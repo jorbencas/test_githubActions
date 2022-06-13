@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Linter execution
-        uses: github/super-linter/slim@v2
+        uses: github/super-linter/slim@v3
         env:
           DEFAULT_BRANCH: nodejs_linter_job
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
