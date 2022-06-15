@@ -3,7 +3,7 @@ name: main_workflow
 on: 
   push:
     branches:
-      - main
+      -  nodejs_linter_jo
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'
