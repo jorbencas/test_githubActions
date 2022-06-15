@@ -12,22 +12,22 @@ jobs:
    wget:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: donwload and update link
-      shell: bash
-      run: bash ./downloadFile.sh
-    - name: Update Github repo
-    - run: |
-        git config user.name jorbencas
-        git config user.email jorbencas@gmail.com
-        git add index.html
-        git diff --quiet && git diff --staged --quiet || git commit -m "[bot] Update link to download file"
-        git push origin main 
-    - name: Deploy to foo-bar.surge.sh
-      uses: dswistowski/surge-sh-action@v1
-      with:
-        domain: 'jorbencasdownloaderdocument.surge.sh'
-        project: '.'
-        login: ${{ secrets.surge_login }}
-        token: ${{ secrets.surge_token }}
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: donwload and update link
+        shell: bash
+        run: bash ./downloadFile.sh
+      - name: Update Github repo
+      - run: |
+          git config user.name jorbencas
+          git config user.email jorbencas@gmail.com
+          git add index.html
+          git diff --quiet && git diff --staged --quiet || git commit -m "[bot] Update link to download file"
+          git push origin main 
+      - name: Deploy to foo-bar.surge.sh
+        uses: dswistowski/surge-sh-action@v1
+        with:
+          domain: 'jorbencasdownloaderdocument.surge.sh'
+          project: '.'
+          login: ${{ secrets.surge_login }}
+          token: ${{ secrets.surge_token }}
