@@ -1,8 +1,5 @@
-name: main_workflow
-on: 
-  push:
-    branches:
-      -  nodejs_linter_jo
+name: download_workflow
+on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'
@@ -15,10 +12,17 @@ jobs:
             git config user.name jorbencas
             git config user.email jorbencas@gmail.com
             git fetch
-
       - name: donwload and update link
         run: bash ./downloadFile.sh
         shell: bash
+      - name: Update Github repo
+        run: |
+          git config user.name jorbencas
+          git config user.email jorbencas@gmail.com
+          git checkout master
+          git add index.html
+          git diff --quiet && git diff --staged --quiet || git commit -m "[bot] Update link to download file"
+          git push origin master 
   deployment_job:
     runs-on: ubuntu-latest
     steps:
