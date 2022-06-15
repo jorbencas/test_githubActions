@@ -23,7 +23,7 @@ jobs:
           git add index.html
           git diff --quiet && git diff --staged --quiet || git commit -m "[bot] Update link to download file"
           git push origin main 
-      
+    steps:
       - name: Deploy to foo-bar.surge.sh
         uses: dswistowski/surge-sh-action@v1
         with:
