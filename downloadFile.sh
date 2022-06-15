@@ -1,6 +1,7 @@
 #!bin/bash 
 date=`date +"%Y%m%d"`;# 20210127
 url="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Informe_Comunicacion_"+ echo $date + ".ods";
+echo $url;
 file_in_repo=`${echo $url | rev | cut -d/ -f1 | rev}`;
 mkdir -p "$(dirname "$file_in_repo")";
 wget "$url" -O "$file_in_repo" ;
