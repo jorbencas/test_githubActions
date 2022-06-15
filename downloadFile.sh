@@ -1,5 +1,5 @@
 #!/bin/bash 
-date='20210127';#`date +"%Y%m%d"`;# 20210127
+date='20210127';#`date +"%Y%m%d"`;
 url="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Informe_Comunicacion_$date.ods";
 file_in_repo=$(echo $url | rev | cut -d/ -f1 | rev);
 dir='./files';
