@@ -18,7 +18,7 @@ jobs:
         run: bash ./downloadFile.sh
         shell: bash
       - name: Update Github repo
-      - run: |
+        run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add ./index.html  
