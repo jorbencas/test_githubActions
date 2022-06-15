@@ -9,9 +9,9 @@ jobs:
     steps:
       - name: donwload changes repo
         run: |
-            git config user.name jorbencas
-            git config user.email jorbencas@gmail.com
-            git fetch
+          git config user.name jorbencas
+          git config user.email jorbencas@gmail.com
+          git fetch
       - name: donwload and update link
         run: bash ./downloadFile.sh
         shell: bash
@@ -33,3 +33,6 @@ jobs:
           project: '.'
           login: ${{ secrets.surge_login }}
           token: ${{ secrets.surge_token }}
+          branch: master
+          force: true
+          message: 'Deployed by Github Actions'
