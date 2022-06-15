@@ -3,24 +3,31 @@ name: main_workflow
 on: 
   push:
     branches:
-      - nodejs_linter_job
-jobs:
-  primerjob:
-    name: linter-execution
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
 
-      - name: Linter execution
-        uses: github/super-linter/slim@v3
-        env:
-          DEFAULT_BRANCH: nodejs_linter_job
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          LINTER_RULES_PATH: /
-          JAVASCRIPT_ES_CONFIG_FILE: .eslintrc
-          VALIDATE_JAVASCRIPT_ES: true
-          VALIDATE_JAVASCRIPT_STANDARD: true
+jobs:
+   wget:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: donwload and update link
+      shell: bash
+      run: bash ./downloadFile.sh
+    - name: Update Github repo
+    - run: |
+        git config user.name jorbencas
+        git config user.email jorbencas@gmail.com
+        git add index.html
+        git diff --quiet && git diff --staged --quiet || git commit -m "[bot] Update link to download file"
+        git push origin main 
+    - name: Deploy to foo-bar.surge.sh
+      uses: dswistowski/surge-sh-action@v1
+      with:
+        domain: 'jorbencasdownloaderdocument.surge.sh'
+        project: '.'
+        login: ${{ secrets.surge_login }}
+        token: ${{ secrets.surge_token }}
