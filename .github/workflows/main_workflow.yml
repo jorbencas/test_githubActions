@@ -31,4 +31,3 @@ jobs:
           domain: 'jorbencasdownloaderdocument.surge.sh'
           project: '.'
           login: ${{ secrets.surge_login }}
-          password: ${{ secrets.surge_token }}
