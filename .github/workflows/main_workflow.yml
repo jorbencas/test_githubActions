@@ -10,11 +10,11 @@ jobs:
   download_and_update:
     runs-on: ubuntu-latest
     steps:
-      -name: donwload changes repo
-       run: |
-          git config user.name jorbencas
-          git config user.email jorbencas@gmail.com
-          git fetch
+      - name: donwload changes repo
+        run: |
+            git config user.name jorbencas
+            git config user.email jorbencas@gmail.com
+            git fetch
 
       - name: donwload and update link
         run: bash ./downloadFile.sh
