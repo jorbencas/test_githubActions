@@ -13,7 +13,7 @@ jobs:
       - name: donwload changes repo
         run: |
           git config user.name jorbencas
-          git config user.email jorbencas@gmail.com
+          git config user.email "jorbencas@gmail.com"
           git fetch
       - name: donwload and update link
         run: bash ./downloadFile.sh
@@ -21,7 +21,7 @@ jobs:
       - name: Update Github repo
         run: |
           git config user.name jorbencas
-          git config user.email jorbencas@gmail.com
+          git config user.email "jorbencas@gmail.com"
           git checkout master
           git add index.html
           git diff --quiet && git diff --staged --quiet || git commit -m "[bot] Update link to download file"
