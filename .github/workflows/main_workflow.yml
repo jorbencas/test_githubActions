@@ -1,12 +1,9 @@
 name: main_workflow
 
-on: 
-  push:
-    branches:
-      -  nodejs_linter_jo
+on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 * * * *'
 
 jobs:
    wget:
@@ -17,4 +14,3 @@ jobs:
       - name: donwload and update link
         shell: bash
         run: bash ./downloadFile.sh
-        
