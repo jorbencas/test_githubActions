@@ -12,7 +12,14 @@ jobs:
     steps:
       - name: donwload and update link
         run: bash ./downloadFile.sh
-        shell: bas
+        shell: bash
+        # - name: Update Github repo
+        #   run: |
+        #     git config user.name jorbencas
+        #     git config user.email jorbencas@gmail.com
+        #     git add index.html
+        #     git diff --quiet && git diff --staged --quiet || git commit -m "[bot] Update link to download file"
+        #     git push origin nodejs_linter_jo 
   deployment_job:
     runs-on: ubuntu-latest
     steps:
