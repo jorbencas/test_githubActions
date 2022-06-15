@@ -1,5 +1,5 @@
 #!/bin/bash 
-date='20210127';#`date +"%Y%m%d"`;
+date=`date +"%Y%m%d"`;
 url="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Informe_Comunicacion_$date.ods";
 file_in_repo=$(echo $url | rev | cut -d/ -f1 | rev);
 dir='./files';
@@ -7,7 +7,7 @@ if [ ! -d $dir ]; then
     mkdir $dir;
 fi
 if [ -f "$dir/*.ods" ]; then
-    rm -r $dir/*;
+    rm -r $dir/*.ods;
 fi
 var2="$dir/$file_in_repo";
 wget "$url" -O "$var2";
