@@ -18,7 +18,6 @@ jobs:
         run: bash ./downloadFile.sh
         shell: bash
       - name: Update Github repo
-      - uses: actions/checkout@v3
       - run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
