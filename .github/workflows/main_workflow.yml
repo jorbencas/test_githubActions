@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: donwload changes repo
         run: |
-          git config user.name jorbencas
+          git config user.name "jorbencas"
           git config user.email "jorbencas@gmail.com"
           git fetch
       - name: donwload and update link
@@ -20,7 +20,7 @@ jobs:
         shell: bash
       - name: Update Github repo
         run: |
-          git config user.name jorbencas
+          git config user.name "jorbencas"
           git config user.email "jorbencas@gmail.com"
           git checkout master
           git add index.html
