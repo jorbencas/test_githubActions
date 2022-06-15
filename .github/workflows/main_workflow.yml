@@ -1,9 +1,5 @@
 name: download_workflow
-
 on:
-  push:
-    branches:
-      - master
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'
@@ -18,13 +14,13 @@ jobs:
       - name: donwload and update link
         run: bash ./downloadFile.sh
         shell: bash
-      # - name: Update Github repo
-      #   run: |
-      #     git config user.name github-actions
-      #     git config user.email github-actions@github.com
-      #     git add .  
-      #     git commit -m "download and update"
-      #     git push
+      - name: Update Github repo
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .  
+          git commit -m "download and update"
+          git push
       - name: Deploy to jorbencasdownloaderdocument.surge.sh
         uses: dswistowski/surge-sh-action@v1
         with:
