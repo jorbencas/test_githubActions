@@ -14,7 +14,7 @@ jobs:
         run: |
           git config user.name "jorbencas"
           git config user.email "jorbencas@gmail.com"
-          git fetch
+          git pull origin master
       - name: donwload and update link
         run: bash ./downloadFile.sh
         shell: bash
