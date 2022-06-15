@@ -12,10 +12,10 @@ jobs:
    wget:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      uses: actions/checkout@v2
       
       - name: donwload and update link
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         run: bash ./downloadFile.sh
         shell: bash
       
@@ -28,7 +28,7 @@ jobs:
           git push origin main 
       
       - name: Deploy to foo-bar.surge.sh
-      - uses: dswistowski/surge-sh-action@v1
+        uses: dswistowski/surge-sh-action@v1
         with:
           domain: 'jorbencasdownloaderdocument.surge.sh'
           project: '.'
