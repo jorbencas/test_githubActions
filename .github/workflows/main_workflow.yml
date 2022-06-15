@@ -9,7 +9,7 @@ on:
     - cron: '0 0 * * *'
 
 jobs:
-   wget:
+   download_and_update:
     runs-on: ubuntu-latest
     steps:
       - name: donwload and update link
@@ -23,6 +23,8 @@ jobs:
           git add index.html
           git diff --quiet && git diff --staged --quiet || git commit -m "[bot] Update link to download file"
           git push origin main 
+  deployment:
+    runs-on: ubuntu-latest
     steps:
       - name: Deploy to foo-bar.surge.sh
         uses: dswistowski/surge-sh-action@v1
