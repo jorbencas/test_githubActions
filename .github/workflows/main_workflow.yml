@@ -1,5 +1,12 @@
 name: main_workflow
 
+      # - name: Update Github repo
+      #   run: |
+      #     git config user.name jorbencas
+      #     git config user.email jorbencas@gmail.com
+      #     git add index.html
+      #     git diff --quiet && git diff --staged --quiet || git commit -m "[bot] Update link to download file"
+      #     git push origin nodejs_linter_jo 
 on: 
   push:
     branches:
@@ -9,20 +16,12 @@ on:
     - cron: '0 0 * * *'
 
 jobs:
-   download_and_update:
+  download_and_update:
     runs-on: ubuntu-latest
     steps:
       - name: donwload and update link
         run: bash ./downloadFile.sh
-        shell: bash
-      
-      # - name: Update Github repo
-      #   run: |
-      #     git config user.name jorbencas
-      #     git config user.email jorbencas@gmail.com
-      #     git add index.html
-      #     git diff --quiet && git diff --staged --quiet || git commit -m "[bot] Update link to download file"
-      #     git push origin nodejs_linter_jo 
+        shell: bas
   deployment:
     runs-on: ubuntu-latest
     steps:
