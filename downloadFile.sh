@@ -14,4 +14,4 @@ wget "$url" -O "$var2";
 if [ ! -f $var2 ]; then
     sleep 3;
 fi
-sed "s|<a[^>]* href=\"[^\"]*|<a download href=\"$var2|g" "index.html";
+sed "s|<a[^>]* href=\"[^\"]*|<a download href=\"$var2|g" "index.html"  >> "index.html";
