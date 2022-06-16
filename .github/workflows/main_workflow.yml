@@ -16,8 +16,8 @@ jobs:
         shell: bash
       - name: Update Github repo
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name jorbencas
+          git config user.email jorbencas@gmail.com
           git add .  
           git commit -m " [bot] update link to download file"
           git push
