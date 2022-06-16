@@ -19,7 +19,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .  
-          git commit -m "download and update"
+          git commit -m " [bot] update link to download file"
           git push
       - name: Deploy to jorbencasdownloaderdocument.surge.sh
         uses: dswistowski/surge-sh-action@v1

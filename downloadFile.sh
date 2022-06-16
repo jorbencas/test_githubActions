@@ -13,5 +13,5 @@ var2="$dir/$file_in_repo";
 wget "$url" -O "$var2";
 if [ ! -f $var2 ]; then
     sleep 3;
+    sed "s|<a[^>]* href=\"[^\"]*|<a download href=\"$var2|g" "index.html"  > "index.html";
 fi
-sed "s|<a[^>]* href=\"[^\"]*|<a download href=\"$var2|g" "index.html"  >> "index.html";
