@@ -1,0 +1,122 @@
+[
+    {
+        "name": "Nsoci",
+        "kind": "Nsoci"
+    },
+    {
+        "name": "CIF",
+        "kind": "CIF"
+    },
+    {
+        "name": "Institució",
+        "kind": "Institució"
+    },
+    {
+        "name": "Entitat",
+        "kind": "Entitat"
+    },
+    {
+        "name": "Cognom 1",
+        "kind": "cognom1"
+    },
+    {
+        "name": "Cognom 2",
+        "kind": "cognom2"
+    },
+    {
+        "name": "Nom",
+        "kind": "nom"
+    },
+    {
+        "name": "Data admisió",
+        "kind": "data_admisió"
+    },
+    {
+        "name": "Data Baixa",
+        "kind": "data_baixa"
+    },
+    {
+        "name": "Adeça",
+        "kind": "Adreça"
+    },
+    {
+        "name": "Telèfon",
+        "kind": "Telèfon"
+    },
+    {
+        "name": "Telèfon móvil",
+        "kind": "Telèfon_mòbil"
+    },
+    {
+        "name": "Fax",
+        "kind": "fax"
+    },
+    {
+        "name": "Correu Electrònic",
+        "kind": "Correu_Electrònic"
+    },
+    {
+        "name": "Pàgina web",
+        "kind": "Pàgina_e"
+    },
+    {
+        "name": "Localitat",
+        "kind": "Localitat"
+    },
+    {
+        "name": "CP",
+        "kind": "CP"
+    },
+    {
+        "name": "Data Naixement",
+        "kind": "Data_naixement"
+    },
+    {
+        "name": "Professió",
+        "kind": "Professió"
+    },
+    {
+        "name": "Telèfon treball",
+        "kind": "Telèfon_treball"
+    },
+    {
+        "name": "Centre treball",
+        "kind": "Centre_Treball"
+    },
+    {
+        "name": "Població treball",
+        "kind": "Població_Treball"
+    },
+    {
+        "name": "Área IEVA 1",
+        "kind": "Àrea_Ieva_1"
+    },
+    {
+        "name": "Área IEVA 2",
+        "kind": "Àrea_Ieva_2"
+    },
+    {
+        "name": "Área IEVA 3",
+        "kind": "Àrea_Ieva_3"
+    },
+    {
+        "name": "Banc Caixa",
+        "kind": "banc_caixa"
+    },
+    {
+        "name": "Codi banc compte",
+        "kind": "codi_banc_compte"
+    },
+    {
+        "name": "Quota",
+        "kind": "quota"
+    },
+    {
+        "name": "Observacions",
+        "kind": "observacions"
+    },
+    {
+        "name": "Xarxes Socials",
+        "kind": "xarxes_socials"
+    }
+]

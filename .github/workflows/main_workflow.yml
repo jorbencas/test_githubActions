@@ -19,11 +19,12 @@ jobs:
           git config user.name jorbencas
           git config user.email jorbencas@gmail.com
           git add .  
-          git commit -m " [bot] update link to download file"
+          git commit -m "[bot] update link to download file"
           git push
       - name: Deploy to jorbencasdownloaderdocument.surge.sh
         uses: dswistowski/surge-sh-action@v1
         with:
           domain: 'jorbencasdownloaderdocument.surge.sh'
           project: '.'
-          login: ${{ secrets.surge_login }}
+          login: ${{ secrets.SURGE_LOGIN }}
+          token: ${{ secrets.SURGE_TOKEN }}

@@ -1,7 +1,8 @@
 #!/bin/bash 
-date=`date +"%Y%m%d"`;
-url="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Informe_Comunicacion_$date.ods";
-file_in_repo=$(echo $url | rev | cut -d/ -f1 | rev);
+# date=`date +"%Y%m%d"`;
+# url="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Informe_Comunicacion_$date.ods";
+# file_in_repo=$(echo $url | rev | cut -d/ -f1 | rev);
+file_in_repo='filters.json';
 dir='./files';
 if [ ! -d $dir ]; then
     mkdir $dir;
