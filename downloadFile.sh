@@ -2,7 +2,6 @@
 date=`date +"%Y%m%d"`;
 url="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Informe_Comunicacion_$date.ods";
 file_in_repo=$(echo $url | rev | cut -d/ -f1 | rev);
-# file_in_repo='filters.json';
 dir='./files';
 if [ ! -d $dir ]; then
     mkdir $dir;
@@ -13,6 +12,10 @@ fi
 var2="$dir/$file_in_repo";
 wget "$url" -O "$var2";
 if [ ! -f $var2 ]; then
-    sleep 3;
-    sed "s|<a[^>]* href=\"[^\"]*|<a download href=\"$var2|g" "index.html"  > "index.html";
+    sleep 2;
 fi
+if [ ! -f $var2 ]; then
+    file_in_repo='filters.json';
+    var2="$dir/$file_in_repo";
+fi
+sed "s|<a[^>]* href=\"[^\"]*|<a download href=\"$var2|g" "index.html"  > "index.html";
