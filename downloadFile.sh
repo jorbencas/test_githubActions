@@ -1,21 +1,31 @@
-#!/bin/bash 
+#!/bin/bash
+function downloadder () {
+    wget -O $1 $2;
+    sleep 1;
+}
+htmlFile="index.html";
 date=`date +"%Y%m%d"`;
 url="https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Informe_Comunicacion_$date.ods";
 file_in_repo=$(echo $url | rev | cut -d/ -f1 | rev);
 dir='./files';
-if [ ! -d $dir ]; then
+if [[ ! -d "$dir" ]]; then
     mkdir $dir;
 fi
-if [ -f "$dir/*.ods" ]; then
+if [[ -f "$dir/*.ods" ]]; then
     rm -r $dir/*.ods;
 fi
-var2="$dir/$file_in_repo";
-wget "$url" -O "$var2";
-if [ ! -f $var2 ]; then
-    sleep 2;
-fi
-if [ ! -f $var2 ]; then
+downloadFile="$dir/$file_in_repo";
+http_status=$( wget --server-response -c "$url" 2>&1 )
+if [[ $http_status == *"200"* ]]; then
+    downloadder $downloadFile $url;
+else
     file_in_repo='filters.json';
-    var2="$dir/$file_in_repo";
+    downloadFile="$dir/$file_in_repo";
 fi
-sed "s|<a[^>]* href=\"[^\"]*|<a download href=\"$var2|g" "index.html"  > "index.html";
+if [[ ! -s "$htmlFile" ]]; then
+    url="https://github.com/jorbencas/test_githubActions/blob/0f2cff77cf0914a37e4d439f8f026a3feefca3b0/index.html?raw=true";
+    downloadder $htmlFile $url; 
+fi
+if [[ -s "$htmlFile" ]]; then
+    sed "s|<a[^>]* href=\"[^\"]*|<a download href=\"$downloadFile|g" $htmlFile > $htmlFile.tmp && mv $htmlFile.tmp $htmlFile;
+fi
