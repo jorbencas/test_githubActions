@@ -1,8 +1,9 @@
 name: download_workflow
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * *'
+  push
+  # workflow_dispatch:
+  # schedule:
+  #   - cron: '0 0 * * *'
 jobs:
   download_and_update:
     runs-on: ubuntu-latest
