@@ -17,7 +17,7 @@ jobs:
         run: bash ./downloadFile.sh
         shell: bash
       - name: Update Github repo
-        if: github.event.push.branches != 'master'
+        if: github.event.schedule == '9 0 * * 6'
         run: |
           git config user.name jorbencas
           git config user.email jorbencas@gmail.com
