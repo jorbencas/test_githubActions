@@ -19,7 +19,7 @@ http_status=$( wget --server-response -c "$url" 2>&1 )
 if [[ $http_status == *"200"* ]]; then
     downloadder $downloadFile $url;
 else
-    file_in_repo='filters.json';
+    file_in_repo='filters_'+$date+'json';
     downloadFile="$dir/$file_in_repo";
 fi
 if [[ ! -s "$htmlFile" ]]; then
@@ -29,3 +29,4 @@ fi
 if [[ -s "$htmlFile" ]]; then
     sed "s|<a[^>]* href=\"[^\"]*|<a download href=\"$downloadFile|g" $htmlFile > $htmlFile.tmp && mv $htmlFile.tmp $htmlFile;
 fi
+echo $url;
