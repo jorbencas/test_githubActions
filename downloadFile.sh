@@ -14,12 +14,12 @@ fi
 if [[ -f "$dir/*.ods" ]]; then
     rm -r $dir/*.ods;
 fi
-    downloadFile="$dir/$file_in_repo";
+downloadFile="$dir/$file_in_repo";
 http_status=$( wget --server-response -c "$url" 2>&1 )
 if [[ $http_status == *"200"* ]]; then
     downloadder $downloadFile $url;
 else
-    file_in_repo='filters_'+$date+'json';
+    file_in_repo="filters$date.json";
     downloadFile="$dir/$file_in_repo";
 fi
 if [[ ! -s "$htmlFile" ]]; then
