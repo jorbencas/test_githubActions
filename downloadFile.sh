@@ -21,6 +21,7 @@ if [[ $http_status == *"200"* ]]; then
 else
     file_in_repo="filters$date.json";
     downloadFile="$dir/$file_in_repo";
+    echo "fallo"
 fi
 if [[ ! -s "$htmlFile" ]]; then
     url="https://github.com/jorbencas/test_githubActions/blob/0f2cff77cf0914a37e4d439f8f026a3feefca3b0/index.html?raw=true";
