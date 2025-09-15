@@ -13,10 +13,10 @@ file_in_repo=$(basename "$url")
 dir='./files'
 
 # Crear directorio si no existe
-mkdir -p "$dir"
+#mkdir -p "$dir"
 
 # Eliminar ODS antiguos de forma segura
-rm -f "$dir"/*.ods || true
+#rm -f "$dir"/*.ods || true
 
 downloadFile="$dir/$file_in_repo"
 
