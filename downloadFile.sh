@@ -1,4 +1,3 @@
-#!/bin/bash
 # set -euo pipefail
 echo "hola mundo"
 # function downloadder () {
