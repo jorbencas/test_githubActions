@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash 
 function downloadder () {
     wget -O $1 $2;
     sleep 1;
