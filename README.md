@@ -21,3 +21,8 @@ Este proyecto realiza múltiples tareas útiles: scraping de noticias de tecnolo
 - Genbeta
 - ComputerHoy
 - El Español Tech
+
+## Enlaces Rotos Verificados
+Esta sección muestra enlaces rotos encontrados en el sitio web durante la verificación automática de enlaces internos.
+
+- https://jorbencas.github.io/ - Status: 404
