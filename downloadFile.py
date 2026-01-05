@@ -99,7 +99,12 @@ def generate_md_posts(news):
     slugs = []
     for item in news:
         # Crear slug simple
-        slug = item["titulo"].lower().replace(" ", "_").replace("/", "_").replace(":", "").replace("?", "")[:50] + ".md"
+        base_slug = item["titulo"].lower().replace(" ", "_").replace("/", "_").replace(":", "").replace("?", "")[:50]
+        slug = base_slug + ".md"
+        counter = 1
+        while os.path.exists(f'./auto-news/{slug}'):
+            slug = f"{base_slug}_{counter}.md"
+            counter += 1
         pub_date = item["fecha"]
         md_content = f"""---
 draft: false
