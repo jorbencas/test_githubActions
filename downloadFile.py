@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Script para scraping de noticias tecnológicas y becas, actualizado con permisos corregidos
 import requests
 from bs4 import BeautifulSoup
 import json
