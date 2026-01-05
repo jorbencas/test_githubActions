@@ -8,7 +8,7 @@ from urllib.parse import urljoin, urlparse
 import time
 
 # Configuración
-BASE_URL = "https://jorbencas.github.io/blog/"  # Cambia si es otro sitio
+BASE_URL = "https://jorbencas.github.io/"  # Cambiado al portfolio
 MAX_DEPTH = 2  # Profundidad de crawling
 TIMEOUT = 10
 
@@ -64,7 +64,10 @@ def scrape_news():
         "Xataka": "https://www.xataka.com/",
         "Genbeta": "https://www.genbeta.com/",
         "ComputerHoy": "https://computerhoy.com/",
-        "El Español Tech": "https://www.elespanol.com/tecno/"
+        "Teknautas": "https://www.teknautas.com/",
+        "El País Tecnología": "https://elpais.com/tecnologia/",
+        "ABC Tecnología": "https://www.abc.es/tecnologia/",
+        "Vida Extra": "https://www.vidaextra.com/"
     }
     news = []
     for source, url in SOURCES.items():
