@@ -4,36 +4,83 @@ from bs4 import BeautifulSoup
 import json
 import os
 from datetime import datetime
+from urllib.parse import urljoin, urlparse
+import time
 
-# Lista de webs de tecnología en España
-SOURCES = {
-    "Xataka": "https://www.xataka.com/",
-    "Genbeta": "https://www.genbeta.com/",
-    "ComputerHoy": "https://computerhoy.com/",
-    "El Español Tech": "https://www.elespanol.com/tecno/"
-}
+# Configuración
+BASE_URL = "https://jorbencas.github.io/blog/"  # Cambia si es otro sitio
+MAX_DEPTH = 2  # Profundidad de crawling
+TIMEOUT = 10
+
+def get_all_links(url, visited, depth=0):
+    if depth > MAX_DEPTH or url in visited:
+        return set()
+    visited.add(url)
+    links = set()
+    try:
+        response = requests.get(url, timeout=TIMEOUT)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.text, 'html.parser')
+        for a_tag in soup.find_all('a', href=True):
+            href = a_tag['href']
+            full_url = urljoin(url, href)
+            if urlparse(full_url).netloc == urlparse(BASE_URL).netloc:  # Solo enlaces internos
+                links.add(full_url)
+    except Exception as e:
+        print(f"Error crawling {url}: {e}")
+    return links
+
+def check_links():
+    visited = set()
+    to_check = set([BASE_URL])
+    broken_links = []
+    working_links = []
+
+    while to_check:
+        current_url = to_check.pop()
+        if current_url in visited:
+            continue
+        visited.add(current_url)
+        
+        try:
+            response = requests.head(current_url, timeout=TIMEOUT, allow_redirects=True)
+            if response.status_code >= 400:
+                broken_links.append({"url": current_url, "status": response.status_code})
+            else:
+                working_links.append({"url": current_url, "status": response.status_code})
+        except Exception as e:
+            broken_links.append({"url": current_url, "error": str(e)})
+        
+        # Obtener más enlaces internos
+        new_links = get_all_links(current_url, visited, depth=len(visited))
+        to_check.update(new_links)
+        time.sleep(0.5)  # Delay para no sobrecargar
+
+    return working_links, broken_links
 
 def scrape_news():
+    # Mantener scraping de noticias como opción
+    SOURCES = {
+        "Xataka": "https://www.xataka.com/",
+        "Genbeta": "https://www.genbeta.com/",
+        "ComputerHoy": "https://computerhoy.com/",
+        "El Español Tech": "https://www.elespanol.com/tecno/"
+    }
     news = []
     for source, url in SOURCES.items():
         try:
             response = requests.get(url, timeout=10)
             response.raise_for_status()
             soup = BeautifulSoup(response.text, 'html.parser')
-            
-            # Extraer artículos (ajustar selectores según la estructura del sitio)
-            articles = soup.select('article, .post, .entry')[:5]  # Limitar a 5 por sitio
-            
+            articles = soup.select('article, .post, .entry')[:5]
             for article in articles:
                 title_tag = article.select_one('h1, h2, h3, .title')
                 link_tag = article.select_one('a')
-                
                 if title_tag and link_tag:
                     title = title_tag.get_text(strip=True)
                     link = link_tag['href']
                     if not link.startswith('http'):
                         link = url.rstrip('/') + '/' + link.lstrip('/')
-                    
                     news.append({
                         "titulo": title,
                         "enlace": link,
@@ -42,40 +89,69 @@ def scrape_news():
                     })
         except Exception as e:
             print(f"Error scraping {source}: {e}")
-    
     return news
 
+def generate_sitemap():
+    # Generador simple de sitemap
+    sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    # Aquí agregar URLs del sitio, por simplicidad, usar enlaces encontrados
+    working, _ = check_links()
+    for link in working[:50]:  # Limitar
+        sitemap += f'  <url><loc>{link["url"]}</loc><lastmod>{datetime.now().strftime("%Y-%m-%d")}</lastmod></url>\n'
+    sitemap += '</urlset>'
+    return sitemap
+
 def main():
-    # Crear directorio si no existe
     os.makedirs('./files', exist_ok=True)
-    
-    # Scraper noticias
-    news = scrape_news()
-    
-    # Guardar en JSON
     date = datetime.now().strftime("%Y%m%d")
-    json_file = f"./files/tech_news_{date}.json"
-    with open(json_file, 'w', encoding='utf-8') as f:
+    
+    # 1. Checker de enlaces rotos
+    print("Checking links...")
+    working, broken = check_links()
+    link_report = {"working": working, "broken": broken}
+    with open(f"./files/link_check_{date}.json", 'w', encoding='utf-8') as f:
+        json.dump(link_report, f, ensure_ascii=False, indent=4)
+    
+    # 2. Scraping de noticias
+    print("Scraping news...")
+    news = scrape_news()
+    with open(f"./files/tech_news_{date}.json", 'w', encoding='utf-8') as f:
         json.dump(news, f, ensure_ascii=False, indent=4)
     
-    # Actualizar index.html
+    # 3. Generar sitemap
+    print("Generating sitemap...")
+    sitemap = generate_sitemap()
+    with open('sitemap.xml', 'w', encoding='utf-8') as f:
+        f.write(sitemap)
+    
+    # Actualizar index.html con reporte
     html_content = f"""
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Noticias de Tecnología en España</title>
+    <title>Reporte Diario</title>
 </head>
 <body>
-    <h1>Últimas Noticias de Tecnología</h1>
-    <p>Actualizado: {datetime.now().strftime("%Y-%m-%d %H:%M")}</p>
+    <h1>Reporte Diario - {datetime.now().strftime("%Y-%m-%d %H:%M")}</h1>
+    
+    <h2>Enlaces Rotos</h2>
     <ul>
 """
-    for item in news:
-        html_content += f'        <li><a href="{item["enlace"]}" target="_blank">{item["titulo"]}</a> - {item["fuente"]}</li>\n'
-    
+    for broken_link in broken[:10]:  # Mostrar primeros 10
+        html_content += f'        <li>{broken_link["url"]} - Status: {broken_link.get("status", "Error")}</li>\n'
     html_content += """
     </ul>
+    
+    <h2>Últimas Noticias de Tecnología</h2>
+    <ul>
+"""
+    for item in news[:10]:
+        html_content += f'        <li><a href="{item["enlace"]}" target="_blank">{item["titulo"]}</a> - {item["fuente"]}</li>\n'
+    html_content += """
+    </ul>
+    
+    <p><a href="sitemap.xml">Ver Sitemap</a></p>
 </body>
 </html>
 """
@@ -83,7 +159,7 @@ def main():
     with open('index.html', 'w', encoding='utf-8') as f:
         f.write(html_content)
     
-    print(f"Scraping completado. {len(news)} noticias guardadas.")
+    print("Todo completado.")
 
 if __name__ == "__main__":
     main()
