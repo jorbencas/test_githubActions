@@ -94,15 +94,37 @@ def scrape_news():
             print(f"Error scraping {source}: {e}")
     return news
 
-def generate_sitemap():
-    # Generador simple de sitemap
-    sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    # Aquí agregar URLs del sitio, por simplicidad, usar enlaces encontrados
-    working, _ = check_links()
-    for link in working[:50]:  # Limitar
-        sitemap += f'  <url><loc>{link["url"]}</loc><lastmod>{datetime.now().strftime("%Y-%m-%d")}</lastmod></url>\n'
-    sitemap += '</urlset>'
-    return sitemap
+def generate_md_posts(news):
+    os.makedirs('./auto-news', exist_ok=True)
+    slugs = []
+    for item in news:
+        # Crear slug simple
+        slug = item["titulo"].lower().replace(" ", "_").replace("/", "_").replace(":", "").replace("?", "")[:50] + ".md"
+        pub_date = item["fecha"]
+        md_content = f"""---
+draft: false
+title: "{item["titulo"]}"
+description: "Noticia automática de {item["fuente"]}"
+pubDate: "{pub_date.replace("-", "/")}"
+tags: ['tecnologia', 'auto']
+slug: "{slug}"
+image: "/img/tech_news.webp"
+author: "Bot Scraper"
+layout: "../../layouts/PostLayout.astro"
+---
+
+# {item["titulo"]}
+
+Fuente: {item["fuente"]}
+
+[Leer la noticia completa]({item["enlace"]})
+
+*Esta es una noticia automática scrapeada. Para más detalles, visita el enlace original.*
+"""
+        with open(f'./auto-news/{slug}', 'w', encoding='utf-8') as f:
+            f.write(md_content)
+        slugs.append(slug)
+    return slugs
 
 def main():
     os.makedirs('./files', exist_ok=True)
@@ -118,14 +140,14 @@ def main():
     # 2. Scraping de noticias
     print("Scraping news...")
     news = scrape_news()
+    # Filtrar enlaces sospechosos
+    news = [item for item in news if 'ads' not in item['enlace'].lower() and 'track' not in item['enlace'].lower()]
     with open(f"./files/tech_news_{date}.json", 'w', encoding='utf-8') as f:
         json.dump(news, f, ensure_ascii=False, indent=4)
     
-    # 3. Generar sitemap
-    print("Generating sitemap...")
-    sitemap = generate_sitemap()
-    with open('sitemap.xml', 'w', encoding='utf-8') as f:
-        f.write(sitemap)
+    # 4. Generar posts MD
+    print("Generating MD posts...")
+    slugs = generate_md_posts(news)
     
     # Actualizar index.html con reporte
     html_content = f"""
@@ -145,10 +167,14 @@ def main():
         .broken {{ background: #ffe6e6; }}
         .working {{ background: #e6ffe6; }}
         .section {{ margin-bottom: 30px; }}
+        .date {{ font-size: 0.9em; color: #666; }}
+        .logo {{ width: 50px; height: 50px; float: right; }}
     </style>
 </head>
 <body>
+    <img src="https://img.icons8.com/color/96/000000/technology-items.png" alt="Logo Tecnología" class="logo">
     <h1>Reporte Diario - {datetime.now().strftime("%Y-%m-%d %H:%M")}</h1>
+    <p class="date">Generado el {datetime.now().strftime("%d de %B de %Y")}</p>
     
     <div class="section">
         <h2>Enlaces Rotos</h2>
@@ -172,10 +198,18 @@ def main():
     </div>
     
     <div class="section">
-        <p><a href="sitemap.xml">Ver Sitemap</a></p>
+        <h2>Nuevos Posts Automáticos en el Blog</h2>
+        <ul>
+"""
+    for slug in slugs[:10]:
+        post_url = f"https://jorbencas.github.io/blog/posts/auto-news/{slug.replace('.md', '')}"
+        html_content += f'            <li><a href="{post_url}" target="_blank">{slug.replace(".md", "").replace("_", " ")}</a></li>\n'
+    html_content += """
+        </ul>
     </div>
-</body>
-</html>
+    
+    <div class="section">
+        <p><a href="sitemap.xml">Ver Sitemap</a></p>
 """
     
     with open('index.html', 'w', encoding='utf-8') as f:

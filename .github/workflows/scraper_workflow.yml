@@ -24,8 +24,26 @@ jobs:
             - name: Run scraper
               run: python downloadFile.py
               shell: bash
+            - name: Checkout blog repo
+              uses: actions/checkout@v3
+              with:
+                  repository: jorbencas/blog
+                  path: blog
+                  token: ${{ secrets.BLOG_TOKEN }}
+            - name: Copy auto-news to blog
+              run: |
+                  mkdir -p blog/src/pages/posts/auto-news
+                  cp -r auto-news/* blog/src/pages/posts/auto-news/ || true
+            - name: Commit and push to blog
+              run: |
+                  cd blog
+                  git config user.name jorbencas
+                  git config user.email jorbencas@gmail.com
+                  git add .
+                  git commit -m "[bot] Add auto-generated news posts" || echo "No changes to commit"
+                  git push
             - name: Update Github repo
-              if: github.event.schedule == '0 9 * * *'
+              if: github.event.schedule == '0 9 * * 6'
               run: |
                   git config user.name jorbencas
                   git config user.email jorbencas@gmail.com
