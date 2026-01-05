@@ -12,6 +12,24 @@ BASE_URL = "https://jorbencas.github.io/"  # Cambiado al portfolio
 MAX_DEPTH = 2  # Profundidad de crawling
 TIMEOUT = 10
 
+# Lista de webs de tecnología en España
+SOURCES = {
+    "Xataka": "https://www.xataka.com/",
+    "Genbeta": "https://www.genbeta.com/",
+    "ComputerHoy": "https://computerhoy.com/",
+    "HobbyConsolas": "https://www.hobbyconsolas.com/",
+    "El País Tecnología": "https://elpais.com/tecnologia/",
+    "ABC Tecnología": "https://www.abc.es/tecnologia/",
+    "Vida Extra": "https://www.vidaextra.com/"
+}
+
+# Fuentes de becas y cursos en Vall d'Albaida y alrededores (Comunidad Valenciana)
+BECAS_SOURCES = {
+    "Levante-EMV": "https://www.levante-emv.com/",
+    "Valencia Plaza": "https://valenciaplaza.com/",
+    "Fundación Carolina": "https://www.fundacioncarolina.es/"
+}
+
 def get_all_links(url, visited, depth=0):
     if depth > MAX_DEPTH or url in visited:
         return set()
@@ -60,15 +78,6 @@ def check_links():
 
 def scrape_news():
     # Mantener scraping de noticias como opción
-    SOURCES = {
-        "Xataka": "https://www.xataka.com/",
-        "Genbeta": "https://www.genbeta.com/",
-        "ComputerHoy": "https://computerhoy.com/",
-        "HobbyConsolas": "https://www.hobbyconsolas.com/",
-        "El País Tecnología": "https://elpais.com/tecnologia/",
-        "ABC Tecnología": "https://www.abc.es/tecnologia/",
-        "Vida Extra": "https://www.vidaextra.com/"
-    }
     news = []
     for source, url in SOURCES.items():
         try:
@@ -93,6 +102,44 @@ def scrape_news():
         except Exception as e:
             print(f"Error scraping {source}: {e}")
     return news
+
+def scrape_becas():
+    becas = []
+    for source, url in BECAS_SOURCES.items():
+        try:
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()
+            soup = BeautifulSoup(response.text, 'html.parser')
+            articles = soup.select('article, .post, .entry, .news, .noticia, .beca')[:5]  # Más selectores
+            
+            for article in articles:
+                title_tag = article.select_one('h1, h2, h3, .title, a')
+                link_tag = article.select_one('a')
+                
+                if title_tag and link_tag:
+                    title = title_tag.get_text(strip=True)
+                    link = link_tag['href']
+                    if not link.startswith('http'):
+                        link = url.rstrip('/') + '/' + link.lstrip('/')
+                    
+                    # Filtrar por becas y cursos en informática, IA, tecnología, etc.
+                    tech_keywords = ['informática', 'ia', 'inteligencia artificial', 'programación', 'desarrollo', 'tecnología', 'software', 'hardware', 'ciberseguridad', 'machine learning', 'deep learning', 'data science', 'big data', 'blockchain', 'criptomonedas', 'iot', 'internet de las cosas', 'cloud', 'nube', 'devops', 'agile', 'scrum']
+                    scholarship_keywords = ['beca', 'curso', 'ayuda', 'subvención', 'formación', 'certificación', 'diploma', 'master', 'doctorado', 'fp', 'vocacional', 'valencia', 'vall', 'albaida']
+                    all_keywords = tech_keywords + scholarship_keywords
+                    
+                    if any(keyword in title.lower() for keyword in all_keywords):
+                        # Evitar duplicados
+                        if not any(b['titulo'] == title for b in becas):
+                            becas.append({
+                                "titulo": title,
+                                "enlace": link,
+                                "fecha": datetime.now().strftime("%Y-%m-%d"),
+                                "fuente": source
+                            })
+        except Exception as e:
+            print(f"Error scraping becas {source}: {e}")
+    
+    return becas
 
 def generate_md_posts(news):
     os.makedirs('./auto-news', exist_ok=True)
@@ -150,9 +197,21 @@ def main():
     with open(f"./files/tech_news_{date}.json", 'w', encoding='utf-8') as f:
         json.dump(news, f, ensure_ascii=False, indent=4)
     
+    # 3. Scraping de becas
+    print("Scraping becas...")
+    becas = scrape_becas()
+    with open(f"./files/becas_{date}.json", 'w', encoding='utf-8') as f:
+        json.dump(becas, f, ensure_ascii=False, indent=4)
+    
     # 4. Generar posts MD
     print("Generating MD posts...")
     slugs = generate_md_posts(news)
+    
+    # 5. Scraping de becas
+    print("Scraping becas...")
+    becas = scrape_becas()
+    with open(f"./files/becas_{date}.json", 'w', encoding='utf-8') as f:
+        json.dump(becas, f, ensure_ascii=False, indent=4)
     
     # Actualizar index.html con reporte
     html_content = f"""
@@ -182,7 +241,8 @@ def main():
     <p class="date">Generado el {datetime.now().strftime("%d de %B de %Y")}</p>
     
     <div class="section">
-        <h2>Enlaces Rotos</h2>
+        <h2>Enlaces Rotos Verificados</h2>
+        <p>Esta sección muestra enlaces rotos encontrados en el sitio web durante la verificación automática de enlaces internos.</p>
         <ul>
 """
     for broken_link in broken[:10]:  # Mostrar primeros 10
@@ -209,6 +269,16 @@ def main():
     for slug in slugs[:10]:
         post_url = f"https://jorbencas.github.io/blog/posts/auto-news/{slug.replace('.md', '')}"
         html_content += f'            <li><a href="{post_url}" target="_blank">{slug.replace(".md", "").replace("_", " ")}</a></li>\n'
+    html_content += """
+        </ul>
+    </div>
+    
+    <div class="section">
+        <h2>Becas y Cursos en España (Vall de Albaida)</h2>
+        <ul>
+"""
+    for beca in becas[:10]:
+        html_content += f'            <li><a href="{beca["enlace"]}" target="_blank">{beca["titulo"]}</a> - {beca["fuente"]}</li>\n'
     html_content += """
         </ul>
     </div>

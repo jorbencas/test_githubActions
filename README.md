@@ -4,7 +4,7 @@
 
 Este proyecto realiza múltiples tareas útiles: scraping de noticias de tecnología en España, verificación de enlaces rotos en tu sitio, y generación de sitemap.
 
-[The link of the page](http://jorbencasdownloaderdocument.surge.sh)
+<a href="http://jorbencasdownloaderdocument.surge.sh" target="_blank">The link of the page</a>
 
 ## Funcionalidades
 - **Scraping de noticias**: Extrae títulos y enlaces de Xataka, Genbeta, ComputerHoy y El Español Tech.
