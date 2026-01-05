@@ -1,41 +1,41 @@
 name: scraper_workflow
 on:
-  push:
-    branches:
-      - 'master'
-  schedule:
-     - cron: '0 9 * * *'  # Ejecutar diariamente a las 9:00 UTC
+    push:
+        branches:
+            - "master"
+    schedule:
+        - cron: "0 9 * * *" # Ejecutar diariamente a las 9:00 UTC
 jobs:
-  scrape_and_update:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-        with:
-          ref: master
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests beautifulsoup4
-      - name: Run scraper
-        run: python downloadFile.py
-        shell: bash
-      - name: Update Github repo
-        if: github.event.schedule == '0 9 * * *'
-        run: |
-          git config user.name jorbencas
-          git config user.email jorbencas@gmail.com
-          git add .  
-          git commit -m "[bot] update tech news scraping"
-          git push
-      - name: Deploy to jorbencasdownloaderdocument.surge.sh
-        uses: dswistowski/surge-sh-action@v1
-        with:
-          domain: 'jorbencasdownloaderdocument.surge.sh'
-          project: '.'
-          login: ${{ secrets.SURGE_LOGIN }}
-          token: ${{ secrets.SURGE_TOKEN }}
+    scrape_and_update:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v3
+              with:
+                  ref: master
+            - name: Set up Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: "3.9"
+            - name: Install dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  pip install requests beautifulsoup4
+            - name: Run scraper
+              run: python downloadFile.py
+              shell: bash
+            - name: Update Github repo
+              if: github.event.schedule == '0 9 * * *'
+              run: |
+                  git config user.name jorbencas
+                  git config user.email jorbencas@gmail.com
+                  git add .  
+                  git commit -m "[bot] update tech news scraping"
+                  git push
+            - name: Deploy to jorbencasdownloaderdocument.surge.sh
+              uses: dswistowski/surge-sh-action@v1
+              with:
+                  domain: "jorbencasdownloaderdocument.surge.sh"
+                  project: "."
+                  login: ${{ secrets.SURGE_LOGIN }}
+                  token: ${{ secrets.SURGE_TOKEN }}
