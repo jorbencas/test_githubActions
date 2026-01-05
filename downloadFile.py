@@ -131,27 +131,46 @@ def main():
 <head>
     <meta charset="UTF-8">
     <title>Reporte Diario</title>
+    <style>
+        body {{ font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }}
+        h1 {{ color: #333; }}
+        h2 {{ color: #555; border-bottom: 2px solid #ddd; padding-bottom: 5px; }}
+        ul {{ list-style-type: none; padding: 0; }}
+        li {{ background: #fff; margin: 5px 0; padding: 10px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }}
+        a {{ color: #007bff; text-decoration: none; }}
+        a:hover {{ text-decoration: underline; }}
+        .broken {{ background: #ffe6e6; }}
+        .working {{ background: #e6ffe6; }}
+        .section {{ margin-bottom: 30px; }}
+    </style>
 </head>
 <body>
     <h1>Reporte Diario - {datetime.now().strftime("%Y-%m-%d %H:%M")}</h1>
     
-    <h2>Enlaces Rotos</h2>
-    <ul>
+    <div class="section">
+        <h2>Enlaces Rotos</h2>
+        <ul>
 """
     for broken_link in broken[:10]:  # Mostrar primeros 10
-        html_content += f'        <li>{broken_link["url"]} - Status: {broken_link.get("status", "Error")}</li>\n'
+        status = broken_link.get("status", "Error")
+        html_content += f'            <li class="broken">{broken_link["url"]} - Status: {status}</li>\n'
     html_content += """
-    </ul>
+        </ul>
+    </div>
     
-    <h2>Últimas Noticias de Tecnología</h2>
-    <ul>
+    <div class="section">
+        <h2>Últimas Noticias de Tecnología</h2>
+        <ul>
 """
     for item in news[:10]:
-        html_content += f'        <li><a href="{item["enlace"]}" target="_blank">{item["titulo"]}</a> - {item["fuente"]}</li>\n'
+        html_content += f'            <li><a href="{item["enlace"]}" target="_blank">{item["titulo"]}</a> - {item["fuente"]}</li>\n'
     html_content += """
-    </ul>
+        </ul>
+    </div>
     
-    <p><a href="sitemap.xml">Ver Sitemap</a></p>
+    <div class="section">
+        <p><a href="sitemap.xml">Ver Sitemap</a></p>
+    </div>
 </body>
 </html>
 """

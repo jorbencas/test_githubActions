@@ -1,0 +1,9 @@
+{
+    "working": [],
+    "broken": [
+        {
+            "url": "https://jorbencas.github.io/blog/",
+            "status": 404
+        }
+    ]
+}
