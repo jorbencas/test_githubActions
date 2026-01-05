@@ -143,6 +143,10 @@ def scrape_becas():
 
 def generate_md_posts(news):
     os.makedirs('./auto-news', exist_ok=True)
+    # Limpiar archivos antiguos
+    for file in os.listdir('./auto-news'):
+        if file.endswith('.md'):
+            os.remove(os.path.join('./auto-news', file))
     slugs = []
     for item in news:
         # Crear slug simple
@@ -197,21 +201,26 @@ def main():
     with open(f"./files/tech_news_{date}.json", 'w', encoding='utf-8') as f:
         json.dump(news, f, ensure_ascii=False, indent=4)
     
+    # Seleccionar solo 1 noticia, priorizando IA
+    if news:
+        # Buscar si hay alguna sobre IA
+        ia_news = [item for item in news if 'ia' in item['titulo'].lower() or 'inteligencia artificial' in item['titulo'].lower()]
+        if ia_news:
+            selected_news = [ia_news[0]]  # La primera sobre IA
+        else:
+            selected_news = [news[0]]  # La primera noticia
+    else:
+        selected_news = []
+    
     # 3. Scraping de becas
     print("Scraping becas...")
     becas = scrape_becas()
     with open(f"./files/becas_{date}.json", 'w', encoding='utf-8') as f:
         json.dump(becas, f, ensure_ascii=False, indent=4)
     
-    # 4. Generar posts MD
+    # 4. Generar posts MD para la noticia seleccionada
     print("Generating MD posts...")
-    slugs = generate_md_posts(news)
-    
-    # 5. Scraping de becas
-    print("Scraping becas...")
-    becas = scrape_becas()
-    with open(f"./files/becas_{date}.json", 'w', encoding='utf-8') as f:
-        json.dump(becas, f, ensure_ascii=False, indent=4)
+    slugs = generate_md_posts(selected_news)
     
     # Actualizar index.html con reporte
     html_content = f"""

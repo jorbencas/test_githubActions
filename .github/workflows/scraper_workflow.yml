@@ -33,7 +33,6 @@ jobs:
             - name: Copy auto-news to blog
               run: |
                   mkdir -p blog/src/pages/posts/auto-news
-                  rm -rf blog/src/pages/posts/auto-news/*
                   cp -r auto-news/* blog/src/pages/posts/auto-news/ || true
             - name: Commit and push to blog
               run: |
