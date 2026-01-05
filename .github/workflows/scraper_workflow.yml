@@ -33,7 +33,14 @@ jobs:
             - name: Copy auto-news to blog
               run: |
                   mkdir -p blog/src/pages/posts/auto-news
-                  cp -r auto-news/* blog/src/pages/posts/auto-news/ || true
+                  # Seleccionar solo 1 archivo: priorizar IA, sino el primero
+                  selected_file=$(ls auto-news/*.md 2>/dev/null | grep -i ia | head -1)
+                  if [ -z "$selected_file" ]; then
+                      selected_file=$(ls auto-news/*.md 2>/dev/null | head -1)
+                  fi
+                  if [ -n "$selected_file" ]; then
+                      cp "$selected_file" blog/src/pages/posts/auto-news/
+                  fi
             - name: Commit and push to blog
               run: |
                   cd blog

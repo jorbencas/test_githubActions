@@ -201,26 +201,15 @@ def main():
     with open(f"./files/tech_news_{date}.json", 'w', encoding='utf-8') as f:
         json.dump(news, f, ensure_ascii=False, indent=4)
     
-    # Seleccionar solo 1 noticia, priorizando IA
-    if news:
-        # Buscar si hay alguna sobre IA
-        ia_news = [item for item in news if 'ia' in item['titulo'].lower() or 'inteligencia artificial' in item['titulo'].lower()]
-        if ia_news:
-            selected_news = [ia_news[0]]  # La primera sobre IA
-        else:
-            selected_news = [news[0]]  # La primera noticia
-    else:
-        selected_news = []
-    
     # 3. Scraping de becas
     print("Scraping becas...")
     becas = scrape_becas()
     with open(f"./files/becas_{date}.json", 'w', encoding='utf-8') as f:
         json.dump(becas, f, ensure_ascii=False, indent=4)
     
-    # 4. Generar posts MD para la noticia seleccionada
+    # 4. Generar posts MD
     print("Generating MD posts...")
-    slugs = generate_md_posts(selected_news)
+    slugs = generate_md_posts(news)
     
     # Actualizar index.html con reporte
     html_content = f"""
