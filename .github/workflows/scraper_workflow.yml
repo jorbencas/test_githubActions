@@ -4,7 +4,7 @@ on:
         branches:
             - "master"
     schedule:
-        - cron: "0 9 * * *" # Ejecutar diariamente a las 9:00 UTC
+        - cron: "0 9 * * 6" # Ejecutar los sábados a las 9:00 UTC
 jobs:
     scrape_and_update:
         runs-on: ubuntu-latest

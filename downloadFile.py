@@ -64,7 +64,7 @@ def scrape_news():
         "Xataka": "https://www.xataka.com/",
         "Genbeta": "https://www.genbeta.com/",
         "ComputerHoy": "https://computerhoy.com/",
-        "Teknautas": "https://www.teknautas.com/",
+        "HobbyConsolas": "https://www.hobbyconsolas.com/",
         "El País Tecnología": "https://elpais.com/tecnologia/",
         "ABC Tecnología": "https://www.abc.es/tecnologia/",
         "Vida Extra": "https://www.vidaextra.com/"
