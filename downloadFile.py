@@ -11,7 +11,7 @@ import re
 
 
 # Configuración
-BASE_URL = "https://jorbencas.github.io/"  # Cambiado al portfolio
+BASE_URL = "https://blog-jorbencas.vercel.app/"  # Cambiado al blog
 MAX_DEPTH = 2  # Profundidad de crawling
 TIMEOUT = 10
 
