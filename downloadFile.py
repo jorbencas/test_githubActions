@@ -195,7 +195,7 @@ draft: false
 title: "{item["titulo"]}"
 description: "Noticia automática de {item["fuente"]}"
 pubDate: "{pub_date.replace("-", "/")}"
-tags: ['tecnologia', 'auto']
+tags: ['tecnologia']
 slug: "{slug}"
 image: "{image_url}"
 author: "Bot Scraper"
