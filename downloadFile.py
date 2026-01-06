@@ -172,9 +172,9 @@ def scrape_becas():
 
 def clean_slug(text):
     # Convertir a minúsculas, reemplazar espacios por _, quitar caracteres no alfanuméricos excepto _ y -
-    text = text.lower().replace(' ', '_').replace('ñ', 'n')
+    text = text.lower().replace(' ', '_')
     text = re.sub(r'[^a-z0-9_-]', '', text)
-    return text[:50]
+    return text[:50].endswith('_') and text[:-1] or text  # Limitar a 50 caracteres
 
 def generate_md_posts(news):
     os.makedirs('./auto-news', exist_ok=True)
