@@ -8,7 +8,7 @@ Este proyecto realiza múltiples tareas útiles: scraping de noticias de tecnolo
 
 ## Funcionalidades
 - **Scraping de noticias**: Extrae títulos y enlaces de Xataka, Genbeta, ComputerHoy y El Español Tech.
-- **Checker de enlaces rotos**: Verifica enlaces en https://jorbencas.github.io/blog/ (ajusta BASE_URL si es otro).
+- **Checker de enlaces rotos**: Verifica enlaces en https://blog-jorbencas.vercel.app/ (ajusta BASE_URL si es otro).
 - **Generador de sitemap**: Crea sitemap.xml con enlaces encontrados.
 
 ## Instalación
