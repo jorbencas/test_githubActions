@@ -38,17 +38,21 @@ jobs:
           if [ -z "$selected_file" ]; then
               selected_file=$(ls auto-news/*.md 2>/dev/null | head -1)
           fi
+          copied=""
           if [ -n "$selected_file" ] && [ ! -f "blog/src/pages/posts/auto-news/$(basename "$selected_file")" ]; then
               cp "$selected_file" blog/src/pages/posts/auto-news/
+              copied="yes"
           fi
+          echo "copied=$copied" >> $GITHUB_ENV
       - name: Commit and push to blog
+        if: env.copied == 'yes'
         run: |
           cd blog
           git config user.name jorbencas
           git config user.email jorbencas@gmail.com
           git pull origin main --rebase
           git add .
-          git commit -m "[bot] Add auto-generated news posts" || echo "No changes to commit"
+          git commit -m "[bot] Add auto-generated news posts"
           git push
       - name: Update Github repo
         if: github.event.schedule == '0 9 * * 6'

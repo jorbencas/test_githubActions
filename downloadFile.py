@@ -1,12 +1,6 @@
 #!/usr/bin/env python3
 # Script para scraping de noticias tecnológicas y becas, actualizado con permisos corregidos
-import requests
-from bs4 import BeautifulSoup
-import json
-import os
-from datetime import datetime
-from urllib.parse import urljoin, urlparse
-import time
+import re
 
 # Configuración
 BASE_URL = "https://jorbencas.github.io/"  # Cambiado al portfolio
@@ -168,13 +162,19 @@ def scrape_becas():
     
     return becas
 
+def clean_slug(text):
+    # Convertir a minúsculas, reemplazar espacios por _, quitar caracteres no alfanuméricos excepto _ y -
+    text = text.lower().replace(' ', '_')
+    text = re.sub(r'[^a-z0-9_-]', '', text)
+    return text[:50]
+
 def generate_md_posts(news):
     os.makedirs('./auto-news', exist_ok=True)
     # No limpiar archivos antiguos para hacer acumulativas
     slugs = []
     for item in news:
         # Crear slug simple
-        base_slug = item["titulo"].lower().replace(" ", "_").replace("/", "_").replace(":", "").replace("?", "").replace('"', '').replace("'", '').replace("¿", '').replace("¡", '').replace(",", '').replace(".", '').replace(";", '').replace("!", '').replace("(", '').replace(")", '').replace("[", '').replace("]", '').replace("{", '').replace("}", '').replace("|", '').replace("\\", '').replace("*", '').replace("<", '').replace(">", '').replace("&", '').replace("%", '').replace("$", '').replace("#", '').replace("@", '').replace("+", '').replace("=", '').replace("^", '').replace("~", '').replace("`", '').replace("´", '').replace("¨", '').replace("·", '').replace("ç", 'c').replace("ñ", 'n').replace("á", 'a').replace("é", 'e').replace("í", 'i').replace("ó", 'o').replace("ú", 'u').replace("ü", 'u')[:50]
+        base_slug = clean_slug(item["titulo"])
         slug = base_slug + ".md"
         counter = 1
         while os.path.exists(f'./auto-news/{slug}'):
