@@ -172,7 +172,7 @@ def scrape_becas():
 
 def clean_slug(text):
     # Convertir a minúsculas, reemplazar espacios por _, quitar caracteres no alfanuméricos excepto _ y -
-    text = text.lower().replace(' ', '_')
+    text = text.lower().replace(' ', '_').replace('ñ', 'n')
     text = re.sub(r'[^a-z0-9_-]', '', text)
     return text[:50]
 
