@@ -174,7 +174,7 @@ def generate_md_posts(news):
     slugs = []
     for item in news:
         # Crear slug simple
-        base_slug = item["titulo"].lower().replace(" ", "_").replace("/", "_").replace(":", "").replace("?", "")[:50]
+        base_slug = item["titulo"].lower().replace(" ", "_").replace("/", "_").replace(":", "").replace("?", "").replace('"', '').replace("'", '').replace("¿", '').replace("¡", '').replace(",", '').replace(".", '').replace(";", '').replace("!", '').replace("(", '').replace(")", '').replace("[", '').replace("]", '').replace("{", '').replace("}", '').replace("|", '').replace("\\", '').replace("*", '').replace("<", '').replace(">", '').replace("&", '').replace("%", '').replace("$", '').replace("#", '').replace("@", '').replace("+", '').replace("=", '').replace("^", '').replace("~", '').replace("`", '').replace("´", '').replace("¨", '').replace("·", '').replace("ç", 'c').replace("ñ", 'n').replace("á", 'a').replace("é", 'e').replace("í", 'i').replace("ó", 'o').replace("ú", 'u').replace("ü", 'u')[:50]
         slug = base_slug + ".md"
         counter = 1
         while os.path.exists(f'./auto-news/{slug}'):
