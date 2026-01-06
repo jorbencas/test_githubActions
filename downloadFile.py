@@ -198,7 +198,7 @@ tags: ['tecnologia']
 slug: "{slug}"
 image: "{image_url}"
 author: "Bot Scraper"
-layout: "../../layouts/PostLayout.astro"
+layout: "../../../layouts/PostLayout.astro"
 ---
 
 # {item["titulo"]}
