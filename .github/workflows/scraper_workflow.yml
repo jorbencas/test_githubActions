@@ -1,66 +1,67 @@
 name: scraper_workflow
 on:
-    push:
-        branches:
-            - "master"
-    schedule:
-        - cron: "0 9 * * 6" # Ejecutar los sábados a las 9:00 UTC
+  push:
+    branches:
+      - "master"
+  schedule:
+    - cron: "0 9 * * 6" # Ejecutar los sábados a las 9:00 UTC
 jobs:
-    scrape_and_update:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout repo
-              uses: actions/checkout@v3
-              with:
-                  ref: master
-            - name: Set up Python
-              uses: actions/setup-python@v4
-              with:
-                  python-version: "3.9"
-            - name: Install dependencies
-              run: |
-                  python -m pip install --upgrade pip
-                  pip install requests beautifulsoup4
-            - name: Run scraper
-              run: python downloadFile.py
-              shell: bash
-            - name: Checkout blog repo
-              uses: actions/checkout@v3
-              with:
-                  repository: jorbencas/blog
-                  path: blog
-                  token: ${{ secrets.BLOG_TOKEN }}
-            - name: Copy auto-news to blog
-              run: |
-                  mkdir -p blog/src/pages/posts/auto-news
-                  # Seleccionar solo 1 archivo: priorizar IA, sino el primero
-                  selected_file=$(ls auto-news/*.md 2>/dev/null | grep -i ia | head -1)
-                  if [ -z "$selected_file" ]; then
-                      selected_file=$(ls auto-news/*.md 2>/dev/null | head -1)
-                  fi
-                  if [ -n "$selected_file" ]; then
-                      cp "$selected_file" blog/src/pages/posts/auto-news/
-                  fi
-            - name: Commit and push to blog
-              run: |
-                  cd blog
-                  git config user.name jorbencas
-                  git config user.email jorbencas@gmail.com
-                  git add .
-                  git commit -m "[bot] Add auto-generated news posts" || echo "No changes to commit"
-                  git push
-            - name: Update Github repo
-              if: github.event.schedule == '0 9 * * 6'
-              run: |
-                  git config user.name jorbencas
-                  git config user.email jorbencas@gmail.com
-                  git add .  
-                  git commit -m "[bot] update tech news scraping"
-                  git push
-            - name: Deploy to jorbencasdownloaderdocument.surge.sh
-              uses: dswistowski/surge-sh-action@v1
-              with:
-                  domain: "jorbencasdownloaderdocument.surge.sh"
-                  project: "."
-                  login: ${{ secrets.SURGE_LOGIN }}
-                  token: ${{ secrets.SURGE_TOKEN }}
+  scrape_and_update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          ref: master
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4
+      - name: Run scraper
+        run: python downloadFile.py
+        shell: bash
+      - name: Checkout blog repo
+        uses: actions/checkout@v3
+        with:
+          repository: jorbencas/blog
+          path: blog
+          token: ${{ secrets.BLOG_TOKEN }}
+      - name: Copy auto-news to blog
+        run: |
+          mkdir -p blog/src/pages/posts/auto-news
+          # Seleccionar solo 1 archivo nuevo: priorizar IA, sino el primero, y checkear si no existe en blog
+          selected_file=$(ls auto-news/*.md 2>/dev/null | grep -i ia | head -1)
+          if [ -z "$selected_file" ]; then
+              selected_file=$(ls auto-news/*.md 2>/dev/null | head -1)
+          fi
+          if [ -n "$selected_file" ] && [ ! -f "blog/src/pages/posts/auto-news/$(basename "$selected_file")" ]; then
+              cp "$selected_file" blog/src/pages/posts/auto-news/
+          fi
+      - name: Commit and push to blog
+        run: |
+          cd blog
+          git config user.name jorbencas
+          git config user.email jorbencas@gmail.com
+          git pull origin main --rebase
+          git add .
+          git commit -m "[bot] Add auto-generated news posts" || echo "No changes to commit"
+          git push
+      - name: Update Github repo
+        if: github.event.schedule == '0 9 * * 6'
+        run: |
+          git config user.name jorbencas
+          git config user.email jorbencas@gmail.com
+          git add .  
+          git commit -m "[bot] update tech news scraping"
+          git push
+      - name: Deploy to jorbencasdownloaderdocument.surge.sh
+        uses: dswistowski/surge-sh-action@v1
+        with:
+          domain: "jorbencasdownloaderdocument.surge.sh"
+          project: "."
+          login: ${{ secrets.SURGE_LOGIN }}
+          token: ${{ secrets.SURGE_TOKEN }}

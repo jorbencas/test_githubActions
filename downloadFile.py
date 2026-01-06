@@ -89,17 +89,32 @@ def scrape_news():
             for article in articles:
                 title_tag = article.select_one('h1, h2, h3, .title')
                 link_tag = article.select_one('a')
+                date_tag = article.select_one('time, .date, .published, [datetime]')
+                img_tag = article.select_one('img')
                 if title_tag and link_tag:
                     title = title_tag.get_text(strip=True)
                     link = link_tag['href']
                     if not link.startswith('http'):
                         link = url.rstrip('/') + '/' + link.lstrip('/')
-                    news.append({
-                        "titulo": title,
-                        "enlace": link,
-                        "fecha": datetime.now().strftime("%Y-%m-%d"),
-                        "fuente": source
-                    })
+                    fecha = datetime.now().strftime("%Y-%m-%d")
+                    if date_tag:
+                        if date_tag.get('datetime'):
+                            fecha = date_tag['datetime'][:10]  # YYYY-MM-DD
+                        else:
+                            fecha_text = date_tag.get_text(strip=True)
+                            # Intentar parsear fecha, pero por simplicidad, usar actual si falla
+                    imagen = ""
+                    if img_tag and img_tag.get('src'):
+                        imagen = urljoin(url, img_tag['src'])
+                    # Evitar duplicados
+                    if not any(n['titulo'] == title for n in news):
+                        news.append({
+                            "titulo": title,
+                            "enlace": link,
+                            "fecha": fecha,
+                            "imagen": imagen,
+                            "fuente": source
+                        })
         except Exception as e:
             print(f"Error scraping {source}: {e}")
     return news
@@ -116,12 +131,22 @@ def scrape_becas():
             for article in articles:
                 title_tag = article.select_one('h1, h2, h3, .title, a')
                 link_tag = article.select_one('a')
+                date_tag = article.select_one('time, .date, .published, [datetime]')
+                img_tag = article.select_one('img')
                 
                 if title_tag and link_tag:
                     title = title_tag.get_text(strip=True)
                     link = link_tag['href']
                     if not link.startswith('http'):
                         link = url.rstrip('/') + '/' + link.lstrip('/')
+                    
+                    fecha = datetime.now().strftime("%Y-%m-%d")
+                    if date_tag:
+                        if date_tag.get('datetime'):
+                            fecha = date_tag['datetime'][:10]
+                    imagen = ""
+                    if img_tag and img_tag.get('src'):
+                        imagen = urljoin(url, img_tag['src'])
                     
                     # Filtrar por becas y cursos en informática, IA, tecnología, etc.
                     tech_keywords = ['informática', 'ia', 'inteligencia artificial', 'programación', 'desarrollo', 'tecnología', 'software', 'hardware', 'ciberseguridad', 'machine learning', 'deep learning', 'data science', 'big data', 'blockchain', 'criptomonedas', 'iot', 'internet de las cosas', 'cloud', 'nube', 'devops', 'agile', 'scrum']
@@ -134,7 +159,8 @@ def scrape_becas():
                             becas.append({
                                 "titulo": title,
                                 "enlace": link,
-                                "fecha": datetime.now().strftime("%Y-%m-%d"),
+                                "fecha": fecha,
+                                "imagen": imagen,
                                 "fuente": source
                             })
         except Exception as e:
@@ -144,10 +170,7 @@ def scrape_becas():
 
 def generate_md_posts(news):
     os.makedirs('./auto-news', exist_ok=True)
-    # Limpiar archivos antiguos
-    for file in os.listdir('./auto-news'):
-        if file.endswith('.md'):
-            os.remove(os.path.join('./auto-news', file))
+    # No limpiar archivos antiguos para hacer acumulativas
     slugs = []
     for item in news:
         # Crear slug simple
@@ -158,6 +181,7 @@ def generate_md_posts(news):
             slug = f"{base_slug}_{counter}.md"
             counter += 1
         pub_date = item["fecha"]
+        image_url = item.get("imagen", "/img/tech_news.webp")
         md_content = f"""---
 draft: false
 title: "{item["titulo"]}"
@@ -165,7 +189,7 @@ description: "Noticia automática de {item["fuente"]}"
 pubDate: "{pub_date.replace("-", "/")}"
 tags: ['tecnologia', 'auto']
 slug: "{slug}"
-image: "/img/tech_news.webp"
+image: "{image_url}"
 author: "Bot Scraper"
 layout: "../../layouts/PostLayout.astro"
 ---
@@ -178,9 +202,10 @@ Fuente: {item["fuente"]}
 
 *Esta es una noticia automática scrapeada. Para más detalles, visita el enlace original.*
 """
-        with open(f'./auto-news/{slug}', 'w', encoding='utf-8') as f:
-            f.write(md_content)
-        slugs.append(slug)
+        if not os.path.exists(f'./auto-news/{slug}'):
+            with open(f'./auto-news/{slug}', 'w', encoding='utf-8') as f:
+                f.write(md_content)
+            slugs.append(slug)
     return slugs
 
 def main():
@@ -202,92 +227,55 @@ def main():
     with open(f"./files/tech_news_{date}.json", 'w', encoding='utf-8') as f:
         json.dump(news, f, ensure_ascii=False, indent=4)
     
+    # Acumular todas las noticias
+    all_news_file = "./files/all_news.json"
+    if os.path.exists(all_news_file):
+        with open(all_news_file, 'r', encoding='utf-8') as f:
+            all_news = json.load(f)
+    else:
+        all_news = []
+    # Agregar nuevas sin duplicados (por título)
+    existing_titles = {n['titulo'] for n in all_news}
+    for item in news:
+        if item['titulo'] not in existing_titles:
+            all_news.append(item)
+            existing_titles.add(item['titulo'])
+    # Ordenar por fecha descendente
+    all_news.sort(key=lambda x: x['fecha'], reverse=True)
+    with open(all_news_file, 'w', encoding='utf-8') as f:
+        json.dump(all_news, f, ensure_ascii=False, indent=4)
+    
     # 3. Scraping de becas
     print("Scraping becas...")
     becas = scrape_becas()
     with open(f"./files/becas_{date}.json", 'w', encoding='utf-8') as f:
         json.dump(becas, f, ensure_ascii=False, indent=4)
     
+    # Acumular todas las becas
+    all_becas_file = "./files/all_becas.json"
+    if os.path.exists(all_becas_file):
+        with open(all_becas_file, 'r', encoding='utf-8') as f:
+            all_becas = json.load(f)
+    else:
+        all_becas = []
+    # Agregar nuevas sin duplicados (por título)
+    existing_titles_b = {b['titulo'] for b in all_becas}
+    for item in becas:
+        if item['titulo'] not in existing_titles_b:
+            all_becas.append(item)
+            existing_titles_b.add(item['titulo'])
+    # Ordenar por fecha descendente
+    all_becas.sort(key=lambda x: x['fecha'], reverse=True)
+    with open(all_becas_file, 'w', encoding='utf-8') as f:
+        json.dump(all_becas, f, ensure_ascii=False, indent=4)
+    
     # 4. Generar posts MD
     print("Generating MD posts...")
     slugs = generate_md_posts(news)
     
     # Actualizar index.html con reporte
-    html_content = f"""
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Reporte Diario</title>
-    <style>
-        body {{ font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }}
-        h1 {{ color: #333; }}
-        h2 {{ color: #555; border-bottom: 2px solid #ddd; padding-bottom: 5px; }}
-        ul {{ list-style-type: none; padding: 0; }}
-        li {{ background: #fff; margin: 5px 0; padding: 10px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }}
-        a {{ color: #007bff; text-decoration: none; }}
-        a:hover {{ text-decoration: underline; }}
-        .broken {{ background: #ffe6e6; }}
-        .working {{ background: #e6ffe6; }}
-        .section {{ margin-bottom: 30px; }}
-        .date {{ font-size: 0.9em; color: #666; }}
-        .logo {{ width: 50px; height: 50px; float: right; }}
-    </style>
-</head>
-<body>
-    <img src="https://img.icons8.com/color/96/000000/technology-items.png" alt="Logo Tecnología" class="logo">
-    <h1>Reporte Diario - {datetime.now().strftime("%Y-%m-%d %H:%M")}</h1>
-    <p class="date">Generado el {datetime.now().strftime("%d de %B de %Y")}</p>
-    
-    <div class="section">
-        <h2>Enlaces Rotos Verificados</h2>
-        <p>Esta sección muestra enlaces rotos encontrados en el sitio web durante la verificación automática de enlaces internos.</p>
-        <ul>
-"""
-    for broken_link in broken[:10]:  # Mostrar primeros 10
-        status = broken_link.get("status", "Error")
-        html_content += f'            <li class="broken">{broken_link["url"]} - Status: {status}</li>\n'
-    html_content += """
-        </ul>
-    </div>
-    
-    <div class="section">
-        <h2>Últimas Noticias de Tecnología</h2>
-        <ul>
-"""
-    for item in news[:10]:
-        html_content += f'            <li><a href="{item["enlace"]}" target="_blank">{item["titulo"]}</a> - {item["fuente"]}</li>\n'
-    html_content += """
-        </ul>
-    </div>
-    
-    <div class="section">
-        <h2>Nuevos Posts Automáticos en el Blog</h2>
-        <ul>
-"""
-    for slug in slugs[:10]:
-        post_url = f"https://jorbencas.github.io/blog/posts/auto-news/{slug.replace('.md', '')}"
-        html_content += f'            <li><a href="{post_url}" target="_blank">{slug.replace(".md", "").replace("_", " ")}</a></li>\n'
-    html_content += """
-        </ul>
-    </div>
-    
-    <div class="section">
-        <h2>Becas y Cursos en España (Vall de Albaida)</h2>
-        <ul>
-"""
-    for beca in becas[:10]:
-        html_content += f'            <li><a href="{beca["enlace"]}" target="_blank">{beca["titulo"]}</a> - {beca["fuente"]}</li>\n'
-    html_content += """
-        </ul>
-    </div>
-    
-    <div class="section">
-        <p><a href="sitemap.xml">Ver Sitemap</a></p>
-"""
-    
-    with open('index.html', 'w', encoding='utf-8') as f:
-        f.write(html_content)
+    # Ya no se regenera el HTML, ahora es estático con JS
+    print("Index.html is now static with JS loading data.")
     
     print("Todo completado.")
 
