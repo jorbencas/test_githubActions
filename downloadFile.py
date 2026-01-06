@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 # Script para scraping de noticias tecnológicas y becas, actualizado con permisos corregidos
+import requests
+from bs4 import BeautifulSoup
+import json
+import os
+from datetime import datetime
+from urllib.parse import urljoin, urlparse
+import time
 import re
+
 
 # Configuración
 BASE_URL = "https://jorbencas.github.io/"  # Cambiado al portfolio
