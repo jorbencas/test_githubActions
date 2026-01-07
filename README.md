@@ -1,6 +1,6 @@
 # test_githubActions
 
-![Logo de Tecnología](https://img.icons8.com/color/96/000000/technology-items.png)
+![Logo de Tecnología](./image.png)
 
 Este proyecto realiza múltiples tareas útiles: scraping de noticias de tecnología en España, verificación de enlaces rotos en tu sitio, y generación de sitemap.
 
