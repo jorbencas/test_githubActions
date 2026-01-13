@@ -198,7 +198,7 @@ tags: ['tecnologia']
 slug: "{slug}"
 image: "{image_url}"
 author: "Bot Scraper"
-layout: "../../../layouts/PostLayout.astro"
+layout: "@layouts/PostLayout.astro"
 ---
 
 # {item["titulo"]}
@@ -307,8 +307,7 @@ def main():
 </head>
 <body>
     <img src="./Image.png" alt="Logo Tecnología" class="logo">
-    <h1>Reporte Diario - {datetime.now().strftime("%Y-%m-%d %H:%M")}</h1>
-    <p class="date">Generado el {datetime.now().strftime("%d de %B de %Y")}</p>
+    <h1>Reporte Semanal </h1>
     
     <div class="section">
         <h2>Enlaces Rotos Verificados</h2>
