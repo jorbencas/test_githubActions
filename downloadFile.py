@@ -306,7 +306,20 @@ def main():
 <head>
     <meta charset="UTF-8">
     <title>Reporte Diario</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <style>
+        body {{ font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }}
+h1 {{ color: #333; }}
+h2 {{ color: #555; border-bottom: 2px solid #ddd; padding-bottom: 5px; }}
+ul {{ list-style-type: none; padding: 0; }}
+li {{ background: #fff; margin: 5px 0; padding: 10px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }}
+a {{ color: #007bff; text-decoration: none; }}
+a:hover {{ text-decoration: underline; }}
+.broken {{ background: #ffe6e6; }}
+.working {{ background: #e6ffe6; }}
+.section {{ margin-bottom: 30px; }}
+.date {{ font-size: 0.9em; color: #666; }}
+.logo {{ width: 50px; height: 50px; float: right; }}
+</style>
 </head>
 <body>
     <img src="./Image.png" alt="Logo Tecnología" class="logo">
