@@ -19,7 +19,7 @@ TIMEOUT = 10
 SOURCES = {
     "Xataka": "https://www.xataka.com/",
     "Genbeta": "https://www.genbeta.com/",
-    "ComputerHoy": "https://computerhoy.com/",
+    #"ComputerHoy": "https://computerhoy.com/",
     "HobbyConsolas": "https://www.hobbyconsolas.com/",
     "El País Tecnología": "https://elpais.com/tecnologia/",
     "ABC Tecnología": "https://www.abc.es/tecnologia/",
@@ -36,7 +36,7 @@ BECAS_SOURCES = {
 COLORS_SOURCES = {
     "Xataka": "#212a34",
     "Genbeta": "#004c98",
-    "ComputerHoy": "White",
+    #"ComputerHoy": "White",
     "HobbyConsolas": "#00a6f8",
     "El País Tecnología": "white",
     "ABC Tecnología": "White",
