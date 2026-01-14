@@ -33,6 +33,22 @@ BECAS_SOURCES = {
     "Fundación Carolina": "https://www.fundacioncarolina.es/"
 }
 
+COLORS_SOURCES = {
+    "Xataka": "#212a34",
+    "Genbeta": "#004c98",
+    "ComputerHoy": "White",
+    "HobbyConsolas": "#00a6f8",
+    "El País Tecnología": "white",
+    "ABC Tecnología": "White",
+    "Vida Extra": "#042340",
+    "Levante-EMV": "white",
+    "Valencia Plaza": "#4A82B9",
+    "Fundación Carolina": "#C20321"
+}
+
+def get_color(source):
+    return COLORS_SOURCES[source]
+
 def get_all_links(url, visited, depth=0):
     if depth > MAX_DEPTH or url in visited:
         return set()
@@ -290,20 +306,7 @@ def main():
 <head>
     <meta charset="UTF-8">
     <title>Reporte Diario</title>
-    <style>
-        body {{ font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }}
-        h1 {{ color: #333; }}
-        h2 {{ color: #555; border-bottom: 2px solid #ddd; padding-bottom: 5px; }}
-        ul {{ list-style-type: none; padding: 0; }}
-        li {{ background: #fff; margin: 5px 0; padding: 10px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }}
-        a {{ color: #007bff; text-decoration: none; }}
-        a:hover {{ text-decoration: underline; }}
-        .broken {{ background: #ffe6e6; }}
-        .working {{ background: #e6ffe6; }}
-        .section {{ margin-bottom: 30px; }}
-        .date {{ font-size: 0.9em; color: #666; }}
-        .logo {{ width: 50px; height: 50px; float: right; }}
-    </style>
+    <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
     <img src="./Image.png" alt="Logo Tecnología" class="logo">
@@ -326,7 +329,7 @@ def main():
         <ul>
 """
     for item in news:
-        html_content += f'            <li><a href="{item["enlace"]}" target="_blank">{item["titulo"]}</a> - {item["fuente"]}</li>\n'
+        html_content += f'<li  style="background-color:{get_color(item["fuente"])};"> {item["fuente"]} - <a href="{item["enlace"]}" target="_blank">{item["titulo"]}</a></li>\n'
     html_content += """
         </ul>
     </div>
@@ -336,7 +339,7 @@ def main():
         <ul>
 """
     for beca in becas:
-        html_content += f'            <li><a href="{beca["enlace"]}" target="_blank">{beca["titulo"]}</a> - {beca["fuente"]}</li>\n'
+        html_content += f'<li  style="background-color:{get_color(item["fuente"])};"> {item["fuente"]} - <a href="{beca["enlace"]}" target="_blank">{beca["titulo"]}</a></li>\n'
     html_content += """
         </ul>
     </div>
