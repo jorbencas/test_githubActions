@@ -34,7 +34,7 @@ BECAS_SOURCES = {
 }
 
 COLORS_SOURCES = {
-    "Xataka": "#212a34",
+    "Xataka": {"bgcolor":"#212a34", "color":"white"},
     "Genbeta": "#004c98",
     #"ComputerHoy": "White",
     "HobbyConsolas": "#00a6f8",
@@ -235,6 +235,7 @@ def main():
     os.makedirs('./files', exist_ok=True)
     date = datetime.now().strftime("%Y%m%d")
     
+
     # 1. Checker de enlaces rotos
     print("Checking links...")
     working, broken = check_links()
@@ -302,7 +303,7 @@ def main():
     # Actualizar index.html con reporte
     html_content = f"""
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es en">
 <head>
     <meta charset="UTF-8">
     <title>Reporte Diario</title>

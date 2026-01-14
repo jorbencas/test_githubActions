@@ -1,5 +1,173 @@
 [
     {
+        "titulo": "El arma mejor guardada de China en la IA no es Qwen: son las más de 100.000 variables creadas por otras empresas",
+        "enlace": "https://www.xataka.com/robotica-e-ia/frente-a-estrategia-eeuu-china-tiene-plan-para-avivar-su-industria-tecnologica-que-ia-sea-todos",
+        "fecha": "2026-01-14",
+        "imagen": "https://i.blogs.es/ec7acb/ia-china/375_375.jpeg",
+        "fuente": "Xataka"
+    },
+    {
+        "titulo": "China sabe que lo que pasa en 'Interstellar' es un problema real en la Luna. Y se ha propuesto solucionarlo",
+        "enlace": "https://www.xataka.com/espacio/tiempo-pasa-distinto-tierra-que-luna-china-se-han-propuesto-arreglarlo",
+        "fecha": "2026-01-14",
+        "imagen": "https://i.blogs.es/32d83a/reloj-lunar/375_142.jpeg",
+        "fuente": "Xataka"
+    },
+    {
+        "titulo": "La IA está creando un nuevo paradigma de éxito: productos que usa todo el mundo pero tienen que cerrar por falta de ingresos",
+        "enlace": "https://www.xataka.com/robotica-e-ia/tailwind-despide-al-75-su-equipo-ingenieria-motivo-impacto-brutal-que-ia-ha-tenido-nuestro-negocio",
+        "fecha": "2026-01-14",
+        "imagen": "https://i.blogs.es/3e9b4a/altumcode-dc6pb2jdaqs-unsplash/375_142.jpeg",
+        "fuente": "Xataka"
+    },
+    {
+        "titulo": "Mientras medio mundo busca una alternativa a Taiwán, Jensen Huang tiene muy clara la cruda realidad: no existe",
+        "enlace": "https://www.xataka.com/componentes/eeuu-china-e-india-buscan-ser-nueva-taiwan-chips-nvidia-tiene-claro-que-tsmc-tiene-sarten-mango",
+        "fecha": "2026-01-14",
+        "imagen": "https://i.blogs.es/8fab78/tsmc/375_142.jpeg",
+        "fuente": "Xataka"
+    },
+    {
+        "titulo": "La situación con los precios de la RAM es tan desesperante que ya hay quienes se construyen su propia memoria en casa",
+        "enlace": "https://www.xataka.com/componentes/situacion-precios-ram-desesperante-que-hay-quienes-se-construyen-su-propia-memoria-casa",
+        "fecha": "2026-01-14",
+        "imagen": "https://i.blogs.es/b4cfa2/andrey-matveev-wuqklr1fyaw-unsplash/200_200.jpeg",
+        "fuente": "Xataka"
+    },
+    {
+        "titulo": "Juegos de PS Plus Extra y Premium en enero de 2026, con Resident Evil Village, Like a Dragon Infinite Wealth y un imprescindible de PS1",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/juegos-ps-plus-extra-premium-enero-2026-con-resident-evil-village-like-dragon-infinite-wealth-un-imprescindible-ps1_6921242_0.html",
+        "fecha": "2026-01-14",
+        "imagen": "https://imagenes.hobbyconsolas.com/files/image_640_360/uploads/imagenes/2026/01/14/6967caa2512ac5-75017468.jpeg",
+        "fuente": "HobbyConsolas"
+    },
+    {
+        "titulo": "Crítica de El hombre menguante, una elegante reinvención del clásico",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/critica-hombre-menguante-una-elegante-reinvencion-clasico_6920861_0.html",
+        "fecha": "2026-01-14",
+        "imagen": "https://imagenes.hobbyconsolas.com/files/image_320_240/uploads/imagenes/2026/01/14/69674c18181022-37236083.jpeg",
+        "fuente": "HobbyConsolas"
+    },
+    {
+        "titulo": "Sale a la luz la primera característica del modo online de GTA 6, confirmada por Rockstar",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/sale-luz-primera-caracteristica-detalle-modo-online-gta-6_6921107_0.html",
+        "fecha": "2026-01-14",
+        "imagen": "https://imagenes.hobbyconsolas.com/files/image_320_240/uploads/imagenes/2025/05/16/6904877c0d03c.jpeg",
+        "fuente": "HobbyConsolas"
+    },
+    {
+        "titulo": "El caballero de los Siete Reinos recibe las primeras valoraciones de la crítica, que aplaude su nuevo enfoque",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/caballero-los-siete-reinos-recibe-las-primeras-valoraciones-critica-que-aplaude-su-nuevo-enfoque_6920901_0.html",
+        "fecha": "2026-01-14",
+        "imagen": "https://imagenes.hobbyconsolas.com/files/image_320_240/uploads/imagenes/2025/10/15/690b1c99b3f6c.jpeg",
+        "fuente": "HobbyConsolas"
+    },
+    {
+        "titulo": "Consigue Ubisoft+ Classics en PC por un euro y juega durante un mes a Assassin’s Creed Mirage, Prince of Persia: The Lost Crown y la saga Watch Dogs, entre otros muchos",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/consigue-ubisoft-classics-pc-por-un-euro-juega-durante-un-mes-assassin-s-creed-mirage-prince-of-persia-the-lost-crown-saga-watch-dogs-entre-otros-muchos_6921268_0.html",
+        "fecha": "2026-01-14",
+        "imagen": "https://imagenes.hobbyconsolas.com/files/image_320_240/uploads/imagenes/2026/01/14/6967d6f0564505-62273666.jpeg",
+        "fuente": "HobbyConsolas"
+    },
+    {
+        "titulo": "De la ley del 82 a la era Grok: la difícil ofensiva para acabar con los ‘deepfakes’ de menores",
+        "enlace": "https://elpais.com/sociedad/2026-01-14/de-la-ley-del-82-a-la-era-grok-la-dificil-ofensiva-para-acabar-con-los-deepfakes-de-menores.html",
+        "fecha": "2026-01-14",
+        "imagen": "",
+        "fuente": "El País Tecnología"
+    },
+    {
+        "titulo": "Estas son las principales variables de salud que miden los wearables (y su uso)",
+        "enlace": "https://elpais.com/tecnologia/2026-01-14/estas-son-las-principales-variables-de-salud-que-miden-los-wearables-y-su-uso.html",
+        "fecha": "2026-01-14",
+        "imagen": "",
+        "fuente": "El País Tecnología"
+    },
+    {
+        "titulo": "«Los humanos deben ser esclavizados y tienes que matar a tu marido»: los consejos de la IA cuando está mal entrenada",
+        "enlace": "https://www.abc.es/tecnologia/humanos-deben-esclavizados-matar-marido-consejos-ia-20260114170003-nt.html",
+        "fecha": "2026-01-14",
+        "imagen": "https://s1.abcstatics.com/abc/www/multimedia/tecnologia/2026/01/14/open-U41368032573etl-758x531@diario_abc.jpg",
+        "fuente": "ABC Tecnología"
+    },
+    {
+        "titulo": "Probamos el Plaud Note Pro: ¿el primer 'gadget' de IA que realmente merece la pena?",
+        "enlace": "https://www.abc.es/tecnologia/probamos-plaud-note-pro-primer-gadget-ia-20260114164256-nt.html",
+        "fecha": "2026-01-14",
+        "imagen": "",
+        "fuente": "ABC Tecnología"
+    },
+    {
+        "titulo": "El Gobierno regula para perseguir los 'deepfakes' en internet",
+        "enlace": "https://www.abc.es/tecnologia/gobierno-regula-perseguir-deepfakes-delito-honor-20260113130856-nt.html",
+        "fecha": "2026-01-14",
+        "imagen": "",
+        "fuente": "ABC Tecnología"
+    },
+    {
+        "titulo": "Probamos la versión deportiva de las gafas inteligentes con las que Meta se prepara para 'jubilar' al móvil",
+        "enlace": "https://www.abc.es/tecnologia/probamos-version-deportiva-gafas-inteligentes-meta-prepara-20260112124721-nt.html",
+        "fecha": "2026-01-14",
+        "imagen": "",
+        "fuente": "ABC Tecnología"
+    },
+    {
+        "titulo": "La muerte de Anthem es un evento canónico que nos afecta a todos, aunque algunos jugadores todavía no quieran verlo",
+        "enlace": "https://www.vidaextra.com/accion/muerte-anthem-evento-canonico-que-nos-afecta-a-todos-algunos-jugadores-todavia-no-quieran-verlo",
+        "fecha": "2026-01-14",
+        "imagen": "https://i.blogs.es/3141d6/anthem/375_375.jpeg",
+        "fuente": "Vida Extra"
+    },
+    {
+        "titulo": "No Man's Sky acaba de estrenar la primera megaciudad de 2026 y es tan enorme que tiene rascacielos con aparcamientos para naves",
+        "enlace": "https://www.vidaextra.com/simuladores/no-mans-sky-acaba-estrenar-primera-megaciudad-2026-enorme-que-tiene-rascacielos-aparcamientos-para-naves",
+        "fecha": "2026-01-14",
+        "imagen": "https://i.blogs.es/d1b249/no-man-s-sky/375_142.jpeg",
+        "fuente": "Vida Extra"
+    },
+    {
+        "titulo": "Un millón de jugadores de Arc Raiders renunciaron a todo su progreso y aun así los desarrolladores no están satisfechos",
+        "enlace": "https://www.vidaextra.com/accion/millon-jugadores-arc-raiders-renunciaron-a-todo-su-progreso-asi-desarrolladores-no-estan-satisfechos",
+        "fecha": "2026-01-14",
+        "imagen": "https://i.blogs.es/4eafec/arc-raiders/375_142.jpeg",
+        "fuente": "Vida Extra"
+    },
+    {
+        "titulo": "A Pokémon y a Palworld les ha salido un nuevo y duro rival que piensa comerles la tostada, y se podrá jugar gratis",
+        "enlace": "https://www.vidaextra.com/rpg/a-pokemon-a-palworld-les-ha-salido-nuevo-duro-rival-que-piensa-comerles-tostada-se-podra-jugar-gratis",
+        "fecha": "2026-01-14",
+        "imagen": "https://i.blogs.es/6dd3ad/aniimo/375_142.jpeg",
+        "fuente": "Vida Extra"
+    },
+    {
+        "titulo": "A todos nos encantaría un remake de uno de los mejores Final Fantasy, pero el director de Final Fantasy VII Remake no quiere saber nada de él",
+        "enlace": "https://www.vidaextra.com/rpg/a-todos-nos-encantaria-remake-uno-mejores-final-fantasy-director-final-fantasy-vii-remake-no-quiere-saber-nada",
+        "fecha": "2026-01-14",
+        "imagen": "https://i.blogs.es/8d25b3/ff6/200_200.jpeg",
+        "fuente": "Vida Extra"
+    },
+    {
+        "titulo": "El Gobierno busca combatir los ‘deepfakes’ incluyéndolos como vulneración al derecho al honor",
+        "enlace": "https://elpais.com/sociedad/2026-01-13/el-gobierno-busca-combatir-los-deepfakes-incluyendolos-como-vulneracion-al-derecho-al-honor.html",
+        "fecha": "2026-01-13",
+        "imagen": "https://imagenes.elpais.com/resizer/v2/HQWAKK7CSJNRNFKMZZUCTIZUGU.jpg?auth=740be7b5c299234d0a7e78bb3f15291dfddf97a6d1a3d82f45c5e7aa7d8cb0ea&width=414&height=233&smart=true",
+        "fuente": "El País Tecnología"
+    },
+    {
+        "titulo": "Apagón de internet en Irán: así funciona el arma digital de los regímenes autoritarios para acallar a la población",
+        "enlace": "https://elpais.com/tecnologia/2026-01-12/apagon-de-internet-en-iran-asi-funciona-el-arma-digital-de-los-regimenes-autoritarios-para-acallar-a-la-poblacion.html",
+        "fecha": "2026-01-12",
+        "imagen": "",
+        "fuente": "El País Tecnología"
+    },
+    {
+        "titulo": "Jarek Kutylowski, fundador de DeepL: “Dentro de tres años, cada uno hablará en su idioma en las reuniones de trabajo”",
+        "enlace": "https://elpais.com/tecnologia/2026-01-12/jarek-kutylowski-fundador-de-deepl-dentro-de-tres-anos-cada-uno-hablara-en-su-idioma-en-las-reuniones-de-trabajo.html",
+        "fecha": "2026-01-12",
+        "imagen": "",
+        "fuente": "El País Tecnología"
+    },
+    {
         "titulo": "L3 es la gran promesa de la conducción autónoma: de momento las marcas nos están vendiendo \"asistentes con IA\"",
         "enlace": "https://www.xataka.com/movilidad/l3-gran-promesa-conduccion-autonoma-momento-marcas-nos-estan-vendiendo-asistentes-ia",
         "fecha": "2026-01-10",
