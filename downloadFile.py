@@ -374,7 +374,7 @@ a:hover {{ text-decoration: underline; }}
         <ul>
 """
     for item in news:
-        html_content += f'<li  style="background-color:{get_color(item["fuente"])};"> {item["fuente"]} - <a href="{item["enlace"]}" target="_blank">{item["titulo"]}</a></li>\n'
+        html_content += f'<li class="{get_color(item["fuente"])}"> {item["fuente"]} - <a href="{item["enlace"]}" target="_blank">{item["titulo"]}</a></li>\n'
     html_content += """
         </ul>
     </div>
@@ -384,7 +384,7 @@ a:hover {{ text-decoration: underline; }}
         <ul>
 """
     for beca in becas:
-        html_content += f'<li  style="background-color:{get_color(item["fuente"])};"> {item["fuente"]} - <a href="{beca["enlace"]}" target="_blank">{beca["titulo"]}</a></li>\n'
+        html_content += f'<li class="{get_color(item["fuente"])}"> {item["fuente"]} - <a href="{beca["enlace"]}" target="_blank">{beca["titulo"]}</a></li>\n'
     html_content += """
         </ul>
     </div>
