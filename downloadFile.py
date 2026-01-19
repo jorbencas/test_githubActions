@@ -33,22 +33,6 @@ BECAS_SOURCES = {
     "Fundación Carolina": "https://www.fundacioncarolina.es/"
 }
 
-COLORS_SOURCES = {
-    "Xataka": "Xataka",
-    "Genbeta": "Genbeta",
-    #"ComputerHoy": "ComputerHoy",
-    "HobbyConsolas": "HobbyConsolas",
-    "El País Tecnología": "El_País_Tecnología",
-    "ABC Tecnología": "ABC_Tecnología",
-    "Vida Extra": "Vida_Extra",
-    "Levante-EMV": "Levante_EMV",
-    "Valencia Plaza": "Valencia_Plaza",
-    "Fundación Carolina": "Fundación_Carolina"
-}
-
-def get_color(source):
-    return COLORS_SOURCES[source]
-
 def get_all_links(url, visited, depth=0):
     if depth > MAX_DEPTH or url in visited:
         return set()
@@ -316,41 +300,6 @@ a:hover {{ text-decoration: underline; }}
 .section {{ margin-bottom: 30px; }}
 .date {{ font-size: 0.9em; color: #666; }}
 .logo {{ width: 50px; height: 50px; float: right; }}
-
-
-
-  .Xataka {{ background-color:#212a34; color:#378708; }}
-    .Genbeta {{ "background-color":"#004c98", "color":"white"}}
-    .ComputerHoy {{ "background-color":"White", "color":"white"}}
-    .HobbyConsolas {{ "background-color":"#00a6f8", "color":"white"}}
-    .El_País_Tecnología {{ "background-color":"white", "color":"white"}}
-    .ABC_Tecnología {{ "background-color":"White", "color":"white"}}
-    .Vida_Extra {{ "background-color":"#042340", "color":"white"}}
-    .Levante_EMV {{ "background-color":"white", "color":"white"}}
-    .Valencia_Plaza {{ "background-color":"#4A82B9", "color":"white"}}
-    .Fundación_Carolina {{ "background-color":"#C20321", "color":"white"}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </style>
 </head>
 <body>
@@ -374,7 +323,7 @@ a:hover {{ text-decoration: underline; }}
         <ul>
 """
     for item in news:
-        html_content += f'<li class="{get_color(item["fuente"])}"> {item["fuente"]} - <a href="{item["enlace"]}" target="_blank">{item["titulo"]}</a></li>\n'
+        html_content += f'<li> {item["fuente"]} - <a href="{item["enlace"]}" target="_blank">{item["titulo"]}</a></li>\n'
     html_content += """
         </ul>
     </div>
@@ -384,7 +333,7 @@ a:hover {{ text-decoration: underline; }}
         <ul>
 """
     for beca in becas:
-        html_content += f'<li class="{get_color(item["fuente"])}"> {item["fuente"]} - <a href="{beca["enlace"]}" target="_blank">{beca["titulo"]}</a></li>\n'
+        html_content += f'<li> {item["fuente"]} - <a href="{beca["enlace"]}" target="_blank">{beca["titulo"]}</a></li>\n'
     html_content += """
         </ul>
     </div>
