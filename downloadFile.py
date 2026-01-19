@@ -34,16 +34,16 @@ BECAS_SOURCES = {
 }
 
 COLORS_SOURCES = {
-    "Xataka": {"bgcolor":"#212a34", "color":"white"},
-    "Genbeta": "#004c98",
-    #"ComputerHoy": "White",
-    "HobbyConsolas": "#00a6f8",
-    "El País Tecnología": "white",
-    "ABC Tecnología": "White",
-    "Vida Extra": "#042340",
-    "Levante-EMV": "white",
-    "Valencia Plaza": "#4A82B9",
-    "Fundación Carolina": "#C20321"
+    "Xataka": "Xataka",
+    "Genbeta": "Genbeta",
+    #"ComputerHoy": "ComputerHoy",
+    "HobbyConsolas": "HobbyConsolas",
+    "El País Tecnología": "El_País_Tecnología",
+    "ABC Tecnología": "ABC_Tecnología",
+    "Vida Extra": "Vida_Extra",
+    "Levante-EMV": "Levante_EMV",
+    "Valencia Plaza": "Valencia_Plaza",
+    "Fundación Carolina": "Fundación_Carolina"
 }
 
 def get_color(source):
@@ -248,8 +248,6 @@ def main():
     news = scrape_news()
     # Filtrar enlaces sospechosos
     news = [item for item in news if 'ads' not in item['enlace'].lower() and 'track' not in item['enlace'].lower()]
-    with open(f"./files/tech_news_{date}.json", 'w', encoding='utf-8') as f:
-        json.dump(news, f, ensure_ascii=False, indent=4)
     
     # Acumular todas las noticias
     all_news_file = "./files/all_news.json"
@@ -272,14 +270,12 @@ def main():
     # 3. Scraping de becas
     print("Scraping becas...")
     becas = scrape_becas()
-    with open(f"./files/becas_{date}.json", 'w', encoding='utf-8') as f:
-        json.dump(becas, f, ensure_ascii=False, indent=4)
     
     # Acumular todas las becas
     all_becas_file = "./files/all_becas.json"
     if os.path.exists(all_becas_file):
         with open(all_becas_file, 'r', encoding='utf-8') as f:
-            all_becas = json.load(f)
+               all_becas = json.load(f)
     else:
         all_becas = [] #Obtener todos los post que hay guardados
     # Agregar nuevas sin duplicados (por título)
@@ -309,28 +305,48 @@ def main():
     <title>Reporte Diario</title>
     <style>
         body {{ font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }}
-        h1 {{ color: #333; }}
-        h2 {{ color: #555; border-bottom: 2px solid #ddd; padding-bottom: 5px; }}
-        ul {{ list-style-type: none; padding: 0; }}
-        li {{ background: #fff; margin: 5px 0; padding: 10px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }}
-        a {{ color: #007bff; text-decoration: none; }}
-        a:hover {{ text-decoration: underline; }}
-        .broken {{ background: #ffe6e6; }}
-        .working {{ background: #e6ffe6; }}
-        .section {{ margin-bottom: 30px; }}
-        .date {{ font-size: 0.9em; color: #666; }}
-        .logo {{ width: 50px; height: 50px; float: right; }}
+h1 {{ color: #333; }}
+h2 {{ color: #555; border-bottom: 2px solid #ddd; padding-bottom: 5px; }}
+ul {{ list-style-type: none; padding: 0; }}
+li {{ background: #fff; margin: 5px 0; padding: 10px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }}
+a {{ color: #007bff; text-decoration: none; }}
+a:hover {{ text-decoration: underline; }}
+.broken {{ background: #ffe6e6; }}
+.working {{ background: #e6ffe6; }}
+.section {{ margin-bottom: 30px; }}
+.date {{ font-size: 0.9em; color: #666; }}
+.logo {{ width: 50px; height: 50px; float: right; }}
 
-  .Xataka {{"background-color:#212a34; color:white;}}
-    .Genbeta #004c98",
-    #"ComputerHoy": "White",
-    "HobbyConsolas": "#00a6f8",
-    "El País Tecnología": "white",
-    "ABC Tecnología": "White",
-    "Vida Extra": "#042340",
-    "Levante-EMV": "white",
-    "Valencia Plaza": "#4A82B9",
-    "Fundación Carolina": "#C20321"
+
+
+  .Xataka {{ background-color:#212a34; color:#378708; }}
+    .Genbeta {{ "background-color":"#004c98", "color":"white"}}
+    .ComputerHoy {{ "background-color":"White", "color":"white"}}
+    .HobbyConsolas {{ "background-color":"#00a6f8", "color":"white"}}
+    .El_País_Tecnología {{ "background-color":"white", "color":"white"}}
+    .ABC_Tecnología {{ "background-color":"White", "color":"white"}}
+    .Vida_Extra {{ "background-color":"#042340", "color":"white"}}
+    .Levante_EMV {{ "background-color":"white", "color":"white"}}
+    .Valencia_Plaza {{ "background-color":"#4A82B9", "color":"white"}}
+    .Fundación_Carolina {{ "background-color":"#C20321", "color":"white"}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
