@@ -283,10 +283,10 @@ def main():
     # Actualizar index.html con reporte
     html_content = f"""
 <!DOCTYPE html>
-<html lang="es en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Reporte Diario</title>
+    <title>Reporte Semanal</title>
     <style>
         body {{ font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }}
 h1 {{ color: #333; }}
