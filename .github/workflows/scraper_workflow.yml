@@ -54,7 +54,6 @@ jobs:
           git add .
           git commit -m "[bot] Add auto-generated news posts"
           git push
-          rm -r blog
       - name: Update Github repo
         if: github.event.schedule == '0 9 * * 6'
         run: |
