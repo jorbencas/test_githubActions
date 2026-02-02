@@ -103,7 +103,7 @@ def scrape_news():
                         if date_tag.get('datetime'):
                             fecha = date_tag['datetime'][:10]  # YYYY-MM-DD
                         else:
-                            fecha_text = date_tag.get_text(strip=True)
+                            fecha = date_tag.get_text(strip=True)
                             # Intentar parsear fecha, pero por simplicidad, usar actual si falla
                     imagen = ""
                     if img_tag and img_tag.get('src'):
@@ -172,7 +172,7 @@ def scrape_becas():
 
 def clean_slug(text):
     # Convertir a minúsculas, reemplazar espacios por _, quitar caracteres no alfanuméricos excepto _ y -
-    text = re.sub(r'[^a-z0-9_-]', '', text.lower().replace(' ', '_'))
+    text = re.sub(r'[^a-z0-9_-]', '', text.lower().replace(' ', '_').replace('"','\''))
     return text[:50].rstrip('_')
 
 def generate_md_posts(news):
@@ -191,7 +191,7 @@ def generate_md_posts(news):
         image_url = item.get("imagen", "/img/tech_news.webp")
         md_content = f"""---
 draft: false
-title: "{item["titulo"]}"
+title: "{item["titulo"].replace('"','\'')}"
 description: "Noticia automática de {item["fuente"]}"
 pubDate: "{pub_date.replace("-", "/")}"
 tags: ['tecnologia']
