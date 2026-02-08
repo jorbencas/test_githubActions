@@ -23,9 +23,6 @@ jobs:
           pip install requests beautifulsoup4
       - name: Run scraper
         env:
-          # ESTO ES LO QUE TE FALTA:
-          # A la izquierda: El nombre que busca Python (EMAIL_PASS)
-          # A la derecha: El nombre que pusiste en Secrets (BLOG_TOKEN)
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASS: ${{ secrets.BLOG_TOKEN }}
         run: python downloadFile.py
