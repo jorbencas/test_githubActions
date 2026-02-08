@@ -223,9 +223,12 @@ def generate_md_posts(news):
             counter += 1
         pub_date = item["fecha"]
         image_url = item.get("imagen", "/img/tech_news.webp")
+        # --- SOLUCIÓN AL ERROR ---
+        # Limpiamos las comillas antes para evitar el backslash dentro de la f-string
+        titulo_limpio = item["titulo"].replace('"', "'")
         md_content = f"""---
 draft: false
-title: "{item["titulo"].replace('"','\'')}"
+title: {titulo_limpio}
 description: "Noticia automática de {item["fuente"]}"
 pubDate: "{pub_date.replace("-", "/")}"
 tags: ['tecnologia']
@@ -235,7 +238,7 @@ author: "Bot Scraper"
 layout: "@layouts/PostLayout.astro"
 ---
 
-# {item["titulo"]}
+# {titulo_limpio}
 
 Fuente: {item["fuente"]}
 
