@@ -41,7 +41,7 @@ def enviar_correo(asunto, cuerpo_html):
     password = os.getenv('EMAIL_PASS')
 
     if not remitente or not password:
-        print(f'❌ Error: No se encontraron las credenciales en las variables de entorno. email: {remitente}')
+        print(f'❌ Error: No se encontraron las credenciales en las variables de entorno.')
         return
         
     # Crear el mensaje
