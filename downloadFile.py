@@ -8,7 +8,9 @@ from datetime import datetime
 from urllib.parse import urljoin, urlparse
 import time
 import re
-
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 # Configuración
 BASE_URL = "https://blog-jorbencas.vercel.app/"  # Cambiado al blog
@@ -33,6 +35,38 @@ BECAS_SOURCES = {
     "Fundación Carolina": "https://www.fundacioncarolina.es/"
 }
 
+def enviar_correo(asunto, cuerpo_html):
+    # Configuración del servidor y cuenta
+    remitente = os.getenv('EMAIL_USER')
+    password = os.getenv('EMAIL_PASS')
+
+    if not remitente or not password:
+        print("❌ Error: No se encontraron las credenciales en las variables de entorno.")
+        return
+        
+    # Crear el mensaje
+    msg = MIMEMultipart()
+    msg['From'] = remitente
+    msg['To'] = destinatario
+    msg['Subject'] = asunto
+
+    # Adjuntar el cuerpo en formato HTML (el que ya generas en tu script)
+    msg.attach(MIMEText(cuerpo_html, 'html'))
+
+    try:
+        # Conexión al servidor SMTP de Gmail
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls() # Seguridad
+        server.login(remitente, password)
+        
+        # Enviar
+        text = msg.as_string()
+        server.sendmail(remitente, destinatario, text)
+        server.quit()
+        print("✅ Correo enviado con éxito")
+    except Exception as e:
+        print(f"❌ Error al enviar el correo: {e}")
+        
 def get_all_links(url, visited, depth=0):
     if depth > MAX_DEPTH or url in visited:
         return set()
@@ -172,7 +206,7 @@ def scrape_becas():
 
 def clean_slug(text):
     # Convertir a minúsculas, reemplazar espacios por _, quitar caracteres no alfanuméricos excepto _ y -
-    text = re.sub(r'[^a-z0-9_-]', '', text.lower().replace(' ', '_')
+    text = re.sub(r'[^a-z0-9_-]', '', text.lower().replace(' ', '_'))
     return text[:50].rstrip('_')
 
 def generate_md_posts(news):
@@ -343,7 +377,10 @@ a:hover {{ text-decoration: underline; }}
     
     with open('index.html', 'w', encoding='utf-8') as f:
         f.write(html_content)
-    
+        
+    # ENVIAR EL REPORTE POR EMAIL
+    print("Enviando reporte por email...")
+    enviar_correo(f"Reporte Tecnológico Semanal - {date}", html_content)
     
     print("Todo completado.")
 
