@@ -38,6 +38,7 @@ BECAS_SOURCES = {
 def enviar_correo(asunto, cuerpo_html):
     # Configuración del servidor y cuenta
     remitente = os.getenv('EMAIL_USER')
+    destinatario = remitente
     password = os.getenv('EMAIL_PASS')
 
     if not remitente or not password:
