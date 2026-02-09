@@ -67,7 +67,7 @@ def enviar_correo(asunto, cuerpo_html):
         print("✅ Correo enviado con éxito")
     except Exception as e:
         print(f"❌ Error al enviar el correo: {e}")
-        #AQUI IRA EL CODIGO ALTERNATIVO DE ENVIO DE CORREO
+        # AQUI IRA EL CODIGO ALTERNATIVO DE ENVIO DE CORREO
         
 def get_all_links(url, visited, depth=0):
     if depth > MAX_DEPTH or url in visited:
