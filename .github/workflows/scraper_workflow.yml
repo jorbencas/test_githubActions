@@ -24,7 +24,8 @@ jobs:
       - name: Run scraper
         env:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
-          EMAIL_PASS: ${{ secrets.BLOG_TOKEN }}
+          MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
+          MAILGUN_DOMAIN: ${{ secrets.MAILGUN_DOMAIN }}
         run: python downloadFile.py
         shell: bash
       - name: Checkout blog repo

@@ -36,35 +36,33 @@ BECAS_SOURCES = {
 }
 
 def enviar_correo(asunto, cuerpo_html):
-    # Configuración del servidor y cuenta
+    # Configuración desde variables de entorno
+    api_key = os.getenv('MAILGUN_API_KEY')
+    dominio = os.getenv('MAILGUN_DOMAIN')
     remitente = os.getenv('EMAIL_USER')
-    destinatario = remitente
-    password = os.getenv('EMAIL_PASS')
-
-    if not remitente or not password:
-        print(f'❌ Error: No se encontraron las credenciales en las variables de entorno.')
+    
+    # Validar credenciales
+    if not all([api_key, dominio, remitente]):
+        print("❌ Error: Faltan variables de entorno (MAILGUN_API_KEY, MAILGUN_DOMAIN o EMAIL_USER).")
         return
-        
-    # Crear el mensaje
-    msg = MIMEMultipart()
-    msg['From'] = remitente
-    msg['To'] = destinatario
-    msg['Subject'] = asunto
 
-    # Adjuntar el cuerpo en formato HTML (el que ya generas en tu script)
-    msg.attach(MIMEText(cuerpo_html, 'html'))
+    url = f"https://api.mailgun.net/v3/{dominio}/messages"
 
     try:
-        # Conexión al servidor SMTP de Gmail
-        server = smtplib.SMTP('smtp.gmail.com', 587)
-        server.starttls() # Seguridad
-        server.login(remitente, password)
+        response = requests.post(
+            url,
+            auth=("api", api_key),
+            data={
+                "from": f"FFmpeg Monitor <{remitente}>",
+                "to": [remitente],
+                "subject": asunto,
+                "html": cuerpo_html
+            },
+            timeout=10
+        )
+        response.raise_for_status()
+        print("✅ Correo enviado con éxito vía Mailgun")
         
-        # Enviar
-        text = msg.as_string()
-        server.sendmail(remitente, destinatario, text)
-        server.quit()
-        print("✅ Correo enviado con éxito")
     except Exception as e:
         print(f"❌ Error al enviar el correo: {e}")
         
