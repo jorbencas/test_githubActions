@@ -40,7 +40,7 @@ def enviar_correo(asunto, cuerpo_html):
     api_key = os.getenv('MAILGUN_API_KEY')
     dominio = os.getenv('MAILGUN_DOMAIN')
     remitente = os.getenv('EMAIL_USER')
-    
+     
     # Validar credenciales
     if not all([api_key, dominio, remitente]):
         print("❌ Error: Faltan variables de entorno (MAILGUN_API_KEY, MAILGUN_DOMAIN o EMAIL_USER).")
