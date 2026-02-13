@@ -34,7 +34,7 @@ BECAS_SOURCES = {
     "Valencia Plaza": "https://valenciaplaza.com/",
     "Fundación Carolina": "https://www.fundacioncarolina.es/"
 }
-
+ 
 def enviar_correo(asunto, cuerpo_html):
     # Configuración desde variables de entorno
     api_key = os.getenv('MAILGUN_API_KEY')
