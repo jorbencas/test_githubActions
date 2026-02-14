@@ -1,5 +1,173 @@
 [
     {
+        "titulo": "Roborock F25 Ace Pro, análisis: pensaba que era imposible, pero al fin un aspirador ha conseguido que jubile la fregona",
+        "enlace": "https://www.xataka.com/analisis/roborock-f25-ace-pro-analisis-caracteristicas-precio-especificaciones",
+        "fecha": "2026-02-14",
+        "imagen": "https://i.blogs.es/869ca6/img_1453/375_375.jpeg",
+        "fuente": "Xataka"
+    },
+    {
+        "titulo": "Anthropic crece tan deprisa que el problema de OpenAI crece a la misma velocidad: perder el mercado que importa",
+        "enlace": "https://www.xataka.com/empresas-y-economia/anthropic-crece-deprisa-que-problema-openai-crece-a-velocidad-perder-mercado-que-importa",
+        "fecha": "2026-02-14",
+        "imagen": "https://i.blogs.es/6cf348/1200_800-2/375_142.jpeg",
+        "fuente": "Xataka"
+    },
+    {
+        "titulo": "Mismo coche, tres nombres, tres precios y una sola realidad: China ha elegido a México como punta de lanza de sus exportaciones",
+        "enlace": "https://www.xataka.com/movilidad/china-necesita-exportar-coches-urgencia-eso-vende-coche-tres-veces-diferentes-nombres-precios-a-mexico",
+        "fecha": "2026-02-14",
+        "imagen": "https://i.blogs.es/ebd5ba/1366_2000-15/375_142.jpeg",
+        "fuente": "Xataka"
+    },
+    {
+        "titulo": "Las sanciones de EEUU están colapsando las fábricas de China. Son malas noticias para el resto del mundo",
+        "enlace": "https://www.xataka.com/empresas-y-economia/sanciones-eeuu-estan-colapsando-fabricas-china-malas-noticias-para-resto-mundo",
+        "fecha": "2026-02-14",
+        "imagen": "https://i.blogs.es/ccb0e7/smic/375_142.jpeg",
+        "fuente": "Xataka"
+    },
+    {
+        "titulo": "Electro Renove de Carrefour en Samsung, LG, Hisense y TCL: cinco teles a precio de outlet con cupones para próximas compras",
+        "enlace": "https://www.xataka.com/seleccion/electro-renove-carrefour-samsung-lg-hisense-tcl-cinco-teles-a-precio-outlet-cupones-para-proximas-compras",
+        "fecha": "2026-02-14",
+        "imagen": "https://i.blogs.es/6b3808/carrefour/200_200.jpeg",
+        "fuente": "Xataka"
+    },
+    {
+        "titulo": "El RPG más realista recibe hoy una actualización next-gen gratuita: análisis de Kingdom Come: Deliverance para PS5, Xbox Series X|S y PC",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/rpg-mas-realista-recibe-hoy-una-actualizacion-next-gen-gratuita-analisis-kingdom-come-deliverance-para-ps5-xbox-series-x-s-pc_6933743_0.html",
+        "fecha": "2026-02-14",
+        "imagen": "https://imagenes.hobbyconsolas.com/files/image_640_360/uploads/imagenes/2026/02/13/698ef07a44cbb0-77692135.jpeg",
+        "fuente": "HobbyConsolas"
+    },
+    {
+        "titulo": "Margot Robbie veía audiciones de esta otra actriz para triunfar en los castings",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/margot-robbie-veia-audiciones-esta-otra-actriz-para-triunfar-los-castings_6934126_0.html",
+        "fecha": "2026-02-14",
+        "imagen": "https://imagenes.hobbyconsolas.com/files/image_320_240/uploads/imagenes/2023/04/25/69027b381b5fd.jpeg",
+        "fuente": "HobbyConsolas"
+    },
+    {
+        "titulo": "Yakuza Kiwami 3, Final Fantasy VII Remake y la polémica de hasta qué punto el remake de un videojuego debe alterar el contenido original",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/yakuza-kiwami-3-final-fantasy-vii-remake-polemica-hasta-que-punto-remake-un-videojuego-debe-alterar-contenido-original_6930977_3.html",
+        "fecha": "2026-02-14",
+        "imagen": "https://imagenes.hobbyconsolas.com/files/image_320_240/uploads/imagenes/2026/02/11/698c65c3523411-23002048.jpeg",
+        "fuente": "HobbyConsolas"
+    },
+    {
+        "titulo": "Krypto, Grogu, Minions y otros protagonistas cuquis: ¿son personajes o solo futuros peluches?",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/krypto-grogu-minions-otros-protagonistas-cuquis-son-personajes-solo-futuros-peluches_6932335_3.html",
+        "fecha": "2026-02-14",
+        "imagen": "https://imagenes.hobbyconsolas.com/files/image_320_240/uploads/imagenes/2023/04/25/69011643a85f9.jpeg",
+        "fuente": "HobbyConsolas"
+    },
+    {
+        "titulo": "¡Zeus! ¡Tu hijo ha regresado! Anunciados God of War Trilogy Remake y God of War: Sons of Sparta, un nuevo juego... ¡ya disponible!",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/zeus-tu-hijo-ha-regresado-anunciados-god-of-war-trilogy-remake-god-of-war-sons-of-sparta-un-nuevo-juego-ya-disponible_6933643_0.html",
+        "fecha": "2026-02-14",
+        "imagen": "https://imagenes.hobbyconsolas.com/files/image_320_240/uploads/imagenes/2026/02/13/698e60c4596fe6-90243053.jpeg",
+        "fuente": "HobbyConsolas"
+    },
+    {
+        "titulo": "Beatriz Martínez, psiquiatra: “En unos años, dejar a los niños con las pantallas se verá como cuando se mojaba el chupete en anís”",
+        "enlace": "https://elpais.com/sociedad/2026-02-14/beatriz-martinez-psiquiatra-en-unos-anos-dejar-a-los-ninos-con-las-pantallas-se-vera-como-cuando-se-mojaba-el-chupete-en-anis.html",
+        "fecha": "2026-02-14",
+        "imagen": "",
+        "fuente": "El País Tecnología"
+    },
+    {
+        "titulo": "Tu coche ya es un ordenador con ruedas: qué datos recoge y para qué se utilizan",
+        "enlace": "https://elpais.com/tecnologia/tu-tecnologia/2026-02-14/tu-coche-ya-es-un-ordenador-con-ruedas-que-datos-recoge-y-para-que-se-utilizan.html",
+        "fecha": "2026-02-14",
+        "imagen": "",
+        "fuente": "El País Tecnología"
+    },
+    {
+        "titulo": "Probamos OpenClaw: el mayordomo de IA viral que trabaja para ti desde tu ordenador",
+        "enlace": "https://www.abc.es/tecnologia/probamos-openclaw-mayordomo-ia-viral-trabaja-ordenador-20260212110459-nt.html",
+        "fecha": "2026-02-14",
+        "imagen": "https://s1.abcstatics.com/abc/www/multimedia/tecnologia/2026/02/12/openclaw-U80167134345GFz-758x531@diario_abc.jpg",
+        "fuente": "ABC Tecnología"
+    },
+    {
+        "titulo": "Probamos el HoverAir X1 Pro Max, el pequeño dron tipo 'selfie' ideal para deportistas",
+        "enlace": "https://www.abc.es/tecnologia/probamos-hoverair-pro-max-pequeno-dron-tipo-20260211105607-nt.html",
+        "fecha": "2026-02-14",
+        "imagen": "",
+        "fuente": "ABC Tecnología"
+    },
+    {
+        "titulo": "Probamos el OnePlus 15, el móvil que te hará olvidar el cargador",
+        "enlace": "https://www.abc.es/tecnologia/probamos-oneplus-movil-hara-olvidar-cargador-20260210111506-nt.html",
+        "fecha": "2026-02-14",
+        "imagen": "",
+        "fuente": "ABC Tecnología"
+    },
+    {
+        "titulo": "Europa amenaza a WhatsApppor bloquear la IA de la competencia",
+        "enlace": "https://www.abc.es/tecnologia/europa-amenaza-whatsapp-medidas-provisionales-bloquear-ia-20260209104429-nt.html",
+        "fecha": "2026-02-14",
+        "imagen": "",
+        "fuente": "ABC Tecnología"
+    },
+    {
+        "titulo": "Crisol: Theater of Idols es uno de los poemas más bonitos y terroríficos que he jugado en toda mi vida",
+        "enlace": "https://www.vidaextra.com/analisis/crisol-theater-of-idols-uno-poemas-bonitos-terrorificos-que-he-jugado-toda-mi-vida",
+        "fecha": "2026-02-14",
+        "imagen": "https://i.blogs.es/7703b8/crisol1/375_375.jpeg",
+        "fuente": "Vida Extra"
+    },
+    {
+        "titulo": "\"Deja de actuar como un niño mimado\": los creadores de No Rest for the Wicked y Painkiller le dan un baño de realiad a un dev de Highguard",
+        "enlace": "https://www.vidaextra.com/juegos-online/deja-actuar-como-nino-mimado-dev-highguard-se-queja-fracaso-creadores-no-rest-for-the-wicked-painkiller-le-responden-dureza",
+        "fecha": "2026-02-14",
+        "imagen": "https://i.blogs.es/8d7a5b/ss_c441bff8b21e97cd5f241128b494ec5e38114369.1920x1080/375_142.jpeg",
+        "fuente": "Vida Extra"
+    },
+    {
+        "titulo": "Resumen State of Play con God of War Trilogy, John Wick, Castlevania: Belmont's Curse y todos los tráilers y anuncios",
+        "enlace": "https://www.vidaextra.com/eventos/resumen-state-of-play-god-of-war-trilogy-john-wick-castlevania-belmonts-curse-todos-trailers-anuncios",
+        "fecha": "2026-02-14",
+        "imagen": "https://i.blogs.es/2c0f6c/kratos/375_142.jpeg",
+        "fuente": "Vida Extra"
+    },
+    {
+        "titulo": "John Wick tendrá su propio juego de tiros y ejecuciones brutales gracias a los creadores de Warhammer 40K: Space Marine 2. Y sí, está Keanu",
+        "enlace": "https://www.vidaextra.com/accion/baba-yaga-vuelve-a-videojuegos-john-wick-tendra-su-propio-videojuego-cargado-tiroteos-ejecuciones-brutales",
+        "fecha": "2026-02-14",
+        "imagen": "https://i.blogs.es/4e9de5/wick/375_142.jpeg",
+        "fuente": "Vida Extra"
+    },
+    {
+        "titulo": "Halo iba a llamarse \"Huevos de mono\" porque Bungie se inventó más de 20 nombres hasta encontrar el bueno",
+        "enlace": "https://www.vidaextra.com/industria/halo-iba-a-llamarse-huevos-mono-porque-bungie-se-invento-20-nombres-encontrar-bueno",
+        "fecha": "2026-02-14",
+        "imagen": "https://i.blogs.es/dde543/halo/500_333.jpeg",
+        "fuente": "Vida Extra"
+    },
+    {
+        "titulo": "El primer ‘Ariane 6’ de cuatro motores: por qué es importante para Europa el lanzamiento de los satélites de Amazon",
+        "enlace": "https://elpais.com/tecnologia/2026-02-13/el-primer-ariane-6-de-cuatro-motores-por-que-es-importante-para-europa-el-lanzamiento-de-los-satelites-de-amazon.html",
+        "fecha": "2026-02-13",
+        "imagen": "https://imagenes.elpais.com/resizer/v2/TWNKVWHZ2RAZRL7XEWCF76A3AU.jfif?auth=7622cc51ecefa20ad06c2aa85886b03d5b2133e93db7d1856cc4202ddc167f31&width=414&height=233&smart=true",
+        "fuente": "El País Tecnología"
+    },
+    {
+        "titulo": "Jeff Bezos rompe el monopolio espacial de Musk en la carrera del millón de satélites con el despliegue de Leo",
+        "enlace": "https://elpais.com/tecnologia/2026-02-12/jeff-bezos-intenta-romper-el-monopolio-espacial-de-elon-musk-en-la-carrera-del-millon-de-satelites.html",
+        "fecha": "2026-02-12",
+        "imagen": "",
+        "fuente": "El País Tecnología"
+    },
+    {
+        "titulo": "Portugal inicia el trámite de la ley para limitar las redes sociales a menores con el rechazo de la ultraderecha",
+        "enlace": "https://elpais.com/sociedad/2026-02-12/portugal-inicia-el-tramite-de-la-ley-para-limitar-las-redes-sociales-a-menores-con-el-rechazo-de-la-ultraderecha.html",
+        "fecha": "2026-02-12",
+        "imagen": "",
+        "fuente": "El País Tecnología"
+    },
+    {
         "titulo": "Los 21 coches eléctricos más baratos que se pueden comprar (2026)",
         "enlace": "https://www.xataka.com/movilidad/coches-electricos-baratos-espana",
         "fecha": "2026-01-31",
