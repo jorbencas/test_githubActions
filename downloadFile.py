@@ -260,7 +260,7 @@ def main():
     print("Checking links...")
     working, broken = check_links()
     link_report = {"working": working, "broken": broken}
-    with open(f"./files/link_check_{date}.json", 'w', encoding='utf-8') as f:
+    with open(f"./files/link_check.json", 'w', encoding='utf-8') as f:
         json.dump(link_report, f, ensure_ascii=False, indent=4)
     
     # 2. Scraping de noticias

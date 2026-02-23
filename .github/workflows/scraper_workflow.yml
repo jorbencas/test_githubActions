@@ -39,9 +39,9 @@ jobs:
         run: |
           mkdir -p blog/src/pages/posts/auto-news
           # Seleccionar solo 1 archivo nuevo: priorizar IA, sino el primero, y checkear si no existe en blog
-          selected_file=$(ls auto-news/*.md 2>/dev/null | grep -i ia | head -1)
+          selected_file=$(ls -t auto-news/*.md 2>/dev/null | grep -i ia | head -1)
           if [ -z "$selected_file" ]; then
-              selected_file=$(ls auto-news/*.md 2>/dev/null | head -1)
+              selected_file=$(ls -t auto-news/*.md 2>/dev/null | head -1)
           fi
           copied=""
           if [ -n "$selected_file" ] && [ ! -f "blog/src/pages/posts/auto-news/$(basename "$selected_file")" ]; then
