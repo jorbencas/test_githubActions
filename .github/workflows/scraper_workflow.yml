@@ -68,10 +68,5 @@ jobs:
           git commit -m "[bot] update tech news scraping"
           git push
       - name: Deploy to jorbencasdownloaderdocument.surge.sh
-        NODE_OPTIONS: "--no-warnings" 
-        uses: dswistowski/surge-sh-action@v1
-        with:
-          domain: "jorbencasdownloaderdocument.surge.sh"
-          project: "."
-          login: ${{ secrets.SURGE_LOGIN }}
-          token: ${{ secrets.SURGE_TOKEN }}
+        run : |
+          npx surge . jorbencasdownloaderdocument.surge.sh --token ${{ secrets.SURGE_TOKEN }}
