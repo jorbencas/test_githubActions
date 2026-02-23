@@ -35,6 +35,7 @@ jobs:
           path: blog
           token: ${{ secrets.BLOG_TOKEN }}
       - name: Copy auto-news to blog
+        id: news_copied_to_blog_folder # You need an ID to reference it later
         run: |
           mkdir -p blog/src/pages/posts/auto-news
           # Seleccionar solo 1 archivo nuevo: priorizar IA, sino el primero, y checkear si no existe en blog
@@ -47,9 +48,9 @@ jobs:
               cp "$selected_file" blog/src/pages/posts/auto-news/
               copied="yes"
           fi
-          echo "copied=$copied" >> $GITHUB_ENV
+          echo "copied=$copied" >> $GITHUB_OUTPUT
       - name: Commit and push to blog
-        if: env.copied == 'yes'
+        if: steps.news_copied_to_blog_folder.outputs.copied == 'yes'
         run: |
           cd blog
           git config user.name jorbencas
@@ -67,6 +68,7 @@ jobs:
           git commit -m "[bot] update tech news scraping"
           git push
       - name: Deploy to jorbencasdownloaderdocument.surge.sh
+        NODE_OPTIONS: "--no-warnings" 
         uses: dswistowski/surge-sh-action@v1
         with:
           domain: "jorbencasdownloaderdocument.surge.sh"
