@@ -8,7 +8,7 @@ import google.generativeai as genai
 # --- 1. CONFIGURACIÓN ---
 CONFIG = {
     "BOT_TOKEN": os.getenv("TELEGRAM_BOT_TOKEN"),
-    "CHAT_ID": os.getenv("TOKEN_API_ID"),
+    "CHAT_ID": os.getenv("TELEGRAM_API_ID"),
     "GEMINI_KEY": os.getenv("GEMINI_API_KEY"),
     "MAIL_KEY": os.getenv("MAILGUN_API_KEY"),
     "MAIL_DOMAIN": os.getenv("MAILGUN_DOMAIN"),
@@ -23,7 +23,6 @@ FUENTES = {
     "Becas": {"url": "https://www.becas.com/noticias/"}
 }
 
-# --- 2. MOTOR DE SCRAPING SEGURO ---
 class ScraperPro:
     def extraer(self, nombre, info):
         results = []
@@ -36,60 +35,124 @@ class ScraperPro:
                 titles = re.findall(r'"title":\{"runs":\[\{"text":"(.*?)"\}\],"accessibility"', r.text)
                 ids = re.findall(r'"videoId":"(.*?)"', r.text)
                 for t, i in zip(titles[:3], ids[:3]):
-                    # TRADUCCIÓN Y LIMPIEZA INMEDIATA
-                    t_es = translate(t, 'es').replace('"', '') 
-                    results.append({"titulo": t_es, "enlace": f"https://youtube.com/watch?v={i}", "fuente": nombre, "tipo": "video"})
+                    t_clean = t.replace('"', '').replace("'", "")
+                    t_es = translate(t_clean, 'es')
+                    results.append({
+                        "titulo": t_es, 
+                        "enlace": f"https://youtube.com/watch?v={i}", 
+                        "id_video": i, # Guardamos el ID para la miniatura
+                        "fuente": nombre, 
+                        "tipo": "video"
+                    })
             else:
                 soup = BeautifulSoup(r.text, 'html.parser')
                 items = soup.select('article h2 a, .post-title a, h3 a, .title a')[:5]
                 tipo = "beca" if "beca" in nombre.lower() else "noticia"
                 for i in items:
-                    t_raw = i.get_text(strip=True).replace('"', '') # Quitar comillas para evitar error YAML
+                    t_raw = i.get_text(strip=True).replace('"', '').replace("'", "")
                     t_es = translate(t_raw, 'es')
-                    results.append({"titulo": t_es, "enlace": urljoin(target, i.get('href')), "fuente": nombre, "tipo": tipo})
+                    results.append({
+                        "titulo": t_es, 
+                        "enlace": urljoin(target, i.get('href')), 
+                        "fuente": nombre, 
+                        "tipo": tipo
+                    })
         except: pass
         return results
 
-# --- 3. LÓGICA DE IA ---
 async def obtener_resumen_ia(noticias):
-    if not CONFIG["GEMINI_KEY"]: return "Análisis no disponible."
+    if not CONFIG["GEMINI_KEY"]: return None
     try:
         genai.configure(api_key=CONFIG["GEMINI_KEY"])
         model = genai.GenerativeModel('gemini-pro')
-        texto_noticias = ". ".join([n['titulo'] for n in noticias[:12]])
-        prompt = f"Resume estas noticias en 3 párrafos profesionales en ESPAÑOL: {texto_noticias}"
-        return model.generate_content(prompt).text
-    except: return "Error en la IA."
+        texto_noticias = ". ".join([f"{n['fuente']}: {n['titulo']}" for n in noticias[:12]])
+        prompt = f"Resume estas noticias en 3 párrafos profesionales y en español: {texto_noticias}"
+        response = model.generate_content(prompt)
+        return response.text
+    except: return None
 
-# --- 4. ENVÍOS (CORREGIDO MAILGUN) ---
-def distribuir_datos(nuevos, resumen, becas):
-    # Telegram (Ahora forzado en Español y sin comillas rotas)
-    if CONFIG["BOT_TOKEN"]:
-        try:
-            msg = f"🛰️ **REPORTE {datetime.now().strftime('%d/%m')}**\n\n"
-            for n in nuevos[:8]:
-                msg += f"• {n['titulo']}\n  🔗 [Enlace]({n['enlace']})\n\n"
-            requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendMessage", 
-                          json={"chat_id": CONFIG["CHAT_ID"], "text": msg, "parse_mode": "Markdown"}, timeout=10)
-        except: print("⚠️ Error Telegram")
-
-    # Email (Mailgun) - Verificado
-    if CONFIG["MAIL_KEY"] and CONFIG["MAIL_DOMAIN"]:
-        try:
-            html = f"<html><body><h2>🤖 Resumen IA</h2><p>{resumen}</p><h2>🎓 Becas</h2><ul>"
-            for b in becas: html += f'<li><a href="{b["enlace"]}">{b["titulo"]}</a></li>'
-            html += "</ul></body></html>"
+# --- GENERACIÓN DE WEB (CON VÍDEOS) ---
+def generar_index(nuevos, resumen):
+    try:
+        videos = [n for n in nuevos if n['tipo'] == "video"]
+        otros = [n for n in nuevos if n['tipo'] != "video"]
+        
+        html = f"""
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <style>
+                body {{ font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; color: #333; }}
+                h1 {{ color: #222; }}
+                h2 {{ color: #444; border-bottom: 2px solid #ccc; padding-bottom: 10px; margin-top: 40px; }}
+                .section {{ margin-bottom: 30px; }}
+                
+                /* Grid para vídeos */
+                .video-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }}
+                .video-card {{ background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }}
+                .video-card img {{ width: 100%; display: block; }}
+                .video-card-content {{ padding: 10px; }}
+                .video-card b {{ color: #d32f2f; font-size: 0.8em; text-transform: uppercase; }}
+                
+                /* Lista para noticias */
+                ul {{ list-style: none; padding: 0; }}
+                li {{ background: #fff; margin: 10px 0; padding: 15px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 5px solid #007bff; }}
+                
+                a {{ color: #007bff; text-decoration: none; font-weight: bold; }}
+                a:hover {{ text-decoration: underline; }}
+                .logo {{ width: 60px; float: right; }}
+                .ia-box {{ background: #eef2f7; padding: 20px; border-radius: 10px; border: 1px solid #d1d9e6; line-height: 1.6; }}
+            </style>
+        </head>
+        <body>
+            <img src="./Image.png" alt="Logo" class="logo">
+            <h1>Reporte Tecnológico <span style="font-size:0.5em; color:#666;">{datetime.now().strftime('%d/%m/%Y')}</span></h1>
             
-            r = requests.post(f"https://api.mailgun.net/v3/{CONFIG['MAIL_DOMAIN']}/messages", 
-                auth=("api", CONFIG["MAIL_KEY"]),
-                data={"from": f"News Bot <postmaster@{CONFIG['MAIL_DOMAIN']}>", 
-                      "to": [CONFIG["EMAIL_TO"]], 
-                      "subject": f"🚀 Reporte Tech {datetime.now().strftime('%d/%m')}", 
-                      "html": html}, timeout=15)
-            print(f"Status Mailgun: {r.status_code}")
-        except Exception as e: print(f"⚠️ Error Mailgun: {e}")
+            <div class="section">
+                <h2>🤖 Resumen de Inteligencia Artificial</h2>
+                <div class="ia-box">{resumen if resumen else 'No se pudo generar el resumen hoy.'}</div>
+            </div>
 
-# --- 5. MAIN ---
+            <div class="section">
+                <h2>📺 Últimos Vídeos</h2>
+                <div class="video-grid">
+        """
+        for v in videos:
+            thumb = f"https://img.youtube.com/vi/{v['id_video']}/mqdefault.jpg"
+            html += f"""
+                <div class="video-card">
+                    <a href="{v['enlace']}" target="_blank">
+                        <img src="{thumb}" alt="Thumbnail">
+                    </a>
+                    <div class="video-card-content">
+                        <b>{v['fuente']}</b><br>
+                        <a href="{v['enlace']}">{v['titulo']}</a>
+                    </div>
+                </div>
+            """
+        
+        html += """
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📰 Noticias y Becas</h2>
+                <ul>
+        """
+        for o in otros:
+            html += f"<li><b>{o['fuente']}</b>: <a href='{o['enlace']}'>{o['titulo']}</a></li>"
+        
+        html += """
+                </ul>
+            </div>
+        </body>
+        </html>
+        """
+        with open("index.html", "w", encoding="utf-8") as f: f.write(html)
+    except Exception as e: print(f"Error web: {e}")
+
+# --- MAIN REESTRUCTURADO ---
 async def main():
     scr = ScraperPro()
     datos = []
@@ -102,28 +165,27 @@ async def main():
 
     if nuevos:
         resumen = await obtener_resumen_ia(nuevos)
-        becas = [n for n in nuevos if n['tipo'] == "beca"]
         
-        distribuir_datos(nuevos, resumen, becas)
+        # 1. Enviar Telegram (Diseño limpio)
+        if CONFIG["BOT_TOKEN"] and CONFIG["CHAT_ID"]:
+            msg = f"🔔 *Reporte Tech {datetime.now().strftime('%d/%m')}*\n\n"
+            for n in nuevos[:6]:
+                msg += f"🔹 *{n['fuente']}*: {n['titulo']}\n🔗 [Link]({n['enlace']})\n\n"
+            requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendMessage", 
+                          json={"chat_id": CONFIG["CHAT_ID"], "text": msg, "parse_mode": "Markdown"})
+
+        # 2. Generar Web Multimedia
+        generar_index(nuevos, resumen)
         
-        # Generar index.html y Markdown (LIMPIANDO TÍTULOS PARA YAML)
-        try:
-            with open("index.html", "w", encoding="utf-8") as f:
-                f.write(f"<html><body style='font-family:sans-serif;background:#121212;color:white;'>")
-                f.write(f"<h1>Dashboard</h1><p>{resumen}</p>")
-                for n in nuevos: f.write(f"<p><a href='{n['enlace']}' style='color:#00d4ff;'>{n['titulo']}</a></p>")
-                f.write("</body></html>")
-            
-            os.makedirs("./auto-news", exist_ok=True)
-            fecha = datetime.now().strftime("%Y-%m-%d")
-            with open(f"./auto-news/reporte-{fecha}.md", "w", encoding="utf-8") as f:
-                # Usamos comillas simples para el título de Astro para evitar conflictos con comillas dobles
-                f.write(f"---\ntitle: '{nuevos[0]['titulo']}'\nlayout: '../../layouts/PostLayout.astro'\n---\n\n{resumen}")
-        except: pass
+        # 3. Guardar histórico y Astro
+        os.makedirs("./auto-news", exist_ok=True)
+        with open(f"./auto-news/reporte-{datetime.now().strftime('%Y-%m-%d')}.md", "w", encoding="utf-8") as f:
+            t = nuevos[0]['titulo'].replace("'", "")
+            f.write(f"---\ntitle: '{t}'\nlayout: '../../layouts/PostLayout.astro'\n---\n\n{resumen}")
 
         with open(archivo_h, 'w') as f: json.dump((nuevos + h)[:200], f, indent=4)
-        print("✅ Proceso completado.")
-    else: print("☕ Sin novedades.")
+        print("✅ Éxito.")
+    else: print("☕ Sin cambios.")
 
 if __name__ == "__main__":
     asyncio.run(main())
