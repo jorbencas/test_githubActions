@@ -61,7 +61,7 @@ jobs:
           git pull origin main --rebase
           git add .
           git commit -m "[bot] Add auto-generated news posts"
-          git push origin master
+          git push origin main
       - name: Update Github repo
         if: github.event_name == 'schedule' || github.event_name == 'push'
         run: |
