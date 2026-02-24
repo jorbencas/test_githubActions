@@ -1,14 +1,13 @@
 # 🛰️ test_githubActions
 
-![Build Status](https://img.shields.io/github/actions/workflow/status/TU_USUARIO/TU_REPO/main.yml?branch=master&style=flat-square&label=Estado&logo=github)
-![GitHub last commit](https://img.shields.io/github/last-commit/TU_USUARIO/TU_REPO?style=flat-square&logo=git&label=Último%20cambio)
+![Build Status](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/main.yml?branch=master&style=flat-square&label=Estado&logo=github)
+![GitHub last commit](https://img.shields.io/github/last-commit/jorbencas/test_githubActions?style=flat-square&logo=git&label=Último%20cambio)
 ![Surge Status](https://img.shields.io/badge/Surge-Live-blue?style=flat-square&logo=vercel)
 
 ![Logo de Tecnología](./Image.png)
 
 # 🛰️ test_githubActions
 
-![Logo de Tecnología](./Image.png)
 
 Este es un ecosistema automatizado de noticias tech. El sistema no solo recopila información, sino que la procesa mediante **Inteligencia Artificial** para ofrecerte lo más relevante de forma digerida y multicanal.
 
@@ -26,17 +25,6 @@ Este es un ecosistema automatizado de noticias tech. El sistema no solo recopila
     * **Email:** Resumen IA enviado a través de Mailgun, optimizado con técnicas anti-spam para Gmail.
 * **🚀 Auto-Publicación:** Crea automáticamente archivos Markdown (`.md`) limpios para tu blog en **Astro/Vercel**.
 * **🔗 Checker de Enlaces:** Verifica la salud de los links en [blog-jorbencas.vercel.app](https://blog-jorbencas.vercel.app/).
-
----
-
-## 📡 Fuentes Monitorizadas
-
-Actualmente el bot rastrea contenido de:
-* **YouTube:** MoureDev, Midudev, Pelado Nerd.
-* **Noticias Tech:** Xataka, Genbeta, ComputerHoy y El Español Tech.
-* **Oportunidades:** Becas.com.
-
----
 
 ## ⚙️ Configuración (Secrets de GitHub)
 
@@ -57,7 +45,7 @@ Para que el proyecto funcione en GitHub Actions, debes configurar los siguientes
 
 1.  **Clonar el repositorio:**
     ```bash
-    git clone [https://github.com/tu-usuario/test_githubActions.git](https://github.com/tu-usuario/test_githubActions.git)
+    git clone [https://github.com/jorbencas/test_githubActions.git](https://github.com/jorbencas/test_githubActions.git)
     ```
 2.  **Instalar dependencias:**
     ```bash
@@ -78,4 +66,4 @@ El proyecto utiliza **GitHub Actions** para ejecutarse de forma autónoma:
 3.  **Despliegue:** Al detectar novedades, actualiza el `index.html` en Surge y genera el nuevo post para Vercel.
 
 ---
-*Mantenido por [Tu Nombre/Usuario]*
+*Mantenido por [Jorge/@jorbencas]*
