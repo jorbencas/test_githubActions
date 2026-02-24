@@ -182,7 +182,7 @@ async def main():
         with open(f"./auto-news/reporte-{datetime.now().strftime('%Y-%m-%d')}.md", "w", encoding="utf-8") as f:
             t = nuevos[0]['titulo'].replace("'", "")
             f.write(f"---\ntitle: '{t}'\nlayout: '../../layouts/PostLayout.astro'\n---\n\n{resumen}")
-
+ 
         with open(archivo_h, 'w') as f: json.dump((nuevos + h)[:200], f, indent=4)
         print("✅ Éxito.")
     else: print("☕ Sin cambios.")
