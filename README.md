@@ -1,5 +1,13 @@
 # 🛰️ test_githubActions
 
+![Build Status](https://img.shields.io/github/actions/workflow/status/TU_USUARIO/TU_REPO/main.yml?branch=master&style=flat-square&label=Estado&logo=github)
+![GitHub last commit](https://img.shields.io/github/last-commit/TU_USUARIO/TU_REPO?style=flat-square&logo=git&label=Último%20cambio)
+![Surge Status](https://img.shields.io/badge/Surge-Live-blue?style=flat-square&logo=vercel)
+
+![Logo de Tecnología](./Image.png)
+
+# 🛰️ test_githubActions
+
 ![Logo de Tecnología](./Image.png)
 
 Este es un ecosistema automatizado de noticias tech. El sistema no solo recopila información, sino que la procesa mediante **Inteligencia Artificial** para ofrecerte lo más relevante de forma digerida y multicanal.

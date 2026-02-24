@@ -3,8 +3,7 @@ from datetime import datetime
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 from mtranslate import translate
-import google.generativeai as genai
-
+from google import genai # <-- Cambio de importación
 # --- 1. CONFIGURACIÓN ---
 CONFIG = {
     "BOT_TOKEN": os.getenv("TELEGRAM_BOT_TOKEN"),
@@ -12,7 +11,8 @@ CONFIG = {
     "GEMINI_KEY": os.getenv("GEMINI_API_KEY"),
     "MAIL_KEY": os.getenv("MAILGUN_API_KEY"),
     "MAIL_DOMAIN": os.getenv("MAILGUN_DOMAIN"),
-    "EMAIL_TO": os.getenv("EMAIL_USER")
+    "EMAIL_TO": os.getenv("EMAIL_USER"),
+    "FOLDER": "files" # Carpeta para el JSON
 }
 
 FUENTES = {
@@ -23,12 +23,14 @@ FUENTES = {
     "Becas": {"url": "https://www.becas.com/noticias/"}
 }
 
+os.makedirs(CONFIG["FOLDER"], exist_ok=True)
+
 class ScraperPro:
     def extraer(self, nombre, info):
         results = []
         target = info.get("yt") or info.get("url")
         try:
-            r = requests.get(target, timeout=15, headers={'User-Agent': 'Mozilla/5.0'})
+            r = requests.get(target, timeout=15, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'})
             if r.status_code != 200: return []
             
             if "yt" in info:
@@ -63,13 +65,19 @@ class ScraperPro:
 async def obtener_resumen_ia(noticias):
     if not CONFIG["GEMINI_KEY"]: return None
     try:
-        genai.configure(api_key=CONFIG["GEMINI_KEY"])
-        model = genai.GenerativeModel('gemini-pro')
+        client = genai.Client(api_key=CONFIG["GEMINI_KEY"])
         texto_noticias = ". ".join([f"{n['fuente']}: {n['titulo']}" for n in noticias[:12]])
-        prompt = f"Resume estas noticias en 3 párrafos profesionales y en español: {texto_noticias}"
-        response = model.generate_content(prompt)
+        prompt = f"Actúa como analista tech. Resume estas noticias en 3 párrafos profesionales en español: {texto_noticias}"        
+
+        # Nueva forma de generar contenido
+        response = client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=prompt
+        )
         return response.text
-    except: return None
+    except Exception as e:
+        print(f"Error IA: {e}")
+        return "Error generando resumen."
 
 # --- GENERACIÓN DE WEB (CON VÍDEOS) ---
 def generar_index(nuevos, resumen):
@@ -158,7 +166,7 @@ async def main():
     datos = []
     for n, info in FUENTES.items(): datos += scr.extraer(n, info)
 
-    archivo_h = "all_news.json"
+    archivo_h = os.path.join(CONFIG["FOLDER"], "all_news.json")
     h = json.load(open(archivo_h)) if os.path.exists(archivo_h) else []
     vistos = {x['enlace'] for x in h}
     nuevos = [n for n in datos if n['enlace'] not in vistos]
