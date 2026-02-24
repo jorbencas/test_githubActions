@@ -71,9 +71,13 @@ jobs:
         run: |
           git config user.name jorbencas
           git config user.email jorbencas@gmail.com
-          git add .  
-          git commit -m "[bot] update tech news scraping"
-          git push origin master
+          git add .
+          if ! git diff --cached --quiet; then
+            git commit -m "[bot] update tech news scraping"
+            git push origin master
+          else
+            echo "No hay noticias nuevas, nada que actualizar."
+          fi
       - name: Deploy to jorbencasdownloaderdocument.surge.sh
         run : |
           npx surge . jorbencasdownloaderdocument.surge.sh --token ${{ secrets.SURGE_TOKEN }}
