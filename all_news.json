@@ -1,0 +1,86 @@
+[
+    {
+        "titulo": "The path every junior programmer should follow in 2026",
+        "enlace": "https://youtube.com/watch?v=S3QKUYBvN-Q",
+        "fuente": "MoureDev",
+        "tipo": "video"
+    },
+    {
+        "titulo": "If you feel you're not good enough as a programmer, check this out.",
+        "enlace": "https://youtube.com/watch?v=S3QKUYBvN-Q",
+        "fuente": "MoureDev",
+        "tipo": "video"
+    },
+    {
+        "titulo": "Companies are no longer just looking for programmers (and nobody explains it to you)",
+        "enlace": "https://youtube.com/watch?v=S3QKUYBvN-Q",
+        "fuente": "MoureDev",
+        "tipo": "video"
+    },
+    {
+        "titulo": "Discover the power of SPF, DKIM and DMARC",
+        "enlace": "https://youtube.com/watch?v=fz4Ny5QBKHM",
+        "fuente": "Pelado Nerd",
+        "tipo": "video"
+    },
+    {
+        "titulo": "OPENCLOW is AMAZING",
+        "enlace": "https://youtube.com/watch?v=fz4Ny5QBKHM",
+        "fuente": "Pelado Nerd",
+        "tipo": "video"
+    },
+    {
+        "titulo": "MONITORING SERIES 2025 - INCIDENT MANAGEMENT",
+        "enlace": "https://youtube.com/watch?v=fz4Ny5QBKHM",
+        "fuente": "Pelado Nerd",
+        "tipo": "video"
+    },
+    {
+        "titulo": "The future of websites for AI",
+        "enlace": "https://youtube.com/watch?v=2xWhNd2BHkc",
+        "fuente": "Midudev",
+        "tipo": "video"
+    },
+    {
+        "titulo": "\\\"Nobody wants to be a computer scientist,\\\" my opinion",
+        "enlace": "https://youtube.com/watch?v=2xWhNd2BHkc",
+        "fuente": "Midudev",
+        "tipo": "video"
+    },
+    {
+        "titulo": "The most popular Front-end Framework to date",
+        "enlace": "https://youtube.com/watch?v=2xWhNd2BHkc",
+        "fuente": "Midudev",
+        "tipo": "video"
+    },
+    {
+        "titulo": "La IA ya es un campo de batalla: Anthropic acaba de acusar a DeepSeek y a otras empresas chinas de \u201cdestilar\u201d Claude",
+        "enlace": "https://www.xataka.com/robotica-e-ia/ia-campo-batalla-anthropic-acaba-acusar-a-deepseek-a-otras-empresas-chinas-destilar-claude",
+        "fuente": "Xataka",
+        "tipo": "noticia"
+    },
+    {
+        "titulo": "A Sam Altman le han preguntado si entrenar a una IA no es ineficiente. Ha respondido que \"entrenar\" a un humano lo es m\u00e1s",
+        "enlace": "https://www.xataka.com/robotica-e-ia/ia-consume-cantidades-obscenas-energia-sam-altman-compara-coste-entrenar-humanos",
+        "fuente": "Xataka",
+        "tipo": "noticia"
+    },
+    {
+        "titulo": "Cada vez hay m\u00e1s ni\u00f1os espa\u00f1oles miopes. Y la ciencia tiene claro que el culpable principal no es el tel\u00e9fono m\u00f3vil",
+        "enlace": "https://www.xataka.com/medicina-y-salud/llevamos-anos-culpando-al-movil-miopia-ahora-tenemos-sospechoso-mucho-sutil-falta-luz",
+        "fuente": "Xataka",
+        "tipo": "noticia"
+    },
+    {
+        "titulo": "Seedance es la mayor brutalidad que hemos visto generando v\u00eddeo. Y tiene un mensaje inc\u00f3modo: ha superado a Sora y Veo sin chips NVIDIA",
+        "enlace": "https://www.xataka.com/robotica-e-ia/seedance-mayor-brutalidad-que-hemos-visto-generando-video-tiene-mensaje-incomodo-ha-superado-a-sora-veo-chips-nvidia",
+        "fuente": "Xataka",
+        "tipo": "noticia"
+    },
+    {
+        "titulo": "Los Juegos Ol\u00edmpicos de Invierno dejan a Italia con una deuda de 7,8 millones de d\u00f3lares. No por organizarlos, por ganarlos",
+        "enlace": "https://www.xataka.com/magnet/juegos-olimpicos-invierno-dejan-a-italia-deuda-7-8-millones-dolares-no-organizarlos-ganarlos",
+        "fuente": "Xataka",
+        "tipo": "noticia"
+    }
+]
