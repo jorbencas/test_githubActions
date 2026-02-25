@@ -1,5 +1,4 @@
-import hashlib
-import json
+import hashlib json os Image
 
 # Cargar registro de imágenes ya optimizadas
 cache_file = "optimized_cache.json"
