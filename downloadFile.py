@@ -163,21 +163,22 @@ class ScraperPro:
         return results
 
 async def obtener_resumen_ia(noticias):
-    if not CONFIG["GEMINI_KEY"] or not noticias: return "No hay novedades suficientes para resumir."
+    if not CONFIG["GEMINI_KEY"] or not noticias: return "Sin novedades para resumir hoy."
     try:
         client = genai.Client(api_key=CONFIG["GEMINI_KEY"])
         texto = ". ".join([f"{n['fuente']}: {n['titulo']}" for n in noticias[:12]])
         response = client.models.generate_content(
             model="gemini-2.0-flash",
-            contents=f"Resume estas noticias tecnológicas en 3 párrafos profesionales en español: {texto}"
+            contents=f"Resume estas noticias tecnológicas en 3 párrafos en español: {texto}"
         )
         return response.text
     except Exception as e:
-        print(f"Error IA: {e}")
-        return "Resumen no disponible actualmente."
+        print(f"⚠️ Error Gemini (Cuota agotada): {e}")
+        return "Resumen no disponible por límite de cuota en la API de Gemini. Consulta los enlaces abajo."
 
 def publicar_contenidos(historial, nuevos, resumen_ia):
     fecha_h = datetime.now().strftime("%d/%m/%Y")
+    fecha_pub = datetime.now().strftime("%Y/%m/%d")
     fecha_iso = datetime.now().strftime("%Y-%m-%d")
     historial.sort(key=lambda x: x.get('ts', ''), reverse=True)
     
@@ -215,9 +216,20 @@ def publicar_contenidos(historial, nuevos, resumen_ia):
             email_list += f"<li><b>{n['fuente']}</b>: <a href='{n['enlace']}'>{n['titulo']}</a></li>"
         
         # Guardar MD
-        t_clean = nuevos[0]['titulo'].replace("'", "")
-        with open(f"./auto-news/reporte-{fecha_iso}.md", "w", encoding="utf-8") as f:
-            f.write(MD_TEMPLATE.format(titulo=t_clean, fecha_iso=fecha_iso, contenido=resumen_final, lista_enlaces=md_links))
+        slug = f"reporte-{fecha_iso}"
+        # Creamos la variable que faltaba y limpiamos comillas para evitar errores en Astro
+        resumen_corto_limpio = resumen_final[:150].replace("\\n", " ").replace('"', '') + "..."
+        
+        with open(f"./auto-news/{slug}.md", "w", encoding="utf-8") as f:
+            # Asegúrate de que los nombres coincidan con los de tu MD_TEMPLATE
+            f.write(MD_TEMPLATE.format(
+                titulo=f"Reporte Tech {fecha_h}",
+                resumen_corto=resumen_corto_limpio,
+                fecha_pub=fecha_pub,
+                slug_name=f"{slug}.md",
+                contenido=resumen_final,
+                lista_enlaces=md_links
+            ))
 
         # Enviar Email
         if CONFIG["MAIL_KEY"]:
