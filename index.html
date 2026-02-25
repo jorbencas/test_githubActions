@@ -1,53 +1,138 @@
 
-        <!DOCTYPE html>
-        <html lang="es">
-        <head>
-            <meta charset="UTF-8">
-            <style>
-                body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; color: #333; }
-                h1 { color: #222; }
-                h2 { color: #444; border-bottom: 2px solid #ccc; padding-bottom: 10px; margin-top: 40px; }
-                .section { margin-bottom: 30px; }
-                
-                /* Grid para vídeos */
-                .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-                .video-card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-                .video-card img { width: 100%; display: block; }
-                .video-card-content { padding: 10px; }
-                .video-card b { color: #d32f2f; font-size: 0.8em; text-transform: uppercase; }
-                
-                /* Lista para noticias */
-                ul { list-style: none; padding: 0; }
-                li { background: #fff; margin: 10px 0; padding: 15px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-left: 5px solid #007bff; }
-                
-                a { color: #007bff; text-decoration: none; font-weight: bold; }
-                a:hover { text-decoration: underline; }
-                .logo { width: 60px; float: right; }
-                .ia-box { background: #eef2f7; padding: 20px; border-radius: 10px; border: 1px solid #d1d9e6; line-height: 1.6; }
-            </style>
-        </head>
-        <body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 20px; background: #f0f2f5; color: #1c1e21; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #007bff; padding-bottom: 10px; margin-bottom: 30px; }
+        .ia-box { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-left: 6px solid #8e44ad; margin-bottom: 30px; line-height: 1.6; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .card img { width: 100%; height: 160px; object-fit: cover; background: #ddd; }
+        .card-content { padding: 15px; }
+        .meta { font-size: 0.8em; color: #65676b; font-weight: bold; margin-bottom: 5px; }
+        .news-list { list-style: none; padding: 0; }
+        .news-item { background: white; margin-bottom: 10px; padding: 15px; border-radius: 8px; border-left: 5px solid #007bff; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        a { color: #007bff; text-decoration: none; font-weight: bold; }
+        .logo { height: 50px; }
+    </style>
+    <title>Tech Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tech Pulse <small style="font-size: 0.4em; color: #666;">25/02/2026</small></h1>
             <img src="./Image.png" alt="Logo" class="logo">
-            <h1>Reporte Tecnológico <span style="font-size:0.5em; color:#666;">25/02/2026</span></h1>
-            
-            <div class="section">
-                <h2>🤖 Resumen de Inteligencia Artificial</h2>
-                <div class="ia-box">Error generando resumen.</div>
-            </div>
-
-            <div class="section">
-                <h2>📺 Últimos Vídeos</h2>
-                <div class="video-grid">
-        
+        </header>
+        <div class="ia-box">
+            <h2>🤖 Resumen</h2>
+            <p>Resumen no disponible por límite de cuota de IA. Consulta los enlaces abajo.</p>
+        </div>
+        <h2>📺 Últimos Vídeos</h2>
+        <div class="video-grid">
+            <div class="card">
+                <img src="https://img.youtube.com/vi/fkJGBbC2OcA/mqdefault.jpg">
+                <div class="card-content">
+                    <div class="meta">Midudev | 25/02</div>
+                    <a href="https://youtube.com/watch?v=fkJGBbC2OcA" target="_blank">El framework front-end más popular hasta la fecha</a>
                 </div>
             </div>
-
-            <div class="section">
-                <h2>📰 Noticias y Becas</h2>
-                <ul>
-        <li><b>Xataka</b>: <a href='https://www.xataka.com/eventos/samsung-galaxy-s26-unpacked-2026-seguir-presentacion-directo'>Samsung Galaxy S26: sigue la presentación Unpacked 2026 de hoy en directo</a></li><li><b>Xataka</b>: <a href='https://www.xataka.com/robotica-e-ia/15-fabricantes-coches-chinos-van-a-producir-robots-humanoides-van-a-usar-ventaja-que-les-hizo-lideres'>Tesla lleva años construyendo el Optimus. China acaba de presentarse con quince empresas y las fábricas ya montadas</a></li><li><b>Xataka</b>: <a href='https://www.xataka.com/espacio/miles-pc-analizaron-millones-datos-buscando-extraterrestres-anos-despues-seti-home-consiguio-100-candidatas-finales'>Hemos analizado el universo durante 20 años buscando a E.T. y lo único que tenemos son 100 señales que ahora investiga China</a></li><li><b>Xataka</b>: <a href='https://www.xataka.com/seleccion/vpn-gran-aliada-que-somos-nomadas-digitales-ayuda-a-trabajar-seguros-donde-sea'>Una VPN es la gran aliada de los que somos nómadas digitales: ayuda a trabajar más seguros desde donde sea</a></li>
-                </ul>
+            <div class="card">
+                <img src="https://img.youtube.com/vi/0MGVfynJ4UY/mqdefault.jpg">
+                <div class="card-content">
+                    <div class="meta">Midudev | 25/02</div>
+                    <a href="https://youtube.com/watch?v=0MGVfynJ4UY" target="_blank">\Nadie quiere ser informático,\ mi opinión.</a>
+                </div>
             </div>
-        </body>
-        </html>
-        
+            <div class="card">
+                <img src="https://img.youtube.com/vi/2aN_-m1uU4k/mqdefault.jpg">
+                <div class="card-content">
+                    <div class="meta">Midudev | 25/02</div>
+                    <a href="https://youtube.com/watch?v=2aN_-m1uU4k" target="_blank">Curso Inteligencia Artificial para Programadores en 2026 (Conceptos, Herramientas, Claude Code)</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://img.youtube.com/vi/QMHY-PPUfds/mqdefault.jpg">
+                <div class="card-content">
+                    <div class="meta">Pelado Nerd | 25/02</div>
+                    <a href="https://youtube.com/watch?v=QMHY-PPUfds" target="_blank">SERIE DE MONITOREO 2025 - ¿Qué se espera de una persona de guardia?</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://img.youtube.com/vi/A5qX-_v1CRA/mqdefault.jpg">
+                <div class="card-content">
+                    <div class="meta">Pelado Nerd | 25/02</div>
+                    <a href="https://youtube.com/watch?v=A5qX-_v1CRA" target="_blank">SERIE DE MONITOREO 2025 - La TRÍADA de Monitoreo (AVANZADO)</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://img.youtube.com/vi/cmkyHSen4yY/mqdefault.jpg">
+                <div class="card-content">
+                    <div class="meta">Pelado Nerd | 25/02</div>
+                    <a href="https://youtube.com/watch?v=cmkyHSen4yY" target="_blank">SERIE DE MONITOREO 2025 - GESTIÓN DE INCIDENTES</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://img.youtube.com/vi/GVf-JZdJjU8/mqdefault.jpg">
+                <div class="card-content">
+                    <div class="meta">Pelado Nerd | 25/02</div>
+                    <a href="https://youtube.com/watch?v=GVf-JZdJjU8" target="_blank">OPENCLOW es INCREÍBLE</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://img.youtube.com/vi/ABgLEKFhlZE/mqdefault.jpg">
+                <div class="card-content">
+                    <div class="meta">MoureDev | 25/02</div>
+                    <a href="https://youtube.com/watch?v=ABgLEKFhlZE" target="_blank">Curso COMPLETO de BASH y la Terminal: Aprende desde Cero</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://img.youtube.com/vi/JwuUfAWh3Jk/mqdefault.jpg">
+                <div class="card-content">
+                    <div class="meta">MoureDev | 25/02</div>
+                    <a href="https://youtube.com/watch?v=JwuUfAWh3Jk" target="_blank">Cómo ESTUDIAR Programación en 2026 (si realmente quieres ser programador)</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://img.youtube.com/vi/oIU0s9O3kIc/mqdefault.jpg">
+                <div class="card-content">
+                    <div class="meta">MoureDev | 25/02</div>
+                    <a href="https://youtube.com/watch?v=oIU0s9O3kIc" target="_blank">Las empresas ya no buscan sólo programadores (y nadie te lo explica)</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://img.youtube.com/vi/SeELckpmG7Q/mqdefault.jpg">
+                <div class="card-content">
+                    <div class="meta">MoureDev | 25/02</div>
+                    <a href="https://youtube.com/watch?v=SeELckpmG7Q" target="_blank">Si crees que no eres lo suficientemente bueno como programador, mira esto.</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://img.youtube.com/vi/CKaSGFLci4I/mqdefault.jpg">
+                <div class="card-content">
+                    <div class="meta">Midudev | --/--</div>
+                    <a href="https://youtube.com/watch?v=CKaSGFLci4I" target="_blank">Probé Google Gemini 3.1 Pro y es...</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://img.youtube.com/vi/CKaSGFLci4I/mqdefault.jpg">
+                <div class="card-content">
+                    <div class="meta">Midudev | --/--</div>
+                    <a href="https://youtube.com/watch?v=CKaSGFLci4I" target="_blank">El futuro de los sitios web para IA</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://img.youtube.com/vi/CKaSGFLci4I/mqdefault.jpg">
+                <div class="card-content">
+                    <div class="meta">Midudev | --/--</div>
+                    <a href="https://youtube.com/watch?v=CKaSGFLci4I" target="_blank">\Nadie quiere ser informático,\ mi opinión.</a>
+                </div>
+            </div></div>
+        <h2>📰 Noticias</h2>
+        <ul class="news-list"><li class="news-item"><div class="meta">Xataka | 25/02</div><a href="https://www.xataka.com/moviles/software-moviles-se-ha-vuelto-complejo-que-samsung-ha-tenido-que-anadir-ia-te-explique">El software de los móviles se ha vuelto tan complejo que Samsung ha tenido que añadir una IA para que te lo explique</a></li><li class="news-item"><div class="meta">Xataka | --/--</div><a href="https://www.xataka.com/eventos/samsung-galaxy-s26-unpacked-2026-seguir-presentacion-directo">Samsung Galaxy S26: sigue la presentación Unpacked 2026 de hoy en directo</a></li><li class="news-item"><div class="meta">Xataka | --/--</div><a href="https://www.xataka.com/robotica-e-ia/15-fabricantes-coches-chinos-van-a-producir-robots-humanoides-van-a-usar-ventaja-que-les-hizo-lideres">Tesla lleva años construyendo el Optimus. China acaba de presentarse con quince empresas y las fábricas ya montadas</a></li><li class="news-item"><div class="meta">Xataka | --/--</div><a href="https://www.xataka.com/espacio/miles-pc-analizaron-millones-datos-buscando-extraterrestres-anos-despues-seti-home-consiguio-100-candidatas-finales">Hemos analizado el universo durante 20 años buscando a E.T. y lo único que tenemos son 100 señales que ahora investiga China</a></li><li class="news-item"><div class="meta">Xataka | --/--</div><a href="https://www.xataka.com/seleccion/vpn-gran-aliada-que-somos-nomadas-digitales-ayuda-a-trabajar-seguros-donde-sea">Una VPN es la gran aliada de los que somos nómadas digitales: ayuda a trabajar más seguros desde donde sea</a></li><li class="news-item"><div class="meta">Xataka | --/--</div><a href="https://www.xataka.com/espacio/marte-era-gran-campo-batalla-espacial-china-eeuu-ahora-luna-hay-demasiado-juego">Marte era el gran campo de batalla espacial entre China y EEUU. Ahora es la Luna (y hay demasiado en juego)</a></li><li class="news-item"><div class="meta">Xataka | --/--</div><a href="https://www.xataka.com/empresas-y-economia/nvidia-fue-fundada-tres-ingenieros-solo-jensen-huang-se-mantiene-como-ceo-ojala-hubiera-conservado-algunas-acciones">NVIDIA fue fundada por tres ingenieros, pero solo Jensen Huang se mantiene como CEO: Ojalá hubiera conservado algunas acciones</a></li><li class="news-item"><div class="meta">Xataka | --/--</div><a href="https://www.xataka.com/energia/espana-se-esta-quedando-hueco-red-electrica-culpa-ia-gobierno-tiene-plan-para-hacerle-sitio-gastar-euro">España tenía una red eléctrica completamente saturada. Y entonces llegaron los centros de datos para reventarla aún más</a></li><li class="news-item"><div class="meta">Xataka | --/--</div><a href="https://www.xataka.com/investigacion/tesoro-petra-no-estaba-tallado-roca-fluia-ella-hallazgo-que-obliga-a-reescribir-historia-ingenieria">El tesoro de Petra no estaba tallado en la roca, fluía por ella: el hallazgo que obliga a reescribir la historia de la ingeniería</a></li><li class="news-item"><div class="meta">Xataka | --/--</div><a href="https://www.xataka.com/seleccion/traca-final-rebajas-invierno-aeg-descuentazos-850-euros-frigorificos-lavadoras-hornos">Traca final de las Rebajas de Invierno de AEG: descuentazos de hasta 850 euros en frigoríficos, lavadoras, hornos y más</a></li><li class="news-item"><div class="meta">MoureDev | --/--</div><a href="https://youtube.com/watch?v=S3QKUYBvN-Q">The path every junior programmer should follow in 2026</a></li><li class="news-item"><div class="meta">MoureDev | --/--</div><a href="https://youtube.com/watch?v=S3QKUYBvN-Q">If you feel you're not good enough as a programmer, check this out.</a></li><li class="news-item"><div class="meta">MoureDev | --/--</div><a href="https://youtube.com/watch?v=S3QKUYBvN-Q">Companies are no longer just looking for programmers (and nobody explains it to you)</a></li><li class="news-item"><div class="meta">Pelado Nerd | --/--</div><a href="https://youtube.com/watch?v=fz4Ny5QBKHM">Discover the power of SPF, DKIM and DMARC</a></li><li class="news-item"><div class="meta">Pelado Nerd | --/--</div><a href="https://youtube.com/watch?v=fz4Ny5QBKHM">OPENCLOW is AMAZING</a></li><li class="news-item"><div class="meta">Pelado Nerd | --/--</div><a href="https://youtube.com/watch?v=fz4Ny5QBKHM">MONITORING SERIES 2025 - INCIDENT MANAGEMENT</a></li><li class="news-item"><div class="meta">Midudev | --/--</div><a href="https://youtube.com/watch?v=2xWhNd2BHkc">The future of websites for AI</a></li><li class="news-item"><div class="meta">Midudev | --/--</div><a href="https://youtube.com/watch?v=2xWhNd2BHkc">\"Nobody wants to be a computer scientist,\" my opinion</a></li><li class="news-item"><div class="meta">Midudev | --/--</div><a href="https://youtube.com/watch?v=2xWhNd2BHkc">The most popular Front-end Framework to date</a></li><li class="news-item"><div class="meta">Xataka | --/--</div><a href="https://www.xataka.com/robotica-e-ia/ia-campo-batalla-anthropic-acaba-acusar-a-deepseek-a-otras-empresas-chinas-destilar-claude">La IA ya es un campo de batalla: Anthropic acaba de acusar a DeepSeek y a otras empresas chinas de “destilar” Claude</a></li><li class="news-item"><div class="meta">Xataka | --/--</div><a href="https://www.xataka.com/robotica-e-ia/ia-consume-cantidades-obscenas-energia-sam-altman-compara-coste-entrenar-humanos">A Sam Altman le han preguntado si entrenar a una IA no es ineficiente. Ha respondido que "entrenar" a un humano lo es más</a></li><li class="news-item"><div class="meta">Xataka | --/--</div><a href="https://www.xataka.com/medicina-y-salud/llevamos-anos-culpando-al-movil-miopia-ahora-tenemos-sospechoso-mucho-sutil-falta-luz">Cada vez hay más niños españoles miopes. Y la ciencia tiene claro que el culpable principal no es el teléfono móvil</a></li><li class="news-item"><div class="meta">Xataka | --/--</div><a href="https://www.xataka.com/robotica-e-ia/seedance-mayor-brutalidad-que-hemos-visto-generando-video-tiene-mensaje-incomodo-ha-superado-a-sora-veo-chips-nvidia">Seedance es la mayor brutalidad que hemos visto generando vídeo. Y tiene un mensaje incómodo: ha superado a Sora y Veo sin chips NVIDIA</a></li><li class="news-item"><div class="meta">Xataka | --/--</div><a href="https://www.xataka.com/magnet/juegos-olimpicos-invierno-dejan-a-italia-deuda-7-8-millones-dolares-no-organizarlos-ganarlos">Los Juegos Olímpicos de Invierno dejan a Italia con una deuda de 7,8 millones de dólares. No por organizarlos, por ganarlos</a></li></ul>
+    </div>
+</body>
+</html>
