@@ -1,6 +1,384 @@
 [
     {
         "titulo": "V\u00eddeos esf\u00e9ricos",
+        "enlace": "https://youtube.com/shorts/jHlQfDupMb4",
+        "id_video": "jHlQfDupMb4",
+        "fuente": "Xataka",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:48.608658",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Subt\u00edtulos y subt\u00edtulos cerrados",
+        "enlace": "https://youtube.com/shorts/kCssEw7WZ-E",
+        "id_video": "kCssEw7WZ-E",
+        "fuente": "Xataka",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:48.478877",
+        "f": "25/02"
+    },
+    {
+        "titulo": "General",
+        "enlace": "https://youtube.com/shorts/kKz0DTigYT8",
+        "id_video": "kKz0DTigYT8",
+        "fuente": "Xataka",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:48.342061",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Reproducci\u00f3n",
+        "enlace": "https://youtube.com/shorts/_CufOON24ek",
+        "id_video": "_CufOON24ek",
+        "fuente": "Xataka",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:48.209152",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Atajos de teclado",
+        "enlace": "https://youtube.com/shorts/N0NZAhAtgOg",
+        "id_video": "N0NZAhAtgOg",
+        "fuente": "Xataka",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:48.029389",
+        "f": "25/02"
+    },
+    {
+        "titulo": "V\u00eddeos esf\u00e9ricos",
+        "enlace": "https://youtube.com/shorts/s-OvtuRHQKM",
+        "id_video": "s-OvtuRHQKM",
+        "fuente": "EDteam",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:47.642479",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Subt\u00edtulos y subt\u00edtulos cerrados",
+        "enlace": "https://youtube.com/shorts/Oe0w0c2Knt8",
+        "id_video": "Oe0w0c2Knt8",
+        "fuente": "EDteam",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:47.518784",
+        "f": "25/02"
+    },
+    {
+        "titulo": "General",
+        "enlace": "https://youtube.com/shorts/OHO-yGcFMcc",
+        "id_video": "OHO-yGcFMcc",
+        "fuente": "EDteam",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:47.381599",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Reproducci\u00f3n",
+        "enlace": "https://youtube.com/shorts/5NEHEShGdHg",
+        "id_video": "5NEHEShGdHg",
+        "fuente": "EDteam",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:47.251534",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Atajos de teclado",
+        "enlace": "https://youtube.com/shorts/9AkNCL9abk4",
+        "id_video": "9AkNCL9abk4",
+        "fuente": "EDteam",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:47.108272",
+        "f": "25/02"
+    },
+    {
+        "titulo": "V\u00eddeos esf\u00e9ricos",
+        "enlace": "https://youtube.com/shorts/MqAW83e95wU",
+        "id_video": "MqAW83e95wU",
+        "fuente": "Fazt",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:46.722347",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Subt\u00edtulos y subt\u00edtulos cerrados",
+        "enlace": "https://youtube.com/shorts/Jk4NWFq-kmg",
+        "id_video": "Jk4NWFq-kmg",
+        "fuente": "Fazt",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:46.586478",
+        "f": "25/02"
+    },
+    {
+        "titulo": "General",
+        "enlace": "https://youtube.com/shorts/dIIeMUXGSvY",
+        "id_video": "dIIeMUXGSvY",
+        "fuente": "Fazt",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:46.442866",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Reproducci\u00f3n",
+        "enlace": "https://youtube.com/shorts/QeglKcajRac",
+        "id_video": "QeglKcajRac",
+        "fuente": "Fazt",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:46.301077",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Atajos de teclado",
+        "enlace": "https://youtube.com/shorts/IAIFCPNzIvs",
+        "id_video": "IAIFCPNzIvs",
+        "fuente": "Fazt",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:46.163308",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Subt\u00edtulos y subt\u00edtulos cerrados",
+        "enlace": "https://youtube.com/shorts/XQ-in8OHiT0",
+        "id_video": "XQ-in8OHiT0",
+        "fuente": "Carlos Azaustre",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:45.804412",
+        "f": "25/02"
+    },
+    {
+        "titulo": "General",
+        "enlace": "https://youtube.com/shorts/vkKO4AiEd6Q",
+        "id_video": "vkKO4AiEd6Q",
+        "fuente": "Carlos Azaustre",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:45.663027",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Reproducci\u00f3n",
+        "enlace": "https://youtube.com/shorts/nzDMwWpMKII",
+        "id_video": "nzDMwWpMKII",
+        "fuente": "Carlos Azaustre",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:45.490506",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Atajos de teclado",
+        "enlace": "https://youtube.com/shorts/tV5pG_06DWA",
+        "id_video": "tV5pG_06DWA",
+        "fuente": "Carlos Azaustre",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:45.355363",
+        "f": "25/02"
+    },
+    {
+        "titulo": "\u00bfQuieres unirte a este canal?",
+        "enlace": "https://youtube.com/shorts/pWY-CXDqudY",
+        "id_video": "pWY-CXDqudY",
+        "fuente": "Carlos Azaustre",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:45.177466",
+        "f": "25/02"
+    },
+    {
+        "titulo": "V\u00eddeos esf\u00e9ricos",
+        "enlace": "https://youtube.com/shorts/4RVFRqdRPP8",
+        "id_video": "4RVFRqdRPP8",
+        "fuente": "Midudev",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:44.782211",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Subt\u00edtulos y subt\u00edtulos cerrados",
+        "enlace": "https://youtube.com/shorts/0Dv0FcTRpcg",
+        "id_video": "0Dv0FcTRpcg",
+        "fuente": "Midudev",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:44.049185",
+        "f": "25/02"
+    },
+    {
+        "titulo": "General",
+        "enlace": "https://youtube.com/shorts/7WNTnZghjtQ",
+        "id_video": "7WNTnZghjtQ",
+        "fuente": "Midudev",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:43.911694",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Reproducci\u00f3n",
+        "enlace": "https://youtube.com/shorts/YbR7pDv5y50",
+        "id_video": "YbR7pDv5y50",
+        "fuente": "Midudev",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:43.785768",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Atajos de teclado",
+        "enlace": "https://youtube.com/shorts/ZO6NHhm0fgI",
+        "id_video": "ZO6NHhm0fgI",
+        "fuente": "Midudev",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:43.653702",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Subt\u00edtulos y subt\u00edtulos cerrados",
+        "enlace": "https://youtube.com/shorts/pYAAGoxe8BU",
+        "id_video": "pYAAGoxe8BU",
+        "fuente": "MoureDev",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:43.314925",
+        "f": "25/02"
+    },
+    {
+        "titulo": "General",
+        "enlace": "https://youtube.com/shorts/oCfHSk0aszo",
+        "id_video": "oCfHSk0aszo",
+        "fuente": "MoureDev",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:42.897765",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Reproducci\u00f3n",
+        "enlace": "https://youtube.com/shorts/TEUmyv4p8vs",
+        "id_video": "TEUmyv4p8vs",
+        "fuente": "MoureDev",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:42.756058",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Atajos de teclado",
+        "enlace": "https://youtube.com/shorts/yTsvWj_LNoQ",
+        "id_video": "yTsvWj_LNoQ",
+        "fuente": "MoureDev",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:42.627667",
+        "f": "25/02"
+    },
+    {
+        "titulo": "\u00bfQuieres unirte a este canal?",
+        "enlace": "https://youtube.com/shorts/R7y211YVqlg",
+        "id_video": "R7y211YVqlg",
+        "fuente": "MoureDev",
+        "tipo": "shorts",
+        "ts": "2026-02-25T20:55:42.483116",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Ahora entiendo por qu\u00e9 este robot tiene este precio.",
+        "enlace": "https://youtube.com/watch?v=MIepalFCTjI",
+        "id_video": "MIepalFCTjI",
+        "fuente": "Xataka",
+        "tipo": "video",
+        "ts": "2026-02-25T20:55:34.595955",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Todo se filtr\u00f3 sobre el SAMSUNG GALAXY S26 ULTRA",
+        "enlace": "https://youtube.com/watch?v=f0lVFSXbYjc",
+        "id_video": "f0lVFSXbYjc",
+        "fuente": "Xataka",
+        "tipo": "video",
+        "ts": "2026-02-25T20:55:34.175116",
+        "f": "25/02"
+    },
+    {
+        "titulo": "La unidad USB no est\u00e1 muerta: 7 formas de darle una segunda vida",
+        "enlace": "https://youtube.com/watch?v=1zAnUGWWomo",
+        "id_video": "1zAnUGWWomo",
+        "fuente": "Xataka",
+        "tipo": "video",
+        "ts": "2026-02-25T20:55:33.787387",
+        "f": "25/02"
+    },
+    {
+        "titulo": "C\u00f3mo un DISPOSITIVO con IA me ahorr\u00f3 1 mes de tomar notas: As\u00ed fue mi experiencia con PLAUD NOTE PRO",
+        "enlace": "https://youtube.com/watch?v=XMAXdLn4VTc",
+        "id_video": "XMAXdLn4VTc",
+        "fuente": "Xataka",
+        "tipo": "video",
+        "ts": "2026-02-25T20:55:33.378546",
+        "f": "25/02"
+    },
+    {
+        "titulo": "PRIMERAS IMPRESIONES SAMSUNG GALAXY S26, S26+ y S26 Ultra: Los HE PROBADO",
+        "enlace": "https://youtube.com/watch?v=2cakx0A1mFU",
+        "id_video": "2cakx0A1mFU",
+        "fuente": "Xataka",
+        "tipo": "video",
+        "ts": "2026-02-25T20:55:33.253066",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Lo que ha pasado con Udemy es... \u00bfPREOCUPANTE?",
+        "enlace": "https://youtube.com/watch?v=X-sMZmno0-4",
+        "id_video": "X-sMZmno0-4",
+        "fuente": "Victor Robles",
+        "tipo": "video",
+        "ts": "2026-02-25T20:55:32.905617",
+        "f": "25/02"
+    },
+    {
+        "titulo": "SKILLS: La salvaci\u00f3n de la IA para programadores",
+        "enlace": "https://youtube.com/watch?v=9rlnbNBPs8I",
+        "id_video": "9rlnbNBPs8I",
+        "fuente": "Victor Robles",
+        "tipo": "video",
+        "ts": "2026-02-25T20:55:32.775060",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Lo que ha pasado con Antigravity y un modelo de IA es SALVAJE",
+        "enlace": "https://youtube.com/watch?v=Gciqvv1bjTo",
+        "id_video": "Gciqvv1bjTo",
+        "fuente": "Victor Robles",
+        "tipo": "video",
+        "ts": "2026-02-25T20:55:32.643493",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Lo que ha pasado con JavaScript y un modelo de IA es SALVAJE",
+        "enlace": "https://youtube.com/watch?v=-tz_wEMqHTE",
+        "id_video": "-tz_wEMqHTE",
+        "fuente": "Victor Robles",
+        "tipo": "video",
+        "ts": "2026-02-25T20:55:32.492593",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Master en Desarrollo Web Pre IA: Conocimientos OBLIGATORIOS antes de hacer Vibe Coding",
+        "enlace": "https://youtube.com/watch?v=mcpvKPk5pKw",
+        "id_video": "mcpvKPk5pKw",
+        "fuente": "Victor Robles",
+        "tipo": "video",
+        "ts": "2026-02-25T20:55:32.356444",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Estos lenguajes est\u00e1n MUERTOS y no deber\u00edas aprenderlos",
+        "enlace": "https://youtube.com/watch?v=0ONof-yyph0",
+        "id_video": "0ONof-yyph0",
+        "fuente": "HolaMundo",
+        "tipo": "video",
+        "ts": "2026-02-25T20:55:31.880828",
+        "f": "25/02"
+    },
+    {
+        "titulo": "Linus Torvalds NO es VIBECoder: inicie sus sesiones profesionales",
+        "enlace": "https://youtube.com/watch?v=4m2MWI0Qw5I",
+        "id_video": "4m2MWI0Qw5I",
+        "fuente": "Codigo facilito",
+        "tipo": "video",
+        "ts": "2026-02-25T20:55:19.024440",
+        "f": "25/02"
+    },
+    {
+        "titulo": "V\u00eddeos esf\u00e9ricos",
         "enlace": "https://youtube.com/shortss-OvtuRHQKM",
         "id_video": "s-OvtuRHQKM",
         "fuente": "EDteam Shorts",
