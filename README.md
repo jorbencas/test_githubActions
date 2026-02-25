@@ -1,13 +1,10 @@
 # 🛰️ test_githubActions
 
-![Build Status](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/main.yml?branch=master&style=flat-square&label=Estado&logo=github)
+![Build Status](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/scraper_workflow.yml?branch=master&style=flat-square&label=Estado&logo=github)
 ![GitHub last commit](https://img.shields.io/github/last-commit/jorbencas/test_githubActions?style=flat-square&logo=git&label=Último%20cambio)
 ![Surge Status](https://img.shields.io/badge/Surge-Live-blue?style=flat-square&logo=vercel)
 
 ![Logo de Tecnología](./Image.png)
-
-# 🛰️ test_githubActions
-
 
 Este es un ecosistema automatizado de noticias tech. El sistema no solo recopila información, sino que la procesa mediante **Inteligencia Artificial** para ofrecerte lo más relevante de forma digerida y multicanal.
 
@@ -45,7 +42,7 @@ Para que el proyecto funcione en GitHub Actions, debes configurar los siguientes
 
 1.  **Clonar el repositorio:**
     ```bash
-    git clone [https://github.com/jorbencas/test_githubActions.git](https://github.com/jorbencas/test_githubActions.git)
+    git clone https://github.com/jorbencas/test_githubActions.git
     ```
 2.  **Instalar dependencias:**
     ```bash
@@ -61,9 +58,9 @@ Para que el proyecto funcione en GitHub Actions, debes configurar los siguientes
 ## 🤖 Flujo de Automatización
 
 El proyecto utiliza **GitHub Actions** para ejecutarse de forma autónoma:
-1.  **Cron Job:** Se dispara según el horario configurado en `.github/workflows/main.yml`.
+1.  **Cron Job:** Se dispara según el horario configurado en `.github/workflows/scraper_workflow.yml`.
 2.  **Verificación de Cambios:** El flujo incluye una protección de Git que evita errores de "commit vacío". Si no hay noticias nuevas, el sistema termina la tarea sin realizar cambios en el repositorio.
 3.  **Despliegue:** Al detectar novedades, actualiza el `index.html` en Surge y genera el nuevo post para Vercel.
 
 ---
-*Mantenido por [Jorge/@jorbencas]*
+*Mantenido por **[Jorge (@jorbencas)](https://github.com/jorbencas)***

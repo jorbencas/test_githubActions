@@ -21,6 +21,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4 telethon google-genai mtranslate
+      - name: Optimize Images
+        run: |
+          pip install Pillow
+          python optimize.py
       - name: Run scraper
         env:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
