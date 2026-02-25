@@ -20,17 +20,16 @@ FUENTES = {
     "MoureDev": {"url": "https://mouredev.com/blog", "yt": "https://www.youtube.com/@mouredev/videos"},
     "Pelado Nerd": {"yt": "https://www.youtube.com/@PeladoNerd/videos"},
     "Midudev": {"yt": "https://www.youtube.com/@midudev/videos"},
-    "Codigo facilito": {"yt": "https://youtube.com/@codigofacilito?si=vEBAZLbRsySBwr-w"},
+    "Codigo facilito": {"yt": "https://www.youtube.com/@codigofacilito/videos"},
     "Carlos Azaustre": {"yt": "https://www.youtube.com/@CarlosAzaustre/videos"},
     "Clipset": {"yt": "https://www.youtube.com/@clipset/videos"},
     "Codely": {"yt": "https://www.youtube.com/@CodelyTV/videos"},
     "EDteam": {"yt": "https://www.youtube.com/@EDteam/videos"},
     "Fazt": {"yt": "https://www.youtube.com/@FaztTech/videos"},
     "FreeCodeCamp": {"yt": "https://www.youtube.com/@freecodecamp/videos"},
-    "HolaMundo": {"yt": "https://youtube.com/@holamundodev?si=96mb2LLLAE8HlYQN"},
-    "Kiko palomares": {"yt": "https://www.youtube.com/@midudev/videos"},
-    "Victor Robles": {"yt": "https://youtube.com/@victorroblesweb?si=Lbdm1hvF0rd8ovgi"},
-    "Xataka": {"url": "https://www.xataka.com/", "yt":"https://youtube.com/@xatakatv?si=LVD_3XvpoVPdAZNT"},
+    "HolaMundo": {"yt": "https://www.youtube.com/@holamundodev/videos"},
+    "Victor Robles": {"yt": "https://www.youtube.com/@victorroblesweb/videos"},
+    "Xataka": {"url": "https://www.xataka.com/", "yt":"https://www.youtube.com/@xatakatv/videos"},
     "Becas": {"url": "https://www.becas.com/noticias/"},
     "Genbeta": {"url":"https://www.genbeta.com/"},
     "HobbyConsolas": {"url": "https://www.hobbyconsolas.com/"},
@@ -39,16 +38,18 @@ FUENTES = {
     "Fundación Carolina": {"url": "https://www.fundacioncarolina.es/"},
 }
 
-# Añadir versiones de SHORTS para los canales principales
-canales_con_shorts = ["MoureDev", "Midudev", "Carlos Azaustre", "Fazt", "EDteam"]
-for canal in canales_con_shorts:
-    url_base = FUENTES[canal]["yt"].replace("/videos", "/shorts")
-    FUENTES[f"{canal} Shorts"] = {"yt": url_base}
-    
+# Auto-añadir secciones de Shorts
+canales_shorts = ["MoureDev", "Midudev", "Carlos Azaustre", "Fazt", "EDteam", "Xataka"]
+for canal in canales_shorts:
+    if canal in FUENTES and "yt" in FUENTES[canal]:
+        url_s = FUENTES[canal]["yt"].replace("/videos", "/shorts")
+        FUENTES[f"{canal} Shorts"] = {"yt": url_s}
+
 os.makedirs(CONFIG["FOLDER"], exist_ok=True)
 os.makedirs("./auto-news", exist_ok=True)
 
 # --- 2. PLANTILLAS ---
+
 HTML_TEMPLATE = """
 <!DOCTYPE html>
 <html lang="es">
@@ -56,17 +57,24 @@ HTML_TEMPLATE = """
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body {{ font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 20px; background: #f0f2f5; color: #1c1e21; }}
-        .container {{ max-width: 1000px; margin: 0 auto; }}
+        body {{ font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; background: #f0f2f5; color: #1c1e21; }}
+        .container {{ max-width: 1200px; margin: 0 auto; }}
         header {{ display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #007bff; padding-bottom: 10px; margin-bottom: 30px; }}
-        .ia-box {{ background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-left: 6px solid #8e44ad; margin-bottom: 30px; line-height: 1.6; }}
-        .video-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }}
-        .card {{ background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }}
-        .card img {{ width: 100%; height: 160px; object-fit: cover; background: #ddd; }}
-        .card-content {{ padding: 15px; }}
-        .meta {{ font-size: 0.8em; color: #65676b; font-weight: bold; margin-bottom: 5px; }}
-        .news-list {{ list-style: none; padding: 0; }}
-        .news-item {{ background: white; margin-bottom: 10px; padding: 15px; border-radius: 8px; border-left: 5px solid #007bff; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }}
+        .ia-box {{ background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-left: 6px solid #8e44ad; margin-bottom: 30px; }}
+        
+        .video-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; align-items: start; }}
+        .card {{ background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }}
+        
+        /* Estilo YouTube Normal */
+        .card.tipo-video img {{ width: 100%; aspect-ratio: 16/9; object-fit: cover; background: #000; }}
+        /* Estilo YouTube Shorts (Vertical) */
+        .card.tipo-shorts {{ max-width: 200px; }}
+        .card.tipo-shorts img {{ width: 100%; aspect-ratio: 9/16; object-fit: cover; background: #000; }}
+        
+        .card-content {{ padding: 12px; }}
+        .meta {{ font-size: 0.75em; color: #65676b; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; }}
+        .news-list {{ list-style: none; padding: 0; display: grid; gap: 10px; }}
+        .news-item {{ background: white; padding: 15px; border-radius: 8px; border-left: 5px solid #007bff; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }}
         a {{ color: #007bff; text-decoration: none; font-weight: bold; }}
         .logo {{ height: 50px; }}
     </style>
@@ -82,23 +90,39 @@ HTML_TEMPLATE = """
             <h2>🤖 Resumen</h2>
             <p>{resumen}</p>
         </div>
-        <h2>📺 Últimos Vídeos y Shorts</h2>
+        <h2>📺 Multimedia (Vídeos y Shorts)</h2>
         <div class="video-grid">{bloque_videos}</div>
-        <h2>📰 Noticias</h2>
+        <h2>📰 Noticias Históricas</h2>
         <ul class="news-list">{bloque_noticias}</ul>
     </div>
 </body>
 </html>
 """
 
+EMAIL_TEMPLATE = """
+<div style="font-family: Arial; max-width: 600px; margin: 0 auto; border: 1px solid #eee; padding: 20px;">
+    <h2 style="color: #8e44ad;">🤖 Resumen IA</h2>
+    <p>{contenido}</p>
+    <hr>
+    <h2 style="color: #007bff;">📋 Enlaces del día</h2>
+    <ul>{lista_email}</ul>
+</div>
+"""
+
 MD_TEMPLATE = """---
+draft: false
 title: "{titulo}"
-date: "{fecha_iso}"
+description: "{resumen_corto}"
+pubDate: "{fecha_pub}"
+tags: ['web', 'tech', 'ia']
+slug: "{slug_name}"
+image: "/img/arquitectura_web.webp"
+author: "Jorge Beneyto Castelló"
 layout: "@layouts/PostLayout.astro"
 ---
 {contenido}
 
-### 🔗 Enlaces
+### 🔗 Enlaces de interés
 {lista_enlaces}
 """
 
@@ -112,17 +136,16 @@ class ScraperPro:
             r = requests.get(target, timeout=15, headers={'User-Agent': 'Mozilla/5.0'})
             if r.status_code != 200: return []
             if "yt" in info:
-                # Detectar IDs de video y shorts
                 ids = re.findall(r'"videoId":"(.*?)"', r.text)
                 titles = re.findall(r'"title":\{"runs":\[\{"text":"(.*?)"\}\]', r.text)
                 clean_ids = list(dict.fromkeys(ids))
                 for t, i in zip(titles[:5], clean_ids[:5]):
-                    # Si la URL original tenía "shorts", el enlace debe ser de shorts
-                    tipo_link = "shorts" if "shorts" in target else "watch?v="
+                    es_short = "shorts" in target or "Shorts" in nombre
                     results.append({
                         "titulo": translate(t.replace('"', ''), 'es'),
-                        "enlace": f"https://youtube.com/{tipo_link}{i}" if "shorts" in tipo_link else f"https://youtube.com/watch?v={i}",
-                        "id_video": i, "fuente": nombre, "tipo": "video",
+                        "enlace": f"https://youtube.com/shorts/{i}" if es_short else f"https://youtube.com/watch?v={i}",
+                        "id_video": i, "fuente": nombre.replace(" Shorts", ""), 
+                        "tipo": "shorts" if es_short else "video",
                         "ts": datetime.now().isoformat(), "f": datetime.now().strftime("%d/%m")
                     })
             else:
@@ -140,33 +163,39 @@ class ScraperPro:
         return results
 
 async def obtener_resumen_ia(noticias):
-    if not CONFIG["GEMINI_KEY"] or not noticias: return "No hay noticias nuevas para resumir."
+    if not CONFIG["GEMINI_KEY"] or not noticias: return "No hay novedades suficientes para resumir."
     try:
         client = genai.Client(api_key=CONFIG["GEMINI_KEY"])
         texto = ". ".join([f"{n['fuente']}: {n['titulo']}" for n in noticias[:12]])
         response = client.models.generate_content(
             model="gemini-2.0-flash",
-            contents=f"Resume estas noticias en 3 párrafos en español: {texto}"
+            contents=f"Resume estas noticias tecnológicas en 3 párrafos profesionales en español: {texto}"
         )
         return response.text
     except Exception as e:
-        print(f"Aviso IA (Probable cuota agotada): {e}")
-        return "Resumen no disponible por límite de cuota de IA. Consulta los enlaces abajo."
+        print(f"Error IA: {e}")
+        return "Resumen no disponible actualmente."
 
 def publicar_contenidos(historial, nuevos, resumen_ia):
     fecha_h = datetime.now().strftime("%d/%m/%Y")
     fecha_iso = datetime.now().strftime("%Y-%m-%d")
-    
     historial.sort(key=lambda x: x.get('ts', ''), reverse=True)
-    v_html, n_html, md_list = "", "", ""
-    resumen_final = resumen_ia if resumen_ia else "Actualización de noticias."
+    
+    v_html, n_html, email_list, md_links = "", "", "", ""
+    resumen_final = resumen_ia if resumen_ia else "Actualización diaria de tecnología."
 
-    for n in historial[:100]:
-        meta = f"{n['fuente']} | {n.get('f', '--/--')}"
-        if n.get('tipo') == "video" and n.get('id_video'): # Validación extra para evitar KeyError
+    # Generar bloques para la WEB (Acumulativo 200)
+    for n in historial[:200]:
+        fecha_display = f" | {n['f']}" if n.get('f') else ""
+        meta = f"{n['fuente']}{fecha_display}"
+        
+        if n.get('id_video'):
+            clase = "tipo-shorts" if n.get('tipo') == "shorts" else "tipo-video"
             v_html += f"""
-            <div class="card">
-                <img src="https://img.youtube.com/vi/{n['id_video']}/mqdefault.jpg">
+            <div class="card {clase}">
+                <a href="{n['enlace']}" target="_blank">
+                    <img src="https://img.youtube.com/vi/{n['id_video']}/mqdefault.jpg">
+                </a>
                 <div class="card-content">
                     <div class="meta">{meta}</div>
                     <a href="{n['enlace']}" target="_blank">{n['titulo']}</a>
@@ -175,45 +204,62 @@ def publicar_contenidos(historial, nuevos, resumen_ia):
         else:
             n_html += f'<li class="news-item"><div class="meta">{meta}</div><a href="{n["enlace"]}">{n["titulo"]}</a></li>'
 
-    # Guardar Web
+    # Guardar HTML
     with open("index.html", "w", encoding="utf-8") as f:
         f.write(HTML_TEMPLATE.format(fecha_hoy=fecha_h, resumen=resumen_final, bloque_videos=v_html, bloque_noticias=n_html))
 
-    # Guardar MD si hay nuevos
+    # Guardar MD y Email (Solo si hay nuevos)
     if nuevos:
-        for n in nuevos: md_list += f"- **{n['fuente']}**: [{n['titulo']}]({n['enlace']})\n"
-        titulo_md = nuevos[0]['titulo'].replace("'", "")
+        for n in nuevos:
+            md_links += f"- **{n['fuente']}**: [{n['titulo']}]({n['enlace']})\n"
+            email_list += f"<li><b>{n['fuente']}</b>: <a href='{n['enlace']}'>{n['titulo']}</a></li>"
+        
+        # Guardar MD
+        t_clean = nuevos[0]['titulo'].replace("'", "")
         with open(f"./auto-news/reporte-{fecha_iso}.md", "w", encoding="utf-8") as f:
-            f.write(MD_TEMPLATE.format(titulo=titulo_md, fecha_iso=fecha_iso, contenido=resumen_final, lista_enlaces=md_list))
+            f.write(MD_TEMPLATE.format(titulo=t_clean, fecha_iso=fecha_iso, contenido=resumen_final, lista_enlaces=md_links))
 
-# --- 4. MAIN ---
+        # Enviar Email
+        if CONFIG["MAIL_KEY"]:
+            try:
+                requests.post(f"https://api.mailgun.net/v3/{CONFIG['MAIL_DOMAIN']}/messages",
+                    auth=("api", CONFIG["MAIL_KEY"]),
+                    data={
+                        "from": f"Tech Pulse <postmaster@{CONFIG['MAIL_DOMAIN']}>",
+                        "to": [CONFIG["EMAIL_TO"]],
+                        "subject": f"🚀 Reporte Tech {fecha_h}",
+                        "html": EMAIL_TEMPLATE.format(contenido=resumen_final, lista_email=email_list)
+                    })
+            except: pass
+
 async def main():
     scr = ScraperPro()
-    datos_actuales = []
-    for nombre, info in FUENTES.items(): datos_actuales += scr.extraer(nombre, info)
+    datos = []
+    for n, info in FUENTES.items(): datos += scr.extraer(n, info)
 
     archivo_h = os.path.join(CONFIG["FOLDER"], "all_news.json")
     historial = json.load(open(archivo_h)) if os.path.exists(archivo_h) else []
     
     vistos = {x['enlace'] for x in historial}
-    nuevos = [n for n in datos_actuales if n['enlace'] not in vistos]
-    total_acumulado = nuevos + historial
+    nuevos = [n for n in datos if n['enlace'] not in vistos]
+    total = nuevos + historial
 
-    resumen = await obtener_resumen_ia(nuevos) if nuevos else "Sin novedades hoy."
-    
-    # Esta función ahora es segura contra KeyErrors y fallos de IA
-    publicar_contenidos(total_acumulado, nuevos, resumen)
+    resumen = await obtener_resumen_ia(nuevos) if nuevos else "Todo al día por ahora."
+    publicar_contenidos(total, nuevos, resumen)
 
     if nuevos:
+        # TELEGRAM
         if CONFIG["BOT_TOKEN"] and CONFIG["CHAT_ID"]:
-            msg = f"🔔 *Novedades Tech*\n\n" + "\n".join([f"• {n['fuente']}: {n['titulo']}" for n in nuevos[:5]])
+            msg = f"🔔 *Novedades Tech {datetime.now().strftime('%d/%m')}*\n\n"
+            for n in nuevos[:6]:
+                msg += f"🔹 *{n['fuente']}*: {n['titulo']}\n🔗 [Link]({n['enlace']})\n\n"
             requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendMessage", 
                           json={"chat_id": CONFIG["CHAT_ID"], "text": msg, "parse_mode": "Markdown"})
 
-        with open(archivo_h, 'w') as f: json.dump(total_acumulado[:500], f, indent=4)
-        print(f"✅ Procesado con {len(nuevos)} noticias nuevas.")
+        with open(archivo_h, 'w') as f: json.dump(total[:600], f, indent=4)
+        print(f"✅ {len(nuevos)} noticias nuevas procesadas.")
     else:
-        print("☕ Todo al día.")
+        print("☕ Sin cambios hoy.")
 
 if __name__ == "__main__":
     asyncio.run(main())
