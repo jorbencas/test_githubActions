@@ -20,8 +20,18 @@ FUENTES = {
     "MoureDev": {"url": "https://mouredev.com/blog", "yt": "https://www.youtube.com/@mouredev/videos"},
     "Pelado Nerd": {"yt": "https://www.youtube.com/@PeladoNerd/videos"},
     "Midudev": {"yt": "https://www.youtube.com/@midudev/videos"},
-    "Xataka": {"url": "https://www.xataka.com/"},
-    "Becas": {"url": "https://www.becas.com/noticias/"}
+    "Codigo facilito": {"yt": "https://youtube.com/@codigofacilito?si=vEBAZLbRsySBwr-w"},
+    "Fazt": {"yt": "https://youtube.com/@fazttech?si=Q_jN3gMmxcBY4_R9"},
+    "HolaMundo": {"yt": "https://youtube.com/@holamundodev?si=96mb2LLLAE8HlYQN"},
+    "Kiko palomares": {"yt": "https://www.youtube.com/@midudev/videos"},
+    "Victor Robles": {"yt": "https://youtube.com/@victorroblesweb?si=Lbdm1hvF0rd8ovgi"},
+    "Xataka": {"url": "https://www.xataka.com/", "yt":"https://youtube.com/@xatakatv?si=LVD_3XvpoVPdAZNT"},
+    "Becas": {"url": "https://www.becas.com/noticias/"},
+    "Genbeta": {"url":"https://www.genbeta.com/"},
+    "HobbyConsolas": {"url": "https://www.hobbyconsolas.com/"},
+    "El País Tecnología": {"url": "https://elpais.com/tecnologia/"},
+    "Levante-EMV": {"url": "https://www.levante-emv.com/"},
+    "Fundación Carolina": {"url": "https://www.fundacioncarolina.es/"},
 }
 
 os.makedirs(CONFIG["FOLDER"], exist_ok=True)
