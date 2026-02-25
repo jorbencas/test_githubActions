@@ -8,7 +8,7 @@ from google import genai
 # --- 1. CONFIGURACIÓN ---
 CONFIG = {
     "BOT_TOKEN": os.getenv("TELEGRAM_BOT_TOKEN"),
-    "CHAT_ID": os.getenv("TELEGRAM_CHAT_ID"),
+    "CHAT_ID": os.getenv("TELEGRAM_API_ID"),
     "GEMINI_KEY": os.getenv("GEMINI_API_KEY"),
     "MAIL_KEY": os.getenv("MAILGUN_API_KEY"),
     "MAIL_DOMAIN": os.getenv("MAILGUN_DOMAIN"),
@@ -21,7 +21,12 @@ FUENTES = {
     "Pelado Nerd": {"yt": "https://www.youtube.com/@PeladoNerd/videos"},
     "Midudev": {"yt": "https://www.youtube.com/@midudev/videos"},
     "Codigo facilito": {"yt": "https://youtube.com/@codigofacilito?si=vEBAZLbRsySBwr-w"},
-    "Fazt": {"yt": "https://youtube.com/@fazttech?si=Q_jN3gMmxcBY4_R9"},
+    "Carlos Azaustre": {"yt": "https://www.youtube.com/@CarlosAzaustre/videos"},
+    "Clipset": {"yt": "https://www.youtube.com/@clipset/videos"},
+    "Codely": {"yt": "https://www.youtube.com/@CodelyTV/videos"},
+    "EDteam": {"yt": "https://www.youtube.com/@EDteam/videos"},
+    "Fazt": {"yt": "https://www.youtube.com/@FaztTech/videos"},
+    "FreeCodeCamp": {"yt": "https://www.youtube.com/@freecodecamp/videos"},
     "HolaMundo": {"yt": "https://youtube.com/@holamundodev?si=96mb2LLLAE8HlYQN"},
     "Kiko palomares": {"yt": "https://www.youtube.com/@midudev/videos"},
     "Victor Robles": {"yt": "https://youtube.com/@victorroblesweb?si=Lbdm1hvF0rd8ovgi"},
@@ -34,6 +39,12 @@ FUENTES = {
     "Fundación Carolina": {"url": "https://www.fundacioncarolina.es/"},
 }
 
+# Añadir versiones de SHORTS para los canales principales
+canales_con_shorts = ["MoureDev", "Midudev", "Carlos Azaustre", "Fazt", "EDteam"]
+for canal in canales_con_shorts:
+    url_base = FUENTES[canal]["yt"].replace("/videos", "/shorts")
+    FUENTES[f"{canal} Shorts"] = {"yt": url_base}
+    
 os.makedirs(CONFIG["FOLDER"], exist_ok=True)
 os.makedirs("./auto-news", exist_ok=True)
 
@@ -65,13 +76,13 @@ HTML_TEMPLATE = """
     <div class="container">
         <header>
             <h1>Tech Pulse <small style="font-size: 0.4em; color: #666;">{fecha_hoy}</small></h1>
-            <img src="./Image.png" alt="Logo" class="logo">
+            <img src="./optimizado/Image.png" alt="Logo" class="logo">
         </header>
         <div class="ia-box">
             <h2>🤖 Resumen</h2>
             <p>{resumen}</p>
         </div>
-        <h2>📺 Últimos Vídeos</h2>
+        <h2>📺 Últimos Vídeos y Shorts</h2>
         <div class="video-grid">{bloque_videos}</div>
         <h2>📰 Noticias</h2>
         <ul class="news-list">{bloque_noticias}</ul>
@@ -101,13 +112,16 @@ class ScraperPro:
             r = requests.get(target, timeout=15, headers={'User-Agent': 'Mozilla/5.0'})
             if r.status_code != 200: return []
             if "yt" in info:
+                # Detectar IDs de video y shorts
                 ids = re.findall(r'"videoId":"(.*?)"', r.text)
                 titles = re.findall(r'"title":\{"runs":\[\{"text":"(.*?)"\}\]', r.text)
                 clean_ids = list(dict.fromkeys(ids))
                 for t, i in zip(titles[:5], clean_ids[:5]):
+                    # Si la URL original tenía "shorts", el enlace debe ser de shorts
+                    tipo_link = "shorts" if "shorts" in target else "watch?v="
                     results.append({
                         "titulo": translate(t.replace('"', ''), 'es'),
-                        "enlace": f"https://youtube.com/watch?v={i}",
+                        "enlace": f"https://youtube.com/{tipo_link}{i}" if "shorts" in tipo_link else f"https://youtube.com/watch?v={i}",
                         "id_video": i, "fuente": nombre, "tipo": "video",
                         "ts": datetime.now().isoformat(), "f": datetime.now().strftime("%d/%m")
                     })
