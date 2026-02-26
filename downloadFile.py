@@ -39,11 +39,10 @@ FUENTES = {
 }
 
 # Auto-añadir secciones de Shorts
-canales_shorts = FUENTES.keys
-for canal in canales_shorts:
-    if canal in FUENTES and "yt" in FUENTES[canal]:
-        url_s = FUENTES[canal]["yt"].replace("/videos", "/shorts")
-        FUENTES[f"{canal} Shorts"] = {"yt": url_s}
+for nombre in list(FUENTES): # Usamos list() para poder modificar el dict mientras iteramos
+    if "yt" in FUENTES[nombre]:
+        url_s = FUENTES[nombre]["yt"].replace("/videos", "/shorts")
+        FUENTES[f"{nombre} Shorts"] = {"yt": url_s}
 
 os.makedirs(CONFIG["FOLDER"], exist_ok=True)
 os.makedirs("./auto-news", exist_ok=True)
