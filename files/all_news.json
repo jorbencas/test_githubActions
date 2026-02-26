@@ -1,5 +1,140 @@
 [
     {
+        "titulo": "Atajos de teclado",
+        "enlace": "https://youtube.com/shorts/Cvfa_XlKiAQ",
+        "id_video": "Cvfa_XlKiAQ",
+        "fuente": "Xataka",
+        "tipo": "shorts",
+        "ts": "2026-02-26T20:45:10.278414",
+        "f": "26/02"
+    },
+    {
+        "titulo": "\u00bfQuieres unirte a este canal?",
+        "enlace": "https://youtube.com/shorts/Yygu7TBWdPs",
+        "id_video": "Yygu7TBWdPs",
+        "fuente": "FreeCodeCamp",
+        "tipo": "shorts",
+        "ts": "2026-02-26T20:45:06.193947",
+        "f": "26/02"
+    },
+    {
+        "titulo": "Atajos de teclado",
+        "enlace": "https://youtube.com/shorts/K8JRh0_buLE",
+        "id_video": "K8JRh0_buLE",
+        "fuente": "EDteam",
+        "tipo": "shorts",
+        "ts": "2026-02-26T20:45:03.599382",
+        "f": "26/02"
+    },
+    {
+        "titulo": "Atajos de teclado",
+        "enlace": "https://youtube.com/shorts/keEQ6al-k7A",
+        "id_video": "keEQ6al-k7A",
+        "fuente": "Clipset",
+        "tipo": "shorts",
+        "ts": "2026-02-26T20:45:00.859803",
+        "f": "26/02"
+    },
+    {
+        "titulo": "Susto en el casal de Borrull-Turia",
+        "enlace": "https://www.levante-emv.com/fallas/2026/02/26/susto-casal-borrull-turia-127319114.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-26T20:44:50.215080",
+        "f": "26/02"
+    },
+    {
+        "titulo": "Directo: Baskonia - Valencia Basket",
+        "enlace": "https://www.levante-emv.com/deportes/baloncesto/euroliga/2025-2026/laboral-kutxa-valencia-basket-30526_10_29_6205_6206.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-26T20:44:49.347297",
+        "f": "26/02"
+    },
+    {
+        "titulo": "Dos alternativas para el corredor ferroviario hacia l'Horta Sud: prolongar el metro hasta Barrio del Cristo y un \u201cmetrotram\u201d ligado al t\u00fanel pasante",
+        "enlace": "https://www.levante-emv.com/horta/2026/02/26/generalitat-estudio-alternativas-ferroviarias-puente-xirivella-valencia-127255881.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-26T20:44:49.162435",
+        "f": "26/02"
+    },
+    {
+        "titulo": "Coronas de la Fundaci\u00f3n Francisco Franco y de Espa\u00f1a 2000, en el coche f\u00fanebre de Antonio Tejero",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/02/26/coronas-fundacion-francisco-franco-espana-127317944.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-26T20:44:48.938809",
+        "f": "26/02"
+    },
+    {
+        "titulo": "Familiares y conocidos despiden a Antonio Tejero con un discreto funeral celebrado en X\u00e0tiva",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/02/26/familiares-conocidos-llegan-dar-ultimo-127314971.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-26T20:44:48.696096",
+        "f": "26/02"
+    },
+    {
+        "titulo": "GTA 6 no sufrir\u00e1 m\u00e1s retrasos y tanto Sony como Microsoft han recibido confirmaci\u00f3n por parte de Take-Two, seg\u00fan un insider",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/gta-6-no-sufrira-mas-retrasos-tanto-sony-como-microsoft-han-recibido-confirmacion-por-parte-take-two-segun-un-insider_6939577_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-02-26T20:44:45.261773",
+        "f": "26/02"
+    },
+    {
+        "titulo": "Scream 7 no afila bien el cuchillo y se coloca como la peor entrega de la saga para la cr\u00edtica",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/scream-7-no-afila-bien-cuchillo-se-coloca-como-peor-entrega-saga-para-critica_6939545_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-02-26T20:44:45.064035",
+        "f": "26/02"
+    },
+    {
+        "titulo": "Otra gala de los Goya aburrida a la que odiar",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/otra-gala-los-goya-aburrida-que-odiar_6938082_3.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-02-26T20:44:44.689444",
+        "f": "26/02"
+    },
+    {
+        "titulo": "La Ofertamania llega a PS Store pulverizando el precio de EA FC 26 TOTY con 70% de descuento o The Crew Motorfest Deluxe por 17,99 euros",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/ofertamania-ps-store-deja-nuevos-precios-minimos-ea-fc-26-con-70-rebaja-nier-replicant-con-70-the-crew-motorfest-deluxe-por-17-99-euros_6938623_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-02-26T20:44:44.499234",
+        "f": "26/02"
+    },
+    {
+        "titulo": "Ollama vs LM Studio vs Docker Models vs LlamaBarn: \u00bfCu\u00e1l es la mejor herramienta de inferencia de modelos?",
+        "enlace": "https://youtube.com/watch?v=934BLPv15UI",
+        "id_video": "934BLPv15UI",
+        "fuente": "CodelyTV",
+        "tipo": "video",
+        "ts": "2026-02-26T20:44:31.716587",
+        "f": "26/02"
+    },
+    {
+        "titulo": "JavaScript ya no es necesario para esto en 2026",
+        "enlace": "https://youtube.com/watch?v=8V_krkzedHE",
+        "id_video": "8V_krkzedHE",
+        "fuente": "Carlos Azaustre",
+        "tipo": "video",
+        "ts": "2026-02-26T20:44:28.299750",
+        "f": "26/02"
+    },
+    {
+        "titulo": "C\u00f3mo DOCUMENTAR tu C\u00f3digo Python en la Era de la IA - Sesiones ActualizaTECH",
+        "enlace": "https://youtube.com/watch?v=Os_rPuqrmH0",
+        "id_video": "Os_rPuqrmH0",
+        "fuente": "Codigo facilito",
+        "tipo": "video",
+        "ts": "2026-02-26T20:44:26.806970",
+        "f": "26/02"
+    },
+    {
         "titulo": "Subt\u00edtulos y subt\u00edtulos cerrados",
         "enlace": "https://youtube.com/shorts/BlLyML5mrQw",
         "id_video": "BlLyML5mrQw",
