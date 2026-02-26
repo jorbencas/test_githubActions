@@ -23,7 +23,7 @@ FUENTES = {
     "Codigo facilito": {"yt": "https://www.youtube.com/@codigofacilito/videos"},
     "Carlos Azaustre": {"yt": "https://www.youtube.com/@CarlosAzaustre/videos"},
     "Clipset": {"yt": "https://www.youtube.com/@clipset/videos"},
-    "Codely": {"yt": "https://www.youtube.com/@CodelyTV/videos"},
+    "CodelyTV": {"yt": "https://www.youtube.com/@CodelyTV/videos"},
     "EDteam": {"yt": "https://www.youtube.com/@EDteam/videos"},
     "Fazt": {"yt": "https://www.youtube.com/@FaztTech/videos"},
     "FreeCodeCamp": {"yt": "https://www.youtube.com/@freecodecamp/videos"},
