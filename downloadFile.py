@@ -39,7 +39,7 @@ FUENTES = {
 }
 
 # Auto-añadir secciones de Shorts
-canales_shorts = ["MoureDev", "Midudev", "Carlos Azaustre", "Fazt", "EDteam", "Xataka"]
+canales_shorts = FUENTES.keys
 for canal in canales_shorts:
     if canal in FUENTES and "yt" in FUENTES[canal]:
         url_s = FUENTES[canal]["yt"].replace("/videos", "/shorts")
