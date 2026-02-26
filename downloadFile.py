@@ -229,7 +229,7 @@ def publicar_contenidos(historial, nuevos, resumen_ia):
                 contenido=resumen_final,
                 lista_enlaces=md_links
             ))
-
+        print(F"HOLA HOLA HOLA {CONFIG['EMAIL_TO']}")
         # Enviar Email
         if CONFIG["MAIL_KEY"]:
             try:
