@@ -242,7 +242,9 @@ def publicar_contenidos(historial, nuevos, resumen_ia):
                         "subject": f"🚀 Reporte Tech {fecha_h}",
                         "html": EMAIL_TEMPLATE.format(contenido=resumen_final, lista_email=email_list)
                     })
-            except: pass
+            except Exception as e:
+                print(f"⚠️ Error al enviar a email: {e}")
+                pass
 
 async def main():
     scr = ScraperPro()
@@ -265,8 +267,11 @@ async def main():
             msg = f"🔔 *Novedades Tech {datetime.now().strftime('%d/%m')}*\n\n"
             for n in nuevos[:6]:
                 msg += f"🔹 *{n['fuente']}*: {n['titulo']}\n🔗 [Link]({n['enlace']})\n\n"
-            requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendMessage", 
-                          json={"chat_id": CONFIG["CHAT_ID"], "text": msg, "parse_mode": "Markdown"})
+            try:               
+                requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendMessage", json={"chat_id": CONFIG["CHAT_ID"], "text": msg, "parse_mode": "Markdown"})
+            except Exception as e:
+                print(f"⚠️ Error al enviar a telegram: {e}")
+                pass
 
         with open(archivo_h, 'w') as f: json.dump(total[:600], f, indent=4)
         print(f"✅ {len(nuevos)} noticias nuevas procesadas.")
