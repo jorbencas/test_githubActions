@@ -76,6 +76,48 @@ HTML_TEMPLATE = """
         .news-item {{ background: white; padding: 15px; border-radius: 8px; border-left: 5px solid #007bff; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }}
         a {{ color: #007bff; text-decoration: none; font-weight: bold; }}
         .logo {{ height: 50px; }}
+
+
+        .chip {
+  /* Alineación y Display */
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Suaviza el cambio de color */
+  
+  /* Forma de Píldora */
+  padding: 5px 15px 5px 5px; /* Menos padding a la izquierda por la imagen */
+  border-radius: 50px;
+  
+  /* Estilo Visual */
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Imagen circular dentro del chip */
+.chip-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+/* Efecto Hover */
+.chip:hover {
+  background-color: #e0e0e0;
+  border-color: #999;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Texto */
+.chip-text {
+  font-weight: 500;
+}
+
     </style>
     <title>Tech Dashboard</title>
 </head>
@@ -90,11 +132,29 @@ HTML_TEMPLATE = """
             <p>{resumen}</p>
         </div>
         <h2>📺 Multimedia (Vídeos y Shorts)</h2>
+        {bloque_chips}
         <div class="video-grid">{bloque_videos}</div>
         <h2>📰 Noticias Históricas</h2>
         <ul class="news-list">{bloque_noticias}</ul>
     </div>
 </body>
+<script>
+    function filtrarCanal(canal) {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            if (canal === 'all') {
+                card.style.display = 'block';
+            } else {
+                // Comparamos el data-fuente de la card con el nombre del canal del chip
+                if (card.getAttribute('data-fuente') === canal) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+        });
+    }
+</script>
 </html>
 """
 
@@ -128,6 +188,38 @@ layout: "@layouts/PostLayout.astro"
 # --- 3. FUNCIONES ---
 
 class ScraperPro:
+    def __init__(self):
+        self.cache_file = os.path.join(CONFIG["FOLDER"], "avatars_cache.json")
+        self.avatars = self.cargar_avatars()
+
+    def cargar_avatars(self):
+        if os.path.exists(self.cache_file):
+            with open(self.cache_file, 'r') as f: return json.load(f)
+        return {}
+
+    def guardar_avatars(self):
+        with open(self.cache_file, 'w') as f: json.dump(self.avatars, f)
+
+    def obtener_avatar_canal(self, nombre, url_canal):
+        # Si ya lo tenemos en caché, no entramos a YouTube
+        if nombre in self.avatars: return self.avatars[nombre]
+        
+        try:
+            print(f"🔍 Buscando avatar real para: {nombre}...")
+            # Limpiamos la URL para ir al home del canal
+            target = url_canal.replace("/videos", "").replace("/shorts", "")
+            r = requests.get(target, timeout=10, headers={'User-Agent': 'Mozilla/5.0'})
+            soup = BeautifulSoup(r.text, 'html.parser')
+            meta_img = soup.find("meta", property="og:image")
+            if meta_img:
+                url_avatar = meta_img['content']
+                self.avatars[nombre] = url_avatar
+                return url_avatar
+        except: pass
+        
+        # Si falla, usamos avatar por defecto y no guardamos en caché para reintentar luego
+        return f"https://ui-avatars.com/api/?name={nombre}&background=random"
+
     def extraer(self, nombre, info):
         results = []
         target = info.get("yt") or info.get("url")
@@ -175,7 +267,17 @@ async def obtener_resumen_ia(noticias):
         print(f"⚠️ Error Gemini (Cuota agotada): {e}")
         return "Resumen no disponible por límite de cuota en la API de Gemini. Consulta los enlaces abajo."
 
-def publicar_contenidos(historial, nuevos, resumen_ia):
+def obtener_avatar_canal(self, url_canal):
+    try:
+        r = requests.get(url_canal, timeout=10)
+        # Buscamos la meta etiqueta og:image que contiene el avatar del canal
+        soup = BeautifulSoup(r.text, 'html.parser')
+        meta_img = soup.find("meta", property="og:image")
+        return meta_img['content'] if meta_img else None
+    except:
+        return None
+
+def publicar_contenidos(historial, nuevos, resumen_ia, src):
     fecha_h = datetime.now().strftime("%d/%m/%Y")
     fecha_pub = datetime.now().strftime("%Y/%m/%d")
     fecha_iso = datetime.now().strftime("%Y-%m-%d")
@@ -183,6 +285,23 @@ def publicar_contenidos(historial, nuevos, resumen_ia):
     
     v_html, n_html, email_list, md_links = "", "", "", ""
     resumen_final = resumen_ia if resumen_ia else "Actualización diaria de tecnología."
+
+  # --- GENERAR CHIPS DE FILTRADO ---
+    chips_html = '<div class="filter-container" style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px;">'
+    chips_html += '<div class="chip" onclick="filtrarCanal(\'all\')"><span class="chip-text">Todos</span></div>'
+    
+    canales_vistos = []
+    for n, info in FUENTES.items():
+        nombre_c = n.replace(" Shorts", "")
+        if "yt" in info and nombre_c not in canales_vistos:
+            img_url = scr.obtener_avatar_canal(nombre_c, info["yt"])
+            chips_html += f"""
+            <div class="chip" onclick="filtrarCanal('{nombre_c}')">
+                <img src="{img_url}" alt="{nombre_c}" class="chip-img">
+                <span class="chip-text">{nombre_c}</span>
+            </div>"""
+            canales_vistos.append(nombre_c)
+    chips_html += "</div>"
 
     # Generar bloques para la WEB (Acumulativo 200)
     for n in historial[:200]:
@@ -206,7 +325,7 @@ def publicar_contenidos(historial, nuevos, resumen_ia):
 
     # Guardar HTML
     with open("index.html", "w", encoding="utf-8") as f:
-        f.write(HTML_TEMPLATE.format(fecha_hoy=fecha_h, resumen=resumen_final, bloque_videos=v_html, bloque_noticias=n_html))
+        f.write(HTML_TEMPLATE.format(fecha_hoy=fecha_h, resumen=resumen_final, bloque_chips=chips_html, bloque_videos=v_html, bloque_noticias=n_html))
 
     # Guardar MD y Email (Solo si hay nuevos)
     if nuevos:
@@ -258,8 +377,11 @@ async def main():
     total = nuevos + historial
 
     resumen = await obtener_resumen_ia(nuevos) if nuevos else "Todo al día por ahora."
-    publicar_contenidos(total, nuevos, resumen)
+    publicar_contenidos(total, nuevos, resumen, src)
 
+    # Guardar la caché de avatares para la próxima vez
+    scr.guardar_avatars()
+    
     if nuevos:
         # TELEGRAM
         if CONFIG["BOT_TOKEN"] and CONFIG["CHAT_ID"]:
