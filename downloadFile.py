@@ -81,6 +81,18 @@ HTML_TEMPLATE = """
         .chip-img {{ width: 32px; height: 32px; border-radius: 50%; margin-right: 10px; object-fit: cover; }}
         .chip:hover {{ background-color: #e0e0e0; border-color: #999; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }}
         .chip-text {{ font-weight: 500; }}
+        /* Clase que se aplicará al hacer clic */
+        .chip.active {{
+            background-color: #007bff !important; /* Azul intenso */
+            color: white !important;
+            border-color: #0056b3 !important;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+        }}
+        
+        /* Ajuste para que la imagen no se vea rara en el chip activo */
+        .chip.active .chip-text {{
+            color: white;
+        }}
     </style>
     <title>Tech Dashboard</title>
 </head>
@@ -102,17 +114,38 @@ HTML_TEMPLATE = """
     </div>
 </body>
 <script>
-    function filtrarCanal(canal) {{
+    function filtrarCanal(canal, elemento) {{
+        const chips = document.querySelectorAll('.chip');
+        const todosChip = chips[0]; // Asumiendo que "Todos" es el primero
+
+        if (canal === 'all') {{
+            // Si pulsas "Todos", limpiamos el resto
+            chips.forEach(c => c.classList.remove('active'));
+            todosChip.classList.add('active');
+        }} else {{
+            // Si pulsas un canal específico:
+            todosChip.classList.remove('active');
+            elemento.classList.toggle('active'); // Activa/Desactiva el chip actual
+        }}
+    
+        // Obtener la lista de canales activos actualmente
+        const activos = Array.from(document.querySelectorAll('.chip.active'))
+                            .map(c => c.getAttribute('data-filtro'))
+                            .filter(f => f !== 'all');
+    
+        // Si no queda ninguno activo, volvemos a marcar "Todos"
+        if (activos.length === 0) {{
+            todosChip.classList.add('active');
+        }}
+    
+        // Filtrar las cards
         const cards = document.querySelectorAll('.card');
         cards.forEach(card => {{
-            if (canal === 'all') {{
+            const fuente = card.getAttribute('data-fuente');
+            if (activos.length === 0 || activos.includes(fuente)) {{
                 card.style.display = 'block';
             }} else {{
-                if (card.getAttribute('data-fuente') === canal) {{
-                    card.style.display = 'block';
-                }} else {{
-                    card.style.display = 'none';
-                }}
+                card.style.display = 'none';
             }}
         }});
     }}
@@ -250,15 +283,15 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
 
     # --- GENERAR CHIPS DE FILTRADO ---
     chips_html = '<div class="filter-container" style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px;">'
-    chips_html += '<div class="chip" onclick="filtrarCanal(\'all\')"><span class="chip-text">Todos</span></div>'
-    
+    chips_html += '<div class="chip active" onclick="filtrarCanal(\'all\', this)"><span class="chip-text">Todos</span></div>'
+
     canales_vistos = []
     for n, info in FUENTES.items():
         nombre_c = n.replace(" Shorts", "")
         if "yt" in info and nombre_c not in canales_vistos:
             img_url = scr.obtener_avatar_canal(nombre_c, info["yt"])
             chips_html += f"""
-            <div class="chip" onclick="filtrarCanal('{nombre_c}')">
+            <div class="chip" onclick="filtrarCanal('{nombre_c}', this)">
                 <img src="{img_url}" alt="{nombre_c}" class="chip-img">
                 <span class="chip-text">{nombre_c}</span>
             </div>"""
