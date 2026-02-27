@@ -102,21 +102,20 @@ HTML_TEMPLATE = """
     </div>
 </body>
 <script>
-    function filtrarCanal(canal) {
+    function filtrarCanal(canal) {{
         const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            if (canal === 'all') {
+        cards.forEach(card => {{
+            if (canal === 'all') {{
                 card.style.display = 'block';
-            } else {
-                // Comparamos el data-fuente de la card con el nombre del canal del chip
-                if (card.getAttribute('data-fuente') === canal) {
+            }} else {{
+                if (card.getAttribute('data-fuente') === canal) {{
                     card.style.display = 'block';
-                } else {
+                }} else {{
                     card.style.display = 'none';
-                }
-            }
-        });
-    }
+                }}
+            }}
+        }});
+    }}
 </script>
 </html>
 """
@@ -249,7 +248,7 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
     v_html, n_html, email_list, md_links = "", "", "", ""
     resumen_final = resumen_ia if resumen_ia else "Actualización diaria de tecnología."
 
-  # --- GENERAR CHIPS DE FILTRADO ---
+    # --- GENERAR CHIPS DE FILTRADO ---
     chips_html = '<div class="filter-container" style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px;">'
     chips_html += '<div class="chip" onclick="filtrarCanal(\'all\')"><span class="chip-text">Todos</span></div>'
     
