@@ -30,7 +30,6 @@
         .chip-img { width: 32px; height: 32px; border-radius: 50%; margin-right: 10px; object-fit: cover; }
         .chip:hover { background-color: #e0e0e0; border-color: #999; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .chip-text { font-weight: 500; }
-        /* Clase que se aplicará al hacer clic */
         .chip.active {
             background-color: #007bff !important; /* Azul intenso */
             color: white !important;
@@ -42,6 +41,15 @@
         .chip.active .chip-text {
             color: white;
         }
+
+        .search-container { margin-bottom: 20px; width: 100%; }
+        #searchInput { 
+            width: 100%; padding: 12px 20px; border-radius: 25px; 
+            border: 1px solid #ccc; font-size: 16px; outline: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.3s;
+        }
+        #searchInput:focus { border-color: #007bff; box-shadow: 0 2px 8px rgba(0,123,255,0.2); }
+        .clear-search { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #999; display: none; }
     </style>
     <title>Tech Dashboard</title>
 </head>
@@ -56,7 +64,11 @@
             <p>Resumen no disponible por límite de cuota en la API de Gemini. Consulta los enlaces abajo.</p>
         </div>
         <h2>📺 Multimedia (Vídeos y Shorts)</h2>
-        <div class="filter-container" style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px;"><div class="chip active" data-filtro="{nombre_c}" onclick="filtrarCanal('all', this)"><span class="chip-text">Todos</span></div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="🔍 Buscar por título o fuente..." onkeyup="filtrarTodo()">
+            <span id="clearBtn" class="clear-search" onclick="limpiarBusqueda()">✖</span>
+        </div>
+        <div class="filter-container" style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px;"><div class="chip active" data-filtro="'all'" onclick="filtrarCanal('all', this)"><span class="chip-text">Todos</span></div>
             <div class="chip" data-filtro="MoureDev" onclick="filtrarCanal('MoureDev', this)">
                 <img src="https://yt3.googleusercontent.com/aPuVOhE66m_en_vzdz5SpbytqxUd-xHyAfLyn_lIVcC88dYT85WVhdYKrbZgRz7QMXvF7Ap_4fQ=s900-c-k-c0x00ffffff-no-rj" alt="MoureDev" class="chip-img">
                 <span class="chip-text">MoureDev</span>
@@ -110,6 +122,87 @@
                 <span class="chip-text">Xataka</span>
             </div></div>
         <div class="video-grid">
+            <div class="card tipo-shorts" data-fuente="FreeCodeCamp">
+                <a href="https://youtube.com/shorts/TcZFJrjxOYQ" target="_blank">
+                    <img src="https://img.youtube.com/vi/TcZFJrjxOYQ/mqdefault.jpg">
+                </a>
+                <div class="card-content">
+                    <div class="meta">FreeCodeCamp | 27/02</div>
+                    <a href="https://youtube.com/shorts/TcZFJrjxOYQ" target="_blank">¿Quieres unirte a este canal?</a>
+                </div>
+            </div>
+            <div class="card tipo-shorts" data-fuente="EDteam">
+                <a href="https://youtube.com/shorts/RwBBXI-DntM" target="_blank">
+                    <img src="https://img.youtube.com/vi/RwBBXI-DntM/mqdefault.jpg">
+                </a>
+                <div class="card-content">
+                    <div class="meta">EDteam | 27/02</div>
+                    <a href="https://youtube.com/shorts/RwBBXI-DntM" target="_blank">Atajos de teclado</a>
+                </div>
+            </div>
+            <div class="card tipo-shorts" data-fuente="Carlos Azaustre">
+                <a href="https://youtube.com/shorts/ewL_asCETQs" target="_blank">
+                    <img src="https://img.youtube.com/vi/ewL_asCETQs/mqdefault.jpg">
+                </a>
+                <div class="card-content">
+                    <div class="meta">Carlos Azaustre | 27/02</div>
+                    <a href="https://youtube.com/shorts/ewL_asCETQs" target="_blank">¿Quieres unirte a este canal?</a>
+                </div>
+            </div>
+            <div class="card tipo-shorts" data-fuente="Codigo facilito">
+                <a href="https://youtube.com/shorts/t9qhXgb-8MY" target="_blank">
+                    <img src="https://img.youtube.com/vi/t9qhXgb-8MY/mqdefault.jpg">
+                </a>
+                <div class="card-content">
+                    <div class="meta">Codigo facilito | 27/02</div>
+                    <a href="https://youtube.com/shorts/t9qhXgb-8MY" target="_blank">Atajos de teclado</a>
+                </div>
+            </div>
+            <div class="card tipo-shorts" data-fuente="Midudev">
+                <a href="https://youtube.com/shorts/T4r2o36Z4MA" target="_blank">
+                    <img src="https://img.youtube.com/vi/T4r2o36Z4MA/mqdefault.jpg">
+                </a>
+                <div class="card-content">
+                    <div class="meta">Midudev | 27/02</div>
+                    <a href="https://youtube.com/shorts/T4r2o36Z4MA" target="_blank">Atajos de teclado</a>
+                </div>
+            </div>
+            <div class="card tipo-shorts" data-fuente="MoureDev">
+                <a href="https://youtube.com/shorts/MQ_nPWaOlJY" target="_blank">
+                    <img src="https://img.youtube.com/vi/MQ_nPWaOlJY/mqdefault.jpg">
+                </a>
+                <div class="card-content">
+                    <div class="meta">MoureDev | 27/02</div>
+                    <a href="https://youtube.com/shorts/MQ_nPWaOlJY" target="_blank">¿Quieres unirte a este canal?</a>
+                </div>
+            </div>
+            <div class="card tipo-video" data-fuente="Victor Robles">
+                <a href="https://youtube.com/watch?v=MrOewwybuAA" target="_blank">
+                    <img src="https://img.youtube.com/vi/MrOewwybuAA/mqdefault.jpg">
+                </a>
+                <div class="card-content">
+                    <div class="meta">Victor Robles | 27/02</div>
+                    <a href="https://youtube.com/watch?v=MrOewwybuAA" target="_blank">Lo que le han hecho al CREADOR de OpenClaw (Clawdbot) es SALVAJE....</a>
+                </div>
+            </div>
+            <div class="card tipo-video" data-fuente="Clipset">
+                <a href="https://youtube.com/watch?v=ZaIhRYyyIbI" target="_blank">
+                    <img src="https://img.youtube.com/vi/ZaIhRYyyIbI/mqdefault.jpg">
+                </a>
+                <div class="card-content">
+                    <div class="meta">Clipset | 27/02</div>
+                    <a href="https://youtube.com/watch?v=ZaIhRYyyIbI" target="_blank">Roborock Saros 20 limpieza CON PATAS!!!</a>
+                </div>
+            </div>
+            <div class="card tipo-video" data-fuente="Codigo facilito">
+                <a href="https://youtube.com/watch?v=P1T3Q-N8GTQ" target="_blank">
+                    <img src="https://img.youtube.com/vi/P1T3Q-N8GTQ/mqdefault.jpg">
+                </a>
+                <div class="card-content">
+                    <div class="meta">Codigo facilito | 27/02</div>
+                    <a href="https://youtube.com/watch?v=P1T3Q-N8GTQ" target="_blank">Primeros pasos en n8n con Agentes de IA y MCP - TUTORIAL</a>
+                </div>
+            </div>
             <div class="card tipo-video" data-fuente="FreeCodeCamp">
                 <a href="https://youtube.com/watch?v=s950xhRvqYQ" target="_blank">
                     <img src="https://img.youtube.com/vi/s950xhRvqYQ/mqdefault.jpg">
@@ -938,7 +1031,7 @@
                     <a href="https://youtube.com/watch?v=4m2MWI0Qw5I" target="_blank">Linus Torvalds NO es VIBECoder: inicie sus sesiones profesionales</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="EDteam Shorts">
+            <div class="card tipo-video" data-fuente="EDteam">
                 <a href="https://youtube.com/shortss-OvtuRHQKM" target="_blank">
                     <img src="https://img.youtube.com/vi/s-OvtuRHQKM/mqdefault.jpg">
                 </a>
@@ -947,7 +1040,7 @@
                     <a href="https://youtube.com/shortss-OvtuRHQKM" target="_blank">Vídeos esféricos</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="EDteam Shorts">
+            <div class="card tipo-video" data-fuente="EDteam">
                 <a href="https://youtube.com/shortsOe0w0c2Knt8" target="_blank">
                     <img src="https://img.youtube.com/vi/Oe0w0c2Knt8/mqdefault.jpg">
                 </a>
@@ -956,7 +1049,7 @@
                     <a href="https://youtube.com/shortsOe0w0c2Knt8" target="_blank">Subtítulos y subtítulos cerrados</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="EDteam Shorts">
+            <div class="card tipo-video" data-fuente="EDteam">
                 <a href="https://youtube.com/shortsOHO-yGcFMcc" target="_blank">
                     <img src="https://img.youtube.com/vi/OHO-yGcFMcc/mqdefault.jpg">
                 </a>
@@ -965,7 +1058,7 @@
                     <a href="https://youtube.com/shortsOHO-yGcFMcc" target="_blank">General</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="EDteam Shorts">
+            <div class="card tipo-video" data-fuente="EDteam">
                 <a href="https://youtube.com/shorts5NEHEShGdHg" target="_blank">
                     <img src="https://img.youtube.com/vi/5NEHEShGdHg/mqdefault.jpg">
                 </a>
@@ -974,7 +1067,7 @@
                     <a href="https://youtube.com/shorts5NEHEShGdHg" target="_blank">Reproducción</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="EDteam Shorts">
+            <div class="card tipo-video" data-fuente="EDteam">
                 <a href="https://youtube.com/shorts9AkNCL9abk4" target="_blank">
                     <img src="https://img.youtube.com/vi/9AkNCL9abk4/mqdefault.jpg">
                 </a>
@@ -983,7 +1076,7 @@
                     <a href="https://youtube.com/shorts9AkNCL9abk4" target="_blank">Atajos de teclado</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="Fazt Shorts">
+            <div class="card tipo-video" data-fuente="Fazt">
                 <a href="https://youtube.com/shortsMqAW83e95wU" target="_blank">
                     <img src="https://img.youtube.com/vi/MqAW83e95wU/mqdefault.jpg">
                 </a>
@@ -992,7 +1085,7 @@
                     <a href="https://youtube.com/shortsMqAW83e95wU" target="_blank">Vídeos esféricos</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="Fazt Shorts">
+            <div class="card tipo-video" data-fuente="Fazt">
                 <a href="https://youtube.com/shortsJk4NWFq-kmg" target="_blank">
                     <img src="https://img.youtube.com/vi/Jk4NWFq-kmg/mqdefault.jpg">
                 </a>
@@ -1001,7 +1094,7 @@
                     <a href="https://youtube.com/shortsJk4NWFq-kmg" target="_blank">Subtítulos y subtítulos cerrados</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="Fazt Shorts">
+            <div class="card tipo-video" data-fuente="Fazt">
                 <a href="https://youtube.com/shortsdIIeMUXGSvY" target="_blank">
                     <img src="https://img.youtube.com/vi/dIIeMUXGSvY/mqdefault.jpg">
                 </a>
@@ -1010,7 +1103,7 @@
                     <a href="https://youtube.com/shortsdIIeMUXGSvY" target="_blank">General</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="Fazt Shorts">
+            <div class="card tipo-video" data-fuente="Fazt">
                 <a href="https://youtube.com/shortsQeglKcajRac" target="_blank">
                     <img src="https://img.youtube.com/vi/QeglKcajRac/mqdefault.jpg">
                 </a>
@@ -1019,7 +1112,7 @@
                     <a href="https://youtube.com/shortsQeglKcajRac" target="_blank">Reproducción</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="Fazt Shorts">
+            <div class="card tipo-video" data-fuente="Fazt">
                 <a href="https://youtube.com/shortsIAIFCPNzIvs" target="_blank">
                     <img src="https://img.youtube.com/vi/IAIFCPNzIvs/mqdefault.jpg">
                 </a>
@@ -1028,7 +1121,7 @@
                     <a href="https://youtube.com/shortsIAIFCPNzIvs" target="_blank">Atajos de teclado</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="Carlos Azaustre Shorts">
+            <div class="card tipo-video" data-fuente="Carlos Azaustre">
                 <a href="https://youtube.com/shorts11mHdmUGGBg" target="_blank">
                     <img src="https://img.youtube.com/vi/11mHdmUGGBg/mqdefault.jpg">
                 </a>
@@ -1037,7 +1130,7 @@
                     <a href="https://youtube.com/shorts11mHdmUGGBg" target="_blank">Subtítulos y subtítulos cerrados</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="Carlos Azaustre Shorts">
+            <div class="card tipo-video" data-fuente="Carlos Azaustre">
                 <a href="https://youtube.com/shortsXQ-in8OHiT0" target="_blank">
                     <img src="https://img.youtube.com/vi/XQ-in8OHiT0/mqdefault.jpg">
                 </a>
@@ -1046,7 +1139,7 @@
                     <a href="https://youtube.com/shortsXQ-in8OHiT0" target="_blank">General</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="Carlos Azaustre Shorts">
+            <div class="card tipo-video" data-fuente="Carlos Azaustre">
                 <a href="https://youtube.com/shortsvkKO4AiEd6Q" target="_blank">
                     <img src="https://img.youtube.com/vi/vkKO4AiEd6Q/mqdefault.jpg">
                 </a>
@@ -1055,7 +1148,7 @@
                     <a href="https://youtube.com/shortsvkKO4AiEd6Q" target="_blank">Reproducción</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="Carlos Azaustre Shorts">
+            <div class="card tipo-video" data-fuente="Carlos Azaustre">
                 <a href="https://youtube.com/shortsnzDMwWpMKII" target="_blank">
                     <img src="https://img.youtube.com/vi/nzDMwWpMKII/mqdefault.jpg">
                 </a>
@@ -1064,7 +1157,7 @@
                     <a href="https://youtube.com/shortsnzDMwWpMKII" target="_blank">Atajos de teclado</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="Carlos Azaustre Shorts">
+            <div class="card tipo-video" data-fuente="Carlos Azaustre">
                 <a href="https://youtube.com/shortstV5pG_06DWA" target="_blank">
                     <img src="https://img.youtube.com/vi/tV5pG_06DWA/mqdefault.jpg">
                 </a>
@@ -1073,7 +1166,7 @@
                     <a href="https://youtube.com/shortstV5pG_06DWA" target="_blank">¿Quieres unirte a este canal?</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="Midudev Shorts">
+            <div class="card tipo-video" data-fuente="Midudev">
                 <a href="https://youtube.com/shorts4RVFRqdRPP8" target="_blank">
                     <img src="https://img.youtube.com/vi/4RVFRqdRPP8/mqdefault.jpg">
                 </a>
@@ -1082,7 +1175,7 @@
                     <a href="https://youtube.com/shorts4RVFRqdRPP8" target="_blank">Vídeos esféricos</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="Midudev Shorts">
+            <div class="card tipo-video" data-fuente="Midudev">
                 <a href="https://youtube.com/shorts0Dv0FcTRpcg" target="_blank">
                     <img src="https://img.youtube.com/vi/0Dv0FcTRpcg/mqdefault.jpg">
                 </a>
@@ -1091,7 +1184,7 @@
                     <a href="https://youtube.com/shorts0Dv0FcTRpcg" target="_blank">Subtítulos y subtítulos cerrados</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="Midudev Shorts">
+            <div class="card tipo-video" data-fuente="Midudev">
                 <a href="https://youtube.com/shorts7WNTnZghjtQ" target="_blank">
                     <img src="https://img.youtube.com/vi/7WNTnZghjtQ/mqdefault.jpg">
                 </a>
@@ -1100,7 +1193,7 @@
                     <a href="https://youtube.com/shorts7WNTnZghjtQ" target="_blank">General</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="Midudev Shorts">
+            <div class="card tipo-video" data-fuente="Midudev">
                 <a href="https://youtube.com/shortsYbR7pDv5y50" target="_blank">
                     <img src="https://img.youtube.com/vi/YbR7pDv5y50/mqdefault.jpg">
                 </a>
@@ -1109,7 +1202,7 @@
                     <a href="https://youtube.com/shortsYbR7pDv5y50" target="_blank">Reproducción</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="Midudev Shorts">
+            <div class="card tipo-video" data-fuente="Midudev">
                 <a href="https://youtube.com/shortsZO6NHhm0fgI" target="_blank">
                     <img src="https://img.youtube.com/vi/ZO6NHhm0fgI/mqdefault.jpg">
                 </a>
@@ -1118,7 +1211,7 @@
                     <a href="https://youtube.com/shortsZO6NHhm0fgI" target="_blank">Atajos de teclado</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="MoureDev Shorts">
+            <div class="card tipo-video" data-fuente="MoureDev">
                 <a href="https://youtube.com/shortspYAAGoxe8BU" target="_blank">
                     <img src="https://img.youtube.com/vi/pYAAGoxe8BU/mqdefault.jpg">
                 </a>
@@ -1127,7 +1220,7 @@
                     <a href="https://youtube.com/shortspYAAGoxe8BU" target="_blank">Subtítulos y subtítulos cerrados</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="MoureDev Shorts">
+            <div class="card tipo-video" data-fuente="MoureDev">
                 <a href="https://youtube.com/shortsoCfHSk0aszo" target="_blank">
                     <img src="https://img.youtube.com/vi/oCfHSk0aszo/mqdefault.jpg">
                 </a>
@@ -1136,7 +1229,7 @@
                     <a href="https://youtube.com/shortsoCfHSk0aszo" target="_blank">General</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="MoureDev Shorts">
+            <div class="card tipo-video" data-fuente="MoureDev">
                 <a href="https://youtube.com/shortsTEUmyv4p8vs" target="_blank">
                     <img src="https://img.youtube.com/vi/TEUmyv4p8vs/mqdefault.jpg">
                 </a>
@@ -1145,7 +1238,7 @@
                     <a href="https://youtube.com/shortsTEUmyv4p8vs" target="_blank">Reproducción</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="MoureDev Shorts">
+            <div class="card tipo-video" data-fuente="MoureDev">
                 <a href="https://youtube.com/shortsyTsvWj_LNoQ" target="_blank">
                     <img src="https://img.youtube.com/vi/yTsvWj_LNoQ/mqdefault.jpg">
                 </a>
@@ -1154,7 +1247,7 @@
                     <a href="https://youtube.com/shortsyTsvWj_LNoQ" target="_blank">Atajos de teclado</a>
                 </div>
             </div>
-            <div class="card tipo-video" data-fuente="MoureDev Shorts">
+            <div class="card tipo-video" data-fuente="MoureDev">
                 <a href="https://youtube.com/shortsR7y211YVqlg" target="_blank">
                     <img src="https://img.youtube.com/vi/R7y211YVqlg/mqdefault.jpg">
                 </a>
@@ -1434,13 +1527,13 @@
                 </div>
             </div></div>
         <h2>📰 Noticias Históricas</h2>
-        <ul class="news-list"><li class="news-item"><div class="meta">Levante-EMV | 27/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/27/consell-destituye-numero-emergencias-tras-15-meses-cargo-generalitat-valenciana-127342095.html">El Consell destituye a la número dos de Emergencias de la Generalitat Valenciana tras 15 meses en el cargo</a></li><li class="news-item"><div class="meta">HobbyConsolas | 27/02</div><a href="https://www.hobbyconsolas.com/hobbycine/critica-residencia-una-distopia-futurista-plausible-aterradora_6938767_0.html">Crítica de La residencIA, una distopía futurista plausible y aterradora</a></li><li class="news-item"><div class="meta">Levante-EMV | 27/02</div><a href="https://www.levante-emv.com/sucesos/2026/02/27/pinganillos-ocultos-copiar-o-suplantacion-identidad-trampas-sacarse-carnet-conducir-valencia-127335105.html">De pinganillos ocultos para copiar a suplantación de identidad: las 'trampas' para sacarse el carnet de conducir</a></li><li class="news-item"><div class="meta">Levante-EMV | 27/02</div><a href="https://www.levante-emv.com/opinion/2026/02/27/antonio-tejero-23-f-golpe-de-estado-rey-emerito-juan-carlos-i-nunez-feijoo-sanchez-espias-servicios-secretos-javier-cercas-anatomia-de-un-instante-127318279.html">El último giro de guion del 23-F</a></li><li class="news-item"><div class="meta">Levante-EMV | 27/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/27/fvmp-bruselas-mazonismo-encuentra-cobijo-127299303.html">De la FVMP a 'Bruselas': todo el 'mazonismo' encuentra cobijo público tres meses después</a></li><li class="news-item"><div class="meta">Levante-EMV | 27/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/27/jefa-prensa-mazon-informamos-horas-127338060.html">La jefa de prensa de Mazón: Cuando informamos de las horas de Mazón en el Palau lo hicimos con las horas que nos parecieron lógicas</a></li><li class="news-item"><div class="meta">Levante-EMV | 27/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/27/receta-universidad-zona-dana-127317093.html">La receta de la universidad para la zona dana</a></li><li class="news-item"><div class="meta">Levante-EMV | 27/02</div><a href="https://www.levante-emv.com/cultura/2026/02/27/centenares-jovenes-cola-inaugurar-salon-127338591.html">Centenares de jóvenes hacen cola para inaugurar el Salón del Cómic 2026</a></li><li class="news-item"><div class="meta">El País Tecnología | 27/02</div><a href="https://elpais.com/tecnologia/2026-02-27/espana-persigue-la-soberania-espacial-con-el-desarrollo-de-sus-propios-cohetes.html">España persigue la soberanía espacial con el desarrollo de sus propios cohetes</a></li><li class="news-item"><div class="meta">HobbyConsolas | 27/02</div><a href="https://www.hobbyconsolas.com/hobbycine/warner-da-un-giro-180o-declara-superior-oferta-paramount-netflix-se-retira-operacion-compra_6939648_0.html">Warner da un giro de 180º, declara superior la oferta de Paramount y Netflix se retira de la operación de compra</a></li><li class="news-item"><div class="meta">HobbyConsolas | 27/02</div><a href="https://www.hobbyconsolas.com/videojuegos/como-ver-pokemon-presents-30-aniversario-saga-horario-fecha-que-esperar_6939668_0.html">Cómo ver el Pokémon Presents del 30 aniversario de la saga: horario, fecha y qué esperar</a></li><li class="news-item"><div class="meta">HobbyConsolas | 27/02</div><a href="https://www.hobbyconsolas.com/hobbycine/critica-scream-7-mismo-te-hace-gritar-por-los-motivos-menos-esperados_6939513_0.html">Crítica de Scream 7... Lo mismo te hace gritar por los motivos menos esperados</a></li><li class="news-item"><div class="meta">HobbyConsolas | 27/02</div><a href="https://www.hobbyconsolas.com/videojuegos/analisis-fallout-4-anniversary-edition-para-nintendo-switch-2-otro-port-muy-s-p-c-i-l_6939308_0.html">Análisis de Fallout 4 Anniversary Edition para Nintendo Switch 2: otro port muy S.P.E.C.I.A.L.</a></li><li class="news-item"><div class="meta">Levante-EMV | 26/02</div><a href="https://www.levante-emv.com/fallas/2026/02/26/susto-casal-borrull-turia-127319114.html">Susto en el casal de Borrull-Turia</a></li><li class="news-item"><div class="meta">Levante-EMV | 26/02</div><a href="https://www.levante-emv.com/deportes/baloncesto/euroliga/2025-2026/laboral-kutxa-valencia-basket-30526_10_29_6205_6206.html">Directo: Baskonia - Valencia Basket</a></li><li class="news-item"><div class="meta">Levante-EMV | 26/02</div><a href="https://www.levante-emv.com/horta/2026/02/26/generalitat-estudio-alternativas-ferroviarias-puente-xirivella-valencia-127255881.html">Dos alternativas para el corredor ferroviario hacia l'Horta Sud: prolongar el metro hasta Barrio del Cristo y un “metrotram” ligado al túnel pasante</a></li><li class="news-item"><div class="meta">Levante-EMV | 26/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/26/coronas-fundacion-francisco-franco-espana-127317944.html">Coronas de la Fundación Francisco Franco y de España 2000, en el coche fúnebre de Antonio Tejero</a></li><li class="news-item"><div class="meta">Levante-EMV | 26/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/26/familiares-conocidos-llegan-dar-ultimo-127314971.html">Familiares y conocidos despiden a Antonio Tejero con un discreto funeral celebrado en Xàtiva</a></li><li class="news-item"><div class="meta">HobbyConsolas | 26/02</div><a href="https://www.hobbyconsolas.com/videojuegos/gta-6-no-sufrira-mas-retrasos-tanto-sony-como-microsoft-han-recibido-confirmacion-por-parte-take-two-segun-un-insider_6939577_0.html">GTA 6 no sufrirá más retrasos y tanto Sony como Microsoft han recibido confirmación por parte de Take-Two, según un insider</a></li><li class="news-item"><div class="meta">HobbyConsolas | 26/02</div><a href="https://www.hobbyconsolas.com/hobbycine/scream-7-no-afila-bien-cuchillo-se-coloca-como-peor-entrega-saga-para-critica_6939545_0.html">Scream 7 no afila bien el cuchillo y se coloca como la peor entrega de la saga para la crítica</a></li><li class="news-item"><div class="meta">HobbyConsolas | 26/02</div><a href="https://www.hobbyconsolas.com/hobbycine/otra-gala-los-goya-aburrida-que-odiar_6938082_3.html">Otra gala de los Goya aburrida a la que odiar</a></li><li class="news-item"><div class="meta">HobbyConsolas | 26/02</div><a href="https://www.hobbyconsolas.com/videojuegos/ofertamania-ps-store-deja-nuevos-precios-minimos-ea-fc-26-con-70-rebaja-nier-replicant-con-70-the-crew-motorfest-deluxe-por-17-99-euros_6938623_0.html">La Ofertamania llega a PS Store pulverizando el precio de EA FC 26 TOTY con 70% de descuento o The Crew Motorfest Deluxe por 17,99 euros</a></li><li class="news-item"><div class="meta">Levante-EMV | 26/02</div><a href="https://www.levante-emv.com/espana/2026/02/26/papeles-desclasificados-golpe-estado-23f-juan-carlos-ajeno-golpe-127293969.html">Los papeles del 23F desclasificados ahora por el Gobierno reflejan a un Juan Carlos I ajeno al golpe de Estado</a></li><li class="news-item"><div class="meta">Levante-EMV | 26/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/26/muerte-de-antonio-tejero-sigue-la-ultima-hora-de-la-muerte-en-alzira-y-velatorio-y-entierro-en-xativa-ultima-hora-muerte-velatorio-entierro-tejero-23-f-127295075.html">👉Sigue la última hora de la muerte, velatorio y entierro de Antonio Tejero</a></li><li class="news-item"><div class="meta">Levante-EMV | 26/02</div><a href="https://www.levante-emv.com/costera/2026/02/26/muerte-antonio-tejero-la-familia-vela-el-cuerpo-durante-la-noche-en-el-tanatoria-de-xativa-a-la-espera-de-la-misa-funeral-127279708.html">Expectación a las puertas del tanatorio de Xàtiva donde reposan los restos de Antonio Tejero</a></li><li class="news-item"><div class="meta">El País Tecnología | 26/02</div><a href="https://elpais.com/tecnologia/2026-02-26/un-laser-record-entre-tenerife-y-la-palma-para-multiplicar-por-1000-las-comunicaciones.html">Un láser récord entre Tenerife y La Palma para multiplicar por 1.000 las comunicaciones</a></li><li class="news-item"><div class="meta">HobbyConsolas | 26/02</div><a href="https://www.hobbyconsolas.com/videojuegos/comparativa-resident-evil-requiem-hay-mucha-diferencia-entre-ps5-pc-switch-2_6939199_0.html">Comparativa Resident Evil Requiem. ¿Hay mucha diferencia entre PS5, PC y Switch 2?</a></li><li class="news-item"><div class="meta">HobbyConsolas | 26/02</div><a href="https://www.hobbyconsolas.com/hobbycine/spider-noir-lanza-un-nuevo-teaser-que-ciudad-le-vendria-bien-un-heroe-como-nicolas-cage_6939246_0.html">Spider-Noir lanza un nuevo teaser en el que a la ciudad le vendría bien un héroe como Nicolas Cage</a></li><li class="news-item"><div class="meta">HobbyConsolas | 26/02</div><a href="https://www.hobbyconsolas.com/videojuegos/analisis-tales-of-berseria-remastered-entrega-mas-oscura-saga-llega-por-fin-las-consolas-microsoft-nintendo_6938657_0.html">Análisis de Tales Of Berseria Remastered, la entrega más oscura de la saga llega por fin a las consolas de Microsoft y Nintendo</a></li><li class="news-item"><div class="meta">HobbyConsolas | 26/02</div><a href="https://www.hobbyconsolas.com/hobbycine/hollywood-no-conecta-con-las-nuevas-audiencias-que-no-quieren-hipermasculinidad-las-peliculas-afirma-un-estudio_6939189_0.html">Hollywood no conecta con las nuevas audiencias, que no quieren hipermasculinidad en las películas, afirma un estudio</a></li><li class="news-item"><div class="meta">Fundación Carolina | 25/02</div><a href="https://www.fundacioncarolina.es/un-nuevo-encuentro-entre-la-fundacion-carolina-y-embajadas-latinoamericanas-consolida-la-importancia-de-este-espacio-de-dialogo-para-impulsar-las-iniciativas-de-la-institucion-en-la-region/">Un nuevo encuentro entre la Fundación Carolina y embajadas latinoamericanas consolida la importancia de este espacio de diálogo para impulsar las iniciativas de la institución en la Región</a></li><li class="news-item"><div class="meta">Fundación Carolina | 25/02</div><a href="https://www.fundacioncarolina.es/abierta-la-convocatoria-de-la-xxi-edicion-de-jovenes-lideres-iberoamericanos/">Abierta la convocatoria de la XXI edición de Jóvenes Líderes Iberoamericanos</a></li><li class="news-item"><div class="meta">Fundación Carolina | 25/02</div><a href="https://www.fundacioncarolina.es/celebramos-una-nueva-sesion-informativa-para-hablar-de-derechos-humanos-en-america-latina/">Celebramos una nueva sesión informativa para hablar de Derechos Humanos en América Latina</a></li><li class="news-item"><div class="meta">Fundación Carolina | 25/02</div><a href="https://www.fundacioncarolina.es/aguanta-ucrania-cuarto-aniversario-de-la-invasion-rusa/">¡Aguanta, Ucrania! Cuarto aniversario de la invasión rusa</a></li><li class="news-item"><div class="meta">Fundación Carolina | 25/02</div><a href="https://www.fundacioncarolina.es/presentacion-del-informe-anual-2025-2026-de-la-fundacion-carolina-america-latina-en-el-cruce-de-caminos/">Presentación del informe anual 2025-2026 de la Fundación Carolina: América Latina en el cruce de caminos</a></li><li class="news-item"><div class="meta">Levante-EMV | 25/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/25/golpe-de-estado-valencia-juan-carlos-i-entrevisto-secreto-milans-bosch-antes-juicio-23f-no-salpicase-corona-c-127255114.html">Juan Carlos I se entrevistó en secreto con Milans del Bosch antes del juicio para que el 23F no salpicase a la Corona</a></li><li class="news-item"><div class="meta">Levante-EMV | 25/02</div><a href="https://www.levante-emv.com/ribera/2026/02/25/muere-tejero-alzira-silencio-respeto-discrecion-en-el-domicilio-de-la-familia-de-antonio-tejero-en-alzira-127275945.html">Silencio, respeto y discreción en el domicilio de la familia Tejero en Alzira</a></li><li class="news-item"><div class="meta">Levante-EMV | 25/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/25/elvira-tejero-fallecido-casa-rodeado-hijos-y-sus-nietos-alzira-127274511.html">Elvira Tejero: Ha fallecido en casa rodeado de sus hijos y sus nietos</a></li><li class="news-item"><div class="meta">Levante-EMV | 25/02</div><a href="https://www.levante-emv.com/cultura/2026/02/25/anatomia-instante-serie-golpe-estado-23-f-antonio-tejero-127276023.html">'Anatomía de un instante', la serie que retrata el 23-F</a></li><li class="news-item"><div class="meta">Levante-EMV | 25/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/25/muerte-antonio-tejero-93-anos-127272414.html">Muere en Alzira Antonio Tejero, protagonista del golpe de Estado del 23-F</a></li><li class="news-item"><div class="meta">El País Tecnología | 25/02</div><a href="https://elpais.com/sociedad/2026-02-22/dentro-de-los-moviles-de-los-adolescentes-espanoles-entre-redes-sociales-videojuegos-e-influencers.html">Dentro de los móviles de los adolescentes españoles: entre redes sociales, videojuegos e ‘influencers’</a></li><li class="news-item"><div class="meta">El País Tecnología | 25/02</div><a href="https://elpais.com/sociedad/2026-02-24/therians-el-fenomeno-viral-sin-base-que-sirve-a-los-ultras-para-cebar-su-discurso-anti-woke.html">‘Therians’, el fenómeno viral sin base que sirve a los ultras para cebar su discurso ‘antiwoke’</a></li><li class="news-item"><div class="meta">El País Tecnología | 25/02</div><a href="https://elpais.com/tecnologia/2026-02-24/la-adiccion-digital-de-los-menores-trato-a-ninos-que-pasan-el-fin-de-semana-en-la-habitacion-con-el-movil.html">La adicción digital de los menores: “Trato a niños que pasan el fin de semana en la habitación con el móvil”</a></li><li class="news-item"><div class="meta">El País Tecnología | 25/02</div><a href="https://elpais.com/tecnologia/2026-02-25/alberto-gago-director-de-la-aesia-estamos-seguros-de-que-en-espana-no-opera-ninguna-ia-prohibida.html">Alberto Gago, director de la Aesia: “Estamos seguros de que en España no opera ninguna IA prohibida”</a></li><li class="news-item"><div class="meta">El País Tecnología | 25/02</div><a href="https://elpais.com/tecnologia/2026-02-25/el-samsung-galaxy-s26-responde-por-ti-a-las-llamadas-de-desconocidos.html">El Samsung Galaxy S26 responde por ti a las llamadas de desconocidos</a></li><li class="news-item"><div class="meta">HobbyConsolas | 25/02</div><a href="https://www.hobbyconsolas.com/videojuegos/he-vuelto-arc-raiders-con-su-nueva-actualizacion-me-he-encontrado-con-huracanes-lanzallamas-una-nueva-prueba-que-este-juego-es-increible_6938632_0.html">He vuelto a Arc Raiders con su nueva actualización y me he encontrado con huracanes, lanzallamas y una nueva prueba de que este juego es increíble</a></li><li class="news-item"><div class="meta">HobbyConsolas | 25/02</div><a href="https://www.hobbyconsolas.com/hobbycine/mortal-kombat-ii-presenta-nuevo-trailer-oficial-con-johnny-cage-karl-urban-siendo-arrastrado-mortal-torneo_6939066_0.html">Mortal Kombat II presenta nuevo tráiler oficial, con Johnny Cage (Karl Urban) siendo arrastrado al mortal torneo</a></li><li class="news-item"><div class="meta">HobbyConsolas | 25/02</div><a href="https://www.hobbyconsolas.com/videojuegos/anunciados-los-juegos-ps-plus-marzo-2026-con-monster-hunter-rise-mmo-the-elder-scrolls-mejor-golf-un-simulador-muy-colorido_6939012_0.html">Anunciados los juegos de PS Plus de marzo de 2026 con Monster Hunter Rise, el MMO de The Elder Scrolls, el mejor golf y un simulador muy colorido</a></li><li class="news-item"><div class="meta">HobbyConsolas | 25/02</div><a href="https://www.hobbyconsolas.com/hobbycine/critica-monarch-legado-los-monstruos-temporada-2-monsterverso-es-mejor-pantalla-pequena_6933551_0.html">Crítica de Monarch: El legado de los monstruos temporada 2; el Monsterverso es mejor en pantalla pequeña</a></li><li class="news-item"><div class="meta">HobbyConsolas | 25/02</div><a href="https://www.hobbyconsolas.com/videojuegos/analisis-resident-evil-requiem-accion-terror-buena-cepa-virica_6936439_0.html">Análisis de Resident Evil Requiem, acción y terror de buena cepa (vírica)</a></li><li class="news-item"><div class="meta">Genbeta | 25/02</div><a href="https://www.genbeta.com/inteligencia-artificial/sera-trabajo-estresante-promete-sam-altman-esta-oferta-eso-ofrece-medio-millon-dolares-sueldo">Será un trabajo estresante, promete Sam Altman en esta oferta. Por eso ofrece más de medio millón de dólares de sueldo</a></li><li class="news-item"><div class="meta">Genbeta | 25/02</div><a href="https://www.trendencias.com/shopping/nuevo-jersey-lana-zara-calentito-color-verde-esmeralda-dara-luz-a-dias-grises-este-invierno?utm_source=genbeta&utm_medium=network&utm_campaign=repost">El nuevo jersey de lana de Zara es calentito, color verde esmeralda y dará luz a los días grises este invierno</a></li><li class="news-item"><div class="meta">Genbeta | 25/02</div><a href="https://www.genbeta.com/inteligencia-artificial/meta-se-ha-puesto-a-cabeza-carrera-agentes-ia-adquiriendo-manus-2-000-millones-dolares">Meta se ha puesto a la cabeza de la carrera de los agentes de IA adquiriendo Manus por 2.000 millones de dólares</a></li></ul>
+        <ul class="news-list"><li class="news-item"><div class="meta">Levante-EMV | 27/02</div><a href="https://www.levante-emv.com/sucesos/2026/02/27/policia-nacional-arresta-arbitro-usurpacion-villarreal-entradas-127359596.html">La Policía Nacional arresta a un árbitro por usurpación de identidad para conseguir abonos del Villarreal CF</a></li><li class="news-item"><div class="meta">Levante-EMV | 27/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/27/fiscalia-valencia-tres-acusaciones-favorables-127356806.html">La Fiscalía de València y tres acusaciones son favorables a prorrogar la causa de la dana hasta octubre de 2026</a></li><li class="news-item"><div class="meta">Levante-EMV | 27/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/27/la-jefa-de-prensa-de-mazon-cuando-informamos-de-las-horas-en-el-palau-lo-hicimos-con-las-horas-que-nos-parecieron-logicas-no-sobre-lo-que-sabiamos-127338060.html">La jefa de prensa de Mazón: Cuando informamos de las horas en el Palau lo hicimos con las horas que nos parecieron lógicas</a></li><li class="news-item"><div class="meta">El País Tecnología | 27/02</div><a href="https://elpais.com/tecnologia/2026-02-27/las-armas-autonomas-con-ia-enfrentan-a-las-tecnologicas-con-trump.html">Las armas autónomas con IA enfrentan a las tecnológicas con Trump</a></li><li class="news-item"><div class="meta">HobbyConsolas | 27/02</div><a href="https://www.hobbyconsolas.com/videojuegos/primer-vistazo-serie-god-of-war-amazon-asi-son-ryan-hurst-como-kratos-callum-vinson-papel-atreus_6939999_0.html">¡Primer vistazo a la serie de God of War de Amazon! Así son Ryan Hurst como Kratos y Callum Vinson en el papel de Atreus</a></li><li class="news-item"><div class="meta">HobbyConsolas | 27/02</div><a href="https://www.hobbyconsolas.com/videojuegos/resumen-pokemon-presents-17-02-2026-con-pokemon-viento-oleaje-fecha-pokemon-champions-todos-los-anuncios-30-aniversario_6939853_0.html">Resumen Pokémon Presents 17/02/2026 con Pokémon Viento y Oleaje, fecha de Pokémon Champions y todos los anuncios del 30 aniversario</a></li><li class="news-item"><div class="meta">Levante-EMV | 27/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/27/consell-destituye-numero-emergencias-tras-15-meses-cargo-generalitat-valenciana-127342095.html">El Consell destituye a la número dos de Emergencias de la Generalitat Valenciana tras 15 meses en el cargo</a></li><li class="news-item"><div class="meta">HobbyConsolas | 27/02</div><a href="https://www.hobbyconsolas.com/hobbycine/critica-residencia-una-distopia-futurista-plausible-aterradora_6938767_0.html">Crítica de La residencIA, una distopía futurista plausible y aterradora</a></li><li class="news-item"><div class="meta">Levante-EMV | 27/02</div><a href="https://www.levante-emv.com/sucesos/2026/02/27/pinganillos-ocultos-copiar-o-suplantacion-identidad-trampas-sacarse-carnet-conducir-valencia-127335105.html">De pinganillos ocultos para copiar a suplantación de identidad: las 'trampas' para sacarse el carnet de conducir</a></li><li class="news-item"><div class="meta">Levante-EMV | 27/02</div><a href="https://www.levante-emv.com/opinion/2026/02/27/antonio-tejero-23-f-golpe-de-estado-rey-emerito-juan-carlos-i-nunez-feijoo-sanchez-espias-servicios-secretos-javier-cercas-anatomia-de-un-instante-127318279.html">El último giro de guion del 23-F</a></li><li class="news-item"><div class="meta">Levante-EMV | 27/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/27/fvmp-bruselas-mazonismo-encuentra-cobijo-127299303.html">De la FVMP a 'Bruselas': todo el 'mazonismo' encuentra cobijo público tres meses después</a></li><li class="news-item"><div class="meta">Levante-EMV | 27/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/27/jefa-prensa-mazon-informamos-horas-127338060.html">La jefa de prensa de Mazón: Cuando informamos de las horas de Mazón en el Palau lo hicimos con las horas que nos parecieron lógicas</a></li><li class="news-item"><div class="meta">Levante-EMV | 27/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/27/receta-universidad-zona-dana-127317093.html">La receta de la universidad para la zona dana</a></li><li class="news-item"><div class="meta">Levante-EMV | 27/02</div><a href="https://www.levante-emv.com/cultura/2026/02/27/centenares-jovenes-cola-inaugurar-salon-127338591.html">Centenares de jóvenes hacen cola para inaugurar el Salón del Cómic 2026</a></li><li class="news-item"><div class="meta">El País Tecnología | 27/02</div><a href="https://elpais.com/tecnologia/2026-02-27/espana-persigue-la-soberania-espacial-con-el-desarrollo-de-sus-propios-cohetes.html">España persigue la soberanía espacial con el desarrollo de sus propios cohetes</a></li><li class="news-item"><div class="meta">HobbyConsolas | 27/02</div><a href="https://www.hobbyconsolas.com/hobbycine/warner-da-un-giro-180o-declara-superior-oferta-paramount-netflix-se-retira-operacion-compra_6939648_0.html">Warner da un giro de 180º, declara superior la oferta de Paramount y Netflix se retira de la operación de compra</a></li><li class="news-item"><div class="meta">HobbyConsolas | 27/02</div><a href="https://www.hobbyconsolas.com/videojuegos/como-ver-pokemon-presents-30-aniversario-saga-horario-fecha-que-esperar_6939668_0.html">Cómo ver el Pokémon Presents del 30 aniversario de la saga: horario, fecha y qué esperar</a></li><li class="news-item"><div class="meta">HobbyConsolas | 27/02</div><a href="https://www.hobbyconsolas.com/hobbycine/critica-scream-7-mismo-te-hace-gritar-por-los-motivos-menos-esperados_6939513_0.html">Crítica de Scream 7... Lo mismo te hace gritar por los motivos menos esperados</a></li><li class="news-item"><div class="meta">HobbyConsolas | 27/02</div><a href="https://www.hobbyconsolas.com/videojuegos/analisis-fallout-4-anniversary-edition-para-nintendo-switch-2-otro-port-muy-s-p-c-i-l_6939308_0.html">Análisis de Fallout 4 Anniversary Edition para Nintendo Switch 2: otro port muy S.P.E.C.I.A.L.</a></li><li class="news-item"><div class="meta">Levante-EMV | 26/02</div><a href="https://www.levante-emv.com/fallas/2026/02/26/susto-casal-borrull-turia-127319114.html">Susto en el casal de Borrull-Turia</a></li><li class="news-item"><div class="meta">Levante-EMV | 26/02</div><a href="https://www.levante-emv.com/deportes/baloncesto/euroliga/2025-2026/laboral-kutxa-valencia-basket-30526_10_29_6205_6206.html">Directo: Baskonia - Valencia Basket</a></li><li class="news-item"><div class="meta">Levante-EMV | 26/02</div><a href="https://www.levante-emv.com/horta/2026/02/26/generalitat-estudio-alternativas-ferroviarias-puente-xirivella-valencia-127255881.html">Dos alternativas para el corredor ferroviario hacia l'Horta Sud: prolongar el metro hasta Barrio del Cristo y un “metrotram” ligado al túnel pasante</a></li><li class="news-item"><div class="meta">Levante-EMV | 26/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/26/coronas-fundacion-francisco-franco-espana-127317944.html">Coronas de la Fundación Francisco Franco y de España 2000, en el coche fúnebre de Antonio Tejero</a></li><li class="news-item"><div class="meta">Levante-EMV | 26/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/26/familiares-conocidos-llegan-dar-ultimo-127314971.html">Familiares y conocidos despiden a Antonio Tejero con un discreto funeral celebrado en Xàtiva</a></li><li class="news-item"><div class="meta">HobbyConsolas | 26/02</div><a href="https://www.hobbyconsolas.com/videojuegos/gta-6-no-sufrira-mas-retrasos-tanto-sony-como-microsoft-han-recibido-confirmacion-por-parte-take-two-segun-un-insider_6939577_0.html">GTA 6 no sufrirá más retrasos y tanto Sony como Microsoft han recibido confirmación por parte de Take-Two, según un insider</a></li><li class="news-item"><div class="meta">HobbyConsolas | 26/02</div><a href="https://www.hobbyconsolas.com/hobbycine/scream-7-no-afila-bien-cuchillo-se-coloca-como-peor-entrega-saga-para-critica_6939545_0.html">Scream 7 no afila bien el cuchillo y se coloca como la peor entrega de la saga para la crítica</a></li><li class="news-item"><div class="meta">HobbyConsolas | 26/02</div><a href="https://www.hobbyconsolas.com/hobbycine/otra-gala-los-goya-aburrida-que-odiar_6938082_3.html">Otra gala de los Goya aburrida a la que odiar</a></li><li class="news-item"><div class="meta">HobbyConsolas | 26/02</div><a href="https://www.hobbyconsolas.com/videojuegos/ofertamania-ps-store-deja-nuevos-precios-minimos-ea-fc-26-con-70-rebaja-nier-replicant-con-70-the-crew-motorfest-deluxe-por-17-99-euros_6938623_0.html">La Ofertamania llega a PS Store pulverizando el precio de EA FC 26 TOTY con 70% de descuento o The Crew Motorfest Deluxe por 17,99 euros</a></li><li class="news-item"><div class="meta">Levante-EMV | 26/02</div><a href="https://www.levante-emv.com/espana/2026/02/26/papeles-desclasificados-golpe-estado-23f-juan-carlos-ajeno-golpe-127293969.html">Los papeles del 23F desclasificados ahora por el Gobierno reflejan a un Juan Carlos I ajeno al golpe de Estado</a></li><li class="news-item"><div class="meta">Levante-EMV | 26/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/26/muerte-de-antonio-tejero-sigue-la-ultima-hora-de-la-muerte-en-alzira-y-velatorio-y-entierro-en-xativa-ultima-hora-muerte-velatorio-entierro-tejero-23-f-127295075.html">👉Sigue la última hora de la muerte, velatorio y entierro de Antonio Tejero</a></li><li class="news-item"><div class="meta">Levante-EMV | 26/02</div><a href="https://www.levante-emv.com/costera/2026/02/26/muerte-antonio-tejero-la-familia-vela-el-cuerpo-durante-la-noche-en-el-tanatoria-de-xativa-a-la-espera-de-la-misa-funeral-127279708.html">Expectación a las puertas del tanatorio de Xàtiva donde reposan los restos de Antonio Tejero</a></li><li class="news-item"><div class="meta">El País Tecnología | 26/02</div><a href="https://elpais.com/tecnologia/2026-02-26/un-laser-record-entre-tenerife-y-la-palma-para-multiplicar-por-1000-las-comunicaciones.html">Un láser récord entre Tenerife y La Palma para multiplicar por 1.000 las comunicaciones</a></li><li class="news-item"><div class="meta">HobbyConsolas | 26/02</div><a href="https://www.hobbyconsolas.com/videojuegos/comparativa-resident-evil-requiem-hay-mucha-diferencia-entre-ps5-pc-switch-2_6939199_0.html">Comparativa Resident Evil Requiem. ¿Hay mucha diferencia entre PS5, PC y Switch 2?</a></li><li class="news-item"><div class="meta">HobbyConsolas | 26/02</div><a href="https://www.hobbyconsolas.com/hobbycine/spider-noir-lanza-un-nuevo-teaser-que-ciudad-le-vendria-bien-un-heroe-como-nicolas-cage_6939246_0.html">Spider-Noir lanza un nuevo teaser en el que a la ciudad le vendría bien un héroe como Nicolas Cage</a></li><li class="news-item"><div class="meta">HobbyConsolas | 26/02</div><a href="https://www.hobbyconsolas.com/videojuegos/analisis-tales-of-berseria-remastered-entrega-mas-oscura-saga-llega-por-fin-las-consolas-microsoft-nintendo_6938657_0.html">Análisis de Tales Of Berseria Remastered, la entrega más oscura de la saga llega por fin a las consolas de Microsoft y Nintendo</a></li><li class="news-item"><div class="meta">HobbyConsolas | 26/02</div><a href="https://www.hobbyconsolas.com/hobbycine/hollywood-no-conecta-con-las-nuevas-audiencias-que-no-quieren-hipermasculinidad-las-peliculas-afirma-un-estudio_6939189_0.html">Hollywood no conecta con las nuevas audiencias, que no quieren hipermasculinidad en las películas, afirma un estudio</a></li><li class="news-item"><div class="meta">Fundación Carolina | 25/02</div><a href="https://www.fundacioncarolina.es/un-nuevo-encuentro-entre-la-fundacion-carolina-y-embajadas-latinoamericanas-consolida-la-importancia-de-este-espacio-de-dialogo-para-impulsar-las-iniciativas-de-la-institucion-en-la-region/">Un nuevo encuentro entre la Fundación Carolina y embajadas latinoamericanas consolida la importancia de este espacio de diálogo para impulsar las iniciativas de la institución en la Región</a></li><li class="news-item"><div class="meta">Fundación Carolina | 25/02</div><a href="https://www.fundacioncarolina.es/abierta-la-convocatoria-de-la-xxi-edicion-de-jovenes-lideres-iberoamericanos/">Abierta la convocatoria de la XXI edición de Jóvenes Líderes Iberoamericanos</a></li><li class="news-item"><div class="meta">Fundación Carolina | 25/02</div><a href="https://www.fundacioncarolina.es/celebramos-una-nueva-sesion-informativa-para-hablar-de-derechos-humanos-en-america-latina/">Celebramos una nueva sesión informativa para hablar de Derechos Humanos en América Latina</a></li><li class="news-item"><div class="meta">Fundación Carolina | 25/02</div><a href="https://www.fundacioncarolina.es/aguanta-ucrania-cuarto-aniversario-de-la-invasion-rusa/">¡Aguanta, Ucrania! Cuarto aniversario de la invasión rusa</a></li><li class="news-item"><div class="meta">Fundación Carolina | 25/02</div><a href="https://www.fundacioncarolina.es/presentacion-del-informe-anual-2025-2026-de-la-fundacion-carolina-america-latina-en-el-cruce-de-caminos/">Presentación del informe anual 2025-2026 de la Fundación Carolina: América Latina en el cruce de caminos</a></li><li class="news-item"><div class="meta">Levante-EMV | 25/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/25/golpe-de-estado-valencia-juan-carlos-i-entrevisto-secreto-milans-bosch-antes-juicio-23f-no-salpicase-corona-c-127255114.html">Juan Carlos I se entrevistó en secreto con Milans del Bosch antes del juicio para que el 23F no salpicase a la Corona</a></li><li class="news-item"><div class="meta">Levante-EMV | 25/02</div><a href="https://www.levante-emv.com/ribera/2026/02/25/muere-tejero-alzira-silencio-respeto-discrecion-en-el-domicilio-de-la-familia-de-antonio-tejero-en-alzira-127275945.html">Silencio, respeto y discreción en el domicilio de la familia Tejero en Alzira</a></li><li class="news-item"><div class="meta">Levante-EMV | 25/02</div><a href="https://www.levante-emv.com/comunitat-valenciana/2026/02/25/elvira-tejero-fallecido-casa-rodeado-hijos-y-sus-nietos-alzira-127274511.html">Elvira Tejero: Ha fallecido en casa rodeado de sus hijos y sus nietos</a></li></ul>
     </div>
 </body>
 <script>
     function filtrarCanal(canal, elemento) {
         const chips = document.querySelectorAll('.chip');
-        const todosChip = chips[0]; // Asumiendo que "Todos" es el primero
++       const todosChip = document.querySelector('[data-filtro="all"]');
 
         if (canal === 'all') {
             // Si pulsas "Todos", limpiamos el resto
@@ -1466,12 +1559,46 @@
         const cards = document.querySelectorAll('.card');
         cards.forEach(card => {
             const fuente = card.getAttribute('data-fuente');
+            console.log(fuente);
             if (activos.length === 0 || activos.includes(fuente)) {
                 card.style.display = 'block';
             } else {
                 card.style.display = 'none';
             }
         });
+        filtrarTodo(); // Llamamos a la función unificada
     }
+
+    function filtrarTodo() {
+        const texto = document.getElementById('searchInput').value.toLowerCase();
+        document.getElementById('clearBtn').style.display = texto ? 'block' : 'none';
+        const activos = Array.from(document.querySelectorAll('.chip.active'))
+                            .map(c => c.getAttribute('data-filtro'))
+                            .filter(f => f !== 'all');
+
+        // Filtrar Cards (Vídeos)
+        document.querySelectorAll('.card').forEach(card => {
+            const titulo = card.querySelector('a:last-child').innerText.toLowerCase();
+            const fuente = card.getAttribute('data-fuente');
+            const coincideTexto = titulo.includes(texto) || fuente.toLowerCase().includes(texto);
+            const coincideFiltro = activos.length === 0 || activos.includes(fuente);
+
+            card.style.display = (coincideTexto && coincideFiltro) ? 'block' : 'none';
+        });
+
+        // Filtrar Noticias Históricas
+        document.querySelectorAll('.news-item').forEach(item => {
+            const contenido = item.innerText.toLowerCase();
+            item.style.display = contenido.includes(texto) ? 'block' : 'none';
+        });
+    }
+
+    function limpiarBusqueda() {
+        document.getElementById('searchInput').value = '';
+        filtrarTodo();
+    }
+
+
+
 </script>
 </html>
