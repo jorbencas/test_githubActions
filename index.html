@@ -30,6 +30,18 @@
         .chip-img { width: 32px; height: 32px; border-radius: 50%; margin-right: 10px; object-fit: cover; }
         .chip:hover { background-color: #e0e0e0; border-color: #999; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .chip-text { font-weight: 500; }
+        /* Clase que se aplicará al hacer clic */
+        .chip.active {
+            background-color: #007bff !important; /* Azul intenso */
+            color: white !important;
+            border-color: #0056b3 !important;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+        }
+        
+        /* Ajuste para que la imagen no se vea rara en el chip activo */
+        .chip.active .chip-text {
+            color: white;
+        }
     </style>
     <title>Tech Dashboard</title>
 </head>
@@ -41,59 +53,59 @@
         </header>
         <div class="ia-box">
             <h2>🤖 Resumen</h2>
-            <p>Resumen no disponible por límite de cuota en la API de Gemini. Consulta los enlaces abajo.</p>
+            <p>Todo al día por ahora.</p>
         </div>
         <h2>📺 Multimedia (Vídeos y Shorts)</h2>
-        <div class="filter-container" style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px;"><div class="chip" onclick="filtrarCanal('all')"><span class="chip-text">Todos</span></div>
-            <div class="chip" onclick="filtrarCanal('MoureDev')">
+        <div class="filter-container" style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px;"><div class="chip active" onclick="filtrarCanal('all', this)"><span class="chip-text">Todos</span></div>
+            <div class="chip" onclick="filtrarCanal('MoureDev', this)">
                 <img src="https://yt3.googleusercontent.com/aPuVOhE66m_en_vzdz5SpbytqxUd-xHyAfLyn_lIVcC88dYT85WVhdYKrbZgRz7QMXvF7Ap_4fQ=s900-c-k-c0x00ffffff-no-rj" alt="MoureDev" class="chip-img">
                 <span class="chip-text">MoureDev</span>
             </div>
-            <div class="chip" onclick="filtrarCanal('Pelado Nerd')">
+            <div class="chip" onclick="filtrarCanal('Pelado Nerd', this)">
                 <img src="https://yt3.googleusercontent.com/S1xVWTVkSqTVaEnU30OGV4OwT8acL1ri3d3WUGOp4k_aXNKtveI99kZahhlr-ViKyvn5zg_D=s900-c-k-c0x00ffffff-no-rj" alt="Pelado Nerd" class="chip-img">
                 <span class="chip-text">Pelado Nerd</span>
             </div>
-            <div class="chip" onclick="filtrarCanal('Midudev')">
+            <div class="chip" onclick="filtrarCanal('Midudev', this)">
                 <img src="https://yt3.googleusercontent.com/QkJIZgFfiFacdK8syyPRt7cJYPl3jTf0qFhdPwFdpJpyCW5jI_uylNK5a3IH8bitE2wy6Dr2Lw=s900-c-k-c0x00ffffff-no-rj" alt="Midudev" class="chip-img">
                 <span class="chip-text">Midudev</span>
             </div>
-            <div class="chip" onclick="filtrarCanal('Codigo facilito')">
+            <div class="chip" onclick="filtrarCanal('Codigo facilito', this)">
                 <img src="https://yt3.googleusercontent.com/ytc/AIdro_kt9RHOt4zZmKV8wIWZaIdyumK9yS1VXfvh_iDJozt7i4w=s900-c-k-c0x00ffffff-no-rj" alt="Codigo facilito" class="chip-img">
                 <span class="chip-text">Codigo facilito</span>
             </div>
-            <div class="chip" onclick="filtrarCanal('Carlos Azaustre')">
+            <div class="chip" onclick="filtrarCanal('Carlos Azaustre', this)">
                 <img src="https://yt3.googleusercontent.com/RwgiCUvX7HFmo2qAtnvUsfoGxmyUIa_l_HAEo_3dt5OuJYliyJF8Pnlpr56I74GDyA_f-RawKs8=s900-c-k-c0x00ffffff-no-rj" alt="Carlos Azaustre" class="chip-img">
                 <span class="chip-text">Carlos Azaustre</span>
             </div>
-            <div class="chip" onclick="filtrarCanal('Clipset')">
+            <div class="chip" onclick="filtrarCanal('Clipset', this)">
                 <img src="https://yt3.googleusercontent.com/ytc/AIdro_my5V8zqNi3--ZTykMjzFI8lyt_4K-ad5wANZ_jmXIfT0o=s900-c-k-c0x00ffffff-no-rj" alt="Clipset" class="chip-img">
                 <span class="chip-text">Clipset</span>
             </div>
-            <div class="chip" onclick="filtrarCanal('CodelyTV')">
+            <div class="chip" onclick="filtrarCanal('CodelyTV', this)">
                 <img src="https://yt3.googleusercontent.com/DGnXieIWjL1Femn2HZBGUObeg9biIKtbsLp25r99dBBwwqp2jWysEQQ_d-qEqcfrq81zZZYVtg=s900-c-k-c0x00ffffff-no-rj" alt="CodelyTV" class="chip-img">
                 <span class="chip-text">CodelyTV</span>
             </div>
-            <div class="chip" onclick="filtrarCanal('EDteam')">
+            <div class="chip" onclick="filtrarCanal('EDteam', this)">
                 <img src="https://yt3.googleusercontent.com/gVPEp1RFXTNqaImY4yOnIjamU1AFDGNEpI1B7g_D4PBX10esTrtQpqejAaj0sNx_hl7lugPEYA=s900-c-k-c0x00ffffff-no-rj" alt="EDteam" class="chip-img">
                 <span class="chip-text">EDteam</span>
             </div>
-            <div class="chip" onclick="filtrarCanal('Fazt')">
+            <div class="chip" onclick="filtrarCanal('Fazt', this)">
                 <img src="https://yt3.googleusercontent.com/ytc/AIdro_nlI29kkP3d2OAKZTdDVgkDA6D7g7TfNvSKNBGTY-5cQHY=s900-c-k-c0x00ffffff-no-rj" alt="Fazt" class="chip-img">
                 <span class="chip-text">Fazt</span>
             </div>
-            <div class="chip" onclick="filtrarCanal('FreeCodeCamp')">
+            <div class="chip" onclick="filtrarCanal('FreeCodeCamp', this)">
                 <img src="https://yt3.googleusercontent.com/ytc/AIdro_lGRc-05M2OoE1ejQdxeFhyP7OkJg9h4Y-7CK_5je3QqFI=s900-c-k-c0x00ffffff-no-rj" alt="FreeCodeCamp" class="chip-img">
                 <span class="chip-text">FreeCodeCamp</span>
             </div>
-            <div class="chip" onclick="filtrarCanal('HolaMundo')">
+            <div class="chip" onclick="filtrarCanal('HolaMundo', this)">
                 <img src="https://yt3.googleusercontent.com/mNbmN9qWmMpQ-XN37IejdhwF5rn2-WD6fjRY8ZKcYUFer6F5Y-2vQTCDs3HpCHmOBtpeeWgu6g=s900-c-k-c0x00ffffff-no-rj" alt="HolaMundo" class="chip-img">
                 <span class="chip-text">HolaMundo</span>
             </div>
-            <div class="chip" onclick="filtrarCanal('Victor Robles')">
+            <div class="chip" onclick="filtrarCanal('Victor Robles', this)">
                 <img src="https://yt3.googleusercontent.com/ytc/AIdro_njmB5jmScUOEAkHOvLmlbiwyDW6Sjo9QNMAn_mYqKW17c=s900-c-k-c0x00ffffff-no-rj" alt="Victor Robles" class="chip-img">
                 <span class="chip-text">Victor Robles</span>
             </div>
-            <div class="chip" onclick="filtrarCanal('Xataka')">
+            <div class="chip" onclick="filtrarCanal('Xataka', this)">
                 <img src="https://yt3.googleusercontent.com/Isndcf4xNmVxIMeO_x-4W2tJKzPcvDsdZeLoSbml-xYAHQlv8hfqlGK8NrRFhO9KwiN569mN=s900-c-k-c0x00ffffff-no-rj" alt="Xataka" class="chip-img">
                 <span class="chip-text">Xataka</span>
             </div></div>
@@ -1426,17 +1438,38 @@
     </div>
 </body>
 <script>
-    function filtrarCanal(canal) {
+    function filtrarCanal(canal, elemento) {
+        const chips = document.querySelectorAll('.chip');
+        const todosChip = chips[0]; // Asumiendo que "Todos" es el primero
+
+        if (canal === 'all') {
+            // Si pulsas "Todos", limpiamos el resto
+            chips.forEach(c => c.classList.remove('active'));
+            todosChip.classList.add('active');
+        } else {
+            // Si pulsas un canal específico:
+            todosChip.classList.remove('active');
+            elemento.classList.toggle('active'); // Activa/Desactiva el chip actual
+        }
+    
+        // Obtener la lista de canales activos actualmente
+        const activos = Array.from(document.querySelectorAll('.chip.active'))
+                            .map(c => c.getAttribute('data-filtro'))
+                            .filter(f => f !== 'all');
+    
+        // Si no queda ninguno activo, volvemos a marcar "Todos"
+        if (activos.length === 0) {
+            todosChip.classList.add('active');
+        }
+    
+        // Filtrar las cards
         const cards = document.querySelectorAll('.card');
         cards.forEach(card => {
-            if (canal === 'all') {
+            const fuente = card.getAttribute('data-fuente');
+            if (activos.length === 0 || activos.includes(fuente)) {
                 card.style.display = 'block';
             } else {
-                if (card.getAttribute('data-fuente') === canal) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+                card.style.display = 'none';
             }
         });
     }
