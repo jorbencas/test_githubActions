@@ -283,7 +283,7 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
 
     # --- GENERAR CHIPS DE FILTRADO ---
     chips_html = '<div class="filter-container" style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px;">'
-    chips_html += '<div class="chip active" onclick="filtrarCanal(\'all\', this)"><span class="chip-text">Todos</span></div>'
+    chips_html += '<div class="chip active" data-filtro="{nombre_c}" onclick="filtrarCanal(\'all\', this)"><span class="chip-text">Todos</span></div>'
 
     canales_vistos = []
     for n, info in FUENTES.items():
@@ -291,7 +291,7 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
         if "yt" in info and nombre_c not in canales_vistos:
             img_url = scr.obtener_avatar_canal(nombre_c, info["yt"])
             chips_html += f"""
-            <div class="chip" onclick="filtrarCanal('{nombre_c}', this)">
+            <div class="chip" data-filtro="{nombre_c}" onclick="filtrarCanal('{nombre_c}', this)">
                 <img src="{img_url}" alt="{nombre_c}" class="chip-img">
                 <span class="chip-text">{nombre_c}</span>
             </div>"""
