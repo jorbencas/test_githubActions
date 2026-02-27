@@ -377,7 +377,7 @@ async def main():
     total = nuevos + historial
 
     resumen = await obtener_resumen_ia(nuevos) if nuevos else "Todo al día por ahora."
-    publicar_contenidos(total, nuevos, resumen, src)
+    publicar_contenidos(total, nuevos, resumen, scr)
 
     # Guardar la caché de avatares para la próxima vez
     scr.guardar_avatars()
