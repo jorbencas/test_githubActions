@@ -277,7 +277,7 @@ def obtener_avatar_canal(self, url_canal):
     except:
         return None
 
-def publicar_contenidos(historial, nuevos, resumen_ia, src):
+def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
     fecha_h = datetime.now().strftime("%d/%m/%Y")
     fecha_pub = datetime.now().strftime("%Y/%m/%d")
     fecha_iso = datetime.now().strftime("%Y-%m-%d")
