@@ -13,7 +13,8 @@ CONFIG = {
     "MAIL_KEY": os.getenv("MAILGUN_API_KEY"),
     "MAIL_DOMAIN": os.getenv("MAILGUN_DOMAIN"),
     "EMAIL_TO": os.getenv("EMAIL_USER"),
-    "FOLDER": "files" 
+    "FOLDER": "files",
+    "IS_LOCAL_ENV": os.getenv("IS_LOCAL_ENV")
 }
 
 FUENTES = {
@@ -81,7 +82,6 @@ HTML_TEMPLATE = """
         .chip-img {{ width: 32px; height: 32px; border-radius: 50%; margin-right: 10px; object-fit: cover; }}
         .chip:hover {{ background-color: #e0e0e0; border-color: #999; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }}
         .chip-text {{ font-weight: 500; }}
-        /* Clase que se aplicará al hacer clic */
         .chip.active {{
             background-color: #007bff !important; /* Azul intenso */
             color: white !important;
@@ -93,6 +93,15 @@ HTML_TEMPLATE = """
         .chip.active .chip-text {{
             color: white;
         }}
+
+        .search-container {{ margin-bottom: 20px; width: 100%; }}
+        #searchInput {{ 
+            width: 100%; padding: 12px 20px; border-radius: 25px; 
+            border: 1px solid #ccc; font-size: 16px; outline: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.3s;
+        }}
+        #searchInput:focus {{ border-color: #007bff; box-shadow: 0 2px 8px rgba(0,123,255,0.2); }}
+        .clear-search {{ position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #999; display: none; }}
     </style>
     <title>Tech Dashboard</title>
 </head>
@@ -107,6 +116,10 @@ HTML_TEMPLATE = """
             <p>{resumen}</p>
         </div>
         <h2>📺 Multimedia (Vídeos y Shorts)</h2>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="🔍 Buscar por título o fuente..." onkeyup="filtrarTodo()">
+            <span id="clearBtn" class="clear-search" onclick="limpiarBusqueda()">✖</span>
+        </div>
         {bloque_chips}
         <div class="video-grid">{bloque_videos}</div>
         <h2>📰 Noticias Históricas</h2>
@@ -116,7 +129,7 @@ HTML_TEMPLATE = """
 <script>
     function filtrarCanal(canal, elemento) {{
         const chips = document.querySelectorAll('.chip');
-        const todosChip = chips[0]; // Asumiendo que "Todos" es el primero
++       const todosChip = document.querySelector('[data-filtro="all"]');
 
         if (canal === 'all') {{
             // Si pulsas "Todos", limpiamos el resto
@@ -142,13 +155,47 @@ HTML_TEMPLATE = """
         const cards = document.querySelectorAll('.card');
         cards.forEach(card => {{
             const fuente = card.getAttribute('data-fuente');
+            console.log(fuente);
             if (activos.length === 0 || activos.includes(fuente)) {{
                 card.style.display = 'block';
             }} else {{
                 card.style.display = 'none';
             }}
         }});
+        filtrarTodo(); // Llamamos a la función unificada
     }}
+
+    function filtrarTodo() {{
+        const texto = document.getElementById('searchInput').value.toLowerCase();
+        document.getElementById('clearBtn').style.display = texto ? 'block' : 'none';
+        const activos = Array.from(document.querySelectorAll('.chip.active'))
+                            .map(c => c.getAttribute('data-filtro'))
+                            .filter(f => f !== 'all');
+
+        // Filtrar Cards (Vídeos)
+        document.querySelectorAll('.card').forEach(card => {{
+            const titulo = card.querySelector('a:last-child').innerText.toLowerCase();
+            const fuente = card.getAttribute('data-fuente');
+            const coincideTexto = titulo.includes(texto) || fuente.toLowerCase().includes(texto);
+            const coincideFiltro = activos.length === 0 || activos.includes(fuente);
+
+            card.style.display = (coincideTexto && coincideFiltro) ? 'block' : 'none';
+        }});
+
+        // Filtrar Noticias Históricas
+        document.querySelectorAll('.news-item').forEach(item => {{
+            const contenido = item.innerText.toLowerCase();
+            item.style.display = contenido.includes(texto) ? 'block' : 'none';
+        }});
+    }}
+
+    function limpiarBusqueda() {{
+        document.getElementById('searchInput').value = '';
+        filtrarTodo();
+    }}
+
+
+
 </script>
 </html>
 """
@@ -262,16 +309,6 @@ async def obtener_resumen_ia(noticias):
         print(f"⚠️ Error Gemini (Cuota agotada): {e}")
         return "Resumen no disponible por límite de cuota en la API de Gemini. Consulta los enlaces abajo."
 
-def obtener_avatar_canal(self, url_canal):
-    try:
-        r = requests.get(url_canal, timeout=10)
-        # Buscamos la meta etiqueta og:image que contiene el avatar del canal
-        soup = BeautifulSoup(r.text, 'html.parser')
-        meta_img = soup.find("meta", property="og:image")
-        return meta_img['content'] if meta_img else None
-    except:
-        return None
-
 def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
     fecha_h = datetime.now().strftime("%d/%m/%Y")
     fecha_pub = datetime.now().strftime("%Y/%m/%d")
@@ -283,7 +320,7 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
 
     # --- GENERAR CHIPS DE FILTRADO ---
     chips_html = '<div class="filter-container" style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px;">'
-    chips_html += '<div class="chip active" data-filtro="{nombre_c}" onclick="filtrarCanal(\'all\', this)"><span class="chip-text">Todos</span></div>'
+    chips_html += '<div class="chip active" data-filtro="\'all\'" onclick="filtrarCanal(\'all\', this)"><span class="chip-text">Todos</span></div>'
 
     canales_vistos = []
     for n, info in FUENTES.items():
@@ -305,9 +342,9 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
         
         if n.get('id_video'):
             clase = "tipo-shorts" if n.get('tipo') == "shorts" else "tipo-video"
-            fuente_id = n['fuente']
+            fuente_limpia = n['fuente'].replace(" Shorts", "")
             v_html += f"""
-            <div class="card {clase}" data-fuente="{fuente_id}">
+            <div class="card {clase}" data-fuente="{fuente_limpia}">
                 <a href="{n['enlace']}" target="_blank">
                     <img src="https://img.youtube.com/vi/{n['id_video']}/mqdefault.jpg">
                 </a>
@@ -324,7 +361,8 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
         f.write(HTML_TEMPLATE.format(fecha_hoy=fecha_h, resumen=resumen_final, bloque_chips=chips_html, bloque_videos=v_html, bloque_noticias=n_html))
 
     # Guardar MD y Email (Solo si hay nuevos)
-    if nuevos:
+    is_local = CONFIG["IS_LOCAL_ENV"]
+    if nuevos and not is_local:
         for n in nuevos:
             md_links += f"- **{n['fuente']}**: [{n['titulo']}]({n['enlace']})\n"
             email_list += f"<li><b>{n['fuente']}</b>: <a href='{n['enlace']}'>{n['titulo']}</a></li>"
@@ -378,7 +416,8 @@ async def main():
     # Guardar la caché de avatares para la próxima vez
     scr.guardar_avatars()
     
-    if nuevos:
+    is_local = CONFIG["IS_LOCAL_ENV"]
+    if nuevos and not is_local:
         # TELEGRAM
         if CONFIG["BOT_TOKEN"] and CONFIG["CHAT_ID"]:
             msg = f"🔔 *Novedades Tech {datetime.now().strftime('%d/%m')}*\n\n"
