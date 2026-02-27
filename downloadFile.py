@@ -77,47 +77,10 @@ HTML_TEMPLATE = """
         a {{ color: #007bff; text-decoration: none; font-weight: bold; }}
         .logo {{ height: 50px; }}
 
-
-        .chip {
-  /* Alineación y Display */
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.3s ease; /* Suaviza el cambio de color */
-  
-  /* Forma de Píldora */
-  padding: 5px 15px 5px 5px; /* Menos padding a la izquierda por la imagen */
-  border-radius: 50px;
-  
-  /* Estilo Visual */
-  background-color: #f1f1f1;
-  border: 1px solid #ccc;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  color: #333;
-}
-
-/* Imagen circular dentro del chip */
-.chip-img {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  margin-right: 10px;
-  object-fit: cover;
-}
-
-/* Efecto Hover */
-.chip:hover {
-  background-color: #e0e0e0;
-  border-color: #999;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-/* Texto */
-.chip-text {
-  font-weight: 500;
-}
-
+        .chip {{ display: inline-flex; align-items: center; cursor: pointer; transition: all 0.3s ease; padding: 5px 15px 5px 5px; border-radius: 50px; background-color: #f1f1f1; border: 1px solid #ccc; font-family: Arial, sans-serif; font-size: 14px; color: #333; }}
+        .chip-img {{ width: 32px; height: 32px; border-radius: 50%; margin-right: 10px; object-fit: cover; }}
+        .chip:hover {{ background-color: #e0e0e0; border-color: #999; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }}
+        .chip-text {{ font-weight: 500; }}
     </style>
     <title>Tech Dashboard</title>
 </head>
