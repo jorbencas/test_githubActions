@@ -1,5 +1,103 @@
 [
     {
+        "titulo": "Reproducci\u00f3n",
+        "enlace": "https://youtube.com/shorts/alasiX8t93c",
+        "id_video": "alasiX8t93c",
+        "fuente": "EDteam",
+        "tipo": "shorts",
+        "ts": "2026-02-27T10:53:45.229392",
+        "f": "27/02"
+    },
+    {
+        "titulo": "Atajos de teclado",
+        "enlace": "https://youtube.com/shorts/udEFaq4Hg4c",
+        "id_video": "udEFaq4Hg4c",
+        "fuente": "EDteam",
+        "tipo": "shorts",
+        "ts": "2026-02-27T10:53:45.046642",
+        "f": "27/02"
+    },
+    {
+        "titulo": "El \u00faltimo giro de guion del 23-F",
+        "enlace": "https://www.levante-emv.com/opinion/2026/02/27/antonio-tejero-23-f-golpe-de-estado-rey-emerito-juan-carlos-i-nunez-feijoo-sanchez-espias-servicios-secretos-javier-cercas-anatomia-de-un-instante-127318279.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-27T10:53:36.531484",
+        "f": "27/02"
+    },
+    {
+        "titulo": "De la FVMP a 'Bruselas': todo el 'mazonismo' encuentra cobijo p\u00fablico tres meses despu\u00e9s",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/02/27/fvmp-bruselas-mazonismo-encuentra-cobijo-127299303.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-27T10:53:36.357512",
+        "f": "27/02"
+    },
+    {
+        "titulo": "La jefa de prensa de Maz\u00f3n: Cuando informamos de las horas de Maz\u00f3n en el Palau lo hicimos con las horas que nos parecieron l\u00f3gicas",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/02/27/jefa-prensa-mazon-informamos-horas-127338060.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-27T10:53:36.192379",
+        "f": "27/02"
+    },
+    {
+        "titulo": "La receta de la universidad para la zona dana",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/02/27/receta-universidad-zona-dana-127317093.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-27T10:53:36.069898",
+        "f": "27/02"
+    },
+    {
+        "titulo": "Centenares de j\u00f3venes hacen cola para inaugurar el Sal\u00f3n del C\u00f3mic 2026",
+        "enlace": "https://www.levante-emv.com/cultura/2026/02/27/centenares-jovenes-cola-inaugurar-salon-127338591.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-27T10:53:35.953497",
+        "f": "27/02"
+    },
+    {
+        "titulo": "Espa\u00f1a persigue la soberan\u00eda espacial con el desarrollo de sus propios cohetes",
+        "enlace": "https://elpais.com/tecnologia/2026-02-27/espana-persigue-la-soberania-espacial-con-el-desarrollo-de-sus-propios-cohetes.html",
+        "fuente": "El Pa\u00eds Tecnolog\u00eda",
+        "tipo": "noticia",
+        "ts": "2026-02-27T10:53:33.313905",
+        "f": "27/02"
+    },
+    {
+        "titulo": "Warner da un giro de 180\u00ba, declara superior la oferta de Paramount y Netflix se retira de la operaci\u00f3n de compra",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/warner-da-un-giro-180o-declara-superior-oferta-paramount-netflix-se-retira-operacion-compra_6939648_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-02-27T10:53:32.470677",
+        "f": "27/02"
+    },
+    {
+        "titulo": "C\u00f3mo ver el Pok\u00e9mon Presents del 30 aniversario de la saga: horario, fecha y qu\u00e9 esperar",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/como-ver-pokemon-presents-30-aniversario-saga-horario-fecha-que-esperar_6939668_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-02-27T10:53:32.347047",
+        "f": "27/02"
+    },
+    {
+        "titulo": "Cr\u00edtica de Scream 7... Lo mismo te hace gritar por los motivos menos esperados",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/critica-scream-7-mismo-te-hace-gritar-por-los-motivos-menos-esperados_6939513_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-02-27T10:53:32.171222",
+        "f": "27/02"
+    },
+    {
+        "titulo": "An\u00e1lisis de Fallout 4 Anniversary Edition para Nintendo Switch 2: otro port muy S.P.E.C.I.A.L.",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/analisis-fallout-4-anniversary-edition-para-nintendo-switch-2-otro-port-muy-s-p-c-i-l_6939308_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-02-27T10:53:32.064312",
+        "f": "27/02"
+    },
+    {
         "titulo": "Atajos de teclado",
         "enlace": "https://youtube.com/shorts/Cvfa_XlKiAQ",
         "id_video": "Cvfa_XlKiAQ",
