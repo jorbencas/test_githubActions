@@ -272,8 +272,9 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
         
         if n.get('id_video'):
             clase = "tipo-shorts" if n.get('tipo') == "shorts" else "tipo-video"
+            fuente_id = n['fuente']
             v_html += f"""
-            <div class="card {clase}">
+            <div class="card {clase}" data-fuente="{fuente_id}">
                 <a href="{n['enlace']}" target="_blank">
                     <img src="https://img.youtube.com/vi/{n['id_video']}/mqdefault.jpg">
                 </a>
@@ -310,7 +311,7 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
                 contenido=resumen_final,
                 lista_enlaces=md_links
             ))
-        print(F"HOLA HOLA HOLA {CONFIG['EMAIL_TO']}")
+        print(F"HOLA HOLA HOLA {CONFIG['MAIL_KEY']}")
         # Enviar Email
         if CONFIG["MAIL_KEY"]:
             try:
