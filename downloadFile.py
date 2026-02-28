@@ -1,5 +1,5 @@
 import os, json, re, requests, asyncio
-from datetime import datetime
+from datetime import datetime, timedelta
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 from mtranslate import translate
@@ -16,6 +16,8 @@ CONFIG = {
     "FOLDER": "files",
     "IS_LOCAL_ENV": os.getenv("IS_LOCAL_ENV")
 }
+
+TECH_KEYWORDS = ['beca', 'curso', 'ayuda', 'formación', 'ia', 'inteligencia artificial', 'empleo', 'software', 'programación', 'valencia', 'albaida', 'tecnología']
 
 FUENTES = {
     "MoureDev": {"url": "https://mouredev.com/blog", "yt": "https://www.youtube.com/@mouredev/videos"},
@@ -65,7 +67,6 @@ HTML_TEMPLATE = """
         .video-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; align-items: start; }}
         .card {{ background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }}
         
-        /* Estilo YouTube Normal */
         .card.tipo-video img {{ width: 100%; aspect-ratio: 16/9; object-fit: cover; background: #000; }}
         /* Estilo YouTube Shorts (Vertical) */
         .card.tipo-shorts {{ max-width: 200px; }}
@@ -94,14 +95,26 @@ HTML_TEMPLATE = """
             color: white;
         }}
 
-        .search-container {{ margin-bottom: 20px; width: 100%; }}
-        #searchInput {{ 
-            width: 100%; padding: 12px 20px; border-radius: 25px; 
-            border: 1px solid #ccc; font-size: 16px; outline: none;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.3s;
-        }}
-        #searchInput:focus {{ border-color: #007bff; box-shadow: 0 2px 8px rgba(0,123,255,0.2); }}
-        .clear-search {{ position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #999; display: none; }}
+
+
+
+         .video-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }}
+        .card {{ background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }}
+        .card img {{ width: 100%; aspect-ratio: 16/9; object-fit: cover; }}
+        .card.tipo-shorts {{ max-width: 200px; }}
+        .card.tipo-shorts img {{ aspect-ratio: 9/16; }}
+        
+        .card-content {{ padding: 12px; }}
+        .meta {{ font-size: 0.75em; color: #65676b; font-weight: bold; text-transform: uppercase; }}
+        .news-list {{ list-style: none; padding: 0; display: grid; gap: 10px; }}
+        .news-item {{ background: white; padding: 15px; border-radius: 8px; border-left: 5px solid #007bff; }}
+        a {{ color: #007bff; text-decoration: none; font-weight: bold; }}
+
+
+
+        .filter-section {{ background: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }}
+        .chip-container {{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }}
+
     </style>
     <title>Tech Dashboard</title>
 </head>
@@ -115,11 +128,19 @@ HTML_TEMPLATE = """
             <h2>🤖 Resumen</h2>
             <p>{resumen}</p>
         </div>
-        <h2>📺 Multimedia (Vídeos y Shorts)</h2>
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="🔍 Buscar por título o fuente..." onkeyup="filtrarTodo()">
-            <span id="clearBtn" class="clear-search" onclick="limpiarBusqueda()">✖</span>
+
+        <div class="filter-section">
+            <strong>📅 Por Tiempo:</strong>
+            <div class="chip-container">{bloque_semanas}</div>
         </div>
+
+        <div class="filter-section">
+            <strong>👤 Por Canal:</strong>
+            <div class="chip-container">{bloque_chips}</div>
+        </div>
+
+
+        <h2>📺 Multimedia (Vídeos y Shorts)</h2>
         {bloque_chips}
         <div class="video-grid">{bloque_videos}</div>
         <h2>📰 Noticias Históricas</h2>
@@ -127,75 +148,43 @@ HTML_TEMPLATE = """
     </div>
 </body>
 <script>
-    function filtrarCanal(canal, elemento) {{
-        const chips = document.querySelectorAll('.chip');
-+       const todosChip = document.querySelector('[data-filtro="all"]');
+    let selSemana = {{ ini: 'all', fin: 'all' }};
+        let selCanal = 'all';
 
-        if (canal === 'all') {{
-            // Si pulsas "Todos", limpiamos el resto
+        function filtrarSemana(el) {{
+            const chips = el.parentElement.querySelectorAll('.chip');
             chips.forEach(c => c.classList.remove('active'));
-            todosChip.classList.add('active');
-        }} else {{
-            // Si pulsas un canal específico:
-            todosChip.classList.remove('active');
-            elemento.classList.toggle('active'); // Activa/Desactiva el chip actual
+            el.classList.add('active');
+            selSemana.ini = el.getAttribute('data-inicio');
+            selSemana.fin = el.getAttribute('data-fin');
+            aplicarFiltros();
         }}
-    
-        // Obtener la lista de canales activos actualmente
-        const activos = Array.from(document.querySelectorAll('.chip.active'))
-                            .map(c => c.getAttribute('data-filtro'))
-                            .filter(f => f !== 'all');
-    
-        // Si no queda ninguno activo, volvemos a marcar "Todos"
-        if (activos.length === 0) {{
-            todosChip.classList.add('active');
+
+        function filtrarCanal(canal, el) {{
+            const chips = el.parentElement.querySelectorAll('.chip');
+            chips.forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            selCanal = canal;
+            aplicarFiltros();
         }}
-    
-        // Filtrar las cards
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {{
-            const fuente = card.getAttribute('data-fuente');
-            console.log(fuente);
-            if (activos.length === 0 || activos.includes(fuente)) {{
-                card.style.display = 'block';
-            }} else {{
-                card.style.display = 'none';
-            }}
-        }});
-        filtrarTodo(); // Llamamos a la función unificada
-    }}
 
-    function filtrarTodo() {{
-        const texto = document.getElementById('searchInput').value.toLowerCase();
-        document.getElementById('clearBtn').style.display = texto ? 'block' : 'none';
-        const activos = Array.from(document.querySelectorAll('.chip.active'))
-                            .map(c => c.getAttribute('data-filtro'))
-                            .filter(f => f !== 'all');
+        function aplicarFiltros() {{
+            document.querySelectorAll('.card, .news-item').forEach(item => {{
+                const itemTS = new Date(item.getAttribute('data-ts'));
+                const itemFuente = item.getAttribute('data-fuente');
 
-        // Filtrar Cards (Vídeos)
-        document.querySelectorAll('.card').forEach(card => {{
-            const titulo = card.querySelector('a:last-child').innerText.toLowerCase();
-            const fuente = card.getAttribute('data-fuente');
-            const coincideTexto = titulo.includes(texto) || fuente.toLowerCase().includes(texto);
-            const coincideFiltro = activos.length === 0 || activos.includes(fuente);
+                const okSemana = (selSemana.ini === 'all') || 
+                                (itemTS >= new Date(selSemana.ini) && itemTS <= new Date(selSemana.fin));
+                const okCanal = (selCanal === 'all') || (itemFuente === selCanal);
 
-            card.style.display = (coincideTexto && coincideFiltro) ? 'block' : 'none';
-        }});
+                item.style.display = (okSemana && okCanal) ? 'block' : 'none';
+            }});
+        }}
 
-        // Filtrar Noticias Históricas
-        document.querySelectorAll('.news-item').forEach(item => {{
-            const contenido = item.innerText.toLowerCase();
-            item.style.display = contenido.includes(texto) ? 'block' : 'none';
-        }});
-    }}
-
-    function limpiarBusqueda() {{
-        document.getElementById('searchInput').value = '';
-        filtrarTodo();
-    }}
-
-
-
+        window.onload = () => {{
+            const activeWeek = document.querySelector('.chip[data-inicio]:not([data-inicio="all"]).active');
+            if(activeWeek) filtrarSemana(activeWeek);
+        }};
 </script>
 </html>
 """
@@ -310,11 +299,23 @@ async def obtener_resumen_ia(noticias):
         return "Resumen no disponible por límite de cuota en la API de Gemini. Consulta los enlaces abajo."
 
 def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
-    fecha_h = datetime.now().strftime("%d/%m/%Y")
-    fecha_pub = datetime.now().strftime("%Y/%m/%d")
-    fecha_iso = datetime.now().strftime("%Y-%m-%d")
+    ahora = datetime.now()
+    fecha_h = ahora.strftime("%d/%m/%Y")
+    fecha_pub = ahora.strftime("%Y/%m/%d")
+    fecha_iso = ahora.strftime("%Y-%m-%d")
     historial.sort(key=lambda x: x.get('ts', ''), reverse=True)
     
+    # --- GENERAR CHIPS DE SEMANAS ---
+    bloque_semanas = ""
+    for i in range(4):
+        inicio = ahora - timedelta(days=ahora.weekday() + (7*i))
+        inicio = inicio.replace(hour=0, minute=0, second=0)
+        fin = inicio + timedelta(days=6, hours=23, minutes=59)
+        clase_activa = "active" if i == 0 else ""
+        txt = f"Semana {inicio.strftime('%d/%m')} - {fin.strftime('%d/%m')}"
+        bloque_semanas += f'<div class="chip {clase_activa}" data-inicio="{inicio.isoformat()}" data-fin="{fin.isoformat()}" onclick="filtrarSemana(this)">{txt}</div>'
+    bloque_semanas += '<div class="chip" data-inicio="all" onclick="filtrarSemana(this)">Historial Completo</div>'
+
     v_html, n_html, email_list, md_links = "", "", "", ""
     resumen_final = resumen_ia if resumen_ia else "Actualización diaria de tecnología."
 
@@ -358,7 +359,7 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
 
     # Guardar HTML
     with open("index.html", "w", encoding="utf-8") as f:
-        f.write(HTML_TEMPLATE.format(fecha_hoy=fecha_h, resumen=resumen_final, bloque_chips=chips_html, bloque_videos=v_html, bloque_noticias=n_html))
+        f.write(HTML_TEMPLATE.format(fecha_hoy=fecha_h, resumen=resumen_final, bloque_semanas=bloque_semanas, bloque_chips=chips_html, bloque_videos=v_html, bloque_noticias=n_html))
 
     # Guardar MD y Email (Solo si hay nuevos)
     is_local = CONFIG["IS_LOCAL_ENV"]
