@@ -1,6 +1,105 @@
 [
     {
         "titulo": "\u00bfQuieres unirte a este canal?",
+        "enlace": "https://youtube.com/shorts/k8Cq4jlmJX0",
+        "id_video": "k8Cq4jlmJX0",
+        "fuente": "Victor Robles",
+        "tipo": "shorts",
+        "ts": "2026-02-28T09:22:18.058115",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Atajos de teclado",
+        "enlace": "https://youtube.com/shorts/x6Tq2bnQ4vo",
+        "id_video": "x6Tq2bnQ4vo",
+        "fuente": "Clipset",
+        "tipo": "shorts",
+        "ts": "2026-02-28T09:22:11.952999",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Ir\u00e1n lanza un misil a la base naval estadounidense en Bar\u00e9in, seg\u00fan prensa iran\u00ed",
+        "enlace": "https://www.levante-emv.com/internacional/2026/02/28/respuesta-iran-ataque-eeuu-israel-ataque-aplastante-127375265.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-28T09:22:03.160399",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Netanyahu: El ataque eliminar\u00e1 la amenaza existencial que supone el r\u00e9gimen iran\u00ed para Israel",
+        "enlace": "https://www.levante-emv.com/internacional/2026/02/28/netanyahu-ataque-eliminara-amenaza-existencial-iran-israel-127375177.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-28T09:22:03.007441",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Trump pide a la poblaci\u00f3n iran\u00ed que est\u00e9 lista para tomar el Gobierno",
+        "enlace": "https://www.levante-emv.com/internacional/2026/02/28/trump-pide-poblacion-irani-lista-tomar-gobierno-127374696.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-28T09:22:02.877576",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Conflicto en Oriente Pr\u00f3ximo, en directo | Guardia Revolucionaria iran\u00ed anuncia primera oleada de misiles y drones conta Israel",
+        "enlace": "https://www.levante-emv.com/internacional/2026/02/28/directo-ultima-hora-conflicto-palestina-93048487.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-28T09:22:02.723494",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Estados Unidos e Israel lanzan un ataque coordinado a gran escala contra Ir\u00e1n",
+        "enlace": "https://www.levante-emv.com/internacional/2026/02/28/israel-lanza-ataque-preventivo-iran-127373869.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-28T09:22:02.579497",
+        "f": "28/02"
+    },
+    {
+        "titulo": "\u00a1Primer vistazo a la serie de God of War de Amazon! As\u00ed son Ryan Hurst como Kratos y Callum Vinson en el papel de Atreus",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/primer-vistazo-serie-god-of-war-amazon-asi-son-ryan-hurst-como-kratos-callum-vinson-papel-atreus_6939999_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-02-28T09:21:59.380876",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Todo lo que se sabe de Silent Hill Townfall y el futuro de la saga de Konami",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/todo-que-se-sabe-silent-hill-townfall-futuro-saga-konami_6938673_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-02-28T09:21:59.219208",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Todas las series de Juego de tronos ordenadas de mejor a peor seg\u00fan la valoraci\u00f3n de los espectadores",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/todas-las-series-juego-tronos-ordenadas-mejor-peor-segun-valoracion-los-espectadores_6938880_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-02-28T09:21:59.068900",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Los mejores juegos de marzo 2026: todos los nuevos lanzamientos de un mes lleno de prometedoras joyas",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/los-mejores-juegos-marzo-2026-todos-los-nuevos-lanzamientos-un-mes-lleno-prometedoras-joyas_6939702_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-02-28T09:21:58.921887",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Novedades de LLM Codex 5.3 y Opus 4.6 - Sesiones UpdateTECH",
+        "enlace": "https://youtube.com/watch?v=nns9mhHGw_g",
+        "id_video": "nns9mhHGw_g",
+        "fuente": "Codigo facilito",
+        "tipo": "video",
+        "ts": "2026-02-28T09:21:35.786367",
+        "f": "28/02"
+    },
+    {
+        "titulo": "\u00bfQuieres unirte a este canal?",
         "enlace": "https://youtube.com/shorts/TcZFJrjxOYQ",
         "id_video": "TcZFJrjxOYQ",
         "fuente": "FreeCodeCamp",
