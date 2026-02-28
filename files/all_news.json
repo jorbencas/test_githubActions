@@ -1,6 +1,132 @@
 [
     {
         "titulo": "\u00bfQuieres unirte a este canal?",
+        "enlace": "https://youtube.com/shorts/Bc4blwgFF-o",
+        "id_video": "Bc4blwgFF-o",
+        "fuente": "FreeCodeCamp",
+        "tipo": "shorts",
+        "ts": "2026-02-28T20:47:39.743008",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Atajos de teclado",
+        "enlace": "https://youtube.com/shorts/BQ6v6b_bmyU",
+        "id_video": "BQ6v6b_bmyU",
+        "fuente": "Fazt",
+        "tipo": "shorts",
+        "ts": "2026-02-28T20:47:38.772490",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Atajos de teclado",
+        "enlace": "https://youtube.com/shorts/WJxpvrl6c6I",
+        "id_video": "WJxpvrl6c6I",
+        "fuente": "EDteam",
+        "tipo": "shorts",
+        "ts": "2026-02-28T20:47:37.690863",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Atajos de teclado",
+        "enlace": "https://youtube.com/shorts/l2dMr8GVOBA",
+        "id_video": "l2dMr8GVOBA",
+        "fuente": "Clipset",
+        "tipo": "shorts",
+        "ts": "2026-02-28T20:47:35.528074",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Del 'no a la guerra' al rap de Resines: 10 galas que han pasado a la historia",
+        "enlace": "https://www.levante-emv.com/cultura/2026/02/24/10-galas-premios-goya-historia-momentos-127228597.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-28T20:47:25.918577",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Los Goya, el reflejo de una desigualdad estructural: 90 nominadas versus 146 nominados",
+        "enlace": "https://www.levante-emv.com/ocio/cine/2026/02/26/goya-reflejo-desigualdad-estructural-90-127312679.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-28T20:47:25.772308",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Alfombra roja de los Premios Goya 2026: los vestidos m\u00e1s espectaculares y otras sorpresas, de Nieves \u00c1lvarez a Laura Escanes y Paula V\u00e1zquez",
+        "enlace": "https://www.levante-emv.com/ocio/cine/2026/02/28/alfombra-roja-premios-goya-2026-nieves-alvarez-laura-escanes-paula-vazquez-127394623.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-28T20:47:25.635507",
+        "f": "28/02"
+    },
+    {
+        "titulo": "\u00bfCu\u00e1nto sabes de los premios Goya? Ponte a prueba con este test",
+        "enlace": "https://www.levante-emv.com/ocio/cine/2026/02/25/premios-goya-ponte-prueba-test-127251664.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-28T20:47:25.476390",
+        "f": "28/02"
+    },
+    {
+        "titulo": "\u00daltima hora de los Goya 2026, en directo | Todo listo para el comienzo de la gala de los Goya 2026",
+        "enlace": "https://www.levante-emv.com/ocio/cine/2026/02/28/gala-premios-goya-2026-directo-127374154.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-28T20:47:25.334800",
+        "f": "28/02"
+    },
+    {
+        "titulo": "El Snyderverse podr\u00eda no estar muerto y Zack Snyder reaviva el sue\u00f1o por el regreso de su Liga de la Justicia",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/snyderverse-podria-no-estar-muerto-zack-snyder-reaviva-sueno-por-regreso-su-liga-justicia_6940176_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-02-28T20:47:21.620751",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Las cartas Pok\u00e9mon vuelven a los ni\u00f1os de Jap\u00f3n y pueden comprarlas otra vez porque su burbuja especulativa ha estallado",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/las-cartas-pokemon-vuelven-los-ninos-japon-pueden-comprarlas-otra-vez-porque-su-burbuja-especulativa-ha-estallado_6940143_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-02-28T20:47:21.483838",
+        "f": "28/02"
+    },
+    {
+        "titulo": "El orden final en que se entregan los Premios Goya este a\u00f1o, y la hora de comienzo",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/orden-final-que-se-entregan-los-premios-goya-este-ano-hora-comienzo_6940049_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-02-28T20:47:21.342683",
+        "f": "28/02"
+    },
+    {
+        "titulo": "7 colecciones de juegos de PS4 y PS5 en oferta entre 5 y 10 euros que, como m\u00ednimo, tienen tres o m\u00e1s juegos y son un aut\u00e9ntico chollo",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/7-colecciones-juegos-ps4-ps5-oferta-entre-5-10-euros-que-como-minimo-tienen-tres-mas-juegos-son-un-autentico-chollo_6940166_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-02-28T20:47:21.197209",
+        "f": "28/02"
+    },
+    {
+        "titulo": "conceptos para crear cualquier sistema MAS PRE ROLL PROXY SELLER",
+        "enlace": "https://youtube.com/watch?v=n_5gu8D30tA",
+        "id_video": "n_5gu8D30tA",
+        "fuente": "Fazt",
+        "tipo": "video",
+        "ts": "2026-02-28T20:47:04.758576",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Xiaomi 17 ULTRA (no LEICA phone) -NO TODO lo nuevo es MEJOR",
+        "enlace": "https://youtube.com/watch?v=57Y8C1uRQ8k",
+        "id_video": "57Y8C1uRQ8k",
+        "fuente": "Clipset",
+        "tipo": "video",
+        "ts": "2026-02-28T20:46:55.564827",
+        "f": "28/02"
+    },
+    {
+        "titulo": "\u00bfQuieres unirte a este canal?",
         "enlace": "https://youtube.com/shorts/k8Cq4jlmJX0",
         "id_video": "k8Cq4jlmJX0",
         "fuente": "Victor Robles",
