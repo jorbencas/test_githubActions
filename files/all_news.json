@@ -1,6 +1,39 @@
 [
     {
         "titulo": "\u00bfQuieres unirte a este canal?",
+        "enlace": "https://youtube.com/shorts/_BkaFgjZmWE",
+        "id_video": "_BkaFgjZmWE",
+        "fuente": "Victor Robles",
+        "tipo": "shorts",
+        "ts": "2026-02-28T23:36:10.510230",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Nagore Aranburu y \u00c1lvaro Cervantes, mejor actriz y actor de reparto",
+        "enlace": "https://www.levante-emv.com/ocio/cine/2026/02/28/nagore-aranburu-alvaro-cervantes-mejor-actriz-actor-reparto-premios-goya-127400105.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-28T23:35:56.184899",
+        "f": "28/02"
+    },
+    {
+        "titulo": "Susan Sarandon recibe el Goya Internacional con una loa a S\u00e1nchez: Vuestra lucidez moral me ayuda, estoy en medio del caos y la represi\u00f3n",
+        "enlace": "https://www.levante-emv.com/ocio/cine/2026/02/28/susan-sarandon-recibe-goya-internacional-127400419.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-28T23:35:56.032284",
+        "f": "28/02"
+    },
+    {
+        "titulo": "La argentina 'Bel\u00e9n' gana el Goya a la mejor pel\u00edcula iberoamericana",
+        "enlace": "https://www.levante-emv.com/ocio/cine/2026/02/28/argentina-belen-gana-goya-mejor-127400839.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-02-28T23:35:55.896396",
+        "f": "28/02"
+    },
+    {
+        "titulo": "\u00bfQuieres unirte a este canal?",
         "enlace": "https://youtube.com/shorts/Bc4blwgFF-o",
         "id_video": "Bc4blwgFF-o",
         "fuente": "FreeCodeCamp",
