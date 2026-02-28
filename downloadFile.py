@@ -129,6 +129,7 @@ HTML_TEMPLATE = """
             <p>{resumen}</p>
         </div>
 
+        
         <div class="filter-section">
             <strong>📅 Por Tiempo:</strong>
             <div class="chip-container">{bloque_semanas}</div>
@@ -139,9 +140,7 @@ HTML_TEMPLATE = """
             <div class="chip-container">{bloque_chips}</div>
         </div>
 
-
         <h2>📺 Multimedia (Vídeos y Shorts)</h2>
-        {bloque_chips}
         <div class="video-grid">{bloque_videos}</div>
         <h2>📰 Noticias Históricas</h2>
         <ul class="news-list">{bloque_noticias}</ul>
@@ -340,12 +339,14 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
     for n in historial[:200]:
         fecha_display = f" | {n['f']}" if n.get('f') else ""
         meta = f"{n['fuente']}{fecha_display}"
-        
+
         if n.get('id_video'):
             clase = "tipo-shorts" if n.get('tipo') == "shorts" else "tipo-video"
             fuente_limpia = n['fuente'].replace(" Shorts", "")
+            ts = n.get('ts', ahora.isoformat())
+
             v_html += f"""
-            <div class="card {clase}" data-fuente="{fuente_limpia}">
+            <div class="card {clase}" data-ts="{ts}"  data-fuente="{fuente_limpia}">
                 <a href="{n['enlace']}" target="_blank">
                     <img src="https://img.youtube.com/vi/{n['id_video']}/mqdefault.jpg">
                 </a>
