@@ -4,7 +4,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/jorbencas/test_githubActions?style=flat-square&logo=git&label=Último%20cambio)
 ![Surge Status](https://img.shields.io/badge/Surge-Live-blue?style=flat-square&logo=vercel)
 
-![Logo de Tecnología](./optimizado/Image.png)
+![Logo de Tecnología](./public/optimizado/Image.png)
 
 Este es un ecosistema automatizado de noticias tech. El sistema no solo recopila información, sino que la procesa mediante **Inteligencia Artificial** para ofrecerte lo más relevante de forma digerida y multicanal.
 
