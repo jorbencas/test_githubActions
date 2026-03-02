@@ -111,7 +111,7 @@ HTML_TEMPLATE = """
         .filter-section {{ background: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }}
         .chip-container {{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }}
 
-        .badge {
+        .badge {{
             display: inline-block;
             padding: 2px 8px;
             border-radius: 4px;
@@ -120,10 +120,9 @@ HTML_TEMPLATE = """
             text-transform: uppercase;
             margin-right: 8px;
             vertical-align: middle;
-        }
-        .badge-tech { background: #e3f2fd; color: #1976d2; border: 1px solid #1976d2; }
-        .badge-beca { background: #e8f5e9; color: #2e7d32; border: 1px solid #2e7d32; }
-        .badge-yt { background: #ffebee; color: #c62828; border: 1px solid #c62828; }
+        }}
+        .badge-tech {{ background: #e3f2fd; color: #1976d2; border: 1px solid #1976d2; }}
+        .badge-beca {{ background: #e8f5e9; color: #2e7d32; border: 1px solid #2e7d32; }}
     </style>
     <title>Tech Dashboard</title>
 </head>
