@@ -1,8 +1,10 @@
 import io
+import locale
 import os, json, re, requests, asyncio
 from datetime import datetime, timedelta
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
+from collections import Counter
 from mtranslate import translate
 from google import genai
 from gtts import gTTS  # Necesitas instalar: pip install gTTS
@@ -10,7 +12,7 @@ from gtts import gTTS  # Necesitas instalar: pip install gTTS
 # --- 1. CONFIGURACIÓN ---
 CONFIG = {
     "BOT_TOKEN": os.getenv("TELEGRAM_BOT_TOKEN"),
-    "CHAT_ID": os.getenv("TELEGRAM_API_ID"),
+    "CHAT_ID": os.getenv("TOKEN_API_ID"),
     "GEMINI_KEY": os.getenv("GEMINI_API_KEY"),
     "MAIL_KEY": os.getenv("MAILGUN_API_KEY"),
     "MAIL_DOMAIN": os.getenv("MAILGUN_DOMAIN"),
@@ -123,6 +125,51 @@ HTML_TEMPLATE = """
         }}
         .badge-tech {{ background: #e3f2fd; color: #1976d2; border: 1px solid #1976d2; }}
         .badge-beca {{ background: #e8f5e9; color: #2e7d32; border: 1px solid #2e7d32; }}
+        .ia-box {{
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 6px solid #8e44ad;
+            margin-bottom: 30px;
+            font-size: 1.05em;
+            color: #34495e;
+        }}
+
+        .ia-box h2 {{
+            margin-top: 0;
+            color: #8e44ad;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }}
+
+        .ia-box b {{
+            color: #2c3e50;
+            background: #f4ecf7;
+            padding: 0 4px;
+            border-radius: 3px;
+        }}
+
+    #selectorSemanas {{
+        transition: all 0.3s ease;
+    }}
+    #selectorSemanas:hover {{
+        background: #f0f7ff;
+        border-color: #0056b3;
+    }}
+    optgroup {{
+        font-weight: bold;
+        color: #333;
+        background: #f8f9fa;
+    }}
+    option {{
+        font-weight: normal;
+        color: #555;
+        background: white;
+    }}
+
+
     </style>
     <title>Tech Dashboard</title>
 </head>
@@ -154,55 +201,129 @@ HTML_TEMPLATE = """
     </div>
 </body>
 <script>
-    let selSemana = {{ ini: 'all', fin: 'all' }};
-        let selCanal = 'all';
+    let selSemana = { tipo: 'all_recent', ini: null, fin: null };
+    let selCanal = 'all';
 
-        function filtrarSemana(el) {{
-            const chips = el.parentElement.querySelectorAll('.chip');
-            chips.forEach(c => c.classList.remove('active'));
-            el.classList.add('active');
-            selSemana.ini = el.getAttribute('data-inicio');
-            selSemana.fin = el.getAttribute('data-fin');
-            aplicarFiltros();
-        }}
+    // Función para los Chips (Reciente)
+    function filtrarSemana(el) {
+        document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        document.getElementById('selectorSemanas').value = 'all'; 
+        el.classList.add('active');
+        
+        if (el.getAttribute('data-inicio') === 'all_recent') {
+            selSemana.tipo = 'all_recent';
+        }
+        aplicarFiltros();
+    }
 
-        function filtrarCanal(canal, el) {{
-            const chips = el.parentElement.querySelectorAll('.chip');
-            chips.forEach(c => c.classList.remove('active'));
-            el.classList.add('active');
-            selCanal = canal;
-            aplicarFiltros();
-        }}
+    // Función para el Selector Agrupado
+    function filtrarDesdeSelector(el) {
+        if (el.value === 'all') {
+            // Si vuelve a la opción por defecto, mostramos "Reciente"
+            selSemana.tipo = 'all_recent';
+            document.querySelector('.chip[data-inicio="all_recent"]').classList.add('active');
+        } else {
+            document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+            const [ini, fin] = el.value.split('|');
+            selSemana.tipo = 'range';
+            selSemana.ini = new Date(ini).getTime();
+            selSemana.fin = new Date(fin).getTime();
+        }
+        aplicarFiltros();
+    }
 
-        function aplicarFiltros() {{
-            document.querySelectorAll('.card, .news-item').forEach(item => {{
-                const itemTS = new Date(item.getAttribute('data-ts'));
-                const itemFuente = item.getAttribute('data-fuente');
+    function aplicarFiltros() {
+        const ahora = new Date().getTime();
+        const limiteReciente = ahora - (14 * 24 * 60 * 60 * 1000); 
 
-                const okSemana = (selSemana.ini === 'all') || 
-                                (itemTS >= new Date(selSemana.ini) && itemTS <= new Date(selSemana.fin));
-                const okCanal = (selCanal === 'all') || (itemFuente === selCanal);
+        document.querySelectorAll('.card, .news-item').forEach(item => {
+            const tsAttr = item.getAttribute('data-ts');
+            if (!tsAttr) return; // Seguridad si falta el atributo
+            
+            const itemTS = new Date(tsAttr).getTime();
+            const itemFuente = item.getAttribute('data-fuente');
 
-                item.style.display = (okSemana && okCanal) ? 'block' : 'none';
-            }});
-        }}
+            let okSemana = false;
+            if (selSemana.tipo === 'all_recent') {
+                okSemana = (itemTS >= limiteReciente);
+            } else if (selSemana.tipo === 'range') {
+                okSemana = (itemTS >= selSemana.ini && itemTS <= selSemana.fin);
+            }
 
-        window.onload = () => {{
-            const activeWeek = document.querySelector('.chip[data-inicio]:not([data-inicio="all"]).active');
-            if(activeWeek) filtrarSemana(activeWeek);
-        }};
+            const okCanal = (selCanal === 'all') || (itemFuente === selCanal);
+            
+            if (okSemana && okCanal) {
+                item.style.display = item.classList.contains('news-item') ? 'list-item' : 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
 </script>
 </html>
 """
 
 EMAIL_TEMPLATE = """
-<div style="font-family: Arial; max-width: 600px; margin: 0 auto; border: 1px solid #eee; padding: 20px;">
-    <h2 style="color: #8e44ad;">🤖 Resumen IA</h2>
-    <p>{contenido}</p>
-    <hr>
-    <h2 style="color: #007bff;">📋 Enlaces del día</h2>
-    <ul>{lista_email}</ul>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualización Tecnológica</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f4f7f9; font-family: Arial, sans-serif;">
+    <div style="display: none; max-height: 0px; overflow: hidden;">
+        Resumen de hoy: {total_noticias} novedades encontradas sobre {temas_clave}...
+    </div>
+
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; background-color: #ffffff; margin: 20px auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+        <tr>
+            <td bgcolor="#1a73e8" style="padding: 40px 20px; text-align: center; border-radius: 10px 10px 0 0;">
+                <h1 style="color: #ffffff; margin: 0; font-size: 26px; letter-spacing: 1px;">Tech Pulse News</h1>
+                <p style="color: #c2e7ff; margin: 10px 0 0 0; font-size: 14px; font-weight: bold;">{fecha_hoy}</p>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="padding: 20px 40px 0 40px;">
+                <table width="100%" style="background: #f8f9fa; border-radius: 8px; padding: 15px; text-align: center;">
+                    <tr>
+                        <td width="33%"> <b style="font-size: 20px; color: #1a73e8;">{count_tech}</b><br><span style="font-size: 12px; color: #666;">Noticias Tech</span> </td>
+                        <td width="33%" style="border-left: 1px solid #ddd; border-right: 1px solid #ddd;"> <b style="font-size: 20px; color: #2e7d32;">{count_becas}</b><br><span style="font-size: 12px; color: #666;">Becas/Ayudas</span> </td>
+                        <td width="33%"> <b style="font-size: 20px; color: #d93025;">{count_vids}</b><br><span style="font-size: 12px; color: #666;">Multimedia</span> </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td style="padding: 30px 40px;">
+                <h2 style="color: #8e44ad; font-size: 18px; margin-bottom: 15px;">🤖 Resumen Inteligente</h2>
+                <div style="line-height: 1.6; color: #3c4043; font-size: 15px; background: #fdf7ff; padding: 20px; border-radius: 8px; border-left: 4px solid #8e44ad;">
+                    {contenido_html}
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td style="padding: 0 40px 40px 40px;">
+                <h2 style="color: #202124; font-size: 18px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;">📋 Selección para ti</h2>
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    {lista_email}
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td style="padding: 20px; text-align: center; background: #f1f3f4; border-radius: 0 0 10px 10px;">
+                <p style="font-size: 12px; color: #70757a; margin: 0;">
+                    Generado automáticamente para Jorge Beneyto.<br>
+                    <a href="http://jorbencasdownloaderdocument.surge.sh" style="color: #1a73e8; text-decoration: none; font-weight: bold;">Acceder al Dashboard Histórico</a>
+                </p>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
 """
 
 MD_TEMPLATE = """---
@@ -340,13 +461,14 @@ async def obtener_resumen_ia(noticias):
             model="gemini-2.5-flash-lite",
             contents=prompt
         )
-        
-        # 5. Retornar el texto generado
-        if response.text:
-            return response.text
-        else:
-            return "La IA devolvió un resumen vacío."
-
+        raw_text = response.text if response.text else "Resumen no disponible."
+        # --- FORMATEO PARA WEB ---
+        # Convertimos Markdown de la IA (**texto**) a HTML (<b>texto</b>)
+        html_text = raw_text.replace("**", "<b>").replace("**", "</b>")
+        # Convertimos saltos de línea dobles en párrafos HTML
+        parrafos = html_text.split("\n\n")
+        resumen_formateado = "".join([f"<p style='margin-bottom:15px; line-height:1.6;'>{p}</p>" for p in parrafos if p.strip()])
+        return resumen_formateado
     except Exception as e:
         # Imprime el error real en tu terminal para saber qué pasa exactamente
         print(f"❌ Error en obtener_resumen_ia: {e}")
@@ -364,15 +486,51 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
     historial.sort(key=lambda x: x.get('ts', ''), reverse=True)
     
     # --- GENERAR CHIPS DE SEMANAS ---
-    bloque_semanas = ""
-    for i in range(4):
+    conteo_meses = Counter()
+    for n in historial:
+        try:
+            # Extraemos el mes y año de la fecha de la noticia (ts)
+            dt_n = datetime.fromisoformat(n.get('ts'))
+            mes_key = dt_n.strftime('%B %Y').capitalize()
+            conteo_meses[mes_key] += 1
+        except: continue
+
+    # --- 2. GENERAR NAVEGACIÓN POR SEMANAS ---
+    try: locale.setlocale(locale.LC_TIME, "es_ES.UTF-8") 
+    except: pass
+
+    # Chip rápido (Últimas 2 semanas)
+    bloque_semanas = '<div class="chip active" data-inicio="all_recent" onclick="filtrarSemana(this)">🔄 Últimas 2 Semanas</div>'
+    
+    selector_html = '<select id="selectorSemanas" onchange="filtrarDesdeSelector(this)" style="padding: 10px 15px; border-radius: 20px; border: 2px solid #007bff; background: white; color: #007bff; font-weight: bold; cursor: pointer; outline: none; margin-left: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">'
+    selector_html += '<option value="all">📅 Archivo Histórico...</option>'
+
+    mes_actual = ""
+    # Recorremos las últimas 26 semanas
+    for i in range(26):
         inicio = ahora - timedelta(days=ahora.weekday() + (7*i))
-        inicio = inicio.replace(hour=0, minute=0, second=0)
-        fin = inicio + timedelta(days=6, hours=23, minutes=59)
-        clase_activa = "active" if i == 0 else ""
-        txt = f"Semana {inicio.strftime('%d/%m')} - {fin.strftime('%d/%m')}"
-        bloque_semanas += f'<div class="chip {clase_activa}" data-inicio="{inicio.isoformat()}" data-fin="{fin.isoformat()}" onclick="filtrarSemana(this)">{txt}</div>'
-    bloque_semanas += '<div class="chip" data-inicio="all" onclick="filtrarSemana(this)">Historial Completo</div>'
+        inicio = inicio.replace(hour=0, minute=0, second=0, microsecond=0)
+        fin = inicio + timedelta(days=6, hours=23, minute=59, second=59)
+        
+        nombre_mes = inicio.strftime('%B %Y').capitalize()
+        
+        # Si cambia el mes, cerramos el grupo anterior y abrimos el nuevo con el CONTADOR
+        if nombre_mes != mes_actual:
+            if mes_actual != "": selector_html += '</optgroup>'
+            total_mes = conteo_meses.get(nombre_mes, 0)
+            selector_html += f'<optgroup label="── {nombre_mes} ({total_mes} ítems) ──">'
+            mes_actual = nombre_mes
+        
+        txt_semana = f"Semana {inicio.strftime('%d/%m/%y')}"
+        val_ini = inicio.isoformat()
+        val_fin = fin.isoformat()
+        
+        selector_html += f'<option value="{val_ini}|{val_fin}">{txt_semana}</option>'
+    
+    selector_html += '</optgroup></select>'
+    
+    # Bloque final para el template
+    bloque_semanas_completo = f'<div class="filter-group" style="display:flex; align-items:center; flex-wrap:wrap; gap:10px;">{bloque_semanas} {selector_html}</div>'
 
     v_html, n_html, email_list, md_links = "", "", "", ""
     resumen_final = resumen_ia if resumen_ia else "Actualización diaria de tecnología."
@@ -398,14 +556,14 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
     for n in historial[:200]:
         fecha_display = f" | {n['f']}" if n.get('f') else ""
         meta = f"{n['fuente']}{fecha_display}"
+        fuente_limpia = n['fuente'].replace(" Shorts", "")
+        ts = n.get('ts', ahora.isoformat())
 
         if n.get('id_video'):
             clase = "tipo-shorts" if n.get('tipo') == "shorts" else "tipo-video"
-            fuente_limpia = n['fuente'].replace(" Shorts", "")
-            ts = n.get('ts', ahora.isoformat())
 
             v_html += f"""
-            <div class="card {clase}" data-ts="{ts}"  data-fuente="{fuente_limpia}">
+            <div class="card {clase}" data-ts="{ts}" data-fuente="{fuente_limpia}">
                 <a href="{n['enlace']}" target="_blank">
                     <img src="https://img.youtube.com/vi/{n['id_video']}/mqdefault.jpg">
                 </a>
@@ -419,11 +577,11 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
             badge_type = n.get('badge', 'Tech')
             badge_class = "badge-beca" if badge_type == "Beca/Ayuda" else "badge-tech"
             if "youtube.com" not in n['enlace'] and "youtu.be" not in n['enlace']:
-                n_html += f'<li class="news-item"><div class="meta">{meta}</div> <span class="badge {badge_class}">{badge_type}</span> <a href="{n["enlace"]}">{n["titulo"]}</a></li>'
+                n_html += f'<li class="news-item" data-ts="{ts}" data-fuente="{fuente_limpia}" ><div class="meta">{meta}</div> <span class="badge {badge_class}">{badge_type}</span> <a href="{n["enlace"]}">{n["titulo"]}</a></li>'
 
     # Guardar HTML
     with open("index.html", "w", encoding="utf-8") as f:
-        f.write(HTML_TEMPLATE.format(fecha_hoy=fecha_h, resumen=resumen_final, bloque_semanas=bloque_semanas, bloque_chips=chips_html, bloque_videos=v_html, bloque_noticias=n_html))
+        f.write(HTML_TEMPLATE.format(fecha_hoy=fecha_h, resumen=resumen_final, bloque_semanas=bloque_semanas_completo, bloque_chips=chips_html, bloque_videos=v_html, bloque_noticias=n_html))
 
     # Guardar MD y Email (Solo si hay nuevos)
     is_local = CONFIG["IS_LOCAL_ENV"]
@@ -447,51 +605,130 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
                 contenido=resumen_final,
                 lista_enlaces=md_links
             ))
+def enviar_email_reporte(resumen_html, nuevos):
+    """Genera y envía el reporte por email con diseño anti-spam y estadísticas."""
+    if not CONFIG["MAIL_KEY"] or not nuevos:
+        return
 
-        # Enviar Email
-        if CONFIG["MAIL_KEY"]:
-            try:
-                requests.post(f"https://api.mailgun.net/v3/{CONFIG['MAIL_DOMAIN']}/messages",
-                    auth=("api", CONFIG["MAIL_KEY"]),
-                    data={
-                        "from": f"Tech Pulse <postmaster@{CONFIG['MAIL_DOMAIN']}>",
-                        "to": [CONFIG["EMAIL_TO"]],
-                        "subject": f"🚀 Reporte Tech {fecha_h}",
-                        "html": EMAIL_TEMPLATE.format(contenido=resumen_final, lista_email=email_list)
-                    })
-            except Exception as e:
-                print(f"⚠️ Error al enviar a email: {e}")
-                pass
+    # 1. Cálculos para el "Minigráfico" de actividad
+    c_tech = len([x for x in nuevos if x.get('badge') == 'Tech'])
+    c_becas = len([x for x in nuevos if x.get('badge') == 'Beca'])
+    c_vids = len([x for x in nuevos if x.get('id_video')])
+    
+    # 2. Construir la lista de noticias en formato tabla HTML
+    filas_noticias = ""
+    for n in nuevos[:15]:  # Limitamos a 15 para no saturar el correo
+        icon = "📺" if n.get('id_video') else ("🎓" if n.get('badge') == "Beca" else "💻")
+        
+        filas_noticias += f"""
+        <tr>
+            <td style="padding: 12px 0; border-bottom: 1px solid #edf2f7;">
+                <span style="font-size: 18px; margin-right: 8px;">{icon}</span>
+                <span style="color: #718096; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">{n['fuente']}</span><br>
+                <a href="{n['enlace']}" style="color: #1a73e8; text-decoration: none; font-weight: 600; font-size: 15px; line-height: 1.4;">{n['titulo']}</a>
+            </td>
+        </tr>
+        """
+
+    # 3. Asunto Dinámico Anti-Spam (basado en la noticia principal)
+    # Evitamos asuntos repetitivos como "Reporte diario" que van directo a SPAM
+    top_titular = nuevos[0]['titulo']
+    asunto = f"🔥 {top_titular[:55]}... y {len(nuevos)-1} más"
+    
+    # Temas clave para el preheader invisible
+    temas_clave = ", ".join(list(set([n['fuente'] for n in nuevos[:3]])))
+
+    # 4. Componer el HTML final
+    html_final = EMAIL_TEMPLATE.format(
+        fecha_hoy=datetime.now().strftime("%d de %B, %Y"),
+        contenido_html=resumen_html,
+        lista_email=filas_noticias,
+        count_tech=c_tech,
+        count_becas=c_becas,
+        count_vids=c_vids,
+        total_noticias=len(nuevos),
+        temas_clave=temas_clave
+    )
+
+    # 5. Envío mediante Mailgun API
+    try:
+        r = requests.post(
+            f"https://api.mailgun.net/v3/{CONFIG['MAIL_DOMAIN']}/messages",
+            auth=("api", CONFIG["MAIL_KEY"]),
+            data={
+                "from": f"Tech Pulse Newsletter <newsletter@{CONFIG['MAIL_DOMAIN']}>",
+                "to": [CONFIG["EMAIL_TO"]],
+                "subject": asunto,
+                "html": html_final
+            }
+        )
+        if r.status_code == 200:
+            print(f"📧 Email enviado con éxito: {asunto}")
+        else:
+            print(f"❌ Error Mailgun ({r.status_code}): {r.text}")
+    except Exception as e:
+        print(f"⚠️ Fallo en el envío de email: {e}")
 
 async def enviar_telegram_con_audio(resumen, nuevos):
     if not CONFIG["BOT_TOKEN"] or not CONFIG["CHAT_ID"]: return
+# 1. Limpiar el resumen HTML para que sea compatible con Markdown de Telegram
+    # Quitamos los tags de párrafo y los convertimos en saltos de línea
+    resumen_md = resumen.replace("<p style='margin-bottom:15px; line-height:1.6;'>", "").replace("</p>", "\n\n")
+    # Convertimos negritas HTML <b> a Markdown *
+    resumen_md = resumen_md.replace("<b>", "*").replace("</b>", "*")
+    fecha_str = datetime.now().strftime('%d/%m')
+    caption = f"🤖 *RESUMEN IA - {fecha_str}*\n"
     
-    # 1. Enviar texto
-    msg = f"🔔 *Novedades Tech {datetime.now().strftime('%d/%m')}*\n\n"
-    for n in nuevos[:8]:
-        # Asignar emoji según badge o tipo
-        if n.get('tipo') in ['video', 'shorts']:
-            icon = "📺"
-        elif n.get('badge') == "Beca":
-            icon = "🎓"
+    # Añadimos el resumen (limitamos a 600 caracteres para dejar espacio a los links)
+    resumen_recortado = (resumen_md[:600] + '...') if len(resumen_md) > 600 else resumen_md
+    caption += f"{resumen_recortado.strip()}\n\n"
+    caption += f"📋 *TOP ENLACES:*\n"
+
+    # 3. Añadir enlaces controlando el espacio restante
+    # Dejamos un margen de seguridad (100 caracteres para el botón y despedida)
+    LIMITE_TELEGRAM = 1024
+    MARGEN_SEGURIDAD = 100
+
+    for n in nuevos[:10]: # Intentamos meter hasta 10
+        if n.get('id_video'): icono = "📺"
+        elif n.get('badge') == "Beca": icono = "🎓"
+        else: icono = "💻"
+        
+        nuevo_item = f"{icono} [{n['fuente']}]({n['enlace']}) "
+        
+        # Si añadir este link supera el límite, paramos
+        if len(caption) + len(nuevo_item) > (LIMITE_TELEGRAM - MARGEN_SEGURIDAD):
+            caption += "\n\n⚠️ _Hay más enlaces en el Dashboard..._"
+            break
         else:
-            icon = "💻"
+            caption += nuevo_item
 
-    for n in nuevos[:6]:
-        msg += f"{icon}🔹 *{n['fuente']}*: {n['titulo']}\n🔗 [Link]({n['enlace']})\n\n"
-    requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendMessage", json={"chat_id": CONFIG["CHAT_ID"], "text": msg, "parse_mode": "Markdown"})
+    url_dashboard = "http://jorbencasdownloaderdocument.surge.sh"     
+    reply_markup = {
+        "inline_keyboard": [[
+            {"text": "🌐 Ver Dashboard Completo", "url": url_dashboard}
+        ]]
+    }
 
-    # 2. Generar AUDIO AL VUELO (sin guardar en disco)
+    # 5. Generar y enviar el AUDIO (TTS)
     try:
-        tts = gTTS(text=resumen, lang='es')
+        # Usamos el texto limpio de Markdown para que la voz no lea los asteriscos
+        texto_para_voz = resumen_md.replace("*", "")
+        tts = gTTS(text=texto_para_voz, lang='es')
         audio_buffer = io.BytesIO()
         tts.write_to_fp(audio_buffer)
         audio_buffer.seek(0) # Resetear puntero al inicio
         
-        # Enviar a Telegram como Voice Note
+        # Enviamos el audio con el caption y el botón
         files = {'voice': ('resumen.mp3', audio_buffer, 'audio/mpeg')}
-        requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice", data={"chat_id": CONFIG["CHAT_ID"]}, files=files)
-        print("✅ Audio enviado a Telegram.")
+        payload={
+            "chat_id": CONFIG["CHAT_ID"], 
+            "caption": caption, 
+            "parse_mode": "Markdown",
+            "reply_markup": json.dumps(reply_markup)
+        }
+        requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice", data=payload, files=files)
+        
     except Exception as e:
         print(f"⚠️ Error TTS/Telegram: {e}")
 
@@ -537,7 +774,8 @@ async def main():
     
     is_local = CONFIG["IS_LOCAL_ENV"]
     if nuevos and not is_local:
-        print(F"HOLA HOLA HOLA {CONFIG['BOT_TOKEN']} HOLA HOLA HOLA {CONFIG['CHAT_ID']}")
+        # Enviar Email
+        enviar_email_reporte(resumen, nuevos)
         # TELEGRAM
         if CONFIG["BOT_TOKEN"] and CONFIG["CHAT_ID"]:
             await enviar_telegram_con_audio(resumen, nuevos)
