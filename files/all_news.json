@@ -1,6 +1,147 @@
 [
     {
         "titulo": "\u00bfQuieres unirte a este canal?",
+        "enlace": "https://youtube.com/shorts/c1Op7YSTwhg",
+        "id_video": "c1Op7YSTwhg",
+        "fuente": "FreeCodeCamp",
+        "tipo": "shorts",
+        "ts": "2026-03-02T09:27:58.705949",
+        "f": "02/03"
+    },
+    {
+        "titulo": "Atajos de teclado",
+        "enlace": "https://youtube.com/shorts/tAKv1BmjRxM",
+        "id_video": "tAKv1BmjRxM",
+        "fuente": "EDteam",
+        "tipo": "shorts",
+        "ts": "2026-03-02T09:27:56.707738",
+        "f": "02/03"
+    },
+    {
+        "titulo": "Atajos de teclado",
+        "enlace": "https://youtube.com/shorts/v0nOvZSoraE",
+        "id_video": "v0nOvZSoraE",
+        "fuente": "Clipset",
+        "tipo": "shorts",
+        "ts": "2026-03-02T09:27:54.746449",
+        "f": "02/03"
+    },
+    {
+        "titulo": "\u00bfQuieres unirte a este canal?",
+        "enlace": "https://youtube.com/shorts/C71PJ-qG4QI",
+        "id_video": "C71PJ-qG4QI",
+        "fuente": "Carlos Azaustre",
+        "tipo": "shorts",
+        "ts": "2026-03-02T09:27:53.723587",
+        "f": "02/03"
+    },
+    {
+        "titulo": "La mitad de los proyectos del Consell para 2025 no han empezado un a\u00f1o despu\u00e9s",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/02/mitad-proyectos-consell-2025-han-127295501.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-03-02T09:27:47.263022",
+        "f": "02/03"
+    },
+    {
+        "titulo": "Los idus propicios de marzo",
+        "enlace": "https://www.levante-emv.com/deportes/2026/03/02/idus-propicios-marzo-paco-lloret-127428385.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-03-02T09:27:47.114211",
+        "f": "02/03"
+    },
+    {
+        "titulo": "El municipalismo valenciano analiza la reconstrucci\u00f3n y los retos de futuro",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/02/26/municipalismo-valenciano-analiza-reconstruccion-retos-127308685.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-03-02T09:27:46.983850",
+        "f": "02/03"
+    },
+    {
+        "titulo": "Directo |  Ra\u00fal M\u00e9rida, comisionado de la Generalitat para la reconstrucci\u00f3n: La dana toco a m\u00e1s de 100 municipios en la provincia de Valencia y afect\u00f3 a m\u00e1s de 800.000 personas",
+        "enlace": "https://www.levante-emv.com/videos/levante-tv/2026/03/02/directo-primera-jornada-iv-foro-127303054.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-03-02T09:27:46.818269",
+        "f": "02/03"
+    },
+    {
+        "titulo": "Joan Romero elaborar\u00e1 las bases del plan director del \u00e1rea metropolitana de Valencia",
+        "enlace": "https://www.levante-emv.com/valencia/2026/03/02/joan-romero-elaborara-bases-plan-director-del-area-metropolitana-127437563.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ts": "2026-03-02T09:27:46.673052",
+        "f": "02/03"
+    },
+    {
+        "titulo": "Entre lo retro y la rob\u00f3tica: as\u00ed mejoran sus c\u00e1maras los m\u00f3viles del MWC",
+        "enlace": "https://elpais.com/tecnologia/2026-03-02/entre-lo-retro-y-la-robotica-asi-mejoran-sus-camaras-los-moviles-del-mwc.html",
+        "fuente": "El Pa\u00eds Tecnolog\u00eda",
+        "tipo": "noticia",
+        "ts": "2026-03-02T09:27:45.596194",
+        "f": "02/03"
+    },
+    {
+        "titulo": "M\u00e1s de 350 cient\u00edficos alertan de la ineficacia y los peligros de verificar la edad en la red",
+        "enlace": "https://elpais.com/tecnologia/2026-03-02/mas-de-350-cientificos-alertan-de-la-ineficacia-y-los-peligros-de-verificar-la-edad-en-la-red.html",
+        "fuente": "El Pa\u00eds Tecnolog\u00eda",
+        "tipo": "noticia",
+        "ts": "2026-03-02T09:27:45.462280",
+        "f": "02/03"
+    },
+    {
+        "titulo": "Capcom aclara qu\u00e9 significa RE Engine, porque no es Resident Evil y todo tiene que ver con su logo y la luna",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/capcom-aclara-que-significa-re-engine-porque-no-es-resident-evil-todo-tiene-que-ver-con-su-logo-luna_6940345_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-03-02T09:27:44.585473",
+        "f": "02/03"
+    },
+    {
+        "titulo": "Las mejores pel\u00edculas y series de estreno (2 - 8 de marzo): de Hoppers a Marshals: Una historia de Yellowstone",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/las-mejores-peliculas-series-estreno-2-8-marzo-hoppers-marshals-una-historia-yellowstone_6939709_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-03-02T09:27:44.438793",
+        "f": "02/03"
+    },
+    {
+        "titulo": "La nueva Xbox tras Series X|S est\u00e1 muerta para un analista, quien cree que Microsoft ya solo piensa en Game Pass",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/nueva-xbox-tras-series-x-s-esta-muerta-para-un-analista-quien-cree-que-microsoft-ya-solo-piensa-game-pass_6940336_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-03-02T09:27:44.293001",
+        "f": "02/03"
+    },
+    {
+        "titulo": "Todo sobre La Odisea de Nolan, el director que se atreve a desafiar a los dioses",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/todo-sobre-odisea-nolan-director-que-se-atreve-desafiar-los-dioses_6939832_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-03-02T09:27:44.146738",
+        "f": "02/03"
+    },
+    {
+        "titulo": "El universo God of War se expandir\u00e1 en 2027 con un nuevo juego protagonizado por Faye y un enfoque m\u00e1s Devil May Cry, seg\u00fan nuevos rumores",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/universo-god-of-war-se-expandira-2027-con-un-nuevo-juego-protagonizado-por-faye-un-enfoque-mas-devil-may-cry-segun-nuevos-rumores_6940495_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ts": "2026-03-02T09:27:44.003231",
+        "f": "02/03"
+    },
+    {
+        "titulo": "C\u00f3digo en la nube + MCP + Habilidades = Desarrollo automatizado",
+        "enlace": "https://youtube.com/watch?v=Lb3c3HuCzYA",
+        "id_video": "Lb3c3HuCzYA",
+        "fuente": "Fazt",
+        "tipo": "video",
+        "ts": "2026-03-02T09:27:34.195471",
+        "f": "02/03"
+    },
+    {
+        "titulo": "\u00bfQuieres unirte a este canal?",
         "enlace": "https://youtube.com/shorts/_BkaFgjZmWE",
         "id_video": "_BkaFgjZmWE",
         "fuente": "Victor Robles",
