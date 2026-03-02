@@ -64,24 +64,16 @@ jobs:
           git config user.email jorbencas@gmail.com
           git pull origin main --rebase
           git add .
-          if ! git diff --cached --quiet; then
-            git commit -m "[bot] Add auto-generated news posts"
-            git push origin main
-          else
-            echo "No hay noticias nuevas, nada que actualizar."
-          fi
+          git diff --quiet && git diff --staged --quiet || git commit -m "[bot] Add auto-generated news posts"
+          git push origin main
       - name: Update Github repo
         if: github.event_name == 'schedule' || github.event_name == 'push'
         run: |
           git config user.name jorbencas
           git config user.email jorbencas@gmail.com
           git add .
-          if ! git diff --cached --quiet; then
-            git commit -m "[bot] update tech news scraping"
-            git push origin master
-          else
-            echo "No hay noticias nuevas, nada que actualizar."
-          fi
+          git diff --quiet && git diff --staged --quiet || git commit -m "[bot] update tech news scraping"
+          git push origin master
       - name: Deploy to jorbencasdownloaderdocument.surge.sh
         run : |
           npx surge . jorbencasdownloaderdocument.surge.sh --token ${{ secrets.SURGE_TOKEN }}
