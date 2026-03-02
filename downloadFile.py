@@ -396,7 +396,7 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
                 contenido=resumen_final,
                 lista_enlaces=md_links
             ))
-        print(F"HOLA HOLA HOLA {CONFIG['MAIL_KEY']}")
+
         # Enviar Email
         if CONFIG["MAIL_KEY"]:
             try:
@@ -432,6 +432,7 @@ async def main():
     
     is_local = CONFIG["IS_LOCAL_ENV"]
     if nuevos and not is_local:
+        print(F"HOLA HOLA HOLA {CONFIG['BOT_TOKEN']} HOLA HOLA HOLA {CONFIG['CHAT_ID']}")
         # TELEGRAM
         if CONFIG["BOT_TOKEN"] and CONFIG["CHAT_ID"]:
             msg = f"🔔 *Novedades Tech {datetime.now().strftime('%d/%m')}*\n\n"
