@@ -1,9 +1,11 @@
+import io
 import os, json, re, requests, asyncio
 from datetime import datetime, timedelta
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 from mtranslate import translate
 from google import genai
+from gtts import gTTS  # Necesitas instalar: pip install gTTS
 
 # --- 1. CONFIGURACIÓN ---
 CONFIG = {
@@ -17,7 +19,9 @@ CONFIG = {
     "IS_LOCAL_ENV": os.getenv("IS_LOCAL_ENV")
 }
 
-TECH_KEYWORDS = ['beca', 'curso', 'ayuda', 'formación', 'ia', 'inteligencia artificial', 'empleo', 'software', 'programación', 'valencia', 'albaida', 'tecnología']
+TECH_KEYWORDS = ['ia', 'inteligencia artificial', 'empleo', 'software', 'programación', 'valencia', 'albaida', 'tecnología']
+BECAS_KEYWORDS = ['beca', 'curso', 'ayuda', 'formación', 'subvención', 'taller']
+ALL_KEYWORDS = TECH_KEYWORDS + BECAS_KEYWORDS
 
 FUENTES = {
     "MoureDev": {"url": "https://mouredev.com/blog", "yt": "https://www.youtube.com/@mouredev/videos"},
@@ -89,13 +93,10 @@ HTML_TEMPLATE = """
             border-color: #0056b3 !important;
             box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
         }}
-        
-        /* Ajuste para que la imagen no se vea rara en el chip activo */
         .chip.active .chip-text {{
             color: white;
         }}
-
-         .video-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }}
+        .video-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }}
         .card {{ background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }}
         .card img {{ width: 100%; aspect-ratio: 16/9; object-fit: cover; }}
         .card.tipo-shorts {{ max-width: 200px; }}
@@ -110,6 +111,19 @@ HTML_TEMPLATE = """
         .filter-section {{ background: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }}
         .chip-container {{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }}
 
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        .badge-tech { background: #e3f2fd; color: #1976d2; border: 1px solid #1976d2; }
+        .badge-beca { background: #e8f5e9; color: #2e7d32; border: 1px solid #2e7d32; }
+        .badge-yt { background: #ffebee; color: #c62828; border: 1px solid #c62828; }
     </style>
     <title>Tech Dashboard</title>
 </head>
@@ -215,14 +229,20 @@ class ScraperPro:
     def __init__(self):
         self.cache_file = os.path.join(CONFIG["FOLDER"], "avatars_cache.json")
         self.avatars = self.cargar_avatars()
+        self.cambios_en_cache = False
 
     def cargar_avatars(self):
         if os.path.exists(self.cache_file):
-            with open(self.cache_file, 'r') as f: return json.load(f)
+            try:
+                with open(self.cache_file, 'r') as f: return json.load(f)
+            except: return {}
         return {}
 
     def guardar_avatars(self):
-        with open(self.cache_file, 'w') as f: json.dump(self.avatars, f)
+        if self.cambios_en_cache:
+            with open(self.cache_file, 'w') as f: 
+                json.dump(self.avatars, f, indent=4)
+            print("💾 Caché de avatares actualizada.")
 
     def obtener_avatar_canal(self, nombre, url_canal):
         # Si ya lo tenemos en caché, no entramos a YouTube
@@ -238,6 +258,7 @@ class ScraperPro:
             if meta_img:
                 url_avatar = meta_img['content']
                 self.avatars[nombre] = url_avatar
+                self.cambios_en_cache = True 
                 return url_avatar
         except: pass
         
@@ -248,32 +269,59 @@ class ScraperPro:
         results = []
         target = info.get("yt") or info.get("url")
         try:
-            r = requests.get(target, timeout=15, headers={'User-Agent': 'Mozilla/5.0'})
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept-Language': 'es-ES,es;q=0.9'
+            }
+            r = requests.get(target, timeout=15, headers=headers)
             if r.status_code != 200: return []
             if "yt" in info:
                 ids = re.findall(r'"videoId":"(.*?)"', r.text)
                 titles = re.findall(r'"title":\{"runs":\[\{"text":"(.*?)"\}\]', r.text)
                 clean_ids = list(dict.fromkeys(ids))
+                # 2. Extraer Títulos (Diferentes patrones según si es /videos o /shorts)
+                # Patrón para videos normales
+                titles_video = re.findall(r'"title":\{"runs":\[\{"text":"(.*?)"\}\]', r.text)
+                # Patrón específico para Shorts (overlayMetadata)
+                titles_shorts = re.findall(r'"overlayMetadata":\{"title":\{"runs":\[\{"text":"(.*?)"\}\]', r.text)
+                
+                # Combinamos o elegimos según el tipo
+                titles = titles_shorts if "shorts" in target.lower() else titles_video
+                
+                # Si fallan ambos, intentamos un patrón genérico de accesibilidad
+                if not titles:
+                    titles = re.findall(r'title="([^"]*)"[^>]*aria-describedby', r.text)
+
                 for t, i in zip(titles[:5], clean_ids[:5]):
                     es_short = "shorts" in target or "Shorts" in nombre
+                    t_clean = t.encode().decode('unicode-escape').replace('"', '')
                     results.append({
-                        "titulo": translate(t.replace('"', ''), 'es'),
+                        "titulo": translate(t_clean, 'es'),
                         "enlace": f"https://youtube.com/shorts/{i}" if es_short else f"https://youtube.com/watch?v={i}",
                         "id_video": i, "fuente": nombre.replace(" Shorts", ""), 
                         "tipo": "shorts" if es_short else "video",
                         "ts": datetime.now().isoformat(), "f": datetime.now().strftime("%d/%m")
                     })
-            else:
+            else:                
                 soup = BeautifulSoup(r.text, 'html.parser')
                 items = soup.select('article h2 a, .post-title a, h3 a, .title a')[:5]
+                
                 for i in items:
                     t_raw = i.get_text(strip=True).replace('"', '')
-                    results.append({
-                        "titulo": translate(t_raw, 'es'),
-                        "enlace": urljoin(target, i.get('href')),
-                        "fuente": nombre, "tipo": "noticia",
-                        "ts": datetime.now().isoformat(), "f": datetime.now().strftime("%d/%m")
-                    })
+                    t_low = t_raw.lower()
+                        
+                    # Comprobamos si coincide con alguna de nuestras keywords totales
+                    if any(key in t_low for key in ALL_KEYWORDS):
+                        # Clasificamos: Si tiene algo de becas, es "Beca", si no "Tech"
+                        categoria = "Beca" if any(k in t_low for k in BECAS_KEYWORDS) else "Tech"
+
+                        results.append({
+                            "titulo": translate(t_raw, 'es'),
+                            "enlace": urljoin(target, i.get('href')),
+                            "fuente": nombre, "tipo": "noticia",
+                            "badge": categoria, # Nueva propiedad
+                            "ts": datetime.now().isoformat(), "f": datetime.now().strftime("%d/%m")
+                        })
         except: pass
         return results
 
@@ -368,7 +416,11 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
                 </div>
             </div>"""
         else:
-            n_html += f'<li class="news-item"><div class="meta">{meta}</div><a href="{n["enlace"]}">{n["titulo"]}</a></li>'
+            # Determinar qué badge poner
+            badge_type = n.get('badge', 'Tech')
+            badge_class = "badge-beca" if badge_type == "Beca/Ayuda" else "badge-tech"
+            if "youtube.com" not in n['enlace'] and "youtu.be" not in n['enlace']:
+                n_html += f'<li class="news-item"><div class="meta">{meta}</div> <span class="badge {badge_class}">{badge_type}</span> <a href="{n["enlace"]}">{n["titulo"]}</a></li>'
 
     # Guardar HTML
     with open("index.html", "w", encoding="utf-8") as f:
@@ -412,6 +464,59 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
                 print(f"⚠️ Error al enviar a email: {e}")
                 pass
 
+async def enviar_telegram_con_audio(resumen, nuevos):
+    if not CONFIG["BOT_TOKEN"] or not CONFIG["CHAT_ID"]: return
+    
+    # 1. Enviar texto
+    msg = f"🔔 *Novedades Tech {datetime.now().strftime('%d/%m')}*\n\n"
+    for n in nuevos[:8]:
+        # Asignar emoji según badge o tipo
+        if n.get('tipo') in ['video', 'shorts']:
+            icon = "📺"
+        elif n.get('badge') == "Beca":
+            icon = "🎓"
+        else:
+            icon = "💻"
+
+    for n in nuevos[:6]:
+        msg += f"{icon}🔹 *{n['fuente']}*: {n['titulo']}\n🔗 [Link]({n['enlace']})\n\n"
+    requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendMessage", json={"chat_id": CONFIG["CHAT_ID"], "text": msg, "parse_mode": "Markdown"})
+
+    # 2. Generar AUDIO AL VUELO (sin guardar en disco)
+    try:
+        tts = gTTS(text=resumen, lang='es')
+        audio_buffer = io.BytesIO()
+        tts.write_to_fp(audio_buffer)
+        audio_buffer.seek(0) # Resetear puntero al inicio
+        
+        # Enviar a Telegram como Voice Note
+        files = {'voice': ('resumen.mp3', audio_buffer, 'audio/mpeg')}
+        requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice", data={"chat_id": CONFIG["CHAT_ID"]}, files=files)
+        print("✅ Audio enviado a Telegram.")
+    except Exception as e:
+        print(f"⚠️ Error TTS/Telegram: {e}")
+
+# --- FUNCIONALIDAD LINK CHECKER ---
+def limpiar_enlaces_rotos(historial):
+    """Verifica los enlaces del histórico y elimina los que devuelven error."""
+    print(f"🧹 Iniciando limpieza de enlaces rotos ({len(historial)} items)...")
+    limpios = []
+    # Solo chequeamos los últimos 50 para no ralentizar demasiado el script, 
+    # o puedes chequear todos si prefieres.
+    for item in historial:
+        try:
+            # Petición HEAD es más rápida que GET porque no descarga el contenido
+            r = requests.head(item['enlace'], timeout=5, headers={'User-Agent': 'Mozilla/5.0'})
+            if r.status_code < 400:
+                limpios.append(item)
+            else:
+                print(f"🗑️ Eliminando enlace roto: {item['titulo']}")
+        except:
+            # Si hay timeout o error de conexión, lo mantenemos por si es error temporal 
+            # o lo eliminamos según prefieras. Aquí lo mantenemos:
+            limpios.append(item)
+    return limpios
+
 async def main():
     scr = ScraperPro()
     datos = []
@@ -424,6 +529,7 @@ async def main():
     nuevos = [n for n in datos if n['enlace'] not in vistos]
     total = nuevos + historial
 
+    total = limpiar_enlaces_rotos(total)
     resumen = await obtener_resumen_ia(nuevos) if nuevos else "Todo al día por ahora."
     publicar_contenidos(total, nuevos, resumen, scr)
 
@@ -435,14 +541,7 @@ async def main():
         print(F"HOLA HOLA HOLA {CONFIG['BOT_TOKEN']} HOLA HOLA HOLA {CONFIG['CHAT_ID']}")
         # TELEGRAM
         if CONFIG["BOT_TOKEN"] and CONFIG["CHAT_ID"]:
-            msg = f"🔔 *Novedades Tech {datetime.now().strftime('%d/%m')}*\n\n"
-            for n in nuevos[:6]:
-                msg += f"🔹 *{n['fuente']}*: {n['titulo']}\n🔗 [Link]({n['enlace']})\n\n"
-            try:               
-                requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendMessage", json={"chat_id": CONFIG["CHAT_ID"], "text": msg, "parse_mode": "Markdown"})
-            except Exception as e:
-                print(f"⚠️ Error al enviar a telegram: {e}")
-                pass
+            await enviar_telegram_con_audio(resumen, nuevos)
 
         with open(archivo_h, 'w') as f: json.dump(total[:600], f, indent=4)
         print(f"✅ {len(nuevos)} noticias nuevas procesadas.")
