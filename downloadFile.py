@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 from mtranslate import translate
-from google.genai import genai 
+from google import genai
 
 # --- 1. CONFIGURACIÓN ---
 CONFIG = {
@@ -282,15 +282,32 @@ async def obtener_resumen_ia(noticias):
     try:
         client = genai.Client(api_key=CONFIG["GEMINI_KEY"])
         texto = ". ".join([f"{n['fuente']}: {n['titulo']}" for n in noticias[:12]])
-        prompt = f"Resume estas noticias tecnológicas en 3 párrafos en español: {texto}"
-        response = client.models.generate_content(
-            model="gemini-2.0-flash",
-            contents=propmt
+        prompt = (
+            "Actúa como un editor de noticias tecnológicas. "
+            "Resume los siguientes titulares en 3 párrafos claros y concisos en español. "
+            f"Aquí tienes las noticias:\n{texto}"
         )
-        return response.text
+
+        # 4. Llamada al modelo 'flash-lite' (El mejor para el Tier Gratuito)
+        response = client.models.generate_content(
+            model="gemini-2.5-flash-lite",
+            contents=prompt
+        )
+        
+        # 5. Retornar el texto generado
+        if response.text:
+            return response.text
+        else:
+            return "La IA devolvió un resumen vacío."
+
     except Exception as e:
-        print(f"⚠️ Error Gemini (Cuota agotada): {e}")
-        return "Resumen no disponible por límite de cuota en la API de Gemini. Consulta los enlaces abajo."
+        # Imprime el error real en tu terminal para saber qué pasa exactamente
+        print(f"❌ Error en obtener_resumen_ia: {e}")
+        
+        # Mensajes amigables según el tipo de error
+        if "429" in str(e):
+            return "Límite de cuota alcanzado. Inténtalo en unos minutos."
+        return "Resumen no disponible en este momento. Revisa los enlaces directos."
 
 def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
     ahora = datetime.now()
