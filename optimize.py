@@ -2,15 +2,16 @@ import hashlib
 import json
 import os
 from PIL import Image
+from pathlib import Path
 
 # Configuración
 directory = "images"  # Carpeta de entrada
-output_dir = "optimizado" # Carpeta de salida
+output_dir = "public/optimizado" # Carpeta de salida
 cache_file = "optimized_cache.json"
 
 # Crear carpetas si no existen
-os.makedirs(output_dir, exist_ok=True)
-
+path = Path(output_dir)
+path.mkdir(parents=True, exist_ok=True)
 # Cargar caché
 try:
     with open(cache_file, "r") as f:

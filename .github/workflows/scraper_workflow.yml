@@ -76,4 +76,4 @@ jobs:
           git push origin master
       - name: Deploy to jorbencasdownloaderdocument.surge.sh
         run : |
-          npx surge . jorbencasdownloaderdocument.surge.sh --token ${{ secrets.SURGE_TOKEN }}
+          npx surge public jorbencasdownloaderdocument.surge.sh --token ${{ secrets.SURGE_TOKEN }}

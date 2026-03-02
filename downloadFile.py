@@ -64,14 +64,14 @@ HTML_TEMPLATE = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="public/style.css">
     <title>Tech Dashboard</title>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>Tech Pulse <small style="font-size: 0.4em; color: #666;">{fecha_hoy}</small></h1>
-            <img src="./optimizado/Image.png" alt="Logo" class="logo">
+            <img src="public/optimizado/Image.png" alt="Logo" class="logo">
         </header>
         <div class="ia-box">
             <h2>🤖 Resumen</h2>
@@ -94,7 +94,7 @@ HTML_TEMPLATE = """
         <ul class="news-list">{bloque_noticias}</ul>
     </div>
 </body>
-<script src="script.js"></script>
+<script src="public/script.js"></script>
 </html>
 """
 
@@ -415,7 +415,7 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
                 n_html += f'<li class="news-item" data-ts="{ts}" data-fuente="{fuente_limpia}" ><div class="meta">{meta}</div> <span class="badge {badge_class}">{badge_type}</span> <a href="{n["enlace"]}">{n["titulo"]}</a></li>'
 
     # Guardar HTML
-    with open("index.html", "w", encoding="utf-8") as f:
+    with open("public/index.html", "w", encoding="utf-8") as f:
         f.write(HTML_TEMPLATE.format(fecha_hoy=fecha_h, resumen=resumen_final, bloque_semanas=bloque_semanas_completo, bloque_chips=chips_html, bloque_videos=v_html, bloque_noticias=n_html))
 
     # Guardar MD y Email (Solo si hay nuevos)
