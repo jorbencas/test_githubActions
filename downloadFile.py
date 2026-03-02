@@ -510,7 +510,7 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
     for i in range(26):
         inicio = ahora - timedelta(days=ahora.weekday() + (7*i))
         inicio = inicio.replace(hour=0, minute=0, second=0, microsecond=0)
-        fin = inicio + timedelta(days=6, hours=23, minute=59, second=59)
+        fin = inicio + timedelta(days=6, hours=23, minutes=59, seconds=59)
         
         nombre_mes = inicio.strftime('%B %Y').capitalize()
         
