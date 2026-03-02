@@ -9,13 +9,11 @@ jobs:
   scrape_and_update:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout repo and Set up Python
         uses: actions/checkout@v3
-        with:
-          ref: master
-      - name: Set up Python
         uses: actions/setup-python@v4
         with:
+          ref: master
           python-version: "3.11"
       - name: Install dependencies
         run: |
