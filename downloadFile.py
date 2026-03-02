@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 from mtranslate import translate
-from google import genai 
+from google.genai as genai 
 
 # --- 1. CONFIGURACIÓN ---
 CONFIG = {
@@ -95,9 +95,6 @@ HTML_TEMPLATE = """
             color: white;
         }}
 
-
-
-
          .video-grid {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }}
         .card {{ background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }}
         .card img {{ width: 100%; aspect-ratio: 16/9; object-fit: cover; }}
@@ -109,8 +106,6 @@ HTML_TEMPLATE = """
         .news-list {{ list-style: none; padding: 0; display: grid; gap: 10px; }}
         .news-item {{ background: white; padding: 15px; border-radius: 8px; border-left: 5px solid #007bff; }}
         a {{ color: #007bff; text-decoration: none; font-weight: bold; }}
-
-
 
         .filter-section {{ background: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }}
         .chip-container {{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }}
@@ -129,7 +124,6 @@ HTML_TEMPLATE = """
             <p>{resumen}</p>
         </div>
 
-        
         <div class="filter-section">
             <strong>📅 Por Tiempo:</strong>
             <div class="chip-container">{bloque_semanas}</div>
@@ -288,9 +282,10 @@ async def obtener_resumen_ia(noticias):
     try:
         client = genai.Client(api_key=CONFIG["GEMINI_KEY"])
         texto = ". ".join([f"{n['fuente']}: {n['titulo']}" for n in noticias[:12]])
+        prompt = f"Resume estas noticias tecnológicas en 3 párrafos en español: {texto}"
         response = client.models.generate_content(
             model="gemini-2.0-flash",
-            contents=f"Resume estas noticias tecnológicas en 3 párrafos en español: {texto}"
+            contents=propmt
         )
         return response.text
     except Exception as e:
