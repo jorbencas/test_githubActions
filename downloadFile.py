@@ -71,7 +71,7 @@ HTML_TEMPLATE = """
     <div class="container">
         <header>
             <h1>Tech Pulse <small style="font-size: 0.4em; color: #666;">{fecha_hoy}</small></h1>
-            <img src="public/optimizado/Image.png" alt="Logo" class="logo">
+            <img src="optimizado/Image.png" alt="Logo" class="logo">
         </header>
         <div class="ia-box">
             <h2>🤖 Resumen</h2>
@@ -94,7 +94,7 @@ HTML_TEMPLATE = """
         <ul class="news-list">{bloque_noticias}</ul>
     </div>
 </body>
-<script src="public/script.js"></script>
+<script src="script.js"></script>
 </html>
 """
 
