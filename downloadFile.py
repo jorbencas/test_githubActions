@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 from mtranslate import translate
-from google.genai as genai 
+from google.genai import genai 
 
 # --- 1. CONFIGURACIÓN ---
 CONFIG = {
