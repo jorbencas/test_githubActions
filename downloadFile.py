@@ -8,7 +8,7 @@ from collections import Counter
 from mtranslate import translate
 from google import genai
 from gtts import gTTS  # Necesitas instalar: pip install gTTS
-from concurrent.futures import ThreadPoolExecutor
+
 
 # --- 1. CONFIGURACIÓN ---
 CONFIG = {
@@ -414,7 +414,12 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
             badge_type = n.get('badge', 'Tech')
             badge_class = "badge-beca" if badge_type == "Beca/Ayuda" else "badge-tech"
             if "youtube.com" not in n['enlace'] and "youtu.be" not in n['enlace']:
-                n_html += f'<li class="news-item" data-ts="{ts}" data-fuente="{fuente_limpia}" ><div class="meta">{meta}</div> <span class="badge {badge_class}">{badge_type}</span> <a href="{n["enlace"]}">{n["titulo"]}</a></li>'
+                n_html += f'''
+                <li class="news-item" data-ts="{ts}" data-fuente="{fuente_limpia}">
+                    <div class="meta">{meta}</div> 
+                    <span class="badge {badge_class}">{badge_type}</span> 
+                    <a href="{n["enlace"]}">{n["titulo"]}</a>
+                </li>'''
 
     # Guardar HTML
     with open("public/index.html", "w", encoding="utf-8") as f:
@@ -461,7 +466,7 @@ def enviar_email_reporte(resumen_html, nuevos):
             <td style="padding: 12px 0; border-bottom: 1px solid #edf2f7;">
                 <span style="font-size: 18px; margin-right: 8px;">{icon}</span>
                 <span style="color: #718096; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">{n['fuente']}</span><br>
-                <a href="{n['enlace']}" style="color: #1a73e8; text-decoration: none; font-weight: 600; font-size: 15px; line-height: 1.4;">{n['titulo']}</a>
+                <a href="{n['enlace']}" target="_blank" style="color: #1a73e8; text-decoration: none; font-weight: 600; font-size: 15px; line-height: 1.4;">{n['titulo']}</a>
             </td>
         </tr>
         """
@@ -500,8 +505,6 @@ def enviar_email_reporte(resumen_html, nuevos):
         )
         if r.status_code == 200:
             print(f"📧 Email enviado con éxito: {asunto}")
-        else:
-            print(f"❌ Error Mailgun ({r.status_code}): {r.text}")
     except Exception as e:
         print(f"⚠️ Fallo en el envío de email: {e}")
 
@@ -563,66 +566,13 @@ async def enviar_telegram_con_audio(resumen, nuevos):
             "parse_mode": "Markdown",
             "reply_markup": json.dumps(reply_markup)
         }
-        requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice", data=payload, files=files)
-        
+        r= requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice", data=payload, files=files)
+        if r.status_code == 200:
+            print(f"🤖 Mensaje telegram enviado con éxito")
     except Exception as e:
         print(f"⚠️ Error TTS/Telegram: {e}")
 
 # --- FUNCIONALIDAD LINK CHECKER ---
-def limpiar_enlaces_rotos(historial):
-    print(f"🧹 Iniciando limpieza de enlaces rotos ({len(historial)} items)...")
-    ahora = datetime.now()
-    limite_antiguedad = ahora - timedelta(days=90) # 3 meses
-    revisar_reciente = ahora - timedelta(days=30)  # No re-revisar si se miró hace poco
-
-    items_a_validar = []
-    items_intactos = []
-
-    for item in historial:
-        # 1. Convertimos la fecha en que se añadió el link
-        # (Asumo que guardas 'fecha_adicion' en formato ISO: YYYY-MM-DD)
-        fecha_adicion = datetime.fromisoformat(item.get('ts', ahora.isoformat()))
-        ultima_verif = item.get('ultima_verificacion')
-        
-        # REGLA: ¿Es un link antiguo (> 3 meses)?
-        es_antiguo = fecha_adicion < limite_antiguedad
-        
-        # REGLA DE CACHÉ: ¿Se revisó hace menos de 30 días?
-        revisado_hace_poco = False
-        if ultima_verif:
-            fecha_v = datetime.fromisoformat(ultima_verif)
-            if ahora - fecha_v < (ahora - revisar_reciente):
-                revisado_hace_poco = True
-
-        # Solo validamos si es antiguo Y no se ha verificado recientemente
-        if es_antiguo and not revisado_hace_poco:
-            items_a_validar.append(item)
-        else:
-            items_intactos.append(item)
-
-    print(f"⏩ Omitiendo {len(items_intactos)} enlaces (son recientes o ya verificados).")
-    print(f"🔍 Validando {len(items_a_validar)} enlaces de más de 2 meses...")
-
-    if not items_a_validar:
-        return historial
-
-    # --- Ejecución rápida con hilos ---
-    def chequear(item):
-        try:
-            r = requests.head(item['enlace'], timeout=8, headers={'User-Agent': 'Mozilla/5.0'}, allow_redirects=True)
-            if r.status_code < 400:
-                item['ultima_verificacion'] = ahora.isoformat()
-                return item
-            else:
-                print(f"❌ Roto [{r.status_code}]: {item['titulo']}")
-                return None # Eliminado por roto
-        except:
-            return item 
-
-    with ThreadPoolExecutor(max_workers=20) as executor:
-        resultados = list(executor.map(chequear, items_a_validar))
-
-    return items_intactos + [r for r in resultados if r is not None]
 
 async def main():
     scr = ScraperPro()
@@ -636,7 +586,6 @@ async def main():
     nuevos = [n for n in datos if n['enlace'] not in vistos]
     total = nuevos + historial
 
-    # total = limpiar_enlaces_rotos(total)
     resumen = await obtener_resumen_ia(nuevos) if nuevos else "Todo al día por ahora."
     publicar_contenidos(total, nuevos, resumen, scr)
 

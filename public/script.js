@@ -25,7 +25,7 @@ function filtrarDesdeSelector(el) {
       .classList.add("active");
   } else {
     document
-      .querySelectorAll("filter-group .chip")
+      .querySelectorAll(".chip")
       .forEach((c) => c.classList.remove("active"));
     const [ini, fin] = el.value.split("|");
     selSemana.tipo = "range";
@@ -65,13 +65,11 @@ function aplicarFiltros() {
   });
 }
 
-
-
-  function filtrarCanal(canal, el) {
-    const chips = el.parentElement.querySelectorAll('.chip');
-    console.log(chips);
-    chips.forEach(c => c.classList.remove('active'));
-    el.classList.add('active');
-    selCanal = canal;
-    aplicarFiltros();
-  }
+function filtrarCanal(canal, el) {
+  const chips = el.parentElement.querySelectorAll(".chip");
+  console.log(chips);
+  chips.forEach((c) => c.classList.remove("active"));
+  el.classList.add("active");
+  selCanal = canal;
+  aplicarFiltros();
+}

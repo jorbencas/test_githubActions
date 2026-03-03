@@ -4,7 +4,7 @@ on:
     branches:
       - "master"
   schedule:
-    - cron: "0 9 * * 6" # Ejecutar los sábados a las 9:00 UTC
+    - cron: "0 7 * * 6" # Ejecutar los sábados a las 9:00 UTC
 jobs:
   scrape_and_update:
     runs-on: ubuntu-latest
@@ -13,14 +13,40 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: master
+      - name: 🕑 Ajuste de Horario (Verano vs Invierno)
+        run: |
+          # Obtenemos el desfase horario actual de Madrid
+          OFFSET=$(TZ="Europe/Madrid" date +%z)
+          echo "Desfase actual con UTC: $OFFSET"
+          
+          if [ "$OFFSET" == "+0100" ]; then
+            echo "Estamos en horario de INVIERNO. Esperando 1 hora para ser las 9:00 AM..."
+            sleep 3600
+          else
+            echo "Estamos en horario de VERANO. Procediendo de inmediato (son las 9:00 AM)."
+          fi
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
+          cache: 'pip'
+      - name: Cache de dependencias de Python
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4 telethon google-genai mtranslate gTTS
+      - name: Update Github repo
+        if: always()
+        run: |
+          git config user.name jorbencas
+          git config user.email jorbencas@gmail.com
+          git pull origin main --rebase
       - name: Optimize Images
         run: |
           pip install Pillow
@@ -41,6 +67,7 @@ jobs:
           repository: jorbencas/blog
           path: blog
           token: ${{ secrets.BLOG_TOKEN }}
+          fetch-depth: 0
       - name: Copy auto-news to blog
         id: news_copied_to_blog_folder # You need an ID to reference it later
         run: |
@@ -67,7 +94,7 @@ jobs:
           git diff --quiet && git diff --staged --quiet || git commit -m "[bot] Add auto-generated news posts"
           git push origin main
       - name: Update Github repo
-        if: github.event_name == 'schedule' || github.event_name == 'push'
+        if: always()
         run: |
           git config user.name jorbencas
           git config user.email jorbencas@gmail.com
