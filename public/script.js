@@ -64,3 +64,13 @@ function aplicarFiltros() {
     }
   });
 }
+
+
+
+  function filtrarCanal(canal, el) {
+    const chips = el.parentEleent.querySelectorAll('.chip');
+    chips.forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    selCanal = canal;
+    aplicarFiltros();
+  }
