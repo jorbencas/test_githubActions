@@ -68,7 +68,7 @@ function aplicarFiltros() {
 
 
   function filtrarCanal(canal, el) {
-    const chips = el.parentEleent.querySelectorAll('.chip');
+    const chips = el.parentElement.querySelectorAll('.chip');
     console.log(chips);
     chips.forEach(c => c.classList.remove('active'));
     el.classList.add('active');
