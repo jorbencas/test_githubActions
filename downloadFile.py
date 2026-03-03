@@ -8,6 +8,7 @@ from collections import Counter
 from mtranslate import translate
 from google import genai
 from gtts import gTTS  # Necesitas instalar: pip install gTTS
+from concurrent.futures import ThreadPoolExecutor
 
 # --- 1. CONFIGURACIÓN ---
 CONFIG = {
@@ -17,8 +18,7 @@ CONFIG = {
     "MAIL_KEY": os.getenv("MAILGUN_API_KEY"),
     "MAIL_DOMAIN": os.getenv("MAILGUN_DOMAIN"),
     "EMAIL_TO": os.getenv("EMAIL_USER"),
-    "FOLDER": "files",
-    "IS_LOCAL_ENV": os.getenv("IS_LOCAL_ENV")
+    "FOLDER": "files"
 }
 
 TECH_KEYWORDS = ['ia', 'inteligencia artificial', 'empleo', 'software', 'programación', 'valencia', 'albaida', 'tecnología']
@@ -255,9 +255,10 @@ class ScraperPro:
                         "enlace": f"https://youtube.com/shorts/{i}" if es_short else f"https://youtube.com/watch?v={i}",
                         "id_video": i, "fuente": nombre.replace(" Shorts", ""), 
                         "tipo": "shorts" if es_short else "video",
+                        "ultima_verificacion" = datetime.now().isoformat(),
                         "ts": datetime.now().isoformat(), "f": datetime.now().strftime("%d/%m")
                     })
-            else:                
+            else:
                 soup = BeautifulSoup(r.text, 'html.parser')
                 items = soup.select('article h2 a, .post-title a, h3 a, .title a')[:5]
                 
@@ -274,6 +275,7 @@ class ScraperPro:
                             "titulo": translate(t_raw, 'es'),
                             "enlace": urljoin(target, i.get('href')),
                             "fuente": nombre, "tipo": "noticia",
+                            "ultima_verificacion" = datetime.now().isoformat()
                             "badge": categoria, # Nueva propiedad
                             "ts": datetime.now().isoformat(), "f": datetime.now().strftime("%d/%m")
                         })
@@ -419,8 +421,7 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
         f.write(HTML_TEMPLATE.format(fecha_hoy=fecha_h, resumen=resumen_final, bloque_semanas=bloque_semanas_completo, bloque_chips=chips_html, bloque_videos=v_html, bloque_noticias=n_html))
 
     # Guardar MD y Email (Solo si hay nuevos)
-    is_local = CONFIG["IS_LOCAL_ENV"]
-    if nuevos and not is_local:
+    if nuevos:
         for n in nuevos:
             md_links += f"- **{n['fuente']}**: [{n['titulo']}]({n['enlace']})\n"
             email_list += f"<li><b>{n['fuente']}</b>: <a href='{n['enlace']}'>{n['titulo']}</a></li>"
@@ -506,7 +507,7 @@ def enviar_email_reporte(resumen_html, nuevos):
 
 async def enviar_telegram_con_audio(resumen, nuevos):
     if not CONFIG["BOT_TOKEN"] or not CONFIG["CHAT_ID"]: return
-# 1. Limpiar el resumen HTML para que sea compatible con Markdown de Telegram
+    # 1. Limpiar el resumen HTML para que sea compatible con Markdown de Telegram
     # Quitamos los tags de párrafo y los convertimos en saltos de línea
     resumen_md = resumen.replace("<p style='margin-bottom:15px; line-height:1.6;'>", "").replace("</p>", "\n\n")
     # Convertimos negritas HTML <b> a Markdown *
@@ -568,25 +569,62 @@ async def enviar_telegram_con_audio(resumen, nuevos):
         print(f"⚠️ Error TTS/Telegram: {e}")
 
 # --- FUNCIONALIDAD LINK CHECKER ---
+
+
 def limpiar_enlaces_rotos(historial):
-    """Verifica los enlaces del histórico y elimina los que devuelven error."""
     print(f"🧹 Iniciando limpieza de enlaces rotos ({len(historial)} items)...")
-    limpios = []
-    # Solo chequeamos los últimos 50 para no ralentizar demasiado el script, 
-    # o puedes chequear todos si prefieres.
+    ahora = datetime.now()
+    limite_antiguedad = ahora - timedelta(days=90) # 3 meses
+    revisar_reciente = ahora - timedelta(days=30)  # No re-revisar si se miró hace poco
+
+    items_a_validar = []
+    items_intactos = []
+
     for item in historial:
+        # 1. Convertimos la fecha en que se añadió el link
+        # (Asumo que guardas 'fecha_adicion' en formato ISO: YYYY-MM-DD)
+        fecha_adicion = datetime.fromisoformat(item.get('ts', ahora.isoformat()))
+        ultima_verif = item.get('ultima_verificacion')
+        
+        # REGLA: ¿Es un link antiguo (> 3 meses)?
+        es_antiguo = fecha_adicion < limite_antiguedad
+        
+        # REGLA DE CACHÉ: ¿Se revisó hace menos de 30 días?
+        revisado_hace_poco = False
+        if ultima_verif:
+            fecha_v = datetime.fromisoformat(ultima_verif)
+            if ahora - fecha_v < (ahora - revisar_reciente):
+                revisado_hace_poco = True
+
+        # Solo validamos si es antiguo Y no se ha verificado recientemente
+        if es_antiguo and not revisado_hace_poco:
+            items_a_validar.append(item)
+        else:
+            items_intactos.append(item)
+
+    print(f"⏩ Omitiendo {len(items_intactos)} enlaces (son recientes o ya verificados).")
+    print(f"🔍 Validando {len(items_a_validar)} enlaces de más de 2 meses...")
+
+    if not items_a_validar:
+        return historial
+
+    # --- Ejecución rápida con hilos ---
+    def chequear(item):
         try:
-            # Petición HEAD es más rápida que GET porque no descarga el contenido
-            r = requests.head(item['enlace'], timeout=5, headers={'User-Agent': 'Mozilla/5.0'})
+            r = requests.head(item['enlace'], timeout=8, headers={'User-Agent': 'Mozilla/5.0'}, allow_redirects=True)
             if r.status_code < 400:
-                limpios.append(item)
+                item['ultima_verificacion'] = ahora.isoformat()
+                return item
             else:
-                print(f"🗑️ Eliminando enlace roto: {item['titulo']}")
+                print(f"❌ Roto [{r.status_code}]: {item['titulo']}")
+                return None # Eliminado por roto
         except:
-            # Si hay timeout o error de conexión, lo mantenemos por si es error temporal 
-            # o lo eliminamos según prefieras. Aquí lo mantenemos:
-            limpios.append(item)
-    return limpios
+            return item 
+
+    with ThreadPoolExecutor(max_workers=20) as executor:
+        resultados = list(executor.map(chequear, items_a_validar))
+
+    return items_intactos + [r for r in resultados if r is not None]
 
 async def main():
     scr = ScraperPro()
@@ -607,8 +645,7 @@ async def main():
     # Guardar la caché de avatares para la próxima vez
     scr.guardar_avatars()
     
-    is_local = CONFIG["IS_LOCAL_ENV"]
-    if nuevos and not is_local:
+    if nuevos:
         # Enviar Email
         enviar_email_reporte(resumen, nuevos)
         # TELEGRAM

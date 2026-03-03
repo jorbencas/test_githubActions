@@ -4,7 +4,7 @@ let selCanal = "all";
 // Función para los Chips (Reciente)
 function filtrarSemana(el) {
   document
-    .querySelectorAll("filter-group .chip")
+    .querySelectorAll(".chip")
     .forEach((c) => c.classList.remove("active"));
   document.getElementById("selectorSemanas").value = "all";
   el.classList.add("active");
