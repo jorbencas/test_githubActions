@@ -569,8 +569,6 @@ async def enviar_telegram_con_audio(resumen, nuevos):
         print(f"⚠️ Error TTS/Telegram: {e}")
 
 # --- FUNCIONALIDAD LINK CHECKER ---
-
-
 def limpiar_enlaces_rotos(historial):
     print(f"🧹 Iniciando limpieza de enlaces rotos ({len(historial)} items)...")
     ahora = datetime.now()
@@ -638,7 +636,7 @@ async def main():
     nuevos = [n for n in datos if n['enlace'] not in vistos]
     total = nuevos + historial
 
-    total = limpiar_enlaces_rotos(total)
+    # total = limpiar_enlaces_rotos(total)
     resumen = await obtener_resumen_ia(nuevos) if nuevos else "Todo al día por ahora."
     publicar_contenidos(total, nuevos, resumen, scr)
 
@@ -649,9 +647,7 @@ async def main():
         # Enviar Email
         enviar_email_reporte(resumen, nuevos)
         # TELEGRAM
-        if CONFIG["BOT_TOKEN"] and CONFIG["CHAT_ID"]:
-            await enviar_telegram_con_audio(resumen, nuevos)
-
+        await enviar_telegram_con_audio(resumen, nuevos)
         with open(archivo_h, 'w') as f: json.dump(total[:600], f, indent=4)
         print(f"✅ {len(nuevos)} noticias nuevas procesadas.")
     else:
