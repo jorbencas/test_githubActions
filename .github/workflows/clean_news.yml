@@ -11,12 +11,10 @@ jobs:
     steps:
       - name: Checkout del repositorio
         uses: actions/checkout@v4
-
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
       # --- CONFIGURACIÓN DE CACHÉ ---
       - name: Cache de dependencias de Python
         uses: actions/cache@v3
@@ -26,20 +24,18 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-
       - name: Instalar dependencias
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Sincronizar con el servidor
+        if: github.event_name == 'schedule'
         run: |
           git config --global user.name "GitHub Action Bot"
           git config --global user.email "actions@github.com"
           git pull origin master --rebase
-
       - name: Ejecutar Script de Limpieza
         run: python clean_news.py
-
       - name: Guardar cambios en el JSON
         run: |
           git add files/all_news.json
