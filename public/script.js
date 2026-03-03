@@ -4,7 +4,7 @@ let selCanal = "all";
 // Función para los Chips (Reciente)
 function filtrarSemana(el) {
   document
-    .querySelectorAll(".chip")
+    .querySelectorAll("filter-group .chip")
     .forEach((c) => c.classList.remove("active"));
   document.getElementById("selectorSemanas").value = "all";
   el.classList.add("active");
@@ -25,7 +25,7 @@ function filtrarDesdeSelector(el) {
       .classList.add("active");
   } else {
     document
-      .querySelectorAll(".chip")
+      .querySelectorAll("filter-group .chip")
       .forEach((c) => c.classList.remove("active"));
     const [ini, fin] = el.value.split("|");
     selSemana.tipo = "range";
@@ -68,7 +68,7 @@ function aplicarFiltros() {
 
 
   function filtrarCanal(canal, el) {
-    const chips = el.parentEleent.querySelectorAll('.chip');
+    const chips = el.parentEleent.querySelectorAll('.filter-container .chip');
     chips.forEach(c => c.classList.remove('active'));
     el.classList.add('active');
     selCanal = canal;
