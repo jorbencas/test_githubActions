@@ -255,7 +255,7 @@ class ScraperPro:
                         "enlace": f"https://youtube.com/shorts/{i}" if es_short else f"https://youtube.com/watch?v={i}",
                         "id_video": i, "fuente": nombre.replace(" Shorts", ""), 
                         "tipo": "shorts" if es_short else "video",
-                        "ultima_verificacion" = datetime.now().isoformat(),
+                        "ultima_verificacion": datetime.now().isoformat(),
                         "ts": datetime.now().isoformat(), "f": datetime.now().strftime("%d/%m")
                     })
             else:
@@ -275,7 +275,7 @@ class ScraperPro:
                             "titulo": translate(t_raw, 'es'),
                             "enlace": urljoin(target, i.get('href')),
                             "fuente": nombre, "tipo": "noticia",
-                            "ultima_verificacion" = datetime.now().isoformat()
+                            "ultima_verificacion": datetime.now().isoformat()
                             "badge": categoria, # Nueva propiedad
                             "ts": datetime.now().isoformat(), "f": datetime.now().strftime("%d/%m")
                         })
