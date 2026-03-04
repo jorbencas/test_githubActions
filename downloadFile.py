@@ -428,6 +428,8 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
     # Guardar MD y Email (Solo si hay nuevos)
     if nuevos:
         nuevos = filtrar_solo_noticias(nuevos)
+        if len(nuevos) == 0:
+            return
         for n in nuevos:
             md_links += f"- **{n['fuente']}**: [{n['titulo']}]({n['enlace']})\n"
             email_list += f"<li><b>{n['fuente']}</b>: <a href='{n['enlace']}'>{n['titulo']}</a></li>"
@@ -457,6 +459,8 @@ def enviar_email_reporte(resumen_html, noticias_texto):
     if not CONFIG["MAIL_KEY"] or not noticias_texto:
         return
     nuevos = filtrar_solo_noticias(noticias_texto)
+    if len(nuevos) == 0:
+        return
     # 1. Cálculos para el "Minigráfico" de actividad
     c_tech = len([x for x in nuevos if x.get('badge') == 'Tech'])
     c_becas = len([x for x in nuevos if x.get('badge') == 'Beca'])
@@ -534,7 +538,8 @@ async def enviar_telegram_con_audio(resumen, noticias_texto):
     # Dejamos un margen de seguridad (100 caracteres para el botón y despedida)
     LIMITE_TELEGRAM = 1024
     MARGEN_SEGURIDAD = 100
-
+    if len(nuevos) == 0:
+        return
     for n in nuevos[:10]: # Intentamos meter hasta 10
         if n.get('id_video'): icono = "📺"
         elif n.get('badge') == "Beca": icono = "🎓"
