@@ -427,6 +427,7 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
 
     # Guardar MD y Email (Solo si hay nuevos)
     if nuevos:
+        nuevos = filtrar_solo_noticias(nuevos)
         for n in nuevos:
             md_links += f"- **{n['fuente']}**: [{n['titulo']}]({n['enlace']})\n"
             email_list += f"<li><b>{n['fuente']}</b>: <a href='{n['enlace']}'>{n['titulo']}</a></li>"
@@ -446,11 +447,16 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
                 contenido=resumen_final,
                 lista_enlaces=md_links
             ))
-def enviar_email_reporte(resumen_html, nuevos):
-    """Genera y envía el reporte por email con diseño anti-spam y estadísticas."""
-    if not CONFIG["MAIL_KEY"] or not nuevos:
-        return
 
+def filtrar_solo_noticias(nuevos):
+    """Retorna solo items que NO sean vídeos ni shorts."""
+    return [n for n in nuevos if n.get('tipo') == 'noticia']
+
+def enviar_email_reporte(resumen_html, noticias_texto):
+    """Genera y envía el reporte por email con diseño anti-spam y estadísticas."""
+    if not CONFIG["MAIL_KEY"] or not noticias_texto:
+        return
+    nuevos = filtrar_solo_noticias(noticias_texto)
     # 1. Cálculos para el "Minigráfico" de actividad
     c_tech = len([x for x in nuevos if x.get('badge') == 'Tech'])
     c_becas = len([x for x in nuevos if x.get('badge') == 'Beca'])
@@ -508,8 +514,9 @@ def enviar_email_reporte(resumen_html, nuevos):
     except Exception as e:
         print(f"⚠️ Fallo en el envío de email: {e}")
 
-async def enviar_telegram_con_audio(resumen, nuevos):
+async def enviar_telegram_con_audio(resumen, noticias_texto):
     if not CONFIG["BOT_TOKEN"] or not CONFIG["CHAT_ID"]: return
+    nuevos = filtrar_solo_noticias(noticias_texto)
     # 1. Limpiar el resumen HTML para que sea compatible con Markdown de Telegram
     # Quitamos los tags de párrafo y los convertimos en saltos de línea
     resumen_md = resumen.replace("<p style='margin-bottom:15px; line-height:1.6;'>", "").replace("</p>", "\n\n")
