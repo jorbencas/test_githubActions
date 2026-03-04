@@ -104,6 +104,15 @@ jobs:
           git add .
           git diff --quiet && git diff --staged --quiet || git commit -m "[bot] update tech news scraping"
           git push origin master
+      - name: Cache Surge
+        id: cache-surge
+        uses: actions/cache@v4
+        with:
+          path: /usr/local/lib/node_modules/surge
+          key: ${{ runner.os }}-surge-v1
+      - name: Install Surge (solo si no hay caché)
+        if: steps.cache-surge.outputs.cache-hit != 'true'
+        run: npm install -g surge
       - name: Deploy to jorbencasdownloaderdocument.surge.sh
         run : |
-          npx surge public jorbencasdownloaderdocument.surge.sh --token ${{ secrets.SURGE_TOKEN }}
+          surge ./public jorbencasdownloaderdocument.surge.sh --token ${{ secrets.SURGE_TOKEN }}
