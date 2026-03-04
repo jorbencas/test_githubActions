@@ -3,9 +3,7 @@ let selCanal = "all";
 
 // Función para los Chips (Reciente)
 function filtrarSemana(el) {
-  document
-    .querySelectorAll(".chip")
-    .forEach((c) => c.classList.remove("active"));
+  el.parentElement.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
   document.getElementById("selectorSemanas").value = "all";
   el.classList.add("active");
 
@@ -20,13 +18,9 @@ function filtrarDesdeSelector(el) {
   if (el.value === "all") {
     // Si vuelve a la opción por defecto, mostramos "Reciente"
     selSemana.tipo = "all_recent";
-    document
-      .querySelector('.chip[data-inicio="all_recent"]')
-      .classList.add("active");
+    document.querySelector('.chip[data-inicio="all_recent"]').classList.add("active");
   } else {
-    document
-      .querySelectorAll(".chip")
-      .forEach((c) => c.classList.remove("active"));
+    el.parentElement.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
     const [ini, fin] = el.value.split("|");
     selSemana.tipo = "range";
     selSemana.ini = new Date(ini).getTime();
