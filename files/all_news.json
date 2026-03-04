@@ -1,5 +1,85 @@
 [
     {
+        "titulo": "La expedici\u00f3n de Valencia Basket ya est\u00e1 en casa: Desde el hotel se escuchaban explosiones",
+        "enlace": "https://www.levante-emv.com/deportes/2026/03/04/junior-valencia-basket-abu-dabi-regreso-127531816.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-04T16:13:40.698373",
+        "badge": "Tech",
+        "ts": "2026-03-04T16:13:40.698378",
+        "f": "04/03"
+    },
+    {
+        "titulo": "Las aerol\u00edneas ajustan rutas para evitar el espacio a\u00e9reo en conflicto: \u00bfC\u00f3mo afecta a tus viajes?",
+        "enlace": "https://www.levante-emv.com/economia/2026/03/04/ruta-aerolineas-empiezan-utilizar-evitar-127534135.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-04T16:13:40.559489",
+        "badge": "Tech",
+        "ts": "2026-03-04T16:13:40.559495",
+        "f": "04/03"
+    },
+    {
+        "titulo": "Lanzamos Xataka Xtra: tu experiencia en Xataka sube de nivel con newsletters exclusivas, sorteos, El Consultorio y m\u00e1s",
+        "enlace": "https://www.xataka.com/xataka-xtra/lanzamos-xataka-xtra-tu-experiencia-xataka-sube-nivel-newsletters-exclusivas-sorteos-consultorio?utm_source=genbeta&utm_medium=network&utm_campaign=repost",
+        "fuente": "Genbeta",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-04T16:13:37.944949",
+        "badge": "Tech",
+        "ts": "2026-03-04T16:13:37.944953",
+        "f": "04/03"
+    },
+    {
+        "titulo": "LED vs MiniLED vs QLED vs OLED: \u00c2\u00bfCu\u00c3\u00a1l es la compra m\u00c3\u00a1s inteligente?",
+        "enlace": "https://youtube.com/watch?v=hlgAuWaXuoU",
+        "id_video": "hlgAuWaXuoU",
+        "fuente": "Xataka",
+        "tipo": "video",
+        "ultima_verificacion": "2026-03-04T16:13:35.817822",
+        "ts": "2026-03-04T16:13:35.817829",
+        "f": "04/03"
+    },
+    {
+        "titulo": "\u00c2\u00bfLa IA est\u00c3\u00a1 Matando la Programaci\u00c3\u00b3n? Esto es lo que me dijeron 100 Programadores...",
+        "enlace": "https://youtube.com/watch?v=G6PO18KlXCM",
+        "id_video": "G6PO18KlXCM",
+        "fuente": "Victor Robles",
+        "tipo": "video",
+        "ultima_verificacion": "2026-03-04T16:13:34.670394",
+        "ts": "2026-03-04T16:13:34.670398",
+        "f": "04/03"
+    },
+    {
+        "titulo": "ATAQUE A AWS EN UAE: \u00c2\u00bfQU\u00c3\u0089 FALL\u00c3\u0093?",
+        "enlace": "https://youtube.com/watch?v=eoB7MRepFf8",
+        "id_video": "eoB7MRepFf8",
+        "fuente": "HolaMundo",
+        "tipo": "video",
+        "ultima_verificacion": "2026-03-04T16:13:33.792586",
+        "ts": "2026-03-04T16:13:33.792590",
+        "f": "04/03"
+    },
+    {
+        "titulo": "Hasta 8 veces m\u00c3\u00a1s r\u00c3\u00a1pido son los nuevos MacBook M5",
+        "enlace": "https://youtube.com/watch?v=B95HNJaK6VI",
+        "id_video": "B95HNJaK6VI",
+        "fuente": "HolaMundo",
+        "tipo": "video",
+        "ultima_verificacion": "2026-03-04T16:13:33.636927",
+        "ts": "2026-03-04T16:13:33.636932",
+        "f": "04/03"
+    },
+    {
+        "titulo": "Combinaciones de teclas",
+        "enlace": "https://youtube.com/watch?v=1D_voSUWuGQ",
+        "id_video": "1D_voSUWuGQ",
+        "fuente": "Midudev",
+        "tipo": "video",
+        "ultima_verificacion": "2026-03-04T16:13:23.823441",
+        "ts": "2026-03-04T16:13:23.823447",
+        "f": "04/03"
+    },
+    {
         "titulo": "El ataque a Ir\u00e1n hace tambalear la log\u00edstica mundial y amenaza con un efecto domin\u00f3 de sobrecostes",
         "enlace": "https://www.levante-emv.com/economia/2026/03/04/ataque-iran-tambalear-logistica-mundial-amenaza-efecto-domino-sobrecostes-127532398.html",
         "fuente": "Levante-EMV",
