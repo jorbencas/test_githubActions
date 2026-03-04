@@ -2,7 +2,7 @@ name: 🧹 Mantenimiento Trimestral (Cleanup)
 on:
   schedule:
     # Día 1 de Enero, Abril, Julio y Octubre a las 00:00 UTC
-    - cron: '0 0 1 1,4,7,10 *'
+    - cron: '0 0 1 */4 *'
   workflow_dispatch:
 
 jobs:
