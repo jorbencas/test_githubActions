@@ -454,7 +454,7 @@ def filtrar_solo_noticias(nuevos):
     """Retorna solo items que NO sean vídeos ni shorts."""
     return [n for n in nuevos if n.get('tipo') == 'noticia']
 
-def enviar_email_reporte(resumen_html, noticias_texto):
+async def enviar_email_reporte(resumen_html, noticias_texto):
     """Genera y envía el reporte por email con diseño anti-spam y estadísticas."""
     if not CONFIG["MAIL_KEY"] or not noticias_texto:
         return
@@ -503,7 +503,7 @@ def enviar_email_reporte(resumen_html, noticias_texto):
 
     # 5. Envío mediante Mailgun API
     try:
-        r = requests.post(
+        r = await requests.post(
             f"https://api.mailgun.net/v3/{CONFIG['MAIL_DOMAIN']}/messages",
             auth=("api", CONFIG["MAIL_KEY"]),
             data={
@@ -519,6 +519,7 @@ def enviar_email_reporte(resumen_html, noticias_texto):
         print(f"⚠️ Fallo en el envío de email: {e}")
 
 async def enviar_telegram_con_audio(resumen, noticias_texto):
+    print(f"chat id: {CONFIG["CHAT_ID"]}")
     if not CONFIG["BOT_TOKEN"] or not CONFIG["CHAT_ID"]: return
     nuevos = filtrar_solo_noticias(noticias_texto)
     # 1. Limpiar el resumen HTML para que sea compatible con Markdown de Telegram
@@ -567,7 +568,8 @@ async def enviar_telegram_con_audio(resumen, noticias_texto):
         texto_para_voz = resumen_md.replace("*", "")
         tts = gTTS(text=texto_para_voz, lang='es')
         audio_buffer = io.BytesIO()
-        tts.write_to_fp(audio_buffer)
+        loop = asyncio.get_event_loop()
+        await loop.run_in_executor(None, tts.write_to_fp, audio_buffer)
         audio_buffer.seek(0) # Resetear puntero al inicio
         
         # Enviamos el audio con el caption y el botón
@@ -578,7 +580,7 @@ async def enviar_telegram_con_audio(resumen, noticias_texto):
             "parse_mode": "Markdown",
             "reply_markup": json.dumps(reply_markup)
         }
-        r= requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice", data=payload, files=files)
+        r = await requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice", data=payload, files=files)
         if r.status_code == 200:
             print(f"🤖 Mensaje telegram enviado con éxito")
     except Exception as e:
@@ -606,7 +608,7 @@ async def main():
     
     if nuevos:
         # Enviar Email
-        enviar_email_reporte(resumen, nuevos)
+        await enviar_email_reporte(resumen, nuevos)
         # TELEGRAM
         await enviar_telegram_con_audio(resumen, nuevos)
         with open(archivo_h, 'w') as f: json.dump(total[:600], f, indent=4)
