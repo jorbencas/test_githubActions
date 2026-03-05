@@ -2,4 +2,4 @@ requests
 beautifulsoup4
 mtranslate
 google-genai
-gTTS
+edge-tts

@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from collections import Counter
 from mtranslate import translate
 from google import genai
-from gtts import gTTS  # Necesitas instalar: pip install gTTS
+import edge_tts
 from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE 
 
 # Auto-añadir secciones de Shorts
@@ -258,7 +258,7 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
                 <li class="news-item" data-ts="{ts}" data-fuente="{fuente_limpia}">
                     <div class="meta">{meta}</div> 
                     <span class="badge {badge_class}">{badge_type}</span> 
-                    <a href="{n["enlace"]}">{n["titulo"]}</a>
+                    <a href="{n["enlace"]}" target="_blank">{n["titulo"]}</a>
                 </li>'''
 
     # Guardar HTML
@@ -352,7 +352,7 @@ def enviar_email_reporte(resumen_html, nuevos):
     except Exception as e:
         print(f"⚠️ Fallo en el envío de email: {e}")
 
-def enviar_telegram_con_audio(resumen, nuevos):
+async def enviar_telegram_con_audio(resumen, nuevos):
     if not CONFIG["BOT_TOKEN"] or not CONFIG["CHAT_ID"]: return
     # 1. Limpiar el resumen HTML para que sea compatible con Markdown de Telegram
     # Quitamos los tags de párrafo y los convertimos en saltos de línea
@@ -386,37 +386,36 @@ def enviar_telegram_con_audio(resumen, nuevos):
         else:
             caption += nuevo_item
 
-    url_dashboard = "http://jorbencasdownloaderdocument.surge.sh"     
-    reply_markup = {
-        "inline_keyboard": [[
-            {"text": "🌐 Ver Dashboard Completo", "url": url_dashboard}
-        ]]
-    }
 
-    # 5. Generar y enviar el AUDIO (TTS)
+    VOZ_ELEGIDA = "es-ES-AlvaroNeural" # Otras: es-ES-ElviraNeural, es-MX-JorgeNeural
+    audio_path = "resumen.mp3"
+
     try:
-        # Usamos el texto limpio de Markdown para que la voz no lea los asteriscos
-        texto_para_voz = resumen_md.replace("*", "")
-        tts = gTTS(text=texto_para_voz, lang='es')
-        audio_buffer = io.BytesIO()
-        tts.write_to_fp(audio_buffer)
-        audio_buffer.seek(0) # Resetear puntero al inicio
+        # Generamos el archivo de audio
+        communicate = edge_tts.Communicate(resumen_recortado, VOZ_ELEGIDA)
+        await communicate.save(audio_path)
+
+        # 4. ENVÍO A TELEGRAM
+        with open(audio_path, "rb") as audio_file:
+            files = {'voice': (audio_path, audio_file, 'audio/mpeg')}
+            payload = {
+                "chat_id": CONFIG["CHAT_ID"], 
+                "caption": caption, 
+                "parse_mode": "Markdown",
+                "reply_markup": json.dumps({
+                    "inline_keyboard": [[{"text": "🌐 Dashboard", "url": "http://jorbencasdownloaderdocument.surge.sh"}]]
+                })
+            }
+            r = requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice", data=payload, files=files)
         
-        # Enviamos el audio con el caption y el botón
-        files = {'voice': ('resumen.mp3', audio_buffer, 'audio/mpeg')}
-        payload={
-            "chat_id": CONFIG["CHAT_ID"], 
-            "caption": caption, 
-            "parse_mode": "Markdown",
-            "reply_markup": json.dumps(reply_markup)
-        }
-        r= requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice", data=payload, files=files)
-        if r.status_code == 200:
-            print(f"🤖 Mensaje telegram enviado con éxito")
-        else: 
-            print(f"❌ Error Telegram: {r.text}")
+        # Limpieza: Borramos el archivo temporal
+        if os.path.exists(audio_path): os.remove(audio_path)
+        
+        if r.status_code == 200: print("✅ Telegram con voz humana enviado")
+        else: print(f"❌ Error Telegram: {r.text}")
+
     except Exception as e:
-        print(f"⚠️ Error TTS/Telegram: {e}")
+        print(f"⚠️ Error en TTS Humano: {e}")
 
 # --- FUNCIONALIDAD LINK CHECKER ---
 async def main():
@@ -441,7 +440,7 @@ async def main():
         noticias_texto_nuevas = filtrar_solo_noticias(nuevos)
         if len(noticias_texto_nuevas) > 0:
             enviar_email_reporte(resumen, noticias_texto_nuevas)
-            enviar_telegram_con_audio(resumen, noticias_texto_nuevas)
+            await enviar_telegram_con_audio(resumen, noticias_texto_nuevas)
         with open(archivo_h, 'w') as f: json.dump(total[:600], f, indent=4)
         print(f"✅ {len(nuevos)} noticias nuevas procesadas.")
     else:
