@@ -593,7 +593,6 @@ def enviar_telegram_con_audio(resumen, noticias_texto):
         print(f"⚠️ Error TTS/Telegram: {e}")
 
 # --- FUNCIONALIDAD LINK CHECKER ---
-
 async def main():
     scr = ScraperPro()
     datos = []
