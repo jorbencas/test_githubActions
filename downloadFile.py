@@ -209,7 +209,7 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
     # Bloque final para el template
     bloque_semanas_completo = f'<div class="filter-group" style="display:flex; align-items:center; flex-wrap:wrap; gap:10px;">{bloque_semanas} {selector_html}</div>'
 
-    v_html, n_html, md_links = "", "", "", ""
+    v_html, n_html, md_links = "", "", ""
     resumen_final = resumen_ia if resumen_ia else "Actualización diaria de tecnología."
 
     # --- GENERAR CHIPS DE FILTRADO ---
