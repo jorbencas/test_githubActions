@@ -605,17 +605,17 @@ async def main():
     publicar_contenidos(total, nuevos, resumen, scr)
 
     # Guardar la caché de avatares para la próxima vez
-    scr.guardar_avatars()
+    #scr.guardar_avatars()
     
-    if nuevos:
+    #  if nuevos:
         # Enviar Email
-        enviar_email_reporte(resumen, nuevos)
+        # enviar_email_reporte(resumen, nuevos)
         # TELEGRAM
-        enviar_telegram_con_audio(resumen, nuevos)
-        with open(archivo_h, 'w') as f: json.dump(total[:600], f, indent=4)
-        print(f"✅ {len(nuevos)} noticias nuevas procesadas.")
-    else:
-        print("☕ Sin cambios hoy.")
+    enviar_telegram_con_audio(resumen, historial)
+        # with open(archivo_h, 'w') as f: json.dump(total[:600], f, indent=4)
+    print(f"✅ {len(nuevos)} noticias nuevas procesadas.")
+    # else:
+    #   print("☕ Sin cambios hoy.")
 
 if __name__ == "__main__":
     asyncio.run(main())
