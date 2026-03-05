@@ -542,8 +542,7 @@ def enviar_telegram_con_audio(resumen, noticias_texto):
     if len(nuevos) == 0:
         return
     for n in nuevos[:10]: # Intentamos meter hasta 10
-        if n.get('id_video'): icono = "📺"
-        elif n.get('badge') == "Beca": icono = "🎓"
+        if n.get('badge') == "Beca": icono = "🎓"
         else: icono = "💻"
         
         nuevo_item = f"{icono} [{n['fuente']}]({n['enlace']}) "
