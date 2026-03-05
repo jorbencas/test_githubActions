@@ -209,7 +209,7 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
     # Bloque final para el template
     bloque_semanas_completo = f'<div class="filter-group" style="display:flex; align-items:center; flex-wrap:wrap; gap:10px;">{bloque_semanas} {selector_html}</div>'
 
-    v_html, n_html, email_list, md_links = "", "", "", ""
+    v_html, n_html, md_links = "", "", "", ""
     resumen_final = resumen_ia if resumen_ia else "Actualización diaria de tecnología."
 
     # --- GENERAR CHIPS DE FILTRADO ---
@@ -269,7 +269,6 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
     if nuevos:
         for n in nuevos:
             md_links += f"- **{n['fuente']}**: [{n['titulo']}]({n['enlace']})\n"
-            #email_list += f"<li><b>{n['fuente']}</b>: <a href='{n['enlace']}'>{n['titulo']}</a></li>"
         
         # Guardar MD
         slug = f"reporte-{fecha_iso}"
