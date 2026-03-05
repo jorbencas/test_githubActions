@@ -538,7 +538,6 @@ def enviar_telegram_con_audio(resumen, noticias_texto):
     # Dejamos un margen de seguridad (100 caracteres para el botón y despedida)
     LIMITE_TELEGRAM = 1024
     MARGEN_SEGURIDAD = 100
-    print(f"chat id: {nuevos}")
 
     if len(nuevos) == 0:
         return
@@ -581,7 +580,13 @@ def enviar_telegram_con_audio(resumen, noticias_texto):
             "parse_mode": "Markdown",
             "reply_markup": json.dumps(reply_markup)
         }
-        r = requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice", data=payload, files=files)
+        test = {
+            "data":payload, 
+            "files":files
+        }
+
+        print(f"chat id: {test}")
+        r = requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice", test)
         if r.status_code == 200:
             print(f"🤖 Mensaje telegram enviado con éxito")
     except Exception as e:
