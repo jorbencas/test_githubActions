@@ -454,7 +454,7 @@ def filtrar_solo_noticias(nuevos):
     """Retorna solo items que NO sean vídeos ni shorts."""
     return [n for n in nuevos if n.get('tipo') == 'noticia']
 
- def enviar_email_reporte(resumen_html, noticias_texto):
+def enviar_email_reporte(resumen_html, noticias_texto):
     """Genera y envía el reporte por email con diseño anti-spam y estadísticas."""
     if not CONFIG["MAIL_KEY"] or not noticias_texto:
         return
@@ -518,7 +518,7 @@ def filtrar_solo_noticias(nuevos):
     except Exception as e:
         print(f"⚠️ Fallo en el envío de email: {e}")
 
- def enviar_telegram_con_audio(resumen, noticias_texto):
+def enviar_telegram_con_audio(resumen, noticias_texto):
     print(f"chat id: {CONFIG['CHAT_ID']}")
     if not CONFIG["BOT_TOKEN"] or not CONFIG["CHAT_ID"]: return
     nuevos = filtrar_solo_noticias(noticias_texto)
@@ -569,7 +569,7 @@ def filtrar_solo_noticias(nuevos):
         tts = gTTS(text=texto_para_voz, lang='es')
         audio_buffer = io.BytesIO()
         loop = asyncio.get_event_loop()
-        await loop.run_in_executor(None, tts.write_to_fp, audio_buffer)
+        loop.run_in_executor(None, tts.write_to_fp, audio_buffer)
         audio_buffer.seek(0) # Resetear puntero al inicio
         
         # Enviamos el audio con el caption y el botón
