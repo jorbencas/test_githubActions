@@ -519,7 +519,6 @@ def enviar_email_reporte(resumen_html, noticias_texto):
         print(f"⚠️ Fallo en el envío de email: {e}")
 
 def enviar_telegram_con_audio(resumen, noticias_texto):
-    print(f"chat id: {CONFIG['CHAT_ID']}")
     if not CONFIG["BOT_TOKEN"] or not CONFIG["CHAT_ID"]: return
     nuevos = filtrar_solo_noticias(noticias_texto)
     # 1. Limpiar el resumen HTML para que sea compatible con Markdown de Telegram
@@ -539,6 +538,8 @@ def enviar_telegram_con_audio(resumen, noticias_texto):
     # Dejamos un margen de seguridad (100 caracteres para el botón y despedida)
     LIMITE_TELEGRAM = 1024
     MARGEN_SEGURIDAD = 100
+    print(f"chat id: {nuevos}")
+
     if len(nuevos) == 0:
         return
     for n in nuevos[:10]: # Intentamos meter hasta 10
