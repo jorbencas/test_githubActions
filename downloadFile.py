@@ -503,7 +503,7 @@ async def enviar_email_reporte(resumen_html, noticias_texto):
 
     # 5. Envío mediante Mailgun API
     try:
-        r = await requests.post(
+        r = requests.post(
             f"https://api.mailgun.net/v3/{CONFIG['MAIL_DOMAIN']}/messages",
             auth=("api", CONFIG["MAIL_KEY"]),
             data={
@@ -580,7 +580,7 @@ async def enviar_telegram_con_audio(resumen, noticias_texto):
             "parse_mode": "Markdown",
             "reply_markup": json.dumps(reply_markup)
         }
-        r = await requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice", data=payload, files=files)
+        r = requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice", data=payload, files=files)
         if r.status_code == 200:
             print(f"🤖 Mensaje telegram enviado con éxito")
     except Exception as e:
@@ -608,9 +608,9 @@ async def main():
     
     if nuevos:
         # Enviar Email
-        await enviar_email_reporte(resumen, nuevos)
+        enviar_email_reporte(resumen, nuevos)
         # TELEGRAM
-        await enviar_telegram_con_audio(resumen, nuevos)
+        enviar_telegram_con_audio(resumen, nuevos)
         with open(archivo_h, 'w') as f: json.dump(total[:600], f, indent=4)
         print(f"✅ {len(nuevos)} noticias nuevas procesadas.")
     else:
