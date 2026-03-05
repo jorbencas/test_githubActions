@@ -1,5 +1,35 @@
 [
     {
+        "titulo": "La borrasca Regina deja ya precipitaciones de m\u00e1s de 70 l/m2 en la Safor, la Vall d'Albaida, la Marina y la Costera",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/05/borrasca-regina-deja-precipitaciones-70-l-m2-la-safor-la-marina-la-costera-la-vall-127594114.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-05T15:40:24.300057",
+        "badge": "Tech",
+        "ts": "2026-03-05T15:40:24.300068",
+        "f": "05/03"
+    },
+    {
+        "titulo": "Cinco magistrados, en lugar de tres, de la sala de lo Civil y lo Penal del TSJCV decidir\u00e1n el futuro judicial de Carlos Maz\u00f3n",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/05/cinco-magistrados-de-la-sala-de-lo-civil-y-lo-penal-del-tsjcv-decidiran-el-futuro-judicial-de-carlos-mazon-127595341.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-05T15:40:23.904474",
+        "badge": "Tech",
+        "ts": "2026-03-05T15:40:23.904483",
+        "f": "05/03"
+    },
+    {
+        "titulo": "Aprenda MLOps con MLflow y Databricks: curso completo para ingenieros de aprendizaje autom\u00e1tico",
+        "enlace": "https://youtube.com/watch?v=tVskbekONlw",
+        "id_video": "tVskbekONlw",
+        "fuente": "FreeCodeCamp",
+        "tipo": "video",
+        "ultima_verificacion": "2026-03-05T15:40:12.719985",
+        "ts": "2026-03-05T15:40:12.719995",
+        "f": "05/03"
+    },
+    {
         "titulo": "Aemet activa un cu\u00e1druple aviso en la C. Valenciana por la borrasca Regina: lluvias persistentes y olas de m\u00e1s de 3 metros",
         "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/05/aviso-aemet-lluvia-comunitat-valenciana-tiempo-hoy-manana-127591083.html",
         "fuente": "Levante-EMV",
