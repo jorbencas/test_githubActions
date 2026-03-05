@@ -8,44 +8,7 @@ from collections import Counter
 from mtranslate import translate
 from google import genai
 from gtts import gTTS  # Necesitas instalar: pip install gTTS
-
-
-# --- 1. CONFIGURACIÓN ---
-CONFIG = {
-    "BOT_TOKEN": os.getenv("TELEGRAM_BOT_TOKEN"),
-    "CHAT_ID": os.getenv("TOKEN_API_ID"),
-    "GEMINI_KEY": os.getenv("GEMINI_API_KEY"),
-    "MAIL_KEY": os.getenv("MAILGUN_API_KEY"),
-    "MAIL_DOMAIN": os.getenv("MAILGUN_DOMAIN"),
-    "EMAIL_TO": os.getenv("EMAIL_USER"),
-    "FOLDER": "files"
-}
-
-TECH_KEYWORDS = ['ia', 'inteligencia artificial', 'empleo', 'software', 'programación', 'valencia', 'albaida', 'tecnología']
-BECAS_KEYWORDS = ['beca', 'curso', 'ayuda', 'formación', 'subvención', 'taller']
-ALL_KEYWORDS = TECH_KEYWORDS + BECAS_KEYWORDS
-
-FUENTES = {
-    "MoureDev": {"url": "https://mouredev.com/blog", "yt": "https://www.youtube.com/@mouredev/videos"},
-    "Pelado Nerd": {"yt": "https://www.youtube.com/@PeladoNerd/videos"},
-    "Midudev": {"yt": "https://www.youtube.com/@midudev/videos"},
-    "Codigo facilito": {"yt": "https://www.youtube.com/@codigofacilito/videos"},
-    "Carlos Azaustre": {"yt": "https://www.youtube.com/@CarlosAzaustre/videos"},
-    "Clipset": {"yt": "https://www.youtube.com/@clipset/videos"},
-    "CodelyTV": {"yt": "https://www.youtube.com/@CodelyTV/videos"},
-    "EDteam": {"yt": "https://www.youtube.com/@EDteam/videos"},
-    "Fazt": {"yt": "https://www.youtube.com/@FaztTech/videos"},
-    "FreeCodeCamp": {"yt": "https://www.youtube.com/@freecodecamp/videos"},
-    "HolaMundo": {"yt": "https://www.youtube.com/@holamundodev/videos"},
-    "Victor Robles": {"yt": "https://www.youtube.com/@victorroblesweb/videos"},
-    "Xataka": {"url": "https://www.xataka.com/", "yt":"https://www.youtube.com/@xatakatv/videos"},
-    "Becas": {"url": "https://www.becas.com/noticias/"},
-    "Genbeta": {"url":"https://www.genbeta.com/"},
-    "HobbyConsolas": {"url": "https://www.hobbyconsolas.com/"},
-    "El País Tecnología": {"url": "https://elpais.com/tecnologia/"},
-    "Levante-EMV": {"url": "https://www.levante-emv.com/"},
-    "Fundación Carolina": {"url": "https://www.fundacioncarolina.es/"},
-}
+from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE 
 
 # Auto-añadir secciones de Shorts
 for nombre in list(FUENTES): # Usamos list() para poder modificar el dict mientras iteramos
@@ -56,130 +19,7 @@ for nombre in list(FUENTES): # Usamos list() para poder modificar el dict mientr
 os.makedirs(CONFIG["FOLDER"], exist_ok=True)
 os.makedirs("./auto-news", exist_ok=True)
 
-# --- 2. PLANTILLAS ---
-
-HTML_TEMPLATE = """
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Tech Dashboard</title>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Tech Pulse <small style="font-size: 0.4em; color: #666;">{fecha_hoy}</small></h1>
-            <img src="optimizado/Image.png" alt="Logo" class="logo">
-        </header>
-        <div class="ia-box">
-            <h2>🤖 Resumen</h2>
-            <p>{resumen}</p>
-        </div>
-
-        <div class="filter-section">
-            <strong>📅 Por Tiempo:</strong>
-            <div class="chip-container">{bloque_semanas}</div>
-        </div>
-
-        <div class="filter-section">
-            <strong>👤 Por Canal:</strong>
-            <div class="chip-container">{bloque_chips}</div>
-        </div>
-
-        <h2>📺 Multimedia (Vídeos y Shorts)</h2>
-        <div class="video-grid">{bloque_videos}</div>
-        <h2>📰 Noticias Históricas</h2>
-        <ul class="news-list">{bloque_noticias}</ul>
-    </div>
-</body>
-<script src="script.js"></script>
-</html>
-"""
-
-EMAIL_TEMPLATE = """
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actualización Tecnológica</title>
-</head>
-<body style="margin: 0; padding: 0; background-color: #f4f7f9; font-family: Arial, sans-serif;">
-    <div style="display: none; max-height: 0px; overflow: hidden;">
-        Resumen de hoy: {total_noticias} novedades encontradas sobre {temas_clave}...
-    </div>
-
-    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; background-color: #ffffff; margin: 20px auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-        <tr>
-            <td bgcolor="#1a73e8" style="padding: 40px 20px; text-align: center; border-radius: 10px 10px 0 0;">
-                <h1 style="color: #ffffff; margin: 0; font-size: 26px; letter-spacing: 1px;">Tech Pulse News</h1>
-                <p style="color: #c2e7ff; margin: 10px 0 0 0; font-size: 14px; font-weight: bold;">{fecha_hoy}</p>
-            </td>
-        </tr>
-        
-        <tr>
-            <td style="padding: 20px 40px 0 40px;">
-                <table width="100%" style="background: #f8f9fa; border-radius: 8px; padding: 15px; text-align: center;">
-                    <tr>
-                        <td width="33%"> <b style="font-size: 20px; color: #1a73e8;">{count_tech}</b><br><span style="font-size: 12px; color: #666;">Noticias Tech</span> </td>
-                        <td width="33%" style="border-left: 1px solid #ddd; border-right: 1px solid #ddd;"> <b style="font-size: 20px; color: #2e7d32;">{count_becas}</b><br><span style="font-size: 12px; color: #666;">Becas/Ayudas</span> </td>
-                        <td width="33%"> <b style="font-size: 20px; color: #d93025;">{count_vids}</b><br><span style="font-size: 12px; color: #666;">Multimedia</span> </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-
-        <tr>
-            <td style="padding: 30px 40px;">
-                <h2 style="color: #8e44ad; font-size: 18px; margin-bottom: 15px;">🤖 Resumen Inteligente</h2>
-                <div style="line-height: 1.6; color: #3c4043; font-size: 15px; background: #fdf7ff; padding: 20px; border-radius: 8px; border-left: 4px solid #8e44ad;">
-                    {contenido_html}
-                </div>
-            </td>
-        </tr>
-
-        <tr>
-            <td style="padding: 0 40px 40px 40px;">
-                <h2 style="color: #202124; font-size: 18px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;">📋 Selección para ti</h2>
-                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                    {lista_email}
-                </table>
-            </td>
-        </tr>
-
-        <tr>
-            <td style="padding: 20px; text-align: center; background: #f1f3f4; border-radius: 0 0 10px 10px;">
-                <p style="font-size: 12px; color: #70757a; margin: 0;">
-                    Generado automáticamente para Jorge Beneyto.<br>
-                    <a href="http://jorbencasdownloaderdocument.surge.sh" style="color: #1a73e8; text-decoration: none; font-weight: bold;">Acceder al Dashboard Histórico</a>
-                </p>
-            </td>
-        </tr>
-    </table>
-</body>
-</html>
-"""
-
-MD_TEMPLATE = """---
-draft: false
-title: "{titulo}"
-description: "{resumen_corto}"
-pubDate: "{fecha_pub}"
-tags: ['web', 'tech', 'ia']
-slug: "{slug_name}"
-image: "/img/arquitectura_web.webp"
-author: "Jorge Beneyto Castelló"
-layout: "@layouts/PostLayout.astro"
----
-{contenido}
-
-### 🔗 Enlaces de interés
-{lista_enlaces}
-"""
-
 # --- 3. FUNCIONES ---
-
 class ScraperPro:
     def __init__(self):
         self.cache_file = os.path.join(CONFIG["FOLDER"], "avatars_cache.json")
@@ -427,12 +267,9 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
 
     # Guardar MD y Email (Solo si hay nuevos)
     if nuevos:
-        nuevos = filtrar_solo_noticias(nuevos)
-        if len(nuevos) == 0:
-            return
         for n in nuevos:
             md_links += f"- **{n['fuente']}**: [{n['titulo']}]({n['enlace']})\n"
-            email_list += f"<li><b>{n['fuente']}</b>: <a href='{n['enlace']}'>{n['titulo']}</a></li>"
+            #email_list += f"<li><b>{n['fuente']}</b>: <a href='{n['enlace']}'>{n['titulo']}</a></li>"
         
         # Guardar MD
         slug = f"reporte-{fecha_iso}"
@@ -454,12 +291,9 @@ def filtrar_solo_noticias(nuevos):
     """Retorna solo items que NO sean vídeos ni shorts."""
     return [n for n in nuevos if n.get('tipo') == 'noticia']
 
-def enviar_email_reporte(resumen_html, noticias_texto):
+def enviar_email_reporte(resumen_html, nuevos):
     """Genera y envía el reporte por email con diseño anti-spam y estadísticas."""
-    if not CONFIG["MAIL_KEY"] or not noticias_texto:
-        return
-    nuevos = filtrar_solo_noticias(noticias_texto)
-    if len(nuevos) == 0:
+    if not CONFIG["MAIL_KEY"] or not nuevos:
         return
     # 1. Cálculos para el "Minigráfico" de actividad
     c_tech = len([x for x in nuevos if x.get('badge') == 'Tech'])
@@ -518,9 +352,8 @@ def enviar_email_reporte(resumen_html, noticias_texto):
     except Exception as e:
         print(f"⚠️ Fallo en el envío de email: {e}")
 
-def enviar_telegram_con_audio(resumen, noticias_texto):
+def enviar_telegram_con_audio(resumen, nuevos):
     if not CONFIG["BOT_TOKEN"] or not CONFIG["CHAT_ID"]: return
-    nuevos = filtrar_solo_noticias(noticias_texto)
     # 1. Limpiar el resumen HTML para que sea compatible con Markdown de Telegram
     # Quitamos los tags de párrafo y los convertimos en saltos de línea
     resumen_md = resumen.replace("<p style='margin-bottom:15px; line-height:1.6;'>", "").replace("</p>", "\n\n")
@@ -539,10 +372,9 @@ def enviar_telegram_con_audio(resumen, noticias_texto):
     LIMITE_TELEGRAM = 1024
     MARGEN_SEGURIDAD = 100
 
-    if len(nuevos) == 0:
-        return
-    for n in nuevos[:10]: # Intentamos meter hasta 10
-        if n.get('badge') == "Beca": icono = "🎓"
+    for n in nuevos:
+        if n.get('id_video'): icono = "📺"
+        elif n.get('badge') == "Beca": icono = "🎓"
         else: icono = "💻"
         
         nuevo_item = f"{icono} [{n['fuente']}]({n['enlace']}) "
@@ -567,8 +399,7 @@ def enviar_telegram_con_audio(resumen, noticias_texto):
         texto_para_voz = resumen_md.replace("*", "")
         tts = gTTS(text=texto_para_voz, lang='es')
         audio_buffer = io.BytesIO()
-        loop = asyncio.get_event_loop()
-        loop.run_in_executor(None, tts.write_to_fp, audio_buffer)
+        tts.write_to_fp(audio_buffer)
         audio_buffer.seek(0) # Resetear puntero al inicio
         
         # Enviamos el audio con el caption y el botón
@@ -579,15 +410,11 @@ def enviar_telegram_con_audio(resumen, noticias_texto):
             "parse_mode": "Markdown",
             "reply_markup": json.dumps(reply_markup)
         }
-        test = {
-            "data":payload, 
-            "files":files
-        }
-
-        print(f"chat id: {test}")
-        r = requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice", test)
+        r= requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice", data=payload, files=files)
         if r.status_code == 200:
             print(f"🤖 Mensaje telegram enviado con éxito")
+        else: 
+            print(f"❌ Error Telegram: {r.text}")
     except Exception as e:
         print(f"⚠️ Error TTS/Telegram: {e}")
 
@@ -608,17 +435,17 @@ async def main():
     publicar_contenidos(total, nuevos, resumen, scr)
 
     # Guardar la caché de avatares para la próxima vez
-    #scr.guardar_avatars()
+    scr.guardar_avatars()
     
-    #  if nuevos:
-        # Enviar Email
-        # enviar_email_reporte(resumen, nuevos)
-        # TELEGRAM
-    enviar_telegram_con_audio(resumen, historial)
-        # with open(archivo_h, 'w') as f: json.dump(total[:600], f, indent=4)
-    print(f"✅ {len(nuevos)} noticias nuevas procesadas.")
-    # else:
-    #   print("☕ Sin cambios hoy.")
+    if nuevos:
+        noticias_texto_nuevas = filtrar_solo_noticias(nuevos)
+        if len(noticias_texto_nuevas) > 0:
+            enviar_email_reporte(resumen, noticias_texto_nuevas)
+            enviar_telegram_con_audio(resumen, noticias_texto_nuevas)
+        with open(archivo_h, 'w') as f: json.dump(total[:600], f, indent=4)
+        print(f"✅ {len(nuevos)} noticias nuevas procesadas.")
+    else:
+        print("☕ Sin cambios hoy.")
 
 if __name__ == "__main__":
     asyncio.run(main())
