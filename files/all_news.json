@@ -1,5 +1,85 @@
 [
     {
+        "titulo": "El primer viernes fallero de Val\u00e8ncia, con la mirada en el cielo por las lluvias de la borrasca Regina",
+        "enlace": "https://www.levante-emv.com/fallas/2026/03/06/la-mascleta-de-hoy-en-valencia-con-la-mirada-en-el-cielo-por-la-borrasca-regina-127626707.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-06T17:36:51.258519",
+        "badge": "Tech",
+        "ts": "2026-03-06T17:36:51.258528",
+        "f": "06/03"
+    },
+    {
+        "titulo": "Las acusaciones de CGT, Podemos Ciudadanos y Acci\u00f3 Cultural piden al Tribunal Superior de Justicia que investigue a Carlos Maz\u00f3n por la dana de Val\u00e8ncia",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/06/las-acusaciones-de-podemos-cgt-ciudadanos-y-accio-cultural-piden-al-tribunal-superior-de-justicia-que-investigue-a-carlos-mazon-por-la-dana-de-valencia-127648926.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-06T17:36:51.116295",
+        "badge": "Tech",
+        "ts": "2026-03-06T17:36:51.116310",
+        "f": "06/03"
+    },
+    {
+        "titulo": "El PSOE expulsa al alcalde de Almussafes por su trato a las denunciantes de acoso sexual",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/06/pspv-expulsa-alcalde-almussafes-trato-denunciantes-acoso-sexual-127652829.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-06T17:36:50.919464",
+        "badge": "Tech",
+        "ts": "2026-03-06T17:36:50.919474",
+        "f": "06/03"
+    },
+    {
+        "titulo": "C\u00f3mo puede sobrevivir la red el\u00e9ctrica a la explosi\u00f3n de la IA",
+        "enlace": "https://elpais.com/tecnologia/2026-03-06/como-puede-sobrevivir-la-red-electrica-a-la-explosion-de-la-ia.html",
+        "fuente": "El Pa\u00eds Tecnolog\u00eda",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-06T17:36:49.109705",
+        "badge": "Tech",
+        "ts": "2026-03-06T17:36:49.109713",
+        "f": "06/03"
+    },
+    {
+        "titulo": "IA y \u00e9tica en tiempos de guerra: el conflicto que marca el futuro de la gobernanza tecnol\u00f3gica",
+        "enlace": "https://elpais.com/tecnologia/2026-03-06/ia-y-etica-en-tiempos-de-guerra-el-conflicto-que-marca-el-futuro-de-la-gobernanza-tecnologica.html",
+        "fuente": "El Pa\u00eds Tecnolog\u00eda",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-06T17:36:48.949604",
+        "badge": "Tech",
+        "ts": "2026-03-06T17:36:48.949611",
+        "f": "06/03"
+    },
+    {
+        "titulo": "En 1 Minuto un E-commerce Completo y 100% Funcional con IA? Esto ME DA VERG\u00c3\u009cENZA ajena...",
+        "enlace": "https://youtube.com/watch?v=FuqDzgX4d7k",
+        "id_video": "FuqDzgX4d7k",
+        "fuente": "Victor Robles",
+        "tipo": "video",
+        "ultima_verificacion": "2026-03-06T17:36:43.926993",
+        "ts": "2026-03-06T17:36:43.927002",
+        "f": "06/03"
+    },
+    {
+        "titulo": "Blind\u00c3\u00a9 mi OpenClaw: configuraci\u00c3\u00b3n segura completa",
+        "enlace": "https://youtube.com/watch?v=P8UCwa3cdFo",
+        "id_video": "P8UCwa3cdFo",
+        "fuente": "HolaMundo",
+        "tipo": "video",
+        "ultima_verificacion": "2026-03-06T17:36:42.723085",
+        "ts": "2026-03-06T17:36:42.723094",
+        "f": "06/03"
+    },
+    {
+        "titulo": "Hay 2 tipos de desarrolladores. Uno de ellos est\u00e1 jodido. Entrevista a Justin Searls [Podcast #210]",
+        "enlace": "https://youtube.com/watch?v=hP931079TMw",
+        "id_video": "hP931079TMw",
+        "fuente": "FreeCodeCamp",
+        "tipo": "video",
+        "ultima_verificacion": "2026-03-06T17:36:41.596216",
+        "ts": "2026-03-06T17:36:41.596228",
+        "f": "06/03"
+    },
+    {
         "titulo": "Cr\u00edtica de \u00a1La novia!: un remake tan libre como loco de La novia de Frankenstein",
         "enlace": "https://www.hobbyconsolas.com/hobbycine/critica-novia-un-remake-tan-libre-como-loco-novia-frankenstein_6942376_0.html",
         "fuente": "HobbyConsolas",
