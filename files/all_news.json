@@ -1,5 +1,55 @@
 [
     {
+        "titulo": "La Audiencia de Valencia afea al Ayuntamiento de Mislata que responda con evasivas a la jueza del castillo hinchable",
+        "enlace": "https://www.levante-emv.com/sucesos/2026/03/07/accidente-hinchable-audiencia-valencia-afea-ayuntamiento-evasivas-respuesta-jueza-127600406.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-07T08:23:23.347049",
+        "badge": "Tech",
+        "ts": "2026-03-07T08:23:23.347058",
+        "f": "07/03"
+    },
+    {
+        "titulo": "Aemet confirma lo que nadie quiere o\u00edr en Valencia: Las Fallas 2026 estar\u00e1n pasadas por agua",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/06/aemet-fallas-2026-valencia-tiempo-lluvias-127630942.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-07T08:23:23.200709",
+        "badge": "Tech",
+        "ts": "2026-03-07T08:23:23.200718",
+        "f": "07/03"
+    },
+    {
+        "titulo": "La borrasca Regina da un respiro y se desplaza al norte despu\u00e9s de dos d\u00edas de lluvia persistente",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/07/borrasca-regina-desplaza-mitad-norte-lluvias-persistentes-127653533.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-07T08:23:23.069293",
+        "badge": "Tech",
+        "ts": "2026-03-07T08:23:23.069302",
+        "f": "07/03"
+    },
+    {
+        "titulo": "Numant-IA, el salto del Ej\u00e9rcito espa\u00f1ol hacia la inteligencia artificial: \u201cTiene que ser un humano el que controle\u201d",
+        "enlace": "https://elpais.com/tecnologia/2026-03-07/numant-ia-el-salto-del-ejercito-espanol-hacia-la-inteligencia-artificial-tiene-que-ser-un-humano-el-que-controle.html",
+        "fuente": "El Pa\u00eds Tecnolog\u00eda",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-07T08:23:22.198913",
+        "badge": "Tech",
+        "ts": "2026-03-07T08:23:22.198923",
+        "f": "07/03"
+    },
+    {
+        "titulo": "As\u00ed es Wikigacha, el juego viral a lo Pok\u00e9mon TCG Pocket que convierte art\u00edculos de Wikipedia en sobres coleccionables",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/asi-es-wikigacha-juego-viral-pokemon-tcg-pocket-que-convierte-articulos-wikipedia-sobres-coleccionables_6943041_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-07T08:23:21.319115",
+        "badge": "Tech",
+        "ts": "2026-03-07T08:23:21.319124",
+        "f": "07/03"
+    },
+    {
         "titulo": "Recorrido por las fallas de Secci\u00f3n Especial de Val\u00e8ncia: d\u00f3nde est\u00e1n y c\u00f3mo llegar f\u00e1cilmente",
         "enlace": "https://www.levante-emv.com/fallas/2026/02/13/recorrido-fallas-seccion-especial-valencia-como-llegar-126810476.html",
         "fuente": "Levante-EMV",
