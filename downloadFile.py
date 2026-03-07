@@ -8,7 +8,7 @@ from collections import Counter
 from mtranslate import translate
 from google import genai
 import edge_tts
-from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE 
+from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE, RETO_MD_TEMPLATE
 
 # Auto-añadir secciones de Shorts
 for nombre in list(FUENTES): # Usamos list() para poder modificar el dict mientras iteramos
@@ -103,11 +103,15 @@ class ScraperPro:
                 items = soup.select('article h2 a, .post-title a, h3 a, .title a')[:5]
                 
                 for i in items:
+                    link_tag = i.find('a')
+                    if not link_tag: continue
+
                     t_raw = i.get_text(strip=True).replace('"', '')
                     t_low = t_raw.lower()
                         
                     # Comprobamos si coincide con alguna de nuestras keywords totales
                     if any(key in t_low for key in ALL_KEYWORDS):
+                        raw_content = i.get_text(strip=True)[:1000]
                         # Clasificamos: Si tiene algo de becas, es "Beca", si no "Tech"
                         categoria = "Beca" if any(k in t_low for k in BECAS_KEYWORDS) else "Tech"
 
@@ -117,6 +121,7 @@ class ScraperPro:
                             "fuente": nombre, "tipo": "noticia",
                             "ultima_verificacion": datetime.now().isoformat(),
                             "badge": categoria, # Nueva propiedad
+                            "raw": raw_content, # <--- NUEVO: Para que Gemini analice el reto
                             "ts": datetime.now().isoformat(), "f": datetime.now().strftime("%d/%m")
                         })
         except: pass
@@ -155,7 +160,31 @@ async def obtener_resumen_ia(noticias):
             return "Límite de cuota alcanzado. Inténtalo en unos minutos."
         return "Resumen no disponible en este momento. Revisa los enlaces directos."
 
-def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
+async def obtener_solucion_reto_ia(item):
+    """Pide a Gemini que analice el reto y devuelva una solución paso a paso en JSON."""
+    if not CONFIG["GEMINI_KEY"]: return None
+    try:
+        client = genai.Client(api_key=CONFIG["GEMINI_KEY"])
+        prompt = f"""
+        Analiza este RETO TECNICO: "{item['titulo']}"
+        Contexto extraído: {item.get('raw', 'No hay descripción disponible')}
+        
+        Responde estrictamente en formato JSON con estas llaves:
+        "descripcion": "Resumen claro del desafío",
+        "paso1": "Explicación de la lógica inicial",
+        "paso2": "Pasos para la implementación",
+        "paso3": "Optimización o consejos",
+        "codigo": "Código solución en Python o JS"
+        """
+        response = client.models.generate_content(model="gemini-2.0-flash-lite", contents=prompt)
+        # Limpieza de markdown por si la IA devuelve ```json
+        clean_json = re.sub(r'```json|```', '', response.text).strip()
+        return json.loads(clean_json)
+    except Exception as e:
+        print(f"⚠️ Error resolviendo reto: {e}")
+        return None
+    
+async def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
     ahora = datetime.now()
     fecha_h = ahora.strftime("%d/%m/%Y")
     fecha_pub = ahora.strftime("%Y/%m/%d")
@@ -268,23 +297,47 @@ def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
     # Guardar MD y Email (Solo si hay nuevos)
     if nuevos:
         for n in nuevos:
-            md_links += f"- **{n['fuente']}**: [{n['titulo']}]({n['enlace']})\n"
-        
-        # Guardar MD
-        slug = f"reporte-{fecha_iso}"
-        # Creamos la variable que faltaba y limpiamos comillas para evitar errores en Astro
-        resumen_corto_limpio = resumen_final[:150].replace("\\n", " ").replace('"', '') + "..."
-        
-        with open(f"./auto-news/{slug}.md", "w", encoding="utf-8") as f:
-            # Asegúrate de que los nombres coincidan con los de tu MD_TEMPLATE
-            f.write(MD_TEMPLATE.format(
-                titulo=f"Reporte Tech {fecha_h}",
-                resumen_corto=resumen_corto_limpio,
-                fecha_pub=fecha_pub,
-                slug_name=f"{slug}.md",
-                contenido=resumen_final,
-                lista_enlaces=md_links
-            ))
+            # Detectar si es un reto
+            es_reto = any(k in n['titulo'].lower() for k in ["reto", "challenge", "kata", "ejercicio", "hack"])
+            slug = f"post-{re.sub(r'[^a-z0-9]', '-', n['titulo'].lower())[:30]}"
+            fecha_iso = ahora.strftime("%Y-%m-%d")
+
+            if es_reto:
+                # 1. Obtener solución de la IA
+                sol = await obtener_solucion_reto_ia(n) # Ejecución síncrona dentro de la función
+                if sol:
+                    res = RETO_MD_TEMPLATE
+                    res = res.replace("{titulo}", str(n['titulo']))
+                    res = res.replace("{resumen_corto}", "Reto técnico resuelto paso a paso.")
+                    res = res.replace("{fecha_pub}", str(fecha_pub))
+                    res = res.replace("{slug_name}", f"{slug}.md")
+                    res = res.replace("{descripcion_ia}", str(sol.get('descripcion', '')))
+                    res = res.replace("{paso_1}", str(sol.get('paso1', '')))
+                    res = res.replace("{paso_2}", str(sol.get('paso2', '')))
+                    res = res.replace("{paso_3}", str(sol.get('paso3', '')))
+                    res = res.replace("{codigo_solucion}", str(sol.get('codigo', '')))
+                    
+                    with open(f"./auto-news/reto-{fecha_iso}-{slug}.md", "w", encoding="utf-8") as f:
+                        f.write(res)
+                    continue
+            else:
+                md_links += f"- **{n['fuente']}**: [{n['titulo']}]({n['enlace']})\n"
+            
+                # Guardar MD
+                slug = f"reporte-{fecha_iso}"
+                # Creamos la variable que faltaba y limpiamos comillas para evitar errores en Astro
+                resumen_corto_limpio = resumen_final[:150].replace("\\n", " ").replace('"', '') + "..."
+                
+                with open(f"./auto-news/{slug}.md", "w", encoding="utf-8") as f:
+                    # Asegúrate de que los nombres coincidan con los de tu MD_TEMPLATE
+                    f.write(MD_TEMPLATE.format(
+                        titulo=f"Reporte Tech {fecha_h}",
+                        resumen_corto=resumen_corto_limpio,
+                        fecha_pub=fecha_pub,
+                        slug_name=f"{slug}.md",
+                        contenido=resumen_final,
+                        lista_enlaces=md_links
+                    ))
 
 def filtrar_solo_noticias(nuevos):
     """Retorna solo items que NO sean vídeos ni shorts."""
@@ -388,10 +441,10 @@ async def enviar_telegram_con_audio(resumen, nuevos):
 
     VOZ_ELEGIDA = "es-ES-AlvaroNeural" # Otras: es-ES-ElviraNeural, es-MX-JorgeNeural
     audio_path = "resumen.mp3"
-
+    texto_para_voz = resumen_recortado[:800] # Álvaro lee mejor textos de esta longitud
     try:
         # Generamos el archivo de audio
-        communicate = edge_tts.Communicate(resumen_recortado, VOZ_ELEGIDA)
+        communicate = edge_tts.Communicate(texto_para_voz, VOZ_ELEGIDA)
         await communicate.save(audio_path)
 
         # 4. ENVÍO A TELEGRAM
@@ -430,7 +483,7 @@ async def main():
     total = nuevos + historial
 
     resumen = await obtener_resumen_ia(nuevos) if nuevos else "Todo al día por ahora."
-    publicar_contenidos(total, nuevos, resumen, scr)
+    await publicar_contenidos(total, nuevos, resumen, scr)
 
     # Guardar la caché de avatares para la próxima vez
     scr.guardar_avatars()

@@ -9,7 +9,20 @@ CONFIG = {
     "FOLDER": "files"
 }
 
-TECH_KEYWORDS = ['ia', 'inteligencia artificial', 'empleo', 'software', 'programación', 'valencia', 'albaida', 'tecnología']
+TECH_KEYWORDS = [# Inteligencia Artificial
+"IA", "AI", "LLM", "GPT-4", "GPT-4o", "Gemini", "Claude", "Llama 3", "DeepSeek",
+"OpenAI", "Anthropic", "Mistral", "Stable Diffusion", "Midjourney", "Sora",
+"RAG", "Fine-tuning", "Prompt", "Agente IA", "Copilot", "Neural", "Deep Learning",
+"Python", "Rust", "TypeScript", "React", "Next.js", "Docker", "Kubernetes",
+"API", "Backend", "Frontend", "Fullstack", "DevOps", "Serverless", "GitHub",
+"Tailwind", "Node.js", "Go", "WebAssembly", "Ciberseguridad", "Zero Trust",
+"NVIDIA", "H100", "Blackwell", "GPU", "NPU", "Apple Silicon", "M4", "Intel",
+"AMD", "Snapdragon", "Quantum", "Chip", "Semicondutores",
+"SaaS", "Startups", "Cloud", "Big Data", "Blockchain", "Web3", "Automatización",
+"Fintech", "Cripto", "Metaverso", "IoT", "Open Source",
+"reto progrmación", "challenge", "kata", "ctf", "vulnerabilidad", "hack", "desafío"
+]
+
 BECAS_KEYWORDS = ['beca', 'curso', 'ayuda', 'formación', 'subvención', 'taller']
 ALL_KEYWORDS = TECH_KEYWORDS + BECAS_KEYWORDS
 
@@ -33,6 +46,23 @@ FUENTES = {
     "El País Tecnología": {"url": "https://elpais.com/tecnologia/"},
     "Levante-EMV": {"url": "https://www.levante-emv.com/"},
     "Fundación Carolina": {"url": "https://www.fundacioncarolina.es/"},
+    "Genbeta": {"url": "https://www.genbeta.com/"},
+    "Applesfera": {"url": "https://www.applesfera.com/"},
+    "Mixx.io": {"url": "https://mixx.io/"},
+    "Wired": {"url": "https://www.wired.com/category/science/"},
+    "The Verge": {"url": "https://www.theverge.com/tech"},
+    "TechCrunch": {"url": "https://techcrunch.com/category/artificial-intelligence/"},
+    "Hacker News": {"url": "https://news.ycombinator.com/"},
+    "GitHub Blog": {"url": "https://github.blog/category/engineering/"},
+    "OpenAI": {"url": "https://openai.com/news/"},
+    "Google AI": {"url": "https://blog.google/technology/ai/"},
+    "NVIDIA Blog": {"url": "https://blogs.nvidia.com/blog/category/deep-learning/"},
+    "Dev.to": {"url": "https://dev.to/t/ai"},
+    "Ars Technica": {"url": "https://arstechnica.com/gadgets/"},
+    "Slashdot": {"url": "https://slashdot.org/"},
+    "Codewars": {"url": "https://www.codewars.com/kata/latest"},
+    "HackTheBox": {"url": "https://www.hackthebox.com/blog"},
+    "RetosMoure": {"url": "https://retosdeprogramacion.com/semanales2024"}
 }
 
 HTML_TEMPLATE = """
@@ -153,4 +183,45 @@ layout: "@layouts/PostLayout.astro"
 
 ### 🔗 Enlaces de interés
 {lista_enlaces}
+"""
+
+# --- En constants_downloadfile.py ---
+
+RETO_MD_TEMPLATE = """---
+draft: false
+title: "🏆 RETO: {titulo}"
+description: "{resumen_corto}"
+pubDate: "{fecha_pub}"
+tags: ['web', 'tech', 'ia']
+slug: "{slug_name}"
+image: "/img/arquitectura_web.webp"
+author: "Jorge Beneyto Castelló"
+layout: "@layouts/PostLayout.astro"
+---
+
+# 🎯 Desafío: {titulo}
+
+### 📝 Descripción del Reto
+{descripcion_ia}
+
+---
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+
+### 🏗️ Paso 1: Análisis de la lógica
+{paso_1}
+
+### ⚙️ Paso 2: Implementación
+{paso_2}
+
+### 🚀 Paso 3: Optimización
+{paso_3}
+
+### 💻 Código de la Solución
+```python
+{codigo_solucion}
+</details>
 """
