@@ -291,7 +291,7 @@ async def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
     with open("public/index.html", "w", encoding="utf-8") as f:
         f.write(HTML_TEMPLATE.format(fecha_hoy=fecha_h, resumen=resumen_final, bloque_semanas=bloque_semanas_completo, bloque_chips=chips_html, bloque_videos=v_html, bloque_noticias=n_html))
 
-    # Guardar MD y Email (Solo si hay nuevos)
+    # Guardar MD (Solo si hay nuevos)
     if nuevos:
         fecha_iso = ahora.strftime("%Y-%m-%d")
         for n in nuevos:
@@ -317,7 +317,7 @@ async def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
                     with open(f"./auto-news/reto-{fecha_iso}-{slug}.md", "w", encoding="utf-8") as f:
                         f.write(res)
                     continue
-            else:
+            elif "youtube.com" not in n['enlace'] and "youtu.be" not in n['enlace']:
                 md_links += f"- **{n['fuente']}**: [{n['titulo']}]({n['enlace']})\n"
 
         if md_links:
@@ -327,7 +327,6 @@ async def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
             resumen_corto_limpio = resumen_final[:150].replace("\\n", " ").replace('"', '') + "..."
             
             with open(f"./auto-news/{slug}.md", "w", encoding="utf-8") as f:
-                # Asegúrate de que los nombres coincidan con los de tu MD_TEMPLATE
                 f.write(MD_TEMPLATE.format(
                     titulo=f"Reporte Tech {fecha_h}",
                     resumen_corto=resumen_corto_limpio,
