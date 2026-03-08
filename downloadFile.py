@@ -491,7 +491,8 @@ async def main():
         if len(noticias_texto_nuevas) > 0:
             enviar_email_reporte(resumen, noticias_texto_nuevas)
             await enviar_telegram_con_audio(resumen, noticias_texto_nuevas)
-        with open(archivo_h, 'w') as f: json.dump(total[:600], f, indent=4)
+            total = noticias_texto_nuevas + historial
+            with open(archivo_h, 'w') as f: json.dump(total[:600], f, indent=4)
         print(f"✅ {len(nuevos)} noticias nuevas procesadas.")
     else:
         print("☕ Sin cambios hoy.")
