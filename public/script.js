@@ -3,7 +3,9 @@ let selCanal = "all";
 
 // Función para los Chips (Reciente)
 function filtrarSemana(el) {
-  el.parentElement.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
+  el.parentElement
+    .querySelectorAll(".chip")
+    .forEach((c) => c.classList.remove("active"));
   document.getElementById("selectorSemanas").value = "all";
   el.classList.add("active");
 
@@ -18,9 +20,13 @@ function filtrarDesdeSelector(el) {
   if (el.value === "all") {
     // Si vuelve a la opción por defecto, mostramos "Reciente"
     selSemana.tipo = "all_recent";
-    document.querySelector('.chip[data-inicio="all_recent"]').classList.add("active");
+    document
+      .querySelector('.chip[data-inicio="all_recent"]')
+      .classList.add("active");
   } else {
-    el.parentElement.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
+    el.parentElement
+      .querySelectorAll(".chip")
+      .forEach((c) => c.classList.remove("active"));
     const [ini, fin] = el.value.split("|");
     selSemana.tipo = "range";
     selSemana.ini = new Date(ini).getTime();
@@ -29,17 +35,24 @@ function filtrarDesdeSelector(el) {
   aplicarFiltros();
 }
 
-function aplicarFiltros() {
+// CAMBIO: Asegúrate de que la definición acepte el parámetro por defecto
+function aplicarFiltros(afectarNoticias = true) {
+  // Usamos un nombre más claro
   const ahora = new Date().getTime();
   const limiteReciente = ahora - 14 * 24 * 60 * 60 * 1000;
 
-  document.querySelectorAll(".card, .news-item").forEach((item) => {
+  // Si afectarNoticias es false (desde filtrarCanal), el selector SOLO coge vídeos.
+  // Esto hace que las noticias ni se oculten ni se muestren: se quedan como estaban.
+  let itemsfiler = afectarNoticias ? ".card, .news-item" : ".card";
+
+  document.querySelectorAll(itemsfiler).forEach((item) => {
     const tsAttr = item.getAttribute("data-ts");
-    if (!tsAttr) return; // Seguridad si falta el atributo
+    if (!tsAttr) return;
 
     const itemTS = new Date(tsAttr).getTime();
     const itemFuente = item.getAttribute("data-fuente");
 
+    // Lógica de tiempo (Semanas)
     let okSemana = false;
     if (selSemana.tipo === "all_recent") {
       okSemana = itemTS >= limiteReciente;
@@ -47,6 +60,7 @@ function aplicarFiltros() {
       okSemana = itemTS >= selSemana.ini && itemTS <= selSemana.fin;
     }
 
+    // Lógica de Canal
     const okCanal = selCanal === "all" || itemFuente === selCanal;
 
     if (okSemana && okCanal) {
@@ -65,5 +79,5 @@ function filtrarCanal(canal, el) {
   chips.forEach((c) => c.classList.remove("active"));
   el.classList.add("active");
   selCanal = canal;
-  aplicarFiltros();
+  aplicarFiltros(false);
 }

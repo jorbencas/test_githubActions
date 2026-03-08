@@ -103,15 +103,12 @@ class ScraperPro:
                 items = soup.select('article h2 a, .post-title a, h3 a, .title a')[:5]
                 
                 for i in items:
-                    link_tag = i.find('a')
-                    if not link_tag: continue
-
                     t_raw = i.get_text(strip=True).replace('"', '')
                     t_low = t_raw.lower()
                         
                     # Comprobamos si coincide con alguna de nuestras keywords totales
                     if any(key in t_low for key in ALL_KEYWORDS):
-                        raw_content = i.get_text(strip=True)[:1000]
+                        raw_content = t_low
                         # Clasificamos: Si tiene algo de becas, es "Beca", si no "Tech"
                         categoria = "Beca" if any(k in t_low for k in BECAS_KEYWORDS) else "Tech"
 
@@ -296,11 +293,11 @@ async def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
 
     # Guardar MD y Email (Solo si hay nuevos)
     if nuevos:
+        fecha_iso = ahora.strftime("%Y-%m-%d")
         for n in nuevos:
             # Detectar si es un reto
             es_reto = any(k in n['titulo'].lower() for k in ["reto", "challenge", "kata", "ejercicio", "hack"])
             slug = f"post-{re.sub(r'[^a-z0-9]', '-', n['titulo'].lower())[:30]}"
-            fecha_iso = ahora.strftime("%Y-%m-%d")
 
             if es_reto:
                 # 1. Obtener solución de la IA
@@ -322,22 +319,23 @@ async def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
                     continue
             else:
                 md_links += f"- **{n['fuente']}**: [{n['titulo']}]({n['enlace']})\n"
+
+        if md_links:
+            # Guardar MD
+            slug = f"reporte-{fecha_iso}"
+            # Creamos la variable que faltaba y limpiamos comillas para evitar errores en Astro
+            resumen_corto_limpio = resumen_final[:150].replace("\\n", " ").replace('"', '') + "..."
             
-                # Guardar MD
-                slug = f"reporte-{fecha_iso}"
-                # Creamos la variable que faltaba y limpiamos comillas para evitar errores en Astro
-                resumen_corto_limpio = resumen_final[:150].replace("\\n", " ").replace('"', '') + "..."
-                
-                with open(f"./auto-news/{slug}.md", "w", encoding="utf-8") as f:
-                    # Asegúrate de que los nombres coincidan con los de tu MD_TEMPLATE
-                    f.write(MD_TEMPLATE.format(
-                        titulo=f"Reporte Tech {fecha_h}",
-                        resumen_corto=resumen_corto_limpio,
-                        fecha_pub=fecha_pub,
-                        slug_name=f"{slug}.md",
-                        contenido=resumen_final,
-                        lista_enlaces=md_links
-                    ))
+            with open(f"./auto-news/{slug}.md", "w", encoding="utf-8") as f:
+                # Asegúrate de que los nombres coincidan con los de tu MD_TEMPLATE
+                f.write(MD_TEMPLATE.format(
+                    titulo=f"Reporte Tech {fecha_h}",
+                    resumen_corto=resumen_corto_limpio,
+                    fecha_pub=fecha_pub,
+                    slug_name=f"{slug}.md",
+                    contenido=resumen_final,
+                    lista_enlaces=md_links
+                ))
 
 def filtrar_solo_noticias(nuevos):
     """Retorna solo items que NO sean vídeos ni shorts."""
