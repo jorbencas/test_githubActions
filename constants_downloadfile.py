@@ -59,10 +59,14 @@ FUENTES = {
     "NVIDIA Blog": {"url": "https://blogs.nvidia.com/blog/category/deep-learning/"},
     "Dev.to": {"url": "https://dev.to/t/ai"},
     "Ars Technica": {"url": "https://arstechnica.com/gadgets/"},
-    "Slashdot": {"url": "https://slashdot.org/"},
-    "Codewars": {"url": "https://www.codewars.com/kata/latest"},
-    "HackTheBox": {"url": "https://www.hackthebox.com/blog"},
-    "RetosMoure": {"url": "https://retosdeprogramacion.com/semanales2024"}
+    "Slashdot": {"url": "https://slashdot.org/", "selector": "h2.story-title a"},
+    "HackTheBox": {"url": "https://www.hackthebox.com/blog/", "selector": ".blog-post-card h3"},
+}
+
+WEBS_RETOS = {
+    "Retos de Programación": {"url": "https://retosdeprogramacion.com/ejercicios/", "selector": "a[href*='/retos/']"},
+    "Codewars": {"url": "https://www.codewars.com/kata/latest", "selector": ".item-title a"},
+    "RetosMoure": {"url": "https://retosdeprogramacion.com/semanales2024", "selector": "a[href*='/retos/']"}
 }
 
 HTML_TEMPLATE = """
@@ -187,12 +191,13 @@ layout: "@layouts/PostLayout.astro"
 
 # --- En constants_downloadfile.py ---
 
+# Reutilizamos tu Template exacto
 RETO_MD_TEMPLATE = """---
 draft: false
 title: "🏆 RETO: {titulo}"
 description: "{resumen_corto}"
 pubDate: "{fecha_pub}"
-tags: ['web', 'tech', 'ia']
+tags: {tags_seo}
 slug: "{slug_name}"
 image: "/img/arquitectura_web.webp"
 author: "Jorge Beneyto Castelló"

@@ -295,11 +295,18 @@ async def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
     if nuevos:
         fecha_iso = ahora.strftime("%Y-%m-%d")
         for n in nuevos:
-            # Detectar si es un reto
-            es_reto = any(k in n['titulo'].lower() for k in ["reto", "challenge", "kata", "ejercicio", "hack"])
+            titulo_low = n['titulo'].lower()
+            # Ampliamos las keywords para que sea más sensible
+            keywords_reto = ["reto", "challenge", "kata", "ejercicio", "hack", "desafío", "aprende a programar", "coding"]
+            es_reto = any(k in titulo_low for k in keywords_reto)
+
+            # DIAGNÓSTICO: Esto aparecerá en los logs de GitHub Actions
+            if "reto" in titulo_low or "desafío" in titulo_low:
+                print(f"DEBUG: Posible reto detectado -> {n['titulo']}")
             slug = f"post-{re.sub(r'[^a-z0-9]', '-', n['titulo'].lower())[:30]}"
 
             if es_reto:
+                print(f"🚀 Procesando Reto con IA: {n['titulo']}")
                 # 1. Obtener solución de la IA
                 sol = await obtener_solucion_reto_ia(n) # Ejecución síncrona dentro de la función
                 if sol:

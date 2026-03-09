@@ -1,0 +1,36 @@
+name: 🏹 Cazador de Retos IA
+
+on:
+  workflow_dispatch: # Permite ejecutarlo manualmente con un botón
+  schedule:
+    - cron: '0 23 * * 0' # Se ejecuta todos los domingos a las 23:00 UTC
+
+jobs:
+  hunt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📂 Checkout del código
+        uses: actions/checkout@v4
+
+      - name: 🐍 Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4 mtranslate google-genai
+
+      - name: 🏹 Ejecutar Cacería de Retos
+        env:
+          GEMINI_KEY: ${{ secrets.GEMINI_KEY }}
+        run: python hunt_challenges.py
+
+      - name: 📝 Commit y Push de los nuevos MD
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+          git add auto-challenges/*.md
+          # Solo hace commit si hay archivos nuevos para evitar errores
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🚀 IA: Nuevos retos de programación generados" && git push)
