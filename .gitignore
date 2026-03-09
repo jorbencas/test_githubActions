@@ -2,4 +2,4 @@ blog
 .env
 optimixed_cache.json
 local_run.py
-./__pycache__
+__pycache__/
