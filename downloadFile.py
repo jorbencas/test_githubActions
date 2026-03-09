@@ -36,7 +36,7 @@ class ScraperPro:
     def guardar_avatars(self):
         if self.cambios_en_cache:
             with open(self.cache_file, 'w') as f: 
-                json.dump(self.avatars, f, indent=4)
+                json.dump(self.avatars, f, indent=4, ensure_ascii=False)
             print("💾 Caché de avatares actualizada.")
 
     def obtener_avatar_canal(self, nombre, url_canal):
@@ -277,8 +277,8 @@ async def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
             </div>"""
         else:
             # Determinar qué badge poner
-            badge_type = n.get('badge', 'Tech')
-            badge_class = "badge-beca" if badge_type == "Beca/Ayuda" else "badge-tech"
+            badge_type = n.get('badge')
+            badge_class = "badge-beca" if badge_type == "Beca" else "badge-tech"
             if "youtube.com" not in n['enlace'] and "youtu.be" not in n['enlace']:
                 n_html += f'''
                 <li class="news-item" data-ts="{ts}" data-fuente="{fuente_limpia}">
@@ -445,7 +445,7 @@ async def enviar_telegram_con_audio(resumen, nuevos):
         await communicate.save(audio_path)
 
         # 4. ENVÍO A TELEGRAM
-        with open(audio_path, "rb") as audio_file:
+        with open(audio_path, "rb", encoding='utf-8') as audio_file:
             files = {'voice': (audio_path, audio_file, 'audio/mpeg')}
             payload = {
                 "chat_id": CONFIG["CHAT_ID"], 
@@ -453,7 +453,7 @@ async def enviar_telegram_con_audio(resumen, nuevos):
                 "parse_mode": "Markdown",
                 "reply_markup": json.dumps({
                     "inline_keyboard": [[{"text": "🌐 Dashboard", "url": "http://jorbencasdownloaderdocument.surge.sh"}]]
-                })
+                }, ensure_ascii=False)
             }
             r = requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice", data=payload, files=files)
         
@@ -491,7 +491,7 @@ async def main():
             enviar_email_reporte(resumen, noticias_texto_nuevas)
             await enviar_telegram_con_audio(resumen, noticias_texto_nuevas)
             total = noticias_texto_nuevas + historial
-            with open(archivo_h, 'w') as f: json.dump(total[:600], f, indent=4)
+            with open(archivo_h, 'w') as f: json.dump(total[:600], f, indent=4, ensure_ascii=False)
         print(f"✅ {len(nuevos)} noticias nuevas procesadas.")
     else:
         print("☕ Sin cambios hoy.")
