@@ -314,7 +314,7 @@ async def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
                     res = res.replace("{titulo}", str(n['titulo']))
                     res = res.replace("{resumen_corto}", "Reto técnico resuelto paso a paso.")
                     res = res.replace("{fecha_pub}", str(fecha_pub))
-                    res = res.replace("{slug_name}", f"{slug}.md")
+                    res = res.replace("{slug_name}", f"{slug}")
                     res = res.replace("{descripcion_ia}", str(sol.get('descripcion', '')))
                     res = res.replace("{paso_1}", str(sol.get('paso1', '')))
                     res = res.replace("{paso_2}", str(sol.get('paso2', '')))
@@ -331,14 +331,16 @@ async def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
             # Guardar MD
             slug = f"reporte-{fecha_iso}"
             # Creamos la variable que faltaba y limpiamos comillas para evitar errores en Astro
-            resumen_corto_limpio = resumen_final[:150].replace("\\n", " ").replace('"', '') + "..."
+            sopa = BeautifulSoup(resumen_final[:150], "html.parser")
+            texto_limpio = sopa.get_text()
+            resumen_corto_limpio = texto_limpio.replace("\\n", " ").replace('"', '') + "..."
             
             with open(f"./auto-news/{slug}.md", "w", encoding="utf-8") as f:
                 f.write(MD_TEMPLATE.format(
                     titulo=f"Reporte Tech {fecha_h}",
                     resumen_corto=resumen_corto_limpio,
                     fecha_pub=fecha_pub,
-                    slug_name=f"{slug}.md",
+                    slug_name=f"{slug}",
                     contenido=resumen_final,
                     lista_enlaces=md_links
                 ))
