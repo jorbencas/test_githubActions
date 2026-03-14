@@ -74,15 +74,15 @@ jobs:
       - name: Copy auto-news to blog
         id: news_copied_to_blog_folder # You need an ID to reference it later
         run: |
-          mkdir -p blog/src/pages/posts/auto-news
+          mkdir -p blog/src/content/auto-news
           # Seleccionar solo 1 archivo nuevo: priorizar IA, sino el primero, y checkear si no existe en blog
           selected_file=$(ls -t auto-news/*.md 2>/dev/null | grep -i ia | head -1)
           if [ -z "$selected_file" ]; then
               selected_file=$(ls -t auto-news/*.md 2>/dev/null | head -1)
           fi
           copied=""
-          if [ -n "$selected_file" ] && [ ! -f "blog/src/pages/posts/auto-news/$(basename "$selected_file")" ]; then
-              cp "$selected_file" blog/src/pages/posts/auto-news/
+          if [ -n "$selected_file" ] && [ ! -f "blog/src/content/auto-news/$(basename "$selected_file")" ]; then
+              cp "$selected_file" blog/src/content/auto-news/
               copied="yes"
           fi
           echo "copied=$copied" >> $GITHUB_OUTPUT
