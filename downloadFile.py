@@ -8,7 +8,6 @@ from mtranslate import translate
 from google import genai
 import edge_tts
 from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE, RETO_MD_TEMPLATE, PROMPT_IMAGEN_TEMPLATE
-from openai import OpenAI
 from slugify import slugify # Instalar: pip install python-slugify
 
 # Auto-añadir secciones de Shorts
@@ -336,6 +335,7 @@ async def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
                     res = res.replace("{fecha_pub}", str(fecha_pub))
                     res = res.replace("{slug_name}", f"{slug}")
                     res = res.replace("{descripcion_ia}", str(sol.get('descripcion', '')))
+                    res = res.replace("{ruta_imagen}", generar_imagen_noticia(str(n['titulo'])))
                     res = res.replace("{paso_1}", str(sol.get('paso1', '')))
                     res = res.replace("{paso_2}", str(sol.get('paso2', '')))
                     res = res.replace("{paso_3}", str(sol.get('paso3', '')))

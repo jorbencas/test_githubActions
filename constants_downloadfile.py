@@ -179,7 +179,7 @@ description: "{resumen_corto}"
 pubDate: "{fecha_pub}"
 tags: ['web', 'tech', 'ia']
 slug: "{slug_name}"
-image: "/img/arquitectura_web.webp"
+image: "{ruta_imagen}"
 author: "Jorge Beneyto Castelló"
 ---
 {contenido}
@@ -198,7 +198,7 @@ description: "{resumen_corto}"
 pubDate: "{fecha_pub}"
 tags: {tags_seo}
 slug: "{slug_name}"
-image: "/img/arquitectura_web.webp"
+image: "{ruta_imagen}"
 author: "Jorge Beneyto Castelló"
 ---
 
@@ -227,4 +227,14 @@ author: "Jorge Beneyto Castelló"
 ```python
 {codigo_solucion}
 </details>
+"""
+
+
+PROMPT_IMAGEN_TEMPLATE = """
+Create a high-quality, professional wide-angle image representing the following concept: "{titulo_post}".
+The visual style should be cinematic and futuristic, featuring a blend of clean technological elements, 
+soft ambient lighting, and a depth of field that keeps the subject in focus. 
+Color palette: deep digital blues, crisp white highlights, and subtle neon green accents. 
+Ensure the composition is balanced and suitable for a tech article header. 
+Highly detailed, photorealistic, 8k resolution, modern aesthetic, professional photography style.
 """

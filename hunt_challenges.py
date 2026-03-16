@@ -4,7 +4,8 @@ from mtranslate import translate
 from datetime import datetime
 from google import genai
 # Importamos CONFIG para las claves y la nueva WEBS_RETOS específica para este script
-from constants_downloadfile import CONFIG, WEBS_RETOS, RETO_MD_TEMPLATE 
+from constants_downloadfile import CONFIG, WEBS_RETOS, RETO_MD_TEMPLATE, PROMPT_IMAGEN_TEMPLATE 
+from slugify import slugify # Instalar: pip install python-slugify
 
 async def enviar_telegram(mensaje):
     """Envía notificación al Telegram del usuario."""
@@ -50,6 +51,57 @@ async def obtener_solucion_ia(titulo, nombre, client):
                 print(f"⚠️ Error en Gemini para '{titulo}': {e}")
                 break
     return None
+
+
+async def generar_imagen_noticia(titulo_noticia):
+    """
+    Genera una imagen usando Gemini 3 Flash Image (Nano Banana 2).
+    Mantiene la misma lógica de guardado y caché.
+    """
+    api_key = CONFIG.get("GEMINI_KEY")
+    if not api_key:
+        print("⚠️ No GEMINI_KEY found. Skipping image generation.")
+        return None
+
+    slug = slugify(titulo_noticia)
+    filename = f"{slug}.png"
+    filepath = os.path.join(CONFIG["IMAGES_FOLDER"], filename)
+
+    # 1. Caché: Si ya existe, no gastamos créditos
+    if os.path.exists(filepath):
+        return f"{CONFIG['IMAGES_PATH_PREFIX']}/{filename}"
+
+    try:
+        print(f"🎨 Generando imagen con Gemini para: '{titulo_noticia}'...")
+        
+        # 2. Preparamos el cliente (puedes usar el que ya tienes global)
+        client = genai.Client(api_key=api_key)
+        
+        # 3. Prompt optimizado para Gemini
+        prompt_completo = PROMPT_IMAGEN_TEMPLATE.format(titulo_post=titulo_noticia)
+
+        # 4. Generación de imagen
+        # Usamos el modelo de imagen de Gemini (Nano Banana 2)
+        response = client.models.generate_image(
+            model="gemini-3-flash-image", # O el nombre del modelo de imagen activo en tu tier
+            prompt=prompt_completo
+        )
+
+        # 5. Guardar el objeto binario directamente
+        os.makedirs(CONFIG["IMAGES_FOLDER"], exist_ok=True)
+        
+        # Gemini suele devolver la imagen en bytes directamente en la respuesta
+        with open(filepath, 'wb') as f:
+            f.write(response.image_bytes)
+            
+        print(f"✅ Imagen de Gemini guardada en: {filepath}")
+        return f"{CONFIG['IMAGES_PATH_PREFIX']}/{filename}"
+
+    except Exception as e:
+        print(f"❌ Error en Gemini Image: {e}")
+        return None
+
+
 
 async def hunt():
     # Inicializamos el cliente de Gemini usando la clave centralizada
@@ -111,6 +163,7 @@ async def hunt():
                             .replace("{slug_name}", slug)\
                             .replace("{tags_seo}", str([sol.get('lenguaje','ia').lower(), 'retos']))\
                             .replace("{descripcion_ia}", sol.get('descripcion',''))\
+                            .replace("{ruta_imagen}", generar_imagen_noticia(titulo_es))\
                             .replace("{paso_1}", sol.get('paso1',''))\
                             .replace("{paso_2}", sol.get('paso2',''))\
                             .replace("{paso_3}", sol.get('paso3',''))\
