@@ -1,0 +1,46 @@
+name: Monitor Netflix Rating
+
+# Control de ejecución
+on:
+  schedule:
+    - cron: '0 0 */3 * *' 
+  workflow_dispatch:      
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    # Permisos necesarios para que el bot pueda subir el archivo de texto al repo
+    permissions:
+      contents: write
+
+    steps:
+      # 1. Descarga el código de tu repositorio
+      - name: Checkout de código
+        uses: actions/checkout@v4
+
+      # 2. Configura Python
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 3. Instala la librería requests
+      - name: Instalar dependencias
+        run: pip install requests
+
+      # 4. Ejecuta tu script de Python
+      - name: Ejecutar monitor de Netflix
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python check_netflix.py
+
+      # 5. Guarda los cambios en el archivo de texto (para no repetir mensajes)
+      - name: Guardar estado y hacer Push
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add last_ratings.txt || echo "No hay cambios en el archivo de estado"
+          git commit -m "Actualización automática de estado de clasificación" || echo "Nada que commitear"
+          git push || echo "No hay cambios para subir"
