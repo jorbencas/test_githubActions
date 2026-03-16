@@ -114,7 +114,6 @@ class ScraperPro:
                     # Si es inglés, permitimos pasar si tiene keywords universales (AI, GPT, Python, NVIDIA...)
                     # o si Gemini se encargará de filtrarlo luego.
                     match_keyword = any(key.lower() in t_low for key in ALL_KEYWORDS)
-                    
                     # Si es una web inglesa de confianza, bajamos la guardia del filtro 
                     # porque palabras como "AI" o "Cloud" coinciden, pero "Beca" no.
                     if match_keyword or is_english:
@@ -150,6 +149,7 @@ async def obtener_resumen_ia(noticias):
             model="gemini-2.5-flash-lite",
             contents=prompt
         )
+        await asyncio.sleep(2)
         raw_text = response.text if response.text else "Resumen no disponible."
         # --- FORMATEO PARA WEB ---
         # Convertimos Markdown de la IA (**texto**) a HTML (<b>texto</b>)
@@ -464,7 +464,7 @@ async def enviar_telegram_con_audio(resumen, nuevos):
         await communicate.save(audio_path)
 
         # 4. ENVÍO A TELEGRAM
-        with open(audio_path, "rb", encoding='utf-8') as audio_file:
+        with open(audio_path, "rb") as audio_file:
             files = {'voice': (audio_path, audio_file, 'audio/mpeg')}
             payload = {
                 "chat_id": CONFIG["CHAT_ID"], 
