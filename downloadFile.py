@@ -1,4 +1,3 @@
-import io
 import locale
 import os, json, re, requests, asyncio
 from datetime import datetime, timedelta
@@ -8,7 +7,9 @@ from collections import Counter
 from mtranslate import translate
 from google import genai
 import edge_tts
-from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE, RETO_MD_TEMPLATE
+from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE, RETO_MD_TEMPLATE, PROMPT_IMAGEN_TEMPLATE
+from openai import OpenAI
+from slugify import slugify # Instalar: pip install python-slugify
 
 # Auto-añadir secciones de Shorts
 for nombre in list(FUENTES): # Usamos list() para poder modificar el dict mientras iteramos
@@ -170,27 +171,36 @@ async def obtener_resumen_ia(noticias):
 async def obtener_solucion_reto_ia(item):
     """Pide a Gemini que analice el reto y devuelva una solución paso a paso en JSON."""
     if not CONFIG["GEMINI_KEY"]: return None
-    try:
-        client = genai.Client(api_key=CONFIG["GEMINI_KEY"])
-        prompt = f"""
-        Analiza este RETO TECNICO: "{item['titulo']}"
-        Contexto extraído: {item.get('raw', 'No hay descripción disponible')}
-        
-        Responde estrictamente en formato JSON con estas llaves:
-        "descripcion": "Resumen claro del desafío",
-        "paso1": "Explicación de la lógica inicial",
-        "paso2": "Pasos para la implementación",
-        "paso3": "Optimización o consejos",
-        "codigo": "Código solución en Python o JS"
-        """
-        response = client.models.generate_content(model="gemini-2.0-flash-lite", contents=prompt)
-        # Limpieza de markdown por si la IA devuelve ```json
-        clean_json = re.sub(r'```json|```', '', response.text).strip()
-        return json.loads(clean_json)
-    except Exception as e:
-        print(f"⚠️ Error resolviendo reto: {e}")
-        return None
+    prompt = f"""
+    Analiza este RETO TECNICO: "{item['titulo']}"
+    Contexto extraído: {item.get('raw', 'No hay descripción disponible')}
     
+    Responde estrictamente en formato JSON con estas llaves:
+    "descripcion": "Resumen claro del desafío",
+    "paso1": "Explicación de la lógica inicial",
+    "paso2": "Pasos para la implementación",
+    "paso3": "Optimización o consejos",
+    "codigo": "Código solución en Python o JS"
+    """
+    max_intentos = 3
+    for intento in range(max_intentos):
+        try:
+            client = genai.Client(api_key=CONFIG["GEMINI_KEY"])
+            response = client.models.generate_content(model="gemini-2.0-flash-lite", contents=prompt)
+            # Limpieza de markdown por si la IA devuelve ```json
+            clean_json = re.sub(r'```json|```', '', response.text).strip()
+            return json.loads(clean_json)
+        except Exception as e:
+            if "429" in str(e):
+                # Si es error de cuota, esperamos el tiempo que nos pide (aprox 32s)
+                tiempo_espera = 35 * (intento + 1)
+                print(f"⏳ Cuota excedida. Reintentando en {tiempo_espera}s...")
+                await asyncio.sleep(tiempo_espera)
+            else:
+                print(f"⚠️ Error serio: {e}")
+                break
+    return None
+        
 async def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
     ahora = datetime.now()
     fecha_h = ahora.strftime("%d/%m/%Y")
@@ -463,7 +473,9 @@ async def enviar_telegram_con_audio(resumen, nuevos):
         communicate = edge_tts.Communicate(texto_para_voz, VOZ_ELEGIDA)
         await communicate.save(audio_path)
 
-        # 4. ENVÍO A TELEGRAM
+        # 4. ENVÍO A TELEGRAM (Corregido el error de binary mode y el envío)
+        url = f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice"
+        
         with open(audio_path, "rb") as audio_file:
             files = {'voice': (audio_path, audio_file, 'audio/mpeg')}
             payload = {
@@ -474,8 +486,18 @@ async def enviar_telegram_con_audio(resumen, nuevos):
                     "inline_keyboard": [[{"text": "🌐 Dashboard", "url": "http://jorbencasdownloaderdocument.surge.sh"}]]
                 }, ensure_ascii=False)
             }
-            r = requests.post(f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice", data=payload, files=files)
-        
+            # El post debe ir dentro del 'with' para que el archivo esté abierto
+            r = requests.post(url, data=payload, files=files)
+
+        if not r.ok:
+            # FALLBACK: Si falla el Markdown por caracteres raros, reintentamos sin Markdown
+            print(f"⚠️ Reintentando envío sin Markdown por error: {r.text}")
+            payload.pop("parse_mode")
+            # Limpiamos el caption de caracteres de escape para texto plano
+            payload["caption"] = caption.replace("\\_", "_").replace("\\*", "*")
+            with open(audio_path, "rb") as audio_file:
+                files = {'voice': (audio_path, audio_file, 'audio/mpeg')}
+                r = requests.post(url, data=payload, files=files)
         # Limpieza: Borramos el archivo temporal
         if os.path.exists(audio_path): os.remove(audio_path)
         
@@ -484,6 +506,154 @@ async def enviar_telegram_con_audio(resumen, nuevos):
 
     except Exception as e:
         print(f"⚠️ Error en TTS Humano: {e}")
+
+
+
+
+
+async def generar_imagen_noticia(titulo_noticia):
+    """
+    Genera una imagen usando Gemini 3 Flash Image (Nano Banana 2).
+    Mantiene la misma lógica de guardado y caché.
+    """
+    api_key = CONFIG.get("GEMINI_KEY")
+    if not api_key:
+        print("⚠️ No GEMINI_KEY found. Skipping image generation.")
+        return None
+
+    slug = slugify(titulo_noticia)
+    filename = f"{slug}.png"
+    filepath = os.path.join(CONFIG["IMAGES_FOLDER"], filename)
+
+    # 1. Caché: Si ya existe, no gastamos créditos
+    if os.path.exists(filepath):
+        return f"{CONFIG['IMAGES_PATH_PREFIX']}/{filename}"
+
+    try:
+        print(f"🎨 Generando imagen con Gemini para: '{titulo_noticia}'...")
+        
+        # 2. Preparamos el cliente (puedes usar el que ya tienes global)
+        client = genai.Client(api_key=api_key)
+        
+        # 3. Prompt optimizado para Gemini
+        prompt_completo = PROMPT_IMAGEN_TEMPLATE.format(titulo_post=titulo_noticia)
+
+        # 4. Generación de imagen
+        # Usamos el modelo de imagen de Gemini (Nano Banana 2)
+        response = client.models.generate_image(
+            model="gemini-3-flash-image", # O el nombre del modelo de imagen activo en tu tier
+            prompt=prompt_completo
+        )
+
+        # 5. Guardar el objeto binario directamente
+        os.makedirs(CONFIG["IMAGES_FOLDER"], exist_ok=True)
+        
+        # Gemini suele devolver la imagen en bytes directamente en la respuesta
+        with open(filepath, 'wb') as f:
+            f.write(response.image_bytes)
+            
+        print(f"✅ Imagen de Gemini guardada en: {filepath}")
+        return f"{CONFIG['IMAGES_PATH_PREFIX']}/{filename}"
+
+    except Exception as e:
+        print(f"❌ Error en Gemini Image: {e}")
+        return None
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # --- FUNCIONALIDAD LINK CHECKER ---
 async def main():

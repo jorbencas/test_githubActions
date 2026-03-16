@@ -26,7 +26,54 @@ jobs:
         env:
           GEMINI_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python hunt_challenges.py
+      - name: Checkout blog repo
+        uses: actions/checkout@v3
+        with:
+          repository: jorbencas/blog
+          path: blog
+          token: ${{ secrets.BLOG_TOKEN }}
+          fetch-depth: 0
+      - name: 🔄 Sincronizar retos nuevos al blog
+        id: sync_process
+        run: |
+          # Asegurar que la carpeta de destino existe en el repo del blog
+          mkdir -p blog/src/content/auto-challenges
+          
+          COUNT=0
+          # Buscamos todos los .md generados localmente
+          for file in auto-challenges/*.md; do
+            # Si no hay archivos, el for puede dar error, validamos que el archivo existe
+            [ -e "$file" ] || continue
+            
+            filename=$(basename "$file")
+            
+            # Solo copiamos si el archivo NO existe en el repo del blog
+            if [ ! -f "blog/src/content/auto-challenges/$filename" ]; then
+              cp "$file" "blog/src/content/auto-challenges/"
+              echo "🆕 Nuevo reto detectado: $filename"
+              COUNT=$((COUNT + 1))
+            else
+              echo "✅ El reto ya existía: $filename"
+            fi
+          done
+          
+          echo "total_nuevos=$COUNT" >> $GITHUB_OUTPUT
+          if [ $COUNT -gt 0 ]; then
+            echo "has_changes=yes" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=no" >> $GITHUB_OUTPUT
+          fi
 
+      - name: 🚀 Commit y Push al Blog
+        if: steps.sync_process.outputs.has_changes == 'yes'
+        run: |
+          cd blog
+          git config user.name "jorbencas-bot"
+          git config user.email "jorbencas@gmail.com"
+          git pull origin main --rebase
+          git add src/content/auto-challenges/*.md
+          git commit -m "[bot] Añadidos ${{ steps.sync_process.outputs.total_nuevos }} retos nuevos"
+          git push origin main
       - name: 📝 Commit y Push de los nuevos MD
         run: |
           git config --global user.name "GitHub Actions Bot"
