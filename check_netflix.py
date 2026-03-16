@@ -1,84 +1,61 @@
 import os
-import requests
 import re
+from playwright.sync_api import sync_playwright
 
-# Configuración desde Secrets de GitHub
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 
-# Diccionario de series: { "Nombre": "ID_Netflix" }
-SERIES_A_MONITORIZAR = {
-    "Berlin y La Dama del Armiño": "82152349",
-    "Berlin": "81586657",
-    "Entre tierras": "81700632",
-    "La casa de papel":"80192098",
+SERIES = {
+    "La Dama del Armiño": "82152349",
+    "Berlín": "81584733",
+    "La casa de papel": "80192017"
 }
 
-STATUS_FILE = "last_ratings.txt"
-
-def get_netflix_info(name, n_id):
+def get_data(page, name, n_id):
     url = f"https://www.netflix.com/es/title/{n_id}"
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-        "Accept-Language": "es-ES,es;q=0.9"
-    }
+    page.goto(url, wait_until="networkidle")
     
-    try:
-        response = requests.get(url, headers=headers, timeout=15)
-        html = response.text
+    html = page.content()
+    
+    # Extraer Rating
+    rating = "Pendiente"
+    r_match = re.search(r'"maturityRating":\s*"([^"]+)"', html)
+    if r_match:
+        rating = r_match.group(1)
 
-        # 1. Buscamos el Rating (ej: 16+, 18+)
-        rating_match = re.search(r'"maturityRating":\s*"([^"]+)"', html)
-        rating = rating_match.group(1) if rating_match else "Pendiente"
-
-        # 2. Buscamos los Descriptores (violencia, sexo, sustancias...)
-        # Buscamos en el bloque JSON 'maturityDescription'
-        desc_match = re.search(r'"maturityDescription":\s*"([^"]+)"', html)
-        descriptors = desc_match.group(1) if desc_match else None
-
-        return rating, descriptors
-    except Exception as e:
-        print(f"Error con {name}: {e}")
-        return None, None
-
-def load_previous_status():
-    if os.path.exists(STATUS_FILE):
-        with open(STATUS_FILE, "r", encoding="utf-8") as f:
-            return f.read()
-    return ""
-
-def save_status(content):
-    with open(STATUS_FILE, "w", encoding="utf-8") as f:
-        f.write(content)
-
-def send_telegram(msg):
-    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    requests.post(url, json={"chat_id": TELEGRAM_CHAT_ID, "text": msg, "parse_mode": "Markdown"})
+    # Extraer Descriptores
+    desc = "Sin detalles"
+    d_match = re.search(r'"maturityDescription":\s*"([^"]+)"', html)
+    if d_match:
+        desc = d_match.group(1)
+    
+    print(f"Analizando {name}: Rating={rating}, Desc={desc}")
+    return rating, desc
 
 def main():
-    previous_full_status = load_previous_status()
-    current_status_list = []
-    changes_detected = False
-    final_message = "🚀 *Novedades en Clasificaciones Netflix:*\n\n"
-
-    for name, n_id in SERIES_A_MONITORIZAR.items():
-        rating, desc = get_netflix_info(name, n_id)
+    with sync_playwright() as p:
+        # Lanzamos un navegador real
+        browser = p.chromium.launch(headless=True)
+        # Usamos un perfil de usuario normal para no parecer un bot
+        context = browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+        )
+        page = context.new_page()
         
-        # Formateamos el estado de esta serie
-        status_line = f"{name}: {rating} ({desc if desc else 'Sin detalles'})"
-        current_status_list.append(status_line)
+        results = []
+        for name, n_id in SERIES.items():
+            rating, desc = get_data(page, name, n_id)
+            # Solo si encontramos algo real, preparamos el mensaje
+            if rating != "Pendiente":
+                results.append(f"🎬 *{name}*\n🔞 Edad: {rating}\n⚠️ Detalles: {desc}")
 
-        # Si este estado no estaba en el archivo anterior Y tiene descriptores reales
-        if status_line not in previous_full_status and desc:
-            changes_detected = True
-            final_message += f"🎬 *{name}*\n🔞 Edad: {rating}\n⚠️ Detalles: {desc}\n\n"
+        if results:
+            msg = "🚀 *Novedades Netflix:*\n\n" + "\n\n".join(results)
+            import requests
+            url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+            requests.post(url, json={"chat_id": TELEGRAM_CHAT_ID, "text": msg, "parse_mode": "Markdown"})
 
-    if changes_detected:
-        send_telegram(final_message)
-        # Guardamos el nuevo estado global
-        save_status("\n".join(current_status_list))
-    else:
-        print("No hay cambios relevantes o faltan descriptores.")
+        browser.close()
 
 if __name__ == "__main__":
     main()

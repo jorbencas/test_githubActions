@@ -100,20 +100,30 @@ class ScraperPro:
                     })
             else:
                 soup = BeautifulSoup(r.text, 'html.parser')
-                items = soup.select('article h2 a, .post-title a, h3 a, .title a')[:5]
-                
+                selector_custom = info.get("selector", 'article h2 a, .post-title a, h3 a, .title a, h2 a')
+                items = soup.select(selector_custom)[:10] # Pillamos 10 para filtrar luego
+
                 for i in items:
                     t_raw = i.get_text(strip=True).replace('"', '')
                     t_low = t_raw.lower()
                         
-                    # Comprobamos si coincide con alguna de nuestras keywords totales
-                    if any(key in t_low for key in ALL_KEYWORDS):
+                    # DETERMINAR IDIOMA: Si la URL contiene términos comunes de webs inglesas
+                    is_english = any(x in target for x in ["wired", "verge", "techcrunch", "slashdot", "github", "openai", "hacker-news"])
+
+                    # FILTRO INTELIGENTE:
+                    # Si es inglés, permitimos pasar si tiene keywords universales (AI, GPT, Python, NVIDIA...)
+                    # o si Gemini se encargará de filtrarlo luego.
+                    match_keyword = any(key.lower() in t_low for key in ALL_KEYWORDS)
+                    
+                    # Si es una web inglesa de confianza, bajamos la guardia del filtro 
+                    # porque palabras como "AI" o "Cloud" coinciden, pero "Beca" no.
+                    if match_keyword or is_english:
                         raw_content = t_low
                         # Clasificamos: Si tiene algo de becas, es "Beca", si no "Tech"
                         categoria = "Beca" if any(k in t_low for k in BECAS_KEYWORDS) else "Tech"
 
                         results.append({
-                            "titulo": translate(t_raw, 'es'),
+                            "titulo": translate(t_raw, 'es') if is_english else t_raw,                            
                             "enlace": urljoin(target, i.get('href')),
                             "fuente": nombre, "tipo": "noticia",
                             "ultima_verificacion": datetime.now().isoformat(),

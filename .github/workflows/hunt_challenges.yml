@@ -24,7 +24,7 @@ jobs:
 
       - name: 🏹 Ejecutar Cacería de Retos
         env:
-          GEMINI_KEY: ${{ secrets.GEMINI_KEY }}
+          GEMINI_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python hunt_challenges.py
 
       - name: 📝 Commit y Push de los nuevos MD
