@@ -181,7 +181,6 @@ tags: ['web', 'tech', 'ia']
 slug: "{slug_name}"
 image: "/img/arquitectura_web.webp"
 author: "Jorge Beneyto Castelló"
-layout: "@layouts/PostLayout.astro"
 ---
 {contenido}
 
@@ -201,7 +200,6 @@ tags: {tags_seo}
 slug: "{slug_name}"
 image: "/img/arquitectura_web.webp"
 author: "Jorge Beneyto Castelló"
-layout: "@layouts/PostLayout.astro"
 ---
 
 # 🎯 Desafío: {titulo}

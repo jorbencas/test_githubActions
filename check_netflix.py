@@ -8,8 +8,10 @@ TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 
 # Diccionario de series: { "Nombre": "ID_Netflix" }
 SERIES_A_MONITORIZAR = {
-    "La Dama del Armiño": "82152349",
-    "Berlin": "81586657"
+    "Berlin y La Dama del Armiño": "82152349",
+    "Berlin": "81586657",
+    "Entre tierras": "81700632",
+    "La casa de papel":"80192098",
 }
 
 STATUS_FILE = "last_ratings.txt"
