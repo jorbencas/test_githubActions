@@ -1,5 +1,38 @@
 [
     {
+        "titulo": "Fuse recauda 25 millones de dólares para alterar los antiguos sistemas de originación de préstamos utilizados por las cooperativas de crédito de EE. UU.",
+        "enlace": "https://techcrunch.com/2026/03/16/fuse-raises-25m-to-disrupt-aging-loan-origination-systems-used-by-u-s-credit-unions/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-16T17:47:09.216369",
+        "badge": "Tech",
+        "raw": "fuse raises $25m  to disrupt aging loan origination systems used by u.s. credit unions",
+        "ts": "2026-03-16T17:47:09.216373",
+        "f": "16/03"
+    },
+    {
+        "titulo": "El diccionario demanda a OpenAI",
+        "enlace": "https://techcrunch.com/2026/03/16/the-dictionary-sues-openai/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-16T17:47:09.662545",
+        "badge": "Tech",
+        "raw": "the dictionary sues openai",
+        "ts": "2026-03-16T17:47:09.662554",
+        "f": "16/03"
+    },
+    {
+        "titulo": "Speed at the Cost of Quality. Study of Use of Cursor AI in Open Source Projects",
+        "enlace": "https://arxiv.org/abs/2511.04427",
+        "fuente": "Hacker News",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-16T17:47:12.243274",
+        "badge": "Beca",
+        "raw": "speed at the cost of quality. study of use of cursor ai in open source projects",
+        "ts": "2026-03-16T17:47:12.243275",
+        "f": "16/03"
+    },
+    {
         "titulo": "Llega el primer sorteo exclusivo para suscriptores de Xataka Xtra: así puedes ganar un televisor LG QNED evo AI de 75”",
         "enlace": "https://www.xataka.com/xataka-xtra/llega-primer-sorteo-exclusivo-para-suscriptores-xataka-xtra-asi-puedes-ganar-televisor-lg-qned-evo-ai-75?utm_source=genbeta&utm_medium=network&utm_campaign=repost",
         "fuente": "Genbeta",
