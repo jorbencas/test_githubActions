@@ -189,8 +189,25 @@ author: "Jorge Beneyto Castelló"
 """
 
 # --- En constants_downloadfile.py ---
+PROMPT_IMAGEN_TEMPLATE = """
+Create a high-quality, professional wide-angle image representing the following concept: "{titulo_post}".
+The visual style should be cinematic and futuristic, featuring a blend of clean technological elements, 
+soft ambient lighting, and a depth of field that keeps the subject in focus. 
+Color palette: deep digital blues, crisp white highlights, and subtle neon green accents. 
+Ensure the composition is balanced and suitable for a tech article header. 
+Highly detailed, photorealistic, 8k resolution, modern aesthetic, professional photography style.
+"""
 
-# Reutilizamos tu Template exacto
+
+PROMPT_IMAGEN_TEMPLATE_RETO = """
+Minimalist tech illustration of {titulo_post}. 
+Style: Flat vector art, isometric perspective, cyberpunk aesthetics. 
+Palette: Deep slate background, neon cyan and electric blue highlights. 
+Clean lines, high contrast, professional digital art, centered composition. 
+No text, no faces, simple geometric shapes.
+"""
+
+# Template corregido para que Astro y CodeEnhancer lo pinten perfecto
 RETO_MD_TEMPLATE = """---
 draft: false
 title: "🏆 RETO: {titulo}"
@@ -200,12 +217,20 @@ tags: {tags_seo}
 slug: "{slug_name}"
 image: "{ruta_imagen}"
 author: "Jorge Beneyto Castelló"
+difficulty: "Intermedio"
 ---
+
+import Challenge from '@components/Challenge.astro';
 
 # 🎯 Desafío: {titulo}
 
 ### 📝 Descripción del Reto
 {descripcion_ia}
+
+<Challenge 
+  nivel="{dificultad}" 
+  mision="{resumen_corto}" 
+/>
 
 ---
 
@@ -213,6 +238,7 @@ author: "Jorge Beneyto Castelló"
 
 <details>
 <summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
 
 ### 🏗️ Paso 1: Análisis de la lógica
 {paso_1}
@@ -224,17 +250,11 @@ author: "Jorge Beneyto Castelló"
 {paso_3}
 
 ### 💻 Código de la Solución
-```python
+```{lenguaje_lower}
+{titulo}
+Solución Técnica
+
 {codigo_solucion}
+</div>
 </details>
-"""
-
-
-PROMPT_IMAGEN_TEMPLATE = """
-Create a high-quality, professional wide-angle image representing the following concept: "{titulo_post}".
-The visual style should be cinematic and futuristic, featuring a blend of clean technological elements, 
-soft ambient lighting, and a depth of field that keeps the subject in focus. 
-Color palette: deep digital blues, crisp white highlights, and subtle neon green accents. 
-Ensure the composition is balanced and suitable for a tech article header. 
-Highly detailed, photorealistic, 8k resolution, modern aesthetic, professional photography style.
 """

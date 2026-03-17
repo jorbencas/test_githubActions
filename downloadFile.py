@@ -120,6 +120,12 @@ class ScraperPro:
                         raw_content = t_low
                         # Clasificamos: Si tiene algo de becas, es "Beca", si no "Tech"
                         categoria = "Beca" if any(k in t_low for k in BECAS_KEYWORDS) else "Tech"
+                        # BUSCAR LA IMAGEN (IMG TAG)
+                        img_tag = i.select_one('img')
+                        img_url = ""
+                        if img_tag:
+                            # Probamos src o data-src (muchas webs usan lazy loading)
+                            img_url = img_tag.get('src') or img_tag.get('data-src') or img_tag.get('srcset')
 
                         results.append({
                             "titulo": translate(t_raw, 'es') if is_english else t_raw,                            
@@ -128,6 +134,7 @@ class ScraperPro:
                             "ultima_verificacion": datetime.now().isoformat(),
                             "badge": categoria, # Nueva propiedad
                             "raw": raw_content, # <--- NUEVO: Para que Gemini analice el reto
+                            "imagen_url_original": urljoin(target, img_url) if img_url else "",
                             "ts": datetime.now().isoformat(), "f": datetime.now().strftime("%d/%m")
                         })
         except: pass
@@ -335,7 +342,7 @@ async def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
                     res = res.replace("{fecha_pub}", str(fecha_pub))
                     res = res.replace("{slug_name}", f"{slug}")
                     res = res.replace("{descripcion_ia}", str(sol.get('descripcion', '')))
-                    res = res.replace("{ruta_imagen}", generar_imagen_noticia(str(n['titulo'])))
+                    res = res.replace("{ruta_imagen}", await generar_imagen_noticia(str(n['titulo']), sol.get('imagen_url_original')))
                     res = res.replace("{paso_1}", str(sol.get('paso1', '')))
                     res = res.replace("{paso_2}", str(sol.get('paso2', '')))
                     res = res.replace("{paso_3}", str(sol.get('paso3', '')))
@@ -510,16 +517,16 @@ async def enviar_telegram_con_audio(resumen, nuevos):
 
 
 
-
-async def generar_imagen_noticia(titulo_noticia):
+async def generar_imagen_noticia(titulo_noticia, url_imagen_scrap):
     """
-    Genera una imagen usando Gemini 3 Flash Image (Nano Banana 2).
-    Mantiene la misma lógica de guardado y caché.
+    Genera una imagen usando Gemini 3 con reintentos.
+    Si falla tras los intentos, devuelve la imagen scrapeada original.
     """
     api_key = CONFIG.get("GEMINI_KEY")
+    # Fallback inmediato si no hay API Key
     if not api_key:
-        print("⚠️ No GEMINI_KEY found. Skipping image generation.")
-        return None
+        print("⚠️ No GEMINI_KEY found. Usando imagen scrapeada.")
+        return url_imagen_scrap
 
     slug = slugify(titulo_noticia)
     filename = f"{slug}.png"
@@ -529,35 +536,45 @@ async def generar_imagen_noticia(titulo_noticia):
     if os.path.exists(filepath):
         return f"{CONFIG['IMAGES_PATH_PREFIX']}/{filename}"
 
-    try:
-        print(f"🎨 Generando imagen con Gemini para: '{titulo_noticia}'...")
-        
-        # 2. Preparamos el cliente (puedes usar el que ya tienes global)
-        client = genai.Client(api_key=api_key)
-        
-        # 3. Prompt optimizado para Gemini
-        prompt_completo = PROMPT_IMAGEN_TEMPLATE.format(titulo_post=titulo_noticia)
+    # 2. Configuración de reintentos
+    max_intentos = 3
+    client = genai.Client(api_key=api_key)
+    prompt_completo = PROMPT_IMAGEN_TEMPLATE.format(titulo_post=titulo_noticia)
 
-        # 4. Generación de imagen
-        # Usamos el modelo de imagen de Gemini (Nano Banana 2)
-        response = client.models.generate_image(
-            model="gemini-3-flash-image", # O el nombre del modelo de imagen activo en tu tier
-            prompt=prompt_completo
-        )
-
-        # 5. Guardar el objeto binario directamente
-        os.makedirs(CONFIG["IMAGES_FOLDER"], exist_ok=True)
-        
-        # Gemini suele devolver la imagen en bytes directamente en la respuesta
-        with open(filepath, 'wb') as f:
-            f.write(response.image_bytes)
+    for intento in range(max_intentos):
+        try:
+            print(f"🎨 Generando imagen IA para: '{titulo_noticia}' (Intento {intento+1})...")
             
-        print(f"✅ Imagen de Gemini guardada en: {filepath}")
-        return f"{CONFIG['IMAGES_PATH_PREFIX']}/{filename}"
+            # Generación de imagen
+            response = client.models.generate_image(
+                model="gemini-3-flash-image",
+                prompt=prompt_completo
+            )
 
-    except Exception as e:
-        print(f"❌ Error en Gemini Image: {e}")
-        return None
+            # Guardar el objeto binario
+            os.makedirs(CONFIG["IMAGES_FOLDER"], exist_ok=True)
+            with open(filepath, 'wb') as f:
+                f.write(response.image_bytes)
+                
+            print(f"✅ Imagen de Gemini guardada en: {filepath}")
+            return f"{CONFIG['IMAGES_PATH_PREFIX']}/{filename}"
+
+        except Exception as e:
+            # Manejo de limitaciones (Error 429 / Resource Exhausted)
+            if "429" in str(e) or "QUOTA" in str(e).upper():
+                tiempo_espera = 40 * (intento + 1)
+                if intento < max_intentos - 1:
+                    print(f"⏳ Límite alcanzado. Reintentando en {tiempo_espera}s...")
+                    await asyncio.sleep(tiempo_espera)
+                else:
+                    print("❌ Agotados los reintentos de cuota para imagen.")
+            else:
+                print(f"⚠️ Error inesperado en imagen: {e}")
+                break # Si es otro tipo de error (ej. prompt bloqueado), no reintentamos
+
+    # 3. EL GRAN FALLBACK: Si todo falla, devolvemos la imagen scrapeada
+    print(f"🔄 Usando imagen original de la fuente para: {titulo_noticia}")
+    return url_imagen_scrap if url_imagen_scrap else "/img/default-tech.webp"
 
 
 
