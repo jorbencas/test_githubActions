@@ -368,6 +368,7 @@ async def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
                     resumen_corto=resumen_corto_limpio,
                     fecha_pub=fecha_pub,
                     slug_name=f"{slug}",
+                    ruta_imagen="https://github.com/jorbencas/test_githubActions/blob/master/public/optimizado/Image.png?raw=true",
                     contenido=resumen_final,
                     lista_enlaces=md_links
                 ))
@@ -574,7 +575,7 @@ async def generar_imagen_noticia(titulo_noticia, url_imagen_scrap):
 
     # 3. EL GRAN FALLBACK: Si todo falla, devolvemos la imagen scrapeada
     print(f"🔄 Usando imagen original de la fuente para: {titulo_noticia}")
-    return url_imagen_scrap if url_imagen_scrap else "/img/default-tech.webp"
+    return url_imagen_scrap if url_imagen_scrap else "https://github.com/jorbencas/test_githubActions/blob/master/public/optimizado/Image.png?raw=true"
 
 
 

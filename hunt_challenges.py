@@ -126,7 +126,7 @@ async def generar_imagen_noticia(titulo_noticia, client):
         return f"{CONFIG['IMAGES_PATH_PREFIX']}/{filename}"
     except Exception as e:
         print(f"❌ Error Imagen: {e}")
-        return ""
+        return "https://github.com/jorbencas/test_githubActions/blob/master/public/optimizado/Image.png?raw=true"
 
 # ==========================================
 # 3. CORE: PROCESO DE "HUNT" (CACERÍA)
