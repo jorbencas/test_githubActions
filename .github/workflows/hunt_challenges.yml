@@ -24,7 +24,7 @@ jobs:
 
       - name: 🏹 Ejecutar Cacería de Retos
         env:
-          GEMINI_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python hunt_challenges.py
       - name: Checkout blog repo
         uses: actions/checkout@v3
