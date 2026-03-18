@@ -1,5 +1,17 @@
 [
     {
+        "titulo": "blog.google",
+        "enlace": "https://news.ycombinator.com/from?site=blog.google",
+        "fuente": "Hacker News",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-18T12:11:46.853001",
+        "badge": "Tech",
+        "raw": "blog.google",
+        "imagen_url_original": "",
+        "ts": "2026-03-18T12:11:46.853011",
+        "f": "18/03"
+    },
+    {
         "titulo": "Spider-Man: Brand New Day lanza su teaser tráiler oficial, con Tom Holland de regreso al Universo Marvel",
         "enlace": "https://www.hobbyconsolas.com/hobbycine/spider-man-brand-new-day-lanza-su-teaser-trailer-oficial-con-tom-holland-regreso-universo-marvel_6911578_0.html",
         "fuente": "HobbyConsolas",
