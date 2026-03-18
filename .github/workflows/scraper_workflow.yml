@@ -1,4 +1,4 @@
-name: scraper_workflow
+name: 📰 scraper_workflow
 on:
   push:
     branches:
@@ -40,7 +40,7 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
-      - name: Install dependencies
+      - name: 📦 Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4 telethon google-genai mtranslate edge-tts slugify
@@ -50,11 +50,11 @@ jobs:
           git config user.name jorbencas
           git config user.email jorbencas@gmail.com
           git pull origin master --rebase
-      - name: Optimize Images
+      - name: 🖼️ Optimize Images
         run: |
           pip install Pillow
           python optimize.py
-      - name: Run scraper
+      - name: 💻 Run scraper
         env:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
@@ -64,14 +64,14 @@ jobs:
           TOKEN_API_ID: ${{ secrets.TOKEN_API_ID }}
         run: python downloadFile.py
         shell: bash
-      - name: Checkout blog repo
+      - name: 📂 Checkout blog repo
         uses: actions/checkout@v3
         with:
           repository: jorbencas/blog
           path: blog
           token: ${{ secrets.BLOG_TOKEN }}
           fetch-depth: 0
-      - name: Copy auto-news to blog
+      - name: 🔄 Copy auto-news to blog
         id: news_copied_to_blog_folder # You need an ID to reference it later
         run: |
           mkdir -p blog/src/content/auto-news
@@ -86,7 +86,7 @@ jobs:
               copied="yes"
           fi
           echo "copied=$copied" >> $GITHUB_OUTPUT
-      - name: Commit and push to blog
+      - name: 🚀 Commit and push to blog
         if: steps.news_copied_to_blog_folder.outputs.copied == 'yes'
         run: |
           cd blog
@@ -96,7 +96,7 @@ jobs:
           git add .
           git diff --quiet && git diff --staged --quiet || git commit -m "[bot] Add auto-generated news posts"
           git push origin main
-      - name: Update Github repo
+      - name: 📝 Update Github repo
         if: always()
         run: |
           git config user.name jorbencas
@@ -104,6 +104,6 @@ jobs:
           git add .
           git diff --quiet && git diff --staged --quiet || git commit -m "[bot] update tech news scraping"
           git push origin master
-      - name: Deploy to jorbencasdownloaderdocument.surge.sh
+      - name: ✨ Deploy to jorbencasdownloaderdocument.surge.sh
         run : |
           npx surge public jorbencasdownloaderdocument.surge.sh --token ${{ secrets.SURGE_TOKEN }}
