@@ -348,7 +348,7 @@ async def publicar_contenidos(historial, nuevos, resumen_ia, scr ):
                     res = res.replace("{paso_3}", str(sol.get('paso3', '')))
                     res = res.replace("{codigo_solucion}", str(sol.get('codigo', '')))
                     
-                    with open(f"./auto-news/reto-{fecha_iso}-{slug}.md", "w", encoding="utf-8") as f:
+                    with open(f"./auto-challenges/reto-{fecha_iso}-{slug}.md", "w", encoding="utf-8") as f:
                         f.write(res)
                     continue
             elif "youtube.com" not in n['enlace'] and "youtu.be" not in n['enlace']:
@@ -515,9 +515,6 @@ async def enviar_telegram_con_audio(resumen, nuevos):
     except Exception as e:
         print(f"⚠️ Error en TTS Humano: {e}")
 
-
-
-
 async def generar_imagen_noticia(titulo_noticia, url_imagen_scrap):
     """
     Genera una imagen usando Gemini 3 con reintentos.
@@ -576,102 +573,6 @@ async def generar_imagen_noticia(titulo_noticia, url_imagen_scrap):
     # 3. EL GRAN FALLBACK: Si todo falla, devolvemos la imagen scrapeada
     print(f"🔄 Usando imagen original de la fuente para: {titulo_noticia}")
     return url_imagen_scrap if url_imagen_scrap else "https://github.com/jorbencas/test_githubActions/blob/master/public/optimizado/Image.png?raw=true"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # --- FUNCIONALIDAD LINK CHECKER ---
 async def main():

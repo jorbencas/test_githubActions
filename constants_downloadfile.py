@@ -255,6 +255,7 @@ import Challenge from '@components/Challenge.astro';
 Solución Técnica
 
 {codigo_solucion}
+```
 </div>
 </details>
 """
