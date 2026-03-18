@@ -28,7 +28,7 @@ jobs:
       # 3. Instala la librería requests
       - name: Instalar dependencias
         run:
-          pip install requests playwright install chromium 
+          pip install requests playwright chromium 
 
       # 4. Ejecuta tu script de Python
       - name: Ejecutar monitor de Netflix
