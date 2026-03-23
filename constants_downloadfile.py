@@ -173,19 +173,36 @@ EMAIL_TEMPLATE = """
 """
 
 MD_TEMPLATE = """---
-draft: false
 title: "{titulo}"
-description: "{resumen_corto}"
-pubDate: "{fecha_pub}"
-tags: ['web', 'tech', 'ia']
-slug: "{slug_name}"
+description: "{description}"
+pubDate: "{fecha_iso}"
+author: "{author}"
 image: "{ruta_imagen}"
-author: "Jorge Beneyto Castelló"
+tags: {tags}
+slug: "{slug_name}"
+draft: false
 ---
-{contenido}
 
-### 🔗 Enlaces de interés
-{lista_enlaces}
+## 🚀 Lo más destacado de la semana
+
+{introduccion}
+
+{bloque_noticias}
+
+---
+
+### 🛠️ Herramienta o Repo de la Semana
+He encontrado este recurso que te puede ahorrar horas de trabajo:
+- **Link:** [{repo_name}]({repo_url})
+- **Utilidad:** {repo_desc}
+
+---
+
+## 🏁 Conclusión rápida (TL;DR)
+{conclusion_tldr}
+
+---
+> **Nota del autor:** {nota_personal}
 """
 
 # --- En constants_downloadfile.py ---

@@ -10,6 +10,8 @@ SERIES = {
     "Berlín": "81584733",
     "La casa de papel": "80192017"
 }
+"https://www.netflix.com/title/82152349"
+
 
 def get_data(page, name, n_id):
     url = f"https://www.netflix.com/es/title/{n_id}"

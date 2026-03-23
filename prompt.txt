@@ -1,0 +1,41 @@
+He revisado tu blog "Problemas de un desarrollador Web" y me gusta mucho que seas constante (se ve que publicas casi a diario). Tienes una base sólida con Astro, pero para que el blog pase de ser un "registro de notas" a una herramienta de marca personal potente, te sugiero las siguientes mejoras:
+
+1. Limpieza de contenido (Curación)
+He notado que tienes muchos posts titulados "Reporte Tech [Fecha]".
+
+El problema: Si el contenido es un resumen de noticias generado o muy breve, el lector se pierde entre tantos posts similares y el SEO se diluye.
+
+Mejora: En lugar de un post diario de noticias, ¿por qué no haces un "Weekly Tech Recap" (Resumen semanal)? Agruparías las noticias en un solo post más robusto, lo cual es mejor para Google y más cómodo de leer.
+
+2. Formateo y Visualización (UI/UX)
+En los extractos de los posts (especialmente los de "Reporte Tech"), se ven etiquetas HTML como <p style='margin-bottom:15px...'>.
+
+Mejora: Revisa cómo estás renderizando el description o el excerpt en tu componente de Astro. Deberías limpiar el HTML o usar un campo de texto plano para que la previsualización en la home se vea limpia.
+
+3. Personalización del "Día a Día"
+Mencionabas en tu pregunta anterior lo de escribir cosas que te pasan:
+
+Mejora: Crea una categoría específica llamada "Diario de Dev" o "Log".
+
+Dale un toque más humano. El post de "Manual Maestro de Git" está genial, pero añade un párrafo al principio: "Hoy tuve que arreglar un lío con los rebase en el trabajo y me di cuenta de que siempre olvido estos comandos, así que aquí los dejo...". Eso conecta más con el lector.
+
+4. Implementación de un CMS (Para lo que preguntabas de "modificar desde la web")
+Como usas Astro y lo tienes en Vercel, tienes opciones geniales para editar sin tocar código:
+
+Keystatic: Es perfecto para Astro. Te permite tener una interfaz en /admin dentro de tu web para escribir tus posts en Markdown de forma visual.
+
+Decap CMS (antes Netlify CMS): Muy sencillo de configurar con archivos YAML.
+
+Ventaja: Podrás escribir desde el móvil o cualquier navegador cuando te pase algo interesante en el día, sin abrir el editor de código.
+
+5. SEO y Navegación
+Tags: Tienes una buena lista de etiquetas, pero asegúrate de que cada una tenga una descripción o que no estén vacías.
+
+Buscador: A medida que crezca el blog, un buscador (puedes usar Pagefind, que funciona increíble con Astro) será vital.
+
+6. El footer y Redes Sociales
+Tienes muchos enlaces a blogs antiguos (Wordpress, Blogger, Google Sites).
+
+Consejo: Si esos blogs ya no están activos o tienen contenido viejo, quizás sea mejor mover los mejores posts de ahí a este nuevo blog de Astro y poner un aviso de "Me he mudado aquí". Mantener tantos enlaces puede distraer al usuario de tu contenido actual.
+
+¿Qué te parece si intentamos arreglar lo de las etiquetas HTML que se ven en la home? Si me pasas el código de tu componente de tarjeta de post, te digo cómo limpiarlo.

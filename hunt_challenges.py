@@ -3,11 +3,13 @@ import json
 import re
 import asyncio
 import requests
+import inspect  # Necesario para limpiar el template
 from bs4 import BeautifulSoup
 from mtranslate import translate
 from datetime import datetime
 from google import genai
 from slugify import slugify
+
 # Importamos tus constantes personalizadas
 from constants_downloadfile import (
     CONFIG, 
@@ -71,39 +73,11 @@ def clean_challenges(folder="./auto-challenges"):
 
     print(f"✨ Limpieza terminada. Se eliminaron {borrados} archivos.")
 
-# ==========================================
-# 2. GENERACIÓN DE CONTENIDO (IA & IMAGEN)
-# ==========================================
 
-async def obtener_solucion_ia(titulo, nombre, client):
-    """Obtiene la solución de Gemini con sistema de reintentos."""
-    max_intentos = 3
-    for intento in range(max_intentos):
-        try:
-            prompt = f"Resuelve el reto técnico: {titulo} de {nombre}. Explica en español pero mantén términos técnicos en inglés. JSON requerido: descripcion, paso1, paso2, paso3, codigo, lenguaje."
-            response = client.models.generate_content(model="gemini-2.0-flash-lite", contents=prompt)
-            
-            texto_limpio = response.text.strip()
-            # Extraer JSON de bloques de código si existen
-            if "```json" in texto_limpio:
-                texto_limpio = re.search(r'```json\s*(.*?)\s*```', texto_limpio, re.DOTALL).group(1)
-            elif "```" in texto_limpio:
-                texto_limpio = re.search(r'```\s*(.*?)\s*```', texto_limpio, re.DOTALL).group(1)
-            
-            return json.loads(texto_limpio)
-        except Exception as e:
-            if "429" in str(e):
-                espera = 35 * (intento + 1)
-                print(f"⏳ Cuota excedida. Reintentando en {espera}s...")
-                await asyncio.sleep(espera)
-            else:
-                print(f"⚠️ Error Gemini para '{titulo}': {e}")
-                break
-    return None
 
 async def generar_imagen_noticia(titulo_noticia, client):
     """Genera imagen rápida con Gemini 3 Flash Image."""
-    slug = slugify(titulo_noticia)
+    slug = slugify(titulo_noticia)[:40]
     filename = f"{slug}.png"
     filepath = os.path.join(CONFIG["IMAGES_FOLDER"], filename)
 
@@ -126,21 +100,55 @@ async def generar_imagen_noticia(titulo_noticia, client):
         return f"{CONFIG['IMAGES_PATH_PREFIX']}/{filename}"
     except Exception as e:
         print(f"❌ Error Imagen: {e}")
-        return "https://github.com/jorbencas/test_githubActions/blob/master/public/optimizado/Image.png?raw=true"
+        return "[https://github.com/jorbencas/test_githubActions/blob/master/public/optimizado/Image.png?raw=true](https://github.com/jorbencas/test_githubActions/blob/master/public/optimizado/Image.png?raw=true)"
+
 
 # ==========================================
-# 3. CORE: PROCESO DE "HUNT" (CACERÍA)
+# 2. GENERACIÓN DE CONTENIDO (IA & IMAGEN)
 # ==========================================
+
+async def obtener_solucion_ia(titulo, fuente, client):
+    """Obtiene solución técnica con esquema JSON estricto y extracción robusta."""
+    prompt = f"""
+    Resuelve el reto técnico: "{titulo}" de la fuente {fuente}.
+    Explica en español pero mantén términos técnicos en inglés.
+    
+    RESPONDE EXCLUSIVAMENTE UN OBJETO JSON con este formato:
+    {{
+      "descripcion": "explicación breve",
+      "paso1": "análisis del problema",
+      "paso2": "lógica de programación",
+      "paso3": "complejidad o Big O",
+      "codigo": "código completo comentado",
+      "lenguaje": "nombre del lenguaje",
+      "dificultad": "Fácil, Intermedio o Difícil"
+    }}
+    """
+    for intento in range(3):
+        try:
+            response = client.models.generate_content(model="gemini-2.0-flash-lite", contents=prompt)
+            # Extracción robusta del JSON entre llaves
+            match = re.search(r'(\{.*\})', response.text.strip(), re.DOTALL)
+            if match:
+                return json.loads(match.group(1))
+        except Exception as e:
+            if "429" in str(e):
+                await asyncio.sleep(45 * (intento + 1))
+            else:
+                print(f"⚠️ Error Gemini en '{titulo}': {e}")
+                break
+    return None
 
 async def hunt():
+    """Cacería de retos en webs externas."""
     api_key = CONFIG.get("GEMINI_KEY")
-    if not api_key: return print("❌ No GEMINI_KEY.")
+    if not api_key: return print("❌ Sin API KEY.")
         
     client = genai.Client(api_key=api_key)
     folder = "./auto-challenges"
     os.makedirs(folder, exist_ok=True)
     
-    headers = {'User-Agent': 'Mozilla/5.0...'}
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
     retos_nuevos = []
     
     for nombre, config in WEBS_RETOS.items():
@@ -154,50 +162,46 @@ async def hunt():
             
             for i in items:
                 titulo_raw = i.get_text(strip=True)
-                if not titulo_raw: continue
+                if len(titulo_raw) < 5: continue
                 
                 titulo_es = translate(titulo_raw, 'es')
                 slug = f"reto-{slugify(titulo_es)[:40]}"
                 path = f"{folder}/{slug}.md"
                 
                 if not os.path.exists(path):
-                    print(f"🤖 Nuevo reto: {titulo_es}")
+                    print(f"🎯 Cazado: {titulo_es}")
                     sol = await obtener_solucion_ia(titulo_es, nombre, client)
                     
-                    if sol and isinstance(sol, dict):
-                        lang = sol.get('lenguaje', 'python').lower()
+                    if sol:
                         img_url = await generar_imagen_noticia(titulo_es, client)
+                        lang = sol.get('lenguaje', 'python').lower()
                         
-                        # Inyección en el template
-                        res = RETO_MD_TEMPLATE.replace("{titulo}", titulo_es)\
-                            .replace("{resumen_corto}", sol.get('descripcion','')[:150].replace('"', "'") + "...")\
-                            .replace("{fecha_pub}", datetime.now().strftime("%Y-%m-%d"))\
-                            .replace("{slug_name}", slug)\
-                            .replace("{tags_seo}", json.dumps([lang, 'retos']))\
-                            .replace("{descripcion_ia}", sol.get('descripcion',''))\
-                            .replace("{ruta_imagen}", img_url)\
-                            .replace("{paso_1}", sol.get('paso1',''))\
-                            .replace("{paso_2}", sol.get('paso2',''))\
-                            .replace("{paso_3}", sol.get('paso3',''))\
-                            .replace("{lenguaje_lower}", lang)\
-                            .replace("{codigo_solucion}", sol.get('codigo',''))
+                        # Inyección limpia en el Template
+                        res = inspect.cleandoc(RETO_MD_TEMPLATE).format(
+                            titulo=titulo_es.replace('"', "'"),
+                            resumen_corto=sol.get('descripcion', '')[:140].replace('"', "'"),
+                            fecha_pub=datetime.now().strftime("%Y-%m-%d"),
+                            slug_name=slug,
+                            tags_seo=json.dumps([lang, 'retos', 'ia']),
+                            descripcion_ia=sol.get('descripcion', ''),
+                            ruta_imagen=img_url,
+                            dificultad=sol.get('dificultad', 'Intermedio'),
+                            paso_1=sol.get('paso1', ''),
+                            paso_2=sol.get('paso2', ''),
+                            paso_3=sol.get('paso3', ''),
+                            lenguaje_lower=lang,
+                            codigo_solucion=sol.get('codigo', '')
+                        )
                         
                         with open(path, "w", encoding="utf-8") as f: 
                             f.write(res)
-                            
                         retos_nuevos.append(titulo_es)
                         await asyncio.sleep(5) 
                 else:
                     print(f"⏭️ Existe: {slug}")
-
         except Exception as e: 
-            print(f"⚠️ Error fuente {nombre}: {e}")
+            print(f"⚠️ Error {nombre}: {e}")
 
-    # Notificaciones y limpieza final
     if retos_nuevos:
-        await enviar_telegram(f"🏹 *¡Cacería exitosa!*\n{len(retos_nuevos)} nuevos retos.")
-    
+        await enviar_telegram(f"🏹 *Cacería:* {len(retos_nuevos)} nuevos retos.")
     clean_challenges(folder)
-
-if __name__ == "__main__":
-    asyncio.run(hunt())

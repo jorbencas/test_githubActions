@@ -6,6 +6,8 @@ from concurrent.futures import ThreadPoolExecutor
 CONFIG = {
     "FOLDER": "files"
 }
+
+
 def limpiar_y_validar_historial(historial):
     if not historial: return []
     
