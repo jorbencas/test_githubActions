@@ -1,0 +1,35 @@
+. ¿Qué debería hacer tu Script de Noticias? (Estrategia de Curación)
+Para que tu automatización no parezca "basura" o "spam" de IA, el script debe seguir este flujo de Curación Selectiva:
+
+A. Fase de Captura (Inflow)
+No te limites a una sola fuente. Tu script debería consultar:
+
+RSS Feeds de sitios top (TechCrunch, The Verge, Wired).
+
+GitHub Trending (para la sección de herramientas).
+
+Hacker News (para captar qué está discutiendo la comunidad dev).
+
+B. El "Filtro de Relevancia" (Prompt de la IA)
+Cuando le pases los datos a la IA para generar el Markdown, no le pidas "un resumen". Pídele lo siguiente:
+
+Agrupar por temas: Si hay 3 noticias de OpenAI, que las junte en un solo bloque.
+
+Calcular el impacto: Que responda a la pregunta: "¿Cómo afecta esto a un programador promedio?".
+
+Extraer Keywords: Para que las tags del frontmatter sean automáticas y precisas (ej: ["react", "frontend", "ia"]).
+
+C. Estructura de Salida (Output)
+El script debe escribir el archivo directamente en src/content/auto-news/ siguiendo este formato:
+
+Nombre de archivo: 2026-W12-recap.md (Año-Semana).
+
+Frontmatter: Debe incluir una imagen llamativa (puedes usar una API de stock como Unsplash o generar una con DALL-E/Midjourney con un prompt tipo "Futuristic tech hardware, cyan and purple lighting").
+
+Cuerpo: Un sistema de 3 capas:
+
+Titular de impacto.
+
+Resumen en 2 puntos.
+
+Enlace a la fuente original (importante para la credibilidad).
