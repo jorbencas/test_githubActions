@@ -351,7 +351,7 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
 
         # Generar Chips de canales con Avatar
         if fuente_limpia not in canales_vistos:
-            url_c = next((info['yt'] for name, info in FUENTES.items() if name.startswith(fuente_limpia)), None)
+            url_c = next((info.get('yt') for name, info in FUENTES.items() if name.startswith(fuente_limpia) and info.get('yt')), None)
             if url_c:
                 img_avatar = scr.obtener_avatar_canal(fuente_limpia, url_c)
                 chips_html += f'<div class="chip" data-filtro="{fuente_limpia}" onclick="filtrarCanal(\'{fuente_limpia}\', this)"><img src="{img_avatar}">{fuente_limpia}</div>'
