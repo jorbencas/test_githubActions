@@ -336,7 +336,7 @@ async def generar_blog_astro(noticias_web, fecha_iso, year, week, client):
     return data_ia.get('introduccion', '')
 
 
-def generar_dashboard_html(historial, scr, fecha_h, ahora):
+def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
     v_html, n_html = "", ""
     canales_vistos = []
     
@@ -374,7 +374,7 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora):
     with open("public/index.html", "w", encoding="utf-8") as f:
         f.write(HTML_TEMPLATE.format(
             fecha_hoy=fecha_h, 
-            resumen="Resumen diario disponible en el Blog.", 
+            resumen=resumen_ia, 
             bloque_chips=chips_html, 
             bloque_videos=v_html, 
             bloque_noticias=n_html,
