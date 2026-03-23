@@ -33,3 +33,83 @@ Titular de impacto.
 Resumen en 2 puntos.
 
 Enlace a la fuente original (importante para la credibilidad).
+
+
+
+
+
+
+
+
+
+
+
+
+
+🤖 Prompt para Generación de Weekly Recap
+Actúa como un Editor Senior de Tecnología y Curador de Contenidos Dev.
+
+Tu objetivo: Crear un reporte semanal de noticias tecnológicas llamado "Weekly Recap" para mi blog personal. El tono debe ser profesional, técnico pero accesible, con un toque "Cyberpunk/Minimalista".
+
+Entrada de datos: [AQUÍ PEGA LAS NOTICIAS BRUTAS O LINKS DE LA SEMANA]
+
+Instrucciones de Formato (ESTRICTO):
+
+Frontmatter (YAML):
+
+title: Un titular con gancho (no uses "Weekly #12", usa algo como "El renacer de la IA y el nuevo estándar de JS").
+
+description: Un resumen de 2 líneas máximo que invite a leer.
+
+pubDate: La fecha de hoy en formato AAAA-MM-DD.
+
+author: "Tu Nombre".
+
+tags: Un array de 3 a 5 strings (incluye siempre "weekly" y temas como "ia", "dev", "web").
+
+image: Una URL de imagen relacionada o un placeholder de alta calidad.
+
+draft: false.
+
+Estructura del Cuerpo:
+
+Empieza con una sección ## 🚀 Resumen de Impacto.
+
+Divide las noticias en bloques de ### [Título de Noticia].
+
+Para cada noticia incluye: ¿Qué ocurrió? (Contexto) y ¿Por qué nos importa? (Análisis para developers).
+
+Añade una sección ## 🛠️ Tool of the Week mencionando un repo de GitHub o herramienta nueva.
+
+Termina con un ## 🏁 Conclusión TL;DR en puntos clave.
+
+Restricciones:
+
+No uses lenguaje genérico de IA (evita "En el cambiante mundo de la tecnología...").
+
+Usa negritas para resaltar conceptos clave.
+
+Si hay varias noticias del mismo tema, agrúpalas en un solo bloque.
+
+🛠️ ¿Qué debe hacer técnicamente tu Script de Automatización?
+Si tienes un script (Python, Node.js o una herramienta tipo Make/n8n), este es el flujo lógico que debe seguir para mantener tu blog limpio:
+
+Recolección (Lunes a Sábado):
+
+El script guarda cada noticia interesante en un archivo temporal buffer.json. No publica nada todavía para evitar el "spam" de posts cortos.
+
+Curación (Domingo):
+
+El script lee el buffer.json.
+
+Envía todo ese texto al Prompt Maestro de arriba.
+
+Recibe el Markdown generado.
+
+Escritura y Limpieza:
+
+Crea el archivo en src/content/weeklyPosts/recap-semana-XX.md.
+
+IMPORTANTE: El script debe vaciar el buffer.json para empezar la siguiente semana de cero.
+
+Si tienes una carpeta de auto-news con reportes diarios antiguos, el script debe borrarlos o moverlos a una carpeta /archive/ para que no afecten al SEO de tu página principal.
