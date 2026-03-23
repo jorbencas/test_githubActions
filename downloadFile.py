@@ -219,7 +219,7 @@ async def generar_retos_individuales(noticias_web, fecha_iso, client):
             sol = await obtener_solucion_ia(n['titulo'], n.get('fuente', 'Web'), client)
             
             if sol:
-                img_reto = await generar_imagen_noticia(n['titulo'], client)
+                img_reto = await generar_imagen_noticia(n['titulo'], "", client)
                 lang = sol.get('lenguaje', 'python').lower()
 
                 try:
@@ -250,23 +250,12 @@ async def generar_retos_individuales(noticias_web, fecha_iso, client):
                 except Exception as e:
                     print(f"❌ Error inesperado en '{slug_reto}': {e}")
 
-async def obtener_recap_semanal_ia(noticias):
+async def obtener_recap_semanal_ia(noticias, client):
     """
     Sustituye a obtener_resumen_ia. 
     Analiza las noticias y genera el contenido estructurado para el Blog y el Dashboard.
     """
-    if not CONFIG["GEMINI_KEY"] or not noticias: 
-        return {
-            "introduccion": "Sin novedades destacadas para resumir hoy.",
-            "noticias_destacadas": "",
-            "repo": {"nombre": "", "url": "", "desc": ""},
-            "tldr": "No hay datos suficientes.",
-            "tags": ["news"],
-            "nota_personal": ""
-        }
-
     try:
-        client = genai.Client(api_key=CONFIG["GEMINI_KEY"])
         
         # Preparamos los titulares para que la IA los procese
         texto_noticias = "\n".join([f"- {n['fuente']}: {n['titulo']}" for n in noticias[:15]])
@@ -311,17 +300,17 @@ async def obtener_recap_semanal_ia(noticias):
         # Retornamos un objeto vacío con la misma estructura para evitar errores de .get()
         return None
 
-async def generar_blog_astro(noticias_web, fecha_iso, year, week):
+async def generar_blog_astro(noticias_web, fecha_iso, year, week, client):
     # FILTRO: Cero YouTube en el Blog para evitar errores en Vercel
     noticias_blog = [n for n in noticias_web if "yout" not in n['enlace']]
     if not noticias_blog: return None
 
     # Usamos el prompt nuevo que devuelve JSON
-    data_ia = await obtener_recap_semanal_ia(noticias_blog)
+    data_ia = await obtener_recap_semanal_ia(noticias_blog, client)
     if not data_ia: return None
 
     semana_slug = f"{year}-w{week:02d}-tech-recap"
-    img_recap = await generar_imagen_noticia(f"Recap {week}", noticias_blog[0].get('imagen_url_original', ''))
+    img_recap = await generar_imagen_noticia(f"Recap {week}", noticias_blog[0].get('imagen_url_original', ''), client)
     
     final_md = inspect.cleandoc(MD_TEMPLATE).format(
         titulo=f"Weekly Tech Recap W{week}",
@@ -402,12 +391,14 @@ async def publicar_contenidos(historial, nuevos, scr):
     # Filtramos noticias web para la IA
     noticias_web = filtrar_solo_noticias(nuevos)
 
+    client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
+
     # 1. Generamos el Blog y sacamos el resumen para el dashboard
     # (Ya no necesitas llamar a obtener_resumen_ia por separado)
-    resumen_ia = await generar_blog_astro(noticias_web, fecha_iso, year, week)
+    resumen_ia = await generar_blog_astro(noticias_web, fecha_iso, year, week, client)
 
     # 2. Generamos los Retos (¡Ya no me los paso por el forro!)
-    await generar_retos_individuales(noticias_web, fecha_iso)
+    await generar_retos_individuales(noticias_web, fecha_iso, client)
 
     # 3. Generamos el Dashboard HTML (con vídeos, chips y el resumen de la IA)
     generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia or "Sin novedades hoy.")
@@ -857,16 +848,11 @@ async def enviar_telegram_con_audio(resumen, nuevos):
     except Exception as e:
         print(f"⚠️ Error en TTS Humano: {e}")
 
-async def generar_imagen_noticia(titulo_noticia, url_imagen_scrap):
+async def generar_imagen_noticia(titulo_noticia, url_imagen_scrap, client):
     """
     Genera una imagen usando Gemini 3 con reintentos.
     Si falla tras los intentos, devuelve la imagen scrapeada original.
     """
-    api_key = CONFIG.get("GEMINI_KEY")
-    # Fallback inmediato si no hay API Key
-    if not api_key:
-        print("⚠️ No GEMINI_KEY found. Usando imagen scrapeada.")
-        return url_imagen_scrap
 
     slug = slugify(titulo_noticia)
     filename = f"{slug}.png"
@@ -878,7 +864,6 @@ async def generar_imagen_noticia(titulo_noticia, url_imagen_scrap):
 
     # 2. Configuración de reintentos
     max_intentos = 3
-    client = genai.Client(api_key=api_key)
     prompt_completo = PROMPT_IMAGEN_TEMPLATE.format(titulo_post=titulo_noticia)
 
     for intento in range(max_intentos):
