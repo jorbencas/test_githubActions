@@ -339,7 +339,54 @@ async def generar_blog_astro(noticias_web, fecha_iso, year, week, client):
 def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
     v_html, n_html = "", ""
     canales_vistos = []
+    historial.sort(key=lambda x: x.get('ts', ''), reverse=True)
+    # --- GENERAR CHIPS DE SEMANAS ---
+    conteo_meses = Counter()
+    for n in historial:
+        try:
+            # Extraemos el mes y año de la fecha de la noticia (ts)
+            dt_n = datetime.fromisoformat(n.get('ts'))
+            mes_key = dt_n.strftime('%B %Y').capitalize()
+            conteo_meses[mes_key] += 1
+        except: continue
+
+    # --- 2. GENERAR NAVEGACIÓN POR SEMANAS ---
+    try: locale.setlocale(locale.LC_TIME, "es_ES.UTF-8") 
+    except: pass
+
+    # Chip rápido (Últimas 2 semanas)
+    bloque_semanas = '<div class="chip active" data-inicio="all_recent" onclick="filtrarSemana(this)">🔄 Últimas 2 Semanas</div>'
     
+    selector_html = '<select id="selectorSemanas" onchange="filtrarDesdeSelector(this)" style="padding: 10px 15px; border-radius: 20px; border: 2px solid #007bff; background: white; color: #007bff; font-weight: bold; cursor: pointer; outline: none; margin-left: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">'
+    selector_html += '<option value="all">📅 Archivo Histórico...</option>'
+
+    mes_actual = ""
+    # Recorremos las últimas 26 semanas
+    for i in range(26):
+        inicio = ahora - timedelta(days=ahora.weekday() + (7*i))
+        inicio = inicio.replace(hour=0, minute=0, second=0, microsecond=0)
+        fin = inicio + timedelta(days=6, hours=23, minutes=59, seconds=59)
+        
+        nombre_mes = inicio.strftime('%B %Y').capitalize()
+        
+        # Si cambia el mes, cerramos el grupo anterior y abrimos el nuevo con el CONTADOR
+        if nombre_mes != mes_actual:
+            if mes_actual != "": selector_html += '</optgroup>'
+            total_mes = conteo_meses.get(nombre_mes, 0)
+            selector_html += f'<optgroup label="── {nombre_mes} ({total_mes} ítems) ──">'
+            mes_actual = nombre_mes
+        
+        txt_semana = f"Semana {inicio.strftime('%d/%m/%y')}"
+        val_ini = inicio.isoformat()
+        val_fin = fin.isoformat()
+        
+        selector_html += f'<option value="{val_ini}|{val_fin}">{txt_semana}</option>'
+    
+    selector_html += '</optgroup></select>'
+    
+    # Bloque final para el template
+    bloque_semanas_completo = f'<div class="filter-group" style="display:flex; align-items:center; flex-wrap:wrap; gap:10px;">{bloque_semanas} {selector_html}</div>'
+
     # Chips iniciales
     chips_html = '<div class="filter-container" style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px;">'
     chips_html += '<div class="chip active" data-filtro="\'all\'" onclick="filtrarCanal(\'all\', this)"><span>Todos</span></div>'
@@ -378,7 +425,7 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
             bloque_chips=chips_html, 
             bloque_videos=v_html, 
             bloque_noticias=n_html,
-            bloque_semanas="" # Puedes rellenar esto con tu lógica de semanas
+            bloque_semanas=bloque_semanas_completo # Puedes rellenar esto con tu lógica de semanas
         ))
     print("✅ Dashboard HTML generado con Chips y Vídeos.")
 
