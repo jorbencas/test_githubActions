@@ -100,7 +100,7 @@ async def generar_imagen_noticia(titulo_noticia, client):
         return f"{CONFIG['IMAGES_PATH_PREFIX']}/{filename}"
     except Exception as e:
         print(f"❌ Error Imagen: {e}")
-        return "[https://github.com/jorbencas/test_githubActions/blob/master/public/optimizado/Image.png?raw=true](https://github.com/jorbencas/test_githubActions/blob/master/public/optimizado/Image.png?raw=true)"
+        return "public/img/arquitectura_web.webp"
 
 
 # ==========================================
@@ -205,3 +205,6 @@ async def hunt():
     if retos_nuevos:
         await enviar_telegram(f"🏹 *Cacería:* {len(retos_nuevos)} nuevos retos.")
     clean_challenges(folder)
+
+if __name__ == "__main__":
+    hunt()

@@ -9,7 +9,7 @@ from mtranslate import translate
 from google import genai
 import edge_tts
 from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE, RETO_MD_TEMPLATE, PROMPT_IMAGEN_TEMPLATE
-from slugify import slugify # Instalar: pip install python-slugify
+from slugify import slugify 
 
 # Auto-añadir secciones de Shorts
 for nombre in list(FUENTES): # Usamos list() para poder modificar el dict mientras iteramos
@@ -317,7 +317,7 @@ async def generar_blog_astro(noticias_web, fecha_iso, year, week, client):
         description=data_ia.get('introduccion', '')[:150].replace('"', "'"),
         fecha_iso=fecha_iso,
         author="Jorge Beneyto Castelló",
-        ruta_imagen=img_recap or "/img/recap-default.webp",
+        ruta_imagen=img_recap or "https://github.com/jorbencas/test_githubActions/blob/master/public/optimizado/Image.png?raw=true",
         tags=json.dumps(data_ia.get('tags', ["tech"])),
         slug_name=semana_slug,
         introduccion=data_ia.get('introduccion', ''),
@@ -634,7 +634,7 @@ async def publicar_contenidos(historial, nuevos, scr):
 #                 description=data_ia.get('introduccion', '')[:150].replace('"', "'"),
 #                 fecha_iso=fecha_iso,
 #                 author="Jorge Beneyto Castelló",
-#                 ruta_imagen=img_recap or "/img/recap-default.webp",
+#                 ruta_imagen=img_recap or "public/img/arquitectura_web.webp",
 #                 tags=json.dumps(data_ia.get('tags', ["tech"])),
 #                 slug_name=semana_slug,
 #                 introduccion=data_ia.get('introduccion', ''),
@@ -946,7 +946,7 @@ async def generar_imagen_noticia(titulo_noticia, url_imagen_scrap, client):
 
     # 3. EL GRAN FALLBACK: Si todo falla, devolvemos la imagen scrapeada
     print(f"🔄 Usando imagen original de la fuente para: {titulo_noticia}")
-    return url_imagen_scrap if url_imagen_scrap else "https://github.com/jorbencas/test_githubActions/blob/master/public/optimizado/Image.png?raw=true"
+    return url_imagen_scrap if url_imagen_scrap else "public/img/arquitectura_web.webp"
 
 # --- FUNCIONALIDAD LINK CHECKER ---
 async def main():
