@@ -1,12 +1,15 @@
 import os
 import requests
 import json
+import re
+import time
 from playwright.sync_api import sync_playwright
 
-# Configuración
+# --- CONFIGURACIÓN ---
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 CACHE_FILE = "netflix_cache.json"
+
 SERIES = {
     "La Dama del Armiño": "82152349",
     "Berlín": "81584733",
@@ -14,35 +17,81 @@ SERIES = {
 }
 
 def enviar_telegram(nombre, rating, desc, img_url):
-    """Envía la tarjeta a Telegram usando HTML y manejando errores de imagen"""
-    # Limpieza de URL de imagen
+    """Envía la notificación usando HTML para máxima compatibilidad."""
     if img_url and img_url.startswith('//'):
         img_url = f"https:{img_url}"
     
     msg = (f"<b>🔔 ¡CAMBIO DETECTADO!</b>\n\n"
            f"🎬 <b>Serie:</b> {nombre}\n"
            f"🔞 <b>Rating:</b> {rating}\n"
-           f"📝 <b>Info:</b> {desc}")
+           f"📝 <b>Info:</b> {desc}\n"
+           f"🔗 <a href='https://www.netflix.com/title'>Ver en Netflix</a>")
 
     base_url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}"
     
     try:
+        # Intentar enviar FOTO
         if img_url:
-            # Intentar enviar con foto
             r = requests.post(f"{base_url}/sendPhoto", json={
                 "chat_id": TELEGRAM_CHAT_ID, "photo": img_url, "caption": msg, "parse_mode": "HTML"
             })
             if r.status_code == 200: return
         
-        # Si no hay foto o falla el envío de foto, enviar solo texto
+        # PLAN B: Enviar solo texto si la foto falla
         requests.post(f"{base_url}/sendMessage", json={
             "chat_id": TELEGRAM_CHAT_ID, "text": msg, "parse_mode": "HTML"
         })
     except Exception as e:
-        print(f"Error enviando Telegram: {e}")
+        print(f"❌ Error Telegram: {e}")
+
+def get_data(page, name, n_id):
+    url = f"https://www.netflix.com/es/title/{n_id}"
+    print(f"🕵️  Analizando: {name}...")
+    
+    try:
+        # Navegación con headers humanos
+        page.goto(url, wait_until="domcontentloaded", timeout=60000)
+        page.wait_for_timeout(3000) # Pausa anti-bot
+
+        # --- EXTRACCIÓN PLAN A: Selectores Visuales ---
+        rating = "Pendiente"
+        desc = "Sin detalles"
+        img_url = None
+
+        if page.locator('.maturity-number').is_visible():
+            rating = page.locator('.maturity-number').first.inner_text().strip()
+            if page.locator('.maturity-description').is_visible():
+                desc = page.locator('.maturity-description').first.inner_text().strip()
         
+        # --- EXTRACCIÓN PLAN B: Búsqueda en el Código Fuente (Más robusto) ---
+        if rating == "Pendiente":
+            html = page.content()
+            # Buscamos el rating en el JSON interno de la página
+            r_match = re.search(r'"maturityRating":\{"label":"([^"]+)"', html)
+            if r_match:
+                rating = r_match.group(1)
+            
+            d_match = re.search(r'"maturityDescription":"([^"]+)"', html)
+            if d_match:
+                desc = d_match.group(1)
+
+        # Extraer imagen (Poster)
+        img_el = page.locator('img.nm-collections-title-img').first
+        if img_el.is_visible():
+            img_url = img_el.get_attribute('src')
+        else:
+            # Fallback imagen por regex
+            i_match = re.search(r'"og:image" content="([^"]+)"', html)
+            if i_match: img_url = i_match.group(1)
+
+        return rating, desc, img_url
+
+    except Exception as e:
+        print(f"⚠️ Error en {name}: {e}")
+        return "Error", str(e), None
+
 def main():
-    # 1. Cargar cache (el "if -f" de Python)
+    # 1. Cargar Cache
     if os.path.exists(CACHE_FILE):
         with open(CACHE_FILE, 'r') as f:
             cache = json.load(f)
@@ -51,47 +100,33 @@ def main():
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        # Importante: El user_agent evita que Netflix nos bloquee de entrada
-        context = browser.new_context(user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36")
+        context = browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+            locale="es-ES"
+        )
         page = context.new_page()
 
+        cambios = False
         for nombre, n_id in SERIES.items():
-            url = f"https://www.netflix.com/es/title/{n_id}"
-            print(f"🕵️  Extrayendo datos de: {nombre}...")
+            rating, desc, img_url = get_data(page, nombre, n_id)
             
-            try:
-                page.goto(url, wait_until="domcontentloaded", timeout=60000)
-                
-                # --- EXTRACCIÓN REAL CON PLAYWRIGHT ---
-                # Esperamos a que el elemento del rating sea visible
-                page.wait_for_selector('.maturity-number', timeout=10000)
-                
-                rating_actual = page.locator('.maturity-number').first.inner_text().strip()
-                desc_actual = page.locator('.maturity-description').first.inner_text().strip()
-                
-                # Buscamos la imagen del póster
-                img_element = page.locator('img.nm-collections-title-img').first
-                img_url = img_element.get_attribute('src') if img_element.is_visible() else None
+            if rating == "Error": continue
 
-                # --- LÓGICA DE COMPARACIÓN ---
-                last_rating = cache.get(n_id, {}).get('rating')
+            last_rating = cache.get(n_id, {}).get('rating', 'Pendiente')
 
-                if rating_actual != last_rating:
-                    print(f"📢 ¡Novedad en {nombre}! {last_rating} -> {rating_actual}")
-                    enviar_telegram(nombre, rating_actual, desc_actual, img_url)
-                    
-                    # Actualizar cache
-                    cache[n_id] = {"rating": rating_actual, "name": nombre}
-                else:
-                    print(f"✅ {nombre} sin cambios.")
+            if rating != last_rating:
+                print(f"📢 ¡CAMBIO! {nombre}: {last_rating} -> {rating}")
+                enviar_telegram(nombre, rating, desc, img_url)
+                cache[n_id] = {"rating": rating, "name": nombre}
+                cambios = True
+            else:
+                print(f"✅ {nombre}: Sin cambios ({rating})")
 
-            except Exception as e:
-                print(f"❌ Error procesando {nombre}: {e}")
+        # 2. Guardar si hubo novedades
+        if cambios:
+            with open(CACHE_FILE, 'w') as f:
+                json.dump(cache, f, indent=4)
 
-        # 2. Guardar Memoria actualizada
-        with open(CACHE_FILE, 'w') as f:
-            json.dump(cache, f, indent=4)
-            
         browser.close()
 
 if __name__ == "__main__":
