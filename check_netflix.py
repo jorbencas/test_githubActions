@@ -8,7 +8,7 @@ TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 CACHE_FILE = "netflix_cache.json"
 
-def enviar_telegram(nombre, rating, desc, img_url):
+def enviar_a_telegram(nombre, rating, desc, img_url):
     """
     Envía una notificación a Telegram. 
     Usa HTML para evitar errores de parseo y valida la URL de la imagen.
