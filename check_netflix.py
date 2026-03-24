@@ -8,31 +8,67 @@ TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 CACHE_FILE = "netflix_cache.json"
 
-def enviar_a_telegram(nombre, rating, descripcion, url_imagen):
-    """Envía una foto con un pie de página formateado"""
-    url_api = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendPhoto"
+def enviar_telegram(nombre, rating, desc, img_url):
+    """
+    Envía una notificación a Telegram. 
+    Usa HTML para evitar errores de parseo y valida la URL de la imagen.
+    """
+    # 1. Limpieza de la URL de la imagen (Netflix usa a veces // o /)
+    if img_url:
+        if img_url.startswith('//'):
+            img_url = f"https:{img_url}"
+        elif img_url.startswith('/'):
+            img_url = f"https://www.netflix.com{img_url}"
     
-    mensaje = (
-        f"🔔 *¡CAMBIO DETECTADO!*\n\n"
-        f"🎬 *Serie:* {nombre}\n"
-        f"🔞 *Nuevo Rating:* {rating}\n"
-        f"📝 *Info:* {descripcion}"
-    )
+    # 2. Configuración de URLs de la API
+    token = os.getenv('TELEGRAM_TOKEN')
+    chat_id = os.getenv('TELEGRAM_CHAT_ID')
     
-    payload = {
-        "chat_id": TELEGRAM_CHAT_ID,
-        "photo": url_imagen if url_imagen else "https://via.placeholder.com/400x600?text=Netflix",
-        "caption": mensaje,
-        "parse_mode": "Markdown"
-    }
-    
-    try:
-        response = requests.post(url_api, json=payload)
-        response.raise_for_status()
-        print(f"🚀 Notificación enviada para {nombre}")
-    except Exception as e:
-        print(f"❌ Error al enviar a Telegram: {e}")
+    url_foto = f"https://api.telegram.org/bot{token}/sendPhoto"
+    url_texto = f"https://api.telegram.org/bot{token}/sendMessage"
 
+    # 3. Formateo del mensaje en HTML (Más robusto que Markdown)
+    mensaje = (
+        f"<b>🔔 ¡ACTUALIZACIÓN DETECTADA!</b>\n\n"
+        f"🎬 <b>Serie:</b> {nombre}\n"
+        f"🔞 <b>Clasificación:</b> {rating}\n"
+        f"📝 <b>Detalles:</b> {desc}"
+    )
+
+    try:
+        # Intentamos enviar FOTO si hay una URL válida
+        if img_url and img_url.startswith('http'):
+            payload = {
+                "chat_id": chat_id,
+                "photo": img_url,
+                "caption": mensaje,
+                "parse_mode": "HTML"
+            }
+            response = requests.post(url_foto, json=payload)
+        else:
+            # Si no hay imagen, enviamos solo texto para evitar el Error 400
+            raise ValueError("Imagen no válida, usando modo texto.")
+
+        # Si el envío de la foto falla (ej. Telegram no puede descargarla), pasamos a texto
+        if response.status_code != 200:
+            print(f"⚠️ Falló envío de foto ({response.status_code}), reintentando solo texto...")
+            raise ConnectionError("Reintento en modo texto")
+
+    except Exception:
+        # PLAN B: Enviar solo el texto
+        payload = {
+            "chat_id": chat_id,
+            "text": mensaje,
+            "parse_mode": "HTML"
+        }
+        response = requests.post(url_texto, json=payload)
+
+    # Verificación final
+    if response.status_code == 200:
+        print(f"✅ Notificación enviada para {nombre}")
+    else:
+        print(f"❌ Error crítico en Telegram: {response.status_code} - {response.text}")
+        
 def main():
     # 1. Cargar cache (el "if -f" de Python)
     if os.path.exists(CACHE_FILE):
