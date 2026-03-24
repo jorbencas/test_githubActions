@@ -1,5 +1,41 @@
 [
     {
+        "titulo": "Un informe jurídico del Ayuntamiento de València dice que la permuta de las 39 viviendas reservadas fue legal",
+        "enlace": "https://www.levante-emv.com/valencia/2026/03/24/informe-juridico-ayuntamiento-valencia-dice-128344858.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-24T11:25:07.906542",
+        "badge": "Tech",
+        "raw": "un informe jurídico del ayuntamiento de valència dice que la permuta de las 39 viviendas reservadas fue legal",
+        "imagen_url_original": "",
+        "ts": "2026-03-24T11:25:07.906543",
+        "f": "24/03"
+    },
+    {
+        "titulo": "How We Designed a 7-Stage Transaction Pipeline for AI Agents",
+        "enlace": "https://dev.to/walletguy/how-we-designed-a-7-stage-transaction-pipeline-for-ai-agents-4f4o",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-24T11:25:23.392380",
+        "badge": "Tech",
+        "raw": "how we designed a 7-stage transaction pipeline for ai agents",
+        "imagen_url_original": "",
+        "ts": "2026-03-24T11:25:23.392381",
+        "f": "24/03"
+    },
+    {
+        "titulo": "AI Skills Are the New Boilerplate. They Solve Almost Nothing.",
+        "enlace": "https://dev.to/reneza/ai-skills-are-the-new-boilerplate-they-solve-almost-nothing-4obo",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-24T11:25:23.392416",
+        "badge": "Tech",
+        "raw": "ai skills are the new boilerplate. they solve almost nothing.",
+        "imagen_url_original": "",
+        "ts": "2026-03-24T11:25:23.392417",
+        "f": "24/03"
+    },
+    {
         "titulo": "Fallece una adolescente de meningitis en el hospital de Dénia",
         "enlace": "https://www.levante-emv.com/marina/2026/03/24/fallece-adolescente-hospital-denia-benissa-festera-tragedia-meningitis-uci-128339038.html",
         "fuente": "Levante-EMV",
