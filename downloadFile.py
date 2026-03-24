@@ -81,6 +81,11 @@ class ScraperPro:
                 # Patrón específico para Shorts (overlayMetadata)
                 titles_shorts = re.findall(r'"overlayMetadata":\{"title":\{"runs":\[\{"text":"(.*?)"\}\]', r.text)
                 
+                # Buscamos el bloque de fechas (está cerca de los videoIds)
+                fechas_raw = re.findall(r'"publishedTimeText":\{"simpleText":"(.*?)"\}', r.text)
+                # Si queremos la fecha EXACTA (ISO), YouTube suele ponerla en un bloque "uploadDate"
+                fechas_iso = re.findall(r'"uploadDate":"(.*?)"', r.text)
+
                 # Combinamos o elegimos según el tipo
                 titles = titles_shorts if "shorts" in target.lower() else titles_video
                 
@@ -98,14 +103,23 @@ class ScraperPro:
                     if es_short: tipo_final = "shorts"
                     elif es_live: tipo_final = "live"
 
+                    fecha_video_raw = fechas_iso[titles.index(t)] if titles.index(t) < len(fechas_iso) else datetime.now().isoformat()
+    
+                    try:
+                        dt_obj = datetime.fromisoformat(fecha_video_raw.split('T')[0])
+                        fecha_formateada = dt_obj.strftime("%d/%m/%Y") # <--- AQUÍ TIENES TU DÍA/MES/AÑO
+                    except:
+                        fecha_formateada = datetime.now().strftime("%d/%m/%Y")
+                        
                     results.append({
                         "titulo": translate(t_clean, 'es'),
                         "enlace": f"https://youtube.com/shorts/{i}" if es_short else f"https://youtube.com/watch?v={i}",
                         "id_video": i, "fuente": nombre.replace(" Shorts", ""), 
                         "tipo": tipo_final,
                         "is_live": es_live, # Guardamos flag explícito
+                        "fecha_real": fecha_formateada, # <--- GUARDAMOS LA FECHA REAL
                         "ultima_verificacion": datetime.now().isoformat(),
-                        "ts": datetime.now().isoformat(), "f": datetime.now().strftime("%d/%m")
+                        "ts": fecha_video_raw, "f": fecha_formateada
                     })
             else:
                 soup = BeautifulSoup(r.text, 'html.parser')
@@ -368,7 +382,8 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
     for n_item in historial[:200]:
         fuente_limpia = n_item['fuente'].replace(" Shorts", "")
         ts = n_item.get('ts', ahora.isoformat())
-        meta = f"{n_item['fuente']} | {n_item.get('f', '')}"
+        fecha_display = n_item.get('fecha_real', n_item.get('f', 'S/D'))
+        meta = f"{n_item['fuente']} | {fecha_display}"
 
         # Generar Chips de canales con Avatar
         if fuente_limpia not in canales_vistos:
@@ -379,7 +394,7 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
                 canales_vistos.append(fuente_limpia)
 
         # HTML de Vídeos/Shorts y Noticias (Web)
-        if n_item.get('id_video'):
+        if n_item.get('id_video'):            
             tipo = n_item.get('tipo', 'video')
             es_live = n_item.get('is_live', False) or tipo == "live"
             clase = "tipo-live" if es_live else ("tipo-shorts" if n_item.get('tipo') == "shorts" else "tipo-video")
@@ -388,7 +403,7 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
             badge_live = '<span class="badge-live">● EN DIRECTO</span>' if es_live else ""
             
             # Botón de Descarga (Link dinámico)
-            url_directa_mp4 = f"https://api.vevioz.com/api/button/videos/{n_item['id_video']}"
+            url_directa_mp4 = f"https://cobalt.tools/?u={n_item['id_video']}"
             btn_download = f'<a href="{url_directa_mp4}" target="_blank" class="btn-download" title="Descargar Vídeo">📥</a>'
             v_html += f"""
             <div class="card {clase}" data-ts="{ts}" data-fuente="{fuente_limpia}">
