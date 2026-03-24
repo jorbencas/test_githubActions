@@ -31,13 +31,22 @@ jobs:
           pip install requests playwright chromium 
           python -m playwright install --with-deps chromium
 
+      - name: Descargar Cache anterior
+        uses: actions/download-artifact@v4
+        with:
+          name: netflix-cache
+        continue-on-error: true # La primera vez no existirá
       # 4. Ejecuta tu script de Python
       - name: Ejecutar monitor de Netflix
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TOKEN_API_ID }}
         run: python check_netflix.py
-
+      - name: Subir Cache actualizada
+        uses: actions/upload-artifact@v4
+        with:
+          name: netflix-cache
+          path: netflix_cache.json
       # 5. Guarda los cambios en el archivo de texto (para no repetir mensajes)
       - name: Guardar estado y hacer Push
         run: |
