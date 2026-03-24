@@ -4,7 +4,7 @@
         .ia-box { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-left: 6px solid #8e44ad; margin-bottom: 30px; }
         
         .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; align-items: start; }
-        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .card { position: relative; overflow: hidden; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         
         .card.tipo-video img { width: 100%; aspect-ratio: 16/9; object-fit: cover; background: #000; }
         /* Estilo YouTube Shorts (Vertical) */
