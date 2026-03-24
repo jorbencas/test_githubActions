@@ -1,0 +1,35 @@
+name: Fix Auto-News Images
+
+on:
+  push:
+    paths:
+      - 'src/content/auto-news/**' # Solo se activa si cambian las noticias
+  workflow_dispatch:
+
+jobs:
+  fix-images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run Image Fixer
+        env:
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+        run: python scripts/fix_images.py
+
+      - name: Commit and Push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "style: auto-update news images from Unsplash"
+          file_pattern: 'src/content/auto-news/*.md'
