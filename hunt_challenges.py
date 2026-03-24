@@ -207,4 +207,4 @@ async def hunt():
     clean_challenges(folder)
 
 if __name__ == "__main__":
-    await hunt()
+    asyncio.run(hunt())
