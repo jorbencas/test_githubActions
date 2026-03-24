@@ -81,3 +81,39 @@ function filtrarCanal(canal, el) {
   selCanal = canal;
   aplicarFiltros(false);
 }
+
+
+
+async function descargarVideo(urlVideo, boton) {
+  const originalText = boton.innerHTML;
+  boton.innerHTML = "⏳..."; // Feedback visual
+
+  const API_BASE = "https://tu-api.koyeb.app/download";
+  const TOKEN = "TU_CLAVE_MAESTRA_9922";
+
+  try {
+    const response = await fetch(
+      `${API_BASE}?url=${encodeURIComponent(urlVideo)}&token=${TOKEN}`
+    );
+    const data = await response.json();
+
+    if (data.url) {
+      // Creamos un link temporal y simulamos el click para descargar
+      const a = document.createElement("a");
+      a.href = data.url;
+      a.download = data.title + ".mp4"; // Intenta forzar nombre de archivo
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      boton.innerHTML = "✅";
+    } else {
+      alert("No se pudo obtener el link directo.");
+      boton.innerHTML = "❌";
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    boton.innerHTML = "❌";
+  } finally {
+    setTimeout(() => (boton.innerHTML = originalText), 3000);
+  }
+}

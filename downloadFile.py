@@ -11,6 +11,10 @@ import edge_tts
 from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE, RETO_MD_TEMPLATE, PROMPT_IMAGEN_TEMPLATE
 from slugify import slugify 
 
+# En tu script del Dashboard (el que genera el HTML)
+URL_API_DESCARGA = "https://api-jorge.onrender.com/download"
+TOKEN_API = "Tu_Clave_Super_Secreta" 
+
 # Auto-añadir secciones de Shorts
 for nombre in list(FUENTES): # Usamos list() para poder modificar el dict mientras iteramos
     if "yt" in FUENTES[nombre]:
@@ -110,7 +114,7 @@ class ScraperPro:
                         fecha_formateada = dt_obj.strftime("%d/%m/%Y") # <--- AQUÍ TIENES TU DÍA/MES/AÑO
                     except:
                         fecha_formateada = datetime.now().strftime("%d/%m/%Y")
-                        
+
                     results.append({
                         "titulo": translate(t_clean, 'es'),
                         "enlace": f"https://youtube.com/shorts/{i}" if es_short else f"https://youtube.com/watch?v={i}",
@@ -403,8 +407,7 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
             badge_live = '<span class="badge-live">● EN DIRECTO</span>' if es_live else ""
             
             # Botón de Descarga (Link dinámico)
-            url_directa_mp4 = f"https://cobalt.tools/?u={n_item['id_video']}"
-            btn_download = f'<a href="{url_directa_mp4}" target="_blank" class="btn-download" title="Descargar Vídeo">📥</a>'
+            btn_download = f'<button onclick="descargarVideo('{n_item.get("enlace")}', this)" target="_blank" class="btn-download" title="Descargar Vídeo">📥</button>'
             v_html += f"""
             <div class="card {clase}" data-ts="{ts}" data-fuente="{fuente_limpia}">
                 {badge_live}
