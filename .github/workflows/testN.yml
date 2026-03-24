@@ -43,6 +43,6 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add last_ratings.txt || echo "No hay cambios en el archivo de estado"
+          git add netflix_cache.json || echo "No hay cambios en el archivo de estado"
           git commit -m "Actualización automática de estado de clasificación" || echo "Nada que commitear"
           git push || echo "No hay cambios para subir"
