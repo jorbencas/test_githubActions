@@ -1,5 +1,65 @@
 [
     {
+        "titulo": "GTA 6 usará la tecnología procedural para ofrecer un avance gráfico nunca antes visto en un juego",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/gta-6-usara-tecnologia-procedural-para-ofrecer-un-avance-grafico-nunca-antes-visto-un-juego_6950243_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-24T18:56:31.615248",
+        "badge": "Tech",
+        "raw": "gta 6 usará la tecnología procedural para ofrecer un avance gráfico nunca antes visto en un juego",
+        "imagen_url_original": "",
+        "ts": "2026-03-24T18:56:31.615250",
+        "f": "24/03"
+    },
+    {
+        "titulo": "OpenAI agrega herramientas de código abierto para ayudar a los desarrolladores a crear seguridad para los adolescentes",
+        "enlace": "https://techcrunch.com/2026/03/24/openai-adds-open-source-tools-to-help-developers-build-for-teen-safety/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-24T18:56:37.796750",
+        "badge": "Tech",
+        "raw": "openai adds open source tools to help developers build for teen safety",
+        "imagen_url_original": "",
+        "ts": "2026-03-24T18:56:37.796757",
+        "f": "24/03"
+    },
+    {
+        "titulo": "Las notas de las reuniones con IA de Talat permanecen en su máquina, no en la nube",
+        "enlace": "https://techcrunch.com/2026/03/24/talats-ai-meeting-notes-stay-on-your-machine-not-in-the-cloud/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-24T18:56:38.310035",
+        "badge": "Tech",
+        "raw": "talat’s ai meeting notes stay on your machine, not in the cloud",
+        "imagen_url_original": "",
+        "ts": "2026-03-24T18:56:38.310043",
+        "f": "24/03"
+    },
+    {
+        "titulo": "Hypura – A storage-tier-aware LLM inference scheduler for Apple Silicon",
+        "enlace": "https://github.com/t8/hypura",
+        "fuente": "Hacker News",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-24T18:56:40.011522",
+        "badge": "Tech",
+        "raw": "hypura – a storage-tier-aware llm inference scheduler for apple silicon",
+        "imagen_url_original": "",
+        "ts": "2026-03-24T18:56:40.011529",
+        "f": "24/03"
+    },
+    {
+        "titulo": "AI 102",
+        "enlace": "https://dev.to/bekahhw/ai-102-4o0",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-24T18:56:42.846606",
+        "badge": "Tech",
+        "raw": "ai 102",
+        "imagen_url_original": "",
+        "ts": "2026-03-24T18:56:42.846607",
+        "f": "24/03"
+    },
+    {
         "titulo": "Vine a Tomodachi Life: Una Vida de Ensueño por la simulación... y me quedé por el salseo: impresiones del juego para Nintendo Switch",
         "enlace": "https://www.hobbyconsolas.com/videojuegos/vine-tomodachi-life-una-vida-ensueno-por-simulacion-me-quede-por-salseo-impresiones-juego-para-nintendo-switch_6949798_0.html",
         "fuente": "HobbyConsolas",
