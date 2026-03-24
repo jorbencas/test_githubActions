@@ -76,7 +76,7 @@ jobs:
           git push origin main
       - name: 📝 Commit y Push de los nuevos MD
         run: |
-          if [ -d "./auto-challenges" ]; then
+          if [ -d "./auto-challenges" ] && ls auto-challenges/*.md >/dev/null 2>&1; then
             git config user.name jorbencas
             git config user.email jorbencas@gmail.com
             git add auto-challenges/*.md
