@@ -407,7 +407,10 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
             badge_live = '<span class="badge-live">● EN DIRECTO</span>' if es_live else ""
             
             # Botón de Descarga (Link dinámico)
-            btn_download = f'<button onclick="descargarVideo("{n_item.get('enlace')}", this)" target="_blank" class="btn-download">📥</button>'
+            btn_download = f"""
+            <button onclick="descargarVideo(`{n_item.get('enlace')}`, this)" target="_blank" class="btn-download">📥</button>
+            """
+            
             v_html += f"""
             <div class="card {clase}" data-ts="{ts}" data-fuente="{fuente_limpia}">
                 {badge_live}
