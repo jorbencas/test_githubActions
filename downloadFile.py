@@ -431,7 +431,7 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
             bloque_videos=v_html, 
             bloque_noticias=n_html,
             bloque_semanas=bloque_semanas_completo, # Puedes rellenar esto con tu lógica de semanas
-            api_token={CONFIG['API_TOKEN']}, api_url={URL_API_DESCARGA}, api_salud={URL_API_SALUD}}
+            api_token=CONFIG['API_TOKEN'], api_url=URL_API_DESCARGA, api_salud=URL_API_SALUD
         ))
     print("✅ Dashboard HTML generado con Chips y Vídeos.")
 
