@@ -424,7 +424,7 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
 
     chips_html += "</div>"
 
-    token_oculto = base64.b64encode(str({CONFIG['API_TOKEN']})).decode()
+    token_oculto = base64.b64encode(CONFIG['API_TOKEN']).decode()
 
     with open("public/index.html", "w", encoding="utf-8") as f:
         f.write(HTML_TEMPLATE.format(
