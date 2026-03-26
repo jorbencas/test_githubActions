@@ -111,7 +111,7 @@ HTML_TEMPLATE = """
 </body>
 <script>
   const API_BASE = "{api_url}";
-  const TOKEN = "{api_toekn}";
+  const TOKEN = "{api_token}";
 </script>
 <script src="script.js"></script>
 </html>
