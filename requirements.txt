@@ -3,3 +3,4 @@ beautifulsoup4
 mtranslate
 google-genai
 edge-tts
+python-slugify

@@ -200,24 +200,24 @@ async def generar_retos_individuales(noticias_web, fecha_iso, client):
     os.makedirs(folder, exist_ok=True)
 
     for n in noticias_web:
-        titulo_low = n['titulo'].lower()
+        titulo_low = n.get('title', 'video-sin-nombre').lower()
         if any(k in titulo_low for k in ["reto", "challenge", "desafío"]):
-            slug_reto = f"reto-{slugify(n['titulo'])[:40]}"
+            slug_reto = f"reto-{slugify(n.get('title', 'video-sin-nombre'))[:40]}"
             path = f"{folder}/{slug_reto}.md"
             
             if os.path.exists(path): continue
 
-            print(f"🎯 Procesando reto: {n['titulo']}")
-            sol = await obtener_solucion_ia(n['titulo'], n.get('fuente', 'Web'), client)
+            print(f"🎯 Procesando reto: {n.get('title', 'video-sin-nombre')}")
+            sol = await obtener_solucion_ia(n.get('title', 'video-sin-nombre'), n.get('fuente', 'Web'), client)
             
             if sol:
-                img_reto = await generar_imagen_noticia(n['titulo'], "", client)
+                img_reto = await generar_imagen_noticia(n.get('title', 'video-sin-nombre'), "", client)
                 lang = sol.get('lenguaje', 'python').lower()
 
                 try:
                     # Usamos inspect.cleandoc para que el Frontmatter (---) empiece en la columna 0
                     reto_md = inspect.cleandoc(RETO_MD_TEMPLATE).format(
-                        titulo=n['titulo'].replace('"', "'"),
+                        titulo=n.get('title', 'video-sin-nombre').replace('"', "'"),
                         resumen_corto=sol.get('descripcion', '')[:140].replace('"', "'"),
                         fecha_pub=fecha_iso,
                         slug_name=slug_reto,
