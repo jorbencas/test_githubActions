@@ -1,0 +1,546 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Tech Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tech Pulse <small style="font-size: 0.4em; color: #666;">26/03/2026</small></h1>
+            <img src="optimizado/Image.png" alt="Logo" class="logo">
+        </header>
+        <div class="ia-box">
+            <h2>🤖 Resumen</h2>
+            <p>Sin novedades hoy.</p>
+        </div>
+
+        <div class="filter-section">
+            <strong>📅 Por Tiempo:</strong>
+            <div class="chip-container"><div class="filter-group" style="display:flex; align-items:center; flex-wrap:wrap; gap:10px;"><div class="chip active" data-inicio="all_recent" onclick="filtrarSemana(this)">🔄 Últimas 2 Semanas</div> <select id="selectorSemanas" onchange="filtrarDesdeSelector(this)" style="padding: 10px 15px; border-radius: 20px; border: 2px solid #007bff; background: white; color: #007bff; font-weight: bold; cursor: pointer; outline: none; margin-left: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);"><option value="all">📅 Archivo Histórico...</option><optgroup label="── March 2026 (506 ítems) ──"><option value="2026-03-23T00:00:00|2026-03-29T23:59:59">Semana 23/03/26</option><option value="2026-03-16T00:00:00|2026-03-22T23:59:59">Semana 16/03/26</option><option value="2026-03-09T00:00:00|2026-03-15T23:59:59">Semana 09/03/26</option><option value="2026-03-02T00:00:00|2026-03-08T23:59:59">Semana 02/03/26</option></optgroup><optgroup label="── February 2026 (83 ítems) ──"><option value="2026-02-23T00:00:00|2026-03-01T23:59:59">Semana 23/02/26</option><option value="2026-02-16T00:00:00|2026-02-22T23:59:59">Semana 16/02/26</option><option value="2026-02-09T00:00:00|2026-02-15T23:59:59">Semana 09/02/26</option><option value="2026-02-02T00:00:00|2026-02-08T23:59:59">Semana 02/02/26</option></optgroup><optgroup label="── January 2026 (0 ítems) ──"><option value="2026-01-26T00:00:00|2026-02-01T23:59:59">Semana 26/01/26</option><option value="2026-01-19T00:00:00|2026-01-25T23:59:59">Semana 19/01/26</option><option value="2026-01-12T00:00:00|2026-01-18T23:59:59">Semana 12/01/26</option><option value="2026-01-05T00:00:00|2026-01-11T23:59:59">Semana 05/01/26</option></optgroup><optgroup label="── December 2025 (0 ítems) ──"><option value="2025-12-29T00:00:00|2026-01-04T23:59:59">Semana 29/12/25</option><option value="2025-12-22T00:00:00|2025-12-28T23:59:59">Semana 22/12/25</option><option value="2025-12-15T00:00:00|2025-12-21T23:59:59">Semana 15/12/25</option><option value="2025-12-08T00:00:00|2025-12-14T23:59:59">Semana 08/12/25</option><option value="2025-12-01T00:00:00|2025-12-07T23:59:59">Semana 01/12/25</option></optgroup><optgroup label="── November 2025 (0 ítems) ──"><option value="2025-11-24T00:00:00|2025-11-30T23:59:59">Semana 24/11/25</option><option value="2025-11-17T00:00:00|2025-11-23T23:59:59">Semana 17/11/25</option><option value="2025-11-10T00:00:00|2025-11-16T23:59:59">Semana 10/11/25</option><option value="2025-11-03T00:00:00|2025-11-09T23:59:59">Semana 03/11/25</option></optgroup><optgroup label="── October 2025 (0 ítems) ──"><option value="2025-10-27T00:00:00|2025-11-02T23:59:59">Semana 27/10/25</option><option value="2025-10-20T00:00:00|2025-10-26T23:59:59">Semana 20/10/25</option><option value="2025-10-13T00:00:00|2025-10-19T23:59:59">Semana 13/10/25</option><option value="2025-10-06T00:00:00|2025-10-12T23:59:59">Semana 06/10/25</option></optgroup><optgroup label="── September 2025 (0 ítems) ──"><option value="2025-09-29T00:00:00|2025-10-05T23:59:59">Semana 29/09/25</option></optgroup></select></div></div>
+        </div>
+
+        <div class="filter-section">
+            <strong>👤 Por Canal:</strong>
+            <div class="chip-container"><div class="filter-container" style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px;"><div class="chip active" data-filtro="'all'" onclick="filtrarCanal('all', this)"><span>Todos</span></div><div class="chip" data-filtro="Xataka" onclick="filtrarCanal('Xataka', this)"><img class="chip-img" src="https://yt3.googleusercontent.com/Isndcf4xNmVxIMeO_x-4W2tJKzPcvDsdZeLoSbml-xYAHQlv8hfqlGK8NrRFhO9KwiN569mN=s900-c-k-c0x00ffffff-no-rj"><span class="chip-text">Xataka</span></div><div class="chip" data-filtro="Victor Robles" onclick="filtrarCanal('Victor Robles', this)"><img class="chip-img" src="https://yt3.googleusercontent.com/ytc/AIdro_njmB5jmScUOEAkHOvLmlbiwyDW6Sjo9QNMAn_mYqKW17c=s900-c-k-c0x00ffffff-no-rj"><span class="chip-text">Victor Robles</span></div><div class="chip" data-filtro="HolaMundo" onclick="filtrarCanal('HolaMundo', this)"><img class="chip-img" src="https://yt3.googleusercontent.com/mNbmN9qWmMpQ-XN37IejdhwF5rn2-WD6fjRY8ZKcYUFer6F5Y-2vQTCDs3HpCHmOBtpeeWgu6g=s900-c-k-c0x00ffffff-no-rj"><span class="chip-text">HolaMundo</span></div><div class="chip" data-filtro="FreeCodeCamp" onclick="filtrarCanal('FreeCodeCamp', this)"><img class="chip-img" src="https://yt3.googleusercontent.com/ytc/AIdro_lGRc-05M2OoE1ejQdxeFhyP7OkJg9h4Y-7CK_5je3QqFI=s900-c-k-c0x00ffffff-no-rj"><span class="chip-text">FreeCodeCamp</span></div><div class="chip" data-filtro="Fazt" onclick="filtrarCanal('Fazt', this)"><img class="chip-img" src="https://yt3.googleusercontent.com/ytc/AIdro_nlI29kkP3d2OAKZTdDVgkDA6D7g7TfNvSKNBGTY-5cQHY=s900-c-k-c0x00ffffff-no-rj"><span class="chip-text">Fazt</span></div><div class="chip" data-filtro="EDteam" onclick="filtrarCanal('EDteam', this)"><img class="chip-img" src="https://yt3.googleusercontent.com/gVPEp1RFXTNqaImY4yOnIjamU1AFDGNEpI1B7g_D4PBX10esTrtQpqejAaj0sNx_hl7lugPEYA=s900-c-k-c0x00ffffff-no-rj"><span class="chip-text">EDteam</span></div><div class="chip" data-filtro="CodelyTV" onclick="filtrarCanal('CodelyTV', this)"><img class="chip-img" src="https://yt3.googleusercontent.com/DGnXieIWjL1Femn2HZBGUObeg9biIKtbsLp25r99dBBwwqp2jWysEQQ_d-qEqcfrq81zZZYVtg=s900-c-k-c0x00ffffff-no-rj"><span class="chip-text">CodelyTV</span></div><div class="chip" data-filtro="Clipset" onclick="filtrarCanal('Clipset', this)"><img class="chip-img" src="https://yt3.googleusercontent.com/ytc/AIdro_my5V8zqNi3--ZTykMjzFI8lyt_4K-ad5wANZ_jmXIfT0o=s900-c-k-c0x00ffffff-no-rj"><span class="chip-text">Clipset</span></div><div class="chip" data-filtro="Carlos Azaustre" onclick="filtrarCanal('Carlos Azaustre', this)"><img class="chip-img" src="https://yt3.googleusercontent.com/RwgiCUvX7HFmo2qAtnvUsfoGxmyUIa_l_HAEo_3dt5OuJYliyJF8Pnlpr56I74GDyA_f-RawKs8=s900-c-k-c0x00ffffff-no-rj"><span class="chip-text">Carlos Azaustre</span></div><div class="chip" data-filtro="Codigo facilito" onclick="filtrarCanal('Codigo facilito', this)"><img class="chip-img" src="https://yt3.googleusercontent.com/ytc/AIdro_kt9RHOt4zZmKV8wIWZaIdyumK9yS1VXfvh_iDJozt7i4w=s900-c-k-c0x00ffffff-no-rj"><span class="chip-text">Codigo facilito</span></div><div class="chip" data-filtro="Midudev" onclick="filtrarCanal('Midudev', this)"><img class="chip-img" src="https://yt3.googleusercontent.com/QkJIZgFfiFacdK8syyPRt7cJYPl3jTf0qFhdPwFdpJpyCW5jI_uylNK5a3IH8bitE2wy6Dr2Lw=s900-c-k-c0x00ffffff-no-rj"><span class="chip-text">Midudev</span></div><div class="chip" data-filtro="Pelado Nerd" onclick="filtrarCanal('Pelado Nerd', this)"><img class="chip-img" src="https://yt3.googleusercontent.com/S1xVWTVkSqTVaEnU30OGV4OwT8acL1ri3d3WUGOp4k_aXNKtveI99kZahhlr-ViKyvn5zg_D=s900-c-k-c0x00ffffff-no-rj"><span class="chip-text">Pelado Nerd</span></div><div class="chip" data-filtro="MoureDev" onclick="filtrarCanal('MoureDev', this)"><img class="chip-img" src="https://yt3.googleusercontent.com/aPuVOhE66m_en_vzdz5SpbytqxUd-xHyAfLyn_lIVcC88dYT85WVhdYKrbZgRz7QMXvF7Ap_4fQ=s900-c-k-c0x00ffffff-no-rj"><span class="chip-text">MoureDev</span></div></div></div>
+        </div>
+
+        <h2>📺 Multimedia (Vídeos y Shorts)</h2>
+        <div class="video-grid">
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:56.726981" data-fuente="Xataka">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=sd7BLrxVPlw`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=sd7BLrxVPlw" target="_blank"><img src="https://img.youtube.com/vi/sd7BLrxVPlw/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Xataka | 26/03/2026</div><a href="https://youtube.com/watch?v=sd7BLrxVPlw">TOP FUNCIONES de OPERA que harÃ¡n que QUIERAS CAMBIAR DE NAVEGADOR</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:56.590048" data-fuente="Xataka">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=8TFXgJyUlhA`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=8TFXgJyUlhA" target="_blank"><img src="https://img.youtube.com/vi/8TFXgJyUlhA/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Xataka | 26/03/2026</div><a href="https://youtube.com/watch?v=8TFXgJyUlhA">Xiaomi TV BOX ð Amazon FIRE STICK 4K MAX: Este es EL MEJOR en 2026</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:54.512745" data-fuente="Xataka">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=d5H6K-QAFXI`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=d5H6K-QAFXI" target="_blank"><img src="https://img.youtube.com/vi/d5H6K-QAFXI/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Xataka | 26/03/2026</div><a href="https://youtube.com/watch?v=d5H6K-QAFXI">RENAULT CLIO Full Hybrid E-Tech | ¿Hay 1000km de autonomía? ð¤</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:54.373488" data-fuente="Xataka">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=2PxtbtywQFg`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=2PxtbtywQFg" target="_blank"><img src="https://img.youtube.com/vi/2PxtbtywQFg/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Xataka | 26/03/2026</div><a href="https://youtube.com/watch?v=2PxtbtywQFg">El mejor editor de fotos GRATIS para mÃ³vil en 2026</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:54.235580" data-fuente="Xataka">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=Dk_x8E3M3xY`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=Dk_x8E3M3xY" target="_blank"><img src="https://img.youtube.com/vi/Dk_x8E3M3xY/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Xataka | 26/03/2026</div><a href="https://youtube.com/watch?v=Dk_x8E3M3xY">Este ROBOT ASPIRADOR de Dyson FRIEGA DE VERDAD, DETECTA todo tipo de MANCHAS con IA</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:53.788157" data-fuente="Victor Robles">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=IYpLxYs_n3U`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=IYpLxYs_n3U" target="_blank"><img src="https://img.youtube.com/vi/IYpLxYs_n3U/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Victor Robles | 26/03/2026</div><a href="https://youtube.com/watch?v=IYpLxYs_n3U">Los Programadores EstÃ¡n Frustrados con el Vibe Codingâ¦ y esto es lo que da MAS MIEDO</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:53.660384" data-fuente="Victor Robles">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=DKXhWnMPKho`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=DKXhWnMPKho" target="_blank"><img src="https://img.youtube.com/vi/DKXhWnMPKho/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Victor Robles | 26/03/2026</div><a href="https://youtube.com/watch?v=DKXhWnMPKho">UsÃ© OpenClaw y Casi Pierdo el Controlâ¦ Riesgos Reales de esta IA</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:53.528216" data-fuente="Victor Robles">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=gGResY7jmoo`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=gGResY7jmoo" target="_blank"><img src="https://img.youtube.com/vi/gGResY7jmoo/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Victor Robles | 26/03/2026</div><a href="https://youtube.com/watch?v=gGResY7jmoo">CEO de Replit INSULTA a todos los PROGRAMADORES (y yo lo pongo en su sitio)</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:53.392106" data-fuente="Victor Robles">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=UOqp--6UokY`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=UOqp--6UokY" target="_blank"><img src="https://img.youtube.com/vi/UOqp--6UokY/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Victor Robles | 26/03/2026</div><a href="https://youtube.com/watch?v=UOqp--6UokY">Amazon PROHIBE el Vibe Coding con IA a sus programadores</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:53.250879" data-fuente="Victor Robles">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=yT3vynF4068`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=yT3vynF4068" target="_blank"><img src="https://img.youtube.com/vi/yT3vynF4068/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Victor Robles | 26/03/2026</div><a href="https://youtube.com/watch?v=yT3vynF4068">El Futuro del Backend ya no es como lo Conocemosâ¦ Esto es MCP</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:52.768441" data-fuente="HolaMundo">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=P8UCwa3cdFo`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=P8UCwa3cdFo" target="_blank"><img src="https://img.youtube.com/vi/P8UCwa3cdFo/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">HolaMundo | 26/03/2026</div><a href="https://youtube.com/watch?v=P8UCwa3cdFo">MIRA ESTO ANTES DE INSTALAR OPENCLAW!!</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:52.613228" data-fuente="HolaMundo">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=IaWg3J-3vk4`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=IaWg3J-3vk4" target="_blank"><img src="https://img.youtube.com/vi/IaWg3J-3vk4/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">HolaMundo | 26/03/2026</div><a href="https://youtube.com/watch?v=IaWg3J-3vk4">Esto debe parar... Atlassian en problemas por culpa de la IA...</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:51.940834" data-fuente="HolaMundo">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=WHjfhKtD4QM`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=WHjfhKtD4QM" target="_blank"><img src="https://img.youtube.com/vi/WHjfhKtD4QM/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">HolaMundo | 26/03/2026</div><a href="https://youtube.com/watch?v=WHjfhKtD4QM">Caída HISTÓRICA del Amazonas</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:51.789538" data-fuente="HolaMundo">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=oVlVUCdTLlg`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=oVlVUCdTLlg" target="_blank"><img src="https://img.youtube.com/vi/oVlVUCdTLlg/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">HolaMundo | 26/03/2026</div><a href="https://youtube.com/watch?v=oVlVUCdTLlg">Curso gratis de introducciÃ³n a IA local, ejecuta modelos LLM en tu mÃ¡quina</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:51.658263" data-fuente="HolaMundo">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=8A8PyJeQhlo`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=8A8PyJeQhlo" target="_blank"><img src="https://img.youtube.com/vi/8A8PyJeQhlo/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">HolaMundo | 26/03/2026</div><a href="https://youtube.com/watch?v=8A8PyJeQhlo">Curso completo de N8N, aprende N8N ahora!</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:50.839596" data-fuente="FreeCodeCamp">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=jydYq7oAtD8`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=jydYq7oAtD8" target="_blank"><img src="https://img.youtube.com/vi/jydYq7oAtD8/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">FreeCodeCamp | 26/03/2026</div><a href="https://youtube.com/watch?v=jydYq7oAtD8">Curso de pruebas de software â Dramaturgos, E2E y agentes de IA</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:50.395762" data-fuente="FreeCodeCamp">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=uJrh9GHrC38`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=uJrh9GHrC38" target="_blank"><img src="https://img.youtube.com/vi/uJrh9GHrC38/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">FreeCodeCamp | 26/03/2026</div><a href="https://youtube.com/watch?v=uJrh9GHrC38">El mundo todavía necesita personas que se preocupen: entrevista al fundador de CodePen, Chris Coyier [Podcast #212]</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:49.335337" data-fuente="FreeCodeCamp">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=brLhhkUqcn4`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=brLhhkUqcn4" target="_blank"><img src="https://img.youtube.com/vi/brLhhkUqcn4/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">FreeCodeCamp | 26/03/2026</div><a href="https://youtube.com/watch?v=brLhhkUqcn4">Conceptos básicos del código Claude</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:48.778556" data-fuente="FreeCodeCamp">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=R8h_gpSpEVU`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=R8h_gpSpEVU" target="_blank"><img src="https://img.youtube.com/vi/R8h_gpSpEVU/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">FreeCodeCamp | 26/03/2026</div><a href="https://youtube.com/watch?v=R8h_gpSpEVU">Implementación de modelos de IA con cara abrazada: curso práctico</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:48.054224" data-fuente="FreeCodeCamp">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=tchN4xa4pfg`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=tchN4xa4pfg" target="_blank"><img src="https://img.youtube.com/vi/tchN4xa4pfg/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">FreeCodeCamp | 26/03/2026</div><a href="https://youtube.com/watch?v=tchN4xa4pfg">Fundamentos de la IA para principiantes absolutos</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:47.605817" data-fuente="Fazt">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=4G8b5HMh_hY`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=4G8b5HMh_hY" target="_blank"><img src="https://img.youtube.com/vi/4G8b5HMh_hY/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Fazt | 26/03/2026</div><a href="https://youtube.com/watch?v=4G8b5HMh_hY">Aprende Estos 4 Lenguajes o la IA Siempre Va a Trabajar Contra Ti</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:47.454252" data-fuente="Fazt">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=2Xu70fu2Pf4`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=2Xu70fu2Pf4" target="_blank"><img src="https://img.youtube.com/vi/2Xu70fu2Pf4/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Fazt | 26/03/2026</div><a href="https://youtube.com/watch?v=2Xu70fu2Pf4">Claude Code en VSCode: La guÃ­a COMPLETA para desarrolladores</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:47.317998" data-fuente="Fazt">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=fWFfs5OJ-pw`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=fWFfs5OJ-pw" target="_blank"><img src="https://img.youtube.com/vi/fWFfs5OJ-pw/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Fazt | 26/03/2026</div><a href="https://youtube.com/watch?v=fWFfs5OJ-pw">Â¿Por quÃ© los PROGRAMADORES le tienen MIEDO a la IA?</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:47.163103" data-fuente="Fazt">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=GsDWNw3Pr7A`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=GsDWNw3Pr7A" target="_blank"><img src="https://img.youtube.com/vi/GsDWNw3Pr7A/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Fazt | 26/03/2026</div><a href="https://youtube.com/watch?v=GsDWNw3Pr7A">Google acaba de matar estoâ¦ y es solo el comienzo</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:47.017411" data-fuente="Fazt">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=jDX4n9yc6v8`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=jDX4n9yc6v8" target="_blank"><img src="https://img.youtube.com/vi/jDX4n9yc6v8/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Fazt | 26/03/2026</div><a href="https://youtube.com/watch?v=jDX4n9yc6v8">ProbÃ© 5 formas de instalar OpenClawâ¦ esta es la mejor</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:46.555504" data-fuente="EDteam">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=QCVek1WMGl4`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=QCVek1WMGl4" target="_blank"><img src="https://img.youtube.com/vi/QCVek1WMGl4/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">EDteam | 26/03/2026</div><a href="https://youtube.com/watch?v=QCVek1WMGl4">El monopolio del diseÃ±o se derrumba Â¿QuÃ© pasÃ³ con Adobe?</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:46.416185" data-fuente="EDteam">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=0rASPs081j8`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=0rASPs081j8" target="_blank"><img src="https://img.youtube.com/vi/0rASPs081j8/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">EDteam | 26/03/2026</div><a href="https://youtube.com/watch?v=0rASPs081j8">La primera COMPUTADORA CUÃNTICA en PerÃº | SpinQ por Inducontrol</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:46.254091" data-fuente="EDteam">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=fsS8HoDk6iE`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=fsS8HoDk6iE" target="_blank"><img src="https://img.youtube.com/vi/fsS8HoDk6iE/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">EDteam | 26/03/2026</div><a href="https://youtube.com/watch?v=fsS8HoDk6iE">Composer 2. Â¿La mejor IA para programar?</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:46.087957" data-fuente="EDteam">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=hmB9K2WNcKg`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=hmB9K2WNcKg" target="_blank"><img src="https://img.youtube.com/vi/hmB9K2WNcKg/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">EDteam | 26/03/2026</div><a href="https://youtube.com/watch?v=hmB9K2WNcKg">Google pone en problemas a Figma con Stitch 2</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:45.944493" data-fuente="EDteam">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=Pog8NBRpu-0`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=Pog8NBRpu-0" target="_blank"><img src="https://img.youtube.com/vi/Pog8NBRpu-0/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">EDteam | 26/03/2026</div><a href="https://youtube.com/watch?v=Pog8NBRpu-0">Â¿Por quÃ© OpenAI matÃ³ a Sora? (y por quÃ© es una buena noticia)</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:45.491781" data-fuente="CodelyTV">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=OWqgzRZeFus`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=OWqgzRZeFus" target="_blank"><img src="https://img.youtube.com/vi/OWqgzRZeFus/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">CodelyTV | 26/03/2026</div><a href="https://youtube.com/watch?v=OWqgzRZeFus">WebMCP: Lo mejor que le ha pasado a HTML desde HTML5</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:45.362779" data-fuente="CodelyTV">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=VDEP4i4LELQ`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=VDEP4i4LELQ" target="_blank"><img src="https://img.youtube.com/vi/VDEP4i4LELQ/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">CodelyTV | 26/03/2026</div><a href="https://youtube.com/watch?v=VDEP4i4LELQ">El futuro de la web con agentes como OpenAI Frontier</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:45.223437" data-fuente="CodelyTV">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=fknpZg9ShNo`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=fknpZg9ShNo" target="_blank"><img src="https://img.youtube.com/vi/fknpZg9ShNo/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">CodelyTV | 26/03/2026</div><a href="https://youtube.com/watch?v=fknpZg9ShNo">Reduce el coste de la IA x10: TÃ©cnicas de prompt caching y errores comunes</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:45.086188" data-fuente="CodelyTV">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=934BLPv15UI`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=934BLPv15UI" target="_blank"><img src="https://img.youtube.com/vi/934BLPv15UI/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">CodelyTV | 26/03/2026</div><a href="https://youtube.com/watch?v=934BLPv15UI">Ollama vs LM Studio vs Docker Models vs LlamaBarn Â¿CuÃ¡l es el mejor inferidor de modelos?</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:44.958349" data-fuente="CodelyTV">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=EQADMGVdXp4`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=EQADMGVdXp4" target="_blank"><img src="https://img.youtube.com/vi/EQADMGVdXp4/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">CodelyTV | 26/03/2026</div><a href="https://youtube.com/watch?v=EQADMGVdXp4">Lo que necesitas saber de IA para Programar</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:44.516979" data-fuente="Clipset">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=jBtQaTHQaQM`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=jBtQaTHQaQM" target="_blank"><img src="https://img.youtube.com/vi/jBtQaTHQaQM/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Clipset | 26/03/2026</div><a href="https://youtube.com/watch?v=jBtQaTHQaQM">POCO X8 Pro MAX con 8500mAh de baterÃ­a!!</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:43.915240" data-fuente="Clipset">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=v67uYYszw7o`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=v67uYYszw7o" target="_blank"><img src="https://img.youtube.com/vi/v67uYYszw7o/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Clipset | 26/03/2026</div><a href="https://youtube.com/watch?v=v67uYYszw7o">En la gama MEDIA es DIFÍCIL realme 16 PRO+</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:43.780427" data-fuente="Clipset">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=rSwA6k7qg90`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=rSwA6k7qg90" target="_blank"><img src="https://img.youtube.com/vi/rSwA6k7qg90/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Clipset | 26/03/2026</div><a href="https://youtube.com/watch?v=rSwA6k7qg90">No has visto NADA igual Nothing 4a PRO</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:43.177709" data-fuente="Clipset">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=f-0-8uXazqU`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=f-0-8uXazqU" target="_blank"><img src="https://img.youtube.com/vi/f-0-8uXazqU/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Clipset | 26/03/2026</div><a href="https://youtube.com/watch?v=f-0-8uXazqU">Nintendo Switch 2 Virtual Boy unboxing y revisión</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:43.039561" data-fuente="Clipset">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=zhdtWrCGHpw`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=zhdtWrCGHpw" target="_blank"><img src="https://img.youtube.com/vi/zhdtWrCGHpw/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Clipset | 26/03/2026</div><a href="https://youtube.com/watch?v=zhdtWrCGHpw">Â¿Un smartphone plegable sin pliegue?</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:42.623574" data-fuente="Carlos Azaustre">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=-_Sc6hi5UQU`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=-_Sc6hi5UQU" target="_blank"><img src="https://img.youtube.com/vi/-_Sc6hi5UQU/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Carlos Azaustre | 26/03/2026</div><a href="https://youtube.com/watch?v=-_Sc6hi5UQU">Â¿El MEJOR monitor para PROGRAMAR en 2025? | BenQ RD320UA Review</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:42.479038" data-fuente="Carlos Azaustre">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=XC66dMWzL4A`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=XC66dMWzL4A" target="_blank"><img src="https://img.youtube.com/vi/XC66dMWzL4A/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Carlos Azaustre | 26/03/2026</div><a href="https://youtube.com/watch?v=XC66dMWzL4A">REACT v19.2: Las 4 Novedades que NO Puedes Ignorar</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:42.351666" data-fuente="Carlos Azaustre">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=1Z36GrfXEns`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=1Z36GrfXEns" target="_blank"><img src="https://img.youtube.com/vi/1Z36GrfXEns/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Carlos Azaustre | 26/03/2026</div><a href="https://youtube.com/watch?v=1Z36GrfXEns">El error MÃS COMÃN en C++ (Paso por Valor vs Referencia) y cÃ³mo evitarlo</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:42.203556" data-fuente="Carlos Azaustre">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=IfuGwSVrt5Y`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=IfuGwSVrt5Y" target="_blank"><img src="https://img.youtube.com/vi/IfuGwSVrt5Y/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Carlos Azaustre | 26/03/2026</div><a href="https://youtube.com/watch?v=IfuGwSVrt5Y">El teclado que reemplaza al Stream Deck | Corsair Galleon 100SD Review</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:42.063446" data-fuente="Carlos Azaustre">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=8V_krkzedHE`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=8V_krkzedHE" target="_blank"><img src="https://img.youtube.com/vi/8V_krkzedHE/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Carlos Azaustre | 26/03/2026</div><a href="https://youtube.com/watch?v=8V_krkzedHE">CSS reemplaza a JavaScript: 3 features de Chrome 146 que lo cambian todo</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:41.599210" data-fuente="Codigo facilito">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=Puhjyd-7v9E`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=Puhjyd-7v9E" target="_blank"><img src="https://img.youtube.com/vi/Puhjyd-7v9E/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Codigo facilito | 26/03/2026</div><a href="https://youtube.com/watch?v=Puhjyd-7v9E">FABRIC IQ, Donde los Datos adquieren significado empresarial - Sesiones ActualizaTECH</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:41.467379" data-fuente="Codigo facilito">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=IL_aioq350E`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=IL_aioq350E" target="_blank"><img src="https://img.youtube.com/vi/IL_aioq350E/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Codigo facilito | 26/03/2026</div><a href="https://youtube.com/watch?v=IL_aioq350E">Claude Code en menos de 20 minutos</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:41.324109" data-fuente="Codigo facilito">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=5KS6ndvUnaE`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=5KS6ndvUnaE" target="_blank"><img src="https://img.youtube.com/vi/5KS6ndvUnaE/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Codigo facilito | 26/03/2026</div><a href="https://youtube.com/watch?v=5KS6ndvUnaE">Concurrencia explicada en 3 minutos</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:41.187682" data-fuente="Codigo facilito">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=JwYdHrVvjns`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=JwYdHrVvjns" target="_blank"><img src="https://img.youtube.com/vi/JwYdHrVvjns/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Codigo facilito | 26/03/2026</div><a href="https://youtube.com/watch?v=JwYdHrVvjns">Concurrencia en Java</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:41.044504" data-fuente="Codigo facilito">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=cApOo7AtxiI`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=cApOo7AtxiI" target="_blank"><img src="https://img.youtube.com/vi/cApOo7AtxiI/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Codigo facilito | 26/03/2026</div><a href="https://youtube.com/watch?v=cApOo7AtxiI">Aplicaciones inteligentes con .NET - Sesiones ActualizaTECH</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:40.577290" data-fuente="Midudev">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=TpiNiICroMA`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=TpiNiICroMA" target="_blank"><img src="https://img.youtube.com/vi/TpiNiICroMA/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Midudev | 26/03/2026</div><a href="https://youtube.com/watch?v=TpiNiICroMA">Crea una API de IA Gratis desde cero + Deploy a VPS con Dokploy + Hackathon con premios</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:40.425237" data-fuente="Midudev">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=T0VlcnJ9r5A`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=T0VlcnJ9r5A" target="_blank"><img src="https://img.youtube.com/vi/T0VlcnJ9r5A/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Midudev | 26/03/2026</div><a href="https://youtube.com/watch?v=T0VlcnJ9r5A">Aprende a integrar IA a tu AplicaciÃ³n Web (con modelos GRATIS)</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:40.293927" data-fuente="Midudev">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=u8ffYWVMAes`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=u8ffYWVMAes" target="_blank"><img src="https://img.youtube.com/vi/u8ffYWVMAes/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Midudev | 26/03/2026</div><a href="https://youtube.com/watch?v=u8ffYWVMAes">Claude AI controla mi ordenador desde el mÃ³vil</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:40.144105" data-fuente="Midudev">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=ikdCG4goKIE`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=ikdCG4goKIE" target="_blank"><img src="https://img.youtube.com/vi/ikdCG4goKIE/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Midudev | 26/03/2026</div><a href="https://youtube.com/watch?v=ikdCG4goKIE">Me hackearon</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:40.012981" data-fuente="Midudev">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=kCB_bnz5txQ`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=kCB_bnz5txQ" target="_blank"><img src="https://img.youtube.com/vi/kCB_bnz5txQ/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Midudev | 26/03/2026</div><a href="https://youtube.com/watch?v=kCB_bnz5txQ">El nuevo modelo de Cursor no es lo que parece</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:39.542066" data-fuente="Pelado Nerd">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=QMHY-PPUfds`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=QMHY-PPUfds" target="_blank"><img src="https://img.youtube.com/vi/QMHY-PPUfds/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Pelado Nerd | 26/03/2026</div><a href="https://youtube.com/watch?v=QMHY-PPUfds">SERIE DE MONITOREO 2025 - Â¿QuÃ© se espera de una persona On-Call?</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:39.394194" data-fuente="Pelado Nerd">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=A5qX-_v1CRA`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=A5qX-_v1CRA" target="_blank"><img src="https://img.youtube.com/vi/A5qX-_v1CRA/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Pelado Nerd | 26/03/2026</div><a href="https://youtube.com/watch?v=A5qX-_v1CRA">SERIE DE MONITOREO 2025 - La TRIADA del Monitoreo (AVANZADO)</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:39.248264" data-fuente="Pelado Nerd">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=cmkyHSen4yY`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=cmkyHSen4yY" target="_blank"><img src="https://img.youtube.com/vi/cmkyHSen4yY/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Pelado Nerd | 26/03/2026</div><a href="https://youtube.com/watch?v=cmkyHSen4yY">SERIE DE MONITOREO 2025 - Manejo de INCIDENTES</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:38.500928" data-fuente="Pelado Nerd">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=GVf-JZdJjU8`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=GVf-JZdJjU8" target="_blank"><img src="https://img.youtube.com/vi/GVf-JZdJjU8/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">Pelado Nerd | 26/03/2026</div><a href="https://youtube.com/watch?v=GVf-JZdJjU8">OPENCLAW es INCREÃBLE</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:37.933916" data-fuente="MoureDev">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=JwuUfAWh3Jk`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=JwuUfAWh3Jk" target="_blank"><img src="https://img.youtube.com/vi/JwuUfAWh3Jk/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">MoureDev | 26/03/2026</div><a href="https://youtube.com/watch?v=JwuUfAWh3Jk">CÃ³mo ESTUDIAR ProgramaciÃ³n en 2026 (si de verdad quieres ser programador)</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:37.804205" data-fuente="MoureDev">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=oIU0s9O3kIc`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=oIU0s9O3kIc" target="_blank"><img src="https://img.youtube.com/vi/oIU0s9O3kIc/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">MoureDev | 26/03/2026</div><a href="https://youtube.com/watch?v=oIU0s9O3kIc">Las empresas ya no buscan sÃ³lo programadores (y nadie te lo explica)</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:37.657037" data-fuente="MoureDev">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=SeELckpmG7Q`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=SeELckpmG7Q" target="_blank"><img src="https://img.youtube.com/vi/SeELckpmG7Q/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">MoureDev | 26/03/2026</div><a href="https://youtube.com/watch?v=SeELckpmG7Q">Si sientes que no vales como PROGRAMADOR, mira esto</a></div>
+            </div>
+            <div class="card tipo-video" data-ts="2026-03-26T11:36:37.366787" data-fuente="MoureDev">
+                
+                
+            <button onclick="descargarVideo(`https://youtube.com/watch?v=x0y28JJcJpc`, this)" target="_blank" class="btn-download">📥</button>
+            
+                <a href="https://youtube.com/watch?v=x0y28JJcJpc" target="_blank"><img src="https://img.youtube.com/vi/x0y28JJcJpc/mqdefault.jpg"></a>
+                <div class="card-content"><div class="meta">MoureDev | 26/03/2026</div><a href="https://youtube.com/watch?v=x0y28JJcJpc">Mi primer aÃ±o como PROGRAMADOR fue un infierno (No cometas mi error)</a></div>
+            </div></div>
+        <h2>📰 Noticias Históricas</h2>
+        <ul class="news-list"><li class="news-item" data-ts="2026-03-26T11:37:15.497588" data-fuente="Dev.to"><div class="meta">Dev.to | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/ahd_1337/agents-in-60-lines-of-python-part-8-jge">Agents in 60 lines of python : Part 8</a></li><li class="news-item" data-ts="2026-03-26T11:37:15.497530" data-fuente="Dev.to"><div class="meta">Dev.to | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/gentic_news/overnight-cli-train-claude-code-on-your-own-chat-history-to-work-while-you-sleep-2k4b">Overnight CLI: Train Claude Code on Your Own Chat History to Work While You Sleep</a></li><li class="news-item" data-ts="2026-03-26T11:37:15.497488" data-fuente="Dev.to"><div class="meta">Dev.to | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/wasp/whats-the-best-way-to-vibe-code-a-saas-in-2026-9fh">What's the Best Way to Vibe Code a SaaS in 2026?</a></li><li class="news-item" data-ts="2026-03-26T11:37:15.497427" data-fuente="Dev.to"><div class="meta">Dev.to | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/hello_arisyn_0dc948aa82b3/what-the-agent-era-really-lacks-is-not-a-bigger-model-but-a-data-relationship-intelligence-layer-5e1e">What the Agent Era Really Lacks Is Not a Bigger Model, but a Data Relationship Intelligence Layer</a></li><li class="news-item" data-ts="2026-03-26T11:37:15.497376" data-fuente="Dev.to"><div class="meta">Dev.to | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/khoavannguyen/i-got-tired-of-juggling-terminal-windows-for-every-ai-agent-so-i-built-an-all-in-one-ide-3m99">I got tired of juggling terminal windows for every AI agent, so I built an all-in-one IDE</a></li><li class="news-item" data-ts="2026-03-26T11:37:15.497330" data-fuente="Dev.to"><div class="meta">Dev.to | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/kathryngrayson/ai-crash-course-hallucinations-1jeg">AI Crash Course: Hallucinations</a></li><li class="news-item" data-ts="2026-03-26T11:37:15.497273" data-fuente="Dev.to"><div class="meta">Dev.to | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/jonoherrington/ai-didnt-break-your-culture-it-exposed-it-2729">AI Didn't Break Your Culture. It Exposed It.</a></li><li class="news-item" data-ts="2026-03-26T11:37:15.358522" data-fuente="NVIDIA Blog"><div class="meta">NVIDIA Blog | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://blogs.nvidia.com/blog/power-flexible-ai-factories-energy-grid/">Blowing Off Steam: How Power-Flexible AI Factories Can Stabilize the Global Energy Grid</a></li><li class="news-item" data-ts="2026-03-26T11:37:15.358478" data-fuente="NVIDIA Blog"><div class="meta">NVIDIA Blog | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://blogs.nvidia.com/blog/ai-future-open-and-proprietary/">The Future of AI Is Open and Proprietary</a></li><li class="news-item" data-ts="2026-03-26T11:37:08.621977" data-fuente="Hacker News"><div class="meta">Hacker News | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://en.andros.dev/blog/aa31d744/from-zero-to-a-rag-system-successes-and-failures/">From zero to a RAG system: successes and failures</a></li><li class="news-item" data-ts="2026-03-26T11:37:08.621857" data-fuente="Hacker News"><div class="meta">Hacker News | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://whoami.wiki/blog/personal-encyclopedias">Personal Encyclopedias</a></li><li class="news-item" data-ts="2026-03-26T11:37:08.472562" data-fuente="TechCrunch"><div class="meta">TechCrunch | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/25/reddit-bots-new-human-verification-requirements/">Reddit se enfrenta a los bots con nuevos requisitos de "verificación humana" para comportamiento sospechoso</a></li><li class="news-item" data-ts="2026-03-26T11:37:07.852899" data-fuente="TechCrunch"><div class="meta">TechCrunch | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/25/google-launches-lyria-3-pro-music-generation-model/">Google lanza el modelo de generación de música Lyria 3 Pro</a></li><li class="news-item" data-ts="2026-03-26T11:37:07.707703" data-fuente="TechCrunch"><div class="meta">TechCrunch | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/25/bernie-sanders-and-aoc-propose-a-ban-on-data-center-construction/">Bernie Sanders y AOC proponen prohibir la construcción de centros de datos</a></li><li class="news-item" data-ts="2026-03-26T11:37:07.573457" data-fuente="TechCrunch"><div class="meta">TechCrunch | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/25/melania-trump-wants-a-robot-to-homeschool-your-child/">Melania Trump quiere un robot para educar a su hijo en casa</a></li><li class="news-item" data-ts="2026-03-26T11:37:07.145241" data-fuente="TechCrunch"><div class="meta">TechCrunch | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/25/google-turboquant-ai-memory-compression-silicon-valley-pied-piper/">Google presenta TurboQuant, un nuevo algoritmo de compresión de memoria mediante IA, y sí, Internet lo llama "Pied Piper"</a></li><li class="news-item" data-ts="2026-03-26T11:37:06.617821" data-fuente="TechCrunch"><div class="meta">TechCrunch | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/25/the-ai-skills-gap-is-here-says-ai-company-and-power-users-are-pulling-ahead/">La brecha de habilidades en IA ya está aquí, dice una empresa de IA, y los usuarios avanzados están tomando la delantera</a></li><li class="news-item" data-ts="2026-03-26T11:37:06.472867" data-fuente="TechCrunch"><div class="meta">TechCrunch | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/25/deccan-ai-raises-25m-as-ai-training-push-relies-on-india-based-workforce/">El competidor de Mercor, Deccan AI, recauda 25 millones de dólares, según expertos de la India</a></li><li class="news-item" data-ts="2026-03-26T11:37:06.324974" data-fuente="TechCrunch"><div class="meta">TechCrunch | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/25/the-least-surprising-chapter-of-the-manus-story-is-whats-happening-right-now/">El capítulo menos sorprendente de la historia de Manus es lo que está pasando ahora mismo.</a></li><li class="news-item" data-ts="2026-03-26T11:37:06.188235" data-fuente="TechCrunch"><div class="meta">TechCrunch | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/26/mistral-releases-a-new-open-source-model-for-speech-generation/">Mistral lanza un nuevo modelo de código abierto para la generación de voz</a></li><li class="news-item" data-ts="2026-03-26T11:37:01.517699" data-fuente="Applesfera"><div class="meta">Applesfera | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://www.xataka.com/ecologia-y-naturaleza/algo-que-paso-a-30-km-polo-norte-hace-seis-semanas-esta-a-punto-arruinar-domingo-ramos-culpable-tiene-nombre-apellidos?utm_source=applesfera&utm_medium=network&utm_campaign=repost">Un enero climático en pleno Domingo de Ramos: AEMET ya tiene una foto más clara de la Semana Santa que nos espera</a></li><li class="news-item" data-ts="2026-03-26T11:37:01.517609" data-fuente="Applesfera"><div class="meta">Applesfera | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://www.xataka.com/xataka-xtra/ultimas-horas-para-participar-sorteo-nothing-phone-3a-community-edition-solo-para-suscriptores-xataka-xtra?utm_source=applesfera&utm_medium=network&utm_campaign=repost">¡Últimas horas para participar en el sorteo de un Nothing Phone (3a) Community Edition!: solo para suscriptores de Xataka Xtra</a></li><li class="news-item" data-ts="2026-03-26T11:37:01.517550" data-fuente="Applesfera"><div class="meta">Applesfera | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://www.applesfera.com/apple-1/apple-esta-troceando-inmenso-cerebro-gemini-para-exprimirlo-dentro-iphone-plan-pasa-poner-a-ia-a-dieta">Apple está troceando el inmenso cerebro de Gemini para exprimirlo dentro del iPhone. El plan pasa por poner a la IA a dieta</a></li><li class="news-item" data-ts="2026-03-26T11:37:01.517494" data-fuente="Applesfera"><div class="meta">Applesfera | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://www.applesfera.com/seleccion/cinco-mejores-ofertas-apple-days-mediamarkt-precios-minimos-iphone-chollos-airtag-auriculares">Las cinco mejores ofertas de los Apple Days en MediaMarkt: precios mínimos en iPhone y chollos en AirTag, iPads y más</a></li><li class="news-item" data-ts="2026-03-26T11:37:01.517372" data-fuente="Applesfera"><div class="meta">Applesfera | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://www.applesfera.com/seguridad/ios-26-4-alla-novedades-visuales-corrigen-30-vulnerabilidades-que-podian-exponer-todas-tus-contrasenas">No actualizar el iPhone a iOS 26.4 tiene serios riesgos de seguridad. Apple ha informado de más de 30 vulnerabilidades</a></li><li class="news-item" data-ts="2026-03-26T11:37:01.081536" data-fuente="Fundación Carolina"><div class="meta">Fundación Carolina | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://www.fundacioncarolina.es/presentacion-del-libro-interfaz-ciencia-y-politica-asesoramiento-cientifico-en-iberoamerica-y-oportunidades-para-una-cooperacion-regional-informada-en-evidencia/">Presentación del libro: Interfaz ciencia y política: asesoramiento científico en Iberoamérica y oportunidades para una cooperación regional informada en evidencia</a></li><li class="news-item" data-ts="2026-03-26T11:36:59.649988" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/opinion/2026/03/25/ricard-camarena-quique-dacosta-jordi-morera-napoleon-cocineros-chefs-gastronomia-comunitat-valenciana-a-punt-santos-ruiz-128418105.html">La alta diplomacia de Camarena</a></li><li class="news-item" data-ts="2026-03-26T11:36:59.649898" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/economia/2026/03/26/vivienda-valencia-pisos-valencia-valencia-necesita-multiplicar-seis-construccion-128408899.html">Valencia necesita multiplicar por seis la construcción para hacer frente al déficit de pisos</a></li><li class="news-item" data-ts="2026-03-26T11:36:59.649850" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/comunitat-valenciana/2026/03/26/gobierno-frena-plan-llorca-vivienda-128410752.html">El Gobierno frena el plan de Llorca para construir vivienda en suelo municipal y le exige más protección</a></li><li class="news-item" data-ts="2026-03-26T11:36:59.649767" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/valencia/2026/03/26/catala-festivales-ciudad-artes-priorizar-128434970.html">Catalá, sobre los festivales de la Ciudad de las Artes en València: Vamos a priorizar el descanso de los vecinos</a></li><li class="news-item" data-ts="2026-03-26T11:36:59.014668" data-fuente="El País Tecnología"><div class="meta">El País Tecnología | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://elpais.com/tecnologia/2026-03-25/openai-cierra-su-generador-de-video-sora-solo-seis-meses-despues-de-su-lanzamiento-como-app.html">OpenAI cierra su generador de vídeo Sora solo seis meses después de su lanzamiento como app</a></li><li class="news-item" data-ts="2026-03-26T11:36:59.014605" data-fuente="El País Tecnología"><div class="meta">El País Tecnología | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://elpais.com/tecnologia/2026-03-25/una-sentencia-pionera-condena-a-meta-a-pagar-375-millones-de-dolares-por-no-proteger-a-los-menores-en-las-redes-sociales.html">Una sentencia pionera condena a Meta a pagar 375 millones de dólares por no proteger a los menores en las redes sociales</a></li><li class="news-item" data-ts="2026-03-26T11:36:58.288770" data-fuente="HobbyConsolas"><div class="meta">HobbyConsolas | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://www.hobbyconsolas.com/videojuegos/jason-blundell-responsable-dark-outlaw-games-confirma-que-cierre-estudio-se-debe-un-cambio-estrategia-sony_6951025_0.html">Jason Blundell, el responsable de Dark Outlaw Games, confirma que el cierre del estudio se debe a un cambio en la estrategia de Sony</a></li><li class="news-item" data-ts="2026-03-26T11:36:58.288669" data-fuente="HobbyConsolas"><div class="meta">HobbyConsolas | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://www.hobbyconsolas.com/videojuegos/capcom-baraja-varias-opciones-para-resident-evil-entre-ellas-un-remake-que-nadie-espera-segun-desvela-dusk-golem_6950864_0.html">Capcom baraja varias opciones para Resident Evil, entre ellas un remake que nadie espera, según desvela Dusk Golem</a></li><li class="news-item" data-ts="2026-03-26T11:36:58.288563" data-fuente="HobbyConsolas"><div class="meta">HobbyConsolas | 26/03</div><span class="badge badge-tech">Tech</span><a href="https://www.hobbyconsolas.com/hobbycine/harry-potter-divide-fandom-con-trailer-serie-adaptacion-innecesaria-enfoque-correcto_6950912_0.html">Harry Potter divide al fandom con el tráiler de la serie: ¿Adaptación innecesaria o enfoque correcto?</a></li><li class="news-item" data-ts="2026-03-25T09:21:46.586601" data-fuente="Dev.to"><div class="meta">Dev.to | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/tgoldi/i-scanned-100-ai-generated-apps-for-security-vulnerabilities-heres-what-i-found-1l5o">I scanned 100 AI-generated apps for security vulnerabilities. Here's what I found.</a></li><li class="news-item" data-ts="2026-03-25T09:21:46.586563" data-fuente="Dev.to"><div class="meta">Dev.to | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/schrepa/serving-mcp-and-rest-from-the-same-typescript-process-1n41">Serving MCP and REST from the same TypeScript process</a></li><li class="news-item" data-ts="2026-03-25T09:21:46.586492" data-fuente="Dev.to"><div class="meta">Dev.to | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/jeremy_longshore/automating-developer-workflows-building-custom-ai-command-systems-5fdd">Automating Developer Workflows: Building Custom AI Command Systems</a></li><li class="news-item" data-ts="2026-03-25T09:21:46.586453" data-fuente="Dev.to"><div class="meta">Dev.to | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/thisishaykins/bridging-fintech-and-agentic-ai-building-a-paystack-mcp-server-in-python-43f0">Bridging Fintech and Agentic AI: Building a Paystack MCP Server in Python</a></li><li class="news-item" data-ts="2026-03-25T09:21:46.586414" data-fuente="Dev.to"><div class="meta">Dev.to | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/yash_sonawane25/notionops-ai-i-built-an-ai-devops-brain-that-lives-inside-notion-3foh">NotionOps AI — I Built an AI DevOps Brain That Lives Inside Notion 🧠</a></li><li class="news-item" data-ts="2026-03-25T09:21:43.048640" data-fuente="Hacker News"><div class="meta">Hacker News | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://flighty.com/airports">Flighty Airports</a></li><li class="news-item" data-ts="2026-03-25T09:21:43.048601" data-fuente="Hacker News"><div class="meta">Hacker News | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://news.ycombinator.com/from?site=twitter.com/soraofficialapp">twitter.com/soraofficialapp</a></li><li class="news-item" data-ts="2026-03-25T09:21:43.048557" data-fuente="Hacker News"><div class="meta">Hacker News | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://twitter.com/soraofficialapp/status/2036532795984715896">Goodbye to Sora</a></li><li class="news-item" data-ts="2026-03-25T09:21:43.048506" data-fuente="Hacker News"><div class="meta">Hacker News | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://v-os.dev">VitruvianOS – Desktop Linux Inspired by the BeOS</a></li><li class="news-item" data-ts="2026-03-25T09:21:43.048463" data-fuente="Hacker News"><div class="meta">Hacker News | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://news.ycombinator.com/from?site=research.google">research.google</a></li><li class="news-item" data-ts="2026-03-25T09:21:43.048390" data-fuente="Hacker News"><div class="meta">Hacker News | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/">TurboQuant: Redefining AI efficiency with extreme compression</a></li><li class="news-item" data-ts="2026-03-25T09:21:42.494504" data-fuente="TechCrunch"><div class="meta">TechCrunch | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/24/openais-plans-to-make-chatgpt-more-like-amazon-arent-going-so-well/">Los planes de OpenAI para hacer que ChatGPT se parezca más a Amazon no van tan bien</a></li><li class="news-item" data-ts="2026-03-25T09:21:42.272653" data-fuente="TechCrunch"><div class="meta">TechCrunch | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/24/arm-is-releasing-its-first-in-house-chip-in-its-35-year-history/">Arm lanza el primer chip interno en sus 35 años de historia</a></li><li class="news-item" data-ts="2026-03-25T09:21:42.068429" data-fuente="TechCrunch"><div class="meta">TechCrunch | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/24/databricks-buys-two-startups-lakewatch-antimatter-siftd-ai-security/">Databricks compró dos empresas emergentes para respaldar su nuevo producto de seguridad de inteligencia artificial</a></li><li class="news-item" data-ts="2026-03-25T09:21:41.879399" data-fuente="TechCrunch"><div class="meta">TechCrunch | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/24/spotify-tests-new-tool-to-stop-ai-slop-from-being-attributed-to-real-artists/">Spotify prueba una nueva herramienta para evitar que la IA se atribuya a artistas reales</a></li><li class="news-item" data-ts="2026-03-25T09:21:41.658776" data-fuente="TechCrunch"><div class="meta">TechCrunch | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/24/anthropic-hands-claude-code-more-control-but-keeps-it-on-a-leash/">Anthropic le da a Claude Code más control, pero lo mantiene atado</a></li><li class="news-item" data-ts="2026-03-25T09:21:41.439222" data-fuente="TechCrunch"><div class="meta">TechCrunch | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/24/kentucky-woman-rejects-26-million-offer-to-turn-her-farm-into-a-data-center/">Mujer de Kentucky rechaza oferta de 26 millones de dólares para convertir su granja en un centro de datos</a></li><li class="news-item" data-ts="2026-03-25T09:21:40.616570" data-fuente="TechCrunch"><div class="meta">TechCrunch | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/24/openais-sora-was-the-creepiest-app-on-your-phone-now-its-shutting-down/">Sora de OpenAI era la aplicación más espeluznante en tu teléfono, ahora se está cerrando</a></li><li class="news-item" data-ts="2026-03-25T09:21:40.402240" data-fuente="TechCrunch"><div class="meta">TechCrunch | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/24/with-3-5b-in-fresh-capital-kleiner-perkins-is-going-all-in-on-ai/">Con 3.500 millones de dólares de capital fresco, Kleiner Perkins apuesta por la IA</a></li><li class="news-item" data-ts="2026-03-25T09:21:36.660419" data-fuente="Applesfera"><div class="meta">Applesfera | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://www.applesfera.com/rumores/gurman-confirma-mala-noticia-nueva-siri-ios-26-paso-filtra-nuevo-chatgpt-apple">Gurman confirma la mala noticia sobre la nueva Siri en iOS 26. Y de paso filtra grandes novedades como un nuevo ChatGPT de Apple</a></li><li class="news-item" data-ts="2026-03-25T09:21:35.065012" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/economia/2026/03/25/inquilinos-revisan-contrato-valencia-pagar-128352509.html">Los inquilinos que revisan su contrato en València van a tener que pagar casi el doble por su piso</a></li><li class="news-item" data-ts="2026-03-25T09:21:35.064921" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/comunitat-valenciana/2026/03/25/sanidad-rastrea-contactos-menor-fallecida-meningitis-denia-128367495.html">Sanidad rastrea los contactos de la menor de 17 años fallecida por meningitis en el hospital de Dénia</a></li><li class="news-item" data-ts="2026-03-25T09:21:35.064783" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/comunitat-valenciana/2026/03/25/carlos-mazon-declarara-como-testigo-ante-la-jueza-de-la-dana-y-valorara-si-entrega-sus-whatsapps-del-29-o-128369548.html">Carlos Mazón declarará ante la jueza de la dana como testigo y aclarará si entrega sus 'wasaps' del 29-O</a></li><li class="news-item" data-ts="2026-03-25T09:21:35.064713" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/comunitat-valenciana/2026/03/25/atasco-pista-silla-obras-v31-trafico-valencia-v30-128383497.html">Atasco monumental en Valencia por unas obras en la Pista de Silla: las retenciones superan los 34 km</a></li><li class="news-item" data-ts="2026-03-25T09:21:33.391176" data-fuente="HobbyConsolas"><div class="meta">HobbyConsolas | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://www.hobbyconsolas.com/hobbycine/harry-potter-hbo-presenta-primera-imagen-oficial-serie-con-dominic-mclaughlin-punto-echar-vuelo_6950140_0.html">Harry Potter de HBO presenta la primera imagen oficial de la serie, con Dominic McLaughlin a punto de echar el vuelo</a></li><li class="news-item" data-ts="2026-03-25T09:21:33.391024" data-fuente="HobbyConsolas"><div class="meta">HobbyConsolas | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://www.hobbyconsolas.com/hobbycine/critica-scrubs-revival-disney-regresa-por-todo-alto-con-misma-esencia-serie-original_6949988_0.html">Crítica de Scrubs, el revival de Disney+ regresa por todo lo alto con la misma esencia de la serie original</a></li><li class="news-item" data-ts="2026-03-25T09:21:33.390903" data-fuente="HobbyConsolas"><div class="meta">HobbyConsolas | 25/03</div><span class="badge badge-tech">Tech</span><a href="https://www.hobbyconsolas.com/hobbycine/critica-daredevil-born-again-temporada-2-asi-se-debe-hacer-una-serie-marvel_6949297_0.html">Crítica de Daredevil Born Again temporada 2. ASÍ se debe hacer una serie de Marvel</a></li><li class="news-item" data-ts="2026-03-24T19:26:13.021814" data-fuente="TechCrunch"><div class="meta">TechCrunch | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/24/google-tv-new-gemini-features-keep-fans-updated-on-sports-teams-deep-dives-visual-answers/">Las nuevas funciones Gemini de Google TV mantienen a los fanáticos actualizados sobre equipos deportivos y más</a></li><li class="news-item" data-ts="2026-03-24T19:26:06.643332" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/comunitat-valenciana/2026/03/24/protesta-cesa-nueva-manifestacion-mazon-128370871.html">La protesta que no cesa: nueva manifestación contra Mazón en València</a></li><li class="news-item" data-ts="2026-03-24T18:56:42.846607" data-fuente="Dev.to"><div class="meta">Dev.to | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/bekahhw/ai-102-4o0">AI 102</a></li><li class="news-item" data-ts="2026-03-24T18:56:40.011529" data-fuente="Hacker News"><div class="meta">Hacker News | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://github.com/t8/hypura">Hypura – A storage-tier-aware LLM inference scheduler for Apple Silicon</a></li><li class="news-item" data-ts="2026-03-24T18:56:38.310043" data-fuente="TechCrunch"><div class="meta">TechCrunch | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/24/talats-ai-meeting-notes-stay-on-your-machine-not-in-the-cloud/">Las notas de las reuniones con IA de Talat permanecen en su máquina, no en la nube</a></li><li class="news-item" data-ts="2026-03-24T18:56:37.796757" data-fuente="TechCrunch"><div class="meta">TechCrunch | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/24/openai-adds-open-source-tools-to-help-developers-build-for-teen-safety/">OpenAI agrega herramientas de código abierto para ayudar a los desarrolladores a crear seguridad para los adolescentes</a></li><li class="news-item" data-ts="2026-03-24T18:56:31.615250" data-fuente="HobbyConsolas"><div class="meta">HobbyConsolas | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.hobbyconsolas.com/videojuegos/gta-6-usara-tecnologia-procedural-para-ofrecer-un-avance-grafico-nunca-antes-visto-un-juego_6950243_0.html">GTA 6 usará la tecnología procedural para ofrecer un avance gráfico nunca antes visto en un juego</a></li><li class="news-item" data-ts="2026-03-24T17:56:15.646728" data-fuente="Dev.to"><div class="meta">Dev.to | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/acacian/your-ai-agent-can-be-hijacked-with-3-lines-of-json-5878">Your AI Agent Can Be Hijacked With 3 Lines of JSON</a></li><li class="news-item" data-ts="2026-03-24T17:56:15.646565" data-fuente="Dev.to"><div class="meta">Dev.to | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/egorfedorov/update-my-claude-code-token-optimizer-now-blocks-redundant-reads-heres-the-data-from-107-27lj">Update: my Claude Code token optimizer now blocks redundant reads. Here's the data from 107 sessions.</a></li><li class="news-item" data-ts="2026-03-24T17:56:15.646511" data-fuente="Dev.to"><div class="meta">Dev.to | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/helderberto/ai-writes-code-you-own-quality-19g0">AI Writes Code. You Own Quality.</a></li><li class="news-item" data-ts="2026-03-24T17:56:13.116553" data-fuente="Hacker News"><div class="meta">Hacker News | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://news.ycombinator.com/from?site=emailmd.dev">emailmd.dev</a></li><li class="news-item" data-ts="2026-03-24T17:56:13.116499" data-fuente="Hacker News"><div class="meta">Hacker News | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.emailmd.dev/">Show HN: Email.md – Markdown to responsive, email-safe HTML</a></li><li class="news-item" data-ts="2026-03-24T17:56:13.116386" data-fuente="Hacker News"><div class="meta">Hacker News | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://news.ycombinator.com/from?site=github.com/t8">github.com/t8</a></li><li class="news-item" data-ts="2026-03-24T17:56:13.116311" data-fuente="Hacker News"><div class="meta">Hacker News | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://news.ycombinator.com/from?site=github.com/berriai">github.com/berriai</a></li><li class="news-item" data-ts="2026-03-24T17:56:13.116241" data-fuente="Hacker News"><div class="meta">Hacker News | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://github.com/BerriAI/litellm/issues/24512">LiteLLM Python package compromised by supply-chain attack</a></li><li class="news-item" data-ts="2026-03-24T17:56:12.097716" data-fuente="TechCrunch"><div class="meta">TechCrunch | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/24/mirage-raises-75m-to-continue-building-models-for-its-ai-video-editing-app-captions/">Mirage recauda 75 millones de dólares para seguir construyendo modelos para su aplicación de edición de vídeo con IA</a></li><li class="news-item" data-ts="2026-03-24T17:56:11.465554" data-fuente="TechCrunch"><div class="meta">TechCrunch | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/24/meet-the-former-apple-designer-building-a-new-ai-interface-at-hark/">Conozca al ex diseñador de Apple que construye una nueva interfaz de inteligencia artificial en Hark</a></li><li class="news-item" data-ts="2026-03-24T17:56:10.218128" data-fuente="TechCrunch"><div class="meta">TechCrunch | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/24/doss-raises-55m-for-ai-inventory-management-that-plugs-into-erp/">Doss recauda 55 millones de dólares para la gestión de inventario de IA que se conecta al ERP</a></li><li class="news-item" data-ts="2026-03-24T17:56:07.168510" data-fuente="Applesfera"><div class="meta">Applesfera | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.applesfera.com/app-store/nunca-antes-se-habian-lanzada-tantas-nuevas-apps-para-iphone-vibe-coding-tiene-lectura-positiva">La App Store se está llenando de apps sin usuarios y que apestan a IA: es un problemón para desarrolladores (y para nosotros)</a></li><li class="news-item" data-ts="2026-03-24T17:56:07.168439" data-fuente="Applesfera"><div class="meta">Applesfera | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.xataka.com/robotica-e-ia/youtube-invierte-millon-contenido-ia-para-ninos-justo-cuando-acaba-declarar-guerra-al-contenido-ia-para-ninos?utm_source=applesfera&utm_medium=network&utm_campaign=repost">YouTube está invirtiendo millones en contenido IA para niños. YouTube también está combatiendo el contenido IA para niños</a></li><li class="news-item" data-ts="2026-03-24T17:56:07.168246" data-fuente="Applesfera"><div class="meta">Applesfera | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.applesfera.com/ios/oficial-apple-acaba-lanzar-ios-26-4-viene-interesantes-novedades-no-que-esperabamos">Ya es oficial: Apple acaba de lanzar iOS 26.4 y viene con interesantes novedades (aunque no la que más esperábamos)</a></li><li class="news-item" data-ts="2026-03-24T17:56:05.253535" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/comunitat-valenciana/2026/03/24/apelar-dialogo-caso-cofradia-sagunt-128362084.html">El videoanálisis de Alfons Garcia: “No se puede apelar solo al diálogo en el caso de la cofradía de Sagunt. Se están vulnerando valores fundamentales”</a></li><li class="news-item" data-ts="2026-03-24T17:56:05.253442" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/deportes/2026/03/24/dia-de-lesport-2026-fundacion-trinidad-alfonso-fecha-actividades-bc-128366127.html">El Dia de l’Esport más ‘retro’ llega a la Comunitat</a></li><li class="news-item" data-ts="2026-03-24T17:56:05.253229" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/comunitat-valenciana/2026/03/24/morant-baldovi-exigen-mazon-diga-128364547.html">Morant y Baldoví exigen a Mazón que diga la verdad ante la jueza: Sin rodeos ni medias verdades</a></li><li class="news-item" data-ts="2026-03-24T17:56:05.253155" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/comunitat-valenciana/2026/03/24/por-que-la-jueza-de-la-dana-cita-ahora-a-carlos-mazon-como-testigo-y-antes-no-128358917.html">¿Por qué la jueza de la dana cita ahora a Carlos Mazón como testigo y antes no?</a></li><li class="news-item" data-ts="2026-03-24T17:56:05.253041" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/comunitat-valenciana/2026/03/24/la-jueza-de-la-dana-cita-a-carlos-mazon-como-testigo-tras-rechazar-el-tsjcv-su-imputacion-128356465.html">La jueza de la dana cita a Carlos Mazón como testigo tras rechazar el TSJCV su imputación</a></li><li class="news-item" data-ts="2026-03-24T17:56:02.945916" data-fuente="HobbyConsolas"><div class="meta">HobbyConsolas | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.hobbyconsolas.com/videojuegos/vine-tomodachi-life-una-vida-ensueno-por-simulacion-me-quede-por-salseo-impresiones-juego-para-nintendo-switch_6949798_0.html">Vine a Tomodachi Life: Una Vida de Ensueño por la simulación... y me quedé por el salseo: impresiones del juego para Nintendo Switch</a></li><li class="news-item" data-ts="2026-03-24T12:39:06.012412" data-fuente="Applesfera"><div class="meta">Applesfera | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.trendencias.com/silver/dr-nancy-fisioterapeuta-estos-cuatro-ejercicios-pilates-cinta-elastica-podras-fortalecer-cadera-caminar-mejor-prevenir-caidas?utm_source=applesfera&utm_medium=network&utm_campaign=repost">Dr. Nancy, fisioterapeuta: Con estos cuatro ejercicios de pilates con cinta elástica podrás fortalecer la cadera, caminar mejor y prevenir caídas</a></li><li class="news-item" data-ts="2026-03-24T12:39:03.835158" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/sucesos/2026/03/24/gran-despliegue-guardia-civil-nules-128343126.html">La Guardia Civil rescata a más de 100 víctimas de trata de seres humanos en tres redadas en Castellón</a></li><li class="news-item" data-ts="2026-03-24T12:39:02.166113" data-fuente="HobbyConsolas"><div class="meta">HobbyConsolas | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.hobbyconsolas.com/hobbycine/critica-altas-capacidades-laberinto-social-retratado-con-tintes-comedia-negra_6949849_0.html">Crítica de Altas capacidades: el laberinto social retratado con tintes de comedia negra</a></li><li class="news-item" data-ts="2026-03-24T12:39:02.166049" data-fuente="HobbyConsolas"><div class="meta">HobbyConsolas | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.hobbyconsolas.com/videojuegos/pokemon-pokopia-va-terminar-primer-trimestre-2026-como-juego-mejor-valorado-metacritic-por-encima-resident-evil-requiem-crimson-desert_6949845_0.html">Pokémon Pokopia va a terminar el primer trimestre de 2026 como el juego mejor valorado en Metacritic, por encima Resident Evil Requiem o Crimson Desert</a></li><li class="news-item" data-ts="2026-03-24T12:09:04.033909" data-fuente="TechCrunch"><div class="meta">TechCrunch | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/24/agile-robots-becomes-the-latest-robotics-company-to-partner-with-google-deepmind/">Agile Robots se convierte en la última empresa de robótica en asociarse con Google DeepMind</a></li><li class="news-item" data-ts="2026-03-24T12:08:59.822661" data-fuente="Applesfera"><div class="meta">Applesfera | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.applesfera.com/seguridad/faltaban-razones-para-actualizar-iphone-ipad-antiguo-he-aqui-gran-razon-se-acaba-filtrar-su-ultimo-malware">Se acaba de filtrar un malware que afectaba a varios iPhone y iPad antiguos. Pero hay una buena noticia: se soluciona actualizando</a></li><li class="news-item" data-ts="2026-03-24T12:08:59.822492" data-fuente="Applesfera"><div class="meta">Applesfera | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.applesfera.com/iphone/iphone-air-no-venia-a-destronar-a-modelos-pro-su-mision-era-resucitar-ventas-acaba-lograrlo-creces">El iPhone Air no venía a destronar a los modelos Pro. Su misión era resucitar las ventas y acaba de lograrlo con creces</a></li><li class="news-item" data-ts="2026-03-24T12:08:59.352597" data-fuente="Fundación Carolina"><div class="meta">Fundación Carolina | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.fundacioncarolina.es/la-transicion-verde-protagoniza-los-trabajos-ganadores-de-los-vii-premios-universidad-conocimiento-y-agenda-2030/">La transición verde protagoniza los trabajos ganadores de los VII Premios “Universidad, Conocimiento y Agenda 2030”</a></li><li class="news-item" data-ts="2026-03-24T11:41:46.790843" data-fuente="Applesfera"><div class="meta">Applesfera | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.applesfera.com/seleccion/iphone-air-vuelve-a-bajar-precio-mejor-que-no-ha-sido-su-configuracion-minima">El iPhone Air vuelve a bajar de precio, y lo mejor es que no ha sido en su configuración mínima</a></li><li class="news-item" data-ts="2026-03-24T11:25:23.392417" data-fuente="Dev.to"><div class="meta">Dev.to | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/reneza/ai-skills-are-the-new-boilerplate-they-solve-almost-nothing-4obo">AI Skills Are the New Boilerplate. They Solve Almost Nothing.</a></li><li class="news-item" data-ts="2026-03-24T11:25:23.392381" data-fuente="Dev.to"><div class="meta">Dev.to | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/walletguy/how-we-designed-a-7-stage-transaction-pipeline-for-ai-agents-4f4o">How We Designed a 7-Stage Transaction Pipeline for AI Agents</a></li><li class="news-item" data-ts="2026-03-24T11:25:07.906543" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/valencia/2026/03/24/informe-juridico-ayuntamiento-valencia-dice-128344858.html">Un informe jurídico del Ayuntamiento de València dice que la permuta de las 39 viviendas reservadas fue legal</a></li><li class="news-item" data-ts="2026-03-24T10:41:34.850489" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/valencia/2026/03/24/ayuntamiento-prepara-zbe-informe-innecesaria-minimos-valencia-128342583.html">El Ayuntamiento de València allana el camino a una ZBE de mínimos con un informe de tráfico que la hace innecesaria</a></li><li class="news-item" data-ts="2026-03-24T10:41:34.850216" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/marina/2026/03/24/fallece-adolescente-hospital-denia-benissa-festera-tragedia-meningitis-uci-128339038.html">Fallece una adolescente de meningitis en el hospital de Dénia</a></li><li class="news-item" data-ts="2026-03-24T10:21:46.168874" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/morvedre/2026/03/24/alcalde-sagunt-semana-santa-momento-valientes-igualdad-inclusion-128339409.html">El alcalde de Sagunt sobre la Semana Santa: Es el momento de ser valientes y dar un paso hacia la igualdad</a></li><li class="news-item" data-ts="2026-03-24T09:02:52.900279" data-fuente="Dev.to"><div class="meta">Dev.to | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/oolongtea2026/the-message-that-got-blue-ticks-but-never-arrived-3eo5">The Message That Got Blue Ticks But Never Arrived</a></li><li class="news-item" data-ts="2026-03-24T09:02:52.900213" data-fuente="Dev.to"><div class="meta">Dev.to | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/grant_biggert/i-have-a-theory-about-ai-just-like-everyone-else-3k07">I have a theory about AI (just like everyone else)</a></li><li class="news-item" data-ts="2026-03-24T09:02:52.900166" data-fuente="Dev.to"><div class="meta">Dev.to | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/leugarcez/construi-um-gerador-de-playlists-no-spotify-com-claude-18ge">Construí um gerador de playlists no Spotify com Claude</a></li><li class="news-item" data-ts="2026-03-24T09:02:50.182569" data-fuente="Hacker News"><div class="meta">Hacker News | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://proofshot.argil.io/">Show HN: ProofShot – Give AI coding agents eyes to verify the UI they build</a></li><li class="news-item" data-ts="2026-03-24T09:02:48.343466" data-fuente="TechCrunch"><div class="meta">TechCrunch | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/23/air-street-becomes-one-of-the-largest-solo-vcs-in-europe-with-232m-fund/">Air Street se convierte en uno de los capitalistas de riesgo individuales más grandes de Europa con un fondo de 232 millones de dólares</a></li><li class="news-item" data-ts="2026-03-24T09:02:45.336031" data-fuente="Applesfera"><div class="meta">Applesfera | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.applesfera.com/rumores/que-novedades-podemos-esperar-wwdc26-apple-protagonizada-ia-google">Qué novedades podemos esperar en una WWDC26 de Apple protagonizada por la IA de Google</a></li><li class="news-item" data-ts="2026-03-24T09:02:43.827561" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/podcast/2026/03/10/gastos-basicos-o-innecesarios-aventura-bc-127730383.html">¿Gastos básicos o innecesarios? | La aventura de la economía de la vida cotidiana</a></li><li class="news-item" data-ts="2026-03-24T09:02:43.827428" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/comunitat-valenciana/camp-de-turia/2026/03/24/lliria-abre-camino-semana-santa-veto-mujer-sagunt-128318099.html">La apertura de la Semana Santa en Llíria frente al veto femenino en Sagunt: Sin las mujeres la cofradía estaría destinada a morir</a></li><li class="news-item" data-ts="2026-03-24T09:02:43.827350" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/opinion/2026/03/24/valenciaport-autoridad-portuaria-de-valencia-apv-puerto-de-valencia-zal-de-valencia-tribunal-supremo-comercio-exportacion-la-lonja-128326589.html">El aval definitivo al Puerto de València</a></li><li class="news-item" data-ts="2026-03-24T09:02:43.827301" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/comunitat-valenciana/2026/03/24/jefa-prensa-mazon-multiples-versiones-128327919.html">La jefa de prensa de Mazón, sobre las múltiples versiones de la dana: Contestamos aleatoriamente, no porque me lo hubiera dicho el president</a></li><li class="news-item" data-ts="2026-03-24T09:02:43.827251" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/comunitat-valenciana/2026/03/23/el-cabo-de-guardia-aviso-al-consorcio-de-bomberos-que-el-reten-de-chiva-en-la-cabecera-del-poyo-ya-se-estaba-inundando-a-las-17-50-horas-128321913.html">El cabo de guardia avisó al Consorcio de Bomberos que el retén de Chiva, en la cabecera del Poyo, ya se estaba inundando a las 17.50 horas</a></li><li class="news-item" data-ts="2026-03-24T09:02:43.827183" data-fuente="Levante-EMV"><div class="meta">Levante-EMV | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.levante-emv.com/economia/2026/03/24/supremo-cierra-via-judicial-ampara-128307101.html">El Supremo cierra la vía judicial y ampara la ZAL del puerto de València</a></li><li class="news-item" data-ts="2026-03-24T09:02:43.231704" data-fuente="El País Tecnología"><div class="meta">El País Tecnología | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://elpais.com/sociedad/2026-03-24/la-denuncia-en-espana-de-una-actriz-a-su-exmarido-por-enviar-deepfakes-sexuales-sacude-a-alemania.html">La denuncia en España de una actriz a su exmarido por enviar ‘deepfakes’ sexuales sacude a Alemania</a></li><li class="news-item" data-ts="2026-03-24T09:02:42.952300" data-fuente="HobbyConsolas"><div class="meta">HobbyConsolas | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.hobbyconsolas.com/videojuegos/los-fans-crimson-desert-no-le-perdonan-ni-una-ahora-centran-sus-quejas-las-monturas-colega-donde-esta-mi-dragon_6949771_0.html">Los fans de Crimson Desert no le perdonan ni una y ahora centran sus quejas en las monturas: colega, ¿dónde está mi dragón?</a></li><li class="news-item" data-ts="2026-03-24T09:02:42.952139" data-fuente="HobbyConsolas"><div class="meta">HobbyConsolas | 24/03</div><span class="badge badge-tech">Tech</span><a href="https://www.hobbyconsolas.com/hobbycine/the-boys-temporada-5-no-tendra-grandes-batallas-porque-no-es-juego-tronos-senala-su-creador_6949810_0.html">The Boys temporada 5 no tendrá grandes batallas porque no es Juego de tronos, señala su creador</a></li><li class="news-item" data-ts="2026-03-23T20:25:37.201688" data-fuente="Dev.to"><div class="meta">Dev.to | 23/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/clawgenesis/i-used-claude-code-for-30-days-heres-what-actually-broke-in-production-43h8">I Used Claude Code for 30 Days. Here's What Actually Broke in Production</a></li><li class="news-item" data-ts="2026-03-23T20:25:37.201627" data-fuente="Dev.to"><div class="meta">Dev.to | 23/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/kagioneko/i-built-an-open-source-limbic-system-for-ai-agents-emotion-bias-and-memory-as-mcp-servers-227b">I built an open-source \limbic system\ for AI agents — emotion, bias, and memory as MCP servers</a></li><li class="news-item" data-ts="2026-03-23T20:25:37.201580" data-fuente="Dev.to"><div class="meta">Dev.to | 23/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/tanizya/i-built-an-ios-stock-prediction-app-with-claude-code-heres-how-it-went-2d2e">I Built an iOS Stock Prediction App with Claude Code — Here's How It Went</a></li><li class="news-item" data-ts="2026-03-23T20:25:37.201530" data-fuente="Dev.to"><div class="meta">Dev.to | 23/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/ashiya_farhin_d450eb33855/designing-an-ai-that-remembers-how-we-built-a-coding-mentor-with-a-human-memory-dlk">Designing an AI That Remembers: How We Built a Coding Mentor with a Human Memory</a></li><li class="news-item" data-ts="2026-03-23T20:25:37.201463" data-fuente="Dev.to"><div class="meta">Dev.to | 23/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/sudodevesh/i-talk-to-ai-while-i-code-heres-what-works-what-fails-and-where-i-stop-22jk">I Talk to AI While I Code. Here's What Works, What Fails, and Where I Stop.</a></li><li class="news-item" data-ts="2026-03-23T20:25:37.201392" data-fuente="Dev.to"><div class="meta">Dev.to | 23/03</div><span class="badge badge-tech">Tech</span><a href="https://dev.to/fransborges/engenharia-de-prompt-por-que-a-forma-como-voce-pergunta-muda-tudoum-guia-introdutorio-3hb0">Engenharia de Prompt: Por Que a Forma Como Você Pergunta Muda Tudo(Um guia introdutório)</a></li><li class="news-item" data-ts="2026-03-23T20:25:37.020475" data-fuente="NVIDIA Blog"><div class="meta">NVIDIA Blog | 23/03</div><span class="badge badge-tech">Tech</span><a href="https://blogs.nvidia.com/blog/secure-autonomous-ai-agents-openshell/">How Autonomous AI Agents Become Secure by Design With NVIDIA OpenShell</a></li><li class="news-item" data-ts="2026-03-23T20:25:33.677010" data-fuente="Hacker News"><div class="meta">Hacker News | 23/03</div><span class="badge badge-tech">Tech</span><a href="https://socket.dev/blog/trivy-under-attack-again-github-actions-compromise">Trivy under attack again: Widespread GitHub Actions tag compromise secrets</a></li><li class="news-item" data-ts="2026-03-23T20:25:33.676963" data-fuente="Hacker News"><div class="meta">Hacker News | 23/03</div><span class="badge badge-tech">Tech</span><a href="https://news.ycombinator.com/from?site=github.com/localstack">github.com/localstack</a></li><li class="news-item" data-ts="2026-03-23T20:25:33.676903" data-fuente="Hacker News"><div class="meta">Hacker News | 23/03</div><span class="badge badge-tech">Tech</span><a href="https://github.com/localstack/localstack">Local Stack Archived their GitHub repo and requires an account to run</a></li><li class="news-item" data-ts="2026-03-23T20:25:33.676820" data-fuente="Hacker News"><div class="meta">Hacker News | 23/03</div><span class="badge badge-tech">Tech</span><a href="https://twitter.com/anemll/status/2035901335984611412">iPhone 17 Pro Demonstrated Running a 400B LLM</a></li><li class="news-item" data-ts="2026-03-23T20:25:33.145473" data-fuente="TechCrunch"><div class="meta">TechCrunch | 23/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/23/sam-altman-openai-fusion-energy-board-helion/">Helion, la startup de fusión respaldada por Sam Altman, en conversaciones para vender energía a OpenAI</a></li><li class="news-item" data-ts="2026-03-23T20:25:33.020850" data-fuente="TechCrunch"><div class="meta">TechCrunch | 23/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/23/elizabeth-warren-anthropic-pentagon-defense-supply-chain-risk-retaliation/">Elizabeth Warren califica la decisión del Pentágono de prohibir a Anthropic “represalias”</a></li><li class="news-item" data-ts="2026-03-23T20:25:32.887527" data-fuente="TechCrunch"><div class="meta">TechCrunch | 23/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/23/littlebird-raises-11m-to-capture-context-from-your-computer-so-you-can-query-your-data/">Littlebird recauda 11 millones de dólares para su herramienta de "recuperación" asistida por IA que lee la pantalla de su computadora</a></li><li class="news-item" data-ts="2026-03-23T20:25:32.775312" data-fuente="TechCrunch"><div class="meta">TechCrunch | 23/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/23/startup-gimlet-labs-is-solving-the-ai-inference-bottleneck-in-a-surprisingly-elegant-way/">La startup Gimlet Labs está resolviendo el cuello de botella de la inferencia de IA de una manera sorprendentemente elegante</a></li><li class="news-item" data-ts="2026-03-23T20:25:32.625249" data-fuente="TechCrunch"><div class="meta">TechCrunch | 23/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/23/apple-wwdc-june-8-12-ai-advancements-siri-developers-conference/">Apple fija la fecha de junio para la WWDC 2026, provocando 'avances en la IA'</a></li><li class="news-item" data-ts="2026-03-23T20:25:32.507624" data-fuente="TechCrunch"><div class="meta">TechCrunch | 23/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/23/vibe-coding-startup-lovable-is-on-the-hunt-for-acquisitions/">La startup de codificación Vibe Lovable está a la caza de adquisiciones</a></li><li class="news-item" data-ts="2026-03-23T20:25:32.371157" data-fuente="TechCrunch"><div class="meta">TechCrunch | 23/03</div><span class="badge badge-tech">Tech</span><a href="https://techcrunch.com/2026/03/23/bernie-sanders-ai-gotcha-video-flops-but-the-memes-are-great/">El video de AI 'gotcha' de Bernie Sanders fracasa, pero los memes son geniales</a></li></ul>
+    </div>
+</body>
+<script>
+  const API_BASE = "https://testactions1github-api-python.hf.space/download";
+  const TOKEN = "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";
+</script>
+<script src="script.js"></script>
+</html>
