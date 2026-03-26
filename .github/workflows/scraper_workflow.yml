@@ -62,7 +62,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TOKEN_API_ID: ${{ secrets.TOKEN_API_ID }}
-          API_TOKEN: ${{ secrets.API_TOKEN }}
+          API_TOKEN: ${{ secrets.DOWNLOADER_TOKEN }}
         run: python downloadFile.py
         shell: bash
       - name: 📂 Checkout blog repo

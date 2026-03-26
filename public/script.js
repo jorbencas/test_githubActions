@@ -82,16 +82,22 @@ function filtrarCanal(canal, el) {
   aplicarFiltros(false);
 }
 
-
-
 async function descargarVideo(urlVideo, boton) {
   const originalText = boton.innerHTML;
   boton.innerHTML = "⏳..."; // Feedback visual
 
   try {
     const response = await fetch(
-      `${API_BASE}?url=${encodeURIComponent(urlVideo)}&token=${TOKEN}`
+      `${API_BASE}?url=${encodeURIComponent(urlVideo)}`,
+      {
+        method: "GET",
+        headers: {
+          "X-API-Key": atob(TOKEN), // 'atob' decodifica el Base64 en el momento del envío
+          "Content-Type": "application/json",
+        },
+      }
     );
+
     const data = await response.json();
 
     if (data.url) {

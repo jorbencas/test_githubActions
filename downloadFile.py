@@ -10,6 +10,7 @@ from google import genai
 import edge_tts
 from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE, RETO_MD_TEMPLATE, PROMPT_IMAGEN_TEMPLATE, URL_API_DESCARGA, URL_API_SALUD
 from slugify import slugify 
+import base64
 
 # En tu script del Dashboard (el que genera el HTML)
 
@@ -423,6 +424,8 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
 
     chips_html += "</div>"
 
+    token_oculto = base64.b64encode(str({CONFIG['API_TOKEN']})).decode()
+
     with open("public/index.html", "w", encoding="utf-8") as f:
         f.write(HTML_TEMPLATE.format(
             fecha_hoy=fecha_h, 
@@ -431,7 +434,7 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
             bloque_videos=v_html, 
             bloque_noticias=n_html,
             bloque_semanas=bloque_semanas_completo, # Puedes rellenar esto con tu lógica de semanas
-            api_token=CONFIG['API_TOKEN'], api_url=URL_API_DESCARGA, api_salud=URL_API_SALUD
+            api_token=token_oculto, api_url=URL_API_DESCARGA, api_salud=URL_API_SALUD
         ))
     print("✅ Dashboard HTML generado con Chips y Vídeos.")
 
