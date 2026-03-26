@@ -139,6 +139,55 @@ async def obtener_solucion_ia(titulo, fuente, client):
                 break
     return None
 
+async def generar_retos_ia_puros(client, folder):
+    """Genera 5 retos desde cero si no se encontró nada en la web."""
+    print("🤖 No se encontraron retos nuevos. Activando generación creativa de IA...")
+    lenguajes = ["Svelte", "Python (FastAPI/Django)", "Go", "C#", "Astro (JS/TS)"]
+    retos_generados = []
+
+    for lang in lenguajes:
+        # Prompt para inventar un reto temático
+        prompt_inventar = f"Inventa un título de reto técnico avanzado para el lenguaje {lang}. Solo el título, corto y profesional."
+        try:
+            res_titulo = client.models.generate_content(model="gemini-2.0-flash-lite", contents=prompt_inventar)
+            titulo_inventado = res_titulo.text.strip()
+            
+            sol = await obtener_solucion_ia(titulo_inventado, "IA Creativa", client, lenguaje_fijo=lang)
+            
+            if sol:
+                titulo_final = sol.get('titulo_final', titulo_inventado)
+                slug = f"reto-ia-{slugify(titulo_final)[:40]}"
+                path = f"{folder}/{slug}.md"
+                
+                img_url = await generar_imagen_noticia(titulo_final, client)
+                lang_tag = sol.get('lenguaje', lang).lower()
+                
+                res = inspect.cleandoc(RETO_MD_TEMPLATE).format(
+                    titulo=titulo_final.replace('"', "'"),
+                    resumen_corto=sol.get('descripcion', '')[:140].replace('"', "'"),
+                    fecha_pub=datetime.now().strftime("%Y-%m-%d"),
+                    slug_name=slug,
+                    tags_seo=json.dumps([lang_tag, 'retos-ia', 'master-dev']),
+                    descripcion_ia=sol.get('descripcion', ''),
+                    ruta_imagen=img_url,
+                    dificultad=sol.get('dificultad', 'Avanzado'),
+                    paso_1=sol.get('paso1', ''),
+                    paso_2=sol.get('paso2', ''),
+                    paso_3=sol.get('paso3', ''),
+                    lenguaje_lower=lang_tag,
+                    codigo_solucion=sol.get('codigo', '')
+                )
+                
+                with open(path, "w", encoding="utf-8") as f:
+                    f.write(res)
+                retos_generados.append(titulo_final)
+                print(f"✅ Reto IA Generado ({lang}): {titulo_final}")
+                await asyncio.sleep(2)
+        except Exception as e:
+            print(f"⚠️ Error generando reto IA para {lang}: {e}")
+            
+    return retos_generados
+    
 async def hunt():
     """Cacería de retos en webs externas."""
     api_key = CONFIG.get("GEMINI_KEY")
@@ -201,6 +250,9 @@ async def hunt():
                     print(f"⏭️ Existe: {slug}")
         except Exception as e: 
             print(f"⚠️ Error {nombre}: {e}")
+
+    if not retos_nuevos:
+        retos_nuevos = await generar_retos_ia_puros(client, folder)
 
     if retos_nuevos:
         await enviar_telegram(f"🏹 *Cacería:* {len(retos_nuevos)} nuevos retos.")
