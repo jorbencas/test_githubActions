@@ -6,8 +6,12 @@ CONFIG = {
     "MAIL_KEY": os.getenv("MAILGUN_API_KEY"),
     "MAIL_DOMAIN": os.getenv("MAILGUN_DOMAIN"),
     "EMAIL_TO": os.getenv("EMAIL_USER"),
+    "API_TOKEN": os.getenv("API_TOKEN"), 
     "FOLDER": "files"
 }
+
+URL_API_DESCARGA = "https://testactions1github-api-python.hf.space/download"
+URL_API_SALUD = "https://testactions1github-api-python.hf.space/health"
 
 TECH_KEYWORDS = [# Inteligencia Artificial
 "IA", "AI", "LLM", "GPT-4", "GPT-4o", "Gemini", "Claude", "Llama 3", "DeepSeek",
@@ -105,6 +109,10 @@ HTML_TEMPLATE = """
         <ul class="news-list">{bloque_noticias}</ul>
     </div>
 </body>
+<script>
+  const API_BASE = "{api_url}";
+  const TOKEN = "{api_toekn}";
+</script>
 <script src="script.js"></script>
 </html>
 """
@@ -171,6 +179,9 @@ EMAIL_TEMPLATE = """
 </body>
 </html>
 """
+
+
+
 
 MD_TEMPLATE = """---
 title: "{titulo}"

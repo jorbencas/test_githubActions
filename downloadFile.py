@@ -8,12 +8,11 @@ from collections import Counter
 from mtranslate import translate
 from google import genai
 import edge_tts
-from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE, RETO_MD_TEMPLATE, PROMPT_IMAGEN_TEMPLATE
+from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE, RETO_MD_TEMPLATE, PROMPT_IMAGEN_TEMPLATE, URL_API_DESCARGA, URL_API_SALUD
 from slugify import slugify 
 
 # En tu script del Dashboard (el que genera el HTML)
-URL_API_DESCARGA = "https://api-jorge.onrender.com/download"
-TOKEN_API = "Tu_Clave_Super_Secreta" 
+
 
 # Auto-añadir secciones de Shorts
 for nombre in list(FUENTES): # Usamos list() para poder modificar el dict mientras iteramos
@@ -431,7 +430,8 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
             bloque_chips=chips_html, 
             bloque_videos=v_html, 
             bloque_noticias=n_html,
-            bloque_semanas=bloque_semanas_completo # Puedes rellenar esto con tu lógica de semanas
+            bloque_semanas=bloque_semanas_completo, # Puedes rellenar esto con tu lógica de semanas
+            api_token={CONFIG['API_TOKEN']}, api_url={URL_API_DESCARGA}, api_salud={URL_API_SALUD}}
         ))
     print("✅ Dashboard HTML generado con Chips y Vídeos.")
 

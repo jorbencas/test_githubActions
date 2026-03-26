@@ -88,9 +88,6 @@ async function descargarVideo(urlVideo, boton) {
   const originalText = boton.innerHTML;
   boton.innerHTML = "⏳..."; // Feedback visual
 
-  const API_BASE = "https://tu-api.koyeb.app/download";
-  const TOKEN = "TU_CLAVE_MAESTRA_9922";
-
   try {
     const response = await fetch(
       `${API_BASE}?url=${encodeURIComponent(urlVideo)}&token=${TOKEN}`
