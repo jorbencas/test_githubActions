@@ -1,5 +1,77 @@
 [
     {
+        "titulo": "Game Pass puede estar a punto de transformarse, gracias al nuevo modelo que prepara Xbox y que solo tendrá juegos first party",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/game-pass-puede-estar-punto-transformarse-gracias-nuevo-modelo-que-prepara-xbox-que-solo-tendra-juegos-first-party_6951928_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T21:04:18.467914",
+        "badge": "Tech",
+        "raw": "game pass puede estar a punto de transformarse, gracias al nuevo modelo que prepara xbox y que solo tendrá juegos first party",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T21:04:18.467924",
+        "f": "27/03"
+    },
+    {
+        "titulo": "La Aemet activa la alerta naranja en la Comunitat Valenciana por rachas de viento huracanadas de 100 km/h y olas de cuatro metros",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/27/aemet-alerta-naranja-comunitat-valenciana-rachas-viento-huracanadas-128502012.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T21:04:20.012017",
+        "badge": "Tech",
+        "raw": "la aemet activa la alerta naranja en la comunitat valenciana por rachas de viento huracanadas de 100 km/h y olas de cuatro metros",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T21:04:20.012019",
+        "f": "27/03"
+    },
+    {
+        "titulo": "El gigante de los chips de memoria SK hynix podría ayudar a poner fin a 'RAMmageddon' con una exitosa oferta pública inicial en EE. UU.",
+        "enlace": "https://techcrunch.com/2026/03/27/memory-chip-giant-sk-hynix-could-help-end-rammageddon-with-blockbuster-us-ipo/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T21:04:26.471779",
+        "badge": "Tech",
+        "raw": "memory chip giant sk hynix could help end ‘rammageddon’ with blockbuster us ipo",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T21:04:26.471788",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Turning Weekly GitHub Activity Into Blog Posts on Notion + DEV.to",
+        "enlace": "https://dev.to/yashksaini/i-built-a-3-agent-pipeline-that-turns-my-github-activity-into-weekly-blog-posts-on-notion-devto-1ndn",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T21:04:32.539921",
+        "badge": "Tech",
+        "raw": "turning weekly github activity into blog posts on notion + dev.to",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T21:04:32.539922",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Copilot CLI Weekly: MCP Servers Get LLM Access",
+        "enlace": "https://dev.to/htekdev/copilot-cli-weekly-mcp-servers-get-llm-access-2jli",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T21:04:32.540085",
+        "badge": "Tech",
+        "raw": "copilot cli weekly: mcp servers get llm access",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T21:04:32.540086",
+        "f": "27/03"
+    },
+    {
+        "titulo": "I Built an AI That Recommends Therapy Pets — Here's What I Learned (and the Code)",
+        "enlace": "https://dev.to/coach4life/i-built-an-ai-that-recommends-therapy-pets-heres-what-i-learned-and-the-code-3h0d",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T21:04:32.540130",
+        "badge": "Tech",
+        "raw": "i built an ai that recommends therapy pets — here's what i learned (and the code)",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T21:04:32.540131",
+        "f": "27/03"
+    },
+    {
         "titulo": "Hollow Knight acaba de arreglar un bug que llevaba presente en el juego nueve años y que hacía el combate final bastante más difícil",
         "enlace": "https://www.hobbyconsolas.com/videojuegos/hollow-knight-acaba-arreglar-un-bug-que-llevaba-presente-juego-nueve-anos-que-hacia-combate-final-bastante-mas-dificil_6951866_0.html",
         "fuente": "HobbyConsolas",
@@ -6561,49 +6633,5 @@
         "tipo": "noticia",
         "ts": "2026-02-25T20:09:11.290893",
         "f": "25/02"
-    },
-    {
-        "titulo": "Meta se ha puesto a la cabeza de la carrera de los agentes de IA adquiriendo Manus por 2.000 millones de dólares",
-        "enlace": "https://www.genbeta.com/inteligencia-artificial/meta-se-ha-puesto-a-cabeza-carrera-agentes-ia-adquiriendo-manus-2-000-millones-dolares",
-        "fuente": "Genbeta",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:11.135769",
-        "f": "25/02"
-    },
-    {
-        "titulo": "Un jefe boomer no entendía que sus empleados millennials no quisieran cargos directivos. Ellos tienen claras las razones",
-        "enlace": "https://www.genbeta.com/laboral/jefe-boomer-no-entendia-que-sus-empleados-millennials-no-quisieran-cargos-directivos-ellos-tienen-claras-razones",
-        "fuente": "Genbeta",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:10.980955",
-        "f": "25/02"
-    },
-    {
-        "titulo": "Así ha cambiado Internet en los 20 años transcurridos desde el lanzamiento de Genbeta",
-        "enlace": "https://www.genbeta.com/a-fondo/asi-ha-cambiado-internet-20-anos-transcurridos-lanzamiento-genbeta",
-        "fuente": "Genbeta",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:10.832528",
-        "f": "25/02"
-    },
-    {
-        "titulo": "El software de los móviles se ha vuelto tan complejo que Samsung ha tenido que añadir una IA para que te lo explique",
-        "enlace": "https://www.xataka.com/moviles/software-moviles-se-ha-vuelto-complejo-que-samsung-ha-tenido-que-anadir-ia-te-explique",
-        "fuente": "Xataka",
-        "tipo": "noticia",
-        "ts": "2026-02-25T19:34:07.535835",
-        "f": "25/02"
-    },
-    {
-        "titulo": "Samsung Galaxy S26: sigue la presentación Unpacked 2026 de hoy en directo",
-        "enlace": "https://www.xataka.com/eventos/samsung-galaxy-s26-unpacked-2026-seguir-presentacion-directo",
-        "fuente": "Xataka",
-        "tipo": "noticia"
-    },
-    {
-        "titulo": "Tesla lleva años construyendo el Optimus. China acaba de presentarse con quince empresas y las fábricas ya montadas",
-        "enlace": "https://www.xataka.com/robotica-e-ia/15-fabricantes-coches-chinos-van-a-producir-robots-humanoides-van-a-usar-ventaja-que-les-hizo-lideres",
-        "fuente": "Xataka",
-        "tipo": "noticia"
     }
 ]
