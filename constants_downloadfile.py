@@ -31,11 +31,13 @@ BECAS_KEYWORDS = ['beca', 'curso', 'ayuda', 'formación', 'subvención', 'taller
 ALL_KEYWORDS = TECH_KEYWORDS + BECAS_KEYWORDS
 
 FUENTES = {
+    "Programa Con Arnau": {"yt":"https://youtube.com/@progconarnau?si=AFBTWjGeo-UpuJdE"},
+    "El Pingüino de Mario": {"yt":"https://www.youtube.com/@elpinguinodemario?si=DvMsCTK74FQfFzwH"},
     "MoureDev": {"url": "https://mouredev.com/blog", "yt": "https://www.youtube.com/@mouredev/videos"},
     "Pelado Nerd": {"yt": "https://www.youtube.com/@PeladoNerd/videos"},
-    "Midudev": {"yt": "https://www.youtube.com/@midudev/videos"},
+    "Midudev": {"url":"https://midu.dev/page/1/", "yt": "https://www.youtube.com/@midudev/videos"},
     "Codigo facilito": {"yt": "https://www.youtube.com/@codigofacilito/videos"},
-    "Carlos Azaustre": {"yt": "https://www.youtube.com/@CarlosAzaustre/videos"},
+    "Carlos Azaustre": {"url":"https://carlosazaustre.es/blog", "yt": "https://www.youtube.com/@CarlosAzaustre/videos"},
     "Clipset": {"yt": "https://www.youtube.com/@clipset/videos"},
     "CodelyTV": {"yt": "https://www.youtube.com/@CodelyTV/videos"},
     "EDteam": {"yt": "https://www.youtube.com/@EDteam/videos"},
