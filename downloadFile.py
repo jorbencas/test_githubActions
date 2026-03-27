@@ -1,3 +1,4 @@
+import hashlib
 import locale
 import inspect
 import os, json, re, requests, asyncio
@@ -424,7 +425,13 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
 
     chips_html += "</div>"
 
-    token_oculto = base64.b64encode(CONFIG['API_TOKEN'].encode()).decode()
+
+    palabra_maestra = CONFIG.get("DOWNLOADER_API_TOKEN") # Asegúrate que esté en tu dict CONFIG
+    fecha_hoy = datetime.utcnow().strftime("%Y-%m-%d")
+    semilla = f"{palabra_maestra}-{fecha_hoy}"
+    
+    # Este es el token que el JS usará hoy
+    token_oculto = hashlib.sha256(semilla.encode()).hexdigest()
 
     with open("public/index.html", "w", encoding="utf-8") as f:
         f.write(HTML_TEMPLATE.format(
