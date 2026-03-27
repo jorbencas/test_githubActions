@@ -1,5 +1,41 @@
 [
     {
+        "titulo": "Así ha cambiado Internet en los 20 años transcurridos desde el lanzamiento de Genbeta",
+        "enlace": "https://www.genbeta.com/a-fondo/asi-ha-cambiado-internet-20-anos-transcurridos-lanzamiento-genbeta",
+        "fuente": "Genbeta",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T21:09:09.823886",
+        "badge": "Tech",
+        "raw": "así ha cambiado internet en los 20 años transcurridos desde el lanzamiento de genbeta",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T21:09:09.823897",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Un jefe boomer no entendía que sus empleados millennials no quisieran cargos directivos. Ellos tienen claras las razones",
+        "enlace": "https://www.genbeta.com/laboral/jefe-boomer-no-entendia-que-sus-empleados-millennials-no-quisieran-cargos-directivos-ellos-tienen-claras-razones",
+        "fuente": "Genbeta",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T21:09:09.824128",
+        "badge": "Tech",
+        "raw": "un jefe boomer no entendía que sus empleados millennials no quisieran cargos directivos. ellos tienen claras las razones",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T21:09:09.824129",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Meta se ha puesto a la cabeza de la carrera de los agentes de IA adquiriendo Manus por 2.000 millones de dólares",
+        "enlace": "https://www.genbeta.com/inteligencia-artificial/meta-se-ha-puesto-a-cabeza-carrera-agentes-ia-adquiriendo-manus-2-000-millones-dolares",
+        "fuente": "Genbeta",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T21:09:09.824171",
+        "badge": "Tech",
+        "raw": "meta se ha puesto a la cabeza de la carrera de los agentes de ia adquiriendo manus por 2.000 millones de dólares",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T21:09:09.824172",
+        "f": "27/03"
+    },
+    {
         "titulo": "Game Pass puede estar a punto de transformarse, gracias al nuevo modelo que prepara Xbox y que solo tendrá juegos first party",
         "enlace": "https://www.hobbyconsolas.com/videojuegos/game-pass-puede-estar-punto-transformarse-gracias-nuevo-modelo-que-prepara-xbox-que-solo-tendra-juegos-first-party_6951928_0.html",
         "fuente": "HobbyConsolas",
@@ -6608,30 +6644,6 @@
         "fuente": "HobbyConsolas",
         "tipo": "noticia",
         "ts": "2026-02-25T20:09:12.008507",
-        "f": "25/02"
-    },
-    {
-        "titulo": "Análisis de Resident Evil Requiem, acción y terror de buena cepa (vírica)",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/analisis-resident-evil-requiem-accion-terror-buena-cepa-virica_6936439_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:11.856068",
-        "f": "25/02"
-    },
-    {
-        "titulo": "Será un trabajo estresante, promete Sam Altman en esta oferta. Por eso ofrece más de medio millón de dólares de sueldo",
-        "enlace": "https://www.genbeta.com/inteligencia-artificial/sera-trabajo-estresante-promete-sam-altman-esta-oferta-eso-ofrece-medio-millon-dolares-sueldo",
-        "fuente": "Genbeta",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:11.467989",
-        "f": "25/02"
-    },
-    {
-        "titulo": "El nuevo jersey de lana de Zara es calentito, color verde esmeralda y dará luz a los días grises este invierno",
-        "enlace": "https://www.trendencias.com/shopping/nuevo-jersey-lana-zara-calentito-color-verde-esmeralda-dara-luz-a-dias-grises-este-invierno?utm_source=genbeta&utm_medium=network&utm_campaign=repost",
-        "fuente": "Genbeta",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:11.290893",
         "f": "25/02"
     }
 ]
