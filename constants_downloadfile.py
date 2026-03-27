@@ -6,7 +6,8 @@ CONFIG = {
     "MAIL_KEY": os.getenv("MAILGUN_API_KEY"),
     "MAIL_DOMAIN": os.getenv("MAILGUN_DOMAIN"),
     "EMAIL_TO": os.getenv("EMAIL_USER"),
-    "API_TOKEN": os.getenv("API_TOKEN"), 
+    "DOWNLOADER_API_TOKEN": os.getenv("DOWNLOADER_API_TOKEN"), 
+    
     "FOLDER": "files"
 }
 
