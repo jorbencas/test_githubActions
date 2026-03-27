@@ -1,5 +1,437 @@
 [
     {
+        "titulo": "Hollow Knight acaba de arreglar un bug que llevaba presente en el juego nueve años y que hacía el combate final bastante más difícil",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/hollow-knight-acaba-arreglar-un-bug-que-llevaba-presente-juego-nueve-anos-que-hacia-combate-final-bastante-mas-dificil_6951866_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:53.514946",
+        "badge": "Tech",
+        "raw": "hollow knight acaba de arreglar un bug que llevaba presente en el juego nueve años y que hacía el combate final bastante más difícil",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:53.514959",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Life is Strange: Reunion: El cierre de una historia que es también la tuya",
+        "enlace": "https://www.hobbyconsolas.com/branded/life-is-strange-reunion_6949414_5.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:53.515084",
+        "badge": "Tech",
+        "raw": "life is strange: reunion: el cierre de una historia que es también la tuya",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:53.515085",
+        "f": "27/03"
+    },
+    {
+        "titulo": "¿Es un mensaje de Instagram como un cigarro? Llega la ‘era tabaco’ a las redes sociales",
+        "enlace": "https://elpais.com/tecnologia/2026-03-27/es-un-mensaje-de-instagram-como-un-cigarro-llega-la-era-tabaco-a-las-redes-sociales.html",
+        "fuente": "El País Tecnología",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:53.986124",
+        "badge": "Tech",
+        "raw": "¿es un mensaje de instagram como un cigarro? llega la ‘era tabaco’ a las redes sociales",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:53.986138",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Los deberes de Arcadi España: de negociar la nueva financiación autonómica a presentar los presupuestos",
+        "enlace": "https://www.levante-emv.com/economia/2026/03/27/deberes-arcadi-espana-negociar-nueva-128494958.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:54.414308",
+        "badge": "Tech",
+        "raw": "los deberes de arcadi españa: de negociar la nueva financiación autonómica a presentar los presupuestos",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:54.414321",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Valencia cierra la incorporación del suelo recuperado al cabecilla de Azud para construir 644 VPP",
+        "enlace": "https://www.levante-emv.com/valencia/2026/03/27/valencia-cierra-incorporacion-suelo-recuperado-128478576.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:54.414386",
+        "badge": "Tech",
+        "raw": "valencia cierra la incorporación del suelo recuperado al cabecilla de azud para construir 644 vpp",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:54.414388",
+        "f": "27/03"
+    },
+    {
+        "titulo": "La Semana Santa en las carreteras valencianas: más accidentes mortales y exceso de alcohol al volante",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/27/atencion-peligro-valencianos-irresponsables-volante-accidentes-siniestros-coches-estudios-perfil-victimas-carresteras-vias-128451237.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:54.414449",
+        "badge": "Tech",
+        "raw": "la semana santa en las carreteras valencianas: más accidentes mortales y exceso de alcohol al volante",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:54.414451",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Ya hay sentencia de la secta de Vistabella: condenados a penas menores cinco de los seis acusados de agresiones sexuales",
+        "enlace": "https://www.levante-emv.com/sucesos/2026/03/27/hay-sentencia-secta-sexual-vistabella-128494291.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:54.414490",
+        "badge": "Tech",
+        "raw": "ya hay sentencia de la secta de vistabella: condenados a penas menores cinco de los seis acusados de agresiones sexuales",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:54.414491",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Decathlon inaugura su nueva tienda en el Centro Comercial Arena",
+        "enlace": "https://www.levante-emv.com/deportes/2026/03/27/decathlon-inaugura-nueva-tienda-centro-bc-128501319.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:54.414568",
+        "badge": "Tech",
+        "raw": "decathlon inaugura su nueva tienda en el centro comercial arena",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:54.414570",
+        "f": "27/03"
+    },
+    {
+        "titulo": "El astrofísico mexicano José Eduardo Méndez Delgado, exbecario de Fundación Carolina, Premio Princesa de Girona Internacional 2026 en Investigación",
+        "enlace": "https://www.fundacioncarolina.es/el-astrofisico-mexicano-jose-eduardo-mendez-delgado-exbecario-de-fundacion-carolina-premio-princesa-de-girona-internacional-2026-en-investigacion/",
+        "fuente": "Fundación Carolina",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:55.284451",
+        "badge": "Beca",
+        "raw": "el astrofísico mexicano josé eduardo méndez delgado, exbecario de fundación carolina, premio princesa de girona internacional 2026 en investigación",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:55.284465",
+        "f": "27/03"
+    },
+    {
+        "titulo": "La nueva Siri será más inteligente. Y si no, iOS 27 permitirá conectarla a Claude, Gemini o ChatGPT",
+        "enlace": "https://www.applesfera.com/rumores/nueva-siri-sera-inteligente-no-ios-27-permitira-conectarla-a-claude-gemini-chatgpt",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:55.925721",
+        "badge": "Tech",
+        "raw": "la nueva siri será más inteligente. y si no, ios 27 permitirá conectarla a claude, gemini o chatgpt",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:55.925732",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Esconder el Face ID bajo la pantalla se le está haciendo bola a Apple. La Isla Dinámica asegura su supervivencia en el iPhone 18 Pro",
+        "enlace": "https://www.applesfera.com/rumores/sueno-iphone-pantalla-infinita-acaba-chocar-muro-isla-dinamica-se-niega-a-desaparecer",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:55.925806",
+        "badge": "Tech",
+        "raw": "esconder el face id bajo la pantalla se le está haciendo bola a apple. la isla dinámica asegura su supervivencia en el iphone 18 pro",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:55.925807",
+        "f": "27/03"
+    },
+    {
+        "titulo": "El iPhone Air sigue peleando por encontrar su hueco. Una rebaja tan inusual como esta huele a estrategia para vaciar los estantes",
+        "enlace": "https://www.applesfera.com/iphone/iphone-air-sigue-peleando-encontrar-su-hueco-rebaja-inusual-como-esta-huele-a-estrategia-para-vaciar-estantes",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:55.925913",
+        "badge": "Tech",
+        "raw": "el iphone air sigue peleando por encontrar su hueco. una rebaja tan inusual como esta huele a estrategia para vaciar los estantes",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:55.925914",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Apple no dará ni un paso atrás con Liquid Glass. El polémico diseño no admitirá medias tintas en el próximo iOS 27",
+        "enlace": "https://www.applesfera.com/ios/apple-no-dara-paso-atras-liquid-glass-polemico-diseno-no-admitira-medias-tintas-proximo-ios-27",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:55.925957",
+        "badge": "Tech",
+        "raw": "apple no dará ni un paso atrás con liquid glass. el polémico diseño no admitirá medias tintas en el próximo ios 27",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:55.925958",
+        "f": "27/03"
+    },
+    {
+        "titulo": "La relación de Apple con los videojuegos empezó hace 50 años y nunca tuvo éxito. Ahora las tornas han cambiado",
+        "enlace": "https://www.applesfera.com/juegos-os-x/relacion-apple-videojuegos-empezo-hace-50-anos-nunca-tuvo-exito-ahora-tornas-han-cambiado",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:55.925997",
+        "badge": "Tech",
+        "raw": "la relación de apple con los videojuegos empezó hace 50 años y nunca tuvo éxito. ahora las tornas han cambiado",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:55.925997",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Alguien ha creado una app que hace que tu MacBook grite cuando lo golpeas. Y dicen que ha generado 5.000 dólares en tres días",
+        "enlace": "https://www.applesfera.com/aplicaciones-os-x-1/alguien-ha-creado-app-que-hace-que-tu-macbook-grite-cuando-golpeas-dicen-que-ha-generado-5-000-dolares-tres-dias",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:55.926042",
+        "badge": "Tech",
+        "raw": "alguien ha creado una app que hace que tu macbook grite cuando lo golpeas. y dicen que ha generado 5.000 dólares en tres días",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:55.926043",
+        "f": "27/03"
+    },
+    {
+        "titulo": "'Harry Potter' se ha convertido en una franquicia rehén de los millennial y por eso su serie es igual a las películas",
+        "enlace": "https://www.xataka.com/cine-y-tv/trailer-serie-harrry-potter-innova-cero-cosas-respecto-a-pelicula-justo-que-quieren-millennials?utm_source=applesfera&utm_medium=network&utm_campaign=repost",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:55.926081",
+        "badge": "Tech",
+        "raw": "'harry potter' se ha convertido en una franquicia rehén de los millennial y por eso su serie es igual a las películas",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:55.926083",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Alguien que conoce Apple desde dentro mejor que nadie está vaciando su equipo de diseño. Frenar la sangría cuesta media millonada",
+        "enlace": "https://www.applesfera.com/apple-1/jony-ive-esta-saqueando-plantilla-apple-openai-acaban-desvelar-dineral-que-cuesta-frenar-esta-sangria",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:55.926118",
+        "badge": "Tech",
+        "raw": "alguien que conoce apple desde dentro mejor que nadie está vaciando su equipo de diseño. frenar la sangría cuesta media millonada",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:55.926118",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Los capitalistas de riesgo están apostando miles de millones en la próxima ola de IA, entonces, ¿por qué OpenAI está matando a Sora?",
+        "enlace": "https://techcrunch.com/podcast/vcs-are-betting-billions-on-ais-next-wave-so-why-is-openai-killing-sora/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:58.795941",
+        "badge": "Tech",
+        "raw": "vcs are betting billions on ai’s next wave, so why is openai killing sora?",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:58.795951",
+        "f": "27/03"
+    },
+    {
+        "titulo": "OpenAI cierra a Sora mientras Meta es excluida en la corte",
+        "enlace": "https://techcrunch.com/video/openai-shuts-down-sora-while-meta-gets-shut-out-in-court/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:58.931832",
+        "badge": "Tech",
+        "raw": "openai shuts down sora while meta gets shut out in court",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:58.931842",
+        "f": "27/03"
+    },
+    {
+        "titulo": "David Sacks ha terminado como zar de la IA: esto es lo que está haciendo en su lugar",
+        "enlace": "https://techcrunch.com/2026/03/26/david-sacks-is-done-as-ai-czar-heres-what-hes-doing-instead/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:59.054724",
+        "badge": "Tech",
+        "raw": "david sacks is done as ai czar — here’s what he’s doing instead",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:59.054734",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Anthropic gana una orden judicial contra la administración Trump por la saga del Departamento de Defensa",
+        "enlace": "https://techcrunch.com/2026/03/26/anthropic-wins-injunction-against-trump-administration-over-defense-department-saga/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:59.194560",
+        "badge": "Tech",
+        "raw": "anthropic wins injunction against trump administration over defense department saga",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:59.194570",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Ahora puedes transferir tus chats e información personal de otros chatbots directamente a Gemini",
+        "enlace": "https://techcrunch.com/2026/03/26/you-can-now-transfer-your-chats-and-personal-information-from-other-chatbots-directly-into-gemini/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:59.314877",
+        "badge": "Tech",
+        "raw": "you can now transfer your chats and personal information from other chatbots directly into gemini",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:59.314887",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Wikipedia toma medidas enérgicas contra el uso de IA en la redacción de artículos",
+        "enlace": "https://techcrunch.com/2026/03/26/wikipedia-cracks-down-on-the-use-of-ai-in-article-writing/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:29:59.458836",
+        "badge": "Tech",
+        "raw": "wikipedia cracks down on the use of ai in article writing",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:29:59.458847",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Anatomy of the .claude/ folder",
+        "enlace": "https://blog.dailydoseofds.com/p/anatomy-of-the-claude-folder",
+        "fuente": "Hacker News",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:30:00.203587",
+        "badge": "Tech",
+        "raw": "anatomy of the .claude/ folder",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:30:00.203597",
+        "f": "27/03"
+    },
+    {
+        "titulo": "dailydoseofds.com",
+        "enlace": "https://news.ycombinator.com/from?site=dailydoseofds.com",
+        "fuente": "Hacker News",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:30:00.203666",
+        "badge": "Tech",
+        "raw": "dailydoseofds.com",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:30:00.203668",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Don't Wait for Claude",
+        "enlace": "https://jeapostrophe.github.io/tech/jc-workflow/",
+        "fuente": "Hacker News",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:30:00.203713",
+        "badge": "Tech",
+        "raw": "don't wait for claude",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:30:00.203714",
+        "f": "27/03"
+    },
+    {
+        "titulo": "jeapostrophe.github.io",
+        "enlace": "https://news.ycombinator.com/from?site=jeapostrophe.github.io",
+        "fuente": "Hacker News",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:30:00.203760",
+        "badge": "Tech",
+        "raw": "jeapostrophe.github.io",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:30:00.203761",
+        "f": "27/03"
+    },
+    {
+        "titulo": "soranews24.com",
+        "enlace": "https://news.ycombinator.com/from?site=soranews24.com",
+        "fuente": "Hacker News",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:30:00.203856",
+        "badge": "Tech",
+        "raw": "soranews24.com",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:30:00.203857",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Auth0 MCP Server Extension for Gemini CLI",
+        "enlace": "https://dev.to/auth0/auth0-mcp-server-extension-for-gemini-cli-405m",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:30:02.597031",
+        "badge": "Tech",
+        "raw": "auth0 mcp server extension for gemini cli",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:30:02.597043",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Cursor Used Kimi K2.5 (a Chinese AI Model) Without Disclosure — Why Every Developer Should Care",
+        "enlace": "https://dev.to/harsh2644/cursor-used-kimi-k25-a-chinese-ai-model-without-disclosure-why-every-developer-should-care-15h6",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:30:02.597113",
+        "badge": "Beca",
+        "raw": "cursor used kimi k2.5 (a chinese ai model) without disclosure — why every developer should care",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:30:02.597114",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Building Reliable Agents with the Transactional Outbox Pattern and Redis Streams",
+        "enlace": "https://dev.to/redis/building-reliable-agents-with-the-transactional-outbox-pattern-and-redis-streams-45e6",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:30:02.597188",
+        "badge": "Tech",
+        "raw": "building reliable agents with the transactional outbox pattern and redis streams",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:30:02.597189",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Ghost Maintainer — An AI Junior Partner for Open Source",
+        "enlace": "https://dev.to/sbis04/ghost-maintainer-an-ai-junior-partner-for-open-source-11l0",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:30:02.597229",
+        "badge": "Tech",
+        "raw": "ghost maintainer — an ai junior partner for open source",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:30:02.597230",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Qdrant Has a Free Vector Database Optimized for AI and Semantic Search",
+        "enlace": "https://dev.to/0012303/qdrant-has-a-free-vector-database-optimized-for-ai-and-semantic-search-5232",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:30:02.597314",
+        "badge": "Tech",
+        "raw": "qdrant has a free vector database optimized for ai and semantic search",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:30:02.597315",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Top AI Video Tools 2026: Ultimate Guide",
+        "enlace": "https://dev.to/b1fe7066aefjbingbong/top-ai-video-tools-2026-ultimate-guide-4ak7",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:30:02.597349",
+        "badge": "Tech",
+        "raw": "top ai video tools 2026: ultimate guide",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:30:02.597350",
+        "f": "27/03"
+    },
+    {
+        "titulo": "Sony is raising PlayStation 5 prices again, this time by between $100 and $150",
+        "enlace": "https://arstechnica.com/gadgets/2026/03/sony-is-raising-playstation-5-prices-again-this-time-by-between-100-and-150/",
+        "fuente": "Ars Technica",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:30:02.849697",
+        "badge": "Tech",
+        "raw": "sony is raising playstation 5 prices again, this time by between $100 and $150",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:30:02.849707",
+        "f": "27/03"
+    },
+    {
+        "titulo": "AMD’s Ryzen 9 9950X3D2 Dual Edition crams 208MB of cache into a single chip",
+        "enlace": "https://arstechnica.com/gadgets/2026/03/amds-ryzen-9-9950x3d2-dual-edition-crams-208mb-of-cache-into-a-single-chip/",
+        "fuente": "Ars Technica",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-27T18:30:02.849825",
+        "badge": "Tech",
+        "raw": "amd’s ryzen 9 9950x3d2 dual edition crams 208mb of cache into a single chip",
+        "imagen_url_original": "",
+        "ts": "2026-03-27T18:30:02.849827",
+        "f": "27/03"
+    },
+    {
         "titulo": "Análisis de Kena: Bridge of Spirits para Nintendo Switch 2, un port con mucha magia y una sola pega",
         "enlace": "https://www.hobbyconsolas.com/videojuegos/analisis-kena-bridge-of-spirits-para-nintendo-switch-2-un-port-con-mucha-magia-una-sola-pega_6950054_0.html",
         "fuente": "HobbyConsolas",
@@ -6171,132 +6603,6 @@
     {
         "titulo": "Tesla lleva años construyendo el Optimus. China acaba de presentarse con quince empresas y las fábricas ya montadas",
         "enlace": "https://www.xataka.com/robotica-e-ia/15-fabricantes-coches-chinos-van-a-producir-robots-humanoides-van-a-usar-ventaja-que-les-hizo-lideres",
-        "fuente": "Xataka",
-        "tipo": "noticia"
-    },
-    {
-        "titulo": "Hemos analizado el universo durante 20 años buscando a E.T. y lo único que tenemos son 100 señales que ahora investiga China",
-        "enlace": "https://www.xataka.com/espacio/miles-pc-analizaron-millones-datos-buscando-extraterrestres-anos-despues-seti-home-consiguio-100-candidatas-finales",
-        "fuente": "Xataka",
-        "tipo": "noticia"
-    },
-    {
-        "titulo": "Una VPN es la gran aliada de los que somos nómadas digitales: ayuda a trabajar más seguros desde donde sea",
-        "enlace": "https://www.xataka.com/seleccion/vpn-gran-aliada-que-somos-nomadas-digitales-ayuda-a-trabajar-seguros-donde-sea",
-        "fuente": "Xataka",
-        "tipo": "noticia"
-    },
-    {
-        "titulo": "Marte era el gran campo de batalla espacial entre China y EEUU. Ahora es la Luna (y hay demasiado en juego)",
-        "enlace": "https://www.xataka.com/espacio/marte-era-gran-campo-batalla-espacial-china-eeuu-ahora-luna-hay-demasiado-juego",
-        "fuente": "Xataka",
-        "tipo": "noticia"
-    },
-    {
-        "titulo": "NVIDIA fue fundada por tres ingenieros, pero solo Jensen Huang se mantiene como CEO: Ojalá hubiera conservado algunas acciones",
-        "enlace": "https://www.xataka.com/empresas-y-economia/nvidia-fue-fundada-tres-ingenieros-solo-jensen-huang-se-mantiene-como-ceo-ojala-hubiera-conservado-algunas-acciones",
-        "fuente": "Xataka",
-        "tipo": "noticia"
-    },
-    {
-        "titulo": "España tenía una red eléctrica completamente saturada. Y entonces llegaron los centros de datos para reventarla aún más",
-        "enlace": "https://www.xataka.com/energia/espana-se-esta-quedando-hueco-red-electrica-culpa-ia-gobierno-tiene-plan-para-hacerle-sitio-gastar-euro",
-        "fuente": "Xataka",
-        "tipo": "noticia"
-    },
-    {
-        "titulo": "El tesoro de Petra no estaba tallado en la roca, fluía por ella: el hallazgo que obliga a reescribir la historia de la ingeniería",
-        "enlace": "https://www.xataka.com/investigacion/tesoro-petra-no-estaba-tallado-roca-fluia-ella-hallazgo-que-obliga-a-reescribir-historia-ingenieria",
-        "fuente": "Xataka",
-        "tipo": "noticia"
-    },
-    {
-        "titulo": "Traca final de las Rebajas de Invierno de AEG: descuentazos de hasta 850 euros en frigoríficos, lavadoras, hornos y más",
-        "enlace": "https://www.xataka.com/seleccion/traca-final-rebajas-invierno-aeg-descuentazos-850-euros-frigorificos-lavadoras-hornos",
-        "fuente": "Xataka",
-        "tipo": "noticia"
-    },
-    {
-        "titulo": "The path every junior programmer should follow in 2026",
-        "enlace": "https://youtube.com/watch?v=S3QKUYBvN-Q",
-        "fuente": "MoureDev",
-        "tipo": "video"
-    },
-    {
-        "titulo": "If you feel you're not good enough as a programmer, check this out.",
-        "enlace": "https://youtube.com/watch?v=S3QKUYBvN-Q",
-        "fuente": "MoureDev",
-        "tipo": "video"
-    },
-    {
-        "titulo": "Companies are no longer just looking for programmers (and nobody explains it to you)",
-        "enlace": "https://youtube.com/watch?v=S3QKUYBvN-Q",
-        "fuente": "MoureDev",
-        "tipo": "video"
-    },
-    {
-        "titulo": "Discover the power of SPF, DKIM and DMARC",
-        "enlace": "https://youtube.com/watch?v=fz4Ny5QBKHM",
-        "fuente": "Pelado Nerd",
-        "tipo": "video"
-    },
-    {
-        "titulo": "OPENCLOW is AMAZING",
-        "enlace": "https://youtube.com/watch?v=fz4Ny5QBKHM",
-        "fuente": "Pelado Nerd",
-        "tipo": "video"
-    },
-    {
-        "titulo": "MONITORING SERIES 2025 - INCIDENT MANAGEMENT",
-        "enlace": "https://youtube.com/watch?v=fz4Ny5QBKHM",
-        "fuente": "Pelado Nerd",
-        "tipo": "video"
-    },
-    {
-        "titulo": "The future of websites for AI",
-        "enlace": "https://youtube.com/watch?v=2xWhNd2BHkc",
-        "fuente": "Midudev",
-        "tipo": "video"
-    },
-    {
-        "titulo": "\\\"Nobody wants to be a computer scientist,\\\" my opinion",
-        "enlace": "https://youtube.com/watch?v=2xWhNd2BHkc",
-        "fuente": "Midudev",
-        "tipo": "video"
-    },
-    {
-        "titulo": "The most popular Front-end Framework to date",
-        "enlace": "https://youtube.com/watch?v=2xWhNd2BHkc",
-        "fuente": "Midudev",
-        "tipo": "video"
-    },
-    {
-        "titulo": "La IA ya es un campo de batalla: Anthropic acaba de acusar a DeepSeek y a otras empresas chinas de “destilar” Claude",
-        "enlace": "https://www.xataka.com/robotica-e-ia/ia-campo-batalla-anthropic-acaba-acusar-a-deepseek-a-otras-empresas-chinas-destilar-claude",
-        "fuente": "Xataka",
-        "tipo": "noticia"
-    },
-    {
-        "titulo": "A Sam Altman le han preguntado si entrenar a una IA no es ineficiente. Ha respondido que \"entrenar\" a un humano lo es más",
-        "enlace": "https://www.xataka.com/robotica-e-ia/ia-consume-cantidades-obscenas-energia-sam-altman-compara-coste-entrenar-humanos",
-        "fuente": "Xataka",
-        "tipo": "noticia"
-    },
-    {
-        "titulo": "Cada vez hay más niños españoles miopes. Y la ciencia tiene claro que el culpable principal no es el teléfono móvil",
-        "enlace": "https://www.xataka.com/medicina-y-salud/llevamos-anos-culpando-al-movil-miopia-ahora-tenemos-sospechoso-mucho-sutil-falta-luz",
-        "fuente": "Xataka",
-        "tipo": "noticia"
-    },
-    {
-        "titulo": "Seedance es la mayor brutalidad que hemos visto generando vídeo. Y tiene un mensaje incómodo: ha superado a Sora y Veo sin chips NVIDIA",
-        "enlace": "https://www.xataka.com/robotica-e-ia/seedance-mayor-brutalidad-que-hemos-visto-generando-video-tiene-mensaje-incomodo-ha-superado-a-sora-veo-chips-nvidia",
-        "fuente": "Xataka",
-        "tipo": "noticia"
-    },
-    {
-        "titulo": "Los Juegos Olímpicos de Invierno dejan a Italia con una deuda de 7,8 millones de dólares. No por organizarlos, por ganarlos",
-        "enlace": "https://www.xataka.com/magnet/juegos-olimpicos-invierno-dejan-a-italia-deuda-7-8-millones-dolares-no-organizarlos-ganarlos",
         "fuente": "Xataka",
         "tipo": "noticia"
     }
