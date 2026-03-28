@@ -1,5 +1,161 @@
 [
     {
+        "titulo": "Sánchez apuntala la influencia del PSPV en Madrid con vistas a la batalla de Valencia",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/28/sanchez-apuntala-influencia-pspv-madrid-128503761.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-28T08:39:29.938673",
+        "badge": "Tech",
+        "raw": "sánchez apuntala la influencia del pspv en madrid con vistas a la batalla de valencia",
+        "imagen_url_original": "",
+        "ts": "2026-03-28T08:39:29.938683",
+        "f": "28/03"
+    },
+    {
+        "titulo": "Desembarco de valencianos en la toma de posesión de Arcadi España",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/27/desembarco-valencianos-toma-posesion-arcadi-128502653.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-28T08:39:29.938758",
+        "badge": "Tech",
+        "raw": "desembarco de valencianos en la toma de posesión de arcadi españa",
+        "imagen_url_original": "",
+        "ts": "2026-03-28T08:39:29.938759",
+        "f": "28/03"
+    },
+    {
+        "titulo": "La compraventa de suelo más cara y arriesgada de València: las torres de Mestalla costarán 450 millones",
+        "enlace": "https://www.levante-emv.com/deportes/2026/03/28/pisos-en-mestalla-pisos-mestalla-compraventa-suelo-cara-arriesgada-valencia-128495140.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-28T08:39:29.938810",
+        "badge": "Tech",
+        "raw": "la compraventa de suelo más cara y arriesgada de valència: las torres de mestalla costarán 450 millones",
+        "imagen_url_original": "",
+        "ts": "2026-03-28T08:39:29.938812",
+        "f": "28/03"
+    },
+    {
+        "titulo": "El día del gol de Forment en Troya",
+        "enlace": "https://www.levante-emv.com/deportes/2026/03/28/dia-gol-forment-troya-128484228.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-28T08:39:29.938862",
+        "badge": "Tech",
+        "raw": "el día del gol de forment en troya",
+        "imagen_url_original": "",
+        "ts": "2026-03-28T08:39:29.938863",
+        "f": "28/03"
+    },
+    {
+        "titulo": "Con crespones negros e indiferencia: Así responden los defensores de la inclusión en la Semana Santa de Sagunt",
+        "enlace": "https://www.levante-emv.com/morvedre/2026/03/28/crespones-negros-indiferencia-responden-defensores-semana-santa-sagunt-mujeres-veto-128498358.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-28T08:39:29.938999",
+        "badge": "Tech",
+        "raw": "con crespones negros e indiferencia: así responden los defensores de la inclusión en la semana santa de sagunt",
+        "imagen_url_original": "",
+        "ts": "2026-03-28T08:39:29.939000",
+        "f": "28/03"
+    },
+    {
+        "titulo": "Por qué el nuevo préstamo de 40.000 millones de dólares de SoftBank apunta a una oferta pública inicial de OpenAI en 2026",
+        "enlace": "https://techcrunch.com/2026/03/27/why-softbanks-new-40b-loan-points-to-a-2026-openai-ipo/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-28T08:39:34.677513",
+        "badge": "Tech",
+        "raw": "why softbank’s new $40b loan points to a 2026 openai ipo",
+        "imagen_url_original": "",
+        "ts": "2026-03-28T08:39:34.677522",
+        "f": "28/03"
+    },
+    {
+        "titulo": "Go hard on agents, not on your filesystem",
+        "enlace": "https://jai.scs.stanford.edu/",
+        "fuente": "Hacker News",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-28T08:39:36.522688",
+        "badge": "Tech",
+        "raw": "go hard on agents, not on your filesystem",
+        "imagen_url_original": "",
+        "ts": "2026-03-28T08:39:36.522701",
+        "f": "28/03"
+    },
+    {
+        "titulo": "CERN uses tiny AI models burned into silicon for real-time LHC data filtering",
+        "enlace": "https://theopenreader.org/Journalism:CERN_Uses_Tiny_AI_Models_Burned_into_Silicon_for_Real-Time_LHC_Data_Filtering",
+        "fuente": "Hacker News",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-28T08:39:36.522868",
+        "badge": "Tech",
+        "raw": "cern uses tiny ai models burned into silicon for real-time lhc data filtering",
+        "imagen_url_original": "",
+        "ts": "2026-03-28T08:39:36.522870",
+        "f": "28/03"
+    },
+    {
+        "titulo": "I Built an MCP That Publishes Your Blog to Every Platform With One Sentence to Claude",
+        "enlace": "https://dev.to/thecodedaniel/i-built-an-mcp-that-publishes-your-blog-to-every-platform-with-one-sentence-to-claude-26li",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-28T08:39:40.233621",
+        "badge": "Tech",
+        "raw": "i built an mcp that publishes your blog to every platform with one sentence to claude",
+        "imagen_url_original": "",
+        "ts": "2026-03-28T08:39:40.233631",
+        "f": "28/03"
+    },
+    {
+        "titulo": "Learn the Hard Way First: Why New Developers Should Build Skills Before Leaning on AI",
+        "enlace": "https://dev.to/rickcogley/learn-the-hard-way-first-why-new-developers-should-build-skills-before-leaning-on-ai-ibk",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-28T08:39:40.233752",
+        "badge": "Tech",
+        "raw": "learn the hard way first: why new developers should build skills before leaning on ai",
+        "imagen_url_original": "",
+        "ts": "2026-03-28T08:39:40.233753",
+        "f": "28/03"
+    },
+    {
+        "titulo": "The .workbuddy/ Folder Is My Brain. Here's What's Inside.",
+        "enlace": "https://dev.to/mindon/the-workbuddy-folder-is-my-brain-heres-whats-inside-jlc",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-28T08:39:40.233798",
+        "badge": "Tech",
+        "raw": "the .workbuddy/ folder is my brain. here's what's inside.",
+        "imagen_url_original": "",
+        "ts": "2026-03-28T08:39:40.233799",
+        "f": "28/03"
+    },
+    {
+        "titulo": "Building an AI Social Media Autopilot — The Technical Decisions That Actually Matter",
+        "enlace": "https://dev.to/donot_eat_ffa468446e53242/building-an-ai-social-media-autopilot-the-technical-decisions-that-actually-matter-3604",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-28T08:39:40.233847",
+        "badge": "Tech",
+        "raw": "building an ai social media autopilot — the technical decisions that actually matter",
+        "imagen_url_original": "",
+        "ts": "2026-03-28T08:39:40.233849",
+        "f": "28/03"
+    },
+    {
+        "titulo": "I Built a Netflix-Style AI App to Study AWS (And It Actually Works)",
+        "enlace": "https://dev.to/davidkljajo/i-built-a-netflix-style-ai-aws-saa-coach-using-partyrock-14cf",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "ultima_verificacion": "2026-03-28T08:39:40.233999",
+        "badge": "Tech",
+        "raw": "i built a netflix-style ai app to study aws (and it actually works)",
+        "imagen_url_original": "",
+        "ts": "2026-03-28T08:39:40.234000",
+        "f": "28/03"
+    },
+    {
         "titulo": "Así ha cambiado Internet en los 20 años transcurridos desde el lanzamiento de Genbeta",
         "enlace": "https://www.genbeta.com/a-fondo/asi-ha-cambiado-internet-20-anos-transcurridos-lanzamiento-genbeta",
         "fuente": "Genbeta",
@@ -6540,110 +6696,6 @@
         "fuente": "Levante-EMV",
         "tipo": "noticia",
         "ts": "2026-02-25T20:09:15.842806",
-        "f": "25/02"
-    },
-    {
-        "titulo": "Silencio, respeto y discreción en el domicilio de la familia Tejero en Alzira",
-        "enlace": "https://www.levante-emv.com/ribera/2026/02/25/muere-tejero-alzira-silencio-respeto-discrecion-en-el-domicilio-de-la-familia-de-antonio-tejero-en-alzira-127275945.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:15.701495",
-        "f": "25/02"
-    },
-    {
-        "titulo": "Elvira Tejero: Ha fallecido en casa rodeado de sus hijos y sus nietos",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/02/25/elvira-tejero-fallecido-casa-rodeado-hijos-y-sus-nietos-alzira-127274511.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:15.557037",
-        "f": "25/02"
-    },
-    {
-        "titulo": "'Anatomía de un instante', la serie que retrata el 23-F",
-        "enlace": "https://www.levante-emv.com/cultura/2026/02/25/anatomia-instante-serie-golpe-estado-23-f-antonio-tejero-127276023.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:15.412034",
-        "f": "25/02"
-    },
-    {
-        "titulo": "Muere en Alzira Antonio Tejero, protagonista del golpe de Estado del 23-F",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/02/25/muerte-antonio-tejero-93-anos-127272414.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:15.275807",
-        "f": "25/02"
-    },
-    {
-        "titulo": "Dentro de los móviles de los adolescentes españoles: entre redes sociales, videojuegos e ‘influencers’",
-        "enlace": "https://elpais.com/sociedad/2026-02-22/dentro-de-los-moviles-de-los-adolescentes-espanoles-entre-redes-sociales-videojuegos-e-influencers.html",
-        "fuente": "El País Tecnología",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:13.652248",
-        "f": "25/02"
-    },
-    {
-        "titulo": "‘Therians’, el fenómeno viral sin base que sirve a los ultras para cebar su discurso ‘antiwoke’",
-        "enlace": "https://elpais.com/sociedad/2026-02-24/therians-el-fenomeno-viral-sin-base-que-sirve-a-los-ultras-para-cebar-su-discurso-anti-woke.html",
-        "fuente": "El País Tecnología",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:13.522987",
-        "f": "25/02"
-    },
-    {
-        "titulo": "La adicción digital de los menores: “Trato a niños que pasan el fin de semana en la habitación con el móvil”",
-        "enlace": "https://elpais.com/tecnologia/2026-02-24/la-adiccion-digital-de-los-menores-trato-a-ninos-que-pasan-el-fin-de-semana-en-la-habitacion-con-el-movil.html",
-        "fuente": "El País Tecnología",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:13.388835",
-        "f": "25/02"
-    },
-    {
-        "titulo": "Alberto Gago, director de la Aesia: “Estamos seguros de que en España no opera ninguna IA prohibida”",
-        "enlace": "https://elpais.com/tecnologia/2026-02-25/alberto-gago-director-de-la-aesia-estamos-seguros-de-que-en-espana-no-opera-ninguna-ia-prohibida.html",
-        "fuente": "El País Tecnología",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:13.260111",
-        "f": "25/02"
-    },
-    {
-        "titulo": "El Samsung Galaxy S26 responde por ti a las llamadas de desconocidos",
-        "enlace": "https://elpais.com/tecnologia/2026-02-25/el-samsung-galaxy-s26-responde-por-ti-a-las-llamadas-de-desconocidos.html",
-        "fuente": "El País Tecnología",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:13.107884",
-        "f": "25/02"
-    },
-    {
-        "titulo": "He vuelto a Arc Raiders con su nueva actualización y me he encontrado con huracanes, lanzallamas y una nueva prueba de que este juego es increíble",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/he-vuelto-arc-raiders-con-su-nueva-actualizacion-me-he-encontrado-con-huracanes-lanzallamas-una-nueva-prueba-que-este-juego-es-increible_6938632_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:12.430924",
-        "f": "25/02"
-    },
-    {
-        "titulo": "Mortal Kombat II presenta nuevo tráiler oficial, con Johnny Cage (Karl Urban) siendo arrastrado al mortal torneo",
-        "enlace": "https://www.hobbyconsolas.com/hobbycine/mortal-kombat-ii-presenta-nuevo-trailer-oficial-con-johnny-cage-karl-urban-siendo-arrastrado-mortal-torneo_6939066_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:12.279599",
-        "f": "25/02"
-    },
-    {
-        "titulo": "Anunciados los juegos de PS Plus de marzo de 2026 con Monster Hunter Rise, el MMO de The Elder Scrolls, el mejor golf y un simulador muy colorido",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/anunciados-los-juegos-ps-plus-marzo-2026-con-monster-hunter-rise-mmo-the-elder-scrolls-mejor-golf-un-simulador-muy-colorido_6939012_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:12.157409",
-        "f": "25/02"
-    },
-    {
-        "titulo": "Crítica de Monarch: El legado de los monstruos temporada 2; el Monsterverso es mejor en pantalla pequeña",
-        "enlace": "https://www.hobbyconsolas.com/hobbycine/critica-monarch-legado-los-monstruos-temporada-2-monsterverso-es-mejor-pantalla-pequena_6933551_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-02-25T20:09:12.008507",
         "f": "25/02"
     }
 ]
