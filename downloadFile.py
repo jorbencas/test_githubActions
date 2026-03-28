@@ -11,7 +11,6 @@ from google import genai
 import edge_tts
 from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE, RETO_MD_TEMPLATE, PROMPT_IMAGEN_TEMPLATE, URL_API_DESCARGA, URL_API_SALUD
 from slugify import slugify 
-import base64
 
 # En tu script del Dashboard (el que genera el HTML)
 
