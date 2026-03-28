@@ -426,7 +426,7 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
     chips_html += "</div>"
 
 
-    palabra_maestra = CONFIG.get("DOWNLOADER_API_TOKEN") # Asegúrate que esté en tu dict CONFIG
+    palabra_maestra = CONFIG.get("DOWNLOADER_API_TOKEN")
     fecha_hoy = datetime.utcnow().strftime("%Y-%m-%d")
     semilla = f"{palabra_maestra}-{fecha_hoy}"
     
@@ -445,14 +445,11 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
         ))
     print("✅ Dashboard HTML generado con Chips y Vídeos.")
 
-async def publicar_contenidos(historial, nuevos, scr):
+async def publicar_contenidos(historial, noticias_web, scr):
     ahora = datetime.now()
     fecha_h = ahora.strftime("%d/%m/%Y")
     fecha_iso = ahora.strftime("%Y-%m-%d")
     year, week, _ = ahora.isocalendar()
-
-    # Filtramos noticias web para la IA
-    noticias_web = filtrar_solo_noticias(nuevos)
 
     client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
 
@@ -465,6 +462,9 @@ async def publicar_contenidos(historial, nuevos, scr):
 
     # 3. Generamos el Dashboard HTML (con vídeos, chips y el resumen de la IA)
     generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia or "Sin novedades hoy.")
+
+    enviar_email_reporte(resumen_ia, noticias_web)
+    await enviar_telegram_con_audio(resumen_ia, noticias_web)
 
 def filtrar_solo_noticias(nuevos):
     """Retorna solo items que NO sean vídeos ni shorts."""
@@ -675,20 +675,19 @@ async def main():
     nuevos = [n for n in datos if n['enlace'] not in vistos]
     total = nuevos + historial
 
-   # resumen = await obtener_resumen_ia(nuevos) if nuevos else "Todo al día por ahora."
-    await publicar_contenidos(total, nuevos, scr)
+    # resumen = await obtener_resumen_ia(nuevos) if nuevos else "Todo al día por ahora."
 
     # Guardar la caché de avatares para la próxima vez
     scr.guardar_avatars()
-    
-    if nuevos:
-        noticias_texto_nuevas = filtrar_solo_noticias(nuevos)
-        if len(noticias_texto_nuevas) > 0:
-            enviar_email_reporte("", noticias_texto_nuevas)
-            await enviar_telegram_con_audio("", noticias_texto_nuevas)
-            total = noticias_texto_nuevas + historial
-            with open(archivo_h, 'w') as f: json.dump(total[:600], f, indent=4, ensure_ascii=False)
-        print(f"✅ {len(nuevos)} noticias nuevas procesadas.")
+    # Filtramos noticias web para la IA
+    noticias_web = filtrar_solo_noticias(nuevos)
+
+    await publicar_contenidos(total, noticias_web, scr)
+
+    if noticias_web:
+        total = noticias_web + historial
+        with open(archivo_h, 'w') as f: json.dump(total[:600], f, indent=4, ensure_ascii=False)
+        print(f"✅ {len(noticias_web)} noticias nuevas procesadas.")
     else:
         print("☕ Sin cambios hoy.")
 

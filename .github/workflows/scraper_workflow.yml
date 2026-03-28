@@ -23,10 +23,10 @@ jobs:
           echo "Desfase actual con UTC: $OFFSET"
           
           if [ "$OFFSET" == "+0100" ]; then
-            echo "Estamos en horario de INVIERNO. Esperando 1 hora para ser las 9:00 AM..."
+            echo "Estamos en horario de VERANO. Esperando 1 hora para ser las 9:00 AM..."
             sleep 3600
           else
-            echo "Estamos en horario de VERANO. Procediendo de inmediato (son las 9:00 AM)."
+            echo "Estamos en horario de INVIERNO. Procediendo de inmediato (son las 9:00 AM)."
           fi
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -62,7 +62,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TOKEN_API_ID: ${{ secrets.TOKEN_API_ID }}
-          API_TOKEN: ${{ secrets.DOWNLOADER_TOKEN }}
+          DOWNLOADER_API_TOKEN: ${{ secrets.DOWNLOADER_API_TOKEN }}
         run: python downloadFile.py
         shell: bash
       - name: 📂 Checkout blog repo
