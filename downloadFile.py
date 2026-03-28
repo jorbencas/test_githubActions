@@ -535,6 +535,7 @@ def enviar_email_reporte(resumen_html, nuevos):
 async def enviar_telegram_con_audio(resumen, nuevos):
     if not CONFIG["BOT_TOKEN"] or not CONFIG["CHAT_ID"]: return
     # 1. Limpiar el resumen HTML para que sea compatible con Markdown de Telegram
+    print(f" RESUMEN RESUMEN RESUMEN RESUMEN RESUMEN RESUMEN RESUMEN  resumen: {resumen}")
     # Quitamos los tags de párrafo y los convertimos en saltos de línea
     resumen_md = resumen.replace("<p style='margin-bottom:15px; line-height:1.6;'>", "").replace("</p>", "\n\n")
     # Convertimos negritas HTML <b> a Markdown *
