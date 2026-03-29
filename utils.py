@@ -25,20 +25,21 @@ def enviar_telegram(mensaje, parse_mode="Markdown"):
             print(f"⚠️ Error enviando Telegram: {e}")
     return False
 
-async def obtener_solucion_ia(titulo, fuente, client, model="gemini-2.0-flash-lite", custom_prompt=None):
+async def obtener_solucion_ia(titulo, fuente, client, model="gemini-2.0-flash-lite", custom_prompt=None, lang="Python"):
     """Obtiene solución técnica con esquema JSON estricto."""
     prompt = custom_prompt or f"""
     Resuelve el reto técnico: "{titulo}" de la fuente {fuente}.
     Explica en español pero mantén términos técnicos en inglés.
+    Usa el lenguaje de programación: {lang}
     
     RESPONDE EXCLUSIVAMENTE UN OBJETO JSON con este formato:
     {{
-      "descripcion": "explicación breve",
-      "paso1": "análisis del problema",
-      "paso2": "lógica de programación",
-      "paso3": "complejidad o Big O",
-      "codigo": "código completo comentado",
-      "lenguaje": "nombre del lenguaje",
+      "titulo": "Título del reto en español",
+      "descripcion": "explicación clara del problema con ejemplo de entrada/salida",
+      "paso1": "análisis detallado del problema y restricciones",
+      "paso2": "explicación de la implementación en {lang}: algoritmo y estructuras usadas",
+      "paso3": "complejidad temporal O(?) y espacial O(?), posibles optimizaciones",
+      "codigo": "código completo y funcional en {lang} con comentarios y ejemplo de uso. Sin placeholders ni TODOs.",
       "dificultad": "Fácil, Intermedio o Difícil"
     }}
     """
@@ -47,7 +48,10 @@ async def obtener_solucion_ia(titulo, fuente, client, model="gemini-2.0-flash-li
             response = client.models.generate_content(model=model, contents=prompt)
             match = re.search(r'(\{.*\})', response.text.strip(), re.DOTALL)
             if match:
-                return json.loads(match.group(1))
+                data = json.loads(match.group(1))
+                # Validar que hay código real
+                if data.get('codigo') and len(data['codigo']) > 80 and 'TODO' not in data['codigo']:
+                    return data
         except Exception as e:
             if "429" in str(e) or "QUOTA" in str(e).upper():
                 await asyncio.sleep(45 * (intento + 1))
@@ -55,6 +59,7 @@ async def obtener_solucion_ia(titulo, fuente, client, model="gemini-2.0-flash-li
                 print(f"⚠️ Error Gemini en '{titulo}': {e}")
                 break
     return None
+
 
 async def generar_imagen_noticia(titulo_noticia, client, prompt_template=PROMPT_IMAGEN_TEMPLATE, fallback_url=None):
     """Genera una imagen usando Gemini 3 con reintentos."""

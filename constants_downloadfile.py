@@ -238,7 +238,7 @@ Clean lines, high contrast, professional digital art, centered composition.
 No text, no faces, simple geometric shapes.
 """
 
-# Template corregido para que Astro y CodeEnhancer lo pinten perfecto
+# Template para retos generados dinámicamente por IA (hunt_challenges.py)
 RETO_MD_TEMPLATE = """---
 draft: false
 title: "🏆 RETO: {titulo}"
@@ -274,19 +274,18 @@ import Challenge from '@components/Challenge.astro';
 ### 🏗️ Paso 1: Análisis de la lógica
 {paso_1}
 
-### ⚙️ Paso 2: Implementación
+### ⚙️ Paso 2: Implementación en {lenguaje_display}
 {paso_2}
 
-### 🚀 Paso 3: Optimización
+### 🚀 Paso 3: Complejidad y Optimización
 {paso_3}
 
-### 💻 Código de la Solución
-```{lenguaje_lower}
-{titulo}
-Solución Técnica
+### 💻 Código de la Solución ({lenguaje_display})
 
+```{lenguaje_lower}
 {codigo_solucion}
 ```
+
 </div>
 </details>
 """

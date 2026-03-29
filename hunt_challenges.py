@@ -17,6 +17,7 @@ from constants_downloadfile import (
     PROMPT_IMAGEN_TEMPLATE_RETO
 )
 from utils import enviar_telegram, obtener_solucion_ia, generar_imagen_noticia
+from solutions_db import lookup as db_lookup, generate_generic
 
 # ==========================================
 # 1. FUNCIONES DE APOYO Y NOTIFICACIÓN
@@ -96,10 +97,59 @@ async def generar_retos_ia_puros(client, folder):
             
     return retos_generados
     
+
+# Lenguajes del Codeember para rotación
+CODEEMBER_LANGS = [
+    ("python", "Python"),
+    ("javascript", "JavaScript"),
+    ("typescript", "TypeScript"),
+    ("go", "Go"),
+    ("rust", "Rust"),
+    ("java", "Java"),
+    ("csharp", "C#"),
+    ("kotlin", "Kotlin"),
+    ("swift", "Swift"),
+    ("php", "PHP"),
+    ("ruby", "Ruby"),
+    ("dart", "Dart"),
+]
+
+# Contador global para rotación de lenguajes
+_reto_counter = 0
+
 async def solve_and_save(titulo, fuente, client, folder, difficulty_override=None):
     """Encapsula la lógica de resolver un reto y guardarlo."""
+    global _reto_counter
     print(f"🎯 Procesando: {titulo}")
-    sol = await obtener_solucion_ia(titulo, fuente, client)
+    
+    # Elegir lenguaje del Codeember cíclicamente
+    lang_id, lang_display = CODEEMBER_LANGS[_reto_counter % len(CODEEMBER_LANGS)]
+    _reto_counter += 1
+    
+    # 1️⃣ Consultar BD local (gratis, sin IA)
+    # Para ampliar la BD, añade entradas a SOLUTIONS en solutions_db.py
+    # con la clave = slug del título (ej: "ordenamiento-burbuja").
+    # Los retos que coincidan no consumirán cuota de Gemini.
+    #
+    # Ejemplo real en solutions_db.py:
+    # "ordenamiento-burbuja": {
+    #     "desc": "Ordena una lista usando el algoritmo Bubble Sort.",
+    #     "p1": "Comparar pares adyacentes e intercambiarlos si están desordenados.",
+    #     "p2": "Repetir n-1 pasadas sobre la lista, reduciendo el rango cada vez.",
+    #     "p3": "O(n²) tiempo, O(1) espacio. Ineficiente para listas grandes.",
+    #     "python": "def bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in range(n-i-1):\n            if arr[j] > arr[j+1]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n    return arr\n\nprint(bubble_sort([5,3,1,4,2]))  # [1,2,3,4,5]",
+    #     "javascript": "...",
+    # },
+    sol = db_lookup(titulo, lang_id)
+    if sol:
+        print(f"   📦 Solución local encontrada ({lang_display}), sin llamada a IA")
+    else:
+        # 2️⃣ Pedir a Gemini solo si no está en la BD
+        sol = await obtener_solucion_ia(titulo, fuente, client, lang=lang_display)
+        if not sol:
+            # 3️⃣ Fallback: código genérico estructurado (nunca TODO)
+            print(f"   ⚠️ IA falló. Usando código genérico ({lang_display})")
+            sol = generate_generic(titulo, lang_id)
     
     if sol:
         titulo_es = sol.get('titulo', titulo)
@@ -107,7 +157,6 @@ async def solve_and_save(titulo, fuente, client, folder, difficulty_override=Non
         path = os.path.join(folder, f"{slug}.mdx")
         
         img_url = await generar_imagen_noticia(titulo_es, client, prompt_template=PROMPT_IMAGEN_TEMPLATE_RETO)
-        lang_tag = sol.get('lenguaje', 'python').lower()
         dificultad = difficulty_override or sol.get('dificultad', 'Intermedio')
         
         # Mapeo a la taxonomía específica del blog
@@ -118,19 +167,22 @@ async def solve_and_save(titulo, fuente, client, folder, difficulty_override=Non
         }
         dificultad_blog = taxonomia.get(dificultad, "Intermedio")
 
+        tags_seo = json.dumps([lang_id, 'retos', dificultad_blog.lower()])
+
         res = inspect.cleandoc(RETO_MD_TEMPLATE).format(
             titulo=titulo_es.replace('"', "'"),
             resumen_corto=sol.get('descripcion', '')[:140].replace('"', "'"),
             fecha_pub=datetime.now().strftime("%Y-%m-%d"),
             slug_name=slug,
-            tags_seo=json.dumps([lang_tag, 'retos', dificultad_blog.lower()]),
+            tags_seo=tags_seo,
             descripcion_ia=sol.get('descripcion', ''),
             ruta_imagen=img_url,
             dificultad=dificultad_blog,
             paso_1=sol.get('paso1', ''),
             paso_2=sol.get('paso2', ''),
             paso_3=sol.get('paso3', ''),
-            lenguaje_lower=lang_tag,
+            lenguaje_lower=lang_id,
+            lenguaje_display=lang_display,
             codigo_solucion=sol.get('codigo', '')
         )
         
@@ -138,6 +190,7 @@ async def solve_and_save(titulo, fuente, client, folder, difficulty_override=Non
             f.write(res)
         return True
     return False
+
 
 async def hunt(offline=False):
     """Cacería de retos en webs externas o generación estática."""
