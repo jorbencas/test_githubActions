@@ -75,9 +75,15 @@ def limpiar_y_validar_historial(historial):
 
 def main():
     archivo_h = os.path.join(CONFIG["FOLDER"], "all_news.json")
-    historial = json.load(open(archivo_h)) if os.path.exists(archivo_h) else []
+    if os.path.exists(archivo_h):
+        with open(archivo_h, 'r', encoding='utf-8') as f:
+            historial = json.load(f)
+    else:
+        historial = []
+        
     total = limpiar_y_validar_historial(historial)
-    with open(archivo_h, 'w') as f: json.dump(total[:600], f, indent=4)
+    with open(archivo_h, 'w', encoding='utf-8') as f: 
+        json.dump(total[:600], f, indent=4, ensure_ascii=False)
 
 
 if __name__ == "__main__":

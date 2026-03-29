@@ -4,3 +4,6 @@ mtranslate
 google-genai
 edge-tts
 python-slugify
+aiohttp
+playwright
+Pillow

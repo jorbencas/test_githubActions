@@ -4,9 +4,11 @@ import os
 from PIL import Image
 from pathlib import Path
 
+from constants_downloadfile import CONFIG
+
 # Configuración
-directory = "images"  # Carpeta de entrada
-output_dir = "public/optimizado" # Carpeta de salida
+directory = CONFIG.get("IMAGES_FOLDER", "images")  # Carpeta de entrada
+output_dir = CONFIG.get("IMAGES_PATH_PREFIX", "public/optimizado") # Carpeta de salida
 cache_file = "optimized_cache.json"
 
 # Crear carpetas si no existen

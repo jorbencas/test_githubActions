@@ -7,7 +7,9 @@ CONFIG = {
     "MAIL_DOMAIN": os.getenv("MAILGUN_DOMAIN"),
     "EMAIL_TO": os.getenv("EMAIL_USER"),
     "DOWNLOADER_API_TOKEN": os.getenv("DOWNLOADER_API_TOKEN"),
-    "FOLDER": "files"
+    "FOLDER": "files",
+    "IMAGES_FOLDER": "images",
+    "IMAGES_PATH_PREFIX": "public/optimizado"
 }
 
 URL_API_DESCARGA = "https://testactions1github-api-python.hf.space/download"
@@ -35,7 +37,7 @@ FUENTES = {
     "El Pingüino de Mario": {"yt":"https://www.youtube.com/@elpinguinodemario?si=DvMsCTK74FQfFzwH"},
     "MoureDev": {"url": "https://mouredev.com/blog", "yt": "https://www.youtube.com/@mouredev/videos"},
     "Pelado Nerd": {"yt": "https://www.youtube.com/@PeladoNerd/videos"},
-    "Midudev": {"url":"https://midu.dev/page/1/", "yt": "https://www.youtube.com/@midudev/videos"},
+    "Midudev": {"url":"https://midu.dev/", "yt": "https://www.youtube.com/@midudev/videos"},
     "Codigo facilito": {"yt": "https://www.youtube.com/@codigofacilito/videos"},
     "Carlos Azaustre": {"url":"https://carlosazaustre.es/blog", "yt": "https://www.youtube.com/@CarlosAzaustre/videos"},
     "Clipset": {"yt": "https://www.youtube.com/@clipset/videos"},
@@ -47,12 +49,11 @@ FUENTES = {
     "Victor Robles": {"yt": "https://www.youtube.com/@victorroblesweb/videos"},
     "Xataka": {"url": "https://www.xataka.com/", "yt":"https://www.youtube.com/@xatakatv/videos"},
     "Becas": {"url": "https://www.becas.com/noticias/"},
-    "Genbeta": {"url":"https://www.genbeta.com/"},
+    "Genbeta": {"url": "https://www.genbeta.com/"},
     "HobbyConsolas": {"url": "https://www.hobbyconsolas.com/"},
     "El País Tecnología": {"url": "https://elpais.com/tecnologia/"},
     "Levante-EMV": {"url": "https://www.levante-emv.com/"},
     "Fundación Carolina": {"url": "https://www.fundacioncarolina.es/"},
-    "Genbeta": {"url": "https://www.genbeta.com/"},
     "Applesfera": {"url": "https://www.applesfera.com/"},
     "Mixx.io": {"url": "https://mixx.io/"},
     "Wired": {"url": "https://www.wired.com/category/science/"},
@@ -247,7 +248,7 @@ tags: {tags_seo}
 slug: "{slug_name}"
 image: "{ruta_imagen}"
 author: "Jorge Beneyto Castelló"
-difficulty: "Intermedio"
+difficulty: "{dificultad}"
 ---
 
 import Challenge from '@components/Challenge.astro';

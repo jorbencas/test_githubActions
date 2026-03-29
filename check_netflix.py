@@ -4,10 +4,11 @@ import json
 import re
 import time
 from playwright.sync_api import sync_playwright
+from constants_downloadfile import CONFIG
 
 # --- CONFIGURACIÓN ---
-TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
-TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
+TELEGRAM_TOKEN = CONFIG.get('BOT_TOKEN')
+TELEGRAM_CHAT_ID = CONFIG.get('CHAT_ID')
 CACHE_FILE = "netflix_cache.json"
 
 SERIES = {
@@ -65,23 +66,23 @@ def get_data(page, name, n_id):
         
         # --- EXTRACCIÓN PLAN B: Búsqueda en el Código Fuente (Más robusto) ---
         if rating == "Pendiente":
-            html = page.content()
-            # Buscamos el rating en el JSON interno de la página
-            r_match = re.search(r'"maturityRating":\{"label":"([^"]+)"', html)
+            html_content = page.content()
+            # Patrones comunes en el JSON de Netflix
+            r_match = re.search(r'"maturityRating"\s*:\s*\{[^}]*"label"\s*:\s*"([^"]+)"', html_content)
             if r_match:
                 rating = r_match.group(1)
             
-            d_match = re.search(r'"maturityDescription":"([^"]+)"', html)
+            d_match = re.search(r'"maturityDescription"\s*:\s*"([^"]+)"', html_content)
             if d_match:
                 desc = d_match.group(1)
 
         # Extraer imagen (Poster)
-        img_el = page.locator('img.nm-collections-title-img').first
+        img_el = page.locator('img.nm-collections-title-img, img.hero-artwork, img.title-logo-image').first
         if img_el.is_visible():
             img_url = img_el.get_attribute('src')
         else:
             # Fallback imagen por regex
-            i_match = re.search(r'"og:image" content="([^"]+)"', html)
+            i_match = re.search(r'"og:image"\s*content="([^"]+)"', html_content if 'html_content' in locals() else page.content())
             if i_match: img_url = i_match.group(1)
 
         return rating, desc, img_url
@@ -93,7 +94,7 @@ def get_data(page, name, n_id):
 def main():
     # 1. Cargar Cache
     if os.path.exists(CACHE_FILE):
-        with open(CACHE_FILE, 'r') as f:
+        with open(CACHE_FILE, 'r', encoding='utf-8') as f:
             cache = json.load(f)
     else:
         cache = {}
@@ -124,8 +125,8 @@ def main():
 
         # 2. Guardar si hubo novedades
         if cambios:
-            with open(CACHE_FILE, 'w') as f:
-                json.dump(cache, f, indent=4)
+            with open(CACHE_FILE, 'w', encoding='utf-8') as f:
+                json.dump(cache, f, indent=4, ensure_ascii=False)
 
         browser.close()
 

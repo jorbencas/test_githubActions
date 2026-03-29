@@ -25,10 +25,11 @@ jobs:
         with:
           python-version: '3.11'
 
-      # 3. Instala la librería requests
+      # 3. Instalar dependencias
       - name: Instalar dependencias
         run: |
-          pip install requests playwright chromium 
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
           python -m playwright install --with-deps chromium
 
       - name: Descargar Cache anterior
@@ -39,8 +40,8 @@ jobs:
       # 4. Ejecuta tu script de Python
       - name: Ejecutar monitor de Netflix
         env:
-          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TOKEN_API_ID }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TOKEN_API_ID: ${{ secrets.TOKEN_API_ID }}
         run: python check_netflix.py
       - name: Subir Cache actualizada
         uses: actions/upload-artifact@v4

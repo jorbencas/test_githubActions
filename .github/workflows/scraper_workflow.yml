@@ -43,7 +43,7 @@ jobs:
       - name: 📦 Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4 telethon google-genai mtranslate edge-tts slugify python-slugify
+          pip install -r requirements.txt
       - name: Update Github repo
         if: github.event_name == 'schedule'
         run: |
@@ -52,7 +52,6 @@ jobs:
           git pull origin master --rebase
       - name: 🖼️ Optimize Images
         run: |
-          pip install Pillow
           python optimize.py
       - name: 💻 Run scraper
         env:

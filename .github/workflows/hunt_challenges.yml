@@ -20,7 +20,7 @@ jobs:
       - name: 📦 Instalar dependencias
         run: |
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4 mtranslate google-genai slugify python-slugify
+          pip install -r requirements.txt
 
       - name: 🏹 Ejecutar Cacería de Retos
         env:
