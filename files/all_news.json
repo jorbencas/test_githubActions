@@ -1,5 +1,65 @@
 [
     {
+        "titulo": "Filtrados los primeros detalles de Star Wars Jedi: Parte 3, que se anunciaría pronto y mostraría al detalle el Día de Star Wars",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/filtrados-los-primeros-detalles-star-wars-jedi-parte-3-que-se-anunciaria-pronto-mostraria-detalle-dia-star-wars_6952190_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "29/03",
+        "ts": "2026-03-29T16:13:36.519667"
+    },
+    {
+        "titulo": "Sagunt celebra el Domingo de Ramos en plena polémica por la exclusión de mujeres en la cofradía",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/29/sagunt-celebra-domingo-ramos-plena-128552462.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "29/03",
+        "ts": "2026-03-29T16:13:37.506912"
+    },
+    {
+        "titulo": "Why Rails Still Feels Like a Startup’s Best Friend in the AI Era",
+        "enlace": "https://dev.to/mezbahalam/why-rails-still-feels-like-a-startups-best-friend-in-the-ai-era-45hn",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "29/03",
+        "ts": "2026-03-29T16:13:43.092253"
+    },
+    {
+        "titulo": "How to Use ChatGPT for Code Review (with Prompts)",
+        "enlace": "https://dev.to/rahulxsingh/how-to-use-chatgpt-for-code-review-with-prompts-3i5m",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "29/03",
+        "ts": "2026-03-29T16:13:43.092364"
+    },
+    {
+        "titulo": "Gemini 3.1: Real-World Voice Recognition with Flash Live: Making Your LINE Bot Understand You",
+        "enlace": "https://dev.to/gde/gemini-31-real-world-voice-recognition-with-flash-live-making-your-line-bot-understand-you-560o",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/exploding-head-daceb38d627e6ae9b730f36a1e390fca556a4289d5a41abb2c35068ad3e2c4b5.svg",
+        "f": "29/03",
+        "ts": "2026-03-29T16:13:43.092472"
+    },
+    {
+        "titulo": "Can AI Build Production Software Without Developers? The Reality Explained",
+        "enlace": "https://dev.to/alifar/can-ai-build-production-software-without-developers-the-reality-explained-53df",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/multi-unicorn-b44d6f8c23cdd00964192bedc38af3e82463978aa611b4365bd33a0f1f4f3e97.svg",
+        "f": "29/03",
+        "ts": "2026-03-29T16:13:43.092698"
+    },
+    {
         "titulo": "Los mejores juegos de abril 2026: los lanzamientos imprescindibles para consola y PC de un mes que va a ofrecer de todo",
         "enlace": "https://www.hobbyconsolas.com/videojuegos/los-mejores-juegos-abril-2026-los-lanzamientos-imprescindibles-para-consola-pc-un-mes-que-va-ofrecer-todo_6951310_0.html",
         "fuente": "HobbyConsolas",
@@ -6780,54 +6840,6 @@
         "fuente": "Levante-EMV",
         "tipo": "noticia",
         "ts": "2026-02-27T18:30:19.220758",
-        "f": "27/02"
-    },
-    {
-        "titulo": "Las armas autónomas con IA enfrentan a las tecnológicas con Trump",
-        "enlace": "https://elpais.com/tecnologia/2026-02-27/las-armas-autonomas-con-ia-enfrentan-a-las-tecnologicas-con-trump.html",
-        "fuente": "El País Tecnología",
-        "tipo": "noticia",
-        "ts": "2026-02-27T18:30:17.885503",
-        "f": "27/02"
-    },
-    {
-        "titulo": "¡Primer vistazo a la serie de God of War de Amazon! Así son Ryan Hurst como Kratos y Callum Vinson en el papel de Atreus",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/primer-vistazo-serie-god-of-war-amazon-asi-son-ryan-hurst-como-kratos-callum-vinson-papel-atreus_6939999_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-02-27T18:30:17.368932",
-        "f": "27/02"
-    },
-    {
-        "titulo": "Resumen Pokémon Presents 17/02/2026 con Pokémon Viento y Oleaje, fecha de Pokémon Champions y todos los anuncios del 30 aniversario",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/resumen-pokemon-presents-17-02-2026-con-pokemon-viento-oleaje-fecha-pokemon-champions-todos-los-anuncios-30-aniversario_6939853_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-02-27T18:30:16.848414",
-        "f": "27/02"
-    },
-    {
-        "titulo": "El Consell destituye a la número dos de Emergencias de la Generalitat Valenciana tras 15 meses en el cargo",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/02/27/consell-destituye-numero-emergencias-tras-15-meses-cargo-generalitat-valenciana-127342095.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-02-27T12:52:05.086991",
-        "f": "27/02"
-    },
-    {
-        "titulo": "Crítica de La residencIA, una distopía futurista plausible y aterradora",
-        "enlace": "https://www.hobbyconsolas.com/hobbycine/critica-residencia-una-distopia-futurista-plausible-aterradora_6938767_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-02-27T12:52:02.407876",
-        "f": "27/02"
-    },
-    {
-        "titulo": "De pinganillos ocultos para copiar a suplantación de identidad: las 'trampas' para sacarse el carnet de conducir",
-        "enlace": "https://www.levante-emv.com/sucesos/2026/02/27/pinganillos-ocultos-copiar-o-suplantacion-identidad-trampas-sacarse-carnet-conducir-valencia-127335105.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-02-27T11:06:08.313227",
         "f": "27/02"
     }
 ]
