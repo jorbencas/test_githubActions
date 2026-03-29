@@ -68,103 +68,138 @@ class ScraperPro:
     def extraer(self, nombre, info):
         results = []
         target = info.get("yt") or info.get("url")
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+            'Accept-Language': 'es-ES,es;q=0.9',
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
+        }
+
         try:
-            headers = {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-                'Accept-Language': 'es-ES,es;q=0.9'
-            }
-            r = requests.get(target, timeout=15, headers=headers)
+            r = requests.get(target, timeout=20, headers=headers)
             if r.status_code != 200: return []
+
             if "yt" in info:
-                ids = re.findall(r'"videoId":"(.*?)"', r.text)
-                titles = re.findall(r'"title":\{"runs":\[\{"text":"(.*?)"\}\]', r.text)
-                clean_ids = list(dict.fromkeys(ids))
-                # 2. Extraer Títulos (Diferentes patrones según si es /videos o /shorts)
-                # Patrón para videos normales
-                titles_video = re.findall(r'"title":\{"runs":\[\{"text":"(.*?)"\}\]', r.text)
-                # Patrón específico para Shorts (overlayMetadata)
-                titles_shorts = re.findall(r'"overlayMetadata":\{"title":\{"runs":\[\{"text":"(.*?)"\}\]', r.text)
+                # --- MEJORA YOUTUBE: BUSCAR EL JSON INTERNO ---
+                # Este bloque contiene la información real que YouTube renderiza
+                json_data = re.search(r'var ytInitialData = (\{.*?\});', r.text)
                 
-                # Buscamos el bloque de fechas (está cerca de los videoIds)
-                fechas_raw = re.findall(r'"publishedTimeText":\{"simpleText":"(.*?)"\}', r.text)
-                # Si queremos la fecha EXACTA (ISO), YouTube suele ponerla en un bloque "uploadDate"
-                fechas_iso = re.findall(r'"uploadDate":"(.*?)"', r.text)
-
-                # Combinamos o elegimos según el tipo
-                titles = titles_shorts if "shorts" in target.lower() else titles_video
-                
-                # Si fallan ambos, intentamos un patrón genérico de accesibilidad
-                if not titles:
-                    titles = re.findall(r'title="([^"]*)"[^>]*aria-describedby', r.text)
-
-                for t, i in zip(titles[:5], clean_ids[:5]):
-                    # NUEVA LÓGICA DE DETECCIÓN
-                    es_short = "shorts" in target or "Shorts" in nombre
-                    # Los directos suelen tener "LIVE" en el texto o venir de la pestaña /streams
-                    es_live = "live" in target.lower() or "directo" in t.lower()
-                    t_clean = t.encode().decode('unicode-escape').replace('"', '')
-                    tipo_final = "video"
-                    if es_short: tipo_final = "shorts"
-                    elif es_live: tipo_final = "live"
-
-                    fecha_video_raw = fechas_iso[titles.index(t)] if titles.index(t) < len(fechas_iso) else datetime.now().isoformat()
-    
+                if json_data:
                     try:
-                        dt_obj = datetime.fromisoformat(fecha_video_raw.split('T')[0])
-                        fecha_formateada = dt_obj.strftime("%d/%m/%Y") # <--- AQUÍ TIENES TU DÍA/MES/AÑO
-                    except:
-                        fecha_formateada = datetime.now().strftime("%d/%m/%Y")
+                        data = json.loads(json_data.group(1))
+                        # Navegamos por la estructura compleja de YouTube para llegar a los videos
+                        # Dependiendo de la pestaña (/videos, /shorts, /streams) la ruta cambia levemente
+                        contents = data['contents']['twoColumnBrowseResultsRenderer']['tabs']
+                        # Buscamos la pestaña activa que tiene el contenido
+                        video_list = []
+                        for tab in contents:
+                            if 'content' in tab['tabRenderer']:
+                                rich_grid = tab['tabRenderer']['content'].get('richGridRenderer', {})
+                                items = rich_grid.get('contents', [])
+                                if items:
+                                    video_list = items
+                                    break
+                        
+                        for item in video_list[:6]: # Limitamos a los 6 más recientes
+                            v_data = item.get('richItemRenderer', {}).get('content', {}).get('videoRenderer', {})
+                            if not v_data: 
+                                # Si no es videoRenderer, podría ser un 'reelItemRenderer' (Shorts específicos)
+                                v_data = item.get('richItemRenderer', {}).get('content', {}).get('reelItemRenderer', {})
 
-                    results.append({
-                        "titulo": translate(t_clean, 'es'),
-                        "enlace": f"https://youtube.com/shorts/{i}" if es_short else f"https://youtube.com/watch?v={i}",
-                        "id_video": i, "fuente": nombre.replace(" Shorts", ""), 
-                        "tipo": tipo_final,
-                        "is_live": es_live, # Guardamos flag explícito
-                        "fecha_real": fecha_formateada, # <--- GUARDAMOS LA FECHA REAL
-                        "ultima_verificacion": datetime.now().isoformat(),
-                        "ts": fecha_video_raw, "f": fecha_formateada
-                    })
+                            # 1. DETECTAR DIRECTOS (LIVE)
+                            # Buscamos la etiqueta "En directo" o "LIVE" en los badges
+                            badges = v_data.get('badges', [])
+                            es_live = any(b.get('metadataBadgeRenderer', {}).get('style') == "BADGE_STYLE_TYPE_LIVE_NOW" for b in badges)
+                            # Refuerzo: Si el tiempo de publicación dice "Emitido hace..."
+                            published_text = v_data.get('publishedTimeText', {}).get('simpleText', '').lower()
+                            if "emitido" in published_text or "streaming" in published_text:
+                                es_live = True
+
+                            # 2. DETECTAR SHORTS
+                            # Los Shorts suelen venir en un objeto llamado 'reelItemRenderer' o tener la URL /shorts/
+                            es_short = "reelItemRenderer" in str(item) or "/shorts/" in target.lower()
+
+                            video_id = v_data.get('videoId')
+                            titulo_sucio = v_data.get('title', {}).get('runs', [{}])[0].get('text', '')
+                            titulo_limpio = html.unescape(titulo_sucio.encode().decode('unicode-escape'))
+                            
+                            
+                            fecha_relativa = v_data.get('publishedTimeText', {}).get('simpleText', 'Reciente')
+                            
+                            # Ignorar vídeos de hace años
+                            if any(x in fecha_relativa.lower() for x in ["año", "year", "meses", "months"]):
+                                continue
+
+                            es_short = "shorts" in target.lower() or "/shorts/" in video_id
+                            es_live = "badges" in v_data and "LIVE" in str(v_data["badges"])
+
+                            results.append({
+                                "titulo": titulo_limpio,
+                                "enlace": f"https://www.youtube.com/watch?v={video_id}",
+                                "id_video": video_id,
+                                "fuente": nombre,
+                                "tipo": "shorts" if es_short else ("live" if es_live else "video"),
+                                "fecha_real": datetime.now().strftime("%d/%m/%Y"), # Fallback
+                                "f": datetime.now().strftime("%d/%m"),
+                                "ts": datetime.now().isoformat()
+                            })
+                    except Exception as e:
+                        print(f"⚠️ Error procesando JSON de YT: {e}")
+                
+                # --- FALLBACK: Si el JSON falla, usamos tus Regex mejoradas ---
+                if not results:
+                    ids = list(dict.fromkeys(re.findall(r'"videoId":"(.*?)"', r.text)))
+                    # Patrón más robusto para títulos
+                    titles = re.findall(r'{"videoRenderer":{"videoId":".*?","thumbnail":.*?,"title":{"runs":\[{"text":"(.*?)"}\]', r.text)
+                    
+                    for t, i in zip(titles[:5], ids[:5]):
+                        results.append({
+                            "titulo": t.encode().decode('unicode-escape'),
+                            "enlace": f"https://www.youtube.com/watch?v={i}",
+                            "id_video": i, "fuente": nombre, "tipo": "video",
+                            "f": datetime.now().strftime("%d/%m")
+                        })
+
             else:
+                # --- MEJORA WEB: SCRAPING TRADICIONAL ---
                 soup = BeautifulSoup(r.text, 'html.parser')
-                selector_custom = info.get("selector", 'article h2 a, .post-title a, h3 a, .title a, h2 a')
-                items = soup.select(selector_custom)[:10] # Pillamos 10 para filtrar luego
+                selector = info.get("selector", 'article h2 a, h3 a, h2 a, .post-title a')
+                items = soup.select(selector)[:10]
 
                 for i in items:
-                    t_raw = i.get_text(strip=True).replace('"', '')
-                    t_low = t_raw.lower()
-                        
-                    # DETERMINAR IDIOMA: Si la URL contiene términos comunes de webs inglesas
-                    is_english = any(x in target for x in ["wired", "verge", "techcrunch", "slashdot", "github", "openai", "hacker-news"])
+                    enlace = urljoin(target, i.get('href', ''))
+                    if not enlace or len(enlace) < 10: continue
 
-                    # FILTRO INTELIGENTE:
-                    # Si es inglés, permitimos pasar si tiene keywords universales (AI, GPT, Python, NVIDIA...)
-                    # o si Gemini se encargará de filtrarlo luego.
+                    t_raw = i.get_text(strip=True)
+                    t_low = t_raw.lower()
+
+                    # Solo procesar si hay keywords o es una web de confianza
+                    is_english = any(x in target for x in ["wired", "verge", "techcrunch", "github", "openai"])
                     match_keyword = any(key.lower() in t_low for key in ALL_KEYWORDS)
-                    # Si es una web inglesa de confianza, bajamos la guardia del filtro 
-                    # porque palabras como "AI" o "Cloud" coinciden, pero "Beca" no.
+
                     if match_keyword or is_english:
-                        raw_content = t_low
-                        # Clasificamos: Si tiene algo de becas, es "Beca", si no "Tech"
-                        categoria = "Beca" if any(k in t_low for k in BECAS_KEYWORDS) else "Tech"
-                        # BUSCAR LA IMAGEN (IMG TAG)
-                        img_tag = i.select_one('img')
                         img_url = ""
-                        if img_tag:
-                            # Probamos src o data-src (muchas webs usan lazy loading)
-                            img_url = img_tag.get('src') or img_tag.get('data-src') or img_tag.get('srcset')
+                        # Buscar imagen subiendo al contenedor padre para ser más precisos
+                        parent = i.find_parent(['article', 'div', 'section'])
+                        if parent:
+                            img_tag = parent.find('img')
+                            if img_tag:
+                                img_url = img_tag.get('src') or img_tag.get('data-src') or img_tag.get('srcset', '').split(' ')[0]
 
                         results.append({
-                            "titulo": translate(t_raw, 'es') if is_english else t_raw,                            
-                            "enlace": urljoin(target, i.get('href')),
-                            "fuente": nombre, "tipo": "noticia",
-                            "ultima_verificacion": datetime.now().isoformat(),
-                            "badge": categoria, # Nueva propiedad
-                            "raw": raw_content, # <--- NUEVO: Para que Gemini analice el reto
+                            "titulo": t_raw,
+                            "enlace": enlace,
+                            "fuente": nombre,
+                            "tipo": "noticia",
+                            "badge": "Beca" if any(k in t_low for k in BECAS_KEYWORDS) else "Tech",
                             "imagen_url_original": urljoin(target, img_url) if img_url else "",
-                            "ts": datetime.now().isoformat(), "f": datetime.now().strftime("%d/%m")
+                            "f": datetime.now().strftime("%d/%m"),
+                            "ts": datetime.now().isoformat()
                         })
-        except: pass
+
+        except Exception as e:
+            print(f"❌ Error en fuente {nombre}: {e}")
+        
         return results
 
 async def obtener_solucion_ia(titulo, fuente, client):
