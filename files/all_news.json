@@ -1,5 +1,85 @@
 [
     {
+        "titulo": "Valencia Basket, campeón de la Copa de la Reina",
+        "enlace": "https://www.levante-emv.com/deportes/2026/03/29/tercer-cuarto-fulgurante-da-copa-128561790.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "29/03",
+        "ts": "2026-03-29T21:23:29.400213"
+    },
+    {
+        "titulo": "San Pablo Burgos-Valencia BC: De Larrea lidera el triunfo taronja en Burgos",
+        "enlace": "https://www.levante-emv.com/deportes/2026/03/29/larrea-lidera-triunfo-taronja-san-pablo-burgos-liga-endesa-128563202.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "29/03",
+        "ts": "2026-03-29T21:23:29.400344"
+    },
+    {
+        "titulo": "Justin De Haas, cazado en València",
+        "enlace": "https://www.levante-emv.com/deportes/2026/03/29/justin-haas-valencia-nuevo-fichaje-valencianista-128557280.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "29/03",
+        "ts": "2026-03-29T21:23:29.400428"
+    },
+    {
+        "titulo": "Sora’s shutdown could be a reality check moment for AI video",
+        "enlace": "https://techcrunch.com/2026/03/29/soras-shutdown-could-be-a-reality-check-moment-for-ai-video/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "29/03",
+        "ts": "2026-03-29T21:23:28.468912"
+    },
+    {
+        "titulo": "AI overly affirms users asking for personal advice",
+        "enlace": "https://dev.to/dwelvin_morgan_38be4ff3ba/ai-overly-affirms-users-asking-for-personal-advice-406h",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg",
+        "f": "29/03",
+        "ts": "2026-03-29T21:23:28.923372"
+    },
+    {
+        "titulo": "NoteRunway: Because Your Notion Workspace Deserves an Elite Crew",
+        "enlace": "https://dev.to/georgekobaidze/noterunway-because-your-notion-workspace-deserves-an-elite-crew-53bk",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Beca",
+        "imagen_url_original": "",
+        "f": "29/03",
+        "ts": "2026-03-29T21:23:28.923574"
+    },
+    {
+        "titulo": "OpenClaw Skills: Teaching Your AI Agent New Abilities",
+        "enlace": "https://dev.to/hex_agent/openclaw-skills-teaching-your-ai-agent-new-abilities-591f",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "29/03",
+        "ts": "2026-03-29T21:23:28.923872"
+    },
+    {
+        "titulo": "Claude Code's New Cybersecurity Guardrails: How to Keep Your Security Research Flowing",
+        "enlace": "https://dev.to/gentic_news/claude-codes-new-cybersecurity-guardrails-how-to-keep-your-security-research-flowing-1emc",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "29/03",
+        "ts": "2026-03-29T21:23:28.923974"
+    },
+    {
         "titulo": "Filtrados los primeros detalles de Star Wars Jedi: Parte 3, que se anunciaría pronto y mostraría al detalle el Día de Star Wars",
         "enlace": "https://www.hobbyconsolas.com/videojuegos/filtrados-los-primeros-detalles-star-wars-jedi-parte-3-que-se-anunciaria-pronto-mostraria-detalle-dia-star-wars_6952190_0.html",
         "fuente": "HobbyConsolas",
@@ -6777,69 +6857,5 @@
         "tipo": "noticia",
         "ts": "2026-02-28T09:22:02.723494",
         "f": "28/02"
-    },
-    {
-        "titulo": "Estados Unidos e Israel lanzan un ataque coordinado a gran escala contra Irán",
-        "enlace": "https://www.levante-emv.com/internacional/2026/02/28/israel-lanza-ataque-preventivo-iran-127373869.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-02-28T09:22:02.579497",
-        "f": "28/02"
-    },
-    {
-        "titulo": "¡Primer vistazo a la serie de God of War de Amazon! Así son Ryan Hurst como Kratos y Callum Vinson en el papel de Atreus",
-        "enlace": "https://www.hobbyconsolas.com/hobbycine/primer-vistazo-serie-god-of-war-amazon-asi-son-ryan-hurst-como-kratos-callum-vinson-papel-atreus_6939999_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-02-28T09:21:59.380876",
-        "f": "28/02"
-    },
-    {
-        "titulo": "Todo lo que se sabe de Silent Hill Townfall y el futuro de la saga de Konami",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/todo-que-se-sabe-silent-hill-townfall-futuro-saga-konami_6938673_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-02-28T09:21:59.219208",
-        "f": "28/02"
-    },
-    {
-        "titulo": "Todas las series de Juego de tronos ordenadas de mejor a peor según la valoración de los espectadores",
-        "enlace": "https://www.hobbyconsolas.com/hobbycine/todas-las-series-juego-tronos-ordenadas-mejor-peor-segun-valoracion-los-espectadores_6938880_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-02-28T09:21:59.068900",
-        "f": "28/02"
-    },
-    {
-        "titulo": "Los mejores juegos de marzo 2026: todos los nuevos lanzamientos de un mes lleno de prometedoras joyas",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/los-mejores-juegos-marzo-2026-todos-los-nuevos-lanzamientos-un-mes-lleno-prometedoras-joyas_6939702_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-02-28T09:21:58.921887",
-        "f": "28/02"
-    },
-    {
-        "titulo": "La Policía Nacional arresta a un árbitro por usurpación de identidad para conseguir abonos del Villarreal CF",
-        "enlace": "https://www.levante-emv.com/sucesos/2026/02/27/policia-nacional-arresta-arbitro-usurpacion-villarreal-entradas-127359596.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-02-27T18:30:19.903045",
-        "f": "27/02"
-    },
-    {
-        "titulo": "La Fiscalía de Valéncia y tres acusaciones son favorables a prorrogar la causa de la dana hasta octubre de 2026",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/02/27/fiscalia-valencia-tres-acusaciones-favorables-127356806.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-02-27T18:30:19.616578",
-        "f": "27/02"
-    },
-    {
-        "titulo": "La jefa de prensa de Mazón: Cuando informamos de las horas en el Palau lo hicimos con las horas que nos parecieron lógicas",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/02/27/la-jefa-de-prensa-de-mazon-cuando-informamos-de-las-horas-en-el-palau-lo-hicimos-con-las-horas-que-nos-parecieron-logicas-no-sobre-lo-que-sabiamos-127338060.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-02-27T18:30:19.220758",
-        "f": "27/02"
     }
 ]
