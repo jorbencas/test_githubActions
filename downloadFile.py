@@ -250,58 +250,58 @@ async def obtener_recap_semanal_ia(noticias, client):
     max_intentos = 3
 
     for intento in range(max_intentos):
-    try:
-        
-        # Preparamos los titulares para que la IA los procese
-        texto_noticias = "\n".join([f"- {n['fuente']}: {n['titulo']}" for n in noticias[:15]])
-        
-        prompt = f"""
-        Actúa como un Editor Senior de Tecnología. Analiza estos titulares y genera un RECAP SEMANAL.
-        
-        NOTICIAS:
-        {texto_noticias}
-        
-        INSTRUCCIONES DE FORMATO (RESPONDE SOLO EN JSON):
-        {{
-          "introduccion": "Un párrafo analítico de 3 líneas sobre la tendencia de esta semana (úsalo para el Dashboard).",
-          "noticias_destacadas": "Genera 3 secciones siguiendo este formato exacto: 
-                                  ### 1. [Título de la Noticia]\\n**El suceso:** [Explicación]\\n**Impacto:** [Por qué importa]\\n---",
-          "repo": {{
-            "nombre": "Nombre de una herramienta o repo trend de los titulares o relacionado",
-            "url": "URL del recurso",
-            "desc": "Por qué un dev debería probarlo"
-          }},
-          "tldr": "3 puntos clave breves en formato lista Markdown",
-          "tags": ["lista", "de", "3", "tags", "en", "minusculas"],
-          "nota_personal": "Una reflexión breve sobre el día a día del programador."
-        }}
-        """
-
-        response = client.models.generate_content(
-            model="gemini-2.0-flash-lite",
-            contents=prompt
-        )
-        
-        # Limpieza de la respuesta por si la IA incluye ```json ... ```
-        raw_text = response.text if response.text else "{}"
-        clean_json = re.sub(r'```json|```', '', raw_text).strip()
-        
-        data = json.loads(clean_json)
-        return data
-
-    except Exception as e:
-        error_str = str(e).upper()
-        # Si el error es de Cuota (429) o Sobrecarga (503)
-        if "429" in error_str or "QUOTA" in error_str or "RESOURCE_EXHAUSTED" in error_str:
-            tiempo_espera = 35 * (intento + 1) # Esperamos 35s, 70s...
-            if intento < max_intentos - 1:
-                print(f"⏳ Límite de Gemini alcanzado. Esperando {tiempo_espera}s para reintentar...")
-                await asyncio.sleep(tiempo_espera)
+        try:
+            
+            # Preparamos los titulares para que la IA los procese
+            texto_noticias = "\n".join([f"- {n['fuente']}: {n['titulo']}" for n in noticias[:15]])
+            
+            prompt = f"""
+            Actúa como un Editor Senior de Tecnología. Analiza estos titulares y genera un RECAP SEMANAL.
+            
+            NOTICIAS:
+            {texto_noticias}
+            
+            INSTRUCCIONES DE FORMATO (RESPONDE SOLO EN JSON):
+            {{
+              "introduccion": "Un párrafo analítico de 3 líneas sobre la tendencia de esta semana (úsalo para el Dashboard).",
+              "noticias_destacadas": "Genera 3 secciones siguiendo este formato exacto: 
+                                      ### 1. [Título de la Noticia]\\n**El suceso:** [Explicación]\\n**Impacto:** [Por qué importa]\\n---",
+              "repo": {{
+                "nombre": "Nombre de una herramienta o repo trend de los titulares o relacionado",
+                "url": "URL del recurso",
+                "desc": "Por qué un dev debería probarlo"
+              }},
+              "tldr": "3 puntos clave breves en formato lista Markdown",
+              "tags": ["lista", "de", "3", "tags", "en", "minusculas"],
+              "nota_personal": "Una reflexión breve sobre el día a día del programador."
+            }}
+            """
+    
+            response = client.models.generate_content(
+                model="gemini-2.0-flash-lite",
+                contents=prompt
+            )
+            
+            # Limpieza de la respuesta por si la IA incluye ```json ... ```
+            raw_text = response.text if response.text else "{}"
+            clean_json = re.sub(r'```json|```', '', raw_text).strip()
+            
+            data = json.loads(clean_json)
+            return data
+    
+        except Exception as e:
+            error_str = str(e).upper()
+            # Si el error es de Cuota (429) o Sobrecarga (503)
+            if "429" in error_str or "QUOTA" in error_str or "RESOURCE_EXHAUSTED" in error_str:
+                tiempo_espera = 35 * (intento + 1) # Esperamos 35s, 70s...
+                if intento < max_intentos - 1:
+                    print(f"⏳ Límite de Gemini alcanzado. Esperando {tiempo_espera}s para reintentar...")
+                    await asyncio.sleep(tiempo_espera)
+                else:
+                    print("❌ Se agotaron los reintentos de cuota para el Blog.")
             else:
-                print("❌ Se agotaron los reintentos de cuota para el Blog.")
-        else:
-            print(f"❌ Error en obtener_recap_semanal_ia: {e}")
-            break
+                print(f"❌ Error en obtener_recap_semanal_ia: {e}")
+                break
     return None
 
 async def generar_blog_astro(noticias_web, fecha_iso, year, week, client):
