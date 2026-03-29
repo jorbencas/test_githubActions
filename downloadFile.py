@@ -185,7 +185,7 @@ async def obtener_solucion_ia(titulo, fuente, client):
     """
     for intento in range(3):
         try:
-            response = client.models.generate_content(model="gemini-2.0-flash-lite", contents=prompt)
+            response = client.models.generate_content(model="gemini-1.5-flash", contents=prompt)
             match = re.search(r'(\{.*\})', response.text.strip(), re.DOTALL)
             if match:
                 return json.loads(match.group(1))
@@ -213,7 +213,7 @@ async def generar_retos_individuales(noticias_web, fecha_iso, client):
             if sol:
                 img_reto = await generar_imagen_noticia(n.get('title', 'video-sin-nombre'), "", client)
                 lang = sol.get('lenguaje', 'python').lower()
-
+                await asyncio.sleep(3)
                 try:
                     # Usamos inspect.cleandoc para que el Frontmatter (---) empiece en la columna 0
                     reto_md = inspect.cleandoc(RETO_MD_TEMPLATE).format(
@@ -247,6 +247,9 @@ async def obtener_recap_semanal_ia(noticias, client):
     Sustituye a obtener_resumen_ia. 
     Analiza las noticias y genera el contenido estructurado para el Blog y el Dashboard.
     """
+    max_intentos = 3
+
+    for intento in range(max_intentos):
     try:
         
         # Preparamos los titulares para que la IA los procese
@@ -274,7 +277,6 @@ async def obtener_recap_semanal_ia(noticias, client):
         }}
         """
 
-        # Usamos flash-lite para velocidad y ahorro de cuota
         response = client.models.generate_content(
             model="gemini-2.0-flash-lite",
             contents=prompt
@@ -288,9 +290,19 @@ async def obtener_recap_semanal_ia(noticias, client):
         return data
 
     except Exception as e:
-        print(f"❌ Error en obtener_recap_semanal_ia: {e}")
-        # Retornamos un objeto vacío con la misma estructura para evitar errores de .get()
-        return None
+        error_str = str(e).upper()
+        # Si el error es de Cuota (429) o Sobrecarga (503)
+        if "429" in error_str or "QUOTA" in error_str or "RESOURCE_EXHAUSTED" in error_str:
+            tiempo_espera = 35 * (intento + 1) # Esperamos 35s, 70s...
+            if intento < max_intentos - 1:
+                print(f"⏳ Límite de Gemini alcanzado. Esperando {tiempo_espera}s para reintentar...")
+                await asyncio.sleep(tiempo_espera)
+            else:
+                print("❌ Se agotaron los reintentos de cuota para el Blog.")
+        else:
+            print(f"❌ Error en obtener_recap_semanal_ia: {e}")
+            break
+    return None
 
 async def generar_blog_astro(noticias_web, fecha_iso, year, week, client):
     # FILTRO: Cero YouTube en el Blog para evitar errores en Vercel
@@ -301,9 +313,12 @@ async def generar_blog_astro(noticias_web, fecha_iso, year, week, client):
     data_ia = await obtener_recap_semanal_ia(noticias_blog, client)
     if not data_ia: return None
 
+    await asyncio.sleep(5)
+
     semana_slug = f"{year}-w{week:02d}-tech-recap"
     img_recap = await generar_imagen_noticia(f"Recap {week}", noticias_blog[0].get('imagen_url_original', ''), client)
-    
+    await asyncio.sleep(3)
+
     final_md = inspect.cleandoc(MD_TEMPLATE).format(
         titulo=f"Weekly Tech Recap W{week}",
         description=data_ia.get('introduccion', '')[:150].replace('"', "'"),
@@ -456,10 +471,11 @@ async def publicar_contenidos(historial, noticias_web, scr):
     # (Ya no necesitas llamar a obtener_resumen_ia por separado)
     resumen_ia = await generar_blog_astro(noticias_web, fecha_iso, year, week, client)
 
-    # 2. Generamos los Retos (¡Ya no me los paso por el forro!)
+    if not resumen_ia:
+        resumen_ia = "Hoy no ha sido posible generar el resumen automático. Consulta los enlaces directos abajo."
+
     await generar_retos_individuales(noticias_web, fecha_iso, client)
 
-    # 3. Generamos el Dashboard HTML (con vídeos, chips y el resumen de la IA)
     generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia or "Sin novedades hoy.")
 
     enviar_email_reporte(resumen_ia, noticias_web)
@@ -533,11 +549,9 @@ def enviar_email_reporte(resumen_html, nuevos):
 
 async def enviar_telegram_con_audio(resumen, nuevos):
     if not CONFIG["BOT_TOKEN"] or not CONFIG["CHAT_ID"]: return
-    # 1. Limpiar el resumen HTML para que sea compatible con Markdown de Telegram
-    print(f" RESUMEN RESUMEN RESUMEN RESUMEN RESUMEN RESUMEN RESUMEN  resumen: {resumen}")
-    # Quitamos los tags de párrafo y los convertimos en saltos de línea
+
     resumen_md = resumen.replace("<p style='margin-bottom:15px; line-height:1.6;'>", "").replace("</p>", "\n\n")
-    # Convertimos negritas HTML <b> a Markdown *
+
     resumen_md = resumen_md.replace("<b>", "*").replace("</b>", "*")
     fecha_str = datetime.now().strftime('%d/%m')
     caption = f"🤖 *RESUMEN IA - {fecha_str}*\n"
