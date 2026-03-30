@@ -64,16 +64,20 @@ jobs:
             echo "has_changes=no" >> $GITHUB_OUTPUT
           fi
 
-      - name: 🚀 Commit y Push al Blog
-        if: steps.sync_process.outputs.has_changes == 'yes'
-        run: |
-          cd blog
-          git config user.name jorbencas
-          git config user.email jorbencas@gmail.com
-          git pull origin main --rebase
-          git add src/content/auto-challenges/*.md
-          git commit -m "[bot] Añadidos ${{ steps.sync_process.outputs.total_nuevos }} retos nuevos"
-          git push origin main
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        if: steps.news_copied_to_blog_folder.outputs.copied == 'yes'
+        with:
+          token: ${{ secrets.BLOG_TOKEN }} 
+          path: blog  # Indica que el PR se crea dentro de la carpeta 'blog'
+          commit-message: "feat: nuevo weekly recap para revisar"
+          branch: "news/weekly-${{ github.run_id }}"
+          title: "📰 Review Necesaria: Nuevo Weekly Recap"
+          body: |
+            Se ha detectado una nueva noticia. 
+            Reviewdog y LanguageTool analizarán este PR en unos segundos.
+            Por favor, revisa las sugerencias de ortografía antes de hacer Merge.
+          base: main
       - name: 📝 Commit y Push de los nuevos MD
         run: |
           if [ -d "./auto-challenges" ] && ls auto-challenges/*.md >/dev/null 2>&1; then
