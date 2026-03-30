@@ -44,12 +44,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Update Github repo
-        if: github.event_name == 'schedule'
-        run: |
-          git config user.name jorbencas
-          git config user.email jorbencas@gmail.com
-          git pull origin master --rebase
       - name: 🖼️ Optimize Images
         run: |
           python optimize.py
