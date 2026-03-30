@@ -1,5 +1,105 @@
 [
     {
+        "titulo": "Crítica de Lapönia: posturas enfrentadas acerca de la magia de la Navidad con Natalia Verbeke, Julián López, Ángela Cervantes y Vebjørn Enge",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/critica-lapoenia-posturas-enfrentadas-acerca-magia-navidad-con-natalia-verbeke-julian-lopez-angela-cervantes-vebjorn-enge_6952308_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "30/03",
+        "ts": "2026-03-30T07:57:14.773719"
+    },
+    {
+        "titulo": "Encuentran un nuevo guiño al remake de Code Veronica en Resident Evil Requiem gracias al nuevo modo foto",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/encuentran-un-nuevo-guino-remake-code-veronica-resident-evil-requiem-gracias-nuevo-modo-foto_6952354_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "30/03",
+        "ts": "2026-03-30T07:57:14.773950"
+    },
+    {
+        "titulo": "Llorca pedirá una reunión al nuevo ministro Arcadi España sobre la dana y la financiación",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/30/llorca-pedira-reunion-nuevo-ministro-128561306.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "30/03",
+        "ts": "2026-03-30T07:57:15.431926"
+    },
+    {
+        "titulo": "Mónica Oltra, y todos detrás: intrahistoria del regreso que agita la izquierda valenciana",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/30/monica-oltra-detras-intrahistoria-regreso-128560492.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "30/03",
+        "ts": "2026-03-30T07:57:15.432015"
+    },
+    {
+        "titulo": "Una Copa de la Reina para afianzar la dinastía taronja en el baloncesto nacional",
+        "enlace": "https://www.levante-emv.com/deportes/2026/03/30/valencia-basket-suma-copa-reina-128568664.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "30/03",
+        "ts": "2026-03-30T07:57:15.432098"
+    },
+    {
+        "titulo": "Apple lleva años de retraso en la carrera de la IA. Se acaba de filtrar un cambio de rumbo y parece el más inteligente",
+        "enlace": "https://www.applesfera.com/rumores/apple-lleva-anos-retraso-carrera-ia-se-acaba-filtrar-cambio-rumbo-parece-inteligente",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://i.blogs.es/ac4e56/apple-intelligence/375_375.jpeg",
+        "f": "30/03",
+        "ts": "2026-03-30T07:57:14.724962"
+    },
+    {
+        "titulo": "Why OpenAI really shut down Sora",
+        "enlace": "https://techcrunch.com/2026/03/29/why-openai-really-shut-down-sora/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "30/03",
+        "ts": "2026-03-30T07:57:14.322875"
+    },
+    {
+        "titulo": "SafeBrowse: A Trust Layer for AI Browser Agents (Prevent Prompt Injection & Data Exfiltration)",
+        "enlace": "https://dev.to/rob_kang_7e54350f8af26743/safebrowse-a-trust-layer-for-ai-browser-agents-prevent-prompt-injection-data-exfiltration-3i3b",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "30/03",
+        "ts": "2026-03-30T07:57:14.395373"
+    },
+    {
+        "titulo": "Add auth to your AI agents in 5 minutes with KavachOS",
+        "enlace": "https://dev.to/thegdsks/add-auth-to-your-ai-agents-in-5-minutes-with-kavachos-5b9k",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg",
+        "f": "30/03",
+        "ts": "2026-03-30T07:57:14.395474"
+    },
+    {
+        "titulo": "I Automated My Upwork Proposals With AI — Here's the Template (Free)",
+        "enlace": "https://dev.to/yedanyagamiaicmd/i-automated-my-upwork-proposals-with-ai-heres-the-template-free-2l51",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "30/03",
+        "ts": "2026-03-30T07:57:14.395586"
+    },
+    {
         "titulo": "Why SSE for AI agents keeps breaking at 2am",
         "enlace": "https://dev.to/abhishek_chatterjee_33b9d/why-sse-for-ai-agents-keeps-breaking-at-2am-55ie",
         "fuente": "Dev.to",
@@ -6778,86 +6878,6 @@
         "fuente": "Levante-EMV",
         "tipo": "noticia",
         "ts": "2026-02-28T20:47:25.772308",
-        "f": "28/02"
-    },
-    {
-        "titulo": "Alfombra roja de los Premios Goya 2026: los vestidos más espectaculares y otras sorpresas, de Nieves Álvarez a Laura Escanes y Paula Vázquez",
-        "enlace": "https://www.levante-emv.com/ocio/cine/2026/02/28/alfombra-roja-premios-goya-2026-nieves-alvarez-laura-escanes-paula-vazquez-127394623.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-02-28T20:47:25.635507",
-        "f": "28/02"
-    },
-    {
-        "titulo": "¿Cuánto sabes de los premios Goya? Ponte a prueba con este test",
-        "enlace": "https://www.levante-emv.com/ocio/cine/2026/02/25/premios-goya-ponte-prueba-test-127251664.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-02-28T20:47:25.476390",
-        "f": "28/02"
-    },
-    {
-        "titulo": "Última hora de los Goya 2026, en directo | Todo listo para el comienzo de la gala de los Goya 2026",
-        "enlace": "https://www.levante-emv.com/ocio/cine/2026/02/28/gala-premios-goya-2026-directo-127374154.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-02-28T20:47:25.334800",
-        "f": "28/02"
-    },
-    {
-        "titulo": "El Snyderverse podría no estar muerto y Zack Snyder reaviva el sueño por el regreso de su Liga de la Justicia",
-        "enlace": "https://www.hobbyconsolas.com/hobbycine/snyderverse-podria-no-estar-muerto-zack-snyder-reaviva-sueno-por-regreso-su-liga-justicia_6940176_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-02-28T20:47:21.620751",
-        "f": "28/02"
-    },
-    {
-        "titulo": "Las cartas Pokémon vuelven a los niños de Japón y pueden comprarlas otra vez porque su burbuja especulativa ha estallado",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/las-cartas-pokemon-vuelven-los-ninos-japon-pueden-comprarlas-otra-vez-porque-su-burbuja-especulativa-ha-estallado_6940143_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-02-28T20:47:21.483838",
-        "f": "28/02"
-    },
-    {
-        "titulo": "El orden final en que se entregan los Premios Goya este año, y la hora de comienzo",
-        "enlace": "https://www.hobbyconsolas.com/hobbycine/orden-final-que-se-entregan-los-premios-goya-este-ano-hora-comienzo_6940049_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-02-28T20:47:21.342683",
-        "f": "28/02"
-    },
-    {
-        "titulo": "7 colecciones de juegos de PS4 y PS5 en oferta entre 5 y 10 euros que, como mínimo, tienen tres o más juegos y son un auténtico chollo",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/7-colecciones-juegos-ps4-ps5-oferta-entre-5-10-euros-que-como-minimo-tienen-tres-mas-juegos-son-un-autentico-chollo_6940166_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-02-28T20:47:21.197209",
-        "f": "28/02"
-    },
-    {
-        "titulo": "Irán lanza un misil a la base naval estadounidense en Baréin, según prensa iraní",
-        "enlace": "https://www.levante-emv.com/internacional/2026/02/28/respuesta-iran-ataque-eeuu-israel-ataque-aplastante-127375265.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-02-28T09:22:03.160399",
-        "f": "28/02"
-    },
-    {
-        "titulo": "Netanyahu: El ataque eliminará la amenaza existencial que supone el régimen iraní para Israel",
-        "enlace": "https://www.levante-emv.com/internacional/2026/02/28/netanyahu-ataque-eliminara-amenaza-existencial-iran-israel-127375177.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-02-28T09:22:03.007441",
-        "f": "28/02"
-    },
-    {
-        "titulo": "Trump pide a la población iraní que esté lista para tomar el Gobierno",
-        "enlace": "https://www.levante-emv.com/internacional/2026/02/28/trump-pide-poblacion-irani-lista-tomar-gobierno-127374696.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-02-28T09:22:02.877576",
         "f": "28/02"
     }
 ]
