@@ -86,16 +86,20 @@ jobs:
               copied="yes"
           fi
           echo "copied=$copied" >> $GITHUB_OUTPUT
-      - name: 🚀 Commit and push to blog
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
         if: steps.news_copied_to_blog_folder.outputs.copied == 'yes'
-        run: |
-          cd blog
-          git config user.name jorbencas
-          git config user.email jorbencas@gmail.com
-          git pull origin main --rebase
-          git add .
-          git diff --quiet && git diff --staged --quiet || git commit -m "[bot] Add auto-generated news posts"
-          git push origin main
+        with:
+          token: ${{ secrets.BLOG_TOKEN }} 
+          path: blog  # Indica que el PR se crea dentro de la carpeta 'blog'
+          commit-message: "feat: nuevo weekly recap para revisar"
+          branch: "news/weekly-${{ github.run_id }}"
+          title: "📰 Review Necesaria: Nuevo Weekly Recap"
+          body: |
+            Se ha detectado una nueva noticia. 
+            Reviewdog y LanguageTool analizarán este PR en unos segundos.
+            Por favor, revisa las sugerencias de ortografía antes de hacer Merge.
+          base: main
       - name: 📝 Update Github repo
         if: always()
         run: |
