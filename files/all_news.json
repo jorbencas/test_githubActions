@@ -1,5 +1,55 @@
 [
     {
+        "titulo": "El Consell lanza 100 millones en créditos a empresas y estudiará ayudas sociales",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/30/consell-lanza-100-millones-creditos-128583607.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Beca",
+        "imagen_url_original": "",
+        "f": "30/03",
+        "ts": "2026-03-30T11:25:29.359470"
+    },
+    {
+        "titulo": "Baldoví: \"Mónica Oltra es una líder absolutamente limpia y tiene todo el apoyo de Compromís\"",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/30/baldovi-monica-oltra-lider-absolutamente-corts-compromis-baldovi-valencia-128584793.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "30/03",
+        "ts": "2026-03-30T11:25:29.359741"
+    },
+    {
+        "titulo": "El precio del iPad Air M3 se desploma en su versión de 1 TB. Nunca ha estado tan barata",
+        "enlace": "https://www.applesfera.com/seleccion/precio-ipad-air-m3-se-desploma-su-version-1-tb-nunca-ha-estado-barata",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "30/03",
+        "ts": "2026-03-30T11:25:28.251139"
+    },
+    {
+        "titulo": "Starcloud raises $170 million Series Ato build data centers in space",
+        "enlace": "https://techcrunch.com/2026/03/30/starcloud-raises-170-million-series-ato-build-data-centers-in-space/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "30/03",
+        "ts": "2026-03-30T11:25:27.225565"
+    },
+    {
+        "titulo": "Is Paying for an AI Interview Assistant Worth It? A Real Developer’s Breakdown (2026)",
+        "enlace": "https://dev.to/finalroundai/is-paying-for-an-ai-interview-assistant-worth-it-a-real-developers-breakdown-2026-5bkl",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/exploding-head-daceb38d627e6ae9b730f36a1e390fca556a4289d5a41abb2c35068ad3e2c4b5.svg",
+        "f": "30/03",
+        "ts": "2026-03-30T11:25:28.642562"
+    },
+    {
         "titulo": "El Gobierno y la Iglesia pactan iniciar las reparaciones a víctimas de pederastia desde el 15 de abril, pero sin fijar cuantías",
         "enlace": "https://www.levante-emv.com/sociedad/2026/03/30/gobierno-iglesia-protocolo-indemnizar-victimas-abusos-sexuales-128579758.html",
         "fuente": "Levante-EMV",
@@ -6850,46 +6900,6 @@
         "fuente": "El País Tecnología",
         "tipo": "noticia",
         "ts": "2026-03-02T09:27:45.596194",
-        "f": "02/03"
-    },
-    {
-        "titulo": "Más de 350 científicos alertan de la ineficacia y los peligros de verificar la edad en la red",
-        "enlace": "https://elpais.com/tecnologia/2026-03-02/mas-de-350-cientificos-alertan-de-la-ineficacia-y-los-peligros-de-verificar-la-edad-en-la-red.html",
-        "fuente": "El País Tecnología",
-        "tipo": "noticia",
-        "ts": "2026-03-02T09:27:45.462280",
-        "f": "02/03"
-    },
-    {
-        "titulo": "Capcom aclara qué significa RE Engine, porque no es Resident Evil y todo tiene que ver con su logo y la luna",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/capcom-aclara-que-significa-re-engine-porque-no-es-resident-evil-todo-tiene-que-ver-con-su-logo-luna_6940345_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-03-02T09:27:44.585473",
-        "f": "02/03"
-    },
-    {
-        "titulo": "Las mejores películas y series de estreno (2 - 8 de marzo): de Hoppers a Marshals: Una historia de Yellowstone",
-        "enlace": "https://www.hobbyconsolas.com/hobbycine/las-mejores-peliculas-series-estreno-2-8-marzo-hoppers-marshals-una-historia-yellowstone_6939709_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-03-02T09:27:44.438793",
-        "f": "02/03"
-    },
-    {
-        "titulo": "La nueva Xbox tras Series X|S está muerta para un analista, quien cree que Microsoft ya solo piensa en Game Pass",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/nueva-xbox-tras-series-x-s-esta-muerta-para-un-analista-quien-cree-que-microsoft-ya-solo-piensa-game-pass_6940336_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-03-02T09:27:44.293001",
-        "f": "02/03"
-    },
-    {
-        "titulo": "Todo sobre La Odisea de Nolan, el director que se atreve a desafiar a los dioses",
-        "enlace": "https://www.hobbyconsolas.com/hobbycine/todo-sobre-odisea-nolan-director-que-se-atreve-desafiar-los-dioses_6939832_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-03-02T09:27:44.146738",
         "f": "02/03"
     }
 ]
