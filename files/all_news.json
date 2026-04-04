@@ -1,5 +1,385 @@
 [
     {
+        "titulo": "State of Decay 3 aleja los temores de cancelación al anunciar su versión alfa en mayo, con las inscripciones ya abiertas",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/state-of-decay-3-aleja-los-temores-cancelacion-anunciar-su-version-alfa-mayo-con-las-inscripciones-ya-abiertas_6953999_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.808437"
+    },
+    {
+        "titulo": "Square Enix se corona como la mejor editora de 2026 según el ranking de Metacritic, que \"castiga\" a Nintendo y Sony a posiciones intermedias",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/square-enix-se-corona-como-mejor-editora-2026-segun-ranking-metacritic-que-castiga-nintendo-sony-posiciones-intermedias_6953984_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.808598"
+    },
+    {
+        "titulo": "La nueva película de Resident Evil entusiasma al público en su primer pase: \"es un Mad Max Fury Road de terror\"",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/nueva-pelicula-resident-evil-entusiasma-publico-su-primer-pase-es-un-mad-max-fury-road-terror_6953987_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.808702"
+    },
+    {
+        "titulo": "El éxito de Clair Obscur Expedition 33 estaba claro para una de las responsables de Baldur's Gate 3: \"me aposté 33 baguettes\"",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/exito-clair-obscur-expedition-33-estaba-claro-para-una-las-responsables-baldur-s-gate-3-me-aposte-33-baguettes_6953977_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.808779"
+    },
+    {
+        "titulo": "The Hunt For Gollum no será la reunión esperada: Andy Serkis confirma que Viggo Mortensen no regresará como Aragorn",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/the-hunt-for-gollum-no-sera-reunion-esperada-andy-serkis-confirma-que-viggo-mortensen-no-regresara-como-aragorn_6953936_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.808855"
+    },
+    {
+        "titulo": "Flaquea el veto a las redes de los menores en Australia: la mayoría las sigue usando y el Gobierno amenaza a las empresas",
+        "enlace": "https://elpais.com/tecnologia/2026-03-31/flaquea-el-veto-a-las-redes-de-los-menores-australianos-la-mayoria-las-sigue-usando-y-el-gobierno-amenaza-a-las-empresas.html",
+        "fuente": "El País Tecnología",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.518194"
+    },
+    {
+        "titulo": "Mette Lykke, consejera delegada de Too Good To Go: “Tiramos alimentos por valor de un billón de euros al año”",
+        "enlace": "https://elpais.com/sociedad/2026-03-31/mette-lykke-consejera-delegada-de-too-good-to-go-tiramos-alimentos-por-valor-de-un-billon-de-euros-al-ano.html",
+        "fuente": "El País Tecnología",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://imagenes.elpais.com/resizer/v2/7XAKUOJCMZAXLDSA4OSJ5K2VJQ.jpg?auth=c169eee50bd2214560c17dff510331d4b701c58303bd62fb2e09d0732ac3d042&width=414&height=233&smart=true",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.518370"
+    },
+    {
+        "titulo": "De una exempleada de Facebook a padres desesperados: así se fraguó el mayor revés judicial contra las redes sociales",
+        "enlace": "https://elpais.com/tecnologia/2026-03-30/de-una-exempleada-de-facebook-a-padres-desesperados-asi-se-fraguo-el-mayor-reves-judicial-contra-las-redes-sociales.html",
+        "fuente": "El País Tecnología",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.518466"
+    },
+    {
+        "titulo": "Las obras tras la dana transforman las cuencas de los ríos Túria y Magre",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/04/04/transformacion-cuencas-turia-magre-raiz-128676071.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.728531"
+    },
+    {
+        "titulo": "El TSJCV rechaza el recurso de los extrabajadores de La Marina para frenar la disolución del Consorcio Valencia 2007",
+        "enlace": "https://www.levante-emv.com/valencia/2026/04/04/tsjcv-rechaza-recurso-extrabajadores-marina-128608363.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Beca",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.728646"
+    },
+    {
+        "titulo": "Una triste goleada del Valencia al Celta",
+        "enlace": "https://www.levante-emv.com/deportes/2026/04/04/triste-goleada-valencia-celta-paco-lloret-128715002.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.728764"
+    },
+    {
+        "titulo": "La Policía sorprende a dos hermanos violando a una mujer en un coche abandonado en Valencia",
+        "enlace": "https://www.levante-emv.com/sucesos/2026/04/04/detenidos-hermanos-valencia-violar-mujer-coche-abandonado-descampado-malilla-128728664.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.728872"
+    },
+    {
+        "titulo": "De Beniparrell a la órbita lunar: tecnología valenciana en el montaje de la futura nave de Artemis IV",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/04/04/beniparrell-orbita-lunar-tecnologia-valenciana-128723755.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.728976"
+    },
+    {
+        "titulo": "En 3 días regresa uno de los mejores animes de la historia. La temporada 2 llega tras casi 30 años en emisión con un cambio histórico para el futuro de la serie",
+        "enlace": "https://www.espinof.com/anime/3-dias-regresa-uno-mejores-animes-historia-temporada-2-llega-casi-30-anos-emision-cambio-historico-para-futuro-serie?utm_source=applesfera&utm_medium=network&utm_campaign=repost",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.564440"
+    },
+    {
+        "titulo": "Los móviles estaban totalmente prohibidos en las naves de la NASA. Los astronautas que viajan a la Luna acaban de romper la norma con sus iPhone 17 Pro",
+        "enlace": "https://www.applesfera.com/iphone/astronautas-que-vuelan-luna-querian-hacerse-fotos-recuerdo-solucion-nasa-ha-sido-inedita-meterles-iphone-bolsillo",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.564544"
+    },
+    {
+        "titulo": "El mayor problema de vivir en Marte no es el oxígeno: los humanos que nazcan allí dejarán de ser Homo sapiens",
+        "enlace": "https://www.xataka.com/espacio/mayor-problema-vivir-marte-no-oxigeno-humanos-que-nazcan-alli-dejaran-ser-homo-sapiens?utm_source=applesfera&utm_medium=network&utm_campaign=repost",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.564684"
+    },
+    {
+        "titulo": "Aumentar el almacenamiento del Mac mini M4 es tan fácil como utilizar este soporte que además te añade varios puertos",
+        "enlace": "https://www.applesfera.com/seleccion/aumentar-almacenamiento-mac-mini-m4-facil-como-utilizar-este-soporte-que-te-anade-varios-puertos",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.564792"
+    },
+    {
+        "titulo": "MacBook Air M5, análisis: tiene poco que envidiar a los 'Pro' (y al 'Neo')",
+        "enlace": "https://www.applesfera.com/analisis/apple-macbook-air-m5-analisis-caracteristicas-especificaciones",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.564897"
+    },
+    {
+        "titulo": "Anthropic is having a moment in the private markets; SpaceX could spoil the party",
+        "enlace": "https://techcrunch.com/2026/04/03/anthropic-is-having-a-moment-in-the-private-markets-spacex-could-spoil-the-party/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.339392"
+    },
+    {
+        "titulo": "OpenAI executive shuffle includes new role for COO Brad Lightcap to lead ‘special projects’",
+        "enlace": "https://techcrunch.com/2026/04/03/openai-executive-shuffle-new-roles-coo-brad-lightcap-fidji-simo-kate-rouch/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.339494"
+    },
+    {
+        "titulo": "Anthropic buys biotech startup Coefficient Bio in $400M deal: Reports",
+        "enlace": "https://techcrunch.com/2026/04/03/anthropic-buys-biotech-startup-coefficient-bio-in-400m-deal-reports/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.339595"
+    },
+    {
+        "titulo": "Anthropic ramps up its political activities with a new PAC",
+        "enlace": "https://techcrunch.com/2026/04/03/anthropic-ramps-up-its-political-activities-with-a-new-pac/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.339713"
+    },
+    {
+        "titulo": "AI companies are building huge natural gas plants to power data centers. What could go wrong?",
+        "enlace": "https://techcrunch.com/2026/04/03/ai-companies-are-building-huge-natural-gas-plants-to-power-data-centers-what-could-go-wrong/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.339802"
+    },
+    {
+        "titulo": "People would rather have an Amazon warehouse in their backyard than a data center",
+        "enlace": "https://techcrunch.com/2026/04/03/people-would-rather-have-an-amazon-warehouse-in-their-backyard-than-a-data-center/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.339901"
+    },
+    {
+        "titulo": "The Facebook insider building content moderation for the AI era",
+        "enlace": "https://techcrunch.com/2026/04/03/moonbounce-fundraise-content-moderation-for-the-ai-era/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.339992"
+    },
+    {
+        "titulo": "OpenAI acquires TBPN, the buzzy founder-led business talk show",
+        "enlace": "https://techcrunch.com/2026/04/02/openai-acquires-tbpn-the-buzzy-founder-led-business-talk-show/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.340075"
+    },
+    {
+        "titulo": "Microsoft takes on AI rivals with three new foundational models",
+        "enlace": "https://techcrunch.com/2026/04/02/microsoft-takes-on-ai-rivals-with-three-new-foundational-models/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:31.340154"
+    },
+    {
+        "titulo": "The uphill climb of making diff lines performant",
+        "enlace": "https://github.blog/engineering/architecture-optimization/the-uphill-climb-of-making-diff-lines-performant/",
+        "fuente": "GitHub Blog",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.234301"
+    },
+    {
+        "titulo": "Agent-driven development in Copilot Applied Science",
+        "enlace": "https://github.blog/ai-and-ml/github-copilot/agent-driven-development-in-copilot-applied-science/",
+        "fuente": "GitHub Blog",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.234399"
+    },
+    {
+        "titulo": "The Great Claude Code Leak of 2026: Accident, Incompetence, or the Best PR Stunt in AI History?",
+        "enlace": "https://dev.to/varshithvhegde/the-great-claude-code-leak-of-2026-accident-incompetence-or-the-best-pr-stunt-in-ai-history-3igm",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/exploding-head-daceb38d627e6ae9b730f36a1e390fca556a4289d5a41abb2c35068ad3e2c4b5.svg",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.066290"
+    },
+    {
+        "titulo": "I Built a Visual Spec-Driven Development Extension for VS Code That Works With Any LLM",
+        "enlace": "https://dev.to/fabian_silva_/i-built-a-visual-spec-driven-development-extension-for-vs-code-that-works-with-any-llm-36ok",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.066410"
+    },
+    {
+        "titulo": "De front-end para UX, e de volta ao código: o que significa ser Design Engineer em 2026",
+        "enlace": "https://dev.to/vitoriazzp/de-front-end-para-ux-e-de-volta-ao-codigo-o-que-significa-ser-design-engineer-em-2026-3j74",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/exploding-head-daceb38d627e6ae9b730f36a1e390fca556a4289d5a41abb2c35068ad3e2c4b5.svg",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.066575"
+    },
+    {
+        "titulo": "I Was Engineering Around AI Emotions Before Anyone Proved They Existed",
+        "enlace": "https://dev.to/webdevtodayjason/i-was-engineering-around-ai-emotions-before-anyone-proved-they-existed-10n9",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.066727"
+    },
+    {
+        "titulo": "Hacking with multimodal Gemma 4 in AI Studio",
+        "enlace": "https://dev.to/googleai/hacking-with-multimodal-gemma-4-in-ai-studio-3had",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.066825"
+    },
+    {
+        "titulo": "Docker Build Output: 50 Lines You Don't Need",
+        "enlace": "https://dev.to/ji_ai/docker-build-output-50-lines-you-dont-need-4cpi",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.066927"
+    },
+    {
+        "titulo": "You test your code. Why aren’t you testing your AI instructions?",
+        "enlace": "https://dev.to/lukasmetzler/you-test-your-code-why-arent-you-testing-your-ai-instructions-4j2p",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.067028"
+    },
+    {
+        "titulo": "Netflix must refund customers for years of price hikes, Italian court rules",
+        "enlace": "https://arstechnica.com/gadgets/2026/04/netflix-ordered-to-refund-subscribers-up-to-e500-for-unlawful-price-hikes/",
+        "fuente": "Ars Technica",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.438652"
+    },
+    {
+        "titulo": "You can finally change the goofy Gmail address you chose years ago",
+        "enlace": "https://arstechnica.com/gadgets/2026/03/you-can-finally-change-the-goofy-gmail-address-you-chose-years-ago/",
+        "fuente": "Ars Technica",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "04/04",
+        "ts": "2026-04-04T07:43:32.438752"
+    },
+    {
         "titulo": "El Consell lanza 100 millones en créditos a empresas y estudiará ayudas sociales",
         "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/30/consell-lanza-100-millones-creditos-128583607.html",
         "fuente": "Levante-EMV",
@@ -6550,356 +6930,5 @@
         "badge": "Tech",
         "ts": "2026-03-05T15:40:24.300068",
         "f": "05/03"
-    },
-    {
-        "titulo": "Cinco magistrados, en lugar de tres, de la sala de lo Civil y lo Penal del TSJCV decidirán el futuro judicial de Carlos Mazón",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/05/cinco-magistrados-de-la-sala-de-lo-civil-y-lo-penal-del-tsjcv-decidiran-el-futuro-judicial-de-carlos-mazon-127595341.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-05T15:40:23.904474",
-        "badge": "Tech",
-        "ts": "2026-03-05T15:40:23.904483",
-        "f": "05/03"
-    },
-    {
-        "titulo": "Aemet activa un cuádruple aviso en la C. Valenciana por la borrasca Regina: lluvias persistentes y olas de más de 3 metros",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/05/aviso-aemet-lluvia-comunitat-valenciana-tiempo-hoy-manana-127591083.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-05T12:55:13.286537",
-        "badge": "Tech",
-        "ts": "2026-03-05T12:55:13.286546",
-        "f": "05/03"
-    },
-    {
-        "titulo": "Suspendida la mascletà de hoy en Vancia tras las fuertes lluvias y cierra el puerto por rachas de viento",
-        "enlace": "https://www.levante-emv.com/fallas/2026/03/05/suspendida-la-mascleta-de-este-jueves-en-valencia-tras-las-fuertes-lluvias-a-cargo-de-la-pirotecnia-zaragozana-127576768.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-05T12:19:01.477389",
-        "badge": "Tech",
-        "ts": "2026-03-05T12:19:01.477399",
-        "f": "05/03"
-    },
-    {
-        "titulo": "Las conselleries de Medio Ambiente y Servicios Sociales tampoco recibieron ninguna alerta de las emergencias que dirigía la consellera Salomé Pradas el día de la dana de Valéncia",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/05/las-conselleries-de-medio-ambiente-y-servicios-sociales-tampoco-recibieron-ninguna-alerta-de-las-emergencias-que-dirigia-la-consellera-salome-pradas-el-dia-de-la-dana-de-valencia-127563636.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-05T12:19:01.334517",
-        "badge": "Tech",
-        "ts": "2026-03-05T12:19:01.334528",
-        "f": "05/03"
-    },
-    {
-        "titulo": "Abren juicio oral contra Mónica Oltra tras rechazar la Audiencia de Valéncia la decisión de archivo",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/05/el-juzgado-abre-juicio-oral-contra-monica-oltra-tras-rechazar-la-audiencia-de-valencia-la-decision-de-archivo-de-la-fiscalia-y-el-instructor-127579703.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-05T12:19:01.211557",
-        "badge": "Tech",
-        "ts": "2026-03-05T12:19:01.211567",
-        "f": "05/03"
-    },
-    {
-        "titulo": "Samsung apuesta por multiplicar el hardware en la era de la IA",
-        "enlace": "https://elpais.com/tecnologia/2026-03-05/samsung-apuesta-por-multiplicar-el-hardware-en-la-era-de-la-ia.html",
-        "fuente": "El País Tecnología",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-05T12:19:00.369099",
-        "badge": "Tech",
-        "ts": "2026-03-05T12:19:00.369108",
-        "f": "05/03"
-    },
-    {
-        "titulo": "Un hombre de 36 años se suicida tras mantener una delirante relación con la IA de Google",
-        "enlace": "https://elpais.com/tecnologia/2026-03-05/un-hombre-de-36-anos-se-suicida-tras-mantener-una-delirante-relacion-con-la-ia-de-google.html",
-        "fuente": "El País Tecnología",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-05T12:19:00.163866",
-        "badge": "Tech",
-        "ts": "2026-03-05T12:19:00.163875",
-        "f": "05/03"
-    },
-    {
-        "titulo": "¡Primera imagen del remake de Assassin’s Creed Black Flag! Ubisoft confirma su existencia y ofrece novedades de Hexe, Invictus y un parche para AC Unity",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/primera-imagen-remake-assassin-s-creed-black-flag-ubisoft-confirma-su-existencia-ofrece-novedades-hexe-invictus-un-parche-para-ac-unity_6941979_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-05T12:18:59.760149",
-        "badge": "Tech",
-        "ts": "2026-03-05T12:18:59.760160",
-        "f": "05/03"
-    },
-    {
-        "titulo": "La expedición de Valencia Basket ya está en casa: Desde el hotel se escuchaban explosiones",
-        "enlace": "https://www.levante-emv.com/deportes/2026/03/04/junior-valencia-basket-abu-dabi-regreso-127531816.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-04T16:13:40.698373",
-        "badge": "Tech",
-        "ts": "2026-03-04T16:13:40.698378",
-        "f": "04/03"
-    },
-    {
-        "titulo": "Las aerolíneas ajustan rutas para evitar el espacio aéreo en conflicto: ¿Cómo afecta a tus viajes?",
-        "enlace": "https://www.levante-emv.com/economia/2026/03/04/ruta-aerolineas-empiezan-utilizar-evitar-127534135.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-04T16:13:40.559489",
-        "badge": "Tech",
-        "ts": "2026-03-04T16:13:40.559495",
-        "f": "04/03"
-    },
-    {
-        "titulo": "Lanzamos Xataka Xtra: tu experiencia en Xataka sube de nivel con newsletters exclusivas, sorteos, El Consultorio y más",
-        "enlace": "https://www.xataka.com/xataka-xtra/lanzamos-xataka-xtra-tu-experiencia-xataka-sube-nivel-newsletters-exclusivas-sorteos-consultorio?utm_source=genbeta&utm_medium=network&utm_campaign=repost",
-        "fuente": "Genbeta",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-04T16:13:37.944949",
-        "badge": "Tech",
-        "ts": "2026-03-04T16:13:37.944953",
-        "f": "04/03"
-    },
-    {
-        "titulo": "El ataque a Irán hace tambalear la logística mundial y amenaza con un efecto dominó de sobrecostes",
-        "enlace": "https://www.levante-emv.com/economia/2026/03/04/ataque-iran-tambalear-logistica-mundial-amenaza-efecto-domino-sobrecostes-127532398.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-04T09:59:48.732118",
-        "badge": "Tech",
-        "ts": "2026-03-04T09:59:48.732128",
-        "f": "04/03"
-    },
-    {
-        "titulo": "Nostalgia de las 'tradwife': cuando ellas también viran a la extrema derecha",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/04/nostalgia-tradwife-viran-extrema-derecha-127505575.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-04T09:10:40.695404",
-        "badge": "Tech",
-        "ts": "2026-03-04T09:10:40.695412",
-        "f": "04/03"
-    },
-    {
-        "titulo": "Del paquete pendiente al chantaje con IA: guía básica para no caer en las estafas más consultadas en el 017",
-        "enlace": "https://elpais.com/tecnologia/2026-03-04/del-paquete-pendiente-al-chantaje-con-ia-guia-basica-para-no-caer-en-las-estafas-mas-consultadas-en-el-017.html",
-        "fuente": "El País Tecnología",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-04T09:10:39.671644",
-        "badge": "Tech",
-        "ts": "2026-03-04T09:10:39.671651",
-        "f": "04/03"
-    },
-    {
-        "titulo": "Análisis de World of Warcraft Midnight: llevo 20 años jugando y la nostalgia sigue funcionando",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/analisis-world-of-warcraft-midnight-llevo-20-anos-jugando-nostalgia-sigue-funcionando_6941380_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-04T09:10:38.311190",
-        "badge": "Tech",
-        "ts": "2026-03-04T09:10:38.311199",
-        "f": "04/03"
-    },
-    {
-        "titulo": "El impacto de la guerra: Las compañías aéreas recomiendan pedir reembolsos por los viajes con escala en Oriente Medio",
-        "enlace": "https://www.levante-emv.com/economia/2026/03/03/companias-aereas-recomiendan-clientes-solicitar-127482132.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-03T20:56:00.922677",
-        "badge": "Tech",
-        "ts": "2026-03-03T20:56:00.922685",
-        "f": "03/03"
-    },
-    {
-        "titulo": "Análisis de Legacy of Kain Defiance Remastered, una reliquia del pasado con mucho por descubrir",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/analisis-legacy-of-kain-defiance-remastered-una-reliquia-pasado-con-mucho-por-descubrir_6941112_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-03T20:55:57.468649",
-        "badge": "Tech",
-        "ts": "2026-03-03T20:55:57.468655",
-        "f": "03/03"
-    },
-    {
-        "titulo": "La carpa fallera que se adelanta al calendario: cuándo se inicia su montaje en las calles de Valencia",
-        "enlace": "https://www.levante-emv.com/fallas/2026/03/03/la-carpa-fallera-que-se-adelanta-al-calendario-cuando-se-inicia-su-montaje-en-las-calles-de-valencia-falla-barrio-betero-127483985.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-03T12:42:19.912243",
-        "badge": "Tech",
-        "ts": "2026-03-03T12:42:19.912248",
-        "f": "03/03"
-    },
-    {
-        "titulo": "Fallas'26 | Especial Mascletá 03: Pirotecnia Alto Palancia",
-        "enlace": "https://www.levante-emv.com/videos/levante-tv/2026/03/03/falles26-especial-mascleta-03-pirotecnia-127310175.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-03T12:42:19.765392",
-        "badge": "Tech",
-        "ts": "2026-03-03T12:42:19.765402",
-        "f": "03/03"
-    },
-    {
-        "titulo": "Bielsa anuncia una iniciativa para promover una ley de área metropolitana",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/03/bielsa-anuncio-iniciativa-ley-area-metropolitana-valencia-127487522.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-03T12:36:43.775145",
-        "badge": "Tech",
-        "ts": "2026-03-03T12:36:43.775155",
-        "f": "03/03"
-    },
-    {
-        "titulo": "Directo, Foro de Municipalismo | Martínez Mus, sobre la movilidad en Valencia: Necesitamos estar todos más coordinados y mejorar las infraestructuras",
-        "enlace": "https://www.levante-emv.com/videos/levante-tv/2026/03/03/directo-segunda-jornada-iv-foro-127309592.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "ts": "2026-03-03T09:17:07.316109",
-        "f": "03/03"
-    },
-    {
-        "titulo": "¿Cancelarán mi vuelo a Asia?: La guerra en Oriente Próximo pone en jaque los viajes de valencianos con escala en Doha",
-        "enlace": "https://www.levante-emv.com/economia/2026/03/03/cancelaran-vuelo-asia-guerra-oriente-127442821.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "ts": "2026-03-03T08:24:57.026575",
-        "f": "03/03"
-    },
-    {
-        "titulo": "El conflicto bélico en Irán dispara los costes de importación y exportación desde Valenciaport",
-        "enlace": "https://www.levante-emv.com/economia/2026/03/03/navieras-iran-fletes-comercio-exterior-valenciaport-127443555.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "ts": "2026-03-03T08:24:56.707343",
-        "f": "03/03"
-    },
-    {
-        "titulo": "La subida en los precios de las memorias acecha a los móviles y marca el MWC 2026",
-        "enlace": "https://elpais.com/tecnologia/2026-03-03/la-subida-en-los-precios-de-las-memorias-acecha-a-los-moviles-y-marca-el-mwc-2026.html",
-        "fuente": "El País Tecnología",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "ts": "2026-03-03T08:24:55.130397",
-        "f": "03/03"
-    },
-    {
-        "titulo": "Análisis de Pokémon Rojo Fuego y Verde Hoja para Nintendo Switch: nostalgia a precio de Magikarp",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/analisis-pokemon-rojo-fuego-verde-hoja-para-nintendo-switch-nostalgia-precio-magikarp_6940558_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "ts": "2026-03-03T08:24:53.716219",
-        "f": "03/03"
-    },
-    {
-        "titulo": "La serie de God of War en Amazon añade a su reparto los hijos de Thor y la valquiria más fiera de Odín",
-        "enlace": "https://www.hobbyconsolas.com/hobbycine/serie-god-of-war-amazon-anade-su-reparto-los-hijos-thor-valquiria-mas-fiera-odin_6940934_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "ts": "2026-03-02T20:36:23.264536",
-        "f": "02/03"
-    },
-    {
-        "titulo": "Análisis de Pokémon Pokopia, un COLOSAL paraíso que todo fan de la saga debería visitar",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/analisis-pokemon-pokopia-un-colosal-paraiso-que-todo-fan-saga-deberia-visitar_6938224_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "ts": "2026-03-02T18:35:24.184936",
-        "f": "02/03"
-    },
-    {
-        "titulo": "La Fundación Carolina cierra la convocatoria de becas de posgrado 2026–2027 con un incremento en la participación",
-        "enlace": "https://www.fundacioncarolina.es/la-fundacion-carolina-cierra-la-convocatoria-de-becas-de-posgrado-20262027-con-un-incremento-en-la-participacion/",
-        "fuente": "Fundación Carolina",
-        "tipo": "noticia",
-        "ts": "2026-03-02T12:23:02.637458",
-        "f": "02/03"
-    },
-    {
-        "titulo": "La Académia tumbó el cambio de nombre de Valéncia con 16 votos en contra y solo 2 a favor",
-        "enlace": "https://www.levante-emv.com/valencia/2026/03/02/academia-tumbo-cambio-nombre-valencia-127444838.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-03-02T12:11:19.318386",
-        "f": "02/03"
-    },
-    {
-        "titulo": "La Saga de Buu de Dragon Ball Z se estrenará hoy en Pluto TV totalmente gratis para toda España",
-        "enlace": "https://www.hobbyconsolas.com/hobbycine/saga-buu-dragon-ball-z-se-estrenara-hoy-pluto-tv-totalmente-gratis-para-toda-espana_6940583_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-03-02T12:11:14.876981",
-        "f": "02/03"
-    },
-    {
-        "titulo": "La primera jornada del IV Foro del Municipalismo, en imágenes",
-        "enlace": "https://www.levante-emv.com/fotos/comunitat-valenciana/2026/03/02/primera-jornada-iv-foro-municipalismo-127440427.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-03-02T10:46:21.405004",
-        "f": "02/03"
-    },
-    {
-        "titulo": "Ryan Hurst, el Kratos de la serie de God of War, advierte a los fans de no creer todo lo que ven",
-        "enlace": "https://www.hobbyconsolas.com/hobbycine/ryan-hurst-kratos-serie-god-of-war-advierte-los-fans-no-creer-todo-que-ven_6940551_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ts": "2026-03-02T10:46:18.601229",
-        "f": "02/03"
-    },
-    {
-        "titulo": "La mitad de los proyectos del Consell para 2025 no han empezado un año después",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/02/mitad-proyectos-consell-2025-han-127295501.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-03-02T09:27:47.263022",
-        "f": "02/03"
-    },
-    {
-        "titulo": "Los idus propicios de marzo",
-        "enlace": "https://www.levante-emv.com/deportes/2026/03/02/idus-propicios-marzo-paco-lloret-127428385.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-03-02T09:27:47.114211",
-        "f": "02/03"
-    },
-    {
-        "titulo": "El municipalismo valenciano analiza la reconstrucción y los retos de futuro",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/02/26/municipalismo-valenciano-analiza-reconstruccion-retos-127308685.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-03-02T09:27:46.983850",
-        "f": "02/03"
-    },
-    {
-        "titulo": "Directo |  Raúl Mérida, comisionado de la Generalitat para la reconstrucción: La dana toco a más de 100 municipios en la provincia de Valencia y afectó a más de 800.000 personas",
-        "enlace": "https://www.levante-emv.com/videos/levante-tv/2026/03/02/directo-primera-jornada-iv-foro-127303054.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-03-02T09:27:46.818269",
-        "f": "02/03"
-    },
-    {
-        "titulo": "Joan Romero elaborará las bases del plan director del área metropolitana de Valencia",
-        "enlace": "https://www.levante-emv.com/valencia/2026/03/02/joan-romero-elaborara-bases-plan-director-del-area-metropolitana-127437563.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ts": "2026-03-02T09:27:46.673052",
-        "f": "02/03"
-    },
-    {
-        "titulo": "Entre lo retro y la robótica: así mejoran sus cámaras los móviles del MWC",
-        "enlace": "https://elpais.com/tecnologia/2026-03-02/entre-lo-retro-y-la-robotica-asi-mejoran-sus-camaras-los-moviles-del-mwc.html",
-        "fuente": "El País Tecnología",
-        "tipo": "noticia",
-        "ts": "2026-03-02T09:27:45.596194",
-        "f": "02/03"
     }
 ]
