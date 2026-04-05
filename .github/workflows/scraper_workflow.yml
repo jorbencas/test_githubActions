@@ -1,8 +1,5 @@
 name: 📰 scraper_workflow
 on:
-  push:
-    branches:
-      - "master"
   schedule:
     - cron: "0 7 * * 6" # Ejecutar los sábados a las 9:00 UTC
   workflow_dispatch:
