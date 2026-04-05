@@ -564,7 +564,9 @@ def enviar_email_reporte(resumen_html, nuevos):
 
 
 async def enviar_telegram_con_audio(resumen, nuevos):
-    if not CONFIG["BOT_TOKEN"] or not CONFIG["CHAT_ID"]: resumen_md = resumen.replace("<p style='margin-bottom:15px; line-height:1.6;'>", "").replace("</p>", "\n\n")
+    if not CONFIG["BOT_TOKEN"] or not CONFIG["CHAT_ID"]: return
+
+    resumen_md = resumen.replace("<p style='margin-bottom:15px; line-height:1.6;'>", "").replace("</p>", "\n\n")
 
     resumen_md = resumen_md.replace("<b>", "*").replace("</b>", "*")
     fecha_str = datetime.now().strftime('%d/%m')
