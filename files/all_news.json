@@ -1,5 +1,165 @@
 [
     {
+        "titulo": "9 juegos de Nintendo Switch y Switch 2 en oferta por menos de 9 euros que no son los típicos AAA, pero que deberías jugar una vez en tu vida",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/9-juegos-nintendo-switch-switch-2-oferta-por-menos-9-euros-que-no-son-los-tipicos-aaa-pero-que-deberias-jugar-una-vez-tu-vida_6954162_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T17:12:58.060660"
+    },
+    {
+        "titulo": "John Wick regresa a lo grande con varias películas y una serie",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/john-wick-regresa-grande-con-varias-peliculas-una-serie_6952372_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T17:12:58.060747"
+    },
+    {
+        "titulo": "Nueva Zelanda deja de ser la Tierra Media y se convierte en Hyrule para la película de The Legend of Zelda",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/nueva-zelanda-deja-ser-tierra-media-se-convierte-hyrule-para-pelicula-the-legend-of-zelda_6954209_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T17:12:58.060879"
+    },
+    {
+        "titulo": "Fallece el escritor valenciano Josep Piera a los 78 años",
+        "enlace": "https://www.levante-emv.com/cultura/2026/04/05/fallece-escritor-valenciano-josep-piera-128738212.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T17:12:59.337173"
+    },
+    {
+        "titulo": "Piera, el poeta que no volia creure en la mort",
+        "enlace": "https://www.levante-emv.com/opinion/2026/04/05/piera-poeta-volia-creure-mort-128738893.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://estaticos-cdn.prensaiberica.es/clip/3e709a68-f5eb-404b-9ad5-35e71e31f111_source-aspect-ratio_320w_0.jpg",
+        "f": "05/04",
+        "ts": "2026-04-05T17:12:59.337282"
+    },
+    {
+        "titulo": "La última entrevista de Josep Piera a Levante-EMV : \"Els valencians tenim una identitat, però no la volem\"",
+        "enlace": "https://www.levante-emv.com/postdata/2025/10/18/josep-piera-sabria-diferenciar-vida-122737275.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T17:12:59.337395"
+    },
+    {
+        "titulo": "Valencia CF-Celta: Mazazo a Europa",
+        "enlace": "https://www.levante-emv.com/deportes/2026/04/05/valencia-cf-celta-mazazo-definitivo-128769395.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T17:12:59.337498"
+    },
+    {
+        "titulo": "Nuevo iPhone Air 2 - Todo lo que creemos saber sobre él",
+        "enlace": "https://www.applesfera.com/nuevo/apple-iphone-air-2-informacion",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T17:12:58.307545"
+    },
+    {
+        "titulo": "Can orbital data centers help justify a massive valuation for SpaceX?",
+        "enlace": "https://techcrunch.com/2026/04/05/can-orbital-data-centers-help-justify-a-massive-valuation-for-spacex/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T17:12:57.451232"
+    },
+    {
+        "titulo": "In Japan, the robot isn’t coming for your job; it’s filling the one nobody wants",
+        "enlace": "https://techcrunch.com/2026/04/05/japan-is-proving-experimental-physical-ai-is-ready-for-the-real-world/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T17:12:57.451348"
+    },
+    {
+        "titulo": "Reaching Across the Isles: UK-LLM Brings AI to UK Languages With NVIDIA Nemotron",
+        "enlace": "https://blogs.nvidia.com/blog/uk-llm-nemotron/",
+        "fuente": "NVIDIA Blog",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T17:12:57.480041"
+    },
+    {
+        "titulo": "I Built a Chess Engine with 5 AI Agents — Here's What Surprised Me",
+        "enlace": "https://dev.to/battyterm/i-built-a-chess-engine-with-5-ai-agents-heres-what-surprised-me-1g16",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T17:12:57.557870"
+    },
+    {
+        "titulo": "How I Built an Islamic Storytelling App with AI, Audio Narration & 8 Languages",
+        "enlace": "https://dev.to/bb_apps_4ba0440b392baf96f/how-i-built-an-islamic-storytelling-app-with-ai-audio-narration-8-languages-190p",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T17:12:57.557977"
+    },
+    {
+        "titulo": "How I Use Genetic Algorithms to Evolve Trading Strategies (With Real Code)",
+        "enlace": "https://dev.to/neuzhou/how-i-use-genetic-algorithms-to-evolve-trading-strategies-with-real-code-1n84",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T17:12:57.558267"
+    },
+    {
+        "titulo": "Building a Privacy-First AI Hair Simulator: Lessons Learned",
+        "enlace": "https://dev.to/qiulin_qin_f33dd3910d9c43/building-a-privacy-first-ai-hair-simulator-lessons-learned-5acl",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T17:12:57.558633"
+    },
+    {
+        "titulo": "Building a Production-Ready Serverless App on Google Cloud (Part 2: The Data Contract)",
+        "enlace": "https://dev.to/gde/building-a-production-ready-serverless-app-on-google-cloud-part-2-the-data-contract-3hpa",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T17:12:57.558729"
+    },
+    {
         "titulo": "Un veterano de Halo, con 17 años de experiencia en la IP, acusa al estudio de actos ilegales como fraude y \"múltiples campañas de acoso\"",
         "enlace": "https://www.hobbyconsolas.com/videojuegos/un-veterano-halo-con-17-anos-experiencia-ip-acusa-estudio-actos-ilegales-como-fraude-multiples-campanas-acoso_6954177_0.html",
         "fuente": "HobbyConsolas",
@@ -6740,182 +6900,6 @@
         "badge": "Tech",
         "raw": "how we rebuilt the search architecture for high availability in github enterprise server",
         "ts": "2026-03-16T17:30:14.344665",
-        "f": "16/03"
-    },
-    {
-        "titulo": "De píxeles a caracteres: la ingeniería detrás del banner ASCII animado de GitHub Copilot CLI",
-        "enlace": "https://github.blog/engineering/from-pixels-to-characters-the-engineering-behind-github-copilot-clis-animated-ascii-banner/",
-        "fuente": "GitHub Blog",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:14.778647",
-        "badge": "Tech",
-        "raw": "from pixels to characters: the engineering behind github copilot cli’s animated ascii banner",
-        "ts": "2026-03-16T17:30:14.778658",
-        "f": "16/03"
-    },
-    {
-        "titulo": "Cuando las protecciones sobreviven a su propósito: una lección sobre la gestión de sistemas de defensa a escala",
-        "enlace": "https://github.blog/engineering/infrastructure/when-protections-outlive-their-purpose-a-lesson-on-managing-defense-systems-at-scale/",
-        "fuente": "GitHub Blog",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:15.203265",
-        "badge": "Tech",
-        "raw": "when protections outlive their purpose: a lesson on managing defense systems at scale",
-        "ts": "2026-03-16T17:30:15.203275",
-        "f": "16/03"
-    },
-    {
-        "titulo": "Seguridad poscuántica para acceso SSH en GitHub",
-        "enlace": "https://github.blog/engineering/platform-security/post-quantum-security-for-ssh-access-on-github/",
-        "fuente": "GitHub Blog",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:16.133225",
-        "badge": "Tech",
-        "raw": "post-quantum security for ssh access on github",
-        "ts": "2026-03-16T17:30:16.133239",
-        "f": "16/03"
-    },
-    {
-        "titulo": "Cómo los ingenieros de GitHub abordan los problemas de la plataforma",
-        "enlace": "https://github.blog/engineering/infrastructure/how-github-engineers-tackle-platform-problems/",
-        "fuente": "GitHub Blog",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:16.871446",
-        "badge": "Tech",
-        "raw": "how github engineers tackle platform problems",
-        "ts": "2026-03-16T17:30:16.871462",
-        "f": "16/03"
-    },
-    {
-        "titulo": "La búsqueda de problemas de GitHub ahora admite consultas anidadas y operadores booleanos: así es como lo (re)construimos",
-        "enlace": "https://github.blog/developer-skills/application-development/github-issues-search-now-supports-nested-queries-and-boolean-operators-heres-how-we-rebuilt-it/",
-        "fuente": "GitHub Blog",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:17.360624",
-        "badge": "Tech",
-        "raw": "github issues search now supports nested queries and boolean operators: here’s how we (re)built it",
-        "ts": "2026-03-16T17:30:17.360633",
-        "f": "16/03"
-    },
-    {
-        "titulo": "Anotaciones del sistema de diseño, parte 2: métodos avanzados para anotar componentes",
-        "enlace": "https://github.blog/engineering/user-experience/design-system-annotations-part-2-advanced-methods-of-annotating-components/",
-        "fuente": "GitHub Blog",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:17.593276",
-        "badge": "Tech",
-        "raw": "design system annotations, part 2: advanced methods of annotating components",
-        "ts": "2026-03-16T17:30:17.593287",
-        "f": "16/03"
-    },
-    {
-        "titulo": "Anotaciones del sistema de diseño, parte 1: Cómo la accesibilidad queda fuera de los componentes",
-        "enlace": "https://github.blog/engineering/user-experience/design-system-annotations-part-1-how-accessibility-gets-left-out-of-components/",
-        "fuente": "GitHub Blog",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:18.034473",
-        "badge": "Tech",
-        "raw": "design system annotations, part 1: how accessibility gets left out of components",
-        "ts": "2026-03-16T17:30:18.034483",
-        "f": "16/03"
-    },
-    {
-        "titulo": "Construyendo una CLI de GitHub más accesible",
-        "enlace": "https://github.blog/engineering/user-experience/building-a-more-accessible-github-cli/",
-        "fuente": "GitHub Blog",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:18.890686",
-        "badge": "Tech",
-        "raw": "building a more accessible github cli",
-        "ts": "2026-03-16T17:30:18.890696",
-        "f": "16/03"
-    },
-    {
-        "titulo": "As AI Grows More Complex, Model Builders Rely on NVIDIA",
-        "enlace": "https://blogs.nvidia.com/blog/leading-models-nvidia/",
-        "fuente": "NVIDIA Blog",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:24.519958",
-        "badge": "Tech",
-        "raw": "as ai grows more complex, model builders rely on nvidia",
-        "ts": "2026-03-16T17:30:24.519968",
-        "f": "16/03"
-    },
-    {
-        "titulo": "Isambard-AI, the UK’s Most Powerful AI Supercomputer, Goes Live",
-        "enlace": "https://blogs.nvidia.com/blog/isambard-ai/",
-        "fuente": "NVIDIA Blog",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:24.520014",
-        "badge": "Tech",
-        "raw": "isambard-ai, the uk’s most powerful ai supercomputer, goes live",
-        "ts": "2026-03-16T17:30:24.520016",
-        "f": "16/03"
-    },
-    {
-        "titulo": "A Gaming GPU Helps Crack the Code on a Thousand-Year Cultural Conversation",
-        "enlace": "https://blogs.nvidia.com/blog/gaming-gpu-ceramics/",
-        "fuente": "NVIDIA Blog",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:24.520049",
-        "badge": "Tech",
-        "raw": "a gaming gpu helps crack the code on a thousand-year cultural conversation",
-        "ts": "2026-03-16T17:30:24.520050",
-        "f": "16/03"
-    },
-    {
-        "titulo": "New NVIDIA Nemotron 3 Super Delivers 5x Higher Throughput for Agentic AI",
-        "enlace": "https://blogs.nvidia.com/blog/nemotron-3-super-agentic-ai/",
-        "fuente": "NVIDIA Blog",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:24.520087",
-        "badge": "Tech",
-        "raw": "new nvidia nemotron 3 super delivers 5x higher throughput for agentic ai",
-        "ts": "2026-03-16T17:30:24.520089",
-        "f": "16/03"
-    },
-    {
-        "titulo": "NVIDIA GTC 2026: Live Updates on What’s Next in AI",
-        "enlace": "https://blogs.nvidia.com/blog/gtc-2026-news/",
-        "fuente": "NVIDIA Blog",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:24.520112",
-        "badge": "Tech",
-        "raw": "nvidia gtc 2026: live updates on what’s next in ai",
-        "ts": "2026-03-16T17:30:24.520113",
-        "f": "16/03"
-    },
-    {
-        "titulo": "As Open Models Spark AI Boom, NVIDIA Jetson Brings It to Life at the Edge",
-        "enlace": "https://blogs.nvidia.com/blog/jetson-generative-ai-edge-oss/",
-        "fuente": "NVIDIA Blog",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:24.520134",
-        "badge": "Tech",
-        "raw": "as open models spark ai boom, nvidia jetson brings it to life at the edge",
-        "ts": "2026-03-16T17:30:24.520135",
-        "f": "16/03"
-    },
-    {
-        "titulo": "NVIDIA Virtualizes Game Development With RTX PRO Server",
-        "enlace": "https://blogs.nvidia.com/blog/gdc-2026-virtual-game-development/",
-        "fuente": "NVIDIA Blog",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:24.520156",
-        "badge": "Tech",
-        "raw": "nvidia virtualizes game development with rtx pro server",
-        "ts": "2026-03-16T17:30:24.520157",
-        "f": "16/03"
-    },
-    {
-        "titulo": "NVIDIA Rubin Platform, Open Models, Autonomous Driving: NVIDIA Presents Blueprint for the Future at CES",
-        "enlace": "https://blogs.nvidia.com/blog/2026-ces-special-presentation/",
-        "fuente": "NVIDIA Blog",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:24.520176",
-        "badge": "Tech",
-        "raw": "nvidia rubin platform, open models, autonomous driving: nvidia presents blueprint for the future at ces",
-        "ts": "2026-03-16T17:30:24.520177",
         "f": "16/03"
     }
 ]
