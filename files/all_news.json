@@ -1,5 +1,65 @@
 [
     {
+        "titulo": "Un veterano de Halo, con 17 años de experiencia en la IP, acusa al estudio de actos ilegales como fraude y \"múltiples campañas de acoso\"",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/un-veterano-halo-con-17-anos-experiencia-ip-acusa-estudio-actos-ilegales-como-fraude-multiples-campanas-acoso_6954177_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T13:27:52.064328"
+    },
+    {
+        "titulo": "Jeff Bezos garantiza que Los Anillos de Poder tendrá 5 temporadas pese a su alto coste y pérdida de audiencia",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/jeff-bezos-garantiza-que-los-anillos-poder-tendra-5-temporadas-pese-su-alto-coste-perdida-audiencia_6954178_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T13:27:52.064483"
+    },
+    {
+        "titulo": "Operación retorno de Semana Santa: La DGT registra 12 kilómetros de retenciones en la A-3 y colas kilométricas en el baipás",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/04/05/operacion-retorno-semana-santa-dgt-atasco-retenciones-128761661.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T13:27:52.566718"
+    },
+    {
+        "titulo": "Detenido un joven por cortarle el cuello a otro en una reyerta en Gandia",
+        "enlace": "https://www.levante-emv.com/sucesos/2026/04/05/detenido-joven-cortarle-cuello-reyerta-playa-gandia-128763104.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T13:27:52.566924"
+    },
+    {
+        "titulo": "How to Replicate a Full Mobile Dev Workflow in Claude Code",
+        "enlace": "https://dev.to/gentic_news/how-to-replicate-a-full-mobile-dev-workflow-in-claude-code-33a2",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T13:27:52.777602"
+    },
+    {
+        "titulo": "From Stockout to Stock-Smart: AI-Powered Predictive Reordering",
+        "enlace": "https://dev.to/ken_deng_ai/from-stockout-to-stock-smart-ai-powered-predictive-reordering-5a16",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "05/04",
+        "ts": "2026-04-05T13:27:52.777780"
+    },
+    {
         "titulo": "Lanzamos Xataka Xtra: tu experiencia en Xataka sube de nivel con newsletters exclusivas, sorteos, El Consultorio y más",
         "enlace": "https://www.xataka.com/xataka-xtra/lanzamos-xataka-xtra-tu-experiencia-xataka-sube-nivel-newsletters-exclusivas-sorteos-consultorio?utm_source=genbeta&utm_medium=network&utm_campaign=repost",
         "fuente": "Genbeta",
@@ -6856,72 +6916,6 @@
         "badge": "Tech",
         "raw": "nvidia rubin platform, open models, autonomous driving: nvidia presents blueprint for the future at ces",
         "ts": "2026-03-16T17:30:24.520177",
-        "f": "16/03"
-    },
-    {
-        "titulo": "Reaching Across the Isles: UK-LLM Brings AI to UK Languages With NVIDIA Nemotron",
-        "enlace": "https://blogs.nvidia.com/blog/uk-llm-nemotron/",
-        "fuente": "NVIDIA Blog",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:24.520196",
-        "badge": "Tech",
-        "raw": "reaching across the isles: uk-llm brings ai to uk languages with nvidia nemotron",
-        "ts": "2026-03-16T17:30:24.520198",
-        "f": "16/03"
-    },
-    {
-        "titulo": "I Built a Browser UI for Claude Code — Here's Why",
-        "enlace": "https://dev.to/hamed_farag/i-built-a-browser-ui-for-claude-code-heres-why-4959",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:24.677393",
-        "badge": "Tech",
-        "raw": "i built a browser ui for claude code — here's why",
-        "ts": "2026-03-16T17:30:24.677406",
-        "f": "16/03"
-    },
-    {
-        "titulo": "neither naive nor nostalgic",
-        "enlace": "https://dev.to/ingosteinke/neither-naive-nor-nostalgic-1mmp",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:24.677453",
-        "badge": "Tech",
-        "raw": "neither naive nor nostalgic",
-        "ts": "2026-03-16T17:30:24.677455",
-        "f": "16/03"
-    },
-    {
-        "titulo": "Rethinking Architecture in the AI Era — Part 1: Repository Management",
-        "enlace": "https://dev.to/iktakahiro/rethinking-architecture-in-the-ai-era-part-1-repository-management-2ia4",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:24.677503",
-        "badge": "Tech",
-        "raw": "rethinking architecture in the ai era — part 1: repository management",
-        "ts": "2026-03-16T17:30:24.677505",
-        "f": "16/03"
-    },
-    {
-        "titulo": "Building Adaptive Language Coaching with Gemini Live API",
-        "enlace": "https://dev.to/ryan_ahamer_105192d3215e3/building-adaptive-language-coaching-with-gemini-live-api-2ngd",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:24.677531",
-        "badge": "Tech",
-        "raw": "building adaptive language coaching with gemini live api",
-        "ts": "2026-03-16T17:30:24.677532",
-        "f": "16/03"
-    },
-    {
-        "titulo": "Fortran meets AI",
-        "enlace": "https://dev.to/viksaaskool/fortran-meets-ai-3oac",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-16T17:30:24.677587",
-        "badge": "Tech",
-        "raw": "fortran meets ai",
-        "ts": "2026-03-16T17:30:24.677589",
         "f": "16/03"
     }
 ]
