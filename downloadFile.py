@@ -14,6 +14,7 @@ from utils import obtener_solucion_ia, generar_imagen_noticia
 from slugify import slugify 
 import html
 import aiohttp
+import html2text
 # En tu script del Dashboard (el que genera el HTML)
 
 
@@ -319,6 +320,21 @@ async def obtener_recap_semanal_ia(noticias, client):
                 print(f"❌ Error en obtener_recap_semanal_ia: {e}")
                 break
     return None
+def limpiar_html_para_mdx(html: str, to_markdown: bool = False) -> str:
+    if not html:
+        return ""
+
+    # 1. Arregla HTML roto
+    soup = BeautifulSoup(html, "html.parser")
+
+    html_limpio = str(soup)
+
+    # 2. Opcional: convertir a Markdown (recomendado)
+    if to_markdown:
+        md = html2text.html2text(html_limpio)
+        return md.strip()
+
+    return html_limpio.strip()
 
 async def generar_blog_astro(noticias_web, fecha_iso, year, week, client):
     # FILTRO: Cero YouTube en el Blog para evitar errores en Vercel
@@ -335,16 +351,26 @@ async def generar_blog_astro(noticias_web, fecha_iso, year, week, client):
     img_recap = await generar_imagen_noticia(f"Recap {week}", noticias_blog[0].get('imagen_url_original', ''), client)
     await asyncio.sleep(3)
 
+    introduccion = limpiar_html_para_mdx(
+        data_ia.get('introduccion', ''), 
+        to_markdown=True
+    )
+
+    bloque_noticias = limpiar_html_para_mdx(
+        data_ia.get('noticias_destacadas', ''), 
+        to_markdown=True
+    )
+
     final_md = inspect.cleandoc(MD_TEMPLATE).format(
         titulo=f"Weekly Tech Recap W{week}",
-        description=data_ia.get('introduccion', '')[:150].replace('"', "'"),
+        description=introduccion[:150].replace('"', "'"),
         fecha_iso=fecha_iso,
         author="Jorge Beneyto Castelló",
         ruta_imagen=img_recap or "https://github.com/jorbencas/test_githubActions/blob/master/public/optimizado/Image.png?raw=true",
         tags=json.dumps(data_ia.get('tags', ["tech"])),
         slug_name=semana_slug,
-        introduccion=data_ia.get('introduccion', ''),
-        bloque_noticias=data_ia.get('noticias_destacadas', ''),
+        introduccion=introduccion,
+        bloque_noticias=bloque_noticias,
         repo_name=data_ia.get('repo', {}).get('nombre', 'Tool'),
         repo_url=data_ia.get('repo', {}).get('url', '#'),
         repo_desc=data_ia.get('repo', {}).get('desc', ''),
@@ -356,7 +382,7 @@ async def generar_blog_astro(noticias_web, fecha_iso, year, week, client):
         f.write(final_md)
     
     # Devolvemos la introducción para usarla como "resumen" en el Dashboard
-    return data_ia.get('introduccion', '')
+    return introduccion
 
 
 def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
