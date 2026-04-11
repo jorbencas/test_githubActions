@@ -7,3 +7,4 @@ python-slugify
 aiohttp
 playwright
 Pillow
+html2text
