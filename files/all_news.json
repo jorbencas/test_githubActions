@@ -1,5 +1,15 @@
 [
     {
+        "titulo": "Dos exbecarios de Fundación Carolina, finalistas en los Premios Princesa de Girona Internacional 2026",
+        "enlace": "https://www.fundacioncarolina.es/dos-exbecarios-de-fundacion-carolina-entre-los-finalistas-de-los-premios-princesa-de-girona-internacional-2026/",
+        "fuente": "Fundación Carolina",
+        "tipo": "noticia",
+        "badge": "Beca",
+        "imagen_url_original": "",
+        "f": "17/04",
+        "ts": "2026-04-17T10:11:57.021779"
+    },
+    {
         "titulo": "The Mandalorian and Grogu lanza su tráiler final, que combina épica y nostalgia",
         "enlace": "https://www.hobbyconsolas.com/hobbycine/the-mandalorian-and-grogu-lanza-su-trailer-final-que-combina-epica-nostalgia_6959319_0.html",
         "fuente": "HobbyConsolas",
@@ -6673,18 +6683,6 @@
         "raw": "i built a personalized ai life coach with obsidian + claude — here's the exact setup",
         "imagen_url_original": "",
         "ts": "2026-03-21T08:28:44.538068",
-        "f": "21/03"
-    },
-    {
-        "titulo": "Why I Built a Privacy-First AI Assistant for Visual Studio 2022 (Goodbye Cloud-Only Copilots!)",
-        "enlace": "https://dev.to/furkiak/why-i-built-a-privacy-first-ai-assistant-for-visual-studio-2022-goodbye-cloud-only-copilots-e9h",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-21T08:28:44.538109",
-        "badge": "Tech",
-        "raw": "why i built a privacy-first ai assistant for visual studio 2022 (goodbye cloud-only copilots!)",
-        "imagen_url_original": "",
-        "ts": "2026-03-21T08:28:44.538110",
         "f": "21/03"
     }
 ]
