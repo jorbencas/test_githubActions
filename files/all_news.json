@@ -1,5 +1,35 @@
 [
     {
+        "titulo": "El astrofísico mexicano José Eduardo Méndez Delgado, exbecario de Fundación Carolina, Premio Princesa de Girona Internacional 2026 en Investigación",
+        "enlace": "https://www.fundacioncarolina.es/el-astrofisico-mexicano-jose-eduardo-mendez-delgado-exbecario-de-fundacion-carolina-premio-princesa-de-girona-internacional-2026-en-investigacion/",
+        "fuente": "Fundación Carolina",
+        "tipo": "noticia",
+        "badge": "Beca",
+        "imagen_url_original": "",
+        "f": "26/05",
+        "ts": "2026-05-26T16:40:53.089074"
+    },
+    {
+        "titulo": "Las principales telecos de cada provincia de España, en un mapa que dice mucho de quién tiene la mejor cobertura",
+        "enlace": "https://www.xatakamovil.com/conectividad/principales-telecos-cada-provincia-espana-mapa-que-dice-mucho-quien-tiene-mejor-cobertura-1?utm_source=applesfera&utm_medium=network&utm_campaign=repost",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "26/05",
+        "ts": "2026-05-26T16:40:49.438043"
+    },
+    {
+        "titulo": "How I Escaped Claude & Cursor Limits: The Ultimate Free Local AI Coding Setup with Ollama + Continue.dev (2026 Guide)",
+        "enlace": "https://dev.to/david_bilsonn/how-i-escaped-claude-cursor-limits-the-ultimate-free-local-ai-coding-setup-with-ollama--2nib",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Beca",
+        "imagen_url_original": "https://assets.dev.to/assets/exploding-head-daceb38d627e6ae9b730f36a1e390fca556a4289d5a41abb2c35068ad3e2c4b5.svg",
+        "f": "26/05",
+        "ts": "2026-05-26T16:40:48.575746"
+    },
+    {
         "titulo": "Deploying OpenWebUI Local AI Interface on Ubuntu 24.04",
         "enlace": "https://dev.to/vultr/deploying-openwebui-local-ai-interface-on-ubuntu-2404-553d",
         "fuente": "Dev.to",
@@ -6083,42 +6113,6 @@
         "raw": "¿es un mensaje de instagram como un cigarro? llega la ‘era tabaco’ a las redes sociales",
         "imagen_url_original": "",
         "ts": "2026-03-27T18:29:53.986138",
-        "f": "27/03"
-    },
-    {
-        "titulo": "Los deberes de Arcadi España: de negociar la nueva financiación autonómica a presentar los presupuestos",
-        "enlace": "https://www.levante-emv.com/economia/2026/03/27/deberes-arcadi-espana-negociar-nueva-128494958.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-27T18:29:54.414308",
-        "badge": "Tech",
-        "raw": "los deberes de arcadi españa: de negociar la nueva financiación autonómica a presentar los presupuestos",
-        "imagen_url_original": "",
-        "ts": "2026-03-27T18:29:54.414321",
-        "f": "27/03"
-    },
-    {
-        "titulo": "Valencia cierra la incorporación del suelo recuperado al cabecilla de Azud para construir 644 VPP",
-        "enlace": "https://www.levante-emv.com/valencia/2026/03/27/valencia-cierra-incorporacion-suelo-recuperado-128478576.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-27T18:29:54.414386",
-        "badge": "Tech",
-        "raw": "valencia cierra la incorporación del suelo recuperado al cabecilla de azud para construir 644 vpp",
-        "imagen_url_original": "",
-        "ts": "2026-03-27T18:29:54.414388",
-        "f": "27/03"
-    },
-    {
-        "titulo": "La Semana Santa en las carreteras valencianas: más accidentes mortales y exceso de alcohol al volante",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/27/atencion-peligro-valencianos-irresponsables-volante-accidentes-siniestros-coches-estudios-perfil-victimas-carresteras-vias-128451237.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-27T18:29:54.414449",
-        "badge": "Tech",
-        "raw": "la semana santa en las carreteras valencianas: más accidentes mortales y exceso de alcohol al volante",
-        "imagen_url_original": "",
-        "ts": "2026-03-27T18:29:54.414451",
         "f": "27/03"
     }
 ]
