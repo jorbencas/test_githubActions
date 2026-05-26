@@ -45,7 +45,10 @@ async def obtener_solucion_ia(titulo, fuente, client, lang="Python"):
                         return data
             except Exception as e:
                 error_str = str(e).upper()
-                if "429" in error_str or "QUOTA" in error_str or "RESOURCE_EXHAUSTED" in error_str:
+                if "API_KEY_INVALID" in error_str or ("INVALID_ARGUMENT" in error_str and "API KEY" in error_str):
+                    logger.error(f"🔑 API KEY INVÁLIDA. Configura GEMINI_API_KEY correctamente.")
+                    return None
+                elif "429" in error_str or "QUOTA" in error_str or "RESOURCE_EXHAUSTED" in error_str:
                     logger.warning(f"⏳ Cuota excedida en {modelo}. Reintentando/Cambiando...")
                     await asyncio.sleep(5)
                 else:
@@ -84,7 +87,11 @@ async def obtener_recap_semanal_ia(noticias, client):
             clean_json = re.sub(r'```json|```', '', raw_text).strip()
             return json.loads(clean_json)
         except Exception as e:
-            if "429" in str(e).upper() or "QUOTA" in str(e).upper():
+            error_str = str(e).upper()
+            if "API_KEY_INVALID" in error_str or ("INVALID_ARGUMENT" in error_str and "API KEY" in error_str):
+                logger.error(f"🔑 API KEY INVÁLIDA. Configura GEMINI_API_KEY correctamente.")
+                return None
+            elif "429" in error_str or "QUOTA" in error_str:
                 logger.warning(f"⏳ Pasando al siguiente modelo por cuota en {modelo}...")
                 continue
             logger.error(f"❌ Error Recap ({modelo}): {e}")

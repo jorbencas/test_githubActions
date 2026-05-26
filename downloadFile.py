@@ -398,6 +398,11 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
     v_html, n_html = "", ""
     canales_vistos = []
     historial.sort(key=lambda x: x.get('ts', ''), reverse=True)
+    # Establecer locale ANTES del conteo para que las claves coincidan con los labels
+    try: locale.setlocale(locale.LC_TIME, "es_ES.UTF-8")
+    except:
+        try: locale.setlocale(locale.LC_TIME, "es_ES.utf8")
+        except: pass
     # --- GENERAR CHIPS DE SEMANAS ---
     conteo_meses = Counter()
     for n in historial:
@@ -409,8 +414,7 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
         except: continue
 
     # --- 2. GENERAR NAVEGACIÓN POR SEMANAS ---
-    try: locale.setlocale(locale.LC_TIME, "es_ES.UTF-8") 
-    except: pass
+    # locale ya establecido arriba
 
     # Chip rápido (Últimas 2 semanas)
     bloque_semanas = '<div class="chip active" data-inicio="all_recent" onclick="filtrarSemana(this)">🔄 Últimas 2 Semanas</div>'
