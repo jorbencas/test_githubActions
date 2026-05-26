@@ -1,5 +1,25 @@
 [
     {
+        "titulo": "Star Wars Jedi Parte 3 no será la despedida de Cal Kestis, según avanza Disney: \"tenemos preparadas más historias del personaje\"",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/star-wars-jedi-parte-3-no-sera-despedida-cal-kestis-segun-avanza-disney-tenemos-preparadas-mas-historias-personaje_6975408_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "26/05",
+        "ts": "2026-05-26T17:29:33.632776"
+    },
+    {
+        "titulo": "Educación 'enfría' la bajada de ratios y presentará una nueva propuesta mañana tras encallarse la negociación",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/05/26/educacion-enfria-bajada-ratios-presentara-130687482.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "26/05",
+        "ts": "2026-05-26T17:29:33.942849"
+    },
+    {
         "titulo": "El astrofísico mexicano José Eduardo Méndez Delgado, exbecario de Fundación Carolina, Premio Princesa de Girona Internacional 2026 en Investigación",
         "enlace": "https://www.fundacioncarolina.es/el-astrofisico-mexicano-jose-eduardo-mendez-delgado-exbecario-de-fundacion-carolina-premio-princesa-de-girona-internacional-2026-en-investigacion/",
         "fuente": "Fundación Carolina",
@@ -6089,30 +6109,6 @@
         "raw": "hollow knight acaba de arreglar un bug que llevaba presente en el juego nueve años y que hacía el combate final bastante más difícil",
         "imagen_url_original": "",
         "ts": "2026-03-27T18:29:53.514959",
-        "f": "27/03"
-    },
-    {
-        "titulo": "Life is Strange: Reunion: El cierre de una historia que es también la tuya",
-        "enlace": "https://www.hobbyconsolas.com/branded/life-is-strange-reunion_6949414_5.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-27T18:29:53.515084",
-        "badge": "Tech",
-        "raw": "life is strange: reunion: el cierre de una historia que es también la tuya",
-        "imagen_url_original": "",
-        "ts": "2026-03-27T18:29:53.515085",
-        "f": "27/03"
-    },
-    {
-        "titulo": "¿Es un mensaje de Instagram como un cigarro? Llega la ‘era tabaco’ a las redes sociales",
-        "enlace": "https://elpais.com/tecnologia/2026-03-27/es-un-mensaje-de-instagram-como-un-cigarro-llega-la-era-tabaco-a-las-redes-sociales.html",
-        "fuente": "El País Tecnología",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-27T18:29:53.986124",
-        "badge": "Tech",
-        "raw": "¿es un mensaje de instagram como un cigarro? llega la ‘era tabaco’ a las redes sociales",
-        "imagen_url_original": "",
-        "ts": "2026-03-27T18:29:53.986138",
         "f": "27/03"
     }
 ]
