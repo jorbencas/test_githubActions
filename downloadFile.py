@@ -10,11 +10,28 @@ from mtranslate import translate
 from google import genai
 import edge_tts
 from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE, RETO_MD_TEMPLATE, URL_API_DESCARGA, URL_API_SALUD
-from utils import obtener_solucion_ia, generar_imagen_noticia
+from utils import obtener_solucion_ia, generar_imagen_noticia, obtener_recap_semanal_ia
 from slugify import slugify 
 import html
 import aiohttp
 import html2text
+import logging
+from logging.handlers import RotatingFileHandler
+
+# --- CONFIGURACIÓN DE LOGS ---
+log_folder = "logs"
+os.makedirs(log_folder, exist_ok=True)
+log_file = os.path.join(log_folder, "scraper.log")
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(message)s',
+    handlers=[
+        RotatingFileHandler(log_file, maxBytes=1024*1024*5, backupCount=5, encoding='utf-8'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger("scraper")
 # En tu script del Dashboard (el que genera el HTML)
 
 
@@ -45,14 +62,14 @@ class ScraperPro:
         if self.cambios_en_cache:
             with open(self.cache_file, 'w') as f: 
                 json.dump(self.avatars, f, indent=4, ensure_ascii=False)
-            print("💾 Caché de avatares actualizada.")
+            logger.info("💾 Caché de avatares actualizada.")
 
     def obtener_avatar_canal(self, nombre, url_canal):
         # Si ya lo tenemos en caché, no entramos a YouTube
         if nombre in self.avatars: return self.avatars[nombre]
         
         try:
-            print(f"🔍 Buscando avatar real para: {nombre}...")
+            logger.info(f"🔍 Buscando avatar real para: {nombre}...")
             # Limpiamos la URL para ir al home del canal
             target = url_canal.replace("/videos", "").replace("/shorts", "")
             r = requests.get(target, timeout=10, headers={'User-Agent': 'Mozilla/5.0'})
@@ -72,8 +89,10 @@ class ScraperPro:
         results = []
         target = info.get("yt") or info.get("url")
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-            'Accept-Language': 'es-ES,es;q=0.9',
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+            'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
+            'Cookie': 'SOCS=CAISNQgDEitib3FfaWRlbnRpdHlmcm9udGVuZHVpc2VydmVyXzIwMjYwNTI1LjA5X3AwGgJlcyACGgYIgMXT0AY; PREF=tz=Europe.Madrid',
             'Cache-Control': 'no-cache',
             'Pragma': 'no-cache'
         }
@@ -84,28 +103,78 @@ class ScraperPro:
                 html_text = await response.text()
 
             if "yt" in info:
+                logger.info(f"📺 Procesando fuente de YouTube: {nombre} ({target})")
                 # --- MEJORA YOUTUBE: BUSCAR EL JSON INTERNO ---
-                json_data = re.search(r'var ytInitialData = (\{.*?\});', html_text)
+                # Regex más flexible para ytInitialData
+                json_data = re.search(r'ytInitialData\s*=\s*(\{.*?\});', html_text)
+                if not json_data:
+                    json_data = re.search(r'window\[["\']ytInitialData["\']\]\s*=\s*(\{.*?\});', html_text)
                 
                 if json_data:
+                    logger.info(f"✅ 'ytInitialData' encontrado para {nombre}.")
                     try:
                         data = json.loads(json_data.group(1))
                         # Navegamos por la estructura compleja de YouTube
-                        contents = data['contents']['twoColumnBrowseResultsRenderer']['tabs']
+                        tabs = data.get('contents', {}).get('twoColumnBrowseResultsRenderer', {}).get('tabs', [])
                         video_list = []
-                        for tab in contents:
-                            if 'tabRenderer' in tab and 'content' in tab['tabRenderer']:
-                                content = tab['tabRenderer']['content']
-                                if 'richGridRenderer' in content:
-                                    video_list = content['richGridRenderer'].get('contents', [])
-                                    break
-                                elif 'sectionListRenderer' in content: # Fallback for old layouts
-                                    # ... 
-                                    pass
+                        for tab in tabs:
+                            content = tab.get('tabRenderer', {}).get('content', {})
+                            if 'richGridRenderer' in content:
+                                video_list = content['richGridRenderer'].get('contents', [])
+                                break
                         
-                        for item in video_list[:6]:
-                            # 1. IDENTIFICAR EL RENDERER (Video, Short o Live)
+                        logger.info(f"🛠️ Analizando {len(video_list)} elementos para {nombre}...")
+                        for item in video_list[:10]: # Aumentamos un poco el rango para encontrar videos válidos
+                            # 1. IDENTIFICAR EL RENDERER (Video, Short, Live o el nuevo lockupViewModel)
                             v_data = item.get('richItemRenderer', {}).get('content', {}).get('videoRenderer', {})
+                            
+                            # NUEVA ESTRUCTURA: lockupViewModel (Videos normales 2024/2025)
+                            if not v_data:
+                                lockup = item.get('richItemRenderer', {}).get('content', {}).get('lockupViewModel', {})
+                                if lockup:
+                                    video_id = lockup.get('contentId')
+                                    metadata = lockup.get('metadata', {}).get('lockupMetadataViewModel', {})
+                                    titulo_limpio = metadata.get('title', {}).get('content', '')
+                                    
+                                    # Para videos normales en lockupViewModel, la fecha está en metadata
+                                    fecha_relativa = metadata.get('videoMetadataRenderer', {}).get('publishedTimeText', {}).get('simpleText', 'Reciente')
+                                    if any(x in fecha_relativa.lower() for x in ["año", "year", "mes", "month"]):
+                                        continue
+
+                                    if video_id and titulo_limpio:
+                                        results.append({
+                                            "titulo": html.unescape(titulo_limpio),
+                                            "enlace": f"https://www.youtube.com/watch?v={video_id}",
+                                            "id_video": video_id,
+                                            "fuente": nombre,
+                                            "tipo": "video",
+                                            "fecha_real": datetime.now().strftime("%d/%m/%Y"),
+                                            "f": datetime.now().strftime("%d/%m"),
+                                            "ts": datetime.now().isoformat()
+                                        })
+                                    continue
+
+                            # NUEVA ESTRUCTURA: shortsLockupViewModel (Shorts 2024/2025)
+                            if not v_data:
+                                s_lockup = item.get('richItemRenderer', {}).get('content', {}).get('shortsLockupViewModel', {})
+                                if s_lockup:
+                                    video_id = s_lockup.get('onTap', {}).get('innertubeCommand', {}).get('reelWatchEndpoint', {}).get('videoId')
+                                    titulo_limpio = s_lockup.get('overlayMetadata', {}).get('primaryText', {}).get('content', '')
+                                    
+                                    if video_id and titulo_limpio:
+                                        # Los Shorts no suelen tener fecha en la parrilla, los damos por válidos (recientes)
+                                        results.append({
+                                            "titulo": html.unescape(titulo_limpio),
+                                            "enlace": f"https://www.youtube.com/watch?v={video_id}",
+                                            "id_video": video_id,
+                                            "fuente": nombre,
+                                            "tipo": "shorts",
+                                            "fecha_real": datetime.now().strftime("%d/%m/%Y"),
+                                            "f": datetime.now().strftime("%d/%m"),
+                                            "ts": datetime.now().isoformat()
+                                        })
+                                    continue
+
                             if not v_data: 
                                 v_data = item.get('richItemRenderer', {}).get('content', {}).get('reelItemRenderer', {})
 
@@ -137,7 +206,6 @@ class ScraperPro:
                             fecha_relativa = v_data.get('publishedTimeText', {}).get('simpleText', 'Reciente')
                             
                             # FILTRO DE RECIENCIA: Solo hoy, ayer o esta semana (máximo 7-10 días)
-                            # Ignoramos si dice "meses", "años" o "months", "years"
                             if any(x in fecha_relativa.lower() for x in ["año", "year", "mes", "month"]):
                                 continue
 
@@ -153,11 +221,13 @@ class ScraperPro:
                                 "f": datetime.now().strftime("%d/%m"),
                                 "ts": datetime.now().isoformat()
                             })
+                        logger.info(f"📊 {len(results)} videos/shorts válidos extraídos de {nombre}.")
                     except Exception as e:
-                        print(f"⚠️ Error procesando JSON de YT ({nombre}): {e}")
+                        logger.error(f"⚠️ Error procesando JSON de YT ({nombre}): {e}", exc_info=True)
                 
                 # --- FALLBACK: Regex ---
                 if not results:
+                    logger.warning(f"⚠️ No se obtuvieron resultados vía JSON para {nombre}. Intentando fallback con Regex...")
                     ids = list(dict.fromkeys(re.findall(r'"videoId":"(.*?)"', html_text)))
                     titles = re.findall(r'{"videoRenderer":{"videoId":".*?","thumbnail":.*?,"title":{"runs":\[{"text":"(.*?)"}\]', html_text)
                     
@@ -224,11 +294,11 @@ async def generar_retos_individuales(noticias_web, fecha_iso, client):
             
             if os.path.exists(path): continue
 
-            print(f"🎯 Procesando reto: {n.get('title', 'video-sin-nombre')}")
-            sol = await obtener_solucion_ia(n.get('title', 'video-sin-nombre'), n.get('fuente', 'Web'), client)
+            logger.info(f"🎯 Procesando reto: {n.get('title', 'video-sin-nombre')}")
+            sol = await obtener_solucion_ia(n['titulo'], n['fuente'], client, lang=lang)
             
             if sol:
-                img_reto = await generar_imagen_noticia(n.get('title', 'video-sin-nombre'), "", client)
+                img_reto = await generar_imagen_noticia(f"Reto de programación {n['titulo']}", client)
                 lang = sol.get('lenguaje', 'python').lower()
                 await asyncio.sleep(3)
                 try:
@@ -251,75 +321,14 @@ async def generar_retos_individuales(noticias_web, fecha_iso, client):
 
                     with open(path, "w", encoding="utf-8") as f:
                         f.write(reto_md)
-                    print(f"✅ Archivo creado: {path}")
+                    logger.info(f"✅ Archivo creado: {path}")
                     await asyncio.sleep(2)
 
                 except KeyError as e:
-                    print(f"❌ Error: El template espera la llave {e} pero no se envió.")
+                    logger.error(f"❌ Error: El template espera la llave {e} pero no se envió.")
                 except Exception as e:
-                    print(f"❌ Error inesperado en '{slug_reto}': {e}")
+                    logger.error(f"❌ Error inesperado en '{slug_reto}': {e}")
 
-async def obtener_recap_semanal_ia(noticias, client):
-    """
-    Sustituye a obtener_resumen_ia. 
-    Analiza las noticias y genera el contenido estructurado para el Blog y el Dashboard.
-    """
-    max_intentos = 3
-
-    for intento in range(max_intentos):
-        try:
-            
-            # Preparamos los titulares para que la IA los procese
-            texto_noticias = "\n".join([f"- {n['fuente']}: {n['titulo']}" for n in noticias[:15]])
-            
-            prompt = f"""
-            Actúa como un Editor Senior de Tecnología. Analiza estos titulares y genera un RECAP SEMANAL.
-            
-            NOTICIAS:
-            {texto_noticias}
-            
-            INSTRUCCIONES DE FORMATO (RESPONDE SOLO EN JSON):
-            {{
-              "introduccion": "Un párrafo analítico de 3 líneas sobre la tendencia de esta semana (úsalo para el Dashboard).",
-              "noticias_destacadas": "Genera 3 secciones siguiendo este formato exacto: 
-                                      ### 1. [Título de la Noticia]\\n**El suceso:** [Explicación]\\n**Impacto:** [Por qué importa]\\n---",
-              "repo": {{
-                "nombre": "Nombre de una herramienta o repo trend de los titulares o relacionado",
-                "url": "URL del recurso",
-                "desc": "Por qué un dev debería probarlo"
-              }},
-              "tldr": "3 puntos clave breves en formato lista Markdown",
-              "tags": ["lista", "de", "3", "tags", "en", "minusculas"],
-              "nota_personal": "Una reflexión breve sobre el día a día del programador."
-            }}
-            """
-    
-            response = client.models.generate_content(
-                model="gemini-2.0-flash-lite",
-                contents=prompt
-            )
-            
-            # Limpieza de la respuesta por si la IA incluye ```json ... ```
-            raw_text = response.text if response.text else "{}"
-            clean_json = re.sub(r'```json|```', '', raw_text).strip()
-            
-            data = json.loads(clean_json)
-            return data
-    
-        except Exception as e:
-            error_str = str(e).upper()
-            # Si el error es de Cuota (429) o Sobrecarga (503)
-            if "429" in error_str or "QUOTA" in error_str or "RESOURCE_EXHAUSTED" in error_str:
-                tiempo_espera = 35 * (intento + 1) # Esperamos 35s, 70s...
-                if intento < max_intentos - 1:
-                    print(f"⏳ Límite de Gemini alcanzado. Esperando {tiempo_espera}s para reintentar...")
-                    await asyncio.sleep(tiempo_espera)
-                else:
-                    print("❌ Se agotaron los reintentos de cuota para el Blog.")
-            else:
-                print(f"❌ Error en obtener_recap_semanal_ia: {e}")
-                break
-    return None
 def limpiar_html_para_mdx(html: str, to_markdown: bool = False) -> str:
     if not html:
         return ""
@@ -348,7 +357,7 @@ async def generar_blog_astro(noticias_web, fecha_iso, year, week, client):
     await asyncio.sleep(5)
 
     semana_slug = f"{year}-w{week:02d}-tech-recap"
-    img_recap = await generar_imagen_noticia(f"Recap {week}", noticias_blog[0].get('imagen_url_original', ''), client)
+    img_recap = await generar_imagen_noticia(f"Recap {week}", client)
     await asyncio.sleep(3)
 
     introduccion = limpiar_html_para_mdx(
@@ -499,7 +508,7 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
             bloque_semanas=bloque_semanas_completo, # Puedes rellenar esto con tu lógica de semanas
             api_token=token_oculto, api_url=URL_API_DESCARGA, api_salud=URL_API_SALUD
         ))
-    print("✅ Dashboard HTML generado con Chips y Vídeos.")
+    logger.info("✅ Dashboard HTML generado con Chips y Vídeos.")
 
 async def publicar_contenidos(historial, noticias_web, scr):
     ahora = datetime.now()
@@ -584,9 +593,9 @@ def enviar_email_reporte(resumen_html, nuevos):
             }
         )
         if r.status_code == 200:
-            print(f"📧 Email enviado con éxito: {asunto}")
+            logger.info(f"📧 Email enviado con éxito: {asunto}")
     except Exception as e:
-        print(f"⚠️ Fallo en el envío de email: {e}")
+        logger.error(f"⚠️ Fallo en el envío de email: {e}")
 
 
 async def enviar_telegram_con_audio(resumen, nuevos):
@@ -649,7 +658,7 @@ async def enviar_telegram_con_audio(resumen, nuevos):
 
         if not r.ok:
             # FALLBACK: Si falla el Markdown por caracteres raros, reintentamos sin Markdown
-            print(f"⚠️ Reintentando envío sin Markdown por error: {r.text}")
+            logger.warning(f"⚠️ Reintentando envío sin Markdown por error: {r.text}")
             payload.pop("parse_mode")
             # Limpiamos el caption de caracteres de escape para texto plano
             payload["caption"] = caption.replace("\\_", "_").replace("\\*", "*")
@@ -659,11 +668,11 @@ async def enviar_telegram_con_audio(resumen, nuevos):
         # Limpieza: Borramos el archivo temporal
         if os.path.exists(audio_path): os.remove(audio_path)
         
-        if r.status_code == 200: print("✅ Telegram con voz humana enviado")
-        else: print(f"❌ Error Telegram: {r.text}")
+        if r.status_code == 200: logger.info("✅ Telegram con voz humana enviado")
+        else: logger.error(f"❌ Error Telegram: {r.text}")
 
     except Exception as e:
-        print(f"⚠️ Error en TTS Humano: {e}")
+        logger.error(f"⚠️ Error en TTS Humano: {e}")
 
 
 
@@ -694,9 +703,9 @@ async def main():
         total = noticias_web + historial
         with open(archivo_h, 'w', encoding='utf-8') as f: 
             json.dump(total[:600], f, indent=4, ensure_ascii=False)
-        print(f"✅ {len(noticias_web)} noticias nuevas procesadas.")
+        logger.info(f"✅ {len(noticias_web)} noticias nuevas procesadas.")
     else:
-        print("☕ Sin cambios hoy.")
+        logger.info("☕ Sin cambios hoy.")
 
 if __name__ == "__main__":
     asyncio.run(main())

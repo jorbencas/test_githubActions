@@ -1,0 +1,291 @@
+2026-05-26 17:56:05,189 [INFO] 📺 Procesando fuente de YouTube: Programa Con Arnau Shorts (https://youtube.com/@progconarnau?si=AFBTWjGeo-UpuJdE)
+2026-05-26 17:56:05,193 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para Programa Con Arnau Shorts. Intentando fallback con Regex...
+2026-05-26 17:56:06,026 [INFO] 📺 Procesando fuente de YouTube: Programa Con Arnau (https://youtube.com/@progconarnau?si=AFBTWjGeo-UpuJdE)
+2026-05-26 17:56:06,027 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para Programa Con Arnau. Intentando fallback con Regex...
+2026-05-26 17:56:06,302 [INFO] 📺 Procesando fuente de YouTube: Xataka (https://www.youtube.com/@xatakatv/videos)
+2026-05-26 17:56:06,314 [INFO] ✅ 'ytInitialData' encontrado para Xataka.
+2026-05-26 17:56:06,329 [INFO] 🛠️ Analizando 31 elementos para Xataka...
+2026-05-26 17:56:06,334 [INFO] 📊 10 videos/shorts válidos extraídos de Xataka.
+2026-05-26 17:56:06,343 [INFO] 📺 Procesando fuente de YouTube: FreeCodeCamp (https://www.youtube.com/@freecodecamp/videos)
+2026-05-26 17:56:06,351 [INFO] ✅ 'ytInitialData' encontrado para FreeCodeCamp.
+2026-05-26 17:56:06,361 [INFO] 🛠️ Analizando 31 elementos para FreeCodeCamp...
+2026-05-26 17:56:06,363 [INFO] 📊 10 videos/shorts válidos extraídos de FreeCodeCamp.
+2026-05-26 17:56:07,022 [INFO] 📺 Procesando fuente de YouTube: Victor Robles (https://www.youtube.com/@victorroblesweb/videos)
+2026-05-26 17:56:07,036 [INFO] ✅ 'ytInitialData' encontrado para Victor Robles.
+2026-05-26 17:56:07,055 [INFO] 🛠️ Analizando 31 elementos para Victor Robles...
+2026-05-26 17:56:07,057 [INFO] 📊 10 videos/shorts válidos extraídos de Victor Robles.
+2026-05-26 17:56:07,073 [INFO] 📺 Procesando fuente de YouTube: HolaMundo (https://www.youtube.com/@holamundodev/videos)
+2026-05-26 17:56:07,085 [INFO] ✅ 'ytInitialData' encontrado para HolaMundo.
+2026-05-26 17:56:07,100 [INFO] 🛠️ Analizando 31 elementos para HolaMundo...
+2026-05-26 17:56:07,102 [INFO] 📊 10 videos/shorts válidos extraídos de HolaMundo.
+2026-05-26 17:56:07,115 [INFO] 📺 Procesando fuente de YouTube: Fazt (https://www.youtube.com/@FaztTech/videos)
+2026-05-26 17:56:07,128 [INFO] ✅ 'ytInitialData' encontrado para Fazt.
+2026-05-26 17:56:07,141 [INFO] 🛠️ Analizando 31 elementos para Fazt...
+2026-05-26 17:56:07,142 [INFO] 📊 10 videos/shorts válidos extraídos de Fazt.
+2026-05-26 17:56:07,176 [INFO] 📺 Procesando fuente de YouTube: Midudev (https://www.youtube.com/@midudev/videos)
+2026-05-26 17:56:07,189 [INFO] ✅ 'ytInitialData' encontrado para Midudev.
+2026-05-26 17:56:07,203 [INFO] 🛠️ Analizando 31 elementos para Midudev...
+2026-05-26 17:56:07,208 [INFO] 📊 10 videos/shorts válidos extraídos de Midudev.
+2026-05-26 17:56:07,214 [INFO] 📺 Procesando fuente de YouTube: Pelado Nerd (https://www.youtube.com/@PeladoNerd/videos)
+2026-05-26 17:56:07,236 [INFO] ✅ 'ytInitialData' encontrado para Pelado Nerd.
+2026-05-26 17:56:07,264 [INFO] 🛠️ Analizando 31 elementos para Pelado Nerd...
+2026-05-26 17:56:07,264 [INFO] 📊 10 videos/shorts válidos extraídos de Pelado Nerd.
+2026-05-26 17:56:07,279 [INFO] 📺 Procesando fuente de YouTube: Pelado Nerd Shorts (https://www.youtube.com/@PeladoNerd/shorts)
+2026-05-26 17:56:07,284 [INFO] ✅ 'ytInitialData' encontrado para Pelado Nerd Shorts.
+2026-05-26 17:56:07,294 [INFO] 🛠️ Analizando 20 elementos para Pelado Nerd Shorts...
+2026-05-26 17:56:07,295 [INFO] 📊 0 videos/shorts válidos extraídos de Pelado Nerd Shorts.
+2026-05-26 17:56:07,296 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para Pelado Nerd Shorts. Intentando fallback con Regex...
+2026-05-26 17:56:07,856 [INFO] 📺 Procesando fuente de YouTube: EDteam (https://www.youtube.com/@EDteam/videos)
+2026-05-26 17:56:07,871 [INFO] ✅ 'ytInitialData' encontrado para EDteam.
+2026-05-26 17:56:07,903 [INFO] 🛠️ Analizando 31 elementos para EDteam...
+2026-05-26 17:56:07,904 [INFO] 📊 10 videos/shorts válidos extraídos de EDteam.
+2026-05-26 17:56:07,935 [INFO] 📺 Procesando fuente de YouTube: Clipset (https://www.youtube.com/@clipset/videos)
+2026-05-26 17:56:07,950 [INFO] ✅ 'ytInitialData' encontrado para Clipset.
+2026-05-26 17:56:07,981 [INFO] 🛠️ Analizando 31 elementos para Clipset...
+2026-05-26 17:56:07,982 [INFO] 📊 10 videos/shorts válidos extraídos de Clipset.
+2026-05-26 17:56:08,045 [INFO] 📺 Procesando fuente de YouTube: CodelyTV (https://www.youtube.com/@CodelyTV/videos)
+2026-05-26 17:56:08,068 [INFO] ✅ 'ytInitialData' encontrado para CodelyTV.
+2026-05-26 17:56:08,096 [INFO] 🛠️ Analizando 31 elementos para CodelyTV...
+2026-05-26 17:56:08,098 [INFO] 📊 10 videos/shorts válidos extraídos de CodelyTV.
+2026-05-26 17:56:08,124 [INFO] 📺 Procesando fuente de YouTube: Carlos Azaustre (https://www.youtube.com/@CarlosAzaustre/videos)
+2026-05-26 17:56:08,138 [INFO] ✅ 'ytInitialData' encontrado para Carlos Azaustre.
+2026-05-26 17:56:08,152 [INFO] 🛠️ Analizando 31 elementos para Carlos Azaustre...
+2026-05-26 17:56:08,154 [INFO] 📊 10 videos/shorts válidos extraídos de Carlos Azaustre.
+2026-05-26 17:56:08,185 [INFO] 📺 Procesando fuente de YouTube: El Pingüino de Mario Shorts (https://www.youtube.com/@elpinguinodemario?si=DvMsCTK74FQfFzwH)
+2026-05-26 17:56:08,214 [INFO] ✅ 'ytInitialData' encontrado para El Pingüino de Mario Shorts.
+2026-05-26 17:56:08,257 [INFO] 🛠️ Analizando 0 elementos para El Pingüino de Mario Shorts...
+2026-05-26 17:56:08,258 [INFO] 📊 0 videos/shorts válidos extraídos de El Pingüino de Mario Shorts.
+2026-05-26 17:56:08,258 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para El Pingüino de Mario Shorts. Intentando fallback con Regex...
+2026-05-26 17:56:08,290 [INFO] 📺 Procesando fuente de YouTube: Codigo facilito (https://www.youtube.com/@codigofacilito/videos)
+2026-05-26 17:56:08,304 [INFO] ✅ 'ytInitialData' encontrado para Codigo facilito.
+2026-05-26 17:56:08,329 [INFO] 🛠️ Analizando 31 elementos para Codigo facilito...
+2026-05-26 17:56:08,332 [INFO] 📊 10 videos/shorts válidos extraídos de Codigo facilito.
+2026-05-26 17:56:08,353 [INFO] 📺 Procesando fuente de YouTube: MoureDev (https://www.youtube.com/@mouredev/videos)
+2026-05-26 17:56:08,371 [INFO] ✅ 'ytInitialData' encontrado para MoureDev.
+2026-05-26 17:56:08,410 [INFO] 🛠️ Analizando 31 elementos para MoureDev...
+2026-05-26 17:56:08,410 [INFO] 📊 10 videos/shorts válidos extraídos de MoureDev.
+2026-05-26 17:56:08,683 [INFO] 📺 Procesando fuente de YouTube: El Pingüino de Mario (https://www.youtube.com/@elpinguinodemario?si=DvMsCTK74FQfFzwH)
+2026-05-26 17:56:08,763 [INFO] ✅ 'ytInitialData' encontrado para El Pingüino de Mario.
+2026-05-26 17:56:08,880 [INFO] 🛠️ Analizando 0 elementos para El Pingüino de Mario...
+2026-05-26 17:56:08,881 [INFO] 📊 0 videos/shorts válidos extraídos de El Pingüino de Mario.
+2026-05-26 17:56:08,881 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para El Pingüino de Mario. Intentando fallback con Regex...
+2026-05-26 17:56:09,015 [INFO] 📺 Procesando fuente de YouTube: CodelyTV Shorts (https://www.youtube.com/@CodelyTV/shorts)
+2026-05-26 17:56:09,045 [INFO] ✅ 'ytInitialData' encontrado para CodelyTV Shorts.
+2026-05-26 17:56:09,077 [INFO] 🛠️ Analizando 49 elementos para CodelyTV Shorts...
+2026-05-26 17:56:09,089 [INFO] 📊 0 videos/shorts válidos extraídos de CodelyTV Shorts.
+2026-05-26 17:56:09,090 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para CodelyTV Shorts. Intentando fallback con Regex...
+2026-05-26 17:56:09,122 [INFO] 📺 Procesando fuente de YouTube: Fazt Shorts (https://www.youtube.com/@FaztTech/shorts)
+2026-05-26 17:56:09,130 [INFO] ✅ 'ytInitialData' encontrado para Fazt Shorts.
+2026-05-26 17:56:09,154 [INFO] 🛠️ Analizando 49 elementos para Fazt Shorts...
+2026-05-26 17:56:09,155 [INFO] 📊 0 videos/shorts válidos extraídos de Fazt Shorts.
+2026-05-26 17:56:09,156 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para Fazt Shorts. Intentando fallback con Regex...
+2026-05-26 17:56:09,171 [INFO] 📺 Procesando fuente de YouTube: MoureDev Shorts (https://www.youtube.com/@mouredev/shorts)
+2026-05-26 17:56:09,182 [INFO] ✅ 'ytInitialData' encontrado para MoureDev Shorts.
+2026-05-26 17:56:09,201 [INFO] 🛠️ Analizando 49 elementos para MoureDev Shorts...
+2026-05-26 17:56:09,202 [INFO] 📊 0 videos/shorts válidos extraídos de MoureDev Shorts.
+2026-05-26 17:56:09,202 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para MoureDev Shorts. Intentando fallback con Regex...
+2026-05-26 17:56:09,211 [INFO] 📺 Procesando fuente de YouTube: Codigo facilito Shorts (https://www.youtube.com/@codigofacilito/shorts)
+2026-05-26 17:56:09,225 [INFO] ✅ 'ytInitialData' encontrado para Codigo facilito Shorts.
+2026-05-26 17:56:09,238 [INFO] 🛠️ Analizando 49 elementos para Codigo facilito Shorts...
+2026-05-26 17:56:09,238 [INFO] 📊 0 videos/shorts válidos extraídos de Codigo facilito Shorts.
+2026-05-26 17:56:09,238 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para Codigo facilito Shorts. Intentando fallback con Regex...
+2026-05-26 17:56:09,504 [INFO] 📺 Procesando fuente de YouTube: Midudev Shorts (https://www.youtube.com/@midudev/shorts)
+2026-05-26 17:56:09,531 [INFO] ✅ 'ytInitialData' encontrado para Midudev Shorts.
+2026-05-26 17:56:09,541 [INFO] 🛠️ Analizando 49 elementos para Midudev Shorts...
+2026-05-26 17:56:09,541 [INFO] 📊 0 videos/shorts válidos extraídos de Midudev Shorts.
+2026-05-26 17:56:09,541 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para Midudev Shorts. Intentando fallback con Regex...
+2026-05-26 17:56:09,719 [INFO] 📺 Procesando fuente de YouTube: FreeCodeCamp Shorts (https://www.youtube.com/@freecodecamp/shorts)
+2026-05-26 17:56:09,730 [INFO] ✅ 'ytInitialData' encontrado para FreeCodeCamp Shorts.
+2026-05-26 17:56:09,745 [INFO] 🛠️ Analizando 49 elementos para FreeCodeCamp Shorts...
+2026-05-26 17:56:09,746 [INFO] 📊 0 videos/shorts válidos extraídos de FreeCodeCamp Shorts.
+2026-05-26 17:56:09,746 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para FreeCodeCamp Shorts. Intentando fallback con Regex...
+2026-05-26 17:56:09,757 [INFO] 📺 Procesando fuente de YouTube: Clipset Shorts (https://www.youtube.com/@clipset/shorts)
+2026-05-26 17:56:09,767 [INFO] ✅ 'ytInitialData' encontrado para Clipset Shorts.
+2026-05-26 17:56:09,776 [INFO] 🛠️ Analizando 49 elementos para Clipset Shorts...
+2026-05-26 17:56:09,776 [INFO] 📊 0 videos/shorts válidos extraídos de Clipset Shorts.
+2026-05-26 17:56:09,777 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para Clipset Shorts. Intentando fallback con Regex...
+2026-05-26 17:56:09,787 [INFO] 📺 Procesando fuente de YouTube: EDteam Shorts (https://www.youtube.com/@EDteam/shorts)
+2026-05-26 17:56:09,797 [INFO] ✅ 'ytInitialData' encontrado para EDteam Shorts.
+2026-05-26 17:56:09,812 [INFO] 🛠️ Analizando 49 elementos para EDteam Shorts...
+2026-05-26 17:56:09,812 [INFO] 📊 0 videos/shorts válidos extraídos de EDteam Shorts.
+2026-05-26 17:56:09,812 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para EDteam Shorts. Intentando fallback con Regex...
+2026-05-26 17:56:09,829 [INFO] 📺 Procesando fuente de YouTube: Xataka Shorts (https://www.youtube.com/@xatakatv/shorts)
+2026-05-26 17:56:09,842 [INFO] ✅ 'ytInitialData' encontrado para Xataka Shorts.
+2026-05-26 17:56:09,859 [INFO] 🛠️ Analizando 49 elementos para Xataka Shorts...
+2026-05-26 17:56:09,859 [INFO] 📊 0 videos/shorts válidos extraídos de Xataka Shorts.
+2026-05-26 17:56:09,860 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para Xataka Shorts. Intentando fallback con Regex...
+2026-05-26 17:56:10,078 [INFO] 📺 Procesando fuente de YouTube: HolaMundo Shorts (https://www.youtube.com/@holamundodev/shorts)
+2026-05-26 17:56:10,101 [INFO] ✅ 'ytInitialData' encontrado para HolaMundo Shorts.
+2026-05-26 17:56:10,120 [INFO] 🛠️ Analizando 49 elementos para HolaMundo Shorts...
+2026-05-26 17:56:10,122 [INFO] 📊 0 videos/shorts válidos extraídos de HolaMundo Shorts.
+2026-05-26 17:56:10,123 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para HolaMundo Shorts. Intentando fallback con Regex...
+2026-05-26 17:56:10,190 [INFO] 📺 Procesando fuente de YouTube: Carlos Azaustre Shorts (https://www.youtube.com/@CarlosAzaustre/shorts)
+2026-05-26 17:56:10,217 [INFO] ✅ 'ytInitialData' encontrado para Carlos Azaustre Shorts.
+2026-05-26 17:56:10,232 [INFO] 🛠️ Analizando 49 elementos para Carlos Azaustre Shorts...
+2026-05-26 17:56:10,233 [INFO] 📊 0 videos/shorts válidos extraídos de Carlos Azaustre Shorts.
+2026-05-26 17:56:10,235 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para Carlos Azaustre Shorts. Intentando fallback con Regex...
+2026-05-26 17:56:10,328 [INFO] 📺 Procesando fuente de YouTube: Victor Robles Shorts (https://www.youtube.com/@victorroblesweb/shorts)
+2026-05-26 17:56:10,357 [INFO] ✅ 'ytInitialData' encontrado para Victor Robles Shorts.
+2026-05-26 17:56:10,388 [INFO] 🛠️ Analizando 49 elementos para Victor Robles Shorts...
+2026-05-26 17:56:10,389 [INFO] 📊 0 videos/shorts válidos extraídos de Victor Robles Shorts.
+2026-05-26 17:56:10,393 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para Victor Robles Shorts. Intentando fallback con Regex...
+2026-05-26 17:56:10,730 [INFO] ✅ Dashboard HTML generado con Chips y Vídeos.
+2026-05-26 17:56:10,730 [INFO] ☕ Sin cambios hoy.
+2026-05-26 18:01:39,425 [INFO] 📺 Procesando fuente de YouTube: Codigo facilito (https://www.youtube.com/@codigofacilito/videos)
+2026-05-26 18:01:39,437 [INFO] ✅ 'ytInitialData' encontrado para Codigo facilito.
+2026-05-26 18:01:39,452 [INFO] 🛠️ Analizando 31 elementos para Codigo facilito...
+2026-05-26 18:01:39,454 [INFO] 📊 10 videos/shorts válidos extraídos de Codigo facilito.
+2026-05-26 18:01:40,640 [INFO] 📺 Procesando fuente de YouTube: Midudev (https://www.youtube.com/@midudev/videos)
+2026-05-26 18:01:40,654 [INFO] ✅ 'ytInitialData' encontrado para Midudev.
+2026-05-26 18:01:40,675 [INFO] 🛠️ Analizando 31 elementos para Midudev...
+2026-05-26 18:01:40,676 [INFO] 📊 10 videos/shorts válidos extraídos de Midudev.
+2026-05-26 18:01:40,833 [INFO] 📺 Procesando fuente de YouTube: Xataka (https://www.youtube.com/@xatakatv/videos)
+2026-05-26 18:01:40,852 [INFO] ✅ 'ytInitialData' encontrado para Xataka.
+2026-05-26 18:01:40,890 [INFO] 🛠️ Analizando 31 elementos para Xataka...
+2026-05-26 18:01:40,891 [INFO] 📊 10 videos/shorts válidos extraídos de Xataka.
+2026-05-26 18:01:41,825 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-26 18:01:42,771 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent "HTTP/1.1 400 Bad Request"
+2026-05-26 18:01:42,779 [ERROR] ❌ Error en obtener_recap_semanal_ia: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}
+2026-05-26 18:01:42,811 [INFO] ✅ Dashboard HTML generado con Chips y Vídeos.
+2026-05-26 18:01:43,878 [INFO] ✅ 1 noticias nuevas procesadas.
+2026-05-26 18:07:15,407 [INFO] 📺 Procesando fuente de YouTube: Midudev (https://www.youtube.com/@midudev/videos)
+2026-05-26 18:07:15,417 [INFO] ✅ 'ytInitialData' encontrado para Midudev.
+2026-05-26 18:07:15,428 [INFO] 🛠️ Analizando 31 elementos para Midudev...
+2026-05-26 18:07:15,429 [INFO] 📊 10 videos/shorts válidos extraídos de Midudev.
+2026-05-26 18:07:15,889 [INFO] 📺 Procesando fuente de YouTube: Carlos Azaustre (https://www.youtube.com/@CarlosAzaustre/videos)
+2026-05-26 18:07:15,901 [INFO] ✅ 'ytInitialData' encontrado para Carlos Azaustre.
+2026-05-26 18:07:15,916 [INFO] 🛠️ Analizando 31 elementos para Carlos Azaustre...
+2026-05-26 18:07:15,918 [INFO] 📊 10 videos/shorts válidos extraídos de Carlos Azaustre.
+2026-05-26 18:07:16,145 [INFO] 📺 Procesando fuente de YouTube: FreeCodeCamp (https://www.youtube.com/@freecodecamp/videos)
+2026-05-26 18:07:16,157 [INFO] ✅ 'ytInitialData' encontrado para FreeCodeCamp.
+2026-05-26 18:07:16,172 [INFO] 🛠️ Analizando 31 elementos para FreeCodeCamp...
+2026-05-26 18:07:16,173 [INFO] 📊 10 videos/shorts válidos extraídos de FreeCodeCamp.
+2026-05-26 18:07:16,535 [INFO] 📺 Procesando fuente de YouTube: CodelyTV (https://www.youtube.com/@CodelyTV/videos)
+2026-05-26 18:07:16,549 [INFO] ✅ 'ytInitialData' encontrado para CodelyTV.
+2026-05-26 18:07:16,568 [INFO] 🛠️ Analizando 31 elementos para CodelyTV...
+2026-05-26 18:07:16,569 [INFO] 📊 10 videos/shorts válidos extraídos de CodelyTV.
+2026-05-26 18:07:16,850 [INFO] 📺 Procesando fuente de YouTube: HolaMundo (https://www.youtube.com/@holamundodev/videos)
+2026-05-26 18:07:16,862 [INFO] ✅ 'ytInitialData' encontrado para HolaMundo.
+2026-05-26 18:07:16,876 [INFO] 🛠️ Analizando 31 elementos para HolaMundo...
+2026-05-26 18:07:16,880 [INFO] 📊 10 videos/shorts válidos extraídos de HolaMundo.
+2026-05-26 18:07:16,915 [INFO] 📺 Procesando fuente de YouTube: EDteam (https://www.youtube.com/@EDteam/videos)
+2026-05-26 18:07:16,931 [INFO] ✅ 'ytInitialData' encontrado para EDteam.
+2026-05-26 18:07:16,969 [INFO] 🛠️ Analizando 31 elementos para EDteam...
+2026-05-26 18:07:16,970 [INFO] 📊 10 videos/shorts válidos extraídos de EDteam.
+2026-05-26 18:07:17,124 [INFO] 📺 Procesando fuente de YouTube: Fazt (https://www.youtube.com/@FaztTech/videos)
+2026-05-26 18:07:17,133 [INFO] ✅ 'ytInitialData' encontrado para Fazt.
+2026-05-26 18:07:17,144 [INFO] 🛠️ Analizando 31 elementos para Fazt...
+2026-05-26 18:07:17,145 [INFO] 📊 10 videos/shorts válidos extraídos de Fazt.
+2026-05-26 18:07:17,247 [INFO] 📺 Procesando fuente de YouTube: Programa Con Arnau Shorts (https://youtube.com/@progconarnau?si=AFBTWjGeo-UpuJdE)
+2026-05-26 18:07:17,249 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para Programa Con Arnau Shorts. Intentando fallback con Regex...
+2026-05-26 18:07:17,255 [INFO] 📺 Procesando fuente de YouTube: Victor Robles (https://www.youtube.com/@victorroblesweb/videos)
+2026-05-26 18:07:17,268 [INFO] ✅ 'ytInitialData' encontrado para Victor Robles.
+2026-05-26 18:07:17,285 [INFO] 🛠️ Analizando 31 elementos para Victor Robles...
+2026-05-26 18:07:17,286 [INFO] 📊 10 videos/shorts válidos extraídos de Victor Robles.
+2026-05-26 18:07:17,293 [INFO] 📺 Procesando fuente de YouTube: Programa Con Arnau (https://youtube.com/@progconarnau?si=AFBTWjGeo-UpuJdE)
+2026-05-26 18:07:17,295 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para Programa Con Arnau. Intentando fallback con Regex...
+2026-05-26 18:07:17,439 [INFO] 📺 Procesando fuente de YouTube: Pelado Nerd (https://www.youtube.com/@PeladoNerd/videos)
+2026-05-26 18:07:17,459 [INFO] ✅ 'ytInitialData' encontrado para Pelado Nerd.
+2026-05-26 18:07:17,480 [INFO] 🛠️ Analizando 31 elementos para Pelado Nerd...
+2026-05-26 18:07:17,481 [INFO] 📊 10 videos/shorts válidos extraídos de Pelado Nerd.
+2026-05-26 18:07:17,502 [INFO] 📺 Procesando fuente de YouTube: MoureDev (https://www.youtube.com/@mouredev/videos)
+2026-05-26 18:07:17,525 [INFO] ✅ 'ytInitialData' encontrado para MoureDev.
+2026-05-26 18:07:17,560 [INFO] 🛠️ Analizando 31 elementos para MoureDev...
+2026-05-26 18:07:17,561 [INFO] 📊 10 videos/shorts válidos extraídos de MoureDev.
+2026-05-26 18:07:17,673 [INFO] 📺 Procesando fuente de YouTube: Pelado Nerd Shorts (https://www.youtube.com/@PeladoNerd/shorts)
+2026-05-26 18:07:17,679 [INFO] ✅ 'ytInitialData' encontrado para Pelado Nerd Shorts.
+2026-05-26 18:07:17,686 [INFO] 🛠️ Analizando 20 elementos para Pelado Nerd Shorts...
+2026-05-26 18:07:17,687 [INFO] 📊 10 videos/shorts válidos extraídos de Pelado Nerd Shorts.
+2026-05-26 18:07:17,697 [INFO] 📺 Procesando fuente de YouTube: Codigo facilito (https://www.youtube.com/@codigofacilito/videos)
+2026-05-26 18:07:17,717 [INFO] ✅ 'ytInitialData' encontrado para Codigo facilito.
+2026-05-26 18:07:17,743 [INFO] 🛠️ Analizando 31 elementos para Codigo facilito...
+2026-05-26 18:07:17,744 [INFO] 📊 10 videos/shorts válidos extraídos de Codigo facilito.
+2026-05-26 18:07:17,779 [INFO] 📺 Procesando fuente de YouTube: Clipset (https://www.youtube.com/@clipset/videos)
+2026-05-26 18:07:17,789 [INFO] ✅ 'ytInitialData' encontrado para Clipset.
+2026-05-26 18:07:17,799 [INFO] 🛠️ Analizando 31 elementos para Clipset...
+2026-05-26 18:07:17,800 [INFO] 📊 10 videos/shorts válidos extraídos de Clipset.
+2026-05-26 18:07:17,838 [INFO] 📺 Procesando fuente de YouTube: Xataka (https://www.youtube.com/@xatakatv/videos)
+2026-05-26 18:07:17,847 [INFO] ✅ 'ytInitialData' encontrado para Xataka.
+2026-05-26 18:07:17,858 [INFO] 🛠️ Analizando 31 elementos para Xataka...
+2026-05-26 18:07:17,859 [INFO] 📊 10 videos/shorts válidos extraídos de Xataka.
+2026-05-26 18:07:18,264 [INFO] 📺 Procesando fuente de YouTube: El Pingüino de Mario Shorts (https://www.youtube.com/@elpinguinodemario?si=DvMsCTK74FQfFzwH)
+2026-05-26 18:07:18,294 [INFO] ✅ 'ytInitialData' encontrado para El Pingüino de Mario Shorts.
+2026-05-26 18:07:18,364 [INFO] 🛠️ Analizando 0 elementos para El Pingüino de Mario Shorts...
+2026-05-26 18:07:18,364 [INFO] 📊 0 videos/shorts válidos extraídos de El Pingüino de Mario Shorts.
+2026-05-26 18:07:18,365 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para El Pingüino de Mario Shorts. Intentando fallback con Regex...
+2026-05-26 18:07:18,415 [INFO] 📺 Procesando fuente de YouTube: MoureDev Shorts (https://www.youtube.com/@mouredev/shorts)
+2026-05-26 18:07:18,427 [INFO] ✅ 'ytInitialData' encontrado para MoureDev Shorts.
+2026-05-26 18:07:18,441 [INFO] 🛠️ Analizando 49 elementos para MoureDev Shorts...
+2026-05-26 18:07:18,442 [INFO] 📊 10 videos/shorts válidos extraídos de MoureDev Shorts.
+2026-05-26 18:07:18,955 [INFO] 📺 Procesando fuente de YouTube: Carlos Azaustre Shorts (https://www.youtube.com/@CarlosAzaustre/shorts)
+2026-05-26 18:07:18,970 [INFO] ✅ 'ytInitialData' encontrado para Carlos Azaustre Shorts.
+2026-05-26 18:07:18,978 [INFO] 🛠️ Analizando 49 elementos para Carlos Azaustre Shorts...
+2026-05-26 18:07:18,979 [INFO] 📊 10 videos/shorts válidos extraídos de Carlos Azaustre Shorts.
+2026-05-26 18:07:18,985 [INFO] 📺 Procesando fuente de YouTube: Fazt Shorts (https://www.youtube.com/@FaztTech/shorts)
+2026-05-26 18:07:18,994 [INFO] ✅ 'ytInitialData' encontrado para Fazt Shorts.
+2026-05-26 18:07:19,003 [INFO] 🛠️ Analizando 49 elementos para Fazt Shorts...
+2026-05-26 18:07:19,004 [INFO] 📊 10 videos/shorts válidos extraídos de Fazt Shorts.
+2026-05-26 18:07:19,113 [INFO] 📺 Procesando fuente de YouTube: Codigo facilito Shorts (https://www.youtube.com/@codigofacilito/shorts)
+2026-05-26 18:07:19,132 [INFO] ✅ 'ytInitialData' encontrado para Codigo facilito Shorts.
+2026-05-26 18:07:19,146 [INFO] 🛠️ Analizando 49 elementos para Codigo facilito Shorts...
+2026-05-26 18:07:19,148 [INFO] 📊 10 videos/shorts válidos extraídos de Codigo facilito Shorts.
+2026-05-26 18:07:19,276 [INFO] 📺 Procesando fuente de YouTube: El Pingüino de Mario (https://www.youtube.com/@elpinguinodemario?si=DvMsCTK74FQfFzwH)
+2026-05-26 18:07:19,318 [INFO] ✅ 'ytInitialData' encontrado para El Pingüino de Mario.
+2026-05-26 18:07:19,357 [INFO] 🛠️ Analizando 0 elementos para El Pingüino de Mario...
+2026-05-26 18:07:19,357 [INFO] 📊 0 videos/shorts válidos extraídos de El Pingüino de Mario.
+2026-05-26 18:07:19,359 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para El Pingüino de Mario. Intentando fallback con Regex...
+2026-05-26 18:07:19,461 [INFO] 📺 Procesando fuente de YouTube: CodelyTV Shorts (https://www.youtube.com/@CodelyTV/shorts)
+2026-05-26 18:07:19,474 [INFO] ✅ 'ytInitialData' encontrado para CodelyTV Shorts.
+2026-05-26 18:07:19,489 [INFO] 🛠️ Analizando 49 elementos para CodelyTV Shorts...
+2026-05-26 18:07:19,490 [INFO] 📊 10 videos/shorts válidos extraídos de CodelyTV Shorts.
+2026-05-26 18:07:19,501 [INFO] 📺 Procesando fuente de YouTube: HolaMundo Shorts (https://www.youtube.com/@holamundodev/shorts)
+2026-05-26 18:07:19,517 [INFO] ✅ 'ytInitialData' encontrado para HolaMundo Shorts.
+2026-05-26 18:07:19,528 [INFO] 🛠️ Analizando 49 elementos para HolaMundo Shorts...
+2026-05-26 18:07:19,529 [INFO] 📊 10 videos/shorts válidos extraídos de HolaMundo Shorts.
+2026-05-26 18:07:19,539 [INFO] 📺 Procesando fuente de YouTube: Victor Robles Shorts (https://www.youtube.com/@victorroblesweb/shorts)
+2026-05-26 18:07:19,549 [INFO] ✅ 'ytInitialData' encontrado para Victor Robles Shorts.
+2026-05-26 18:07:19,559 [INFO] 🛠️ Analizando 49 elementos para Victor Robles Shorts...
+2026-05-26 18:07:19,560 [INFO] 📊 10 videos/shorts válidos extraídos de Victor Robles Shorts.
+2026-05-26 18:07:19,679 [INFO] 📺 Procesando fuente de YouTube: Clipset Shorts (https://www.youtube.com/@clipset/shorts)
+2026-05-26 18:07:19,706 [INFO] ✅ 'ytInitialData' encontrado para Clipset Shorts.
+2026-05-26 18:07:19,745 [INFO] 🛠️ Analizando 49 elementos para Clipset Shorts...
+2026-05-26 18:07:19,748 [INFO] 📊 10 videos/shorts válidos extraídos de Clipset Shorts.
+2026-05-26 18:07:19,758 [INFO] 📺 Procesando fuente de YouTube: FreeCodeCamp Shorts (https://www.youtube.com/@freecodecamp/shorts)
+2026-05-26 18:07:19,772 [INFO] ✅ 'ytInitialData' encontrado para FreeCodeCamp Shorts.
+2026-05-26 18:07:19,788 [INFO] 🛠️ Analizando 49 elementos para FreeCodeCamp Shorts...
+2026-05-26 18:07:19,790 [INFO] 📊 10 videos/shorts válidos extraídos de FreeCodeCamp Shorts.
+2026-05-26 18:07:19,799 [INFO] 📺 Procesando fuente de YouTube: Midudev Shorts (https://www.youtube.com/@midudev/shorts)
+2026-05-26 18:07:19,815 [INFO] ✅ 'ytInitialData' encontrado para Midudev Shorts.
+2026-05-26 18:07:19,838 [INFO] 🛠️ Analizando 49 elementos para Midudev Shorts...
+2026-05-26 18:07:19,840 [INFO] 📊 10 videos/shorts válidos extraídos de Midudev Shorts.
+2026-05-26 18:07:19,845 [INFO] 📺 Procesando fuente de YouTube: EDteam Shorts (https://www.youtube.com/@EDteam/shorts)
+2026-05-26 18:07:19,862 [INFO] ✅ 'ytInitialData' encontrado para EDteam Shorts.
+2026-05-26 18:07:19,871 [INFO] 🛠️ Analizando 49 elementos para EDteam Shorts...
+2026-05-26 18:07:19,872 [INFO] 📊 10 videos/shorts válidos extraídos de EDteam Shorts.
+2026-05-26 18:07:19,879 [INFO] 📺 Procesando fuente de YouTube: Xataka Shorts (https://www.youtube.com/@xatakatv/shorts)
+2026-05-26 18:07:19,894 [INFO] ✅ 'ytInitialData' encontrado para Xataka Shorts.
+2026-05-26 18:07:19,907 [INFO] 🛠️ Analizando 49 elementos para Xataka Shorts...
+2026-05-26 18:07:19,908 [INFO] 📊 10 videos/shorts válidos extraídos de Xataka Shorts.
+2026-05-26 18:07:20,241 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-26 18:07:20,798 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent "HTTP/1.1 400 Bad Request"
+2026-05-26 18:07:20,801 [ERROR] ❌ Error en obtener_recap_semanal_ia: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}
+2026-05-26 18:07:20,826 [INFO] ✅ Dashboard HTML generado con Chips y Vídeos.
+2026-05-26 18:07:21,803 [INFO] ✅ 1 noticias nuevas procesadas.
+2026-05-26 18:16:08,664 [INFO] 🗞️ Generando Recap con modelo: gemini-2.0-flash-lite
+2026-05-26 18:16:08,665 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-26 18:16:23,198 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent "HTTP/1.1 400 Bad Request"
+2026-05-26 18:16:23,208 [ERROR] ❌ Error Recap (gemini-2.0-flash-lite): 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}
+2026-05-26 18:16:23,214 [INFO] 🗞️ Generando Recap con modelo: gemini-2.0-flash
+2026-05-26 18:16:23,217 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-26 18:16:23,671 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 400 Bad Request"
+2026-05-26 18:16:23,673 [ERROR] ❌ Error Recap (gemini-2.0-flash): 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}
+2026-05-26 18:16:23,677 [INFO] 🗞️ Generando Recap con modelo: gemini-1.5-flash
+2026-05-26 18:16:23,680 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-26 18:16:24,032 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent "HTTP/1.1 400 Bad Request"
+2026-05-26 18:16:24,036 [ERROR] ❌ Error Recap (gemini-1.5-flash): 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}
+2026-05-26 18:16:24,038 [INFO] 🗞️ Generando Recap con modelo: gemini-1.5-flash-8b
+2026-05-26 18:16:24,040 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-26 18:16:24,216 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-8b:generateContent "HTTP/1.1 400 Bad Request"
+2026-05-26 18:16:24,218 [ERROR] ❌ Error Recap (gemini-1.5-flash-8b): 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}
+2026-05-26 18:16:24,228 [INFO] ✅ Dashboard HTML generado con Chips y Vídeos.
+2026-05-26 18:16:29,842 [INFO] ✅ 4 noticias nuevas procesadas.

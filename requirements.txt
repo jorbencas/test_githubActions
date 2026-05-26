@@ -8,3 +8,5 @@ aiohttp
 playwright
 Pillow
 html2text
+mtranslate
+python-dotenv

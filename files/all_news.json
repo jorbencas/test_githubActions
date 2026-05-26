@@ -1,5 +1,85 @@
 [
     {
+        "titulo": "Deploying OpenWebUI Local AI Interface on Ubuntu 24.04",
+        "enlace": "https://dev.to/vultr/deploying-openwebui-local-ai-interface-on-ubuntu-2404-553d",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "26/05",
+        "ts": "2026-05-26T18:16:06.760255"
+    },
+    {
+        "titulo": "Usage-Based Billing for AI Agents with FastAPI and Kong",
+        "enlace": "https://dev.to/konghq/usage-based-billing-for-ai-agents-with-fastapi-and-kong-b33",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/multi-unicorn-b44d6f8c23cdd00964192bedc38af3e82463978aa611b4365bd33a0f1f4f3e97.svg",
+        "f": "26/05",
+        "ts": "2026-05-26T18:16:06.760515"
+    },
+    {
+        "titulo": "OpenClaw vs CraftBot: Which Local AI Agent Is Right for You?",
+        "enlace": "https://dev.to/harsh2644/openclaw-vs-craftbot-which-local-ai-agent-is-right-for-you-47k9",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/exploding-head-daceb38d627e6ae9b730f36a1e390fca556a4289d5a41abb2c35068ad3e2c4b5.svg",
+        "f": "26/05",
+        "ts": "2026-05-26T18:16:06.761095"
+    },
+    {
+        "titulo": "Run OpenAI Codex CLI on Claude, Gemini, or Llama — in 50 lines of C#",
+        "enlace": "https://dev.to/rkttu/run-openai-codex-cli-on-claude-gemini-or-llama-in-50-lines-of-c-2418",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "26/05",
+        "ts": "2026-05-26T18:16:06.761386"
+    },
+    {
+        "titulo": "\"Yo te resuelvo el problema y tú me pagas\". Steve Jobs pagó 100.000 dólares por un logo que dividió a los expertos",
+        "enlace": "https://www.applesfera.com/curiosidades/yo-te-resuelvo-problema-tu-me-pagas-steve-jobs-pago-100-000-dolares-logo-que-dividio-a-expertos",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "26/05",
+        "ts": "2026-05-26T18:07:13.053299"
+    },
+    {
+        "titulo": "This startup is betting India’s gig economy can train the world’s robots",
+        "enlace": "https://techcrunch.com/2026/05/26/human-archive-taps-into-indias-services-startups-to-collect-data-for-physical-ai/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "26/05",
+        "ts": "2026-05-26T18:01:22.559856"
+    },
+    {
+        "titulo": "De alojar un sitio web a potenciar un proyecto digital: qué hosting necesitas cuando tu proyecto crece",
+        "enlace": "https://www.xataka.com/n/alojar-sitio-web-a-potenciar-proyecto-digital-que-hosting-necesitas-cuando-tu-proyecto-crece?utm_source=genbeta&utm_medium=network&utm_campaign=repost",
+        "fuente": "Genbeta",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "26/05",
+        "ts": "2026-05-26T17:40:25.141533"
+    },
+    {
+        "titulo": "Esta es la propuesta de bajada de ratios de Educación: casi inexistente en Primaria y mínimo en la ESO",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/05/26/propuesta-bajada-ratios-educacion-130681375.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "26/05",
+        "ts": "2026-05-26T17:40:26.854176"
+    },
+    {
         "titulo": "Análisis de 007 First Light, el juego que James Bond merecía y un emocionante nuevo comienzo para el personaje",
         "enlace": "https://www.hobbyconsolas.com/videojuegos/analisis-007-first-light-juego-que-james-bond-merecia-un-emocionante-nuevo-comienzo-para-personaje_6974656_0.html",
         "fuente": "HobbyConsolas",
@@ -6039,102 +6119,6 @@
         "raw": "la semana santa en las carreteras valencianas: más accidentes mortales y exceso de alcohol al volante",
         "imagen_url_original": "",
         "ts": "2026-03-27T18:29:54.414451",
-        "f": "27/03"
-    },
-    {
-        "titulo": "Ya hay sentencia de la secta de Vistabella: condenados a penas menores cinco de los seis acusados de agresiones sexuales",
-        "enlace": "https://www.levante-emv.com/sucesos/2026/03/27/hay-sentencia-secta-sexual-vistabella-128494291.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-27T18:29:54.414490",
-        "badge": "Tech",
-        "raw": "ya hay sentencia de la secta de vistabella: condenados a penas menores cinco de los seis acusados de agresiones sexuales",
-        "imagen_url_original": "",
-        "ts": "2026-03-27T18:29:54.414491",
-        "f": "27/03"
-    },
-    {
-        "titulo": "Decathlon inaugura su nueva tienda en el Centro Comercial Arena",
-        "enlace": "https://www.levante-emv.com/deportes/2026/03/27/decathlon-inaugura-nueva-tienda-centro-bc-128501319.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-27T18:29:54.414568",
-        "badge": "Tech",
-        "raw": "decathlon inaugura su nueva tienda en el centro comercial arena",
-        "imagen_url_original": "",
-        "ts": "2026-03-27T18:29:54.414570",
-        "f": "27/03"
-    },
-    {
-        "titulo": "El astrofísico mexicano José Eduardo Méndez Delgado, exbecario de Fundación Carolina, Premio Princesa de Girona Internacional 2026 en Investigación",
-        "enlace": "https://www.fundacioncarolina.es/el-astrofisico-mexicano-jose-eduardo-mendez-delgado-exbecario-de-fundacion-carolina-premio-princesa-de-girona-internacional-2026-en-investigacion/",
-        "fuente": "Fundación Carolina",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-27T18:29:55.284451",
-        "badge": "Beca",
-        "raw": "el astrofísico mexicano josé eduardo méndez delgado, exbecario de fundación carolina, premio princesa de girona internacional 2026 en investigación",
-        "imagen_url_original": "",
-        "ts": "2026-03-27T18:29:55.284465",
-        "f": "27/03"
-    },
-    {
-        "titulo": "La nueva Siri será más inteligente. Y si no, iOS 27 permitirá conectarla a Claude, Gemini o ChatGPT",
-        "enlace": "https://www.applesfera.com/rumores/nueva-siri-sera-inteligente-no-ios-27-permitira-conectarla-a-claude-gemini-chatgpt",
-        "fuente": "Applesfera",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-27T18:29:55.925721",
-        "badge": "Tech",
-        "raw": "la nueva siri será más inteligente. y si no, ios 27 permitirá conectarla a claude, gemini o chatgpt",
-        "imagen_url_original": "",
-        "ts": "2026-03-27T18:29:55.925732",
-        "f": "27/03"
-    },
-    {
-        "titulo": "Esconder el Face ID bajo la pantalla se le está haciendo bola a Apple. La Isla Dinámica asegura su supervivencia en el iPhone 18 Pro",
-        "enlace": "https://www.applesfera.com/rumores/sueno-iphone-pantalla-infinita-acaba-chocar-muro-isla-dinamica-se-niega-a-desaparecer",
-        "fuente": "Applesfera",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-27T18:29:55.925806",
-        "badge": "Tech",
-        "raw": "esconder el face id bajo la pantalla se le está haciendo bola a apple. la isla dinámica asegura su supervivencia en el iphone 18 pro",
-        "imagen_url_original": "",
-        "ts": "2026-03-27T18:29:55.925807",
-        "f": "27/03"
-    },
-    {
-        "titulo": "El iPhone Air sigue peleando por encontrar su hueco. Una rebaja tan inusual como esta huele a estrategia para vaciar los estantes",
-        "enlace": "https://www.applesfera.com/iphone/iphone-air-sigue-peleando-encontrar-su-hueco-rebaja-inusual-como-esta-huele-a-estrategia-para-vaciar-estantes",
-        "fuente": "Applesfera",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-27T18:29:55.925913",
-        "badge": "Tech",
-        "raw": "el iphone air sigue peleando por encontrar su hueco. una rebaja tan inusual como esta huele a estrategia para vaciar los estantes",
-        "imagen_url_original": "",
-        "ts": "2026-03-27T18:29:55.925914",
-        "f": "27/03"
-    },
-    {
-        "titulo": "Apple no dará ni un paso atrás con Liquid Glass. El polémico diseño no admitirá medias tintas en el próximo iOS 27",
-        "enlace": "https://www.applesfera.com/ios/apple-no-dara-paso-atras-liquid-glass-polemico-diseno-no-admitira-medias-tintas-proximo-ios-27",
-        "fuente": "Applesfera",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-27T18:29:55.925957",
-        "badge": "Tech",
-        "raw": "apple no dará ni un paso atrás con liquid glass. el polémico diseño no admitirá medias tintas en el próximo ios 27",
-        "imagen_url_original": "",
-        "ts": "2026-03-27T18:29:55.925958",
-        "f": "27/03"
-    },
-    {
-        "titulo": "La relación de Apple con los videojuegos empezó hace 50 años y nunca tuvo éxito. Ahora las tornas han cambiado",
-        "enlace": "https://www.applesfera.com/juegos-os-x/relacion-apple-videojuegos-empezo-hace-50-anos-nunca-tuvo-exito-ahora-tornas-han-cambiado",
-        "fuente": "Applesfera",
-        "tipo": "noticia",
-        "ultima_verificacion": "2026-03-27T18:29:55.925997",
-        "badge": "Tech",
-        "raw": "la relación de apple con los videojuegos empezó hace 50 años y nunca tuvo éxito. ahora las tornas han cambiado",
-        "imagen_url_original": "",
-        "ts": "2026-03-27T18:29:55.925997",
         "f": "27/03"
     }
 ]

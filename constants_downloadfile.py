@@ -9,7 +9,9 @@ CONFIG = {
     "DOWNLOADER_API_TOKEN": os.getenv("DOWNLOADER_API_TOKEN"),
     "FOLDER": "files",
     "IMAGES_FOLDER": "images",
-    "IMAGES_PATH_PREFIX": "public/optimizado"
+    "IMAGES_PATH_PREFIX": "public/optimizado",
+    "AI_MODELS": ["gemini-2.0-flash-lite", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-flash-8b"],
+    "IMAGE_MODELS": ["gemini-3-flash-image", "imagen-3.0-generate-002"] # Fallback para imagen
 }
 
 URL_API_DESCARGA = "https://testactions1github-api-python.hf.space/download"
