@@ -874,6 +874,7 @@
 2026-05-28 16:56:59,719 [INFO] 📧 Email enviado con éxito: 🔥 Así ha cambiado Internet en los 20 años transcurridos d... y 26 más
 2026-05-28 16:57:01,604 [INFO] ✅ Telegram con voz humana enviado
 2026-05-28 16:57:01,610 [INFO] ✅ 27 noticias nuevas procesadas.
+<<<<<<< HEAD
 2026-05-28 17:10:56,662 [INFO] 📺 Procesando fuente de YouTube: MoureDev Shorts (https://www.youtube.com/@mouredev/shorts)
 2026-05-28 17:10:56,666 [INFO] ✅ 'ytInitialData' encontrado para MoureDev Shorts.
 2026-05-28 17:10:56,670 [INFO] 🛠️ Analizando 49 elementos para MoureDev Shorts...
@@ -1196,3 +1197,30 @@
 2026-05-28 17:24:43,188 [INFO] 📧 Email enviado con éxito: 🔥 Empieza la época de festivales y yo tengo una cosa clar... y 1 más
 2026-05-28 17:24:51,207 [INFO] ✅ Telegram con voz humana enviado
 2026-05-28 17:24:51,215 [INFO] ✅ 2 noticias nuevas procesadas.
+=======
+2026-05-28 19:29:01,994 [INFO] 🌐 Traduciendo 5 noticias nuevas...
+2026-05-28 19:29:01,994 [INFO] 🌐 Traduciendo 5 títulos con gemini-1.5-flash...
+2026-05-28 19:29:01,994 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-28 19:29:17,624 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent "HTTP/1.1 400 Bad Request"
+2026-05-28 19:29:17,625 [ERROR] ❌ Error traducción batch (gemini-1.5-flash): 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}
+2026-05-28 19:29:17,625 [INFO] 🌐 Traduciendo 5 títulos con gemini-1.5-pro...
+2026-05-28 19:29:17,626 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-28 19:29:22,765 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent "HTTP/1.1 400 Bad Request"
+2026-05-28 19:29:22,768 [ERROR] ❌ Error traducción batch (gemini-1.5-pro): 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}
+2026-05-28 19:29:22,768 [INFO] 🌐 Traduciendo 5 títulos con gemini-2.0-flash-lite...
+2026-05-28 19:29:22,768 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-28 19:29:27,842 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent "HTTP/1.1 400 Bad Request"
+2026-05-28 19:29:27,843 [ERROR] ❌ Error traducción batch (gemini-2.0-flash-lite): 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}
+2026-05-28 19:29:27,843 [INFO] 🌐 Traduciendo 5 títulos con gemini-2.0-flash...
+2026-05-28 19:29:27,843 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-28 19:29:29,194 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 400 Bad Request"
+2026-05-28 19:29:29,196 [ERROR] ❌ Error traducción batch (gemini-2.0-flash): 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}
+2026-05-28 19:29:29,313 [INFO] 🗞️ Generando Recap con modelo: gemini-1.5-flash
+2026-05-28 19:29:29,313 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-28 19:29:30,280 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent "HTTP/1.1 400 Bad Request"
+2026-05-28 19:29:30,295 [ERROR] 🔑 API KEY INVÁLIDA. Configura GEMINI_API_KEY correctamente.
+2026-05-28 19:29:30,302 [INFO] ✅ Dashboard HTML generado con Chips y Vídeos.
+2026-05-28 19:29:31,064 [INFO] ✅ 5 noticias nuevas procesadas.
+2026-05-28 19:30:21,067 [INFO] ✅ Dashboard HTML generado con Chips y Vídeos.
+2026-05-28 19:30:21,068 [INFO] ☕ Sin cambios hoy.
+>>>>>>> f61b6c8 (fixing gmini models)

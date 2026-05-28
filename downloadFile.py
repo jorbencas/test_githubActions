@@ -104,23 +104,45 @@ class ScraperPro:
             if "yt" in info:
                 logger.info(f"📺 Procesando fuente de YouTube: {nombre} ({target})")
                 # --- MEJORA YOUTUBE: BUSCAR EL JSON INTERNO ---
-                # Regex más flexible para ytInitialData
+                # Regex más flexible para ytInitialData y alternativas
                 json_data = re.search(r'ytInitialData\s*=\s*(\{.*?\});', html_text)
                 if not json_data:
                     json_data = re.search(r'window\[["\']ytInitialData["\']\]\s*=\s*(\{.*?\});', html_text)
                 
+                # Intentamos también ytInitialPlayerResponse que a veces tiene info útil
+                if not json_data:
+                    json_data = re.search(r'ytInitialPlayerResponse\s*=\s*(\{.*?\});', html_text)
+
                 if json_data:
-                    logger.info(f"✅ 'ytInitialData' encontrado para {nombre}.")
+                    logger.info(f"✅ JSON de YouTube encontrado para {nombre}.")
                     try:
                         data = json.loads(json_data.group(1))
                         # Navegamos por la estructura compleja de YouTube
                         tabs = data.get('contents', {}).get('twoColumnBrowseResultsRenderer', {}).get('tabs', [])
                         video_list = []
                         for tab in tabs:
-                            content = tab.get('tabRenderer', {}).get('content', {})
-                            if 'richGridRenderer' in content:
-                                video_list = content['richGridRenderer'].get('contents', [])
+                            tab_content = tab.get('tabRenderer', {}).get('content', {})
+                            # Caso 1: richGridRenderer (Nuevo diseño)
+                            if 'richGridRenderer' in tab_content:
+                                video_list = tab_content['richGridRenderer'].get('contents', [])
                                 break
+                            # Caso 2: sectionListRenderer (Layout clásico o móvil)
+                            elif 'sectionListRenderer' in tab_content:
+                                sections = tab_content['sectionListRenderer'].get('contents', [])
+                                for section in sections:
+                                    item_section = section.get('itemSectionRenderer', {}).get('contents', [])
+                                    for item in item_section:
+                                        if 'gridRenderer' in item:
+                                            video_list = item['gridRenderer'].get('items', [])
+                                            break
+                                if video_list: break
+
+                        if not video_list:
+                            # Intento desesperado: buscar cualquier lista de videos en el JSON
+                            str_data = json.dumps(data)
+                            if 'videoRenderer' in str_data or 'lockupViewModel' in str_data:
+                                logger.info(f"🔎 Estructura no estándar en {nombre}, usando búsqueda profunda...")
+                                # Aquí podríamos implementar una búsqueda recursiva, pero por ahora confiamos en el fallback regex
                         
                         logger.info(f"🛠️ Analizando {len(video_list)} elementos para {nombre}...")
                         for item in video_list[:10]: # Aumentamos un poco el rango para encontrar videos válidos

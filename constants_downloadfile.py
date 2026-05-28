@@ -10,7 +10,7 @@ CONFIG = {
     "FOLDER": "files",
     "IMAGES_FOLDER": "images",
     "IMAGES_PATH_PREFIX": "public/optimizado",
-    "AI_MODELS": ["gemini-2.0-flash", "gemini-2.0-flash-lite", "gemini-1.5-flash", "gemini-1.5-pro-latest"],
+    "AI_MODELS": ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-2.0-flash-lite", "gemini-2.0-flash"],
     "IMAGE_MODELS": ["imagen-3.0-generate-001", "gemini-1.5-flash"] # Fallback para imagen
 }
 

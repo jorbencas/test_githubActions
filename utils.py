@@ -84,6 +84,12 @@ async def obtener_recap_semanal_ia(noticias, client):
         try:
             response = client.models.generate_content(model=modelo, contents=prompt)
             raw_text = response.text if response.text else "{}"
+            # Extracción robusta de JSON con Regex
+            match = re.search(r'(\{.*\})', raw_text.strip(), re.DOTALL)
+            if match:
+                return json.loads(match.group(1))
+            
+            # Fallback simple si falla regex
             clean_json = re.sub(r'```json|```', '', raw_text).strip()
             return json.loads(clean_json)
         except Exception as e:
@@ -161,8 +167,14 @@ async def traducir_titulos_ia(noticias, client):
             logger.info(f"🌐 Traduciendo {len(noticias)} títulos con {modelo}...")
             response = client.models.generate_content(model=modelo, contents=prompt)
             raw_text = response.text if response.text else "{}"
-            clean_json = re.sub(r'```json|```', '', raw_text).strip()
-            data = json.loads(clean_json)
+            
+            # Extracción robusta de JSON con Regex
+            match = re.search(r'(\{.*\})', raw_text.strip(), re.DOTALL)
+            if match:
+                data = json.loads(match.group(1))
+            else:
+                clean_json = re.sub(r'```json|```', '', raw_text).strip()
+                data = json.loads(clean_json)
             
             traducciones = {item['id']: item['tr'] for item in data.get('traducciones', [])}
             
