@@ -1,5 +1,65 @@
 [
     {
+        "titulo": "III Foro Económico y Social del Mediterráneo",
+        "enlace": "https://www.levante-emv.com/",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "28/05",
+        "ts": "2026-05-28T17:47:58.911797"
+    },
+    {
+        "titulo": "Diana Morant reivindica la capacidad de la Comunitat Valenciana para liderar “la transformación verde del Mediterráneo europeo”",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/05/28/diana-morant-reivindica-transformacion-verde-comunitat-valenciana-130773066.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Beca",
+        "imagen_url_original": "",
+        "f": "28/05",
+        "ts": "2026-05-28T17:47:58.911921"
+    },
+    {
+        "titulo": "Joan Romero alerta del “colapso” de la movilidad metropolitana y reclama un “cambio de agujas” en València",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/05/28/jon-romero-joan-romero-colapso-area-metropolitana-130774437.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "28/05",
+        "ts": "2026-05-28T17:47:58.911993"
+    },
+    {
+        "titulo": "Diálogo Comunitat Valenciana",
+        "enlace": "https://www.levante-emv.com/",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "28/05",
+        "ts": "2026-05-28T17:47:58.912047"
+    },
+    {
+        "titulo": "In just 3 weeks, StrictlyVC is coming to Los Angeles",
+        "enlace": "https://techcrunch.com/2026/05/28/in-just-3-weeks-strictlyvc-is-coming-to-los-angeles/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "28/05",
+        "ts": "2026-05-28T17:47:58.287126"
+    },
+    {
+        "titulo": "4 Best AI TTS APIs in 2026",
+        "enlace": "https://dev.to/agent-one/4-best-ai-tts-apis-in-2026-n43",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/fire-f60e7a582391810302117f987b22a8ef04a2fe0df7e3258a5f49332df1cec71e.svg",
+        "f": "28/05",
+        "ts": "2026-05-28T17:47:59.403678"
+    },
+    {
         "titulo": "Empieza la época de festivales y yo tengo una cosa clara: no quiero que me roben el iPhone. Ocho consejos para evitar la desgracia",
         "enlace": "https://www.applesfera.com/tutoriales/empieza-epoca-festivales-yo-tengo-cosa-clara-no-quiero-que-me-roben-iphone-ocho-consejos-para-evitar-desgracia",
         "fuente": "Applesfera",
@@ -5938,65 +5998,5 @@
         "imagen_url_original": "",
         "f": "30/03",
         "ts": "2026-03-30T07:57:14.773950"
-    },
-    {
-        "titulo": "Llorca pedirá una reunión al nuevo ministro Arcadi España sobre la dana y la financiación",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/30/llorca-pedira-reunion-nuevo-ministro-128561306.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "30/03",
-        "ts": "2026-03-30T07:57:15.431926"
-    },
-    {
-        "titulo": "Mónica Oltra, y todos detrás: intrahistoria del regreso que agita la izquierda valenciana",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/03/30/monica-oltra-detras-intrahistoria-regreso-128560492.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "30/03",
-        "ts": "2026-03-30T07:57:15.432015"
-    },
-    {
-        "titulo": "Una Copa de la Reina para afianzar la dinastía taronja en el baloncesto nacional",
-        "enlace": "https://www.levante-emv.com/deportes/2026/03/30/valencia-basket-suma-copa-reina-128568664.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "30/03",
-        "ts": "2026-03-30T07:57:15.432098"
-    },
-    {
-        "titulo": "Apple lleva años de retraso en la carrera de la IA. Se acaba de filtrar un cambio de rumbo y parece el más inteligente",
-        "enlace": "https://www.applesfera.com/rumores/apple-lleva-anos-retraso-carrera-ia-se-acaba-filtrar-cambio-rumbo-parece-inteligente",
-        "fuente": "Applesfera",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "https://i.blogs.es/ac4e56/apple-intelligence/375_375.jpeg",
-        "f": "30/03",
-        "ts": "2026-03-30T07:57:14.724962"
-    },
-    {
-        "titulo": "Why OpenAI really shut down Sora",
-        "enlace": "https://techcrunch.com/2026/03/29/why-openai-really-shut-down-sora/",
-        "fuente": "TechCrunch",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "30/03",
-        "ts": "2026-03-30T07:57:14.322875"
-    },
-    {
-        "titulo": "SafeBrowse: A Trust Layer for AI Browser Agents (Prevent Prompt Injection & Data Exfiltration)",
-        "enlace": "https://dev.to/rob_kang_7e54350f8af26743/safebrowse-a-trust-layer-for-ai-browser-agents-prevent-prompt-injection-data-exfiltration-3i3b",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "30/03",
-        "ts": "2026-03-30T07:57:14.395373"
     }
 ]
