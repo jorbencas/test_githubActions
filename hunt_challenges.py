@@ -3,7 +3,6 @@ import json
 import re
 import asyncio
 import requests
-import inspect  # Necesario para limpiar el template
 from bs4 import BeautifulSoup
 from mtranslate import translate
 from datetime import datetime
@@ -22,8 +21,6 @@ from solutions_db import lookup as db_lookup, generate_generic
 # ==========================================
 # 1. FUNCIONES DE APOYO Y NOTIFICACIÓN
 # ==========================================
-
-# Eliminamos enviar_telegram local - ya está en utils.py
 
 def clean_challenges(folder="./auto-challenges"):
     """Limpia archivos basura, incompletos o duplicados."""
@@ -47,9 +44,10 @@ def clean_challenges(folder="./auto-challenges"):
                 continue
 
             # Detectar duplicados por título en el frontmatter
-            match = re.search(r'title: ".*?RETO: (.*?)"', content)
+            # Corregido: Escape seguro de comillas en regex
+            match = re.search(r'title:\s*["\'](.*?)["\']', content)
             if match:
-                titulo = match.group(1).lower().strip()
+                titulo = match.group(1).replace("RETO: ", "").lower().strip()
                 if titulo in titulos_vistos:
                     os.remove(path)
                     borrados += 1
@@ -66,29 +64,32 @@ def clean_challenges(folder="./auto-challenges"):
     print(f"✨ Limpieza terminada. Se eliminaron {borrados} archivos.")
 
 
-
-# Eliminamos generar_imagen_noticia local - ya está en utils.py
-
-
 # ==========================================
 # 2. GENERACIÓN DE CONTENIDO (IA & IMAGEN)
 # ==========================================
 
-# Eliminamos obtener_solucion_ia local - ya está en utils.py
-
 async def generar_retos_ia_puros(client, folder):
-    """Genera 5 retos desde cero si no se encontró nada en la web."""
+    """Genera retos desde cero si no se encontró nada en la web."""
+    if not client:
+        print("⚠️ Modo offline activo. No se pueden generar retos creativos con IA.")
+        return []
+
     print("🤖 No se encontraron retos nuevos. Activando generación creativa de IA...")
     lenguajes = ["Svelte", "Python (FastAPI/Django)", "Go", "C#", "Astro (JS/TS)"]
     retos_generados = []
 
-    for lang in lenguajes:
+    for idx, lang in enumerate(lenguajes):
         try:
             prompt_inventar = f"Inventa un título de reto técnico para el lenguaje {lang}. Solo el título."
-            res_titulo = client.models.generate_content(model="gemini-2.0-flash-lite", contents=prompt_inventar)
+            # Ejecutamos la llamada síncrona del cliente genai en un hilo secundario
+            res_titulo = await asyncio.to_thread(
+                client.models.generate_content, 
+                model="gemini-2.0-flash-lite", 
+                contents=prompt_inventar
+            )
             titulo_inventado = res_titulo.text.strip()
             
-            if await solve_and_save(titulo_inventado, "IA Creativa", client, folder):
+            if await solve_and_save(titulo_inventado, "IA Creativa", client, folder, index_hint=idx):
                 retos_generados.append(titulo_inventado)
                 print(f"✅ Reto IA Generado ({lang}): {titulo_inventado}")
                 await asyncio.sleep(2)
@@ -114,41 +115,26 @@ CODEEMBER_LANGS = [
     ("dart", "Dart"),
 ]
 
-# Contador global para rotación de lenguajes
-_reto_counter = 0
-
-async def solve_and_save(titulo, fuente, client, folder, difficulty_override=None):
+async def solve_and_save(titulo, fuente, client, folder, difficulty_override=None, index_hint=0):
     """Encapsula la lógica de resolver un reto y guardarlo."""
-    global _reto_counter
     print(f"🎯 Procesando: {titulo}")
     
-    # Elegir lenguaje del Codeember cíclicamente
-    lang_id, lang_display = CODEEMBER_LANGS[_reto_counter % len(CODEEMBER_LANGS)]
-    _reto_counter += 1
+    # Corregido: Eliminada la variable global para evitar race conditions. 
+    # Ahora usamos un index_hint pasado por parámetro.
+    lang_id, lang_display = CODEEMBER_LANGS[index_hint % len(CODEEMBER_LANGS)]
     
     # 1️⃣ Consultar BD local (gratis, sin IA)
-    # Para ampliar la BD, añade entradas a SOLUTIONS en solutions_db.py
-    # con la clave = slug del título (ej: "ordenamiento-burbuja").
-    # Los retos que coincidan no consumirán cuota de Gemini.
-    #
-    # Ejemplo real en solutions_db.py:
-    # "ordenamiento-burbuja": {
-    #     "desc": "Ordena una lista usando el algoritmo Bubble Sort.",
-    #     "p1": "Comparar pares adyacentes e intercambiarlos si están desordenados.",
-    #     "p2": "Repetir n-1 pasadas sobre la lista, reduciendo el rango cada vez.",
-    #     "p3": "O(n²) tiempo, O(1) espacio. Ineficiente para listas grandes.",
-    #     "python": "def bubble_sort(arr):\n    n = len(arr)\n    for i in range(n):\n        for j in range(n-i-1):\n            if arr[j] > arr[j+1]:\n                arr[j], arr[j+1] = arr[j+1], arr[j]\n    return arr\n\nprint(bubble_sort([5,3,1,4,2]))  # [1,2,3,4,5]",
-    #     "javascript": "...",
-    # },
     sol = db_lookup(titulo, lang_id)
     if sol:
         print(f"   📦 Solución local encontrada ({lang_display}), sin llamada a IA")
     else:
-        # 2️⃣ Pedir a Gemini solo si no está en la BD
-        sol = await obtener_solucion_ia(titulo, fuente, client, lang=lang_display)
+        # 2️⃣ Pedir a Gemini solo si no está en la BD y tenemos cliente válido (Online)
+        if client:
+            sol = await obtener_solucion_ia(titulo, fuente, client, lang=lang_display)
+        
         if not sol:
-            # 3️⃣ Fallback: código genérico estructurado (nunca TODO)
-            print(f"   ⚠️ IA falló. Usando código genérico ({lang_display})")
+            # 3️⃣ Fallback: código genérico estructurado (offline o fallo de IA)
+            print(f"   ⚠️ IA falló o modo offline. Usando código genérico ({lang_display})")
             sol = generate_generic(titulo, lang_id)
     
     if sol:
@@ -156,7 +142,11 @@ async def solve_and_save(titulo, fuente, client, folder, difficulty_override=Non
         slug = f"reto-{slugify(titulo_es)[:40]}"
         path = os.path.join(folder, f"{slug}.mdx")
         
-        img_url = await generar_imagen_noticia(titulo_es, client, prompt_template=PROMPT_IMAGEN_TEMPLATE_RETO)
+        # Generar imagen (solo si hay cliente online)
+        img_url = ""
+        if client:
+            img_url = await generar_imagen_noticia(titulo_es, client, prompt_template=PROMPT_IMAGEN_TEMPLATE_RETO)
+        
         dificultad = difficulty_override or sol.get('dificultad', 'Intermedio')
         
         # Mapeo a la taxonomía específica del blog
@@ -166,29 +156,34 @@ async def solve_and_save(titulo, fuente, client, folder, difficulty_override=Non
             "Difícil": "Avanzado", "Avanzado": "Avanzado", "Senior": "Avanzado"
         }
         dificultad_blog = taxonomia.get(dificultad, "Intermedio")
-
         tags_seo = json.dumps([lang_id, 'retos', dificultad_blog.lower()])
 
-        res = inspect.cleandoc(RETO_MD_TEMPLATE).format(
-            titulo=titulo_es.replace('"', "'"),
-            resumen_corto=sol.get('descripcion', '')[:140].replace('"', "'"),
-            fecha_pub=datetime.now().strftime("%Y-%m-%d"),
-            slug_name=slug,
-            tags_seo=tags_seo,
-            descripcion_ia=sol.get('descripcion', ''),
-            ruta_imagen=img_url,
-            dificultad=dificultad_blog,
-            paso_1=sol.get('paso1', ''),
-            paso_2=sol.get('paso2', ''),
-            paso_3=sol.get('paso3', ''),
-            lenguaje_lower=lang_id,
-            lenguaje_display=lang_display,
-            codigo_solucion=sol.get('codigo', '')
-        )
-        
-        with open(path, "w", encoding="utf-8") as f: 
-            f.write(res)
-        return True
+        # Corregido: Se quitó inspect.cleandoc para evitar deformaciones en la indentación del Markdown
+        # Nota: Asegúrate de que las llaves que uses en tu RETO_MD_TEMPLATE (que no correspondan a estas variables) estén duplicadas {{ }}
+        try:
+            res = RETO_MD_TEMPLATE.format(
+                titulo=titulo_es.replace('"', "'"),
+                resumen_corto=sol.get('descripcion', '')[:140].replace('"', "'"),
+                fecha_pub=datetime.now().strftime("%Y-%m-%d"),
+                slug_name=slug,
+                tags_seo=tags_seo,
+                descripcion_ia=sol.get('descripcion', ''),
+                ruta_imagen=img_url,
+                dificultad=dificultad_blog,
+                paso_1=sol.get('paso1', ''),
+                paso_2=sol.get('paso2', ''),
+                paso_3=sol.get('paso3', ''),
+                lenguaje_lower=lang_id,
+                lenguaje_display=lang_display,
+                codigo_solucion=sol.get('codigo', '')
+            )
+            
+            # Escritura de archivos delegada a un hilo para no bloquear el loop de asyncio
+            await asyncio.to_thread(lambda: open(path, "w", encoding="utf-8").write(res))
+            return True
+        except KeyError as e:
+            print(f"❌ Error de formato en el Template: Olvidaste escapar una llave en tu constante: {e}")
+            return False
     return False
 
 
@@ -206,36 +201,50 @@ async def hunt(offline=False):
     retos_nuevos = []
 
     if offline:
-        print("💡 Generando retos desde el pool estático...")
-        # Lógica para generar de una lista predefinida si no hay internet/API
-        return
+        print("💡 Modo Offline: El script solo buscará soluciones en la base de datos local (solutions_db.py).")
 
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+    
+    # Contador local para asignar índices únicos a cada reto procesado secuencialmente
+    reto_idx = 0
+
     for nombre, config in WEBS_RETOS.items():
         try:
             print(f"🔍 Buscando en: {nombre}...")
-            r = requests.get(config["url"], timeout=15, headers=headers)
+            
+            # Corregido: Ejecutamos el requests.get síncrono en un hilo secundario asíncrono
+            r = await asyncio.to_thread(
+                lambda: requests.get(config["url"], timeout=15, headers=headers)
+            )
+            
             if r.status_code != 200: continue
                 
             soup = BeautifulSoup(r.text, 'html.parser')
             items = soup.select(config["selector"])[:5]
             
             for i in items:
+                # Corregido: Protección si no se encuentran títulos o están vacíos
                 titulo_raw = i.get_text(strip=True)
                 if len(titulo_raw) < 5: continue
                 
-                titulo_es = translate(titulo_raw, 'es')
-                if await solve_and_save(titulo_es, nombre, client, folder):
+                # Corregido: mtranslate.translate es síncrono, lo movemos a un hilo
+                titulo_es = await asyncio.to_thread(lambda: translate(titulo_raw, 'es'))
+                
+                if await solve_and_save(titulo_es, nombre, client, folder, index_hint=reto_idx):
                     retos_nuevos.append(titulo_es)
+                    reto_idx += 1
                     await asyncio.sleep(5) 
         except Exception as e: 
-            print(f"⚠️ Error {nombre}: {e}")
+            print(f"⚠️ Error en {nombre}: {e}")
 
-    if not retos_nuevos and client:
+    # Si no se encontraron retos en la web y estamos online, la IA genera creativos
+    if not retos_nuevos and not offline and client:
         retos_nuevos = await generar_retos_ia_puros(client, folder)
 
     if retos_nuevos:
         await enviar_telegram(f"🏹 *Cacería:* {len(retos_nuevos)} nuevos retos.")
+        
+    # Limpieza final de archivos basura
     clean_challenges(folder)
 
 if __name__ == "__main__":
