@@ -91,8 +91,11 @@ async def obtener_recap_semanal_ia(noticias, client):
             if "API_KEY_INVALID" in error_str or ("INVALID_ARGUMENT" in error_str and "API KEY" in error_str):
                 logger.error(f"🔑 API KEY INVÁLIDA. Configura GEMINI_API_KEY correctamente.")
                 return None
-            elif "429" in error_str or "QUOTA" in error_str:
-                logger.warning(f"⏳ Pasando al siguiente modelo por cuota en {modelo}...")
+            elif "429" in error_str or "QUOTA" in error_str or "RESOURCE_EXHAUSTED" in error_str:
+                logger.warning(f"⏳ Cuota excedida en {modelo}. Probando siguiente...")
+                continue
+            elif "404" in error_str or "NOT_FOUND" in error_str:
+                logger.warning(f"⚠️ Modelo {modelo} no encontrado (404). Saltando...")
                 continue
             logger.error(f"❌ Error Recap ({modelo}): {e}")
     return None
@@ -170,7 +173,13 @@ async def traducir_titulos_ia(noticias, client):
             
             return noticias
         except Exception as e:
-            logger.error(f"❌ Error traducción batch ({modelo}): {e}")
+            error_str = str(e).upper()
+            if "429" in error_str or "QUOTA" in error_str or "RESOURCE_EXHAUSTED" in error_str:
+                logger.warning(f"⏳ Cuota excedida en {modelo} (traducción). Probando siguiente...")
+            elif "404" in error_str or "NOT_FOUND" in error_str:
+                logger.warning(f"⚠️ Modelo {modelo} no disponible (404) para traducción. Saltando...")
+            else:
+                logger.error(f"❌ Error traducción batch ({modelo}): {e}")
             continue
             
     return noticias
