@@ -1035,3 +1035,164 @@
 2026-05-28 17:11:00,508 [INFO] 📧 Email enviado con éxito: 🔥 Anthropic releases Opus 4.8 with new ‘dynamic workflow’... y 2 más
 2026-05-28 17:11:03,884 [INFO] ✅ Telegram con voz humana enviado
 2026-05-28 17:11:03,891 [INFO] ✅ 3 noticias nuevas procesadas.
+2026-05-28 17:24:39,080 [INFO] 📺 Procesando fuente de YouTube: Pelado Nerd Shorts (https://www.youtube.com/@PeladoNerd/shorts)
+2026-05-28 17:24:39,082 [INFO] ✅ 'ytInitialData' encontrado para Pelado Nerd Shorts.
+2026-05-28 17:24:39,086 [INFO] 🛠️ Analizando 20 elementos para Pelado Nerd Shorts...
+2026-05-28 17:24:39,086 [INFO] 📊 10 videos/shorts válidos extraídos de Pelado Nerd Shorts.
+2026-05-28 17:24:39,101 [INFO] 📺 Procesando fuente de YouTube: EDteam Shorts (https://www.youtube.com/@EDteam/shorts)
+2026-05-28 17:24:39,107 [INFO] ✅ 'ytInitialData' encontrado para EDteam Shorts.
+2026-05-28 17:24:39,111 [INFO] 🛠️ Analizando 49 elementos para EDteam Shorts...
+2026-05-28 17:24:39,111 [INFO] 📊 10 videos/shorts válidos extraídos de EDteam Shorts.
+2026-05-28 17:24:39,126 [INFO] 📺 Procesando fuente de YouTube: EDteam (https://www.youtube.com/@EDteam/videos)
+2026-05-28 17:24:39,133 [INFO] ✅ 'ytInitialData' encontrado para EDteam.
+2026-05-28 17:24:39,138 [INFO] 🛠️ Analizando 31 elementos para EDteam...
+2026-05-28 17:24:39,138 [INFO] 📊 10 videos/shorts válidos extraídos de EDteam.
+2026-05-28 17:24:39,143 [INFO] 📺 Procesando fuente de YouTube: Fazt Shorts (https://www.youtube.com/@FaztTech/shorts)
+2026-05-28 17:24:39,150 [INFO] ✅ 'ytInitialData' encontrado para Fazt Shorts.
+2026-05-28 17:24:39,155 [INFO] 🛠️ Analizando 49 elementos para Fazt Shorts...
+2026-05-28 17:24:39,155 [INFO] 📊 10 videos/shorts válidos extraídos de Fazt Shorts.
+2026-05-28 17:24:39,159 [INFO] 📺 Procesando fuente de YouTube: MoureDev (https://www.youtube.com/@mouredev/videos)
+2026-05-28 17:24:39,164 [INFO] ✅ 'ytInitialData' encontrado para MoureDev.
+2026-05-28 17:24:39,167 [INFO] 🛠️ Analizando 31 elementos para MoureDev...
+2026-05-28 17:24:39,168 [INFO] 📊 10 videos/shorts válidos extraídos de MoureDev.
+2026-05-28 17:24:39,170 [INFO] 📺 Procesando fuente de YouTube: Midudev (https://www.youtube.com/@midudev/videos)
+2026-05-28 17:24:39,175 [INFO] ✅ 'ytInitialData' encontrado para Midudev.
+2026-05-28 17:24:39,178 [INFO] 🛠️ Analizando 31 elementos para Midudev...
+2026-05-28 17:24:39,178 [INFO] 📊 10 videos/shorts válidos extraídos de Midudev.
+2026-05-28 17:24:39,203 [INFO] 📺 Procesando fuente de YouTube: HolaMundo Shorts (https://www.youtube.com/@holamundodev/shorts)
+2026-05-28 17:24:39,208 [INFO] ✅ 'ytInitialData' encontrado para HolaMundo Shorts.
+2026-05-28 17:24:39,211 [INFO] 🛠️ Analizando 49 elementos para HolaMundo Shorts...
+2026-05-28 17:24:39,212 [INFO] 📊 10 videos/shorts válidos extraídos de HolaMundo Shorts.
+2026-05-28 17:24:39,214 [INFO] 📺 Procesando fuente de YouTube: Codigo facilito (https://www.youtube.com/@codigofacilito/videos)
+2026-05-28 17:24:39,218 [INFO] ✅ 'ytInitialData' encontrado para Codigo facilito.
+2026-05-28 17:24:39,221 [INFO] 🛠️ Analizando 31 elementos para Codigo facilito...
+2026-05-28 17:24:39,222 [INFO] 📊 10 videos/shorts válidos extraídos de Codigo facilito.
+2026-05-28 17:24:39,230 [INFO] 📺 Procesando fuente de YouTube: Victor Robles Shorts (https://www.youtube.com/@victorroblesweb/shorts)
+2026-05-28 17:24:39,237 [INFO] ✅ 'ytInitialData' encontrado para Victor Robles Shorts.
+2026-05-28 17:24:39,241 [INFO] 🛠️ Analizando 49 elementos para Victor Robles Shorts...
+2026-05-28 17:24:39,241 [INFO] 📊 10 videos/shorts válidos extraídos de Victor Robles Shorts.
+2026-05-28 17:24:39,246 [INFO] 📺 Procesando fuente de YouTube: Fazt (https://www.youtube.com/@FaztTech/videos)
+2026-05-28 17:24:39,251 [INFO] ✅ 'ytInitialData' encontrado para Fazt.
+2026-05-28 17:24:39,255 [INFO] 🛠️ Analizando 31 elementos para Fazt...
+2026-05-28 17:24:39,255 [INFO] 📊 10 videos/shorts válidos extraídos de Fazt.
+2026-05-28 17:24:39,260 [INFO] 📺 Procesando fuente de YouTube: CodelyTV (https://www.youtube.com/@CodelyTV/videos)
+2026-05-28 17:24:39,264 [INFO] ✅ 'ytInitialData' encontrado para CodelyTV.
+2026-05-28 17:24:39,268 [INFO] 🛠️ Analizando 31 elementos para CodelyTV...
+2026-05-28 17:24:39,268 [INFO] 📊 10 videos/shorts válidos extraídos de CodelyTV.
+2026-05-28 17:24:39,273 [INFO] 📺 Procesando fuente de YouTube: Clipset (https://www.youtube.com/@clipset/videos)
+2026-05-28 17:24:39,277 [INFO] ✅ 'ytInitialData' encontrado para Clipset.
+2026-05-28 17:24:39,342 [INFO] 🛠️ Analizando 31 elementos para Clipset...
+2026-05-28 17:24:39,342 [INFO] 📊 10 videos/shorts válidos extraídos de Clipset.
+2026-05-28 17:24:39,346 [INFO] 📺 Procesando fuente de YouTube: FreeCodeCamp (https://www.youtube.com/@freecodecamp/videos)
+2026-05-28 17:24:39,351 [INFO] ✅ 'ytInitialData' encontrado para FreeCodeCamp.
+2026-05-28 17:24:39,355 [INFO] 🛠️ Analizando 31 elementos para FreeCodeCamp...
+2026-05-28 17:24:39,355 [INFO] 📊 10 videos/shorts válidos extraídos de FreeCodeCamp.
+2026-05-28 17:24:39,357 [INFO] 📺 Procesando fuente de YouTube: Xataka (https://www.youtube.com/@xatakatv/videos)
+2026-05-28 17:24:39,362 [INFO] ✅ 'ytInitialData' encontrado para Xataka.
+2026-05-28 17:24:39,365 [INFO] 🛠️ Analizando 31 elementos para Xataka...
+2026-05-28 17:24:39,365 [INFO] 📊 10 videos/shorts válidos extraídos de Xataka.
+2026-05-28 17:24:39,370 [INFO] 📺 Procesando fuente de YouTube: HolaMundo (https://www.youtube.com/@holamundodev/videos)
+2026-05-28 17:24:39,374 [INFO] ✅ 'ytInitialData' encontrado para HolaMundo.
+2026-05-28 17:24:39,378 [INFO] 🛠️ Analizando 31 elementos para HolaMundo...
+2026-05-28 17:24:39,378 [INFO] 📊 10 videos/shorts válidos extraídos de HolaMundo.
+2026-05-28 17:24:39,382 [INFO] 📺 Procesando fuente de YouTube: Codigo facilito Shorts (https://www.youtube.com/@codigofacilito/shorts)
+2026-05-28 17:24:39,387 [INFO] ✅ 'ytInitialData' encontrado para Codigo facilito Shorts.
+2026-05-28 17:24:39,391 [INFO] 🛠️ Analizando 49 elementos para Codigo facilito Shorts...
+2026-05-28 17:24:39,391 [INFO] 📊 10 videos/shorts válidos extraídos de Codigo facilito Shorts.
+2026-05-28 17:24:39,411 [INFO] 📺 Procesando fuente de YouTube: FreeCodeCamp Shorts (https://www.youtube.com/@freecodecamp/shorts)
+2026-05-28 17:24:39,416 [INFO] ✅ 'ytInitialData' encontrado para FreeCodeCamp Shorts.
+2026-05-28 17:24:39,420 [INFO] 🛠️ Analizando 49 elementos para FreeCodeCamp Shorts...
+2026-05-28 17:24:39,421 [INFO] 📊 10 videos/shorts válidos extraídos de FreeCodeCamp Shorts.
+2026-05-28 17:24:39,423 [INFO] 📺 Procesando fuente de YouTube: Clipset Shorts (https://www.youtube.com/@clipset/shorts)
+2026-05-28 17:24:39,427 [INFO] ✅ 'ytInitialData' encontrado para Clipset Shorts.
+2026-05-28 17:24:39,430 [INFO] 🛠️ Analizando 49 elementos para Clipset Shorts...
+2026-05-28 17:24:39,431 [INFO] 📊 10 videos/shorts válidos extraídos de Clipset Shorts.
+2026-05-28 17:24:39,434 [INFO] 📺 Procesando fuente de YouTube: CodelyTV Shorts (https://www.youtube.com/@CodelyTV/shorts)
+2026-05-28 17:24:39,439 [INFO] ✅ 'ytInitialData' encontrado para CodelyTV Shorts.
+2026-05-28 17:24:39,442 [INFO] 🛠️ Analizando 49 elementos para CodelyTV Shorts...
+2026-05-28 17:24:39,443 [INFO] 📊 10 videos/shorts válidos extraídos de CodelyTV Shorts.
+2026-05-28 17:24:39,445 [INFO] 📺 Procesando fuente de YouTube: MoureDev Shorts (https://www.youtube.com/@mouredev/shorts)
+2026-05-28 17:24:39,450 [INFO] ✅ 'ytInitialData' encontrado para MoureDev Shorts.
+2026-05-28 17:24:39,452 [INFO] 🛠️ Analizando 49 elementos para MoureDev Shorts...
+2026-05-28 17:24:39,453 [INFO] 📊 10 videos/shorts válidos extraídos de MoureDev Shorts.
+2026-05-28 17:24:39,457 [INFO] 📺 Procesando fuente de YouTube: Victor Robles (https://www.youtube.com/@victorroblesweb/videos)
+2026-05-28 17:24:39,461 [INFO] ✅ 'ytInitialData' encontrado para Victor Robles.
+2026-05-28 17:24:39,465 [INFO] 🛠️ Analizando 31 elementos para Victor Robles...
+2026-05-28 17:24:39,466 [INFO] 📊 10 videos/shorts válidos extraídos de Victor Robles.
+2026-05-28 17:24:39,467 [INFO] 📺 Procesando fuente de YouTube: Pelado Nerd (https://www.youtube.com/@PeladoNerd/videos)
+2026-05-28 17:24:39,472 [INFO] ✅ 'ytInitialData' encontrado para Pelado Nerd.
+2026-05-28 17:24:39,475 [INFO] 🛠️ Analizando 31 elementos para Pelado Nerd...
+2026-05-28 17:24:39,476 [INFO] 📊 10 videos/shorts válidos extraídos de Pelado Nerd.
+2026-05-28 17:24:39,478 [INFO] 📺 Procesando fuente de YouTube: Carlos Azaustre (https://www.youtube.com/@CarlosAzaustre/videos)
+2026-05-28 17:24:39,482 [INFO] ✅ 'ytInitialData' encontrado para Carlos Azaustre.
+2026-05-28 17:24:39,486 [INFO] 🛠️ Analizando 31 elementos para Carlos Azaustre...
+2026-05-28 17:24:39,486 [INFO] 📊 10 videos/shorts válidos extraídos de Carlos Azaustre.
+2026-05-28 17:24:39,566 [INFO] 📺 Procesando fuente de YouTube: Carlos Azaustre Shorts (https://www.youtube.com/@CarlosAzaustre/shorts)
+2026-05-28 17:24:39,571 [INFO] ✅ 'ytInitialData' encontrado para Carlos Azaustre Shorts.
+2026-05-28 17:24:39,574 [INFO] 🛠️ Analizando 49 elementos para Carlos Azaustre Shorts...
+2026-05-28 17:24:39,575 [INFO] 📊 10 videos/shorts válidos extraídos de Carlos Azaustre Shorts.
+2026-05-28 17:24:39,576 [INFO] 📺 Procesando fuente de YouTube: Xataka Shorts (https://www.youtube.com/@xatakatv/shorts)
+2026-05-28 17:24:39,580 [INFO] ✅ 'ytInitialData' encontrado para Xataka Shorts.
+2026-05-28 17:24:39,583 [INFO] 🛠️ Analizando 49 elementos para Xataka Shorts...
+2026-05-28 17:24:39,583 [INFO] 📊 10 videos/shorts válidos extraídos de Xataka Shorts.
+2026-05-28 17:24:39,584 [INFO] 📺 Procesando fuente de YouTube: Midudev Shorts (https://www.youtube.com/@midudev/shorts)
+2026-05-28 17:24:39,589 [INFO] ✅ 'ytInitialData' encontrado para Midudev Shorts.
+2026-05-28 17:24:39,592 [INFO] 🛠️ Analizando 49 elementos para Midudev Shorts...
+2026-05-28 17:24:39,592 [INFO] 📊 10 videos/shorts válidos extraídos de Midudev Shorts.
+2026-05-28 17:24:39,696 [INFO] 📺 Procesando fuente de YouTube: Programa Con Arnau (https://youtube.com/@progconarnau?si=AFBTWjGeo-UpuJdE)
+2026-05-28 17:24:39,697 [INFO] ✅ 'ytInitialData' encontrado para Programa Con Arnau.
+2026-05-28 17:24:39,698 [INFO] 🛠️ Analizando 0 elementos para Programa Con Arnau...
+2026-05-28 17:24:39,698 [INFO] 📊 0 videos/shorts válidos extraídos de Programa Con Arnau.
+2026-05-28 17:24:39,698 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para Programa Con Arnau. Intentando fallback con Regex...
+2026-05-28 17:24:39,702 [INFO] 📺 Procesando fuente de YouTube: El Pingüino de Mario Shorts (https://www.youtube.com/@elpinguinodemario?si=DvMsCTK74FQfFzwH)
+2026-05-28 17:24:39,714 [INFO] ✅ 'ytInitialData' encontrado para El Pingüino de Mario Shorts.
+2026-05-28 17:24:39,727 [INFO] 🛠️ Analizando 0 elementos para El Pingüino de Mario Shorts...
+2026-05-28 17:24:39,727 [INFO] 📊 0 videos/shorts válidos extraídos de El Pingüino de Mario Shorts.
+2026-05-28 17:24:39,727 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para El Pingüino de Mario Shorts. Intentando fallback con Regex...
+2026-05-28 17:24:39,737 [INFO] 📺 Procesando fuente de YouTube: El Pingüino de Mario (https://www.youtube.com/@elpinguinodemario?si=DvMsCTK74FQfFzwH)
+2026-05-28 17:24:39,749 [INFO] ✅ 'ytInitialData' encontrado para El Pingüino de Mario.
+2026-05-28 17:24:39,762 [INFO] 🛠️ Analizando 0 elementos para El Pingüino de Mario...
+2026-05-28 17:24:39,762 [INFO] 📊 0 videos/shorts válidos extraídos de El Pingüino de Mario.
+2026-05-28 17:24:39,762 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para El Pingüino de Mario. Intentando fallback con Regex...
+2026-05-28 17:24:40,320 [INFO] 📺 Procesando fuente de YouTube: Programa Con Arnau Shorts (https://youtube.com/@progconarnau?si=AFBTWjGeo-UpuJdE)
+2026-05-28 17:24:40,321 [INFO] ✅ 'ytInitialData' encontrado para Programa Con Arnau Shorts.
+2026-05-28 17:24:40,322 [INFO] 🛠️ Analizando 0 elementos para Programa Con Arnau Shorts...
+2026-05-28 17:24:40,322 [INFO] 📊 0 videos/shorts válidos extraídos de Programa Con Arnau Shorts.
+2026-05-28 17:24:40,322 [WARNING] ⚠️ No se obtuvieron resultados vía JSON para Programa Con Arnau Shorts. Intentando fallback con Regex...
+2026-05-28 17:24:41,991 [INFO] 🌐 Traduciendo 262 noticias nuevas...
+2026-05-28 17:24:41,992 [INFO] 🌐 Traduciendo 262 títulos con gemini-2.0-flash...
+2026-05-28 17:24:41,992 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-28 17:24:42,096 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 429 Too Many Requests"
+2026-05-28 17:24:42,097 [WARNING] ⏳ Cuota excedida en gemini-2.0-flash (traducción). Probando siguiente...
+2026-05-28 17:24:42,097 [INFO] 🌐 Traduciendo 262 títulos con gemini-2.0-flash-lite...
+2026-05-28 17:24:42,097 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-28 17:24:42,186 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent "HTTP/1.1 429 Too Many Requests"
+2026-05-28 17:24:42,186 [WARNING] ⏳ Cuota excedida en gemini-2.0-flash-lite (traducción). Probando siguiente...
+2026-05-28 17:24:42,187 [INFO] 🌐 Traduciendo 262 títulos con gemini-1.5-flash...
+2026-05-28 17:24:42,187 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-28 17:24:42,303 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent "HTTP/1.1 404 Not Found"
+2026-05-28 17:24:42,304 [WARNING] ⚠️ Modelo gemini-1.5-flash no disponible (404) para traducción. Saltando...
+2026-05-28 17:24:42,304 [INFO] 🌐 Traduciendo 262 títulos con gemini-1.5-pro-latest...
+2026-05-28 17:24:42,304 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-28 17:24:42,398 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent "HTTP/1.1 404 Not Found"
+2026-05-28 17:24:42,399 [WARNING] ⚠️ Modelo gemini-1.5-pro-latest no disponible (404) para traducción. Saltando...
+2026-05-28 17:24:42,454 [INFO] 🗞️ Generando Recap con modelo: gemini-2.0-flash
+2026-05-28 17:24:42,455 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-28 17:24:42,536 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent "HTTP/1.1 429 Too Many Requests"
+2026-05-28 17:24:42,537 [WARNING] ⏳ Cuota excedida en gemini-2.0-flash. Probando siguiente...
+2026-05-28 17:24:42,537 [INFO] 🗞️ Generando Recap con modelo: gemini-2.0-flash-lite
+2026-05-28 17:24:42,537 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-28 17:24:42,676 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent "HTTP/1.1 429 Too Many Requests"
+2026-05-28 17:24:42,677 [WARNING] ⏳ Cuota excedida en gemini-2.0-flash-lite. Probando siguiente...
+2026-05-28 17:24:42,677 [INFO] 🗞️ Generando Recap con modelo: gemini-1.5-flash
+2026-05-28 17:24:42,677 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-28 17:24:42,751 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent "HTTP/1.1 404 Not Found"
+2026-05-28 17:24:42,752 [WARNING] ⚠️ Modelo gemini-1.5-flash no encontrado (404). Saltando...
+2026-05-28 17:24:42,752 [INFO] 🗞️ Generando Recap con modelo: gemini-1.5-pro-latest
+2026-05-28 17:24:42,752 [INFO] AFC is enabled with max remote calls: 10.
+2026-05-28 17:24:42,862 [INFO] HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent "HTTP/1.1 404 Not Found"
+2026-05-28 17:24:42,863 [WARNING] ⚠️ Modelo gemini-1.5-pro-latest no encontrado (404). Saltando...
+2026-05-28 17:24:42,868 [INFO] ✅ Dashboard HTML generado con Chips y Vídeos.
+2026-05-28 17:24:43,188 [INFO] 📧 Email enviado con éxito: 🔥 Empieza la época de festivales y yo tengo una cosa clar... y 1 más
+2026-05-28 17:24:51,207 [INFO] ✅ Telegram con voz humana enviado
+2026-05-28 17:24:51,215 [INFO] ✅ 2 noticias nuevas procesadas.
