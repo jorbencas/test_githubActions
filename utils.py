@@ -8,6 +8,7 @@ from datetime import datetime
 from slugify import slugify
 from google import genai
 from constants_downloadfile import CONFIG, PROMPT_IMAGEN_TEMPLATE
+import solutions_db
 
 logger = logging.getLogger("scraper")
 
@@ -54,7 +55,20 @@ async def obtener_solucion_ia(titulo, fuente, client, lang="Python"):
                 else:
                     logger.error(f"❌ Error en {modelo}: {e}")
                     break
-    return None
+    logger.error(f"❌ Fallo total en IA para reto: {titulo}")
+    
+    # 1. Intentamos buscar en nuestra base de datos local de soluciones hardcoded
+    try:
+        sol_local = solutions_db.lookup(titulo, lang.lower())
+        if sol_local:
+            logger.info(f"💾 Solución recuperada de la BD local para: {titulo}")
+            return sol_local
+    except Exception as e:
+        logger.error(f"⚠️ Error al consultar solutions_db: {e}")
+
+    # 2. Si no existe en BD, generamos una estructura funcional genérica (mejor que 'No disponible')
+    logger.warning(f"⚠️ Generando solución genérica funcional para: {titulo}")
+    return solutions_db.generate_generic(titulo, lang.lower())
 
 async def obtener_recap_semanal_ia(noticias, client):
     """Genera el resumen semanal probando varios modelos."""
@@ -104,7 +118,17 @@ async def obtener_recap_semanal_ia(noticias, client):
                 logger.warning(f"⚠️ Modelo {modelo} no encontrado (404). Saltando...")
                 continue
             logger.error(f"❌ Error Recap ({modelo}): {e}")
-    return None
+    logger.error("❌ Fallo total en Recap IA. Generando fallback básico.")
+    # Fallback básico si falla la IA: usamos los títulos originales
+    recap_fallback = "\n".join([f"### {n['titulo']}\n---" for n in noticias[:5]])
+    return {
+        "introduccion": "Esta semana hemos seguido de cerca las principales tendencias en tecnología y desarrollo.",
+        "noticias_destacadas": recap_fallback,
+        "repo": {"nombre": "GitHub", "url": "https://github.com/jorbencas/", "desc": "Proyectos destacados."},
+        "tldr": "Novedades semanales en el sector tecnológico.",
+        "tags": ["tech", "semanal"],
+        "nota_personal": "Fallo en IA: Generado contenido de reserva."
+    }
 
 async def generar_imagen_noticia(titulo_noticia, client, prompt_template=PROMPT_IMAGEN_TEMPLATE, fallback_url=None):
     """Genera imagen con fallback de modelos."""
@@ -178,9 +202,9 @@ async def traducir_titulos_ia(noticias, client):
             
             traducciones = {item['id']: item['tr'] for item in data.get('traducciones', [])}
             
-            # Aplicamos las traducciones
+            # Aplicamos las traducciones (solo si tienen contenido)
             for i, n in enumerate(noticias):
-                if i in traducciones:
+                if i in traducciones and traducciones[i] and len(traducciones[i].strip()) > 5:
                     n['titulo'] = traducciones[i]
             
             return noticias

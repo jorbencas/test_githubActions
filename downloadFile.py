@@ -316,7 +316,8 @@ async def generar_retos_individuales(noticias_web, fecha_iso, client):
             if os.path.exists(path): continue
 
             logger.info(f"🎯 Procesando reto: {n.get('title', 'video-sin-nombre')}")
-            sol = await obtener_solucion_ia(n['titulo'], n['fuente'], client, lang=lang)
+            lang_fav = CONFIG.get("DEFAULT_LANG", "Python")
+            sol = await obtener_solucion_ia(n['titulo'], n['fuente'], client, lang=lang_fav)
             
             if sol:
                 img_reto = await generar_imagen_noticia(f"Reto de programación {n['titulo']}", client)
@@ -557,8 +558,10 @@ async def publicar_contenidos(historial, noticias_web, scr):
 
     resumen_ia = await generar_blog_astro(noticias_web, fecha_iso, year, week, client)
 
-    if not resumen_ia:
-        resumen_ia = "Hoy no ha sido posible generar el resumen automático. Consulta los enlaces directos abajo."
+    if not resumen_ia or "no ha sido posible" in resumen_ia or len(resumen_ia) < 50:
+        logger.warning("⚠️ Generando resumen de emergencia con titulares.")
+        titulares = [f"• {n['titulo']}" for n in noticias_web[:10]]
+        resumen_ia = "Resumen de hoy:\n\n" + "\n".join(titulares)
 
     await generar_retos_individuales(noticias_web, fecha_iso, client)
 
