@@ -125,3 +125,52 @@ async def generar_imagen_noticia(titulo_noticia, client, prompt_template=PROMPT_
             logger.warning(f"⚠️ Fallo imagen con {modelo}: {e}. Intentando siguiente...")
             
     return fallback_url or "public/img/arquitectura_web.webp"
+
+async def traducir_titulos_ia(noticias, client):
+    """Traduce una lista de títulos al español en un solo bloque usando Gemini."""
+    if not noticias: return noticias
+    
+    from constants_downloadfile import CONFIG
+    modelos = CONFIG.get("AI_MODELS", ["gemini-2.0-flash-lite"])
+    
+    # Preparamos el texto a traducir
+    texto_a_traducir = "\n".join([f"{i}|{n['titulo']}" for i, n in enumerate(noticias)])
+    
+    prompt = f"""
+    Traduce estos titulares de tecnología al español de forma profesional y natural.
+    Mantén nombres propios y marcas (OpenAI, NVIDIA, etc.) igual.
+    Devuelve un JSON con la lista de traducciones manteniendo el orden.
+    
+    TEXTO:
+    {texto_a_traducir}
+    
+    FORMATO DE RESPUESTA (JSON):
+    {{
+      "traducciones": [
+        {{"id": 0, "tr": "Título traducido 0"}},
+        {{"id": 1, "tr": "Título traducido 1"}}
+      ]
+    }}
+    """
+    
+    for modelo in modelos:
+        try:
+            logger.info(f"🌐 Traduciendo {len(noticias)} títulos con {modelo}...")
+            response = client.models.generate_content(model=modelo, contents=prompt)
+            raw_text = response.text if response.text else "{}"
+            clean_json = re.sub(r'```json|```', '', raw_text).strip()
+            data = json.loads(clean_json)
+            
+            traducciones = {item['id']: item['tr'] for item in data.get('traducciones', [])}
+            
+            # Aplicamos las traducciones
+            for i, n in enumerate(noticias):
+                if i in traducciones:
+                    n['titulo'] = traducciones[i]
+            
+            return noticias
+        except Exception as e:
+            logger.error(f"❌ Error traducción batch ({modelo}): {e}")
+            continue
+            
+    return noticias

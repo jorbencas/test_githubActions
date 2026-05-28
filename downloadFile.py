@@ -6,11 +6,10 @@ from datetime import datetime, timedelta
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 from collections import Counter
-from mtranslate import translate
 from google import genai
 import edge_tts
 from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE, RETO_MD_TEMPLATE, URL_API_DESCARGA, URL_API_SALUD
-from utils import obtener_solucion_ia, generar_imagen_noticia, obtener_recap_semanal_ia
+from utils import obtener_solucion_ia, generar_imagen_noticia, obtener_recap_semanal_ia, traducir_titulos_ia
 from slugify import slugify 
 import html
 import aiohttp
@@ -711,6 +710,13 @@ async def main():
     total = nuevos + historial
 
     scr.guardar_avatars()
+    
+    # --- TRADUCCIÓN BATCH CON GEMINI ---
+    if nuevos:
+        client_trans = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
+        logger.info(f"🌐 Traduciendo {len(nuevos)} noticias nuevas...")
+        nuevos = await traducir_titulos_ia(nuevos, client_trans)
+
     noticias_web = filtrar_solo_noticias(nuevos)
 
     await publicar_contenidos(total, noticias_web, scr)

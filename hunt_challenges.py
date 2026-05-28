@@ -3,8 +3,8 @@ import json
 import re
 import asyncio
 import requests
+import logging
 from bs4 import BeautifulSoup
-from mtranslate import translate
 from datetime import datetime
 from google import genai
 from slugify import slugify
@@ -15,8 +15,10 @@ from constants_downloadfile import (
     RETO_MD_TEMPLATE, 
     PROMPT_IMAGEN_TEMPLATE_RETO
 )
-from utils import obtener_solucion_ia, generar_imagen_noticia
+from utils import obtener_solucion_ia, generar_imagen_noticia, traducir_titulos_ia
 from solutions_db import lookup as db_lookup, generate_generic
+
+logger = logging.getLogger("scraper")
 
 # ==========================================
 # 1. FUNCIONES DE APOYO Y NOTIFICACIÓN
@@ -222,14 +224,19 @@ async def hunt(offline=False):
             soup = BeautifulSoup(r.text, 'html.parser')
             items = soup.select(config["selector"])[:5]
             
+            # Recolectamos títulos para traducir en lote
+            items_validos = []
             for i in items:
-                # Corregido: Protección si no se encuentran títulos o están vacíos
-                titulo_raw = i.get_text(strip=True)
-                if len(titulo_raw) < 5: continue
-                
-                # Corregido: mtranslate.translate es síncrono, lo movemos a un hilo
-                titulo_es = await asyncio.to_thread(lambda: translate(titulo_raw, 'es'))
-                
+                t_raw = i.get_text(strip=True)
+                if len(t_raw) >= 5:
+                    items_validos.append({"obj": i, "titulo": t_raw})
+            
+            if items_validos and not offline and client:
+                logger.info(f"🌐 Traduciendo {len(items_validos)} títulos de {nombre}...")
+                items_validos = await traducir_titulos_ia(items_validos, client)
+
+            for item_data in items_validos:
+                titulo_es = item_data["titulo"]
                 if await solve_and_save(titulo_es, nombre, client, folder, index_hint=reto_idx):
                     retos_nuevos.append(titulo_es)
                     reto_idx += 1
