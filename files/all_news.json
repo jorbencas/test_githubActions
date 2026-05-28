@@ -7,7 +7,6 @@
         "badge": "Tech",
         "imagen_url_original": "",
         "f": "28/05",
-<<<<<<< HEAD
         "ts": "2026-05-28T17:24:40.406795"
     },
     {
@@ -19,9 +18,6 @@
         "imagen_url_original": "",
         "f": "28/05",
         "ts": "2026-05-28T17:24:40.824544"
-=======
-        "ts": "2026-05-28T19:28:51.937045"
->>>>>>> f61b6c8 (fixing gmini models)
     },
     {
         "titulo": "Anthropic releases Opus 4.8 with new ‘dynamic workflow’ tool",
@@ -31,11 +27,7 @@
         "badge": "Tech",
         "imagen_url_original": "",
         "f": "28/05",
-<<<<<<< HEAD
         "ts": "2026-05-28T17:10:57.411600"
-=======
-        "ts": "2026-05-28T19:28:43.036549"
->>>>>>> f61b6c8 (fixing gmini models)
     },
     {
         "titulo": "NVIDIA Research Advances Robotics From Simulation to the Real World",
@@ -45,39 +37,17 @@
         "badge": "Tech",
         "imagen_url_original": "",
         "f": "28/05",
-<<<<<<< HEAD
         "ts": "2026-05-28T17:10:58.099571"
     },
     {
         "titulo": "How-To Spec-Driven AI Development",
         "enlace": "https://dev.to/sebastian_wessel/how-to-spec-driven-ai-development-1602",
-=======
-        "ts": "2026-05-28T19:29:01.565613"
-    },
-    {
-        "titulo": "4 Best AI TTS APIs in 2026",
-        "enlace": "https://dev.to/agent-one/4-best-ai-tts-apis-in-2026-n43",
->>>>>>> f61b6c8 (fixing gmini models)
         "fuente": "Dev.to",
         "tipo": "noticia",
         "badge": "Tech",
         "imagen_url_original": "https://assets.dev.to/assets/fire-f60e7a582391810302117f987b22a8ef04a2fe0df7e3258a5f49332df1cec71e.svg",
         "f": "28/05",
-<<<<<<< HEAD
         "ts": "2026-05-28T17:10:58.018286"
-=======
-        "ts": "2026-05-28T19:28:51.355307"
-    },
-    {
-        "titulo": "Intel makes a bid for handheld gaming PCs with new Arc G3 processors",
-        "enlace": "https://arstechnica.com/gadgets/2026/05/intel-makes-a-bid-for-handheld-gaming-pcs-with-new-arc-g3-processors/",
-        "fuente": "Ars Technica",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "28/05",
-        "ts": "2026-05-28T19:28:58.057459"
->>>>>>> f61b6c8 (fixing gmini models)
     },
     {
         "titulo": "Así ha cambiado Internet en los 20 años transcurridos desde el lanzamiento de Genbeta",

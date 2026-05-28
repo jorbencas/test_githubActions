@@ -725,7 +725,16 @@ async def main():
     datos = [item for sublist in paginas_datos for item in sublist]
 
     archivo_h = os.path.join(CONFIG["FOLDER"], "all_news.json")
-    historial = json.load(open(archivo_h)) if os.path.exists(archivo_h) else []
+    try:
+        with open(archivo_h, 'r', encoding='utf-8') as f:
+            historial = json.load(f) if os.path.exists(archivo_h) else []
+    except (json.JSONDecodeError, FileNotFoundError):
+        if os.path.exists(archivo_h):
+            logger.warning(f"⚠️ Error cargando {archivo_h}. El archivo puede estar corrupto. Re-inicializando historial.")
+        historial = []
+    except Exception as e:
+        logger.error(f"❌ Error inesperado cargando historial: {e}")
+        historial = []
     
     vistos = {x['enlace'] for x in historial}
     nuevos = [n for n in datos if n['enlace'] not in vistos]
