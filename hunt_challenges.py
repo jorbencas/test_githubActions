@@ -15,7 +15,7 @@ from constants_downloadfile import (
     RETO_MD_TEMPLATE, 
     PROMPT_IMAGEN_TEMPLATE_RETO
 )
-from utils import enviar_telegram, obtener_solucion_ia, generar_imagen_noticia
+from utils import obtener_solucion_ia, generar_imagen_noticia
 from solutions_db import lookup as db_lookup, generate_generic
 
 # ==========================================
@@ -242,7 +242,7 @@ async def hunt(offline=False):
         retos_nuevos = await generar_retos_ia_puros(client, folder)
 
     if retos_nuevos:
-        await enviar_telegram(f"🏹 *Cacería:* {len(retos_nuevos)} nuevos retos.")
+        print(f"🏹 *Cacería:* {len(retos_nuevos)} nuevos retos.")
         
     # Limpieza final de archivos basura
     clean_challenges(folder)
