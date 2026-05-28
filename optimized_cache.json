@@ -1,0 +1,22 @@
+{
+    "Image.png": {
+        "hash": "f496affb4e7e59a1cd0dcef85c3509b3",
+        "original_size": 7069,
+        "outputs": {
+            "png": {
+                "file": "Image.png",
+                "size": 6168
+            },
+            "webp": {
+                "file": "Image.webp",
+                "size": 3282,
+                "q": 50
+            },
+            "avif": {
+                "file": "Image.avif",
+                "size": 1948,
+                "q": 50
+            }
+        }
+    }
+}
