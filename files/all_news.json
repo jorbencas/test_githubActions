@@ -1,5 +1,35 @@
 [
     {
+        "titulo": "Anthropic releases Opus 4.8 with new ‘dynamic workflow’ tool",
+        "enlace": "https://techcrunch.com/2026/05/28/anthropic-releases-opus-4-8-with-new-dynamic-workflow-tool/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "28/05",
+        "ts": "2026-05-28T17:10:57.411600"
+    },
+    {
+        "titulo": "NVIDIA Research Advances Robotics From Simulation to the Real World",
+        "enlace": "https://blogs.nvidia.com/blog/icra-research-robotics-simulation-to-real-world/",
+        "fuente": "NVIDIA Blog",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "28/05",
+        "ts": "2026-05-28T17:10:58.099571"
+    },
+    {
+        "titulo": "How-To Spec-Driven AI Development",
+        "enlace": "https://dev.to/sebastian_wessel/how-to-spec-driven-ai-development-1602",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/fire-f60e7a582391810302117f987b22a8ef04a2fe0df7e3258a5f49332df1cec71e.svg",
+        "f": "28/05",
+        "ts": "2026-05-28T17:10:58.018286"
+    },
+    {
         "titulo": "Así ha cambiado Internet en los 20 años transcurridos desde el lanzamiento de Genbeta",
         "enlace": "https://www.genbeta.com/a-fondo/asi-ha-cambiado-internet-20-anos-transcurridos-lanzamiento-genbeta",
         "fuente": "Genbeta",
@@ -5968,35 +5998,5 @@
         "imagen_url_original": "",
         "f": "30/03",
         "ts": "2026-03-30T07:57:14.395586"
-    },
-    {
-        "titulo": "Why SSE for AI agents keeps breaking at 2am",
-        "enlace": "https://dev.to/abhishek_chatterjee_33b9d/why-sse-for-ai-agents-keeps-breaking-at-2am-55ie",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "29/03",
-        "ts": "2026-03-29T22:11:47.208961"
-    },
-    {
-        "titulo": "Valencia Basket, campeón de la Copa de la Reina",
-        "enlace": "https://www.levante-emv.com/deportes/2026/03/29/tercer-cuarto-fulgurante-da-copa-128561790.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "29/03",
-        "ts": "2026-03-29T21:23:29.400213"
-    },
-    {
-        "titulo": "San Pablo Burgos-Valencia BC: De Larrea lidera el triunfo taronja en Burgos",
-        "enlace": "https://www.levante-emv.com/deportes/2026/03/29/larrea-lidera-triunfo-taronja-san-pablo-burgos-liga-endesa-128563202.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "29/03",
-        "ts": "2026-03-29T21:23:29.400344"
     }
 ]
