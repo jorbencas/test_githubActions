@@ -350,13 +350,19 @@ async def generar_blog_astro(noticias_web, fecha_iso, year, week, client):
     noticias_blog = [n for n in noticias_web if "yout" not in n['enlace']]
     if not noticias_blog: return None
 
+    semana_slug = f"{year}-w{week:02d}-tech-recap"
+    path_md = f"./auto-news/{semana_slug}.md"
+
+    # OPTIMIZACIÓN: Si ya existe el recap de esta semana y no hay noticias urgentes, saltar
+    if os.path.exists(path_md) and not noticias_web:
+        logger.info(f"⏭️  Recap semanal {semana_slug} ya existe. Saltando generación IA.")
+        with open(path_md, "r", encoding="utf-8") as f:
+            match = re.search(r'description: "(.*?)"', f.read())
+            return match.group(1) if match else "Recap semanal disponible."
+
     # Usamos el prompt nuevo que devuelve JSON
     data_ia = await obtener_recap_semanal_ia(noticias_blog, client)
     if not data_ia: return None
-
-    await asyncio.sleep(5)
-
-    semana_slug = f"{year}-w{week:02d}-tech-recap"
     img_recap = await generar_imagen_noticia(f"Recap {week}", client)
     await asyncio.sleep(3)
 
@@ -482,10 +488,16 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
             """
             
             v_html += f"""
-            <div class="card {clase}" data-ts="{ts}" data-fuente="{fuente_limpia}">
+            <div class="card {clase}" data-ts="{ts}" data-fuente="{fuente_limpia}" style="aspect-ratio: 16/9; contain: layout style;">
                 {badge_live}
                 {btn_download}
-                <a href="{n_item['enlace']}" target="_blank"><img src="https://img.youtube.com/vi/{n_item['id_video']}/mqdefault.jpg"></a>
+                <a href="{n_item['enlace']}" target="_blank">
+                    <img src="https://img.youtube.com/vi/{n_item['id_video']}/mqdefault.jpg" 
+                         alt="{n_item['titulo']}" 
+                         width="320" height="180" 
+                         loading="lazy" 
+                         style="width:100%; height:auto; aspect-ratio: 16/9; background: #eee;">
+                </a>
                 <div class="card-content"><div class="meta">{meta}</div><a href="{n_item['enlace']}" target="_blank">{n_item['titulo']}</a></div>
             </div>"""
         else:

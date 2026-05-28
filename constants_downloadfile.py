@@ -10,8 +10,8 @@ CONFIG = {
     "FOLDER": "files",
     "IMAGES_FOLDER": "images",
     "IMAGES_PATH_PREFIX": "public/optimizado",
-    "AI_MODELS": ["gemini-2.0-flash-lite", "gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-flash-8b"],
-    "IMAGE_MODELS": ["gemini-3-flash-image", "imagen-3.0-generate-002"] # Fallback para imagen
+    "AI_MODELS": ["gemini-2.0-flash", "gemini-1.5-flash", "gemini-1.5-pro"],
+    "IMAGE_MODELS": ["imagen-3.0-generate-001", "gemini-1.5-flash"] # Fallback para imagen
 }
 
 URL_API_DESCARGA = "https://testactions1github-api-python.hf.space/download"
@@ -91,7 +91,11 @@ HTML_TEMPLATE = """
     <div class="container">
         <header>
             <h1>Tech Pulse <small style="font-size: 0.4em; color: #666;">{fecha_hoy}</small></h1>
-            <img src="optimizado/Image.png" alt="Logo" class="logo">
+            <picture>
+                <source srcset="optimizado/Image.avif" type="image/avif">
+                <source srcset="optimizado/Image.webp" type="image/webp">
+                <img src="optimizado/Image.png" alt="Logo" class="logo" width="120" height="40" style="aspect-ratio: 3/1; object-fit: contain;" loading="eager">
+            </picture>
         </header>
         <div class="ia-box">
             <h2>🤖 Resumen</h2>

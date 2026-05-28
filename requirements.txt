@@ -7,6 +7,6 @@ python-slugify
 aiohttp
 playwright
 Pillow
+pillow-avif-plugin
 html2text
-mtranslate
 python-dotenv
