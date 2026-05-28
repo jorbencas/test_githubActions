@@ -98,6 +98,9 @@ HTML_TEMPLATE = """
             <p>{resumen}</p>
         </div>
 
+        <h2>📰 Noticias Históricas</h2>
+        <ul class="news-list">{bloque_noticias}</ul>
+        
         <div class="filter-section">
             <strong>📅 Por Tiempo:</strong>
             <div class="chip-container">{bloque_semanas}</div>
@@ -110,8 +113,6 @@ HTML_TEMPLATE = """
 
         <h2>📺 Multimedia (Vídeos y Shorts)</h2>
         <div class="video-grid">{bloque_videos}</div>
-        <h2>📰 Noticias Históricas</h2>
-        <ul class="news-list">{bloque_noticias}</ul>
     </div>
 </body>
 <script>
