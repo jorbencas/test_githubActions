@@ -1,5 +1,495 @@
 [
     {
+        "titulo": "Todas las películas de ciencia ficción de Ridley Scott en este siglo: un director más irregular de lo que le gustaría",
+        "enlace": "https://www.hobbyconsolas.com/hobbycine/todas-las-peliculas-ciencia-ficcion-ridley-scott-este-siglo-un-director-mas-irregular-que-le-gustaria_6973262_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.179118"
+    },
+    {
+        "titulo": "Todo lo que se sabe de God of War Laufey, el nuevo spin-off de la saga de Kratos protagonizado por Faye",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/todo-que-se-sabe-god-of-war-laufey-spin-off-protagonizado-por-faye_6959238_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.179232"
+    },
+    {
+        "titulo": "Resident Evil Veronica es el primer bombazo del Summer Game Fest: Capcom trae de vuelta a Claire Redfield con un nuevo y espectacular remake",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/resident-evil-veronica-es-primer-bombazo-summer-game-fest-capcom-trae-vuelta-claire-redfield-con-un-nuevo-espectacular-remake_6979964_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.179342"
+    },
+    {
+        "titulo": "El creador de Assassin's Creed revive al fin su juego y el tráiler de 1666: Amsterdam nos deja con ganas de probar su prólogo en Steam",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/creador-assassin-s-creed-revive-fin-su-juego-trailer-1666-amsterdam-nos-deja-con-ganas-probar-su-prologo-steam_6979988_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.179448"
+    },
+    {
+        "titulo": "Es oficial: Final Fantasy VII Revelation es el nombre de la tercera parte y su primer tráiler golpea con la fuerza un meteorito",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/es-oficial-final-fantasy-vii-revelation-es-nombre-tercera-parte-su-primer-trailer-golpea-con-fuerza-un-meteorito_6979975_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.179550"
+    },
+    {
+        "titulo": "Así mantienen las redes sociales enganchados a los alumnos: Notificaciones en horario escolar y adolescentes a sueldo",
+        "enlace": "https://elpais.com/tecnologia/2026-06-05/asi-mantienen-las-redes-sociales-enganchados-a-los-alumnos-notificaciones-en-horario-escolar-y-adolescentes-a-sueldo.html",
+        "fuente": "El País Tecnología",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.847737"
+    },
+    {
+        "titulo": "El legado de Manuel Cebrián, pionero en ver cómo las redes cambian nuestro comportamiento",
+        "enlace": "https://elpais.com/tecnologia/2026-06-04/manuel-cebrian-un-cientifico-dificil-de-catalogar.html",
+        "fuente": "El País Tecnología",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.847862"
+    },
+    {
+        "titulo": "Cecilia Rikap, economista: “Los centros de datos funcionan como bases militares en territorio extranjero”",
+        "enlace": "https://elpais.com/tecnologia/2026-06-04/cecilia-rikap-economista-los-centros-de-datos-funcionan-como-bases-militares-en-territorio-extranjero.html",
+        "fuente": "El País Tecnología",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.847949"
+    },
+    {
+        "titulo": "La IA consumirá en 2030 tanta agua como 1.300 millones de personas",
+        "enlace": "https://elpais.com/tecnologia/2026-06-03/la-ia-consumira-en-2030-tanta-agua-como-1300-millones-de-personas.html",
+        "fuente": "El País Tecnología",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://imagenes.elpais.com/resizer/v2/DKKJHG3PE5E57DL3EZJ6F2BBAE.jpeg?auth=48926e2fa33daca2eace25314dee863f2b4e7b1f6c01e7f73b1935052ab61fa2&width=414&height=311&focal=1504%2C791",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.848042"
+    },
+    {
+        "titulo": "Se acabó la barra libre de la IA: quien pone precio al token decide",
+        "enlace": "https://elpais.com/tecnologia/2026-06-03/se-acabo-la-barra-libre-de-la-ia-quien-pone-precio-al-token-decide.html",
+        "fuente": "El País Tecnología",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://imagenes.elpais.com/resizer/v2/ODKLPU5A5FDRJNFEUEH6TABM34.jpg?auth=100aec4a2358161025a145efdcaa0460ffd4287ec820be49bf8142e4c8f6a823&width=414&height=311&smart=true",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.848128"
+    },
+    {
+        "titulo": "🎞️El Papa León XIV llega a Madrid: encuentro con los Reyes y vigilia en la Plaza Lima",
+        "enlace": "https://www.levante-emv.com/sociedad/2026/06/06/papa-leon-xiv-llega-madrid-131087670.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.719668"
+    },
+    {
+        "titulo": "Hasta 1.700 valencianos, rumbo a ver al papa León XIV: \"Esto es fe y es histórico\"",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/06/06/1-700-valencianos-rumbo-ver-131060918.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.719762"
+    },
+    {
+        "titulo": "Diseños valencianos en los kits para la visita del Papa",
+        "enlace": "https://www.levante-emv.com/ribera/2026/06/06/disenos-valencianos-kits-visita-papa-131087850.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.719890"
+    },
+    {
+        "titulo": "Una negociación televisada acaba con una nueva propuesta de 3.300 millones que valorarán los sindicatos",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/06/05/negociacion-televisada-acaba-nueva-propuesta-131078817.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.719971"
+    },
+    {
+        "titulo": "Última hora de la huelga indefinida de profesores en la Comunitat Valenciana",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/06/05/ultima-hora-huelga-indefinida-de-profesores-valencia-reunion-conselleria-130615662.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.720048"
+    },
+    {
+        "titulo": "Aún recuerdo cómo en el apagón aguanté horas sin quedarme incomunicado. Todo gracias a una decisión que tomé hace años con mi iPhone",
+        "enlace": "https://www.applesfera.com/iphone/recuerdo-como-apagon-aguante-horas-quedarme-incomunicado-todo-gracias-a-decision-que-tome-hace-anos-mi-iphone",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://i.blogs.es/5de824/dualsim/375_142.jpeg",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.571686"
+    },
+    {
+        "titulo": "Que el iPhone empiece a arrasar en India es una mina de oro para Apple. Y también su peor pesadilla",
+        "enlace": "https://www.applesfera.com/apple-1/apple-ha-pasado-2-mercado-india-a-tener-casi-cinco-veces-pocos-anos-eso-problema",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://i.blogs.es/add754/iphone-india/375_142.png",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.571823"
+    },
+    {
+        "titulo": "En dos días se presenta iOS 27 y sus filtraciones de última hora son claras: mucha IA y arreglar lo que no gustó de iOS 26",
+        "enlace": "https://www.applesfera.com/rumores/dos-dias-se-presenta-ios-27-sus-filtraciones-ultima-hora-claras-mucha-ia-arreglar-que-no-gusto-ios-26",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.571927"
+    },
+    {
+        "titulo": "El mayor culpable de la adicción infantil a las pantallas no es el algoritmo de TikTok: son los propios padres",
+        "enlace": "https://www.xataka.com/medicina-y-salud/mayor-culpable-adiccion-infantil-a-pantallas-no-algoritmo-tiktok-propios-padres?utm_source=applesfera&utm_medium=network&utm_campaign=repost",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.572107"
+    },
+    {
+        "titulo": "Un simple accesorio compatible con el iPhone me ahorró comprarme un nuevo aire acondicionado (y pagar más en la factura de la luz)",
+        "enlace": "https://www.applesfera.com/tutoriales/simple-accesorio-compatible-iphone-me-ahorro-comprarme-nuevo-aire-acondicionado-pagar-factura-luz",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.572224"
+    },
+    {
+        "titulo": "Casi caigo en la última estafa \"de la Agencia Tributaria\". Un SMS realista que se desenmascara desde el iPhone en menos de un minuto",
+        "enlace": "https://www.applesfera.com/tutoriales/casi-caigo-ultima-estafa-agencia-tributaria-sms-realista-que-se-desenmascara-iphone-minuto",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.572318"
+    },
+    {
+        "titulo": "Linux devs are fighting the new age-gated internet",
+        "enlace": "https://www.theverge.com/tech/930573/age-verification-bills-linux-open-source",
+        "fuente": "The Verge",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.436210"
+    },
+    {
+        "titulo": "Startup Battlefield 200 applications officially close in 3 days",
+        "enlace": "https://techcrunch.com/2026/06/05/startup-battlefield-200-applications-officially-close-in-3-days/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.948964"
+    },
+    {
+        "titulo": "Google will pay SpaceX $920M per month for compute",
+        "enlace": "https://techcrunch.com/2026/06/05/google-will-pay-spacex-920m-per-month-for-compute/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.949050"
+    },
+    {
+        "titulo": "The most interesting startups right now want to get you off your phone",
+        "enlace": "https://techcrunch.com/video/the-most-interesting-startups-right-now-want-to-get-you-off-your-phone/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.949173"
+    },
+    {
+        "titulo": "The token bill comes due: Inside the industry scramble to manage AI’s runaway costs",
+        "enlace": "https://techcrunch.com/2026/06/05/the-token-bill-comes-due-inside-the-industry-scramble-to-manage-ais-runaway-costs/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.949268"
+    },
+    {
+        "titulo": "The ‘together tech’ wave might be the most intriguing startup bet of 2026",
+        "enlace": "https://techcrunch.com/podcast/the-together-tech-wave-might-be-the-most-intriguing-startup-bet-of-2026/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.949371"
+    },
+    {
+        "titulo": "AirTrunk commits $30B to build 5GW of AI data centers in India",
+        "enlace": "https://techcrunch.com/2026/06/05/airtrunk-commits-30b-to-build-5gw-of-ai-data-centers-in-india/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.949448"
+    },
+    {
+        "titulo": "Mira Murati steps back into the spotlight, carefully",
+        "enlace": "https://techcrunch.com/2026/06/04/mira-murati-steps-back-into-the-spotlight-carefully/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.949532"
+    },
+    {
+        "titulo": "Ahead of its IPO, Anthropic’s Daniela Amodei shrugs off doubts about AI’s returns",
+        "enlace": "https://techcrunch.com/2026/06/04/ahead-of-its-ipo-anthropics-daniela-amodei-shrugs-off-doubts-about-ais-returns/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.949607"
+    },
+    {
+        "titulo": "Airbnb’s Brian Chesky plans to launch a new AI lab",
+        "enlace": "https://techcrunch.com/2026/06/04/airbnbs-brian-chesky-plans-to-launch-a-new-ai-lab/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:45.949684"
+    },
+    {
+        "titulo": "The uphill climb of making diff lines performant",
+        "enlace": "https://github.blog/engineering/architecture-optimization/the-uphill-climb-of-making-diff-lines-performant/",
+        "fuente": "GitHub Blog",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.795750"
+    },
+    {
+        "titulo": "Agent-driven development in Copilot Applied Science",
+        "enlace": "https://github.blog/ai-and-ml/github-copilot/agent-driven-development-in-copilot-applied-science/",
+        "fuente": "GitHub Blog",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.795827"
+    },
+    {
+        "titulo": "NVIDIA Research Unlocks Advanced Grasping, Smarter Autonomous Driving and Agent Training at Scale",
+        "enlace": "https://blogs.nvidia.com/blog/cvpr-research-grasping-driving-agent-training/",
+        "fuente": "NVIDIA Blog",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.060030"
+    },
+    {
+        "titulo": "NVIDIA AI Cloud Ecosystem Expands Worldwide to Meet Global AI Compute Demand",
+        "enlace": "https://blogs.nvidia.com/blog/ai-cloud-ecosystem/",
+        "fuente": "NVIDIA Blog",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.060101"
+    },
+    {
+        "titulo": "NVIDIA Factory Operations Blueprint Gives Factories a New AI Brain",
+        "enlace": "https://blogs.nvidia.com/blog/factory-operations-fox-blueprint-ai-brain/",
+        "fuente": "NVIDIA Blog",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.060196"
+    },
+    {
+        "titulo": "Taiwan’s Industry Titans Turbocharge World’s AI Infrastructure Buildout With NVIDIA",
+        "enlace": "https://blogs.nvidia.com/blog/taiwan-ecosystem-ai-infrastructure/",
+        "fuente": "NVIDIA Blog",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.060272"
+    },
+    {
+        "titulo": "Magnificent Humanity, Building Cities, and a Special Announcement!",
+        "enlace": "https://dev.to/jenlooper/magnificent-humanity-building-cities-and-a-special-announcement-54pf",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/exploding-head-daceb38d627e6ae9b730f36a1e390fca556a4289d5a41abb2c35068ad3e2c4b5.svg",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.032995"
+    },
+    {
+        "titulo": "I Tried to Fix a Vulnerability. A $1,400,000 AI System Said No. Twenty Days Later, That Vulnerability Cost $4,200,000.",
+        "enlace": "https://dev.to/xulingfeng/i-tried-to-fix-a-vulnerability-a-1400000-ai-system-said-no-twenty-days-later-that-5d1m",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/multi-unicorn-b44d6f8c23cdd00964192bedc38af3e82463978aa611b4365bd33a0f1f4f3e97.svg",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.033105"
+    },
+    {
+        "titulo": "Catching the shortcuts AI coding agents take to look done",
+        "enlace": "https://dev.to/moonrunnerkc/catching-the-shortcuts-ai-coding-agents-take-to-look-done-45mm",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.033219"
+    },
+    {
+        "titulo": "Why Coding Stays in Human-AI Collaboration: A Paradox in Stanford's 51 Deployments",
+        "enlace": "https://dev.to/aws-builders/why-coding-stays-in-human-ai-collaboration-a-paradox-in-stanfords-51-deployments-1kpi",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.033406"
+    },
+    {
+        "titulo": "How AI Applications Answer From Your Data, Not Their Training",
+        "enlace": "https://dev.to/abinash1417/how-i-used-rag-to-make-my-ai-pdf-generator-actually-smart-7h4",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.033490"
+    },
+    {
+        "titulo": "My AI agent's CI bill was 6 higher than my last project's. Here's the spec I wrote to fix it.",
+        "enlace": "https://dev.to/maweis1981/my-ai-agents-ci-bill-was-6x-higher-than-my-last-projects-heres-the-spec-i-wrote-to-fix-it-4n6a",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.033579"
+    },
+    {
+        "titulo": "My Claude Code hook silently ate every Korean character, and it took me an hour to figure out why",
+        "enlace": "https://dev.to/codingjhj/my-claude-code-hook-silently-ate-every-korean-character-and-it-took-me-an-hour-to-figure-out-why-3ii4",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:46.033669"
+    },
+    {
+        "titulo": "The Fitbit Air is a good wearable weighed down by a chatty AI “coach”",
+        "enlace": "https://arstechnica.com/gadgets/2026/06/the-fitbit-air-is-great-but-googles-ai-is-too-nice-to-be-your-coach/",
+        "fuente": "Ars Technica",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:47.061645"
+    },
+    {
+        "titulo": "Review: AMD’s Radeon RX 9070 GRE is a disappointing way to spend $549",
+        "enlace": "https://arstechnica.com/gadgets/2026/06/amd-radeon-rx-9070-gre-review-shrinkflation-isnt-just-for-groceries-anymore/",
+        "fuente": "Ars Technica",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:47.061794"
+    },
+    {
+        "titulo": "New social features further Plex’s evolution from media server business",
+        "enlace": "https://arstechnica.com/gadgets/2026/06/new-social-features-further-plexs-evolution-from-media-server-business/",
+        "fuente": "Ars Technica",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:47.061900"
+    },
+    {
+        "titulo": "AMD extends Socket AM5 support through at least 2029; AM4 refuses to die",
+        "enlace": "https://arstechnica.com/gadgets/2026/06/amd-extends-socket-am5-support-through-at-least-2029-am4-refuses-to-die/",
+        "fuente": "Ars Technica",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:47.062129"
+    },
+    {
+        "titulo": "Nvidia RTX Spark comes to Windows PCs with Arm CPU, RTX GPU, and unified memory",
+        "enlace": "https://arstechnica.com/gadgets/2026/06/nvidia-gets-into-the-arm-pc-business-with-new-high-end-rtx-spark-processor/",
+        "fuente": "Ars Technica",
+        "tipo": "noticia",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "f": "06/06",
+        "ts": "2026-06-06T09:19:47.062239"
+    },
+    {
         "titulo": "El diseñador de combate de Tomb Raider: Legacy of Atlantis hace soñar a los fans del remake con batallas memorables contra jefes tras aplaudir a Elden Ring",
         "enlace": "https://www.hobbyconsolas.com/videojuegos/disenador-combate-tomb-raider-legacy-of-atlantis-hace-sonar-los-fans-remake-con-batallas-memorables-contra-jefes-tras-aplaudir-elden-ring_6976632_0.html",
         "fuente": "HobbyConsolas",
@@ -5508,495 +5998,5 @@
         "imagen_url_original": "",
         "f": "05/04",
         "ts": "2026-04-05T13:27:52.777602"
-    },
-    {
-        "titulo": "From Stockout to Stock-Smart: AI-Powered Predictive Reordering",
-        "enlace": "https://dev.to/ken_deng_ai/from-stockout-to-stock-smart-ai-powered-predictive-reordering-5a16",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T13:27:52.777780"
-    },
-    {
-        "titulo": "Lanzamos Xataka Xtra: tu experiencia en Xataka sube de nivel con newsletters exclusivas, sorteos, El Consultorio y más",
-        "enlace": "https://www.xataka.com/xataka-xtra/lanzamos-xataka-xtra-tu-experiencia-xataka-sube-nivel-newsletters-exclusivas-sorteos-consultorio?utm_source=genbeta&utm_medium=network&utm_campaign=repost",
-        "fuente": "Genbeta",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.661197"
-    },
-    {
-        "titulo": "El creador de Alone in the Dark está financiando un nuevo juego de Mega Drive con un mando nunca visto",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/creador-alone-in-the-dark-esta-financiando-un-nuevo-juego-mega-drive-con-un-mando-nunca-visto_6954172_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.319027"
-    },
-    {
-        "titulo": "9 juegos de PS5 y PS4 en oferta con hasta un 85% de descuento y desde 3,29 euros que son obras maestras de sus respectivos géneros",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/9-juegos-ps5-ps4-oferta-con-hasta-un-85-descuento-desde-3-29-euros-que-son-obras-maestras-sus-respectivos-generos_6954017_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.319162"
-    },
-    {
-        "titulo": "Al actor original de Kratos en la saga griega le preguntan sobre el regreso de los minijuegos picantes y cree que volverán",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/actor-original-kratos-saga-griega-le-preguntan-sobre-regreso-los-minijuegos-picantes-cree-que-volveran_6954165_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.319246"
-    },
-    {
-        "titulo": "Call of Duty: Modern Warfare 3 estrena el documental “sobre uno los desarrollos más caóticos de la historia de los videojuegos”",
-        "enlace": "https://www.hobbyconsolas.com/hobbycine/call-of-duty-modern-warfare-3-estrena-documental-sobre-uno-los-desarrollos-mas-caoticos-historia-los-videojuegos_6954089_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.319419"
-    },
-    {
-        "titulo": "Casi 60 puntos del litoral valenciano esperan obras desde hace una década",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/04/05/mapa-puntos-negros-litoral-acumulan-128494012.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:41.163006"
-    },
-    {
-        "titulo": "Una violación en València que termina en archivo",
-        "enlace": "https://www.levante-emv.com/sucesos/2026/04/05/agresion-sexual-en-valencia-jueza-archiva-causa-hermanos-a-los-que-la-policia-sorprendio-violando-a-una-mujer-128748905.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:41.163102"
-    },
-    {
-        "titulo": "Violencia sexual: La amenaza que acecha a las mujeres sin hogar",
-        "enlace": "https://www.levante-emv.com/sucesos/2025/08/18/violacion-sintecho-valencia-violencia-sexual-amenaza-acecha-mujeres-sin-hogar-120633308.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:41.163184"
-    },
-    {
-        "titulo": "La Marina o la incapacidad de València para decidir su futuro",
-        "enlace": "https://www.levante-emv.com/opinion/2026/04/04/la-marina-de-valencia-valencia-copa-del-america-veles-e-vents-maria-jose-catala-ximo-puig-aurelio-martinez-malaga-santiago-calatrava-ricardo-bofill-norman-foster-david-chipperfield-generalitat-puertos-del-estado-bellas-artes-128744755.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "https://estaticos-cdn.prensaiberica.es/clip/273f8129-5bb5-4f38-b3dc-3276a0ae135a_source-aspect-ratio_320w_0.jpg",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:41.163306"
-    },
-    {
-        "titulo": "La Policía localiza un libro manuscrito del siglo XVII del Colegio del Arte Mayor de la Seda de València desaparecido hace un siglo",
-        "enlace": "https://www.levante-emv.com/sucesos/2026/04/05/policia-generalitat-localiza-libro-manuscrito-siglo-xvii-colegio-arte-mayor-seda-desaparecido-100-anos-128757764.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:41.163418"
-    },
-    {
-        "titulo": "Llevamos una década aceptando que un portátil de gama media tiene que ser de plástico crujiente y pantalla lavada. Apple acaba de decir 'basta' con el MacBook Neo",
-        "enlace": "https://www.applesfera.com/portatil/llevamos-decada-aceptando-que-portatil-barato-tiene-que-ser-plastico-crujiente-pantalla-lavada-apple-acaba-decir-basta-macbook-neo",
-        "fuente": "Applesfera",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "https://i.blogs.es/1ca165/macbook-neo/375_375.jpeg",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.570574"
-    },
-    {
-        "titulo": "He bajado al coche a probar la nueva app de ChatGPT para CarPlay. Por fin tengo un copiloto con el que se puede hablar de verdad",
-        "enlace": "https://www.applesfera.com/aplicaciones-ios/he-bajado-al-coche-a-probar-nueva-app-chatgpt-para-carplay-fin-tengo-copiloto-que-se-puede-hablar-verdad",
-        "fuente": "Applesfera",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "https://i.blogs.es/f1aa4b/chatgpt-coche/375_142.jpeg",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.570706"
-    },
-    {
-        "titulo": "Precio mínimo histórico para la powerbank ultradelgada de Xiaomi: es la compra ideal si no quieres llevar encima un armatoste",
-        "enlace": "https://www.applesfera.com/seleccion/precio-minimo-historico-para-powerbank-ultradelgada-xiaomi-compra-ideal-no-quieres-llevar-encima-armatoste",
-        "fuente": "Applesfera",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.570888"
-    },
-    {
-        "titulo": "El Apple Watch empezaba a agobiarme. Así que corté por las malas e hice todos estos cambios",
-        "enlace": "https://www.applesfera.com/apple-watch/apple-watch-empezaba-a-agobiarme-asi-que-corte-malas-e-hice-todos-estos-cambios",
-        "fuente": "Applesfera",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.570973"
-    },
-    {
-        "titulo": "Odio tener cinco cargadores diferentes y más, de viaje. Por eso compré este: es barato y me permite cargarlo todo a la vez",
-        "enlace": "https://www.applesfera.com/seleccion/odio-tener-cinco-cargadores-diferentes-viaje-eso-compre-este-barato-me-permite-cargarlo-todo-a-vez",
-        "fuente": "Applesfera",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.571113"
-    },
-    {
-        "titulo": "Anthropic says Claude Code subscribers will need to pay extra for OpenClaw usage",
-        "enlace": "https://techcrunch.com/2026/04/04/anthropic-says-claude-code-subscribers-will-need-to-pay-extra-for-openclaw-support/",
-        "fuente": "TechCrunch",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.265065"
-    },
-    {
-        "titulo": "I Built a Voice AI with Sub-500ms Latency. Here's the Echo Cancellation Problem Nobody Talks About",
-        "enlace": "https://dev.to/remi_etien/i-built-a-voice-ai-with-sub-500ms-latency-heres-the-echo-cancellation-problem-nobody-talks-about-14la",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.871063"
-    },
-    {
-        "titulo": "Your LLM Passes Type Checks but Fails the \"Vibe Check\": How I Fixed AI Reliability",
-        "enlace": "https://dev.to/akhona_eland_072dac9e0c2c/your-llm-passes-type-checks-but-fails-the-vibe-check-how-i-fixed-ai-reliability-38ac",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.871170"
-    },
-    {
-        "titulo": "LoreKit - AI That GMs Full TTRPG Campaigns",
-        "enlace": "https://dev.to/matluz/i-built-an-ai-that-gms-full-ttrpg-campaigns-774",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.871271"
-    },
-    {
-        "titulo": "What I Learned Supervising 5 AI Agents on a Real Project",
-        "enlace": "https://dev.to/battyterm/what-i-learned-supervising-5-ai-agents-on-a-real-project-cl8",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.871363"
-    },
-    {
-        "titulo": "How I Found $1,240/Month in Wasted LLM API Costs (And Built a Tool to Find Yours)",
-        "enlace": "https://dev.to/buildwithabid/how-i-found-1240month-in-wasted-llm-api-costs-and-built-a-tool-to-find-yours-3041",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.871450"
-    },
-    {
-        "titulo": "I Built a Self-Hosted AI Agent That Runs on a Raspberry Pi",
-        "enlace": "https://dev.to/thegdsks/i-built-a-self-hosted-ai-agent-that-runs-on-a-raspberry-pi-161e",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.871539"
-    },
-    {
-        "titulo": "LLM Semantic Caching: The 95% Hit Rate Myth (and What Production Data Actually Shows)",
-        "enlace": "https://dev.to/gauravdagde/llm-semantic-caching-the-95-hit-rate-myth-and-what-production-data-actually-shows-8ga",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.871662"
-    },
-    {
-        "titulo": "How to Supervise AI Coding Agents Without Losing Your Mind",
-        "enlace": "https://dev.to/battyterm/how-to-supervise-ai-coding-agents-without-losing-your-mind-53m4",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "https://assets.dev.to/assets/raised-hands-74b2099fd66a39f2d7eed9305ee0f4553df0eb7b4f11b01b6b1b499973048fe5.svg",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.871769"
-    },
-    {
-        "titulo": "Your AI Agent Stopped Responding 2 Hours Ago. Nobody Noticed.",
-        "enlace": "https://dev.to/george_belsky_a513cfbf3df/your-ai-agent-stopped-responding-2-hours-ago-nobody-noticed-5340",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "05/04",
-        "ts": "2026-04-05T11:44:40.871857"
-    },
-    {
-        "titulo": "State of Decay 3 aleja los temores de cancelación al anunciar su versión alfa en mayo, con las inscripciones ya abiertas",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/state-of-decay-3-aleja-los-temores-cancelacion-anunciar-su-version-alfa-mayo-con-las-inscripciones-ya-abiertas_6953999_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:31.808437"
-    },
-    {
-        "titulo": "Square Enix se corona como la mejor editora de 2026 según el ranking de Metacritic, que \"castiga\" a Nintendo y Sony a posiciones intermedias",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/square-enix-se-corona-como-mejor-editora-2026-segun-ranking-metacritic-que-castiga-nintendo-sony-posiciones-intermedias_6953984_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:31.808598"
-    },
-    {
-        "titulo": "La nueva película de Resident Evil entusiasma al público en su primer pase: \"es un Mad Max Fury Road de terror\"",
-        "enlace": "https://www.hobbyconsolas.com/hobbycine/nueva-pelicula-resident-evil-entusiasma-publico-su-primer-pase-es-un-mad-max-fury-road-terror_6953987_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:31.808702"
-    },
-    {
-        "titulo": "El éxito de Clair Obscur Expedition 33 estaba claro para una de las responsables de Baldur's Gate 3: \"me aposté 33 baguettes\"",
-        "enlace": "https://www.hobbyconsolas.com/videojuegos/exito-clair-obscur-expedition-33-estaba-claro-para-una-las-responsables-baldur-s-gate-3-me-aposte-33-baguettes_6953977_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:31.808779"
-    },
-    {
-        "titulo": "The Hunt For Gollum no será la reunión esperada: Andy Serkis confirma que Viggo Mortensen no regresará como Aragorn",
-        "enlace": "https://www.hobbyconsolas.com/hobbycine/the-hunt-for-gollum-no-sera-reunion-esperada-andy-serkis-confirma-que-viggo-mortensen-no-regresara-como-aragorn_6953936_0.html",
-        "fuente": "HobbyConsolas",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:31.808855"
-    },
-    {
-        "titulo": "Flaquea el veto a las redes de los menores en Australia: la mayoría las sigue usando y el Gobierno amenaza a las empresas",
-        "enlace": "https://elpais.com/tecnologia/2026-03-31/flaquea-el-veto-a-las-redes-de-los-menores-australianos-la-mayoria-las-sigue-usando-y-el-gobierno-amenaza-a-las-empresas.html",
-        "fuente": "El País Tecnología",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:32.518194"
-    },
-    {
-        "titulo": "Mette Lykke, consejera delegada de Too Good To Go: “Tiramos alimentos por valor de un billón de euros al año”",
-        "enlace": "https://elpais.com/sociedad/2026-03-31/mette-lykke-consejera-delegada-de-too-good-to-go-tiramos-alimentos-por-valor-de-un-billon-de-euros-al-ano.html",
-        "fuente": "El País Tecnología",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "https://imagenes.elpais.com/resizer/v2/7XAKUOJCMZAXLDSA4OSJ5K2VJQ.jpg?auth=c169eee50bd2214560c17dff510331d4b701c58303bd62fb2e09d0732ac3d042&width=414&height=233&smart=true",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:32.518370"
-    },
-    {
-        "titulo": "De una exempleada de Facebook a padres desesperados: así se fraguó el mayor revés judicial contra las redes sociales",
-        "enlace": "https://elpais.com/tecnologia/2026-03-30/de-una-exempleada-de-facebook-a-padres-desesperados-asi-se-fraguo-el-mayor-reves-judicial-contra-las-redes-sociales.html",
-        "fuente": "El País Tecnología",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:32.518466"
-    },
-    {
-        "titulo": "Las obras tras la dana transforman las cuencas de los ríos Túria y Magre",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/04/04/transformacion-cuencas-turia-magre-raiz-128676071.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:32.728531"
-    },
-    {
-        "titulo": "El TSJCV rechaza el recurso de los extrabajadores de La Marina para frenar la disolución del Consorcio Valencia 2007",
-        "enlace": "https://www.levante-emv.com/valencia/2026/04/04/tsjcv-rechaza-recurso-extrabajadores-marina-128608363.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "badge": "Beca",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:32.728646"
-    },
-    {
-        "titulo": "Una triste goleada del Valencia al Celta",
-        "enlace": "https://www.levante-emv.com/deportes/2026/04/04/triste-goleada-valencia-celta-paco-lloret-128715002.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:32.728764"
-    },
-    {
-        "titulo": "La Policía sorprende a dos hermanos violando a una mujer en un coche abandonado en Valencia",
-        "enlace": "https://www.levante-emv.com/sucesos/2026/04/04/detenidos-hermanos-valencia-violar-mujer-coche-abandonado-descampado-malilla-128728664.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:32.728872"
-    },
-    {
-        "titulo": "De Beniparrell a la órbita lunar: tecnología valenciana en el montaje de la futura nave de Artemis IV",
-        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/04/04/beniparrell-orbita-lunar-tecnologia-valenciana-128723755.html",
-        "fuente": "Levante-EMV",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:32.728976"
-    },
-    {
-        "titulo": "En 3 días regresa uno de los mejores animes de la historia. La temporada 2 llega tras casi 30 años en emisión con un cambio histórico para el futuro de la serie",
-        "enlace": "https://www.espinof.com/anime/3-dias-regresa-uno-mejores-animes-historia-temporada-2-llega-casi-30-anos-emision-cambio-historico-para-futuro-serie?utm_source=applesfera&utm_medium=network&utm_campaign=repost",
-        "fuente": "Applesfera",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:31.564440"
-    },
-    {
-        "titulo": "Los móviles estaban totalmente prohibidos en las naves de la NASA. Los astronautas que viajan a la Luna acaban de romper la norma con sus iPhone 17 Pro",
-        "enlace": "https://www.applesfera.com/iphone/astronautas-que-vuelan-luna-querian-hacerse-fotos-recuerdo-solucion-nasa-ha-sido-inedita-meterles-iphone-bolsillo",
-        "fuente": "Applesfera",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:31.564544"
-    },
-    {
-        "titulo": "El mayor problema de vivir en Marte no es el oxígeno: los humanos que nazcan allí dejarán de ser Homo sapiens",
-        "enlace": "https://www.xataka.com/espacio/mayor-problema-vivir-marte-no-oxigeno-humanos-que-nazcan-alli-dejaran-ser-homo-sapiens?utm_source=applesfera&utm_medium=network&utm_campaign=repost",
-        "fuente": "Applesfera",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:31.564684"
-    },
-    {
-        "titulo": "Aumentar el almacenamiento del Mac mini M4 es tan fácil como utilizar este soporte que además te añade varios puertos",
-        "enlace": "https://www.applesfera.com/seleccion/aumentar-almacenamiento-mac-mini-m4-facil-como-utilizar-este-soporte-que-te-anade-varios-puertos",
-        "fuente": "Applesfera",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:31.564792"
-    },
-    {
-        "titulo": "MacBook Air M5, análisis: tiene poco que envidiar a los 'Pro' (y al 'Neo')",
-        "enlace": "https://www.applesfera.com/analisis/apple-macbook-air-m5-analisis-caracteristicas-especificaciones",
-        "fuente": "Applesfera",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:31.564897"
-    },
-    {
-        "titulo": "Anthropic is having a moment in the private markets; SpaceX could spoil the party",
-        "enlace": "https://techcrunch.com/2026/04/03/anthropic-is-having-a-moment-in-the-private-markets-spacex-could-spoil-the-party/",
-        "fuente": "TechCrunch",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:31.339392"
-    },
-    {
-        "titulo": "OpenAI executive shuffle includes new role for COO Brad Lightcap to lead ‘special projects’",
-        "enlace": "https://techcrunch.com/2026/04/03/openai-executive-shuffle-new-roles-coo-brad-lightcap-fidji-simo-kate-rouch/",
-        "fuente": "TechCrunch",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:31.339494"
-    },
-    {
-        "titulo": "Anthropic buys biotech startup Coefficient Bio in $400M deal: Reports",
-        "enlace": "https://techcrunch.com/2026/04/03/anthropic-buys-biotech-startup-coefficient-bio-in-400m-deal-reports/",
-        "fuente": "TechCrunch",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:31.339595"
-    },
-    {
-        "titulo": "Anthropic ramps up its political activities with a new PAC",
-        "enlace": "https://techcrunch.com/2026/04/03/anthropic-ramps-up-its-political-activities-with-a-new-pac/",
-        "fuente": "TechCrunch",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:31.339713"
-    },
-    {
-        "titulo": "AI companies are building huge natural gas plants to power data centers. What could go wrong?",
-        "enlace": "https://techcrunch.com/2026/04/03/ai-companies-are-building-huge-natural-gas-plants-to-power-data-centers-what-could-go-wrong/",
-        "fuente": "TechCrunch",
-        "tipo": "noticia",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "f": "04/04",
-        "ts": "2026-04-04T07:43:31.339802"
     }
 ]
