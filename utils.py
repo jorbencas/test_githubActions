@@ -2,17 +2,16 @@ import os
 import json
 import re
 import asyncio
-import requests
 import logging
-from datetime import datetime
 from slugify import slugify
-from google import genai
 from constants_downloadfile import CONFIG, PROMPT_IMAGEN_TEMPLATE
 import solutions_db
 
-logger = logging.getLogger("scraper")-+, lang="Python"):
+
+logger = logging.getLogger("scraper")
+
+async def obtener_solucion_ia(titulo, fuente, client, lang="Python"):
     """Obtiene solución técnica probando varios modelos si falla la cuota."""
-    from constants_downloadfile import CONFIG
     modelos = CONFIG.get("AI_MODELS", ["gemini-2.0-flash-lite"])
     
     prompt = f"""
@@ -70,7 +69,6 @@ logger = logging.getLogger("scraper")-+, lang="Python"):
 
 async def obtener_recap_semanal_ia(noticias, client):
     """Genera el resumen semanal probando varios modelos."""
-    from constants_downloadfile import CONFIG
     modelos = CONFIG.get("AI_MODELS", ["gemini-2.0-flash-lite"])
     
     texto_noticias = "\n".join([f"- {n['fuente']}: {n['titulo']}" for n in noticias[:15]])
@@ -130,7 +128,7 @@ async def obtener_recap_semanal_ia(noticias, client):
 
 async def generar_imagen_noticia(titulo_noticia, client, prompt_template=PROMPT_IMAGEN_TEMPLATE, fallback_url=None):
     """Genera imagen con fallback de modelos."""
-    from constants_downloadfile import CONFIG
+
     modelos = CONFIG.get("IMAGE_MODELS", ["gemini-3-flash-image"])
     
     slug = slugify(titulo_noticia)[:40]
@@ -161,7 +159,6 @@ async def traducir_titulos_ia(noticias, client):
     """Traduce una lista de títulos al español en un solo bloque usando Gemini."""
     if not noticias: return noticias
     
-    from constants_downloadfile import CONFIG
     modelos = CONFIG.get("AI_MODELS", ["gemini-2.0-flash-lite"])
     
     # Preparamos el texto a traducir

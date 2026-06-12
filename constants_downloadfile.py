@@ -10,8 +10,8 @@ CONFIG = {
     "FOLDER": "files",
     "IMAGES_FOLDER": "images",
     "IMAGES_PATH_PREFIX": "public/optimizado",
-    "AI_MODELS": ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-2.0-flash-lite", "gemini-2.0-flash"],
-    "IMAGE_MODELS": ["imagen-3.0-generate-001", "gemini-1.5-flash"] # Fallback para imagen
+    "AI_MODELS": ["gemini-3.5-flash", "gemini-3.1-pro", "gemini-3.1-flash-lite", "gemini-2.5-flash"],
+    "IMAGE_MODELS": ["nano-banana-pro", "nano-banana", "imagen-2.0-generate-001", "gemini-1.5-flash", "gemini-3.1-flash-image"] # Fallback para imagen
 }
 
 URL_API_DESCARGA = "https://testactions1github-api-python.hf.space/download"
