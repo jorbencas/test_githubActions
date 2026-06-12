@@ -623,39 +623,83 @@ def enviar_email_reporte(resumen_html, nuevos):
         logger.error(f"❌ Error enviando email: {e}")
 
 
-async def enviar_telegram_con_audio(resumen_texto, nuevos):
+async def enviar_telegram_con_audio(resumen, nuevos):
     """Envía el resumen vía Telegram y opcionalmente un audio generado por TTS."""
     if not CONFIG["TELEGRAM_TOKEN"] or not CONFIG["TELEGRAM_CHAT_ID"]:
         return
 
-    texto_limpio = BeautifulSoup(resumen_texto, "html.parser").get_text()
-    mensaje = f"🤖 *Tech Pulse Briefing*\n\n{texto_limpio[:4000]}"
-    
-    url_base = f"https://api.telegram.org/bot{CONFIG['TELEGRAM_TOKEN']}"
-    
+    resumen_md = resumen.replace("<p style='margin-bottom:15px; line-height:1.6;'>", "").replace("</p>", "\n\n")
+
+    resumen_md = resumen_md.replace("<b>", "*").replace("</b>", "*")
+    fecha_str = datetime.now().strftime('%d/%m')
+    caption = f"🤖 *RESUMEN IA - {fecha_str}*\n"
+
+    # Añadimos el resumen (limitamos a 600 caracteres para dejar espacio a los links)
+    resumen_recortado = (resumen_md[:600] + '...') if len(resumen_md) > 600 else resumen_md
+    caption += f"{resumen_recortado.strip()}\n\n"
+    caption += f"📋 *TOP ENLACES:*\n"
+
+    # 3. Añadir enlaces controlando el espacio restante
+    # Dejamos un margen de seguridad (100 caracteres para el botón y despedida)
+    LIMITE_TELEGRAM = 1024
+    MARGEN_SEGURIDAD = 100
+
+    for n in nuevos:
+        if n.get('id_video'): icono = "📺"
+        elif n.get('badge') == "Beca": icono = "🎓"
+        else: icono = "💻"
+
+        nuevo_item = f"{icono} [{n['fuente']}]({n['enlace']}) "
+
+        # Si añadir este link supera el límite, paramos
+        if len(caption) + len(nuevo_item) > (LIMITE_TELEGRAM - MARGEN_SEGURIDAD):
+            caption += "\n\n⚠️ _Hay más enlaces en el Dashboard..._"
+            break
+        else:
+            caption += nuevo_item
+
+
+    VOZ_ELEGIDA = "es-ES-AlvaroNeural" # Otras: es-ES-ElviraNeural, es-MX-JorgeNeural
+    audio_path = "resumen.mp3"
+    texto_para_voz = resumen_recortado[:800] # Álvaro lee mejor textos de esta longitud
     try:
-        # Enviar mensaje de texto
-        requests.post(f"{url_base}/sendMessage", data={
-            "chat_id": CONFIG["TELEGRAM_CHAT_ID"],
-            "text": mensaje,
-            "parse_mode": "Markdown"
-        }, timeout=10)
-        
-        # Generar Audio TTS del resumen
-        audio_path = os.path.join(CONFIG["FOLDER"], "resumen_hoy.mp3")
-        communicate = edge_tts.Communicate(texto_limpio[:1500], "es-ES-AlvaroNeural")
+        # Generamos el archivo de audio
+        communicate = edge_tts.Communicate(texto_para_voz, VOZ_ELEGIDA)
         await communicate.save(audio_path)
-        
-        # Enviar archivo de audio
-        with open(audio_path, "rb") as audio:
-            requests.post(f"{url_base}/sendAudio", data={
-                "chat_id": CONFIG["TELEGRAM_CHAT_ID"],
-                "caption": "🎙️ Escucha el resumen inteligente de hoy"
-            }, files={"audio": audio}, timeout=20)
-            
-        logger.info("📢 Reporte de Telegram y Audio TTS enviados.")
+
+        # 4. ENVÍO A TELEGRAM (Corregido el error de binary mode y el envío)
+        url = f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice"
+
+        with open(audio_path, "rb") as audio_file:
+            files = {'voice': (audio_path, audio_file, 'audio/mpeg')}
+            payload = {
+                "chat_id": CONFIG["CHAT_ID"], 
+                "caption": caption, 
+                "parse_mode": "Markdown",
+                "reply_markup": json.dumps({
+                    "inline_keyboard": [[{"text": "🌐 Dashboard", "url": "http://jorbencasdownloaderdocument.surge.sh"}]]
+                }, ensure_ascii=False)
+            }
+            # El post debe ir dentro del 'with' para que el archivo esté abierto
+            r = requests.post(url, data=payload, files=files)
+
+        if not r.ok:
+            # FALLBACK: Si falla el Markdown por caracteres raros, reintentamos sin Markdown
+            logger.warning(f"⚠️ Reintentando envío sin Markdown por error: {r.text}")
+            payload.pop("parse_mode")
+            # Limpiamos el caption de caracteres de escape para texto plano
+            payload["caption"] = caption.replace("\\_", "_").replace("\\*", "*")
+            with open(audio_path, "rb") as audio_file:
+                files = {'voice': (audio_path, audio_file, 'audio/mpeg')}
+                r = requests.post(url, data=payload, files=files)
+        # Limpieza: Borramos el archivo temporal
+        if os.path.exists(audio_path): os.remove(audio_path)
+
+        if r.status_code == 200: logger.info("✅ Telegram con voz humana enviado")
+        else: logger.error(f"❌ Error Telegram: {r.text}")
+
     except Exception as e:
-        logger.error(f"❌ Error en Telegram/TTS: {e}")
+        logger.error(f"⚠️ Error en TTS Humano: {e}")
 
 
 async def publicar_contenidos(historial, noticias_web, scr):
