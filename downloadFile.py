@@ -668,12 +668,12 @@ async def enviar_telegram_con_audio(resumen, nuevos):
         await communicate.save(audio_path)
 
         # 4. ENVÍO A TELEGRAM (Corregido el error de binary mode y el envío)
-        url = f"https://api.telegram.org/bot{CONFIG['BOT_TOKEN']}/sendVoice"
+        url = f"https://api.telegram.org/bot{CONFIG['TELEGRAM_TOKEN']}/sendVoice"
 
         with open(audio_path, "rb") as audio_file:
             files = {'voice': (audio_path, audio_file, 'audio/mpeg')}
             payload = {
-                "chat_id": CONFIG["CHAT_ID"], 
+                "chat_id": CONFIG["TELEGRAM_CHAT_ID"], 
                 "caption": caption, 
                 "parse_mode": "Markdown",
                 "reply_markup": json.dumps({
