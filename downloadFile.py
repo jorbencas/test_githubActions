@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 from collections import Counter
 from google import genai
 import edge_tts
-from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE, RETO_MD_TEMPLATE, URL_API_DESCARGA, URL_API_SALUD
+from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE, RETO_MD_TEMPLATE, URL_API_DESCARGA, URL_API_SALUD
 from utils import obtener_solucion_ia, generar_imagen_noticia, obtener_recap_semanal_ia, traducir_titulos_ia
 from slugify import slugify 
 import html
@@ -380,7 +380,7 @@ async def generar_retos_individuales(noticias_web, fecha_iso, client):
                         paso_1=sol.get('paso1', 'Analizando...'),
                         paso_2=sol.get('paso2', 'Ejecutando...'),
                         paso_3=sol.get('paso3', 'Optimizando...'),
-                        lenguaje_lower=lang,
+                        lenguaje_display=lang,
                         codigo_solucion=sol.get('codigo', '')
                     )
 

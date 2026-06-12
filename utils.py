@@ -7,7 +7,6 @@ from slugify import slugify
 from constants_downloadfile import CONFIG, PROMPT_IMAGEN_TEMPLATE
 import solutions_db
 
-
 logger = logging.getLogger("scraper")
 
 async def obtener_solucion_ia(titulo, fuente, client, lang="Python"):
@@ -145,7 +144,7 @@ async def generar_imagen_noticia(titulo_noticia, client, prompt_template=PROMPT_
     for modelo in modelos:
         try:
             logger.info(f"🎨 Generando imagen con {modelo} para: '{titulo_noticia}'...")
-            response = client.models.generate_image(model=modelo, prompt=prompt_completo)
+            response = client.models.generate_images(model=modelo, prompt=prompt_completo, config=dict(number_of_images=1))
             os.makedirs(images_folder, exist_ok=True)
             with open(filepath, 'wb') as f:
                 f.write(response.image_bytes)
