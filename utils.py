@@ -10,9 +10,7 @@ from google import genai
 from constants_downloadfile import CONFIG, PROMPT_IMAGEN_TEMPLATE
 import solutions_db
 
-logger = logging.getLogger("scraper")
-
-async def obtener_solucion_ia(titulo, fuente, client, lang="Python"):
+logger = logging.getLogger("scraper")-+, lang="Python"):
     """Obtiene solución técnica probando varios modelos si falla la cuota."""
     from constants_downloadfile import CONFIG
     modelos = CONFIG.get("AI_MODELS", ["gemini-2.0-flash-lite"])

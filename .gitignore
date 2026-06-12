@@ -4,3 +4,4 @@ optimixed_cache.json
 local_run.py
 __pycache__/
 .venv/
+*.log

@@ -129,59 +129,103 @@ HTML_TEMPLATE = """
 
 EMAIL_TEMPLATE = """
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Actualización Tecnológica</title>
+    <title>Tech Pulse Newsletter</title>
+    <style>
+        @media only screen and (max-width: 620px) {{
+            .container {{ width: 100% !important; margin: 0 !important; border-radius: 0 !important; }}
+            .content {{ padding: 20px !important; }}
+            .stat-cell {{ display: block !important; width: 100% !important; border: none !important; padding: 10px 0 !important; }}
+            .stat-border {{ border: none !important; border-top: 1px solid #e2e8f0 !important; border-bottom: 1px solid #e2e8f0 !important; }}
+        }}
+    </style>
 </head>
-<body style="margin: 0; padding: 0; background-color: #f4f7f9; font-family: Arial, sans-serif;">
+<body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased;">
+    
+    <!-- Preheader invisible para lectores de correo -->
     <div style="display: none; max-height: 0px; overflow: hidden;">
         Resumen de hoy: {total_noticias} novedades encontradas sobre {temas_clave}...
     </div>
 
-    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; background-color: #ffffff; margin: 20px auto; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="container" style="max-width: 600px; background-color: #ffffff; margin: 30px auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05); overflow: hidden; border: 1px solid #e2e8f0;">
+        
+        <!-- ENCABEZADO ESTILO NEWSLETTER -->
         <tr>
-            <td bgcolor="#1a73e8" style="padding: 40px 20px; text-align: center; border-radius: 10px 10px 0 0;">
-                <h1 style="color: #ffffff; margin: 0; font-size: 26px; letter-spacing: 1px;">Tech Pulse News</h1>
-                <p style="color: #c2e7ff; margin: 10px 0 0 0; font-size: 14px; font-weight: bold;">{fecha_hoy}</p>
+            <td style="padding: 40px 40px 20px 40px; text-align: left; background-color: #ffffff; border-bottom: 2px solid #f1f5f9;">
+                <p style="margin: 0; font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1.5px;">EDICIÓN DIARIA</p>
+                <h1 style="color: #0f172a; margin: 4px 0 0 0; font-size: 32px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.1;">Tech Pulse</h1>
+                <div style="height: 4px; width: 40px; background-color: #6366f1; margin: 16px 0 0 0; border-radius: 2px;"></div>
+                <p style="color: #475569; margin: 12px 0 0 0; font-size: 14px; font-weight: 500;">{fecha_hoy}</p>
             </td>
         </tr>
         
+        <!-- DASHBOARD DE METRICAS RAPIDAS -->
         <tr>
-            <td style="padding: 20px 40px 0 40px;">
-                <table width="100%" style="background: #f8f9fa; border-radius: 8px; padding: 15px; text-align: center;">
+            <td class="content" style="padding: 24px 40px 0 40px;">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; padding: 16px; text-align: center;">
                     <tr>
-                        <td width="33%"> <b style="font-size: 20px; color: #1a73e8;">{count_tech}</b><br><span style="font-size: 12px; color: #666;">Noticias Tech</span> </td>
-                        <td width="33%" style="border-left: 1px solid #ddd; border-right: 1px solid #ddd;"> <b style="font-size: 20px; color: #2e7d32;">{count_becas}</b><br><span style="font-size: 12px; color: #666;">Becas/Ayudas</span> </td>
-                        <td width="33%"> <b style="font-size: 20px; color: #d93025;">{count_vids}</b><br><span style="font-size: 12px; color: #666;">Multimedia</span> </td>
+                        <td width="33%" class="stat-cell" style="vertical-align: top;">
+                            <b style="font-size: 22px; color: #4f46e5; font-weight: 800;">{count_tech}</b><br>
+                            <span style="font-size: 12px; font-weight: 600; color: #64748b; display: inline-block; margin-top: 4px;">Noticias Tech</span>
+                        </td>
+                        <td width="33%" class="stat-cell stat-border" style="vertical-align: top; border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0;">
+                            <b style="font-size: 22px; color: #16a34a; font-weight: 800;">{count_becas}</b><br>
+                            <span style="font-size: 12px; font-weight: 600; color: #64748b; display: inline-block; margin-top: 4px;">Becas / Ayudas</span>
+                        </td>
+                        <td width="33%" class="stat-cell" style="vertical-align: top;">
+                            <b style="font-size: 22px; color: #dc2626; font-weight: 800;">{count_vids}</b><br>
+                            <span style="font-size: 12px; font-weight: 600; color: #64748b; display: inline-block; margin-top: 4px;">Multimedia</span>
+                        </td>
                     </tr>
                 </table>
             </td>
         </tr>
 
+        <!-- CONTENIDO PRINCIPAL: RESUMEN IA -->
         <tr>
-            <td style="padding: 30px 40px;">
-                <h2 style="color: #8e44ad; font-size: 18px; margin-bottom: 15px;">🤖 Resumen Inteligente</h2>
-                <div style="line-height: 1.6; color: #3c4043; font-size: 15px; background: #fdf7ff; padding: 20px; border-radius: 8px; border-left: 4px solid #8e44ad;">
+            <td class="content" style="padding: 30px 40px 10px 40px;">
+                <h2 style="color: #0f172a; font-size: 18px; font-weight: 700; margin: 0 0 14px 0; display: flex; align-items: center;">
+                    <span style="margin-right: 8px;">🤖</span> Resumen Inteligente del día
+                </h2>
+                <div style="line-height: 1.6; color: #334155; font-size: 15px; background: #fafafa; padding: 24px; border-radius: 10px; border-left: 4px solid #6366f1; border: 1px solid #e2e8f0; border-left: 4px solid #6366f1; box-shadow: inset 0 1px 2px rgba(0,0,0,0.01);">
                     {contenido_html}
                 </div>
             </td>
         </tr>
 
+        <!-- LISTA CURADA DE ENLACES -->
         <tr>
-            <td style="padding: 0 40px 40px 40px;">
-                <h2 style="color: #202124; font-size: 18px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;">📋 Selección para ti</h2>
+            <td class="content" style="padding: 20px 40px 40px 40px;">
+                <h2 style="color: #0f172a; font-size: 18px; font-weight: 700; margin: 0 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #f1f5f9;">
+                    <span style="margin-right: 8px;">📋</span> Lecturas y contenido seleccionado
+                </h2>
                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
                     {lista_email}
                 </table>
             </td>
         </tr>
 
+        <!-- PIE DE PAGINA -->
         <tr>
-            <td style="padding: 20px; text-align: center; background: #f1f3f4; border-radius: 0 0 10px 10px;">
-                <p style="font-size: 12px; color: #70757a; margin: 0;">
-                    Generado automáticamente para Jorge Beneyto.<br>
-                    <a href="http://jorbencasdownloaderdocument.surge.sh" style="color: #1a73e8; text-decoration: none; font-weight: bold;">Acceder al Dashboard Histórico</a>
+            <td class="content" style="padding: 30px 40px; text-align: center; background: #f8fafc; border-top: 1px solid #e2e8f0;">
+                <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.5;">
+                    Esta newsletter ha sido compilada de forma automatizada.<br>
+                    Preparado en exclusiva para <strong>Jorge Beneyto Castelló</strong>.
+                </p>
+                <table border="0" cellpadding="0" cellspacing="0" align="center" style="margin-top: 20px;">
+                    <tr>
+                        <td align="center" bgcolor="#4f46e5" style="border-radius: 6px;">
+                            <a href="http://jorbencasdownloaderdocument.surge.sh" target="_blank" style="font-size: 13px; font-weight: 600; color: #ffffff; text-decoration: none; display: inline-block; padding: 10px 18px;">
+                                Abrir Dashboard Histórico →
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+                <p style="font-size: 11px; color: #94a3b8; margin: 24px 0 0 0;">
+                    &copy; {year} Tech Pulse Briefing. Todos los derechos reservados.
                 </p>
             </td>
         </tr>
