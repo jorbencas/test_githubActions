@@ -1,5 +1,125 @@
 [
     {
+        "titulo": "Creé un SOFTWARE BRUTAL para PSICÓLOGAS desde cero: Así funciona PsicoCMS",
+        "enlace": "https://www.youtube.com/watch?v=l3l5P-LrU3Y",
+        "fuente": "Victor Robles",
+        "tipo": "video",
+        "f": "12/06",
+        "id_video": "l3l5P-LrU3Y",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T15:16:30.265226"
+    },
+    {
+        "titulo": "Publicado el calendario escolar de la C. Valenciana: el curso 2026-2027 empezará el 9 de septiembre y acabará el 18 de junio",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/06/12/publicado-calendario-escolar-curso-2026-131342381.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Beca",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T15:16:31.894948"
+    },
+    {
+        "titulo": "Notas de la PAU 2026 en la Comunitat Valenciana: consulta los resultados de la Selectividad",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/06/12/dia-hora-sabran-notas-pau-131161432.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T15:16:31.895244"
+    },
+    {
+        "titulo": "La Universitat de València oferta 75 titulaciones para el curso 2026-27",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/06/12/universitat-valencia-oferta-75-titulaciones-131333410.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Beca",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T15:16:31.895314"
+    },
+    {
+        "titulo": "He instalado macOS 27 Golden Gate. El sistema vuela, pero hay un cambio de diseño que me tiene dividido",
+        "enlace": "https://www.applesfera.com/os-x/he-instalado-macos-27-golden-gate-sistema-vuela-hay-cambio-diseno-que-me-tiene-dividido",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T15:16:33.299991"
+    },
+    {
+        "titulo": "Liquid Glass a tu gusto: el rediseño oculto en iOS 27 y macOS Golden Gate que cambia mucho la experiencia",
+        "enlace": "https://www.applesfera.com/tutoriales/liquid-glass-a-tu-gusto-rediseno-oculto-ios-27-macos-golden-gate-que-cambia-mucho-experiencia",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T15:16:33.300079"
+    },
+    {
+        "titulo": "SpaceX IPO: Everything you need to know",
+        "enlace": "https://techcrunch.com/2026/06/12/spacex-ipo-everything-you-need-to-know/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T15:16:34.404636"
+    },
+    {
+        "titulo": "The AI Wardriving Setup That Mapped 40,000 Networks in 72 Hours (And Vanished Without a Trace)",
+        "enlace": "https://dev.to/numbpill3d/the-ai-wardriving-setup-that-mapped-40000-networks-in-72-hours-and-vanished-without-a-trace-184c",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T15:16:35.820110"
+    },
+    {
+        "titulo": "Giving Your Local LLM Safe Filesystem Access With Ollama Tool Use",
+        "enlace": "https://dev.to/pavelespitia/giving-your-local-llm-safe-filesystem-access-with-ollama-tool-use-4o79",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T15:16:35.820193"
+    },
+    {
+        "titulo": "Claude Code Incident Review: What Anthropic's Three Production Bugs Teach Agent Engineers",
+        "enlace": "https://dev.to/luhuidev/claude-code-incident-review-what-anthropics-three-production-bugs-teach-agent-engineers-4jmo",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T15:16:35.820302"
+    },
+    {
+        "titulo": "AI Code Quality Is Not Repo Truth",
+        "enlace": "https://dev.to/scarab-systems/ai-code-quality-is-not-repo-truth-40j",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T15:16:35.820377"
+    },
+    {
         "titulo": "¿Programas pero no terminas nada? Mira esto",
         "enlace": "https://www.youtube.com/watch?v=pZ8dIzvYKV0",
         "fuente": "MoureDev",
