@@ -1,5 +1,70 @@
 [
     {
+        "titulo": "Cuando compras un dispositivo hoy, viene con batería gracias a Apple: cómo un empeño de Steve Jobs cambió la forma en la que se vendían los dispositivos",
+        "enlace": "https://www.applesfera.com/curiosidades/cuando-compras-dispositivo-hoy-viene-bateria-gracias-a-apple-como-empeno-steve-jobs-cambio-forma-que-se-vendian-dispositivos",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T19:28:52.495146"
+    },
+    {
+        "titulo": "SpaceX IPO: Live updates on everything you need to know",
+        "enlace": "https://techcrunch.com/2026/06/12/spacex-ipo-live-updates-on-everything-you-need-to-know/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T19:28:54.624638"
+    },
+    {
+        "titulo": "Google sues alleged Chinese cybercrime operation that used AI to send scam texts",
+        "enlace": "https://techcrunch.com/2026/06/12/google-sues-alleged-chinese-cybercrime-operation-that-used-ai-to-send-scam-texts/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T19:28:54.624850"
+    },
+    {
+        "titulo": "How to Give Your AI Agent a Budget (Before It Gives Itself One)",
+        "enlace": "https://dev.to/tonyspiro/how-to-give-your-ai-agent-a-budget-before-it-gives-itself-one-52ia",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T19:28:55.355103"
+    },
+    {
+        "titulo": "DiffusionGemma: How Google's New Open LLM Hits 1,000 Tokens/sec and Changes Inference Economics",
+        "enlace": "https://dev.to/sayed_ali_alkamel/diffusiongemma-how-googles-new-open-llm-hits-1000-tokenssec-and-changes-inference-economics-4587",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/exploding-head-daceb38d627e6ae9b730f36a1e390fca556a4289d5a41abb2c35068ad3e2c4b5.svg",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T19:28:55.355200"
+    },
+    {
+        "titulo": "Sonnet es mejor que Opus",
+        "enlace": "https://www.youtube.com/watch?v=C7XpJjAG2OA",
+        "fuente": "EDteam Shorts",
+        "tipo": "shorts",
+        "f": "12/06",
+        "id_video": "C7XpJjAG2OA",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T19:28:58.999524"
+    },
+    {
         "titulo": "Microsoft Build 2026 en 15 minutos: Lo MEJOR del evento",
         "enlace": "https://www.youtube.com/watch?v=92uv2v8jCyw",
         "fuente": "Midudev",
