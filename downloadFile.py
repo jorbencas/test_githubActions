@@ -610,7 +610,7 @@ def enviar_email_reporte(resumen_html, nuevos):
         auth_mailgun = ("api", CONFIG["MAIL_KEY"])
         data_mailgun = {
             "from": f"Tech Pulse <mailgun@{CONFIG.get('MAIL_DOMAIN')}>",
-            "to": [CONFIG.get("MAIL_TO")],
+            "to": [CONFIG.get("EMAIL_TO")],
             "subject": asunto,
             "html": html_final
         }
