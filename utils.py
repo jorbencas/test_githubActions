@@ -128,8 +128,8 @@ async def obtener_recap_semanal_ia(noticias, client):
 async def generar_imagen_noticia(titulo_noticia, client, prompt_template=PROMPT_IMAGEN_TEMPLATE, fallback_url=None):
     """Genera imagen con fallback de modelos."""
 
-    modelos = CONFIG.get("IMAGE_MODELS", ["gemini-3-flash-image"])
-    
+    modelos = CONFIG.get("IMAGE_MODELS", ["imagen-3.0-generate-002"])
+
     slug = slugify(titulo_noticia)[:40]
     filename = f"{slug}.png"
     images_folder = CONFIG.get("IMAGES_FOLDER", "images")

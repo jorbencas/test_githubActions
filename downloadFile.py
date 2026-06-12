@@ -606,11 +606,11 @@ def enviar_email_reporte(resumen_html, nuevos):
     )
 
     try:
-        url_mailgun = f"https://api.mailgun.net/v3/{CONFIG.get('MAIL_DOMAIN', 'mg.domain.com')}/messages"
+        url_mailgun = f"https://api.mailgun.net/v3/{CONFIG.get('MAIL_DOMAIN')}/messages"
         auth_mailgun = ("api", CONFIG["MAIL_KEY"])
         data_mailgun = {
-            "from": f"Tech Pulse <mailgun@{CONFIG.get('MAIL_DOMAIN', 'mg.domain.com')}>",
-            "to": [CONFIG.get("MAIL_TO", "jorge@domain.com")],
+            "from": f"Tech Pulse <mailgun@{CONFIG.get('MAIL_DOMAIN')}>",
+            "to": [CONFIG.get("MAIL_TO")],
             "subject": asunto,
             "html": html_final
         }

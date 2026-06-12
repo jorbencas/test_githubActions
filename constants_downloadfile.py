@@ -1,6 +1,6 @@
 import os
 CONFIG = {
-    "BOT_TOKEN": os.getenv("TELEGRAM_BOT_TOKEN"),
+    "TELEGRAM_TOKEN": os.getenv("TELEGRAM_BOT_TOKEN"),
     "CHAT_ID": os.getenv("TOKEN_API_ID"),
     "GEMINI_KEY": os.getenv("GEMINI_API_KEY"),
     "MAIL_KEY": os.getenv("MAILGUN_API_KEY"),
