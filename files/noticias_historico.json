@@ -1,5 +1,112 @@
 [
     {
+        "titulo": "Microsoft Build 2026 en 15 minutos: Lo MEJOR del evento",
+        "enlace": "https://www.youtube.com/watch?v=92uv2v8jCyw",
+        "fuente": "Midudev",
+        "tipo": "video",
+        "f": "12/06",
+        "id_video": "92uv2v8jCyw",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T18:03:06.484736"
+    },
+    {
+        "titulo": "Los accionistas de FromSoftware presionan para tener secuelas de Dark Souls y otros grandes éxitos, pero Hidetaka Miyazaki prefiere crear juegos con valor genuino",
+        "enlace": "https://www.hobbyconsolas.com/videojuegos/los-accionistas-fromsoftware-presionan-para-tener-secuelas-dark-souls-otros-grandes-exitos-pero-hidetaka-miyazaki-prefiere-crear-juegos-con-valor-genuino_6982703_0.html",
+        "fuente": "HobbyConsolas",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T18:03:10.587144"
+    },
+    {
+        "titulo": "Guillem, el mejor alumno de las PAU en la UPV que estudiará Filosofía: “Las humanidades hacen que merezca la pena vivir la vida”",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/06/12/guillem-mejor-alumno-pau-upv-131349483.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T18:03:10.868080"
+    },
+    {
+        "titulo": "Mistral is rumored to be raising €3B at €20B valuation",
+        "enlace": "https://techcrunch.com/2026/06/12/mistral-is-rumored-to-be-raising-e3b-at-e20-valuation/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T18:03:12.976310"
+    },
+    {
+        "titulo": "SpaceX, Anthropic, and OpenAI’s hot IPO summer",
+        "enlace": "https://techcrunch.com/video/spacex-anthropic-and-openais-hot-ipo-summer/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T18:03:12.976383"
+    },
+    {
+        "titulo": "Building Knowledge Graphs with Gemini",
+        "enlace": "https://dev.to/googleai/building-knowledge-graphs-with-gemini-3ail",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T18:03:14.589879"
+    },
+    {
+        "titulo": "Every Step Was Allowed. The Sequence Was the Attack. (AI Memory Judgment, CLAIM-30)",
+        "enlace": "https://dev.to/zep1997/every-step-was-allowed-the-sequence-was-the-attack-ai-memory-judgment-claim-30-4ehc",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T18:03:14.590202"
+    },
+    {
+        "titulo": "Single Responsibility Principle for AI Sub-Agents",
+        "enlace": "https://dev.to/doogal/single-responsibility-principle-for-ai-sub-agents-17md",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T18:03:14.590276"
+    },
+    {
+        "titulo": "Sam Altman admite que se equivocó",
+        "enlace": "https://www.youtube.com/watch?v=_L7k7_YayKY",
+        "fuente": "MoureDev Shorts",
+        "tipo": "shorts",
+        "f": "12/06",
+        "id_video": "_L7k7_YayKY",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T18:03:16.149600"
+    },
+    {
+        "titulo": "🎱DOBLE IMPACTO creativo! DJI Pocket 4P #camera #vlogging #cinematic #tech @DJI",
+        "enlace": "https://www.youtube.com/watch?v=nW0u31RbMUs",
+        "fuente": "Clipset Shorts",
+        "tipo": "shorts",
+        "f": "12/06",
+        "id_video": "nW0u31RbMUs",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T18:03:17.602452"
+    },
+    {
         "titulo": "Por qué tu Mac merece un monitor 5K (y cuál he elegido)",
         "enlace": "https://www.youtube.com/watch?v=ntWVrDXDEZk",
         "fuente": "Carlos Azaustre",
