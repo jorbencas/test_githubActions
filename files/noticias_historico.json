@@ -1,5 +1,80 @@
 [
     {
+        "titulo": "Por qué tu Mac merece un monitor 5K (y cuál he elegido)",
+        "enlace": "https://www.youtube.com/watch?v=ntWVrDXDEZk",
+        "fuente": "Carlos Azaustre",
+        "tipo": "video",
+        "f": "12/06",
+        "id_video": "ntWVrDXDEZk",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T16:00:19.408364"
+    },
+    {
+        "titulo": "Loop Engineering: La nueva moda en Agentes IA",
+        "enlace": "https://www.youtube.com/watch?v=VGBeOj0we6c",
+        "fuente": "Fazt",
+        "tipo": "video",
+        "f": "12/06",
+        "id_video": "VGBeOj0we6c",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T16:00:20.687866"
+    },
+    {
+        "titulo": "El 95,23 % de los estudiantes valencianos supera las PAU de 2026 en primera convocatoria",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/06/12/95-23-estudiantes-valencianos-supera-131343997.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T16:00:22.746768"
+    },
+    {
+        "titulo": "Aitana, la mejor nota de las PAU en la UV: “Tenía sentido que los profesores se levantaran por sus derechos”",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/06/12/aitana-mejor-nota-pau-uv-131345992.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T16:00:22.747085"
+    },
+    {
+        "titulo": "Postgrados que anticipan el futuro: la Universidad Europea de Valencia forma al talento que liderará el mañana",
+        "enlace": "https://www.levante-emv.com/sociedad/2026/06/12/postgrados-anticipan-futuro-universidad-europea-bc-131205207.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T16:00:22.747443"
+    },
+    {
+        "titulo": "It’s hot IPO summer, and the MANGOS are ripe",
+        "enlace": "https://techcrunch.com/podcast/its-hot-ipo-summer-and-the-mangos-are-ripe/",
+        "fuente": "TechCrunch",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T16:00:24.984163"
+    },
+    {
+        "titulo": "Flutter Agent Skills: How to Make Your AI Agent Actually Good at Flutter",
+        "enlace": "https://dev.to/sayed_ali_alkamel/flutter-agent-skills-how-to-make-your-ai-agent-actually-good-at-flutter-3831",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "f": "12/06",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "12/06/2026",
+        "ts": "2026-06-12T16:00:27.358591"
+    },
+    {
         "titulo": "Creé un SOFTWARE BRUTAL para PSICÓLOGAS desde cero: Así funciona PsicoCMS",
         "enlace": "https://www.youtube.com/watch?v=l3l5P-LrU3Y",
         "fuente": "Victor Robles",
