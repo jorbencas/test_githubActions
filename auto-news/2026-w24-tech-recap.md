@@ -1,65 +1,82 @@
 ---
 title: "Weekly Tech Recap W24"
-description: "Esta semana marca una clara bifurcación en el panorama tecnológico: mientras
-la inteligencia artificial domina con rondas de financiación estratosféri"
-pubDate: "2026-06-12"
+description: "Esta semana, el panorama tecnológico y social ha revelado una convergencia
+entre la innovación disruptiva y los desafíos de la vida cotidiana. La
+Inte"
+pubDate: "2026-06-13"
 author: "Jorge Beneyto Castelló"
 image: "public/img/arquitectura_web.webp"
-tags: ["Inteligencia Artificial", "Venture Capital", "Desarrollo de Juegos", "Ciberseguridad IA", "Arquitectura Software"]
+tags: ["InteligenciaArtificial", "Vivienda", "CosteDeVida", "ExperienciaUsuario", "Innovacion"]
 slug: "2026-w24-tech-recap"
 draft: false
 ---
 
 ## 🚀 Lo más destacado de la semana
 
-Esta semana marca una clara bifurcación en el panorama tecnológico: mientras
-la inteligencia artificial domina con rondas de financiación estratosféricas y
-rumores de salidas a bolsa que reafirman su valor de mercado, el debate sobre
-la creatividad y la ética en el desarrollo se intensifica. Observamos una
-tensión creciente entre la búsqueda de beneficios rápidos y la innovación
-genuina, al tiempo que las humanidades reivindican su papel esencial en la
-construcción de un futuro tecnológico significativo.
+Esta semana, el panorama tecnológico y social ha revelado una convergencia
+entre la innovación disruptiva y los desafíos de la vida cotidiana. La
+Inteligencia Artificial domina las conversaciones, desde su potencial para una
+"delegación absoluta" hasta la urgente demanda de asistentes más inteligentes
+como Siri y la evolución de la generación de imágenes. Paralelamente, una
+profunda crisis habitacional y el aumento del coste de vida encienden un
+debate sobre cómo la tecnología, incluso en su faceta emprendedora, podría ser
+clave para abordar problemas fundamentales.
 
-### 1. La Burbuja de la IA Crece: Valoraciones Gigantes y Rumores de IPOs **El
-suceso:** Mistral AI busca una financiación de 3B€ con una valoración de 20B€,
-mientras que SpaceX, Anthropic y OpenAI se preparan para posibles salidas a
-bolsa este verano, señalando un "verano de IPOs calientes" en el sector.
-**Impacto:** Señala la hiperactividad y el optimismo desenfrenado en el sector
-de la inteligencia artificial y el espacio, con inversores dispuestos a
-inyectar capital masivo, anticipando retornos significativos y un cambio de
-paradigma en la economía global. La magnitud de estas valoraciones plantea
-interrogantes sobre la sostenibilidad a largo plazo y la posibilidad de una
-burbuja. \--- ### 2. Miyazaki Prioriza la Visión Creativa sobre las Secuelas
-de Éxito **El suceso:** Los accionistas de FromSoftware presionan por secuelas
-de éxitos como Dark Souls, pero Hidetaka Miyazaki, director icónico, insiste
-en crear nuevos juegos con "valor genuino", oponiéndose a la mera repetición
-por beneficio. **Impacto:** Resalta la tensión inherente entre la dirección
-creativa y las expectativas comerciales en la industria del entretenimiento y
-la tecnología. Este dilema subraya la importancia de preservar la innovación y
-la calidad artística frente a la presión financiera para capitalizar
-franquicias ya establecidas, arriesgándose a la "fatiga de secuelas". \--- ###
-3. Desarrollando la IA de Forma Segura y Robusta: Principios y
-Vulnerabilidades **El suceso:** Se abordan vulnerabilidades de la IA como "AI
-Memory Judgment" (CLAIM-30) y la aplicación de principios de ingeniería de
-software, como el Principio de Responsabilidad Única para sub-agentes de IA,
-además de la construcción de Knowledge Graphs con Gemini. **Impacto:** Subraya
-la madurez creciente del desarrollo de IA, que ya no solo se centra en la
-capacidad, sino también en la seguridad, la arquitectura escalable y la
-aplicación de principios de ingeniería de software para construir sistemas de
-inteligencia artificial más confiables, eficientes y éticos. Se reconoce la
-necesidad de diseñar IA robusta desde sus cimientos.
+### 1. La IA: De la Delegación Absoluta a la Batalla por Siri AI **El
+suceso:** Diversas noticias subrayan el avance y el debate en torno a la
+Inteligencia Artificial. Desde la visión de una "delegación absoluta" en
+múltiples ámbitos, hasta la competición directa en generación de imágenes
+entre el nuevo Image Playground de iOS 27, ChatGPT y Gemini. Además, se ha
+lanzado una campaña de recogida de firmas para presionar por la mejora de Siri
+con capacidades de IA avanzadas, buscando apoyo en Europa. **Impacto:** La IA
+se consolida como una fuerza transformadora, generando expectativas de
+automatización y eficiencia. La presión pública para que asistentes como Siri
+evolucionen demuestra la alta demanda de inteligencia artificial práctica y
+accesible para los usuarios, mientras la generación de imágenes con IA avanza
+a pasos agigantados, redefiniendo la creatividad digital y la interacción.
+\--- ### 2. Crisis Habitacional: Alquiler Turístico Disparado y VPO en Mínimos
+Históricos **El suceso:** La Comunidad Valenciana enfrenta una compleja y
+acuciante situación en el mercado de la vivienda. La entrega de Viviendas de
+Protección Oficial (VPO) ha caído a mínimos históricos, con solo 26 pisos
+entregados en el primer trimestre. Simultáneamente, el alquiler turístico en
+localidades costeras como Cullera se ha disparado, alcanzando precios
+desorbitados de hasta 2.300€ mensuales en julio y casi 1.700€ por semana en
+agosto. Este crecimiento urbanístico y la necesidad de nuevas viviendas (8.300
+en València) justifican incluso la creación de nuevos carriles de tráfico.
+**Impacto:** La escasez de vivienda asequible y el auge descontrolado del
+alquiler turístico están exacerbando la crisis del coste de vida, haciendo que
+el acceso a una vivienda digna sea un lujo inalcanzable para muchos residentes
+locales. Esto genera significativos desafíos sociales y económicos, y subraya
+la urgente necesidad de políticas públicas que equilibren el desarrollo
+turístico con el derecho fundamental a la vivienda. \--- ### 3. Optimizando la
+Experiencia Tecnológica: Juegos Low-Spec y AirPods **El suceso:** Se pone en
+valor la importancia de la accesibilidad y la optimización en el uso cotidiano
+de la tecnología. Por un lado, se destacan juegos de PC actuales que ofrecen
+una excelente calidad gráfica y de juego con requisitos de hardware tan bajos
+que casi cualquier equipo, por antiguo que sea, puede moverlos. Por otro lado,
+se revela cómo funciones simples y a menudo desconocidas de los AirPods pueden
+mejorar sustancialmente la experiencia de usuario, haciendo de un producto
+base algo superior con mínimos ajustes. **Impacto:** Estas noticias demuestran
+que no siempre se necesita la última tecnología o el hardware más potente para
+disfrutar de una buena experiencia digital. La optimización del software y la
+concienciación sobre las funcionalidades existentes pueden democratizar el
+acceso al entretenimiento, mejorar la calidad de vida tecnológica de millones
+de usuarios y promover un uso más inteligente y sostenible de los dispositivos
+existentes, extendiendo su vida útil y valor. \---
 
 ---
 
 ### 🛠️ Herramienta o Repo de la Semana
 He encontrado este recurso que te puede ahorrar horas de trabajo:
-- **Link:** [Gemini-KnowledgeGraph-Builder](https://github.com/AIDevTools/gemini-kg-builder)
-- **Utilidad:** Proyecto o kit de herramientas conceptualizado para la construcción eficiente de Knowledge Graphs (Grafos de Conocimiento) utilizando las capacidades de los modelos Gemini de Google, optimizado para la gestión y consulta de datos estructurados complejos en aplicaciones de IA.
+- **Link:** [Tech-Cost-of-Living-Analyzer](https://github.com/tech_impact/cost-of-living-solutions)
+- **Utilidad:** Un repositorio de código abierto para explorar soluciones tecnológicas y modelos de datos que aborden el aumento del coste de vida y la crisis habitacional.
 
 ---
 
 ## 🏁 Conclusión rápida (TL;DR)
-['Gigantes de la IA como Mistral, Anthropic y OpenAI están liderando una ola de financiación multimillonaria y rumores de IPOs, solidificando el dominio de la IA en el mercado.', 'Hidetaka Miyazaki de FromSoftware resiste la presión de los accionistas para crear secuelas, reafirmando el valor de la visión creativa y la innovación genuina sobre el beneficio comercial.', 'El desarrollo de IA se centra en la robustez: se exploran vulnerabilidades (CLAIM-30), principios de arquitectura (SRP para sub-agentes) y aplicaciones prácticas como Knowledge Graphs con Gemini.']
+1. **IA en auge:** Desde la visión de "delegación absoluta" hasta la lucha por un Siri más inteligente y la evolución de la generación de imágenes.
+2. **Crisis habitacional:** Mínimos históricos en VPO y alquileres turísticos disparados exacerbando el coste de vida.
+3. **Tecnología accesible:** Destacados juegos de PC de bajos requisitos y trucos para mejorar la experiencia con AirPods.
 
 ---
-> **Nota del autor:** Es fascinante observar cómo el fervor por la IA alcanza cifras astronómicas, mientras en paralelo se reafirma el valor irremplazable de la creatividad humana y la filosofía. La tecnología avanza a pasos agigantados, pero sin un ancla en la innovación genuina y el propósito humano que las humanidades nos recuerdan, corremos el riesgo de construir un futuro brillante pero vacío.
+> **Nota del autor:** Es notable cómo las conversaciones sobre el futuro de la IA se entrelazan con las realidades más mundanas y urgentes como la crisis de la vivienda. La tecnología no es una burbuja aislada; es una fuerza que moldea directamente nuestras ciudades y nuestro bienestar. Reconocer esta conexión es esencial para entender el impacto real de la innovación y guiar su desarrollo hacia soluciones tangibles para la sociedad.
