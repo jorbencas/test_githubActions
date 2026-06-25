@@ -1,5 +1,41 @@
 [
     {
+        "titulo": "Juan Roig y la peluca del aficionado Enrique Salas, unidos por una promesa: \"Me traje el pack de la gorra y las tijeras\"",
+        "enlace": "https://www.levante-emv.com/deportes/2026/06/25/juan-roig-peluca-enrique-salas-roig-arena-131824663.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "f": "25/06",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "25/06/2026",
+        "ts": "2026-06-25T23:02:25.556427"
+    },
+    {
+        "titulo": "No confío en el LLM para clasificar mi email. Por eso no lo permito.",
+        "enlace": "https://dev.to/k08200/i-dont-trust-the-llm-to-classify-my-email-so-i-dont-let-it-55d9",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "f": "25/06",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "imagen_url_original": "https://assets.dev.to/assets/exploding-head-daceb38d627e6ae9b730f36a1e390fca556a4289d5a41abb2c35068ad3e2c4b5.svg",
+        "fecha_real": "25/06/2026",
+        "ts": "2026-06-25T23:02:28.598733"
+    },
+    {
+        "titulo": "‘Donkey’, el spin-off de ‘Shrek’ basado en Asno (Burro), es oficial y tiene fecha de estreno",
+        "enlace": "https://hipertextual.com/cine-television/donkey-spin-off-asno-burro-shrek-2028/",
+        "fuente": "Hipertextual",
+        "tipo": "noticia",
+        "f": "25/06",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "imagen_url_original": "",
+        "fecha_real": "25/06/2026",
+        "ts": "2026-06-25T23:02:30.511768"
+    },
+    {
         "titulo": "Fatiga por IA: estamos quemados y no lo sabemos",
         "enlace": "https://www.youtube.com/watch?v=ulZlg_TntYI",
         "fuente": "MoureDev",
