@@ -107,15 +107,33 @@ HTML_TEMPLATE = """
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <meta name="description" content="Tech Pulse Dashboard — Resumen inteligente de noticias tech, vídeos, becas y contenido curado. Actualizado diariamente con IA.">
-    <meta property="og:title" content="Tech Pulse Dashboard">
-    <meta property="og:description" content="Dashboard de tecnología con resumen IA, filtros por canal y fecha, vídeos y shorts de YouTube.">
+    <meta name="author" content="Jorge Beneyto Castelló">
+    <meta name="description" content="Tech Pulse Dashboard — Resumen inteligente de noticias tech, vídeos, becas y contenido curado por Jorge Beneyto Castelló. Actualizado diariamente con IA.">
+    <meta property="og:title" content="Tech Pulse Dashboard — Jorge Beneyto Castelló">
+    <meta property="og:description" content="Dashboard de tecnología con resumen IA, filtros por canal y fecha, vídeos y shorts de YouTube. Curado por Jorge Beneyto Castelló.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jorbencasdownloaderdocument.surge.sh">
+    <meta property="og:site_name" content="Tech Pulse Dashboard">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@jorbencas">
+    <meta name="twitter:creator" content="@jorbencas">
     <link rel="canonical" href="https://jorbencasdownloaderdocument.surge.sh">
     <link rel="stylesheet" href="styles.css">
-    <title>Tech Pulse Dashboard — Resumen Tech IA</title>
+    <title>Tech Pulse Dashboard — Jorge Beneyto Castelló</title>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Tech Pulse Dashboard",
+        "url": "https://jorbencasdownloaderdocument.surge.sh",
+        "author": {
+            "@type": "Person",
+            "name": "Jorge Beneyto Castelló",
+            "url": "https://github.com/jorbencas"
+        },
+        "description": "Dashboard de tecnología con resumen IA, filtros por canal y fecha, vídeos y shorts de YouTube."
+    }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -124,12 +142,12 @@ HTML_TEMPLATE = """
             <picture>
                 <source srcset="optimizado/Image.avif" type="image/avif">
                 <source srcset="optimizado/Image.webp" type="image/webp">
-                <img src="optimizado/Image.png" alt="Logo" class="logo" width="120" height="40" style="aspect-ratio: 3/1; object-fit: contain;" loading="eager">
+                <img src="optimizado/Image.png" alt="Tech Pulse Dashboard Logo" class="logo" width="120" height="40" style="aspect-ratio: 3/1; object-fit: contain;" loading="eager">
             </picture>
         </header>
 
         <div class="ia-box">
-            <h2>🤖 Resumen</h2>
+            <h2>🤖 Resumen IA</h2>
             <p>{resumen}</p>
         </div>
 
@@ -141,12 +159,17 @@ HTML_TEMPLATE = """
         </div>
 
         <div class="filter-section">
-            <strong>👤 Por Canal:</strong>
-            <div id="channel-filters" class="chip-container"></div>
+            <strong>📰 Filtro Noticias:</strong>
+            <div id="news-channel-filters" class="chip-container"></div>
         </div>
 
         <h2>📰 Noticias Históricas</h2>
         <ul id="news-list" class="news-list"></ul>
+
+        <div class="filter-section">
+            <strong>📺 Filtro Vídeos:</strong>
+            <div id="video-channel-filters" class="chip-container"></div>
+        </div>
 
         <h2>📺 Multimedia (Vídeos y Shorts)</h2>
         <div id="video-grid" class="video-grid"></div>

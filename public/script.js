@@ -1,5 +1,6 @@
 let selSemana = { tipo: "all_recent", ini: null, fin: null };
-let selCanal = "all";
+let selCanalNoticias = "all";
+let selCanalVideos = "all";
 let allItems = [];
 let avatars = {};
 
@@ -18,25 +19,38 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 function initDashboard() {
-  const channels = getChannels(allItems);
   renderStats(allItems);
   renderWeekFilters(allItems);
-  renderChannelChips(channels);
+  renderNewsChannelChips(allItems);
+  renderVideoChannelChips(allItems);
   renderItems(allItems);
-  aplicarFiltros();
+  aplicarFiltrosNoticias();
+  aplicarFiltrosVideos();
   initScrollToTop();
 }
 
-function getChannels(items) {
+function getNewsChannels(items) {
   const seen = new Set();
-  return items.reduce((acc, item) => {
+  items.forEach((item) => {
+    if (item.id_video) return;
     const ch = (item.fuente || "").replace(" Shorts", "");
     if (!seen.has(ch)) {
       seen.add(ch);
-      acc.push(ch);
     }
-    return acc;
-  }, []);
+  });
+  return Array.from(seen);
+}
+
+function getVideoChannels(items) {
+  const seen = new Set();
+  items.forEach((item) => {
+    if (!item.id_video) return;
+    const ch = (item.fuente || "").replace(" Shorts", "");
+    if (!seen.has(ch)) {
+      seen.add(ch);
+    }
+  });
+  return Array.from(seen);
 }
 
 function renderStats(items) {
@@ -109,13 +123,14 @@ function renderWeekFilters(items) {
   container.appendChild(select);
 }
 
-function renderChannelChips(channels) {
-  const container = document.getElementById("channel-filters");
+function renderNewsChannelChips(items) {
+  const channels = getNewsChannels(items);
+  const container = document.getElementById("news-channel-filters");
   const allChip = document.createElement("div");
   allChip.className = "chip active";
   allChip.innerHTML = "<span>Todos</span>";
   allChip.dataset.filtro = "all";
-  allChip.onclick = () => filtrarCanal("all", allChip);
+  allChip.onclick = () => { selCanalNoticias = "all"; aplicarFiltrosNoticias(); actualizarChips(container, allChip); };
   container.appendChild(allChip);
 
   channels.forEach((ch) => {
@@ -128,9 +143,39 @@ function renderChannelChips(channels) {
     } else {
       chip.innerHTML = `<span class="chip-text">${ch}</span>`;
     }
-    chip.onclick = () => filtrarCanal(ch, chip);
+    chip.onclick = () => { selCanalNoticias = ch; aplicarFiltrosNoticias(); actualizarChips(container, chip); };
     container.appendChild(chip);
   });
+}
+
+function renderVideoChannelChips(items) {
+  const channels = getVideoChannels(items);
+  const container = document.getElementById("video-channel-filters");
+  const allChip = document.createElement("div");
+  allChip.className = "chip active";
+  allChip.innerHTML = "<span>Todos</span>";
+  allChip.dataset.filtro = "all";
+  allChip.onclick = () => { selCanalVideos = "all"; aplicarFiltrosVideos(); actualizarChips(container, allChip); };
+  container.appendChild(allChip);
+
+  channels.forEach((ch) => {
+    const chip = document.createElement("div");
+    chip.className = "chip";
+    chip.dataset.filtro = ch;
+    const avatarUrl = avatars[ch];
+    if (avatarUrl) {
+      chip.innerHTML = `<img class="chip-img" src="${avatarUrl}" onerror="this.style.display='none'"><span class="chip-text">${ch}</span>`;
+    } else {
+      chip.innerHTML = `<span class="chip-text">${ch}</span>`;
+    }
+    chip.onclick = () => { selCanalVideos = ch; aplicarFiltrosVideos(); actualizarChips(container, chip); };
+    container.appendChild(chip);
+  });
+}
+
+function actualizarChips(container, activo) {
+  container.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
+  activo.classList.add("active");
 }
 
 function renderItems(items) {
@@ -150,7 +195,7 @@ function renderNews(items) {
       return `<li class="news-item" data-ts="${ts}" data-fuente="${fuente}">
         <div class="meta">${i.fuente} | ${fecha}</div>
         <span class="badge ${badge}">${i.badge || "Tech"}</span>
-        <a href="${i.enlace}" target="_blank">${i.titulo}</a></li>`;
+        <a href="${i.enlace}" target="_blank">${i.titulo || 'Ver noticia'}</a></li>`;
     })
     .join("");
 }
@@ -164,20 +209,21 @@ function renderVideos(items) {
       const fuente = (i.fuente || "").replace(" Shorts", "");
       const fecha = i.fecha_real || i.f || "S/D";
       const tipo = i.tipo || "video";
-      const esLive = i.is_live || tipo === "live";
+      const esLive = tipo === "live";
       const clase = esLive ? "tipo-live" : tipo === "shorts" ? "tipo-shorts" : "tipo-video";
       const badgeLive = esLive ? '<span class="badge-live">● EN DIRECTO</span>' : "";
+      const titulo = i.titulo || 'Ver video en YouTube';
       return `<div class="card ${clase}" data-ts="${ts}" data-fuente="${fuente}" style="aspect-ratio: 16/9; contain: layout style;">
         ${badgeLive}
         <button onclick="descargarVideo('${i.enlace}', this)" class="btn-download">📥</button>
         <a href="${i.enlace}" target="_blank">
-          <img src="https://img.youtube.com/vi/${i.id_video}/mqdefault.jpg" alt="${i.titulo}"
+          <img src="https://img.youtube.com/vi/${i.id_video}/mqdefault.jpg" alt="${titulo}"
                width="320" height="180" loading="lazy"
                style="width:100%; height:auto; aspect-ratio: 16/9; background: #eee;">
         </a>
         <div class="card-content">
           <div class="meta">${i.fuente} | ${fecha}</div>
-          <a href="${i.enlace}" target="_blank">${i.titulo}</a>
+          <a href="${i.enlace}" target="_blank">${titulo}</a>
         </div>
       </div>`;
     })
@@ -189,55 +235,58 @@ function filtrarSemana(el) {
   const sel = document.getElementById("selectorSemanas");
   if (sel) sel.value = "all";
   el.classList.add("active");
-  if (el.dataset.inicio === "all_recent") selSemana.tipo = "all_recent";
-  aplicarFiltros();
+  selSemana.tipo = el.dataset.inicio === "all_recent" ? "all_recent" : "range";
+  aplicarFiltrosNoticias();
+  aplicarFiltrosVideos();
 }
 
 function filtrarDesdeSelector(el) {
   if (el.value === "all") {
     selSemana.tipo = "all_recent";
-    const recent = document.querySelector('.chip[data-inicio="all_recent"]');
+    const recent = document.querySelector('[data-inicio="all_recent"]');
     if (recent) recent.classList.add("active");
   } else {
-    el.parentElement.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
+    document.querySelectorAll('[data-inicio="all_recent"]').forEach((c) => c.classList.remove("active"));
     const [ini, fin] = el.value.split("|");
     selSemana = { tipo: "range", ini: new Date(ini).getTime(), fin: new Date(fin).getTime() };
   }
-  aplicarFiltros();
+  aplicarFiltrosNoticias();
+  aplicarFiltrosVideos();
 }
 
-function aplicarFiltros(afectarNoticias = true) {
+function itemDentroSemana(itemTS) {
   const ahora = new Date().getTime();
   const limiteReciente = ahora - 14 * 24 * 60 * 60 * 1000;
-  const selector = afectarNoticias ? ".card, .news-item" : ".card";
+  if (selSemana.tipo === "all_recent") {
+    return itemTS >= limiteReciente;
+  } else if (selSemana.tipo === "range") {
+    return itemTS >= selSemana.ini && itemTS <= selSemana.fin;
+  }
+  return false;
+}
 
-  document.querySelectorAll(selector).forEach((item) => {
+function aplicarFiltrosNoticias() {
+  document.querySelectorAll(".news-item").forEach((item) => {
     const tsAttr = item.getAttribute("data-ts");
     if (!tsAttr) return;
     const itemTS = new Date(tsAttr).getTime();
     const itemFuente = item.getAttribute("data-fuente");
-
-    let okSemana = false;
-    if (selSemana.tipo === "all_recent") {
-      okSemana = itemTS >= limiteReciente;
-    } else if (selSemana.tipo === "range") {
-      okSemana = itemTS >= selSemana.ini && itemTS <= selSemana.fin;
-    }
-
-    const okCanal = selCanal === "all" || itemFuente === selCanal;
-
-    item.style.display = okSemana && okCanal
-      ? (item.classList.contains("news-item") ? "list-item" : "block")
-      : "none";
+    const okSemana = itemDentroSemana(itemTS);
+    const okCanal = selCanalNoticias === "all" || itemFuente === selCanalNoticias;
+    item.style.display = okSemana && okCanal ? "list-item" : "none";
   });
 }
 
-function filtrarCanal(canal, el) {
-  const chips = el.parentElement.querySelectorAll(".chip");
-  chips.forEach((c) => c.classList.remove("active"));
-  el.classList.add("active");
-  selCanal = canal;
-  aplicarFiltros(false);
+function aplicarFiltrosVideos() {
+  document.querySelectorAll(".card").forEach((item) => {
+    const tsAttr = item.getAttribute("data-ts");
+    if (!tsAttr) return;
+    const itemTS = new Date(tsAttr).getTime();
+    const itemFuente = item.getAttribute("data-fuente");
+    const okSemana = itemDentroSemana(itemTS);
+    const okCanal = selCanalVideos === "all" || itemFuente === selCanalVideos;
+    item.style.display = okSemana && okCanal ? "block" : "none";
+  });
 }
 
 function initScrollToTop() {

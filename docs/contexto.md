@@ -1,6 +1,6 @@
 # Contexto del proyecto — test_githubActions (Tech Pulse)
 
-**Última actualización**: 2026-06-25 (herramientas + actualizar_recursos.py)
+**Última actualización**: 2026-06-26 (dashboard: filtros separados, SEO, CSS móvil)
 **Stack**: Python 3.11, asyncio, Gemini API, BeautifulSoup4, aiohttp, GitHub Actions
 **Dashboard**: `http://jorbencasdownloaderdocument.surge.sh`
 **Blog destino**: `jorbencas/blog` (PRs automáticos)
@@ -28,6 +28,10 @@
 
 ### Dashboard HTML
 - `public/index.html` con filtros por canal/semana, grid, resumen AI
+- Filtros separados para noticias (`#news-channel-filters`) y vídeos (`#video-channel-filters`)
+- SEO completo: meta author (Jorge Beneyto Castelló), OG tags, Twitter Cards, JSON-LD WebSite
+- Fallback de título para vídeos: `'Ver video en YouTube'` si `titulo` está vacío
+- CSS móvil mejorado: `scrollbar-gutter: stable`, mejor disposición de chips, tipografía responsive, stat-cards apiladas
 - Desplegado en Surge.sh tras cada ejecución del scraper
 
 ## Fuentes de datos

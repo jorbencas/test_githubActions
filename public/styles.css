@@ -1,10 +1,11 @@
+html { scrollbar-gutter: stable; }
 body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; background: #f0f2f5; color: #1c1e21; }
 .container { max-width: 1200px; margin: 0 auto; }
 header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #007bff; padding-bottom: 10px; margin-bottom: 30px; }
 .ia-box { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-left: 6px solid #8e44ad; margin-bottom: 30px; }
 
 .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; align-items: start; }
-.card { position: relative; overflow: hidden; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.card { position: relative; overflow: hidden; background: white; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
 .card.tipo-video img { width: 100%; aspect-ratio: 16/9; object-fit: cover; background: #000; }
 .card.tipo-shorts { max-width: 200px; }
@@ -15,6 +16,7 @@ header { display: flex; justify-content: space-between; align-items: center; bor
 .news-list { list-style: none; padding: 0; display: grid; gap: 10px; }
 .news-item { background: white; padding: 15px; border-radius: 8px; border-left: 5px solid #007bff; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
 a { color: #007bff; text-decoration: none; font-weight: bold; }
+a:hover { text-decoration: underline; }
 .logo { height: 50px; }
 
 .chip { display: inline-flex; align-items: center; cursor: pointer; transition: all 0.3s ease; padding: 5px 15px 5px 5px; border-radius: 50px; background-color: #f1f1f1; border: 1px solid #ccc; font-family: Arial, sans-serif; font-size: 14px; color: #333; }
@@ -77,19 +79,29 @@ option { font-weight: normal; color: #555; background: white; }
 .scroll-top:hover { background: #0056b3; transform: scale(1.1); }
 
 @media (max-width: 640px) {
-  body { padding: 10px; }
+  html { overflow-x: hidden; }
+  body { padding: 10px; overflow-x: hidden; }
   header { flex-direction: column; gap: 10px; text-align: center; }
+  header h1 { font-size: 1.2rem; word-break: break-word; }
   .video-grid { grid-template-columns: 1fr; gap: 12px; }
   .card.tipo-shorts { max-width: 100%; }
   .stats-bar { gap: 6px; }
   .stat-card { min-width: calc(50% - 6px); padding: 12px; }
   .stat-card b { font-size: 20px; }
   .filter-section { padding: 12px; }
+  .filter-section strong { display: block; margin-bottom: 6px; }
   .chip { font-size: 12px; padding: 4px 10px 4px 4px; }
-  .chip-img { width: 24px; height: 24px; margin-right: 6px; }
-  #selectorSemanas { width: 100%; margin-left: 0 !important; margin-top: 8px; }
-  .ia-box { padding: 16px; font-size: 0.95em; }
+  .chip-img { width: 22px; height: 22px; margin-right: 6px; }
+  #selectorSemanas { width: 100%; margin-left: 0 !important; margin-top: 8px; font-size: 13px; padding: 8px 10px; }
+  .ia-box { padding: 14px; font-size: 0.9em; }
+  .ia-box h2 { font-size: 1em; }
+  .news-list { gap: 8px; }
   .news-item { padding: 10px; }
-  .news-item a { font-size: 0.9em; word-break: break-word; }
-  .card-content a { font-size: 0.85em; }
+  .news-item .meta { font-size: 0.65em; flex-wrap: wrap; gap: 4px; }
+  .news-item a { font-size: 0.85em; word-break: break-word; display: block; margin-top: 4px; }
+  .card-content { padding: 8px; }
+  .card-content .meta { font-size: 0.65em; }
+  .card-content a { font-size: 0.8em; word-break: break-word; display: block; margin-top: 4px; }
+  .scroll-top { bottom: 16px; right: 16px; width: 38px; height: 38px; font-size: 16px; }
+  h2 { font-size: 1.1rem; word-break: break-word; }
 }
