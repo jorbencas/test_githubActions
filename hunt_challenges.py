@@ -1,6 +1,7 @@
 import os
 import json
 import re
+import random
 import asyncio
 import requests
 import logging
@@ -82,11 +83,23 @@ async def generar_retos_ia_puros(client, folder):
 
     for idx, lang in enumerate(lenguajes):
         try:
-            prompt_inventar = f"Inventa un título de reto técnico para el lenguaje {lang}. Solo el título."
+            prompt_inventar = f"""
+            Eres un creador de retos de programación. Inventa un título atractivo para un reto técnico en {lang}.
+
+            REQUISITOS:
+            - El reto debe resolverse en ~30-60 minutos
+            - Debe tener aplicación en el mundo real (no solo algoritmia abstracta)
+            - El título debe ser descriptivo pero conciso (max 10 palabras)
+            - Evita: "Calculadora de...", "Hola Mundo", ejercicios de clase repetidos
+            - Prefiere: procesamiento de datos, APIs, automatización, parsing, optimización
+
+            Responde SOLO el título, sin explicaciones ni formato.
+            """
             # Ejecutamos la llamada síncrona del cliente genai en un hilo secundario
+            modelo_actual = (CONFIG.get("AI_MODELS") or ["gemini-2.5-flash"])[0]
             res_titulo = await asyncio.to_thread(
                 client.models.generate_content, 
-                model="gemini-2.0-flash-lite", 
+                model=modelo_actual, 
                 contents=prompt_inventar
             )
             titulo_inventado = res_titulo.text.strip()
@@ -121,9 +134,12 @@ async def solve_and_save(titulo, fuente, client, folder, difficulty_override=Non
     """Encapsula la lógica de resolver un reto y guardarlo."""
     print(f"🎯 Procesando: {titulo}")
     
-    # Corregido: Eliminada la variable global para evitar race conditions. 
-    # Ahora usamos un index_hint pasado por parámetro.
-    lang_id, lang_display = CODEEMBER_LANGS[index_hint % len(CODEEMBER_LANGS)]
+    # Mezcla determinista de lenguajes basada en la semana ISO para variar semanalmente
+    week_seed = datetime.now().isocalendar()[1]
+    rng = random.Random(week_seed)
+    langs_shuffled = list(CODEEMBER_LANGS)
+    rng.shuffle(langs_shuffled)
+    lang_id, lang_display = langs_shuffled[index_hint % len(langs_shuffled)]
     
     # 1️⃣ Consultar BD local (gratis, sin IA)
     sol = db_lookup(titulo, lang_id)
@@ -163,6 +179,12 @@ async def solve_and_save(titulo, fuente, client, folder, difficulty_override=Non
         # Corregido: Se quitó inspect.cleandoc para evitar deformaciones en la indentación del Markdown
         # Nota: Asegúrate de que las llaves que uses en tu RETO_MD_TEMPLATE (que no correspondan a estas variables) estén duplicadas {{ }}
         try:
+            test_cases = sol.get('test_cases', 'entrada_ejemplo | salida_ejemplo')
+            tabla_casos = '\n'.join(
+                f'| `{c.split("|")[0].strip()}` | `{c.split("|")[1].strip()}` |'
+                for c in test_cases.split(';') if '|' in c
+            ) or '| `ejemplo` | `resultado` |'
+
             res = RETO_MD_TEMPLATE.format(
                 titulo=titulo_es.replace('"', "'"),
                 resumen_corto=sol.get('descripcion', '')[:140].replace('"', "'"),
@@ -175,6 +197,9 @@ async def solve_and_save(titulo, fuente, client, folder, difficulty_override=Non
                 paso_1=sol.get('paso1', ''),
                 paso_2=sol.get('paso2', ''),
                 paso_3=sol.get('paso3', ''),
+                big_o_time=sol.get('big_o_time', 'O(n)'),
+                big_o_space=sol.get('big_o_space', 'O(n)'),
+                tabla_casos=tabla_casos,
                 lenguaje_lower=lang_id,
                 lenguaje_display=lang_display,
                 codigo_solucion=sol.get('codigo', '')
@@ -191,7 +216,7 @@ async def solve_and_save(titulo, fuente, client, folder, difficulty_override=Non
 
 async def hunt(offline=False):
     """Cacería de retos en webs externas o generación estática."""
-    folder = CONFIG.get("CHALLENGES_DIR", "../blog/src/content/auto-challenges")
+    folder = CONFIG.get("CHALLENGES_DIR", "auto-challenges")
     os.makedirs(folder, exist_ok=True)
     
     api_key = CONFIG.get("GEMINI_KEY")

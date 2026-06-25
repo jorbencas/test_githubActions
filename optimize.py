@@ -205,7 +205,7 @@ def main():
     Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
     try:
         with open(CACHE_FILE, "r") as f: cache = json.load(f)
-    except: cache = {}
+    except FileNotFoundError: cache = {}
     
     new_cache = {}
     stats = {"orig": 0, "opt": 0, "proc": 0, "skip": 0}

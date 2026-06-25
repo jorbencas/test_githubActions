@@ -11,7 +11,10 @@ CONFIG = {
     "IMAGES_FOLDER": "images",
     "IMAGES_PATH_PREFIX": "public/optimizado",
     "AI_MODELS": ["gemini-2.5-flash", "gemini-2.5-pro"],
-    "IMAGE_MODELS": ["imagen-3.0-generate-002"] # Fallback para imagen
+    "IMAGE_MODELS": ["imagen-3.0-generate-002"], # Fallback para imagen
+    "CHALLENGES_DIR": "auto-challenges",
+    "NEWS_DIR": "auto-news",
+    "DEFAULT_LANG": "Python"
 }
 
 URL_API_DESCARGA = "https://testactions1github-api-python.hf.space/download"
@@ -70,6 +73,25 @@ FUENTES = {
     "Ars Technica": {"url": "https://arstechnica.com/gadgets/"},
     "Slashdot": {"url": "https://slashdot.org/", "selector": "h2.story-title a"},
     "HackTheBox": {"url": "https://www.hackthebox.com/blog/", "selector": ".blog-post-card h3"},
+    # ── Nuevas fuentes ──
+    "ADSL Zone": {"url": "https://www.adslzone.net/", "selector": "article h2 a"},
+    "MuyComputer": {"url": "https://www.muycomputer.com/", "selector": "a[rel=\"bookmark\"]"},
+    "ComputerHoy": {"url": "https://www.computerhoy.com/", "selector": ".c-article__title a"},
+    "Hipertextual": {"url": "https://hipertextual.com/"},
+    "Hugging Face Blog": {"url": "https://huggingface.co/blog", "selector": "article.overview-card-wrapper a[role=\"link\"]"},
+    "Anthropic": {"url": "https://www.anthropic.com/blog", "selector": "a[class*=\"FeaturedGrid\"], a[class*=\"PublicationList\"]"},
+    "Meta AI": {"url": "https://engineering.fb.com/category/artificial-intelligence/", "selector": "h3 a"},
+    "DeepMind": {"url": "https://deepmind.google/discover/blog/", "selector": "h3.card__title"},
+    "MIT Technology Review": {"url": "https://www.technologyreview.com/topic/artificial-intelligence/"},  # JS-rendered; RSS feed available at /topic/artificial-intelligence/feed/
+    "VentureBeat AI": {"url": "https://venturebeat.com/category/ai/", "selector": "header.text-editorial-headline-030 h2 a"},
+    # ── Redes sociales (scraping sin API) ──
+    "Midudev Twitter": {"url": "https://x.com/midudev", "selector": "article[data-testid='tweet'] div[lang]"},
+    "Midudev Threads": {"url": "https://www.threads.net/@midudev", "selector": "article a[href*='/post/']"},
+    "Bricemoure Twitter": {"url": "https://x.com/bricemoure", "selector": "article[data-testid='tweet'] div[lang]"},
+    "Bricemoure Threads": {"url": "https://www.threads.net/@bricemoure", "selector": "article a[href*='/post/']"},
+    # ── Fuentes de herramientas ──
+    "GitHub Trending": {"url": "https://github.com/trending", "tipo": "herramienta", "subtipo": "github"},
+    "Product Hunt": {"url": "https://www.producthunt.com/", "tipo": "herramienta", "subtipo": "producthunt"},
 }
 
 WEBS_RETOS = {
@@ -84,8 +106,16 @@ HTML_TEMPLATE = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="Tech Pulse Dashboard — Resumen inteligente de noticias tech, vídeos, becas y contenido curado. Actualizado diariamente con IA.">
+    <meta property="og:title" content="Tech Pulse Dashboard">
+    <meta property="og:description" content="Dashboard de tecnología con resumen IA, filtros por canal y fecha, vídeos y shorts de YouTube.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jorbencasdownloaderdocument.surge.sh">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://jorbencasdownloaderdocument.surge.sh">
     <link rel="stylesheet" href="styles.css">
-    <title>Tech Dashboard</title>
+    <title>Tech Pulse Dashboard — Resumen Tech IA</title>
 </head>
 <body>
     <div class="container">
@@ -97,31 +127,35 @@ HTML_TEMPLATE = """
                 <img src="optimizado/Image.png" alt="Logo" class="logo" width="120" height="40" style="aspect-ratio: 3/1; object-fit: contain;" loading="eager">
             </picture>
         </header>
+
         <div class="ia-box">
             <h2>🤖 Resumen</h2>
             <p>{resumen}</p>
         </div>
 
-        <h2>📰 Noticias Históricas</h2>
-        <ul class="news-list">{bloque_noticias}</ul>
-        
+        <div id="stats-bar" class="stats-bar"></div>
+
         <div class="filter-section">
             <strong>📅 Por Tiempo:</strong>
-            <div class="chip-container">{bloque_semanas}</div>
+            <div id="week-filters" class="chip-container"></div>
         </div>
 
         <div class="filter-section">
             <strong>👤 Por Canal:</strong>
-            <div class="chip-container">{bloque_chips}</div>
+            <div id="channel-filters" class="chip-container"></div>
         </div>
 
+        <h2>📰 Noticias Históricas</h2>
+        <ul id="news-list" class="news-list"></ul>
+
         <h2>📺 Multimedia (Vídeos y Shorts)</h2>
-        <div class="video-grid">{bloque_videos}</div>
+        <div id="video-grid" class="video-grid"></div>
     </div>
 </body>
 <script>
   const API_BASE = "{api_url}";
   const TOKEN = "{api_token}";
+  const DATA_URL = "data.json";
 </script>
 <script src="script.js"></script>
 </html>
@@ -133,39 +167,64 @@ EMAIL_TEMPLATE = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="supported-color-schemes" content="light dark">
     <title>Tech Pulse Newsletter</title>
     <style>
+        :root {{
+            color-scheme: light dark;
+            supported-color-schemes: light dark;
+        }}
         @media only screen and (max-width: 620px) {{
             .container {{ width: 100% !important; margin: 0 !important; border-radius: 0 !important; }}
             .content {{ padding: 20px !important; }}
             .stat-cell {{ display: block !important; width: 100% !important; border: none !important; padding: 10px 0 !important; }}
             .stat-border {{ border: none !important; border-top: 1px solid #e2e8f0 !important; border-bottom: 1px solid #e2e8f0 !important; }}
+            .stat-table {{ padding: 12px !important; }}
+            .header-cell {{ padding: 28px 24px 16px 24px !important; }}
+            .hide-mobile {{ display: none !important; }}
+        }}
+        @media (prefers-color-scheme: dark) {{
+            .dark-bg {{ background-color: #1e293b !important; }}
+            .dark-card {{ background-color: #0f172a !important; border-color: #334155 !important; }}
+            .dark-text {{ color: #f1f5f9 !important; }}
+            .dark-text-secondary {{ color: #94a3b8 !important; }}
+            .dark-border {{ border-color: #334155 !important; }}
+            .dark-stats {{ background-color: #0f172a !important; border-color: #334155 !important; }}
+            .dark-ia-box {{ background-color: #1e293b !important; border-color: #334155 !important; }}
+            a {{ color: #818cf8 !important; }}
         }}
     </style>
 </head>
 <body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased;">
     
-    <!-- Preheader invisible para lectores de correo -->
     <div style="display: none; max-height: 0px; overflow: hidden;">
-        Resumen de hoy: {total_noticias} novedades encontradas sobre {temas_clave}...
+        {total_noticias} novedades tech · {count_tech} noticias · {count_becas} becas · resumen generado por IA · {temas_clave}
     </div>
 
-    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="container" style="max-width: 600px; background-color: #ffffff; margin: 30px auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05); overflow: hidden; border: 1px solid #e2e8f0;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="container dark-card" style="max-width: 600px; background-color: #ffffff; margin: 30px auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05); overflow: hidden; border: 1px solid #e2e8f0;">
         
-        <!-- ENCABEZADO ESTILO NEWSLETTER -->
         <tr>
-            <td style="padding: 40px 40px 20px 40px; text-align: left; background-color: #ffffff; border-bottom: 2px solid #f1f5f9;">
-                <p style="margin: 0; font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1.5px;">EDICIÓN DIARIA</p>
-                <h1 style="color: #0f172a; margin: 4px 0 0 0; font-size: 32px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.1;">Tech Pulse</h1>
-                <div style="height: 4px; width: 40px; background-color: #6366f1; margin: 16px 0 0 0; border-radius: 2px;"></div>
-                <p style="color: #475569; margin: 12px 0 0 0; font-size: 14px; font-weight: 500;">{fecha_hoy}</p>
+            <td class="header-cell" style="padding: 40px 40px 20px 40px; text-align: left; background-color: #ffffff; border-bottom: 2px solid #f1f5f9;">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="vertical-align: middle;">
+                            <p style="margin: 0; font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1.5px;">EDICIÓN DIARIA</p>
+                            <h1 style="color: #0f172a; margin: 4px 0 0 0; font-size: 32px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.1;">Tech Pulse</h1>
+                            <div style="height: 4px; width: 40px; background-color: #6366f1; margin: 16px 0 0 0; border-radius: 2px;"></div>
+                            <p style="color: #475569; margin: 12px 0 0 0; font-size: 14px; font-weight: 500;">{fecha_hoy}</p>
+                        </td>
+                        <td width="80" class="hide-mobile" style="vertical-align: middle; text-align: right;">
+                            <span style="display: inline-block; background: #eef2ff; color: #4f46e5; font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 20px; letter-spacing: 0.5px; text-transform: uppercase;">IA</span>
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
         
-        <!-- DASHBOARD DE METRICAS RAPIDAS -->
         <tr>
             <td class="content" style="padding: 24px 40px 0 40px;">
-                <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; padding: 16px; text-align: center;">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="stat-table dark-stats" style="background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; padding: 16px; text-align: center;">
                     <tr>
                         <td width="33%" class="stat-cell" style="vertical-align: top;">
                             <b style="font-size: 22px; color: #4f46e5; font-weight: 800;">{count_tech}</b><br>
@@ -184,19 +243,18 @@ EMAIL_TEMPLATE = """
             </td>
         </tr>
 
-        <!-- CONTENIDO PRINCIPAL: RESUMEN IA -->
         <tr>
             <td class="content" style="padding: 30px 40px 10px 40px;">
                 <h2 style="color: #0f172a; font-size: 18px; font-weight: 700; margin: 0 0 14px 0; display: flex; align-items: center;">
                     <span style="margin-right: 8px;">🤖</span> Resumen Inteligente del día
+                    <span class="hide-mobile" style="margin-left: auto; font-size: 10px; font-weight: 600; color: #64748b; background: #f1f5f9; padding: 2px 8px; border-radius: 4px;">generado con Gemini</span>
                 </h2>
-                <div style="line-height: 1.6; color: #334155; font-size: 15px; background: #fafafa; padding: 24px; border-radius: 10px; border-left: 4px solid #6366f1; border: 1px solid #e2e8f0; border-left: 4px solid #6366f1; box-shadow: inset 0 1px 2px rgba(0,0,0,0.01);">
+                <div style="line-height: 1.6; color: #334155; font-size: 15px; background: #fafafa; padding: 24px; border-radius: 10px; border: 1px solid #e2e8f0; border-left: 4px solid #6366f1; box-shadow: inset 0 1px 2px rgba(0,0,0,0.01);">
                     {contenido_html}
                 </div>
             </td>
         </tr>
 
-        <!-- LISTA CURADA DE ENLACES -->
         <tr>
             <td class="content" style="padding: 20px 40px 40px 40px;">
                 <h2 style="color: #0f172a; font-size: 18px; font-weight: 700; margin: 0 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #f1f5f9;">
@@ -208,7 +266,6 @@ EMAIL_TEMPLATE = """
             </td>
         </tr>
 
-        <!-- PIE DE PAGINA -->
         <tr>
             <td class="content" style="padding: 30px 40px; text-align: center; background: #f8fafc; border-top: 1px solid #e2e8f0;">
                 <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.5;">
@@ -246,6 +303,8 @@ image: "{ruta_imagen}"
 tags: {tags}
 slug: "{slug_name}"
 draft: false
+readingTime: {tiempo_lectura}
+categories: ["tech", "weekly-recap"]
 ---
 
 ## 🚀 Lo más destacado de la semana
@@ -256,10 +315,24 @@ draft: false
 
 ---
 
+## 📊 En cifras
+- **{total_noticias}** noticias analizadas de **{total_fuentes}** fuentes distintas
+- **Tiempo estimado de lectura:** {tiempo_lectura} min
+- **Fuentes principales:** {fuentes_top}
+
+---
+
+## 📋 Listado completo de noticias
+
+{lista_noticias}
+
+---
+
 ### 🛠️ Herramienta o Repo de la Semana
-He encontrado este recurso que te puede ahorrar horas de trabajo:
-- **Link:** [{repo_name}]({repo_url})
-- **Utilidad:** {repo_desc}
+
+:::tip
+**[{repo_name}]({repo_url})** — {repo_desc}
+:::
 
 ---
 
@@ -267,17 +340,30 @@ He encontrado este recurso que te puede ahorrar horas de trabajo:
 {conclusion_tldr}
 
 ---
+
+## 🔮 Para la próxima semana
+
+:::warning
+{sneak_peek}
+:::
+
+---
+
 > **Nota del autor:** {nota_personal}
+
+📡 **[Ver dashboard completo con todos los vídeos y filtros](http://jorbencasdownloaderdocument.surge.sh)**
 """
 
 # --- En constants_downloadfile.py ---
 PROMPT_IMAGEN_TEMPLATE = """
-Create a high-quality, professional wide-angle image representing the following concept: "{titulo_post}".
+Create a high-quality, professional wide-angle image (16:9 aspect ratio, 1200x630 recommended) 
+representing the following concept: "{titulo_post}".
 The visual style should be cinematic and futuristic, featuring a blend of clean technological elements, 
 soft ambient lighting, and a depth of field that keeps the subject in focus. 
 Color palette: deep digital blues, crisp white highlights, and subtle neon green accents. 
 Ensure the composition is balanced and suitable for a tech article header. 
 Highly detailed, photorealistic, 8k resolution, modern aesthetic, professional photography style.
+IMPORTANT: Do NOT include any text, letters, numbers, labels, or watermarks in the image.
 """
 
 
@@ -316,6 +402,14 @@ import Challenge from '@components/Challenge.astro';
 
 ---
 
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+{tabla_casos}
+
+---
+
 ## 💡 Guía de Solución Paso a Paso
 
 <details>
@@ -329,6 +423,10 @@ import Challenge from '@components/Challenge.astro';
 {paso_2}
 
 ### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** {big_o_time}  
+**Complejidad espacial:** {big_o_space}  
+
 {paso_3}
 
 ### 💻 Código de la Solución ({lenguaje_display})

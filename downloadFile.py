@@ -1,11 +1,9 @@
 import hashlib
-import locale
 import inspect
 import os, json, re, requests, asyncio
 from datetime import datetime, timedelta
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
-from collections import Counter
 from google import genai
 import edge_tts
 from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE, RETO_MD_TEMPLATE, URL_API_DESCARGA, URL_API_SALUD
@@ -88,7 +86,7 @@ class AvatarRepository:
             try:
                 with open(self.cache_file, 'r', encoding='utf-8') as f: 
                     return json.load(f)
-            except: 
+            except Exception:
                 return {}
         return {}
 
@@ -113,9 +111,9 @@ class AvatarRepository:
                 self.avatars[nombre] = url_avatar
                 self.cambios_en_cache = True 
                 return url_avatar
-        except: 
+        except Exception:
             pass
-        
+         
         return f"https://ui-avatars.com/api/?name={nombre}&background=random"
 
 
@@ -132,13 +130,14 @@ class BaseExtractor:
             'Pragma': 'no-cache'
         }
 
-    def generar_item_base(self, titulo: str, enlace: str, fuente: str, tipo: str) -> dict:
+    def generar_item_base(self, titulo: str, enlace: str, fuente: str, tipo: str, fecha_relativa: str = "") -> dict:
         return {
             "titulo": html.unescape(titulo),
             "enlace": enlace,
             "fuente": fuente,
             "tipo": tipo,
-            "f": datetime.now().strftime("%d/%m")
+            "f": datetime.now().strftime("%d/%m"),
+            "fecha_publicacion": fecha_relativa
         }
 
     def enriquecer_fechas(self, item: dict) -> dict:
@@ -184,7 +183,7 @@ class YouTubeExtractor(BaseExtractor):
                     continue
 
                 if video_id and titulo_limpio:
-                    res_item = self.generar_item_base(titulo_limpio, f"https://www.youtube.com/watch?v={video_id}", nombre, "video")
+                    res_item = self.generar_item_base(titulo_limpio, f"https://www.youtube.com/watch?v={video_id}", nombre, "video", fecha_relativa)
                     res_item["id_video"] = video_id
                     results.append(self.enriquecer_fechas(res_item))
                 continue
@@ -195,7 +194,7 @@ class YouTubeExtractor(BaseExtractor):
                 titulo_limpio = s_lockup.get('overlayMetadata', {}).get('primaryText', {}).get('content', '')
                 
                 if video_id and titulo_limpio:
-                    res_item = self.generar_item_base(titulo_limpio, f"https://www.youtube.com/watch?v={video_id}", nombre, "shorts")
+                    res_item = self.generar_item_base(titulo_limpio, f"https://www.youtube.com/watch?v={video_id}", nombre, "shorts", "")
                     res_item["id_video"] = video_id
                     results.append(self.enriquecer_fechas(res_item))
                 continue
@@ -235,7 +234,7 @@ class YouTubeExtractor(BaseExtractor):
 
             es_short = "shorts" in target.lower() or "/shorts/" in video_id or "reelItemRenderer" in str(item)
 
-            res_item = self.generar_item_base(titulo_limpio, f"https://www.youtube.com/watch?v={video_id}", nombre, "shorts" if es_short else ("live" if es_live else "video"))
+            res_item = self.generar_item_base(titulo_limpio, f"https://www.youtube.com/watch?v={video_id}", nombre, "shorts" if es_short else ("live" if es_live else "video"), fecha_relativa)
             res_item["id_video"] = video_id
             results.append(self.enriquecer_fechas(res_item))
             
@@ -277,12 +276,97 @@ class WebExtractor(BaseExtractor):
                     if img_tag:
                         img_url = img_tag.get('src') or img_tag.get('data-src') or img_tag.get('srcset', '').split(' ')[0]
 
-                item = self.generar_item_base(t_raw, enlace, nombre, "noticia")
+                fecha_pub = ""
+                if parent:
+                    time_tag = parent.find('time')
+                    if time_tag and time_tag.get('datetime'):
+                        fecha_pub = time_tag['datetime']
+                    elif time_tag:
+                        fecha_pub = time_tag.get_text(strip=True)
+                    if not fecha_pub:
+                        meta_date = soup.find('meta', property="article:published_time")
+                        if meta_date:
+                            fecha_pub = meta_date['content']
+
+                item = self.generar_item_base(t_raw, enlace, nombre, "noticia", fecha_pub)
                 item.update({
                     "badge": "Beca" if ContentFilter.es_beca(t_raw) else "Tech",
                     "imagen_url_original": urljoin(target, img_url) if img_url else ""
                 })
                 results.append(self.enriquecer_fechas(item))
+        return results
+
+    def extraer_herramientas(self, html_text: str, nombre: str, target: str, info: dict) -> list:
+        results = []
+        soup = BeautifulSoup(html_text, 'html.parser')
+        subtipo = info.get("subtipo", "")
+
+        if subtipo == "github":
+            articles = soup.select('article.Box-row') or soup.select('[class*="Box-row"]')
+            for article in articles[:15]:
+                h2_a = article.select_one('h2 a')
+                if not h2_a:
+                    continue
+
+                href = h2_a.get('href', '')
+                full_url = urljoin('https://github.com', href)
+                raw_title = h2_a.get_text(strip=True)
+
+                desc_p = article.select_one('p')
+                desc = desc_p.get_text(strip=True) if desc_p else ''
+
+                lang_span = article.select_one('span[itemprop="programmingLanguage"]')
+                lang = lang_span.get_text(strip=True) if lang_span else ''
+
+                stars_a = article.select_one('a[href*="/stargazers"]')
+                stars = stars_a.get_text(strip=True) if stars_a else '0'
+                stars = stars.replace('★', '').replace('☆', '').replace(',', '').strip()
+
+                title = raw_title if raw_title else href.strip('/').split('/')[-1]
+
+                item = self.generar_item_base(title, full_url, nombre, "herramienta")
+                item.update({
+                    "subtipo": subtipo,
+                    "descripcion": desc.strip(),
+                    "lenguaje": lang.strip(),
+                    "estrellas": stars.strip(),
+                    "repo": href.strip('/') if href else ''
+                })
+                results.append(self.enriquecer_fechas(item))
+
+        elif subtipo == "producthunt":
+            next_data = soup.find('script', id='__NEXT_DATA__')
+            if next_data and next_data.string:
+                try:
+                    data = json.loads(next_data.string)
+                    posts = (data.get('props', {}).get('pageProps', {})
+                             .get('posts', []))
+                    for post in posts[:10]:
+                        name = post.get('name', '')
+                        slug = post.get('slug', '')
+                        tagline = post.get('tagline', '')
+                        if not name or not slug:
+                            continue
+                        item = self.generar_item_base(
+                            name,
+                            f"https://www.producthunt.com/posts/{slug}",
+                            nombre, "herramienta"
+                        )
+                        item.update({"subtipo": subtipo, "descripcion": tagline})
+                        results.append(self.enriquecer_fechas(item))
+                except (json.JSONDecodeError, AttributeError, TypeError):
+                    pass
+            if not results:
+                for a in soup.select('a[href*="/posts/"]')[:10]:
+                    href = a.get('href', '')
+                    title = a.get_text(strip=True)
+                    if not href or not title:
+                        continue
+                    full_url = urljoin('https://www.producthunt.com', href)
+                    item = self.generar_item_base(title, full_url, nombre, "herramienta")
+                    item.update({"subtipo": subtipo})
+                    results.append(self.enriquecer_fechas(item))
+
         return results
 
 
@@ -334,6 +418,9 @@ class ScraperPro:
                 
                 if not results:
                     results = self.yt_extractor.ejecutar_fallback(html_text, nombre)
+            elif info.get("tipo") == "herramienta":
+                logger.info(f"🔧 Extrayendo herramientas desde: {nombre}")
+                results = self.web_extractor.extraer_herramientas(html_text, nombre, target, info)
             else:
                 results = self.web_extractor.extraer_noticias(html_text, nombre, target, info)
 
@@ -348,13 +435,13 @@ class ScraperPro:
 # =====================================================================
 
 async def generar_retos_individuales(noticias_web, fecha_iso, client):
-    folder = "./auto-challenges"
+    folder = CONFIG.get("CHALLENGES_DIR", "auto-challenges")
     os.makedirs(folder, exist_ok=True)
 
     for n in noticias_web:
         if ContentFilter.es_reto(n.get('titulo', 'video-sin-nombre')):
             slug_reto = f"reto-{slugify(n.get('titulo', 'video-sin-nombre'))[:40]}"
-            path = f"{folder}/{slug_reto}.md"
+            path = f"{folder}/{slug_reto}.mdx"
             
             if os.path.exists(path): 
                 continue
@@ -367,8 +454,13 @@ async def generar_retos_individuales(noticias_web, fecha_iso, client):
                 img_reto = await generar_imagen_noticia(f"Reto de programación {n['titulo']}", client)
                 lang = sol.get('lenguaje', 'python').lower()
                 await asyncio.sleep(3)
+                test_cases = sol.get('test_cases', 'entrada_ejemplo | salida_ejemplo')
+                tabla_casos = '\n'.join(
+                    f'| `{c.split("|")[0].strip()}` | `{c.split("|")[1].strip()}` |'
+                    for c in test_cases.split(';') if '|' in c
+                ) or '| `ejemplo` | `resultado` |'
                 try:
-                    reto_md = inspect.cleandoc(RETO_MD_TEMPLATE).format(
+                    reto_mdx = RETO_MD_TEMPLATE.format(
                         titulo=n.get('titulo', 'video-sin-nombre').replace('"', "'"),
                         resumen_corto=sol.get('descripcion', '')[:140].replace('"', "'"),
                         fecha_pub=fecha_iso,
@@ -380,12 +472,16 @@ async def generar_retos_individuales(noticias_web, fecha_iso, client):
                         paso_1=sol.get('paso1', 'Analizando...'),
                         paso_2=sol.get('paso2', 'Ejecutando...'),
                         paso_3=sol.get('paso3', 'Optimizando...'),
+                        big_o_time=sol.get('big_o_time', 'O(n)'),
+                        big_o_space=sol.get('big_o_space', 'O(n)'),
+                        tabla_casos=tabla_casos,
+                        lenguaje_lower=lang,
                         lenguaje_display=lang,
                         codigo_solucion=sol.get('codigo', '')
                     )
 
                     with open(path, "w", encoding="utf-8") as f:
-                        f.write(reto_md)
+                        f.write(reto_mdx)
                     logger.info(f"✅ Archivo creado: {path}")
                     await asyncio.sleep(2)
 
@@ -413,6 +509,11 @@ async def generar_blog_astro(noticias_web, fecha_iso, year, week, client):
     if not noticias_blog: 
         return None
 
+    fuente_count = {}
+    for n in noticias_blog:
+        fuente_count[n['fuente']] = fuente_count.get(n['fuente'], 0) + 1
+    fuentes_top = sorted(fuente_count.items(), key=lambda x: -x[1])[:5]
+
     semana_slug = f"{year}-w{week:02d}-tech-recap"
     path_md = f"./auto-news/{semana_slug}.md"
 
@@ -428,8 +529,33 @@ async def generar_blog_astro(noticias_web, fecha_iso, year, week, client):
     img_recap = await generar_imagen_noticia(f"Recap {week}", client)
     await asyncio.sleep(3)
 
-    introduccion = limpiar_html_para_mdx(data_ia.get('introduccion', ''), to_markdown=True)
-    bloque_noticias = limpiar_html_para_mdx(data_ia.get('noticias_destacadas', ''), to_markdown=True)
+    introduccion = data_ia.get('introduccion', '')
+
+    noticias_raw = data_ia.get('noticias_destacadas', [])
+    if isinstance(noticias_raw, list):
+        bloque_noticias = '\n\n'.join(
+            f'### {i+1}. {n.get("titulo", "")}\n**El suceso:** {n.get("suceso", "")}\n**Impacto:** {n.get("impacto", "")}'
+            for i, n in enumerate(noticias_raw[:5])
+        )
+    else:
+        bloque_noticias = str(noticias_raw)
+
+    tldr_raw = data_ia.get('tldr', [])
+    if isinstance(tldr_raw, list):
+        conclusion_tldr = '\n'.join(f'- {p}' for p in tldr_raw[:5])
+    else:
+        conclusion_tldr = str(tldr_raw)
+
+    total_noticias = len(noticias_blog)
+    fuentes_unicas = len(set(n['fuente'] for n in noticias_blog))
+    tiempo_lectura = max(3, total_noticias * 2)
+
+    fuentes_top_str = ", ".join(f"{f} ({c})" for f, c in fuentes_top)
+    lista_noticias = "\n".join(
+        f'- {n.get("titulo", "")} — [{n["fuente"]}]'
+        + (f' ({n.get("fecha_publicacion", "")})' if n.get("fecha_publicacion") else "")
+        for n in noticias_blog[:10]
+    )
 
     final_md = inspect.cleandoc(MD_TEMPLATE).format(
         titulo=f"Weekly Tech Recap W{week}",
@@ -441,10 +567,16 @@ async def generar_blog_astro(noticias_web, fecha_iso, year, week, client):
         slug_name=semana_slug,
         introduccion=introduccion,
         bloque_noticias=bloque_noticias,
+        total_noticias=total_noticias,
+        total_fuentes=fuentes_unicas,
+        tiempo_lectura=tiempo_lectura,
+        fuentes_top=fuentes_top_str,
+        lista_noticias=lista_noticias,
         repo_name=data_ia.get('repo', {}).get('nombre', 'Tool'),
         repo_url=data_ia.get('repo', {}).get('url', '#'),
         repo_desc=data_ia.get('repo', {}).get('desc', ''),
-        conclusion_tldr=data_ia.get('tldr', ''),
+        conclusion_tldr=conclusion_tldr,
+        sneak_peek=data_ia.get('sneak_peek', 'Seguiremos de cerca la evolución del sector. ¡No te lo pierdas!'),
         nota_personal=data_ia.get('nota_personal', 'Keep coding!')
     )
     
@@ -455,96 +587,7 @@ async def generar_blog_astro(noticias_web, fecha_iso, year, week, client):
 
 
 def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
-    v_html, n_html = "", ""
-    canales_vistos = []
     historial.sort(key=lambda x: x.get('ts', ''), reverse=True)
-    
-    try: 
-        locale.setlocale(locale.LC_TIME, "es_ES.UTF-8")
-    except:
-        try: 
-            locale.setlocale(locale.LC_TIME, "es_ES.utf8")
-        except: 
-            pass
-
-    conteo_meses = Counter()
-    for n in historial:
-        try:
-            dt_n = datetime.fromisoformat(n.get('ts'))
-            mes_key = dt_n.strftime('%B %Y').capitalize()
-            conteo_meses[mes_key] += 1
-        except: 
-            continue
-
-    bloque_semanas = '<div class="chip active" data-inicio="all_recent" onclick="filtrarSemana(this)">🔄 Últimas 2 Semanas</div>'
-    selector_html = '<select id="selectorSemanas" onchange="filtrarDesdeSelector(this)" style="padding: 10px 15px; border-radius: 20px; border: 2px solid #007bff; background: white; color: #007bff; font-weight: bold; cursor: pointer; outline: none; margin-left: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">'
-    selector_html += '<option value="all">📅 Archivo Histórico...</option>'
-
-    mes_actual = ""
-    for i in range(26):
-        inicio = ahora - timedelta(days=ahora.weekday() + (7*i))
-        inicio = inicio.replace(hour=0, minute=0, second=0, microsecond=0)
-        fin = inicio + timedelta(days=6, hours=23, minutes=59, seconds=59)
-        nombre_mes = inicio.strftime('%B %Y').capitalize()
-        
-        if nombre_mes != mes_actual:
-            if mes_actual != "": 
-                selector_html += '</optgroup>'
-            total_mes = conteo_meses.get(nombre_mes, 0)
-            selector_html += f'<optgroup label="── {nombre_mes} ({total_mes} ítems) ──">'
-            mes_actual = nombre_mes
-        
-        txt_semana = f"Semana {inicio.strftime('%d/%m/%y')}"
-        val_ini = inicio.isoformat()
-        val_fin = fin.isoformat()
-        
-        selector_html += f'<option value="{val_ini}|{val_fin}">{txt_semana}</option>'
-    
-    selector_html += '</optgroup></select>'
-    bloque_semanas_completo = f'<div class="filter-group" style="display:flex; align-items:center; flex-wrap:wrap; gap:10px;">{bloque_semanas} {selector_html}</div>'
-
-    chips_html = '<div class="filter-container" style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px;">'
-    chips_html += '<div class="chip active" data-filtro="\'all\'" onclick="filtrarCanal(\'all\', this)"><span>Todos</span></div>'
-    
-    for n_item in historial[:200]:
-        fuente_limpia = n_item['fuente'].replace(" Shorts", "")
-        ts = n_item.get('ts', ahora.isoformat())
-        fecha_display = n_item.get('fecha_real', n_item.get('f', 'S/D'))
-        meta = f"{n_item['fuente']} | {fecha_display}"
-
-        if fuente_limpia not in canales_vistos:
-            url_c = next((info.get('yt') for name, info in FUENTES.items() if name.startswith(fuente_limpia) and info.get('yt')), None)
-            if url_c:
-                img_avatar = scr.obtener_avatar_canal(fuente_limpia, url_c)
-                chips_html += f'<div class="chip" data-filtro="{fuente_limpia}" onclick="filtrarCanal(\'{fuente_limpia}\', this)"><img class="chip-img" src="{img_avatar}"><span class="chip-text">{fuente_limpia}</span></div>'
-                canales_vistos.append(fuente_limpia)
-
-        if n_item.get('id_video'):            
-            tipo = n_item.get('tipo', 'video')
-            es_live = n_item.get('is_live', False) or tipo == "live"
-            clase = "tipo-live" if es_live else ("tipo-shorts" if n_item.get('tipo') == "shorts" else "tipo-video")
-            badge_live = '<span class="badge-live">● EN DIRECTO</span>' if es_live else ""
-            # Corrección exacta del botón dentro de generar_dashboard_html
-            btn_download = f"""<button onclick="descargarVideo('{n_item.get('enlace')}', this)" target="_blank" class="btn-download">📥</button>"""
-            
-            v_html += f"""
-            <div class="card {clase}" data-ts="{ts}" data-fuente="{fuente_limpia}" style="aspect-ratio: 16/9; contain: layout style;">
-                {badge_live}
-                {btn_download}
-                <a href="{n_item['enlace']}" target="_blank">
-                    <img src="https://img.youtube.com/vi/{n_item['id_video']}/mqdefault.jpg" 
-                         alt="{n_item['titulo']}" 
-                         width="320" height="180" 
-                         loading="lazy" 
-                         style="width:100%; height:auto; aspect-ratio: 16/9; background: #eee;">
-                </a>
-                <div class="card-content"><div class="meta">{meta}</div><a href="{n_item['enlace']}" target="_blank">{n_item['titulo']}</a></div>
-            </div>"""
-        else:
-            badge_class = "badge-beca" if n_item.get('badge') == "Beca" else "badge-tech"
-            n_html += f'<li class="news-item" data-ts="{ts}" data-fuente="{fuente_limpia}"><div class="meta">{meta}</div><span class="badge {badge_class}">{n_item.get("badge", "Tech")}</span><a href="{n_item["enlace"]}" target="_blank">{n_item["titulo"]}</a></li>'
-
-    chips_html += "</div>"
 
     palabra_maestra = CONFIG.get("DOWNLOADER_API_TOKEN")
     fecha_hoy = datetime.utcnow().strftime("%Y-%m-%d")
@@ -553,15 +596,18 @@ def generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia):
 
     with open("public/index.html", "w", encoding="utf-8") as f:
         f.write(HTML_TEMPLATE.format(
-            fecha_hoy=fecha_h, 
-            resumen=resumen_ia, 
-            bloque_chips=chips_html, 
-            bloque_videos=v_html, 
-            bloque_noticias=n_html,
-            bloque_semanas=bloque_semanas_completo, 
+            fecha_hoy=fecha_h,
+            resumen=resumen_ia,
             api_token=token_oculto, api_url=URL_API_DESCARGA, api_salud=URL_API_SALUD
         ))
-    logger.info("✅ Dashboard HTML generado con Chips y Vídeos.")
+
+    with open("public/data.json", "w", encoding="utf-8") as f:
+        json.dump({
+            "items": historial,
+            "avatars": getattr(scr, 'avatar_repo', None) and scr.avatar_repo.avatars or {}
+        }, f, indent=2, ensure_ascii=False)
+
+    logger.info(f"✅ Dashboard HTML + data.json generados ({len(historial)} registros).")
 
 
 def enviar_email_reporte(resumen_html, nuevos):
@@ -629,31 +675,38 @@ async def enviar_telegram_con_audio(resumen, nuevos):
         return
 
     resumen_md = resumen.replace("<p style='margin-bottom:15px; line-height:1.6;'>", "").replace("</p>", "\n\n")
-
     resumen_md = resumen_md.replace("<b>", "*").replace("</b>", "*")
+
     fecha_str = datetime.now().strftime('%d/%m')
-    caption = f"🤖 *RESUMEN IA - {fecha_str}*\n"
 
-    # Añadimos el resumen (limitamos a 600 caracteres para dejar espacio a los links)
-    resumen_recortado = (resumen_md[:600] + '...') if len(resumen_md) > 600 else resumen_md
+    c_tech = len([x for x in nuevos if x.get('badge') == 'Tech'])
+    c_becas = len([x for x in nuevos if x.get('badge') == 'Beca'])
+    c_vids = len([x for x in nuevos if x.get('id_video')])
+    c_fuentes = len(set(n['fuente'] for n in nuevos))
+    c_total = len(nuevos)
+
+    caption = f"🤖 *RESUMEN IA — {fecha_str}*\n"
+    caption += f"📊 `{c_total} items · {c_fuentes} fuentes · {c_tech} tech · {c_vids} vídeos · {c_becas} becas`\n\n"
+
+    resumen_recortado = (resumen_md[:500] + '...') if len(resumen_md) > 500 else resumen_md
     caption += f"{resumen_recortado.strip()}\n\n"
-    caption += f"📋 *TOP ENLACES:*\n"
+    caption += f"📋 *ENLACES:*\n"
 
-    # 3. Añadir enlaces controlando el espacio restante
-    # Dejamos un margen de seguridad (100 caracteres para el botón y despedida)
     LIMITE_TELEGRAM = 1024
-    MARGEN_SEGURIDAD = 100
+    MARGEN_SEGURIDAD = 120
 
     for n in nuevos:
         if n.get('id_video'): icono = "📺"
         elif n.get('badge') == "Beca": icono = "🎓"
         else: icono = "💻"
 
-        nuevo_item = f"{icono} [{n['fuente']}]({n['enlace']}) "
+        f_pub = n.get('fecha_publicacion', '')
+        fecha_tag = f" [{f_pub}]" if f_pub else ""
+        fuente = n['fuente'].replace('_', '\\_').replace('*', '\\*')
+        nuevo_item = f"{icono} {fecha_tag} — [{fuente}]({n['enlace']})\n"
 
-        # Si añadir este link supera el límite, paramos
         if len(caption) + len(nuevo_item) > (LIMITE_TELEGRAM - MARGEN_SEGURIDAD):
-            caption += "\n\n⚠️ _Hay más enlaces en el Dashboard..._"
+            caption += f"\n⚠️ _+{c_total - nuevos.index(n)} más en el Dashboard_"
             break
         else:
             caption += nuevo_item
@@ -777,6 +830,40 @@ async def main():
                 ids_video_existentes.add(id_vid)
 
     logger.info(f"✨ Extracción masiva terminada. Encontrados {len(nuevos_elementos)} nuevos elementos.")
+
+    # ── Separar herramientas del flujo de noticias ──
+    herramientas_nuevas = [n for n in nuevos_elementos if n.get("tipo") == "herramienta"]
+    nuevos_elementos = [n for n in nuevos_elementos if n.get("tipo") != "herramienta"]
+
+    if herramientas_nuevas:
+        herramientas_path = os.path.join(CONFIG["FOLDER"], "herramientas.json")
+        herramientas_hist = []
+        if os.path.exists(herramientas_path):
+            try:
+                with open(herramientas_path, 'r', encoding='utf-8') as f:
+                    herramientas_hist = json.load(f)
+            except Exception:
+                herramientas_hist = []
+
+        existing_urls = {h.get('enlace') for h in herramientas_hist}
+        for h in herramientas_nuevas:
+            if h['enlace'] not in existing_urls:
+                herramientas_hist.append(h)
+                existing_urls.add(h['enlace'])
+
+        herramientas_hist = herramientas_hist[:200]
+        with open(herramientas_path, 'w', encoding='utf-8') as f:
+            json.dump(herramientas_hist, f, indent=4, ensure_ascii=False)
+        logger.info(f"🔧 {len(herramientas_nuevas)} herramientas nuevas guardadas en {herramientas_path}")
+
+    # Traducir títulos de fuentes en inglés al español
+    if nuevos_elementos:
+        try:
+            import google.genai as genai
+            client_tr = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
+            nuevos_elementos = await traducir_titulos_ia(nuevos_elementos, client_tr)
+        except Exception as e:
+            logger.error(f"❌ Error en traducción masiva: {e}")
 
     if nuevos_elementos:
         # Combinar nuevos datos respetando la persistencia histórica

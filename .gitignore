@@ -1,6 +1,8 @@
 blog
 .env
-optimixed_cache.json
+optimized_cache.json
+files/all_news.json
+public/data.json
 local_run.py
 __pycache__/
 .venv/

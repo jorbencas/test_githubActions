@@ -9,7 +9,7 @@ import solutions_db
 
 logger = logging.getLogger("scraper")
 
-async def obtener_solucion_ia(titulo, fuente, client, lang="Python"):
+async def obtener_solucion_ia(titulo: str, fuente: str, client, lang: str = "Python") -> dict | None:
     """Obtiene solución técnica probando varios modelos si falla la cuota."""
     modelos = CONFIG.get("AI_MODELS", ["gemini-2.0-flash-lite"])
     
@@ -17,16 +17,31 @@ async def obtener_solucion_ia(titulo, fuente, client, lang="Python"):
     Resuelve el reto técnico: "{titulo}" de la fuente {fuente}.
     Explica en español pero mantén términos técnicos en inglés.
     Usa el lenguaje de programación: {lang}
-    
-    RESPONDE EXCLUSIVAMENTE UN OBJETO JSON con este formato:
+
+    NORMAS DE CÓDIGO:
+    - Código COMPLETO y funcional, con imports al inicio y bloque `if __name__ == "__main__"` (si aplica)
+    - Maneja edge cases: entrada vacía, tipos incorrectos, valores límite
+    - Comentarios breves solo en partes no obvias (no comentes cada línea)
+    - Sin placeholders, sin TODOs, sin "..." — debe ejecutarse sin errores
+
+    NORMAS DE EXPLICACIÓN:
+    - Explica como si el lector supiera lo básico del lenguaje pero nunca hubiera visto este problema
+    - Paso 1: empieza con un ejemplo concreto entrada→salida, luego analiza restricciones
+    - Paso 2: explica el algoritmo y estructuras de datos usadas, por qué se eligieron
+    - Paso 3: optimizaciones viables, variantes, y en qué casos reales se aplica
+
+    RESPONDE EXCLUSIVAMENTE UN JSON VÁLIDO (sin markdown, sin comentarios):
     {{
-      "titulo": "Título del reto en español",
-      "descripcion": "explicación clara del problema con ejemplo de entrada/salida",
-      "paso1": "análisis detallado del problema y restricciones",
-      "paso2": "explicación de la implementación en {lang}: algoritmo y estructuras usadas",
-      "paso3": "complejidad temporal O(?) y espacial O(?), posibles optimizaciones",
-      "codigo": "código completo y funcional en {lang} con comentarios y ejemplo de uso. Sin placeholders ni TODOs.",
-      "dificultad": "Fácil, Intermedio o Difícil"
+      "titulo": "Título del reto en español (max 80 chars)",
+      "descripcion": "Explicación clara: qué pide el problema + ejemplo entrada/salida (max 300 chars)",
+      "paso1": "Análisis: ejemplo concreto, restricciones, casos límite (max 500 chars)",
+      "paso2": "Implementación en {lang}: algoritmo, estructuras, por qué funcionan (max 500 chars)",
+      "paso3": "Optimizaciones, variantes, aplicaciones reales (max 400 chars)",
+      "big_o_time": "Big-O temporal (ej: O(n log n), O(n²))",
+      "big_o_space": "Big-O espacial (ej: O(n), O(1))",
+      "test_cases": "3 casos de prueba: entrada | salida_esperada (separados por ;)",
+      "codigo": "Código completo, ejecutable, con imports y ejemplo de uso al final",
+      "dificultad": "Fácil | Intermedio | Difícil"
     }}
     """
 
@@ -66,25 +81,58 @@ async def obtener_solucion_ia(titulo, fuente, client, lang="Python"):
     logger.warning(f"⚠️ Generando solución genérica funcional para: {titulo}")
     return solutions_db.generate_generic(titulo, lang.lower())
 
-async def obtener_recap_semanal_ia(noticias, client):
+async def obtener_recap_semanal_ia(noticias: list, client) -> dict | None:
     """Genera el resumen semanal probando varios modelos."""
     modelos = CONFIG.get("AI_MODELS", ["gemini-2.0-flash-lite"])
-    
-    texto_noticias = "\n".join([f"- {n['fuente']}: {n['titulo']}" for n in noticias[:15]])
+
+    texto_noticias = "\n".join([
+        f"- [{n['fuente']}] {n['titulo']} (fecha: {n.get('fecha_publicacion', 'reciente')})"
+        for n in noticias[:20]
+    ])
     prompt = f"""
-    Actúa como un Editor Senior de Tecnología. Analiza estos titulares y genera un RECAP SEMANAL.
-    
+    Eres un editor senior de tecnología con estilo cercano pero analítico (como una mezcla de Xataka y El Pingüino de Mario).
+    Analiza estos titulares y genera un RECAP SEMANAL DETALLADO.
+
+    NORMAS DE ESTILO:
+    - Voz directa, sin intro genérica tipo "en un mundo digital..."
+    - Asume que el lector ya sigue tecnología, ve al grano
+    - Si una noticia es hype sin sustancia, menciónalo
+    - NO uses markdown dentro del JSON (ni **, ni ###, ni ---)
+    - Sé específico: menciona nombres de productos, empresas, versiones
+    - Aporta contexto: no solo digas qué pasó, di por qué es relevante ahora
+
     NOTICIAS:
     {texto_noticias}
-    
-    INSTRUCCIONES DE FORMATO (RESPONDE SOLO EN JSON):
+
+    RESPONDE EXCLUSIVAMENTE UN JSON VÁLIDO (sin markdown ni comentarios):
     {{
-      "introduccion": "Un párrafo analítico de 3 líneas sobre la tendencia de esta semana (úsalo para el Dashboard).",
-      "noticias_destacadas": "Genera 3 secciones siguiendo este formato exacto: ### 1. [Título]\\n**El suceso:** [Explicación]\\n**Impacto:** [Por qué importa]\\n---",
-      "repo": {{"nombre": "Repo", "url": "url", "desc": "desc"}},
-      "tldr": "3 puntos clave breves",
-      "tags": ["tag1", "tag2", "tag3"],
-      "nota_personal": "Reflexión breve."
+      "introduccion": "Párrafo analítico de 4-6 líneas conectando las tendencias clave de la semana. Menciona al menos 2-3 temas concretos. (max 700 chars)",
+      "noticias_destacadas": [
+        {{
+          "titulo": "Título descriptivo del primer tema destacado",
+          "suceso": "Qué ocurrió exactamente, con detalles concretos (2-3 líneas)",
+          "impacto": "Por qué importa para el lector y qué implicaciones tiene (2-3 líneas)"
+        }},
+        {{
+          "titulo": "Título descriptivo del segundo tema destacado",
+          "suceso": "Qué ocurrió exactamente, con detalles concretos (2-3 líneas)",
+          "impacto": "Por qué importa para el lector y qué implicaciones tiene (2-3 líneas)"
+        }},
+        {{
+          "titulo": "Título descriptivo del tercer tema destacado",
+          "suceso": "Qué ocurrió exactamente, con detalles concretos (2-3 líneas)",
+          "impacto": "Por qué importa para el lector y qué implicaciones tiene (2-3 líneas)"
+        }}
+      ],
+      "repo": {{
+        "nombre": "Nombre del repo/herramienta destacado de la semana",
+        "url": "URL del repo",
+        "desc": "Utilidad práctica en 1-2 frases, explicando el problema que resuelve"
+      }},
+      "tldr": ["Punto clave 1 con contexto (max 160 chars)", "Punto clave 2 con contexto (max 160 chars)", "Punto clave 3 con contexto (max 160 chars)", "Punto clave 4 con contexto (max 160 chars)"],
+      "tags": ["tech", "tag_especifico1", "tag_especifico2", "tag_especifico3"],
+      "sneak_peek": "Un párrafo breve sobre qué esperar la próxima semana, con predicciones concretas basadas en los temas actuales. Sin promesas vacías. (max 350 chars)",
+      "nota_personal": "Reflexión genuina en 2-3 líneas, como si se lo dijeras a un colega. Menciona algún aprendizaje o sorpresa de la semana. (max 320 chars)"
     }}
     """
 
@@ -125,7 +173,7 @@ async def obtener_recap_semanal_ia(noticias, client):
         "nota_personal": "Fallo en IA: Generado contenido de reserva."
     }
 
-async def generar_imagen_noticia(titulo_noticia, client, prompt_template=PROMPT_IMAGEN_TEMPLATE, fallback_url=None):
+async def generar_imagen_noticia(titulo_noticia: str, client, prompt_template: str = PROMPT_IMAGEN_TEMPLATE, fallback_url: str | None = None) -> str:
     """Genera imagen con fallback de modelos."""
 
     modelos = CONFIG.get("IMAGE_MODELS", ["imagen-3.0-generate-002"])
@@ -154,49 +202,55 @@ async def generar_imagen_noticia(titulo_noticia, client, prompt_template=PROMPT_
             
     return fallback_url or "public/img/arquitectura_web.webp"
 
-async def traducir_titulos_ia(noticias, client):
+async def traducir_titulos_ia(noticias: list, client) -> list:
     """Traduce una lista de títulos al español en un solo bloque usando Gemini."""
     if not noticias: return noticias
     
-    modelos = CONFIG.get("AI_MODELS", ["gemini-2.0-flash-lite"])
+    modelos = CONFIG.get("AI_MODELS", ["gemini-2.5-flash", "gemini-2.5-pro"])
     
-    # Preparamos el texto a traducir
-    texto_a_traducir = "\n".join([f"{i}|{n['titulo']}" for i, n in enumerate(noticias)])
+    # Preparamos el texto a traducir (solo los que provienen de fuentes en inglés)
+    indices_traducir = []
+    lineas = []
+    for i, n in enumerate(noticias):
+        fuente = n.get('fuente', '').lower()
+        if any(x in fuente for x in ["wired", "verge", "techcrunch", "github", "openai", "hacker news", "ars", "nvidia", "anthropic", "venturebeat", "mit", "hugging face", "google ai", "deepmind", "dev.to"]):
+            indices_traducir.append(i)
+            lineas.append(f"{i}|{n['titulo']}")
+    
+    if not lineas:
+        return noticias
+    
+    texto_a_traducir = "\n".join(lineas)
     
     prompt = f"""
     Traduce estos titulares de tecnología al español de forma profesional y natural.
-    Mantén nombres propios y marcas (OpenAI, NVIDIA, etc.) igual.
-    Devuelve un JSON con la lista de traducciones manteniendo el orden.
+    Mantén nombres propios, marcas y acrónimos (OpenAI, NVIDIA, iPhone, etc.) sin traducir.
+    Conserva el formato "id|título" en la respuesta.
+    Devuelve SOLO JSON, sin markdown ni explicaciones.
     
     TEXTO:
     {texto_a_traducir}
     
-    FORMATO DE RESPUESTA (JSON):
-    {{
-      "traducciones": [
-        {{"id": 0, "tr": "Título traducido 0"}},
-        {{"id": 1, "tr": "Título traducido 1"}}
-      ]
-    }}
+    FORMATO:
+    {{"traducciones": [{{"id": 0, "tr": "Título traducido 0"}}, {{"id": 1, "tr": "Título traducido 1"}}]}}
     """
     
     for modelo in modelos:
         try:
-            logger.info(f"🌐 Traduciendo {len(noticias)} títulos con {modelo}...")
+            logger.info(f"🌐 Traduciendo {len(lineas)} títulos con {modelo}...")
             response = client.models.generate_content(model=modelo, contents=prompt)
             raw_text = response.text if response.text else "{}"
             
-            # Extracción robusta de JSON con Regex
-            match = re.search(r'(\{.*\})', raw_text.strip(), re.DOTALL)
+            # Limpiar posibles backticks markdown y extraer JSON
+            clean = re.sub(r'```(?:json)?\s*|\s*```', '', raw_text.strip())
+            match = re.search(r'\{.*\}', clean, re.DOTALL)
             if match:
-                data = json.loads(match.group(1))
+                data = json.loads(match.group(0))
             else:
-                clean_json = re.sub(r'```json|```', '', raw_text).strip()
-                data = json.loads(clean_json)
+                data = json.loads(clean)
             
             traducciones = {item['id']: item['tr'] for item in data.get('traducciones', [])}
             
-            # Aplicamos las traducciones (solo si tienen contenido)
             for i, n in enumerate(noticias):
                 if i in traducciones and traducciones[i] and len(traducciones[i].strip()) > 5:
                     n['titulo'] = traducciones[i]

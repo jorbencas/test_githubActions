@@ -15,7 +15,7 @@ import unicodedata
 # GENERADORES DE CÓDIGO POR LENGUAJE
 # ─────────────────────────────────────────────
 
-def gen_python(title, desc):
+def gen_python(title: str, desc: str) -> str:
     return (
         f"# {title}\n"
         f"# {desc}\n\n"
@@ -29,7 +29,7 @@ def gen_python(title, desc):
         '    print(resolver("ejemplo"))  # → resultado esperado\n'
     )
 
-def gen_javascript(title, desc):
+def gen_javascript(title: str, desc: str) -> str:
     return (
         f"// {title}\n// {desc}\n\n"
         "function resolver(entrada) {\n"
@@ -39,7 +39,7 @@ def gen_javascript(title, desc):
         "console.log(resolver('ejemplo')); // → resultado esperado\n"
     )
 
-def gen_typescript(title, desc):
+def gen_typescript(title: str, desc: str) -> str:
     return (
         f"// {title}\n// {desc}\n\n"
         "function resolver<T>(entrada: T): T {\n"
@@ -48,7 +48,7 @@ def gen_typescript(title, desc):
         "console.log(resolver('ejemplo')); // → resultado esperado\n"
     )
 
-def gen_go(title, desc):
+def gen_go(title: str, desc: str) -> str:
     return (
         'package main\n\nimport "fmt"\n\n'
         f"// {title}\nfunc resolver(entrada string) string {{\n"
@@ -57,7 +57,7 @@ def gen_go(title, desc):
         '\tfmt.Println(resolver("ejemplo"))\n}\n'
     )
 
-def gen_rust(title, desc):
+def gen_rust(title: str, desc: str) -> str:
     return (
         f"// {title}\n// {desc}\n\n"
         "fn resolver(entrada: &str) -> String {\n"
@@ -65,7 +65,7 @@ def gen_rust(title, desc):
         'fn main() {\n    println!("{}", resolver("ejemplo"));\n}\n'
     )
 
-def gen_java(title, desc):
+def gen_java(title: str, desc: str) -> str:
     return (
         f"// {title}\n// {desc}\n\n"
         "public class Reto {\n"
@@ -75,7 +75,7 @@ def gen_java(title, desc):
         '        System.out.println(resolver("ejemplo"));\n    }\n}\n'
     )
 
-def gen_csharp(title, desc):
+def gen_csharp(title: str, desc: str) -> str:
     return (
         f"// {title}\n// {desc}\n\nusing System;\n\n"
         "class Reto {\n"
@@ -83,34 +83,34 @@ def gen_csharp(title, desc):
         '    static void Main() => Console.WriteLine(Resolver("ejemplo"));\n}\n'
     )
 
-def gen_kotlin(title, desc):
+def gen_kotlin(title: str, desc: str) -> str:
     return (
         f"// {title}\n// {desc}\n\n"
         "fun resolver(entrada: String) = entrada\n\n"
         'fun main() { println(resolver("ejemplo")) }\n'
     )
 
-def gen_swift(title, desc):
+def gen_swift(title: str, desc: str) -> str:
     return (
         f"// {title}\n// {desc}\n\n"
         'func resolver(_ entrada: String) -> String { entrada }\nprint(resolver("ejemplo"))\n'
     )
 
-def gen_php(title, desc):
+def gen_php(title: str, desc: str) -> str:
     return (
         f"<?php\n// {title}\n// {desc}\n\n"
         "function resolver(string $entrada): string {\n    return $entrada;\n}\n\n"
         'echo resolver("ejemplo") . "\\n";\n'
     )
 
-def gen_ruby(title, desc):
+def gen_ruby(title: str, desc: str) -> str:
     return (
         f"# {title}\n# {desc}\n\n"
         "def resolver(entrada)\n  entrada\nend\n\n"
         'puts resolver("ejemplo")\n'
     )
 
-def gen_dart(title, desc):
+def gen_dart(title: str, desc: str) -> str:
     return (
         f"// {title}\n// {desc}\n\n"
         "String resolver(String entrada) => entrada;\n\n"
@@ -133,16 +133,19 @@ LANG_GENERATORS = {
 }
 
 # ─────────────────────────────────────────────
-# BASE DE DATOS DE SOLUCIONES CONOCIDAS
+# BASE DE DATOS DE SOLUCIONES CONOCIDAS (curated, 12 languages each)
 # Clave: slug del título (sin prefijos de nivel/número)
 # Estructura: desc, p1, p2, p3 + código por lenguaje
 # ─────────────────────────────────────────────
-SOLUTIONS = {
+SOLUTIONS_CURATED = {
     "suma-de-digitos": {
         "desc": "Dado un número entero, suma todos sus dígitos. Ej: 1234 → 10.",
         "p1": "Convertir el número a string e iterar carácter a carácter.",
         "p2": "Usar sum() con expresión generadora sobre los dígitos.",
         "p3": "O(d) donde d es el número de dígitos. Espacio O(1).",
+        "big_o_time": "O(log n)",
+        "big_o_space": "O(1)",
+        "test_cases": "1234 | 10; 9999 | 36; 0 | 0",
         "python":     "def suma_digitos(n):\n    return sum(int(d) for d in str(abs(n)))\n\nprint(suma_digitos(1234))  # 10\nprint(suma_digitos(9999))  # 36",
         "javascript": "const sumaDigitos = n => String(Math.abs(n)).split('').reduce((a, d) => a + +d, 0);\nconsole.log(sumaDigitos(1234)); // 10",
         "typescript": "const sumaDigitos = (n: number): number =>\n  String(Math.abs(n)).split('').reduce((a, d) => a + Number(d), 0);\nconsole.log(sumaDigitos(1234)); // 10",
@@ -161,6 +164,9 @@ SOLUTIONS = {
         "p1": "Un número es par si el resto de dividirlo entre 2 es 0.",
         "p2": "Usar el operador módulo (%) para comprobar la paridad.",
         "p3": "O(1) — operación aritmética constante.",
+        "big_o_time": "O(1)",
+        "big_o_space": "O(1)",
+        "test_cases": "4 | Par; 7 | Impar; 0 | Par",
         "python":     "def par_o_impar(n):\n    return 'Par' if n % 2 == 0 else 'Impar'\n\nprint(par_o_impar(4))   # Par\nprint(par_o_impar(7))   # Impar\nprint(par_o_impar(-12)) # Par",
         "javascript": "const parOImpar = n => n % 2 === 0 ? 'Par' : 'Impar';\nconsole.log(parOImpar(4));  // Par\nconsole.log(parOImpar(7));  // Impar",
         "typescript": "const parOImpar = (n: number): string => n % 2 === 0 ? 'Par' : 'Impar';\nconsole.log(parOImpar(4)); // Par",
@@ -179,6 +185,9 @@ SOLUTIONS = {
         "p1": "Podemos usar slicing en Python o el método reverse en otros lenguajes.",
         "p2": "En Python, `s[::-1]` invierte cualquier secuencia en O(n).",
         "p3": "O(n) tiempo y espacio, donde n es la longitud de la cadena.",
+        "big_o_time": "O(n)",
+        "big_o_space": "O(n)",
+        "test_cases": "hola | aloh; Python | nohtyP; abcba | abcba",
         "python":     "def invertir(s):\n    return s[::-1]\n\nprint(invertir('hola'))    # aloh\nprint(invertir('Python'))  # nohtyP",
         "javascript": "const invertir = s => s.split('').reverse().join('');\nconsole.log(invertir('hola')); // aloh",
         "typescript": "const invertir = (s: string): string => s.split('').reverse().join('');\nconsole.log(invertir('hola')); // aloh",
@@ -197,6 +206,9 @@ SOLUTIONS = {
         "p1": "Fibonacci: F(0)=0, F(1)=1, F(n)=F(n-1)+F(n-2). Casos base: n≤1.",
         "p2": "Implementación recursiva directa. Para mejorar rendimiento, usar memoización con @lru_cache.",
         "p3": "Recursivo puro: O(2^n). Con memoización: O(n) tiempo, O(n) espacio.",
+        "big_o_time": "O(2^n) (O(n) con memoización)",
+        "big_o_space": "O(n)",
+        "test_cases": "0 | 0; 1 | 1; 7 | 13; 10 | 55",
         "python":     "from functools import lru_cache\n\n@lru_cache(maxsize=None)\ndef fib(n):\n    if n <= 1:\n        return n\n    return fib(n-1) + fib(n-2)\n\nfor i in range(10):\n    print(f'fib({i}) = {fib(i)}')",
         "javascript": "function fib(n, memo = {}) {\n  if (n <= 1) return n;\n  if (memo[n]) return memo[n];\n  memo[n] = fib(n-1, memo) + fib(n-2, memo);\n  return memo[n];\n}\nfor (let i = 0; i < 10; i++) console.log(`fib(${i}) = ${fib(i)}`);",
         "typescript": "function fib(n: number, memo: Record<number, number> = {}): number {\n  if (n <= 1) return n;\n  if (memo[n] !== undefined) return memo[n];\n  return (memo[n] = fib(n-1, memo) + fib(n-2, memo));\n}\nconsole.log(fib(7)); // 13",
@@ -215,6 +227,9 @@ SOLUTIONS = {
         "p1": "Normalizar la cadena: minúsculas y sin espacios/símbolos. Comparar con su reverso.",
         "p2": "Usar regex para limpiar, convertir a minúsculas y comparar s == s[::-1].",
         "p3": "O(n) tiempo y espacio.",
+        "big_o_time": "O(n)",
+        "big_o_space": "O(n)",
+        "test_cases": "Ana | true; hola | false; A man a plan a canal Panama | true",
         "python":     "import re\n\ndef es_palindromo(s):\n    limpio = re.sub(r'[^a-z0-9]', '', s.lower())\n    return limpio == limpio[::-1]\n\nprint(es_palindromo('Ana'))          # True\nprint(es_palindromo('A man a plan a canal Panama'))  # True\nprint(es_palindromo('hola'))         # False",
         "javascript": "function esPalindromo(s) {\n  const limpio = s.toLowerCase().replace(/[^a-z0-9]/g, '');\n  return limpio === limpio.split('').reverse().join('');\n}\nconsole.log(esPalindromo('Ana'));  // true",
         "typescript": "function esPalindromo(s: string): boolean {\n  const limpio = s.toLowerCase().replace(/[^a-z0-9]/g, '');\n  return limpio === limpio.split('').reverse().join('');\n}\nconsole.log(esPalindromo('Ana')); // true",
@@ -229,6 +244,18 @@ SOLUTIONS = {
         "dart":       'bool esPalindromo(String s) {\n  final l = s.toLowerCase().replaceAll(RegExp(r\'[^a-z0-9]\'), \'\');\n  return l == l.split(\'\').reversed.join();\n}\nvoid main() => print(esPalindromo(\'Ana\'));',
     },
 }
+
+# ─────────────────────────────────────────────
+# MERGE CON EXTENDED SOLUTIONS DATABASE
+# ─────────────────────────────────────────────
+
+from solutions_data import SOLUTIONS as EXTENDED_SOLUTIONS
+
+# Merge curated entries (rich, 12 langs) over extended ones (basic, py/js only)
+CURATED_SLUGS = {"suma-de-digitos", "par-o-impar", "invertir-palabra",
+                 "fibonacci-recursivo", "detector-de-palindromos"}
+SOLUTIONS = {k: v for k, v in EXTENDED_SOLUTIONS.items() if k not in CURATED_SLUGS}
+SOLUTIONS.update(SOLUTIONS_CURATED)
 
 # ─────────────────────────────────────────────
 # API PÚBLICA
@@ -261,13 +288,23 @@ def lookup(titulo: str, lang_id: str) -> dict | None:
     if not sol:
         return None
 
-    codigo = sol.get(lang_id) or sol.get("python", "")
+    # Map full language ids to short keys for extended entries
+    lang_to_short = {"python": "py", "javascript": "js", "typescript": "ts",
+                     "go": "go", "rust": "rs", "java": "java", "csharp": "cs",
+                     "kotlin": "kt", "swift": "sw", "php": "php", "ruby": "rb", "dart": "dart"}
+    codigo = (sol.get(lang_id)               # curated entry (e.g. "python": "...")
+              or sol.get(lang_to_short.get(lang_id))  # extended entry (e.g. "py": "...")
+              or sol.get("python")
+              or sol.get("py", ""))
     return {
         "titulo":      titulo,
         "descripcion": sol["desc"],
         "paso1":       sol["p1"],
-        "paso2":       sol["p2"],
-        "paso3":       sol["p3"],
+        "paso2":       sol.get("p2", ""),
+        "paso3":       sol.get("p3", ""),
+        "big_o_time":  sol.get("big_o_time", "O(n)"),
+        "big_o_space": sol.get("big_o_space", "O(n)"),
+        "test_cases":  sol.get("test_cases", "ejemplo | resultado"),
         "codigo":      codigo,
         "dificultad":  "Intermedio",
     }
@@ -285,7 +322,10 @@ def generate_generic(titulo: str, lang_id: str, descripcion: str | None = None) 
         "descripcion": desc,
         "paso1":       f"Analizar '{titulo}': entradas, salidas esperadas y restricciones.",
         "paso2":       f"Implementar en {lang_id} con la estructura más idiomática y clara.",
-        "paso3":       "Complejidad O(n) en el caso general. Revisar si aplica memoización.",
+        "paso3":       "Revisar si aplica memoización, estructuras auxiliares o algoritmos alternativos.",
+        "big_o_time":  "O(n)",
+        "big_o_space": "O(n)",
+        "test_cases":  "entrada_ejemplo | salida_ejemplo",
         "codigo":      codigo,
         "dificultad":  "Intermedio",
     }

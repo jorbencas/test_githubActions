@@ -1,9 +1,9 @@
 name: 🏹 Cazador de Retos IA
 
 on:
-  workflow_dispatch: # Permite ejecutarlo manualmente con un botón
+  workflow_dispatch:
   schedule:
-    - cron: '0 23 * * 0' # Se ejecuta todos los domingos a las 23:00 UTC
+    - cron: '0 23 * * 0'
 
 jobs:
   hunt:
@@ -26,66 +26,57 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python hunt_challenges.py
-      - name: Checkout blog repo
-        uses: actions/checkout@v3
+
+      - name: 📂 Checkout blog repo
+        uses: actions/checkout@v4
         with:
           repository: jorbencas/blog
           path: blog
           token: ${{ secrets.BLOG_TOKEN }}
           fetch-depth: 0
+
       - name: 🔄 Sincronizar retos nuevos al blog
         id: sync_process
         run: |
-          # Asegurar que la carpeta de destino existe en el repo del blog
           mkdir -p blog/src/content/auto-challenges
-          
+
           COUNT=0
-          # Buscamos todos los .md generados localmente
-          for file in auto-challenges/*.md; do
-            # Si no hay archivos, el for puede dar error, validamos que el archivo existe
+          for file in auto-challenges/*.mdx; do
             [ -e "$file" ] || continue
-            
             filename=$(basename "$file")
-            
-            # Solo copiamos si el archivo NO existe en el repo del blog
             if [ ! -f "blog/src/content/auto-challenges/$filename" ]; then
               cp "$file" "blog/src/content/auto-challenges/"
-              echo "🆕 Nuevo reto detectado: $filename"
+              echo "🆕 Nuevo reto: $filename"
               COUNT=$((COUNT + 1))
             else
-              echo "✅ El reto ya existía: $filename"
+              echo "✅ Ya existía: $filename"
             fi
           done
-          
+
           echo "total_nuevos=$COUNT" >> $GITHUB_OUTPUT
-          if [ $COUNT -gt 0 ]; then
-            echo "has_changes=yes" >> $GITHUB_OUTPUT
-          else
-            echo "has_changes=no" >> $GITHUB_OUTPUT
-          fi
+          echo "has_changes=$([ $COUNT -gt 0 ] && echo yes || echo no)" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
-        if: steps.news_copied_to_blog_folder.outputs.copied == 'yes'
+        if: steps.sync_process.outputs.has_changes == 'yes'
         with:
-          token: ${{ secrets.BLOG_TOKEN }} 
-          path: blog  # Indica que el PR se crea dentro de la carpeta 'blog'
-          commit-message: "feat: nuevo weekly recap para revisar"
-          branch: "news/weekly-${{ github.run_id }}"
-          title: "📰 Review Necesaria: Nuevo Weekly Recap"
+          token: ${{ secrets.BLOG_TOKEN }}
+          path: blog
+          commit-message: "feat: nuevos retos de programación para revisar"
+          branch: "challenges/weekly-${{ github.run_id }}"
+          title: "🎯 Review Necesaria: Nuevos Retos de Programación"
           body: |
-            Se ha detectado una nueva noticia. 
-            Reviewdog y LanguageTool analizarán este PR en unos segundos.
-            Por favor, revisa las sugerencias de ortografía antes de hacer Merge.
+            Se han detectado nuevos retos de programación generados por IA.
+            Por favor, revisa las soluciones antes de hacer Merge.
           base: main
-      - name: 📝 Commit y Push de los nuevos MD
+
+      - name: 📝 Commit y Push de los nuevos MDX
         run: |
-          if [ -d "./auto-challenges" ] && ls auto-challenges/*.md >/dev/null 2>&1; then
+          if [ -d "./auto-challenges" ] && ls auto-challenges/*.mdx >/dev/null 2>&1; then
             git config user.name jorbencas
             git config user.email jorbencas@gmail.com
-            git add auto-challenges/*.md
-            # Solo hace commit si hay archivos nuevos para evitar errores
+            git add auto-challenges/*.mdx
             git diff --quiet && git diff --staged --quiet || (git commit -m "🚀 IA: Nuevos retos de programación generados" && git push)
           else
-            echo "❌ No hay ningun reto nuevo que añadir"
+            echo "❌ No hay retos nuevos que añadir"
           fi
