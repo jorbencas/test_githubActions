@@ -100,17 +100,16 @@ WEBS_RETOS = {
     "RetosMoure": {"url": "https://retosdeprogramacion.com/semanales2024", "selector": "a[href*='/retos/']"}
 }
 
-HTML_TEMPLATE = """
-<!DOCTYPE html>
+HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
     <meta name="author" content="Jorge Beneyto Castelló">
-    <meta name="description" content="Tech Pulse Dashboard — Resumen inteligente de noticias tech, vídeos, becas y contenido curado por Jorge Beneyto Castelló. Actualizado diariamente con IA.">
-    <meta property="og:title" content="Tech Pulse Dashboard — Jorge Beneyto Castelló">
-    <meta property="og:description" content="Dashboard de tecnología con resumen IA, filtros por canal y fecha, vídeos y shorts de YouTube. Curado por Jorge Beneyto Castelló.">
+    <meta name="description" content="Tech Pulse Dashboard — Resumen inteligente de noticias tech, v\u00eddeos, becas y contenido curado por Jorge Beneyto Castell\u00f3. Actualizado diariamente con IA.">
+    <meta property="og:title" content="Tech Pulse Dashboard — Jorge Beneyto Castell\u00f3">
+    <meta property="og:description" content="Dashboard de tecnolog\u00eda con resumen IA, filtros por canal y fecha, v\u00eddeos y shorts de YouTube. Curado por Jorge Beneyto Castell\u00f3.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jorbencasdownloaderdocument.surge.sh">
     <meta property="og:site_name" content="Tech Pulse Dashboard">
@@ -119,20 +118,20 @@ HTML_TEMPLATE = """
     <meta name="twitter:creator" content="@jorbencas">
     <link rel="canonical" href="https://jorbencasdownloaderdocument.surge.sh">
     <link rel="stylesheet" href="styles.css">
-    <title>Tech Pulse Dashboard — Jorge Beneyto Castelló</title>
+    <title>Tech Pulse Dashboard — Jorge Beneyto Castell\u00f3</title>
     <script type="application/ld+json">
-    {
+    {{
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "Tech Pulse Dashboard",
         "url": "https://jorbencasdownloaderdocument.surge.sh",
-        "author": {
+        "author": {{
             "@type": "Person",
-            "name": "Jorge Beneyto Castelló",
+            "name": "Jorge Beneyto Castell\u00f3",
             "url": "https://github.com/jorbencas"
-        },
-        "description": "Dashboard de tecnología con resumen IA, filtros por canal y fecha, vídeos y shorts de YouTube."
-    }
+        }},
+        "description": "Dashboard de tecnolog\u00eda con resumen IA, filtros por canal y fecha, v\u00eddeos y shorts de YouTube."
+    }}
     </script>
 </head>
 <body>
@@ -147,31 +146,36 @@ HTML_TEMPLATE = """
         </header>
 
         <div class="ia-box">
-            <h2>🤖 Resumen IA</h2>
+            <h2>\U0001f916 Resumen IA</h2>
             <p>{resumen}</p>
         </div>
 
         <div id="stats-bar" class="stats-bar"></div>
 
+        <h2>\U0001f4f0 Noticias</h2>
         <div class="filter-section">
-            <strong>📅 Por Tiempo:</strong>
-            <div id="week-filters" class="chip-container"></div>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+                <strong>\U0001f4c5 Tiempo:</strong>
+                <div id="news-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
+            </div>
         </div>
-
         <div class="filter-section">
-            <strong>📰 Filtro Noticias:</strong>
+            <strong>\U0001f4f0 Filtro Canal:</strong>
             <div id="news-channel-filters" class="chip-container"></div>
         </div>
-
-        <h2>📰 Noticias Históricas</h2>
         <ul id="news-list" class="news-list"></ul>
 
+        <h2>\U0001f4fa Multimedia (V\u00eddeos y Shorts)</h2>
         <div class="filter-section">
-            <strong>📺 Filtro Vídeos:</strong>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+                <strong>\U0001f4c5 Tiempo:</strong>
+                <div id="video-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
+            </div>
+        </div>
+        <div class="filter-section">
+            <strong>\U0001f4fa Filtro Canal:</strong>
             <div id="video-channel-filters" class="chip-container"></div>
         </div>
-
-        <h2>📺 Multimedia (Vídeos y Shorts)</h2>
         <div id="video-grid" class="video-grid"></div>
     </div>
 </body>
