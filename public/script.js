@@ -1,4 +1,5 @@
-let selSemana = { tipo: "all_recent", ini: null, fin: null };
+let selSemanaNoticias = { tipo: "all_recent", ini: null, fin: null };
+let selSemanaVideos = { tipo: "all_recent", ini: null, fin: null };
 let selCanalNoticias = "all";
 let selCanalVideos = "all";
 let allItems = [];
@@ -20,8 +21,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 function initDashboard() {
   renderStats(allItems);
-  renderWeekFilters(allItems);
+  renderNewsWeekFilters(allItems);
   renderNewsChannelChips(allItems);
+  renderVideoWeekFilters(allItems);
   renderVideoChannelChips(allItems);
   renderItems(allItems);
   aplicarFiltrosNoticias();
@@ -34,9 +36,7 @@ function getNewsChannels(items) {
   items.forEach((item) => {
     if (item.id_video) return;
     const ch = (item.fuente || "").replace(" Shorts", "");
-    if (!seen.has(ch)) {
-      seen.add(ch);
-    }
+    if (!seen.has(ch)) seen.add(ch);
   });
   return Array.from(seen);
 }
@@ -46,9 +46,7 @@ function getVideoChannels(items) {
   items.forEach((item) => {
     if (!item.id_video) return;
     const ch = (item.fuente || "").replace(" Shorts", "");
-    if (!seen.has(ch)) {
-      seen.add(ch);
-    }
+    if (!seen.has(ch)) seen.add(ch);
   });
   return Array.from(seen);
 }
@@ -64,25 +62,15 @@ function renderStats(items) {
     <div class="stat-card"><b>${countVids}</b><span>Multimedia</span></div>`;
 }
 
-function renderWeekFilters(items) {
-  const container = document.getElementById("week-filters");
-  const now = new Date();
-  const chipRecent = document.createElement("div");
-  chipRecent.className = "chip active";
-  chipRecent.textContent = "🔄 Últimas 2 Semanas";
-  chipRecent.dataset.inicio = "all_recent";
-  chipRecent.onclick = () => filtrarSemana(chipRecent);
-  container.appendChild(chipRecent);
-
+function generarSelectSemanas(items, prefix) {
   const select = document.createElement("select");
-  select.id = "selectorSemanas";
+  select.id = `selectorSemanas_${prefix}`;
   select.style.cssText =
     "padding: 10px 15px; border-radius: 20px; border: 2px solid #007bff; background: white; color: #007bff; font-weight: bold; cursor: pointer; outline: none; margin-left: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);";
   select.innerHTML = '<option value="all">📅 Archivo Histórico...</option>';
-  select.onchange = () => filtrarDesdeSelector(select);
 
   const tsValues = items.map((i) => new Date(i.ts).getTime()).filter((t) => !isNaN(t));
-  if (tsValues.length === 0) return;
+  if (tsValues.length === 0) return select;
   const minTs = Math.min(...tsValues);
   const maxTs = Math.max(...tsValues);
   const startWeek = new Date(minTs);
@@ -120,6 +108,40 @@ function renderWeekFilters(items) {
     select.innerHTML += `<option value="${wk.toISOString()}|${fin.toISOString()}">${label}</option>`;
   }
   if (lastMonth) select.innerHTML += "</optgroup>";
+  return select;
+}
+
+function renderNewsWeekFilters(items) {
+  const container = document.getElementById("news-week-filters");
+  if (!container) return;
+  container.innerHTML = "";
+
+  const chipRecent = document.createElement("div");
+  chipRecent.className = "chip active";
+  chipRecent.textContent = "🔄 Últimas 2 Semanas";
+  chipRecent.dataset.inicio = "all_recent";
+  chipRecent.onclick = () => filtrarSemanaNoticias(chipRecent);
+  container.appendChild(chipRecent);
+
+  const select = generarSelectSemanas(items, "noticias");
+  select.onchange = () => filtrarSemanaNoticiasDesdeSelector(select);
+  container.appendChild(select);
+}
+
+function renderVideoWeekFilters(items) {
+  const container = document.getElementById("video-week-filters");
+  if (!container) return;
+  container.innerHTML = "";
+
+  const chipRecent = document.createElement("div");
+  chipRecent.className = "chip active";
+  chipRecent.textContent = "🔄 Últimas 2 Semanas";
+  chipRecent.dataset.inicio = "all_recent";
+  chipRecent.onclick = () => filtrarSemanaVideos(chipRecent);
+  container.appendChild(chipRecent);
+
+  const select = generarSelectSemanas(items, "videos");
+  select.onchange = () => filtrarSemanaVideosDesdeSelector(select);
   container.appendChild(select);
 }
 
@@ -203,6 +225,12 @@ function renderNews(items) {
 function renderVideos(items) {
   const grid = document.getElementById("video-grid");
   const videos = items.filter((i) => i.id_video);
+
+  if (videos.length === 0) {
+    grid.innerHTML = '<p style="padding: 20px; color: #666; text-align:center;">No hay vídeos en este período.</p>';
+    return;
+  }
+
   grid.innerHTML = videos
     .map((i) => {
       const ts = i.ts || new Date().toISOString();
@@ -213,13 +241,17 @@ function renderVideos(items) {
       const clase = esLive ? "tipo-live" : tipo === "shorts" ? "tipo-shorts" : "tipo-video";
       const badgeLive = esLive ? '<span class="badge-live">● EN DIRECTO</span>' : "";
       const titulo = i.titulo || 'Ver video en YouTube';
-      return `<div class="card ${clase}" data-ts="${ts}" data-fuente="${fuente}" style="aspect-ratio: 16/9; contain: layout style;">
+      const canal = i.fuente || "YouTube";
+      return `<div class="card ${clase}" data-ts="${ts}" data-fuente="${fuente}">
         ${badgeLive}
         <button onclick="descargarVideo('${i.enlace}', this)" class="btn-download">📥</button>
-        <a href="${i.enlace}" target="_blank">
-          <img src="https://img.youtube.com/vi/${i.id_video}/mqdefault.jpg" alt="${titulo}"
-               width="320" height="180" loading="lazy"
-               style="width:100%; height:auto; aspect-ratio: 16/9; background: #eee;">
+        <a href="${i.enlace}" target="_blank" class="video-thumb-link">
+          <div class="video-thumb">
+            <img src="https://img.youtube.com/vi/${i.id_video}/mqdefault.jpg" alt="${titulo}"
+                 width="320" height="180" loading="lazy" class="video-thumb-img"
+                 onerror="this.classList.add('errored');this.nextElementSibling.classList.add('visible')">
+            <div class="video-thumb-fallback">📺 ${canal}</div>
+          </div>
         </a>
         <div class="card-content">
           <div class="meta">${i.fuente} | ${fecha}</div>
@@ -230,37 +262,13 @@ function renderVideos(items) {
     .join("");
 }
 
-function filtrarSemana(el) {
-  el.parentElement.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
-  const sel = document.getElementById("selectorSemanas");
-  if (sel) sel.value = "all";
-  el.classList.add("active");
-  selSemana.tipo = el.dataset.inicio === "all_recent" ? "all_recent" : "range";
-  aplicarFiltrosNoticias();
-  aplicarFiltrosVideos();
-}
-
-function filtrarDesdeSelector(el) {
-  if (el.value === "all") {
-    selSemana.tipo = "all_recent";
-    const recent = document.querySelector('[data-inicio="all_recent"]');
-    if (recent) recent.classList.add("active");
-  } else {
-    document.querySelectorAll('[data-inicio="all_recent"]').forEach((c) => c.classList.remove("active"));
-    const [ini, fin] = el.value.split("|");
-    selSemana = { tipo: "range", ini: new Date(ini).getTime(), fin: new Date(fin).getTime() };
-  }
-  aplicarFiltrosNoticias();
-  aplicarFiltrosVideos();
-}
-
-function itemDentroSemana(itemTS) {
+function itemDentroSemana(itemTS, selector) {
   const ahora = new Date().getTime();
   const limiteReciente = ahora - 14 * 24 * 60 * 60 * 1000;
-  if (selSemana.tipo === "all_recent") {
+  if (selector.tipo === "all_recent") {
     return itemTS >= limiteReciente;
-  } else if (selSemana.tipo === "range") {
-    return itemTS >= selSemana.ini && itemTS <= selSemana.fin;
+  } else if (selector.tipo === "range") {
+    return itemTS >= selector.ini && itemTS <= selector.fin;
   }
   return false;
 }
@@ -271,7 +279,7 @@ function aplicarFiltrosNoticias() {
     if (!tsAttr) return;
     const itemTS = new Date(tsAttr).getTime();
     const itemFuente = item.getAttribute("data-fuente");
-    const okSemana = itemDentroSemana(itemTS);
+    const okSemana = itemDentroSemana(itemTS, selSemanaNoticias);
     const okCanal = selCanalNoticias === "all" || itemFuente === selCanalNoticias;
     item.style.display = okSemana && okCanal ? "list-item" : "none";
   });
@@ -283,10 +291,58 @@ function aplicarFiltrosVideos() {
     if (!tsAttr) return;
     const itemTS = new Date(tsAttr).getTime();
     const itemFuente = item.getAttribute("data-fuente");
-    const okSemana = itemDentroSemana(itemTS);
+    const okSemana = itemDentroSemana(itemTS, selSemanaVideos);
     const okCanal = selCanalVideos === "all" || itemFuente === selCanalVideos;
     item.style.display = okSemana && okCanal ? "block" : "none";
   });
+}
+
+function filtrarSemanaNoticias(el) {
+  const container = document.getElementById("news-week-filters");
+  container.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
+  const sel = document.getElementById("selectorSemanas_noticias");
+  if (sel) sel.value = "all";
+  el.classList.add("active");
+  selSemanaNoticias.tipo = "all_recent";
+  aplicarFiltrosNoticias();
+}
+
+function filtrarSemanaNoticiasDesdeSelector(el) {
+  const container = document.getElementById("news-week-filters");
+  if (el.value === "all") {
+    selSemanaNoticias.tipo = "all_recent";
+    const recent = container.querySelector('[data-inicio="all_recent"]');
+    if (recent) recent.classList.add("active");
+  } else {
+    container.querySelectorAll('[data-inicio="all_recent"]').forEach((c) => c.classList.remove("active"));
+    const [ini, fin] = el.value.split("|");
+    selSemanaNoticias = { tipo: "range", ini: new Date(ini).getTime(), fin: new Date(fin).getTime() };
+  }
+  aplicarFiltrosNoticias();
+}
+
+function filtrarSemanaVideos(el) {
+  const container = document.getElementById("video-week-filters");
+  container.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
+  const sel = document.getElementById("selectorSemanas_videos");
+  if (sel) sel.value = "all";
+  el.classList.add("active");
+  selSemanaVideos.tipo = "all_recent";
+  aplicarFiltrosVideos();
+}
+
+function filtrarSemanaVideosDesdeSelector(el) {
+  const container = document.getElementById("video-week-filters");
+  if (el.value === "all") {
+    selSemanaVideos.tipo = "all_recent";
+    const recent = container.querySelector('[data-inicio="all_recent"]');
+    if (recent) recent.classList.add("active");
+  } else {
+    container.querySelectorAll('[data-inicio="all_recent"]').forEach((c) => c.classList.remove("active"));
+    const [ini, fin] = el.value.split("|");
+    selSemanaVideos = { tipo: "range", ini: new Date(ini).getTime(), fin: new Date(fin).getTime() };
+  }
+  aplicarFiltrosVideos();
 }
 
 function initScrollToTop() {

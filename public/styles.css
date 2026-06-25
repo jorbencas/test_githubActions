@@ -4,12 +4,26 @@ body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; background
 header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #007bff; padding-bottom: 10px; margin-bottom: 30px; }
 .ia-box { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-left: 6px solid #8e44ad; margin-bottom: 30px; }
 
-.video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; align-items: start; }
+.video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; align-items: start; }
 .card { position: relative; overflow: hidden; background: white; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
-.card.tipo-video img { width: 100%; aspect-ratio: 16/9; object-fit: cover; background: #000; }
-.card.tipo-shorts { max-width: 200px; }
-.card.tipo-shorts img { width: 100%; aspect-ratio: 9/16; object-fit: cover; background: #000; }
+.video-thumb-link { display: block; position: relative; width: 100%; background: #0f172a; overflow: hidden; }
+.card.tipo-video .video-thumb-link { aspect-ratio: 16/9; }
+.card.tipo-shorts { max-width: 220px; }
+.card.tipo-shorts .video-thumb-link { aspect-ratio: 9/16; }
+.card.tipo-live .video-thumb-link { aspect-ratio: 16/9; }
+
+.video-thumb { position: relative; width: 100%; height: 100%; }
+.video-thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.video-thumb-img.errored { display: none; }
+
+.video-thumb-fallback {
+  display: none; position: absolute; inset: 0;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #94a3b8; align-items: center; justify-content: center;
+  font-weight: bold; font-size: 0.9rem; text-align: center; padding: 10px;
+}
+.video-thumb-fallback.visible { display: flex; }
 
 .card-content { padding: 12px; }
 .meta { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 5px; margin-bottom: 8px; font-size: 0.75em; color: #65676b; font-weight: bold; text-transform: uppercase; }
