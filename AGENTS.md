@@ -1,5 +1,8 @@
 # test_githubActions — Agent Guide
 
+## Git restrictions
+- NEVER run `git push`, `git pull`, or `git fetch`. These operations must be done manually by the user.
+
 ## Commands
 - `python downloadFile.py` — run main scraper (news collection + publishing)
 - `python hunt_challenges.py` — hunt for coding challenges + generate solutions
