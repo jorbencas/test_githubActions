@@ -79,7 +79,7 @@ jobs:
       - name: 🔧 Actualizar resources.mdx con nuevas herramientas
         id: tools_updated
         run: |
-          python actualizar_recursos.py --blog-path blog && echo "updated=yes" >> $GITHUB_OUTPUT || echo "updated=no" >> $GITHUB_OUTPUT
+          python blog/scripts/actualizar_recursos.py --blog-path blog && echo "updated=yes" >> $GITHUB_OUTPUT || echo "updated=no" >> $GITHUB_OUTPUT
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         if: steps.news_copied_to_blog_folder.outputs.copied == 'yes' || steps.tools_updated.outputs.updated == 'yes'

@@ -6,8 +6,8 @@ from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 from google import genai
 import edge_tts
-from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE, RETO_MD_TEMPLATE, URL_API_DESCARGA, URL_API_SALUD
-from utils import obtener_solucion_ia, generar_imagen_noticia, obtener_recap_semanal_ia, traducir_titulos_ia
+from constants_downloadfile import FUENTES, CONFIG, HTML_TEMPLATE, EMAIL_TEMPLATE, ALL_KEYWORDS, BECAS_KEYWORDS, MD_TEMPLATE, URL_API_DESCARGA, URL_API_SALUD
+from utils import generar_imagen_noticia, obtener_recap_semanal_ia, traducir_titulos_ia
 from slugify import slugify 
 import html
 import aiohttp
@@ -434,63 +434,6 @@ class ScraperPro:
 # 2. CAPA DE APLICACIÓN (USE CASES & ORCHESTRATION)
 # =====================================================================
 
-async def generar_retos_individuales(noticias_web, fecha_iso, client):
-    folder = CONFIG.get("CHALLENGES_DIR", "auto-challenges")
-    os.makedirs(folder, exist_ok=True)
-
-    for n in noticias_web:
-        if ContentFilter.es_reto(n.get('titulo', 'video-sin-nombre')):
-            slug_reto = f"reto-{slugify(n.get('titulo', 'video-sin-nombre'))[:40]}"
-            path = f"{folder}/{slug_reto}.mdx"
-            
-            if os.path.exists(path): 
-                continue
-
-            logger.info(f"🎯 Procesando reto: {n.get('titulo', 'video-sin-nombre')}")
-            lang_fav = CONFIG.get("DEFAULT_LANG", "Python")
-            sol = await obtener_solucion_ia(n['titulo'], n['fuente'], client, lang=lang_fav)
-            
-            if sol:
-                img_reto = await generar_imagen_noticia(f"Reto de programación {n['titulo']}", client)
-                lang = sol.get('lenguaje', 'python').lower()
-                await asyncio.sleep(3)
-                test_cases = sol.get('test_cases', 'entrada_ejemplo | salida_ejemplo')
-                tabla_casos = '\n'.join(
-                    f'| `{c.split("|")[0].strip()}` | `{c.split("|")[1].strip()}` |'
-                    for c in test_cases.split(';') if '|' in c
-                ) or '| `ejemplo` | `resultado` |'
-                try:
-                    reto_mdx = RETO_MD_TEMPLATE.format(
-                        titulo=n.get('titulo', 'video-sin-nombre').replace('"', "'"),
-                        resumen_corto=sol.get('descripcion', '')[:140].replace('"', "'"),
-                        fecha_pub=fecha_iso,
-                        slug_name=slug_reto,
-                        tags_seo=json.dumps([lang, 'retos', 'ia']),
-                        ruta_imagen=img_reto,
-                        descripcion_ia=sol.get('descripcion', ''),
-                        dificultad=sol.get('dificultad', 'Intermedio'), 
-                        paso_1=sol.get('paso1', 'Analizando...'),
-                        paso_2=sol.get('paso2', 'Ejecutando...'),
-                        paso_3=sol.get('paso3', 'Optimizando...'),
-                        big_o_time=sol.get('big_o_time', 'O(n)'),
-                        big_o_space=sol.get('big_o_space', 'O(n)'),
-                        tabla_casos=tabla_casos,
-                        lenguaje_lower=lang,
-                        lenguaje_display=lang,
-                        codigo_solucion=sol.get('codigo', '')
-                    )
-
-                    with open(path, "w", encoding="utf-8") as f:
-                        f.write(reto_mdx)
-                    logger.info(f"✅ Archivo creado: {path}")
-                    await asyncio.sleep(2)
-
-                except KeyError as e:
-                    logger.error(f"❌ Error: El template espera la llave {e} pero no se envió.")
-                except Exception as e:
-                    logger.error(f"❌ Error inesperado en '{slug_reto}': {e}")
-
-
 def limpiar_html_para_mdx(html: str, to_markdown: bool = False) -> str:
     if not html:
         return ""
@@ -769,8 +712,6 @@ async def publicar_contenidos(historial, noticias_web, scr):
         logger.warning("⚠️ Generando resumen de emergencia con titulares.")
         titulares = [f"• {n['titulo']}" for n in noticias_web[:10]]
         resumen_ia = "Resumen de hoy:\n\n" + "\n".join(titulares)
-
-    await generar_retos_individuales(noticias_web, fecha_iso, client)
 
     generar_dashboard_html(historial, scr, fecha_h, ahora, resumen_ia or "Sin novedades hoy.")
 

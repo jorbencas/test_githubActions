@@ -12,9 +12,7 @@ CONFIG = {
     "IMAGES_PATH_PREFIX": "public/optimizado",
     "AI_MODELS": ["gemini-2.5-flash", "gemini-2.5-pro"],
     "IMAGE_MODELS": ["imagen-3.0-generate-002"], # Fallback para imagen
-    "CHALLENGES_DIR": "auto-challenges",
-    "NEWS_DIR": "auto-news",
-    "DEFAULT_LANG": "Python"
+    "NEWS_DIR": "auto-news"
 }
 
 URL_API_DESCARGA = "https://testactions1github-api-python.hf.space/download"
@@ -92,12 +90,6 @@ FUENTES = {
     # ── Fuentes de herramientas ──
     "GitHub Trending": {"url": "https://github.com/trending", "tipo": "herramienta", "subtipo": "github"},
     "Product Hunt": {"url": "https://www.producthunt.com/", "tipo": "herramienta", "subtipo": "producthunt"},
-}
-
-WEBS_RETOS = {
-    "Retos de Programación": {"url": "https://retosdeprogramacion.com/ejercicios/", "selector": "a[href*='/retos/']"},
-    "Codewars": {"url": "https://www.codewars.com/kata/latest", "selector": ".item-title a"},
-    "RetosMoure": {"url": "https://retosdeprogramacion.com/semanales2024", "selector": "a[href*='/retos/']"}
 }
 
 HTML_TEMPLATE = """<!DOCTYPE html>
@@ -391,77 +383,4 @@ Color palette: deep digital blues, crisp white highlights, and subtle neon green
 Ensure the composition is balanced and suitable for a tech article header. 
 Highly detailed, photorealistic, 8k resolution, modern aesthetic, professional photography style.
 IMPORTANT: Do NOT include any text, letters, numbers, labels, or watermarks in the image.
-"""
-
-
-PROMPT_IMAGEN_TEMPLATE_RETO = """
-Minimalist tech illustration of {titulo_post}. 
-Style: Flat vector art, isometric perspective, cyberpunk aesthetics. 
-Palette: Deep slate background, neon cyan and electric blue highlights. 
-Clean lines, high contrast, professional digital art, centered composition. 
-No text, no faces, simple geometric shapes.
-"""
-
-# Template para retos generados dinámicamente por IA (hunt_challenges.py)
-RETO_MD_TEMPLATE = """---
-draft: false
-title: "🏆 RETO: {titulo}"
-description: "{resumen_corto}"
-pubDate: "{fecha_pub}"
-tags: {tags_seo}
-slug: "{slug_name}"
-image: "{ruta_imagen}"
-author: "Jorge Beneyto Castelló"
-difficulty: "{dificultad}"
----
-
-import Challenge from '@components/Challenge.astro';
-
-# 🎯 Desafío: {titulo}
-
-### 📝 Descripción del Reto
-{descripcion_ia}
-
-<Challenge 
-  nivel="{dificultad}" 
-  mision="{resumen_corto}" 
-/>
-
----
-
-### 🧪 Casos de Prueba
-
-| Entrada | Salida esperada |
-|---------|-----------------|
-{tabla_casos}
-
----
-
-## 💡 Guía de Solución Paso a Paso
-
-<details>
-<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
-<div class="details-content">
-
-### 🏗️ Paso 1: Análisis de la lógica
-{paso_1}
-
-### ⚙️ Paso 2: Implementación en {lenguaje_display}
-{paso_2}
-
-### 🚀 Paso 3: Complejidad y Optimización
-
-**Complejidad temporal:** {big_o_time}  
-**Complejidad espacial:** {big_o_space}  
-
-{paso_3}
-
-### 💻 Código de la Solución ({lenguaje_display})
-
-```{lenguaje_lower}
-{codigo_solucion}
-```
-
-</div>
-</details>
 """

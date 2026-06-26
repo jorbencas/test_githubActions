@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "subAgents": {
+    "migrate-challenges-to-blog": {
+      "description": "Migra scripts de retos/soluciones/guias de test_githubActions al blog, dejando solo news/weekly",
+      "prompt": "Eres un subagente especializado en migrar scripts de generacion de retos de programacion desde test_githubActions hacia el blog (jorbencas/blog). Tu trabajo es:\n\n## Contexto\nEl proyecto test_githubActions (en /home/jorge/dev/test_githubActions) tiene scripts mezclados de dos pipelines:\n- **News/Weekly** (se queda aqui): downloadFile.py, clean_news.py, optimize.py\n- **Challenges/Retos** (migrar al blog): hunt_challenges.py, solutions_data.py, solutions_db.py, actualizar_recursos.py\n\nEl blog esta en /home/jorge/dev/blog, ya tiene scripts/ con fix_images.py y generate_resources.py.\n\n## Plan de migracion\n\n### 1. CREAR shared config en blog\nCrear /home/jorge/dev/blog/scripts/constants_retos.py con:\n- CONFIG (copy CHALLENGES_DIR, AI_MODELS, IMAGE_MODELS, GEMINI_KEY, DEFAULT_LANG de constants_downloadfile.py)\n- WEBS_RETOS (de constants_downloadfile.py)\n- RETO_MD_TEMPLATE (de constants_downloadfile.py)\n- PROMPT_IMAGEN_TEMPLATE_RETO (de constants_downloadfile.py)\n- Los paths deben apuntar a rutas relativas a blog/scripts/\n\n### 2. MOVER scripts a blog/scripts/\nCopiar (luego borrar de origen):\n- hunt_challenges.py → blog/scripts/hunt_challenges.py\n  - Actualizar imports: use from scripts.constants_retos import ... y from scripts.utils_retos import ...\n- solutions_data.py → blog/scripts/solutions_data.py\n- solutions_db.py → blog/scripts/solutions_db.py\n- actualizar_recursos.py → blog/scripts/actualizar_recursos.py\n  - Actualizar paths: el blog-path por defecto debe ser '..' (raiz del blog)\n\n### 3. CREAR utils_retos.py en blog/scripts/\nExtraer de utils.py (de test_githubActions) solo la funcion obtener_solucion_ia (con su import a solutions_db y constants_retos).... (line truncated to 2000 chars)",
+      "subAgentType": "general"
+    }
+  }
+}

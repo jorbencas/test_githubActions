@@ -1,6 +1,6 @@
 # Contexto del proyecto — test_githubActions (Tech Pulse)
 
-**Última actualización**: 2026-06-26 (dashboard: filtros por sección, fallback thumbnails YouTube)
+**Última actualización**: 2026-06-26 (dashboard: filtros por sección, fallback thumbnails YouTube, fix JSON-LD)
 **Stack**: Python 3.11, asyncio, Gemini API, BeautifulSoup4, aiohttp, GitHub Actions
 **Dashboard**: `http://jorbencasdownloaderdocument.surge.sh`
 **Blog destino**: `jorbencas/blog` (PRs automáticos)
@@ -23,16 +23,31 @@
 - Template: `RETO_MD_TEMPLATE` en `constants_downloadfile.py`
 - Frecuencia: dominical vía `hunt_challenges.yml`
 
-### Language Guides
-- Generados por `gen_lang_guides.py` (independiente, no referenciado por workflows)
-
 ### Dashboard HTML
-- `public/index.html` con filtros por canal/semana, grid, resumen AI
-- Filtros separados por sección: noticias y vídeos tienen su propio filtro de tiempo + canal
-- Fallback visual en thumbnails de YouTube si la imagen no carga (gradiente oscuro + nombre del canal)
+- `public/index.html` con filtros por sección, grid, resumen AI
+- Cada sección (noticias, vídeos) tiene su propio filtro de tiempo (`#news-week-filters`, `#video-week-filters`) + canal (`#news-channel-filters`, `#video-channel-filters`)
+- Plantilla en `constants_downloadfile.py` (`HTML_TEMPLATE`) — escapado de llaves `{{`/`}}` en JSON-LD para compatibilidad con `str.format()`. Parámetros: `{fecha_hoy}`, `{resumen}`, `{api_url}`, `{api_token}`.
+- Fallback visual en thumbnails de YouTube si la imagen no carga (gradiente `#0f172a`→`#1e293b` + nombre del canal)
+- Mensaje de estado vacío para vídeos: `"No hay vídeos en este período."`
 - SEO completo: meta author (Jorge Beneyto Castelló), OG tags, Twitter Cards, JSON-LD WebSite
 - CSS móvil mejorado: `scrollbar-gutter: stable`, mejor disposición de chips, tipografía responsive, stat-cards apiladas
 - Desplegado en Surge.sh tras cada ejecución del scraper
+
+### Dashboard JS (`public/script.js`)
+- Estado de filtros separado: `selSemanaNoticias` / `selSemanaVideos` (antes global `selSemana`)
+- `generarSelectSemanas(items, prefix)` — genera select semanal reutilizable con optgroups por mes
+- `renderNewsWeekFilters()` / `renderVideoWeekFilters()` — renderizan su propio chip "Últimas 2 Semanas" + selector de archivo
+- Funciones de filtro independientes: `filtrarSemanaNoticias()`, `filtrarSemanaNoticiasDesdeSelector()`, `filtrarSemanaVideos()`, `filtrarSemanaVideosDesdeSelector()`
+- `itemDentroSemana(itemTS, selector)` — recibe el selector de estado en lugar de usar variable global
+- Cards de vídeo: quitado `aspect-ratio: 16/9` y `contain: layout style` del wrapper. Ahora el thumb tiene su propio contenedor con aspect-ratio por tipo. Imagen con `onerror` que oculta el img y muestra fallback con gradiente + nombre del canal.
+
+### Dashboard CSS (`public/styles.css`)
+- `.video-thumb-link` — contenedor del thumbnail, `aspect-ratio` por tipo (16/9 normal/live, 9/16 shorts)
+- `.video-thumb` — wrapper relativo para img + fallback
+- `.video-thumb-img` — imagen cover full-size
+- `.video-thumb-img.errored` — `display: none` cuando falla la carga
+- `.video-thumb-fallback` — gradiente oscuro, oculto por defecto; `.visible` lo muestra en flex centrado
+- Grid: `minmax(220px, 1fr)` → `minmax(280px, 1fr)`
 
 ## Fuentes de datos
 
@@ -55,8 +70,7 @@ TechCrunch (IA), The Verge, Wired, Ars Technica, Hacker News, Slashdot, GitHub B
    - Guarda herramientas descubiertas en `files/herramientas.json` (acumulativo, máx 200)
 3. `actualizar_recursos.py` → fusiona herramientas nuevas en `resources.mdx` del blog (ejecutado en workflow tras checkout del blog)
 4. `hunt_challenges.py` → scrapea retos, genera soluciones (DB→AI→generic)
-5. `fix_challenges.py` → reescribe MDX desde BD local (`--ai` para regenerar con Gemini)
-6. `clean_news.py` → mantiene `all_news.json` desde `noticias_historico.json`
+5. `clean_news.py` → mantiene `all_news.json` desde `noticias_historico.json`
 
 ### Base de datos de soluciones
 - `solutions_data.py` → 105 entradas básicas (py/js) extraídas de `fix_challenges.py`
@@ -68,12 +82,9 @@ TechCrunch (IA), The Verge, Wired, Ars Technica, Hacker News, Slashdot, GitHub B
 ### Scripts activos
 - `downloadFile.py` (orcestrador principal)
 - `hunt_challenges.py` (cacería de retos)
-- `fix_challenges.py` (reescritura BD local + `--ai`)
 - `clean_news.py` (limpieza trimestral)
 - `optimize.py` (optimización de imágenes)
-- `gen_lang_guides.py` (guías de lenguaje, independiente)
 - `actualizar_recursos.py` (fusión de herramientas → resources.mdx del blog)
-- `local_run.py` (dev runner)
 
 ### Módulos compartidos
 - `utils.py` (AI helpers: solución, recap, imagen, traducción)
@@ -81,21 +92,15 @@ TechCrunch (IA), The Verge, Wired, Ars Technica, Hacker News, Slashdot, GitHub B
 - `solutions_data.py` (105 soluciones extendidas + generadores)
 - `constants_downloadfile.py` (config central: API keys, fuentes, templates, prompts)
 
-### Tests
-- `tests/test_solutions_db.py` (13 tests)
-- `tests/test_content_filter.py` (20 tests)
-- Comando: `.venv/bin/python -m unittest discover tests/ -v`
-
 ### Workflows
 - `.github/workflows/scraper_workflow.yml` (sábados) — incluye paso `Actualizar resources.mdx con nuevas herramientas`
 - `.github/workflows/hunt_challenges.yml` (domingos + manual)
 - `.github/workflows/clean_news.yml` (trimestral + manual)
-- `.github/workflows/tests.yml` (manual + tras scraper/hunt)
 
 ## Reglas importantes
-- Siempre ejecutar tests tras cambios: `.venv/bin/python -m unittest discover tests/ -v`
-- Al modificar `constants_downloadfile.py`, verificar con dry-run si es posible
+- Al modificar `constants_downloadfile.py`, verificar con dry-run si es posible. El `HTML_TEMPLATE` usa `str.format()`, escapar llaves literales como `{{`/`}}`.
 - Si se añade fuente, agregar a `FUENTES` en `constants_downloadfile.py` y actualizar este documento
 - Para sitios JS complejos (MIT Tech Review, DeepMind), intentar con Playwright o RSS feed como fallback
 - Los retos semanales NO se regeneran si el `.mdx` ya existe
 - Todas las rutas de salida se leen de `CONFIG` en `constants_downloadfile.py`
+- **Git restrictions**: NEVER hacer `git push`, `git pull`, o `git fetch`. Solo commit local.
