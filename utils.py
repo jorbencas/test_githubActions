@@ -80,9 +80,20 @@ async def obtener_recap_semanal_ia(noticias: list, client) -> dict | None:
     """Genera el resumen semanal probando varios modelos."""
     modelos = CONFIG.get("AI_MODELS", ["gemini-2.0-flash-lite"])
 
+    categorias = {}
+    for n in noticias[:30]:
+        cat = n.get("categoria", "💡 General")
+        categorias.setdefault(cat, []).append(n["titulo"])
+
+    resumen_cats = "\n".join(
+        f"  [{cat}] ({len(items)} noticias)" for cat, items in sorted(categorias.items(), key=lambda x: -len(x[1]))[:5]
+    )
+    total_rss = sum(1 for n in noticias if n.get("origen") == "rss")
+    total_becas = sum(1 for n in noticias if n.get("badge") == "Beca")
+
     texto_noticias = "\n".join([
-        f"- [{n['fuente']}] {n['titulo']} (fecha: {n.get('fecha_publicacion', 'reciente')})"
-        for n in noticias[:20]
+        f"- [{n['fuente']}] {n['titulo']} (categoria: {n.get('categoria', '💡 General')}, badge: {n.get('badge', 'Tech')}, origen: {n.get('origen', 'web')})"
+        for n in noticias[:25]
     ])
     prompt = f"""
     Eres un editor senior de tecnología con estilo cercano pero analítico (como una mezcla de Xataka y El Pingüino de Mario).
@@ -95,26 +106,34 @@ async def obtener_recap_semanal_ia(noticias: list, client) -> dict | None:
     - NO uses markdown dentro del JSON (ni **, ni ###, ni ---)
     - Sé específico: menciona nombres de productos, empresas, versiones
     - Aporta contexto: no solo digas qué pasó, di por qué es relevante ahora
+    - Menciona la categoria (IA, Programación, Hardware, etc.) de las noticias destacadas
+    - Si hay noticias destacadas de tipo Beca o de fuente RSS, menciónalo
+
+    RESUMEN DE LA SEMANA:
+    - Categorías con más actividad:
+    {resumen_cats}
+    - Noticias tipo Beca: {total_becas}
+    - Noticias vía RSS: {total_rss}
 
     NOTICIAS:
     {texto_noticias}
 
     RESPONDE EXCLUSIVAMENTE UN JSON VÁLIDO (sin markdown ni comentarios):
     {{
-      "introduccion": "Párrafo analítico de 4-6 líneas conectando las tendencias clave de la semana. Menciona al menos 2-3 temas concretos. (max 700 chars)",
+      "introduccion": "Párrafo analítico de 4-6 líneas conectando las tendencias clave de la semana. Menciona al menos 2-3 temas concretos y sus categorías. (max 700 chars)",
       "noticias_destacadas": [
         {{
-          "titulo": "Título descriptivo del primer tema destacado",
+          "titulo": "Título descriptivo del primer tema destacado (incluye la categoria si aplica)",
           "suceso": "Qué ocurrió exactamente, con detalles concretos (2-3 líneas)",
           "impacto": "Por qué importa para el lector y qué implicaciones tiene (2-3 líneas)"
         }},
         {{
-          "titulo": "Título descriptivo del segundo tema destacado",
+          "titulo": "Título descriptivo del segundo tema destacado (incluye la categoria si aplica)",
           "suceso": "Qué ocurrió exactamente, con detalles concretos (2-3 líneas)",
           "impacto": "Por qué importa para el lector y qué implicaciones tiene (2-3 líneas)"
         }},
         {{
-          "titulo": "Título descriptivo del tercer tema destacado",
+          "titulo": "Título descriptivo del tercer tema destacado (incluye la categoria si aplica)",
           "suceso": "Qué ocurrió exactamente, con detalles concretos (2-3 líneas)",
           "impacto": "Por qué importa para el lector y qué implicaciones tiene (2-3 líneas)"
         }}

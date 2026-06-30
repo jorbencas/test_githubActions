@@ -99,6 +99,16 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
     logger.info(f"✅ Dashboard HTML + data.json generados ({len(historial)} registros, {len(top_github)} herramientas).")
 
 
+def emoji_categoria(cat: str) -> str:
+    return cat.split()[0] if cat and cat[0] in "⚡🤖💻🐳🔒📊🎓💡" else "💡"
+
+def badge_str(item: dict) -> str:
+    b = item.get("badge", "Tech")
+    return f"`🎓 Beca`" if b == "Beca" else f"`💻 Tech`"
+
+def origen_str(item: dict) -> str:
+    return " `📡 RSS`" if item.get("origen") == "rss" else ""
+
 async def generar_recap(noticias_web, client) -> str | None:
     ahora = datetime.now()
     fecha_iso = ahora.strftime("%Y-%m-%d")
@@ -108,10 +118,18 @@ async def generar_recap(noticias_web, client) -> str | None:
     if not noticias_blog:
         return None
 
+    categoria_count = {}
+    for n in noticias_blog:
+        cat = n.get("categoria", "💡 General")
+        categoria_count[cat] = categoria_count.get(cat, 0) + 1
+    categorias_ordenadas = sorted(categoria_count.items(), key=lambda x: -x[1])
+
     fuente_count = {}
     for n in noticias_blog:
         fuente_count[n["fuente"]] = fuente_count.get(n["fuente"], 0) + 1
     fuentes_top = sorted(fuente_count.items(), key=lambda x: -x[1])[:5]
+
+    total_rss = sum(1 for n in noticias_blog if n.get("origen") == "rss")
 
     semana_slug = f"{year}-w{week:02d}-tech-recap"
     path_md = f"./auto-news/{semana_slug}.md"
@@ -149,13 +167,33 @@ async def generar_recap(noticias_web, client) -> str | None:
     total_noticias = len(noticias_blog)
     fuentes_unicas = len(set(n["fuente"] for n in noticias_blog))
     tiempo_lectura = max(3, total_noticias * 2)
-    fuentes_top_str = ", ".join(f"{f} ({c})" for f, c in fuentes_top)
-
-    lista_noticias = "\n".join(
-        f'- {n.get("titulo", "")} — [{n["fuente"]}]'
-        + (f' ({n.get("fecha_publicacion", "")})' if n.get("fecha_publicacion") else "")
-        for n in noticias_blog[:10]
+    fuentes_top_str = "\n".join(
+        f"  - {f} — **{c}** noticias" for f, c in fuentes_top
     )
+    top_categorias = ", ".join(
+        f"{c} ({n})" for c, n in categorias_ordenadas[:3]
+    )
+    stats_categorias = "\n".join(
+        f"  - {cat}: **{cnt}** noticias ({cnt * 100 // total_noticias}%)"
+        for cat, cnt in categorias_ordenadas
+    )
+
+    noticias_por_cat: dict[str, list] = {}
+    for n in noticias_blog:
+        cat = n.get("categoria", "💡 General")
+        noticias_por_cat.setdefault(cat, []).append(n)
+
+    partes_lista = []
+    for cat in [c[0] for c in categorias_ordenadas]:
+        items = noticias_por_cat[cat]
+        partes_lista.append(f"**{cat}** ({len(items)} noticias)")
+        for n in items[:10]:
+            badge = badge_str(n)
+            origen = origen_str(n)
+            fecha = f" ({n.get('fecha_publicacion', '')})" if n.get("fecha_publicacion") else ""
+            partes_lista.append(f"  - {badge}{origen} [{n['fuente']}] {n.get('titulo', '')}{fecha}")
+
+    lista_noticias = "\n".join(partes_lista)
 
     final_md = inspect.cleandoc(MD_TEMPLATE).format(
         titulo=f"Weekly Tech Recap W{week}",
@@ -171,6 +209,9 @@ async def generar_recap(noticias_web, client) -> str | None:
         total_noticias=total_noticias,
         total_fuentes=fuentes_unicas,
         tiempo_lectura=tiempo_lectura,
+        total_rss=total_rss,
+        top_categorias=top_categorias,
+        stats_categorias=stats_categorias,
         fuentes_top=fuentes_top_str,
         lista_noticias=lista_noticias,
         repo_name=data_ia.get("repo", {}).get("nombre", "Tool"),

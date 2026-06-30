@@ -467,7 +467,6 @@ EMAIL_TEMPLATE = """
 
 
 
-
 MD_TEMPLATE = """---
 title: "{titulo}"
 description: "{description}"
@@ -481,7 +480,7 @@ readingTime: {tiempo_lectura}
 categories: ["tech", "weekly-recap"]
 ---
 
-## 🚀 Lo más destacado de la semana
+## 🚀 Radiografía de la semana
 
 {introduccion}
 
@@ -489,10 +488,23 @@ categories: ["tech", "weekly-recap"]
 
 ---
 
-## 📊 En cifras
-- **{total_noticias}** noticias analizadas de **{total_fuentes}** fuentes distintas
-- **Tiempo estimado de lectura:** {tiempo_lectura} min
-- **Fuentes principales:** {fuentes_top}
+## 📊 El panel en datos
+
+| Métrica | Valor |
+|---------|-------|
+| Noticias analizadas | **{total_noticias}** |
+| Fuentes distintas | **{total_fuentes}** |
+| Fuentes RSS | **{total_rss}** |
+| Tiempo estimado de lectura | {tiempo_lectura} min |
+| Categoría principal | {top_categorias} |
+
+### Distribución por categoría
+
+{stats_categorias}
+
+### Top fuentes
+
+{fuentes_top}
 
 ---
 
@@ -508,14 +520,16 @@ categories: ["tech", "weekly-recap"]
 **[{repo_name}]({repo_url})** — {repo_desc}
 :::
 
+
 ---
 
-## 🏁 Conclusión rápida (TL;DR)
+## 🏁 En 30 segundos (TL;DR)
+
 {conclusion_tldr}
 
 ---
 
-## 🔮 Para la próxima semana
+## 🔮 Qué esperar la próxima semana
 
 :::warning
 {sneak_peek}
@@ -525,7 +539,7 @@ categories: ["tech", "weekly-recap"]
 
 > **Nota del autor:** {nota_personal}
 
-📡 **[Ver dashboard completo con todos los vídeos y filtros](http://jorbencasdownloaderdocument.surge.sh)**
+📡 **[Ver dashboard completo con todos los filtros](http://jorbencasdownloaderdocument.surge.sh)**
 """
 
 # --- En constants_downloadfile.py ---
