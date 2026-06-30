@@ -26,4 +26,5 @@ jobs:
           MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
           MAILGUN_DOMAIN: ${{ secrets.MAILGUN_DOMAIN }}
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python send_email.py
