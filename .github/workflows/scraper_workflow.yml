@@ -53,12 +53,14 @@ jobs:
       # ── Fase 3: Envíos ──
       - name: 📧 Send email newsletter
         env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
           MAILGUN_DOMAIN: ${{ secrets.MAILGUN_DOMAIN }}
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
         run: python send_email.py
       - name: 🤖 Send Telegram notification
         env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TOKEN_API_ID: ${{ secrets.TOKEN_API_ID }}
         run: python send_telegram.py
