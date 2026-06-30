@@ -1,5 +1,69 @@
 [
     {
+        "titulo": "NO has visto NADA IGUAL: OPPO Reno16 Pro y OPPO Bubble",
+        "enlace": "https://www.youtube.com/watch?v=MwBN9hOeDSA",
+        "fuente": "Clipset",
+        "tipo": "video",
+        "f": "30/06",
+        "fecha_publicacion": "Reciente",
+        "id_video": "MwBN9hOeDSA",
+        "fecha_real": "30/06/2026",
+        "ts": "2026-06-30T19:31:27.897211",
+        "categoria": "💡 General"
+    },
+    {
+        "titulo": "Catalá reivindica la figura de Lluch y Romero como \"referentes de inspiración, concordia y humanidad\"",
+        "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/06/30/premis-valencia-i-valenciana-de-lany-catala-131977714.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "f": "30/06",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "30/06/2026",
+        "ts": "2026-06-30T19:31:31.851966"
+    },
+    {
+        "titulo": "Investigan el robo de un cuadro de Sorolla mientras la familia cargaba el coche",
+        "enlace": "https://www.levante-emv.com/cultura/2026/06/30/investigan-robo-pequeno-cuadro-sorolla-131983281.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "f": "30/06",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "30/06/2026",
+        "ts": "2026-06-30T19:31:31.854424"
+    },
+    {
+        "titulo": "Creación de un clúster OpenShift 4.18 desde cero: Parte 1 – La base de red y el servidor de utilidades",
+        "enlace": "https://dev.to/vilan011/building-an-openshift-418-cluster-from-scratch-part-1-the-network-foundation-utilities-server-5g92",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "f": "30/06",
+        "fecha_publicacion": "Tue, 30 Jun 2026 19:21:50 +0000",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "origen": "rss",
+        "fecha_real": "30/06/2026",
+        "ts": "2026-06-30T19:31:34.818203"
+    },
+    {
+        "titulo": "¿Qué sucede realmente cuando escribes x = 10?",
+        "enlace": "https://dev.to/storvus/what-really-happens-when-you-write-x-10-p0b",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "f": "30/06",
+        "fecha_publicacion": "Tue, 30 Jun 2026 19:20:16 +0000",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "origen": "rss",
+        "fecha_real": "30/06/2026",
+        "ts": "2026-06-30T19:31:34.818227"
+    },
+    {
         "titulo": "MINIMAX M3: al nivel de CLAUDE pero más BARATO",
         "enlace": "https://www.youtube.com/watch?v=wseyhlSZf3Y",
         "fuente": "Midudev",
@@ -10137,55 +10201,5 @@
         "id_video": "Vg3RMRPQ0RA",
         "fecha_real": "12/06/2026",
         "ts": "2026-06-12T13:58:52.119342"
-    },
-    {
-        "titulo": "Si estás trabajando en una solicitud para la universidad o un empleo, piensa en esto: ¿qué te hac...",
-        "enlace": "https://www.youtube.com/watch?v=MrnOWLtCLas",
-        "fuente": "FreeCodeCamp Shorts",
-        "tipo": "shorts",
-        "f": "12/06",
-        "id_video": "MrnOWLtCLas",
-        "fecha_real": "12/06/2026",
-        "ts": "2026-06-12T13:58:52.405172"
-    },
-    {
-        "titulo": "Las propiedades lógicas de CSS cambian tu forma de programar; Chris lo explica aquí.",
-        "enlace": "https://www.youtube.com/watch?v=kEBXszEhC0U",
-        "fuente": "FreeCodeCamp Shorts",
-        "tipo": "shorts",
-        "f": "12/06",
-        "id_video": "kEBXszEhC0U",
-        "fecha_real": "12/06/2026",
-        "ts": "2026-06-12T13:58:52.405191"
-    },
-    {
-        "titulo": "En 2004, el correo electrónico parecía un problema resuelto. Pero un ingeniero de Google tenía ot...",
-        "enlace": "https://www.youtube.com/watch?v=JZeJc9Z7dOg",
-        "fuente": "FreeCodeCamp Shorts",
-        "tipo": "shorts",
-        "f": "12/06",
-        "id_video": "JZeJc9Z7dOg",
-        "fecha_real": "12/06/2026",
-        "ts": "2026-06-12T13:58:52.405204"
-    },
-    {
-        "titulo": "Organizar un hackathon tan grande como TreeHacks no es tarea fácil... pero para Rachel, valió la ...",
-        "enlace": "https://www.youtube.com/watch?v=5bL1WhHj668",
-        "fuente": "FreeCodeCamp Shorts",
-        "tipo": "shorts",
-        "f": "12/06",
-        "id_video": "5bL1WhHj668",
-        "fecha_real": "12/06/2026",
-        "ts": "2026-06-12T13:58:52.405216"
-    },
-    {
-        "titulo": "La primera cámara web se inventó para vigilar... ¿café?",
-        "enlace": "https://www.youtube.com/watch?v=FVgbs2wvKmE",
-        "fuente": "FreeCodeCamp Shorts",
-        "tipo": "shorts",
-        "f": "12/06",
-        "id_video": "FVgbs2wvKmE",
-        "fecha_real": "12/06/2026",
-        "ts": "2026-06-12T13:58:52.405228"
     }
 ]
