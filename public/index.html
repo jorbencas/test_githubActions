@@ -35,7 +35,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>Tech Pulse <small style="font-size: 0.4em; color: #666;">27/06/2026</small></h1>
+            <h1>Tech Pulse <small style="font-size: 0.4em; color: #666;">30/06/2026</small></h1>
             <picture>
                 <source srcset="optimizado/Image.avif" type="image/avif">
                 <source srcset="optimizado/Image.webp" type="image/webp">
@@ -45,12 +45,24 @@
 
         <div class="ia-box">
             <h2>🤖 Resumen IA</h2>
-            <p>Esta semana, la balanza del sector tecnológico parece inclinarse peligrosamente hacia la regulación y el control. Mientras la IA muestra su poder transformador, los gobiernos ya están sentando las bases para su supervisión, con OpenAI y la administración Trump como protagonistas. Paralelamente, el mundo gaming nos deja un contraste brutal: el hype descontrolado por GTA 6 choca con una cruda realidad de ventas para PlayStation 5, marcando un punto de inflexión. Y por si fuera poco, Apple sigue su camino, integrando IA de forma tan potente que asusta (para bien), atrayendo a más desarrolladores. La IA ya no es solo innovación, es geopolítica.</p>
+            <p>La semana nos ha recordado que el ecosistema tecnológico es una montaña rusa. En el gaming, Microsoft siembra la incertidumbre con rumores de cierres de estudios y cancelaciones de juegos clave como Blade y State of Decay 3, mientras GTA 6 sigue batiendo récords de ventas en PS Store antes de su lanzamiento. En el ámbito de la IA, la carrera se intensifica: Anthropic afina sus modelos con Claude Sonnet 5 y apuesta por la ciencia, y un competidor de Nvidia, Etched, irrumpe con una valoración de 5 mil millones de dólares. Apple, por su parte, mantiene su cadencia con iOS 26.5.2, preparando el terreno para futuras personalizaciones en iOS 27, consolidando su omnipresencia. Un claro contraste entre la estabilidad y las turbulencias sectoriales.</p>
         </div>
 
         <div id="stats-bar" class="stats-bar"></div>
 
         <h2>📰 Noticias</h2>
+        <div class="filter-section">
+            <strong>🎯 Categoría:</strong>
+            <div id="news-category-filters" class="chip-container"></div>
+        </div>
+        <div class="filter-section">
+            <strong>💡 Tipo:</strong>
+            <div id="news-badge-filters" class="chip-container"></div>
+        </div>
+        <div class="filter-section">
+            <strong>📡 Fuente RSS:</strong>
+            <div id="news-rss-filters" class="chip-container"></div>
+        </div>
         <div class="filter-section">
             <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
                 <strong>📅 Tiempo:</strong>
@@ -75,11 +87,18 @@
             <div id="video-channel-filters" class="chip-container"></div>
         </div>
         <div id="video-grid" class="video-grid"></div>
+
+        <h2>⭐ Ranking GitHub Stars</h2>
+        <div class="filter-section">
+            <strong>🔤 Filtro:</strong>
+            <input type="text" id="github-filter" placeholder="Buscar por nombre o lenguaje..." style="padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; width: 100%; max-width: 400px; margin-top: 8px; font-size: 14px;">
+        </div>
+        <div id="github-ranking"></div>
     </div>
 </body>
 <script>
   const API_BASE = "https://testactions1github-api-python.hf.space/download";
-  const TOKEN = "75222c0574ce93704a431090ac46564e56327b7ba40c2d7f6ec737161e6561ae";
+  const TOKEN = "79b4924cb9c4246f5085d8e6839b4113cbe7f2e7cbf17817fd84a7024591cc6f";
   const DATA_URL = "data.json";
 </script>
 <script src="script.js"></script>
