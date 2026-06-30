@@ -1,7 +1,7 @@
 # Contexto del proyecto — test_githubActions (Tech Pulse)
 
-**Última actualización**: 2026-06-26 (dashboard: filtros por sección, fallback thumbnails YouTube, fix JSON-LD)
-**Stack**: Python 3.11, asyncio, Gemini API, BeautifulSoup4, aiohttp, GitHub Actions
+**Última actualización**: 2026-06-30 (modular scripts, 20 RSS feeds, dedup, Telegram 30min, chip favicons, badge CSS)
+**Stack**: Python 3.11, asyncio, Gemini API, BeautifulSoup4, aiohttp, Playwright, GitHub Actions
 **Dashboard**: `http://jorbencasdownloaderdocument.surge.sh`
 **Blog destino**: `jorbencas/blog` (PRs automáticos)
 **Idioma**: Español (con traducción automática desde inglés)
@@ -9,98 +9,116 @@
 ## Contenido generado
 
 ### Weekly Tech Recaps
-- Generados por `downloadFile.py` → `generar_blog_astro()`
+- Generados por `generate_weekly.py`
 - Archivos `.md` en `auto-news/` con frontmatter
 - Secciones: introducción, noticias destacadas, herramienta, TL;DR, sneak peek, nota personal
 - Template: `MD_TEMPLATE` en `constants_downloadfile.py`
 - AI: `obtener_recap_semanal_ia()` en `utils.py` (Gemini 2.5 Flash/Pro)
 - Frecuencia: sábados vía `scraper_workflow.yml`
 
-### Coding Challenges
-- Generados por `hunt_challenges.py` (scraping web + AI 3-tier fallback)
-- Archivos `.mdx` en `auto-challenges/` con Big-O, test cases, `<Challenge>` component
-- 12 lenguajes Codeember en rotación semanal determinista (seeded por ISO week)
-- Template: `RETO_MD_TEMPLATE` en `constants_downloadfile.py`
-- Frecuencia: dominical vía `hunt_challenges.yml`
-
 ### Dashboard HTML
-- `public/index.html` con filtros por sección, grid, resumen AI
-- Cada sección (noticias, vídeos) tiene su propio filtro de tiempo (`#news-week-filters`, `#video-week-filters`) + canal (`#news-channel-filters`, `#video-channel-filters`)
-- Plantilla en `constants_downloadfile.py` (`HTML_TEMPLATE`) — escapado de llaves `{{`/`}}` en JSON-LD para compatibilidad con `str.format()`. Parámetros: `{fecha_hoy}`, `{resumen}`, `{api_url}`, `{api_token}`.
-- Fallback visual en thumbnails de YouTube si la imagen no carga (gradiente `#0f172a`→`#1e293b` + nombre del canal)
-- Mensaje de estado vacío para vídeos: `"No hay vídeos en este período."`
-- SEO completo: meta author (Jorge Beneyto Castelló), OG tags, Twitter Cards, JSON-LD WebSite
-- CSS móvil mejorado: `scrollbar-gutter: stable`, mejor disposición de chips, tipografía responsive, stat-cards apiladas
+- `public/index.html` generado desde `HTML_TEMPLATE` en `constants_downloadfile.py`
+- Filtros: categoría (`#news-category-filters`), tipo Tech/Beca/RSS (`#news-badge-filters`), fuente RSS (`#news-rss-filters`), tiempo (`#news-week-filters`), canal (`#news-channel-filters`)
+- Vídeos: filtros de tiempo (`#video-week-filters`) + canal (`#video-channel-filters`)
+- Ranking GitHub Stars: top 20 repos ordenados por estrellas, con filtro por nombre/lenguaje
+- Stats bar con conteos de noticias Tech/Beca, vídeos, herramientas
 - Desplegado en Surge.sh tras cada ejecución del scraper
 
 ### Dashboard JS (`public/script.js`)
-- Estado de filtros separado: `selSemanaNoticias` / `selSemanaVideos` (antes global `selSemana`)
-- `generarSelectSemanas(items, prefix)` — genera select semanal reutilizable con optgroups por mes
-- `renderNewsWeekFilters()` / `renderVideoWeekFilters()` — renderizan su propio chip "Últimas 2 Semanas" + selector de archivo
-- Funciones de filtro independientes: `filtrarSemanaNoticias()`, `filtrarSemanaNoticiasDesdeSelector()`, `filtrarSemanaVideos()`, `filtrarSemanaVideosDesdeSelector()`
-- `itemDentroSemana(itemTS, selector)` — recibe el selector de estado en lugar de usar variable global
-- Cards de vídeo: quitado `aspect-ratio: 16/9` y `contain: layout style` del wrapper. Ahora el thumb tiene su propio contenedor con aspect-ratio por tipo. Imagen con `onerror` que oculta el img y muestra fallback con gradiente + nombre del canal.
+- `DATA_URL` apunta a `data.json`
+- Filtros combinables: semana, categoría, badge, origen RSS, canal
+- Chips con favicon fallback via Google favicon service (`//www.google.com/s2/favicons?domain=...`)
+- `chipWithImage()` reutilizable para todos los chips de canal/fuente
+- `renderGithubRanking()` + `initGithubFilter()` para ranking interactivo
 
 ### Dashboard CSS (`public/styles.css`)
-- `.video-thumb-link` — contenedor del thumbnail, `aspect-ratio` por tipo (16/9 normal/live, 9/16 shorts)
-- `.video-thumb` — wrapper relativo para img + fallback
-- `.video-thumb-img` — imagen cover full-size
-- `.video-thumb-img.errored` — `display: none` cuando falla la carga
-- `.video-thumb-fallback` — gradiente oscuro, oculto por defecto; `.visible` lo muestra en flex centrado
-- Grid: `minmax(220px, 1fr)` → `minmax(280px, 1fr)`
+- Badges definidos como clases: `.badge-tech` (azul), `.badge-beca` (verde), `.badge-rss` (celeste), `.badge-cat` (púrpura)
+- Fallback visual en thumbnails de YouTube con gradiente oscuro
+- Grid responsive: `minmax(280px, 1fr)`
+- Chips redondeados con `.chip-img` para avatares/favicons
 
 ## Fuentes de datos
 
 ### YouTube (canales tech)
-MoureDev, Midudev, Pelado Nerd, HolaMundo, FreeCodeCamp, DotCSV, DeBug, Víctor Robles, Fazt, Clipset, CodelyTV, EDteam, Programa Con Arnau, El Pingüino de Mario, Carlos Azaustre, Código Facilito, Applesfera, etc.
+MoureDev, Midudev, Pelado Nerd, HolaMundo, FreeCodeCamp, DotCSV, DeBug, Víctor Robles, Fazt, Clipset, CodelyTV, EDteam, Programa Con Arnau, El Pingüino de Mario, Carlos Azaustre, Código Facilito, Applesfera, Ringa Tech, Nethermind, LinkTV, Programador X + varios más.
 
-### Web (45+ fuentes)
-TechCrunch (IA), The Verge, Wired, Ars Technica, Hacker News, Slashdot, GitHub Blog, OpenAI, Google AI, NVIDIA Blog, Dev.to, Xataka, Genbeta, ADSL Zone, MuyComputer, ComputerHoy, Hipertextual, El País Tecnología, HobbyConsolas, Mixx.io, Hugging Face Blog, Anthropic, Meta AI (engineering.fb.com), DeepMind, MIT Technology Review (JS-rendered), VentureBeat AI, Becas, Fundación Carolina, Levante-EMV, HackTheBox, etc.
+### Web (60+ fuentes HTML)
+TechCrunch, The Verge, Wired, Ars Technica, Hacker News, Slashdot, GitHub Blog, OpenAI, Google AI, NVIDIA Blog, Dev.to, Xataka, Genbeta, ADSL Zone, MuyComputer, ComputerHoy, Hipertextual, El País Tecnología, HobbyConsolas, Mixx.io, Hugging Face Blog, Anthropic, Meta AI, DeepMind, MIT Tech Review, VentureBeat AI, Becas, Fundación Carolina, Levante-EMV, HackTheBox, etc.
 
-### Herramientas (fuentes de descubrimiento automático)
-- **GitHub Trending** (`https://github.com/trending`) — repos destacados con descripción, lenguaje y estrellas
-- **Product Hunt** (`https://www.producthunt.com/`) — lanzamientos de productos tech (best-effort, JS-heavy)
+### RSS (20 fuentes)
+OpenAI Blog, Anthropic Blog, Google DeepMind, Meta AI Blog, Mistral AI News, GitHub Engineering, Stack Overflow Blog, Hacker News, LangChain Blog, Google AI Blog, MIT Tech Review AI, Google Search Central, Google Developers, Moz Blog SEO, Search Engine Journal, Wired AI, The Verge AI, TechCrunch AI, Ars Technica AI, Dev.to
+
+### Herramientas (descubrimiento automático)
+- **GitHub Trending** (`github.com/trending`) — con subtipos `github`, `github-topic`, `github-collection`
+- **Product Hunt** (`producthunt.com`) — best-effort, JS-heavy
 
 ## Arquitectura
 
-### Pipeline principal
-1. `optimize.py` → optimiza imágenes
-2. `downloadFile.py` → scrapea 35+ fuentes, AI summary, genera recap + dashboard + email + Telegram
-   - Separa herramientas (tipo: "herramienta") del flujo de noticias
-   - Guarda herramientas descubiertas en `files/herramientas.json` (acumulativo, máx 200)
-3. `actualizar_recursos.py` → fusiona herramientas nuevas en `resources.mdx` del blog (ejecutado en workflow tras checkout del blog)
-4. `hunt_challenges.py` → scrapea retos, genera soluciones (DB→AI→generic)
-5. `clean_news.py` → mantiene `all_news.json` desde `noticias_historico.json`
+### Scripts modulares (cada uno independiente)
 
-### Base de datos de soluciones
-- `solutions_data.py` → 105 entradas básicas (py/js) extraídas de `fix_challenges.py`
-- `solutions_db.py` → 5 entradas curadas (12 lenguajes + Big-O + test cases) + merge con extended
-- `lookup()` → soporta claves completas (python) y cortas (py/js)
-
-## Archivos
-
-### Scripts activos
-- `downloadFile.py` (orcestrador principal)
-- `hunt_challenges.py` (cacería de retos)
-- `clean_news.py` (limpieza trimestral)
-- `optimize.py` (optimización de imágenes)
-- `actualizar_recursos.py` (fusión de herramientas → resources.mdx del blog)
+| Script | Función | Salida |
+|--------|---------|--------|
+| `scraper_base.py` | Clases base: YouTubeExtractor, WebExtractor (incl. `extraer_rss`), ScraperPro, AvatarRepository, ContentFilter | — (módulo) |
+| `scrape_news.py` | Scrapea noticias web + YouTube + RSS → `noticias_historico.json` | `files/noticias_historico.json` |
+| `scrape_tools.py` | Scrapea GitHub Trending + Product Hunt → `herramientas.json` | `files/herramientas.json` |
+| `scrape_trends.py` | Playwright: Google Trends + TikTok → `trends.json` | `files/trends.json` |
+| `generate_weekly.py` | AI recap + dashboard HTML + data.json → `auto-news/` + `public/` | `public/index.html`, `public/data.json` |
+| `send_email.py` | Mailgun newsletter con resúmenes por noticia | — |
+| `send_telegram.py` | Telegram con TTS por noticia, dedup vía `telegram_sent.json` | — |
+| `clean_news.py` | Validación trimestral de enlaces, poda de muertos | `noticias_historico.json` |
+| `optimize.py` | Conversión de imágenes a WebP/AVIF/MP4 | `public/optimizado/` |
 
 ### Módulos compartidos
-- `utils.py` (AI helpers: solución, recap, imagen, traducción)
-- `solutions_db.py` (lookup unificado)
-- `solutions_data.py` (105 soluciones extendidas + generadores)
-- `constants_downloadfile.py` (config central: API keys, fuentes, templates, prompts)
+- `utils.py` (AI helpers: resumen, recap, imagen, traducción, dedup)
+- `constants_downloadfile.py` (config central: API keys, 139 fuentes, templates, prompts, CATEGORIAS)
 
-### Workflows
-- `.github/workflows/scraper_workflow.yml` (sábados) — incluye paso `Actualizar resources.mdx con nuevas herramientas`
-- `.github/workflows/hunt_challenges.yml` (domingos + manual)
-- `.github/workflows/clean_news.yml` (trimestral + manual)
+### Content pipeline
+1. `scrape_news.py` → `files/noticias_historico.json` (máx 900, dedup automático)
+2. `scrape_tools.py` → `files/herramientas.json` (máx 200)
+3. `scrape_trends.py` → `files/trends.json`
+4. `generate_weekly.py` → `auto-news/YYYY-W{week}-tech-recap.md` + `public/` → Surge
+5. `send_email.py` → Mailgun (diario 09:00 UTC)
+6. `send_telegram.py` → Telegram con audio TTS (cada 30 min, solo noticias nuevas)
+
+### Deduplicación
+- `deduplicar_items()` en `utils.py`:
+  - URL normalizada (sin `?utm_*`, `#fragment`, trailing `/`, `http`→`https`)
+  - Prefijo de título al 85% del más corto
+- Se ejecuta en `scrape_news.py` (al scrapear) y `generate_weekly.py` (al generar dashboard)
+- Telegram mantiene `telegram_sent.json` para no reenviar
+
+### Workflows (GitHub Actions)
+| Workflow | Trigger | Acción |
+|----------|---------|--------|
+| `scraper_workflow.yml` | Sábado 07:00 UTC | scrape news+tools → generate weekly → email+Telegram → PR blog → Surge |
+| `trends_workflow.yml` | Martes+viernes 08:00 UTC | Playwright: Google Trends + TikTok |
+| `send_email_workflow.yml` | Diario 09:00 UTC | Mailgun newsletter |
+| `send_telegram_workflow.yml` | Cada 30 min | Telegram con TTS (noticias nuevas) |
+| `clean_news.yml` | Trimestral | Validar enlaces → podar muertos |
+
+### Noticias: estructura de item
+```json
+{
+  "titulo": "...",
+  "enlace": "...",
+  "fuente": "Fuente X",
+  "tipo": "noticia|video|shorts|live|herramienta",
+  "f": "dd/mm",
+  "fecha_publicacion": "...",
+  "fecha_real": "dd/mm/aaaa",
+  "ts": "ISO datetime",
+  "badge": "Tech|Beca",
+  "categoria": "🤖 IA|...",
+  "origen": "web|rss",
+  "id_video": "(solo YouTube)"
+}
+```
 
 ## Reglas importantes
-- Al modificar `constants_downloadfile.py`, verificar con dry-run si es posible. El `HTML_TEMPLATE` usa `str.format()`, escapar llaves literales como `{{`/`}}`.
-- Si se añade fuente, agregar a `FUENTES` en `constants_downloadfile.py` y actualizar este documento
-- Para sitios JS complejos (MIT Tech Review, DeepMind), intentar con Playwright o RSS feed como fallback
-- Los retos semanales NO se regeneran si el `.mdx` ya existe
-- Todas las rutas de salida se leen de `CONFIG` en `constants_downloadfile.py`
+- Al modificar `constants_downloadfile.py`, verificar con `py_compile`. El `HTML_TEMPLATE` usa `str.format()`, escapar llaves literales como `{{`/`}}`.
+- Si se añade fuente, agregar a `FUENTES` en `constants_downloadfile.py` y actualizar este documento.
+- Fuentes RSS: usar clave `"rss": "URL"` en FUENTES. El scraper detecta automáticamente `"rss"` y parsea XML (RSS 2.0 o Atom).
+- Los weekly recaps NO se regeneran si el `.md` ya existe.
 - **Git restrictions**: NEVER hacer `git push`, `git pull`, o `git fetch`. Solo commit local.
+- Todas las rutas de salida se leen de `CONFIG` en `constants_downloadfile.py`.
+- `downloadFile.py` se mantiene por retrocompatibilidad pero los scripts modulares son los activos.
