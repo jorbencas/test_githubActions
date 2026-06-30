@@ -35,6 +35,41 @@ TECH_KEYWORDS = [# Inteligencia Artificial
 BECAS_KEYWORDS = ['beca', 'curso', 'ayuda', 'formación', 'subvención', 'taller']
 ALL_KEYWORDS = TECH_KEYWORDS + BECAS_KEYWORDS
 
+CATEGORIAS = {
+    "⚡ Hardware": ["NVIDIA", "H100", "Blackwell", "GPU", "NPU", "Apple Silicon", "M4",
+                    "Intel", "AMD", "Snapdragon", "Chip", "Semicondutores", "procesador",
+                    "Qualcomm", "ARM", "RTX"],
+    "🤖 IA": ["IA", "AI", "LLM", "GPT", "Gemini", "Claude", "Llama 3", "DeepSeek",
+               "OpenAI", "Anthropic", "Mistral", "Stable Diffusion", "Midjourney", "Sora",
+               "RAG", "Fine-tuning", "Prompt", "neural", "Deep Learning",
+               "Hugging Face", "Transformer", "difusión", "modelo",
+               "inteligencia artificial", "aprendizaje automático"],
+    "💻 Programación": ["Python", "Rust", "TypeScript", "React", "Next.js", "Node.js", "Go",
+                        "WebAssembly", "JavaScript", "Java", "C#", "PHP", "Ruby", "Dart",
+                        "Swift", "Kotlin", "Tailwind", "API", "Backend", "Frontend",
+                        "Fullstack", "reto programación", "challenge", "kata", "framework",
+                        "librería", "compilador"],
+    "🐳 DevOps": ["Docker", "Kubernetes", "DevOps", "Serverless", "CI/CD", "Terraform",
+                  "GitHub Actions", "GitLab", "Jenkins", "infra", "despliegue", "contenedor",
+                  "orquestación"],
+    "🔒 Ciberseguridad": ["Ciberseguridad", "Zero Trust", "hack", "vulnerabilidad", "ctf",
+                          "malware", "ransomware", "phishing", "firewall", "ciberataque"],
+    "📊 Negocios": ["SaaS", "Startups", "Cloud", "Big Data", "Blockchain", "Web3",
+                    "Fintech", "Cripto", "Metaverso", "IoT", "Automatización", "Open Source",
+                    "inversión", "millon"],
+    "🎓 Becas/Formación": ["beca", "curso", "ayuda", "formación", "subvención", "taller",
+                           "bootcamp", "máster", "gratuito", "becado"],
+}
+
+
+def clasificar_noticia(titulo: str) -> str:
+    t_padded = " " + titulo.lower() + " "
+    for cat, keywords in CATEGORIAS.items():
+        for k in keywords:
+            if " " + k.lower() + " " in t_padded:
+                return cat
+    return "💡 General"
+
 FUENTES = {
     "Programa Con Arnau": {"yt":"https://youtube.com/@progconarnau?si=AFBTWjGeo-UpuJdE"},
     "El Pingüino de Mario": {"yt":"https://www.youtube.com/@elpinguinodemario?si=DvMsCTK74FQfFzwH"},
@@ -82,11 +117,112 @@ FUENTES = {
     "DeepMind": {"url": "https://deepmind.google/discover/blog/", "selector": "h3.card__title"},
     "MIT Technology Review": {"url": "https://www.technologyreview.com/topic/artificial-intelligence/"},  # JS-rendered; RSS feed available at /topic/artificial-intelligence/feed/
     "VentureBeat AI": {"url": "https://venturebeat.com/category/ai/", "selector": "header.text-editorial-headline-030 h2 a"},
+    # ── Fuentes IA especializadas ──
+    "AssemblyAI": {"url": "https://www.assemblyai.com/blog/", "selector": "article h2 a"},
+    "Cohere": {"url": "https://cohere.com/blog", "selector": "a[href*='/blog/'] h3"},
+    "Scale AI": {"url": "https://scale.com/blog", "selector": "a[class*='blog-card']"},
+    "LangChain": {"url": "https://blog.langchain.dev/", "selector": "article h2 a"},
+    "Pinecone": {"url": "https://www.pinecone.io/blog/", "selector": "a[class*='post-title']"},
+    "Weights & Biases": {"url": "https://wandb.ai/fully-connected", "selector": "article h2 a"},
+    "Hugging Face": {"url": "https://huggingface.co/blog", "selector": "article.overview-card-wrapper a[role='link']"},
+    "LlamaIndex": {"url": "https://www.llamaindex.ai/blog", "selector": "a[class*='blog-post']"},
+    "Anthropic Research": {"url": "https://www.anthropic.com/research", "selector": "a[class*='card']"},
+    "Claude Blog": {"url": "https://docs.anthropic.com/en/release-notes", "selector": "article h2 a"},
+    "OpenCode": {"url": "https://opencode.ai"},
+    "Google Research": {"url": "https://research.google/blog/", "selector": "article h2 a"},
+    "Google DeepMind": {"url": "https://deepmind.google/discover/blog/", "selector": "h3.card__title"},
+    "Google Cloud AI": {"url": "https://cloud.google.com/blog/products/ai-machine-learning", "selector": "article h3 a"},
+    "Google AI Dev": {"url": "https://ai.google.dev/"},
+    "Microsoft AI": {"url": "https://blogs.microsoft.com/ai/", "selector": "article h2 a"},
+    "Microsoft Research AI": {"url": "https://www.microsoft.com/en-us/research/topic/artificial-intelligence/", "selector": "article h2 a"},
+    "Azure AI": {"url": "https://azure.microsoft.com/en-us/blog/product/azure-ai/", "selector": "article h2 a"},
+    "AWS ML": {"url": "https://aws.amazon.com/blogs/machine-learning/", "selector": "article h2 a"},
+    "Apple ML Research": {"url": "https://machinelearning.apple.com/", "selector": "article h2 a"},
+    "xAI": {"url": "https://x.ai/blog", "selector": "article h2 a"},
+    "Perplexity AI": {"url": "https://blog.perplexity.ai/", "selector": "article h2 a"},
+    "Meta AI Research": {"url": "https://ai.meta.com/blog/", "selector": "article h3 a"},
+    "Stability AI": {"url": "https://stability.ai/news", "selector": "article h2 a"},
+    "Replicate": {"url": "https://replicate.com/blog", "selector": "article h2 a"},
+    "Modal": {"url": "https://modal.com/blog", "selector": "article h2 a"},
+    "Together AI": {"url": "https://www.together.ai/blog", "selector": "article h2 a"},
+    "Fireworks AI": {"url": "https://fireworks.ai/blog", "selector": "article h2 a"},
+    "Cursor": {"url": "https://www.cursor.com/blog", "selector": "article h2 a"},
+    "Codeium": {"url": "https://codeium.com/blog", "selector": "article h2 a"},
+    "TabbyML": {"url": "https://tabby.tabbyml.com/blog", "selector": "article h2 a"},
+    "Continue.dev": {"url": "https://docs.continue.dev/changelog", "selector": "article h2 a"},
+    "Aider": {"url": "https://aider.chat/docs/faq.html"},
+    # ── GitHub Topics (AI tools, LLMs, agents) ──
+    "GitHub Topic AI": {"url": "https://github.com/topics/artificial-intelligence?o=desc&s=stars", "tipo": "herramienta", "subtipo": "github-topic"},
+    "GitHub Topic LLM": {"url": "https://github.com/topics/llm?o=desc&s=stars", "tipo": "herramienta", "subtipo": "github-topic"},
+    "GitHub Topic AI Agents": {"url": "https://github.com/topics/ai-agents?o=desc&s=stars", "tipo": "herramienta", "subtipo": "github-topic"},
+    "GitHub Topic ML": {"url": "https://github.com/topics/machine-learning?o=desc&s=stars", "tipo": "herramienta", "subtipo": "github-topic"},
+    "GitHub Collections AI": {"url": "https://github.com/collections/ai-tools", "tipo": "herramienta", "subtipo": "github-collection"},
+    # ── Trending GitHub diario ──
+    "GitHub Trending Daily": {"url": "https://github.com/trending?since=daily", "tipo": "herramienta", "subtipo": "github"},
+    "GitHub Trending Weekly": {"url": "https://github.com/trending?since=weekly", "tipo": "herramienta", "subtipo": "github"},
+    # ── Noticias generales IA ──
+    "BBC AI": {"url": "https://www.bbc.com/news/topics/c302m85qtk1t", "selector": "a[data-testid='internal-link']"},
+    "El Mundo Tecnología": {"url": "https://www.elmundo.es/tecnologia.html", "selector": "article h2 a"},
+    # ── Más creadores de contenido (YouTube + redes) ──
+    "LinkTV": {"yt": "https://www.youtube.com/@LinkTVA/videos"},
+    "LinkTV Twitter": {"url": "https://x.com/LinkTVA", "selector": "article[data-testid='tweet'] div[lang]"},
+    "LinkTV Threads": {"url": "https://www.threads.net/@linktva", "selector": "article a[href*='/post/']"},
+    "Ringa Tech": {"yt": "https://www.youtube.com/@RingaTech/videos"},
+    "Ringa Tech Twitter": {"url": "https://x.com/ringatech", "selector": "article[data-testid='tweet'] div[lang]"},
+    "Nethermind": {"yt": "https://www.youtube.com/@NethermindDev/videos"},
+    "Nethermind Twitter": {"url": "https://x.com/NethermindDev", "selector": "article[data-testid='tweet'] div[lang]"},
+    "Develoteca": {"yt": "https://www.youtube.com/@Develoteca/videos"},
+    "Programador X": {"yt": "https://www.youtube.com/@ProgramadorX/videos"},
+    "Programador X Twitter": {"url": "https://x.com/programadorx", "selector": "article[data-testid='tweet'] div[lang]"},
+    # ── Tech news ──
+    "ZDNet": {"url": "https://www.zdnet.com/topic/artificial-intelligence/", "selector": "article h3 a"},
+    "CNET": {"url": "https://www.cnet.com/tech/", "selector": "a[class*='title']"},
+    "Android Authority": {"url": "https://www.androidauthority.com/", "selector": "h3 a"},
+    "The Next Web": {"url": "https://thenextweb.com/topic/artificial-intelligence", "selector": "article h2 a"},
+    "InfoWorld": {"url": "https://www.infoworld.com/category/artificial-intelligence/", "selector": "h3 a"},
+    # ── Blogs de desarrollo ──
+    "LogRocket": {"url": "https://blog.logrocket.com/", "selector": "article h2 a"},
+    "Smashing Magazine": {"url": "https://www.smashingmagazine.com/articles/", "selector": "article h2 a"},
+    "CSS-Tricks": {"url": "https://css-tricks.com/", "selector": "article h2 a"},
+    "freeCodeCamp": {"url": "https://www.freecodecamp.org/news/", "selector": "article h2 a"},
+    "DigitalOcean": {"url": "https://www.digitalocean.com/blog", "selector": "a[class*='blog-card'] h3"},
+    # ── Más fuentes IA y tecnología ──
+    "The Decoder": {"url": "https://the-decoder.com/"},
+    "MarkTechPost": {"url": "https://www.marktechpost.com/"},
+    "LinkedIn Engineering": {"url": "https://engineering.linkedin.com/blog", "selector": "article h3 a"},
+    "Facebook Engineering": {"url": "https://engineering.fb.com/", "selector": "article h3 a"},
+    # ── TikTok y Google Trends (requieren JS, probar con Playwright) ──
+    "Google Trends Tecnología": {"url": "https://trends.google.com/trends/trendingsearches/daily?geo=ES&cat=tech", "selector": "div.mZvaOc"},
     # ── Redes sociales (scraping sin API) ──
     "Midudev Twitter": {"url": "https://x.com/midudev", "selector": "article[data-testid='tweet'] div[lang]"},
     "Midudev Threads": {"url": "https://www.threads.net/@midudev", "selector": "article a[href*='/post/']"},
     "Bricemoure Twitter": {"url": "https://x.com/bricemoure", "selector": "article[data-testid='tweet'] div[lang]"},
     "Bricemoure Threads": {"url": "https://www.threads.net/@bricemoure", "selector": "article a[href*='/post/']"},
+    "GitHub Twitter": {"url": "https://x.com/github", "selector": "article[data-testid='tweet'] div[lang]"},
+    "Vercel Twitter": {"url": "https://x.com/vercel", "selector": "article[data-testid='tweet'] div[lang]"},
+    "Astro Twitter": {"url": "https://x.com/astrodotbuild", "selector": "article[data-testid='tweet'] div[lang]"},
+    "dotpige Twitter": {"url": "https://x.com/dotpige", "selector": "article[data-testid='tweet'] div[lang]"},
+    # ── Fuentes RSS (lectores XML) ──
+    "OpenAI Blog": {"rss": "https://openai.com/news/feed.xml"},
+    "Anthropic Blog": {"rss": "https://www.anthropic.com/feed.xml"},
+    "Google DeepMind": {"rss": "https://deepmind.google/blog/rss/"},
+    "Meta AI Blog": {"rss": "https://ai.meta.com/blog/rss/"},
+    "Mistral AI News": {"rss": "https://mistral.ai/feed.xml"},
+    "GitHub Engineering": {"rss": "https://github.blog/engineering/feed/"},
+    "Stack Overflow Blog": {"rss": "https://stackoverflow.blog/feed/"},
+    "Hacker News": {"rss": "https://hnrss.org/frontpage"},
+    "LangChain Blog": {"rss": "https://blog.langchain.dev/feed/"},
+    "Google AI Blog": {"rss": "https://blog.google/technology/ai/rss/"},
+    "MIT Tech Review AI": {"rss": "https://www.technologyreview.com/topic/artificial-intelligence/feed/"},
+    "Google Search Central": {"rss": "https://developers.google.com/search/blog/feed.xml"},
+    "Google Developers": {"rss": "https://developers.googleblog.com/feed.xml"},
+    "Moz Blog SEO": {"rss": "https://moz.com/blog/feed.xml"},
+    "Search Engine Journal": {"rss": "https://www.searchenginejournal.com/feed/"},
+    "Wired AI": {"rss": "https://www.wired.com/feed/rss"},
+    "The Verge AI": {"rss": "https://www.theverge.com/ai-artificial-intelligence/rss.xml"},
+    "TechCrunch AI": {"rss": "https://techcrunch.com/category/artificial-intelligence/feed/"},
+    "Ars Technica AI": {"rss": "https://feeds.arstechnica.com/arstechnica/index"},
+    "Dev.to": {"rss": "https://dev.to/feed"},
     # ── Fuentes de herramientas ──
     "GitHub Trending": {"url": "https://github.com/trending", "tipo": "herramienta", "subtipo": "github"},
     "Product Hunt": {"url": "https://www.producthunt.com/", "tipo": "herramienta", "subtipo": "producthunt"},
@@ -146,6 +282,18 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
         <h2>\U0001f4f0 Noticias</h2>
         <div class="filter-section">
+            <strong>\U0001f3af Categoría:</strong>
+            <div id="news-category-filters" class="chip-container"></div>
+        </div>
+        <div class="filter-section">
+            <strong>\U0001f4a1 Tipo:</strong>
+            <div id="news-badge-filters" class="chip-container"></div>
+        </div>
+        <div class="filter-section">
+            <strong>📡 Fuente RSS:</strong>
+            <div id="news-rss-filters" class="chip-container"></div>
+        </div>
+        <div class="filter-section">
             <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
                 <strong>\U0001f4c5 Tiempo:</strong>
                 <div id="news-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
@@ -169,6 +317,13 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             <div id="video-channel-filters" class="chip-container"></div>
         </div>
         <div id="video-grid" class="video-grid"></div>
+
+        <h2>\u2b50 Ranking GitHub Stars</h2>
+        <div class="filter-section">
+            <strong>\U0001f524 Filtro:</strong>
+            <input type="text" id="github-filter" placeholder="Buscar por nombre o lenguaje..." style="padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; width: 100%; max-width: 400px; margin-top: 8px; font-size: 14px;">
+        </div>
+        <div id="github-ranking"></div>
     </div>
 </body>
 <script>

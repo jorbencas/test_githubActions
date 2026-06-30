@@ -51,6 +51,8 @@ a:hover { text-decoration: underline; }
 .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7em; font-weight: bold; text-transform: uppercase; margin-right: 8px; vertical-align: middle; }
 .badge-tech { background: #e3f2fd; color: #1976d2; border: 1px solid #1976d2; }
 .badge-beca { background: #e8f5e9; color: #2e7d32; border: 1px solid #2e7d32; }
+.badge-rss { background: #e1f5fe; color: #0277bd; border: 1px solid #0277bd; }
+.badge-cat { background: #f3e8ff; color: #7c3aed; border: 1px solid #7c3aed; }
 
 .ia-box { background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 6px solid #8e44ad; margin-bottom: 30px; font-size: 1.05em; color: #34495e; }
 .ia-box h2 { margin-top: 0; color: #8e44ad; display: flex; align-items: center; gap: 10px; }
@@ -64,8 +66,9 @@ option { font-weight: normal; color: #555; background: white; }
 .badge-live { position: absolute; top: 8px; left: 8px; background: #ff0000; color: white; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; z-index: 5; animation: blink 1.5s infinite; }
 @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-.btn-download { position: absolute; top: 8px; right: 8px; background: rgba(0, 0, 0, 0.7); color: white; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none; font-size: 14px; z-index: 5; transition: transform 0.2s, background 0.2s; }
-.btn-download:hover { background: #28a745; transform: scale(1.1); }
+/* .btn-download — desactivado: API no funcional */
+/* .btn-download { position: absolute; top: 8px; right: 8px; background: rgba(0, 0, 0, 0.7); color: white; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 50%; text-decoration: none; font-size: 14px; z-index: 5; transition: transform 0.2s, background 0.2s; } */
+/* .btn-download:hover { background: #28a745; transform: scale(1.1); } */
 
 .card.tipo-live { border-bottom: 3px solid #ff0000; }
 .card.tipo-shorts { border-bottom: 3px solid #ff00ff; }

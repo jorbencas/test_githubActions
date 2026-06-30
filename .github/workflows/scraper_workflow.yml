@@ -1,11 +1,11 @@
-name: 📰 scraper_workflow
+name: 📰 Weekly Scraper (Noticias + Herramientas + Recap)
 on:
   schedule:
-    - cron: "0 7 * * 6" # Ejecutar los sábados a las 9:00 UTC
+    - cron: "0 7 * * 6" # Sábados 07:00 UTC
   workflow_dispatch:
 
 jobs:
-  scrape_and_update:
+  weekly_pipeline:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -15,46 +15,55 @@ jobs:
       - name: 🕑 Ajuste de Horario (Verano vs Invierno)
         if: github.event_name == 'schedule'
         run: |
-          # Obtenemos el desfase horario actual de Madrid
           OFFSET=$(TZ="Europe/Madrid" date +%z)
           echo "Desfase actual con UTC: $OFFSET"
-          
           if [ "$OFFSET" == "+0100" ]; then
-            echo "Estamos en horario de VERANO. Esperando 1 hora para ser las 9:00 AM..."
+            echo "Estamos en horario de VERANO. Esperando 1 hora..."
             sleep 3600
           else
-            echo "Estamos en horario de INVIERNO. Procediendo de inmediato (son las 9:00 AM)."
+            echo "Estamos en horario de INVIERNO. Procediendo."
           fi
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
           cache: 'pip'
-      - name: Cache de dependencias de Python
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
       - name: 📦 Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: 🖼️ Optimize Images
-        run: |
-          python optimize.py
-      - name: 💻 Run scraper
+      - name: 🖼️ Optimize Images (dashboard)
+        run: python optimize.py
+
+      # ── Fase 1: Scraping ──
+      - name: 💻 Scrape news
         env:
-          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scrape_news.py
+      - name: 🔧 Scrape tools
+        run: python scrape_tools.py
+
+      # ── Fase 2: Generación ──
+      - name: 📝 Generate weekly recap + dashboard
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DOWNLOADER_API_TOKEN: ${{ secrets.DOWNLOADER_API_TOKEN }}
+        run: python generate_weekly.py
+
+      # ── Fase 3: Envíos ──
+      - name: 📧 Send email newsletter
+        env:
           MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
           MAILGUN_DOMAIN: ${{ secrets.MAILGUN_DOMAIN }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+        run: python send_email.py
+      - name: 🤖 Send Telegram notification
+        env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TOKEN_API_ID: ${{ secrets.TOKEN_API_ID }}
-          DOWNLOADER_API_TOKEN: ${{ secrets.DOWNLOADER_API_TOKEN }}
-        run: python downloadFile.py
-        shell: bash
+        run: python send_telegram.py
+
+      # ── Fase 4: Blog PR ──
       - name: 📂 Checkout blog repo
         uses: actions/checkout@v3
         with:
@@ -63,7 +72,7 @@ jobs:
           token: ${{ secrets.BLOG_TOKEN }}
           fetch-depth: 0
       - name: 🔄 Copy auto-news to blog
-        id: news_copied_to_blog_folder
+        id: news_copied
         run: |
           mkdir -p blog/src/content/auto-news
           selected_file=$(ls -t auto-news/*.md 2>/dev/null | grep -i ia | head -1)
@@ -76,15 +85,26 @@ jobs:
               copied="yes"
           fi
           echo "copied=$copied" >> $GITHUB_OUTPUT
-      - name: 🔧 Actualizar resources.mdx con nuevas herramientas
+      - name: 🔧 Actualizar resources.mdx con herramientas
         id: tools_updated
         run: |
-          python blog/scripts/actualizar_recursos.py --blog-path blog && echo "updated=yes" >> $GITHUB_OUTPUT || echo "updated=no" >> $GITHUB_OUTPUT
+          python blog/scripts/actualizar_recursos.py --blog-path blog \
+            && echo "updated=yes" >> $GITHUB_OUTPUT \
+            || echo "updated=no" >> $GITHUB_OUTPUT
+      - name: 🖼️ Optimizar imágenes del blog
+        env:
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python blog/scripts/fix_images.py
+      - name: 🖼️ Generar portadas
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python blog/scripts/make_cover_collage.py --ci
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
-        if: steps.news_copied_to_blog_folder.outputs.copied == 'yes' || steps.tools_updated.outputs.updated == 'yes'
+        if: steps.news_copied.outputs.copied == 'yes' || steps.tools_updated.outputs.updated == 'yes'
         with:
-          token: ${{ secrets.BLOG_TOKEN }} 
+          token: ${{ secrets.BLOG_TOKEN }}
           path: blog
           commit-message: "feat: nuevo weekly recap y/o herramientas para revisar"
           branch: "news/weekly-${{ github.run_id }}"
@@ -94,14 +114,14 @@ jobs:
             Reviewdog y LanguageTool analizarán este PR en unos segundos.
             Por favor, revisa las sugerencias de ortografía antes de hacer Merge.
           base: main
-      - name: 📝 Update Github repo
+      - name: 📝 Push changes a test_githubActions
         if: always()
         run: |
           git config user.name jorbencas
           git config user.email jorbencas@gmail.com
           git add .
-          git diff --quiet && git diff --staged --quiet || git commit -m "[bot] update tech news scraping"
+          git diff --quiet && git diff --staged --quiet || git commit -m "[bot] update tech news + tools"
           git push origin master
-      - name: ✨ Deploy to jorbencasdownloaderdocument.surge.sh
-        run : |
+      - name: ✨ Deploy dashboard a Surge
+        run: |
           npx surge public jorbencasdownloaderdocument.surge.sh --token ${{ secrets.SURGE_TOKEN }}

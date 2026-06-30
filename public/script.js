@@ -1,8 +1,12 @@
 let selSemanaNoticias = { tipo: "all_recent", ini: null, fin: null };
 let selSemanaVideos = { tipo: "all_recent", ini: null, fin: null };
+let selCategoriaNoticias = "all";
+let selBadgeNoticias = "all";
+let selRssNoticias = "all";
 let selCanalNoticias = "all";
 let selCanalVideos = "all";
 let allItems = [];
+let herramientas = [];
 let avatars = {};
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -10,6 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const resp = await fetch(DATA_URL);
     const data = await resp.json();
     allItems = data.items || [];
+    herramientas = data.herramientas || [];
     avatars = data.avatars || {};
     initDashboard();
   } catch (err) {
@@ -21,14 +26,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 function initDashboard() {
   renderStats(allItems);
+  renderNewsCategoryChips(allItems);
+  renderNewsBadgeChips(allItems);
+  renderNewsRssChips(allItems);
   renderNewsWeekFilters(allItems);
   renderNewsChannelChips(allItems);
   renderVideoWeekFilters(allItems);
   renderVideoChannelChips(allItems);
   renderItems(allItems);
+  renderGithubRanking(herramientas);
   aplicarFiltrosNoticias();
   aplicarFiltrosVideos();
   initScrollToTop();
+  initGithubFilter();
 }
 
 function getNewsChannels(items) {
@@ -159,12 +169,7 @@ function renderNewsChannelChips(items) {
     const chip = document.createElement("div");
     chip.className = "chip";
     chip.dataset.filtro = ch;
-    const avatarUrl = avatars[ch];
-    if (avatarUrl) {
-      chip.innerHTML = `<img class="chip-img" src="${avatarUrl}" onerror="this.style.display='none'"><span class="chip-text">${ch}</span>`;
-    } else {
-      chip.innerHTML = `<span class="chip-text">${ch}</span>`;
-    }
+    chip.innerHTML = chipWithImage(ch, ch, items);
     chip.onclick = () => { selCanalNoticias = ch; aplicarFiltrosNoticias(); actualizarChips(container, chip); };
     container.appendChild(chip);
   });
@@ -184,12 +189,7 @@ function renderVideoChannelChips(items) {
     const chip = document.createElement("div");
     chip.className = "chip";
     chip.dataset.filtro = ch;
-    const avatarUrl = avatars[ch];
-    if (avatarUrl) {
-      chip.innerHTML = `<img class="chip-img" src="${avatarUrl}" onerror="this.style.display='none'"><span class="chip-text">${ch}</span>`;
-    } else {
-      chip.innerHTML = `<span class="chip-text">${ch}</span>`;
-    }
+    chip.innerHTML = chipWithImage(ch, ch, items);
     chip.onclick = () => { selCanalVideos = ch; aplicarFiltrosVideos(); actualizarChips(container, chip); };
     container.appendChild(chip);
   });
@@ -213,10 +213,16 @@ function renderNews(items) {
       const ts = i.ts || new Date().toISOString();
       const fuente = (i.fuente || "").replace(" Shorts", "");
       const fecha = i.fecha_real || i.f || "S/D";
-      const badge = i.badge === "Beca" ? "badge-beca" : "badge-tech";
-      return `<li class="news-item" data-ts="${ts}" data-fuente="${fuente}">
+      const badgeCls = i.badge === "Beca" ? "badge-beca" : "badge-tech";
+      const badgeVal = i.badge || "Tech";
+      const cat = i.categoria || "";
+      const origen = i.origen || "web";
+      const rssBadge = origen === "rss" ? '<span class="badge badge-rss">📡 RSS</span>' : "";
+      return `<li class="news-item" data-ts="${ts}" data-fuente="${fuente}" data-categoria="${cat}" data-badge="${badgeVal}" data-origen="${origen}">
         <div class="meta">${i.fuente} | ${fecha}</div>
-        <span class="badge ${badge}">${i.badge || "Tech"}</span>
+        <span class="badge ${badgeCls}">${badgeVal}</span>
+        ${rssBadge}
+        ${cat ? `<span class="badge badge-cat">${cat}</span>` : ""}
         <a href="${i.enlace}" target="_blank">${i.titulo || 'Ver noticia'}</a></li>`;
     })
     .join("");
@@ -244,7 +250,7 @@ function renderVideos(items) {
       const canal = i.fuente || "YouTube";
       return `<div class="card ${clase}" data-ts="${ts}" data-fuente="${fuente}">
         ${badgeLive}
-        <button onclick="descargarVideo('${i.enlace}', this)" class="btn-download">📥</button>
+        <!-- <button onclick="descargarVideo('${i.enlace}', this)" class="btn-download">📥</button> -->
         <a href="${i.enlace}" target="_blank" class="video-thumb-link">
           <div class="video-thumb">
             <img src="https://img.youtube.com/vi/${i.id_video}/mqdefault.jpg" alt="${titulo}"
@@ -273,15 +279,112 @@ function itemDentroSemana(itemTS, selector) {
   return false;
 }
 
+function domainFromUrl(url) {
+  try { return new URL(url).hostname; } catch(e) { return ""; }
+}
+
+function faviconForSource(sourceName, items) {
+  const av = avatars[sourceName];
+  if (av) return av;
+  const item = items.find(i => (i.fuente || "").replace(" Shorts", "") === sourceName && i.enlace);
+  if (item) return `https://www.google.com/s2/favicons?domain=${domainFromUrl(item.enlace)}&sz=32`;
+  return "";
+}
+
+function chipWithImage(label, sourceName, items) {
+  const imgSrc = faviconForSource(sourceName, items);
+  if (imgSrc) {
+    return `<img class="chip-img" src="${imgSrc}" onerror="this.style.display='none'" loading="lazy"><span class="chip-text">${label}</span>`;
+  }
+  return `<span class="chip-text">${label}</span>`;
+}
+
+function getNoticiasCategorias(items) {
+  const cats = new Set();
+  items.forEach((i) => { if (!i.id_video && i.categoria) cats.add(i.categoria); });
+  return Array.from(cats);
+}
+
+function renderNewsCategoryChips(items) {
+  const cats = getNoticiasCategorias(items);
+  const container = document.getElementById("news-category-filters");
+  if (!container) return;
+  const allChip = document.createElement("div");
+  allChip.className = "chip active";
+  allChip.innerHTML = "<span>Todas</span>";
+  allChip.dataset.filtro = "all";
+  allChip.onclick = () => { selCategoriaNoticias = "all"; aplicarFiltrosNoticias(); actualizarChips(container, allChip); };
+  container.appendChild(allChip);
+  cats.forEach((cat) => {
+    const chip = document.createElement("div");
+    chip.className = "chip";
+    chip.dataset.filtro = cat;
+    chip.innerHTML = `<span class="chip-text">${cat}</span>`;
+    chip.onclick = () => { selCategoriaNoticias = cat; aplicarFiltrosNoticias(); actualizarChips(container, chip); };
+    container.appendChild(chip);
+  });
+}
+
+function renderNewsBadgeChips(items) {
+  const container = document.getElementById("news-badge-filters");
+  if (!container) return;
+  const allChip = document.createElement("div");
+  allChip.className = "chip active";
+  allChip.innerHTML = "<span>Todas</span>";
+  allChip.dataset.filtro = "all";
+  allChip.onclick = () => { selBadgeNoticias = "all"; aplicarFiltrosNoticias(); actualizarChips(container, allChip); };
+  container.appendChild(allChip);
+  ["Tech", "Beca", "RSS"].forEach((b) => {
+    const chip = document.createElement("div");
+    chip.className = "chip";
+    chip.dataset.filtro = b;
+    chip.innerHTML = `<span class="chip-text">${{"Tech": "💻 Tech", "Beca": "🎓 Beca", "RSS": "📡 RSS"}[b] || b}</span>`;
+    chip.onclick = () => { selBadgeNoticias = b; aplicarFiltrosNoticias(); actualizarChips(container, chip); };
+    container.appendChild(chip);
+  });
+}
+
+function getRssSources(items) {
+  return [...new Set(items.filter(i => i.origen === "rss").map(i => i.fuente))].sort();
+}
+
+function renderNewsRssChips(items) {
+  const container = document.getElementById("news-rss-filters");
+  if (!container) return;
+  const rssSources = getRssSources(items);
+  const allChip = document.createElement("div");
+  allChip.className = "chip active";
+  allChip.innerHTML = "<span>Todos</span>";
+  allChip.dataset.filtro = "all";
+  allChip.onclick = () => { selRssNoticias = "all"; aplicarFiltrosNoticias(); actualizarChips(container, allChip); };
+  container.appendChild(allChip);
+  rssSources.forEach((src) => {
+    const chip = document.createElement("div");
+    chip.className = "chip";
+    chip.dataset.filtro = src;
+    chip.innerHTML = chipWithImage(src, src, items);
+    chip.onclick = () => { selRssNoticias = src; aplicarFiltrosNoticias(); actualizarChips(container, chip); };
+    container.appendChild(chip);
+  });
+}
+
 function aplicarFiltrosNoticias() {
   document.querySelectorAll(".news-item").forEach((item) => {
     const tsAttr = item.getAttribute("data-ts");
     if (!tsAttr) return;
     const itemTS = new Date(tsAttr).getTime();
     const itemFuente = item.getAttribute("data-fuente");
+    const itemCat = item.getAttribute("data-categoria");
+    const itemBadge = item.getAttribute("data-badge");
+    const itemOrigen = item.getAttribute("data-origen") || "web";
     const okSemana = itemDentroSemana(itemTS, selSemanaNoticias);
     const okCanal = selCanalNoticias === "all" || itemFuente === selCanalNoticias;
-    item.style.display = okSemana && okCanal ? "list-item" : "none";
+    const okCategoria = selCategoriaNoticias === "all" || itemCat === selCategoriaNoticias;
+    const okBadge = selBadgeNoticias === "all"
+      || (selBadgeNoticias === "RSS" ? itemOrigen === "rss" : itemBadge === selBadgeNoticias);
+    const okRss = selRssNoticias === "all"
+      || (itemOrigen === "rss" && itemFuente === selRssNoticias);
+    item.style.display = okSemana && okCanal && okCategoria && okBadge && okRss ? "list-item" : "none";
   });
 }
 
@@ -361,37 +464,80 @@ function initScrollToTop() {
   });
 }
 
-async function descargarVideo(urlVideo, boton) {
-  const originalText = boton.innerHTML;
-  boton.innerHTML = "⏳...";
-  try {
-    const response = await fetch(
-      `${API_BASE}?url=${encodeURIComponent(urlVideo)}`,
-      {
-        method: "GET",
-        headers: {
-          "X-API-Key": atob(TOKEN),
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const data = await response.json();
-    if (data.url) {
-      const a = document.createElement("a");
-      a.href = data.url;
-      a.download = data.title + ".mp4";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      boton.innerHTML = "✅";
-    } else {
-      alert("No se pudo obtener el link directo.");
-      boton.innerHTML = "❌";
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    boton.innerHTML = "❌";
-  } finally {
-    setTimeout(() => (boton.innerHTML = originalText), 3000);
+function renderGithubRanking(items) {
+  const container = document.getElementById("github-ranking");
+  if (!container) return;
+  if (!items || items.length === 0) {
+    container.innerHTML = '<p style="padding: 20px; color: #666; text-align:center;">No hay datos de repositorios.</p>';
+    return;
   }
+  container.innerHTML = items.map((r, i) => {
+    const lang = r.lenguaje || "";
+    const langBadge = lang ? `<span class="badge badge-tech">${lang}</span>` : "";
+    const stars = Number(r.estrellas) || 0;
+    const starsFormatted = stars >= 1000 ? (stars / 1000).toFixed(1) + "k" : stars;
+    const desc = r.descripcion ? r.descripcion.slice(0, 120) : "";
+    return `<div class="news-item" style="border-left-color: #f59e0b;">
+      <div class="meta">
+        <span>#${i + 1} ⭐ ${starsFormatted}</span>
+        ${langBadge}
+      </div>
+      <a href="${r.enlace}" target="_blank">${r.titulo}</a>
+      ${desc ? `<div style="font-size: 0.85em; color: #64748b; margin-top: 4px;">${desc}</div>` : ""}
+    </div>`;
+  }).join("");
 }
+
+function initGithubFilter() {
+  const input = document.getElementById("github-filter");
+  if (!input) return;
+  let timer;
+  input.addEventListener("input", () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      const q = input.value.toLowerCase().trim();
+      const filtered = q ? herramientas.filter(r =>
+        (r.titulo || "").toLowerCase().includes(q) ||
+        (r.lenguaje || "").toLowerCase().includes(q) ||
+        (r.descripcion || "").toLowerCase().includes(q)
+      ) : herramientas;
+      renderGithubRanking(filtered);
+    }, 300);
+  });
+}
+
+// function descargarVideo — desactivada: API no funcional
+// async function descargarVideo(urlVideo, boton) {
+//   const originalText = boton.innerHTML;
+//   boton.innerHTML = "⏳...";
+//   try {
+//     const response = await fetch(
+//       `${API_BASE}?url=${encodeURIComponent(urlVideo)}`,
+//       {
+//         method: "GET",
+//         headers: {
+//           "X-API-Key": atob(TOKEN),
+//           "Content-Type": "application/json",
+//         },
+//       }
+//     );
+//     const data = await response.json();
+//     if (data.url) {
+//       const a = document.createElement("a");
+//       a.href = data.url;
+//       a.download = data.title + ".mp4";
+//       document.body.appendChild(a);
+//       a.click();
+//       document.body.removeChild(a);
+//       boton.innerHTML = "✅";
+//     } else {
+//       alert("No se pudo obtener el link directo.");
+//       boton.innerHTML = "❌";
+//     }
+//   } catch (error) {
+//     console.error("Error:", error);
+//     boton.innerHTML = "❌";
+//   } finally {
+//     setTimeout(() => (boton.innerHTML = originalText), 3000);
+//   }
+// }

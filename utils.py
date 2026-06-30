@@ -4,9 +4,77 @@ import re
 import asyncio
 import logging
 from slugify import slugify
+from bs4 import BeautifulSoup
+import requests
 from constants_downloadfile import CONFIG, PROMPT_IMAGEN_TEMPLATE
 
 logger = logging.getLogger("scraper")
+
+
+HEADERS_ARTICLE = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",
+}
+
+
+def extraer_texto_articulo(url: str, max_chars: int = 4000) -> str:
+    """Fetch a URL, extract readable text content via BeautifulSoup, return first max_chars chars."""
+    try:
+        r = requests.get(url, timeout=15, headers=HEADERS_ARTICLE)
+        r.raise_for_status()
+        soup = BeautifulSoup(r.text, "html.parser")
+        for tag in soup(["script", "style", "nav", "header", "footer", "aside", "noscript"]):
+            tag.decompose()
+        for selector in ["article", "main", ".post-content", ".entry-content", ".article-body",
+                         '[role="main"]', ".content", "#content", ".story-body"]:
+            main = soup.select_one(selector)
+            if main:
+                text = main.get_text(separator=" ", strip=True)
+                break
+        else:
+            text = soup.get_text(separator=" ", strip=True)
+        text = re.sub(r'\s+', ' ', text).strip()
+        return text[:max_chars]
+    except Exception as e:
+        logger.debug(f"⚠️ No se pudo extraer texto de {url}: {e}")
+        return ""
+
+
+async def resumir_noticia(item: dict, client, max_prompt_chars: int = 3000) -> str | None:
+    """Fetch article text + Gemini summary (3-4 lines) for a single news item."""
+    modelos = CONFIG.get("AI_MODELS", ["gemini-2.5-flash", "gemini-2.5-pro"])
+
+    texto = extraer_texto_articulo(item["enlace"], max_chars=max_prompt_chars)
+    if not texto:
+        texto = item.get("titulo", "")
+
+    prompt = f"""
+    Eres un periodista de tecnología que escribe resúmenes de 3-4 líneas en español.
+    Resuma la siguiente noticia de forma concisa y directa, destacando:
+    - Qué ha ocurrido exactamente
+    - Por qué es relevante para el sector tech
+    - Un dato concreto si aparece en el texto
+
+    TÍTULO: {item['titulo']}
+    FUENTE: {item['fuente']}
+    TEXTO:
+    {texto[:max_prompt_chars]}
+
+    Responde SOLO con el resumen, sin introducciones ni etiquetas. (máx 500 caracteres)
+    """
+    for modelo in modelos:
+        try:
+            response = client.models.generate_content(model=modelo, contents=prompt)
+            if response and response.text:
+                resumen = response.text.strip()
+                if len(resumen) > 500:
+                    resumen = resumen[:497] + "..."
+                return resumen
+        except Exception as e:
+            logger.warning(f"⚠️ Error resumiendo con {modelo}: {e}")
+            continue
+    return None
 
 async def obtener_recap_semanal_ia(noticias: list, client) -> dict | None:
     """Genera el resumen semanal probando varios modelos."""
@@ -167,21 +235,20 @@ async def traducir_titulos_ia(noticias: list, client) -> list:
             logger.info(f"🌐 Traduciendo {len(lineas)} títulos con {modelo}...")
             response = client.models.generate_content(model=modelo, contents=prompt)
             raw_text = response.text if response.text else "{}"
-            
-            # Limpiar posibles backticks markdown y extraer JSON
+
             clean = re.sub(r'```(?:json)?\s*|\s*```', '', raw_text.strip())
             match = re.search(r'\{.*\}', clean, re.DOTALL)
             if match:
                 data = json.loads(match.group(0))
             else:
                 data = json.loads(clean)
-            
+
             traducciones = {item['id']: item['tr'] for item in data.get('traducciones', [])}
-            
+
             for i, n in enumerate(noticias):
                 if i in traducciones and traducciones[i] and len(traducciones[i].strip()) > 5:
                     n['titulo'] = traducciones[i]
-            
+
             return noticias
         except Exception as e:
             error_str = str(e).upper()
@@ -192,5 +259,46 @@ async def traducir_titulos_ia(noticias: list, client) -> list:
             else:
                 logger.error(f"❌ Error traducción batch ({modelo}): {e}")
             continue
-            
+
     return noticias
+
+
+def normalizar_url(url: str) -> str:
+    if not url:
+        return ""
+    url = url.split("?")[0].split("#")[0]
+    url = url.rstrip("/")
+    if url.startswith("http://"):
+        url = "https://" + url[7:]
+    return url.lower()
+
+
+def deduplicar_items(items: list, umbral_similitud: float = 0.85) -> list:
+    urls_vistas: set = set()
+    titulos_vistos: list[str] = []
+    resultado: list = []
+
+    for item in items:
+        url = normalizar_url(item.get("enlace", ""))
+        if url and url in urls_vistas:
+            continue
+        if url:
+            urls_vistas.add(url)
+
+        titulo = (item.get("titulo") or "").lower().strip()
+        if titulo:
+            duplicado = False
+            for t in titulos_vistos:
+                min_len = min(len(titulo), len(t))
+                if min_len > 10:
+                    prefijo = int(min_len * umbral_similitud)
+                    if titulo[:prefijo] == t[:prefijo]:
+                        duplicado = True
+                        break
+            if duplicado:
+                continue
+            titulos_vistos.append(titulo)
+
+        resultado.append(item)
+
+    return resultado
