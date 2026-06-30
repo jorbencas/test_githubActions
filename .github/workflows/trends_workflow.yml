@@ -25,6 +25,8 @@ jobs:
         run: |
           python -m playwright install chromium
       - name: 📊 Scrape trends (Google Trends + TikTok)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scrape_trends.py
       - name: 📝 Push changes
         if: always()
