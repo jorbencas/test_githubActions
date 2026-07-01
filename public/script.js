@@ -3,7 +3,7 @@ const store = (() => {
   const state = {
     semanaNoticias: { tipo: "all_recent", ini: null, fin: null },
     semanaVideos: { tipo: "all_recent", ini: null, fin: null },
-    catNoticias: "all", badgeNoticias: "all", rssNoticias: "all",
+    catNoticias: "all", rssNoticias: "all",
     canalNoticias: "all", canalVideos: "all",
     tipoFuente: "all", tabMultimedia: "youtube",
     items: [], herramientas: [], trends: [], avatars: {},
@@ -86,6 +86,9 @@ function cargarDatos() {
       store._raw.refFrameworks = data.frameworks || {};
       store._raw.refLibrerias = data.librerias || {};
       store._raw.config = data.config_js || {};
+      const now = new Date();
+      document.getElementById("header-date").textContent =
+        now.toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit", year: "numeric" });
       initDashboard();
     } catch (err) {
       console.error("Error loading data.json:", err);
@@ -177,13 +180,11 @@ function canalesNoticias(items) {
 function canalesVideos(items) {
   const seen = new Set();
   const tab = store.get("tabMultimedia");
-  const tf = store.get("tipoFuente");
   const yt = (store.get("config").ALL_YT_CHANNELS || []);
-  if ((tab === "all" || tab === "youtube") && (tf === "all" || tf === "youtube")) yt.forEach(c => seen.add(c));
+  if (tab === "youtube") yt.forEach(c => seen.add(c));
   items.forEach(i => {
     if (tipoMultimedia(i) !== tab) return;
     const ch = limpiarFuente(i.fuente);
-    if (tf !== "all" && tipoFuente(ch) !== tf) return;
     seen.add(ch);
   });
   return [...seen].sort();
@@ -247,11 +248,12 @@ function renderNoticias(items) {
       const badge = i.badge || "Tech";
       const cat = i.categoria || "";
       const tf = tipoFuente(i.fuente);
-      const rss = i.origen === "rss" ? '<span class="badge badge-rss">📡 RSS</span>' : "";
-      return `<li class="news-item" data-ts="${ts}" data-fuente="${fuente}" data-categoria="${cat}" data-badge="${badge}" data-origen="${i.origen || "web"}" data-tipo-fuente="${tf}">
+      const badges = [];
+      if (i.origen === "rss") badges.push('<span class="badge badge-rss">📡 RSS</span>');
+      return `<li class="news-item" data-ts="${ts}" data-fuente="${fuente}" data-categoria="${cat}" data-origen="${i.origen || "web"}" data-tipo-fuente="${tf}">
         <div class="meta">${i.fuente} | ${i.fecha_publicacion || i.fecha_real || i.f || "S/D"}</div>
         <span class="badge badge-tech">${badge}</span>
-        ${rss}
+        ${badges.join("")}
         ${cat ? `<span class="badge badge-cat">${cat}</span>` : ""}
         <a href="${i.enlace}" target="_blank">${i.titulo || "Ver noticia"}</a></li>`;
     }).join("");
@@ -265,8 +267,6 @@ function aplicarFiltrosNoticias() {
     const ok = itemEnSemana(new Date(ts).getTime(), store.get("semanaNoticias"))
       && (store.get("canalNoticias") === "all" || item.getAttribute("data-fuente") === store.get("canalNoticias"))
       && (store.get("catNoticias") === "all" || item.getAttribute("data-categoria") === store.get("catNoticias"))
-      && (store.get("badgeNoticias") === "all"
-        || (store.get("badgeNoticias") === "RSS" ? item.getAttribute("data-origen") === "rss" : item.getAttribute("data-badge") === store.get("badgeNoticias")))
       && (store.get("tipoFuente") === "all" || (item.getAttribute("data-tipo-fuente") || "") === store.get("tipoFuente"))
       && (store.get("rssNoticias") === "all" || (item.getAttribute("data-origen") === "rss" && item.getAttribute("data-fuente") === store.get("rssNoticias")));
     item.style.display = ok ? "list-item" : "none";
@@ -278,8 +278,7 @@ function aplicarFiltrosVideos() {
     const ts = item.getAttribute("data-ts");
     if (!ts) return;
     const ok = itemEnSemana(new Date(ts).getTime(), store.get("semanaVideos"))
-      && (store.get("canalVideos") === "all" || item.getAttribute("data-fuente") === store.get("canalVideos"))
-      && (store.get("tipoFuente") === "all" || (item.getAttribute("data-tipo-fuente") || "") === store.get("tipoFuente"));
+      && (store.get("canalVideos") === "all" || item.getAttribute("data-fuente") === store.get("canalVideos"));
     item.style.display = ok ? "block" : "none";
   });
 }
@@ -326,8 +325,7 @@ function renderYouTube(items, container) {
     const tipo = i.tipo || "video";
     const esLive = tipo === "live";
     const clase = esLive ? "tipo-live" : tipo === "shorts" ? "tipo-shorts" : "tipo-video";
-    const tf = tipoFuente(i.fuente);
-    return `<div class="card ${clase}" data-ts="${ts}" data-fuente="${fuente}" data-tipo-fuente="${tf}">
+    return `<div class="card ${clase}" data-ts="${ts}" data-fuente="${fuente}" data-tipo-fuente="youtube">
       ${esLive ? '<span class="badge-live">● EN DIRECTO</span>' : ""}
       <a href="${i.enlace}" target="_blank" class="video-thumb-link">
         <div class="video-thumb">
@@ -353,8 +351,7 @@ function renderSocial(items, container, type, emoji) {
     const ts = i.ts || new Date().toISOString();
     const fuente = limpiarFuente(i.fuente);
     const fecha = i.fecha_publicacion || i.fecha_real || i.f || "S/D";
-    const tf = tipoFuente(i.fuente);
-    return `<div class="news-item" data-ts="${ts}" data-fuente="${fuente}" data-tipo-fuente="${tf}">
+    return `<div class="news-item" data-ts="${ts}" data-fuente="${fuente}" data-tipo-fuente="${tipoFuente(i.fuente)}">
       <div class="meta">${emoji} ${i.fuente} | ${fecha}</div>
       <a href="${i.enlace}" target="_blank">${i.titulo || "Ver contenido"}</a>
     </div>`;
@@ -435,7 +432,7 @@ function renderTrends(items) {
 function registrarEventos() {
   store.on("tipoFuente", () => {
     const rssSection = document.getElementById("news-rss-filters");
-    if (rssSection) rssSection.style.display = (store.get("tipoFuente") === "all" || store.get("tipoFuente") === "rss") ? "" : "none";
+    if (rssSection) rssSection.style.display = store.get("tipoFuente") === "rss" ? "" : "none";
     renderCanalChips("news-channel-filters", canalesNoticias(store.get("items")), "canalNoticias");
     renderCanalChips("video-channel-filters", canalesVideos(store.get("items")), "canalVideos");
     renderContenidoMultimedia(store.get("items"));
@@ -450,7 +447,6 @@ function registrarEventos() {
   store.on("semanaNoticias", aplicarFiltrosNoticias);
   store.on("canalNoticias", aplicarFiltrosNoticias);
   store.on("catNoticias", aplicarFiltrosNoticias);
-  store.on("badgeNoticias", aplicarFiltrosNoticias);
   store.on("rssNoticias", aplicarFiltrosNoticias);
   store.on("semanaVideos", aplicarFiltrosVideos);
   store.on("canalVideos", aplicarFiltrosVideos);
@@ -495,15 +491,14 @@ function initDashboard() {
     stateKey: "tipoFuente",
   });
 
-  const cats = [...new Set(items.filter(i => !i.id_video && i.categoria).map(i => i.categoria))];
-  renderChips("news-category-filters", {
-    options: [{ id: "all", label: "Todas" }, ...cats.map(c => ({ id: c, label: c }))],
-    stateKey: "catNoticias",
-  });
+  const topCats = Object.entries(
+    items.filter(i => !i.id_video && i.categoria)
+      .reduce((acc, i) => { acc[i.categoria] = (acc[i.categoria] || 0) + 1; return acc; }, {})
+  ).sort((a, b) => b[1] - a[1]).slice(0, 10).map(([cat]) => cat);
 
-  renderChips("news-badge-filters", {
-    options: (store.get("config").FILTRO_BADGE || []),
-    stateKey: "badgeNoticias",
+  renderChips("news-category-filters", {
+    options: [{ id: "all", label: "Todas" }, ...topCats.map(c => ({ id: c, label: c }))],
+    stateKey: "catNoticias",
   });
 
   const rssSources = [...new Set(items.filter(i => i.origen === "rss").map(i => i.fuente))].sort();

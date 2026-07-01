@@ -43,14 +43,36 @@ jobs:
       - name: 🔧 Scrape tools
         run: python scrape_tools.py
 
-      # ── Fase 2: Generación ──
+      # ── Fase 3: Blog (push directo) ──
+      - name: 📂 Checkout blog repo
+        uses: actions/checkout@v3
+        with:
+          repository: jorbencas/blog
+          path: blog
+          token: ${{ secrets.BLOG_TOKEN }}
+          fetch-depth: 0
+
+      # ── Fase 4: Generación (después de blog checkout para escribir directo) ──
       - name: 📝 Generate weekly recap + dashboard
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DOWNLOADER_API_TOKEN: ${{ secrets.DOWNLOADER_API_TOKEN }}
-        run: python generate_weekly.py
+        run: python generate_weekly.py --blog-path blog
+      - name: 🌐 Download free-for.dev resources
+        run: |
+          curl -sL https://raw.githubusercontent.com/ripienaar/free-for-dev/master/README.md -o /tmp/free-for-dev.md
+          echo "✅ free-for.dev README descargado ($(wc -c < /tmp/free-for-dev.md) bytes)"
+      - name: 🔗 Merge free-for.dev resources
+        run: |
+          python merge_freefordev.py --blog-path blog --free-dev-file /tmp/free-for-dev.md || echo "⚠️ merge_freefordev opcional — continuando sin él"
+      - name: 🔄 Gestionar recursos (--clean + --reorder)
+        id: blog_updated
+        run: |
+          python manage_resources.py --blog-path blog --tools-file files/herramientas.json --max-cards 500 --clean --reorder \
+            && echo "updated=yes" >> $GITHUB_OUTPUT \
+            || echo "updated=no" >> $GITHUB_OUTPUT
 
-      # ── Fase 3: Envíos ──
+      # ── Fase 5: Envíos ──
       - name: 📧 Send email newsletter
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -64,35 +86,6 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TOKEN_API_ID: ${{ secrets.TOKEN_API_ID }}
         run: python send_telegram.py
-
-      # ── Fase 4: Blog PR ──
-      - name: 📂 Checkout blog repo
-        uses: actions/checkout@v3
-        with:
-          repository: jorbencas/blog
-          path: blog
-          token: ${{ secrets.BLOG_TOKEN }}
-          fetch-depth: 0
-      - name: 🔄 Copy auto-news to blog
-        id: news_copied
-        run: |
-          mkdir -p blog/src/content/auto-news
-          selected_file=$(ls -t auto-news/*.md 2>/dev/null | grep -i ia | head -1)
-          if [ -z "$selected_file" ]; then
-              selected_file=$(ls -t auto-news/*.md 2>/dev/null | head -1)
-          fi
-          copied=""
-          if [ -n "$selected_file" ] && [ ! -f "blog/src/content/auto-news/$(basename "$selected_file")" ]; then
-              cp "$selected_file" blog/src/content/auto-news/
-              copied="yes"
-          fi
-          echo "copied=$copied" >> $GITHUB_OUTPUT
-      - name: 🔧 Actualizar resources.mdx con herramientas
-        id: tools_updated
-        run: |
-          python blog/scripts/actualizar_recursos.py --blog-path blog \
-            && echo "updated=yes" >> $GITHUB_OUTPUT \
-            || echo "updated=no" >> $GITHUB_OUTPUT
       - name: 🖼️ Optimizar imágenes del blog
         env:
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
@@ -102,20 +95,17 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python blog/scripts/make_cover_collage.py --ci
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
-        if: steps.news_copied.outputs.copied == 'yes' || steps.tools_updated.outputs.updated == 'yes'
-        with:
-          token: ${{ secrets.BLOG_TOKEN }}
-          path: blog
-          commit-message: "feat: nuevo weekly recap y/o herramientas para revisar"
-          branch: "news/weekly-${{ github.run_id }}"
-          title: "📰 Review Necesaria: Weekly Recap + Recursos"
-          body: |
-            Se han detectado nuevas noticias y/o herramientas.
-            Reviewdog y LanguageTool analizarán este PR en unos segundos.
-            Por favor, revisa las sugerencias de ortografía antes de hacer Merge.
-          base: main
+      - name: 🚀 Push directo al blog
+        if: steps.blog_updated.outputs.updated == 'yes'
+        run: |
+          cd blog
+          git config user.name jorbencas
+          git config user.email jorbencas@gmail.com
+          git add src/content/posts/resources*.mdx src/content/auto-news/
+          git diff --quiet && git diff --staged --quiet && echo "No hay cambios" && exit 0
+          git commit -m "[recursos+news] actualización semanal automática"
+          git push origin main
+          echo "✅ Push realizado a jorbencas/blog"
       - name: 📝 Push changes a test_githubActions
         if: always()
         run: |

@@ -110,7 +110,7 @@ def badge_str(item: dict) -> str:
 def origen_str(item: dict) -> str:
     return " `📡 RSS`" if item.get(ORIGEN_KEY) == VAL_RSS else ""
 
-async def generar_recap(noticias_web, client) -> str | None:
+async def generar_recap(noticias_web, client, blog_path: str | None = None) -> str | None:
     ahora = datetime.now()
     fecha_iso = ahora.strftime("%Y-%m-%d")
     year, week, _ = ahora.isocalendar()
@@ -133,8 +133,12 @@ async def generar_recap(noticias_web, client) -> str | None:
     total_rss = sum(1 for n in noticias_blog if n.get(ORIGEN_KEY) == VAL_RSS)
 
     semana_slug = f"{year}-w{week:02d}-tech-recap"
-    path_md = f"./auto-news/{semana_slug}.md"
-    os.makedirs("./auto-news", exist_ok=True)
+    if blog_path:
+        auto_news_dir = os.path.join(blog_path, "src", "content", "auto-news")
+    else:
+        auto_news_dir = "./auto-news"
+    path_md = os.path.join(auto_news_dir, f"{semana_slug}.md")
+    os.makedirs(auto_news_dir, exist_ok=True)
 
     if os.path.exists(path_md):
         logger.info(f"⏭️ Recap semanal {semana_slug} ya existe. Saltando.")
@@ -249,7 +253,7 @@ async def run():
     client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
 
     noticias_web = [n for n in historial if n.get(TIPO_KEY) in (TIPO_VAL_NOTICIA, "news")]
-    resumen_ia = await generar_recap(historial, client)
+    resumen_ia = await generar_recap(historial, client, blog_path=args.blog_path)
     if not resumen_ia or "no ha sido posible" in resumen_ia or len(resumen_ia) < 50:
         logger.warning("⚠️ Generando resumen de emergencia con titulares.")
         titulares = [f"• {n['titulo']}" for n in noticias_web[:10]]

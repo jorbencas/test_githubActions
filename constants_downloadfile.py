@@ -748,7 +748,6 @@ JS_CONFIG = {
     "FILTRO_BADGE": [
         {"id": "all", "label": "Todas"},
         {"id": "Tech", "label": "💻 Tech"},
-        {"id": "RSS", "label": "📡 RSS"},
     ],
     "EMOJIS_CATEGORIA": "⚡🤖💻🐳🔒📊🎓💡",
     "DASHBOARD_URL": "http://jorbencasdownloaderdocument.surge.sh",

@@ -41,6 +41,9 @@ a:hover { text-decoration: underline; }
 .chip.active .chip-text { color: white; }
 
 .filter-section { background: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.news-section { margin-bottom: 40px; }
+.multimedia-section { margin-bottom: 40px; }
+h2 { scroll-margin-top: 20px; }
 .chip-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 
 .stats-bar { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
