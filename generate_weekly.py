@@ -10,7 +10,6 @@ Uso:
 """
 import argparse
 import asyncio
-import hashlib
 import inspect
 import json
 import logging
@@ -23,9 +22,9 @@ from pathlib import Path
 
 from google import genai
 
-from constants_downloadfile import CONFIG, HTML_TEMPLATE, MD_TEMPLATE
+from constants_downloadfile import CONFIG, HTML_TEMPLATE, MD_TEMPLATE, SKILLS, LLMS, LENGUAJES, FRAMEWORKS, LIBRERIAS, CATEGORIAS, JS_CONFIG, FALLBACK_GITHUB_IMAGE, FALLBACK_SNEAK_PEEK, FALLBACK_NOTA_PERSONAL, SUBTIPO_KEY, TIPO_KEY, ORIGEN_KEY, SUB_VAL_GITHUB, TIPO_VAL_NOTICIA, VAL_RSS, ENLACE_KEY, FUENTE_KEY, TS_KEY, FECHA_PUB_KEY, CATEGORIA_KEY, ESTRELLAS_KEY
 from scraper_base import ScraperPro
-from utils import generar_imagen_noticia, obtener_recap_semanal_ia, deduplicar_items
+from utils import load_json, generar_imagen_noticia, obtener_recap_semanal_ia, deduplicar_items
 
 os.makedirs("logs", exist_ok=True)
 logging.basicConfig(
@@ -38,15 +37,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger("weekly")
 
-
-def load_json(path: str) -> list:
-    if os.path.exists(path):
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            return []
-    return []
 
 
 def cargar_herramientas() -> list:
@@ -61,17 +51,12 @@ def cargar_herramientas() -> list:
 
 
 def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen_ia):
-    historial.sort(key=lambda x: x.get("ts", ""), reverse=True)
-    palabra_maestra = CONFIG.get("DOWNLOADER_API_TOKEN")
-    fecha_hoy = datetime.utcnow().strftime("%Y-%m-%d")
-    semilla = f"{palabra_maestra}-{fecha_hoy}"
-    token_oculto = hashlib.sha256(semilla.encode()).hexdigest()
-
+    historial.sort(key=lambda x: x.get(TS_KEY, ""), reverse=True)
     herramientas_github = [
         h for h in herramientas
-        if h.get("subtipo") == "github" and h.get("estrellas", "0").isdigit()
+        if h.get(SUBTIPO_KEY) == SUB_VAL_GITHUB and h.get(ESTRELLAS_KEY, "0").isdigit()
     ]
-    herramientas_github.sort(key=lambda h: int(h.get("estrellas", "0")), reverse=True)
+    herramientas_github.sort(key=lambda h: int(h.get(ESTRELLAS_KEY, "0")), reverse=True)
     top_github = herramientas_github[:20]
 
     os.makedirs("public", exist_ok=True)
@@ -80,9 +65,6 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
             HTML_TEMPLATE.format(
                 fecha_hoy=fecha_h,
                 resumen=resumen_ia,
-                api_token=token_oculto,
-                api_url="https://testactions1github-api-python.hf.space/download",
-                api_salud="https://testactions1github-api-python.hf.space/health",
             )
         )
     with open("public/data.json", "w", encoding="utf-8") as f:
@@ -91,6 +73,13 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
                 "items": historial,
                 "herramientas": top_github,
                 "avatars": getattr(scr, "avatar_repo", None) and scr.avatar_repo.avatars or {},
+                "skills": SKILLS,
+                "llms": LLMS,
+                "lenguajes": LENGUAJES,
+                "frameworks": FRAMEWORKS,
+                "librerias": LIBRERIAS,
+                "categorias": dict(list(CATEGORIAS.items())[:6]),
+                "config_js": JS_CONFIG,
             },
             f,
             indent=2,
@@ -100,36 +89,35 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
 
 
 def emoji_categoria(cat: str) -> str:
-    return cat.split()[0] if cat and cat[0] in "⚡🤖💻🐳🔒📊🎓💡" else "💡"
+    return cat.split()[0] if cat and cat[0] in JS_CONFIG["EMOJIS_CATEGORIA"] else "💡"
 
 def badge_str(item: dict) -> str:
-    b = item.get("badge", "Tech")
-    return f"`🎓 Beca`" if b == "Beca" else f"`💻 Tech`"
+    return "`💻 Tech`"
 
 def origen_str(item: dict) -> str:
-    return " `📡 RSS`" if item.get("origen") == "rss" else ""
+    return " `📡 RSS`" if item.get(ORIGEN_KEY) == VAL_RSS else ""
 
 async def generar_recap(noticias_web, client) -> str | None:
     ahora = datetime.now()
     fecha_iso = ahora.strftime("%Y-%m-%d")
     year, week, _ = ahora.isocalendar()
 
-    noticias_blog = [n for n in noticias_web if "yout" not in n["enlace"]]
+    noticias_blog = [n for n in noticias_web if "yout" not in n[ENLACE_KEY]]
     if not noticias_blog:
         return None
 
     categoria_count = {}
     for n in noticias_blog:
-        cat = n.get("categoria", "💡 General")
+        cat = n.get(CATEGORIA_KEY, "💡 General")
         categoria_count[cat] = categoria_count.get(cat, 0) + 1
     categorias_ordenadas = sorted(categoria_count.items(), key=lambda x: -x[1])
 
     fuente_count = {}
     for n in noticias_blog:
-        fuente_count[n["fuente"]] = fuente_count.get(n["fuente"], 0) + 1
+        fuente_count[n[FUENTE_KEY]] = fuente_count.get(n[FUENTE_KEY], 0) + 1
     fuentes_top = sorted(fuente_count.items(), key=lambda x: -x[1])[:5]
 
-    total_rss = sum(1 for n in noticias_blog if n.get("origen") == "rss")
+    total_rss = sum(1 for n in noticias_blog if n.get(ORIGEN_KEY) == VAL_RSS)
 
     semana_slug = f"{year}-w{week:02d}-tech-recap"
     path_md = f"./auto-news/{semana_slug}.md"
@@ -165,7 +153,7 @@ async def generar_recap(noticias_web, client) -> str | None:
         conclusion_tldr = str(tldr_raw)
 
     total_noticias = len(noticias_blog)
-    fuentes_unicas = len(set(n["fuente"] for n in noticias_blog))
+    fuentes_unicas = len(set(n[FUENTE_KEY] for n in noticias_blog))
     tiempo_lectura = max(3, total_noticias * 2)
     fuentes_top_str = "\n".join(
         f"  - {f} — **{c}** noticias" for f, c in fuentes_top
@@ -180,7 +168,7 @@ async def generar_recap(noticias_web, client) -> str | None:
 
     noticias_por_cat: dict[str, list] = {}
     for n in noticias_blog:
-        cat = n.get("categoria", "💡 General")
+        cat = n.get(CATEGORIA_KEY, "💡 General")
         noticias_por_cat.setdefault(cat, []).append(n)
 
     partes_lista = []
@@ -190,7 +178,7 @@ async def generar_recap(noticias_web, client) -> str | None:
         for n in items[:10]:
             badge = badge_str(n)
             origen = origen_str(n)
-            fecha = f" ({n.get('fecha_publicacion', '')})" if n.get("fecha_publicacion") else ""
+            fecha = f" ({n.get(FECHA_PUB_KEY, '')})" if n.get(FECHA_PUB_KEY) else ""
             partes_lista.append(f"  - {badge}{origen} [{n['fuente']}] {n.get('titulo', '')}{fecha}")
 
     lista_noticias = "\n".join(partes_lista)
@@ -200,8 +188,7 @@ async def generar_recap(noticias_web, client) -> str | None:
         description=introduccion[:150].replace('"', "'"),
         fecha_iso=fecha_iso,
         author="Jorge Beneyto Castelló",
-        ruta_imagen=img_recap
-        or "https://github.com/jorbencas/test_githubActions/blob/master/public/optimizado/Image.png?raw=true",
+        ruta_imagen=img_recap or FALLBACK_GITHUB_IMAGE,
         tags=json.dumps(data_ia.get("tags", ["tech"])),
         slug_name=semana_slug,
         introduccion=introduccion,
@@ -218,8 +205,8 @@ async def generar_recap(noticias_web, client) -> str | None:
         repo_url=data_ia.get("repo", {}).get("url", "#"),
         repo_desc=data_ia.get("repo", {}).get("desc", ""),
         conclusion_tldr=conclusion_tldr,
-        sneak_peek=data_ia.get("sneak_peek", "Seguiremos de cerca la evolución del sector. ¡No te lo pierdas!"),
-        nota_personal=data_ia.get("nota_personal", "Keep coding!"),
+        sneak_peek=data_ia.get("sneak_peek", FALLBACK_SNEAK_PEEK),
+        nota_personal=data_ia.get("nota_personal", FALLBACK_NOTA_PERSONAL),
     )
 
     with open(path_md, "w", encoding="utf-8") as f:
@@ -248,7 +235,7 @@ async def run():
     fecha_h = ahora.strftime("%d/%m/%Y")
     client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
 
-    noticias_web = [n for n in historial if n.get("tipo") in ("noticia", "news")]
+    noticias_web = [n for n in historial if n.get(TIPO_KEY) in (TIPO_VAL_NOTICIA, "news")]
     resumen_ia = await generar_recap(historial, client)
     if not resumen_ia or "no ha sido posible" in resumen_ia or len(resumen_ia) < 50:
         logger.warning("⚠️ Generando resumen de emergencia con titulares.")

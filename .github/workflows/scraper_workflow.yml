@@ -36,10 +36,10 @@ jobs:
         run: python optimize.py
 
       # ── Fase 1: Scraping ──
-      - name: 💻 Scrape news
+      - name: 💻 Scrape news (tier full)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python scrape_news.py
+        run: python scrape_news.py --tier full
       - name: 🔧 Scrape tools
         run: python scrape_tools.py
 

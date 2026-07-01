@@ -6,9 +6,25 @@ import logging
 from slugify import slugify
 from bs4 import BeautifulSoup
 import requests
-from constants_downloadfile import CONFIG, PROMPT_IMAGEN_TEMPLATE
+from constants_downloadfile import CONFIG, PROMPT_IMAGEN_TEMPLATE, PROMPT_RESUMIR_NOTICIA, PROMPT_RESUMIR_LOTE, PROMPT_RECAP_SEMANAL, PROMPT_TRADUCIR_TITULOS, FALLBACK_IMAGE_URL, FALLBACK_RECAP_INTRO, FUENTES_INGLES, ORIGEN_KEY, VAL_RSS, ENLACE_KEY, TITULO_KEY, CATEGORIA_KEY, FUENTE_KEY, BADGE_KEY
 
 logger = logging.getLogger("scraper")
+
+
+def load_json(path: str) -> list:
+    """Load JSON file, return [] on any failure."""
+    if os.path.exists(path):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return []
+    return []
+
+def save_json(path: str, data: list):
+    """Save list to JSON file."""
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=4, ensure_ascii=False)
 
 
 HEADERS_ARTICLE = {
@@ -41,28 +57,32 @@ def extraer_texto_articulo(url: str, max_chars: int = 4000) -> str:
         return ""
 
 
+async def resumir_lote_noticias(noticias: list, client) -> str | None:
+    """Generates a short 2-3 line intro paragraph for a batch of headlines."""
+    if not noticias:
+        return None
+    modelos = CONFIG.get("AI_MODELS", ["gemini-2.5-flash", "gemini-2.5-pro"])
+    texto = "\n".join(f"- [{n.get('fuente','?')}] {n.get('titulo','?')}" for n in noticias[:8])
+    prompt = PROMPT_RESUMIR_LOTE.format(texto=texto)
+    for modelo in modelos:
+        try:
+            response = client.models.generate_content(model=modelo, contents=prompt)
+            if response and response.text:
+                return response.text.strip()[:300]
+        except Exception:
+            continue
+    return None
+
+
 async def resumir_noticia(item: dict, client, max_prompt_chars: int = 3000) -> str | None:
     """Fetch article text + Gemini summary (3-4 lines) for a single news item."""
     modelos = CONFIG.get("AI_MODELS", ["gemini-2.5-flash", "gemini-2.5-pro"])
 
-    texto = extraer_texto_articulo(item["enlace"], max_chars=max_prompt_chars)
+    texto = extraer_texto_articulo(item[ENLACE_KEY], max_chars=max_prompt_chars)
     if not texto:
-        texto = item.get("titulo", "")
+        texto = item.get(TITULO_KEY, "")
 
-    prompt = f"""
-    Eres un periodista de tecnología que escribe resúmenes de 3-4 líneas en español.
-    Resuma la siguiente noticia de forma concisa y directa, destacando:
-    - Qué ha ocurrido exactamente
-    - Por qué es relevante para el sector tech
-    - Un dato concreto si aparece en el texto
-
-    TÍTULO: {item['titulo']}
-    FUENTE: {item['fuente']}
-    TEXTO:
-    {texto[:max_prompt_chars]}
-
-    Responde SOLO con el resumen, sin introducciones ni etiquetas. (máx 500 caracteres)
-    """
+    prompt = PROMPT_RESUMIR_NOTICIA.format(titulo=item['titulo'], fuente=item['fuente'], texto=texto[:max_prompt_chars])
     for modelo in modelos:
         try:
             response = client.models.generate_content(model=modelo, contents=prompt)
@@ -82,73 +102,19 @@ async def obtener_recap_semanal_ia(noticias: list, client) -> dict | None:
 
     categorias = {}
     for n in noticias[:30]:
-        cat = n.get("categoria", "💡 General")
-        categorias.setdefault(cat, []).append(n["titulo"])
+        cat = n.get(CATEGORIA_KEY, "💡 General")
+        categorias.setdefault(cat, []).append(n[TITULO_KEY])
 
     resumen_cats = "\n".join(
         f"  [{cat}] ({len(items)} noticias)" for cat, items in sorted(categorias.items(), key=lambda x: -len(x[1]))[:5]
     )
-    total_rss = sum(1 for n in noticias if n.get("origen") == "rss")
-    total_becas = sum(1 for n in noticias if n.get("badge") == "Beca")
+    total_rss = sum(1 for n in noticias if n.get(ORIGEN_KEY) == VAL_RSS)
 
     texto_noticias = "\n".join([
-        f"- [{n['fuente']}] {n['titulo']} (categoria: {n.get('categoria', '💡 General')}, badge: {n.get('badge', 'Tech')}, origen: {n.get('origen', 'web')})"
+        f"- [{n[FUENTE_KEY]}] {n[TITULO_KEY]} (categoria: {n.get(CATEGORIA_KEY, '💡 General')}, badge: {n.get(BADGE_KEY, 'Tech')}, origen: {n.get(ORIGEN_KEY, 'web')})"
         for n in noticias[:25]
     ])
-    prompt = f"""
-    Eres un editor senior de tecnología con estilo cercano pero analítico (como una mezcla de Xataka y El Pingüino de Mario).
-    Analiza estos titulares y genera un RECAP SEMANAL DETALLADO.
-
-    NORMAS DE ESTILO:
-    - Voz directa, sin intro genérica tipo "en un mundo digital..."
-    - Asume que el lector ya sigue tecnología, ve al grano
-    - Si una noticia es hype sin sustancia, menciónalo
-    - NO uses markdown dentro del JSON (ni **, ni ###, ni ---)
-    - Sé específico: menciona nombres de productos, empresas, versiones
-    - Aporta contexto: no solo digas qué pasó, di por qué es relevante ahora
-    - Menciona la categoria (IA, Programación, Hardware, etc.) de las noticias destacadas
-    - Si hay noticias destacadas de tipo Beca o de fuente RSS, menciónalo
-
-    RESUMEN DE LA SEMANA:
-    - Categorías con más actividad:
-    {resumen_cats}
-    - Noticias tipo Beca: {total_becas}
-    - Noticias vía RSS: {total_rss}
-
-    NOTICIAS:
-    {texto_noticias}
-
-    RESPONDE EXCLUSIVAMENTE UN JSON VÁLIDO (sin markdown ni comentarios):
-    {{
-      "introduccion": "Párrafo analítico de 4-6 líneas conectando las tendencias clave de la semana. Menciona al menos 2-3 temas concretos y sus categorías. (max 700 chars)",
-      "noticias_destacadas": [
-        {{
-          "titulo": "Título descriptivo del primer tema destacado (incluye la categoria si aplica)",
-          "suceso": "Qué ocurrió exactamente, con detalles concretos (2-3 líneas)",
-          "impacto": "Por qué importa para el lector y qué implicaciones tiene (2-3 líneas)"
-        }},
-        {{
-          "titulo": "Título descriptivo del segundo tema destacado (incluye la categoria si aplica)",
-          "suceso": "Qué ocurrió exactamente, con detalles concretos (2-3 líneas)",
-          "impacto": "Por qué importa para el lector y qué implicaciones tiene (2-3 líneas)"
-        }},
-        {{
-          "titulo": "Título descriptivo del tercer tema destacado (incluye la categoria si aplica)",
-          "suceso": "Qué ocurrió exactamente, con detalles concretos (2-3 líneas)",
-          "impacto": "Por qué importa para el lector y qué implicaciones tiene (2-3 líneas)"
-        }}
-      ],
-      "repo": {{
-        "nombre": "Nombre del repo/herramienta destacado de la semana",
-        "url": "URL del repo",
-        "desc": "Utilidad práctica en 1-2 frases, explicando el problema que resuelve"
-      }},
-      "tldr": ["Punto clave 1 con contexto (max 160 chars)", "Punto clave 2 con contexto (max 160 chars)", "Punto clave 3 con contexto (max 160 chars)", "Punto clave 4 con contexto (max 160 chars)"],
-      "tags": ["tech", "tag_especifico1", "tag_especifico2", "tag_especifico3"],
-      "sneak_peek": "Un párrafo breve sobre qué esperar la próxima semana, con predicciones concretas basadas en los temas actuales. Sin promesas vacías. (max 350 chars)",
-      "nota_personal": "Reflexión genuina en 2-3 líneas, como si se lo dijeras a un colega. Menciona algún aprendizaje o sorpresa de la semana. (max 320 chars)"
-    }}
-    """
+    prompt = PROMPT_RECAP_SEMANAL.format(resumen_cats=resumen_cats, total_rss=total_rss, texto_noticias=texto_noticias)
 
     for modelo in modelos:
         logger.info(f"🗞️ Generando Recap con modelo: {modelo}")
@@ -179,7 +145,7 @@ async def obtener_recap_semanal_ia(noticias: list, client) -> dict | None:
     # Fallback básico si falla la IA: usamos los títulos originales
     recap_fallback = "\n".join([f"### {n['titulo']}\n---" for n in noticias[:5]])
     return {
-        "introduccion": "Esta semana hemos seguido de cerca las principales tendencias en tecnología y desarrollo.",
+        "introduccion": FALLBACK_RECAP_INTRO,
         "noticias_destacadas": recap_fallback,
         "repo": {"nombre": "GitHub", "url": "https://github.com/jorbencas/", "desc": "Proyectos destacados."},
         "tldr": "Novedades semanales en el sector tecnológico.",
@@ -214,7 +180,7 @@ async def generar_imagen_noticia(titulo_noticia: str, client, prompt_template: s
         except Exception as e:
             logger.warning(f"⚠️ Fallo imagen con {modelo}: {e}. Intentando siguiente...")
             
-    return fallback_url or "public/img/arquitectura_web.webp"
+    return fallback_url or FALLBACK_IMAGE_URL
 
 async def traducir_titulos_ia(noticias: list, client) -> list:
     """Traduce una lista de títulos al español en un solo bloque usando Gemini."""
@@ -227,7 +193,7 @@ async def traducir_titulos_ia(noticias: list, client) -> list:
     lineas = []
     for i, n in enumerate(noticias):
         fuente = n.get('fuente', '').lower()
-        if any(x in fuente for x in ["wired", "verge", "techcrunch", "github", "openai", "hacker news", "ars", "nvidia", "anthropic", "venturebeat", "mit", "hugging face", "google ai", "deepmind", "dev.to"]):
+        if any(x in fuente for x in FUENTES_INGLES):
             indices_traducir.append(i)
             lineas.append(f"{i}|{n['titulo']}")
     
@@ -236,18 +202,7 @@ async def traducir_titulos_ia(noticias: list, client) -> list:
     
     texto_a_traducir = "\n".join(lineas)
     
-    prompt = f"""
-    Traduce estos titulares de tecnología al español de forma profesional y natural.
-    Mantén nombres propios, marcas y acrónimos (OpenAI, NVIDIA, iPhone, etc.) sin traducir.
-    Conserva el formato "id|título" en la respuesta.
-    Devuelve SOLO JSON, sin markdown ni explicaciones.
-    
-    TEXTO:
-    {texto_a_traducir}
-    
-    FORMATO:
-    {{"traducciones": [{{"id": 0, "tr": "Título traducido 0"}}, {{"id": 1, "tr": "Título traducido 1"}}]}}
-    """
+    prompt = PROMPT_TRADUCIR_TITULOS.format(texto_a_traducir=texto_a_traducir)
     
     for modelo in modelos:
         try:
@@ -298,13 +253,13 @@ def deduplicar_items(items: list, umbral_similitud: float = 0.85) -> list:
     resultado: list = []
 
     for item in items:
-        url = normalizar_url(item.get("enlace", ""))
+        url = normalizar_url(item.get(ENLACE_KEY, ""))
         if url and url in urls_vistas:
             continue
         if url:
             urls_vistas.add(url)
 
-        titulo = (item.get("titulo") or "").lower().strip()
+        titulo = (item.get(TITULO_KEY) or "").lower().strip()
         if titulo:
             duplicado = False
             for t in titulos_vistos:

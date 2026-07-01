@@ -1,491 +1,446 @@
-let selSemanaNoticias = { tipo: "all_recent", ini: null, fin: null };
-let selSemanaVideos = { tipo: "all_recent", ini: null, fin: null };
-let selCategoriaNoticias = "all";
-let selBadgeNoticias = "all";
-let selRssNoticias = "all";
-let selCanalNoticias = "all";
-let selCanalVideos = "all";
-let allItems = [];
-let herramientas = [];
-let avatars = {};
+// ── Observable Store ──
+const store = (() => {
+  const state = {
+    semanaNoticias: { tipo: "all_recent", ini: null, fin: null },
+    semanaVideos: { tipo: "all_recent", ini: null, fin: null },
+    catNoticias: "all", badgeNoticias: "all", rssNoticias: "all",
+    canalNoticias: "all", canalVideos: "all",
+    tipoFuente: "all", tabMultimedia: "youtube",
+    items: [], herramientas: [], avatars: {},
+    refSkills: {}, refLlms: {}, refLenguajes: {}, refFrameworks: {}, refLibrerias: {},
+    config: {},
+  };
+  const listeners = {};
+  return {
+    get(k) { return state[k]; },
+    set(k, v) {
+      state[k] = v;
+      (listeners[k] || []).forEach(fn => fn(v));
+    },
+    on(k, fn) {
+      (listeners[k] = listeners[k] || []).push(fn);
+      return () => { listeners[k] = listeners[k].filter(f => f !== fn); };
+    },
+    _raw: state,
+  };
+})();
 
-document.addEventListener("DOMContentLoaded", async () => {
-  try {
-    const resp = await fetch(DATA_URL);
-    const data = await resp.json();
-    allItems = data.items || [];
-    herramientas = data.herramientas || [];
-    avatars = data.avatars || {};
-    initDashboard();
-  } catch (err) {
-    console.error("Error loading data.json:", err);
-    document.getElementById("news-list").innerHTML =
-      '<li style="color:#dc2626; padding: 20px;">Error al cargar datos.</li>';
-  }
-});
+// ── Pure helpers ──
+const limpiarFuente = (f) => (f || "").replace(" Shorts", "");
 
-function initDashboard() {
-  renderStats(allItems);
-  renderNewsCategoryChips(allItems);
-  renderNewsBadgeChips(allItems);
-  renderNewsRssChips(allItems);
-  renderNewsWeekFilters(allItems);
-  renderNewsChannelChips(allItems);
-  renderVideoWeekFilters(allItems);
-  renderVideoChannelChips(allItems);
-  renderItems(allItems);
-  renderGithubRanking(herramientas);
-  aplicarFiltrosNoticias();
-  aplicarFiltrosVideos();
-  initScrollToTop();
-  initGithubFilter();
+function tipoFuente(name) {
+  const s = (name || "").toLowerCase();
+  const yt = (store.get("config").ALL_YT_CHANNELS || []);
+  if (yt.some(c => c.toLowerCase() === s)) return "youtube";
+  if (s.includes("twitter") || s.includes("x.com")) return "twitter";
+  return "web";
 }
 
-function getNewsChannels(items) {
-  const seen = new Set();
-  items.forEach((item) => {
-    if (item.id_video) return;
-    const ch = (item.fuente || "").replace(" Shorts", "");
-    if (!seen.has(ch)) seen.add(ch);
+function tipoMultimedia(item) {
+  if (item.id_video) return "youtube";
+  const f = (item.fuente || "").toLowerCase();
+  if (f.includes("tiktok")) return "tiktok";
+  if (f.includes("instagram")) return "instagram";
+  return null;
+}
+
+function dominioUrl(url) {
+  try { return new URL(url).hostname; } catch(e) { return ""; }
+}
+
+function itemEnSemana(ts, sel) {
+  const ahora = Date.now();
+  const limite = ahora - 14 * 86400000;
+  if (sel.tipo === "all_recent") return ts >= limite;
+  if (sel.tipo === "range") return ts >= sel.ini && ts <= sel.fin;
+  return false;
+}
+
+function faviconSrc(sourceName) {
+  const av = store.get("avatars")[sourceName];
+  if (av) return av;
+  const item = store.get("items").find(i => limpiarFuente(i.fuente) === sourceName && i.enlace);
+  return item ? `https://www.google.com/s2/favicons?domain=${dominioUrl(item.enlace)}&sz=32` : "";
+}
+
+function chipImg(label, sourceName) {
+  const src = faviconSrc(sourceName);
+  return src
+    ? `<img class="chip-img" src="${src}" onerror="this.style.display='none'" loading="lazy"><span class="chip-text">${label}</span>`
+    : `<span class="chip-text">${label}</span>`;
+}
+
+// ── Data ──
+function cargarDatos() {
+  document.addEventListener("DOMContentLoaded", async () => {
+    try {
+      const resp = await fetch(DATA_URL);
+      const data = await resp.json();
+      store._raw.items = data.items || [];
+      store._raw.herramientas = data.herramientas || [];
+      store._raw.avatars = data.avatars || {};
+      store._raw.refSkills = data.skills || {};
+      store._raw.refLlms = data.llms || {};
+      store._raw.refLenguajes = data.lenguajes || {};
+      store._raw.refFrameworks = data.frameworks || {};
+      store._raw.refLibrerias = data.librerias || {};
+      store._raw.config = data.config_js || {};
+      initDashboard();
+    } catch (err) {
+      console.error("Error loading data.json:", err);
+      document.getElementById("news-list").innerHTML =
+        '<li style="color:#dc2626; padding: 20px;">Error al cargar datos.</li>';
+    }
   });
-  return Array.from(seen);
 }
 
-function getVideoChannels(items) {
-  const seen = new Set();
-  items.forEach((item) => {
-    if (!item.id_video) return;
-    const ch = (item.fuente || "").replace(" Shorts", "");
-    if (!seen.has(ch)) seen.add(ch);
-  });
-  return Array.from(seen);
-}
-
-function renderStats(items) {
-  const countTech = items.filter((i) => i.badge === "Tech").length;
-  const countBecas = items.filter((i) => i.badge === "Beca").length;
-  const countVids = items.filter((i) => i.id_video).length;
-  document.getElementById("stats-bar").innerHTML = `
-    <div class="stat-card"><b>${items.length}</b><span>Total</span></div>
-    <div class="stat-card"><b>${countTech}</b><span>Tech</span></div>
-    <div class="stat-card"><b>${countBecas}</b><span>Becas</span></div>
-    <div class="stat-card"><b>${countVids}</b><span>Multimedia</span></div>`;
-}
-
-function generarSelectSemanas(items, prefix) {
+// ── Week selector ──
+function crearSelectSemanas(items, prefix) {
   const select = document.createElement("select");
   select.id = `selectorSemanas_${prefix}`;
   select.style.cssText =
-    "padding: 10px 15px; border-radius: 20px; border: 2px solid #007bff; background: white; color: #007bff; font-weight: bold; cursor: pointer; outline: none; margin-left: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);";
+    "padding:10px 15px;border-radius:20px;border:2px solid #007bff;background:white;color:#007bff;font-weight:bold;cursor:pointer;outline:none;margin-left:10px;box-shadow:0 2px 4px rgba(0,0,0,0.05)";
   select.innerHTML = '<option value="all">📅 Archivo Histórico...</option>';
-
-  const tsValues = items.map((i) => new Date(i.ts).getTime()).filter((t) => !isNaN(t));
-  if (tsValues.length === 0) return select;
-  const minTs = Math.min(...tsValues);
-  const maxTs = Math.max(...tsValues);
-  const startWeek = new Date(minTs);
-  startWeek.setDate(startWeek.getDate() - startWeek.getDay());
-  const endWeek = new Date(maxTs);
-  endWeek.setDate(endWeek.getDate() + (6 - endWeek.getDay()));
-
+  const timestamps = items.map(i => new Date(i.ts).getTime()).filter(t => !isNaN(t));
+  if (timestamps.length === 0) return select;
+  const minTs = Math.min(...timestamps);
+  const maxTs = Math.max(...timestamps);
+  const start = new Date(minTs); start.setDate(start.getDate() - start.getDay());
+  const end = new Date(maxTs); end.setDate(end.getDate() + (6 - end.getDay()));
   const monthCounts = {};
-  items.forEach((i) => {
+  items.forEach(i => {
     const d = new Date(i.ts);
-    if (!isNaN(d.getTime())) {
+    if (!isNaN(d)) {
       const mk = d.toLocaleDateString("es-ES", { month: "long", year: "numeric" });
       monthCounts[mk] = (monthCounts[mk] || 0) + 1;
     }
   });
-
   let lastMonth = "";
-  const weeks = [];
-  let w = new Date(endWeek);
-  while (w >= startWeek) {
-    weeks.push(new Date(w));
-    w.setDate(w.getDate() - 7);
-  }
-
-  for (const wk of weeks) {
-    const fin = new Date(wk);
-    fin.setDate(fin.getDate() + 6);
-    const monthKey = wk.toLocaleDateString("es-ES", { month: "long", year: "numeric" });
-    if (monthKey !== lastMonth) {
+  for (let w = new Date(end); w >= start; w.setDate(w.getDate() - 7)) {
+    const fin = new Date(w); fin.setDate(fin.getDate() + 6);
+    const mk = w.toLocaleDateString("es-ES", { month: "long", year: "numeric" });
+    if (mk !== lastMonth) {
       if (lastMonth) select.innerHTML += "</optgroup>";
-      select.innerHTML += `<optgroup label="── ${monthKey} (${monthCounts[monthKey] || 0} ítems) ──">`;
-      lastMonth = monthKey;
+      select.innerHTML += `<optgroup label="── ${mk} (${monthCounts[mk] || 0} ítems) ──">`;
+      lastMonth = mk;
     }
-    const label = `Semana ${wk.toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit" })}`;
-    select.innerHTML += `<option value="${wk.toISOString()}|${fin.toISOString()}">${label}</option>`;
+    select.innerHTML += `<option value="${w.toISOString()}|${fin.toISOString()}">Semana ${w.toLocaleDateString("es-ES", { day:"2-digit", month:"2-digit" })}</option>`;
   }
   if (lastMonth) select.innerHTML += "</optgroup>";
   return select;
 }
 
-function renderNewsWeekFilters(items) {
-  const container = document.getElementById("news-week-filters");
+function renderWeekFilter(containerId, selectPrefix, storeKey, items) {
+  const container = document.getElementById(containerId);
   if (!container) return;
   container.innerHTML = "";
-
-  const chipRecent = document.createElement("div");
-  chipRecent.className = "chip active";
-  chipRecent.textContent = "🔄 Últimas 2 Semanas";
-  chipRecent.dataset.inicio = "all_recent";
-  chipRecent.onclick = () => filtrarSemanaNoticias(chipRecent);
-  container.appendChild(chipRecent);
-
-  const select = generarSelectSemanas(items, "noticias");
-  select.onchange = () => filtrarSemanaNoticiasDesdeSelector(select);
+  const chip = document.createElement("div");
+  chip.className = "chip active";
+  chip.textContent = "🔄 Últimas 2 Semanas";
+  chip.onclick = () => {
+    store.set(storeKey, { tipo: "all_recent", ini: null, fin: null });
+    const sel = document.getElementById(`selectorSemanas_${selectPrefix}`);
+    if (sel) sel.value = "all";
+    container.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+    chip.classList.add("active");
+  };
+  container.appendChild(chip);
+  const select = crearSelectSemanas(items, selectPrefix);
+  select.onchange = () => {
+    if (select.value === "all") {
+      store.set(storeKey, { tipo: "all_recent", ini: null, fin: null });
+    } else {
+      container.querySelectorAll('[data-inicio="all_recent"]').forEach(c => c.classList.remove("active"));
+      const [ini, fin] = select.value.split("|");
+      store.set(storeKey, { tipo: "range", ini: new Date(ini).getTime(), fin: new Date(fin).getTime() });
+    }
+  };
   container.appendChild(select);
 }
 
-function renderVideoWeekFilters(items) {
-  const container = document.getElementById("video-week-filters");
+// ── Channel lists ──
+function canalesNoticias(items) {
+  const seen = new Set();
+  const tf = store.get("tipoFuente");
+  const yt = (store.get("config").ALL_YT_CHANNELS || []);
+  if (tf === "all" || tf === "youtube") yt.forEach(c => seen.add(c));
+  items.forEach(i => {
+    if (i.id_video) return;
+    const ch = limpiarFuente(i.fuente);
+    if (tf !== "all" && tipoFuente(ch) !== tf) return;
+    seen.add(ch);
+  });
+  return [...seen].sort();
+}
+
+function canalesVideos(items) {
+  const seen = new Set();
+  const tab = store.get("tabMultimedia");
+  const tf = store.get("tipoFuente");
+  const yt = (store.get("config").ALL_YT_CHANNELS || []);
+  if ((tab === "all" || tab === "youtube") && (tf === "all" || tf === "youtube")) yt.forEach(c => seen.add(c));
+  items.forEach(i => {
+    if (tipoMultimedia(i) !== tab) return;
+    const ch = limpiarFuente(i.fuente);
+    if (tf !== "all" && tipoFuente(ch) !== tf) return;
+    seen.add(ch);
+  });
+  return [...seen].sort();
+}
+
+// ── Renderers ──
+function renderChips(containerId, opts) {
+  const container = document.getElementById(containerId);
   if (!container) return;
-  container.innerHTML = "";
-
-  const chipRecent = document.createElement("div");
-  chipRecent.className = "chip active";
-  chipRecent.textContent = "🔄 Últimas 2 Semanas";
-  chipRecent.dataset.inicio = "all_recent";
-  chipRecent.onclick = () => filtrarSemanaVideos(chipRecent);
-  container.appendChild(chipRecent);
-
-  const select = generarSelectSemanas(items, "videos");
-  select.onchange = () => filtrarSemanaVideosDesdeSelector(select);
-  container.appendChild(select);
+  const { options, stateKey, withImage } = opts;
+  const render = () => {
+    const active = store.get(stateKey);
+    container.innerHTML = "";
+    options.forEach(opt => {
+      const chip = document.createElement("div");
+      chip.className = "chip" + (active === opt.id ? " active" : "");
+      chip.innerHTML = withImage ? chipImg(opt.label, opt.id) : `<span class="chip-text">${opt.label}</span>`;
+      chip.onclick = () => store.set(stateKey, opt.id);
+      container.appendChild(chip);
+    });
+  };
+  store.on(stateKey, render);
+  render();
 }
 
-function renderNewsChannelChips(items) {
-  const channels = getNewsChannels(items);
-  const container = document.getElementById("news-channel-filters");
-  const allChip = document.createElement("div");
-  allChip.className = "chip active";
-  allChip.innerHTML = "<span>Todos</span>";
-  allChip.dataset.filtro = "all";
-  allChip.onclick = () => { selCanalNoticias = "all"; aplicarFiltrosNoticias(); actualizarChips(container, allChip); };
-  container.appendChild(allChip);
-
-  channels.forEach((ch) => {
-    const chip = document.createElement("div");
-    chip.className = "chip";
-    chip.dataset.filtro = ch;
-    chip.innerHTML = chipWithImage(ch, ch, items);
-    chip.onclick = () => { selCanalNoticias = ch; aplicarFiltrosNoticias(); actualizarChips(container, chip); };
-    container.appendChild(chip);
-  });
+function renderCanalChips(containerId, channels, stateKey) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const opts = [{ id: "all", label: "Todos" }, ...channels.map(c => ({ id: c, label: c }))];
+  const render = () => {
+    const active = store.get(stateKey);
+    container.innerHTML = "";
+    opts.forEach(opt => {
+      const chip = document.createElement("div");
+      chip.className = "chip" + (active === opt.id ? " active" : "");
+      chip.innerHTML = opt.id === "all" ? "<span>Todos</span>" : chipImg(opt.label, opt.id);
+      chip.onclick = () => store.set(stateKey, opt.id);
+      container.appendChild(chip);
+    });
+  };
+  store.on(stateKey, render);
+  render();
 }
 
-function renderVideoChannelChips(items) {
-  const channels = getVideoChannels(items);
-  const container = document.getElementById("video-channel-filters");
-  const allChip = document.createElement("div");
-  allChip.className = "chip active";
-  allChip.innerHTML = "<span>Todos</span>";
-  allChip.dataset.filtro = "all";
-  allChip.onclick = () => { selCanalVideos = "all"; aplicarFiltrosVideos(); actualizarChips(container, allChip); };
-  container.appendChild(allChip);
-
-  channels.forEach((ch) => {
-    const chip = document.createElement("div");
-    chip.className = "chip";
-    chip.dataset.filtro = ch;
-    chip.innerHTML = chipWithImage(ch, ch, items);
-    chip.onclick = () => { selCanalVideos = ch; aplicarFiltrosVideos(); actualizarChips(container, chip); };
-    container.appendChild(chip);
-  });
+function renderStats(items) {
+  const news = items.filter(i => tipoMultimedia(i) === null);
+  const multimedia = items.filter(i => tipoMultimedia(i) !== null);
+  document.getElementById("stats-bar").innerHTML = `
+    <div class="stat-card"><b>${items.length}</b><span>Total</span></div>
+    <div class="stat-card"><b>${news.filter(i => i.badge === "Tech").length}</b><span>Tech</span></div>
+    <div class="stat-card"><b>${multimedia.length}</b><span>Multimedia</span></div>`;
 }
 
-function actualizarChips(container, activo) {
-  container.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
-  activo.classList.add("active");
-}
-
-function renderItems(items) {
-  renderNews(items);
-  renderVideos(items);
-}
-
-function renderNews(items) {
+function renderNoticias(items) {
   const ul = document.getElementById("news-list");
   ul.innerHTML = items
-    .filter((i) => !i.id_video)
-    .map((i) => {
+    .filter(i => tipoMultimedia(i) === null)
+    .map(i => {
       const ts = i.ts || new Date().toISOString();
-      const fuente = (i.fuente || "").replace(" Shorts", "");
-      const fecha = i.fecha_real || i.f || "S/D";
-      const badgeCls = i.badge === "Beca" ? "badge-beca" : "badge-tech";
-      const badgeVal = i.badge || "Tech";
+      const fuente = limpiarFuente(i.fuente);
+      const badge = i.badge || "Tech";
       const cat = i.categoria || "";
-      const origen = i.origen || "web";
-      const rssBadge = origen === "rss" ? '<span class="badge badge-rss">📡 RSS</span>' : "";
-      return `<li class="news-item" data-ts="${ts}" data-fuente="${fuente}" data-categoria="${cat}" data-badge="${badgeVal}" data-origen="${origen}">
-        <div class="meta">${i.fuente} | ${fecha}</div>
-        <span class="badge ${badgeCls}">${badgeVal}</span>
-        ${rssBadge}
+      const tf = tipoFuente(i.fuente);
+      const rss = i.origen === "rss" ? '<span class="badge badge-rss">📡 RSS</span>' : "";
+      return `<li class="news-item" data-ts="${ts}" data-fuente="${fuente}" data-categoria="${cat}" data-badge="${badge}" data-origen="${i.origen || "web"}" data-tipo-fuente="${tf}">
+        <div class="meta">${i.fuente} | ${i.fecha_publicacion || i.fecha_real || i.f || "S/D"}</div>
+        <span class="badge badge-tech">${badge}</span>
+        ${rss}
         ${cat ? `<span class="badge badge-cat">${cat}</span>` : ""}
-        <a href="${i.enlace}" target="_blank">${i.titulo || 'Ver noticia'}</a></li>`;
-    })
-    .join("");
+        <a href="${i.enlace}" target="_blank">${i.titulo || "Ver noticia"}</a></li>`;
+    }).join("");
 }
 
-function renderVideos(items) {
-  const grid = document.getElementById("video-grid");
-  const videos = items.filter((i) => i.id_video);
-
-  if (videos.length === 0) {
-    grid.innerHTML = '<p style="padding: 20px; color: #666; text-align:center;">No hay vídeos en este período.</p>';
-    return;
-  }
-
-  grid.innerHTML = videos
-    .map((i) => {
-      const ts = i.ts || new Date().toISOString();
-      const fuente = (i.fuente || "").replace(" Shorts", "");
-      const fecha = i.fecha_real || i.f || "S/D";
-      const tipo = i.tipo || "video";
-      const esLive = tipo === "live";
-      const clase = esLive ? "tipo-live" : tipo === "shorts" ? "tipo-shorts" : "tipo-video";
-      const badgeLive = esLive ? '<span class="badge-live">● EN DIRECTO</span>' : "";
-      const titulo = i.titulo || 'Ver video en YouTube';
-      const canal = i.fuente || "YouTube";
-      return `<div class="card ${clase}" data-ts="${ts}" data-fuente="${fuente}">
-        ${badgeLive}
-        <!-- <button onclick="descargarVideo('${i.enlace}', this)" class="btn-download">📥</button> -->
-        <a href="${i.enlace}" target="_blank" class="video-thumb-link">
-          <div class="video-thumb">
-            <img src="https://img.youtube.com/vi/${i.id_video}/mqdefault.jpg" alt="${titulo}"
-                 width="320" height="180" loading="lazy" class="video-thumb-img"
-                 onerror="this.classList.add('errored');this.nextElementSibling.classList.add('visible')">
-            <div class="video-thumb-fallback">📺 ${canal}</div>
-          </div>
-        </a>
-        <div class="card-content">
-          <div class="meta">${i.fuente} | ${fecha}</div>
-          <a href="${i.enlace}" target="_blank">${titulo}</a>
-        </div>
-      </div>`;
-    })
-    .join("");
-}
-
-function itemDentroSemana(itemTS, selector) {
-  const ahora = new Date().getTime();
-  const limiteReciente = ahora - 14 * 24 * 60 * 60 * 1000;
-  if (selector.tipo === "all_recent") {
-    return itemTS >= limiteReciente;
-  } else if (selector.tipo === "range") {
-    return itemTS >= selector.ini && itemTS <= selector.fin;
-  }
-  return false;
-}
-
-function domainFromUrl(url) {
-  try { return new URL(url).hostname; } catch(e) { return ""; }
-}
-
-function faviconForSource(sourceName, items) {
-  const av = avatars[sourceName];
-  if (av) return av;
-  const item = items.find(i => (i.fuente || "").replace(" Shorts", "") === sourceName && i.enlace);
-  if (item) return `https://www.google.com/s2/favicons?domain=${domainFromUrl(item.enlace)}&sz=32`;
-  return "";
-}
-
-function chipWithImage(label, sourceName, items) {
-  const imgSrc = faviconForSource(sourceName, items);
-  if (imgSrc) {
-    return `<img class="chip-img" src="${imgSrc}" onerror="this.style.display='none'" loading="lazy"><span class="chip-text">${label}</span>`;
-  }
-  return `<span class="chip-text">${label}</span>`;
-}
-
-function getNoticiasCategorias(items) {
-  const cats = new Set();
-  items.forEach((i) => { if (!i.id_video && i.categoria) cats.add(i.categoria); });
-  return Array.from(cats);
-}
-
-function renderNewsCategoryChips(items) {
-  const cats = getNoticiasCategorias(items);
-  const container = document.getElementById("news-category-filters");
-  if (!container) return;
-  const allChip = document.createElement("div");
-  allChip.className = "chip active";
-  allChip.innerHTML = "<span>Todas</span>";
-  allChip.dataset.filtro = "all";
-  allChip.onclick = () => { selCategoriaNoticias = "all"; aplicarFiltrosNoticias(); actualizarChips(container, allChip); };
-  container.appendChild(allChip);
-  cats.forEach((cat) => {
-    const chip = document.createElement("div");
-    chip.className = "chip";
-    chip.dataset.filtro = cat;
-    chip.innerHTML = `<span class="chip-text">${cat}</span>`;
-    chip.onclick = () => { selCategoriaNoticias = cat; aplicarFiltrosNoticias(); actualizarChips(container, chip); };
-    container.appendChild(chip);
-  });
-}
-
-function renderNewsBadgeChips(items) {
-  const container = document.getElementById("news-badge-filters");
-  if (!container) return;
-  const allChip = document.createElement("div");
-  allChip.className = "chip active";
-  allChip.innerHTML = "<span>Todas</span>";
-  allChip.dataset.filtro = "all";
-  allChip.onclick = () => { selBadgeNoticias = "all"; aplicarFiltrosNoticias(); actualizarChips(container, allChip); };
-  container.appendChild(allChip);
-  ["Tech", "Beca", "RSS"].forEach((b) => {
-    const chip = document.createElement("div");
-    chip.className = "chip";
-    chip.dataset.filtro = b;
-    chip.innerHTML = `<span class="chip-text">${{"Tech": "💻 Tech", "Beca": "🎓 Beca", "RSS": "📡 RSS"}[b] || b}</span>`;
-    chip.onclick = () => { selBadgeNoticias = b; aplicarFiltrosNoticias(); actualizarChips(container, chip); };
-    container.appendChild(chip);
-  });
-}
-
-function getRssSources(items) {
-  return [...new Set(items.filter(i => i.origen === "rss").map(i => i.fuente))].sort();
-}
-
-function renderNewsRssChips(items) {
-  const container = document.getElementById("news-rss-filters");
-  if (!container) return;
-  const rssSources = getRssSources(items);
-  const allChip = document.createElement("div");
-  allChip.className = "chip active";
-  allChip.innerHTML = "<span>Todos</span>";
-  allChip.dataset.filtro = "all";
-  allChip.onclick = () => { selRssNoticias = "all"; aplicarFiltrosNoticias(); actualizarChips(container, allChip); };
-  container.appendChild(allChip);
-  rssSources.forEach((src) => {
-    const chip = document.createElement("div");
-    chip.className = "chip";
-    chip.dataset.filtro = src;
-    chip.innerHTML = chipWithImage(src, src, items);
-    chip.onclick = () => { selRssNoticias = src; aplicarFiltrosNoticias(); actualizarChips(container, chip); };
-    container.appendChild(chip);
-  });
-}
-
+// ── Filters (operan sobre DOM, reaccionan a cambios de store) ──
 function aplicarFiltrosNoticias() {
-  document.querySelectorAll(".news-item").forEach((item) => {
-    const tsAttr = item.getAttribute("data-ts");
-    if (!tsAttr) return;
-    const itemTS = new Date(tsAttr).getTime();
-    const itemFuente = item.getAttribute("data-fuente");
-    const itemCat = item.getAttribute("data-categoria");
-    const itemBadge = item.getAttribute("data-badge");
-    const itemOrigen = item.getAttribute("data-origen") || "web";
-    const okSemana = itemDentroSemana(itemTS, selSemanaNoticias);
-    const okCanal = selCanalNoticias === "all" || itemFuente === selCanalNoticias;
-    const okCategoria = selCategoriaNoticias === "all" || itemCat === selCategoriaNoticias;
-    const okBadge = selBadgeNoticias === "all"
-      || (selBadgeNoticias === "RSS" ? itemOrigen === "rss" : itemBadge === selBadgeNoticias);
-    const okRss = selRssNoticias === "all"
-      || (itemOrigen === "rss" && itemFuente === selRssNoticias);
-    item.style.display = okSemana && okCanal && okCategoria && okBadge && okRss ? "list-item" : "none";
+  document.querySelectorAll(".news-item").forEach(item => {
+    const ts = item.getAttribute("data-ts");
+    if (!ts) return;
+    const ok = itemEnSemana(new Date(ts).getTime(), store.get("semanaNoticias"))
+      && (store.get("canalNoticias") === "all" || item.getAttribute("data-fuente") === store.get("canalNoticias"))
+      && (store.get("catNoticias") === "all" || item.getAttribute("data-categoria") === store.get("catNoticias"))
+      && (store.get("badgeNoticias") === "all"
+        || (store.get("badgeNoticias") === "RSS" ? item.getAttribute("data-origen") === "rss" : item.getAttribute("data-badge") === store.get("badgeNoticias")))
+      && (store.get("tipoFuente") === "all" || (item.getAttribute("data-tipo-fuente") || "") === store.get("tipoFuente"))
+      && (store.get("rssNoticias") === "all" || (item.getAttribute("data-origen") === "rss" && item.getAttribute("data-fuente") === store.get("rssNoticias")));
+    item.style.display = ok ? "list-item" : "none";
   });
 }
 
 function aplicarFiltrosVideos() {
-  document.querySelectorAll(".card").forEach((item) => {
-    const tsAttr = item.getAttribute("data-ts");
-    if (!tsAttr) return;
-    const itemTS = new Date(tsAttr).getTime();
-    const itemFuente = item.getAttribute("data-fuente");
-    const okSemana = itemDentroSemana(itemTS, selSemanaVideos);
-    const okCanal = selCanalVideos === "all" || itemFuente === selCanalVideos;
-    item.style.display = okSemana && okCanal ? "block" : "none";
+  document.querySelectorAll("#multimedia-content .card, #multimedia-content .news-item").forEach(item => {
+    const ts = item.getAttribute("data-ts");
+    if (!ts) return;
+    const ok = itemEnSemana(new Date(ts).getTime(), store.get("semanaVideos"))
+      && (store.get("canalVideos") === "all" || item.getAttribute("data-fuente") === store.get("canalVideos"))
+      && (store.get("tipoFuente") === "all" || (item.getAttribute("data-tipo-fuente") || "") === store.get("tipoFuente"));
+    item.style.display = ok ? "block" : "none";
   });
 }
 
-function filtrarSemanaNoticias(el) {
-  const container = document.getElementById("news-week-filters");
-  container.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
-  const sel = document.getElementById("selectorSemanas_noticias");
-  if (sel) sel.value = "all";
-  el.classList.add("active");
-  selSemanaNoticias.tipo = "all_recent";
-  aplicarFiltrosNoticias();
+// ── Multimedia tabs ──
+function renderTabsMultimedia() {
+  const container = document.getElementById("multimedia-tabs");
+  if (!container) return;
+  const tabs = (store.get("config").TABS_MULTIMEDIA || []);
+  const render = () => {
+    const active = store.get("tabMultimedia");
+    container.innerHTML = "";
+    tabs.forEach(t => {
+      const chip = document.createElement("div");
+      chip.className = "chip" + (active === t.id ? " active" : "");
+      chip.innerHTML = `<span class="chip-text">${t.label}</span>`;
+      chip.onclick = () => store.set("tabMultimedia", t.id);
+      container.appendChild(chip);
+    });
+  };
+  store.on("tabMultimedia", render);
+  render();
 }
 
-function filtrarSemanaNoticiasDesdeSelector(el) {
-  const container = document.getElementById("news-week-filters");
-  if (el.value === "all") {
-    selSemanaNoticias.tipo = "all_recent";
-    const recent = container.querySelector('[data-inicio="all_recent"]');
-    if (recent) recent.classList.add("active");
-  } else {
-    container.querySelectorAll('[data-inicio="all_recent"]').forEach((c) => c.classList.remove("active"));
-    const [ini, fin] = el.value.split("|");
-    selSemanaNoticias = { tipo: "range", ini: new Date(ini).getTime(), fin: new Date(fin).getTime() };
+function renderContenidoMultimedia(items) {
+  const c = document.getElementById("multimedia-content");
+  if (!c) return;
+  const tab = store.get("tabMultimedia");
+  if (tab === "youtube") return renderYouTube(items, c);
+  if (tab === "tiktok") return renderSocial(items, c, "tiktok", "🎵");
+  if (tab === "instagram") return renderSocial(items, c, "instagram", "📸");
+}
+
+function renderYouTube(items, container) {
+  const videos = items.filter(i => i.id_video);
+  if (videos.length === 0) {
+    container.innerHTML = '<p style="padding:20px;color:#666;text-align:center;">No hay vídeos en este período.</p>';
+    return;
   }
-  aplicarFiltrosNoticias();
+  container.innerHTML = videos.map(i => {
+    const ts = i.ts || new Date().toISOString();
+    const fuente = limpiarFuente(i.fuente);
+    const fecha = i.fecha_publicacion || i.fecha_real || i.f || "S/D";
+    const tipo = i.tipo || "video";
+    const esLive = tipo === "live";
+    const clase = esLive ? "tipo-live" : tipo === "shorts" ? "tipo-shorts" : "tipo-video";
+    const tf = tipoFuente(i.fuente);
+    return `<div class="card ${clase}" data-ts="${ts}" data-fuente="${fuente}" data-tipo-fuente="${tf}">
+      ${esLive ? '<span class="badge-live">● EN DIRECTO</span>' : ""}
+      <a href="${i.enlace}" target="_blank" class="video-thumb-link">
+        <div class="video-thumb">
+          <img src="https://img.youtube.com/vi/${i.id_video}/mqdefault.jpg" alt="${i.titulo || ""}" width="320" height="180" loading="lazy" class="video-thumb-img" onerror="this.classList.add('errored');this.nextElementSibling.classList.add('visible')">
+          <div class="video-thumb-fallback">📺 ${i.fuente || "YouTube"}</div>
+        </div>
+      </a>
+      <div class="card-content">
+        <div class="meta">${i.fuente} | ${fecha}</div>
+        <a href="${i.enlace}" target="_blank">${i.titulo || "Ver video en YouTube"}</a>
+      </div>
+    </div>`;
+  }).join("");
 }
 
-function filtrarSemanaVideos(el) {
-  const container = document.getElementById("video-week-filters");
-  container.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
-  const sel = document.getElementById("selectorSemanas_videos");
-  if (sel) sel.value = "all";
-  el.classList.add("active");
-  selSemanaVideos.tipo = "all_recent";
-  aplicarFiltrosVideos();
-}
-
-function filtrarSemanaVideosDesdeSelector(el) {
-  const container = document.getElementById("video-week-filters");
-  if (el.value === "all") {
-    selSemanaVideos.tipo = "all_recent";
-    const recent = container.querySelector('[data-inicio="all_recent"]');
-    if (recent) recent.classList.add("active");
-  } else {
-    container.querySelectorAll('[data-inicio="all_recent"]').forEach((c) => c.classList.remove("active"));
-    const [ini, fin] = el.value.split("|");
-    selSemanaVideos = { tipo: "range", ini: new Date(ini).getTime(), fin: new Date(fin).getTime() };
+function renderSocial(items, container, type, emoji) {
+  const filtered = items.filter(i => tipoMultimedia(i) === type);
+  if (filtered.length === 0) {
+    container.innerHTML = `<p style="padding:20px;color:#666;text-align:center;">No hay contenido de ${type} en este período.</p>`;
+    return;
   }
-  aplicarFiltrosVideos();
+  container.innerHTML = filtered.map(i => {
+    const ts = i.ts || new Date().toISOString();
+    const fuente = limpiarFuente(i.fuente);
+    const fecha = i.fecha_publicacion || i.fecha_real || i.f || "S/D";
+    const tf = tipoFuente(i.fuente);
+    return `<div class="news-item" data-ts="${ts}" data-fuente="${fuente}" data-tipo-fuente="${tf}">
+      <div class="meta">${emoji} ${i.fuente} | ${fecha}</div>
+      <a href="${i.enlace}" target="_blank">${i.titulo || "Ver contenido"}</a>
+    </div>`;
+  }).join("");
 }
 
-function initScrollToTop() {
+// ── GitHub ranking ──
+function renderRanking(items) {
+  const container = document.getElementById("github-ranking");
+  if (!container) return;
+  if (!items || items.length === 0) {
+    container.innerHTML = '<p style="padding:20px;color:#666;text-align:center;">No hay datos de repositorios.</p>';
+    return;
+  }
+  container.innerHTML = items.map((r, i) => {
+    const lang = r.lenguaje || "";
+    const stars = Number(r.estrellas) || 0;
+    return `<div class="news-item" style="border-left-color:#f59e0b;">
+      <div class="meta"><span>#${i+1} ⭐ ${stars >= 1000 ? (stars/1000).toFixed(1)+"k" : stars}</span>${lang ? `<span class="badge badge-tech">${lang}</span>` : ""}</div>
+      <a href="${r.enlace}" target="_blank">${r.titulo}</a>
+      ${r.descripcion ? `<div style="font-size:0.85em;color:#64748b;margin-top:4px;">${r.descripcion.slice(0,120)}</div>` : ""}
+    </div>`;
+  }).join("");
+}
+
+// ── Reference ──
+function renderRefGroup(containerId, data) {
+  const container = document.getElementById(containerId);
+  if (!container || !data) return;
+  container.innerHTML = "";
+  Object.entries(data).forEach(([group, items]) => {
+    const groupDiv = document.createElement("div");
+    groupDiv.style.cssText = "margin-bottom:8px;";
+    groupDiv.innerHTML = `<strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">${group}</strong>`;
+    items.forEach(item => {
+      const chip = document.createElement("span");
+      chip.className = "chip";
+      chip.style.cssText = "padding:2px 10px;font-size:12px;cursor:default;";
+      chip.textContent = item;
+      groupDiv.appendChild(chip);
+    });
+    container.appendChild(groupDiv);
+  });
+}
+
+function renderReference() {
+  renderRefGroup("ref-skills", store.get("refSkills"));
+  renderRefGroup("ref-llms", store.get("refLlms"));
+  renderRefGroup("ref-lenguajes", store.get("refLenguajes"));
+  renderRefGroup("ref-frameworks", store.get("refFrameworks"));
+  renderRefGroup("ref-librerias", store.get("refLibrerias"));
+}
+
+// ── Side effects registrados (se ejecutan al cambiar el key correspondiente) ──
+function registrarEventos() {
+  store.on("tipoFuente", () => {
+    const rssSection = document.getElementById("news-rss-filters");
+    if (rssSection) rssSection.style.display = (store.get("tipoFuente") === "all" || store.get("tipoFuente") === "rss") ? "" : "none";
+    renderCanalChips("news-channel-filters", canalesNoticias(store.get("items")), "canalNoticias");
+    renderCanalChips("video-channel-filters", canalesVideos(store.get("items")), "canalVideos");
+    renderContenidoMultimedia(store.get("items"));
+    aplicarFiltrosVideos();
+  });
+
+  store.on("tabMultimedia", () => {
+    renderContenidoMultimedia(store.get("items"));
+    aplicarFiltrosVideos();
+  });
+
+  store.on("semanaNoticias", aplicarFiltrosNoticias);
+  store.on("canalNoticias", aplicarFiltrosNoticias);
+  store.on("catNoticias", aplicarFiltrosNoticias);
+  store.on("badgeNoticias", aplicarFiltrosNoticias);
+  store.on("rssNoticias", aplicarFiltrosNoticias);
+  store.on("semanaVideos", aplicarFiltrosVideos);
+  store.on("canalVideos", aplicarFiltrosVideos);
+}
+
+// ── Init ──
+function initScrollTop() {
   const btn = document.createElement("button");
   btn.className = "scroll-top";
   btn.innerHTML = "&#8593;";
   btn.setAttribute("aria-label", "Volver arriba");
   document.body.appendChild(btn);
-
-  window.addEventListener("scroll", () => {
-    btn.classList.toggle("visible", window.scrollY > 400);
-  }, { passive: true });
-
-  btn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-}
-
-function renderGithubRanking(items) {
-  const container = document.getElementById("github-ranking");
-  if (!container) return;
-  if (!items || items.length === 0) {
-    container.innerHTML = '<p style="padding: 20px; color: #666; text-align:center;">No hay datos de repositorios.</p>';
-    return;
-  }
-  container.innerHTML = items.map((r, i) => {
-    const lang = r.lenguaje || "";
-    const langBadge = lang ? `<span class="badge badge-tech">${lang}</span>` : "";
-    const stars = Number(r.estrellas) || 0;
-    const starsFormatted = stars >= 1000 ? (stars / 1000).toFixed(1) + "k" : stars;
-    const desc = r.descripcion ? r.descripcion.slice(0, 120) : "";
-    return `<div class="news-item" style="border-left-color: #f59e0b;">
-      <div class="meta">
-        <span>#${i + 1} ⭐ ${starsFormatted}</span>
-        ${langBadge}
-      </div>
-      <a href="${r.enlace}" target="_blank">${r.titulo}</a>
-      ${desc ? `<div style="font-size: 0.85em; color: #64748b; margin-top: 4px;">${desc}</div>` : ""}
-    </div>`;
-  }).join("");
+  window.addEventListener("scroll", () => btn.classList.toggle("visible", window.scrollY > 400), { passive: true });
+  btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 }
 
 function initGithubFilter() {
@@ -496,48 +451,56 @@ function initGithubFilter() {
     clearTimeout(timer);
     timer = setTimeout(() => {
       const q = input.value.toLowerCase().trim();
-      const filtered = q ? herramientas.filter(r =>
+      renderRanking(q ? store.get("herramientas").filter(r =>
         (r.titulo || "").toLowerCase().includes(q) ||
         (r.lenguaje || "").toLowerCase().includes(q) ||
         (r.descripcion || "").toLowerCase().includes(q)
-      ) : herramientas;
-      renderGithubRanking(filtered);
+      ) : store.get("herramientas"));
     }, 300);
   });
 }
 
-// function descargarVideo — desactivada: API no funcional
-// async function descargarVideo(urlVideo, boton) {
-//   const originalText = boton.innerHTML;
-//   boton.innerHTML = "⏳...";
-//   try {
-//     const response = await fetch(
-//       `${API_BASE}?url=${encodeURIComponent(urlVideo)}`,
-//       {
-//         method: "GET",
-//         headers: {
-//           "X-API-Key": atob(TOKEN),
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     );
-//     const data = await response.json();
-//     if (data.url) {
-//       const a = document.createElement("a");
-//       a.href = data.url;
-//       a.download = data.title + ".mp4";
-//       document.body.appendChild(a);
-//       a.click();
-//       document.body.removeChild(a);
-//       boton.innerHTML = "✅";
-//     } else {
-//       alert("No se pudo obtener el link directo.");
-//       boton.innerHTML = "❌";
-//     }
-//   } catch (error) {
-//     console.error("Error:", error);
-//     boton.innerHTML = "❌";
-//   } finally {
-//     setTimeout(() => (boton.innerHTML = originalText), 3000);
-//   }
-// }
+function initDashboard() {
+  const items = store.get("items");
+  renderStats(items);
+  registrarEventos();
+
+  renderChips("news-tipo-fuente-filters", {
+    options: (store.get("config").FILTRO_TIPO_FUENTE || []),
+    stateKey: "tipoFuente",
+  });
+
+  const cats = [...new Set(items.filter(i => !i.id_video && i.categoria).map(i => i.categoria))];
+  renderChips("news-category-filters", {
+    options: [{ id: "all", label: "Todas" }, ...cats.map(c => ({ id: c, label: c }))],
+    stateKey: "catNoticias",
+  });
+
+  renderChips("news-badge-filters", {
+    options: (store.get("config").FILTRO_BADGE || []),
+    stateKey: "badgeNoticias",
+  });
+
+  const rssSources = [...new Set(items.filter(i => i.origen === "rss").map(i => i.fuente))].sort();
+  renderChips("news-rss-filters", {
+    options: [{ id: "all", label: "Todas" }, ...rssSources.map(s => ({ id: s, label: s }))],
+    stateKey: "rssNoticias",
+    withImage: true,
+  });
+
+  renderWeekFilter("news-week-filters", "noticias", "semanaNoticias", items);
+  renderCanalChips("news-channel-filters", canalesNoticias(items), "canalNoticias");
+  renderWeekFilter("video-week-filters", "videos", "semanaVideos", items);
+  renderCanalChips("video-channel-filters", canalesVideos(items), "canalVideos");
+  renderTabsMultimedia();
+  renderContenidoMultimedia(items);
+  renderNoticias(items);
+  renderRanking(store.get("herramientas"));
+  renderReference();
+  aplicarFiltrosNoticias();
+  aplicarFiltrosVideos();
+  initScrollTop();
+  initGithubFilter();
+}
+
+cargarDatos();

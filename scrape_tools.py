@@ -14,7 +14,8 @@ from logging.handlers import RotatingFileHandler
 
 import aiohttp
 
-from constants_downloadfile import CONFIG, FUENTES
+from constants_downloadfile import CONFIG, FUENTES, TIPO_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY
+from utils import load_json, save_json
 from scraper_base import ScraperPro
 
 os.makedirs("logs", exist_ok=True)
@@ -29,20 +30,6 @@ logging.basicConfig(
 logger = logging.getLogger("tools")
 
 
-def load_json(path: str) -> list:
-    if os.path.exists(path):
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            return []
-    return []
-
-
-def save_json(path: str, data: list):
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=4, ensure_ascii=False)
-
 
 async def run():
     logger.info("🚀 Iniciando scrape_tools.py")
@@ -50,9 +37,9 @@ async def run():
 
     herramientas_path = os.path.join(CONFIG["FOLDER"], "herramientas.json")
     herramientas_hist = load_json(herramientas_path)
-    existing_urls = {h.get("enlace") for h in herramientas_hist if h.get("enlace")}
+    existing_urls = {h.get(ENLACE_KEY) for h in herramientas_hist if h.get(ENLACE_KEY)}
 
-    tool_sources = {k: v for k, v in FUENTES.items() if v.get("tipo") == "herramienta"}
+    tool_sources = {k: v for k, v in FUENTES.items() if v.get(TIPO_KEY) == TIPO_VAL_HERRAMIENTA}
     logger.info(f"🔧 Fuentes de herramientas: {list(tool_sources.keys())}")
 
     sem = asyncio.Semaphore(3)
@@ -70,7 +57,7 @@ async def run():
     nuevas = []
     for lista_res in resultados_agrupados:
         for item in lista_res:
-            enlace = item.get("enlace")
+            enlace = item.get(ENLACE_KEY)
             if enlace and enlace in existing_urls:
                 continue
             nuevas.append(item)

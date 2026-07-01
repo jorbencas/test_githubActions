@@ -17,9 +17,9 @@ from logging.handlers import RotatingFileHandler
 
 import aiohttp
 
-from constants_downloadfile import CONFIG, FUENTES
+from constants_downloadfile import CONFIG, FUENTES, YT_KEY, TIPO_KEY, QUICK_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY, ID_VIDEO_KEY
 from scraper_base import ScraperPro
-from utils import traducir_titulos_ia, deduplicar_items
+from utils import load_json, save_json, traducir_titulos_ia, deduplicar_items
 
 os.makedirs("logs", exist_ok=True)
 logging.basicConfig(
@@ -33,33 +33,34 @@ logging.basicConfig(
 logger = logging.getLogger("news")
 
 
-def load_json(path: str) -> list:
-    if os.path.exists(path):
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            return []
-    return []
 
-
-def save_json(path: str, data: list):
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=4, ensure_ascii=False)
+def _filtrar_fuentes_por_tier(tier: str) -> dict:
+    """Filtra FUENTES según el tier de scraping."""
+    todas = {k: v for k, v in FUENTES.items() if v.get(TIPO_KEY) != TIPO_VAL_HERRAMIENTA}
+    if tier == "full":
+        return todas
+    if tier == "standard":
+        return {k: v for k, v in todas.items() if YT_KEY not in v}
+    if tier == "light":
+        return {k: v for k, v in todas.items() if v.get(QUICK_KEY)}
+    logger.warning("⚠️ Tier '%s' desconocido. Usando full.", tier)
+    return todas
 
 
 async def run():
     parser = argparse.ArgumentParser(description="Scrape news sources")
     parser.add_argument("--limit", type=int, default=5, help="Máximo de requests simultáneos")
+    parser.add_argument("--tier", choices=["light", "standard", "full"], default="full",
+                        help="Tier de scraping: light (solo quick), standard (web), full (todo)")
     args = parser.parse_args()
 
-    logger.info("🚀 Iniciando scrape_news.py")
+    logger.info("🚀 Iniciando scrape_news.py (tier=%s)", args.tier)
     scr = ScraperPro()
 
     path_json = os.path.join(CONFIG["FOLDER"], "noticias_historico.json")
     historial = load_json(path_json)
-    existing_urls = {n.get("enlace") for n in historial if n.get("enlace")}
-    existing_video_ids = {n.get("id_video") for n in historial if n.get("id_video")}
+    existing_urls = {n.get(ENLACE_KEY) for n in historial if n.get(ENLACE_KEY)}
+    existing_video_ids = {n.get(ID_VIDEO_KEY) for n in historial if n.get(ID_VIDEO_KEY)}
 
     sem = asyncio.Semaphore(args.limit)
 
@@ -69,7 +70,7 @@ async def run():
             return await scr.extraer(session, nombre, info)
 
     connector = aiohttp.TCPConnector(ssl=False)
-    news_sources = {k: v for k, v in FUENTES.items() if v.get("tipo") != "herramienta"}
+    news_sources = _filtrar_fuentes_por_tier(args.tier)
 
     async with aiohttp.ClientSession(connector=connector) as session:
         tareas = [con_semaforo(session, nombre, info) for nombre, info in news_sources.items()]
@@ -78,8 +79,8 @@ async def run():
     nuevos = []
     for lista_res in resultados_agrupados:
         for item in lista_res:
-            enlace = item.get("enlace")
-            id_vid = item.get("id_video")
+            enlace = item.get(ENLACE_KEY)
+            id_vid = item.get(ID_VIDEO_KEY)
             if enlace and enlace in existing_urls:
                 continue
             if id_vid and id_vid in existing_video_ids:

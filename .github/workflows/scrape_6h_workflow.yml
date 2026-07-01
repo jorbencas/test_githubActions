@@ -1,11 +1,11 @@
-name: 🤖 Send Telegram Notification
+name: 🌐 Scraping Semidiario (tier standard)
 on:
   schedule:
-    - cron: "*/30 * * * *" # Cada 30 minutos
+    - cron: "0 */6 * * *" # Cada 6 horas
   workflow_dispatch:
 
 jobs:
-  send_telegram:
+  scrape_6h:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -21,17 +21,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: 🤖 Send Telegram
+      - name: 💻 Scrape news (tier standard — web sources)
         env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TOKEN_API_ID: ${{ secrets.TOKEN_API_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python send_telegram.py
-      - name: 💾 Persistir telegram_sent.json
+        run: python scrape_news.py --tier standard
+      - name: 📝 Push cambios
         if: always()
         run: |
           git config user.name jorbencas
           git config user.email jorbencas@gmail.com
-          git add telegram_sent.json
-          git diff --quiet --cached || git commit -m "[bot] update telegram sent log"
+          git add files/noticias_historico.json files/avatars_cache.json
+          git diff --quiet --cached || git commit -m "[bot] 6h scrape (tier standard)"
           git push origin master

@@ -5,6 +5,8 @@ import requests
 from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
+from constants_downloadfile import TIPO_KEY, ENLACE_KEY, TITULO_KEY, TS_KEY, ULTIMA_VERIF_KEY
+
 CONFIG = {
     "FOLDER": "files"
 }
@@ -17,7 +19,7 @@ def limpiar_y_validar_historial(historial):
     print(f"🧹 Iniciando limpieza y validación ({len(historial)} items)...")
     ahora = datetime.now()
 
-    solo_noticias = [x for x in historial if x.get('tipo') in ('noticia', None)]
+    solo_noticias = [x for x in historial if x.get(TIPO_KEY) in ('noticia', None)]
     vids_eliminados = len(historial) - len(solo_noticias)
     if vids_eliminados > 0:
         print(f"🗑️ Eliminados {vids_eliminados} vídeos/shorts (tipo != noticia).")
@@ -29,13 +31,13 @@ def limpiar_y_validar_historial(historial):
     items_intactos = []
 
     for item in solo_noticias:
-        ts_str = item.get('ts', ahora.isoformat()).replace('Z', '')
+        ts_str = item.get(TS_KEY, ahora.isoformat()).replace('Z', '')
         try:
             fecha_adicion = datetime.fromisoformat(ts_str)
         except (ValueError, TypeError):
             fecha_adicion = ahora
 
-        ultima_verif_str = item.get('ultima_verificacion')
+        ultima_verif_str = item.get(ULTIMA_VERIF_KEY)
         revisado_recientemente = False
 
         if ultima_verif_str:
@@ -58,8 +60,8 @@ def limpiar_y_validar_historial(historial):
     print(f"🔍 Validando {len(items_a_validar)} enlaces antiguos...")
 
     def chequear(item):
-        enlace = item.get('enlace')
-        titulo = item.get('titulo', 'Sin título')[:30]
+        enlace = item.get(ENLACE_KEY)
+        titulo = item.get(TITULO_KEY, 'Sin título')[:30]
         if not enlace:
             return None
         try:
@@ -70,7 +72,7 @@ def limpiar_y_validar_historial(historial):
             if 400 <= r.status_code < 600:
                 print(f"❌ Roto [{r.status_code}]: {titulo}...")
                 return None
-            item['ultima_verificacion'] = ahora.isoformat()
+            item[ULTIMA_VERIF_KEY] = ahora.isoformat()
             return item
         except requests.RequestException:
             return item

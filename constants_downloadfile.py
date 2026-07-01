@@ -32,8 +32,7 @@ TECH_KEYWORDS = [# Inteligencia Artificial
 "reto progrmación", "challenge", "kata", "ctf", "vulnerabilidad", "hack", "desafío"
 ]
 
-BECAS_KEYWORDS = ['beca', 'curso', 'ayuda', 'formación', 'subvención', 'taller']
-ALL_KEYWORDS = TECH_KEYWORDS + BECAS_KEYWORDS
+ALL_KEYWORDS = TECH_KEYWORDS
 
 CATEGORIAS = {
     "⚡ Hardware": ["NVIDIA", "H100", "Blackwell", "GPU", "NPU", "Apple Silicon", "M4",
@@ -57,8 +56,43 @@ CATEGORIAS = {
     "📊 Negocios": ["SaaS", "Startups", "Cloud", "Big Data", "Blockchain", "Web3",
                     "Fintech", "Cripto", "Metaverso", "IoT", "Automatización", "Open Source",
                     "inversión", "millon"],
-    "🎓 Becas/Formación": ["beca", "curso", "ayuda", "formación", "subvención", "taller",
-                           "bootcamp", "máster", "gratuito", "becado"],
+}
+
+
+SKILLS = {
+    "💻 Programación": ["Python", "JavaScript", "TypeScript", "Rust", "Go", "Java", "C#", "PHP", "Ruby", "Swift", "Kotlin", "Dart", "C", "C++", "Zig"],
+    "🤖 IA/ML": ["Machine Learning", "Deep Learning", "NLP", "Computer Vision", "Reinforcement Learning", "MLOps", "Fine-tuning", "RAG", "Agentes IA", "Prompt Engineering"],
+    "☁️ Cloud/DevOps": ["Docker", "Kubernetes", "AWS", "GCP", "Azure", "Terraform", "CI/CD", "Serverless", "GitHub Actions"],
+    "🔒 Seguridad": ["Pentesting", "CTF", "Bug Bounty", "Ciberseguridad", "Zero Trust", "OSINT", "Hacking"],
+    "📊 Datos": ["SQL", "NoSQL", "Big Data", "Data Analysis", "BI", "ETL", "Data Engineering"],
+}
+
+LLMS = {
+    "Propietarios": ["GPT-4", "GPT-4o", "GPT-4o-mini", "Claude 3.5 Sonnet", "Claude 3 Opus", "Gemini 1.5 Pro", "Gemini 2.5 Pro", "Gemini 2.5 Flash", "Grok", "Copilot"],
+    "Open Source": ["Llama 3.1", "Llama 3", "Mistral Large", "Mixtral", "DeepSeek V2", "DeepSeek Coder", "Qwen 2.5", "Phi-3", "Gemma 2", "Falcon 2", "Command R+"],
+    "Especializados": ["CodeLlama", "StarCoder", "SQLCoder", "BioMistral", "Meditron", "FinGPT"],
+}
+
+LENGUAJES = {
+    "Web": ["JavaScript", "TypeScript", "HTML", "CSS"],
+    "Sistema": ["Rust", "Go", "C", "C++", "Zig"],
+    "Datos/IA": ["Python", "R", "Julia", "SQL"],
+    "Mobile": ["Swift", "Kotlin", "Dart"],
+    "Empresarial": ["Java", "C#", "PHP", "Ruby"],
+}
+
+FRAMEWORKS = {
+    "Frontend": ["React", "Next.js", "Vue", "Nuxt", "Svelte", "Solid", "Astro", "Remix", "Angular", "Qwik"],
+    "Backend": ["Django", "FastAPI", "Flask", "Express", "NestJS", "Spring Boot", "Laravel", "ASP.NET", "Actix"],
+    "Mobile/Desktop": ["React Native", "Flutter", "SwiftUI", "Jetpack Compose", "Tauri", ".NET MAUI"],
+    "CSS/UI": ["Tailwind", "Bootstrap", "Material UI", "Shadcn/ui", "Chakra UI", "Radix UI"],
+}
+
+LIBRERIAS = {
+    "IA/ML": ["TensorFlow", "PyTorch", "LangChain", "LlamaIndex", "Hugging Face Transformers", "Scikit-learn", "XGBoost", "JAX"],
+    "Testing": ["Jest", "Playwright", "Vitest", "Cypress", "Pytest", "Selenium", "Testing Library"],
+    "DevOps": ["Ansible", "Prometheus", "Grafana", "Helm", "Vault", "Packer"],
+    "Utilidades": ["Lodash", "Day.js", "Zod", "React Query", "Prisma", "Drizzle ORM", "RxJS", "tRPC"],
 }
 
 
@@ -86,9 +120,8 @@ FUENTES = {
     "HolaMundo": {"yt": "https://www.youtube.com/@holamundodev/videos"},
     "Victor Robles": {"yt": "https://www.youtube.com/@victorroblesweb/videos"},
     "Xataka": {"url": "https://www.xataka.com/", "yt":"https://www.youtube.com/@xatakatv/videos"},
-    "Becas": {"url": "https://www.becas.com/noticias/"},
     "Genbeta": {"url": "https://www.genbeta.com/"},
-    "HobbyConsolas": {"url": "https://www.hobbyconsolas.com/"},
+    "HobbyConsolas": {"url": "https://www.hobbyconsolas.com/tags/temas/tecnologia.html"},
     "El País Tecnología": {"url": "https://elpais.com/tecnologia/"},
     "Levante-EMV": {"url": "https://www.levante-emv.com/"},
     "Fundación Carolina": {"url": "https://www.fundacioncarolina.es/"},
@@ -97,12 +130,10 @@ FUENTES = {
     "Wired": {"url": "https://www.wired.com/category/science/"},
     "The Verge": {"url": "https://www.theverge.com/tech"},
     "TechCrunch": {"url": "https://techcrunch.com/category/artificial-intelligence/"},
-    "Hacker News": {"url": "https://news.ycombinator.com/"},
     "GitHub Blog": {"url": "https://github.blog/category/engineering/"},
     "OpenAI": {"url": "https://openai.com/news/"},
     "Google AI": {"url": "https://blog.google/technology/ai/"},
     "NVIDIA Blog": {"url": "https://blogs.nvidia.com/blog/category/deep-learning/"},
-    "Dev.to": {"url": "https://dev.to/t/ai"},
     "Ars Technica": {"url": "https://arstechnica.com/gadgets/"},
     "Slashdot": {"url": "https://slashdot.org/", "selector": "h2.story-title a"},
     "HackTheBox": {"url": "https://www.hackthebox.com/blog/", "selector": ".blog-post-card h3"},
@@ -130,7 +161,6 @@ FUENTES = {
     "Claude Blog": {"url": "https://docs.anthropic.com/en/release-notes", "selector": "article h2 a"},
     "OpenCode": {"url": "https://opencode.ai"},
     "Google Research": {"url": "https://research.google/blog/", "selector": "article h2 a"},
-    "Google DeepMind": {"url": "https://deepmind.google/discover/blog/", "selector": "h3.card__title"},
     "Google Cloud AI": {"url": "https://cloud.google.com/blog/products/ai-machine-learning", "selector": "article h3 a"},
     "Google AI Dev": {"url": "https://ai.google.dev/"},
     "Microsoft AI": {"url": "https://blogs.microsoft.com/ai/", "selector": "article h2 a"},
@@ -172,6 +202,8 @@ FUENTES = {
     "Nethermind": {"yt": "https://www.youtube.com/@NethermindDev/videos"},
     "Nethermind Twitter": {"url": "https://x.com/NethermindDev", "selector": "article[data-testid='tweet'] div[lang]"},
     "Develoteca": {"yt": "https://www.youtube.com/@Develoteca/videos"},
+    "Linkfydev": {"yt": "https://www.youtube.com/@Linkfydev/videos"},
+    "Esa Operativa": {"yt": "https://www.youtube.com/@EsaOperativa/videos"},
     "Programador X": {"yt": "https://www.youtube.com/@ProgramadorX/videos"},
     "Programador X Twitter": {"url": "https://x.com/programadorx", "selector": "article[data-testid='tweet'] div[lang]"},
     # ── Tech news ──
@@ -186,6 +218,11 @@ FUENTES = {
     "CSS-Tricks": {"url": "https://css-tricks.com/", "selector": "article h2 a"},
     "freeCodeCamp": {"url": "https://www.freecodecamp.org/news/", "selector": "article h2 a"},
     "DigitalOcean": {"url": "https://www.digitalocean.com/blog", "selector": "a[class*='blog-card'] h3"},
+    # ── Fuentes de modelos de IA ──
+    "MiniMax": {"url": "https://minimax.io/blog", "selector": "article h2 a"},
+    "DeepSeek": {"url": "https://deepseek.com/blog", "selector": "article h2 a"},
+    "Qwen": {"url": "https://qwen.readthedocs.io/en/latest/", "selector": "article h2 a"},
+    "AI21 Labs": {"url": "https://www.ai21.com/blog", "selector": "article h2 a"},
     # ── Más fuentes IA y tecnología ──
     "The Decoder": {"url": "https://the-decoder.com/"},
     "MarkTechPost": {"url": "https://www.marktechpost.com/"},
@@ -202,27 +239,32 @@ FUENTES = {
     "Vercel Twitter": {"url": "https://x.com/vercel", "selector": "article[data-testid='tweet'] div[lang]"},
     "Astro Twitter": {"url": "https://x.com/astrodotbuild", "selector": "article[data-testid='tweet'] div[lang]"},
     "dotpige Twitter": {"url": "https://x.com/dotpige", "selector": "article[data-testid='tweet'] div[lang]"},
-    # ── Fuentes RSS (lectores XML) ──
-    "OpenAI Blog": {"rss": "https://openai.com/news/feed.xml"},
-    "Anthropic Blog": {"rss": "https://www.anthropic.com/feed.xml"},
-    "Google DeepMind": {"rss": "https://deepmind.google/blog/rss/"},
-    "Meta AI Blog": {"rss": "https://ai.meta.com/blog/rss/"},
-    "Mistral AI News": {"rss": "https://mistral.ai/feed.xml"},
-    "GitHub Engineering": {"rss": "https://github.blog/engineering/feed/"},
-    "Stack Overflow Blog": {"rss": "https://stackoverflow.blog/feed/"},
-    "Hacker News": {"rss": "https://hnrss.org/frontpage"},
-    "LangChain Blog": {"rss": "https://blog.langchain.dev/feed/"},
-    "Google AI Blog": {"rss": "https://blog.google/technology/ai/rss/"},
-    "MIT Tech Review AI": {"rss": "https://www.technologyreview.com/topic/artificial-intelligence/feed/"},
-    "Google Search Central": {"rss": "https://developers.google.com/search/blog/feed.xml"},
-    "Google Developers": {"rss": "https://developers.googleblog.com/feed.xml"},
-    "Moz Blog SEO": {"rss": "https://moz.com/blog/feed.xml"},
-    "Search Engine Journal": {"rss": "https://www.searchenginejournal.com/feed/"},
-    "Wired AI": {"rss": "https://www.wired.com/feed/rss"},
-    "The Verge AI": {"rss": "https://www.theverge.com/ai-artificial-intelligence/rss.xml"},
-    "TechCrunch AI": {"rss": "https://techcrunch.com/category/artificial-intelligence/feed/"},
-    "Ars Technica AI": {"rss": "https://feeds.arstechnica.com/arstechnica/index"},
-    "Dev.to": {"rss": "https://dev.to/feed"},
+    "This Week in React Instagram": {"url": "https://www.instagram.com/thisweekinreact/", "selector": "article a[href*='/p/']"},
+    "TikTok Tech": {"url": "https://www.tiktok.com/@tech", "selector": "div[data-e2e='search_video-item'] a"},
+    "Python Hub Instagram": {"url": "https://www.instagram.com/python.hub/", "selector": "article a[href*='/p/']"},
+    # ── Fuentes RSS (lectores XML) [quick: True → tier light] ──
+    "OpenAI Blog": {"rss": "https://openai.com/news/feed.xml", "quick": True},
+    "Anthropic Blog": {"rss": "https://www.anthropic.com/feed.xml", "quick": True},
+    "Google DeepMind": {"rss": "https://deepmind.google/blog/rss/", "quick": True},
+    "Meta AI Blog": {"rss": "https://ai.meta.com/blog/rss/", "quick": True},
+    "Mistral AI News": {"rss": "https://mistral.ai/feed.xml", "quick": True},
+    "GitHub Engineering": {"rss": "https://github.blog/engineering/feed/", "quick": True},
+    "Stack Overflow Blog": {"rss": "https://stackoverflow.blog/feed/", "quick": True},
+    "Hacker News": {"rss": "https://hnrss.org/frontpage", "quick": True},
+    "LangChain Blog": {"rss": "https://blog.langchain.dev/feed/", "quick": True},
+    "Google AI Blog": {"rss": "https://blog.google/technology/ai/rss/", "quick": True},
+    "MIT Tech Review AI": {"rss": "https://www.technologyreview.com/topic/artificial-intelligence/feed/", "quick": True},
+    "Google Search Central": {"rss": "https://developers.google.com/search/blog/feed.xml", "quick": True},
+    "Google Developers": {"rss": "https://developers.googleblog.com/feed.xml", "quick": True},
+    "Moz Blog SEO": {"rss": "https://moz.com/blog/feed.xml", "quick": True},
+    "Search Engine Journal": {"rss": "https://www.searchenginejournal.com/feed/", "quick": True},
+    "Wired AI": {"rss": "https://www.wired.com/feed/rss", "quick": True},
+    "The Verge AI": {"rss": "https://www.theverge.com/ai-artificial-intelligence/rss.xml", "quick": True},
+    "TechCrunch AI": {"rss": "https://techcrunch.com/category/artificial-intelligence/feed/", "quick": True},
+    "Ars Technica AI": {"rss": "https://feeds.arstechnica.com/arstechnica/index", "quick": True},
+    "Dev.to": {"rss": "https://dev.to/feed", "quick": True},
+    "Cohere RSS": {"rss": "https://cohere.com/blog/rss.xml", "quick": True},
+    "Hugging Face Daily Papers": {"rss": "https://huggingface.co/papers/feed", "quick": True},
     # ── Fuentes de herramientas ──
     "GitHub Trending": {"url": "https://github.com/trending", "tipo": "herramienta", "subtipo": "github"},
     "Product Hunt": {"url": "https://www.producthunt.com/", "tipo": "herramienta", "subtipo": "producthunt"},
@@ -235,7 +277,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
     <meta name="author" content="Jorge Beneyto Castelló">
-    <meta name="description" content="Tech Pulse Dashboard — Resumen inteligente de noticias tech, v\u00eddeos, becas y contenido curado por Jorge Beneyto Castell\u00f3. Actualizado diariamente con IA.">
+    <meta name="description" content="Tech Pulse Dashboard — Resumen inteligente de noticias tech, v\u00eddeos y contenido curado por Jorge Beneyto Castell\u00f3. Actualizado diariamente con IA.">
     <meta property="og:title" content="Tech Pulse Dashboard — Jorge Beneyto Castell\u00f3">
     <meta property="og:description" content="Dashboard de tecnolog\u00eda con resumen IA, filtros por canal y fecha, v\u00eddeos y shorts de YouTube. Curado por Jorge Beneyto Castell\u00f3.">
     <meta property="og:type" content="website">
@@ -282,6 +324,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
         <h2>\U0001f4f0 Noticias</h2>
         <div class="filter-section">
+            <strong>\U0001f4e1 Tipo de fuente:</strong>
+            <div id="news-tipo-fuente-filters" class="chip-container"></div>
+        </div>
+        <div class="filter-section">
             <strong>\U0001f3af Categoría:</strong>
             <div id="news-category-filters" class="chip-container"></div>
         </div>
@@ -305,18 +351,22 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </div>
         <ul id="news-list" class="news-list"></ul>
 
-        <h2>\U0001f4fa Multimedia (V\u00eddeos y Shorts)</h2>
+        <h2>\U0001f3ac Multimedia</h2>
         <div class="filter-section">
+            <strong>\U0001f4fa Tipo:</strong>
+            <div id="multimedia-tabs" class="chip-container"></div>
+        </div>
+        <div class="filter-section" id="multimedia-filter-section">
             <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
                 <strong>\U0001f4c5 Tiempo:</strong>
                 <div id="video-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
             </div>
         </div>
-        <div class="filter-section">
+        <div class="filter-section" id="multimedia-channel-section">
             <strong>\U0001f4fa Filtro Canal:</strong>
             <div id="video-channel-filters" class="chip-container"></div>
         </div>
-        <div id="video-grid" class="video-grid"></div>
+        <div id="multimedia-content" class="video-grid"></div>
 
         <h2>\u2b50 Ranking GitHub Stars</h2>
         <div class="filter-section">
@@ -324,11 +374,18 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             <input type="text" id="github-filter" placeholder="Buscar por nombre o lenguaje..." style="padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; width: 100%; max-width: 400px; margin-top: 8px; font-size: 14px;">
         </div>
         <div id="github-ranking"></div>
+
+        <h2 style="margin-top:40px;cursor:pointer;" onclick="this.nextElementSibling.classList.toggle('visible')">📚 Referencia <small style="font-size:0.6em;color:#666;">(click para mostrar/ocultar)</small></h2>
+        <div id="reference-section" style="display:none;">
+            <div class="filter-section"><strong>🛠️ Skills</strong><div id="ref-skills" class="chip-container"></div></div>
+            <div class="filter-section"><strong>🧠 LLMs</strong><div id="ref-llms" class="chip-container"></div></div>
+            <div class="filter-section"><strong>📝 Lenguajes</strong><div id="ref-lenguajes" class="chip-container"></div></div>
+            <div class="filter-section"><strong>📦 Frameworks</strong><div id="ref-frameworks" class="chip-container"></div></div>
+            <div class="filter-section"><strong>📚 Librerías</strong><div id="ref-librerias" class="chip-container"></div></div>
+        </div>
     </div>
 </body>
 <script>
-  const API_BASE = "{api_url}";
-  const TOKEN = "{api_token}";
   const DATA_URL = "data.json";
 </script>
 <script src="script.js"></script>
@@ -373,7 +430,7 @@ EMAIL_TEMPLATE = """
 <body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased;">
     
     <div style="display: none; max-height: 0px; overflow: hidden;">
-        {total_noticias} novedades tech · {count_tech} noticias · {count_becas} becas · resumen generado por IA · {temas_clave}
+        {total_noticias} noticias tech · {count_tech} tech · resumen generado por IA · {temas_clave}
     </div>
 
     <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="container dark-card" style="max-width: 600px; background-color: #ffffff; margin: 30px auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05); overflow: hidden; border: 1px solid #e2e8f0;">
@@ -400,17 +457,13 @@ EMAIL_TEMPLATE = """
             <td class="content" style="padding: 24px 40px 0 40px;">
                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="stat-table dark-stats" style="background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; padding: 16px; text-align: center;">
                     <tr>
-                        <td width="33%" class="stat-cell" style="vertical-align: top;">
+                        <td width="50%" class="stat-cell" style="vertical-align: top;">
                             <b style="font-size: 22px; color: #4f46e5; font-weight: 800;">{count_tech}</b><br>
                             <span style="font-size: 12px; font-weight: 600; color: #64748b; display: inline-block; margin-top: 4px;">Noticias Tech</span>
                         </td>
-                        <td width="33%" class="stat-cell stat-border" style="vertical-align: top; border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0;">
-                            <b style="font-size: 22px; color: #16a34a; font-weight: 800;">{count_becas}</b><br>
-                            <span style="font-size: 12px; font-weight: 600; color: #64748b; display: inline-block; margin-top: 4px;">Becas / Ayudas</span>
-                        </td>
-                        <td width="33%" class="stat-cell" style="vertical-align: top;">
-                            <b style="font-size: 22px; color: #dc2626; font-weight: 800;">{count_vids}</b><br>
-                            <span style="font-size: 12px; font-weight: 600; color: #64748b; display: inline-block; margin-top: 4px;">Multimedia</span>
+                        <td width="50%" class="stat-cell" style="vertical-align: top; border-left: 1px solid #e2e8f0;">
+                            <b style="font-size: 22px; color: #dc2626; font-weight: 800;">{total_noticias}</b><br>
+                            <span style="font-size: 12px; font-weight: 600; color: #64748b; display: inline-block; margin-top: 4px;">Total Hoy</span>
                         </td>
                     </tr>
                 </table>
@@ -553,3 +606,191 @@ Ensure the composition is balanced and suitable for a tech article header.
 Highly detailed, photorealistic, 8k resolution, modern aesthetic, professional photography style.
 IMPORTANT: Do NOT include any text, letters, numbers, labels, or watermarks in the image.
 """
+
+# ── AI Prompts ──
+PROMPT_RESUMIR_LOTE = """Eres un editor de newsletter tech. Escribe un párrafo de 2-3 líneas en español
+que introduzca los titulares del día. Sé directo, sin florituras. Menciona
+temas generales (IA, programación, hardware...) si aplican.
+
+TITULARES:
+{texto}
+
+RESPONDE SOLO EL PÁRRAFO, sin intro ni etiquetas. Máx 300 caracteres."""
+
+PROMPT_RESUMIR_NOTICIA = """Eres un periodista de tecnología que escribe resúmenes de 3-4 líneas en español.
+Resume la siguiente noticia de forma concisa y directa, destacando:
+- Qué ha ocurrido exactamente
+- Por qué es relevante para el sector tech
+- Un dato concreto si aparece en el texto
+
+TÍTULO: {titulo}
+FUENTE: {fuente}
+TEXTO:
+{texto}
+
+Responde SOLO con el resumen, sin introducciones ni etiquetas. (máx 500 caracteres)"""
+
+PROMPT_RECAP_SEMANAL = """Eres un editor senior de tecnología con estilo cercano pero analítico (como una mezcla de Xataka y El Pingüino de Mario).
+Analiza estos titulares y genera un RECAP SEMANAL DETALLADO.
+
+NORMAS DE ESTILO:
+- Voz directa, sin intro genérica tipo "en un mundo digital..."
+- Asume que el lector ya sigue tecnología, ve al grano
+- Si una noticia es hype sin sustancia, menciónalo
+- NO uses markdown dentro del JSON (ni **, ni ###, ni ---)
+- Sé específico: menciona nombres de productos, empresas, versiones
+- Aporta contexto: no solo digas qué pasó, di por qué es relevante ahora
+- Menciona la categoria (IA, Programación, Hardware, etc.) de las noticias destacadas
+- Si hay noticias destacadas de fuente RSS, menciónalo
+
+RESUMEN DE LA SEMANA:
+- Categorías con más actividad:
+{resumen_cats}
+- Noticias vía RSS: {total_rss}
+
+NOTICIAS:
+{texto_noticias}
+
+RESPONDE EXCLUSIVAMENTE UN JSON VÁLIDO (sin markdown ni comentarios):
+{{
+  "introduccion": "Párrafo analítico de 4-6 líneas conectando las tendencias clave de la semana. Menciona al menos 2-3 temas concretos y sus categorías. (max 700 chars)",
+  "noticias_destacadas": [
+    {{
+      "titulo": "Título descriptivo del primer tema destacado (incluye la categoria si aplica)",
+      "suceso": "Qué ocurrió exactamente, con detalles concretos (2-3 líneas)",
+      "impacto": "Por qué importa para el lector y qué implicaciones tiene (2-3 líneas)"
+    }},
+    {{
+      "titulo": "Título descriptivo del segundo tema destacado (incluye la categoria si aplica)",
+      "suceso": "Qué ocurrió exactamente, con detalles concretos (2-3 líneas)",
+      "impacto": "Por qué importa para el lector y qué implicaciones tiene (2-3 líneas)"
+    }},
+    {{
+      "titulo": "Título descriptivo del tercer tema destacado (incluye la categoria si aplica)",
+      "suceso": "Qué ocurrió exactamente, con detalles concretos (2-3 líneas)",
+      "impacto": "Por qué importa para el lector y qué implicaciones tiene (2-3 líneas)"
+    }}
+  ],
+  "repo": {{
+    "nombre": "Nombre del repo/herramienta destacado de la semana",
+    "url": "URL del repo",
+    "desc": "Utilidad práctica en 1-2 frases, explicando el problema que resuelve"
+  }},
+  "tldr": ["Punto clave 1 con contexto (max 160 chars)", "Punto clave 2 con contexto (max 160 chars)", "Punto clave 3 con contexto (max 160 chars)", "Punto clave 4 con contexto (max 160 chars)"],
+  "tags": ["tech", "tag_especifico1", "tag_especifico2", "tag_especifico3"],
+  "sneak_peek": "Un párrafo breve sobre qué esperar la próxima semana, con predicciones concretas basadas en los temas actuales. Sin promesas vacías. (max 350 chars)",
+  "nota_personal": "Reflexión genuina en 2-3 líneas, como si se lo dijeras a un colega. Menciona algún aprendizaje o sorpresa de la semana. (max 320 chars)"
+}}"""
+
+PROMPT_TRADUCIR_TITULOS = """Traduce estos titulares de tecnología al español de forma profesional y natural.
+Mantén nombres propios, marcas y acrónimos (OpenAI, NVIDIA, iPhone, etc.) sin traducir.
+Conserva el formato "id|título" en la respuesta.
+Devuelve SOLO JSON, sin markdown ni explicaciones.
+
+TEXTO:
+{texto_a_traducir}
+
+FORMATO:
+{{"traducciones": [{{"id": 0, "tr": "Título traducido 0"}}, {{"id": 1, "tr": "Título traducido 1"}}]}}"""
+
+# ── Fallback values ──
+FALLBACK_IMAGE_URL = "public/img/arquitectura_web.webp"
+FALLBACK_GITHUB_IMAGE = "https://github.com/jorbencas/test_githubActions/blob/master/public/optimizado/Image.png?raw=true"
+FALLBACK_SNEAK_PEEK = "Seguiremos de cerca la evolución del sector. ¡No te lo pierdas!"
+FALLBACK_NOTA_PERSONAL = "Keep coding!"
+FALLBACK_RECAP_INTRO = "Esta semana hemos seguido de cerca las principales tendencias en tecnología y desarrollo."
+
+# ── Telegram ──
+TELEGRAM_TTS_VOZ = "es-ES-AlvaroNeural"
+TELEGRAM_DASHBOARD_URL = "http://jorbencasdownloaderdocument.surge.sh"
+TELEGRAM_MENSAJE_TEMPLATE = "{icono} *{titulo}*\n📰 `{fuente}` | `{fecha}`\n\n{cuerpo}\n🔗 [Abrir noticia]({enlace})\n🌐 [Ver más en el Dashboard]({dashboard_url})"
+
+# ── Email ──
+EMAIL_ROW_TEMPLATE = """<tr>
+    <td style="padding: 16px 0; border-bottom: 1px solid #f1f5f9;">
+        <span style="font-size: 18px; margin-right: 8px; vertical-align: middle;">{icon}</span>
+        <span style="color: #64748b; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; vertical-align: middle;">{fuente}</span><br>
+        <div style="margin-top: 4px;">
+            <a href="{enlace}" target="_blank" style="color: #4f46e5; text-decoration: none; font-weight: 600; font-size: 15px; line-height: 1.4;">{titulo}</a>
+        </div>
+        {resumen_html}
+    </td>
+</tr>"""
+
+# ── JS config (inyectado en data.json) ──
+JS_CONFIG = {
+    "ALL_YT_CHANNELS": [
+        "MoureDev", "Midudev", "Pelado Nerd", "HolaMundo", "FreeCodeCamp",
+        "Fazt", "Clipset", "CodelyTV", "EDteam", "Programa Con Arnau",
+        "El Pingüino de Mario", "Carlos Azaustre", "Código facilito", "Víctor Robles",
+        "LinkTV", "Ringa Tech", "Nethermind", "Develoteca", "Programador X",
+        "Linkfydev", "Esa Operativa", "Xataka",
+    ],
+    "TABS_MULTIMEDIA": [
+        {"id": "youtube", "label": "🎬 YouTube"},
+        {"id": "tiktok", "label": "🎵 TikTok"},
+        {"id": "instagram", "label": "📸 Instagram"},
+    ],
+    "FILTRO_TIPO_FUENTE": [
+        {"id": "all", "label": "Todas"},
+        {"id": "youtube", "label": "🎬 YouTube"},
+        {"id": "web", "label": "🌐 Web"},
+        {"id": "rss", "label": "📡 RSS"},
+        {"id": "twitter", "label": "🐦 Twitter/X"},
+    ],
+    "FILTRO_BADGE": [
+        {"id": "all", "label": "Todas"},
+        {"id": "Tech", "label": "💻 Tech"},
+        {"id": "RSS", "label": "📡 RSS"},
+    ],
+    "EMOJIS_CATEGORIA": "⚡🤖💻🐳🔒📊🎓💡",
+    "DASHBOARD_URL": "http://jorbencasdownloaderdocument.surge.sh",
+}
+
+# ── Dict key constants ──
+YT_KEY = "yt"
+RSS_KEY = "rss"
+URL_KEY = "url"
+TIPO_KEY = "tipo"
+SUBTIPO_KEY = "subtipo"
+QUICK_KEY = "quick"
+SELECTOR_KEY = "selector"
+ORIGEN_KEY = "origen"
+BADGE_KEY = "badge"
+SUB_VAL_GITHUB = "github"
+SUB_VAL_GITHUB_TOPIC = "github-topic"
+SUB_VAL_GITHUB_COLLECTION = "github-collection"
+SUB_VAL_PRODUCTHUNT = "producthunt"
+TIPO_VAL_HERRAMIENTA = "herramienta"
+TIPO_VAL_NOTICIA = "noticia"
+TIPO_VAL_VIDEO = "video"
+TIPO_VAL_SHORTS = "shorts"
+TIPO_VAL_LIVE = "live"
+TIPO_VAL_TREND = "trend"
+TIPO_VAL_SOCIAL = "social"
+VAL_RSS = "rss"
+VAL_TECH = "Tech"
+
+# ── Item schema key constants ──
+ENLACE_KEY = "enlace"
+FUENTE_KEY = "fuente"
+TITULO_KEY = "titulo"
+CATEGORIA_KEY = "categoria"
+ESTRELLAS_KEY = "estrellas"
+DESCRIPCION_KEY = "descripcion"
+LENGUAJE_KEY = "lenguaje"
+REPO_KEY = "repo"
+TS_KEY = "ts"
+F_KEY = "f"
+FECHA_REAL_KEY = "fecha_real"
+FECHA_PUB_KEY = "fecha_publicacion"
+ID_VIDEO_KEY = "id_video"
+IMAGEN_URL_KEY = "imagen_url_original"
+ULTIMA_VERIF_KEY = "ultima_verificacion"
+
+# ── Fuentes inglesas para traducción automática ──
+FUENTES_INGLES = [
+    "wired", "verge", "techcrunch", "github", "openai", "hacker news",
+    "ars", "nvidia", "anthropic", "venturebeat", "mit", "hugging face",
+    "google ai", "deepmind", "dev.to",
+]

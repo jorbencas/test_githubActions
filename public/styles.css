@@ -50,7 +50,6 @@ a:hover { text-decoration: underline; }
 
 .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7em; font-weight: bold; text-transform: uppercase; margin-right: 8px; vertical-align: middle; }
 .badge-tech { background: #e3f2fd; color: #1976d2; border: 1px solid #1976d2; }
-.badge-beca { background: #e8f5e9; color: #2e7d32; border: 1px solid #2e7d32; }
 .badge-rss { background: #e1f5fe; color: #0277bd; border: 1px solid #0277bd; }
 .badge-cat { background: #f3e8ff; color: #7c3aed; border: 1px solid #7c3aed; }
 

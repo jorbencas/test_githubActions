@@ -16,7 +16,7 @@ import aiohttp
 import requests
 from bs4 import BeautifulSoup
 
-from constants_downloadfile import ALL_KEYWORDS, BECAS_KEYWORDS, CATEGORIAS, CONFIG, clasificar_noticia
+from constants_downloadfile import ALL_KEYWORDS, CATEGORIAS, CONFIG, clasificar_noticia, YT_KEY, RSS_KEY, URL_KEY, TIPO_KEY, SUBTIPO_KEY, SELECTOR_KEY, ORIGEN_KEY, BADGE_KEY, TIPO_VAL_HERRAMIENTA, TIPO_VAL_NOTICIA, TIPO_VAL_VIDEO, TIPO_VAL_SHORTS, TIPO_VAL_LIVE, SUB_VAL_GITHUB, SUB_VAL_GITHUB_TOPIC, SUB_VAL_GITHUB_COLLECTION, SUB_VAL_PRODUCTHUNT, VAL_RSS, VAL_TECH, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, CATEGORIA_KEY, ESTRELLAS_KEY, DESCRIPCION_KEY, LENGUAJE_KEY, REPO_KEY, TS_KEY, F_KEY, FECHA_REAL_KEY, FECHA_PUB_KEY, ID_VIDEO_KEY, IMAGEN_URL_KEY
 from xml.etree import ElementTree
 
 logger = logging.getLogger("scraper_base")
@@ -31,10 +31,6 @@ class ContentFilter:
     def coincide_con_keywords(titulo: str) -> bool:
         t_low = titulo.lower()
         return any(key.lower() in t_low for key in ALL_KEYWORDS)
-
-    @staticmethod
-    def es_beca(titulo: str) -> bool:
-        return any(k in titulo.lower() for k in BECAS_KEYWORDS)
 
     @staticmethod
     def es_reto(titulo: str) -> bool:
@@ -94,21 +90,21 @@ class BaseExtractor:
 
     def generar_item_base(self, titulo: str, enlace: str, fuente: str, tipo: str, fecha_relativa: str = "") -> dict:
         return {
-            "titulo": html.unescape(titulo),
-            "enlace": enlace,
-            "fuente": fuente,
-            "tipo": tipo,
-            "f": datetime.now().strftime("%d/%m"),
-            "fecha_publicacion": fecha_relativa,
+            TITULO_KEY: html.unescape(titulo),
+            ENLACE_KEY: enlace,
+            FUENTE_KEY: fuente,
+            TIPO_KEY: tipo,
+            F_KEY: datetime.now().strftime("%d/%m"),
+            FECHA_PUB_KEY: fecha_relativa,
         }
 
     def enriquecer_fechas(self, item: dict) -> dict:
         item.update({
-            "fecha_real": datetime.now().strftime("%d/%m/%Y"),
-            "ts": datetime.now().isoformat(),
+            FECHA_REAL_KEY: datetime.now().strftime("%d/%m/%Y"),
+            TS_KEY: datetime.now().isoformat(),
         })
-        if "categoria" not in item:
-            item["categoria"] = clasificar_noticia(item.get("titulo", ""))
+        if CATEGORIA_KEY not in item:
+            item[CATEGORIA_KEY] = clasificar_noticia(item.get(TITULO_KEY, ""))
         return item
 
 
@@ -149,9 +145,9 @@ class YouTubeExtractor(BaseExtractor):
                     continue
                 if video_id and titulo_limpio:
                     res_item = self.generar_item_base(
-                        titulo_limpio, f"https://www.youtube.com/watch?v={video_id}", nombre, "video", fecha_relativa
+                        titulo_limpio, f"https://www.youtube.com/watch?v={video_id}", nombre, TIPO_VAL_VIDEO, fecha_relativa
                     )
-                    res_item["id_video"] = video_id
+                    res_item[ID_VIDEO_KEY] = video_id
                     results.append(self.enriquecer_fechas(res_item))
                 continue
 
@@ -163,9 +159,9 @@ class YouTubeExtractor(BaseExtractor):
                 titulo_limpio = s_lockup.get("overlayMetadata", {}).get("primaryText", {}).get("content", "")
                 if video_id and titulo_limpio:
                     res_item = self.generar_item_base(
-                        titulo_limpio, f"https://www.youtube.com/watch?v={video_id}", nombre, "shorts", ""
+                        titulo_limpio, f"https://www.youtube.com/watch?v={video_id}", nombre, TIPO_VAL_SHORTS, ""
                     )
-                    res_item["id_video"] = video_id
+                    res_item[ID_VIDEO_KEY] = video_id
                     results.append(self.enriquecer_fechas(res_item))
                 continue
 
@@ -208,10 +204,10 @@ class YouTubeExtractor(BaseExtractor):
                 titulo_limpio,
                 f"https://www.youtube.com/watch?v={video_id}",
                 nombre,
-                "shorts" if es_short else ("live" if es_live else "video"),
+                TIPO_VAL_SHORTS if es_short else (TIPO_VAL_LIVE if es_live else TIPO_VAL_VIDEO),
                 fecha_relativa,
             )
-            res_item["id_video"] = video_id
+            res_item[ID_VIDEO_KEY] = video_id
             results.append(self.enriquecer_fechas(res_item))
 
         return results
@@ -224,7 +220,7 @@ class YouTubeExtractor(BaseExtractor):
             r'{"videoRenderer":{"videoId":".*?","thumbnail":.*?,"title":{"runs":\[{"text":"(.*?)"}\]', html_text
         )
         for t, i in zip(titles[:5], ids[:5]):
-            results.append(self.generar_item_base(t, f"https://www.youtube.com/watch?v={i}", nombre, "video"))
+            results.append(self.generar_item_base(t, f"https://www.youtube.com/watch?v={i}", nombre, TIPO_VAL_VIDEO))
         return results
 
 
@@ -232,7 +228,7 @@ class WebExtractor(BaseExtractor):
     def extraer_noticias(self, html_text: str, nombre: str, target: str, info: dict) -> list:
         results = []
         soup = BeautifulSoup(html_text, "html.parser")
-        selector = info.get("selector", "article h2 a, h3 a, h2 a, .post-title a")
+        selector = info.get(SELECTOR_KEY, "article h2 a, h3 a, h2 a, .post-title a")
         items = soup.select(selector)[:10]
 
         for i in items:
@@ -259,11 +255,11 @@ class WebExtractor(BaseExtractor):
                         meta_date = soup.find("meta", property="article:published_time")
                         if meta_date:
                             fecha_pub = meta_date["content"]
-                item = self.generar_item_base(t_raw, enlace, nombre, "noticia", fecha_pub)
+                item = self.generar_item_base(t_raw, enlace, nombre, TIPO_VAL_NOTICIA, fecha_pub)
                 item.update({
-                    "badge": "Beca" if ContentFilter.es_beca(t_raw) else "Tech",
-                    "categoria": clasificar_noticia(t_raw),
-                    "imagen_url_original": urljoin(target, img_url) if img_url else "",
+                    BADGE_KEY: VAL_TECH,
+                    CATEGORIA_KEY: clasificar_noticia(t_raw),
+                    IMAGEN_URL_KEY: urljoin(target, img_url) if img_url else "",
                 })
                 results.append(self.enriquecer_fechas(item))
         return results
@@ -286,11 +282,11 @@ class WebExtractor(BaseExtractor):
                     enlace = link_el.get("href") if link_el is not None else ""
                     fecha = entry.findtext("{http://www.w3.org/2005/Atom}published", "") or entry.findtext("{http://www.w3.org/2005/Atom}updated", "")
                     if titulo and enlace:
-                        item = self.generar_item_base(titulo, enlace, nombre, "noticia", fecha)
+                        item = self.generar_item_base(titulo, enlace, nombre, TIPO_VAL_NOTICIA, fecha)
                         item.update({
-                            "badge": "Beca" if ContentFilter.es_beca(titulo) else "Tech",
-                            "categoria": clasificar_noticia(titulo),
-                            "origen": "rss",
+                            BADGE_KEY: VAL_TECH,
+                            CATEGORIA_KEY: clasificar_noticia(titulo),
+                            ORIGEN_KEY: VAL_RSS,
                         })
                         results.append(self.enriquecer_fechas(item))
                 return results
@@ -299,11 +295,11 @@ class WebExtractor(BaseExtractor):
                 enlace = i.findtext("link", "")
                 fecha = i.findtext("pubDate", "") or i.findtext("dc:date", "", ns)
                 if titulo and enlace:
-                    item = self.generar_item_base(titulo, enlace, nombre, "noticia", fecha)
+                    item = self.generar_item_base(titulo, enlace, nombre, TIPO_VAL_NOTICIA, fecha)
                     item.update({
-                        "badge": "Beca" if ContentFilter.es_beca(titulo) else "Tech",
-                        "categoria": clasificar_noticia(titulo),
-                        "origen": "rss",
+                        BADGE_KEY: VAL_TECH,
+                        CATEGORIA_KEY: clasificar_noticia(titulo),
+                        ORIGEN_KEY: VAL_RSS,
                     })
                     results.append(self.enriquecer_fechas(item))
         except Exception as e:
@@ -313,9 +309,9 @@ class WebExtractor(BaseExtractor):
     def extraer_herramientas(self, html_text: str, nombre: str, target: str, info: dict) -> list:
         results = []
         soup = BeautifulSoup(html_text, "html.parser")
-        subtipo = info.get("subtipo", "")
+        subtipo = info.get(SUBTIPO_KEY, "")
 
-        if subtipo == "github":
+        if subtipo == SUB_VAL_GITHUB:
             articles = soup.select("article.Box-row") or soup.select('[class*="Box-row"]')
             for article in articles[:15]:
                 h2_a = article.select_one("h2 a")
@@ -332,17 +328,17 @@ class WebExtractor(BaseExtractor):
                 stars = stars_a.get_text(strip=True) if stars_a else "0"
                 stars = stars.replace("★", "").replace("☆", "").replace(",", "").strip()
                 title = raw_title if raw_title else href.strip("/").split("/")[-1]
-                item = self.generar_item_base(title, full_url, nombre, "herramienta")
+                item = self.generar_item_base(title, full_url, nombre, TIPO_VAL_HERRAMIENTA)
                 item.update({
-                    "subtipo": subtipo,
-                    "descripcion": desc.strip(),
-                    "lenguaje": lang.strip(),
-                    "estrellas": stars.strip(),
-                    "repo": href.strip("/") if href else "",
+                    SUBTIPO_KEY: subtipo,
+                    DESCRIPCION_KEY: desc.strip(),
+                    LENGUAJE_KEY: lang.strip(),
+                    ESTRELLAS_KEY: stars.strip(),
+                    REPO_KEY: href.strip("/") if href else "",
                 })
                 results.append(self.enriquecer_fechas(item))
 
-        elif subtipo == "producthunt":
+        elif subtipo == SUB_VAL_PRODUCTHUNT:
             next_data = soup.find("script", id="__NEXT_DATA__")
             if next_data and next_data.string:
                 try:
@@ -354,8 +350,8 @@ class WebExtractor(BaseExtractor):
                         tagline = post.get("tagline", "")
                         if not name or not slug:
                             continue
-                        item = self.generar_item_base(name, f"https://www.producthunt.com/posts/{slug}", nombre, "herramienta")
-                        item.update({"subtipo": subtipo, "descripcion": tagline})
+                        item = self.generar_item_base(name, f"https://www.producthunt.com/posts/{slug}", nombre, TIPO_VAL_HERRAMIENTA)
+                        item.update({SUBTIPO_KEY: subtipo, DESCRIPCION_KEY: tagline})
                         results.append(self.enriquecer_fechas(item))
                 except (json.JSONDecodeError, AttributeError, TypeError):
                     pass
@@ -366,11 +362,11 @@ class WebExtractor(BaseExtractor):
                     if not href or not title:
                         continue
                     full_url = urljoin("https://www.producthunt.com", href)
-                    item = self.generar_item_base(title, full_url, nombre, "herramienta")
-                    item.update({"subtipo": subtipo})
+                    item = self.generar_item_base(title, full_url, nombre, TIPO_VAL_HERRAMIENTA)
+                    item.update({SUBTIPO_KEY: subtipo})
                     results.append(self.enriquecer_fechas(item))
 
-        elif subtipo in ("github-topic", "github-collection"):
+        elif subtipo in (SUB_VAL_GITHUB_TOPIC, SUB_VAL_GITHUB_COLLECTION):
             cards = soup.select("article.border.rounded-1") or soup.select('[class*="border rounded"]')
             for card in cards[:20]:
                 h3 = card.select_one("h3")
@@ -390,13 +386,13 @@ class WebExtractor(BaseExtractor):
                 stars_raw = stars_a.get_text(strip=True) if stars_a else "0"
                 stars = stars_raw.replace("★", "").replace("☆", "").replace(",", "").strip()
                 title = raw_title if raw_title else href.strip("/").split("/")[-1]
-                item = self.generar_item_base(title, full_url, nombre, "herramienta")
+                item = self.generar_item_base(title, full_url, nombre, TIPO_VAL_HERRAMIENTA)
                 item.update({
-                    "subtipo": "github",
-                    "descripcion": desc.strip(),
-                    "lenguaje": lang.strip(),
-                    "estrellas": stars.strip(),
-                    "repo": href.strip("/") if href else "",
+                    SUBTIPO_KEY: SUB_VAL_GITHUB,
+                    DESCRIPCION_KEY: desc.strip(),
+                    LENGUAJE_KEY: lang.strip(),
+                    ESTRELLAS_KEY: stars.strip(),
+                    REPO_KEY: href.strip("/") if href else "",
                 })
                 results.append(self.enriquecer_fechas(item))
 
@@ -423,9 +419,9 @@ class ScraperPro:
         return self.avatar_repo.obtener_avatar(nombre, url_canal)
 
     async def extraer(self, session, nombre, info):
-        target = info.get("yt") or info.get("url") or info.get("rss")
+        target = info.get(YT_KEY) or info.get(URL_KEY) or info.get(RSS_KEY)
         results = []
-        es_rss = "rss" in info
+        es_rss = RSS_KEY in info
         try:
             async with session.get(target, timeout=20, headers=self.yt_extractor.headers) as response:
                 if response.status != 200:
@@ -434,7 +430,7 @@ class ScraperPro:
             if es_rss:
                 logger.info(f"📡 Extrayendo RSS desde: {nombre} ({target})")
                 results = self.web_extractor.extraer_rss(text, nombre)
-            elif "yt" in info:
+            elif YT_KEY in info:
                 logger.info(f"📺 Procesando fuente de YouTube: {nombre} ({target})")
                 json_data = re.search(r"ytInitialData\s*=\s*(\{.*?\});", text)
                 if not json_data:
@@ -450,7 +446,7 @@ class ScraperPro:
                         logger.error(f"⚠️ Error procesando JSON de YT ({nombre}): {e}", exc_info=True)
                 if not results:
                     results = self.yt_extractor.ejecutar_fallback(text, nombre)
-            elif info.get("tipo") == "herramienta":
+            elif info.get(TIPO_KEY) == TIPO_VAL_HERRAMIENTA:
                 logger.info(f"🔧 Extrayendo herramientas desde: {nombre}")
                 results = self.web_extractor.extraer_herramientas(text, nombre, target, info)
             else:

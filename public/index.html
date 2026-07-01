@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
     <meta name="author" content="Jorge Beneyto Castelló">
-    <meta name="description" content="Tech Pulse Dashboard — Resumen inteligente de noticias tech, vídeos, becas y contenido curado por Jorge Beneyto Castelló. Actualizado diariamente con IA.">
+    <meta name="description" content="Tech Pulse Dashboard — Resumen inteligente de noticias tech y vídeos curado por Jorge Beneyto Castelló. Actualizado diariamente con IA.">
     <meta property="og:title" content="Tech Pulse Dashboard — Jorge Beneyto Castelló">
     <meta property="og:description" content="Dashboard de tecnología con resumen IA, filtros por canal y fecha, vídeos y shorts de YouTube. Curado por Jorge Beneyto Castelló.">
     <meta property="og:type" content="website">
@@ -52,6 +52,10 @@
 
         <h2>📰 Noticias</h2>
         <div class="filter-section">
+            <strong>🔍 Tipo de fuente:</strong>
+            <div id="news-tipo-fuente-filters" class="chip-container"></div>
+        </div>
+        <div class="filter-section">
             <strong>🎯 Categoría:</strong>
             <div id="news-category-filters" class="chip-container"></div>
         </div>
@@ -75,18 +79,22 @@
         </div>
         <ul id="news-list" class="news-list"></ul>
 
-        <h2>📺 Multimedia (Vídeos y Shorts)</h2>
+        <h2>🎬 Multimedia</h2>
         <div class="filter-section">
+            <strong>📺 Tipo:</strong>
+            <div id="multimedia-tabs" class="chip-container"></div>
+        </div>
+        <div class="filter-section" id="multimedia-filter-section">
             <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
                 <strong>📅 Tiempo:</strong>
                 <div id="video-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
             </div>
         </div>
-        <div class="filter-section">
+        <div class="filter-section" id="multimedia-channel-section">
             <strong>📺 Filtro Canal:</strong>
             <div id="video-channel-filters" class="chip-container"></div>
         </div>
-        <div id="video-grid" class="video-grid"></div>
+        <div id="multimedia-content" class="video-grid"></div>
 
         <h2>⭐ Ranking GitHub Stars</h2>
         <div class="filter-section">
@@ -97,8 +105,6 @@
     </div>
 </body>
 <script>
-  const API_BASE = "https://testactions1github-api-python.hf.space/download";
-  const TOKEN = "79b4924cb9c4246f5085d8e6839b4113cbe7f2e7cbf17817fd84a7024591cc6f";
   const DATA_URL = "data.json";
 </script>
 <script src="script.js"></script>

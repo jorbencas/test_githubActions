@@ -16,6 +16,9 @@ import logging
 import os
 import re
 import sys
+
+from utils import load_json, save_json
+from constants_downloadfile import ENLACE_KEY, TITULO_KEY, FUENTE_KEY, TIPO_KEY, F_KEY, FECHA_REAL_KEY, TS_KEY, TIPO_VAL_TREND, TIPO_VAL_SOCIAL
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
@@ -52,27 +55,13 @@ TRENDS_SOURCES = {
 }
 
 
-def load_json(path: str) -> list:
-    if os.path.exists(path):
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            return []
-    return []
-
-
-def save_json(path: str, data: list):
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=4, ensure_ascii=False)
-
 
 def is_duplicate(enlace: str, existentes: set) -> bool:
     return enlace in existentes
 
 
 def load_existing_urls(historial: list) -> set:
-    return {n.get("enlace") for n in historial if n.get("enlace")}
+    return {n.get(ENLACE_KEY) for n in historial if n.get(ENLACE_KEY)}
 
 
 def scrape_google_trends(page) -> list:
@@ -91,13 +80,13 @@ def scrape_google_trends(page) -> list:
                 link = f"https://trends.google.com/trends/trendingsearches/detail?q={title}&geo=ES"
                 results.append(
                     {
-                        "titulo": title.strip(),
-                        "enlace": link,
-                        "fuente": "Google Trends Tecnología",
-                        "tipo": "trend",
-                        "f": datetime.now().strftime("%d/%m"),
-                        "fecha_real": datetime.now().strftime("%d/%m/%Y"),
-                        "ts": datetime.now().isoformat(),
+                        TITULO_KEY: title.strip(),
+                        ENLACE_KEY: link,
+                        FUENTE_KEY: "Google Trends Tecnología",
+                        TIPO_KEY: TIPO_VAL_TREND,
+                        F_KEY: datetime.now().strftime("%d/%m"),
+                        FECHA_REAL_KEY: datetime.now().strftime("%d/%m/%Y"),
+                        TS_KEY: datetime.now().isoformat(),
                     }
                 )
             except Exception as e:
@@ -125,13 +114,13 @@ def scrape_tiktok(page, source_name: str, url: str) -> list:
                 if href and title:
                     results.append(
                         {
-                            "titulo": title.strip(),
-                            "enlace": href,
-                            "fuente": source_name,
-                            "tipo": "social",
-                            "f": datetime.now().strftime("%d/%m"),
-                            "fecha_real": datetime.now().strftime("%d/%m/%Y"),
-                            "ts": datetime.now().isoformat(),
+                            TITULO_KEY: title.strip(),
+                            ENLACE_KEY: href,
+                            FUENTE_KEY: source_name,
+                            TIPO_KEY: TIPO_VAL_SOCIAL,
+                            F_KEY: datetime.now().strftime("%d/%m"),
+                            FECHA_REAL_KEY: datetime.now().strftime("%d/%m/%Y"),
+                            TS_KEY: datetime.now().isoformat(),
                         }
                     )
             except Exception as e:
@@ -179,9 +168,9 @@ async def run():
                     results = []
 
                 for item in results:
-                    if not is_duplicate(item["enlace"], existing_urls):
+                    if not is_duplicate(item[ENLACE_KEY], existing_urls):
                         all_new.append(item)
-                        existing_urls.add(item["enlace"])
+                        existing_urls.add(item[ENLACE_KEY])
 
             except Exception as e:
                 logger.error(f"❌ Error en {name}: {e}")
@@ -200,11 +189,11 @@ async def run():
 
     # Guardar también en archivo específico de trends
     trends_hist = load_json(TRENDS_FILE)
-    trends_existing = {t.get("enlace") for t in trends_hist}
+    trends_existing = {t.get(ENLACE_KEY) for t in trends_hist}
     for item in all_new:
-        if item["enlace"] not in trends_existing:
+        if item[ENLACE_KEY] not in trends_existing:
             trends_hist.append(item)
-            trends_existing.add(item["enlace"])
+            trends_existing.add(item[ENLACE_KEY])
     trends_hist = trends_hist[:200]
     save_json(TRENDS_FILE, trends_hist)
     logger.info(f"📊 Trends guardados en {TRENDS_FILE} (total: {len(trends_hist)})")

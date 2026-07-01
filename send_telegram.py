@@ -21,8 +21,9 @@ import edge_tts
 import requests
 from google import genai
 
-from constants_downloadfile import CONFIG
-from utils import resumir_noticia
+from cache import CacheManager, FileCache
+from constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_DASHBOARD_URL, TELEGRAM_MENSAJE_TEMPLATE, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY
+from utils import load_json, resumir_noticia
 
 os.makedirs("logs", exist_ok=True)
 logging.basicConfig(
@@ -36,32 +37,10 @@ logging.basicConfig(
 logger = logging.getLogger("telegram")
 
 
-def load_json(path: str) -> list:
-    if os.path.exists(path):
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            return []
-    return []
-
 
 SENT_LOG = "telegram_sent.json"
 
-
-def load_sent() -> set:
-    if os.path.exists(SENT_LOG):
-        try:
-            with open(SENT_LOG, "r", encoding="utf-8") as f:
-                return set(json.load(f))
-        except Exception:
-            return set()
-    return set()
-
-
-def save_sent(sent: set):
-    with open(SENT_LOG, "w", encoding="utf-8") as f:
-        json.dump(list(sent), f, ensure_ascii=False)
+CACHE = CacheManager(FileCache(SENT_LOG))
 
 
 def enviar_mensaje(texto: str, chat_id: str, token: str, reply_markup: dict | None = None) -> bool:
@@ -97,7 +76,7 @@ def truncar_texto_voz(texto: str, max_chars: int = 800) -> str:
 
 async def enviar_audio_voz(texto: str, chat_id: str, token: str) -> bool:
     audio_path = "resumen.mp3"
-    voz = "es-ES-AlvaroNeural"
+    voz = TELEGRAM_TTS_VOZ
     texto_limpio = truncar_texto_voz(texto)
     try:
         communicate = edge_tts.Communicate(texto_limpio, voz)
@@ -139,8 +118,7 @@ async def run():
         return
 
     client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
-    sent = load_sent()
-    nuevos = [n for n in historial if n.get("enlace") not in sent][:args.max_items]
+    nuevos = [n for n in historial if CACHE.is_new(n.get(ENLACE_KEY, ""))][:args.max_items]
     if not nuevos:
         logger.info("📭 No hay noticias nuevas desde el último envío.")
         return
@@ -148,23 +126,22 @@ async def run():
     logger.info(f"📰 {len(nuevos)} noticias nuevas para enviar.")
     chat_id = CONFIG["TELEGRAM_CHAT_ID"]
     token = CONFIG["TELEGRAM_TOKEN"]
-    dashboard_kb = {"inline_keyboard": [[{"text": "🌐 Dashboard", "url": "http://jorbencasdownloaderdocument.surge.sh"}]]}
+    dashboard_kb = {"inline_keyboard": [[{"text": "🌐 Dashboard", "url": TELEGRAM_DASHBOARD_URL}]]}
 
     for n in nuevos:
-        icono = "📺" if n.get("id_video") else ("🎓" if n.get("badge") == "Beca" else "💻")
-        fuente = n["fuente"].replace("_", "\\_").replace("*", "\\*").replace("[", "\\[").replace("`", "\\`")
-        fecha = n.get("fecha_publicacion") or n.get("f", "")
-        titulo = n["titulo"].replace("_", "\\_").replace("*", "\\*").replace("[", "\\[").replace("`", "\\`")
+        icono = "📺" if n.get(ID_VIDEO_KEY) else "💻"
+        fuente = n[FUENTE_KEY].replace("_", "\\_").replace("*", "\\*").replace("[", "\\[").replace("`", "\\`")
+        fecha = n.get(FECHA_PUB_KEY) or n.get(F_KEY, "")
+        titulo = n[TITULO_KEY].replace("_", "\\_").replace("*", "\\*").replace("[", "\\[").replace("`", "\\`")
 
         logger.info(f"🤖 Generando resumen para: {n['titulo'][:60]}...")
         resumen = await resumir_noticia(n, client)
 
-        mensaje = f"{icono} *{titulo}*\n📰 `{fuente}` | `{fecha}`\n\n"
-        if resumen:
-            mensaje += f"📝 {resumen}\n\n"
-        else:
-            mensaje += f"📝 {titulo}\n\n"
-        mensaje += f"🔗 [Abrir noticia]({n['enlace']})\n🌐 [Ver más en el Dashboard](http://jorbencasdownloaderdocument.surge.sh)"
+        cuerpo = f"📝 {resumen}\n\n" if resumen else f"📝 {titulo}\n\n"
+        mensaje = TELEGRAM_MENSAJE_TEMPLATE.format(
+            icono=icono, titulo=titulo, fuente=fuente, fecha=fecha,
+            cuerpo=cuerpo, enlace=n[ENLACE_KEY], dashboard_url=TELEGRAM_DASHBOARD_URL,
+        )
 
         if args.dry_run:
             print(f"\n{'='*50}")
@@ -175,6 +152,7 @@ async def run():
         ok = enviar_mensaje(mensaje, chat_id, token, dashboard_kb)
         if ok:
             logger.info(f"✅ Enviado: {n['titulo'][:60]}...")
+            CACHE.mark_sent(n.get(ENLACE_KEY, ""))
             await asyncio.sleep(1)
             await enviar_audio_voz(f"{icono} {n['titulo']}. {resumen or n['titulo']}", chat_id, token)
             await asyncio.sleep(2)
@@ -182,8 +160,7 @@ async def run():
             logger.error(f"❌ Fallo al enviar: {n['titulo'][:60]}")
 
     if not args.dry_run:
-        sent.update(n.get("enlace") for n in nuevos if n.get("enlace"))
-        save_sent(sent)
+        CACHE.flush()
 
     logger.info("✅ send_telegram.py completado.")
 
