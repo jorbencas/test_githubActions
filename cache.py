@@ -56,7 +56,21 @@ class FileCache(ICacheBackend):
         if os.path.exists(self.path):
             try:
                 with open(self.path, "r", encoding="utf-8") as f:
-                    self._data = json.load(f)
+                    raw = json.load(f)
+                if isinstance(raw, list):
+                    logger.warning("⚠️ Caché %s es una lista, convirtiendo a dict", self.path)
+                    self._data = {}
+                    for item in raw:
+                        if isinstance(item, dict):
+                            key = item.get(ENLACE_KEY) or item.get("enlace", "")
+                            if key:
+                                self._data[key] = item
+                        elif isinstance(item, str):
+                            self._data[item] = {"ts": 0}
+                elif isinstance(raw, dict):
+                    self._data = raw
+                else:
+                    self._data = {}
             except (json.JSONDecodeError, OSError) as e:
                 logger.warning("⚠️ Error leyendo caché %s: %s", self.path, e)
                 self._data = {}

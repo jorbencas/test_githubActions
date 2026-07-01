@@ -368,10 +368,17 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </div>
         <div id="multimedia-content" class="video-grid"></div>
 
+        <h2>\U0001f4ca Tendencias</h2>
+        <div class="filter-section">
+            <strong>\U0001f50d Filtrar:</strong>
+            <div id="trend-type-filters" class="chip-container"></div>
+        </div>
+        <div id="trends-list" class="news-list"></div>
+
         <h2>\u2b50 Ranking GitHub Stars</h2>
         <div class="filter-section">
             <strong>\U0001f524 Filtro:</strong>
-            <input type="text" id="github-filter" placeholder="Buscar por nombre o lenguaje..." style="padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; width: 100%; max-width: 400px; margin-top: 8px; font-size: 14px;">
+            <input type="text" id="github-filter" placeholder="Buscar por nombre o lenguaje..." style="padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; width: 100%; max-width: 400px; margin-top: 8px; font-size: 14px; background: #fff; color: #1c1e21;">
         </div>
         <div id="github-ranking"></div>
 

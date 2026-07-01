@@ -1,6 +1,6 @@
 # Contexto del proyecto — test_githubActions (Tech Pulse)
 
-**Última actualización**: 2026-07-01 (SOLID refactor + templates + reference data SKILLS/LLMS/LENGUAJES/FRAMEWORKS/LIBRERIAS)
+**Última actualización**: 2026-07-01 (fix cache.py + input fondo blanco + cambios menores)
 **Stack**: Python 3.11, asyncio, Gemini API, BeautifulSoup4, aiohttp, Playwright, GitHub Actions
 **Dashboard**: `http://jorbencasdownloaderdocument.surge.sh`
 **Blog destino**: `jorbencas/blog` (PRs automáticos)
@@ -21,6 +21,7 @@
 - Filtros: tipo de fuente, categoría, tipo Tech/RSS (`#news-badge-filters`), fuente RSS (`#news-rss-filters`), tiempo (`#news-week-filters`), canal (`#news-channel-filters`)
 - Multimedia con tabs: YouTube/TikTok/Instagram (`#multimedia-tabs`), filtros de tiempo (`#video-week-filters`) + canal (`#video-channel-filters`), contenido en `#multimedia-content`
 - Ranking GitHub Stars: top 20 repos ordenados por estrellas, con filtro por nombre/lenguaje
+- Sección de Tendencias: Google Trends + TikTok, filtrable por tipo (`#trend-type-filters`)
 - Stats bar con conteos de noticias Tech, Multimedia
 - Desplegado en Surge.sh tras cada ejecución del scraper
 
@@ -33,11 +34,12 @@
 - Se renderiza en dashboard como sección colapsable "📚 Referencia"
 
 ### Dashboard JS (`public/script.js`)
-- **Store pattern**: `const store = {...}` centraliza 10+ variables de estado global (semana, categoría, badge, canal, tipoFuente, tab, etc.)
+- **Store pattern**: `const store = {...}` centraliza 10+ variables de estado global (semana, categoría, badge, canal, tipoFuente, tab, trendType, etc.)
 - **Generic chip factory**: `renderChips()` única función para todos los filtros de chips. `renderCanalChips()` para canales con imagen.
 - **Helpers puros**: `limpiarFuente()`, `tipoFuente()`, `tipoMultimedia()`, `dominioUrl()`, `itemEnSemana()`, `faviconSrc()`, `chipImg()` — sin side effects.
 - **Filtros unificados**: `aplicarFiltrosNoticias()` y `aplicarFiltrosVideos()` leen del store, sin duplicación de lógica.
 - `DATA_URL` apunta a `data.json`. Filtros combinables: tipo de fuente, semana, categoría, badge, origen RSS, canal.
+- **Sección de tendencias**: `renderTrends()` renderiza Google Trends + TikTok, filtrable por tipo vía `store.trendType`.
 - Multimedia separada en tabs: YouTube / TikTok / Instagram con `store.tabMultimedia` y `tipoMultimedia(item)`.
 - `ALL_YT_CHANNELS` (22 canales) siempre aparecen en chips aunque tengan 0 items en el período.
 - Chips con favicon via Google favicon service + `onerror` fallback.
@@ -75,7 +77,7 @@ This Week in React, Python Hub (nueva)
 | `scraper_base.py` | Clases base: YouTubeExtractor, WebExtractor (incl. `extraer_rss`), ScraperPro, AvatarRepository, ContentFilter | — (módulo) |
 | `scrape_news.py` | Scrapea noticias web + YouTube + RSS → `noticias_historico.json` | `files/noticias_historico.json` |
 | `scrape_tools.py` | Scrapea GitHub Trending + Product Hunt → `herramientas.json` | `files/herramientas.json` |
-| `scrape_trends.py` | Playwright: Google Trends + TikTok → `trends.json` | `files/trends.json` |
+| `scrape_trends.py` | Playwright: Google Trends + TikTok (solo a `trends.json`, no contamina `noticias_historico.json`) | `files/trends.json` |
 | `generate_weekly.py` | AI recap + dashboard HTML + data.json → `auto-news/` + `public/` | `public/index.html`, `public/data.json` |
 | `send_email.py` | Mailgun newsletter con resúmenes por noticia + párrafo introductorio IA del lote (solo news, sin multimedia) | — |
 | `send_telegram.py` | Telegram con TTS por noticia, dedup vía `telegram_sent.json` | — |
@@ -99,7 +101,8 @@ El scraping se divide en 3 tiers para balancear frescura vs. carga:
 3. `scrape_trends.py` → `files/trends.json`
 4. `generate_weekly.py` → `auto-news/YYYY-W{week}-tech-recap.md` + `public/` → Surge
 5. `send_email.py` → Mailgun (diario 09:00 UTC)
-6. `send_telegram.py` → Telegram con audio TTS (cada 30 min, solo noticias nuevas)
+6. `send_telegram.py` → Telegram con audio TTS (cada 30 min, solo noticias nuevas + YT, filtrados trends/social)
+7. Tendencias de `trends.json` se muestran en dashboard (sección 📊 Tendencias) y en email (al final de la newsletter)
 
 ### Sistema de caché (cache.py)
 - `ICacheBackend` (ABC): interfaz con `load()` y `save()`
@@ -122,6 +125,10 @@ Ver `docs/n8n_migration.md` para el plan detallado por fases:
 - **MD_TEMPLATE**: weekly recap para blog, 15+ placeholders, bien aprovechado.
 - **PROMPT_IMAGEN_TEMPLATE**: prompt para generación de imágenes con `{titulo_post}`.
 
+### Fixes recientes
+- **cache.py**: `FileCache.load()` ahora detecta si `telegram_sent.json` es una lista (corrupto) y lo convierte a dict automáticamente, evitando `AttributeError: 'list' object has no attribute 'get'`
+- **styles.css / HTML_TEMPLATE**: input `#github-filter` con `background: #fff` explícito para evitar fondo negro en temas oscuros del navegador
+
 ### Deduplicación
 - `deduplicar_items()` en `utils.py`:
   - URL normalizada (sin `?utm_*`, `#fragment`, trailing `/`, `http`→`https`)
@@ -137,7 +144,7 @@ Ver `docs/n8n_migration.md` para el plan detallado por fases:
 | `scraper_workflow.yml` | Sábado 07:00 UTC | `--tier full` + tools → weekly → email+Telegram → PR blog → Surge |
 | `trends_workflow.yml` | Martes+viernes 08:00 UTC | Playwright: Google Trends + TikTok |
 | `send_email_workflow.yml` | Diario 09:00 UTC | Mailgun newsletter (solo noticias, sin multimedia) |
-| `send_telegram_workflow.yml` | Cada 30 min | Telegram con TTS + persistencia `telegram_sent.json` vía git push |
+| `send_telegram_workflow.yml` | Cada 30 min | Telegram con TTS (solo noticias + YT, filtrando trends/social) + persistencia `telegram_sent.json` vía git push |
 | `clean_news.yml` | Trimestral | Validar enlaces → podar muertos |
 
 ### Noticias: estructura de item

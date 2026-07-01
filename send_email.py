@@ -19,7 +19,7 @@ from logging.handlers import RotatingFileHandler
 import requests
 from google import genai
 
-from constants_downloadfile import CONFIG, EMAIL_TEMPLATE, EMAIL_ROW_TEMPLATE, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, ID_VIDEO_KEY, BADGE_KEY, VAL_TECH
+from constants_downloadfile import CONFIG, EMAIL_TEMPLATE, EMAIL_ROW_TEMPLATE, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, ID_VIDEO_KEY, BADGE_KEY, VAL_TECH, TIPO_KEY, TIPO_VAL_TREND, TIPO_VAL_SOCIAL
 from utils import load_json, resumir_noticia, resumir_lote_noticias
 
 os.makedirs("logs", exist_ok=True)
@@ -54,50 +54,71 @@ async def run():
     logger.info("📧 Iniciando send_email.py (con resúmenes IA por noticia)")
     path_json = os.path.join(CONFIG["FOLDER"], "noticias_historico.json")
     historial = load_json(path_json)
-    if not historial:
-        logger.info("📭 No hay noticias para enviar.")
+
+    # Cargar tendencias
+    path_trends = os.path.join(CONFIG["FOLDER"], "trends.json")
+    trends = load_json(path_trends)
+
+    if not historial and not trends:
+        logger.info("📭 No hay noticias ni tendencias para enviar.")
         return
 
-    historial = [n for n in historial if not _es_multimedia(n)]
-    if not historial:
-        logger.info("📭 No hay noticias (solo multimedia) para enviar.")
-        return
+    historial = [n for n in historial if not _es_multimedia(n) and n.get(TIPO_KEY) not in (TIPO_VAL_TREND, TIPO_VAL_SOCIAL)]
 
     client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
     nuevos = historial[:args.max_items]
+
+    # Añadir tendencias como filas sin resumen
+    filas_trends = ""
+    if trends:
+        filas_trends = '<tr><td style="padding: 16px 0;"><h3 style="font-size: 15px; font-weight: 700; margin: 0 0 8px 0; color: #0f172a;">📊 Tendencias</h3></td></tr>'
+        for t in trends[:5]:
+            icono = "📊" if t.get("tipo") == "trend" else "🎵"
+            filas_trends += EMAIL_ROW_TEMPLATE.format(
+                icon=icono, fuente=t.get("fuente", "Tendencia"),
+                enlace=t.get("enlace", "#"), titulo=t.get("titulo", ""),
+                resumen_html="",
+            )
+
     if not nuevos:
-        logger.info("📭 No hay noticias (solo multimedia) para enviar.")
-        return
-    top_titular = nuevos[0][TITULO_KEY]
-    asunto = f"🔥 {top_titular[:55]}... y {len(nuevos)-1} más"
+        top_titular = trends[0][TITULO_KEY] if trends else "Tech Pulse"
+        asunto = f"📊 {top_titular[:55]}... y tendencias"
+        c_tech = 0
+        filas_noticias = ""
+        temas_clave = ", ".join(list(set([t.get(FUENTE_KEY, "") for t in trends[:3]]))) if trends else ""
+        resumen_lote = None
+        contenido_html = "<p style='font-size:15px;line-height:1.7;margin:0;color:#64748b;'>Tendencias tech sin noticias destacadas hoy.</p>"
+    else:
+        top_titular = nuevos[0][TITULO_KEY]
+        asunto = f"🔥 {top_titular[:55]}... y {len(nuevos)-1} más"
+        c_tech = len([x for x in nuevos if x.get(BADGE_KEY) == VAL_TECH])
 
-    c_tech = len([x for x in nuevos if x.get(BADGE_KEY) == VAL_TECH])
+        logger.info(f"🤖 Generando resúmenes IA para {len(nuevos)} noticias...")
+        filas_noticias = ""
+        for i, n in enumerate(nuevos):
+            icon = "💻"
+            logger.info(f"  [{i+1}/{len(nuevos)}] Resumiendo: {n['titulo'][:60]}...")
+            resumen = await resumir_noticia(n, client)
+            resumen_html = f'<p style="color: #475569; font-size: 13px; line-height: 1.5; margin: 6px 0 0 0; padding-left: 26px;">📝 {resumen}</p>' if resumen else ""
 
-    logger.info(f"🤖 Generando resúmenes IA para {len(nuevos)} noticias...")
-    filas_noticias = ""
-    for i, n in enumerate(nuevos):
-        icon = "💻"
-        logger.info(f"  [{i+1}/{len(nuevos)}] Resumiendo: {n['titulo'][:60]}...")
-        resumen = await resumir_noticia(n, client)
-        resumen_html = f'<p style="color: #475569; font-size: 13px; line-height: 1.5; margin: 6px 0 0 0; padding-left: 26px;">📝 {resumen}</p>' if resumen else ""
+            filas_noticias += EMAIL_ROW_TEMPLATE.format(
+                icon=icon, fuente=n['fuente'], enlace=n['enlace'],
+                titulo=n['titulo'], resumen_html=resumen_html,
+            )
 
-        filas_noticias += EMAIL_ROW_TEMPLATE.format(
-            icon=icon, fuente=n['fuente'], enlace=n['enlace'],
-            titulo=n['titulo'], resumen_html=resumen_html,
-        )
+        temas_clave = ", ".join(list(set([n[FUENTE_KEY] for n in nuevos[:3]])))
+        logger.info("🤖 Generando resumen general del lote...")
+        resumen_lote = await resumir_lote_noticias(nuevos, client)
+        contenido_html = f"<p style='font-size:15px;line-height:1.7;margin:0;'>{resumen_lote}</p>" if resumen_lote else ""
+        if not contenido_html:
+            contenido_html = "<p style='font-size:15px;line-height:1.7;margin:0;color:#64748b;'>" + " · ".join(n['titulo'][:60] for n in nuevos[:3]) + "</p>"
 
-    temas_clave = ", ".join(list(set([n[FUENTE_KEY] for n in nuevos[:3]])))
-    logger.info("🤖 Generando resumen general del lote...")
-    resumen_lote = await resumir_lote_noticias(nuevos, client)
-    contenido_html = f"<p style='font-size:15px;line-height:1.7;margin:0;'>{resumen_lote}</p>" if resumen_lote else ""
-    if not contenido_html:
-        contenido_html = "<p style='font-size:15px;line-height:1.7;margin:0;color:#64748b;'>" + " · ".join(n['titulo'][:60] for n in nuevos[:3]) + "</p>"
     html_final = EMAIL_TEMPLATE.format(
         fecha_hoy=datetime.now().strftime("%d de %B, %Y"),
         contenido_html=contenido_html,
-        lista_email=filas_noticias,
+        lista_email=filas_noticias + filas_trends,
         count_tech=c_tech,
-        total_noticias=len(nuevos),
+        total_noticias=len(nuevos or []),
         temas_clave=temas_clave,
         year=datetime.now().year,
     )

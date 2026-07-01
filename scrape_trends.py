@@ -180,14 +180,11 @@ async def run():
         await browser.close()
 
     if all_new:
-        historial = all_new + historial
-        historial = historial[:900]
-        save_json(NEWS_FILE, historial)
-        logger.info(f"✅ {len(all_new)} nuevos items guardados en {NEWS_FILE}")
+        logger.info(f"✅ {len(all_new)} nuevos items de trends (no se guardan en noticias_historico.json)")
     else:
         logger.info("📭 No hay novedades de trends.")
 
-    # Guardar también en archivo específico de trends
+    # Guardar SOLO en archivo específico de trends (no contaminar noticias_historico)
     trends_hist = load_json(TRENDS_FILE)
     trends_existing = {t.get(ENLACE_KEY) for t in trends_hist}
     for item in all_new:

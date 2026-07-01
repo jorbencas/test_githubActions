@@ -50,7 +50,18 @@ def cargar_herramientas() -> list:
     return []
 
 
-def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen_ia):
+def cargar_trends() -> list:
+    path = os.path.join(CONFIG["FOLDER"], "trends.json")
+    if os.path.exists(path):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return []
+    return []
+
+
+def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen_ia, trends=None):
     historial.sort(key=lambda x: x.get(TS_KEY, ""), reverse=True)
     herramientas_github = [
         h for h in herramientas
@@ -68,10 +79,12 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
             )
         )
     with open("public/data.json", "w", encoding="utf-8") as f:
+        trends_data = trends or []
         json.dump(
             {
                 "items": historial,
                 "herramientas": top_github,
+                "trends": trends_data,
                 "avatars": getattr(scr, "avatar_repo", None) and scr.avatar_repo.avatars or {},
                 "skills": SKILLS,
                 "llms": LLMS,
@@ -243,7 +256,8 @@ async def run():
         resumen_ia = "Resumen de hoy:\n\n" + "\n".join(titulares)
 
     herramientas = cargar_herramientas()
-    generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen_ia or "Sin novedades hoy.")
+    trends = cargar_trends()
+    generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen_ia or "Sin novedades hoy.", trends)
     scr.guardar_avatars()
 
     logger.info("✅ generate_weekly.py completado.")

@@ -6,7 +6,7 @@ const store = (() => {
     catNoticias: "all", badgeNoticias: "all", rssNoticias: "all",
     canalNoticias: "all", canalVideos: "all",
     tipoFuente: "all", tabMultimedia: "youtube",
-    items: [], herramientas: [], avatars: {},
+    items: [], herramientas: [], trends: [], avatars: {},
     refSkills: {}, refLlms: {}, refLenguajes: {}, refFrameworks: {}, refLibrerias: {},
     config: {},
   };
@@ -78,6 +78,7 @@ function cargarDatos() {
       const data = await resp.json();
       store._raw.items = data.items || [];
       store._raw.herramientas = data.herramientas || [];
+      store._raw.trends = data.trends || [];
       store._raw.avatars = data.avatars || {};
       store._raw.refSkills = data.skills || {};
       store._raw.refLlms = data.llms || {};
@@ -407,6 +408,29 @@ function renderReference() {
   renderRefGroup("ref-librerias", store.get("refLibrerias"));
 }
 
+// ── Trends ──
+function renderTrends(items) {
+  const container = document.getElementById("trends-list");
+  if (!container) return;
+  const trendType = store.get("trendType");
+  const filtered = trendType === "all" ? items : items.filter(i => i.tipo === trendType);
+  if (filtered.length === 0) {
+    container.innerHTML = '<p style="padding:20px;color:#666;text-align:center;">No hay tendencias en este período.</p>';
+    return;
+  }
+  container.innerHTML = filtered.map(i => {
+    const ts = i.ts || "";
+    const fecha = i.fecha_publicacion || i.fecha_real || i.f || "";
+    const tipo = i.tipo === "trend" ? "📊" : "🎵";
+    const tipoLabel = i.tipo === "trend" ? "Google Trends" : "TikTok";
+    return `<li class="news-item" data-ts="${ts}">
+      <div class="meta">${tipo} ${tipoLabel} | ${fecha}</div>
+      <span class="badge badge-tech">${tipoLabel}</span>
+      <a href="${i.enlace}" target="_blank">${i.titulo || "Ver tendencia"}</a>
+    </li>`;
+  }).join("");
+}
+
 // ── Side effects registrados (se ejecutan al cambiar el key correspondiente) ──
 function registrarEventos() {
   store.on("tipoFuente", () => {
@@ -430,6 +454,7 @@ function registrarEventos() {
   store.on("rssNoticias", aplicarFiltrosNoticias);
   store.on("semanaVideos", aplicarFiltrosVideos);
   store.on("canalVideos", aplicarFiltrosVideos);
+  store.on("trendType", () => renderTrends(store.get("trends")));
 }
 
 // ── Init ──
@@ -497,6 +522,15 @@ function initDashboard() {
   renderNoticias(items);
   renderRanking(store.get("herramientas"));
   renderReference();
+  renderTrends(store.get("trends"));
+  renderChips("trend-type-filters", {
+    options: [
+      { id: "all", label: "Todas" },
+      { id: "trend", label: "📊 Google Trends" },
+      { id: "social", label: "🎵 TikTok" },
+    ],
+    stateKey: "trendType",
+  });
   aplicarFiltrosNoticias();
   aplicarFiltrosVideos();
   initScrollTop();
