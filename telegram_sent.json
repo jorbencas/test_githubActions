@@ -28,5 +28,20 @@
   },
   "https://github.blog/ai-and-ml/github-copilot/continuous-ai-for-accessibility-how-github-transforms-feedback-into-inclusion/": {
     "ts": 1782924891.917178
+  },
+  "https://github.blog/engineering/architecture-optimization/how-we-rebuilt-the-search-architecture-for-high-availability-in-github-enterprise-server/": {
+    "ts": 1782925127.668406
+  },
+  "https://github.blog/engineering/from-pixels-to-characters-the-engineering-behind-github-copilot-clis-animated-ascii-banner/": {
+    "ts": 1782925137.538673
+  },
+  "https://github.blog/engineering/infrastructure/when-protections-outlive-their-purpose-a-lesson-on-managing-defense-systems-at-scale/": {
+    "ts": 1782925143.549935
+  },
+  "https://github.blog/engineering/platform-security/post-quantum-security-for-ssh-access-on-github/": {
+    "ts": 1782925150.665952
+  },
+  "https://github.blog/engineering/infrastructure/how-github-engineers-tackle-platform-problems/": {
+    "ts": 1782925157.211985
   }
 }
