@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
     <meta name="author" content="Jorge Beneyto Castelló">
-    <meta name="description" content="Tech Pulse Dashboard — Resumen inteligente de noticias tech y vídeos curado por Jorge Beneyto Castelló. Actualizado diariamente con IA.">
+    <meta name="description" content="Tech Pulse Dashboard — Resumen inteligente de noticias tech, vídeos y contenido curado por Jorge Beneyto Castelló. Actualizado diariamente con IA.">
     <meta property="og:title" content="Tech Pulse Dashboard — Jorge Beneyto Castelló">
     <meta property="og:description" content="Dashboard de tecnología con resumen IA, filtros por canal y fecha, vídeos y shorts de YouTube. Curado por Jorge Beneyto Castelló.">
     <meta property="og:type" content="website">
@@ -35,7 +35,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>Tech Pulse <small style="font-size: 0.4em; color: #666;">30/06/2026</small></h1>
+            <h1>Tech Pulse <small style="font-size: 0.4em; color: #666;">01/07/2026</small></h1>
             <picture>
                 <source srcset="optimizado/Image.avif" type="image/avif">
                 <source srcset="optimizado/Image.webp" type="image/webp">
@@ -52,7 +52,7 @@
 
         <h2>📰 Noticias</h2>
         <div class="filter-section">
-            <strong>🔍 Tipo de fuente:</strong>
+            <strong>📡 Tipo de fuente:</strong>
             <div id="news-tipo-fuente-filters" class="chip-container"></div>
         </div>
         <div class="filter-section">
@@ -102,6 +102,15 @@
             <input type="text" id="github-filter" placeholder="Buscar por nombre o lenguaje..." style="padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; width: 100%; max-width: 400px; margin-top: 8px; font-size: 14px;">
         </div>
         <div id="github-ranking"></div>
+
+        <h2 style="margin-top:40px;cursor:pointer;" onclick="this.nextElementSibling.classList.toggle('visible')">📚 Referencia <small style="font-size:0.6em;color:#666;">(click para mostrar/ocultar)</small></h2>
+        <div id="reference-section" style="display:none;">
+            <div class="filter-section"><strong>🛠️ Skills</strong><div id="ref-skills" class="chip-container"></div></div>
+            <div class="filter-section"><strong>🧠 LLMs</strong><div id="ref-llms" class="chip-container"></div></div>
+            <div class="filter-section"><strong>📝 Lenguajes</strong><div id="ref-lenguajes" class="chip-container"></div></div>
+            <div class="filter-section"><strong>📦 Frameworks</strong><div id="ref-frameworks" class="chip-container"></div></div>
+            <div class="filter-section"><strong>📚 Librerías</strong><div id="ref-librerias" class="chip-container"></div></div>
+        </div>
     </div>
 </body>
 <script>
