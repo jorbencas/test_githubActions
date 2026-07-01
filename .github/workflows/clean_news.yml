@@ -38,6 +38,6 @@ jobs:
         run: python clean_news.py
       - name: Guardar cambios en el JSON
         run: |
-          git add files/all_news.json
+          git add files/noticias_historico.json
           git diff --quiet && git diff --staged --quiet || git commit -m "🧹 Mantenimiento trimestral: limpieza de enlaces"
           git push origin master
