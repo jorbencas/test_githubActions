@@ -148,5 +148,20 @@
   },
   "https://www.astralcodexten.com/p/chip-off-the-old-block": {
     "ts": 1782955853.780517
+  },
+  "https://stackoverflow.blog/2026/07/02/ai-coding-chaos-into-a-repeatable-playbook/": {
+    "ts": 1782970498.898401
+  },
+  "https://dev.to/breator/i-coined-a-new-word-breator-1ddi": {
+    "ts": 1782970503.961325
+  },
+  "https://dev.to/nazar_boyko/ai-for-test-generation-where-it-helps-and-where-it-lies-jhm": {
+    "ts": 1782970508.954943
+  },
+  "https://dev.to/anonymilyhq/webhook-idempotency-handling-duplicate-events-5ep8": {
+    "ts": 1782970518.498924
+  },
+  "https://dev.to/richyy/what-three-fictional-startups-taught-me-about-structured-semi-structured-and-unstructured-data-on-1h37": {
+    "ts": 1782970528.571239
   }
 }
