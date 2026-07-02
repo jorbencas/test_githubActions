@@ -22,7 +22,7 @@ from pathlib import Path
 
 from google import genai
 
-from constants_downloadfile import CONFIG, HTML_TEMPLATE, MD_TEMPLATE, SKILLS, LLMS, LENGUAJES, FRAMEWORKS, LIBRERIAS, CATEGORIAS, JS_CONFIG, FALLBACK_GITHUB_IMAGE, FALLBACK_SNEAK_PEEK, FALLBACK_NOTA_PERSONAL, SUBTIPO_KEY, TIPO_KEY, ORIGEN_KEY, SUB_VAL_GITHUB, TIPO_VAL_NOTICIA, VAL_RSS, ENLACE_KEY, FUENTE_KEY, TS_KEY, FECHA_PUB_KEY, CATEGORIA_KEY, ESTRELLAS_KEY, TITULO_KEY, FECHA_REAL_KEY, ID_VIDEO_KEY, LENGUAJE_KEY, DESCRIPCION_KEY, SUB_VAL_GITHUB_TOPIC, SUB_VAL_GITHUB_COLLECTION, SUB_VAL_PRODUCTHUNT, TIPO_VAL_HERRAMIENTA, TIPO_VAL_VIDEO, TIPO_VAL_SHORTS, TIPO_VAL_LIVE, TIPO_VAL_TREND, TIPO_VAL_SOCIAL
+from constants_downloadfile import CONFIG, HTML_TEMPLATE, MD_TEMPLATE, SKILLS, LLMS, LENGUAJES, FRAMEWORKS, LIBRERIAS, CATEGORIAS, JS_CONFIG, FALLBACK_GITHUB_IMAGE, FALLBACK_SNEAK_PEEK, FALLBACK_NOTA_PERSONAL, SUBTIPO_KEY, TIPO_KEY, ORIGEN_KEY, SUB_VAL_GITHUB, TIPO_VAL_NOTICIA, VAL_RSS, ENLACE_KEY, FUENTE_KEY, TS_KEY, FECHA_PUB_KEY, CATEGORIA_KEY, ESTRELLAS_KEY, TITULO_KEY, FECHA_REAL_KEY, ID_VIDEO_KEY, LENGUAJE_KEY, DESCRIPCION_KEY, SUB_VAL_GITHUB_TOPIC, SUB_VAL_GITHUB_COLLECTION, SUB_VAL_PRODUCTHUNT, TIPO_VAL_HERRAMIENTA, TIPO_VAL_VIDEO, TIPO_VAL_SHORTS, TIPO_VAL_LIVE, TIPO_VAL_TREND, TIPO_VAL_SOCIAL, FUENTES, YT_KEY
 from scraper_base import ScraperPro
 from utils import load_json, generar_imagen_noticia, obtener_recap_semanal_ia, deduplicar_items
 
@@ -70,159 +70,47 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
     herramientas_github.sort(key=lambda h: int(h.get(ESTRELLAS_KEY, "0")), reverse=True)
     top_github = herramientas_github[:20]
 
-    # === Renderizar TODO en Python, inyectar en HTML_TEMPLATE ===
-    
-    # Separar noticias y vídeos
-    noticias_web = [n for n in historial if n.get(TIPO_KEY) in (TIPO_VAL_NOTICIA, "news") and not n.get("id_video")]
-    videos = [n for n in historial if n.get("id_video")]
-    
-    # Estadísticas
-    total_noticias = len(noticias_web)
-    total_videos = len(videos)
-    total_items = len(historial)
-    fuentes_unicas = len(set(n.get(FUENTE_KEY, "") for n in historial if n.get(FUENTE_KEY)))
-    
-    # Categorías de noticias
-    cat_count = {}
-    for n in noticias_web:
-        cat = n.get(CATEGORIA_KEY, "💡 General")
-        cat_count[cat] = cat_count.get(cat, 0) + 1
-    cats_sorted = sorted(cat_count.items(), key=lambda x: -x[1])
-    cats_stats = "\n".join(f'  <div class="stat-cell"><b>{cnt}</b><span>{cat}</span></div>' for cat, cnt in cats_sorted[:6])
-    
-    # Top fuentes
-    fuente_count = {}
-    for n in historial:
-        f = n.get(FUENTE_KEY, "")
-        if f: fuente_count[f] = fuente_count.get(f, 0) + 1
-    fuentes_top = sorted(fuente_count.items(), key=lambda x: -x[1])[:5]
-    fuentes_html = "\n".join(
-        f'<div class="chip" style="background: #eef2ff; color: #4f46e5;">{f} <span style="opacity:.7">({c})</span></div>'
-        for f, c in fuentes_top
-    )
-    
-    # === Renderizar NOTICIAS ===
-    def make_news_card(n):
-        ts = n.get(TS_KEY, "")
-        fuente = n.get(FUENTE_KEY, "")
-        titulo = n.get(TITULO_KEY, "Sin título")
-        enlace = n.get(ENLACE_KEY, "#")
-        fecha = n.get(FECHA_PUB_KEY) or n.get(FECHA_REAL_KEY, "")
-        origen = n.get(ORIGEN_KEY, "")
-        badge = "📡 RSS" if origen == VAL_RSS else "💻 Tech"
-        cat = n.get(CATEGORIA_KEY, "")
-        origen_badge = f'<span class="badge badge-rss">{badge}</span>' if origen == VAL_RSS else f'<span class="badge badge-tech">{badge}</span>'
-        cat_html = f'<span class="badge badge-cat">{cat}</span>' if cat else ""
-        origen_badge_html = f'<span class="badge badge-rss">{badge}</span>' if origen == VAL_RSS else f'<span class="badge badge-tech">💻 Tech</span>'
-        return f'<li class="news-item" data-ts="{ts}" data-fuente="{fuente}" data-categoria="{cat}" data-origen="{origen}"><div class="meta">{fuente} | {fecha}</div>{origen_badge_html}{cat_html}<a href="{enlace}" target="_blank">{titulo}</a></li>'
-    
-    noticias_html = "\n".join(make_news_card(n) for n in noticias_web[:50])
-    
-    # === Renderizar VÍDEOS YOUTUBE ===
-    def make_video_card(n):
-        ts = n.get(TS_KEY, "")
-        fuente = n.get(FUENTE_KEY, "")
-        titulo = n.get(TITULO_KEY, "Sin título")
-        enlace = n.get(ENLACE_KEY, "#")
-        fecha = n.get(FECHA_PUB_KEY) or n.get(FECHA_REAL_KEY, "")
-        id_video = n.get("id_video", "")
-        tipo = n.get(TIPO_KEY, "video")
-        esLive = tipo == "live"
-        esShorts = tipo == "shorts"
-        clase = "tipo-live" if esLive else ("tipo-shorts" if esShorts else "tipo-video")
-        live_badge = '<span class="badge-live">● EN DIRECTO</span>' if esLive else ""
-        thumb = f"https://img.youtube.com/vi/{id_video}/mqdefault.jpg" if id_video else ""
-        return f'<div class="card {clase}" data-ts="{ts}" data-fuente="{fuente}">{live_badge}<a href="{enlace}" target="_blank" class="video-thumb-link"><div class="video-thumb"><img src="{thumb}" alt="{titulo}" width="320" height="180" loading="lazy" class="video-thumb-img" onerror="this.classList.add(\'errored\');this.nextElementSibling.classList.add(\'visible\')"><div class="video-thumb-fallback">📺 {fuente or "YouTube"}</div></div></a><div class="card-content"><div class="meta">{fuente} | {fecha}</div><a href="{enlace}" target="_blank">{titulo}</a></div></div>'
-    
-    videos_html = "\n".join(make_video_card(v) for v in videos[:30])
-    
-    # === Renderizar TENDENCIAS ===
-    trends_data = trends or []
-    def make_trend_card(t):
-        ts = t.get(TS_KEY, "")
-        fecha = t.get(FECHA_PUB_KEY) or t.get(FECHA_REAL_KEY, "")
-        tipo = t.get(TIPO_KEY, "trend")
-        tipo_emoji = "📊" if tipo == "trend" else "🎵"
-        tipo_label = "Google Trends" if tipo == "trend" else "TikTok"
-        titulo = t.get(TITULO_KEY, "")
-        enlace = t.get(ENLACE_KEY, "#")
-        return f'<li class="news-item" data-ts="{ts}"><div class="meta">{tipo_emoji} {tipo_label} | {fecha}</div><span class="badge badge-tech">{tipo_label}</span><a href="{enlace}" target="_blank">{titulo}</a></li>'
-    
-    trends_html = "\n".join(make_trend_card(t) for t in trends_data[:20])
-    
-    # === Renderizar RANKING GITHUB ===
-    def make_github_card(r, i):
-        lang = r.get(LENGUAJE_KEY, "")
-        stars = int(r.get(ESTRELLAS_KEY, "0") or 0)
-        stars_str = f"{stars/1000:.1f}k" if stars >= 1000 else str(stars)
-        lang_badge = f'<span class="badge badge-tech">{lang}</span>' if lang else ""
-        desc = r.get("descripcion", "")
-        desc_html = f'<div style="font-size:0.85em;color:#64748b;margin-top:4px;">{desc[:120]}</div>' if desc else ""
-        return f'<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#{i+1} ⭐ {stars_str}</span>{lang_badge}</div><a href="{r.get(ENLACE_KEY, "#")}" target="_blank">{r.get(TITULO_KEY, "")}</a>{desc_html}</div>'
-    
-    github_html = "\n".join(make_github_card(r, i) for i, r in enumerate(top_github))
-    
-    # === Referencias ===
-    def render_refs(refs_dict, title):
-        if not refs_dict: return ""
-        html = [f'<div class="filter-section"><strong>{title}</strong><div class="chip-container">']
-        for group, items in refs_dict.items():
-            html.append(f'<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">{group}</strong>')
-            for item in items:
-                html.append(f'<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">{item}</span>')
-            html.append('</div>')
-        html.append('</div></div>')
-        return "\n".join(html)
-    
-    refs_html = ""
-    refs_html += render_refs(SKILLS, "🛠️ Skills")
-    refs_html += render_refs(LLMS, "🧠 LLMs")
-    refs_html += render_refs(LENGUAJES, "📝 Lenguajes")
-    refs_html += render_refs(FRAMEWORKS, "📦 Frameworks")
-    refs_html += render_refs(LIBRERIAS, "📚 Librerías")
-    
-    # === Stats bar ===
-    stats_html = f'''
-        <div class="stat-card"><b>{total_items}</b><span>Total</span></div>
-        <div class="stat-card"><b>{total_noticias}</b><span>Noticias</span></div>
-        <div class="stat-card"><b>{total_videos}</b><span>Multimedia</span></div>
-        <div class="stat-card"><b>{fuentes_unicas}</b><span>Fuentes</span></div>
-    '''
-    
-    # === Categorías para filtros ===
-    cats_filter_html = "".join(
-        f'<div class="chip" data-cat="{cat}">{cat} <span style="opacity:.7">({cnt})</span></div>'
-        for cat, cnt in cats_sorted[:10]
-    )
-    
-    # === Canales para filtros ===
-    canales = sorted(set(n.get(FUENTE_KEY, "") for n in historial if n.get(FUENTE_KEY)))
-    canales_html = "".join(f'<div class="chip" data-canal="{c}">{c}</div>' for c in canales[:15])
-    
-    # === RSS fuentes ===
-    rss_sources = sorted(set(n.get(FUENTE_KEY, "") for n in historial if n.get(ORIGEN_KEY) == VAL_RSS))
-    rss_html = "".join(f'<div class="chip" data-rss="{r}">📡 {r}</div>' for r in rss_sources[:10])
-    
-    # === Build full HTML ===
+    # === Escribir index.html (solo resumen + fecha, resto lo pinta JS) ===
     os.makedirs("public", exist_ok=True)
-    full_html = HTML_TEMPLATE.format(
-        fecha_hoy=fecha_h,
-        resumen=resumen_ia,
-        stats_bar=stats_html,
-        noticias_list=noticias_html,
-        videos_grid=videos_html,
-        trends_list=trends_html,
-        github_ranking=github_html,
-        references_section=refs_html,
-        cats_filter=cats_filter_html,
-        canales_filter=canales_html,
-        rss_filter=rss_html,
-    )
-    
     with open("public/index.html", "w", encoding="utf-8") as f:
-        f.write(full_html)
-    
-    logger.info(f"✅ Dashboard HTML generado ({len(historial)} registros, {len(top_github)} herramientas, {len(videos)} vídeos).")
+        f.write(
+            HTML_TEMPLATE.format(
+                fecha_hoy=fecha_h,
+                resumen=resumen_ia,
+            )
+        )
+
+    # === Completar avatares: si un canal YT no tiene avatar, usar UI Avatars como fallback ===
+    avatars_known = getattr(scr, "avatar_repo", None) and scr.avatar_repo.avatars or {}
+    for nombre, info in FUENTES.items():
+        if YT_KEY in info:
+            nombre_c = nombre.replace(" Shorts", "")
+            if nombre_c not in avatars_known:
+                avatars_known[nombre_c] = f"https://ui-avatars.com/api/?name={nombre_c}&background=random"
+
+    # === Escribir data.json (lo consume script.js) ===
+    trends_data = trends or []
+    with open("public/data.json", "w", encoding="utf-8") as f:
+        json.dump(
+            {
+                "items": historial,
+                "herramientas": top_github,
+                "trends": trends_data,
+                "avatars": avatars_known,
+                "skills": SKILLS,
+                "llms": LLMS,
+                "lenguajes": LENGUAJES,
+                "frameworks": FRAMEWORKS,
+                "librerias": LIBRERIAS,
+                "categorias": dict(list(CATEGORIAS.items())[:6]),
+                "config_js": JS_CONFIG,
+            },
+            f,
+            indent=2,
+            ensure_ascii=False,
+        )
+
+    logger.info(f"✅ Dashboard HTML + data.json generados ({len(historial)} registros, {len(top_github)} herramientas).")
 
 
 def emoji_categoria(cat: str) -> str:
@@ -382,6 +270,13 @@ async def run():
         logger.warning("⚠️ Generando resumen de emergencia con titulares.")
         titulares = [f"• {n['titulo']}" for n in noticias_web[:10]]
         resumen_ia = "Resumen de hoy:\n\n" + "\n".join(titulares)
+
+    # Precargar avatares de todos los canales YouTube (como se hacía en downloadFile.py)
+    for nombre, info in FUENTES.items():
+        if YT_KEY in info:
+            nombre_c = nombre.replace(" Shorts", "")
+            yt_url = info[YT_KEY]
+            scr.obtener_avatar_canal(nombre_c, yt_url)
 
     herramientas = cargar_herramientas()
     trends = cargar_trends()

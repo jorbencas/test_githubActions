@@ -242,6 +242,47 @@ FUENTES = {
     "This Week in React Instagram": {"url": "https://www.instagram.com/thisweekinreact/", "selector": "article a[href*='/p/']"},
     "TikTok Tech": {"url": "https://www.tiktok.com/@tech", "selector": "div[data-e2e='search_video-item'] a"},
     "Python Hub Instagram": {"url": "https://www.instagram.com/python.hub/", "selector": "article a[href*='/p/']"},
+    # ── Instagram ──
+    "MoureDev Instagram": {"url": "https://www.instagram.com/mouredev/", "selector": "article a[href*='/p/']"},
+    "Pelado Nerd Instagram": {"url": "https://www.instagram.com/peladonerd/", "selector": "article a[href*='/p/']"},
+    "HolaMundo Instagram": {"url": "https://www.instagram.com/holamundodev/", "selector": "article a[href*='/p/']"},
+    "FreeCodeCamp Instagram": {"url": "https://www.instagram.com/freecodecamp/", "selector": "article a[href*='/p/']"},
+    "Fazt Instagram": {"url": "https://www.instagram.com/fazttech/", "selector": "article a[href*='/p/']"},
+    "Clipset Instagram": {"url": "https://www.instagram.com/clipset/", "selector": "article a[href*='/p/']"},
+    "CodelyTV Instagram": {"url": "https://www.instagram.com/codelytv/", "selector": "article a[href*='/p/']"},
+    "EDteam Instagram": {"url": "https://www.instagram.com/edteam/", "selector": "article a[href*='/p/']"},
+    "Carlos Azaustre Instagram": {"url": "https://www.instagram.com/carlosazaustre/", "selector": "article a[href*='/p/']"},
+    "Codigo facilito Instagram": {"url": "https://www.instagram.com/codigofacilito/", "selector": "article a[href*='/p/']"},
+    "Xataka Instagram": {"url": "https://www.instagram.com/xataka/", "selector": "article a[href*='/p/']"},
+    # ── Threads ──
+    "MoureDev Threads": {"url": "https://www.threads.net/@mouredev", "selector": "article a[href*='/post/']"},
+    "Pelado Nerd Threads": {"url": "https://www.threads.net/@peladonerd", "selector": "article a[href*='/post/']"},
+    "HolaMundo Threads": {"url": "https://www.threads.net/@holamundodev", "selector": "article a[href*='/post/']"},
+    "FreeCodeCamp Threads": {"url": "https://www.threads.net/@freecodecamp", "selector": "article a[href*='/post/']"},
+    "Fazt Threads": {"url": "https://www.threads.net/@fazttech", "selector": "article a[href*='/post/']"},
+    "Clipset Threads": {"url": "https://www.threads.net/@clipset", "selector": "article a[href*='/post/']"},
+    "CodelyTV Threads": {"url": "https://www.threads.net/@codelytv", "selector": "article a[href*='/post/']"},
+    "EDteam Threads": {"url": "https://www.threads.net/@edteam", "selector": "article a[href*='/post/']"},
+    "Carlos Azaustre Threads": {"url": "https://www.threads.net/@carlosazaustre", "selector": "article a[href*='/post/']"},
+    "Codigo facilito Threads": {"url": "https://www.threads.net/@codigofacilito", "selector": "article a[href*='/post/']"},
+    "Xataka Threads": {"url": "https://www.threads.net/@xataka", "selector": "article a[href*='/post/']"},
+    # ── X/Twitter ──
+    "MoureDev Twitter": {"url": "https://x.com/mouredev", "selector": "article[data-testid='tweet'] div[lang]"},
+    "Pelado Nerd Twitter": {"url": "https://x.com/peladonerd", "selector": "article[data-testid='tweet'] div[lang]"},
+    "HolaMundo Twitter": {"url": "https://x.com/holamundodev", "selector": "article[data-testid='tweet'] div[lang]"},
+    "FreeCodeCamp Twitter": {"url": "https://x.com/freecodecamp", "selector": "article[data-testid='tweet'] div[lang]"},
+    "Fazt Twitter": {"url": "https://x.com/fazttech", "selector": "article[data-testid='tweet'] div[lang]"},
+    "Clipset Twitter": {"url": "https://x.com/clipset", "selector": "article[data-testid='tweet'] div[lang]"},
+    "CodelyTV Twitter": {"url": "https://x.com/codelytv", "selector": "article[data-testid='tweet'] div[lang]"},
+    "EDteam Twitter": {"url": "https://x.com/edteam", "selector": "article[data-testid='tweet'] div[lang]"},
+    "Carlos Azaustre Twitter": {"url": "https://x.com/carlosazaustre", "selector": "article[data-testid='tweet'] div[lang]"},
+    "Codigo facilito Twitter": {"url": "https://x.com/codigofacilito", "selector": "article[data-testid='tweet'] div[lang]"},
+    "Xataka Twitter": {"url": "https://x.com/xataka", "selector": "article[data-testid='tweet'] div[lang]"},
+    "Victor Robles Twitter": {"url": "https://x.com/victorroblesweb", "selector": "article[data-testid='tweet'] div[lang]"},
+    "Programa Con Arnau Twitter": {"url": "https://x.com/progconarnau", "selector": "article[data-testid='tweet'] div[lang]"},
+    "El Pingüino de Mario Twitter": {"url": "https://x.com/elpinguinodemario", "selector": "article[data-testid='tweet'] div[lang]"},
+    "Develoteca Twitter": {"url": "https://x.com/develoteca", "selector": "article[data-testid='tweet'] div[lang]"},
+    "Linkfydev Twitter": {"url": "https://x.com/linkfydev", "selector": "article[data-testid='tweet'] div[lang]"},
     # ── Fuentes RSS (lectores XML) [quick: True → tier light] ──
     "OpenAI Blog": {"rss": "https://openai.com/news/feed.xml", "quick": True},
     "Anthropic Blog": {"rss": "https://www.anthropic.com/feed.xml", "quick": True},
@@ -307,7 +348,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <body>
     <div class="container">
         <header>
-            <h1>Tech Pulse <small style="font-size: 0.4em; color: #666;">{fecha_hoy}</small></h1>
+            <h1>Tech Pulse <small id="header-date" style="font-size: 0.4em; color: #666;">{fecha_hoy}</small></h1>
             <picture>
                 <source srcset="optimizado/Image.avif" type="image/avif">
                 <source srcset="optimizado/Image.webp" type="image/webp">
@@ -320,76 +361,53 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             <p>{resumen}</p>
         </div>
 
-        <div class="stats-bar">{stats_bar}</div>
+        <div id="stats-bar" class="stats-bar"></div>
 
-        <div class="news-section">
-            <h2>\U0001f4f0 Noticias</h2>
-            <div class="filter-section">
-                <strong>\U0001f4e1 Tipo de fuente:</strong>
-                <div id="news-tipo-fuente-filters" class="chip-container"></div>
+        <h2>\U0001f4f0 Noticias</h2>
+        <div class="filter-section">
+            <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+                <strong>\U0001f4c5 Tiempo:</strong>
+                <div id="news-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
             </div>
-            <div class="filter-section">
-                <strong>\U0001f3af Categoría:</strong>
-                <div id="news-category-filters" class="chip-container">{cats_filter}</div>
-            </div>
-            <div class="filter-section">
-                <strong>\U0001f4a1 Tipo:</strong>
-                <div id="news-badge-filters" class="chip-container"></div>
-            </div>
-            <div class="filter-section">
-                <strong>📡 Fuente RSS:</strong>
-                <div id="news-rss-filters" class="chip-container">{rss_filter}</div>
-            </div>
-            <div class="filter-section">
-                <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
-                    <strong>\U0001f4c5 Tiempo:</strong>
-                    <div id="news-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
-                </div>
-            </div>
-            <div class="filter-section">
-                <strong>\U0001f4f0 Filtro Canal:</strong>
-                <div id="news-channel-filters" class="chip-container">{canales_filter}</div>
-            </div>
-            <ul id="news-list" class="news-list">{noticias_list}</ul>
         </div>
+        <div class="filter-section">
+            <strong>\U0001f310 Webs:</strong>
+            <div id="news-channel-filters" class="chip-container"></div>
+        </div>
+        <div class="filter-section">
+            <strong>\U0001f3af Categoría:</strong>
+            <div id="news-category-filters" class="chip-container"></div>
+        </div>
+        <ul id="news-list" class="news-list"></ul>
 
-        <div class="multimedia-section">
-            <h2>\U0001f3ac Multimedia</h2>
-            <div class="filter-section">
-                <strong>\U0001f4fa Tipo:</strong>
-                <div id="multimedia-tabs" class="chip-container"></div>
+        <h2>\U0001f3ac Multimedia</h2>
+        <div class="filter-section" id="multimedia-filter-section">
+            <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+                <strong>\U0001f4c5 Tiempo:</strong>
+                <div id="video-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
             </div>
-            <div class="filter-section" id="multimedia-filter-section">
-                <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
-                    <strong>\U0001f4c5 Tiempo:</strong>
-                    <div id="video-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
-                </div>
-            </div>
-            <div class="filter-section" id="multimedia-channel-section">
-                <strong>\U0001f4fa Filtro Canal:</strong>
-                <div id="video-channel-filters" class="chip-container">{canales_filter}</div>
-            </div>
-            <div id="multimedia-content" class="video-grid">{videos_grid}</div>
         </div>
+        <div class="filter-section">
+            <strong>\U0001f4fa Tipo:</strong>
+            <div id="multimedia-tabs" class="chip-container"></div>
+        </div>
+        <div class="filter-section" id="multimedia-channel-section">
+            <strong>\U0001f4fa Filtro Canal:</strong>
+            <div id="video-channel-filters" class="chip-container"></div>
+        </div>
+        <div id="multimedia-content" class="video-grid"></div>
 
         <h2>\U0001f4ca Tendencias</h2>
-        <div class="filter-section">
-            <strong>\U0001f50d Filtrar:</strong>
-            <div id="trend-type-filters" class="chip-container"></div>
-        </div>
-        <div id="trends-list" class="news-list">{trends_list}</div>
+        <div id="trends-list" class="news-list"></div>
 
         <h2>\u2b50 Ranking GitHub Stars</h2>
         <div class="filter-section">
             <strong>\U0001f524 Filtro:</strong>
             <input type="text" id="github-filter" placeholder="Buscar por nombre o lenguaje..." style="padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; width: 100%; max-width: 400px; margin-top: 8px; font-size: 14px; background: #fff; color: #1c1e21;">
         </div>
-        <div id="github-ranking">{github_ranking}</div>
+        <div id="github-ranking"></div>
 
-        <h2 style="margin-top:40px;cursor:pointer;" onclick="this.nextElementSibling.classList.toggle('visible')">📚 Referencia <small style="font-size:0.6em;color:#666;">(click para mostrar/ocultar)</small></h2>
-        <div id="reference-section" style="display:none;">
-            {references_section}
-        </div>
+
     </div>
 </body>
 <script>
@@ -729,25 +747,16 @@ JS_CONFIG = {
     "ALL_YT_CHANNELS": [
         "MoureDev", "Midudev", "Pelado Nerd", "HolaMundo", "FreeCodeCamp",
         "Fazt", "Clipset", "CodelyTV", "EDteam", "Programa Con Arnau",
-        "El Pingüino de Mario", "Carlos Azaustre", "Código facilito", "Víctor Robles",
+        "El Pingüino de Mario", "Carlos Azaustre", "Codigo facilito", "Victor Robles",
         "LinkTV", "Ringa Tech", "Nethermind", "Develoteca", "Programador X",
         "Linkfydev", "Esa Operativa", "Xataka",
     ],
     "TABS_MULTIMEDIA": [
         {"id": "youtube", "label": "🎬 YouTube"},
-        {"id": "tiktok", "label": "🎵 TikTok"},
         {"id": "instagram", "label": "📸 Instagram"},
-    ],
-    "FILTRO_TIPO_FUENTE": [
-        {"id": "all", "label": "Todas"},
-        {"id": "youtube", "label": "🎬 YouTube"},
-        {"id": "web", "label": "🌐 Web"},
-        {"id": "rss", "label": "📡 RSS"},
-        {"id": "twitter", "label": "🐦 Twitter/X"},
-    ],
-    "FILTRO_BADGE": [
-        {"id": "all", "label": "Todas"},
-        {"id": "Tech", "label": "💻 Tech"},
+        {"id": "twitter", "label": "🐦 X/Twitter"},
+        {"id": "threads", "label": "🧵 Threads"},
+        {"id": "tiktok", "label": "🎵 TikTok"},
     ],
     "EMOJIS_CATEGORIA": "⚡🤖💻🐳🔒📊🎓💡",
     "DASHBOARD_URL": "http://jorbencasdownloaderdocument.surge.sh",
@@ -776,6 +785,12 @@ TIPO_VAL_TREND = "trend"
 TIPO_VAL_SOCIAL = "social"
 VAL_RSS = "rss"
 VAL_TECH = "Tech"
+PLAYWRIGHT_KEY = "pw"
+
+# ── Playwright sources (JS-heavy, excluded from HTTP scraping) ──
+PLAYWRIGHT_SOURCES = {
+    "Instagram", "Threads", "Twitter", "TikTok",
+}
 
 # ── Item schema key constants ──
 ENLACE_KEY = "enlace"

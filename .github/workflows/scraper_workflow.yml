@@ -42,6 +42,12 @@ jobs:
         run: python scrape_news.py --tier full
       - name: 🔧 Scrape tools
         run: python scrape_tools.py
+      - name: 📱 Scrape social media (Playwright)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python -m playwright install chromium 2>&1
+          python scrape_social.py --source all
 
       # ── Fase 3: Blog (push directo) ──
       - name: 📂 Checkout blog repo
@@ -96,6 +102,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           npm --prefix blog install playwright-core --no-save 2>&1
+          cd blog && npx playwright install chromium 2>&1
           python blog/scripts/make_cover_collage.py --ci
       - name: 🚀 Push directo al blog
         if: steps.blog_updated.outputs.updated == 'yes'
