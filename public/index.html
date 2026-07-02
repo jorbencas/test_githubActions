@@ -45,56 +45,117 @@
 
         <div class="ia-box">
             <h2>🤖 Resumen IA</h2>
-            <p>Esta semana hemos seguido de cerca las principales tendencias en tecnología y desarrollo.</p>
+            <p>Test resumen IA</p>
         </div>
 
-        <div id="stats-bar" class="stats-bar"></div>
+        <div class="stats-bar">
+        <div class="stat-card"><b>890</b><span>Total</span></div>
+        <div class="stat-card"><b>886</b><span>Noticias</span></div>
+        <div class="stat-card"><b>4</b><span>Multimedia</span></div>
+        <div class="stat-card"><b>38</b><span>Fuentes</span></div>
+    </div>
 
-        <h2>📰 Noticias</h2>
-        <div class="filter-section">
-            <strong>📡 Tipo de fuente:</strong>
-            <div id="news-tipo-fuente-filters" class="chip-container"></div>
-        </div>
-        <div class="filter-section">
-            <strong>🎯 Categoría:</strong>
-            <div id="news-category-filters" class="chip-container"></div>
-        </div>
-        <div class="filter-section">
-            <strong>💡 Tipo:</strong>
-            <div id="news-badge-filters" class="chip-container"></div>
-        </div>
-        <div class="filter-section">
-            <strong>📡 Fuente RSS:</strong>
-            <div id="news-rss-filters" class="chip-container"></div>
-        </div>
-        <div class="filter-section">
-            <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
-                <strong>📅 Tiempo:</strong>
-                <div id="news-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
+        <div class="news-section">
+            <h2>📰 Noticias</h2>
+            <div class="filter-section">
+                <strong>📡 Tipo de fuente:</strong>
+                <div id="news-tipo-fuente-filters" class="chip-container"></div>
             </div>
-        </div>
-        <div class="filter-section">
-            <strong>📰 Filtro Canal:</strong>
-            <div id="news-channel-filters" class="chip-container"></div>
-        </div>
-        <ul id="news-list" class="news-list"></ul>
-
-        <h2>🎬 Multimedia</h2>
-        <div class="filter-section">
-            <strong>📺 Tipo:</strong>
-            <div id="multimedia-tabs" class="chip-container"></div>
-        </div>
-        <div class="filter-section" id="multimedia-filter-section">
-            <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
-                <strong>📅 Tiempo:</strong>
-                <div id="video-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
+            <div class="filter-section">
+                <strong>🎯 Categoría:</strong>
+                <div id="news-category-filters" class="chip-container"><div class="chip" data-cat="💡 General">💡 General <span style="opacity:.7">(642)</span></div><div class="chip" data-cat="🤖 IA">🤖 IA <span style="opacity:.7">(164)</span></div><div class="chip" data-cat="💻 Programación">💻 Programación <span style="opacity:.7">(31)</span></div><div class="chip" data-cat="⚡ Hardware">⚡ Hardware <span style="opacity:.7">(23)</span></div><div class="chip" data-cat="📊 Negocios">📊 Negocios <span style="opacity:.7">(14)</span></div><div class="chip" data-cat="🐳 DevOps">🐳 DevOps <span style="opacity:.7">(6)</span></div><div class="chip" data-cat="🔒 Ciberseguridad">🔒 Ciberseguridad <span style="opacity:.7">(5)</span></div><div class="chip" data-cat="🎓 Becas/Formación">🎓 Becas/Formación <span style="opacity:.7">(1)</span></div></div>
             </div>
+            <div class="filter-section">
+                <strong>💡 Tipo:</strong>
+                <div id="news-badge-filters" class="chip-container"></div>
+            </div>
+            <div class="filter-section">
+                <strong>📡 Fuente RSS:</strong>
+                <div id="news-rss-filters" class="chip-container"><div class="chip" data-rss="Ars Technica AI">📡 Ars Technica AI</div><div class="chip" data-rss="Dev.to">📡 Dev.to</div><div class="chip" data-rss="Google AI Blog">📡 Google AI Blog</div><div class="chip" data-rss="Google Search Central">📡 Google Search Central</div><div class="chip" data-rss="Hacker News">📡 Hacker News</div><div class="chip" data-rss="MIT Tech Review AI">📡 MIT Tech Review AI</div><div class="chip" data-rss="Moz Blog SEO">📡 Moz Blog SEO</div><div class="chip" data-rss="Search Engine Journal">📡 Search Engine Journal</div><div class="chip" data-rss="Stack Overflow Blog">📡 Stack Overflow Blog</div><div class="chip" data-rss="TechCrunch AI">📡 TechCrunch AI</div></div>
+            </div>
+            <div class="filter-section">
+                <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+                    <strong>📅 Tiempo:</strong>
+                    <div id="news-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
+                </div>
+            </div>
+            <div class="filter-section">
+                <strong>📰 Filtro Canal:</strong>
+                <div id="news-channel-filters" class="chip-container"><div class="chip" data-canal="ADSL Zone">ADSL Zone</div><div class="chip" data-canal="AWS ML">AWS ML</div><div class="chip" data-canal="Anthropic">Anthropic</div><div class="chip" data-canal="Applesfera">Applesfera</div><div class="chip" data-canal="Ars Technica">Ars Technica</div><div class="chip" data-canal="Ars Technica AI">Ars Technica AI</div><div class="chip" data-canal="Azure AI">Azure AI</div><div class="chip" data-canal="CSS-Tricks">CSS-Tricks</div><div class="chip" data-canal="ComputerHoy">ComputerHoy</div><div class="chip" data-canal="DeepMind">DeepMind</div><div class="chip" data-canal="Dev.to">Dev.to</div><div class="chip" data-canal="El País Tecnología">El País Tecnología</div><div class="chip" data-canal="Fundación Carolina">Fundación Carolina</div><div class="chip" data-canal="Genbeta">Genbeta</div><div class="chip" data-canal="GitHub Blog">GitHub Blog</div></div>
+            </div>
+            <ul id="news-list" class="news-list"><li class="news-item" data-ts="2026-07-02T11:33:28.225178" data-fuente="Dev.to" data-categoria="🤖 IA" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 11:00:31 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🤖 IA</span><a href="https://dev.to/mgobea/meta-building-cloud-business-to-sell-excess-ai-capacity-41ek" target="_blank">Meta building cloud business to sell excess AI capacity!</a></li>
+<li class="news-item" data-ts="2026-07-02T11:33:28.225138" data-fuente="Dev.to" data-categoria="🤖 IA" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 11:02:08 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🤖 IA</span><a href="https://dev.to/coder11/code-review-graph-vs-graphify-vs-codebase-memory-mcp-the-best-code-intelligence-mcp-tools-for-ai-3ea" target="_blank">code-review-graph vs Graphify vs codebase-memory-mcp: The Best Code Intelligence MCP Tools for AI Coding Agents (2026)</a></li>
+<li class="news-item" data-ts="2026-07-02T11:33:28.225125" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 11:07:14 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/lettstartdesign-official/angular-22-admin-dashboard-whats-new-and-why-it-matters-2gbi" target="_blank">Angular 22 Admin Dashboard: What's New and Why It Matters</a></li>
+<li class="news-item" data-ts="2026-07-02T11:33:28.225097" data-fuente="Dev.to" data-categoria="🐳 DevOps" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 11:12:48 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🐳 DevOps</span><a href="https://dev.to/highbee/building-docker-containers-with-persistent-storage-p1d" target="_blank">Building Docker Containers with Persistent Storage</a></li>
+<li class="news-item" data-ts="2026-07-02T11:33:28.225078" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 11:13:17 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/hafsa_motiwala/the-supply-chain-project-stockpulse-focus-2c6e" target="_blank">The Supply Chain Project (StockPulse Focus)</a></li>
+<li class="news-item" data-ts="2026-07-02T11:33:28.225054" data-fuente="Dev.to" data-categoria="🤖 IA" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 11:14:03 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🤖 IA</span><a href="https://dev.to/scussel/parei-de-usar-ia-como-chatbot-virei-ela-em-infraestrutura-44ip" target="_blank">Parei de usar IA como chatbot. Virei ela em infraestrutura.</a></li>
+<li class="news-item" data-ts="2026-07-02T11:33:28.225042" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 11:19:31 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/darshit_tank/paginate-pagination-designed-properly-4i5n" target="_blank">Paginate - Pagination, designed properly.</a></li>
+<li class="news-item" data-ts="2026-07-02T11:33:28.225016" data-fuente="Dev.to" data-categoria="💻 Programación" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 11:20:45 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💻 Programación</span><a href="https://dev.to/achiya-automation/i-deleted-my-no-code-automation-platform-and-rewrote-34-workflows-in-typescript-emh" target="_blank">I Deleted My No-Code Automation Platform and Rewrote 34 Workflows in TypeScript</a></li>
+<li class="news-item" data-ts="2026-07-02T11:33:28.224996" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 11:21:39 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/achiya-automation/exactly-once-by-default-how-durable-execution-changed-the-way-i-build-automations-2gbm" target="_blank">Exactly-Once by Default: How Durable Execution Changed the Way I Build Automations</a></li>
+<li class="news-item" data-ts="2026-07-02T11:33:28.224960" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 11:27:34 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/mafzal88_dev_net/blazor-jwt-authentication-with-radzen-net-10-complete-starter-template-56mo" target="_blank">Blazor JWT Authentication with Radzen & .NET 10: Complete Starter Template</a></li>
+<li class="news-item" data-ts="2026-07-02T11:33:28.224909" data-fuente="Dev.to" data-categoria="🤖 IA" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 11:28:15 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🤖 IA</span><a href="https://dev.to/nazarii-ahapevych/your-ai-coding-agent-gets-expensive-one-reasonable-decision-at-a-time-735" target="_blank">Your AI coding agent gets expensive one reasonable decision at a time</a></li>
+<li class="news-item" data-ts="2026-07-02T11:33:28.194669" data-fuente="Ars Technica AI" data-categoria="💡 General" data-origen="rss"><div class="meta">Ars Technica AI | Thu, 02 Jul 2026 10:00:27 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://arstechnica.com/science/2026/07/editorial-the-most-important-thing-you-can-do-to-protect-science/" target="_blank">Editorial: It's time to step up and have your say for science</a></li>
+<li class="news-item" data-ts="2026-07-02T11:33:27.187240" data-fuente="Wired AI" data-categoria="💡 General" data-origen="rss"><div class="meta">Wired AI | Thu, 02 Jul 2026 11:00:00 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://www.wired.com/story/how-trump-helped-china-make-slate-americas-cheapest-ev/" target="_blank">How Trump Helped China Make America’s Cheapest EV</a></li>
+<li class="news-item" data-ts="2026-07-02T11:33:27.187200" data-fuente="Wired AI" data-categoria="💡 General" data-origen="rss"><div class="meta">Wired AI | Thu, 02 Jul 2026 11:04:00 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://www.wired.com/review/bublue-buvortex-v5-pool-skimmer/" target="_blank">Bublue BuVortex V5 Pool Skimmer Review: An Impractical Cleaner</a></li>
+<li class="news-item" data-ts="2026-07-02T11:33:27.096502" data-fuente="Search Engine Journal" data-categoria="💡 General" data-origen="rss"><div class="meta">Search Engine Journal | Thu, 02 Jul 2026 11:21:15 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://www.searchenginejournal.com/googles-dmca-crisis-is-disrupting-the-web-it-will-only-get-worse/581340/" target="_blank">Google’s DMCA Crisis Is Disrupting The Web. It Will Only Get Worse. via @sejournal, @martinibuster</a></li>
+<li class="news-item" data-ts="2026-07-02T11:33:24.933572" data-fuente="Hacker News" data-categoria="⚡ Hardware" data-origen="rss"><div class="meta">Hacker News | Thu, 02 Jul 2026 10:41:33 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">⚡ Hardware</span><a href="https://www.cnbc.com/2026/07/02/nvidia-plans-to-offer-start-up-customers-access-to-revenue-sharing-deals.html" target="_blank">Nvidia offers startup customers chance to swap compute power for revenue share</a></li>
+<li class="news-item" data-ts="2026-07-02T11:02:40.525417" data-fuente="Dev.to" data-categoria="🤖 IA" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 10:45:14 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🤖 IA</span><a href="https://dev.to/clawbase/fable-5-changed-what-i-expect-from-an-ai-agent-so-i-built-clawbase-premium-around-it-2oba" target="_blank">Fable 5 cambió lo que espero de un agente de IA. Así que construí ClawBase Premium a su alrededor.</a></li>
+<li class="news-item" data-ts="2026-07-02T11:02:40.525406" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 10:45:22 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/timevolt/high-frequency-trading-like-a-boss-in-dark-souls-1ol1" target="_blank">Trading de alta frecuencia: como un jefe final en Dark Souls.</a></li>
+<li class="news-item" data-ts="2026-07-02T11:02:40.525379" data-fuente="Dev.to" data-categoria="💻 Programación" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 10:46:46 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💻 Programación</span><a href="https://dev.to/janardan_joshi_6f21026e06/stop-writing-typescript-interfaces-by-hand-2h6e" target="_blank">Deja de escribir interfaces de TypeScript a mano.</a></li>
+<li class="news-item" data-ts="2026-07-02T11:02:40.525364" data-fuente="Dev.to" data-categoria="🤖 IA" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 10:54:06 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🤖 IA</span><a href="https://dev.to/mininglamp/claude-sonnet-5-what-most-agentic-actually-means-in-practice-3hog" target="_blank">Claude Sonnet 5: Lo que 'más agentic' realmente significa en la práctica.</a></li>
+<li class="news-item" data-ts="2026-07-02T11:02:40.525352" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 11:00:00 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/rawveg/chatgpt-ads-are-not-contextual-23n8" target="_blank">Los anuncios de ChatGPT no son contextuales.</a></li>
+<li class="news-item" data-ts="2026-07-02T11:02:40.525310" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 11:01:04 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/patchvex/soc-2-cc71-what-auditors-actually-ask-for-in-vulnerability-management-15lg" target="_blank">SOC 2 CC7.1: Lo que los auditores realmente solicitan en la gestión de vulnerabilidades.</a></li>
+<li class="news-item" data-ts="2026-07-02T11:02:39.446051" data-fuente="Hacker News" data-categoria="🤖 IA" data-origen="rss"><div class="meta">Hacker News | Thu, 02 Jul 2026 10:43:41 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🤖 IA</span><a href="https://www.reuters.com/business/meta-sell-excess-ai-computing-capacity-via-cloud-business-bloomberg-news-reports-2026-07-01/" target="_blank">Meta construye un negocio en la nube para vender el exceso de capacidad de IA.</a></li>
+<li class="news-item" data-ts="2026-07-02T11:02:39.418394" data-fuente="Search Engine Journal" data-categoria="🤖 IA" data-origen="rss"><div class="meta">Search Engine Journal | Thu, 02 Jul 2026 11:00:11 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🤖 IA</span><a href="https://www.searchenginejournal.com/google-data-shows-ai-search-users-moved-past-keywords-your-content-hasnt/580596/" target="_blank">Google Data Shows AI Search Users Moved Past Keywords, Your Content Hasn’t via @sejournal, @gregjarboe</a></li>
+<li class="news-item" data-ts="2026-07-02T11:02:30.081022" data-fuente="MarkTechPost" data-categoria="🤖 IA" data-origen=""><div class="meta">MarkTechPost | 02/07/2026</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">🤖 IA</span><a href="https://www.marktechpost.com/2026/07/01/anthropic-redeploys-claude-fable-5-on-july-1-after-us-export-controls-lift-adds-new-cybersecurity-classifier/" target="_blank">Anthropic Redeploys Claude Fable 5 on July 1 After US Export Controls Lift, Adds New Cybersecurity Classifier</a></li>
+<li class="news-item" data-ts="2026-07-02T11:02:30.078503" data-fuente="MarkTechPost" data-categoria="💻 Programación" data-origen=""><div class="meta">MarkTechPost | 2026-07-02T01:46:56-07:00</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">💻 Programación</span><a href="https://www.marktechpost.com/2026/07/02/the-google-health-api-got-a-cli-ghealth-is-an-open-source-tool-for-your-fitbit-air-data/" target="_blank">The Google Health API Got a CLI: ghealth is an Open-Source Tool for Your Fitbit Air Data</a></li>
+<li class="news-item" data-ts="2026-07-02T11:01:59.456665" data-fuente="Applesfera" data-categoria="💡 General" data-origen=""><div class="meta">Applesfera | 2026-07-02T10:50:28Z</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">💡 General</span><a href="https://www.xatakahome.com/hogar/antes-usaba-papel-higienico-para-limpiar-asiento-inodoro-lavabo-he-descubierto-que-mala-idea-varios-motivos-1?utm_source=applesfera&utm_medium=network&utm_campaign=repost" target="_blank">Antes usaba papel higiénico para limpiar el asiento del inodoro y el lavabo. He descubierto que es una mala idea por varios motivos</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:55.223424" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 10:00:15 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/prathamchauhan/how-to-let-a-vercel-app-read-a-private-clickhouse-on-ec2-using-cloudflare-tunnel-3kjp" target="_blank">Cómo permitir que una Vercel App lea un ClickHouse privado en EC2 (Usando Cloudflare Tunnel).</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:55.223393" data-fuente="Dev.to" data-categoria="🤖 IA" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 10:10:49 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🤖 IA</span><a href="https://dev.to/anuis258/chat-exporter-for-gemini-save-conversations-as-word-pdf-notion-markdown-3fmb" target="_blank">Exportador de chat para Gemini – Guarda conversaciones como Word, PDF, Notion y Markdown.</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:55.223375" data-fuente="Dev.to" data-categoria="🤖 IA" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 10:11:15 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🤖 IA</span><a href="https://dev.to/resk/why-traditional-llm-audits-are-partially-useless-logit-level-security-is-the-fix-d0b" target="_blank">Por qué las auditorías de LLM tradicionales son parcialmente inútiles — La seguridad a nivel de logit es la solución.</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:55.223362" data-fuente="Dev.to" data-categoria="🤖 IA" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 10:11:59 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🤖 IA</span><a href="https://dev.to/resk/llm-audits-and-guardrails-are-not-enough-why-you-must-filter-at-the-logit-level-2b68" target="_blank">Las auditorías y barreras de seguridad de LLM no son suficientes: Por qué debes filtrar a nivel de logit.</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:55.223351" data-fuente="Dev.to" data-categoria="🤖 IA" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 10:12:16 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🤖 IA</span><a href="https://dev.to/andrew-ooo/video-use-review-browser-use-teams-ai-video-editor-58nl" target="_blank">Reseña de video-use: El editor de video con IA del equipo de browser-use.</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:55.223340" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 10:13:20 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/sentient-ui/the-interface-is-not-the-product-its-the-output-391g" target="_blank">La interfaz no es el producto. Es el resultado.</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:55.223300" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 10:20:00 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/mads_quist/understanding-the-incident-management-software-on-call-lifecycle-1ham" target="_blank">Entendiendo el software de gestión de incidentes y el ciclo de vida de las guardias.</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:55.223265" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 10:27:58 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/bengreenberg/the-mcp-release-candidate-survival-guide-apps-auth-deprecations-and-tool-schemas-5da2" target="_blank">La guía de supervivencia del candidato a lanzamiento de MCP: Aplicaciones, autenticación, deprecaciones y esquemas de herramientas.</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:55.223233" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 10:29:06 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/bjh7790/i-built-a-cfp-submission-tracker-in-notion-heres-the-free-template-5ja" target="_blank">Creé un rastreador de envíos de CFP en Notion — Aquí tienes la plantilla gratuita.</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:55.223196" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 10:30:11 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/ctrotech/testing-and-debugging-your-env-config-2ke8" target="_blank">Probando y depurando tu configuración de entorno.</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:55.223168" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 10:37:00 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/astaykov/securing-the-code-that-decides-who-entra-trusts-a-function-app-and-a-logic-app-end-to-end-1bi0" target="_blank">Protegiendo el código que decide en quién confía Entra: una Function App y una Logic App, de extremo a extremo.</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:55.223126" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 10:37:31 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/ctrotech/shipping-reusable-env-schemas-5dj5" target="_blank">Envío de esquemas de entorno reutilizables.</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:54.165814" data-fuente="Wired AI" data-categoria="💡 General" data-origen="rss"><div class="meta">Wired AI | Thu, 02 Jul 2026 09:00:00 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://www.wired.com/story/heat-domes-are-dangerous-july-fourth-activities-make-things-worse/" target="_blank">Las cúpulas de calor son peligrosas. Las actividades del 4 de Julio empeorarán las cosas.</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:54.165784" data-fuente="Wired AI" data-categoria="💡 General" data-origen="rss"><div class="meta">Wired AI | Thu, 02 Jul 2026 09:30:00 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://www.wired.com/story/why-meta-is-charging-a-subscription-for-on-device-smart-glasses-features/" target="_blank">Meta está cobrando una suscripción por las funciones de sus gafas inteligentes. Bienvenidos a la nueva era de la tecnología de consumo.</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:54.165748" data-fuente="Wired AI" data-categoria="💡 General" data-origen="rss"><div class="meta">Wired AI | Thu, 02 Jul 2026 10:00:00 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://www.wired.com/story/inside-the-luddite-festival-harnessing-gen-zs-rage-against-big-tech/" target="_blank">Dentro del Festival Ludita que canaliza la rabia de la Gen Z contra las Big Tech.</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:54.165706" data-fuente="Wired AI" data-categoria="💡 General" data-origen="rss"><div class="meta">Wired AI | Thu, 02 Jul 2026 10:30:00 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://www.wired.com/story/i-tried-rips-the-card-pack-app-where-users-spend-thousands-chasing-pricey-pokemon/" target="_blank">Probé Rips, la aplicación de paquetes de cartas donde los usuarios gastan miles persiguiendo Pokémon caros.</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:53.661701" data-fuente="Search Engine Journal" data-categoria="🤖 IA" data-origen="rss"><div class="meta">Search Engine Journal | Thu, 02 Jul 2026 09:30:54 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🤖 IA</span><a href="https://www.searchenginejournal.com/ask-an-seo-should-i-block-ai-crawlers-or-measure-their-value-first/580005/" target="_blank">Should I Block AI Crawlers Or Measure Their Value First? – Ask An SEO via @sejournal, @HelenPollitt1</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:51.949616" data-fuente="Hacker News" data-categoria="💡 General" data-origen="rss"><div class="meta">Hacker News | Thu, 02 Jul 2026 08:34:13 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://www.cnbc.com/2026/07/02/alphabet-google-android-eu-antitrust-fine-4-1-billion-euro-appeal.html" target="_blank">Google pierde la batalla por la multa antimonopolio récord de 4.700 millones de dólares de la UE.</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:51.949582" data-fuente="Hacker News" data-categoria="💡 General" data-origen="rss"><div class="meta">Hacker News | Thu, 02 Jul 2026 10:00:27 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://docs.google.com/document/d/1SH9QRTAlL02THgAN2AGmWe9El0_2ZJF6hhgDBx8k97c/edit?tab=t.0" target="_blank">Por qué me veo obligado a decir adiós: La dirección de Google ha perdido su brújula moral.</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:45.877154" data-fuente="The Decoder" data-categoria="🤖 IA" data-origen=""><div class="meta">The Decoder | 02/07/2026</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">🤖 IA</span><a href="https://the-decoder.com/openai-reportedly-offers-the-trump-administration-a-five-percent-stake-in-the-company/" target="_blank">OpenAI reportedly offers the Trump administration a five percent stake in the company</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:23.510546" data-fuente="ComputerHoy" data-categoria="💡 General" data-origen=""><div class="meta">ComputerHoy | 02/07/2026</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">💡 General</span><a href="https://www.computerhoy.com/tendencias/francia-da-marcha-atras-elimina-tasa-para-paquetes-pequenos-tiendas-como-aliexpress-shein-temu_7009610_0.html" target="_blank">Francia da marcha atrás y elimina la tasa para paquetes pequeños de tiendas como AliExpress, Shein o Temu</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:23.508006" data-fuente="ComputerHoy" data-categoria="💡 General" data-origen=""><div class="meta">ComputerHoy | 02/07/2026</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">💡 General</span><a href="https://www.computerhoy.com/moviles/nombres-usuario-whatsapp-para-principiantes-que-significan-como-se-hace-que-es-clave-seguridad-por-que-es-tan-importante-que-hagas-cuanto-antes_7009586_0.html" target="_blank">Nombres de usuario en WhatsApp para principiantes: qué significan, cómo se hace, qué es la clave de seguridad y por qué es tan importante que lo hagas cuanto antes</a></li>
+<li class="news-item" data-ts="2026-07-02T10:46:23.290683" data-fuente="MuyComputer" data-categoria="💡 General" data-origen=""><div class="meta">MuyComputer | 02/07/2026</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">💡 General</span><a href="https://www.muycomputer.com/2026/07/02/ps6-y-xbox-project-helix-seran-totalmente-digitales-descubre-como-te-afectara-esto/" target="_blank">NoticiasHace 55 segundosPS6 y Xbox Project Helix serán totalmente digitales: descubre cómo te afectará esto</a></li></ul>
         </div>
-        <div class="filter-section" id="multimedia-channel-section">
-            <strong>📺 Filtro Canal:</strong>
-            <div id="video-channel-filters" class="chip-container"></div>
+
+        <div class="multimedia-section">
+            <h2>🎬 Multimedia</h2>
+            <div class="filter-section">
+                <strong>📺 Tipo:</strong>
+                <div id="multimedia-tabs" class="chip-container"></div>
+            </div>
+            <div class="filter-section" id="multimedia-filter-section">
+                <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+                    <strong>📅 Tiempo:</strong>
+                    <div id="video-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
+                </div>
+            </div>
+            <div class="filter-section" id="multimedia-channel-section">
+                <strong>📺 Filtro Canal:</strong>
+                <div id="video-channel-filters" class="chip-container"><div class="chip" data-canal="ADSL Zone">ADSL Zone</div><div class="chip" data-canal="AWS ML">AWS ML</div><div class="chip" data-canal="Anthropic">Anthropic</div><div class="chip" data-canal="Applesfera">Applesfera</div><div class="chip" data-canal="Ars Technica">Ars Technica</div><div class="chip" data-canal="Ars Technica AI">Ars Technica AI</div><div class="chip" data-canal="Azure AI">Azure AI</div><div class="chip" data-canal="CSS-Tricks">CSS-Tricks</div><div class="chip" data-canal="ComputerHoy">ComputerHoy</div><div class="chip" data-canal="DeepMind">DeepMind</div><div class="chip" data-canal="Dev.to">Dev.to</div><div class="chip" data-canal="El País Tecnología">El País Tecnología</div><div class="chip" data-canal="Fundación Carolina">Fundación Carolina</div><div class="chip" data-canal="Genbeta">Genbeta</div><div class="chip" data-canal="GitHub Blog">GitHub Blog</div></div>
+            </div>
+            <div id="multimedia-content" class="video-grid"><div class="card tipo-video" data-ts="2026-07-02T11:01:53.683629" data-fuente="MoureDev"><a href="https://www.youtube.com/watch?v=pZ8dIzvYKV0" target="_blank" class="video-thumb-link"><div class="video-thumb"><img src="https://img.youtube.com/vi/pZ8dIzvYKV0/mqdefault.jpg" alt="¿Programas pero no terminas nada? Mira esto" width="320" height="180" loading="lazy" class="video-thumb-img" onerror="this.classList.add('errored');this.nextElementSibling.classList.add('visible')"><div class="video-thumb-fallback">📺 MoureDev</div></div></a><div class="card-content"><div class="meta">MoureDev | Reciente</div><a href="https://www.youtube.com/watch?v=pZ8dIzvYKV0" target="_blank">¿Programas pero no terminas nada? Mira esto</a></div></div>
+<div class="card tipo-video" data-ts="2026-07-02T10:46:14.441986" data-fuente="MoureDev"><a href="https://www.youtube.com/watch?v=YRr8s1kJ780" target="_blank" class="video-thumb-link"><div class="video-thumb"><img src="https://img.youtube.com/vi/YRr8s1kJ780/mqdefault.jpg" alt="No eres dueño de la IA: el peligro de alquilar tecnología" width="320" height="180" loading="lazy" class="video-thumb-img" onerror="this.classList.add('errored');this.nextElementSibling.classList.add('visible')"><div class="video-thumb-fallback">📺 MoureDev</div></div></a><div class="card-content"><div class="meta">MoureDev | Reciente</div><a href="https://www.youtube.com/watch?v=YRr8s1kJ780" target="_blank">No eres dueño de la IA: el peligro de alquilar tecnología</a></div></div>
+<div class="card tipo-video" data-ts="2026-07-01T19:54:15.241352" data-fuente="MoureDev"><a href="https://www.youtube.com/watch?v=ulZlg_TntYI" target="_blank" class="video-thumb-link"><div class="video-thumb"><img src="https://img.youtube.com/vi/ulZlg_TntYI/mqdefault.jpg" alt="Fatiga por IA: estamos quemados y no lo sabemos" width="320" height="180" loading="lazy" class="video-thumb-img" onerror="this.classList.add('errored');this.nextElementSibling.classList.add('visible')"><div class="video-thumb-fallback">📺 MoureDev</div></div></a><div class="card-content"><div class="meta">MoureDev | Reciente</div><a href="https://www.youtube.com/watch?v=ulZlg_TntYI" target="_blank">Fatiga por IA: estamos quemados y no lo sabemos</a></div></div>
+<div class="card tipo-video" data-ts="2026-07-01T19:45:03.270831" data-fuente="MoureDev"><a href="https://www.youtube.com/watch?v=VFAihl_RsPA" target="_blank" class="video-thumb-link"><div class="video-thumb"><img src="https://img.youtube.com/vi/VFAihl_RsPA/mqdefault.jpg" alt="Producimos apps 10 veces más rápido. ¿El problema? No funcionan" width="320" height="180" loading="lazy" class="video-thumb-img" onerror="this.classList.add('errored');this.nextElementSibling.classList.add('visible')"><div class="video-thumb-fallback">📺 MoureDev</div></div></a><div class="card-content"><div class="meta">MoureDev | Reciente</div><a href="https://www.youtube.com/watch?v=VFAihl_RsPA" target="_blank">Producimos apps 10 veces más rápido. ¿El problema? No funcionan</a></div></div></div>
         </div>
-        <div id="multimedia-content" class="video-grid"></div>
 
         <h2>📊 Tendencias</h2>
         <div class="filter-section">
@@ -108,15 +169,232 @@
             <strong>🔤 Filtro:</strong>
             <input type="text" id="github-filter" placeholder="Buscar por nombre o lenguaje..." style="padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; width: 100%; max-width: 400px; margin-top: 8px; font-size: 14px; background: #fff; color: #1c1e21;">
         </div>
-        <div id="github-ranking"></div>
+        <div id="github-ranking"><div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#1 ⭐ 243.9k</span><span class="badge badge-tech">Shell</span></div><a href="https://github.com/obra/superpowers" target="_blank">obra /superpowers</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">An agentic skills framework & software development methodology that works.</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#2 ⭐ 224.8k</span><span class="badge badge-tech">JavaScript</span></div><a href="https://github.com/affaan-m/ECC" target="_blank">affaan-m /ECC</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development f</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#3 ⭐ 150.4k</span><span class="badge badge-tech">Python</span></div><a href="https://github.com/langflow-ai/langflow" target="_blank">langflow-ai /langflow</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">Langflow is a powerful tool for building and deploying AI-powered agents and workflows.</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#4 ⭐ 123.9k</span><span class="badge badge-tech">HTML</span></div><a href="https://github.com/ripienaar/free-for-dev" target="_blank">ripienaar /free-for-dev</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#5 ⭐ 120.6k</span><span class="badge badge-tech">Shell</span></div><a href="https://github.com/msitarzewski/agency-agents" target="_blank">msitarzewski /agency-agents</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to rea</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#6 ⭐ 115.7k</span><span class="badge badge-tech">TypeScript</span></div><a href="https://github.com/garrytan/gstack" target="_blank">garrytan /gstack</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager,</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#7 ⭐ 101.0k</span><span class="badge badge-tech">Python</span></div><a href="https://github.com/pytorch/pytorch" target="_blank">pytorch /pytorch</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">Tensors and Dynamic neural networks in Python with strong GPU acceleration</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#8 ⭐ 79.4k</span><span class="badge badge-tech">JavaScript</span></div><a href="https://github.com/JuliusBrussee/caveman" target="_blank">JuliusBrussee /caveman</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">🪨 why use many token when few token do trick — Claude Code skill that cuts 65% of tokens by talking like caveman</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#9 ⭐ 75.0k</span><span class="badge badge-tech">TypeScript</span></div><a href="https://github.com/grafana/grafana" target="_blank">grafana /grafana</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">The open and composable observability and data visualization platform. Visualize metrics, logs, and traces from multiple</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#10 ⭐ 69.4k</span><span class="badge badge-tech">Python</span></div><a href="https://github.com/opendatalab/MinerU" target="_blank">opendatalab /MinerU</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">Transforms complex documents like PDFs and Office docs into LLM-ready markdown/JSON for your Agentic workflows.</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#11 ⭐ 61.9k</span><span class="badge badge-tech">Python</span></div><a href="https://github.com/commaai/openpilot" target="_blank">commaai /openpilot</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">openpilot is an operating system for robotics. Currently, it upgrades the driver assistance system on 300+ supported car</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#12 ⭐ 60.4k</span><span class="badge badge-tech">HTML</span></div><a href="https://github.com/shanraisshan/claude-code-best-practice" target="_blank">shanraisshan /claude-code-best-practice</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">from vibe coding to agentic engineering - practice makes claude perfect</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#13 ⭐ 57.3k</span><span class="badge badge-tech">JavaScript</span></div><a href="https://github.com/santifer/career-ops" target="_blank">santifer /career-ops</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">AI-powered job search system built on Claude Code. 14 skill modes, Go dashboard, PDF generation, batch processing.</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#14 ⭐ 53.6k</span><span class="badge badge-tech">Python</span></div><a href="https://github.com/NanmiCoder/MediaCrawler" target="_blank">NanmiCoder /MediaCrawler</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">小红书笔记 | 评论爬虫、抖音视频 | 评论爬虫、快手视频 | 评论爬虫、B 站视频 ｜ 评论爬虫、微博帖子 ｜ 评论爬虫、百度贴吧帖子 ｜ 百度贴吧评论回复爬虫 | 知乎问答文章｜评论爬虫</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#15 ⭐ 52.4k</span><span class="badge badge-tech">Python</span></div><a href="https://github.com/ZhuLinsen/daily_stock_analysis" target="_blank">ZhuLinsen /daily_stock_analysis</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">LLM 驱动的多市场股票智能分析系统：多源行情、实时新闻、决策看板与自动推送，支持零成本定时运行。 LLM-powered multi-market stock analysis system with multi-source marke</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#16 ⭐ 49.2k</span><span class="badge badge-tech">Jupyter Notebook</span></div><a href="https://github.com/microsoft/AI-For-Beginners" target="_blank">microsoft /AI-For-Beginners</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">12 Weeks, 24 Lessons, AI for All!</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#17 ⭐ 46.8k</span><span class="badge badge-tech">Python</span></div><a href="https://github.com/Panniantong/Agent-Reach" target="_blank">Panniantong /Agent-Reach</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">Give your AI agent eyes to see the entire internet. Read & search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongSh</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#18 ⭐ 45.8k</span><span class="badge badge-tech">Python</span></div><a href="https://github.com/roboflow/supervision" target="_blank">roboflow /supervision</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">We write your reusable computer vision tools. 💜</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#19 ⭐ 44.9k</span><span class="badge badge-tech">TypeScript</span></div><a href="https://github.com/ChromeDevTools/chrome-devtools-mcp" target="_blank">ChromeDevTools /chrome-devtools-mcp</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">Chrome DevTools for coding agents</div></div>
+<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#20 ⭐ 43.1k</span><span class="badge badge-tech">Swift</span></div><a href="https://github.com/apple/container" target="_blank">apple /container</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">A tool for creating and running Linux containers using lightweight virtual machines on a Mac. It is written in Swift, an</div></div></div>
 
         <h2 style="margin-top:40px;cursor:pointer;" onclick="this.nextElementSibling.classList.toggle('visible')">📚 Referencia <small style="font-size:0.6em;color:#666;">(click para mostrar/ocultar)</small></h2>
         <div id="reference-section" style="display:none;">
-            <div class="filter-section"><strong>🛠️ Skills</strong><div id="ref-skills" class="chip-container"></div></div>
-            <div class="filter-section"><strong>🧠 LLMs</strong><div id="ref-llms" class="chip-container"></div></div>
-            <div class="filter-section"><strong>📝 Lenguajes</strong><div id="ref-lenguajes" class="chip-container"></div></div>
-            <div class="filter-section"><strong>📦 Frameworks</strong><div id="ref-frameworks" class="chip-container"></div></div>
-            <div class="filter-section"><strong>📚 Librerías</strong><div id="ref-librerias" class="chip-container"></div></div>
+            <div class="filter-section"><strong>🛠️ Skills</strong><div class="chip-container">
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">💻 Programación</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Python</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">JavaScript</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">TypeScript</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Rust</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Go</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Java</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">C#</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">PHP</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Ruby</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Swift</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Kotlin</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Dart</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">C</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">C++</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Zig</span>
+</div>
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">🤖 IA/ML</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Machine Learning</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Deep Learning</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">NLP</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Computer Vision</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Reinforcement Learning</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">MLOps</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Fine-tuning</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">RAG</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Agentes IA</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Prompt Engineering</span>
+</div>
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">☁️ Cloud/DevOps</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Docker</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Kubernetes</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">AWS</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">GCP</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Azure</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Terraform</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">CI/CD</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Serverless</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">GitHub Actions</span>
+</div>
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">🔒 Seguridad</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Pentesting</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">CTF</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Bug Bounty</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Ciberseguridad</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Zero Trust</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">OSINT</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Hacking</span>
+</div>
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">📊 Datos</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">SQL</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">NoSQL</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Big Data</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Data Analysis</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">BI</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">ETL</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Data Engineering</span>
+</div>
+</div></div><div class="filter-section"><strong>🧠 LLMs</strong><div class="chip-container">
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Propietarios</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">GPT-4</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">GPT-4o</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">GPT-4o-mini</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Claude 3.5 Sonnet</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Claude 3 Opus</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Gemini 1.5 Pro</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Gemini 2.5 Pro</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Gemini 2.5 Flash</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Grok</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Copilot</span>
+</div>
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Open Source</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Llama 3.1</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Llama 3</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Mistral Large</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Mixtral</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">DeepSeek V2</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">DeepSeek Coder</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Qwen 2.5</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Phi-3</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Gemma 2</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Falcon 2</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Command R+</span>
+</div>
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Especializados</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">CodeLlama</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">StarCoder</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">SQLCoder</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">BioMistral</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Meditron</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">FinGPT</span>
+</div>
+</div></div><div class="filter-section"><strong>📝 Lenguajes</strong><div class="chip-container">
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Web</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">JavaScript</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">TypeScript</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">HTML</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">CSS</span>
+</div>
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Sistema</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Rust</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Go</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">C</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">C++</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Zig</span>
+</div>
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Datos/IA</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Python</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">R</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Julia</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">SQL</span>
+</div>
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Mobile</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Swift</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Kotlin</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Dart</span>
+</div>
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Empresarial</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Java</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">C#</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">PHP</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Ruby</span>
+</div>
+</div></div><div class="filter-section"><strong>📦 Frameworks</strong><div class="chip-container">
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Frontend</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">React</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Next.js</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Vue</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Nuxt</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Svelte</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Solid</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Astro</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Remix</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Angular</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Qwik</span>
+</div>
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Backend</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Django</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">FastAPI</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Flask</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Express</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">NestJS</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Spring Boot</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Laravel</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">ASP.NET</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Actix</span>
+</div>
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Mobile/Desktop</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">React Native</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Flutter</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">SwiftUI</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Jetpack Compose</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Tauri</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">.NET MAUI</span>
+</div>
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">CSS/UI</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Tailwind</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Bootstrap</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Material UI</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Shadcn/ui</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Chakra UI</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Radix UI</span>
+</div>
+</div></div><div class="filter-section"><strong>📚 Librerías</strong><div class="chip-container">
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">IA/ML</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">TensorFlow</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">PyTorch</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">LangChain</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">LlamaIndex</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Hugging Face Transformers</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Scikit-learn</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">XGBoost</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">JAX</span>
+</div>
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Testing</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Jest</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Playwright</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Vitest</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Cypress</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Pytest</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Selenium</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Testing Library</span>
+</div>
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">DevOps</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Ansible</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Prometheus</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Grafana</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Helm</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Vault</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Packer</span>
+</div>
+<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Utilidades</strong>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Lodash</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Day.js</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Zod</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">React Query</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Prisma</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Drizzle ORM</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">RxJS</span>
+<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">tRPC</span>
+</div>
+</div></div>
         </div>
     </div>
 </body>
