@@ -320,75 +320,75 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             <p>{resumen}</p>
         </div>
 
-        <div id="stats-bar" class="stats-bar"></div>
+        <div class="stats-bar">{stats_bar}</div>
 
-        <h2>\U0001f4f0 Noticias</h2>
-        <div class="filter-section">
-            <strong>\U0001f4e1 Tipo de fuente:</strong>
-            <div id="news-tipo-fuente-filters" class="chip-container"></div>
-        </div>
-        <div class="filter-section">
-            <strong>\U0001f3af Categoría:</strong>
-            <div id="news-category-filters" class="chip-container"></div>
-        </div>
-        <div class="filter-section">
-            <strong>\U0001f4a1 Tipo:</strong>
-            <div id="news-badge-filters" class="chip-container"></div>
-        </div>
-        <div class="filter-section">
-            <strong>📡 Fuente RSS:</strong>
-            <div id="news-rss-filters" class="chip-container"></div>
-        </div>
-        <div class="filter-section">
-            <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
-                <strong>\U0001f4c5 Tiempo:</strong>
-                <div id="news-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
+        <div class="news-section">
+            <h2>\U0001f4f0 Noticias</h2>
+            <div class="filter-section">
+                <strong>\U0001f4e1 Tipo de fuente:</strong>
+                <div id="news-tipo-fuente-filters" class="chip-container"></div>
             </div>
+            <div class="filter-section">
+                <strong>\U0001f3af Categoría:</strong>
+                <div id="news-category-filters" class="chip-container">{cats_filter}</div>
+            </div>
+            <div class="filter-section">
+                <strong>\U0001f4a1 Tipo:</strong>
+                <div id="news-badge-filters" class="chip-container"></div>
+            </div>
+            <div class="filter-section">
+                <strong>📡 Fuente RSS:</strong>
+                <div id="news-rss-filters" class="chip-container">{rss_filter}</div>
+            </div>
+            <div class="filter-section">
+                <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+                    <strong>\U0001f4c5 Tiempo:</strong>
+                    <div id="news-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
+                </div>
+            </div>
+            <div class="filter-section">
+                <strong>\U0001f4f0 Filtro Canal:</strong>
+                <div id="news-channel-filters" class="chip-container">{canales_filter}</div>
+            </div>
+            <ul id="news-list" class="news-list">{noticias_list}</ul>
         </div>
-        <div class="filter-section">
-            <strong>\U0001f4f0 Filtro Canal:</strong>
-            <div id="news-channel-filters" class="chip-container"></div>
-        </div>
-        <ul id="news-list" class="news-list"></ul>
 
-        <h2>\U0001f3ac Multimedia</h2>
-        <div class="filter-section">
-            <strong>\U0001f4fa Tipo:</strong>
-            <div id="multimedia-tabs" class="chip-container"></div>
-        </div>
-        <div class="filter-section" id="multimedia-filter-section">
-            <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
-                <strong>\U0001f4c5 Tiempo:</strong>
-                <div id="video-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
+        <div class="multimedia-section">
+            <h2>\U0001f3ac Multimedia</h2>
+            <div class="filter-section">
+                <strong>\U0001f4fa Tipo:</strong>
+                <div id="multimedia-tabs" class="chip-container"></div>
             </div>
+            <div class="filter-section" id="multimedia-filter-section">
+                <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+                    <strong>\U0001f4c5 Tiempo:</strong>
+                    <div id="video-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
+                </div>
+            </div>
+            <div class="filter-section" id="multimedia-channel-section">
+                <strong>\U0001f4fa Filtro Canal:</strong>
+                <div id="video-channel-filters" class="chip-container">{canales_filter}</div>
+            </div>
+            <div id="multimedia-content" class="video-grid">{videos_grid}</div>
         </div>
-        <div class="filter-section" id="multimedia-channel-section">
-            <strong>\U0001f4fa Filtro Canal:</strong>
-            <div id="video-channel-filters" class="chip-container"></div>
-        </div>
-        <div id="multimedia-content" class="video-grid"></div>
 
         <h2>\U0001f4ca Tendencias</h2>
         <div class="filter-section">
             <strong>\U0001f50d Filtrar:</strong>
             <div id="trend-type-filters" class="chip-container"></div>
         </div>
-        <div id="trends-list" class="news-list"></div>
+        <div id="trends-list" class="news-list">{trends_list}</div>
 
         <h2>\u2b50 Ranking GitHub Stars</h2>
         <div class="filter-section">
             <strong>\U0001f524 Filtro:</strong>
             <input type="text" id="github-filter" placeholder="Buscar por nombre o lenguaje..." style="padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; width: 100%; max-width: 400px; margin-top: 8px; font-size: 14px; background: #fff; color: #1c1e21;">
         </div>
-        <div id="github-ranking"></div>
+        <div id="github-ranking">{github_ranking}</div>
 
         <h2 style="margin-top:40px;cursor:pointer;" onclick="this.nextElementSibling.classList.toggle('visible')">📚 Referencia <small style="font-size:0.6em;color:#666;">(click para mostrar/ocultar)</small></h2>
         <div id="reference-section" style="display:none;">
-            <div class="filter-section"><strong>🛠️ Skills</strong><div id="ref-skills" class="chip-container"></div></div>
-            <div class="filter-section"><strong>🧠 LLMs</strong><div id="ref-llms" class="chip-container"></div></div>
-            <div class="filter-section"><strong>📝 Lenguajes</strong><div id="ref-lenguajes" class="chip-container"></div></div>
-            <div class="filter-section"><strong>📦 Frameworks</strong><div id="ref-frameworks" class="chip-container"></div></div>
-            <div class="filter-section"><strong>📚 Librerías</strong><div id="ref-librerias" class="chip-container"></div></div>
+            {references_section}
         </div>
     </div>
 </body>
