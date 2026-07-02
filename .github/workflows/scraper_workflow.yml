@@ -102,8 +102,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           npm --prefix blog install playwright-core --no-save 2>&1
-          cd blog && npx playwright install chromium 2>&1
-          python blog/scripts/make_cover_collage.py --ci
+          cd blog && npx playwright install chromium 2>&1 && python scripts/make_cover_collage.py --ci
       - name: 🚀 Push directo al blog
         if: steps.blog_updated.outputs.updated == 'yes'
         run: |
