@@ -1,5 +1,95 @@
 [
     {
+        "titulo": "¿Dejar de programar? Google dice que ni se te ocurra",
+        "enlace": "https://www.youtube.com/watch?v=fK5WwFMFwdE",
+        "fuente": "MoureDev",
+        "tipo": "video",
+        "f": "02/07",
+        "fecha_publicacion": "Reciente",
+        "id_video": "fK5WwFMFwdE",
+        "fecha_real": "02/07/2026",
+        "ts": "2026-07-02T14:13:47.990339",
+        "categoria": "💡 General"
+    },
+    {
+        "titulo": "El AirTag me avisó antes que la propia aerolínea: la función básica que tienes que conocer para tus viajes de verano",
+        "enlace": "https://www.applesfera.com/airtag/airtag-me-aviso-propia-aerolinea-funcion-basica-que-tienes-que-conocer-para-tus-viajes-verano",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "f": "02/07",
+        "fecha_publicacion": "2026-07-02T14:01:54Z",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "02/07/2026",
+        "ts": "2026-07-02T14:13:53.472362"
+    },
+    {
+        "titulo": "Show HN: ZeroFS – A log-structured filesystem for S3",
+        "enlace": "https://www.zerofs.net/",
+        "fuente": "Hacker News",
+        "tipo": "noticia",
+        "f": "02/07",
+        "fecha_publicacion": "Thu, 02 Jul 2026 13:41:11 +0000",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "origen": "rss",
+        "fecha_real": "02/07/2026",
+        "ts": "2026-07-02T14:14:29.527657"
+    },
+    {
+        "titulo": "Winamp Skin Museum",
+        "enlace": "https://skins.webamp.org",
+        "fuente": "Hacker News",
+        "tipo": "noticia",
+        "f": "02/07",
+        "fecha_publicacion": "Thu, 02 Jul 2026 12:58:55 +0000",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "origen": "rss",
+        "fecha_real": "02/07/2026",
+        "ts": "2026-07-02T14:14:29.527752"
+    },
+    {
+        "titulo": "Germany's Infineon opens $5.7B chip plant as EU seeks tech autonomy",
+        "enlace": "https://www.rfi.fr/en/international-news/20260702-germany-s-infineon-opens-major-chip-plant-as-eu-seeks-tech-autonomy",
+        "fuente": "Hacker News",
+        "tipo": "noticia",
+        "f": "02/07",
+        "fecha_publicacion": "Thu, 02 Jul 2026 12:46:31 +0000",
+        "badge": "Tech",
+        "categoria": "⚡ Hardware",
+        "origen": "rss",
+        "fecha_real": "02/07/2026",
+        "ts": "2026-07-02T14:14:29.527769"
+    },
+    {
+        "titulo": "Woman's puzzling decline turns out to be cobalt poisoning from hip replacement",
+        "enlace": "https://arstechnica.com/health/2026/07/womans-puzzling-decline-turns-out-to-be-cobalt-poisoning-from-hip-replacement/",
+        "fuente": "Ars Technica AI",
+        "tipo": "noticia",
+        "f": "02/07",
+        "fecha_publicacion": "Thu, 02 Jul 2026 14:04:28 +0000",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "origen": "rss",
+        "fecha_real": "02/07/2026",
+        "ts": "2026-07-02T14:14:31.660246"
+    },
+    {
+        "titulo": "I made a presentation editor that lives in one HTML file — and any slide can be raw HTML",
+        "enlace": "https://dev.to/nikolas_dziretti_aa6d829f/i-made-a-presentation-editor-that-lives-in-one-html-file-and-any-slide-can-be-raw-html-4ih2",
+        "fuente": "Dev.to",
+        "tipo": "noticia",
+        "f": "02/07",
+        "fecha_publicacion": "Thu, 02 Jul 2026 14:03:40 +0000",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "origen": "rss",
+        "fecha_real": "02/07/2026",
+        "ts": "2026-07-02T14:14:31.634202"
+    },
+    {
         "titulo": "Justicia cierra una subida salarial de 180 euros mensuales para sus 5.800 funcionarios",
         "enlace": "https://www.levante-emv.com/comunitat-valenciana/2026/07/02/justicia-cierra-subida-salarial-funcionarios-132046734.html",
         "fuente": "Levante-EMV",
@@ -11432,82 +11522,5 @@
         "imagen_url_original": "",
         "fecha_real": "20/06/2026",
         "ts": "2026-06-20T09:57:45.652525"
-    },
-    {
-        "titulo": "The CEO of Allbirds’ new AI biz has a plan, but no team",
-        "enlace": "https://techcrunch.com/2026/06/19/the-ceo-of-allbirds-new-ai-biz-has-a-plan-but-no-employees/",
-        "fuente": "TechCrunch",
-        "tipo": "noticia",
-        "f": "20/06",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "fecha_real": "20/06/2026",
-        "ts": "2026-06-20T09:57:45.652597"
-    },
-    {
-        "titulo": "The US says ASML’s top chip tool may be in China, but how?",
-        "enlace": "https://techcrunch.com/2026/06/19/the-us-says-asmls-top-chip-tool-may-be-in-china-asml-says-it-isnt/",
-        "fuente": "TechCrunch",
-        "tipo": "noticia",
-        "f": "20/06",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "fecha_real": "20/06/2026",
-        "ts": "2026-06-20T09:57:45.652671"
-    },
-    {
-        "titulo": "Source: Elastic agrees to buy CRV-backed Deductive AI for up to $85M",
-        "enlace": "https://techcrunch.com/2026/06/18/source-elastic-agrees-to-buy-crv-backed-deductiveai-for-up-to-85m/",
-        "fuente": "TechCrunch",
-        "tipo": "noticia",
-        "f": "20/06",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "fecha_real": "20/06/2026",
-        "ts": "2026-06-20T09:57:45.652748"
-    },
-    {
-        "titulo": "AI inference startup Baseten reportedly raising $1.5B months after its last mega-round",
-        "enlace": "https://techcrunch.com/2026/06/18/ai-inference-startup-baseten-reportedly-raising-1-5b-months-after-its-last-mega-round/",
-        "fuente": "TechCrunch",
-        "tipo": "noticia",
-        "f": "20/06",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "fecha_real": "20/06/2026",
-        "ts": "2026-06-20T09:57:45.652811"
-    },
-    {
-        "titulo": "Snap spins off AI video team into new company, Dotmo, due to costs",
-        "enlace": "https://techcrunch.com/2026/06/18/snap-spins-off-ai-video-team-into-new-company-dotmo-due-to-costs/",
-        "fuente": "TechCrunch",
-        "tipo": "noticia",
-        "f": "20/06",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "fecha_real": "20/06/2026",
-        "ts": "2026-06-20T09:57:45.652874"
-    },
-    {
-        "titulo": "I automated everything except the code, and that's where Claude Code actually paid off",
-        "enlace": "https://dev.to/rapls/i-automated-everything-except-the-code-and-thats-where-claude-code-actually-paid-off-51oh",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "20/06",
-        "badge": "Tech",
-        "imagen_url_original": "https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg",
-        "fecha_real": "20/06/2026",
-        "ts": "2026-06-20T09:57:47.362311"
-    },
-    {
-        "titulo": "agentic experience for Go",
-        "enlace": "https://dev.to/rshade/agentic-experience-for-go-36mh",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "20/06",
-        "badge": "Tech",
-        "imagen_url_original": "https://assets.dev.to/assets/sparkle-heart-5f9bee3767e18deb1bb725290cb151c25234768a0e9a2bd39370c382d02920cf.svg",
-        "fecha_real": "20/06/2026",
-        "ts": "2026-06-20T09:57:47.362423"
     }
 ]
