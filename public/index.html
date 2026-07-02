@@ -35,7 +35,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>Tech Pulse <small style="font-size: 0.4em; color: #666;">02/07/2026</small></h1>
+            <h1>Tech Pulse <small id="header-date" style="font-size: 0.4em; color: #666;">02/07/2026</small></h1>
             <picture>
                 <source srcset="optimizado/Image.avif" type="image/avif">
                 <source srcset="optimizado/Image.webp" type="image/webp">
@@ -48,117 +48,43 @@
             <p>Esta semana hemos seguido de cerca las principales tendencias en tecnología y desarrollo.</p>
         </div>
 
-        <div class="stats-bar">
-        <div class="stat-card"><b>887</b><span>Total</span></div>
-        <div class="stat-card"><b>886</b><span>Noticias</span></div>
-        <div class="stat-card"><b>1</b><span>Multimedia</span></div>
-        <div class="stat-card"><b>38</b><span>Fuentes</span></div>
-    </div>
+        <div id="stats-bar" class="stats-bar"></div>
 
-        <div class="news-section">
-            <h2>📰 Noticias</h2>
-            <div class="filter-section">
-                <strong>📡 Tipo de fuente:</strong>
-                <div id="news-tipo-fuente-filters" class="chip-container"></div>
+        <h2>📰 Noticias</h2>
+        <div class="filter-section">
+            <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+                <strong>📅 Tiempo:</strong>
+                <div id="news-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
             </div>
-            <div class="filter-section">
-                <strong>🎯 Categoría:</strong>
-                <div id="news-category-filters" class="chip-container"><div class="chip" data-cat="💡 General">💡 General <span style="opacity:.7">(627)</span></div><div class="chip" data-cat="🤖 IA">🤖 IA <span style="opacity:.7">(174)</span></div><div class="chip" data-cat="💻 Programación">💻 Programación <span style="opacity:.7">(33)</span></div><div class="chip" data-cat="⚡ Hardware">⚡ Hardware <span style="opacity:.7">(25)</span></div><div class="chip" data-cat="📊 Negocios">📊 Negocios <span style="opacity:.7">(14)</span></div><div class="chip" data-cat="🐳 DevOps">🐳 DevOps <span style="opacity:.7">(7)</span></div><div class="chip" data-cat="🔒 Ciberseguridad">🔒 Ciberseguridad <span style="opacity:.7">(5)</span></div><div class="chip" data-cat="🎓 Becas/Formación">🎓 Becas/Formación <span style="opacity:.7">(1)</span></div></div>
-            </div>
-            <div class="filter-section">
-                <strong>💡 Tipo:</strong>
-                <div id="news-badge-filters" class="chip-container"></div>
-            </div>
-            <div class="filter-section">
-                <strong>📡 Fuente RSS:</strong>
-                <div id="news-rss-filters" class="chip-container"><div class="chip" data-rss="Ars Technica AI">📡 Ars Technica AI</div><div class="chip" data-rss="Dev.to">📡 Dev.to</div><div class="chip" data-rss="Google AI Blog">📡 Google AI Blog</div><div class="chip" data-rss="Google Search Central">📡 Google Search Central</div><div class="chip" data-rss="Hacker News">📡 Hacker News</div><div class="chip" data-rss="MIT Tech Review AI">📡 MIT Tech Review AI</div><div class="chip" data-rss="Moz Blog SEO">📡 Moz Blog SEO</div><div class="chip" data-rss="Search Engine Journal">📡 Search Engine Journal</div><div class="chip" data-rss="Stack Overflow Blog">📡 Stack Overflow Blog</div><div class="chip" data-rss="TechCrunch AI">📡 TechCrunch AI</div></div>
-            </div>
-            <div class="filter-section">
-                <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
-                    <strong>📅 Tiempo:</strong>
-                    <div id="news-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
-                </div>
-            </div>
-            <div class="filter-section">
-                <strong>📰 Filtro Canal:</strong>
-                <div id="news-channel-filters" class="chip-container"><div class="chip" data-canal="ADSL Zone">ADSL Zone</div><div class="chip" data-canal="AWS ML">AWS ML</div><div class="chip" data-canal="Anthropic">Anthropic</div><div class="chip" data-canal="Applesfera">Applesfera</div><div class="chip" data-canal="Ars Technica">Ars Technica</div><div class="chip" data-canal="Ars Technica AI">Ars Technica AI</div><div class="chip" data-canal="Azure AI">Azure AI</div><div class="chip" data-canal="CSS-Tricks">CSS-Tricks</div><div class="chip" data-canal="ComputerHoy">ComputerHoy</div><div class="chip" data-canal="DeepMind">DeepMind</div><div class="chip" data-canal="Dev.to">Dev.to</div><div class="chip" data-canal="El País Tecnología">El País Tecnología</div><div class="chip" data-canal="Fundación Carolina">Fundación Carolina</div><div class="chip" data-canal="Genbeta">Genbeta</div><div class="chip" data-canal="GitHub Blog">GitHub Blog</div></div>
-            </div>
-            <ul id="news-list" class="news-list"><li class="news-item" data-ts="2026-07-02T14:14:31.660246" data-fuente="Ars Technica AI" data-categoria="💡 General" data-origen="rss"><div class="meta">Ars Technica AI | Thu, 02 Jul 2026 14:04:28 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://arstechnica.com/health/2026/07/womans-puzzling-decline-turns-out-to-be-cobalt-poisoning-from-hip-replacement/" target="_blank">Woman's puzzling decline turns out to be cobalt poisoning from hip replacement</a></li>
-<li class="news-item" data-ts="2026-07-02T14:14:31.634202" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 14:03:40 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/nikolas_dziretti_aa6d829f/i-made-a-presentation-editor-that-lives-in-one-html-file-and-any-slide-can-be-raw-html-4ih2" target="_blank">I made a presentation editor that lives in one HTML file — and any slide can be raw HTML</a></li>
-<li class="news-item" data-ts="2026-07-02T14:14:29.527769" data-fuente="Hacker News" data-categoria="⚡ Hardware" data-origen="rss"><div class="meta">Hacker News | Thu, 02 Jul 2026 12:46:31 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">⚡ Hardware</span><a href="https://www.rfi.fr/en/international-news/20260702-germany-s-infineon-opens-major-chip-plant-as-eu-seeks-tech-autonomy" target="_blank">Germany's Infineon opens $5.7B chip plant as EU seeks tech autonomy</a></li>
-<li class="news-item" data-ts="2026-07-02T14:14:29.527752" data-fuente="Hacker News" data-categoria="💡 General" data-origen="rss"><div class="meta">Hacker News | Thu, 02 Jul 2026 12:58:55 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://skins.webamp.org" target="_blank">Winamp Skin Museum</a></li>
-<li class="news-item" data-ts="2026-07-02T14:14:29.527657" data-fuente="Hacker News" data-categoria="💡 General" data-origen="rss"><div class="meta">Hacker News | Thu, 02 Jul 2026 13:41:11 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://www.zerofs.net/" target="_blank">Show HN: ZeroFS – A log-structured filesystem for S3</a></li>
-<li class="news-item" data-ts="2026-07-02T14:13:53.472362" data-fuente="Applesfera" data-categoria="💡 General" data-origen=""><div class="meta">Applesfera | 2026-07-02T14:01:54Z</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">💡 General</span><a href="https://www.applesfera.com/airtag/airtag-me-aviso-propia-aerolinea-funcion-basica-que-tienes-que-conocer-para-tus-viajes-verano" target="_blank">El AirTag me avisó antes que la propia aerolínea: la función básica que tienes que conocer para tus viajes de verano</a></li>
-<li class="news-item" data-ts="2026-07-02T14:03:10.028501" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 13:57:07 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/raphplt/i-built-a-30mb-database-client-in-rust-heres-what-it-cost-me-1pjb" target="_blank">I built a 30MB database client in Rust. Here's what it cost me.</a></li>
-<li class="news-item" data-ts="2026-07-02T14:03:10.028475" data-fuente="Dev.to" data-categoria="💻 Programación" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 14:00:00 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💻 Programación</span><a href="https://dev.to/accreditly/how-to-turn-any-url-into-a-screenshot-from-nodejs-oe" target="_blank">How to turn any URL into a screenshot from Node.js</a></li>
-<li class="news-item" data-ts="2026-07-02T14:03:10.028458" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 14:00:04 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/kito2718/kaggle-titanic-improving-survival-prediction-with-random-forest-age-imputation-5b3l" target="_blank">Kaggle Titanic: Improving Survival Prediction with Random Forest Age Imputation</a></li>
-<li class="news-item" data-ts="2026-07-02T14:03:10.028411" data-fuente="Dev.to" data-categoria="💻 Programación" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 14:00:05 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💻 Programación</span><a href="https://dev.to/iwtlp/code-challenge-of-the-day-reverse-word-order-easy-3pkj" target="_blank">Code Challenge of the Day — Reverse word order (easy)</a></li>
-<li class="news-item" data-ts="2026-07-02T14:03:10.028387" data-fuente="Dev.to" data-categoria="🤖 IA" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 14:00:19 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🤖 IA</span><a href="https://dev.to/kavinkimcreator/mica-is-live-in-31-days-the-eu-ai-act-hits-your-agent-messaging-too-you-need-both-g39" target="_blank">MiCA Is Live. In 31 Days, the EU AI Act Hits Your Agent Messaging Too. You Need Both.</a></li>
-<li class="news-item" data-ts="2026-07-02T14:03:10.028376" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 14:00:28 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/hongster85/event-sourcing-understand-in-3-minutes-4hk" target="_blank">Event Sourcing : Understand in 3 Minutes</a></li>
-<li class="news-item" data-ts="2026-07-02T14:03:10.028352" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 14:01:03 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/version_6llc_b4d52bd440b/buylockblocks-how-immute-prevents-smart-contract-sandwich-attacks-4kpa" target="_blank">BUY_LOCK_BLOCKS: How Immute Prevents Smart Contract Sandwich Attacks</a></li>
-<li class="news-item" data-ts="2026-07-02T14:03:10.028324" data-fuente="Dev.to" data-categoria="🤖 IA" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 14:01:27 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🤖 IA</span><a href="https://dev.to/o96a/stop-treating-llm-memory-as-a-database-the-shift-toward-memory-as-a-skill-507k" target="_blank">Stop Treating LLM Memory as a Database: The Shift Toward Memory as a Skill</a></li>
-<li class="news-item" data-ts="2026-07-02T14:03:10.028313" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 14:01:44 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/rait_761f9a208b66707c899/best-way-to-build-a-modern-website-in-2026-static-sites-headless-cms-25g5" target="_blank">Best Way to Build a Modern Website in 2026: Static Sites + Headless CMS</a></li>
-<li class="news-item" data-ts="2026-07-02T14:03:10.028284" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 14:02:00 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/kenwalger/declarations-from-the-periphery-from-genesis-to-the-sovereign-edge-473h" target="_blank">Declarations from the Periphery: From Genesis to the Sovereign Edge</a></li>
-<li class="news-item" data-ts="2026-07-02T14:03:10.028256" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 14:02:11 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/dailycontext/beyond-context-4b0g" target="_blank">Beyond Context</a></li>
-<li class="news-item" data-ts="2026-07-02T14:03:10.028228" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 14:02:23 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/hookprobe/fixing-xdp-redirect-map-failures-for-edge-security-4i4o" target="_blank">Fixing XDP Redirect Map Failures for Edge Security</a></li>
-<li class="news-item" data-ts="2026-07-02T14:02:40.136871" data-fuente="ADSL Zone" data-categoria="💡 General" data-origen=""><div class="meta">ADSL Zone | 02 de julio, 2026 • 12:57</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">💡 General</span><a href="https://www.adslzone.net/ofertas/pccomponentes-airpods-pro-3-0726/" target="_blank">PcComponentes hunde el precio de los AirPods Pro: ahórrate hoy 80 €, ¡solo para los más rápidos!</a></li>
-<li class="news-item" data-ts="2026-07-02T14:02:40.136597" data-fuente="ADSL Zone" data-categoria="💡 General" data-origen=""><div class="meta">ADSL Zone | 02 de julio, 2026 • 15:07</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">💡 General</span><a href="https://www.adslzone.net/noticias/streaming-tv/donde-ver-gratis-espana-austria-mundial-2026/" target="_blank">España vs Austria de dieciseisavos de final: a qué hora y dónde ver el partido del Mundial 2026</a></li>
-<li class="news-item" data-ts="2026-07-02T14:02:39.823269" data-fuente="Hipertextual" data-categoria="💡 General" data-origen=""><div class="meta">Hipertextual | 02/07/2026</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">💡 General</span><a href="https://hipertextual.com/apple/si-te-ibas-a-comprar-un-macbook-mejor-esperar-apple-va-a-cambiar-su-diseno-despues-de-varios-anos/" target="_blank">Si te ibas a comprar un MacBook, mejor esperar. Apple va a cambiar su diseño después de varios años</a></li>
-<li class="news-item" data-ts="2026-07-02T14:02:39.821903" data-fuente="Hipertextual" data-categoria="🤖 IA" data-origen=""><div class="meta">Hipertextual | 02/07/2026</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">🤖 IA</span><a href="https://hipertextual.com/mobile/google-cambia-gmail-para-siempre-ahora-se-usa-con-la-voz-y-tiene-ia-en-todas-partes/" target="_blank">Google cambia Gmail para siempre: ahora se usa con la voz y tiene IA en todas partes</a></li>
-<li class="news-item" data-ts="2026-07-02T14:02:39.706161" data-fuente="ComputerHoy" data-categoria="🤖 IA" data-origen=""><div class="meta">ComputerHoy | 02/07/2026</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">🤖 IA</span><a href="https://www.computerhoy.com/tecnologia/yoshua-bengio-experto-ia-no-se-puede-garantizar-que-medida-que-sus-capacidades-sigan-aumentando-ia-no-cause-danos-catastroficos-ya-sea-por-si-misma-debido-usuarios-malintencionados_7009584_0.html" target="_blank">Yoshua Bengio, experto en IA: "No se puede garantizar que, a medida que sus capacidades sigan aumentando, la IA no cause daños catastróficos, ya sea por sí misma o debido a usuarios malintencionados"</a></li>
-<li class="news-item" data-ts="2026-07-02T14:02:39.704911" data-fuente="ComputerHoy" data-categoria="🤖 IA" data-origen=""><div class="meta">ComputerHoy | 02/07/2026</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">🤖 IA</span><a href="https://www.computerhoy.com/software/ia-entra-lleno-microsoft-teams-podra-escuchar-tus-reuniones-responder-preguntas-por-ti-pero-aumenta-control-las-empresas_7009608_0.html" target="_blank">La IA entra de lleno en Microsoft Teams: podrá escuchar tus reuniones y responder preguntas por ti, pero aumenta el control de las empresas</a></li>
-<li class="news-item" data-ts="2026-07-02T14:02:39.703624" data-fuente="ComputerHoy" data-categoria="💡 General" data-origen=""><div class="meta">ComputerHoy | 02/07/2026</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">💡 General</span><a href="https://www.computerhoy.com/software/crisis-google-chrome-ultima-actualizacion-obliga-corregir-hasta-400-fallos-seguridad-con-15-errores-criticos_7009722_0.html" target="_blank">Crisis en Google Chrome: la última actualización obliga a corregir hasta 400 fallos de seguridad con 15 errores críticos</a></li>
-<li class="news-item" data-ts="2026-07-02T14:02:39.445382" data-fuente="MuyComputer" data-categoria="⚡ Hardware" data-origen=""><div class="meta">MuyComputer | 02/07/2026</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">⚡ Hardware</span><a href="https://www.muycomputer.com/2026/07/02/los-intel-core-ultra-7-270k-plus-y-core-ultra-250k-plus-suben-de-precio/" target="_blank">NoticiasHace 1 horaLos Intel Core Ultra 7 270K Plus y Core Ultra 250K Plus suben de precio</a></li>
-<li class="news-item" data-ts="2026-07-02T14:02:39.443915" data-fuente="MuyComputer" data-categoria="💡 General" data-origen=""><div class="meta">MuyComputer | 02/07/2026</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">💡 General</span><a href="https://www.muycomputer.com/2026/07/02/novedades-de-geforce-now-para-el-mes-de-julio-2/" target="_blank">NoticiasHace 4 minutosNovedades de GeForce Now para el mes de julioNVIDIA ha confirmado los juegos que llegarán a GeForce Now a lo largo del mes de julio, y tenemos un...</a></li>
-<li class="news-item" data-ts="2026-07-02T14:02:36.184987" data-fuente="Levante-EMV" data-categoria="💡 General" data-origen=""><div class="meta">Levante-EMV | 02/07/2026</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">💡 General</span><a href="https://www.levante-emv.com/comunitat-valenciana/2026/07/02/maria-merce-marcal-rodoreda-examen-132046059.html" target="_blank">Maria-Mercè Marçal y Rodoreda: el examen de Valenciano en las PAU de julio pasa por encima de la exclusión de autores catalanes</a></li>
-<li class="news-item" data-ts="2026-07-02T14:02:36.180304" data-fuente="Levante-EMV" data-categoria="💡 General" data-origen=""><div class="meta">Levante-EMV | 02/07/2026</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">💡 General</span><a href="https://www.levante-emv.com/comunitat-valenciana/2026/07/02/aemet-alerta-nueva-ola-calor-comunitat-valenciana-132041185.html" target="_blank">Aemet avisa de una posible nueva ola de calor en la Comunitat Valenciana: las temperaturas superarán los 40 grados</a></li>
-<li class="news-item" data-ts="2026-07-02T14:02:36.175633" data-fuente="Levante-EMV" data-categoria="💡 General" data-origen=""><div class="meta">Levante-EMV | 02/07/2026</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">💡 General</span><a href="https://www.levante-emv.com/podcast/2026/07/01/levante-estrena-podcast-bajo-tierra-accidente-metro-valencia-131951388.html" target="_blank">Ya disponible el primer episodio del videopodcast "Bajo Tierra: El accidente del metro de València"</a></li>
-<li class="news-item" data-ts="2026-07-02T14:02:36.173223" data-fuente="Levante-EMV" data-categoria="💡 General" data-origen=""><div class="meta">Levante-EMV | 02/07/2026</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">💡 General</span><a href="https://www.levante-emv.com/cultura/2026/07/02/museo-bellas-artes-valencia-rastrea-132052518.html" target="_blank">El Museo de Bellas Artes de València rastrea el nacimiento del genio de Rubens</a></li>
-<li class="news-item" data-ts="2026-07-02T14:02:36.170806" data-fuente="Levante-EMV" data-categoria="💡 General" data-origen=""><div class="meta">Levante-EMV | 02/07/2026</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">💡 General</span><a href="https://www.levante-emv.com/comunitat-valenciana/2026/07/02/justicia-cierra-subida-salarial-funcionarios-132046734.html" target="_blank">Justicia cierra una subida salarial de 180 euros mensuales para sus 5.800 funcionarios</a></li>
-<li class="news-item" data-ts="2026-07-02T14:02:35.847167" data-fuente="Applesfera" data-categoria="💡 General" data-origen=""><div class="meta">Applesfera | 2026-07-02T12:16:24Z</div><span class="badge badge-tech">💻 Tech</span><span class="badge badge-cat">💡 General</span><a href="https://www.applesfera.com/aplicaciones-ios/cierra-tv-time-yo-tengo-mejor-alternativa-iphone-para-hacer-seguimiento-series-peliculas" target="_blank">Cierra TV Time, pero yo tengo la mejor alternativa en iPhone para hacer un seguimiento de series y películas</a></li>
-<li class="news-item" data-ts="2026-07-02T13:58:32.401415" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 13:16:40 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/akarsh_hegde_83a825eda213/more-context-made-my-classifier-worse-building-a-machine-maintained-failure-taxonomy-2do7" target="_blank">More Context Made My Classifier Worse: Building a Machine-Maintained Failure Taxonomy</a></li>
-<li class="news-item" data-ts="2026-07-02T13:58:32.401388" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 13:17:45 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/gde/omni-flash-preview-with-kiro-19ka" target="_blank">Omni Flash Preview with Kiro</a></li>
-<li class="news-item" data-ts="2026-07-02T13:58:32.401359" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 13:18:29 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/rogervinas/strands-agents-langfuse-evaluations-25hd" target="_blank">Strands Agents + Langfuse Evaluations</a></li>
-<li class="news-item" data-ts="2026-07-02T13:58:32.401335" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 13:32:01 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/darkwiiplayer/website-looking-for-feedback-3ioi" target="_blank">Website - Looking for Feedback</a></li>
-<li class="news-item" data-ts="2026-07-02T13:58:32.401311" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 13:33:16 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/codenameone/game-builder-tutorial-1-build-a-2d-platformer-dukes-coffee-run-45b0" target="_blank">Game Builder Tutorial 1: Build a 2D Platformer — Duke's Coffee Run</a></li>
-<li class="news-item" data-ts="2026-07-02T13:58:32.401278" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 13:33:51 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/jangkrik/hellyah-a-first-person-25d-survivor-game-fdg" target="_blank">HellYah A First-Person 2.5D Survivor Game</a></li>
-<li class="news-item" data-ts="2026-07-02T13:58:32.401254" data-fuente="Dev.to" data-categoria="🐳 DevOps" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 13:34:34 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🐳 DevOps</span><a href="https://dev.to/vyacheslav_sarzhan_3c1767/community-docker-images-keeping-the-operator-open-without-a-vendor-registry-lock-in-532g" target="_blank">Community Docker Images: keeping the operator open without a vendor registry lock-in</a></li>
-<li class="news-item" data-ts="2026-07-02T13:58:32.401231" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 13:34:36 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/springheadio/the-failure-that-looks-like-success-how-an-unattended-agent-loop-dies-10ba" target="_blank">The failure that looks like success: how an unattended agent loop dies</a></li>
-<li class="news-item" data-ts="2026-07-02T13:58:32.401200" data-fuente="Dev.to" data-categoria="🤖 IA" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 13:36:27 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🤖 IA</span><a href="https://dev.to/xb-software/ai-can-write-code-but-it-cant-own-production-systems-2a07" target="_blank">AI Can Write Code, But It Can't Own Production Systems</a></li>
-<li class="news-item" data-ts="2026-07-02T13:58:32.401181" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 13:37:12 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/mrclhnz/i-set-out-to-clone-a-diagram-editor-the-real-problem-showed-up-later-5694" target="_blank">I set out to clone a diagram editor. The real problem showed up later.</a></li>
-<li class="news-item" data-ts="2026-07-02T13:58:32.400830" data-fuente="Dev.to" data-categoria="💻 Programación" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 13:44:36 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💻 Programación</span><a href="https://dev.to/mehak974/how-i-built-a-premium-38000-manga-reader-with-nextjs-14-gsap-a-privacy-first-architecture-3gkk" target="_blank">💎 How I Built a Premium 38,000+ Manga Reader with Next.js 14, GSAP & a Privacy-First Architecture</a></li>
-<li class="news-item" data-ts="2026-07-02T13:58:32.400794" data-fuente="Dev.to" data-categoria="💡 General" data-origen="rss"><div class="meta">Dev.to | Thu, 02 Jul 2026 13:48:00 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://dev.to/olayiwola_akinnagbe/free-online-table-makers-compared-and-what-they-get-right-and-wrong-tags-3mg5" target="_blank">Free Online Table Makers Compared: What They Get Right and Wrong</a></li>
-<li class="news-item" data-ts="2026-07-02T13:58:32.319441" data-fuente="Ars Technica AI" data-categoria="🤖 IA" data-origen="rss"><div class="meta">Ars Technica AI | Thu, 02 Jul 2026 11:15:49 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🤖 IA</span><a href="https://arstechnica.com/ai/2026/07/googles-ai-buildout-drove-37-increase-in-electricity-use-in-2025/" target="_blank">Google’s AI buildout drove 37% increase in electricity use in 2025</a></li>
-<li class="news-item" data-ts="2026-07-02T13:58:32.125396" data-fuente="TechCrunch AI" data-categoria="💡 General" data-origen="rss"><div class="meta">TechCrunch AI | Thu, 02 Jul 2026 12:00:00 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://techcrunch.com/2026/07/02/yep-were-using-openclaw-to-date-now/" target="_blank">Yep, we’re using OpenClaw to date now</a></li>
-<li class="news-item" data-ts="2026-07-02T13:58:32.125335" data-fuente="TechCrunch AI" data-categoria="🤖 IA" data-origen="rss"><div class="meta">TechCrunch AI | Thu, 02 Jul 2026 13:53:00 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">🤖 IA</span><a href="https://techcrunch.com/2026/07/02/microsoft-launches-its-own-ai-deployment-company-with-2-5-billion-commitment/" target="_blank">Microsoft launches its own AI deployment company with $2.5 billion commitment</a></li>
-<li class="news-item" data-ts="2026-07-02T13:58:31.375784" data-fuente="Wired AI" data-categoria="💡 General" data-origen="rss"><div class="meta">Wired AI | Thu, 02 Jul 2026 11:31:00 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://www.wired.com/gallery/best-travel-adapters/" target="_blank">8 Best Travel Adapters (2026): My Top Recommendations</a></li>
-<li class="news-item" data-ts="2026-07-02T13:58:31.375753" data-fuente="Wired AI" data-categoria="💡 General" data-origen="rss"><div class="meta">Wired AI | Thu, 02 Jul 2026 13:30:00 +0000</div><span class="badge badge-rss">📡 RSS</span><span class="badge badge-cat">💡 General</span><a href="https://www.wired.com/story/7-google-account-settings-you-should-change/" target="_blank">7 Lesser-Known Google Account Settings You Should Change</a></li></ul>
         </div>
+        <div class="filter-section">
+            <strong>🌐 Webs:</strong>
+            <div id="news-channel-filters" class="chip-container"></div>
+        </div>
+        <div class="filter-section">
+            <strong>🎯 Categoría:</strong>
+            <div id="news-category-filters" class="chip-container"></div>
+        </div>
+        <ul id="news-list" class="news-list"></ul>
 
-        <div class="multimedia-section">
-            <h2>🎬 Multimedia</h2>
-            <div class="filter-section">
-                <strong>📺 Tipo:</strong>
-                <div id="multimedia-tabs" class="chip-container"></div>
+        <h2>🎬 Multimedia</h2>
+        <div class="filter-section" id="multimedia-filter-section">
+            <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+                <strong>📅 Tiempo:</strong>
+                <div id="video-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
             </div>
-            <div class="filter-section" id="multimedia-filter-section">
-                <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
-                    <strong>📅 Tiempo:</strong>
-                    <div id="video-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
-                </div>
-            </div>
-            <div class="filter-section" id="multimedia-channel-section">
-                <strong>📺 Filtro Canal:</strong>
-                <div id="video-channel-filters" class="chip-container"><div class="chip" data-canal="ADSL Zone">ADSL Zone</div><div class="chip" data-canal="AWS ML">AWS ML</div><div class="chip" data-canal="Anthropic">Anthropic</div><div class="chip" data-canal="Applesfera">Applesfera</div><div class="chip" data-canal="Ars Technica">Ars Technica</div><div class="chip" data-canal="Ars Technica AI">Ars Technica AI</div><div class="chip" data-canal="Azure AI">Azure AI</div><div class="chip" data-canal="CSS-Tricks">CSS-Tricks</div><div class="chip" data-canal="ComputerHoy">ComputerHoy</div><div class="chip" data-canal="DeepMind">DeepMind</div><div class="chip" data-canal="Dev.to">Dev.to</div><div class="chip" data-canal="El País Tecnología">El País Tecnología</div><div class="chip" data-canal="Fundación Carolina">Fundación Carolina</div><div class="chip" data-canal="Genbeta">Genbeta</div><div class="chip" data-canal="GitHub Blog">GitHub Blog</div></div>
-            </div>
-            <div id="multimedia-content" class="video-grid"><div class="card tipo-video" data-ts="2026-07-02T14:13:47.990339" data-fuente="MoureDev"><a href="https://www.youtube.com/watch?v=fK5WwFMFwdE" target="_blank" class="video-thumb-link"><div class="video-thumb"><img src="https://img.youtube.com/vi/fK5WwFMFwdE/mqdefault.jpg" alt="¿Dejar de programar? Google dice que ni se te ocurra" width="320" height="180" loading="lazy" class="video-thumb-img" onerror="this.classList.add('errored');this.nextElementSibling.classList.add('visible')"><div class="video-thumb-fallback">📺 MoureDev</div></div></a><div class="card-content"><div class="meta">MoureDev | Reciente</div><a href="https://www.youtube.com/watch?v=fK5WwFMFwdE" target="_blank">¿Dejar de programar? Google dice que ni se te ocurra</a></div></div></div>
         </div>
+        <div class="filter-section">
+            <strong>📺 Tipo:</strong>
+            <div id="multimedia-tabs" class="chip-container"></div>
+        </div>
+        <div class="filter-section" id="multimedia-channel-section">
+            <strong>📺 Filtro Canal:</strong>
+            <div id="video-channel-filters" class="chip-container"></div>
+        </div>
+        <div id="multimedia-content" class="video-grid"></div>
 
         <h2>📊 Tendencias</h2>
-        <div class="filter-section">
-            <strong>🔍 Filtrar:</strong>
-            <div id="trend-type-filters" class="chip-container"></div>
-        </div>
         <div id="trends-list" class="news-list"></div>
 
         <h2>⭐ Ranking GitHub Stars</h2>
@@ -166,233 +92,9 @@
             <strong>🔤 Filtro:</strong>
             <input type="text" id="github-filter" placeholder="Buscar por nombre o lenguaje..." style="padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; width: 100%; max-width: 400px; margin-top: 8px; font-size: 14px; background: #fff; color: #1c1e21;">
         </div>
-        <div id="github-ranking"><div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#1 ⭐ 243.9k</span><span class="badge badge-tech">Shell</span></div><a href="https://github.com/obra/superpowers" target="_blank">obra /superpowers</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">An agentic skills framework & software development methodology that works.</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#2 ⭐ 224.8k</span><span class="badge badge-tech">JavaScript</span></div><a href="https://github.com/affaan-m/ECC" target="_blank">affaan-m /ECC</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development f</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#3 ⭐ 150.4k</span><span class="badge badge-tech">Python</span></div><a href="https://github.com/langflow-ai/langflow" target="_blank">langflow-ai /langflow</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">Langflow is a powerful tool for building and deploying AI-powered agents and workflows.</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#4 ⭐ 123.9k</span><span class="badge badge-tech">HTML</span></div><a href="https://github.com/ripienaar/free-for-dev" target="_blank">ripienaar /free-for-dev</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#5 ⭐ 120.6k</span><span class="badge badge-tech">Shell</span></div><a href="https://github.com/msitarzewski/agency-agents" target="_blank">msitarzewski /agency-agents</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to rea</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#6 ⭐ 115.7k</span><span class="badge badge-tech">TypeScript</span></div><a href="https://github.com/garrytan/gstack" target="_blank">garrytan /gstack</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager,</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#7 ⭐ 101.0k</span><span class="badge badge-tech">Python</span></div><a href="https://github.com/pytorch/pytorch" target="_blank">pytorch /pytorch</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">Tensors and Dynamic neural networks in Python with strong GPU acceleration</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#8 ⭐ 79.4k</span><span class="badge badge-tech">JavaScript</span></div><a href="https://github.com/JuliusBrussee/caveman" target="_blank">JuliusBrussee /caveman</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">🪨 why use many token when few token do trick — Claude Code skill that cuts 65% of tokens by talking like caveman</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#9 ⭐ 75.0k</span><span class="badge badge-tech">TypeScript</span></div><a href="https://github.com/grafana/grafana" target="_blank">grafana /grafana</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">The open and composable observability and data visualization platform. Visualize metrics, logs, and traces from multiple</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#10 ⭐ 69.4k</span><span class="badge badge-tech">Python</span></div><a href="https://github.com/opendatalab/MinerU" target="_blank">opendatalab /MinerU</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">Transforms complex documents like PDFs and Office docs into LLM-ready markdown/JSON for your Agentic workflows.</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#11 ⭐ 61.9k</span><span class="badge badge-tech">Python</span></div><a href="https://github.com/commaai/openpilot" target="_blank">commaai /openpilot</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">openpilot is an operating system for robotics. Currently, it upgrades the driver assistance system on 300+ supported car</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#12 ⭐ 60.4k</span><span class="badge badge-tech">HTML</span></div><a href="https://github.com/shanraisshan/claude-code-best-practice" target="_blank">shanraisshan /claude-code-best-practice</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">from vibe coding to agentic engineering - practice makes claude perfect</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#13 ⭐ 57.3k</span><span class="badge badge-tech">JavaScript</span></div><a href="https://github.com/santifer/career-ops" target="_blank">santifer /career-ops</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">AI-powered job search system built on Claude Code. 14 skill modes, Go dashboard, PDF generation, batch processing.</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#14 ⭐ 53.6k</span><span class="badge badge-tech">Python</span></div><a href="https://github.com/NanmiCoder/MediaCrawler" target="_blank">NanmiCoder /MediaCrawler</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">小红书笔记 | 评论爬虫、抖音视频 | 评论爬虫、快手视频 | 评论爬虫、B 站视频 ｜ 评论爬虫、微博帖子 ｜ 评论爬虫、百度贴吧帖子 ｜ 百度贴吧评论回复爬虫 | 知乎问答文章｜评论爬虫</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#15 ⭐ 52.4k</span><span class="badge badge-tech">Python</span></div><a href="https://github.com/ZhuLinsen/daily_stock_analysis" target="_blank">ZhuLinsen /daily_stock_analysis</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">LLM 驱动的多市场股票智能分析系统：多源行情、实时新闻、决策看板与自动推送，支持零成本定时运行。 LLM-powered multi-market stock analysis system with multi-source marke</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#16 ⭐ 49.2k</span><span class="badge badge-tech">Jupyter Notebook</span></div><a href="https://github.com/microsoft/AI-For-Beginners" target="_blank">microsoft /AI-For-Beginners</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">12 Weeks, 24 Lessons, AI for All!</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#17 ⭐ 46.8k</span><span class="badge badge-tech">Python</span></div><a href="https://github.com/Panniantong/Agent-Reach" target="_blank">Panniantong /Agent-Reach</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">Give your AI agent eyes to see the entire internet. Read & search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongSh</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#18 ⭐ 45.8k</span><span class="badge badge-tech">Python</span></div><a href="https://github.com/roboflow/supervision" target="_blank">roboflow /supervision</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">We write your reusable computer vision tools. 💜</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#19 ⭐ 44.9k</span><span class="badge badge-tech">TypeScript</span></div><a href="https://github.com/ChromeDevTools/chrome-devtools-mcp" target="_blank">ChromeDevTools /chrome-devtools-mcp</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">Chrome DevTools for coding agents</div></div>
-<div class="news-item" style="border-left-color:#f59e0b;"><div class="meta"><span>#20 ⭐ 43.1k</span><span class="badge badge-tech">Swift</span></div><a href="https://github.com/apple/container" target="_blank">apple /container</a><div style="font-size:0.85em;color:#64748b;margin-top:4px;">A tool for creating and running Linux containers using lightweight virtual machines on a Mac. It is written in Swift, an</div></div></div>
+        <div id="github-ranking"></div>
 
-        <h2 style="margin-top:40px;cursor:pointer;" onclick="this.nextElementSibling.classList.toggle('visible')">📚 Referencia <small style="font-size:0.6em;color:#666;">(click para mostrar/ocultar)</small></h2>
-        <div id="reference-section" style="display:none;">
-            <div class="filter-section"><strong>🛠️ Skills</strong><div class="chip-container">
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">💻 Programación</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Python</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">JavaScript</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">TypeScript</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Rust</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Go</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Java</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">C#</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">PHP</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Ruby</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Swift</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Kotlin</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Dart</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">C</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">C++</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Zig</span>
-</div>
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">🤖 IA/ML</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Machine Learning</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Deep Learning</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">NLP</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Computer Vision</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Reinforcement Learning</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">MLOps</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Fine-tuning</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">RAG</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Agentes IA</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Prompt Engineering</span>
-</div>
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">☁️ Cloud/DevOps</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Docker</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Kubernetes</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">AWS</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">GCP</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Azure</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Terraform</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">CI/CD</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Serverless</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">GitHub Actions</span>
-</div>
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">🔒 Seguridad</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Pentesting</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">CTF</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Bug Bounty</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Ciberseguridad</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Zero Trust</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">OSINT</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Hacking</span>
-</div>
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">📊 Datos</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">SQL</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">NoSQL</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Big Data</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Data Analysis</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">BI</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">ETL</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Data Engineering</span>
-</div>
-</div></div><div class="filter-section"><strong>🧠 LLMs</strong><div class="chip-container">
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Propietarios</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">GPT-4</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">GPT-4o</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">GPT-4o-mini</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Claude 3.5 Sonnet</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Claude 3 Opus</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Gemini 1.5 Pro</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Gemini 2.5 Pro</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Gemini 2.5 Flash</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Grok</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Copilot</span>
-</div>
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Open Source</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Llama 3.1</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Llama 3</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Mistral Large</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Mixtral</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">DeepSeek V2</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">DeepSeek Coder</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Qwen 2.5</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Phi-3</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Gemma 2</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Falcon 2</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Command R+</span>
-</div>
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Especializados</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">CodeLlama</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">StarCoder</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">SQLCoder</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">BioMistral</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Meditron</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">FinGPT</span>
-</div>
-</div></div><div class="filter-section"><strong>📝 Lenguajes</strong><div class="chip-container">
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Web</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">JavaScript</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">TypeScript</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">HTML</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">CSS</span>
-</div>
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Sistema</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Rust</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Go</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">C</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">C++</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Zig</span>
-</div>
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Datos/IA</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Python</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">R</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Julia</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">SQL</span>
-</div>
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Mobile</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Swift</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Kotlin</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Dart</span>
-</div>
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Empresarial</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Java</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">C#</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">PHP</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Ruby</span>
-</div>
-</div></div><div class="filter-section"><strong>📦 Frameworks</strong><div class="chip-container">
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Frontend</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">React</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Next.js</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Vue</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Nuxt</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Svelte</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Solid</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Astro</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Remix</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Angular</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Qwik</span>
-</div>
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Backend</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Django</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">FastAPI</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Flask</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Express</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">NestJS</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Spring Boot</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Laravel</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">ASP.NET</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Actix</span>
-</div>
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Mobile/Desktop</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">React Native</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Flutter</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">SwiftUI</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Jetpack Compose</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Tauri</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">.NET MAUI</span>
-</div>
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">CSS/UI</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Tailwind</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Bootstrap</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Material UI</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Shadcn/ui</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Chakra UI</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Radix UI</span>
-</div>
-</div></div><div class="filter-section"><strong>📚 Librerías</strong><div class="chip-container">
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">IA/ML</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">TensorFlow</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">PyTorch</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">LangChain</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">LlamaIndex</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Hugging Face Transformers</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Scikit-learn</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">XGBoost</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">JAX</span>
-</div>
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Testing</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Jest</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Playwright</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Vitest</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Cypress</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Pytest</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Selenium</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Testing Library</span>
-</div>
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">DevOps</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Ansible</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Prometheus</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Grafana</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Helm</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Vault</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Packer</span>
-</div>
-<div style="margin-bottom:8px;"><strong style="font-size:0.85em;color:#555;display:block;margin-bottom:4px;">Utilidades</strong>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Lodash</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Day.js</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Zod</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">React Query</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Prisma</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">Drizzle ORM</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">RxJS</span>
-<span class="chip" style="padding:2px 10px;font-size:12px;cursor:default;">tRPC</span>
-</div>
-</div></div>
-        </div>
+
     </div>
 </body>
 <script>
