@@ -208,5 +208,20 @@
   },
   "https://www.reuters.com/business/meta-sell-excess-ai-computing-capacity-via-cloud-business-bloomberg-news-reports-2026-07-01/": {
     "ts": 1782990295.915166
+  },
+  "https://www.searchenginejournal.com/google-data-shows-ai-search-users-moved-past-keywords-your-content-hasnt/580596/": {
+    "ts": 1782991673.136458
+  },
+  "https://dev.to/patchvex/soc-2-cc71-what-auditors-actually-ask-for-in-vulnerability-management-15lg": {
+    "ts": 1782991685.337411
+  },
+  "https://dev.to/rawveg/chatgpt-ads-are-not-contextual-23n8": {
+    "ts": 1782991691.874063
+  },
+  "https://dev.to/mininglamp/claude-sonnet-5-what-most-agentic-actually-means-in-practice-3hog": {
+    "ts": 1782991697.630189
+  },
+  "https://dev.to/janardan_joshi_6f21026e06/stop-writing-typescript-interfaces-by-hand-2h6e": {
+    "ts": 1782991703.079109
   }
 }
