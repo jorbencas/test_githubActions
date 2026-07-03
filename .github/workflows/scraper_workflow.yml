@@ -92,11 +92,6 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TOKEN_API_ID: ${{ secrets.TOKEN_API_ID }}
         run: python send_telegram.py
-      - name: 🖼️ Optimizar imágenes del blog
-        env:
-          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python blog/scripts/fix_images.py
       - name: 🖼️ Generar portadas
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

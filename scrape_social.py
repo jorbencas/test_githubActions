@@ -2,15 +2,9 @@
 """
 scrape_social.py — Scraper para redes sociales (Instagram, Threads, X/Twitter, TikTok)
 que requieren Playwright para renderizar contenido dinámico.
-
-Uso:
-    python scrape_social.py                          # Scrapea todas las fuentes sociales
-    python scrape_social.py --source instagram        # Solo Instagram
-    python scrape_social.py --source twitter          # Solo X/Twitter
-
-Workflow independiente, guarda en noticias_historico.json.
 """
 import argparse
+import asyncio
 import json
 import logging
 import os
@@ -41,22 +35,20 @@ NEWS_FILE = os.path.join(CONFIG_DIR, "noticias_historico.json")
 
 
 def _fuentes_sociales() -> dict:
-    """Filtra FUENTES para obtener solo las que requieren Playwright."""
     return {k: v for k, v in FUENTES.items()
             if any(kw.lower() in k.lower() for kw in PLAYWRIGHT_SOURCES)}
 
 
-def _extraer_twitter(page, nombre: str, url: str) -> list:
-    """Extrae posts de X/Twitter."""
+async def _extraer_twitter(page, nombre: str, url: str) -> list:
     results = []
     try:
-        page.goto(url, timeout=30000, wait_until="domcontentloaded")
-        page.wait_for_timeout(5000)
-        tweets = page.locator("article[data-testid='tweet'] div[lang]").all()
+        await page.goto(url, timeout=30000, wait_until="domcontentloaded")
+        await page.wait_for_timeout(5000)
+        tweets = await page.locator("article[data-testid='tweet'] div[lang]").all()
         logger.info(f"  🐦 {nombre}: {len(tweets)} tweets encontrados")
         for tweet in tweets[:10]:
             try:
-                text = tweet.inner_text(timeout=3000)
+                text = await tweet.inner_text(timeout=3000)
                 if text:
                     results.append({
                         TITULO_KEY: text[:200],
@@ -74,18 +66,17 @@ def _extraer_twitter(page, nombre: str, url: str) -> list:
     return results
 
 
-def _extraer_threads(page, nombre: str, url: str) -> list:
-    """Extrae posts de Threads."""
+async def _extraer_threads(page, nombre: str, url: str) -> list:
     results = []
     try:
-        page.goto(url, timeout=30000, wait_until="domcontentloaded")
-        page.wait_for_timeout(5000)
-        posts = page.locator("article a[href*='/post/']").all()
+        await page.goto(url, timeout=30000, wait_until="domcontentloaded")
+        await page.wait_for_timeout(5000)
+        posts = await page.locator("article a[href*='/post/']").all()
         logger.info(f"  🧵 {nombre}: {len(posts)} posts encontrados")
         for post in posts[:10]:
             try:
-                href = post.get_attribute("href", timeout=3000)
-                text = post.inner_text(timeout=3000)
+                href = await post.get_attribute("href", timeout=3000)
+                text = await post.inner_text(timeout=3000)
                 if href and text:
                     if not href.startswith("http"):
                         href = f"https://www.threads.net{href}"
@@ -105,18 +96,17 @@ def _extraer_threads(page, nombre: str, url: str) -> list:
     return results
 
 
-def _extraer_instagram(page, nombre: str, url: str) -> list:
-    """Extrae posts de Instagram."""
+async def _extraer_instagram(page, nombre: str, url: str) -> list:
     results = []
     try:
-        page.goto(url, timeout=30000, wait_until="domcontentloaded")
-        page.wait_for_timeout(5000)
-        posts = page.locator("article a[href*='/p/']").all()
+        await page.goto(url, timeout=30000, wait_until="domcontentloaded")
+        await page.wait_for_timeout(5000)
+        posts = await page.locator("article a[href*='/p/']").all()
         logger.info(f"  📸 {nombre}: {len(posts)} posts encontrados")
         for post in posts[:10]:
             try:
-                href = post.get_attribute("href", timeout=3000)
-                text = post.inner_text(timeout=3000)
+                href = await post.get_attribute("href", timeout=3000)
+                text = await post.inner_text(timeout=3000)
                 if href and text:
                     if not href.startswith("http"):
                         href = f"https://www.instagram.com{href}"
@@ -136,19 +126,20 @@ def _extraer_instagram(page, nombre: str, url: str) -> list:
     return results
 
 
-def _extraer_tiktok(page, nombre: str, url: str) -> list:
-    """Extrae posts de TikTok."""
+async def _extraer_tiktok(page, nombre: str, url: str) -> list:
     results = []
     try:
-        page.goto(url, timeout=30000, wait_until="domcontentloaded")
-        page.wait_for_timeout(5000)
-        items = page.locator("div[data-e2e='user-post-item']").all()
+        await page.goto(url, timeout=30000, wait_until="domcontentloaded")
+        await page.wait_for_timeout(5000)
+        items = await page.locator("div[data-e2e='user-post-item']").all()
         logger.info(f"  🎵 {nombre}: {len(items)} posts encontrados")
         for item in items[:10]:
             try:
                 link_el = item.locator("a")
-                href = link_el.get_attribute("href", timeout=3000) if link_el.count() > 0 else ""
-                title = item.inner_text(timeout=3000).split("\n")[0][:80] if href else ""
+                count = await link_el.count()
+                href = await link_el.get_attribute("href", timeout=3000) if count > 0 else ""
+                title = await item.inner_text(timeout=3000) if href else ""
+                title = title.split("\n")[0][:80]
                 if href and not href.startswith("http"):
                     href = f"https://www.tiktok.com{href}"
                 if href and title:
@@ -201,7 +192,6 @@ async def run():
         )
 
         for nombre, info in fuentes.items():
-            # Determine platform from source name
             platform = None
             for p in ["instagram", "threads", "twitter", "tiktok"]:
                 if p in nombre.lower():
@@ -218,6 +208,18 @@ async def run():
                 logger.warning(f"  ⚠️ Sin extractor para {platform}")
                 continue
 
+            # Health check rápido: validar que la URL responde
+            try:
+                import urllib.request
+                loop = asyncio.get_event_loop()
+                req = urllib.request.Request(info["url"], method="HEAD")
+                resp = await loop.run_in_executor(None, lambda: urllib.request.urlopen(req, timeout=10))
+                logger.info(f"  ✓ {nombre}: HTTP {resp.status}")
+                resp.close()
+            except Exception as e:
+                logger.warning(f"  ⚠️ {nombre}: URL no accesible ({e}) — se omite")
+                continue
+
             page = await context.new_page()
             try:
                 results = await extractor(page, nombre, info["url"])
@@ -229,7 +231,10 @@ async def run():
             except Exception as e:
                 logger.error(f"❌ Error en {nombre}: {e}")
             finally:
-                await page.close()
+                try:
+                    await page.close()
+                except Exception:
+                    pass
 
         await browser.close()
 
@@ -254,5 +259,8 @@ async def run():
 
 
 if __name__ == "__main__":
-    import asyncio
-    asyncio.run(run())
+    try:
+        asyncio.run(run())
+    except Exception as e:
+        logger.error(f"❌ Error fatal en scrape_social.py: {e}")
+        sys.exit(1)

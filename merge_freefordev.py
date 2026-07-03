@@ -184,31 +184,7 @@ def parse_freefordev(text):
     return resources
 
 
-def make_card(name, url, desc):
-    dom = domain_from(url)
-    favicon = f"https://www.google.com/s2/favicons?domain={dom}&sz=32"
-    escaped_desc = desc.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
-    escaped_name = name.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
-    
-    desc_html = f'\n    <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">{escaped_desc}</p>' if escaped_desc else ""
-    
-    return (
-        f'<a href="{url}" '
-        f'class="flex items-start gap-4 p-4 rounded-xl border border-slate-200 '
-        f'dark:border-slate-700 bg-white dark:bg-slate-900 '
-        f'hover:border-cyan-400 dark:hover:border-cyan-400 '
-        f'hover:shadow-xl hover:-translate-y-1 transition-all no-underline group">'
-        f'\n  <img src="{favicon}" width="20" height="20" '
-        f'class="mt-1 shrink-0 rounded bg-slate-100 dark:bg-slate-800 p-0.5"'
-        f' alt="{escaped_name}" loading="lazy" />'
-        f'\n  <div>'
-        f'\n    <span class="font-bold text-slate-900 dark:text-white '
-        f'group-hover:text-cyan-600 dark:group-hover:text-cyan-400 '
-        f'transition-colors">{escaped_name}</span>'
-        f'{desc_html}'
-        f'\n  </div>'
-        f'\n</a>'
-    )
+from manage_resources import format_card as make_card
 
 
 def make_section_header(name):
@@ -273,10 +249,24 @@ def add_section_after_nav(content, section_header, cards_html):
 
 
 def add_cards_to_section(content, grid_start, cards_html):
-    """Add cards to an existing section's grid."""
-    grid_end = find_grid_end(content, grid_start)
-    before = content[:grid_end]
-    after = content[grid_end:]
+    """Add cards to an existing section's grid (inside, before closing)."""
+    close_idx = content.find("</div>", grid_start)
+    depth = 1
+    i = grid_start + len('<div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-6">')
+    while i < len(content) and depth > 0:
+        if content[i:i+4] == '<div' and content[i+4] in (' ', '>'):
+            depth += 1
+            i += 4
+        elif content[i:i+6] == '</div>':
+            depth -= 1
+            if depth == 0:
+                close_idx = i
+                break
+            i += 6
+        else:
+            i += 1
+    before = content[:close_idx]
+    after = content[close_idx:]
     return before + "\n" + cards_html + "\n" + after
 
 

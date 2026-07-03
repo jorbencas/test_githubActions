@@ -32,6 +32,31 @@ def domain_from(url: str) -> str:
     return urlparse(url).netloc.replace("www.", "")
 
 
+def format_card(name: str, url: str, description: str) -> str:
+    dom = domain_from(url)
+    favicon = f"https://www.google.com/s2/favicons?domain={dom}&sz=32"
+    desc_escaped = description.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+    name_escaped = name.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+    desc_html = f'\n    <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">{desc_escaped}</p>' if desc_escaped else ""
+    return (
+        f'<a href="{url}" '
+        'class="flex items-start gap-4 p-4 rounded-xl border border-slate-200 '
+        'dark:border-slate-700 bg-white dark:bg-slate-900 '
+        'hover:border-cyan-400 dark:hover:border-cyan-400 '
+        'hover:shadow-xl hover:-translate-y-1 transition-all no-underline group">'
+        f'\n  <img src="{favicon}" width="20" height="20" '
+        'class="mt-1 shrink-0 rounded bg-slate-100 dark:bg-slate-800 p-0.5"'
+        f' alt="{name_escaped}" loading="lazy" />'
+        "\n  <div>"
+        f'\n    <span class="font-bold text-slate-900 dark:text-white '
+        "group-hover:text-cyan-600 dark:group-hover:text-cyan-400 "
+        f'transition-colors">{name_escaped}</span>'
+        f"{desc_html}"
+        "\n  </div>"
+        "\n</a>"
+    )
+
+
 def extract_existing_urls(text: str) -> set:
     seen = set()
     for u in re.findall(r"https?://[^\s\n<>\"\'\)]+", text):
@@ -46,29 +71,7 @@ def count_cards(text: str) -> int:
     return len(CARD_PATTERN.findall(text))
 
 
-def build_card(name: str, url: str, description: str) -> str:
-    dom = domain_from(url)
-    favicon = f"https://www.google.com/s2/favicons?domain={dom}&sz=32"
-    desc_escaped = description.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
-    name_escaped = name.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
-    return (
-        f'<a href="{url}" '
-        'class="flex items-start gap-4 p-4 rounded-xl border border-slate-200 '
-        'dark:border-slate-700 bg-white dark:bg-slate-900 '
-        'hover:border-cyan-400 dark:hover:border-cyan-400 '
-        'hover:shadow-xl hover:-translate-y-1 transition-all no-underline group">'
-        f'\n  <img src="{favicon}" width="20" height="20" '
-        'class="mt-1 shrink-0 rounded bg-slate-100 dark:bg-slate-800 p-0.5"'
-        f' alt="{name_escaped}" loading="lazy" />'
-        "\n  <div>"
-        f'\n    <span class="font-bold text-slate-900 dark:text-white '
-        "group-hover:text-cyan-600 dark:group-hover:text-cyan-400 "
-        f'transition-colors">{name_escaped}</span>'
-        f'\n    <p class="text-sm text-slate-500 dark:text-slate-400 '
-        f'mt-0.5 leading-snug">{desc_escaped}</p>'
-        "\n  </div>"
-        "\n</a>"
-    )
+
 
 
 def card_count_from_html(text: str) -> int:
@@ -194,6 +197,13 @@ def reorder_resources(posts_dir: Path, max_cards: int):
     fm_end = first_content.find("---", 3)
     frontmatter = first_content[:fm_end + 3] if fm_end != -1 else first_content
 
+    # Strip ALL frontmatter blocks from preamble_text to avoid duplication
+    while preamble_text.startswith("---"):
+        fm_close = preamble_text.find("---", 3)
+        if fm_close == -1:
+            break
+        preamble_text = preamble_text[fm_close + 3:].lstrip("\n")
+
     # Collect all sections from all files
     all_sections = []
     total_card_count = 0
@@ -294,6 +304,18 @@ def main():
         print(f"   {f.name}: {c} tarjetas")
     print(f"   Total: {total_cards} tarjetas")
 
+    # Fix broken cards: añadir </a> si falta entre </div> y el siguiente card
+    for rf in existing_files:
+        content = rf.read_text(encoding="utf-8")
+        fixed = re.sub(
+            r'(?<!</a>\n)(</div>)\s*\n\s*(<a href="https?://[^"]+" class="flex items-start gap-4)',
+            r'\1\n</a>\n\2',
+            content,
+        )
+        if fixed != content:
+            rf.write_text(fixed, encoding="utf-8")
+            print(f"   🔧 Reparados cards sin </a> en {rf.name}")
+
     # Ensure all resources files have the "recursos" tag in frontmatter
     for rf in existing_files:
         content = rf.read_text(encoding="utf-8")
@@ -388,7 +410,7 @@ def main():
             name = t.get("titulo", domain_from(t.get("enlace", "")))
             desc = t.get("descripcion", "")
             url = t.get("enlace", "")
-            cards.append(build_card(name, url, desc))
+            cards.append(format_card(name, url, desc))
 
         cards_block = "\n\n".join(cards)
         bounds = find_section_bounds(active_content, SECTION_ID)
