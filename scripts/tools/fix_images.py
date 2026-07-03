@@ -579,11 +579,17 @@ async def process_file(session: aiohttp.ClientSession, path: Path, semaphore: as
 
             # Inyección limpia del componente Astro en la sección frontmatter
             import_stmt: str = 'import ResponsiveImage from "@components/ResponsiveImage.astro";'
-            content = re.sub(r'import\s+ResponsiveImage\s+from\s+["\']@components/ResponsiveImage\.astro["\'];?\n*', '', content)
-            if "<ResponsiveImage" in content:
+            has_component = "<ResponsiveImage" in content
+            has_import = "import ResponsiveImage" in content
+
+            if has_component and not has_import:
+                # Componente usado pero import falta → agregar después del frontmatter
                 fm_match = re.search(r'^---\s*\n(.*?)\n---\s*\n', content, re.DOTALL)
-                if fm_match: 
+                if fm_match:
                     content = content[:fm_match.end()] + import_stmt + "\n\n" + content[fm_match.end():]
+            elif not has_component and has_import:
+                # Import existe pero componente no se usa → eliminar import
+                content = re.sub(r'import\s+ResponsiveImage\s+from\s+["\']@components/ResponsiveImage\.astro["\'];?\n*', '', content)
 
             with open(path, "w", encoding="utf-8") as f: 
                 f.write(content)

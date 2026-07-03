@@ -23,6 +23,15 @@
   - Ejecuta manage_resources.py contra el blog
   - Crea PR directo al blog (jorbencas/blog)
   
+### Fix fix_images.py — 03/07/2026
+- Corregido bug donde `fix_images.py` eliminaba `import ResponsiveImage` de posts del blog
+- **Causa**: el script borraba el import siempre y solo lo re-agregaba si encontraba `<ResponsiveImage` en el contenido
+- **Solución**: nueva lógica condicional:
+  - Si componente existe + import falta → agregar import después del frontmatter
+  - Si componente NO existe + import existe → eliminar import
+  - Si ambos existen → no hacer nada (mantener)
+- Commit: `[fix] fix_images.py: preserve ResponsiveImage import when component is used`
+
 ## Notas
 - El dashboard se despliega en Surge.sh solo los sábados (scraper_workflow.yml)
 - Los recursos NO aparecen en el dashboard — van directo al blog vía PR
