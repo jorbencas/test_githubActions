@@ -327,6 +327,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@jorbencas">
     <meta name="twitter:creator" content="@jorbencas">
+    <meta id="api-base-token" content="{downloader_api_token}">
     <link rel="canonical" href="https://jorbencasdownloaderdocument.surge.sh">
     <link rel="stylesheet" href="styles.css">
     <title>Tech Pulse Dashboard — Jorge Beneyto Castell\u00f3</title>

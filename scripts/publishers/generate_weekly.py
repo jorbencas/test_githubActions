@@ -69,7 +69,7 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
     ]
     herramientas_github.sort(key=lambda h: int(h.get(ESTRELLAS_KEY, "0")), reverse=True)
     top_github = herramientas_github[:20]
-
+     
     # === Escribir index.html (solo resumen + fecha, resto lo pinta JS) ===
     os.makedirs("public", exist_ok=True)
     with open("public/index.html", "w", encoding="utf-8") as f:
@@ -77,6 +77,7 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
             HTML_TEMPLATE.format(
                 fecha_hoy=fecha_h,
                 resumen=resumen_ia,
+                downloader_api_token=CONFIG.get("DOWNLOADER_API_TOKEN"),
             )
         )
 
