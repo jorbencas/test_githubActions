@@ -1,0 +1,46 @@
+name: 🏹 Cazador de Retos IA
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 23 * * 0'
+
+jobs:
+  hunt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 📂 Checkout blog
+        uses: actions/checkout@v4
+        with:
+          repository: jorbencas/blog
+          path: blog
+          token: ${{ secrets.BLOG_TOKEN }}
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r blog/requirements.txt
+
+      - name: 🏹 Ejecutar Cacería de Retos
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PYTHONPATH: ${{ github.workspace }}/blog
+        run: python blog/scripts/hunt_challenges.py
+
+      - name: 📝 Commit y Push al blog
+        run: |
+          cd blog
+          if ls src/content/auto-challenges/*.mdx 2>/dev/null; then
+            git config user.name jorbencas
+            git config user.email jorbencas@gmail.com
+            git add src/content/auto-challenges/*.mdx
+            git diff --quiet && git diff --staged --quiet || (git commit -m "🚀 IA: Nuevos retos de programación generados" && git push)
+          else
+            echo "No hay retos nuevos que añadir"
+          fi
