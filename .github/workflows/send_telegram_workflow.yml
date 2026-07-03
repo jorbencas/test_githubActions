@@ -30,8 +30,8 @@ jobs:
       - name: 💾 Persistir telegram_sent.json
         if: always()
         run: |
-          git config user.name jorbencas
-          git config user.email jorbencas@gmail.com
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
           git add telegram_sent.json
           git diff --quiet --cached || git commit -m "[bot] update telegram sent log"
           git push origin master
