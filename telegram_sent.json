@@ -523,5 +523,20 @@
   },
   "https://www.wired.com/category/science/psychology-neuroscience/": {
     "ts": 1783110563.467606
+  },
+  "https://techcrunch.com/category/artificial-intelligence/": {
+    "ts": 1783110970.13968
+  },
+  "https://github.com/afspies/clawdmoji": {
+    "ts": 1783110975.158459
+  },
+  "https://crocidb.com/post/freebsd-ate-my-ram/": {
+    "ts": 1783110980.969322
+  },
+  "https://techcrunch.com/2026/07/01/spacex-has-an-ai-device-prototype-and-it-sure-sounds-phone-ish/": {
+    "ts": 1783110985.818598
+  },
+  "https://techcrunch.com/2026/07/01/ashton-kutcher-leaving-sound-ventures-to-launch-new-vc-firm-with-morgan-beller/": {
+    "ts": 1783110992.538649
   }
 }
