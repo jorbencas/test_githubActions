@@ -25,13 +25,13 @@ jobs:
       - name: 📦 Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r blog/requirements.txt
+          pip install -r requirements.txt
 
       - name: 🏹 Ejecutar Cacería de Retos
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PYTHONPATH: ${{ github.workspace }}/blog
-        run: python blog/scripts/hunt_challenges.py
+        run: python hunt_challenges.py
 
       - name: 📝 Commit y Push al blog
         run: |
