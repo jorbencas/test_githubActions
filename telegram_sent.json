@@ -463,5 +463,20 @@
   },
   "https://huggingface.co/blog/ginigen-ai/metacognition": {
     "ts": 1783096808.04632
+  },
+  "https://www.anthropic.com/news/redeploying-fable-5": {
+    "ts": 1783101328.690274
+  },
+  "https://azure.microsoft.com/en-us/blog/from-insight-to-action-the-next-phase-of-agentic-cloud-operations/": {
+    "ts": 1783101347.141151
+  },
+  "https://blogs.microsoft.com/blog/2026/06/02/ai-alone-wont-change-your-business-the-system-running-it-will/": {
+    "ts": 1783101353.354264
+  },
+  "https://azure.microsoft.com/en-us/blog/announcing-microsoft-discovery-general-availability-and-microsoft-discovery-app-preview/": {
+    "ts": 1783101373.926511
+  },
+  "https://azure.microsoft.com/en-us/blog/advancing-enterprise-ai-new-sap-on-azure-announcements-from-sap-sapphire-2026/": {
+    "ts": 1783101392.099562
   }
 }
