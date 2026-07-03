@@ -437,9 +437,9 @@ function renderYouTube(items, container) {
         : `tab-${tab}`;
       return `<div class="card ${clase}" data-ts="${ts}" data-fuente="${fuente}">
       ${esLive ? '<span class="badge-live">● EN DIRECTO</span>' : ""}
-       <button onclick="descargarVideo(${
+       <button onclick="descargarVideo('${
          i.enlace
-       }, this)" target="_blank" class="btn-download">📥</button>
+       }', this)" target="_blank" class="btn-download">📥</button>
       <a href="${i.enlace}" target="_blank" class="video-thumb-link">
         <div class="video-thumb">
           <img src="https://img.youtube.com/vi/${
