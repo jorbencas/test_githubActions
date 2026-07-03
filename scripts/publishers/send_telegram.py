@@ -21,9 +21,9 @@ import edge_tts
 import requests
 from google import genai
 
-from cache import CacheManager, FileCache
-from constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_DASHBOARD_URL, TELEGRAM_MENSAJE_TEMPLATE, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY, TIPO_KEY, TIPO_VAL_TREND, TIPO_VAL_SOCIAL
-from utils import load_json, resumir_noticia
+from scripts.utils.cache import CacheManager, FileCache
+from scripts.utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_DASHBOARD_URL, TELEGRAM_MENSAJE_TEMPLATE, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY, TIPO_KEY, TIPO_VAL_TREND, TIPO_VAL_SOCIAL
+from scripts.utils.common import load_json, resumir_noticia
 
 os.makedirs("logs", exist_ok=True)
 logging.basicConfig(

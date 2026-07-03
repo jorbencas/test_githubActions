@@ -37,7 +37,7 @@ for i, a in enumerate(list(__import__("sys").argv)):
 ROOT = Path(_argv_blog_path).resolve() if _argv_blog_path else Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from fix_images import compress_and_save_adaptive, IMG_DIR, SIZES, slugify
+from scripts.tools.fix_images import compress_and_save_adaptive, IMG_DIR, SIZES, slugify
 
 CANVAS_W = 1400
 CANVAS_H = 900

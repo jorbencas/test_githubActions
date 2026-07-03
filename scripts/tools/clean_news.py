@@ -5,7 +5,7 @@ import requests
 from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from constants_downloadfile import TIPO_KEY, ENLACE_KEY, TITULO_KEY, TS_KEY, ULTIMA_VERIF_KEY
+from scripts.utils.constants_downloadfile import TIPO_KEY, ENLACE_KEY, TITULO_KEY, TS_KEY, ULTIMA_VERIF_KEY
 
 CONFIG = {
     "FOLDER": "files"

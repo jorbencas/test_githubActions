@@ -30,8 +30,7 @@ jobs:
       - name: 🏹 Ejecutar Cacería de Retos
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          PYTHONPATH: ${{ github.workspace }}/blog
-        run: python hunt_challenges.py
+        run: python -m scripts.tools.hunt_challenges
 
       - name: 📝 Commit y Push al blog
         run: |

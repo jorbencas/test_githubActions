@@ -35,7 +35,7 @@ jobs:
           git config user.email jorbencas@gmail.com
           git pull origin master --rebase
       - name: Ejecutar Script de Limpieza
-        run: python clean_news.py
+        run: python -m scripts.tools.clean_news
       - name: Guardar cambios en el JSON
         run: |
           git config user.name jorbencas

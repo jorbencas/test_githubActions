@@ -11,8 +11,8 @@ import os
 import re
 import sys
 
-from utils import load_json, save_json, deduplicar_items
-from constants_downloadfile import (
+from scripts.utils.common import load_json, save_json, deduplicar_items
+from scripts.utils.constants_downloadfile import (
     ENLACE_KEY, TITULO_KEY, FUENTE_KEY, TIPO_KEY, F_KEY, FECHA_REAL_KEY,
     TS_KEY, TIPO_VAL_SOCIAL, FUENTES, PLAYWRIGHT_SOURCES
 )
@@ -245,7 +245,7 @@ async def run():
         try:
             import google.genai as genai
             client_tr = genai.Client(api_key=os.environ.get("GEMINI_API_KEY") or "")
-            from utils import traducir_titulos_ia
+            from scripts.utils.common import traducir_titulos_ia
             all_new = await traducir_titulos_ia(all_new, client_tr)
         except Exception as e:
             logger.warning(f"⚠️ Traducción no disponible: {e}")

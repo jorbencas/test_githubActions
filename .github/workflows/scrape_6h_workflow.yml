@@ -24,7 +24,7 @@ jobs:
       - name: 💻 Scrape news (tier standard — web sources)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python scrape_news.py --tier standard
+        run: python -m scripts.scrapers.scrape_news --tier standard
       - name: 📝 Push cambios
         if: always()
         run: |

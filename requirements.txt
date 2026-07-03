@@ -9,3 +9,4 @@ Pillow
 pillow-avif-plugin
 html2text
 python-dotenv
+pytest

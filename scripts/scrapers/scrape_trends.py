@@ -17,8 +17,8 @@ import os
 import re
 import sys
 
-from utils import load_json, save_json
-from constants_downloadfile import ENLACE_KEY, TITULO_KEY, FUENTE_KEY, TIPO_KEY, F_KEY, FECHA_REAL_KEY, TS_KEY, TIPO_VAL_TREND, TIPO_VAL_SOCIAL
+from scripts.utils.common import load_json, save_json
+from scripts.utils.constants_downloadfile import ENLACE_KEY, TITULO_KEY, FUENTE_KEY, TIPO_KEY, F_KEY, FECHA_REAL_KEY, TS_KEY, TIPO_VAL_TREND, TIPO_VAL_SOCIAL
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
 from pathlib import Path

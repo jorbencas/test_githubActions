@@ -26,7 +26,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TOKEN_API_ID: ${{ secrets.TOKEN_API_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python send_telegram.py
+        run: python -m scripts.publishers.send_telegram
       - name: 💾 Persistir telegram_sent.json
         if: always()
         run: |

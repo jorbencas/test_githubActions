@@ -14,9 +14,9 @@ from logging.handlers import RotatingFileHandler
 
 import aiohttp
 
-from constants_downloadfile import CONFIG, FUENTES, TIPO_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY
-from utils import load_json, save_json
-from scraper_base import ScraperPro
+from scripts.utils.constants_downloadfile import CONFIG, FUENTES, TIPO_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY
+from scripts.utils.common import load_json, save_json
+from scripts.scrapers.scraper_base import ScraperPro
 
 os.makedirs("logs", exist_ok=True)
 logging.basicConfig(

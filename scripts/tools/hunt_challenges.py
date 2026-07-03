@@ -10,15 +10,15 @@ from datetime import datetime
 from google import genai
 from slugify import slugify
 
-from constants_retos import (
+from scripts.utils.constants_retos import (
     CONFIG,
     WEBS_RETOS,
     RETO_MD_TEMPLATE,
     PROMPT_IMAGEN_TEMPLATE_RETO
 )
-from utils_retos import obtener_solucion_ia, generar_imagen_noticia, traducir_titulos_ia
+from scripts.utils.utils_retos import obtener_solucion_ia, generar_imagen_noticia, traducir_titulos_ia
 try:
-    from scripts.solutions_db import lookup as db_lookup, generate_generic
+    from scripts.solutions.solutions_db import lookup as db_lookup, generate_generic
 except ImportError:
     def db_lookup(titulo, lang):
         return None
@@ -222,7 +222,7 @@ async def hunt(offline=False):
     retos_nuevos = []
 
     if offline:
-        print("Modo Offline: El script solo buscará soluciones en la base de datos local (solutions_db.py).")
+        print("Modo Offline: El script solo buscará soluciones en la base de datos local (scripts.solutions.solutions_db).")
 
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
 

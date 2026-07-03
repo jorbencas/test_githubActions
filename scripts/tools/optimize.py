@@ -23,7 +23,7 @@ try:
 except ImportError:
     pillow_avif = None
 
-from constants_downloadfile import CONFIG
+from scripts.utils.constants_downloadfile import CONFIG
 
 # ───────────────────────── Configuration ─────────────────────────
 INPUT_DIR = CONFIG.get("IMAGES_FOLDER", "images")

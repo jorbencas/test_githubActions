@@ -184,7 +184,7 @@ def parse_freefordev(text):
     return resources
 
 
-from manage_resources import format_card as make_card
+from scripts.publishers.manage_resources import format_card as make_card
 
 
 def make_section_header(name):

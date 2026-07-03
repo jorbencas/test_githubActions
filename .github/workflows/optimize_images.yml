@@ -32,7 +32,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
-        run: python fix_images.py --blog-path blog
+        run: python -m scripts.tools.fix_images --blog-path blog
 
       - name: 🚀 Push cambios al blog
         run: |

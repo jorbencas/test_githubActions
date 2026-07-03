@@ -33,21 +33,21 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: 🖼️ Optimize Images (dashboard)
-        run: python optimize.py
+        run: python -m scripts.tools.optimize
 
       # ── Fase 1: Scraping ──
       - name: 💻 Scrape news (tier full)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python scrape_news.py --tier full
+        run: python -m scripts.scrapers.scrape_news --tier full
       - name: 🔧 Scrape tools
-        run: python scrape_tools.py
+        run: python -m scripts.scrapers.scrape_tools
       - name: 📱 Scrape social media (Playwright)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           python -m playwright install chromium 2>&1
-          python scrape_social.py --source all
+          python -m scripts.scrapers.scrape_social --source all
 
       # ── Fase 3: Blog (push directo) ──
       - name: 📂 Checkout blog repo
@@ -63,18 +63,18 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DOWNLOADER_API_TOKEN: ${{ secrets.DOWNLOADER_API_TOKEN }}
-        run: python generate_weekly.py --blog-path blog
+        run: python -m scripts.publishers.generate_weekly --blog-path blog
       - name: 🌐 Download free-for.dev resources
         run: |
           curl -sL https://raw.githubusercontent.com/ripienaar/free-for-dev/master/README.md -o /tmp/free-for-dev.md
           echo "✅ free-for.dev README descargado ($(wc -c < /tmp/free-for-dev.md) bytes)"
       - name: 🔗 Merge free-for.dev resources
         run: |
-          python merge_freefordev.py --blog-path blog --free-dev-file /tmp/free-for-dev.md || echo "⚠️ merge_freefordev opcional — continuando sin él"
+          python -m scripts.publishers.merge_freefordev --blog-path blog --free-dev-file /tmp/free-for-dev.md || echo "⚠️ merge_freefordev opcional — continuando sin él"
       - name: 🔄 Gestionar recursos (--clean + --reorder)
         id: blog_updated
         run: |
-          python manage_resources.py --blog-path blog --tools-file files/herramientas.json --max-cards 500 --clean --reorder \
+          python -m scripts.publishers.manage_resources --blog-path blog --tools-file files/herramientas.json --max-cards 500 --clean --reorder \
             && echo "updated=yes" >> $GITHUB_OUTPUT \
             || echo "updated=no" >> $GITHUB_OUTPUT
 
@@ -85,20 +85,20 @@ jobs:
           MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
           MAILGUN_DOMAIN: ${{ secrets.MAILGUN_DOMAIN }}
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
-        run: python send_email.py
+        run: python -m scripts.publishers.send_email
       - name: 🤖 Send Telegram notification
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TOKEN_API_ID: ${{ secrets.TOKEN_API_ID }}
-        run: python send_telegram.py
+        run: python -m scripts.publishers.send_telegram
       - name: 🖼️ Generar portadas
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           npm install playwright-core --no-save 2>&1
           npx playwright install chromium 2>&1
-          python make_cover_collage.py --ci --blog-path blog
+          python -m scripts.tools.make_cover_collage --ci --blog-path blog
       - name: 🚀 Push directo al blog
         if: steps.blog_updated.outputs.updated == 'yes'
         run: |

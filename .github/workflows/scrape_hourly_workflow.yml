@@ -24,7 +24,7 @@ jobs:
       - name: 💻 Scrape news (tier light — RSS + fuentes rápidas)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python scrape_news.py --tier light
+        run: python -m scripts.scrapers.scrape_news --tier light
       - name: 📝 Push cambios
         if: always()
         run: |

@@ -25,7 +25,7 @@ from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
 from typing import Any
 
-from constants_downloadfile import ENLACE_KEY, TS_KEY
+from scripts.utils.constants_downloadfile import ENLACE_KEY, TS_KEY
 
 logger = logging.getLogger(__name__)
 

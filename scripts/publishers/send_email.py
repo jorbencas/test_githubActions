@@ -19,8 +19,8 @@ from logging.handlers import RotatingFileHandler
 import requests
 from google import genai
 
-from constants_downloadfile import CONFIG, EMAIL_TEMPLATE, EMAIL_ROW_TEMPLATE, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, ID_VIDEO_KEY, BADGE_KEY, VAL_TECH, TIPO_KEY, TIPO_VAL_TREND, TIPO_VAL_SOCIAL
-from utils import load_json, resumir_noticia, resumir_lote_noticias
+from scripts.utils.constants_downloadfile import CONFIG, EMAIL_TEMPLATE, EMAIL_ROW_TEMPLATE, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, ID_VIDEO_KEY, BADGE_KEY, VAL_TECH, TIPO_KEY, TIPO_VAL_TREND, TIPO_VAL_SOCIAL
+from scripts.utils.common import load_json, resumir_noticia, resumir_lote_noticias
 
 os.makedirs("logs", exist_ok=True)
 logging.basicConfig(

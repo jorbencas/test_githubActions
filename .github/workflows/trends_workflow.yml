@@ -27,7 +27,7 @@ jobs:
       - name: 📊 Scrape trends (Google Trends + TikTok)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python scrape_trends.py
+        run: python -m scripts.scrapers.scrape_trends
       - name: 📝 Push changes
         if: always()
         run: |

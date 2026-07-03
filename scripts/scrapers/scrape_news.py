@@ -17,9 +17,9 @@ from logging.handlers import RotatingFileHandler
 
 import aiohttp
 
-from constants_downloadfile import CONFIG, FUENTES, YT_KEY, TIPO_KEY, QUICK_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY, ID_VIDEO_KEY, PLAYWRIGHT_SOURCES
-from scraper_base import ScraperPro
-from utils import load_json, save_json, traducir_titulos_ia, deduplicar_items
+from scripts.utils.constants_downloadfile import CONFIG, FUENTES, YT_KEY, TIPO_KEY, QUICK_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY, ID_VIDEO_KEY, PLAYWRIGHT_SOURCES
+from scripts.scrapers.scraper_base import ScraperPro
+from scripts.utils.common import load_json, save_json, traducir_titulos_ia, deduplicar_items
 
 os.makedirs("logs", exist_ok=True)
 logging.basicConfig(

@@ -4,9 +4,9 @@ import re
 import asyncio
 import logging
 from slugify import slugify
-from constants_retos import CONFIG, PROMPT_IMAGEN_TEMPLATE_RETO
+from scripts.utils.constants_retos import CONFIG, PROMPT_IMAGEN_TEMPLATE_RETO
 try:
-    from scripts.solutions_db import lookup, generate_generic
+    from scripts.solutions.solutions_db import lookup, generate_generic
 except ImportError:
     def lookup(titulo, lang):
         return None

@@ -25,7 +25,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: 🔧 Scrape tools (GitHub Trending + Product Hunt)
-        run: python scrape_tools.py
+        run: python -m scripts.scrapers.scrape_tools
 
       - name: 📂 Checkout blog repo
         uses: actions/checkout@v3
@@ -38,7 +38,7 @@ jobs:
       - name: 📊 Gestionar recursos (paginación + nuevas herramientas)
         id: resources_updated
         run: |
-          python manage_resources.py --blog-path blog --tools-file files/herramientas.json --max-cards 500 \
+          python -m scripts.publishers.manage_resources --blog-path blog --tools-file files/herramientas.json --max-cards 500 \
             && echo "updated=yes" >> $GITHUB_OUTPUT \
             || echo "updated=no" >> $GITHUB_OUTPUT
 
