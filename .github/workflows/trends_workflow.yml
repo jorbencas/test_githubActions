@@ -31,8 +31,8 @@ jobs:
       - name: 📝 Push changes
         if: always()
         run: |
-          git config user.name jorbencas
-          git config user.email jorbencas@gmail.com
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
           git add .
           git diff --quiet && git diff --staged --quiet || git commit -m "[bot] update trends data"
           git push origin master
