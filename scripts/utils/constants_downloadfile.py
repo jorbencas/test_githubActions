@@ -123,7 +123,7 @@ FUENTES = {
     "Genbeta": {"url": "https://www.genbeta.com/"},
     "HobbyConsolas": {"url": "https://www.hobbyconsolas.com/tags/temas/tecnologia.html"},
     "El País Tecnología": {"url": "https://elpais.com/tecnologia/"},
-    "Levante-EMV": {"url": "https://www.levante-emv.com/"},
+    "Levante-EMV": {"url": "https://www.levante-emv.com/tags/tecnologia/"},
     "Fundación Carolina": {"url": "https://www.fundacioncarolina.es/"},
     "Applesfera": {"url": "https://www.applesfera.com/"},
     "Mixx.io": {"url": "https://mixx.io/"},
