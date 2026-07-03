@@ -478,5 +478,20 @@
   },
   "https://azure.microsoft.com/en-us/blog/advancing-enterprise-ai-new-sap-on-azure-announcements-from-sap-sapphire-2026/": {
     "ts": 1783101392.099562
+  },
+  "https://www.fide.com/fide-ethics-disciplinary-commission-issues-a-decision-in-case-involving-gm-vladimir-kramnik/": {
+    "ts": 1783105517.694921
+  },
+  "https://www.theguardian.com/us-news/2026/jul/03/datacenter-recall-elections": {
+    "ts": 1783105529.863721
+  },
+  "https://github.com/teamchong/pxpipe": {
+    "ts": 1783105543.033177
+  },
+  "https://12gramsofcarbon.com/p/agentics-memorizing-session-transcripts": {
+    "ts": 1783105552.892771
+  },
+  "https://dev.to/ttibbs/cursor-was-using-50gb-of-memory-the-cause-was-a-nested-cursor-folder-275o": {
+    "ts": 1783105558.775724
   }
 }
