@@ -1,5 +1,18 @@
 [
     {
+        "titulo": "The Life and Times of Maxis, Part 1: SimEverything",
+        "enlace": "https://www.filfre.net/2026/07/the-life-and-times-of-maxis-part-1-simeverything/",
+        "fuente": "Hacker News",
+        "tipo": "noticia",
+        "f": "03/07",
+        "fecha_publicacion": "Fri, 03 Jul 2026 15:56:02 +0000",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "origen": "rss",
+        "fecha_real": "03/07/2026",
+        "ts": "2026-07-03T16:28:41.128782"
+    },
+    {
         "titulo": "Markets are competitive if and only if P = NP",
         "enlace": "https://arxiv.org/abs/2602.20415",
         "fuente": "Hacker News",
@@ -11678,18 +11691,5 @@
         "imagen_url_original": "",
         "fecha_real": "01/07/2026",
         "ts": "2026-07-01T16:33:49.140789"
-    },
-    {
-        "titulo": "Rebecca Ferguson (‘Dune’ y ‘Silo’): «No me atrae la ciencia ficción, no la busco»",
-        "enlace": "https://hipertextual.com/cine-television/rebecca-ferguson-dune-y-silo-no-me-atrae-la-ciencia-ficcion-no-la-busco/",
-        "fuente": "Hipertextual",
-        "tipo": "noticia",
-        "f": "01/07",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "",
-        "fecha_real": "01/07/2026",
-        "ts": "2026-07-01T16:33:49.142161"
     }
 ]
