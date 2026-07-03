@@ -659,7 +659,7 @@ async function descargarVideo(urlVideo, boton) {
 
   // 3. LLAMADA FETCH A TU API EN HUGGING FACE
   const apiUrl = `https://testactions1github-api-python.hf.space/download?url=${encodeURIComponent(
-    inputUrl
+    urlVideo
   )}`;
 
   try {
