@@ -136,25 +136,46 @@ option { font-weight: normal; color: #555; background: white; }
   body { padding: 10px; overflow-x: hidden; }
   header { flex-direction: column; gap: 10px; text-align: center; }
   header h1 { font-size: 1.2rem; word-break: break-word; }
-  .video-grid { grid-template-columns: 1fr; gap: 12px; }
-  .card.tipo-shorts { max-width: 100%; }
-  .stats-bar { gap: 6px; }
-  .stat-card { min-width: calc(50% - 6px); padding: 12px; }
-  .stat-card b { font-size: 20px; }
-  .filter-section { padding: 12px; }
-  .filter-section strong { display: block; margin-bottom: 6px; }
-  .chip { font-size: 12px; padding: 6px 14px 6px 6px; }
-  .chip-img { width: 22px; height: 22px; margin-right: 6px; }
-  #selectorSemanas { width: 100%; margin-left: 0 !important; margin-top: 8px; font-size: 13px; padding: 8px 10px; }
-  .ia-box { padding: 14px; font-size: 0.9em; }
-  .ia-box h2 { font-size: 1em; }
-  .news-list { gap: 8px; }
-  .news-item { padding: 10px; }
-  .news-item .meta { font-size: 0.65em; flex-wrap: wrap; gap: 4px; }
-  .news-item a { font-size: 0.85em; word-break: break-word; display: block; margin-top: 4px; }
-  .card-content { padding: 8px; }
-  .card-content .meta { font-size: 0.65em; }
-  .card-content a { font-size: 0.8em; word-break: break-word; display: block; margin-top: 4px; }
-  .scroll-top { bottom: 16px; right: 16px; width: 38px; height: 38px; font-size: 16px; }
-  h2 { font-size: 1.1rem; word-break: break-word; }
+  .header-gradient { font-size: 1.1rem; }
+
+  .stats-bar { gap: 6px; flex-direction: row; flex-wrap: wrap; }
+  .stat-card { min-width: calc(33% - 4px); padding: 10px 6px; flex: 1 1 auto; }
+  .stat-card b { font-size: 18px; }
+  .stat-card span { font-size: 9px; }
+
+  .filter-section { padding: 10px; margin-bottom: 12px; }
+  .filter-section strong { display: block; margin-bottom: 6px; font-size: 0.85em; }
+
+  .chip { font-size: 11px; padding: 5px 12px 5px 5px; }
+  .chip-img { width: 20px; height: 20px; margin-right: 4px; }
+  .chip-container { gap: 6px; }
+
+  #selectorSemanas, #selectorSemanasVideos { width: 100%; font-size: 13px; padding: 8px 10px; }
+
+  .news-list { gap: 6px; max-height: 500px; }
+  .news-item { padding: 8px 10px; border-left-width: 4px; }
+  .news-item a { gap: 8px; }
+  .news-item .favicon { width: 14px; height: 14px; }
+  .news-item .news-title { font-size: 0.85em; }
+  .news-item .news-meta { font-size: 0.7em; flex-wrap: wrap; gap: 3px; }
+
+  .video-grid { grid-template-columns: 1fr; gap: 10px; }
+  .video-card { border-radius: 10px; }
+  .video-info { padding: 8px; }
+  .video-title { font-size: 0.85em; }
+  .video-meta { font-size: 0.7em; }
+
+  .github-item { flex-wrap: wrap; gap: 8px; padding: 10px 12px; border-left-width: 4px; }
+  .github-item .rank { font-size: 12px; min-width: 24px; }
+  .github-item .github-name { font-size: 0.85em; }
+  .github-item .github-desc { font-size: 0.75em; }
+  .github-item .github-stars { font-size: 0.8em; }
+
+  #github-filter { font-size: 13px; padding: 6px 10px; }
+
+  .ia-box { padding: 12px; font-size: 0.85em; border-left-width: 4px; }
+  .ia-box h2 { font-size: 0.95em; }
+
+  .scroll-top { bottom: 14px; right: 14px; width: 36px; height: 36px; font-size: 15px; }
+  h2 { font-size: 1rem; word-break: break-word; margin-bottom: 8px; }
 }
