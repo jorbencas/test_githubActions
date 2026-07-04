@@ -2,6 +2,16 @@
 
 ## Cambios recientes
 
+### Telegram: traducción y mensajes limpios — 04/07/2026
+- `traducir_titulo()`: traduce títulos al español vía Gemini con `PROMPT_TRADUCIR_TITULOS`
+- Eliminada línea de fuente/fecha del mensaje (solo queda icono + título + resumen + enlace)
+- Eliminado botón inline "Dashboard" del mensaje
+- Audio de voz: una vez al día con resumen de todos los titulares (antes era por cada noticia)
+- `strip_emojis()`: elimina emojis del texto del audio para TTS más claro
+- `--force-voice` para forzar envío de audio
+- `telegram_voice_sent.json`: control diario de envío de voz
+- Modelos gemini-2.5-flash y gemini-2.5-pro como fallback
+
 ### Weekly recap pipeline improvements — 04/07/2026
 - `archivar_recaps_antiguos()`: mueve recaps de >2 semanas a `auto-news/archive/`
 - SEO: un solo post por semana (evita duplicados)
