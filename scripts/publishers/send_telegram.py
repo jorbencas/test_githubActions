@@ -22,7 +22,7 @@ import requests
 from google import genai
 
 from scripts.utils.cache import CacheManager, FileCache
-from scripts.utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_DASHBOARD_URL, TELEGRAM_MENSAJE_TEMPLATE, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY
+from scripts.utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_DASHBOARD_URL, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY
 from scripts.utils.common import load_json, resumir_noticia
 
 os.makedirs("logs", exist_ok=True)
@@ -59,6 +59,24 @@ EMOJI_PATTERN = re.compile(
 
 def strip_emojis(text: str) -> str:
     return EMOJI_PATTERN.sub("", text).strip()
+
+
+async def traducir_titulo(titulo: str, client) -> str:
+    """Traduce un título al español usando Gemini."""
+    modelos = CONFIG.get("AI_MODELS", ["gemini-2.5-flash", "gemini-2.5-pro"])
+    prompt = PROMPT_TRADUCIR_TITULOS.format(texto_a_traducir=f"0|{titulo}")
+    for modelo in modelos:
+        try:
+            response = client.models.generate_content(model=modelo, contents=prompt)
+            if response and response.text:
+                import json as _json
+                data = _json.loads(response.text.strip().removeprefix("```json").removesuffix("```").strip())
+                trads = data.get("traducciones", [])
+                if trads and trads[0].get("tr"):
+                    return trads[0]["tr"]
+        except Exception:
+            continue
+    return titulo
 
 
 def enviar_mensaje(texto: str, chat_id: str, token: str, reply_markup: dict | None = None) -> bool:
@@ -161,28 +179,30 @@ async def run():
 
     for n in nuevos:
         icono = "📺" if n.get(ID_VIDEO_KEY) else "💻"
-        titulo = n[TITULO_KEY].replace("_", "\\_").replace("*", "\\*").replace("[", "\\[").replace("`", "\\`")
+        titulo_original = n[TITULO_KEY]
 
-        logger.info(f"🤖 Generando resumen para: {n['titulo'][:60]}...")
+        logger.info(f"🤖 Traduciendo y resumiendo: {titulo_original[:60]}...")
+        titulo_es = await traducir_titulo(titulo_original, client)
         resumen = await resumir_noticia(n, client)
 
+        titulo_safe = titulo_es.replace("_", "\\_").replace("*", "\\*").replace("[", "\\[").replace("`", "\\`")
         cuerpo = f"{resumen}\n\n" if resumen else ""
-        mensaje = f"{icono} *{titulo}*\n\n{cuerpo}[Abrir noticia]({n[ENLACE_KEY]})"
+        mensaje = f"{icono} *{titulo_safe}*\n\n{cuerpo}[Abrir noticia]({n[ENLACE_KEY]})"
 
         if args.dry_run:
             print(f"\n{'='*50}")
             print(mensaje)
-            logger.info(f"📋 Dry-run: {n['titulo'][:60]}...")
+            logger.info(f"📋 Dry-run: {titulo_es[:60]}...")
             continue
 
         ok = enviar_mensaje(mensaje, chat_id, token)
         if ok:
-            logger.info(f"✅ Enviado: {n['titulo'][:60]}...")
+            logger.info(f"✅ Enviado: {titulo_es[:60]}...")
             CACHE.mark_sent(n.get(ENLACE_KEY, ""))
-            titulares_enviados.append(n[TITULO_KEY])
+            titulares_enviados.append(titulo_es)
             await asyncio.sleep(1)
         else:
-            logger.error(f"❌ Fallo al enviar: {n['titulo'][:60]}")
+            logger.error(f"❌ Fallo al enviar: {titulo_es[:60]}")
 
     # Audio de voz: 1 vez al día con resumen de todos los titulares
     if not args.dry_run and titulares_enviados:
