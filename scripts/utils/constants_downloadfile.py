@@ -342,7 +342,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <h2>\u2b50 Ranking GitHub Stars</h2>
         <div class="filter-section">
             <strong>\U0001f524 Filtro:</strong>
-            <input type="text" id="github-filter" placeholder="Buscar por nombre o lenguaje..." style="padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; width: 100%; max-width: 400px; margin-top: 8px; font-size: 14px; background: #fff; color: #1c1e21;">
+            <input type="text" id="github-filter" placeholder="Buscar por nombre o lenguaje..." style="padding: 8px 12px; border-radius: 8px; border: 1px solid #ff6600; width: 100%; max-width: 400px; margin-top: 8px; font-size: 14px; background: #fff; color: #1c1e21;">
         </div>
         <div id="github-ranking">{github_ranking_html}</div>
 
