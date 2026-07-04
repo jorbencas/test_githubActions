@@ -21,7 +21,7 @@
 - edge-tts for Telegram voice messages (Spanish voice)
 - Mailgun API for email newsletters
 - Surge.sh for static dashboard deployment
-- GitHub Actions for automation (5 workflows)
+- GitHub Actions for automation (10 workflows)
 
 ## Repository
 - `jorbencas/test_githubActions` (branch: master)
@@ -58,6 +58,9 @@
 - **News** → `scrape_news.py` → `files/noticias_historico.json`
 - **Tools** → `scrape_tools.py` → `files/herramientas.json`
 - **Weekly recap** → `generate_weekly.py` → `auto-news/YYYY-W{week}-tech-recap.md`
+  - Auto-archives recaps >2 weeks old to `auto-news/archive/`
+  - SEO: one post per week max (dedup by week slug)
+  - News grouped by category before AI processing
 - **Dashboard** → `generate_weekly.py` → `public/` → Surge.sh
 - **PR to blog** → `scraper_workflow.yml` (copia auto-news + recursos + imágenes)
 
@@ -65,15 +68,22 @@
 | Workflow | Trigger | Action |
 |----------|---------|--------|
 | `scraper_workflow.yml` | Saturday 07:00 UTC | scrapes news+tools → generate weekly → email+Telegram → PR blog → Surge |
+| `scrape_hourly_workflow.yml` | Every hour | Light scrape (RSS + quick sources) |
+| `scrape_6h_workflow.yml` | Every 6 hours | Standard scrape |
+| `daily_resources.yml` | Daily 06:00 UTC | Tools scrape + resources.mdx management |
 | `send_email_workflow.yml` | Daily 09:00 UTC | Send Mailgun newsletter |
-| `send_telegram_workflow.yml` | Every hour | Send Telegram with TTS audio (solo noticias nuevas) |
+| `send_telegram_workflow.yml` | Every 30 min | Send Telegram with TTS audio |
 | `clean_news.yml` | Quarterly (Jan/Apr/Jul/Oct) | Validate links → prune dead entries |
+| `hunt_challenges.yml` | Weekly (Sun) | AI challenge generation |
+| `optimize_images.yml` | Dispatch from blog | Image optimization for blog |
+| `tests.yml` | Push/PR to master | pytest (89 tests) |
 
 ### Modular pipeline (each script is independent)
 
 1. **News scraping** (`scrape_news.py`): YouTube + web sources → `noticias_historico.json`
 2. **Tools scraping** (`scrape_tools.py`): GitHub Trending + Product Hunt → `herramientas.json`
-3. **Weekly generation** (`generate_weekly.py`): AI recap + dashboard → `auto-news/` + `public/`
+3. **Weekly generation** (`generate_weekly.py`): AI recap (grouped by category) + dashboard → `auto-news/` + `public/`
+   - Auto-archives old recaps, enforces one-post-per-week SEO
 4. **Email** (`send_email.py`): Mailgun newsletter
 5. **Telegram** (`send_telegram.py`): Telegram with edge-tts audio
 
@@ -91,6 +101,7 @@
 ## Notes
 - `optimized_cache.json` is auto-generated cache; safe to delete.
 - Weekly recaps are NOT regenerated if the `.md` file already exists.
+- Old recaps (>2 weeks) are auto-archived to `auto-news/archive/`.
 - The blog repo is checked out as `./blog` in the GitHub Actions runner.
 - Python venv: `.venv/` (local dev), dependencies in `requirements.txt`.
 - Log files (`*.log`, `logs/`) y `prompt.txt` se pueden eliminar.
