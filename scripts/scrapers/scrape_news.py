@@ -104,7 +104,6 @@ async def run():
             logger.error(f"❌ Error en traducción: {e}")
 
         historial = nuevos + historial
-        historial = historial[:900]
         save_json(path_json, historial)
         logger.info(f"💾 {len(nuevos)} nuevos items guardados en {path_json}")
 
