@@ -598,5 +598,20 @@
   },
   "https://github.com/fossprime/steam-controller-auto-charge": {
     "ts": 1783127190.021373
+  },
+  "https://surfingcomplexity.blog/2026/07/03/synthesis-is-harder-than-analysis/": {
+    "ts": 1783141385.738242
+  },
+  "https://dev.to/sgbp/atob-cant-decode-a-jwt-the-base64url-gotcha-and-the-fix-1i26": {
+    "ts": 1783141398.668498
+  },
+  "https://dev.to/surajrkhonde/the-database-architect-teaches-his-nephew-where-the-real-interview-happens-2go7": {
+    "ts": 1783141405.719742
+  },
+  "https://dev.to/realnamehidden1_61/what-is-a-message-processor-in-apigee-x-a-beginners-guide-4ah2": {
+    "ts": 1783141412.00523
+  },
+  "https://dev.to/iprajapatiparesh/scale-react-teams-micro-frontends-via-module-federation-5781": {
+    "ts": 1783141418.835827
   }
 }
