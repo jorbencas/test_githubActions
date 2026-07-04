@@ -54,13 +54,13 @@ a:hover { text-decoration: underline; }
 .chip-img { width: 32px; height: 32px; margin-right: 10px; object-fit: cover; }
 .chip:hover { background-color: #e0e0e0; border-color: #999; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 .chip-text { font-weight: 500; }
-.chip.active { background: linear-gradient(135deg, #007bff, #0056b3) !important; color: white !important; border-color: #0056b3 !important; box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); }
+.chip.active { background: linear-gradient(135deg, #007bff, #0056b3) !important; color: white !important; border-color: #0056b3 !important; }
 .chip.active .chip-text { color: white; }
 
-#multimedia-tabs .chip.active { background: linear-gradient(135deg, #ff0000, #cc0000) !important; border-color: #cc0000 !important; box-shadow: 0 0 8px rgba(255, 0, 0, 0.5); }
-#video-channel-filters .chip.active { background: linear-gradient(135deg, #ff0000, #cc0000) !important; border-color: #cc0000 !important; box-shadow: 0 0 8px rgba(255, 0, 0, 0.5); }
+#multimedia-tabs .chip.active { background: linear-gradient(135deg, #ff0000, #cc0000) !important; border-color: #cc0000 !important; }
+#video-channel-filters .chip.active { background: linear-gradient(135deg, #ff0000, #cc0000) !important; border-color: #cc0000 !important; }
 
-.header-gradient { background: linear-gradient(90deg, #ffffff 0%, #d1d5db 15%, #3b82f6 35%, #eab308 55%, #ef4444 75%, #dc2626 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 900; }
+.header-gradient { background: linear-gradient(90deg, #ef4444 0%, #eab308 20%, #ffffff 40%, #9ca3af 60%, #3b82f6 80%, #1d4ed8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 900; }
 
 .filter-section { background: white; padding: 15px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
 .news-section { margin-bottom: 40px; }

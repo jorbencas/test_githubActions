@@ -290,7 +290,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <body>
     <div class="container">
         <header>
-            <h1 class="header-gradient">Tech Pulse <small id="header-date" style="font-size: 0.4em; -webkit-text-fill-color: #666;">{fecha_hoy}</small></h1>
+            <h1 class="header-gradient">Tech Pulse</h1>
             <picture>
                 <source srcset="optimizado/Image.avif" type="image/avif">
                 <source srcset="optimizado/Image.webp" type="image/webp">
