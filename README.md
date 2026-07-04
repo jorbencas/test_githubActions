@@ -30,9 +30,9 @@ Automated tech news ecosystem. Collects, processes with **AI (Gemini)**, and dis
 This project runs **10 GitHub Actions workflows** that form a fully automated content pipeline:
 
 1. **Scrape** — news and tools from 50+ sources (RSS, web, YouTube)
-2. **Process** — AI summarization with Gemini, translation, image generation
-3. **Publish** — weekly recaps, dashboard (SSR), email newsletter, Telegram notifications
-4. **Manage** — resource lists, challenges, image optimization, link validation
+2. **Process** — AI summarization with Gemini, news grouped by category, translation, image generation
+3. **Publish** — weekly recaps with auto-archive, dashboard (SSR), email newsletter, Telegram notifications
+4. **Manage** — resource lists, challenges, image optimization, link validation, SEO dedup
 
 ---
 
@@ -151,6 +151,8 @@ All scripts run with `python -m` from the project root:
 ## 📊 Dashboard
 
 Deployed on Surge.sh. Fully **server-side rendered (SSR)** — Python generates a single `index.html` with all content pre-rendered (news, YouTube videos, GitHub ranking). JavaScript is minimal (~135 lines) and only handles interactive filters, tabs, and search.
+
+Weekly recaps auto-archive old posts (>2 weeks) and enforce one-post-per-week SEO. News is grouped by category before AI processing for better context.
 
 ---
 

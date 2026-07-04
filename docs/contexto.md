@@ -2,6 +2,18 @@
 
 ## Cambios recientes
 
+### Weekly recap pipeline improvements — 04/07/2026
+- `archivar_recaps_antiguos()`: mueve recaps de >2 semanas a `auto-news/archive/`
+- SEO: un solo post por semana (evita duplicados)
+- Agrupación de noticias por categoría antes de enviar a la IA (mejor contexto)
+- Prompts mejorados:
+  - `PROMPT_RECAP_SEMANAL`: secciones estructuradas, anti-hype, reglas de estilo explícitas
+  - `PROMPT_RESUMIR_NOTICIA`: regla de 3 líneas (qué pasó → por qué importa → dato)
+  - `PROMPT_RESUMIR_LOTE`: identidad Tech Pulse, tono cercano-profesional
+- `obtener_recap_semanal_ia()` acepta params pre-calculados (resumen_cats, fuentes_top, texto_agrupado)
+- Eliminado `TODO.txt` (todo completado)
+- Actualizado README.md y contexto.md
+
 ### Social media removal — 04/07/2026
 - Eliminadas todas las integraciones de redes sociales: Instagram, X/Twitter, Threads, TikTok, Google Trends
 - Eliminadas ~70 fuentes sociales de `FUENTES` en `constants_downloadfile.py`
