@@ -85,7 +85,6 @@ option { font-weight: normal; color: #555; background: white; }
 .github-item .github-stars { font-weight: 700; color: #f59e0b; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
 .github-item .badge-lang { background: #e0e7ff; color: #3730a3; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; font-weight: 600; }
 
-.social-placeholder { display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, #667eea, #764ba2); font-size: 3em; }
 @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
 /* .btn-download — desactivado: API no funcional */
@@ -95,10 +94,6 @@ option { font-weight: normal; color: #555; background: white; }
 .card.tipo-live { border-bottom: 3px solid #ff0000; }
 .card.tipo-shorts { border-bottom: 3px solid #ff00ff; }
 .card.tab-youtube { border-bottom: 3px solid #ff0000; }
-.card.tab-instagram { border-bottom: 3px solid #833AB4; }
-.news-item.tab-twitter { border-left-color: #1DA1F2; }
-.news-item.tab-threads { border-left-color: #ff69b4; }
-.news-item.tab-tiktok { border-left-color: #00f2ea; }
 
 .scroll-top {
   display: none;

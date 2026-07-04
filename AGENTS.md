@@ -7,7 +7,6 @@
 - `python downloadFile.py` — (legacy) monolithic orchestrator
 - `python scrape_news.py` — scrape news sources (YouTube + web)
 - `python scrape_tools.py` — scrape tools (GitHub Trending + Product Hunt)
-- `python scrape_trends.py` — scrape JS-heavy sources (Google Trends, TikTok) via Playwright
 - `python generate_weekly.py` — generate weekly recap MD + dashboard HTML
 - `python send_email.py` — send Mailgun newsletter
 - `python send_telegram.py` — send Telegram notification with TTS audio
@@ -17,12 +16,12 @@
 ## Stack
 - Python 3.11+, async (asyncio + aiohttp)
 - Gemini API (`google-genai`) for summaries, translations, solutions, images
-- BeautifulSoup4 + Playwright for web scraping
+- BeautifulSoup4 for web scraping
 - Pillow + pillow-avif-plugin for image optimization
 - edge-tts for Telegram voice messages (Spanish voice)
 - Mailgun API for email newsletters
 - Surge.sh for static dashboard deployment
-- GitHub Actions for automation (6 workflows)
+- GitHub Actions for automation (5 workflows)
 
 ## Repository
 - `jorbencas/test_githubActions` (branch: master)
@@ -37,7 +36,6 @@
 | `scraper_base.py` | Shared extractors (YouTube, Web, ScraperPro) | constants_downloadfile |
 | `scrape_news.py` | Scrape news + YouTube sources | scraper_base, utils |
 | `scrape_tools.py` | Scrape GitHub Trending + Product Hunt | scraper_base |
-| `scrape_trends.py` | Playwright scraper (Trends, TikTok) | Playwright |
 | `generate_weekly.py` | AI recap + dashboard HTML | constants_downloadfile, utils, scraper_base |
 | `send_email.py` | Mailgun newsletter | constants_downloadfile |
 | `send_telegram.py` | Telegram with TTS audio | constants_downloadfile, edge-tts |
@@ -48,7 +46,6 @@
 ### Data files
 - `files/noticias_historico.json` — full news history (max 900 entries)
 - `files/herramientas.json` — discovered tools from GitHub + Product Hunt (max 200)
-- `files/trends.json` — trends from Google Trends, TikTok
 - `files/avatars_cache.json` — YouTube channel avatar cache
 - `optimized_cache.json` — image opt results (hash-based dedup)
 
@@ -60,7 +57,6 @@
 ### Content pipeline
 - **News** → `scrape_news.py` → `files/noticias_historico.json`
 - **Tools** → `scrape_tools.py` → `files/herramientas.json`
-- **Trends** → `scrape_trends.py` → `files/trends.json`
 - **Weekly recap** → `generate_weekly.py` → `auto-news/YYYY-W{week}-tech-recap.md`
 - **Dashboard** → `generate_weekly.py` → `public/` → Surge.sh
 - **PR to blog** → `scraper_workflow.yml` (copia auto-news + recursos + imágenes)
@@ -69,7 +65,6 @@
 | Workflow | Trigger | Action |
 |----------|---------|--------|
 | `scraper_workflow.yml` | Saturday 07:00 UTC | scrapes news+tools → generate weekly → email+Telegram → PR blog → Surge |
-| `trends_workflow.yml` | Tuesday+Friday 08:00 UTC | Playwright scrape Google Trends + TikTok |
 | `send_email_workflow.yml` | Daily 09:00 UTC | Send Mailgun newsletter |
 | `send_telegram_workflow.yml` | Every hour | Send Telegram with TTS audio (solo noticias nuevas) |
 | `clean_news.yml` | Quarterly (Jan/Apr/Jul/Oct) | Validate links → prune dead entries |
@@ -78,10 +73,9 @@
 
 1. **News scraping** (`scrape_news.py`): YouTube + web sources → `noticias_historico.json`
 2. **Tools scraping** (`scrape_tools.py`): GitHub Trending + Product Hunt → `herramientas.json`
-3. **Trends scraping** (`scrape_trends.py`): Google Trends + TikTok (Playwright) → `trends.json`
-4. **Weekly generation** (`generate_weekly.py`): AI recap + dashboard → `auto-news/` + `public/`
-5. **Email** (`send_email.py`): Mailgun newsletter
-6. **Telegram** (`send_telegram.py`): Telegram with edge-tts audio
+3. **Weekly generation** (`generate_weekly.py`): AI recap + dashboard → `auto-news/` + `public/`
+4. **Email** (`send_email.py`): Mailgun newsletter
+5. **Telegram** (`send_telegram.py`): Telegram with edge-tts audio
 
 ## Secrets (GitHub)
 `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `GEMINI_API_KEY`, `MAILGUN_API_KEY`, `MAILGUN_DOMAIN`, `EMAIL_USER`, `BLOG_TOKEN`, `UNSPLASH_ACCESS_KEY`
@@ -100,5 +94,4 @@
 - The blog repo is checked out as `./blog` in the GitHub Actions runner.
 - Python venv: `.venv/` (local dev), dependencies in `requirements.txt`.
 - Log files (`*.log`, `logs/`) y `prompt.txt` se pueden eliminar.
-- `scrape_trends.py` requires Playwright (`python -m playwright install chromium`).
 - `downloadFile.py` is kept for backward compatibility; prefer the new modular scripts.

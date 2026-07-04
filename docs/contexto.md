@@ -2,6 +2,20 @@
 
 ## Cambios recientes
 
+### Social media removal — 04/07/2026
+- Eliminadas todas las integraciones de redes sociales: Instagram, X/Twitter, Threads, TikTok, Google Trends
+- Eliminadas ~70 fuentes sociales de `FUENTES` en `constants_downloadfile.py`
+- Eliminados scripts: `scrape_social.py`, `scrape_trends.py`
+- Eliminado workflow: `trends_workflow.yml` (Google Trends + TikTok)
+- Eliminado step de social media del `scraper_workflow.yml`
+- Eliminadas funciones: `render_social_card`, `_tipo_multimedia` (social types), `render_trends`, `cargar_trends`
+- Eliminadas constantes: `TIPO_VAL_TREND`, `TIPO_VAL_SOCIAL`, `PLAYWRIGHT_SOURCES`
+- Eliminado tab "Multimedia" del dashboard (solo queda YouTube)
+- Eliminada sección "Tendencias" del HTML_TEMPLATE
+- Actualizado `send_email.py`: eliminado soporte para trends
+- Eliminado CSS social: `.social-placeholder`, `.tab-instagram`, `.tab-twitter`, `.tab-threads`, `.tab-tiktok`
+- Actualizado `AGENTS.md` y `contexto.md` para reflejar cambios
+
 ### Dashboard (public/) — 01/07/2026
 - Unificados filtros RSS: eliminado "RSS" de FILTRO_BADGE (quedan solo Todas/Tech)
 - RSS se maneja exclusivamente como tipo de fuente (FILTRO_TIPO_FUENTE) y filtro específico (news-rss-filters)

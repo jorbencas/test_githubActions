@@ -22,7 +22,7 @@ from pathlib import Path
 
 from google import genai
 
-from scripts.utils.constants_downloadfile import CONFIG, HTML_TEMPLATE, MD_TEMPLATE, SKILLS, LLMS, LENGUAJES, FRAMEWORKS, LIBRERIAS, CATEGORIAS, JS_CONFIG, FALLBACK_GITHUB_IMAGE, FALLBACK_SNEAK_PEEK, FALLBACK_NOTA_PERSONAL, SUBTIPO_KEY, TIPO_KEY, ORIGEN_KEY, SUB_VAL_GITHUB, TIPO_VAL_NOTICIA, VAL_RSS, ENLACE_KEY, FUENTE_KEY, TS_KEY, FECHA_PUB_KEY, CATEGORIA_KEY, ESTRELLAS_KEY, TITULO_KEY, FECHA_REAL_KEY, ID_VIDEO_KEY, LENGUAJE_KEY, DESCRIPCION_KEY, SUB_VAL_GITHUB_TOPIC, SUB_VAL_GITHUB_COLLECTION, SUB_VAL_PRODUCTHUNT, TIPO_VAL_HERRAMIENTA, TIPO_VAL_VIDEO, TIPO_VAL_SHORTS, TIPO_VAL_LIVE, TIPO_VAL_TREND, TIPO_VAL_SOCIAL, FUENTES, YT_KEY
+from scripts.utils.constants_downloadfile import CONFIG, HTML_TEMPLATE, MD_TEMPLATE, SKILLS, LLMS, LENGUAJES, FRAMEWORKS, LIBRERIAS, CATEGORIAS, JS_CONFIG, FALLBACK_GITHUB_IMAGE, FALLBACK_SNEAK_PEEK, FALLBACK_NOTA_PERSONAL, SUBTIPO_KEY, TIPO_KEY, ORIGEN_KEY, SUB_VAL_GITHUB, TIPO_VAL_NOTICIA, VAL_RSS, ENLACE_KEY, FUENTE_KEY, TS_KEY, FECHA_PUB_KEY, CATEGORIA_KEY, ESTRELLAS_KEY, TITULO_KEY, FECHA_REAL_KEY, ID_VIDEO_KEY, LENGUAJE_KEY, DESCRIPCION_KEY, SUB_VAL_GITHUB_TOPIC, SUB_VAL_GITHUB_COLLECTION, SUB_VAL_PRODUCTHUNT, TIPO_VAL_HERRAMIENTA, TIPO_VAL_VIDEO, TIPO_VAL_SHORTS, TIPO_VAL_LIVE, FUENTES, YT_KEY
 
 # Acceder a valores anidados dentro de JS_CONFIG
 ALL_YT_CHANNELS = JS_CONFIG.get("ALL_YT_CHANNELS", [])
@@ -54,16 +54,6 @@ def cargar_herramientas() -> list:
             return []
     return []
 
-
-def cargar_trends() -> list:
-    path = os.path.join(CONFIG["FOLDER"], "trends.json")
-    if os.path.exists(path):
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            return []
-    return []
 
 
 # ==============================================================================
@@ -208,19 +198,13 @@ def render_multimedia_tabs() -> str:
     return html
 
 
-def _tipo_multimedia(item: dict) -> str | None:
-    fuente = str(item.get(FUENTE_KEY, "")).lower()
-    if item.get(ID_VIDEO_KEY):
-        if "tiktok" in fuente:
-            return "tiktok"
-        if "instagram" in fuente:
-            return "instagram"
-        if "twitter" in fuente or "x.com" in fuente:
-            return "twitter"
-        if "threads" in fuente:
-            return "threads"
-        return "youtube"
-    return None
+
+def render_multimedia_content(items: list, avatars: dict) -> str:
+    html = ""
+    for item in items:
+        if item.get(ID_VIDEO_KEY):
+            html += render_youtube_card(item, avatars)
+    return html
 
 
 def render_youtube_card(item: dict, avatars: dict) -> str:
@@ -248,37 +232,11 @@ def render_youtube_card(item: dict, avatars: dict) -> str:
     )
 
 
-def render_social_card(item: dict, media_type: str, avatars: dict) -> str:
-    titulo = _escape_html(item.get(TITULO_KEY, ""))
-    enlace = item.get(ENLACE_KEY, "#")
-    fuente = _escape_html(item.get(FUENTE_KEY, ""))
-    ts = _item_timestamp(item)
-    fecha = item.get(FECHA_PUB_KEY, "")
-    favicon = _favicon_src(fuente, avatars)
-
-    emojis = {"instagram": "📸", "tiktok": "🎵", "twitter": "🐦", "threads": "💬"}
-    emoji = emojis.get(media_type, "📱")
-
-    return (
-        f'<div class="video-card social-card" data-type="{media_type}" data-source="{fuente}" data-ts="{ts}">'
-        f'<a href="{enlace}" target="_blank" rel="noopener">'
-        f'<div class="social-placeholder">{emoji}</div>'
-        f'</a>'
-        f'<div class="video-info">'
-        f'<a href="{enlace}" target="_blank" rel="noopener" class="video-title">{titulo}</a>'
-        f'<span class="video-meta"><img src="{favicon}" class="chip-icon" alt="" width="14" height="14" loading="lazy"> {fuente} · {fecha}</span>'
-        f'</div></div>'
-    )
-
-
 def render_multimedia_content(items: list, avatars: dict) -> str:
     html = ""
     for item in items:
-        media_type = _tipo_multimedia(item)
-        if media_type == "youtube":
+        if item.get(ID_VIDEO_KEY):
             html += render_youtube_card(item, avatars)
-        elif media_type in ("instagram", "tiktok", "twitter", "threads"):
-            html += render_social_card(item, media_type, avatars)
     return html
 
 
@@ -306,31 +264,8 @@ def render_github_ranking(herramientas: list) -> str:
     return html
 
 
-def render_trends(trends: list) -> str:
-    if not trends:
-        return '<p style="color:#888;font-size:14px;">Sin datos de tendencias disponibles.</p>'
 
-    html = ""
-    for t in trends:
-        titulo = _escape_html(t.get(TITULO_KEY, t.get("query", "")))
-        enlace = t.get(ENLACE_KEY, "#")
-        fuente = _escape_html(t.get(FUENTE_KEY, "Google Trends"))
-        traffic = t.get("traffic", "")
-
-        traffic_html = f' <span class="badge-tech">{traffic}</span>' if traffic else ""
-
-        html += (
-            f'<li class="news-item" data-category="trend">'
-            f'<a href="{enlace}" target="_blank" rel="noopener">'
-            f'<div class="news-text">'
-            f'<span class="news-title">📈 {titulo}</span>'
-            f'<span class="news-meta">{fuente}{traffic_html}</span>'
-            f'</div></a></li>'
-        )
-    return html
-
-
-def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen_ia, trends=None):
+def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen_ia):
     historial.sort(key=lambda x: x.get(TS_KEY, ""), reverse=True)
     herramientas_github = [
         h for h in herramientas
@@ -347,8 +282,6 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
             if nombre_c not in avatars_known:
                 avatars_known[nombre_c] = f"https://ui-avatars.com/api/?name={nombre_c}&background=random"
 
-    trends_data = trends or []
-
     # === Renderizar todas las secciones ===
     stats_html = render_stats(historial)
     news_list_html = render_news_list(historial, avatars_known)
@@ -359,7 +292,6 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
     multimedia_tabs_html = render_multimedia_tabs()
     video_channel_filters_html = render_channel_chips(historial, "canalVideos", avatars_known)
     multimedia_content_html = render_multimedia_content(historial, avatars_known)
-    trends_html = render_trends(trends_data)
     github_ranking_html = render_github_ranking(top_github)
 
     # === Escribir index.html con todo pre-renderizado ===
@@ -379,7 +311,6 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
                 multimedia_tabs_html=multimedia_tabs_html,
                 video_channel_filters_html=video_channel_filters_html,
                 multimedia_content_html=multimedia_content_html,
-                trends_html=trends_html,
                 github_ranking_html=github_ranking_html,
             )
         )
@@ -553,8 +484,7 @@ async def run():
             scr.obtener_avatar_canal(nombre_c, yt_url)
 
     herramientas = cargar_herramientas()
-    trends = cargar_trends()
-    generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen_ia or "Sin novedades hoy.", trends)
+    generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen_ia or "Sin novedades hoy.")
     scr.guardar_avatars()
 
     logger.info("✅ generate_weekly.py completado.")

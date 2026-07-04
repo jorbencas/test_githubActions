@@ -19,7 +19,7 @@ from logging.handlers import RotatingFileHandler
 import requests
 from google import genai
 
-from scripts.utils.constants_downloadfile import CONFIG, EMAIL_TEMPLATE, EMAIL_ROW_TEMPLATE, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, ID_VIDEO_KEY, BADGE_KEY, VAL_TECH, TIPO_KEY, TIPO_VAL_TREND, TIPO_VAL_SOCIAL
+from scripts.utils.constants_downloadfile import CONFIG, EMAIL_TEMPLATE, EMAIL_ROW_TEMPLATE, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, ID_VIDEO_KEY, BADGE_KEY, VAL_TECH, TIPO_KEY
 from scripts.utils.common import load_json, resumir_noticia, resumir_lote_noticias
 
 os.makedirs("logs", exist_ok=True)
@@ -36,10 +36,7 @@ logger = logging.getLogger("email")
 
 
 def _es_multimedia(item: dict) -> bool:
-    if item.get(ID_VIDEO_KEY):
-        return None
-    fuente = (item.get(FUENTE_KEY) or "").lower()
-    return "tiktok" in fuente or "instagram" in fuente
+    return item.get(ID_VIDEO_KEY) is not None
 
 async def run():
     parser = argparse.ArgumentParser(description="Send email newsletter with AI per-news summaries")
@@ -55,39 +52,23 @@ async def run():
     path_json = os.path.join(CONFIG["FOLDER"], "noticias_historico.json")
     historial = load_json(path_json)
 
-    # Cargar tendencias
-    path_trends = os.path.join(CONFIG["FOLDER"], "trends.json")
-    trends = load_json(path_trends)
-
-    if not historial and not trends:
-        logger.info("📭 No hay noticias ni tendencias para enviar.")
+    if not historial:
+        logger.info("📭 No hay noticias para enviar.")
         return
 
-    historial = [n for n in historial if not _es_multimedia(n) and n.get(TIPO_KEY) not in (TIPO_VAL_TREND, TIPO_VAL_SOCIAL)]
+    historial = [n for n in historial if not _es_multimedia(n)]
 
     client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
     nuevos = historial[:args.max_items]
 
-    # Añadir tendencias como filas sin resumen
-    filas_trends = ""
-    if trends:
-        filas_trends = '<tr><td style="padding: 16px 0;"><h3 style="font-size: 15px; font-weight: 700; margin: 0 0 8px 0; color: #0f172a;">📊 Tendencias</h3></td></tr>'
-        for t in trends[:5]:
-            icono = "📊" if t.get("tipo") == "trend" else "🎵"
-            filas_trends += EMAIL_ROW_TEMPLATE.format(
-                icon=icono, fuente=t.get("fuente", "Tendencia"),
-                enlace=t.get("enlace", "#"), titulo=t.get("titulo", ""),
-                resumen_html="",
-            )
-
     if not nuevos:
-        top_titular = trends[0][TITULO_KEY] if trends else "Tech Pulse"
-        asunto = f"📊 {top_titular[:55]}... y tendencias"
+        top_titular = "Tech Pulse"
+        asunto = f"📊 Tech Pulse — sin noticias destacadas hoy"
         c_tech = 0
         filas_noticias = ""
-        temas_clave = ", ".join(list(set([t.get(FUENTE_KEY, "") for t in trends[:3]]))) if trends else ""
+        temas_clave = ""
         resumen_lote = None
-        contenido_html = "<p style='font-size:15px;line-height:1.7;margin:0;color:#64748b;'>Tendencias tech sin noticias destacadas hoy.</p>"
+        contenido_html = "<p style='font-size:15px;line-height:1.7;margin:0;color:#64748b;'>No hay noticias destacadas hoy.</p>"
     else:
         top_titular = nuevos[0][TITULO_KEY]
         asunto = f"🔥 {top_titular[:55]}... y {len(nuevos)-1} más"
@@ -116,7 +97,7 @@ async def run():
     html_final = EMAIL_TEMPLATE.format(
         fecha_hoy=datetime.now().strftime("%d de %B, %Y"),
         contenido_html=contenido_html,
-        lista_email=filas_noticias + filas_trends,
+        lista_email=filas_noticias,
         count_tech=c_tech,
         total_noticias=len(nuevos or []),
         temas_clave=temas_clave,

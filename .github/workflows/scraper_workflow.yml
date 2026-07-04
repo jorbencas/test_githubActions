@@ -42,12 +42,6 @@ jobs:
         run: python -m scripts.scrapers.scrape_news --tier full
       - name: 🔧 Scrape tools
         run: python -m scripts.scrapers.scrape_tools
-      - name: 📱 Scrape social media (Playwright)
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: |
-          python -m playwright install chromium 2>&1
-          python -m scripts.scrapers.scrape_social --source all
 
       # ── Fase 3: Blog (push directo) ──
       - name: 📂 Checkout blog repo

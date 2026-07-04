@@ -195,17 +195,12 @@ FUENTES = {
     "El Mundo Tecnología": {"url": "https://www.elmundo.es/tecnologia.html", "selector": "article h2 a"},
     # ── Más creadores de contenido (YouTube + redes) ──
     "LinkTV": {"yt": "https://www.youtube.com/@LinkTVA/videos"},
-    "LinkTV Twitter": {"url": "https://x.com/LinkTVA", "selector": "article[data-testid='tweet'] div[lang]"},
-    "LinkTV Threads": {"url": "https://www.threads.net/@linktva", "selector": "article a[href*='/post/']"},
     "Ringa Tech": {"yt": "https://www.youtube.com/@RingaTech/videos"},
-    "Ringa Tech Twitter": {"url": "https://x.com/ringatech", "selector": "article[data-testid='tweet'] div[lang]"},
     "Nethermind": {"yt": "https://www.youtube.com/@NethermindDev/videos"},
-    "Nethermind Twitter": {"url": "https://x.com/NethermindDev", "selector": "article[data-testid='tweet'] div[lang]"},
     "Develoteca": {"yt": "https://www.youtube.com/@Develoteca/videos"},
     "Linkfydev": {"yt": "https://www.youtube.com/@Linkfydev/videos"},
     "Esa Operativa": {"yt": "https://www.youtube.com/@EsaOperativa/videos"},
     "Programador X": {"yt": "https://www.youtube.com/@ProgramadorX/videos"},
-    "Programador X Twitter": {"url": "https://x.com/programadorx", "selector": "article[data-testid='tweet'] div[lang]"},
     # ── Tech news ──
     "ZDNet": {"url": "https://www.zdnet.com/topic/artificial-intelligence/", "selector": "article h3 a"},
     "CNET": {"url": "https://www.cnet.com/tech/", "selector": "a[class*='title']"},
@@ -228,61 +223,7 @@ FUENTES = {
     "MarkTechPost": {"url": "https://www.marktechpost.com/"},
     "LinkedIn Engineering": {"url": "https://engineering.linkedin.com/blog", "selector": "article h3 a"},
     "Facebook Engineering": {"url": "https://engineering.fb.com/", "selector": "article h3 a"},
-    # ── TikTok y Google Trends (requieren JS, probar con Playwright) ──
-    "Google Trends Tecnología": {"url": "https://trends.google.com/trends/trendingsearches/daily?geo=ES&cat=tech", "selector": "div.mZvaOc"},
-    # ── Redes sociales (scraping sin API) ──
-    "Midudev Twitter": {"url": "https://x.com/midudev", "selector": "article[data-testid='tweet'] div[lang]"},
-    "Midudev Threads": {"url": "https://www.threads.net/@midudev", "selector": "article a[href*='/post/']"},
-    "Bricemoure Twitter": {"url": "https://x.com/bricemoure", "selector": "article[data-testid='tweet'] div[lang]"},
-    "Bricemoure Threads": {"url": "https://www.threads.net/@bricemoure", "selector": "article a[href*='/post/']"},
-    "GitHub Twitter": {"url": "https://x.com/github", "selector": "article[data-testid='tweet'] div[lang]"},
-    "Vercel Twitter": {"url": "https://x.com/vercel", "selector": "article[data-testid='tweet'] div[lang]"},
-    "Astro Twitter": {"url": "https://x.com/astrodotbuild", "selector": "article[data-testid='tweet'] div[lang]"},
-    "dotpige Twitter": {"url": "https://x.com/dotpige", "selector": "article[data-testid='tweet'] div[lang]"},
-    "This Week in React Instagram": {"url": "https://www.instagram.com/thisweekinreact/", "selector": "article a[href*='/p/']"},
-    "TikTok Tech": {"url": "https://www.tiktok.com/@tech", "selector": "div[data-e2e='search_video-item'] a"},
-    "Python Hub Instagram": {"url": "https://www.instagram.com/python.hub/", "selector": "article a[href*='/p/']"},
-    # ── Instagram ──
-    "MoureDev Instagram": {"url": "https://www.instagram.com/mouredev/", "selector": "article a[href*='/p/']"},
-    "Pelado Nerd Instagram": {"url": "https://www.instagram.com/peladonerd/", "selector": "article a[href*='/p/']"},
-    "HolaMundo Instagram": {"url": "https://www.instagram.com/holamundodev/", "selector": "article a[href*='/p/']"},
-    "FreeCodeCamp Instagram": {"url": "https://www.instagram.com/freecodecamp/", "selector": "article a[href*='/p/']"},
-    "Fazt Instagram": {"url": "https://www.instagram.com/fazttech/", "selector": "article a[href*='/p/']"},
-    "Clipset Instagram": {"url": "https://www.instagram.com/clipset/", "selector": "article a[href*='/p/']"},
-    "CodelyTV Instagram": {"url": "https://www.instagram.com/codelytv/", "selector": "article a[href*='/p/']"},
-    "EDteam Instagram": {"url": "https://www.instagram.com/edteam/", "selector": "article a[href*='/p/']"},
-    "Carlos Azaustre Instagram": {"url": "https://www.instagram.com/carlosazaustre/", "selector": "article a[href*='/p/']"},
-    "Codigo facilito Instagram": {"url": "https://www.instagram.com/codigofacilito/", "selector": "article a[href*='/p/']"},
-    "Xataka Instagram": {"url": "https://www.instagram.com/xataka/", "selector": "article a[href*='/p/']"},
-    # ── Threads ──
-    "MoureDev Threads": {"url": "https://www.threads.net/@mouredev", "selector": "article a[href*='/post/']"},
-    "Pelado Nerd Threads": {"url": "https://www.threads.net/@peladonerd", "selector": "article a[href*='/post/']"},
-    "HolaMundo Threads": {"url": "https://www.threads.net/@holamundodev", "selector": "article a[href*='/post/']"},
-    "FreeCodeCamp Threads": {"url": "https://www.threads.net/@freecodecamp", "selector": "article a[href*='/post/']"},
-    "Fazt Threads": {"url": "https://www.threads.net/@fazttech", "selector": "article a[href*='/post/']"},
-    "Clipset Threads": {"url": "https://www.threads.net/@clipset", "selector": "article a[href*='/post/']"},
-    "CodelyTV Threads": {"url": "https://www.threads.net/@codelytv", "selector": "article a[href*='/post/']"},
-    "EDteam Threads": {"url": "https://www.threads.net/@edteam", "selector": "article a[href*='/post/']"},
-    "Carlos Azaustre Threads": {"url": "https://www.threads.net/@carlosazaustre", "selector": "article a[href*='/post/']"},
-    "Codigo facilito Threads": {"url": "https://www.threads.net/@codigofacilito", "selector": "article a[href*='/post/']"},
-    "Xataka Threads": {"url": "https://www.threads.net/@xataka", "selector": "article a[href*='/post/']"},
-    # ── X/Twitter ──
-    "MoureDev Twitter": {"url": "https://x.com/mouredev", "selector": "article[data-testid='tweet'] div[lang]"},
-    "Pelado Nerd Twitter": {"url": "https://x.com/peladonerd", "selector": "article[data-testid='tweet'] div[lang]"},
-    "HolaMundo Twitter": {"url": "https://x.com/holamundodev", "selector": "article[data-testid='tweet'] div[lang]"},
-    "FreeCodeCamp Twitter": {"url": "https://x.com/freecodecamp", "selector": "article[data-testid='tweet'] div[lang]"},
-    "Fazt Twitter": {"url": "https://x.com/fazttech", "selector": "article[data-testid='tweet'] div[lang]"},
-    "Clipset Twitter": {"url": "https://x.com/clipset", "selector": "article[data-testid='tweet'] div[lang]"},
-    "CodelyTV Twitter": {"url": "https://x.com/codelytv", "selector": "article[data-testid='tweet'] div[lang]"},
-    "EDteam Twitter": {"url": "https://x.com/edteam", "selector": "article[data-testid='tweet'] div[lang]"},
-    "Carlos Azaustre Twitter": {"url": "https://x.com/carlosazaustre", "selector": "article[data-testid='tweet'] div[lang]"},
-    "Codigo facilito Twitter": {"url": "https://x.com/codigofacilito", "selector": "article[data-testid='tweet'] div[lang]"},
-    "Xataka Twitter": {"url": "https://x.com/xataka", "selector": "article[data-testid='tweet'] div[lang]"},
-    "Victor Robles Twitter": {"url": "https://x.com/victorroblesweb", "selector": "article[data-testid='tweet'] div[lang]"},
-    "Programa Con Arnau Twitter": {"url": "https://x.com/progconarnau", "selector": "article[data-testid='tweet'] div[lang]"},
-    "El Pingüino de Mario Twitter": {"url": "https://x.com/elpinguinodemario", "selector": "article[data-testid='tweet'] div[lang]"},
-    "Develoteca Twitter": {"url": "https://x.com/develoteca", "selector": "article[data-testid='tweet'] div[lang]"},
-    "Linkfydev Twitter": {"url": "https://x.com/linkfydev", "selector": "article[data-testid='tweet'] div[lang]"},
+
     # ── Fuentes RSS (lectores XML) [quick: True → tier light] ──
     "OpenAI Blog": {"rss": "https://openai.com/news/feed.xml", "quick": True},
     "Anthropic Blog": {"rss": "https://www.anthropic.com/feed.xml", "quick": True},
@@ -397,9 +338,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             <div id="video-channel-filters" class="chip-container">{video_channel_filters_html}</div>
         </div>
         <div id="multimedia-content" class="video-grid">{multimedia_content_html}</div>
-
-        <h2>\U0001f4ca Tendencias</h2>
-        <div id="trends-list" class="news-list">{trends_html}</div>
 
         <h2>\u2b50 Ranking GitHub Stars</h2>
         <div class="filter-section">
@@ -751,10 +689,6 @@ JS_CONFIG = {
     ],
     "TABS_MULTIMEDIA": [
         {"id": "youtube", "label": "🎬 YouTube"},
-        {"id": "instagram", "label": "📸 Instagram"},
-        {"id": "twitter", "label": "🐦 X/Twitter"},
-        {"id": "threads", "label": "🧵 Threads"},
-        {"id": "tiktok", "label": "🎵 TikTok"},
     ],
     "EMOJIS_CATEGORIA": "⚡🤖💻🐳🔒📊🎓💡",
     "DASHBOARD_URL": "http://jorbencasdownloaderdocument.surge.sh",
@@ -779,16 +713,11 @@ TIPO_VAL_NOTICIA = "noticia"
 TIPO_VAL_VIDEO = "video"
 TIPO_VAL_SHORTS = "shorts"
 TIPO_VAL_LIVE = "live"
-TIPO_VAL_TREND = "trend"
-TIPO_VAL_SOCIAL = "social"
+
 VAL_RSS = "rss"
 VAL_TECH = "Tech"
 PLAYWRIGHT_KEY = "pw"
 
-# ── Playwright sources (JS-heavy, excluded from HTTP scraping) ──
-PLAYWRIGHT_SOURCES = {
-    "Instagram", "Threads", "Twitter", "TikTok",
-}
 
 # ── Item schema key constants ──
 ENLACE_KEY = "enlace"

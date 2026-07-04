@@ -1,5 +1,5 @@
 from scripts.utils.constants_downloadfile import (
-    FUENTES, PLAYWRIGHT_SOURCES, CONFIG, JS_CONFIG,
+    FUENTES, CONFIG, JS_CONFIG,
     clasificar_noticia,
 )
 
@@ -14,18 +14,11 @@ class TestFuentesStructure:
             assert has_url, f"{name} missing url/yt/rss: {info}"
 
 
-class TestPlaywrightSources:
-    def test_is_a_set(self):
-        assert isinstance(PLAYWRIGHT_SOURCES, set)
-        assert len(PLAYWRIGHT_SOURCES) > 0
-
-
 class TestTabsMultimedia:
     def test_has_tabs_in_js_config(self):
         tabs = JS_CONFIG.get("TABS_MULTIMEDIA", [])
         ids = [t["id"] for t in tabs]
         assert "youtube" in ids
-        assert "instagram" in ids
 
     def test_each_tab_has_id(self):
         tabs = JS_CONFIG.get("TABS_MULTIMEDIA", [])
