@@ -208,8 +208,8 @@ details.filter-collapse .chip-container { padding-top: 12px; }
 
   .stats-bar { gap: 6px; flex-direction: row; flex-wrap: wrap; }
   .stat-card { min-width: calc(33% - 4px); padding: 10px 6px; flex: 1 1 auto; }
-  .stat-card b { font-size: 18px; }
-  .stat-card span { font-size: 9px; }
+  .stat-card b { font-size: 20px; }
+  .stat-card span { font-size: 11px; }
 
   .filter-section { padding: 10px; margin-bottom: 12px; }
   .filter-section strong { display: block; margin-bottom: 6px; font-size: 0.85em; }
