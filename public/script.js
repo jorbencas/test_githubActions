@@ -1,5 +1,5 @@
 // ── Tech Pulse Dashboard — Minimal Interactivity (SSR by Python) ──
-// Filters, tabs, search, scroll-to-top. Content is pre-rendered in HTML.
+// Filters, tabs, search, scroll-to-top, dark theme. Content is pre-rendered in HTML.
 
 (function () {
   "use strict";
@@ -110,6 +110,25 @@
     btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
   }
 
+  // ── Dark theme ──
+  function setupDarkTheme() {
+    const btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+    const saved = localStorage.getItem("theme");
+    if (saved === "dark") document.body.classList.add("dark");
+    updateThemeIcon();
+
+    btn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+      updateThemeIcon();
+    });
+
+    function updateThemeIcon() {
+      btn.textContent = document.body.classList.contains("dark") ? "\u2600\uFE0F" : "\uD83C\uDF19";
+    }
+  }
+
   // ── Init ──
   document.addEventListener("DOMContentLoaded", () => {
     setupSearch("news-search", "#news-list .news-item", filtrarNoticias);
@@ -120,5 +139,6 @@
     setupTabs();
     setupGithubSearch();
     setupScrollTop();
+    setupDarkTheme();
   });
 })();

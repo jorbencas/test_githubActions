@@ -291,11 +291,14 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <div class="container">
         <header>
             <h1 class="header-gradient">Tech Pulse</h1>
-            <picture>
-                <source srcset="optimizado/Image.avif" type="image/avif">
-                <source srcset="optimizado/Image.webp" type="image/webp">
-                <img src="optimizado/Image.png" alt="Tech Pulse Dashboard Logo" class="logo" width="120" height="40" style="aspect-ratio: 3/1; object-fit: contain;" loading="eager">
-            </picture>
+            <div style="display:flex;align-items:center;gap:12px;">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌙</button>
+                <picture>
+                    <source srcset="optimizado/Image.avif" type="image/avif">
+                    <source srcset="optimizado/Image.webp" type="image/webp">
+                    <img src="optimizado/Image.png" alt="Tech Pulse Dashboard Logo" class="logo" width="120" height="40" style="aspect-ratio: 3/1; object-fit: contain;" loading="eager">
+                </picture>
+            </div>
         </header>
 
         <div id="stats-bar" class="stats-bar">{stats_html}</div>
@@ -307,14 +310,14 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                 {news_search_html}
             </div>
         </div>
-        <div class="filter-section">
-            <strong>\U0001f310 Webs:</strong>
+        <details class="filter-collapse" open>
+            <summary>\U0001f310 Webs</summary>
             <div id="news-channel-filters" class="chip-container">{news_channel_filters_html}</div>
-        </div>
-        <div class="filter-section">
-            <strong>\U0001f3af Categoría:</strong>
+        </details>
+        <details class="filter-collapse" open>
+            <summary>\U0001f3af Categoría</summary>
             <div id="news-category-filters" class="chip-container">{news_category_filters_html}</div>
-        </div>
+        </details>
         <ul id="news-list" class="news-list">{news_list_html}</ul>
 
         <h2>\U0001f3ac Multimedia</h2>
@@ -324,14 +327,14 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                 {video_search_html}
             </div>
         </div>
-        <div class="filter-section">
-            <strong>\U0001f4fa Tipo:</strong>
+        <details class="filter-collapse" open>
+            <summary>\U0001f4fa Tipo</summary>
             <div id="multimedia-tabs" class="chip-container">{multimedia_tabs_html}</div>
-        </div>
-        <div class="filter-section" id="multimedia-channel-section">
-            <strong>\U0001f4fa Filtro Canal:</strong>
+        </details>
+        <details class="filter-collapse" open>
+            <summary>\U0001f4fa Filtro Canal</summary>
             <div id="video-channel-filters" class="chip-container">{video_channel_filters_html}</div>
-        </div>
+        </details>
         <div id="multimedia-content" class="video-grid">{multimedia_content_html}</div>
 
         <h2>\u2b50 Ranking GitHub Stars</h2>
