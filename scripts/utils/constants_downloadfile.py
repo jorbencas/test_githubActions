@@ -362,58 +362,55 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             <p>{resumen}</p>
         </div>
 
-        <div id="stats-bar" class="stats-bar"></div>
+        <div id="stats-bar" class="stats-bar">{stats_html}</div>
 
         <h2>\U0001f4f0 Noticias</h2>
         <div class="filter-section">
             <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
                 <strong>\U0001f4c5 Tiempo:</strong>
-                <div id="news-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
+                <div id="news-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">{news_week_filters_html}</div>
             </div>
         </div>
         <div class="filter-section">
             <strong>\U0001f310 Webs:</strong>
-            <div id="news-channel-filters" class="chip-container"></div>
+            <div id="news-channel-filters" class="chip-container">{news_channel_filters_html}</div>
         </div>
         <div class="filter-section">
             <strong>\U0001f3af Categoría:</strong>
-            <div id="news-category-filters" class="chip-container"></div>
+            <div id="news-category-filters" class="chip-container">{news_category_filters_html}</div>
         </div>
-        <ul id="news-list" class="news-list"></ul>
+        <ul id="news-list" class="news-list">{news_list_html}</ul>
 
         <h2>\U0001f3ac Multimedia</h2>
         <div class="filter-section" id="multimedia-filter-section">
             <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
                 <strong>\U0001f4c5 Tiempo:</strong>
-                <div id="video-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;"></div>
+                <div id="video-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">{video_week_filters_html}</div>
             </div>
         </div>
         <div class="filter-section">
             <strong>\U0001f4fa Tipo:</strong>
-            <div id="multimedia-tabs" class="chip-container"></div>
+            <div id="multimedia-tabs" class="chip-container">{multimedia_tabs_html}</div>
         </div>
         <div class="filter-section" id="multimedia-channel-section">
             <strong>\U0001f4fa Filtro Canal:</strong>
-            <div id="video-channel-filters" class="chip-container"></div>
+            <div id="video-channel-filters" class="chip-container">{video_channel_filters_html}</div>
         </div>
-        <div id="multimedia-content" class="video-grid"></div>
+        <div id="multimedia-content" class="video-grid">{multimedia_content_html}</div>
 
         <h2>\U0001f4ca Tendencias</h2>
-        <div id="trends-list" class="news-list"></div>
+        <div id="trends-list" class="news-list">{trends_html}</div>
 
         <h2>\u2b50 Ranking GitHub Stars</h2>
         <div class="filter-section">
             <strong>\U0001f524 Filtro:</strong>
             <input type="text" id="github-filter" placeholder="Buscar por nombre o lenguaje..." style="padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; width: 100%; max-width: 400px; margin-top: 8px; font-size: 14px; background: #fff; color: #1c1e21;">
         </div>
-        <div id="github-ranking"></div>
+        <div id="github-ranking">{github_ranking_html}</div>
 
 
     </div>
 </body>
-<script>
-  const DATA_URL = "data.json";
-</script>
 <script src="script.js"></script>
 </html>
 """

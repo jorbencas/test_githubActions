@@ -23,6 +23,11 @@ from pathlib import Path
 from google import genai
 
 from scripts.utils.constants_downloadfile import CONFIG, HTML_TEMPLATE, MD_TEMPLATE, SKILLS, LLMS, LENGUAJES, FRAMEWORKS, LIBRERIAS, CATEGORIAS, JS_CONFIG, FALLBACK_GITHUB_IMAGE, FALLBACK_SNEAK_PEEK, FALLBACK_NOTA_PERSONAL, SUBTIPO_KEY, TIPO_KEY, ORIGEN_KEY, SUB_VAL_GITHUB, TIPO_VAL_NOTICIA, VAL_RSS, ENLACE_KEY, FUENTE_KEY, TS_KEY, FECHA_PUB_KEY, CATEGORIA_KEY, ESTRELLAS_KEY, TITULO_KEY, FECHA_REAL_KEY, ID_VIDEO_KEY, LENGUAJE_KEY, DESCRIPCION_KEY, SUB_VAL_GITHUB_TOPIC, SUB_VAL_GITHUB_COLLECTION, SUB_VAL_PRODUCTHUNT, TIPO_VAL_HERRAMIENTA, TIPO_VAL_VIDEO, TIPO_VAL_SHORTS, TIPO_VAL_LIVE, TIPO_VAL_TREND, TIPO_VAL_SOCIAL, FUENTES, YT_KEY
+
+# Acceder a valores anidados dentro de JS_CONFIG
+ALL_YT_CHANNELS = JS_CONFIG.get("ALL_YT_CHANNELS", [])
+TABS_MULTIMEDIA = JS_CONFIG.get("TABS_MULTIMEDIA", [])
+EMOJIS_CATEGORIA_MAP = {v: JS_CONFIG.get("EMOJIS_CATEGORIA", "⚡🤖💻🐳🔒📊🎓💡")[i] for i, v in enumerate(["Hardware", "IA", "Programacion", "DevOps", "Ciberseguridad", "Negocios", "General", "Otro"]) if i < len(JS_CONFIG.get("EMOJIS_CATEGORIA", "⚡🤖💻🐳🔒📊🎓💡"))}
 from scripts.scrapers.scraper_base import ScraperPro
 from scripts.utils.common import load_json, generar_imagen_noticia, obtener_recap_semanal_ia, deduplicar_items
 
@@ -61,6 +66,270 @@ def cargar_trends() -> list:
     return []
 
 
+# ==============================================================================
+# FUNCIONES DE RENDERIZADO HTML (SSR)
+# ==============================================================================
+
+def _escape_html(text: str) -> str:
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;").replace("'", "&#39;")
+
+
+def _favicon_src(source_name: str, avatars: dict) -> str:
+    nombre_c = source_name.replace(" Shorts", "")
+    if nombre_c in avatars:
+        return avatars[nombre_c]
+    try:
+        from urllib.parse import urlparse
+        domain = urlparse(FUENTES.get(nombre_c, {}).get("url", "")).netloc
+        if domain:
+            return f"https://www.google.com/s2/favicons?domain={domain}&sz=32"
+    except Exception:
+        pass
+    return f"https://ui-avatars.com/api/?name={nombre_c}&background=random"
+
+
+def _item_timestamp(item: dict) -> str:
+    ts = item.get(TS_KEY) or item.get(FECHA_REAL_KEY) or ""
+    return str(ts)
+
+
+def render_stats(items: list) -> str:
+    total = len(items)
+    tech_count = sum(1 for i in items if i.get("badge") == "Tech")
+    multimedia_count = sum(1 for i in items if i.get(ID_VIDEO_KEY))
+    return (
+        f'<span class="stat"><strong>{total}</strong> Total</span>'
+        f'<span class="stat"><strong>{tech_count}</strong> Tech</span>'
+        f'<span class="stat"><strong>{multimedia_count}</strong> Multimedia</span>'
+    )
+
+
+def render_news_item(item: dict, avatars: dict) -> str:
+    titulo = _escape_html(item.get(TITULO_KEY, "Sin título"))
+    enlace = item.get(ENLACE_KEY, "#")
+    fuente = _escape_html(item.get(FUENTE_KEY, ""))
+    fecha = item.get(FECHA_PUB_KEY, "")
+    badge = item.get("badge", "")
+    origen = item.get(ORIGEN_KEY, "")
+    ts = _item_timestamp(item)
+    categoria = item.get(CATEGORIA_KEY, "")
+    favicon = _favicon_src(fuente, avatars)
+
+    badge_html = ""
+    if badge == "Tech":
+        badge_html = '<span class="badge-tech">Tech</span>'
+    if origen == VAL_RSS:
+        badge_html += '<span class="badge-rss">RSS</span>'
+
+    cat_emoji = ""
+    if categoria:
+        cat_emoji = EMOJIS_CATEGORIA.get(categoria.split()[0] if categoria else "", "")
+        if not cat_emoji:
+            cat_emoji = "💡"
+
+    return (
+        f'<li class="news-item" data-source="{_escape_html(fuente)}" data-category="{_escape_html(categoria)}" data-ts="{ts}">'
+        f'<a href="{enlace}" target="_blank" rel="noopener">'
+        f'<img class="favicon" src="{favicon}" alt="{fuente}" width="16" height="16" loading="lazy">'
+        f'<div class="news-text">'
+        f'<span class="news-title">{titulo}</span>'
+        f'<span class="news-meta">{fuente} · {fecha} {badge_html}</span>'
+        f'</div></a></li>'
+    )
+
+
+def render_news_list(items: list, avatars: dict) -> str:
+    return "".join(render_news_item(i, avatars) for i in items)
+
+
+def render_week_selector(items: list, prefix: str) -> str:
+    weeks: dict[str, list] = {}
+    for item in items:
+        ts = _item_timestamp(item)
+        if not ts:
+            continue
+        try:
+            dt = datetime.fromisoformat(ts.replace("Z", "+00:00"))
+            iso_year, iso_week, _ = dt.isocalendar()
+            key = f"{iso_year}-W{iso_week:02d}"
+            weeks.setdefault(key, []).append(item)
+        except Exception:
+            continue
+
+    if not weeks:
+        return '<button class="chip active" data-week="all">Últimas 2 semanas</button>'
+
+    sorted_weeks = sorted(weeks.keys(), reverse=True)
+    html = '<button class="chip active" data-week="all">Últimas 2 semanas</button>'
+    for week_key in sorted_weeks[:8]:
+        count = len(weeks[week_key])
+        html += f'<button class="chip" data-week="{week_key}">{week_key} ({count})</button>'
+    return html
+
+
+def render_channel_chips(items: list, state_key: str, avatars: dict) -> str:
+    channels: dict[str, int] = {}
+    for item in items:
+        fuente = item.get(FUENTE_KEY, "")
+        if fuente:
+            channels[fuente] = channels.get(fuente, 0) + 1
+
+    html = f'<button class="chip active" data-channel="all">Todos</button>'
+    for ch, count in sorted(channels.items(), key=lambda x: -x[1])[:20]:
+        favicon = _favicon_src(ch, avatars)
+        html += (
+            f'<button class="chip" data-channel="{_escape_html(ch)}">'
+            f'<img src="{favicon}" class="chip-icon" alt="" width="14" height="14" loading="lazy">'
+            f'{_escape_html(ch)} ({count})</button>'
+        )
+    return html
+
+
+def render_category_chips(items: list) -> str:
+    cats: dict[str, int] = {}
+    for item in items:
+        cat = item.get(CATEGORIA_KEY, "💡 General")
+        cats[cat] = cats.get(cat, 0) + 1
+
+    html = '<button class="chip active" data-category="all">Todas</button>'
+    for cat, count in sorted(cats.items(), key=lambda x: -x[1])[:10]:
+        emoji = EMOJIS_CATEGORIA_MAP.get(cat.split()[0] if cat else "", "💡")
+        html += f'<button class="chip" data-category="{_escape_html(cat)}">{emoji} {_escape_html(cat)} ({count})</button>'
+    return html
+
+
+def render_multimedia_tabs() -> str:
+    html = ""
+    for tab in TABS_MULTIMEDIA:
+        label = tab.get("label", "")
+        key = tab.get("id", "")
+        active = " active" if key == "youtube" else ""
+        html += f'<button class="chip{active}" data-tab="{key}">{label}</button>'
+    return html
+
+
+def _tipo_multimedia(item: dict) -> str | None:
+    fuente = str(item.get(FUENTE_KEY, "")).lower()
+    if item.get(ID_VIDEO_KEY):
+        if "tiktok" in fuente:
+            return "tiktok"
+        if "instagram" in fuente:
+            return "instagram"
+        if "twitter" in fuente or "x.com" in fuente:
+            return "twitter"
+        if "threads" in fuente:
+            return "threads"
+        return "youtube"
+    return None
+
+
+def render_youtube_card(item: dict, avatars: dict) -> str:
+    titulo = _escape_html(item.get(TITULO_KEY, ""))
+    enlace = item.get(ENLACE_KEY, "#")
+    fuente = _escape_html(item.get(FUENTE_KEY, ""))
+    id_video = item.get(ID_VIDEO_KEY, "")
+    ts = _item_timestamp(item)
+    fecha = item.get(FECHA_PUB_KEY, "")
+    favicon = _favicon_src(fuente, avatars)
+
+    thumbnail = f"https://img.youtube.com/vi/{id_video}/mqdefault.jpg" if id_video else ""
+    is_live = item.get("is_live", False)
+    live_badge = '<span class="badge-live">🔴 LIVE</span>' if is_live else ""
+
+    return (
+        f'<div class="video-card" data-source="{fuente}" data-ts="{ts}">'
+        f'<a href="{enlace}" target="_blank" rel="noopener">'
+        f'<img src="{thumbnail}" alt="{titulo}" class="video-thumb" loading="lazy" onerror="this.src=\'https://via.placeholder.com/320x180?text=No+Preview\'">'
+        f'</a>'
+        f'<div class="video-info">'
+        f'<a href="{enlace}" target="_blank" rel="noopener" class="video-title">{titulo}</a>'
+        f'<span class="video-meta"><img src="{favicon}" class="chip-icon" alt="" width="14" height="14" loading="lazy"> {fuente} · {fecha} {live_badge}</span>'
+        f'</div></div>'
+    )
+
+
+def render_social_card(item: dict, media_type: str, avatars: dict) -> str:
+    titulo = _escape_html(item.get(TITULO_KEY, ""))
+    enlace = item.get(ENLACE_KEY, "#")
+    fuente = _escape_html(item.get(FUENTE_KEY, ""))
+    ts = _item_timestamp(item)
+    fecha = item.get(FECHA_PUB_KEY, "")
+    favicon = _favicon_src(fuente, avatars)
+
+    emojis = {"instagram": "📸", "tiktok": "🎵", "twitter": "🐦", "threads": "💬"}
+    emoji = emojis.get(media_type, "📱")
+
+    return (
+        f'<div class="video-card social-card" data-type="{media_type}" data-source="{fuente}" data-ts="{ts}">'
+        f'<a href="{enlace}" target="_blank" rel="noopener">'
+        f'<div class="social-placeholder">{emoji}</div>'
+        f'</a>'
+        f'<div class="video-info">'
+        f'<a href="{enlace}" target="_blank" rel="noopener" class="video-title">{titulo}</a>'
+        f'<span class="video-meta"><img src="{favicon}" class="chip-icon" alt="" width="14" height="14" loading="lazy"> {fuente} · {fecha}</span>'
+        f'</div></div>'
+    )
+
+
+def render_multimedia_content(items: list, avatars: dict) -> str:
+    html = ""
+    for item in items:
+        media_type = _tipo_multimedia(item)
+        if media_type == "youtube":
+            html += render_youtube_card(item, avatars)
+        elif media_type in ("instagram", "tiktok", "twitter", "threads"):
+            html += render_social_card(item, media_type, avatars)
+    return html
+
+
+def render_github_ranking(herramientas: list) -> str:
+    html = ""
+    for i, h in enumerate(herramientas):
+        nombre = _escape_html(h.get(TITULO_KEY, ""))
+        enlace = h.get(ENLACE_KEY, "#")
+        estrellas = h.get(ESTRELLAS_KEY, "0")
+        lenguaje = _escape_html(h.get(LENGUAJE_KEY, ""))
+        desc = _escape_html(h.get(DESCRIPCION_KEY, "")[:120])
+
+        lang_badge = f'<span class="badge-lang">{lenguaje}</span>' if lenguaje else ""
+
+        html += (
+            f'<div class="github-item" data-lang="{lenguaje.lower()}">'
+            f'<span class="rank">#{i+1}</span>'
+            f'<div class="github-info">'
+            f'<a href="{enlace}" target="_blank" rel="noopener" class="github-name">{nombre}</a>'
+            f'<span class="github-desc">{desc}</span>'
+            f'</div>'
+            f'<div class="github-stars">⭐ {estrellas} {lang_badge}</div>'
+            f'</div>'
+        )
+    return html
+
+
+def render_trends(trends: list) -> str:
+    if not trends:
+        return '<p style="color:#888;font-size:14px;">Sin datos de tendencias disponibles.</p>'
+
+    html = ""
+    for t in trends:
+        titulo = _escape_html(t.get(TITULO_KEY, t.get("query", "")))
+        enlace = t.get(ENLACE_KEY, "#")
+        fuente = _escape_html(t.get(FUENTE_KEY, "Google Trends"))
+        traffic = t.get("traffic", "")
+
+        traffic_html = f' <span class="badge-tech">{traffic}</span>' if traffic else ""
+
+        html += (
+            f'<li class="news-item" data-category="trend">'
+            f'<a href="{enlace}" target="_blank" rel="noopener">'
+            f'<div class="news-text">'
+            f'<span class="news-title">📈 {titulo}</span>'
+            f'<span class="news-meta">{fuente}{traffic_html}</span>'
+            f'</div></a></li>'
+        )
+    return html
+
+
 def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen_ia, trends=None):
     historial.sort(key=lambda x: x.get(TS_KEY, ""), reverse=True)
     herramientas_github = [
@@ -69,19 +338,8 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
     ]
     herramientas_github.sort(key=lambda h: int(h.get(ESTRELLAS_KEY, "0")), reverse=True)
     top_github = herramientas_github[:20]
-     
-    # === Escribir index.html (solo resumen + fecha, resto lo pinta JS) ===
-    os.makedirs("public", exist_ok=True)
-    with open("public/index.html", "w", encoding="utf-8") as f:
-        f.write(
-            HTML_TEMPLATE.format(
-                fecha_hoy=fecha_h,
-                resumen=resumen_ia,
-                downloader_api_token=CONFIG.get("DOWNLOADER_API_TOKEN"),
-            )
-        )
 
-    # === Completar avatares: si un canal YT no tiene avatar, usar UI Avatars como fallback ===
+    # Completar avatares
     avatars_known = getattr(scr, "avatar_repo", None) and scr.avatar_repo.avatars or {}
     for nombre, info in FUENTES.items():
         if YT_KEY in info:
@@ -89,29 +347,44 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
             if nombre_c not in avatars_known:
                 avatars_known[nombre_c] = f"https://ui-avatars.com/api/?name={nombre_c}&background=random"
 
-    # === Escribir data.json (lo consume script.js) ===
     trends_data = trends or []
-    with open("public/data.json", "w", encoding="utf-8") as f:
-        json.dump(
-            {
-                "items": historial,
-                "herramientas": top_github,
-                "trends": trends_data,
-                "avatars": avatars_known,
-                "skills": SKILLS,
-                "llms": LLMS,
-                "lenguajes": LENGUAJES,
-                "frameworks": FRAMEWORKS,
-                "librerias": LIBRERIAS,
-                "categorias": dict(list(CATEGORIAS.items())[:6]),
-                "config_js": JS_CONFIG,
-            },
-            f,
-            indent=2,
-            ensure_ascii=False,
+
+    # === Renderizar todas las secciones ===
+    stats_html = render_stats(historial)
+    news_list_html = render_news_list(historial, avatars_known)
+    news_week_filters_html = render_week_selector(historial, "news")
+    news_channel_filters_html = render_channel_chips(historial, "canalNoticias", avatars_known)
+    news_category_filters_html = render_category_chips(historial)
+    video_week_filters_html = render_week_selector(historial, "video")
+    multimedia_tabs_html = render_multimedia_tabs()
+    video_channel_filters_html = render_channel_chips(historial, "canalVideos", avatars_known)
+    multimedia_content_html = render_multimedia_content(historial, avatars_known)
+    trends_html = render_trends(trends_data)
+    github_ranking_html = render_github_ranking(top_github)
+
+    # === Escribir index.html con todo pre-renderizado ===
+    os.makedirs("public", exist_ok=True)
+    with open("public/index.html", "w", encoding="utf-8") as f:
+        f.write(
+            HTML_TEMPLATE.format(
+                fecha_hoy=fecha_h,
+                resumen=resumen_ia,
+                downloader_api_token=CONFIG.get("DOWNLOADER_API_TOKEN"),
+                stats_html=stats_html,
+                news_list_html=news_list_html,
+                news_week_filters_html=news_week_filters_html,
+                news_channel_filters_html=news_channel_filters_html,
+                news_category_filters_html=news_category_filters_html,
+                video_week_filters_html=video_week_filters_html,
+                multimedia_tabs_html=multimedia_tabs_html,
+                video_channel_filters_html=video_channel_filters_html,
+                multimedia_content_html=multimedia_content_html,
+                trends_html=trends_html,
+                github_ranking_html=github_ranking_html,
+            )
         )
 
-    logger.info(f"✅ Dashboard HTML + data.json generados ({len(historial)} registros, {len(top_github)} herramientas).")
+    logger.info(f"✅ Dashboard HTML pre-renderizado ({len(historial)} registros, {len(top_github)} herramientas).")
 
 
 def emoji_categoria(cat: str) -> str:
