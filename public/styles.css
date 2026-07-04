@@ -134,9 +134,10 @@ option { font-weight: normal; color: #555; background: white; }
 @media (max-width: 640px) {
   html { overflow-x: hidden; }
   body { padding: 10px; overflow-x: hidden; }
-  header { flex-direction: column; gap: 10px; text-align: center; }
-  header h1 { font-size: 1.2rem; word-break: break-word; }
-  .header-gradient { font-size: 1.1rem; }
+  header { flex-direction: column; gap: 8px; text-align: center; border-bottom-width: 2px; padding-bottom: 8px; margin-bottom: 16px; }
+  header h1 { font-size: 1.1rem; word-break: break-word; }
+  header .logo { height: 35px; width: auto; }
+  .header-gradient { font-size: 1rem; }
 
   .stats-bar { gap: 6px; flex-direction: row; flex-wrap: wrap; }
   .stat-card { min-width: calc(33% - 4px); padding: 10px 6px; flex: 1 1 auto; }
