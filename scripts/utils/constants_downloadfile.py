@@ -740,7 +740,7 @@ EMAIL_ROW_TEMPLATE = """<tr>
     </td>
 </tr>"""
 
-# ── JS config (inyectado en data.json) ──
+# ── JS config (inyectado en HTML pre-renderizado) ──
 JS_CONFIG = {
     "ALL_YT_CHANNELS": [
         "MoureDev", "Midudev", "Pelado Nerd", "HolaMundo", "FreeCodeCamp",

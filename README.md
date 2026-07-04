@@ -157,7 +157,7 @@ All scripts run with `python -m` from the project root:
 
 ## 📊 Dashboard
 
-Deployed on Surge.sh. Static HTML (~6.5KB) with a `data.json` payload (~530KB, 1400+ entries) rendered via JavaScript (Observable Store). Includes news, YouTube videos, Instagram, X/Twitter, Threads, and TikTok posts.
+Deployed on Surge.sh. Fully server-side rendered (SSR) — Python generates a single `index.html` with all content pre-rendered (news, YouTube videos, Instagram, X/Twitter, Threads, TikTok, GitHub ranking, trends). JavaScript is minimal (~100 lines) and only handles interactive filters, tabs, and search.
 
 ---
 

@@ -133,3 +133,59 @@
     setupScrollTop();
   });
 })();
+
+// ── Video Download (disabled — was used for Hugging Face API integration) ──
+// async function descargarVideo(urlVideo, boton) {
+//   const originalText = boton.innerHTML;
+//   boton.innerHTML = "⏳...";
+//
+//   const tokenElement = document.getElementById("api-base-token");
+//   const TOKEN_BASE = tokenElement ? tokenElement.content : "";
+//   if (!TOKEN_BASE) {
+//     console.error("Error de configuración: No se encontró el token base.");
+//     return;
+//   }
+//
+//   const fechaHoy = new Date().toISOString().split("T")[0];
+//   const semilla = `${TOKEN_BASE}-${fechaHoy}`;
+//   const tokenHashed = await generarSHA256(semilla);
+//
+//   const apiUrl = `https://testactions1github-api-python.hf.space/download?url=${encodeURIComponent(urlVideo)}`;
+//
+//   try {
+//     const response = await fetch(apiUrl, {
+//       method: "GET",
+//       headers: {
+//         "X-API-Key": tokenHashed,
+//         "Content-Type": "application/json",
+//       },
+//     });
+//
+//     if (!response.ok) {
+//       const errorData = await response.json();
+//       throw new Error(errorData.detail || "Error en el servidor");
+//     }
+//
+//     const data = await response.json();
+//     const a = document.createElement("a");
+//     a.href = data.url;
+//     a.target = "_blank";
+//     a.download = `${data.title}.mp4`;
+//     document.body.appendChild(a);
+//     a.click();
+//     a.remove();
+//   } catch (error) {
+//     console.error("Error:", error.message);
+//     boton.innerHTML = "❌";
+//   } finally {
+//     setTimeout(() => (boton.innerHTML = originalText), 3000);
+//   }
+// }
+//
+// async function generarSHA256(mensaje) {
+//   const encoder = new TextEncoder();
+//   const data = encoder.encode(mensaje);
+//   const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+//   const hashArray = Array.from(new Uint8Array(hashBuffer));
+//   return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+// }
