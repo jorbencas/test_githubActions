@@ -328,10 +328,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             </div>
         </div>
         <details class="filter-collapse" open>
-            <summary>\U0001f4fa Tipo</summary>
-            <div id="multimedia-tabs" class="chip-container">{multimedia_tabs_html}</div>
-        </details>
-        <details class="filter-collapse" open>
             <summary>\U0001f4fa Filtro Canal</summary>
             <div id="video-channel-filters" class="chip-container">{video_channel_filters_html}</div>
         </details>
