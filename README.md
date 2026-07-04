@@ -95,7 +95,7 @@ All scripts run with `python -m` from the project root:
 | `python -m scripts.publishers.generate_weekly --blog-path blog` | Generate weekly recap + dashboard (SSR) |
 | `python -m scripts.publishers.send_email` | Send Mailgun newsletter |
 | `python -m scripts.publishers.send_telegram` | Send Telegram notification with TTS |
-| `python -m scripts.publishers.manage_resources --blog-path blog --max-cards 500 --clean --reorder` | Manage resources.mdx |
+| `python -m scripts.publishers.manage_resources --blog-path blog --max-cards 500 --clean --reorder --fix-spacing` | Manage resources.mdx |
 | `python -m scripts.publishers.merge_freefordev --blog-path blog --free-dev-file /tmp/free-for-dev.md` | Merge free-for-dev resources |
 
 ### 🔧 Maintenance

@@ -1,6 +1,6 @@
 from scripts.publishers.manage_resources import (
     domain_from, format_card, count_cards, find_grid_bounds,
-    extract_sections_with_depth, extract_category_name,
+    extract_sections, extract_category_name,
     generate_frontmatter,
 )
 
@@ -101,18 +101,18 @@ title: Test
 """
 
     def test_extracts_two_sections(self):
-        parts = extract_sections_with_depth(self.SAMPLE)
+        parts = extract_sections(self.SAMPLE)
         sections = [p for p in parts if p[0] == "section"]
         assert len(sections) == 2
 
     def test_first_section_content(self):
-        parts = extract_sections_with_depth(self.SAMPLE)
+        parts = extract_sections(self.SAMPLE)
         sections = [p for p in parts if p[0] == "section"]
         assert "Categoria 1" in sections[0][1]
         assert "a.com" in sections[0][1]
 
     def test_preamble_includes_frontmatter(self):
-        parts = extract_sections_with_depth(self.SAMPLE)
+        parts = extract_sections(self.SAMPLE)
         preambles = [p for p in parts if p[0] == "preamble"]
         assert any("---" in p[1] for p in preambles)
 
@@ -132,11 +132,11 @@ class TestExtractCategoryName:
 
 class TestGenerateFrontmatter:
     def test_first_page(self):
-        fm = generate_frontmatter(0, 2, 500)
+        fm = generate_frontmatter(0, 500)
         assert '"Recursos para desarrolladores"' in fm
         assert 'tags' in fm
 
     def test_subsequent_page(self):
-        fm = generate_frontmatter(1, 2, 300)
+        fm = generate_frontmatter(1, 300)
         assert 'Página 2' in fm
         assert '300' in fm
