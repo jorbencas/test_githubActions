@@ -569,20 +569,27 @@ IMPORTANT: Do NOT include any text, letters, numbers, labels, or watermarks in t
 """
 
 # ── AI Prompts ──
-PROMPT_RESUMIR_LOTE = """Eres un editor de newsletter tech. Escribe un párrafo de 2-3 líneas en español
-que introduzca los titulares del día. Sé directo, sin florituras. Menciona
-temas generales (IA, programación, hardware...) si aplican.
+PROMPT_RESUMIR_LOTE = """Eres el editor de "Tech Pulse", una newsletter tech diaria para profesionales del sector.
+Escribe un párrafo de 2-3 líneas en español que introduzca los titulares de hoy.
+
+REGLAS:
+- Sé directo, sin florituras ni frases vacías
+- Menciona 2-3 temas concretos (IA, programación, hardware, seguridad...)
+- Si hay un tema dominante, ponlo en primera línea
+- Tono: cercano pero profesional, como un colega que te cuenta lo importante
 
 TITULARES:
 {texto}
 
 RESPONDE SOLO EL PÁRRAFO, sin intro ni etiquetas. Máx 300 caracteres."""
 
-PROMPT_RESUMIR_NOTICIA = """Eres un periodista de tecnología que escribe resúmenes de 3-4 líneas en español.
-Resume la siguiente noticia de forma concisa y directa, destacando:
-- Qué ha ocurrido exactamente
-- Por qué es relevante para el sector tech
-- Un dato concreto si aparece en el texto
+PROMPT_RESUMIR_NOTICIA = """Eres el editor de "Tech Pulse". Resume esta noticia en 3-4 líneas en español.
+
+REGLAS:
+1. Primera línea: qué ha ocurrido exactamente (hecho concreto, no genérico)
+2. Segunda línea: por qué es relevante para un programador o profesional tech
+3. Tercera línea: un dato concreto si aparece (versión, cifra, fecha)
+4. Evita frases tipo "en un mundo cada vez más digital" o "la revolución de la IA"
 
 TÍTULO: {titulo}
 FUENTE: {fuente}
@@ -591,57 +598,57 @@ TEXTO:
 
 Responde SOLO con el resumen, sin introducciones ni etiquetas. (máx 500 caracteres)"""
 
-PROMPT_RECAP_SEMANAL = """Eres un editor senior de tecnología con estilo cercano pero analítico (como una mezcla de Xataka y El Pingüino de Mario).
-Analiza estos titulares y genera un RECAP SEMANAL DETALLADO.
+PROMPT_RECAP_SEMANAL = """Eres el editor senior de "Tech Pulse", una newsletter semanal de tecnología.
+Tu estilo: directo, analítico, sin hype vacío. Como Xataka mezclado con The Verge en español.
 
-NORMAS DE ESTILO:
-- Voz directa, sin intro genérica tipo "en un mundo digital..."
-- Asume que el lector ya sigue tecnología, ve al grano
-- Si una noticia es hype sin sustancia, menciónalo
-- NO uses markdown dentro del JSON (ni **, ni ###, ni ---)
-- Sé específico: menciona nombres de productos, empresas, versiones
-- Aporta contexto: no solo digas qué pasó, di por qué es relevante ahora
-- Menciona la categoria (IA, Programación, Hardware, etc.) de las noticias destacadas
-- Si hay noticias destacadas de fuente RSS, menciónalo
+MISSION: Analiza las noticias de la semana y genera un RECAP SEMANAL que un programador quiera leer.
 
-RESUMEN DE LA SEMANA:
-- Categorías con más actividad:
+═══ NORMAS DE ESTILO (OBLIGATORIO) ═══
+- Voz directa: nada de "En el cambiante mundo digital..." o "La era de la IA transforma..."
+- Asume que el lector ya sabe qué es OpenAI, Docker o Kubernetes
+- Si una noticia es solo marketing, dilo ("mucho ruido, pocas nueces")
+- Sé específico: nombres, versiones, cifras concretas
+- Conecta temas: si OpenAI y Google sacan algo similar, agrúpalos
+- La introducción debe enganchar en la primera frase
+
+═══ NOTICIAS DE LA SEMANA (AGRUPADAS POR CATEGORÍA) ═══
+
 {resumen_cats}
-- Noticias vía RSS: {total_rss}
 
-NOTICIAS:
+Total noticias RSS: {total_rss}
+
 {texto_noticias}
 
-RESPONDE EXCLUSIVAMENTE UN JSON VÁLIDO (sin markdown ni comentarios):
+═══ INSTRUCCIONES DE SALIDA ═══
+
+Genera un JSON con esta estructura EXACTA:
+
 {{
-  "introduccion": "Párrafo analítico de 4-6 líneas conectando las tendencias clave de la semana. Menciona al menos 2-3 temas concretos y sus categorías. (max 700 chars)",
+  "introduccion": "Párrafo de 4-6 líneas. Primera frase: tema principal de la semana. Luego conecta 2-3 tendencias clave con sus categorías. Tono analítico, no sensacionalista. (max 700 chars)",
   "noticias_destacadas": [
     {{
-      "titulo": "Título descriptivo del primer tema destacado (incluye la categoria si aplica)",
-      "suceso": "Qué ocurrió exactamente, con detalles concretos (2-3 líneas)",
-      "impacto": "Por qué importa para el lector y qué implicaciones tiene (2-3 líneas)"
-    }},
-    {{
-      "titulo": "Título descriptivo del segundo tema destacado (incluye la categoria si aplica)",
-      "suceso": "Qué ocurrió exactamente, con detalles concretos (2-3 líneas)",
-      "impacto": "Por qué importa para el lector y qué implicaciones tiene (2-3 líneas)"
-    }},
-    {{
-      "titulo": "Título descriptivo del tercer tema destacado (incluye la categoria si aplica)",
-      "suceso": "Qué ocurrió exactamente, con detalles concretos (2-3 líneas)",
-      "impacto": "Por qué importa para el lector y qué implicaciones tiene (2-3 líneas)"
+      "titulo": "Título descriptivo + categoría entre paréntesis (ej: 'GPT-5: OpenAI supera expectativas (🤖 IA)')",
+      "suceso": "Qué ocurrió con datos concretos: nombres, versiones, cifras. 2-3 líneas. (max 300 chars)",
+      "impacto": "Por qué importa AHORA. Conecta con tendencias del sector. 2-3 líneas. (max 300 chars)"
     }}
   ],
   "repo": {{
-    "nombre": "Nombre del repo/herramienta destacado de la semana",
-    "url": "URL del repo",
-    "desc": "Utilidad práctica en 1-2 frases, explicando el problema que resuelve"
+    "nombre": "Nombre del repo/herramienta más interesante de la semana",
+    "url": "URL del repo (de preferencia uno de las noticias o de GitHub Trending)",
+    "desc": "Qué problema resuelve y por qué debería probarlo. 1-2 frases."
   }},
-  "tldr": ["Punto clave 1 con contexto (max 160 chars)", "Punto clave 2 con contexto (max 160 chars)", "Punto clave 3 con contexto (max 160 chars)", "Punto clave 4 con contexto (max 160 chars)"],
-  "tags": ["tech", "tag_especifico1", "tag_especifico2", "tag_especifico3"],
-  "sneak_peek": "Un párrafo breve sobre qué esperar la próxima semana, con predicciones concretas basadas en los temas actuales. Sin promesas vacías. (max 350 chars)",
-  "nota_personal": "Reflexión genuina en 2-3 líneas, como si se lo dijeras a un colega. Menciona algún aprendizaje o sorpresa de la semana. (max 320 chars)"
-}}"""
+  "tldr": [
+    "Punto 1: tema principal + contexto (max 160 chars)",
+    "Punto 2: segunda tendencia + dato concreto (max 160 chars)",
+    "Punto 3: herramienta/repo destacado (max 160 chars)",
+    "Punto 4: preview de lo que viene (max 160 chars)"
+  ],
+  "tags": ["tech", "tag_tema_principal", "tag_tema2", "tag_tema3"],
+  "sneak_peek": "Predicción concreta basada en lo visto esta semana. Sin promesas vacías. (max 350 chars)",
+  "nota_personal": "Reflexión genuina como si se lo dijeras a un colega. Menciona algo que te sorprendió o un aprendizaje. (max 320 chars)"
+}}
+
+RESPONDE SOLO EL JSON, sin markdown, sin comentarios, sin explicaciones."""
 
 PROMPT_TRADUCIR_TITULOS = """Traduce estos titulares de tecnología al español de forma profesional y natural.
 Mantén nombres propios, marcas y acrónimos (OpenAI, NVIDIA, iPhone, etc.) sin traducir.

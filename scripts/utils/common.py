@@ -96,25 +96,45 @@ async def resumir_noticia(item: dict, client, max_prompt_chars: int = 3000) -> s
             continue
     return None
 
-async def obtener_recap_semanal_ia(noticias: list, client) -> dict | None:
+async def obtener_recap_semanal_ia(
+    noticias: list,
+    client,
+    resumen_cats: str | None = None,
+    total_rss: int | None = None,
+    texto_noticias: str | None = None,
+    fuentes_top: list | None = None,
+    categorias_ordenadas: list | None = None,
+) -> dict | None:
     """Genera el resumen semanal probando varios modelos."""
     modelos = CONFIG.get("AI_MODELS", ["gemini-2.0-flash-lite"])
 
-    categorias = {}
-    for n in noticias[:30]:
-        cat = n.get(CATEGORIA_KEY, "💡 General")
-        categorias.setdefault(cat, []).append(n[TITULO_KEY])
+    # Si no se proporcionan pre-calculados, calcular aquí
+    if resumen_cats is None:
+        categorias = {}
+        for n in noticias[:30]:
+            cat = n.get(CATEGORIA_KEY, "💡 General")
+            categorias.setdefault(cat, []).append(n[TITULO_KEY])
+        resumen_cats = "\n".join(
+            f"  [{cat}] ({len(items)} noticias)" for cat, items in sorted(categorias.items(), key=lambda x: -len(x[1]))[:5]
+        )
+    if total_rss is None:
+        total_rss = sum(1 for n in noticias if n.get(ORIGEN_KEY) == VAL_RSS)
+    if texto_noticias is None:
+        texto_noticias = "\n".join([
+            f"- [{n[FUENTE_KEY]}] {n[TITULO_KEY]} (categoria: {n.get(CATEGORIA_KEY, '💡 General')}, badge: {n.get(BADGE_KEY, 'Tech')}, origen: {n.get(ORIGEN_KEY, 'web')})"
+            for n in noticias[:25]
+        ])
+    if fuentes_top is None:
+        fuente_count = {}
+        for n in noticias:
+            fuente_count[n[FUENTE_KEY]] = fuente_count.get(n[FUENTE_KEY], 0) + 1
+        fuentes_top = sorted(fuente_count.items(), key=lambda x: -x[1])[:5]
 
-    resumen_cats = "\n".join(
-        f"  [{cat}] ({len(items)} noticias)" for cat, items in sorted(categorias.items(), key=lambda x: -len(x[1]))[:5]
+    prompt = PROMPT_RECAP_SEMANAL.format(
+        resumen_cats=resumen_cats,
+        total_rss=total_rss,
+        texto_noticias=texto_noticias,
     )
-    total_rss = sum(1 for n in noticias if n.get(ORIGEN_KEY) == VAL_RSS)
-
-    texto_noticias = "\n".join([
-        f"- [{n[FUENTE_KEY]}] {n[TITULO_KEY]} (categoria: {n.get(CATEGORIA_KEY, '💡 General')}, badge: {n.get(BADGE_KEY, 'Tech')}, origen: {n.get(ORIGEN_KEY, 'web')})"
-        for n in noticias[:25]
-    ])
-    prompt = PROMPT_RECAP_SEMANAL.format(resumen_cats=resumen_cats, total_rss=total_rss, texto_noticias=texto_noticias)
 
     for modelo in modelos:
         logger.info(f"🗞️ Generando Recap con modelo: {modelo}")

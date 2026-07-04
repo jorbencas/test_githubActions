@@ -15,6 +15,7 @@ import json
 import logging
 import os
 import re
+import shutil
 import sys
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
@@ -53,6 +54,43 @@ def cargar_herramientas() -> list:
         except Exception:
             return []
     return []
+
+
+def archivar_recaps_antiguos(auto_news_dir: str, semana_actual: str) -> int:
+    """Mueve recaps antiguos (>2 semanas) a subcarpeta /archive/. Devuelve cantidad movidos."""
+    archive_dir = os.path.join(auto_news_dir, "archive")
+    os.makedirs(archive_dir, exist_ok=True)
+    moved = 0
+    if not os.path.isdir(auto_news_dir):
+        return 0
+    for fname in os.listdir(auto_news_dir):
+        if not fname.endswith(".md"):
+            continue
+        match = re.match(r"(\d{4})-w(\d{2})-tech-recap\.md", fname)
+        if not match:
+            continue
+        file_week = f"{match.group(1)}-W{match.group(2)}"
+        if file_week < semana_actual:
+            src = os.path.join(auto_news_dir, fname)
+            dst = os.path.join(archive_dir, fname)
+            try:
+                shutil.move(src, dst)
+                moved += 1
+                logger.info(f"📦 Archivado: {fname} → archive/")
+            except Exception as e:
+                logger.warning(f"⚠️ No se pudo archivar {fname}: {e}")
+    return moved
+
+
+def eliminar_duplicados_semana(auto_news_dir: str, semana_slug: str) -> bool:
+    """Elimina posts duplicados de la misma semana. Devuelve True si ya existe uno."""
+    if not os.path.isdir(auto_news_dir):
+        return False
+    count = 0
+    for fname in os.listdir(auto_news_dir):
+        if fname.endswith(".md") and semana_slug in fname:
+            count += 1
+    return count > 0
 
 
 
@@ -336,27 +374,20 @@ async def generar_recap(noticias_web, client, blog_path: str | None = None) -> s
     if not noticias_blog:
         return None
 
-    categoria_count = {}
-    for n in noticias_blog:
-        cat = n.get(CATEGORIA_KEY, "💡 General")
-        categoria_count[cat] = categoria_count.get(cat, 0) + 1
-    categorias_ordenadas = sorted(categoria_count.items(), key=lambda x: -x[1])
-
-    fuente_count = {}
-    for n in noticias_blog:
-        fuente_count[n[FUENTE_KEY]] = fuente_count.get(n[FUENTE_KEY], 0) + 1
-    fuentes_top = sorted(fuente_count.items(), key=lambda x: -x[1])[:5]
-
-    total_rss = sum(1 for n in noticias_blog if n.get(ORIGEN_KEY) == VAL_RSS)
-
-    semana_slug = f"{year}-w{week:02d}-tech-recap"
+    # ── Archivar recaps antiguos (>2 semanas) ──
+    semana_actual = f"{year}-W{week:02d}"
     if blog_path:
         auto_news_dir = os.path.join(blog_path, "src", "content", "auto-news")
     else:
         auto_news_dir = "./auto-news"
-    path_md = os.path.join(auto_news_dir, f"{semana_slug}.md")
     os.makedirs(auto_news_dir, exist_ok=True)
+    archivados = archivar_recaps_antiguos(auto_news_dir, semana_actual)
+    if archivados:
+        logger.info(f"📦 {archivados} recaps antiguos archivados.")
 
+    # ── SEO: un solo post por semana ──
+    semana_slug = f"{year}-w{week:02d}-tech-recap"
+    path_md = os.path.join(auto_news_dir, f"{semana_slug}.md")
     if os.path.exists(path_md):
         logger.info(f"⏭️ Recap semanal {semana_slug} ya existe. Saltando.")
         with open(path_md, "r", encoding="utf-8") as f:
@@ -364,7 +395,44 @@ async def generar_recap(noticias_web, client, blog_path: str | None = None) -> s
             introduccion = match.group(1) if match else "Recap semanal disponible."
         return introduccion
 
-    data_ia = await obtener_recap_semanal_ia(noticias_blog, client)
+    # ── Agrupar noticias por categoría para mejor contexto IA ──
+    noticias_por_cat: dict[str, list] = {}
+    for n in noticias_blog:
+        cat = n.get(CATEGORIA_KEY, "💡 General")
+        noticias_por_cat.setdefault(cat, []).append(n)
+
+    categorias_ordenadas = sorted(noticias_por_cat.items(), key=lambda x: -len(x[1]))
+
+    # Estadísticas para el prompt
+    total_rss = sum(1 for n in noticias_blog if n.get(ORIGEN_KEY) == VAL_RSS)
+    fuente_count = {}
+    for n in noticias_blog:
+        fuente_count[n[FUENTE_KEY]] = fuente_count.get(n[FUENTE_KEY], 0) + 1
+    fuentes_top = sorted(fuente_count.items(), key=lambda x: -x[1])[:5]
+
+    resumen_cats = "\n".join(
+        f"  [{cat}] ({len(items)} noticias): " + ", ".join(n[TITULO_KEY][:50] for n in items[:3])
+        for cat, items in categorias_ordenadas[:6]
+    )
+
+    # Texto agrupado por categoría (mejor contexto para la IA)
+    texto_agrupado = []
+    for cat, items in categorias_ordenadas:
+        texto_agrupado.append(f"\n=== {cat} ({len(items)} noticias) ===")
+        for n in items[:8]:
+            origen = "RSS" if n.get(ORIGEN_KEY) == VAL_RSS else "web"
+            texto_agrupado.append(f"  [{n[FUENTE_KEY]}] {n[TITULO_KEY]} (origen: {origen})")
+    texto_noticias = "\n".join(texto_agrupado)
+
+    # ── Llamar a la IA ──
+    data_ia = await obtener_recap_semanal_ia(
+        noticias_blog, client,
+        resumen_cats=resumen_cats,
+        total_rss=total_rss,
+        texto_noticias=texto_noticias,
+        fuentes_top=fuentes_top,
+        categorias_ordenadas=categorias_ordenadas,
+    )
     if not data_ia:
         return None
     img_recap = await generar_imagen_noticia(f"Recap {week}", client)
@@ -397,17 +465,11 @@ async def generar_recap(noticias_web, client, blog_path: str | None = None) -> s
     )
     stats_categorias = "\n".join(
         f"  - {cat}: **{cnt}** noticias ({cnt * 100 // total_noticias}%)"
-        for cat, cnt in categorias_ordenadas
+        for cat, cnt in [(c, len(i)) for c, i in categorias_ordenadas]
     )
 
-    noticias_por_cat: dict[str, list] = {}
-    for n in noticias_blog:
-        cat = n.get(CATEGORIA_KEY, "💡 General")
-        noticias_por_cat.setdefault(cat, []).append(n)
-
     partes_lista = []
-    for cat in [c[0] for c in categorias_ordenadas]:
-        items = noticias_por_cat[cat]
+    for cat, items in categorias_ordenadas:
         partes_lista.append(f"**{cat}** ({len(items)} noticias)")
         for n in items[:10]:
             badge = badge_str(n)

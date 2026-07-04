@@ -1,7 +1,6 @@
 # 🛰️ test_githubActions — Tech Automation Ecosystem
 
 ![Python](https://img.shields.io/badge/python-3.11-3776AB?style=flat-square&logo=python&logoColor=white)
-![Playwright](https://img.shields.io/badge/playwright-✓-45ba4b?style=flat-square&logo=playwright)
 ![License](https://img.shields.io/github/license/jorbencas/test_githubActions?style=flat-square&label=License)
 ![Repo size](https://img.shields.io/github/repo-size/jorbencas/test_githubActions?style=flat-square&label=Repo%20size&logo=git)
 ![Code size](https://img.shields.io/github/languages/code-size/jorbencas/test_githubActions?style=flat-square&label=Code%20size)
@@ -12,7 +11,6 @@
 ![Scraper](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/scraper_workflow.yml?branch=master&style=flat-square&label=Scraper&logo=github)
 ![Hourly](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/scrape_hourly_workflow.yml?branch=master&style=flat-square&label=Hourly&logo=github)
 ![6h](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/scrape_6h_workflow.yml?branch=master&style=flat-square&label=Every%206h&logo=github)
-![Trends](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/trends_workflow.yml?branch=master&style=flat-square&label=Trends&logo=github)
 ![Resources](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_resources.yml?branch=master&style=flat-square&label=Resources&logo=github)
 ![Email](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/send_email_workflow.yml?branch=master&style=flat-square&label=Email&logo=github)
 ![Telegram](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/send_telegram_workflow.yml?branch=master&style=flat-square&label=Telegram&logo=github)
@@ -29,11 +27,11 @@ Automated tech news ecosystem. Collects, processes with **AI (Gemini)**, and dis
 
 ## 📋 Overview
 
-This project runs **11 GitHub Actions workflows** that form a fully automated content pipeline:
+This project runs **10 GitHub Actions workflows** that form a fully automated content pipeline:
 
-1. **Scrape** — news, social media, trends, and tools from 30+ sources
+1. **Scrape** — news and tools from 50+ sources (RSS, web, YouTube)
 2. **Process** — AI summarization with Gemini, translation, image generation
-3. **Publish** — weekly recaps, dashboard, email newsletter, Telegram notifications
+3. **Publish** — weekly recaps, dashboard (SSR), email newsletter, Telegram notifications
 4. **Manage** — resource lists, challenges, image optimization, link validation
 
 ---
@@ -42,15 +40,13 @@ This project runs **11 GitHub Actions workflows** that form a fully automated co
 
 ```
 scripts/
-├── scrapers/             🌐 Data collection from 30+ sources
+├── scrapers/             🌐 Data collection from 50+ sources
 │   ├── scraper_base.py         YouTube, Web, ScraperPro extractors
 │   ├── scrape_news.py          RSS + web + YouTube news
-│   ├── scrape_social.py        Social media (Playwright)
 │   ├── scrape_tools.py         GitHub Trending + Product Hunt
-│   ├── scrape_trends.py        Google Trends + TikTok
 │   └── screenshot_helper.mjs   Playwright screenshot helper
 ├── publishers/           📤 Content generation & distribution
-│   ├── generate_weekly.py      AI recap + dashboard HTML
+│   ├── generate_weekly.py      AI recap + dashboard HTML (SSR)
 │   ├── manage_resources.py     Pagination, cleanup, reorder resources.mdx
 │   ├── merge_freefordev.py     Merge free-for-dev resources
 │   ├── send_email.py           Mailgun newsletter
@@ -71,7 +67,7 @@ scripts/
 └── solutions/            💡 Challenge solutions database
     ├── solutions_db.py            Lookup + solution generation
     └── solutions_data.py          105+ curated solutions in 12 languages
-tests/                    ✅ pytest test suite (90+ tests)
+tests/                    ✅ pytest test suite (89 tests)
 ├── test_cache.py / test_constants_downloadfile.py
 ├── test_constants_retos.py / test_fix_images.py
 ├── test_manage_resources.py / test_solutions_db.py
@@ -89,15 +85,13 @@ All scripts run with `python -m` from the project root:
 | Command | Description |
 |---------|-------------|
 | `python -m scripts.scrapers.scrape_news --tier full` | Full news scrape (RSS + web + YouTube) |
-| `python -m scripts.scrapers.scrape_social --source all` | Social media scrape (Playwright) |
 | `python -m scripts.scrapers.scrape_tools` | GitHub Trending + Product Hunt |
-| `python -m scripts.scrapers.scrape_trends` | Google Trends + TikTok |
 
 ### 📤 Publishing
 
 | Command | Description |
 |---------|-------------|
-| `python -m scripts.publishers.generate_weekly --blog-path blog` | Generate weekly recap + dashboard |
+| `python -m scripts.publishers.generate_weekly --blog-path blog` | Generate weekly recap + dashboard (SSR) |
 | `python -m scripts.publishers.send_email` | Send Mailgun newsletter |
 | `python -m scripts.publishers.send_telegram` | Send Telegram notification with TTS |
 | `python -m scripts.publishers.manage_resources --blog-path blog --max-cards 500 --clean --reorder` | Manage resources.mdx |
@@ -117,26 +111,25 @@ All scripts run with `python -m` from the project root:
 
 | Command | Description |
 |---------|-------------|
-| `python -m pytest tests/ -v` | Run all tests (90+ tests) |
+| `python -m pytest tests/ -v` | Run all tests (89 tests) |
 | `python -m pytest tests/test_solutions_db.py -v` | Run specific test suite |
 
 ---
 
-## 🤖 GitHub Actions — 11 Workflows
+## 🤖 GitHub Actions — 10 Workflows
 
 | Workflow | Schedule / Trigger | Pipeline |
 |----------|-------------------|----------|
-| **🆕 scraper_workflow** | Sat 07:00 UTC | Scrape all → generate weekly → PR to blog → deploy Surge |
-| **🕐 scrape_hourly** | Every hour | Light scrape (RSS + quick sources) |
-| **🕒 scrape_6h** | Every 6 hours | Standard scrape |
-| **📈 trends_workflow** | Tue+Fio 08:00 UTC | Google Trends + TikTok scrape |
-| **📦 daily_resources** | Daily 06:00 UTC | Tools scrape + resources.mdx management |
-| **📧 send_email** | Daily 09:00 UTC | Mailgun newsletter |
-| **📱 send_telegram** | Every 30 min | Telegram with TTS audio |
-| **🧹 clean_news** | Quarterly | Link health check |
-| **🧩 hunt_challenges** | Weekly (Sun) | AI challenge generation |
-| **🖼️ optimize_images** | Dispatch from blog | Image optimization for blog |
-| **✅ tests** | Push/PR to master | pytest (90+ tests) |
+| **scraper_workflow** | Sat 07:00 UTC | Scrape all → generate weekly → PR to blog → deploy Surge |
+| **scrape_hourly** | Every hour | Light scrape (RSS + quick sources) |
+| **scrape_6h** | Every 6 hours | Standard scrape |
+| **daily_resources** | Daily 06:00 UTC | Tools scrape + resources.mdx management |
+| **send_email** | Daily 09:00 UTC | Mailgun newsletter |
+| **send_telegram** | Every 30 min | Telegram with TTS audio |
+| **clean_news** | Quarterly | Link health check |
+| **hunt_challenges** | Weekly (Sun) | AI challenge generation |
+| **optimize_images** | Dispatch from blog | Image optimization for blog |
+| **tests** | Push/PR to master | pytest (89 tests) |
 
 ---
 
@@ -157,13 +150,13 @@ All scripts run with `python -m` from the project root:
 
 ## 📊 Dashboard
 
-Deployed on Surge.sh. Fully server-side rendered (SSR) — Python generates a single `index.html` with all content pre-rendered (news, YouTube videos, Instagram, X/Twitter, Threads, TikTok, GitHub ranking, trends). JavaScript is minimal (~100 lines) and only handles interactive filters, tabs, and search.
+Deployed on Surge.sh. Fully **server-side rendered (SSR)** — Python generates a single `index.html` with all content pre-rendered (news, YouTube videos, GitHub ranking). JavaScript is minimal (~135 lines) and only handles interactive filters, tabs, and search.
 
 ---
 
 ## 🧪 Test Coverage
 
-90+ pytest tests covering:
+89 pytest tests covering:
 - **Cache** — FileCache, CacheManager, expiration, TTL
 - **Constants** — source configurations, challenge templates
 - **Image pipeline** — Unsplash fetching, Gemini banner gen, WebP/AVIF conversion
