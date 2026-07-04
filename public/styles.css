@@ -27,8 +27,17 @@ header { display: flex; justify-content: space-between; align-items: center; bor
 
 .card-content { padding: 12px; }
 .meta { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 5px; margin-bottom: 8px; font-size: 0.75em; color: #65676b; font-weight: bold; text-transform: uppercase; }
-.news-list { list-style: none; padding: 0; display: grid; gap: 10px; }
+.news-list { list-style: none; padding: 0; display: grid; gap: 10px; max-height: 600px; overflow-y: auto; scroll-behavior: smooth; }
+.news-list::-webkit-scrollbar { width: 6px; }
+.news-list::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 3px; }
+.news-list::-webkit-scrollbar-thumb { background: #007bff; border-radius: 3px; }
+.news-list::-webkit-scrollbar-thumb:hover { background: #0056b3; }
 .news-item { background: white; padding: 15px; border-radius: 8px; border-left: 5px solid #007bff; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+.news-item a { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+.news-item .favicon { width: 16px; height: 16px; border-radius: 2px; flex-shrink: 0; }
+.news-item .news-text { flex: 1; min-width: 0; }
+.news-item .news-title { font-weight: 600; color: #1c1e21; display: block; }
+.news-item .news-meta { font-size: 0.75em; color: #65676b; display: block; margin-top: 2px; }
 #github-ranking .news-item { margin-bottom: 10px; }
 a { color: #007bff; text-decoration: none; font-weight: bold; }
 a:hover { text-decoration: underline; }
@@ -67,6 +76,16 @@ optgroup { font-weight: bold; color: #333; background: #f8f9fa; }
 option { font-weight: normal; color: #555; background: white; }
 
 .badge-live { position: absolute; top: 8px; left: 8px; background: #ff0000; color: white; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; z-index: 5; animation: blink 1.5s infinite; }
+
+.github-item { display: flex; align-items: center; gap: 12px; background: white; padding: 12px 15px; border-radius: 8px; border-left: 5px solid #f59e0b; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+.github-item .rank { font-weight: 800; color: #f59e0b; min-width: 30px; font-size: 14px; }
+.github-item .github-info { flex: 1; min-width: 0; }
+.github-item .github-name { font-weight: 600; color: #1c1e21; display: block; }
+.github-item .github-desc { font-size: 0.8em; color: #64748b; display: block; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.github-item .github-stars { font-weight: 700; color: #f59e0b; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+.github-item .badge-lang { background: #e0e7ff; color: #3730a3; padding: 2px 6px; border-radius: 4px; font-size: 0.75em; font-weight: 600; }
+
+.social-placeholder { display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, #667eea, #764ba2); font-size: 3em; }
 @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
 /* .btn-download — desactivado: API no funcional */
