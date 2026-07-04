@@ -170,7 +170,7 @@ def render_news_list(items: list, avatars: dict) -> str:
     return "".join(render_news_item(i, avatars) for i in items)
 
 
-def render_week_selector(items: list, prefix: str, select_id: str = "selectorSemanas") -> str:
+def render_week_selector(items: list, prefix: str) -> str:
     weeks: dict[str, list] = {}
     for item in items:
         ts = _item_timestamp(item)
@@ -185,15 +185,13 @@ def render_week_selector(items: list, prefix: str, select_id: str = "selectorSem
             continue
 
     if not weeks:
-        return f'<select id="{select_id}" class="chip"><option value="all">Últimas 2 semanas</option></select>'
+        return '<button class="chip active" data-week="all">Últimas 2 semanas</button>'
 
     sorted_weeks = sorted(weeks.keys(), reverse=True)
-    html = f'<select id="{select_id}" class="chip">'
-    html += '<option value="all">Últimas 2 semanas</option>'
+    html = '<button class="chip active" data-week="all">Últimas 2 semanas</button>'
     for week_key in sorted_weeks[:8]:
         count = len(weeks[week_key])
-        html += f'<option value="{week_key}">{week_key} ({count})</option>'
-    html += '</select>'
+        html += f'<button class="chip" data-week="{week_key}">{week_key} ({count})</button>'
     return html
 
 
@@ -316,10 +314,10 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
     # === Renderizar todas las secciones ===
     stats_html = render_stats(historial)
     news_list_html = render_news_list(historial, avatars_known)
-    news_week_filters_html = render_week_selector(historial, "news", "selectorSemanas")
+    news_week_filters_html = render_week_selector(historial, "news")
     news_channel_filters_html = render_channel_chips(historial, "canalNoticias", avatars_known)
     news_category_filters_html = render_category_chips(historial)
-    video_week_filters_html = render_week_selector(historial, "video", "selectorSemanasVideos")
+    video_week_filters_html = render_week_selector(historial, "video")
     multimedia_tabs_html = render_multimedia_tabs()
     video_channel_filters_html = render_channel_chips(historial, "canalVideos", avatars_known)
     multimedia_content_html = render_multimedia_content(historial, avatars_known)

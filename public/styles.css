@@ -82,12 +82,6 @@ h2 { scroll-margin-top: 20px; }
 .ia-box h2 { margin-top: 0; color: #8e44ad; display: flex; align-items: center; gap: 10px; }
 .ia-box b { color: #2c3e50; background: #f4ecf7; padding: 0 4px; }
 
-#selectorSemanas, #selectorSemanasVideos { transition: all 0.3s ease; padding: 8px 14px; border: 2px solid #007bff; font-family: Arial, sans-serif; font-size: 14px; color: #333; background: white; cursor: pointer; appearance: auto; }
-#selectorSemanas:hover, #selectorSemanasVideos:hover { border-color: #0056b3; background: #f0f7ff; }
-#selectorSemanas:focus, #selectorSemanasVideos:focus { outline: none; border-color: #007bff; box-shadow: 0 0 0 2px rgba(0,123,255,0.25); }
-optgroup { font-weight: bold; color: #333; background: #f8f9fa; }
-option { font-weight: normal; color: #555; background: white; }
-
 .badge-live { position: absolute; top: 8px; left: 8px; background: #ff0000; color: white; padding: 3px 8px; font-size: 10px; font-weight: bold; z-index: 5; animation: blink 1.5s infinite; }
 
 .github-item { display: flex; align-items: center; gap: 12px; background: white; padding: 12px 15px; border-left: 5px solid #ff6600; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
@@ -134,7 +128,7 @@ option { font-weight: normal; color: #555; background: white; }
   body { padding: 10px; overflow-x: hidden; }
   header { flex-direction: column; gap: 8px; text-align: center; border-bottom-width: 2px; padding-bottom: 8px; margin-bottom: 16px; }
   header h1 { font-size: 1.1rem; word-break: break-word; }
-  header .logo { height: 35px; width: auto; }
+  header .logo { height: 50px; width: auto; }
   .header-gradient { font-size: 1rem; }
 
   .stats-bar { gap: 6px; flex-direction: row; flex-wrap: wrap; }
@@ -148,8 +142,6 @@ option { font-weight: normal; color: #555; background: white; }
   .chip { font-size: 11px; padding: 5px 12px 5px 5px; }
   .chip-img { width: 20px; height: 20px; margin-right: 4px; }
   .chip-container { gap: 6px; }
-
-  #selectorSemanas, #selectorSemanasVideos { width: 100%; font-size: 13px; padding: 8px 10px; }
 
   .news-list { gap: 6px; max-height: 500px; }
   .news-item { padding: 8px 10px; border-left-width: 4px; }

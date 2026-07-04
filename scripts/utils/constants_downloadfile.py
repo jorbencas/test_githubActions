@@ -298,11 +298,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             </picture>
         </header>
 
-        <div class="ia-box">
-            <h2>\U0001f916 Resumen IA</h2>
-            <p>{resumen}</p>
-        </div>
-
         <div id="stats-bar" class="stats-bar">{stats_html}</div>
 
         <h2>\U0001f4f0 Noticias</h2>

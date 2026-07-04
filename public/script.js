@@ -50,16 +50,6 @@
     });
   }
 
-  // ── Select (combobox) handlers ──
-  function setupSelectFilters(selectId, stateKey, filterFn) {
-    const sel = document.getElementById(selectId);
-    if (!sel) return;
-    sel.addEventListener("change", () => {
-      state[stateKey] = sel.value || "all";
-      filterFn();
-    });
-  }
-
   // ── News filters ──
   function filtrarNoticias() {
     document.querySelectorAll("#news-list .news-item").forEach((item) => {
@@ -133,10 +123,10 @@
 
   // ── Init ──
   document.addEventListener("DOMContentLoaded", () => {
-    setupSelectFilters("selectorSemanas", "semanaNoticias", filtrarNoticias);
+    setupChipFilters("news-week-filters", "semanaNoticias", filtrarNoticias);
     setupChipFilters("news-channel-filters", "canalNoticias", filtrarNoticias);
     setupChipFilters("news-category-filters", "catNoticias", filtrarNoticias);
-    setupSelectFilters("selectorSemanasVideos", "semanaVideos", filtrarVideos);
+    setupChipFilters("video-week-filters", "semanaVideos", filtrarVideos);
     setupChipFilters("video-channel-filters", "canalVideos", filtrarVideos);
     setupTabs();
     setupGithubSearch();
