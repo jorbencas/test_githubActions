@@ -44,6 +44,11 @@
   - Cada archivo mantiene su propio frontmatter y secciones
 
 ### Workflows nuevos
+- `.github/workflows/dashboard_update.yml`: Se ejecuta al hacer push a master si cambian archivos JS/CSS/Python del dashboard
+  - Detecta si cambiaron `generate_weekly.py` o `constants_downloadfile.py` → regenera `index.html`
+  - Si solo cambiaron JS/CSS → deploy directo sin regenerar
+  - Deploy automático a Surge.sh
+  - Push automático de cambios generados
 - `.github/workflows/daily_resources.yml`: Se ejecuta cada día a las 06:00 UTC
   - Scrapea tools (GitHub Trending + Product Hunt)
   - Ejecuta manage_resources.py contra el blog
@@ -64,11 +69,11 @@
 - Commit: `[fix] fix_images.py: preserve ResponsiveImage import when component is used`
 
 ## Notas
-- El dashboard se despliega en Surge.sh solo los sábados (scraper_workflow.yml)
+- El dashboard se despliega en Surge.sh con `dashboard_update.yml` (cambios en JS/CSS/Python) y `scraper_workflow.yml` (sábados)
 - Los recursos NO aparecen en el dashboard — van directo al blog vía PR
 - manage_resources.py usa el blog checkout en `./blog` (misma estructura que scraper_workflow.yml)
 - Límite: 500 tarjetas por archivo resources.mdx (configurable con --max-cards)
-- AGENTS.md: 10 workflows, pipeline de archive, SEO dedup documentado
+- AGENTS.md: 11 workflows, pipeline de archive, SEO dedup documentado
 - README.md: estructura completa del proyecto, pipelines detallados
 - 89 tests pytest en `tests/` (constantes, scrapers, publishers, tools, soluciones)
 - Scripts organizados: `scripts/scrapers/`, `scripts/publishers/`, `scripts/tools/`, `scripts/utils/`, `scripts/solutions/`

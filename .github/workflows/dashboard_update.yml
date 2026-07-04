@@ -1,0 +1,58 @@
+name: 🔄 Dashboard Update (JS/CSS/Python)
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'public/**/*.js'
+      - 'public/**/*.css'
+      - 'public/**/*.html'
+      - 'scripts/publishers/generate_weekly.py'
+      - 'scripts/utils/constants_downloadfile.py'
+
+jobs:
+  update_dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          ref: master
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 🔄 Regenerate dashboard (if Python changed)
+        id: regen
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || echo "")
+          if echo "$CHANGED" | grep -qE "scripts/publishers/generate_weekly.py|scripts/utils/constants_downloadfile.py"; then
+            echo "🔄 Python changed — regenerating dashboard..."
+            python -m scripts.publishers.generate_weekly
+            echo "regenerated=yes" >> $GITHUB_OUTPUT
+          else
+            echo "⏭️ Only JS/CSS changed — skipping regeneration"
+            echo "regenerated=no" >> $GITHUB_OUTPUT
+          fi
+
+      - name: ✨ Deploy dashboard a Surge
+        run: |
+          npx surge public jorbencasdownloaderdocument.surge.sh --token ${{ secrets.SURGE_TOKEN }}
+
+      - name: 📝 Push changes
+        if: steps.regen.outputs.regenerated == 'yes'
+        run: |
+          git config user.name jorbencas
+          git config user.email jorbencas@gmail.com
+          git add public/
+          git diff --quiet && git diff --staged --quiet || git commit -m "[bot] regenerate dashboard after Python changes"
+          git push origin master

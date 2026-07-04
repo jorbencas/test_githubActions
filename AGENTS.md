@@ -21,7 +21,7 @@
 - edge-tts for Telegram voice messages (Spanish voice)
 - Mailgun API for email newsletters
 - Surge.sh for static dashboard deployment
-- GitHub Actions for automation (10 workflows)
+- GitHub Actions for automation (11 workflows)
 
 ## Repository
 - `jorbencas/test_githubActions` (branch: master)
@@ -77,6 +77,7 @@
 | `hunt_challenges.yml` | Weekly (Sun) | AI challenge generation |
 | `optimize_images.yml` | Dispatch from blog | Image optimization for blog |
 | `tests.yml` | Push/PR to master | pytest (89 tests) |
+| `dashboard_update.yml` | Push (JS/CSS/Python) | Regenerate + deploy dashboard |
 
 ### Modular pipeline (each script is independent)
 
