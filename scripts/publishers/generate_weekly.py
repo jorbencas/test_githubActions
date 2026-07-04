@@ -102,6 +102,33 @@ def _escape_html(text: str) -> str:
     return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;").replace("'", "&#39;")
 
 
+MESES_ES = {
+    1: "enero", 2: "febrero", 3: "marzo", 4: "abril",
+    5: "mayo", 6: "junio", 7: "julio", 8: "agosto",
+    9: "septiembre", 10: "octubre", 11: "noviembre", 12: "diciembre",
+}
+
+
+def _format_fecha_es(fecha: str) -> str:
+    """Convierte fecha ISO o RFC2822 a formato largo en español: '4 de julio de 2026'."""
+    if not fecha:
+        return ""
+    try:
+        # Intentar ISO format primero
+        dt = datetime.fromisoformat(fecha.replace("Z", "+00:00"))
+    except Exception:
+        try:
+            # Intentar RFC2822: "Sat, 04 Jul 2026 09:08:09 +0000"
+            from email.utils import parsedate_to_datetime
+            dt = parsedate_to_datetime(fecha)
+        except Exception:
+            return fecha
+    dia = dt.day
+    mes = MESES_ES.get(dt.month, "")
+    anio = dt.year
+    return f"{dia} de {mes} de {anio}"
+
+
 def _favicon_src(source_name: str, avatars: dict) -> str:
     nombre_c = source_name.replace(" Shorts", "")
     if nombre_c in avatars:
@@ -136,12 +163,15 @@ def render_news_item(item: dict, avatars: dict) -> str:
     titulo = _escape_html(item.get(TITULO_KEY, "Sin título"))
     enlace = item.get(ENLACE_KEY, "#")
     fuente = _escape_html(item.get(FUENTE_KEY, ""))
-    fecha = item.get(FECHA_PUB_KEY, "")
+    fecha_raw = item.get(FECHA_PUB_KEY, "")
     badge = item.get("badge", "")
     origen = item.get(ORIGEN_KEY, "")
     ts = _item_timestamp(item)
     categoria = item.get(CATEGORIA_KEY, "")
     favicon = _favicon_src(fuente, avatars)
+
+    # Convertir fecha a formato largo en español
+    fecha = _format_fecha_es(fecha_raw)
 
     badge_html = ""
     if badge == "Tech":
@@ -149,16 +179,10 @@ def render_news_item(item: dict, avatars: dict) -> str:
     if origen == VAL_RSS:
         badge_html += '<span class="badge-rss">RSS</span>'
 
-    cat_emoji = ""
-    if categoria:
-        cat_emoji = EMOJIS_CATEGORIA_MAP.get(categoria.split()[0] if categoria else "", "")
-        if not cat_emoji:
-            cat_emoji = "💡"
-
     return (
         f'<li class="news-item" data-source="{_escape_html(fuente)}" data-category="{_escape_html(categoria)}" data-ts="{ts}">'
         f'<a href="{enlace}" target="_blank" rel="noopener">'
-        f'<img class="favicon" src="{favicon}" alt="{fuente}" width="16" height="16" loading="lazy">'
+        f'<img class="favicon" src="{favicon}" alt="{fuente}" width="20" height="20" loading="lazy">'
         f'<div class="news-text">'
         f'<span class="news-title">{titulo}</span>'
         f'<span class="news-meta">{fuente} · {fecha} {badge_html}<span class="badge-cat">{_escape_html(categoria)}</span></span>'
