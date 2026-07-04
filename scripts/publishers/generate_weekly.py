@@ -161,7 +161,7 @@ def render_news_item(item: dict, avatars: dict) -> str:
         f'<img class="favicon" src="{favicon}" alt="{fuente}" width="16" height="16" loading="lazy">'
         f'<div class="news-text">'
         f'<span class="news-title">{titulo}</span>'
-        f'<span class="news-meta">{fuente} · {fecha} {badge_html}</span>'
+        f'<span class="news-meta">{fuente} · {fecha} {badge_html}<span class="badge-cat">{_escape_html(categoria)}</span></span>'
         f'</div></a></li>'
     )
 
@@ -223,8 +223,7 @@ def render_category_chips(items: list) -> str:
 
     html = '<button class="chip active" data-category="all">Todas</button>'
     for cat, count in sorted(cats.items(), key=lambda x: -x[1])[:10]:
-        emoji = EMOJIS_CATEGORIA_MAP.get(cat.split()[0] if cat else "", "💡")
-        html += f'<button class="chip" data-category="{_escape_html(cat)}">{emoji} {_escape_html(cat)} ({count})</button>'
+        html += f'<button class="chip" data-category="{_escape_html(cat)}">{_escape_html(cat)} ({count})</button>'
     return html
 
 
