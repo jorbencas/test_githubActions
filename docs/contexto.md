@@ -48,6 +48,11 @@
   - Scrapea tools (GitHub Trending + Product Hunt)
   - Ejecuta manage_resources.py contra el blog
   - Crea PR directo al blog (jorbencas/blog)
+- `.github/workflows/tests.yml`: Ejecuta pytest (89 tests) en push/PR a master
+- `.github/workflows/scrape_hourly_workflow.yml`: Scrape ligero cada hora (RSS + fuentes rápidas)
+- `.github/workflows/scrape_6h_workflow.yml`: Scrape estándar cada 6 horas
+- `.github/workflows/hunt_challenges.yml`: Genera retos con IA (domingos)
+- `.github/workflows/optimize_images.yml`: Optimización de imágenes (dispatch desde blog)
   
 ### Fix fix_images.py — 03/07/2026
 - Corregido bug donde `fix_images.py` eliminaba `import ResponsiveImage` de posts del blog
@@ -63,3 +68,9 @@
 - Los recursos NO aparecen en el dashboard — van directo al blog vía PR
 - manage_resources.py usa el blog checkout en `./blog` (misma estructura que scraper_workflow.yml)
 - Límite: 500 tarjetas por archivo resources.mdx (configurable con --max-cards)
+- AGENTS.md: 10 workflows, pipeline de archive, SEO dedup documentado
+- README.md: estructura completa del proyecto, pipelines detallados
+- 89 tests pytest en `tests/` (constantes, scrapers, publishers, tools, soluciones)
+- Scripts organizados: `scripts/scrapers/`, `scripts/publishers/`, `scripts/tools/`, `scripts/utils/`, `scripts/solutions/`
+- Dashboard SSR: Python genera HTML completo, JS solo maneja interactividad (~135 líneas)
+- Prompts de IA optimizados: anti-hype, reglas de estilo, identidad Tech Pulse
