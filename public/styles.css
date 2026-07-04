@@ -202,7 +202,7 @@ details.filter-collapse .chip-container { padding-top: 10px; }
   .news-list { gap: 8px; max-height: 500px; }
   .news-item { padding: 12px 14px; border-left-width: 4px; }
   .news-item a { gap: 10px; }
-  .news-item .favicon { width: 18px; height: 18px; }
+  .news-item .favicon { width: 28px; height: 28px; }
   .news-item .news-title { font-size: 0.9em; }
   .news-item .news-meta { font-size: 0.75em; gap: 6px; }
   .badge-tech, .badge-rss, .badge-cat { padding: 3px 8px; font-size: 0.75em; }
