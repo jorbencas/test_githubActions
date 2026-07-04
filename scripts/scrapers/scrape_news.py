@@ -17,7 +17,7 @@ from logging.handlers import RotatingFileHandler
 
 import aiohttp
 
-from scripts.utils.constants_downloadfile import CONFIG, FUENTES, YT_KEY, TIPO_KEY, QUICK_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY, ID_VIDEO_KEY, PLAYWRIGHT_SOURCES
+from scripts.utils.constants_downloadfile import CONFIG, FUENTES, YT_KEY, TIPO_KEY, QUICK_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY, ID_VIDEO_KEY
 from scripts.scrapers.scraper_base import ScraperPro
 from scripts.utils.common import load_json, save_json, traducir_titulos_ia, deduplicar_items
 
@@ -37,9 +37,6 @@ logger = logging.getLogger("news")
 def _filtrar_fuentes_por_tier(tier: str) -> dict:
     """Filtra FUENTES según el tier de scraping."""
     todas = {k: v for k, v in FUENTES.items() if v.get(TIPO_KEY) != TIPO_VAL_HERRAMIENTA}
-    # Excluir fuentes JS-heavy que requieren Playwright
-    todas = {k: v for k, v in todas.items()
-             if not any(kw.lower() in k.lower() for kw in PLAYWRIGHT_SOURCES)}
     if tier == "full":
         return todas
     if tier == "standard":
