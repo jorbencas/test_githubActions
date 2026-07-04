@@ -303,8 +303,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <h2>\U0001f4f0 Noticias</h2>
         <div class="filter-section">
             <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
-                <strong>\U0001f4c5 Tiempo:</strong>
-                <div id="news-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">{news_week_filters_html}</div>
+                <strong>\U0001f50d Buscar:</strong>
+                {news_search_html}
             </div>
         </div>
         <div class="filter-section">
@@ -320,8 +320,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <h2>\U0001f3ac Multimedia</h2>
         <div class="filter-section" id="multimedia-filter-section">
             <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
-                <strong>\U0001f4c5 Tiempo:</strong>
-                <div id="video-week-filters" class="chip-container" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">{video_week_filters_html}</div>
+                <strong>\U0001f50d Buscar:</strong>
+                {video_search_html}
             </div>
         </div>
         <div class="filter-section">

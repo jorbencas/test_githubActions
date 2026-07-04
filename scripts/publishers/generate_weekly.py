@@ -170,29 +170,8 @@ def render_news_list(items: list, avatars: dict) -> str:
     return "".join(render_news_item(i, avatars) for i in items)
 
 
-def render_week_selector(items: list, prefix: str) -> str:
-    weeks: dict[str, list] = {}
-    for item in items:
-        ts = _item_timestamp(item)
-        if not ts:
-            continue
-        try:
-            dt = datetime.fromisoformat(ts.replace("Z", "+00:00"))
-            iso_year, iso_week, _ = dt.isocalendar()
-            key = f"{iso_year}-W{iso_week:02d}"
-            weeks.setdefault(key, []).append(item)
-        except Exception:
-            continue
-
-    if not weeks:
-        return '<button class="chip active" data-week="all">Últimas 2 semanas</button>'
-
-    sorted_weeks = sorted(weeks.keys(), reverse=True)
-    html = '<button class="chip active" data-week="all">Últimas 2 semanas</button>'
-    for week_key in sorted_weeks[:8]:
-        count = len(weeks[week_key])
-        html += f'<button class="chip" data-week="{week_key}">{week_key} ({count})</button>'
-    return html
+def render_search_input(placeholder: str = "Buscar...") -> str:
+    return f'<input type="text" id="news-search" class="search-input" placeholder="{placeholder}" style="padding: 8px 12px; border: 2px solid #007bff; width: 100%; max-width: 400px; font-size: 14px; background: white; color: #1c1e21;">'
 
 
 def render_channel_chips(items: list, state_key: str, avatars: dict) -> str:
@@ -314,10 +293,10 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
     # === Renderizar todas las secciones ===
     stats_html = render_stats(historial)
     news_list_html = render_news_list(historial, avatars_known)
-    news_week_filters_html = render_week_selector(historial, "news")
+    news_search_html = render_search_input("Buscar noticias...")
     news_channel_filters_html = render_channel_chips(historial, "canalNoticias", avatars_known)
     news_category_filters_html = render_category_chips(historial)
-    video_week_filters_html = render_week_selector(historial, "video")
+    video_search_html = render_search_input("Buscar vídeos...")
     multimedia_tabs_html = render_multimedia_tabs()
     video_channel_filters_html = render_channel_chips(historial, "canalVideos", avatars_known)
     multimedia_content_html = render_multimedia_content(historial, avatars_known)
@@ -333,10 +312,10 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
                 downloader_api_token=CONFIG.get("DOWNLOADER_API_TOKEN"),
                 stats_html=stats_html,
                 news_list_html=news_list_html,
-                news_week_filters_html=news_week_filters_html,
+                news_search_html=news_search_html,
                 news_channel_filters_html=news_channel_filters_html,
                 news_category_filters_html=news_category_filters_html,
-                video_week_filters_html=video_week_filters_html,
+                video_search_html=video_search_html,
                 multimedia_tabs_html=multimedia_tabs_html,
                 video_channel_filters_html=video_channel_filters_html,
                 multimedia_content_html=multimedia_content_html,

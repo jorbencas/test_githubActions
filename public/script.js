@@ -4,34 +4,10 @@
 (function () {
   "use strict";
 
-  // ── Helpers ──
-  function itemEnSemana(ts, sel) {
-    if (!ts) return false;
-    const ahora = Date.now();
-    const limite = ahora - 14 * 86400000;
-    if (sel === "all" || sel === "all_recent") return new Date(ts).getTime() >= limite;
-    // Week key format: "2026-W27"
-    const itemDate = new Date(ts);
-    const [year, week] = sel.split("-W").map(Number);
-    const itemYear = itemDate.getFullYear();
-    const itemWeek = getISOWeek(itemDate);
-    return itemYear === year && itemWeek === week;
-  }
-
-  function getISOWeek(date) {
-    const d = new Date(date);
-    d.setHours(0, 0, 0, 0);
-    d.setDate(d.getDate() + 3 - ((d.getDay() + 6) % 7));
-    const week1 = new Date(d.getFullYear(), 0, 4);
-    return 1 + Math.round(((d - week1) / 86400000 - 3 + ((week1.getDay() + 6) % 7)) / 7);
-  }
-
   // ── State ──
   let state = {
-    semanaNoticias: "all",
     canalNoticias: "all",
     catNoticias: "all",
-    semanaVideos: "all",
     canalVideos: "all",
     tabMultimedia: "youtube",
   };
@@ -45,34 +21,47 @@
       if (!chip) return;
       container.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
       chip.classList.add("active");
-      state[stateKey] = chip.dataset.week || chip.dataset.channel || chip.dataset.category || chip.dataset.tab || "all";
+      state[stateKey] = chip.dataset.channel || chip.dataset.category || chip.dataset.tab || "all";
       filterFn();
+    });
+  }
+
+  // ── Search handlers ──
+  function setupSearch(inputId, itemSelector, filterFn) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    let timer;
+    input.addEventListener("input", () => {
+      clearTimeout(timer);
+      timer = setTimeout(filterFn, 200);
     });
   }
 
   // ── News filters ──
   function filtrarNoticias() {
+    const q = (document.getElementById("news-search")?.value || "").toLowerCase().trim();
     document.querySelectorAll("#news-list .news-item").forEach((item) => {
-      const ts = item.dataset.ts;
       const source = item.dataset.source;
       const category = item.dataset.category;
-      const okWeek = itemEnSemana(ts, state.semanaNoticias);
+      const title = (item.querySelector(".news-title") || {}).textContent || "";
       const okChannel = state.canalNoticias === "all" || source === state.canalNoticias;
       const okCategory = state.catNoticias === "all" || category === state.catNoticias;
-      item.style.display = okWeek && okChannel && okCategory ? "" : "none";
+      const okSearch = !q || title.toLowerCase().includes(q) || source.toLowerCase().includes(q);
+      item.style.display = okChannel && okCategory && okSearch ? "" : "none";
     });
   }
 
   // ── Video filters ──
   function filtrarVideos() {
+    const q = (document.getElementById("video-search")?.value || "").toLowerCase().trim();
     document.querySelectorAll("#multimedia-content .video-card").forEach((item) => {
-      const ts = item.dataset.ts;
       const source = item.dataset.source;
       const type = item.dataset.type || "youtube";
-      const okWeek = itemEnSemana(ts, state.semanaVideos);
+      const title = (item.querySelector(".video-title") || {}).textContent || "";
       const okChannel = state.canalVideos === "all" || source === state.canalVideos;
       const okTab = state.tabMultimedia === "all" || type === state.tabMultimedia;
-      item.style.display = okWeek && okChannel && okTab ? "" : "none";
+      const okSearch = !q || title.toLowerCase().includes(q) || source.toLowerCase().includes(q);
+      item.style.display = okChannel && okTab && okSearch ? "" : "none";
     });
   }
 
@@ -123,69 +112,13 @@
 
   // ── Init ──
   document.addEventListener("DOMContentLoaded", () => {
-    setupChipFilters("news-week-filters", "semanaNoticias", filtrarNoticias);
+    setupSearch("news-search", "#news-list .news-item", filtrarNoticias);
     setupChipFilters("news-channel-filters", "canalNoticias", filtrarNoticias);
     setupChipFilters("news-category-filters", "catNoticias", filtrarNoticias);
-    setupChipFilters("video-week-filters", "semanaVideos", filtrarVideos);
+    setupSearch("video-search", "#multimedia-content .video-card", filtrarVideos);
     setupChipFilters("video-channel-filters", "canalVideos", filtrarVideos);
     setupTabs();
     setupGithubSearch();
     setupScrollTop();
   });
 })();
-
-// ── Video Download (disabled — was used for Hugging Face API integration) ──
-// async function descargarVideo(urlVideo, boton) {
-//   const originalText = boton.innerHTML;
-//   boton.innerHTML = "⏳...";
-//
-//   const tokenElement = document.getElementById("api-base-token");
-//   const TOKEN_BASE = tokenElement ? tokenElement.content : "";
-//   if (!TOKEN_BASE) {
-//     console.error("Error de configuración: No se encontró el token base.");
-//     return;
-//   }
-//
-//   const fechaHoy = new Date().toISOString().split("T")[0];
-//   const semilla = `${TOKEN_BASE}-${fechaHoy}`;
-//   const tokenHashed = await generarSHA256(semilla);
-//
-//   const apiUrl = `https://testactions1github-api-python.hf.space/download?url=${encodeURIComponent(urlVideo)}`;
-//
-//   try {
-//     const response = await fetch(apiUrl, {
-//       method: "GET",
-//       headers: {
-//         "X-API-Key": tokenHashed,
-//         "Content-Type": "application/json",
-//       },
-//     });
-//
-//     if (!response.ok) {
-//       const errorData = await response.json();
-//       throw new Error(errorData.detail || "Error en el servidor");
-//     }
-//
-//     const data = await response.json();
-//     const a = document.createElement("a");
-//     a.href = data.url;
-//     a.target = "_blank";
-//     a.download = `${data.title}.mp4`;
-//     document.body.appendChild(a);
-//     a.click();
-//     a.remove();
-//   } catch (error) {
-//     console.error("Error:", error.message);
-//     boton.innerHTML = "❌";
-//   } finally {
-//     setTimeout(() => (boton.innerHTML = originalText), 3000);
-//   }
-// }
-//
-// async function generarSHA256(mensaje) {
-//   const encoder = new TextEncoder();
-//   const data = encoder.encode(mensaje);
-//   const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-//   const hashArray = Array.from(new Uint8Array(hashBuffer));
-//   return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
-// }
