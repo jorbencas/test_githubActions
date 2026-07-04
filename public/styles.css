@@ -1,7 +1,7 @@
 html { scrollbar-gutter: stable; }
-body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; margin: 0; padding: 24px; background: linear-gradient(135deg, #f0f4f8 0%, #e8edf3 100%); color: #1c1e21; transition: background 0.3s, color 0.3s; min-height: 100vh; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; margin: 0; padding: 24px; background: #e5e7eb; color: #1c1e21; transition: background 0.3s, color 0.3s; min-height: 100vh; }
 .container { max-width: 1200px; margin: 0 auto; }
-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #007bff; padding-bottom: 12px; margin-bottom: 32px; position: relative; }
+header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #007bff; padding-bottom: 12px; margin-bottom: 32px; position: relative; background: white; border-radius: 0 0 0 0; }
 header::after { content: ""; position: absolute; bottom: -3px; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, #ef4444, #eab308, #3b82f6, #1d4ed8); opacity: 0.4; }
 
 /* ── Dark theme toggle ── */
@@ -9,45 +9,45 @@ header::after { content: ""; position: absolute; bottom: -3px; left: 0; width: 1
 .theme-toggle:hover { background: #f1f5f9; border-color: #cbd5e1; transform: scale(1.05); }
 
 /* ── Dark theme ── */
-body.dark { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #e2e8f0; }
-body.dark header { border-bottom-color: #3b82f6; }
-body.dark header::after { opacity: 0.6; }
-body.dark .theme-toggle { background: #1e293b; border-color: #475569; }
-body.dark .theme-toggle:hover { background: #334155; }
-body.dark .filter-section { background: #1e293b; border: 1px solid #334155; }
-body.dark .filter-section strong { color: #cbd5e1; }
-body.dark .search-input { background: #334155; color: #e2e8f0; border-color: #3b82f6 !important; }
-body.dark .news-item { background: #1e293b; border-left-color: #3b82f6; }
-body.dark .news-item:hover { background: #253349; }
-body.dark .news-item a { color: #60a5fa; }
-body.dark .news-item .news-meta { color: #94a3b8; }
-body.dark .video-card { background: #1e293b; border-color: #dc2626; }
-body.dark .video-info { background: #1e293b; }
+body.dark { background: #18181b; color: #e4e4e7; }
+body.dark header { border-bottom-color: #52525b; background: #27272a; }
+body.dark header::after { opacity: 0.5; }
+body.dark .theme-toggle { background: #27272a; border-color: #3f3f46; }
+body.dark .theme-toggle:hover { background: #3f3f46; }
+body.dark .filter-section { background: #27272a; border: 1px solid #3f3f46; }
+body.dark .filter-section strong { color: #d4d4d8; }
+body.dark .search-input { background: #3f3f46; color: #e4e4e7; border-color: #52525b !important; }
+body.dark .news-item { background: #27272a; border-left-color: #52525b; }
+body.dark .news-item:hover { background: #2e2e33; }
+body.dark .news-item a { color: #a1a1aa; }
+body.dark .news-item .news-meta { color: #71717a; }
+body.dark .video-card { background: #27272a; border-color: #dc2626; }
+body.dark .video-info { background: #27272a; }
 body.dark .video-title { color: #f87171; }
-body.dark .github-item { background: #1e293b; border-left-color: #f97316; }
-body.dark .github-item .github-desc { color: #94a3b8; }
-body.dark .stat-card { background: #1e293b; border: 1px solid #334155; }
-body.dark .stat-card span { color: #94a3b8; }
-body.dark .ia-box { background: #1e293b; color: #cbd5e1; border-left-color: #a855f7; }
-body.dark .ia-box b { color: #e2e8f0; background: #334155; }
-body.dark .chip { background: #334155; color: #e2e8f0; border-color: #475569; }
-body.dark .chip:hover { background: #475569; border-color: #64748b; }
-body.dark .chip.active { background: linear-gradient(135deg, #3b82f6, #2563eb) !important; color: white !important; border-color: #2563eb !important; }
-body.dark a { color: #60a5fa; }
-body.dark .meta { color: #94a3b8; border-bottom-color: #334155; }
-body.dark .badge-tech { background: linear-gradient(135deg, #1e3a5f, #1e40af); color: #93c5fd; border-color: #3b82f6; }
-body.dark .badge-rss { background: linear-gradient(135deg, #0c4a6e, #0369a1); color: #7dd3fc; border-color: #0ea5e9; }
-body.dark .badge-cat { background: linear-gradient(135deg, #4c1d95, #7c3aed); color: #c4b5fd; border-color: #8b5cf6; }
-body.dark .news-list::-webkit-scrollbar-track { background: #0f172a; }
-body.dark .video-grid::-webkit-scrollbar-track { background: #0f172a; }
-body.dark .chip-icon { filter: brightness(0.8); }
-body.dark .github-item .badge-lang { background: #7c2d12; color: #fdba74; }
-body.dark .scroll-top { background: #3b82f6; }
-body.dark .scroll-top:hover { background: #2563eb; }
+body.dark .github-item { background: #27272a; border-left-color: #f97316; }
+body.dark .github-item .github-desc { color: #71717a; }
+body.dark .stat-card { background: #27272a; border: 1px solid #3f3f46; }
+body.dark .stat-card span { color: #71717a; }
+body.dark .ia-box { background: #27272a; color: #d4d4d8; border-left-color: #a855f7; }
+body.dark .ia-box b { color: #e4e4e7; background: #3f3f46; }
+body.dark .chip { background: #3f3f46; color: #e4e4e7; border-color: #52525b; }
+body.dark .chip:hover { background: #52525b; border-color: #71717a; }
+body.dark .chip.active { background: linear-gradient(135deg, #52525b, #3f3f46) !important; color: white !important; border-color: #52525b !important; }
+body.dark a { color: #a1a1aa; }
+body.dark .meta { color: #71717a; border-bottom-color: #3f3f46; }
+body.dark .badge-tech { background: #27272a; color: #a1a1aa; border-color: #3f3f46; }
+body.dark .badge-rss { background: #27272a; color: #a1a1aa; border-color: #3f3f46; }
+body.dark .badge-cat { background: #27272a; color: #a1a1aa; border-color: #3f3f46; }
+body.dark .news-list::-webkit-scrollbar-track { background: #18181b; }
+body.dark .video-grid::-webkit-scrollbar-track { background: #18181b; }
+body.dark .chip-icon { filter: brightness(0.7); }
+body.dark .github-item .badge-lang { background: #422006; color: #fbbf24; }
+body.dark .scroll-top { background: #52525b; }
+body.dark .scroll-top:hover { background: #71717a; }
 body.dark .header-gradient { filter: brightness(1.1); }
-body.dark details summary { color: #cbd5e1; background: #1e293b; border-color: #334155; }
-body.dark details[open] summary { color: #60a5fa; }
-body.dark details.filter-collapse summary:hover { background: #253349; }
+body.dark details summary { color: #d4d4d8; background: #27272a; border-color: #3f3f46; }
+body.dark details[open] summary { color: #a1a1aa; }
+body.dark details.filter-collapse summary:hover { background: #2e2e33; }
 
 /* ── Video grid ── */
 .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; align-items: start; max-height: 600px; overflow-y: auto; scroll-behavior: smooth; padding-right: 4px; }
