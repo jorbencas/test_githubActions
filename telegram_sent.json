@@ -688,5 +688,20 @@
   },
   "https://www.youtube.com/watch?v=lz9bqm3nzim": {
     "ts": 1783179613.123445
+  },
+  "https://stackoverflow.blog/2026/07/03/the-good-the-bad-and-the-ai-apps/": {
+    "ts": 1783184126.231039
+  },
+  "https://stackoverflow.blog/2026/06/30/why-intent-prediction-needs-more-than-an-llm/": {
+    "ts": 1783184128.098355
+  },
+  "https://stackoverflow.blog/2026/06/26/paging-charity-how-can-engineering-leaders-avoid-becoming-bond-villains/": {
+    "ts": 1783184130.142728
+  },
+  "https://stackoverflow.blog/2026/06/25/code-isnt-causing-your-production-failures/": {
+    "ts": 1783184132.042026
+  },
+  "https://stackoverflow.blog/2026/06/23/your-ai-shipped-a-backend-that-boots-that-is-the-whole-problem/": {
+    "ts": 1783184133.919715
   }
 }
