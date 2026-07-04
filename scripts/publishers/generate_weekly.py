@@ -126,9 +126,9 @@ def render_stats(items: list) -> str:
     tech_count = sum(1 for i in items if i.get("badge") == "Tech")
     multimedia_count = sum(1 for i in items if i.get(ID_VIDEO_KEY))
     return (
-        f'<span class="stat"><strong>{total}</strong> Total</span>'
-        f'<span class="stat"><strong>{tech_count}</strong> Tech</span>'
-        f'<span class="stat"><strong>{multimedia_count}</strong> Multimedia</span>'
+        f'<div class="stat-card"><b>{total}</b><span>Total</span></div>'
+        f'<div class="stat-card"><b>{tech_count}</b><span>Tech</span></div>'
+        f'<div class="stat-card"><b>{multimedia_count}</b><span>Multimedia</span></div>'
     )
 
 
@@ -170,7 +170,7 @@ def render_news_list(items: list, avatars: dict) -> str:
     return "".join(render_news_item(i, avatars) for i in items)
 
 
-def render_week_selector(items: list, prefix: str) -> str:
+def render_week_selector(items: list, prefix: str, select_id: str = "selectorSemanas") -> str:
     weeks: dict[str, list] = {}
     for item in items:
         ts = _item_timestamp(item)
@@ -185,13 +185,15 @@ def render_week_selector(items: list, prefix: str) -> str:
             continue
 
     if not weeks:
-        return '<button class="chip active" data-week="all">Últimas 2 semanas</button>'
+        return f'<select id="{select_id}" class="chip"><option value="all">Últimas 2 semanas</option></select>'
 
     sorted_weeks = sorted(weeks.keys(), reverse=True)
-    html = '<button class="chip active" data-week="all">Últimas 2 semanas</button>'
+    html = f'<select id="{select_id}" class="chip">'
+    html += '<option value="all">Últimas 2 semanas</option>'
     for week_key in sorted_weeks[:8]:
         count = len(weeks[week_key])
-        html += f'<button class="chip" data-week="{week_key}">{week_key} ({count})</button>'
+        html += f'<option value="{week_key}">{week_key} ({count})</option>'
+    html += '</select>'
     return html
 
 
@@ -315,10 +317,10 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
     # === Renderizar todas las secciones ===
     stats_html = render_stats(historial)
     news_list_html = render_news_list(historial, avatars_known)
-    news_week_filters_html = render_week_selector(historial, "news")
+    news_week_filters_html = render_week_selector(historial, "news", "selectorSemanas")
     news_channel_filters_html = render_channel_chips(historial, "canalNoticias", avatars_known)
     news_category_filters_html = render_category_chips(historial)
-    video_week_filters_html = render_week_selector(historial, "video")
+    video_week_filters_html = render_week_selector(historial, "video", "selectorSemanasVideos")
     multimedia_tabs_html = render_multimedia_tabs()
     video_channel_filters_html = render_channel_chips(historial, "canalVideos", avatars_known)
     multimedia_content_html = render_multimedia_content(historial, avatars_known)

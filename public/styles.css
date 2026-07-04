@@ -5,7 +5,7 @@ header { display: flex; justify-content: space-between; align-items: center; bor
 .ia-box { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-left: 6px solid #8e44ad; margin-bottom: 30px; }
 
 .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; align-items: start; }
-.video-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.video-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 2px solid #ff0000; }
 .video-card a { display: block; }
 .video-thumb { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
 .video-info { padding: 12px; }
@@ -77,8 +77,9 @@ h2 { scroll-margin-top: 20px; }
 .ia-box h2 { margin-top: 0; color: #8e44ad; display: flex; align-items: center; gap: 10px; }
 .ia-box b { color: #2c3e50; background: #f4ecf7; padding: 0 4px; border-radius: 3px; }
 
-#selectorSemanas { transition: all 0.3s ease; }
+#selectorSemanas { transition: all 0.3s ease; padding: 5px 12px; border-radius: 50px; border: 1px solid #ccc; font-family: Arial, sans-serif; font-size: 14px; color: #333; background: #f1f1f1; cursor: pointer; }
 #selectorSemanas:hover { background: #f0f7ff; border-color: #0056b3; }
+#selectorSemanas:focus { outline: none; border-color: #007bff; box-shadow: 0 0 0 2px rgba(0,123,255,0.25); }
 optgroup { font-weight: bold; color: #333; background: #f8f9fa; }
 option { font-weight: normal; color: #555; background: white; }
 
