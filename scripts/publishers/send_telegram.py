@@ -22,7 +22,7 @@ import requests
 from google import genai
 
 from scripts.utils.cache import CacheManager, FileCache
-from scripts.utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_DASHBOARD_URL, TELEGRAM_MENSAJE_TEMPLATE, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY, TIPO_KEY, TIPO_VAL_TREND, TIPO_VAL_SOCIAL
+from scripts.utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_DASHBOARD_URL, TELEGRAM_MENSAJE_TEMPLATE, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY, TIPO_KEY
 from scripts.utils.common import load_json, resumir_noticia
 
 os.makedirs("logs", exist_ok=True)
@@ -118,7 +118,6 @@ async def run():
         return
 
     client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
-    historial = [n for n in historial if n.get(TIPO_KEY) not in (TIPO_VAL_TREND, TIPO_VAL_SOCIAL)]
     nuevos = [n for n in historial if CACHE.is_new(n.get(ENLACE_KEY, ""))][:args.max_items]
     if not nuevos:
         logger.info("📭 No hay noticias nuevas desde el último envío.")
