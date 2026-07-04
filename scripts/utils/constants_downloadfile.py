@@ -371,6 +371,7 @@ EMAIL_TEMPLATE = """
             .stat-table {{ padding: 12px !important; }}
             .header-cell {{ padding: 28px 24px 16px 24px !important; }}
             .hide-mobile {{ display: none !important; }}
+            .social-cell {{ display: block !important; width: 100% !important; text-align: center !important; padding-top: 8px !important; }}
         }}
         @media (prefers-color-scheme: dark) {{
             .dark-bg {{ background-color: #1e293b !important; }}
@@ -380,69 +381,78 @@ EMAIL_TEMPLATE = """
             .dark-border {{ border-color: #334155 !important; }}
             .dark-stats {{ background-color: #0f172a !important; border-color: #334155 !important; }}
             .dark-ia-box {{ background-color: #1e293b !important; border-color: #334155 !important; }}
+            .dark-footer {{ background-color: #0f172a !important; border-color: #334155 !important; }}
             a {{ color: #818cf8 !important; }}
         }}
     </style>
 </head>
-<body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased;">
+<body style="margin: 0; padding: 0; background: linear-gradient(180deg, #f0f4f8 0%, #e8edf3 100%); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased;">
     
     <div style="display: none; max-height: 0px; overflow: hidden;">
         {total_noticias} noticias tech · {count_tech} tech · resumen generado por IA · {temas_clave}
     </div>
 
-    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="container dark-card" style="max-width: 600px; background-color: #ffffff; margin: 30px auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05); overflow: hidden; border: 1px solid #e2e8f0;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="container dark-card" style="max-width: 600px; background-color: #ffffff; margin: 30px auto; border-radius: 12px; box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08); overflow: hidden; border: 1px solid #e2e8f0;">
         
+        <!-- Header -->
         <tr>
-            <td class="header-cell" style="padding: 40px 40px 20px 40px; text-align: left; background-color: #ffffff; border-bottom: 2px solid #f1f5f9;">
-                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <td class="header-cell" style="padding: 0; text-align: left;">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 36px 40px 28px 40px;">
                     <tr>
-                        <td style="vertical-align: middle;">
-                            <p style="margin: 0; font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1.5px;">EDICIÓN DIARIA</p>
-                            <h1 style="color: #0f172a; margin: 4px 0 0 0; font-size: 32px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.1;">Tech Pulse</h1>
-                            <div style="height: 4px; width: 40px; background-color: #6366f1; margin: 16px 0 0 0; border-radius: 2px;"></div>
-                            <p style="color: #475569; margin: 12px 0 0 0; font-size: 14px; font-weight: 500;">{fecha_hoy}</p>
+                        <td style="vertical-align: middle; padding: 36px 40px 28px 40px;">
+                            <p style="margin: 0; font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px;">EDICIÓN DIARIA</p>
+                            <h1 style="color: #f8fafc; margin: 6px 0 0 0; font-size: 34px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.1;">Tech Pulse</h1>
+                            <div style="height: 3px; width: 48px; background: linear-gradient(90deg, #3b82f6, #8b5cf6); margin: 16px 0 0 0; border-radius: 2px;"></div>
+                            <p style="color: #94a3b8; margin: 14px 0 0 0; font-size: 14px; font-weight: 500;">{fecha_hoy}</p>
                         </td>
-                        <td width="80" class="hide-mobile" style="vertical-align: middle; text-align: right;">
-                            <span style="display: inline-block; background: #eef2ff; color: #4f46e5; font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 20px; letter-spacing: 0.5px; text-transform: uppercase;">IA</span>
+                        <td width="80" class="hide-mobile" style="vertical-align: middle; text-align: right; padding: 36px 40px 28px 0;">
+                            <span style="display: inline-block; background: rgba(59,130,246,0.15); color: #60a5fa; font-size: 10px; font-weight: 700; padding: 5px 12px; border-radius: 20px; letter-spacing: 0.5px; text-transform: uppercase; border: 1px solid rgba(59,130,246,0.2);">IA</span>
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
         
+        <!-- Stats -->
         <tr>
             <td class="content" style="padding: 24px 40px 0 40px;">
-                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="stat-table dark-stats" style="background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; padding: 16px; text-align: center;">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="stat-table dark-stats" style="background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0; padding: 16px; text-align: center;">
                     <tr>
-                        <td width="50%" class="stat-cell" style="vertical-align: top;">
-                            <b style="font-size: 22px; color: #4f46e5; font-weight: 800;">{count_tech}</b><br>
-                            <span style="font-size: 12px; font-weight: 600; color: #64748b; display: inline-block; margin-top: 4px;">Noticias Tech</span>
+                        <td width="33%" class="stat-cell" style="vertical-align: top; padding: 14px 8px;">
+                            <b style="font-size: 24px; color: #3b82f6; font-weight: 800;">{count_tech}</b><br>
+                            <span style="font-size: 11px; font-weight: 600; color: #64748b; display: inline-block; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.3px;">Tech</span>
                         </td>
-                        <td width="50%" class="stat-cell" style="vertical-align: top; border-left: 1px solid #e2e8f0;">
-                            <b style="font-size: 22px; color: #dc2626; font-weight: 800;">{total_noticias}</b><br>
-                            <span style="font-size: 12px; font-weight: 600; color: #64748b; display: inline-block; margin-top: 4px;">Total Hoy</span>
+                        <td width="33%" class="stat-cell" style="vertical-align: top; border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; padding: 14px 8px;">
+                            <b style="font-size: 24px; color: #ef4444; font-weight: 800;">{total_noticias}</b><br>
+                            <span style="font-size: 11px; font-weight: 600; color: #64748b; display: inline-block; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.3px;">Total</span>
+                        </td>
+                        <td width="33%" class="stat-cell" style="vertical-align: top; padding: 14px 8px;">
+                            <b style="font-size: 24px; color: #8b5cf6; font-weight: 800;">IA</b><br>
+                            <span style="font-size: 11px; font-weight: 600; color: #64748b; display: inline-block; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.3px;">Gemini</span>
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
 
+        <!-- AI Summary -->
         <tr>
-            <td class="content" style="padding: 30px 40px 10px 40px;">
-                <h2 style="color: #0f172a; font-size: 18px; font-weight: 700; margin: 0 0 14px 0; display: flex; align-items: center;">
-                    <span style="margin-right: 8px;">🤖</span> Resumen Inteligente del día
-                    <span class="hide-mobile" style="margin-left: auto; font-size: 10px; font-weight: 600; color: #64748b; background: #f1f5f9; padding: 2px 8px; border-radius: 4px;">generado con Gemini</span>
+            <td class="content" style="padding: 28px 40px 10px 40px;">
+                <h2 style="color: #0f172a; font-size: 16px; font-weight: 700; margin: 0 0 14px 0;">
+                    <span style="margin-right: 6px;">🤖</span> Resumen del día
+                    <span class="hide-mobile" style="margin-left: auto; font-size: 9px; font-weight: 600; color: #94a3b8; background: #f1f5f9; padding: 3px 8px; border-radius: 4px; vertical-align: middle;">Gemini</span>
                 </h2>
-                <div style="line-height: 1.6; color: #334155; font-size: 15px; background: #fafafa; padding: 24px; border-radius: 10px; border: 1px solid #e2e8f0; border-left: 4px solid #6366f1; box-shadow: inset 0 1px 2px rgba(0,0,0,0.01);">
+                <div style="line-height: 1.7; color: #334155; font-size: 14px; background: #fafbfc; padding: 20px 24px; border-radius: 10px; border: 1px solid #e2e8f0; border-left: 4px solid #3b82f6;">
                     {contenido_html}
                 </div>
             </td>
         </tr>
 
+        <!-- News list -->
         <tr>
-            <td class="content" style="padding: 20px 40px 40px 40px;">
-                <h2 style="color: #0f172a; font-size: 18px; font-weight: 700; margin: 0 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #f1f5f9;">
-                    <span style="margin-right: 8px;">📋</span> Lecturas y contenido seleccionado
+            <td class="content" style="padding: 20px 40px 32px 40px;">
+                <h2 style="color: #0f172a; font-size: 16px; font-weight: 700; margin: 0 0 14px 0; padding-bottom: 10px; border-bottom: 2px solid #f1f5f9;">
+                    <span style="margin-right: 6px;">📋</span> Lecturas seleccionadas
                 </h2>
                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
                     {lista_email}
@@ -450,24 +460,68 @@ EMAIL_TEMPLATE = """
             </td>
         </tr>
 
+        <!-- Footer -->
         <tr>
-            <td class="content" style="padding: 30px 40px; text-align: center; background: #f8fafc; border-top: 1px solid #e2e8f0;">
-                <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.5;">
-                    Esta newsletter ha sido compilada de forma automatizada.<br>
-                    Preparado en exclusiva para <strong>Jorge Beneyto Castelló</strong>.
-                </p>
-                <table border="0" cellpadding="0" cellspacing="0" align="center" style="margin-top: 20px;">
+            <td class="content dark-footer" style="padding: 0; background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%); border-top: 1px solid #e2e8f0;">
+                
+                <!-- CTA Button -->
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td align="center" bgcolor="#4f46e5" style="border-radius: 6px;">
-                            <a href="http://jorbencasdownloaderdocument.surge.sh" target="_blank" style="font-size: 13px; font-weight: 600; color: #ffffff; text-decoration: none; display: inline-block; padding: 10px 18px;">
-                                Abrir Dashboard Histórico →
-                            </a>
+                        <td style="padding: 28px 40px 20px 40px; text-align: center;">
+                            <table border="0" cellpadding="0" cellspacing="0" align="center">
+                                <tr>
+                                    <td align="center" bgcolor="#3b82f6" style="border-radius: 8px; background: linear-gradient(135deg, #3b82f6, #2563eb);">
+                                        <a href="http://jorbencasdownloaderdocument.surge.sh" target="_blank" style="font-size: 13px; font-weight: 700; color: #ffffff; text-decoration: none; display: inline-block; padding: 12px 24px; letter-spacing: 0.3px;">
+                                            Abrir Dashboard →
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                 </table>
-                <p style="font-size: 11px; color: #94a3b8; margin: 24px 0 0 0;">
-                    &copy; {year} Tech Pulse Briefing. Todos los derechos reservados.
-                </p>
+
+                <!-- Social links -->
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="padding: 0 40px 20px 40px; text-align: center;">
+                            <p style="margin: 0 0 12px 0; font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">Sígueme</p>
+                            <table border="0" cellpadding="0" cellspacing="0" align="center">
+                                <tr>
+                                    <td style="padding: 0 6px;">
+                                        <a href="https://github.com/jorbencas" target="_blank" style="display: inline-block; width: 36px; height: 36px; background: #0f172a; border-radius: 8px; text-align: center; line-height: 36px; text-decoration: none; font-size: 16px; color: #f8fafc; transition: all 0.2s;">GH</a>
+                                    </td>
+                                    <td style="padding: 0 6px;">
+                                        <a href="https://twitter.com/jorgevenkas" target="_blank" style="display: inline-block; width: 36px; height: 36px; background: #1d9bf0; border-radius: 8px; text-align: center; line-height: 36px; text-decoration: none; font-size: 14px; font-weight: 700; color: #ffffff;">X</a>
+                                    </td>
+                                    <td style="padding: 0 6px;">
+                                        <a href="https://gitlab.com/jorbencas" target="_blank" style="display: inline-block; width: 36px; height: 36px; background: #e24329; border-radius: 8px; text-align: center; line-height: 36px; text-decoration: none; font-size: 14px; font-weight: 700; color: #ffffff;">GL</a>
+                                    </td>
+                                    <td style="padding: 0 6px;">
+                                        <a href="mailto:jorgebeneytocastello@gmail.com" target="_blank" style="display: inline-block; width: 36px; height: 36px; background: #ea4335; border-radius: 8px; text-align: center; line-height: 36px; text-decoration: none; font-size: 16px; color: #ffffff;">@</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Credits -->
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="padding: 16px 40px; text-align: center; border-top: 1px solid #e2e8f0;">
+                            <p style="font-size: 12px; color: #94a3b8; margin: 0; line-height: 1.5;">
+                                Compilada automáticamente con <strong style="color: #64748b;">Gemini IA</strong> · Preparada para <strong style="color: #64748b;">Jorge Beneyto Castelló</strong>
+                            </p>
+                            <p style="font-size: 11px; color: #cbd5e1; margin: 10px 0 0 0;">
+                                &copy; {year} Tech Pulse Briefing · 
+                                <a href="https://blog-jorbencas.vercel.app/" target="_blank" style="color: #94a3b8; text-decoration: none;">Blog</a> · 
+                                <a href="https://github.com/jorbencas/test_githubActions" target="_blank" style="color: #94a3b8; text-decoration: none;">Código</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+
             </td>
         </tr>
     </table>
@@ -671,13 +725,21 @@ TELEGRAM_MENSAJE_TEMPLATE = "{icono} *{titulo}*\n📰 `{fuente}` | `{fecha}`\n\n
 
 # ── Email ──
 EMAIL_ROW_TEMPLATE = """<tr>
-    <td style="padding: 16px 0; border-bottom: 1px solid #f1f5f9;">
-        <span style="font-size: 18px; margin-right: 8px; vertical-align: middle;">{icon}</span>
-        <span style="color: #64748b; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; vertical-align: middle;">{fuente}</span><br>
-        <div style="margin-top: 4px;">
-            <a href="{enlace}" target="_blank" style="color: #4f46e5; text-decoration: none; font-weight: 600; font-size: 15px; line-height: 1.4;">{titulo}</a>
-        </div>
-        {resumen_html}
+    <td style="padding: 14px 0; border-bottom: 1px solid #f1f5f9;">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="28" style="vertical-align: top; padding-top: 2px;">
+                    <span style="font-size: 16px;">{icon}</span>
+                </td>
+                <td style="vertical-align: top; padding-left: 10px;">
+                    <span style="color: #94a3b8; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">{fuente}</span>
+                    <div style="margin-top: 3px;">
+                        <a href="{enlace}" target="_blank" style="color: #1e293b; text-decoration: none; font-weight: 600; font-size: 14px; line-height: 1.4;">{titulo}</a>
+                    </div>
+                    {resumen_html}
+                </td>
+            </tr>
+        </table>
     </td>
 </tr>"""
 
