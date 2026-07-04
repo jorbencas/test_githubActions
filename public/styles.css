@@ -240,8 +240,6 @@ details.filter-collapse .chip-container { padding-top: 10px; }
   .github-item .github-desc { font-size: 0.75em; }
   .github-item .github-stars { font-size: 0.8em; }
 
-  #github-filter { width: 100%; font-size: 13px; padding: 8px 10px; }
-
   .scroll-top { bottom: 14px; right: 14px; width: 36px; height: 36px; font-size: 15px; }
   h2 { font-size: 1rem; word-break: break-word; margin-bottom: 8px; }
   details.filter-collapse summary { font-size: 0.8em; padding: 8px 10px; }
