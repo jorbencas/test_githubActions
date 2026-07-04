@@ -195,7 +195,7 @@ def render_news_list(items: list, avatars: dict) -> str:
 
 
 def render_search_input(placeholder: str = "Buscar...") -> str:
-    return f'<input type="text" id="news-search" class="search-input" placeholder="{placeholder}" style="padding: 8px 12px; border: 2px solid #007bff; width: 100%; max-width: 400px; font-size: 14px; background: white; color: #1c1e21;">'
+    return f'<input type="text" id="news-search" class="search-input" placeholder="{placeholder}">'
 
 
 def render_channel_chips(items: list, state_key: str, avatars: dict) -> str:
@@ -322,7 +322,8 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
     news_category_filters_html = render_category_chips(historial)
     video_search_html = render_search_input("Buscar vídeos...")
     multimedia_tabs_html = render_multimedia_tabs()
-    video_channel_filters_html = render_channel_chips(historial, "canalVideos", avatars_known)
+    video_items = [n for n in historial if n.get(ID_VIDEO_KEY)]
+    video_channel_filters_html = render_channel_chips(video_items, "canalVideos", avatars_known)
     multimedia_content_html = render_multimedia_content(historial, avatars_known)
     github_ranking_html = render_github_ranking(top_github)
 
