@@ -151,7 +151,7 @@ def render_news_item(item: dict, avatars: dict) -> str:
 
     cat_emoji = ""
     if categoria:
-        cat_emoji = EMOJIS_CATEGORIA.get(categoria.split()[0] if categoria else "", "")
+        cat_emoji = EMOJIS_CATEGORIA_MAP.get(categoria.split()[0] if categoria else "", "")
         if not cat_emoji:
             cat_emoji = "💡"
 
@@ -514,6 +514,7 @@ async def generar_recap(noticias_web, client, blog_path: str | None = None) -> s
 async def run():
     parser = argparse.ArgumentParser(description="Generate weekly recap + dashboard + PR")
     parser.add_argument("--no-pr", action="store_true", help="Skip PR creation")
+    parser.add_argument("--dashboard-only", action="store_true", help="Only regenerate dashboard HTML (skip AI recap and blog PR)")
     parser.add_argument("--blog-path", default=None, help="Path to blog checkout")
     args = parser.parse_args()
 
@@ -529,16 +530,20 @@ async def run():
 
     ahora = datetime.now()
     fecha_h = ahora.strftime("%d/%m/%Y")
-    client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
 
-    noticias_web = [n for n in historial if n.get(TIPO_KEY) in (TIPO_VAL_NOTICIA, "news")]
-    resumen_ia = await generar_recap(historial, client, blog_path=args.blog_path)
-    if not resumen_ia or "no ha sido posible" in resumen_ia or len(resumen_ia) < 50:
-        logger.warning("⚠️ Generando resumen de emergencia con titulares.")
-        titulares = [f"• {n['titulo']}" for n in noticias_web[:10]]
-        resumen_ia = "Resumen de hoy:\n\n" + "\n".join(titulares)
+    if args.dashboard_only:
+        logger.info("ℹ️ Modo --dashboard-only: saltando recap IA y PR.")
+        resumen_ia = "Resumen generado localmente sin IA."
+    else:
+        client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
+        noticias_web = [n for n in historial if n.get(TIPO_KEY) in (TIPO_VAL_NOTICIA, "news")]
+        resumen_ia = await generar_recap(historial, client, blog_path=args.blog_path)
+        if not resumen_ia or "no ha sido posible" in resumen_ia or len(resumen_ia) < 50:
+            logger.warning("⚠️ Generando resumen de emergencia con titulares.")
+            titulares = [f"• {n['titulo']}" for n in noticias_web[:10]]
+            resumen_ia = "Resumen de hoy:\n\n" + "\n".join(titulares)
 
-    # Precargar avatares de todos los canales YouTube (como se hacía en downloadFile.py)
+    # Precargar avatares de todos los canales YouTube
     for nombre, info in FUENTES.items():
         if YT_KEY in info:
             nombre_c = nombre.replace(" Shorts", "")
@@ -550,8 +555,8 @@ async def run():
     scr.guardar_avatars()
 
     logger.info("✅ generate_weekly.py completado.")
-    if args.no_pr:
-        logger.info("ℹ️ PR saltado (--no-pr).")
+    if args.no_pr or args.dashboard_only:
+        logger.info("ℹ️ PR saltado.")
 
 
 if __name__ == "__main__":
