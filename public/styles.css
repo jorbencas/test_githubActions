@@ -4,7 +4,11 @@ body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; background
 header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #007bff; padding-bottom: 10px; margin-bottom: 30px; }
 .ia-box { background: white; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-left: 6px solid #8e44ad; margin-bottom: 30px; }
 
-.video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; align-items: start; }
+.video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; align-items: start; max-height: 600px; overflow-y: auto; scroll-behavior: smooth; padding-right: 4px; }
+.video-grid::-webkit-scrollbar { width: 6px; }
+.video-grid::-webkit-scrollbar-track { background: #f1f1f1; }
+.video-grid::-webkit-scrollbar-thumb { background: #ff0000; }
+.video-grid::-webkit-scrollbar-thumb:hover { background: #cc0000; }
 .video-card { background: white; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border: 2px solid #ff0000; }
 .video-card a { display: block; }
 .video-thumb { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
@@ -144,6 +148,8 @@ h2 { scroll-margin-top: 20px; }
   .chip-img { width: 20px; height: 20px; margin-right: 4px; }
   .chip-container { gap: 6px; }
 
+  .search-input { width: 100% !important; max-width: 100% !important; font-size: 13px !important; padding: 8px 10px !important; }
+
   .news-list { gap: 8px; max-height: 500px; }
   .news-item { padding: 12px 14px; border-left-width: 4px; }
   .news-item a { gap: 10px; }
@@ -152,7 +158,7 @@ h2 { scroll-margin-top: 20px; }
   .news-item .news-meta { font-size: 0.75em; gap: 6px; }
   .badge-tech, .badge-rss, .badge-cat { padding: 3px 8px; font-size: 0.75em; }
 
-  .video-grid { grid-template-columns: 1fr; gap: 10px; }
+  .video-grid { grid-template-columns: 1fr; gap: 10px; max-height: 500px; }
   .video-info { padding: 8px; }
   .video-title { font-size: 0.85em; }
   .video-meta { font-size: 0.7em; }
@@ -163,10 +169,7 @@ h2 { scroll-margin-top: 20px; }
   .github-item .github-desc { font-size: 0.75em; }
   .github-item .github-stars { font-size: 0.8em; }
 
-  #github-filter { font-size: 13px; padding: 6px 10px; }
-
-  .ia-box { padding: 12px; font-size: 0.85em; border-left-width: 4px; }
-  .ia-box h2 { font-size: 0.95em; }
+  #github-filter { width: 100%; font-size: 13px; padding: 8px 10px; }
 
   .scroll-top { bottom: 14px; right: 14px; width: 36px; height: 36px; font-size: 15px; }
   h2 { font-size: 1rem; word-break: break-word; margin-bottom: 8px; }
