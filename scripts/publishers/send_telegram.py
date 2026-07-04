@@ -156,20 +156,18 @@ async def run():
     logger.info(f"📰 {len(nuevos)} noticias nuevas para enviar.")
     chat_id = CONFIG["TELEGRAM_CHAT_ID"]
     token = CONFIG["TELEGRAM_TOKEN"]
-    dashboard_kb = {"inline_keyboard": [[{"text": "Dashboard", "url": TELEGRAM_DASHBOARD_URL}]]}
 
     titulares_enviados = []
 
     for n in nuevos:
         icono = "📺" if n.get(ID_VIDEO_KEY) else "💻"
-        fuente = n[FUENTE_KEY].replace("_", "\\_").replace("*", "\\*").replace("[", "\\[").replace("`", "\\`")
         titulo = n[TITULO_KEY].replace("_", "\\_").replace("*", "\\*").replace("[", "\\[").replace("`", "\\`")
 
         logger.info(f"🤖 Generando resumen para: {n['titulo'][:60]}...")
         resumen = await resumir_noticia(n, client)
 
         cuerpo = f"{resumen}\n\n" if resumen else ""
-        mensaje = f"{icono} *{titulo}*\n`{fuente}`\n\n{cuerpo}[Abrir noticia]({n[ENLACE_KEY]})"
+        mensaje = f"{icono} *{titulo}*\n\n{cuerpo}[Abrir noticia]({n[ENLACE_KEY]})"
 
         if args.dry_run:
             print(f"\n{'='*50}")
@@ -177,7 +175,7 @@ async def run():
             logger.info(f"📋 Dry-run: {n['titulo'][:60]}...")
             continue
 
-        ok = enviar_mensaje(mensaje, chat_id, token, dashboard_kb)
+        ok = enviar_mensaje(mensaje, chat_id, token)
         if ok:
             logger.info(f"✅ Enviado: {n['titulo'][:60]}...")
             CACHE.mark_sent(n.get(ENLACE_KEY, ""))
