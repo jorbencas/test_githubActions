@@ -260,11 +260,17 @@ async def traducir_titulos_ia(noticias: list, client) -> list:
 def normalizar_url(url: str) -> str:
     if not url:
         return ""
-    url = url.split("?")[0].split("#")[0]
-    url = url.rstrip("/")
-    if url.startswith("http://"):
-        url = "https://" + url[7:]
-    return url.lower()
+    # Preserve YouTube video IDs (v= param) and other query-based IDs
+    from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
+    parsed = urlparse(url)
+    params = parse_qs(parsed.query)
+    # For YouTube, keep the v= parameter in the normalized URL
+    if "youtube.com" in (parsed.hostname or "") and "v" in params:
+        normalized = f"{parsed.scheme}://{parsed.netloc}{parsed.path}?v={params['v'][0]}"
+    else:
+        normalized = f"{parsed.scheme}://{parsed.netloc}{parsed.path}"
+    normalized = normalized.rstrip("/")
+    return normalized.lower()
 
 
 def deduplicar_items(items: list, umbral_similitud: float = 0.85) -> list:

@@ -237,14 +237,6 @@ def render_multimedia_tabs() -> str:
 
 
 
-def render_multimedia_content(items: list, avatars: dict) -> str:
-    html = ""
-    for item in items:
-        if item.get(ID_VIDEO_KEY):
-            html += render_youtube_card(item, avatars)
-    return html
-
-
 def render_youtube_card(item: dict, avatars: dict) -> str:
     titulo = _escape_html(item.get(TITULO_KEY, ""))
     enlace = item.get(ENLACE_KEY, "#")
