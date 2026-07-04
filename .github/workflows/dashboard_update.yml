@@ -8,6 +8,8 @@ on:
       - 'public/**/*.html'
       - 'scripts/publishers/generate_weekly.py'
       - 'scripts/utils/constants_downloadfile.py'
+  workflow_dispatch:
+
 
 jobs:
   update_dashboard:
