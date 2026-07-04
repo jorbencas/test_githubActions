@@ -14,6 +14,18 @@
 - Eliminado `TODO.txt` (todo completado)
 - Actualizado README.md y contexto.md
 
+### Simplified scraper_workflow.yml — 04/07/2026
+- Eliminados pasos repetitivos que ya ejecutan otros workflows:
+  - Optimize Images → `optimize_images.yml`
+  - Scrape news → `scrape_hourly.yml` + `scrape_6h.yml`
+  - Scrape tools → `daily_resources.yml`
+  - Merge free-for.dev → `daily_resources.yml`
+  - Gestionar recursos → `daily_resources.yml`
+  - Send email → `send_email_workflow.yml`
+  - Send Telegram → `send_telegram_workflow.yml`
+  - Deploy dashboard → `dashboard_update.yml`
+- **Workflow simplificado**: solo genera recap semanal + portadas y push al blog
+
 ### Social media removal — 04/07/2026
 - Eliminadas todas las integraciones de redes sociales: Instagram, X/Twitter, Threads, TikTok, Google Trends
 - Eliminadas ~70 fuentes sociales de `FUENTES` en `constants_downloadfile.py`

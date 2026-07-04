@@ -67,7 +67,7 @@
 ### GitHub Actions workflows
 | Workflow | Trigger | Action |
 |----------|---------|--------|
-| `scraper_workflow.yml` | Saturday 07:00 UTC | scrapes news+tools → generate weekly → email+Telegram → PR blog → Surge |
+| `scraper_workflow.yml` | Saturday 07:00 UTC | Generate weekly recap + portadas → PR to blog |
 | `scrape_hourly_workflow.yml` | Every hour | Light scrape (RSS + quick sources) |
 | `scrape_6h_workflow.yml` | Every 6 hours | Standard scrape |
 | `daily_resources.yml` | Daily 06:00 UTC | Tools scrape + resources.mdx management |

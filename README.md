@@ -17,6 +17,7 @@
 ![Cleanup](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/clean_news.yml?branch=master&style=flat-square&label=Cleanup&logo=github)
 ![Challenges](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/hunt_challenges.yml?branch=master&style=flat-square&label=Challenges&logo=github)
 ![Optimize](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/optimize_images.yml?branch=master&style=flat-square&label=Optimize&logo=github)
+![Dashboard](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/dashboard_update.yml?branch=master&style=flat-square&label=Dashboard&logo=github)
 ![Tests](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/tests.yml?branch=master&style=flat-square&label=Tests&logo=github)
 
 Automated tech news ecosystem. Collects, processes with **AI (Gemini)**, and distributes content across multiple channels. Also manages images, resources, programming challenges, and the blog dashboard for [jorbencas/blog](https://blog-jorbencas.vercel.app/).
@@ -27,7 +28,7 @@ Automated tech news ecosystem. Collects, processes with **AI (Gemini)**, and dis
 
 ## 📋 Overview
 
-This project runs **10 GitHub Actions workflows** that form a fully automated content pipeline:
+This project runs **11 GitHub Actions workflows** that form a fully automated content pipeline:
 
 1. **Scrape** — news and tools from 50+ sources (RSS, web, YouTube)
 2. **Process** — AI summarization with Gemini, news grouped by category, translation, image generation
@@ -116,11 +117,11 @@ All scripts run with `python -m` from the project root:
 
 ---
 
-## 🤖 GitHub Actions — 10 Workflows
+## 🤖 GitHub Actions — 11 Workflows
 
 | Workflow | Schedule / Trigger | Pipeline |
 |----------|-------------------|----------|
-| **scraper_workflow** | Sat 07:00 UTC | Scrape all → generate weekly → PR to blog → deploy Surge |
+| **scraper_workflow** | Sat 07:00 UTC | Generate weekly recap + portadas → PR to blog |
 | **scrape_hourly** | Every hour | Light scrape (RSS + quick sources) |
 | **scrape_6h** | Every 6 hours | Standard scrape |
 | **daily_resources** | Daily 06:00 UTC | Tools scrape + resources.mdx management |
@@ -129,7 +130,46 @@ All scripts run with `python -m` from the project root:
 | **clean_news** | Quarterly | Link health check |
 | **hunt_challenges** | Weekly (Sun) | AI challenge generation |
 | **optimize_images** | Dispatch from blog | Image optimization for blog |
+| **dashboard_update** | Push (JS/CSS/Python) | Regenerate + deploy dashboard |
 | **tests** | Push/PR to master | pytest (89 tests) |
+
+### Workflow Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        DATA COLLECTION                              │
+├─────────────────────────────────────────────────────────────────────┤
+│  scrape_hourly  →  every hour  →  RSS + quick sources              │
+│  scrape_6h      →  every 6h    →  standard scrape                  │
+│  daily_resources →  daily       →  tools + resources.mdx           │
+└─────────────────────────────────────────────────────────────────────┘
+                                    ↓
+┌─────────────────────────────────────────────────────────────────────┐
+│                        WEEKLY PROCESSING                            │
+├─────────────────────────────────────────────────────────────────────┤
+│  scraper_workflow  →  Sat 07:00 UTC                                │
+│  ├── Generate weekly recap (AI + Gemini)                           │
+│  ├── Generate portadas (Playwright)                                │
+│  └── Push to blog (auto-news + resources)                          │
+└─────────────────────────────────────────────────────────────────────┘
+                                    ↓
+┌─────────────────────────────────────────────────────────────────────┐
+│                        DISTRIBUTION                                 │
+├─────────────────────────────────────────────────────────────────────┤
+│  send_email       →  daily       →  Mailgun newsletter             │
+│  send_telegram    →  every 30min →  Telegram + TTS                 │
+│  dashboard_update →  on push     →  Surge.sh deploy                │
+└─────────────────────────────────────────────────────────────────────┘
+                                    ↓
+┌─────────────────────────────────────────────────────────────────────┐
+│                        MAINTENANCE                                  │
+├─────────────────────────────────────────────────────────────────────┤
+│  clean_news       →  quarterly   →  link validation                │
+│  hunt_challenges  →  weekly      →  AI challenges                  │
+│  optimize_images  →  dispatch    →  image optimization             │
+│  tests            →  on push     →  89 pytest tests                │
+└─────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 
