@@ -50,12 +50,17 @@ a { color: #007bff; text-decoration: none; font-weight: bold; }
 a:hover { text-decoration: underline; }
 .logo { height: 50px; }
 
-.chip { display: inline-flex; align-items: center; cursor: pointer; transition: all 0.3s ease; padding: 5px 15px 5px 5px; border-radius: 50px; background-color: #f1f1f1; border: 1px solid #ccc; font-family: Arial, sans-serif; font-size: 14px; color: #333; }
+.chip { display: inline-flex; align-items: center; cursor: pointer; transition: all 0.3s ease; padding: 8px 18px 8px 8px; border-radius: 50px; background-color: #f1f1f1; border: 1px solid #ccc; font-family: Arial, sans-serif; font-size: 14px; color: #333; }
 .chip-img { width: 32px; height: 32px; border-radius: 50%; margin-right: 10px; object-fit: cover; }
 .chip:hover { background-color: #e0e0e0; border-color: #999; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 .chip-text { font-weight: 500; }
-.chip.active { background-color: #007bff !important; color: white !important; border-color: #0056b3 !important; box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); }
+.chip.active { background: linear-gradient(135deg, #007bff, #0056b3) !important; color: white !important; border-color: #0056b3 !important; box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); }
 .chip.active .chip-text { color: white; }
+
+#multimedia-tabs .chip.active { background: linear-gradient(135deg, #ff0000, #cc0000) !important; border-color: #cc0000 !important; box-shadow: 0 0 8px rgba(255, 0, 0, 0.5); }
+#video-channel-filters .chip.active { background: linear-gradient(135deg, #ff0000, #cc0000) !important; border-color: #cc0000 !important; box-shadow: 0 0 8px rgba(255, 0, 0, 0.5); }
+
+.header-gradient { background: linear-gradient(90deg, #ffffff, #9ca3af, #3b82f6, #eab308, #ef4444); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
 .filter-section { background: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
 .news-section { margin-bottom: 40px; }
@@ -138,7 +143,7 @@ option { font-weight: normal; color: #555; background: white; }
   .stat-card b { font-size: 20px; }
   .filter-section { padding: 12px; }
   .filter-section strong { display: block; margin-bottom: 6px; }
-  .chip { font-size: 12px; padding: 4px 10px 4px 4px; }
+  .chip { font-size: 12px; padding: 6px 14px 6px 6px; }
   .chip-img { width: 22px; height: 22px; margin-right: 6px; }
   #selectorSemanas { width: 100%; margin-left: 0 !important; margin-top: 8px; font-size: 13px; padding: 8px 10px; }
   .ia-box { padding: 14px; font-size: 0.9em; }
