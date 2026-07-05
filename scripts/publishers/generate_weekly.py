@@ -82,17 +82,6 @@ def archivar_recaps_antiguos(auto_news_dir: str, semana_actual: str) -> int:
     return moved
 
 
-def eliminar_duplicados_semana(auto_news_dir: str, semana_slug: str) -> bool:
-    """Elimina posts duplicados de la misma semana. Devuelve True si ya existe uno."""
-    if not os.path.isdir(auto_news_dir):
-        return False
-    count = 0
-    for fname in os.listdir(auto_news_dir):
-        if fname.endswith(".md") and semana_slug in fname:
-            count += 1
-    return count > 0
-
-
 
 # ==============================================================================
 # FUNCIONES DE RENDERIZADO HTML (SSR)
@@ -369,9 +358,6 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
 
     logger.info(f"✅ Dashboard HTML pre-renderizado ({len(historial)} registros, {len(top_github)} herramientas).")
 
-
-def emoji_categoria(cat: str) -> str:
-    return cat.split()[0] if cat and cat[0] in JS_CONFIG["EMOJIS_CATEGORIA"] else "💡"
 
 def badge_str(item: dict) -> str:
     return "`💻 Tech`"

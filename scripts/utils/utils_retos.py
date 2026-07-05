@@ -15,6 +15,7 @@ except ImportError:
 
 logger = logging.getLogger("scraper")
 
+
 async def obtener_solucion_ia(titulo: str, fuente: str, client, lang: str = "Python") -> dict | None:
     modelos = CONFIG.get("AI_MODELS", ["gemini-2.0-flash-lite"])
 
@@ -83,6 +84,7 @@ async def obtener_solucion_ia(titulo: str, fuente: str, client, lang: str = "Pyt
 
     logger.warning(f"Generando solución genérica funcional para: {titulo}")
     return generate_generic(titulo, lang.lower())
+
 
 
 async def generar_imagen_noticia(titulo_noticia: str, client, prompt_template: str = PROMPT_IMAGEN_TEMPLATE_RETO, fallback_url: str | None = None) -> str:

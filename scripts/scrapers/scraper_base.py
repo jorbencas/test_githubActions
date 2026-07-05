@@ -32,10 +32,6 @@ class ContentFilter:
         t_low = titulo.lower()
         return any(key.lower() in t_low for key in ALL_KEYWORDS)
 
-    @staticmethod
-    def es_reto(titulo: str) -> bool:
-        return any(k in titulo.lower() for k in ["reto", "challenge", "desafío"])
-
 
 class AvatarRepository:
     def __init__(self, cache_path: str):
@@ -404,13 +400,6 @@ class ScraperPro:
         self.avatar_repo = AvatarRepository(os.path.join(CONFIG["FOLDER"], "avatars_cache.json"))
         self.yt_extractor = YouTubeExtractor()
         self.web_extractor = WebExtractor()
-
-    @property
-    def cambios_en_cache(self):
-        return self.avatar_repo.cambios_en_cache
-
-    def cargar_avatars(self):
-        return self.avatar_repo.avatars
 
     def guardar_avatars(self):
         self.avatar_repo.guardar_si_cambio()

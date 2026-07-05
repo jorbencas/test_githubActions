@@ -201,22 +201,6 @@ def make_section_header(name):
     )
 
 
-def find_category_start(content, cat_name_with_emoji):
-    """Find where a category section starts in the card format content."""
-    emoji = cat_name_with_emoji.split()[0]
-    name = cat_name_with_emoji[len(emoji):].strip()
-    sec_id = name.lower().replace("/", "").replace(" ", "-").replace("--", "-")
-    pattern = f'id="{sec_id}"'
-    idx = content.find(pattern)
-    if idx == -1:
-        return None
-    # Find the grid opening after this section header
-    grid_start = content.find('<div class="not-prose grid grid-cols-1', idx)
-    if grid_start == -1:
-        return None
-    return grid_start
-
-
 def find_grid_end(content, grid_start):
     close_tag = '</div>'
     grid_open = content[grid_start:grid_start + 100]

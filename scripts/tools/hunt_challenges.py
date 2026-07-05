@@ -143,11 +143,18 @@ async def solve_and_save(titulo, fuente, client, folder, difficulty_override=Non
         lang_sol = db_lookup(titulo, lang_id)
         if lang_sol:
             codes[lang_id] = lang_sol.get('codigo', '')
-        else:
+        elif client:
+            ia_sol = await obtener_solucion_ia(titulo, fuente, client, lang=LANG_DISPLAY.get(lang_id, lang_id))
+            codes[lang_id] = ia_sol.get('codigo', '') if ia_sol else ''
+        if not codes.get(lang_id):
             gen_sol = generate_generic(titulo, lang_id)
             codes[lang_id] = gen_sol.get('codigo', '')
 
-    primary_sol = db_lookup(titulo, "python") or generate_generic(titulo, "python")
+    primary_sol = db_lookup(titulo, "python")
+    if not primary_sol and client:
+        primary_sol = await obtener_solucion_ia(titulo, fuente, client, lang="Python")
+    if not primary_sol:
+        primary_sol = generate_generic(titulo, "python")
     sol = primary_sol
 
     if sol:
