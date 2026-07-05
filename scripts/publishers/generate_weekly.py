@@ -202,8 +202,8 @@ def render_news_list(items: list, avatars: dict) -> str:
     return "".join(render_news_item(i, avatars) for i in items)
 
 
-def render_search_input(placeholder: str = "Buscar...") -> str:
-    return f'<input type="text" id="news-search" class="search-input" placeholder="{placeholder}">'
+def render_search_input(placeholder: str = "Buscar...", input_id: str = "news-search") -> str:
+    return f'<input type="text" id="{input_id}" class="search-input" placeholder="{placeholder}">'
 
 
 def render_channel_chips(items: list, state_key: str, avatars: dict) -> str:
@@ -337,9 +337,9 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
     video_items = [n for n in historial if n.get(ID_VIDEO_KEY)]
     news_items = [n for n in historial if not n.get(ID_VIDEO_KEY)]
     news_list_html = render_news_list(news_items, avatars_known)
-    news_search_html = render_search_input("Buscar noticias...")
+    news_search_html = render_search_input("Buscar noticias...", "news-search")
     news_channel_filters_html = render_channel_chips(news_items, "canalNoticias", avatars_known)
-    video_search_html = render_search_input("Buscar vídeos...")
+    video_search_html = render_search_input("Buscar vídeos...", "video-search")
     multimedia_tabs_html = render_multimedia_tabs()
     video_channel_filters_html = render_channel_chips(video_items, "canalVideos", avatars_known)
     multimedia_content_html = render_multimedia_content(historial, avatars_known)

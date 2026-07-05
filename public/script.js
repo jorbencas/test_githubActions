@@ -56,7 +56,7 @@
     const q = (document.getElementById("video-search")?.value || "").toLowerCase().trim();
     document.querySelectorAll("#multimedia-content .video-card").forEach((item) => {
       const source = item.dataset.source;
-      const type = item.dataset.type || "youtube";
+      const type = item.dataset.tipo || "youtube";
       const title = (item.querySelector(".video-title") || {}).textContent || "";
       const okChannel = state.canalVideos === "all" || source === state.canalVideos;
       const okTab = state.tabMultimedia === "all" || type === state.tabMultimedia;
