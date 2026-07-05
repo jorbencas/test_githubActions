@@ -159,6 +159,14 @@ def render_stats(items: list) -> str:
     )
 
 
+def _news_type_badge(tipo: str, origen: str) -> str:
+    if origen == VAL_RSS:
+        return '<span class="badge-rss">📡 RSS</span>'
+    if tipo == TIPO_VAL_HERRAMIENTA:
+        return '<span class="badge-tool">🔧 Herramienta</span>'
+    return '<span class="badge-news">📄 Noticia</span>'
+
+
 def render_news_item(item: dict, avatars: dict) -> str:
     titulo = _escape_html(item.get(TITULO_KEY, "Sin título"))
     enlace = item.get(ENLACE_KEY, "#")
@@ -170,14 +178,14 @@ def render_news_item(item: dict, avatars: dict) -> str:
     categoria = item.get(CATEGORIA_KEY, "")
     favicon = _favicon_src(fuente, avatars)
 
-    # Convertir fecha a formato largo en español
     fecha = _format_fecha_es(fecha_raw)
+    tipo = item.get(TIPO_KEY, TIPO_VAL_NOTICIA)
 
     badge_html = ""
     if badge == "Tech":
         badge_html = '<span class="badge-tech">Tech</span>'
-    if origen == VAL_RSS:
-        badge_html += '<span class="badge-rss">RSS</span>'
+
+    tipo_badge_html = _news_type_badge(tipo, origen)
 
     return (
         f'<li class="news-item" data-source="{_escape_html(fuente)}" data-category="{_escape_html(categoria)}" data-ts="{ts}">'
@@ -185,7 +193,7 @@ def render_news_item(item: dict, avatars: dict) -> str:
         f'<img class="favicon" src="{favicon}" alt="{fuente}" width="20" height="20" loading="lazy">'
         f'<div class="news-text">'
         f'<span class="news-title">{titulo}</span>'
-        f'<span class="news-meta">{fuente} · {fecha} {badge_html}<span class="badge-cat">{_escape_html(categoria)}</span></span>'
+        f'<span class="news-meta">{tipo_badge_html}{badge_html}{fuente} · {fecha} <span class="badge-cat">{_escape_html(categoria)}</span></span>'
         f'</div></a></li>'
     )
 
@@ -239,27 +247,36 @@ def render_multimedia_tabs() -> str:
 
 
 
+def _video_type_badge(tipo: str) -> str:
+    if tipo == TIPO_VAL_LIVE:
+        return '<span class="badge-video-live">🔴 Directo</span>'
+    elif tipo == TIPO_VAL_SHORTS:
+        return '<span class="badge-video-short">🩳 Short</span>'
+    else:
+        return '<span class="badge-video">🎬 Video</span>'
+
+
 def render_youtube_card(item: dict, avatars: dict) -> str:
     titulo = _escape_html(item.get(TITULO_KEY, ""))
     enlace = item.get(ENLACE_KEY, "#")
     fuente = _escape_html(item.get(FUENTE_KEY, ""))
     id_video = item.get(ID_VIDEO_KEY, "")
     ts = _item_timestamp(item)
-    fecha = item.get(FECHA_PUB_KEY, "")
+    fecha = item.get(FECHA_REAL_KEY, "") or item.get(FECHA_PUB_KEY, "")
     favicon = _favicon_src(fuente, avatars)
+    tipo = item.get(TIPO_KEY, TIPO_VAL_VIDEO)
 
     thumbnail = f"https://img.youtube.com/vi/{id_video}/mqdefault.jpg" if id_video else ""
-    is_live = item.get("is_live", False)
-    live_badge = '<span class="badge-live">🔴 LIVE</span>' if is_live else ""
+    tipo_badge = _video_type_badge(tipo)
 
     return (
-        f'<div class="video-card" data-source="{fuente}" data-ts="{ts}">'
+        f'<div class="video-card" data-source="{fuente}" data-ts="{ts}" data-tipo="{tipo}">'
         f'<a href="{enlace}" target="_blank" rel="noopener">'
         f'<img src="{thumbnail}" alt="{titulo}" class="video-thumb" loading="lazy" onerror="this.src=\'https://via.placeholder.com/320x180?text=No+Preview\'">'
         f'</a>'
         f'<div class="video-info">'
         f'<a href="{enlace}" target="_blank" rel="noopener" class="video-title">{titulo}</a>'
-        f'<span class="video-meta"><img src="{favicon}" class="chip-icon" alt="" width="14" height="14" loading="lazy"> {fuente} · {fecha} {live_badge}</span>'
+        f'<span class="video-meta"><img src="{favicon}" class="chip-icon" alt="" width="14" height="14" loading="lazy"> {fuente} · {fecha} {tipo_badge}</span>'
         f'</div></div>'
     )
 
@@ -318,11 +335,12 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
     stats_html = render_stats(historial)
     news_list_html = render_news_list(historial, avatars_known)
     news_search_html = render_search_input("Buscar noticias...")
-    news_channel_filters_html = render_channel_chips(historial, "canalNoticias", avatars_known)
+    video_items = [n for n in historial if n.get(ID_VIDEO_KEY)]
+    news_items = [n for n in historial if not n.get(ID_VIDEO_KEY)]
+    news_channel_filters_html = render_channel_chips(news_items, "canalNoticias", avatars_known)
     news_category_filters_html = render_category_chips(historial)
     video_search_html = render_search_input("Buscar vídeos...")
     multimedia_tabs_html = render_multimedia_tabs()
-    video_items = [n for n in historial if n.get(ID_VIDEO_KEY)]
     video_channel_filters_html = render_channel_chips(video_items, "canalVideos", avatars_known)
     multimedia_content_html = render_multimedia_content(historial, avatars_known)
     github_ranking_html = render_github_ranking(top_github)
