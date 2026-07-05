@@ -206,16 +206,30 @@ def render_search_input(placeholder: str = "Buscar...", input_id: str = "news-se
     return f'<input type="text" id="{input_id}" class="search-input" placeholder="{placeholder}">'
 
 
-def render_channel_chips(items: list, state_key: str, avatars: dict) -> str:
+def _norm_channel(name: str) -> str:
+    return name.strip().replace(" Shorts", "").replace(" shorts", "")
+
+def render_channel_chips(items: list, state_key: str, avatars: dict, all_channels: list | None = None) -> str:
     channels: dict[str, int] = {}
+    # Build case-insensitive lookup for dedup
+    seen_lower: dict[str, str] = {}
     for item in items:
         fuente = item.get(FUENTE_KEY, "")
         if fuente:
-            fuente = fuente.replace(" Shorts", "")
+            fuente = _norm_channel(fuente)
             channels[fuente] = channels.get(fuente, 0) + 1
+            seen_lower[fuente.lower()] = fuente
+
+    if all_channels:
+        for ch in all_channels:
+            ch_norm = _norm_channel(ch)
+            if ch_norm and ch_norm.lower() not in seen_lower:
+                channels[ch_norm] = 0
+                seen_lower[ch_norm.lower()] = ch_norm
 
     html = f'<button class="chip active" data-channel="all">Todos</button>'
-    for ch, count in sorted(channels.items(), key=lambda x: -x[1])[:20]:
+    sorted_ch = sorted(channels.items(), key=lambda x: (-x[1] if x[1] > 0 else 1, x[0]))
+    for ch, count in sorted_ch:
         favicon = _favicon_src(ch, avatars)
         html += (
             f'<button class="chip" data-channel="{_escape_html(ch)}">'
@@ -341,7 +355,7 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
     news_channel_filters_html = render_channel_chips(news_items, "canalNoticias", avatars_known)
     video_search_html = render_search_input("Buscar vídeos...", "video-search")
     multimedia_tabs_html = render_multimedia_tabs()
-    video_channel_filters_html = render_channel_chips(video_items, "canalVideos", avatars_known)
+    video_channel_filters_html = render_channel_chips(video_items, "canalVideos", avatars_known, ALL_YT_CHANNELS)
     multimedia_content_html = render_multimedia_content(historial, avatars_known)
     github_ranking_html = render_github_ranking(top_github)
 
