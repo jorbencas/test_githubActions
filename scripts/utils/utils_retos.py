@@ -4,6 +4,7 @@ import re
 import asyncio
 import logging
 from slugify import slugify
+from scripts.utils.common import _generar_imagen_noticia
 from scripts.utils.constants_retos import CONFIG, PROMPT_IMAGEN_TEMPLATE_RETO
 try:
     from scripts.solutions.solutions_db import lookup, generate_generic
@@ -88,31 +89,13 @@ async def obtener_solucion_ia(titulo: str, fuente: str, client, lang: str = "Pyt
 
 
 async def generar_imagen_noticia(titulo_noticia: str, client, prompt_template: str = PROMPT_IMAGEN_TEMPLATE_RETO, fallback_url: str | None = None) -> str:
-    modelos = CONFIG.get("IMAGE_MODELS", ["imagen-3.0-generate-002"])
-
-    slug = slugify(titulo_noticia)[:40]
-    filename = f"{slug}.png"
-    images_folder = CONFIG.get("IMAGES_FOLDER", "../public/img/retos")
-    images_prefix = CONFIG.get("IMAGES_PATH_PREFIX", "/img/retos")
-    filepath = os.path.join(os.path.dirname(__file__), images_folder, filename) if not os.path.isabs(images_folder) else os.path.join(images_folder, filename)
-
-    if os.path.exists(filepath):
-        return f"{images_prefix}/{filename}"
-
-    prompt_completo = prompt_template.format(titulo_post=titulo_noticia)
-
-    for modelo in modelos:
-        try:
-            logger.info(f"Generando imagen con {modelo} para: '{titulo_noticia}'...")
-            response = client.models.generate_images(model=modelo, prompt=prompt_completo, config=dict(number_of_images=1))
-            os.makedirs(os.path.dirname(filepath), exist_ok=True)
-            with open(filepath, 'wb') as f:
-                f.write(response.image_bytes)
-            return f"{images_prefix}/{filename}"
-        except Exception as e:
-            logger.warning(f"Fallo imagen con {modelo}: {e}. Intentando siguiente...")
-
-    return fallback_url or "/img/default.jpg"
+    return await _generar_imagen_noticia(
+        titulo_noticia, client,
+        prompt_template=prompt_template,
+        images_folder=CONFIG.get("IMAGES_FOLDER", "public/img/retos"),
+        images_prefix=CONFIG.get("IMAGES_PATH_PREFIX", "/img/retos"),
+        fallback_url=fallback_url or "/img/default.jpg",
+    )
 
 
 async def traducir_titulos_ia(noticias: list, client) -> list:

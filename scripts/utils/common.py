@@ -1,14 +1,19 @@
 import os
 import json
 import re
+import random
 import asyncio
 import logging
+from pathlib import Path
 from slugify import slugify
 from bs4 import BeautifulSoup
 import requests
+from PIL import Image
 from scripts.utils.constants_downloadfile import CONFIG, PROMPT_IMAGEN_TEMPLATE, PROMPT_RESUMIR_NOTICIA, PROMPT_RESUMIR_LOTE, PROMPT_RECAP_SEMANAL, PROMPT_TRADUCIR_TITULOS, FALLBACK_IMAGE_URL, FALLBACK_RECAP_INTRO, FUENTES_INGLES, ORIGEN_KEY, VAL_RSS, ENLACE_KEY, TITULO_KEY, CATEGORIA_KEY, FUENTE_KEY, BADGE_KEY
 
 logger = logging.getLogger("scraper")
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 
 def load_json(path: str) -> list:
@@ -173,34 +178,95 @@ async def obtener_recap_semanal_ia(
         "nota_personal": "Fallo en IA: Generado contenido de reserva."
     }
 
-async def generar_imagen_noticia(titulo_noticia: str, client, prompt_template: str = PROMPT_IMAGEN_TEMPLATE, fallback_url: str | None = None) -> str:
-    """Genera imagen con fallback de modelos."""
-
+async def _generar_imagen_noticia(
+    titulo_noticia: str,
+    client,
+    *,
+    prompt_template: str,
+    images_folder: str,
+    images_prefix: str,
+    fallback_url: str,
+) -> str:
     modelos = CONFIG.get("IMAGE_MODELS", ["imagen-3.0-generate-002"])
-
     slug = slugify(titulo_noticia)[:40]
     filename = f"{slug}.png"
-    images_folder = CONFIG.get("IMAGES_FOLDER", "images")
-    images_prefix = CONFIG.get("IMAGES_PATH_PREFIX", "public/optimizado")
-    filepath = os.path.join(images_folder, filename)
 
-    if os.path.exists(filepath):
+    folder = Path(images_folder)
+    if not folder.is_absolute():
+        folder = PROJECT_ROOT / folder
+    filepath = folder / filename
+
+    if filepath.exists():
         return f"{images_prefix}/{filename}"
 
     prompt_completo = prompt_template.format(titulo_post=titulo_noticia)
 
     for modelo in modelos:
-        try:
-            logger.info(f"🎨 Generando imagen con {modelo} para: '{titulo_noticia}'...")
-            response = client.models.generate_images(model=modelo, prompt=prompt_completo, config=dict(number_of_images=1))
-            os.makedirs(images_folder, exist_ok=True)
-            with open(filepath, 'wb') as f:
-                f.write(response.image_bytes)
-            return f"{images_prefix}/{filename}"
-        except Exception as e:
-            logger.warning(f"⚠️ Fallo imagen con {modelo}: {e}. Intentando siguiente...")
-            
-    return fallback_url or FALLBACK_IMAGE_URL
+        for intento in range(3):
+            try:
+                logger.info(f"🎨 Generando imagen con {modelo} para: '{titulo_noticia}'...")
+                response = client.models.generate_images(
+                    model=modelo, prompt=prompt_completo,
+                    config=dict(number_of_images=1)
+                )
+                filepath.parent.mkdir(parents=True, exist_ok=True)
+                with open(filepath, 'wb') as f:
+                    f.write(response.image_bytes)
+
+                # Validación post-generación
+                try:
+                    img = Image.open(filepath)
+                    img.verify()
+                    img = Image.open(filepath)
+                    w, h = img.size
+                    if w < 200 or h < 200:
+                        raise ValueError(f"Imagen demasiado pequeña: {w}x{h}")
+                except Exception as ve:
+                    logger.warning(f"⚠️ Imagen inválida: {ve}. Reintentando...")
+                    filepath.unlink(missing_ok=True)
+                    continue
+
+                # Strip metadata
+                clean = Image.new(img.mode, img.size)
+                clean.paste(img)
+
+                # Constrain size
+                if clean.width > 1920:
+                    ratio = 1920 / clean.width
+                    clean = clean.resize((1920, int(clean.height * ratio)), Image.LANCZOS)
+
+                clean.save(filepath, format="PNG")
+
+                # WebP sidecar
+                webp_path = filepath.with_suffix(".webp")
+                clean.save(webp_path, format="WEBP", quality=85, method=6)
+
+                return f"{images_prefix}/{filename}"
+
+            except Exception as e:
+                error_str = str(e).upper()
+                if "429" in error_str or "RATE_LIMIT" in error_str or "RESOURCE_EXHAUSTED" in error_str:
+                    wait = 2 ** intento + random.random() * 0.5
+                    logger.warning(f"⏳ Rate limit en {modelo}, esperando {wait:.1f}s...")
+                    await asyncio.sleep(wait)
+                elif "API_KEY_INVALID" in error_str:
+                    logger.error("🔑 API KEY INVÁLIDA.")
+                    return fallback_url
+                else:
+                    logger.warning(f"⚠️ Fallo imagen con {modelo}: {e}. Intentando siguiente...")
+                    break
+
+    return fallback_url
+
+
+async def generar_imagen_noticia(titulo_noticia: str, client, prompt_template: str = PROMPT_IMAGEN_TEMPLATE, fallback_url: str | None = None) -> str:
+    return await _generar_imagen_noticia(
+        titulo_noticia, client,
+        prompt_template=prompt_template,
+        images_folder=CONFIG.get("IMAGES_FOLDER", "images"),
+        images_prefix=CONFIG.get("IMAGES_PATH_PREFIX", "public/optimizado"),
+        fallback_url=fallback_url or FALLBACK_IMAGE_URL,
+    )
 
 async def traducir_titulos_ia(noticias: list, client) -> list:
     """Traduce una lista de títulos al español en un solo bloque usando Gemini."""

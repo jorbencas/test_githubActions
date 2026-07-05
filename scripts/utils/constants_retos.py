@@ -6,7 +6,7 @@ CONFIG = {
     "IMAGE_MODELS": ["imagen-3.0-generate-002"],
     "CHALLENGES_DIR": "../src/content/auto-challenges",
     "DEFAULT_LANG": "Python",
-    "IMAGES_FOLDER": "../public/img/retos",
+    "IMAGES_FOLDER": "public/img/retos",
     "IMAGES_PATH_PREFIX": "/img/retos",
 }
 
@@ -100,5 +100,6 @@ Minimalist tech illustration of {titulo_post}.
 Style: Flat vector art, isometric perspective, cyberpunk aesthetics. 
 Palette: Deep slate background, neon cyan and electric blue highlights. 
 Clean lines, high contrast, professional digital art, centered composition. 
-No text, no faces, simple geometric shapes.
+Aspect ratio: 16:9, suitable for a blog header image.
+No text, no faces, simple geometric shapes, no watermarks.
 """
