@@ -1,7 +1,8 @@
 # test_githubActions — Agent Guide
 
-## Git restrictions
-- NEVER run `git push`, `git pull`, or `git fetch`. These operations must be done manually by the user.
+## AI Hooks (hard rules — never skip)
+- **NO destructive commands**: Never run `rm`, `shutil.rmtree`, `os.remove`, `os.unlink`, `Path.unlink`, `Path.rmdir`, `shutil.rmdir` or any other command that deletes files/directories. Use `/tmp/` for temporary files; they will be cleaned up by the system.
+- **NO git push/pull/fetch**: Never run `git push`, `git pull`, or `git fetch`. These must be done manually by the user.
 
 ## Commands
 - `python downloadFile.py` — (legacy) monolithic orchestrator
