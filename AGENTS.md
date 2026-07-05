@@ -1,7 +1,9 @@
 # test_githubActions — Agent Guide
 
-## Git restrictions
-- NEVER run `git push`, `git pull`, or `git fetch`. These operations must be done manually by the user.
+## Git hooks (enforced)
+- `githooks/pre-push` — blocks all `git push` (user must push manually)
+- `githooks/pre-commit` — blocks commits containing `rm`, `shutil.rmtree`, `os.remove` and similar destructive operations. Use `/tmp/` for temporary files instead.
+- Git config `core.hooksPath` is set to `githooks/` to auto-activate these.
 
 ## Commands
 - `python downloadFile.py` — (legacy) monolithic orchestrator
