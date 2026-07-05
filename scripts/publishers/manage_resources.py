@@ -433,11 +433,11 @@ def main():
                 grid_start = active_content.find(grid_open, header_idx)
                 if grid_start != -1:
                     _, grid_end = find_grid_bounds(active_content, grid_start)
-                    before = active_content[:grid_end]
+                    before = active_content[:grid_end - 6].rstrip('\n')
                     after = active_content[grid_end:]
-                    active_content = before + "\n\n" + cards_block + "\n" + after
+                    active_content = before + "\n\n" + cards_block + "\n\n</div>" + after
         else:
-            separator = "\n\n---\n\n" if active_content.rstrip().endswith("</div>") else "\n\n"
+            separator = "\n\n"
             block = (
                 separator
                 + section_header
