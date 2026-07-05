@@ -2,6 +2,11 @@
 
 ## Cambios recientes
 
+### Traducciones y dark theme — 05/07/2026
+- `FUENTES_INGLES` ampliado con `freecodecamp` y `nethermind` para traducción de títulos YT inglés
+- `generate_weekly.py`: ahora ejecuta `traducir_titulos_ia` sobre todo el histórico antes de renderizar el dashboard, y guarda los títulos traducidos al JSON
+- Dark theme: `.news-item .news-title` usa gradient `#60a5fa → #3b82f6` (más oscuro, del commit df4725a)
+
 ### Telegram: traducción y mensajes limpios — 04/07/2026
 - `traducir_titulo()`: traduce títulos al español vía Gemini con `PROMPT_TRADUCIR_TITULOS`
 - Eliminada línea de fuente/fecha del mensaje (solo queda icono + título + resumen + enlace)
