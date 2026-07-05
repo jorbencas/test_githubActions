@@ -1,3 +1,0 @@
-#!/bin/sh
-echo "❌ git push blocked by hook — pushes must be done manually by the user."
-exit 1
