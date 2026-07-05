@@ -99,6 +99,11 @@
 5. Changes affecting blog output must be tested locally first.
 6. **Always update `docs/contexto.md` after any significant change**.
 
+## Auxiliary / one-off code
+- If you need to write a function to check or validate something the user requests, do it in a way that does NOT modify nor affect the normal behaviour of the application or its code.
+- Create such code in a temporary file outside the repo (e.g. `/tmp/`). Once the user confirms the feature works correctly, delete the temporary file.
+- Do NOT commit auxiliary/validation code to the repository.
+
 ## Notes
 - `optimized_cache.json` is auto-generated cache; safe to delete.
 - Weekly recaps are NOT regenerated if the `.md` file already exists.
