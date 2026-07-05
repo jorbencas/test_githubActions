@@ -178,6 +178,14 @@ h2 { scroll-margin-top: 20px; font-size: 1.15rem; }
 .card.tipo-shorts { border-bottom: 3px solid #d946ef; }
 .card.tab-youtube { border-bottom: 3px solid #ef4444; }
 
+/* ── Footer ── */
+.site-footer { margin-top: 40px; padding: 24px 20px; border-top: 1px solid #e2e8f0; text-align: center; font-size: 0.82em; color: #64748b; }
+.site-footer p { margin: 6px 0; line-height: 1.5; }
+.footer-heart { color: #ef4444; display: inline; }
+.footer-disclaimer { font-size: 0.78em; color: #94a3b8; max-width: 600px; margin: 8px auto 0; }
+body.dark .site-footer { border-top-color: #3f3f46; color: #a1a1aa; }
+body.dark .footer-disclaimer { color: #71717a; }
+
 /* ── Scroll to top ── */
 .scroll-top {
   display: none;

@@ -339,6 +339,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <div id="github-ranking">{github_ranking_html}</div>
 
 
+        <footer class="site-footer">
+            <p>Creado con <span class="footer-heart">❤️</span> y sin ánimo de lucro por <a href="https://github.com/jorbencas" target="_blank" rel="noopener">@jorbencas</a></p>
+            <p class="footer-disclaimer">Este sitio no almacena, aloja ni se atribuye la propiedad de ningún contenido externo. Simplemente enlaza y muestra fragmentos de fuentes públicas con fines informativos y educativos. Cada pieza de contenido pertenece a su legítimo autor o medio original.</p>
+        </footer>
     </div>
 </body>
 <script src="script.js"></script>
