@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Block commits that introduce destructive file operations in .py files
+# Scan staged diff for destructive Python calls only (skip hook files)
+PATTERN='shutil\.rmtree\s*\(|os\.remove\s*\(|os\.unlink\s*\(|Path\.unlink\s*\(|Path\.rmdir\s*\(|shutil\.rmdir\s*\('
+
+if git diff --cached -U0 -- '*.py' | grep -qE "$PATTERN"; then
+    echo "❌ Commit blocked: detected a destructive file operation in Python code."
+    echo "   Matched patterns: shutil.rmtree, os.remove, os.unlink, Path.unlink, Path.rmdir, shutil.rmdir"
+    echo "   Use /tmp/ for temporary files instead."
+    exit 1
+fi

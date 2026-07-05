@@ -4,6 +4,10 @@
 - **NO destructive commands**: Never run `rm`, `shutil.rmtree`, `os.remove`, `os.unlink`, `Path.unlink`, `Path.rmdir`, `shutil.rmdir` or any other command that deletes files/directories. Use `/tmp/` for temporary files; they will be cleaned up by the system.
 - **NO git push/pull/fetch**: Never run `git push`, `git pull`, or `git fetch`. These must be done manually by the user.
 
+## Git hooks (enforced by repo config `core.hooksPath`)
+- `githooks/pre-push` — blocks all `git push`
+- `githooks/pre-commit` — blocks commits containing destructive Python operations (`shutil.rmtree`, `os.remove`, etc.)
+
 ## Commands
 - `python downloadFile.py` — (legacy) monolithic orchestrator
 - `python scrape_news.py` — scrape news sources (YouTube + web)
