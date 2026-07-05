@@ -239,18 +239,6 @@ def render_channel_chips(items: list, state_key: str, avatars: dict, all_channel
     return html
 
 
-def render_category_chips(items: list) -> str:
-    cats: dict[str, int] = {}
-    for item in items:
-        cat = item.get(CATEGORIA_KEY, "💡 General")
-        cats[cat] = cats.get(cat, 0) + 1
-
-    html = '<button class="chip active" data-category="all">Todas</button>'
-    for cat, count in sorted(cats.items(), key=lambda x: -x[1])[:10]:
-        html += f'<button class="chip" data-category="{_escape_html(cat)}">{_escape_html(cat)} ({count})</button>'
-    return html
-
-
 def render_multimedia_tabs() -> str:
     html = ""
     for tab in TABS_MULTIMEDIA:

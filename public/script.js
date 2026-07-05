@@ -7,7 +7,6 @@
   // ── State ──
   let state = {
     canalNoticias: "all",
-    catNoticias: "all",
     canalVideos: "all",
     tabMultimedia: "youtube",
   };
@@ -45,9 +44,8 @@
       const category = item.dataset.category;
       const title = (item.querySelector(".news-title") || {}).textContent || "";
       const okChannel = state.canalNoticias === "all" || source === state.canalNoticias;
-      const okCategory = state.catNoticias === "all" || category === state.catNoticias;
       const okSearch = !q || title.toLowerCase().includes(q) || source.toLowerCase().includes(q);
-      item.style.display = okChannel && okCategory && okSearch ? "" : "none";
+      item.style.display = okChannel && okSearch ? "" : "none";
     });
   }
 
@@ -133,7 +131,6 @@
   document.addEventListener("DOMContentLoaded", () => {
     setupSearch("news-search", "#news-list .news-item", filtrarNoticias);
     setupChipFilters("news-channel-filters", "canalNoticias", filtrarNoticias);
-    setupChipFilters("news-category-filters", "catNoticias", filtrarNoticias);
     setupSearch("video-search", "#multimedia-content .video-card", filtrarVideos);
     setupChipFilters("video-channel-filters", "canalVideos", filtrarVideos);
     setupTabs();
