@@ -20,7 +20,7 @@
 ![Dashboard](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/dashboard_update.yml?branch=master&style=flat-square&label=Dashboard&logo=github)
 ![Tests](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/tests.yml?branch=master&style=flat-square&label=Tests&logo=github)
 
-Automated tech news ecosystem. Collects, processes with **AI (Gemini)**, and distributes content across multiple channels. Also manages images, resources, programming challenges, and the blog dashboard for [jorbencas/blog](https://blog-jorbencas.vercel.app/).
+Automated tech news ecosystem. Collects from **268 sources** (158 YouTube channels + 110 web/RSS), processes with **AI (Gemini)**, and distributes content across multiple channels. Also manages images, resources, programming challenges, and the blog dashboard for [jorbencas/blog](https://blog-jorbencas.vercel.app/).
 
 🚀 **[News Dashboard](http://jorbencasdownloaderdocument.surge.sh)**
 
@@ -30,8 +30,8 @@ Automated tech news ecosystem. Collects, processes with **AI (Gemini)**, and dis
 
 This project runs **11 GitHub Actions workflows** that form a fully automated content pipeline:
 
-1. **Scrape** — news and tools from 50+ sources (RSS, web, YouTube)
-2. **Process** — AI summarization with Gemini, news grouped by category, translation, image generation
+1. **Scrape** — news and tools from 268 sources (110 web/RSS + 158 YouTube channels)
+2. **Process** — AI summarization with Gemini, news grouped by category, automatic translation of English titles (web + YT), image generation
 3. **Publish** — weekly recaps with auto-archive, dashboard (SSR), email newsletter, Telegram notifications
 4. **Manage** — resource lists, challenges, image optimization, link validation, SEO dedup
 
@@ -41,7 +41,7 @@ This project runs **11 GitHub Actions workflows** that form a fully automated co
 
 ```
 scripts/
-├── scrapers/             🌐 Data collection from 50+ sources
+├── scrapers/             🌐 Data collection from 268 sources
 │   ├── scraper_base.py         YouTube, Web, ScraperPro extractors
 │   ├── scrape_news.py          RSS + web + YouTube news
 │   ├── scrape_tools.py         GitHub Trending + Product Hunt
@@ -190,7 +190,14 @@ All scripts run with `python -m` from the project root:
 
 ## 📊 Dashboard
 
-Deployed on Surge.sh. Fully **server-side rendered (SSR)** — Python generates a single `index.html` with all content pre-rendered (news, YouTube videos, GitHub ranking). JavaScript is minimal (~135 lines) and only handles interactive filters, tabs, and search.
+Deployed on Surge.sh. Fully **server-side rendered (SSR)** — Python generates a single `index.html` with all content pre-rendered (news, YouTube videos, GitHub ranking). JavaScript is minimal and only handles interactive filters, tabs, and search.
+
+**Recent UI improvements:**
+- **Separated channel filters** — news filter uses `news_items` (no YouTube), video filter uses `video_items` (no web links)
+- **Type badges** — `📄 Noticia`, `📡 RSS`, `🔧 Herramienta` in news cards; `🎬 Video`, `🩳 Short`, `🔴 Directo` in video cards
+- **Footer** — "Creado con ❤️ y sin ánimo de lucro por @jorbencas" + disclaimer (no hosted content)
+- **Dark theme** — news title gradient uses `#60a5fa → #3b82f6` in dark mode
+- **Translation** — English YouTube channel titles (`FUENTES_INGLES`) auto-translated via Gemini during weekly recap generation
 
 Weekly recaps auto-archive old posts (>2 weeks) and enforce one-post-per-week SEO. News is grouped by category before AI processing for better context.
 
