@@ -34,6 +34,8 @@ body.dark .chip { background: #3f3f46; color: #e4e4e7; border-color: #52525b; }
 body.dark .chip:hover { background: #52525b; border-color: #71717a; }
 body.dark .chip.active { background: linear-gradient(135deg, #52525b, #3f3f46) !important; color: white !important; border-color: #52525b !important; }
 body.dark a { color: #a1a1aa; }
+body.dark .news-item a { color: #60a5fa; }
+body.dark .news-item .news-title { background: linear-gradient(90deg, #60a5fa, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 body.dark .meta { color: #71717a; border-bottom-color: #3f3f46; }
 body.dark .badge-tech { background: #27272a; color: #a1a1aa; border-color: #3f3f46; }
 body.dark .badge-rss { background: #27272a; color: #a1a1aa; border-color: #3f3f46; }
