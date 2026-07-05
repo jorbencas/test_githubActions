@@ -853,5 +853,20 @@
   },
   "https://www.wired.com/review/eight-sleep-pod-5/": {
     "ts": 1783250212.199707
+  },
+  "https://www.bbc.com/news/articles/c8e2j0j87reo": {
+    "ts": 1783255613.407469
+  },
+  "https://www.bbc.com/news/articles/cz758x04g83o": {
+    "ts": 1783255615.293374
+  },
+  "https://github.com/trystan-sa/claude-design-system-prompt": {
+    "ts": 1783255617.979204
+  },
+  "https://www.formaly.io/blog/knowledge-should-not-be-gated": {
+    "ts": 1783255619.864489
+  },
+  "https://hamiltonianresearch.xyz/blog/hr-diffuse-1.html": {
+    "ts": 1783255621.729035
   }
 }
