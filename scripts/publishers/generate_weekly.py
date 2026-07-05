@@ -211,6 +211,7 @@ def render_channel_chips(items: list, state_key: str, avatars: dict) -> str:
     for item in items:
         fuente = item.get(FUENTE_KEY, "")
         if fuente:
+            fuente = fuente.replace(" Shorts", "")
             channels[fuente] = channels.get(fuente, 0) + 1
 
     html = f'<button class="chip active" data-channel="all">Todos</button>'
@@ -333,12 +334,11 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
 
     # === Renderizar todas las secciones ===
     stats_html = render_stats(historial)
-    news_list_html = render_news_list(historial, avatars_known)
-    news_search_html = render_search_input("Buscar noticias...")
     video_items = [n for n in historial if n.get(ID_VIDEO_KEY)]
     news_items = [n for n in historial if not n.get(ID_VIDEO_KEY)]
+    news_list_html = render_news_list(news_items, avatars_known)
+    news_search_html = render_search_input("Buscar noticias...")
     news_channel_filters_html = render_channel_chips(news_items, "canalNoticias", avatars_known)
-    news_category_filters_html = render_category_chips(historial)
     video_search_html = render_search_input("Buscar vídeos...")
     multimedia_tabs_html = render_multimedia_tabs()
     video_channel_filters_html = render_channel_chips(video_items, "canalVideos", avatars_known)
@@ -357,7 +357,6 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
                 news_list_html=news_list_html,
                 news_search_html=news_search_html,
                 news_channel_filters_html=news_channel_filters_html,
-                news_category_filters_html=news_category_filters_html,
                 video_search_html=video_search_html,
                 multimedia_tabs_html=multimedia_tabs_html,
                 video_channel_filters_html=video_channel_filters_html,

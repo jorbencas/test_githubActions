@@ -314,10 +314,6 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             <summary>\U0001f310 Webs</summary>
             <div id="news-channel-filters" class="chip-container">{news_channel_filters_html}</div>
         </details>
-        <details class="filter-collapse" open>
-            <summary>\U0001f3af Categoría</summary>
-            <div id="news-category-filters" class="chip-container">{news_category_filters_html}</div>
-        </details>
         <ul id="news-list" class="news-list">{news_list_html}</ul>
 
         <h2>\U0001f3ac Multimedia</h2>
