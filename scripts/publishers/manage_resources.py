@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Gestión automática de resources.mdx: añade herramientas, paginación automática, limpieza."""
+"""Gestión automática de resources*.mdx: añade herramientas, paginación automática, limpieza, dedup, traducción."""
 
 import argparse
 import json
@@ -423,12 +423,12 @@ def reorder_resources(posts_dir: Path, max_cards: int):
         if is_first:
             preamble_clean = preamble_text.strip()
             content = preamble_clean + "\n\n" + body if preamble_clean else body
-            path = posts_dir / "resources.mdx"
+            path = existing[0] if existing else posts_dir / "resources.mdx"
         else:
             fm = generate_frontmatter(file_index, file_cards)
             content = fm + "\n" + body
 
-            if file_index <= len(existing) - 1:
+            if file_index < len(existing):
                 path = existing[file_index]
             else:
                 path, _ = get_next_filename(posts_dir, "resources.mdx")
@@ -590,7 +590,7 @@ def main():
 
     existing_files = sorted(posts_dir.glob("resources*.mdx"), key=lambda p: p.name)
     if not existing_files:
-        print(f"No se encuentra resources.mdx en {posts_dir}")
+        print(f"No se encuentra ningún resources*.mdx en {posts_dir}")
         sys.exit(1)
 
     print(f"📂 Archivos de recursos encontrados: {len(existing_files)}")
