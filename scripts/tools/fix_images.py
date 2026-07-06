@@ -537,8 +537,8 @@ async def process_file(session: aiohttp.ClientSession, path: Path, semaphore: as
                     if img.mode in ("RGBA", "P"): 
                         img = img.convert("RGB")
                     _, webp, _ = compress_and_save_adaptive(img, f"{base_name}_cover", current_folder)
-                if (current_folder / f"{base_name}_cover-1200.webp").exists():
-                    content = re.sub(r'image:\s*["\']?(.*?)["\']?\n', f'image: "img/{current_folder.name}/{base_name}_cover-1200.webp"\n', content)
+                    if webp:
+                        content = re.sub(r'^image:\s*["\']?(.*?)["\']?\n', f'image: "img/{current_folder.name}/{base_name}_cover-1200.webp"\n', content, flags=re.MULTILINE)
 
             # Inyección del cuerpo Markdown (Procesa imágenes internas)
             for i, (alt, original_src) in enumerate(md_images):
@@ -554,7 +554,7 @@ async def process_file(session: aiohttp.ClientSession, path: Path, semaphore: as
 
                 archivos_existen: bool = all((current_folder / f"{name}-{s}.webp").exists() for s in SIZES)
                 if not archivos_existen:
-                    full_local_path: Path = ROOT_DIR / original_src.lstrip("/")
+                    full_local_path: Path = ROOT_DIR / "public" / original_src.lstrip("/")
                     if full_local_path.exists() and full_local_path.is_file():
                         img = Image.open(full_local_path)
                     else:
