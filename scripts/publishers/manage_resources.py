@@ -14,28 +14,26 @@ RESOURCES_PER_FILE = 500
 SECTION_ID = "nuevas-herramientas"
 SECTION_TITLE = "\U0001f1f9 Nuevas Herramientas Descubiertas"
 
-# ── HTML Templates ──────────────────────────────────────────────────────────
-
-SECTION_HEADER_TEMPLATE = (
-    '<div class="not-prose mt-12 mb-6">'
-    '<h2 class="inline-flex items-center gap-2 bg-gradient-to-r from-sky-800 to-cyan-500 '
-    'dark:from-sky-600 dark:to-cyan-400 px-5 py-2.5 text-xs sm:text-sm font-black '
-    'uppercase tracking-[0.25em] text-white dark:text-slate-900 '
-    'shadow-[4px_4px_0px_0px_rgba(6,182,212,0.3)]" id="{section_id}">'
-    '{title}</h2></div>'
+IMPORT_BLOCK = (
+    "import ResourceCard from '@components/ResourceCard.astro';\n"
+    "import ResourceCategory from '@components/ResourceCategory.astro';\n"
 )
 
-GRID_TEMPLATE = '<div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-6">'
+# ── Component Templates ───────────────────────────────────────────────────────
 
 CARD_TEMPLATE = """\
-<a href="{url}" class="flex items-start gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:border-cyan-400 dark:hover:border-cyan-400 hover:shadow-xl hover:-translate-y-1 transition-all no-underline group">
-  <img src="{favicon}" width="20" height="20" class="mt-1 shrink-0 rounded bg-slate-100 dark:bg-slate-800 p-0.5" alt="{name}" loading="lazy" />
-  <div>
-    <span class="font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">{name}</span>{desc_html}
-  </div>
-</a>"""
+<ResourceCard
+  href="{url}"
+  title="{name}"
+  description="{desc}"
+/>"""
 
-CARD_DESC_TEMPLATE = '\n    <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">{desc}</p>'
+SECTION_TEMPLATE = """\
+<ResourceCategory id="{section_id}" title="{section_title}">
+
+{cards}
+
+</ResourceCategory>"""
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -43,17 +41,14 @@ def domain_from(url: str) -> str:
     return urlparse(url).netloc.replace("www.", "")
 
 
-def escape_html(text: str) -> str:
-    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+def escape_component(text: str) -> str:
+    return text.replace('"', "&quot;")
 
 
 def format_card(name: str, url: str, description: str) -> str:
-    dom = domain_from(url)
-    favicon = f"https://www.google.com/s2/favicons?domain={dom}&sz=32"
-    name_esc = escape_html(name)
-    desc_esc = escape_html(description)
-    desc_html = CARD_DESC_TEMPLATE.format(desc=desc_esc) if desc_esc else ""
-    return CARD_TEMPLATE.format(url=url, favicon=favicon, name=name_esc, desc_html=desc_html)
+    name_esc = name.replace('"', "&quot;")
+    desc_esc = description.replace('"', "&quot;")
+    return CARD_TEMPLATE.format(url=url, name=name_esc, desc=desc_esc)
 
 
 def extract_existing_urls(text: str) -> set:
@@ -67,28 +62,36 @@ def extract_existing_urls(text: str) -> set:
 
 
 def count_cards(text: str) -> int:
-    return len(re.findall(r'<a href="https?://[^"]+" class="flex items-start gap-4.*?</a>', text, re.DOTALL))
+    return len(re.findall(r'<ResourceCard\n', text))
 
 
-# ── Section Parsing ──────────────────────────────────────────────────────────
+# ── Section Parsing (new component format) ────────────────────────────────────
 
-def find_grid_bounds(content: str, grid_start: int) -> tuple[int, int]:
-    """Find matching </div> for grid with depth counting."""
+SECTION_OPEN_RE = re.compile(
+    r'<ResourceCategory id="([^"]*)" title="([^"]*)">'
+)
+
+def find_section_bounds(content: str, section_start: int) -> tuple[int, int]:
+    """Find matching </ResourceCategory> with depth counting."""
     depth = 0
-    i = grid_start
+    i = section_start
+    open_tag = '<ResourceCategory'
+    close_tag = '</ResourceCategory>'
+    open_len = len(open_tag)
+    close_len = len(close_tag)
     while i < len(content):
-        if content[i:i + 6] == '</div>':
+        if content[i:i + close_len] == close_tag:
             depth -= 1
             if depth == 0:
-                return grid_start, i + 6
-            i += 6
+                return section_start, i + close_len
+            i += close_len
             continue
-        if content[i:i + 4] == '<div' and content[i + 4] in (' ', '>'):
+        if content[i:i + open_len] == open_tag:
             depth += 1
-            i += 4
+            i += open_len
             continue
         i += 1
-    return grid_start, len(content)
+    return section_start, len(content)
 
 
 def extract_sections(content: str) -> list[tuple[str, str]]:
@@ -98,44 +101,50 @@ def extract_sections(content: str) -> list[tuple[str, str]]:
     last_end = 0
 
     while True:
-        header_start = content.find('<div class="not-prose mt-12 mb-6">', pos)
-        if header_start == -1:
-            break
-        header_end = content.find('</h2></div>', header_start)
-        if header_end == -1:
-            break
-        header_end += len('</h2></div>')
-
-        grid_start = content.find('<div class="not-prose grid grid-cols-1', header_end)
-        if grid_start == -1:
+        m = SECTION_OPEN_RE.search(content, pos)
+        if not m:
             break
 
-        _, grid_end = find_grid_bounds(content, grid_start)
-        section = content[header_start:grid_end]
+        _, section_end = find_section_bounds(content, m.start())
+        section_text = content[m.start():section_end]
 
-        if header_start > last_end:
-            sections.append(("preamble", content[last_end:header_start]))
-        sections.append(("section", section))
-        last_end = grid_end
-        pos = grid_end
+        if m.start() > last_end:
+            sections.append(("preamble", content[last_end:m.start()]))
+        sections.append(("section", section_text))
+        last_end = section_end
+        pos = section_end
 
     if last_end < len(content):
         sections.append(("preamble", content[last_end:]))
     return sections
 
 
-def extract_category_name(section_html: str) -> str:
-    m = re.search(r'<h2[^>]*>([^<]+)</h2>', section_html)
+def extract_category_name(section_text: str) -> str:
+    m = SECTION_OPEN_RE.search(section_text)
     if not m:
         return ""
-    text = m.group(1).strip()
-    parts = text.split(None, 1)
+    title = m.group(2).strip()
+    parts = title.split(None, 1)
     if parts and len(parts) > 1 and not re.search(r'[a-zA-Z0-9]', parts[0]):
         return parts[1].strip().lower()
-    return text.lower()
+    return title.lower()
 
 
 # ── File Management ──────────────────────────────────────────────────────────
+
+def has_imports(text: str) -> bool:
+    return "import ResourceCard from" in text
+
+
+def ensure_imports(text: str) -> str:
+    if has_imports(text):
+        return text
+    fm_end = text.find("---", 3)
+    if fm_end == -1:
+        return text
+    fm_end += 3
+    return text[:fm_end] + "\n" + IMPORT_BLOCK + "\n" + text[fm_end:]
+
 
 def get_next_filename(posts_dir: Path, base_name: str) -> tuple[Path, int]:
     for i in range(100):
@@ -179,9 +188,6 @@ def reorder_resources(posts_dir: Path, max_cards: int):
             preamble_text = content
             break
 
-    fm_end = first_content.find("---", 3)
-    frontmatter = first_content[:fm_end + 3] if fm_end != -1 else first_content
-
     while preamble_text.startswith("---"):
         fm_close = preamble_text.find("---", 3)
         if fm_close == -1:
@@ -196,7 +202,7 @@ def reorder_resources(posts_dir: Path, max_cards: int):
         for t, content in sp:
             if t == "section":
                 cat = extract_category_name(content)
-                cards = re.findall(r'<a href="https?://[^"]+" class="flex items-start gap-4.*?</a>', content, re.DOTALL)
+                cards = re.findall(r'<ResourceCard\n', content)
                 if cards:
                     total_card_count += len(cards)
                     all_sections.append((cat, content))
@@ -214,31 +220,35 @@ def reorder_resources(posts_dir: Path, max_cards: int):
         file_sections = []
 
         while section_ptr < len(all_sections):
-            _, sec_html = all_sections[section_ptr]
-            sec_count = len(re.findall(r'<a href="https?://[^"]+" class="flex items-start gap-4.*?</a>', sec_html, re.DOTALL))
+            _, sec_text = all_sections[section_ptr]
+            sec_count = sec_text.count('<ResourceCard\n')
             if file_cards + sec_count <= max_cards:
-                file_sections.append(sec_html)
+                file_sections.append(sec_text)
                 file_cards += sec_count
                 section_ptr += 1
             else:
                 if not file_sections:
-                    file_sections.append(sec_html)
+                    file_sections.append(sec_text)
                     file_cards += sec_count
                     section_ptr += 1
                 break
 
+        body = "\n\n".join(file_sections) + "\n"
+
         if is_first:
-            body = preamble_text + "\n\n" + "\n\n".join(file_sections) + "\n"
-            content = frontmatter + "\n" + body
+            preamble_clean = preamble_text.strip()
+            content = preamble_clean + "\n\n" + body if preamble_clean else body
             path = posts_dir / "resources.mdx"
         else:
-            body = "\n\n".join(file_sections) + "\n"
             fm = generate_frontmatter(file_index, file_cards)
             content = fm + "\n" + body
+
             if file_index <= len(existing) - 1:
                 path = existing[file_index]
             else:
                 path, _ = get_next_filename(posts_dir, "resources.mdx")
+
+        content = ensure_imports(content)
 
         path.write_text(content, encoding="utf-8")
         written_files.append(path)
@@ -256,9 +266,9 @@ def reorder_resources(posts_dir: Path, max_cards: int):
 # ── Fix Spacing ──────────────────────────────────────────────────────────────
 
 def fix_card_spacing(content: str) -> str:
-    """Ensure blank line between </a> and next <a> card."""
+    """Ensure blank line between </ResourceCategory> and next section."""
     return re.sub(
-        r'(</a>)\s*\n(<a href="https?://[^"]+" class="flex items-start gap-4)',
+        r'(</ResourceCategory>)\s*\n(<ResourceCategory)',
         r'\1\n\n\2',
         content,
     )
@@ -270,7 +280,6 @@ def fix_all_files(posts_dir: Path):
     for rf in sorted(posts_dir.glob("resources*.mdx")):
         content = rf.read_text(encoding="utf-8")
         fixed = fix_card_spacing(content)
-        # Also ensure file ends with newline
         if not fixed.endswith("\n"):
             fixed += "\n"
         if fixed != content:
@@ -278,6 +287,98 @@ def fix_all_files(posts_dir: Path):
             print(f"   🔧 Fixed spacing in {rf.name}")
             fixed_count += 1
     return fixed_count
+
+
+def _legacy_find_grid_bounds(content: str, grid_start: int) -> tuple[int, int]:
+    """Find matching </div> for grid with depth counting."""
+    depth = 0
+    i = grid_start
+    while i < len(content):
+        if content[i:i + 6] == '</div>':
+            depth -= 1
+            if depth == 0:
+                return grid_start, i + 6
+            i += 6
+            continue
+        if content[i:i + 4] == '<div' and (i + 4 >= len(content) or content[i + 4] in (' ', '>')):
+            depth += 1
+            i += 4
+            continue
+        i += 1
+    return grid_start, len(content)
+
+
+def convert_legacy_section(section_html: str) -> str:
+    """Convert a legacy HTML section to new component format."""
+    m = re.search(r'<h2[^>]* id="([^"]*)">([^<]+)</h2>', section_html)
+    if not m:
+        return section_html
+    section_id = m.group(1)
+    title = m.group(2)
+
+    cards_text = section_html[m.end():]
+    grid_start = cards_text.find('<div class="not-prose grid')
+    if grid_start == -1:
+        return section_html
+
+    _, grid_end = _legacy_find_grid_bounds(cards_text, grid_start)
+    grid_inner_start = cards_text.index('>', grid_start) + 1
+    inner = cards_text[grid_inner_start:grid_end - 6]
+
+    card_pattern = re.compile(
+        r'<a href="([^"]+)" class="flex items-start gap-4[^"]*">'
+        r'\s*<img[^>]*/>'
+        r'\s*<div>'
+        r'\s*<span[^>]*>([^<]+)</span>'
+        r'\s*<p[^>]*>(.*?)</p>'
+        r'\s*</div>'
+        r'\s*</a>',
+        re.DOTALL
+    )
+
+    cards = []
+    for cm in card_pattern.finditer(inner):
+        href = cm.group(1)
+        name = cm.group(2)
+        desc = cm.group(3)
+        desc = desc.replace('&amp;', '&')
+        cards.append(format_card(name, href, desc))
+
+    if not cards:
+        return section_html
+
+    return SECTION_TEMPLATE.format(
+        section_id=section_id,
+        section_title=title,
+        cards="\n\n".join(cards),
+    )
+
+
+def convert_all_legacy_files(posts_dir: Path):
+    """Convert all resources*.mdx from legacy HTML to component format."""
+    converted = 0
+    for rf in sorted(posts_dir.glob("resources*.mdx")):
+        content = rf.read_text(encoding="utf-8")
+        if has_imports(content):
+            continue
+
+        print(f"   🔄 Converting {rf.name} from legacy HTML to components...")
+
+        parts = extract_sections(content)
+        new_parts = []
+        for t, text in parts:
+            if t == "section":
+                text = convert_legacy_section(text)
+            new_parts.append(text)
+
+        new_content = "".join(new_parts)
+        new_content = ensure_imports(new_content)
+
+        rf.write_text(new_content, encoding="utf-8")
+        converted += 1
+        print(f"      Done ({count_cards(new_content)} cards)")
+
+    return converted
 
 
 # ── Main ─────────────────────────────────────────────────────────────────────
@@ -289,7 +390,8 @@ def main():
     parser.add_argument("--max-cards", type=int, default=RESOURCES_PER_FILE, help="Max cards per file")
     parser.add_argument("--clean", action="store_true", help="Check URLs and remove dead resources")
     parser.add_argument("--reorder", action="store_true", help="Reorder all categories alphabetically")
-    parser.add_argument("--fix-spacing", action="store_true", help="Fix missing blank lines between cards")
+    parser.add_argument("--fix-spacing", action="store_true", help="Fix missing blank lines between sections")
+    parser.add_argument("--convert", action="store_true", help="Convert legacy HTML files to component format")
     args = parser.parse_args()
 
     blog_path = Path(args.blog_path).resolve()
@@ -312,25 +414,31 @@ def main():
         print(f"   {f.name}: {c} tarjetas")
     print(f"   Total: {total_cards} tarjetas")
 
+    # Convert legacy files
+    if args.convert:
+        print("\n🔄 Convirtiendo archivos legacy al formato de componentes...")
+        converted = convert_all_legacy_files(posts_dir)
+        if converted:
+            existing_files = sorted(posts_dir.glob("resources*.mdx"), key=lambda p: p.name)
+            print(f"   {converted} archivo(s) convertido(s)")
+        else:
+            print("   No hay archivos legacy que convertir")
+
     # Fix spacing issues
     if args.fix_spacing:
-        print("\n🔧 Corrigiendo espaciado entre cards...")
+        print("\n🔧 Corrigiendo espaciado entre secciones...")
         fixed = fix_all_files(posts_dir)
         if fixed:
             existing_files = sorted(posts_dir.glob("resources*.mdx"), key=lambda p: p.name)
         print()
 
-    # Fix broken </a> tags
+    # Ensure imports in all files
     for rf in existing_files:
         content = rf.read_text(encoding="utf-8")
-        fixed = re.sub(
-            r'(?<!</a>\n)(</div>)\s*\n\s*(<a href="https?://[^"]+" class="flex items-start gap-4)',
-            r'\1\n</a>\n\2',
-            content,
-        )
-        if fixed != content:
-            rf.write_text(fixed, encoding="utf-8")
-            print(f"   🔧 Reparados cards sin </a> en {rf.name}")
+        updated = ensure_imports(content)
+        if updated != content:
+            rf.write_text(updated, encoding="utf-8")
+            print(f"   📥 Añadidos imports a {rf.name}")
 
     # Ensure "recursos" tag
     for rf in existing_files:
@@ -357,7 +465,7 @@ def main():
         print("\n🔍 Verificando enlaces de recursos...")
         for rf in existing_files:
             content = rf.read_text(encoding="utf-8")
-            card_pattern = re.compile(r'(<a href="https?://[^"]+" class="flex items-start gap-4.*?</a>)', re.DOTALL)
+            card_pattern = re.compile(r'(<ResourceCard\n  href="[^"]+"\n  title="[^"]+"\n  description="[^"]*"\n/>)', re.DOTALL)
             cards = card_pattern.findall(content)
             removed = 0
             checked = 0
@@ -419,35 +527,34 @@ def main():
     if new_tools:
         print(f"\n➕ Añadiendo {len(new_tools)} nuevas herramientas...")
 
-        cards = [format_card(t.get("titulo", domain_from(t.get("enlace", ""))), t.get("enlace", ""), t.get("descripcion", "")) for t in new_tools]
+        cards = [format_card(
+            t.get("titulo", domain_from(t.get("enlace", ""))),
+            t.get("enlace", ""),
+            t.get("descripcion", ""),
+        ) for t in new_tools]
         cards_block = "\n\n".join(cards)
 
-        # Find "Nuevas Herramientas" section or create it
-        section_header = SECTION_HEADER_TEMPLATE.format(section_id=SECTION_ID, title=SECTION_TITLE)
-        grid_open = GRID_TEMPLATE
+        section_text = SECTION_TEMPLATE.format(
+            section_id=SECTION_ID,
+            section_title=SECTION_TITLE,
+            cards=cards_block,
+        )
 
         if SECTION_ID in active_content:
-            # Find end of grid in existing section
-            header_idx = active_content.find(f'id="{SECTION_ID}"')
-            if header_idx != -1:
-                grid_start = active_content.find(grid_open, header_idx)
-                if grid_start != -1:
-                    _, grid_end = find_grid_bounds(active_content, grid_start)
-                    before = active_content[:grid_end - 6].rstrip('\n')
-                    after = active_content[grid_end:]
-                    active_content = before + "\n\n" + cards_block + "\n\n</div>" + after
+            # Find existing "Nuevas Herramientas" section and append cards
+            m = SECTION_OPEN_RE.search(active_content)
+            while m:
+                if m.group(1) == SECTION_ID:
+                    _, sec_end = find_section_bounds(active_content, m.start())
+                    before = active_content[:sec_end - 22].rstrip('\n')
+                    after = active_content[sec_end:]
+                    active_content = before + "\n\n" + cards_block + "\n\n</ResourceCategory>" + after
+                    break
+                m = SECTION_OPEN_RE.search(active_content, m.end())
+            else:
+                active_content = active_content.rstrip() + "\n\n" + section_text + "\n"
         else:
-            separator = "\n\n"
-            block = (
-                separator
-                + section_header
-                + "\n"
-                + grid_open
-                + "\n\n"
-                + cards_block
-                + "\n\n</div>\n"
-            )
-            active_content = active_content.rstrip() + block
+            active_content = active_content.rstrip() + "\n\n" + section_text + "\n"
 
         active_file.write_text(active_content, encoding="utf-8")
         active_card_count = count_cards(active_content)
@@ -467,14 +574,14 @@ def main():
             print("⚠️  No se pudieron identificar secciones para paginar.")
             sys.exit(0)
 
-        preamble_text = preambles[0] if preambles else active_content
+        preamble_text = preambles[0] if preambles else ""
 
         kept_sections = []
         overflow_sections = []
         kept_count = 0
 
         for s in sections:
-            s_cards = count_cards(s)
+            s_cards = s.count('<ResourceCard\n')
             if kept_count + s_cards <= args.max_cards:
                 kept_sections.append(s)
                 kept_count += s_cards
@@ -485,15 +592,18 @@ def main():
             new_index = active_index + 1
             new_path, _ = get_next_filename(posts_dir, "resources.mdx")
 
-            overflow_card_count = sum(count_cards(s) for s in overflow_sections)
+            overflow_card_count = sum(s.count('<ResourceCard\n') for s in overflow_sections)
 
             new_frontmatter = generate_frontmatter(new_index, overflow_card_count)
-            new_content = new_frontmatter.strip() + "\n\n" + "\n\n".join(overflow_sections) + "\n"
+            new_body = "\n\n".join(overflow_sections) + "\n"
+            new_content = new_frontmatter.strip() + "\n\n" + new_body
+            new_content = ensure_imports(new_content)
             new_path.write_text(new_content, encoding="utf-8")
             print(f"   ✅ Creado {new_path.name} con {overflow_card_count} tarjetas ({len(overflow_sections)} secciones)")
 
-            kept_content = preamble_text + "\n" + "\n\n".join(kept_sections) + "\n"
-            active_file.write_text(kept_content, encoding="utf-8")
+            kept_body = preamble_text + "\n\n" + "\n\n".join(kept_sections) + "\n" if preamble_text else "\n\n".join(kept_sections) + "\n"
+            kept_body = ensure_imports(kept_body)
+            active_file.write_text(kept_body, encoding="utf-8")
             print(f"   ✅ {active_file.name} ahora tiene {kept_count} tarjetas ({len(kept_sections)} secciones)")
         else:
             print("   ⚠️  No se pudo dividir - tarjetas concentradas en pocas secciones grandes.")

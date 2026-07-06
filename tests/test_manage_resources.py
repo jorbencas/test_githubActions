@@ -1,7 +1,7 @@
 from scripts.publishers.manage_resources import (
-    domain_from, format_card, count_cards, find_grid_bounds,
+    domain_from, format_card, count_cards, find_section_bounds, SECTION_OPEN_RE,
     extract_sections, extract_category_name,
-    generate_frontmatter,
+    generate_frontmatter, has_imports, ensure_imports, convert_legacy_section,
 )
 
 
@@ -19,69 +19,81 @@ class TestDomainFrom:
 class TestFormatCard:
     def test_card_has_required_parts(self):
         card = format_card("Test", "https://example.com", "A description")
-        assert '<a href="https://example.com"' in card
-        assert "Test" in card
-        assert "A description" in card
-        assert "</a>" in card
+        assert '<ResourceCard' in card
+        assert 'href="https://example.com"' in card
+        assert 'title="Test"' in card
+        assert 'description="A description"' in card
+        assert '/>' in card
 
     def test_card_without_description(self):
         card = format_card("NoDesc", "https://example.com", "")
-        assert "NoDesc" in card
-        assert "<p" not in card  # No empty <p>
+        assert 'description=""' in card
 
-    def test_card_escapes_html(self):
-        card = format_card("<b>X</b>", "https://example.com", 'a & b < c')
-        assert "&lt;b&gt;X&lt;/b&gt;" in card
-        assert "a &amp; b &lt; c" in card
+    def test_card_escapes_quotes(self):
+        card = format_card('Test "Name"', "https://example.com", 'desc "with" quotes')
+        assert "&quot;" in card
 
-    def test_favicon_url(self):
+    def test_card_ampersand_not_escaped(self):
+        card = format_card("Test", "https://example.com", "a & b")
+        assert "a & b" in card
+
+    def test_no_favicon_reference(self):
         card = format_card("X", "https://example.com/page", "")
-        assert "google.com/s2/favicons?domain=example.com" in card
+        assert "google.com/s2/favicons" not in card
 
 
 class TestCountCards:
     def test_counts_correctly(self):
-        html = (
-            '<a href="https://a.com" class="flex items-start gap-4 ..."></a>\n'
-            '<a href="https://b.com" class="flex items-start gap-4 ..."></a>\n'
-            '<a href="https://c.com" class="flex items-start gap-4 ..."></a>\n'
+        text = (
+            '<ResourceCard\n'
+            '  href="https://a.com"\n'
+            '  title="A"\n'
+            '  description="a"\n'
+            '/>\n'
+            '<ResourceCard\n'
+            '  href="https://b.com"\n'
+            '  title="B"\n'
+            '  description="b"\n'
+            '/>\n'
         )
-        assert count_cards(html) == 3
+        assert count_cards(text) == 2
 
     def test_zero_cards(self):
         assert count_cards("<p>no cards here</p>") == 0
 
-    def test_card_with_long_content(self):
-        card = format_card("Long", "https://example.com", "x" * 500)
-        assert count_cards(card) == 1
 
-
-class TestFindGridBounds:
-    def test_simple_grid(self):
-        html = '<div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-6">\ncard\n</div>'
-        start, end = find_grid_bounds(html, 0)
+class TestFindSectionBounds:
+    def test_simple_section(self):
+        text = '<ResourceCategory id="test" title="Test">\n\ncard\n\n</ResourceCategory>'
+        start, end = find_section_bounds(text, 0)
         assert start == 0
-        assert html[start:end] == html
+        assert text[start:end] == text
 
-    def test_nested_divs(self):
-        html = (
-            '<div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-6">\n'
-            '  <div>inner</div>\n'
-            '</div>\n'
+    def test_nested_sections_not_nested(self):
+        text = (
+            '<ResourceCategory id="a" title="A">\n'
+            '<ResourceCard\n'
+            '  href="https://x.com"\n'
+            '  title="X"\n'
+            '  description="x"\n'
+            '/>\n'
+            '</ResourceCategory>\n'
+            '<ResourceCategory id="b" title="B">\n'
+            'card\n'
+            '</ResourceCategory>\n'
             'tail'
         )
-        start, end = find_grid_bounds(html, 0)
-        assert end == len(html) - 5  # minus "tail"
-        assert html[end:] == "\ntail"
+        start, end = find_section_bounds(text, 0)
+        # Should stop at first </ResourceCategory> (section "a")
+        section_a = text[start:end]
+        assert 'id="a"' in section_a
+        assert 'id="b"' not in section_a
+        assert section_a.endswith('</ResourceCategory>')
 
-    def test_deeply_nested(self):
-        html = (
-            '<div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-6">\n'
-            '  <div><div><p>deep</p></div></div>\n'
-            '</div>\n'
-        )
-        start, end = find_grid_bounds(html, 0)
-        assert html[:end] == html.strip()
+    def test_end_of_content(self):
+        text = '<ResourceCategory id="x" title="X">\ncard\n'
+        start, end = find_section_bounds(text, 0)
+        assert text[start:end] == text
 
 
 class TestExtractSections:
@@ -89,15 +101,29 @@ class TestExtractSections:
 title: Test
 ---
 
-<div class="not-prose mt-12 mb-6"><h2 id="cat1">📁 Categoria 1</h2></div>
-<div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
-<a href="https://a.com" class="flex items-start gap-4 ..."></a>
-</div>
+preamble text
 
-<div class="not-prose mt-12 mb-6"><h2 id="cat2">📁 Categoria 2</h2></div>
-<div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
-<a href="https://b.com" class="flex items-start gap-4 ..."></a>
-</div>
+<ResourceCategory id="cat1" title="📁 Categoria 1">
+
+<ResourceCard
+  href="https://a.com"
+  title="A"
+  description="a"
+/>
+
+</ResourceCategory>
+
+<ResourceCategory id="cat2" title="📁 Categoria 2">
+
+<ResourceCard
+  href="https://b.com"
+  title="B"
+  description="b"
+/>
+
+</ResourceCategory>
+
+footer
 """
 
     def test_extracts_two_sections(self):
@@ -108,6 +134,7 @@ title: Test
     def test_first_section_content(self):
         parts = extract_sections(self.SAMPLE)
         sections = [p for p in parts if p[0] == "section"]
+        assert "cat1" in sections[0][1]
         assert "Categoria 1" in sections[0][1]
         assert "a.com" in sections[0][1]
 
@@ -116,18 +143,23 @@ title: Test
         preambles = [p for p in parts if p[0] == "preamble"]
         assert any("---" in p[1] for p in preambles)
 
+    def test_footer_is_preamble(self):
+        parts = extract_sections(self.SAMPLE)
+        preambles = [p for p in parts if p[0] == "preamble"]
+        assert any("footer" in p[1] for p in preambles)
+
 
 class TestExtractCategoryName:
     def test_with_emoji(self):
-        html = '<h2 class="...">📁 Categoria</h2>'
-        assert extract_category_name(html) == "categoria"
+        text = '<ResourceCategory id="x" title="📁 Categoria">\ncard\n</ResourceCategory>'
+        assert extract_category_name(text) == "categoria"
 
     def test_without_emoji(self):
-        html = '<h2 class="...">Testing</h2>'
-        assert extract_category_name(html) == "testing"
+        text = '<ResourceCategory id="x" title="Testing">\ncard\n</ResourceCategory>'
+        assert extract_category_name(text) == "testing"
 
     def test_empty(self):
-        assert extract_category_name("<p>no h2</p>") == ""
+        assert extract_category_name("<p>no section</p>") == ""
 
 
 class TestGenerateFrontmatter:
@@ -140,3 +172,52 @@ class TestGenerateFrontmatter:
         fm = generate_frontmatter(1, 300)
         assert 'Página 2' in fm
         assert '300' in fm
+
+
+class TestHasImports:
+    def test_has_imports(self):
+        assert has_imports("import ResourceCard from '@components/ResourceCard.astro';")
+
+    def test_no_imports(self):
+        assert not has_imports("---\ntitle: Test\n---\n\ncontent")
+
+
+class TestEnsureImports:
+    def test_adds_imports_after_frontmatter(self):
+        text = "---\ntitle: Test\n---\n\ncontent"
+        result = ensure_imports(text)
+        assert "import ResourceCard from" in result
+        assert "import ResourceCategory from" in result
+        assert "content" in result
+        assert result.index("import") > result.index("---")
+
+    def test_does_not_duplicate(self):
+        text = "---\ntitle: Test\n---\n\nimport ResourceCard from '@components/ResourceCard.astro';\nimport ResourceCategory from '@components/ResourceCategory.astro';\n\ncontent"
+        result = ensure_imports(text)
+        assert result.count("import ResourceCard") == 1
+
+
+class TestConvertLegacySection:
+    def test_converts_html_section(self):
+        html = '''<div class="not-prose mt-12 mb-6"><h2 class="..." id="test-id">🔧 Test Title</h2></div>
+<div class="not-prose grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+
+<a href="https://example.com" class="flex items-start gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:border-cyan-400 dark:hover:border-cyan-400 hover:shadow-xl hover:-translate-y-1 transition-all no-underline group">
+  <img src="https://www.google.com/s2/favicons?domain=example.com&sz=32" width="20" height="20" class="mt-1 shrink-0 rounded bg-slate-100 dark:bg-slate-800 p-0.5" alt="Test" loading="lazy" />
+  <div>
+    <span class="font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">Test Tool</span>
+    <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">A description with &amp; ampersand</p>
+  </div>
+</a>
+
+</div>'''
+        result = convert_legacy_section(html)
+        assert '<ResourceCategory id="test-id" title="🔧 Test Title">' in result
+        assert '<ResourceCard' in result
+        assert 'href="https://example.com"' in result
+        assert 'title="Test Tool"' in result
+        assert 'description="A description with & ampersand"' in result
+        assert '</ResourceCategory>' in result
+
+    def test_returns_original_if_no_h2(self):
+        assert convert_legacy_section("<p>no section</p>") == "<p>no section</p>"
