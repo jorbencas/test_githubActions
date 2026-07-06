@@ -2,6 +2,18 @@
 
 ## Cambios recientes
 
+### Dedup + traducción resources — 06/07/2026
+- `manage_resources.py`: añadido `--dedup` que fusiona secciones con mismo ID y elimina tarjetas duplicadas por URL
+- `manage_resources.py`: añadido `--translate` que traduce descripciones al español vía Gemini (heuristic: >=60% ASCII = inglés)
+- `daily_resources.yml`: añadido `--dedup` al comando diario (previene duplicación de secciones)
+- `merge_sections()`: función que agrupa secciones por ID y deduplica cards por `href`
+- `deduplicate_all_files()`: fusiona todos los resources*.mdx en uno, elimina duplicados, repagina
+- Formato ResourceCard/ResourceCategory: migración completa (sin HTML inline legacy)
+- Tests: 96 tests (28 específicos de manage_resources)
+- Commit: `[manage_resources] add --dedup (merge sections + dedup cards) and --translate (Gemini ES)`
+
+### Traducciones y dark theme — 05/07/2026
+
 ### Traducciones y dark theme — 05/07/2026
 - `FUENTES_INGLES` ampliado con `freecodecamp` y `nethermind` para traducción de títulos YT inglés
 - `generate_weekly.py`: ahora ejecuta `traducir_titulos_ia` sobre todo el histórico antes de renderizar el dashboard, y guarda los títulos traducidos al JSON

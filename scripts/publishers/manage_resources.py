@@ -3,12 +3,17 @@
 
 import argparse
 import json
+import os
 import re
 import sys
 import time
 import urllib.request
 from pathlib import Path
 from urllib.parse import urlparse
+
+from google import genai
+
+from scripts.utils.constants_downloadfile import CONFIG
 
 RESOURCES_PER_FILE = 500
 SECTION_ID = "nuevas-herramientas"
@@ -173,13 +178,50 @@ author: "Jorge Beneyto Castelló"
 
 # ── Reorder ──────────────────────────────────────────────────────────────────
 
-def reorder_resources(posts_dir: Path, max_cards: int):
-    """Merge all resources*.mdx, sort sections alphabetically, redistribute."""
-    existing = sorted(posts_dir.glob("resources*.mdx"), key=lambda p: p.name)
-    if not existing:
-        print("⚠️  No hay resources*.mdx para reordenar.")
-        return
+CARD_URL_RE = re.compile(r'href="(https?://[^"]+)"')
 
+
+def extract_card_urls(section_text: str) -> list[str]:
+    return CARD_URL_RE.findall(section_text)
+
+
+def merge_sections(sections: list[tuple[str, str]]) -> list[tuple[str, str]]:
+    """Merge sections with the same category name, deduplicating cards by URL."""
+    merged: dict[str, list[str]] = {}
+    section_titles: dict[str, str] = {}
+
+    for cat, text in sections:
+        m = SECTION_OPEN_RE.search(text)
+        if m:
+            section_titles[cat] = m.group(2)
+        if cat not in merged:
+            merged[cat] = []
+            section_titles.setdefault(cat, "")
+
+        card_pattern = re.compile(
+            r'<ResourceCard\n  href="[^"]+"\n  title="[^"]+"\n  description="[^"]*"\n/>',
+            re.DOTALL,
+        )
+        seen_urls = set(extract_card_urls("\n".join(merged.get(cat, []))))
+        for card in card_pattern.findall(text):
+            url_match = re.search(r'href="(https?://[^"]+)"', card)
+            if url_match and url_match.group(1) not in seen_urls:
+                merged[cat].append(card)
+                seen_urls.add(url_match.group(1))
+
+    result = []
+    for cat in merged:
+        title = section_titles.get(cat, cat)
+        cards_block = "\n\n".join(merged[cat])
+        result.append((
+            cat,
+            SECTION_TEMPLATE.format(section_id=cat, section_title=title, cards=cards_block),
+        ))
+    return result
+
+
+def _extract_all_sections(existing: list[Path]) -> tuple[str, list[tuple[str, str]], int]:
+    """Extract all sections from all files, returning (preamble, sections, total_cards)."""
     first_content = existing[0].read_text(encoding="utf-8")
     parts = extract_sections(first_content)
     preamble_text = ""
@@ -207,20 +249,163 @@ def reorder_resources(posts_dir: Path, max_cards: int):
                     total_card_count += len(cards)
                     all_sections.append((cat, content))
 
-    all_sections.sort(key=lambda x: x[0])
-    print(f"📊 {len(all_sections)} secciones ({total_card_count} tarjetas) ordenadas alfabéticamente")
+    return preamble_text, all_sections, total_card_count
+
+
+def deduplicate_all_files(posts_dir: Path) -> int:
+    """Merge sections with same ID and deduplicate cards by URL across all resources*.mdx files."""
+    existing = sorted(posts_dir.glob("resources*.mdx"), key=lambda p: p.name)
+    if not existing:
+        print("⚠️  No hay resources*.mdx para deduplicar.")
+        return 0
+
+    print(f"📂 Procesando {len(existing)} archivos...")
+
+    preamble_text, all_sections, total_card_count = _extract_all_sections(existing)
+
+    # Count before
+    before_count = len(all_sections)
+    print(f"   Secciones antes: {before_count}, tarjetas: {total_card_count}")
+
+    # Merge duplicates
+    merged = merge_sections(all_sections)
+    after_section_count = len(merged)
+    after_card_count = sum(len(extract_card_urls(s[1])) for s in merged)
+    print(f"   Secciones después: {after_section_count}, tarjetas: {after_card_count}")
+
+    # Sort alphabetically
+    merged.sort(key=lambda x: x[0])
+
+    # Update first file and remove rest
+    first = existing[0]
+    body_parts = [s[1] for s in merged]
+    body = "\n\n".join(body_parts) + "\n"
+    content = preamble_text.strip()
+    if content:
+        content += "\n\n" + body
+    else:
+        content = body
+    content = ensure_imports(content)
+    first.write_text(content, encoding="utf-8")
+
+    removed = 0
+    for f in existing[1:]:
+        f.unlink()
+        removed += 1
+        print(f"   🗑️  Eliminado {f.name} (contenido fusionado en {first.name})")
+
+    print(f"\n✅ Deduplicación completa: {before_count} → {after_section_count} secciones, 1 archivo")
+    return removed + 1
+
+
+def translate_descriptions(posts_dir: Path):
+    """Translate English card descriptions to Spanish using Gemini."""
+    existing = sorted(posts_dir.glob("resources*.mdx"), key=lambda p: p.name)
+    if not existing:
+        print("⚠️  No hay resources*.mdx para traducir.")
+        return
+
+    api_key = CONFIG.get("GEMINI_KEY") or os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        print("⚠️  No se encontró GEMINI_KEY en CONFIG ni GEMINI_API_KEY en entorno.")
+        return
+    client = genai.Client(api_key=api_key)
+
+    card_pattern = re.compile(
+        r'<ResourceCard\n  href="[^"]+"\n  title="[^"]+"\n  description="([^"]*)"\n/>',
+        re.DOTALL,
+    )
+
+    # Heuristic: descriptions with >=60% ASCII letters likely need translation
+    def needs_translation(desc: str) -> bool:
+        if not desc.strip():
+            return False
+        letters = [c for c in desc if c.isalpha()]
+        if not letters:
+            return False
+        ascii_letters = sum(1 for c in letters if c.isascii())
+        return (ascii_letters / len(letters)) >= 0.6
+
+    total_translated = 0
+
+    for f in existing:
+        content = f.read_text(encoding="utf-8")
+        matches = list(card_pattern.finditer(content))
+        to_translate = [(m.start(1), m.end(1), m.group(1)) for m in matches if needs_translation(m.group(1))]
+
+        if not to_translate:
+            continue
+
+        # Build batch prompt
+        lines = [f"{i}: {desc}" for i, (_, _, desc) in enumerate(to_translate)]
+        batch_text = "\n".join(lines)
+        prompt = (
+            "Traduce al español las siguientes descripciones de herramientas/recursos tecnológicos. "
+            "Mantén el tono profesional y técnico. Conserva nombres propios, marcas, y URLs sin traducir.\n\n"
+            "Devuelve SOLO un JSON array con objetos: {\"id\": número, \"tr\": \"traducción\"}\n\n"
+            f"{batch_text}"
+        )
+
+        modelos = CONFIG.get("AI_MODELS", ["gemini-2.5-flash", "gemini-2.5-pro"])
+        translated = {}
+        for modelo in modelos:
+            try:
+                print(f"   🤖 Traduciendo {len(to_translate)} descripciones con {modelo}...")
+                response = client.models.generate_content(model=modelo, contents=prompt)
+                raw_text = response.text if response.text else "[]"
+                clean = re.sub(r'```(?:json)?\s*|\s*```', '', raw_text.strip())
+                data = json.loads(clean)
+                translated = {item["id"]: item["tr"] for item in data if "tr" in item}
+                break
+            except Exception as e:
+                print(f"   ⚠️  Error con {modelo}: {e}")
+                continue
+
+        if not translated:
+            print(f"   ⚠️  No se pudieron traducir descripciones en {f.name}")
+            continue
+
+        # Apply translations
+        modified = list(content)
+        for idx, (start, end, original) in enumerate(to_translate):
+            if idx in translated and translated[idx].strip():
+                new_desc = translated[idx].strip().replace('"', '&quot;')
+                modified[start:end] = new_desc
+                total_translated += 1
+                if total_translated <= 5:
+                    print(f"   🌍 '{original[:50]}...' → '{new_desc[:50]}...'")
+
+        f.write_text("".join(modified), encoding="utf-8")
+        print(f"   ✅ {f.name}: {len(translated)} descripciones traducidas")
+
+    print(f"\n✅ Traducción completa: {total_translated} descripciones" if total_translated else "   ℹ️  No había descripciones que traducir")
+
+
+def reorder_resources(posts_dir: Path, max_cards: int):
+    """Merge all resources*.mdx, sort sections alphabetically, redistribute."""
+    existing = sorted(posts_dir.glob("resources*.mdx"), key=lambda p: p.name)
+    if not existing:
+        print("⚠️  No hay resources*.mdx para reordenar.")
+        return
+
+    preamble_text, raw_sections, total_card_count = _extract_all_sections(existing)
+
+    # Merge sections with same category
+    merged_sections = merge_sections(raw_sections)
+    merged_sections.sort(key=lambda x: x[0])
+    print(f"📊 {len(merged_sections)} secciones ({total_card_count} tarjetas) ordenadas alfabéticamente (duplicados fusionados)")
 
     file_index = 0
     written_files = []
     section_ptr = 0
 
-    while section_ptr < len(all_sections):
+    while section_ptr < len(merged_sections):
         is_first = file_index == 0
         file_cards = 0
         file_sections = []
 
-        while section_ptr < len(all_sections):
-            _, sec_text = all_sections[section_ptr]
+        while section_ptr < len(merged_sections):
+            _, sec_text = merged_sections[section_ptr]
             sec_count = sec_text.count('<ResourceCard\n')
             if file_cards + sec_count <= max_cards:
                 file_sections.append(sec_text)
@@ -392,6 +577,8 @@ def main():
     parser.add_argument("--reorder", action="store_true", help="Reorder all categories alphabetically")
     parser.add_argument("--fix-spacing", action="store_true", help="Fix missing blank lines between sections")
     parser.add_argument("--convert", action="store_true", help="Convert legacy HTML files to component format")
+    parser.add_argument("--dedup", action="store_true", help="Deduplicate sections and cards across all resources files")
+    parser.add_argument("--translate", action="store_true", help="Translate English descriptions to Spanish using Gemini")
     args = parser.parse_args()
 
     blog_path = Path(args.blog_path).resolve()
@@ -457,6 +644,20 @@ def main():
     # Reorder
     if args.reorder:
         reorder_resources(posts_dir, args.max_cards)
+        existing_files = sorted(posts_dir.glob("resources*.mdx"), key=lambda p: p.name)
+        print()
+
+    # Deduplicate
+    if args.dedup:
+        print("\n🔁 Deduplicando secciones y tarjetas...")
+        deduplicate_all_files(posts_dir)
+        existing_files = sorted(posts_dir.glob("resources*.mdx"), key=lambda p: p.name)
+        print()
+
+    # Translate descriptions to Spanish
+    if args.translate:
+        print("\n🌐 Traduciendo descripciones al español...")
+        translate_descriptions(posts_dir)
         existing_files = sorted(posts_dir.glob("resources*.mdx"), key=lambda p: p.name)
         print()
 

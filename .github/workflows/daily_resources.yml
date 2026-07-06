@@ -38,7 +38,7 @@ jobs:
       - name: 📊 Gestionar recursos (paginación + nuevas herramientas)
         id: resources_updated
         run: |
-          python -m scripts.publishers.manage_resources --blog-path blog --tools-file files/herramientas.json --max-cards 500 --fix-spacing \
+          python -m scripts.publishers.manage_resources --blog-path blog --tools-file files/herramientas.json --max-cards 500 --fix-spacing --dedup \
             && echo "updated=yes" >> $GITHUB_OUTPUT \
             || echo "updated=no" >> $GITHUB_OUTPUT
 
