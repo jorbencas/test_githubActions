@@ -230,12 +230,6 @@ def _extract_all_sections(existing: list[Path]) -> tuple[str, list[tuple[str, st
             preamble_text = content
             break
 
-    while preamble_text.startswith("---"):
-        fm_close = preamble_text.find("---", 3)
-        if fm_close == -1:
-            break
-        preamble_text = preamble_text[fm_close + 3:].lstrip("\n")
-
     all_sections = []
     total_card_count = 0
     for f in existing:
@@ -253,7 +247,7 @@ def _extract_all_sections(existing: list[Path]) -> tuple[str, list[tuple[str, st
 
 
 def deduplicate_all_files(posts_dir: Path) -> int:
-    """Merge sections with same ID and deduplicate cards by URL across all resources*.mdx files."""
+    """Deduplicate cards by URL within each resources*.mdx file. Keeps all files intact."""
     existing = sorted(posts_dir.glob("resources*.mdx"), key=lambda p: p.name)
     if not existing:
         print("⚠️  No hay resources*.mdx para deduplicar.")
@@ -261,41 +255,60 @@ def deduplicate_all_files(posts_dir: Path) -> int:
 
     print(f"📂 Procesando {len(existing)} archivos...")
 
-    preamble_text, all_sections, total_card_count = _extract_all_sections(existing)
+    total_removed = 0
+    for f in existing:
+        content = f.read_text(encoding="utf-8")
+        original_len = len(content)
 
-    # Count before
-    before_count = len(all_sections)
-    print(f"   Secciones antes: {before_count}, tarjetas: {total_card_count}")
+        # Extract sections
+        parts = extract_sections(content)
+        new_parts = []
+        seen_urls = set()
+        removed_in_file = 0
 
-    # Merge duplicates
-    merged = merge_sections(all_sections)
-    after_section_count = len(merged)
-    after_card_count = sum(len(extract_card_urls(s[1])) for s in merged)
-    print(f"   Secciones después: {after_section_count}, tarjetas: {after_card_count}")
+        for part_type, part_content in parts:
+            if part_type == "preamble":
+                new_parts.append(part_content)
+            else:
+                # Deduplicate cards within this section
+                card_pattern = re.compile(
+                    r'<ResourceCard\n  href="([^"]+)"\n  title="[^"]+"\n  description="[^"]*"\n/>',
+                    re.DOTALL,
+                )
+                cards = card_pattern.findall(part_content)
+                unique_cards = []
+                for card_match in card_pattern.finditer(part_content):
+                    url = card_match.group(1)
+                    if url not in seen_urls:
+                        seen_urls.add(url)
+                        unique_cards.append(card_match.group(0))
+                    else:
+                        removed_in_file += 1
 
-    # Sort alphabetically
-    merged.sort(key=lambda x: x[0])
+                # Rebuild section with only unique cards
+                if unique_cards:
+                    section_open = SECTION_OPEN_RE.search(part_content)
+                    if section_open:
+                        section_id = section_open.group(1)
+                        section_title = section_open.group(2)
+                        new_section = SECTION_TEMPLATE.format(
+                            section_id=section_id,
+                            section_title=section_title,
+                            cards="\n\n".join(unique_cards),
+                        )
+                        new_parts.append(new_section)
 
-    # Update first file and remove rest
-    first = existing[0]
-    body_parts = [s[1] for s in merged]
-    body = "\n\n".join(body_parts) + "\n"
-    content = preamble_text.strip()
-    if content:
-        content += "\n\n" + body
-    else:
-        content = body
-    content = ensure_imports(content)
-    first.write_text(content, encoding="utf-8")
+        if removed_in_file > 0:
+            new_content = "\n\n".join(new_parts) + "\n"
+            new_content = ensure_imports(new_content)
+            f.write_text(new_content, encoding="utf-8")
+            print(f"   {f.name}: {removed_in_file} tarjetas duplicadas eliminadas")
+            total_removed += removed_in_file
+        else:
+            print(f"   {f.name}: sin duplicados")
 
-    removed = 0
-    for f in existing[1:]:
-        f.unlink()
-        removed += 1
-        print(f"   🗑️  Eliminado {f.name} (contenido fusionado en {first.name})")
-
-    print(f"\n✅ Deduplicación completa: {before_count} → {after_section_count} secciones, 1 archivo")
-    return removed + 1
+    print(f"\n✅ Deduplicación completa: {total_removed} tarjetas duplicadas eliminadas en {len(existing)} archivos")
+    return total_removed
 
 
 def translate_descriptions(posts_dir: Path):
