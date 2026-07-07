@@ -19,15 +19,15 @@ from logging.handlers import RotatingFileHandler
 import requests
 from google import genai
 
-from scripts.utils.constants_downloadfile import CONFIG, EMAIL_TEMPLATE, EMAIL_ROW_TEMPLATE, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, ID_VIDEO_KEY, BADGE_KEY, VAL_TECH, TIPO_KEY
+from scripts.utils.constants_downloadfile import CONFIG, EMAIL_TEMPLATE, EMAIL_ROW_TEMPLATE, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, ID_VIDEO_KEY, BADGE_KEY, VAL_TECH, TIPO_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES
 from scripts.utils.common import load_json, resumir_noticia, resumir_lote_noticias
 
-os.makedirs("logs", exist_ok=True)
+os.makedirs(LOGS_DIR, exist_ok=True)
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        RotatingFileHandler("logs/email.log", maxBytes=1024 * 1024 * 5, backupCount=5, encoding="utf-8"),
+        RotatingFileHandler(os.path.join(LOGS_DIR, LOG_FILES["email"]), maxBytes=1024 * 1024 * 5, backupCount=5, encoding="utf-8"),
         logging.StreamHandler(),
     ],
 )
@@ -49,7 +49,7 @@ async def run():
         return
 
     logger.info("📧 Iniciando send_email.py (con resúmenes IA por noticia)")
-    path_json = os.path.join(CONFIG["FOLDER"], "noticias_historico.json")
+    path_json = os.path.join(CONFIG["FOLDER"], NOTICIAS_FILENAME)
     historial = load_json(path_json)
 
     if not historial:

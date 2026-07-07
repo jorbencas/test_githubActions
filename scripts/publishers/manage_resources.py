@@ -13,7 +13,7 @@ from urllib.parse import urlparse
 
 from google import genai
 
-from scripts.utils.constants_downloadfile import CONFIG
+from scripts.utils.constants_downloadfile import CONFIG, BLOG_PATH_DEFAULT, HERRAMIENTAS_PATH_DEFAULT
 
 RESOURCES_PER_FILE = 500
 SECTION_ID = "nuevas-herramientas"
@@ -583,8 +583,8 @@ def convert_all_legacy_files(posts_dir: Path):
 
 def main():
     parser = argparse.ArgumentParser(description="Manage blog resources files with auto-pagination")
-    parser.add_argument("--blog-path", default="blog", help="Path to the blog checkout directory")
-    parser.add_argument("--tools-file", default="files/herramientas.json", help="Path to herramientas.json")
+    parser.add_argument("--blog-path", default=BLOG_PATH_DEFAULT, help="Path to the blog checkout directory")
+    parser.add_argument("--tools-file", default=HERRAMIENTAS_PATH_DEFAULT, help="Path to herramientas.json")
     parser.add_argument("--max-cards", type=int, default=RESOURCES_PER_FILE, help="Max cards per file")
     parser.add_argument("--clean", action="store_true", help="Check URLs and remove dead resources")
     parser.add_argument("--reorder", action="store_true", help="Reorder all categories alphabetically")

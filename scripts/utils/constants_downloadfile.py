@@ -15,6 +15,30 @@ CONFIG = {
     "NEWS_DIR": "auto-news"
 }
 
+# ── File paths (centralized) ──
+NOTICIAS_FILENAME = "noticias_historico.json"
+HERRAMIENTAS_FILENAME = "herramientas.json"
+AVATARS_CACHE_FILENAME = "avatars_cache.json"
+TELEGRAM_SENT_FILENAME = "telegram_sent.json"
+TELEGRAM_VOICE_SENT_FILENAME = "telegram_voice_sent.json"
+OPTIMIZED_CACHE_FILENAME = "optimized_cache.json"
+LOGS_DIR = "logs"
+LOG_FILES = {
+    "news": "news.log",
+    "tools": "tools.log",
+    "weekly": "weekly.log",
+    "telegram": "telegram.log",
+    "email": "email.log",
+}
+DASHBOARD_DIR = "public"
+DASHBOARD_HTML = "public/index.html"
+AUTO_NEWS_DIR = "auto-news"
+BLOG_AUTO_NEWS_REL = ("src", "content", "auto-news")
+BLOG_PATH_DEFAULT = "blog"
+HERRAMIENTAS_PATH_DEFAULT = os.path.join(CONFIG["FOLDER"], HERRAMIENTAS_FILENAME)
+FONT_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+FONT_REGULAR = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+
 URL_API_DESCARGA = "https://testactions1github-api-python.hf.space/download"
 URL_API_SALUD = "https://testactions1github-api-python.hf.space/health"
 

@@ -16,7 +16,7 @@ import aiohttp
 import requests
 from bs4 import BeautifulSoup
 
-from scripts.utils.constants_downloadfile import ALL_KEYWORDS, CATEGORIAS, CONFIG, clasificar_noticia, YT_KEY, RSS_KEY, URL_KEY, TIPO_KEY, SUBTIPO_KEY, SELECTOR_KEY, ORIGEN_KEY, BADGE_KEY, TIPO_VAL_HERRAMIENTA, TIPO_VAL_NOTICIA, TIPO_VAL_VIDEO, TIPO_VAL_SHORTS, TIPO_VAL_LIVE, SUB_VAL_GITHUB, SUB_VAL_GITHUB_TOPIC, SUB_VAL_GITHUB_COLLECTION, SUB_VAL_PRODUCTHUNT, VAL_RSS, VAL_TECH, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, CATEGORIA_KEY, ESTRELLAS_KEY, DESCRIPCION_KEY, LENGUAJE_KEY, REPO_KEY, TS_KEY, F_KEY, FECHA_REAL_KEY, FECHA_PUB_KEY, ID_VIDEO_KEY, IMAGEN_URL_KEY
+from scripts.utils.constants_downloadfile import ALL_KEYWORDS, CATEGORIAS, CONFIG, clasificar_noticia, YT_KEY, RSS_KEY, URL_KEY, TIPO_KEY, SUBTIPO_KEY, SELECTOR_KEY, ORIGEN_KEY, BADGE_KEY, TIPO_VAL_HERRAMIENTA, TIPO_VAL_NOTICIA, TIPO_VAL_VIDEO, TIPO_VAL_SHORTS, TIPO_VAL_LIVE, SUB_VAL_GITHUB, SUB_VAL_GITHUB_TOPIC, SUB_VAL_GITHUB_COLLECTION, SUB_VAL_PRODUCTHUNT, VAL_RSS, VAL_TECH, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, CATEGORIA_KEY, ESTRELLAS_KEY, DESCRIPCION_KEY, LENGUAJE_KEY, REPO_KEY, TS_KEY, F_KEY, FECHA_REAL_KEY, FECHA_PUB_KEY, ID_VIDEO_KEY, IMAGEN_URL_KEY, AVATARS_CACHE_FILENAME
 from xml.etree import ElementTree
 
 logger = logging.getLogger("scraper_base")
@@ -397,7 +397,7 @@ class WebExtractor(BaseExtractor):
 
 class ScraperPro:
     def __init__(self):
-        self.avatar_repo = AvatarRepository(os.path.join(CONFIG["FOLDER"], "avatars_cache.json"))
+        self.avatar_repo = AvatarRepository(os.path.join(CONFIG["FOLDER"], AVATARS_CACHE_FILENAME))
         self.yt_extractor = YouTubeExtractor()
         self.web_extractor = WebExtractor()
 

@@ -17,16 +17,16 @@ from logging.handlers import RotatingFileHandler
 
 import aiohttp
 
-from scripts.utils.constants_downloadfile import CONFIG, FUENTES, YT_KEY, TIPO_KEY, QUICK_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY, ID_VIDEO_KEY
+from scripts.utils.constants_downloadfile import CONFIG, FUENTES, YT_KEY, TIPO_KEY, QUICK_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY, ID_VIDEO_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES
 from scripts.scrapers.scraper_base import ScraperPro
 from scripts.utils.common import load_json, save_json, traducir_titulos_ia, deduplicar_items
 
-os.makedirs("logs", exist_ok=True)
+os.makedirs(LOGS_DIR, exist_ok=True)
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        RotatingFileHandler("logs/news.log", maxBytes=1024 * 1024 * 5, backupCount=5, encoding="utf-8"),
+        RotatingFileHandler(os.path.join(LOGS_DIR, LOG_FILES["news"]), maxBytes=1024 * 1024 * 5, backupCount=5, encoding="utf-8"),
         logging.StreamHandler(),
     ],
 )
@@ -57,7 +57,7 @@ async def run():
     logger.info("🚀 Iniciando scrape_news.py (tier=%s)", args.tier)
     scr = ScraperPro()
 
-    path_json = os.path.join(CONFIG["FOLDER"], "noticias_historico.json")
+    path_json = os.path.join(CONFIG["FOLDER"], NOTICIAS_FILENAME)
     historial = load_json(path_json)
     existing_urls = {n.get(ENLACE_KEY) for n in historial if n.get(ENLACE_KEY)}
     existing_video_ids = {n.get(ID_VIDEO_KEY) for n in historial if n.get(ID_VIDEO_KEY)}

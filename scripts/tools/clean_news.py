@@ -5,11 +5,7 @@ import requests
 from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from scripts.utils.constants_downloadfile import TIPO_KEY, ENLACE_KEY, TITULO_KEY, TS_KEY, ULTIMA_VERIF_KEY
-
-CONFIG = {
-    "FOLDER": "files"
-}
+from scripts.utils.constants_downloadfile import CONFIG, TIPO_KEY, ENLACE_KEY, TITULO_KEY, TS_KEY, ULTIMA_VERIF_KEY, NOTICIAS_FILENAME
 
 
 def limpiar_y_validar_historial(historial):
@@ -93,7 +89,7 @@ def limpiar_y_validar_historial(historial):
 def main():
     os.makedirs(CONFIG["FOLDER"], exist_ok=True)
 
-    ruta = os.path.join(CONFIG["FOLDER"], "noticias_historico.json")
+    ruta = os.path.join(CONFIG["FOLDER"], NOTICIAS_FILENAME)
 
     if os.path.exists(ruta):
         with open(ruta, 'r', encoding='utf-8') as f:

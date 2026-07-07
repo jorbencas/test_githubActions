@@ -23,12 +23,12 @@ try:
 except ImportError:
     pillow_avif = None
 
-from scripts.utils.constants_downloadfile import CONFIG
+from scripts.utils.constants_downloadfile import CONFIG, OPTIMIZED_CACHE_FILENAME
 
 # ───────────────────────── Configuration ─────────────────────────
 INPUT_DIR = CONFIG.get("IMAGES_FOLDER", "images")
 OUTPUT_DIR = CONFIG.get("IMAGES_PATH_PREFIX", "public/optimizado")
-CACHE_FILE = "optimized_cache.json"
+CACHE_FILE = OPTIMIZED_CACHE_FILENAME
 
 MAX_WIDTH = 1920
 SSIM_THRESHOLD = 0.98      # Perceptually identical

@@ -23,7 +23,7 @@ from pathlib import Path
 
 from google import genai
 
-from scripts.utils.constants_downloadfile import CONFIG, HTML_TEMPLATE, MD_TEMPLATE, SKILLS, LLMS, LENGUAJES, FRAMEWORKS, LIBRERIAS, CATEGORIAS, JS_CONFIG, FALLBACK_GITHUB_IMAGE, FALLBACK_SNEAK_PEEK, FALLBACK_NOTA_PERSONAL, SUBTIPO_KEY, TIPO_KEY, ORIGEN_KEY, SUB_VAL_GITHUB, TIPO_VAL_NOTICIA, VAL_RSS, ENLACE_KEY, FUENTE_KEY, TS_KEY, FECHA_PUB_KEY, CATEGORIA_KEY, ESTRELLAS_KEY, TITULO_KEY, FECHA_REAL_KEY, ID_VIDEO_KEY, LENGUAJE_KEY, DESCRIPCION_KEY, SUB_VAL_GITHUB_TOPIC, SUB_VAL_GITHUB_COLLECTION, SUB_VAL_PRODUCTHUNT, TIPO_VAL_HERRAMIENTA, TIPO_VAL_VIDEO, TIPO_VAL_SHORTS, TIPO_VAL_LIVE, FUENTES, YT_KEY
+from scripts.utils.constants_downloadfile import CONFIG, HTML_TEMPLATE, MD_TEMPLATE, SKILLS, LLMS, LENGUAJES, FRAMEWORKS, LIBRERIAS, CATEGORIAS, JS_CONFIG, FALLBACK_GITHUB_IMAGE, FALLBACK_SNEAK_PEEK, FALLBACK_NOTA_PERSONAL, SUBTIPO_KEY, TIPO_KEY, ORIGEN_KEY, SUB_VAL_GITHUB, TIPO_VAL_NOTICIA, VAL_RSS, ENLACE_KEY, FUENTE_KEY, TS_KEY, FECHA_PUB_KEY, CATEGORIA_KEY, ESTRELLAS_KEY, TITULO_KEY, FECHA_REAL_KEY, ID_VIDEO_KEY, LENGUAJE_KEY, DESCRIPCION_KEY, SUB_VAL_GITHUB_TOPIC, SUB_VAL_GITHUB_COLLECTION, SUB_VAL_PRODUCTHUNT, TIPO_VAL_HERRAMIENTA, TIPO_VAL_VIDEO, TIPO_VAL_SHORTS, TIPO_VAL_LIVE, FUENTES, YT_KEY, NOTICIAS_FILENAME, HERRAMIENTAS_FILENAME, LOGS_DIR, LOG_FILES, DASHBOARD_DIR, DASHBOARD_HTML, AUTO_NEWS_DIR, BLOG_AUTO_NEWS_REL
 
 # Acceder a valores anidados dentro de JS_CONFIG
 ALL_YT_CHANNELS = JS_CONFIG.get("ALL_YT_CHANNELS", [])
@@ -32,12 +32,12 @@ EMOJIS_CATEGORIA_MAP = {v: JS_CONFIG.get("EMOJIS_CATEGORIA", "⚡🤖💻🐳�
 from scripts.scrapers.scraper_base import ScraperPro
 from scripts.utils.common import load_json, save_json, generar_imagen_noticia, obtener_recap_semanal_ia, deduplicar_items, traducir_titulos_ia
 
-os.makedirs("logs", exist_ok=True)
+os.makedirs(LOGS_DIR, exist_ok=True)
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        RotatingFileHandler("logs/weekly.log", maxBytes=1024 * 1024 * 5, backupCount=5, encoding="utf-8"),
+        RotatingFileHandler(os.path.join(LOGS_DIR, LOG_FILES["weekly"]), maxBytes=1024 * 1024 * 5, backupCount=5, encoding="utf-8"),
         logging.StreamHandler(),
     ],
 )
@@ -46,7 +46,7 @@ logger = logging.getLogger("weekly")
 
 
 def cargar_herramientas() -> list:
-    path = os.path.join(CONFIG["FOLDER"], "herramientas.json")
+    path = os.path.join(CONFIG["FOLDER"], HERRAMIENTAS_FILENAME)
     if os.path.exists(path):
         try:
             with open(path, "r", encoding="utf-8") as f:
@@ -313,7 +313,7 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
         if h.get(SUBTIPO_KEY) == SUB_VAL_GITHUB and h.get(ESTRELLAS_KEY, "0").isdigit()
     ]
     herramientas_github.sort(key=lambda h: int(h.get(ESTRELLAS_KEY, "0")), reverse=True)
-    top_github = herramientas_github[:20]
+    top_github = herramientas_github[:100]
 
     # Completar avatares
     avatars_known = getattr(scr, "avatar_repo", None) and scr.avatar_repo.avatars or {}
@@ -337,8 +337,8 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
     github_ranking_html = render_github_ranking(top_github)
 
     # === Escribir index.html con todo pre-renderizado ===
-    os.makedirs("public", exist_ok=True)
-    with open("public/index.html", "w", encoding="utf-8") as f:
+    os.makedirs(DASHBOARD_DIR, exist_ok=True)
+    with open(DASHBOARD_HTML, "w", encoding="utf-8") as f:
         f.write(
             HTML_TEMPLATE.format(
                 fecha_hoy=fecha_h,
@@ -377,9 +377,9 @@ async def generar_recap(noticias_web, client, blog_path: str | None = None) -> s
     # ── Archivar recaps antiguos (>2 semanas) ──
     semana_actual = f"{year}-W{week:02d}"
     if blog_path:
-        auto_news_dir = os.path.join(blog_path, "src", "content", "auto-news")
+        auto_news_dir = os.path.join(blog_path, *BLOG_AUTO_NEWS_REL)
     else:
-        auto_news_dir = "./auto-news"
+        auto_news_dir = os.path.join(".", AUTO_NEWS_DIR)
     os.makedirs(auto_news_dir, exist_ok=True)
     archivados = archivar_recaps_antiguos(auto_news_dir, semana_actual)
     if archivados:
@@ -521,7 +521,7 @@ async def run():
     logger.info("🚀 Iniciando generate_weekly.py")
     scr = ScraperPro()
 
-    path_json = os.path.join(CONFIG["FOLDER"], "noticias_historico.json")
+    path_json = os.path.join(CONFIG["FOLDER"], NOTICIAS_FILENAME)
     historial = load_json(path_json)
     if not historial:
         logger.warning("⚠️ No hay noticias en el histórico. Ejecuta scrape_news.py primero.")

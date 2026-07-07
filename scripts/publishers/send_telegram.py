@@ -22,22 +22,22 @@ import requests
 from google import genai
 
 from scripts.utils.cache import CacheManager, FileCache
-from scripts.utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_DASHBOARD_URL, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY
+from scripts.utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_DASHBOARD_URL, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY, NOTICIAS_FILENAME, TELEGRAM_SENT_FILENAME, TELEGRAM_VOICE_SENT_FILENAME, LOGS_DIR, LOG_FILES
 from scripts.utils.common import load_json, resumir_noticia
 
-os.makedirs("logs", exist_ok=True)
+os.makedirs(LOGS_DIR, exist_ok=True)
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        RotatingFileHandler("logs/telegram.log", maxBytes=1024 * 1024 * 5, backupCount=5, encoding="utf-8"),
+        RotatingFileHandler(os.path.join(LOGS_DIR, LOG_FILES["telegram"]), maxBytes=1024 * 1024 * 5, backupCount=5, encoding="utf-8"),
         logging.StreamHandler(),
     ],
 )
 logger = logging.getLogger("telegram")
 
-SENT_LOG = "telegram_sent.json"
-VOICE_SENT_LOG = "telegram_voice_sent.json"
+SENT_LOG = TELEGRAM_SENT_FILENAME
+VOICE_SENT_LOG = TELEGRAM_VOICE_SENT_FILENAME
 
 CACHE = CacheManager(FileCache(SENT_LOG))
 VOICE_CACHE = CacheManager(FileCache(VOICE_SENT_LOG))
@@ -159,7 +159,7 @@ async def run():
         return
 
     logger.info("📱 Iniciando send_telegram.py")
-    path_json = os.path.join(CONFIG["FOLDER"], "noticias_historico.json")
+    path_json = os.path.join(CONFIG["FOLDER"], NOTICIAS_FILENAME)
     historial = load_json(path_json)
     if not historial:
         logger.info("📭 No hay noticias en el histórico.")

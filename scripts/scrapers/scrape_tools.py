@@ -14,16 +14,16 @@ from logging.handlers import RotatingFileHandler
 
 import aiohttp
 
-from scripts.utils.constants_downloadfile import CONFIG, FUENTES, TIPO_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY
+from scripts.utils.constants_downloadfile import CONFIG, FUENTES, TIPO_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY, HERRAMIENTAS_FILENAME, LOGS_DIR, LOG_FILES
 from scripts.utils.common import load_json, save_json
 from scripts.scrapers.scraper_base import ScraperPro
 
-os.makedirs("logs", exist_ok=True)
+os.makedirs(LOGS_DIR, exist_ok=True)
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        RotatingFileHandler("logs/tools.log", maxBytes=1024 * 1024 * 5, backupCount=5, encoding="utf-8"),
+        RotatingFileHandler(os.path.join(LOGS_DIR, LOG_FILES["tools"]), maxBytes=1024 * 1024 * 5, backupCount=5, encoding="utf-8"),
         logging.StreamHandler(),
     ],
 )
@@ -35,7 +35,7 @@ async def run():
     logger.info("🚀 Iniciando scrape_tools.py")
     scr = ScraperPro()
 
-    herramientas_path = os.path.join(CONFIG["FOLDER"], "herramientas.json")
+    herramientas_path = os.path.join(CONFIG["FOLDER"], HERRAMIENTAS_FILENAME)
     herramientas_hist = load_json(herramientas_path)
     existing_urls = {h.get(ENLACE_KEY) for h in herramientas_hist if h.get(ENLACE_KEY)}
 
