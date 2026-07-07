@@ -1258,5 +1258,20 @@
   },
   "https://techcrunch.com/2026/07/07/microsoft-joins-ai-cost-cutting-trend-by-relying-more-on-its-own-models/": {
     "ts": 1783461041.352174
+  },
+  "https://arstechnica.com/gaming/2026/07/bethesda-id-software-reportedly-hit-hard-by-microsoft-layoffs/": {
+    "ts": 1783464780.863973
+  },
+  "https://dev.to/vultr/deploying-dokploy-self-hosted-paas-for-docker-applications-on-ubuntu-2404-27eg": {
+    "ts": 1783464782.878633
+  },
+  "https://dev.to/vultr/deploying-ngrok-ingress-controller-on-kubernetes-j70": {
+    "ts": 1783464784.925209
+  },
+  "https://dev.to/siddhartha_bhattarai_a084/getting-selected-for-the-lfx-mentorship-and-what-ive-learned-so-far-about-openssl-k0f": {
+    "ts": 1783464786.89505
+  },
+  "https://dev.to/vultr/deploying-pocketbase-open-source-go-backend-platform-on-linux-27bl": {
+    "ts": 1783464788.851654
   }
 }
