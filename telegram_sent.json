@@ -1453,5 +1453,20 @@
   },
   "https://github.com/animesh-94/onboard-cli": {
     "ts": 1783547996.563171
+  },
+  "https://arstechnica.com/ai/2026/07/we-cannot-choose-to-become-idiots-the-ai-cheating-scandal-roiling-brown-university/": {
+    "ts": 1783552315.244119
+  },
+  "https://arstechnica.com/tech-policy/2026/07/lawsuit-grok-user-made-7k-child-sex-images-xai-only-reported-one-gang-rape-prompt/": {
+    "ts": 1783552317.640029
+  },
+  "https://arstechnica.com/tech-policy/2026/07/new-york-can-restrict-sports-gambling-on-prediction-markets-us-judge-rules/": {
+    "ts": 1783552320.007624
+  },
+  "https://arstechnica.com/security/2026/07/high-severity-guest-vm-escape-is-1-of-2-linux-vulnerabilities-to-surface-this-week/": {
+    "ts": 1783552322.230348
+  },
+  "https://bun.com/blog/bun-in-rust": {
+    "ts": 1783552324.460229
   }
 }
