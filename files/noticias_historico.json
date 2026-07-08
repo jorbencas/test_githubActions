@@ -1716,19 +1716,6 @@
         "ts": "2026-07-08T12:21:14.829718"
     },
     {
-        "titulo": "Node.js: el runtime que cambió cómo pensamos el backend",
-        "enlace": "https://dev.to/jtorchia/nodejs-el-runtime-que-cambio-como-pensamos-el-backend-1e86",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "08/07",
-        "fecha_publicacion": "Wed, 08 Jul 2026 12:01:54 +0000",
-        "badge": "Tech",
-        "categoria": "💻 Programación",
-        "origen": "rss",
-        "fecha_real": "08/07/2026",
-        "ts": "2026-07-08T12:21:14.829738"
-    },
-    {
         "titulo": "Título",
         "enlace": "https://dev.to/enadoc2_temp_cc4da1a52236/title-3eh1",
         "fuente": "Dev.to",
@@ -8385,19 +8372,6 @@
         "ts": "2026-07-06T17:42:54.148552"
     },
     {
-        "titulo": "Startup de robótica en sigilo (YC S26) está contratando ingenieros principales (Palo Alto).",
-        "enlace": "https://news.ycombinator.com/item?id=48806976",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "06/07",
-        "fecha_publicacion": "Mon, 06 Jul 2026 16:33:04 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "06/07/2026",
-        "ts": "2026-07-06T17:42:54.148583"
-    },
-    {
         "titulo": "Show HN: Pulpie – Modelos para limpiar la web.",
         "enlace": "https://usefeyn.com/blog/pulpie-pareto-optimal-models-for-cleaning-the-web/",
         "fuente": "Hacker News",
@@ -8513,19 +8487,6 @@
         "origen": "rss",
         "fecha_real": "06/07/2026",
         "ts": "2026-07-06T17:42:52.543911"
-    },
-    {
-        "titulo": "La misión de rescate de satélites de Katalyst ahora persigue al Swift de la NASA.",
-        "enlace": "https://arstechnica.com/science/2026/07/katalysts-satellite-rescue-mission-is-now-in-pursuit-of-nasas-swift/",
-        "fuente": "Ars Technica AI",
-        "tipo": "noticia",
-        "f": "06/07",
-        "fecha_publicacion": "Mon, 06 Jul 2026 17:14:09 +0000",
-        "badge": "Tech",
-        "categoria": "💻 Programación",
-        "origen": "rss",
-        "fecha_real": "06/07/2026",
-        "ts": "2026-07-06T17:42:53.209939"
     },
     {
         "titulo": "Un rastreador secreto de Claude sorprende a los usuarios tras la postura anti-vigilancia de Anthropic.",
@@ -9813,19 +9774,6 @@
         "origen": "rss",
         "fecha_real": "06/07/2026",
         "ts": "2026-07-06T10:24:41.557109"
-    },
-    {
-        "titulo": "Mapa en tiempo real de la red ferroviaria de Gran Bretaña",
-        "enlace": "https://www.map.signalbox.io",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "06/07",
-        "fecha_publicacion": "Mon, 06 Jul 2026 09:38:36 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "06/07/2026",
-        "ts": "2026-07-06T10:19:23.642725"
     },
     {
         "titulo": "Cuando la IA cuesta más que el ingeniero",
@@ -18148,19 +18096,6 @@
         "ts": "2026-07-04T16:01:34.805814"
     },
     {
-        "titulo": "Indexación de bases de datos y optimización de consultas para desarrolladores Java",
-        "enlace": "https://dev.to/gpuneet/database-indexing-and-query-optimization-for-java-developers-3mcc",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "04/07",
-        "fecha_publicacion": "Sat, 04 Jul 2026 15:29:35 +0000",
-        "badge": "Tech",
-        "categoria": "💻 Programación",
-        "origen": "rss",
-        "fecha_real": "04/07/2026",
-        "ts": "2026-07-04T16:01:34.805830"
-    },
-    {
         "titulo": "Mejores prácticas de testing en Python",
         "enlace": "https://dev.to/gpuneet/testing-best-practices-in-python-33jl",
         "fuente": "Dev.to",
@@ -20082,18 +20017,6 @@
         "imagen_url_original": "https://www.anthropic.com/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2Fb296093596b38f0a5fb56b85760baed37ea6798b-2400x1260.png&w=3840&q=75",
         "fecha_real": "25/06/2026",
         "ts": "2026-06-25T20:28:02.440351"
-    },
-    {
-        "titulo": "Presentamos Claude Tag.",
-        "enlace": "https://www.anthropic.com/news/introducing-claude-tag",
-        "fuente": "Anthropic",
-        "tipo": "noticia",
-        "f": "25/06",
-        "fecha_publicacion": "Jun 23, 2026",
-        "badge": "Tech",
-        "imagen_url_original": "",
-        "fecha_real": "25/06/2026",
-        "ts": "2026-06-25T20:28:02.440460"
     },
     {
         "titulo": "Política sobre la IA exponencial.",
@@ -25199,16 +25122,6 @@
         "ts": "2026-06-12T13:58:51.694648"
     },
     {
-        "titulo": "El Verdadero Mythos 5 Llegó (pero con nombre Fable 5) – Anthropic lo soltó",
-        "enlace": "https://www.youtube.com/watch?v=YzLOOYHxkhI",
-        "fuente": "Fazt Shorts",
-        "tipo": "shorts",
-        "f": "12/06",
-        "id_video": "YzLOOYHxkhI",
-        "fecha_real": "12/06/2026",
-        "ts": "2026-06-12T13:58:52.119219"
-    },
-    {
         "titulo": "El Secreto para Activar Windows 11 Pro Muy Barato (Keysfan)",
         "enlace": "https://www.youtube.com/watch?v=dzuHuAkjCAc",
         "fuente": "Fazt Shorts",
@@ -25407,16 +25320,6 @@
         "id_video": "e-3EXt4zv0k",
         "fecha_real": "12/06/2026",
         "ts": "2026-06-12T13:58:52.461241"
-    },
-    {
-        "titulo": "Deja de pedirle código a la IA!",
-        "enlace": "https://www.youtube.com/watch?v=objQF8D-t3Q",
-        "fuente": "HolaMundo Shorts",
-        "tipo": "shorts",
-        "f": "12/06",
-        "id_video": "objQF8D-t3Q",
-        "fecha_real": "12/06/2026",
-        "ts": "2026-06-12T13:58:52.461260"
     },
     {
         "titulo": "¿se puede programar con agentes con 32GB de RAM?",
