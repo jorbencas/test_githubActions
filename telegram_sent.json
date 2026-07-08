@@ -1318,5 +1318,20 @@
   },
   "https://dev.to/vanni_fan/idmix-a-better-alternative-to-sqids-for-structured-access-keys-4a75": {
     "ts": 1783487675.422287
+  },
+  "https://stackoverflow.blog/2026/07/08/what-s-left-for-infrastructure-as-code-after-ai-moves-in/": {
+    "ts": 1783496681.638074
+  },
+  "https://noma.security/blog/gitlost-how-we-tricked-githubs-ai-agent-into-leaking-private-repos/": {
+    "ts": 1783496703.764274
+  },
+  "https://twitter.com/openai/status/2074704958419792299": {
+    "ts": 1783496713.740633
+  },
+  "https://neil.computer/notes/how-to-setup-minimal-zfs-nas-without-truenas/": {
+    "ts": 1783496715.736149
+  },
+  "https://www.digipres.org/the-floppy-guide/": {
+    "ts": 1783496717.735919
   }
 }
