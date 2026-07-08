@@ -20,7 +20,7 @@
 ![Dashboard](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/dashboard_update.yml?branch=master&style=flat-square&label=Dashboard&logo=github)
 ![Tests](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/tests.yml?branch=master&style=flat-square&label=Tests&logo=github)
 
-Automated tech news ecosystem. Collects from **268 sources** (158 YouTube channels + 110 web/RSS), processes with **AI (Gemini)**, and distributes content across multiple channels. Also manages images, resources, programming challenges, and the blog dashboard for [jorbencas/blog](https://blog-jorbencas.vercel.app/).
+Automated tech news ecosystem. Collects from **330 sources** (158 YouTube channels, 32 RSS feeds, 82 HTML pages, 52 GitHub Topics, 5 GitHub Repos, 1 Product Hunt, 1 GitHub Collection), processes with **AI (Gemini)**, and distributes content across multiple channels. Also manages images, resources, programming challenges, and the blog dashboard for [jorbencas/blog](https://blog-jorbencas.vercel.app/).
 
 🚀 **[News Dashboard](http://jorbencasdownloaderdocument.surge.sh)**
 
@@ -30,10 +30,26 @@ Automated tech news ecosystem. Collects from **268 sources** (158 YouTube channe
 
 This project runs **11 GitHub Actions workflows** that form a fully automated content pipeline:
 
-1. **Scrape** — news and tools from 268 sources (110 web/RSS + 158 YouTube channels)
+1. **Scrape** — news and tools from 330 sources (158 YouTube channels, 32 RSS feeds, 82 HTML pages, 52 GitHub Topics, 5 GitHub Repos, 1 Product Hunt)
 2. **Process** — AI summarization with Gemini, news grouped by category, automatic translation of English titles (web + YT), image generation
 3. **Publish** — weekly recaps with auto-archive, dashboard (SSR), email newsletter, Telegram notifications
 4. **Manage** — resource lists, challenges, image optimization, link validation, SEO dedup
+
+---
+
+## 📡 Sources — 330 Total
+
+| Category | Count | Examples |
+|----------|-------|---------|
+| YouTube channels | 158 | MoureDev, Falcon Master, The Engineer's Digest |
+| RSS feeds | 32 | web.dev, MDN, CSS-Tricks, Smashing Magazine, HN, Lobsters |
+| HTML scraping | 82 | Xataka, Genbeta, Slashdot, TechCrunch, The Verge |
+| GitHub Topics | 52 | AI, LLM, Docker, Kubernetes, CSS, HTML, algorithms |
+| GitHub Collections | 1 | AI Tools |
+| GitHub Repos | 5 | OpenWiki, Meetily, AutoPR, PR-Agent, Code-to-Docs |
+| Product Hunt | 1 | Top products daily |
+
+RSS feeds use `--quick` flag for hourly scraping (light tier). GitHub Topics scraped daily via `daily_resources.yml`.
 
 ---
 
@@ -41,7 +57,7 @@ This project runs **11 GitHub Actions workflows** that form a fully automated co
 
 ```
 scripts/
-├── scrapers/             🌐 Data collection from 268 sources
+├── scrapers/             🌐 Data collection from 330 sources
 │   ├── scraper_base.py         YouTube, Web, ScraperPro extractors
 │   ├── scrape_news.py          RSS + web + YouTube news
 │   ├── scrape_tools.py         GitHub Trending + Product Hunt
@@ -68,7 +84,7 @@ scripts/
 └── solutions/            💡 Challenge solutions database
     ├── solutions_db.py            Lookup + solution generation
     └── solutions_data.py          105+ curated solutions in 12 languages
-tests/                    ✅ pytest test suite (89 tests)
+tests/                    ✅ pytest test suite (101 tests)
 ├── test_cache.py / test_constants_downloadfile.py
 ├── test_constants_retos.py / test_fix_images.py
 ├── test_manage_resources.py / test_solutions_db.py
@@ -131,7 +147,7 @@ All scripts run with `python -m` from the project root:
 | **hunt_challenges** | Weekly (Sun) | AI challenge generation |
 | **optimize_images** | Dispatch from blog | Image optimization for blog |
 | **dashboard_update** | Push (JS/CSS/Python) | Regenerate + deploy dashboard |
-| **tests** | Push/PR to master | pytest (89 tests) |
+| **tests** | Push/PR to master | pytest (101 tests) |
 
 ### Workflow Architecture
 
@@ -139,9 +155,9 @@ All scripts run with `python -m` from the project root:
 ┌─────────────────────────────────────────────────────────────────────┐
 │                        DATA COLLECTION                              │
 ├─────────────────────────────────────────────────────────────────────┤
-│  scrape_hourly  →  every hour  →  RSS + quick sources              │
-│  scrape_6h      →  every 6h    →  standard scrape                  │
-│  daily_resources →  daily       →  tools + resources.mdx           │
+│  scrape_hourly   →  every hour  →  RSS + quick sources (32 feeds)  │
+│  scrape_6h       →  every 6h    →  standard scrape (82 HTML pages) │
+│  daily_resources →  daily       →  tools (52 GitHub Topics + repos) │
 └─────────────────────────────────────────────────────────────────────┘
                                     ↓
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -167,7 +183,7 @@ All scripts run with `python -m` from the project root:
 │  clean_news       →  quarterly   →  link validation                │
 │  hunt_challenges  →  weekly      →  AI challenges                  │
 │  optimize_images  →  dispatch    →  image optimization             │
-│  tests            →  on push     →  89 pytest tests                │
+│  tests            →  on push     →  101 pytest tests               │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -205,11 +221,11 @@ Weekly recaps auto-archive old posts (>2 weeks) and enforce one-post-per-week SE
 
 ## 🧪 Test Coverage
 
-89 pytest tests covering:
+101 pytest tests covering:
 - **Cache** — FileCache, CacheManager, expiration, TTL
 - **Constants** — source configurations, challenge templates
 - **Image pipeline** — Unsplash fetching, Gemini banner gen, WebP/AVIF conversion
-- **Resources** — pagination, cleanup, reordering, card management
+- **Resources** — pagination, cleanup, reordering, card management, cross-file dedup, malformed card fix
 - **Solutions** — database lookup, multi-language generation, edge cases
 - **Utilities** — JSON helpers, URL validation, deduplication, AI integration
 

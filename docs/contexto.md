@@ -2,6 +2,29 @@
 
 ## Cambios recientes
 
+### Expanded content sources — 08/07/2026
+- **RSS Feeds (32)**: web.dev, MDN Blog, CSS-Tricks, Smashing Magazine, Can I Use, hacks.mozilla.org, Chrome Developers, W3C Blog, Linux.com, Hacker News, Lobsters, InfoQ, Ars Technica, OpenAI Blog, Anthropic Blog, Google AI Blog, and more
+- **HTML Scraping (82)**: Xataka, Genbeta, ComputerHoy, Slashdot, 36Kr, The Verge, TechCrunch, etc.
+- **GitHub Topics (52)**: AI, LLM, AI Agents, ML, video-editing, screen-recording, content-creation, markdown, git, docker, container, kubernetes, algorithms, data-structures, generative-ai, ai-coding, open-source, awesome-lists, image-processing, document-processing, pdf, office, presentation, data-pipeline, etl, workflow-automation, documentation-generator, ai-code-review, meeting-assistant, transcription, speech-to-text, wiki, knowledge-base, ai-agent, rag, css, html, web-standards, frontend, linux-config, dotfiles, linux-admin, best-practices, coding-guidelines, style-guide, xml, yaml
+- **GitHub Collections (1)**: AI tools
+- **GitHub Repos (5)**: OpenWiki, Meetily, Code-to-Docs, AutoPR, PR-Agent
+- **Product Hunt (1)**
+- **YouTube Channels (158)**: Various tech channels
+- `--quick` flag makes RSS sources available for hourly scraping (light tier)
+
+### Expanded tool sources — 08/07/2026
+- `constants_downloadfile.py`: añadidos 15 nuevos GitHub Topics para scraping de herramientas:
+  - Video: `video-editing`, `screen-recording`
+  - Content: `content-creation`, `markdown`
+  - Git: `git`, `version-control`
+  - Docker: `docker`, `container`, `kubernetes`
+  - Algorithms: `algorithms`, `data-structures`, `competitive-programming`
+  - AI: `generative-ai`, `ai-coding`
+  - Open Source: `open-source`, `awesome-lists`
+- `manage_resources.py`: `deduplicate_all_files()` ahora deduplica cross-file (global_seen_urls)
+- `manage_resources.py`: `fix_malformed_cards()` corrige tags ResourceCard con `/` en vez de `/>`
+- Tests: 101 tests (nuevos: TestDeduplicateAllFiles, TestFixMalformedCards)
+
 ### Dedup + traducción resources — 06/07/2026
 - `manage_resources.py`: añadido `--dedup` que fusiona secciones con mismo ID y elimina tarjetas duplicadas por URL
 - `manage_resources.py`: añadido `--translate` que traduce descripciones al español vía Gemini (heuristic: >=60% ASCII = inglés)
@@ -109,6 +132,7 @@
 
 ## Notas
 - El dashboard se despliega en Surge.sh con `dashboard_update.yml` (cambios en JS/CSS/Python) y `scraper_workflow.yml` (sábados)
+- Fuentes expandidas: ~331 (32 RSS + 82 HTML + 52 GitHub Topics + 52 GitHub Collections/Repos + 1 PH + 158 YouTube)
 - Los recursos NO aparecen en el dashboard — van directo al blog vía PR
 - manage_resources.py usa el blog checkout en `./blog` (misma estructura que scraper_workflow.yml)
 - Límite: 500 tarjetas por archivo resources.mdx (configurable con --max-cards)

@@ -247,7 +247,7 @@ def _extract_all_sections(existing: list[Path]) -> tuple[str, list[tuple[str, st
 
 
 def deduplicate_all_files(posts_dir: Path) -> int:
-    """Deduplicate cards by URL within each resources*.mdx file. Keeps all files intact."""
+    """Deduplicate cards by URL across all resources*.mdx files. Keeps all files intact."""
     existing = sorted(posts_dir.glob("resources*.mdx"), key=lambda p: p.name)
     if not existing:
         print("⚠️  No hay resources*.mdx para deduplicar.")
@@ -256,6 +256,8 @@ def deduplicate_all_files(posts_dir: Path) -> int:
     print(f"📂 Procesando {len(existing)} archivos...")
 
     total_removed = 0
+    global_seen_urls = set()
+    
     for f in existing:
         content = f.read_text(encoding="utf-8")
         original_len = len(content)
@@ -263,14 +265,13 @@ def deduplicate_all_files(posts_dir: Path) -> int:
         # Extract sections
         parts = extract_sections(content)
         new_parts = []
-        seen_urls = set()
         removed_in_file = 0
 
         for part_type, part_content in parts:
             if part_type == "preamble":
                 new_parts.append(part_content)
             else:
-                # Deduplicate cards within this section
+                # Deduplicate cards across all files
                 card_pattern = re.compile(
                     r'<ResourceCard\n  href="([^"]+)"\n  title="[^"]+"\n  description="[^"]*"\n/>',
                     re.DOTALL,
@@ -279,8 +280,8 @@ def deduplicate_all_files(posts_dir: Path) -> int:
                 unique_cards = []
                 for card_match in card_pattern.finditer(part_content):
                     url = card_match.group(1)
-                    if url not in seen_urls:
-                        seen_urls.add(url)
+                    if url not in global_seen_urls:
+                        global_seen_urls.add(url)
                         unique_cards.append(card_match.group(0))
                     else:
                         removed_in_file += 1
@@ -472,12 +473,22 @@ def fix_card_spacing(content: str) -> str:
     )
 
 
+def fix_malformed_cards(content: str) -> str:
+    """Fix ResourceCard tags that are missing the closing > (e.g., / instead of />)."""
+    return re.sub(
+        r'<ResourceCard\n  href="[^"]+"\n  title="[^"]+"\n  description="[^"]*"\n/\s*\n',
+        lambda m: m.group(0).rstrip() + '/>\n' if not m.group(0).rstrip().endswith('/>') else m.group(0),
+        content,
+    )
+
+
 def fix_all_files(posts_dir: Path):
     """Fix spacing issues in all resources*.mdx files."""
     fixed_count = 0
     for rf in sorted(posts_dir.glob("resources*.mdx")):
         content = rf.read_text(encoding="utf-8")
         fixed = fix_card_spacing(content)
+        fixed = fix_malformed_cards(fixed)
         if not fixed.endswith("\n"):
             fixed += "\n"
         if fixed != content:
