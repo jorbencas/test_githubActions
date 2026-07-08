@@ -221,19 +221,6 @@
         "ts": "2026-07-08T15:01:12.455813"
     },
     {
-        "titulo": "New to the web platform in April",
-        "enlace": "https://web.dev/blog/web-platform-04-2026?hl=en",
-        "fuente": "web.dev",
-        "tipo": "noticia",
-        "f": "08/07",
-        "fecha_publicacion": "Fri, 24 Apr 2026 07:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "08/07/2026",
-        "ts": "2026-07-08T15:01:13.251999"
-    },
-    {
         "titulo": "Launching Interop 2025",
         "enlace": "https://hacks.mozilla.org/2025/02/interop-2025/",
         "fuente": "hacks.mozilla.org",
@@ -806,19 +793,6 @@
         "ts": "2026-07-08T14:09:54.382786"
     },
     {
-        "titulo": "New to the web platform in May",
-        "enlace": "https://web.dev/blog/web-platform-05-2026?hl=en",
-        "fuente": "web.dev",
-        "tipo": "noticia",
-        "f": "08/07",
-        "fecha_publicacion": "Fri, 29 May 2026 07:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "08/07/2026",
-        "ts": "2026-07-08T14:10:07.506607"
-    },
-    {
         "titulo": "April 2026 Baseline monthly digest",
         "enlace": "https://web.dev/blog/baseline-digest-apr-2026?hl=en",
         "fuente": "web.dev",
@@ -1207,19 +1181,6 @@
         "origen": "rss",
         "fecha_real": "08/07/2026",
         "ts": "2026-07-08T14:10:08.552650"
-    },
-    {
-        "titulo": "Launching Interop 2026",
-        "enlace": "https://hacks.mozilla.org/2026/02/launching-interop-2026/",
-        "fuente": "hacks.mozilla.org",
-        "tipo": "noticia",
-        "f": "08/07",
-        "fecha_publicacion": "Thu, 12 Feb 2026 17:07:24 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "08/07/2026",
-        "ts": "2026-07-08T14:10:08.552673"
     },
     {
         "titulo": "CRLite: Fast, private, and comprehensive certificate revocation checking in Firefox",
