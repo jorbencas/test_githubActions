@@ -1378,5 +1378,20 @@
   },
   "https://arstechnica.com/space/2026/07/blue-origin-for-the-first-time-is-expected-to-raise-private-capital/": {
     "ts": 1783522559.63666
+  },
+  "https://web.dev/blog/web-platform-05-2026?hl=en": {
+    "ts": 1783527950.173932
+  },
+  "https://hacks.mozilla.org/2026/02/launching-interop-2026/": {
+    "ts": 1783527952.283644
+  },
+  "https://www.theatlantic.com/magazine/2026/08/reading-crisis-postliterate-age/687618/": {
+    "ts": 1783527954.435276
+  },
+  "https://dev.to/codenameone/device-integrity-and-app-review-rasp-attestation-and-asking-for-ratings-right-2n1j": {
+    "ts": 1783527956.416739
+  },
+  "https://dev.to/salmankawcher/building-a-zero-cost-portfolio-site-for-a-friend-with-ai-github-netlify-no-domain-no-hosting-3odp": {
+    "ts": 1783527958.515024
   }
 }
