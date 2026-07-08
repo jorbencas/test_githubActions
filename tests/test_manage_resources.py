@@ -42,6 +42,13 @@ class TestFormatCard:
         card = format_card("X", "https://example.com/page", "")
         assert "google.com/s2/favicons" not in card
 
+    def test_card_escapes_angle_brackets(self):
+        card = format_card("Test", "https://example.com", "Less than <250 or >100 items")
+        assert "&lt;" in card
+        assert "&gt;" in card
+        assert "<250" not in card
+        assert ">100" not in card
+
 
 class TestCountCards:
     def test_counts_correctly(self):

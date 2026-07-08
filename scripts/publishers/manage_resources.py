@@ -47,12 +47,12 @@ def domain_from(url: str) -> str:
 
 
 def escape_component(text: str) -> str:
-    return text.replace('"', "&quot;")
+    return text.replace('"', "&quot;").replace("<", "&lt;").replace(">", "&gt;")
 
 
 def format_card(name: str, url: str, description: str) -> str:
     name_esc = name.replace('"', "&quot;")
-    desc_esc = description.replace('"', "&quot;")
+    desc_esc = description.replace('"', "&quot;").replace("<", "&lt;").replace(">", "&gt;")
     return CARD_TEMPLATE.format(url=url, name=name_esc, desc=desc_esc)
 
 
@@ -383,7 +383,7 @@ def translate_descriptions(posts_dir: Path):
         modified = list(content)
         for idx, (start, end, original) in enumerate(to_translate):
             if idx in translated and translated[idx].strip():
-                new_desc = translated[idx].strip().replace('"', '&quot;')
+                new_desc = translated[idx].strip().replace('"', '&quot;').replace('<', '&lt;').replace('>', '&gt;')
                 modified[start:end] = new_desc
                 total_translated += 1
                 if total_translated <= 5:
