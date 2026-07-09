@@ -1558,5 +1558,20 @@
   },
   "https://hy.tencent.com/research/hy3": {
     "ts": 1783619368.275102
+  },
+  "https://arstechnica.com/health/2026/07/surprised-doctors-find-10-inch-worm-in-mans-groin-during-elective-surgery/": {
+    "ts": 1783625090.128656
+  },
+  "https://marindedic.com/groups/": {
+    "ts": 1783625092.129538
+  },
+  "https://openai.com/index/gpt-5-6/": {
+    "ts": 1783625094.748255
+  },
+  "https://openai.com/index/chatgpt-for-your-most-ambitious-work/": {
+    "ts": 1783625097.138731
+  },
+  "https://www.ycombinator.com/companies/wildcard/jobs/zslvaau-founding-engineer": {
+    "ts": 1783625099.385097
   }
 }
