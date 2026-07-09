@@ -1513,5 +1513,20 @@
   },
   "https://www.wired.com/story/layla-sleep-coupon/": {
     "ts": 1783589388.036726
+  },
+  "https://andrewkelley.me/post/my-thoughts-bun-rust-rewrite.html": {
+    "ts": 1783599555.669138
+  },
+  "https://www.wired.com/story/self-driving-cars-are-interfering-with-first-responders-feds-arent-happy/": {
+    "ts": 1783599573.984318
+  },
+  "https://www.wired.com/story/madison-square-garden-celebrity-database-surveillance/": {
+    "ts": 1783599589.423228
+  },
+  "https://dev.to/mininglamp/why-most-ai-agents-still-cant-loop-and-thats-why-ai-apps-havent-exploded-56j4": {
+    "ts": 1783599591.328943
+  },
+  "https://dev.to/tznthou/why-ccrewind-never-writes-to-claude-2k6b": {
+    "ts": 1783599593.077096
   }
 }
