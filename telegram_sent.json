@@ -1588,5 +1588,20 @@
   },
   "https://dev.to/tufik2/i-made-an-app-to-improve-the-desktop-experience-boost-the-productivity-and-keep-instant-access-to-4do": {
     "ts": 1783630903.872623
+  },
+  "https://arstechnica.com/security/2026/07/patch-for-windows-defender-0-day-could-allow-attackers-to-fill-hard-disk/": {
+    "ts": 1783637308.141184
+  },
+  "https://arstechnica.com/information-technology/2026/07/allstate-accuses-broadcom-of-auditing-it-because-it-quit-vmware-ca/": {
+    "ts": 1783637319.899002
+  },
+  "https://arstechnica.com/ai/2026/07/humanoid-robots-controlled-by-surgeons-did-world-first-operation-on-live-pigs/": {
+    "ts": 1783637322.575677
+  },
+  "https://speedcube.com.br/": {
+    "ts": 1783637325.449
+  },
+  "https://github.blog/security/application-security/how-github-gave-every-repository-a-durable-owner/": {
+    "ts": 1783637327.514537
   }
 }
