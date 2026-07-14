@@ -2578,5 +2578,20 @@
   },
   "https://www.artfish.ai/p/offloading-thinking-to-ai": {
     "ts": 1784050759.437965
+  },
+  "https://arstechnica.com/tech-policy/2026/07/new-york-is-the-first-state-to-impose-a-data-center-moratorium/": {
+    "ts": 1784055956.230812
+  },
+  "https://www.ycombinator.com/companies/kontigo/jobs/unttrlv-head-of-security": {
+    "ts": 1784055958.424494
+  },
+  "https://lucumr.pocoo.org/2026/7/13/the-tower-keeps-rising/": {
+    "ts": 1784055960.341026
+  },
+  "https://www.heise.de/en/news/s-p-downgrades-oracle-to-bbb-only-one-notch-above-junk-level-11363472.html": {
+    "ts": 1784055963.17855
+  },
+  "https://marco-nett.de/blog/measuring-input-latency-on-linux-x11-vs-wayland-vrr-dxvk/": {
+    "ts": 1784055965.543111
   }
 }
