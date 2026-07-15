@@ -2833,5 +2833,20 @@
   },
   "https://economics.mit.edu/sites/default/files/2026-07/speculative_growth_ai_public.pdf": {
     "ts": 1784154598.999075
+  },
+  "https://pairdrop.net/": {
+    "ts": 1784158237.387417
+  },
+  "https://mass-driver.com/article/from-human-hands": {
+    "ts": 1784158239.261788
+  },
+  "https://www.schneier.com/blog/archives/2026/07/ai-data-centers-and-the-concentration-of-wealth.html": {
+    "ts": 1784158241.14839
+  },
+  "https://dev.to/maxtesla/why-i-picked-astro-over-nextjs-for-my-site-2pf8": {
+    "ts": 1784158243.006578
+  },
+  "https://dev.to/raju_dandigam/the-hidden-cost-of-ai-agents-tokens-tools-retries-and-latency-aj6": {
+    "ts": 1784158244.884916
   }
 }
