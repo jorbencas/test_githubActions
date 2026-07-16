@@ -2923,5 +2923,20 @@
   },
   "https://www.infoq.com/presentations/rust-tps-service/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=global": {
     "ts": 1784201277.208929
+  },
+  "https://www.bbc.com/news/articles/c5y680w62wno": {
+    "ts": 1784206782.728476
+  },
+  "https://www.ssp.sh/blog/on-creation/": {
+    "ts": 1784206784.705319
+  },
+  "https://www.latimes.com/business/story/2026-07-16/spacex-stock-erases-gains-slides-below-ipo-price-in-intraday-trading": {
+    "ts": 1784206786.651139
+  },
+  "https://www.theocharis.dev/blog/llm-critics-are-right-i-use-llms-anyway/": {
+    "ts": 1784206788.530237
+  },
+  "https://onatm.dev/2026/07/16/homescale-part-1/": {
+    "ts": 1784206790.464043
   }
 }
