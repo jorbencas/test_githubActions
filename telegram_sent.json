@@ -2953,5 +2953,20 @@
   },
   "https://www.bbc.com/news/articles/c4gyg0y6yg2o": {
     "ts": 1784214287.980955
+  },
+  "https://blog.yossarian.net/2026/07/16/readme-not": {
+    "ts": 1784220460.909862
+  },
+  "https://techcrunch.com/2026/07/16/why-ami-labs-alexandre-lebrun-wont-call-his-ai-agi-or-superintelligence/": {
+    "ts": 1784220463.05639
+  },
+  "https://techcrunch.com/2026/07/16/moonshots-upcoming-kimi-3-is-expected-to-close-the-gap-with-anthropics-opus-4-8/": {
+    "ts": 1784220465.120957
+  },
+  "https://dev.to/maxbonnard/what-is-an-agentic-semantic-layer-4hbj": {
+    "ts": 1784220467.250053
+  },
+  "https://dev.to/maxbonnard/why-your-ai-agents-need-a-semantic-layer-3l9e": {
+    "ts": 1784220469.282964
   }
 }
