@@ -2848,5 +2848,20 @@
   },
   "https://dev.to/raju_dandigam/the-hidden-cost-of-ai-agents-tokens-tools-retries-and-latency-aj6": {
     "ts": 1784158244.884916
+  },
+  "https://dev.to/coridev/your-ai-coding-assistant-isnt-reading-your-code-its-mailing-it-home-3blg": {
+    "ts": 1784166697.912605
+  },
+  "https://dev.to/coridev/your-ai-agents-memory-is-now-an-attack-surface-and-nobody-designed-for-that-34p4": {
+    "ts": 1784166699.89116
+  },
+  "https://dev.to/gurinderchauhan/laravel-1320-image-processing-a-production-guide-381n": {
+    "ts": 1784166701.867515
+  },
+  "https://dev.to/jocanola/stop-uninstalling-your-app-to-test-staging-and-production-a-proper-multi-environment-setup-for-50j0": {
+    "ts": 1784166703.945721
+  },
+  "https://dev.to/aws-builders/building-a-false-positive-resilient-challenge-architecture-with-aws-waf-dynamic-label-interpolation-e96": {
+    "ts": 1784166705.979442
   }
 }
