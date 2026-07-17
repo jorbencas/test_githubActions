@@ -3073,5 +3073,20 @@
   },
   "https://hellorecon.com/blog/cve-2026-25089": {
     "ts": 1784253329.176416
+  },
+  "https://goliath32.com/blog/z80.html": {
+    "ts": 1784264247.344602
+  },
+  "https://dev.to/prowlindex/5-proyectos-de-agentes-autonomos-que-revelan-una-infraestructura-emergente-kb7": {
+    "ts": 1784264249.085811
+  },
+  "https://dev.to/plasma_01/a-tiny-llm-request-recorder-i-use-to-reproduce-production-failures-kna": {
+    "ts": 1784264250.843521
+  },
+  "https://dev.to/takundanashebmuchenapixel/how-to-gate-your-ci-pipeline-on-quantum-vulnerability-with-quantum-audit-5bbe": {
+    "ts": 1784264252.581617
+  },
+  "https://dev.to/codisfy/stop-hiding-behind-code-comfort-zone-bph": {
+    "ts": 1784264254.280935
   }
 }
