@@ -3744,19 +3744,6 @@
         "ts": "2026-07-17T13:25:34.080958"
     },
     {
-        "titulo": "Ask HN: ¿Se conocen problemas de facturación de AWS? Pronóstico de Amazon de 3 mil millones de dólares",
-        "enlace": "https://news.ycombinator.com/item?id=48945681",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "17/07",
-        "fecha_publicacion": "Fri, 17 Jul 2026 10:45:21 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "17/07/2026",
-        "ts": "2026-07-17T13:25:34.080987"
-    },
-    {
         "titulo": "Pushinka",
         "enlace": "https://en.wikipedia.org/wiki/Pushinka",
         "fuente": "Hacker News",
@@ -7033,19 +7020,6 @@
         "ts": "2026-07-16T19:08:41.270088"
     },
     {
-        "titulo": "Show HN: Una adaptación moderna de Linux a un teléfono QWERTY de diez años",
-        "enlace": "https://news.ycombinator.com/item?id=48936554",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "16/07",
-        "fecha_publicacion": "Thu, 16 Jul 2026 16:15:55 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "16/07/2026",
-        "ts": "2026-07-16T19:08:41.270260"
-    },
-    {
         "titulo": "Microsoft Comic Chat is now open source",
         "enlace": "https://opensource.microsoft.com/blog/2026/07/16/microsoft-comic-chat-is-now-open-source/",
         "fuente": "Lobsters",
@@ -7343,19 +7317,6 @@
         "origen": "rss",
         "fecha_real": "16/07/2026",
         "ts": "2026-07-16T17:14:25.611897"
-    },
-    {
-        "titulo": "Launch HN: Traceforce (YC S26) – Company-wide security monitoring for AI apps",
-        "enlace": "https://news.ycombinator.com/item?id=48937020",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "16/07",
-        "fecha_publicacion": "Thu, 16 Jul 2026 16:52:16 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "16/07/2026",
-        "ts": "2026-07-16T17:14:25.611917"
     },
     {
         "titulo": "'We used acid to sabotage Microsoft hyperscale data centre construction'",
@@ -11568,19 +11529,6 @@
         "origen": "rss",
         "fecha_real": "15/07/2026",
         "ts": "2026-07-15T19:12:05.987609"
-    },
-    {
-        "titulo": "Codex Micro",
-        "enlace": "https://openai.com/supply/co-lab/work-louder/",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "15/07",
-        "fecha_publicacion": "Wed, 15 Jul 2026 16:12:58 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "15/07/2026",
-        "ts": "2026-07-15T19:12:05.987809"
     },
     {
         "titulo": "Inventing ELIZA - How the First Chatbot Shaped the Future of AI",
@@ -18655,19 +18603,6 @@
         "ts": "2026-07-14T10:44:59.517614"
     },
     {
-        "titulo": "Jurassic Park computers in excruciating detail",
-        "enlace": "https://fabiensanglard.net/jurrasic_park_computers/index.html",
-        "fuente": "Lobsters",
-        "tipo": "noticia",
-        "f": "14/07",
-        "fecha_publicacion": "Tue, 14 Jul 2026 04:24:36 -0500",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "14/07/2026",
-        "ts": "2026-07-14T10:44:57.151916"
-    },
-    {
         "titulo": "git-absorb: git commit --fixup, but automatic",
         "enlace": "https://github.com/tummychow/git-absorb",
         "fuente": "Lobsters",
@@ -23075,19 +23010,6 @@
         "ts": "2026-07-13T13:26:12.818337"
     },
     {
-        "titulo": "What are you doing this week?",
-        "enlace": "https://lobste.rs/s/ozcrd0/what_are_you_doing_this_week",
-        "fuente": "Lobsters",
-        "tipo": "noticia",
-        "f": "13/07",
-        "fecha_publicacion": "Mon, 13 Jul 2026 04:44:13 -0500",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "13/07/2026",
-        "ts": "2026-07-13T13:26:12.818387"
-    },
-    {
         "titulo": "Java News Roundup: TornadoVM 5, JHipster, Google ADK, OmniFish Build of Payara, Introducing Vidocq",
         "enlace": "https://www.infoq.com/news/2026/07/java-news-roundup-jul06-2026/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=global",
         "fuente": "InfoQ",
@@ -24115,19 +24037,6 @@
         "ts": "2026-07-13T09:29:12.387276"
     },
     {
-        "titulo": "BrowserAct vs Agent Browser: Una comparación práctica de ejecución sigilosa",
-        "enlace": "https://dev.to/hadil/browseract-vs-agent-browser-a-hands-on-stealth-execution-comparison-b82",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "13/07",
-        "fecha_publicacion": "Mon, 13 Jul 2026 09:11:03 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "13/07/2026",
-        "ts": "2026-07-13T09:29:12.387303"
-    },
-    {
         "titulo": "🚀 Desmitificando la IA agéntica: Dominando los fundamentos de LangGraph sin la jerga",
         "enlace": "https://dev.to/gobinath_sundaram_0924b25/demystifying-agentic-ai-mastering-langgraph-fundamentals-without-the-jargon-3c5",
         "fuente": "Dev.to",
@@ -24516,19 +24425,6 @@
         "origen": "rss",
         "fecha_real": "13/07/2026",
         "ts": "2026-07-13T02:41:16.901000"
-    },
-    {
-        "titulo": "Ask HN: Añadir un indicador para artículos generados por IA",
-        "enlace": "https://news.ycombinator.com/item?id=48886741",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "13/07",
-        "fecha_publicacion": "Mon, 13 Jul 2026 01:24:20 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "13/07/2026",
-        "ts": "2026-07-13T02:41:16.901035"
     },
     {
         "titulo": "¿Por qué Vanilla JavaScript?",
@@ -24958,19 +24854,6 @@
         "origen": "rss",
         "fecha_real": "12/07/2026",
         "ts": "2026-07-12T22:46:31.125868"
-    },
-    {
-        "titulo": "Ask HN: What Are You Working On? (July 2026)",
-        "enlace": "https://news.ycombinator.com/item?id=48884984",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "12/07",
-        "fecha_publicacion": "Sun, 12 Jul 2026 21:26:41 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "12/07/2026",
-        "ts": "2026-07-12T22:46:31.125974"
     },
     {
         "titulo": "Show HN: Adaptive Recall, persistent memory for AI assistants over MCP",
@@ -27144,19 +27027,6 @@
         "ts": "2026-07-12T13:21:42.586848"
     },
     {
-        "titulo": "El Protocolo de Seis Capas: Un Enfoque Estructural para la Generación de Imágenes por IA",
-        "enlace": "https://dev.to/yuta_tu_df870be227e99357a/the-six-layer-protocol-a-structural-approach-to-ai-image-generation-40j0",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "12/07",
-        "fecha_publicacion": "Sun, 12 Jul 2026 13:12:49 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "12/07/2026",
-        "ts": "2026-07-12T13:21:42.586862"
-    },
-    {
         "titulo": "La pesadilla del contexto de solicitud: Por qué NestJS tiene dificultades con ello y cómo Ditsmod lo resolvió hace años",
         "enlace": "https://dev.to/kostyatretyak/the-request-context-nightmare-why-nestjs-struggles-with-it-and-how-ditsmod-solved-it-years-ago-3gi4",
         "fuente": "Dev.to",
@@ -29146,19 +29016,6 @@
         "ts": "2026-07-11T21:48:10.543130"
     },
     {
-        "titulo": "Show HN: Ant – A JavaScript Runtime and Ecosystem",
-        "enlace": "https://antjs.org",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "11/07",
-        "fecha_publicacion": "Sat, 11 Jul 2026 20:07:18 +0000",
-        "badge": "Tech",
-        "categoria": "💻 Programación",
-        "origen": "rss",
-        "fecha_real": "11/07/2026",
-        "ts": "2026-07-11T20:45:12.574889"
-    },
-    {
         "titulo": "The Chinese Voice Actor Forced to Prove He's Human",
         "enlace": "https://www.sixthtone.com/news/1018753",
         "fuente": "Hacker News",
@@ -29365,19 +29222,6 @@
         "origen": "rss",
         "fecha_real": "11/07/2026",
         "ts": "2026-07-11T20:45:17.416264"
-    },
-    {
-        "titulo": "Pregunta en HN: ¿Por qué Google no indexa información sobre el AT Protocol?",
-        "enlace": "https://news.ycombinator.com/item?id=48874046",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "11/07",
-        "fecha_publicacion": "Sat, 11 Jul 2026 17:44:40 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "11/07/2026",
-        "ts": "2026-07-11T19:11:37.135710"
     },
     {
         "titulo": "Gestores de contraseñas: 3 diferencias clave para una elección segura",
@@ -31174,19 +31018,6 @@
         "ts": "2026-07-11T13:17:01.626762"
     },
     {
-        "titulo": "New to the web platform in April",
-        "enlace": "https://web.dev/blog/web-platform-04-2026?hl=en",
-        "fuente": "web.dev",
-        "tipo": "noticia",
-        "f": "11/07",
-        "fecha_publicacion": "Fri, 24 Apr 2026 07:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "11/07/2026",
-        "ts": "2026-07-11T11:04:25.931285"
-    },
-    {
         "titulo": "A font that humans can read but AI cannot",
         "enlace": "https://www.mixfont.com/ghost-font",
         "fuente": "Hacker News",
@@ -31458,19 +31289,6 @@
         "origen": "rss",
         "fecha_real": "11/07/2026",
         "ts": "2026-07-11T11:04:32.673809"
-    },
-    {
-        "titulo": "New to the web platform in May",
-        "enlace": "https://web.dev/blog/web-platform-05-2026?hl=en",
-        "fuente": "web.dev",
-        "tipo": "noticia",
-        "f": "11/07",
-        "fecha_publicacion": "Fri, 29 May 2026 07:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "11/07/2026",
-        "ts": "2026-07-11T09:28:30.353801"
     },
     {
         "titulo": "Launching Interop 2025",
@@ -33787,19 +33605,6 @@
         "ts": "2026-07-10T19:28:48.308480"
     },
     {
-        "titulo": "Ask HN: ¿Cuál fue la última tarea que solo un modelo frontera pudo realizar?",
-        "enlace": "https://news.ycombinator.com/item?id=48863171",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "10/07",
-        "fecha_publicacion": "Fri, 10 Jul 2026 18:02:02 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "10/07/2026",
-        "ts": "2026-07-10T18:23:23.691911"
-    },
-    {
         "titulo": "SpaceX quiere lanzar 100.000 satélites Starlink más para multiplicar por 100 el ancho de banda",
         "enlace": "https://www.zdnet.com/home-and-office/networking/spacex-wants-to-launch-100000-more-starlink-satellites/",
         "fuente": "Hacker News",
@@ -34786,19 +34591,6 @@
         "origen": "rss",
         "fecha_real": "10/07/2026",
         "ts": "2026-07-10T14:24:24.649161"
-    },
-    {
-        "titulo": "What are you doing this weekend?",
-        "enlace": "https://lobste.rs/s/u9yf5l/what_are_you_doing_this_weekend",
-        "fuente": "Lobsters",
-        "tipo": "noticia",
-        "f": "10/07",
-        "fecha_publicacion": "Fri, 10 Jul 2026 05:44:48 -0500",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "10/07/2026",
-        "ts": "2026-07-10T14:24:24.918112"
     },
     {
         "titulo": "Slack Introduces Agent Driven End-to-End Testing to Improve Resilience in UI Test Automation",
@@ -41158,19 +40950,6 @@
         "ts": "2026-07-09T03:27:23.599513"
     },
     {
-        "titulo": "Los agentes de IA no son magia",
-        "enlace": "https://dev.to/patrick0806/ai-agents-arent-magic-33pn",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "09/07",
-        "fecha_publicacion": "Thu, 09 Jul 2026 02:38:41 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "09/07/2026",
-        "ts": "2026-07-09T03:27:23.599524"
-    },
-    {
         "titulo": "Escalera de autonomía de agentes de IA: Permite que los agentes actúen sin perder el control",
         "enlace": "https://dev.to/jackm-singularity/ai-agent-autonomy-ladder-let-agents-act-without-losing-control-3if0",
         "fuente": "Dev.to",
@@ -42458,19 +42237,6 @@
         "ts": "2026-07-08T19:24:00.771957"
     },
     {
-        "titulo": "New to the web platform in February",
-        "enlace": "https://web.dev/blog/web-platform-02-2026?hl=en",
-        "fuente": "web.dev",
-        "tipo": "noticia",
-        "f": "08/07",
-        "fecha_publicacion": "Thu, 26 Feb 2026 08:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "08/07/2026",
-        "ts": "2026-07-08T19:24:01.162698"
-    },
-    {
         "titulo": "OpenMandriva: Comunicado sobre el intento de sabotaje de la distribución",
         "enlace": "https://forum.openmandriva.org/t/statement-regarding-attempted-distribution-sabotage/8997",
         "fuente": "Hacker News",
@@ -43106,19 +42872,6 @@
         "origen": "rss",
         "fecha_real": "08/07/2026",
         "ts": "2026-07-08T17:28:40.595841"
-    },
-    {
-        "titulo": "Launching Interop 2026",
-        "enlace": "https://hacks.mozilla.org/2026/02/launching-interop-2026/",
-        "fuente": "hacks.mozilla.org",
-        "tipo": "noticia",
-        "f": "08/07",
-        "fecha_publicacion": "Thu, 12 Feb 2026 17:07:24 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "08/07/2026",
-        "ts": "2026-07-08T15:21:35.182473"
     },
     {
         "titulo": "Parece que la era de la lectura podría ser una breve anomalía en la historia de la humanidad",
@@ -47526,19 +47279,6 @@
         "origen": "rss",
         "fecha_real": "07/07/2026",
         "ts": "2026-07-07T21:23:18.132193"
-    },
-    {
-        "titulo": "Introduction to media streaming: Part 1",
-        "enlace": "https://dev.to/xheghun/introduction-to-media-streaming-part-1-2lbc",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "07/07",
-        "fecha_publicacion": "Tue, 07 Jul 2026 20:51:52 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "07/07/2026",
-        "ts": "2026-07-07T21:23:18.132218"
     },
     {
         "titulo": "La temporada 3 de 'Silo' hace historia y logra el ansiado 100% de la crítica. Lo que opina el público ya es otro tema",
@@ -56420,19 +56160,6 @@
         "ts": "2026-07-05T12:15:30.871745"
     },
     {
-        "titulo": "Principales artículos de IA en Hugging Face - 2026-07-05",
-        "enlace": "https://dev.to/y_hnhnhan_2f26de65ffcc4/top-ai-papers-on-hugging-face-2026-07-05-55fg",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "05/07",
-        "fecha_publicacion": "Sun, 05 Jul 2026 12:01:22 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "05/07/2026",
-        "ts": "2026-07-05T12:15:30.871755"
-    },
-    {
         "titulo": "Caché del App Router de Next.js: revalidate, dynamic y no-store sin el folklore",
         "enlace": "https://dev.to/jtorchia/nextjs-app-router-caching-revalidate-dynamic-and-no-store-without-the-folklore-in1",
         "fuente": "Dev.to",
@@ -61579,19 +61306,6 @@
         "origen": "rss",
         "fecha_real": "04/07/2026",
         "ts": "2026-07-04T16:01:34.805596"
-    },
-    {
-        "titulo": "¡Hola a todos!",
-        "enlace": "https://dev.to/mujnuu/hey-everyone-1g99",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "04/07",
-        "fecha_publicacion": "Sat, 04 Jul 2026 15:58:32 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "04/07/2026",
-        "ts": "2026-07-04T16:01:34.805624"
     },
     {
         "titulo": "El peligro oculto en tu pipeline RAG de n8n: ¿Qué sucede cuando envías documentos internos a ChatGPT?",
