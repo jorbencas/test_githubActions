@@ -3673,5 +3673,20 @@
   },
   "https://lobste.rs/s/69mche/what_is_your_favorite_blog_read_recently": {
     "ts": 1784473168.522698
+  },
+  "https://www.tomshardware.com/networking/clever-hacker-fits-537-000-domains-in-a-tiny-usd5-esp32-ad-blocking-dongle-firmware-uses-only-around-50kb-of-ram-and-can-answer-blocked-lookups-in-10-milliseconds": {
+    "ts": 1784476759.449793
+  },
+  "https://ollama.com/blog/all-aboard-open-models": {
+    "ts": 1784476761.345637
+  },
+  "https://dev.to/moleaine/devlog-1-re-entering-the-matrix-after-years-away-318g": {
+    "ts": 1784476763.156304
+  },
+  "https://dev.to/review-it/the-difference-between-a-review-and-an-advert-1f26": {
+    "ts": 1784476764.884141
+  },
+  "https://dev.to/gkhan205/i-built-an-architecture-intelligence-tool-for-react-nextjs-during-the-openai-build-week-hackathon-37ba": {
+    "ts": 1784476766.613666
   }
 }
