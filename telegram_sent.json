@@ -3628,5 +3628,20 @@
   },
   "https://www.wired.com/story/search-for-earth-like-planet-step-forward/": {
     "ts": 1784459153.016074
+  },
+  "https://sgt.hootr.club/blog/home-server-rebirth/": {
+    "ts": 1784463116.560079
+  },
+  "https://qwen.ai/home": {
+    "ts": 1784463118.872139
+  },
+  "https://chipweinberger.com/articles/20260719-hardware-is-not-so-hard": {
+    "ts": 1784463120.748651
+  },
+  "https://simonwillison.net/2026/jul/19/claude-code-in-bun-in-rust/": {
+    "ts": 1784463122.62599
+  },
+  "https://offlinetts.com/": {
+    "ts": 1784463124.381013
   }
 }
