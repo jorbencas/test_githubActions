@@ -1,5 +1,18 @@
 [
     {
+        "titulo": "Shake Blog",
+        "enlace": "https://abhin4v.github.io/shake-blog/",
+        "fuente": "Lobsters",
+        "tipo": "noticia",
+        "f": "19/07",
+        "fecha_publicacion": "Sun, 19 Jul 2026 08:21:02 -0500",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "origen": "rss",
+        "fecha_real": "19/07/2026",
+        "ts": "2026-07-19T13:25:29.023854"
+    },
+    {
         "titulo": "Bob Keller, veterano de Operaciones Especiales y Delta Force: \"Mi película favorita. Hicieron un trabajo muy bueno con el realismo\"",
         "enlace": "https://www.sensacine.com/noticias/cine/noticia-1000213297/#utm_source=applesfera&utm_medium=network&utm_campaign=repost",
         "fuente": "Applesfera",
