@@ -3913,5 +3913,20 @@
   },
   "https://jelly-ui.com/": {
     "ts": 1784574769.886812
+  },
+  "https://xenaproject.wordpress.com/2026/07/20/human-mathematicians-are-being-outcounterexampled/": {
+    "ts": 1784580430.298864
+  },
+  "https://www.wired.com/story/new-research-estimates-most-emissions-came-from-fan-travel/": {
+    "ts": 1784580439.461138
+  },
+  "https://dev.to/thecodedaniel/i-taught-a-security-camera-to-say-i-dont-know-and-it-got-more-useful-not-less-1d87": {
+    "ts": 1784580441.686465
+  },
+  "https://dev.to/imus_d7584cbc8ee9b0336256/optimizing-rag-at-scale-chunking-retrieval-and-the-bayesian-search-that-cut-latency-40-1gpi": {
+    "ts": 1784580448.833757
+  },
+  "https://dev.to/phetphet/your-ai-writes-e2e-tests-that-look-right-and-fail-i-built-a-map-so-it-stops-guessing-468g": {
+    "ts": 1784580450.799004
   }
 }
