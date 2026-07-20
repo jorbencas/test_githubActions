@@ -3793,5 +3793,20 @@
   },
   "https://www.nytimes.com/2026/07/17/climate/company-climate-change-commitments-renege.html": {
     "ts": 1784505039.121018
+  },
+  "https://spectrum.ieee.org/biggest-probabilistic-computer": {
+    "ts": 1784513625.961514
+  },
+  "https://www.reuters.com/world/us/americans-are-angry-about-data-centers-politicians-are-feeling-pressure-2026-07-16/": {
+    "ts": 1784513627.866258
+  },
+  "https://taoofmac.com/space/blog/2026/06/18/1845": {
+    "ts": 1784513629.590995
+  },
+  "https://dev.to/imus_d7584cbc8ee9b0336256/optimizing-rag-at-scale-chunking-retrieval-and-the-bayesian-search-that-cut-latency-40-a11": {
+    "ts": 1784513631.417303
+  },
+  "https://dev.to/imus_d7584cbc8ee9b0336256/building-production-grade-llm-evaluation-pipelines-from-vibes-to-metrics-51id": {
+    "ts": 1784513633.238532
   }
 }
