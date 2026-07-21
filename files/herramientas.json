@@ -1,5 +1,21 @@
 [
     {
+        "titulo": "PrefectHQ /fastmcp",
+        "enlace": "https://github.com/PrefectHQ/fastmcp",
+        "fuente": "GitHub Trending Daily",
+        "tipo": "herramienta",
+        "f": "21/07",
+        "fecha_publicacion": "",
+        "subtipo": "github",
+        "descripcion": "🚀 The fast, Pythonic way to build MCP servers and clients.",
+        "lenguaje": "Python",
+        "estrellas": "26661",
+        "repo": "PrefectHQ/fastmcp",
+        "fecha_real": "21/07/2026",
+        "ts": "2026-07-21T08:37:28.675472",
+        "categoria": "💡 General"
+    },
+    {
         "titulo": "bojieli /ai-agent-book",
         "enlace": "https://github.com/bojieli/ai-agent-book",
         "fuente": "GitHub Trending Daily",
