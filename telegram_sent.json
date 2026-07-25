@@ -4963,5 +4963,20 @@
   },
   "https://brolly.sh/forecast/rwfp2qw8": {
     "ts": 1785014622.455616
+  },
+  "https://daringfireball.net/linked/2026/07/25/ai-mania-nikhil-suresh": {
+    "ts": 1785018242.548264
+  },
+  "https://www.apalrd.net/posts/2026/isp_mcast/": {
+    "ts": 1785018244.620019
+  },
+  "https://fly.io/blog/kurt-scott-money-sprites/": {
+    "ts": 1785018246.836685
+  },
+  "https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models": {
+    "ts": 1785018248.788615
+  },
+  "https://news.ycombinator.com/item?id=49051130": {
+    "ts": 1785018251.087136
   }
 }
