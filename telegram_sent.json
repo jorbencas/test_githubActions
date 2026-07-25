@@ -4903,5 +4903,20 @@
   },
   "https://dev.to/themassiveone/what-if-mcp-could-manage-your-entire-development-runtime-1k8l": {
     "ts": 1784998657.377665
+  },
+  "https://dev.to/dsplce-co/building-an-mcp-server-in-python-and-connecting-it-to-claude-code-4ibk": {
+    "ts": 1785002199.455689
+  },
+  "https://dev.to/andreimerlescu/how-i-processed-666k-pages-of-flattened-pdfs-into-a-full-text-search-engine-4db3": {
+    "ts": 1785002201.659312
+  },
+  "https://dev.to/skyestrela/stop-asking-ai-coding-agents-to-fix-vague-bugs-4ji6": {
+    "ts": 1785002203.745791
+  },
+  "https://dev.to/dipankar_sarkar/two-coding-agents-editing-the-same-issue-no-merge-conflict-here-is-how-git-refs-make-that-work-325k": {
+    "ts": 1785002205.929086
+  },
+  "https://dev.to/abhijat_chaturvedi/the-two-map-party-game-server-building-gamenight-without-a-database-4phb": {
+    "ts": 1785002208.225485
   }
 }
