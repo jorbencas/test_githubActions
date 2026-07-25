@@ -2158,19 +2158,6 @@
         "ts": "2026-07-24T17:36:50.973773"
     },
     {
-        "titulo": "Claude Opus 5",
-        "enlace": "https://www.anthropic.com/claude-opus-5-system-card",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "24/07",
-        "fecha_publicacion": "Fri, 24 Jul 2026 16:57:41 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "24/07/2026",
-        "ts": "2026-07-24T17:36:53.922147"
-    },
-    {
         "titulo": "A partir de JDK 27, los ingenieros de Oracle dejarán de mantener el puerto de macOS/x64",
         "enlace": "https://openjdk.org/jeps/541",
         "fuente": "Hacker News",
@@ -5486,19 +5473,6 @@
         "ts": "2026-07-23T21:03:13.952022"
     },
     {
-        "titulo": "Show HN: Echo – Resultados a nivel de Fable a 1/3 del coste usando modelos de peso abierto",
-        "enlace": "https://news.ycombinator.com/item?id=49026810",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "23/07",
-        "fecha_publicacion": "Thu, 23 Jul 2026 19:26:01 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "23/07/2026",
-        "ts": "2026-07-23T21:03:15.993054"
-    },
-    {
         "titulo": "Selfie para iniciar sesión: una nueva y fácil forma de acceder a tu cuenta de Google",
         "enlace": "https://blog.google/innovation-and-ai/technology/safety-security/selfie-video-sign-in/",
         "fuente": "Hacker News",
@@ -6355,19 +6329,6 @@
         "origen": "rss",
         "fecha_real": "23/07/2026",
         "ts": "2026-07-23T17:22:06.378958"
-    },
-    {
-        "titulo": "Launch HN: Screenpipe (YC S26) – Potencia tus agentes con tu grabación de pantalla 24/7",
-        "enlace": "https://news.ycombinator.com/item?id=49024620",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "23/07",
-        "fecha_publicacion": "Thu, 23 Jul 2026 16:48:38 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "23/07/2026",
-        "ts": "2026-07-23T17:22:06.379016"
     },
     {
         "titulo": "JEP 540: API JSON Sencilla (Ahora en Incubadora)",
@@ -9475,19 +9436,6 @@
         "origen": "rss",
         "fecha_real": "22/07/2026",
         "ts": "2026-07-22T21:05:55.515359"
-    },
-    {
-        "titulo": "John C. Dvorak has died",
-        "enlace": "https://twitter.com/na_announce/status/2079952538040672302",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "22/07",
-        "fecha_publicacion": "Wed, 22 Jul 2026 19:22:19 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "22/07/2026",
-        "ts": "2026-07-22T21:05:55.515390"
     },
     {
         "titulo": "Does creatine make you smarter?",
@@ -14443,19 +14391,6 @@
         "ts": "2026-07-21T19:20:20.333437"
     },
     {
-        "titulo": "Bloomy (YC S26) está contratando a un ingeniero fundador",
-        "enlace": "https://news.ycombinator.com/item?id=48995037",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "21/07",
-        "fecha_publicacion": "Tue, 21 Jul 2026 17:00:20 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "21/07/2026",
-        "ts": "2026-07-21T17:18:08.751631"
-    },
-    {
         "titulo": "Los 2.400 Castillos del Mundo",
         "enlace": "https://thecastlemap.com/",
         "fuente": "Hacker News",
@@ -14662,19 +14597,6 @@
         "origen": "rss",
         "fecha_real": "21/07/2026",
         "ts": "2026-07-21T17:18:13.807457"
-    },
-    {
-        "titulo": "Claude Opus vs. GPT Codex: Quién lidera y quién es liderado en la respuesta real a incidentes",
-        "enlace": "https://dev.to/mehrdadkhodaverdi/claude-opus-vs-gpt-codex-who-drives-and-who-gets-driven-in-real-incident-response-4a1j",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "21/07",
-        "fecha_publicacion": "Tue, 21 Jul 2026 16:42:57 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "21/07/2026",
-        "ts": "2026-07-21T17:18:13.807468"
     },
     {
         "titulo": "Ejecuté mi escáner de Solidity en las 10 bases de código más auditadas de web3. Aquí están todos los indicadores.",
@@ -16861,19 +16783,6 @@
         "ts": "2026-07-21T05:49:49.302925"
     },
     {
-        "titulo": "Optimizando RAG a escala: Segmentación, recuperación y la búsqueda bayesiana que redujo la latencia en un 40%",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/optimizing-rag-at-scale-chunking-retrieval-and-the-bayesian-search-that-cut-latency-40-4o8l",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "21/07",
-        "fecha_publicacion": "Tue, 21 Jul 2026 05:10:14 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "21/07/2026",
-        "ts": "2026-07-21T05:49:49.302940"
-    },
-    {
         "titulo": "Construyendo pipelines de evaluación de LLM de grado de producción: De las impresiones a las métricas",
         "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/building-production-grade-llm-evaluation-pipelines-from-vibes-to-metrics-1c77",
         "fuente": "Dev.to",
@@ -17043,19 +16952,6 @@
         "ts": "2026-07-21T02:44:44.804574"
     },
     {
-        "titulo": "Building Production-Grade LLM Evaluation Pipelines: From Vibes to Metrics",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/building-production-grade-llm-evaluation-pipelines-from-vibes-to-metrics-28em",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "21/07",
-        "fecha_publicacion": "Tue, 21 Jul 2026 02:05:47 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "21/07/2026",
-        "ts": "2026-07-21T02:44:44.804584"
-    },
-    {
         "titulo": "Flock Credibility Lost as It Repeatedly Lies to City Councils, Police, & Public",
         "enlace": "https://www.aclu.org/news/privacy-technology/tracking-alpr-cameras/flock-safety-credibility-lost-as-it-repeatedly-lies-to-city-councils-police-departments-and-public-across-the-country",
         "fuente": "Hacker News",
@@ -17132,32 +17028,6 @@
         "origen": "rss",
         "fecha_real": "21/07/2026",
         "ts": "2026-07-21T02:34:33.474753"
-    },
-    {
-        "titulo": "Optimizing RAG at Scale: Chunking, Retrieval, and the Bayesian Search That Cut Latency 40%",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/optimizing-rag-at-scale-chunking-retrieval-and-the-bayesian-search-that-cut-latency-40-332j",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "21/07",
-        "fecha_publicacion": "Tue, 21 Jul 2026 02:20:38 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "21/07/2026",
-        "ts": "2026-07-21T02:34:33.534850"
-    },
-    {
-        "titulo": "Building Production-Grade LLM Evaluation Pipelines: From Vibes to Metrics",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/building-production-grade-llm-evaluation-pipelines-from-vibes-to-metrics-1k6f",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "21/07",
-        "fecha_publicacion": "Tue, 21 Jul 2026 02:20:36 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "21/07/2026",
-        "ts": "2026-07-21T02:34:33.534865"
     },
     {
         "titulo": "Cybr Academy - [LAB] Compromise EC2 IMDSv2 with RCE (AWS Red Teaming)",
@@ -17498,19 +17368,6 @@
         "ts": "2026-07-20T23:07:50.287252"
     },
     {
-        "titulo": "The Space Force is now seeking to buy up to $30 billion in rocket launches",
-        "enlace": "https://arstechnica.com/science/2026/07/the-space-force-is-now-seeking-to-buy-up-to-30-billion-in-rocket-launches/",
-        "fuente": "Ars Technica",
-        "tipo": "noticia",
-        "f": "20/07",
-        "fecha_publicacion": "Mon, 20 Jul 2026 20:30:25 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "20/07/2026",
-        "ts": "2026-07-20T21:59:04.042749"
-    },
-    {
         "titulo": "AT&T loses key ruling in bid to stop offering basic phone service in California",
         "enlace": "https://arstechnica.com/tech-policy/2026/07/att-loses-key-ruling-in-bid-to-stop-offering-basic-phone-service-in-california/",
         "fuente": "Ars Technica",
@@ -17654,19 +17511,6 @@
         "ts": "2026-07-20T21:59:12.553844"
     },
     {
-        "titulo": "Optimizing RAG at Scale: Chunking, Retrieval, and the Bayesian Search That Cut Latency 40%",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/optimizing-rag-at-scale-chunking-retrieval-and-the-bayesian-search-that-cut-latency-40-30oh",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "20/07",
-        "fecha_publicacion": "Mon, 20 Jul 2026 21:40:15 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "20/07/2026",
-        "ts": "2026-07-20T21:59:12.553860"
-    },
-    {
         "titulo": "Your Application Is Ready... According to Whom?",
         "enlace": "https://dev.to/agiloop_ai/your-application-is-readyaccording-to-whom-5467",
         "fuente": "Dev.to",
@@ -17717,19 +17561,6 @@
         "origen": "rss",
         "fecha_real": "20/07/2026",
         "ts": "2026-07-20T21:59:12.553964"
-    },
-    {
-        "titulo": "Building Production-Grade LLM Evaluation Pipelines: From Vibes to Metrics",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/building-production-grade-llm-evaluation-pipelines-from-vibes-to-metrics-l9p",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "20/07",
-        "fecha_publicacion": "Mon, 20 Jul 2026 21:23:16 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "20/07/2026",
-        "ts": "2026-07-20T21:59:12.553975"
     },
     {
         "titulo": "El peronismo se fragmenta: ¿quién paga el costo fiscal de la interna?",
@@ -17821,19 +17652,6 @@
         "origen": "rss",
         "fecha_real": "20/07/2026",
         "ts": "2026-07-20T20:20:00.416886"
-    },
-    {
-        "titulo": "Optimizing RAG at Scale: Chunking, Retrieval, and the Bayesian Search That Cut Latency 40%",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/optimizing-rag-at-scale-chunking-retrieval-and-the-bayesian-search-that-cut-latency-40-1gpi",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "20/07",
-        "fecha_publicacion": "Mon, 20 Jul 2026 20:02:38 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "20/07/2026",
-        "ts": "2026-07-20T20:20:00.416911"
     },
     {
         "titulo": "Stop letting your AI guess selectors.",
@@ -18538,19 +18356,6 @@
         "ts": "2026-07-20T19:45:02.080832"
     },
     {
-        "titulo": "Construyendo pipelines de evaluación de LLM de grado de producción: De las impresiones a las métricas",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/building-production-grade-llm-evaluation-pipelines-from-vibes-to-metrics-50g1",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "20/07",
-        "fecha_publicacion": "Mon, 20 Jul 2026 19:22:51 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "20/07/2026",
-        "ts": "2026-07-20T19:45:02.080844"
-    },
-    {
         "titulo": "Construyendo Enola, Parte 1: Por qué importa el análisis arquitectónico determinista",
         "enlace": "https://dev.to/gert_/building-enola-part-1-why-deterministic-architecture-analysis-matters-27e1",
         "fuente": "Dev.to",
@@ -18720,19 +18525,6 @@
         "ts": "2026-07-20T18:01:36.157245"
     },
     {
-        "titulo": "Launch HN: Bloomy (YC S26) – Aprendizaje por maestría impulsado por IA para K-12",
-        "enlace": "https://news.ycombinator.com/item?id=48981136",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "20/07",
-        "fecha_publicacion": "Mon, 20 Jul 2026 16:32:10 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "20/07/2026",
-        "ts": "2026-07-20T18:01:36.157280"
-    },
-    {
         "titulo": "Chequia se dispone a prohibir los teléfonos móviles en las escuelas a partir de septiembre de 2027",
         "enlace": "https://www.expats.cz/czech-news/article/czech-news-in-brief-for-july-20-2026-monday-top-afternoon-headlines",
         "fuente": "Hacker News",
@@ -18887,19 +18679,6 @@
         "origen": "rss",
         "fecha_real": "20/07/2026",
         "ts": "2026-07-20T18:01:41.747192"
-    },
-    {
-        "titulo": "Optimizando RAG a escala: Segmentación, Recuperación y la búsqueda bayesiana que redujo la latencia en un 40%",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/optimizing-rag-at-scale-chunking-retrieval-and-the-bayesian-search-that-cut-latency-40-1ojl",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "20/07",
-        "fecha_publicacion": "Mon, 20 Jul 2026 17:40:16 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "20/07/2026",
-        "ts": "2026-07-20T18:01:41.747207"
     },
     {
         "titulo": "Construyendo un mensajero de privacidad de código abierto con IA como fundador único",
@@ -20254,19 +20033,6 @@
         "ts": "2026-07-20T10:09:40.888789"
     },
     {
-        "titulo": "What are you doing this week?",
-        "enlace": "https://lobste.rs/s/hq0he3/what_are_you_doing_this_week",
-        "fuente": "Lobsters",
-        "tipo": "noticia",
-        "f": "20/07",
-        "fecha_publicacion": "Mon, 20 Jul 2026 03:25:33 -0500",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "20/07/2026",
-        "ts": "2026-07-20T10:09:55.790538"
-    },
-    {
         "titulo": "Who’s responsible for bug reports on old software versions?",
         "enlace": "https://pointieststick.com/2026/07/19/whos-responsible-for-bug-reports-on-old-software-versions/",
         "fuente": "Lobsters",
@@ -20447,19 +20213,6 @@
         "origen": "rss",
         "fecha_real": "20/07/2026",
         "ts": "2026-07-20T10:09:45.058969"
-    },
-    {
-        "titulo": "Optimizando RAG a escala: Fragmentación, recuperación y la búsqueda bayesiana que redujo la latencia en un 40%",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/optimizing-rag-at-scale-chunking-retrieval-and-the-bayesian-search-that-cut-latency-40-5deb",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "20/07",
-        "fecha_publicacion": "Mon, 20 Jul 2026 09:41:25 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "20/07/2026",
-        "ts": "2026-07-20T10:09:45.058984"
     },
     {
         "titulo": "Construyendo pipelines de evaluación de LLM de nivel de producción: De las sensaciones a las métricas",
@@ -20657,19 +20410,6 @@
         "ts": "2026-07-20T09:15:45.180342"
     },
     {
-        "titulo": "Claude found a counterexample to the Jacobian Conjecture",
-        "enlace": "https://news.ycombinator.com/item?id=48973869",
-        "fuente": "Lobsters",
-        "tipo": "noticia",
-        "f": "20/07",
-        "fecha_publicacion": "Mon, 20 Jul 2026 02:23:27 -0500",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "20/07/2026",
-        "ts": "2026-07-20T09:15:45.180356"
-    },
-    {
         "titulo": "JSON5E - JSON5 for Humans",
         "enlace": "https://github.com/boris-kolpackov/libpdjson5/blob/master/JSON5E.md",
         "fuente": "Lobsters",
@@ -20748,19 +20488,6 @@
         "ts": "2026-07-20T09:15:55.340735"
     },
     {
-        "titulo": "Optimizing RAG at Scale: Chunking, Retrieval, and the Bayesian Search That Cut Latency 40%",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/optimizing-rag-at-scale-chunking-retrieval-and-the-bayesian-search-that-cut-latency-40-1cjc",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "20/07",
-        "fecha_publicacion": "Mon, 20 Jul 2026 09:12:38 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "20/07/2026",
-        "ts": "2026-07-20T09:15:57.561710"
-    },
-    {
         "titulo": "How I Structured SEO for a 20+ Page Indie Site Without Hiring an Agency",
         "enlace": "https://dev.to/faizan_ebahoochaudhry_3/how-i-structured-seo-for-a-20-page-indie-site-without-hiring-an-agency-k4",
         "fuente": "Dev.to",
@@ -20824,19 +20551,6 @@
         "origen": "rss",
         "fecha_real": "20/07/2026",
         "ts": "2026-07-20T09:15:57.561868"
-    },
-    {
-        "titulo": "Building Production-Grade LLM Evaluation Pipelines: From Vibes to Metrics",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/building-production-grade-llm-evaluation-pipelines-from-vibes-to-metrics-18je",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "20/07",
-        "fecha_publicacion": "Mon, 20 Jul 2026 09:00:16 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "20/07/2026",
-        "ts": "2026-07-20T09:15:57.561879"
     },
     {
         "titulo": "What Science Actually Says About CVs (and 3 HR Myths to Drop)",
@@ -20915,19 +20629,6 @@
         "origen": "rss",
         "fecha_real": "20/07/2026",
         "ts": "2026-07-20T06:44:24.409308"
-    },
-    {
-        "titulo": "Xiaomi-Robotics-1",
-        "enlace": "https://robotics.xiaomi.com/xiaomi-robotics-1.html",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "20/07",
-        "fecha_publicacion": "Mon, 20 Jul 2026 04:45:15 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "20/07/2026",
-        "ts": "2026-07-20T06:44:24.409338"
     },
     {
         "titulo": "LoRA Speedrun – una clasificación pública de tiempo real para técnicas de fine-tuning",
@@ -21320,19 +21021,6 @@
         "ts": "2026-07-20T03:15:29.956237"
     },
     {
-        "titulo": "Construyendo pipelines de evaluación de LLM de grado de producción: De las sensaciones a las métricas",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/building-production-grade-llm-evaluation-pipelines-from-vibes-to-metrics-i2n",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "20/07",
-        "fecha_publicacion": "Mon, 20 Jul 2026 02:32:32 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "20/07/2026",
-        "ts": "2026-07-20T03:15:29.956248"
-    },
-    {
         "titulo": "Añade analíticas a tu sitio sin un banner de consentimiento de cookies",
         "enlace": "https://dev.to/solca/add-analytics-to-your-site-without-a-cookie-consent-banner-4a11",
         "fuente": "Dev.to",
@@ -21383,32 +21071,6 @@
         "origen": "rss",
         "fecha_real": "19/07/2026",
         "ts": "2026-07-19T23:56:02.078553"
-    },
-    {
-        "titulo": "Optimizing RAG at Scale: Chunking, Retrieval, and the Bayesian Search That Cut Latency 40%",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/optimizing-rag-at-scale-chunking-retrieval-and-the-bayesian-search-that-cut-latency-40-a11",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "19/07",
-        "fecha_publicacion": "Sun, 19 Jul 2026 23:36:47 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "19/07/2026",
-        "ts": "2026-07-19T23:56:06.754981"
-    },
-    {
-        "titulo": "Building Production-Grade LLM Evaluation Pipelines: From Vibes to Metrics",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/building-production-grade-llm-evaluation-pipelines-from-vibes-to-metrics-51id",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "19/07",
-        "fecha_publicacion": "Sun, 19 Jul 2026 23:36:46 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "19/07/2026",
-        "ts": "2026-07-19T23:56:06.754999"
     },
     {
         "titulo": "Gateway Talents in Solon AI: OpenAPI, Tool, and MCP Surfaces That Scale Without Context Blow-Up",
@@ -21775,32 +21437,6 @@
         "ts": "2026-07-19T21:51:47.692083"
     },
     {
-        "titulo": "Optimizando RAG a escala: fragmentación, recuperación y la búsqueda bayesiana que redujo la latencia en un 40%",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/optimizing-rag-at-scale-chunking-retrieval-and-the-bayesian-search-that-cut-latency-40-3o1k",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "19/07",
-        "fecha_publicacion": "Sun, 19 Jul 2026 21:17:58 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "19/07/2026",
-        "ts": "2026-07-19T21:51:47.692097"
-    },
-    {
-        "titulo": "Construyendo pipelines de evaluación de LLM de grado de producción: De las sensaciones a las métricas",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/building-production-grade-llm-evaluation-pipelines-from-vibes-to-metrics-285f",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "19/07",
-        "fecha_publicacion": "Sun, 19 Jul 2026 21:17:56 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "19/07/2026",
-        "ts": "2026-07-19T21:51:47.692109"
-    },
-    {
         "titulo": "El agente propone, el humano dispone: construyendo un piloto automático de seguridad alimentaria sobre Qwen",
         "enlace": "https://dev.to/mark124/the-agent-proposes-the-human-disposes-building-a-food-safety-autopilot-on-qwen-3k4d",
         "fuente": "Dev.to",
@@ -22035,32 +21671,6 @@
         "ts": "2026-07-19T20:45:40.912668"
     },
     {
-        "titulo": "Optimización de RAG a escala: Fragmentación, recuperación y la búsqueda bayesiana que redujo la latencia un 40%.",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/optimizing-rag-at-scale-chunking-retrieval-and-the-bayesian-search-that-cut-latency-40-4o3l",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "19/07",
-        "fecha_publicacion": "Sun, 19 Jul 2026 20:11:29 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "19/07/2026",
-        "ts": "2026-07-19T20:45:40.912682"
-    },
-    {
-        "titulo": "Construyendo pipelines de evaluación de LLM de nivel de producción: De las sensaciones a las métricas.",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/building-production-grade-llm-evaluation-pipelines-from-vibes-to-metrics-4ef4",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "19/07",
-        "fecha_publicacion": "Sun, 19 Jul 2026 20:11:28 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "19/07/2026",
-        "ts": "2026-07-19T20:45:40.912694"
-    },
-    {
         "titulo": "La aceleración de FLUX de 1.125x fue real. La pregunta más difícil es dónde la difusión recupera el tiempo.",
         "enlace": "https://dev.to/kkjcodes/a-1125x-flux-speedup-was-real-the-harder-question-is-where-diffusion-gives-back-time-ppi",
         "fuente": "Dev.to",
@@ -22269,32 +21879,6 @@
         "ts": "2026-07-19T19:07:46.383804"
     },
     {
-        "titulo": "Optimizando RAG a escala: fragmentación, recuperación y la búsqueda bayesiana que redujo la latencia un 40%",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/optimizing-rag-at-scale-chunking-retrieval-and-the-bayesian-search-that-cut-latency-40-16kd",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "19/07",
-        "fecha_publicacion": "Sun, 19 Jul 2026 18:27:46 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "19/07/2026",
-        "ts": "2026-07-19T19:07:46.383820"
-    },
-    {
-        "titulo": "Construyendo pipelines de evaluación de LLM de grado de producción: de las sensaciones a las métricas",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/building-production-grade-llm-evaluation-pipelines-from-vibes-to-metrics-35p0",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "19/07",
-        "fecha_publicacion": "Sun, 19 Jul 2026 18:27:45 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "19/07/2026",
-        "ts": "2026-07-19T19:07:46.383831"
-    },
-    {
         "titulo": "Menos es más: Por qué el audio en SoundCloud se ve diferente",
         "enlace": "https://developers.soundcloud.com/blog/less-is-more-why-soundcloud-low-passes-its-aac-transcodings/",
         "fuente": "Hacker News",
@@ -22358,19 +21942,6 @@
         "origen": "rss",
         "fecha_real": "19/07/2026",
         "ts": "2026-07-19T19:04:18.245648"
-    },
-    {
-        "titulo": "Show HN: Reemplacé un sistema de bolera de 120.000 dólares con 1.600 dólares en ESP32s",
-        "enlace": "https://news.ycombinator.com/item?id=48968606",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "19/07",
-        "fecha_publicacion": "Sun, 19 Jul 2026 14:41:16 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "19/07/2026",
-        "ts": "2026-07-19T19:04:18.245708"
     },
     {
         "titulo": "Introduction to Formal Verification with Lean (Part 1)",
@@ -22696,32 +22267,6 @@
         "origen": "rss",
         "fecha_real": "19/07/2026",
         "ts": "2026-07-19T17:01:18.304813"
-    },
-    {
-        "titulo": "Optimizando RAG a escala: Fragmentación, Recuperación y la búsqueda bayesiana que redujo la latencia un 40%",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/optimizing-rag-at-scale-chunking-retrieval-and-the-bayesian-search-that-cut-latency-40-2h4d",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "19/07",
-        "fecha_publicacion": "Sun, 19 Jul 2026 16:21:52 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "19/07/2026",
-        "ts": "2026-07-19T17:01:18.304828"
-    },
-    {
-        "titulo": "Construyendo pipelines de evaluación de LLM de grado de producción: De sensaciones a métricas",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/building-production-grade-llm-evaluation-pipelines-from-vibes-to-metrics-1icc",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "19/07",
-        "fecha_publicacion": "Sun, 19 Jul 2026 16:21:51 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "19/07/2026",
-        "ts": "2026-07-19T17:01:18.304839"
     },
     {
         "titulo": "Deja de parsear HTML para obtener datos de productos — el JSON ya está en la página",
@@ -23621,19 +23166,6 @@
         "ts": "2026-07-19T11:57:12.696950"
     },
     {
-        "titulo": "Qwen 3.8 Max",
-        "enlace": "https://qwen.ai/home",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "19/07",
-        "fecha_publicacion": "Sun, 19 Jul 2026 10:41:42 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "19/07/2026",
-        "ts": "2026-07-19T11:57:12.696971"
-    },
-    {
         "titulo": "Lo que aprendí vendiendo 2.500 grabadoras MIDI: El hardware no es tan difícil",
         "enlace": "https://chipweinberger.com/articles/20260719-hardware-is-not-so-hard",
         "fuente": "Hacker News",
@@ -23749,19 +23281,6 @@
         "origen": "rss",
         "fecha_real": "19/07/2026",
         "ts": "2026-07-19T11:57:17.366908"
-    },
-    {
-        "titulo": "Optimizando RAG a escala: Fragmentación, recuperación y la búsqueda bayesiana que redujo la latencia en un 40%",
-        "enlace": "https://dev.to/imus_d7584cbc8ee9b0336256/optimizing-rag-at-scale-chunking-retrieval-and-the-bayesian-search-that-cut-latency-40-3oi9",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "19/07",
-        "fecha_publicacion": "Sun, 19 Jul 2026 11:40:18 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "19/07/2026",
-        "ts": "2026-07-19T11:57:18.646727"
     },
     {
         "titulo": "Por qué construí un firmador de PDF 100% privado (Sin subidas al servidor)",
@@ -26403,19 +25922,6 @@
         "ts": "2026-07-18T18:01:43.919561"
     },
     {
-        "titulo": "OpenEvidence is bribing spouses of CMI and Genentech leadership",
-        "enlace": "https://news.ycombinator.com/item?id=48959765",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "18/07",
-        "fecha_publicacion": "Sat, 18 Jul 2026 16:48:55 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "18/07/2026",
-        "ts": "2026-07-18T16:59:48.459524"
-    },
-    {
         "titulo": "Heresy",
         "enlace": "https://paulgraham.com/heresy.html",
         "fuente": "Hacker News",
@@ -26897,19 +26403,6 @@
         "ts": "2026-07-18T15:56:46.636053"
     },
     {
-        "titulo": "LG ThinQ Terms of Use",
-        "enlace": "https://news.ycombinator.com/item?id=48958273",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "18/07",
-        "fecha_publicacion": "Sat, 18 Jul 2026 14:04:55 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "18/07/2026",
-        "ts": "2026-07-18T14:51:25.473882"
-    },
-    {
         "titulo": "GPT-5.6 used a prompt to close a 30-year gap in convex optimization",
         "enlace": "https://old.reddit.com/r/math/comments/1uxj3cy/after_openais_cdc_proof_announcement_gpt56_used_a/",
         "fuente": "Hacker News",
@@ -27339,19 +26832,6 @@
         "ts": "2026-07-18T13:12:37.620400"
     },
     {
-        "titulo": "New to the web platform in April",
-        "enlace": "https://web.dev/blog/web-platform-04-2026?hl=en",
-        "fuente": "web.dev",
-        "tipo": "noticia",
-        "f": "18/07",
-        "fecha_publicacion": "Fri, 24 Apr 2026 07:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "18/07/2026",
-        "ts": "2026-07-18T13:12:37.883445"
-    },
-    {
         "titulo": "What AI did to stackoverflow in a graph",
         "enlace": "https://data.stackexchange.com/stackoverflow/query/1953768#graph",
         "fuente": "Hacker News",
@@ -27597,19 +27077,6 @@
         "origen": "rss",
         "fecha_real": "18/07/2026",
         "ts": "2026-07-18T13:12:44.849830"
-    },
-    {
-        "titulo": "New to the web platform in May",
-        "enlace": "https://web.dev/blog/web-platform-05-2026?hl=en",
-        "fuente": "web.dev",
-        "tipo": "noticia",
-        "f": "18/07",
-        "fecha_publicacion": "Fri, 29 May 2026 07:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "18/07/2026",
-        "ts": "2026-07-18T11:02:27.356794"
     },
     {
         "titulo": "Launching Interop 2026",
@@ -29352,19 +28819,6 @@
         "origen": "rss",
         "fecha_real": "17/07/2026",
         "ts": "2026-07-17T21:52:55.296377"
-    },
-    {
-        "titulo": "Gracias, HN, por 15 años de apoyo y por ayudarme a encontrar mi vocación",
-        "enlace": "https://news.ycombinator.com/item?id=48949551",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "17/07",
-        "fecha_publicacion": "Fri, 17 Jul 2026 16:57:27 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "17/07/2026",
-        "ts": "2026-07-17T21:52:55.296537"
     },
     {
         "titulo": "Lobsters Interview with matheusmoreira about Lone Lisp",
@@ -32238,19 +31692,6 @@
         "origen": "rss",
         "fecha_real": "17/07/2026",
         "ts": "2026-07-17T09:08:45.428597"
-    },
-    {
-        "titulo": "What are you doing this weekend?",
-        "enlace": "https://lobste.rs/s/1vplvg/what_are_you_doing_this_weekend",
-        "fuente": "Lobsters",
-        "tipo": "noticia",
-        "f": "17/07",
-        "fecha_publicacion": "Fri, 17 Jul 2026 03:31:40 -0500",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "17/07/2026",
-        "ts": "2026-07-17T09:08:45.177791"
     },
     {
         "titulo": "QCon AI Boston: Production AI Moves Beyond Prompts to Platforms, Harnesses, and Evals",
@@ -41377,19 +40818,6 @@
         "origen": "rss",
         "fecha_real": "15/07/2026",
         "ts": "2026-07-15T12:14:20.631747"
-    },
-    {
-        "titulo": "Show HN: En 10 Mundiales, los 2 favoritos de mi modelo siempre tuvieron al campeón",
-        "enlace": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7013338",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "15/07",
-        "fecha_publicacion": "Wed, 15 Jul 2026 11:26:33 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "15/07/2026",
-        "ts": "2026-07-15T12:14:20.631781"
     },
     {
         "titulo": "Weathergotchi – un Tamagotchi climático de código abierto",
@@ -58695,19 +58123,6 @@
         "ts": "2026-07-11T13:16:54.331684"
     },
     {
-        "titulo": "New to the web platform in March",
-        "enlace": "https://web.dev/blog/web-platform-03-2026?hl=en",
-        "fuente": "web.dev",
-        "tipo": "noticia",
-        "f": "11/07",
-        "fecha_publicacion": "Fri, 27 Mar 2026 07:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "11/07/2026",
-        "ts": "2026-07-11T13:16:54.785173"
-    },
-    {
         "titulo": "Redes e Internet, desde los principios fundamentales",
         "enlace": "https://fazamhd.com/mental-models/networking/",
         "fuente": "Hacker News",
@@ -59200,19 +58615,6 @@
         "origen": "rss",
         "fecha_real": "11/07/2026",
         "ts": "2026-07-11T11:04:32.673809"
-    },
-    {
-        "titulo": "Launching Interop 2025",
-        "enlace": "https://hacks.mozilla.org/2025/02/interop-2025/",
-        "fuente": "hacks.mozilla.org",
-        "tipo": "noticia",
-        "f": "11/07",
-        "fecha_publicacion": "Thu, 13 Feb 2025 16:59:13 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "11/07/2026",
-        "ts": "2026-07-11T09:28:30.094698"
     },
     {
         "titulo": "Las empresas se apresuran a contener los disparados costos de la IA",
@@ -68159,19 +67561,6 @@
         "ts": "2026-07-09T09:55:20.887231"
     },
     {
-        "titulo": "Tu pipeline de datos es probablemente más frágil de lo que crees",
-        "enlace": "https://dev.to/sampada_sharma_842c114249/your-data-pipeline-is-probably-more-fragile-than-you-think-3bc9",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "09/07",
-        "fecha_publicacion": "Thu, 09 Jul 2026 09:23:41 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "09/07/2026",
-        "ts": "2026-07-09T09:55:20.887257"
-    },
-    {
         "titulo": "OLTP vs OLAP: Entendiendo los fundamentos de los sistemas de datos modernos",
         "enlace": "https://dev.to/sirsona/oltp-vs-olap-understanding-the-foundation-of-modern-data-systems-3agm",
         "fuente": "Dev.to",
@@ -75593,19 +74982,6 @@
         "origen": "rss",
         "fecha_real": "07/07/2026",
         "ts": "2026-07-07T19:56:48.469678"
-    },
-    {
-        "titulo": "Claude Opus 4.7: Benchmarks, xhigh Effort Level y lo que cambió",
-        "enlace": "https://dev.to/akaranjkar08/claude-opus-47-benchmarks-xhigh-effort-level-and-what-changed-5159",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "07/07",
-        "fecha_publicacion": "Tue, 07 Jul 2026 19:39:05 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "07/07/2026",
-        "ts": "2026-07-07T19:56:48.469690"
     },
     {
         "titulo": "Explorando DeepSpec: Perspectivas para desarrolladores en decodificación especulativa",
