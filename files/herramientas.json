@@ -1,5 +1,37 @@
 [
     {
+        "titulo": "yorukot /superfile",
+        "enlace": "https://github.com/yorukot/superfile",
+        "fuente": "GitHub Trending Daily",
+        "tipo": "herramienta",
+        "f": "25/07",
+        "fecha_publicacion": "",
+        "subtipo": "github",
+        "descripcion": "Pretty fancy and modern terminal file manager",
+        "lenguaje": "Go",
+        "estrellas": "19757",
+        "repo": "yorukot/superfile",
+        "fecha_real": "25/07/2026",
+        "ts": "2026-07-25T08:14:40.736322",
+        "categoria": "💡 General"
+    },
+    {
+        "titulo": "Lordog /dive-into-llms",
+        "enlace": "https://github.com/Lordog/dive-into-llms",
+        "fuente": "GitHub Trending Daily",
+        "tipo": "herramienta",
+        "f": "25/07",
+        "fecha_publicacion": "",
+        "subtipo": "github",
+        "descripcion": "《动手学大模型Dive into LLMs》系列编程实践教程",
+        "lenguaje": "Jupyter Notebook",
+        "estrellas": "45168",
+        "repo": "Lordog/dive-into-llms",
+        "fecha_real": "25/07/2026",
+        "ts": "2026-07-25T08:14:40.737925",
+        "categoria": "💡 General"
+    },
+    {
         "titulo": "block /buzz",
         "enlace": "https://github.com/block/buzz",
         "fuente": "GitHub Trending Daily",
@@ -3148,35 +3180,5 @@
         "repo": "kunchenguid/no-mistakes",
         "fecha_real": "27/06/2026",
         "ts": "2026-06-27T09:24:10.571411"
-    },
-    {
-        "titulo": "grafana /grafana",
-        "enlace": "https://github.com/grafana/grafana",
-        "fuente": "GitHub Trending",
-        "tipo": "herramienta",
-        "f": "27/06",
-        "fecha_publicacion": "",
-        "subtipo": "github",
-        "descripcion": "The open and composable observability and data visualization platform. Visualize metrics, logs, and traces from multiple sources like Prometheus, Loki, Elasticsearch, InfluxDB, Postgres and many more.",
-        "lenguaje": "TypeScript",
-        "estrellas": "75036",
-        "repo": "grafana/grafana",
-        "fecha_real": "27/06/2026",
-        "ts": "2026-06-27T09:24:10.571724"
-    },
-    {
-        "titulo": "ripienaar /free-for-dev",
-        "enlace": "https://github.com/ripienaar/free-for-dev",
-        "fuente": "GitHub Trending",
-        "tipo": "herramienta",
-        "f": "27/06",
-        "fecha_publicacion": "",
-        "subtipo": "github",
-        "descripcion": "A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev",
-        "lenguaje": "HTML",
-        "estrellas": "123901",
-        "repo": "ripienaar/free-for-dev",
-        "fecha_real": "27/06/2026",
-        "ts": "2026-06-27T09:24:10.572036"
     }
 ]
