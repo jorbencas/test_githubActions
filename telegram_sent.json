@@ -4753,5 +4753,20 @@
   },
   "https://artificialanalysis.ai/models": {
     "ts": 1784937449.253909
+  },
+  "https://www.cnbc.com/2026/07/24/nvidia-microsoft-meta-open-weight-ai-models.html": {
+    "ts": 1784946250.719748
+  },
+  "https://martin.janiczek.cz/2026/07/24/systems-and-delays.html": {
+    "ts": 1784946252.984849
+  },
+  "https://www.wired.com/story/spanish-wildfires-nasa-deep-space-observatory/": {
+    "ts": 1784946254.992319
+  },
+  "https://techcrunch.com/2026/07/24/prentis-new-ai-lab-co-founded-by-reid-hoffman-marc-pincus-in-talks-to-raise-100m/": {
+    "ts": 1784946260.573768
+  },
+  "https://dev.to/anasmallouh/how-to-pass-the-technical-interview-a-practical-guide-for-arab-developers-2017": {
+    "ts": 1784946262.388885
   }
 }
