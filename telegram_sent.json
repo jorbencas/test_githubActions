@@ -5203,5 +5203,20 @@
   },
   "https://infinitejigsaw.com": {
     "ts": 1785104920.545319
+  },
+  "https://arstechnica.com/culture/2026/07/first-teaser-for-apple-tvs-neuromancer-debuts-at-sdcc/": {
+    "ts": 1785108557.80769
+  },
+  "https://hynek.me/til/sqlite-read-only-wal-locked/": {
+    "ts": 1785108559.967977
+  },
+  "https://dev.to/argenkiwi/thumb-chords-1j5": {
+    "ts": 1785108561.740152
+  },
+  "https://dev.to/shankar_subramanian/i-turned-plain-english-and-any-live-website-into-api-tests-42a1": {
+    "ts": 1785108563.442597
+  },
+  "https://dev.to/darkedges/proving-zero-trust-actually-works-entra-id-cloudflare-access-over-both-oidc-and-saml-4f7d": {
+    "ts": 1785108565.125782
   }
 }
