@@ -1,5 +1,37 @@
 [
     {
+        "titulo": "permissionlesstech /bitchat",
+        "enlace": "https://github.com/permissionlesstech/bitchat",
+        "fuente": "GitHub Trending Daily",
+        "tipo": "herramienta",
+        "f": "26/07",
+        "fecha_publicacion": "",
+        "subtipo": "github",
+        "descripcion": "bluetooth mesh chat, IRC vibes",
+        "lenguaje": "Swift",
+        "estrellas": "28985",
+        "repo": "permissionlesstech/bitchat",
+        "fecha_real": "26/07/2026",
+        "ts": "2026-07-26T08:34:08.278708",
+        "categoria": "💡 General"
+    },
+    {
+        "titulo": "palmier-io /palmier-pro",
+        "enlace": "https://github.com/palmier-io/palmier-pro",
+        "fuente": "GitHub Trending Daily",
+        "tipo": "herramienta",
+        "f": "26/07",
+        "fecha_publicacion": "",
+        "subtipo": "github",
+        "descripcion": "macOS video editor built for AI",
+        "lenguaje": "Swift",
+        "estrellas": "12342",
+        "repo": "palmier-io/palmier-pro",
+        "fecha_real": "26/07/2026",
+        "ts": "2026-07-26T08:34:08.279516",
+        "categoria": "💡 General"
+    },
+    {
         "titulo": "yorukot /superfile",
         "enlace": "https://github.com/yorukot/superfile",
         "fuente": "GitHub Trending Daily",
@@ -3150,35 +3182,5 @@
         "repo": "simplex-chat/simplex-chat",
         "fecha_real": "27/06/2026",
         "ts": "2026-06-27T09:24:10.570411"
-    },
-    {
-        "titulo": "commaai /openpilot",
-        "enlace": "https://github.com/commaai/openpilot",
-        "fuente": "GitHub Trending",
-        "tipo": "herramienta",
-        "f": "27/06",
-        "fecha_publicacion": "",
-        "subtipo": "github",
-        "descripcion": "openpilot is an operating system for robotics. Currently, it upgrades the driver assistance system on 300+ supported cars.",
-        "lenguaje": "Python",
-        "estrellas": "61900",
-        "repo": "commaai/openpilot",
-        "fecha_real": "27/06/2026",
-        "ts": "2026-06-27T09:24:10.571072"
-    },
-    {
-        "titulo": "kunchenguid /no-mistakes",
-        "enlace": "https://github.com/kunchenguid/no-mistakes",
-        "fuente": "GitHub Trending",
-        "tipo": "herramienta",
-        "f": "27/06",
-        "fecha_publicacion": "",
-        "subtipo": "github",
-        "descripcion": "git push no-mistakes",
-        "lenguaje": "Go",
-        "estrellas": "3622",
-        "repo": "kunchenguid/no-mistakes",
-        "fecha_real": "27/06/2026",
-        "ts": "2026-06-27T09:24:10.571411"
     }
 ]
