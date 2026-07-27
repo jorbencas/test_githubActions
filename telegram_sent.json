@@ -5248,5 +5248,20 @@
   },
   "https://fontsinuse.com/": {
     "ts": 1785128677.636639
+  },
+  "https://antirez.com/news/171": {
+    "ts": 1785142381.37756
+  },
+  "https://quuxplusone.github.io/blog/2026/07/26/function-explosion/": {
+    "ts": 1785142391.839782
+  },
+  "https://www.infoq.com/news/2026/07/tanstack-table-v9-beta/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=global": {
+    "ts": 1785142405.344603
+  },
+  "https://dev.to/victak36lgtm/python-for-beginners-part-1-from-zero-to-writing-your-first-programs-2ahk": {
+    "ts": 1785142407.518425
+  },
+  "https://dev.to/pedroe/ai-assisted-end-to-end-product-development-2l19": {
+    "ts": 1785142409.622464
   }
 }
