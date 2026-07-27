@@ -5353,5 +5353,20 @@
   },
   "https://www.rise-reforming.com": {
     "ts": 1785188172.322106
+  },
+  "https://www.theverge.com/games/967174/steam-game-malware-cryptostealer-arrest": {
+    "ts": 1785192855.038645
+  },
+  "https://xkcd.com/3277/": {
+    "ts": 1785192857.450333
+  },
+  "https://news.ycombinator.com/item?id=49074693": {
+    "ts": 1785192859.383835
+  },
+  "https://antithesis.com/blog/2026/finding-bugs-in-raft-implementations/": {
+    "ts": 1785192869.987644
+  },
+  "https://dfarq.homeip.net/advantages-and-disadvantages-of-windows-nt-3-1/": {
+    "ts": 1785192872.40023
   }
 }
