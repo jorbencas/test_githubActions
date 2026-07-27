@@ -1,5 +1,31 @@
 [
     {
+        "titulo": "Todos los grandes anuncios de cine y series de la San Diego Comic-Con 2026: Marvel, DC, ‘El Señor de los Anillos’…",
+        "enlace": "https://hipertextual.com/cine-television/todos-los-grandes-anuncios-de-cine-y-series-de-la-san-diego-comic-con-2026-marvel-dc-el-senor-de-los-anillos/",
+        "fuente": "Hipertextual",
+        "tipo": "noticia",
+        "f": "27/07",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "27/07/2026",
+        "ts": "2026-07-27T02:58:11.708094"
+    },
+    {
+        "titulo": "Me cambié a un móvil plegable y esta es mi experiencia: ¿Realmente merece la pena?",
+        "enlace": "https://hipertextual.com/mobile/mi-experiencia-con-un-movil-plegable-merece-la-pena/",
+        "fuente": "Hipertextual",
+        "tipo": "noticia",
+        "f": "27/07",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "27/07/2026",
+        "ts": "2026-07-27T02:58:11.709541"
+    },
+    {
         "titulo": "PGSimCity - Cómo funciona PostgreSQL",
         "enlace": "https://nikolays.github.io/PGSimCity/",
         "fuente": "Hacker News",
