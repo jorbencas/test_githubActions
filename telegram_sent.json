@@ -5413,5 +5413,20 @@
   },
   "https://jacob.gold/posts/residential-proxies-are-a-national-security-threat/": {
     "ts": 1785216496.748709
+  },
+  "https://arsastronomica.com/": {
+    "ts": 1785225577.813598
+  },
+  "https://www.fermionresearch.com/models/neutrino-8b/": {
+    "ts": 1785225587.107301
+  },
+  "https://docs.pytorch.org/devlogs/compiler/2026-07-25-pytorch-a-reference-language/": {
+    "ts": 1785225598.552747
+  },
+  "https://thedecisionlab.com/biases/the-illusion-of-explanatory-depth": {
+    "ts": 1785225600.497887
+  },
+  "https://golemui.com/blog/the-age-of-token-efficiency/": {
+    "ts": 1785225602.428924
   }
 }
