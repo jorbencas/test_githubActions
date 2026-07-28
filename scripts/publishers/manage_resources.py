@@ -51,8 +51,8 @@ def escape_component(text: str) -> str:
 
 
 def format_card(name: str, url: str, description: str) -> str:
-    name_esc = name.replace('"', "&quot;")
-    desc_esc = description.replace('"', "&quot;").replace("<", "&lt;").replace(">", "&gt;")
+    name_esc = name.replace('"', "&quot;").replace("\n", " ").replace("\r", "")
+    desc_esc = description.replace('"', "&quot;").replace("<", "&lt;").replace(">", "&gt;").replace("\n", " ").replace("\r", "")
     return CARD_TEMPLATE.format(url=url, name=name_esc, desc=desc_esc)
 
 
@@ -475,9 +475,19 @@ def fix_card_spacing(content: str) -> str:
 
 def fix_malformed_cards(content: str) -> str:
     """Fix ResourceCard tags that are missing the closing > (e.g., / instead of />)."""
+
+    def _fix_card(m):
+        card = m.group(0)
+        stripped = card.rstrip()
+        if stripped.endswith('/>'):
+            return card
+        if stripped.endswith('/'):
+            return stripped + '>\n'
+        return card
+
     return re.sub(
-        r'<ResourceCard\n  href="[^"]+"\n  title="[^"]+"\n  description="[^"]*"\n/\s*\n',
-        lambda m: m.group(0).rstrip() + '/>\n' if not m.group(0).rstrip().endswith('/>') else m.group(0),
+        r'<ResourceCard\n  href="[^"]+"\n  title="[^"]+"\n  description="[^"]*"\n\s*/[ \t]*\n',
+        _fix_card,
         content,
     )
 
@@ -496,6 +506,49 @@ def fix_all_files(posts_dir: Path):
             print(f"   🔧 Fixed spacing in {rf.name}")
             fixed_count += 1
     return fixed_count
+
+
+def validate_mdx(content: str, filename: str) -> list[str]:
+    """Validate MDX content and return list of errors."""
+    errors = []
+    lines = content.split("\n")
+    in_code_block = False
+
+    for i, line in enumerate(lines):
+        line_num = i + 1
+
+        # Track code blocks
+        if line.startswith("```"):
+            in_code_block = not in_code_block
+            continue
+
+        if in_code_block:
+            continue
+
+        # Check for malformed ResourceCard (missing />)
+        if re.match(r'^<ResourceCard\s*$', line):
+            # Look ahead for closing />
+            found_close = False
+            for j in range(i + 1, min(i + 10, len(lines))):
+                if "/>" in lines[j] or ">" in lines[j]:
+                    found_close = True
+                    break
+            if not found_close:
+                errors.append(f"  {filename}:{line_num} — <ResourceCard> posiblemente sin cerrar")
+
+        # Check for lone / after description
+        if line.strip() == "/" and i > 0:
+            prev = lines[i - 1]
+            if "description=" in prev and not prev.rstrip().endswith('"'):
+                errors.append(f"  {filename}:{line_num} — '/' suelto después de description (¿falta '>')?")
+
+    # Check ResourceCategory balance
+    opens = len(re.findall(r'<ResourceCategory[\s>]', content))
+    closes = len(re.findall(r'</ResourceCategory>', content))
+    if opens != closes:
+        errors.append(f"  {filename} — <ResourceCategory> desbalanceado: {opens} aperturas, {closes} cierres")
+
+    return errors
 
 
 def _legacy_find_grid_bounds(content: str, grid_start: int) -> tuple[int, int]:
@@ -834,6 +887,22 @@ def main():
             print("   ⚠️  No se pudo dividir - tarjetas concentradas en pocas secciones grandes.")
     else:
         print(f"\n✅ {active_file.name} tiene {active_card_count}/{args.max_cards} tarjetas - no necesita paginación.")
+
+    # Validate all files
+    print("\n🔍 Validando archivos generados...")
+    all_errors = []
+    for rf in sorted(posts_dir.glob("resources*.mdx")):
+        content = rf.read_text(encoding="utf-8")
+        errs = validate_mdx(content, rf.name)
+        all_errors.extend(errs)
+
+    if all_errors:
+        print(f"\n⚠️  {len(all_errors)} advertencia(s) encontrada(s):")
+        for e in all_errors:
+            print(e)
+        print("\n   Estos problemas pueden causar errores en el build de Astro.")
+    else:
+        print("   ✅ Todos los archivos son válidos")
 
 
 if __name__ == "__main__":
