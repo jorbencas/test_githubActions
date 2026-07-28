@@ -778,7 +778,7 @@ author: "{author}"
 image: "{ruta_imagen}"
 tags: {tags}
 slug: "{slug_name}"
-draft: false
+draft: true
 readingTime: {tiempo_lectura}
 categories: ["tech", "weekly-recap"]
 ---
