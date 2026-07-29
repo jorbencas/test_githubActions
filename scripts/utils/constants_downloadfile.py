@@ -609,6 +609,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             <summary>\U0001f4fa Filtro Canal</summary>
             <div id="video-channel-filters" class="chip-container">{video_channel_filters_html}</div>
         </details>
+        <div class="chip-container" id="multimedia-tabs">{multimedia_tabs_html}</div>
         <div id="multimedia-content" class="video-grid">{multimedia_content_html}</div>
 
         <h2>\u2b50 Ranking GitHub Stars</h2>
@@ -1097,6 +1098,8 @@ JS_CONFIG = {
     ],
     "TABS_MULTIMEDIA": [
         {"id": "youtube", "label": "🎬 YouTube"},
+        {"id": "shorts", "label": "🩳 Shorts"},
+        {"id": "live", "label": "🔴 En directo"},
     ],
     "EMOJIS_CATEGORIA": "⚡🤖💻🐳🔒📊🎓💡",
     "DASHBOARD_URL": "http://jorbencasdownloaderdocument.surge.sh",

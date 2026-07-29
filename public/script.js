@@ -108,7 +108,7 @@
     btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
   }
 
-  // ── Dark theme ──
+  // ── Dark theme with circular reveal ──
   function setupDarkTheme() {
     const btn = document.getElementById("theme-toggle");
     if (!btn) return;
@@ -116,10 +116,47 @@
     if (saved === "dark") document.body.classList.add("dark");
     updateThemeIcon();
 
-    btn.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
-      updateThemeIcon();
+    // Create overlay for circular transition
+    const overlay = document.createElement("div");
+    overlay.id = "theme-transition-overlay";
+    overlay.style.cssText = "position:fixed;inset:0;z-index:9999;pointer-events:none;transition:clip-path 0.5s cubic-bezier(0.4,0,0.2,1);clip-path:circle(0% at 50% 50%);";
+    document.body.appendChild(overlay);
+
+    btn.addEventListener("click", (e) => {
+      const goingDark = !document.body.classList.contains("dark");
+
+      // Set overlay background to the TARGET theme
+      overlay.style.background = goingDark ? "#18181b" : "#e8edf5";
+
+      // Calculate center of the toggle button
+      const rect = btn.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+
+      // Start from 0%, expand to cover entire viewport
+      overlay.style.clipPath = `circle(0% at ${cx}px ${cy}px)`;
+      overlay.style.pointerEvents = "all";
+
+      // Force reflow so the browser registers the start state
+      void overlay.offsetWidth;
+
+      // Expand to cover full screen
+      const maxRadius = Math.hypot(Math.max(cx, window.innerWidth - cx), Math.max(cy, window.innerHeight - cy));
+      const pct = Math.ceil((maxRadius / Math.hypot(window.innerWidth, window.innerHeight)) * 100) + 5;
+      overlay.style.clipPath = `circle(${pct}% at ${cx}px ${cy}px)`;
+
+      // Switch theme at midpoint
+      setTimeout(() => {
+        document.body.classList.toggle("dark");
+        localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+        updateThemeIcon();
+      }, 250);
+
+      // Remove overlay after transition
+      setTimeout(() => {
+        overlay.style.clipPath = `circle(0% at ${cx}px ${cy}px)`;
+        overlay.style.pointerEvents = "none";
+      }, 550);
     });
 
     function updateThemeIcon() {

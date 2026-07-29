@@ -124,12 +124,16 @@ def _favicon_src(source_name: str, avatars: dict) -> str:
         return avatars[nombre_c]
     try:
         from urllib.parse import urlparse
-        domain = urlparse(FUENTES.get(nombre_c, {}).get("url", "")).netloc
-        if domain:
-            return f"https://www.google.com/s2/favicons?domain={domain}&sz=32"
+        info = FUENTES.get(nombre_c, {})
+        for key in ("url", "rss", "yt"):
+            raw = info.get(key, "")
+            if raw:
+                domain = urlparse(raw).netloc
+                if domain:
+                    return f"https://www.google.com/s2/favicons?domain={domain}&sz=32"
     except Exception:
         pass
-    return f"https://ui-avatars.com/api/?name={nombre_c}&background=random"
+    return f"https://www.google.com/s2/favicons?domain={nombre_c.lower().replace(' ', '')}.com&sz=32"
 
 
 def _item_timestamp(item: dict) -> str:
@@ -160,6 +164,7 @@ def render_news_item(item: dict, avatars: dict) -> str:
     titulo = _escape_html(item.get(TITULO_KEY, "Sin título"))
     enlace = item.get(ENLACE_KEY, "#")
     fuente = _escape_html(item.get(FUENTE_KEY, ""))
+    fuente_norm = _norm_channel(item.get(FUENTE_KEY, ""))
     fecha_raw = item.get(FECHA_PUB_KEY, "")
     badge = item.get("badge", "")
     origen = item.get(ORIGEN_KEY, "")
@@ -177,7 +182,7 @@ def render_news_item(item: dict, avatars: dict) -> str:
     tipo_badge_html = _news_type_badge(tipo, origen)
 
     return (
-        f'<li class="news-item" data-source="{_escape_html(fuente)}" data-category="{_escape_html(categoria)}" data-ts="{ts}">'
+        f'<li class="news-item" data-source="{_escape_html(fuente_norm)}" data-category="{_escape_html(categoria)}" data-ts="{ts}">'
         f'<a href="{enlace}" target="_blank" rel="noopener">'
         f'<img class="favicon" src="{favicon}" alt="{fuente}" width="20" height="20" loading="lazy">'
         f'<div class="news-text">'
@@ -252,6 +257,7 @@ def render_youtube_card(item: dict, avatars: dict) -> str:
     titulo = _escape_html(item.get(TITULO_KEY, ""))
     enlace = item.get(ENLACE_KEY, "#")
     fuente = _escape_html(item.get(FUENTE_KEY, ""))
+    fuente_norm = _norm_channel(item.get(FUENTE_KEY, ""))
     id_video = item.get(ID_VIDEO_KEY, "")
     ts = _item_timestamp(item)
     fecha = item.get(FECHA_REAL_KEY, "") or item.get(FECHA_PUB_KEY, "")
@@ -262,7 +268,7 @@ def render_youtube_card(item: dict, avatars: dict) -> str:
     tipo_badge = _video_type_badge(tipo)
 
     return (
-        f'<div class="video-card" data-source="{fuente}" data-ts="{ts}" data-tipo="{tipo}">'
+        f'<div class="video-card" data-source="{fuente_norm}" data-ts="{ts}" data-tipo="{tipo}">'
         f'<a href="{enlace}" target="_blank" rel="noopener">'
         f'<img src="{thumbnail}" alt="{titulo}" class="video-thumb" loading="lazy" onerror="this.src=\'https://via.placeholder.com/320x180?text=No+Preview\'">'
         f'</a>'
