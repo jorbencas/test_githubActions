@@ -102,3 +102,42 @@ class TestCacheManager:
             cm.mark_sent("k")
             cm.clear()
             assert cm.size() == 0
+
+    def test_flush_removes_expired_entries(self):
+        with tempfile.TemporaryDirectory() as d:
+            cm = CacheManager(
+                FileCache(os.path.join(d, "cache.json")), ttl_hours=1
+            )
+            # Add fresh entry
+            cm.mark_sent("fresh_key")
+            # Add old entry (2 hours ago)
+            cm._data["old_key"] = {
+                "ts": (datetime.now() - timedelta(hours=2)).timestamp()
+            }
+            assert cm.size() == 2
+            cm.flush()
+            # After flush, old entry should be removed
+            assert cm.size() == 1
+            assert cm.is_new("old_key")
+            assert not cm.is_new("fresh_key")
+
+    def test_flush_keeps_valid_entries(self):
+        with tempfile.TemporaryDirectory() as d:
+            cm = CacheManager(
+                FileCache(os.path.join(d, "cache.json")), ttl_hours=24
+            )
+            cm.mark_sent("k1")
+            cm.mark_sent("k2")
+            cm.flush()
+            assert cm.size() == 2
+            assert not cm.is_new("k1")
+            assert not cm.is_new("k2")
+
+    def test_flush_without_ttl_keeps_all(self):
+        with tempfile.TemporaryDirectory() as d:
+            cm = CacheManager(FileCache(os.path.join(d, "cache.json")))
+            cm.mark_sent("k1")
+            cm._data["old_entry"] = {"ts": 0}  # epoch 0
+            cm.flush()
+            # Without TTL, all entries kept
+            assert cm.size() == 2
