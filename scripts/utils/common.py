@@ -269,15 +269,18 @@ async def generar_imagen_noticia(titulo_noticia: str, client, prompt_template: s
     )
 
 async def traducir_titulos_ia(noticias: list, client) -> list:
-    """Traduce una lista de títulos al español en un solo bloque usando Gemini."""
+    """Traduce una lista de títulos al español en un solo bloque usando Gemini.
+    Solo traduce items que NO tengan 'traducido=True'."""
     if not noticias: return noticias
     
     modelos = CONFIG.get("AI_MODELS", ["gemini-2.5-flash", "gemini-2.5-pro"])
     
-    # Preparamos el texto a traducir (solo los que provienen de fuentes en inglés)
+    # Preparamos el texto a traducir (solo los que provienen de fuentes en inglés y no están traducidos)
     indices_traducir = []
     lineas = []
     for i, n in enumerate(noticias):
+        if n.get('traducido'):
+            continue
         fuente = n.get('fuente', '').lower()
         if any(x in fuente for x in FUENTES_INGLES):
             indices_traducir.append(i)
@@ -308,6 +311,7 @@ async def traducir_titulos_ia(noticias: list, client) -> list:
             for i, n in enumerate(noticias):
                 if i in traducciones and traducciones[i] and len(traducciones[i].strip()) > 5:
                     n['titulo'] = traducciones[i]
+                    n['traducido'] = True
 
             return noticias
         except Exception as e:

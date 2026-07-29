@@ -23,7 +23,7 @@ from google import genai
 
 from scripts.utils.cache import CacheManager, FileCache
 from scripts.utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_DASHBOARD_URL, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY, TS_KEY, NOTICIAS_FILENAME, TELEGRAM_SENT_FILENAME, TELEGRAM_VOICE_SENT_FILENAME, LOGS_DIR, LOG_FILES
-from scripts.utils.common import load_json, resumir_noticia
+from scripts.utils.common import load_json, save_json, resumir_noticia
 
 os.makedirs(LOGS_DIR, exist_ok=True)
 logging.basicConfig(
@@ -172,6 +172,8 @@ async def run():
     cutoff = datetime.now() - timedelta(hours=24)
     recientes = []
     for n in historial:
+        if n.get(ID_VIDEO_KEY):
+            continue
         ts = n.get(TS_KEY, "")
         if ts:
             try:
@@ -195,12 +197,21 @@ async def run():
     titulares_enviados = []
 
     for n in nuevos:
-        icono = "📺" if n.get(ID_VIDEO_KEY) else "💻"
+        icono = "💻"
         titulo_original = n[TITULO_KEY]
 
-        logger.info(f"🤖 Traduciendo y resumiendo: {titulo_original[:60]}...")
-        titulo_es = await traducir_titulo(titulo_original, client)
-        resumen = await resumir_noticia(n, client)
+        if n.get('traducido'):
+            titulo_es = titulo_original
+        else:
+            logger.info(f"🤖 Traduciendo: {titulo_original[:60]}...")
+            titulo_es = await traducir_titulo(titulo_original, client)
+
+        resumen = n.get('resumen')
+        if not resumen:
+            logger.info(f"📝 Resumiendo: {titulo_original[:60]}...")
+            resumen = await resumir_noticia(n, client)
+            if resumen:
+                n['resumen'] = resumen
 
         titulo_safe = titulo_es.replace("_", "\\_").replace("*", "\\*").replace("[", "\\[").replace("`", "\\`")
         cuerpo = f"{resumen}\n\n" if resumen else ""
@@ -237,6 +248,7 @@ async def run():
 
     if not args.dry_run:
         CACHE.flush()
+        save_json(path_json, historial)
 
     logger.info("✅ send_telegram.py completado.")
 

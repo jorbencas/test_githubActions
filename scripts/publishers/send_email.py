@@ -21,7 +21,7 @@ import requests
 from google import genai
 
 from scripts.utils.constants_downloadfile import CONFIG, EMAIL_TEMPLATE, EMAIL_ROW_TEMPLATE, EMAIL_SOURCE_HEADER, EMAIL_VIDEO_HEADER, EMAIL_VIDEO_ROW, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, ID_VIDEO_KEY, BADGE_KEY, VAL_TECH, TIPO_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES
-from scripts.utils.common import load_json, resumir_noticia, resumir_lote_noticias
+from scripts.utils.common import load_json, save_json, resumir_noticia, resumir_lote_noticias
 
 os.makedirs(LOGS_DIR, exist_ok=True)
 logging.basicConfig(
@@ -183,9 +183,20 @@ async def run():
             for n in items:
                 icon = style["icon"]
                 titulo_original = n['titulo']
-                logger.info(f"  Traduciendo y resumiendo: {titulo_original[:60]}...")
-                titulo_es = await traducir_titulo(titulo_original, client)
-                resumen = await resumir_noticia(n, client)
+
+                if n.get('traducido'):
+                    titulo_es = titulo_original
+                else:
+                    logger.info(f"  Traduciendo: {titulo_original[:60]}...")
+                    titulo_es = await traducir_titulo(titulo_original, client)
+
+                resumen = n.get('resumen')
+                if not resumen:
+                    logger.info(f"  Resumiendo: {titulo_original[:60]}...")
+                    resumen = await resumir_noticia(n, client)
+                    if resumen:
+                        n['resumen'] = resumen
+
                 resumen_html = f'<p style="color: #64748b; font-size: 12px; line-height: 1.4; margin: 4px 0 0 0; padding-left: 0; font-style: italic;">{resumen}</p>' if resumen else ""
 
                 filas_noticias += EMAIL_ROW_TEMPLATE.format(
@@ -231,6 +242,7 @@ async def run():
         r = requests.post(url_mailgun, auth=auth, data=data, timeout=30)
         if r.status_code == 200:
             logger.info("✅ Newsletter con resúmenes IA enviada exitosamente.")
+            save_json(path_json, historial)
         else:
             logger.error(f"❌ Error Mailgun ({r.status_code}): {r.text}")
     except Exception as e:
