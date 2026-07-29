@@ -5563,5 +5563,20 @@
   },
   "https://arstechnica.com/science/2026/07/dust-cloud-from-dino-killing-asteroid-charbroiled-the-earth/": {
     "ts": 1785282794.745478
+  },
+  "https://www.wired.com/story/a-typo-landed-an-innocent-gamer-in-prison-for-18-months/": {
+    "ts": 1785289843.531655
+  },
+  "https://dev.to/oscarrabasa/operable-over-sophisticated-what-shipping-ai-agents-at-scale-actually-looks-like-2461": {
+    "ts": 1785289845.351486
+  },
+  "https://dev.to/joylo/why-replits-ai-agent-deleted-a-production-database-389p": {
+    "ts": 1785289847.164946
+  },
+  "https://dev.to/remojansen/your-ai-agents-need-finite-state-machines-fsms-2i9j": {
+    "ts": 1785289848.94766
+  },
+  "https://dev.to/yusuf_kzlkan_bec8219b13/i-built-a-free-full-stack-auth-starter-so-you-can-skip-auth-week-flutter-fastapi-4e51": {
+    "ts": 1785289850.764422
   }
 }
