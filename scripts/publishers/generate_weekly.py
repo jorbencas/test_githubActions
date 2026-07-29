@@ -468,16 +468,42 @@ async def generar_recap(noticias_web, client, blog_path: str | None = None) -> s
         for cat, cnt in [(c, len(i)) for c, i in categorias_ordenadas]
     )
 
-    partes_lista = []
-    for cat, items in categorias_ordenadas:
-        partes_lista.append(f"**{cat}** ({len(items)} noticias)")
+    # Agrupar noticias por fuente (sin duplicados)
+    from collections import defaultdict, OrderedDict
+    por_fuente = OrderedDict()
+    seen_titles = set()
+    for n in noticias_blog:
+        titulo = n.get(TITULO_KEY, "")
+        if titulo.lower() in seen_titles:
+            continue
+        seen_titles.add(titulo.lower())
+        fuente = n[FUENTE_KEY]
+        por_fuente.setdefault(fuente, []).append(n)
+
+    partes_por_fuente = []
+    for fuente, items in por_fuente.items():
+        partes_por_fuente.append(f"### 📰 {fuente} ({len(items)} noticias)\n")
         for n in items[:10]:
             badge = badge_str(n)
             origen = origen_str(n)
             fecha = f" ({n.get(FECHA_PUB_KEY, '')})" if n.get(FECHA_PUB_KEY) else ""
-            partes_lista.append(f"  - {badge}{origen} [{n['fuente']}] {n.get('titulo', '')}{fecha}")
+            partes_por_fuente.append(f"- {badge}{origen} {n.get('titulo', '')}{fecha}")
+        partes_por_fuente.append("")
 
-    lista_noticias = "\n".join(partes_lista)
+    noticias_por_fuente = "\n".join(partes_por_fuente)
+
+    # Sección de videos
+    videos = [n for n in noticias_blog if n.get(ID_VIDEO_KEY)]
+    if videos:
+        partes_videos = []
+        for v in videos[:10]:
+            canal = v.get(FUENTE_KEY, "YouTube")
+            titulo = v.get(TITULO_KEY, "Sin título")
+            enlace = v.get(ENLACE_KEY, "#")
+            partes_videos.append(f"- 🎬 **{canal}** — [{titulo}]({enlace})")
+        videos_seccion = "\n".join(partes_videos)
+    else:
+        videos_seccion = "_No hay videos destacados esta semana._"
 
     final_md = inspect.cleandoc(MD_TEMPLATE).format(
         titulo=f"Weekly Tech Recap W{week}",
@@ -489,14 +515,9 @@ async def generar_recap(noticias_web, client, blog_path: str | None = None) -> s
         slug_name=semana_slug,
         introduccion=introduccion,
         bloque_noticias=bloque_noticias,
-        total_noticias=total_noticias,
-        total_fuentes=fuentes_unicas,
         tiempo_lectura=tiempo_lectura,
-        total_rss=total_rss,
-        top_categorias=top_categorias,
-        stats_categorias=stats_categorias,
-        fuentes_top=fuentes_top_str,
-        lista_noticias=lista_noticias,
+        noticias_por_fuente=noticias_por_fuente,
+        videos_seccion=videos_seccion,
         repo_name=data_ia.get("repo", {}).get("nombre", "Tool"),
         repo_url=data_ia.get("repo", {}).get("url", "#"),
         repo_desc=data_ia.get("repo", {}).get("desc", ""),

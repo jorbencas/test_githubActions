@@ -8,6 +8,7 @@ on:
       - 'public/**/*.html'
       - 'scripts/publishers/generate_weekly.py'
       - 'scripts/utils/constants_downloadfile.py'
+      - 'files/noticias_historico.json'
   workflow_dispatch:
 
 
@@ -31,15 +32,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 🔄 Regenerate dashboard (if Python changed)
+      - name: 🔄 Regenerate dashboard (if data or Python changed)
         id: regen
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || echo "")
-          if echo "$CHANGED" | grep -qE "scripts/publishers/generate_weekly.py|scripts/utils/constants_downloadfile.py"; then
-            echo "🔄 Python changed — regenerating dashboard..."
-            python -m scripts.publishers.generate_weekly
+          if echo "$CHANGED" | grep -qE "scripts/publishers/generate_weekly.py|scripts/utils/constants_downloadfile.py|files/noticias_historico.json"; then
+            echo "🔄 Data changed — regenerating dashboard..."
+            python -m scripts.publishers.generate_weekly --dashboard-only
             echo "regenerated=yes" >> $GITHUB_OUTPUT
           else
             echo "⏭️ Only JS/CSS changed — skipping regeneration"

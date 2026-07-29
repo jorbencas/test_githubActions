@@ -173,8 +173,19 @@ class CacheManager:
         self._data[key] = {"ts": datetime.now().timestamp()}
 
     def flush(self):
-        """Persiste el estado actual en el backend."""
+        """Persiste el estado actual en el backend, limpiando entradas expiradas."""
         if self._data is not None:
+            if self.ttl:
+                now = datetime.now()
+                cleaned = {}
+                for key, entry in self._data.items():
+                    ts = entry.get(TS_KEY) if isinstance(entry, dict) else entry
+                    if isinstance(ts, (int, float)):
+                        if now - datetime.fromtimestamp(ts) <= self.ttl:
+                            cleaned[key] = entry
+                    else:
+                        cleaned[key] = entry
+                self._data = cleaned
             self.backend.save(self._data)
 
     def size(self) -> int:

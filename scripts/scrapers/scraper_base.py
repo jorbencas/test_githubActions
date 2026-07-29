@@ -232,7 +232,9 @@ class WebExtractor(BaseExtractor):
             if not enlace or len(enlace) < 10:
                 continue
             t_raw = i.get_text(strip=True)
-            is_english = any(x in target for x in ["wired", "verge", "techcrunch", "github", "openai"])
+            if len(t_raw) < 5:
+                continue
+            is_english = any(x in target for x in ["wired", "verge", "techcrunch", "github", "openai", "astro.build"])
             if ContentFilter.coincide_con_keywords(t_raw) or is_english:
                 img_url = ""
                 parent = i.find_parent(["article", "div", "section"])

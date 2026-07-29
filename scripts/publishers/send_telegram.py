@@ -22,7 +22,7 @@ import requests
 from google import genai
 
 from scripts.utils.cache import CacheManager, FileCache
-from scripts.utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_DASHBOARD_URL, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY, NOTICIAS_FILENAME, TELEGRAM_SENT_FILENAME, TELEGRAM_VOICE_SENT_FILENAME, LOGS_DIR, LOG_FILES
+from scripts.utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_DASHBOARD_URL, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY, TS_KEY, NOTICIAS_FILENAME, TELEGRAM_SENT_FILENAME, TELEGRAM_VOICE_SENT_FILENAME, LOGS_DIR, LOG_FILES
 from scripts.utils.common import load_json, resumir_noticia
 
 os.makedirs(LOGS_DIR, exist_ok=True)
@@ -39,8 +39,8 @@ logger = logging.getLogger("telegram")
 SENT_LOG = TELEGRAM_SENT_FILENAME
 VOICE_SENT_LOG = TELEGRAM_VOICE_SENT_FILENAME
 
-CACHE = CacheManager(FileCache(SENT_LOG))
-VOICE_CACHE = CacheManager(FileCache(VOICE_SENT_LOG))
+CACHE = CacheManager(FileCache(SENT_LOG), ttl_hours=168)  # 7 días
+VOICE_CACHE = CacheManager(FileCache(VOICE_SENT_LOG), ttl_hours=24)  # 1 día
 
 # Emojis para stripping del texto de voz
 EMOJI_PATTERN = re.compile(
@@ -166,7 +166,24 @@ async def run():
         return
 
     client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
-    nuevos = [n for n in historial if CACHE.is_new(n.get(ENLACE_KEY, ""))][:args.max_items]
+
+    # Filtrar noticias recientes (últimas 24h) y que no estén en caché
+    from datetime import timedelta
+    cutoff = datetime.now() - timedelta(hours=24)
+    recientes = []
+    for n in historial:
+        ts = n.get(TS_KEY, "")
+        if ts:
+            try:
+                fecha = datetime.fromisoformat(ts.replace("Z", "+00:00").replace("+00:00", ""))
+                if fecha < cutoff:
+                    continue
+            except (ValueError, AttributeError):
+                pass
+        if CACHE.is_new(n.get(ENLACE_KEY, "")):
+            recientes.append(n)
+
+    nuevos = recientes[:args.max_items]
     if not nuevos:
         logger.info("📭 No hay noticias nuevas desde el último envío.")
         return

@@ -143,7 +143,7 @@ FUENTES = {
     "FreeCodeCamp": {"yt": "https://www.youtube.com/@freecodecamp/videos"},
     "HolaMundo": {"yt": "https://www.youtube.com/@holamundodev/videos"},
     "Victor Robles": {"yt": "https://www.youtube.com/@victorroblesweb/videos"},
-    "Xataka": {"url": "https://www.xataka.com/", "yt":"https://www.youtube.com/@xatakatv/videos"},
+    "Xataka": {"url": "https://www.xataka.com/", "yt":"https://www.youtube.com/@xatakatv/videos", "quick": True},
     "Genbeta": {"url": "https://www.genbeta.com/"},
     "HobbyConsolas": {"url": "https://www.hobbyconsolas.com/tags/temas/tecnologia.html"},
     "El País Tecnología": {"url": "https://elpais.com/tecnologia/"},
@@ -276,7 +276,6 @@ FUENTES = {
     "CSS-Tricks": {"rss": "https://css-tricks.com/feed/", "quick": True},
     "Smashing Magazine": {"rss": "https://www.smashingmagazine.com/feed/", "quick": True},
     "Can I Use": {"rss": "https://caniuse.com/feed", "quick": True},
-    "hacks.mozilla.org": {"rss": "https://hacks.mozilla.org/feed/", "quick": True},
     "Chrome Developers": {"rss": "https://developer.chrome.com/blog/feed.xml", "quick": True},
     "W3C Blog": {"rss": "https://www.w3.org/blog/feed/", "quick": True},
     # ── RSS/Web: Linux, DevOps, Infraestructura ──
@@ -287,7 +286,6 @@ FUENTES = {
     # ── RSS/Web: General Tech, AI, Science ──
     "Ars Technica": {"rss": "https://feeds.arstechnica.com/arstechnica/index", "quick": True},
     "OpenAI Blog": {"rss": "https://openai.com/news/rss.xml", "quick": True},
-    "Anthropic Blog": {"rss": "https://www.anthropic.com/rss.xml", "quick": True},
     "Google AI Blog": {"rss": "https://blog.google/technology/ai/rss/", "quick": True},
     # ── Trending GitHub diario ──
     "GitHub Trending Daily": {"url": "https://github.com/trending?since=daily", "tipo": "herramienta", "subtipo": "github"},
@@ -464,28 +462,73 @@ FUENTES = {
     "Facebook Engineering": {"url": "https://engineering.fb.com/", "selector": "article h3 a"},
 
     # ── Fuentes RSS (lectores XML) [quick: True → tier light] ──
-    "OpenAI Blog": {"rss": "https://openai.com/news/feed.xml", "quick": True},
-    "Anthropic Blog": {"rss": "https://www.anthropic.com/feed.xml", "quick": True},
-    "Google DeepMind": {"rss": "https://deepmind.google/blog/rss/", "quick": True},
-    "Meta AI Blog": {"rss": "https://ai.meta.com/blog/rss/", "quick": True},
-    "Mistral AI News": {"rss": "https://mistral.ai/feed.xml", "quick": True},
     "GitHub Engineering": {"rss": "https://github.blog/engineering/feed/", "quick": True},
     "Stack Overflow Blog": {"rss": "https://stackoverflow.blog/feed/", "quick": True},
     "Hacker News": {"rss": "https://hnrss.org/frontpage", "quick": True},
-    "LangChain Blog": {"rss": "https://blog.langchain.dev/feed/", "quick": True},
     "Google AI Blog": {"rss": "https://blog.google/technology/ai/rss/", "quick": True},
     "MIT Tech Review AI": {"rss": "https://www.technologyreview.com/topic/artificial-intelligence/feed/", "quick": True},
     "Google Search Central": {"rss": "https://developers.google.com/search/blog/feed.xml", "quick": True},
-    "Google Developers": {"rss": "https://developers.googleblog.com/feed.xml", "quick": True},
     "Moz Blog SEO": {"rss": "https://moz.com/blog/feed.xml", "quick": True},
     "Search Engine Journal": {"rss": "https://www.searchenginejournal.com/feed/", "quick": True},
     "Wired AI": {"rss": "https://www.wired.com/feed/rss", "quick": True},
-    "The Verge AI": {"rss": "https://www.theverge.com/ai-artificial-intelligence/rss.xml", "quick": True},
     "TechCrunch AI": {"rss": "https://techcrunch.com/category/artificial-intelligence/feed/", "quick": True},
     "Ars Technica AI": {"rss": "https://feeds.arstechnica.com/arstechnica/index", "quick": True},
     "Dev.to": {"rss": "https://dev.to/feed", "quick": True},
-    "Cohere RSS": {"rss": "https://cohere.com/blog/rss.xml", "quick": True},
-    "Hugging Face Daily Papers": {"rss": "https://huggingface.co/papers/feed", "quick": True},
+    # ── IA empresas: web scraping (sin RSS) ──
+    "Anthropic Research": {"url": "https://www.anthropic.com/research", "selector": "a[href*='/research/']", "tipo": "noticia", "quick": True},
+    "Ollama Blog": {"url": "https://ollama.com/blog", "selector": "a[href^='/blog/'] h2", "tipo": "noticia", "quick": True},
+    "Mistral News": {"url": "https://mistral.ai/news", "selector": "a[href^='/news/']", "tipo": "noticia", "quick": True},
+    "Cohere Blog": {"url": "https://cohere.com/blog", "selector": "a[href^='/blog/'] h2, a[href^='/blog/'] h3", "tipo": "noticia", "quick": True},
+    "LangChain Blog": {"url": "https://blog.langchain.dev", "selector": "a[href*='/p/'] h2, a[href*='/p/'] h3", "tipo": "noticia", "quick": True},
+    "Google Developers Blog": {"url": "https://developers.googleblog.com/en/", "selector": ".post-item__link, a.glue-carousel__item", "tipo": "noticia", "quick": True},
+    "HuggingFace Papers": {"url": "https://huggingface.co/papers", "selector": "article a", "tipo": "noticia", "quick": True},
+    "Mozilla Hacks": {"url": "https://hacks.mozilla.org", "selector": "h3.post__title a", "tipo": "noticia", "quick": True},
+    # ── IA China: RSS + web scraping ──
+    "量子位 (QbitAI)": {"rss": "https://www.qbitai.com/feed", "quick": True},
+    "36氪 AI": {"rss": "https://36kr.com/feed", "quick": True},
+    "Qwen Blog": {"url": "https://qwen.ai/blog", "selector": "article h2, .post h2", "tipo": "noticia", "quick": True},
+    "DeepSeek Blog": {"url": "https://api-docs.deepseek.com/", "selector": "a[href*='Change Log'], .changelog a", "tipo": "noticia", "quick": True},
+    "01.AI News": {"url": "https://01.ai/", "selector": ".news-item a, a[href*='news']", "tipo": "noticia", "quick": True},
+    "THUDM ChatGLM": {"rss": "https://github.com/zai-org/ChatGLM3/releases.atom", "quick": True},
+    # ── Noticias tech y general ──
+    "Hipertextual": {"rss": "https://hipertextual.com/feed/", "quick": True},
+    "ADSL Zone": {"rss": "https://www.adslzone.net/feed", "quick": True},
+    "MuyComputer": {"rss": "https://www.muycomputer.com/feed/", "quick": True},
+    "The Verge": {"rss": "https://www.theverge.com/rss/index.xml", "quick": True},
+    "TechCrunch": {"rss": "https://techcrunch.com/feed/", "quick": True},
+    "Wired": {"rss": "https://www.wired.com/feed/rss", "quick": True},
+    "Ars Technica": {"rss": "https://feeds.arstechnica.com/arstechnica/index", "quick": True},
+    "Engadget": {"rss": "https://www.engadget.com/rss.xml", "quick": True},
+    "ZDNet": {"rss": "https://www.zdnet.com/news/rss.xml", "quick": True},
+    "CNET": {"rss": "https://www.cnet.com/rss/news/", "quick": True},
+    "Tom's Hardware": {"rss": "https://www.tomshardware.com/feeds/all", "quick": True},
+    # ── Google, Apple, Microsoft ──
+    "Google Blog": {"rss": "https://blog.google/rss/", "quick": True},
+    "Apple Newsroom": {"rss": "https://www.apple.com/newsroom/rss-feed.rss", "quick": True},
+    "Microsoft Dev Blog": {"rss": "https://devblogs.microsoft.com/feed/", "quick": True},
+    # ── Astro framework ──
+    "Astro Blog": {"url": "https://astro.build/blog/", "selector": "a[href^='/blog/']", "tipo": "noticia", "quick": True},
+    "Astro GitHub Releases": {"rss": "https://github.com/withastro/astro/releases.atom", "quick": True},
+    # ── Software libre y Open Source ──
+    "Phoronix": {"rss": "https://www.phoronix.com/rss.php", "quick": True},
+    "OMG Ubuntu": {"rss": "https://www.omgubuntu.co.uk/feed", "quick": True},
+    "It's FOSS": {"rss": "https://itsfoss.com/feed/", "quick": True},
+    "Docker Blog": {"rss": "https://www.docker.com/blog/feed/", "quick": True},
+    "Kubernetes Blog": {"rss": "https://kubernetes.io/feed.xml", "quick": True},
+    # ── Sandbox, herramientas IA, infraestructura ──
+    "Vercel Blog": {"rss": "https://vercel.com/atom", "quick": True},
+    "Cloudflare Blog": {"rss": "https://blog.cloudflare.com/rss/", "quick": True},
+    "Railway Blog": {"rss": "https://blog.railway.app/rss.xml", "quick": True},
+    # ── AI Research / Papers ──
+    "AI Alignment Forum": {"rss": "https://www.alignmentforum.org/feed.xml", "quick": True},
+    "LessWrong AI": {"rss": "https://www.lesswrong.com/feed.xml", "quick": True},
+    "Machine Learning Mastery": {"rss": "https://machinelearningmastery.com/feed/", "quick": True},
+    "NVIDIA Developer Blog": {"rss": "https://developer.nvidia.com/blog/feed/", "quick": True},
+    # ── Seguridad y DevOps ──
+    "Krebs on Security": {"rss": "https://krebsonsecurity.com/feed/", "quick": True},
+    "The Hacker News": {"rss": "https://feeds.feedburner.com/TheHackersNews", "quick": True},
+    "SANS ISC": {"rss": "https://isc.sans.edu/rssfeed.xml", "quick": True},
+    "HashiCorp Blog": {"rss": "https://www.hashicorp.com/blog/feed.xml", "quick": True},
     # ── Fuentes de herramientas ──
     "GitHub Trending": {"url": "https://github.com/trending", "tipo": "herramienta", "subtipo": "github"},
     "Product Hunt": {"url": "https://www.producthunt.com/", "tipo": "herramienta", "subtipo": "producthunt"},
@@ -699,6 +742,15 @@ EMAIL_TEMPLATE = """
             </td>
         </tr>
 
+        <!-- Videos section -->
+        <tr>
+            <td class="content" style="padding: 0 40px 32px 40px;">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    {videos_html}
+                </table>
+            </td>
+        </tr>
+
         <!-- Footer -->
         <tr>
             <td class="content dark-footer" style="padding: 0; background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%); border-top: 1px solid #e2e8f0;">
@@ -728,16 +780,24 @@ EMAIL_TEMPLATE = """
                             <table border="0" cellpadding="0" cellspacing="0" align="center">
                                 <tr>
                                     <td style="padding: 0 6px;">
-                                        <a href="https://github.com/jorbencas" target="_blank" style="display: inline-block; width: 36px; height: 36px; background: #0f172a; border-radius: 8px; text-align: center; line-height: 36px; text-decoration: none; font-size: 16px; color: #f8fafc; transition: all 0.2s;">GH</a>
+                                        <a href="https://github.com/jorbencas" target="_blank" style="display: inline-block; width: 36px; height: 36px; background: #0f172a; border-radius: 8px; text-align: center; line-height: 36px; text-decoration: none;">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f8fafc" style="vertical-align: middle; margin-top: 8px;"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                        </a>
                                     </td>
                                     <td style="padding: 0 6px;">
-                                        <a href="https://twitter.com/jorgevenkas" target="_blank" style="display: inline-block; width: 36px; height: 36px; background: #1d9bf0; border-radius: 8px; text-align: center; line-height: 36px; text-decoration: none; font-size: 14px; font-weight: 700; color: #ffffff;">X</a>
+                                        <a href="https://twitter.com/jorgevenkas" target="_blank" style="display: inline-block; width: 36px; height: 36px; background: #1d9bf0; border-radius: 8px; text-align: center; line-height: 36px; text-decoration: none;">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#ffffff" style="vertical-align: middle; margin-top: 8px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                                        </a>
                                     </td>
                                     <td style="padding: 0 6px;">
-                                        <a href="https://gitlab.com/jorbencas" target="_blank" style="display: inline-block; width: 36px; height: 36px; background: #e24329; border-radius: 8px; text-align: center; line-height: 36px; text-decoration: none; font-size: 14px; font-weight: 700; color: #ffffff;">GL</a>
+                                        <a href="https://gitlab.com/jorbencas" target="_blank" style="display: inline-block; width: 36px; height: 36px; background: #e24329; border-radius: 8px; text-align: center; line-height: 36px; text-decoration: none;">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffffff" style="vertical-align: middle; margin-top: 8px;"><path d="M23.955 13.587l-1.342-4.135-2.664-8.189a.455.455 0 00-.867 0L16.418 9.45H7.582L4.918 1.263a.455.455 0 00-.867 0L1.387 9.452.045 13.587c-.121.376.012.782.335 1.032l11.623 9.315c.166.131.393.131.559 0l11.623-9.315c.323-.25.456-.656.335-1.032zM12 22.048L2.456 14.38l.99-3.057 8.554-.003 8.553.003.99 3.057z"/></svg>
+                                        </a>
                                     </td>
                                     <td style="padding: 0 6px;">
-                                        <a href="mailto:jorgebeneytocastello@gmail.com" target="_blank" style="display: inline-block; width: 36px; height: 36px; background: #ea4335; border-radius: 8px; text-align: center; line-height: 36px; text-decoration: none; font-size: 16px; color: #ffffff;">@</a>
+                                        <a href="mailto:jorgebeneytocastello@gmail.com" target="_blank" style="display: inline-block; width: 36px; height: 36px; background: #ea4335; border-radius: 8px; text-align: center; line-height: 36px; text-decoration: none;">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffffff" style="vertical-align: middle; margin-top: 8px;"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+                                        </a>
                                     </td>
                                 </tr>
                             </table>
@@ -791,29 +851,15 @@ categories: ["tech", "weekly-recap"]
 
 ---
 
-## 📊 El panel en datos
+## 📋 Noticias por fuente
 
-| Métrica | Valor |
-|---------|-------|
-| Noticias analizadas | **{total_noticias}** |
-| Fuentes distintas | **{total_fuentes}** |
-| Fuentes RSS | **{total_rss}** |
-| Tiempo estimado de lectura | {tiempo_lectura} min |
-| Categoría principal | {top_categorias} |
-
-### Distribución por categoría
-
-{stats_categorias}
-
-### Top fuentes
-
-{fuentes_top}
+{noticias_por_fuente}
 
 ---
 
-## 📋 Listado completo de noticias
+## 🎬 Videos destacados
 
-{lista_noticias}
+{videos_seccion}
 
 ---
 
@@ -963,19 +1009,66 @@ TELEGRAM_DASHBOARD_URL = "http://jorbencasdownloaderdocument.surge.sh"
 TELEGRAM_MENSAJE_TEMPLATE = "{icono} *{titulo}*\n📰 `{fuente}` | `{fecha}`\n\n{cuerpo}\n🔗 [Abrir noticia]({enlace})\n🌐 [Ver más en el Dashboard]({dashboard_url})"
 
 # ── Email ──
+EMAIL_SOURCE_HEADER = """<tr>
+    <td style="padding: 20px 0 8px 0;">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td style="padding: 0; border-bottom: 2px solid {source_color};">
+                    <span style="font-size: 12px; font-weight: 700; color: {source_color}; text-transform: uppercase; letter-spacing: 0.5px; padding-bottom: 6px; display: inline-block;">{source_icon} {source_name}</span>
+                    <span style="font-size: 10px; color: #94a3b8; margin-left: 8px;">{source_count} noticias</span>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>"""
+
 EMAIL_ROW_TEMPLATE = """<tr>
-    <td style="padding: 14px 0; border-bottom: 1px solid #f1f5f9;">
+    <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
         <table width="100%" border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td width="28" style="vertical-align: top; padding-top: 2px;">
                     <span style="font-size: 16px;">{icon}</span>
                 </td>
                 <td style="vertical-align: top; padding-left: 10px;">
-                    <span style="color: #94a3b8; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">{fuente}</span>
-                    <div style="margin-top: 3px;">
-                        <a href="{enlace}" target="_blank" style="color: #1e293b; text-decoration: none; font-weight: 600; font-size: 14px; line-height: 1.4;">{titulo}</a>
-                    </div>
+                    <a href="{enlace}" target="_blank" style="color: #0f172a; text-decoration: none; font-weight: 700; font-size: 15px; line-height: 1.4;">{titulo}</a>
                     {resumen_html}
+                    <div style="margin-top: 8px;">
+                        <a href="{enlace}" target="_blank" style="display: inline-block; font-size: 11px; font-weight: 600; color: #3b82f6; text-decoration: none; background: #eff6ff; padding: 5px 12px; border-radius: 6px; border: 1px solid #dbeafe;">Leer noticia →</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>"""
+
+EMAIL_VIDEO_HEADER = """<tr>
+    <td style="padding: 24px 0 8px 0;">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td style="padding: 0; border-bottom: 2px solid #ef4444;">
+                    <span style="font-size: 12px; font-weight: 700; color: #ef4444; text-transform: uppercase; letter-spacing: 0.5px; padding-bottom: 6px; display: inline-block;">🎬 VIDEOS</span>
+                    <span style="font-size: 10px; color: #94a3b8; margin-left: 8px;">{video_count} nuevos</span>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>"""
+
+EMAIL_VIDEO_ROW = """<tr>
+    <td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="120" style="vertical-align: top;">
+                    <a href="{enlace}" target="_blank" style="text-decoration: none; display: block;">
+                        <img src="{thumbnail}" width="110" height="62" style="border-radius: 6px; display: block; object-fit: cover; background: #1e293b;" alt="{titulo}">
+                    </a>
+                </td>
+                <td style="vertical-align: top; padding-left: 12px;">
+                    <span style="color: #94a3b8; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">{canal}</span>
+                    <div style="margin-top: 3px;">
+                        <a href="{enlace}" target="_blank" style="color: #1e293b; text-decoration: none; font-weight: 600; font-size: 13px; line-height: 1.4;">{titulo}</a>
+                    </div>
+                    <span style="color: #94a3b8; font-size: 11px;">{duracion}</span>
                 </td>
             </tr>
         </table>

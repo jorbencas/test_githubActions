@@ -16,10 +16,11 @@ import os
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
 
+from collections import defaultdict
 import requests
 from google import genai
 
-from scripts.utils.constants_downloadfile import CONFIG, EMAIL_TEMPLATE, EMAIL_ROW_TEMPLATE, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, ID_VIDEO_KEY, BADGE_KEY, VAL_TECH, TIPO_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES
+from scripts.utils.constants_downloadfile import CONFIG, EMAIL_TEMPLATE, EMAIL_ROW_TEMPLATE, EMAIL_SOURCE_HEADER, EMAIL_VIDEO_HEADER, EMAIL_VIDEO_ROW, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, ID_VIDEO_KEY, BADGE_KEY, VAL_TECH, TIPO_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES
 from scripts.utils.common import load_json, resumir_noticia, resumir_lote_noticias
 
 os.makedirs(LOGS_DIR, exist_ok=True)
@@ -32,6 +33,73 @@ logging.basicConfig(
     ],
 )
 logger = logging.getLogger("email")
+
+# Colores e iconos por fuente
+SOURCE_STYLES = {
+    "TechCrunch": {"color": "#16a34a", "icon": "📱"},
+    "The Verge": {"color": "#7c3aed", "icon": "🔮"},
+    "Wired": {"color": "#000000", "icon": "⚫"},
+    "Ars Technica": {"color": "#ff4400", "icon": "🔬"},
+    "Engadget": {"color": "#02b3e4", "icon": "📱"},
+    "Hacker News": {"color": "#ff6600", "icon": "🔶"},
+    "GitHub": {"color": "#24292e", "icon": "🐙"},
+    "Google": {"color": "#4285f4", "icon": "🔍"},
+    "Xataka": {"color": "#1d9bf0", "icon": "📰"},
+    "OpenAI": {"color": "#10a37f", "icon": "🤖"},
+    "Anthropic": {"color": "#d97706", "icon": "🧠"},
+    "Astro": {"color": "#ff5d01", "icon": "🚀"},
+    "Vercel": {"color": "#000000", "icon": "▲"},
+    "Dev.to": {"color": "#0a0a23", "icon": "👨‍💻"},
+    "Mozilla": {"color": "#ff9400", "icon": "🦊"},
+    "Krebs": {"color": "#dc2626", "icon": "🔒"},
+    "default": {"color": "#3b82f6", "icon": "💻"},
+}
+
+# Estilos para canales de video
+VIDEO_CHANNEL_STYLES = {
+    "Fernando Herrera": {"color": "#ff0000"},
+    "Fazt Code": {"color": "#ff0000"},
+    "HolaMundo": {"color": "#ff0000"},
+    "CodelyTV": {"color": "#7c3aed"},
+    "midudev": {"color": "#ff6600"},
+    "Pildoras Informaticas": {"color": "#0066cc"},
+    "Angel Vertex": {"color": "#00cc66"},
+    "VisualStudioCode": {"color": "#007acc"},
+    "freeCodeCamp": {"color": "#0a0a23"},
+    "FalconMasters": {"color": "#ff4444"},
+    "Carlos Azaustre": {"color": "#1e293b"},
+    "Manz Dev": {"color": "#ff6600"},
+    "default": {"color": "#64748b"},
+}
+
+def get_video_channel_style(canal: str) -> dict:
+    for key, style in VIDEO_CHANNEL_STYLES.items():
+        if key.lower() in canal.lower():
+            return style
+    return VIDEO_CHANNEL_STYLES["default"]
+
+def get_source_style(fuente: str) -> dict:
+    for key, style in SOURCE_STYLES.items():
+        if key.lower() in fuente.lower():
+            return style
+    return SOURCE_STYLES["default"]
+
+async def traducir_titulo(titulo: str, client) -> str:
+    """Traduce un título al español usando Gemini."""
+    modelos = CONFIG.get("AI_MODELS", ["gemini-2.5-flash", "gemini-2.5-pro"])
+    prompt = PROMPT_TRADUCIR_TITULOS.format(texto_a_traducir=f"0|{titulo}")
+    for modelo in modelos:
+        try:
+            response = client.models.generate_content(model=modelo, contents=prompt)
+            if response and response.text:
+                import json as _json
+                data = _json.loads(response.text.strip().removeprefix("```json").removesuffix("```").strip())
+                trads = data.get("traducciones", [])
+                if trads and trads[0].get("tr"):
+                    return trads[0]["tr"]
+        except Exception:
+            continue
+    return titulo
 
 
 
@@ -56,10 +124,32 @@ async def run():
         logger.info("📭 No hay noticias para enviar.")
         return
 
+    # Separar videos y noticias
+    todos_videos = [n for n in historial if _es_multimedia(n)][:10]
     historial = [n for n in historial if not _es_multimedia(n)]
 
     client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
     nuevos = historial[:args.max_items]
+
+    # Generar sección de videos
+    filas_videos = ""
+    if todos_videos:
+        filas_videos += EMAIL_VIDEO_HEADER.format(video_count=len(todos_videos))
+        for v in todos_videos:
+            canal = v.get(FUENTE_KEY, "YouTube")
+            thumbnail = v.get("thumbnail", f"https://img.youtube.com/vi/{v.get(ID_VIDEO_KEY, '')}/mqdefault.jpg")
+            enlace = v.get(ENLACE_KEY, "#")
+            titulo = v.get(TITULO_KEY, "Sin título")
+            duracion = v.get("duracion", "")
+            duracion_html = f' · {duracion}' if duracion else ""
+
+            filas_videos += EMAIL_VIDEO_ROW.format(
+                thumbnail=thumbnail,
+                canal=canal,
+                enlace=enlace,
+                titulo=titulo,
+                duracion=duracion_html,
+            )
 
     if not nuevos:
         top_titular = "Tech Pulse"
@@ -75,17 +165,33 @@ async def run():
         c_tech = len([x for x in nuevos if x.get(BADGE_KEY) == VAL_TECH])
 
         logger.info(f"🤖 Generando resúmenes IA para {len(nuevos)} noticias...")
-        filas_noticias = ""
-        for i, n in enumerate(nuevos):
-            icon = "💻"
-            logger.info(f"  [{i+1}/{len(nuevos)}] Resumiendo: {n['titulo'][:60]}...")
-            resumen = await resumir_noticia(n, client)
-            resumen_html = f'<p style="color: #475569; font-size: 13px; line-height: 1.5; margin: 6px 0 0 0; padding-left: 26px;">📝 {resumen}</p>' if resumen else ""
 
-            filas_noticias += EMAIL_ROW_TEMPLATE.format(
-                icon=icon, fuente=n['fuente'], enlace=n['enlace'],
-                titulo=n['titulo'], resumen_html=resumen_html,
+        # Agrupar noticias por fuente
+        por_fuente = defaultdict(list)
+        for n in nuevos:
+            por_fuente[n[FUENTE_KEY]].append(n)
+
+        filas_noticias = ""
+        for fuente, items in por_fuente.items():
+            style = get_source_style(fuente)
+            filas_noticias += EMAIL_SOURCE_HEADER.format(
+                source_name=fuente,
+                source_count=len(items),
+                source_color=style["color"],
+                source_icon=style["icon"],
             )
+            for n in items:
+                icon = style["icon"]
+                titulo_original = n['titulo']
+                logger.info(f"  Traduciendo y resumiendo: {titulo_original[:60]}...")
+                titulo_es = await traducir_titulo(titulo_original, client)
+                resumen = await resumir_noticia(n, client)
+                resumen_html = f'<p style="color: #64748b; font-size: 12px; line-height: 1.4; margin: 4px 0 0 0; padding-left: 0; font-style: italic;">{resumen}</p>' if resumen else ""
+
+                filas_noticias += EMAIL_ROW_TEMPLATE.format(
+                    icon=icon, enlace=n['enlace'],
+                    titulo=titulo_es, resumen_html=resumen_html,
+                )
 
         temas_clave = ", ".join(list(set([n[FUENTE_KEY] for n in nuevos[:3]])))
         logger.info("🤖 Generando resumen general del lote...")
@@ -98,6 +204,7 @@ async def run():
         fecha_hoy=datetime.now().strftime("%d de %B, %Y"),
         contenido_html=contenido_html,
         lista_email=filas_noticias,
+        videos_html=filas_videos,
         count_tech=c_tech,
         total_noticias=len(nuevos or []),
         temas_clave=temas_clave,
