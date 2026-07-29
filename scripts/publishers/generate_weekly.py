@@ -321,13 +321,8 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
     herramientas_github.sort(key=lambda h: int(h.get(ESTRELLAS_KEY, "0")), reverse=True)
     top_github = herramientas_github[:100]
 
-    # Completar avatares
+    # Completar avatares — only real cached avatars, no ui-avatars fallback
     avatars_known = getattr(scr, "avatar_repo", None) and scr.avatar_repo.avatars or {}
-    for nombre, info in FUENTES.items():
-        if YT_KEY in info:
-            nombre_c = nombre.replace(" Shorts", "")
-            if nombre_c not in avatars_known:
-                avatars_known[nombre_c] = f"https://ui-avatars.com/api/?name={nombre_c}&background=random"
 
     # === Renderizar todas las secciones ===
     stats_html = render_stats(historial)
@@ -335,7 +330,9 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
     news_items = [n for n in historial if not n.get(ID_VIDEO_KEY)]
     news_list_html = render_news_list(news_items, avatars_known)
     news_search_html = render_search_input("Buscar noticias...", "news-search")
-    news_channel_filters_html = render_channel_chips(news_items, "canalNoticias", avatars_known)
+    # Fuentes duales (url + yt) deben mostrar chips en ambas secciones
+    dual_source_names = [name for name, info in FUENTES.items() if "url" in info and "yt" in info]
+    news_channel_filters_html = render_channel_chips(news_items, "canalNoticias", avatars_known, dual_source_names)
     video_search_html = render_search_input("Buscar vídeos...", "video-search")
     multimedia_tabs_html = render_multimedia_tabs()
     video_channel_filters_html = render_channel_chips(video_items, "canalVideos", avatars_known, ALL_YT_CHANNELS)

@@ -3,6 +3,7 @@
 scraper_base.py — Clases base de extracción compartidas entre todos los scrapers.
 YouTubeExtractor, WebExtractor, ScraperPro, AvatarRepository, ContentFilter.
 """
+import asyncio
 import hashlib
 import html
 import json
@@ -409,39 +410,76 @@ class ScraperPro:
     def obtener_avatar_canal(self, nombre, url_canal):
         return self.avatar_repo.obtener_avatar(nombre, url_canal)
 
+    async def _extraer_yt(self, session, nombre, url):
+        """Extrae videos de YouTube desde una URL de canal."""
+        results = []
+        try:
+            async with session.get(url, timeout=20, headers=self.yt_extractor.headers) as response:
+                if response.status != 200:
+                    return []
+                text = await response.text()
+            logger.info(f"📺 Procesando fuente de YouTube: {nombre} ({url})")
+            json_data = re.search(r"ytInitialData\s*=\s*(\{.*?\});", text)
+            if not json_data:
+                json_data = re.search(r'window\[["\']ytInitialData["\']\]\s*=\s*(\{.*?\});', text)
+            if not json_data:
+                json_data = re.search(r"ytInitialPlayerResponse\s*=\s*(\{.*?\});", text)
+            if json_data:
+                logger.info(f"✅ JSON de YouTube encontrado para {nombre}.")
+                try:
+                    data = json.loads(json_data.group(1))
+                    results = self.yt_extractor.extraer_desde_json(data, nombre, url)
+                except Exception as e:
+                    logger.error(f"⚠️ Error procesando JSON de YT ({nombre}): {e}", exc_info=True)
+            if not results:
+                results = self.yt_extractor.ejecutar_fallback(text, nombre)
+        except Exception as e:
+            logger.error(f"❌ Error extrayendo YT {nombre}: {e}")
+        return results
+
+    async def _extraer_web(self, session, nombre, url, info):
+        """Extrae noticias/herramientas desde una URL web."""
+        results = []
+        try:
+            async with session.get(url, timeout=20, headers=self.yt_extractor.headers) as response:
+                if response.status != 200:
+                    return []
+                text = await response.text()
+            if info.get(TIPO_KEY) == TIPO_VAL_HERRAMIENTA:
+                logger.info(f"🔧 Extrayendo herramientas desde: {nombre}")
+                results = self.web_extractor.extraer_herramientas(text, nombre, url, info)
+            else:
+                logger.info(f"🌐 Extrayendo noticias web desde: {nombre} ({url})")
+                results = self.web_extractor.extraer_noticias(text, nombre, url, info)
+        except Exception as e:
+            logger.error(f"❌ Error extrayendo web {nombre}: {e}")
+        return results
+
     async def extraer(self, session, nombre, info):
         target = info.get(YT_KEY) or info.get(URL_KEY) or info.get(RSS_KEY)
         results = []
         es_rss = RSS_KEY in info
         try:
-            async with session.get(target, timeout=20, headers=self.yt_extractor.headers) as response:
-                if response.status != 200:
-                    return []
-                text = await response.text()
             if es_rss:
+                async with session.get(target, timeout=20, headers=self.yt_extractor.headers) as response:
+                    if response.status != 200:
+                        return []
+                    text = await response.text()
                 logger.info(f"📡 Extrayendo RSS desde: {nombre} ({target})")
                 results = self.web_extractor.extraer_rss(text, nombre)
+            elif YT_KEY in info and URL_KEY in info:
+                yt_url = info[YT_KEY]
+                web_url = info[URL_KEY]
+                logger.info(f"🔀 Fuente dual (YT + Web): {nombre}")
+                yt_results, web_results = await asyncio.gather(
+                    self._extraer_yt(session, nombre, yt_url),
+                    self._extraer_web(session, nombre, web_url, info),
+                )
+                results = yt_results + web_results
             elif YT_KEY in info:
-                logger.info(f"📺 Procesando fuente de YouTube: {nombre} ({target})")
-                json_data = re.search(r"ytInitialData\s*=\s*(\{.*?\});", text)
-                if not json_data:
-                    json_data = re.search(r'window\[["\']ytInitialData["\']\]\s*=\s*(\{.*?\});', text)
-                if not json_data:
-                    json_data = re.search(r"ytInitialPlayerResponse\s*=\s*(\{.*?\});", text)
-                if json_data:
-                    logger.info(f"✅ JSON de YouTube encontrado para {nombre}.")
-                    try:
-                        data = json.loads(json_data.group(1))
-                        results = self.yt_extractor.extraer_desde_json(data, nombre, target)
-                    except Exception as e:
-                        logger.error(f"⚠️ Error procesando JSON de YT ({nombre}): {e}", exc_info=True)
-                if not results:
-                    results = self.yt_extractor.ejecutar_fallback(text, nombre)
-            elif info.get(TIPO_KEY) == TIPO_VAL_HERRAMIENTA:
-                logger.info(f"🔧 Extrayendo herramientas desde: {nombre}")
-                results = self.web_extractor.extraer_herramientas(text, nombre, target, info)
+                results = await self._extraer_yt(session, nombre, target)
             else:
-                results = self.web_extractor.extraer_noticias(text, nombre, target, info)
+                results = await self._extraer_web(session, nombre, target, info)
         except Exception as e:
             print(f"❌ Error en fuente {nombre}: {e}")
         return results

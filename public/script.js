@@ -116,47 +116,44 @@
     if (saved === "dark") document.body.classList.add("dark");
     updateThemeIcon();
 
-    // Create overlay for circular transition
     const overlay = document.createElement("div");
-    overlay.id = "theme-transition-overlay";
-    overlay.style.cssText = "position:fixed;inset:0;z-index:9999;pointer-events:none;transition:clip-path 0.5s cubic-bezier(0.4,0,0.2,1);clip-path:circle(0% at 50% 50%);";
+    overlay.style.cssText = "position:fixed;inset:0;z-index:9999;pointer-events:none;will-change:clip-path;";
     document.body.appendChild(overlay);
 
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", () => {
       const goingDark = !document.body.classList.contains("dark");
-
-      // Set overlay background to the TARGET theme
-      overlay.style.background = goingDark ? "#18181b" : "#e8edf5";
-
-      // Calculate center of the toggle button
       const rect = btn.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
+      const maxR = Math.hypot(Math.max(cx, innerWidth - cx), Math.max(cy, innerHeight - cy));
+      const pct = Math.ceil((maxR / Math.hypot(innerWidth, innerHeight)) * 100) + 5;
 
-      // Start from 0%, expand to cover entire viewport
+      overlay.style.background = goingDark
+        ? "linear-gradient(160deg, #0f0f13, #131318, #18181b)"
+        : "linear-gradient(160deg, #e8edf5, #dde4f0, #e2e8f0)";
+
+      overlay.style.transition = "none";
       overlay.style.clipPath = `circle(0% at ${cx}px ${cy}px)`;
       overlay.style.pointerEvents = "all";
-
-      // Force reflow so the browser registers the start state
       void overlay.offsetWidth;
 
-      // Expand to cover full screen
-      const maxRadius = Math.hypot(Math.max(cx, window.innerWidth - cx), Math.max(cy, window.innerHeight - cy));
-      const pct = Math.ceil((maxRadius / Math.hypot(window.innerWidth, window.innerHeight)) * 100) + 5;
+      overlay.style.transition = "clip-path 0.45s cubic-bezier(0.22, 1, 0.36, 1)";
       overlay.style.clipPath = `circle(${pct}% at ${cx}px ${cy}px)`;
 
-      // Switch theme at midpoint
       setTimeout(() => {
         document.body.classList.toggle("dark");
         localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
         updateThemeIcon();
-      }, 250);
+      }, 200);
 
-      // Remove overlay after transition
       setTimeout(() => {
+        overlay.style.transition = "clip-path 0.35s cubic-bezier(0.22, 1, 0.36, 1)";
         overlay.style.clipPath = `circle(0% at ${cx}px ${cy}px)`;
+      }, 500);
+
+      setTimeout(() => {
         overlay.style.pointerEvents = "none";
-      }, 550);
+      }, 850);
     });
 
     function updateThemeIcon() {

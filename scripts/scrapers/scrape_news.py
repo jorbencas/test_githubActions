@@ -17,7 +17,7 @@ from logging.handlers import RotatingFileHandler
 
 import aiohttp
 
-from scripts.utils.constants_downloadfile import CONFIG, FUENTES, YT_KEY, TIPO_KEY, QUICK_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY, ID_VIDEO_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES
+from scripts.utils.constants_downloadfile import CONFIG, FUENTES, YT_KEY, URL_KEY, TIPO_KEY, QUICK_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY, ID_VIDEO_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES
 from scripts.scrapers.scraper_base import ScraperPro
 from scripts.utils.common import load_json, save_json, traducir_titulos_ia, deduplicar_items
 
@@ -40,7 +40,7 @@ def _filtrar_fuentes_por_tier(tier: str) -> dict:
     if tier == "full":
         return todas
     if tier == "standard":
-        return {k: v for k, v in todas.items() if YT_KEY not in v}
+        return {k: v for k, v in todas.items() if URL_KEY in v}
     if tier == "light":
         return {k: v for k, v in todas.items() if v.get(QUICK_KEY)}
     logger.warning("⚠️ Tier '%s' desconocido. Usando full.", tier)

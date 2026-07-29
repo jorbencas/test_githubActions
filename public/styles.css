@@ -22,11 +22,13 @@ body.dark .filter-section { background: linear-gradient(135deg, rgba(30,30,36,0.
 body.dark .filter-section strong { color: #d4d4d8; }
 body.dark .search-input { background: rgba(24,24,27,0.8); color: #e4e4e7; border-color: #3f3f46 !important; }
 body.dark .search-input:focus { border-color: #3b82f6 !important; box-shadow: 0 0 0 3px rgba(59,130,246,0.2) !important; }
-body.dark .news-item { background: linear-gradient(135deg, rgba(30,30,36,0.85), rgba(39,39,42,0.85)); border-left-color: #3b82f6; }
-body.dark .news-item:hover { background: linear-gradient(135deg, rgba(39,39,42,0.9), rgba(46,46,51,0.9)); border-left-color: #60a5fa; box-shadow: 0 4px 16px rgba(59,130,246,0.1); }
+body.dark .news-item { background: linear-gradient(135deg, rgba(30,30,36,0.9), rgba(39,39,42,0.85)); border-left-color: #3b82f6; }
+body.dark .news-item::before { background: linear-gradient(90deg, rgba(59,130,246,0.08), transparent 40%); }
+body.dark .news-item:hover { background: linear-gradient(135deg, rgba(39,39,42,0.95), rgba(46,46,51,0.9)); border-left-color: #60a5fa; box-shadow: 0 6px 20px rgba(59,130,246,0.12); }
 body.dark .news-item a { color: #93c5fd; }
+body.dark .news-item .favicon { background: #27272a; border-color: rgba(255,255,255,0.08); }
 body.dark .news-item .news-meta { color: #71717a; }
-body.dark .news-item .news-title { background: linear-gradient(90deg, #93c5fd, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+body.dark .news-item .news-title { background: linear-gradient(90deg, #60a5fa, #93c5fd, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 body.dark .video-card { background: linear-gradient(135deg, rgba(30,30,36,0.85), rgba(39,39,42,0.85)); border-color: rgba(239,68,68,0.3); }
 body.dark .video-card:hover { border-color: #ef4444; box-shadow: 0 8px 24px rgba(239,68,68,0.12); }
 body.dark .video-info { background: linear-gradient(135deg, rgba(30,30,36,0.85), rgba(39,39,42,0.85)); }
@@ -60,6 +62,7 @@ body.dark .github-item .badge-lang { background: rgba(251,191,36,0.15); color: #
 body.dark .scroll-top { background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 4px 16px rgba(59,130,246,0.3); }
 body.dark .scroll-top:hover { background: linear-gradient(135deg, #60a5fa, #3b82f6); box-shadow: 0 6px 20px rgba(59,130,246,0.4); }
 body.dark .header-gradient { filter: brightness(1.15); }
+body.dark h2 { color: #f1f5f9; }
 body.dark details summary { color: #d4d4d8; background: linear-gradient(135deg, rgba(30,30,36,0.8), rgba(39,39,42,0.8)); border-color: rgba(63,63,70,0.5); }
 body.dark details[open] summary { color: #a1a1aa; }
 body.dark details.filter-collapse summary:hover { background: linear-gradient(135deg, rgba(39,39,42,0.9), rgba(46,46,51,0.9)); }
@@ -108,13 +111,16 @@ body.dark .footer-disclaimer { color: #52525b; }
 .news-list::-webkit-scrollbar-track { background: transparent; border-radius: 3px; }
 .news-list::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #3b82f6, #2563eb); border-radius: 3px; }
 .news-list::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #2563eb, #1d4ed8); }
-.news-item { background: rgba(255,255,255,0.8); padding: 14px 16px; border-left: 4px solid #3b82f6; box-shadow: 0 1px 4px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03); transition: all 0.2s ease; border-radius: 0 12px 12px 0; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-.news-item:hover { transform: translateX(3px); box-shadow: 0 4px 16px rgba(59,130,246,0.1); border-left-color: #2563eb; background: rgba(239,246,255,0.9); }
-.news-item a { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #3b82f6; }
+.news-item { background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,250,252,0.85)); padding: 14px 16px; border-left: 4px solid #3b82f6; box-shadow: 0 1px 4px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03); transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1); border-radius: 0 12px 12px 0; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); position: relative; overflow: hidden; }
+.news-item::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(59,130,246,0.04), transparent 40%); opacity: 0; transition: opacity 0.25s; pointer-events: none; }
+.news-item:hover { transform: translateX(4px); box-shadow: 0 6px 20px rgba(59,130,246,0.12), 0 2px 6px rgba(0,0,0,0.04); border-left-color: #2563eb; background: linear-gradient(135deg, rgba(239,246,255,0.95), rgba(240,249,255,0.9)); }
+.news-item:hover::before { opacity: 1; }
+.news-item a { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #3b82f6; position: relative; z-index: 1; }
 .news-item a:hover { text-decoration: none; }
-.news-item .favicon { width: 22px; height: 22px; flex-shrink: 0; border-radius: 6px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.news-item .favicon { width: 24px; height: 24px; flex-shrink: 0; border-radius: 6px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 1px 3px rgba(0,0,0,0.08); background: white; object-fit: contain; padding: 2px; }
 .news-item .news-text { flex: 1; min-width: 0; }
-.news-item .news-title { font-weight: 700; background: linear-gradient(90deg, #2563eb, #1d4ed8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: block; font-size: 0.95em; line-height: 1.35; }
+.news-item .news-title { font-weight: 700; background: linear-gradient(90deg, #1e40af, #2563eb, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: block; font-size: 0.95em; line-height: 1.35; }
+.news-item:hover .news-title { background: linear-gradient(90deg, #1e3a8a, #1d4ed8, #2563eb); -webkit-background-clip: text; background-clip: text; }
 .news-item .news-meta { font-size: 0.78em; color: #64748b; display: flex; align-items: center; gap: 4px; margin-top: 5px; flex-wrap: wrap; }
 .badge-tech, .badge-rss, .badge-news, .badge-tool, .badge-cat,
 .badge-video, .badge-video-short, .badge-video-live {
@@ -296,5 +302,5 @@ h2::after { content: ""; display: block; height: 2px; margin-top: 8px; backgroun
   
   /* Theme toggle mobile */
   header { position: relative; }
-  .theme-toggle { position: absolute; top: 0; right: 0; order: -1; }
+  .theme-toggle { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; border-radius: 8px; }
 }
