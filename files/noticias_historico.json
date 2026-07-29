@@ -1716,19 +1716,6 @@
         "ts": "2026-07-29T00:00:48.179432"
     },
     {
-        "titulo": "Modelo de Datos de Python - Parte 1",
-        "enlace": "https://dev.to/brunotlps/modelo-de-dados-python-parte-1-3ela",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "29/07",
-        "fecha_publicacion": "Tue, 28 Jul 2026 22:51:54 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "29/07/2026",
-        "ts": "2026-07-29T00:00:48.179445"
-    },
-    {
         "titulo": "Reaction wheel failures leave Swift rescue mission spinning in orbit",
         "enlace": "https://arstechnica.com/space/2026/07/reaction-wheel-failures-leave-swift-rescue-mission-spinning-in-orbit/",
         "fuente": "Ars Technica",
@@ -2819,19 +2806,6 @@
         "origen": "rss",
         "fecha_real": "28/07/2026",
         "ts": "2026-07-28T19:21:46.666288"
-    },
-    {
-        "titulo": "¿Puede Google ADK comunicarse con Amazon Bedrock AgentCore Runtime? Un benchmark A2A entre nubes",
-        "enlace": "https://dev.to/gde/can-google-adk-talk-to-amazon-bedrock-agentcore-runtime-a-cross-cloud-a2a-benchmark-162l",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "28/07",
-        "fecha_publicacion": "Tue, 28 Jul 2026 18:58:24 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "28/07/2026",
-        "ts": "2026-07-28T19:21:46.666321"
     },
     {
         "titulo": "Foreman 101: codificación agéntica como recursos de Kubernetes",
@@ -6394,19 +6368,6 @@
         "origen": "rss",
         "fecha_real": "27/07/2026",
         "ts": "2026-07-27T22:05:59.988252"
-    },
-    {
-        "titulo": "El autor de Clean Code ya no revisa código generado por IA",
-        "enlace": "https://news.ycombinator.com/item?id=49074693",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "27/07",
-        "fecha_publicacion": "Mon, 27 Jul 2026 19:47:06 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "27/07/2026",
-        "ts": "2026-07-27T22:05:59.988319"
     },
     {
         "titulo": "Finding bugs in Raft implementations",
@@ -11830,19 +11791,6 @@
         "ts": "2026-07-26T15:04:18.015543"
     },
     {
-        "titulo": "Ask HN: What are the most promising RL fields for a new master student?",
-        "enlace": "https://news.ycombinator.com/item?id=49057972",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "26/07",
-        "fecha_publicacion": "Sun, 26 Jul 2026 13:22:59 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "26/07/2026",
-        "ts": "2026-07-26T15:04:18.015590"
-    },
-    {
         "titulo": "Beginner J: Dealing Cards",
         "enlace": "https://www.youtube.com/watch?v=eXGKK8BkCkg",
         "fuente": "Lobsters",
@@ -14352,19 +14300,6 @@
         "ts": "2026-07-25T21:54:37.948685"
     },
     {
-        "titulo": "Show HN: Writemark, un componente web sin dependencias para la edición de Markdown en línea",
-        "enlace": "https://news.ycombinator.com/item?id=49051130",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "25/07",
-        "fecha_publicacion": "Sat, 25 Jul 2026 20:18:54 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "25/07/2026",
-        "ts": "2026-07-25T21:54:37.948714"
-    },
-    {
         "titulo": "¿Te hicieron 'ghosting'?",
         "enlace": "https://didtheyghostyou.com/",
         "fuente": "Hacker News",
@@ -16276,19 +16211,6 @@
         "ts": "2026-07-25T13:28:15.057770"
     },
     {
-        "titulo": "New to the web platform in April",
-        "enlace": "https://web.dev/blog/web-platform-04-2026?hl=en",
-        "fuente": "web.dev",
-        "tipo": "noticia",
-        "f": "25/07",
-        "fecha_publicacion": "Fri, 24 Apr 2026 07:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "25/07/2026",
-        "ts": "2026-07-25T12:02:03.136814"
-    },
-    {
         "titulo": "A shell colon does nothing. Use it anyway",
         "enlace": "https://refp.se/articles/your-shell-and-the-magic-colon",
         "fuente": "Lobsters",
@@ -16521,19 +16443,6 @@
         "origen": "rss",
         "fecha_real": "25/07/2026",
         "ts": "2026-07-25T12:02:09.849024"
-    },
-    {
-        "titulo": "New to the web platform in May",
-        "enlace": "https://web.dev/blog/web-platform-05-2026?hl=en",
-        "fuente": "web.dev",
-        "tipo": "noticia",
-        "f": "25/07",
-        "fecha_publicacion": "Fri, 29 May 2026 07:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "25/07/2026",
-        "ts": "2026-07-25T10:26:14.371858"
     },
     {
         "titulo": "Launching Interop 2025",
@@ -18720,19 +18629,6 @@
         "ts": "2026-07-24T19:23:45.317160"
     },
     {
-        "titulo": "Claude Opus 5",
-        "enlace": "https://www.anthropic.com/news/claude-opus-5",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "24/07",
-        "fecha_publicacion": "Fri, 24 Jul 2026 16:57:41 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "24/07/2026",
-        "ts": "2026-07-24T19:23:45.317173"
-    },
-    {
         "titulo": "git rebase -i is not that scary",
         "enlace": "https://cachebag.sh/journal/interactive-rebasing/",
         "fuente": "Lobsters",
@@ -19121,19 +19017,6 @@
         "origen": "rss",
         "fecha_real": "24/07/2026",
         "ts": "2026-07-24T17:36:54.750051"
-    },
-    {
-        "titulo": "What are you doing this weekend?",
-        "enlace": "https://lobste.rs/s/rbfmuh/what_are_you_doing_this_weekend",
-        "fuente": "Lobsters",
-        "tipo": "noticia",
-        "f": "24/07",
-        "fecha_publicacion": "Fri, 24 Jul 2026 09:38:42 -0500",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "24/07/2026",
-        "ts": "2026-07-24T17:36:54.750102"
     },
     {
         "titulo": "Anthropic lanza Opus 5",
@@ -22059,19 +21942,6 @@
         "origen": "rss",
         "fecha_real": "23/07/2026",
         "ts": "2026-07-23T23:59:52.382952"
-    },
-    {
-        "titulo": "Namecheap entregó mi cuenta a un tercero no verificado solo porque lo pidieron.",
-        "enlace": "https://news.ycombinator.com/item?id=49028037",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "23/07",
-        "fecha_publicacion": "Thu, 23 Jul 2026 21:05:29 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "23/07/2026",
-        "ts": "2026-07-23T22:55:25.659298"
     },
     {
         "titulo": "Una pareja paga más de $800k por una terapia de edición genética para su hija. Ella murió.",
@@ -43589,19 +43459,6 @@
         "ts": "2026-07-18T13:16:40.983697"
     },
     {
-        "titulo": "New to the web platform in February",
-        "enlace": "https://web.dev/blog/web-platform-02-2026?hl=en",
-        "fuente": "web.dev",
-        "tipo": "noticia",
-        "f": "18/07",
-        "fecha_publicacion": "Thu, 26 Feb 2026 08:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "18/07/2026",
-        "ts": "2026-07-18T13:16:55.867568"
-    },
-    {
         "titulo": "Open-weight models now match frontier cyber performance from just four months ago at a fraction of the cost",
         "enlace": "https://the-decoder.com/open-weight-models-now-match-frontier-cyber-performance-from-just-four-months-ago-at-a-fraction-of-the-cost/",
         "fuente": "The Decoder",
@@ -43912,19 +43769,6 @@
         "origen": "rss",
         "fecha_real": "18/07/2026",
         "ts": "2026-07-18T13:12:44.849830"
-    },
-    {
-        "titulo": "Launching Interop 2026",
-        "enlace": "https://hacks.mozilla.org/2026/02/launching-interop-2026/",
-        "fuente": "hacks.mozilla.org",
-        "tipo": "noticia",
-        "f": "18/07",
-        "fecha_publicacion": "Thu, 12 Feb 2026 17:07:24 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "18/07/2026",
-        "ts": "2026-07-18T11:02:27.038852"
     },
     {
         "titulo": "LG monitors silently install software through Windows Update without consent",
@@ -81848,19 +81692,6 @@
         "ts": "2026-07-09T18:50:10.312095"
     },
     {
-        "titulo": "ChatGPT Work",
-        "enlace": "https://openai.com/index/chatgpt-for-your-most-ambitious-work/",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "09/07",
-        "fecha_publicacion": "Thu, 09 Jul 2026 17:03:53 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "09/07/2026",
-        "ts": "2026-07-09T18:50:10.312128"
-    },
-    {
         "titulo": "Wildcard (YC W25) Is Hiring a Founding Engineer",
         "enlace": "https://www.ycombinator.com/companies/wildcard/jobs/ZSLVaaU-founding-engineer",
         "fuente": "Hacker News",
@@ -86864,19 +86695,6 @@
         "origen": "rss",
         "fecha_real": "08/07/2026",
         "ts": "2026-07-08T17:28:40.595631"
-    },
-    {
-        "titulo": "Pipelines de CI/CD que realmente funcionan: Mi búsqueda como un Jedi de DevOps",
-        "enlace": "https://dev.to/timevolt/cicd-pipelines-that-actually-work-my-quest-like-a-devops-jedi-42le",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "08/07",
-        "fecha_publicacion": "Wed, 08 Jul 2026 17:11:22 +0000",
-        "badge": "Tech",
-        "categoria": "🐳 DevOps",
-        "origen": "rss",
-        "fecha_real": "08/07/2026",
-        "ts": "2026-07-08T17:28:40.595660"
     },
     {
         "titulo": "Tarifas de gateways de IA comparadas: ¿Quién encarece tus tokens?",
