@@ -232,19 +232,43 @@ async def run():
         else:
             logger.error(f"❌ Fallo al enviar: {titulo_es[:60]}")
 
-    # Audio de voz: 1 vez al día con resumen de todos los titulares
-    if not args.dry_run and titulares_enviados:
-        if args.force_voice or not hoy_ya_se_envio_voz():
-            resumen_voz = "Hoy en tecnología. " + ". ".join(titulares_enviados) + ". Fin del resumen."
-            logger.info("🎙️ Enviando resumen de voz diario...")
-            ok = await enviar_audio_voz(resumen_voz, chat_id, token)
-            if ok:
-                marcar_voz_enviada()
-                logger.info("✅ Audio de voz enviado.")
+    # Audio de voz: 1 vez al día con resumen de TODAS las noticias del día
+    if not args.dry_run:
+        hora_actual = datetime.now().hour
+        if args.force_voice or (not hoy_ya_se_envio_voz() and hora_actual >= 21):
+            # Recopilar TODAS las noticias del día (no solo las enviadas en este run)
+            cutoff_voz = datetime.now() - timedelta(hours=24)
+            todas_hoy = []
+            for n in historial:
+                if n.get(ID_VIDEO_KEY):
+                    continue
+                ts = n.get(TS_KEY, "")
+                if ts:
+                    try:
+                        fecha = datetime.fromisoformat(ts.replace("Z", "+00:00").replace("+00:00", ""))
+                        if fecha < cutoff_voz:
+                            continue
+                    except (ValueError, AttributeError):
+                        pass
+                titulo = n.get(TITULO_KEY, "")
+                if titulo:
+                    todas_hoy.append(titulo)
+
+            if todas_hoy:
+                resumen_voz = "Hoy en tecnología. " + ". ".join(todas_hoy) + ". Fin del resumen."
+                logger.info(f"🎙️ Enviando resumen de voz diario ({len(todas_hoy)} noticias)...")
+                ok = await enviar_audio_voz(resumen_voz, chat_id, token)
+                if ok:
+                    marcar_voz_enviada()
+                    logger.info("✅ Audio de voz enviado.")
+                else:
+                    logger.warning("⚠️ Fallo al enviar audio de voz.")
             else:
-                logger.warning("⚠️ Fallo al enviar audio de voz.")
-        else:
+                logger.info("ℹ️ No hay noticias hoy para audio.")
+        elif hoy_ya_se_envio_voz():
             logger.info("ℹ️ Audio de voz ya enviado hoy. Saltando.")
+        else:
+            logger.info(f"ℹ️ Audio de voz se enviará a las 21:00 (hora actual: {hora_actual}:00).")
 
     if not args.dry_run:
         CACHE.flush()

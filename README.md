@@ -20,7 +20,7 @@
 ![Dashboard](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/dashboard_update.yml?branch=master&style=flat-square&label=Dashboard&logo=github)
 ![Tests](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/tests.yml?branch=master&style=flat-square&label=Tests&logo=github)
 
-Automated tech news ecosystem. Collects from **350+ sources** (158 YouTube channels, 55 RSS feeds, 11 web scraping sites, 82 HTML pages, 52 GitHub Topics, 5 GitHub Repos, 1 Product Hunt, 1 GitHub Collection), processes with **AI (Gemini)**, and distributes content across multiple channels. Also manages images, resources, programming challenges, and the blog dashboard for [jorbencas/blog](https://blog-jorbencas.vercel.app/).
+Automated tech news ecosystem. Collects from **350+ sources** (158 YouTube channels, 55 RSS feeds, 11 web scraping sites, 82 HTML pages, 52 GitHub Topics, 5 GitHub Repos, 1 Product Hunt, 1 GitHub Collection), processes with **AI (Gemini)**, and distributes content across multiple channels. 4 dual sources (MoureDev, Midudev, Carlos Azaustre, Xataka) extract from both YouTube AND web scraping. Also manages images, resources, programming challenges, and the blog dashboard for [jorbencas/blog](https://blog-jorbencas.vercel.app/).
 
 🚀 **[News Dashboard](http://jorbencasdownloaderdocument.surge.sh)**
 
@@ -30,9 +30,9 @@ Automated tech news ecosystem. Collects from **350+ sources** (158 YouTube chann
 
 This project runs **11 GitHub Actions workflows** that form a fully automated content pipeline:
 
-1. **Scrape** — news and tools from 350+ sources (158 YouTube channels, 55 RSS feeds, 11 web scraping, 82 HTML pages, 52 GitHub Topics)
-2. **Process** — AI summarization with Gemini, news grouped by source, automatic translation (web + YT), image generation, deduplication
-3. **Publish** — weekly recaps with source grouping, dashboard (SSR), email newsletter with video section, Telegram notifications with TTS
+1. **Scrape** — news and tools from 350+ sources (158 YouTube channels, 55 RSS feeds, 11 web scraping, 82 HTML pages, 52 GitHub Topics); 4 dual sources extract from both YouTube AND web scraping
+2. **Process** — AI summarization with Gemini, news grouped by source, automatic translation (only new items), image generation, deduplication, summaries persisted in JSON
+3. **Publish** — weekly recaps with source grouping, dashboard (SSR), email newsletter with video section, Telegram notifications (news only, no videos)
 4. **Manage** — resource lists, challenges, image optimization, link validation, SEO dedup
 
 ---
@@ -43,8 +43,9 @@ This project runs **11 GitHub Actions workflows** that form a fully automated co
 |----------|-------|---------|
 | YouTube channels | 158 | MoureDev, Fernando Herrera, The Engineer's Digest |
 | RSS feeds (quick) | 55 | TechCrunch, The Verge, Wired, Ars Technica, Google Blog, Vercel Blog |
-| Web scraping (quick) | 11 | Xataka, Anthropic, Ollama, Mistral, LangChain, Mozilla Hacks |
+| Web scraping (quick) | 11 | Anthropic, Ollama, Mistral, LangChain, Mozilla Hacks |
 | HTML scraping | 82 | Genbeta, Slashdot, Applesfera, El País Tecnología |
+| Dual (YT + Web) | 4 | MoureDev, Midudev, Carlos Azaustre, Xataka |
 | GitHub Topics | 52 | AI, LLM, Docker, Kubernetes, CSS, HTML, algorithms |
 | GitHub Collections | 1 | AI Tools |
 | GitHub Repos | 5 | OpenWiki, Meetily, AutoPR, PR-Agent, Code-to-Road |
@@ -65,29 +66,31 @@ RSS and web scraping sources with `quick: True` are scraped every hour:
 ```
 scripts/
 ├── scrapers/             🌐 Data collection from 350+ sources
-│   ├── scraper_base.py         YouTube, Web, ScraperPro extractors
-│   ├── scrape_news.py          RSS + web + YouTube news
+│   ├── scraper_base.py         YouTube, Web, ScraperPro extractors (dual source support)
+│   ├── scrape_news.py          RSS + web + YouTube news (standard tier includes dual sources)
 │   ├── scrape_tools.py         GitHub Trending + Product Hunt
 │   └── screenshot_helper.mjs   Playwright screenshot helper
 ├── publishers/           📤 Content generation & distribution
 │   ├── generate_weekly.py      AI recap + dashboard HTML (SSR)
 │   ├── manage_resources.py     Pagination, cleanup, reorder resources.mdx
 │   ├── merge_freefordev.py     Merge free-for-dev resources
-│   ├── send_email.py           Mailgun newsletter (grouped by source + videos)
-│   └── send_telegram.py        Telegram notifications with TTS
+│   ├── send_email.py           Mailgun newsletter (grouped by source + videos, smart translation)
+│   └── send_telegram.py        Telegram notifications (news only, smart translation + summaries)
 ├── tools/                🔧 Maintenance utilities
 │   ├── clean_news.py           Link validation
 │   ├── fix_images.py           Image pipeline (Unsplash + Gemini + WebP/AVIF)
 │   ├── hunt_challenges.py      AI challenge generation
 │   ├── make_cover_collage.py   Cover image collages
 │   ├── optimize.py             Dashboard image optimization
+│   ├── update_resource_format.py  Batch update ResourceCard to new format (headline, features, platform)
 │   └── downloadFile.py         (legacy) Original monolith
 ├── utils/                🧰 Shared modules
 │   ├── constants_downloadfile.py   Sources, templates, config
 │   ├── constants_retos.py          Challenge configuration
-│   ├── common.py                   JSON, URL, dedup, AI helpers
+│   ├── common.py                   JSON, URL, dedup, AI helpers (traducido flag support)
 │   ├── utils_retos.py              Challenge utilities
 │   └── cache.py                    Pluggable cache (FileCache + CacheManager)
+├── backfill_traducido.py    🔄 One-time migration (mark 6,612 items as translated)
 └── solutions/            💡 Challenge solutions database
     ├── solutions_db.py            Lookup + solution generation
     └── solutions_data.py          105+ curated solutions in 12 languages
@@ -134,6 +137,7 @@ All scripts run with `python -m` from the project root:
 | `python -m scripts.tools.hunt_challenges` | AI challenge generation |
 | `python -m scripts.tools.clean_news` | Link validation |
 | `python -m scripts.tools.optimize` | Dashboard image optimization |
+| `python scripts/backfill_traducido.py` | One-time: mark existing items as translated |
 
 ### ✅ Testing
 
@@ -167,7 +171,7 @@ All scripts run with `python -m` from the project root:
 │                        DATA COLLECTION                              │
 ├─────────────────────────────────────────────────────────────────────┤
 │  scrape_hourly   →  every hour  →  quick sources (55 RSS + 11 web) │
-│  scrape_6h       →  every 6h    →  standard scrape (82 HTML pages) │
+│  scrape_6h       →  every 6h    →  standard scrape (82 HTML + 4 dual sources) │
 │  daily_resources →  daily       →  tools (52 GitHub Topics + repos) │
 └─────────────────────────────────────────────────────────────────────┘
                                     ↓
@@ -205,10 +209,9 @@ All scripts run with `python -m` from the project root:
 The daily email newsletter is sent via Mailgun with:
 
 - **Grouped by source** — news organized by website (TechCrunch, The Verge, Xataka, etc.)
-- **Translated titles** — English titles auto-translated to Spanish via Gemini
-- **AI summaries** — each news item has a 3-4 line summary in Spanish
+- **Smart translation** — only translates new items (`traducido` flag), skips already-translated
+- **Persisted summaries** — AI summaries saved in JSON to avoid re-summarization
 - **Video section** — YouTube videos with thumbnail, channel, and duration
-- **SVG social icons** — GitHub, X/Twitter, GitLab, Email
 - **Responsive design** — works on mobile and desktop
 
 ### Source styles
@@ -231,11 +234,13 @@ Each source has a custom color and icon:
 
 ## 🤖 Telegram Notifications
 
+- **News only** — only sends news items, no video links
 - **Deduplication** — GitHub Actions Cache (`actions/cache@v4`) persists `telegram_sent.json` between runs
 - **TTL** — 7-day expiration for news items, 24-hour for voice messages
 - **Time filter** — only sends news from the last 24 hours
-- **TTS audio** — daily voice summary via Edge TTS (es-ES-AlvaroNeural)
-- **Translated titles** — Gemini translates English titles to Spanish
+- **TTS audio** — daily voice summary at 21:00 UTC with ALL news from the day (not just the 5 from current run)
+- **Smart translation** — skips already-translated items (`traducido` flag)
+- **Persisted summaries** — AI summaries saved in `noticias_historico.json` to avoid re-summarization
 
 ---
 
@@ -244,11 +249,13 @@ Each source has a custom color and icon:
 Deployed on Surge.sh. Fully **server-side rendered (SSR)** — Python generates a single `index.html` with all content pre-rendered (news, YouTube videos, GitHub ranking). JavaScript is minimal and only handles interactive filters, tabs, and search.
 
 **Recent UI improvements:**
+- **ResourceCard enhanced** — new `headline`, `features`, `platform` props for structured descriptions (backward compatible)
+- **Dual source chips** — sources with both YouTube and web (MoureDev, Midudev, Carlos Azaustre, Xataka) show filter chips in both News and Multimedia sections
 - **Separated channel filters** — news filter uses `news_items` (no YouTube), video filter uses `video_items` (no web links)
 - **Type badges** — `📄 Noticia`, `📡 RSS`, `🔧 Herramienta` in news cards; `🎬 Video`, `🩳 Short`, `🔴 Directo` in video cards
 - **Footer** — "Creado con ❤️ y sin ánimo de lucro por @jorbencas" + disclaimer (no hosted content)
 - **Dark theme** — news title gradient uses `#60a5fa → #3b82f6` in dark mode
-- **Translation** — English YouTube channel titles (`FUENTES_INGLES`) auto-translated via Gemini during weekly recap generation
+- **Translation** — only new items translated, `traducido` flag prevents re-translation
 
 Weekly recaps auto-archive old posts (>2 weeks) and enforce one-post-per-week SEO. News is grouped by source with deduplication before rendering.
 
@@ -273,12 +280,13 @@ Weekly recaps auto-archive old posts (>2 weeks) and enforce one-post-per-week SE
 
 117 pytest tests covering:
 - **Cache** — FileCache, CacheManager, expiration, TTL, flush cleanup
-- **Constants** — source configurations, email templates, challenge templates
+- **Constants** — source configurations (350+ sources), email templates, challenge templates
+- **Dual sources** — YouTube + web scraping extraction, chip rendering in both sections
 - **Email templates** — placeholders, source headers, video sections, button styles
 - **Image pipeline** — Unsplash fetching, Gemini banner gen, WebP/AVIF conversion
 - **Resources** — pagination, cleanup, reordering, card management, cross-file dedup, malformed card fix
 - **Solutions** — database lookup, multi-language generation, edge cases
-- **Utilities** — JSON helpers, URL validation, deduplication, AI integration
+- **Utilities** — JSON helpers, URL validation, deduplication, AI integration, `traducido` flag support
 
 ---
 

@@ -31,6 +31,9 @@ CARD_TEMPLATE = """\
   href="{url}"
   title="{name}"
   description="{desc}"
+  headline="{headline}"
+  features={features}
+  platform="{platform}"
 />"""
 
 SECTION_TEMPLATE = """\
@@ -50,10 +53,15 @@ def escape_component(text: str) -> str:
     return text.replace('"', "&quot;").replace("<", "&lt;").replace(">", "&gt;")
 
 
-def format_card(name: str, url: str, description: str) -> str:
+def format_card(name: str, url: str, description: str, headline: str = "", features: list | None = None, platform: str = "") -> str:
     name_esc = name.replace('"', "&quot;").replace("\n", " ").replace("\r", "")
     desc_esc = description.replace('"', "&quot;").replace("<", "&lt;").replace(">", "&gt;").replace("\n", " ").replace("\r", "")
-    return CARD_TEMPLATE.format(url=url, name=name_esc, desc=desc_esc)
+    headline_esc = headline.replace('"', "&quot;").replace("\n", " ").replace("\r", "")
+    platform_esc = platform.replace('"', "&quot;").replace("\n", " ").replace("\r", "")
+    if features is None:
+        features = []
+    features_str = "[" + ", ".join('"' + f.replace('"', "&quot;").replace("\n", " ") + '"' for f in features) + "]"
+    return CARD_TEMPLATE.format(url=url, name=name_esc, desc=desc_esc, headline=headline_esc, features=features_str, platform=platform_esc)
 
 
 def extract_existing_urls(text: str) -> set:
@@ -199,7 +207,7 @@ def merge_sections(sections: list[tuple[str, str]]) -> list[tuple[str, str]]:
             section_titles.setdefault(cat, "")
 
         card_pattern = re.compile(
-            r'<ResourceCard\n  href="[^"]+"\n  title="[^"]+"\n  description="[^"]*"\n/>',
+            r'<ResourceCard\n  href="[^"]+"\n  title="[^"]+"\n  description="[^"]*"(?:\n  [^/]*)?\n/>',
             re.DOTALL,
         )
         seen_urls = set(extract_card_urls("\n".join(merged.get(cat, []))))
@@ -273,7 +281,7 @@ def deduplicate_all_files(posts_dir: Path) -> int:
             else:
                 # Deduplicate cards across all files
                 card_pattern = re.compile(
-                    r'<ResourceCard\n  href="([^"]+)"\n  title="[^"]+"\n  description="[^"]*"\n/>',
+                    r'<ResourceCard\n  href="([^"]+)"\n  title="[^"]+"\n  description="[^"]*"(?:\n  [^/]*)?\n/>',
                     re.DOTALL,
                 )
                 cards = card_pattern.findall(part_content)
@@ -326,7 +334,7 @@ def translate_descriptions(posts_dir: Path):
     client = genai.Client(api_key=api_key)
 
     card_pattern = re.compile(
-        r'<ResourceCard\n  href="[^"]+"\n  title="[^"]+"\n  description="([^"]*)"\n/>',
+        r'<ResourceCard\n  href="[^"]+"\n  title="[^"]+"\n  description="([^"]*)"(?:\n  [^/]*)?\n/>',
         re.DOTALL,
     )
 
@@ -486,7 +494,7 @@ def fix_malformed_cards(content: str) -> str:
         return card
 
     return re.sub(
-        r'<ResourceCard\n  href="[^"]+"\n  title="[^"]+"\n  description="[^"]*"\n\s*/[ \t]*(?:\n|$)',
+        r'<ResourceCard\n  href="[^"]+"\n  title="[^"]+"\n  description="[^"]*"(?:\n  [^/]*)?\n\s*/[ \t]*(?:\n|$)',
         _fix_card,
         content,
     )
@@ -743,7 +751,7 @@ def main():
         print("\n🔍 Verificando enlaces de recursos...")
         for rf in existing_files:
             content = rf.read_text(encoding="utf-8")
-            card_pattern = re.compile(r'(<ResourceCard\n  href="[^"]+"\n  title="[^"]+"\n  description="[^"]*"\n/>)', re.DOTALL)
+            card_pattern = re.compile(r'(<ResourceCard\n  href="[^"]+"\n  title="[^"]+"\n  description="[^"]*"(?:\n  [^/]*)?\n/>)', re.DOTALL)
             cards = card_pattern.findall(content)
             removed = 0
             checked = 0
