@@ -653,7 +653,6 @@ EMAIL_TEMPLATE = """
             .stat-table {{ padding: 12px !important; }}
             .header-cell {{ padding: 28px 24px 16px 24px !important; }}
             .hide-mobile {{ display: none !important; }}
-            .social-cell {{ display: block !important; width: 100% !important; text-align: center !important; padding-top: 8px !important; }}
         }}
         @media (prefers-color-scheme: dark) {{
             .dark-bg {{ background-color: #1e293b !important; }}
@@ -764,39 +763,6 @@ EMAIL_TEMPLATE = """
                                     <td align="center" bgcolor="#3b82f6" style="border-radius: 8px; background: linear-gradient(135deg, #3b82f6, #2563eb);">
                                         <a href="http://jorbencasdownloaderdocument.surge.sh" target="_blank" style="font-size: 13px; font-weight: 700; color: #ffffff; text-decoration: none; display: inline-block; padding: 12px 24px; letter-spacing: 0.3px;">
                                             Abrir Dashboard →
-                                        </a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-
-                <!-- Social links -->
-                <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td style="padding: 0 40px 20px 40px; text-align: center;">
-                            <p style="margin: 0 0 12px 0; font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">Sígueme</p>
-                            <table border="0" cellpadding="0" cellspacing="0" align="center">
-                                <tr>
-                                    <td style="padding: 0 6px;">
-                                        <a href="https://github.com/jorbencas" target="_blank" style="display: inline-block; width: 36px; height: 36px; background: #0f172a; border-radius: 8px; text-align: center; line-height: 36px; text-decoration: none;">
-                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f8fafc" style="vertical-align: middle; margin-top: 8px;"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                                        </a>
-                                    </td>
-                                    <td style="padding: 0 6px;">
-                                        <a href="https://twitter.com/jorgevenkas" target="_blank" style="display: inline-block; width: 36px; height: 36px; background: #1d9bf0; border-radius: 8px; text-align: center; line-height: 36px; text-decoration: none;">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#ffffff" style="vertical-align: middle; margin-top: 8px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                                        </a>
-                                    </td>
-                                    <td style="padding: 0 6px;">
-                                        <a href="https://gitlab.com/jorbencas" target="_blank" style="display: inline-block; width: 36px; height: 36px; background: #e24329; border-radius: 8px; text-align: center; line-height: 36px; text-decoration: none;">
-                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffffff" style="vertical-align: middle; margin-top: 8px;"><path d="M23.955 13.587l-1.342-4.135-2.664-8.189a.455.455 0 00-.867 0L16.418 9.45H7.582L4.918 1.263a.455.455 0 00-.867 0L1.387 9.452.045 13.587c-.121.376.012.782.335 1.032l11.623 9.315c.166.131.393.131.559 0l11.623-9.315c.323-.25.456-.656.335-1.032zM12 22.048L2.456 14.38l.99-3.057 8.554-.003 8.553.003.99 3.057z"/></svg>
-                                        </a>
-                                    </td>
-                                    <td style="padding: 0 6px;">
-                                        <a href="mailto:jorgebeneytocastello@gmail.com" target="_blank" style="display: inline-block; width: 36px; height: 36px; background: #ea4335; border-radius: 8px; text-align: center; line-height: 36px; text-decoration: none;">
-                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffffff" style="vertical-align: middle; margin-top: 8px;"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
                                         </a>
                                     </td>
                                 </tr>
