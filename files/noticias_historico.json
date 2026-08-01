@@ -1,5 +1,57 @@
 [
     {
+        "titulo": "Por qué antes había muchísimas consolas y en la actualidad apenas hay competencia",
+        "enlace": "https://www.computerhoy.com/gaming/por-que-antes-habia-muchisimas-consolas-actualidad-apenas-hay-competencia_7020483_0.html",
+        "fuente": "ComputerHoy",
+        "tipo": "noticia",
+        "f": "01/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "01/08/2026",
+        "ts": "2026-08-01T08:21:46.849409"
+    },
+    {
+        "titulo": "Arturo Artom, emprendedor tecnológico: \"Si la inteligencia artificial puede responder, el talento humano residirá en formular preguntas\"",
+        "enlace": "https://www.computerhoy.com/tecnologia/arturo-artom-emprendedor-tecnologico-si-inteligencia-artificial-puede-responder-talento-humano-residira-formular-preguntas_6979630_0.html",
+        "fuente": "ComputerHoy",
+        "tipo": "noticia",
+        "f": "01/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "01/08/2026",
+        "ts": "2026-08-01T08:21:46.849955"
+    },
+    {
+        "titulo": "Cómo limitar el uso de la memoria RAM en Windows 11 sin necesidad de modificar el hardware",
+        "enlace": "https://www.computerhoy.com/software/como-limitar-uso-memoria-ram-windows-11-sin-necesidad-modificar-hardware_7010977_0.html",
+        "fuente": "ComputerHoy",
+        "tipo": "noticia",
+        "f": "01/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "01/08/2026",
+        "ts": "2026-08-01T08:21:46.850477"
+    },
+    {
+        "titulo": "El zumbido de un centro de datos de IA está volviendo locos a los vecinos: un vídeo nos lo muestra",
+        "enlace": "https://www.computerhoy.com/tecnologia/zumbido-un-centro-datos-ia-esta-volviendo-locos-los-vecinos-un-video-nos-muestra_7020616_0.html",
+        "fuente": "ComputerHoy",
+        "tipo": "noticia",
+        "f": "01/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "01/08/2026",
+        "ts": "2026-08-01T08:21:46.850994"
+    },
+    {
         "titulo": "Creíamos que \"como España no se vive en ningún sitio\". Este ranking mundial de calidad de vida no opina igual",
         "enlace": "https://www.xataka.com/magnet/creiamos-que-como-espana-no-se-vive-ningun-sitio-este-ranking-mundial-calidad-vida-no-opina-igual",
         "fuente": "Xataka",
