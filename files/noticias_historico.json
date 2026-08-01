@@ -1,5 +1,44 @@
 [
     {
+        "titulo": "AI coding agents can modernize research software but can't judge if the science is right",
+        "enlace": "https://the-decoder.com/ai-coding-agents-can-modernize-research-software-but-cant-judge-if-the-science-is-right/",
+        "fuente": "The Decoder",
+        "tipo": "noticia",
+        "f": "01/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "01/08/2026",
+        "ts": "2026-08-01T19:08:49.612314"
+    },
+    {
+        "titulo": "AMD Releases Instella-MoE-16B-A3B: A Fully Open Mixture-of-Experts LLM With 2.8B Active Parameters Trained On Instinct GPUs",
+        "enlace": "https://www.marktechpost.com/2026/08/01/amd-instella-moe-16b-a3b-fully-open-mixture-of-experts-llm/",
+        "fuente": "MarkTechPost",
+        "tipo": "noticia",
+        "f": "01/08",
+        "fecha_publicacion": "2026-08-01T12:01:42-07:00",
+        "badge": "Tech",
+        "categoria": "⚡ Hardware",
+        "imagen_url_original": "",
+        "fecha_real": "01/08/2026",
+        "ts": "2026-08-01T19:08:49.477445"
+    },
+    {
+        "titulo": "Accelerating Transformer Training with NVIDIA Transformer Engine, Fused Kernels, BF16, FP8, and GPU Benchmarking",
+        "enlace": "https://www.marktechpost.com/2026/08/01/accelerating-transformer-training-with-nvidia-transformer-engine-fused-kernels-bf16-fp8-and-gpu-benchmarking/",
+        "fuente": "MarkTechPost",
+        "tipo": "noticia",
+        "f": "01/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "⚡ Hardware",
+        "imagen_url_original": "",
+        "fecha_real": "01/08/2026",
+        "ts": "2026-08-01T19:08:49.480175"
+    },
+    {
         "titulo": "La ciencia lo tiene claro: una camiseta negra te puede dar menos calor que una blanca (si sabes cómo usarla)",
         "enlace": "https://www.xataka.com/medicina-y-salud/ciencia-tiene-claro-camiseta-negra-te-puede-dar-calor-que-blanca-sabes-como-usarla",
         "fuente": "Xataka",
