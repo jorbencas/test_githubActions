@@ -1,5 +1,44 @@
 [
     {
+        "titulo": "What building Shippy taught us about building agentsallenai•18 days ago•19",
+        "enlace": "https://huggingface.co/blog/allenai/shippy-tech-blog",
+        "fuente": "Hugging Face Blog",
+        "tipo": "noticia",
+        "f": "02/08",
+        "fecha_publicacion": "2026-07-15T17:29:41",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "https://cdn-avatars.huggingface.co/v1/production/uploads/652db071b62cf1f8463221e2/CxxwFiaomTa1MCX_B7-pT.png",
+        "fecha_real": "02/08/2026",
+        "ts": "2026-08-02T19:10:37.685409"
+    },
+    {
+        "titulo": "NVIDIA AI Releases Molt: A PyTorch-Native Agentic Reinforcement Learning Framework",
+        "enlace": "https://www.marktechpost.com/2026/08/01/nvidia-ai-releases-molt-a-pytorch-native-agentic-reinforcement-learning-framework/",
+        "fuente": "MarkTechPost",
+        "tipo": "noticia",
+        "f": "02/08",
+        "fecha_publicacion": "2026-08-01T23:21:26-07:00",
+        "badge": "Tech",
+        "categoria": "⚡ Hardware",
+        "imagen_url_original": "",
+        "fecha_real": "02/08/2026",
+        "ts": "2026-08-02T19:10:57.066220"
+    },
+    {
+        "titulo": "End-to-End Forecasting with TimesFM 2.5: Backtesting, Covariates, Anomaly Detection, and Scalable Colab Deployment",
+        "enlace": "https://www.marktechpost.com/2026/08/01/end-to-end-forecasting-with-timesfm-2-5-backtesting-covariates-anomaly-detection-and-scalable-colab-deployment/",
+        "fuente": "MarkTechPost",
+        "tipo": "noticia",
+        "f": "02/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "02/08/2026",
+        "ts": "2026-08-02T19:10:57.068367"
+    },
+    {
         "titulo": "Ya sé cuál es la mejor cámara gimbal: OSMO POCKET 4P vs LUNA ULTRA",
         "enlace": "https://www.youtube.com/watch?v=seulq7UEuVo",
         "fuente": "Xataka",
