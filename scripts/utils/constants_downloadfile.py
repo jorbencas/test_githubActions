@@ -460,6 +460,18 @@ FUENTES = {
     "MarkTechPost": {"url": "https://www.marktechpost.com/"},
     "LinkedIn Engineering": {"url": "https://engineering.linkedin.com/blog", "selector": "article h3 a"},
     "Facebook Engineering": {"url": "https://engineering.fb.com/", "selector": "article h3 a"},
+    # ── Noticias IA: herramientas, modelos, comparativas ──
+    "AI Bytes": {"url": "https://aibytes.blog/", "selector": "article h2 a, h2 a", "quick": True},
+    "ToolChase": {"url": "https://toolchase.com/blog/", "selector": "article h2 a, h3 a", "quick": True},
+    "ThePlanetTools": {"url": "https://theplanettools.ai/", "selector": "article h2 a, h3 a", "quick": True},
+    "CompareThe.ai": {"url": "https://www.comparethe.ai/blog", "selector": "article h2 a, h3 a", "quick": True},
+    "YourAIChoice": {"url": "https://youraichoice.com/", "selector": "article h2 a, h3 a", "quick": True},
+    "DeeperInsights": {"url": "https://deeperinsights.com/ai-review/", "selector": "article h2 a, h3 a", "quick": True},
+    "AI Weekly": {"url": "https://aiweekly.co/", "selector": "article h2 a, h3 a", "quick": True},
+    "NeelsWorld": {"url": "https://neelsworld.in/", "selector": "article h2 a, h3 a", "quick": True},
+    "CleverAI": {"url": "https://cleverai.app/es/blog", "selector": "article h2 a, h3 a", "quick": True},
+    "IA News": {"url": "https://ia-news.es/", "selector": "article h2 a, h3 a", "quick": True},
+    "DonWeb IA": {"url": "https://blog.donweb.com/ia-todos-lados-2026/", "selector": "article h2 a, h3 a", "quick": True},
 
     # ── Fuentes RSS (lectores XML) [quick: True → tier light] ──
     "GitHub Engineering": {"rss": "https://github.blog/engineering/feed/", "quick": True},
@@ -534,6 +546,13 @@ FUENTES = {
     # ── Fuentes de herramientas ──
     "GitHub Trending": {"url": "https://github.com/trending", "tipo": "herramienta", "subtipo": "github"},
     "Product Hunt": {"url": "https://www.producthunt.com/", "tipo": "herramienta", "subtipo": "producthunt"},
+    # ── Noticias IA: RSS feeds ──
+    "The Decoder RSS": {"rss": "https://the-decoder.com/feed/", "quick": True},
+    "MarkTechPost RSS": {"rss": "https://www.marktechpost.com/feed/", "quick": True},
+    "VentureBeat AI RSS": {"rss": "https://venturebeat.com/category/ai/feed/", "quick": True},
+    "AI News": {"rss": "https://www.artificialintelligence-news.com/feed/", "quick": True},
+    "Towards AI": {"rss": "https://pub.towardsai.net/feed", "quick": True},
+    "Analytics India Magazine": {"rss": "https://analyticsindiamag.com/feed/", "quick": True},
 }
 
 HTML_TEMPLATE = """<!DOCTYPE html>

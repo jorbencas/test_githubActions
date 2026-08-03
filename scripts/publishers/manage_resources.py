@@ -508,7 +508,7 @@ def fix_malformed_cards(content: str) -> str:
         return card
 
     return re.sub(
-        r'<ResourceCard\b[^>]*?/\s*(?:\n|$)',
+        r'<ResourceCard\b[\s\S]*?/\s*(?:\n|$)',
         _fix_card,
         content,
     )
