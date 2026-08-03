@@ -467,6 +467,13 @@ class ScraperPro:
                     text = await response.text()
                 logger.info(f"📡 Extrayendo RSS desde: {nombre} ({target})")
                 results = self.web_extractor.extraer_rss(text, nombre)
+                if not results and URL_KEY in info:
+                    logger.info(f"⚠️ RSS vacío para {nombre}, intentando web scraping...")
+                    fallback_url = info[URL_KEY]
+                    async with session.get(fallback_url, timeout=20, headers=self.yt_extractor.headers) as response:
+                        if response.status == 200:
+                            text = await response.text()
+                            results = self.web_extractor.extraer_noticias(text, nombre, fallback_url, info)
             elif YT_KEY in info and URL_KEY in info:
                 yt_url = info[YT_KEY]
                 web_url = info[URL_KEY]

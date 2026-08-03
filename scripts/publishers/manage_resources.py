@@ -207,7 +207,7 @@ def merge_sections(sections: list[tuple[str, str]]) -> list[tuple[str, str]]:
             section_titles.setdefault(cat, "")
 
         card_pattern = re.compile(
-            r'<ResourceCard\n  href="[^"]+"\n  title="[^"]+"\n  description="[^"]*"(?:\n  [^/]*)?\n/>',
+            r'<ResourceCard\b[^>]*?/>',
             re.DOTALL,
         )
         seen_urls = set(extract_card_urls("\n".join(merged.get(cat, []))))
@@ -281,16 +281,21 @@ def deduplicate_all_files(posts_dir: Path) -> int:
             else:
                 # Deduplicate cards across all files
                 card_pattern = re.compile(
-                    r'<ResourceCard\n  href="([^"]+)"\n  title="[^"]+"\n  description="[^"]*"(?:\n  [^/]*)?\n/>',
+                    r'<ResourceCard\b[^>]*?/>',
                     re.DOTALL,
                 )
+                url_pattern = re.compile(r'href="([^"]+)"')
                 cards = card_pattern.findall(part_content)
                 unique_cards = []
                 for card_match in card_pattern.finditer(part_content):
-                    url = card_match.group(1)
-                    if url not in global_seen_urls:
+                    card_text = card_match.group(0)
+                    url_match = url_pattern.search(card_text)
+                    url = url_match.group(1) if url_match else ""
+                    if url and url not in global_seen_urls:
                         global_seen_urls.add(url)
-                        unique_cards.append(card_match.group(0))
+                        unique_cards.append(card_text)
+                    elif not url:
+                        unique_cards.append(card_text)
                     else:
                         removed_in_file += 1
 
@@ -334,9 +339,10 @@ def translate_descriptions(posts_dir: Path):
     client = genai.Client(api_key=api_key)
 
     card_pattern = re.compile(
-        r'<ResourceCard\n  href="[^"]+"\n  title="[^"]+"\n  description="([^"]*)"(?:\n  [^/]*)?\n/>',
+        r'<ResourceCard\b[^>]*?/>',
         re.DOTALL,
     )
+    desc_pattern = re.compile(r'description="([^"]*)"')
 
     # Heuristic: descriptions with >=60% ASCII letters likely need translation
     def needs_translation(desc: str) -> bool:
@@ -353,7 +359,15 @@ def translate_descriptions(posts_dir: Path):
     for f in existing:
         content = f.read_text(encoding="utf-8")
         matches = list(card_pattern.finditer(content))
-        to_translate = [(m.start(1), m.end(1), m.group(1)) for m in matches if needs_translation(m.group(1))]
+        to_translate = []
+        for m in matches:
+            card_text = m.group(0)
+            desc_m = desc_pattern.search(card_text)
+            if desc_m and needs_translation(desc_m.group(1)):
+                # Calculate offset within the card for the description
+                desc_start = m.start() + desc_m.start(1)
+                desc_end = m.start() + desc_m.end(1)
+                to_translate.append((desc_start, desc_end, desc_m.group(1)))
 
         if not to_translate:
             continue
@@ -494,7 +508,7 @@ def fix_malformed_cards(content: str) -> str:
         return card
 
     return re.sub(
-        r'<ResourceCard\n  href="[^"]+"\n  title="[^"]+"\n  description="[^"]*"(?:\n  [^/]*)?\n\s*/[ \t]*(?:\n|$)',
+        r'<ResourceCard\b[^>]*?/\s*(?:\n|$)',
         _fix_card,
         content,
     )
@@ -751,7 +765,7 @@ def main():
         print("\n🔍 Verificando enlaces de recursos...")
         for rf in existing_files:
             content = rf.read_text(encoding="utf-8")
-            card_pattern = re.compile(r'(<ResourceCard\n  href="[^"]+"\n  title="[^"]+"\n  description="[^"]*"(?:\n  [^/]*)?\n/>)', re.DOTALL)
+            card_pattern = re.compile(r'(<ResourceCard\b[^>]*?/>)', re.DOTALL)
             cards = card_pattern.findall(content)
             removed = 0
             checked = 0
@@ -832,7 +846,8 @@ def main():
             while m:
                 if m.group(1) == SECTION_ID:
                     _, sec_end = find_section_bounds(active_content, m.start())
-                    before = active_content[:sec_end - 22].rstrip('\n')
+                    close_tag_pos = active_content.rfind("</ResourceCategory>", m.start(), sec_end)
+                    before = active_content[:close_tag_pos].rstrip('\n')
                     after = active_content[sec_end:]
                     active_content = before + "\n\n" + cards_block + "\n\n</ResourceCategory>" + after
                     break

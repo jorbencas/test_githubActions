@@ -27,6 +27,9 @@ jobs:
       - name: 🔧 Scrape tools (GitHub Trending + Product Hunt)
         run: python -m scripts.scrapers.scrape_tools
 
+      - name: 🌐 Scrape Public APIs (publicapis.io)
+        run: python -m scripts.scrapers.scrape_publicapis
+
       - name: 📂 Checkout blog repo
         uses: actions/checkout@v3
         with:
@@ -35,10 +38,23 @@ jobs:
           token: ${{ secrets.BLOG_TOKEN }}
           fetch-depth: 1
 
+      - name: 📊 Fusionar datos de herramientas + APIs
+        run: |
+          python -c "
+          import json
+          from pathlib import Path
+          h = json.loads(Path('files/herramientas.json').read_text()) if Path('files/herramientas.json').exists() else []
+          p = json.loads(Path('files/publicapis_apis.json').read_text()) if Path('files/publicapis_apis.json').exists() else []
+          seen = {r['enlace'] for r in h}
+          merged = h + [r for r in p if r['enlace'] not in seen]
+          Path('files/herramientas_merged.json').write_text(json.dumps(merged, indent=4, ensure_ascii=False))
+          print(f'Fusionadas {len(merged)} herramientas ({len(h)} originales + {len(merged)-len(h)} de PublicAPIs)')
+          "
+
       - name: 📊 Gestionar recursos (paginación + nuevas herramientas)
         id: resources_updated
         run: |
-          python -m scripts.publishers.manage_resources --blog-path blog --tools-file files/herramientas.json --max-cards 500 --fix-spacing --dedup \
+          python -m scripts.publishers.manage_resources --blog-path blog --tools-file files/herramientas_merged.json --max-cards 500 --fix-spacing --dedup \
             && echo "updated=yes" >> $GITHUB_OUTPUT \
             || echo "updated=no" >> $GITHUB_OUTPUT
 
@@ -59,6 +75,6 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add files/herramientas.json
-          git diff --quiet && git diff --staged --quiet || git commit -m "[bot] update tools data"
+          git add files/herramientas.json files/publicapis_apis.json files/herramientas_merged.json
+          git diff --quiet && git diff --staged --quiet || git commit -m "[bot] update tools + publicapis data"
           git push origin master

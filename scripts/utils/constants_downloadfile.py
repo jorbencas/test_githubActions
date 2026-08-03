@@ -491,6 +491,8 @@ FUENTES = {
     "01.AI News": {"url": "https://01.ai/", "selector": ".news-item a, a[href*='news']", "tipo": "noticia", "quick": True},
     "THUDM ChatGLM": {"rss": "https://github.com/zai-org/ChatGLM3/releases.atom", "quick": True},
     # ── Noticias tech y general ──
+    "Business Insider Big Tech": {"rss": "https://www.businessinsider.es/rss/big-tech/", "url": "https://www.businessinsider.es/big-tech/", "selector": "article h2 a", "quick": True},
+    "Business Insider Tecnología": {"rss": "https://www.businessinsider.es/rss/tecnologia/", "url": "https://www.businessinsider.es/tecnologia/", "selector": "article h2 a", "quick": True},
     "Hipertextual": {"rss": "https://hipertextual.com/feed/", "quick": True},
     "ADSL Zone": {"rss": "https://www.adslzone.net/feed", "quick": True},
     "MuyComputer": {"rss": "https://www.muycomputer.com/feed/", "quick": True},
