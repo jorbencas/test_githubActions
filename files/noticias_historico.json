@@ -1,5 +1,32 @@
 [
     {
+        "titulo": "FeyNoBg: Un Modelo SOTA para la Eliminación de Fondo",
+        "enlace": "https://huggingface.co/blog/feyninc/feynobg",
+        "fuente": "Hugging Face Blog",
+        "tipo": "noticia",
+        "f": "03/08",
+        "fecha_publicacion": "2026-07-27T17:04:03",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "https://cdn-avatars.huggingface.co/v1/production/uploads/6067760d5a275b0e26010e6b/onWKgqCJEj5cc9sZ4h9IK.png",
+        "fecha_real": "03/08/2026",
+        "ts": "2026-08-03T02:50:58.766937",
+        "traducido": true
+    },
+    {
+        "titulo": "AISPA: User-Centric System Prompt Auditing for Large Language Model Applications",
+        "enlace": "https://huggingface.co/papers/2607.28617",
+        "fuente": "HuggingFace Papers",
+        "tipo": "noticia",
+        "f": "03/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "https://cdn-avatars.huggingface.co/v1/production/uploads/68e396f2b5bb631e9b2fac9a/vJI0POlzGMXL2878t1vz2.jpeg",
+        "fecha_real": "03/08/2026",
+        "ts": "2026-08-03T02:51:19.189533"
+    },
+    {
         "titulo": "Show HN: Shitty – terminal rápido. Inseguro en memoria y más rápido que el tuyo",
         "enlace": "https://github.com/pg83/shitty",
         "fuente": "Hacker News",
