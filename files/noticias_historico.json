@@ -1,5 +1,44 @@
 [
     {
+        "titulo": "Primeros dispositivos de OpenAI - Todo lo que creemos saber sobre ellos",
+        "enlace": "https://www.applesfera.com/nuevo/dispositivos-openai-informacion",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "f": "03/08",
+        "fecha_publicacion": "2026-08-03T17:01:44Z",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "03/08/2026",
+        "ts": "2026-08-03T19:37:45.983372"
+    },
+    {
+        "titulo": "Este hacker demuestra en una conferencia de ciberseguridad por qué hay que apagar el Bluetooth del iPhone. Yo discrepo",
+        "enlace": "https://www.applesfera.com/seguridad/este-hacker-demuestra-conferencia-ciberseguridad-que-hay-que-apagar-bluetooth-iphone-yo-discrepo",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "f": "03/08",
+        "fecha_publicacion": "2026-08-03T16:01:44Z",
+        "badge": "Tech",
+        "categoria": "🔒 Ciberseguridad",
+        "imagen_url_original": "",
+        "fecha_real": "03/08/2026",
+        "ts": "2026-08-03T19:37:45.983498"
+    },
+    {
+        "titulo": "From weeks to minutes: How Formula 1® uses agentic AI on AWS to accelerate data operations",
+        "enlace": "https://aws.amazon.com/blogs/machine-learning/from-weeks-to-minutes-how-formula-1-uses-agentic-ai-on-aws-to-accelerate-data-operations/",
+        "fuente": "AWS ML",
+        "tipo": "noticia",
+        "f": "03/08",
+        "fecha_publicacion": "2026-08-03T09:24:15-08:00",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "03/08/2026",
+        "ts": "2026-08-03T19:37:54.994271"
+    },
+    {
         "titulo": "El 99% no es ni parecido al 100%: por qué un eclipse parcial casi total no se parece en nada a uno total",
         "enlace": "https://www.xataka.com/espacio/99-no-parecido-al-100-que-eclipse-parcial-casi-total-no-se-parece-nada-a-uno-total",
         "fuente": "Xataka",
