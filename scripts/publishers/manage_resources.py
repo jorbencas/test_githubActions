@@ -60,7 +60,7 @@ def format_card(name: str, url: str, description: str, headline: str = "", featu
     platform_esc = platform.replace('"', "&quot;").replace("\n", " ").replace("\r", "")
     if features is None:
         features = []
-    features_str = "[" + ", ".join('"' + f.replace('"', "&quot;").replace("\n", " ") + '"' for f in features) + "]"
+    features_str = "{[" + ", ".join('"' + f.replace('"', "&quot;").replace("\n", " ") + '"' for f in features) + "]}"
     return CARD_TEMPLATE.format(url=url, name=name_esc, desc=desc_esc, headline=headline_esc, features=features_str, platform=platform_esc)
 
 
@@ -315,6 +315,7 @@ def deduplicate_all_files(posts_dir: Path) -> int:
         if removed_in_file > 0:
             new_content = "\n\n".join(new_parts) + "\n"
             new_content = ensure_imports(new_content)
+            new_content = fix_features_syntax(new_content)
             f.write_text(new_content, encoding="utf-8")
             print(f"   {f.name}: {removed_in_file} tarjetas duplicadas eliminadas")
             total_removed += removed_in_file
@@ -514,6 +515,11 @@ def fix_malformed_cards(content: str) -> str:
     )
 
 
+def fix_features_syntax(content: str) -> str:
+    """Fix features=[] to features={[]}. MDX requires {} for JS expressions."""
+    return re.sub(r'features=\[\]', 'features={[]}', content)
+
+
 def fix_all_files(posts_dir: Path):
     """Fix spacing issues in all resources*.mdx files."""
     fixed_count = 0
@@ -521,6 +527,7 @@ def fix_all_files(posts_dir: Path):
         content = rf.read_text(encoding="utf-8")
         fixed = fix_card_spacing(content)
         fixed = fix_malformed_cards(fixed)
+        fixed = fix_features_syntax(fixed)
         if not fixed.endswith("\n"):
             fixed += "\n"
         if fixed != content:
@@ -569,6 +576,11 @@ def validate_mdx(content: str, filename: str) -> list[str]:
     closes = len(re.findall(r'</ResourceCategory>', content))
     if opens != closes:
         errors.append(f"  {filename} — <ResourceCategory> desbalanceado: {opens} aperturas, {closes} cierres")
+
+    # Check for features=[] (should be features={[]})
+    bad_features = len(re.findall(r'features=\[\]', content))
+    if bad_features:
+        errors.append(f"  {filename} — {bad_features} features=[] deben ser features={{[]}}")
 
     return errors
 
@@ -725,6 +737,15 @@ def main():
         if updated != content:
             rf.write_text(updated, encoding="utf-8")
             print(f"   📥 Añadidos imports a {rf.name}")
+
+    # Fix features=[] → features={[]} (always run)
+    for rf in existing_files:
+        content = rf.read_text(encoding="utf-8")
+        fixed = fix_features_syntax(content)
+        if fixed != content:
+            rf.write_text(fixed, encoding="utf-8")
+            count = content.count('features=[]')
+            print(f"   🔧 {rf.name}: {count} features=[] → features={{[]}}")
 
     # Ensure "recursos" tag
     for rf in existing_files:

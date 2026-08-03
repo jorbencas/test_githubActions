@@ -91,6 +91,89 @@ def _escape_html(text: str) -> str:
     return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;").replace("'", "&#39;")
 
 
+def _detectar_efemerides(dt: datetime) -> list[str]:
+    """Detecta efemérides y festividades cercanas a la fecha dada."""
+    efemerides = []
+    dia, mes = dt.day, dt.month
+
+    # Festividades fijas
+    FESTIVIDADES = {
+        (1, 1): "Año Nuevo",
+        (1, 6): "Día de Reyes",
+        (2, 14): "San Valentín",
+        (3, 8): "Día de la Mujer",
+        (4, 23): "Día del Libro",
+        (5, 1): "Día del Trabajo",
+        (5, 15): "Día de la Madre",
+        (6, 23): "Noche de San Juan",
+        (6, 24): "San Juan",
+        (7, 25): "Santiago Apostol",
+        (8, 15): "Asunción de la Virgen",
+        (10, 12): "Hispanidad",
+        (10, 31): "Halloween",
+        (11, 1): "Día de Todos los Santos",
+        (11, 9): "Día de la Innovación",
+        (12, 6): "Día de la Constitución",
+        (12, 22): "Inicio de Navidades",
+        (12, 24): "Nochebuena",
+        (12, 25): "Navidad",
+        (12, 28): "Día de los Santos Inocentes",
+        (12, 31): "Fin de Año",
+    }
+
+    if (mes, dia) in FESTIVIDADES:
+        efemerides.append(FESTIVIDADES[(mes, dia)])
+
+    # Buscar ±3 días para contextos cercanos
+    from datetime import timedelta
+    for offset in [-3, -2, -1, 1, 2, 3]:
+        d = dt + timedelta(days=offset)
+        key = (d.month, d.day)
+        if key in FESTIVIDADES:
+            if offset > 0:
+                efemerides.append(f"viene {FESTIVIDADES[key]} en {abs(offset)} días")
+            else:
+                efemerides.append(f"acaba de pasar {FESTIVIDADES[key]}")
+
+    # Eventos tech conocidos
+    # CES: ~8-12 enero
+    if mes == 1 and 5 <= dia <= 15:
+        efemerides.append("CES en Las Vegas")
+    # MWC: ~24-27 febrero
+    if mes == 2 and 20 <= dia <= 28:
+        efemerides.append("MWC en Barcelona")
+    # Google I/O: ~mayo
+    if mes == 5 and 10 <= dia <= 25:
+        efemerides.append("Google I/O")
+    # WWDC Apple: ~junio
+    if mes == 6 and 1 <= dia <= 15:
+        efemerides.append("WWDC de Apple")
+    # Black Friday: ~viernes anterior a noviembre
+    if mes == 11 and 20 <= dia <= 30:
+        efemerides.append("Black Friday")
+    # Cyber Monday
+    if mes == 11 and dia <= 5:
+        efemerides.append("Cyber Monday")
+
+    return efemerides
+
+
+def _build_semana_info(dt: datetime) -> tuple[str, str]:
+    """Devuelve (fecha_actual, semana_info) para el prompt."""
+    year, week, _ = dt.isocalendar()
+    meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio",
+             "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+    dias = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
+    fecha_str = f"{dias[dt.weekday()]} {dt.day} de {meses[dt.month-1]} de {dt.year}"
+
+    efemerides = _detectar_efemerides(dt)
+    partes = [f"Semana {week} del {year}"]
+    if efemerides:
+        partes.append(f"Efemérides/contexto: {', '.join(efemerides)}")
+
+    return fecha_str, " | ".join(partes)
+
+
 MESES_ES = {
     1: "enero", 2: "febrero", 3: "marzo", 4: "abril",
     5: "mayo", 6: "junio", 7: "julio", 8: "agosto",
@@ -427,6 +510,9 @@ async def generar_recap(noticias_web, client, blog_path: str | None = None) -> s
             texto_agrupado.append(f"  [{n[FUENTE_KEY]}] {n[TITULO_KEY]} (origen: {origen})")
     texto_noticias = "\n".join(texto_agrupado)
 
+    # ── Contexto de fecha para la IA ──
+    fecha_actual, semana_info = _build_semana_info(ahora)
+
     # ── Llamar a la IA ──
     data_ia = await obtener_recap_semanal_ia(
         noticias_blog, client,
@@ -435,6 +521,8 @@ async def generar_recap(noticias_web, client, blog_path: str | None = None) -> s
         texto_noticias=texto_noticias,
         fuentes_top=fuentes_top,
         categorias_ordenadas=categorias_ordenadas,
+        fecha_actual=fecha_actual,
+        semana_info=semana_info,
     )
     if not data_ia:
         return None
@@ -446,14 +534,14 @@ async def generar_recap(noticias_web, client, blog_path: str | None = None) -> s
     if isinstance(noticias_raw, list):
         bloque_noticias = "\n\n".join(
             f'### {i+1}. {n.get("titulo", "")}\n**El suceso:** {n.get("suceso", "")}\n**Impacto:** {n.get("impacto", "")}'
-            for i, n in enumerate(noticias_raw[:5])
+            for i, n in enumerate(noticias_raw[:10])
         )
     else:
         bloque_noticias = str(noticias_raw)
 
     tldr_raw = data_ia.get("tldr", [])
     if isinstance(tldr_raw, list):
-        conclusion_tldr = "\n".join(f"- {p}" for p in tldr_raw[:5])
+        conclusion_tldr = "\n".join(f"- {p}" for p in tldr_raw[:6])
     else:
         conclusion_tldr = str(tldr_raw)
 
@@ -470,6 +558,22 @@ async def generar_recap(noticias_web, client, blog_path: str | None = None) -> s
         f"  - {cat}: **{cnt}** noticias ({cnt * 100 // total_noticias}%)"
         for cat, cnt in [(c, len(i)) for c, i in categorias_ordenadas]
     )
+
+    # Sección de categorías desde IA
+    cat_resumen = data_ia.get("categorias_resumen", {})
+    if cat_resumen:
+        partes_cat = []
+        for cat, resumen in cat_resumen.items():
+            if resumen and resumen.strip():
+                partes_cat.append(f"### {cat}\n\n{resumen}")
+        categorias_seccion = "\n\n".join(partes_cat) if partes_cat else "_No hay resumen por categorías._"
+    else:
+        # Fallback: generar desde datos locales
+        partes_cat = []
+        for cat, items in categorias_ordenadas[:6]:
+            titulares = ", ".join(n[TITULO_KEY][:60] for n in items[:3])
+            partes_cat.append(f"### {cat}\n\n{len(items)} noticias. Destacados: {titulares}")
+        categorias_seccion = "\n\n".join(partes_cat) if partes_cat else "_No hay categorías esta semana._"
 
     # Agrupar noticias por fuente (sin duplicados)
     from collections import defaultdict, OrderedDict
@@ -508,16 +612,30 @@ async def generar_recap(noticias_web, client, blog_path: str | None = None) -> s
     else:
         videos_seccion = "_No hay videos destacados esta semana._"
 
+    # Tags: asegurar mínimo 8, merge IA + fuentes_top
+    tags_ia = data_ia.get("tags", ["tech"])
+    tags_fuentes = [f.lower().replace(" ", "-") for f, _ in fuentes_top[:2]]
+    tags_merged = list(dict.fromkeys(["tech", "weekly-recap"] + tags_ia + tags_fuentes))
+    if len(tags_merged) < 8:
+        tags_extra = ["programacion", "desarrollo-web", "open-source", "herramientas", "inteligencia-artificial"]
+        for t in tags_extra:
+            if t not in tags_merged:
+                tags_merged.append(t)
+            if len(tags_merged) >= 10:
+                break
+
     final_md = inspect.cleandoc(MD_TEMPLATE).format(
         titulo=f"Weekly Tech Recap W{week}",
         description=introduccion[:150].replace('"', "'"),
         fecha_iso=fecha_iso,
         author="Jorge Beneyto Castelló",
         ruta_imagen=img_recap or FALLBACK_GITHUB_IMAGE,
-        tags=json.dumps(data_ia.get("tags", ["tech"])),
+        tags=json.dumps(tags_merged[:10]),
         slug_name=semana_slug,
         introduccion=introduccion,
+        stats_categorias=stats_categorias,
         bloque_noticias=bloque_noticias,
+        categorias_seccion=categorias_seccion,
         tiempo_lectura=tiempo_lectura,
         noticias_por_fuente=noticias_por_fuente,
         videos_seccion=videos_seccion,

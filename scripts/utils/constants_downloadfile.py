@@ -835,7 +835,23 @@ categories: ["tech", "weekly-recap"]
 
 {introduccion}
 
+---
+
+## 📊 La semana en números
+
+{stats_categorias}
+
+---
+
+## 🔥 Lo más destacado
+
 {bloque_noticias}
+
+---
+
+## 🗂️ Por categorías
+
+{categorias_seccion}
 
 ---
 
@@ -856,7 +872,6 @@ categories: ["tech", "weekly-recap"]
 :::tip
 **[{repo_name}]({repo_url})** — {repo_desc}
 :::
-
 
 ---
 
@@ -923,16 +938,26 @@ Responde SOLO con el resumen, sin introducciones ni etiquetas. (máx 500 caracte
 
 PROMPT_RECAP_SEMANAL = """Eres el editor senior de "Tech Pulse", una newsletter semanal de tecnología.
 Tu estilo: directo, analítico, sin hype vacío. Como Xataka mezclado con The Verge en español.
+Ecribes como si le hablaras a un colega programador en una cafetería. Natural, sin preamblos.
 
 MISSION: Analiza las noticias de la semana y genera un RECAP SEMANAL que un programador quiera leer.
 
+═══ CONTEXTO ═══
+Fecha actual: {fecha_actual}
+Semana: {semana_info}
+
 ═══ NORMAS DE ESTILO (OBLIGATORIO) ═══
-- Voz directa: nada de "En el cambiante mundo digital..." o "La era de la IA transforma..."
+- Lenguaje HUMANO: como si se lo contaras a un amigo. Nada de frases de comunicado de prensa
+- NUNCA uses: "En el cambiante mundo digital", "La era de la IA transforma", "En un paso revolucionario"
+- Usa: "esto es lo que ha pasado", "lo que viene es interesante porque...", "aquí va lo gordo"
 - Asume que el lector ya sabe qué es OpenAI, Docker o Kubernetes
 - Si una noticia es solo marketing, dilo ("mucho ruido, pocas nueces")
 - Sé específico: nombres, versiones, cifras concretas
 - Conecta temas: si OpenAI y Google sacan algo similar, agrúpalos
-- La introducción debe enganchar en la primera frase
+- La introducción debe ser ÚNICA cada semana. NO repitas estructura de semanas anteriores
+- Si hay una efeméride, festividad o evento especial esta semana, menciónalo de forma natural en la introducción (ej: "Entre Navidades y el CES...", "Para cerrar el año...", "Semana de descanso pero la IA no para...")
+- La primera frase debe enganchar: puede ser una pregunta, un dato impactante, o una observación directa
+- Varía el tono: una semana puede ser más serio, otra más casual. NO seas monótono
 
 ═══ NOTICIAS DE LA SEMANA (AGRUPADAS POR CATEGORÍA) ═══
 
@@ -947,29 +972,50 @@ Total noticias RSS: {total_rss}
 Genera un JSON con esta estructura EXACTA:
 
 {{
-  "introduccion": "Párrafo de 4-6 líneas. Primera frase: tema principal de la semana. Luego conecta 2-3 tendencias clave con sus categorías. Tono analítico, no sensacionalista. (max 700 chars)",
+  "introduccion": "Párrafo de 4-6 líneas. Tono HUMANO y natural. Primera frase: gancho único (pregunta, dato impactante, o referencia al momento del año si aplica). Luego conecta 2-3 tendencias clave. Si hay efeméride/festividad esta semana, inclúyela de forma orgánica. NUNCA empieces con 'Esta semana en tecnología...' (max 700 chars)",
   "noticias_destacadas": [
     {{
       "titulo": "Título descriptivo + categoría entre paréntesis (ej: 'GPT-5: OpenAI supera expectativas (🤖 IA)')",
-      "suceso": "Qué ocurrió con datos concretos: nombres, versiones, cifras. 2-3 líneas. (max 300 chars)",
-      "impacto": "Por qué importa AHORA. Conecta con tendencias del sector. 2-3 líneas. (max 300 chars)"
+      "suceso": "Qué ocurrió con datos concretos: nombres, versiones, cifras. 2-3 líneas. Tono conversacional. (max 300 chars)",
+      "impacto": "Por qué importa AHORA. Conecta con tendencias del sector. Como si se lo explicaras a un colega. (max 300 chars)",
+      "categoria": "🤖 IA" o "💻 Programación" o "🔒 Seguridad" o "📊 Negocios" o "🎓 General" o "💡 Otro"
     }}
   ],
   "repo": {{
     "nombre": "Nombre del repo/herramienta más interesante de la semana",
     "url": "URL del repo (de preferencia uno de las noticias o de GitHub Trending)",
-    "desc": "Qué problema resuelve y por qué debería probarlo. 1-2 frases."
+    "desc": "Qué problema resuelve y por qué debería probarlo. 1-2 frases, tono recomendación de colega."
   }},
   "tldr": [
     "Punto 1: tema principal + contexto (max 160 chars)",
     "Punto 2: segunda tendencia + dato concreto (max 160 chars)",
     "Punto 3: herramienta/repo destacado (max 160 chars)",
-    "Punto 4: preview de lo que viene (max 160 chars)"
+    "Punto 4: seguridad/privacidad + qué hacer (max 160 chars)",
+    "Punto 5: negocio/inversión + cifra (max 160 chars)",
+    "Punto 6: preview de lo que viene (max 160 chars)"
   ],
-  "tags": ["tech", "tag_tema_principal", "tag_tema2", "tag_tema3"],
-  "sneak_peek": "Predicción concreta basada en lo visto esta semana. Sin promesas vacías. (max 350 chars)",
-  "nota_personal": "Reflexión genuina como si se lo dijeras a un colega. Menciona algo que te sorprendió o un aprendizaje. (max 320 chars)"
+  "tags": ["tech", "weekly-recap", "tag_tema_principal", "tag_tema2", "tag_tema3", "tag_tema4", "tag_fuente_top1", "tag_fuente_top2"],
+  "categorias_resumen": {{
+    "🤖 IA": "Resumen de 1-2 líneas de lo más relevante en IA esta semana",
+    "💻 Programación": "Resumen de 1-2 líneas de lo más relevante en programación",
+    "🔒 Seguridad": "Resumen de 1-2 líneas de lo más relevante en seguridad",
+    "📊 Negocios": "Resumen de 1-2 líneas de lo más relevante en negocios tech",
+    "🎓 General": "Resumen de 1-2 líneas de lo más relevante en general"
+  }},
+  "sneak_peek": "Predicción concreta basada en lo visto esta semana. Tono: como le dijeras a un colega lo que viene. (max 350 chars)",
+  "nota_personal": "Reflexión genuina como si se lo dijeras a un colega tomando un café. Menciona algo que te sorprendió o un aprendizaje real. (max 320 chars)"
 }}
+
+REGLAS PARA tags:
+- Siempre incluir "tech" y "weekly-recap"
+- Añadir 4-6 tags descriptivos de los temas principales (ej: "openai", "docker", "rust", "ciberseguridad", "llm", "devops")
+- Añadir 1-2 tags de las fuentes más activas (ej: "xataka", "genbeta")
+- Total: 8-10 tags
+
+REGLAS PARA categorias_resumen:
+- Incluir SOLO las categorías que tengan noticias reales esta semana
+- Cada resumen: 1-2 líneas con los 2-3 temas más importantes de esa categoría
+- Si una categoría no tiene noticias, no incluirla
 
 RESPONDE SOLO EL JSON, sin markdown, sin comentarios, sin explicaciones."""
 

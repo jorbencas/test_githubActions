@@ -109,6 +109,8 @@ async def obtener_recap_semanal_ia(
     texto_noticias: str | None = None,
     fuentes_top: list | None = None,
     categorias_ordenadas: list | None = None,
+    fecha_actual: str = "",
+    semana_info: str = "",
 ) -> dict | None:
     """Genera el resumen semanal probando varios modelos."""
     modelos = CONFIG.get("AI_MODELS", ["gemini-2.0-flash-lite"])
@@ -139,6 +141,8 @@ async def obtener_recap_semanal_ia(
         resumen_cats=resumen_cats,
         total_rss=total_rss,
         texto_noticias=texto_noticias,
+        fecha_actual=fecha_actual,
+        semana_info=semana_info,
     )
 
     for modelo in modelos:
