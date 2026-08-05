@@ -1,5 +1,31 @@
 [
     {
+        "titulo": "JoyAI-Video-Edit: Real-Time Open-Ended Video Editing with Autoregressive Diffusion",
+        "enlace": "https://huggingface.co/papers/2608.03974",
+        "fuente": "HuggingFace Papers",
+        "tipo": "noticia",
+        "f": "05/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "https://cdn-avatars.huggingface.co/v1/production/uploads/682a966182dc4fc3e373e3ed/9xUgXZCij6qGJpLqpR99M.png",
+        "fecha_real": "05/08/2026",
+        "ts": "2026-08-05T02:34:02.936060"
+    },
+    {
+        "titulo": "MerchantBench: Benchmarking LLM Agents for Long-Term Coherence in E-Commerce Operations",
+        "enlace": "https://huggingface.co/papers/2607.28956",
+        "fuente": "HuggingFace Papers",
+        "tipo": "noticia",
+        "f": "05/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "https://cdn-avatars.huggingface.co/v1/production/uploads/68be3ab7e52df040b2cf80dc/li4G29u_EGswyTN1Sm_Kq.png",
+        "fecha_real": "05/08/2026",
+        "ts": "2026-08-05T02:34:02.936817"
+    },
+    {
         "titulo": "OK, Bueno, los agentes de IA renegados están hackeando de nuevo.",
         "enlace": "https://www.wired.com/story/ok-well-there-are-even-more-ai-agent-hacking-incidents/",
         "fuente": "Wired",
