@@ -143,7 +143,7 @@ FUENTES = {
     "FreeCodeCamp": {"yt": "https://www.youtube.com/@freecodecamp/videos"},
     "HolaMundo": {"yt": "https://www.youtube.com/@holamundodev/videos"},
     "Victor Robles": {"yt": "https://www.youtube.com/@victorroblesweb/videos"},
-    "Xataka": {"url": "https://www.xataka.com/", "yt":"https://www.youtube.com/@xatakatv/videos", "quick": True, "selector": "article a[href]"},
+    "Xataka": {"url": "https://www.xataka.com/", "yt":"https://www.youtube.com/@xatakatv/videos", "quick": True, "selector": "article a[href]", "tipo": "noticia"},
     "Genbeta": {"url": "https://www.genbeta.com/", "selector": "article a[href]"},
     "HobbyConsolas": {"url": "https://www.hobbyconsolas.com/tags/temas/tecnologia.html", "selector": "article a[href]"},
     "El País Tecnología": {"url": "https://elpais.com/tecnologia/", "selector": "article a[href]"},
@@ -548,6 +548,24 @@ FUENTES = {
     "AI News": {"rss": "https://www.artificialintelligence-news.com/feed/", "quick": True},
     "Towards AI": {"rss": "https://pub.towardsai.net/feed", "quick": True},
     "Analytics India Magazine": {"rss": "https://analyticsindiamag.com/feed/", "quick": True},
+    # ── Fuentes nuevas (agregadas) ──
+    # Español tech/media
+    "Vitónica": {"rss": "https://www.vitonica.com/tag/vitonica/rss2.xml", "quick": True},
+    "Andro4all": {"rss": "https://andro4all.com/feed/", "quick": True},
+    "El Confidencial Teknautas": {"rss": "https://rss.elconfidencial.com/tecnologia/", "quick": True},
+    "Microsiervos": {"rss": "https://www.microsiervos.com/index.xml", "quick": True},
+    "Actualidad RT": {"rss": "https://actualidad.rt.com/feeds/all.rss", "quick": True},
+    "La Mente es Maravillosa": {"rss": "https://lamenteesmaravillosa.com/feed/", "quick": True},
+    # AI/DevTools
+    "404 Media": {"rss": "https://www.404media.co/rss/", "quick": True},
+    "DeepLearning.ai": {"rss": "https://www.deeplearning.ai/blog/rss.xml", "quick": True},
+    "Two Minute Papers": {"rss": "https://www.youtube.com/feeds/videos.xml?channel_id=UCbfYPyITQ-7l4upoX8nvctg", "quick": True},
+    "Ahead of AI (Raschka)": {"rss": "https://magazine.sebastianraschka.com/feed", "quick": True},
+    "BAIR Blog": {"rss": "https://bair.berkeley.edu/blog/feed.xml", "quick": True},
+    "arXiv cs.AI": {"rss": "https://rss.arxiv.org/rss/cs.AI", "quick": True},
+    # Comunidades
+    "GitHub Blog": {"rss": "https://github.blog/news-insights/feed/", "quick": True},
+    "Slashdot": {"rss": "http://rss.slashdot.org/Slashdot/slashdotMain", "quick": True},
 }
 
 HTML_TEMPLATE = """<!DOCTYPE html>

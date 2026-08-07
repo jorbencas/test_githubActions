@@ -948,6 +948,145 @@ def main():
     else:
         print("   ✅ Todos los archivos son válidos")
 
+    # Generate resources.json for the blog
+    print("\n📦 Generando resources.json para el blog...")
+    generate_resources_json(posts_dir, blog_path)
+
+
+def generate_resources_json(posts_dir: Path, blog_path: Path) -> None:
+    """Convert all resources*.mdx to a single JSON file for the blog."""
+    existing = sorted(posts_dir.glob("resources*.mdx"), key=lambda p: p.name)
+    if not existing:
+        print("⚠️  No hay resources*.mdx para convertir.")
+        return
+
+    def detect_pricing(title: str, description: str) -> str:
+        """Detect pricing from title and description."""
+        text = f"{title} {description}".lower()
+        
+        free_patterns = [
+            r'\bfree\b', r'\bgratis\b', r'\bopen[\s-]?source\b', r'\bmit license\b',
+            r'\bapache\b', r'\bbsd\b', r'\bgpl\b', r'\bforever free\b',
+            r'\bno[\s-]?cost\b', r'\bwithout paying\b', r'\b100%\s*free\b',
+            r'\balways free\b', r'\bcommunity edition\b',
+        ]
+        
+        freemium_patterns = [
+            r'free\s*(plan|tier|version|account)',
+            r'free\s*(up\s*to|for|with)',
+            r'free\s*\d+[kK]?\s*(mau|users?|requests?|tasks?|builds?|minutes?|events?|emails?|contacts?|gb|mb|storage)',
+            r'free\s*tier', r'generous\s*free', r'free\s*(developer|personal|individual)',
+            r'free\s*(and|&)\s*(open[\s-]?source)', r'includes?\s*free', r'with\s*free',
+            r'comes?\s*with\s*free', r'offers?\s*free', r'free\s*plan\s*includes?',
+            r'free\s*for\s*(up\s*to|small)', r'limited\s*free', r'free\s*version',
+            r'free\s*account', r'free\s*subscription', r'free\s*access',
+            r'free\s*usage', r'free\s*allowance', r'free\s*quota',
+            r'free\s*allocation', r'free\s*credit', r'free\s*trial', r'freemium',
+        ]
+        
+        paid_patterns = [
+            r'\bpric(e|ing|ed)\b', r'\bper\s*month\b', r'\bper\s*year\b',
+            r'\b\$/mo\b', r'\b\$\d+', r'\bpremium\b', r'\bpro\s*plan\b',
+            r'\benterprise\b', r'\bpaid\b', r'\bsubscription\b',
+            r'\bbilling\b', r'\binvoices?\b', r'\bplans?\s*from\b',
+        ]
+        
+        is_opensource = any(re.search(p, text) for p in [r'\bopen[\s-]?source\b', r'\bmit\b', r'\bapache\b', r'\bgpl\b'])
+        
+        free_count = sum(1 for p in free_patterns if re.search(p, text))
+        freemium_count = sum(1 for p in freemium_patterns if re.search(p, text))
+        paid_count = sum(1 for p in paid_patterns if re.search(p, text))
+        
+        if is_opensource and free_count > 0:
+            return "free"
+        if freemium_count > 0 and paid_count > 0:
+            return "freemium"
+        if freemium_count > 0:
+            return "freemium"
+        if free_count > 0 and paid_count == 0:
+            return "free"
+        if paid_count > 0 and free_count == 0:
+            return "paid"
+        if "api" in text or "saas" in text or "cloud" in text or "hosted" in text:
+            return "freemium"
+        return "free"
+
+    all_resources = []
+    
+    for f in existing:
+        content = f.read_text(encoding="utf-8")
+        
+        cat_pattern = re.compile(r'<ResourceCategory id="([^"]*)" title="[^"]*">(.*?)</ResourceCategory>', re.DOTALL)
+        categories = cat_pattern.findall(content)
+        
+        first_cat_match = re.search(r'<ResourceCategory', content)
+        before_cats = content[:first_cat_match.start()] if first_cat_match else content
+        
+        card_pattern = re.compile(r'<ResourceCard\s+href="([^"]*)"\s+title="([^"]*)"\s+description="([^"]*)"', re.DOTALL)
+        
+        for m in card_pattern.finditer(before_cats):
+            href, title, desc = m.groups()
+            desc = re.sub(r'\[([^\]]*)\]\([^)]*\)', r'\1', desc)
+            all_resources.append({
+                "href": href,
+                "title": title,
+                "description": desc.strip(),
+                "category": "general",
+                "pricing": detect_pricing(title, desc)
+            })
+        
+        for cat_id, cat_body in categories:
+            for m in card_pattern.finditer(cat_body):
+                href, title, desc = m.groups()
+                desc = re.sub(r'\[([^\]]*)\]\([^)]*\)', r'\1', desc)
+                all_resources.append({
+                    "href": href,
+                    "title": title,
+                    "description": desc.strip(),
+                    "category": cat_id,
+                    "pricing": detect_pricing(title, desc)
+                })
+
+    # Deduplicate by href (MDX sources)
+    seen_hrefs = set()
+    unique_resources = []
+    for r in all_resources:
+        if r["href"] not in seen_hrefs:
+            seen_hrefs.add(r["href"])
+            unique_resources.append(r)
+
+    # Merge with existing resources.json (cumulative)
+    output_path = blog_path / "src" / "data" / "resources.json"
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    existing_json = []
+    if output_path.exists():
+        try:
+            with open(output_path, "r", encoding="utf-8") as f:
+                existing_json = json.load(f)
+        except (json.JSONDecodeError, FileNotFoundError):
+            existing_json = []
+
+    # Index existing by href for fast lookup
+    existing_by_href = {r["href"]: r for r in existing_json}
+    
+    # Add MDX resources (new ones override existing)
+    for r in unique_resources:
+        existing_by_href[r["href"]] = r
+
+    # Merge any JSON resources that aren't in MDX (keep them)
+    for r in existing_json:
+        if r["href"] not in {mr["href"] for mr in unique_resources}:
+            existing_by_href[r["href"]] = r
+
+    merged = list(existing_by_href.values())
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(merged, f, ensure_ascii=False, indent=2)
+
+    cats = set(r["category"] for r in merged)
+    print(f"   ✅ {len(merged)} recursos (MDX: {len(unique_resources)}, JSON previo: {len(existing_json)}) en {len(cats)} categorías → {output_path}")
+
 
 if __name__ == "__main__":
     main()
