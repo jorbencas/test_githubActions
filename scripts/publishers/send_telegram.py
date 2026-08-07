@@ -104,31 +104,61 @@ def enviar_mensaje(texto: str, chat_id: str, token: str, reply_markup: dict | No
 
 
 async def enviar_audio_voz(texto: str, chat_id: str, token: str) -> bool:
-    audio_path = "resumen_diario.mp3"
+    """Envía audio de voz. Si es largo, lo divide en partes de ~1500 chars."""
     voz = TELEGRAM_TTS_VOZ
     texto_limpio = strip_emojis(texto)
-    if len(texto_limpio) > 800:
-        texto_limpio = texto_limpio[:800] + "..."
-    try:
-        communicate = edge_tts.Communicate(texto_limpio, voz)
-        await communicate.save(audio_path)
-        url = f"https://api.telegram.org/bot{token}/sendVoice"
-        with open(audio_path, "rb") as f:
-            files = {"voice": (audio_path, f, "audio/mpeg")}
-            payload = {
-                "chat_id": chat_id,
-                "caption": "Resumen diario por voz",
-                "parse_mode": "Markdown",
-            }
-            r = requests.post(url, data=payload, files=files, timeout=30)
-        if os.path.exists(audio_path):
-            os.remove(audio_path)
-        return r.ok
-    except Exception as e:
-        logger.error(f"⚠️ Error TTS: {e}")
-        if os.path.exists(audio_path):
-            os.remove(audio_path)
-        return False
+
+    # Dividir en partes de ~1500 caracteres (límite seguro para TTS)
+    MAX_CHARS = 1500
+    partes = []
+    if len(texto_limpio) <= MAX_CHARS:
+        partes = [texto_limpio]
+    else:
+        # Dividir por oraciones
+        oraciones = re.split(r'(?<=[.!?])\s+', texto_limpio)
+        parte_actual = ""
+        for oracion in oraciones:
+            if len(parte_actual) + len(oracion) + 1 > MAX_CHARS:
+                if parte_actual:
+                    partes.append(parte_actual)
+                parte_actual = oracion
+            else:
+                parte_actual = (parte_actual + " " + oracion).strip()
+        if parte_actual:
+            partes.append(parte_actual)
+
+    logger.info(f"🎙️ Audio dividido en {len(partes)} parte(s)")
+    enviado_ok = True
+
+    for i, parte in enumerate(partes):
+        audio_path = f"resumen_diario_{i+1}.mp3"
+        try:
+            communicate = edge_tts.Communicate(parte, voz)
+            await communicate.save(audio_path)
+            url = f"https://api.telegram.org/bot{token}/sendVoice"
+            with open(audio_path, "rb") as f:
+                files = {"voice": (audio_path, f, "audio/mpeg")}
+                caption = f"Resumen diario ({i+1}/{len(partes)})" if len(partes) > 1 else "Resumen diario"
+                payload = {
+                    "chat_id": chat_id,
+                    "caption": caption,
+                }
+                r = requests.post(url, data=payload, files=files, timeout=60)
+            if os.path.exists(audio_path):
+                os.remove(audio_path)
+            if not r.ok:
+                logger.warning(f"⚠️ Audio parte {i+1} falló: {r.text[:100]}")
+                enviado_ok = False
+            else:
+                logger.info(f"✅ Audio parte {i+1}/{len(partes)} enviado")
+            await asyncio.sleep(2)
+        except Exception as e:
+            logger.error(f"⚠️ Error TTS parte {i+1}: {e}")
+            if os.path.exists(audio_path):
+                os.remove(audio_path)
+            enviado_ok = False
+
+    return enviado_ok
 
 
 def hoy_ya_se_envio_voz() -> bool:
@@ -138,19 +168,24 @@ def hoy_ya_se_envio_voz() -> bool:
     return datos.get("last_voice_date") == fecha_hoy
 
 
-def marcar_voz_enviada():
-    """Marca que se envió el audio de voz hoy."""
+def marcar_voz_enviada(noticias_titles: list[str] | None = None):
+    """Marca que se envió el audio de voz hoy, con las noticias incluidas."""
+    datos = {
+        "last_voice_date": datetime.now().strftime("%Y-%m-%d"),
+        "news_count": len(noticias_titles) if noticias_titles else 0,
+        "news_titles": (noticias_titles or [])[:50],  # Guardar hasta 50 títulos
+    }
     if hasattr(VOICE_CACHE, "_save"):
-        VOICE_CACHE._save({"last_voice_date": datetime.now().strftime("%Y-%m-%d")})
+        VOICE_CACHE._save(datos)
     else:
         with open(VOICE_SENT_LOG, "w") as f:
-            json.dump({"last_voice_date": datetime.now().strftime("%Y-%m-%d")}, f)
+            json.dump(datos, f)
 
 
 async def run():
     parser = argparse.ArgumentParser(description="Send Telegram notifications")
     parser.add_argument("--dry-run", action="store_true", help="Preview without sending")
-    parser.add_argument("--max-items", type=int, default=5, help="Max news to send per run (default 5)")
+    parser.add_argument("--max-items", type=int, default=15, help="Max news to send per run (default 15)")
     parser.add_argument("--force-voice", action="store_true", help="Force voice message even if already sent today")
     args = parser.parse_args()
 
@@ -251,15 +286,19 @@ async def run():
                     except (ValueError, AttributeError):
                         pass
                 titulo = n.get(TITULO_KEY, "")
+                resumen = n.get('resumen', '')
                 if titulo:
-                    todas_hoy.append(titulo)
+                    entrada = titulo
+                    if resumen:
+                        entrada += ". " + resumen[:120]
+                    todas_hoy.append(entrada)
 
             if todas_hoy:
                 resumen_voz = "Hoy en tecnología. " + ". ".join(todas_hoy) + ". Fin del resumen."
-                logger.info(f"🎙️ Enviando resumen de voz diario ({len(todas_hoy)} noticias)...")
+                logger.info(f"🎙️ Enviando resumen de voz diario ({len(todas_hoy)} noticias, {len(resumen_voz)} chars)...")
                 ok = await enviar_audio_voz(resumen_voz, chat_id, token)
                 if ok:
-                    marcar_voz_enviada()
+                    marcar_voz_enviada([n.get(TITULO_KEY, "") for n in todas_hoy[:50]])
                     logger.info("✅ Audio de voz enviado.")
                 else:
                     logger.warning("⚠️ Fallo al enviar audio de voz.")
