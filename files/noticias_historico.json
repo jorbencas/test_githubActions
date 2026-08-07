@@ -1,5 +1,18 @@
 [
     {
+        "titulo": "El juez decreta prisión para el dueño del bar acusado de matar a su hijastro a golpes en València",
+        "enlace": "https://www.levante-emv.com/sucesos/2026/08/07/juez-decreta-prision-dueno-bar-mato-hijastro-a-golpes-valencia-homicidio-trafico-drogas-133184017.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "f": "07/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "07/08/2026",
+        "ts": "2026-08-07T18:57:25.579170"
+    },
+    {
         "titulo": "OpenAI frena un nuevo modelo porque es supuestamente demasiado potente",
         "enlace": "https://www.theverge.com/ai-artificial-intelligence/976948/openai-astra-model-pause-critical-cyber-capabilities",
         "fuente": "The Verge",
