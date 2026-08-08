@@ -1,5 +1,19 @@
 [
     {
+        "titulo": "Cómo testear funcionalidades de IA en Flutter [Guía completa]",
+        "enlace": "https://www.freecodecamp.org/news/how-to-test-ai-features-in-flutter-full-handbook/",
+        "fuente": "freeCodeCamp",
+        "tipo": "noticia",
+        "f": "08/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "08/08/2026",
+        "ts": "2026-08-08T01:41:31.670985",
+        "traducido": true
+    },
+    {
         "titulo": "¿Deberían los laboratorios de IA ser tratados como los dueños de animales peligrosos?",
         "enlace": "https://www.economist.com/science-and-technology/2026/08/06/should-ai-labs-be-treated-like-the-owners-of-dangerous-animals",
         "fuente": "Hacker News",
