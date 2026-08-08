@@ -52,12 +52,14 @@
   // ── Video filters ──
   function filtrarVideos() {
     const q = (document.getElementById("video-search")?.value || "").toLowerCase().trim();
+    const tabMap = { youtube: "video", shorts: "shorts", live: "live" };
+    const tipoFiltro = tabMap[state.tabMultimedia] || state.tabMultimedia;
     document.querySelectorAll("#multimedia-content .video-card").forEach((item) => {
       const source = item.dataset.source;
-      const type = item.dataset.tipo || "youtube";
+      const type = item.dataset.tipo || "video";
       const title = (item.querySelector(".video-title") || {}).textContent || "";
       const okChannel = state.canalVideos === "all" || source === state.canalVideos;
-      const okTab = state.tabMultimedia === "all" || type === state.tabMultimedia;
+      const okTab = state.tabMultimedia === "all" || type === tipoFiltro;
       const okSearch = !q || title.toLowerCase().includes(q) || source.toLowerCase().includes(q);
       item.style.display = okChannel && okTab && okSearch ? "" : "none";
     });
