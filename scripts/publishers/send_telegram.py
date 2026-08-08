@@ -314,7 +314,7 @@ async def run():
                 logger.info(f"🎙️ Enviando resumen de voz diario ({len(todas_hoy)} noticias, {len(resumen_voz)} chars)...")
                 ok = await enviar_audio_voz(resumen_voz, chat_id, token)
                 if ok:
-                    marcar_voz_enviada([n.get(TITULO_KEY, "") for n in todas_hoy[:50]])
+                    marcar_voz_enviada(todas_hoy[:50])
                     logger.info("✅ Audio de voz enviado.")
                 else:
                     logger.warning("⚠️ Fallo al enviar audio de voz.")
