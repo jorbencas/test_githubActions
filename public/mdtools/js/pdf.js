@@ -10,19 +10,39 @@
 
   if (!mdInput) return;
 
-  const parserWorker = new Worker('/mdtools/js/parser-worker.js');
-  let pendingRender = null;
+  let md = null;
+  let pdfReady = false;
 
-  parserWorker.addEventListener('message', (e) => {
-    if (pendingRender && e.data.id === pendingRender) {
-      preview.innerHTML = e.data.html;
-      pendingRender = null;
+  function initMarkdown() {
+    if (typeof window.markdownit !== 'undefined') {
+      md = window.markdownit({ html: true, linkify: true, typographer: true });
+      return true;
     }
-  });
+    if (typeof self !== 'undefined' && typeof self.markdownit !== 'undefined') {
+      md = self.markdownit({ html: true, linkify: true, typographer: true });
+      return true;
+    }
+    return false;
+  }
+
+  function initPdfMake() {
+    if (typeof pdfMake !== 'undefined') {
+      pdfReady = true;
+      return true;
+    }
+    return false;
+  }
 
   function updatePreview() {
-    pendingRender = Date.now();
-    parserWorker.postMessage({ id: pendingRender, markdown: mdInput.value });
+    if (!md && !initMarkdown()) {
+      preview.innerHTML = '<p class="output-placeholder">Cargando parser Markdown...</p>';
+      return;
+    }
+    try {
+      preview.innerHTML = md.render(mdInput.value);
+    } catch (err) {
+      preview.innerHTML = '<p class="output-placeholder">Error al renderizar Markdown.</p>';
+    }
   }
 
   mdInput.addEventListener('input', updatePreview);
@@ -44,6 +64,11 @@
 
   if (btnGenerate) {
     btnGenerate.addEventListener('click', () => {
+      if (!initPdfMake()) {
+        pdfOutput.innerHTML = '<p class="output-placeholder">pdfmake no se ha cargado. Verifica tu conexión a internet.</p>';
+        return;
+      }
+
       const theme = pdfTheme?.value || 'default';
       const colors = {
         default: { bg: '#ffffff', text: '#0f172a', accent: '#2563eb' },
@@ -102,14 +127,10 @@
       pdfOutput.innerHTML = '<p style="color: var(--text-muted); text-align: center;">Generando PDF...</p>';
 
       try {
-        if (typeof pdfMake !== 'undefined') {
-          pdfMake.createPdf(docDefinition).download('documento.pdf');
-          pdfOutput.innerHTML = '<p style="color: var(--accent); text-align: center;">✓ PDF descargado</p>';
-        } else {
-          pdfOutput.innerHTML = '<p class="output-placeholder">pdfmake no se ha cargado. Verifica tu conexión.</p>';
-        }
+        pdfMake.createPdf(docDefinition).download('documento.pdf');
+        pdfOutput.innerHTML = '<p style="color: var(--accent); text-align: center;">✓ PDF descargado</p>';
       } catch (err) {
-        pdfOutput.innerHTML = `<p style="color: #ef4444;">Error: ${err.message}</p>`;
+        pdfOutput.innerHTML = '<p style="color: #ef4444;">Error: ' + err.message + '</p>';
       }
     });
   }

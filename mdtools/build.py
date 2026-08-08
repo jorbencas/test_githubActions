@@ -59,9 +59,7 @@ write_page("pdf.html", render_page(
     extra_head="<script src=\"https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/pdfmake.min.js\"></script>"
                "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/vfs_fonts.js\"></script>"
                "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/markdown-it/14.1.0/markdown-it.min.js\"></script>",
-    extra_scripts="<script src=\"/mdtools/js/pdf-worker.js\"></script>"
-                  "<script src=\"/mdtools/js/parser-worker.js\"></script>"
-                  "<script src=\"/mdtools/js/pdf.js\"></script>",
+    extra_scripts="<script src=\"/mdtools/js/pdf.js\"></script>",
 ))
 
 # ── Slides ──

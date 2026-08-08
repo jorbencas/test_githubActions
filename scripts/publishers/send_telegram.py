@@ -163,9 +163,25 @@ async def enviar_audio_voz(texto: str, chat_id: str, token: str) -> bool:
 
 def hoy_ya_se_envio_voz() -> bool:
     """Comprueba si ya se envió el audio de voz hoy."""
-    datos = VOICE_CACHE._load() if hasattr(VOICE_CACHE, "_load") else {}
     fecha_hoy = datetime.now().strftime("%Y-%m-%d")
-    return datos.get("last_voice_date") == fecha_hoy
+    # Intentar leer del CacheManager primero
+    try:
+        if hasattr(VOICE_CACHE, "_load"):
+            datos = VOICE_CACHE._load()
+            if isinstance(datos, dict) and datos.get("last_voice_date") == fecha_hoy:
+                return True
+    except Exception:
+        pass
+    # Fallback: leer directamente el archivo
+    try:
+        if os.path.exists(VOICE_SENT_LOG):
+            with open(VOICE_SENT_LOG, "r", encoding="utf-8") as f:
+                datos = json.load(f)
+            if isinstance(datos, dict) and datos.get("last_voice_date") == fecha_hoy:
+                return True
+    except (json.JSONDecodeError, OSError):
+        pass
+    return False
 
 
 def marcar_voz_enviada(noticias_titles: list[str] | None = None):

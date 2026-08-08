@@ -17,8 +17,12 @@
   const parserWorker = new Worker('/mdtools/js/parser-worker.js');
   parserWorker.addEventListener('message', (e) => {
     if (e.data.id === 0) {
-      slides = e.data.html.split('<hr>').map(s => s.trim()).filter(Boolean);
-      if (!slides.length) slides = ['<p>Escribe algo...</p>'];
+      if (e.data.error) {
+        slides = ['<p>Error al cargar el parser Markdown.</p>'];
+      } else {
+        slides = e.data.html.split(/<hr\s*\/?>/i).map(s => s.trim()).filter(Boolean);
+        if (!slides.length) slides = ['<p>Escribe algo...</p>'];
+      }
       current = 0;
       renderSlide();
     }

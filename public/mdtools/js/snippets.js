@@ -11,6 +11,10 @@
   const parserWorker = new Worker('/mdtools/js/parser-worker.js');
   parserWorker.addEventListener('message', (e) => {
     if (e.data.id === 1) {
+      if (e.data.error) {
+        preview.innerHTML = '<p class="output-placeholder">Error al cargar el parser Markdown.</p>';
+        return;
+      }
       const tmp = document.createElement('div');
       tmp.innerHTML = e.data.html;
       const pres = tmp.querySelectorAll('pre code');

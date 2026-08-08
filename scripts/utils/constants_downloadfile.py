@@ -188,7 +188,7 @@ JS_CONFIG = {
         {"id": "live", "label": "🔴 En directo"},
     ],
     "EMOJIS_CATEGORIA": "⚡🤖💻🐳🔒📊🎓💡",
-    "DASHBOARD_URL": "http://jorbencasdownloaderdocument.surge.sh",
+    "DASHBOARD_URL": "https://jorbencasdownloaderdocument.surge.sh",
 }
 
 # ── Dict key constants ──
@@ -250,7 +250,7 @@ FALLBACK_RECAP_INTRO = "Esta semana hemos seguido de cerca las principales tende
 
 # ── Telegram ──
 TELEGRAM_TTS_VOZ = "es-ES-AlvaroNeural"
-TELEGRAM_DASHBOARD_URL = "http://jorbencasdownloaderdocument.surge.sh"
+TELEGRAM_DASHBOARD_URL = "https://jorbencasdownloaderdocument.surge.sh"
 TELEGRAM_MENSAJE_TEMPLATE = "{icono} *{titulo}*\n📰 `{fuente}` | `{fecha}`\n\n{cuerpo}\n🔗 [Abrir noticia]({enlace})\n🌐 [Ver más en el Dashboard]({dashboard_url})"
 
 # ── Re-exports para compatibilidad (imports existentes siguen funcionando) ──

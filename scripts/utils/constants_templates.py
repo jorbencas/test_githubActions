@@ -191,7 +191,7 @@ EMAIL_TEMPLATE = """
                             <table border="0" cellpadding="0" cellspacing="0" align="center">
                                 <tr>
                                     <td align="center" bgcolor="#3b82f6" style="border-radius: 8px; background: linear-gradient(135deg, #3b82f6, #2563eb);">
-                                        <a href="http://jorbencasdownloaderdocument.surge.sh" target="_blank" style="font-size: 13px; font-weight: 700; color: #ffffff; text-decoration: none; display: inline-block; padding: 12px 24px; letter-spacing: 0.3px;">
+                                        <a href="https://jorbencasdownloaderdocument.surge.sh" target="_blank" style="font-size: 13px; font-weight: 700; color: #ffffff; text-decoration: none; display: inline-block; padding: 12px 24px; letter-spacing: 0.3px;">
                                             Abrir Dashboard →
                                         </a>
                                     </td>
@@ -298,7 +298,7 @@ categories: ["tech", "weekly-recap"]
 
 > **Nota del autor:** {nota_personal}
 
-📡 **[Ver dashboard completo con todos los filtros](http://jorbencasdownloaderdocument.surge.sh)**
+📡 **[Ver dashboard completo con todos los filtros](https://jorbencasdownloaderdocument.surge.sh)**
 """
 
 # ── Prompt para imagen IA ──

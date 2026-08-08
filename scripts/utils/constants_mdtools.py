@@ -322,7 +322,7 @@ ___</code></pre>
 
 MDTOOLS_JS_CONFIG = """const MDTOOLS_CONFIG = {
   "TOOLS_BASE": "/mdtools",
-  "DASHBOARD_URL": "http://jorbencasdownloaderdocument.surge.sh",
+  "DASHBOARD_URL": "https://jorbencasdownloaderdocument.surge.sh",
   "SLIDE_THEMES": ["default", "dark", "mono"],
   "PDF_PAGE_SIZES": ["a4", "letter", "legal"],
   "SNIPPET_LANGUAGES": ["python", "javascript", "typescript", "rust", "go", "java", "c", "html", "css", "sql", "bash"],

@@ -182,3 +182,61 @@ select {
 .limitations-section li {
   margin-bottom: 6px;
 }
+
+/* ── Snippets ── */
+.snippet-block {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.snippet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-surface-hover);
+}
+
+.snippet-lang {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.snippet-lines {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.snippet-block pre {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  padding: 12px 16px;
+  overflow-x: auto;
+}
+
+.snippet-block code {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.line-num {
+  color: var(--text-muted);
+  opacity: 0.5;
+  user-select: none;
+  display: inline-block;
+  min-width: 3ch;
+  text-align: right;
+  margin-right: 12px;
+}
