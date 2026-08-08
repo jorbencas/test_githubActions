@@ -24,6 +24,20 @@
   white-space: nowrap;
 }
 
+.nav-back {
+  color: var(--text-muted) !important;
+  font-size: 0.85rem;
+  padding: 4px 10px;
+  border-radius: var(--radius);
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.nav-back:hover {
+  color: var(--accent) !important;
+  background: var(--accent-soft);
+}
+
 .nav-links {
   display: flex;
   gap: 4px;

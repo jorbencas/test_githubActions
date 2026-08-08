@@ -1,5 +1,6 @@
 MDTOOLS_NAV_HTML = """<nav class="main-nav" id="mainNav">
   <div class="nav-inner">
+    <a href="/" class="nav-back">← Dashboard</a>
     <a href="/mdtools/" class="nav-brand">Markdown Tools</a>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
       <span></span><span></span><span></span>
