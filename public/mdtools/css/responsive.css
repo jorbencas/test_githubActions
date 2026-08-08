@@ -1,0 +1,30 @@
+/* ── responsive.css: Mobile-first breakpoints ── */
+@media (max-width: 768px) {
+  .nav-toggle { display: flex; }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    padding: 8px 20px;
+    gap: 4px;
+  }
+
+  .nav-links.open { display: flex; }
+
+  .tool-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 { font-size: 1.8rem; }
+  .tools-grid { grid-template-columns: 1fr; }
+  .cheatsheet-grid { grid-template-columns: 1fr; }
+  .slide-preview .slide { padding: 24px; font-size: 1rem; }
+
+  .output-header { flex-direction: column; gap: 12px; align-items: flex-start; }
+}

@@ -1,0 +1,130 @@
+/* ── tools.css: Hero, tool cards, cheatsheet, slides ── */
+.hero {
+  text-align: center;
+  padding: 48px 0 36px;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, var(--accent), #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  color: var(--text-muted);
+  font-size: 1.15rem;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.tool-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  transition: all var(--transition);
+  display: flex;
+  flex-direction: column;
+  color: var(--text) !important;
+}
+
+.tool-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.tool-icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.tool-card h3 {
+  margin-bottom: 8px;
+  font-size: 1.15rem;
+}
+
+.tool-card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+.tool-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  margin-top: 12px;
+  align-self: flex-start;
+}
+
+/* ── Cheatsheet ── */
+.cheatsheet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.cheat-section {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+.cheat-section h2 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  color: var(--accent);
+}
+
+.cheat-section pre {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+/* ── Slides ── */
+.slide-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  border-radius: var(--radius);
+  min-height: 350px;
+}
+
+.slide-preview .slide {
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 16/9;
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.slide-counter {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  min-width: 60px;
+  text-align: center;
+}

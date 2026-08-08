@@ -21,7 +21,7 @@ import requests
 from google import genai
 
 from scripts.utils.constants_downloadfile import CONFIG, EMAIL_TEMPLATE, EMAIL_ROW_TEMPLATE, EMAIL_SOURCE_HEADER, EMAIL_VIDEO_HEADER, EMAIL_VIDEO_ROW, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, ID_VIDEO_KEY, BADGE_KEY, VAL_TECH, TIPO_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES
-from scripts.utils.common import load_json, save_json, resumir_noticia, resumir_lote_noticias
+from scripts.utils.common import load_json, save_json, resumir_noticia
 
 os.makedirs(LOGS_DIR, exist_ok=True)
 logging.basicConfig(
@@ -51,7 +51,67 @@ SOURCE_STYLES = {
     "Vercel": {"color": "#000000", "icon": "▲"},
     "Dev.to": {"color": "#0a0a23", "icon": "👨‍💻"},
     "Mozilla": {"color": "#ff9400", "icon": "🦊"},
+    # Seguridad
     "Krebs": {"color": "#dc2626", "icon": "🔒"},
+    "BleepingComputer": {"color": "#dc2626", "icon": "💻"},
+    "SecurityWeek": {"color": "#1e40af", "icon": "🛡️"},
+    "Dark Reading": {"color": "#1e293b", "icon": "🌑"},
+    "Schneier": {"color": "#0369a1", "icon": "🔐"},
+    "The Record": {"color": "#be123c", "icon": "📋"},
+    "CyberScoop": {"color": "#0ea5e9", "icon": "🌐"},
+    "SC Media": {"color": "#7c3aed", "icon": "🛡️"},
+    "Help Net Security": {"color": "#059669", "icon": "🟢"},
+    "PortSwigger": {"color": "#f59e0b", "icon": "🔬"},
+    "NVD": {"color": "#dc2626", "icon": "🔍"},
+    "CVE": {"color": "#ef4444", "icon": "⚠️"},
+    "GitHub Advisory": {"color": "#24292e", "icon": "🐙"},
+    "Snyk": {"color": "#1e293b", "icon": "🔍"},
+    "Sonatype": {"color": "#1e40af", "icon": "📦"},
+    "OWASP": {"color": "#000000", "icon": "🛡️"},
+    "Trellix": {"color": "#7c3aed", "icon": "🔬"},
+    "SentinelOne": {"color": "#0ea5e9", "icon": "👁️"},
+    "Elastic": {"color": "#f59e0b", "icon": "📊"},
+    "Cisco": {"color": "#0ea5e9", "icon": "🌐"},
+    "Palo Alto": {"color": "#dc2626", "icon": "🔥"},
+    "CrowdStrike": {"color": "#ef4444", "icon": "🦅"},
+    "Mandiant": {"color": "#dc2626", "icon": "🔍"},
+    "Unit 42": {"color": "#7c3aed", "icon": "🔬"},
+    "Rapid7": {"color": "#dc2626", "icon": "⚡"},
+    "Qualys": {"color": "#0369a1", "icon": "🔍"},
+    "Tenable": {"color": "#0ea5e9", "icon": "🛡️"},
+    "ZDI": {"color": "#dc2626", "icon": "🎯"},
+    "Packet Storm": {"color": "#16a34a", "icon": "⚡"},
+    "Exploit": {"color": "#ef4444", "icon": "💀"},
+    "Full Disclosure": {"color": "#dc2626", "icon": "📢"},
+    "Bugtraq": {"color": "#ef4444", "icon": "🐛"},
+    "Project Zero": {"color": "#4285f4", "icon": "🔍"},
+    "Microsoft": {"color": "#00a4ef", "icon": "🪟"},
+    "Apple": {"color": "#000000", "icon": "🍎"},
+    "Cloudflare": {"color": "#f48120", "icon": "☁️"},
+    "AWS": {"color": "#ff9900", "icon": "☁️"},
+    "Wordfence": {"color": "#dc2626", "icon": "🛡️"},
+    "Sucuri": {"color": "#1e40af", "icon": "🔒"},
+    "Detectify": {"color": "#0ea5e9", "icon": "🔍"},
+    "Imperva": {"color": "#7c3aed", "icon": "🛡️"},
+    "Arctic Wolf": {"color": "#0369a1", "icon": "🐺"},
+    "Varonis": {"color": "#0ea5e9", "icon": "📊"},
+    "Proofpoint": {"color": "#dc2626", "icon": "📧"},
+    "Fortinet": {"color": "#dc2626", "icon": "🔥"},
+    "Check Point": {"color": "#dc2626", "icon": "🛡️"},
+    "Kaspersky": {"color": "#00a88e", "icon": "🟢"},
+    "Avast": {"color": "#ff7800", "icon": "🟠"},
+    "Bitdefender": {"color": "#dc2626", "icon": "🔴"},
+    "Malwarebytes": {"color": "#0ea5e9", "icon": "🛡️"},
+    "Sophos": {"color": "#0ea5e9", "icon": "🔒"},
+    "Trend Micro": {"color": "#dc2626", "icon": "🔴"},
+    "Zscaler": {"color": "#0ea5e9", "icon": "☁️"},
+    "Recorded Future": {"color": "#7c3aed", "icon": "🔮"},
+    "Volexity": {"color": "#dc2626", "icon": "🔍"},
+    "Huntress": {"color": "#16a34a", "icon": "🎯"},
+    "Black Hills": {"color": "#1e293b", "icon": "⛰️"},
+    "SpecterOps": {"color": "#7c3aed", "icon": "👻"},
+    "Red Canary": {"color": "#dc2626", "icon": "🐦"},
+    "WithSecure": {"color": "#0ea5e9", "icon": "🔒"},
     "default": {"color": "#3b82f6", "icon": "💻"},
 }
 
@@ -157,8 +217,6 @@ async def run():
         c_tech = 0
         filas_noticias = ""
         temas_clave = ""
-        resumen_lote = None
-        contenido_html = "<p style='font-size:15px;line-height:1.7;margin:0;color:#64748b;'>No hay noticias destacadas hoy.</p>"
     else:
         top_titular = nuevos[0][TITULO_KEY]
         asunto = f"🔥 {top_titular[:55]}... y {len(nuevos)-1} más"
@@ -205,15 +263,9 @@ async def run():
                 )
 
         temas_clave = ", ".join(list(set([n[FUENTE_KEY] for n in nuevos[:3]])))
-        logger.info("🤖 Generando resumen general del lote...")
-        resumen_lote = await resumir_lote_noticias(nuevos, client)
-        contenido_html = f"<p style='font-size:15px;line-height:1.7;margin:0;'>{resumen_lote}</p>" if resumen_lote else ""
-        if not contenido_html:
-            contenido_html = "<p style='font-size:15px;line-height:1.7;margin:0;color:#64748b;'>" + " · ".join(n['titulo'][:60] for n in nuevos[:3]) + "</p>"
 
     html_final = EMAIL_TEMPLATE.format(
         fecha_hoy=datetime.now().strftime("%d de %B, %Y"),
-        contenido_html=contenido_html,
         lista_email=filas_noticias,
         videos_html=filas_videos,
         count_tech=c_tech,

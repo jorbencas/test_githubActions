@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdown a PDF | Markdown Tools</title>
+  <meta name="description" content="Convierte Markdown a PDF con tablas, listas y código">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+  <link rel="stylesheet" href="/mdtools/css/base.css">
+  <link rel="stylesheet" href="/mdtools/css/nav.css">
+  <link rel="stylesheet" href="/mdtools/css/editor.css">
+  <link rel="stylesheet" href="/mdtools/css/tools.css">
+  <link rel="stylesheet" href="/mdtools/css/dark-theme.css">
+  <link rel="stylesheet" href="/mdtools/css/responsive.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/pdfmake.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/vfs_fonts.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/14.1.0/markdown-it.min.js"></script>
+</head>
+<body>
+<nav class="main-nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="/mdtools/" class="nav-brand">Markdown Tools</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="/mdtools/" class="">Inicio</a>
+      <a href="/mdtools/pdf.html" class="active">PDF</a>
+      <a href="/mdtools/slides.html" class="">Diapositivas</a>
+      <a href="/mdtools/table.html" class="">Tabla</a>
+      <a href="/mdtools/snippets.html" class="">Snippets</a>
+      <a href="/mdtools/cheatsheet.html" class="">Cheatsheet</a>
+    </div>
+  </div>
+</nav>
+
+  <main class="main-content">
+<div class="tools-subnav" id="toolsSubnav">
+  <div class="subnav-inner">
+    <a href="#editor">Editor</a>
+    <a href="#preview">Preview</a>
+    <a href="#output">Resultado</a>
+  </div>
+</div>
+    <section class="tool-header">
+      <h1>📄 Markdown a PDF</h1>
+      <p>Convierte Markdown a PDF directamente en el navegador.</p>
+    </section>
+
+    <section class="tool-layout">
+      <div class="editor-pane">
+        <div class="pane-header">
+          <h3>Markdown</h3>
+          <div class="pane-actions">
+            <button class="btn-sm" id="btnLoadExample">Ejemplo</button>
+            <button class="btn-sm" id="btnClear">Limpiar</button>
+          </div>
+        </div>
+        <textarea id="mdInput" class="editor-textarea" placeholder="Escribe o pega tu Markdown aquí..."></textarea>
+      </div>
+
+      <div class="preview-pane">
+        <div class="pane-header">
+          <h3>Preview</h3>
+          <div class="pane-actions">
+            <select id="pdfTheme">
+              <option value="default">Tema claro</option>
+              <option value="dark">Tema oscuro</option>
+              <option value="mono">Monocromático</option>
+            </select>
+          </div>
+        </div>
+        <div id="preview" class="preview-content"></div>
+      </div>
+    </section>
+
+    <section class="output-section">
+      <div class="output-header">
+        <h3>Resultado</h3>
+        <button class="btn-primary" id="btnGenerate">Generar PDF</button>
+      </div>
+      <div id="pdfOutput" class="output-content">
+        <p class="output-placeholder">Haz clic en "Generar PDF" para ver el resultado.</p>
+      </div>
+    </section>
+
+    <section class="limitations-section">
+      <h3>Limitaciones conocidas</h3>
+      <ul>
+        <li><strong>Páginas máximas:</strong> 50 (limitación de pdfmake)</li>
+        <li><strong>Tabla:</strong> máx. 500 filas por tabla</li>
+        <li><strong>Syntax highlighting:</strong> no soportado en PDF (se renderiza como texto plano)</li>
+        <li><strong>Mermaid / SVG:</strong> se inserta como imagen estática capturada del preview</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Markdown Tools &mdash; Herramientas offline para convertir y transformar Markdown</p>
+  </footer>
+
+  <script src="/mdtools/js/nav.js"></script>
+  <script src="/mdtools/js/pdf-worker.js"></script><script src="/mdtools/js/parser-worker.js"></script><script src="/mdtools/js/pdf.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cheatsheet | Markdown Tools</title>
+  <meta name="description" content="Referencia rápida de Markdown syntax y shortcodes">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+  <link rel="stylesheet" href="/mdtools/css/base.css">
+  <link rel="stylesheet" href="/mdtools/css/nav.css">
+  <link rel="stylesheet" href="/mdtools/css/editor.css">
+  <link rel="stylesheet" href="/mdtools/css/tools.css">
+  <link rel="stylesheet" href="/mdtools/css/dark-theme.css">
+  <link rel="stylesheet" href="/mdtools/css/responsive.css">
+  
+</head>
+<body>
+<nav class="main-nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="/mdtools/" class="nav-brand">Markdown Tools</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="/mdtools/" class="">Inicio</a>
+      <a href="/mdtools/pdf.html" class="">PDF</a>
+      <a href="/mdtools/slides.html" class="">Diapositivas</a>
+      <a href="/mdtools/table.html" class="">Tabla</a>
+      <a href="/mdtools/snippets.html" class="">Snippets</a>
+      <a href="/mdtools/cheatsheet.html" class="active">Cheatsheet</a>
+    </div>
+  </div>
+</nav>
+
+  <main class="main-content">
+    <section class="tool-header">
+      <h1>📋 Cheatsheet de Markdown</h1>
+      <p>Referencia rápida de syntax, emojis, shortcodes y más.</p>
+    </section>
+
+    <section class="cheatsheet-grid">
+      <div class="cheat-section">
+        <h2>Encabezados</h2>
+        <pre><code># H1
+## H2
+### H3
+#### H4
+##### H5
+###### H6</code></pre>
+      </div>
+
+      <div class="cheat-section">
+        <h2>Texto</h2>
+        <pre><code>**negrita**
+*cursiva*
+~~tachado~~
+`código inline`
+> bloque de cita</code></pre>
+      </div>
+
+      <div class="cheat-section">
+        <h2>Listas</h2>
+        <pre><code>- Elemento 1
+- Elemento 2
+  - Sub-elemento
+
+1. Primero
+2. Segundo
+3. Tercero</code></pre>
+      </div>
+
+      <div class="cheat-section">
+        <h2>Enlaces e Imágenes</h2>
+        <pre><code>[texto](https://url.com)
+![alt](imagen.png)
+[tooltip](https://url.com "título")</code></pre>
+      </div>
+
+      <div class="cheat-section">
+        <h2>Tablas</h2>
+        <pre><code>| Col 1 | Col 2 | Col 3 |
+|-------|:-----:|------:|
+| izq   | centro| derecha |</code></pre>
+      </div>
+
+      <div class="cheat-section">
+        <h2>Bloques de Código</h2>
+        <pre><code>```python
+def hello():
+    print("Hello!")
+```</code></pre>
+      </div>
+
+      <div class="cheat-section">
+        <h2>Emojis</h2>
+        <pre><code>:rocket:  → 🚀
+:fire:    → 🔥
+:check:   → ✅
+:warning: → ⚠️
+:star:    → ⭐
+:heart:   → ❤️
+:bug:     → 🐛
+:sparkles:→ ✨</code></pre>
+      </div>
+
+      <div class="cheat-section">
+        <h2>Horizontal Rule</h2>
+        <pre><code>---
+***
+___</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Markdown Tools &mdash; Herramientas offline para convertir y transformar Markdown</p>
+  </footer>
+
+  <script src="/mdtools/js/nav.js"></script>
+  
+</body>
+</html>

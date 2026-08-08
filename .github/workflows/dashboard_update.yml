@@ -8,6 +8,7 @@ on:
       - 'public/**/*.html'
       - 'scripts/publishers/generate_weekly.py'
       - 'scripts/utils/constants_downloadfile.py'
+      - 'scripts/utils/constants_mdtools.py'
       - 'files/noticias_historico.json'
   workflow_dispatch:
 
@@ -46,6 +47,9 @@ jobs:
             echo "⏭️ Only JS/CSS changed — skipping regeneration"
             echo "regenerated=no" >> $GITHUB_OUTPUT
           fi
+
+      - name: 🔧 Build mdtools
+        run: python mdtools/build.py
 
       - name: ✨ Deploy dashboard a Surge
         run: |

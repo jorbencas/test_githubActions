@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diapositivas | Markdown Tools</title>
+  <meta name="description" content="Crea presentaciones estilo Reveal.js desde Markdown">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+  <link rel="stylesheet" href="/mdtools/css/base.css">
+  <link rel="stylesheet" href="/mdtools/css/nav.css">
+  <link rel="stylesheet" href="/mdtools/css/editor.css">
+  <link rel="stylesheet" href="/mdtools/css/tools.css">
+  <link rel="stylesheet" href="/mdtools/css/dark-theme.css">
+  <link rel="stylesheet" href="/mdtools/css/responsive.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/14.1.0/markdown-it.min.js"></script>
+</head>
+<body>
+<nav class="main-nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="/mdtools/" class="nav-brand">Markdown Tools</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="/mdtools/" class="">Inicio</a>
+      <a href="/mdtools/pdf.html" class="">PDF</a>
+      <a href="/mdtools/slides.html" class="active">Diapositivas</a>
+      <a href="/mdtools/table.html" class="">Tabla</a>
+      <a href="/mdtools/snippets.html" class="">Snippets</a>
+      <a href="/mdtools/cheatsheet.html" class="">Cheatsheet</a>
+    </div>
+  </div>
+</nav>
+
+  <main class="main-content">
+<div class="tools-subnav" id="toolsSubnav">
+  <div class="subnav-inner">
+    <a href="#editor">Editor</a>
+    <a href="#preview">Preview</a>
+    <a href="#output">Resultado</a>
+  </div>
+</div>
+    <section class="tool-header">
+      <h1>🎞️ Diapositivas desde Markdown</h1>
+      <p>Crea presentaciones estilo Reveal.js directamente en el navegador.</p>
+    </section>
+
+    <section class="tool-layout">
+      <div class="editor-pane">
+        <div class="pane-header">
+          <h3>Markdown</h3>
+          <div class="pane-actions">
+            <button class="btn-sm" id="btnLoadExample">Ejemplo</button>
+            <button class="btn-sm" id="btnClear">Limpiar</button>
+          </div>
+        </div>
+        <textarea id="mdInput" class="editor-textarea" placeholder="Separa diapositivas con --- (tres guiones)"></textarea>
+      </div>
+
+      <div class="preview-pane">
+        <div class="pane-header">
+          <h3>Preview</h3>
+          <div class="pane-actions">
+            <button class="btn-sm" id="btnPrev">◀</button>
+            <span id="slideCounter" class="slide-counter">1 / 1</span>
+            <button class="btn-sm" id="btnNext">▶</button>
+            <button class="btn-sm" id="btnFullscreen">⛶</button>
+          </div>
+        </div>
+        <div id="preview" class="preview-content slide-preview"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Markdown Tools &mdash; Herramientas offline para convertir y transformar Markdown</p>
+  </footer>
+
+  <script src="/mdtools/js/nav.js"></script>
+  <script src="/mdtools/js/parser-worker.js"></script><script src="/mdtools/js/slides.js"></script>
+</body>
+</html>

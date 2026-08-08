@@ -1,0 +1,18 @@
+/* ── dark-theme.css: Tema oscuro (ya es el default, pero permite override) ── */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-surface-hover: #f1f5f9;
+    --bg-input: #f1f5f9;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --accent: #2563eb;
+    --accent-hover: #3b82f6;
+    --accent-soft: rgba(37, 99, 235, 0.1);
+    --border: #e2e8f0;
+  }
+
+  .slide-preview { background: #1e293b; }
+  .slide-preview .slide { background: #0f172a; color: #e2e8f0; }
+}

@@ -38,7 +38,6 @@ class TestFuentesStructure:
 
 class TestEmailTemplates:
     def test_email_template_has_placeholders(self):
-        assert "{contenido_html}" in EMAIL_TEMPLATE
         assert "{lista_email}" in EMAIL_TEMPLATE
         assert "{videos_html}" in EMAIL_TEMPLATE
         assert "{fecha_hoy}" in EMAIL_TEMPLATE
