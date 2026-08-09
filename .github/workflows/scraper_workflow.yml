@@ -1,4 +1,4 @@
-name: 📰 Weekly Scraper (Noticias + Herramientas + Recap)
+name: "[BLOG] 📰 Weekly Scraper (Noticias + Herramientas + Recap)"
 on:
   schedule:
     - cron: "0 7 * * 6" # Sábados 07:00 UTC

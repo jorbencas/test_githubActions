@@ -9,7 +9,7 @@ from slugify import slugify
 from bs4 import BeautifulSoup
 import requests
 from PIL import Image
-from scripts.utils.constants_downloadfile import CONFIG, PROMPT_IMAGEN_TEMPLATE, PROMPT_RESUMIR_NOTICIA, PROMPT_RESUMIR_LOTE, PROMPT_RECAP_SEMANAL, PROMPT_TRADUCIR_TITULOS, FALLBACK_IMAGE_URL, FALLBACK_RECAP_INTRO, FUENTES_INGLES, ORIGEN_KEY, VAL_RSS, ENLACE_KEY, TITULO_KEY, CATEGORIA_KEY, FUENTE_KEY, BADGE_KEY
+from scripts.utils.constants_downloadfile import CONFIG, PROMPT_IMAGEN_TEMPLATE, PROMPT_RESUMIR_NOTICIA, PROMPT_RESUMIR_LOTE, PROMPT_RECAP_SEMANAL, PROMPT_TRADUCIR_TITULOS, FALLBACK_IMAGE_URL, FALLBACK_RECAP_INTRO, ORIGEN_KEY, VAL_RSS, ENLACE_KEY, TITULO_KEY, CATEGORIA_KEY, FUENTE_KEY, BADGE_KEY
 
 logger = logging.getLogger("scraper")
 
@@ -279,16 +279,16 @@ async def traducir_titulos_ia(noticias: list, client) -> list:
     
     modelos = CONFIG.get("AI_MODELS", ["gemini-2.5-flash", "gemini-2.5-pro"])
     
-    # Preparamos el texto a traducir (solo los que provienen de fuentes en inglés y no están traducidos)
+    # Preparamos el texto a traducir (solo los que no están traducidos)
     indices_traducir = []
     lineas = []
     for i, n in enumerate(noticias):
         if n.get('traducido'):
             continue
-        fuente = n.get('fuente', '').lower()
-        if any(x in fuente for x in FUENTES_INGLES):
+        titulo = n.get('titulo', '').strip()
+        if titulo:
             indices_traducir.append(i)
-            lineas.append(f"{i}|{n['titulo']}")
+            lineas.append(f"{i}|{titulo}")
     
     if not lineas:
         return noticias

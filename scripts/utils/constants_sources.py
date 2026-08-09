@@ -19,7 +19,7 @@ FUENTES = {
     "Genbeta": {"url": "https://www.genbeta.com/", "selector": "article a[href]"},
     "HobbyConsolas": {"url": "https://www.hobbyconsolas.com/tags/temas/tecnologia.html", "selector": "article a[href]"},
     "El País Tecnología": {"url": "https://elpais.com/tecnologia/", "selector": "article a[href]"},
-    "Levante-EMV": {"url": "https://www.levante-emv.com/tags/tecnologia/", "selector": "article a[href]"},
+    "Microsiervos": {"url": "https://www.microsiervos.com/", "selector": "article a[href]"},
     "Fundación Carolina": {"url": "https://www.fundacioncarolina.es/", "selector": "h3 a[href]"},
     "Applesfera": {"url": "https://www.applesfera.com/", "selector": "article a[href]"},
     "Wired": {"url": "https://www.wired.com/category/science/"},

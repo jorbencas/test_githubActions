@@ -9,10 +9,12 @@
   const btnClear = document.getElementById('btnClear');
   const pdfOutput = document.getElementById('pdfOutput');
   const pdfTheme = document.getElementById('pdfTheme');
+  const btnDownloadPdf = document.getElementById('btnDownloadPdf');
 
   if (!mdInput || !preview) return;
 
   let md = null;
+  let lastDocDef = null;
 
   function getMd() {
     if (md) return md;
@@ -126,11 +128,22 @@
 
       pdfOutput.innerHTML = '<p style="color: var(--text-muted); text-align: center;">Generando PDF…</p>';
       try {
+        lastDocDef = docDefinition;
         pdfMake.createPdf(docDefinition).download('documento.pdf');
         pdfOutput.innerHTML = '<p style="color: var(--accent); text-align: center;">✓ PDF descargado</p>';
+        if (btnDownloadPdf) btnDownloadPdf.style.display = '';
       } catch (err) {
         pdfOutput.innerHTML = '<p style="color: #ef4444;">Error: ' + err.message + '</p>';
       }
+    });
+  }
+
+  if (btnDownloadPdf) {
+    btnDownloadPdf.addEventListener('click', function () {
+      if (!lastDocDef) return;
+      try {
+        pdfMake.createPdf(lastDocDef).download('documento.pdf');
+      } catch (err) {}
     });
   }
 })();

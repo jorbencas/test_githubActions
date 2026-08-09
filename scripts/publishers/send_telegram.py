@@ -23,7 +23,7 @@ from google import genai
 
 from scripts.utils.cache import CacheManager, FileCache
 from scripts.utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_DASHBOARD_URL, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY, TS_KEY, NOTICIAS_FILENAME, TELEGRAM_SENT_FILENAME, TELEGRAM_VOICE_SENT_FILENAME, LOGS_DIR, LOG_FILES
-from scripts.utils.common import load_json, save_json, resumir_noticia
+from scripts.utils.common import load_json, save_json
 
 os.makedirs(LOGS_DIR, exist_ok=True)
 logging.basicConfig(
@@ -104,12 +104,12 @@ def enviar_mensaje(texto: str, chat_id: str, token: str, reply_markup: dict | No
 
 
 async def enviar_audio_voz(texto: str, chat_id: str, token: str) -> bool:
-    """Envía audio de voz. Si es largo, lo divide en partes de ~1500 chars."""
+    """Envía audio de voz. Si es largo, lo divide en partes de ~4000 chars."""
     voz = TELEGRAM_TTS_VOZ
     texto_limpio = strip_emojis(texto)
 
-    # Dividir en partes de ~1500 caracteres (límite seguro para TTS)
-    MAX_CHARS = 1500
+    # Dividir en partes de ~4000 caracteres (~3-4 min por audio)
+    MAX_CHARS = 4000
     partes = []
     if len(texto_limpio) <= MAX_CHARS:
         partes = [texto_limpio]
@@ -256,17 +256,10 @@ async def run():
         else:
             logger.info(f"🤖 Traduciendo: {titulo_original[:60]}...")
             titulo_es = await traducir_titulo(titulo_original, client)
-
-        resumen = n.get('resumen')
-        if not resumen:
-            logger.info(f"📝 Resumiendo: {titulo_original[:60]}...")
-            resumen = await resumir_noticia(n, client)
-            if resumen:
-                n['resumen'] = resumen
+            n['traducido'] = True
 
         titulo_safe = titulo_es.replace("_", "\\_").replace("*", "\\*").replace("[", "\\[").replace("`", "\\`")
-        cuerpo = f"{resumen}\n\n" if resumen else ""
-        mensaje = f"{icono} *{titulo_safe}*\n\n{cuerpo}[Abrir noticia]({n[ENLACE_KEY]})"
+        mensaje = f"{icono} *{titulo_safe}*\n\n[Abrir noticia]({n[ENLACE_KEY]})"
 
         if args.dry_run:
             print(f"\n{'='*50}")
@@ -302,12 +295,8 @@ async def run():
                     except (ValueError, AttributeError):
                         pass
                 titulo = n.get(TITULO_KEY, "")
-                resumen = n.get('resumen', '')
                 if titulo:
-                    entrada = titulo
-                    if resumen:
-                        entrada += ". " + resumen[:120]
-                    todas_hoy.append(entrada)
+                    todas_hoy.append(titulo)
 
             if todas_hoy:
                 resumen_voz = "Hoy en tecnología. " + ". ".join(todas_hoy) + ". Fin del resumen."

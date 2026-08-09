@@ -1,4 +1,4 @@
-name: 🔄 Dashboard Update (JS/CSS/Python)
+name: "[DASHBOARD] 🔄 Dashboard Update (JS/CSS/Python)"
 on:
   push:
     branches: [master]

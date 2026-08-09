@@ -1,5 +1,6 @@
 MDTOOLS_NAV_HTML = """<nav class="main-nav" id="mainNav">
   <div class="nav-inner">
+    <a href="/" class="nav-back">← Dashboard</a>
     <a href="/mdtools/" class="nav-brand">Markdown Tools</a>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
       <span></span><span></span><span></span>
@@ -39,7 +40,8 @@ MDTOOLS_BASE_TEMPLATE = """<!DOCTYPE html>
   </main>
 
   <footer class="site-footer">
-    <p>Markdown Tools &mdash; Herramientas offline para convertir y transformar Markdown</p>
+    <p>Markdown Tools &mdash; Herramientas para convertir y transformar Markdown</p>
+    <p style="margin-top:6px;"><a href="https://github.com/jorbencas" target="_blank" rel="noopener">@jorbencas</a> &middot; <a href="https://github.com/jorbencas/test_githubActions" target="_blank" rel="noopener">GitHub</a></p>
   </footer>
 
   <script src="/mdtools/js/nav.js"></script>
@@ -49,7 +51,7 @@ MDTOOLS_BASE_TEMPLATE = """<!DOCTYPE html>
 
 MDTOOLS_HOME_CONTENT = """    <section class="hero">
       <h1>Markdown Tools</h1>
-      <p class="hero-subtitle">Herramientas offline para convertir y transformar Markdown</p>
+      <p class="hero-subtitle">Herramientas para convertir y transformar Markdown</p>
     </section>
 
     <section class="tools-grid">
@@ -120,7 +122,10 @@ MDTOOLS_PDF_CONTENT = """    <section class="tool-header">
     <section class="output-section">
       <div class="output-header">
         <h3>Resultado</h3>
-        <button class="btn-primary" id="btnGenerate">Generar PDF</button>
+        <div class="pane-actions">
+          <button class="btn-primary" id="btnGenerate">Generar PDF</button>
+          <button class="btn-sm btn-download" id="btnDownloadPdf" title="Descargar PDF" style="display:none">⬇</button>
+        </div>
       </div>
       <div id="pdfOutput" class="output-content">
         <p class="output-placeholder">Haz clic en "Generar PDF" para ver el resultado.</p>
@@ -162,6 +167,7 @@ MDTOOLS_SLIDES_CONTENT = """    <section class="tool-header">
             <span id="slideCounter" class="slide-counter">1 / 1</span>
             <button class="btn-sm" id="btnNext">▶</button>
             <button class="btn-sm" id="btnFullscreen">⛶</button>
+            <button class="btn-sm btn-download" id="btnDownload" title="Descargar presentación">⬇</button>
           </div>
         </div>
         <div id="preview" class="preview-content slide-preview"></div>

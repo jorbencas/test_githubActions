@@ -429,7 +429,9 @@ REGLAS PARA categorias_resumen:
 RESPONDE SOLO EL JSON, sin markdown, sin comentarios, sin explicaciones."""
 
 # ── Prompt traducir titulares ──
-PROMPT_TRADUCIR_TITULOS = """Traduce estos titulares de tecnología al español de forma profesional y natural.
+PROMPT_TRADUCIR_TITULOS = """Analiza estos titulares de tecnología.
+Si un titular NO está en español, tradúcelo al español de forma profesional y natural.
+Si ya está en español, devuélvelo tal cual.
 Manten nombres propios, marcas y acrónimos (OpenAI, NVIDIA, iPhone, etc.) sin traducir.
 Conserva el formato "id|título" en la respuesta.
 Devuelve SOLO JSON, sin markdown ni explicaciones.
@@ -438,7 +440,7 @@ TEXTO:
 {texto_a_traducir}
 
 FORMATO:
-{{"traducciones": [{{"id": 0, "tr": "Título traducido 0"}}, {{"id": 1, "tr": "Título traducido 1"}}]}}"""
+{{"traducciones": [{{"id": 0, "tr": "Título 0"}}, {{"id": 1, "tr": "Título 1"}}]}}"""
 
 # ── Email source header ──
 EMAIL_SOURCE_HEADER = """<tr>

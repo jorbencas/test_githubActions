@@ -1,4 +1,4 @@
-name: 🌐 Scraping Semidiario (tier standard)
+name: "[NOTICIAS] 🌐 Scraping Semidiario (tier standard)"
 on:
   schedule:
     - cron: "0 */6 * * *" # Cada 6 horas

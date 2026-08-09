@@ -1,4 +1,4 @@
-name: 📧 Send Email Newsletter
+name: "[NOTICIAS] 📧 Send Email Newsletter"
 on:
   schedule:
     - cron: "0 9 * * *" # Diariamente a las 09:00 UTC

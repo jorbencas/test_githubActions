@@ -127,6 +127,16 @@
   background: var(--accent-hover);
 }
 
+.btn-download {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  transition: opacity var(--transition);
+}
+
+.btn-download:hover {
+  opacity: 1;
+}
+
 select {
   padding: 4px 10px;
   border: 1px solid var(--border);

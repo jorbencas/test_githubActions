@@ -1,4 +1,4 @@
-name: 🤖 Send Telegram Notification
+name: "[NOTICIAS] 🤖 Send Telegram Notification"
 on:
   schedule:
     - cron: "*/30 * * * *" # Cada 30 minutos

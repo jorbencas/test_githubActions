@@ -1,4 +1,4 @@
-name: ⏰ Scraping Horario (tier light)
+name: "[NOTICIAS] ⏰ Scraping Horario (tier light)"
 on:
   schedule:
     - cron: "0 * * * *" # Cada hora

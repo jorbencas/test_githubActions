@@ -347,7 +347,7 @@ def render_youtube_card(item: dict, avatars: dict) -> str:
     favicon = _favicon_src(fuente, avatars)
     tipo = item.get(TIPO_KEY, TIPO_VAL_VIDEO)
 
-    thumbnail = f"https://img.youtube.com/vi/{id_video}/mqdefault.jpg" if id_video else ""
+    thumbnail = f"https://img.youtube.com/vi/{id_video}/default.jpg" if id_video else ""
     tipo_badge = _video_type_badge(tipo)
 
     return (

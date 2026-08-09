@@ -1,4 +1,4 @@
-"""clean_news.py — Quarterly maintenance: filter videos, validate links."""
+"""clean_news.py — Quarterly maintenance: validate old links, remove broken ones."""
 import os
 import json
 import requests
@@ -15,18 +15,13 @@ def limpiar_y_validar_historial(historial):
     print(f"🧹 Iniciando limpieza y validación ({len(historial)} items)...")
     ahora = datetime.now()
 
-    solo_noticias = [x for x in historial if x.get(TIPO_KEY) in ('noticia', None)]
-    vids_eliminados = len(historial) - len(solo_noticias)
-    if vids_eliminados > 0:
-        print(f"🗑️ Eliminados {vids_eliminados} vídeos/shorts (tipo != noticia).")
-
     limite_antiguedad = ahora - timedelta(days=90)
     limite_cache = ahora - timedelta(days=30)
 
     items_a_validar = []
     items_intactos = []
 
-    for item in solo_noticias:
+    for item in historial:
         ts_str = item.get(TS_KEY, ahora.isoformat()).replace('Z', '')
         try:
             fecha_adicion = datetime.fromisoformat(ts_str)
@@ -58,6 +53,7 @@ def limpiar_y_validar_historial(historial):
     def chequear(item):
         enlace = item.get(ENLACE_KEY)
         titulo = item.get(TITULO_KEY, 'Sin título')[:30]
+        tipo = item.get(TIPO_KEY, 'noticia')
         if not enlace:
             return None
         try:
@@ -66,7 +62,7 @@ def limpiar_y_validar_historial(historial):
                              allow_redirects=True, stream=True)
             r.close()
             if 400 <= r.status_code < 600:
-                print(f"❌ Roto [{r.status_code}]: {titulo}...")
+                print(f"❌ Roto [{r.status_code}] ({tipo}): {titulo}...")
                 return None
             item[ULTIMA_VERIF_KEY] = ahora.isoformat()
             return item
@@ -81,8 +77,9 @@ def limpiar_y_validar_historial(historial):
             if r is not None:
                 resultados.append(r)
 
+    eliminados = len(items_a_validar) - len(resultados)
     final = items_intactos + resultados
-    print(f"✨ Historial saneado. Total actual: {len(final)} noticias.")
+    print(f"✨ Historial saneado. Eliminados {eliminados} enlaces rotos. Total actual: {len(final)} items.")
     return final
 
 

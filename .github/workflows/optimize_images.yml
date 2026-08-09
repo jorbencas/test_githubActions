@@ -1,4 +1,4 @@
-name: 🖼️ Optimizar imágenes del blog
+name: "[BLOG] 🖼️ Optimizar imágenes del blog"
 on:
   repository_dispatch:
     types: [optimize-images]

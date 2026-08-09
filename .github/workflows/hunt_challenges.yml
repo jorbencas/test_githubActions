@@ -1,4 +1,4 @@
-name: 🏹 Cazador de Retos IA
+name: "[BLOG] 🏹 Cazador de Retos IA"
 on:
   workflow_dispatch:
   schedule:

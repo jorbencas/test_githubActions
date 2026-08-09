@@ -197,7 +197,7 @@ async def run():
         filas_videos += EMAIL_VIDEO_HEADER.format(video_count=len(todos_videos))
         for v in todos_videos:
             canal = v.get(FUENTE_KEY, "YouTube")
-            thumbnail = v.get("thumbnail", f"https://img.youtube.com/vi/{v.get(ID_VIDEO_KEY, '')}/mqdefault.jpg")
+            thumbnail = v.get("thumbnail", f"https://img.youtube.com/vi/{v.get(ID_VIDEO_KEY, '')}/default.jpg")
             enlace = v.get(ENLACE_KEY, "#")
             titulo = v.get(TITULO_KEY, "Sin título")
             duracion = v.get("duracion", "")
@@ -247,6 +247,7 @@ async def run():
                 else:
                     logger.info(f"  Traduciendo: {titulo_original[:60]}...")
                     titulo_es = await traducir_titulo(titulo_original, client)
+                    n['traducido'] = True
 
                 resumen = n.get('resumen')
                 if not resumen:

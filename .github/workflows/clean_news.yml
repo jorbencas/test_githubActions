@@ -1,4 +1,4 @@
-name: 🧹 Mantenimiento Trimestral (Cleanup)
+name: "[NOTICIAS] 🧹 Mantenimiento Trimestral (Cleanup)"
 on:
   schedule:
     # Día 1 de Enero, Abril, Julio y Octubre a las 00:00 UTC
@@ -15,12 +15,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      # --- CONFIGURACIÓN DE CACHÉ ---
       - name: Cache de dependencias de Python
         uses: actions/cache@v3
         with:
           path: ~/.cache/pip
-          # La clave de la caché depende del contenido de requirements.txt
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
@@ -35,5 +33,10 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add files/noticias_historico.json
-          git diff --quiet && git diff --staged --quiet || git commit -m "🧹 Mantenimiento trimestral: limpieza de enlaces"
-          git push origin master
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "Sin cambios que commitear."
+          else
+            git commit -m "🧹 Mantenimiento trimestral: limpieza de enlaces"
+            git pull --rebase origin master
+            git push origin master
+          fi
