@@ -16,14 +16,6 @@ MDTOOLS_NAV_HTML = """<nav class="main-nav" id="mainNav">
   </div>
 </nav>"""
 
-MDTOOLS_TOOLS_SUBNAV_HTML = """<div class="tools-subnav" id="toolsSubnav">
-  <div class="subnav-inner">
-    <a href="#editor">Editor</a>
-    <a href="#preview">Preview</a>
-    <a href="#output">Resultado</a>
-  </div>
-</div>"""
-
 MDTOOLS_BASE_TEMPLATE = """<!DOCTYPE html>
 <html lang="es">
 <head>

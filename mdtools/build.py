@@ -5,7 +5,7 @@ import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from scripts.utils.constants_mdtools import (
-    MDTOOLS_BASE_TEMPLATE, MDTOOLS_NAV_HTML, MDTOOLS_TOOLS_SUBNAV_HTML,
+    MDTOOLS_BASE_TEMPLATE, MDTOOLS_NAV_HTML,
     MDTOOLS_HOME_CONTENT, MDTOOLS_PDF_CONTENT, MDTOOLS_SLIDES_CONTENT,
     MDTOOLS_TABLE_CONTENT, MDTOOLS_SNIPPETS_CONTENT, MDTOOLS_CHEATSHEET_CONTENT,
     MDTOOLS_JS_CONFIG,
@@ -55,7 +55,7 @@ write_page("pdf.html", render_page(
     title="Markdown a PDF",
     description="Convierte Markdown a PDF con tablas, listas y código",
     active_nav="pdf",
-    content=MDTOOLS_TOOLS_SUBNAV_HTML + "\n" + MDTOOLS_PDF_CONTENT,
+    content=MDTOOLS_PDF_CONTENT,
     extra_head="<script src=\"https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/pdfmake.min.js\"></script>"
                "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/vfs_fonts.js\"></script>"
                "<script src=\"https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js\"></script>",
@@ -67,7 +67,7 @@ write_page("slides.html", render_page(
     title="Diapositivas",
     description="Crea presentaciones estilo Reveal.js desde Markdown",
     active_nav="slides",
-    content=MDTOOLS_TOOLS_SUBNAV_HTML + "\n" + MDTOOLS_SLIDES_CONTENT,
+    content=MDTOOLS_SLIDES_CONTENT,
     extra_head="<script src=\"https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js\"></script>",
     extra_scripts="<script src=\"/mdtools/js/slides.js\"></script>",
 ))
@@ -77,7 +77,7 @@ write_page("table.html", render_page(
     title="Tabla Markdown",
     description="Genera tablas Markdown a partir de datos tabulares",
     active_nav="table",
-    content=MDTOOLS_TOOLS_SUBNAV_HTML + "\n" + MDTOOLS_TABLE_CONTENT,
+    content=MDTOOLS_TABLE_CONTENT,
     extra_scripts="<script src=\"/mdtools/js/table.js\"></script>",
 ))
 
@@ -86,7 +86,7 @@ write_page("snippets.html", render_page(
     title="Snippets de Código",
     description="Extrae y formatea fragmentos de código Markdown",
     active_nav="snippets",
-    content=MDTOOLS_TOOLS_SUBNAV_HTML + "\n" + MDTOOLS_SNIPPETS_CONTENT,
+    content=MDTOOLS_SNIPPETS_CONTENT,
     extra_head="<script src=\"https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js\"></script>",
     extra_scripts="<script src=\"/mdtools/js/snippets.js\"></script>",
 ))
