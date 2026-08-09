@@ -24,6 +24,8 @@
   .hero h1 { font-size: 1.8rem; }
   .tools-grid { grid-template-columns: 1fr; }
   .cheatsheet-grid { grid-template-columns: 1fr; }
+  .cheat-row { grid-template-columns: 1fr; }
+  .cheat-code { border-right: none; border-bottom: 1px solid var(--border); }
   .slide-preview .slide { padding: 24px; font-size: 1rem; }
 
   .output-header { flex-direction: column; gap: 12px; align-items: flex-start; }

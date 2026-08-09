@@ -8,7 +8,7 @@ from scripts.utils.constants_mdtools import (
     MDTOOLS_BASE_TEMPLATE, MDTOOLS_NAV_HTML, MDTOOLS_TOOLS_SUBNAV_HTML,
     MDTOOLS_HOME_CONTENT, MDTOOLS_PDF_CONTENT, MDTOOLS_SLIDES_CONTENT,
     MDTOOLS_TABLE_CONTENT, MDTOOLS_SNIPPETS_CONTENT, MDTOOLS_CHEATSHEET_CONTENT,
-    MDTOOLS_MD_CONTENT, MDTOOLS_JS_CONFIG,
+    MDTOOLS_JS_CONFIG,
 )
 
 OUTPUT_DIR = os.path.join("public", "mdtools")
@@ -19,7 +19,7 @@ os.makedirs(CSS_DIR, exist_ok=True)
 os.makedirs(JS_DIR, exist_ok=True)
 
 def render_nav(active: str) -> str:
-    keys = ["home", "pdf", "slides", "table", "snippets", "md", "cheatsheet"]
+    keys = ["home", "pdf", "slides", "table", "snippets", "cheatsheet"]
     return MDTOOLS_NAV_HTML.format(**{f"active_{k}": "active" if k == active else "" for k in keys})
 
 def render_page(title: str, description: str, active_nav: str, content: str,
@@ -93,20 +93,14 @@ write_page("snippets.html", render_page(
                   "<script src=\"/mdtools/js/snippets.js\"></script>",
 ))
 
-# ── Cheatsheet MD ──
-write_page("md.html", render_page(
-    title="Cheatsheet MD",
-    description="Referencia completa de Markdown puro: syntax, tablas, listas, código, emojis y más.",
-    active_nav="md",
-    content=MDTOOLS_MD_CONTENT,
-))
-
-# ── Cheatsheet MDX ──
+# ── Cheatsheet ──
 write_page("cheatsheet.html", render_page(
-    title="Cheatsheet MDX",
-    description="Referencia rápida de MDX: imports, JSX, componentes, Astro.",
+    title="Cheatsheet",
+    description="Referencia completa de Markdown y MDX con preview en vivo.",
     active_nav="cheatsheet",
     content=MDTOOLS_CHEATSHEET_CONTENT,
+    extra_head="<script src=\"https://cdnjs.cloudflare.com/ajax/libs/markdown-it/14.1.0/markdown-it.min.js\"></script>",
+    extra_scripts="<script src=\"/mdtools/js/cheatsheet.js\"></script>",
 ))
 
 print("Listo ✅")
