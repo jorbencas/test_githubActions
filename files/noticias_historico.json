@@ -1,5 +1,57 @@
 [
     {
+        "titulo": "Brutal agresión homófoba a un grupo de niñas de 14 años en Benialí al grito de \"Viva Franco\"",
+        "enlace": "https://www.levante-emv.com/sucesos/2026/08/09/agresion-homofoba-beniali-tres-menores-agreden-ninas-grupo-grito-viva-franco-133212622.html",
+        "fuente": "Levante-EMV",
+        "tipo": "noticia",
+        "f": "09/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "09/08/2026",
+        "ts": "2026-08-09T12:51:30.695466"
+    },
+    {
+        "titulo": "Tras años de espera, Apple entrará en los plegables con un doble golpe: primero el iPhone, luego el iPad que será más grande que un Mac",
+        "enlace": "https://www.applesfera.com/rumores/anos-espera-apple-entrara-plegables-doble-golpe-primero-iphone-luego-ipad-que-sera-grande-que-mac",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "f": "09/08",
+        "fecha_publicacion": "2026-08-09T11:01:15Z",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "09/08/2026",
+        "ts": "2026-08-09T12:51:30.854750"
+    },
+    {
+        "titulo": "¿Por qué deberías borrar la memoria caché de tu móvil Android cada poco tiempo y cómo se hace?",
+        "enlace": "https://www.computerhoy.com/moviles/por-que-deberias-borrar-memoria-cache-tu-movil-android-cada-poco-tiempo-como-se-hace_7013128_0.html",
+        "fuente": "ComputerHoy",
+        "tipo": "noticia",
+        "f": "09/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "09/08/2026",
+        "ts": "2026-08-09T12:51:32.325307"
+    },
+    {
+        "titulo": "AI research",
+        "enlace": "https://the-decoder.com/artificial-intelligence-news/ai-research/",
+        "fuente": "The Decoder",
+        "tipo": "noticia",
+        "f": "09/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "09/08/2026",
+        "ts": "2026-08-09T12:51:49.603011"
+    },
+    {
         "titulo": "El complicado caso de legar tu patrimonio digital",
         "enlace": "https://www.wired.com/story/digital-estate-planning-tips/",
         "fuente": "Wired",
