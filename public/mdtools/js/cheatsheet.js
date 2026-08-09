@@ -1,46 +1,54 @@
-/* cheatsheet.js — Render previews for cheatsheet items */
-(function() {
+/* cheatsheet.js: Preview en vivo — robusto */
+(function () {
   'use strict';
 
-  const PREVIEWS = document.querySelectorAll('.md-preview[data-render]');
+  var PREVIEWS = document.querySelectorAll('.md-preview[data-render]');
   if (!PREVIEWS.length) return;
 
+  var md = null;
+
   function getMd() {
-    if (typeof markdownit === 'function') {
-      return markdownit({ html: true, breaks: true, linkify: true, typographer: true });
+    if (md) return md;
+    try {
+      if (typeof markdownit === 'function') {
+        md = markdownit({ html: true, breaks: true, linkify: true, typographer: true });
+      } else if (window.markdownit) {
+        md = window.markdownit({ html: true, breaks: true, linkify: true, typographer: true });
+      } else {
+        return null;
+      }
+      return md;
+    } catch (e) {
+      return null;
     }
-    if (window.markdownit) {
-      return window.markdownit({ html: true, breaks: true, linkify: true, typographer: true });
-    }
-    return null;
   }
 
   function cleanCode(el) {
-    const code = el.querySelector('code');
+    var code = el.querySelector('code');
     if (!code) return '';
-    let text = code.textContent;
+    var text = code.textContent;
     text = text.replace(/^```[\w]*\n?/, '').replace(/\n?```$/, '');
     return text.trim();
   }
 
   function renderAll() {
-    const md = getMd();
-    if (!md) {
-      console.warn('cheatsheet.js: markdown-it not loaded');
+    var parser = getMd();
+    if (!parser) {
+      setTimeout(renderAll, 200);
       return;
     }
 
-    PREVIEWS.forEach(function(preview) {
-      const item = preview.closest('.cheat-item');
+    PREVIEWS.forEach(function (preview) {
+      var item = preview.closest('.cheat-item');
       if (!item) return;
-      const codeBlock = item.querySelector('.cheat-code');
+      var codeBlock = item.querySelector('.cheat-code');
       if (!codeBlock) return;
 
-      const raw = cleanCode(codeBlock);
+      var raw = cleanCode(codeBlock);
       if (!raw) return;
 
       try {
-        preview.innerHTML = md.render(raw);
+        preview.innerHTML = parser.render(raw);
       } catch (e) {
         preview.textContent = raw;
       }

@@ -69,8 +69,7 @@ write_page("slides.html", render_page(
     active_nav="slides",
     content=MDTOOLS_TOOLS_SUBNAV_HTML + "\n" + MDTOOLS_SLIDES_CONTENT,
     extra_head="<script src=\"https://cdnjs.cloudflare.com/ajax/libs/markdown-it/14.1.0/markdown-it.min.js\"></script>",
-    extra_scripts="<script src=\"/mdtools/js/parser-worker.js\"></script>"
-                  "<script src=\"/mdtools/js/slides.js\"></script>",
+    extra_scripts="<script src=\"/mdtools/js/slides.js\"></script>",
 ))
 
 # ── Table ──
@@ -89,8 +88,7 @@ write_page("snippets.html", render_page(
     active_nav="snippets",
     content=MDTOOLS_TOOLS_SUBNAV_HTML + "\n" + MDTOOLS_SNIPPETS_CONTENT,
     extra_head="<script src=\"https://cdnjs.cloudflare.com/ajax/libs/markdown-it/14.1.0/markdown-it.min.js\"></script>",
-    extra_scripts="<script src=\"/mdtools/js/parser-worker.js\"></script>"
-                  "<script src=\"/mdtools/js/snippets.js\"></script>",
+    extra_scripts="<script src=\"/mdtools/js/snippets.js\"></script>",
 ))
 
 # ── Cheatsheet ──
