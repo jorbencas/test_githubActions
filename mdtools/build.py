@@ -58,7 +58,7 @@ write_page("pdf.html", render_page(
     content=MDTOOLS_TOOLS_SUBNAV_HTML + "\n" + MDTOOLS_PDF_CONTENT,
     extra_head="<script src=\"https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/pdfmake.min.js\"></script>"
                "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/vfs_fonts.js\"></script>"
-               "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/markdown-it/14.1.0/markdown-it.min.js\"></script>",
+               "<script src=\"https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js\"></script>",
     extra_scripts="<script src=\"/mdtools/js/pdf.js\"></script>",
 ))
 
@@ -68,7 +68,7 @@ write_page("slides.html", render_page(
     description="Crea presentaciones estilo Reveal.js desde Markdown",
     active_nav="slides",
     content=MDTOOLS_TOOLS_SUBNAV_HTML + "\n" + MDTOOLS_SLIDES_CONTENT,
-    extra_head="<script src=\"https://cdnjs.cloudflare.com/ajax/libs/markdown-it/14.1.0/markdown-it.min.js\"></script>",
+    extra_head="<script src=\"https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js\"></script>",
     extra_scripts="<script src=\"/mdtools/js/slides.js\"></script>",
 ))
 
@@ -87,7 +87,7 @@ write_page("snippets.html", render_page(
     description="Extrae y formatea fragmentos de código Markdown",
     active_nav="snippets",
     content=MDTOOLS_TOOLS_SUBNAV_HTML + "\n" + MDTOOLS_SNIPPETS_CONTENT,
-    extra_head="<script src=\"https://cdnjs.cloudflare.com/ajax/libs/markdown-it/14.1.0/markdown-it.min.js\"></script>",
+    extra_head="<script src=\"https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js\"></script>",
     extra_scripts="<script src=\"/mdtools/js/snippets.js\"></script>",
 ))
 
@@ -97,7 +97,7 @@ write_page("cheatsheet.html", render_page(
     description="Referencia completa de Markdown y MDX con preview en vivo.",
     active_nav="cheatsheet",
     content=MDTOOLS_CHEATSHEET_CONTENT,
-    extra_head="<script src=\"https://cdnjs.cloudflare.com/ajax/libs/markdown-it/14.1.0/markdown-it.min.js\"></script>",
+    extra_head="<script src=\"https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js\"></script>",
     extra_scripts="<script src=\"/mdtools/js/cheatsheet.js\"></script>",
 ))
 
