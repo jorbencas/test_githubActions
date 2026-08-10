@@ -1,5 +1,18 @@
 [
     {
+        "titulo": "¿Cuánta basura hay en Windows 11? Este usuario dejó que Claude analizara su PC y el resultado sorprende",
+        "enlace": "https://www.computerhoy.com/software/cuanta-basura-hay-windows-11-este-usuario-dejo-que-claude-analizara-su-pc-resultado-sorprende_7017674_0.html",
+        "fuente": "ComputerHoy",
+        "tipo": "noticia",
+        "f": "10/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "10/08/2026",
+        "ts": "2026-08-10T01:50:13.855576"
+    },
+    {
         "titulo": "Cómo impulsamos a CDC a Postgres",
         "enlace": "https://www.snowflake.com/en/blog/engineering/postgres-to-snowflake-replication-mirroring/",
         "fuente": "Hacker News",
