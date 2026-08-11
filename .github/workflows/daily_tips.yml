@@ -1,0 +1,46 @@
+name: "[TIPS] 💡 Tips de IT (cada 6h)"
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # Cada 6 horas: 00:00, 06:00, 12:00, 18:00 UTC
+  workflow_dispatch:
+
+jobs:
+  send_tips:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          ref: master
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests google-generativeai
+
+      - name: 💾 Restaurar historial de tips
+        uses: actions/cache@v4
+        with:
+          path: tips_history.json
+          key: tips-history-${{ github.run_id }}
+          restore-keys: tips-history-
+
+      - name: 💡 Enviar tips
+        env:
+          TIPS_BOT_TOKEN: ${{ secrets.TIPS_BOT_TOKEN }}
+          TIPS_CHAT_ID: ${{ secrets.TIPS_CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/tips_generator.py
+
+      - name: 💾 Guardar historial
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: tips_history.json
+          key: tips-history-${{ github.run_id }}
