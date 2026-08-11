@@ -41,6 +41,7 @@ FUENTES = {
     "Meta AI": {"url": "https://engineering.fb.com/category/artificial-intelligence/", "selector": "article a[href]"},
     "DeepMind": {"url": "https://deepmind.google/discover/blog/", "selector": "h3.card__title"},
     "VentureBeat AI": {"url": "https://venturebeat.com/category/ai/", "selector": "header.text-editorial-headline-030 h2 a"},
+    "Cactus Compute": {"url": "https://cactuscompute.com/blog", "selector": "article a[href]"},
     # ── Fuentes IA especializadas ──
     "AssemblyAI": {"url": "https://www.assemblyai.com/blog/", "selector": "article h2 a"},
     "Cohere": {"url": "https://cohere.com/blog", "selector": "a[href*='/blog/'] h3"},
