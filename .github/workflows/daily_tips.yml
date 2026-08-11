@@ -33,7 +33,7 @@ jobs:
 
       - name: 💡 Enviar tips
         env:
-          TIPS_BOT_TOKEN: ${{ secrets.TIPS_BOT_TOKEN }}
+          TIPS_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TIPS_CHAT_ID: ${{ secrets.TIPS_CHAT_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scripts/tips_generator.py
