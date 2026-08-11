@@ -1,5 +1,33 @@
 [
     {
+        "titulo": "Cómo hacer que tu proyecto paralelo sea visible y conseguir usuarios de pago",
+        "enlace": "https://www.freecodecamp.org/news/how-to-get-your-side-project-seen-and-gain-paying-users/",
+        "fuente": "freeCodeCamp",
+        "tipo": "noticia",
+        "f": "11/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "11/08/2026",
+        "ts": "2026-08-11T01:46:51.584360",
+        "traducido": true
+    },
+    {
+        "titulo": "Ingeniería de Evaluación de IA: Construye una plataforma de evaluación de LLM de grado de producción desde cero [Manual Completo]",
+        "enlace": "https://www.freecodecamp.org/news/ai-evaluation-engineering-build-a-production-grade-llm-evaluation-platform-handbook/",
+        "fuente": "freeCodeCamp",
+        "tipo": "noticia",
+        "f": "11/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "11/08/2026",
+        "ts": "2026-08-11T01:46:51.585116",
+        "traducido": true
+    },
+    {
         "titulo": "OpenAI supuestamente completó una oferta pública de adquisición de acciones de empleados por $7 mil millones",
         "enlace": "https://techcrunch.com/2026/08/10/openai-reportedly-completed-a-7-billion-employee-tender-offer/",
         "fuente": "TechCrunch",
