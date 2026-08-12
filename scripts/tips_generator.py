@@ -688,22 +688,41 @@ def build_gemini_prompt(categories, sent_titles, news, tools):
 2. Cada tip = UNA categoría DIFERENTE del batch
 3. NUNCA repitas título, concepto ni idea de la lista de enviados
 4. Cada tip debe tener UNA SOLA idea clara y concreta
-5. El body debe explicar QUÉ es, CÓMO se usa y POR QUÉ es útil (en máximo 3 frases)
-6. Todo en ESPAÑOL correcto, sin anglicismos innecesarios
-7. Ejemplos reales de comandos, código o configuración cuando aplique
-8. Varía dificultad: 1=básico, 2=intermedio, 3=avanzado
+5. Si el tip es sobre un comando, SQL, bash, scripting, código, framework o herramienta técnica: DEBE incluir un ejemplo de código o comando real
+6. Si el tip es sobre un concepto, principio, patrón o idea general: NO pongas código, solo explicación clara
+7. Todo en ESPAÑOL correcto, sin anglicismos innecesarios
+8. NUNCA uses emojis en el body ni en el título
+9. Usa términos técnicos en INGLÉS cuando sea estándar (cold start, hot function, load balancer, etc.)
+10. Varía dificultad: 1=básico, 2=intermedio, 3=avanzado
 
-=== ESTRUCTURA DE CADA TIP ===
-- title: nombre claro y descriptivo (ej: "Usar htop en vez de top")
-- body: explicación con 1 idea principal + ejemplo práctico (máx 3 frases)
-- cat: una categoría del batch
-- difficulty: 1, 2 o 3
+=== CUÁNDO INCLUIR CÓDIGO ===
+- Comandos de terminal (linux, docker, git, etc.)
+- SQL queries
+- Scripts bash
+- Código de programación (python, javascript, rust, etc.)
+- Configuraciones (nginx, docker-compose, etc.)
+- APIs y endpoints
 
-=== EJEMPLO DE TIP BIEN ESTRUCTURADO ===
+=== CUÁNDO NO INCLUIR CÓDIGO ===
+- Conceptos abstractos (polimorfismo, herencia, etc.)
+- Principios y buenas prácticas
+- Consejos de carrera
+- Leyendas de programación
+- Organización y arquitectura
+
+=== EJEMPLO CON CÓDIGO ===
 {{
-  "cat": "linux",
-  "title": "Renombrar archivos en masa con rename",
-  "body": "El comando rename de Perl permite renombrar archivos con patrones regex. Ejemplo: rename 's/\\.txt$/\\.md/' *.txt cambia todas las extensiones .txt por .md en una sola línea.",
+  "cat": "postgresql",
+  "title": "Explicar un query SQL lento",
+  "body": "En PostgreSQL: EXPLAIN ANALYZE seguido de tu query. Te muestra el plan de ejecución real y cuánto tarda cada paso. Ejemplo: EXPLAIN ANALYZE SELECT * FROM usuarios WHERE email = 'test@mail.com'; Esencial para optimizar.",
+  "difficulty": 2
+}}
+
+=== EJEMPLO SIN CÓDIGO ===
+{{
+  "cat": "programming",
+  "title": "¿Qué es polimorfismo?",
+  "body": "Objetos de diferentes clases respondiendo al mismo método. Un gato.hablar() dice 'miau', un perro.hablar() dice 'guau'. El código que usa hablar() no necesita saber qué animal es.",
   "difficulty": 2
 }}
 
@@ -783,15 +802,7 @@ def mix_tips(gemini_tips, db_tips, total=10):
 
 
 def format_tip_message(tip, index):
-    emoji = CAT_EMOJI.get(tip["cat"], "📌")
-    cat_name = CAT_NAMES.get(tip["cat"], tip["cat"])
-    diff = DIFF_NAMES.get(tip.get("difficulty", 1), "?")
-    source = "Gemini" if tip.get("source") == "gemini" else "DB"
-    return (
-        f"{emoji} *Tip {index}: {tip['title']}*\n"
-        f"📂 {cat_name} · 🎯 {diff} · 🤖 {source}\n\n"
-        f"{tip['body']}"
-    )
+    return tip['body']
 
 
 DIAS_ES = {
@@ -814,10 +825,9 @@ def build_daily_message(tips):
     hour_str = now.strftime("%H:%M")
 
     header = (
-        f"{greeting} *Tips de IT*\n"
-        f"📅 {date_str} — {hour_str}\n"
+        f"{greeting}\n"
+        f"{date_str} — {hour_str}\n"
         f"━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        f"💡 {len(tips)} tips para mejorar tus skills:\n"
     )
 
     body_parts = []
@@ -826,11 +836,7 @@ def build_daily_message(tips):
 
     body = "\n\n━━━━━━━━━━━━━━━━━━━━━━━━━\n\n".join(body_parts)
 
-    footer = (
-        "\n\n━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        "💡 _Practica al menos 1 tip hoy._\n"
-        "🤖 _Gemini + DB local · Nunca se repiten_"
-    )
+    footer = ""
 
     return header + "\n\n" + body + footer
 
@@ -838,11 +844,11 @@ def build_daily_message(tips):
 def _get_time_greeting(now):
     hour = now.hour
     if 5 <= hour < 12:
-        return "☀️ *Buenos días —*"
+        return "*Buenos días*"
     elif 12 <= hour < 19:
-        return "🌤️ *Buenas tardes —*"
+        return "*Buenas tardes*"
     else:
-        return "🌙 *Buenas noches —*"
+        return "*Buenas noches*"
 
 
 def send_telegram(text):
