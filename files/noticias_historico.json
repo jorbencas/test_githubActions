@@ -1,5 +1,19 @@
 [
     {
+        "titulo": "Revisión de artículo de IA: Modelado generativo mediante la estimación de gradientes de la distribución de datos",
+        "enlace": "https://www.freecodecamp.org/news/ai-paper-review-generative-modeling-by-estimating-gradients-of-the-data-distribution/",
+        "fuente": "freeCodeCamp",
+        "tipo": "noticia",
+        "f": "13/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "13/08/2026",
+        "ts": "2026-08-13T02:00:41.891365",
+        "traducido": true
+    },
+    {
         "titulo": "Aug 13, 2026Frontier Red TeamPatterns and problems in emerging multiagent systems",
         "enlace": "https://www.anthropic.com/research/multiagent-systems",
         "fuente": "Anthropic Research",
