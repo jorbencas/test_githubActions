@@ -737,11 +737,10 @@ def generate_tips_gemini(count, categories, sent_titles):
         return None
 
     try:
-        import google.generativeai as genai
-        genai.configure(api_key=GEMINI_API_KEY)
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        from google import genai
+        client = genai.Client(api_key=GEMINI_API_KEY)
     except ImportError:
-        print("⚠️  google-generativeai no instalado. Solo se usarán tips de la DB.")
+        print("⚠️  google-genai no instalado. Solo se usarán tips de la DB.")
         return None
     except Exception as e:
         print(f"⚠️  Error al inicializar Gemini: {e}")
@@ -752,7 +751,10 @@ def generate_tips_gemini(count, categories, sent_titles):
     prompt = build_gemini_prompt(categories, sent_titles, news, tools)
 
     try:
-        response = model.generate_content(prompt)
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt,
+        )
         text = response.text.strip()
         if text.startswith("```"):
             text = text.split("\n", 1)[1] if "\n" in text else text[3:]
@@ -801,40 +803,34 @@ def mix_tips(gemini_tips, db_tips, total=10):
     return mixed[:total]
 
 
+SISTEMAS_POR_CATEGORIA = {
+    "linux": "Linux", "ubuntu": "Linux", "bash": "Linux", "bash_scripting": "Linux",
+    "windows": "Windows",
+    "macos": "macOS",
+    "android": "Android", "android_studio": "Android",
+    "ios": "iOS",
+}
+
+
 def format_tip_message(tip, index):
-    return tip['body']
-
-
-DIAS_ES = {
-    0: "Lunes", 1: "Martes", 2: "Miércoles", 3: "Jueves",
-    4: "Viernes", 5: "Sábado", 6: "Domingo",
-}
-MESES_ES = {
-    1: "Enero", 2: "Febrero", 3: "Marzo", 4: "Abril",
-    5: "Mayo", 6: "Junio", 7: "Julio", 8: "Agosto",
-    9: "Septiembre", 10: "Octubre", 11: "Noviembre", 12: "Diciembre",
-}
+    cat = tip.get("cat", "")
+    emoji = CAT_EMOJI.get(cat, "?")
+    nombre = CAT_NAMES.get(cat, cat)
+    sistema = SISTEMAS_POR_CATEGORIA.get(cat)
+    if sistema:
+        return f"{index}. {emoji} {nombre} — {tip['body']}\n    💿 Sistema: {sistema}"
+    return f"{index}. {emoji} {nombre} — {tip['body']}"
 
 
 def build_daily_message(tips):
-    now = datetime.now()
-    greeting = _get_time_greeting(now)
-    dia = DIAS_ES[now.weekday()]
-    mes = MESES_ES[now.month]
-    date_str = f"{dia} {now.day} de {mes} {now.year}"
-    hour_str = now.strftime("%H:%M")
-
-    header = (
-        f"{greeting}\n"
-        f"{date_str} — {hour_str}\n"
-        f"━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-    )
+    greeting = _get_time_greeting(datetime.now())
+    header = f"{greeting}\n"
 
     body_parts = []
     for i, tip in enumerate(tips, 1):
         body_parts.append(format_tip_message(tip, i))
 
-    body = "\n\n━━━━━━━━━━━━━━━━━━━━━━━━━\n\n".join(body_parts)
+    body = "\n\n".join(body_parts)
 
     footer = ""
 
