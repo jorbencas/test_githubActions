@@ -1,5 +1,57 @@
 [
     {
+        "titulo": "China ya ha convertido desiertos en paisajes verdes y la tecnología ha acelerado su ambicioso plan",
+        "enlace": "https://www.computerhoy.com/tecnologia/china-ya-ha-convertido-desiertos-paisajes-verdes-tecnologia-ha-acelerado-su-ambicioso-plan_7013871_0.html",
+        "fuente": "ComputerHoy",
+        "tipo": "noticia",
+        "f": "15/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "15/08/2026",
+        "ts": "2026-08-15T06:37:47.035245"
+    },
+    {
+        "titulo": "El encanto de la tecnología vintage: categorías más demandadas y motivos de un 'revival' que no es una moda más",
+        "enlace": "https://www.computerhoy.com/dispositivos/encanto-tecnologia-vintage-categorias-mas-demandadas-motivos-un-revival-que-no-es-una-moda-mas_7024253_0.html",
+        "fuente": "ComputerHoy",
+        "tipo": "noticia",
+        "f": "15/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "15/08/2026",
+        "ts": "2026-08-15T06:37:47.036193"
+    },
+    {
+        "titulo": "Guido van Rossum, creador de Python: \"El código se lee con mucha más frecuencia de lo que se escribe, debe haber una, y preferiblemente solo una, manera obvia de hacerlo”",
+        "enlace": "https://www.computerhoy.com/software/guido-van-rossum-creador-python-codigo-se-lee-con-mucha-mas-frecuencia-que-se-escribe-debe-haber-una-preferiblemente-solo-una-manera-obvia-hacerlo_7020286_0.html",
+        "fuente": "ComputerHoy",
+        "tipo": "noticia",
+        "f": "15/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "15/08/2026",
+        "ts": "2026-08-15T06:37:47.037140"
+    },
+    {
+        "titulo": "¿Sirve para algo reiniciar tu iPhone o móvil Android cada cierto tiempo? La NSA y los expertos en ciberseguridad lo tienen claro: \"Sí, pero solo en estado BFU\"",
+        "enlace": "https://www.computerhoy.com/moviles/sirve-para-algo-reiniciar-tu-iphone-movil-android-cada-cierto-tiempo-nsa-los-expertos-ciberseguridad-tienen-claro-si-pero-solo-estado-bfu_7020755_0.html",
+        "fuente": "ComputerHoy",
+        "tipo": "noticia",
+        "f": "15/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🔒 Ciberseguridad",
+        "imagen_url_original": "",
+        "fecha_real": "15/08/2026",
+        "ts": "2026-08-15T06:37:47.038071"
+    },
+    {
         "titulo": "El live-action de ‘Enredados’ muestra las primeras imágenes del remake y su fecha de estreno",
         "enlace": "https://hipertextual.com/cine-television/el-live-action-de-enredados-muestra-las-primeras-imagenes-del-remake-y-su-fecha-de-estreno/",
         "fuente": "Hipertextual",
