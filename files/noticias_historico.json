@@ -1,5 +1,33 @@
 [
     {
+        "titulo": "Cómo construir un bot básico de Discord para narración, chat y bienestar mental con Python",
+        "enlace": "https://www.freecodecamp.org/news/how-to-build-a-basic-discord-bot-with-python/",
+        "fuente": "freeCodeCamp",
+        "tipo": "noticia",
+        "f": "15/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💻 Programación",
+        "imagen_url_original": "",
+        "fecha_real": "15/08/2026",
+        "ts": "2026-08-15T01:15:03.448747",
+        "traducido": true
+    },
+    {
+        "titulo": "Cómo construir un sistema de investigación de trading multiagente con LangChain Deep Agents [Manual completo]",
+        "enlace": "https://www.freecodecamp.org/news/build-a-multi-agent-trading-research-system-with-langchain-deep-agents-handbook/",
+        "fuente": "freeCodeCamp",
+        "tipo": "noticia",
+        "f": "15/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "15/08/2026",
+        "ts": "2026-08-15T01:15:03.449438",
+        "traducido": true
+    },
+    {
         "titulo": "Jane Street sufre un golpe de 15 mil millones de dólares tras el colapso en Situational Awareness.",
         "enlace": "https://www.ft.com/content/47dd5308-dd17-404a-a615-61046defd697",
         "fuente": "Hacker News",
