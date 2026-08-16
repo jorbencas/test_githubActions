@@ -1,5 +1,44 @@
 [
     {
+        "titulo": "El mítico Power Mac G4 era un bicho en potencia, pero un gran fallo de fábrica obligó a tomar medidas",
+        "enlace": "https://www.applesfera.com/sobremesa/mitico-power-mac-g4-era-bicho-potencia-gran-fallo-fabrica-obligo-a-tomar-medidas",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "f": "16/08",
+        "fecha_publicacion": "2026-08-16T15:00:48Z",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "16/08/2026",
+        "ts": "2026-08-16T18:29:35.547605"
+    },
+    {
+        "titulo": "Marian Sánchez, experta en tecnología, revela el truco para que tu PC Windows vaya más fluido : \"Lo que mola es que casi nadie lo sabe\"",
+        "enlace": "https://www.computerhoy.com/redes-sociales/marian-sanchez-experta-tecnologia-revela-truco-para-que-tu-pc-windows-vaya-mas-fluido-que-mola-es-que-casi-nadie-sabe_7023524_0.html",
+        "fuente": "ComputerHoy",
+        "tipo": "noticia",
+        "f": "16/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "16/08/2026",
+        "ts": "2026-08-16T18:29:37.153836"
+    },
+    {
+        "titulo": "Yousuf Aslam, neurocientífico cognitivo, sobre la epidemia mundial de sueño: \"El cerebro necesita sentirse seguro y protegido antes de dormir\"",
+        "enlace": "https://www.computerhoy.com/ciencia/yousuf-aslam-neurocientifico-cognitivo-sobre-epidemia-mundial-sueno-cerebro-necesita-sentirse-seguro-protegido-antes-dormir_7023171_0.html",
+        "fuente": "ComputerHoy",
+        "tipo": "noticia",
+        "f": "16/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "16/08/2026",
+        "ts": "2026-08-16T18:29:37.156472"
+    },
+    {
         "titulo": "Amazon está intentando aplastar las demandas colectivas antes de que comiencen",
         "enlace": "https://www.theverge.com/tech/980752/amazon-class-action-arbitration-terms-and-conditions",
         "fuente": "The Verge",
