@@ -54,6 +54,7 @@ self es la referencia al objeto actual. En una clase, self.nombre = 'Juan' guard
 - Codigo SOLO cuando es necesario (comandos, SQL, bash, scripts, config)
 - Sin codigo para conceptos, principios, consejos
 - Terminos tecnicos en INGLCES cuando son estandar (cold start, hot function, load balancer, etc.)
+- Siglas/acronimos: expandir entre parentesis la primera vez (VPN = Virtual Private Network) + una frase breve que la explique en contexto
 
 ## Fuentes de datos
 

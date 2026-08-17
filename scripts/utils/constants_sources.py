@@ -505,6 +505,18 @@ FUENTES = {
     "Red Canary Blog": {"rss": "https://redcanary.com/blog/feed/", "quick": True},
     "Sophos X-Ops": {"rss": "https://news.sophos.com/en-us/feed/", "quick": True},
     "WithSecure Labs": {"rss": "https://labs.withsecure.com/publications/rss", "quick": True},
+    # ── Vulnerabilidades web, GitHub Security y novedades añadidas ──
+    "GitHub Security Blog": {"rss": "https://github.blog/security/feed/", "quick": True},
+    "MSRC (Microsoft Security)": {"rss": "https://msrc.microsoft.com/blog/feed/", "quick": True},
+    "GitHub Changelog": {"rss": "https://github.blog/changelog/feed/", "quick": True},
+    "Threatpost": {"rss": "https://threatpost.com/feed/", "quick": True},
+    "The Register Security": {"rss": "https://www.theregister.com/security/headlines.atom", "quick": True},
+    "Dark Reading": {"rss": "https://www.darkreading.com/rss.xml", "quick": True},
+    "ESET WeLiveSecurity": {"rss": "https://www.welivesecurity.com/feed/", "quick": True},
+    "Snyk Blog": {"rss": "https://snyk.io/blog/feed/", "quick": True},
+    "Veracode Blog": {"rss": "https://www.veracode.com/blog/feed", "quick": True},
+    "arXiv cs.CR (Security)": {"rss": "https://rss.arxiv.org/rss/cs.CR", "quick": True},
+    "TechRepublic": {"rss": "https://www.techrepublic.com/rssfeeds/", "quick": True},
     # ── GitHub Topics (Security) ──
     "GitHub Topic Security": {"url": "https://github.com/topics/security?o=desc&s=stars", "tipo": "herramienta", "subtipo": "github-topic", "selector": "article a[href]"},
     "GitHub Topic Cybersecurity": {"url": "https://github.com/topics/cybersecurity?o=desc&s=stars", "tipo": "herramienta", "subtipo": "github-topic", "selector": "article a[href]"},
@@ -535,7 +547,6 @@ FUENTES = {
     "Andro4all": {"rss": "https://andro4all.com/feed/", "quick": True},
     "El Confidencial Teknautas": {"rss": "https://rss.elconfidencial.com/tecnologia/", "quick": True},
     "Microsiervos": {"rss": "https://www.microsiervos.com/index.xml", "quick": True},
-    "Actualidad RT": {"rss": "https://actualidad.rt.com/feeds/all.rss", "quick": True},
     "La Mente es Maravillosa": {"rss": "https://lamenteesmaravillosa.com/feed/", "quick": True},
     # AI/DevTools
     "404 Media": {"rss": "https://www.404media.co/rss/", "quick": True},

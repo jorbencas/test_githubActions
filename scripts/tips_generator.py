@@ -680,7 +680,10 @@ def build_gemini_prompt(categories, sent_titles, news, tools):
 === CONCEPTOS/TIPS YA ENVIADOS (NUNCA REPETIR) ===
 {titles_str}
 
-=== NOTICIAS TECH DE HOY (usar como inspiración) ===
+=== NOTICIAS TECH DE HOY (usar como inspiración, basa tips en ellas siempre que sea posible) ===
+{news_str}
+
+=== HERRAMIENTAS/REPOS TRENDING DE HOY (inspiración secundaria) ===
 {tools_str}
 
 === REGLAS ESTRICTAS ===
@@ -694,6 +697,7 @@ def build_gemini_prompt(categories, sent_titles, news, tools):
 8. NUNCA uses emojis en el body ni en el título
 9. Usa términos técnicos en INGLÉS cuando sea estándar (cold start, hot function, load balancer, etc.)
 10. Varía dificultad: 1=básico, 2=intermedio, 3=avanzado
+11. Cuando el tip mencione una SIGLA o acrónimo (por ejemplo: VPN, SSL, LLM, SVN, WISPr, DNS, HTTP, API, SQL, SSH, TLS, SMTP, RAID, VM, CI, CD, IaC, RBAC, ETL, MQTT, NAT, WAN, LAN...), SIEMPRE expande la sigla entre paréntesis la primera vez que aparezca y añade UNA frase breve que la explique en contexto. Ejemplo: "VPN (Virtual Private Network, red privada virtual) cifra tu conexión..."
 
 === CUÁNDO INCLUIR CÓDIGO ===
 - Comandos de terminal (linux, docker, git, etc.)
@@ -724,6 +728,14 @@ def build_gemini_prompt(categories, sent_titles, news, tools):
   "title": "¿Qué es polimorfismo?",
   "body": "Objetos de diferentes clases respondiendo al mismo método. Un gato.hablar() dice 'miau', un perro.hablar() dice 'guau'. El código que usa hablar() no necesita saber qué animal es.",
   "difficulty": 2
+}}
+
+=== EJEMPLO CON SIGLA EXPLICADA ===
+{{
+  "cat": "redes",
+  "title": "Para qué sirve una VPN",
+  "body": "Una VPN (Virtual Private Network, red privada virtual) crea un túnel cifrado entre tu equipo y un servidor remoto. Sirve para ocultar tu IP, protegerte en redes Wi-Fi públicas y acceder a recursos internos de una empresa como si estuvieras en la oficina.",
+  "difficulty": 1
 }}
 
 === RESPUESTA ===
@@ -803,22 +815,10 @@ def mix_tips(gemini_tips, db_tips, total=10):
     return mixed[:total]
 
 
-SISTEMAS_POR_CATEGORIA = {
-    "linux": "Linux", "ubuntu": "Linux", "bash": "Linux", "bash_scripting": "Linux",
-    "windows": "Windows",
-    "macos": "macOS",
-    "android": "Android", "android_studio": "Android",
-    "ios": "iOS",
-}
-
-
 def format_tip_message(tip, index):
     cat = tip.get("cat", "")
     emoji = CAT_EMOJI.get(cat, "?")
     nombre = CAT_NAMES.get(cat, cat)
-    sistema = SISTEMAS_POR_CATEGORIA.get(cat)
-    if sistema:
-        return f"{index}. {emoji} {nombre} — {tip['body']}\n    💿 Sistema: {sistema}"
     return f"{index}. {emoji} {nombre} — {tip['body']}"
 
 

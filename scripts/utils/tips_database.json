@@ -2,158 +2,2467 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de tips diarios de IT - 5 tips por día, sin repetir",
-    "categories": ["linux", "windows", "redes", "seguridad", "devops", "git", "docker", "databases", "ai", "programming", "bash", "cloud", "cybersecurity", "hardware", "virtualizacion"]
+    "categories": [
+      "linux",
+      "windows",
+      "redes",
+      "seguridad",
+      "devops",
+      "git",
+      "docker",
+      "databases",
+      "ai",
+      "programming",
+      "bash",
+      "cloud",
+      "cybersecurity",
+      "hardware",
+      "virtualizacion"
+    ]
   },
   "tips": [
-    {"id": 1, "cat": "linux", "title": "Atajo de teclado en terminal", "body": "Ctrl+R busca en el historial de comandos. Escribe unas letras y aparece el último comando que las contenía. Mucho más rápido que hacer flecha arriba 50 veces.", "difficulty": 1},
-    {"id": 2, "cat": "windows", "title": "Captura de pantalla sin herramientas", "body": "Win+Shift+S abre el recortador de pantalla. Puedes seleccionar zona, ventana o pantalla completa. Se copia al portapapeles automáticamente.", "difficulty": 1},
-    {"id": 3, "cat": "ai", "title": "Prompt para código limpio", "body": "En vez de 'hazme un script', escribe: 'Escribe un script en Python que [función], siguiendo PEP 8, con docstrings, manejo de errores y type hints'. Obtendrás código mucho mejor.", "difficulty": 1},
-    {"id": 4, "cat": "git", "title": "Deshacer el último commit sin perder cambios", "body": "git reset --soft HEAD~1 deshace el commit pero mantiene los archivos staged. Perfecto cuando te olvidaste de incluir algo o el mensaje estaba mal.", "difficulty": 1},
-    {"id": 5, "cat": "docker", "title": "Limpiar todo el cache de Docker", "body": "docker system prune -a --volumes elimina contenedores parados, imágenes sin usar, redes huérfanas y volúmenes. Recupera GBs de espacio en segundos.", "difficulty": 1},
-    {"id": 6, "cat": "linux", "title": "Ver qué proceso come tu CPU", "body": "htop es mejor que top. Instálalo: sudo apt install htop. Muestra colores, árbol de procesos y puedes matar con F9. Arranca con htop.", "difficulty": 1},
-    {"id": 7, "cat": "redes", "title": "Probar si un puerto está abierto", "body": "nc -zv host puerto. Ejemplo: nc -zv google.com 443. Te dice si la conexión TCP funciona. Más rápido que ncat o telnet.", "difficulty": 1},
-    {"id": 8, "cat": "seguridad", "title": "Generar contraseñas seguras desde terminal", "body": "openssl rand -base64 32 genera una contraseña de 32 caracteres aleatorios. Cópiala y úsala donde necesites algo fuerte.", "difficulty": 1},
-    {"id": 9, "cat": "bash", "title": "Repetir el último comando con un cambio", "body": "!!:s/antigo/nuevo. Ejemplo: sudo apt install foo → !!:s/foo/bar ejecuta sudo apt install bar. Ahorra reescribir toda la línea.", "difficulty": 2},
-    {"id": 10, "cat": "programming", "title": "El principio DRY", "body": "DRY = Don't Repeat Yourself. Si copias y pegas código más de 2 veces, extrae una función. El código duplicado es el enemigo del mantenimiento.", "difficulty": 1},
-    {"id": 11, "cat": "windows", "title": "Acceso rápido a configuración", "body": "Win+I abre Configuración directamente. Win+X muestra el menú del botón derecho del Inicio (Terminal, Gestor de dispositivos, etc.).", "difficulty": 1},
-    {"id": 12, "cat": "ai", "title": "Contexto para mejores respuestas", "body": "Antes de pedir algo a la IA, dale contexto: 'Soy desarrollador junior, trabajo con Python y FastAPI, necesito explicar [tema] como si tuviera 2 años de experiencia'. La respuesta será mucho más útil.", "difficulty": 1},
-    {"id": 13, "cat": "devops", "title": "Verificar si un servicio está activo", "body": "systemctl status nombre_servicio. Muestra si está activo, las últimas líneas de log y el PID. Más informativo que solo '¿está corriendo?'.", "difficulty": 1},
-    {"id": 14, "cat": "databases", "title": "Explicar un query SQL lento", "body": "En PostgreSQL: EXPLAIN ANALYZE seguido de tu query. Te muestra el plan de ejecución real y cuánto tarda cada paso. Esencial para optimizar.", "difficulty": 2},
-    {"id": 15, "cat": "cloud", "title": "Ver costes AWS rápido", "body": "aws ce get-cost-and-usage --time-period Start=2026-08-01,End=2026-08-11 --granularity MONTHLY --metrics 'UnblendedCost'. Mira cuánto llevas gastado este mes.", "difficulty": 2},
-    {"id": 16, "cat": "linux", "title": "Archivos más grandes de 100MB", "body": "find / -type f -size +100M 2>/dev/null. Encuentra los archivos pesados que llenan tu disco. Combina con du -sh para ver el tamaño.", "difficulty": 1},
-    {"id": 17, "cat": "cybersecurity", "title": "Cifrar un archivo con AES", "body": "openssl enc -aes-256-cbc -salt -in archivo.txt -out archivo.enc. Para descifrar: openssl enc -d -aes-256-cbc -in archivo.enc -out archivo.txt. Pide contraseña.", "difficulty": 2},
-    {"id": 18, "cat": "git", "title": "Ver el historial de un archivo", "body": "git log --follow -p archivo.py muestra todo el historial de cambios de un archivo, incluso si fue renombrado. Útil para saber quién cambió qué y por qué.", "difficulty": 2},
-    {"id": 19, "cat": "docker", "title": "Entrar en un contenedor que está corriendo", "body": "docker exec -it nombre_contenedor /bin/bash abre una shell dentro del contenedor. Si no hay bash, usa /bin/sh. Perfecto para debugar.", "difficulty": 1},
-    {"id": 20, "cat": "hardware", "title": "Verificar salud del disco", "body": "smartctl -a /dev/sda muestra todos los atributos SMART del disco. Las columnas que importan: Reallocated_Sector_Ct y Current_Pending_Sector. Si crecen, el disco va a morir.", "difficulty": 2},
-    {"id": 21, "cat": "ai", "title": "Chain of Thought", "body": "Añade 'Piensa paso a paso' al final de tu prompt. La IA razona antes de responder y obtienes respuestas más lógicas, especialmente en matemáticas o problemas complejos.", "difficulty": 1},
-    {"id": 22, "cat": "bash", "title": "Ejecutar un comando cada N segundos", "body": "watch -n 5 'comando'. Ejemplo: watch -n 2 'docker ps'. Actualiza la pantalla cada 2 segundos. Perfecto para monitorear procesos.", "difficulty": 1},
-    {"id": 23, "cat": "programming", "title": "Clean Code: nombres descriptivos", "body": "Mal: x = calc(a, b). Bien: total_price = calculate_discount(price, percentage). Los nombres deben revelar la intención, no solo describir el tipo de dato.", "difficulty": 1},
-    {"id": 24, "cat": "windows", "title": "Gestor de tareas rápido", "body": "Ctrl+Shift+Esc abre el Gestor de tareas directamente. Ctrl+Alt+Delete también funciona pero tiene un paso intermedio. El primero es más rápido.", "difficulty": 1},
-    {"id": 25, "cat": "redes", "title": "Ver tu IP pública", "body": "curl ifconfig.me te muestra tu IP pública en segundos. También funciona: curl icanhazip.com. Más rápido que abrir un navegador.", "difficulty": 1},
-    {"id": 26, "cat": "virtualizacion", "title": "Clonar VM sin perder config", "body": "VirtualBox: VBoxManage clonevm 'nombre' --register --name 'copia'. Clona la VM completa incluyendo configuración. No necesitas abrir la GUI.", "difficulty": 2},
-    {"id": 27, "cat": "seguridad", "title": "Verificar integridad de un archivo", "body": "sha256sum archivo.tar.gz compara el hash con el publicado por el desarrollador. Si coinciden, el archivo no fue alterado. Fundamental antes de ejecutar software descargado.", "difficulty": 1},
-    {"id": 28, "cat": "devops", "title": "Logs de systemd en tiempo real", "body": "journalctl -u nombre_servicio -f --no-pager. Muestra los logs del servicio en tiempo real sin pager. Combínalo con --since '5 min ago' para ver solo los recientes.", "difficulty": 2},
-    {"id": 29, "cat": "linux", "title": "Procesos que escuchan puertos", "body": "ss -tlnp muestra todos los puertos TCP en escucha y el proceso que los usa. Más rápido que netstat. El -p muestra el PID.", "difficulty": 1},
-    {"id": 30, "cat": "ai", "title": "Few-shot prompting", "body": "En vez de explicar el formato que quieres, muestra 2-3 ejemplos en el prompt. La IA aprende el patrón y replica el formato exacto. Funciona genial para JSON, CSV o estructuras específicas.", "difficulty": 2},
-    {"id": 31, "cat": "databases", "title": "Crear índice para queries lentos", "body": "CREATE INDEX idx_nombre ON tabla(columna). Si un WHERE o JOIN usa esa columna mucho, un índice reduce el tiempo de query de minutos a milisegundos. No indexes todo: cada índice ralentiza los INSERT.", "difficulty": 2},
-    {"id": 32, "cat": "bash", "title": "Procesar salida de un comando", "body": "comando | while read linea; do echo \"Procesando: $linea\"; done. Útil para iterar sobre la salida línea por línea y hacer algo con cada una.", "difficulty": 2},
-    {"id": 33, "cat": "git", "title": "Ver diferencias entre branches", "body": "git diff main..mi-branch muestra todos los cambios que tienes相对于 main. Para ver solo los archivos: git diff main..mi-branch --name-only.", "difficulty": 1},
-    {"id": 34, "cat": "docker", "title": "Ver logs de un contenedor", "body": "docker logs -f nombre_contenedor --tail 100. Muestra las últimas 100 líneas de log en tiempo real. El -f sigue los nuevos logs como tail -f.", "difficulty": 1},
-    {"id": 35, "cat": "cloud", "title": "Verificar credenciales AWS", "body": "aws sts get-caller-identity te dice qué usuario/rol estás usando. Es lo primero que debes probar si algo de AWS no funciona. Si falla, tus credenciales están mal.", "difficulty": 1},
-    {"id": 36, "cat": "linux", "title": "Matar un proceso que no responde", "body": "kill -9 PID fuerza la terminación. Pero antes intenta kill PID (señal 15, graceful). Si no responde en 5 segundos, entonces usa -9. Último recurso.", "difficulty": 1},
-    {"id": 37, "cat": "cybersecurity", "title": "Escanear puertos de tu máquina", "body": "nmap -sT localhost verifica qué puertos están abiertos en tu propia máquina. Si ves puertos que no reconoces, investiga. Primer paso de un auditor de seguridad.", "difficulty": 2},
-    {"id": 38, "cat": "programming", "title": "Unittest: la regla del AAA", "body": "Arrange (prepara datos), Act (ejecuta), Assert (verifica). Cada test debe seguir estas 3 fases. Si tu test tiene más de 10 líneas, probablemente necesita refactorizarse.", "difficulty": 1},
-    {"id": 39, "cat": "windows", "title": "Abrir el explorador de archivos rápido", "body": "Win+E abre el Explorador. Win+R y escribe . abre la carpeta del usuario. Win+R y escribe .. abre C:\\. Atajos para no buscar el icono.", "difficulty": 1},
-    {"id": 40, "cat": "hardware", "title": "RAM libre sin reiniciar", "body": "sync; echo 3 | sudo tee /proc/sys/vm/drop_caches libera la caché de Linux sin reiniciar. Útil en servidores con poca RAM. No borra datos, solo caché.", "difficulty": 2},
-    {"id": 41, "cat": "ai", "title": "Role prompting", "body": "Empieza con: 'Eres un ingeniero de software senior con 10 años de experiencia en Python'. Darle un rol a la IA mejora la calidad y el tono de la respuesta.", "difficulty": 1},
-    {"id": 42, "cat": "devops", "title": "Verificar espacio en disco rápido", "body": "df -h / muestra el espacio libre en la partición raíz. Si supera 85%, empieza a limpiar. Si llega al 95%, tu sistema puede dejar de funcionar.", "difficulty": 1},
-    {"id": 43, "cat": "redes", "title": "Traceroute para ver el camino", "body": "traceroute google.com muestra cada router por el que pasa tu paquete hasta el destino. Si ves un salto con mucho tiempo (asteriscos), ahí hay un cuello de botella.", "difficulty": 1},
-    {"id": 44, "cat": "bash", "title": "Historial de comandos del día", "body": "history | grep '2026-08-11' o HISTTIMEFORMAT='%F %T ' history. Muestra cuándo ejecutaste cada comando. Útil para recordar qué hiciste hace 2 horas.", "difficulty": 2},
-    {"id": 45, "cat": "seguridad", "title": "Buscar contraseñas en código", "body": "grep -rn 'password\\|secret\\|api_key\\|token' --include='*.py' --include='*.js'. Busca strings que parezcan secretos en tu código. Primer paso antes de commitear.", "difficulty": 1},
-    {"id": 46, "cat": "virtualizacion", "title": "Snapshot antes de cambios", "body": "Antes de actualizar un sistema o instalar algo arriesgado, haz un snapshot de la VM. Si algo sale mal, restauras en 30 segundos. VirtualBox: Máquina → Tomar snapshot.", "difficulty": 1},
-    {"id": 47, "cat": "linux", "title": "Buscar archivos por contenido", "body": "grep -rl 'texto' /carpeta/ busca recursivamente en qué archivos aparece ese texto. Más útil que find + grep por separado.", "difficulty": 1},
-    {"id": 48, "cat": "programming", "title": "El Principio de Responsabilidad Única", "body": "Cada función debe hacer UNA cosa. Si una función calcula el IVA, formatea el PDF y lo envía por email, está haciendo 3 cosas. Sepáralas.", "difficulty": 1},
-    {"id": 49, "cat": "git", "title": "Stash: guardar cambios temporalmente", "body": "git stash guarda tus cambios sin commit. git stash pop los restaura. Perfecto cuando necesitas cambiar de branch rápidamente sin commitear a medias.", "difficulty": 1},
-    {"id": 50, "cat": "docker", "title": "Ver el tamaño de imágenes", "body": "docker images --format '{{.Repository}}:{{.Tag}} {{.Size}}' ordena las imágenes por tamaño. Elimina las pesadas que no usas: docker rmi imagen.", "difficulty": 1},
-    {"id": 51, "cat": "ai", "title": "Generar test con IA", "body": "Copia tu función y pide: 'Genera tests unitarios con pytest para esta función, cubriendo casos normales, edge cases y errores'. La IA crea tests que no habrías pensado.", "difficulty": 1},
-    {"id": 52, "cat": "cybersecurity", "title": "Verificar si tu email fue filtrado", "body": "Have I Been Pwned (haveibeenpwned.com) comprueba si tu email aparece en filtraciones de datos conocidas. Si aparece, cambia la contraseña de ese servicio.", "difficulty": 1},
-    {"id": 53, "cat": "databases", "title": "Backup rápido de PostgreSQL", "body": "pg_dump -U usuario base_datos > backup.sql. Restaurar: psql -U usuario base_datos < backup.sql. Hazlo antes de cualquier migración importante.", "difficulty": 1},
-    {"id": 54, "cat": "cloud", "title": "S3: copiar archivos rápido", "body": "aws s3 sync ./carpeta s3://bucket/carpeta sincroniza solo los archivos que cambiaron. Más rápido que cp para backups grandes. El --delete elimina archivos que ya no existen localmente.", "difficulty": 2},
-    {"id": 55, "cat": "windows", "title": "Desinstalar apps que no aparecen", "body": "Win+R → appwiz.cpl abre Programas y Características directamente. Si una app no aparece, prueba Revo Uninstaller o winget uninstall nombre.", "difficulty": 1},
-    {"id": 56, "cat": "linux", "title": "Monitorear red en tiempo real", "body": "iftop muestra qué conexiones están consumiendo ancho de banda en tiempo real. Instala: sudo apt install iftop. Salida similar a top pero para red.", "difficulty": 2},
-    {"id": 57, "cat": "bash", "title": "Condicionar comandos", "body": "comando1 && comando2 ejecuta comando2 solo si comando1 tuvo éxito. comando1 || comando2 ejecuta comando2 solo si comando1 falló. Fundamental en scripts.", "difficulty": 1},
-    {"id": 58, "cat": "programming", "title": "Code review: revisa primero la interfaz", "body": "Al revisar código, empieza por las interfaces (funciones públicas, APIs, clases). Si la interfaz está mal diseñada, por muy bueno que sea el código interno, el resultado será problemático.", "difficulty": 2},
-    {"id": 59, "cat": "devops", "title": "Cron: programar tareas en Linux", "body": "crontab -e edita tus tareas programadas. Formato: min hora dia mes dia_semana comando. Ejemplo: 0 3 * * * /script/backup.sh ejecuta a las 3am todos los días.", "difficulty": 2},
-    {"id": 60, "cat": "redes", "title": "DNS: qué servidor estás usando", "body": "cat /etc/resolv.conf muestra tu servidor DNS. Para probar un DNS específico: nslookup google.com 8.8.8.8. Cambiar DNS puede mejorar velocidad o privacidad.", "difficulty": 1},
-    {"id": 61, "cat": "ai", "title": "Estructurar la salida", "body": "Pide la respuesta en formato específico: 'Responde en JSON con las claves: titulo, descripcion, prioridad'. La IA respeta el formato y la respuesta es directamente usable.", "difficulty": 1},
-    {"id": 62, "cat": "seguridad", "title": " SSH sin contraseña (keys)", "body": "ssh-keygen -t ed25519 genera una clave. ssh-copy-id usuario@host la copia al servidor. Después te conectas sin contraseña. Más seguro que passwords.", "difficulty": 2},
-    {"id": 63, "cat": "hardware", "title": "Temperatura de la CPU", "body": " sensors (de lm-sensors) muestra la temperatura de CPU, GPU y discos. Si la CPU supera 85°C bajo carga, revisa la pasta térmica o el ventilador.", "difficulty": 1},
-    {"id": 64, "cat": "virtualizacion", "title": "Docker vs VM: cuándo usar cada uno", "body": "Docker: apps que necesitan lo mismo que el host (mismo OS, rapido, ligero). VM: cuando necesitas otro OS completo o aislamiento total. Para la mayoría de apps modernas, Docker es suficiente.", "difficulty": 1},
-    {"id": 65, "cat": "git", "title": "Revertir un commit ya pusheado", "body": "git revert HEAD crea un nuevo commit que deshace los cambios del anterior. Seguro para equipos porque no reescribe historial. A diferencia de git reset.", "difficulty": 2},
-    {"id": 66, "cat": "linux", "title": "Particionar discos desde terminal", "body": "fdisk /dev/sdb para particionar interactivamente, o parted para más opciones. Después mkfs.ext4 /dev/sdb1 para formatear y mount para montar.", "difficulty": 3},
-    {"id": 67, "cat": "programming", "title": "El costo de los bytes", "body": "Un string vacío '' ocupa 49 bytes en Python. Un bool True ocupa 28 bytes. Un int 0 ocupa 24 bytes. En estructuras grandes, esto importa. Usa __slots__ para reducir memoria.", "difficulty": 3},
-    {"id": 68, "cat": "docker", "title": "Multi-stage builds", "body": "Un Dockerfile con múltiples FROM: en el primero compilas, en el segundo copias solo el binario resultante. La imagen final es 10x más ligera. Ejemplo: compilar Go → copiar binario a Alpine.", "difficulty": 2},
-    {"id": 69, "cat": "bash", "title": "Trap: capturar Ctrl+C", "body": "trap 'echo Saliendo; cleanup' INT en un script captura la señal INT (Ctrl+C). Útil para limpiar archivos temporales o cerrar conexiones antes de salir.", "difficulty": 2},
-    {"id": 70, "cat": "ai", "title": "Evaluar la respuesta de la IA", "body": "Pregunta: '¿Qué partes de tu respuesta tienes menos confianza?' o '¿Qué información podrías estar inventando?'. La IA a veces alucina, y esto te ayuda a identificar dónde verificar.", "difficulty": 2},
-    {"id": 71, "cat": "databases", "title": "Conexiones zombis en PostgreSQL", "body": "SELECT count(*), state FROM pg_stat_activity GROUP BY state; si ves muchos 'idle' o 'idle in transaction', tu app no está cerrando conexiones. Puede agotar el pool.", "difficulty": 3},
-    {"id": 72, "cat": "cybersecurity", "title": "HTTPS no es infalible", "body": "HTTPS cifra la transmisión pero no verifica QUién eres. Un certificado válido puede ser de un atacante. Por eso importa verificar el dominio, no solo el candado.", "difficulty": 2},
-    {"id": 73, "cat": "windows", "title": "Programar apagado", "body": "shutdown /s /t 3600 apaga en 1 hora (3600 segundos). Para cancelar: shutdown /a. Útil para descargas largas o tareas nocturnas.", "difficulty": 1},
-    {"id": 74, "cat": "cloud", "title": "Lambda: evitar cold starts", "body": "En AWS Lambda, usa Provisioned Concurrency para funciones críticas. O mantén la función caliente con un CloudWatch Event cada 5 minutos. Los cold adds 1-3 segundos.", "difficulty": 3},
-    {"id": 75, "cat": "redes", "title": "Proxy SOCKS con SSH", "body": "ssh -D 1080 usuario@host crea un proxy SOCKS. Configura tu navegador para usar SOCKS5 en localhost:1080. Todo el tráfico pasa por el servidor remoto.", "difficulty": 2},
-    {"id": 76, "cat": "programming", "title": "Logging: no imprimas, loguea", "body": "En vez de print(), usa logging con niveles: DEBUG para desarrollo, INFO para flujo normal, WARNING para problemas, ERROR para fallos. En producción, print() no se ve.", "difficulty": 1},
-    {"id": 77, "cat": "devops", "title": "Health check en Docker", "body": "healthcheck en docker-compose.yml: test: ['CMD', 'curl', '-f', 'http://localhost:8000/health']. Docker reinicia el contenedor si falla el health check.", "difficulty": 2},
-    {"id": 78, "cat": "linux", "title": "Renombrar archivos en masa", "body": "rename 's/\\.jpg$/.jpeg/' *.jpg renombra todos los .jpg a .jpeg. Más seguro que mv en bucle. Prueba primero con --n para ver qué haría sin ejecutar.", "difficulty": 2},
-    {"id": 79, "cat": "git", "title": "Bisect: encontrar el commit malo", "body": "git bisect start, git bisect bad (commit actual), git bisect good v1.0 (última versión que funcionaba). Git prueba commits y te dice cuál rompió todo.", "difficulty": 3},
-    {"id": 80, "cat": "ai", "title": "System prompt para asistente de código", "body": "Define un system prompt: 'Eres un reviewer de código estricto. Revisa el código que te envíe buscando: bugs, vulnerabilidades, malas prácticas de performance, y violaciones de PEP 8'. Obtendrás reviews consistentes.", "difficulty": 2},
-    {"id": 81, "cat": "seguridad", "title": "Auditar dependencias vulnerables", "body": "pip-audit (Python) o npm audit (Node) comprueba si tus dependencias tienen vulnerabilidades conocidas. Ejecútalo en CI para detectar problemas antes de producción.", "difficulty": 2},
-    {"id": 82, "cat": "bash", "title": "Copiar al portapapeles desde terminal", "body": "xclip -selection clipboard < archivo.txt copia el contenido de un archivo al portapapeles en Linux. En macOS: cat archivo.txt | pbcopy.", "difficulty": 1},
-    {"id": 83, "cat": "docker", "title": "Red Docker: comunicar contenedores", "body": "Crea una red: docker network create mi_red. Conecta contenedores: docker run --network mi_red. Se comunican por nombre de contenedor, no por IP.", "difficulty": 2},
-    {"id": 84, "cat": "hardware", "title": "Benchmark de disco", "body": "dd if=/dev/zero of=test bs=1G count=1 oflag=dsync mide escritura real. hdparm -t /dev/sda mide lectura. Compara resultados para saber si el disco va bien.", "difficulty": 2},
-    {"id": 85, "cat": "programming", "title": "API design: usa sustantivos, no verbos", "body": "Mal: /getUser, /createUser. Bien: /users (GET = listar, POST = crear). REST se basa en recursos (sustantivos), no en acciones (verbos).", "difficulty": 1},
-    {"id": 86, "cat": "windows", "title": "Limpiar archivos temporales", "body": "Win+R → %temp% abre la carpeta temporal. Selecciona todo (Ctrl+A) y borra. También: Win+R → cleanmgr para el Limpiador de discos integrado.", "difficulty": 1},
-    {"id": 87, "cat": "linux", "title": "Swap sin partición dedicada", "body": "fallocate -l 4G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile. Crea 4GB de swap sin tocar particiones. Útil si te quedas sin RAM.", "difficulty": 2},
-    {"id": 88, "cat": "cloud", "title": "Variables de entorno para secrets", "body": "Nunca hardcodees API keys. Usa variables de entorno: export API_KEY=xxx. En Docker: environment: - API_KEY=${API_KEY}. En GitHub Actions: secrets.", "difficulty": 1},
-    {"id": 89, "cat": "devops", "title": "Rolling update sin downtime", "body": "Docker Compose: docker compose up -d --no-deps --scale servicio=3 --build servicio. Actualiza instancias una por una sin parar el servicio completo.", "difficulty": 3},
-    {"id": 90, "cat": "redes", "title": "Puerto 53: DNS siempre abierto", "body": "Si tu empresa bloquea puertos pero necesitas DNS, el puerto 53 casi siempre está abierto. Puedes tunelar tráfico DNS (DNS tunneling) como alternativa.", "difficulty": 3},
-    {"id": 91, "cat": "ai", "title": "Iterar sobre una solución", "body": "No pidas la solución perfecta de golpe. Pide algo básico, luego: 'Ahora mejora el manejo de errores', 'Ahora añade logging', 'Ahora optimiza para performance'. Paso a paso.", "difficulty": 1},
-    {"id": 92, "cat": "seguridad", "title": "Cifrar el disco completo", "body": "Linux: LUKS (cryptsetup). Windows: BitLocker. Mac: FileVault. Si te roban el portátil, los datos son inaccesibles sin la contraseña. Configúralo HOY.", "difficulty": 2},
-    {"id": 93, "cat": "git", "title": "Alias útiles de Git", "body": "git config --global alias.st status, alias.co checkout, alias.br branch, alias.ci commit. Ahorra escribir comandos largos. Añade alias personalizados en ~/.gitconfig.", "difficulty": 1},
-    {"id": 94, "cat": "databases", "title": "N+1 queries: el problema clásico", "body": "Si cargas 100 usuarios y luego haces 100 queries para sus posts, tienes un problema N+1. Usa JOIN o eager loading. Detecta con django-debug-toolbar o EXPLAIN.", "difficulty": 2},
-    {"id": 95, "cat": "bash", "title": "Argumentos opcionales en scripts", "body": "while [[ $# -gt 0 ]]; do case $1 in -v|--verbose) VERBOSE=1;; -o) OUTPUT=$2;; esac; shift; done. Parsea flags como -v, -o archivo en tus scripts profesionales.", "difficulty": 3},
-    {"id": 96, "cat": "programming", "title": "Evita el premature optimization", "body": "Premature optimization is the root of all evil — Donald Knuth. Primero hazlo correcto, luego rápido. Mide antes de optimizar. El 80% del tiempo está en el 20% del código.", "difficulty": 1},
-    {"id": 97, "cat": "linux", "title": "Files immutable en ext4", "body": "sudo chattr +i archivo.txt hace que el archivo no se pueda modificar, borrar ni renombrar ni por root. Para desbloquear: sudo chattr -i archivo.txt.", "difficulty": 2},
-    {"id": 98, "cat": "docker", "title": "Debug: ver qué hay dentro de una imagen", "body": "docker run -it --rm imagen sh entra en la imagen como si fuera un contenedor. Explora archivos, verifica versiones, comprueba dependencias instaladas.", "difficulty": 1},
-    {"id": 99, "cat": "hardware", "title": "Monitorizar temperatura remota", "body": "En un servidor: ssh root@server 'sensors | grep Core'. Crea un alias o script para comprobar periódicamente. Si algún core supera 90°C, revisa la refrigeración.", "difficulty": 2},
-    {"id": 100, "cat": "ai", "title": "Auto-refinamiento de prompts", "body": "Pregunta a la IA: '¿Cómo podría mejorar este prompt para obtener mejor respuesta?'. La IA te sugiere mejoras a tu propio prompt. Meta-prompting.", "difficulty": 2},
-    {"id": 101, "cat": "virtualizacion", "title": "Vagrant: VMs reproducibles", "body": "Vagrant crea VMs desde un Vagrantfile. 'vagrant up' levanta la VM, 'vagrant destroy' la elimina. Perfecto para entornos de desarrollo idénticos entre el equipo.", "difficulty": 2},
-    {"id": 102, "cat": "cybersecurity", "title": "2FA: no uses SMS", "body": "SMS es interceptable (SIM swapping). Usa apps como Google Authenticator, Authy o hardware keys (YubiKey). Si una web solo ofrece SMS, es una bandera roja.", "difficulty": 1},
-    {"id": 103, "cat": "cloud", "title": "Tagging en AWS: ahorra dinero", "body": "Etiqueta TODOS los recursos con Environment:dev, Team:backend, etc. Sin tags, no puedes saber qué equipo gasta qué. La facturación sin tags es un caos.", "difficulty": 1},
-    {"id": 104, "cat": "programming", "title": "Tipos de testing", "body": "Unit: una función aislada. Integration: varias partes juntas. E2E: flujo completo del usuario. Unit son rápidos y baratos, E2E son lentos pero cubren más. Necesitas los tres.", "difficulty": 1},
-    {"id": 105, "cat": "devops", "title": "Blue-Green deployment", "body": "Mantén dos entornos: blue (producción actual) y green (nueva versión). Cuando green está listo, redirige el tráfico. Si falla, vuelves a blue en segundos.", "difficulty": 3},
-    {"id": 106, "cat": "linux", "title": "Syslog centralizado", "body": "rsyslog envía logs de múltiples servidores a un central. Configura /etc/rsyslog.conf para transmitir vía UDP/TCP. En el central, recibe y almacena todo junto.", "difficulty": 3},
-    {"id": 107, "cat": "git", "title": "Worktrees: trabajar en dos branches", "body": "git worktree add ../nuevo-branch mi-branch permite tener dos branches checked out a la vez. Útil para hacer hotfix sin stashar tu trabajo actual.", "difficulty": 3},
-    {"id": 108, "cat": "ai", "title": "Retrieval-Augmented Generation", "body": "RAG combina búsqueda de documentos con generación de texto. En vez de depender solo del entrenamiento, la IA busca en tus documentos y responde basándose en ellos. Reduce alucinaciones.", "difficulty": 2},
-    {"id": 109, "cat": "bash", "title": "Parallel execution", "body": "comando1 & comando2 & wait ejecuta dos comandos en paralelo y espera a que terminen ambos. Útil para tareas independientes que quieres acelerar.", "difficulty": 2},
-    {"id": 110, "cat": "seguridad", "title": "Principle of Least Privilege", "body": "Dale a cada usuario/programa solo los permisos que necesita NADA más. Si un script solo lee una tabla, no le des permisos de DROP. Si un usuario solo necesita FTP, no le des shell.", "difficulty": 1},
-    {"id": 111, "cat": "databases", "title": "Migraciones: nunca toques producción directamente", "body": "Siempre usa herramientas de migración (Alembic, Flyway, etc.). Nunca hagas ALTER TABLE manual en producción. Una migración mal hecha puede borrar datos para siempre.", "difficulty": 1},
-    {"id": 112, "cat": "windows", "title": "WSL: Linux en Windows", "body": "wsl --install instala Windows Subsystem for Linux. Tienes bash, apt, Python, Node directamente en Windows. Ideal si desarrollas para Linux pero usas Windows.", "difficulty": 1},
-    {"id": 113, "cat": "programming", "title": "Code smells comunes", "body": "Funciones de más de 30 líneas, más de 3 niveles de indentación, nombres genéricos (data, info, temp), parámetrosbooleanos, código duplicado. Si los ves, refactoriza.", "difficulty": 1},
-    {"id": 114, "cat": "cloud", "title": "CDN para estáticos", "body": "CloudFront (AWS), Cloudflare, o Azure CDN. Pon HTML/CSS/JS e imágenes en CDN. Reduce latencia y ahorra bandwidth de tu servidor. Coste mínimo o gratis.", "difficulty": 2},
-    {"id": 115, "cat": "linux", "title": "Atajos de tmux", "body": "Ctrl+B % divide verticalmente. Ctrl+B \" divide horizontalmente. Ctrl+B flecha cambia de panel. Ctrl+B d desconecta (el proceso sigue corriendo). Tmux = terminal que no muere.", "difficulty": 2},
-    {"id": 116, "cat": "ai", "title": "Chain-of-thought negativa", "body": "Pide: 'Antes de dar tu respuesta, piensa en 3 razones por las que tu enfoque podría estar mal'. Esto reduce alucinaciones y mejora la robustez de la respuesta.", "difficulty": 2},
-    {"id": 117, "cat": "hardware", "title": "NVMe vs SATA SSD", "body": "NVMe: hasta 7000 MB/s. SATA: hasta 550 MB/s. Si tu placa soporta NVMe, úsalo para el SO y proyectos. SATA queda para almacenamiento secundario.", "difficulty": 1},
-    {"id": 118, "cat": "devops", "title": "Infrastructure as Code", "body": "Terraform, Pulumi o CloudFormation. Define tu infraestructura en código. Se puede versionar, reviewear y reproducir. Nunca toques la consola web para cambios manuales.", "difficulty": 2},
-    {"id": 119, "cat": "redes", "title": "VPN vs Proxy vs Tor", "body": "VPN: cifra todo tu tráfico, buen para privacidad general. Proxy: solo cifra una app, más rápido pero menos seguro. Tor: máximo anonimato pero muy lento. Elige según tu necesidad.", "difficulty": 1},
-    {"id": 120, "cat": "git", "title": "Conventional Commits", "body": "feat: nueva función. fix: corrige bug. docs: documentación. refactor: reestructura sin cambiar funcionalidad. Los commits descriptivos ayudan a generar changelogs automáticos.", "difficulty": 1},
-    {"id": 121, "cat": "programming", "title": "¿Qué es if __name__ == '__main__'?", "body": "En Python, __name__ es una variable especial. Cuando ejecutas un archivo directamente, __name__ vale '__main__'. Cuando lo importas como módulo, vale el nombre del archivo. Así puedes tener código que solo se ejecuta al correr el archivo, no al importarlo.", "difficulty": 1},
-    {"id": 122, "cat": "programming", "title": "¿Qué es __init__.py?", "body": "Un archivo vacío que indica a Python que una carpeta es un paquete (módulo). Sin él, Python no reconoce la carpeta como paquete. Desde Python 3.3+ es opcional (namespace packages), pero ponlo por defecto.", "difficulty": 1},
-    {"id": 123, "cat": "programming", "title": "¿Qué es self en Python?", "body": "self es la referencia al objeto actual. En una clase, self.nombre = 'Juan' guarda 'Juan' en la instancia. Es como 'this' en Java/JS pero explícito. Siempre es el primer parámetro de un método.", "difficulty": 1},
-    {"id": 124, "cat": "programming", "title": "¿Qué es un decorador?", "body": "Es una función que envuelve otra función para añadirle comportamiento sin modificarla. @timer antes de una función la mide. @login_required exige autenticación. Es azúcar sintáctico para f-wrapper(f).", "difficulty": 2},
-    {"id": 125, "cat": "programming", "title": "¿Qué es un generator?", "body": "Una función con yield en vez de return. Devuelve valores uno a uno sin cargar todo en memoria. Ideal para procesar millones de líneas: for line in open('big_file.txt') es un generator.", "difficulty": 2},
-    {"id": 126, "cat": "programming", "title": "¿Qué es un virtual environment?", "body": "Un aislamiento de dependencias por proyecto. Crea una carpeta .venv con su propio Python y paquetes. Así proyecto A usa requests 2.28 y proyecto B usa 2.31 sin conflictos. Comando: python -m venv .venv", "difficulty": 1},
-    {"id": 127, "cat": "programming", "title": "¿Qué es un pip freeze?", "body": "pip freeze > requirements.txt lista todas las versiones exactas de paquetes instalados. Alguien más puede instalarlas con pip install -r requirements.txt. Es la forma de compartir dependencias.", "difficulty": 1},
-    {"id": 128, "cat": "programming", "title": "¿Qué es una API REST?", "body": "Una API que usa HTTP para comunicarse. GET para leer, POST para crear, PUT para actualizar, DELETE para borrar. Cada endpoint es una URL. Los datos van en JSON. Es el estándar para servicios web.", "difficulty": 1},
-    {"id": 129, "cat": "programming", "title": "¿Qué es JSON?", "body": "JavaScript Object Notation. Formato de texto ligero para intercambiar datos: {\"nombre\": \"Juan\", \"edad\": 30}. Python lo lee con json.load() y escribe con json.dump(). Todo API moderna usa JSON.", "difficulty": 1},
-    {"id": 130, "cat": "programming", "title": "¿Qué es un HTTP status code?", "body": "200 = OK, 201 = Creado, 400 = Bad Request, 401 = No autenticado, 403 = Prohibido, 404 = No encontrado, 500 = Error del servidor. Saber estos códigos te dice qué falla sin leer logs.", "difficulty": 1},
-    {"id": 131, "cat": "programming", "title": "¿Qué es un ORM?", "body": "Object-Relational Mapping. Convierte tablas de BD en clases de Python. En vez de escribir SQL: user = User.query.get(1). SQLAlchemy, Django ORM, Peewee. Ahorra código pero puede ser más lento que SQL raw.", "difficulty": 2},
-    {"id": 132, "cat": "programming", "title": "¿Qué es un middleware?", "body": "Es un código que se ejecuta entre la petición y la respuesta. En Flask/Django: CORS, autenticación, logging. Cada request pasa por todos los middlewares antes de llegar al handler.", "difficulty": 2},
-    {"id": 133, "cat": "programming", "title": "¿Qué es un endpoint?", "body": "Una URL específica de una API. GET /api/usuarios es un endpoint para listar usuarios. POST /api/usuarios es otro para crear. Cada endpoint maneja un método HTTP y una función.", "difficulty": 1},
-    {"id": 134, "cat": "programming", "title": "¿Qué es un type hint?", "body": "def greet(name: str) -> str: indica que name es str y devuelve str. No obliga a Python pero ayuda a detectar errores antes de ejecutar. PyCharm y VS Code los usan para autocompletar.", "difficulty": 1},
-    {"id": 135, "cat": "programming", "title": "¿Qué es un closure?", "body": "Una función que 'recuerda' variables de su scope externo aunque ya no exista. def make_counter(): count=0; return lambda: count+1. El lambda recuerda count. Base de los decoradores.", "difficulty": 2},
-    {"id": 136, "cat": "programming", "title": "¿Qué es un hash?", "body": "Convierte datos en un número fijo. hashlib.sha256('hola').hexdigest() da una cadena de 64 caracteres. Se usa para verificar integridad, contraseñas (nunca guardes texto plano) y deduplicación.", "difficulty": 1},
-    {"id": 137, "cat": "programming", "title": "¿Qué es un mutex?", "body": "Mutual Exclusion. Un candado que evita que dos procesos accedan al mismo recurso a la vez. Sin mutex, dos threads escribiendo el mismo archivo pueden corromperlo. threading.Lock() en Python.", "difficulty": 3},
-    {"id": 138, "cat": "programming", "title": "¿Qué es Dockerfile?", "body": "Instrucciones para construir una imagen Docker. FROM python:3.12, COPY . /app, RUN pip install. Es como una receta: define qué hay dentro del contenedor. Se construye con docker build.", "difficulty": 1},
-    {"id": 139, "cat": "programming", "title": "¿Qué es un contenedor?", "body": "Un proceso aislado con su propio filesystem pero compartiendo el kernel del host. Más ligero que una VM (segundos vs minutos). Docker crea contenedores a partir de imágenes.", "difficulty": 1},
-    {"id": 140, "cat": "programming", "title": "¿Qué es CI/CD?", "body": "Continuous Integration: cada commit se construye y testea automáticamente. Continuous Deployment: si pasa todo, se despliega a producción. GitHub Actions hace CI/CD gratis para repos públicos.", "difficulty": 1},
-    {"id": 141, "cat": "programming", "title": "¿Qué es un linter?", "body": "Una herramienta que revisa tu código buscando errores de estilo y bugs comunes sin ejecutarlo. Ruff, Flake8, Pylint en Python. Ejecútalo antes de commitear para mantener código limpio.", "difficulty": 1},
-    {"id": 142, "cat": "programming", "title": "¿Qué es un tuple vs list?", "body": "Lista: mutable, puede cambiar. Tupla: inmutable, no puede cambiar. usa list para colecciones que cambian, tuple para datos fijos (coordenadas, config). Las tuplas son más rápidas.", "difficulty": 1},
-    {"id": 143, "cat": "programming", "title": "¿Qué es una comprehensión de lista?", "body": "[x*2 for x in range(10) if x > 3] crea una lista con una línea. Es más rápido y legible que un bucle for con append. Funciona con dicts, sets y generators también.", "difficulty": 1},
-    {"id": 144, "cat": "programming", "title": "¿Qué es *args y **kwargs?", "body": "*args captura argumentos posicionales extra como tupla. **kwargs captura argumentos nombrados extra como dict. def func(*args, **kwargs) acepta cualquier cantidad de parámetros.", "difficulty": 2},
-    {"id": 145, "cat": "programming", "title": "¿Qué es un context manager?", "body": "with open('file.txt') as f: garantiza que el archivo se cierra aunque haya error. Implementa __enter__ y __exit__. Útil para archivos, conexiones BD, locks. Recurso que se libera siempre.", "difficulty": 2},
-    {"id": 146, "cat": "programming", "title": "¿Qué es una abstracción?", "body": "Esconder la complejidad y mostrar solo lo necesario. Una función es abstracción: el usuario no sabe cómo funciona por dentro, solo qué hace. Las clases abstractas definen interfaces sin implementar.", "difficulty": 1},
-    {"id": 147, "cat": "programming", "title": "¿Qué es polimorfismo?", "body": "Objetos de diferentes clases respondiendo al mismo método. Un gato.hablar() dice 'miau', un perro.hablar() dice 'guau'. El código que usa hablar() no necesita saber qué animal es.", "difficulty": 2},
-    {"id": 148, "cat": "programming", "title": "¿Qué es un stub en testing?", "body": "Un objeto falso que devuelve datos predefinidos. En vez de llamar a la API real en el test, usas un stub que devuelve {status: 200}. Los tests son rápidos y no dependen de servicios externos.", "difficulty": 2},
-    {"id": 149, "cat": "programming", "title": "¿Qué es un repo monorepo vs polyrepo?", "body": "Monorepo: todos los proyectos en un solo repositorio (Google lo usa). Polyrepo: cada proyecto en su repo. Monorepo facilita compartir código, polyrepo facilita permisos y despliegues independientes.", "difficulty": 2},
-    {"id": 150, "cat": "programming", "title": "¿Qué es un feature flag?", "body": "Una variable que activa/desactiva una función sin redeploy. if FEATURE_NEW_UI: mostrar_nueva_ui(). Puedes lanzar features gradualmente, hacer A/B testing y desactivar rápido si hay bugs.", "difficulty": 2}
+    {
+      "id": 1,
+      "cat": "linux",
+      "title": "Atajo de teclado en terminal",
+      "body": "Ctrl+R busca en el historial de comandos. Escribe unas letras y aparece el último comando que las contenía. Mucho más rápido que hacer flecha arriba 50 veces.",
+      "difficulty": 1
+    },
+    {
+      "id": 2,
+      "cat": "windows",
+      "title": "Captura de pantalla sin herramientas",
+      "body": "Win+Shift+S abre el recortador de pantalla. Puedes seleccionar zona, ventana o pantalla completa. Se copia al portapapeles automáticamente.",
+      "difficulty": 1
+    },
+    {
+      "id": 3,
+      "cat": "ai",
+      "title": "Prompt para código limpio",
+      "body": "En vez de 'hazme un script', escribe: 'Escribe un script en Python que [función], siguiendo PEP 8, con docstrings, manejo de errores y type hints'. Obtendrás código mucho mejor.",
+      "difficulty": 1
+    },
+    {
+      "id": 4,
+      "cat": "git",
+      "title": "Deshacer el último commit sin perder cambios",
+      "body": "git reset --soft HEAD~1 deshace el commit pero mantiene los archivos staged. Perfecto cuando te olvidaste de incluir algo o el mensaje estaba mal.",
+      "difficulty": 1
+    },
+    {
+      "id": 5,
+      "cat": "docker",
+      "title": "Limpiar todo el cache de Docker",
+      "body": "docker system prune -a --volumes elimina contenedores parados, imágenes sin usar, redes huérfanas y volúmenes. Recupera GBs de espacio en segundos.",
+      "difficulty": 1
+    },
+    {
+      "id": 6,
+      "cat": "linux",
+      "title": "Ver qué proceso come tu CPU",
+      "body": "htop es mejor que top. Instálalo: sudo apt install htop. Muestra colores, árbol de procesos y puedes matar con F9. Arranca con htop.",
+      "difficulty": 1
+    },
+    {
+      "id": 7,
+      "cat": "redes",
+      "title": "Probar si un puerto está abierto",
+      "body": "nc -zv host puerto. Ejemplo: nc -zv google.com 443. Te dice si la conexión TCP funciona. Más rápido que ncat o telnet.",
+      "difficulty": 1
+    },
+    {
+      "id": 8,
+      "cat": "seguridad",
+      "title": "Generar contraseñas seguras desde terminal",
+      "body": "openssl rand -base64 32 genera una contraseña de 32 caracteres aleatorios. Cópiala y úsala donde necesites algo fuerte.",
+      "difficulty": 1
+    },
+    {
+      "id": 9,
+      "cat": "bash",
+      "title": "Repetir el último comando con un cambio",
+      "body": "!!:s/antigo/nuevo. Ejemplo: sudo apt install foo → !!:s/foo/bar ejecuta sudo apt install bar. Ahorra reescribir toda la línea.",
+      "difficulty": 2
+    },
+    {
+      "id": 10,
+      "cat": "programming",
+      "title": "El principio DRY",
+      "body": "DRY = Don't Repeat Yourself. Si copias y pegas código más de 2 veces, extrae una función. El código duplicado es el enemigo del mantenimiento.",
+      "difficulty": 1
+    },
+    {
+      "id": 11,
+      "cat": "windows",
+      "title": "Acceso rápido a configuración",
+      "body": "Win+I abre Configuración directamente. Win+X muestra el menú del botón derecho del Inicio (Terminal, Gestor de dispositivos, etc.).",
+      "difficulty": 1
+    },
+    {
+      "id": 12,
+      "cat": "ai",
+      "title": "Contexto para mejores respuestas",
+      "body": "Antes de pedir algo a la IA, dale contexto: 'Soy desarrollador junior, trabajo con Python y FastAPI, necesito explicar [tema] como si tuviera 2 años de experiencia'. La respuesta será mucho más útil.",
+      "difficulty": 1
+    },
+    {
+      "id": 13,
+      "cat": "devops",
+      "title": "Verificar si un servicio está activo",
+      "body": "systemctl status nombre_servicio. Muestra si está activo, las últimas líneas de log y el PID. Más informativo que solo '¿está corriendo?'.",
+      "difficulty": 1
+    },
+    {
+      "id": 14,
+      "cat": "databases",
+      "title": "Explicar un query SQL lento",
+      "body": "En PostgreSQL: EXPLAIN ANALYZE seguido de tu query. Te muestra el plan de ejecución real y cuánto tarda cada paso. Esencial para optimizar.",
+      "difficulty": 2
+    },
+    {
+      "id": 15,
+      "cat": "cloud",
+      "title": "Ver costes AWS rápido",
+      "body": "aws ce get-cost-and-usage --time-period Start=2026-08-01,End=2026-08-11 --granularity MONTHLY --metrics 'UnblendedCost'. Mira cuánto llevas gastado este mes.",
+      "difficulty": 2
+    },
+    {
+      "id": 16,
+      "cat": "linux",
+      "title": "Archivos más grandes de 100MB",
+      "body": "find / -type f -size +100M 2>/dev/null. Encuentra los archivos pesados que llenan tu disco. Combina con du -sh para ver el tamaño.",
+      "difficulty": 1
+    },
+    {
+      "id": 17,
+      "cat": "cybersecurity",
+      "title": "Cifrar un archivo con AES",
+      "body": "openssl enc -aes-256-cbc -salt -in archivo.txt -out archivo.enc. Para descifrar: openssl enc -d -aes-256-cbc -in archivo.enc -out archivo.txt. Pide contraseña.",
+      "difficulty": 2
+    },
+    {
+      "id": 18,
+      "cat": "git",
+      "title": "Ver el historial de un archivo",
+      "body": "git log --follow -p archivo.py muestra todo el historial de cambios de un archivo, incluso si fue renombrado. Útil para saber quién cambió qué y por qué.",
+      "difficulty": 2
+    },
+    {
+      "id": 19,
+      "cat": "docker",
+      "title": "Entrar en un contenedor que está corriendo",
+      "body": "docker exec -it nombre_contenedor /bin/bash abre una shell dentro del contenedor. Si no hay bash, usa /bin/sh. Perfecto para debugar.",
+      "difficulty": 1
+    },
+    {
+      "id": 20,
+      "cat": "hardware",
+      "title": "Verificar salud del disco",
+      "body": "smartctl -a /dev/sda muestra todos los atributos SMART del disco. Las columnas que importan: Reallocated_Sector_Ct y Current_Pending_Sector. Si crecen, el disco va a morir.",
+      "difficulty": 2
+    },
+    {
+      "id": 21,
+      "cat": "ai",
+      "title": "Chain of Thought",
+      "body": "Añade 'Piensa paso a paso' al final de tu prompt. La IA razona antes de responder y obtienes respuestas más lógicas, especialmente en matemáticas o problemas complejos.",
+      "difficulty": 1
+    },
+    {
+      "id": 22,
+      "cat": "bash",
+      "title": "Ejecutar un comando cada N segundos",
+      "body": "watch -n 5 'comando'. Ejemplo: watch -n 2 'docker ps'. Actualiza la pantalla cada 2 segundos. Perfecto para monitorear procesos.",
+      "difficulty": 1
+    },
+    {
+      "id": 23,
+      "cat": "programming",
+      "title": "Clean Code: nombres descriptivos",
+      "body": "Mal: x = calc(a, b). Bien: total_price = calculate_discount(price, percentage). Los nombres deben revelar la intención, no solo describir el tipo de dato.",
+      "difficulty": 1
+    },
+    {
+      "id": 24,
+      "cat": "windows",
+      "title": "Gestor de tareas rápido",
+      "body": "Ctrl+Shift+Esc abre el Gestor de tareas directamente. Ctrl+Alt+Delete también funciona pero tiene un paso intermedio. El primero es más rápido.",
+      "difficulty": 1
+    },
+    {
+      "id": 25,
+      "cat": "redes",
+      "title": "Ver tu IP pública",
+      "body": "curl ifconfig.me te muestra tu IP pública en segundos. También funciona: curl icanhazip.com. Más rápido que abrir un navegador.",
+      "difficulty": 1
+    },
+    {
+      "id": 26,
+      "cat": "virtualizacion",
+      "title": "Clonar VM sin perder config",
+      "body": "VirtualBox: VBoxManage clonevm 'nombre' --register --name 'copia'. Clona la VM completa incluyendo configuración. No necesitas abrir la GUI.",
+      "difficulty": 2
+    },
+    {
+      "id": 27,
+      "cat": "seguridad",
+      "title": "Verificar integridad de un archivo",
+      "body": "sha256sum archivo.tar.gz compara el hash con el publicado por el desarrollador. Si coinciden, el archivo no fue alterado. Fundamental antes de ejecutar software descargado.",
+      "difficulty": 1
+    },
+    {
+      "id": 28,
+      "cat": "devops",
+      "title": "Logs de systemd en tiempo real",
+      "body": "journalctl -u nombre_servicio -f --no-pager. Muestra los logs del servicio en tiempo real sin pager. Combínalo con --since '5 min ago' para ver solo los recientes.",
+      "difficulty": 2
+    },
+    {
+      "id": 29,
+      "cat": "linux",
+      "title": "Procesos que escuchan puertos",
+      "body": "ss -tlnp muestra todos los puertos TCP en escucha y el proceso que los usa. Más rápido que netstat. El -p muestra el PID.",
+      "difficulty": 1
+    },
+    {
+      "id": 30,
+      "cat": "ai",
+      "title": "Few-shot prompting",
+      "body": "En vez de explicar el formato que quieres, muestra 2-3 ejemplos en el prompt. La IA aprende el patrón y replica el formato exacto. Funciona genial para JSON, CSV o estructuras específicas.",
+      "difficulty": 2
+    },
+    {
+      "id": 31,
+      "cat": "databases",
+      "title": "Crear índice para queries lentos",
+      "body": "CREATE INDEX idx_nombre ON tabla(columna). Si un WHERE o JOIN usa esa columna mucho, un índice reduce el tiempo de query de minutos a milisegundos. No indexes todo: cada índice ralentiza los INSERT.",
+      "difficulty": 2
+    },
+    {
+      "id": 32,
+      "cat": "bash",
+      "title": "Procesar salida de un comando",
+      "body": "comando | while read linea; do echo \"Procesando: $linea\"; done. Útil para iterar sobre la salida línea por línea y hacer algo con cada una.",
+      "difficulty": 2
+    },
+    {
+      "id": 33,
+      "cat": "git",
+      "title": "Ver diferencias entre branches",
+      "body": "git diff main..mi-branch muestra todos los cambios que tienes相对于 main. Para ver solo los archivos: git diff main..mi-branch --name-only.",
+      "difficulty": 1
+    },
+    {
+      "id": 34,
+      "cat": "docker",
+      "title": "Ver logs de un contenedor",
+      "body": "docker logs -f nombre_contenedor --tail 100. Muestra las últimas 100 líneas de log en tiempo real. El -f sigue los nuevos logs como tail -f.",
+      "difficulty": 1
+    },
+    {
+      "id": 35,
+      "cat": "cloud",
+      "title": "Verificar credenciales AWS",
+      "body": "aws sts get-caller-identity te dice qué usuario/rol estás usando. Es lo primero que debes probar si algo de AWS no funciona. Si falla, tus credenciales están mal.",
+      "difficulty": 1
+    },
+    {
+      "id": 36,
+      "cat": "linux",
+      "title": "Matar un proceso que no responde",
+      "body": "kill -9 PID fuerza la terminación. Pero antes intenta kill PID (señal 15, graceful). Si no responde en 5 segundos, entonces usa -9. Último recurso.",
+      "difficulty": 1
+    },
+    {
+      "id": 37,
+      "cat": "cybersecurity",
+      "title": "Escanear puertos de tu máquina",
+      "body": "nmap -sT localhost verifica qué puertos están abiertos en tu propia máquina. Si ves puertos que no reconoces, investiga. Primer paso de un auditor de seguridad.",
+      "difficulty": 2
+    },
+    {
+      "id": 38,
+      "cat": "programming",
+      "title": "Unittest: la regla del AAA",
+      "body": "Arrange (prepara datos), Act (ejecuta), Assert (verifica). Cada test debe seguir estas 3 fases. Si tu test tiene más de 10 líneas, probablemente necesita refactorizarse.",
+      "difficulty": 1
+    },
+    {
+      "id": 39,
+      "cat": "windows",
+      "title": "Abrir el explorador de archivos rápido",
+      "body": "Win+E abre el Explorador. Win+R y escribe . abre la carpeta del usuario. Win+R y escribe .. abre C:\\. Atajos para no buscar el icono.",
+      "difficulty": 1
+    },
+    {
+      "id": 40,
+      "cat": "hardware",
+      "title": "RAM libre sin reiniciar",
+      "body": "sync; echo 3 | sudo tee /proc/sys/vm/drop_caches libera la caché de Linux sin reiniciar. Útil en servidores con poca RAM. No borra datos, solo caché.",
+      "difficulty": 2
+    },
+    {
+      "id": 41,
+      "cat": "ai",
+      "title": "Role prompting",
+      "body": "Empieza con: 'Eres un ingeniero de software senior con 10 años de experiencia en Python'. Darle un rol a la IA mejora la calidad y el tono de la respuesta.",
+      "difficulty": 1
+    },
+    {
+      "id": 42,
+      "cat": "devops",
+      "title": "Verificar espacio en disco rápido",
+      "body": "df -h / muestra el espacio libre en la partición raíz. Si supera 85%, empieza a limpiar. Si llega al 95%, tu sistema puede dejar de funcionar.",
+      "difficulty": 1
+    },
+    {
+      "id": 43,
+      "cat": "redes",
+      "title": "Traceroute para ver el camino",
+      "body": "traceroute google.com muestra cada router por el que pasa tu paquete hasta el destino. Si ves un salto con mucho tiempo (asteriscos), ahí hay un cuello de botella.",
+      "difficulty": 1
+    },
+    {
+      "id": 44,
+      "cat": "bash",
+      "title": "Historial de comandos del día",
+      "body": "history | grep '2026-08-11' o HISTTIMEFORMAT='%F %T ' history. Muestra cuándo ejecutaste cada comando. Útil para recordar qué hiciste hace 2 horas.",
+      "difficulty": 2
+    },
+    {
+      "id": 45,
+      "cat": "seguridad",
+      "title": "Buscar contraseñas en código",
+      "body": "grep -rn 'password\\|secret\\|api_key\\|token' --include='*.py' --include='*.js'. Busca strings que parezcan secretos en tu código. Primer paso antes de commitear.",
+      "difficulty": 1
+    },
+    {
+      "id": 46,
+      "cat": "virtualizacion",
+      "title": "Snapshot antes de cambios",
+      "body": "Antes de actualizar un sistema o instalar algo arriesgado, haz un snapshot de la VM. Si algo sale mal, restauras en 30 segundos. VirtualBox: Máquina → Tomar snapshot.",
+      "difficulty": 1
+    },
+    {
+      "id": 47,
+      "cat": "linux",
+      "title": "Buscar archivos por contenido",
+      "body": "grep -rl 'texto' /carpeta/ busca recursivamente en qué archivos aparece ese texto. Más útil que find + grep por separado.",
+      "difficulty": 1
+    },
+    {
+      "id": 48,
+      "cat": "programming",
+      "title": "El Principio de Responsabilidad Única",
+      "body": "Cada función debe hacer UNA cosa. Si una función calcula el IVA, formatea el PDF y lo envía por email, está haciendo 3 cosas. Sepáralas.",
+      "difficulty": 1
+    },
+    {
+      "id": 49,
+      "cat": "git",
+      "title": "Stash: guardar cambios temporalmente",
+      "body": "git stash guarda tus cambios sin commit. git stash pop los restaura. Perfecto cuando necesitas cambiar de branch rápidamente sin commitear a medias.",
+      "difficulty": 1
+    },
+    {
+      "id": 50,
+      "cat": "docker",
+      "title": "Ver el tamaño de imágenes",
+      "body": "docker images --format '{{.Repository}}:{{.Tag}} {{.Size}}' ordena las imágenes por tamaño. Elimina las pesadas que no usas: docker rmi imagen.",
+      "difficulty": 1
+    },
+    {
+      "id": 51,
+      "cat": "ai",
+      "title": "Generar test con IA",
+      "body": "Copia tu función y pide: 'Genera tests unitarios con pytest para esta función, cubriendo casos normales, edge cases y errores'. La IA crea tests que no habrías pensado.",
+      "difficulty": 1
+    },
+    {
+      "id": 52,
+      "cat": "cybersecurity",
+      "title": "Verificar si tu email fue filtrado",
+      "body": "Have I Been Pwned (haveibeenpwned.com) comprueba si tu email aparece en filtraciones de datos conocidas. Si aparece, cambia la contraseña de ese servicio.",
+      "difficulty": 1
+    },
+    {
+      "id": 53,
+      "cat": "databases",
+      "title": "Backup rápido de PostgreSQL",
+      "body": "pg_dump -U usuario base_datos > backup.sql. Restaurar: psql -U usuario base_datos < backup.sql. Hazlo antes de cualquier migración importante.",
+      "difficulty": 1
+    },
+    {
+      "id": 54,
+      "cat": "cloud",
+      "title": "S3: copiar archivos rápido",
+      "body": "aws s3 sync ./carpeta s3://bucket/carpeta sincroniza solo los archivos que cambiaron. Más rápido que cp para backups grandes. El --delete elimina archivos que ya no existen localmente.",
+      "difficulty": 2
+    },
+    {
+      "id": 55,
+      "cat": "windows",
+      "title": "Desinstalar apps que no aparecen",
+      "body": "Win+R → appwiz.cpl abre Programas y Características directamente. Si una app no aparece, prueba Revo Uninstaller o winget uninstall nombre.",
+      "difficulty": 1
+    },
+    {
+      "id": 56,
+      "cat": "linux",
+      "title": "Monitorear red en tiempo real",
+      "body": "iftop muestra qué conexiones están consumiendo ancho de banda en tiempo real. Instala: sudo apt install iftop. Salida similar a top pero para red.",
+      "difficulty": 2
+    },
+    {
+      "id": 57,
+      "cat": "bash",
+      "title": "Condicionar comandos",
+      "body": "comando1 && comando2 ejecuta comando2 solo si comando1 tuvo éxito. comando1 || comando2 ejecuta comando2 solo si comando1 falló. Fundamental en scripts.",
+      "difficulty": 1
+    },
+    {
+      "id": 58,
+      "cat": "programming",
+      "title": "Code review: revisa primero la interfaz",
+      "body": "Al revisar código, empieza por las interfaces (funciones públicas, APIs, clases). Si la interfaz está mal diseñada, por muy bueno que sea el código interno, el resultado será problemático.",
+      "difficulty": 2
+    },
+    {
+      "id": 59,
+      "cat": "devops",
+      "title": "Cron: programar tareas en Linux",
+      "body": "crontab -e edita tus tareas programadas. Formato: min hora dia mes dia_semana comando. Ejemplo: 0 3 * * * /script/backup.sh ejecuta a las 3am todos los días.",
+      "difficulty": 2
+    },
+    {
+      "id": 60,
+      "cat": "redes",
+      "title": "DNS: qué servidor estás usando",
+      "body": "cat /etc/resolv.conf muestra tu servidor DNS. Para probar un DNS específico: nslookup google.com 8.8.8.8. Cambiar DNS puede mejorar velocidad o privacidad.",
+      "difficulty": 1
+    },
+    {
+      "id": 61,
+      "cat": "ai",
+      "title": "Estructurar la salida",
+      "body": "Pide la respuesta en formato específico: 'Responde en JSON con las claves: titulo, descripcion, prioridad'. La IA respeta el formato y la respuesta es directamente usable.",
+      "difficulty": 1
+    },
+    {
+      "id": 62,
+      "cat": "seguridad",
+      "title": " SSH sin contraseña (keys)",
+      "body": "ssh-keygen -t ed25519 genera una clave. ssh-copy-id usuario@host la copia al servidor. Después te conectas sin contraseña. Más seguro que passwords.",
+      "difficulty": 2
+    },
+    {
+      "id": 63,
+      "cat": "hardware",
+      "title": "Temperatura de la CPU",
+      "body": " sensors (de lm-sensors) muestra la temperatura de CPU, GPU y discos. Si la CPU supera 85°C bajo carga, revisa la pasta térmica o el ventilador.",
+      "difficulty": 1
+    },
+    {
+      "id": 64,
+      "cat": "virtualizacion",
+      "title": "Docker vs VM: cuándo usar cada uno",
+      "body": "Docker: apps que necesitan lo mismo que el host (mismo OS, rapido, ligero). VM: cuando necesitas otro OS completo o aislamiento total. Para la mayoría de apps modernas, Docker es suficiente.",
+      "difficulty": 1
+    },
+    {
+      "id": 65,
+      "cat": "git",
+      "title": "Revertir un commit ya pusheado",
+      "body": "git revert HEAD crea un nuevo commit que deshace los cambios del anterior. Seguro para equipos porque no reescribe historial. A diferencia de git reset.",
+      "difficulty": 2
+    },
+    {
+      "id": 66,
+      "cat": "linux",
+      "title": "Particionar discos desde terminal",
+      "body": "fdisk /dev/sdb para particionar interactivamente, o parted para más opciones. Después mkfs.ext4 /dev/sdb1 para formatear y mount para montar.",
+      "difficulty": 3
+    },
+    {
+      "id": 67,
+      "cat": "programming",
+      "title": "El costo de los bytes",
+      "body": "Un string vacío '' ocupa 49 bytes en Python. Un bool True ocupa 28 bytes. Un int 0 ocupa 24 bytes. En estructuras grandes, esto importa. Usa __slots__ para reducir memoria.",
+      "difficulty": 3
+    },
+    {
+      "id": 68,
+      "cat": "docker",
+      "title": "Multi-stage builds",
+      "body": "Un Dockerfile con múltiples FROM: en el primero compilas, en el segundo copias solo el binario resultante. La imagen final es 10x más ligera. Ejemplo: compilar Go → copiar binario a Alpine.",
+      "difficulty": 2
+    },
+    {
+      "id": 69,
+      "cat": "bash",
+      "title": "Trap: capturar Ctrl+C",
+      "body": "trap 'echo Saliendo; cleanup' INT en un script captura la señal INT (Ctrl+C). Útil para limpiar archivos temporales o cerrar conexiones antes de salir.",
+      "difficulty": 2
+    },
+    {
+      "id": 70,
+      "cat": "ai",
+      "title": "Evaluar la respuesta de la IA",
+      "body": "Pregunta: '¿Qué partes de tu respuesta tienes menos confianza?' o '¿Qué información podrías estar inventando?'. La IA a veces alucina, y esto te ayuda a identificar dónde verificar.",
+      "difficulty": 2
+    },
+    {
+      "id": 71,
+      "cat": "databases",
+      "title": "Conexiones zombis en PostgreSQL",
+      "body": "SELECT count(*), state FROM pg_stat_activity GROUP BY state; si ves muchos 'idle' o 'idle in transaction', tu app no está cerrando conexiones. Puede agotar el pool.",
+      "difficulty": 3
+    },
+    {
+      "id": 72,
+      "cat": "cybersecurity",
+      "title": "HTTPS no es infalible",
+      "body": "HTTPS cifra la transmisión pero no verifica QUién eres. Un certificado válido puede ser de un atacante. Por eso importa verificar el dominio, no solo el candado.",
+      "difficulty": 2
+    },
+    {
+      "id": 73,
+      "cat": "windows",
+      "title": "Programar apagado",
+      "body": "shutdown /s /t 3600 apaga en 1 hora (3600 segundos). Para cancelar: shutdown /a. Útil para descargas largas o tareas nocturnas.",
+      "difficulty": 1
+    },
+    {
+      "id": 74,
+      "cat": "cloud",
+      "title": "Lambda: evitar cold starts",
+      "body": "En AWS Lambda, usa Provisioned Concurrency para funciones críticas. O mantén la función caliente con un CloudWatch Event cada 5 minutos. Los cold adds 1-3 segundos.",
+      "difficulty": 3
+    },
+    {
+      "id": 75,
+      "cat": "redes",
+      "title": "Proxy SOCKS con SSH",
+      "body": "ssh -D 1080 usuario@host crea un proxy SOCKS. Configura tu navegador para usar SOCKS5 en localhost:1080. Todo el tráfico pasa por el servidor remoto.",
+      "difficulty": 2
+    },
+    {
+      "id": 76,
+      "cat": "programming",
+      "title": "Logging: no imprimas, loguea",
+      "body": "En vez de print(), usa logging con niveles: DEBUG para desarrollo, INFO para flujo normal, WARNING para problemas, ERROR para fallos. En producción, print() no se ve.",
+      "difficulty": 1
+    },
+    {
+      "id": 77,
+      "cat": "devops",
+      "title": "Health check en Docker",
+      "body": "healthcheck en docker-compose.yml: test: ['CMD', 'curl', '-f', 'http://localhost:8000/health']. Docker reinicia el contenedor si falla el health check.",
+      "difficulty": 2
+    },
+    {
+      "id": 78,
+      "cat": "linux",
+      "title": "Renombrar archivos en masa",
+      "body": "rename 's/\\.jpg$/.jpeg/' *.jpg renombra todos los .jpg a .jpeg. Más seguro que mv en bucle. Prueba primero con --n para ver qué haría sin ejecutar.",
+      "difficulty": 2
+    },
+    {
+      "id": 79,
+      "cat": "git",
+      "title": "Bisect: encontrar el commit malo",
+      "body": "git bisect start, git bisect bad (commit actual), git bisect good v1.0 (última versión que funcionaba). Git prueba commits y te dice cuál rompió todo.",
+      "difficulty": 3
+    },
+    {
+      "id": 80,
+      "cat": "ai",
+      "title": "System prompt para asistente de código",
+      "body": "Define un system prompt: 'Eres un reviewer de código estricto. Revisa el código que te envíe buscando: bugs, vulnerabilidades, malas prácticas de performance, y violaciones de PEP 8'. Obtendrás reviews consistentes.",
+      "difficulty": 2
+    },
+    {
+      "id": 81,
+      "cat": "seguridad",
+      "title": "Auditar dependencias vulnerables",
+      "body": "pip-audit (Python) o npm audit (Node) comprueba si tus dependencias tienen vulnerabilidades conocidas. Ejecútalo en CI para detectar problemas antes de producción.",
+      "difficulty": 2
+    },
+    {
+      "id": 82,
+      "cat": "bash",
+      "title": "Copiar al portapapeles desde terminal",
+      "body": "xclip -selection clipboard < archivo.txt copia el contenido de un archivo al portapapeles en Linux. En macOS: cat archivo.txt | pbcopy.",
+      "difficulty": 1
+    },
+    {
+      "id": 83,
+      "cat": "docker",
+      "title": "Red Docker: comunicar contenedores",
+      "body": "Crea una red: docker network create mi_red. Conecta contenedores: docker run --network mi_red. Se comunican por nombre de contenedor, no por IP.",
+      "difficulty": 2
+    },
+    {
+      "id": 84,
+      "cat": "hardware",
+      "title": "Benchmark de disco",
+      "body": "dd if=/dev/zero of=test bs=1G count=1 oflag=dsync mide escritura real. hdparm -t /dev/sda mide lectura. Compara resultados para saber si el disco va bien.",
+      "difficulty": 2
+    },
+    {
+      "id": 85,
+      "cat": "programming",
+      "title": "API design: usa sustantivos, no verbos",
+      "body": "Mal: /getUser, /createUser. Bien: /users (GET = listar, POST = crear). REST se basa en recursos (sustantivos), no en acciones (verbos).",
+      "difficulty": 1
+    },
+    {
+      "id": 86,
+      "cat": "windows",
+      "title": "Limpiar archivos temporales",
+      "body": "Win+R → %temp% abre la carpeta temporal. Selecciona todo (Ctrl+A) y borra. También: Win+R → cleanmgr para el Limpiador de discos integrado.",
+      "difficulty": 1
+    },
+    {
+      "id": 87,
+      "cat": "linux",
+      "title": "Swap sin partición dedicada",
+      "body": "fallocate -l 4G /swapfile && chmod 600 /swapfile && mkswap /swapfile && swapon /swapfile. Crea 4GB de swap sin tocar particiones. Útil si te quedas sin RAM.",
+      "difficulty": 2
+    },
+    {
+      "id": 88,
+      "cat": "cloud",
+      "title": "Variables de entorno para secrets",
+      "body": "Nunca hardcodees API keys. Usa variables de entorno: export API_KEY=xxx. En Docker: environment: - API_KEY=${API_KEY}. En GitHub Actions: secrets.",
+      "difficulty": 1
+    },
+    {
+      "id": 89,
+      "cat": "devops",
+      "title": "Rolling update sin downtime",
+      "body": "Docker Compose: docker compose up -d --no-deps --scale servicio=3 --build servicio. Actualiza instancias una por una sin parar el servicio completo.",
+      "difficulty": 3
+    },
+    {
+      "id": 90,
+      "cat": "redes",
+      "title": "Puerto 53: DNS siempre abierto",
+      "body": "Si tu empresa bloquea puertos pero necesitas DNS, el puerto 53 casi siempre está abierto. Puedes tunelar tráfico DNS (DNS tunneling) como alternativa.",
+      "difficulty": 3
+    },
+    {
+      "id": 91,
+      "cat": "ai",
+      "title": "Iterar sobre una solución",
+      "body": "No pidas la solución perfecta de golpe. Pide algo básico, luego: 'Ahora mejora el manejo de errores', 'Ahora añade logging', 'Ahora optimiza para performance'. Paso a paso.",
+      "difficulty": 1
+    },
+    {
+      "id": 92,
+      "cat": "seguridad",
+      "title": "Cifrar el disco completo",
+      "body": "Linux: LUKS (cryptsetup). Windows: BitLocker. Mac: FileVault. Si te roban el portátil, los datos son inaccesibles sin la contraseña. Configúralo HOY.",
+      "difficulty": 2
+    },
+    {
+      "id": 93,
+      "cat": "git",
+      "title": "Alias útiles de Git",
+      "body": "git config --global alias.st status, alias.co checkout, alias.br branch, alias.ci commit. Ahorra escribir comandos largos. Añade alias personalizados en ~/.gitconfig.",
+      "difficulty": 1
+    },
+    {
+      "id": 94,
+      "cat": "databases",
+      "title": "N+1 queries: el problema clásico",
+      "body": "Si cargas 100 usuarios y luego haces 100 queries para sus posts, tienes un problema N+1. Usa JOIN o eager loading. Detecta con django-debug-toolbar o EXPLAIN.",
+      "difficulty": 2
+    },
+    {
+      "id": 95,
+      "cat": "bash",
+      "title": "Argumentos opcionales en scripts",
+      "body": "while [[ $# -gt 0 ]]; do case $1 in -v|--verbose) VERBOSE=1;; -o) OUTPUT=$2;; esac; shift; done. Parsea flags como -v, -o archivo en tus scripts profesionales.",
+      "difficulty": 3
+    },
+    {
+      "id": 96,
+      "cat": "programming",
+      "title": "Evita el premature optimization",
+      "body": "Premature optimization is the root of all evil — Donald Knuth. Primero hazlo correcto, luego rápido. Mide antes de optimizar. El 80% del tiempo está en el 20% del código.",
+      "difficulty": 1
+    },
+    {
+      "id": 97,
+      "cat": "linux",
+      "title": "Files immutable en ext4",
+      "body": "sudo chattr +i archivo.txt hace que el archivo no se pueda modificar, borrar ni renombrar ni por root. Para desbloquear: sudo chattr -i archivo.txt.",
+      "difficulty": 2
+    },
+    {
+      "id": 98,
+      "cat": "docker",
+      "title": "Debug: ver qué hay dentro de una imagen",
+      "body": "docker run -it --rm imagen sh entra en la imagen como si fuera un contenedor. Explora archivos, verifica versiones, comprueba dependencias instaladas.",
+      "difficulty": 1
+    },
+    {
+      "id": 99,
+      "cat": "hardware",
+      "title": "Monitorizar temperatura remota",
+      "body": "En un servidor: ssh root@server 'sensors | grep Core'. Crea un alias o script para comprobar periódicamente. Si algún core supera 90°C, revisa la refrigeración.",
+      "difficulty": 2
+    },
+    {
+      "id": 100,
+      "cat": "ai",
+      "title": "Auto-refinamiento de prompts",
+      "body": "Pregunta a la IA: '¿Cómo podría mejorar este prompt para obtener mejor respuesta?'. La IA te sugiere mejoras a tu propio prompt. Meta-prompting.",
+      "difficulty": 2
+    },
+    {
+      "id": 101,
+      "cat": "virtualizacion",
+      "title": "Vagrant: VMs reproducibles",
+      "body": "Vagrant crea VMs desde un Vagrantfile. 'vagrant up' levanta la VM, 'vagrant destroy' la elimina. Perfecto para entornos de desarrollo idénticos entre el equipo.",
+      "difficulty": 2
+    },
+    {
+      "id": 102,
+      "cat": "cybersecurity",
+      "title": "2FA: no uses SMS",
+      "body": "SMS es interceptable (SIM swapping). Usa apps como Google Authenticator, Authy o hardware keys (YubiKey). Si una web solo ofrece SMS, es una bandera roja.",
+      "difficulty": 1
+    },
+    {
+      "id": 103,
+      "cat": "cloud",
+      "title": "Tagging en AWS: ahorra dinero",
+      "body": "Etiqueta TODOS los recursos con Environment:dev, Team:backend, etc. Sin tags, no puedes saber qué equipo gasta qué. La facturación sin tags es un caos.",
+      "difficulty": 1
+    },
+    {
+      "id": 104,
+      "cat": "programming",
+      "title": "Tipos de testing",
+      "body": "Unit: una función aislada. Integration: varias partes juntas. E2E: flujo completo del usuario. Unit son rápidos y baratos, E2E son lentos pero cubren más. Necesitas los tres.",
+      "difficulty": 1
+    },
+    {
+      "id": 105,
+      "cat": "devops",
+      "title": "Blue-Green deployment",
+      "body": "Mantén dos entornos: blue (producción actual) y green (nueva versión). Cuando green está listo, redirige el tráfico. Si falla, vuelves a blue en segundos.",
+      "difficulty": 3
+    },
+    {
+      "id": 106,
+      "cat": "linux",
+      "title": "Syslog centralizado",
+      "body": "rsyslog envía logs de múltiples servidores a un central. Configura /etc/rsyslog.conf para transmitir vía UDP/TCP. En el central, recibe y almacena todo junto.",
+      "difficulty": 3
+    },
+    {
+      "id": 107,
+      "cat": "git",
+      "title": "Worktrees: trabajar en dos branches",
+      "body": "git worktree add ../nuevo-branch mi-branch permite tener dos branches checked out a la vez. Útil para hacer hotfix sin stashar tu trabajo actual.",
+      "difficulty": 3
+    },
+    {
+      "id": 108,
+      "cat": "ai",
+      "title": "Retrieval-Augmented Generation",
+      "body": "RAG combina búsqueda de documentos con generación de texto. En vez de depender solo del entrenamiento, la IA busca en tus documentos y responde basándose en ellos. Reduce alucinaciones.",
+      "difficulty": 2
+    },
+    {
+      "id": 109,
+      "cat": "bash",
+      "title": "Parallel execution",
+      "body": "comando1 & comando2 & wait ejecuta dos comandos en paralelo y espera a que terminen ambos. Útil para tareas independientes que quieres acelerar.",
+      "difficulty": 2
+    },
+    {
+      "id": 110,
+      "cat": "seguridad",
+      "title": "Principle of Least Privilege",
+      "body": "Dale a cada usuario/programa solo los permisos que necesita NADA más. Si un script solo lee una tabla, no le des permisos de DROP. Si un usuario solo necesita FTP, no le des shell.",
+      "difficulty": 1
+    },
+    {
+      "id": 111,
+      "cat": "databases",
+      "title": "Migraciones: nunca toques producción directamente",
+      "body": "Siempre usa herramientas de migración (Alembic, Flyway, etc.). Nunca hagas ALTER TABLE manual en producción. Una migración mal hecha puede borrar datos para siempre.",
+      "difficulty": 1
+    },
+    {
+      "id": 112,
+      "cat": "windows",
+      "title": "WSL: Linux en Windows",
+      "body": "wsl --install instala Windows Subsystem for Linux. Tienes bash, apt, Python, Node directamente en Windows. Ideal si desarrollas para Linux pero usas Windows.",
+      "difficulty": 1
+    },
+    {
+      "id": 113,
+      "cat": "programming",
+      "title": "Code smells comunes",
+      "body": "Funciones de más de 30 líneas, más de 3 niveles de indentación, nombres genéricos (data, info, temp), parámetrosbooleanos, código duplicado. Si los ves, refactoriza.",
+      "difficulty": 1
+    },
+    {
+      "id": 114,
+      "cat": "cloud",
+      "title": "CDN para estáticos",
+      "body": "CloudFront (AWS), Cloudflare, o Azure CDN. Pon HTML/CSS/JS e imágenes en CDN. Reduce latencia y ahorra bandwidth de tu servidor. Coste mínimo o gratis.",
+      "difficulty": 2
+    },
+    {
+      "id": 115,
+      "cat": "linux",
+      "title": "Atajos de tmux",
+      "body": "Ctrl+B % divide verticalmente. Ctrl+B \" divide horizontalmente. Ctrl+B flecha cambia de panel. Ctrl+B d desconecta (el proceso sigue corriendo). Tmux = terminal que no muere.",
+      "difficulty": 2
+    },
+    {
+      "id": 116,
+      "cat": "ai",
+      "title": "Chain-of-thought negativa",
+      "body": "Pide: 'Antes de dar tu respuesta, piensa en 3 razones por las que tu enfoque podría estar mal'. Esto reduce alucinaciones y mejora la robustez de la respuesta.",
+      "difficulty": 2
+    },
+    {
+      "id": 117,
+      "cat": "hardware",
+      "title": "NVMe vs SATA SSD",
+      "body": "NVMe: hasta 7000 MB/s. SATA: hasta 550 MB/s. Si tu placa soporta NVMe, úsalo para el SO y proyectos. SATA queda para almacenamiento secundario.",
+      "difficulty": 1
+    },
+    {
+      "id": 118,
+      "cat": "devops",
+      "title": "Infrastructure as Code",
+      "body": "Terraform, Pulumi o CloudFormation. Define tu infraestructura en código. Se puede versionar, reviewear y reproducir. Nunca toques la consola web para cambios manuales.",
+      "difficulty": 2
+    },
+    {
+      "id": 119,
+      "cat": "redes",
+      "title": "VPN vs Proxy vs Tor",
+      "body": "VPN: cifra todo tu tráfico, buen para privacidad general. Proxy: solo cifra una app, más rápido pero menos seguro. Tor: máximo anonimato pero muy lento. Elige según tu necesidad.",
+      "difficulty": 1
+    },
+    {
+      "id": 120,
+      "cat": "git",
+      "title": "Conventional Commits",
+      "body": "feat: nueva función. fix: corrige bug. docs: documentación. refactor: reestructura sin cambiar funcionalidad. Los commits descriptivos ayudan a generar changelogs automáticos.",
+      "difficulty": 1
+    },
+    {
+      "id": 121,
+      "cat": "programming",
+      "title": "¿Qué es if __name__ == '__main__'?",
+      "body": "En Python, __name__ es una variable especial. Cuando ejecutas un archivo directamente, __name__ vale '__main__'. Cuando lo importas como módulo, vale el nombre del archivo. Así puedes tener código que solo se ejecuta al correr el archivo, no al importarlo.",
+      "difficulty": 1
+    },
+    {
+      "id": 122,
+      "cat": "programming",
+      "title": "¿Qué es __init__.py?",
+      "body": "Un archivo vacío que indica a Python que una carpeta es un paquete (módulo). Sin él, Python no reconoce la carpeta como paquete. Desde Python 3.3+ es opcional (namespace packages), pero ponlo por defecto.",
+      "difficulty": 1
+    },
+    {
+      "id": 123,
+      "cat": "programming",
+      "title": "¿Qué es self en Python?",
+      "body": "self es la referencia al objeto actual. En una clase, self.nombre = 'Juan' guarda 'Juan' en la instancia. Es como 'this' en Java/JS pero explícito. Siempre es el primer parámetro de un método.",
+      "difficulty": 1
+    },
+    {
+      "id": 124,
+      "cat": "programming",
+      "title": "¿Qué es un decorador?",
+      "body": "Es una función que envuelve otra función para añadirle comportamiento sin modificarla. @timer antes de una función la mide. @login_required exige autenticación. Es azúcar sintáctico para f-wrapper(f).",
+      "difficulty": 2
+    },
+    {
+      "id": 125,
+      "cat": "programming",
+      "title": "¿Qué es un generator?",
+      "body": "Una función con yield en vez de return. Devuelve valores uno a uno sin cargar todo en memoria. Ideal para procesar millones de líneas: for line in open('big_file.txt') es un generator.",
+      "difficulty": 2
+    },
+    {
+      "id": 126,
+      "cat": "programming",
+      "title": "¿Qué es un virtual environment?",
+      "body": "Un aislamiento de dependencias por proyecto. Crea una carpeta .venv con su propio Python y paquetes. Así proyecto A usa requests 2.28 y proyecto B usa 2.31 sin conflictos. Comando: python -m venv .venv",
+      "difficulty": 1
+    },
+    {
+      "id": 127,
+      "cat": "programming",
+      "title": "¿Qué es un pip freeze?",
+      "body": "pip freeze > requirements.txt lista todas las versiones exactas de paquetes instalados. Alguien más puede instalarlas con pip install -r requirements.txt. Es la forma de compartir dependencias.",
+      "difficulty": 1
+    },
+    {
+      "id": 128,
+      "cat": "programming",
+      "title": "¿Qué es una API REST?",
+      "body": "Una API que usa HTTP para comunicarse. GET para leer, POST para crear, PUT para actualizar, DELETE para borrar. Cada endpoint es una URL. Los datos van en JSON. Es el estándar para servicios web.",
+      "difficulty": 1
+    },
+    {
+      "id": 129,
+      "cat": "programming",
+      "title": "¿Qué es JSON?",
+      "body": "JavaScript Object Notation. Formato de texto ligero para intercambiar datos: {\"nombre\": \"Juan\", \"edad\": 30}. Python lo lee con json.load() y escribe con json.dump(). Todo API moderna usa JSON.",
+      "difficulty": 1
+    },
+    {
+      "id": 130,
+      "cat": "programming",
+      "title": "¿Qué es un HTTP status code?",
+      "body": "200 = OK, 201 = Creado, 400 = Bad Request, 401 = No autenticado, 403 = Prohibido, 404 = No encontrado, 500 = Error del servidor. Saber estos códigos te dice qué falla sin leer logs.",
+      "difficulty": 1
+    },
+    {
+      "id": 131,
+      "cat": "programming",
+      "title": "¿Qué es un ORM?",
+      "body": "Object-Relational Mapping. Convierte tablas de BD en clases de Python. En vez de escribir SQL: user = User.query.get(1). SQLAlchemy, Django ORM, Peewee. Ahorra código pero puede ser más lento que SQL raw.",
+      "difficulty": 2
+    },
+    {
+      "id": 132,
+      "cat": "programming",
+      "title": "¿Qué es un middleware?",
+      "body": "Es un código que se ejecuta entre la petición y la respuesta. En Flask/Django: CORS, autenticación, logging. Cada request pasa por todos los middlewares antes de llegar al handler.",
+      "difficulty": 2
+    },
+    {
+      "id": 133,
+      "cat": "programming",
+      "title": "¿Qué es un endpoint?",
+      "body": "Una URL específica de una API. GET /api/usuarios es un endpoint para listar usuarios. POST /api/usuarios es otro para crear. Cada endpoint maneja un método HTTP y una función.",
+      "difficulty": 1
+    },
+    {
+      "id": 134,
+      "cat": "programming",
+      "title": "¿Qué es un type hint?",
+      "body": "def greet(name: str) -> str: indica que name es str y devuelve str. No obliga a Python pero ayuda a detectar errores antes de ejecutar. PyCharm y VS Code los usan para autocompletar.",
+      "difficulty": 1
+    },
+    {
+      "id": 135,
+      "cat": "programming",
+      "title": "¿Qué es un closure?",
+      "body": "Una función que 'recuerda' variables de su scope externo aunque ya no exista. def make_counter(): count=0; return lambda: count+1. El lambda recuerda count. Base de los decoradores.",
+      "difficulty": 2
+    },
+    {
+      "id": 136,
+      "cat": "programming",
+      "title": "¿Qué es un hash?",
+      "body": "Convierte datos en un número fijo. hashlib.sha256('hola').hexdigest() da una cadena de 64 caracteres. Se usa para verificar integridad, contraseñas (nunca guardes texto plano) y deduplicación.",
+      "difficulty": 1
+    },
+    {
+      "id": 137,
+      "cat": "programming",
+      "title": "¿Qué es un mutex?",
+      "body": "Mutual Exclusion. Un candado que evita que dos procesos accedan al mismo recurso a la vez. Sin mutex, dos threads escribiendo el mismo archivo pueden corromperlo. threading.Lock() en Python.",
+      "difficulty": 3
+    },
+    {
+      "id": 138,
+      "cat": "programming",
+      "title": "¿Qué es Dockerfile?",
+      "body": "Instrucciones para construir una imagen Docker. FROM python:3.12, COPY . /app, RUN pip install. Es como una receta: define qué hay dentro del contenedor. Se construye con docker build.",
+      "difficulty": 1
+    },
+    {
+      "id": 139,
+      "cat": "programming",
+      "title": "¿Qué es un contenedor?",
+      "body": "Un proceso aislado con su propio filesystem pero compartiendo el kernel del host. Más ligero que una VM (segundos vs minutos). Docker crea contenedores a partir de imágenes.",
+      "difficulty": 1
+    },
+    {
+      "id": 140,
+      "cat": "programming",
+      "title": "¿Qué es CI/CD?",
+      "body": "Continuous Integration: cada commit se construye y testea automáticamente. Continuous Deployment: si pasa todo, se despliega a producción. GitHub Actions hace CI/CD gratis para repos públicos.",
+      "difficulty": 1
+    },
+    {
+      "id": 141,
+      "cat": "programming",
+      "title": "¿Qué es un linter?",
+      "body": "Una herramienta que revisa tu código buscando errores de estilo y bugs comunes sin ejecutarlo. Ruff, Flake8, Pylint en Python. Ejecútalo antes de commitear para mantener código limpio.",
+      "difficulty": 1
+    },
+    {
+      "id": 142,
+      "cat": "programming",
+      "title": "¿Qué es un tuple vs list?",
+      "body": "Lista: mutable, puede cambiar. Tupla: inmutable, no puede cambiar. usa list para colecciones que cambian, tuple para datos fijos (coordenadas, config). Las tuplas son más rápidas.",
+      "difficulty": 1
+    },
+    {
+      "id": 143,
+      "cat": "programming",
+      "title": "¿Qué es una comprehensión de lista?",
+      "body": "[x*2 for x in range(10) if x > 3] crea una lista con una línea. Es más rápido y legible que un bucle for con append. Funciona con dicts, sets y generators también.",
+      "difficulty": 1
+    },
+    {
+      "id": 144,
+      "cat": "programming",
+      "title": "¿Qué es *args y **kwargs?",
+      "body": "*args captura argumentos posicionales extra como tupla. **kwargs captura argumentos nombrados extra como dict. def func(*args, **kwargs) acepta cualquier cantidad de parámetros.",
+      "difficulty": 2
+    },
+    {
+      "id": 145,
+      "cat": "programming",
+      "title": "¿Qué es un context manager?",
+      "body": "with open('file.txt') as f: garantiza que el archivo se cierra aunque haya error. Implementa __enter__ y __exit__. Útil para archivos, conexiones BD, locks. Recurso que se libera siempre.",
+      "difficulty": 2
+    },
+    {
+      "id": 146,
+      "cat": "programming",
+      "title": "¿Qué es una abstracción?",
+      "body": "Esconder la complejidad y mostrar solo lo necesario. Una función es abstracción: el usuario no sabe cómo funciona por dentro, solo qué hace. Las clases abstractas definen interfaces sin implementar.",
+      "difficulty": 1
+    },
+    {
+      "id": 147,
+      "cat": "programming",
+      "title": "¿Qué es polimorfismo?",
+      "body": "Objetos de diferentes clases respondiendo al mismo método. Un gato.hablar() dice 'miau', un perro.hablar() dice 'guau'. El código que usa hablar() no necesita saber qué animal es.",
+      "difficulty": 2
+    },
+    {
+      "id": 148,
+      "cat": "programming",
+      "title": "¿Qué es un stub en testing?",
+      "body": "Un objeto falso que devuelve datos predefinidos. En vez de llamar a la API real en el test, usas un stub que devuelve {status: 200}. Los tests son rápidos y no dependen de servicios externos.",
+      "difficulty": 2
+    },
+    {
+      "id": 149,
+      "cat": "programming",
+      "title": "¿Qué es un repo monorepo vs polyrepo?",
+      "body": "Monorepo: todos los proyectos en un solo repositorio (Google lo usa). Polyrepo: cada proyecto en su repo. Monorepo facilita compartir código, polyrepo facilita permisos y despliegues independientes.",
+      "difficulty": 2
+    },
+    {
+      "id": 150,
+      "cat": "programming",
+      "title": "¿Qué es un feature flag?",
+      "body": "Una variable que activa/desactiva una función sin redeploy. if FEATURE_NEW_UI: mostrar_nueva_ui(). Puedes lanzar features gradualmente, hacer A/B testing y desactivar rápido si hay bugs.",
+      "difficulty": 2
+    },
+    {
+      "cat": "seguridad",
+      "title": "Para qué sirve el cifrado SSL/TLS",
+      "body": "SSL/TLS (Secure Sockets Layer / Transport Layer Security) cifra la conexión entre tu navegador y el servidor. Es el candado del puerto: los datos viajan codificados para que nadie en medio los lea. El HTTPS es HTTP+SSL/TLS.",
+      "difficulty": 1,
+      "id": 151
+    },
+    {
+      "cat": "redes",
+      "title": "Qué es una VPN y para qué sirve",
+      "body": "Una VPN (Virtual Private Network, red privada virtual) crea un túnel cifrado entre tu equipo y un servidor remoto. Oculta tu IP, te protege en Wi-Fi públicas y te permite acceder a la red de tu empresa como si estuvieras en la oficina.",
+      "difficulty": 1,
+      "id": 152
+    },
+    {
+      "cat": "ai",
+      "title": "Qué es un LLM",
+      "body": "Un LLM (Large Language Model, modelo de lenguaje grande) es una IA que aprende patrones de lenguaje leyendo enormes cantidades de texto. Predice la siguiente palabra para generar respuestas. ChatGPT o Claude son LLMs. Se entrena una vez y se usa muchísimas veces.",
+      "difficulty": 1,
+      "id": 153
+    },
+    {
+      "cat": "devops",
+      "title": "Diferencia entre CI y CD",
+      "body": "CI (Continuous Integration, integración continua) fusiona y testea el código de todos en un mismo sitio de forma automática. CD (Continuous Delivery, entrega continua) sube esos cambios a producción de forma automatizada. CI valida, CD despliega.",
+      "difficulty": 1,
+      "id": 154
+    },
+    {
+      "cat": "virtualizacion",
+      "title": "Qué es una VM",
+      "body": "Una VM (Virtual Machine, máquina virtual) es un ordenador completo simulado con software: tiene su propio SO, CPU, RAM y disco virtuales. Varias VMs corren en un solo hardware físico, aisladas entre sí. Docker y contenedores son más ligeros que VMs porque comparten el SO.",
+      "difficulty": 1,
+      "id": 155
+    },
+    {
+      "cat": "cloud",
+      "title": "Qué significa IaaS, PaaS y SaaS",
+      "body": "Son los 3 modelos según cuánto gestiona el proveedor. IaaS (Infrastructure as a Service): alquilas servidores y redes, montas todo tú. PaaS (Platform as a Service): te dan también el sistema para desplegar tu app. SaaS (Software as a Service): usas el software ya hecho por internet, tipo Gmail.",
+      "difficulty": 2,
+      "id": 156
+    },
+    {
+      "cat": "databases",
+      "title": "Qué es un ETL",
+      "body": "ETL (Extract, Transform, Load: extraer, transformar, cargar) es el proceso de mover datos de varias fuentes a un almacén. Se extraen, se limpian/formatean y se cargan en una BD o data warehouse. Es la base de la ingeniería de datos.",
+      "difficulty": 2,
+      "id": 157
+    },
+    {
+      "cat": "seguridad",
+      "title": "Autenticación y RBAC explicados",
+      "body": "Autenticación valida QUIÉN eres (usuario y contraseña). RBAC (Role-Based Access Control, control de acceso por roles): en vez de dar permisos a cada persona, agrupas permisos en roles y asignas roles. Más fácil de mantener que permisos individuales.",
+      "difficulty": 2,
+      "id": 158
+    },
+    {
+      "cat": "redes",
+      "title": "Qué es el NAT",
+      "body": "NAT (Network Address Translation, traducción de direcciones de red) permite que muchos equipos de tu casa compartan una sola IP pública de internet. El router traduce las IPs privadas (192.168.x.x) a la pública y recuerda qué respuesta va a cada equipo.",
+      "difficulty": 2,
+      "id": 159
+    },
+    {
+      "cat": "devops",
+      "title": "Qué es IaC",
+      "body": "IaC (Infrastructure as Code, infraestructura como código) es gestionar servidores, redes y configuraciones con código versionado en vez de hacerlo a mano. Si declaras tu infra en archivos (Terraform, Ansible), es reproducible y revisable.",
+      "difficulty": 2,
+      "id": 160
+    },
+    {
+      "cat": "programming",
+      "title": "Qué es una API",
+      "body": "API (Application Programming Interface, interfaz de programación de aplicaciones) es un contrato que permite que dos programas se hablen. Tú pides algo (petición HTTP) y el servidor responde con datos (normalmente JSON). Es la puerta de entrada a un servicio.",
+      "difficulty": 1,
+      "id": 161
+    },
+    {
+      "cat": "seguridad",
+      "title": "Para qué es el SSH",
+      "body": "SSH (Secure Shell) es un protocolo para entrar y ejecutar comandos en un servidor remoto de forma cifrada, sobre un canal seguro. Sustituye a Telnet (sin cifrar). Normalmente se autentica con una clave pública/privada en vez de contraseña.",
+      "difficulty": 1,
+      "id": 162
+    },
+    {
+      "cat": "git",
+      "title": "Qué es SVN",
+      "body": "SVN (Apache Subversion) es un sistema de control de versiones centralizado: hay UN servidor que guarda la historia y todos suben y bajan cambios desde él. A diferencia de Git (distribuido), solo hay un repositorio central. Está en desuso frente a Git.",
+      "difficulty": 1,
+      "id": 163
+    },
+    {
+      "cat": "redes",
+      "title": "Qué es un WISPr",
+      "body": "WISPr (Wireless Internet Service Provider roaming) es un estándar que permite que una conexión Wi-Fi pública reconozca automáticamente al usuario sin pedirle datos cada vez. Se usaba en hotspots para hacer el inicio de sesión transparente entre redes de distintos proveedores.",
+      "difficulty": 3,
+      "id": 164
+    },
+    {
+      "cat": "seguridad",
+      "title": "HTTP vs HTTPS",
+      "body": "HTTP (HyperText Transfer Protocol) envía los datos en claro, cualquiera puede leerlos. HTTPS (el extra S es de Secure) los cifra con SSL/TLS. Hoy en día todo sitio serio usa HTTPS; si un formulario de contraseña está en HTTP, tus datos van desnudos por la red.",
+      "difficulty": 1,
+      "id": 165
+    },
+    {
+      "cat": "programming",
+      "title": "Que es un compilador vs interprete",
+      "body": "Un COMPILADOR traduce todo tu codigo a maquina de una vez y genera un ejecutable (C, Rust, Go). Un INTERPRETE ejecuta el codigo linea a linea sin archivo final (Python, Ruby, JS). El compilado suele ser mas rapido; el interpretado mas flexible.",
+      "difficulty": 1,
+      "id": 166
+    },
+    {
+      "cat": "programming",
+      "title": "Que es un framework",
+      "body": "Un FRAMEWORK te da estructura y herramientas ya hechas: rutas, plantillas, acceso a BD. Tu escribes la logica dentro de su esquema (Django, Rails, Spring). Invierte el control: el framework llama a tu codigo, no al reves.",
+      "difficulty": 1,
+      "id": 167
+    },
+    {
+      "cat": "programming",
+      "title": "Libreria vs framework",
+      "body": "Una LIBRERIA es codigo que TU llamas cuando quieres (una utilidad de fechas). Un FRAMEWORK te llama a ti y dicta la estructura. La libreria es una herramienta; el framework, el andamiaje.",
+      "difficulty": 1,
+      "id": 168
+    },
+    {
+      "cat": "programming",
+      "title": "Que es el polimorfismo",
+      "body": "POLIMORFISMO: objetos de distintas clases responden al mismo metodo. gato.hablar() dice 'miau', perro.hablar() dice 'guau'. El codigo que llama a hablar() no necesita saber que animal es. Facilita extender sin tocar lo existente.",
+      "difficulty": 1,
+      "id": 169
+    },
+    {
+      "cat": "programming",
+      "title": "Que es la herencia",
+      "body": "HERENCIA: una clase hija reutiliza y amplia el comportamiento de una padre. class Perro(Animal) hereda comer() y anade ladrar(). Reduce duplicado, pero usala con moderacion: mucha jerarquia complica el codigo.",
+      "difficulty": 1,
+      "id": 170
+    },
+    {
+      "cat": "programming",
+      "title": "Que es la recursion",
+      "body": "RECURSION: una funcion se llama a si misma para resolver un problema dividiendolo. Para el factorial: factorial(n) = n * factorial(n-1). Necesita un caso base que detenga las llamadas o se desborda la pila.",
+      "difficulty": 1,
+      "id": 171
+    },
+    {
+      "cat": "programming",
+      "title": "Que es Big O notation",
+      "body": "BIG O mide como crece el tiempo de un algoritmo al crecer los datos. O(1) constante, O(n) lineal, O(n^2) cuadratico. Optimizar es pasar de O(n^2) a O(n) u O(log n). Es el lenguaje de la eficiencia.",
+      "difficulty": 1,
+      "id": 172
+    },
+    {
+      "cat": "programming",
+      "title": "Que es un hash map / diccionario",
+      "body": "Un HASH MAP (diccionario en Python, objeto en JS) guarda pares clave-valor y los busca en O(1), casi instantaneo, usando el hash de la clave. Ideal para buscar por id o nombre sin recorrer toda la lista.",
+      "difficulty": 1,
+      "id": 173
+    },
+    {
+      "cat": "programming",
+      "title": "Stack vs queue",
+      "body": "Pila (STACK): ultimo en entrar, primero en salir (LIFO). Cola (QUEUE): primero en entrar, primero en salir (FIFO). El stack sirve para deshacer acciones; la cola para tareas en orden de llegada.",
+      "difficulty": 1,
+      "id": 174
+    },
+    {
+      "cat": "programming",
+      "title": "Que es refactorizar",
+      "body": "REFACTORIZAR es mejorar el codigo SIN cambiar su comportamiento externo: renombrar variables, partir funciones largas, quitar duplicados. Se hace con tests que confirmen que no se rompe nada. Misma funcion, codigo mas limpio.",
+      "difficulty": 1,
+      "id": 175
+    },
+    {
+      "cat": "programming",
+      "title": "Que es DRY",
+      "body": "DRY (Don't Repeat Yourself, no te repitas): si repites la misma logica en varios sitios, extrala a una funcion o constante. Asi arreglas un fallo una sola vez. Principio clave del codigo limpio.",
+      "difficulty": 1,
+      "id": 176
+    },
+    {
+      "cat": "programming",
+      "title": "Que es una variable de entorno",
+      "body": "Una VARIABLE DE ENTORNO es un valor que guarda el SO y tu app lo lee en ejecucion. Clave para guardar SECRETOS (tokens, claves API) fuera del codigo. En bash: export MI_VAR=valor; en Python: os.environ.get('MI_VAR').",
+      "difficulty": 1,
+      "id": 177
+    },
+    {
+      "cat": "programming",
+      "title": "Que es el garbage collector",
+      "body": "El GARBAGE COLLECTOR libera automaticamente la memoria de objetos que ya no se usan. Lenguajes como Python, Java y Go lo tienen. En C/C++ la gestionas a mano (malloc/free), con mas riesgo de fugas.",
+      "difficulty": 1,
+      "id": 178
+    },
+    {
+      "cat": "programming",
+      "title": "Que es un deadlock",
+      "body": "Un DEADLOCK es cuando dos procesos se bloquean esperando cada uno lo que el otro tiene: A tiene el recurso 1 y espera el 2, B tiene el 2 y espera el 1. Se evita con un orden global de bloqueo y timeouts.",
+      "difficulty": 2,
+      "id": 179
+    },
+    {
+      "cat": "concurrency",
+      "title": "Corrutina vs hilo",
+      "body": "Un HILO (thread) es una tarea paralela gestionada por el SO, pesada. Una CORRUTINA (async/await) es cooperativa: cedes el control mientras esperas I/O, mucho mas ligera. Para operaciones de red, las corrutinas escalan mejor.",
+      "difficulty": 2,
+      "id": 180
+    },
+    {
+      "cat": "concurrency",
+      "title": "Que es un race condition",
+      "body": "RACE CONDITION: dos hilos acceden a la MISMA variable a la vez y el resultado depende del orden en que caen. Un contador queda en 3 en vez de 4. Se evita con locks u operaciones atomicas en la zona critica.",
+      "difficulty": 2,
+      "id": 181
+    },
+    {
+      "cat": "programming",
+      "title": "Complejidad de espacio",
+      "body": "La COMPLEJIDAD DE ESPACIO mide cuanta memoria usa un algoritmo al crecer los datos. Ordenar en sitio usa poca; crear una copia duplica. A veces ganas tiempo gastando memoria y al reves (trade-off).",
+      "difficulty": 2,
+      "id": 182
+    },
+    {
+      "cat": "redes",
+      "title": "Que es una IP",
+      "body": "Una IP (Internet Protocol) identifica un equipo o red en internet. IPv4: 192.168.1.1; IPv6: 2001:db8::1 (muchas mas direcciones). Es el 'numero de casa' de cada dispositivo conectado.",
+      "difficulty": 1,
+      "id": 183
+    },
+    {
+      "cat": "redes",
+      "title": "Que es el DNS",
+      "body": "DNS (Domain Name System) traduce nombres (github.com) a IPs (140.82.x.x). Es la 'agenda' de internet: buscas un nombre y te devuelve la IP para conectar. Sin DNS memorizarias numeros.",
+      "difficulty": 1,
+      "id": 184
+    },
+    {
+      "cat": "redes",
+      "title": "Que es HTTP",
+      "body": "HTTP (HyperText Transfer Protocol) es el protocolo con el que tu navegador pide paginas al servidor. GET para leer, POST para enviar. El servidor responde con codigos: 200 OK, 404 no encontrado, 500 error interno.",
+      "difficulty": 1,
+      "id": 185
+    },
+    {
+      "cat": "redes",
+      "title": "Que es un puerto",
+      "body": "Un PUERTO es una puerta numerada por la que entra la comunicacion a un servidor. El 80 es HTTP, 443 HTTPS, 22 SSH, 3306 MySQL. Direccion IP + puerto: 192.168.1.10:8080. Un servidor atiende muchos servicios a la vez.",
+      "difficulty": 1,
+      "id": 186
+    },
+    {
+      "cat": "redes",
+      "title": "Que es un router",
+      "body": "El ROUTER conecta redes distintas y decide por donde enviar cada paquete. En casa une tu red interna con internet. Usa una tabla de rutas para saber a que red va cada direccion.",
+      "difficulty": 1,
+      "id": 187
+    },
+    {
+      "cat": "redes",
+      "title": "Switch vs hub",
+      "body": "Un HUB repite todo a todos los dispositivos (caos). Un SWITCH es inteligente: aprende que equipo esta en cada puerto y solo envia al destinatario correcto. El switch es el estandar moderno.",
+      "difficulty": 1,
+      "id": 188
+    },
+    {
+      "cat": "redes",
+      "title": "Que es la latencia",
+      "body": "La LATENCIA es el tiempo que tarda un dato en viajar de A a B (ms). Importa en juegos y videollamadas: es tu ping. Se mide con ping. Es distinta del ancho de banda (cuanto dato por segundo, no cuanto tarda).",
+      "difficulty": 1,
+      "id": 189
+    },
+    {
+      "cat": "redes",
+      "title": "Ancho de banda vs latencia",
+      "body": "ANCHO DE BANDA es cuanto dato puedes mover por segundo (Mbps). LATENCIA es cuanto tarda en llegar cada dato (ms). Una fibra ancha puede tardar en llegar; una conexion rapida puede ser estrecha.",
+      "difficulty": 1,
+      "id": 190
+    },
+    {
+      "cat": "redes",
+      "title": "Que es un proxy",
+      "body": "Un PROXY es un intermediario entre tu y el destino: recibe tu peticion y la reenvia, ocultando tu IP o cacheando respuestas. El reverso (reverse proxy) va DELANTE de un servidor para repartir carga y proteger. Nginx hace de reverse proxy.",
+      "difficulty": 1,
+      "id": 191
+    },
+    {
+      "cat": "redes",
+      "title": "Que es un firewall",
+      "body": "Un FIREWALL filtra el trafico que entra y sale de una red, dejando pasar solo lo autorizado. Bloquea puertos o IPs segun reglas. Es la barrera de seguridad entre tu red e internet (software o hardware).",
+      "difficulty": 1,
+      "id": 192
+    },
+    {
+      "cat": "redes",
+      "title": "Que es un CDN",
+      "body": "Un CDN (Content Delivery Network) replica tu contenido en servidores de todo el mundo. Cada visita baja del mas cercano en vez del original, acelerando y aligerando tu servidor. Cloudflare y Fastly son CDNs.",
+      "difficulty": 1,
+      "id": 193
+    },
+    {
+      "cat": "redes",
+      "title": "TCP vs UDP",
+      "body": "TCP (Transmission Control Protocol) es fiable y ordenado: verifica que todo llegue y en orden (web, correo). UDP (User Datagram Protocol) es rapido y sin verificacion: manda y ya (video en vivo, juegos). Fiable vs veloz.",
+      "difficulty": 1,
+      "id": 194
+    },
+    {
+      "cat": "redes",
+      "title": "Que es un puerto abierto",
+      "body": "Un PUERTO ABIERTO es un puerto que acepta conexiones desde fuera. Es funcional pero tambien una via de entrada. Reducir los puertos abiertos (solo los necesarios) reduce tu superficie de ataque. Se mira con nmap.",
+      "difficulty": 1,
+      "id": 195
+    },
+    {
+      "cat": "redes",
+      "title": "Que es localhost",
+      "body": "127.0.0.1 o localhost es tu propia maquina. Cuando te conectas a el, el trafico no sale de tu equipo. Sirve para probar servidores locales sin exponerlos. En IPv6 equivale a ::1.",
+      "difficulty": 1,
+      "id": 196
+    },
+    {
+      "cat": "cloud",
+      "title": "Que es el edge computing",
+      "body": "EDGE COMPUTING procesa datos cerca de donde se generan (el 'borde', el dispositivo) en vez de un datacenter lejano. Reduce latencia y trafico: util en IoT, coches, camaras. La nube central sigue para analisis pesados.",
+      "difficulty": 2,
+      "id": 197
+    },
+    {
+      "cat": "seguridad",
+      "title": "Que es el cifrado simetrico",
+      "body": "CIFRADO SIMETRICO usa la MISMA clave para cifrar y descifrar (AES). Es rapido pero debes compartir la clave con el otro de forma segura. Como un candado con una sola llave que ambas partes tienen.",
+      "difficulty": 1,
+      "id": 198
+    },
+    {
+      "cat": "seguridad",
+      "title": "Que es el cifrado asimetrico",
+      "body": "CIFRADO ASIMETRICO usa un par: clave PUBLICA para cifrar y PRIVADA para descifrar (RSA). Puedes dar la publica a todos; solo tu descifras. Es mas lento pero resuelve compartir claves. Base de SSH y certificados.",
+      "difficulty": 1,
+      "id": 199
+    },
+    {
+      "cat": "seguridad",
+      "title": "Clave publica vs privada",
+      "body": "Es un par de claves matematicamente ligadas. La PUBLICA la das a cualquiera, la PRIVADA nunca sale de tu equipo. Lo firmado con la privada se verifica con la publica. Asi demuestras identidad sin compartir secretos.",
+      "difficulty": 1,
+      "id": 200
+    },
+    {
+      "cat": "seguridad",
+      "title": "Autenticacion vs autorizacion",
+      "body": "AUTENTICACION verifica QUIEN eres (usuario+contrasena, 2FA). AUTORIZACION verifica QUE PUEDES HACER (rol admin, permisos). Primero te identificas, luego se mira si tienes permiso. Son pasos distintos.",
+      "difficulty": 1,
+      "id": 201
+    },
+    {
+      "cat": "seguridad",
+      "title": "Que es el phishing",
+      "body": "PHISHING es un engano para que entregues datos o cliques enlaces falsos: correos que imitan a tu banco pidiendo credenciales. Defensa: no cliques enlaces sospechosos, verifica la URL y desconfia de la urgencia.",
+      "difficulty": 1,
+      "id": 202
+    },
+    {
+      "cat": "seguridad",
+      "title": "Que es el 2FA",
+      "body": "2FA (Two-Factor Authentication, autenticacion en dos pasos) pide DOS pruebas: tu contrasena y algo mas (codigo de app, SMS, huella). Aunque roben tu contrasena, sin el segundo factor no entran. Activalo siempre.",
+      "difficulty": 1,
+      "id": 203
+    },
+    {
+      "cat": "seguridad",
+      "title": "Que es un ataque DDoS",
+      "body": "DDoS (Distributed Denial of Service) inunda un servidor con muchisimo trafico de muchas maquinas hasta que colapsa y no atiende a usuarios legitimos. Como bloquear la puerta de una tienda llenandola de gente. Se mitiga con CDN y filtrado.",
+      "difficulty": 1,
+      "id": 204
+    },
+    {
+      "cat": "seguridad",
+      "title": "Que es una SQL injection",
+      "body": "SQL INJECTION: el atacante mete codigo SQL en un campo (un formulario) para manipular tu BD y robar o borrar datos. Se evita usando parametros preparados en vez de concatenar strings en las queries.",
+      "difficulty": 2,
+      "id": 205
+    },
+    {
+      "cat": "seguridad",
+      "title": "Que es un ataque XSS",
+      "body": "XSS (Cross-Site Scripting) inyecta scripts maliciosos que se ejecutan en el navegador de otras victimas al ver tu pagina. Permite robar sesiones. Se previene escapando la salida y validando la entrada.",
+      "difficulty": 2,
+      "id": 206
+    },
+    {
+      "cat": "seguridad",
+      "title": "Que es el hashing",
+      "body": "HASHING convierte un texto en una huella fija e irreversible (SHA-256). Por eso las contrasenas se guardan HASHEADAS, no en claro. Al validar comparas hashes. Anade 'salt' para evitar tablas de busqueda.",
+      "difficulty": 1,
+      "id": 207
+    },
+    {
+      "cat": "seguridad",
+      "title": "Que es un token",
+      "body": "Un TOKEN es una credencial temporal que prueba que has iniciado sesion. En vez de mandar la contrasena a cada peticion, mandas el token (JWT). Expira y puede invalidarse en el servidor: tipo una pulsera en una entrada.",
+      "difficulty": 1,
+      "id": 208
+    },
+    {
+      "cat": "seguridad",
+      "title": "Que es CORS",
+      "body": "CORS (Cross-Origin Resource Sharing) controla si un script de otro dominio puede llamar a tu API. El navegador bloquea por defecto las peticiones entre dominios distintos; el servidor permite las que quiera. Problema tipico en frontend+backend separados.",
+      "difficulty": 2,
+      "id": 209
+    },
+    {
+      "cat": "seguridad",
+      "title": "Principio de menor privilegio",
+      "body": "MENOR PRIVILEGIO: cada usuario o proceso tiene SOLO los permisos minimos para su tarea, ni uno mas. Un usuario normal no es admin. Si algo se compromete, el dano es limitado. Regla de oro en seguridad y roles de BD.",
+      "difficulty": 1,
+      "id": 210
+    },
+    {
+      "cat": "docker",
+      "title": "Que es un contenedor",
+      "body": "Un CONTENEDOR empaqueta tu app con todas sus dependencias para que corra igual en cualquier sitio. Comparte el sistema del anfitrion, asi es mas ligero que una VM. Docker es la herramienta de contenedores mas popular.",
+      "difficulty": 1,
+      "id": 211
+    },
+    {
+      "cat": "docker",
+      "title": "Imagen vs contenedor",
+      "body": "Una IMAGEN es la plantilla estatica (el Dockerfile compilado). Un CONTENEDOR es una instancia EN EJECUCION de esa imagen. Como una clase (imagen) y sus objetos (contenedores). docker build crea imagenes, docker run las lanza.",
+      "difficulty": 1,
+      "id": 212
+    },
+    {
+      "cat": "docker",
+      "title": "Que es un Dockerfile",
+      "body": "Un DOCKERFILE es un archivo de instrucciones que define como se construye tu imagen: base, que copiar, que instalar, que ejecutar. FROM, RUN, COPY, CMD. Automatiza el empaquetado de la app.",
+      "difficulty": 1,
+      "id": 213
+    },
+    {
+      "cat": "docker",
+      "title": "Que es un volumen en Docker",
+      "body": "Un VOLUMEN es almacenamiento persistente que sobrevive a los contenedores. Sin el, al borrar el contenedor se pierden los datos. Montas carpetas del host para bases de datos y archivos que no deben perderse.",
+      "difficulty": 1,
+      "id": 214
+    },
+    {
+      "cat": "docker",
+      "title": "Que es docker-compose",
+      "body": "docker-compose define y lanza VARIOS contenedores a la vez con un solo archivo (compose.yml): tu app, su BD, su cache. Con 'docker compose up' levantas todo el stack y quedan en red entre ellos.",
+      "difficulty": 1,
+      "id": 215
+    },
+    {
+      "cat": "kubernetes",
+      "title": "Que es Kubernetes",
+      "body": "KUBERNETES (k8s) orquesta muchos contenedores: los despliega, escala, reinicia si mueren y reparte el trafico. Es el gestor para apps grandes en produccion. Docker crea contenedores; k8s los dirige a escala.",
+      "difficulty": 2,
+      "id": 216
+    },
+    {
+      "cat": "devops",
+      "title": "Que es un pipeline",
+      "body": "Un PIPELINE es una secuencia de pasos automaticos que lleva tu codigo a produccion: compilar, testear, empaquetar, desplegar. En GitHub Actions, GitLab CI o Jenkins defines los pasos que se ejecutan solos.",
+      "difficulty": 1,
+      "id": 217
+    },
+    {
+      "cat": "devops",
+      "title": "Que es un artefacto",
+      "body": "Un ARTEFACTO es el producto de tu build: un ejecutable, un .jar, una imagen Docker, un .zip. El pipeline lo genera y lo publica para desplegarlo. Es lo que queda listo para ir a produccion.",
+      "difficulty": 1,
+      "id": 218
+    },
+    {
+      "cat": "devops",
+      "title": "Que es el monitoring",
+      "body": "MONITORING vigila la salud de tu sistema: metricas de CPU, memoria, errores, latencia, y te alerta si algo se rompe. Prometheus recoge metricas, Grafana las muestra, alertas avisan. Si no lo mides, no sabes si falla.",
+      "difficulty": 1,
+      "id": 219
+    },
+    {
+      "cat": "devops",
+      "title": "Que es un log",
+      "body": "Un LOG es el registro de eventos de tu app: peticiones, errores, avisos. Sirve para depurar lo que paso. Niveles y contexto bien puestos son fundamentales en produccion. Herramientas como ELK los centralizan.",
+      "difficulty": 1,
+      "id": 220
+    },
+    {
+      "cat": "devops",
+      "title": "Que es un rollback",
+      "body": "ROLLBACK es volver a la version anterior de tu app si la nueva da problemas. Por eso se despliega de forma reversible (imagenes etiquetadas, versiones). Mejor volver a la buena que arreglar en caliente.",
+      "difficulty": 2,
+      "id": 221
+    },
+    {
+      "cat": "devops",
+      "title": "Que es blue-green deployment",
+      "body": "BLUE-GREEN: dos entornos identicos (azul y verde). Despliegas en el que no sirve trafico, pruebas y cambias el trafico de golpe. Si falla, vuelves al anterior al instante. Downtime casi nulo.",
+      "difficulty": 2,
+      "id": 222
+    },
+    {
+      "cat": "devops",
+      "title": "Que es canary deployment",
+      "body": "CANARY: lanzas la version nueva primero a un PEQUENO porcentaje de usuarios (5%). Si va bien, subes el porcentaje hasta el 100%. Si falla, solo afecta a pocos y reviertes. Riesgo progresivo.",
+      "difficulty": 2,
+      "id": 223
+    },
+    {
+      "cat": "devops",
+      "title": "Que es un rate limit",
+      "body": "RATE LIMITING limita cuantas peticiones puede hacer un cliente (p. ej. 100 por minuto). Evita abusos y protege tus recursos. Responde con el codigo 429 Too Many Requests al superarlo. Comun en APIs publicas.",
+      "difficulty": 1,
+      "id": 224
+    },
+    {
+      "cat": "databases",
+      "title": "Que es SQL",
+      "body": "SQL (Structured Query Language) es el lenguaje para consultar bases de datos relacionales. SELECT para leer, INSERT para anadir, UPDATE para modificar, DELETE para borrar. Es el estandar de datos tabulares.",
+      "difficulty": 1,
+      "id": 225
+    },
+    {
+      "cat": "databases",
+      "title": "Que es una clave primaria",
+      "body": "En una BD relacional, la CLAVE PRIMARIA (id) identifica cada fila de forma UNICA. Las tablas guardan datos del mismo tipo (usuarios) y se relacionan con claves sin repetir informacion.",
+      "difficulty": 1,
+      "id": 226
+    },
+    {
+      "cat": "databases",
+      "title": "Que es una clave foranea",
+      "body": "Una CLAVE FORANEA relaciona una tabla con otra guardando el id referenciado. La tabla pedidos tiene id_usuario que apunta a usuarios. Permite JOINs y mantiene la integridad de los datos.",
+      "difficulty": 1,
+      "id": 227
+    },
+    {
+      "cat": "databases",
+      "title": "Que es un JOIN",
+      "body": "El JOIN une filas de dos o mas tablas segun una relacion. INNER JOIN devuelve solo lo que coincide en ambas; LEFT JOIN todo lo de la izquierda aunque no tenga pareja. Es como juntar datos relacionados.",
+      "difficulty": 1,
+      "id": 228
+    },
+    {
+      "cat": "databases",
+      "title": "Que es un indice",
+      "body": "Un INDICE en una BD funciona como el indice de un libro: acelera las busquedas por esa columna a costa de espacio y de escrituras mas lentas. Creas indices en columnas que buscas mucho. Sin ellos, las consultas grandes van lentas.",
+      "difficulty": 1,
+      "id": 229
+    },
+    {
+      "cat": "databases",
+      "title": "SQL vs NoSQL",
+      "body": "SQL (relacional) usa tablas con esquema fijo y consultas potentes (users, pedidos). NoSQL (MongoDB, Redis) guarda documentos o claves sin esquema rigido, ideal para datos flexibles o gran escala. Eliges segun tu modelo de datos.",
+      "difficulty": 1,
+      "id": 230
+    },
+    {
+      "cat": "databases",
+      "title": "Que son las transacciones",
+      "body": "Una TRANSACCION agrupa varias operaciones para que se apliquen todas o ninguna (ACID). Si una falla, se deshacen las anteriores (rollback). Imprescindible para dinero y datos sensibles: evita estados a medias.",
+      "difficulty": 1,
+      "id": 231
+    },
+    {
+      "cat": "databases",
+      "title": "Que es ACID",
+      "body": "ACID son las garantias de una transaccion fiable: Atomicidad (todo o nada), Consistencia (no deja datos rotos), Aislamiento (las transacciones no se pisan), Durabilidad (los datos persisten). Las relacionales lo cumplen.",
+      "difficulty": 2,
+      "id": 232
+    },
+    {
+      "cat": "databases",
+      "title": "Que es un ORM",
+      "body": "ORM (Object-Relational Mapping) convierte tus tablas en objetos/clases de tu lenguaje. En vez de SQL, haces user = User.query.get(1). Facilita el trabajo pero puede ocultar consultas ineficientes.",
+      "difficulty": 1,
+      "id": 233
+    },
+    {
+      "cat": "databases",
+      "title": "Que es una migracion de BD",
+      "body": "Una MIGRACION es un cambio versionado al esquema: anadir columna, crear tabla. Se aplica en orden y puede revertirse. Herramientas como Alembic o Django migrations llevan la cuenta de que se ha aplicado.",
+      "difficulty": 1,
+      "id": 234
+    },
+    {
+      "cat": "databases",
+      "title": "Que es una BD en memoria",
+      "body": "Una BD EN MEMORIA guarda datos en RAM (Redis, Memcached), mucho mas rapida que en disco. Se usa como cache o para sesiones. Contrapartida: se pierde al apagar el proceso salvo que persistas.",
+      "difficulty": 1,
+      "id": 235
+    },
+    {
+      "cat": "databases",
+      "title": "Que es la normalizacion",
+      "body": "NORMALIZAR una BD es organizar tablas para evitar datos repetidos y dependencias raras. Separas conceptos en tablas y usas claves. Un diseno normalizado es mas limpio; desnormalizar a proposito puede acelerar lecturas.",
+      "difficulty": 2,
+      "id": 236
+    },
+    {
+      "cat": "databases",
+      "title": "Que es sharding",
+      "body": "SHARDING divide una BD enorme en partes (shards) repartidas en varios servidores, cada una con un rango de datos. Escala horizontalmente cuando una sola maquina no basta. Anade complejidad: enrutar y consultar entre shards.",
+      "difficulty": 2,
+      "id": 237
+    },
+    {
+      "cat": "cloud",
+      "title": "Que es serverless",
+      "body": "SERVERLESS significa que no gestionas servidores: subes tu funcion y el proveedor la ejecuta bajo demanda y cobra por uso (AWS Lambda, Cloud Functions). Escala sola y sin infra a tu cargo. Ojo: latencia en frio.",
+      "difficulty": 2,
+      "id": 238
+    },
+    {
+      "cat": "cloud",
+      "title": "Que es un bucket",
+      "body": "Un BUCKET es un contenedor de archivos en la nube (S3, Cloud Storage). Guarda objetos accesibles por HTTP de forma masiva y duradera. Requiere permisos: por defecto es privado hasta que lo haces publico.",
+      "difficulty": 1,
+      "id": 239
+    },
+    {
+      "cat": "cloud",
+      "title": "Que es el object storage",
+      "body": "OBJECT STORAGE guarda archivos con metadatos y una clave unica, sin estructura de carpetas jerarquica. Ideal para imagenes, backups y archivos grandes. S3 en AWS, Blob en Azure. Distinto de un disco tradicional.",
+      "difficulty": 1,
+      "id": 240
+    },
+    {
+      "cat": "cloud",
+      "title": "Escalabilidad horizontal vs vertical",
+      "body": "VERTICAL: das MAS recursos a una misma maquina (RAM/CPU). HORIZONTAL: anades MAS maquinas y repartes la carga. Lo horizontal aguanta casi ilimitado pero tu app debe soportar varios nodos.",
+      "difficulty": 1,
+      "id": 241
+    },
+    {
+      "cat": "cloud",
+      "title": "Que es un SLA",
+      "body": "SLA (Service Level Agreement) es el contrato de disponibilidad que un proveedor promete: p. ej. 99.99% al mes. Si lo incumple, compensa o descuenta. Un 99.99% puede ser varias horas de caida al ano.",
+      "difficulty": 1,
+      "id": 242
+    },
+    {
+      "cat": "cloud",
+      "title": "Que es el pay-as-you-go",
+      "body": "PAY-AS-YOU-GO (pago por uso) es el modelo de la nube: pagas por lo que consumes (horas de CPU, GB de disco), no por adelantado. Escalas y solo pagas lo usado. Ventaja frente a comprar hardware fijo.",
+      "difficulty": 1,
+      "id": 243
+    },
+    {
+      "cat": "cloud",
+      "title": "Que es multi-cloud",
+      "body": "MULTI-CLOUD usa varios proveedores a la vez (AWS, GCP, Azure). Evitas depender de uno (vendor lock-in) y eliges lo mejor de cada uno, pero anade complejidad de gestion. Diversificar riesgo.",
+      "difficulty": 1,
+      "id": 244
+    },
+    {
+      "cat": "ai",
+      "title": "Que es el machine learning",
+      "body": "MACHINE LEARNING (aprendizaje automatico): en vez de programar reglas, entrenas un modelo con datos hasta que aprende el patron solo. Se le dan ejemplos (emails normales y spam) y aprende a clasificar. Base de la IA moderna.",
+      "difficulty": 1,
+      "id": 245
+    },
+    {
+      "cat": "ai",
+      "title": "Que es un modelo",
+      "body": "En IA, un MODELO es una red matematica entrenada con datos para hacer una tarea: predecir, clasificar, generar. Es la 'regla' aprendida. Se entrena una vez y se usa luego para hacer predicciones nuevas.",
+      "difficulty": 1,
+      "id": 246
+    },
+    {
+      "cat": "ai",
+      "title": "Que es entrenar un modelo",
+      "body": "ENTRENAR es ajustar los parametros del modelo con datos para que sus respuestas se acerquen a lo esperado. Repites miles de veces midiendo el error y corrigiendo. Resultado: un modelo que ya 'sabe' la tarea.",
+      "difficulty": 1,
+      "id": 247
+    },
+    {
+      "cat": "ai",
+      "title": "Que es un prompt",
+      "body": "Un PROMPT es la instruccion que le das a un LLM. Uno bueno es claro, con contexto y formato esperado: 'Resume en 3 puntos'. El arte de afinar prompts se llama prompt engineering y cambia mucho el resultado.",
+      "difficulty": 1,
+      "id": 248
+    },
+    {
+      "cat": "ai",
+      "title": "Que es la alucinacion",
+      "body": "ALUCINACION: cuando una IA inventa datos que parecen ciertos pero son falsos (hechos, URLs, citas). Los LLM predicen texto plausible, no certifican hechos. Verifica siempre la informacion importante que te den.",
+      "difficulty": 1,
+      "id": 249
+    },
+    {
+      "cat": "ai",
+      "title": "Que es la temperatura",
+      "body": "La TEMPERATURA controla la creatividad de un LLM. Baja (0-0.2) = respuestas deterministas y formales, ideal para codigo o datos. Alta (0.8-1) = mas variacion y creatividad, util para ideas o textos. Ajustala segun el caso.",
+      "difficulty": 2,
+      "id": 250
+    },
+    {
+      "cat": "ai",
+      "title": "Que es un embedding",
+      "body": "Un EMBEDDING convierte texto en un vector de numeros que mide lo parecido a otro texto. Permite buscar por significado ('algo sobre perros') en vez de palabras exactas. Base de chatbots con documentos.",
+      "difficulty": 2,
+      "id": 251
+    },
+    {
+      "cat": "ai",
+      "title": "Que es RAG",
+      "body": "RAG (Retrieval-Augmented Generation) conecta un LLM a TUS documentos para responder con tus datos reales, no solo su conocimiento general. Primero busca fragmentos relevantes y luego genera con esa base. Reduce alucinaciones.",
+      "difficulty": 2,
+      "id": 252
+    },
+    {
+      "cat": "git",
+      "title": "Que es un branch",
+      "body": "Un BRANCH (rama) es una linea de trabajo independiente de la principal. Creas una para una feature y no molestas a main. Al terminar la integras (merge). Rama main = produccion, ramas feature = cambios.",
+      "difficulty": 1,
+      "id": 253
+    },
+    {
+      "cat": "git",
+      "title": "Que es un commit",
+      "body": "Un COMMIT es una foto del estado de tu codigo en un instante, con un mensaje que lo explica. Cada commit es un punto de la historia al que puedes volver. Commitea cambios pequenos y con mensajes claros.",
+      "difficulty": 1,
+      "id": 254
+    },
+    {
+      "cat": "git",
+      "title": "Que es un merge",
+      "body": "MERGE une una rama con otra integrando sus cambios. git merge feature en main trae los cambios de feature a main. Si dos tocan la misma parte puede haber un CONFLICTO que resuelves a mano. Rebase es la alternativa.",
+      "difficulty": 1,
+      "id": 255
+    },
+    {
+      "cat": "git",
+      "title": "Que es un pull request",
+      "body": "PULL REQUEST (PR) es una peticion para integrar tu rama en otra, normalmente con revision. Es el espacio donde otros comentan, aprueban y piden cambios antes del merge. Estandar de colaboracion en GitHub/GitLab.",
+      "difficulty": 1,
+      "id": 256
+    },
+    {
+      "cat": "git",
+      "title": "Que es un stash",
+      "body": "git stash guarda tus cambios sin commitear y deja el area limpia. Util cuando tienes trabajo a medias y necesitas cambiar de rama. git stash pop los devuelve. No se pierden mientras esten stasheados.",
+      "difficulty": 1,
+      "id": 257
+    },
+    {
+      "cat": "git",
+      "title": "Que es rebase",
+      "body": "REBASE reescribe el historial reaplicando tus commits sobre la punta de otra rama, dando una historia lineal limpia. A diferencia del merge, no crea commit de union. Cuidado: no rebasees ramas compartidas, reescribes historia.",
+      "difficulty": 2,
+      "id": 258
+    },
+    {
+      "cat": "git",
+      "title": "Que es el .gitignore",
+      "body": "El .gitignore lista archivos/carpetas que git NO debe versionar: .env con secretos, node_modules, build. Evita subir basura y secretos. Un repo limpio solo lleva fuente y configs no sensibles.",
+      "difficulty": 1,
+      "id": 259
+    },
+    {
+      "cat": "git",
+      "title": "Que es git blame",
+      "body": "git blame muestra quien cambio cada linea y cuando. Perfecto para saber a quien preguntar o que commit introdujo una linea sospechosa. Ayuda a encontrar el origen de errores.",
+      "difficulty": 1,
+      "id": 260
+    },
+    {
+      "cat": "testing",
+      "title": "Que es un test unitario",
+      "body": "Un TEST UNITARIO comprueba una pequena unidad de codigo (una funcion) aislada: ejecuta, compara el resultado esperado y, si no coincide, falla. Base de la piramide de tests y rapido de correr.",
+      "difficulty": 1,
+      "id": 261
+    },
+    {
+      "cat": "testing",
+      "title": "Que es TDD",
+      "body": "TDD (Test-Driven Development): primero escribes el test que falla, luego el codigo para que pase, luego refactorizas. Rojo, verde, refactor. Obliga a pensar que debe hacer la funcion antes. Codigo mas fiable.",
+      "difficulty": 1,
+      "id": 262
+    },
+    {
+      "cat": "testing",
+      "title": "Que es un mock",
+      "body": "Un MOCK simula una dependencia (BD, API externa) para que el test no dependa de ella. Devuelves resultados fijos y verificas que la llamaste bien. Aisla la logica y acelera los tests. Mockito, unittest.mock, Jest.",
+      "difficulty": 1,
+      "id": 263
+    },
+    {
+      "cat": "testing",
+      "title": "Que es un test de integracion",
+      "body": "Un TEST DE INTEGRACION comprueba que varias piezas funcionan JUNTAS: tu codigo con la BD real, tu API con su servicio. Complementa a los unitarios y detecta problemas en las conexiones entre partes.",
+      "difficulty": 1,
+      "id": 264
+    },
+    {
+      "cat": "testing",
+      "title": "Que es un test end-to-end",
+      "body": "Un TEST E2E simula al usuario completo: abre la app, navega, hace clic y verifica el resultado final. Prueba todo el sistema pero es lento y fragil. Cima de la piramide: pocos pero importantes.",
+      "difficulty": 1,
+      "id": 265
+    },
+    {
+      "cat": "testing",
+      "title": "Que es la cobertura",
+      "body": "COBERTURA mide el porcentaje de codigo que ejecutan los tests (lineas, ramas). Alta cobertura no importa si los tests no verifican nada real. Es una guia, no la meta: un test que no afirma nada no aporta.",
+      "difficulty": 2,
+      "id": 266
+    },
+    {
+      "cat": "hardware",
+      "title": "Que es la RAM",
+      "body": "RAM (Random Access Memory) es la memoria de trabajo rapida y volatil donde el sistema carga lo que usa ahora. Al apagar se vacia. Mas RAM = mas programas sin ir lento. El disco es la memoria permanente, mas lenta.",
+      "difficulty": 1,
+      "id": 267
+    },
+    {
+      "cat": "hardware",
+      "title": "SSD vs HDD",
+      "body": "SSD (Solid State Drive) usa memoria flash sin partes moviles: arranque y carga rapidisimos. HDD (disco duro) usa discos giratorios magneticos: mas barato por GB. Cambiar el sistema a SSD es la mejora mas notoria de velocidad.",
+      "difficulty": 1,
+      "id": 268
+    },
+    {
+      "cat": "hardware",
+      "title": "Que es la CPU",
+      "body": "CPU (Central Processing Unit) ejecuta las instrucciones de los programas: el 'cerebro'. Importan su velocidad (GHz) y sus nucleos (cores). La combinación con RAM define la fluidez del sistema.",
+      "difficulty": 1,
+      "id": 269
+    },
+    {
+      "cat": "hardware",
+      "title": "Que es un core",
+      "body": "Un CORE es una unidad de calculo de la CPU. Mas cores = mas tareas a la vez. El sistema explota maximo hilos si las apps lo permiten. Hoy 4-16 cores es lo comun en un PC.",
+      "difficulty": 1,
+      "id": 270
+    },
+    {
+      "cat": "hardware",
+      "title": "Que es la GPU",
+      "body": "GPU (Graphics Processing Unit) calcula de forma masiva en paralelo, pensada para graficos. Por eso tambien acelera el machine learning: muchos calculos simples a la vez. Nvidia/AMD/Intel la integran o dedicada.",
+      "difficulty": 1,
+      "id": 271
+    },
+    {
+      "cat": "hardware",
+      "title": "Que es el BIOS/UEFI",
+      "body": "BIOS/UEFI es el firmware que arranca el PC al encenderse: inicializa el hardware y carga el SO. El UEFI es el sucesor moderno, mas rapido y seguro. Entras a configurarlo con tecla F2/Supr al boot.",
+      "difficulty": 1,
+      "id": 272
+    },
+    {
+      "cat": "virtualizacion",
+      "title": "Que es un hypervisor",
+      "body": "Un HYPERVISOR es el software que crea y ejecuta maquinas virtuales repartiendo el hardware real. VirtualBox o VMWare = tipo 2 (sobre un SO). KVM o Hyper-V = tipo 1 (directo sobre hardware, mas eficiente).",
+      "difficulty": 1,
+      "id": 273
+    },
+    {
+      "cat": "virtualizacion",
+      "title": "Que es una ISO",
+      "body": "Una ISO es el archivo de imagen de un CD/DVD o de un sistema de instalacion. Se monta como si fuera un disco o se graba a USB con Rufus o balenaEtcher para instalarlo. No se descomprime: se monta.",
+      "difficulty": 1,
+      "id": 274
+    },
+    {
+      "cat": "iot",
+      "title": "Que es un microcontrolador",
+      "body": "Un MICROCONTROLADOR es un chip completo con CPU, memoria y entradas/salidas en un solo circuito (Arduino, ESP32). Coste bajo y consumo minimo, ideal para sensores y dispositivos. IoT = millones de estos conectados.",
+      "difficulty": 1,
+      "id": 275
+    },
+    {
+      "cat": "iot",
+      "title": "Que es MQTT",
+      "body": "MQTT (Message Queuing Telemetry Transport) es un protocolo ligero de mensajeria para IoT. Un broker reparte mensajes entre dispositivos por temas. Poco ancho de banda y funciona en redes lentas: ideal para sensores.",
+      "difficulty": 1,
+      "id": 276
+    },
+    {
+      "cat": "frontend",
+      "title": "Que es HTML",
+      "body": "HTML (HyperText Markup Language) define la ESTRUCTURA de una pagina: titulos, parrafos, imagenes, formularios. No es un lenguaje de programacion, es marcado. Etiquetas como <h1>, <p> y <img> le dicen al navegador que es cada cosa.",
+      "difficulty": 1,
+      "id": 277
+    },
+    {
+      "cat": "frontend",
+      "title": "Que es CSS",
+      "body": "CSS (Cascading Style Sheets) controla la APARIENCIA: colores, fuentes, espacio, layout. Separas la estructura (HTML) del estilo (CSS). Un cambio de estilo puede afectar a toda la web sin tocar el HTML.",
+      "difficulty": 1,
+      "id": 278
+    },
+    {
+      "cat": "frontend",
+      "title": "Que es JavaScript",
+      "body": "JAVASCRIPT (JS) hace la web INTERACTIVA: validar, animar, cargar datos sin recargar. Corre en el navegador del cliente y hoy tambien en el servidor con Node.js. Es el lenguaje de la web moderna.",
+      "difficulty": 1,
+      "id": 279
+    },
+    {
+      "cat": "backend",
+      "title": "Que es una API REST",
+      "body": "REST (Representational State Transfer) es un estilo de API que usa HTTP y sus verbos: GET (leer), POST (crear), PUT (actualizar), DELETE (borrar). Recursos en URLs (/users) y respuestas en JSON. Estandar de backend.",
+      "difficulty": 1,
+      "id": 280
+    },
+    {
+      "cat": "backend",
+      "title": "Que es JSON",
+      "body": "JSON (JavaScript Object Notation) es el formato para estructurar datos legibles (por ejemplo, un usuario con nombre y edad). Es el intercambio estandar entre APIs y apps. Ligero, anidado y soportado en todos los lenguajes.",
+      "difficulty": 1,
+      "id": 281
+    },
+    {
+      "cat": "backend",
+      "title": "Que es un endpoint",
+      "body": "Un ENDPOINT es una URL concreta de una API a la que llamar: GET /api/users o POST /api/login. Cada endpoint hace una accion. Es la 'puerta' de entrada a un servicio desde fuera.",
+      "difficulty": 1,
+      "id": 282
+    },
+    {
+      "cat": "backend",
+      "title": "Que es WebSocket",
+      "body": "WEBSOCKET mantiene un canal abierto y bidireccional entre cliente y servidor para empujar datos en tiempo real (chat, notificaciones, precios). HTTP va y viene por peticion; WebSocket queda conectado.",
+      "difficulty": 1,
+      "id": 283
+    },
+    {
+      "cat": "frontend",
+      "title": "Que es el DOM",
+      "body": "DOM (Document Object Model) es la representacion en memoria de tu pagina que JS puede manipular: cambiar elementos, clases, textos en vivo. Es la puerta por la que JavaScript toca y actualiza la pagina.",
+      "difficulty": 1,
+      "id": 284
+    },
+    {
+      "cat": "frontend",
+      "title": "Que es responsive",
+      "body": "RESPONSIVE: una web que se adapta y se ve bien en movil, tablet y escritorio segun el tamano de pantalla. Se logra con CSS flexible, media queries y frameworks como Bootstrap o Tailwind. Esencial hoy.",
+      "difficulty": 1,
+      "id": 285
+    },
+    {
+      "cat": "frontend",
+      "title": "Que es un framework de frontend",
+      "body": "Un FRAMEWORK DE FRONTEND (React, Vue, Svelte) organiza como construyes la interfaz: componentes, estado, renderizado. Facilita apps grandes y reactivas. Cada uno tiene su filosofia y curva de aprendizaje.",
+      "difficulty": 1,
+      "id": 286
+    },
+    {
+      "cat": "frontend",
+      "title": "Que es un componente",
+      "body": "Un COMPONENTE es una pieza reutilizable de la interfaz con su propio HTML, logica y estilo: un boton, una tarjeta. En React/Vue los combinas y cada uno gestiona su estado. Base del desarrollo moderno.",
+      "difficulty": 1,
+      "id": 287
+    },
+    {
+      "cat": "html_css",
+      "title": "Que es un framework CSS",
+      "body": "Un FRAMEWORK CSS (Bootstrap, Tailwind) da clases y componentes ya disenados para interfaces rapidas y consistentes. Bootstrap es predefinido; Tailwind son utilidades atomicas para componer tu. Ahorra mucho trabajo visual.",
+      "difficulty": 1,
+      "id": 288
+    },
+    {
+      "cat": "frontend",
+      "title": "Que es el lazy loading",
+      "body": "LAZY LOADING carga contenido solo cuando hace falta: imagenes al hacer scroll, modulos al usarlos. Reduce la carga inicial y acelera la primera vista. La pagina pesa menos al inicio.",
+      "difficulty": 1,
+      "id": 289
+    },
+    {
+      "cat": "redes",
+      "title": "HTTP/2 vs HTTP/1.1",
+      "body": "HTTP/2 multiplexa peticiones en una sola conexion y comprime cabeceras con HPACK: muchas peticiones se cargan en paralelo mas rapido. HTTP/1.1 abria una conexion por peticion (lento). Hoy casi todo sirve por HTTP/2 o HTTP/3.",
+      "difficulty": 2,
+      "id": 290
+    },
+    {
+      "cat": "redes",
+      "title": "IPv4 vs IPv6",
+      "body": "IPv4 usa 32 bits (4.294 millones de direcciones, ya escasas) y escribe 192.168.1.1. IPv6 usa 128 bits: direcciones casi infinitas tipo 2001:0db8::1. IPv6 ademas simplifica NAT y mejora la fragmentacion, pero requiere soporte de tu red y proveedor.",
+      "difficulty": 2,
+      "id": 291
+    },
+    {
+      "cat": "redes",
+      "title": "SSH vs Telnet",
+      "body": "Ambos acceden a un servidor por terminal, pero Telnet envia todo en claro (usuario y password viajan como texto plano, prohibido hoy) mientras SSH cifra la sesion completa. Usa siempre SSH (puerto 22); Telnet solo existe en redes internas de juguete.",
+      "difficulty": 1,
+      "id": 292
+    },
+    {
+      "cat": "redes",
+      "title": "FTP vs SFTP",
+      "body": "FTP transfiere archivos sin cifrar (credenciales visibles). SFTP corre sobre SSH y cifra todo, con los mismos comandos. Si tu hosting te da a elegir, escoge siempre SFTP (puerto 22) en vez de FTP (puerto 21).",
+      "difficulty": 1,
+      "id": 293
+    },
+    {
+      "cat": "redes",
+      "title": "WPA2 vs WPA3",
+      "body": "WPA2 cifra tu WiFi pero su handshake puede forzarse offline. WPA3 usa SAE (Dragonfly) que resiste esos ataques y cifra por usuario. En tu router, activa WPA3 o WPA2/WPA3 mixto, nunca WEP (roto).",
+      "difficulty": 2,
+      "id": 294
+    },
+    {
+      "cat": "redes",
+      "title": "HTTP vs WebSocket",
+      "body": "HTTP es peticion-respuesta: el servidor solo habla cuando el cliente le pide. WebSocket abre un canal bidireccional persistente para push en tiempo real (chats, trading, juegos). Para push constante, WebSocket; para lo demas, HTTP.",
+      "difficulty": 2,
+      "id": 295
+    },
+    {
+      "cat": "redes",
+      "title": "Que es TTL en DNS",
+      "body": "TTL (Time To Live) en DNS dice cuantos segundos una cache puede recordar un registro. TTL corto (30s) propaga cambios de IP rapido (ideal antes de migrar); TTL largo (24h) reduce consultas. Bajalo antes de un cambio para que nadie guarde la IP vieja.",
+      "difficulty": 1,
+      "id": 296
+    },
+    {
+      "cat": "redes",
+      "title": "CDN vs hosting comun",
+      "body": "Un hosting sirve tu web desde un solo servidor. Un CDN (Cloudflare, CloudFront) replica tu contenido en nodos por todo el mundo y sirve al usuario el mas cercano, reduciendo latencia y absorbiendo ataques. Usa CDN para estaticos e imagenes.",
+      "difficulty": 1,
+      "id": 297
+    },
+    {
+      "cat": "seguridad",
+      "title": "Contrasena fuerte vs passphrase",
+      "body": "Una passphrase (frase larga tipo 'cafe-luna-verde-planta') es mas facil de recordar y mas dura de romper que una 'K7$zQ!9' corta, porque prima la longitud sobre el ruido de caracteres. Usa un gestor y passphrases de 4+ palabras.",
+      "difficulty": 1,
+      "id": 298
+    },
+    {
+      "cat": "seguridad",
+      "title": "Hashing vs cifrado",
+      "body": "El hash es unidireccional (sha256, bcrypt): no se puede obtener el original, sirve para guardar contrasenas. El cifrado (AES) es bidireccional: con la clave recuperas el texto. Nunca 'cifres' contrasenas: hashealas con salt.",
+      "difficulty": 2,
+      "id": 299
+    },
+    {
+      "cat": "seguridad",
+      "title": "VPN personal vs corporativa",
+      "body": "Una VPN personal oculta tu IP al proveedor y cifra en redes publicas. Una VPN corporativa (normalmente con certificado y MFA) da acceso a la red interna de la empresa. No asumas que una VPN te vuelve anonimo: el destino te ve igual.",
+      "difficulty": 1,
+      "id": 300
+    },
+    {
+      "cat": "seguridad",
+      "title": "Password manager local vs en la nube",
+      "body": "Un gestor local (KeePass) guarda tu boveda en un archivo que tu controlas; uno en la nube (1Password, Bitwarden) se sincroniza entre dispositivos. La nube es mas comoda; cerciorate de que cifre con tu clave maestra que nadie mas conoce.",
+      "difficulty": 1,
+      "id": 301
+    },
+    {
+      "cat": "seguridad",
+      "title": "Que es la autenticacion en dos pasos (2FA/MFA)",
+      "body": "2FA pide algo que sabes (contrasena) MAS algo que tienes (app autenticadora, llave) o eres (huella). Aunque roben tu contrasena, sin el segundo factor no entran. Prefiere app autenticadora o llave fisica antes que SMS.",
+      "difficulty": 1,
+      "id": 302
+    },
+    {
+      "cat": "seguridad",
+      "title": "Cerrojo HTTPS: que significa de verdad",
+      "body": "El candado del navegador cifra el canal (SSL/TLS), no significa que el sitio sea legitimo. Un phishing tambien puede tener HTTPS. Verifica siempre el dominio y amigos del contenido antes de dar datos.",
+      "difficulty": 1,
+      "id": 303
+    },
+    {
+      "cat": "seguridad",
+      "title": "Principio de minimo privilegio",
+      "body": "Da a cada usuario o proceso solo los permisos imprescindibles para su tarea, nada mas. Asi, una cuenta comprometida o un fallo no escala a todo el sistema. Aplica a bases de datos, IAM en cloud y usuarios de tu maquina.",
+      "difficulty": 1,
+      "id": 304
+    },
+    {
+      "cat": "git",
+      "title": "Git merge vs rebase",
+      "body": "merge une ramas y conserva un commit de union (el historial muestra ramas). rebase reescribe tu rama 'encima' de la base y deja un historial lineal limpio. En el trabajo no rebeasee ramas compartidas; usa merge o rebase con --rebase en ramas locales.",
+      "difficulty": 2,
+      "id": 305
+    },
+    {
+      "cat": "git",
+      "title": "Git fetch vs pull",
+      "body": "fetch solo BAJA los cambios y mueve el puntero remoto, sin tocar tu trabajo. pull hace fetch + merge automatico en tu rama. Si dudas o quieres ver primero que llega, usa fetch y luego revisa con git log HEAD..origin/main.",
+      "difficulty": 1,
+      "id": 306
+    },
+    {
+      "cat": "git",
+      "title": "Git stash: guardar trabajo en pausa",
+      "body": "git stash guarda tus cambios sin commitear 'en un cajon' y deja la carpeta limpia para cambiar de rama. Vuelve con git stash pop. Ideal cuando te llaman a arreglar un bug urgentemente sin perder tu trabajo a medias.",
+      "difficulty": 1,
+      "id": 307
+    },
+    {
+      "cat": "git",
+      "title": "Que es un .gitignore",
+      "body": "El archivo .gitignore lista rutas/patrones que Git ignora: .env, node_modules/, *.log, caches. Asi no subes secretos ni binarios. Revisalo siempre antes del primer commit para no volcar claves o datos personales.",
+      "difficulty": 1,
+      "id": 308
+    },
+    {
+      "cat": "git",
+      "title": "Git reset vs revert",
+      "body": "reset mueve el historial ATRAS y puede BORRAR commits (peligroso si ya los compartiste). revert crea un commit nuevo que deshace el cambio, manteniendo el historial (seguro en ramas compartidas). Para deshacer algo ya subido, usa revert.",
+      "difficulty": 2,
+      "id": 309
+    },
+    {
+      "cat": "git",
+      "title": "git cherry-pick: tomar un commit suelto",
+      "body": "git cherry-pick <hash> aplica un commit concreto de otra rama a la tuya actual, sin fusionar toda la rama. Util para portar un fix puntual de hotfix a main mientras otras ramas avanzan.",
+      "difficulty": 2,
+      "id": 310
+    },
+    {
+      "cat": "git",
+      "title": "Convencion Conventional Commits",
+      "body": "Escribe mensajes tipo fix(cli): corrige error X o feat(auth): anade login OAuth. El prefijo (fix, feat, docs, breaking) permite generar changelogs y versiones automaticas, ademas de historial leible.",
+      "difficulty": 1,
+      "id": 311
+    },
+    {
+      "cat": "docker",
+      "title": "Docker COPY vs ADD",
+      "body": "Ambos copian archivos a la imagen. ADD ademas descomprime tar y acepta URLs, lo cual es magia implicita que sorprende. Prefiere siempre COPY (explicito y predecible); ADD es innecesario en la practica.",
+      "difficulty": 2,
+      "id": 312
+    },
+    {
+      "cat": "docker",
+      "title": "Docker CMD vs ENTRYPOINT",
+      "body": "CMD define el comando por defecto que se puede sustituir al correr (docker run <img> otro-comando). ENTRYPOINT fija el proceso principal que no se sustituye. Combinalos: ENTRYPOINT el binario, CMD sus argumentos por defecto.",
+      "difficulty": 2,
+      "id": 313
+    },
+    {
+      "cat": "docker",
+      "title": "Imagen alpine vs completa",
+      "body": "Una imagen Alpine pesa ~5-10 MB porque usa musl y sin extras; las completas traen shell y utilidades pesadas. Usa Alpine (o distroless) para reducir imagen y superficie de ataque, pero verifica compatibilidad nativa de tu binario.",
+      "difficulty": 2,
+      "id": 314
+    },
+    {
+      "cat": "docker",
+      "title": "Por que montar volumenes",
+      "body": "Los contenedores son efimeros: al borrarlo pierdes sus datos. Con -v o volumenes docker, montas una carpeta externa persistente para DB, logs o uploads. Separa siempre el estado de la imagen.",
+      "difficulty": 1,
+      "id": 315
+    },
+    {
+      "cat": "docker",
+      "title": "docker compose up vs run",
+      "body": "compose up crea/arranca los servicios definidos en el yml y los deja corriendo. compose run ejecuta un comando puntual en un contenedor nuevo (crea duplicados si no tienes cuidado con el nombre). Para arrancar todo, usa up -d.",
+      "difficulty": 1,
+      "id": 316
+    },
+    {
+      "cat": "databases",
+      "title": "Indice en una columna: cuando si y cuando no",
+      "body": "Un indice acelera los SELECT (WHERE por esa columna) pero hace cada INSERT/UDPATE mas lento y ocupa espacio, porque hay que mantenerlo. Indicea solo columnas consultadas a menudo y con alta discriminacion; no todo.",
+      "difficulty": 2,
+      "id": 317
+    },
+    {
+      "cat": "databases",
+      "title": "EXPLAIN: leer el plan de query",
+      "body": "En SQL (MySQL, Postgres) antepone EXPLAIN a tu query para ver como el motor la ejecuta: usa indice? hace full scan? Combina con ANALYZE para tiempos. Es la primera herramienta para optimizar consultas lentas.",
+      "difficulty": 2,
+      "id": 318
+    },
+    {
+      "cat": "databases",
+      "title": "Transaccion ACID en una linea",
+      "body": "Una transaccion agrupa operaciones que o se hacen todas o ninguna: si falla a mitad, se revierte. Es lo que evita que te quedes sin saldo o sin stock en un fallo. Usa BEGIN...COMMIT/ROLLBACK y aislamiento adecuado.",
+      "difficulty": 2,
+      "id": 319
+    },
+    {
+      "cat": "databases",
+      "title": "Normalizacion vs denormalizacion",
+      "body": "Normalizar divide datos en varias tablas para evitar duplicados/actualizaciones inconsistentes. Desnormalizar duplica datos a proposito para lecturas mas rapidas (tipico en analytics). Empieza normalizado y denormaliza solo lo que midas que va lento.",
+      "difficulty": 2,
+      "id": 320
+    },
+    {
+      "cat": "databases",
+      "title": "Backup de DB en tres copias",
+      "body": "Regla 3-2-1: al menos 3 copias del backup, en 2 medios distintos, 1 copia fuera de la maquina. Prueba RESTAURAR una vez al mes; un backup que no restauras es solo una plegaria. Automatiza y verifica.",
+      "difficulty": 1,
+      "id": 321
+    },
+    {
+      "cat": "linux",
+      "title": "grep -r vs ripgrep",
+      "body": "grep -r busca recursivo en archivos pero es lento en tree grandes. ripgrep (rg) es mucho mas rapido, respeta .gitignore por defecto y tiene mejores salidas. Instala ripgrep: tu busqueda en monorepos deja de ser un infierno.",
+      "difficulty": 1,
+      "id": 322
+    },
+    {
+      "cat": "linux",
+      "title": "hardlink vs symlink",
+      "body": "Un symlink (ln -s) es un acceso directo que puede apuntar a otro disco y romperse si el destino se mueve. Un hardlink es otra entrada al mismo inodo en el mismo filesystem. Para apuntar, usa symlinks. -s",
+      "difficulty": 2,
+      "id": 323
+    },
+    {
+      "cat": "linux",
+      "title": "find vs locate",
+      "body": "find recorre el arbol en vivo (exacto pero mas lento); locate usa una base de datos pre-construida (lineal pero rapida, puede estar desactualizada). Corre updatedb tras cambios si usas locate. Para busquedas puntuales y precisas, find.",
+      "difficulty": 1,
+      "id": 324
+    },
+    {
+      "cat": "linux",
+      "title": "Que es un proceso zombie",
+      "body": "Un proceso zombie es un hijo terminado del que el padre aun no ha recogido su estado de salida; aparece en top como 'Z' y ocupa poca RAM pero consume un PID. Si el padre muere, los adopta init. Suele ser sintoma de bug del padre.",
+      "difficulty": 2,
+      "id": 325
+    },
+    {
+      "cat": "linux",
+      "title": "kill vs kill -9",
+      "body": "kill envia SIGTERM: el proceso puede limpiar recursos y salir con orden. kill -9 envia SIGKILL: el kernel lo mata al instante sin guardar nada (puede corromper archivos/DB). Usa kill normal primero y solo -9 contra procesos congelados.",
+      "difficulty": 1,
+      "id": 326
+    },
+    {
+      "cat": "bash",
+      "title": "set -e y set -u en scripts",
+      "body": "set -e aborta el script si cualquier comando falla (evita ejecutar la mitad de un script roto). set -u falla si usas una variable sin definir (te atrapa typos). Empieza tus scripts con set -euo pipefail.",
+      "difficulty": 2,
+      "id": 327
+    },
+    {
+      "cat": "bash",
+      "title": "Comillas simples vs dobles",
+      "body": "En comillas dobles \\$\"var\" se expande (usa el valor). En simples 'var' todo es literal, sin expansion ni miedo a espacios. Para rutas con espacios o textos fijos, simples; para incrustar variables, dobles.",
+      "difficulty": 1,
+      "id": 328
+    },
+    {
+      "cat": "bash",
+      "title": "&& vs ;",
+      "body": "El ; ejecuta el segundo comando siempre, pase lo que pase con el primero. El && solo ejecuta el segundo si el primero acabo con exito. Para cadenas 'si esto funciona entonces esto', usa && y no ;.",
+      "difficulty": 1,
+      "id": 329
+    },
+    {
+      "cat": "bash",
+      "title": "Pipeline: que hace |",
+      "body": "El tubo | conecta la salida de un comando con la entrada de otro: ls | grep pdf. Cada proceso corre a la vez (buffering en directo), no espera al anterior. Es la base del filtrado en bash.",
+      "difficulty": 1,
+      "id": 330
+    },
+    {
+      "cat": "cloud",
+      "title": "EC2 vs Lambda vs Containers",
+      "body": "EC2 te da maquinas que tu administras (siempre encendidas, pagas por hora). Lambda ejecuta funciones sin servidor, escala sola y solo pagas por invocacion (bien para APIs con pico). Containers (ECS/K8s) para apps completas. Elige por carga y coste.",
+      "difficulty": 2,
+      "id": 331
+    },
+    {
+      "cat": "cloud",
+      "title": "Autoescaling: carga bajo demanda",
+      "body": "Un autoescaling group crea y destruye instancias segun la carga real (CPU, traffico). Evita pagar por capacidad ociosa y aguantar picos sin caidas. Configura umbrales y politicas de in/out con margen.",
+      "difficulty": 1,
+      "id": 332
+    },
+    {
+      "cat": "cloud",
+      "title": "Multi-AZ vs Single-AZ",
+      "body": "Un despliegue single-AZ vive en un solo centro de datos: si se cae, se cae todo. Multi-AZ replica en zonas independientes para alta disponibilidad (RDS, EBS). Para produccion critica, multi-AZ aunque suba el coste.",
+      "difficulty": 1,
+      "id": 333
+    },
+    {
+      "cat": "cloud",
+      "title": "What is IAM policies basics",
+      "body": "IAM define QUIEN puede hacer QUE sobre QUE recurso (accion, recurso, condicion). Da minimo privilegio y revisa roles mal configurados. Nunca pongas claves secretas en el codigo: usa roles y secret managers.",
+      "difficulty": 1,
+      "id": 334
+    },
+    {
+      "cat": "ai",
+      "title": "RAG vs fine-tuning",
+      "body": "RAG inyecta documentos relevantes en el contexto en cada consulta (sin reentrenar, actualizable al vuelo, perfecto para datos propios que cambian). Fine-tuning entrena el modelo con tus ejemplos para ajustar su tono/formato. Para conocimiento factual, RAG; para estilo, fine-tuning.",
+      "difficulty": 2,
+      "id": 335
+    },
+    {
+      "cat": "ai",
+      "title": "Temperatura alta vs baja",
+      "body": "Temperatura controla la aleatoriedad: baja (0.0-0.3) da respuestas predecibles y rigidas; alta (0.7-1.0) mas creativas pero propensas a alucinar. Para tareas deterministas (parseo, resumen de datos) usa baja; para lluvia de ideas, alta.",
+      "difficulty": 1,
+      "id": 336
+    },
+    {
+      "cat": "ai",
+      "title": "Contexto vs ventana de tokens",
+      "body": "El modelo lee un maximo de tokens por consulta (ventana). 'Contexto' son los tokens que realmente pasan. Cuantos mas tokens, mas lento y caro. Recorta prompts y usa recientes documentos relevantes para no agotar la ventana.",
+      "difficulty": 1,
+      "id": 337
+    },
+    {
+      "cat": "ai",
+      "title": "Engineer prompt: rol + tarea + formato",
+      "body": "Estructura tus prompts: dale un rol ('eres un experto en SQL'), una tarea concreta y un formato de salida (JSON, pasos, tabla). Cuanto mas contexto util y constraints, mejores respuestas. Ejemplo damos en la practica.",
+      "difficulty": 1,
+      "id": 338
+    },
+    {
+      "cat": "programming",
+      "title": "Readability: nombres que digan que hacen",
+      "body": "Nombra variables y funciones por su INTENCION, no por su tipo: isUserAdmin en vez de flag1, getUserById vs getData. El codigo se lee 10 veces mas de lo que se escribe; los nombres claros son la documentacion que nunca se desactualiza.",
+      "difficulty": 1,
+      "id": 339
+    },
+    {
+      "cat": "programming",
+      "title": "Refactor: cambiar sin cambiar comportamiento",
+      "body": "Refactorizar es reestructurar el codigo PARA que sea mas legible/limpio SIN cambiar su funcinamiento externo. Se apoya en tests que verifiquen que sigues igual. Hazlo en pasos pequenos, no todo de golpe.",
+      "difficulty": 1,
+      "id": 340
+    },
+    {
+      "cat": "programming",
+      "title": "SOLID en una linea",
+      "body": "SOLID son 5 principios: cada clase una responsabilidad (S), abierta a extender pero cerrada a modificar (O), sustituible por sus subclases (L), clientes con interfaces pequenas (I) y depender de abstracciones (D). Guia para diseno mantenible y testeable.",
+      "difficulty": 2,
+      "id": 341
+    },
+    {
+      "cat": "programming",
+      "title": "Complejidad Big-O que importa",
+      "body": "Big-O mide como crece el tiempo/memoria con el tamano de entrada. O(1) constante, O(n) lineal, O(n log n) ordenacion, O(n^2) doble bucle. Antes de optimizar, identifica el bucle/cubo que mas crece; casi nunca es micro-optimizacion.",
+      "difficulty": 2,
+      "id": 342
+    },
+    {
+      "cat": "programming",
+      "title": "Codigo limpio: mejor 2000 lineas buenas",
+      "body": "Reduce duplicacion (DRY), divide funciones por responsabilidad, y no programes 'para el futuro incierto' (YAGNI). Un buen nombre y codigo corto y testeable paga mas que ingenio. Revisa en PR como lector nuevo.",
+      "difficulty": 1,
+      "id": 343
+    },
+    {
+      "cat": "devops",
+      "title": "CI vs CD",
+      "body": "CI (integracion continua) prueba y compila TU codigo en cada commit autoatemica. CD (entrega/despliegue continuo) despliega ese codigo al entorno de forma automatica tras pasar CI. CI da feedback rapido; CD entrega valor frecuentemente.",
+      "difficulty": 1,
+      "id": 344
+    },
+    {
+      "cat": "devops",
+      "title": "Infraestructura como codigo (IaC)",
+      "body": "Describe tus servidores en codigo (Terraform, CloudFormation) en vez de configurarlos a mano. Es versionable, reproducible y revisable. Recrear el entorno desde cero deja de ser un misterio.",
+      "difficulty": 1,
+      "id": 345
+    },
+    {
+      "cat": "devops",
+      "title": "Observabilidad: logs, metrics, traces",
+      "body": "Observabilidad es saber QUE pasa por dentro: logs (verbales, con contexto), metricas (numeros: latencia, uso CPU) y traces (una peticion de punta a punta). Instrumenta los 3, no te quedes solo con logs cuando algo cae.",
+      "difficulty": 2,
+      "id": 346
+    },
+    {
+      "cat": "windows",
+      "title": "PowerShell vs CMD",
+      "body": "CMD es el terminal clasico, limitado. PowerShell es un shell orientado a objetos: los comandos devuelven objetos (no solo texto) y puedes pipearlos. Para administrar Windows moderno, aprende PowerShell (posiblemente pwsh en Linux).",
+      "difficulty": 1,
+      "id": 347
+    },
+    {
+      "cat": "windows",
+      "title": "Task Scheduler: automatizar tareas",
+      "body": "El Programador de tareas de Windows ejecuta scripts/programas en horario o al evento. Util para backups, limpieza o lanzar apps al arrancar. Cuidado con la politica de energia: define el trigger y que se ejecute aunque el portatil tenga bateria.",
+      "difficulty": 1,
+      "id": 348
+    },
+    {
+      "cat": "windows",
+      "title": "winget: instalar software de terminal",
+      "body": "winget install <app> es el gestor de paquetes nativo de Windows (como apt). Instala, actualiza y desinstala desde terminal sin ir pagina por pagina. Ideal para reproducir tu entorno en otra maquina.",
+      "difficulty": 1,
+      "id": 349
+    }
   ]
 }

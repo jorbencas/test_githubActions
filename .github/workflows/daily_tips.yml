@@ -1,7 +1,7 @@
-name: "[TIPS] 💡 Tips de IT (cada 6h)"
+name: "[TIPS] 💡 Tips de IT (cada 3h)"
 on:
   schedule:
-    - cron: "0 */6 * * *"   # Cada 6 horas: 00:00, 06:00, 12:00, 18:00 UTC
+    - cron: "0 */3 * * *"   # Cada 3 horas: 00:00, 03:00, 06:00, ... 21:00 UTC
   workflow_dispatch:
 
 jobs:
