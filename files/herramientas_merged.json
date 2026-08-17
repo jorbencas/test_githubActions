@@ -1,5 +1,21 @@
 [
     {
+        "titulo": "basecamp /omarchy",
+        "enlace": "https://github.com/basecamp/omarchy",
+        "fuente": "GitHub Trending Daily",
+        "tipo": "herramienta",
+        "f": "17/08",
+        "fecha_publicacion": "",
+        "subtipo": "github",
+        "descripcion": "Beautiful, Modern & Opinionated Linux",
+        "lenguaje": "Shell",
+        "estrellas": "25624",
+        "repo": "basecamp/omarchy",
+        "fecha_real": "17/08/2026",
+        "ts": "2026-08-17T07:05:29.697499",
+        "categoria": "💡 General"
+    },
+    {
         "titulo": "cordiverse /cordis",
         "enlace": "https://github.com/cordiverse/cordis",
         "fuente": "GitHub Trending Daily",
@@ -3181,22 +3197,6 @@
         "repo": "Crosstalk-Solutions/project-nomad",
         "fecha_real": "13/07/2026",
         "ts": "2026-07-13T09:37:58.792885",
-        "categoria": "💡 General"
-    },
-    {
-        "titulo": "ColeMurray /background-agents",
-        "enlace": "https://github.com/ColeMurray/background-agents",
-        "fuente": "GitHub Trending Daily",
-        "tipo": "herramienta",
-        "f": "13/07",
-        "fecha_publicacion": "",
-        "subtipo": "github",
-        "descripcion": "An open-source background agents coding system",
-        "lenguaje": "TypeScript",
-        "estrellas": "2365",
-        "repo": "ColeMurray/background-agents",
-        "fecha_real": "13/07/2026",
-        "ts": "2026-07-13T09:37:58.793222",
         "categoria": "💡 General"
     },
     {
