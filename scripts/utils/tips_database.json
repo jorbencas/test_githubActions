@@ -249,7 +249,7 @@
       "id": 33,
       "cat": "git",
       "title": "Ver diferencias entre branches",
-      "body": "git diff main..mi-branch muestra todos los cambios que tienes相对于 main. Para ver solo los archivos: git diff main..mi-branch --name-only.",
+      "body": "git diff main..mi-branch muestra todos los cambios que tienes respecto a main. Para ver solo los archivos: git diff main..mi-branch --name-only.",
       "difficulty": 1
     },
     {
@@ -564,7 +564,7 @@
       "id": 78,
       "cat": "linux",
       "title": "Renombrar archivos en masa",
-      "body": "rename 's/\\.jpg$/.jpeg/' *.jpg renombra todos los .jpg a .jpeg. Más seguro que mv en bucle. Prueba primero con --n para ver qué haría sin ejecutar.",
+      "body": "rename 's/\\.jpg$/.jpeg/' *.jpg renombra todos los .jpg a .jpeg. Más seguro que mv en bucle. Prueba primero con -n para ver qué haría sin ejecutar.",
       "difficulty": 2
     },
     {
@@ -2152,7 +2152,7 @@
     {
       "cat": "git",
       "title": "Git merge vs rebase",
-      "body": "merge une ramas y conserva un commit de union (el historial muestra ramas). rebase reescribe tu rama 'encima' de la base y deja un historial lineal limpio. En el trabajo no rebeasee ramas compartidas; usa merge o rebase con --rebase en ramas locales.",
+      "body": "merge une ramas y conserva un commit de union (el historial muestra ramas). rebase reescribe tu rama 'encima' de la base y deja un historial lineal limpio. No rebasees ramas compartidas; en ramas locales usa rebase o merge segun prefieras un historial lineal o ramificado.",
       "difficulty": 2,
       "id": 305
     },
@@ -2271,14 +2271,14 @@
     {
       "cat": "linux",
       "title": "grep -r vs ripgrep",
-      "body": "grep -r busca recursivo en archivos pero es lento en tree grandes. ripgrep (rg) es mucho mas rapido, respeta .gitignore por defecto y tiene mejores salidas. Instala ripgrep: tu busqueda en monorepos deja de ser un infierno.",
+      "body": "grep -r busca recursivo en archivos pero es lento en arboles grandes. ripgrep (rg) es mucho mas rapido, respeta .gitignore por defecto y tiene mejores salidas. Instala ripgrep: tu busqueda en monorepos deja de ser un infierno.",
       "difficulty": 1,
       "id": 322
     },
     {
       "cat": "linux",
       "title": "hardlink vs symlink",
-      "body": "Un symlink (ln -s) es un acceso directo que puede apuntar a otro disco y romperse si el destino se mueve. Un hardlink es otra entrada al mismo inodo en el mismo filesystem. Para apuntar, usa symlinks. -s",
+      "body": "Un symlink (ln -s) es un acceso directo que puede apuntar a otro disco y romperse si el destino se mueve. Un hardlink es otra entrada al mismo inodo en el mismo filesystem. Usa symlinks para apuntar a archivos en otros discos; hardlinks solo dentro del mismo filesystem.",
       "difficulty": 2,
       "id": 323
     },
@@ -2463,6 +2463,456 @@
       "body": "winget install <app> es el gestor de paquetes nativo de Windows (como apt). Instala, actualiza y desinstala desde terminal sin ir pagina por pagina. Ideal para reproducir tu entorno en otra maquina.",
       "difficulty": 1,
       "id": 349
+    },
+    {
+      "id": 350,
+      "cat": "docker",
+      "title": "Correr contenedores como root",
+      "body": "Los procesos root dentro del contenedor son root efectivo: si la app se compromete, el atacante controla el contenedor con privilegios máximos.",
+      "mala": "USER root (o no definir USER) y correr sin --user.",
+      "buena": "Crear usuario no-root en el Dockerfile (USER app) y correr con --user 1000:1000 o el UID del orquestador.",
+      "difficulty": 1
+    },
+    {
+      "id": 351,
+      "cat": "docker",
+      "title": "Imagen base desactualizada o con CVEs",
+      "body": "Una imagen base vieja arrastra vulnerabilidades conocidas de librerías del sistema y de tu app.",
+      "mala": "FROM python:3.12 de hace meses, dependencias sin renovar.",
+      "buena": "Actualizar imagen base y dependencias periódicamente y escanear en CI con trivy o docker scan.",
+      "difficulty": 2
+    },
+    {
+      "id": 352,
+      "cat": "docker",
+      "title": "Secrets en la imagen o en build args",
+      "body": "Un ENV o ARG con una password queda grabado en la capa de la imagen y en su historial. Cualquiera con acceso al registry la ve.",
+      "mala": "ENV DB_PASSWORD=xxx en el Dockerfile o --build-arg con secretos.",
+      "buena": "Pasar secretos en runtime por variables de entorno del orquestador o Docker secrets; nunca en build-time ni en la imagen.",
+      "difficulty": 2
+    },
+    {
+      "id": 353,
+      "cat": "docker",
+      "title": "Exponer todo a 0.0.0.0",
+      "body": "Publicar puertos a todas las interfaces deja servicios internos (DB, Redis) alcanzables desde la red.",
+      "mala": "docker run -p 0.0.0.0:5432:5432 para una BD interna.",
+      "buena": "Bind a 127.0.0.1: -p 127.0.0.1:5432:5432, o mejor: sin -p, solo dentro de la red interna.",
+      "difficulty": 1
+    },
+    {
+      "id": 354,
+      "cat": "docker",
+      "title": "Usar :latest en producción",
+      "body": "latest cambia en cada build: no puedes reproducir ni hacer rollback a una versión concreta.",
+      "mala": "imagen:latest en compose o k8s.",
+      "buena": "Tags semver (v1.2.3) o digests sha256; pin explícito por versión y rollback limpio.",
+      "difficulty": 1
+    },
+    {
+      "id": 355,
+      "cat": "docker",
+      "title": "No escanear vulnerabilidades",
+      "body": "Desplegar sin saber qué CVEs trae tu imagen es entregar un RCE regalado.",
+      "mala": "docker build && push sin ningún scan.",
+      "buena": "trivy image o docker scan en el pipeline; bloquear el deploy si hay CVEs críticos.",
+      "difficulty": 2
+    },
+    {
+      "id": 356,
+      "cat": "docker",
+      "title": "--privileged sin necesidad",
+      "body": "--privileged da todos los capabilities del host y acceso a /dev: el aislamiento desaparece.",
+      "mala": "docker run --privileged para cosas que requieren permisos puntuales.",
+      "buena": "--cap-drop=ALL + --cap-add solo lo necesario (ej. NET_BIND_SERVICE); evitar privileged.",
+      "difficulty": 2
+    },
+    {
+      "id": 357,
+      "cat": "docker",
+      "title": "Montar el socket de Docker dentro",
+      "body": "docker.sock montado da control total del host al contenedor: es root en la máquina real.",
+      "mala": "-v /var/run/docker.sock:/var/run/docker.sock en la app.",
+      "buena": "No montar el socket; usar APIs remotas, agentes, o diseños sin acceso directo al daemon.",
+      "difficulty": 3
+    },
+    {
+      "id": 358,
+      "cat": "docker",
+      "title": "Capabilities por defecto sin restringir",
+      "body": "Docker arranca con un set amplio de capabilities; cada una es una puerta más.",
+      "mala": "Correr sin cap-drop, con el set por defecto.",
+      "buena": "--cap-drop=ALL y añadir solo las imprescindibles; --security-opt no-new-privileges.",
+      "difficulty": 2
+    },
+    {
+      "id": 359,
+      "cat": "docker",
+      "title": "Filesystem de escritura innecesario",
+      "body": "Si el runtime puede escribir, un fallo o ataque puede plantar/ejecutar código en la imagen.",
+      "mala": "Todo el fs montado rw porque sí.",
+      "buena": "--read-only y volúmenes/tmpfs solo donde la app escribe (logs, uploads, /tmp).",
+      "difficulty": 2
+    },
+    {
+      "id": 360,
+      "cat": "docker",
+      "title": "Sin límites de memoria/CPU",
+      "body": "Un contenedor sin --memory ni --cpus puede consumir todo el host y tumbar al resto.",
+      "mala": "docker run sin límites; un leak de la app agota el nodo.",
+      "buena": "--memory=512m --cpus=0.5 (o limits en el orquestador) siempre, incluso en dev.",
+      "difficulty": 1
+    },
+    {
+      "id": 361,
+      "cat": "docker",
+      "title": "Bind mounts de directorios del host",
+      "body": "Montar carpetas sensibles del host (/, /etc) da acceso total a archivos del sistema.",
+      "mala": "-v /:/host o montar /etc del host.",
+      "buena": "Montar solo lo imprescindible y en modo lectura (:ro) cuando baste.",
+      "difficulty": 2
+    },
+    {
+      "id": 362,
+      "cat": "docker",
+      "title": "No usar multi-stage builds",
+      "body": "La imagen final arrastra compiladores, node_modules de dev y fuentes, multiplicando el tamaño y la superficie de ataque.",
+      "mala": "Un solo FROM con todo lo de build y runtime mezclado.",
+      "buena": "Multi-stage: compila en un stage builder y copia solo el artefacto al stage final ligero.",
+      "difficulty": 2
+    },
+    {
+      "id": 363,
+      "cat": "docker",
+      "title": "Caché invalidada por orden de capas",
+      "body": "Si COPY . . va antes de instalar dependencias, cualquier cambio del código reinstala todo.",
+      "mala": "COPY . . y después RUN npm ci / pip install.",
+      "buena": "Copiar primero package.json/requirements.txt, instalar, y copiar el código al final para reusar la caché.",
+      "difficulty": 2
+    },
+    {
+      "id": 364,
+      "cat": "docker",
+      "title": "No usar .dockerignore",
+      "body": "El build context envía .git, node_modules y logs a cada build: contexto enorme y builds lentos.",
+      "mala": "docker build con todo el repo sin filtrar.",
+      "buena": "Dockerfile + .dockerignore con .git, node_modules, __pycache__, *.log, .env.",
+      "difficulty": 1
+    },
+    {
+      "id": 365,
+      "cat": "docker",
+      "title": "Imagen base enorme",
+      "body": "Ubuntu o imágenes completas traen cientos de paquetes que la app no usa.",
+      "mala": "FROM ubuntu o python:3.12 para una API simple.",
+      "buena": "python:3.12-slim, alpine o distroless: menos superficie de ataque y menos peso.",
+      "difficulty": 1
+    },
+    {
+      "id": 366,
+      "cat": "docker",
+      "title": "apt-get sin limpiar",
+      "body": "Las listas de paquetes de apt quedan en la capa y ocupan decenas de MB.",
+      "mala": "RUN apt-get install -y sin --no-install-recommends ni limpieza.",
+      "buena": "RUN apt-get update && apt-get install -y --no-install-recommends PACKAGE && rm -rf /var/lib/apt/lists/* en un solo RUN.",
+      "difficulty": 2
+    },
+    {
+      "id": 367,
+      "cat": "docker",
+      "title": "Dependencias sin versionar",
+      "body": "pip install fastapi o npm i express sin fijar versiones da builds no reproducibles.",
+      "mala": "Instalar deps flotantes en el Dockerfile.",
+      "buena": "requirements.txt con versiones exactas o npm ci con el lockfile.",
+      "difficulty": 2
+    },
+    {
+      "id": 368,
+      "cat": "docker",
+      "title": "Herramientas de debug en la imagen final",
+      "body": "bash, curl, vim y wget en producción son superficie de ataque y peso extra.",
+      "mala": "Dejar todo el tooling de dev en la imagen de producción.",
+      "buena": "Solo runtime en producción (distroless si aplica); debuggear con un contenedor efímero aparte.",
+      "difficulty": 2
+    },
+    {
+      "id": 369,
+      "cat": "docker",
+      "title": "Temporales intermedios en capas",
+      "body": "Cada RUN que crea y no borra archivos los deja en una capa permanente.",
+      "mala": "Descargar y descomprimir sin limpiar en el mismo RUN.",
+      "buena": "Agrupar instalación + limpieza en el mismo RUN para que la capa final no guarde temporales.",
+      "difficulty": 2
+    },
+    {
+      "id": 370,
+      "cat": "docker",
+      "title": "Usar la red bridge por defecto",
+      "body": "En la red por defecto los contenedores no se resuelven por nombre de servicio: terminas usando IPs.",
+      "mala": "docker run sin --network, conectando por IP.",
+      "buena": "Redes definidas por usuario (docker network create) con DNS interno por nombre de servicio.",
+      "difficulty": 2
+    },
+    {
+      "id": 371,
+      "cat": "docker",
+      "title": "Exponer puertos de servicios internos",
+      "body": "Publicar Redis/Postgres/API internos los hace visibles a la red exterior.",
+      "mala": "-p 6379:6379 para Redis que solo usa tu API.",
+      "buena": "No mapear puertos internos; dejarlos en la red interna compartida.",
+      "difficulty": 1
+    },
+    {
+      "id": 372,
+      "cat": "docker",
+      "title": "Depender de IPs de contenedor",
+      "body": "Las IPs cambian al recrear el contenedor; hardcodearlas rompe todo al reiniciar.",
+      "mala": "Conectarse a 172.x.x.x fijado a mano.",
+      "buena": "Conectarse por nombre de servicio en la misma red definida por el usuario.",
+      "difficulty": 2
+    },
+    {
+      "id": 373,
+      "cat": "docker",
+      "title": "Sin healthcheck para el balanceo",
+      "body": "El load balancer manda tráfico a contenedores vivos pero rotos.",
+      "mala": "Sin HEALTHCHECK; el proxy reparte a cualquiera.",
+      "buena": "HEALTHCHECK o healthcheck: en compose; el LB solo envía a contenedores healthy.",
+      "difficulty": 2
+    },
+    {
+      "id": 374,
+      "cat": "docker",
+      "title": "--network host sin necesidad",
+      "body": "Perder el aislamiento de red expone todos los puertos del host y rompe el DNS de Docker.",
+      "mala": "docker run --network host porque 'es más simple'.",
+      "buena": "Red bridge aislada y publicar solo los puertos necesarios con -p.",
+      "difficulty": 2
+    },
+    {
+      "id": 375,
+      "cat": "docker",
+      "title": "Todo en una única red sin separación",
+      "body": "Frontend, backend y BD con acceso mutuo total: un fallo en uno expone todo.",
+      "mala": "Un solo docker network para toda la app.",
+      "buena": "Separar por capas (front, backend, db) y conectar solo lo que debe hablar entre sí.",
+      "difficulty": 3
+    },
+    {
+      "id": 376,
+      "cat": "docker",
+      "title": "Puertos en conflicto sin control",
+      "body": "Mapeos aleatorios a puertos del host acaban chocando entre proyectos.",
+      "mala": "Cada compose mapea 8080:80 sin coordinar.",
+      "buena": "Mapa de puertos explícito y documentado; evitar mapear si el servicio es solo interno.",
+      "difficulty": 1
+    },
+    {
+      "id": 377,
+      "cat": "docker",
+      "title": "Usar IPs o links en docker-compose",
+      "body": "links: e IPs hardcodeadas son frágiles; los nombres de servicio en compose ya resuelven DNS.",
+      "mala": "links: - db o IP del contenedor en la config.",
+      "buena": "Referenciar por nombre de servicio; la red de compose resuelve el DNS automáticamente.",
+      "difficulty": 2
+    },
+    {
+      "id": 378,
+      "cat": "docker",
+      "title": "Guardar datos en la capa del contenedor",
+      "body": "Todo lo escrito en el contenedor muere con él: adiós BD, logs y uploads.",
+      "mala": "Escribir en /var/lib/... dentro del contenedor.",
+      "buena": "Volumen nombrado o bind mount para todo estado persistente.",
+      "difficulty": 1
+    },
+    {
+      "id": 379,
+      "cat": "docker",
+      "title": "Volúmenes anónimos",
+      "body": "-v /ruta sin nombre crea un volumen que no sabes cuál es ni para qué.",
+      "mala": "-v /var/lib/postgresql/data (anónimo).",
+      "buena": "docker volume create pg_data y -v pg_data:/var/lib/postgresql/data.",
+      "difficulty": 1
+    },
+    {
+      "id": 380,
+      "cat": "docker",
+      "title": "Permisos de bind mount incorrectos",
+      "body": "Un bind mount de host montado como root impide escribir a la app no-root del contenedor.",
+      "mala": "-v /home/user/data:/app/data con UID que no coincide.",
+      "buena": "Alinear UID/GID del host con el usuario del contenedor o usar volúmenes gestionados.",
+      "difficulty": 2
+    },
+    {
+      "id": 381,
+      "cat": "docker",
+      "title": "Sin backup de volúmenes",
+      "body": "El volumen es local al nodo: un fallo de disco = pérdida total de datos.",
+      "mala": "Solo datos en el volumen local, sin copia.",
+      "buena": "Backups programados del volumen, replicación o storage gestionado (EBS, volúmenes cloud).",
+      "difficulty": 2
+    },
+    {
+      "id": 382,
+      "cat": "docker",
+      "title": "Montar el código fuente en producción",
+      "body": "Bind mount del repo en runtime hace que cambios sin rebuild entren en producción y rompe la inmutabilidad.",
+      "mala": "volumes: - .:/app en el compose de producción.",
+      "buena": "El código va dentro de la imagen; bind mounts solo para config o datos puntuales.",
+      "difficulty": 2
+    },
+    {
+      "id": 383,
+      "cat": "docker",
+      "title": "No usar tmpfs para datos efímeros",
+      "body": "/tmp, cachés y sockets acaban en disco y desgastan/llenan el storage.",
+      "mala": "Escribir cache y /tmp en el filesystem persistente.",
+      "buena": "--tmpfs /tmp (o type: tmpfs en compose) para datos que no deben persistir.",
+      "difficulty": 2
+    },
+    {
+      "id": 384,
+      "cat": "docker",
+      "title": "BD en contenedor con nodo efímero",
+      "body": "Correr la base de datos en un contenedor sin volumen replicado es perder datos al recrear el nodo.",
+      "mala": "Postgres en contenedor con datos en la capa local.",
+      "buena": "Volumen con respaldo o managed service para estado crítico.",
+      "difficulty": 2
+    },
+    {
+      "id": 385,
+      "cat": "docker",
+      "title": "Sin monitorizar el tamaño del volumen",
+      "body": "Uploads, logs y datos crecen hasta llenar el disco del host y parar todo.",
+      "mala": "Dejar que el volumen crezca sin límites ni alertas.",
+      "buena": "Monitorear uso, límites de tamaño y políticas de retención/rotación.",
+      "difficulty": 2
+    },
+    {
+      "id": 386,
+      "cat": "docker",
+      "title": "Contenedor sin restart policy",
+      "body": "Si la app muere, nadie la levanta (o reinicia en bucle infinito).",
+      "mala": "Sin restart; el contenedor queda Down hasta que alguien lo vea.",
+      "buena": "restart: unless-stopped (no always en jobs/one-shots) + healthchecks.",
+      "difficulty": 1
+    },
+    {
+      "id": 387,
+      "cat": "docker",
+      "title": "Logs sin rotación",
+      "body": "El driver json-file por defecto crece sin límite: días = GBs de disco.",
+      "mala": "docker logs con el json-file estándar sin config.",
+      "buena": "logging: driver: json-file, options: max-size: 10m, max-file: 3 (o driver centralizado).",
+      "difficulty": 1
+    },
+    {
+      "id": 388,
+      "cat": "docker",
+      "title": "No manejar SIGTERM",
+      "body": "La app ignora el stop limpio: docker stop acaba en kill -9 y posible corrupción.",
+      "mala": "App que no captura SIGTERM, se corta en seco.",
+      "buena": "Capturar SIGTERM y hacer graceful shutdown (trap); docker stop espera y luego SIGKILL.",
+      "difficulty": 2
+    },
+    {
+      "id": 389,
+      "cat": "docker",
+      "title": "Ignorar el PID 1 / procesos zombie",
+      "body": "La app como PID 1 no reaparea zombies: se acumulan procesos huérfanos.",
+      "mala": "Correr el binario directo sin init.",
+      "buena": "docker run --init (o init: true en compose) para que tini haga de reaper.",
+      "difficulty": 2
+    },
+    {
+      "id": 390,
+      "cat": "docker",
+      "title": "Sin límites en el orquestador",
+      "body": "Sin requests/limits, los contenedores se roban recursos y el host se satura.",
+      "mala": "k8s/compose sin resources definidos.",
+      "buena": "deploy.resources.limits y requests (memoria y CPU) para cada servicio.",
+      "difficulty": 2
+    },
+    {
+      "id": 391,
+      "cat": "docker",
+      "title": "Builds manuales y tags flotantes",
+      "body": "docker build a mano + push latest = deploys irreproducibles y rollbacks imposibles.",
+      "mala": "Construir y subir imágenes a mano en cada release.",
+      "buena": "CI/CD que construye con tag por commit/sha; rollback a cualquier versión.",
+      "difficulty": 2
+    },
+    {
+      "id": 392,
+      "cat": "docker",
+      "title": "Sin monitoreo ni alertas",
+      "body": "docker ps no basta: sin métricas y logs centralizados no sabes qué pasó.",
+      "mala": "Solo mirar el estado con docker ps cuando algo falla.",
+      "buena": "docker stats/cAdvisor + Prometheus + Grafana y logs a un agregador.",
+      "difficulty": 2
+    },
+    {
+      "id": 393,
+      "cat": "docker",
+      "title": "Secrets commiteados en el repo",
+      "body": ".env con contraseñas en git queda para siempre en el historial.",
+      "mala": ".env o compose con credenciales reales commiteado.",
+      "buena": "Secrets del orquestador, .env en .gitignore y variables desde el CI.",
+      "difficulty": 1
+    },
+    {
+      "id": 394,
+      "cat": "docker",
+      "title": "Arrancar la app en background dentro del contenedor",
+      "body": "PID 1 no es tu app, los logs se pierden y el stop no funciona bien.",
+      "mala": "nohup app & o arrancar un service manager dentro del contenedor.",
+      "buena": "La app en primer plano como PID 1 (CMD/ENTRYPOINT correctos).",
+      "difficulty": 2
+    },
+    {
+      "id": 395,
+      "cat": "docker",
+      "title": "Confundir CMD y ENTRYPOINT",
+      "body": "Poner el binario en CMD permite que un docker run img --flag lo reemplace por error.",
+      "mala": "CMD ['app', '--flag'] sin ENTRYPOINT.",
+      "buena": "ENTRYPOINT fija el binario y CMD los argumentos por defecto: ENTRYPOINT ['app'] CMD ['--flag'].",
+      "difficulty": 2
+    },
+    {
+      "id": 396,
+      "cat": "docker",
+      "title": "Escalar estado sin volumen correcto",
+      "body": "Escalar una BD/replica con volumen local da datos inconsistentes.",
+      "mala": "Escalar a 3 réplicas cada una con su volumen local.",
+      "buena": "Estado en servicio gestionado o volumen compartido; escalar solo lo stateless.",
+      "difficulty": 3
+    },
+    {
+      "id": 397,
+      "cat": "docker",
+      "title": "Registry sin limpieza ni versionado",
+      "body": "El registry se llena de latest y tags viejos sin control.",
+      "mala": "Subir siempre como latest, sin borrar nada.",
+      "buena": "Tags únicos por build + política de retención/limpieza en el registry.",
+      "difficulty": 1
+    },
+    {
+      "id": 398,
+      "cat": "docker",
+      "title": "Ignorar exit codes y contenedores huérfanos",
+      "body": "docker compose run olvidado o contenedores que mueren en silencio consumen recursos.",
+      "mala": "No revisar docker ps -a ni los exit codes.",
+      "buena": "Auditar docker ps -a, restart policies y alertas de exits; limpiar one-shots.",
+      "difficulty": 2
+    },
+    {
+      "id": 399,
+      "cat": "docker",
+      "title": "Un solo contenedor para todo (app + worker + scheduler)",
+      "body": "Meter todo en un contenedor gigante mezcla ciclos de vida y escalado independientes.",
+      "mala": "Un contenedor con API, worker y cron juntos.",
+      "buena": "Un proceso por contenedor; compose escala cada rol por separado.",
+      "difficulty": 2
     }
   ]
 }

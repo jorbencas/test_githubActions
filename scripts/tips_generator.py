@@ -698,6 +698,8 @@ def build_gemini_prompt(categories, sent_titles, news, tools):
 9. Usa términos técnicos en INGLÉS cuando sea estándar (cold start, hot function, load balancer, etc.)
 10. Varía dificultad: 1=básico, 2=intermedio, 3=avanzado
 11. Cuando el tip mencione una SIGLA o acrónimo (por ejemplo: VPN, SSL, LLM, SVN, WISPr, DNS, HTTP, API, SQL, SSH, TLS, SMTP, RAID, VM, CI, CD, IaC, RBAC, ETL, MQTT, NAT, WAN, LAN...), SIEMPRE expande la sigla entre paréntesis la primera vez que aparezca y añade UNA frase breve que la explique en contexto. Ejemplo: "VPN (Virtual Private Network, red privada virtual) cifra tu conexión..."
+12. Cuando el tip describa una práctica, comando o configuración técnicos, SIEMPRE rellena los campos "mala" (cómo NO se debe hacer) y "buena" (cómo se debe hacer correctamente), redactados como frases breves. Si el tip es un concepto teórico puro, deja "mala" y "buena" vacíos ("").
+13. El campo "body" describe el tema de forma neutra; los campos "mala" y "buena" muestran el contraste de práctica. Cada tip DEBE tener los campos "id"/"title","cat","body","difficulty" y opcionalmente "mala"/"buena". Siempre con mala/buena rellenados en tips prácticos.
 
 === CUÁNDO INCLUIR CÓDIGO ===
 - Comandos de terminal (linux, docker, git, etc.)
@@ -718,15 +720,19 @@ def build_gemini_prompt(categories, sent_titles, news, tools):
 {{
   "cat": "postgresql",
   "title": "Explicar un query SQL lento",
-  "body": "En PostgreSQL: EXPLAIN ANALYZE seguido de tu query. Te muestra el plan de ejecución real y cuánto tarda cada paso. Ejemplo: EXPLAIN ANALYZE SELECT * FROM usuarios WHERE email = 'test@mail.com'; Esencial para optimizar.",
+  "body": "En PostgreSQL: EXPLAIN ANALYZE seguido de tu query te muestra el plan de ejecución real y cuánto tarda cada paso. Esencial para optimizar.",
+  "mala": "SELECT * FROM usuarios WHERE email = 'test@mail.com'; sin saber por qué va lento.",
+  "buena": "EXPLAIN ANALYZE SELECT * FROM usuarios WHERE email = 'test@mail.com'; para ver el plan real y los tiempos de cada paso.",
   "difficulty": 2
 }}
 
-=== EJEMPLO SIN CÓDIGO ===
+=== EJEMPLO SIN CÓDIGO (concepto teórico: mala/buena vacías) ===
 {{
   "cat": "programming",
   "title": "¿Qué es polimorfismo?",
   "body": "Objetos de diferentes clases respondiendo al mismo método. Un gato.hablar() dice 'miau', un perro.hablar() dice 'guau'. El código que usa hablar() no necesita saber qué animal es.",
+  "mala": "",
+  "buena": "",
   "difficulty": 2
 }}
 
@@ -735,12 +741,14 @@ def build_gemini_prompt(categories, sent_titles, news, tools):
   "cat": "redes",
   "title": "Para qué sirve una VPN",
   "body": "Una VPN (Virtual Private Network, red privada virtual) crea un túnel cifrado entre tu equipo y un servidor remoto. Sirve para ocultar tu IP, protegerte en redes Wi-Fi públicas y acceder a recursos internos de una empresa como si estuvieras en la oficina.",
+  "mala": "",
+  "buena": "",
   "difficulty": 1
 }}
 
 === RESPUESTA ===
 SOLO el JSON array, sin markdown, sin texto adicional:
-[{{"cat": "...", "title": "...", "body": "...", "difficulty": 1}}, ...]"""
+[{{"cat": "...", "title": "...", "body": "...", "mala": "...", "buena": "...", "difficulty": 1}}, ...]"""
 
 
 def generate_tips_gemini(count, categories, sent_titles):
@@ -819,7 +827,10 @@ def format_tip_message(tip, index):
     cat = tip.get("cat", "")
     emoji = CAT_EMOJI.get(cat, "?")
     nombre = CAT_NAMES.get(cat, cat)
-    return f"{index}. {emoji} {nombre} — {tip['body']}"
+    header = f"{index}. {emoji} {nombre}{': ' + tip['title'] if tip.get('title') else ''} — {tip.get('body', '')}"
+    if tip.get("mala") and tip.get("buena"):
+        return f"{header}\n❌ Mala práctica: {tip['mala']}\n✅ Buena práctica: {tip['buena']}"
+    return f"{index}. {emoji} {nombre} — {tip.get('body', '')}"
 
 
 def build_daily_message(tips):

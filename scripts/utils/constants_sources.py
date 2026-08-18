@@ -54,6 +54,9 @@ FUENTES = {
     "Anthropic Research": {"url": "https://www.anthropic.com/research", "selector": "a[class*='card']"},
     "Claude Blog": {"url": "https://docs.anthropic.com/en/release-notes", "selector": "article a[href]"},
     "OpenCode": {"url": "https://opencode.ai/changelog", "selector": "article a[href]"},
+    "OpenCode Docs": {"url": "https://opencode.ai/docs/", "selector": "a[href^='/docs/']"},
+    "OpenCode Blog": {"url": "https://opencode.ai/blog/", "selector": "article a[href]"},
+    "OpenCode Releases": {"rss": "https://github.com/anomalyco/opencode/releases.atom"},
     "Google Research": {"url": "https://research.google/blog/", "selector": "a[href*='/blog/']"},
     "Google Cloud AI": {"url": "https://cloud.google.com/blog/products/ai-machine-learning", "selector": "a[href*='/blog/']"},
     "Google AI Dev": {"url": "https://ai.google.dev/", "selector": "article a[href]"},
@@ -421,6 +424,8 @@ FUENTES = {
     # ── Astro framework ──
     "Astro Blog": {"url": "https://astro.build/blog/", "selector": "a[href^='/blog/']", "tipo": "noticia", "quick": True},
     "Astro GitHub Releases": {"rss": "https://github.com/withastro/astro/releases.atom", "quick": True},
+    # ── Anthropic / Claude ──
+    "Claude Help Center": {"url": "https://support.claude.com/es/collections/4078531-claude", "selector": "a[href*='/es/articles/']", "tipo": "noticia", "quick": True},
     # ── Software libre y Open Source ──
     "Phoronix": {"rss": "https://www.phoronix.com/rss.php", "quick": True},
     "OMG Ubuntu": {"rss": "https://www.omgubuntu.co.uk/feed", "quick": True},
