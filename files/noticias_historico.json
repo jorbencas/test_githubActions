@@ -1,5 +1,44 @@
 [
     {
+        "titulo": "Sam Altman cree que 4 años de universidad son demasiados en la era de la IA: \"No debería durar tanto\"",
+        "enlace": "https://www.computerhoy.com/tecnologia/sam-altman-cree-que-4-anos-universidad-son-demasiados-era-ia-no-deberia-durar-tanto_7026535_0.html",
+        "fuente": "ComputerHoy",
+        "tipo": "noticia",
+        "f": "18/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "18/08/2026",
+        "ts": "2026-08-18T06:43:05.268315"
+    },
+    {
+        "titulo": "Linux 7.3 acaba de mejorar una de las partes más importantes del sistema: así gestionará mejor la memoria en ARM64",
+        "enlace": "https://www.computerhoy.com/software/linux-7-3-acaba-mejorar-una-las-partes-mas-importantes-sistema-asi-gestionara-mejor-memoria-arm64_7026497_0.html",
+        "fuente": "ComputerHoy",
+        "tipo": "noticia",
+        "f": "18/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "18/08/2026",
+        "ts": "2026-08-18T06:43:05.269765"
+    },
+    {
+        "titulo": "newsMongoDB unveils MongoDB Atlas Managed MCP ServerMongoDB Atlas Managed MCP Server works with Claude Code, Codex, Grok Build, and Devin, giving the coding agents direct access to live application data.By Paul KrillAug 17, 20262 minsDatabasesGenerative AINoSQL Databases",
+        "enlace": "https://www.infoworld.com/article/4210798/mongodb-unveils-mongodb-atlas-managed-mcp-server.html",
+        "fuente": "InfoWorld",
+        "tipo": "noticia",
+        "f": "18/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "https://www.infoworld.com/wp-content/uploads/2026/08/4210798-0-71231600-1787019979-AI-protocols-set-standards-shutterstock_2630638521.jpg?quality=50&strip=all&w=1240",
+        "fecha_real": "18/08/2026",
+        "ts": "2026-08-18T06:43:18.027746"
+    },
+    {
         "titulo": "O2 va a por Digi y lanza una nueva tarifa móvil por solo 5 € al mes",
         "enlace": "https://www.adslzone.net/noticias/operadores/o2-nueva-tarifa-15-gbps-5-euros/",
         "fuente": "ADSL Zone",
