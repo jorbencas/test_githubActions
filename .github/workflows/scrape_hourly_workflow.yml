@@ -4,6 +4,10 @@ on:
     - cron: "0 * * * *" # Cada hora
   workflow_dispatch:
 
+concurrency:
+  group: master-push
+  cancel-in-progress: false
+
 jobs:
   scrape_hourly:
     runs-on: ubuntu-latest
@@ -32,4 +36,5 @@ jobs:
           git config --local user.name "GitHub Actions"
           git add files/noticias_historico.json files/avatars_cache.json
           git diff --quiet --cached || git commit -m "[bot] hourly scrape (tier light)"
+          git pull --rebase origin master
           git push origin master

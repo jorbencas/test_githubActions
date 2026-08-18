@@ -4,6 +4,10 @@ on:
     - cron: "0 6 * * *"  # Daily at 06:00 UTC
   workflow_dispatch:
 
+concurrency:
+  group: master-push
+  cancel-in-progress: false
+
 jobs:
   resources_pipeline:
     runs-on: ubuntu-latest
@@ -77,4 +81,5 @@ jobs:
           git config --local user.name "GitHub Actions"
           git add files/herramientas.json files/publicapis_apis.json files/herramientas_merged.json
           git diff --quiet && git diff --staged --quiet || git commit -m "[bot] update tools + publicapis data"
+          git pull --rebase origin master
           git push origin master

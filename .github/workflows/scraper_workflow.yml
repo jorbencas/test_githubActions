@@ -4,6 +4,10 @@ on:
     - cron: "0 7 * * 6" # Sábados 07:00 UTC
   workflow_dispatch:
 
+concurrency:
+  group: master-push
+  cancel-in-progress: false
+
 jobs:
   weekly_pipeline:
     runs-on: ubuntu-latest
@@ -74,4 +78,5 @@ jobs:
           git config user.email jorbencas@gmail.com
           git add .
           git diff --quiet && git diff --staged --quiet || git commit -m "[bot] update tech news + tools"
+          git pull --rebase origin master
           git push origin master

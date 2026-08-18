@@ -12,6 +12,9 @@ on:
       - 'files/noticias_historico.json'
   workflow_dispatch:
 
+concurrency:
+  group: master-push
+  cancel-in-progress: false
 
 jobs:
   update_dashboard:
@@ -62,4 +65,5 @@ jobs:
           git config user.email jorbencas@gmail.com
           git add public/
           git diff --quiet && git diff --staged --quiet || git commit -m "[bot] regenerate dashboard after Python changes"
+          git pull --rebase origin master
           git push origin master
