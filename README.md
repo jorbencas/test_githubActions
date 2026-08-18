@@ -20,7 +20,7 @@
 ![Dashboard](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/dashboard_update.yml?branch=master&style=flat-square&label=Dashboard&logo=github)
 ![Tests](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/tests.yml?branch=master&style=flat-square&label=Tests&logo=github)
 
-Automated tech news ecosystem. Collects from **350+ sources** (158 YouTube channels, 55 RSS feeds, 11 web scraping sites, 82 HTML pages, 52 GitHub Topics, 5 GitHub Repos, 1 Product Hunt, 1 GitHub Collection), processes with **AI (Gemini)**, and distributes content across multiple channels. 4 dual sources (MoureDev, Midudev, Carlos Azaustre, Xataka) extract from both YouTube AND web scraping. Also manages images, resources, programming challenges, and the blog dashboard for [jorbencas/blog](https://blog-jorbencas.vercel.app/).
+Automated tech news ecosystem. Collects from **515 sources** (158 YouTube channels, 151 RSS feeds, 107 web scraping sites, 89 GitHub Topics, 8 GitHub Repos, 1 Product Hunt, 1 GitHub Collection), processes with **AI (Gemini)**, and distributes content across multiple channels. 4 dual sources (MoureDev, Midudev, Carlos Azaustre, Xataka) extract from both YouTube AND web scraping. Also manages images, resources, programming challenges, a daily IT tips system, and the blog dashboard for [jorbencas/blog](https://blog-jorbencas.vercel.app/).
 
 🚀 **[News Dashboard](http://jorbencasdownloaderdocument.surge.sh)**
 
@@ -28,35 +28,35 @@ Automated tech news ecosystem. Collects from **350+ sources** (158 YouTube chann
 
 ## 📋 Overview
 
-This project runs **11 GitHub Actions workflows** that form a fully automated content pipeline:
+This project runs **12 GitHub Actions workflows** that form a fully automated content pipeline:
 
-1. **Scrape** — news and tools from 350+ sources (158 YouTube channels, 55 RSS feeds, 11 web scraping, 82 HTML pages, 52 GitHub Topics); 4 dual sources extract from both YouTube AND web scraping
+1. **Scrape** — news and tools from 515 sources (158 YouTube channels, 151 RSS feeds, 107 web scraping, 89 GitHub Topics); 4 dual sources extract from both YouTube AND web scraping
 2. **Process** — AI summarization with Gemini, news grouped by source, automatic translation (only new items), image generation, deduplication, summaries persisted in JSON
 3. **Publish** — weekly recaps with source grouping, dashboard (SSR), email newsletter with video section, Telegram notifications (news only, no videos)
 4. **Manage** — resource lists, challenges, image optimization, link validation, SEO dedup
+5. **Tips** — daily IT tips sent via Telegram, mixing Gemini-generated tips with a static database (399 tips) never repeated
 
 ---
 
-## 📡 Sources — 350+ Total
+## 📡 Sources — 515 Total
 
 | Category | Count | Examples |
 |----------|-------|---------|
-| YouTube channels | 158 | MoureDev, Fernando Herrera, The Engineer's Digest |
-| RSS feeds (quick) | 55 | TechCrunch, The Verge, Wired, Ars Technica, Google Blog, Vercel Blog |
-| Web scraping (quick) | 11 | Anthropic, Ollama, Mistral, LangChain, Mozilla Hacks |
-| HTML scraping | 82 | Genbeta, Slashdot, Applesfera, El País Tecnología |
+| YouTube channels | 154 | MoureDev, Fernando Herrera, The Engineer's Digest |
+| RSS feeds | 151 | TechCrunch, The Verge, Wired, Ars Technica, Google Blog, Vercel Blog, OpenCode Releases |
+| Web scraping | 107 | Anthropic, Ollama, Mistral, LangChain, Mozilla Hacks, OpenCode Docs, Claude Help Center |
 | Dual (YT + Web) | 4 | MoureDev, Midudev, Carlos Azaustre, Xataka |
-| GitHub Topics | 52 | AI, LLM, Docker, Kubernetes, CSS, HTML, algorithms |
+| GitHub Topics | 89 | AI, LLM, Docker, Kubernetes, CSS, HTML, algorithms |
 | GitHub Collections | 1 | AI Tools |
-| GitHub Repos | 5 | OpenWiki, Meetily, AutoPR, PR-Agent, Code-to-Road |
+| GitHub Repos | 8 | OpenWiki, Meetily, AutoPR, PR-Agent, Code-to-Road |
 | Product Hunt | 1 | Top products daily |
 
 ### Quick sources (hourly tier)
 
 RSS and web scraping sources with `quick: True` are scraped every hour:
 
-- **RSS (55)**: TechCrunch, The Verge, Wired, Ars Technica, Google Blog, Google AI, Vercel, Astro Releases, Docker, Kubernetes, Krebs, HN, Stack Overflow, Dev.to, NVIDIA, Machine Learning Mastery, etc.
-- **Web scraping (11)**: Anthropic Research, Ollama Blog, Mistral News, Cohere, LangChain, Google Developers, HuggingFace Papers, Mozilla Hacks, Qwen Blog, DeepSeek, 01.AI
+- **RSS (150)**: TechCrunch, The Verge, Wired, Ars Technica, Google Blog, Google AI, Vercel, Astro Releases, Docker, Kubernetes, Krebs, HN, Stack Overflow, Dev.to, NVIDIA, Machine Learning Mastery, etc.
+- **Web scraping (43)**: Anthropic Research, Ollama Blog, Mistral News, Cohere, LangChain, Google Developers, HuggingFace Papers, Mozilla Hacks, Qwen Blog, DeepSeek, 01.AI, Claude Help Center
 - **Chinese AI**: QbitAI (量子位), 36氪 AI, Qwen, DeepSeek, 01.AI, THUDM/ChatGLM
 
 ---
@@ -65,7 +65,7 @@ RSS and web scraping sources with `quick: True` are scraped every hour:
 
 ```
 scripts/
-├── scrapers/             🌐 Data collection from 350+ sources
+├── scrapers/             🌐 Data collection from 515 sources
 │   ├── scraper_base.py         YouTube, Web, ScraperPro extractors (dual source support)
 │   ├── scrape_news.py          RSS + web + YouTube news (standard tier includes dual sources)
 │   ├── scrape_tools.py         GitHub Trending + Product Hunt
@@ -94,7 +94,12 @@ scripts/
 └── solutions/            💡 Challenge solutions database
     ├── solutions_db.py            Lookup + solution generation
     └── solutions_data.py          105+ curated solutions in 12 languages
-tests/                    ✅ pytest test suite (101 tests)
+├── tips_generator.py         💡 Daily IT tips (Gemini + DB fallback, nunca repite)
+├── backfill_traducido.py    🔄 One-time migration (mark 6,612 items as translated)
+└── utils/
+    ├── tips_database.json         399 tips (con estructura ❌/✅ mala/buena práctica)
+    └── constants_sources.py       Fuentes de scraping (+ OpenCode, Claude Help Center)
+tests/                    ✅ pytest test suite (117 tests)
 ├── test_cache.py / test_constants_downloadfile.py
 ├── test_constants_retos.py / test_fix_images.py
 ├── test_manage_resources.py / test_solutions_db.py
@@ -139,6 +144,15 @@ All scripts run with `python -m` from the project root:
 | `python -m scripts.tools.optimize` | Dashboard image optimization |
 | `python scripts/backfill_traducido.py` | One-time: mark existing items as translated |
 
+### 💡 Tips de IT
+
+| Command | Description |
+|---------|-------------|
+| `python scripts/tips_generator.py` | Envía 10 tips por Telegram |
+| `python scripts/tips_generator.py --dry-run` | Previsualiza los tips sin enviar |
+| `python scripts/tips_generator.py --list-categories` | Lista las categorías de tips |
+| `python scripts/tips_generator.py --stats` | Estadísticas de la base de tips |
+
 ### ✅ Testing
 
 | Command | Description |
@@ -148,7 +162,7 @@ All scripts run with `python -m` from the project root:
 
 ---
 
-## 🤖 GitHub Actions — 11 Workflows
+## 🤖 GitHub Actions — 12 Workflows
 
 | Workflow | Schedule / Trigger | Pipeline |
 |----------|-------------------|----------|
@@ -156,6 +170,7 @@ All scripts run with `python -m` from the project root:
 | **scrape_hourly** | Every hour | Light scrape (RSS + quick sources) |
 | **scrape_6h** | Every 6 hours | Standard scrape |
 | **daily_resources** | Daily 06:00 UTC | Tools scrape + resources.mdx management |
+| **daily_tips** | Every 3 hours | IT tips via Telegram (Gemini + DB, nunca repite) |
 | **send_email** | Daily 09:00 UTC | Mailgun newsletter (grouped by source + videos) |
 | **send_telegram** | Every 30 min | Telegram + TTS (GitHub Actions Cache for dedup) |
 | **clean_news** | Quarterly | Link health check |
@@ -170,9 +185,9 @@ All scripts run with `python -m` from the project root:
 ┌─────────────────────────────────────────────────────────────────────┐
 │                        DATA COLLECTION                              │
 ├─────────────────────────────────────────────────────────────────────┤
-│  scrape_hourly   →  every hour  →  quick sources (55 RSS + 11 web) │
-│  scrape_6h       →  every 6h    →  standard scrape (82 HTML + 4 dual sources) │
-│  daily_resources →  daily       →  tools (52 GitHub Topics + repos) │
+│  scrape_hourly   →  every hour  →  quick sources (150 RSS + 43 web) │
+│  scrape_6h       →  every 6h    →  standard scrape (107 web + 4 dual sources) │
+│  daily_resources →  daily       →  tools (89 GitHub Topics + repos) │
 └─────────────────────────────────────────────────────────────────────┘
                                     ↓
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -198,9 +213,22 @@ All scripts run with `python -m` from the project root:
 │  clean_news       →  quarterly   →  link validation                │
 │  hunt_challenges  →  weekly      →  AI challenges                  │
 │  optimize_images  →  dispatch    →  image optimization             │
+│  daily_tips      →  every 3h   →  tips IT (Gemini + DB)           │
 │  tests            →  on push     →  117 pytest tests               │
 └─────────────────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## 💡 Daily IT Tips
+
+Automated daily IT tips sent to Telegram every 3 hours via `tips_generator.py`:
+
+- **Mixed generation** — Gemini generates fresh tips (5) plus 5 from the static database, 10 total per run
+- **Static DB fallback** — 399 curated tips across 22 categories (docker, git, linux, databases, security, programming...)
+- **Never repeats** — tracks sent titles in `tips_history.json` (persisted via GitHub Actions Cache)
+- **Mala/Buena práctica** — practical tips include a structured `❌ Mala práctica / ✅ Buena práctica` contrast
+- **Exhaustion recovery** — when the DB is exhausted, Gemini generates the full batch
 
 ---
 
@@ -280,7 +308,7 @@ Weekly recaps auto-archive old posts (>2 weeks) and enforce one-post-per-week SE
 
 117 pytest tests covering:
 - **Cache** — FileCache, CacheManager, expiration, TTL, flush cleanup
-- **Constants** — source configurations (350+ sources), email templates, challenge templates
+- **Constants** — source configurations (515 sources), email templates, challenge templates
 - **Dual sources** — YouTube + web scraping extraction, chip rendering in both sections
 - **Email templates** — placeholders, source headers, video sections, button styles
 - **Image pipeline** — Unsplash fetching, Gemini banner gen, WebP/AVIF conversion

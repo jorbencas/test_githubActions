@@ -263,7 +263,7 @@ class WebExtractor(BaseExtractor):
                 results.append(self.enriquecer_fechas(item))
         return results
 
-    def extraer_rss(self, xml_text: str, nombre: str) -> list:
+    def extraer_rss(self, xml_text: str, nombre: str, info: dict | None = None) -> list:
         results = []
         try:
             root = ElementTree.fromstring(xml_text)
@@ -303,6 +303,8 @@ class WebExtractor(BaseExtractor):
                     results.append(self.enriquecer_fechas(item))
         except Exception as e:
             logger.debug(f"⚠️ Error parseando RSS {nombre}: {e}")
+        if info and info.get("solo_tech"):
+            results = [r for r in results if ContentFilter.coincide_con_keywords(r.get(TITULO_KEY, ""))]
         return results
 
     def extraer_herramientas(self, html_text: str, nombre: str, target: str, info: dict) -> list:
@@ -466,7 +468,7 @@ class ScraperPro:
                         return []
                     text = await response.text()
                 logger.info(f"📡 Extrayendo RSS desde: {nombre} ({target})")
-                results = self.web_extractor.extraer_rss(text, nombre)
+                results = self.web_extractor.extraer_rss(text, nombre, info)
                 if not results and URL_KEY in info:
                     logger.info(f"⚠️ RSS vacío para {nombre}, intentando web scraping...")
                     fallback_url = info[URL_KEY]

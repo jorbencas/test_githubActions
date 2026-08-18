@@ -1,0 +1,47 @@
+name: "[SALUDOS] 🌅🏙️ Imagen Buenos días / noches (cada 3h)"
+on:
+  schedule:
+    - cron: "0 */3 * * *"   # Cada 3 horas: 00:00, 03:00, ... 21:00 UTC
+  workflow_dispatch:
+
+jobs:
+  send_saludo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          ref: master
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests google-genai
+
+      - name: 💾 Restaurar historial de saludos
+        uses: actions/cache@v4
+        with:
+          path: saludos_history.json
+          key: saludos-history-${{ github.run_id }}
+          restore-keys: saludos-history-
+
+      - name: 🌅 Generar y enviar imagen de saludo
+        env:
+          TIPS_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          SALUDO_CHAT_ID: ${{ secrets.SALUDO_CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SALUDOS_TZ_OFFSET: ${{ vars.SALUDOS_TZ_OFFSET }}
+        run: python scripts/saludo_imagen.py
+
+      - name: 💾 Guardar historial
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: saludos_history.json
+          key: saludos-history-${{ github.run_id }}

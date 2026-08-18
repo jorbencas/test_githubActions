@@ -1,0 +1,46 @@
+name: "[AI TOOLS] 🧰 Herramientas de IA (cada 3h)"
+on:
+  schedule:
+    - cron: "0 */3 * * *"   # Cada 3 horas: 00:00, 03:00, 06:00, ... 21:00 UTC
+  workflow_dispatch:
+
+jobs:
+  send_ai_tools:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          ref: master
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests google-genai
+
+      - name: 💾 Restaurar historial de herramientas IA
+        uses: actions/cache@v4
+        with:
+          path: ai_tools_history.json
+          key: ai-tools-history-${{ github.run_id }}
+          restore-keys: ai-tools-history-
+
+      - name: 🧰 Enviar herramientas de IA
+        env:
+          TIPS_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          AI_TOOLS_CHAT_ID: ${{ secrets.AI_TOOLS_CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/ai_tools_generator.py
+
+      - name: 💾 Guardar historial
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ai_tools_history.json
+          key: ai-tools-history-${{ github.run_id }}

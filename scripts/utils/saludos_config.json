@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "description": "Config de saludos de imagen: temas, estilos, festivos y públicos. Sin contenido de terror.",
+    "saludos": ["Buenos días", "Buenas noches"]
+  },
+  "estilos": {
+    "acuarela": "estilo acuarela suave",
+    "dibujo": "estilo dibujo a mano, croquis",
+    "anime": "estilo ilustración anime",
+    "cartoon": "estilo caricatura cartoon",
+    "minimo": "estilo minimalista flat",
+    "realista": "estilo realista cálido",
+    "pastel": "estilo pastel tierno",
+    "vintage": "estilo vintage nostálgico",
+    "moderno": "estilo moderno colorido",
+    "granja": "estilo granja acogedor",
+    "neon": "estilo neón suave elegante"
+  },
+  "publicos": {
+    "niños": "personajes infantiles, niños",
+    "ancianos": "personajes ancianos, abuelos cariñosos",
+    "adultos": "personajes adultos",
+    "mixto": "mezcla de edades: niños, adultos y ancianos juntos",
+    "animales": "animales adorables"
+  },
+  "emociones": {
+    "alegre": "alegre y desenfadado",
+    "gracioso": "gracioso y divertido",
+    "tierno": "tierno y entrañable",
+    "motivador": "motivador y positivo",
+    "tranquilo": "tranquilo y sereno",
+    "nostalgico": "nostálgico"
+  },
+  "materias": {
+    "cafe": "una taza de café humeante",
+    "amanecer": "un amanecer brillante",
+    "atardecer": "un atardecer dorado",
+    "luna": "una luna tranquilizadora y estrellas",
+    "mar": "una playa y el mar",
+    "montaña": "montañas al amanecer",
+    "bosque": "un bosque sereno",
+    "jardin": "un jardín florido",
+    "campo": "el campo abierto",
+    "ciudad": "una ciudad despertando",
+    "nube": "nubes suaves y sol",
+    "aroma": "una cafetería acogedora",
+    "lluvia": "lluvia suave con paraguas",
+    "ave": "pájaros al amanecer"
+  },
+  "festivos": {
+    "01-01": ["Año Nuevo", "año nuevo, celebración"],
+    "14-02": ["San Valentín", "corazones, amor"],
+    "03-08": ["Día de la Mujer", "flores, empoderamiento"],
+    "04-01": ["Inocentes", "inocencia, bromas suaves"],
+    "06-01": ["Reyes Magos", "regalos, magia"],
+    "05-01": ["Día del Trabajo", "solidaridad"],
+    "10-31": ["Halloween suave", "calabazas alegres, nada terrorífico"],
+    "09-11": ["Víspera de Navidad", "árbol navideño, regalos"],
+    "12-25": ["Navidad", "familia, regalos, nieve"],
+    "12-31": ["Nochevieja", "fuego artificial, uvas, celebración"],
+    "12-06": ["Día de la Constitución (ES)", "tradición española"],
+    "12-08": ["Inmaculada (ES)", "tradición"],
+    "07-06": ["Año nuevo peruano (mezcla)", "celebración"]
+  },
+  "temporadas": {
+    "01": "invierno con nieve y abrigos",
+    "02": "invierno frío acogedor",
+    "03": "comienzo de primavera con flores",
+    "04": "primavera en flor",
+    "05": "primavera/verano soleado",
+    "06": "verano caluroso y luminoso",
+    "07": "verano pleno, playa",
+    "08": "verano tardío",
+    "09": "otoño suave",
+    "10": "otoño con hojas caídas",
+    "11": "otoño frío, primeras nevadas",
+    "12": "invierno festivo navideño"
+  }
+}

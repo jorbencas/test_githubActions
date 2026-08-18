@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "description": "DB estática de herramientas de IA por categoría. Fallback cuando Gemini no está disponible.",
+    "count": 20
+  },
+  "tools": [
+    {"id": 1, "cat": "transcripcion", "tool": "OpenAI Whisper", "body": "Transcribe audio y vídeo a texto con precisión en decenas de idiomas. La base de casi todo pipeline de contenido.", "dific": 1, "workflow": "Whisper -> LLM (resumen) -> Obsidian", "combinaciones": ["second_brain", "llm_workflow"]},
+    {"id": 2, "cat": "video_gen", "tool": "Pika / Runway Gen", "body": "Genera clips de vídeo a partir de texto o imágenes. Ideal para B-roll automático.", "dific": 2, "workflow": "Prompt -> vídeo -> DAW para añadir audio", "combinaciones": ["audio_gen", "video_edit"]},
+    {"id": 3, "cat": "audio_tts", "tool": "ElevenLabs", "body": "Texto a voz ultra realista con clonación de voz para doblajes y audiolibros.", "dific": 1, "workflow": "Guion -> TTS -> podcast", "combinaciones": ["podcast_gen", "audio_edit"]},
+    {"id": 4, "cat": "subtitle_gen", "tool": "AutoSub / Whisper", "body": "Genera subtítulos sincronizados automáticamente desde el audio del vídeo.", "dific": 1, "workflow": "Vídeo -> subtítulos -> quemar en vídeo", "combinaciones": ["transcripcion", "video_edit"]},
+    {"id": 5, "cat": "n8n_ai", "tool": "n8n", "body": "Orquestador de automatizaciones en nodos que une APIs, bases de datos y LLMs. Se autohostea.", "dific": 2, "workflow": "Webhook -> LLM -> notificación -> DB", "combinaciones": ["llm_workflow", "workflow_gen"]},
+    {"id": 6, "cat": "make_ai", "tool": "Make", "body": "Plataforma visual de automatización para integrar cientos de apps sin código.", "dific": 1, "workflow": "Trigger -> Transformar -> Acción", "combinaciones": ["reporting_auto", "email_gen"]},
+    {"id": 7, "cat": "second_brain", "tool": "Obsidian + IA", "body": "Grafos de notas donde cada concepto se enlaza; plugins de IA dan resúmenes y conexiones ocultas.", "dific": 2, "workflow": "Nota -> enlace bidireccional -> grafo -> resumen IA", "combinaciones": ["mindmap", "unir_conceptos"]},
+    {"id": 8, "cat": "tutor_ai", "tool": "ChatGPT / Claude como tutor", "body": "Convierte cualquier tema en sesiones de estudio: explica, hace preguntas y evalúa.", "dific": 1, "workflow": "Tema -> tutor -> quiz -> repaso", "combinaciones": ["exam_prep", "flashcards_ai"]},
+    {"id": 9, "cat": "img_gen", "tool": "Stable Diffusion / Flux", "body": "Genera imágenes desde texto con control fino de estilo, composición y prompts negativos.", "dific": 2, "workflow": "Prompt -> imagen -> upscale -> edición", "combinaciones": ["img_upscale", "comfyui"]},
+    {"id": 10, "cat": "gpt_api", "tool": "GPT / Gemini / Claude APIs", "body": "APIs para generar, resumir, clasificar y transformar texto de forma programática.", "dific": 2, "workflow": "Input -> API -> JSON -> app", "combinaciones": ["llm_workflow", "api_ai"]},
+    {"id": 11, "cat": "zapier_ai", "tool": "Zapier", "body": "Automatiza tareas entre apps web mediante triggers y acciones sin servidor.", "dific": 1, "workflow": "Gmail -> Zap -> Drive -> Slack", "combinaciones": ["email_gen", "notificaciones_ai"]},
+    {"id": 12, "cat": "code_gen", "tool": "GitHub Copilot / Cursor", "body": "Autocompleta y genera código dentro del editor con contexto del proyecto completo.", "dific": 1, "workflow": "Contexto -> sugerencia -> review", "combinaciones": ["code_review", "code_refactor"]},
+    {"id": 13, "cat": "estudiar", "tool": "Anki + flashcards IA", "body": "Repaso espaciado generado automáticamente desde apuntes o PDFs para retener a largo plazo.", "dific": 1, "workflow": "PDF -> tarjetas -> repaso diario", "combinaciones": ["repaso_espaciado", "resumen_auto"]},
+    {"id": 14, "cat": "video_edit", "tool": "CapCut / Descript", "body": "Edición de vídeo con IA: recorte por texto, eliminación de sonidos y arreglo de audio.", "dific": 1, "workflow": "Vídeo -> editar por transcripción -> exportar", "combinaciones": ["transcripcion", "video_caption"]},
+    {"id": 15, "cat": "comfyui", "tool": "ComfyUI", "body": "Entorno por nodos para construir flujos avanzados de imágenes y vídeo con modelos de IA.", "dific": 3, "workflow": "Nodos -> modelo -> pipeline -> imagen/vídeo", "combinaciones": ["img_gen", "controlnet"]},
+    {"id": 16, "cat": "translation_ai", "tool": "DeepL API", "body": "Traducción de alta calidad entre idiomas, con control de tono y glosarios.", "dific": 1, "workflow": "Documento -> traducir -> revisar", "combinaciones": ["translation_ai", "docs_ai"]},
+    {"id": 17, "cat": "powerpoint_ai", "tool": "Gamma / Tome", "body": "Genera presentaciones completas a partir de un texto o idea, con diseño automático.", "dific": 1, "workflow": "Tema -> diapositivas -> exportar PDF", "combinaciones": ["powerpoint_ai", "resumen_auto"]},
+    {"id": 18, "cat": "vector_db", "tool": "Pinecone / pgvector", "body": "Almacena embeddings para búsqueda semántica y memoria de largo plazo en apps de IA.", "dific": 2, "workflow": "Documentos -> embeddings -> consulta", "combinaciones": ["embeddings", "retrieval_rag"]},
+    {"id": 19, "cat": "agentes", "tool": "LangGraph / LlamaIndex agents", "body": "Construye agentes y workflows con herramientas y memoria sobre LLMs.", "dific": 3, "workflow": "Agente -> tool -> memoria -> respuesta", "combinaciones": ["llm_workflow", "agentes"]},
+    {"id": 20, "cat": "img_edit", "tool": "Photoshop Firefly / ControlNet", "body": "Edición generativa de imágenes: ampliar, quitar elementos y recolorear con IA.", "dific": 2, "workflow": "Imagen -> control -> edición", "combinaciones": ["img_gen", "img_inpainting"]}
+  ]
+}
