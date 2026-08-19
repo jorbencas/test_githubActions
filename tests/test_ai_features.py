@@ -155,11 +155,12 @@ class TestSaludoImagen:
         from datetime import datetime
 
         prompt = _build_prompt(
-            "Buenos días", datetime(2026, 12, 25), "Navidad", "añevin, regalos",
+            "Buenos días", "Eres la luz que ilumina el día", datetime(2026, 12, 25), "Navidad", "añevin, regalos",
             "acuarela", "niños", "alegre", "la mañana", "invierno festivo",
         )
         assert "Navidad" in prompt
         assert "Buenos días" in prompt
+        assert "Eres la luz que ilumina el día" in prompt
         # el prompt debe prohibir explícitamente contenido de terror
         assert "NO terror" in prompt
         assert "horror" in prompt.lower()
@@ -168,9 +169,10 @@ class TestSaludoImagen:
         load_config()
         from datetime import datetime
 
-        p = _build_prompt("Buenas noches", datetime(2026, 12, 25), "Navidad",
+        p = _build_prompt("Buenas noches", "Eres la luz que ilumina mi noche", datetime(2026, 12, 25), "Navidad",
                           "árbol navideño", "cartoon", "mixto", "tierno", "navidad", "invierno")
         assert "árbol navideño" in p
+        assert "Eres la luz que ilumina mi noche" in p
 
 
 class TestSaludoFallback:
@@ -181,6 +183,17 @@ class TestSaludoFallback:
         assert data is not None
         # PNG magic number
         assert data[:8] == b"\x89PNG\r\n\x1a\n"
+
+    def test_superponer_texto_preserva_proporciones(self):
+        from scripts.saludo_imagen import fallback_pil, _superponer_texto
+
+        raw = fallback_pil("Buenas noches", "amigo")
+        out = _superponer_texto(raw, "Eres la luz que ilumina mi noche", "Buenas noches")
+        import io
+        from PIL import Image
+        img = Image.open(io.BytesIO(out))
+        assert abs(img.width / img.height - 1.0) < 0.01  # cuadrada, sin apaisar
+        assert img.width >= 256
 
     def test_fallback_pollinations_url_valida(self):
         import requests as _r

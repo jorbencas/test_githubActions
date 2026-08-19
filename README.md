@@ -280,6 +280,8 @@ Automated image greetings (Buenos días / Buenas noches) sent to Telegram every 
 - **AI-generated image** — Gemini 3 (Nano Banana 2, `gemini-3.1-flash-image`) via the Interactions API
 - **Time aware** — `SALUDOS_TZ_OFFSET` sets the local timezone offset for the "Buenos días" (5–12h) / "Buenas noches" window
 - **Variety** — 11 styles, 5 públicos, 6 emociones, 14 materias, 13 festivos, 12 temporadas from `saludos_config.json`, never repeats
+- **Inspiring phrases** — a daily motivational frase (día/noche) is drawn INSIDE the image, in the image's dominant color, plus the saludo below it; never repeats
+- **Square images** — 1:1 ratio for all sources (Gemini prompt, Pollinations `1024x1024`, PIL `1024x1024`), text overlay preserves proportions
 - **Fallback chain** — if Gemini fails (quota/429/error): tries **Pollinations.ai** (image from prompt, no registration/API key needed), then a **local PIL** image
 - **Send** — `SALUDO_CHAT_ID` (fallback `TIPS_CHAT_ID`, default `-1004296712840`)
 

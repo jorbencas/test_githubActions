@@ -1,7 +1,10 @@
 {
   "meta": {
     "description": "Config de saludos de imagen: temas, estilos, festivos y públicos. Sin contenido de terror.",
-    "saludos": ["Buenos días", "Buenas noches"]
+    "saludos": [
+      "Buenos días",
+      "Buenas noches"
+    ]
   },
   "estilos": {
     "acuarela": "estilo acuarela suave",
@@ -48,19 +51,58 @@
     "ave": "pájaros al amanecer"
   },
   "festivos": {
-    "01-01": ["Año Nuevo", "año nuevo, celebración"],
-    "14-02": ["San Valentín", "corazones, amor"],
-    "03-08": ["Día de la Mujer", "flores, empoderamiento"],
-    "04-01": ["Inocentes", "inocencia, bromas suaves"],
-    "06-01": ["Reyes Magos", "regalos, magia"],
-    "05-01": ["Día del Trabajo", "solidaridad"],
-    "10-31": ["Halloween suave", "calabazas alegres, nada terrorífico"],
-    "09-11": ["Víspera de Navidad", "árbol navideño, regalos"],
-    "12-25": ["Navidad", "familia, regalos, nieve"],
-    "12-31": ["Nochevieja", "fuego artificial, uvas, celebración"],
-    "12-06": ["Día de la Constitución (ES)", "tradición española"],
-    "12-08": ["Inmaculada (ES)", "tradición"],
-    "07-06": ["Año nuevo peruano (mezcla)", "celebración"]
+    "01-01": [
+      "Año Nuevo",
+      "año nuevo, celebración"
+    ],
+    "14-02": [
+      "San Valentín",
+      "corazones, amor"
+    ],
+    "03-08": [
+      "Día de la Mujer",
+      "flores, empoderamiento"
+    ],
+    "04-01": [
+      "Inocentes",
+      "inocencia, bromas suaves"
+    ],
+    "06-01": [
+      "Reyes Magos",
+      "regalos, magia"
+    ],
+    "05-01": [
+      "Día del Trabajo",
+      "solidaridad"
+    ],
+    "10-31": [
+      "Halloween suave",
+      "calabazas alegres, nada terrorífico"
+    ],
+    "09-11": [
+      "Víspera de Navidad",
+      "árbol navideño, regalos"
+    ],
+    "12-25": [
+      "Navidad",
+      "familia, regalos, nieve"
+    ],
+    "12-31": [
+      "Nochevieja",
+      "fuego artificial, uvas, celebración"
+    ],
+    "12-06": [
+      "Día de la Constitución (ES)",
+      "tradición española"
+    ],
+    "12-08": [
+      "Inmaculada (ES)",
+      "tradición"
+    ],
+    "07-06": [
+      "Año nuevo peruano (mezcla)",
+      "celebración"
+    ]
   },
   "temporadas": {
     "01": "invierno con nieve y abrigos",
@@ -75,5 +117,26 @@
     "10": "otoño con hojas caídas",
     "11": "otoño frío, primeras nevadas",
     "12": "invierno festivo navideño"
+  },
+  "frases": {
+    "dias": [
+      "Eres la luz que ilumina el día",
+      "Tu sonrisa hace el mundo mejor",
+      "Hoy es un regalo, vívelo",
+      "Confía en ti, lo lograrás",
+      "Cada mañana te acerca a tus sueños",
+      "Que tu luz brille hoy con fuerza"
+    ],
+    "noches": [
+      "Eres la luz que ilumina mi noche",
+      "Descansa, mañana todo brilla",
+      "Que tus sueños te acompañen",
+      "Eres más fuerte de lo que crees",
+      "Cierra los ojos y sonríe",
+      "Brillaré contigo esta noche"
+    ],
+    "notas": [
+      "Con cariño para ti"
+    ]
   }
 }

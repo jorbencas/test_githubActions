@@ -88,7 +88,101 @@ def _pick(key_list, history_keys, config_key):
     return random.choice(available)
 
 
-def _build_prompt(saludo, now, festivo_nombre, festivo_temas, estilo, publico, emocion, materia, temporada):
+def _pick_frase(saludo, history_keys):
+    """Elige una frase inspiradora nueva (sin repetir) según el momento del día."""
+    franja = "dias" if "Buenos días" in saludo else "noches"
+    lista = CONFIG["frases"].get(franja, [])
+    disponibles = [f for f in lista if f"frase:{f}" not in history_keys]
+    if not disponibles:
+        disponibles = list(lista)
+    return random.choice(disponibles)
+
+
+def _color_texto(img):
+    """Color del texto en función del tono medio de la imagen.
+
+    Calcula la luminosidad media y devuelve un color de alto contraste que
+    armoniza con la imagen (texto claro sobre fondos oscuros y viceversa).
+    """
+    try:
+        from PIL import ImageStat
+        stat = ImageStat.Stat(img.convert("RGB"))
+        r, g, b = stat.mean
+        lum = 0.299 * r + 0.587 * g + 0.114 * b
+        if lum > 150:
+            return (30, 40, 60)      # texto oscuro sobre imagen clara
+        return (255, 255, 255)       # texto claro sobre imagen oscura
+    except Exception:
+        return (255, 255, 255)
+
+
+def _superponer_texto(img_bytes, frase, saludo):
+    """Dibuja el texto de la frase DENTRO de la imagen, con el color de la
+    imagen y respetando sus proporciones originales (no la distorsiona).
+
+    Devuelve bytes de la imagen con el texto sobrepuesto."""
+    try:
+        from PIL import Image, ImageDraw, ImageFont
+    except ImportError:
+        return img_bytes
+    try:
+        import io
+        img = Image.open(io.BytesIO(img_bytes)).convert("RGB")
+
+        color = _color_texto(img)
+        sombra = (0, 0, 0, 160)
+
+        w, h = img.size
+        # Fuente proporcional a la imagen, sin estirar
+        tam = max(28, int(min(w, h) * 0.07))
+        font = None
+        for f in ("DejaVuSans-Bold.ttf", "Arial.ttf", "FreeSans.ttf"):
+            try:
+                font = ImageFont.truetype(f, tam)
+                break
+            except Exception:
+                continue
+        if font is None:
+            font = ImageFont.load_default()
+
+        draw = ImageDraw.Draw(img, "RGBA")
+        # Líneas: frase grande, saludo más pequeño debajo
+        lineas = [
+            (frase, 1.0),
+            (saludo, 0.7),
+        ]
+        ys = []
+        total_h = 0
+        for texto, fac in lineas:
+            f = font.font_variant(size=int(tam * fac)) if hasattr(font, "font_variant") else font
+            bbox = draw.textbbox((0, 0), texto, font=f)
+            tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
+            total_h += th + (10 if texto != lineas[-1][0] else 0)
+            ys.append((texto, f, tw, th))
+
+        margen = max(20, int(h * 0.05))
+        y = margen if not _texto_peligra(margen, total_h, h) else int(h / 2) - total_h // 2
+        for texto, f, tw, th in ys:
+            x = (w - tw) // 2
+            # sombra
+            draw.text((x + 2, y + 2), texto, font=f, fill=sombra)
+            draw.text((x, y), texto, font=f, fill=color)
+            y += th + 10
+
+        buf = io.BytesIO()
+        img.save(buf, format="PNG")
+        return buf.getvalue()
+    except Exception as e:
+        print(f"⚠️  Error superponiendo texto: {e}")
+        return img_bytes
+
+
+def _texto_peligra(margen, total_h, h):
+    """El texto cabe dentro de la imagen sin llegar ni al borde superior ni inferior."""
+    return margen < 10 or total_h > h - margen * 2
+
+
+def _build_prompt(saludo, frase, now, festivo_nombre, festivo_temas, estilo, publico, emocion, materia, temporada):
     fecha_legible = now.strftime("%A %d de %B").capitalize()
     contexto = f"Celebramos {festivo_nombre} ({festivo_temas})." if festivo_nombre else f"Es temporada de {temporada}."
     return (
@@ -97,8 +191,11 @@ def _build_prompt(saludo, now, festivo_nombre, festivo_temas, estilo, publico, e
         f"Estilo: {estilo}. "
         f"Atmósfera: {contexto} "
         f"Día: {fecha_legible}. "
-        f"Incluye en la imagen el texto claro y legible: '{saludo}'. "
+        f"Decoración tipográfica integrada en la imagen, EN ESPAÑOL, con el texto "
+        f"legible y bien encajado en la composición, en dos líneas: "
+        f"arriba la frase \"{frase}\" y debajo \"{saludo}\". "
         f"Que sea cálida, positiva y acogedora. NO terror, NO horror, NO sangre, NO nada inquietante."
+        f" La imagen debe ser CUADRADA (1:1)."
     )
 
 
@@ -168,7 +265,7 @@ def fallback_pollinations(saludo, publico, materia):
         url = (
             "https://image.pollinations.ai/prompt/"
             + requests.utils.quote(prompt)
-            + "?width=1024&height=576&model=flux&nologo=true&seed=42"
+            + "?width=1024&height=1024&model=flux&nologo=true&seed=42"
         )
         resp = requests.get(url, timeout=90)
         if resp.status_code != 200:
@@ -193,7 +290,7 @@ def fallback_pil(saludo, publico):
         print("⚠️  Pillow no instalado; sin fallback local.")
         return None
     try:
-        w, h = 1280, 720
+        w, h = 1024, 1024
         img = Image.new("RGB", (w, h), "#1e3a8a")
         draw = ImageDraw.Draw(img)
         for i in range(h):
@@ -292,9 +389,11 @@ def main():
     publico = _pick("publicos", history_keys, "publico")
     emocion = _pick("emociones", history_keys, "emocion")
     materia = _pick("materias", history_keys, "materia")
+    frase = _pick_frase(saludo, history_keys)
 
     print(f"📅 Fecha local: {now.isoformat()} (offset {TZ_OFFSET}h)")
     print(f"👋 Saludo: {saludo}")
+    print(f"💬 Frase: {frase}")
     if festivo_nombre:
         print(f"🎉 Festivo detectado: {festivo_nombre}")
     print(f"🎨 {estilo} + {publico} + {emocion} + {materia}")
@@ -303,7 +402,7 @@ def main():
         materia = festivo_temas
 
     prompt = _build_prompt(
-        saludo, now, festivo_nombre, festivo_temas, estilo, publico, emocion, materia, temporada
+        saludo, frase, now, festivo_nombre, festivo_temas, estilo, publico, emocion, materia, temporada
     )
 
     image_bytes = generate_image(prompt)
@@ -320,6 +419,10 @@ def main():
         print("❌ No se pudo generar la imagen con ninguna fuente.")
         sys.exit(1)
 
+    # Garantiza que el texto (frase + saludo) quede DENTRO de la imagen,
+    # en el color de la misma y sin distorsionar sus proporciones.
+    image_bytes = _superponer_texto(image_bytes, frase, saludo)
+
     if dry_run:
         print("\n--- VISTA PREVIA (dry-run) ---")
         print(f"Prompt: {prompt}")
@@ -327,11 +430,11 @@ def main():
         print("--- FIN VISTA PREVIA ---")
         return
 
-    caption = f"{saludo}! ☀️🌙\nCon cariño para ti {publico}."
+    caption = f"{frase} 📖✨\n{saludo}! {publico}."
     print(f"🎨 Fuente de imagen: {fuente}")
     if send_photo(image_bytes, caption):
         for k in (f"estilo:{estilo}", f"publico:{publico}",
-                  f"emocion:{emocion}", f"materia:{materia}"):
+                  f"emocion:{emocion}", f"materia:{materia}", f"frase:{frase}"):
             history.setdefault("keys", []).append(k)
         history["keys"] = history["keys"][-HISTORY_MAX:]
         history["last_run"] = now.isoformat()
