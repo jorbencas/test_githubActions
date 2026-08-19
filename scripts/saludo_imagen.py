@@ -33,7 +33,7 @@ HISTORY_MAX = 30
 BOT_TOKEN = os.environ.get("TIPS_BOT_TOKEN", "")
 CHAT_ID = os.environ.get("SALUDO_CHAT_ID", os.environ.get("TIPS_CHAT_ID", "-1004296712840"))
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
-TZ_OFFSET = float(os.environ.get("SALUDOS_TZ_OFFSET", "0"))
+TZ_OFFSET = float((os.environ.get("SALUDOS_TZ_OFFSET") or "").strip() or "0")
 
 MODELO_IMAGEN = "gemini-3.1-flash-image"   # Nano Banana 2
 
