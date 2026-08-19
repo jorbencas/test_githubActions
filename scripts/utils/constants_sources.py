@@ -407,7 +407,7 @@ FUENTES = {
     "Business Insider Big Tech": {"rss": "https://www.businessinsider.es/rss/big-tech/", "url": "https://www.businessinsider.es/big-tech/", "selector": "article h2 a", "quick": True, "tipo": "noticia"},
     "Business Insider Tecnología": {"rss": "https://www.businessinsider.es/rss/tecnologia/", "url": "https://www.businessinsider.es/tecnologia/", "selector": "article h2 a", "quick": True, "tipo": "noticia"},
     "Hipertextual": {"rss": "https://hipertextual.com/feed/", "quick": True},
-    "ADSL Zone": {"rss": "https://www.adslzone.net/feed", "url": "https://www.adslzone.net/", "selector": "article h2 a", "quick": True, "solo_tech": True},
+    "ADSL Zone": {"rss": "https://www.adslzone.net/feed", "url": "https://www.adslzone.net/", "selector": "article h2 a", "quick": True, "tipo": "noticia", "solo_tech": True},
     "MuyComputer": {"rss": "https://www.muycomputer.com/feed/", "quick": True},
     "The Verge": {"rss": "https://www.theverge.com/rss/index.xml", "quick": True},
     "TechCrunch": {"rss": "https://techcrunch.com/feed/", "quick": True},

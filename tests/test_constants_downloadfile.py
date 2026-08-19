@@ -35,6 +35,17 @@ class TestFuentesStructure:
             found = any(name.lower() in k.lower() for k in FUENTES.keys())
             assert found, f"Chinese AI source '{name}' not found"
 
+    def test_adsl_zone_solo_tech(self):
+        adsl = next((v for k, v in FUENTES.items() if k == "ADSL Zone"), None)
+        assert adsl is not None, "ADSL Zone no encontrado"
+        assert adsl.get("solo_tech") is True, "ADSL Zone debe tener solo_tech=True"
+        assert "rss" in adsl, "ADSL Zone debe tener rss"
+        assert adsl.get("quick") is True, "ADSL Zone debe seguir siendo quick"
+
+    def test_single_adsl_zone_entry(self):
+        names = [k for k in FUENTES if k == "ADSL Zone"]
+        assert len(names) == 1, "ADSL Zone no debe estar duplicado"
+
 
 class TestEmailTemplates:
     def test_email_template_has_placeholders(self):
