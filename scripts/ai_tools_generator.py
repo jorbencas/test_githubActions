@@ -173,10 +173,12 @@ def build_gemini_prompt(categories, sent_titles, news, tools):
 4. Cada herramienta debe tener UNA sola idea clara y concreta
 5. Incluye SIEMPRE el campo "workflow": una cadena que muestre cómo se aplica (ej. "Transcripción -> LLM resumen -> Obsidian")
 6. Incluye SIEMPRE el campo "combinaciones": array de 2-5 categorías del listado total con las que encaja
-7. Todo en ESPAÑOL correcto
-8. NUNCA uses emojis en los campos "tool" ni "body"
-9. Usa nombres de herramientas reales y conocidas (respeta la clave exacta de categoría)
-10. Varía dificultad: 1=básico, 2=intermedio, 3=avanzado
+7. Incluye SIEMPRE el campo "url": enlace web OFICIAL de la herramienta (https://...)
+8. Incluye SIEMPRE el campo "restricciones": una frase corta con las limitaciones o requisitos clave (plan gratuito, hardware, coste, curva de aprendizaje)
+9. Todo en ESPAÑOL correcto
+10. NUNCA uses emojis en los campos "tool" ni "body"
+11. Usa nombres de herramientas reales y conocidas (respeta la clave exacta de categoría)
+12. Varía dificultad: 1=básico, 2=intermedio, 3=avanzado
 
 === LISTADO TOTAL DE CATEGORÍAS (usa estas claves exactas en "cat" y en "combinaciones") ===
 {', '.join(sorted(ALL_CATEGORIES))}
@@ -188,12 +190,14 @@ def build_gemini_prompt(categories, sent_titles, news, tools):
   "body": "Transcribe audio y vídeo a texto con alta precisión. Es la base de los pipelines de contenido audiovisual.",
   "workflow": "Whisper -> LLM resumen -> Obsidian",
   "combinaciones": ["second_brain", "video_edit", "llm_workflow"],
+  "url": "https://openai.com/whisper",
+  "restricciones": "Modelo abierto; necesita GPU o cola de API para timings largos.",
   "dific": 1
 }}
 
 === RESPUESTA ===
 SOLO el JSON array, sin markdown, sin texto adicional:
-[{{"cat": "...", "tool": "...", "body": "...", "workflow": "...", "combinaciones": [...], "dific": 1}}, ...]"""
+[{{"cat": "...", "tool": "...", "body": "...", "workflow": "...", "combinaciones": [...], "url": "https://...", "restricciones": "...", "dific": 1}}, ...]"""
 
 
 def generate_tools_gemini(count, categories, sent_titles):
@@ -234,6 +238,8 @@ def generate_tools_gemini(count, categories, sent_titles):
                     if t["cat"] in CAT_EMOJI:
                         t.setdefault("workflow", "")
                         t.setdefault("combinaciones", [])
+                        t.setdefault("url", "")
+                        t.setdefault("restricciones", "")
                         t.setdefault("dific", 1)
                         valid.append(t)
             if valid:
@@ -277,18 +283,24 @@ def format_tool_message(tool, index):
     body = tool.get("body", "")
     workflow = tool.get("workflow", "")
     combos = tool.get("combinaciones", [])
+    url = tool.get("url", "")
+    restricciones = tool.get("restricciones", "")
 
     header = f"{index}. {_cat_label(cat)} • {tool_name}"
 
     parts = [header]
     if body:
         parts.append(body)
+    if url:
+        parts.append(f"🔗 {url}")
     if workflow:
         parts.append(f"⚙️ Flujo: {workflow}")
     if combos:
         labels = ", ".join(CAT_NAMES.get(c, c) for c in combos if c in CAT_EMOJI)
         if labels:
             parts.append(f"🔗 Combina con: {labels}")
+    if restricciones:
+        parts.append(f"⚠️ Ojo: {restricciones}")
 
     return "\n".join(parts)
 

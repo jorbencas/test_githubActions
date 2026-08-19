@@ -157,6 +157,79 @@ def generate_image(prompt):
         return None
 
 
+def fallback_pollinations(saludo, publico, materia):
+    """Genera la imagen con Pollinations.ai (flux). SIN registro ni API key.
+
+    Es una simple petición GET con el prompt en la URL. El límite anónimo
+    (1 petición/15s) sobra para un envío cada 3 horas.
+    Devuelve bytes JPEG o None si hay error."""
+    try:
+        prompt = f"{saludo}, {materia}, ilustración cálida y acogedora, en español, estilo cartoon"
+        url = (
+            "https://image.pollinations.ai/prompt/"
+            + requests.utils.quote(prompt)
+            + "?width=1024&height=576&model=flux&nologo=true&seed=42"
+        )
+        resp = requests.get(url, timeout=90)
+        if resp.status_code != 200:
+            print(f"❌ Pollinations ({resp.status_code}): {resp.text[:120]}")
+            return None
+        if not resp.content or resp.content[:2] != b"\xff\xd8":
+            print("⚠️  Pollinations no devolvió una imagen JPEG válida.")
+            return None
+        print(f"✅ Imagen generada con Pollinations.ai ({len(resp.content)} bytes)")
+        return resp.content
+    except Exception as e:
+        print(f"⚠️  Error con Pollinations: {e}")
+        return None
+
+
+def fallback_pil(saludo, publico):
+    """Genera una imagen simple con PIL: texto del saludo sobre degradado.
+    Infalible: no depende de APIs externas ni cuotas."""
+    try:
+        from PIL import Image, ImageDraw, ImageFont
+    except ImportError:
+        print("⚠️  Pillow no instalado; sin fallback local.")
+        return None
+    try:
+        w, h = 1280, 720
+        img = Image.new("RGB", (w, h), "#1e3a8a")
+        draw = ImageDraw.Draw(img)
+        for i in range(h):
+            r = int(30 + (20 + 60 * i / h))
+            g = int(58 + (20 + 40 * i / h))
+            b = int(138 + (80 + 30 * i / h))
+            draw.line([(0, i), (w, i)], fill=(min(r, 255), min(g, 255), min(b, 255)))
+        font = None
+        for f in ("DejaVuSans-Bold.ttf", "Arial.ttf", "FreeSans.ttf"):
+            try:
+                font = ImageFont.truetype(f, 72)
+                break
+            except Exception:
+                continue
+        if font is None:
+            font = ImageFont.load_default()
+        text = f"{saludo}!\nCon cariño para ti {publico}."
+        lines = text.splitlines()
+        line_h = 100
+        total = line_h * len(lines)
+        y = (h - total) // 2
+        for line in lines:
+            bbox = draw.textbbox((0, 0), line, font=font)
+            tw = bbox[2] - bbox[0]
+            draw.text(((w - tw) // 2, y), line, fill="white", font=font)
+            y += line_h
+        import io
+        buf = io.BytesIO()
+        img.save(buf, format="PNG")
+        print(f"✅ Imagen local generada con PIL ({len(buf.getvalue())} bytes)")
+        return buf.getvalue()
+    except Exception as e:
+        print(f"⚠️  Error generando imagen local: {e}")
+        return None
+
+
 def send_photo(image_bytes, caption):
     if not BOT_TOKEN or not CHAT_ID:
         print("⚠️  TIPS_BOT_TOKEN o TIPS_CHAT_ID no configurados.")
@@ -234,18 +307,28 @@ def main():
     )
 
     image_bytes = generate_image(prompt)
+    fuente = "gemini"
     if not image_bytes:
-        print("❌ No se pudo generar la imagen.")
+        print("⚠️  Gemini falló; probando fallback Pollinations (sin registro)...")
+        image_bytes = fallback_pollinations(saludo, publico, materia)
+        fuente = "pollinations"
+    if not image_bytes:
+        print("⚠️  Pollinations falló; probando fallback PIL local...")
+        image_bytes = fallback_pil(saludo, publico)
+        fuente = "pil"
+    if not image_bytes:
+        print("❌ No se pudo generar la imagen con ninguna fuente.")
         sys.exit(1)
 
     if dry_run:
         print("\n--- VISTA PREVIA (dry-run) ---")
         print(f"Prompt: {prompt}")
-        print(f"Imagen generada: {len(image_bytes)} bytes")
+        print(f"Imagen generada: {len(image_bytes)} bytes (fuente: {fuente})")
         print("--- FIN VISTA PREVIA ---")
         return
 
     caption = f"{saludo}! ☀️🌙\nCon cariño para ti {publico}."
+    print(f"🎨 Fuente de imagen: {fuente}")
     if send_photo(image_bytes, caption):
         for k in (f"estilo:{estilo}", f"publico:{publico}",
                   f"emocion:{emocion}", f"materia:{materia}"):

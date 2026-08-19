@@ -63,6 +63,7 @@ class TestAiToolsDatabase:
             assert tool["cat"] in cats, f"{tool['tool']} cat inválido: {tool['cat']}"
             assert "body" in tool and "dific" in tool
             assert "workflow" in tool and "combinaciones" in tool
+            assert tool.get("url", "").startswith("http"), f"{tool['tool']} sin url válida"
             ids.append(tool["id"])
         assert len(ids) == len(set(ids)), "ids duplicados"
 
@@ -86,17 +87,38 @@ class TestAiToolsGenerator:
             "body": "Transcribe.",
             "workflow": "A -> B -> C",
             "combinaciones": ["second_brain", "video_edit"],
+            "url": "https://openai.com/whisper",
+            "restricciones": "Requiere GPU.",
         }
         msg = format_tool_message(tool, 1)
         assert "Whisper" in msg
         assert "Flujo" in msg and "A -> B -> C" in msg
         assert "Combina" in msg
+        assert "https://openai.com/whisper" in msg
+        assert "Ojo" in msg and "Requiere GPU." in msg
+
+    def test_format_tool_message_sin_url_omite_enlace(self):
+        tool = {
+            "cat": "transcripcion",
+            "tool": "Whisper",
+            "body": "Transcribe.",
+            "workflow": "A -> B",
+            "combinaciones": [],
+        }
+        msg = format_tool_message(tool, 1)
+        assert "🔗" not in msg
 
     def test_build_prompt_estricto(self):
         prompt = build_gemini_prompt(["transcripcion", "img_gen"], ["ya env"], [], [])
         assert "EXACTAMENTE" in prompt
         assert "transcripcion" in prompt
         assert "ya env" in prompt
+        assert "restricciones" in prompt
+
+    def test_database_tools_tienen_restricciones(self):
+        db = json.loads(AI_DB_PATH.read_text(encoding="utf-8"))
+        for tool in db["tools"]:
+            assert tool.get("restricciones", "").strip(), f"{tool['tool']} sin restricciones"
 
     def test_mix_tools_respeta_total(self):
         g = [{"tool": f"g{i}", "cat": "x"} for i in range(3)]
@@ -149,3 +171,22 @@ class TestSaludoImagen:
         p = _build_prompt("Buenas noches", datetime(2026, 12, 25), "Navidad",
                           "árbol navideño", "cartoon", "mixto", "tierno", "navidad", "invierno")
         assert "árbol navideño" in p
+
+
+class TestSaludoFallback:
+    def test_fallback_pil_genera_png(self):
+        from scripts.saludo_imagen import fallback_pil
+
+        data = fallback_pil("Buenos días", "amigo")
+        assert data is not None
+        # PNG magic number
+        assert data[:8] == b"\x89PNG\r\n\x1a\n"
+
+    def test_fallback_pollinations_url_valida(self):
+        import requests as _r
+        from scripts.saludo_imagen import fallback_pollinations
+
+        data = fallback_pollinations("Buenos días", "amigo", "cafe")
+        # puede fallar por red, pero si devuelve algo debe ser JPEG
+        if data is not None:
+            assert data[:2] == b"\xff\xd8"

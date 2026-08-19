@@ -14,6 +14,8 @@
 ![Resources](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_resources.yml?branch=master&style=flat-square&label=Resources&logo=github)
 ![Email](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/send_email_workflow.yml?branch=master&style=flat-square&label=Email&logo=github)
 ![Telegram](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/send_telegram_workflow.yml?branch=master&style=flat-square&label=Telegram&logo=github)
+![Saludos](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_saludo.yml?branch=master&style=flat-square&label=Saludos&logo=github)
+![AI Tools](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_ai_tools.yml?branch=master&style=flat-square&label=AI%20Tools&logo=github)
 ![Cleanup](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/clean_news.yml?branch=master&style=flat-square&label=Cleanup&logo=github)
 ![Challenges](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/hunt_challenges.yml?branch=master&style=flat-square&label=Challenges&logo=github)
 ![Optimize](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/optimize_images.yml?branch=master&style=flat-square&label=Optimize&logo=github)
@@ -28,13 +30,14 @@ Automated tech news ecosystem. Collects from **515 sources** (158 YouTube channe
 
 ## 📋 Overview
 
-This project runs **12 GitHub Actions workflows** that form a fully automated content pipeline:
+This project runs **13 GitHub Actions workflows** that form a fully automated content pipeline:
 
 1. **Scrape** — news and tools from 515 sources (158 YouTube channels, 151 RSS feeds, 107 web scraping, 89 GitHub Topics); 4 dual sources extract from both YouTube AND web scraping
 2. **Process** — AI summarization with Gemini, news grouped by source, automatic translation (only new items), image generation, deduplication, summaries persisted in JSON
 3. **Publish** — weekly recaps with source grouping, dashboard (SSR), email newsletter with video section, Telegram notifications (news only, no videos)
 4. **Manage** — resource lists, challenges, image optimization, link validation, SEO dedup
 5. **Tips** — daily IT tips sent via Telegram, mixing Gemini-generated tips with a static database (399 tips) never repeated
+6. **Saludos** — hourly image greetings (Buenos días / Buenas noches) sent via Telegram with AI-generated image and fallback chain (Gemini → Unsplash → PIL)
 
 ---
 
@@ -95,15 +98,21 @@ scripts/
     ├── solutions_db.py            Lookup + solution generation
     └── solutions_data.py          105+ curated solutions in 12 languages
 ├── tips_generator.py         💡 Daily IT tips (Gemini + DB fallback, nunca repite)
+├── ai_tools_generator.py     🛠️  AI tools (Gemini + DB fallback, 150 categorías)
+├── saludo_imagen.py          🌅 Imagen de saludo diario (Gemini → Unsplash → PIL fallback)
 ├── backfill_traducido.py    🔄 One-time migration (mark 6,612 items as translated)
 └── utils/
     ├── tips_database.json         399 tips (con estructura ❌/✅ mala/buena práctica)
+    ├── ai_categories.json         150 categorías de herramientas IA
+    ├── ai_tools_database.json     20 herramientas IA con combinaciones
+    ├── saludos_config.json        Estilos/públicos/emociones/materias/festivos
     └── constants_sources.py       Fuentes de scraping (+ OpenCode, Claude Help Center)
-tests/                    ✅ pytest test suite (117 tests)
+tests/                    ✅ pytest test suite (134 tests)
 ├── test_cache.py / test_constants_downloadfile.py
 ├── test_constants_retos.py / test_fix_images.py
 ├── test_manage_resources.py / test_solutions_db.py
-└── test_utils.py
+├── test_ai_features.py / test_utils.py
+└── test_solutions_db.py
 ```
 
 ---
@@ -153,16 +162,33 @@ All scripts run with `python -m` from the project root:
 | `python scripts/tips_generator.py --list-categories` | Lista las categorías de tips |
 | `python scripts/tips_generator.py --stats` | Estadísticas de la base de tips |
 
+### 🛠️ AI Tools
+
+| Command | Description |
+|---------|-------------|
+| `python scripts/ai_tools_generator.py` | Envía herramienta IA por Telegram |
+| `python scripts/ai_tools_generator.py --dry-run` | Previsualiza sin enviar |
+| `python scripts/ai_tools_generator.py --list-categories` | Lista las 150 categorías |
+| `python scripts/ai_tools_generator.py --stats` | Estadísticas de la base |
+
+### 🌅 Saludos
+
+| Command | Description |
+|---------|-------------|
+| `python scripts/saludo_imagen.py` | Genera y envía imagen de saludo |
+| `python scripts/saludo_imagen.py --dry-run` | Solo genera, no envía |
+| `python scripts/saludo_imagen.py --list-config` | Muestra la configuración disponible |
+
 ### ✅ Testing
 
 | Command | Description |
 |---------|-------------|
-| `python -m pytest tests/ -v` | Run all tests (117 tests) |
+| `python -m pytest tests/ -v` | Run all tests (134 tests) |
 | `python -m pytest tests/test_solutions_db.py -v` | Run specific test suite |
 
 ---
 
-## 🤖 GitHub Actions — 12 Workflows
+## 🤖 GitHub Actions — 14 Workflows
 
 | Workflow | Schedule / Trigger | Pipeline |
 |----------|-------------------|----------|
@@ -171,13 +197,15 @@ All scripts run with `python -m` from the project root:
 | **scrape_6h** | Every 6 hours | Standard scrape |
 | **daily_resources** | Daily 06:00 UTC | Tools scrape + resources.mdx management |
 | **daily_tips** | Every 3 hours | IT tips via Telegram (Gemini + DB, nunca repite) |
+| **daily_ai_tools** | Every 3 hours | Herramientas IA via Telegram (Gemini + DB, 150 categorías) |
+| **daily_saludo** | Every 3 hours | Imagen de saludo (Gemini → Unsplash → PIL fallback) |
 | **send_email** | Daily 09:00 UTC | Mailgun newsletter (grouped by source + videos) |
 | **send_telegram** | Every 30 min | Telegram + TTS (GitHub Actions Cache for dedup) |
 | **clean_news** | Quarterly | Link health check |
 | **hunt_challenges** | Weekly (Sun) | AI challenge generation |
 | **optimize_images** | Dispatch from blog | Image optimization for blog |
 | **dashboard_update** | Push (JS/CSS/Python/data) | Regenerate + deploy dashboard |
-| **tests** | Push/PR to master | pytest (117 tests) |
+| **tests** | Push/PR to master | pytest (134 tests) |
 
 ### Workflow Architecture
 
@@ -214,7 +242,9 @@ All scripts run with `python -m` from the project root:
 │  hunt_challenges  →  weekly      →  AI challenges                  │
 │  optimize_images  →  dispatch    →  image optimization             │
 │  daily_tips      →  every 3h   →  tips IT (Gemini + DB)           │
-│  tests            →  on push     →  117 pytest tests               │
+│  daily_ai_tools  →  every 3h   →  herramientas IA (Gemini + DB)   │
+│  daily_saludo    →  every 3h   →  imagen saludo + fallback        │
+│  tests            →  on push     →  134 pytest tests               │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -229,6 +259,29 @@ Automated daily IT tips sent to Telegram every 3 hours via `tips_generator.py`:
 - **Never repeats** — tracks sent titles in `tips_history.json` (persisted via GitHub Actions Cache)
 - **Mala/Buena práctica** — practical tips include a structured `❌ Mala práctica / ✅ Buena práctica` contrast
 - **Exhaustion recovery** — when the DB is exhausted, Gemini generates the full batch
+
+---
+
+## 🛠️ AI Tools
+
+Automated AI tools sent to Telegram every 3 hours via `ai_tools_generator.py`:
+
+- **Gemini generation** — Gemini generates fresh tools, falling back to a static database of 20 curated tools with `workflow` and `combinaciones`
+- **150 categories** — categorized in `ai_categories.json` for varied selection
+- **Complete format** — each tool includes: clear name, what it's for, official website link (`url`), workflow, possible integrations (`combinaciones`), and key restrictions/caveats (`restricciones`)
+- **Never repeats** — tracks sent tools in `ai_tools_history.json` (persisted via GitHub Actions Cache)
+
+---
+
+## 🌅 Saludos
+
+Automated image greetings (Buenos días / Buenas noches) sent to Telegram every 3 hours via `saludo_imagen.py`:
+
+- **AI-generated image** — Gemini 3 (Nano Banana 2, `gemini-3.1-flash-image`) via the Interactions API
+- **Time aware** — `SALUDOS_TZ_OFFSET` sets the local timezone offset for the "Buenos días" (5–12h) / "Buenas noches" window
+- **Variety** — 11 styles, 5 públicos, 6 emociones, 14 materias, 13 festivos, 12 temporadas from `saludos_config.json`, never repeats
+- **Fallback chain** — if Gemini fails (quota/429/error): tries **Pollinations.ai** (image from prompt, no registration/API key needed), then a **local PIL** image
+- **Send** — `SALUDO_CHAT_ID` (fallback `TIPS_CHAT_ID`, default `-1004296712840`)
 
 ---
 
@@ -300,18 +353,27 @@ Weekly recaps auto-archive old posts (>2 weeks) and enforce one-post-per-week SE
 | `MAILGUN_DOMAIN` | Mailgun domain |
 | `EMAIL_USER` | Destination email |
 | `BLOG_TOKEN` | Blog checkout token |
-| `UNSPLASH_ACCESS_KEY` | Unsplash API key |
+| `UNSPLASH_ACCESS_KEY` | Unsplash API key (fix_images) |
+| `SALUDO_CHAT_ID` | Chat/group ID para saludos (fallback: `TELEGRAM_CHAT_ID`) |
+| `AI_TOOLS_CHAT_ID` | Chat/group ID para herramientas IA (fallback: `TELEGRAM_CHAT_ID`) |
+
+Repository variables:
+
+| Variable | Description |
+|----------|-------------|
+| `SALUDOS_TZ_OFFSET` | Desfase horario en horas para el saludo (ej. `2` = CEST). Vacío/ausente → UTC |
 
 ---
 
 ## 🧪 Test Coverage
 
-117 pytest tests covering:
+134 pytest tests covering:
 - **Cache** — FileCache, CacheManager, expiration, TTL, flush cleanup
 - **Constants** — source configurations (515 sources), email templates, challenge templates
 - **Dual sources** — YouTube + web scraping extraction, chip rendering in both sections
 - **Email templates** — placeholders, source headers, video sections, button styles
 - **Image pipeline** — Unsplash fetching, Gemini banner gen, WebP/AVIF conversion
+- **AI features** — 150 categorías, DB tools, generador de herramientas IA, saludo por hora/festivos
 - **Resources** — pagination, cleanup, reordering, card management, cross-file dedup, malformed card fix
 - **Solutions** — database lookup, multi-language generation, edge cases
 - **Utilities** — JSON helpers, URL validation, deduplication, AI integration, `traducido` flag support
