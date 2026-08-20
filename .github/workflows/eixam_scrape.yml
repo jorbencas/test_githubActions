@@ -11,9 +11,18 @@ jobs:
       contents: write
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: master
+          # Necesario para poder volver a hacer push a master al final
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: ✅ Verificar checkout
+        run: |
+          git status
+          test -d scripts/scrapers && echo "Éxito: scripts/scrapers presente"
+          test -f scripts/scrapers/scrape_eixam.py && echo "Éxito: scrape_eixam.py presente"
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -44,5 +53,5 @@ jobs:
             echo "Sin cambios en eixam_pelicula.json"
           else
             git commit -m "[eixam] actualizar registro de la película Enjambre"
-            git push origin master
+            git push origin HEAD:master
           fi
