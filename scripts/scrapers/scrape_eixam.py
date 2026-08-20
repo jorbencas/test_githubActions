@@ -497,24 +497,78 @@ def main():
         print("\n✅ Sin novedades: no hay contenido nuevo que archivar.")
 
     if args.enviar:
-        _enviar_telegram(realmente_nuevos, por_tipo, len(todos))
+        _enviar_telegram(realmente_nuevos, por_tipo, len(todos), todos)
 
 
-def _enviar_telegram(nuevos, por_tipo, total):
+def _enviar_telegram(nuevos, por_tipo, total, todos=None):
     if not BOT_TOKEN or not CHAT_ID:
         print("⚠️  TIPS_BOT_TOKEN / SALUDO_CHAT_ID no configurados; no se envía.")
         return
     try:
-        msg_parts = [f"🎬 *Eixam (Enjambre)* — Novedades recopiladas\n"
-                     f"Nuevos: {len(nuevos)} · Total archivo: {total}"]
-        tipos = " · ".join(f"{k}: {v}" for k, v in sorted(por_tipo.items()))
-        msg_parts.append(tipos)
-        for n in nuevos[:10]:
-            msg_parts.append(f"▫️ [{n['tipo']}] {n['titulo'].replace('*', '')}\n{n['url']}")
-        msg = "\n".join(msg_parts)[:4000]
-        url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
-        r = requests.post(url, data={"chat_id": CHAT_ID, "text": msg, "parse_mode": "Markdown"}, timeout=60)
-        print("✅ Resumen enviado a Telegram." if r.status_code == 200 else f"❌ Telegram error {r.status_code}")
+        menciones = {
+            "trailer": "🎬", "video": "🎬", "foto": "🖼️", "poster": "🎞️",
+            "critica": "📝", "noticia": "📰", "entrevista": "🎙️", "fotograma": "🗂️",
+        }
+        def _cabecera():
+            tipos = " · ".join(f"{k}: {v}" for k, v in sorted(por_tipo.items()))
+            return (f"🎬 *Eixam (Enjambre)* — Novedades recopiladas\n"
+                    f"Nuevos: {len(nuevos)} · Total archivo: {total}\n{tipos}")
+
+        def _send_message(msg):
+            try:
+                url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+                r = requests.post(url, data={"chat_id": CHAT_ID, "text": msg, "parse_mode": "Markdown"}, timeout=60)
+                return r.status_code == 200
+            except Exception:
+                return False
+
+        def _send_photo(it):
+            """Envía la foto/thumbnail de la entrada con título + tipo + enlace de caption.
+            Si no hay imagen o falla Telegram, cae al mensaje de texto con el enlace."""
+            emoji = menciones.get(it.get("tipo", "•"), "•")
+            caption = (f"{emoji} *[{it.get('tipo', 'noticia')}]* {it.get('titulo', '').replace('*', '')}"
+                       f"\n{it.get('url', '')}")
+            img = (it.get("imagen") or "").strip()
+            if img:
+                try:
+                    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendPhoto"
+                    r = requests.post(url, data={"chat_id": CHAT_ID, "photo": img,
+                                                 "caption": caption, "parse_mode": "Markdown"}, timeout=60)
+                    if r.status_code == 200:
+                        return True
+                except Exception:
+                    pass  # falla a texto
+            return _send_message(f"{emoji} *[{it.get('tipo', 'noticia')}]* {it.get('titulo', '').replace('*', '')}\n{it.get('url', '')}")
+
+        # Cabecera siempre, aunque no haya novedades
+        ok = _send_message(_cabecera())
+
+        if not nuevos:
+            if todos:
+                # Registro completo acumulado (texto + enlaces), partido si es grande
+                lista = [f"{menciones.get(e['tipo'], '•')} [{e['tipo']}] {e['titulo'].replace('*', '')}"
+                         f"\n{e['url']}" for e in todos]
+                parte = ["*Registro completo acumulado:*"]
+                bloque = ""
+                for linea in lista:
+                    if bloque and len(bloque) + len(linea) + 1 > 3500:
+                        parte.append(bloque)
+                        bloque = linea
+                    else:
+                        bloque = f"{bloque}\n{linea}" if bloque else linea
+                if bloque:
+                    parte.append(bloque)
+                for p in parte:
+                    ok = _send_message(p) and ok
+            else:
+                ok = _send_message("_No hay contenido nuevo desde la última vez._") and ok
+        else:
+            # Cada novedad con su imagen + enlace (y para vídeos, el enlace también)
+            for n in nuevos:
+                ok = _send_photo(n) and ok
+
+        print(f"✅ Media enviado a Telegram ({len(nuevos)} novedad(es) + cabecera)."
+              if ok else "❌ Telegram: falló algún envío.")
     except Exception as e:
         print(f"❌ Error enviando Telegram: {e}")
 
