@@ -1,5 +1,47 @@
 [
     {
+        "titulo": "Ya es oficial: Xiaomi supera esta barrera energética imposible con su Redmi Note 17 Pro Max",
+        "enlace": "https://www.xatakamovil.com/xiaomi/oficial-xiaomi-supera-esta-barrera-energetica-imposible-su-redmi-note-17-pro-max",
+        "fuente": "Xataka Móvil",
+        "tipo": "noticia",
+        "f": "20/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "https://i.blogs.es/04a9fa/xiaomi-redmi-note-17-pro-max-10000-mah/375_142.jpeg",
+        "fecha_real": "20/08/2026",
+        "ts": "2026-08-20T06:45:49.352059",
+        "traducido": true
+    },
+    {
+        "titulo": "O2 cambia las reglas de la televisión: ahora puedes tener Movistar Plus con descuento en más tarifas",
+        "enlace": "https://www.xatakamovil.com/o2/o2-cambia-reglas-television-ahora-puedes-tener-movistar-plus-descuento-tarifas",
+        "fuente": "Xataka Móvil",
+        "tipo": "noticia",
+        "f": "20/08",
+        "fecha_publicacion": "2026-08-20T06:31:33Z",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "20/08/2026",
+        "ts": "2026-08-20T06:45:49.352217",
+        "traducido": true
+    },
+    {
+        "titulo": "Microsoft intenta solucionar una vulnerabilidad y termina rompiendo Windows Defender: \"Cuando intento ejecutar un análisis, se detiene y me pide que reinicie el servicio\"",
+        "enlace": "https://www.computerhoy.com/tecnologia/microsoft-intenta-solucionar-una-vulnerabilidad-termina-rompiendo-windows-defender-cuando-intento-ejecutar-un-analisis-se-detiene-me-pide-que-reinicie-servicio_7027287_0.html",
+        "fuente": "ComputerHoy",
+        "tipo": "noticia",
+        "f": "20/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🔒 Ciberseguridad",
+        "imagen_url_original": "",
+        "fecha_real": "20/08/2026",
+        "ts": "2026-08-20T06:45:49.816602",
+        "traducido": true
+    },
+    {
         "titulo": "China tendrá un radiotelescopio de 110 metros con precisión extrema: podrá apuntar al equivalente de una pelota a 3,3 km",
         "enlace": "https://www.xataka.com/ingenieria-y-megaconstrucciones/china-tendra-radiotelescopio-110-metros-precision-extrema-podra-apuntar-al-equivalente-pelota-a-3-3-km",
         "fuente": "Xataka",
