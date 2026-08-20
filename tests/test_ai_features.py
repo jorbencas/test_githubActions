@@ -159,9 +159,11 @@ class TestSaludoImagen:
             "acuarela", "niños", "alegre", "la mañana", "invierno festivo",
         )
         assert "Navidad" in prompt
-        assert "Buenos días" in prompt
-        assert "Eres la luz que ilumina el día" in prompt
-        # el prompt debe prohibir explícitamente contenido de terror
+        assert "buenos días" in prompt
+        # el prompt ya NO incrusta la frase: el texto se superpone luego por PIL
+        assert "Eres la luz que ilumina el día" not in prompt
+        # el prompt debe prohibir texto en la imagen y contenido de terror
+        assert "NO incluyas NINGÚN texto" in prompt
         assert "NO terror" in prompt
         assert "horror" in prompt.lower()
 
@@ -172,7 +174,8 @@ class TestSaludoImagen:
         p = _build_prompt("Buenas noches", "Eres la luz que ilumina mi noche", datetime(2026, 12, 25), "Navidad",
                           "árbol navideño", "cartoon", "mixto", "tierno", "navidad", "invierno")
         assert "árbol navideño" in p
-        assert "Eres la luz que ilumina mi noche" in p
+        # la frase ya no va en el prompt (se superpone por PIL después)
+        assert "Eres la luz que ilumina mi noche" not in p
 
 
 class TestSaludoFallback:

@@ -2,6 +2,42 @@
 
 ## Cambios recientes
 
+### Nuevo: recopilación de la película Eixam (Enjambre) — 20/08/2026
+- Nuevo script `scripts/scrapers/scrape_eixam.py`: recopila y archiva Toda la información
+  disponible sobre la película **"Eixam" (Enjambre, 2026)**, thriller rural de Óscar Bernàcer
+  que se estrena el 4 de septiembre de 2026 (Pablo Molinero, Cristina Fernández Pintado).
+- Fuentes: Google News RSS (ventanas 3h y 7d) + Bing News RSS con múltiples términos
+  (título catalán, título español, director, actores, Malpàs, Bejís, tráiler, crítica, estreno)
+  + **YouTube** (busca tráilers/clips en `ytInitialData` del HTML del buscador, ya que el RSS
+  oficial devuelve 400) + **Contraste.info** (feed RSS de búsqueda de WordPress)
+  + consulta dirigida por dominio (`site:`) en Google News a **directorios/medios de reseñas**
+  (decine21, contraste, butacaancha, fotogramas, cinemaldito, aullidos, ecartelera, sensacine,
+  filmaffinity) usando solo el título original "eixam".
+- **Anti falsos positivos**: sistema de puntuación de relevancia con señales fuertes de la
+  película (director, actores, personajes, sinopsis, rodaje, festival) + señales de cine +
+  señales negativas que descartan otras obras "Enjambre" (serie Swarm/Donald Glover de Prime
+  Video, filmes homónimos, abejas/apicultura, aviación, ciencia, research...) + rechazo de
+  años de estreno distintos de 2026 (fichas de otras películas homónimas de decine21/etc.). Solo se aceptan
+  resultados con suficientes refuerzos positivos y ninguna señal negativa.
+- Validación opcional con IA (Gemini 2.5 Flash) cuando hay `GEMINI_API_KEY`: confirma cada
+  titular que es sobre esta película y refina el filtro en casos ambiguos (fail-open si no
+  hay clave).
+- Normalización de URLs: extrae el destino real de enlaces `apiclick` de Bing y colapsa los
+  espejos regionales de MSN (es-us/es-ve/es-mx) → deduplicación por URL real. Algunos
+  duplicados por URL que ya existían se evitan.
+- Clasifica cada hallazgo por tipo: `trailer`, `poster`, `entrevista`, `critica`, `foto`,
+  `fotograma`, `video`, `noticia`.
+- Salida acumulada y deduplicada por URL real (normaliza los enlaces `apiclick` de Bing
+  extrayendo el destino real) en `files/eixam_pelicula.json`.
+- Filtra falsos positivos de otras obras "Enjambre" (p. ej. la serie Prime Video de Donald Glover).
+- Flags: `--dry-run` (no guarda), `--enviar` (resumen a Telegram al canal de imágenes,
+  mismo secret que el saludo: `SALUDO_CHAT_ID` + `TIPS_BOT_TOKEN`).
+- Nuevo workflow `.github/workflows/eixam_scrape.yml`: se ejecuta cada 6 horas
+  (`17 */6 * * *`) y con `workflow_dispatch` manual.
+- Persistencia fiable: en cada ejecución el JSON acumulado se hace **commit a master**,
+  de modo que la información se va acumulando de forma permanente y deduplicada por URL
+  entre ejecuciones (sin depender de cachés que pueden expirar).
+
 ### Expanded content sources — 08/07/2026
 - **RSS Feeds (32)**: web.dev, MDN Blog, CSS-Tricks, Smashing Magazine, Can I Use, hacks.mozilla.org, Chrome Developers, W3C Blog, Linux.com, Hacker News, Lobsters, InfoQ, Ars Technica, OpenAI Blog, Anthropic Blog, Google AI Blog, and more
 - **HTML Scraping (82)**: Xataka, Genbeta, ComputerHoy, Slashdot, 36Kr, The Verge, TechCrunch, etc.
