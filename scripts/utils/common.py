@@ -328,7 +328,61 @@ async def traducir_titulos_ia(noticias: list, client) -> list:
                 logger.error(f"❌ Error traducción batch ({modelo}): {e}")
             continue
 
+    # Gemini falló en todos los modelos → fallback con IA local (Ollama)
+    _traducir_con_ollama(noticias, indices_traducir, lineas)
+
     return noticias
+
+
+def _traducir_con_ollama(noticias: list, indices: list, lineas: list):
+    """Fallback local: traduce títulos con Ollama (qwen2.5) si Gemini falla.
+    Silenciosamente no hace nada si no hay Ollama disponible (timeout corto).
+    Marca 'traducido=True' solo en los que consiga traducir."""
+    import urllib.request
+    url = os.environ.get("OLLAMA_URL", "http://localhost:11434")
+    model = os.environ.get("OLLAMA_MODEL", "qwen2.5:1.5b")
+
+    # Ping rápido (GET /api/tags): ¿está Ollama corriendo? Sin generar nada.
+    try:
+        with urllib.request.urlopen(f"{url}/api/tags", timeout=3) as r:
+            r.read()
+    except Exception:
+        logger.info("ℹ️ Ollama no disponible; sin fallback de traducción")
+        return 0
+
+    prompt = PROMPT_TRADUCIR_TITULOS.format(texto_a_traducir="\n".join(lineas))
+    try:
+        req = urllib.request.Request(
+            f"{url}/api/generate",
+            data=json.dumps({
+                "model": model,
+                "prompt": prompt,
+                "stream": False,
+                "format": "json",
+                "options": {"temperature": 0.1},
+            }).encode(),
+            headers={"Content-Type": "application/json"},
+            method="POST")
+        with urllib.request.urlopen(req, timeout=600) as r:
+            raw = json.loads(r.read().decode()).get("response", "")
+        clean = re.sub(r'```(?:json)?\s*|\s*```', '', raw.strip())
+        match = re.search(r'\{.*\}', clean, re.DOTALL)
+        data = json.loads(match.group(0)) if match else json.loads(clean)
+        traducciones = {int(item['id']): item['tr']
+                        for item in data.get('traducciones', [])}
+        ok = 0
+        for i in indices:
+            tr = traducciones.get(i)
+            if tr and len(tr.strip()) > 5:
+                noticias[i]['titulo'] = tr
+                noticias[i]['traducido'] = True
+                ok += 1
+        if ok:
+            logger.info(f"🦙 {ok} títulos traducidos con {model} (fallback local)")
+        return ok
+    except Exception as e:
+        logger.warning(f"⚠️ Fallback Ollama falló: {e}")
+        return 0
 
 
 def normalizar_url(url: str) -> str:
