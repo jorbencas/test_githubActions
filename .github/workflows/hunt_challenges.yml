@@ -1,8 +1,9 @@
 name: "[BLOG] 🏹 Cazador de Retos IA"
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 23 * * 0'
+  # Schedule deshabilitado: restricciones de cuota de Gemini
+  # schedule:
+  #   - cron: '0 23 * * 0'
 
 jobs:
   hunt:

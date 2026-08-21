@@ -203,7 +203,7 @@ All scripts run with `python -m` from the project root:
 | **send_telegram** | Every 30 min | Telegram + TTS (GitHub Actions Cache for dedup) |
 | **telegram_ai_bot** | Every 15 min | Bot IA local en Telegram: responde menciones/respuestas/`/ai` con Qwen 2.5 vía Ollama (`/help` para ver uso) |
 | **clean_news** | Quarterly | Link health check |
-| **hunt_challenges** | Weekly (Sun) | AI challenge generation |
+| **hunt_challenges** | Dispatch manual | AI challenge generation (schedule off: cuota Gemini) |
 | **optimize_images** | Dispatch from blog | Image optimization for blog |
 | **dashboard_update** | Push (JS/CSS/Python/data) | Regenerate + deploy dashboard |
 | **tests** | Push/PR to master | pytest (134 tests) |
