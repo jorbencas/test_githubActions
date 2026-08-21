@@ -642,12 +642,14 @@ def select_random_categories(count=6):
     return random.sample(ALL_CATEGORIES, min(count, len(ALL_CATEGORIES)))
 
 
-def select_tips_from_db(database, history, count=5):
+def select_tips_from_db(database, history, count=5, tip_type=None):
     all_tips = database["tips"]
     sent_titles = set(history.get("sent_titles", []))
     available = [t for t in all_tips if t["title"] not in sent_titles]
+    if tip_type:
+        available = [t for t in available if t.get("type") == tip_type]
     if len(available) < count:
-        available = all_tips
+        available = [t for t in all_tips if not tip_type or t.get("type") == tip_type]
     random.shuffle(available)
     selected = []
     used_cats = set()
@@ -697,9 +699,10 @@ def build_gemini_prompt(categories, sent_titles, news, tools):
 8. NUNCA uses emojis en el body ni en el título
 9. Usa términos técnicos en INGLÉS cuando sea estándar (cold start, hot function, load balancer, etc.)
 10. Varía dificultad: 1=básico, 2=intermedio, 3=avanzado
-11. Cuando el tip mencione una SIGLA o acrónimo (por ejemplo: VPN, SSL, LLM, SVN, WISPr, DNS, HTTP, API, SQL, SSH, TLS, SMTP, RAID, VM, CI, CD, IaC, RBAC, ETL, MQTT, NAT, WAN, LAN...), SIEMPRE expande la sigla entre paréntesis la primera vez que aparezca y añade UNA frase breve que la explique en contexto. Ejemplo: "VPN (Virtual Private Network, red privada virtual) cifra tu conexión..."
-12. Cuando el tip describa una práctica, comando o configuración técnicos, SIEMPRE rellena los campos "mala" (cómo NO se debe hacer) y "buena" (cómo se debe hacer correctamente), redactados como frases breves. Si el tip es un concepto teórico puro, deja "mala" y "buena" vacíos ("").
-13. El campo "body" describe el tema de forma neutra; los campos "mala" y "buena" muestran el contraste de práctica. Cada tip DEBE tener los campos "id"/"title","cat","body","difficulty" y opcionalmente "mala"/"buena". Siempre con mala/buena rellenados en tips prácticos.
+11. Cuando el tip mencione una SIGLA o acrónimo, SIEMPRE expande la sigla entre paréntesis la primera vez que aparezca y añade UNA frase breve que la explique en contexto.
+12. Cuando el tip describa una práctica, comando o configuración técnicos, SIEMPRE rellena los campos "mala" (cómo NO se debe hacer) y "buena" (cómo se debe hacer correctamente). Si el tip es un concepto teórico puro, deja "mala" y "buena" vacíos ("").
+13. El campo "body" describe el tema de forma neutra; los campos "mala" y "buena" muestran el contraste de práctica.
+14. Usa "type": "tip" para conceptos, principios, definiciones. Usa "type": "trick" para comandos, atajos, herramientas prácticos con código.
 
 === CUÁNDO INCLUIR CÓDIGO ===
 - Comandos de terminal (linux, docker, git, etc.)
@@ -716,39 +719,42 @@ def build_gemini_prompt(categories, sent_titles, news, tools):
 - Leyendas de programación
 - Organización y arquitectura
 
-=== EJEMPLO CON CÓDIGO ===
+=== EJEMPLO CON CÓDIGO (type: trick) ===
 {{
   "cat": "postgresql",
   "title": "Explicar un query SQL lento",
   "body": "En PostgreSQL: EXPLAIN ANALYZE seguido de tu query te muestra el plan de ejecución real y cuánto tarda cada paso. Esencial para optimizar.",
   "mala": "SELECT * FROM usuarios WHERE email = 'test@mail.com'; sin saber por qué va lento.",
   "buena": "EXPLAIN ANALYZE SELECT * FROM usuarios WHERE email = 'test@mail.com'; para ver el plan real y los tiempos de cada paso.",
-  "difficulty": 2
+  "difficulty": 2,
+  "type": "trick"
 }}
 
-=== EJEMPLO SIN CÓDIGO (concepto teórico: mala/buena vacías) ===
+=== EJEMPLO SIN CÓDIGO (concepto: type: tip) ===
 {{
   "cat": "programming",
   "title": "¿Qué es polimorfismo?",
   "body": "Objetos de diferentes clases respondiendo al mismo método. Un gato.hablar() dice 'miau', un perro.hablar() dice 'guau'. El código que usa hablar() no necesita saber qué animal es.",
   "mala": "",
   "buena": "",
-  "difficulty": 2
+  "difficulty": 2,
+  "type": "tip"
 }}
 
-=== EJEMPLO CON SIGLA EXPLICADA ===
+=== EJEMPLO CON SIGLA EXPLICADA (type: tip) ===
 {{
   "cat": "redes",
   "title": "Para qué sirve una VPN",
   "body": "Una VPN (Virtual Private Network, red privada virtual) crea un túnel cifrado entre tu equipo y un servidor remoto. Sirve para ocultar tu IP, protegerte en redes Wi-Fi públicas y acceder a recursos internos de una empresa como si estuvieras en la oficina.",
   "mala": "",
   "buena": "",
-  "difficulty": 1
+  "difficulty": 1,
+  "type": "tip"
 }}
 
 === RESPUESTA ===
 SOLO el JSON array, sin markdown, sin texto adicional:
-[{{"cat": "...", "title": "...", "body": "...", "mala": "...", "buena": "...", "difficulty": 1}}, ...]"""
+[{{"cat": "...", "title": "...", "body": "...", "mala": "...", "buena": "...", "difficulty": 1, "type": "tip"}}, ...]"""
 
 
 def generate_tips_gemini(count, categories, sent_titles):
@@ -787,6 +793,8 @@ def generate_tips_gemini(count, categories, sent_titles):
             for t in tips:
                 if all(k in t for k in ("cat", "title", "body", "difficulty")):
                     if t["cat"] in CAT_EMOJI:
+                        if "type" not in t:
+                            t["type"] = "tip"
                         valid.append(t)
             if valid:
                 print(f"✅ Gemini generó {len(valid)} tips nuevos")
@@ -823,29 +831,72 @@ def mix_tips(gemini_tips, db_tips, total=10):
     return mixed[:total]
 
 
+def interleave_tips_tricks(tips, tricks, total=10):
+    mixed = []
+    i_t, i_k = 0, 0
+    use_tip = True
+    while len(mixed) < total:
+        if use_tip and i_t < len(tips):
+            mixed.append(tips[i_t])
+            i_t += 1
+        elif not use_tip and i_k < len(tricks):
+            mixed.append(tricks[i_k])
+            i_k += 1
+        elif i_t < len(tips):
+            mixed.append(tips[i_t])
+            i_t += 1
+        elif i_k < len(tricks):
+            mixed.append(tricks[i_k])
+            i_k += 1
+        else:
+            break
+        use_tip = not use_tip
+    return mixed[:total]
+
+
+DIFFICULTY_BAR = {1: "●○○", 2: "●●○", 3: "●●●"}
+TYPE_LABEL = {"tip": "💡 Tip", "trick": "⚡ Trick"}
+
+
 def format_tip_message(tip, index):
     cat = tip.get("cat", "")
     emoji = CAT_EMOJI.get(cat, "?")
     nombre = CAT_NAMES.get(cat, cat)
-    header = f"{index}. {emoji} {nombre}{': ' + tip['title'] if tip.get('title') else ''} — {tip.get('body', '')}"
+    diff = tip.get("difficulty", 1)
+    bar = DIFFICULTY_BAR.get(diff, "●○○")
+    title = tip.get("title", "")
+    body = tip.get("body", "")
+    tip_type = tip.get("type", "tip")
+    label = TYPE_LABEL.get(tip_type, "💡 Tip")
+    title_part = f": {title}" if title else ""
+    lines = [f"{index}. {label} {emoji} *{nombre}*{title_part}"]
+    lines.append(f"   {bar} {'Básico' if diff == 1 else 'Intermedio' if diff == 2 else 'Avanzado'}")
+    if body:
+        lines.append(f"   {body}")
     if tip.get("mala") and tip.get("buena"):
-        return f"{header}\n❌ Mala práctica: {tip['mala']}\n✅ Buena práctica: {tip['buena']}"
-    return f"{index}. {emoji} {nombre} — {tip.get('body', '')}"
+        lines.append(f"   ❌ _Mala práct.:_ {tip['mala']}")
+        lines.append(f"   ✅ _Buena práct.:_ {tip['buena']}")
+    return "\n".join(lines)
 
 
 def build_daily_message(tips):
     greeting = _get_time_greeting(datetime.now())
-    header = f"{greeting}\n"
+    now = datetime.now()
+    date_str = now.strftime("%d/%m/%Y")
+    header = f"{greeting} — {date_str}\n{'─' * 28}"
 
     body_parts = []
     for i, tip in enumerate(tips, 1):
         body_parts.append(format_tip_message(tip, i))
+        if i < len(tips):
+            body_parts.append("")
 
-    body = "\n\n".join(body_parts)
+    body = "\n".join(body_parts)
+    tip_count = sum(1 for t in tips if t.get("type") == "tip")
+    trick_count = sum(1 for t in tips if t.get("type") == "trick")
+    footer = f"💡 {tip_count} tips · ⚡ {trick_count} tricks · Total: {len(tips)}"
 
-    footer = ""
-
-    return header + "\n\n" + body + footer
+    return header + "\n\n" + body + "\n\n" + footer
 
 
 def _get_time_greeting(now):
@@ -907,8 +958,10 @@ def main():
     sent_titles = history.get("sent_titles", [])
 
     if show_stats:
+        db_tips_count = sum(1 for t in database['tips'] if t.get('type') == 'tip')
+        db_tricks_count = sum(1 for t in database['tips'] if t.get('type') == 'trick')
         print(f"📊 Estadísticas del sistema de tips:")
-        print(f"   Tips en DB: {len(database['tips'])}")
+        print(f"   Tips en DB: {len(database['tips'])} ({db_tips_count} tips + {db_tricks_count} tricks)")
         print(f"   Tips enviados (total): {len(sent_titles)}")
         print(f"   DB agotada: {'Sí' if history.get('db_exhausted') else 'No'}")
         print(f"   Última ejecución: {history.get('last_run', 'Nunca')}")
@@ -934,24 +987,27 @@ def main():
             tips = gemini_tips
         else:
             print("⚠️  Gemini no disponible. Reintentando con DB (puede repetir)...")
-            db_tips = select_tips_from_db(database, history, 10)
-            tips = db_tips
+            db_tips = select_tips_from_db(database, history, 5, tip_type="tip")
+            db_tricks = select_tips_from_db(database, history, 5, tip_type="trick")
+            tips = interleave_tips_tricks(db_tips, db_tricks, total=10)
     else:
-        print("🔄 Generando tips (Gemini + DB)...")
+        print("🔄 Generando tips + tricks (Gemini + DB)...")
         gemini_tips = generate_tips_gemini(5, categories, sent_titles)
         if gemini_tips:
             for t in gemini_tips:
                 t["source"] = "gemini"
-        db_tips = select_tips_from_db(database, history, 5)
-        tips = mix_tips(gemini_tips, db_tips, total=10)
+        db_tips = select_tips_from_db(database, history, 5, tip_type="tip")
+        db_tricks = select_tips_from_db(database, history, 5, tip_type="trick")
+        tips = interleave_tips_tricks(db_tips, db_tricks, total=10)
 
     message = build_daily_message(tips)
 
-    print(f"\n📋 Tips seleccionados ({len(tips)}):")
+    print(f"\n📋 Selección ({len(tips)}):")
     for i, tip in enumerate(tips, 1):
         emoji = CAT_EMOJI.get(tip["cat"], "?")
         src = tip.get("source", "db")
-        print(f"   {i}. {emoji} [{tip['cat']}] {tip['title']} ({src})")
+        t = "💡" if tip.get("type") == "tip" else "⚡"
+        print(f"   {i}. {t} {emoji} [{tip['cat']}] {tip['title']} ({src})")
 
     if dry_run:
         print("\n--- VISTA PREVIA (dry-run) ---\n")

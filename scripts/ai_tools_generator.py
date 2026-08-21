@@ -277,6 +277,9 @@ def mix_tools(gemini_tools, db_tools, total=5):
     return mixed[:total]
 
 
+DIFFICULTY_BAR = {1: "●○○", 2: "●●○", 3: "●●●"}
+
+
 def format_tool_message(tool, index):
     cat = tool.get("cat", "")
     tool_name = tool.get("tool", "")
@@ -285,39 +288,53 @@ def format_tool_message(tool, index):
     combos = tool.get("combinaciones", [])
     url = tool.get("url", "")
     restricciones = tool.get("restricciones", "")
+    dific = tool.get("dific", 1)
+    bar = DIFFICULTY_BAR.get(dific, "●○○")
+    emoji = CAT_EMOJI.get(cat, "🤖")
+    nombre = CAT_NAMES.get(cat, cat)
 
-    header = f"{index}. {_cat_label(cat)} • {tool_name}"
-
-    parts = [header]
+    lines = [f"{index}. {emoji} *{nombre}* — *{tool_name}*"]
+    lines.append(f"   {bar} {'Básico' if dific == 1 else 'Intermedio' if dific == 2 else 'Avanzado'}")
     if body:
-        parts.append(body)
+        lines.append(f"   {body}")
     if url:
-        parts.append(f"🔗 {url}")
+        lines.append(f"   🔗 {url}")
     if workflow:
-        parts.append(f"⚙️ Flujo: {workflow}")
+        lines.append(f"   ⚙️ _Workflow:_ {workflow}")
     if combos:
         labels = ", ".join(CAT_NAMES.get(c, c) for c in combos if c in CAT_EMOJI)
         if labels:
-            parts.append(f"🔗 Combina con: {labels}")
+            lines.append(f"   🔗 _Combina con:_ {labels}")
     if restricciones:
-        parts.append(f"⚠️ Ojo: {restricciones}")
-
-    return "\n".join(parts)
+        lines.append(f"   ⚠️ _Limitaciones:_ {restricciones}")
+    return "\n".join(lines)
 
 
 def build_daily_message(tools):
     greeting = _get_time_greeting(datetime.now())
-    header = f"{greeting}\n\n🧰 *Herramientas de IA para tu día*"
+    now = datetime.now()
+    date_str = now.strftime("%d/%m/%Y")
+    header = f"{greeting} — {date_str}\n{'─' * 28}\n🧰 *Herramientas de IA para tu día*"
+
+    grouped = {}
+    for i, tool in enumerate(tools, 1):
+        cat = tool.get("cat", "")
+        grouped.setdefault(cat, []).append((i, tool))
 
     body_parts = []
-    for i, tool in enumerate(tools, 1):
-        body_parts.append(format_tool_message(tool, i))
+    for cat, cat_tools in grouped.items():
+        emoji = CAT_EMOJI.get(cat, "🤖")
+        nombre = CAT_NAMES.get(cat, cat)
+        body_parts.append(f"\n{emoji} *{nombre}* ({len(cat_tools)} herramienta{'s' if len(cat_tools) > 1 else ''})")
+        for idx, tool in cat_tools:
+            body_parts.append("")
+            body_parts.append(format_tool_message(tool, idx))
+        body_parts.append(f"\n{'─' * 28}")
 
-    body = "\n\n".join(body_parts)
+    body = "\n".join(body_parts)
+    footer = f"💡 {len(tools)} herramientas de {len(grouped)} categorías\n\n_Combina herramientas entre sí para crear workflows potentes._"
 
-    footer = "\n\n_Recuerda: combina herramientas entre sí para crear workflows potentes._"
-
-    return header + "\n\n" + body + footer
+    return header + "\n" + body + "\n" + footer
 
 
 def _get_time_greeting(now):

@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "DB estática de herramientas de IA por categoría. Fallback cuando Gemini no está disponible.",
-    "count": 20
+    "count": 100
   },
   "tools": [
     {
@@ -187,34 +187,6 @@
       "restricciones": "Requiere constancia diaria; genera tarjetas eficaces solo con apuntes bien estructurados."
     },
     {
-      "id": 14,
-      "cat": "video_edit",
-      "tool": "CapCut / Descript",
-      "body": "Edición de vídeo con IA: recorte por texto, eliminación de sonidos y arreglo de audio.",
-      "dific": 1,
-      "workflow": "Vídeo -> editar por transcripción -> exportar",
-      "combinaciones": [
-        "transcripcion",
-        "video_caption"
-      ],
-      "url": "https://www.descript.com",
-      "restricciones": "Exportación HD limitada en free; edición por texto funciona mejor en audios claros."
-    },
-    {
-      "id": 15,
-      "cat": "comfyui",
-      "tool": "ComfyUI",
-      "body": "Entorno por nodos para construir flujos avanzados de imágenes y vídeo con modelos de IA.",
-      "dific": 3,
-      "workflow": "Nodos -> modelo -> pipeline -> imagen/vídeo",
-      "combinaciones": [
-        "img_gen",
-        "controlnet"
-      ],
-      "url": "https://github.com/comfyanonymous/ComfyUI",
-      "restricciones": "Complejo de instalar; requiere GPU y conocimiento técnico de modelos y nodos."
-    },
-    {
       "id": 16,
       "cat": "translation_ai",
       "tool": "DeepL",
@@ -243,20 +215,6 @@
       "restricciones": "Precio por proyecto en free; plantillas limitadas para el plan gratuito."
     },
     {
-      "id": 18,
-      "cat": "vector_db",
-      "tool": "Pinecone / pgvector",
-      "body": "Almacena embeddings para búsqueda semántica y memoria de largo plazo en apps de IA.",
-      "dific": 2,
-      "workflow": "Documentos -> embeddings -> consulta",
-      "combinaciones": [
-        "embeddings",
-        "retrieval_rag"
-      ],
-      "url": "https://www.pinecone.io",
-      "restricciones": "Costo de infraestructura si se autoalojan; dimensión de vectores afecta presupuesto."
-    },
-    {
       "id": 19,
       "cat": "agentes",
       "tool": "LangGraph / LlamaIndex agents",
@@ -283,6 +241,1168 @@
       ],
       "url": "https://firefly.adobe.com",
       "restricciones": "Disponibilidad sujeta a los modelos de Adobe; ControlNet requiere setup técnico."
+    },
+    {
+      "id": 21,
+      "cat": "transcripcion",
+      "tool": "AssemblyAI",
+      "body": "Transcripción con detección de sentimiento, entidades y resumen automático.",
+      "dific": 2,
+      "workflow": "Audio -> API -> JSON estructurado",
+      "combinaciones": [
+        "nlp",
+        "resumen_auto"
+      ],
+      "url": "https://www.assemblyai.com",
+      "restricciones": "API key necesaria; coste por minuto de audio."
+    },
+    {
+      "id": 22,
+      "cat": "video_gen",
+      "tool": "Pika",
+      "body": "Genera vídeos cortos con movimiento cinematográfico desde texto o imagen.",
+      "dific": 2,
+      "workflow": "Prompt -> vídeo -> upscale",
+      "combinaciones": [
+        "img_gen",
+        "video_edit"
+      ],
+      "url": "https://pika.art",
+      "restricciones": "Vídeos de 3-4 segundos; plan gratuito limitado."
+    },
+    {
+      "id": 23,
+      "cat": "video_gen",
+      "tool": "HeyGen",
+      "body": "Genera avatares virtuales que hablan tu guion con lip-sync perfecto.",
+      "dific": 2,
+      "workflow": "Guion -> avatar -> vídeo",
+      "combinaciones": [
+        "audio_tts",
+        "translation_ai"
+      ],
+      "url": "https://www.heygen.com",
+      "restricciones": "Créditos limitados; avatares personalizados son de pago."
+    },
+    {
+      "id": 24,
+      "cat": "video_gen",
+      "tool": "Synthesia",
+      "body": "Crea vídeos profesionales con avatares IA en 120+ idiomas.",
+      "dific": 2,
+      "workflow": "Guión -> avatar -> vídeo",
+      "combinaciones": [
+        "audio_tts",
+        "translation_ai"
+      ],
+      "url": "https://www.synthesia.io",
+      "restricciones": "Plan básico limita minutos; avatares premium son caros."
+    },
+    {
+      "id": 25,
+      "cat": "video_gen",
+      "tool": "Luma Dream Machine",
+      "body": "Genera vídeos hiperrealistas desde texto con movimiento fluido.",
+      "dific": 2,
+      "workflow": "Prompt -> vídeo -> editar",
+      "combinaciones": [
+        "img_gen",
+        "video_edit"
+      ],
+      "url": "https://lumalabs.ai/dream-machine",
+      "restricciones": "Límite diario en free; vídeos cortos."
+    },
+    {
+      "id": 26,
+      "cat": "audio_tts",
+      "tool": "Play.ht",
+      "body": "TTS con voces ultra realistas y clonación de voz personalizada.",
+      "dific": 2,
+      "workflow": "Texto -> voz -> podcast",
+      "combinaciones": [
+        "podcast_gen",
+        "transcripcion"
+      ],
+      "url": "https://play.ht",
+      "restricciones": "Minutos limitados en free."
+    },
+    {
+      "id": 27,
+      "cat": "audio_tts",
+      "tool": "Murf AI",
+      "body": "Voces profesionales para vídeos, presentaciones y e-learning.",
+      "dific": 1,
+      "workflow": "Guion -> voz -> vídeo",
+      "combinaciones": [
+        "powerpoint_ai",
+        "video_edit"
+      ],
+      "url": "https://murf.ai",
+      "restricciones": "Pocos minutos gratis; voces premium en plan pago."
+    },
+    {
+      "id": 28,
+      "cat": "audio_tts",
+      "tool": "Bark (Suno)",
+      "body": "Modelo open source de texto a voz con efectos de sonido y emociones.",
+      "dific": 2,
+      "workflow": "Texto -> modelo local -> audio",
+      "combinaciones": [
+        "audio_gen",
+        "transcripcion"
+      ],
+      "url": "https://github.com/suno-ai/bark",
+      "restricciones": "Requiere GPU para correr local; calidad variable."
+    },
+    {
+      "id": 29,
+      "cat": "audio_gen",
+      "tool": "Suno AI",
+      "body": "Genera música completa con letra desde una descripción.",
+      "dific": 2,
+      "workflow": "Prompt -> canción -> mastering",
+      "combinaciones": [
+        "audio_tts",
+        "video_edit"
+      ],
+      "url": "https://suno.com",
+      "restricciones": "Créditos limitados; derechos de uso en plan pago."
+    },
+    {
+      "id": 30,
+      "cat": "audio_gen",
+      "tool": "Udio",
+      "body": "Genera música de alta calidad con control de estilo y duración.",
+      "dific": 2,
+      "workflow": "Estilo -> prompt -> música",
+      "combinaciones": [
+        "audio_tts",
+        "podcast_gen"
+      ],
+      "url": "https://www.udio.com",
+      "restricciones": "Créditos diarios limitados."
+    },
+    {
+      "id": 31,
+      "cat": "img_gen",
+      "tool": "Midjourney",
+      "body": "Genera imágenes artísticas de alta calidad con prompts detallados.",
+      "dific": 2,
+      "workflow": "Prompt -> imagen -> upscale",
+      "combinaciones": [
+        "img_edit",
+        "comfyui"
+      ],
+      "url": "https://www.midjourney.com",
+      "restricciones": "Requiere Discord o web; suscripción de pago."
+    },
+    {
+      "id": 32,
+      "cat": "img_gen",
+      "tool": "DALL-E 3",
+      "body": "Genera imágenes precisas desde texto con comprensión semántica avanzada.",
+      "dific": 1,
+      "workflow": "Prompt -> imagen -> editar",
+      "combinaciones": [
+        "img_edit",
+        "concept_to_visual"
+      ],
+      "url": "https://openai.com/dall-e-3",
+      "restricciones": "Integrado en ChatGPT; créditos por uso."
+    },
+    {
+      "id": 33,
+      "cat": "img_gen",
+      "tool": "Flux (Black Forest Labs)",
+      "body": "Modelo open source de alta calidad para generación de imágenes.",
+      "dific": 2,
+      "workflow": "Prompt -> imagen -> post-proceso",
+      "combinaciones": [
+        "comfyui",
+        "img_edit"
+      ],
+      "url": "https://huggingface.co/black-forest-labs",
+      "restricciones": "Requiere GPU; calidad comparable a modelos propietarios."
+    },
+    {
+      "id": 34,
+      "cat": "img_gen",
+      "tool": "Ideogram",
+      "body": "Genera imágenes con texto integrado de forma precisa.",
+      "dific": 2,
+      "workflow": "Prompt -> imagen con texto",
+      "combinaciones": [
+        "concept_to_visual",
+        "img_edit"
+      ],
+      "url": "https://ideogram.ai",
+      "restricciones": "Plan free limitado; ideal para logos y texto."
+    },
+    {
+      "id": 35,
+      "cat": "img_gen",
+      "tool": "Leonardo AI",
+      "body": "Plataforma de generación de imágenes con modelos personalizables.",
+      "dific": 2,
+      "workflow": "Prompt -> modelo -> imagen",
+      "combinaciones": [
+        "comfyui",
+        "img_edit"
+      ],
+      "url": "https://leonardo.ai",
+      "restricciones": "Créditos diarios; modelos custom son premium."
+    },
+    {
+      "id": 36,
+      "cat": "img_edit",
+      "tool": "Clipdrop",
+      "body": "Edición de imágenes con IA: quitar fondo, upscale, relight.",
+      "dific": 1,
+      "workflow": "Imagen -> herramienta -> resultado",
+      "combinaciones": [
+        "img_gen",
+        "concept_to_visual"
+      ],
+      "url": "https://clipdrop.co",
+      "restricciones": "Algunas funciones son de pago."
+    },
+    {
+      "id": 37,
+      "cat": "img_upscale",
+      "tool": "Topaz Gigapixel",
+      "body": "Upscale de imágenes con IA que añade detalle realista.",
+      "dific": 2,
+      "workflow": "Imagen -> modelo -> imagen HD",
+      "combinaciones": [
+        "img_gen",
+        "img_edit"
+      ],
+      "url": "https://www.topazlabs.com",
+      "restricciones": "Licencia de pago; resultados impresionantes."
+    },
+    {
+      "id": 38,
+      "cat": "code_gen",
+      "tool": "Cursor",
+      "body": "Editor de código con IA integrada que entiende todo el proyecto.",
+      "dific": 2,
+      "workflow": "Código -> contexto -> sugerencia",
+      "combinaciones": [
+        "code_review",
+        "code_refactor"
+      ],
+      "url": "https://cursor.sh",
+      "restricciones": "Plan free limitado; requiere suscripción para uso intensivo."
+    },
+    {
+      "id": 39,
+      "cat": "code_gen",
+      "tool": "Tabnine",
+      "body": "Autocompletado de código que aprende de tu estilo de programación.",
+      "dific": 1,
+      "workflow": "Código -> predicción -> completado",
+      "combinaciones": [
+        "code_review",
+        "code_review"
+      ],
+      "url": "https://www.tabnine.com",
+      "restricciones": "Plan free con sugerencias limitadas."
+    },
+    {
+      "id": 40,
+      "cat": "code_gen",
+      "tool": "Codeium",
+      "body": "Autocompletado gratuito con soporte para 70+ lenguajes.",
+      "dific": 1,
+      "workflow": "Código -> sugerencia -> aceptar",
+      "combinaciones": [
+        "code_review",
+        "code_refactor"
+      ],
+      "url": "https://codeium.com",
+      "restricciones": "Gratis para uso personal; enterprise de pago."
+    },
+    {
+      "id": 41,
+      "cat": "code_gen",
+      "tool": "Amazon CodeWhisperer",
+      "body": "Generación de código de AWS con detección de seguridad integrada.",
+      "dific": 2,
+      "workflow": "Código -> sugerencia -> scan",
+      "combinaciones": [
+        "code_review",
+        "sistemas"
+      ],
+      "url": "https://aws.amazon.com/codewhisperer",
+      "restricciones": "Gratis para uso personal; requiere AWS."
+    },
+    {
+      "id": 42,
+      "cat": "code_review",
+      "tool": "CodeRabbit",
+      "body": "Review automático de PRs con sugerencias de mejora detalladas.",
+      "dific": 2,
+      "workflow": "PR -> análisis -> comentarios",
+      "combinaciones": [
+        "code_gen",
+        "code_review"
+      ],
+      "url": "https://coderabbit.ai",
+      "restricciones": "Plan free limitado; integrado con GitHub."
+    },
+    {
+      "id": 43,
+      "cat": "code_review",
+      "tool": "Sourcery",
+      "body": "Refactoring automático y suggestions de código limpio.",
+      "dific": 1,
+      "workflow": "Código -> análisis -> refactor",
+      "combinaciones": [
+        "code_refactor",
+        "code_refactor"
+      ],
+      "url": "https://sourcery.ai",
+      "restricciones": "Plan free para open source."
+    },
+    {
+      "id": 44,
+      "cat": "llm_workflow",
+      "tool": "LangChain",
+      "body": "Framework para construir apps con LLMs, chains y agentes.",
+      "dific": 2,
+      "workflow": "Prompt -> chain -> respuesta",
+      "combinaciones": [
+        "agentes",
+        "retrieval_rag"
+      ],
+      "url": "https://www.langchain.com",
+      "restricciones": "Requiere programación; documentación amplia."
+    },
+    {
+      "id": 45,
+      "cat": "llm_workflow",
+      "tool": "LlamaIndex",
+      "body": "Framework para conectar LLMs con tus propios datos.",
+      "dific": 2,
+      "workflow": "Documentos -> índice -> consulta",
+      "combinaciones": [
+        "retrieval_rag",
+        "embeddings"
+      ],
+      "url": "https://www.llamaindex.ai",
+      "restricciones": "Requiere programación; ideal para RAG."
+    },
+    {
+      "id": 46,
+      "cat": "retrieval_rag",
+      "tool": "Haystack",
+      "body": "Framework modular para pipelines de NLP y RAG.",
+      "dific": 2,
+      "workflow": "Documentos -> pipeline -> respuesta",
+      "combinaciones": [
+        "llm_workflow",
+        "vector_db"
+      ],
+      "url": "https://haystack.deepset.ai",
+      "restricciones": "Requiere programación; flexible y potente."
+    },
+    {
+      "id": 47,
+      "cat": "embeddings",
+      "tool": "OpenAI Embeddings",
+      "body": "Convierte texto en vectores para búsqueda semántica.",
+      "dific": 2,
+      "workflow": "Texto -> API -> vector",
+      "combinaciones": [
+        "vector_db",
+        "retrieval_rag"
+      ],
+      "url": "https://platform.openai.com",
+      "restricciones": "Coste por token; dimensionalidad 1536."
+    },
+    {
+      "id": 48,
+      "cat": "agentes",
+      "tool": "AutoGPT",
+      "body": "Agente autónomo que se auto-guía para completar tareas complejas.",
+      "dific": 3,
+      "workflow": "Objetivo -> plan -> ejecutar -> iterar",
+      "combinaciones": [
+        "llm_workflow",
+        "agentes"
+      ],
+      "url": "https://github.com/Significant-Gravitas/AutoGPT",
+      "restricciones": "Inestable; consume muchos tokens; experimental."
+    },
+    {
+      "id": 49,
+      "cat": "agentes",
+      "tool": "CrewAI",
+      "body": "Framework multi-agente para tareas complejas con roles.",
+      "dific": 3,
+      "workflow": "Roles -> tareas -> ejecución coordinada",
+      "combinaciones": [
+        "llm_workflow",
+        "workflow_gen"
+      ],
+      "url": "https://www.crewai.com",
+      "restricciones": "Requiere programación; conceptualmente avanzado."
+    },
+    {
+      "id": 50,
+      "cat": "video_edit",
+      "tool": "CapCut",
+      "body": "Editor de vídeo gratuito con IA: subtítulos automáticos, efectos y templates.",
+      "dific": 1,
+      "workflow": "Vídeo -> editar -> exportar",
+      "combinaciones": [
+        "subtitle_gen",
+        "video_caption"
+      ],
+      "url": "https://www.capcut.com",
+      "restricciones": "Gratis; funciones IA limitadas en web."
+    },
+    {
+      "id": 51,
+      "cat": "video_edit",
+      "tool": "DaVinci Resolve",
+      "body": "Editor profesional con herramientas de IA integradas.",
+      "dific": 2,
+      "workflow": "Vídeo -> color -> audio -> exportar",
+      "combinaciones": [
+        "transcripcion",
+        "img_edit"
+      ],
+      "url": "https://www.blackmagicdesign.com",
+      "restricciones": "Versión gratuita muy completa; curva de aprendizaje."
+    },
+    {
+      "id": 52,
+      "cat": "paper_ai",
+      "tool": "Consensus",
+      "body": "Motor de búsqueda que usa IA para encontrar respuestas en papers científicos.",
+      "dific": 1,
+      "workflow": "Pregunta -> papers -> resumen",
+      "combinaciones": [
+        "resumen_auto",
+        "second_brain"
+      ],
+      "url": "https://consensus.app",
+      "restricciones": "Gratis para búsquedas básicas."
+    },
+    {
+      "id": 53,
+      "cat": "paper_ai",
+      "tool": "Elicit",
+      "body": "Asistente de investigación que analiza papers académicos automáticamente.",
+      "dific": 2,
+      "workflow": "Tema -> papers -> análisis",
+      "combinaciones": [
+        "resumen_auto",
+        "flashcards_ai"
+      ],
+      "url": "https://elicit.com",
+      "restricciones": "Plan free limitado; ideal para literatura."
+    },
+    {
+      "id": 54,
+      "cat": "paper_ai",
+      "tool": "Semantic Scholar",
+      "body": "Motor de búsqueda académico con IA que destaca papers relevantes.",
+      "dific": 1,
+      "workflow": "Query -> papers -> citations",
+      "combinaciones": [
+        "paper_ai",
+        "second_brain"
+      ],
+      "url": "https://www.semanticscholar.org",
+      "restricciones": "Gratis; API disponible."
+    },
+    {
+      "id": 55,
+      "cat": "resumen_auto",
+      "tool": "Scholarcy",
+      "body": "Resume papers académicos en tarjetas de estudio concisas.",
+      "dific": 1,
+      "workflow": "Paper -> resumen -> flashcards",
+      "combinaciones": [
+        "estudiar",
+        "flashcards_ai"
+      ],
+      "url": "https://www.scholarcy.com",
+      "restricciones": "Extensión de navegador; plan free limitado."
+    },
+    {
+      "id": 56,
+      "cat": "resumen_auto",
+      "tool": "QuillBot",
+      "body": "Parafraseo y resumen de textos con control de tono.",
+      "dific": 1,
+      "workflow": "Texto -> parafrasear/resumir",
+      "combinaciones": [
+        "translation_ai",
+        "texto_gen"
+      ],
+      "url": "https://quillbot.com",
+      "restricciones": "Plan free con límites; premium sin restricciones."
+    },
+    {
+      "id": 57,
+      "cat": "flashcards_ai",
+      "tool": "Quizlet Plus",
+      "body": "Generación de flashcards con IA y modo de estudio adaptativo.",
+      "dific": 1,
+      "workflow": "Contenido -> tarjetas -> estudio",
+      "combinaciones": [
+        "estudiar",
+        "tutor_ai"
+      ],
+      "url": "https://quizlet.com",
+      "restricciones": "Plan de pago para funciones IA."
+    },
+    {
+      "id": 58,
+      "cat": "texto_gen",
+      "tool": "Jasper",
+      "body": "Generador de contenido marketing con templates y brand voice.",
+      "dific": 2,
+      "workflow": "Template -> contenido -> editar",
+      "combinaciones": [
+        "copywriting_ai",
+        "email_gen"
+      ],
+      "url": "https://www.jasper.ai",
+      "restricciones": "Plan de pago; ideal para marketing."
+    },
+    {
+      "id": 59,
+      "cat": "texto_gen",
+      "tool": "Copy.ai",
+      "body": "Generador de copy para ads, emails y landing pages.",
+      "dific": 1,
+      "workflow": "Tipo -> contenido -> variaciones",
+      "combinaciones": [
+        "copywriting_ai",
+        "email_gen"
+      ],
+      "url": "https://www.copy.ai",
+      "restricciones": "Plan free con créditos limitados."
+    },
+    {
+      "id": 60,
+      "cat": "texto_gen",
+      "tool": "Notion AI",
+      "body": "IA integrada en Notion para resumir, escribir y organizar notas.",
+      "dific": 1,
+      "workflow": "Nota -> IA -> acción",
+      "combinaciones": [
+        "second_brain",
+        "resumen_auto"
+      ],
+      "url": "https://www.notion.so",
+      "restricciones": "Requiere suscripción Notion AI."
+    },
+    {
+      "id": 61,
+      "cat": "copywriting_ai",
+      "tool": "Writesonic",
+      "body": "Generador de contenido SEO y artículos con IA.",
+      "dific": 2,
+      "workflow": "Keyword -> artículo -> optimizar",
+      "combinaciones": [
+        "marketing_ai",
+        "texto_gen"
+      ],
+      "url": "https://writesonic.com",
+      "restricciones": "Créditos limitados en free."
+    },
+    {
+      "id": 62,
+      "cat": "marketing_ai",
+      "tool": "Surfer SEO",
+      "body": "Optimización de contenido con análisis de-ranking y keywords.",
+      "dific": 2,
+      "workflow": "Keyword -> análisis -> contenido optimizado",
+      "combinaciones": [
+        "copywriting_ai",
+        "texto_gen"
+      ],
+      "url": "https://surferseo.com",
+      "restricciones": "Plan de pago; integral para SEO."
+    },
+    {
+      "id": 63,
+      "cat": "marketing_ai",
+      "tool": "Clearscope",
+      "body": "Optimización de contenido basada en data de search.",
+      "dific": 2,
+      "workflow": "Tema -> palabras clave -> contenido",
+      "combinaciones": [
+        "copywriting_ai",
+        "texto_gen"
+      ],
+      "url": "https://www.clearscope.io",
+      "restricciones": "Plan de pago; ideal para blogs profesionales."
+    },
+    {
+      "id": 64,
+      "cat": "concept_to_visual",
+      "tool": "Canva AI",
+      "body": "Generación y edición de diseños con IA integrada en Canva.",
+      "dific": 1,
+      "workflow": "Plantilla -> personalizar -> exportar",
+      "combinaciones": [
+        "img_gen",
+        "powerpoint_ai"
+      ],
+      "url": "https://www.canva.com",
+      "restricciones": "Plan free con funciones IA limitadas."
+    },
+    {
+      "id": 65,
+      "cat": "concept_to_visual",
+      "tool": "Figma AI",
+      "body": "Herramientas de IA en Figma para diseño de interfaces.",
+      "dific": 2,
+      "workflow": "Boceto -> componente -> diseño",
+      "combinaciones": [
+        "concept_to_visual",
+        "code_gen"
+      ],
+      "url": "https://www.figma.com",
+      "restricciones": "Requiere Figma; funciones IA en desarrollo."
+    },
+    {
+      "id": 66,
+      "cat": "email_gen",
+      "tool": "Flowrite",
+      "body": "Genera emails profesionales desde instrucciones breves.",
+      "dific": 1,
+      "workflow": "Instrucción -> email -> enviar",
+      "combinaciones": [
+        "texto_gen",
+        "chatbot"
+      ],
+      "url": "https://flowrite.com",
+      "restricciones": "Plan de pago; integrado con Gmail."
+    },
+    {
+      "id": 67,
+      "cat": "chatbot",
+      "tool": "Otter.ai",
+      "body": "Transcripción de reuniones con resumen automático y acciones.",
+      "dific": 1,
+      "workflow": "Reunión -> transcripción -> resumen",
+      "combinaciones": [
+        "transcripcion",
+        "resumen_auto"
+      ],
+      "url": "https://otter.ai",
+      "restricciones": "Plan free limitado; integrado con Zoom."
+    },
+    {
+      "id": 68,
+      "cat": "dataviz_ai",
+      "tool": "Julius AI",
+      "body": "Analiza datos con lenguaje natural: gráficos, estadísticas, insights.",
+      "dific": 2,
+      "workflow": "Datos -> pregunta -> análisis visual",
+      "combinaciones": [
+        "dataviz_ai",
+        "reporting_auto"
+      ],
+      "url": "https://julius.ai",
+      "restricciones": "Plan free limitado; ideal para no-programadores."
+    },
+    {
+      "id": 69,
+      "cat": "dataviz_ai",
+      "tool": "Observable",
+      "body": "Notebooks interactivos con visualización de datos y IA.",
+      "dific": 2,
+      "workflow": "Datos -> notebook -> visualización",
+      "combinaciones": [
+        "dataviz_ai",
+        "reporting_auto"
+      ],
+      "url": "https://observablehq.com",
+      "restricciones": "Plan free para uso público."
+    },
+    {
+      "id": 70,
+      "cat": "reporting_auto",
+      "tool": "PolyAI",
+      "body": "Agentes de IA para atención al cliente con voz natural.",
+      "dific": 2,
+      "workflow": "Llamada -> agente -> resolución",
+      "combinaciones": [
+        "audio_tts",
+        "transcripcion"
+      ],
+      "url": "https://poly.ai",
+      "restricciones": "Enterprise; no hay plan free."
+    },
+    {
+      "id": 71,
+      "cat": "workflow_gen",
+      "tool": "Zapier AI",
+      "body": "Automatizaciones con IA que sugieren flujos y transforman datos.",
+      "dific": 1,
+      "workflow": "Trigger -> IA -> acción",
+      "combinaciones": [
+        "make_ai",
+        "n8n_ai"
+      ],
+      "url": "https://zapier.com",
+      "restricciones": "Tareas gratuitas limitadas."
+    },
+    {
+      "id": 72,
+      "cat": "workflow_gen",
+      "tool": "Activepieces",
+      "body": "Alternativa open source a Zapier con soporte IA.",
+      "dific": 2,
+      "workflow": "Trigger -> pieza -> acción",
+      "combinaciones": [
+        "n8n_ai",
+        "make_ai"
+      ],
+      "url": "https://activepieces.com",
+      "restricciones": "Self-hosted gratis; cloud de pago."
+    },
+    {
+      "id": 73,
+      "cat": "powerpoint_ai",
+      "tool": "Tome",
+      "body": "Genera presentaciones narrativas con IA desde una idea.",
+      "dific": 1,
+      "workflow": "Idea -> presentación -> compartir",
+      "combinaciones": [
+        "texto_gen",
+        "concept_to_visual"
+      ],
+      "url": "https://tome.app",
+      "restricciones": "Plan free con créditos limitados."
+    },
+    {
+      "id": 74,
+      "cat": "powerpoint_ai",
+      "tool": "Beautiful.ai",
+      "body": "Presentaciones con diseño automático y templates inteligentes.",
+      "dific": 1,
+      "workflow": "Contenido -> diseño auto -> exportar",
+      "combinaciones": [
+        "concept_to_visual",
+        "texto_gen"
+      ],
+      "url": "https://www.beautiful.ai",
+      "restricciones": "Plan de pago; plantillas premium."
+    },
+    {
+      "id": 75,
+      "cat": "audio_voice_clone",
+      "tool": "Resemble AI",
+      "body": "Clonación de voz en tiempo real con control de emociones.",
+      "dific": 3,
+      "workflow": "Voz -> clonar -> sintetizar",
+      "combinaciones": [
+        "audio_tts",
+        "translation_ai"
+      ],
+      "url": "https://www.resemble.ai",
+      "restricciones": "API de pago; requiere consentimiento."
+    },
+    {
+      "id": 76,
+      "cat": "podcast_gen",
+      "tool": "Riverside.fm",
+      "body": "Grabación de podcasts con transcripción y edición IA.",
+      "dific": 1,
+      "workflow": "Grabar -> transcribir -> editar",
+      "combinaciones": [
+        "transcripcion",
+        "audio_edit"
+      ],
+      "url": "https://riverside.fm",
+      "restricciones": "Plan free limitado; calidad profesional."
+    },
+    {
+      "id": 77,
+      "cat": "podcast_gen",
+      "tool": "Descript",
+      "body": "Editor de podcasts que edita como un documento de texto.",
+      "dific": 1,
+      "workflow": "Audio -> texto -> editar -> exportar",
+      "combinaciones": [
+        "transcripcion",
+        "audio_edit"
+      ],
+      "url": "https://www.descript.com",
+      "restricciones": "Plan free con horas limitadas."
+    },
+    {
+      "id": 78,
+      "cat": "audio_edit",
+      "tool": "Adobe Podcast",
+      "body": "Mejora de audio con IA: reduce ruido y ecualiza automáticamente.",
+      "dific": 1,
+      "workflow": "Audio -> IA -> audio limpio",
+      "combinaciones": [
+        "audio_tts",
+        "podcast_gen"
+      ],
+      "url": "https://podcast.adobe.com",
+      "restricciones": "Gratis; herramientas web."
+    },
+    {
+      "id": 79,
+      "cat": "translation_ai",
+      "tool": "Argos Translate",
+      "body": "Traducción open source que funciona offline.",
+      "dific": 1,
+      "workflow": "Texto -> modelo local -> traducción",
+      "combinaciones": [
+        "translation_ai",
+        "docs_ai"
+      ],
+      "url": "https://github.com/argosopentech/argos-translate",
+      "restricciones": "Gratis; modelos descargables."
+    },
+    {
+      "id": 80,
+      "cat": "docs_ai",
+      "tool": "Notion Q&A",
+      "body": "Pregunta a tu base de conocimiento de Notion y obtén respuestas.",
+      "dific": 1,
+      "workflow": "Pregunta -> Notion -> respuesta",
+      "combinaciones": [
+        "second_brain",
+        "retrieval_rag"
+      ],
+      "url": "https://www.notion.so",
+      "restricciones": "Requiere suscripción Notion AI."
+    },
+    {
+      "id": 81,
+      "cat": "transcripcion",
+      "tool": "Fireflies.ai",
+      "body": "Transcribe y analiza reuniones automáticamente.",
+      "dific": 1,
+      "workflow": "Reunión -> transcripción -> insights",
+      "combinaciones": [
+        "transcripcion",
+        "resumen_auto"
+      ],
+      "url": "https://fireflies.ai",
+      "restricciones": "Plan free limitado; integrado con Zoom/Meet."
+    },
+    {
+      "id": 82,
+      "cat": "transcripcion",
+      "tool": "Fathom",
+      "body": "Transcripción gratuita de reuniones con resúmenes IA.",
+      "dific": 1,
+      "workflow": "Reunión -> transcripción -> resumen",
+      "combinaciones": [
+        "transcripcion",
+        "resumen_auto"
+      ],
+      "url": "https://fathom.video",
+      "restricciones": "Gratis para uso personal; integrado con Zoom."
+    },
+    {
+      "id": 83,
+      "cat": "sistemas",
+      "tool": "Snyk",
+      "body": "Escaneo de vulnerabilidades en dependencias con IA.",
+      "dific": 2,
+      "workflow": "Código -> escaneo -> fix",
+      "combinaciones": [
+        "code_review",
+        "sistemas"
+      ],
+      "url": "https://snyk.io",
+      "restricciones": "Plan free limitado; integrado con CI/CD."
+    },
+    {
+      "id": 84,
+      "cat": "sistemas",
+      "tool": "Trivy",
+      "body": "Escaneo de vulnerabilidades en imágenes Docker y dependencias.",
+      "dific": 2,
+      "workflow": "Imagen -> escaneo -> reporte",
+      "combinaciones": [
+        "sistemas",
+        "sistemas"
+      ],
+      "url": "https://trivy.dev",
+      "restricciones": "Gratis; open source."
+    },
+    {
+      "id": 85,
+      "cat": "mindmap",
+      "tool": "Whimsical AI",
+      "body": "Genera diagramas, mindmaps y wireframes con IA.",
+      "dific": 1,
+      "workflow": "Idea -> diagrama -> editar",
+      "combinaciones": [
+        "unir_conceptos",
+        "concept_to_visual"
+      ],
+      "url": "https://whimsical.com",
+      "restricciones": "Plan free limitado."
+    },
+    {
+      "id": 86,
+      "cat": "unir_conceptos",
+      "tool": "Heptabase",
+      "body": "Canvas visual para conectar ideas con tarjetas y flujos.",
+      "dific": 2,
+      "workflow": "Tarjeta -> enlace -> canvas visual",
+      "combinaciones": [
+        "mindmap",
+        "second_brain"
+      ],
+      "url": "https://heptabase.com",
+      "restricciones": "Plan de pago; curva de aprendizaje."
+    },
+    {
+      "id": 87,
+      "cat": "ai_search",
+      "tool": "Perplexity",
+      "body": "Motor de búsqueda con IA que da respuestas con fuentes.",
+      "dific": 1,
+      "workflow": "Pregunta -> fuentes -> respuesta",
+      "combinaciones": [
+        "paper_ai",
+        "resumen_auto"
+      ],
+      "url": "https://perplexity.ai",
+      "restricciones": "Plan free; Pro para búsquedas profundas."
+    },
+    {
+      "id": 88,
+      "cat": "ai_search",
+      "tool": "You.com",
+      "body": "Búsqueda personalizada con IA y modo de código.",
+      "dific": 1,
+      "workflow": "Query -> resultados -> chat",
+      "combinaciones": [
+        "paper_ai",
+        "code_gen"
+      ],
+      "url": "https://you.com",
+      "restricciones": "Plan free disponible."
+    },
+    {
+      "id": 89,
+      "cat": "chatbot",
+      "tool": "Claude",
+      "body": "IA conversacional de Anthropic con contexto largo y análisis profundo.",
+      "dific": 1,
+      "workflow": "Pregunta -> análisis -> respuesta",
+      "combinaciones": [
+        "texto_gen",
+        "paper_ai"
+      ],
+      "url": "https://claude.ai",
+      "restricciones": "Plan free limitado; Pro para uso intensivo."
+    },
+    {
+      "id": 90,
+      "cat": "chatbot",
+      "tool": "Gemini",
+      "body": "IA de Google con integración en Workspace y búsqueda.",
+      "dific": 1,
+      "workflow": "Pregunta -> búsqueda -> respuesta",
+      "combinaciones": [
+        "paper_ai",
+        "docs_ai"
+      ],
+      "url": "https://gemini.google.com",
+      "restricciones": "Gratis con cuenta Google."
+    },
+    {
+      "id": 91,
+      "cat": "chatbot",
+      "tool": "ChatGPT",
+      "body": "IA conversacional de OpenAI con herramientas de código y búsqueda.",
+      "dific": 1,
+      "workflow": "Pregunta -> herramienta -> respuesta",
+      "combinaciones": [
+        "code_gen",
+        "paper_ai"
+      ],
+      "url": "https://chatgpt.com",
+      "restricciones": "Plan free; Plus para funciones avanzadas."
+    },
+    {
+      "id": 92,
+      "cat": "gpt_api",
+      "tool": "Groq",
+      "body": "API de inferencia ultrarrápida con modelos open source (Llama, Mixtral).",
+      "dific": 1,
+      "workflow": "Prompt -> API -> respuesta rápida",
+      "combinaciones": [
+        "llm_workflow",
+        "agentes"
+      ],
+      "url": "https://groq.com",
+      "restricciones": "Gratis con rate limits altos; sin modelos propietarios."
+    },
+    {
+      "id": 93,
+      "cat": "gpt_api",
+      "tool": "Together AI",
+      "body": "Plataforma de inferencia con 100+ modelos open source y fine-tuning.",
+      "dific": 2,
+      "workflow": "Modelo -> API -> respuesta",
+      "combinaciones": [
+        "llm_workflow",
+        "embeddings"
+      ],
+      "url": "https://www.together.ai",
+      "restricciones": "Créditos gratis iniciales; pago por uso."
+    },
+    {
+      "id": 94,
+      "cat": "vector_db",
+      "tool": "Pinecone",
+      "body": "Base de datos vectorial gestionada para búsqueda semántica.",
+      "dific": 2,
+      "workflow": "Embeddings -> índice -> consulta",
+      "combinaciones": [
+        "retrieval_rag",
+        "embeddings"
+      ],
+      "url": "https://www.pinecone.io",
+      "restricciones": "Plan free con 1M vectores; escalable."
+    },
+    {
+      "id": 95,
+      "cat": "vector_db",
+      "tool": "ChromaDB",
+      "body": "Base de datos vectorial open source ligera y fácil de usar.",
+      "dific": 2,
+      "workflow": "Documentos -> embeddings -> búsqueda",
+      "combinaciones": [
+        "retrieval_rag",
+        "embeddings"
+      ],
+      "url": "https://www.trychroma.com",
+      "restricciones": "Gratis; self-hosted o cloud."
+    },
+    {
+      "id": 96,
+      "cat": "img_gen",
+      "tool": "Stable Diffusion 3",
+      "body": "Modelo open source de generación de imágenes de alta calidad.",
+      "dific": 2,
+      "workflow": "Prompt -> modelo local -> imagen",
+      "combinaciones": [
+        "comfyui",
+        "img_edit"
+      ],
+      "url": "https://huggingface.co/stabilityai",
+      "restricciones": "Requiere GPU; 100% local y gratuito."
+    },
+    {
+      "id": 97,
+      "cat": "comfyui",
+      "tool": "ComfyUI",
+      "body": "Interfaz visual para pipelines de generación de imágenes con nodos.",
+      "dific": 3,
+      "workflow": "Nodos -> pipeline -> imagen/video",
+      "combinaciones": [
+        "img_gen",
+        "video_gen"
+      ],
+      "url": "https://github.com/comfyanonymous/ComfyUI",
+      "restricciones": "Requiere GPU; curva de aprendizaje alta."
+    },
+    {
+      "id": 98,
+      "cat": "texto_gen",
+      "tool": "Sudowrite",
+      "body": "Asistente de escritura creativa con IA para novelas y guiones.",
+      "dific": 2,
+      "workflow": "Escena -> estilo -> texto",
+      "combinaciones": [
+        "texto_gen",
+        "copywriting_ai"
+      ],
+      "url": "https://www.sudowrite.com",
+      "restricciones": "Plan de pago; ideal para ficción."
+    },
+    {
+      "id": 99,
+      "cat": "ocr",
+      "tool": "Textract (AWS)",
+      "body": "Extracción automática de texto y datos de documentos escaneados.",
+      "dific": 2,
+      "workflow": "Documento -> OCR -> datos estructurados",
+      "combinaciones": [
+        "docs_ai",
+        "reporting_auto"
+      ],
+      "url": "https://aws.amazon.com/textract",
+      "restricciones": "API AWS; coste por página."
+    },
+    {
+      "id": 100,
+      "cat": "automatizaciones",
+      "tool": "Bubble AI",
+      "body": "Constructor de apps full-stack con IA que genera UI y lógica.",
+      "dific": 2,
+      "workflow": "Idea -> drag-drop -> app completa",
+      "combinaciones": [
+        "workflow_gen",
+        "code_gen"
+      ],
+      "url": "https://bubble.io",
+      "restricciones": "Plan free con limitaciones; escalable."
+    },
+    {
+      "id": 101,
+      "cat": "code_gen",
+      "tool": "Windsurf",
+      "body": "Editor de código con IA que navega tu codebase y edita en múltiples archivos.",
+      "dific": 2,
+      "workflow": "Contexto -> sugerencia -> multi-file edit",
+      "combinaciones": [
+        "code_review",
+        "code_refactor"
+      ],
+      "url": "https://codeium.com/windsurf",
+      "restricciones": "Plan free limitado; requiere suscripción para uso intensivo."
+    },
+    {
+      "id": 102,
+      "cat": "video_edit",
+      "tool": "Runway",
+      "body": "Plataforma de edición de vídeo con IA: motion brush, inpainting y más.",
+      "dific": 2,
+      "workflow": "Vídeo -> IA -> efecto",
+      "combinaciones": [
+        "img_gen",
+        "video_gen"
+      ],
+      "url": "https://runwayml.com",
+      "restricciones": "Créditos limitados; funciones avanzadas de pago."
+    },
+    {
+      "id": 103,
+      "cat": "img_gen",
+      "tool": "Ideogram 2.0",
+      "body": "Genera imágenes con texto integrado y composición precisa.",
+      "dific": 2,
+      "workflow": "Prompt -> imagen con texto",
+      "combinaciones": [
+        "concept_to_visual",
+        "img_edit"
+      ],
+      "url": "https://ideogram.ai",
+      "restricciones": "Plan free limitado; ideal para logos."
     }
   ]
 }

@@ -92,10 +92,10 @@ class TestAiToolsGenerator:
         }
         msg = format_tool_message(tool, 1)
         assert "Whisper" in msg
-        assert "Flujo" in msg and "A -> B -> C" in msg
+        assert "Workflow" in msg and "A -> B -> C" in msg
         assert "Combina" in msg
         assert "https://openai.com/whisper" in msg
-        assert "Ojo" in msg and "Requiere GPU." in msg
+        assert "Limitaciones" in msg and "Requiere GPU." in msg
 
     def test_format_tool_message_sin_url_omite_enlace(self):
         tool = {
