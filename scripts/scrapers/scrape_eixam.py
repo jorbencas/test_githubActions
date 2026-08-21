@@ -496,8 +496,23 @@ def main():
     else:
         print("\n✅ Sin novedades: no hay contenido nuevo que archivar.")
 
-    if args.enviar:
-        _enviar_telegram(realmente_nuevos, por_tipo, len(todos), todos)
+    # Filtrar lo que realmente se debe enviar: items nuevos SIN enviar
+    # (los que ya tienen enviada=True se saltan)
+    por_enviar = [n for n in realmente_nuevos if not n.get("enviada", False)]
+
+    if args.enviar and por_enviar:
+        enviados = _enviar_telegram(por_enviar, por_tipo, len(todos), todos)
+        if enviados:
+            # Marcar en "todos" los que se enviaron
+            urls_enviadas = {e["url"] for e in enviados}
+            for item in todos:
+                if item["url"] in urls_enviadas:
+                    item["enviada"] = True
+            # Re-guardar con los flags enviada=True
+            OUTPUT_PATH.write_text(json.dumps(todos, ensure_ascii=False, indent=2), encoding="utf-8")
+            print(f"💾 Archivo actualizado: {len(urls_enviadas)} items marcados como enviados.")
+    elif args.enviar:
+        print("\n📭 No hay elementos nuevos sin enviar.")
 
 
 def _enviar_telegram(nuevos, por_tipo, total, todos=None):
@@ -569,8 +584,15 @@ def _enviar_telegram(nuevos, por_tipo, total, todos=None):
 
         print(f"✅ Media enviado a Telegram ({len(nuevos)} novedad(es) + cabecera)."
               if ok else "❌ Telegram: falló algún envío.")
+        # Devolver lista de items que se enviaron correctamente
+        enviados = []
+        for n in nuevos:
+            if _send_photo(n):
+                enviados.append(n)
+        return enviados
     except Exception as e:
         print(f"❌ Error enviando Telegram: {e}")
+        return []
 
 
 if __name__ == "__main__":

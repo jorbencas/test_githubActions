@@ -1,7 +1,9 @@
 name: "[SALUDOS] 🌅🏙️ Imagen Buenos días / noches (cada 3h)"
 on:
-  schedule:
-    - cron: "0 */3 * * *"   # Cada 3 horas: 00:00, 03:00, ... 21:00 UTC
+  # ⛔ DESHABILITADO: imágenes sin Gemini son basura.
+  # Para re-activar, descomenta el bloque schedule:
+  # schedule:
+  #   - cron: "0 */3 * * *"
   workflow_dispatch:
 
 jobs:
