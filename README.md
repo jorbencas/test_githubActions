@@ -30,7 +30,7 @@ Automated tech news ecosystem. Collects from **515 sources** (158 YouTube channe
 
 ## 📋 Overview
 
-This project runs **13 GitHub Actions workflows** that form a fully automated content pipeline:
+This project runs **15 GitHub Actions workflows** that form a fully automated content pipeline:
 
 1. **Scrape** — news and tools from 515 sources (158 YouTube channels, 151 RSS feeds, 107 web scraping, 89 GitHub Topics); 4 dual sources extract from both YouTube AND web scraping
 2. **Process** — AI summarization with Gemini, news grouped by source, automatic translation (only new items), image generation, deduplication, summaries persisted in JSON
@@ -188,7 +188,7 @@ All scripts run with `python -m` from the project root:
 
 ---
 
-## 🤖 GitHub Actions — 14 Workflows
+## 🤖 GitHub Actions — 15 Workflows
 
 | Workflow | Schedule / Trigger | Pipeline |
 |----------|-------------------|----------|
@@ -201,6 +201,7 @@ All scripts run with `python -m` from the project root:
 | **daily_saludo** | Every 3 hours | Imagen de saludo (Gemini → Unsplash → PIL fallback) |
 | **send_email** | Daily 09:00 UTC | Mailgun newsletter (grouped by source + videos) |
 | **send_telegram** | Every 30 min | Telegram + TTS (GitHub Actions Cache for dedup) |
+| **telegram_ai_bot** | Every 15 min | Bot IA local en Telegram: responde menciones/respuestas/`/ai` con Qwen 2.5 vía Ollama (`/help` para ver uso) |
 | **clean_news** | Quarterly | Link health check |
 | **hunt_challenges** | Weekly (Sun) | AI challenge generation |
 | **optimize_images** | Dispatch from blog | Image optimization for blog |
@@ -379,6 +380,20 @@ Repository variables:
 - **Resources** — pagination, cleanup, reordering, card management, cross-file dedup, malformed card fix
 - **Solutions** — database lookup, multi-language generation, edge cases
 - **Utilities** — JSON helpers, URL validation, deduplication, AI integration, `traducido` flag support
+
+---
+
+## 🦙 IA Local (Ollama + Qwen 2.5)
+
+Los workflows instalan **Ollama con Qwen 2.5 1.5B** en el propio runner de Actions, con el modelo cacheado (`actions/cache`, clave compartida `ollama-qwen2.5-1.5b`):
+
+- **`telegram_ai_bot`** — bot conversacional en Telegram 100% local:
+  - Menciona al bot: `@bot ¿qué es un closure?`
+  - Comando directo: `/ai explícame async/await`
+  - Responde a un mensaje del bot citándolo → usa el texto citado como contexto
+  - `/help` → muestra la ayuda de uso en el chat
+  - Sin estado en git: confirma los updates en el servidor de Telegram y filtra mensajes >15 min, así no interfiere con otros workflows
+- **Fallback de traducción** (`scrape_hourly`, `scrape_6h`) — si Gemini falla (cuota/404), los títulos de noticias se traducen con Qwen local; si Ollama tampoco está disponible, se omite silenciosamente
 
 ---
 

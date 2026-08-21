@@ -339,6 +339,10 @@ def _traducir_con_ollama(noticias: list, indices: list, lineas: list):
     Silenciosamente no hace nada si no hay Ollama disponible (timeout corto).
     Marca 'traducido=True' solo en los que consiga traducir."""
     import urllib.request
+    # El workflow puede desactivar el fallback (ej: Gemini pasó el ping)
+    if os.environ.get("OLLAMA_DISABLED") == "1":
+        logger.info("ℹ️ Fallback Ollama desactivado por configuración")
+        return 0
     url = os.environ.get("OLLAMA_URL", "http://localhost:11434")
     model = os.environ.get("OLLAMA_MODEL", "qwen2.5:1.5b")
 

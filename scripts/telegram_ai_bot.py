@@ -29,9 +29,22 @@ import time
 import urllib.error
 import urllib.request
 
-MAX_UPDATES = 20          # procesados como máximo por ejecución
+MAX_UPDATES = 50          # procesados como máximo por ejecución
 MAX_RESPUESTA = 3500      # Telegram corta a 4096; margen de seguridad
 MAX_EDAD = 15 * 60        # ignora mensajes con más de 15 min
+AYUDA = (
+    "🤖 *Soy el bot IA del canal* (modelo local Qwen 2.5)\n\n"
+    "*Cómo usarme:*\n"
+    "• Mencióname: `@bot tu pregunta`\n"
+    "• Comando: `/ai explícame los decoradores de Python`\n"
+    "• Responde (reply) a cualquiera de MIS mensajes con tu pregunta "
+    "— mantengo el contexto del hilo\n\n"
+    "*Comandos:*\n"
+    "• `/help` — muestra esta ayuda\n"
+    "• `/ai <texto>` — pregunta directa al modelo\n\n"
+    "_Puedo explicar conceptos, resolver dudas de código, traducir, "
+    "resumir texto que me pegues... lo que necesites._"
+)
 SYSTEM_PROMPT = (
     "Eres un asistente útil en un canal de Telegram sobre programación e IA. "
     "Responde en español, de forma concisa (máximo 150 palabras), clara y "
@@ -115,6 +128,20 @@ def preguntar_ollama(url: str, model: str, prompt: str) -> str | None:
         return None
 
 
+def construir_prompt(texto: str, msg: dict) -> str:
+    """Construye el prompt. Si el mensaje es una respuesta a otro, incluye
+    el texto citado como contexto (así 'responder citando' funciona)."""
+    reply = msg.get("reply_to_message") or {}
+    citado = (reply.get("text") or reply.get("caption") or "").strip()
+    autor = ((reply.get("from") or {}).get("first_name")
+             or (reply.get("chat") or {}).get("title") or "").strip()
+    if citado and not texto.lower().startswith("/ai"):
+        return (f"Contexto del mensaje citado de {autor}:\n"
+                f"\"{citado[:1000]}\"\n\n"
+                f"Mi pregunta sobre eso:\n{texto}")
+    return texto
+
+
 def main():
     token = os.environ.get("BOT_TOKEN")
     if not token:
@@ -157,15 +184,26 @@ def main():
         user = (msg.get("from") or {}).get("first_name", "")
         print(f"[msg] {user}: {texto[:80]}", flush=True)
 
-        respuesta = preguntar_ollama(url, model, texto)
+        payload = {"chat_id": chat_id}
+        if msg.get("message_id"):
+            payload["reply_to_message_id"] = msg["message_id"]
+
+        # Comando /help (solo, o tras mención) → respuesta fija sin LLM
+        if texto.lower() in ("help", "/help", "ayuda", "?"):
+            payload["text"] = AYUDA
+            payload["parse_mode"] = "Markdown"
+            if tg(token, "sendMessage", payload):
+                respondidos += 1
+            continue
+
+        respuesta = preguntar_ollama(url, model,
+                                     construir_prompt(texto, msg))
         if not respuesta:
             respuesta = "Vaya, ahora mismo no consigo pensar. Inténtalo luego."
         if len(respuesta) > MAX_RESPUESTA:
             respuesta = respuesta[:MAX_RESPUESTA - 3] + "..."
 
-        payload = {"chat_id": chat_id, "text": respuesta}
-        if msg.get("message_id"):
-            payload["reply_to_message_id"] = msg["message_id"]
+        payload["text"] = respuesta
         if tg(token, "sendMessage", payload):
             respondidos += 1
 

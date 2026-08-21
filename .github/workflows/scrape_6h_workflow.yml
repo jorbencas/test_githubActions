@@ -25,13 +25,35 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      - name: 🔍 Ping Gemini (¿hace falta fallback?)
+        id: ping
+        run: |
+          # Si Gemini responde, nos saltamos instalar Ollama (~45s/run)
+          if [ -z "$GEMINI_API_KEY" ]; then
+            echo "needed=true" >> $GITHUB_OUTPUT; exit 0
+          fi
+          HTTP=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 \
+            -H "x-goog-api-key: $GEMINI_API_KEY" \
+            -H 'Content-Type: application/json' \
+            -d '{"contents":[{"parts":[{"text":"ping"}]}]}' \
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent")
+          echo "Gemini HTTP $HTTP"
+          if [ "$HTTP" != "200" ]; then
+            echo "needed=true" >> $GITHUB_OUTPUT
+          else
+            echo "needed=false" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       - name: Cache Ollama models (compartida con el bot)
+        if: steps.ping.outputs.needed == 'true'
         uses: actions/cache@v4
         with:
           path: ~/.ollama
           key: ollama-qwen2.5-1.5b
           restore-keys: ollama-
       - name: 🦙 Instalar y arrancar Ollama (fallback traducción)
+        if: steps.ping.outputs.needed == 'true'
         run: |
           if ! command -v ollama >/dev/null; then
             curl -fsSL https://ollama.com/install.sh | sh
@@ -46,6 +68,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           OLLAMA_MODEL: qwen2.5:1.5b
+          OLLAMA_DISABLED: ${{ steps.ping.outputs.needed == 'true' && '0' || '1' }}
         run: python -m scripts.scrapers.scrape_news --tier standard
       - name: 📝 Push cambios
         if: always()
