@@ -1,5 +1,57 @@
 [
     {
+        "titulo": "Steve Jobs aprendió de niño la importancia de perder la vergüenza a pedir favores",
+        "enlace": "https://www.applesfera.com/curiosidades/steve-jobs-aprendio-nino-importancia-perder-verguenza-a-pedir-favores",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "f": "22/08",
+        "fecha_publicacion": "2026-08-22T16:01:33Z",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "22/08/2026",
+        "ts": "2026-08-22T18:30:41.390963"
+    },
+    {
+        "titulo": "23 juegos multijugador para Android para jugar en local o a distancia",
+        "enlace": "https://www.xatakamovil.com/aplicaciones/mejores-juegos-multijugador-movil-ios-android",
+        "fuente": "Xataka Móvil",
+        "tipo": "noticia",
+        "f": "22/08",
+        "fecha_publicacion": "2026-08-22T16:01:33Z",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "22/08/2026",
+        "ts": "2026-08-22T18:30:42.856551"
+    },
+    {
+        "titulo": "Modo avión o no molestar del móvil: diferencias, cuándo deberías elegir cada uno y cuál ayuda a ahorrar más batería",
+        "enlace": "https://www.computerhoy.com/moviles/modo-avion-no-molestar-movil-diferencias-cuando-deberias-elegir-cada-uno-cual-ayuda-ahorrar-mas-bateria_7025029_0.html",
+        "fuente": "ComputerHoy",
+        "tipo": "noticia",
+        "f": "22/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "22/08/2026",
+        "ts": "2026-08-22T18:30:42.988239"
+    },
+    {
+        "titulo": "¿Por qué está corriendo algo en tu PC? El repositorio de GitHub que lo resuelve fácilmente",
+        "enlace": "https://www.computerhoy.com/tecnologia/por-que-esta-corriendo-algo-tu-pc-repositorio-github-que-resuelve-facilmente_7023564_0.html",
+        "fuente": "ComputerHoy",
+        "tipo": "noticia",
+        "f": "22/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "22/08/2026",
+        "ts": "2026-08-22T18:30:42.989453"
+    },
+    {
         "titulo": "Las 6 mejores películas de ciencia ficción del año",
         "enlace": "https://hipertextual.com/cine-television/las-6-mejores-peliculas-de-ciencia-ficcion-del-ano/",
         "fuente": "Hipertextual",
