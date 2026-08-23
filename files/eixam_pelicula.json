@@ -325,5 +325,17 @@
     "relevancia": 3,
     "pelicula": "Eixam",
     "enviada": true
+  },
+  {
+    "titulo": "Enjambre (Eixam) - Tráiler español",
+    "url": "https://www.youtube.com/watch?v=r58GZrPdRWE",
+    "fecha_pub": "",
+    "fecha_ts": "2026-08-23T13:01:09.124631",
+    "medio": "CineTrailer",
+    "imagen": "https://i.ytimg.com/vi/r58GZrPdRWE/hqdefault.jpg",
+    "tipo": "trailer",
+    "relevancia": 1,
+    "pelicula": "Eixam",
+    "enviada": true
   }
 ]
