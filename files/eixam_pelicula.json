@@ -313,5 +313,17 @@
     "relevancia": 1,
     "pelicula": "Eixam",
     "enviada": true
+  },
+  {
+    "titulo": "La Maria lanza 'La Mentida', canción original de 'Eixam', película de Óscar Bernàcer que se estrena el 4 de septiembre",
+    "url": "https://www.europapress.es/comunitat-valenciana/noticia-maria-lanza-mentida-cancion-original-eixam-pelicula-oscar-bernacer-estrena-septiembre-20260821124533.html",
+    "fecha_pub": "Fri, 21 Aug 2026 05:45:00 GMT",
+    "fecha_ts": "2026-08-23T01:59:18.943601",
+    "medio": "Europa Press",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Eixam",
+    "enviada": true
   }
 ]
