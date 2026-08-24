@@ -1,5 +1,18 @@
 [
     {
+        "titulo": "VLM Run Gateway: Run GLM-OCR, DeepSeek-OCR-2, dots.mocr with an OpenAI Compatible APIvlm-run•4 days ago•6",
+        "enlace": "https://huggingface.co/blog/vlm-run/intro-to-vlmrun-gateway",
+        "fuente": "Hugging Face",
+        "tipo": "noticia",
+        "f": "24/08",
+        "fecha_publicacion": "2026-08-19T20:29:56",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "https://cdn-avatars.huggingface.co/v1/production/uploads/6079c852921db717010c7c9a/mzbOogGWIXAfhhI4lMLBA.png",
+        "fecha_real": "24/08/2026",
+        "ts": "2026-08-24T01:18:42.142531"
+    },
+    {
         "titulo": "The text mode lie: why modern TUIs are a nightmare for accessibility",
         "enlace": "https://www.osnews.com/story/144892/the-text-mode-lie-why-modern-tuis-are-a-nightmare-for-accessibility/",
         "fuente": "Lobsters",
