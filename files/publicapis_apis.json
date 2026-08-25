@@ -10998,5 +10998,16 @@
         "subtipo": "api",
         "descripcion": "Danbooru is an thousands of anime artist database to find good anime art. Random anime photos.",
         "categoria": "Anime"
+    },
+    {
+        "titulo": "Webz.io  API",
+        "enlace": "https://publicapis.io/webz-io-news-api",
+        "fuente": "Public APIs",
+        "tipo": "herramienta",
+        "f": "25/08",
+        "fecha_publicacion": "",
+        "subtipo": "api",
+        "descripcion": "Webz.io News APIs provide global news data for search, monitoring, analytics, and AI applications, with powerful filters and natural-language search.",
+        "categoria": "News"
     }
 ]
