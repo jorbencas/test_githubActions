@@ -1,5 +1,33 @@
 [
     {
+        "titulo": "25 de agosto de 2026: AgentHands: Generación de gestos de mano interactivos para conversaciones espaciales y físicas en XR: Human-Computer Interaction and Visualization·Inteligencia Artificial",
+        "enlace": "https://research.google/blog/agenthands-generating-interactive-hand-gestures-for-spatially-grounded-agent-conversations-in-xr/",
+        "fuente": "Google Research",
+        "tipo": "noticia",
+        "f": "26/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "https://storage.googleapis.com/gweb-research2023-media/original_images/AgentHands5_Workflow.png",
+        "fecha_real": "26/08/2026",
+        "ts": "2026-08-26T01:20:16.747972",
+        "traducido": true
+    },
+    {
+        "titulo": "¿Cómo reparar un API Key rotado: Guía para la seguridad de Git para los desarrolladores",
+        "enlace": "https://www.freecodecamp.org/news/how-to-fix-a-leaked-api-key/",
+        "fuente": "freeCodeCamp",
+        "tipo": "noticia",
+        "f": "26/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💻 Programación",
+        "imagen_url_original": "",
+        "fecha_real": "26/08/2026",
+        "ts": "2026-08-26T01:20:25.347267",
+        "traducido": true
+    },
+    {
         "titulo": "La startup de robótica Generalist alcanza una valoración de 3 mil millones de dólares, según fuentes.",
         "enlace": "https://techcrunch.com/2026/08/25/robotics-startup-generalist-reaches-3b-valuation-sources-say/",
         "fuente": "TechCrunch",
