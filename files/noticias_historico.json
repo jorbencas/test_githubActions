@@ -1,5 +1,44 @@
 [
     {
+        "titulo": "Claude Opus 4.8",
+        "enlace": "https://docs.anthropic.com/docs/en/release-notes/system-prompts/claude-opus-4-8",
+        "fuente": "Claude Blog",
+        "tipo": "noticia",
+        "f": "30/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "30/08/2026",
+        "ts": "2026-08-30T04:02:35.402421"
+    },
+    {
+        "titulo": "Consejos y aprendizajes de IAModelos abiertos vs cerrados: compensaciones para constructoresExplora los compromisos cruciales entre los modelos abiertos y cerrados en el desarrollo de IA, destacando sus implicaciones para los constructores.August 30, 2026",
+        "enlace": "https://cleverai.app/es/blog/modelos-abiertos-vs-modelos-cerrados-compensaciones-para-constructores",
+        "fuente": "CleverAI",
+        "tipo": "noticia",
+        "f": "30/08",
+        "fecha_publicacion": "2026-08-30T00:02:16.922Z",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "https://cleverai.app/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgenius-ai-app-test-1.appspot.com%2Fblog%2Ffeatured%2FSOE17_cyu3IxzTiCdRk7i.webp&w=3840&q=75",
+        "fecha_real": "30/08/2026",
+        "ts": "2026-08-30T04:02:56.035657"
+    },
+    {
+        "titulo": "La IA se está convirtiendo en el tercer progenitor: así están usando los padres los chatbots para criar a sus hijos",
+        "enlace": "https://www.businessinsider.es/big-tech/ia-se-esta-convirtiendo-tercer-progenitor-asi-estan-usando-los-padres-los-chatbots-para-criar-sus-hijos_7030232_0.html",
+        "fuente": "Business Insider Big Tech",
+        "tipo": "noticia",
+        "f": "30/08",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "30/08/2026",
+        "ts": "2026-08-30T04:02:59.946589"
+    },
+    {
         "titulo": "Bug Blindness",
         "enlace": "https://danluu.com/bug-blind/",
         "fuente": "Hacker News",
