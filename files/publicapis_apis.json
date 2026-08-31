@@ -11009,5 +11009,16 @@
         "subtipo": "api",
         "descripcion": "Webz.io News APIs provide global news data for search, monitoring, analytics, and AI applications, with powerful filters and natural-language search.",
         "categoria": "News"
+    },
+    {
+        "titulo": "iGaming Tools",
+        "enlace": "https://publicapis.io/igaming-tools-api",
+        "fuente": "Public APIs",
+        "tipo": "herramienta",
+        "f": "31/08",
+        "fecha_publicacion": "",
+        "subtipo": "api",
+        "descripcion": "Structured iGaming data API: providers, game catalogues with mechanics, RTP and volatility, plus release history, industry news, jobs and per-market search demand. Free tier, full OpenAPI 3 schema, MC",
+        "categoria": "Games & Comics"
     }
 ]
