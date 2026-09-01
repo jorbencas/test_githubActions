@@ -2,14 +2,14 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 20,
+    "total_concepts": 22,
     "categories": [
       "css_moderno",
       "devops",
       "interfaces",
       "patrones_diseno"
     ],
-    "last_scraped": "2026-09-01T11:15:47.051222"
+    "last_scraped": "2026-09-01T16:12:07.830475"
   },
   "concepts": [
     {
@@ -391,6 +391,42 @@
       ],
       "cat": "css_moderno",
       "scraped_at": "2026-09-01T11:15:44.050330"
+    },
+    {
+      "title": "Tower en Rust: Service, Layer y middleware componible para aplicaciones async",
+      "summary": "Tower es una biblioteca de componentes para construir aplicaciones de red robustas y componibles. Define dos traits fundamentales,ServiceyLayer, que son la base del sistema de middlewares en prácticam",
+      "explanation": "Tower es una biblioteca de componentes para construir aplicaciones de red robustas y componibles. Define dos traits fundamentales,ServiceyLayer, que son la base del sistema de middlewares en prácticamente todo el ecosistema Rust async: Axum, Tonic (gRPC), Hyper y muchos otros frameworks los usan directamente. La idea central de Tower es que un servidor web, una llamada a base de datos o una petición HTTP son todos, conceptualmente, lo mismo: recibes una petición, haces algo, devuelves una respuesta. Eso es unService.El trait Servicepub trait Service<Request> {\n    type Response;\n    type Error;\n    type Future: Future<Output = Result<Self::Response, Self::Error>>;\n\n    fn poll_ready(&mut self, cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>>;\n    fn call(&mut self, req: Request) -> Self::Future;\n} UnService<Request>recibe unRequesty devuelve un future que produceResult<Response, Error>. El métodopoll_readypermite al service indicar si está listo para aceptar más peticiones (útil para backpressure). Un service mínimo:use std::future::Future;\nuse std::pin::Pin;\nuse std::task::{Context, Poll};\nuse tower::Service;\n\nstruct Eco;\n\nimpl Service<String> for Eco {\n    type Response = String;\n    type Error = std::convert::Infallible;\n    type Future = Pin<Box<dyn Future<Output = Result<String, Self::Error>> + Send>>;\n\n    fn poll_ready(&mut self, _cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>> {\n        Poll::Ready(Ok(()))\n    }\n\n    fn call(&mut self, req: String) -> Sel",
+      "code_example": "pub trait Service<Request> {\n    type Response;\n    type Error;\n    type Future: Future<Output = Result<Self::Response, Self::Error>>;\n\n    fn poll_ready(&mut self, cx: &mut Context<'_>) -> Poll<Result<(), Self::Error>>;\n    fn call(&mut self, req: Request) -> Self::Future;\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-01T16:11:24.730349"
+    },
+    {
+      "title": "Vapor en Swift: routes, controllers, Fluent ORM, middleware y deploy en Linux",
+      "summary": "Swift en el servidor es una realidad productiva gracias a Vapor, el framework web más completo del ecosistema. Funciona en Linux y macOS, tiene un rendimiento comparable a Go en benchmarks de concurre",
+      "explanation": "Swift en el servidor es una realidad productiva gracias a Vapor, el framework web más completo del ecosistema. Funciona en Linux y macOS, tiene un rendimiento comparable a Go en benchmarks de concurrencia, y aprovecha el sistema de tipos de Swift para hacer que errores comunes en otros frameworks sean imposibles en tiempo de compilación. Este artículo cubre el ciclo completo: rutas, controladores, Fluent ORM, middleware y despliegue.Estructura de un proyecto Vaporvapor new MiAPI --template api\ncd MiAPI\nswift run La estructura básica:// Sources/App/configure.swift\nimport Vapor\nimport Fluent\nimport FluentPostgresDriver\n\npublic func configure(_ app: Application) async throws {\n    // Base de datos\n    app.databases.use(\n        .postgres(configuration: .init(\n            hostname: Environment.get(\"DB_HOST\") ?? \"localhost\",\n            username: Environment.get(\"DB_USER\") ?? \"vapor\",\n            password: Environment.get(\"DB_PASSWORD\") ?? \"\",\n            database: Environment.get(\"DB_NAME\") ?? \"miapi\"\n        )),\n        as: .psql\n    )\n\n    // Migraciones\n    app.migrations.add(CrearUsuarios())\n    app.migrations.add(CrearPosts())\n    try await app.autoMigrate()\n\n    // Rutas\n    try routes(app)\n}Rutas: definición y agrupación Las rutas en Vapor son funciones que reciben unRequesty retornan algo que conforme aResponseEncodable:// Sources/App/routes.swift\nfunc routes(_ app: Application) throws {\n    // Ruta simple\n    app.get(\"health\") { req in\n        [\"status\": \"ok\"]\n    }\n\n   ",
+      "code_example": "vapor new MiAPI --template api\ncd MiAPI\nswift run",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-01T16:11:26.361652"
     }
   ]
 }
