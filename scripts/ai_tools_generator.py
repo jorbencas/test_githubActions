@@ -25,6 +25,7 @@ DB_PATH = SCRIPT_DIR / "utils" / "ai_tools_database.json"
 HISTORY_PATH = SCRIPT_DIR.parent / "ai_tools_history.json"
 NEWS_PATH = SCRIPT_DIR.parent / "files" / "noticias_historico.json"
 TOOLS_PATH = SCRIPT_DIR.parent / "files" / "herramientas.json"
+CANDIDATES_PATH = SCRIPT_DIR.parent / "files" / "ai_tools_candidates.json"
 
 BOT_TOKEN = os.environ.get("TIPS_BOT_TOKEN", "")
 CHAT_ID = os.environ.get("AI_TOOLS_CHAT_ID", os.environ.get("TIPS_CHAT_ID", "-1004380905505"))
@@ -112,6 +113,28 @@ def load_recent_tools(count=10):
         return []
 
 
+def load_ai_candidates(count=15):
+    if not CANDIDATES_PATH.exists():
+        return []
+    try:
+        with open(CANDIDATES_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        if not isinstance(data, list):
+            return []
+        result = []
+        for item in data[:count]:
+            titulo = item.get("titulo", "")
+            desc = item.get("descripcion", "")
+            lang = item.get("lenguaje", "")
+            stars = item.get("estrellas", "")
+            source = item.get("fuente", "")
+            if titulo:
+                result.append(f"- {titulo} ({source}, {lang}, ⭐{stars}): {desc}")
+        return result
+    except Exception:
+        return []
+
+
 def select_random_categories(count=5):
     return random.sample(ALL_CATEGORIES, min(count, len(ALL_CATEGORIES)))
 
@@ -146,11 +169,12 @@ def _cat_label(cat):
     return f"{emoji} {nombre}"
 
 
-def build_gemini_prompt(categories, sent_titles, news, tools):
+def build_gemini_prompt(categories, sent_titles, news, tools, candidates=None):
     cats_str = "\n".join(f"- {c} ({CAT_NAMES.get(c, c)})" for c in categories)
     titles_str = "\n".join(sent_titles[:200]) if sent_titles else "(nunca se han enviado herramientas antes)"
     news_str = "\n".join(news[:15]) if news else "(no hay noticias recientes disponibles)"
     tools_str = "\n".join(tools[:10]) if tools else "(no hay herramientas trending disponibles)"
+    candidates_str = "\n".join(candidates[:15]) if candidates else "(no hay candidatos auto-detectados)"
 
     return f"""Eres un curador experto en herramientas de Inteligencia Artificial. Propones herramientas de IA EN ESPAÑOL para contenido multimedia, unión de conceptos, automatizaciones, estudio y generación.
 
@@ -159,6 +183,9 @@ def build_gemini_prompt(categories, sent_titles, news, tools):
 
 === HERRAMIENTAS YA ENVIADAS (NUNCA REPETIR) ===
 {titles_str}
+
+=== CANDIDATOS AUTO-DETECTADOS (ALTA PRIORIDAD: usa estos si encajan) ===
+{candidates_str}
 
 === NOTICIAS TECH DE HOY (inspiración) ===
 {news_str}
@@ -179,6 +206,8 @@ def build_gemini_prompt(categories, sent_titles, news, tools):
 10. NUNCA uses emojis en los campos "tool" ni "body"
 11. Usa nombres de herramientas reales y conocidas (respeta la clave exacta de categoría)
 12. Varía dificultad: 1=básico, 2=intermedio, 3=avanzado
+13. PRIORIZA herramientas de la sección CANDIDATOS AUTO-DETECTADOS si son relevantes
+14. Si un candidato aparece en múltiples fuentes (HF + GitHub), dale MÁXIMA prioridad
 
 === LISTADO TOTAL DE CATEGORÍAS (usa estas claves exactas en "cat" y en "combinaciones") ===
 {', '.join(sorted(ALL_CATEGORIES))}
@@ -217,7 +246,8 @@ def generate_tools_gemini(count, categories, sent_titles):
 
     news = load_recent_news(15)
     tools = load_recent_tools(10)
-    prompt = build_gemini_prompt(categories, sent_titles, news, tools)
+    candidates = load_ai_candidates(15)
+    prompt = build_gemini_prompt(categories, sent_titles, news, tools, candidates)
 
     try:
         response = client.models.generate_content(

@@ -70,12 +70,14 @@ jobs:
           OLLAMA_MODEL: qwen2.5:1.5b
           OLLAMA_DISABLED: ${{ steps.ping.outputs.needed == 'true' && '0' || '1' }}
         run: python -m scripts.scrapers.scrape_news --tier standard
+      - name: 🧰 Scrape AI tools candidates (HF + GitHub)
+        run: python -m scripts.scrapers.scrape_ai_tools
       - name: 📝 Push cambios
         if: always()
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add files/noticias_historico.json files/avatars_cache.json
-          git diff --quiet --cached || git commit -m "[bot] 6h scrape (tier standard)"
+          git add files/noticias_historico.json files/avatars_cache.json files/ai_tools_candidates.json
+          git diff --quiet --cached || git commit -m "[bot] 6h scrape (tier standard + ai tools)"
           git pull --rebase origin master
           git push origin master

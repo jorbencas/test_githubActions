@@ -18,6 +18,7 @@ CONFIG = {
 # ── File paths (centralized) ──
 NOTICIAS_FILENAME = "noticias_historico.json"
 HERRAMIENTAS_FILENAME = "herramientas.json"
+AI_TOOLS_CANDIDATES_FILENAME = "ai_tools_candidates.json"
 AVATARS_CACHE_FILENAME = "avatars_cache.json"
 TELEGRAM_SENT_FILENAME = "telegram_sent.json"
 TELEGRAM_VOICE_SENT_FILENAME = "telegram_voice_sent.json"
