@@ -25,6 +25,7 @@ DB_PATH = SCRIPT_DIR / "utils" / "tips_database.json"
 HISTORY_PATH = SCRIPT_DIR.parent / "tips_history.json"
 NEWS_PATH = SCRIPT_DIR.parent / "files" / "noticias_historico.json"
 TOOLS_PATH = SCRIPT_DIR.parent / "files" / "herramientas.json"
+CONCEPTS_PATH = SCRIPT_DIR / "utils" / "concepts_database.json"
 
 # ── Telegram config ──
 BOT_TOKEN = os.environ.get("TIPS_BOT_TOKEN", "")
@@ -302,6 +303,10 @@ CAT_EMOJI = {
     "cv_tech": "📄",
     "freelance": "💼",
     "remote_work": "🏠",
+    "habilidades": "🧩",
+    "interfaces": "🔌",
+    "css_moderno": "🎨",
+    "patrones_lenguajes": "🧬",
 }
 
 CAT_NAMES = {
@@ -571,6 +576,19 @@ CAT_NAMES = {
     "cv_tech": "CV/Currículum Tech",
     "freelance": "Freelance",
     "remote_work": "Trabajo Remoto",
+    "patrones_diseno": "Patrones de Diseño",
+    "poo": "POO",
+    "seguridad_web": "Seguridad Web",
+    "rag_ai": "RAG e IA",
+    "entrevistas": "Entrevistas Técnicas",
+    "arquitectura": "Arquitectura",
+    "bases_datos": "Bases de Datos",
+    "rendering": "Renderizado",
+    "multithread": "Multithreading",
+    "habilidades": "Habilidades y Skills",
+    "interfaces": "Interfaces y Abstract",
+    "css_moderno": "CSS Moderno",
+    "patrones_lenguajes": "Patrones por Lenguaje",
 }
 
 ALL_CATEGORIES = list(CAT_EMOJI.keys())
@@ -640,6 +658,122 @@ def load_recent_tools(count=10):
 
 def select_random_categories(count=6):
     return random.sample(ALL_CATEGORIES, min(count, len(ALL_CATEGORIES)))
+
+
+def load_concepts_database():
+    if not CONCEPTS_PATH.exists():
+        return {"meta": {}, "concepts": []}
+    try:
+        with open(CONCEPTS_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {"meta": {}, "concepts": []}
+
+
+def select_concepts_from_db(concepts_db, sent_titles, categories, count=5):
+    all_concepts = concepts_db.get("concepts", [])
+    sent = set(sent_titles)
+    available = [c for c in all_concepts if c.get("title", "").lower().strip() not in {s.lower().strip() for s in sent}]
+    preferred = [c for c in available if c.get("cat") in categories]
+    if len(preferred) < count:
+        preferred += [c for c in available if c not in preferred]
+    random.shuffle(preferred)
+    return preferred[:count]
+
+
+def build_concepts_gemini_prompt(categories, sent_titles):
+    cats_str = ", ".join(categories)
+    titles_str = "\n".join(sent_titles[:200]) if sent_titles else "(nunca se han enviado conceptos antes)"
+
+    return f"""Eres un profesor experto en tecnologías de la información. Generas CONCEPTOS DE PROGRAMACIÓN EN ESPAÑOL para profesionales de IT.
+
+=== CATEGORÍAS DE ESTE BATCH ===
+{cats_str}
+
+=== CONCEPTOS YA ENVIADOS (NUNCA REPETIR) ===
+{titles_str}
+
+=== REGLAS ESTRICTAS ===
+1. Genera EXACTAMENTE 5 CONCEPTOS DE PROGRAMACIÓN
+2. Cada concepto = UNA categoría DIFERENTE del batch
+3. NUNCA repitas título, concepto ni idea de la lista de enviados
+4. Cada concepto debe tener: title, summary, explanation (3-5 párrafos), code_example, use_cases, difficulty, language, interview_relevant, interview_question, interview_answer
+5. Todo en ESPAÑOL correcto
+6. NUNCA uses emojis en el body ni en el título
+7. Usa términos técnicos en INGLÉS cuando sea estándar
+8. Varía dificultad: 1=básico, 2=intermedio, 3=avanzado
+9. INCLUYE siempre un code_example real y ejecutable cuando el concepto lo permita
+10. INCLUYE interview_question e interview_answer para ALMENOS 3 de los 5 conceptos
+11. use_cases debe ser una lista de 2-3 casos de uso reales
+12. IMPORTANTE: Genera al menos 1 concepto de patrones_diseno, 1 de kafka o multithread, 1 de entrevistas
+
+=== FORMATO DE RESPUESTA ===
+SOLO el JSON array, sin markdown, sin texto adicional:
+[
+  {{
+    "cat": "patrones_diseno",
+    "title": "Patrón Observer",
+    "summary": "Define una dependencia uno-a-muchos.",
+    "explanation": "Explicación detallada en 3-4 párrafos sobre el patrón, cómo funciona, ventajas y desventajas...",
+    "code_example": "class Subject:\\n    def __init__(self):\\n        self._observers = []\\n    def attach(self, observer):\\n        self._observers.append(observer)\\n    def notify(self):\\n        for o in self._observers:\\n            o.update(self)",
+    "use_cases": ["Sistemas de eventos", "MVC", "Reactividad"],
+    "difficulty": 2,
+    "language": "python",
+    "interview_relevant": true,
+    "interview_question": "¿Qué diferencia Observer de Pub/Sub?",
+    "interview_answer": "Observer es síncrono y directo. Pub/Sub usa un broker intermedio...",
+    "type": "concepto"
+  }}
+]"""
+
+
+def generate_concepts_gemini(count, categories, sent_titles):
+    if not GEMINI_API_KEY:
+        print("⚠️  GEMINI_API_KEY no configurada. Solo se usarán conceptos de la DB.")
+        return None
+
+    try:
+        from google import genai
+        client = genai.Client(api_key=GEMINI_API_KEY)
+    except ImportError:
+        print("⚠️  google-genai no instalado. Solo se usarán conceptos de la DB.")
+        return None
+    except Exception as e:
+        print(f"⚠️  Error al inicializar Gemini: {e}")
+        return None
+
+    prompt = build_concepts_gemini_prompt(categories, sent_titles)
+
+    try:
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt,
+        )
+        text = response.text.strip()
+        if text.startswith("```"):
+            text = text.split("\n", 1)[1] if "\n" in text else text[3:]
+            if text.endswith("```"):
+                text = text[:-3]
+            text = text.strip()
+        concepts = json.loads(text)
+        if isinstance(concepts, list) and len(concepts) > 0:
+            valid = []
+            for c in concepts:
+                if all(k in c for k in ("cat", "title", "explanation")):
+                    if c["cat"] in CAT_EMOJI:
+                        c["type"] = "concepto"
+                        valid.append(c)
+            if valid:
+                print(f"✅ Gemini generó {len(valid)} conceptos nuevos")
+                return valid[:count]
+        print("⚠️  Respuesta de Gemini no tiene formato válido para conceptos")
+        return None
+    except json.JSONDecodeError:
+        print("⚠️  Gemini respondió con JSON inválido para conceptos")
+        return None
+    except Exception as e:
+        print(f"⚠️  Error al llamar a Gemini para conceptos: {e}")
+        return None
 
 
 def select_tips_from_db(database, history, count=5, tip_type=None):
@@ -855,7 +989,7 @@ def interleave_tips_tricks(tips, tricks, total=10):
 
 
 DIFFICULTY_BAR = {1: "●○○", 2: "●●○", 3: "●●●"}
-TYPE_LABEL = {"tip": "💡 Tip", "trick": "⚡ Trick"}
+TYPE_LABEL = {"tip": "💡 Tip", "trick": "⚡ Trick", "concepto": "📘 Concepto"}
 
 
 def format_tip_message(tip, index):
@@ -865,17 +999,37 @@ def format_tip_message(tip, index):
     diff = tip.get("difficulty", 1)
     bar = DIFFICULTY_BAR.get(diff, "●○○")
     title = tip.get("title", "")
-    body = tip.get("body", "")
     tip_type = tip.get("type", "tip")
     label = TYPE_LABEL.get(tip_type, "💡 Tip")
     title_part = f": {title}" if title else ""
     lines = [f"{index}. {label} {emoji} *{nombre}*{title_part}"]
     lines.append(f"   {bar} {'Básico' if diff == 1 else 'Intermedio' if diff == 2 else 'Avanzado'}")
-    if body:
-        lines.append(f"   {body}")
-    if tip.get("mala") and tip.get("buena"):
-        lines.append(f"   ❌ _Mala práct.:_ {tip['mala']}")
-        lines.append(f"   ✅ _Buena práct.:_ {tip['buena']}")
+
+    if tip_type == "concepto":
+        explanation = tip.get("explanation", "")
+        if explanation:
+            lines.append(f"   {explanation}")
+        code = tip.get("code_example", "")
+        if code:
+            lang = tip.get("language", "")
+            lines.append(f"   ```{lang}")
+            lines.append(f"   {code}")
+            lines.append(f"   ```")
+        use_cases = tip.get("use_cases", [])
+        if use_cases:
+            lines.append(f"   💡 *Uso:* {', '.join(use_cases)}")
+        if tip.get("interview_relevant"):
+            iq = tip.get("interview_question", "")
+            if iq:
+                lines.append(f"   🎤 *Entrevista:* {iq}")
+    else:
+        body = tip.get("body", "")
+        if body:
+            lines.append(f"   {body}")
+        if tip.get("mala") and tip.get("buena"):
+            lines.append(f"   ❌ _Mala práct.:_ {tip['mala']}")
+            lines.append(f"   ✅ _Buena práct.:_ {tip['buena']}")
+
     return "\n".join(lines)
 
 
@@ -885,16 +1039,38 @@ def build_daily_message(tips):
     date_str = now.strftime("%d/%m/%Y")
     header = f"{greeting} — {date_str}\n{'─' * 28}"
 
+    tips_only = [t for t in tips if t.get("type") != "concepto"]
+    concepts_only = [t for t in tips if t.get("type") == "concepto"]
+
     body_parts = []
-    for i, tip in enumerate(tips, 1):
-        body_parts.append(format_tip_message(tip, i))
-        if i < len(tips):
+    idx = 1
+
+    for tip in tips_only:
+        body_parts.append(format_tip_message(tip, idx))
+        body_parts.append("")
+        idx += 1
+
+    if concepts_only:
+        body_parts.append("📘 *CONCEPTOS DE PROGRAMACIÓN*")
+        body_parts.append("━" * 28)
+        for concept in concepts_only:
+            body_parts.append(format_tip_message(concept, idx))
             body_parts.append("")
+            idx += 1
 
     body = "\n".join(body_parts)
     tip_count = sum(1 for t in tips if t.get("type") == "tip")
     trick_count = sum(1 for t in tips if t.get("type") == "trick")
-    footer = f"💡 {tip_count} tips · ⚡ {trick_count} tricks · Total: {len(tips)}"
+    concept_count = sum(1 for t in tips if t.get("type") == "concepto")
+    footer_parts = []
+    if tip_count:
+        footer_parts.append(f"💡 {tip_count} tips")
+    if trick_count:
+        footer_parts.append(f"⚡ {trick_count} tricks")
+    if concept_count:
+        footer_parts.append(f"📘 {concept_count} conceptos")
+    footer_parts.append(f"Total: {len(tips)}")
+    footer = " · ".join(footer_parts)
 
     return header + "\n\n" + body + "\n\n" + footer
 
@@ -954,14 +1130,17 @@ def main():
         sys.exit(1)
 
     database = load_database()
+    concepts_db = load_concepts_database()
     history = load_history()
     sent_titles = history.get("sent_titles", [])
 
     if show_stats:
         db_tips_count = sum(1 for t in database['tips'] if t.get('type') == 'tip')
         db_tricks_count = sum(1 for t in database['tips'] if t.get('type') == 'trick')
+        concepts_count = len(concepts_db.get('concepts', []))
         print(f"📊 Estadísticas del sistema de tips:")
         print(f"   Tips en DB: {len(database['tips'])} ({db_tips_count} tips + {db_tricks_count} tricks)")
+        print(f"   Conceptos en DB: {concepts_count}")
         print(f"   Tips enviados (total): {len(sent_titles)}")
         print(f"   DB agotada: {'Sí' if history.get('db_exhausted') else 'No'}")
         print(f"   Última ejecución: {history.get('last_run', 'Nunca')}")
@@ -979,26 +1158,53 @@ def main():
     db_exhausted = history.get("db_exhausted", False)
 
     if db_exhausted:
-        print("🔄 DB agotada. Generando 10 tips con Gemini...")
-        gemini_tips = generate_tips_gemini(10, categories, sent_titles)
-        if gemini_tips:
-            for t in gemini_tips:
-                t["source"] = "gemini"
-            tips = gemini_tips
-        else:
-            print("⚠️  Gemini no disponible. Reintentando con DB (puede repetir)...")
-            db_tips = select_tips_from_db(database, history, 5, tip_type="tip")
-            db_tricks = select_tips_from_db(database, history, 5, tip_type="trick")
-            tips = interleave_tips_tricks(db_tips, db_tricks, total=10)
-    else:
-        print("🔄 Generando tips + tricks (Gemini + DB)...")
+        print("🔄 DB agotada. Generando tips + conceptos con Gemini...")
         gemini_tips = generate_tips_gemini(5, categories, sent_titles)
         if gemini_tips:
             for t in gemini_tips:
                 t["source"] = "gemini"
+        else:
+            gemini_tips = []
+        gemini_concepts = generate_concepts_gemini(3, categories, sent_titles)
+        if gemini_concepts:
+            for c in gemini_concepts:
+                c["source"] = "gemini"
+        else:
+            gemini_concepts = []
         db_tips = select_tips_from_db(database, history, 5, tip_type="tip")
         db_tricks = select_tips_from_db(database, history, 5, tip_type="trick")
-        tips = interleave_tips_tricks(db_tips, db_tricks, total=10)
+        db_concepts = select_concepts_from_db(concepts_db, sent_titles, categories, 5)
+        for c in db_concepts:
+            c["source"] = "db"
+        tips_gemini = mix_tips(gemini_tips, db_tips + db_tricks, total=5)
+        all_concepts = gemini_concepts + db_concepts
+        all_concepts = all_concepts[:5]
+        tips = tips_gemini + all_concepts
+        random.shuffle(tips)
+    else:
+        print("🔄 Generando tips + tricks + conceptos (Gemini + DB)...")
+        gemini_tips = generate_tips_gemini(5, categories, sent_titles)
+        if gemini_tips:
+            for t in gemini_tips:
+                t["source"] = "gemini"
+        else:
+            gemini_tips = []
+        gemini_concepts = generate_concepts_gemini(3, categories, sent_titles)
+        if gemini_concepts:
+            for c in gemini_concepts:
+                c["source"] = "gemini"
+        else:
+            gemini_concepts = []
+        db_tips = select_tips_from_db(database, history, 5, tip_type="tip")
+        db_tricks = select_tips_from_db(database, history, 5, tip_type="trick")
+        db_concepts = select_concepts_from_db(concepts_db, sent_titles, categories, 5)
+        for c in db_concepts:
+            c["source"] = "db"
+        tips_gemini = mix_tips(gemini_tips, db_tips + db_tricks, total=5)
+        all_concepts = gemini_concepts + db_concepts
+        all_concepts = all_concepts[:5]
+        tips = tips_gemini + all_concepts
+        random.shuffle(tips)
 
     message = build_daily_message(tips)
 
@@ -1006,7 +1212,7 @@ def main():
     for i, tip in enumerate(tips, 1):
         emoji = CAT_EMOJI.get(tip["cat"], "?")
         src = tip.get("source", "db")
-        t = "💡" if tip.get("type") == "tip" else "⚡"
+        t = "💡" if tip.get("type") == "tip" else "⚡" if tip.get("type") == "trick" else "📘"
         print(f"   {i}. {t} {emoji} [{tip['cat']}] {tip['title']} ({src})")
 
     if dry_run:

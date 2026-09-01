@@ -19,6 +19,11 @@ CONFIG = {
 NOTICIAS_FILENAME = "noticias_historico.json"
 HERRAMIENTAS_FILENAME = "herramientas.json"
 AI_TOOLS_CANDIDATES_FILENAME = "ai_tools_candidates.json"
+CONCEPTS_FILENAME = "concepts_database.json"
+CONCEPTS_PATH_DEFAULT = os.path.join(CONFIG["FOLDER"], CONCEPTS_FILENAME)
+CONCEPTS_MAX = 200
+CONCEPTS_PRUNE_BATCH = 20
+CONCEPTS_MIN_INTERVIEW = 50
 AVATARS_CACHE_FILENAME = "avatars_cache.json"
 TELEGRAM_SENT_FILENAME = "telegram_sent.json"
 TELEGRAM_VOICE_SENT_FILENAME = "telegram_voice_sent.json"
@@ -27,6 +32,7 @@ LOGS_DIR = "logs"
 LOG_FILES = {
     "news": "news.log",
     "tools": "tools.log",
+    "concepts": "concepts.log",
     "weekly": "weekly.log",
     "telegram": "telegram.log",
     "email": "email.log",
@@ -251,6 +257,7 @@ FALLBACK_RECAP_INTRO = "Esta semana hemos seguido de cerca las principales tende
 
 # ── Telegram ──
 TELEGRAM_TTS_VOZ = "es-ES-AlvaroNeural"
+TELEGRAM_TTS_VOZ_EN = "en-US-GuyNeural"
 TELEGRAM_DASHBOARD_URL = "https://jorbencasdownloaderdocument.surge.sh"
 TELEGRAM_MENSAJE_TEMPLATE = "{icono} *{titulo}*\n📰 `{fuente}` | `{fecha}`\n\n{cuerpo}\n🔗 [Abrir noticia]({enlace})\n🌐 [Ver más en el Dashboard]({dashboard_url})"
 

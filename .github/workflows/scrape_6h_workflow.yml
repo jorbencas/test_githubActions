@@ -32,16 +32,16 @@ jobs:
           if [ -z "$GEMINI_API_KEY" ]; then
             echo "needed=true" >> $GITHUB_OUTPUT; exit 0
           fi
-          HTTP=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 \
+          HTTP=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 \
             -H "x-goog-api-key: $GEMINI_API_KEY" \
             -H 'Content-Type: application/json' \
             -d '{"contents":[{"parts":[{"text":"ping"}]}]}' \
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent")
-          echo "Gemini HTTP $HTTP"
-          if [ "$HTTP" != "200" ]; then
-            echo "needed=true" >> $GITHUB_OUTPUT
-          else
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent" 2>/dev/null) || true
+          echo "Gemini HTTP: '${HTTP}'"
+          if [ "$HTTP" = "200" ]; then
             echo "needed=false" >> $GITHUB_OUTPUT
+          else
+            echo "needed=true" >> $GITHUB_OUTPUT
           fi
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -72,12 +72,14 @@ jobs:
         run: python -m scripts.scrapers.scrape_news --tier standard
       - name: 🧰 Scrape AI tools candidates (HF + GitHub)
         run: python -m scripts.scrapers.scrape_ai_tools
+      - name: 🧠 Scrape conceptos de programación
+        run: python -m scripts.scrapers.scrape_concepts --tier light
       - name: 📝 Push cambios
         if: always()
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add files/noticias_historico.json files/avatars_cache.json files/ai_tools_candidates.json
-          git diff --quiet --cached || git commit -m "[bot] 6h scrape (tier standard + ai tools)"
+          git add files/noticias_historico.json files/avatars_cache.json files/ai_tools_candidates.json files/concepts_database.json
+          git diff --quiet --cached || git commit -m "[bot] 6h scrape (tier standard + ai tools + concepts)"
           git pull --rebase origin master
           git push origin master

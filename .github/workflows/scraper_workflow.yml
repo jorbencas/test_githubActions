@@ -66,9 +66,9 @@ jobs:
           cd blog
           git config user.name jorbencas
           git config user.email jorbencas@gmail.com
-          git add src/content/posts/resources*.mdx src/content/auto-news/
+          git add src/content/auto-news/ || true
           git diff --quiet && git diff --staged --quiet && echo "No hay cambios" && exit 0
-          git commit -m "[recursos+news] actualización semanal automática"
+          git commit -m "[news] actualización semanal automática"
           git push origin main
           echo "✅ Push realizado a jorbencas/blog"
       - name: 📝 Push changes a test_githubActions

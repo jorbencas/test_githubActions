@@ -22,7 +22,7 @@ import requests
 from google import genai
 
 from scripts.utils.cache import CacheManager, FileCache
-from scripts.utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_DASHBOARD_URL, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY, TS_KEY, NOTICIAS_FILENAME, TELEGRAM_SENT_FILENAME, TELEGRAM_VOICE_SENT_FILENAME, LOGS_DIR, LOG_FILES
+from scripts.utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_TTS_VOZ_EN, TELEGRAM_DASHBOARD_URL, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY, TS_KEY, NOTICIAS_FILENAME, TELEGRAM_SENT_FILENAME, TELEGRAM_VOICE_SENT_FILENAME, LOGS_DIR, LOG_FILES, FUENTES_INGLES
 from scripts.utils.common import load_json, save_json
 
 os.makedirs(LOGS_DIR, exist_ok=True)
@@ -59,6 +59,61 @@ EMOJI_PATTERN = re.compile(
 
 def strip_emojis(text: str) -> str:
     return EMOJI_PATTERN.sub("", text).strip()
+
+
+# Palabras comunes en inglés para detección rápida
+_ENCOMMON_WORDS = {
+    "the", "is", "are", "was", "were", "be", "been", "being",
+    "have", "has", "had", "do", "does", "did", "will", "would",
+    "could", "should", "may", "might", "shall", "can", "need",
+    "dare", "ought", "used", "to", "of", "in", "for", "on",
+    "with", "at", "by", "from", "as", "into", "through", "during",
+    "before", "after", "above", "below", "between", "out", "off",
+    "over", "under", "again", "further", "then", "once", "here",
+    "there", "when", "where", "why", "how", "all", "both", "each",
+    "few", "more", "most", "other", "some", "such", "no", "nor",
+    "not", "only", "own", "same", "so", "than", "too", "very",
+    "just", "because", "but", "and", "or", "if", "while", "about",
+    "up", "it", "its", "this", "that", "these", "those", "what",
+    "which", "who", "whom", "new", "first", "last", "long", "great",
+    "little", "right", "big", "high", "old", "different", "small",
+    "large", "next", "early", "young", "important", "public", "bad",
+    "same", "able", "ai", "tech", "startup", "funding", "launch",
+    "release", "update", "feature", "app", "data", "cloud", "code",
+}
+
+
+def detectar_idioma(texto: str, fuente: str = "") -> str:
+    """Detecta si un texto está en inglés o español.
+    Devuelve 'en' para inglés, 'es' para español."""
+    texto_lower = texto.lower()
+    fuente_lower = fuente.lower().strip()
+
+    # 1) Por fuente conocida
+    if fuente_lower:
+        for f in FUENTES_INGLES:
+            if f in fuente_lower:
+                return "en"
+
+    # 2) Heurísticas de caracteres españoles
+    if re.search(r'[áéíóúñ¿¡]', texto_lower):
+        return "es"
+
+    # 3) Contar palabras comunes en inglés vs patrones españoles
+    words = re.findall(r'\b[a-z]+\b', texto_lower)
+    if not words:
+        return "es"
+
+    en_count = sum(1 for w in words if w in _ENCOMMON_WORDS)
+    en_ratio = en_count / len(words)
+
+    # Patrones españoles comunes
+    es_patterns = re.findall(r'\b(el|la|los|las|de|del|en|un|una|por|con|para|que|se|no|lo|al|es|su|ce|yo)\b', texto_lower)
+    es_ratio = len(es_patterns) / len(words)
+
+    if en_ratio > 0.3 or (en_ratio > es_ratio and en_ratio > 0.15):
+        return "en"
+    return "es"
 
 
 async def traducir_titulo(titulo: str, client) -> str:
@@ -103,42 +158,52 @@ def enviar_mensaje(texto: str, chat_id: str, token: str, reply_markup: dict | No
         return False
 
 
-async def enviar_audio_voz(texto: str, chat_id: str, token: str) -> bool:
-    """Envía audio de voz. Si es largo, lo divide en partes de ~4000 chars."""
-    voz = TELEGRAM_TTS_VOZ
-    texto_limpio = strip_emojis(texto)
+async def enviar_audio_voz(titulares: list[tuple[str, str]], chat_id: str, token: str) -> bool:
+    """Envía audio de voz mezclando voces según el idioma de cada titular.
+    titulares: lista de (titulo, fuente) para detectar idioma."""
+    if not titulares:
+        return False
 
-    # Dividir en partes de ~4000 caracteres (~3-4 min por audio)
-    MAX_CHARS = 4000
-    partes = []
-    if len(texto_limpio) <= MAX_CHARS:
-        partes = [texto_limpio]
-    else:
-        # Dividir por oraciones
-        oraciones = re.split(r'(?<=[.!?])\s+', texto_limpio)
-        parte_actual = ""
-        for oracion in oraciones:
-            if len(parte_actual) + len(oracion) + 1 > MAX_CHARS:
-                if parte_actual:
-                    partes.append(parte_actual)
-                parte_actual = oracion
-            else:
-                parte_actual = (parte_actual + " " + oracion).strip()
-        if parte_actual:
-            partes.append(parte_actual)
+    # Detectar idioma de cada titular y agrupar por idioma consecutivo
+    grupos = []
+    grupo_actual = []
+    idioma_actual = None
 
-    logger.info(f"🎙️ Audio dividido en {len(partes)} parte(s)")
+    for titulo, fuente in titulares:
+        texto = strip_emojis(titulo)
+        if not texto.strip():
+            continue
+        idioma = detectar_idioma(texto, fuente)
+        if idioma != idioma_actual:
+            if grupo_actual:
+                grupos.append((idioma_actual, grupo_actual[:]))
+            grupo_actual = [texto]
+            idioma_actual = idioma
+        else:
+            grupo_actual.append(texto)
+    if grupo_actual:
+        grupos.append((idioma_actual, grupo_actual[:]))
+
+    if not grupos:
+        logger.info("ℹ️ No hay texto para audio.")
+        return False
+
+    logger.info(f"🎙️ Audio dividido en {len(grupos)} grupo(s) por idioma")
     enviado_ok = True
+    total_partes = len(grupos)
 
-    for i, parte in enumerate(partes):
+    for i, (idioma, oraciones) in enumerate(grupos):
+        voz = TELEGRAM_TTS_VOZ_EN if idioma == "en" else TELEGRAM_TTS_VOZ
+        lang_label = "EN" if idioma == "en" else "ES"
+        texto_parte = ". ".join(oraciones) + "."
         audio_path = f"resumen_diario_{i+1}.mp3"
         try:
-            communicate = edge_tts.Communicate(parte, voz)
+            communicate = edge_tts.Communicate(texto_parte, voz)
             await communicate.save(audio_path)
             url = f"https://api.telegram.org/bot{token}/sendVoice"
             with open(audio_path, "rb") as f:
                 files = {"voice": (audio_path, f, "audio/mpeg")}
-                caption = f"Resumen diario ({i+1}/{len(partes)})" if len(partes) > 1 else "Resumen diario"
+                caption = f"Resumen diario ({lang_label}) ({i+1}/{total_partes})" if total_partes > 1 else f"Resumen diario ({lang_label})"
                 payload = {
                     "chat_id": chat_id,
                     "caption": caption,
@@ -147,13 +212,13 @@ async def enviar_audio_voz(texto: str, chat_id: str, token: str) -> bool:
             if os.path.exists(audio_path):
                 os.remove(audio_path)
             if not r.ok:
-                logger.warning(f"⚠️ Audio parte {i+1} falló: {r.text[:100]}")
+                logger.warning(f"⚠️ Audio parte {i+1} ({lang_label}) falló: {r.text[:100]}")
                 enviado_ok = False
             else:
-                logger.info(f"✅ Audio parte {i+1}/{len(partes)} enviado")
+                logger.info(f"✅ Audio parte {i+1}/{total_partes} ({lang_label}, voz: {voz}) enviado")
             await asyncio.sleep(2)
         except Exception as e:
-            logger.error(f"⚠️ Error TTS parte {i+1}: {e}")
+            logger.error(f"⚠️ Error TTS parte {i+1} ({lang_label}): {e}")
             if os.path.exists(audio_path):
                 os.remove(audio_path)
             enviado_ok = False
@@ -295,15 +360,15 @@ async def run():
                     except (ValueError, AttributeError):
                         pass
                 titulo = n.get(TITULO_KEY, "")
+                fuente = n.get(FUENTE_KEY, "")
                 if titulo:
-                    todas_hoy.append(titulo)
+                    todas_hoy.append((titulo, fuente))
 
             if todas_hoy:
-                resumen_voz = "Hoy en tecnología. " + ". ".join(todas_hoy) + ". Fin del resumen."
-                logger.info(f"🎙️ Enviando resumen de voz diario ({len(todas_hoy)} noticias, {len(resumen_voz)} chars)...")
-                ok = await enviar_audio_voz(resumen_voz, chat_id, token)
+                logger.info(f"🎙️ Enviando resumen de voz diario ({len(todas_hoy)} noticias)...")
+                ok = await enviar_audio_voz(todas_hoy, chat_id, token)
                 if ok:
-                    marcar_voz_enviada(todas_hoy[:50])
+                    marcar_voz_enviada([t for t, _ in todas_hoy[:50]])
                     logger.info("✅ Audio de voz enviado.")
                 else:
                     logger.warning("⚠️ Fallo al enviar audio de voz.")
