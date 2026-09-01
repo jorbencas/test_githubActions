@@ -1,0 +1,396 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
+    "total_concepts": 20,
+    "categories": [
+      "css_moderno",
+      "devops",
+      "interfaces",
+      "patrones_diseno"
+    ],
+    "last_scraped": "2026-09-01T11:15:47.051222"
+  },
+  "concepts": [
+    {
+      "title": "Celery en Python: tareas asíncronas, Redis como broker, Beat scheduler y monitorización",
+      "summary": "Celeryes la biblioteca de colas de tareas más popular del ecosistema Python. Permite ejecutar trabajo de forma asíncrona (enviar emails, generar PDFs, procesar imágenes) sin bloquear la respuesta HTTP",
+      "explanation": "Celeryes la biblioteca de colas de tareas más popular del ecosistema Python. Permite ejecutar trabajo de forma asíncrona (enviar emails, generar PDFs, procesar imágenes) sin bloquear la respuesta HTTP, y también programar tareas periódicas. Este tutorial cubre el flujo completo con Redis como broker: instalación, definición de tareas, envío, reintentos, flujos de trabajo y monitorización.Instalación# pip install celery[redis]\n# pip install redis\n# También necesitas Redis corriendo: docker run -d -p 6379:6379 redis:7Configuración básica# tareas.py\nfrom celery import Celery\n\napp = Celery(\n    'miapp',\n    broker='redis://localhost:6379/0',    # donde se almacenan las tareas\n    backend='redis://localhost:6379/1',   # donde se guardan los resultados\n)\n\napp.conf.update(\n    task_serializer='json',\n    result_serializer='json',\n    accept_content=['json'],\n    timezone='Europe/Madrid',\n    enable_utc=True,\n    task_track_started=True,\n    result_expires=3600,   # los resultados se borran tras 1 hora\n)Definir tareas con @app.task# tareas.py (continuación)\nimport time\nimport logging\n\nlogger = logging.getLogger(__name__)\n\n\n@app.task\ndef sumar(a: int, b: int) -> int:\n    return a + b\n\n\n@app.task\ndef procesar_imagen(ruta: str, ancho: int, alto: int) -> str:\n    \"\"\"Redimensiona una imagen (simulado).\"\"\"\n    logger.info(f\"Procesando {ruta} ? {ancho}x{alto}\")\n    time.sleep(2)   # simula trabajo real\n    return f\"{ruta}_thumb_{ancho}x{alto}.jpg\"\n\n\n@app.task(name='tareas.enviar_email')\ndef",
+      "code_example": "# pip install celery[redis]\n# pip install redis\n# También necesitas Redis corriendo: docker run -d -p 6379:6379 redis:7",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "devops"
+      ],
+      "cat": "devops",
+      "scraped_at": "2026-09-01T11:15:01.515235"
+    },
+    {
+      "title": "Shiny en R: crear aplicaciones web interactivas de datos sin saber JavaScript",
+      "summary": "Shiny es el paquete de R que permite crear aplicaciones web interactivas escribiendo solo R, sin tocar JavaScript. Un analista que sabe hacer gráficos y modelos en R puede convertir ese análisis en un",
+      "explanation": "Shiny es el paquete de R que permite crear aplicaciones web interactivas escribiendo solo R, sin tocar JavaScript. Un analista que sabe hacer gráficos y modelos en R puede convertir ese análisis en una app con controles deslizantes, selectores, tablas actualizables y gráficos reactivos sin aprender frontend. Eso es lo que lo hace tan popular en entornos científicos y empresariales donde el equipo de datos no tiene perfil web. Shiny 1.8, publicado en 2024, introdujo mejoras en la gestión de sesiones y en el sistema de módulos. La estructura básica de una aplicación Shiny no ha cambiado desde los inicios: hay una parte de interfaz (ui) y una parte de lógica (server).Estructura básica de una app Shinylibrary(shiny)\n\n# UI: define lo que ve el usuario\nui <- fluidPage(\n  titlePanel(\"Explorador de datos de iris\"),\n\n  sidebarLayout(\n    sidebarPanel(\n      selectInput(\n        inputId  = \"especie\",\n        label    = \"Selecciona especie:\",\n        choices  = c(\"Todas\", unique(iris$Species)),\n        selected = \"Todas\"\n      ),\n      selectInput(\n        inputId  = \"variable_x\",\n        label    = \"Eje X:\",\n        choices  = names(iris)[1:4],\n        selected = \"Sepal.Length\"\n      ),\n      selectInput(\n        inputId  = \"variable_y\",\n        label    = \"Eje Y:\",\n        choices  = names(iris)[1:4],\n        selected = \"Petal.Length\"\n      ),\n      sliderInput(\n        inputId = \"tamanyo_punto\",\n        label   = \"Tamaño de punto:\",\n        min = 1, max = 5, value = 2, step = 0.5\n   ",
+      "code_example": "library(shiny)\n\n# UI: define lo que ve el usuario\nui <- fluidPage(\n  titlePanel(\"Explorador de datos de iris\"),\n\n  sidebarLayout(\n    sidebarPanel(\n      selectInput(\n        inputId  = \"especie\",\n        label    = \"Selecciona especie:\",\n        choices  = c(\"Todas\", unique(iris$Species)),\n        selected = \"Todas\"\n      ),\n      selectInput(\n        inputId  = \"variable_x\",\n        label    = \"Eje X:\",\n        choices  = names(iris)[1:4],\n        selected = \"Sepal.Length\"\n      ),\n      selectInput(\n        inputId  = \"variable_y\",\n        label    = \"Eje Y:\",\n        choices  = names(iris)[1:4],\n        selected = \"Petal.Length\"\n      ),\n      sliderInput(\n        inputId = \"tamanyo_punto\",\n        label   = \"Tamaño de punto:\",\n        min = 1, max = 5, value = 2, step = 0.5\n      )\n    ),\n\n    mainPanel(\n      plotOutput(\"grafico\"),\n      tableOutput(\"resumen\")\n    )\n  )\n)\n\n# Server: define la lógica reactiva\nserver <- function(input, output, session) {\n\n  # Datos filtrados reactivos\n  datos_filtrados <- reactive({\n    if (input$especie == \"Todas\") {\n      iris\n    } else {\n      iris[iris$Species == input$especie, ]\n    }\n  })\n\n  # Gráfico reactivo\n  output$grafico <- renderPlot({\n    df <- datos_filtrados()\n    plot(\n      df[[input$variable_x]],\n      df[[input$variable_y]],\n      col   = as.integer(df$Species) + 1,\n      pch   = 16,\n      cex   = input$tamanyo_punto,\n      xlab  = input$variable_x,\n      ylab  = input$variable_y,\n      main  = paste(\"Iris:\", input$variable_x, \"vs\", input$variable_y)\n    )\n    legend(\"topright\", legend = levels(df$Species),\n           col = 2:4, pch = 16)\n  })\n\n  # Tabla reactiva\n  output$resumen <- renderTable({\n    df <- datos_filtrados()\n    aggregate(. ~ Species, data = df[, 1:5], FUN = mean)\n  })\n}\n\n# Lanzar la app\nshinyApp(ui = ui, server = server)",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-01T11:15:03.225597"
+    },
+    {
+      "title": "Paralelismo en Julia: Threads, @distributed y GPU computing con CUDA.jl",
+      "summary": "Python tiene el GIL, que limita el paralelismo real en threads para código que no llame a extensiones C. Julia no tiene ese problema: los threads de Julia ejecutan código Julia en paralelo de verdad, ",
+      "explanation": "Python tiene el GIL, que limita el paralelismo real en threads para código que no llame a extensiones C. Julia no tiene ese problema: los threads de Julia ejecutan código Julia en paralelo de verdad, con acceso compartido a la misma memoria. Eso simplifica muchos patrones pero también significa que tienes que pensar en condiciones de carrera.Threads: paralelismo multihilo Para usar threads hay que lanzar Julia con el número de threads deseado. Desde la terminal:julia --threads 8, o estableciendo la variable de entornoJULIA_NUM_THREADS=8.using Base.Threads\n\n# Ver cuántos threads hay disponibles\nprintln(\"Threads: \", nthreads())\n\n# Paralelizar un bucle con @threads\nfunction suma_paralela(n)\n    resultados = zeros(nthreads())\n    @threads for i in 1:n\n        tid = threadid()\n        resultados[tid] += i\n    end\n    return sum(resultados)\nend\n\nsuma_paralela(10_000_000)\n\n# Alternativa: @threads con reducción explícita\nfunction suma_simple(arr)\n    total = Atomic{Float64}(0.0)\n    @threads for x in arr\n        atomic_add!(total, x)\n    end\n    return total[]\nend El patrón de dividir los resultados por thread (resultados[tid]) evita la necesidad de bloqueos al escribir. Cada thread escribe en su propio slot y al final sumas todos. Es más eficiente que usar un mutex o unAtomicpara acumulaciones.@spawn: tareas asíncronas Cuando quieres lanzar una tarea y recoger el resultado más tarde,@spawnes más flexible que@threads:# Lanzar tareas asíncronas\nt1 = @spawn calcular_parte_1(datos)\nt2 =",
+      "code_example": "using Base.Threads\n\n# Ver cuántos threads hay disponibles\nprintln(\"Threads: \", nthreads())\n\n# Paralelizar un bucle con @threads\nfunction suma_paralela(n)\n    resultados = zeros(nthreads())\n    @threads for i in 1:n\n        tid = threadid()\n        resultados[tid] += i\n    end\n    return sum(resultados)\nend\n\nsuma_paralela(10_000_000)\n\n# Alternativa: @threads con reducción explícita\nfunction suma_simple(arr)\n    total = Atomic{Float64}(0.0)\n    @threads for x in arr\n        atomic_add!(total, x)\n    end\n    return total[]\nend",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-01T11:15:04.944965"
+    },
+    {
+      "title": "TypeScript con WebAssembly: tipos para módulos WASM, wasm-bindgen y AssemblyScript",
+      "summary": "WebAssembly permite ejecutar código de alto rendimiento en el navegador y en Node.js. Combinarlo con TypeScript requiere declarar los tipos del módulo WASM, ya sea manualmente o mediante las herramien",
+      "explanation": "WebAssembly permite ejecutar código de alto rendimiento en el navegador y en Node.js. Combinarlo con TypeScript requiere declarar los tipos del módulo WASM, ya sea manualmente o mediante las herramientas de generación que acompañan a Rust y AssemblyScript.Declaración manual de un módulo WASM Si compilas un módulo WASM sin herramientas de bindings, puedes declarar su tipo manualmente:// src/types/wasm.d.ts\n\n// Declaración ambient para importar ficheros .wasm:\ndeclare module '*.wasm' {\n  const url: string;\n  export default url;\n}\n\n// O si el bundler lo carga como módulo instanciado (Vite con ?init):\ndeclare module '*.wasm?init' {\n  import type { WebAssembly } from 'typescript/lib/lib.webworker';\n  const inicializar: (options?: WebAssembly.Instantiatestreaming) => Promise<WebAssembly.Instance>;\n  export default inicializar;\n}\n\n// Tipos de las exports del módulo WASM (escrito a mano):\ninterface ModuloCalculadora {\n  memory: WebAssembly.Memory;\n  sumar(a: number, b: number): number;\n  multiplicar(a: number, b: number): number;\n  fibonacci(n: number): number;\n}\n\nasync function cargarCalculadora(): Promise<ModuloCalculadora> {\n  const { instance } = await WebAssembly.instantiateStreaming(\n    fetch('/calculadora.wasm')\n  );\n  return instance.exports as unknown as ModuloCalculadora;\n}wasm-bindgen con Rust wasm-bindgengenera automáticamente los archivos.d.tsal compilar código Rust a WASM:// En Rust (src/lib.rs):\n// use wasm_bindgen::prelude::*;\n//\n// #[wasm_bindgen]\n// pub fn saludar(",
+      "code_example": "// src/types/wasm.d.ts\n\n// Declaración ambient para importar ficheros .wasm:\ndeclare module '*.wasm' {\n  const url: string;\n  export default url;\n}\n\n// O si el bundler lo carga como módulo instanciado (Vite con ?init):\ndeclare module '*.wasm?init' {\n  import type { WebAssembly } from 'typescript/lib/lib.webworker';\n  const inicializar: (options?: WebAssembly.Instantiatestreaming) => Promise<WebAssembly.Instance>;\n  export default inicializar;\n}\n\n// Tipos de las exports del módulo WASM (escrito a mano):\ninterface ModuloCalculadora {\n  memory: WebAssembly.Memory;\n  sumar(a: number, b: number): number;\n  multiplicar(a: number, b: number): number;\n  fibonacci(n: number): number;\n}\n\nasync function cargarCalculadora(): Promise<ModuloCalculadora> {\n  const { instance } = await WebAssembly.instantiateStreaming(\n    fetch('/calculadora.wasm')\n  );\n  return instance.exports as unknown as ModuloCalculadora;\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "interfaces"
+      ],
+      "cat": "interfaces",
+      "scraped_at": "2026-09-01T11:15:06.669766"
+    },
+    {
+      "title": "Lua en el servidor web: OpenResty, ngx_lua y scripting con Lua en nginx",
+      "summary": "nginx es uno de los servidores web más usados del mundo. Su modelo de workers asíncronos y no bloqueantes le permite manejar decenas de miles de conexiones simultáneas con una huella de memoria muy pe",
+      "explanation": "nginx es uno de los servidores web más usados del mundo. Su modelo de workers asíncronos y no bloqueantes le permite manejar decenas de miles de conexiones simultáneas con una huella de memoria muy pequeña. La única pega es que su módulo de configuración no fue diseñado para lógica de negocio compleja. Ahí entra OpenResty: una distribución de nginx que integra LuaJIT dentro del proceso del servidor, permitiendo ejecutar código Lua con acceso completo a la petición HTTP y a las fases del ciclo de vida de nginx.Qué es OpenResty OpenResty no es un fork de nginx; es nginx compilado con un conjunto de módulos adicionales, el más importante de los cuales esngx_lua(también llamadolua-nginx-module). Este módulo integra LuaJIT en el proceso de nginx y expone la APIngx.*para acceder a la petición, la respuesta, las variables de nginx y los subsistemas de conexión a servicios externos (Redis, MySQL, HTTP, DNS). Cloudflare, Kong y muchas CDN lo usan en producción.Bloques de Lua en la configuración de nginx OpenResty añade directivas Lua a la sintaxis de nginx. Los bloques más habituales son:init_by_lua_block: se ejecuta una vez al arrancar el master process. Útil para precargar módulos.access_by_lua_block: se ejecuta antes de pasar la petición al upstream. Ideal para autenticación y rate limiting.content_by_lua_block: genera la respuesta directamente desde Lua, sin upstream.header_filter_by_lua_block: modifica las cabeceras de la respuesta.log_by_lua_block: logging personalizado tras en",
+      "code_example": "http {\n    # Precargar módulos compartidos entre workers\n    init_by_lua_block {\n        cjson = require(\"cjson\")\n        redis = require(\"resty.redis\")\n    }\n\n    server {\n        listen 80;\n\n        # Endpoint que responde directamente desde Lua\n        location /api/saludo {\n            content_by_lua_block {\n                local nombre = ngx.var.arg_nombre or \"mundo\"\n                ngx.header[\"Content-Type\"] = \"application/json\"\n                ngx.say(cjson.encode({\n                    mensaje = \"Hola, \" .. nombre,\n                    timestamp = ngx.time()\n                }))\n            }\n        }\n\n        # Autenticación con token antes de pasar al upstream\n        location /privado/ {\n            access_by_lua_block {\n                local token = ngx.req.get_headers()[\"Authorization\"]\n                if not token or token ~= \"Bearer secreto123\" then\n                    ngx.status = 401\n                    ngx.say(\"No autorizado\")\n                    ngx.exit(401)\n                end\n            }\n            proxy_pass http://backend;\n        }\n    }\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-01T11:15:08.400612"
+    },
+    {
+      "title": "Interoperabilidad de Gleam con Erlang y Elixir: llamar a librerías existentes del BEAM",
+      "summary": "Una de las ventajas prácticas de Gleam es que no empieza desde cero. Al compilar a BEAM, tiene acceso directo a décadas de librerías de Erlang y a todo el ecosistema deElixir. No necesitas reimplement",
+      "explanation": "Una de las ventajas prácticas de Gleam es que no empieza desde cero. Al compilar a BEAM, tiene acceso directo a décadas de librerías de Erlang y a todo el ecosistema deElixir. No necesitas reimplementar lo que ya existe: puedes llamar a código Erlang o Elixir desde Gleam con una anotación de interop. Esto es clave para un lenguaje joven como Gleam. Su ecosistema propio todavía está creciendo, pero la riqueza de librerías disponibles en Hex y en la BEAM es inmensa. Con interop, Gleam puede aprovechar todo eso desde el día uno.@external: la puerta de entrada La anotación@externalle dice al compilador de Gleam que una función está implementada externamente, en Erlang o en un módulo JS. La sintaxis es:@external(erlang, \"nombre_modulo_erlang\", \"nombre_funcion\")\npub fn nombre_en_gleam(arg: TipoArg) -> TipoRetorno El compilador acepta la declaración de tipos tal como la escribes, así que eres tú quien garantiza que los tipos declarados corresponden con lo que la función Erlang realmente devuelve. Si te equivocas en los tipos, el compilador no puede detectarlo, pero al menos el resto del código Gleam está verificado.Llamar a módulos de Erlang",
+      "code_example": "@external(erlang, \"nombre_modulo_erlang\", \"nombre_funcion\")\npub fn nombre_en_gleam(arg: TipoArg) -> TipoRetorno",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-01T11:15:10.138270"
+    },
+    {
+      "title": "Arquitectura limpia en Go: hexagonal, ports & adapters y organización de paquetes a escala",
+      "summary": "La arquitectura hexagonal, también conocida como ports & adapters, organiza el código en capas con dependencias que siempre apuntan hacia el centro: el dominio. El código de negocio no sabe nada de ba",
+      "explanation": "La arquitectura hexagonal, también conocida como ports & adapters, organiza el código en capas con dependencias que siempre apuntan hacia el centro: el dominio. El código de negocio no sabe nada de bases de datos, HTTP ni librerías externas. Lo que cambia con el tiempo (proveedores, frameworks, protocolos) vive en la periferia.Estructura de directoriosmiapp/\n??? cmd/\n?   ??? server/\n?       ??? main.go          // punto de entrada, wire\n??? internal/\n?   ??? domain/              // entidades y lógica de negocio\n?   ?   ??? usuario.go\n?   ?   ??? pedido.go\n?   ??? ports/               // interfaces (contracts)\n?   ?   ??? repositories.go\n?   ?   ??? services.go\n?   ??? application/         // casos de uso\n?   ?   ??? crear_usuario.go\n?   ?   ??? realizar_pedido.go\n?   ??? adapters/            // implementaciones concretas\n?       ??? postgres/\n?       ?   ??? usuario_repo.go\n?       ??? smtp/\n?           ??? email_service.go\n??? pkg/                     // código reutilizable sin dependencias internas\n    ??? pagination/\n        ??? pagination.goEl dominio: sin dependencias externas// internal/domain/usuario.go\npackage domain\n\nimport (\n    \"errors\"\n    \"time\"\n)\n\ntype Usuario struct {\n    ID        int\n    Nombre    string\n    Email     string\n    Activo    bool\n    CreadoEn  time.Time\n}\n\nvar (\n    ErrEmailVacio    = errors.New(\"el email no puede estar vacío\")\n    ErrNombreVacio   = errors.New(\"el nombre no puede estar vacío\")\n    ErrUsuarioNoExiste = errors.New(\"usuario no enc",
+      "code_example": "miapp/\n??? cmd/\n?   ??? server/\n?       ??? main.go          // punto de entrada, wire\n??? internal/\n?   ??? domain/              // entidades y lógica de negocio\n?   ?   ??? usuario.go\n?   ?   ??? pedido.go\n?   ??? ports/               // interfaces (contracts)\n?   ?   ??? repositories.go\n?   ?   ??? services.go\n?   ??? application/         // casos de uso\n?   ?   ??? crear_usuario.go\n?   ?   ??? realizar_pedido.go\n?   ??? adapters/            // implementaciones concretas\n?       ??? postgres/\n?       ?   ??? usuario_repo.go\n?       ??? smtp/\n?           ??? email_service.go\n??? pkg/                     // código reutilizable sin dependencias internas\n    ??? pagination/\n        ??? pagination.go",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "interfaces"
+      ],
+      "cat": "interfaces",
+      "scraped_at": "2026-09-01T11:15:11.509346"
+    },
+    {
+      "title": "Memory leaks en JavaScript: patrones comunes, detección con DevTools y heap snapshots",
+      "summary": "Los memory leaks en JavaScript son más frecuentes de lo que parece y pueden degradar el rendimiento de una aplicación de forma silenciosa y progresiva. A diferencia de lenguajes con gestión manual de ",
+      "explanation": "Los memory leaks en JavaScript son más frecuentes de lo que parece y pueden degradar el rendimiento de una aplicación de forma silenciosa y progresiva. A diferencia de lenguajes con gestión manual de memoria, en JavaScript los leaks ocurren cuando el garbage collector no puede liberar objetos porque siguen siendo referenciados, aunque ya no sean necesarios.Event listeners sin eliminar El patrón más común de memory leak en el navegador: añadir listeners que nunca se eliminan, especialmente cuando el elemento DOM se recrea:// LEAK  cada vez que se monta el componente, añade otro listener\nfunction montarComponente() {\n  const boton = document.getElementById('enviar');\n  boton.addEventListener('click', function handleClick() {\n    console.log('click');\n    // La función keepAlive mantiene viva la referencia al scope\n    procesarDatos(cacheLocal);\n  });\n}\n\n// Si montarComponente() se llama varias veces (SPA con navegación),\n// el botón acumula N listeners sin que los anteriores se eliminen.\n\n// CORRECTO  guardar referencia y eliminar al desmontar\nfunction montarComponente() {\n  const boton = document.getElementById('enviar');\n\n  function handleClick() {\n    console.log('click');\n    procesarDatos(cacheLocal);\n  }\n\n  boton.addEventListener('click', handleClick);\n\n  // Devolver función de limpieza\n  return function desmontar() {\n    boton.removeEventListener('click', handleClick);\n  };\n}\n\nconst desmontar = montarComponente();\n// Al navegar a otra página:\ndesmontar();Closures que r",
+      "code_example": "// LEAK  cada vez que se monta el componente, añade otro listener\nfunction montarComponente() {\n  const boton = document.getElementById('enviar');\n  boton.addEventListener('click', function handleClick() {\n    console.log('click');\n    // La función keepAlive mantiene viva la referencia al scope\n    procesarDatos(cacheLocal);\n  });\n}\n\n// Si montarComponente() se llama varias veces (SPA con navegación),\n// el botón acumula N listeners sin que los anteriores se eliminen.\n\n// CORRECTO  guardar referencia y eliminar al desmontar\nfunction montarComponente() {\n  const boton = document.getElementById('enviar');\n\n  function handleClick() {\n    console.log('click');\n    procesarDatos(cacheLocal);\n  }\n\n  boton.addEventListener('click', handleClick);\n\n  // Devolver función de limpieza\n  return function desmontar() {\n    boton.removeEventListener('click', handleClick);\n  };\n}\n\nconst desmontar = montarComponente();\n// Al navegar a otra página:\ndesmontar();",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-01T11:15:13.378777"
+    },
+    {
+      "title": "El trait Future en Rust: poll, Context, Waker e implementar un Future a mano",
+      "summary": "UnFutureen Rust representa un valor que todavía no está listo, pero que estará disponible en algún momento. A diferencia de los callbacks o las promesas de otros lenguajes, los futures de Rust sonlazy",
+      "explanation": "UnFutureen Rust representa un valor que todavía no está listo, pero que estará disponible en algún momento. A diferencia de los callbacks o las promesas de otros lenguajes, los futures de Rust sonlazy: no hacen nada hasta que alguien los ejecuta.// Este future no hace nada hasta que alguien lo ejecute:\nlet f = alguna_funcion_async();\n\n// Solo aquí empieza a ejecutarse:\nlet resultado = f.await; El traitFuturees la interfaz que define este comportamiento:pub trait Future {\n    type Output;\n    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;\n}\n\npub enum Poll<T> {\n    Ready(T),\n    Pending,\n} El métodopollhace una pregunta al future: \"¿ya tienes el resultado?\" Si lo tiene, devuelvePoll::Ready(valor). Si no, devuelvePoll::Pending.El Context y el Waker Cuando un future devuelvePoll::Pending, necesita alguna forma de decirle al runtime cuándo volver a intentarlo. Para eso existe elWaker, que se pasa a través delContext.fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {\n    // Si el resultado no está listo...\n    if !datos_disponibles() {\n        // Guardar el waker para llamarlo cuando los datos estén listos\n        let waker = cx.waker().clone();\n        registrar_callback(move || waker.wake());\n        return Poll::Pending;\n    }\n\n    Poll::Ready(obtener_datos())\n}",
+      "code_example": "// Este future no hace nada hasta que alguien lo ejecute:\nlet f = alguna_funcion_async();\n\n// Solo aquí empieza a ejecutarse:\nlet resultado = f.await;",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-01T11:15:15.037742"
+    },
+    {
+      "title": "Swift Algorithms y Collections: chunked, windows, product, Deque y OrderedDictionary",
+      "summary": "La librería estándar de Swift es sólida, pero hay operaciones que aparecen constantemente en código real y que no están incluidas: partir un array en grupos de N elementos, generar la ventana deslizan",
+      "explanation": "La librería estándar de Swift es sólida, pero hay operaciones que aparecen constantemente en código real y que no están incluidas: partir un array en grupos de N elementos, generar la ventana deslizante sobre una secuencia, obtener todas las combinaciones de un conjunto, o una estructura de cola eficiente. Apple mantiene dos paquetes oficiales que añaden exactamente eso:swift-algorithmsyswift-collections.Swift Algorithms: operaciones sobre secuencias El paqueteswift-algorithmsañade más de 40 algoritmos sobreSequenceyCollection. Los más usados:chunked: dividir en gruposimport Algorithms\n\nlet numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n\n// Grupos de tamaño fijo\nlet grupos = numeros.chunks(ofCount: 3)\n// [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]]\n\n// Grupos según un criterio de cambio\nlet letras = [\"a\", \"a\", \"b\", \"b\", \"b\", \"c\", \"a\"]\nlet porLetra = letras.chunked(by: { $0 == $1 })\n// [[\"a\", \"a\"], [\"b\", \"b\", \"b\"], [\"c\"], [\"a\"]]\n\n// Por clave\nlet palabras = [\"hola\", \"hey\", \"adios\", \"ala\"]\nlet porInicial = palabras.chunked(on: { $0.first! })\n// [[\"hola\", \"hey\"], [\"adios\", \"ala\"]]windows: ventana deslizantelet precios = [10.0, 12.0, 11.5, 13.0, 14.5, 13.0]\n\n// Media móvil de 3 elementos\nlet mediaMovil = precios.windows(ofCount: 3).map { ventana in\n    ventana.reduce(0, +) / Double(ventana.count)\n}\n// [11.17, 12.17, 13.0, 13.5]\n\n// Detectar tendencias\nfor ventana in precios.windows(ofCount: 2) {\n    let tendencia = ventana[ventana.startIndex] < ventana[ventana.index(after: ventana.startInd",
+      "code_example": "import Algorithms\n\nlet numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n\n// Grupos de tamaño fijo\nlet grupos = numeros.chunks(ofCount: 3)\n// [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]]\n\n// Grupos según un criterio de cambio\nlet letras = [\"a\", \"a\", \"b\", \"b\", \"b\", \"c\", \"a\"]\nlet porLetra = letras.chunked(by: { $0 == $1 })\n// [[\"a\", \"a\"], [\"b\", \"b\", \"b\"], [\"c\"], [\"a\"]]\n\n// Por clave\nlet palabras = [\"hola\", \"hey\", \"adios\", \"ala\"]\nlet porInicial = palabras.chunked(on: { $0.first! })\n// [[\"hola\", \"hey\"], [\"adios\", \"ala\"]]",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-01T11:15:16.707594"
+    },
+    {
+      "title": "Te damos la bienvenida a Learn CSS.Organiza tus páginas con coleccionesGuarda y categoriza el contenido según tus preferencias.",
+      "summary": "En este curso, se desglosan los conceptos básicos de CSS en partes claras y fáciles de comprender.\nEn los próximos módulos, aprenderás cómo funcionan los aspectos principales de CSS y cómo usarlos de ",
+      "explanation": "En este curso, se desglosan los conceptos básicos de CSS en partes claras y fáciles de comprender.\nEn los próximos módulos, aprenderás cómo funcionan los aspectos principales de CSS y cómo usarlos de manera eficaz en tus proyectos. Usa el panel del menú junto al logotipo de \"Learn CSS\" para navegar por los módulos. Aprenderás los conceptos básicos de CSS, como el modelo de caja, la cascada y la especificidad, Flexbox, la cuadrícula y el índice Z. También aprenderás sobre funciones, tipos de color, gradientes, propiedades lógicas y herencia para convertirte en un desarrollador de frontend integral, listo para abordar cualquier interfaz de usuario. Cada módulo está lleno de demostraciones interactivas y autoevaluaciones para que pongas a prueba tus conocimientos. Además de aprender a través de la lectura y las demostraciones, cada tema incluye un episodio de podcast como otra forma de aprender y seguir ampliando tus conocimientos. Este curso se creó para desarrolladores de CSS principiantes y avanzados. Puedes completar la serie de principio a fin para obtener una comprensión general de CSS de arriba abajo, o bien puedes usarla como referencia para temas de diseño específicos. Si eres principiante en el desarrollo web, consultaAprende HTMLpara obtener información sobre cómo escribir lenguaje de marcado y vincular tus hojas de estilo.",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 1,
+      "language": "css",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "web.dev",
+      "tags": [
+        "css",
+        "modern",
+        "css_moderno"
+      ],
+      "cat": "css_moderno",
+      "scraped_at": "2026-09-01T11:15:23.641812"
+    },
+    {
+      "title": "Modelo de cajaOrganízate con las coleccionesGuarda y clasifica el contenido según tus preferencias.",
+      "summary": "Digamos que tienes este fragmento de HTML: Luego escribes este CSS para el párrafo anterior: El contenido saldría de su elemento y tendría 142px de ancho, en lugar de 100px. ¿Porqué sucede eso? El mod",
+      "explanation": "Digamos que tienes este fragmento de HTML: Luego escribes este CSS para el párrafo anterior: El contenido saldría de su elemento y tendría 142px de ancho, en lugar de 100px. ¿Porqué sucede eso? El modelo de caja es una base fundamental de CSS y comprender cómo funciona, cómo se ve afectado por otros aspectos de CSS y, lo que es más importante, cómo puedes controlarlo te ayudará a escribir un CSS más predecible. Una cosa realmente importante para recordar al escribir CSS, o al trabajar en la web en general, es que todo lo que muestra CSS es una caja. Ya sea que usesborder-radiusen una caja para que se parezca a un círculo, o incluso solo un texto: la clave a recordar es que todo es una caja.",
+      "code_example": "<p>Soy un párrafo de texto y tengo algunas palabras.</p>",
+      "use_cases": [],
+      "difficulty": 3,
+      "language": "css",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "web.dev",
+      "tags": [
+        "css",
+        "modern",
+        "css_moderno"
+      ],
+      "cat": "css_moderno",
+      "scraped_at": "2026-09-01T11:15:25.494883"
+    },
+    {
+      "title": "SelectoresOrganízate con las coleccionesGuarda y clasifica el contenido según tus preferencias.",
+      "summary": "Si tiene un texto que quiere que se agrande y aparezca en rojo cuando se muestre en el primer párrafo de un artículo, ¿cómo lo hace? Debe utilizar un selector de CSS para encontrar ese elemento especí",
+      "explanation": "Si tiene un texto que quiere que se agrande y aparezca en rojo cuando se muestre en el primer párrafo de un artículo, ¿cómo lo hace? Debe utilizar un selector de CSS para encontrar ese elemento específico y aplicar una regla de CSS, como esta. CSS le brinda muchas opciones para seleccionar elementos y aplicarles reglas, desde muy simples hasta muy complejas, para ayudarlo a resolver situaciones como esta. Para comprender cómo funcionan los selectores y su función en CSS, es importante conocer las partes de una regla CSS. Una regla CSS es un bloque de código que contiene uno o más selectores y una o más declaraciones.",
+      "code_example": "<article>\n  <p>Quiero ser rojo y más grande que el otro texto.</p>\n  <p>Quiero tener el tamaño normal y el color predeterminado.</p>\n</article>",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "css",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "web.dev",
+      "tags": [
+        "css",
+        "modern",
+        "css_moderno"
+      ],
+      "cat": "css_moderno",
+      "scraped_at": "2026-09-01T11:15:27.104496"
+    },
+    {
+      "title": "AnidaciónOrganiza tus páginas con coleccionesGuarda y categoriza el contenido según tus preferencias.",
+      "summary": "Anidar reglas de diseño de CSS puede hacer que tus hojas de diseño sean más organizadas, fáciles de leer y mantener. Ahora que aprendiste sobre losselectores, probablemente te preguntes cómo organizar",
+      "explanation": "Anidar reglas de diseño de CSS puede hacer que tus hojas de diseño sean más organizadas, fáciles de leer y mantener. Ahora que aprendiste sobre losselectores, probablemente te preguntes cómo organizarlos mejor en tus hojas de estilo. Imagina que estás aplicando estilos a los elementos dentro de una sección de \"funciones\" en tu sitio. Con el anidamiento, puedes agrupar estos estilos dentro de la regla.featurede la siguiente manera: Esto sería lo mismo que escribir cada diseño por separado: El anidamiento puede tener tantas capas como sea necesario.",
+      "code_example": ".feature{button{color:blue;}.link{color:red;}.text{font-size:1.3em;}}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "css",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "web.dev",
+      "tags": [
+        "css",
+        "modern",
+        "css_moderno"
+      ],
+      "cat": "css_moderno",
+      "scraped_at": "2026-09-01T11:15:28.932120"
+    },
+    {
+      "title": "La cascadaOrganízate con las coleccionesGuarda y clasifica el contenido según tus preferencias.",
+      "summary": "CSS son las siglas para Cascading Stylesheets (hojas de estilo en cascada). La cascada es el algoritmo para resolver conflictos donde se aplican múltiples reglas CSS a un elemento HTML. Es la razón po",
+      "explanation": "CSS son las siglas para Cascading Stylesheets (hojas de estilo en cascada). La cascada es el algoritmo para resolver conflictos donde se aplican múltiples reglas CSS a un elemento HTML. Es la razón por la que el texto del botón con el siguiente CSS será azul. Comprender el algoritmo en cascada te ayuda a comprender en cómo el navegador resuelve conflictos como este. El algoritmo en cascada se divide en 4 etapas distintas. La cascada tiene en cuenta el orden en que aparecen las reglas CSS y cómo aparecen mientras calcula la resolución de conflictos. La demostración que se encuentra al comienzo de esta lección es el ejemplo más sencillo de posición. Hay dos reglas que tienen selectores de especificidad idéntica, por lo que la última en ser declarada fue la que ganó.",
+      "code_example": "button{color:red;}button{color:blue;}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "css",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "web.dev",
+      "tags": [
+        "css",
+        "modern",
+        "css_moderno"
+      ],
+      "cat": "css_moderno",
+      "scraped_at": "2026-09-01T11:15:34.792496"
+    },
+    {
+      "title": "EspecificidadOrganízate con las coleccionesGuarda y clasifica el contenido según tus preferencias.",
+      "summary": "Suponga que está trabajando con los siguientes HTML y CSS: Aquí hay dos reglas que compiten. Una coloreará el botón de rojo y el otro de azul. ¿Qué regla se aplica al elemento? Comprender el algoritmo",
+      "explanation": "Suponga que está trabajando con los siguientes HTML y CSS: Aquí hay dos reglas que compiten. Una coloreará el botón de rojo y el otro de azul. ¿Qué regla se aplica al elemento? Comprender el algoritmo de la especificación CSS sobre la especificidad es la clave para comprender cómo el CSS decide entre reglas en competencia. La especificidad es una de las cuatro etapas distintas de la cascada, que se cubrió en el último módulo dela cascada. Cada regla de selección obtiene una puntuación. Puede pensar en la especificidad como una puntuación total y cada tipo de selector gana puntos para esa puntuación. El selector con la puntuación más alta gana.",
+      "code_example": "<button class=\"branding\">Hello, Specificity!</button>",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "css",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "web.dev",
+      "tags": [
+        "css",
+        "modern",
+        "css_moderno"
+      ],
+      "cat": "css_moderno",
+      "scraped_at": "2026-09-01T11:15:36.872865"
+    },
+    {
+      "title": "HerenciaOrganízate con las coleccionesGuarda y clasifica el contenido según tus preferencias.",
+      "summary": "Digamos que acaba de escribir algo de CSS para que los elementos parezcan un botón. Luego agrega un elemento de enlace a un artículo de contenido, con un valor.my-buttonparaclass. Sin embargo, hay un ",
+      "explanation": "Digamos que acaba de escribir algo de CSS para que los elementos parezcan un botón. Luego agrega un elemento de enlace a un artículo de contenido, con un valor.my-buttonparaclass. Sin embargo, hay un problema, el texto no tiene el color que esperaba. ¿Cómo pasó esto? Algunas propiedades CSS se heredan si no especifica un valor para ellas. En el caso de este botón,heredóelcolorde este CSS: En esta lección, aprenderá por qué sucede eso y cómo la herencia es una característica poderosa para ayudarlo a escribir menos CSS.",
+      "code_example": "<a href=\"http://example.com\" class=\"my-button\">I am a button link</a>",
+      "use_cases": [],
+      "difficulty": 1,
+      "language": "css",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "web.dev",
+      "tags": [
+        "css",
+        "modern",
+        "css_moderno"
+      ],
+      "cat": "css_moderno",
+      "scraped_at": "2026-09-01T11:15:38.524244"
+    },
+    {
+      "title": "ColorOrganiza tus páginas con coleccionesGuarda y categoriza el contenido según tus preferencias.",
+      "summary": "El color es una parte importante de cualquier sitio web y, en CSS, hay muchas opciones para especificar y manipular colores. ¿Cómo decides qué tipo de color usar?\n¿Cómo haces que tus colores sean semi",
+      "explanation": "El color es una parte importante de cualquier sitio web y, en CSS, hay muchas opciones para especificar y manipular colores. ¿Cómo decides qué tipo de color usar?\n¿Cómo haces que tus colores sean semitransparentes?\nEn esta lección, aprenderás qué opciones tienes para tomar las decisiones correctas para tu proyecto y equipo. CSS tienevarios tipos de datos diferentes, como cadenas y números.\nEl color es uno de estos tipos y usa otros, como los números, para sus propias definiciones. La forma más sencilla de elegir un color es elegir uno de los148 colores con nombre en CSS.\nEstos son nombres en inglés simple, comopurple,tomatoygoldenrod. Algunos de los nombres más populares, según elWeb Almanac, sonblack,white,red,blueygray. Entre nuestros favoritos, se incluyengoldenrod,aliceblueyhotpink.",
+      "code_example": "h1{color:#b71540;}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "css",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "web.dev",
+      "tags": [
+        "css",
+        "modern",
+        "css_moderno"
+      ],
+      "cat": "css_moderno",
+      "scraped_at": "2026-09-01T11:15:40.440653"
+    },
+    {
+      "title": "Unidades de dimensionamientoOrganízate con las coleccionesGuarda y clasifica el contenido según tus preferencias.",
+      "summary": "La web es un medio responsivo, pero a veces deseamos controlar sus dimensiones para mejorar la calidad general de la interfaz. Un buen ejemplo de esto es limitar la longitud de las líneas para mejorar",
+      "explanation": "La web es un medio responsivo, pero a veces deseamos controlar sus dimensiones para mejorar la calidad general de la interfaz. Un buen ejemplo de esto es limitar la longitud de las líneas para mejorar la legibilidad. ¿Cómo haría eso en un medio flexible como la web? Para este caso, puede usar una unidadch, que es igual al ancho de un carácter \"0\" en la fuente renderizada a su tamaño calculado. Esta unidad le permite limitar el ancho del texto con una unidad diseñada para ajustar su tamaño, lo que a su vez, permite un control predecible independientemente del tamaño de ese texto. La unidadches una de las pocas unidades que son útiles para contextos específicos como este ejemplo. Los números se utilizan para definir laopacity,line-heighte incluso los valores del canal de color enrgb. Los números son enteros sin unidades (1, 2, 3, 100) y decimales (.1, .2, .3). Los números tienen significado según su contexto. Por ejemplo, al definirline-height, un número es representativo de una ratio si la define sin una unidad de apoyo:",
+      "code_example": "p{font-size:24px;line-height:1.5;}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "css",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "web.dev",
+      "tags": [
+        "css",
+        "modern",
+        "css_moderno"
+      ],
+      "cat": "css_moderno",
+      "scraped_at": "2026-09-01T11:15:42.409316"
+    },
+    {
+      "title": "DiseñoOrganízate con las coleccionesGuarda y clasifica el contenido según tus preferencias.",
+      "summary": "Imagine que está trabajando como desarrollador y un colega diseñador le entrega el diseño para un nuevo sitio web. El diseño tiene todo tipo de distribución de elementos y composiciones interesantes: ",
+      "explanation": "Imagine que está trabajando como desarrollador y un colega diseñador le entrega el diseño para un nuevo sitio web. El diseño tiene todo tipo de distribución de elementos y composiciones interesantes: diseños bidimensionales que tienen en cuenta el ancho y la altura de la ventana gráfica, así como diseños que deben ser fluidos y flexibles. ¿Cómo decides la mejor manera de llevarlos a cabo con CSS? El CSS nos proporciona varias formas de resolver problemas de diseño en un eje vertical, horizontal o incluso ambos. Elegir el método de diseño adecuado para un contexto puede ser difícil y, a menudo, es posible que necesite más de un método de diseño para resolver su problema. Para ayudar con esto, en los siguientes módulos, aprenderá sobre las características únicas de cada mecanismo de diseño CSS para informar esas decisiones. En los primeros días de la web, los diseños más complejos que un simple documento se presentaban con elementos<table>. La separación de HTML de los estilos visuales se hizo más fácil cuando los navegadores adoptaron CSS ampliamente a finales de los noventa. El CSS abrió la puerta a que los desarrolladores pudieran cambiar completamente la apariencia de un sitio web sin tener que tocar el HTML. Esta nueva capacidad inspiró proyectos comoThe CSS Zen Garden, creado para demostrar el poder del CSS y alentar a más desarrolladores a aprenderlo. El CSS ha evolucionado a medida que evolucionan nuestras necesidades de diseño web y tecnología de navegador. Puede leer ",
+      "code_example": ".my-element{display:inline;}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "css",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "web.dev",
+      "tags": [
+        "css",
+        "modern",
+        "css_moderno"
+      ],
+      "cat": "css_moderno",
+      "scraped_at": "2026-09-01T11:15:44.050330"
+    }
+  ]
+}
