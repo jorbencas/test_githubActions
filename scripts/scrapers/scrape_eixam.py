@@ -100,6 +100,11 @@ REDES_SOCIALES = [
     "atlantidamallorca enjambre twitter",
     "acontracorrientefilms eixam x.com",
     "atlantidamallorca eixam x.com",
+    "nakamura films eixam instagram",
+    "nakamura films enjambre instagram",
+    "nakamura films eixam twitter",
+    "nakamura films enjambre twitter",
+    "nakamura films eixam x.com",
 ]
 
 HEADERS = {
