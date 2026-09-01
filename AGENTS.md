@@ -37,6 +37,7 @@
 | `scraper_base.py` | Shared extractors (YouTube, Web, ScraperPro) | constants_downloadfile |
 | `scrape_news.py` | Scrape news + YouTube sources | scraper_base, utils |
 | `scrape_tools.py` | Scrape GitHub Trending + Product Hunt | scraper_base |
+| `scrape_ai_tools.py` | Auto-detect AI tools (HF API + GitHub Search) | aiohttp, constants_downloadfile |
 | `generate_weekly.py` | AI recap + dashboard HTML | constants_downloadfile, utils, scraper_base |
 | `send_email.py` | Mailgun newsletter | constants_downloadfile |
 | `send_telegram.py` | Telegram with TTS audio | constants_downloadfile, edge-tts |
@@ -47,6 +48,7 @@
 ### Data files
 - `files/noticias_historico.json` — full news history (max 900 entries)
 - `files/herramientas.json` — discovered tools from GitHub + Product Hunt (max 200)
+- `files/ai_tools_candidates.json` — auto-detected AI tools (HF + GitHub, max 50)
 - `files/avatars_cache.json` — YouTube channel avatar cache
 - `optimized_cache.json` — image opt results (hash-based dedup)
 
@@ -58,6 +60,7 @@
 ### Content pipeline
 - **News** → `scrape_news.py` → `files/noticias_historico.json`
 - **Tools** → `scrape_tools.py` → `files/herramientas.json`
+- **AI Tools Auto-Scrape** → `scrape_ai_tools.py` → `files/ai_tools_candidates.json`
 - **Weekly recap** → `generate_weekly.py` → `auto-news/YYYY-W{week}-tech-recap.md`
   - Auto-archives recaps >2 weeks old to `auto-news/archive/`
   - SEO: one post per week max (dedup by week slug)
@@ -70,7 +73,7 @@
 |----------|---------|--------|
 | `scraper_workflow.yml` | Saturday 07:00 UTC | Generate weekly recap + portadas → PR to blog |
 | `scrape_hourly_workflow.yml` | Every hour | Light scrape (RSS + quick sources) |
-| `scrape_6h_workflow.yml` | Every 6 hours | Standard scrape |
+| `scrape_6h_workflow.yml` | Every 6 hours | Standard scrape + AI tools auto-scrape |
 | `daily_resources.yml` | Daily 06:00 UTC | Tools scrape + resources.mdx management |
 | `send_email_workflow.yml` | Daily 09:00 UTC | Send Mailgun newsletter |
 | `send_telegram_workflow.yml` | Every 30 min | Send Telegram with TTS audio |
@@ -84,10 +87,11 @@
 
 1. **News scraping** (`scrape_news.py`): YouTube + web sources → `noticias_historico.json`
 2. **Tools scraping** (`scrape_tools.py`): GitHub Trending + Product Hunt → `herramientas.json`
-3. **Weekly generation** (`generate_weekly.py`): AI recap (grouped by category) + dashboard → `auto-news/` + `public/`
+3. **AI Tools auto-scrape** (`scrape_ai_tools.py`): HF API + GitHub Search → `ai_tools_candidates.json`
+4. **Weekly generation** (`generate_weekly.py`): AI recap (grouped by category) + dashboard → `auto-news/` + `public/`
    - Auto-archives old recaps, enforces one-post-per-week SEO
-4. **Email** (`send_email.py`): Mailgun newsletter
-5. **Telegram** (`send_telegram.py`): Telegram with edge-tts audio
+5. **Email** (`send_email.py`): Mailgun newsletter
+6. **Telegram** (`send_telegram.py`): Telegram with edge-tts audio
 
 ## Secrets (GitHub)
 `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `GEMINI_API_KEY`, `MAILGUN_API_KEY`, `MAILGUN_DOMAIN`, `EMAIL_USER`, `BLOG_TOKEN`, `UNSPLASH_ACCESS_KEY`

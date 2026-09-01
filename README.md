@@ -72,6 +72,7 @@ scripts/
 │   ├── scraper_base.py         YouTube, Web, ScraperPro extractors (dual source support)
 │   ├── scrape_news.py          RSS + web + YouTube news (standard tier includes dual sources)
 │   ├── scrape_tools.py         GitHub Trending + Product Hunt
+│   ├── scrape_ai_tools.py      Auto-detect AI tools (HF API + GitHub Search)
 │   └── screenshot_helper.mjs   Playwright screenshot helper
 ├── publishers/           📤 Content generation & distribution
 │   ├── generate_weekly.py      AI recap + dashboard HTML (SSR)
@@ -128,6 +129,7 @@ All scripts run with `python -m` from the project root:
 | `python -m scripts.scrapers.scrape_news --tier full` | Full news scrape (RSS + web + YouTube) |
 | `python -m scripts.scrapers.scrape_news --tier light` | Light scrape (quick sources only) |
 | `python -m scripts.scrapers.scrape_tools` | GitHub Trending + Product Hunt |
+| `python -m scripts.scrapers.scrape_ai_tools` | Auto-detect AI tools (HF API + GitHub Search) |
 
 ### 📤 Publishing
 
@@ -215,8 +217,15 @@ All scripts run with `python -m` from the project root:
 │                        DATA COLLECTION                              │
 ├─────────────────────────────────────────────────────────────────────┤
 │  scrape_hourly   →  every hour  →  quick sources (150 RSS + 43 web) │
-│  scrape_6h       →  every 6h    →  standard scrape (107 web + 4 dual sources) │
+│  scrape_6h       →  every 6h    →  standard scrape + AI tools auto  │
 │  daily_resources →  daily       →  tools (89 GitHub Topics + repos) │
+└─────────────────────────────────────────────────────────────────────┘
+                                    ↓
+┌─────────────────────────────────────────────────────────────────────┐
+│                        AI TOOLS AUTO-SCRAPE                         │
+├─────────────────────────────────────────────────────────────────────┤
+│  scrape_ai_tools  →  every 6h   →  HF Models + Spaces + GitHub     │
+│  Output: files/ai_tools_candidates.json (50 tools, auto-detected)  │
 └─────────────────────────────────────────────────────────────────────┘
                                     ↓
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -243,7 +252,7 @@ All scripts run with `python -m` from the project root:
 │  hunt_challenges  →  weekly      →  AI challenges                  │
 │  optimize_images  →  dispatch    →  image optimization             │
 │  daily_tips      →  every 3h   →  tips IT (Gemini + DB)           │
-│  daily_ai_tools  →  every 3h   →  herramientas IA (Gemini + DB)   │
+│  daily_ai_tools  →  every 3h   →  herramientas IA (auto + Gemini) │
 │  daily_saludo    →  every 3h   →  imagen saludo + fallback        │
 │  tests            →  on push     →  134 pytest tests               │
 └─────────────────────────────────────────────────────────────────────┘
@@ -267,10 +276,33 @@ Automated daily IT tips sent to Telegram every 3 hours via `tips_generator.py`:
 
 Automated AI tools sent to Telegram every 3 hours via `ai_tools_generator.py`:
 
-- **Gemini generation** — Gemini generates fresh tools, falling back to a static database of 20 curated tools with `workflow` and `combinaciones`
+- **Auto-scraping** — `scrape_ai_tools.py` discovers new tools every 6h from:
+  - **Hugging Face API** — trending models (by downloads) + spaces (by likes)
+  - **GitHub Search API** — AI repos with 200+ stars, recently updated
+  - **Product Hunt** — daily top products
+- **Gemini generation** — Gemini generates fresh tools using auto-detected candidates as HIGH PRIORITY input, falling back to a static database of 107 curated tools
 - **150 categories** — categorized in `ai_categories.json` for varied selection
 - **Complete format** — each tool includes: clear name, what it's for, official website link (`url`), workflow, possible integrations (`combinaciones`), and key restrictions/caveats (`restricciones`)
 - **Never repeats** — tracks sent tools in `ai_tools_history.json` (persisted via GitHub Actions Cache)
+- **Multi-source priority** — tools found in multiple sources (HF + GitHub) get maximum priority in Gemini prompt
+
+### Auto-scraping data flow
+
+```
+Cada 6h (scrape_6h_workflow):
+  scrape_ai_tools.py → files/ai_tools_candidates.json
+    ├── Hugging Face API (30 models + 20 spaces)
+    ├── GitHub Search API (repos with 200+ stars)
+    └── Product Hunt (daily top products)
+
+Cada 3h (daily_ai_tools):
+  ai_tools_generator.py → Telegram
+    ├── 1. Load ai_tools_candidates.json (HIGH PRIORITY)
+    ├── 2. Load herramientas.json (inspiration)
+    ├── 3. Load noticias_historico.json (inspiration)
+    ├── 4. Gemini prompt with all sources → generates 5 tools
+    └── 5. Send to Telegram
+```
 
 ---
 
