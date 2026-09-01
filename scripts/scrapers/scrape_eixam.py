@@ -78,7 +78,9 @@ CONTRASTE_QUERIES = [
 # porque "enjambre" mezclaría fichas de otras películas homónimas (2020, 2003...).
 SITIOS_RESENIAS = [
     ("decine21.com", "eixam"),
+    ("decine21.com", "enjambre 2026"),
     ("contraste.info", "eixam"),
+    ("contraste.info", "enjambre bernàcer"),
     ("butacaancha", "eixam"),
     ("fotogramas.es", "eixam"),
     ("cinemaldito.com", "eixam"),
@@ -268,8 +270,8 @@ def _rss_google(termino: str, ventana: str = "3h") -> list:
     url = f"https://news.google.com/rss/search?q={quote_plus(termino)}+when:{ventana}&hl=es&gl=ES&ceid=ES:es"
     items = []
     try:
-        r = requests.get(url, timeout=20, headers=HEADERS)
-        if r.status_code != 200:
+        r = requests.get(url, timeout=8, headers=HEADERS)
+        if r.status_code != 200 or "<html" in r.text[:500].lower():
             return []
         texto = r.text
         regex = re.compile(
@@ -368,7 +370,7 @@ def _rss_bing(termino: str) -> list:
     url = f"https://www.bing.com/news/search?q={quote_plus(termino)}&format=rss"
     items = []
     try:
-        r = requests.get(url, timeout=20, headers=HEADERS)
+        r = requests.get(url, timeout=10, headers=HEADERS)
         if r.status_code != 200:
             return []
         texto = r.text
@@ -412,27 +414,30 @@ def _anexar(items, resultados, vistos):
 def recopilar() -> list:
     resultados = []
     vistos = set()
-    # Buscar tanto lo reciente (3h) como lo de la última semana (7d) para no perder
-    # artículos que salieron fuera de la última ventana horaria.
+    # Priorizar Bing (Google bloquea peticiones automatizadas)
     for termino in QUERIES:
-        grupos_google = [_rss_google(termino, "3h"), _rss_google(termino, "7d")]
-        for items in grupos_google:
-            _anexar(items, resultados, vistos)
-    for termino in QUERIES:
+        _anexar(_rss_bing(termino), resultados, vistos)
+    # Búsquedas adicionales con "enjambre" vía Bing
+    enjambre_queries = [
+        "enjambre película 2026",
+        "enjambre bernàcer",
+        "enjambre película valenciana",
+        "enjambre thriller rural",
+        "enjambre reseña crítica",
+    ]
+    for termino in enjambre_queries:
         _anexar(_rss_bing(termino), resultados, vistos)
     for termino in YT_QUERIES:
         _anexar(_rss_youtube(termino), resultados, vistos)
     for termino in CONTRASTE_QUERIES:
         _anexar(_rss_contraste(termino), resultados, vistos)
-    # Medios de reseñas específicos, vía Google News acotado al dominio del sitio.
-    # Se busca solo el título original "eixam" para evitar fichas de películas
-    # homónimas de otros años.
+    # Medios de reseñas — Bing con site: para cada dominio
     for dominio, termino in SITIOS_RESENIAS:
-        for it in _rss_google(f"site:{dominio} {termino}", "7d"):
+        for it in _rss_bing(f"site:{dominio} {termino}"):
             _anexar([it], resultados, vistos)
     # Redes sociales del distribuidor y productora (Instagram, Twitter/X)
     for termino in REDES_SOCIALES:
-        for it in _rss_google(termino, "7d"):
+        for it in _rss_bing(termino):
             _anexar([it], resultados, vistos)
     return resultados
 
