@@ -86,6 +86,23 @@ SITIOS_RESENIAS = [
     ("ecartelera", "eixam"),
     ("sensa cine", "eixam"),
     ("filmaffinity", "eixam"),
+    ("cineuropa.org", "eixam"),
+    ("labutaca.net", "eixam"),
+    ("dirigido.es", "eixam"),
+    ("espinof.com", "eixam"),
+    ("title-magazine.com", "eixam"),
+    ("elcineenlauva.com", "eixam"),
+    ("cinemanía", "eixam"),
+    ("elcomercio.es", "eixam"),
+    ("elpais.com", "eixam"),
+    ("elmundo.es", "eixam"),
+    ("laregion.es", "eixam"),
+    ("20minutos.es", "eixam"),
+    ("buzzfeed.com", "eixam"),
+    ("timeout.com", "eixam"),
+    ("indiewire.com", "eixam"),
+    ("variety.com", "eixam"),
+    ("hollywoodreporter.com", "eixam"),
 ]
 
 # Redes sociales del distribuidor y productora — se buscan vía Google News sin site:
