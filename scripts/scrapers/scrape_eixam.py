@@ -88,6 +88,20 @@ SITIOS_RESENIAS = [
     ("filmaffinity", "eixam"),
 ]
 
+# Redes sociales del distribuidor y productora — se buscan vía Google News sin site:
+REDES_SOCIALES = [
+    "acontracorrientefilms eixam instagram",
+    "acontracorrientefilms enjambre instagram",
+    "atlantidamallorca eixam instagram",
+    "atlantidamallorca enjambre instagram",
+    "acontracorrientefilms eixam twitter",
+    "acontracorrientefilms enjambre twitter",
+    "atlantidamallorca eixam twitter",
+    "atlantidamallorca enjambre twitter",
+    "acontracorrientefilms eixam x.com",
+    "atlantidamallorca eixam x.com",
+]
+
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
     "Accept": "application/xml,application/json,text/html,*/*;q=0.8",
@@ -394,6 +408,10 @@ def recopilar() -> list:
     for dominio, termino in SITIOS_RESENIAS:
         for it in _rss_google(f"site:{dominio} {termino}", "7d"):
             _anexar([it], resultados, vistos)
+    # Redes sociales del distribuidor y productora (Instagram, Twitter/X)
+    for termino in REDES_SOCIALES:
+        for it in _rss_google(termino, "7d"):
+            _anexar([it], resultados, vistos)
     return resultados
 
 
@@ -524,10 +542,6 @@ def _enviar_telegram(nuevos, por_tipo, total, todos=None):
             "trailer": "🎬", "video": "🎬", "foto": "🖼️", "poster": "🎞️",
             "critica": "📝", "noticia": "📰", "entrevista": "🎙️", "fotograma": "🗂️",
         }
-        def _cabecera():
-            tipos = " · ".join(f"{k}: {v}" for k, v in sorted(por_tipo.items()))
-            return (f"🎬 *Eixam (Enjambre)* — Novedades recopiladas\n"
-                    f"Nuevos: {len(nuevos)} · Total archivo: {total}\n{tipos}")
 
         def _send_message(msg):
             try:
@@ -555,9 +569,6 @@ def _enviar_telegram(nuevos, por_tipo, total, todos=None):
                     pass  # falla a texto
             return _send_message(f"{emoji} *[{it.get('tipo', 'noticia')}]* {it.get('titulo', '').replace('*', '')}\n{it.get('url', '')}")
 
-        # Cabecera siempre, aunque no haya novedades
-        ok = _send_message(_cabecera())
-
         if not nuevos:
             if todos:
                 # Registro completo acumulado (texto + enlaces), partido si es grande
@@ -574,22 +585,19 @@ def _enviar_telegram(nuevos, por_tipo, total, todos=None):
                 if bloque:
                     parte.append(bloque)
                 for p in parte:
-                    ok = _send_message(p) and ok
+                    _send_message(p)
             else:
-                ok = _send_message("_No hay contenido nuevo desde la última vez._") and ok
+                _send_message("_No hay contenido nuevo desde la última vez._")
         else:
-            # Cada novedad con su imagen + enlace (y para vídeos, el enlace también)
+            # Cada novedad con su imagen + enlace
+            enviados = []
             for n in nuevos:
-                ok = _send_photo(n) and ok
+                if _send_photo(n):
+                    enviados.append(n)
 
-        print(f"✅ Media enviado a Telegram ({len(nuevos)} novedad(es) + cabecera)."
-              if ok else "❌ Telegram: falló algún envío.")
-        # Devolver lista de items que se enviaron correctamente
-        enviados = []
-        for n in nuevos:
-            if _send_photo(n):
-                enviados.append(n)
-        return enviados
+            print(f"✅ Enviado a Telegram ({len(enviados)} novedad(es))."
+                  if enviados else "❌ Telegram: falló algún envío.")
+            return enviados
     except Exception as e:
         print(f"❌ Error enviando Telegram: {e}")
         return []
