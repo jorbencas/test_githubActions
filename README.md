@@ -209,6 +209,7 @@ All scripts run with `python -m` from the project root:
 | **optimize_images** | Dispatch from blog | Image optimization for blog |
 | **dashboard_update** | Push (JS/CSS/Python/data) | Regenerate + deploy dashboard |
 | **tests** | Push/PR to master | pytest (134 tests) |
+| **eixam_scrape** | Every 6 hours | Scraping película "Eixam" (noticias, trailers, fotos) → Telegram |
 
 ### Workflow Architecture
 
@@ -426,6 +427,45 @@ Los workflows instalan **Ollama con Qwen 2.5 1.5B** en el propio runner de Actio
   - `/help` → muestra la ayuda de uso en el chat
   - Sin estado en git: confirma los updates en el servidor de Telegram y filtra mensajes >15 min, así no interfiere con otros workflows
 - **Fallback de traducción** (`scrape_hourly`, `scrape_6h`) — si Gemini falla (cuota/404), los títulos de noticias se traducen con Qwen local; si Ollama tampoco está disponible, se omite silenciosamente
+
+---
+
+## 🎬 Eixam — Película (Scraping + Noticias)
+
+Workflow `eixam_scrape` que recopila toda la información sobre la película **"Eixam"** (Enjambre, 2026), thriller rural dirigido por Óscar Bernàcer.
+
+### Fuentes de búsqueda
+
+- **Google News RSS** — 14 queries generales (título original + español, director, actores, localizaciones)
+- **YouTube** — 5 queries orientadas a tráilers y clips
+- **Contraste.info** — RSS de WordPress (revista de cine)
+- **Bing News RSS** — búsquedas complementarias
+- **Medios de reseñas** — 9 sitios domain-scoped (decine21, fotogramas, cinemaldito, etc.)
+- **Redes sociales** — Instagram y Twitter/X de @acontracorrientefilms y @atlantidamallorca
+
+### Sistema anti-falsos positivos
+
+"Filtrado de relevancia con señales fuertes (director, actores, localizaciones) y negativas (abejas, Swarm, Donald Glover, ciencia). Requiere mínimo 2 señales positivas y cero negativas."
+
+### Envío a Telegram
+
+- Cada noticia se envía con foto (si disponible) + título + enlace
+- Clasificación automática por tipo: trailer, foto, poster, entrevista, crítica, noticia, video
+- Deduplicación por URL normalizada (resuelve redirecciones de Bing/MSN)
+- Acumulación en `files/eixam_pelicula.json` con flag `enviada` para no reenviar
+
+### Uso
+
+```bash
+# Recopilar y archivar (sin enviar)
+python scripts/scrapers/scrape_eixam.py
+
+# Dry-run (mostrar sin guardar)
+python scripts/scrapers/scrape_eixam.py --dry-run
+
+# Enviar a Telegram
+python scripts/scrapers/scrape_eixam.py --enviar
+```
 
 ---
 
