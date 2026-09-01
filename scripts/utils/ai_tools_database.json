@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "DB estática de herramientas de IA por categoría. Fallback cuando Gemini no está disponible.",
-    "count": 100
+    "count": 107
   },
   "tools": [
     {
@@ -1403,6 +1403,104 @@
       ],
       "url": "https://ideogram.ai",
       "restricciones": "Plan free limitado; ideal para logos."
+    },
+    {
+      "id": 104,
+      "cat": "code_gen",
+      "tool": "OpenCode",
+      "body": "Asistente de código CLI que entiende tu codebase completo. Edita archivos, ejecuta comandos y navega el proyecto autonomamente.",
+      "dific": 2,
+      "workflow": "Contexto del proyecto -> instrucción -> código generado",
+      "combinaciones": [
+        "code_review",
+        "code_refactor"
+      ],
+      "url": "https://opencode.ai",
+      "restricciones": "Requiere API key de proveedor LLM; models outside free tier."
+    },
+    {
+      "id": 105,
+      "cat": "code_gen",
+      "tool": "OpenCode + Skills",
+      "body": "Skills predefinidas para OpenCode: customize-opencode para configuración, subagents para tareas complejas, MCP servers para herramientas externas.",
+      "dific": 2,
+      "workflow": "Instrucción -> skill cargada -> ejecución autónoma",
+      "combinaciones": [
+        "agentes",
+        "workflow_gen"
+      ],
+      "url": "https://opencode.ai",
+      "restricciones": "Skills son experimentales; compatibilidad varía según modelo."
+    },
+    {
+      "id": 106,
+      "cat": "agentes",
+      "tool": "OpenCode Subagents",
+      "body": "Subagentes especializados dentro de OpenCode: explore para búsqueda de código, general para tareas complejas multistep.",
+      "dific": 3,
+      "workflow": "Tarea compleja -> subagente especializado -> resultado",
+      "combinaciones": [
+        "code_gen",
+        "workflow_gen"
+      ],
+      "url": "https://opencode.ai",
+      "restricciones": "Cada subagente tiene contexto limitado; coordinación manual necesaria."
+    },
+    {
+      "id": 107,
+      "cat": "code_review",
+      "tool": "OpenCode + Lint/Typecheck",
+      "body": "Verificación automática de código: ejecuta lint, typecheck y tests después de cada cambio para asegurar calidad.",
+      "dific": 2,
+      "workflow": "Cambio -> lint -> typecheck -> tests -> commit",
+      "combinaciones": [
+        "code_gen",
+        "code_refactor"
+      ],
+      "url": "https://opencode.ai",
+      "restricciones": "Depende de los hooks configurados en el proyecto."
+    },
+    {
+      "id": 108,
+      "cat": "workflow_gen",
+      "tool": "OpenCode + MCP Servers",
+      "body": "Servidores MCP (Model Context Protocol) que conectan OpenCode con bases de datos, APIs y herramientas externas de forma segura.",
+      "dific": 3,
+      "workflow": "OpenCode -> MCP server -> herramienta externa -> resultado",
+      "combinaciones": [
+        "api_ai",
+        "agentes"
+      ],
+      "url": "https://modelcontextprotocol.io",
+      "restricciones": "Configuración manual de permisos; cada MCP server es independiente."
+    },
+    {
+      "id": 109,
+      "cat": "code_refactor",
+      "tool": "OpenCode + Git Integration",
+      "body": "Gestión completa de Git desde OpenCode: commits, diffs, branches y PRs con contexto del proyecto completo.",
+      "dific": 2,
+      "workflow": "Cambio -> diff -> commit message automático -> push",
+      "combinaciones": [
+        "code_review",
+        "code_gen"
+      ],
+      "url": "https://opencode.ai",
+      "restricciones": "Requiere permisos de escritura en el repositorio."
+    },
+    {
+      "id": 110,
+      "cat": "docs_ai",
+      "tool": "OpenCode + Documentation",
+      "body": "Generación y actualización automática de documentación: READMEs, AGENTS.md, comentarios de código y changelogs.",
+      "dific": 1,
+      "workflow": "Código -> análisis -> documentación generada",
+      "combinaciones": [
+        "code_gen",
+        "resumen_auto"
+      ],
+      "url": "https://opencode.ai",
+      "restricciones": "Documentación generada requiere revisión humana."
     }
   ]
 }
