@@ -2,14 +2,15 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 23,
+    "total_concepts": 27,
     "categories": [
       "css_moderno",
       "devops",
+      "habilidades",
       "interfaces",
       "patrones_diseno"
     ],
-    "last_scraped": "2026-09-02T03:17:35.349352"
+    "last_scraped": "2026-09-02T10:48:58.201413"
   },
   "concepts": [
     {
@@ -445,6 +446,82 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-02T03:16:56.824423"
+    },
+    {
+      "title": "20 tips de TypeScript para ser más productivo: satisfies, NoUnchecked, Extract y trucos del sistema de tipos",
+      "summary": "La productividad con TypeScript no viene solo de conocer la sintaxis, sino de dominar las técnicas que reducen el ruido de tipos, mejoran la legibilidad del código en el editor y detectan errores ante",
+      "explanation": "La productividad con TypeScript no viene solo de conocer la sintaxis, sino de dominar las técnicas que reducen el ruido de tipos, mejoran la legibilidad del código en el editor y detectan errores antes. Estos 20 trucos son los más útiles del día a día, ordenados por impacto.1. satisfies: validar sin ampliar el tipo// Sin satisfies: el tipo se amplía a string | number\nconst paleta = {\n  rojo: [255, 0, 0],\n  verde: '#00ff00',\n};\npaleta.rojo.toUpperCase(); // Error en runtime: es un array\n\n// Con satisfies: valida contra el tipo pero conserva el tipo inferido\ntype ColorPaleta = Record<string, [number, number, number] | string>;\n\nconst paleta2 = {\n  rojo: [255, 0, 0],\n  verde: '#00ff00',\n} satisfies ColorPaleta;\n\npaleta2.rojo.map(x => x / 255); // OK: TypeScript sabe que es [number, number, number]\npaleta2.verde.toUpperCase();      // OK: TypeScript sabe que es string2. NoUncheckedIndexedAccess// tsconfig.json: \"noUncheckedIndexedAccess\": true\n\nconst items = ['a', 'b', 'c'];\nconst primero = items[0];\n// Sin la opción: string\n// Con la opción: string | undefined  fuerza a comprobar antes de usar\n\nif (primero !== undefined) {\n  console.log(primero.toUpperCase()); // OK\n}3. Extract para filtrar unionstype Evento =\n  | { tipo: 'click'; x: number; y: number }\n  | { tipo: 'tecla'; codigo: string }\n  | { tipo: 'scroll'; delta: number };\n\ntype EventoClick = Extract<Evento, { tipo: 'click' }>;\n// { tipo: 'click'; x: number; y: number }\n\ntype EventosConCodigo = Extract<Evento, { codigo: s",
+      "code_example": "// Sin satisfies: el tipo se amplía a string | number\nconst paleta = {\n  rojo: [255, 0, 0],\n  verde: '#00ff00',\n};\npaleta.rojo.toUpperCase(); // Error en runtime: es un array\n\n// Con satisfies: valida contra el tipo pero conserva el tipo inferido\ntype ColorPaleta = Record<string, [number, number, number] | string>;\n\nconst paleta2 = {\n  rojo: [255, 0, 0],\n  verde: '#00ff00',\n} satisfies ColorPaleta;\n\npaleta2.rojo.map(x => x / 255); // OK: TypeScript sabe que es [number, number, number]\npaleta2.verde.toUpperCase();      // OK: TypeScript sabe que es string",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-02T10:48:16.528902"
+    },
+    {
+      "title": "go generate en Go: stringer, mockgen, sqlc y generación de código como parte del build",
+      "summary": "go generatees un comando que ejecuta programas arbitrarios a partir de directivas especiales en los comentarios del código fuente. Su propósito es automatizar la generación de código: métodosString()p",
+      "explanation": "go generatees un comando que ejecuta programas arbitrarios a partir de directivas especiales en los comentarios del código fuente. Su propósito es automatizar la generación de código: métodosString()para tipos enumerados, mocks de interfaces, código SQL tipado y código de Protocol Buffers. Todo esto como parte del proceso de build.Cómo funciona go generate//go:generate comando argumentos Al ejecutargo generate ./..., Go busca estas directivas en los ficheros.godel proyecto y ejecuta los comandos. Habitualmente se concentran en un ficherogenerate.goen la raíz del paquete.stringer: métodos String() para tipos enumerados// estado.go\npackage domain\n\n//go:generate stringer -type=EstadoPedido -output=estado_string.go\n\ntype EstadoPedido int\n\nconst (\n    EstadoPendiente EstadoPedido = iota\n    EstadoProcesando\n    EstadoEnviado\n    EstadoCancelado\n)\n\n// Después de go generate, puedes usar:\n// fmt.Println(EstadoPendiente) ? \"EstadoPendiente\"\n// e.String()                  ? \"EstadoEnviado\"go install golang.org/x/tools/cmd/stringer@latest\ngo generate ./internal/domain/ El ficheroestado_string.gogenerado contiene un array constante de cadenas con una búsqueda O(1). Es más eficiente que un switch manual y se mantiene sincronizado automáticamente al agregar o quitar valores del enum.mockgen: mocks automáticos de interfaces// generate.go\npackage ports\n\n//go:generate mockgen -source=repositories.go -destination=../mocks/mock_repositories.go -package=mocks\n\n// En los tests:\nimport (\n    \"tes",
+      "code_example": "//go:generate comando argumentos",
+      "use_cases": [],
+      "difficulty": 1,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "habilidades"
+      ],
+      "cat": "habilidades",
+      "scraped_at": "2026-09-02T10:48:17.828522"
+    },
+    {
+      "title": "FlexboxOrganízate con las coleccionesGuarda y clasifica el contenido según tus preferencias.",
+      "summary": "Andy BellXGitHubHomepageRachel AndrewGitHubLinkedInMastodonBlueskyHomepage Un patrón de diseño que puede ser complicado en el diseño responsivo es una barra lateral que se alinea con algunos contenido",
+      "explanation": "Andy BellXGitHubHomepageRachel AndrewGitHubLinkedInMastodonBlueskyHomepage Un patrón de diseño que puede ser complicado en el diseño responsivo es una barra lateral que se alinea con algunos contenidos. Donde hay espacio en la ventana gráfica, este patrón funciona muy bien, pero donde el espacio se condensa, esta distribución rígida puede volverse problemática. El modelo de distribución de caja flexible (flexbox) es un modelo de distribución pensado para contenido unidimensional. Se destaca por tomar varios elementos que tienen diferentes tamaños y devolver la mejor distribución para estos. Este es el modelo de distribución ideal para este patrón de barra lateral. Flexbox no solo ayuda a colocar la barra lateral y el contenido en línea, sino que, donde no queda suficiente espacio, la barra lateral se dividirá en una nueva línea. En lugar de establecer dimensiones rígidas para que las siga el navegador, con flexbox, puede ofrecer límites flexibles para indicar cómo podría mostrarse el contenido.",
+      "code_example": "<div class=\"container\" id=\"container\">\n  <div>One</div>\n  <div>Item two</div>\n  <div>The item we will refer to as three</div>\n</div>",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "css",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "web.dev",
+      "tags": [
+        "css",
+        "modern",
+        "css_moderno"
+      ],
+      "cat": "css_moderno",
+      "scraped_at": "2026-09-02T10:48:53.840768"
+    },
+    {
+      "title": "Grid (cuadrícula)Organízate con las coleccionesGuarda y clasifica el contenido según tus preferencias.",
+      "summary": "Andy BellXGitHubHomepageRachel AndrewGitHubLinkedInMastodonBlueskyHomepage Una disposición muy común en el diseño web es la de cabecera, barra lateral, cuerpo y pie de página. A lo largo de los años, ",
+      "explanation": "Andy BellXGitHubHomepageRachel AndrewGitHubLinkedInMastodonBlueskyHomepage Una disposición muy común en el diseño web es la de cabecera, barra lateral, cuerpo y pie de página. A lo largo de los años, ha habido muchos métodos para resolver esta distribución, pero con la cuadrícula CSS, no solo es relativamente sencillo, sino que tiene muchas opciones. La cuadrícula (Grid) es excepcionalmente útil para combinar el control que proporciona el tamaño extrínseco con la flexibilidad del tamaño intrínseco, lo que lo hace ideal para este tipo de disposición. Esto se debe a que la cuadrícula es un método de distribución diseñado para contenido bidimensional. Es decir, colocar las cosas en filas y columnas al mismo tiempo. Al crear una distribución de cuadrícula, usted define una cuadrícula con filas y columnas. Luego, coloca elementos en esa cuadrícula o permite que el navegador los coloque automáticamente en las celdas que ha creado. El tema de la cuadrícula es muy extenso, pero con una descripción general de lo que tiene disponible, pronto estará haciendo diseños de cuadrícula.",
+      "code_example": ".container{display:grid;}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "css",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "web.dev",
+      "tags": [
+        "css",
+        "modern",
+        "css_moderno"
+      ],
+      "cat": "css_moderno",
+      "scraped_at": "2026-09-02T10:48:55.200677"
     }
   ]
 }
