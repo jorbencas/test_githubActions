@@ -685,7 +685,7 @@ def select_concepts_from_db(concepts_db, sent_titles, categories, count=5):
 
 
 def build_concepts_gemini_prompt(categories, sent_titles):
-    cats_str = ", ".join(categories)
+    cats_str = ", ".join(categories) if categories else "cualquier categoría"
     titles_str = "\n".join(sent_titles[:200]) if sent_titles else "(nunca se han enviado conceptos antes)"
 
     return f"""Eres un profesor experto en tecnologías de la información. Generas CONCEPTOS DE PROGRAMACIÓN EN ESPAÑOL para profesionales de IT.
@@ -806,7 +806,7 @@ def select_tips_from_db(database, history, count=5, tip_type=None):
 
 
 def build_gemini_prompt(categories, sent_titles, news, tools):
-    cats_str = ", ".join(categories)
+    cats_str = ", ".join(categories) if categories else "cualquier categoría"
     titles_str = "\n".join(sent_titles[:200]) if sent_titles else "(nunca se han enviado tips antes)"
     news_str = "\n".join(news[:15]) if news else "(no hay noticias recientes disponibles)"
     tools_str = "\n".join(tools[:10]) if tools else "(no hay herramientas trending disponibles)"
