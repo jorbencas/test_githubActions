@@ -3198,5 +3198,21 @@
         "fecha_real": "30/07/2026",
         "ts": "2026-07-30T08:36:36.459942",
         "categoria": "💡 General"
+    },
+    {
+        "titulo": "stablyai/orca",
+        "enlace": "https://github.com/stablyai/orca",
+        "fuente": "Manual",
+        "tipo": "herramienta",
+        "f": "02/09",
+        "fecha_publicacion": "",
+        "subtipo": "github",
+        "descripcion": "The agent development environment. Run Claude Code, Codex, and any other coding agent in parallel, each in its own worktree. Terminals, diffs, a browser, and a CLI.",
+        "lenguaje": "TypeScript",
+        "estrellas": "59600",
+        "repo": "stablyai/orca",
+        "fecha_real": "02/09/2026",
+        "ts": "2026-09-02T13:19:58.464213",
+        "categoria": "💡 General"
     }
 ]
