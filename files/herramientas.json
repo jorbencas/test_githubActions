@@ -3185,7 +3185,7 @@
     },
     {
         "titulo": "stablyai/orca",
-        "enlace": "https://github.com/stablyai/orca",
+        "enlace": "https://www.onorca.dev",
         "fuente": "Manual",
         "tipo": "herramienta",
         "f": "02/09",
@@ -3197,6 +3197,7 @@
         "repo": "stablyai/orca",
         "fecha_real": "02/09/2026",
         "ts": "2026-09-02T13:19:58.464213",
-        "categoria": "💡 General"
+        "categoria": "💡 General",
+        "homepage": "https://www.onorca.dev"
     }
 ]
