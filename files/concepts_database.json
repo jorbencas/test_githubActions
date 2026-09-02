@@ -2,14 +2,14 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 22,
+    "total_concepts": 23,
     "categories": [
       "css_moderno",
       "devops",
       "interfaces",
       "patrones_diseno"
     ],
-    "last_scraped": "2026-09-01T20:42:20.577161"
+    "last_scraped": "2026-09-02T03:17:35.349352"
   },
   "concepts": [
     {
@@ -427,6 +427,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-01T16:11:26.361652"
+    },
+    {
+      "title": "V8 y motores JavaScript: hidden classes, JIT, optimización y antipatrones de rendimiento",
+      "summary": "V8 es el motor JavaScript que impulsa tanto Node.js como Chrome, y su arquitectura interna tiene implicaciones directas en el rendimiento del código que escribimos. Comprender cómo funciona el pipelin",
+      "explanation": "V8 es el motor JavaScript que impulsa tanto Node.js como Chrome, y su arquitectura interna tiene implicaciones directas en el rendimiento del código que escribimos. Comprender cómo funciona el pipeline de compilación, qué son las hidden classes y el inline caching permite escribir código que el JIT puede optimizar eficientemente, y evitar los antipatrones que provocan desoptimizaciones.El pipeline de compilación de V8 V8 no interpreta ni compila estáticamente: usa un enfoque mixto que evoluciona en tiempo de ejecución según la frecuencia de uso del código:// Fase 1: INTERPRETACIÓN (Ignition)\n// El código fuente se parsea y compila a bytecode.\n// La primera ejecución usa el intérprete Ignition.\n// Es rápido de iniciar pero más lento por instrucción.\n\n// Fase 2: COMPILACIÓN JIT (TurboFan)\n// Las funciones \"calientes\" (ejecutadas muchas veces) se optimizan.\n// TurboFan genera código máquina nativo muy rápido.\n\n// Fase 3: DESOPTIMIZACIÓN\n// Si las suposiciones que hizo TurboFan resultan incorrectas,\n// vuelve al bytecode de Ignition y puede reoptimizar más tarde.\n\nfunction sumarNumeros(a, b) {\n  return a + b;\n}\n\n// Estas llamadas permiten a V8 especializarse para números\nfor (let i = 0; i < 10_000; i++) {\n  sumarNumeros(i, i + 1); // V8 optimiza asumiendo argumentos numéricos\n}\n\n// Ahora una llamada con string provoca DESOPTIMIZACIÓN\nsumarNumeros('hola', ' mundo'); // V8 descarta la versión optimizadaHidden classes: el secreto detrás de la velocidad V8 crea internamente una \"clas",
+      "code_example": "// Fase 1: INTERPRETACIÓN (Ignition)\n// El código fuente se parsea y compila a bytecode.\n// La primera ejecución usa el intérprete Ignition.\n// Es rápido de iniciar pero más lento por instrucción.\n\n// Fase 2: COMPILACIÓN JIT (TurboFan)\n// Las funciones \"calientes\" (ejecutadas muchas veces) se optimizan.\n// TurboFan genera código máquina nativo muy rápido.\n\n// Fase 3: DESOPTIMIZACIÓN\n// Si las suposiciones que hizo TurboFan resultan incorrectas,\n// vuelve al bytecode de Ignition y puede reoptimizar más tarde.\n\nfunction sumarNumeros(a, b) {\n  return a + b;\n}\n\n// Estas llamadas permiten a V8 especializarse para números\nfor (let i = 0; i < 10_000; i++) {\n  sumarNumeros(i, i + 1); // V8 optimiza asumiendo argumentos numéricos\n}\n\n// Ahora una llamada con string provoca DESOPTIMIZACIÓN\nsumarNumeros('hola', ' mundo'); // V8 descarta la versión optimizada",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-02T03:16:56.824423"
     }
   ]
 }
