@@ -359,10 +359,9 @@ def build_daily_message(tools):
         for idx, tool in cat_tools:
             body_parts.append("")
             body_parts.append(format_tool_message(tool, idx))
-        body_parts.append(f"\n{'─' * 28}")
 
     body = "\n".join(body_parts)
-    footer = f"💡 {len(tools)} herramientas de {len(grouped)} categorías\n\n_Combina herramientas entre sí para crear workflows potentes._"
+    footer = f"💡 {len(tools)} herramientas de {len(grouped)} categorías"
 
     return header + "\n" + body + "\n" + footer
 
