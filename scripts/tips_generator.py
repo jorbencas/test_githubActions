@@ -1213,10 +1213,10 @@ def main():
 
     print(f"\n📋 Selección ({len(tips)}):")
     for i, tip in enumerate(tips, 1):
-        emoji = CAT_EMOJI.get(tip["cat"], "?")
+        emoji = CAT_EMOJI.get(tip.get("cat", ""), "?")
         src = tip.get("source", "db")
         t = "💡" if tip.get("type") == "tip" else "⚡" if tip.get("type") == "trick" else "📘"
-        print(f"   {i}. {t} {emoji} [{tip['cat']}] {tip['title']} ({src})")
+        print(f"   {i}. {t} {emoji} [{tip.get('cat', '?')}] {tip['title']} ({src})")
 
     if dry_run:
         print("\n--- VISTA PREVIA (dry-run) ---\n")
