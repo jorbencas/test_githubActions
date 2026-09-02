@@ -346,22 +346,14 @@ def build_daily_message(tools):
     date_str = now.strftime("%d/%m/%Y")
     header = f"{greeting} — {date_str}\n{'─' * 28}\n🧰 *Herramientas de IA para tu día*"
 
-    grouped = {}
-    for i, tool in enumerate(tools, 1):
-        cat = tool.get("cat", "")
-        grouped.setdefault(cat, []).append((i, tool))
-
     body_parts = []
-    for cat, cat_tools in grouped.items():
-        emoji = CAT_EMOJI.get(cat, "🤖")
-        nombre = CAT_NAMES.get(cat, cat)
-        body_parts.append(f"\n{emoji} *{nombre}* ({len(cat_tools)} herramienta{'s' if len(cat_tools) > 1 else ''})")
-        for idx, tool in cat_tools:
-            body_parts.append("")
-            body_parts.append(format_tool_message(tool, idx))
+    for i, tool in enumerate(tools, 1):
+        body_parts.append("")
+        body_parts.append(format_tool_message(tool, i))
 
     body = "\n".join(body_parts)
-    footer = f"💡 {len(tools)} herramientas de {len(grouped)} categorías"
+    cats = set(t.get("cat", "") for t in tools)
+    footer = f"💡 {len(tools)} herramientas de {len(cats)} categorías"
 
     return header + "\n" + body + "\n" + footer
 
