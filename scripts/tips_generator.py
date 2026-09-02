@@ -674,7 +674,10 @@ def select_concepts_from_db(concepts_db, sent_titles, categories, count=5):
     all_concepts = concepts_db.get("concepts", [])
     sent = set(sent_titles)
     available = [c for c in all_concepts if c.get("title", "").lower().strip() not in {s.lower().strip() for s in sent}]
-    preferred = [c for c in available if c.get("cat") in categories]
+    if categories:
+        preferred = [c for c in available if c.get("cat") in categories]
+    else:
+        preferred = available[:]
     if len(preferred) < count:
         preferred += [c for c in available if c not in preferred]
     random.shuffle(preferred)
