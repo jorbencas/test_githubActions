@@ -840,6 +840,7 @@ def build_gemini_prompt(categories, sent_titles, news, tools):
 12. Cuando el tip describa una práctica, comando o configuración técnicos, SIEMPRE rellena los campos "mala" (cómo NO se debe hacer) y "buena" (cómo se debe hacer correctamente). Si el tip es un concepto teórico puro, deja "mala" y "buena" vacíos ("").
 13. El campo "body" describe el tema de forma neutra; los campos "mala" y "buena" muestran el contraste de práctica.
 14. Usa "type": "tip" para conceptos, principios, definiciones. Usa "type": "trick" para comandos, atajos, herramientas prácticos con código.
+15. IMPORTANTE: El campo "body" SIEMPRE debe tener contenido. NUNCA lo dejes vacío. El body es la explicación del tip, sin ella el mensaje no tiene sentido.
 
 === CUÁNDO INCLUIR CÓDIGO ===
 - Comandos de terminal (linux, docker, git, etc.)
@@ -932,6 +933,9 @@ def generate_tips_gemini(count, categories, sent_titles):
                     if t["cat"] in CAT_EMOJI:
                         if "type" not in t:
                             t["type"] = "tip"
+                        # Ensure body is not empty
+                        if not t.get("body", "").strip():
+                            t["body"] = t.get("title", "")
                         valid.append(t)
             if valid:
                 print(f"✅ Gemini generó {len(valid)} tips nuevos")
@@ -1029,6 +1033,8 @@ def format_tip_message(tip, index):
         body = tip.get("body", "")
         if body:
             lines.append(f"   {body}")
+        else:
+            lines.append(f"   {title}")
         if tip.get("mala") and tip.get("buena"):
             lines.append(f"   ❌ _Mala práct.:_ {tip['mala']}")
             lines.append(f"   ✅ _Buena práct.:_ {tip['buena']}")
