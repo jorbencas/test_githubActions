@@ -150,6 +150,16 @@ FUENTES = {
     "Apple": {"url": "https://github.com/apple", "tipo": "herramienta", "subtipo": "github-org", "selector": "article a[href]", "org": "apple"},
     "Amazon AI": {"url": "https://github.com/aws", "tipo": "herramienta", "subtipo": "github-org", "selector": "article a[href]", "org": "aws"},
     "Google DeepMind": {"url": "https://github.com/google-deepmind", "tipo": "herramienta", "subtipo": "github-org", "selector": "article a[href]", "org": "google-deepmind"},
+    # ── AI Tool Directories (descubrimiento de herramientas) ──
+    "There's An AI For That": {"url": "https://theresanaiforthat.com/most-saved/", "tipo": "herramienta", "subtipo": "directory", "selector": "a[href*='/ai/']"},
+    "AI Tool Directory": {"url": "https://aitoolsdirectory.com/", "tipo": "herramienta", "subtipo": "directory", "selector": "a[href*='/tool/']"},
+    "Futurepedia": {"url": "https://www.futurepedia.io/ai-tools", "tipo": "herramienta", "subtipo": "directory", "selector": "a[href*='/ai-tool/']"},
+    "TopAI Tools": {"url": "https://topaitools.co/", "tipo": "herramienta", "subtipo": "directory", "selector": "a[href*='/tools/']"},
+    "AlternativeTo AI": {"url": "https://alternativeto.net/software/chatgpt/?sort=popularity", "tipo": "herramienta", "subtipo": "alternativeto", "selector": "a[href*='/software/']"},
+    # ── Tech News (herramientas mencionadas) ──
+    "TechCrunch AI": {"url": "https://techcrunch.com/category/artificial-intelligence/", "tipo": "herramienta", "subtipo": "technews", "selector": "a[href*='techcrunch.com/']"},
+    "The Verge AI": {"url": "https://www.theverge.com/ai-artificial-intelligence", "tipo": "herramienta", "subtipo": "technews", "selector": "a[href*='theverge.com/']"},
+    "Ars Technica AI": {"url": "https://arstechnica.com/ai-policy/", "tipo": "herramienta", "subtipo": "technews", "selector": "a[href*='arstechnica.com/']"},
     "GitHub Topic PDF": {"url": "https://github.com/topics/pdf?o=desc&s=stars", "tipo": "herramienta", "subtipo": "github-topic", "selector": "article a[href]"},
     "GitHub Topic Office": {"url": "https://github.com/topics/office?o=desc&s=stars", "tipo": "herramienta", "subtipo": "github-topic", "selector": "article a[href]"},
     "GitHub Topic Presentation": {"url": "https://github.com/topics/presentation?o=desc&s=stars", "tipo": "herramienta", "subtipo": "github-topic", "selector": "article a[href]"},

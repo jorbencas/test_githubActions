@@ -472,6 +472,48 @@ class WebExtractor(BaseExtractor):
                 })
                 results.append(self.enriquecer_fechas(item))
 
+        elif subtipo == "directory":
+            # AI Tool Directories: extraer herramientas listadas
+            for a in soup.select("a[href]")[:30]:
+                href = a.get("href", "")
+                if not href or len(href) < 10:
+                    continue
+                title = a.get_text(strip=True)
+                if not title or len(title) < 3:
+                    continue
+                # Filtrar solo enlaces relevantes
+                if any(x in href.lower() for x in ["/ai/", "/tool/", "/software/"]):
+                    full_url = urljoin(target, href)
+                    item = self.generar_item_base(title, full_url, nombre, TIPO_VAL_HERRAMIENTA)
+                    item.update({SUBTIPO_KEY: "directory"})
+                    results.append(self.enriquecer_fechas(item))
+
+        elif subtipo == "alternativeto":
+            # AlternativeTo: extraer alternativas
+            for a in soup.select("a[href*='/software/']")[:20]:
+                href = a.get("href", "")
+                title = a.get_text(strip=True)
+                if not href or not title or len(title) < 3:
+                    continue
+                full_url = urljoin("https://alternativeto.net", href)
+                item = self.generar_item_base(title, full_url, nombre, TIPO_VAL_HERRAMIENTA)
+                item.update({SUBTIPO_KEY: "alternativeto"})
+                results.append(self.enriquecer_fechas(item))
+
+        elif subtipo == "technews":
+            # Tech News: extraer menciones de herramientas
+            for a in soup.select("a[href]")[:15]:
+                href = a.get("href", "")
+                title = a.get_text(strip=True)
+                if not href or not title or len(title) < 10:
+                    continue
+                # Filtrar solo artículos relevantes
+                if any(x in title.lower() for x in ["ai", "tool", "launch", "release", "new", "introducing"]):
+                    full_url = urljoin(target, href)
+                    item = self.generar_item_base(title, full_url, nombre, TIPO_VAL_HERRAMIENTA)
+                    item.update({SUBTIPO_KEY: "technews"})
+                    results.append(self.enriquecer_fechas(item))
+
         return results
 
 
