@@ -442,6 +442,36 @@ class WebExtractor(BaseExtractor):
             except (json.JSONDecodeError, AttributeError):
                 pass
 
+        elif subtipo == "github-org":
+            # GitHub Organization: extraer repos recientes/populares
+            org = info.get("org", "")
+            articles = soup.select("article.Box-row") or soup.select('[class*="Box-row"]')
+            for article in articles[:15]:
+                h2_a = article.select_one("h2 a")
+                if not h2_a:
+                    continue
+                href = h2_a.get("href", "")
+                full_url = urljoin("https://github.com", href)
+                raw_title = h2_a.get_text(strip=True)
+                desc_p = article.select_one("p")
+                desc = desc_p.get_text(strip=True) if desc_p else ""
+                lang_span = article.select_one('span[itemprop="programmingLanguage"]')
+                lang = lang_span.get_text(strip=True) if lang_span else ""
+                stars_a = article.select_one('a[href*="/stargazers"]')
+                stars = stars_a.get_text(strip=True) if stars_a else "0"
+                stars = stars.replace("★", "").replace("☆", "").replace(",", "").strip()
+                title = raw_title if raw_title else href.strip("/").split("/")[-1]
+                item = self.generar_item_base(title, full_url, nombre, TIPO_VAL_HERRAMIENTA)
+                item.update({
+                    SUBTIPO_KEY: "github",
+                    DESCRIPCION_KEY: desc.strip(),
+                    LENGUAJE_KEY: lang.strip(),
+                    ESTRELLAS_KEY: stars.strip(),
+                    REPO_KEY: href.strip("/") if href else "",
+                    "org": org,
+                })
+                results.append(self.enriquecer_fechas(item))
+
         return results
 
 

@@ -139,6 +139,17 @@ FUENTES = {
     "Product Hunt Developer Tools": {"url": "https://www.producthunt.com/topics/developer-tools", "tipo": "herramienta", "subtipo": "producthunt", "selector": "a[href*='/posts/']"},
     # ── Hacker News ──
     "Hacker News Show HN": {"url": "https://hn.algolia.com/api/v1/search?query=Show%20HN&tags=show_hn", "tipo": "herramienta", "subtipo": "hackernews", "selector": ""},
+    # ── Tech Companies (herramientas oficiales) ──
+    "Google AI Tools": {"url": "https://github.com/google", "tipo": "herramienta", "subtipo": "github-org", "selector": "article a[href]", "org": "google"},
+    "Microsoft AI": {"url": "https://github.com/microsoft", "tipo": "herramienta", "subtipo": "github-org", "selector": "article a[href]", "org": "microsoft"},
+    "Meta AI": {"url": "https://github.com/meta-llama", "tipo": "herramienta", "subtipo": "github-org", "selector": "article a[href]", "org": "meta-llama"},
+    "OpenAI": {"url": "https://github.com/openai", "tipo": "herramienta", "subtipo": "github-org", "selector": "article a[href]", "org": "openai"},
+    "Anthropic": {"url": "https://github.com/anthropics", "tipo": "herramienta", "subtipo": "github-org", "selector": "article a[href]", "org": "anthropics"},
+    "Hugging Face": {"url": "https://github.com/huggingface", "tipo": "herramienta", "subtipo": "github-org", "selector": "article a[href]", "org": "huggingface"},
+    "NVIDIA": {"url": "https://github.com/NVIDIA", "tipo": "herramienta", "subtipo": "github-org", "selector": "article a[href]", "org": "NVIDIA"},
+    "Apple": {"url": "https://github.com/apple", "tipo": "herramienta", "subtipo": "github-org", "selector": "article a[href]", "org": "apple"},
+    "Amazon AI": {"url": "https://github.com/aws", "tipo": "herramienta", "subtipo": "github-org", "selector": "article a[href]", "org": "aws"},
+    "Google DeepMind": {"url": "https://github.com/google-deepmind", "tipo": "herramienta", "subtipo": "github-org", "selector": "article a[href]", "org": "google-deepmind"},
     "GitHub Topic PDF": {"url": "https://github.com/topics/pdf?o=desc&s=stars", "tipo": "herramienta", "subtipo": "github-topic", "selector": "article a[href]"},
     "GitHub Topic Office": {"url": "https://github.com/topics/office?o=desc&s=stars", "tipo": "herramienta", "subtipo": "github-topic", "selector": "article a[href]"},
     "GitHub Topic Presentation": {"url": "https://github.com/topics/presentation?o=desc&s=stars", "tipo": "herramienta", "subtipo": "github-topic", "selector": "article a[href]"},
