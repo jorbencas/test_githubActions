@@ -1984,22 +1984,6 @@
         "categoria": "💡 General"
     },
     {
-        "titulo": "stablyai /orca",
-        "enlace": "https://github.com/stablyai/orca",
-        "fuente": "GitHub Trending Daily",
-        "tipo": "herramienta",
-        "f": "12/08",
-        "fecha_publicacion": "",
-        "subtipo": "github",
-        "descripcion": "Orca is the ADE for working with a fleet of parallel agents. Run any coding agent with your own subscription. Available on desktop, mobile and VPS.",
-        "lenguaje": "TypeScript",
-        "estrellas": "43150",
-        "repo": "stablyai/orca",
-        "fecha_real": "12/08/2026",
-        "ts": "2026-08-12T07:40:41.261791",
-        "categoria": "💡 General"
-    },
-    {
         "titulo": "huggingface /transformers",
         "enlace": "https://github.com/huggingface/transformers",
         "fuente": "GitHub Trending Daily",
