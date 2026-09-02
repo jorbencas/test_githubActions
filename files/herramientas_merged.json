@@ -14220,5 +14220,16 @@
         "subtipo": "api",
         "descripcion": "Structured iGaming data API: providers, game catalogues with mechanics, RTP and volatility, plus release history, industry news, jobs and per-market search demand. Free tier, full OpenAPI 3 schema, MC",
         "categoria": "Games & Comics"
+    },
+    {
+        "titulo": "Whop API",
+        "enlace": "https://publicapis.io/whop-api",
+        "fuente": "Public APIs",
+        "tipo": "herramienta",
+        "f": "02/09",
+        "fecha_publicacion": "",
+        "subtipo": "api",
+        "descripcion": "Whop provides multiple payments and business APIs, including checkouts, payment links, invoices, subscriptions, LLC formation and more. Access via the API, MCP or our CLI.",
+        "categoria": "Finance"
     }
 ]
