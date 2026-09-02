@@ -30,6 +30,45 @@ logging.basicConfig(
 logger = logging.getLogger("tools")
 
 
+async def get_homepage_from_github(session: aiohttp.ClientSession, repo: str) -> str | None:
+    """Obtiene la homepage URL de un repo de GitHub via API."""
+    if not repo or "/" not in repo:
+        return None
+    try:
+        url = f"https://api.github.com/repos/{repo}"
+        async with session.get(url, timeout=10) as resp:
+            if resp.status != 200:
+                return None
+            data = await resp.json()
+            homepage = data.get("homepage", "").strip()
+            if homepage and homepage.startswith("http"):
+                return homepage
+    except Exception as e:
+        logger.debug(f"⚠️ Error obteniendo homepage para {repo}: {e}")
+    return None
+
+
+async def enrich_with_homepages(items: list) -> list:
+    """Para cada herramienta de GitHub, intenta obtener su homepage URL."""
+    async with aiohttp.ClientSession() as session:
+        sem = asyncio.Semaphore(5)
+
+        async def process_item(item):
+            async with sem:
+                repo = item.get("repo", "")
+                if not repo:
+                    return item
+                homepage = await get_homepage_from_github(session, repo)
+                if homepage:
+                    item["enlace"] = homepage
+                    item["homepage"] = homepage
+                    logger.info(f"🏠 {repo} → {homepage}")
+                return item
+
+        tasks = [process_item(item) for item in items]
+        return await asyncio.gather(*tasks)
+
+
 
 async def run():
     logger.info("🚀 Iniciando scrape_tools.py")
@@ -63,6 +102,11 @@ async def run():
             nuevas.append(item)
             if enlace:
                 existing_urls.add(enlace)
+
+    # Enriquecer con homepages de GitHub API
+    if nuevas:
+        logger.info(f"🏠 Obteniendo homepages de GitHub para {len(nuevas)} herramientas...")
+        nuevas = await enrich_with_homepages(nuevas)
 
     if nuevas:
         herramientas_hist = nuevas + herramientas_hist
