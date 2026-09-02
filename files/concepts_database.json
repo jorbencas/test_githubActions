@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 27,
+    "total_concepts": 30,
     "categories": [
       "css_moderno",
       "devops",
@@ -10,7 +10,7 @@
       "interfaces",
       "patrones_diseno"
     ],
-    "last_scraped": "2026-09-02T16:10:29.177566"
+    "last_scraped": "2026-09-02T20:38:24.676825"
   },
   "concepts": [
     {
@@ -522,6 +522,60 @@
       ],
       "cat": "css_moderno",
       "scraped_at": "2026-09-02T10:48:55.200677"
+    },
+    {
+      "title": "El crate regex en Rust: expresiones regulares con rendimiento y seguridad garantizados",
+      "summary": "El crateregexes la solución estándar para expresiones regulares en Rust. A diferencia de los motores de regex de muchos lenguajes, este no usa backtracking: está basado en autómatas finitos, lo que ga",
+      "explanation": "El crateregexes la solución estándar para expresiones regulares en Rust. A diferencia de los motores de regex de muchos lenguajes, este no usa backtracking: está basado en autómatas finitos, lo que garantiza tiempo de ejecución O(n) respecto al tamaño del texto, sin importar la complejidad de la expresión. Esto hace imposible el ataque ReDoS (Regular Expression Denial of Service).[dependencies]\nregex = \"1\"Crear y usar un Regex básicouse regex::Regex;\n\nfn main() {\n    let re = Regex::new(r\"bd{5}b\").unwrap();\n\n    let texto = \"El código postal de Madrid es 28001 y el de Barcelona 08001.\";\n\n    if re.is_match(texto) {\n        println!(\"Encontrado un código postal\");\n    }\n\n    // Encontrar la primera coincidencia\n    if let Some(m) = re.find(texto) {\n        println!(\"Primera coincidencia: '{}' en posición {}\", m.as_str(), m.start());\n    }\n} El prefijoren las raw strings (r\"bd{5}b\") evita tener que escapar las barras. Sin él, habría que escribir\"\\b\\d{5}\\b\".Compilar el regex una sola vez con OnceLock Compilar un regex es costoso. Si lo llamas en un loop o en una función que se ejecuta muchas veces, deberías compilarlo una sola vez y reutilizarlo. La forma moderna es conOnceLock(desde Rust 1.70) o el crateonce_cellen versiones anteriores:use std::sync::OnceLock;\nuse regex::Regex;\n\nfn regex_codigo_postal() -> &'static Regex {\n    static RE: OnceLock<Regex> = OnceLock::new();\n    RE.get_or_init(|| Regex::new(r\"bd{5}b\").unwrap())\n}\n\nfn contiene_codigo_postal(texto: &str) -> bool {\n ",
+      "code_example": "[dependencies]\nregex = \"1\"",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-02T20:37:46.115440"
+    },
+    {
+      "title": "Property Wrappers y Result Builders en Swift: crear DSLs y abstracciones de comportamiento",
+      "summary": "Los property wrappers y los result builders son dos mecanismos de metaprogramación que Swift usa internamente para implementar SwiftUI, Combine y el nuevo Testing framework. Entenderlos no solo aclara",
+      "explanation": "Los property wrappers y los result builders son dos mecanismos de metaprogramación que Swift usa internamente para implementar SwiftUI, Combine y el nuevo Testing framework. Entenderlos no solo aclara cómo funcionan esas APIs, sino que permite crear abstracciones propias igual de expresivas: desde envoltorios de UserDefaults hasta lenguajes de dominio específico (DSLs) con sintaxis declarativa.Property wrappers: encapsular lógica de acceso Un property wrapper añade lógica de acceso a una propiedad sin que el código que usa esa propiedad necesite saber que existe. Se define con@propertyWrappery debe tener una propiedadwrappedValue:@propertyWrapper\nstruct Clamped<T: Comparable> {\n    private var valor: T\n    let rango: ClosedRange<T>\n\n    init(wrappedValue: T, _ rango: ClosedRange<T>) {\n        self.rango = rango\n        self.valor = min(max(wrappedValue, rango.lowerBound), rango.upperBound)\n    }\n\n    var wrappedValue: T {\n        get { valor }\n        set { valor = min(max(newValue, rango.lowerBound), rango.upperBound) }\n    }\n}\n\nstruct Configuracion {\n    @Clamped(0...100) var volumen: Int = 50\n    @Clamped(8...72) var tamanoFuente: Double = 16\n    @Clamped(-90.0...90.0) var latitud: Double = 0\n}\n\nvar config = Configuracion()\nconfig.volumen = 150  // Se clampea a 100\nconfig.volumen = -10  // Se clampea a 0\nprint(config.volumen) // 0@UserDefault: persistencia automática@propertyWrapper\nstruct UserDefault<T> {\n    let clave: String\n    let porDefecto: T\n    let suite: UserDefa",
+      "code_example": "@propertyWrapper\nstruct Clamped<T: Comparable> {\n    private var valor: T\n    let rango: ClosedRange<T>\n\n    init(wrappedValue: T, _ rango: ClosedRange<T>) {\n        self.rango = rango\n        self.valor = min(max(wrappedValue, rango.lowerBound), rango.upperBound)\n    }\n\n    var wrappedValue: T {\n        get { valor }\n        set { valor = min(max(newValue, rango.lowerBound), rango.upperBound) }\n    }\n}\n\nstruct Configuracion {\n    @Clamped(0...100) var volumen: Int = 50\n    @Clamped(8...72) var tamanoFuente: Double = 16\n    @Clamped(-90.0...90.0) var latitud: Double = 0\n}\n\nvar config = Configuracion()\nconfig.volumen = 150  // Se clampea a 100\nconfig.volumen = -10  // Se clampea a 0\nprint(config.volumen) // 0",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-02T20:37:47.633907"
+    },
+    {
+      "title": "Redis con Python (redis-py): caché, Pub/Sub, sorted sets, pipelines y patrones comunes",
+      "summary": "redis-pyes el cliente oficial de Redis para Python. Redis es una base de datos en memoria que funciona como caché, broker de mensajes, almacén de sesiones y motor de estructuras de datos en tiempo rea",
+      "explanation": "redis-pyes el cliente oficial de Redis para Python. Redis es una base de datos en memoria que funciona como caché, broker de mensajes, almacén de sesiones y motor de estructuras de datos en tiempo real. Este tutorial cubre desde la conexión básica hasta patrones avanzados como Pub/Sub, sorted sets para rankings, pipelines y distributed locks, incluyendo el cliente asíncronoAsyncRedis.Instalación y conexión# pip install redis\nimport redis\n\n# Conexión sencilla\nr = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)\nr.ping()   # True si Redis está disponible\n\n# Usando URL\nr = redis.from_url(\"redis://localhost:6379/0\", decode_responses=True)\n\n# Con pool de conexiones (recomendado en producción)\npool = redis.ConnectionPool(host='localhost', port=6379, db=0, decode_responses=True)\nr = redis.Redis(connection_pool=pool) Antipatrón frecuente: crear un objetoRedis()en cada petición HTTP. Crea el pool una vez al arrancar la aplicación y reutilízalo.Operaciones básicasimport redis\n\nr = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)\n\n# Strings\nr.set('nombre', 'Python')\nr.set('contador', 0)\nr.incr('contador')          # 1\nr.incrby('contador', 10)    # 11\nprint(r.get('nombre'))      # Python\n\n# TTL (expiración automática)\nr.set('sesion:abc123', 'datos_usuario', ex=3600)  # expira en 1 hora\nr.ttl('sesion:abc123')   # segundos restantes\n\n# Hashes\nr.hset('usuario:42', mapping={'nombre': 'Ana', 'email': '[email protected]', 'rol': 'admin'})\nprint(r.hget(",
+      "code_example": "# pip install redis\nimport redis\n\n# Conexión sencilla\nr = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)\nr.ping()   # True si Redis está disponible\n\n# Usando URL\nr = redis.from_url(\"redis://localhost:6379/0\", decode_responses=True)\n\n# Con pool de conexiones (recomendado en producción)\npool = redis.ConnectionPool(host='localhost', port=6379, db=0, decode_responses=True)\nr = redis.Redis(connection_pool=pool)",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-02T20:37:49.107100"
     }
   ]
 }
