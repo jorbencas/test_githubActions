@@ -127,6 +127,18 @@ FUENTES = {
     "GitHub Topic Image Editing": {"url": "https://github.com/topics/image-editing?o=desc&s=stars", "tipo": "herramienta", "subtipo": "github-topic", "selector": "article a[href]"},
     "GitHub Topic Computer Vision": {"url": "https://github.com/topics/computer-vision?o=desc&s=stars", "tipo": "herramienta", "subtipo": "github-topic", "selector": "article a[href]"},
     "GitHub Topic Document Processing": {"url": "https://github.com/topics/document-processing?o=desc&s=stars", "tipo": "herramienta", "subtipo": "github-topic", "selector": "article a[href]"},
+    # ── Awesome Lists (GitHub READMEs con herramientas curadas) ──
+    "Awesome Python": {"url": "https://github.com/vinta/awesome-python", "tipo": "herramienta", "subtipo": "awesome", "selector": "article a[href], li a[href]"},
+    "Awesome AI Tools": {"url": "https://github.com/mahseema/awesome-ai-tools", "tipo": "herramienta", "subtipo": "awesome", "selector": "article a[href], li a[href]"},
+    "Awesome ChatGPT": {"url": "https://github.com/awesome-chatgpt/awesome-chatgpt", "tipo": "herramienta", "subtipo": "awesome", "selector": "article a[href], li a[href]"},
+    "Awesome Open Source AI": {"url": "https://github.com/nicekate/Awesome-Open-Source-AI", "tipo": "herramienta", "subtipo": "awesome", "selector": "article a[href], li a[href]"},
+    "Awesome Self Hosted": {"url": "https://github.com/awesome-selfhosted/awesome-selfhosted", "tipo": "herramienta", "subtipo": "awesome", "selector": "article a[href], li a[href]"},
+    "Awesome DevTools": {"url": "https://github.com/nicedoc/awesome-ai-tools", "tipo": "herramienta", "subtipo": "awesome", "selector": "article a[href], li a[href]"},
+    # ── Product Hunt ──
+    "Product Hunt AI": {"url": "https://www.producthunt.com/topics/artificial-intelligence", "tipo": "herramienta", "subtipo": "producthunt", "selector": "a[href*='/posts/']"},
+    "Product Hunt Developer Tools": {"url": "https://www.producthunt.com/topics/developer-tools", "tipo": "herramienta", "subtipo": "producthunt", "selector": "a[href*='/posts/']"},
+    # ── Hacker News ──
+    "Hacker News Show HN": {"url": "https://hn.algolia.com/api/v1/search?query=Show%20HN&tags=show_hn", "tipo": "herramienta", "subtipo": "hackernews", "selector": ""},
     "GitHub Topic PDF": {"url": "https://github.com/topics/pdf?o=desc&s=stars", "tipo": "herramienta", "subtipo": "github-topic", "selector": "article a[href]"},
     "GitHub Topic Office": {"url": "https://github.com/topics/office?o=desc&s=stars", "tipo": "herramienta", "subtipo": "github-topic", "selector": "article a[href]"},
     "GitHub Topic Presentation": {"url": "https://github.com/topics/presentation?o=desc&s=stars", "tipo": "herramienta", "subtipo": "github-topic", "selector": "article a[href]"},

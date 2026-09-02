@@ -397,6 +397,51 @@ class WebExtractor(BaseExtractor):
                 })
                 results.append(self.enriquecer_fechas(item))
 
+        elif subtipo == "awesome":
+            # Awesome lists: extraer enlaces del README
+            for a in soup.select("li a[href], h2 a[href], h3 a[href]")[:30]:
+                href = a.get("href", "")
+                if not href or not href.startswith("http"):
+                    continue
+                # Filtrar solo enlaces a GitHub repos o sitios web
+                if "github.com/" not in href and not href.startswith("http"):
+                    continue
+                title = a.get_text(strip=True)
+                if not title or len(title) < 3:
+                    continue
+                # Extraer repo de GitHub si aplica
+                repo = ""
+                if "github.com/" in href:
+                    parts = href.replace("https://github.com/", "").split("/")
+                    if len(parts) >= 2:
+                        repo = f"{parts[0]}/{parts[1]}"
+                item = self.generar_item_base(title, href, nombre, TIPO_VAL_HERRAMIENTA)
+                item.update({
+                    SUBTIPO_KEY: "awesome",
+                    DESCRIPCION_KEY: "",
+                    REPO_KEY: repo,
+                })
+                results.append(self.enriquecer_fechas(item))
+
+        elif subtipo == "hackernews":
+            # Hacker News Show HN (API JSON)
+            try:
+                data = json.loads(html_text)
+                hits = data.get("hits", [])
+                for hit in hits[:15]:
+                    title = hit.get("title", "")
+                    url = hit.get("url") or f"https://news.ycombinator.com/item?id={hit.get('objectID', '')}"
+                    if not title:
+                        continue
+                    item = self.generar_item_base(title, url, nombre, TIPO_VAL_HERRAMIENTA)
+                    item.update({
+                        SUBTIPO_KEY: "hackernews",
+                        DESCRIPCION_KEY: hit.get("story_text", "")[:200] if hit.get("story_text") else "",
+                    })
+                    results.append(self.enriquecer_fechas(item))
+            except (json.JSONDecodeError, AttributeError):
+                pass
+
         return results
 
 
