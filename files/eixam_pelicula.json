@@ -829,5 +829,65 @@
     "relevancia": 3,
     "pelicula": "Eixam",
     "enviada": true
+  },
+  {
+    "titulo": "Crítica de 'Eixam (Enjambre)' ⭐⭐⭐",
+    "url": "https://www.msn.com/entretenimiento/cine/cr%C3%ADtica-de-eixam-enjambre/ar-AA2btMA8",
+    "fecha_pub": "Thu, 03 Sep 2026 01:26:45 GMT",
+    "fecha_ts": "2026-09-03T16:23:52.145839",
+    "medio": "Fotogramas on MSN",
+    "imagen": "",
+    "tipo": "critica",
+    "relevancia": 1,
+    "pelicula": "Eixam",
+    "enviada": true
+  },
+  {
+    "titulo": "Óscar Bernàcer preestrena a València 'Eixam', un thriller rural sobre el poder amb molta càrrega simbòlica",
+    "url": "https://www.apuntmedia.es/noticies/cultura/video-oscar-bernacer-preestrena-valencia-eixam-un-thriller-rural-molta-carrega-simbolica_1_1891917.html",
+    "fecha_pub": "Mon, 31 Aug 2026 12:36:00 GMT",
+    "fecha_ts": "2026-09-03T16:23:55.687936",
+    "medio": "apuntmedia",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Eixam",
+    "enviada": true
+  },
+  {
+    "titulo": "EIXAM (ENJAMBRE) | CRÍTICA: ¿COMUNIDAD O PRISIÓN? El thriller de Óscar Bernàcer",
+    "url": "https://www.youtube.com/watch?v=qvpBA4XMzRQ",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-03T16:24:05.328628",
+    "medio": "Cinema-Té",
+    "imagen": "https://i.ytimg.com/vi/qvpBA4XMzRQ/hqdefault.jpg",
+    "tipo": "critica",
+    "relevancia": 3,
+    "pelicula": "Eixam",
+    "enviada": true
+  },
+  {
+    "titulo": "Óscar Bernàcer preestrena en València 'Eixam', un thriller rural sobre el poder con \"mucha carga simbólica\"",
+    "url": "https://www.europapress.es/comunitat-valenciana/noticia-oscar-bernacer-preestrena-valencia-eixam-thriller-rural-poder-mucha-carga-simbolica-20260831153228.html",
+    "fecha_pub": "Mon, 31 Aug 2026 08:32:00 GMT",
+    "fecha_ts": "2026-09-03T16:24:27.760837",
+    "medio": "Europa Press",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Eixam",
+    "enviada": true
+  },
+  {
+    "titulo": "Óscar Bernàcer roda 'En l'eixam', un thriller rural amb Pablo Molinero i Cristina Fernández Pintado",
+    "url": "https://www.europapress.es/valencia/noticia-oscar-bernacer-roda-leixam-thriller-rural-amb-pablo-molinero-cristina-fernandez-pintado-20250528183527.html",
+    "fecha_pub": "Wed, 28 May 2025 09:35:00 GMT",
+    "fecha_ts": "2026-09-03T16:24:27.760990",
+    "medio": "Europa Press",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Eixam",
+    "enviada": true
   }
 ]
