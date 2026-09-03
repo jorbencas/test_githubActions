@@ -29,6 +29,7 @@ logger = logging.getLogger("downloadFile")
 SCRIPTS = {
     "news": "scrape_news.py",
     "tools": "scrape_tools.py",
+    "agent_skills": "scrape_agent_skills.py",
     "weekly": "generate_weekly.py",
     "email": "send_email.py",
     "telegram": "send_telegram.py",
@@ -53,7 +54,7 @@ def main():
     if news_only:
         scripts_to_run = ["news"]
     else:
-        scripts_to_run = ["news", "tools", "weekly", "email", "telegram"]
+        scripts_to_run = ["news", "tools", "agent_skills", "weekly", "email", "telegram"]
 
     for key in scripts_to_run:
         if key not in SCRIPTS:

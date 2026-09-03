@@ -19,6 +19,7 @@ CONFIG = {
 NOTICIAS_FILENAME = "noticias_historico.json"
 HERRAMIENTAS_FILENAME = "herramientas.json"
 AI_TOOLS_CANDIDATES_FILENAME = "ai_tools_candidates.json"
+AGENT_SKILLS_FILENAME = "agent_skills.json"
 CONCEPTS_FILENAME = "concepts_database.json"
 CONCEPTS_PATH_DEFAULT = os.path.join(CONFIG["FOLDER"], CONCEPTS_FILENAME)
 CONCEPTS_MAX = 200
