@@ -25,6 +25,7 @@ DB_PATH = SCRIPT_DIR / "utils" / "ai_tools_database.json"
 HISTORY_PATH = SCRIPT_DIR.parent / "ai_tools_history.json"
 NEWS_PATH = SCRIPT_DIR.parent / "files" / "noticias_historico.json"
 TOOLS_PATH = SCRIPT_DIR.parent / "files" / "herramientas.json"
+BLOG_RESOURCES_PATH = SCRIPT_DIR.parent / "files" / "recursos_blog.json"
 CANDIDATES_PATH = SCRIPT_DIR.parent / "files" / "ai_tools_candidates.json"
 AGENT_SKILLS_PATH = SCRIPT_DIR.parent / "files" / "agent_skills.json"
 
@@ -136,6 +137,26 @@ def format_skill_message(skill, index):
     return "\n".join(lines)
 
 
+def format_blog_resource_message(res, index):
+    """Formatea un recurso del blog para el mensaje de Telegram."""
+    titulo = res.get("titulo", "Recurso")
+    desc = res.get("descripcion", "")
+    enlace = res.get("enlace", "")
+    cat = res.get("categoria", "")
+    pricing = res.get("pricing", "")
+
+    lines = [f"{index}. 📚 *{titulo}*"]
+    if desc:
+        lines.append(f"   {desc[:150]}")
+    if enlace:
+        lines.append(f"   🔗 {enlace}")
+    if cat:
+        lines.append(f"   📂 {cat}")
+    if pricing:
+        lines.append(f"   💰 {pricing}")
+    return "\n".join(lines)
+
+
 def load_recent_tools(count=10):
     if not TOOLS_PATH.exists():
         return []
@@ -153,6 +174,62 @@ def load_recent_tools(count=10):
             stars = item.get("estrellas", "")
             if titulo:
                 result.append(f"- {titulo} ({lang}, ⭐{stars}): {desc}")
+        return result
+    except Exception:
+        return []
+
+
+def load_blog_resources(count=20):
+    """Load resources from blog's resources.json (migrated to test_githubActions)."""
+    if not BLOG_RESOURCES_PATH.exists():
+        return []
+    try:
+        with open(BLOG_RESOURCES_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        if not isinstance(data, list):
+            return []
+        # Shuffle to get random selection
+        import random
+        random.shuffle(data)
+        result = []
+        for item in data[:count]:
+            titulo = item.get("titulo", "")
+            enlace = item.get("enlace", "")
+            desc = item.get("descripcion", "")
+            cat = item.get("categoria", "")
+            if titulo:
+                result.append(f"- {titulo} ({cat}): {desc} → {enlace}")
+        return result
+    except Exception:
+        return []
+
+
+def load_blog_resources_for_message(count=5):
+    """Load random blog resources for daily message (formatted for Telegram)."""
+    if not BLOG_RESOURCES_PATH.exists():
+        return []
+    try:
+        with open(BLOG_RESOURCES_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        if not isinstance(data, list):
+            return []
+        import random
+        random.shuffle(data)
+        result = []
+        for item in data[:count]:
+            titulo = item.get("titulo", "")
+            enlace = item.get("enlace", "")
+            desc = item.get("descripcion", "")
+            cat = item.get("categoria", "")
+            pricing = item.get("pricing", "")
+            if titulo:
+                result.append({
+                    "titulo": titulo,
+                    "enlace": enlace,
+                    "descripcion": desc,
+                    "categoria": cat,
+                    "pricing": pricing,
+                })
         return result
     except Exception:
         return []
@@ -214,12 +291,13 @@ def _cat_label(cat):
     return f"{emoji} {nombre}"
 
 
-def build_gemini_prompt(categories, sent_titles, news, tools, candidates=None):
+def build_gemini_prompt(categories, sent_titles, news, tools, candidates=None, blog_resources=None):
     cats_str = "\n".join(f"- {c} ({CAT_NAMES.get(c, c)})" for c in categories)
     titles_str = "\n".join(sent_titles[:200]) if sent_titles else "(nunca se han enviado herramientas antes)"
     news_str = "\n".join(news[:15]) if news else "(no hay noticias recientes disponibles)"
     tools_str = "\n".join(tools[:10]) if tools else "(no hay herramientas trending disponibles)"
     candidates_str = "\n".join(candidates[:15]) if candidates else "(no hay candidatos auto-detectados)"
+    blog_str = "\n".join(blog_resources[:15]) if blog_resources else "(no hay recursos del blog disponibles)"
 
     return f"""Eres un curador experto en herramientas de Inteligencia Artificial. Propones herramientas de IA EN ESPAÑOL para contenido multimedia, unión de conceptos, automatizaciones, estudio y generación.
 
@@ -237,6 +315,9 @@ def build_gemini_prompt(categories, sent_titles, news, tools, candidates=None):
 
 === HERRAMIENTAS/REPOS TRENDING DE HOY (inspiración) ===
 {tools_str}
+
+=== RECURSOS DEL BLOG (2108 recursos migrados) ===
+{blog_str}
 
 === REGLAS ESTRICTAS ===
 1. Genera EXACTAMENTE 5 herramientas
@@ -292,7 +373,8 @@ def generate_tools_gemini(count, categories, sent_titles):
     news = load_recent_news(15)
     tools = load_recent_tools(10)
     candidates = load_ai_candidates(15)
-    prompt = build_gemini_prompt(categories, sent_titles, news, tools, candidates)
+    blog_resources = load_blog_resources(15)
+    prompt = build_gemini_prompt(categories, sent_titles, news, tools, candidates, blog_resources)
 
     try:
         response = client.models.generate_content(
@@ -385,7 +467,7 @@ def format_tool_message(tool, index):
     return "\n".join(lines)
 
 
-def build_daily_message(tools, skills=None):
+def build_daily_message(tools, skills=None, blog_resources=None):
     greeting = _get_time_greeting(datetime.now())
     now = datetime.now()
     date_str = now.strftime("%d/%m/%Y")
@@ -405,11 +487,22 @@ def build_daily_message(tools, skills=None):
             body_parts.append("")
             body_parts.append(format_skill_message(skill, i))
 
+    if blog_resources:
+        body_parts.append("")
+        body_parts.append("━" * 28)
+        body_parts.append("📚 *RECURSOS DEL BLOG*")
+        body_parts.append("━" * 28)
+        for i, res in enumerate(blog_resources, 1):
+            body_parts.append("")
+            body_parts.append(format_blog_resource_message(res, i))
+
     body = "\n".join(body_parts)
     cats = set(t.get("cat", "") for t in tools)
     footer_parts = [f"💡 {len(tools)} herramientas"]
     if skills:
         footer_parts.append(f"🎯 {len(skills)} skills")
+    if blog_resources:
+        footer_parts.append(f"📚 {len(blog_resources)} recursos")
     footer_parts.append(f"de {len(cats)} categorías")
     footer = " · ".join(footer_parts)
 
@@ -516,7 +609,11 @@ def main():
     skills = select_skills_from_db(all_skills, sent_titles, count=2)
     print(f"🎯 Skills seleccionadas: {len(skills)}")
 
-    message = build_daily_message(tools, skills)
+    # Cargar recursos del blog
+    blog_resources = load_blog_resources_for_message(5)
+    print(f"📚 Recursos del blog: {len(blog_resources)}")
+
+    message = build_daily_message(tools, skills, blog_resources)
 
     print(f"\n🧰 Herramientas seleccionadas ({len(tools)}):")
     for i, tool in enumerate(tools, 1):
