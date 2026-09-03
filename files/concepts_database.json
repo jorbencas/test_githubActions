@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 38,
+    "total_concepts": 39,
     "categories": [
       "css_moderno",
       "devops",
@@ -11,7 +11,7 @@
       "patrones_diseno",
       "poo"
     ],
-    "last_scraped": "2026-09-03T15:57:28.240109"
+    "last_scraped": "2026-09-03T20:39:10.427303"
   },
   "concepts": [
     {
@@ -721,6 +721,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-03T15:56:52.328850"
+    },
+    {
+      "title": "nom en Rust: parsing combinatorio para protocolos, formatos y lenguajes",
+      "summary": "nom es una librería de parser combinators para Rust. En lugar de generar un parser desde una gramática (como ANTLR o yacc), en nom compones parsers pequeños y simples para construir parsers más comple",
+      "explanation": "nom es una librería de parser combinators para Rust. En lugar de generar un parser desde una gramática (como ANTLR o yacc), en nom compones parsers pequeños y simples para construir parsers más complejos. Cada parser es una función que toma entrada y devuelve la entrada restante junto con el dato parseado. Es especialmente útil para parsear protocolos binarios, formatos de datos personalizados o lenguajes de configuración.[dependencies]\nnom = \"7\"IResult: el tipo de retorno de nom Todos los parsers de nom devuelvenIResult:pub type IResult<I, O, E = Error<I>> = Result<(I, O), Err<E>>;\n//                                              ^^^^^^^^\n//                                    (entrada_restante, salida_parseada) Si el parser tiene éxito, devuelveOk((resto, valor))donderestoes la parte de la entrada que no se ha consumido yvalores el dato parseado. Si falla, devuelve un error.Parsers básicosuse nom::{\n    bytes::complete::{tag, take, take_while},\n    character::complete::{alpha1, digit1, alphanumeric1, char, space0, space1},\n    IResult,\n};\n\n// tag: coincide con un string literal exacto\nfn parsear_hola(input: &str) -> IResult<&str, &str> {\n    tag(\"hola\")(input)\n}\n\n// digit1: uno o más dígitos\nfn parsear_numero(input: &str) -> IResult<&str, &str> {\n    digit1(input)\n}\n\nfn main() {\n    println!(\"{:?}\", parsear_hola(\"hola mundo\"));\n    // Ok((\" mundo\", \"hola\"))\n\n    println!(\"{:?}\", parsear_numero(\"123abc\"));\n    // Ok((\"abc\", \"123\"))\n\n    println!(\"{:?}\", parsear_hola(\"adios\"));",
+      "code_example": "[dependencies]\nnom = \"7\"",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-03T20:38:33.621916"
     }
   ]
 }
