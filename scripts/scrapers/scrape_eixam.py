@@ -55,6 +55,25 @@ QUERIES = [
     "eixam Cristina Fernández Pintado",
     "eixam Malpàs",
     "eixam Bejís rodaje",
+    # ── Nuevas búsquedas ──
+    "Eixam película española",
+    "Eixam thriller rural",
+    "Eixam estreno cines",
+    "Enjambre película española",
+    "Enjambre thriller rural",
+    "Enjambre estreno cines",
+    "Eixam reparto actores",
+    "Enjambre reparto actores",
+    "Eixam Pablo Derqui",
+    "Enjambre Pablo Derqui",
+    "Eixam Marta Belenguer",
+    "Enjambre Marta Belenguer",
+    "Eixam Atlàntida Mallorca",
+    "Enjambre Atlàntida Mallorca",
+    "Eixam Nakamura Films",
+    "Enjambre Nakamura Films",
+    "Eixam A Contracorriente Films",
+    "Enjambre A Contracorriente Films",
 ]
 
 # Términos para vídeos de YouTube (más cortos y orientados a tráilers/clips)
@@ -105,6 +124,24 @@ SITIOS_RESENIAS = [
     ("indiewire.com", "eixam"),
     ("variety.com", "eixam"),
     ("hollywoodreporter.com", "eixam"),
+    # ── Nuevas fuentes ──
+    ("cadenaser.com", "eixam"),
+    ("rtve.es", "eixam"),
+    ("europapress.es", "eixam"),
+    ("efeservices.com", "eixam"),
+    ("laverdad.es", "eixam"),
+    ("levante-emv.com", "eixam"),
+    ("informacion.es", "eixam"),
+    ("diarioinformacion.com", "eixam"),
+    ("abc.es", "eixam"),
+    ("larazon.es", "eixam"),
+    ("elperiodico.com", "eixam"),
+    ("nius.es", "eixam"),
+    ("lasprovincias.es", "eixam"),
+    ("superfilmes.es", "eixam"),
+    ("cineuropa.org", "enjambre 2026"),
+    ("imdb.com", "eixam"),
+    ("themoviedb.org", "eixam"),
 ]
 
 # Redes sociales del distribuidor y productora — se buscan vía Google News sin site:
@@ -124,6 +161,28 @@ REDES_SOCIALES = [
     "nakamura films eixam twitter",
     "nakamura films enjambre twitter",
     "nakamura films eixam x.com",
+]
+
+# URLs directas de Filmaffinity (críticas de usuarios y profesionales)
+# Se buscan vía Bing porque Filmaffinity bloquea peticiones directas (403)
+# NOTA: Filmaffinity no aparece bien en Bing News, se usa Bing Web como fallback
+FILMAFFINITY_QUERIES = [
+    "site:filmaffinity.com eixam",
+    "site:filmaffinity.com enjambre 2026",
+    "filmaffinity eixam crítica",
+    "filmaffinity enjambre reseña",
+]
+
+# Fuentes directas de cine adicionales (scrapeo directo)
+FUENTES_CINE_DIRECTAS = [
+    {"url": "https://www.cinemaldito.com/?s=eixam", "selector": "article a[href]", "medio": "Cinemaldito"},
+    {"url": "https://www.aullidos.com/?s=eixam", "selector": "article a[href]", "medio": "Aullidos"},
+    {"url": "https://www.ecartelera.com/buscar/?q=eixam", "selector": "a[href*='/peliculas/']", "medio": "ECartelera"},
+    {"url": "https://www.sensacine.com/buscar/?q=eixam", "selector": "a[href*='/peliculas/']", "medio": "SensaCine"},
+    {"url": "https://www.cineuropa.org/es/?s=eixam", "selector": "article a[href]", "medio": "Cineuropa"},
+    {"url": "https://www.labutaca.net/buscar/?s=eixam", "selector": "article a[href]", "medio": "La Butaca"},
+    {"url": "https://www.espinof.com/buscar/?s=eixam", "selector": "article a[href]", "medio": "Espinof"},
+    {"url": "https://www.cinemania.es/?s=eixam", "selector": "article a[href]", "medio": "Cinemania"},
 ]
 
 HEADERS = {
@@ -395,6 +454,72 @@ def _rss_bing(termino: str) -> list:
     return items
 
 
+def _scrape_filmaffinity() -> list:
+    """Busca críticas de Filmaffinity vía Bing (sitio bloquea peticiones directas)."""
+    items = []
+    for query in FILMAFFINITY_QUERIES:
+        try:
+            bing_items = _rss_bing(query)
+            for it in bing_items:
+                url = it.get("url", "")
+                titulo = it.get("titulo", "")
+                # Filtrar solo resultados de filmaffinity.com
+                if "filmaffinity.com" not in url:
+                    continue
+                # Determinar si es crítica de usuario o profesional
+                es_profesional = any(k in titulo.lower() for k in (
+                    "crítica de prensa", "critica de prensa", "reseña de prensa",
+                    "review de prensa", "crítica profesional", "critica profesional",
+                ))
+                es_usuario = any(k in titulo.lower() for k in (
+                    "opinión de usuarios", "opiniones de usuarios", "crítica de usuario",
+                    "critica de usuario", "reseña de usuario",
+                ))
+                if es_profesional:
+                    it["tipo"] = "critica_profesional"
+                elif es_usuario:
+                    it["tipo"] = "critica_usuario"
+                else:
+                    it["tipo"] = "critica"
+                it["medio"] = "Filmaffinity"
+                items.append(it)
+        except Exception as e:
+            print(f"  ⚠️  Filmaffinity Bing error: {e}")
+    return items
+
+
+def _scrape_cine_directo() -> list:
+    """Scrapea fuentes de cine directamente (sin Bing)."""
+    items = []
+    for fuente in FUENTES_CINE_DIRECTAS:
+        try:
+            url = fuente["url"]
+            selector = fuente.get("selector", "a[href]")
+            medio = fuente.get("medio", "Cine")
+            r = requests.get(url, timeout=15, headers=HEADERS)
+            if r.status_code != 200:
+                continue
+            # Buscar enlaces que contengan "eixam" o "enjambre"
+            links = re.findall(r'href="([^"]*)"[^>]*>([^<]*)</a>', r.text, re.S)
+            for href, texto in links:
+                texto_limpio = html.unescape(re.sub(r'<[^>]+>', '', texto)).strip()
+                if not texto_limpio or len(texto_limpio) < 5:
+                    continue
+                texto_lower = texto_limpio.lower()
+                if not any(k in texto_lower for k in ("eixam", "enjambre", "bernàcer", "oscar bernacer")):
+                    continue
+                if href.startswith("/"):
+                    from urllib.parse import urljoin
+                    href = urljoin(url, href)
+                items.append({
+                    "titulo": texto_limpio, "url": href, "fecha_pub": "", "fecha_ts": datetime.now().isoformat(),
+                    "medio": medio, "imagen": "", "tipo": "critica",
+                })
+        except Exception as e:
+            print(f"  ⚠️  Fuente cine directa error ({fuente.get('medio', '?')}): {e}")
+    return items
+
+
 def _anexar(items, resultados, vistos):
     """Añade a resultados los items relevantes y no duplicados."""
     for it in items:
@@ -424,13 +549,39 @@ def recopilar() -> list:
         "enjambre película valenciana",
         "enjambre thriller rural",
         "enjambre reseña crítica",
+        "enjambre película española",
+        "enjambre estreno cines",
+        "enjambre reparto actores",
+        "enjambre Pablo Derqui",
+        "enjambre Marta Belenguer",
+        "enjambre Atlàntida Mallorca",
+        "enjambre Nakamura Films",
+        "enjambre A Contracorriente Films",
     ]
     for termino in enjambre_queries:
+        _anexar(_rss_bing(termino), resultados, vistos)
+    # Búsquedas adicionales con "eixam" vía Bing
+    eixam_queries = [
+        "eixam película española",
+        "eixam thriller rural",
+        "eixam estreno cines",
+        "eixam reparto actores",
+        "eixam Pablo Derqui",
+        "eixam Marta Belenguer",
+        "eixam Atlàntida Mallorca",
+        "eixam Nakamura Films",
+        "eixam A Contracorriente Films",
+    ]
+    for termino in eixam_queries:
         _anexar(_rss_bing(termino), resultados, vistos)
     for termino in YT_QUERIES:
         _anexar(_rss_youtube(termino), resultados, vistos)
     for termino in CONTRASTE_QUERIES:
         _anexar(_rss_contraste(termino), resultados, vistos)
+    # Filmaffinity: críticas de usuarios y profesionales
+    _anexar(_scrape_filmaffinity(), resultados, vistos)
+    # Fuentes de cine directas (sin Bing)
+    _anexar(_scrape_cine_directo(), resultados, vistos)
     # Medios de reseñas — Bing con site: para cada dominio
     for dominio, termino in SITIOS_RESENIAS:
         for it in _rss_bing(f"site:{dominio} {termino}"):

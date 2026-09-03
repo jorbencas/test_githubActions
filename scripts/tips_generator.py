@@ -999,18 +999,243 @@ DIFFICULTY_BAR = {1: "●○○", 2: "●●○", 3: "●●●"}
 TYPE_LABEL = {"tip": "💡 Tip", "trick": "⚡ Trick", "concepto": "📘 Concepto"}
 
 
+_scrape_cache = {}
+
+def scrape_definition(term):
+    """Genera una definición rápida usando Wikipedia (EN) o Gemini como fallback."""
+    import re
+    import time
+    try:
+        clean_term = re.sub(r'[?!¿]', '', term).strip()
+        if clean_term in _scrape_cache:
+            return _scrape_cache[clean_term]
+        # Mapear términos españoles a inglés para Wikipedia
+        term_map = {
+            "Patrón Decorator": "Decorator pattern",
+            "Patrón Factory Method": "Factory method pattern",
+            "Patrón Abstract Factory": "Abstract factory pattern",
+            "Patrón Singleton": "Singleton pattern",
+            "Patrón Proxy": "Proxy pattern",
+            "Patrón Observer": "Observer pattern",
+            "Patrón Strategy": "Strategy pattern",
+            "Patrón Command": "Command pattern",
+            "Patrón Adapter": "Adapter pattern",
+            "Patrón Facade": "Facade pattern",
+            "Patrón Builder": "Builder pattern",
+            "Patrón Prototype": "Prototype pattern",
+            "Patrón Template Method": "Template method pattern",
+            "GIL y Thread": "Global Interpreter Lock",
+            "GIL": "Global Interpreter Lock",
+            "Double Buffering": "Double buffer",
+            "Interfaces vs Clases Abstractas": "Abstract class",
+            "SLA": "Service-level agreement",
+            "Circuit Breaker": "Circuit breaker pattern",
+            "XSS": "Cross-site scripting",
+            "JWT": "JSON Web Token",
+            "CSS Grid Layout": "CSS grid",
+            "System Design": "Systems design",
+            "Game Loop": "Game loop",
+            "BFF": "Backend for Frontend",
+            "ETL": "Extract, transform, load",
+            "DRY": "Don't repeat yourself",
+            "YAGNI": "You aren't gonna need it",
+            "KISS": "Keep it simple, stupid",
+            "SOLID": "SOLID",
+            "MVC": "Model–view–controller",
+            "MVVM": "Model–view–viewmodel",
+            "CQRS": "Command, query responsibility segregation",
+            "Event Sourcing": "Event sourcing",
+            "Event-Driven Architecture": "Event-driven architecture",
+            "Arquitectura de Microservicios": "Microservices",
+            "Microservicios": "Microservices",
+            "Kafka — Consumer Groups": "Apache Kafka",
+            "Big-O": "Big O notation",
+            "ORM": "Object-relational mapping",
+            "SLA": "Service-level agreement",
+            "VPN": "Virtual private network",
+            "CDN": "Content delivery network",
+            "IaaS": "Cloud computing",
+            "PaaS": "Cloud computing",
+            "SaaS": "Software as a service",
+            "HTML": "HyperText Markup Language",
+            "CSS": "Cascading Style Sheets",
+            "Async/await": "Async/await",
+            "WebSockets": "WebSocket",
+            "Load Balancing": "Load balancing",
+            "Reverse Proxy": "Reverse proxy",
+            "RAID": "RAID",
+            "LVM": "Logical Volume Manager",
+            "ZFS": "ZFS",
+            "NTFS": "NTFS",
+            "EXT4": "Ext4",
+            "Single Page Application": "Single-page application",
+            "SPA": "Single-page application",
+            "PWA": "Progressive web app",
+            "GraphQL": "GraphQL",
+            "gRPC": "GRPC",
+            "OAuth2": "OAuth",
+            "Rate Limiting": "Rate limiting",
+            "Concurrency": "Concurrency",
+            "Parallelism": "Parallel computing",
+            "Goroutines": "Goroutine",
+            "Asyncio": "Asyncio",
+            "Threading": "Thread (computing)",
+            "Multiprocessing": "Multiprocessing",
+            "Locks": "Lock (computer science)",
+            "Semaphores": "Semaphore (programming)",
+            "Event Loop": "Event loop",
+            "Feature Flags": "Feature toggle",
+            "Dark Launch": "Dark launch",
+            "Blue-Green Deploy": "Blue-green deployment",
+            "Canary Deploy": "Canary release",
+            "Rollback": "Rollback",
+            "Failback": "Failback",
+            "Failover": "Failover",
+            "Latencia": "Latency (engineering)",
+            "Throughput": "Throughput",
+            "Escalabilidad": "Scalability",
+            "Resiliencia": "Resilience (engineering)",
+            "Observabilidad": "Observability",
+            "Telemetry": "Telemetry",
+            "Logging": "Logging",
+            "Profiling": "Profiling (computer programming)",
+            "Benchmarking": "Benchmark (computing)",
+            "A/B Testing": "A/B testing",
+            "Feature Toggles": "Feature toggle",
+            "Code Review": "Code review",
+            "Pair Programming": "Pair programming",
+            "Mob Programming": "Mob programming",
+            "Clean Code": "Clean Code",
+            "Refactoring": "Code refactoring",
+            "Technical Debt": "Technical debt",
+            "Code Smell": "Code smell",
+            "Anti-pattern": "Anti-pattern",
+            "Design Smells": "Code smell",
+            "Docker — Contenedores": "Docker",
+            "JavaScript Worker Threads": "Web Worker",
+            "Replication y Sharding": "Shard (database architecture)",
+            "Technical Debt — Cuándo pagar la deuda": "Technical debt",
+            "Kafka — Fundamentos": "Apache Kafka",
+            "Kafka vs RabbitMQ vs Redis Pub/Sub": "Message queue",
+            "Circuit Breaker — Tolerancia a Fallos": "Circuit breaker pattern",
+            "Access Token vs Refresh Token": "OAuth",
+            "Kotlin Coroutines": "Kotlin",
+            "Python multiprocessing — Paralelismo real": "Multiprocessing",
+            "Patrón Singleton": "Singleton pattern",
+            "Patrón Decorator": "Decorator pattern",
+            "Patrón Proxy": "Proxy pattern",
+            "Patrón Observer": "Observer pattern",
+            "Patrón Factory Method": "Factory method pattern",
+            "Patrón Abstract Factory": "Abstract factory pattern",
+            "Patrón Strategy": "Strategy pattern",
+            "Patrón Command": "Command pattern",
+            "Patrón Adapter": "Adapter pattern",
+            "Patrón Facade": "Facade pattern",
+            "Patrón Builder": "Builder pattern",
+            "Patrón Template Method": "Template method pattern",
+            "Saga Pattern — Transacciones Distribuidas": "Saga pattern",
+            "JWT — JSON Web Token": "JSON Web Token",
+            "XSS — Cross-Site Scripting": "Cross-site scripting",
+            "CSS :has() selector — Selector padre": "CSS",
+            "Interfaces vs Clases Abstractas — Cuándo usar cada una": "Abstract class",
+            "System Design — Diseño de Sistemas": "Systems design",
+            "BFF (Backend for Frontend) — Patrón de arquitectura": "Backend for Frontend",
+            "Game Loop — Bucle del Videojuego": "Game loop",
+            "Frame Rate y V-Sync": "Frame rate",
+            "Double Buffering": "Double buffer",
+            "DRY — No te repitas (pero con criterio)": "Don't repeat yourself",
+            "AI Agents — Agentes Autónomos": "Software agent",
+            "Design Smells — Señales de código mal diseñado": "Code smell",
+            "CQRS — Command Query Responsibility Segregation": "Command, query responsibility segregation",
+            "Abstracción": "Abstraction (computer science)",
+            "Polimorfismo": "Polymorphism (computer science)",
+            "Herencia (programación)": "Inheritance (object-oriented programming)",
+            "Encapsulamiento": "Encapsulation (programming)",
+            "Kubernetes — Orquestación de Contenedores": "Kubernetes",
+            "GraphRAG — RAG con Grafos de Conocimiento": "Knowledge graph",
+            "Event-Driven Architecture": "Event-driven architecture",
+            "Arquitectura de Microservicios": "Microservices",
+            "Microservicios": "Microservices",
+        }
+        english_term = clean_term
+        for esp, eng in term_map.items():
+            if esp.lower() in clean_term.lower():
+                english_term = eng
+                break
+        # Simplificar términos muy largos
+        words = english_term.split()
+        if len(words) > 3:
+            english_term = ' '.join(words[:3])
+        # Cache key
+        cache_key = english_term.lower()
+        if cache_key in _scrape_cache:
+            return _scrape_cache[cache_key]
+        url = f"https://en.wikipedia.org/api/rest_v1/page/summary/{english_term.replace(' ', '_')}"
+        resp = requests.get(url, timeout=8, headers={"User-Agent": "TipsBot/1.0 (contact@example.com)"})
+        if resp.status_code == 200:
+            data = resp.json()
+            extract = data.get("extract", "")
+            if extract and len(extract) > 30:
+                if len(extract) > 300:
+                    extract = extract[:300].rsplit(' ', 1)[0] + "..."
+                _scrape_cache[clean_term] = extract
+                _scrape_cache[cache_key] = extract
+                return extract
+        # Si no encuentra, intentar con el primer significado relevante
+        if len(words) > 2:
+            time.sleep(0.8)
+            short_term = ' '.join(words[:2])
+            url2 = f"https://en.wikipedia.org/api/rest_v1/page/summary/{short_term.replace(' ', '_')}"
+            resp2 = requests.get(url2, timeout=8, headers={"User-Agent": "TipsBot/1.0 (contact@example.com)"})
+            if resp2.status_code == 200:
+                extract2 = resp2.json().get("extract", "")
+                if extract2 and len(extract2) > 30:
+                    if len(extract2) > 300:
+                        extract2 = extract2[:300].rsplit(' ', 1)[0] + "..."
+                    _scrape_cache[clean_term] = extract2
+                    _scrape_cache[cache_key] = extract2
+                    return extract2
+        # Fallback: usar Gemini para generar una definición rápida
+        if GEMINI_API_KEY:
+            try:
+                from google import genai
+                client = genai.Client(api_key=GEMINI_API_KEY)
+                resp = client.models.generate_content(
+                    model="gemini-2.5-flash",
+                    contents=f"Define en 1 frase breve en español qué es: {clean_term}. Solo la definición, sin emojis.",
+                )
+                definition = resp.text.strip()
+                if definition and len(definition) > 20:
+                    _scrape_cache[clean_term] = definition
+                    _scrape_cache[cache_key] = definition
+                    return definition
+            except Exception:
+                pass
+        # Último fallback: generar una definición simple basada en el título
+        # Intentar extraer el concepto principal del título
+        simple_parts = clean_term.split(" — ", 1)
+        main_concept = simple_parts[0].strip()
+        if len(main_parts) > 1:
+            desc = main_parts[1].strip()
+            simple_def = f"{desc}. {main_concept} es un concepto técnico utilizado en programación y desarrollo de software."
+        else:
+            simple_def = f"{main_concept} es un concepto técnico utilizado en programación y desarrollo de software."
+        _scrape_cache[clean_term] = simple_def
+        return simple_def
+    except Exception:
+        pass
+    return None
+
+
 def format_tip_message(tip, index):
     cat = tip.get("cat", "")
     emoji = CAT_EMOJI.get(cat, "?")
     nombre = CAT_NAMES.get(cat, cat)
-    diff = tip.get("difficulty", 1)
-    bar = DIFFICULTY_BAR.get(diff, "●○○")
     title = tip.get("title", "")
     tip_type = tip.get("type", "tip")
     label = TYPE_LABEL.get(tip_type, "💡 Tip")
     title_part = f": {title}" if title else ""
     lines = [f"{index}. {label} {emoji} *{nombre}*{title_part}"]
-    lines.append(f"   {bar} {'Básico' if diff == 1 else 'Intermedio' if diff == 2 else 'Avanzado'}")
 
     if tip_type == "concepto":
         explanation = tip.get("explanation", "")
@@ -1027,10 +1252,15 @@ def format_tip_message(tip, index):
             lines.append(f"   💡 *Uso:* {', '.join(use_cases)}")
         if tip.get("interview_relevant"):
             iq = tip.get("interview_question", "")
+            ia = tip.get("interview_answer", "")
             if iq:
                 lines.append(f"   🎤 *Entrevista:* {iq}")
+            if ia:
+                lines.append(f"   💬 *Respuesta:* {ia}")
     else:
         body = tip.get("body", "")
+        if not body:
+            body = scrape_definition(title)
         if body:
             lines.append(f"   {body}")
         else:
