@@ -805,5 +805,29 @@
     "relevancia": 1,
     "pelicula": "Eixam",
     "enviada": true
+  },
+  {
+    "titulo": "Crítica de 'Eixam (Enjambre)' ⭐⭐⭐",
+    "url": "https://www.msn.com/noticias/otras/cr%C3%ADtica-de-eixam-enjambre/ar-AA2btMA8",
+    "fecha_pub": "Thu, 03 Sep 2026 01:26:45 GMT",
+    "fecha_ts": "2026-09-03T11:10:43.613261",
+    "medio": "Fotogramas on MSN",
+    "imagen": "",
+    "tipo": "critica",
+    "relevancia": 1,
+    "pelicula": "Eixam",
+    "enviada": true
+  },
+  {
+    "titulo": "\"Suspense psicológico que se cuece a fuego lento y con buen pulso\". Crítica de 'Eixam (Enjambre)', con Pablo Molinero y Pablo Derqui",
+    "url": "https://www.fotogramas.es/peliculas-criticas/a73600924/suspense-psicologico-que-se-cuece-a-fuego-lento-y-con-buen-pulso-critica-de-eixam-enjambre-con-pablo-molinero-y-pablo-derqui/",
+    "fecha_pub": "Thu, 03 Sep 2026 01:26:00 GMT",
+    "fecha_ts": "2026-09-03T11:10:56.666225",
+    "medio": "Fotogramas",
+    "imagen": "",
+    "tipo": "critica",
+    "relevancia": 3,
+    "pelicula": "Eixam",
+    "enviada": true
   }
 ]
