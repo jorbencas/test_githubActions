@@ -2,15 +2,16 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 31,
+    "total_concepts": 36,
     "categories": [
       "css_moderno",
       "devops",
       "habilidades",
       "interfaces",
-      "patrones_diseno"
+      "patrones_diseno",
+      "poo"
     ],
-    "last_scraped": "2026-09-03T03:19:31.837931"
+    "last_scraped": "2026-09-03T10:49:19.271306"
   },
   "concepts": [
     {
@@ -594,6 +595,96 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-03T03:18:55.137317"
+    },
+    {
+      "title": "Series temporales en R: análisis y predicción con forecast y fable en 2026",
+      "summary": "El análisis de series temporales es uno de los puntos fuertes de R. El paquete forecast, creado por Rob Hyndman, lleva más de una década siendo el estándar para pronósticos estadísticos. Su sucesor, f",
+      "explanation": "El análisis de series temporales es uno de los puntos fuertes de R. El paquete forecast, creado por Rob Hyndman, lleva más de una década siendo el estándar para pronósticos estadísticos. Su sucesor, fable, sigue la filosofía del tidyverse y permite trabajar con múltiples series a la vez de forma limpia. Junto a prophet, el paquete de Meta para series con estacionalidad compleja, R cubre prácticamente cualquier necesidad de análisis temporal en 2026.Conceptos básicos: objetos ts y tsibble En R tradicional, una serie temporal se representa con la clasets. En el ecosistema moderno de fable se usatsibble, que es un tibble con índice temporal:# Serie temporal clásica con ts\nventas_ts <- ts(\n  data      = c(120, 135, 148, 162, 158, 175, 190, 185, 201, 215, 222, 235),\n  start     = c(2023, 1),   # año 2023, mes 1\n  frequency = 12             # mensual\n)\n\n# Visualizar\nplot(ventas_ts, main = \"Ventas mensuales\", ylab = \"Unidades\")\n\n# Descomposición STL (tendencia + estacionalidad + residuo)\nstl_resultado <- stl(ventas_ts, s.window = \"periodic\")\nplot(stl_resultado)forecast: pronósticos con ARIMA y ETSlibrary(forecast)\n\n# auto.arima: selecciona automáticamente el mejor modelo ARIMA\nmod_arima <- auto.arima(ventas_ts, seasonal = TRUE, stepwise = FALSE)\nsummary(mod_arima)\n\n# Pronóstico para los próximos 12 meses\npron_arima <- forecast(mod_arima, h = 12)\nplot(pron_arima, main = \"Pronóstico ARIMA\", ylab = \"Ventas\")\n\n# Acceder a los valores del pronóstico\npron_arima$mean         # valores cent",
+      "code_example": "# Serie temporal clásica con ts\nventas_ts <- ts(\n  data      = c(120, 135, 148, 162, 158, 175, 190, 185, 201, 215, 222, 235),\n  start     = c(2023, 1),   # año 2023, mes 1\n  frequency = 12             # mensual\n)\n\n# Visualizar\nplot(ventas_ts, main = \"Ventas mensuales\", ylab = \"Unidades\")\n\n# Descomposición STL (tendencia + estacionalidad + residuo)\nstl_resultado <- stl(ventas_ts, s.window = \"periodic\")\nplot(stl_resultado)",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "poo"
+      ],
+      "cat": "poo",
+      "scraped_at": "2026-09-03T10:48:39.249527"
+    },
+    {
+      "title": "Visualización de datos en Julia: Plots.jl, Makie y CairoMakie en 2026",
+      "summary": "El ecosistema de visualización de Julia tiene más opciones que otros lenguajes, lo que puede despistar al principio. La buena noticia es que los casos de uso están bastante bien delimitados: Plots.jl ",
+      "explanation": "El ecosistema de visualización de Julia tiene más opciones que otros lenguajes, lo que puede despistar al principio. La buena noticia es que los casos de uso están bastante bien delimitados: Plots.jl para exploración rápida y scripts, Makie.jl para gráficos de mayor calidad o más interactivos, y dentro de Makie, el backend depende de lo que necesites hacer.Plots.jl: el frontend unificado Plots.jl no dibuja directamente: actúa de frontend que envía las órdenes a un backend intercambiable. Puedes cambiar entre GR, PyPlot o Plotly sin cambiar el código de los gráficos.using Plots\n\n# Cambiar backend (GR es el por defecto, más rápido)\ngr()       # backend GR\n# plotly()   # backend Plotly (interactivo en el navegador)\n# pyplot()   # backend PyPlot (requiere matplotlib)\n\n# Gráfico de líneas básico\nx = range(0, 2*pi, length=200)\ny = sin.(x)\nplot(x, y, label=\"sin(x)\", color=:blue, linewidth=2, xlabel=\"x\", ylabel=\"y\")\n\n# Añadir otra serie al mismo gráfico\nplot!(x, cos.(x), label=\"cos(x)\", color=:red, linestyle=:dash)\n\n# Scatter plot\nscatter(rand(50), rand(50), markersize=5, color=:green, label=\"puntos\")\n\n# Histograma\ndatos = randn(1000)\nhistogram(datos, bins=30, label=\"distribución normal\", alpha=0.7)\n\n# Heatmap\nM = rand(10, 10)\nheatmap(M, color=:viridis, title=\"Mapa de calor\")Subplots y layouts# Layout 2x2\np1 = plot(x, sin.(x), title=\"Seno\")\np2 = plot(x, cos.(x), title=\"Coseno\")\np3 = scatter(rand(30), rand(30), title=\"Scatter\")\np4 = histogram(randn(500), title=\"Histograma\")\n\nplot(p1, ",
+      "code_example": "using Plots\n\n# Cambiar backend (GR es el por defecto, más rápido)\ngr()       # backend GR\n# plotly()   # backend Plotly (interactivo en el navegador)\n# pyplot()   # backend PyPlot (requiere matplotlib)\n\n# Gráfico de líneas básico\nx = range(0, 2*pi, length=200)\ny = sin.(x)\nplot(x, y, label=\"sin(x)\", color=:blue, linewidth=2, xlabel=\"x\", ylabel=\"y\")\n\n# Añadir otra serie al mismo gráfico\nplot!(x, cos.(x), label=\"cos(x)\", color=:red, linestyle=:dash)\n\n# Scatter plot\nscatter(rand(50), rand(50), markersize=5, color=:green, label=\"puntos\")\n\n# Histograma\ndatos = randn(1000)\nhistogram(datos, bins=30, label=\"distribución normal\", alpha=0.7)\n\n# Heatmap\nM = rand(10, 10)\nheatmap(M, color=:viridis, title=\"Mapa de calor\")",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-03T10:48:40.925097"
+    },
+    {
+      "title": "Metatables en Lua: implementar orientación a objetos y operadores personalizados",
+      "summary": "Lua no tiene clases. No tiene operadores sobrecargados en el sentido de C++ ni una jerarquía de tipos integrada. Lo que tiene son metatables: un mecanismo que permite asociar a cualquier tabla (o user",
+      "explanation": "Lua no tiene clases. No tiene operadores sobrecargados en el sentido de C++ ni una jerarquía de tipos integrada. Lo que tiene son metatables: un mecanismo que permite asociar a cualquier tabla (o userdata) otra tabla con funciones especiales que controlan cómo se comporta la primera cuando se opera sobre ella. Es un sistema de metaprogramación minimalista que, manejado bien, da acceso a orientación a objetos, operadores personalizados y proxies transparentes.Cómo funciona una metatable Cada tabla puede tener asociada una metatable. Cuando Lua no sabe cómo ejecutar una operación sobre una tabla (sumarla, acceder a un campo que no existe, llamarla como función), mira si la metatable tiene unmetamétodopara esa operación. Si lo hay, lo llama; si no, lanza un error.local t = {}\nlocal mt = {}\nsetmetatable(t, mt)\nprint(getmetatable(t) == mt)   -- trueMetamétodos de acceso: __index y __newindex __indexes el metamétodo más importante. Se activa cuando se accede a una clave que no existe en la tabla:local defaults = {color = \"rojo\", tamanyo = 10, activo = true}\nlocal objeto = setmetatable({tamanyo = 20}, {__index = defaults})\n\nprint(objeto.tamanyo)   -- 20 (existe en objeto)\nprint(objeto.color)     -- rojo (no existe en objeto, cae a defaults.__index)\nprint(objeto.activo)    -- true\n\n-- __index también puede ser una función:\nlocal proxy = setmetatable({}, {\n    __index = function(t, clave)\n        print(\"Accediendo a clave inexistente: \" .. tostring(clave))\n        return nil\n    end\n",
+      "code_example": "local t = {}\nlocal mt = {}\nsetmetatable(t, mt)\nprint(getmetatable(t) == mt)   -- true",
+      "use_cases": [],
+      "difficulty": 3,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-03T10:48:42.280831"
+    },
+    {
+      "title": "Servidores HTTP en Gleam: construir una API con Wisp y Mist",
+      "summary": "Cuando se trata de servidores HTTP en Gleam, el stack habitual es Wisp más Mist. Wisp es el framework de alto nivel que gestiona rutas, requests y responses; Mist es el servidor HTTP subyacente escrit",
+      "explanation": "Cuando se trata de servidores HTTP en Gleam, el stack habitual es Wisp más Mist. Wisp es el framework de alto nivel que gestiona rutas, requests y responses; Mist es el servidor HTTP subyacente escrito en Gleam que maneja las conexiones TCP. Los dos corren sobre la BEAM, así que heredan toda la concurrencia y tolerancia a fallos del ecosistema Erlang. En este artículo construimos una API REST sencilla con Gleam, Wisp y Mist, viendo cómo se estructura un proyecto web real.Crear el proyectogleam new mi_api\ncd mi_api\ngleam add wisp mist gleam_http gleam_json El ficherogleam.tomlresultante:name = \"mi_api\"\nversion = \"1.0.0\"\n\n[dependencies]\ngleam_stdlib = \">= 0.34.0\"\nwisp = \">= 0.16.0\"\nmist = \">= 1.2.0\"\ngleam_http = \">= 3.6.0\"\ngleam_json = \">= 1.0.0\"El punto de entrada: arrancar Mist La funciónmainarranca el servidor Mist y le pasa el handler de Wisp:import gleam/erlang/process\nimport mist\nimport wisp\nimport mi_api/router\n\npub fn main() {\n  wisp.configure_logger()\n\n  let secret_key_base = wisp.random_string(64)\n\n  let assert Ok(_) =\n    wisp.mist_handler(router.handle_request, secret_key_base)\n    |> mist.new\n    |> mist.port(8000)\n    |> mist.start_http\n\n  process.sleep_forever()\n}El router: gestionar rutas",
+      "code_example": "gleam new mi_api\ncd mi_api\ngleam add wisp mist gleam_http gleam_json",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-03T10:48:43.626679"
+    },
+    {
+      "title": "Plugins dinámicos en Go: plugin.Open, Lookup y el sistema de plugins nativo",
+      "summary": "El paquetepluginde Go permite cargar ficheros.socompilados en modo plugin en tiempo de ejecución, sin necesidad de recompilar la aplicación principal. Es Go nativo: los símbolos del plugin son funcion",
+      "explanation": "El paquetepluginde Go permite cargar ficheros.socompilados en modo plugin en tiempo de ejecución, sin necesidad de recompilar la aplicación principal. Es Go nativo: los símbolos del plugin son funciones y variables Go reales que simplemente se cargan dinámicamente.Compilar un plugin// plugins/saludo/saludo.go\npackage main // los plugins deben ser package main\n\nimport \"fmt\"\n\n// Saludar es el símbolo que exportaremos\nfunc Saludar(nombre string) string {\n    return fmt.Sprintf(\"Hola, %s! (desde el plugin)\", nombre)\n}\n\n// Versión es una variable exportada\nvar Version = \"1.0.0\"\n\n// El plugin no tiene función main ejecutable,\n// pero sí puede tener init() para inicialización\nfunc init() {\n    fmt.Println(\"Plugin de saludo cargado\")\n}go build -buildmode=plugin -o plugins/saludo.so plugins/saludo/saludo.goCargar el plugin con plugin.Openpackage main\n\nimport (\n    \"fmt\"\n    \"log\"\n    \"plugin\"\n)\n\nfunc main() {\n    // Abrir el fichero .so\n    p, err := plugin.Open(\"plugins/saludo.so\")\n    if err != nil {\n        log.Fatalf(\"error abriendo plugin: %v\", err)\n    }\n\n    // Buscar el símbolo por nombre (distingue mayúsculas)\n    sym, err := p.Lookup(\"Saludar\")\n    if err != nil {\n        log.Fatalf(\"símbolo no encontrado: %v\", err)\n    }\n\n    // Cast al tipo función esperado\n    saludar, ok := sym.(func(string) string)\n    if !ok {\n        log.Fatalf(\"tipo de símbolo incorrecto\")\n    }\n\n    resultado := saludar(\"Ana\")\n    fmt.Println(resultado) // \"Hola, Ana! (desde el plugin)\"\n\n    // Busc",
+      "code_example": "// plugins/saludo/saludo.go\npackage main // los plugins deben ser package main\n\nimport \"fmt\"\n\n// Saludar es el símbolo que exportaremos\nfunc Saludar(nombre string) string {\n    return fmt.Sprintf(\"Hola, %s! (desde el plugin)\", nombre)\n}\n\n// Versión es una variable exportada\nvar Version = \"1.0.0\"\n\n// El plugin no tiene función main ejecutable,\n// pero sí puede tener init() para inicialización\nfunc init() {\n    fmt.Println(\"Plugin de saludo cargado\")\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-03T10:48:44.992048"
     }
   ]
 }

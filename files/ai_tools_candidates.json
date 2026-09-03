@@ -1,5 +1,18 @@
 [
     {
+        "titulo": "hexgrad/Kokoro-82M",
+        "enlace": "https://huggingface.co/hexgrad/Kokoro-82M",
+        "descripcion": "[text-to-speech] text-to-speech, en, arxiv:2306.07691 — by ",
+        "lenguaje": "Python",
+        "estrellas": "6801",
+        "fuente": "HuggingFace Models",
+        "tipo": "herramienta",
+        "_downloads": 11290774,
+        "_likes": 6801,
+        "_pipeline": "text-to-speech",
+        "_source_type": "hf_model"
+    },
+    {
         "titulo": "enzostvs/deepsite",
         "enlace": "https://huggingface.co/spaces/enzostvs/deepsite",
         "descripcion": "[docker space] docker, region:us",
