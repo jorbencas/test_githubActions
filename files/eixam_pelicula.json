@@ -793,5 +793,17 @@
     "tipo": "noticia",
     "relevancia": 4,
     "pelicula": "Eixam"
+  },
+  {
+    "titulo": "Eixam Enjambre Tráiler Subtitulado",
+    "url": "https://www.youtube.com/watch?v=u3tjxyKD4ds",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-03T04:20:37.601673",
+    "medio": "Cinefilicos MX",
+    "imagen": "https://i.ytimg.com/vi/u3tjxyKD4ds/hqdefault.jpg",
+    "tipo": "trailer",
+    "relevancia": 1,
+    "pelicula": "Eixam",
+    "enviada": true
   }
 ]
