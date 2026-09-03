@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 30,
+    "total_concepts": 31,
     "categories": [
       "css_moderno",
       "devops",
@@ -10,7 +10,7 @@
       "interfaces",
       "patrones_diseno"
     ],
-    "last_scraped": "2026-09-02T20:38:24.676825"
+    "last_scraped": "2026-09-03T03:19:31.837931"
   },
   "concepts": [
     {
@@ -576,6 +576,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-02T20:37:49.107100"
+    },
+    {
+      "title": "Destructuring avanzado en JavaScript: renombrar, defaults, anidado, rest y en parámetros",
+      "summary": "La desestructuración en JavaScript va mucho más allá de extraer valores de arrays u objetos en variables simples. Las técnicas avanzadas renombrar variables, valores por defecto, desestructuración an",
+      "explanation": "La desestructuración en JavaScript va mucho más allá de extraer valores de arrays u objetos en variables simples. Las técnicas avanzadas renombrar variables, valores por defecto, desestructuración anidada, el operador rest y los computed property names permiten escribir código más conciso y expresivo en una gran variedad de situaciones.Renombrar variables al desestructurar Cuando el nombre de la propiedad del objeto no es un buen nombre para la variable local, se puede renombrar en la misma desestructuración con la sintaxispropiedad: nuevoNombre:const respuestaAPI = {\n  user_name: 'ana_dev',\n  user_id: 42,\n  created_at: '2024-01-15',\n  is_active: true,\n};\n\n// Desestructurar y renombrar en una sola línea\nconst {\n  user_name: nombreUsuario,\n  user_id: id,\n  created_at: fechaCreacion,\n  is_active: activo,\n} = respuestaAPI;\n\nconsole.log(nombreUsuario, id); // 'ana_dev', 42\n\n// Útil al trabajar con APIs snake_case desde código camelCaseValores por defecto Los valores por defecto se asignan solo cuando la propiedad esundefined(no cuando esnull):const config = {\n  host: 'localhost',\n  timeout: null,  // null explícito\n  // puerto: no existe\n};\n\nconst {\n  host,\n  puerto = 3000,      // default: config.puerto es undefined\n  timeout = 5000,     // NO aplica: config.timeout es null, no undefined\n  debug = false,\n} = config;\n\nconsole.log(host);    // 'localhost'\nconsole.log(puerto);  // 3000 (se usó el default)\nconsole.log(timeout); // null (null != undefined, no se usa el default)\ncon",
+      "code_example": "const respuestaAPI = {\n  user_name: 'ana_dev',\n  user_id: 42,\n  created_at: '2024-01-15',\n  is_active: true,\n};\n\n// Desestructurar y renombrar en una sola línea\nconst {\n  user_name: nombreUsuario,\n  user_id: id,\n  created_at: fechaCreacion,\n  is_active: activo,\n} = respuestaAPI;\n\nconsole.log(nombreUsuario, id); // 'ana_dev', 42\n\n// Útil al trabajar con APIs snake_case desde código camelCase",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-03T03:18:55.137317"
     }
   ]
 }
