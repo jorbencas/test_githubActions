@@ -242,17 +242,38 @@ def hoy_ya_se_envio_voz() -> bool:
 
 
 def marcar_voz_enviada(noticias_titles: list[str] | None = None):
-    """Marca que se envió el audio de voz hoy, con las noticias incluidas."""
+    """Marca que se envió el audio de voz, con timestamp y noticias incluidas."""
     datos = {
         "last_voice_date": datetime.now().strftime("%Y-%m-%d"),
+        "last_voice_ts": datetime.now().isoformat(),
         "news_count": len(noticias_titles) if noticias_titles else 0,
-        "news_titles": (noticias_titles or [])[:50],  # Guardar hasta 50 títulos
+        "news_titles": (noticias_titles or [])[:50],
     }
     if hasattr(VOICE_CACHE, "_save"):
         VOICE_CACHE._save(datos)
     else:
         with open(VOICE_SENT_LOG, "w") as f:
             json.dump(datos, f)
+
+
+def obtener_timestamp_ultimo_audio() -> datetime | None:
+    """Obtiene el timestamp del último audio enviado."""
+    try:
+        if hasattr(VOICE_CACHE, "_load"):
+            datos = VOICE_CACHE._load()
+            if isinstance(datos, dict) and datos.get("last_voice_ts"):
+                return datetime.fromisoformat(datos["last_voice_ts"])
+    except Exception:
+        pass
+    try:
+        if os.path.exists(VOICE_SENT_LOG):
+            with open(VOICE_SENT_LOG, "r", encoding="utf-8") as f:
+                datos = json.load(f)
+            if isinstance(datos, dict) and datos.get("last_voice_ts"):
+                return datetime.fromisoformat(datos["last_voice_ts"])
+    except (json.JSONDecodeError, OSError):
+        pass
+    return None
 
 
 async def run():
@@ -333,12 +354,18 @@ async def run():
         else:
             logger.error(f"❌ Fallo al enviar: {titulo_es[:60]}")
 
-    # Audio de voz: 1 vez al día con resumen de TODAS las noticias del día
+    # Audio de voz: 1 vez al día con resumen de TODAS las noticias desde el último audio
     if not args.dry_run:
         hora_actual = datetime.now().hour
         if args.force_voice or (not hoy_ya_se_envio_voz() and hora_actual >= 21):
-            # Recopilar TODAS las noticias del día (no solo las enviadas en este run)
-            cutoff_voz = datetime.now() - timedelta(hours=24)
+            # Recopilar TODAS las noticias desde el último audio enviado
+            ts_ultimo_audio = obtener_timestamp_ultimo_audio()
+            if ts_ultimo_audio:
+                cutoff_voz = ts_ultimo_audio
+                logger.info(f"🎙️ Buscando noticias desde último audio: {ts_ultimo_audio.strftime('%Y-%m-%d %H:%M')}")
+            else:
+                cutoff_voz = datetime.now() - timedelta(hours=24)
+                logger.info("🎙️ No hay audio previo, usando últimas 24h")
             todas_hoy = []
             for n in historial:
                 if n.get(ID_VIDEO_KEY):
