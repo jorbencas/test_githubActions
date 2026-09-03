@@ -159,36 +159,28 @@ def enviar_mensaje(texto: str, chat_id: str, token: str, reply_markup: dict | No
 
 
 async def enviar_audio_voz(titulares: list[tuple[str, str]], chat_id: str, token: str) -> bool:
-    """Envía audio de voz mezclando voces según el idioma de cada titular.
+    """Envía audio de voz: un audio por idioma (ES y EN), cada uno lo más largo posible.
     titulares: lista de (titulo, fuente) para detectar idioma."""
     if not titulares:
         return False
 
-    # Detectar idioma de cada titular y agrupar por idioma consecutivo
-    grupos = []
-    grupo_actual = []
-    idioma_actual = None
-
+    # Separar TODOS los titulares por idioma (no consecutivos)
+    por_idioma = {"es": [], "en": []}
     for titulo, fuente in titulares:
         texto = strip_emojis(titulo)
         if not texto.strip():
             continue
         idioma = detectar_idioma(texto, fuente)
-        if idioma != idioma_actual:
-            if grupo_actual:
-                grupos.append((idioma_actual, grupo_actual[:]))
-            grupo_actual = [texto]
-            idioma_actual = idioma
-        else:
-            grupo_actual.append(texto)
-    if grupo_actual:
-        grupos.append((idioma_actual, grupo_actual[:]))
+        por_idioma[idioma].append(texto)
+
+    # Filtrar idiomas que tengan contenido
+    grupos = [(idioma, textos) for idioma, textos in por_idioma.items() if textos]
 
     if not grupos:
         logger.info("ℹ️ No hay texto para audio.")
         return False
 
-    logger.info(f"🎙️ Audio dividido en {len(grupos)} grupo(s) por idioma")
+    logger.info(f"🎙️ Audio: {len(por_idioma['es'])} titulares ES, {len(por_idioma['en'])} titulares EN")
     enviado_ok = True
     total_partes = len(grupos)
 
@@ -196,29 +188,29 @@ async def enviar_audio_voz(titulares: list[tuple[str, str]], chat_id: str, token
         voz = TELEGRAM_TTS_VOZ_EN if idioma == "en" else TELEGRAM_TTS_VOZ
         lang_label = "EN" if idioma == "en" else "ES"
         texto_parte = ". ".join(oraciones) + "."
-        audio_path = f"resumen_diario_{i+1}.mp3"
+        audio_path = f"resumen_diario_{idioma}.mp3"
         try:
             communicate = edge_tts.Communicate(texto_parte, voz)
             await communicate.save(audio_path)
             url = f"https://api.telegram.org/bot{token}/sendVoice"
             with open(audio_path, "rb") as f:
                 files = {"voice": (audio_path, f, "audio/mpeg")}
-                caption = f"Resumen diario ({lang_label}) ({i+1}/{total_partes})" if total_partes > 1 else f"Resumen diario ({lang_label})"
+                caption = f"Resumen diario ({lang_label})" if total_partes == 1 else f"Resumen diario ({lang_label}) ({i+1}/{total_partes})"
                 payload = {
                     "chat_id": chat_id,
                     "caption": caption,
                 }
-                r = requests.post(url, data=payload, files=files, timeout=60)
+                r = requests.post(url, data=payload, files=files, timeout=120)
             if os.path.exists(audio_path):
                 os.remove(audio_path)
             if not r.ok:
-                logger.warning(f"⚠️ Audio parte {i+1} ({lang_label}) falló: {r.text[:100]}")
+                logger.warning(f"⚠️ Audio {lang_label} falló: {r.text[:100]}")
                 enviado_ok = False
             else:
-                logger.info(f"✅ Audio parte {i+1}/{total_partes} ({lang_label}, voz: {voz}) enviado")
+                logger.info(f"✅ Audio {lang_label} enviado ({len(oraciones)} titulares, voz: {voz})")
             await asyncio.sleep(2)
         except Exception as e:
-            logger.error(f"⚠️ Error TTS parte {i+1} ({lang_label}): {e}")
+            logger.error(f"⚠️ Error TTS {lang_label}: {e}")
             if os.path.exists(audio_path):
                 os.remove(audio_path)
             enviado_ok = False
