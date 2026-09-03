@@ -26,6 +26,7 @@ HISTORY_PATH = SCRIPT_DIR.parent / "ai_tools_history.json"
 NEWS_PATH = SCRIPT_DIR.parent / "files" / "noticias_historico.json"
 TOOLS_PATH = SCRIPT_DIR.parent / "files" / "herramientas.json"
 CANDIDATES_PATH = SCRIPT_DIR.parent / "files" / "ai_tools_candidates.json"
+AGENT_SKILLS_PATH = SCRIPT_DIR.parent / "files" / "agent_skills.json"
 
 BOT_TOKEN = os.environ.get("TIPS_BOT_TOKEN", "")
 CHAT_ID = os.environ.get("AI_TOOLS_CHAT_ID", os.environ.get("TIPS_CHAT_ID", "-1004380905505"))
@@ -89,6 +90,50 @@ def load_recent_news(count=15):
         return result
     except Exception:
         return []
+
+
+def load_agent_skills():
+    """Carga las skills de agentes IA desde agent_skills.json."""
+    if not AGENT_SKILLS_PATH.exists():
+        return []
+    try:
+        with open(AGENT_SKILLS_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, list) else []
+    except Exception:
+        return []
+
+
+def select_skills_from_db(skills, sent_titles, count=2):
+    """Selecciona skills aleatorias que no hayan sido enviadas."""
+    sent = set(sent_titles)
+    available = [s for s in skills if s.get("titulo", "") not in sent]
+    if not available:
+        available = skills[:]
+    random.shuffle(available)
+    return available[:count]
+
+
+def format_skill_message(skill, index):
+    """Formatea un skill para el mensaje de Telegram."""
+    titulo = skill.get("titulo", "Skill")
+    desc = skill.get("descripcion", "")
+    fuente = skill.get("fuente", "")
+    enlace = skill.get("enlace", "")
+    plataformas = skill.get("_platforms", [])
+    category = skill.get("_category", "")
+
+    lines = [f"{index}. 🎯 *{titulo}*"]
+    if desc:
+        lines.append(f"   {desc[:150]}")
+    if enlace:
+        lines.append(f"   🔗 {enlace}")
+    if plataformas:
+        platforms_str = ", ".join(plataformas[:5])
+        lines.append(f"   ⚙️ Plataformas: {platforms_str}")
+    if category:
+        lines.append(f"   📂 {category}")
+    return "\n".join(lines)
 
 
 def load_recent_tools(count=10):
@@ -340,7 +385,7 @@ def format_tool_message(tool, index):
     return "\n".join(lines)
 
 
-def build_daily_message(tools):
+def build_daily_message(tools, skills=None):
     greeting = _get_time_greeting(datetime.now())
     now = datetime.now()
     date_str = now.strftime("%d/%m/%Y")
@@ -351,9 +396,22 @@ def build_daily_message(tools):
         body_parts.append("")
         body_parts.append(format_tool_message(tool, i))
 
+    if skills:
+        body_parts.append("")
+        body_parts.append("━" * 28)
+        body_parts.append("🎯 *AI AGENT SKILLS*")
+        body_parts.append("━" * 28)
+        for i, skill in enumerate(skills, 1):
+            body_parts.append("")
+            body_parts.append(format_skill_message(skill, i))
+
     body = "\n".join(body_parts)
     cats = set(t.get("cat", "") for t in tools)
-    footer = f"💡 {len(tools)} herramientas de {len(cats)} categorías"
+    footer_parts = [f"💡 {len(tools)} herramientas"]
+    if skills:
+        footer_parts.append(f"🎯 {len(skills)} skills")
+    footer_parts.append(f"de {len(cats)} categorías")
+    footer = " · ".join(footer_parts)
 
     return header + "\n" + body + "\n" + footer
 
@@ -453,13 +511,20 @@ def main():
             db_tools = select_tools_from_db(database, history, 5)
         tools = mix_tools(gemini_tools, db_tools, total=5)
 
-    message = build_daily_message(tools)
+    # Cargar y seleccionar agent skills
+    all_skills = load_agent_skills()
+    skills = select_skills_from_db(all_skills, sent_titles, count=2)
+    print(f"🎯 Skills seleccionadas: {len(skills)}")
+
+    message = build_daily_message(tools, skills)
 
     print(f"\n🧰 Herramientas seleccionadas ({len(tools)}):")
     for i, tool in enumerate(tools, 1):
         emoji = CAT_EMOJI.get(tool.get("cat", ""), "?")
         src = tool.get("source", "db")
         print(f"   {i}. {emoji} [{tool.get('cat')}] {tool.get('tool')} ({src})")
+    for i, skill in enumerate(skills, 1):
+        print(f"   🎯 {skill.get('titulo', 'Skill')} ({skill.get('fuente', '')})")
 
     if dry_run:
         print("\n--- VISTA PREVIA (dry-run) ---\n")
