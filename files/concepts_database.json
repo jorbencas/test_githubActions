@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 36,
+    "total_concepts": 38,
     "categories": [
       "css_moderno",
       "devops",
@@ -11,7 +11,7 @@
       "patrones_diseno",
       "poo"
     ],
-    "last_scraped": "2026-09-03T10:49:19.271306"
+    "last_scraped": "2026-09-03T15:57:28.240109"
   },
   "concepts": [
     {
@@ -685,6 +685,42 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-03T10:48:44.992048"
+    },
+    {
+      "title": "Rendimiento en Swift: Instruments, Time Profiler, Allocations y optimización de memoria",
+      "summary": "La mayoría de problemas de rendimiento en apps Swift no vienen del lenguaje, sino de patrones de uso incorrectos que solo se revelan cuando la app está bajo carga real. Instruments es la herramienta d",
+      "explanation": "La mayoría de problemas de rendimiento en apps Swift no vienen del lenguaje, sino de patrones de uso incorrectos que solo se revelan cuando la app está bajo carga real. Instruments es la herramienta de análisis de rendimiento de Apple: integrado en Xcode, permite medir con precisión qué funciones consumen tiempo de CPU, qué objetos acumulan memoria y dónde están los cuellos de botella reales, sin suposiciones.Cuándo optimizar La regla clásica sigue siendo válida: primero haz que funcione, luego mide, luego optimiza solo donde los datos señalan. Optimizar sin medir es tan probable que empeore el rendimiento como que lo mejore, y siempre produce código más difícil de mantener. Las señales de que es el momento de medir:El usuario reporta lentitud al hacer scroll o al navegarLa batería se agota más rápido de lo esperadoLa app consume memoria que no libera (crash por memoria)Las animaciones no llegan a 60fps (o 120fps en ProMotion)Time Profiler: localizar funciones lentas Time Profiler muestrea el stack de llamadas periódicamente (cada millisegundo por defecto) y muestra qué funciones ocupan más tiempo:Xcode > Product > Profile (Cmd+I)Selecciona \"Time Profiler\"Pulsa Record y reproduce el escenario lentoPara y busca las funciones más pesadas en el flame chart// Ejemplo: filtrado lento en el hilo principal\nstruct ListaView: View {\n    let items: [Item]\n    let busqueda: String\n\n    // ? Cálculo pesado en la propiedad computada de la vista\n    var itemsFiltrados: [Item] {\n        ite",
+      "code_example": "// Ejemplo: filtrado lento en el hilo principal\nstruct ListaView: View {\n    let items: [Item]\n    let busqueda: String\n\n    // ? Cálculo pesado en la propiedad computada de la vista\n    var itemsFiltrados: [Item] {\n        items.filter { item in\n            // Operación cara en cada renderizado\n            item.texto.localizedCaseInsensitiveContains(busqueda) &&\n            calcularPuntuacionCompleja(item) > 0.5\n        }\n    }\n}\n\n// Solución: cachear el resultado con @State o en el ViewModel\n@Observable\nclass ListaViewModel {\n    var items: [Item] = []\n    var busqueda: String = \"\" {\n        didSet { actualizarFiltro() }\n    }\n    private(set) var itemsFiltrados: [Item] = []\n\n    private func actualizarFiltro() {\n        // Ejecutar el filtrado en un task para no bloquear el hilo principal\n        Task.detached(priority: .userInitiated) { [items, busqueda] in\n            let filtrados = items.filter { item in\n                item.texto.localizedCaseInsensitiveContains(busqueda) &&\n                self.calcularPuntuacion(item) > 0.5\n            }\n            await MainActor.run { self.itemsFiltrados = filtrados }\n        }\n    }\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-03T15:56:50.578747"
+    },
+    {
+      "title": "mypy en Python: verificación estática de tipos, configuración, plugins y modo strict",
+      "summary": "mypyes el verificador de tipos estático de referencia para Python. A diferencia de los tipos en tiempo de ejecución, mypy analiza tu códigosin ejecutarloy detecta errores de tipo antes de que lleguen ",
+      "explanation": "mypyes el verificador de tipos estático de referencia para Python. A diferencia de los tipos en tiempo de ejecución, mypy analiza tu códigosin ejecutarloy detecta errores de tipo antes de que lleguen a producción: argumentos incorrectos, valores potencialmenteNone, accesos a atributos inexistentes o tipos incompatibles. Este tutorial cubre desde la instalación básica hasta el modo--stricty la integración con pre-commit.Instalación# pip install mypy\n# Stubs para bibliotecas populares:\n# pip install types-requests types-redis types-PyYAMLPrimeros pasos con anotaciones de tipo# calculos.py\ndef dividir(a: float, b: float) -> float:\n    if b == 0:\n        raise ValueError(\"División por cero\")\n    return a / b\n\n\ndef procesar_nombres(nombres: list[str]) -> list[str]:\n    return [n.strip().title() for n in nombres]\n\n\n# mypy detectará estos errores sin ejecutar el código:\nresultado = dividir(\"diez\", 2)          # error: Argument 1 has incompatible type \"str\"; expected \"float\"\nlista = procesar_nombres([1, 2, 3])     # error: List item 0 has incompatible type \"int\"; expected \"str\"# Ejecutar mypy:\n# mypy calculos.py\n# mypy calculos.py --strictConfigurar mypy.ini# mypy.ini\n[mypy]\npython_version = 3.13\nwarn_return_any = True\nwarn_unused_configs = True\nignore_missing_imports = False\ndisallow_untyped_defs = True\ncheck_untyped_defs = True\nstrict_optional = True\nno_implicit_optional = True\n\n# Relajar reglas para módulos externos sin stubs\n[mypy-pandas.*]\nignore_missing_imports = True\n\n[mypy-ce",
+      "code_example": "# pip install mypy\n# Stubs para bibliotecas populares:\n# pip install types-requests types-redis types-PyYAML",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-03T15:56:52.328850"
     }
   ]
 }
