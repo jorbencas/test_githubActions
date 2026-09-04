@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 39,
+    "total_concepts": 40,
     "categories": [
       "css_moderno",
       "devops",
@@ -11,7 +11,7 @@
       "patrones_diseno",
       "poo"
     ],
-    "last_scraped": "2026-09-03T20:39:10.427303"
+    "last_scraped": "2026-09-04T03:18:33.668696"
   },
   "concepts": [
     {
@@ -739,6 +739,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-03T20:38:33.621916"
+    },
+    {
+      "title": "Operadores modernos de JavaScript: ??=, ||=, &&=, ?., ?? y patrones de uso",
+      "summary": "ES2020 y ES2021 introdujeron un conjunto de operadores que simplifican patrones muy frecuentes en JavaScript: el manejo de valores nulos o indefinidos y la asignación condicional. El nullish coalescin",
+      "explanation": "ES2020 y ES2021 introdujeron un conjunto de operadores que simplifican patrones muy frecuentes en JavaScript: el manejo de valores nulos o indefinidos y la asignación condicional. El nullish coalescing (??), optional chaining (?.) y los operadores de asignación lógica (??=,||=,&&=) son hoy herramientas cotidianas en cualquier código moderno.Nullish coalescing (??): el problema de || El operador||devuelve el segundo operando cuando el primero esfalsy(false, 0, '', null, undefined, NaN). Esto causa bugs cuando 0 o '' son valores válidos. El operador??solo consideranullyundefinedcomo \"sin valor\":// El bug clásico con ||\nfunction configurarTimeout(opciones) {\n  // Si opciones.timeout es 0 (desactivado), || lo trata como falsy\n  const timeout = opciones.timeout || 5000;\n  // timeout === 5000 incluso si se pasó 0 explícitamente ? BUG\n}\n\n// Con ??: 0 es un valor válido\nfunction configurarTimeoutBien(opciones) {\n  const timeout = opciones.timeout ?? 5000;\n  // Si opciones.timeout === 0, timeout === 0 ?\n  // Si opciones.timeout === undefined o null, timeout === 5000 ?\n}\n\n// Ejemplos prácticos\nconst config = { debug: false, pagina: 0, nombre: '' };\n\nconfig.debug || true;     // true  ¡bug! false es falsy\nconfig.debug ?? true;     // false  correcto\n\nconfig.pagina || 1;       // 1  ¡bug! 0 es falsy\nconfig.pagina ?? 1;       // 0  correcto\n\nconfig.nombre || 'anon';  // 'anon'  ¡bug! '' es falsy\nconfig.nombre ?? 'anon';  // ''  correctoOptional chaining (?.) : acceso seguro a propie",
+      "code_example": "// El bug clásico con ||\nfunction configurarTimeout(opciones) {\n  // Si opciones.timeout es 0 (desactivado), || lo trata como falsy\n  const timeout = opciones.timeout || 5000;\n  // timeout === 5000 incluso si se pasó 0 explícitamente ? BUG\n}\n\n// Con ??: 0 es un valor válido\nfunction configurarTimeoutBien(opciones) {\n  const timeout = opciones.timeout ?? 5000;\n  // Si opciones.timeout === 0, timeout === 0 ?\n  // Si opciones.timeout === undefined o null, timeout === 5000 ?\n}\n\n// Ejemplos prácticos\nconst config = { debug: false, pagina: 0, nombre: '' };\n\nconfig.debug || true;     // true  ¡bug! false es falsy\nconfig.debug ?? true;     // false  correcto\n\nconfig.pagina || 1;       // 1  ¡bug! 0 es falsy\nconfig.pagina ?? 1;       // 0  correcto\n\nconfig.nombre || 'anon';  // 'anon'  ¡bug! '' es falsy\nconfig.nombre ?? 'anon';  // ''  correcto",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-04T03:17:52.203010"
     }
   ]
 }
