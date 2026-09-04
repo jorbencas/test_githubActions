@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 43,
+    "total_concepts": 44,
     "categories": [
       "css_moderno",
       "devops",
@@ -11,7 +11,7 @@
       "patrones_diseno",
       "poo"
     ],
-    "last_scraped": "2026-09-04T15:54:40.330047"
+    "last_scraped": "2026-09-04T20:23:54.085964"
   },
   "concepts": [
     {
@@ -811,6 +811,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-04T15:54:00.863795"
+    },
+    {
+      "title": "tracing en Rust: logging estructurado y async-aware con spans y eventos",
+      "summary": "El cratelogfue durante años el estándar de logging en Rust. Tiene una interfaz simple con macros comoinfo!(),warn!()yerror!(). Pero tiene una limitación fundamental en código async: no hay forma de as",
+      "explanation": "El cratelogfue durante años el estándar de logging en Rust. Tiene una interfaz simple con macros comoinfo!(),warn!()yerror!(). Pero tiene una limitación fundamental en código async: no hay forma de asociar un log con el contexto de la operación que lo generó. Imagina un servidor que procesa cien peticiones concurrentes. Cuando ves un mensaje de log[INFO] Iniciando procesamiento, ¿de cuál de las cien peticiones es? Conlog, no hay forma de saberlo. tracingresuelve esto con el concepto despan: un período de tiempo delimitado con contexto asociado. Los eventos de log que ocurren dentro de un span llevan ese contexto automáticamente, incluso cruzando puntos.await.Añadir tracing al proyecto[dependencies]\ntracing = \"0.1\"\ntracing-subscriber = { version = \"0.3\", features = [\"env-filter\"] } El cratetracingdefine la API.tracing-subscriberes el backend que recibe los eventos y los formatea para la terminal (o los envía a otro destino).Configurar el subscriberuse tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};\n\nfn main() {\n    tracing_subscriber::registry()\n        .with(tracing_subscriber::EnvFilter::new(\n            std::env::var(\"RUST_LOG\").unwrap_or_else(|_| \"info\".into()),\n        ))\n        .with(tracing_subscriber::fmt::layer())\n        .init();\n\n    // Ahora puedes usar las macros de tracing\n    tracing::info!(\"Aplicación iniciada\");\n}",
+      "code_example": "[dependencies]\ntracing = \"0.1\"\ntracing-subscriber = { version = \"0.3\", features = [\"env-filter\"] }",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-04T20:23:15.697458"
     }
   ]
 }
