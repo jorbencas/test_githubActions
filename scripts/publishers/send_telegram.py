@@ -89,17 +89,22 @@ def detectar_idioma(texto: str, fuente: str = "") -> str:
     texto_lower = texto.lower()
     fuente_lower = fuente.lower().strip()
 
-    # 1) Por fuente conocida
+    # 1) Heurísticas de caracteres españoles (más fuerte que fuente)
+    if re.search(r'[áéíóúñ¿¡]', texto_lower):
+        return "es"
+
+    # 2) Patrones españoles claros (artículos, preposiciones específicas)
+    es_strong = re.findall(r'\b(el|la|los|las|del|al|un|una|unos|unas|por|con|para|que|como|pero|más|también|muy|desde|hasta|según|entre|hacia|sobre|ante|bajo|tras|durante|mediante)\b', texto_lower)
+    if len(es_strong) >= 3:
+        return "es"
+
+    # 3) Por fuente conocida
     if fuente_lower:
         for f in FUENTES_INGLES:
             if f in fuente_lower:
                 return "en"
 
-    # 2) Heurísticas de caracteres españoles
-    if re.search(r'[áéíóúñ¿¡]', texto_lower):
-        return "es"
-
-    # 3) Contar palabras comunes en inglés vs patrones españoles
+    # 4) Contar palabras comunes en inglés vs patrones españoles
     words = re.findall(r'\b[a-z]+\b', texto_lower)
     if not words:
         return "es"
@@ -111,7 +116,7 @@ def detectar_idioma(texto: str, fuente: str = "") -> str:
     es_patterns = re.findall(r'\b(el|la|los|las|de|del|en|un|una|por|con|para|que|se|no|lo|al|es|su|ce|yo)\b', texto_lower)
     es_ratio = len(es_patterns) / len(words)
 
-    if en_ratio > 0.3 or (en_ratio > es_ratio and en_ratio > 0.15):
+    if en_ratio > 0.35 or (en_ratio > es_ratio and en_ratio > 0.2):
         return "en"
     return "es"
 

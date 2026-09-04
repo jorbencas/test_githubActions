@@ -329,20 +329,20 @@ TITULARES:
 RESPONDE SOLO EL PÁRRAFO, sin intro ni etiquetas. Máx 300 caracteres."""
 
 # ── Prompt resumir noticia individual ──
-PROMPT_RESUMIR_NOTICIA = """Eres el editor de "Tech Pulse". Resume esta noticia en 3-4 líneas en español.
+PROMPT_RESUMIR_NOTICIA = """Eres el editor de "Tech Pulse". Resume esta noticia en 1-2 líneas en español.
 
 REGLAS:
 1. Primera línea: qué ha ocurrido exactamente (hecho concreto, no genérico)
-2. Segunda línea: por qué es relevante para un programador o profesional tech
-3. Tercera línea: un dato concreto si aparece (versión, cifra, fecha)
-4. Evita frases tipo "en un mundo cada vez más digital" o "la revolución de la IA"
+2. Segunda línea (opcional): por qué es relevante para un programador o profesional tech
+3. Evita frases tipo "en un mundo cada vez más digital" o "la revolución de la IA"
+4. Máximo 255 caracteres TOTAL
 
 TÍTULO: {titulo}
 FUENTE: {fuente}
 TEXTO:
 {texto}
 
-Responde SOLO con el resumen, sin introducciones ni etiquetas. (máx 500 caracteres)"""
+Responde SOLO con el resumen, sin introducciones ni etiquetas. (máx 255 caracteres)"""
 
 # ── Prompt recap semanal ──
 PROMPT_RECAP_SEMANAL = """Eres el editor senior de "Tech Pulse", una newsletter semanal de tecnología.

@@ -80,7 +80,7 @@ async def resumir_lote_noticias(noticias: list, client) -> str | None:
 
 
 async def resumir_noticia(item: dict, client, max_prompt_chars: int = 3000) -> str | None:
-    """Fetch article text + Gemini summary (3-4 lines) for a single news item."""
+    """Fetch article text + Gemini summary (1-2 lines) for a single news item."""
     modelos = CONFIG.get("AI_MODELS", ["gemini-2.5-flash", "gemini-2.5-pro"])
 
     texto = extraer_texto_articulo(item[ENLACE_KEY], max_chars=max_prompt_chars)
@@ -93,8 +93,8 @@ async def resumir_noticia(item: dict, client, max_prompt_chars: int = 3000) -> s
             response = client.models.generate_content(model=modelo, contents=prompt)
             if response and response.text:
                 resumen = response.text.strip()
-                if len(resumen) > 500:
-                    resumen = resumen[:497] + "..."
+                if len(resumen) > 255:
+                    resumen = resumen[:252] + "..."
                 return resumen
         except Exception as e:
             logger.warning(f"⚠️ Error resumiendo con {modelo}: {e}")
