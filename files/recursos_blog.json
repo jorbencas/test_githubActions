@@ -26183,13 +26183,13 @@
     "f": "03/09",
     "fecha_publicacion": "",
     "subtipo": "recurso_blog",
-    "descripcion": "Weather and climate data. This is version 3 of the MET Weather API. For a list of changes since version 2, see the Release Notes for v.3.  The weather data API is loosely based on the REST style of we",
+    "descripcion": "API meteorológica noruega con datos de clima y tiempo. Versión 3 del MET Weather API, basada en estilo REST.",
     "repo": "",
     "fecha_real": "03/09",
     "ts": "2026-09-03T20:48:21.386652",
-    "categoria": "🆕 Nuevas",
+    "categoria": "🌤️ Clima",
     "pricing": "freemium",
-    "blog_category": "nuevas-herramientas"
+    "blog_category": "apis-meteorologia"
   },
   {
     "titulo": "Micro",
