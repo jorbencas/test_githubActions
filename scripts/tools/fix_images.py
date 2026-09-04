@@ -647,7 +647,14 @@ async def process_posts() -> None:
             await asyncio.gather(*tasks)
     save_cache()
 
-SECTION_COLORS: Dict[str, Dict[str, str]] = {}
+SECTION_COLORS: Dict[str, Dict[str, str]] = {
+    "posts": {"bg": "#075985", "accent": "#06b6d4", "secondary": "#38bdf8"},
+    "myprojects": {"bg": "#6b21a8", "accent": "#a855f7", "secondary": "#c084fc"},
+    "auto-challenges": {"bg": "#b45309", "accent": "#f59e0b", "secondary": "#fbbf24"},
+    "auto-news": {"bg": "#075985", "accent": "#06b6d4", "secondary": "#38bdf8"},
+    "tools": {"bg": "#065f46", "accent": "#10b981", "secondary": "#34d399"},
+    "weekly": {"bg": "#075985", "accent": "#06b6d4", "secondary": "#38bdf8"},
+}
 
 if __name__ == "__main__":
     import argparse
