@@ -993,5 +993,29 @@
     "relevancia": 2,
     "pelicula": "Eixam",
     "enviada": true
+  },
+  {
+    "titulo": "Óscar Bernàcer y Pablo Molinero; “Enjambre es una película que dará que hablar”",
+    "url": "https://www.youtube.com/watch?v=KRu1vQ2wv4U",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-04T16:19:59.717646",
+    "medio": "Rocine (Entrefocos) ",
+    "imagen": "https://i.ytimg.com/vi/KRu1vQ2wv4U/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Eixam",
+    "enviada": true
+  },
+  {
+    "titulo": "Enjambre (Óscar Bernàcer)",
+    "url": "https://www.cinemaldito.com/enjambre-oscar-bernacer/",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-04T16:20:08.662293",
+    "medio": "Cinemaldito",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Eixam",
+    "enviada": true
   }
 ]
