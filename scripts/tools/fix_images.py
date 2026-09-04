@@ -358,19 +358,8 @@ def generate_local_banner(title: str, tech_context: Optional[Dict[str, Any]] = N
         img: Image.Image = Image.new('RGB', (width, height), bg_dark)
         draw: ImageDraw.ImageDraw = ImageDraw.Draw(img, "RGBA")
         
-        # Degradado de fondo: de oscuro a ligeramente más claro
-        r_bg: int = int(bg_dark[1:3], 16)
-        g_bg: int = int(bg_dark[3:5], 16)
-        b_bg: int = int(bg_dark[5:7], 16)
-        for y in range(height):
-            factor: float = 0.15 * (y / height)
-            r_grad: int = min(255, int(r_bg + (255 - r_bg) * factor))
-            g_grad: int = min(255, int(g_bg + (255 - g_bg) * factor))
-            b_grad: int = min(255, int(b_bg + (255 - b_bg) * factor))
-            draw.line([(0, y), (width, y)], fill=(r_grad, g_grad, b_grad))
-        
         for i in range(width):
-            alpha: int = int(30 * (i / width))
+            alpha: int = int(40 * (i / width))
             r_a: int = int(accent[1:3], 16)
             g_a: int = int(accent[3:5], 16)
             b_a: int = int(accent[5:7], 16)
