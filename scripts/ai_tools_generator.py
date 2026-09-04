@@ -137,6 +137,16 @@ def format_skill_message(skill, index):
     return "\n".join(lines)
 
 
+PRICING_ES = {
+    "free": "💰 Gratuito",
+    "freemium": "⚠️ Versión gratuita con funciones limitadas",
+    "paid": "💰 De pago",
+    "subscription": "💰 Suscripción mensual/anual",
+    "open source": "🔓 Código abierto",
+    "open-source": "🔓 Código abierto",
+}
+
+
 def format_blog_resource_message(res, index):
     """Formatea un recurso del blog para el mensaje de Telegram."""
     titulo = res.get("titulo", "Recurso")
@@ -144,19 +154,24 @@ def format_blog_resource_message(res, index):
     enlace = res.get("enlace", "")
     cat = res.get("categoria", "")
     pricing = res.get("pricing", "")
-    image = res.get("image", "")
+    repo = res.get("repo", "")
+    blog_category = res.get("blog_category", "")
 
     lines = [f"{index}. 📚 *{titulo}*"]
     if desc:
         lines.append(f"   {desc[:150]}")
     if enlace:
         lines.append(f"   🔗 {enlace}")
+    if repo:
+        lines.append(f"   📦 Repo: {repo}")
     if cat:
         lines.append(f"   📂 {cat}")
+    if blog_category and blog_category.lower() not in ("nuevas-herramientas", "nuevas herramientas descubiertas"):
+        lines.append(f"   🏷️ {blog_category}")
     if pricing:
-        lines.append(f"   💰 {pricing}")
-    if image:
-        lines.append(f"   🖼️ {image}")
+        pricing_lower = pricing.lower().strip()
+        pricing_text = PRICING_ES.get(pricing_lower, f"💰 {pricing}")
+        lines.append(f"   {pricing_text}")
     return "\n".join(lines)
 
 
@@ -225,16 +240,8 @@ def load_blog_resources_for_message(count=5):
             desc = item.get("descripcion", "")
             cat = item.get("categoria", "")
             pricing = item.get("pricing", "")
-            # Generate favicon URL from the domain
-            image = ""
-            if enlace:
-                try:
-                    from urllib.parse import urlparse
-                    domain = urlparse(enlace).hostname
-                    if domain:
-                        image = f"https://www.google.com/s2/favicons?domain={domain}&sz=32"
-                except Exception:
-                    pass
+            repo = item.get("repo", "")
+            blog_category = item.get("blog_category", "")
             if titulo:
                 result.append({
                     "titulo": titulo,
@@ -242,7 +249,8 @@ def load_blog_resources_for_message(count=5):
                     "descripcion": desc,
                     "categoria": cat,
                     "pricing": pricing,
-                    "image": image,
+                    "repo": repo,
+                    "blog_category": blog_category,
                 })
         return result
     except Exception:
