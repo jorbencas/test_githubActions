@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 40,
+    "total_concepts": 41,
     "categories": [
       "css_moderno",
       "devops",
@@ -11,7 +11,7 @@
       "patrones_diseno",
       "poo"
     ],
-    "last_scraped": "2026-09-04T03:18:33.668696"
+    "last_scraped": "2026-09-04T10:47:44.905842"
   },
   "concepts": [
     {
@@ -757,6 +757,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-04T03:17:52.203010"
+    },
+    {
+      "title": "Generics en Go en producción: Optional, Result, Set, filter/map/reduce y patrones reales",
+      "summary": "Los generics de Go (introducidos en 1.18) llevan varios años en producción y ya hay patrones establecidos de qué funciona bien y qué no. Los casos de uso que más valor aportan son los contenedores seg",
+      "explanation": "Los generics de Go (introducidos en 1.18) llevan varios años en producción y ya hay patrones establecidos de qué funciona bien y qué no. Los casos de uso que más valor aportan son los contenedores seguros en tipos, las funciones funcionales sin boxing y los tipos de error/resultado explícitos.Optional: alternativa segura a punterospackage optional\n\ntype Optional[T any] struct {\n    value *T\n}\n\nfunc Some[T any](v T) Optional[T] {\n    return Optional[T]{value: &v}\n}\n\nfunc None[T any]() Optional[T] {\n    return Optional[T]{}\n}\n\nfunc (o Optional[T]) IsPresent() bool { return o.value != nil }\nfunc (o Optional[T]) Get() (T, bool) {\n    if o.value == nil {\n        var zero T\n        return zero, false\n    }\n    return *o.value, true\n}\nfunc (o Optional[T]) OrElse(def T) T {\n    if o.value == nil {\n        return def\n    }\n    return *o.value\n}\n\n// Uso:\nfunc buscarUsuario(id int) optional.Optional[Usuario] {\n    // base de datos...\n    if encontrado {\n        return optional.Some(u)\n    }\n    return optional.None[Usuario]()\n}\n\nu := buscarUsuario(1)\nnombre := u.Map(func(u Usuario) string { return u.Nombre }).OrElse(\"Desconocido\")Result: errores explícitos sin panictype Result[T any] struct {\n    value T\n    err   error\n}\n\nfunc Ok[T any](v T) Result[T]       { return Result[T]{value: v} }\nfunc Err[T any](e error) Result[T]  { return Result[T]{err: e} }\n\nfunc (r Result[T]) IsOk() bool         { return r.err == nil }\nfunc (r Result[T]) Unwrap() T          {\n    if r.err != nil { panic(r.e",
+      "code_example": "package optional\n\ntype Optional[T any] struct {\n    value *T\n}\n\nfunc Some[T any](v T) Optional[T] {\n    return Optional[T]{value: &v}\n}\n\nfunc None[T any]() Optional[T] {\n    return Optional[T]{}\n}\n\nfunc (o Optional[T]) IsPresent() bool { return o.value != nil }\nfunc (o Optional[T]) Get() (T, bool) {\n    if o.value == nil {\n        var zero T\n        return zero, false\n    }\n    return *o.value, true\n}\nfunc (o Optional[T]) OrElse(def T) T {\n    if o.value == nil {\n        return def\n    }\n    return *o.value\n}\n\n// Uso:\nfunc buscarUsuario(id int) optional.Optional[Usuario] {\n    // base de datos...\n    if encontrado {\n        return optional.Some(u)\n    }\n    return optional.None[Usuario]()\n}\n\nu := buscarUsuario(1)\nnombre := u.Map(func(u Usuario) string { return u.Nombre }).OrElse(\"Desconocido\")",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-04T10:47:02.701043"
     }
   ]
 }
