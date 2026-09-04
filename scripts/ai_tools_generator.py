@@ -144,6 +144,7 @@ def format_blog_resource_message(res, index):
     enlace = res.get("enlace", "")
     cat = res.get("categoria", "")
     pricing = res.get("pricing", "")
+    image = res.get("image", "")
 
     lines = [f"{index}. 📚 *{titulo}*"]
     if desc:
@@ -154,6 +155,8 @@ def format_blog_resource_message(res, index):
         lines.append(f"   📂 {cat}")
     if pricing:
         lines.append(f"   💰 {pricing}")
+    if image:
+        lines.append(f"   🖼️ {image}")
     return "\n".join(lines)
 
 
@@ -222,6 +225,16 @@ def load_blog_resources_for_message(count=5):
             desc = item.get("descripcion", "")
             cat = item.get("categoria", "")
             pricing = item.get("pricing", "")
+            # Generate favicon URL from the domain
+            image = ""
+            if enlace:
+                try:
+                    from urllib.parse import urlparse
+                    domain = urlparse(enlace).hostname
+                    if domain:
+                        image = f"https://www.google.com/s2/favicons?domain={domain}&sz=32"
+                except Exception:
+                    pass
             if titulo:
                 result.append({
                     "titulo": titulo,
@@ -229,6 +242,7 @@ def load_blog_resources_for_message(count=5):
                     "descripcion": desc,
                     "categoria": cat,
                     "pricing": pricing,
+                    "image": image,
                 })
         return result
     except Exception:
