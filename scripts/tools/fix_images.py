@@ -523,13 +523,27 @@ async def process_file(session: aiohttp.ClientSession, path: Path, semaphore: as
             current_folder: Path = IMG_DIR / base_name
             current_folder.mkdir(parents=True, exist_ok=True)
 
+            # Detectar sección desde la ruta del archivo
+            section: str = ""
+            path_str: str = str(path)
+            for sec in SECTION_COLORS:
+                if f"/{sec}/" in path_str or path_str.endswith(f"/{sec}"):
+                    section = sec
+                    break
+
             # Resolución adaptativa de portadas
             if fm_image:
                 portada_existe: bool = (current_folder / f"{base_name}_cover-1200.webp").exists()
                 if not portada_existe:
                     res: Dict[str, Any] = await search_all_providers(session, fm_title, content, fm_tags)
                     if res["source"] == "local_gen":
-                        img: Image.Image = generate_local_banner(res["title"], res["theme"])
+                        theme: Dict[str, Any] = res.get("theme") or {}
+                        if section and section in SECTION_COLORS:
+                            sc: Dict[str, str] = SECTION_COLORS[section]
+                            theme["color_bg"] = sc.get("bg", theme.get("color_bg", "#0f141c"))
+                            theme["color_accent"] = sc.get("accent", theme.get("color_accent", "#00f2fe"))
+                            theme["color_secondary"] = sc.get("secondary", theme.get("color_secondary", "#38bdf8"))
+                        img: Image.Image = generate_local_banner(res["title"], theme)
                     else:
                         async with session.get(res["url"], headers={"User-Agent": "Mozilla"}, timeout=15) as r:
                             img = Image.open(BytesIO(await r.read())) if r.status == 200 else Image.new('RGB', (1200,630), "#0f141c")
@@ -560,7 +574,13 @@ async def process_file(session: aiohttp.ClientSession, path: Path, semaphore: as
                     else:
                         res = await search_all_providers(session, alt if alt.strip() else fm_title, content, fm_tags)
                         if res["source"] == "local_gen":
-                            img = generate_local_banner(res["title"], res["theme"])
+                            theme = res.get("theme") or {}
+                            if section and section in SECTION_COLORS:
+                                sc = SECTION_COLORS[section]
+                                theme["color_bg"] = sc.get("bg", theme.get("color_bg", "#0f141c"))
+                                theme["color_accent"] = sc.get("accent", theme.get("color_accent", "#00f2fe"))
+                                theme["color_secondary"] = sc.get("secondary", theme.get("color_secondary", "#38bdf8"))
+                            img = generate_local_banner(res["title"], theme)
                         else:
                             async with session.get(res["url"], headers={"User-Agent": "Mozilla"}, timeout=15) as r:
                                 img = Image.open(BytesIO(await r.read())) if r.status == 200 else Image.new('RGB', (1200,630), "#0f141c")
@@ -627,13 +647,19 @@ async def process_posts() -> None:
             await asyncio.gather(*tasks)
     save_cache()
 
+SECTION_COLORS: Dict[str, Dict[str, str]] = {}
+
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--blog-path", default=str(Path(__file__).resolve().parent.parent if (Path(__file__).resolve().parent.parent / "src" / "content").exists() else "."))
+    parser.add_argument("--section-colors", default=None, help='JSON mapping sections to colors, e.g. \'{"posts":{"bg":"#075985","accent":"#06b6d4"}}\'')
     args = parser.parse_args()
     ROOT_DIR = Path(args.blog_path).resolve()
     TARGET_DIR = ROOT_DIR / "src" / "content"
     IMG_DIR = ROOT_DIR / "public" / "img"
     CACHE_FILE = ROOT_DIR / "image_cache.json"
+    if args.section_colors:
+        import json as _json
+        SECTION_COLORS = _json.loads(args.section_colors)
     asyncio.run(process_posts())
