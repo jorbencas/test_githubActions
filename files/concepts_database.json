@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 41,
+    "total_concepts": 43,
     "categories": [
       "css_moderno",
       "devops",
@@ -11,7 +11,7 @@
       "patrones_diseno",
       "poo"
     ],
-    "last_scraped": "2026-09-04T10:47:44.905842"
+    "last_scraped": "2026-09-04T15:54:40.330047"
   },
   "concepts": [
     {
@@ -775,6 +775,42 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-04T10:47:02.701043"
+    },
+    {
+      "title": "Interoperabilidad en Swift: C, Objective-C, bridging headers y Swift C++ interop",
+      "summary": "Swift no vive en un vacío: millones de líneas de código en Objective-C y C siguen en producción, y el ecosistema Apple tiene APIs que solo existen en esos lenguajes. La interoperabilidad de Swift con ",
+      "explanation": "Swift no vive en un vacío: millones de líneas de código en Objective-C y C siguen en producción, y el ecosistema Apple tiene APIs que solo existen en esos lenguajes. La interoperabilidad de Swift con C y Objective-C no es un añadido de compatibilidad, sino una característica de primera clase del lenguaje diseñada para coexistir con el código existente sin fricciones. Y desde Swift 5.9, la interoperabilidad con C++ es directa sin necesidad de wrappers manuales.Bridging header: usar Objective-C desde Swift El bridging header es un fichero.hque le dice al compilador de Swift qué cabeceras de Objective-C deben estar disponibles en tu código Swift:// MiApp-Bridging-Header.h\n#import \"LegacyManager.h\"\n#import \"AnalyticsSDK/Analytics.h\"\n#import <CommonCrypto/CommonCrypto.h> Xcode lo crea automáticamente la primera vez que añades un fichero Objective-C a un proyecto Swift. También puedes especificarlo manualmente en Build Settings > \"Objective-C Bridging Header\".// Una vez importado, usas las clases Objective-C directamente\nlet manager = LegacyManager()\nmanager.cargarDatos { datos, error in\n    guard error == nil else { return }\n    // datos es [AnyHashable: Any]?  el tipo dinámico de NSDictionary\n}\n\n// Los tipos se puentean automáticamente:\n// NSString ? String, NSArray ? [Any], NSDictionary ? [AnyHashable: Any]\n// NSNumber ? Int/Double/Bool, etc.@objc y @objcMembers: exponer Swift a Objective-C Para que código Objective-C (o el runtime ObjC) pueda llamar a tu código Swift, necesita",
+      "code_example": "// MiApp-Bridging-Header.h\n#import \"LegacyManager.h\"\n#import \"AnalyticsSDK/Analytics.h\"\n#import <CommonCrypto/CommonCrypto.h>",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-04T15:53:59.172353"
+    },
+    {
+      "title": "Polars en Python: DataFrame, Lazy API, expresiones y comparativa con Pandas",
+      "summary": "Polarses una biblioteca de DataFrames escrita en Rust que rivaliza y supera a Pandas en rendimiento gracias a su motor vectorizado y su compatibilidad con Apache Arrow. Ofrece dos APIs: laEager API, q",
+      "explanation": "Polarses una biblioteca de DataFrames escrita en Rust que rivaliza y supera a Pandas en rendimiento gracias a su motor vectorizado y su compatibilidad con Apache Arrow. Ofrece dos APIs: laEager API, que ejecuta las operaciones de inmediato, y laLazy API, que construye un plan de ejecución optimizado antes de procesarlo. Este tutorial cubre ambas con ejemplos prácticos y comparativas.Instalación# pip install polars\n# pip install polars[all]   # con soporte para Excel, Parquet, Delta Lake, etc.Crear un DataFrameimport polars as pl\n\n# Desde diccionario\ndf = pl.DataFrame({\n    \"nombre\": [\"Ana\", \"Luis\", \"María\", \"Carlos\", \"Elena\"],\n    \"edad\": [28, 34, 22, 45, 31],\n    \"ciudad\": [\"Madrid\", \"Barcelona\", \"Madrid\", \"Valencia\", \"Barcelona\"],\n    \"salario\": [45_000, 62_000, 38_000, 71_000, 55_000],\n})\n\nprint(df)\nprint(df.dtypes)   # [String, Int64, String, Int64]\nprint(df.shape)    # (5, 4)Eager API: seleccionar, filtrar y ordenarimport polars as pl\n\ndf = pl.DataFrame({\n    \"nombre\": [\"Ana\", \"Luis\", \"María\", \"Carlos\", \"Elena\"],\n    \"edad\": [28, 34, 22, 45, 31],\n    \"ciudad\": [\"Madrid\", \"Barcelona\", \"Madrid\", \"Valencia\", \"Barcelona\"],\n    \"salario\": [45_000, 62_000, 38_000, 71_000, 55_000],\n})\n\n# Seleccionar columnas con pl.col\nresultado = df.select([\n    pl.col(\"nombre\"),\n    pl.col(\"salario\"),\n    (pl.col(\"salario\") / 12).alias(\"salario_mensual\")\n])\nprint(resultado)\n\n# Filtrar\nmayores_40 = df.filter(pl.col(\"edad\") > 40)\nprint(mayores_40)\n\n# Filtros múltiples con & y |\nde_madrid_bien_p",
+      "code_example": "# pip install polars\n# pip install polars[all]   # con soporte para Excel, Parquet, Delta Lake, etc.",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-04T15:54:00.863795"
     }
   ]
 }
