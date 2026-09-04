@@ -372,6 +372,19 @@ class LeftBigRightStackedLayout(LayoutStrategy):
             raise ValueError(f"Se necesitan 3 imágenes, se recibieron {len(images)}")
 
         canvas = Image.new("RGB", (CANVAS_W, CANVAS_H), "#0f141c")
+        draw_canvas = ImageDraw.Draw(canvas, "RGBA")
+        
+        # Degradado de fondo
+        bg_color = "#0f141c"
+        r_bg = int(bg_color[1:3], 16)
+        g_bg = int(bg_color[3:5], 16)
+        b_bg = int(bg_color[5:7], 16)
+        for y in range(CANVAS_H):
+            factor = 0.12 * (y / CANVAS_H)
+            r_grad = min(255, int(r_bg + (255 - r_bg) * factor))
+            g_grad = min(255, int(g_bg + (255 - g_bg) * factor))
+            b_grad = min(255, int(b_bg + (255 - b_bg) * factor))
+            draw_canvas.line([(0, y), (CANVAS_W, y)], fill=(r_grad, g_grad, b_grad))
 
         if self.mecano:
             # Mecano style: smaller panels with slight rotation
@@ -449,6 +462,20 @@ class ThreeInRowLayout(LayoutStrategy):
             raise ValueError(f"Se necesitan 3 imágenes, se recibieron {len(images)}")
 
         canvas = Image.new("RGB", (CANVAS_W, CANVAS_H), "#0f141c")
+        draw_canvas = ImageDraw.Draw(canvas, "RGBA")
+        
+        # Degradado de fondo
+        bg_color = "#0f141c"
+        r_bg = int(bg_color[1:3], 16)
+        g_bg = int(bg_color[3:5], 16)
+        b_bg = int(bg_color[5:7], 16)
+        for y in range(CANVAS_H):
+            factor = 0.12 * (y / CANVAS_H)
+            r_grad = min(255, int(r_bg + (255 - r_bg) * factor))
+            g_grad = min(255, int(g_bg + (255 - g_bg) * factor))
+            b_grad = min(255, int(b_bg + (255 - b_bg) * factor))
+            draw_canvas.line([(0, y), (CANVAS_W, y)], fill=(r_grad, g_grad, b_grad))
+        
         gap = GAP
         w = (CANVAS_W - gap * 4) // 3
         h = CANVAS_H - gap * 2
