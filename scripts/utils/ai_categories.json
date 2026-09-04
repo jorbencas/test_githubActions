@@ -158,6 +158,23 @@
     "object_removal": {"emoji": "🧹", "nombre": "Eliminación de objetos de vídeo"},
     "motion_tracking": {"emoji": "🎯", "nombre": "Tracking de movimiento IA"},
     "colorization": {"emoji": "🎨", "nombre": "Coloreado de vídeos antiguos"},
-    "slowmo_ai": {"emoji": "🐢", "nombre": "Cámara lenta con IA"}
+    "slowmo_ai": {"emoji": "🐢", "nombre": "Cámara lenta con IA"},
+
+    "navegadores": {"emoji": "🌐", "nombre": "Navegadores web"},
+    "navegador_privacidad": {"emoji": "🔒", "nombre": "Navegadores con privacidad"},
+    "navegador_ai": {"emoji": "🤖", "nombre": "Navegadores con IA integrada"},
+    "extensiones_navegador": {"emoji": "🧩", "nombre": "Extensiones de navegador"},
+    "software_escritorio": {"emoji": "🖥️", "nombre": "Software de escritorio"},
+    "apps_movil": {"emoji": "📱", "nombre": "Apps móviles"},
+    "herramientas_terminal": {"emoji": "⌨️", "nombre": "Herramientas de terminal"},
+    "editores_codigo": {"emoji": "📝", "nombre": "Editores de código"},
+    "ide": {"emoji": "💻", "nombre": "IDEs y entornos de desarrollo"},
+    "control_versiones": {"emoji": "🔀", "nombre": "Control de versiones"},
+    "devops": {"emoji": "⚙️", "nombre": "DevOps y despliegue"},
+    "monitorizacion": {"emoji": "📊", "nombre": "Monitorización y observabilidad"},
+    "seguridad": {"emoji": "🛡️", "nombre": "Seguridad y auditoría"},
+    "base_datos": {"emoji": "🗃️", "nombre": "Bases de datos"},
+    "redes": {"emoji": "🌍", "nombre": "Herramientas de red"},
+    "virtualizacion": {"emoji": "📦", "nombre": "Virtualización y contenedores"}
   }
 }
