@@ -958,5 +958,40 @@
     "relevancia": 2,
     "pelicula": "Eixam",
     "enviada": false
+  },
+  {
+    "titulo": "Tensión y terror en los estrenos de cine: 'Cronos', 'Enjambre' y 'Black Box'",
+    "url": "https://www.youtube.com/watch?v=EjZJG_mroQQ",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-04T11:15:21.485479",
+    "medio": "AGENCIA EFE",
+    "imagen": "https://i.ytimg.com/vi/EjZJG_mroQQ/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Eixam"
+  },
+  {
+    "titulo": "Óscar Bernàcer roda 'En l'eixam', un thriller rural amb Pablo Molinero i Cristina Fernández Pintado",
+    "url": "https://www.europapress.es/valencia/noticia-oscar-bernacer-roda-leixam-thriller-rural-amb-pablo-molinero-cristina-fernandez-pintado-20250528183527.html",
+    "fecha_pub": "Wed, 28 May 2025 09:35:00 GMT",
+    "fecha_ts": "2026-09-04T11:15:40.767116",
+    "medio": "Europa Press",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Eixam",
+    "enviada": true
+  },
+  {
+    "titulo": "Tensión y terror en los estrenos de cine: 'Cronos', 'Enjambre' y 'Black Box'",
+    "url": "https://www.abc.es/play/cine/tension-terror-estrenos-cine-cronos-enjambre-black-20260904121228-nt.html",
+    "fecha_pub": "Fri, 04 Sep 2026 03:12:00 GMT",
+    "fecha_ts": "2026-09-04T11:15:41.883666",
+    "medio": "ABC",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Eixam",
+    "enviada": true
   }
 ]
