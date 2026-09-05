@@ -1,5 +1,44 @@
 [
     {
+        "titulo": "How to Build a Scholarship Research MCP Server with Node.js, Express, and MongoDB",
+        "enlace": "https://www.freecodecamp.org/news/how-to-build-a-scholarship-research-mcp-server-with-node-js-express-and-mongodb/",
+        "fuente": "freeCodeCamp",
+        "tipo": "noticia",
+        "f": "05/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "05/09/2026",
+        "ts": "2026-09-05T03:19:33.558904"
+    },
+    {
+        "titulo": "How AI Receptionists Work: The Architecture Behind AI Phone Agents",
+        "enlace": "https://www.freecodecamp.org/news/how-ai-receptionists-work-the-architecture-behind-ai-phone-agents/",
+        "fuente": "freeCodeCamp",
+        "tipo": "noticia",
+        "f": "05/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "05/09/2026",
+        "ts": "2026-09-05T03:19:33.559618"
+    },
+    {
+        "titulo": "How AI Is Changing Patching and What Devs Need to Know About Exposure Management",
+        "enlace": "https://www.freecodecamp.org/news/how-ai-is-breaking-traditional-patch-management/",
+        "fuente": "freeCodeCamp",
+        "tipo": "noticia",
+        "f": "05/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "05/09/2026",
+        "ts": "2026-09-05T03:19:33.560342"
+    },
+    {
         "titulo": "Índice de Inteligencia para Análisis Artificial v4.2",
         "enlace": "https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v4-2",
         "fuente": "Hacker News",

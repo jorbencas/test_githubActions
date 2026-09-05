@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 44,
+    "total_concepts": 45,
     "categories": [
       "css_moderno",
       "devops",
@@ -11,7 +11,7 @@
       "patrones_diseno",
       "poo"
     ],
-    "last_scraped": "2026-09-04T20:23:54.085964"
+    "last_scraped": "2026-09-05T03:20:39.318434"
   },
   "concepts": [
     {
@@ -829,6 +829,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-04T20:23:15.697458"
+    },
+    {
+      "title": "ESM en Node.js: import/export nativo, interop con CommonJS y configuración package.json",
+      "summary": "Node.js soporta el sistema de módulos ECMAScript (ESM) nativo desde la versión 12 y de forma estable desde la 14. Usar ESM nativo en lugar de CommonJS o de transpiladores como Babel tiene ventajas rea",
+      "explanation": "Node.js soporta el sistema de módulos ECMAScript (ESM) nativo desde la versión 12 y de forma estable desde la 14. Usar ESM nativo en lugar de CommonJS o de transpiladores como Babel tiene ventajas reales: tree-shaking más eficiente, análisis estático de importaciones, top-level await y mejor interoperabilidad con el ecosistema de paquetes modernos.Activar ESM: type:module en package.json La forma más sencilla de activar ESM en un proyecto Node.js es añadir\"type\": \"module\"alpackage.json. Todos los archivos.jsdel proyecto pasan a tratarse como módulos ESM:// package.json\n{\n  \"name\": \"mi-proyecto\",\n  \"version\": \"1.0.0\",\n  \"type\": \"module\",\n  \"main\": \"index.js\"\n}\n\n// index.js  ya es ESM sin extensión .mjs\nimport { readFile } from 'fs/promises';\nimport { join } from 'path';\nimport { fileURLToPath } from 'url';\n\nconst __filename = fileURLToPath(import.meta.url);\nconst __dirname = join(__filename, '..');\n\nconst contenido = await readFile(join(__dirname, 'config.json'), 'utf-8');Extensiones .mjs y .cjs Si no quieres cambiar\"type\"en el package.json (porque tienes código CJS y ESM mezclados), puedes usar extensiones explícitas:// .mjs  siempre ESM, sin importar el \"type\" del package.json\n// modulo.mjs\nexport function saludar(nombre) {\n  return `Hola, ${nombre}`;\n}\n\n// .cjs  siempre CommonJS\n// helpers.cjs\nconst { readFileSync } = require('fs');\nmodule.exports = { readFileSync };\n\n// En un archivo .mjs puedes importar .cjs\nimport helpers from './helpers.cjs'; // Interop automático\n\n/",
+      "code_example": "// package.json\n{\n  \"name\": \"mi-proyecto\",\n  \"version\": \"1.0.0\",\n  \"type\": \"module\",\n  \"main\": \"index.js\"\n}\n\n// index.js  ya es ESM sin extensión .mjs\nimport { readFile } from 'fs/promises';\nimport { join } from 'path';\nimport { fileURLToPath } from 'url';\n\nconst __filename = fileURLToPath(import.meta.url);\nconst __dirname = join(__filename, '..');\n\nconst contenido = await readFile(join(__dirname, 'config.json'), 'utf-8');",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-05T03:20:01.456118"
     }
   ]
 }
