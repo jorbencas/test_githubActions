@@ -355,23 +355,16 @@ def generate_local_banner(title: str, tech_context: Optional[Dict[str, Any]] = N
         tech_label: str = ctx.get("tech_stack", "DEV WORKSPACE")
         keywords: List[str] = ctx.get("keywords", ["code", "system"])
         
-        img: Image.Image = Image.new('RGB', (width, height), bg_dark)
+        img: Image.Image = Image.new('RGB', (width, height), "#000000")
         draw: ImageDraw.ImageDraw = ImageDraw.Draw(img, "RGBA")
 
-        # Degradado vertical con el color de la sección: oscuro arriba → color_accent abajo
+        # Degradado horizontal sutil: negro → color_accent (izquierda → derecha)
         r_a = int(accent[1:3], 16)
         g_a = int(accent[3:5], 16)
         b_a = int(accent[5:7], 16)
-        r_b = int(bg_dark[1:3], 16)
-        g_b = int(bg_dark[3:5], 16)
-        b_b = int(bg_dark[5:7], 16)
-        for y in range(height):
-            t: float = y / (height - 1)
-            f: float = 0.15 + 0.65 * t   # del 15% al 80% del color_accent
-            r: int = int(r_b + (r_a - r_b) * f)
-            g: int = int(g_b + (g_a - g_b) * f)
-            b: int = int(b_b + (b_a - b_b) * f)
-            draw.line([(0, y), (width, y)], fill=(r, g, b, 255))
+        for x in range(width):
+            alpha: int = int(45 * (x / width))
+            draw.line([(x, 0), (x, height)], fill=(r_a, g_a, b_a, alpha))
 
         grid_size: int = 40
         for x in range(0, width, grid_size): 
