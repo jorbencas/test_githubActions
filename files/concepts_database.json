@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 50,
+    "total_concepts": 52,
     "categories": [
       "css_moderno",
       "devops",
@@ -11,7 +11,7 @@
       "patrones_diseno",
       "poo"
     ],
-    "last_scraped": "2026-09-05T10:05:27.825604"
+    "last_scraped": "2026-09-05T14:44:55.398967"
   },
   "concepts": [
     {
@@ -937,6 +937,42 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-05T10:04:50.352036"
+    },
+    {
+      "title": "Combine en Swift: Publishers, Subscribers, operadores y sink/assign",
+      "summary": "Combine es el framework reactivo de Apple, integrado en el SDK desde iOS 13. En lugar de callbacks anidados o delegados, Combine modela las fuentes de datos asíncronas comopublishersy los consumidores",
+      "explanation": "Combine es el framework reactivo de Apple, integrado en el SDK desde iOS 13. En lugar de callbacks anidados o delegados, Combine modela las fuentes de datos asíncronas comopublishersy los consumidores comosubscribers. Los operadores conectan ambos extremos transformando, filtrando y combinando valores a lo largo de la cadena.Publishers básicos: Just, PassthroughSubject y CurrentValueSubject Justemite un único valor y completa inmediatamente. Es útil para pruebas y para envolver valores síncronos en una cadena Combine:import Combine\n\nlet publisher = Just(42)\nlet cancellable = publisher.sink(\n    receiveCompletion: { print(\"Completado: ($0)\") },\n    receiveValue: { print(\"Valor: ($0)\") }\n)\n// Valor: 42\n// Completado: finished PassthroughSubjectactúa como un emisor manual: no tiene valor inicial y envía valores cuando se llama asend(_:). Es el equivalente a un EventEmitter:let subject = PassthroughSubject()\n\nlet cancellable = subject.sink { print(\"Recibido: ($0)\") }\n\nsubject.send(\"hola\")\nsubject.send(\"mundo\")\nsubject.send(completion: .finished)\n// Recibido: hola\n// Recibido: mundo CurrentValueSubjectalmacena el último valor emitido y lo entrega inmediatamente a cualquier nuevo suscriptor. Es equivalente a una variable observable:let temperaturaActual = CurrentValueSubject(20.0)\n\n// Nuevo suscriptor recibe 20.0 de inmediato\nlet cancellable = temperaturaActual.sink { print(\"Temperatura: ($0)\") }\n\ntemperaturaActual.send(22.5)\ntemperaturaActual.send(23.1)\n// Temperatura: 20.0\n// Tem",
+      "code_example": "import Combine\n\nlet publisher = Just(42)\nlet cancellable = publisher.sink(\n    receiveCompletion: { print(\"Completado: ($0)\") },\n    receiveValue: { print(\"Valor: ($0)\") }\n)\n// Valor: 42\n// Completado: finished",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-05T14:44:15.627076"
+    },
+    {
+      "title": "Hypothesis en Python: property-based testing, strategies y encontrar edge cases automáticamente",
+      "summary": "Los tests unitarios tradicionales comprueban los casos que se te ocurren.Hypothesisgenera automáticamente cientos o miles de inputs distintos para encontrar los que rompen tu código: edge cases como e",
+      "explanation": "Los tests unitarios tradicionales comprueban los casos que se te ocurren.Hypothesisgenera automáticamente cientos o miles de inputs distintos para encontrar los que rompen tu código: edge cases como enteros negativos, cadenas vacías, valores en los límites, NaN, listas de un solo elemento. Cuando encuentra un fallo, lo reduce al ejemplo mínimo que lo reproduce mediante un proceso llamadoshrinking.Instalación# pip install hypothesis\n# pip install pytest hypothesis   # para usar con pytest@given: el decorador fundamentalfrom hypothesis import given\nimport hypothesis.strategies as st\n\n\ndef invertir(s: str) -> str:\n    return s[::-1]\n\n\n@given(st.text())\ndef test_invertir_dos_veces_da_original(s: str):\n    assert invertir(invertir(s)) == s\n\n\n@given(st.text())\ndef test_longitud_se_conserva(s: str):\n    assert len(invertir(s)) == len(s)# Ejecutar con pytest:\n# pytest test_invertir.py -v\n# Hypothesis muestra cuántos ejemplos probó y cuáles fallaronStrategies básicasimport hypothesis.strategies as st\nfrom hypothesis import given\n\n# Enteros\n@given(st.integers())\ndef test_enteros_cualquiera(n: int): ...\n\n@given(st.integers(min_value=0, max_value=100))\ndef test_enteros_acotados(n: int): ...\n\n# Floats\n@given(st.floats(allow_nan=False, allow_infinity=False))\ndef test_floats(x: float): ...\n\n# Texto\n@given(st.text(min_size=1, max_size=50))\ndef test_texto(s: str): ...\n\n@given(st.text(alphabet=st.characters(whitelist_categories=('L', 'N'))))\ndef test_texto_alfanumerico(s: str): ...\n\n# Listas\n@",
+      "code_example": "# pip install hypothesis\n# pip install pytest hypothesis   # para usar con pytest",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-05T14:44:17.085245"
     }
   ]
 }
