@@ -1,5 +1,5 @@
 """
-Tip Diario de IT — Envía 10 tips cada 6 horas por Telegram.
+Tip Diario de IT — Envía 10 tips cada 3 horas por Telegram.
 Gemini genera tips dinámicos usando noticias y tools como fuente.
 DB estática como fallback. Nunca repite tips.
 
@@ -701,14 +701,16 @@ def build_concepts_gemini_prompt(categories, sent_titles):
 2. Cada concepto = UNA categoría DIFERENTE del batch
 3. NUNCA repitas título, concepto ni idea de la lista de enviados
 4. Cada concepto debe tener: title, summary, explanation (3-5 párrafos), code_example, use_cases, difficulty, language, interview_relevant, interview_question, interview_answer
-5. Todo en ESPAÑOL correcto
+5. TODO en CASTELLANO (español): title, summary, explanation, interview_question, interview_answer y los comentarios del code_example. Los títulos van SIEMPRE en español.
 6. NUNCA uses emojis en el body ni en el título
-7. Usa términos técnicos en INGLÉS cuando sea estándar
+7. Ningún término en inglés sin su traducción: si un término técnico se usa normalmente en inglés, escríbelo en castellano y añade la forma inglesa entre paréntesis la primera vez (p. ej. "cadena de caracteres (string)", "cola de mensajes (message queue)", "equilibrador de carga (load balancer)").
 8. Varía dificultad: 1=básico, 2=intermedio, 3=avanzado
-9. INCLUYE siempre un code_example real y ejecutable cuando el concepto lo permita
+9. INCLUYE siempre un code_example real y ejecutable cuando el concepto lo permita (con comentarios en español)
 10. INCLUYE interview_question e interview_answer para ALMENOS 3 de los 5 conceptos
 11. use_cases debe ser una lista de 2-3 casos de uso reales
 12. IMPORTANTE: Genera al menos 1 concepto de patrones_diseno, 1 de kafka o multithread, 1 de entrevistas
+13. La explanation debe ser DIDÁCTICA y extensa: 3-5 párrafos bien estructurados: (1) qué es, con una analogía o ejemplo cotidiano; (2) cómo funciona por dentro, paso a paso; (3) cuándo usarlo y cuándo evitarlo; (4) errores o malentendidos comunes; (5) relación con otros conceptos si aplica. NUNCA una definición de una sola frase ni un párrafo genérico.
+14. El summary es una frase corta (1 línea, máx. 20 palabras) que resume la idea central.
 
 === FORMATO DE RESPUESTA ===
 SOLO el JSON array, sin markdown, sin texto adicional:
@@ -832,9 +834,9 @@ def build_gemini_prompt(categories, sent_titles, news, tools):
 4. Cada tip debe tener UNA SOLA idea clara y concreta
 5. Si el tip es sobre un comando, SQL, bash, scripting, código, framework o herramienta técnica: DEBE incluir un ejemplo de código o comando real
 6. Si el tip es sobre un concepto, principio, patrón o idea general: NO pongas código, solo explicación clara
-7. Todo en ESPAÑOL correcto, sin anglicismos innecesarios
+7. TODO en CASTELLANO (español): title, body, mala y buena. Sin anglicismos innecesarios
 8. NUNCA uses emojis en el body ni en el título
-9. Usa términos técnicos en INGLÉS cuando sea estándar (cold start, hot function, load balancer, etc.)
+9. Ningún término en inglés sin su traducción: si un término técnico se usa normalmente en inglés, escríbelo en castellano y añade la forma inglesa entre paréntesis la primera vez (p. ej. "arranque en frío (cold start)", "equilibrador de carga (load balancer)", "función caliente (hot function)").
 10. Varía dificultad: 1=básico, 2=intermedio, 3=avanzado
 11. Cuando el tip mencione una SIGLA o acrónimo, SIEMPRE expande la sigla entre paréntesis la primera vez que aparezca y añade UNA frase breve que la explique en contexto.
 12. Cuando el tip describa una práctica, comando o configuración técnicos, SIEMPRE rellena los campos "mala" (cómo NO se debe hacer) y "buena" (cómo se debe hacer correctamente). Si el tip es un concepto teórico puro, deja "mala" y "buena" vacíos ("").
@@ -1234,18 +1236,31 @@ def format_tip_message(tip, index):
     title = tip.get("title", "")
     tip_type = tip.get("type", "tip")
     label = TYPE_LABEL.get(tip_type, "💡 Tip")
-    title_part = f": {title}" if title else ""
+    has_summary = tip_type == "concepto" and tip.get("summary", "").strip()
+    title_part = f": {title}" if title and not has_summary else ""
     lines = [f"{index}. {label} {emoji} *{nombre}*{title_part}"]
 
     if tip_type == "concepto":
+        summary = tip.get("summary", "")
+        if summary:
+            lines.append(f"   ▶️ *{title}* — {summary}")
         explanation = tip.get("explanation", "")
         if explanation:
-            lines.append(f"   {explanation}")
+            paragraphs = [p.strip() for p in explanation.split("\n\n") if p.strip()]
+            if not paragraphs:
+                paragraphs = [explanation]
+            lines.append("   📖 *Explicación:*")
+            for i, paragraph in enumerate(paragraphs):
+                for line in paragraph.split("\n"):
+                    lines.append(f"   {line}")
+                if i < len(paragraphs) - 1:
+                    lines.append("   ")
         code = tip.get("code_example", "")
         if code:
             lang = tip.get("language", "")
             lines.append(f"   ```{lang}")
-            lines.append(f"   {code}")
+            for line in code.split("\n"):
+                lines.append(f"   {line}")
             lines.append(f"   ```")
         use_cases = tip.get("use_cases", [])
         if use_cases:

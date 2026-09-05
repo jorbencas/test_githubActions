@@ -1,11 +1,11 @@
 # Tips de IT — Gemini + DB Local
 
-Bot de Telegram que envia **10 tips cada 6 horas**. Gemini genera tips dinamicos usando noticias y herramientas trending como fuente. DB estatica como fallback. **Nunca repite tips.**
+Bot de Telegram que envia **10 tips cada 3 horas**. Gemini genera tips dinamicos usando noticias y herramientas trending como fuente. DB estatica como fallback. **Nunca repite tips.**
 
 ## Como funciona
 
 ```
-Cada 6 horas (00:00, 06:00, 12:00, 18:00 UTC)
+Cada 3 horas (00:00, 03:00, 06:00, ..., 21:00 UTC)
     |
     +---> Selecciona 5-6 categorias al azar (de 266)
     |
@@ -53,8 +53,10 @@ self es la referencia al objeto actual. En una clase, self.nombre = 'Juan' guard
 - Cada tip = 1 idea clara y concreta
 - Codigo SOLO cuando es necesario (comandos, SQL, bash, scripts, config)
 - Sin codigo para conceptos, principios, consejos
-- Terminos tecnicos en INGLCES cuando son estandar (cold start, hot function, load balancer, etc.)
+- **TODO en castellano (espanol)**: titulos y bodies siempre en espanol
+- Terminos tecnicos: se traducen al castellano y se pone la forma inglesa entre parentesis la primera vez (p. ej. "arranque en frio (cold start)", "equilibrador de carga (load balancer)", "cola de mensajes (message queue)")
 - Siglas/acronimos: expandir entre parentesis la primera vez (VPN = Virtual Private Network) + una frase breve que la explique en contexto
+- Los conceptos ("type": "concepto") deben tener una explicacion DIDACTICA y extensa: 3-5 parrafos con analogia o ejemplo cotidiano, como funciona por dentro, cuando usarlo y cuando evitarlo, y errores o malentendidos comunes
 
 ## Fuentes de datos
 
@@ -62,7 +64,7 @@ self es la referencia al objeto actual. En una clase, self.nombre = 'Juan' guard
 |--------|---------|---------|
 | Noticias scraping | `files/noticias_historico.json` | 10-15 noticias recientes como inspiracion |
 | GitHub trending | `files/herramientas.json` | 5-10 tools trending como inspiracion |
-| DB estatica | `scripts/utils/tips_database.json` | 150 tips como fallback |
+| DB estatica | `scripts/utils/tips_database.json` | 708 tips + `scripts/utils/concepts_database.json` 283 conceptos como fallback |
 | Historial | `tips_history.json` | Todos los titulos enviados (nunca repetir) |
 
 ## Categorias (266)
@@ -205,8 +207,11 @@ python scripts/tips_generator.py --stats
 ```
 scripts/
 ├── tips_generator.py              # script principal (Gemini + DB)
+├── tools/
+│   └── migrate_concepts_es.py     # traduce y mejora la DB de conceptos con Gemini
 └── utils/
-    └── tips_database.json         # 150 tips estaticos (fallback)
+    ├── tips_database.json         # 708 tips estaticos (fallback)
+    └── concepts_database.json     # 283 conceptos estaticos (fallback)
 files/
 ├── noticias_historico.json        # noticias scraping (inspiracion)
 └── herramientas.json              # GitHub trending (inspiracion)
@@ -223,7 +228,7 @@ El sistema garantiza cero repeticiones:
 2. **Gemini recibe el historial**: El prompt incluye los ultimos 200 titulos enviados
 3. **Noticias cambian**: Cada batch usa noticias diferentes del dia
 4. **Tools trending cambian**: Cada batch usa tools diferentes de GitHub
-5. **DB se agota**: Cuando se usan los 150 tips, solo Gemini genera (con fuente infinita)
+5. **DB se agota**: Cuando se usan los tips y conceptos de la DB, solo Gemini genera (con fuente infinita)
 
 ## Troubleshooting
 
