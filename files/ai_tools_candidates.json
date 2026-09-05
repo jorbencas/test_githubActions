@@ -1,5 +1,18 @@
 [
     {
+        "titulo": "Qwen/Qwen3-VL-8B-Instruct",
+        "enlace": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct",
+        "descripcion": "[image-text-to-text] transformers, safetensors, qwen3_vl — by ",
+        "lenguaje": "Python",
+        "estrellas": "1081",
+        "fuente": "HuggingFace Models",
+        "tipo": "herramienta",
+        "_downloads": 13183766,
+        "_likes": 1081,
+        "_pipeline": "image-text-to-text",
+        "_source_type": "hf_model"
+    },
+    {
         "titulo": "hexgrad/Kokoro-82M",
         "enlace": "https://huggingface.co/hexgrad/Kokoro-82M",
         "descripcion": "[text-to-speech] text-to-speech, en, arxiv:2306.07691 — by ",

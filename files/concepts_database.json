@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 45,
+    "total_concepts": 50,
     "categories": [
       "css_moderno",
       "devops",
@@ -11,7 +11,7 @@
       "patrones_diseno",
       "poo"
     ],
-    "last_scraped": "2026-09-05T03:20:39.318434"
+    "last_scraped": "2026-09-05T10:05:27.825604"
   },
   "concepts": [
     {
@@ -847,6 +847,96 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-05T03:20:01.456118"
+    },
+    {
+      "title": "Bioconductor: el ecosistema de R para bioinformática y análisis genómico",
+      "summary": "Bioconductor es el repositorio de paquetes R especializado en bioinformática y biología computacional. Surgió en 2001 como respuesta a la necesidad de herramientas estadísticas robustas para analizar ",
+      "explanation": "Bioconductor es el repositorio de paquetes R especializado en bioinformática y biología computacional. Surgió en 2001 como respuesta a la necesidad de herramientas estadísticas robustas para analizar los datos del Proyecto Genoma Humano, y desde entonces ha crecido hasta superar los 2.200 paquetes en 2026. Su estructura es diferente a CRAN: los paquetes tienen ciclos de release semestrales sincronizados con versiones de R, lo que garantiza compatibilidad entre ellos. Bioconductor 3.19, publicado en 2024, es la versión más reciente con soporte activo. La instalación de paquetes no se hace coninstall.packages()sino con BiocManager:# Instalar el gestor de Bioconductor\nif (!require(\"BiocManager\", quietly = TRUE))\n    install.packages(\"BiocManager\")\n\n# Instalar paquetes de Bioconductor\nBiocManager::install(\"DESeq2\")\nBiocManager::install(\"limma\")\nBiocManager::install(\"GenomicRanges\")\nBiocManager::install(\"Biostrings\")\nBiocManager::install(\"edgeR\")\n\n# Ver versión de Bioconductor instalada\nBiocManager::version()\n\n# Comprobar paquetes desactualizados\nBiocManager::valid()Las estructuras de datos de Bioconductor Bioconductor define sus propias clases S4 para representar datos genómicos. La más usada esSummarizedExperiment, que combina la matriz de conteos, los metadatos de las muestras y la anotación de los genes en un solo objeto:library(SummarizedExperiment)\n\n# Crear un SummarizedExperiment de ejemplo\nconteos <- matrix(\n  sample(1:1000, 500, replace = TRUE),\n  nrow  = 100,\n  ncol  = 5",
+      "code_example": "# Instalar el gestor de Bioconductor\nif (!require(\"BiocManager\", quietly = TRUE))\n    install.packages(\"BiocManager\")\n\n# Instalar paquetes de Bioconductor\nBiocManager::install(\"DESeq2\")\nBiocManager::install(\"limma\")\nBiocManager::install(\"GenomicRanges\")\nBiocManager::install(\"Biostrings\")\nBiocManager::install(\"edgeR\")\n\n# Ver versión de Bioconductor instalada\nBiocManager::version()\n\n# Comprobar paquetes desactualizados\nBiocManager::valid()",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-05T10:04:44.528841"
+    },
+    {
+      "title": "El método Steffen: por qué el embarque «perfecto» de aviones sigue sin funcionar",
+      "summary": "Cada cierto tiempo vuelve a circular el mismo vídeo. Una simulación con filas de asientos que se llenan en un orden matemático impecable, un locutor asegurando que el problema del embarque está resuel",
+      "explanation": "Cada cierto tiempo vuelve a circular el mismo vídeo. Una simulación con filas de asientos que se llenan en un orden matemático impecable, un locutor asegurando que el problema del embarque está resuelto desde 2008, y un titular que se repite en decenas de publicaciones cada año: «el método Steffen es dos veces más rápido y ninguna aerolínea lo usa por pura tozudez». Este verano lo comprobé en directo. Vuelo interno saliendo de Yogyakarta, Indonesia. La aerolínea había montado grupos de embarque complejos: por ventanilla, por centro y por pasillo, más grupos de los habituales. Un intento claro de aplicar algo parecido a lo del vídeo. El resultado fue caos absoluto. Pasajeros preguntando qué grupo les tocaba, gente colándose, padres preguntando si tenían que separarse de sus hijos porque estaban en grupos distintos. Cada grupo tardó más de cinco minutos en aclararse. El embarque completo fue más lento que uno cualquiera sin ninguna estrategia. No fue sorpresa. La simulación del vídeo no tiene familias, ni pasajeros con tarjeta de prioridad, ni retrasos, ni conexiones ajustadas, ni a esa persona que llega corriendo a la puerta de embarque cuando ya casi han terminado. Tampoco tiene a una sola persona con un micrófono intentando colocar a 180 desconocidos en el orden exacto que pide un paper académico.Quién inventó esto y qué decía realmente",
+      "code_example": "--- % de pasajeros que no respetan su turno: 0% ---\nMetodo                               Media (s)   Desv (s)\nWilMA (ventanilla-centro-pasillo)        940.0       48.1\nAleatorio                               1147.3       64.2\nSteffen                                 1155.9       45.0\nTrasera a delantera                     1534.8       74.8\n\n--- % de pasajeros que no respetan su turno: 15% ---\nMetodo                               Media (s)   Desv (s)\nWilMA (ventanilla-centro-pasillo)        983.3       54.4\nSteffen                                 1144.1       54.7\nAleatorio                               1152.4       72.6\nTrasera a delantera                     1444.4       79.6\n\n--- % de pasajeros que no respetan su turno: 35% ---\nMetodo                               Media (s)   Desv (s)\nWilMA (ventanilla-centro-pasillo)       1035.7       58.4\nSteffen                                 1137.9       57.7\nAleatorio                               1150.9       63.8\nTrasera a delantera                     1310.7       77.9",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-05T10:04:46.237381"
+    },
+    {
+      "title": "Julia con Python, R y C: interoperabilidad entre ecosistemas científicos",
+      "summary": "Una objeción frecuente a Julia es que Python y R llevan décadas acumulando librerías. No es una objeción tonta. La respuesta de Julia es directa: puedes llamar a código Python, R y C desde Julia sin s",
+      "explanation": "Una objeción frecuente a Julia es que Python y R llevan décadas acumulando librerías. No es una objeción tonta. La respuesta de Julia es directa: puedes llamar a código Python, R y C desde Julia sin salir del lenguaje. No como un truco marginal, sino como parte del diseño. Eso significa que puedes aprovechar cualquier librería de esos ecosistemas mientras el código crítico corre en Julia nativo.PyCall.jl: llamar a Python desde Julia PyCall.jlincrusta un intérprete de Python en el proceso de Julia. La conversión de tipos entre Python y Julia es automática para los tipos habituales: arrays de NumPy se convierten a arrays de Julia sin copia, los diccionarios de Python se convierten aDictde Julia, y así sucesivamente.using PyCall\n\n# Importar un módulo de Python\nnp = pyimport(\"numpy\")\nsklearn = pyimport(\"sklearn.linear_model\")\n\n# Usar numpy desde Julia\narr_py = np.array([1.0, 2.0, 3.0, 4.0, 5.0])\nmedia  = np.mean(arr_py)\nprintln(\"Media numpy: $media\")\n\n# Arrays numpy <-> Julia: conversión automática sin copia\narr_julia = [1.0, 2.0, 3.0, 4.0, 5.0]\narr_np_from_julia = PyArray(arr_julia)  # vista sin copia\n\n# Scikit-learn desde Julia\nX_train = np.array([[1.0, 2.0], [2.0, 3.0], [3.0, 4.0]])\ny_train = np.array([1.0, 2.0, 3.0])\n\nmodel = sklearn.LinearRegression()\nmodel.fit(X_train, y_train)\nprintln(\"Coeficientes: \", model.coef_)# Código Python inline con @py_str\npy\"\"\"\nimport matplotlib.pyplot as plt\nimport numpy as np\nx = np.linspace(0, 2*np.pi, 100)\nplt.plot(x, np.sin(x))\nplt.savefig('",
+      "code_example": "using PyCall\n\n# Importar un módulo de Python\nnp = pyimport(\"numpy\")\nsklearn = pyimport(\"sklearn.linear_model\")\n\n# Usar numpy desde Julia\narr_py = np.array([1.0, 2.0, 3.0, 4.0, 5.0])\nmedia  = np.mean(arr_py)\nprintln(\"Media numpy: $media\")\n\n# Arrays numpy <-> Julia: conversión automática sin copia\narr_julia = [1.0, 2.0, 3.0, 4.0, 5.0]\narr_np_from_julia = PyArray(arr_julia)  # vista sin copia\n\n# Scikit-learn desde Julia\nX_train = np.array([[1.0, 2.0], [2.0, 3.0], [3.0, 4.0]])\ny_train = np.array([1.0, 2.0, 3.0])\n\nmodel = sklearn.LinearRegression()\nmodel.fit(X_train, y_train)\nprintln(\"Coeficientes: \", model.coef_)",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-05T10:04:47.621350"
+    },
+    {
+      "title": "LuaRocks y el ecosistema de paquetes de Lua en 2026",
+      "summary": "Una de las críticas habituales a Lua es que su biblioteca estándar es intencionadamente pequeña. No hay módulo de HTTP, ni de JSON, ni de expresiones regulares PCRE, ni de filesystem completo. Esa fil",
+      "explanation": "Una de las críticas habituales a Lua es que su biblioteca estándar es intencionadamente pequeña. No hay módulo de HTTP, ni de JSON, ni de expresiones regulares PCRE, ni de filesystem completo. Esa filosofía de mínima superficie es una decisión de diseño consciente: el intérprete se mantiene pequeño y es la comunidad quien aporta los módulos adicionales a través de LuaRocks.¿Qué es LuaRocks? LuaRocks es el gestor de paquetes de Lua. Un paquete en LuaRocks se llamarocky consiste en código Lua puro, extensiones C compiladas, o una combinación de ambos. El registro público está enluarocks.orgy cuenta con miles de paquetes disponibles. LuaRocks descarga las fuentes, las compila si hace falta y las instala en el directorio correcto para querequirelas encuentre.Instalación y uso básico# Instalar LuaRocks (Ubuntu/Debian)\nsudo apt install luarocks\n\n# Instalar un paquete globalmente\nluarocks install luasocket\n\n# Instalar una versión concreta\nluarocks install lua-cjson 2.1.0\n\n# Instalar solo para el usuario actual (sin sudo)\nluarocks install --local penlight\n\n# Listar paquetes instalados\nluarocks list\n\n# Buscar un paquete en el registro\nluarocks search http\n\n# Ver información de un paquete\nluarocks show busted\n\n# Eliminar un paquete\nluarocks remove luasocketPaquetes imprescindibles en 2026luasocket: networking básico La biblioteca de red más usada en Lua. Proporciona TCP, UDP, HTTP simple y DNS:local http = require(\"socket.http\")\nlocal ltn12 = require(\"ltn12\")\n\n-- GET sencillo\nlocal bod",
+      "code_example": "# Instalar LuaRocks (Ubuntu/Debian)\nsudo apt install luarocks\n\n# Instalar un paquete globalmente\nluarocks install luasocket\n\n# Instalar una versión concreta\nluarocks install lua-cjson 2.1.0\n\n# Instalar solo para el usuario actual (sin sudo)\nluarocks install --local penlight\n\n# Listar paquetes instalados\nluarocks list\n\n# Buscar un paquete en el registro\nluarocks search http\n\n# Ver información de un paquete\nluarocks show busted\n\n# Eliminar un paquete\nluarocks remove luasocket",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-05T10:04:48.986011"
+    },
+    {
+      "title": "Gestión de errores en Gleam: Result, Option y el flujo sin excepciones",
+      "summary": "Gleam no tiene excepciones. No haytry/catch, no haythrow, no hayrescue. Para algunos que vienen de Python, Java o Ruby esto puede parecer una limitación, pero en la práctica es una decisión de diseño ",
+      "explanation": "Gleam no tiene excepciones. No haytry/catch, no haythrow, no hayrescue. Para algunos que vienen de Python, Java o Ruby esto puede parecer una limitación, pero en la práctica es una decisión de diseño que simplifica enormemente el razonamiento sobre el flujo del programa. En Gleam los errores son valores. Se representan con dos tipos del núcleo del lenguaje:Result(ok, err)para operaciones que pueden fallar yOption(a)para valores que pueden no existir. El compilador obliga a manejarlos explícitamente.Result: Ok o Error, sin sorpresas Result(ok, err)es un tipo con dos variantes:Ok(value) la operación tuvo éxito y aquí está el valorError(reason) la operación falló y aquí está la razónimport gleam/int\n\npub fn divide(a: Int, b: Int) -> Result(Int, String) {\n  case b {\n    0 -> Error(\"División por cero\")\n    _ -> Ok(a / b)\n  }\n}\n\npub fn main() {\n  case divide(10, 2) {\n    Ok(result) -> io.println(\"Resultado: \" <> int.to_string(result))\n    Error(msg)  -> io.println(\"Error: \" <> msg)\n  }\n} El compilador no te deja usar el valor de unResultsin comprobar primero si esOkoError. Eso elimina los «olvidé manejar el error» que son tan comunes en lenguajes dinámicos.Option: Some o None en lugar de null",
+      "code_example": "import gleam/int\n\npub fn divide(a: Int, b: Int) -> Result(Int, String) {\n  case b {\n    0 -> Error(\"División por cero\")\n    _ -> Ok(a / b)\n  }\n}\n\npub fn main() {\n  case divide(10, 2) {\n    Ok(result) -> io.println(\"Resultado: \" <> int.to_string(result))\n    Error(msg)  -> io.println(\"Error: \" <> msg)\n  }\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-05T10:04:50.352036"
     }
   ]
 }
