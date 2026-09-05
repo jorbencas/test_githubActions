@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 52,
+    "total_concepts": 54,
     "categories": [
       "css_moderno",
       "devops",
@@ -11,7 +11,7 @@
       "patrones_diseno",
       "poo"
     ],
-    "last_scraped": "2026-09-05T14:44:55.398967"
+    "last_scraped": "2026-09-05T20:02:06.984330"
   },
   "concepts": [
     {
@@ -973,6 +973,42 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-05T14:44:17.085245"
+    },
+    {
+      "title": "Configuración en Rust con config y figment: múltiples fuentes, entornos y validación",
+      "summary": "Una aplicación lista para producción necesita configuración flexible: valores distintos para desarrollo, staging y producción, variables de entorno para secretos y ficheros TOML o YAML para la configu",
+      "explanation": "Una aplicación lista para producción necesita configuración flexible: valores distintos para desarrollo, staging y producción, variables de entorno para secretos y ficheros TOML o YAML para la configuración base. Manejar esto a mano constd::env::var()disperso por todo el código es propenso a errores y difícil de mantener. Los cratesconfigyfigmentofrecen una solución estructurada: cargar configuración desde múltiples fuentes, combinarlas con prioridades y deserializarlas a structs tipadas con serde.El crate config[dependencies]\nconfig = \"0.14\"\nserde = { version = \"1\", features = [\"derive\"] }\ntokio = { version = \"1\", features = [\"full\"] } Define la struct de configuración:use serde::{Deserialize, Serialize};\n\n#[derive(Debug, Deserialize, Serialize)]\npub struct ConfigApp {\n    pub servidor: ConfigServidor,\n    pub base_datos: ConfigDB,\n    pub log: ConfigLog,\n}\n\n#[derive(Debug, Deserialize, Serialize)]\npub struct ConfigServidor {\n    pub host: String,\n    pub puerto: u16,\n    pub workers: Option<usize>,\n}\n\n#[derive(Debug, Deserialize, Serialize)]\npub struct ConfigDB {\n    pub url: String,\n    pub max_conexiones: u32,\n    pub min_conexiones: u32,\n}\n\n#[derive(Debug, Deserialize, Serialize)]\npub struct ConfigLog {\n    pub nivel: String,\n    pub json: bool,\n} Ficheroconfig/default.toml:[servidor]\nhost = \"0.0.0.0\"\npuerto = 3000\nworkers = 4\n\n[base_datos]\nurl = \"postgresql://localhost/mi_app_dev\"\nmax_conexiones = 10\nmin_conexiones = 2\n\n[log]\nnivel = \"info\"\njson = false",
+      "code_example": "[dependencies]\nconfig = \"0.14\"\nserde = { version = \"1\", features = [\"derive\"] }\ntokio = { version = \"1\", features = [\"full\"] }",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-05T20:01:29.725140"
+    },
+    {
+      "title": "Por qué medio ecosistema de software se está pasando a Rust (y quién se resiste)",
+      "summary": "El otro día actualicé mi entorno de Python conuvy ni me paré a pensar que estaba escrito en Rust. Busqué una función en un proyecto que no conocía conripgrepy la respuesta llegó antes de que soltara e",
+      "explanation": "El otro día actualicé mi entorno de Python conuvy ni me paré a pensar que estaba escrito en Rust. Busqué una función en un proyecto que no conocía conripgrepy la respuesta llegó antes de que soltara el teclado. Y entre medias, sin que nadie me avisara, mi sistema había cambiado de idioma por debajo. No soy el único al que le ha pasado. En diciembre de 2025 los mantenedores delkernel de Linuxse reunieron en Tokio y acordaron algo que llevaba años en el aire: Rust deja de ser «experimental» dentro del kernel. Ubuntu 25.10 trae por defectosudo-rsen vez del sudo de toda la vida. Debian ha anunciado que, a partir de mayo de 2026,APTel gestor de paquetes que hay debajo de media internet dependerá de Rust de forma obligatoria, y a las arquitecturas que no tengan un compilador Rust les da seis meses para buscarse la vida. Microsoft está reescribiendo partes de Windows y de su librería criptográfica. Y en Bun se pasaron once días convirtiendo medio millón de líneas de Zig en Rust usando decenas de agentes de Claude en paralelo. Nada de esto lo decidió nadie de un plumazo. Fue pasando: una herramienta sustituyó a otra, una librería cambió por debajo de un comando que llevabas usando años, y un día te encuentras con que media caja de herramientas habla un idioma distinto. Vale la pena pararse a mirar los números reales detrás de este movimiento, lo que ha costado a quien lo ha probado y por qué, pese a todo, ni C++ ni Go ni Zig ni Swift ni Kotlin se han quedado quietos mirando.El fall",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-05T20:01:31.279281"
     }
   ]
 }

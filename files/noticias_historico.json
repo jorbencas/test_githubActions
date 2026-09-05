@@ -1,5 +1,47 @@
 [
     {
+        "titulo": "\"Te lo juro por Snoopy\": así fue el proceso creativo detrás de la esfera más compleja de la historia del Apple Watch",
+        "enlace": "https://www.applesfera.com/curiosidades/te-juro-snoopy-asi-fue-proceso-creativo-detras-esfera-compleja-historia-apple-watch-1",
+        "fuente": "Applesfera",
+        "tipo": "noticia",
+        "f": "05/09",
+        "fecha_publicacion": "2026-09-05T16:00:28Z",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "05/09/2026",
+        "ts": "2026-09-05T20:00:43.421741",
+        "traducido": true
+    },
+    {
+        "titulo": "Claude Fable 5",
+        "enlace": "https://docs.anthropic.com/docs/en/release-notes/system-prompts/claude-fable-5",
+        "fuente": "Claude Blog",
+        "tipo": "noticia",
+        "f": "05/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "05/09/2026",
+        "ts": "2026-09-05T20:00:48.267153",
+        "traducido": true
+    },
+    {
+        "titulo": "Claude Opus 4.8",
+        "enlace": "https://docs.anthropic.com/docs/en/release-notes/system-prompts/claude-opus-4-8",
+        "fuente": "Claude Blog",
+        "tipo": "noticia",
+        "f": "05/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "05/09/2026",
+        "ts": "2026-09-05T20:00:48.267495",
+        "traducido": true
+    },
+    {
         "titulo": "Hikers rescued after using Google Gemini for planning",
         "enlace": "https://techcrunch.com/2026/09/05/hikers-rescued-after-using-google-gemini-for-planning/",
         "fuente": "TechCrunch",
