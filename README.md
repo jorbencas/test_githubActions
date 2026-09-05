@@ -224,7 +224,7 @@ Todos los scripts se ejecutan con `python -m` desde la raíz del proyecto:
 
 ---
 
-## 🤖 GitHub Actions — 15 Workflows
+## 🤖 GitHub Actions — 14 Workflows
 
 | Workflow | Horario | Qué hace | Por qué |
 |----------|---------|----------|---------|
@@ -235,7 +235,6 @@ Todos los scripts se ejecutan con `python -m` desde la raíz del proyecto:
 | **daily_ai_tools** | Cada 3 horas | Herramientas IA via Telegram (Gemini + DB) | Contenido fresco para el bot |
 | **send_email** | Diario 09:00 UTC | Newsletter Mailgun (agrupada por fuente + vídeos) | Resumen diario por email |
 | **send_telegram** | Cada 30 min | Telegram + TTS (cache para dedup) | Noticias en tiempo real |
-| **telegram_ai_bot** | Cada 15 min | Bot IA local: responde menciones/respuestas/`/ai` con Qwen 2.5 vía Ollama | Bot conversacional local |
 | **clean_news** | Trimestral | Validación de enlaces | Mantener links vivos |
 | **hunt_challenges** | Manual | Generación de retos con IA | Cuando hay cuota disponible |
 | **optimize_images** | Dispatch desde blog | Optimización de imágenes | Para el blog |
@@ -451,12 +450,6 @@ Variables del repositorio:
 
 Los workflows instalan **Ollama con Qwen 2.5 1.5B** en el propio runner de Actions, con el modelo cacheado (`actions/cache`, clave compartida `ollama-qwen2.5-1.5b`):
 
-- **`telegram_ai_bot`** — bot conversacional en Telegram 100% local:
-  - Mencionar al bot: `@bot ¿qué es un closure?`
-  - Comando directo: `/ai explícame async/await`
-  - Responder a un mensaje del bot citándolo → usa el texto citado como contexto
-  - `/help` → muestra la ayuda de uso en el chat
-  - Sin estado en git: confirma los updates en el servidor de Telegram y filtra mensajes >15 min, así no interfiere con otros workflows
 - **Fallback de traducción** (`scrape_hourly`, `scrape_6h`) — si Gemini falla (cuota/404), los títulos de noticias se traducen con Qwen local; si Ollama tampoco está disponible, se omite silenciosamente
 
 ---
