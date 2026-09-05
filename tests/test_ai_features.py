@@ -24,9 +24,9 @@ SALUDO_CONFIG = SCRIPT_DIR / "scripts" / "utils" / "saludos_config.json"
 
 
 class TestAiCategories:
-    def test_150_categories(self):
+    def test_category_count(self):
         data = json.loads(AI_CATS_PATH.read_text(encoding="utf-8"))
-        assert len(data["categorias"]) == 150
+        assert len(data["categorias"]) == 166
 
     def test_all_categories_have_emoji_and_nombre(self):
         data = json.loads(AI_CATS_PATH.read_text(encoding="utf-8"))
@@ -78,7 +78,7 @@ class TestAiToolsDatabase:
 class TestAiToolsGenerator:
     def test_load_categories_pobla_mapas(self):
         load_categories()
-        assert len(ai_gen.CAT_NAMES) == 150
+        assert len(ai_gen.CAT_NAMES) == 166
 
     def test_format_tool_message_incluye_flujo_y_combinaciones(self):
         tool = {
