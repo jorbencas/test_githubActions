@@ -3709,468 +3709,6 @@
         "traducido": true
     },
     {
-        "titulo": "¿Qué esperar en la presentación de Apple el 9 de septiembre?",
-        "enlace": "https://www.tomshardware.com/tech-industry/artificial-intelligence/frontier-ai-faces-pricing-reckoning-as-token-volume-explodes-25-fold-mid-tier-models-deliver-90-percent-of-flagship-capability-at-one-sixth-the-cost",
-        "fuente": "Tom's Hardware",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 15:21:56 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:33.213648",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://www.tomshardware.com/video-games/pc-gaming/nvidia-app-update-fails-to-block-unofficial-dlss-multi-frame-generation-on-rtx-40-series-modders-restore-support-across-multiple-games-within-hours",
-        "fuente": "Tom's Hardware",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 14:56:38 +0000",
-        "badge": "Tech",
-        "categoria": "⚡ Hardware",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:33.213657",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://blog.google/innovation-and-ai/products/gemini-app/better-tracks-lyria-gemini/",
-        "fuente": "Google Blog",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 16:00:00 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:33.377265",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://blog.google/products-and-platforms/products/translate/google-translate-ios-android-upgrades/",
-        "fuente": "Google Blog",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 16:00:00 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:33.377300",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://www.phoronix.com/review/amazon-linux-2027-benchmarks",
-        "fuente": "Phoronix",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 11:33:21 -0400",
-        "badge": "Tech",
-        "categoria": "⚡ Hardware",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:35.078655",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://www.phoronix.com/news/NetworkManager-AI-Canary",
-        "fuente": "Phoronix",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 10:52:01 -0400",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:35.078674",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://www.lesswrong.com/posts/RPWoz6tYQtyinCyrn/f-ing-pulleys-how-do-they-work",
-        "fuente": "LessWrong AI",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 16:57:04 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:37.424581",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://www.lesswrong.com/posts/sFgJhr5uvKn3nDaSM/safe-r-self-driving-labs-1-1",
-        "fuente": "LessWrong AI",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 16:20:02 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:37.424612",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://www.lesswrong.com/posts/YyAMz52wDxnLhwvWL/training-models-to-predict-and-explain-their-in-the-wild",
-        "fuente": "LessWrong AI",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 16:16:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:37.424643",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://www.lesswrong.com/posts/m7SZLkkxoeus3eFP8/claude-fable-5-1-and-mythos-5-1-the-system-card",
-        "fuente": "LessWrong AI",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 16:10:54 GMT",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:37.424655",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://www.lesswrong.com/posts/g4eaRCynouiBi2LjQ/almost-nobody-is-funded-to-figure-out-what-work-would-solve",
-        "fuente": "LessWrong AI",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 15:57:26 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:37.424683",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://www.lesswrong.com/posts/7uwnsFibbejWYzF2z/discovery-of-a-new-openai-agent-message-board",
-        "fuente": "LessWrong AI",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 14:46:46 GMT",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:37.424695",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://developer.nvidia.com/blog/building-a-memory-driven-agent-with-nvidia-nemoclaw/",
-        "fuente": "NVIDIA Developer Blog",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "2026-09-04T18:04:55Z",
-        "badge": "Tech",
-        "categoria": "⚡ Hardware",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:37.842748",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://developer.nvidia.com/blog/frontier-reasoning-reaches-the-edge-how-to-deploy-and-optimize-models-on-nvidia-jetson/",
-        "fuente": "NVIDIA Developer Blog",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "2026-09-04T16:21:04Z",
-        "badge": "Tech",
-        "categoria": "⚡ Hardware",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:37.842763",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://thehackernews.com/2026/09/phishing-campaign-sends-millions-of.html",
-        "fuente": "The Hacker News",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 21:27:15 +0530",
-        "badge": "Tech",
-        "categoria": "🔒 Ciberseguridad",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:38.529893",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://thehackernews.com/2026/09/postgresql-fixes-12-year-old-logical.html",
-        "fuente": "The Hacker News",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 20:50:19 +0530",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:38.529930",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://thehackernews.com/2026/09/new-ted-backdoor-hides-inside-victims.html",
-        "fuente": "The Hacker News",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 20:21:13 +0530",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:38.529960",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://www.bleepingcomputer.com/news/security/idscan-sued-over-alleged-data-breach-affecting-153-million-drivers/",
-        "fuente": "BleepingComputer",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 12:56:45 -0400",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:38.927671",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://www.bleepingcomputer.com/news/security/hackers-target-critical-citrix-netscaler-auth-bypass-in-attacks/",
-        "fuente": "BleepingComputer",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 11:25:59 -0400",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:38.927718",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://www.securityweek.com/in-other-news-microsofts-cloud-patches-hacked-dropbox-accounts-guardios-1-1b-valuation/",
-        "fuente": "SecurityWeek",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 16:18:30 +0000",
-        "badge": "Tech",
-        "categoria": "📊 Negocios",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:39.687214",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://www.securityweek.com/hpe-patches-critical-rce-vulnerabilities-in-aos-cx/",
-        "fuente": "SecurityWeek",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 16:11:06 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:39.687261",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://www.securityweek.com/openai-pledges-1-billion-to-bring-frontier-ai-to-critical-infrastructure-defenders/",
-        "fuente": "SecurityWeek",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 16:07:22 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:39.687279",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://www.darkreading.com/cybersecurity-operations/companies-six-months-prepare-automated-attacks",
-        "fuente": "Dark Reading",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 15:57:31 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:39.847132",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://www.darkreading.com/cyberattacks-data-breaches/ai-warning-letter-missed-people",
-        "fuente": "Dark Reading",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Thu, 03 Sep 2026 17:23:14 GMT",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:39.847254",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://therecord.media/scam-compounds-coordination-us-uk-memorandum",
-        "fuente": "The Record",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 15:42:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:39.862999",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://therecord.media/uk-account-hack-losses-surge-as-reporting-changes",
-        "fuente": "The Record",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 14:45:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:39.863045",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://blogs.cisco.com/security/frontier-ai-just-raised-the-stakes-and-the-old-playbook-wont-hold-up/",
-        "fuente": "Cisco Security Blog",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 15:00:46 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:44.042811",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://www.malwarebytes.com/blog/inside-malwarebytes/2026/09/the-hidden-work-of-modernizing-malwarebytes",
-        "fuente": "Malwarebytes Labs",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 17:15:42 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:08:54.901713",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://www.theregister.com/ai-and-ml/2026/09/04/rogue-openai-agents-used-dead-german-web-site-to-communicate-in-may-months-before-hugging-face-incident/5294554",
-        "fuente": "The Register Security",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 18:02:08 +0200",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:09:08.397870",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://the-decoder.com/openais-gpt-6-astra-hallucinates-less-but-remains-vulnerable-to-hidden-prompt-injections/",
-        "fuente": "The Decoder RSS",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 17:23:35 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:09:12.103212",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://pub.towardsai.net/why-vector-search-alone-isnt-enough-building-ai-property-search-with-advanced-filtering-1e60ae82b259?source=rss----98111c9905da---4",
-        "fuente": "Towards AI",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 17:01:03 GMT",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:09:14.387512",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://pub.towardsai.net/i-cleared-all-4-anthropic-claude-certifications-what-you-actually-need-to-know-and-what-you-can-27e3e8d4bb6f?source=rss----98111c9905da---4",
-        "fuente": "Towards AI",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 16:01:03 GMT",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:09:14.387534",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué será de la era de John Ternus?",
-        "enlace": "https://pub.towardsai.net/claude-fable-5-1-just-shipped-i-made-it-scroll-a-commodore-64-in-eight-directions-at-50-fps-5d2bbf07f8c3?source=rss----98111c9905da---4",
-        "fuente": "Towards AI",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 15:01:03 GMT",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T18:09:14.387549",
-        "traducido": true
-    },
-    {
         "titulo": "TrackMCP",
         "enlace": "https://www.producthunt.com/products/trackmcp",
         "fuente": "Product Hunt RSS",
@@ -6083,19 +5621,6 @@
         "origen": "rss",
         "fecha_real": "04/09/2026",
         "ts": "2026-09-04T14:48:41.727021"
-    },
-    {
-        "titulo": "GPT-6 Astra",
-        "enlace": "https://www.producthunt.com/products/openai",
-        "fuente": "Product Hunt RSS",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "2026-09-03T13:14:40-07:00",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T14:48:43.937764"
     },
     {
         "titulo": "Inline",
@@ -10209,20 +9734,6 @@
         "traducido": true
     },
     {
-        "titulo": "GPT-6 Astra",
-        "enlace": "https://openai.com/index/gpt-6-astra/",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "03/09",
-        "fecha_publicacion": "Thu, 03 Sep 2026 18:41:05 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "03/09/2026",
-        "ts": "2026-09-03T22:18:02.237212",
-        "traducido": true
-    },
-    {
         "titulo": "Las represas artificiales de castores hicieron que las tasas de supervivencia del salmón coho juvenil pasaran del 8% al 60%",
         "enlace": "https://www.discoverwildlife.com/animal-facts/artificial-beaver-dams-california",
         "fuente": "Hacker News",
@@ -10881,34 +10392,6 @@
         "traducido": true
     },
     {
-        "titulo": "Lo bueno, lo malo y lo feo en ciberseguridad – Semana 32 (2026)",
-        "enlace": "https://www.sentinelone.com/blog/the-good-the-bad-and-the-ugly-in-cybersecurity-week-32-8/",
-        "fuente": "SentinelOne Labs",
-        "tipo": "noticia",
-        "f": "03/09",
-        "fecha_publicacion": "Fri, 07 Aug 2026 13:00:57 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "03/09/2026",
-        "ts": "2026-09-03T22:18:20.767543",
-        "traducido": true
-    },
-    {
-        "titulo": "Guía de respuesta a incidentes para investigaciones de AWS CloudTrail – Parte 2",
-        "enlace": "https://aws.amazon.com/blogs/security/incident-response-guide-for-aws-cloudtrail-investigations-part-2/",
-        "fuente": "AWS Security Blog",
-        "tipo": "noticia",
-        "f": "03/09",
-        "fecha_publicacion": "Thu, 03 Sep 2026 21:15:53 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "03/09/2026",
-        "ts": "2026-09-03T22:18:27.451817",
-        "traducido": true
-    },
-    {
         "titulo": "Múltiples configuraciones de publicación confiables para npm",
         "enlace": "https://github.blog/changelog/2026-09-03-multiple-trusted-publishing-configurations-for-npm",
         "fuente": "GitHub Changelog",
@@ -10962,20 +10445,6 @@
         "origen": "rss",
         "fecha_real": "03/09/2026",
         "ts": "2026-09-03T22:18:41.975459",
-        "traducido": true
-    },
-    {
-        "titulo": "Gemini 3.8 Flash ya está disponible en GitHub Copilot",
-        "enlace": "https://github.blog/changelog/2026-09-03-gemini-3-8-flash-is-now-available-in-github-copilot",
-        "fuente": "GitHub Changelog",
-        "tipo": "noticia",
-        "f": "03/09",
-        "fecha_publicacion": "Thu, 03 Sep 2026 18:50:38 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "03/09/2026",
-        "ts": "2026-09-03T22:18:41.975470",
         "traducido": true
     },
     {
@@ -11931,20 +11400,6 @@
         "traducido": true
     },
     {
-        "titulo": "Lanzamiento HN: Mireye (YC S26) – Infraestructura para agentes de IA en el mundo físico",
-        "enlace": "https://news.ycombinator.com/item?id=49552616",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "03/09",
-        "fecha_publicacion": "Thu, 03 Sep 2026 16:24:13 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "03/09/2026",
-        "ts": "2026-09-03T19:10:55.819909",
-        "traducido": true
-    },
-    {
         "titulo": "El capital de riesgo ya no es lo que era",
         "enlace": "https://www.anildash.com/2026/09/02/cancer-capital/",
         "fuente": "Hacker News",
@@ -12841,20 +12296,6 @@
         "traducido": true
     },
     {
-        "titulo": "Lo bueno, lo malo y lo feo en ciberseguridad – Semana 33 (2026)",
-        "enlace": "https://www.sentinelone.com/blog/the-good-the-bad-and-the-ugly-in-cybersecurity-week-33-8/",
-        "fuente": "SentinelOne Labs",
-        "tipo": "noticia",
-        "f": "03/09",
-        "fecha_publicacion": "Fri, 14 Aug 2026 15:21:37 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "03/09/2026",
-        "ts": "2026-09-03T19:11:17.506026",
-        "traducido": true
-    },
-    {
         "titulo": "El contrabando ASCII pasa de la inyección de prompts de IA a la evasión de phishing",
         "enlace": "https://www.microsoft.com/en-us/security/blog/2026/09/03/ascii-smuggling-crosses-over-from-ai-prompt-injection-to-phishing-evasion/",
         "fuente": "Microsoft Security Blog",
@@ -13444,19 +12885,6 @@
         "origen": "rss",
         "fecha_real": "03/09/2026",
         "ts": "2026-09-03T15:57:58.774319"
-    },
-    {
-        "titulo": "Ask HN: Why are OpenAI, Claude, and Grok simultaneously down? Coincidence?",
-        "enlace": "https://news.ycombinator.com/item?id=49551096",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "03/09",
-        "fecha_publicacion": "Thu, 03 Sep 2026 15:07:01 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "03/09/2026",
-        "ts": "2026-09-03T15:57:58.774348"
     },
     {
         "titulo": "Codex Is Down",
@@ -14627,19 +14055,6 @@
         "origen": "rss",
         "fecha_real": "03/09/2026",
         "ts": "2026-09-03T15:58:19.834227"
-    },
-    {
-        "titulo": "The Good, the Bad and the Ugly in Cybersecurity – Week 34 (2026)",
-        "enlace": "https://www.sentinelone.com/blog/the-good-the-bad-and-the-ugly-in-cybersecurity-week-34-8/",
-        "fuente": "SentinelOne Labs",
-        "tipo": "noticia",
-        "f": "03/09",
-        "fecha_publicacion": "Fri, 21 Aug 2026 13:00:56 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "03/09/2026",
-        "ts": "2026-09-03T15:58:22.906797"
     },
     {
         "titulo": "Your Best Analyst Shouldn't Be a Person. It Should Be a Capability Everyone Can Summon.",
@@ -15873,20 +15288,6 @@
         "traducido": true
     },
     {
-        "titulo": "Audacity 4.0",
-        "enlace": "https://github.com/audacity/audacity/releases/tag/Audacity-4.0.0",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "03/09",
-        "fecha_publicacion": "Thu, 03 Sep 2026 10:53:08 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "03/09/2026",
-        "ts": "2026-09-03T11:56:24.139362",
-        "traducido": true
-    },
-    {
         "titulo": "Tres colegialas en Kinsale arrancaron una planta de guisantes cubierta de verrugas (2016)",
         "enlace": "https://scienceblog.com/b-three-schoolgirls-in-kinsale-pulled-up-a-pea-plant-covered-in-warts-and-instead-of-binning-it-spent-three-years-testing-13000-seeds-in-a-spare-bedroom-the-bacteria-living-in-those-warts-made-barley/",
         "fuente": "Hacker News",
@@ -16640,20 +16041,6 @@
         "origen": "rss",
         "fecha_real": "03/09/2026",
         "ts": "2026-09-03T11:56:41.839203",
-        "traducido": true
-    },
-    {
-        "titulo": "astro@7.3.0",
-        "enlace": "https://github.com/withastro/astro/releases/tag/astro%407.3.0",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "03/09",
-        "fecha_publicacion": "2026-09-03T10:29:21Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "03/09/2026",
-        "ts": "2026-09-03T11:56:41.839222",
         "traducido": true
     },
     {
@@ -17810,20 +17197,6 @@
         "origen": "rss",
         "fecha_real": "03/09/2026",
         "ts": "2026-09-03T06:52:20.737686",
-        "traducido": true
-    },
-    {
-        "titulo": "Launch HN: RonanRX (YC S26) – Péptidos personalizados y GLP-1s",
-        "enlace": "https://news.ycombinator.com/item?id=49543530",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "03/09",
-        "fecha_publicacion": "Wed, 02 Sep 2026 22:36:04 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "03/09/2026",
-        "ts": "2026-09-03T06:52:20.737770",
         "traducido": true
     },
     {
@@ -20795,20 +20168,6 @@
         "traducido": true
     },
     {
-        "titulo": "Muse Spark 1.3",
-        "enlace": "https://developer.meta.com/ai/models/muse-spark/",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "02/09",
-        "fecha_publicacion": "Wed, 02 Sep 2026 19:35:04 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "02/09/2026",
-        "ts": "2026-09-02T20:32:14.879463",
-        "traducido": true
-    },
-    {
         "titulo": "Presentamos Muse Spark 1.3.",
         "enlace": "https://research.meta.ai/blog/introducing-muse-spark-1-3",
         "fuente": "Hacker News",
@@ -21746,20 +21105,6 @@
         "traducido": true
     },
     {
-        "titulo": "La administración Trump apoya a OpenAI en la demanda por derechos de autor del NYT.",
-        "enlace": "https://www.theverge.com/ai-artificial-intelligence/988344/trump-administration-new-york-times-openai-lawsuit",
-        "fuente": "The Verge",
-        "tipo": "noticia",
-        "f": "02/09",
-        "fecha_publicacion": "2026-09-02T12:12:25-04:00",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "02/09/2026",
-        "ts": "2026-09-02T17:36:30.875338",
-        "traducido": true
-    },
-    {
         "titulo": "Google envía a MrBeast a la naturaleza, armado con IA.",
         "enlace": "https://www.theverge.com/tech/988355/mrbeast-google-partnership-gemini-fitbit",
         "fuente": "The Verge",
@@ -22289,20 +21634,6 @@
         "origen": "rss",
         "fecha_real": "02/09/2026",
         "ts": "2026-09-02T17:36:36.975867",
-        "traducido": true
-    },
-    {
-        "titulo": "Gemini 3.8 Flash y 3.8 Flash Cyber.",
-        "enlace": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "02/09",
-        "fecha_publicacion": "Wed, 02 Sep 2026 15:12:40 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "02/09/2026",
-        "ts": "2026-09-02T17:36:36.975877",
         "traducido": true
     },
     {
@@ -23034,20 +22365,6 @@
         "traducido": true
     },
     {
-        "titulo": "Gemini 3.8 Flash ya disponible en AI Gateway.",
-        "enlace": "https://vercel.com/changelog/gemini-3-8-flash-now-available-on-ai-gateway",
-        "fuente": "Vercel Blog",
-        "tipo": "noticia",
-        "f": "02/09",
-        "fecha_publicacion": "2026-09-02T00:00:00.000Z",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "02/09/2026",
-        "ts": "2026-09-02T17:36:53.090134",
-        "traducido": true
-    },
-    {
         "titulo": "Por qué Astra de OpenAI podría hacer que el \"doom\" de la IA sea más difícil de prevenir.",
         "enlace": "https://www.lesswrong.com/posts/AayZFiHRdiFYWuxyx/why-openai-s-astra-could-make-ai-doom-harder-to-prevent",
         "fuente": "LessWrong AI",
@@ -23552,20 +22869,6 @@
         "traducido": true
     },
     {
-        "titulo": "Atacantes explotan activamente una vulnerabilidad crítica en el plugin Elementor Pro.",
-        "enlace": "https://www.wordfence.com/blog/2026/09/attackers-actively-exploiting-critical-vulnerability-in-elementor-pro-plugin/",
-        "fuente": "Wordfence Blog",
-        "tipo": "noticia",
-        "f": "02/09",
-        "fecha_publicacion": "Wed, 02 Sep 2026 15:07:36 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "02/09/2026",
-        "ts": "2026-09-02T17:37:09.622210",
-        "traducido": true
-    },
-    {
         "titulo": "Las estafas de soporte técnico ahora lucen diferentes. Esto es a lo que debes estar atento.",
         "enlace": "https://www.malwarebytes.com/blog/scams/2026/09/tech-support-scams-look-different-now-heres-what-to-watch-for",
         "fuente": "Malwarebytes Labs",
@@ -23605,20 +22908,6 @@
         "origen": "rss",
         "fecha_real": "02/09/2026",
         "ts": "2026-09-02T17:37:25.415352",
-        "traducido": true
-    },
-    {
-        "titulo": "Gemini 3.8 Flash es el tercer modelo económico de Google en seis semanas, mientras los modelos \"frontier\" siguen desaparecidos.",
-        "enlace": "https://the-decoder.com/gemini-3-8-flash-is-googles-third-budget-model-in-six-weeks-while-frontier-models-remain-mia/",
-        "fuente": "The Decoder RSS",
-        "tipo": "noticia",
-        "f": "02/09",
-        "fecha_publicacion": "Wed, 02 Sep 2026 16:59:29 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "02/09/2026",
-        "ts": "2026-09-02T17:37:30.188476",
         "traducido": true
     },
     {
@@ -24149,20 +23438,6 @@
         "imagen_url_original": "",
         "fecha_real": "02/09/2026",
         "ts": "2026-09-02T16:08:41.918006",
-        "traducido": true
-    },
-    {
-        "titulo": "Cuando la corriente del Golfo se despegue de Hatteras empezará la cuenta atrás: 25 años hasta que Europa cambie de clima",
-        "enlace": "https://www.xataka.com/ecologia-y-naturaleza/cuando-corriente-golfo-se-despegue-hatteras-empezara-cuenta-atras-25-anos-que-europa-cambie-clima",
-        "fuente": "Xataka",
-        "tipo": "noticia",
-        "f": "02/09",
-        "fecha_publicacion": "2026-09-02T13:00:17Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "",
-        "fecha_real": "02/09/2026",
-        "ts": "2026-09-02T13:15:47.466506",
         "traducido": true
     },
     {
@@ -26084,20 +25359,6 @@
         "traducido": true
     },
     {
-        "titulo": "Claude Fable 5.1",
-        "enlace": "https://www.producthunt.com/products/claude-fable-5-1",
-        "fuente": "Product Hunt RSS",
-        "tipo": "noticia",
-        "f": "02/09",
-        "fecha_publicacion": "2026-09-01T14:04:24-07:00",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "02/09/2026",
-        "ts": "2026-09-02T13:16:46.624327",
-        "traducido": true
-    },
-    {
         "titulo": "Dyson CameraJet",
         "enlace": "https://www.producthunt.com/products/dyson-humidifier",
         "fuente": "Product Hunt RSS",
@@ -26221,20 +25482,6 @@
         "imagen_url_original": "https://i.blogs.es/55f17b/22611875006_1cd951648a_k/375_142.jpeg",
         "fecha_real": "02/09/2026",
         "ts": "2026-09-02T10:47:05.895986",
-        "traducido": true
-    },
-    {
-        "titulo": "María Cristina Clemente, notaria, asegura que Hacienda te debe mucho dinero: \"Si compraste una vivienda antes de 2013\"",
-        "enlace": "https://www.xataka.com/legislacion-y-derechos/maria-cristina-clemente-notaria-asegura-que-hacienda-te-debe-mucho-dinero-compraste-vivienda-antes-2013",
-        "fuente": "Xataka",
-        "tipo": "noticia",
-        "f": "02/09",
-        "fecha_publicacion": "2026-09-02T10:30:16Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "",
-        "fecha_real": "02/09/2026",
-        "ts": "2026-09-02T10:47:05.896234",
         "traducido": true
     },
     {
@@ -30469,20 +29716,6 @@
         "traducido": true
     },
     {
-        "titulo": "Claude Fable 5.1",
-        "enlace": "https://docs.anthropic.com/docs/en/release-notes/system-prompts/claude-fable-5-1",
-        "fuente": "Claude Blog",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T20:40:39.973978",
-        "traducido": true
-    },
-    {
         "titulo": "September 1, 2026Mapping global methane emissions from space with deep learningClimate & Sustainability·Earth AI·Machine Intelligence",
         "enlace": "https://research.google/blog/mapping-global-methane-emissions-from-space-with-deep-learning/",
         "fuente": "Google Research",
@@ -30980,32 +30213,6 @@
         "origen": "rss",
         "fecha_real": "01/09/2026",
         "ts": "2026-09-01T20:35:32.123620"
-    },
-    {
-        "titulo": "OpenClaw 2.0 Releases with Simplified Setup and Collaborative Agents",
-        "enlace": "https://www.infoq.com/news/2026/09/openclaw-2-release/?utm_campaign=infoq_content&utm_source=infoq&utm_medium=feed&utm_term=global",
-        "fuente": "InfoQ",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "Tue, 01 Sep 2026 18:47:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T20:35:32.860146"
-    },
-    {
-        "titulo": "Path to Astra: critical capabilities and frontier safeguards",
-        "enlace": "https://openai.com/index/path-to-astra",
-        "fuente": "OpenAI Blog",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "Tue, 01 Sep 2026 13:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T20:35:32.492893"
     },
     {
         "titulo": "No ‘DMV for AI’: US Pushes Against AI Regulations at Global Forum",
@@ -32181,20 +31388,6 @@
         "origen": "rss",
         "fecha_real": "01/09/2026",
         "ts": "2026-09-01T17:38:24.254929",
-        "traducido": true
-    },
-    {
-        "titulo": "Quill (YC W20) está contratando un Ingeniero de Software Fullstack",
-        "enlace": "https://news.ycombinator.com/item?id=49524704",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "Tue, 01 Sep 2026 17:00:14 +0000",
-        "badge": "Tech",
-        "categoria": "💻 Programación",
-        "origen": "rss",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T17:38:24.254950",
         "traducido": true
     },
     {
@@ -34777,20 +33970,6 @@
         "traducido": true
     },
     {
-        "titulo": "Novedades en la plataforma web en abril",
-        "enlace": "https://web.dev/blog/web-platform-04-2026?hl=en",
-        "fuente": "web.dev",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "Fri, 24 Apr 2026 07:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T13:06:57.251285",
-        "traducido": true
-    },
-    {
         "titulo": "Tim Cook traicionó a Steve Jobs",
         "enlace": "https://www.anildash.com/2025/09/09/how-tim-cook-sold-out-steve-jobs/",
         "fuente": "Hacker News",
@@ -36959,19 +36138,6 @@
         "ts": "2026-09-01T11:13:45.994399"
     },
     {
-        "titulo": "Claude Opus 4.8",
-        "enlace": "https://docs.anthropic.com/docs/en/release-notes/system-prompts/claude-opus-4-8",
-        "fuente": "Claude Blog",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T11:13:47.689392"
-    },
-    {
         "titulo": "Explore AI modelsQuickly evaluate AI models, develop prompts, and transform ideas into code.Google AI Studio",
         "enlace": "https://aistudio.google.com/",
         "fuente": "Google AI Dev",
@@ -38127,19 +37293,6 @@
         "origen": "rss",
         "fecha_real": "01/09/2026",
         "ts": "2026-09-01T07:18:08.681700"
-    },
-    {
-        "titulo": "New to the web platform in May",
-        "enlace": "https://web.dev/blog/web-platform-05-2026?hl=en",
-        "fuente": "web.dev",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "Fri, 29 May 2026 07:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T07:18:09.040727"
     },
     {
         "titulo": "April 2026 Baseline monthly digest",
@@ -43472,19 +42625,6 @@
         "ts": "2026-09-01T07:18:32.326469"
     },
     {
-        "titulo": "The Good, the Bad and the Ugly in Cybersecurity – Week 35",
-        "enlace": "https://www.sentinelone.com/blog/the-good-the-bad-and-the-ugly-in-cybersecurity-week-35-8/",
-        "fuente": "SentinelOne Labs",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "Fri, 28 Aug 2026 16:01:30 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T07:18:33.459321"
-    },
-    {
         "titulo": "Edge Infrastructure Under Siege: What Two Independent Datasets Reveal About Who’s Exploiting Your Perimeter",
         "enlace": "https://www.sentinelone.com/blog/what-two-independent-datasets-reveal-about-whos-exploiting-your-perimeter/",
         "fuente": "SentinelOne Labs",
@@ -46995,19 +46135,6 @@
         "ts": "2026-09-01T07:18:54.588855"
     },
     {
-        "titulo": "GitHub Copilot weekly releases — August 24",
-        "enlace": "https://github.blog/changelog/2026-08-28-github-copilot-weekly-releases-august-24",
-        "fuente": "GitHub Changelog",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "Fri, 28 Aug 2026 20:13:22 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T07:18:54.588884"
-    },
-    {
         "titulo": "Upcoming changes to GitHub Copilot policies and billing",
         "enlace": "https://github.blog/changelog/2026-08-28-upcoming-changes-to-github-copilot-policies-and-billing",
         "fuente": "GitHub Changelog",
@@ -49380,18 +48507,6 @@
         "categoria": "💡 General"
     },
     {
-        "titulo": "HONOR ROBOT PHONE: Lo hemos probado y os lo contamos todo",
-        "enlace": "https://www.youtube.com/watch?v=qz6PXegjv60",
-        "fuente": "Xataka",
-        "tipo": "video",
-        "f": "01/09",
-        "fecha_publicacion": "Reciente",
-        "id_video": "qz6PXegjv60",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T03:56:26.366255",
-        "categoria": "💡 General"
-    },
-    {
         "titulo": "Así son los PIXEL 11, PIXEL 11 PRO, Pixel 11 PRO XL y PIXEL WATCH 5: Nuestra OPINIÓN y PRECIO",
         "enlace": "https://www.youtube.com/watch?v=qH3himsPCcA",
         "fuente": "Xataka",
@@ -50349,32 +49464,6 @@
         "ts": "2026-09-01T03:56:35.040340"
     },
     {
-        "titulo": "Claude Opus 5",
-        "enlace": "https://docs.anthropic.com/docs/en/release-notes/system-prompts/claude-opus-5",
-        "fuente": "Claude Blog",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T03:56:35.041506"
-    },
-    {
-        "titulo": "Claude Fable 5",
-        "enlace": "https://docs.anthropic.com/docs/en/release-notes/system-prompts/claude-fable-5",
-        "fuente": "Claude Blog",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T03:56:35.042037"
-    },
-    {
         "titulo": "(@joelstucki-taulia)",
         "enlace": "https://github.com/joelstucki-taulia",
         "fuente": "OpenCode",
@@ -50451,19 +49540,6 @@
         "imagen_url_original": "",
         "fecha_real": "01/09/2026",
         "ts": "2026-09-01T03:56:35.706664"
-    },
-    {
-        "titulo": "Explore models in Google AI Studio",
-        "enlace": "https://aistudio.google.com",
-        "fuente": "Google AI Dev",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T03:56:35.707659"
     },
     {
         "titulo": "View Gemini API docs",
@@ -51987,19 +51063,6 @@
         "ts": "2026-09-01T03:56:54.506786"
     },
     {
-        "titulo": "Anthropic API",
-        "enlace": "https://api-docs.deepseek.com/guides/anthropic_api",
-        "fuente": "DeepSeek Blog",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T03:56:54.507854"
-    },
-    {
         "titulo": "A Ternus se le pide un nuevo artilugio milagroso, pero la clave de Apple sigue estando en la IA",
         "enlace": "https://www.businessinsider.es/big-tech/ternus-se-le-pide-un-nuevo-artilugio-milagroso-pero-clave-apple-sigue-estando-ia_7031061_0.html",
         "fuente": "Business Insider Big Tech",
@@ -52557,19 +51620,6 @@
         "origen": "rss",
         "fecha_real": "01/09/2026",
         "ts": "2026-09-01T01:39:33.960665"
-    },
-    {
-        "titulo": "The Google TV Streamer now costs $50 more",
-        "enlace": "https://www.theverge.com/tech/987032/google-tv-streamer-price-increase",
-        "fuente": "The Verge",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "2026-08-31T18:32:51-04:00",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T01:39:33.517110"
     },
     {
         "titulo": "Lachy Groom backs Indian startup aiming to keep aircraft aloft for a year",
@@ -54092,19 +53142,6 @@
         "ts": "2026-08-31T22:29:26.806157"
     },
     {
-        "titulo": "Autonomous (YC F25) Is Hiring Engineers",
-        "enlace": "https://news.ycombinator.com/item?id=49514781",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "31/08",
-        "fecha_publicacion": "Mon, 31 Aug 2026 21:00:09 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "31/08/2026",
-        "ts": "2026-08-31T22:29:26.806182"
-    },
-    {
         "titulo": "A walkable ASCII cyberpunk city in one HTML file [video]",
         "enlace": "https://www.youtube.com/watch?v=3YtygAx_C6A",
         "fuente": "Hacker News",
@@ -54545,19 +53582,6 @@
         "origen": "rss",
         "fecha_real": "31/08/2026",
         "ts": "2026-08-31T22:29:29.377926"
-    },
-    {
-        "titulo": "Instagram Says It’s Pulling the Mask Off AI Influencers",
-        "enlace": "https://www.cnet.com/tech/services-and-software/instagram-ai-generated-profile-label-fake-influencer-profiles/",
-        "fuente": "CNET",
-        "tipo": "noticia",
-        "f": "31/08",
-        "fecha_publicacion": "2026-08-31T19:33:01Z",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "31/08/2026",
-        "ts": "2026-08-31T22:29:29.377938"
     },
     {
         "titulo": "Huge 12TB Leak Exposes a Decade of Steam’s Game Data",
@@ -55184,19 +54208,6 @@
         "ts": "2026-08-31T22:29:43.407893"
     },
     {
-        "titulo": "Honor Robot Phone hands-on: A gimbal phone experiment with promising results",
-        "enlace": "https://www.engadget.com/2247473/honor-robot-phone-hands-on/",
-        "fuente": "Engadget",
-        "tipo": "noticia",
-        "f": "31/08",
-        "fecha_publicacion": "Mon, 31 Aug 2026 15:00:00 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "31/08/2026",
-        "ts": "2026-08-31T22:29:43.407920"
-    },
-    {
         "titulo": " Kingston's NV3 1TB PCIe 4.0 SSD drops to $156.99 at Newegg — 27% off brings it down to just 15.7 cents per GB ",
         "enlace": "https://www.tomshardware.com/pc-components/ssds/kingstons-nv3-1tb-pcie-4-0-ssd-drops-to-usd156-99-at-newegg-27-percent-off-brings-it-down-to-just-15-7-cents-per-gb",
         "fuente": "Tom's Hardware",
@@ -55325,19 +54336,6 @@
         "imagen_url_original": "",
         "fecha_real": "31/08/2026",
         "ts": "2026-08-31T22:29:45.059146"
-    },
-    {
-        "titulo": "@astrojs/vercel@11.0.9",
-        "enlace": "https://github.com/withastro/astro/releases/tag/%40astrojs%2Fvercel%4011.0.9",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "31/08",
-        "fecha_publicacion": "2026-08-31T19:37:07Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "31/08/2026",
-        "ts": "2026-08-31T22:29:45.917808"
     },
     {
         "titulo": "@astrojs/sitemap@3.7.4",
@@ -56354,45 +55352,6 @@
         "ts": "2026-08-31T22:29:57.883747"
     },
     {
-        "titulo": "[webapps] CubeCart 6.7.4 - SQL injection",
-        "enlace": "https://www.exploit-db.com/exploits/52664",
-        "fuente": "Exploit Database",
-        "tipo": "noticia",
-        "f": "31/08",
-        "fecha_publicacion": "Mon, 31 Aug 2026 00:00:00 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "31/08/2026",
-        "ts": "2026-08-31T22:29:57.883771"
-    },
-    {
-        "titulo": "[webapps] CubeCart 6.7.4 - Stored XSS",
-        "enlace": "https://www.exploit-db.com/exploits/52662",
-        "fuente": "Exploit Database",
-        "tipo": "noticia",
-        "f": "31/08",
-        "fecha_publicacion": "Mon, 31 Aug 2026 00:00:00 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "31/08/2026",
-        "ts": "2026-08-31T22:29:57.883811"
-    },
-    {
-        "titulo": "[webapps] CubeCart 6.7.4 - Cross-Site Scripting",
-        "enlace": "https://www.exploit-db.com/exploits/52661",
-        "fuente": "Exploit Database",
-        "tipo": "noticia",
-        "f": "31/08",
-        "fecha_publicacion": "Mon, 31 Aug 2026 00:00:00 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "31/08/2026",
-        "ts": "2026-08-31T22:29:57.883833"
-    },
-    {
         "titulo": "[webapps] Linksys E1200_2.0.04 - Unauthenticated OS Command Injection",
         "enlace": "https://www.exploit-db.com/exploits/52660",
         "fuente": "Exploit Database",
@@ -56523,19 +55482,6 @@
         "ts": "2026-08-31T22:30:15.776528"
     },
     {
-        "titulo": "OpenClaw 2.0 pours glitter on slow-burning security dumpster fire",
-        "enlace": "https://www.theregister.com/ai-and-ml/2026/08/31/openclaw-20-pours-glitter-on-slow-burning-security-dumpster-fire/5293492",
-        "fuente": "The Register Security",
-        "tipo": "noticia",
-        "f": "31/08",
-        "fecha_publicacion": "Mon, 31 Aug 2026 21:13:31 +0200",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "31/08/2026",
-        "ts": "2026-08-31T22:30:15.776559"
-    },
-    {
         "titulo": "Attack hides malware in PNGs and drops custom reverse tunnel on victims' machines",
         "enlace": "https://www.theregister.com/security/2026/08/31/attack-hides-malware-in-pngs-and-drops-custom-reverse-tunnel-on-victims-machines/5293480",
         "fuente": "The Register Security",
@@ -56638,19 +55584,6 @@
         "origen": "rss",
         "fecha_real": "31/08/2026",
         "ts": "2026-08-31T22:30:20.154781"
-    },
-    {
-        "titulo": "OpenClaw 2.0 brings simplified setup, a rebuilt browser app, and multiplayer sessions",
-        "enlace": "https://the-decoder.com/openclaw-2-0-brings-simplified-setup-a-rebuilt-browser-app-and-multiplayer-sessions/",
-        "fuente": "The Decoder RSS",
-        "tipo": "noticia",
-        "f": "31/08",
-        "fecha_publicacion": "Mon, 31 Aug 2026 10:46:04 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "31/08/2026",
-        "ts": "2026-08-31T22:30:20.154809"
     },
     {
         "titulo": "Google AI Releases TimesFM-3: A 330M Parameter Zero-Shot Foundation Model For Multivariate Time Series Forecasting",
@@ -57454,20 +56387,6 @@
         "origen": "rss",
         "fecha_real": "31/08/2026",
         "ts": "2026-08-31T10:34:22.399959",
-        "traducido": true
-    },
-    {
-        "titulo": "OpenClaw 2.0, Accidentalmente",
-        "enlace": "https://openclaw.ai/blog/openclaw-2-accidentally",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "31/08",
-        "fecha_publicacion": "Mon, 31 Aug 2026 03:38:02 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "31/08/2026",
-        "ts": "2026-08-31T10:34:22.399978",
         "traducido": true
     },
     {
@@ -59031,19 +57950,6 @@
         "origen": "rss",
         "fecha_real": "31/08/2026",
         "ts": "2026-08-31T03:49:13.269394"
-    },
-    {
-        "titulo": "Why do I lose my passion and want to do nothing?",
-        "enlace": "https://news.ycombinator.com/item?id=49505014",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "31/08",
-        "fecha_publicacion": "Mon, 31 Aug 2026 02:40:37 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "31/08/2026",
-        "ts": "2026-08-31T03:49:13.269413"
     },
     {
         "titulo": "CobaltC – The Successor to C?",
