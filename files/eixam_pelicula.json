@@ -1017,5 +1017,41 @@
     "relevancia": 2,
     "pelicula": "Eixam",
     "enviada": true
+  },
+  {
+    "titulo": "Entrevista a Óscar Bernàcer i Joana M. Ortueta revelen els secrets del film",
+    "url": "https://www.youtube.com/watch?v=82jJLoxjiZ8",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-05T15:11:21.440842",
+    "medio": "242 PELÍCULAS DESPUÉS ",
+    "imagen": "https://i.ytimg.com/vi/82jJLoxjiZ8/hqdefault.jpg",
+    "tipo": "entrevista",
+    "relevancia": 3,
+    "pelicula": "Eixam",
+    "enviada": true
+  },
+  {
+    "titulo": "En l’eixam, le premier long-métrage de fiction d'Óscar Bernàcer, entre en phase de montage",
+    "url": "https://cineuropa.org/fr/newsdetail/482325/",
+    "fecha_pub": "Tue, 19 Aug 2025 17:00:00 GMT",
+    "fecha_ts": "2026-09-05T15:11:34.470923",
+    "medio": "Cineuropa",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Eixam",
+    "enviada": true
+  },
+  {
+    "titulo": "In fase di montaggio En l’eixam , primo lungometraggio di finzione diretto da Óscar Bernàcer",
+    "url": "https://cineuropa.org/it/newsdetail/482325/",
+    "fecha_pub": "Tue, 19 Aug 2025 17:00:00 GMT",
+    "fecha_ts": "2026-09-05T15:11:34.470958",
+    "medio": "Cineuropa",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Eixam",
+    "enviada": true
   }
 ]
