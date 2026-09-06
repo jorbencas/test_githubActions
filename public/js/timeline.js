@@ -75,7 +75,7 @@ export class Timeline {
       canvas.height = 40;
       const ctx = canvas.getContext('2d');
       ctx.fillStyle = cat.color;
-      ctx.font = '600 22px Inter, sans-serif';
+      ctx.font = '700 22px Inter, sans-serif';
       ctx.textAlign = 'left';
       ctx.fillText(cat.label, 10, 28);
 

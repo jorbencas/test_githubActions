@@ -17,16 +17,18 @@ export class Particles {
 
   _createAmbient() {
     const isMobile = window.innerWidth < 768;
-    const count = isMobile ? 200 : 400;
+    const count = isMobile ? 150 : 300;
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
 
     const palette = [
-      new THREE.Color(0x00d4ff),
-      new THREE.Color(0xa855f7),
+      new THREE.Color(0x0ea5e9),
+      new THREE.Color(0x8b5cf6),
       new THREE.Color(0x10b981),
       new THREE.Color(0xf59e0b),
-      new THREE.Color(0x3b82f6)
+      new THREE.Color(0x3b82f6),
+      new THREE.Color(0xec4899),
+      new THREE.Color(0xf97316)
     ];
 
     for (let i = 0; i < count; i++) {
@@ -45,12 +47,12 @@ export class Particles {
     geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
     const mat = new THREE.PointsMaterial({
-      size: 0.06,
+      size: 0.08,
       vertexColors: true,
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.25,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
+      blending: THREE.NormalBlending,
       sizeAttenuation: true
     });
 
@@ -60,9 +62,9 @@ export class Particles {
 
   _createTrails(data) {
     const catColors = {
-      languages: 0x00d4ff, frameworks: 0xa855f7, tools: 0x10b981,
+      languages: 0x0ea5e9, frameworks: 0x8b5cf6, tools: 0x10b981,
       ai: 0xf59e0b, hardware: 0xef4444, internet: 0x3b82f6,
-      companies: 0xec4899, opensource: 0x14b8a6
+      companies: 0xec4899, opensource: 0x14b8a6, news: 0xf97316
     };
 
     const YEAR_MIN = 1970;
@@ -89,9 +91,9 @@ export class Particles {
 
       const geo = new THREE.BufferGeometry().setFromPoints(curvePts);
       const mat = new THREE.LineBasicMaterial({
-        color: catColors[cat] || 0xffffff,
+        color: catColors[cat] || 0x999999,
         transparent: true,
-        opacity: 0.06,
+        opacity: 0.08,
         depthWrite: false
       });
 
@@ -105,7 +107,7 @@ export class Particles {
     const count = 20;
     const positions = new Float32Array(count * 3);
     const velocities = [];
-    const c = color || new THREE.Color(0x00d4ff);
+    const c = color || new THREE.Color(0x3182ce);
 
     for (let i = 0; i < count; i++) {
       positions[i * 3] = position.x;
@@ -127,11 +129,11 @@ export class Particles {
 
     const mat = new THREE.PointsMaterial({
       color: c,
-      size: 0.1,
+      size: 0.12,
       transparent: true,
       opacity: 1,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
+      blending: THREE.NormalBlending,
       sizeAttenuation: true
     });
 
@@ -158,7 +160,7 @@ export class Particles {
     }
 
     for (const trail of this.trails) {
-      trail.line.material.opacity = 0.04 + Math.sin(elapsed * 0.5) * 0.02;
+      trail.line.material.opacity = 0.05 + Math.sin(elapsed * 0.5) * 0.02;
     }
 
     for (let i = this.bursts.length - 1; i >= 0; i--) {

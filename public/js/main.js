@@ -3,6 +3,7 @@ import { Timeline } from './timeline.js';
 import { Controls } from './controls.js';
 import { UI } from './ui.js';
 import { Particles } from './particles.js';
+import { AmbientMusic } from './music.js';
 
 const YEAR_MIN = 1970;
 const YEAR_MAX = 2025;
@@ -40,8 +41,10 @@ class App {
     this.controls = new Controls(this);
     this.ui = new UI(this);
     this.particles = new Particles(this);
+    this.music = new AmbientMusic();
 
     this._bindEvents();
+    this._bindMusicButton();
     this._loadData();
   }
 
@@ -55,13 +58,13 @@ class App {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth < 768 ? 1.5 : 2));
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.2;
+    this.renderer.toneMappingExposure = 1.4;
   }
 
   _initScene() {
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x0a0a0f);
-    this.scene.fog = new THREE.FogExp2(0x0a0a0f, 0.015);
+    this.scene.background = new THREE.Color(0xf0f4f8);
+    this.scene.fog = new THREE.FogExp2(0xf0f4f8, 0.012);
 
     const aspect = window.innerWidth / window.innerHeight;
     this.camera = new THREE.PerspectiveCamera(60, aspect, 0.1, 500);
@@ -70,17 +73,17 @@ class App {
   }
 
   _initLights() {
-    this.scene.add(new THREE.AmbientLight(0x222244, 0.6));
+    this.scene.add(new THREE.AmbientLight(0xffffff, 0.9));
 
-    const dir = new THREE.DirectionalLight(0xffffff, 0.8);
+    const dir = new THREE.DirectionalLight(0xffffff, 1.0);
     dir.position.set(10, 30, 20);
     this.scene.add(dir);
 
-    const point1 = new THREE.PointLight(0x00d4ff, 1.5, 80);
+    const point1 = new THREE.PointLight(0x3182ce, 1.0, 80);
     point1.position.set(0, 12, 10);
     this.scene.add(point1);
 
-    const point2 = new THREE.PointLight(0xa855f7, 1.0, 60);
+    const point2 = new THREE.PointLight(0x8b5cf6, 0.8, 60);
     point2.position.set(-20, 10, -5);
     this.scene.add(point2);
   }
@@ -88,17 +91,17 @@ class App {
   _initMaterials() {
     this.eventMaterials = {};
     const cats = {
-      languages: 0x00d4ff, frameworks: 0xa855f7, tools: 0x10b981,
+      languages: 0x0ea5e9, frameworks: 0x8b5cf6, tools: 0x10b981,
       ai: 0xf59e0b, hardware: 0xef4444, internet: 0x3b82f6,
-      companies: 0xec4899, opensource: 0x14b8a6
+      companies: 0xec4899, opensource: 0x14b8a6, news: 0xf97316
     };
     for (const [cat, hex] of Object.entries(cats)) {
       this.eventMaterials[cat] = new THREE.MeshStandardMaterial({
         color: hex,
         emissive: hex,
-        emissiveIntensity: 0.4,
-        metalness: 0.3,
-        roughness: 0.4,
+        emissiveIntensity: 0.3,
+        metalness: 0.1,
+        roughness: 0.5,
         transparent: true,
         opacity: 0.9
       });
@@ -258,13 +261,13 @@ class App {
   _hover(mesh) {
     mesh.userData.origScale = mesh.scale.clone();
     mesh.scale.multiplyScalar(1.6);
-    mesh.material.emissiveIntensity = 0.9;
+    mesh.material.emissiveIntensity = 0.7;
     if (mesh.userData.glow) mesh.userData.glow.visible = true;
   }
 
   _unhover(mesh) {
     if (mesh.userData.origScale) mesh.scale.copy(mesh.userData.origScale);
-    mesh.material.emissiveIntensity = 0.4;
+    mesh.material.emissiveIntensity = 0.3;
     if (mesh.userData.glow) mesh.userData.glow.visible = false;
   }
 
@@ -304,6 +307,16 @@ class App {
     if (this.scrollHint && !this.scrollHint.classList.contains('hidden')) {
       this.scrollHint.classList.add('hidden');
     }
+  }
+
+  _bindMusicButton() {
+    const btn = document.getElementById('btn-music');
+    if (!btn) return;
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const playing = this.music.toggle();
+      btn.classList.toggle('active', playing);
+    });
   }
 
   async _loadData() {
