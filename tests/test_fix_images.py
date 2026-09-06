@@ -4,7 +4,7 @@ from PIL import Image
 
 from scripts.tools.fix_images import (
     compute_ssim, _channel_stats, strip_metadata, constrain_size,
-    clean_query, slugify, build_srcset, generate_placeholder,
+    slugify, build_srcset, generate_placeholder,
 )
 
 SIZES = [480, 768, 1200]
@@ -64,18 +64,6 @@ class TestConstrainSize:
         img = Image.new("RGB", (800, 600))
         resized = constrain_size(img, max_width=1200)
         assert resized.width == 800
-
-
-class TestCleanQuery:
-    def test_removes_stop_words(self):
-        # clean_query splits by _ and filters stop words
-        assert "guia" not in clean_query("guia_de_Python_para_testing")
-        assert "Python" in clean_query("guia_de_Python_para_testing")
-
-    def test_handles_slashes(self):
-        # "tutorial" is a stop word, so it's filtered out
-        result = clean_query("astro/tutorial")
-        assert result == "astro"
 
 
 class TestSlugify:
