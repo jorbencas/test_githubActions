@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 57,
+    "total_concepts": 58,
     "categories": [
       "css_moderno",
       "devops",
@@ -11,7 +11,7 @@
       "patrones_diseno",
       "poo"
     ],
-    "last_scraped": "2026-09-06T15:03:48.854165"
+    "last_scraped": "2026-09-06T20:07:15.043592"
   },
   "concepts": [
     {
@@ -1063,6 +1063,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-06T15:03:13.834540"
+    },
+    {
+      "title": "Profiling en Rust: cargo-flamegraph, perf y benchmarks con Criterion",
+      "summary": "Rust es rápido por diseño, pero eso no significa que todo el código Rust sea óptimo. Un algoritmo cuadrático en Rust sigue siendo cuadrático. Una allocación innecesaria dentro de un loop sigue siendo ",
+      "explanation": "Rust es rápido por diseño, pero eso no significa que todo el código Rust sea óptimo. Un algoritmo cuadrático en Rust sigue siendo cuadrático. Una allocación innecesaria dentro de un loop sigue siendo costosa. El profiling es la forma de encontrar esos cuellos de botella con datos reales en lugar de suposiciones. La regla de oro: mide primero, optimiza después. El profiling te dicequéoptimizar. Sin eso, optimizar partes del código que no son el cuello de botella es tiempo perdido.Criterion.rs: benchmarks estadísticos El framework de benchmarks de Rust incorporado encargo benches básico. Criterion.rs ofrece benchmarks estadísticos robustos: mide la varianza, detecta si el rendimiento ha cambiado entre ejecuciones y genera gráficas HTML.[dev-dependencies]\ncriterion = { version = \"0.5\", features = [\"html_reports\"] }\n\n[[bench]]\nname = \"mi_benchmark\"\nharness = false Archivobenches/mi_benchmark.rs:use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};\n\nfn suma_iterativa(n: u64) -> u64 {\n    (1..=n).sum()\n}\n\nfn suma_formula(n: u64) -> u64 {\n    n * (n + 1) / 2\n}\n\nfn bench_suma(c: &mut Criterion) {\n    let mut grupo = c.benchmark_group(\"suma\");\n\n    for n in [100u64, 1_000, 10_000, 100_000].iter() {\n        grupo.bench_with_input(BenchmarkId::new(\"iterativa\", n), n, |b, n| {\n            b.iter(|| suma_iterativa(black_box(*n)))\n        });\n\n        grupo.bench_with_input(BenchmarkId::new(\"formula\", n), n, |b, n| {\n            b.iter(|| suma_formula(black_b",
+      "code_example": "[dev-dependencies]\ncriterion = { version = \"0.5\", features = [\"html_reports\"] }\n\n[[bench]]\nname = \"mi_benchmark\"\nharness = false",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-06T20:06:38.103618"
     }
   ]
 }
