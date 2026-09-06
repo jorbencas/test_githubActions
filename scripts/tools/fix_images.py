@@ -4,7 +4,6 @@ import asyncio
 import aiohttp
 import base64
 import unicodedata
-import hashlib
 import shutil
 import subprocess
 from pathlib import Path
@@ -24,7 +23,6 @@ except ImportError:
 # CONFIGURACIÓN FUSIONADA Y ENTORNO
 # ==============================================================================
 ACCESS_KEY: Optional[str] = __import__('os').getenv("UNSPLASH_ACCESS_KEY")
-GEMINI_KEY: Optional[str] = __import__('os').getenv("GEMINI_API_KEY")
 
 BASE_DIR: Path = Path(__file__).resolve().parent
 ROOT_DIR: Path = BASE_DIR.parent
@@ -196,58 +194,6 @@ def process_svg_fallback(input_path: Path, out_dir: Path, filename: str) -> None
         f.write(content)
 
 # ==============================================================================
-# IA EDITORIAL (MIGRADO AL NUEVO SDK GOOGLE-GENAI)
-# ==============================================================================
-def get_gemini_tech_context(title: str, content_snippet: str = "", tags: Optional[List[str]] = None) -> Optional[Dict[str, Any]]:
-    if not GEMINI_KEY:
-        return None
-
-    raw: str = f"{title}|||{content_snippet}|||{sorted(tags) if tags else ''}"
-    gemini_key: str = f"_gemini_{hashlib.md5(raw.encode()).hexdigest()}"
-    if gemini_key in cache:
-        return cache[gemini_key]
-
-    try:
-        from google import genai
-        client = genai.Client(api_key=GEMINI_KEY)
-
-        tag_str: str = ", ".join(tags[:5]) if tags else ""
-        prompt: str = f"""
-Eres un diseñador gráfico experto en branding tecnológico. Analiza este artículo de blog y genera una paleta visual y concepto de portada.
-
-TÍTULO: "{title}"
-TAGS: {tag_str}
-FRAGMENTO: "{content_snippet[:600]}"
-
-Devuelve EXACTAMENTE este JSON, sin markdown ni código alrededor:
-{{
-  "color_bg": "Color hexadecimal oscuro y moderno para fondo, que evoque la tecnología (ej: #0d1117, #0f141c, #1a1b2e)",
-  "color_accent": "Color hexadecimal vibrante que represente la tecnología principal, tipo neón sintaxis (ej: #00f2fe para web, #f97316 para Rust, #7c3aed para IA, #22c55e para backend, #e11d48 para frontend)",
-  "color_secondary": "Color hexadecimal secundario más suave para degradados o código sintético (ej: #38bdf8, #a78bfa, #34d399, #fb923c)",
-  "keywords": ["entre 3 y 5 keywords técnicas representativas del artículo"],
-  "mock_filename": "Nombre de archivo realista que refleje el stack o el tema (ej: api.py, Dockerfile, main.tf, k8s-deploy.yaml, agent.py)",
-  "tech_stack": "Tecnología principal en MAYÚSCULAS (ej: PYTHON, ASTRO, KUBERNETES, REACT, RUST, DOCKER, PYTORCH)",
-  "unsplash_query": "consulta visual corta para buscar una imagen de portada en Unsplash, que mezcle el concepto técnico con una metáfora visual atractiva (ej: 'server rack blue lights', 'neon code editor dark', 'robot writing AI', 'circuit board geometric', 'data center purple', 'developer desk minimal')"
-}}
-"""
-        response = client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=prompt,
-        )
-        if response.text:
-            match = re.search(r'(\{.*\})', response.text, re.DOTALL)
-            if match:
-                result: Dict[str, Any] = json.loads(match.group(1))
-                cache[gemini_key] = result
-                save_cache()
-                return result
-    except Exception as e:
-        print(f"⚠️ Aviso en el cliente Gemini GenAI: {e}")
-    cache[gemini_key] = None
-    save_cache()
-    return None
-
-# ==============================================================================
 # AUXILIARES DE TEXTO
 # ==============================================================================
 def clean_query(text: str) -> str:
@@ -343,6 +289,18 @@ async def search_unsplash(session: aiohttp.ClientSession, query: str) -> Optiona
 # ==============================================================================
 # MOTOR GRÁFICO (IDE VECTOR CANVAS)
 # ==============================================================================
+def section_theme(section: str) -> Dict[str, str]:
+    """Paleta de color por sección para las portadas generadas localmente."""
+    if section and section in SECTION_COLORS:
+        sc: Dict[str, str] = SECTION_COLORS[section]
+        return {
+            "color_bg": sc.get("bg", "#0f141c"),
+            "color_accent": sc.get("accent", "#00f2fe"),
+            "color_secondary": sc.get("secondary", "#38bdf8"),
+        }
+    return {}
+
+
 def generate_local_banner(title: str, tech_context: Optional[Dict[str, Any]] = None) -> Image.Image:
     try:
         width: int = 1200
@@ -538,13 +496,7 @@ async def process_file(session: aiohttp.ClientSession, path: Path, semaphore: as
                 if not portada_existe:
                     res: Dict[str, Any] = await search_all_providers(session, fm_title, content, fm_tags)
                     if res["source"] == "local_gen":
-                        theme: Dict[str, Any] = res.get("theme") or {}
-                        if section and section in SECTION_COLORS:
-                            sc: Dict[str, str] = SECTION_COLORS[section]
-                            theme["color_bg"] = sc.get("bg", theme.get("color_bg", "#0f141c"))
-                            theme["color_accent"] = sc.get("accent", theme.get("color_accent", "#00f2fe"))
-                            theme["color_secondary"] = sc.get("secondary", theme.get("color_secondary", "#38bdf8"))
-                        img: Image.Image = generate_local_banner(res["title"], theme)
+                        img: Image.Image = generate_local_banner(res["title"], section_theme(section))
                     else:
                         async with session.get(res["url"], headers={"User-Agent": "Mozilla"}, timeout=15) as r:
                             img = Image.open(BytesIO(await r.read())) if r.status == 200 else Image.new('RGB', (1200,630), "#0f141c")
@@ -575,13 +527,7 @@ async def process_file(session: aiohttp.ClientSession, path: Path, semaphore: as
                     else:
                         res = await search_all_providers(session, alt if alt.strip() else fm_title, content, fm_tags)
                         if res["source"] == "local_gen":
-                            theme = res.get("theme") or {}
-                            if section and section in SECTION_COLORS:
-                                sc = SECTION_COLORS[section]
-                                theme["color_bg"] = sc.get("bg", theme.get("color_bg", "#0f141c"))
-                                theme["color_accent"] = sc.get("accent", theme.get("color_accent", "#00f2fe"))
-                                theme["color_secondary"] = sc.get("secondary", theme.get("color_secondary", "#38bdf8"))
-                            img = generate_local_banner(res["title"], theme)
+                            img = generate_local_banner(res["title"], section_theme(section))
                         else:
                             async with session.get(res["url"], headers={"User-Agent": "Mozilla"}, timeout=15) as r:
                                 img = Image.open(BytesIO(await r.read())) if r.status == 200 else Image.new('RGB', (1200,630), "#0f141c")
@@ -622,7 +568,7 @@ async def search_all_providers(session: aiohttp.ClientSession, title: str, conte
     photo: Optional[Dict[str, Any]] = await search_unsplash(session, query)
     if photo: 
         return {"url": photo["urls"]["raw"], "source": "unsplash"}
-    return {"source": "local_gen", "title": title, "theme": get_gemini_tech_context(title, content_snippet, tags)}
+    return {"source": "local_gen", "title": title}
 
 # ==============================================================================
 # ORQUESTADOR (BÚSQUEDA RECURSIVA CONTROLADA POR SEMÁFORO)

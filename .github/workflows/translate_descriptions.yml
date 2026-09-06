@@ -1,0 +1,39 @@
+name: "[TRADUCCIÓN] 🌐 Descripciones a castellano (manual)"
+on:
+  workflow_dispatch:
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 🌐 Traducir descripciones a castellano
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python -m scripts.tools.translate_descriptions
+
+      - name: 🚀 Commit y push
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add files/agent_skills.json files/recursos_blog.json
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "Sin cambios que commitear."
+          else
+            git commit -m "🌐 Traducidas descripciones a castellano [skip ci]"
+            git pull --rebase origin master
+            git push origin master
+          fi

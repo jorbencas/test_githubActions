@@ -2,7 +2,7 @@
     {
         "titulo": "microsoft/SkillOpt",
         "enlace": "https://github.com/microsoft/SkillOpt",
-        "descripcion": "SkillOpt is a text-space optimizer that trains reusable natural-language skills for frozen LLM agents through trajectory-driven edits, validation-gated updates, and deployable best_skill.md artifacts.",
+        "descripcion": "SkillOpt es un optimizador por espacio textual que entrena habilidades de lenguaje natural reutilizables para agentes LLM congelados, mediante ediciones guiadas por trayectoria, actualizaciones…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 16661,
@@ -11,12 +11,13 @@
             "self-evolving-agents"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "SkillOpt is a text-space optimizer that trains reusable natural-language skills for frozen LLM agents through trajectory-driven edits, validation-gated updates, and deployable best_skill.md artifacts."
     },
     {
         "titulo": "bergside/awesome-design-skills",
         "enlace": "https://github.com/bergside/awesome-design-skills",
-        "descripcion": "List of 67 awesome DESIGN.md and SKILL.md design skill files for agentic tools like Claude Design, Google Stitch, Codex, Cursor, and other AI tools",
+        "descripcion": "Lista de 67 archivos de habilidades de diseño (DESIGN.md y SKILL.md) para herramientas de agentes como Claude Design, Google Stitch, Codex, Cursor y otras herramientas de IA.",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 2647,
@@ -41,12 +42,13 @@
             "skills"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "List of 67 awesome DESIGN.md and SKILL.md design skill files for agentic tools like Claude Design, Google Stitch, Codex, Cursor, and other AI tools"
     },
     {
         "titulo": "skalesapp/skales",
         "enlace": "https://github.com/skalesapp/skales",
-        "descripcion": "Personal AI desktop agent for Windows, macOS, Linux, Android & iOS. Set a goal, it works on its own. Teams (pair two desktops, agents + humans), Agent2Agent, Workflows, Codework, multi-agent orgs, des",
+        "descripcion": "Agente IA personal de escritorio para Windows, macOS, Linux, Android e iOS. Fija un objetivo y trabaja solo. Equipos (empareja dos escritorios, agentes + humanos), Agent2Agent, workflows, codework…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 1744,
@@ -73,12 +75,13 @@
             "windows"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Personal AI desktop agent for Windows, macOS, Linux, Android & iOS. Set a goal, it works on its own. Teams (pair two desktops, agents + humans), Agent2Agent, Workflows, Codework, multi-agent orgs, des"
     },
     {
         "titulo": "gamedev-skills/awesome-gamedev-agent-skills",
         "enlace": "https://github.com/gamedev-skills/awesome-gamedev-agent-skills",
-        "descripcion": "67 game-dev skills for AI coding agents — Godot, Unity, Unreal, Phaser, PixiJS, three.js, Bevy, pygame, LÖVE, Roblox. Portable SKILL.md Agent Skills (the format Anthropic launched as Claude Skills), w",
+        "descripcion": "67 habilidades de desarrollo de juegos para agentes de programación IA — Godot, Unity, Unreal, Phaser, PixiJS, three.js, Bevy, pygame, LÖVE, Roblox. Skills de agente portables en formato SKILL.md (el…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 812,
@@ -104,12 +107,13 @@
             "windsurf"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "67 game-dev skills for AI coding agents — Godot, Unity, Unreal, Phaser, PixiJS, three.js, Bevy, pygame, LÖVE, Roblox. Portable SKILL.md Agent Skills (the format Anthropic launched as Claude Skills), w"
     },
     {
         "titulo": "mxyhi/ok-skills",
         "enlace": "https://github.com/mxyhi/ok-skills",
-        "descripcion": "Curated AI coding agent skills and AGENTS.md playbooks for Codex, Claude Code, Cursor, OpenClaw, and other SKILL.md-compatible tools.",
+        "descripcion": "Habilidades de agentes de programación IA y playbooks AGENTS.md seleccionadas para Codex, Claude Code, Cursor, OpenClaw y otras herramientas compatibles con SKILL.md.",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 480,
@@ -132,12 +136,13 @@
             "skills"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Curated AI coding agent skills and AGENTS.md playbooks for Codex, Claude Code, Cursor, OpenClaw, and other SKILL.md-compatible tools."
     },
     {
         "titulo": "EverMind-AI/SkillCorpus",
         "enlace": "https://github.com/EverMind-AI/SkillCorpus",
-        "descripcion": "Open-source infrastructure that turns scattered SKILL.md files into curated, retrieval-ready agent-skill corpora—with retrieval and evaluation tooling included.",
+        "descripcion": "Infraestructura de código abierto que convierte archivos SKILL.md dispersos en colecciones de skills de agentes curadas y listas para recuperación, con herramientas de recuperación y evaluación…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 477,
@@ -164,12 +169,13 @@
             "vector-search"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Open-source infrastructure that turns scattered SKILL.md files into curated, retrieval-ready agent-skill corpora—with retrieval and evaluation tooling included."
     },
     {
         "titulo": "tizzy916/humanities-writing-companion",
         "enlace": "https://github.com/tizzy916/humanities-writing-companion",
-        "descripcion": "End-to-end humanities writing assistant — an Agent Skill (open SKILL.md format). 11 modes from Socratic research-question sharpening through AI-use disclosure. Bilingual (EN/中文), discipline-aware (lit",
+        "descripcion": "Asistente integral de escritura en humanidades — una Agent Skill en formato abierto SKILL.md. 11 modos, desde el refinamiento socrático de preguntas de investigación hasta la declaración de uso de…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 376,
@@ -191,12 +197,13 @@
             "voice-preservation"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "End-to-end humanities writing assistant — an Agent Skill (open SKILL.md format). 11 modes from Socratic research-question sharpening through AI-use disclosure. Bilingual (EN/中文), discipline-aware (lit"
     },
     {
         "titulo": "arpitg1304/robotics-agent-skills",
         "enlace": "https://github.com/arpitg1304/robotics-agent-skills",
-        "descripcion": "Agent skills that make AI coding assistants write production-grade robotics software. ROS1, ROS2, design patterns, SOLID principles, and testing — for Claude Code, Cursor, Copilot, and any SKILL.md-co",
+        "descripcion": "Skills de agente para que los asistentes de programación IA escriban software robótico de nivel de producción. ROS1, ROS2, patrones de diseño, principios SOLID y testing — para Claude Code, Cursor…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 353,
@@ -207,23 +214,25 @@
             "robotics"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Agent skills that make AI coding assistants write production-grade robotics software. ROS1, ROS2, design patterns, SOLID principles, and testing — for Claude Code, Cursor, Copilot, and any SKILL.md-co"
     },
     {
         "titulo": "futantan/agent-skills.md",
         "enlace": "https://github.com/futantan/agent-skills.md",
-        "descripcion": "Find awesome Agent Skills",
+        "descripcion": "Encuentra increíbles Agent Skills de la comunidad.",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 255,
         "_topics": [],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Find awesome Agent Skills"
     },
     {
         "titulo": "initializ/forge",
         "enlace": "https://github.com/initializ/forge",
-        "descripcion": "Forge is the open-source runtime for Anthropic's Agent Skills standard — built for the agent that runs next to a service, in your environment, on infrastructure you already operate. Write a SKILL.md. ",
+        "descripcion": "Forge es el runtime de código abierto para el estándar de Agent Skills de Anthropic, pensado para el agente que corre junto a un servicio, en tu entorno y sobre la infraestructura que ya operas…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 227,
@@ -246,12 +255,13 @@
             "secure-ai"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Forge is the open-source runtime for Anthropic's Agent Skills standard — built for the agent that runs next to a service, in your environment, on infrastructure you already operate. Write a SKILL.md. "
     },
     {
         "titulo": "SnailSploit/Claude-Red",
         "enlace": "https://github.com/SnailSploit/Claude-Red",
-        "descripcion": "claude-red is a curated library of offensive security skills designed for the Claude skills system. Each skill is a structured SKILL.md file that primes Claude with expert-level methodology for a spec",
+        "descripcion": "claude-red es una biblioteca curada de habilidades de seguridad ofensiva para el sistema de skills de Claude. Cada skill es un archivo SKILL.md estructurado que prepara a Claude con metodología de…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 3021,
@@ -264,12 +274,13 @@
             "skills"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "claude-red is a curated library of offensive security skills designed for the Claude skills system. Each skill is a structured SKILL.md file that primes Claude with expert-level methodology for a spec"
     },
     {
         "titulo": "elementalsouls/Claude-OSINT",
         "enlace": "https://github.com/elementalsouls/Claude-OSINT",
-        "descripcion": "8 Claude skills · 100+ recon capabilities · 80 secret-regex patterns · 80+ dorks · 9 read-only credential validators · 27 attack-path templates · ~10,000 lines of structured tradecraft. Drop-in SKILL.",
+        "descripcion": "8 skills de Claude · 100+ capacidades de reconocimiento · 80 patrones regex de secretos · 80+ dorks · 9 validadores de credenciales de solo lectura · 27 plantillas de rutas de ataque · ~10 000 líneas…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 2521,
@@ -279,12 +290,13 @@
             "skills"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "8 Claude skills · 100+ recon capabilities · 80 secret-regex patterns · 80+ dorks · 9 read-only credential validators · 27 attack-path templates · ~10,000 lines of structured tradecraft. Drop-in SKILL."
     },
     {
         "titulo": "WenyuChiou/ai-research-skills",
         "enlace": "https://github.com/WenyuChiou/ai-research-skills",
-        "descripcion": "Universal SKILL.md catalog for research workflows: literature review, research design, project memory, manuscript writing, and cross-agent delegation for Claude Code, Codex, Gemini, Cursor, OpenClaw, ",
+        "descripcion": "Catálogo universal SKILL.md para flujos de investigación: revisión de literatura, diseño de investigación, memoria de proyecto, redacción de manuscritos y delegación entre agentes para Claude Code…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 237,
@@ -311,12 +323,13 @@
             "zotero"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Universal SKILL.md catalog for research workflows: literature review, research design, project memory, manuscript writing, and cross-agent delegation for Claude Code, Codex, Gemini, Cursor, OpenClaw, "
     },
     {
         "titulo": "seb1n/awesome-ai-agent-skills",
         "enlace": "https://github.com/seb1n/awesome-ai-agent-skills",
-        "descripcion": "103 ready-to-use AI agent skills for Claude Code, OpenAI Codex, Gemini CLI, Cursor, GitHub Copilot, Windsurf, and other Agent Skills-compatible tools. Complete SKILL.md workflows—not a link directory.",
+        "descripcion": "103 skills de agentes IA listos para usar en Claude Code, OpenAI Codex, Gemini CLI, Cursor, GitHub Copilot, Windsurf y otras herramientas compatibles. Workflows completos en SKILL.md, no un…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 171,
@@ -343,12 +356,13 @@
             "windsurf"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "103 ready-to-use AI agent skills for Claude Code, OpenAI Codex, Gemini CLI, Cursor, GitHub Copilot, Windsurf, and other Agent Skills-compatible tools. Complete SKILL.md workflows—not a link directory."
     },
     {
         "titulo": "Yusuke710/manim-skill",
         "enlace": "https://github.com/Yusuke710/manim-skill",
-        "descripcion": "SKILL.md for creating animations with Manim. Coding Agent autonomously plans scenes, writes Manim code, renders videos, and refines based on feedback. ",
+        "descripcion": "SKILL.md para crear animaciones con Manim. El agente de programación planifica escenas de forma autónoma, escribe código Manim, renderiza vídeos y refina a partir de comentarios.",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 149,
@@ -366,12 +380,13 @@
             "maths"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "SKILL.md for creating animations with Manim. Coding Agent autonomously plans scenes, writes Manim code, renders videos, and refines based on feedback. "
     },
     {
         "titulo": "blacktop/ipsw-skill",
         "enlace": "https://github.com/blacktop/ipsw-skill",
-        "descripcion": "A SKILL.md for ipsw",
+        "descripcion": "Un SKILL.md para ipsw.",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 81,
@@ -386,23 +401,25 @@
             "vulnerability-research"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "A SKILL.md for ipsw"
     },
     {
         "titulo": "Hao0321/claude-skill-code-cleanup",
         "enlace": "https://github.com/Hao0321/claude-skill-code-cleanup",
-        "descripcion": "Claude Code skill: auto-scan SKILL.md / prompt / codebase for duplicates, naming drift, modularizable blocks, oversized files. Companion to claude-skill-social-post.",
+        "descripcion": "Skill de Claude Code: escanea automáticamente SKILL.md, prompts y codebase en busca de duplicados, deriva de nombres, bloques modularizables y archivos sobredimensionados. Complemento de…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 72,
         "_topics": [],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Claude Code skill: auto-scan SKILL.md / prompt / codebase for duplicates, naming drift, modularizable blocks, oversized files. Companion to claude-skill-social-post."
     },
     {
         "titulo": "affaan-m/ECC",
         "enlace": "https://github.com/affaan-m/ECC",
-        "descripcion": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
+        "descripcion": "Sistema de optimización del rendimiento de agentes. Skills, instintos, memoria, seguridad y desarrollo centrado en la investigación para Claude Code, Codex, Opencode, Cursor y más.",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 246774,
@@ -417,12 +434,13 @@
             "productivity"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond."
     },
     {
         "titulo": "Egonex-AI/Understand-Anything",
         "enlace": "https://github.com/Egonex-AI/Understand-Anything",
-        "descripcion": "Graphs that teach > graphs that impress. Turn any code into an interactive knowledge graph you can explore, search, and ask questions about. Works with Claude Code, Codex, Cursor, Copilot, Gemini CLI,",
+        "descripcion": "Grafos que enseñan > grafos que impresionan. Convierte cualquier código en un grafo de conocimiento interactivo que puedes explorar, buscar y consultar. Funciona con Claude Code, Codex, Cursor…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 81382,
@@ -446,12 +464,13 @@
             "vibe-coding"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Graphs that teach > graphs that impress. Turn any code into an interactive knowledge graph you can explore, search, and ask questions about. Works with Claude Code, Codex, Cursor, Copilot, Gemini CLI,"
     },
     {
         "titulo": "VoltAgent/awesome-agent-skills",
         "enlace": "https://github.com/VoltAgent/awesome-agent-skills",
-        "descripcion": "A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more.",
+        "descripcion": "Una colección curada de 1000+ skills de agentes de equipos de desarrollo oficiales y de la comunidad, compatible con Claude Code, Codex, Gemini CLI, Cursor y más.",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 33688,
@@ -470,12 +489,13 @@
             "skills"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more."
     },
     {
         "titulo": "OthmanAdi/planning-with-files",
         "enlace": "https://github.com/OthmanAdi/planning-with-files",
-        "descripcion": "Persistent file-based planning for AI coding agents and long-running tasks. Crash-proof markdown plans, session recovery after /clear and compaction, per-turn re-injection against context rot, determi",
+        "descripcion": "Planificación persistente basada en archivos para agentes de programación IA y tareas de larga duración. Planes markdown a prueba de fallos, recuperación de sesión tras /clear y compactación y…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 26609,
@@ -502,12 +522,13 @@
             "session-recovery"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Persistent file-based planning for AI coding agents and long-running tasks. Crash-proof markdown plans, session recovery after /clear and compaction, per-turn re-injection against context rot, determi"
     },
     {
         "titulo": "nexu-io/html-anything",
         "enlace": "https://github.com/nexu-io/html-anything",
-        "descripcion": "✨ The agentic HTML editor — your local AI agent writes the HTML, you ship it. 🚀 75 Skills × 9 Surfaces (magazine · deck · poster · XHS / tweet · prototype · data report · Hyperframes) 🛡️ Sandboxed pre",
+        "descripcion": "El editor HTML agéntico: tu agente de IA local escribe el HTML y tú lo publicas. 75 skills × 9 formatos (magazine, deck, póster, XHS/tweet, prototipo, informe de datos, Hyperframes). Vista previa en…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 8638,
@@ -534,12 +555,13 @@
             "xiaohongshu"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "✨ The agentic HTML editor — your local AI agent writes the HTML, you ship it. 🚀 75 Skills × 9 Surfaces (magazine · deck · poster · XHS / tweet · prototype · data report · Hyperframes) 🛡️ Sandboxed pre"
     },
     {
         "titulo": "Devin-AXIS/iPolloWork",
         "enlace": "https://github.com/Devin-AXIS/iPolloWork",
-        "descripcion": "Enterprise-grade, local-first Agent Workbench for people and agent teams. A unified multi-engine workspace for Codex Harness, DeepSeek Harness, and OpenCode, with unified plugins and Skills, multi-age",
+        "descripcion": "Workbench de agentes de nivel empresarial y prioridad local para personas y equipos. Un espacio de trabajo unificado multi-motor para Codex Harness, DeepSeek Harness y OpenCode, con plugins y skills…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 5295,
@@ -564,12 +586,13 @@
             "visual-editor"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Enterprise-grade, local-first Agent Workbench for people and agent teams. A unified multi-engine workspace for Codex Harness, DeepSeek Harness, and OpenCode, with unified plugins and Skills, multi-age"
     },
     {
         "titulo": "gotalab/cc-sdd",
         "enlace": "https://github.com/gotalab/cc-sdd",
-        "descripcion": "Turn approved specs into long-running autonomous implementation. A minimal, adaptable SDD harness with Agent Skills for Claude Code, Codex, Cursor, Copilot, Windsurf, OpenCode, Gemini CLI, and Antigra",
+        "descripcion": "Convierte especificaciones aprobadas en implementación autónoma de larga duración. Un harness SDD mínimo y adaptable con Agent Skills para Claude Code, Codex, Cursor, Copilot, Windsurf, OpenCode y…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 3649,
@@ -588,12 +611,13 @@
             "subagents"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Turn approved specs into long-running autonomous implementation. A minimal, adaptable SDD harness with Agent Skills for Claude Code, Codex, Cursor, Copilot, Windsurf, OpenCode, Gemini CLI, and Antigra"
     },
     {
         "titulo": "pacifio/atlas",
         "enlace": "https://github.com/pacifio/atlas",
-        "descripcion": "Source control for agents. Use multiple coding agents, track their changes and query them in one place",
+        "descripcion": "Control de versiones para agentes. Usa varios agentes de programación, sigue sus cambios y consúltalos en un solo lugar.",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 3102,
@@ -615,23 +639,25 @@
             "skills"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Source control for agents. Use multiple coding agents, track their changes and query them in one place"
     },
     {
         "titulo": "codejunkie99/agentic-stack",
         "enlace": "https://github.com/codejunkie99/agentic-stack",
-        "descripcion": "One brain, many harnesses. Portable .agent/ folder (memory + skills + protocols) that plugs into Claude Code, Cursor, Windsurf, OpenCode, OpenClaw, Hermes, or DIY Python — and keeps its knowledge when",
+        "descripcion": "Un cerebro, muchos harnesses. Carpeta .agent/ portátil (memoria + skills + protocolos) que conecta con Claude Code, Cursor, Windsurf, OpenCode, OpenClaw, Hermes o Python propio, y mantiene su…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 2247,
         "_topics": [],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "One brain, many harnesses. Portable .agent/ folder (memory + skills + protocols) that plugs into Claude Code, Cursor, Windsurf, OpenCode, OpenClaw, Hermes, or DIY Python — and keeps its knowledge when"
     },
     {
         "titulo": "Weizhena/Deep-Research-skills",
         "enlace": "https://github.com/Weizhena/Deep-Research-skills",
-        "descripcion": "Structured deep research skill for Claude Code/Open Code/Codex with human-in-the-loop control",
+        "descripcion": "Skill de investigación profunda estructurada para Claude Code, Open Code y Codex con control humano en el circuito.",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 2086,
@@ -646,12 +672,13 @@
             "research"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Structured deep research skill for Claude Code/Open Code/Codex with human-in-the-loop control"
     },
     {
         "titulo": "Shubhamsaboo/awesome-llm-apps",
         "enlace": "https://github.com/Shubhamsaboo/awesome-llm-apps",
-        "descripcion": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
+        "descripcion": "100+ agentes de IA, Agent Skills y apps de RAG — gratis y de código abierto.",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 135878,
@@ -662,12 +689,13 @@
             "rag"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source."
     },
     {
         "titulo": "addyosmani/agent-skills",
         "enlace": "https://github.com/addyosmani/agent-skills",
-        "descripcion": "Production-grade engineering skills for AI coding agents.",
+        "descripcion": "Habilidades de ingeniería de nivel de producción para agentes de programación IA.",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 91878,
@@ -680,12 +708,13 @@
             "skills"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Production-grade engineering skills for AI coding agents."
     },
     {
         "titulo": "mvanhorn/last30days-skill",
         "enlace": "https://github.com/mvanhorn/last30days-skill",
-        "descripcion": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary",
+        "descripcion": "Skill de agente IA que investiga cualquier tema en Reddit, X, YouTube, HN, Polymarket y la web, y luego sintetiza un resumen fundamentado.",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 61116,
@@ -712,12 +741,13 @@
             "youtube"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary"
     },
     {
         "titulo": "calesthio/OpenMontage",
         "enlace": "https://github.com/calesthio/OpenMontage",
-        "descripcion": "World's first open-source, agentic video production system. 12 production pipelines, 100+ tools, 700+ agent skill and production-knowledge files. Turn your AI coding assistant into a full video produc",
+        "descripcion": "El primer sistema de producción de vídeo agéntico de código abierto. 12 pipelines de producción, 100+ herramientas y 700+ archivos de skills y conocimiento de producción. Convierte tu asistente de…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 55911,
@@ -743,12 +773,13 @@
             "video-production"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "World's first open-source, agentic video production system. 12 production pipelines, 100+ tools, 700+ agent skill and production-knowledge files. Turn your AI coding assistant into a full video produc"
     },
     {
         "titulo": "zhayujie/CowAgent",
         "enlace": "https://github.com/zhayujie/CowAgent",
-        "descripcion": "Open-source super AI assistant & Agent Harness. Plans tasks, runs tools and skills, self-evolves with memory and knowledge. Multi-model, multi-channel. Lightweight, extensible, one-line install. (form",
+        "descripcion": "Superasistente IA y Agent Harness de código abierto. Planifica tareas, ejecuta herramientas y skills, auto-evoluciona con memoria y conocimiento. Multi-modelo, multi-canal, ligero, extensible y de…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 46769,
@@ -771,12 +802,13 @@
             "skills"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Open-source super AI assistant & Agent Harness. Plans tasks, runs tools and skills, self-evolves with memory and knowledge. Multi-model, multi-channel. Lightweight, extensible, one-line install. (form"
     },
     {
         "titulo": "coreyhaines31/marketingskills",
         "enlace": "https://github.com/coreyhaines31/marketingskills",
-        "descripcion": "Marketing skills for Claude Code and AI agents. CRO, copywriting, SEO, analytics, and growth engineering.",
+        "descripcion": "Skills de marketing para Claude Code y agentes IA. CRO, copywriting, SEO, analítica e ingeniería de crecimiento.",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 46725,
@@ -786,12 +818,13 @@
             "marketing"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Marketing skills for Claude Code and AI agents. CRO, copywriting, SEO, analytics, and growth engineering."
     },
     {
         "titulo": "sickn33/agentic-awesome-skills",
         "enlace": "https://github.com/sickn33/agentic-awesome-skills",
-        "descripcion": "AAS Core is the local, agent-first control plane for complete catalog discovery, agent-owned selection, stack validation, and planning, backed by 2,005+ agentic skills. Includes CLI, local MCP, catalo",
+        "descripcion": "AAS Core es el plano de control local y centrado en el agente para descubrimiento completo de catálogo, selección propiedad del agente, validación de stack y planificación, respaldado por 2005+…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 45912,
@@ -818,7 +851,8 @@
             "skill-library"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "AAS Core is the local, agent-first control plane for complete catalog discovery, agent-owned selection, stack validation, and planning, backed by 2,005+ agentic skills. Includes CLI, local MCP, catalo"
     },
     {
         "titulo": "danny-avila/LibreChat",
@@ -855,7 +889,7 @@
     {
         "titulo": "K-Dense-AI/scientific-agent-skills",
         "enlace": "https://github.com/K-Dense-AI/scientific-agent-skills",
-        "descripcion": "Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by 190,000+ scientists worldwide. 165 ready-to-use validated skills plus 100+ scientific databases covering biolog",
+        "descripcion": "Convierte cualquier agente IA en un científico IA. La biblioteca de Agent Skills nº1 para ciencia, usada por 190 000+ científicos en todo el mundo. 165 skills validados listos y 100+ bases de datos…",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 42309,
@@ -879,12 +913,13 @@
             "scientific-visualization"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Turn any AI agent into an AI Scientist. The #1 Agent Skills library for science, used by 190,000+ scientists worldwide. 165 ready-to-use validated skills plus 100+ scientific databases covering biolog"
     },
     {
         "titulo": "blader/humanizer",
         "enlace": "https://github.com/blader/humanizer",
-        "descripcion": "Agent skill that removes signs of AI-generated writing from text",
+        "descripcion": "Skill de agente que elimina los signos de escritura generada por IA del texto.",
         "fuente": "GitHub",
         "tipo": "skill",
         "_stars": 41138,
@@ -898,6 +933,7 @@
             "writing-tools"
         ],
         "_source_type": "github_repo",
-        "ts": "2026-09-03T16:17:01.495234"
+        "ts": "2026-09-03T16:17:01.495234",
+        "desc_en": "Agent skill that removes signs of AI-generated writing from text"
     }
 ]

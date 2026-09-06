@@ -29,8 +29,6 @@ jobs:
           pip install -r requirements.txt
 
       - name: 🖼️ Optimizar imágenes
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python -m scripts.tools.fix_images --blog-path blog
 
       - name: 📅 Actualizar updatedDate según historial

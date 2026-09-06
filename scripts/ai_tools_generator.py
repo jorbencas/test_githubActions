@@ -18,6 +18,7 @@ from datetime import datetime
 from pathlib import Path
 
 import requests
+from scripts.utils.lang_es import looks_english
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 CATS_PATH = SCRIPT_DIR / "utils" / "ai_categories.json"
@@ -255,6 +256,63 @@ def load_blog_resources_for_message(count=5):
         return result
     except Exception:
         return []
+
+
+def _translate_descriptions_batch(items):
+    """Traduce por lotes las 'descripcion' que estén en inglés a castellano usando Gemini.
+
+    Realiza una sola llamada a Gemini con todas las descripciones a traducir
+    para minimizar latencia y consumo de tokens. Si Gemini no está disponible
+    o falla, devuelve los items sin modificar (fallback al inglés original).
+    """
+    if not GEMINI_API_KEY or not items:
+        return items
+
+    to_translate = [
+        (i, item.get("descripcion", ""))
+        for i, item in enumerate(items)
+        if item.get("descripcion") and looks_english(item["descripcion"])
+    ]
+    if not to_translate:
+        return items
+
+    try:
+        from google import genai
+        client = genai.Client(api_key=GEMINI_API_KEY)
+
+        numbered = "\n".join(f"{pos}|{desc}" for pos, (_, desc) in enumerate(to_translate))
+        prompt = (
+            "Traduce cada línea del siguiente listado al castellano. "
+            "El formato es ID|texto. Devuelve EXACTAMENTE el mismo formato "
+            "ID|texto_traducido, una línea por item, sin añadir nada más. "
+            "Conserva nombres propios, marcas, URLs tal cual.\n\n"
+            + numbered
+        )
+        response = client.models.generate_content(
+            model="gemini-2.5-flash", contents=prompt,
+        )
+        text = response.text.strip() if response.text else ""
+
+        translations = {}
+        for line in text.splitlines():
+            if "|" in line:
+                parts = line.split("|", 1)
+                try:
+                    idx = int(parts[0].strip())
+                    translations[idx] = parts[1].strip()
+                except ValueError:
+                    continue
+
+        for local_pos, (orig_idx, _) in enumerate(to_translate):
+            if local_pos in translations and translations[local_pos]:
+                items[orig_idx]["descripcion"] = translations[local_pos]
+
+        if translations:
+            print(f"🌐 Traducidas {len(translations)}/{len(to_translate)} descripciones en → es")
+    except Exception as e:
+        print(f"⚠️ Error traduciendo descripciones (manteniendo inglés): {e}")
+
+    return items
 
 
 def load_ai_candidates(count=15):
@@ -629,10 +687,12 @@ def main():
     # Cargar y seleccionar agent skills
     all_skills = load_agent_skills()
     skills = select_skills_from_db(all_skills, sent_titles, count=2)
+    skills = _translate_descriptions_batch(skills)
     print(f"🎯 Skills seleccionadas: {len(skills)}")
 
     # Cargar recursos del blog
     blog_resources = load_blog_resources_for_message(5)
+    blog_resources = _translate_descriptions_batch(blog_resources)
     print(f"📚 Recursos del blog: {len(blog_resources)}")
 
     message = build_daily_message(tools, skills, blog_resources)
