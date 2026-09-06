@@ -15,6 +15,7 @@ jobs:
           repository: jorbencas/blog
           path: blog
           token: ${{ secrets.BLOG_TOKEN }}
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -32,10 +33,13 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python -m scripts.tools.fix_images --blog-path blog
 
+      - name: 📅 Actualizar updatedDate según historial
+        run: python -m scripts.tools.bump_updated_dates --blog-path blog
+
       - name: 🚀 Push cambios al blog
         run: |
           cd blog
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add -A
-          git diff --staged --quiet || (git commit -m "🖼️ optimize: imágenes optimizadas [skip ci]" && git pull --rebase && git push)
+          git diff --staged --quiet || (git commit -m "🖼️ optimize: imágenes y updatedDate [skip ci]" && git pull --rebase && git push)
