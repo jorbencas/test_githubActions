@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 55,
+    "total_concepts": 57,
     "categories": [
       "css_moderno",
       "devops",
@@ -11,7 +11,7 @@
       "patrones_diseno",
       "poo"
     ],
-    "last_scraped": "2026-09-06T10:26:07.308251"
+    "last_scraped": "2026-09-06T15:03:48.854165"
   },
   "concepts": [
     {
@@ -1027,6 +1027,42 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-06T03:20:48.856260"
+    },
+    {
+      "title": "Combine avanzado en Swift: publishers propios, Scheduler, share(), multicast y error handling",
+      "summary": "Combine tiene un segundo nivel de complejidad que va más allá de los operadores básicos. Crear publishers propios, controlar en qué hilo se ejecuta el trabajo, compartir suscripciones costosas y manej",
+      "explanation": "Combine tiene un segundo nivel de complejidad que va más allá de los operadores básicos. Crear publishers propios, controlar en qué hilo se ejecuta el trabajo, compartir suscripciones costosas y manejar errores de forma elegante son las habilidades que marcan la diferencia en aplicaciones de producción.Crear publishers propios: el protocolo Publisher Cualquier tipo puede conformarPublisherimplementando dos requisitos: el tipoOutputy el tipoFailure, más el métodoreceive(subscriber:). En la práctica, lo más habitual es envolver lógica en unAnyPublisherusandoDeferredo el inicializador deFuture:import Combine\n\n// Publisher que emite el contenido de un fichero de forma lazy\nfunc leerFicheroPublisher(url: URL) -> AnyPublisher{\n    Deferred {\n        Future { promise in\n            do {\n                let contenido = try String(contentsOf: url, encoding: .utf8)\n                promise(.success(contenido))\n            } catch {\n                promise(.failure(error))\n            }\n        }\n    }\n    .eraseToAnyPublisher()\n} Deferredgarantiza que el trabajo no empieza hasta que hay un suscriptor, evitando efectos secundarios al construir el publisher.Futureencapsula una operación que produce un único valor o falla. La combinación de ambos es la forma estándar para trabajo asíncrono one-shot. Para publishers completamente personalizados que emiten varios valores, es mejor implementar el protocolo directamente:struct ContadorPublisher: Publisher {\n    typealias Output = Int\n    typea",
+      "code_example": "import Combine\n\n// Publisher que emite el contenido de un fichero de forma lazy\nfunc leerFicheroPublisher(url: URL) -> AnyPublisher{\n    Deferred {\n        Future { promise in\n            do {\n                let contenido = try String(contentsOf: url, encoding: .utf8)\n                promise(.success(contenido))\n            } catch {\n                promise(.failure(error))\n            }\n        }\n    }\n    .eraseToAnyPublisher()\n}",
+      "use_cases": [],
+      "difficulty": 1,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "habilidades"
+      ],
+      "cat": "habilidades",
+      "scraped_at": "2026-09-06T15:03:12.354611"
+    },
+    {
+      "title": "El módulo ast en Python: analizar, recorrer y modificar código Python como árbol de sintaxis",
+      "summary": "El móduloast(Abstract Syntax Tree) de Python permite analizar, recorrer y transformar código fuente Python como un árbol de objetos. Es la herramienta que usan linters, formateadores, generadores de d",
+      "explanation": "El móduloast(Abstract Syntax Tree) de Python permite analizar, recorrer y transformar código fuente Python como un árbol de objetos. Es la herramienta que usan linters, formateadores, generadores de documentación y transpiladores. Con él puedes escribir tus propias reglas de calidad de código, detectar patrones peligrosos o transformar código automáticamente.ast.parse(): convertir código en árbolimport ast\n\ncodigo = \"\"\"\nx = 10\ny = x * 2 + 5\nprint(f\"Resultado: {y}\")\n\"\"\"\n\narbol = ast.parse(codigo)\nprint(type(arbol))   # <class 'ast.Module'>\nprint(ast.dump(arbol, indent=2)) El resultado deast.dumpmuestra la estructura completa del árbol: nodos, campos y valores. Es la mejor forma de entender qué tipo de nodo corresponde a cada construcción Python.Explorar el árbol con ast.walkimport ast\n\ncodigo = \"\"\"\ndef calcular(a, b):\n    resultado = a + b * 2\n    return resultado\n\nclass Punto:\n    def __init__(self, x, y):\n        self.x = x\n        self.y = y\n\"\"\"\n\narbol = ast.parse(codigo)\n\n# Encontrar todas las definiciones de función\nfunciones = [nodo.name for nodo in ast.walk(arbol) if isinstance(nodo, ast.FunctionDef)]\nprint(f\"Funciones: {funciones}\")   # ['calcular', '__init__']\n\n# Encontrar todas las clases\nclases = [nodo.name for nodo in ast.walk(arbol) if isinstance(nodo, ast.ClassDef)]\nprint(f\"Clases: {clases}\")   # ['Punto']\n\n# Encontrar todas las llamadas a funciones\nllamadas = [\n    nodo.func.id\n    for nodo in ast.walk(arbol)\n    if isinstance(nodo, ast.Call) and isinstance(nodo",
+      "code_example": "import ast\n\ncodigo = \"\"\"\nx = 10\ny = x * 2 + 5\nprint(f\"Resultado: {y}\")\n\"\"\"\n\narbol = ast.parse(codigo)\nprint(type(arbol))   # <class 'ast.Module'>\nprint(ast.dump(arbol, indent=2))",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-06T15:03:13.834540"
     }
   ]
 }
