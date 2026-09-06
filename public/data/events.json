@@ -6,332 +6,3868 @@
     "total_events": 300
   },
   "categories": {
-    "languages": { "color": "#0ea5e9", "label": "Lenguajes", "yOffset": 0 },
-    "frameworks": { "color": "#8b5cf6", "label": "Frameworks", "yOffset": 2 },
-    "tools": { "color": "#10b981", "label": "Herramientas", "yOffset": 4 },
-    "ai": { "color": "#f59e0b", "label": "IA/ML", "yOffset": 6 },
-    "hardware": { "color": "#ef4444", "label": "Hardware", "yOffset": 8 },
-    "internet": { "color": "#3b82f6", "label": "Internet", "yOffset": 10 },
-    "companies": { "color": "#ec4899", "label": "Empresas", "yOffset": 12 },
-    "opensource": { "color": "#14b8a6", "label": "Open Source", "yOffset": 14 },
-    "news": { "color": "#f97316", "label": "Noticias", "yOffset": 16 }
+    "languages": {
+      "color": "#0ea5e9",
+      "label": "Lenguajes",
+      "yOffset": 0
+    },
+    "frameworks": {
+      "color": "#8b5cf6",
+      "label": "Frameworks",
+      "yOffset": 2
+    },
+    "tools": {
+      "color": "#10b981",
+      "label": "Herramientas",
+      "yOffset": 4
+    },
+    "ai": {
+      "color": "#f59e0b",
+      "label": "IA/ML",
+      "yOffset": 6
+    },
+    "hardware": {
+      "color": "#ef4444",
+      "label": "Hardware",
+      "yOffset": 8
+    },
+    "internet": {
+      "color": "#3b82f6",
+      "label": "Internet",
+      "yOffset": 10
+    },
+    "companies": {
+      "color": "#ec4899",
+      "label": "Empresas",
+      "yOffset": 12
+    },
+    "opensource": {
+      "color": "#14b8a6",
+      "label": "Open Source",
+      "yOffset": 14
+    },
+    "news": {
+      "color": "#f97316",
+      "label": "Noticias",
+      "yOffset": 16
+    }
   },
   "events": [
-    { "id": "intel-4004", "title": "Intel 4004", "year": 1971, "category": "hardware", "description": "Primera CPU comercial de un solo chip. 2300 transistores, 740 kHz.", "url": "https://en.wikipedia.org/wiki/Intel_4004", "importance": 3 },
-    { "id": "ethernet", "title": "Ethernet", "year": 1973, "category": "internet", "description": "Robert Metcalfe inventa Ethernet en Xerox PARC.", "url": "https://en.wikipedia.org/wiki/Ethernet", "importance": 2 },
-    { "id": "c-language", "title": "C", "year": 1972, "category": "languages", "description": "Dennis Ritchie crea el lenguaje C en Bell Labs.", "url": "https://en.wikipedia.org/wiki/C_(programming_language)", "importance": 3 },
-    { "id": "sql", "title": "SQL", "year": 1974, "category": "languages", "description": "IBM desarrolla SEQUEL (después SQL) para bases de datos.", "url": "https://en.wikipedia.org/wiki/SQL", "importance": 2 },
-    { "id": "apple-ii", "title": "Apple II", "year": 1977, "category": "hardware", "description": "Steve Jobs y Steve Wozniak lanzan el Apple II, primer PC popular.", "url": "https://en.wikipedia.org/wiki/Apple_II", "importance": 3 },
-    { "id": "ms-dos", "title": "MS-DOS", "year": 1981, "category": "tools", "description": "Microsoft compra QDOS y lo renombra MS-DOS para el IBM PC.", "url": "https://en.wikipedia.org/wiki/MS-DOS", "importance": 2 },
-    { "id": "tcp-ip", "title": "TCP/IP", "year": 1983, "category": "internet", "description": "ARPANET adopta TCP/IP, nace Internet.", "url": "https://en.wikipedia.org/wiki/Internet", "importance": 3 },
-    { "id": "macintosh", "title": "Apple Macintosh", "year": 1984, "category": "hardware", "description": "Primer PC con interfaz gráfica de usuario popular.", "url": "https://en.wikipedia.org/wiki/Macintosh", "importance": 2 },
-    { "id": "c-plus-plus", "title": "C++", "year": 1985, "category": "languages", "description": "Bjarne Stroustrup crea C++ como extensión de C.", "url": "https://en.wikipedia.org/wiki/C%2B%2B", "importance": 2 },
-    { "id": "perl", "title": "Perl", "year": 1987, "category": "languages", "description": "Larry Wall crea Perl para scripting de Unix.", "url": "https://en.wikipedia.org/wiki/Perl", "importance": 1 },
-    { "id": "www", "title": "World Wide Web", "year": 1989, "category": "internet", "description": "Tim Berners-Lee inventa la WWW en el CERN.", "url": "https://en.wikipedia.org/wiki/World_Wide_Web", "importance": 3 },
-    { "id": "linux", "title": "Linux", "year": 1991, "category": "opensource", "description": "Linus Torvalds publica el kernel Linux.", "url": "https://en.wikipedia.org/wiki/Linux", "importance": 3 },
-    { "id": "python", "title": "Python 1.0", "year": 1991, "category": "languages", "description": "Guido van Rossum publica Python 1.0.", "url": "https://en.wikipedia.org/wiki/Python_1.0", "importance": 3 },
-    { "id": "www-browser", "title": "Primer navegador web", "year": 1990, "category": "internet", "description": "Tim Berners-Lee crea el primer navegador: WorldWideWeb.", "url": "https://en.wikipedia.org/wiki/WorldWideWeb", "importance": 2 },
-    { "id": "usb", "title": "USB 1.0", "year": 1996, "category": "hardware", "description": "Universal Serial Bus, el conector que lo cambia todo.", "url": "https://en.wikipedia.org/wiki/USB", "importance": 2 },
-    { "id": "java", "title": "Java", "year": 1995, "category": "languages", "description": "Sun Microsystems lanza Java: 'Write once, run anywhere'.", "url": "https://en.wikipedia.org/wiki/Java_(programming_language)", "importance": 3 },
-    { "id": "javascript", "title": "JavaScript", "year": 1995, "category": "languages", "description": "Brendan Eich crea JavaScript en Netscape en 10 días.", "url": "https://en.wikipedia.org/wiki/JavaScript", "importance": 3 },
-    { "id": "windows-95", "title": "Windows 95", "year": 1995, "category": "tools", "description": "Microsoft lanza Windows 95 con menú Iniciar.", "url": "https://en.wikipedia.org/wiki/Windows_95", "importance": 2 },
-    { "id": "ie", "title": "Internet Explorer", "year": 1995, "category": "internet", "description": "Microsoft entra en la guerra de navegadores.", "url": "https://en.wikipedia.org/wiki/Internet_Explorer", "importance": 1 },
-    { "id": "google", "title": "Google", "year": 1998, "category": "companies", "description": "Larry Page y Sergey Brin fundan Google en un garaje.", "url": "https://en.wikipedia.org/wiki/Google", "importance": 3 },
-    { "id": "php", "title": "PHP 3.0", "year": 1998, "category": "languages", "description": "PHP se relanza con soporte para bases de datos.", "url": "https://en.wikipedia.org/wiki/PHP", "importance": 1 },
-    { "id": "xml", "title": "XML 1.0", "year": 1998, "category": "tools", "description": "W3C publica XML 1.0, estándar para datos estructurados.", "url": "https://en.wikipedia.org/wiki/XML", "importance": 1 },
-    { "id": "napster", "title": "Napster", "year": 1999, "category": "internet", "description": "P2P cambia la distribución de música para siempre.", "url": "https://en.wikipedia.org/wiki/Napster", "importance": 1 },
-    { "id": "mac-os-x", "title": "Mac OS X", "year": 2001, "category": "tools", "description": "Apple lanza OS X con base Unix.", "url": "https://en.wikipedia.org/wiki/MacOS", "importance": 2 },
-    { "id": "ipod", "title": "iPod", "year": 2001, "category": "hardware", "description": "Apple revoluciona la música portable.", "url": "https://en.wikipedia.org/wiki/IPod", "importance": 2 },
-    { "id": "wiki", "title": "Wikipedia", "year": 2001, "category": "internet", "description": "Jimmy Wales y Larry Sanger lanzan Wikipedia.", "url": "https://en.wikipedia.org/wiki/Wikipedia", "importance": 2 },
-    { "id": "ruby", "title": "Ruby", "year": 2000, "category": "languages", "description": "Ruby 1.6 ganando popularidad en Japón.", "url": "https://en.wikipedia.org/wiki/Ruby_(programming_language)", "importance": 1 },
-    { "id": "ruby-on-rails", "title": "Ruby on Rails", "year": 2004, "category": "frameworks", "description": "David Heinemeier Hansson crea Rails.", "url": "https://en.wikipedia.org/wiki/Ruby_on_Rails", "importance": 2 },
-    { "id": "facebook", "title": "Facebook", "year": 2004, "category": "companies", "description": "Mark Zuckerberg lanza Facebook desde Harvard.", "url": "https://en.wikipedia.org/wiki/Facebook", "importance": 3 },
-    { "id": "github", "title": "GitHub", "year": 2008, "category": "opensource", "description": "Chris Wanstrath, PJ Hyett y Tom Preston-Werner fundan GitHub.", "url": "https://en.wikipedia.org/wiki/GitHub", "importance": 3 },
-    { "id": "android", "title": "Android", "year": 2008, "category": "tools", "description": "Google lanza Android, el SO móvil más usado del mundo.", "url": "https://en.wikipedia.org/wiki/Android_(operating_system)", "importance": 3 },
-    { "id": "chrome", "title": "Google Chrome", "year": 2008, "category": "internet", "description": "Chrome entra en la guerra de navegadores con motor V8.", "url": "https://en.wikipedia.org/wiki/Google_Chrome", "importance": 2 },
-    { "id": "nodejs", "title": "Node.js", "year": 2009, "category": "frameworks", "description": "Ryan Dahl crea Node.js con motor V8 de Chrome.", "url": "https://en.wikipedia.org/wiki/Node.js", "importance": 3 },
-    { "id": "docker", "title": "Docker", "year": 2013, "category": "tools", "description": "Solomon Hykes presenta Docker en PyCon.", "url": "https://en.wikipedia.org/wiki/Docker_(software)", "importance": 3 },
-    { "id": "swift", "title": "Swift", "year": 2014, "category": "languages", "description": "Apple lanza Swift como sucesor de Objective-C.", "url": "https://en.wikipedia.org/wiki/Swift_(programming_language)", "importance": 2 },
-    { "id": "react", "title": "React", "year": 2013, "category": "frameworks", "description": "Facebook libera React para interfaces de usuario.", "url": "https://en.wikipedia.org/wiki/React_(JavaScript_library)", "importance": 3 },
-    { "id": "angular", "title": "Angular 2", "year": 2016, "category": "frameworks", "description": "Google relanza Angular (antes AngularJS) con TypeScript.", "url": "https://en.wikipedia.org/wiki/Angular_(web_framework)", "importance": 2 },
-    { "id": "vue", "title": "Vue.js", "year": 2014, "category": "frameworks", "description": "Evan You crea Vue.js, framework progresivo.", "url": "https://en.wikipedia.org/wiki/Vue.js", "importance": 2 },
-    { "id": "rust", "title": "Rust 1.0", "year": 2015, "category": "languages", "description": "Rust 1.0: seguridad sin garbage collector.", "url": "https://en.wikipedia.org/wiki/Rust_(programming_language)", "importance": 2 },
-    { "id": "go", "title": "Go 1.0", "year": 2012, "category": "languages", "description": "Google lanza Go 1.0, lenguaje para sistemas concurrentes.", "url": "https://en.wikipedia.org/wiki/Go_(programming_language)", "importance": 2 },
-    { "id": "kubernetes", "title": "Kubernetes", "year": 2014, "category": "tools", "description": "Google libera Kubernetes para orquestación de contenedores.", "url": "https://en.wikipedia.org/wiki/Kubernetes", "importance": 3 },
-    { "id": "tensorflow", "title": "TensorFlow", "year": 2015, "category": "ai", "description": "Google libera TensorFlow para machine learning.", "url": "https://en.wikipedia.org/wiki/TensorFlow", "importance": 3 },
-    { "id": "transformers", "title": "Transformers", "year": 2017, "category": "ai", "description": "Google publica 'Attention Is All You Need', nace la arquitectura Transformer.", "url": "https://arxiv.org/abs/1706.03762", "importance": 3 },
-    { "id": "iphone-x", "title": "iPhone X", "year": 2017, "category": "hardware", "description": "Apple elimina el botón Home, llega Face ID.", "url": "https://en.wikipedia.org/wiki/IPhone_X", "importance": 1 },
-    { "id": "gpt-2", "title": "GPT-2", "year": 2019, "category": "ai", "description": "OpenAI lanza GPT-2, 1.5B parámetros.", "url": "https://en.wikipedia.org/wiki/GPT-2", "importance": 2 },
-    { "id": "deno", "title": "Deno 1.0", "year": 2020, "category": "frameworks", "description": "Ryan Dahl lanza Deno como alternativa a Node.js.", "url": "https://en.wikipedia.org/wiki/Deno", "importance": 1 },
-    { "id": "apple-m1", "title": "Apple M1", "year": 2020, "category": "hardware", "description": "Apple Silicon M1: ARM para Mac, revolución de rendimiento.", "url": "https://en.wikipedia.org/wiki/Apple_M1", "importance": 3 },
-    { "id": "gpt-3", "title": "GPT-3", "year": 2020, "category": "ai", "description": "OpenAI lanza GPT-3 con 175B parámetros.", "url": "https://en.wikipedia.org/wiki/GPT-3", "importance": 3 },
-    { "id": "gh-copilot", "title": "GitHub Copilot", "year": 2021, "category": "ai", "description": "GitHub lanza Copilot: asistente de código con IA.", "url": "https://en.wikipedia.org/wiki/GitHub_Copilot", "importance": 2 },
-    { "id": "chatgpt", "title": "ChatGPT", "year": 2022, "category": "ai", "description": "OpenAI lanza ChatGPT, IA que llega a 100M usuarios en 2 meses.", "url": "https://en.wikipedia.org/wiki/ChatGPT", "importance": 3 },
-    { "id": "gpt-4", "title": "GPT-4", "year": 2023, "category": "ai", "description": "OpenAI lanza GPT-4, modelo multimodal.", "url": "https://en.wikipedia.org/wiki/GPT-4", "importance": 3 },
-    { "id": "llama", "title": "Meta LLaMA", "year": 2023, "category": "ai", "description": "Meta libera LLaMA, LLM open source.", "url": "https://en.wikipedia.org/wiki/LLaMA", "importance": 2 },
-    { "id": "bun", "title": "Bun", "year": 2022, "category": "frameworks", "description": "Jarred Sumner crea Bun, runtime JS ultrarrápido.", "url": "https://en.wikipedia.org/wiki/Bun_(software)", "importance": 1 },
-    { "id": "astro", "title": "Astro", "year": 2021, "category": "frameworks", "description": "Astro: framework web island-first para sitios content-driven.", "url": "https://en.wikipedia.org/wiki/Astro_(web_framework)", "importance": 1 },
-    { "id": "tailwind", "title": "Tailwind CSS", "year": 2017, "category": "frameworks", "description": "Adam Wathan crea Tailwind CSS, CSS utility-first.", "url": "https://en.wikipedia.org/wiki/Tailwind_CSS", "importance": 2 },
-    { "id": "nextjs", "title": "Next.js", "year": 2016, "category": "frameworks", "description": "Vercel lanza Next.js para React SSR.", "url": "https://en.wikipedia.org/wiki/Next.js", "importance": 2 },
-    { "id": "svelte", "title": "Svelte", "year": 2016, "category": "frameworks", "description": "Rich Harris crea Svelte, compilador de componentes.", "url": "https://en.wikipedia.org/wiki/Svelte", "importance": 1 },
-    { "id": "typescript", "title": "TypeScript", "year": 2012, "category": "languages", "description": "Microsoft lanza TypeScript, JavaScript con tipos.", "url": "https://en.wikipedia.org/wiki/TypeScript", "importance": 3 },
-    { "id": "vscode", "title": "Visual Studio Code", "year": 2015, "category": "tools", "description": "Microsoft lanza VS Code, editor que domina el mercado.", "url": "https://en.wikipedia.org/wiki/Visual_Studio_Code", "importance": 2 },
-    { "id": "git", "title": "Git", "year": 2005, "category": "tools", "description": "Linus Torvalds crea Git para el kernel Linux.", "url": "https://en.wikipedia.org/wiki/Git", "importance": 3 },
-    { "id": "aws", "title": "Amazon Web Services", "year": 2006, "category": "internet", "description": "AWS lanza EC2 y S3, nace la nube moderna.", "url": "https://en.wikipedia.org/wiki/Amazon_Web_Services", "importance": 3 },
-    { "id": "iphone", "title": "iPhone", "year": 2007, "category": "hardware", "description": "Steve Jobs presenta el iPhone, revoluciona los móviles.", "url": "https://en.wikipedia.org/wiki/IPhone", "importance": 3 },
-    { "id": "app-store", "title": "App Store", "year": 2008, "category": "internet", "description": "Apple abre la App Store, nace la economía de apps.", "url": "https://en.wikipedia.org/wiki/App_Store_(iOS)", "importance": 2 },
-    { "id": "sqlite", "title": "SQLite", "year": 2000, "category": "tools", "description": "Richard Hipp crea SQLite, la BD más desplegada del mundo.", "url": "https://en.wikipedia.org/wiki/SQLite", "importance": 2 },
-    { "id": "wifi", "title": "Wi-Fi", "year": 1999, "category": "internet", "description": "Wi-Fi Alliance crea el estándar 802.11b.", "url": "https://en.wikipedia.org/wiki/Wi-Fi", "importance": 2 },
-    { "id": "bluetooth", "title": "Bluetooth", "year": 1999, "category": "internet", "description": "Bluetooth 1.0: conectividad inalámbrica corta distancia.", "url": "https://en.wikipedia.org/wiki/Bluetooth", "importance": 1 },
-    { "id": "google-cloud", "title": "Google Cloud", "year": 2008, "category": "internet", "description": "Google lanza App Engine, su entrada al cloud.", "url": "https://en.wikipedia.org/wiki/Google_Cloud", "importance": 1 },
-    { "id": "azure", "title": "Microsoft Azure", "year": 2010, "category": "internet", "description": "Microsoft lanza Azure, su plataforma cloud.", "url": "https://en.wikipedia.org/wiki/Microsoft_Azure", "importance": 2 },
-    { "id": "vue-3", "title": "Vue 3", "year": 2020, "category": "frameworks", "description": "Vue 3 con Composition API y mejor rendimiento.", "url": "https://vuejs.org/", "importance": 1 },
-    { "id": "svelte-5", "title": "Svelte 5 (Runes)", "year": 2024, "category": "frameworks", "description": "Svelte 5 con Runes, reactividad basada en signals.", "url": "https://svelte.dev/", "importance": 1 },
-    { "id": "solidjs", "title": "SolidJS", "year": 2021, "category": "frameworks", "description": "Ryan Carniato crea SolidJS, reactividad sin Virtual DOM.", "url": "https://www.solidjs.com/", "importance": 1 },
-    { "id": "htmx", "title": "htmx", "year": 2020, "category": "frameworks", "description": "htmx: HTML extendido para interactividad sin JS.", "url": "https://htmx.org/", "importance": 1 },
-    { "id": "alpine", "title": "Alpine.js", "year": 2019, "category": "frameworks", "description": "Alpine.js: jQuery moderno en 15KB.", "url": "https://alpinejs.dev/", "importance": 1 },
-    { "id": "postgres", "title": "PostgreSQL", "year": 1996, "category": "tools", "description": "PostgreSQL 6.5, la BD open source más avanzada.", "url": "https://en.wikipedia.org/wiki/PostgreSQL", "importance": 2 },
-    { "id": "mongodb", "title": "MongoDB", "year": 2009, "category": "tools", "description": "MongoDB 1.0: base de datos NoSQL popular.", "url": "https://en.wikipedia.org/wiki/MongoDB", "importance": 1 },
-    { "id": "redis", "title": "Redis", "year": 2009, "category": "tools", "description": "Salvatore Sanfilippo crea Redis, caché en memoria.", "url": "https://en.wikipedia.org/wiki/Redis", "importance": 2 },
-    { "id": "terraform", "title": "Terraform", "year": 2014, "category": "tools", "description": "HashiCorp lanza Terraform, infraestructura como código.", "url": "https://en.wikipedia.org/wiki/Terraform", "importance": 2 },
-    { "id": "ansible", "title": "Ansible", "year": 2012, "category": "tools", "description": "Michael DeHaan crea Ansible, automatización sin agentes.", "url": "https://en.wikipedia.org/wiki/Ansible", "importance": 1 },
-    { "id": "vagrant", "title": "Vagrant", "year": 2010, "category": "tools", "description": "Mitchell Hashimoto crea Vagrant para VMs reproducibles.", "url": "https://en.wikipedia.org/wiki/Vagrant_(software)", "importance": 1 },
-    { "id": "webpack", "title": "Webpack", "year": 2012, "category": "tools", "description": "Tobias Koppers crea Webpack, bundler de módulos.", "url": "https://en.wikipedia.org/wiki/Webpack", "importance": 2 },
-    { "id": "vite", "title": "Vite", "year": 2020, "category": "tools", "description": "Evan You crea Vite, dev server ultrarrápido.", "url": "https://en.wikipedia.org/wiki/Vite_(software)", "importance": 2 },
-    { "id": "esbuild", "title": "esbuild", "year": 2020, "category": "tools", "description": "Evan Wallace crea esbuild, bundler en Go 100x más rápido.", "url": "https://esbuild.github.io/", "importance": 1 },
-    { "id": "turbo", "title": "Turborepo", "year": 2021, "category": "tools", "description": "Vercel adquiere Turborepo, monorepos incrementales.", "url": "https://turbo.build/", "importance": 1 },
-    { "id": "neon", "title": "Neon", "year": 2022, "category": "tools", "description": "Neon: PostgreSQL serverless en la nube.", "url": "https://neon.tech/", "importance": 1 },
-    { "id": "planetscale", "title": "PlanetScale", "year": 2022, "category": "tools", "description": "PlanetScale: MySQL serverless branching.", "url": "https://planetscale.com/", "importance": 1 },
-    { "id": "supabase", "title": "Supabase", "year": 2020, "category": "tools", "description": "Supabase: alternativa open source a Firebase.", "url": "https://supabase.com/", "importance": 1 },
-    { "id": "firebase", "title": "Firebase", "year": 2012, "category": "tools", "description": "Google adquiere Firebase, plataforma para apps.", "url": "https://en.wikipedia.org/wiki/Firebase", "importance": 2 },
-    { "id": "netlify", "title": "Netlify", "year": 2014, "category": "internet", "description": "Netlify: hosting JAMstack con deploy automático.", "url": "https://www.netlify.com/", "importance": 1 },
-    { "id": "vercel", "title": "Vercel", "year": 2015, "category": "internet", "description": "Vercel (antes ZEIT): plataforma para Next.js.", "url": "https://vercel.com/", "importance": 2 },
-    { "id": "surge", "title": "Surge.sh", "year": 2014, "category": "internet", "description": "Surge: deploy estático desde CLI.", "url": "https://surge.sh/", "importance": 1 },
-    { "id": "cloudflare", "title": "Cloudflare", "year": 2010, "category": "internet", "description": "Cloudflare: CDN y protección DDoS.", "url": "https://www.cloudflare.com/", "importance": 2 },
-    { "id": "stripe", "title": "Stripe", "year": 2010, "category": "internet", "description": "Stripe: pagos online para desarrolladores.", "url": "https://stripe.com/", "importance": 2 },
-    { "id": "figma", "title": "Figma", "year": 2016, "category": "tools", "description": "Figma: diseño de interfaces colaborativo en navegador.", "url": "https://www.figma.com/", "importance": 2 },
-    { "id": "notion", "title": "Notion", "year": 2016, "category": "tools", "description": "Notion: workspace todo-en-uno.", "url": "https://www.notion.so/", "importance": 1 },
-    { "id": "slack", "title": "Slack", "year": 2013, "category": "tools", "description": "Slack revoluciona la comunicación en equipo.", "url": "https://slack.com/", "importance": 2 },
-    { "id": "discord", "title": "Discord", "year": 2015, "category": "tools", "description": "Discord: chat de voz para gamers y comunidades.", "url": "https://discord.com/", "importance": 1 },
-    { "id": "openai", "title": "OpenAI", "year": 2015, "category": "companies", "description": "Sam Altman, Elon Musk y otros fundan OpenAI.", "url": "https://en.wikipedia.org/wiki/OpenAI", "importance": 3 },
-    { "id": "deepmind", "title": "DeepMind", "year": 2010, "category": "ai", "description": "Demis Hassabis funda DeepMind, IA para investigación.", "url": "https://en.wikipedia.org/wiki/DeepMind", "importance": 2 },
-    { "id": "alphago", "title": "AlphaGo", "year": 2016, "category": "ai", "description": "DeepMind's AlphaGo vence al campeón mundial de Go.", "url": "https://en.wikipedia.org/wiki/AlphaGo", "importance": 2 },
-    { "id": "gpt-4-turbo", "title": "GPT-4 Turbo", "year": 2023, "category": "ai", "description": "OpenAI lanza GPT-4 Turbo con 128k contexto.", "url": "https://openai.com/", "importance": 2 },
-    { "id": "claude", "title": "Claude 3", "year": 2024, "category": "ai", "description": "Anthropic lanza Claude 3, rival de GPT-4.", "url": "https://www.anthropic.com/", "importance": 2 },
-    { "id": "llama-3", "title": "LLaMA 3", "year": 2024, "category": "ai", "description": "Meta lanza LLaMA 3, modelo open source de 405B.", "url": "https://llama.meta.com/", "importance": 2 },
-    { "id": "mistral", "title": "Mistral AI", "year": 2023, "category": "ai", "description": "Mistral AI: startup francesa de LLMs eficientes.", "url": "https://mistral.ai/", "importance": 1 },
-    { "id": "deepseek", "title": "DeepSeek-V3", "year": 2024, "category": "ai", "description": "DeepSeek-V3: modelo chino open source de alto rendimiento.", "url": "https://github.com/deepseek-ai", "importance": 1 },
-    { "id": "ollama", "title": "Ollama", "year": 2023, "category": "ai", "description": "Ollama: ejecuta LLMs localmente con un clic.", "url": "https://ollama.com/", "importance": 2 },
-    { "id": "llamacpp", "title": "llama.cpp", "year": 2023, "category": "ai", "description": "Georgi Gerganov crea llama.cpp, inferencia en CPU.", "url": "https://github.com/ggerganov/llama.cpp", "importance": 2 },
-    { "id": "midudev", "title": "Midudev", "year": 2020, "category": "companies", "description": "Miguel Ángel (Midudev) crea contenido tech en español.", "url": "https://midu.dev/", "importance": 1 },
-    { "id": "mouredev", "title": "MoureDev", "year": 2020, "category": "companies", "description": "Brais Moure (MoureDev) crea contenido tech en español.", "url": "https://moure.dev/", "importance": 1 },
-    { "id": "arduino", "title": "Arduino", "year": 2005, "category": "hardware", "description": "Arduino: plataforma de hardware abierto para makers.", "url": "https://www.arduino.cc/", "importance": 2 },
-    { "id": "raspberry", "title": "Raspberry Pi", "year": 2012, "category": "hardware", "description": "Raspberry Pi: computadora de $35 para educación.", "url": "https://www.raspberrypi.com/", "importance": 2 },
-    { "id": "esp32", "title": "ESP32", "year": 2016, "category": "hardware", "description": "Espressif lanza ESP32, WiFi+BT barato para IoT.", "url": "https://www.espressif.com/", "importance": 1 },
-    { "id": "nvidia-gpu", "title": "NVIDIA CUDA", "year": 2007, "category": "hardware", "description": "NVIDIA lanza CUDA, computación paralela en GPU.", "url": "https://developer.nvidia.com/cuda-toolkit", "importance": 2 },
-    { "id": "arm", "title": "ARM Holdings", "year": 1990, "category": "hardware", "description": "ARM: arquitectura RISC que domina móviles e IoT.", "url": "https://en.wikipedia.org/wiki/Arm_Holdings", "importance": 2 },
-    { "id": "nft", "title": "NFTs y Web3", "year": 2021, "category": "internet", "description": "Explosión de NFTs, blockchain y Web3.", "url": "https://en.wikipedia.org/wiki/Non-fungible_token", "importance": 1 },
-    { "id": "crypto", "title": "Bitcoin", "year": 2009, "category": "internet", "description": "Satoshi Nakamoto publica Bitcoin, primera criptomoneda.", "url": "https://en.wikipedia.org/wiki/Bitcoin", "importance": 2 },
-    { "id": "ethereum", "title": "Ethereum", "year": 2015, "category": "internet", "description": "Vitalik Buterin lanza Ethereum, blockchain programmable.", "url": "https://en.wikipedia.org/wiki/Ethereum", "importance": 2 },
-    { "id": "nostr", "title": "Nostr", "year": 2020, "category": "internet", "description": "Nostr: protocolo descentralizado para redes sociales.", "url": "https://en.wikipedia.org/wiki/Nostr", "importance": 1 },
-    { "id": "mastodon", "title": "Mastodon", "year": 2016, "category": "internet", "description": "Mastodon: red social descentralizada tipo Twitter.", "url": "https://en.wikipedia.org/wiki/Mastodon_(social_network)", "importance": 1 },
-    { "id": "matrix", "title": "Matrix", "year": 2019, "category": "internet", "description": "Matrix: protocolo abierto para comunicación descentralizada.", "url": "https://matrix.org/", "importance": 1 },
-    { "id": "wasm", "title": "WebAssembly", "year": 2017, "category": "languages", "description": "WASM: código binario para la web, rendimiento nativo.", "url": "https://webassembly.org/", "importance": 2 },
-    { "id": "dart-3", "title": "Dart 3", "year": 2023, "category": "languages", "description": "Dart 3 con patrones y clases selladas.", "url": "https://dart.dev/", "importance": 1 },
-    { "id": "kotlin-2", "title": "Kotlin 2.0", "year": 2024, "category": "languages", "description": "Kotlin 2.0 con K2 compiler, más rápido.", "url": "https://kotlinlang.org/", "importance": 1 },
-    { "id": "python-3-12", "title": "Python 3.12", "year": 2023, "category": "languages", "description": "Python 3.12 con mejor rendimiento y f-strings mejorados.", "url": "https://www.python.org/", "importance": 1 },
-    { "id": "java-21", "title": "Java 21 LTS", "year": 2023, "category": "languages", "description": "Java 21 con virtual threads y pattern matching.", "url": "https://openjdk.org/", "importance": 1 },
-    { "id": "zig", "title": "Zig", "year": 2016, "category": "languages", "description": "Zig: lenguaje de sistemas moderno y seguro.", "url": "https://ziglang.org/", "importance": 1 },
-    { "id": "elixir", "title": "Elixir", "year": 2011, "category": "languages", "description": "Elixir: funcional, concurrente, sobre la BEAM.", "url": "https://elixir-lang.org/", "importance": 1 },
-    { "id": "clojure", "title": "Clojure", "year": 2007, "category": "languages", "description": "Rich Hickey crea Clojure, Lisp para la JVM.", "url": "https://clojure.org/", "importance": 1 },
-    { "id": "haskell", "title": "Haskell", "year": 1990, "category": "languages", "description": "Haskell: lenguaje funcional puro, estándar lazy.", "url": "https://www.haskell.org/", "importance": 1 },
-    { "id": "scala", "title": "Scala", "year": 2004, "category": "languages", "description": "Martin Odersky crea Scala, POO funcional para JVM.", "url": "https://www.scala-lang.org/", "importance": 1 },
-    { "id": "erlang", "title": "Erlang", "year": 1986, "category": "languages", "description": "Ericsson crea Erlang para telecomunicaciones.", "url": "https://www.erlang.org/", "importance": 1 },
-    { "id": "lua", "title": "Lua", "year": 1993, "category": "languages", "description": "Lua: lenguaje de scripting ligero para嵌入式.", "url": "https://www.lua.org/", "importance": 1 },
-    { "id": "r-lang", "title": "R", "year": 2000, "category": "languages", "description": "R: lenguaje para estadística y análisis de datos.", "url": "https://www.r-project.org/", "importance": 1 },
-    { "id": "matlab", "title": "MATLAB", "year": 1984, "category": "languages", "description": "MathWorks lanza MATLAB para cálculo numérico.", "url": "https://www.mathworks.com/", "importance": 1 },
-    { "id": "assembly", "title": "Assembly", "year": 1970, "category": "languages", "description": "Lenguaje ensamblador: código máquina legible.", "url": "https://en.wikipedia.org/wiki/Assembly_language", "importance": 2 },
-    { "id": "fortran", "title": "FORTRAN", "year": 1970, "category": "languages", "description": "FORTRAN 77: dominante en cálculo científico.", "url": "https://en.wikipedia.org/wiki/Fortran", "importance": 1 },
-    { "id": "cobol", "title": "COBOL", "year": 1970, "category": "languages", "description": "COBOL: todavía en sistemas bancarios 50 años después.", "url": "https://en.wikipedia.org/wiki/COBOL", "importance": 1 },
-    { "id": "basic", "title": "BASIC", "year": 1970, "category": "languages", "description": "BASIC democratiza la programación en los 70-80.", "url": "https://en.wikipedia.org/wiki/BASIC", "importance": 1 },
-    { "id": "apple-watch", "title": "Apple Watch", "year": 2015, "category": "hardware", "description": "Apple Watch: el smartwatch más vendido del mundo.", "url": "https://en.wikipedia.org/wiki/Apple_Watch", "importance": 1 },
-    { "id": "airpods", "title": "AirPods", "year": 2016, "category": "hardware", "description": "Apple AirPods: auriculares true wireless.", "url": "https://en.wikipedia.org/wiki/AirPods", "importance": 1 },
-    { "id": "meta-quest", "title": "Meta Quest", "year": 2019, "category": "hardware", "description": "Oculus Quest: realidad virtual standalone.", "url": "https://www.meta.com/quest/", "importance": 1 },
-    { "id": "apple-vision", "title": "Apple Vision Pro", "year": 2023, "category": "hardware", "description": "Apple Vision Pro: computación espacial.", "url": "https://www.apple.com/apple-vision-pro/", "importance": 2 },
-    { "id": "tesla", "title": "Tesla Model S", "year": 2012, "category": "hardware", "description": "Tesla Model S: coche eléctrico que cambia la industria.", "url": "https://www.tesla.com/", "importance": 1 },
-    { "id": "spacex", "title": "SpaceX", "year": 2002, "category": "companies", "description": "Elon Musk funda SpaceX para colonizar Marte.", "url": "https://www.spacex.com/", "importance": 2 },
-    { "id": "nasa-mars", "title": "Mars Rover Perseverance", "year": 2021, "category": "hardware", "description": "NASA aterriza el rover Perseverance en Marte.", "url": "https://mars.nasa.gov/mars2020/", "importance": 1 },
-    { "id": "crispr", "title": "CRISPR", "year": 2012, "category": "ai", "description": "CRISPR-Cas9: edición genética con IA.", "url": "https://en.wikipedia.org/wiki/CRISPR", "importance": 2 },
-    { "id": "quantum", "title": "IBM Quantum", "year": 2016, "category": "hardware", "description": "IBM lanza IBM Quantum Experience, computación cuántica accesible.", "url": "https://www.ibm.com/quantum", "importance": 1 },
-    { "id": "starlink", "title": "Starlink", "year": 2019, "category": "internet", "description": "SpaceX lanza Starlink, internet vía satélite.", "url": "https://www.starlink.com/", "importance": 1 },
-    { "id": "5g", "title": "5G", "year": 2019, "category": "internet", "description": "5G: nueva generación de redes móviles.", "url": "https://en.wikipedia.org/wiki/5G", "importance": 1 },
-    { "id": "safari", "title": "Safari", "year": 2003, "category": "internet", "description": "Apple lanza Safari para Mac.", "url": "https://en.wikipedia.org/wiki/Safari_(web_browser)", "importance": 1 },
-    { "id": "firefox", "title": "Firefox", "year": 2004, "category": "internet", "description": "Firefox 1.0: el navegador open source que desafía a IE.", "url": "https://en.wikipedia.org/wiki/Firefox", "importance": 2 },
-    { "id": "opera", "title": "Opera", "year": 1995, "category": "internet", "description": "Opera: pionero en innovación de navegadores.", "url": "https://en.wikipedia.org/wiki/Opera_(web_browser)", "importance": 1 },
-    { "id": "ie6", "title": "Internet Explorer 6", "year": 2001, "category": "internet", "description": "IE6 domina el mercado con 95% de cuota.", "url": "https://en.wikipedia.org/wiki/Internet_Explorer_6", "importance": 1 },
-    { "id": "youtube", "title": "YouTube", "year": 2005, "category": "companies", "description": "Chad Hurley, Steve Chen y Jawed Karim fundan YouTube.", "url": "https://en.wikipedia.org/wiki/YouTube", "importance": 3 },
-    { "id": "twitter", "title": "Twitter", "year": 2006, "category": "companies", "description": "Jack Dorsey publica el primer tweet.", "url": "https://en.wikipedia.org/wiki/Twitter", "importance": 2 },
-    { "id": "instagram", "title": "Instagram", "year": 2010, "category": "companies", "description": "Kevin Systrom y Mike Krieger lanzan Instagram.", "url": "https://en.wikipedia.org/wiki/Instagram", "importance": 2 },
-    { "id": "tiktok", "title": "TikTok", "year": 2016, "category": "companies", "description": "ByteDance lanza TikTok (Douyin en China).", "url": "https://en.wikipedia.org/wiki/TikTok", "importance": 2 },
-    { "id": "uber", "title": "Uber", "year": 2009, "category": "companies", "description": "Uber revoluciona el transporte.", "url": "https://en.wikipedia.org/wiki/Uber", "importance": 1 },
-    { "id": "airbnb", "title": "Airbnb", "year": 2008, "category": "companies", "description": "Airbnb: alquiler de habitaciones entre particulares.", "url": "https://en.wikipedia.org/wiki/Airbnb", "importance": 1 },
-    { "id": "spotify", "title": "Spotify", "year": 2008, "category": "companies", "description": "Daniel Ek lanza Spotify, streaming de música.", "url": "https://en.wikipedia.org/wiki/Spotify", "importance": 2 },
-    { "id": "netflix", "title": "Netflix Streaming", "year": 2007, "category": "companies", "description": "Netflix empieza streaming, fin del DVD.", "url": "https://en.wikipedia.org/wiki/Netflix", "importance": 2 },
-    { "id": "amazon", "title": "Amazon", "year": 1994, "category": "companies", "description": "Jeff Bezos funda Amazon como librería online.", "url": "https://en.wikipedia.org/wiki/Amazon_(company)", "importance": 2 },
-    { "id": "apple-cupertino", "title": "Apple Park", "year": 2017, "category": "companies", "description": "Apple se muda a Apple Park, su nueva sede.", "url": "https://en.wikipedia.org/wiki/Apple_Park", "importance": 1 },
-    { "id": "microsoft-nokia", "title": "Microsoft compra Nokia", "year": 2013, "category": "companies", "description": "Microsoft compra la división de dispositivos de Nokia.", "url": "https://en.wikipedia.org/wiki/Microsoft_Nokia", "importance": 1 },
-    { "id": "yahoo-verizon", "title": "Yahoo → Verizon", "year": 2017, "category": "companies", "description": "Verizon compra Yahoo por $4.48B.", "url": "https://en.wikipedia.org/wiki/Yahoo!", "importance": 1 },
-    { "id": "github-copilot-x", "title": "GitHub Copilot X", "year": 2023, "category": "ai", "description": "GitHub expande Copilot con chat, voice y more.", "url": "https://github.com/features/copilot", "importance": 1 },
-    { "id": "cursor", "title": "Cursor", "year": 2023, "category": "tools", "description": "Cursor: editor de código con IA integrada.", "url": "https://www.cursor.sh/", "importance": 2 },
-    { "id": "v0", "title": "Vercel v0", "year": 2023, "category": "ai", "description": "Vercel lanza v0: generador de UI con IA.", "url": "https://v0.dev/", "importance": 1 },
-    { "id": "bolt", "title": "Bolt.new", "year": 2024, "category": "ai", "description": "Bolt.new: generar apps completas con IA en el navegador.", "url": "https://bolt.new/", "importance": 1 },
-    { "id": "replit-ai", "title": "Replit AI", "year": 2023, "category": "ai", "description": "Replit integra IA para codear desde el navegador.", "url": "https://replit.com/", "importance": 1 },
-    { "id": "npm", "title": "npm", "year": 2010, "category": "tools", "description": "Isaac Schlueter crea npm, gestor de paquetes de Node.", "url": "https://www.npmjs.com/", "importance": 2 },
-    { "id": "yarn", "title": "Yarn", "year": 2016, "category": "tools", "description": "Facebook lanza Yarn, alternativa a npm.", "url": "https://yarnpkg.com/", "importance": 1 },
-    { "id": "pnpm", "title": "pnpm", "year": 2017, "category": "tools", "description": "pnpm: gestor de paquetes eficiente con hard links.", "url": "https://pnpm.io/", "importance": 1 },
-    { "id": "bun-1", "title": "Bun 1.0", "year": 2023, "category": "frameworks", "description": "Bun 1.0: runtime JS que desafía a Node y Deno.", "url": "https://bun.sh/", "importance": 1 },
-    { "id": "biome", "title": "Biome", "year": 2023, "category": "tools", "description": "Biome (antes Rome): linting y formateo en Rust.", "url": "https://biomejs.dev/", "importance": 1 },
-    { "id": "oxc", "title": "Oxc", "year": 2023, "category": "tools", "description": "Oxc: parser y linter ultra-rápido en Rust.", "url": "https://oxc-project.github.io/", "importance": 1 },
-    { "id": "ruff", "title": "Ruff", "year": 2022, "category": "tools", "description": "Ruff: linter de Python 10-100x más rápido en Rust.", "url": "https://docs.astral.sh/ruff/", "importance": 1 },
-    { "id": "uv", "title": "uv", "year": 2024, "category": "tools", "description": "uv: gestor de paquetes de Python en Rust, 10-100x más rápido.", "url": "https://docs.astral.sh/uv/", "importance": 1 },
-    { "id": "turso", "title": "Turso", "year": 2022, "category": "tools", "description": "Turso: SQLite distribuido en el edge.", "url": "https://turso.tech/", "importance": 1 },
-    { "id": "libsql", "title": "libSQL", "year": 2023, "category": "opensource", "description": "libSQL: fork de SQLite open source.", "url": "https://github.com/tursodatabase/libsql", "importance": 1 },
-    { "id": "duckdb", "title": "DuckDB", "year": 2019, "category": "tools", "description": "DuckDB: SQLite para analytics, OLAP embebido.", "url": "https://duckdb.org/", "importance": 1 },
-    { "id": "clickhouse", "title": "ClickHouse", "year": 2016, "category": "tools", "description": "ClickHouse: base de datos columnar ultrarrápida.", "url": "https://clickhouse.com/", "importance": 1 },
-    { "id": "influxdb", "title": "InfluxDB", "year": 2013, "category": "tools", "description": "InfluxDB: base de datos para series temporales.", "url": "https://www.influxdata.com/", "importance": 1 },
-    { "id": "neo4j", "title": "Neo4j", "year": 2007, "category": "tools", "description": "Neo4j: base de datos de grafos.", "url": "https://neo4j.com/", "importance": 1 },
-    { "id": "elasticsearch", "title": "Elasticsearch", "year": 2010, "category": "tools", "description": "Elasticsearch: motor de búsqueda y analytics.", "url": "https://www.elastic.co/", "importance": 1 },
-    { "id": "grafana", "title": "Grafana", "year": 2014, "category": "tools", "description": "Grafana: dashboards de observabilidad.", "url": "https://grafana.com/", "importance": 1 },
-    { "id": "prometheus", "title": "Prometheus", "year": 2012, "category": "tools", "description": "Prometheus: monitoreo y alerting time-series.", "url": "https://prometheus.io/", "importance": 1 },
-    { "id": "nginx", "title": "Nginx", "year": 2004, "category": "tools", "description": "Igor Sysoev crea Nginx, web server de alto rendimiento.", "url": "https://nginx.org/", "importance": 2 },
-    { "id": "caddy", "title": "Caddy", "year": 2015, "category": "tools", "description": "Caddy: web server con HTTPS automático.", "url": "https://caddyserver.com/", "importance": 1 },
-    { "id": "traefik", "title": "Traefik", "year": 2016, "category": "tools", "description": "Traefik: reverse proxy cloud-native.", "url": "https://traefik.io/", "importance": 1 },
-    { "id": "hugo", "title": "Hugo", "year": 2013, "category": "frameworks", "description": "Hugo: generador de sitios estáticos en Go.", "url": "https://gohugo.io/", "importance": 1 },
-    { "id": "jekyll", "title": "Jekyll", "year": 2008, "category": "frameworks", "description": "Tom Preston-Werner crea Jekyll para blogs estáticos.", "url": "https://jekyllrb.com/", "importance": 1 },
-    { "id": "11ty", "title": "Eleventy", "year": 2018, "category": "frameworks", "description": "Eleventy: generador de sitios estáticos simple.", "url": "https://www.11ty.dev/", "importance": 1 },
-    { "id": "remix", "title": "Remix", "year": 2021, "category": "frameworks", "description": "Remix: framework web full-stack para React.", "url": "https://remix.run/", "importance": 1 },
-    { "id": "solidstart", "title": "SolidStart", "year": 2022, "category": "frameworks", "description": "SolidStart: meta-framework para SolidJS.", "url": "https://start.solidjs.com/", "importance": 1 },
-    { "id": "nuxt", "title": "Nuxt", "year": 2016, "category": "frameworks", "description": "Nuxt: framework Vue para SSR/SSG.", "url": "https://nuxt.com/", "importance": 1 },
-    { "id": "sveltekit", "title": "SvelteKit", "year": 2021, "category": "frameworks", "description": "SvelteKit: framework web para Svelte.", "url": "https://kit.svelte.dev/", "importance": 1 },
-    { "id": "astro-2", "title": "Astro 2.0", "year": 2023, "category": "frameworks", "description": "Astro 2.0 con Content Collections y server islands.", "url": "https://astro.build/", "importance": 1 },
-    { "id": "laravel-11", "title": "Laravel 11", "year": 2024, "category": "frameworks", "description": "Laravel 11: framework PHP más popular.", "url": "https://laravel.com/", "importance": 1 },
-    { "id": "django-5", "title": "Django 5", "year": 2023, "category": "frameworks", "description": "Django 5: framework Python para web.", "url": "https://www.djangoproject.com/", "importance": 1 },
-    { "id": "fastapi", "title": "FastAPI", "year": 2018, "category": "frameworks", "description": "Sebastián Ramírez crea FastAPI para Python.", "url": "https://fastapi.tiangolo.com/", "importance": 2 },
-    { "id": "fiber", "title": "Fiber", "year": 2020, "category": "frameworks", "description": "Fiber: framework web ultrarrápido en Go.", "url": "https://gofiber.io/", "importance": 1 },
-    { "id": "actix", "title": "Actix Web", "year": 2017, "category": "frameworks", "description": "Actix Web: framework Rust de alto rendimiento.", "url": "https://actix.rs/", "importance": 1 },
-    { "id": "rails-7", "title": "Rails 7", "year": 2021, "category": "frameworks", "description": "Rails 7: sin JavaScript, import maps y Hotwire.", "url": "https://rubyonrails.org/", "importance": 1 },
-    { "id": "spring-boot-3", "title": "Spring Boot 3", "year": 2022, "category": "frameworks", "description": "Spring Boot 3: Java 17+ y GraalVM native images.", "url": "https://spring.io/", "importance": 1 },
-    { "id": "dotnet-8", "title": ".NET 8", "year": 2023, "category": "frameworks", "description": ".NET 8: plataforma unificada de Microsoft.", "url": "https://dotnet.microsoft.com/", "importance": 1 },
-    { "id": "blazor", "title": "Blazor", "year": 2018, "category": "frameworks", "description": "Blazor: C# en el navegador via WebAssembly.", "url": "https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor", "importance": 1 },
-    { "id": "htmx-1", "title": "htmx 1.0", "year": 2020, "category": "frameworks", "description": "htmx: HTML extendido para interactividad sin JS.", "url": "https://htmx.org/", "importance": 1 },
-    { "id": "pytorch", "title": "PyTorch", "year": 2016, "category": "ai", "description": "Facebook lanza PyTorch, framework de ML flexible.", "url": "https://pytorch.org/", "importance": 3 },
-    { "id": "keras", "title": "Keras", "year": 2015, "category": "ai", "description": "François Chollet crea Keras, API de DL amigable.", "url": "https://keras.io/", "importance": 1 },
-    { "id": "scikit-learn", "title": "scikit-learn", "year": 2010, "category": "ai", "description": "scikit-learn: ML en Python, simple y efectivo.", "url": "https://scikit-learn.org/", "importance": 1 },
-    { "id": "pandas", "title": "pandas", "year": 2008, "category": "ai", "description": "Wes McKinney crea pandas para análisis de datos.", "url": "https://pandas.pydata.org/", "importance": 2 },
-    { "id": "numpy", "title": "NumPy", "year": 2005, "category": "ai", "description": "NumPy: arrays n-dimensional para cálculo numérico.", "url": "https://numpy.org/", "importance": 2 },
-    { "id": "jupyter", "title": "Jupyter", "year": 2014, "category": "tools", "description": "Jupyter: notebooks interactivos para ciencia de datos.", "url": "https://jupyter.org/", "importance": 2 },
-    { "id": "huggingface", "title": "Hugging Face", "year": 2016, "category": "ai", "description": "Hugging Face: GitHub de la IA con modelos open source.", "url": "https://huggingface.co/", "importance": 2 },
-    { "id": "langchain", "title": "LangChain", "year": 2022, "category": "ai", "description": "LangChain: framework para apps con LLMs.", "url": "https://www.langchain.com/", "importance": 1 },
-    { "id": "llamaindex", "title": "LlamaIndex", "year": 2022, "category": "ai", "description": "LlamaIndex: framework para RAG.", "url": "https://www.llamaindex.ai/", "importance": 1 },
-    { "id": "stable-diffusion", "title": "Stable Diffusion", "year": 2022, "category": "ai", "description": "Stability AI lanza Stable Diffusion, generación de imágenes.", "url": "https://stability.ai/", "importance": 2 },
-    { "id": "dalle", "title": "DALL-E", "year": 2021, "category": "ai", "description": "OpenAI lanza DALL-E, imágenes desde texto.", "url": "https://openai.com/dall-e-3", "importance": 2 },
-    { "id": "midjourney", "title": "Midjourney", "year": 2022, "category": "ai", "description": "Midjourney: generación de arte con IA.", "url": "https://www.midjourney.com/", "importance": 2 },
-    { "id": "whisper", "title": "Whisper", "year": 2022, "category": "ai", "description": "OpenAI Whisper: reconocimiento de voz open source.", "url": "https://openai.com/research/whisper", "importance": 1 },
-    { "id": "elevenlabs", "title": "ElevenLabs", "year": 2022, "category": "ai", "description": "ElevenLabs: síntesis de voz ultrarrealista.", "url": "https://elevenlabs.io/", "importance": 1 },
-    { "id": "perplexity", "title": "Perplexity AI", "year": 2022, "category": "ai", "description": "Perplexity: motor de búsqueda con IA.", "url": "https://www.perplexity.ai/", "importance": 1 },
-    { "id": "gemini", "title": "Google Gemini", "year": 2023, "category": "ai", "description": "Google lanza Gemini, su modelo multimodal.", "url": "https://deepmind.google/technologies/gemini/", "importance": 2 },
-    { "id": "groq", "title": "Groq", "year": 2023, "category": "ai", "description": "Groq: inferencia de LLMs ultra-rápida con LPU.", "url": "https://groq.com/", "importance": 1 },
-    { "id": "together", "title": "Together AI", "year": 2022, "category": "ai", "description": "Together AI: plataforma open source para LLMs.", "url": "https://www.together.ai/", "importance": 1 },
-    { "id": "replicate", "title": "Replicate", "year": 2019, "category": "ai", "description": "Replicate: ejecuta modelos de IA en la nube.", "url": "https://replicate.com/", "importance": 1 },
-    { "id": "runway", "title": "Runway", "year": 2018, "category": "ai", "description": "Runway: IA para edición de video.", "url": "https://runwayml.com/", "importance": 1 },
-    { "id": "suno", "title": "Suno AI", "year": 2023, "category": "ai", "description": "Suno: IA que genera música con letra.", "url": "https://suno.com/", "importance": 1 },
-    { "id": "udio", "title": "Udio", "year": 2024, "category": "ai", "description": "Udio: alternativa a Suno para música con IA.", "url": "https://www.udio.com/", "importance": 1 },
-    { "id": "waymo", "title": "Waymo", "year": 2009, "category": "ai", "description": "Google crea Waymo para coches autónomos.", "url": "https://waymo.com/", "importance": 1 },
-    { "id": "tesla-ai", "title": "Tesla Autopilot", "year": 2014, "category": "ai", "description": "Tesla lanza Autopilot, conducción asistida.", "url": "https://www.tesla.com/autopilot", "importance": 1 },
-    { "id": "bsd", "title": "BSD Unix", "year": 1978, "category": "opensource", "description": "BSD: variante de Unix que inspira a Linux.", "url": "https://en.wikipedia.org/wiki/Berkeley_Software_Distribution", "importance": 1 },
-    { "id": "gnu", "title": "GNU", "year": 1983, "category": "opensource", "description": "Richard Stallman lanza el proyecto GNU.", "url": "https://www.gnu.org/", "importance": 2 },
-    { "id": "gpl", "title": "GPL", "year": 1989, "category": "opensource", "description": "Stallman crea la licencia GPL.", "url": "https://www.gnu.org/licenses/gpl-3.0.html", "importance": 2 },
-    { "id": "apache", "title": "Apache HTTP Server", "year": 1995, "category": "opensource", "description": "Apache se convierte en el servidor web más usado.", "url": "https://httpd.apache.org/", "importance": 1 },
-    { "id": "debian", "title": "Debian", "year": 1993, "category": "opensource", "description": "Ian Murdock crea Debian, distro base de muchas.", "url": "https://www.debian.org/", "importance": 1 },
-    { "id": "ubuntu", "title": "Ubuntu", "year": 2004, "category": "opensource", "description": "Canonical lanza Ubuntu, Linux para todos.", "url": "https://ubuntu.com/", "importance": 2 },
-    { "id": "fedora", "title": "Fedora", "year": 2003, "category": "opensource", "description": "Fedora: distro comunitaria de Red Hat.", "url": "https://fedoraproject.org/", "importance": 1 },
-    { "id": "arch", "title": "Arch Linux", "year": 2002, "category": "opensource", "description": "Arch Linux: distro rolling release para avanzados.", "url": "https://archlinux.org/", "importance": 1 },
-    { "id": "freebsd", "title": "FreeBSD", "year": 1993, "category": "opensource", "description": "FreeBSD: sistema operativo derivado de BSD.", "url": "https://www.freebsd.org/", "importance": 1 },
-    { "id": "openbsd", "title": "OpenBSD", "year": 1995, "category": "opensource", "description": "Theo de Raadt crea OpenBSD, enfocado en seguridad.", "url": "https://www.openbsd.org/", "importance": 1 },
-    { "id": "netbsd", "title": "NetBSD", "year": 1993, "category": "opensource", "description": "NetBSD: portabilidad como objetivo.", "url": "https://www.netbsd.org/", "importance": 1 },
-    { "id": "vim", "title": "Vim", "year": 1991, "category": "tools", "description": "Bram Moolenaar crea Vim.", "url": "https://www.vim.org/", "importance": 2 },
-    { "id": "emacs", "title": "Emacs", "year": 1976, "category": "tools", "description": "Richard Stallman crea Emacs.", "url": "https://www.gnu.org/software/emacs/", "importance": 1 },
-    { "id": "neovim", "title": "Neovim", "year": 2014, "category": "tools", "description": "Neovim: fork de Vim con mejoras modernas.", "url": "https://neovim.io/", "importance": 1 },
-    { "id": "helix", "title": "Helix", "year": 2021, "category": "tools", "description": "Helix: editor modal moderno en Rust.", "url": "https://helix-editor.com/", "importance": 1 },
-    { "id": "zellij", "title": "Zellij", "year": 2021, "category": "tools", "description": "Zellij: multiplexor de terminal en Rust.", "url": "https://zellij.dev/", "importance": 1 },
-    { "id": "tmux", "title": "tmux", "year": 2007, "category": "tools", "description": "tmux: multiplexor de terminal.", "url": "https://github.com/tmux/tmux", "importance": 1 },
-    { "id": "alacritty", "title": "Alacritty", "year": 2017, "category": "tools", "description": "Alacritty: terminal GPU-acelerada en Rust.", "url": "https://alacritty.org/", "importance": 1 },
-    { "id": "warp", "title": "Warp", "year": 2022, "category": "tools", "description": "Warp: terminal moderna con IA.", "url": "https://www.warp.dev/", "importance": 1 },
-    { "id": "fig", "title": "Fig (Amazon)", "year": 2021, "category": "tools", "description": "Fig: autocompletado en terminal para devs.", "url": "https://fig.io/", "importance": 1 },
-    { "id": "nix", "title": "Nix", "year": 2003, "category": "tools", "description": "Nix: gestor de paquetes declarativo.", "url": "https://nixos.org/", "importance": 1 },
-    { "id": "guix", "title": "GNU Guix", "year": 2012, "category": "tools", "description": "GNU Guix: sistema de paquetes funcional.", "url": "https://guix.gnu.org/", "importance": 1 },
-    { "id": "flatpak", "title": "Flatpak", "year": 2015, "category": "tools", "description": "Flatpak: empaquetado universal para Linux.", "url": "https://flatpak.org/", "importance": 1 },
-    { "id": "snap", "title": "Snap", "year": 2014, "category": "tools", "description": "Ubuntu Snap: paquetes universales.", "url": "https://snapcraft.io/", "importance": 1 },
-    { "id": "appimage", "title": "AppImage", "year": 2004, "category": "tools", "description": "AppImage: apps portables para Linux.", "url": "https://appimage.org/", "importance": 1 },
-
-    { "id": "apple-intelligence", "title": "Apple Intelligence", "year": 2024, "category": "news", "description": "Apple presenta Apple Intelligence: IA integrada en iPhone, iPad y Mac con privacidad en el dispositivo.", "url": "https://www.apple.com/apple-intelligence/", "importance": 3 },
-    { "id": "ios-18", "title": "iOS 18", "year": 2024, "category": "news", "description": "iOS 18 con personalización total de pantalla inicio y control中心.", "url": "https://developer.apple.com/ios/", "importance": 2 },
-    { "id": "iphone-16", "title": "iPhone 16", "year": 2024, "category": "news", "description": "iPhone 16 con botón Camera Control y chip A18.", "url": "https://www.apple.com/iphone-16/", "importance": 2 },
-    { "id": "macbook-pro-m4", "title": "MacBook Pro M4", "year": 2024, "category": "news", "description": "Apple lanza MacBook Pro con chip M4 Pro y M4 Max.", "url": "https://www.apple.com/macbook-pro/", "importance": 2 },
-    { "id": "windows-11-24h2", "title": "Windows 11 24H2", "year": 2024, "category": "news", "description": "Microsoft actualiza Windows 11 con Recall, Copilot+ y nuevas funciones IA.", "url": "https://www.microsoft.com/windows/windows-11", "importance": 2 },
-    { "id": "copilot-plus", "title": "Copilot+ PCs", "year": 2024, "category": "news", "description": "Microsoft presenta PCs con NPU dedicado para IA local.", "url": "https://www.microsoft.com/copilot-plus-pcs", "importance": 2 },
-    { "id": "samsung-galaxy-s24", "title": "Samsung Galaxy S24", "year": 2024, "category": "news", "description": "Samsung Galaxy S24 con Galaxy AI: traducción en tiempo real, circles to search.", "url": "https://www.samsung.com/galaxy-s24/", "importance": 2 },
-    { "id": "pixel-8", "title": "Google Pixel 8", "year": 2023, "category": "news", "description": "Google Pixel 8 con chip Tensor G3 y funciones IA avanzadas.", "url": "https://store.google.com/product/pixel_8", "importance": 1 },
-    { "id": "openai-devday-2023", "title": "OpenAI DevDay", "year": 2023, "category": "news", "description": "OpenAI presenta GPTs, Assistants API y preço reducido en DevDay.", "url": "https://openai.com/blog/devday", "importance": 3 },
-    { "id": "gpt-4o", "title": "GPT-4o", "year": 2024, "category": "news", "description": "OpenAI lanza GPT-4o: multimodal nativo, voz en tiempo real, 2x más rápido.", "url": "https://openai.com/index/hello-gpt-4o/", "importance": 3 },
-    { "id": "gpt-4o-mini", "title": "GPT-4o mini", "year": 2024, "category": "news", "description": "OpenAI lanza GPT-4o mini: modelo pequeño y barato para apps.", "url": "https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/", "importance": 2 },
-    { "id": "o1-preview", "title": "OpenAI o1", "year": 2024, "category": "news", "description": "OpenAI lanza o1: modelo de razonamiento que piensa antes de responder.", "url": "https://openai.com/index/learning-to-reason-with-llm/", "importance": 3 },
-    { "id": "o3", "title": "OpenAI o3", "year": 2024, "category": "news", "description": "OpenAI anuncia o3: siguiente generación de razonamiento con ARC-AGI récord.", "url": "https://openai.com/index/deliberative-alignment/", "importance": 2 },
-    { "id": "claude-3-5-sonnet", "title": "Claude 3.5 Sonnet", "year": 2024, "category": "news", "description": "Anthropic lanza Claude 3.5 Sonnet: supera a GPT-4 en múltiples benchmarks.", "url": "https://www.anthropic.com/news/claude-3-5-sonnet", "importance": 2 },
-    { "id": "claude-artifacts", "title": "Claude Artifacts", "year": 2024, "category": "news", "description": "Anthropic lanza Artifacts: crear apps y documentos directamente en Claude.", "url": "https://www.anthropic.com/news/artifacts", "importance": 2 },
-    { "id": "gemini-2", "title": "Gemini 2.0", "year": 2024, "category": "news", "description": "Google lanza Gemini 2.0 Flash: modelo multimodal de nueva generación.", "url": "https://deepmind.google/technologies/gemini/", "importance": 2 },
-    { "id": "google-ai-overview", "title": "Google AI Overviews", "year": 2024, "category": "news", "description": "Google integra respuestas IA en resultados de búsqueda (AI Overviews).", "url": "https://blog.google/products/search/generative-ai-google-search/", "importance": 2 },
-    { "id": "deepseek-r1", "title": "DeepSeek-R1", "year": 2025, "category": "news", "description": "DeepSeek lanza R1: modelo de razonamiento open source que rivaliza con o1.", "url": "https://github.com/deepseek-ai/DeepSeek-R1", "importance": 3 },
-    { "id": "deepseek-v3-news", "title": "DeepSeek-V3", "year": 2024, "category": "news", "description": "DeepSeek-V3: modelo chino open source con 671B parámetros, entrenado por $5.6M.", "url": "https://github.com/deepseek-ai/DeepSeek-V3", "importance": 2 },
-    { "id": "llama-3-1", "title": "Meta LLaMA 3.1", "year": 2024, "category": "news", "description": "Meta libera LLaMA 3.1 405B: el mayor modelo open source hasta la fecha.", "url": "https://llama.meta.com/", "importance": 2 },
-    { "id": "mistral-large-2", "title": "Mistral Large 2", "year": 2024, "category": "news", "description": "Mistral lanza Large 2: 123B parámetros, multilingüe, open weight.", "url": "https://mistral.ai/news/mistral-large-2/", "importance": 1 },
-    { "id": "gemma-2", "title": "Google Gemma 2", "year": 2024, "category": "news", "description": "Google lanza Gemma 2: modelos open source de 2B a 27B parámetros.", "url": "https://blog.google/technology/developers/gemma-2/", "importance": 1 },
-    { "id": "apple-m4", "title": "Apple M4", "year": 2024, "category": "news", "description": "Apple presenta chip M4: 38 TOPS de NPU, 10-core CPU.", "url": "https://www.apple.com/newsroom/2024/05/apple-introduces-m4/", "importance": 2 },
-    { "id": "nvidia-blackwell", "title": "NVIDIA Blackwell", "year": 2024, "category": "news", "description": "NVIDIA presenta B200: chip Blackwell con 208B transistores para IA.", "url": "https://www.nvidia.com/en-us/data-center/technologies/blackwell-architecture/", "importance": 2 },
-    { "id": "amd-mi300", "title": "AMD MI300X", "year": 2024, "category": "news", "description": "AMD lanza MI300X: acelerador IA con 192GB HBM3 para data centers.", "url": "https://www.amd.com/en/products/accelerators/instinct/mi300.html", "importance": 1 },
-    { "id": "qualcomm-snapdragon-x", "title": "Snapdragon X Elite", "year": 2024, "category": "news", "description": "Qualcomm lanza Snapdragon X Elite: ARM para Windows con 45 TOPS NPU.", "url": "https://www.qualcomm.com/products/mobile/snapdragon/x-series", "importance": 1 },
-    { "id": "meta-ray-ban", "title": "Meta Ray-Ban AI", "year": 2024, "category": "news", "description": "Meta integra IA multimodal en las gafas Ray-Ban Meta.", "url": "https://www.meta.com/quest/accessories/ray-ban-meta/", "importance": 1 },
-    { "id": "humane-ai-pin", "title": "Humane AI Pin", "year": 2024, "category": "news", "description": "Humane lanza AI Pin: dispositivo IA portátil con proyección láser.", "url": "https://humane.com/", "importance": 1 },
-    { "id": "rabbit-r1", "title": "Rabbit R1", "year": 2024, "category": "news", "description": "Rabbit lanza R1: dispositivo IA con Large Action Model.", "url": "https://www.rabbit.tech/", "importance": 1 },
-    { "id": "eu-ai-act", "title": "EU AI Act", "year": 2024, "category": "news", "description": "Unión Europea aprueba el AI Act: primera regulación global de IA.", "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai", "importance": 3 },
-    { "id": "github-copilot-free", "title": "Copilot Gratis", "year": 2024, "category": "news", "description": "GitHub ofrece Copilot gratis para desarrolladores individuales.", "url": "https://github.com/features/copilot#free", "importance": 2 },
-    { "id": "cursor-ai-editor", "title": "Cursor popular", "year": 2024, "category": "news", "description": "Cursor se convierte en el editor IA más popular, superando a VS Code en crecimiento.", "url": "https://www.cursor.sh/", "importance": 2 },
-    { "id": "bolt-new-launch", "title": "Bolt.new", "year": 2024, "category": "news", "description": "StackBlitz lanza Bolt.new: generar apps completas con IA en el navegador.", "url": "https://bolt.new/", "importance": 2 },
-    { "id": "v0-launch", "title": "Vercel v0", "year": 2023, "category": "news", "description": "Vercel lanza v0: generador de interfaces UI con IA.", "url": "https://v0.dev/", "importance": 2 },
-    { "id": "google-venus", "title": "Google Gemini Live", "year": 2024, "category": "news", "description": "Google lanza Gemini Live: conversación de voz natural con IA.", "url": "https://blog.google/products/gemini/google-gemini-live/", "importance": 2 },
-    { "id": "openai-realtime", "title": "OpenAI Realtime API", "year": 2024, "category": "news", "description": "OpenAI lanza Realtime API: voz y visión en tiempo real para apps.", "url": "https://openai.com/index/realtime-api/", "importance": 2 },
-    { "id": "anthropic-computer-use", "title": "Claude Computer Use", "year": 2024, "category": "news", "description": "Anthropic lanza Computer Use: Claude controla tu ordenador.", "url": "https://www.anthropic.com/news/3-5-sonnet-computer-use", "importance": 2 },
-    { "id": "openai-searchgpt", "title": "SearchGPT", "year": 2024, "category": "news", "description": "OpenAI anuncia SearchGPT: motor de búsqueda con IA conversacional.", "url": "https://openai.com/index/searchgpt-prototype/", "importance": 1 },
-    { "id": "apple-mac-mini-m4", "title": "Mac mini M4", "year": 2024, "category": "news", "description": "Apple lanza Mac mini M4: el Mac más pequeño y potente.", "url": "https://www.apple.com/mac-mini/", "importance": 1 },
-    { "id": "surface-laptop-7", "title": "Surface Laptop 7", "year": 2024, "category": "news", "description": "Microsoft Surface Laptop 7 con chip Snapdragon X y Copilot+.", "url": "https://www.microsoft.com/surface/devices/surface-laptop-7th-edition", "importance": 1 },
-    { "id": "samsung-galaxy-z-fold6", "title": "Galaxy Z Fold 6", "year": 2024, "category": "news", "description": "Samsung Galaxy Z Fold 6: plegable más delgado con Galaxy AI.", "url": "https://www.samsung.com/galaxy-z-fold6/", "importance": 1 },
-    { "id": "oneplus-13", "title": "OnePlus 13", "year": 2025, "category": "news", "description": "OnePlus 13 con Snapdragon 8 Elite y 6000mAh.", "url": "https://www.oneplus.com/13", "importance": 1 },
-    { "id": "nvidia-rtx-50", "title": "NVIDIA RTX 5090", "year": 2025, "category": "news", "description": "NVIDIA presenta RTX 5090: Blackwell para gaming con DLSS 4.", "url": "https://www.nvidia.com/geforce/rtx-5090/", "importance": 2 },
-    { "id": "iphone-se-4", "title": "iPhone SE 4", "year": 2025, "category": "news", "description": "Apple lanza iPhone SE 4: primer SE con Face ID y chip A18.", "url": "https://www.apple.com/iphone-se/", "importance": 1 },
-    { "id": "microsoft-copilot-2025", "title": "Copilot 2025", "year": 2025, "category": "news", "description": "Microsoft renueva Copilot: agente autónomo para empresas.", "url": "https://www.microsoft.com/copilot", "importance": 2 },
-    { "id": "google-gemini-25", "title": "Gemini 2.5 Pro", "year": 2025, "category": "news", "description": "Google lanza Gemini 2.5 Pro: thinking model con 1M contexto.", "url": "https://deepmind.google/technologies/gemini/", "importance": 2 },
-    { "id": "openai-gpt-45", "title": "GPT-4.5", "year": 2025, "category": "news", "description": "OpenAI lanza GPT-4.5: modelo más grande y capaz de OpenAI.", "url": "https://openai.com/index/gpt-4-5/", "importance": 2 },
-    { "id": "claude-3-7-sonnet", "title": "Claude 3.7 Sonnet", "year": 2025, "category": "news", "description": "Anthropic lanza Claude 3.7 Sonnet: thinking extensible y más rápido.", "url": "https://www.anthropic.com/news/claude-3-7-sonnet", "importance": 2 },
-    { "id": "xiaomi-15", "title": "Xiaomi 15", "year": 2025, "category": "news", "description": "Xiaomi 15 con Snapdragon 8 Elite y Leica optics.", "url": "https://www.mi.com/global/product/xiaomi-15/", "importance": 1 },
-    { "id": "meta-quest-3s", "title": "Meta Quest 3S", "year": 2024, "category": "news", "description": "Meta lanza Quest 3S: RV accesible desde $299.", "url": "https://www.meta.com/quest/quest-3s/", "importance": 1 },
-    { "id": "apple-intelligence-2025", "title": "Apple Intelligence 2.0", "year": 2025, "category": "news", "description": "Apple amplía Apple Intelligence a más idiomas y dispositivos.", "url": "https://www.apple.com/apple-intelligence/", "importance": 1 },
-    { "id": "tesla-robotaxi", "title": "Tesla Cybercab", "year": 2024, "category": "news", "description": "Tesla presenta Cybercab: taxi autónomo sin volante.", "url": "https://www.tesla.com/AI", "importance": 2 },
-    { "id": "waymo-expansion", "title": "Waymo expansion", "year": 2024, "category": "news", "description": "Waymo expande coches autónomos a San Francisco, LA y Phoenix.", "url": "https://waymo.com/", "importance": 1 },
-    { "id": "spacex-starship", "title": "SpaceX Starship", "year": 2024, "category": "news", "description": "SpaceX logra primer aterrizaje del Starship, cohete más grande jamás construido.", "url": "https://www.spacex.com/starship", "importance": 2 },
-    { "id": "eu-dsa", "title": "EU DSA", "year": 2024, "category": "news", "description": "Unión Europea activa el Digital Services Act: regulación de plataformas digitales.", "url": "https://digital-strategy.ec.europa.eu/en/policies/digital-services-act-package", "importance": 1 },
-    { "id": "nvidia-nim", "title": "NVIDIA NIM", "year": 2024, "category": "news", "description": "NVIDIA lanza NIM: microservicios optimizados para inferencia IA.", "url": "https://www.nvidia.com/en-us/ai/", "importance": 1 },
-    { "id": "huggingface-smol", "title": "SmolLM", "year": 2024, "category": "news", "description": "Hugging Face lanza SmolLM: modelos pequeños para edge devices.", "url": "https://huggingface.co/HuggingFaceTB", "importance": 1 },
-    { "id": "ollama-04", "title": "Ollama 0.4", "year": 2024, "category": "news", "description": "Ollama 0.4: soporte para vision models y multimodal local.", "url": "https://ollama.com/blog/vision-models", "importance": 1 },
-    { "id": "perplexity-pro", "title": "Perplexity Pro", "year": 2024, "category": "news", "description": "Perplexity lanza Pro: búsqueda IA con fuentes verificadas.", "url": "https://www.perplexity.ai/pro", "importance": 1 }
+    {
+      "id": "intel-4004",
+      "title": "Intel 4004",
+      "year": 1971,
+      "category": "hardware",
+      "description": "Primera CPU comercial de un solo chip. 2300 transistores, 740 kHz.",
+      "url": "https://en.wikipedia.org/wiki/Intel_4004",
+      "importance": 3
+    },
+    {
+      "id": "ethernet",
+      "title": "Ethernet",
+      "year": 1973,
+      "category": "internet",
+      "description": "Robert Metcalfe inventa Ethernet en Xerox PARC.",
+      "url": "https://en.wikipedia.org/wiki/Ethernet",
+      "importance": 2
+    },
+    {
+      "id": "c-language",
+      "title": "C",
+      "year": 1972,
+      "category": "languages",
+      "description": "Dennis Ritchie crea el lenguaje C en Bell Labs.",
+      "url": "https://en.wikipedia.org/wiki/C_(programming_language)",
+      "importance": 3
+    },
+    {
+      "id": "sql",
+      "title": "SQL",
+      "year": 1974,
+      "category": "languages",
+      "description": "IBM desarrolla SEQUEL (después SQL) para bases de datos.",
+      "url": "https://en.wikipedia.org/wiki/SQL",
+      "importance": 2
+    },
+    {
+      "id": "apple-ii",
+      "title": "Apple II",
+      "year": 1977,
+      "category": "hardware",
+      "description": "Steve Jobs y Steve Wozniak lanzan el Apple II, primer PC popular.",
+      "url": "https://en.wikipedia.org/wiki/Apple_II",
+      "importance": 3
+    },
+    {
+      "id": "ms-dos",
+      "title": "MS-DOS",
+      "year": 1981,
+      "category": "tools",
+      "description": "Microsoft compra QDOS y lo renombra MS-DOS para el IBM PC.",
+      "url": "https://en.wikipedia.org/wiki/MS-DOS",
+      "importance": 2
+    },
+    {
+      "id": "tcp-ip",
+      "title": "TCP/IP",
+      "year": 1983,
+      "category": "internet",
+      "description": "ARPANET adopta TCP/IP, nace Internet.",
+      "url": "https://en.wikipedia.org/wiki/Internet",
+      "importance": 3
+    },
+    {
+      "id": "macintosh",
+      "title": "Apple Macintosh",
+      "year": 1984,
+      "category": "hardware",
+      "description": "Primer PC con interfaz gráfica de usuario popular.",
+      "url": "https://en.wikipedia.org/wiki/Macintosh",
+      "importance": 2
+    },
+    {
+      "id": "c-plus-plus",
+      "title": "C++",
+      "year": 1985,
+      "category": "languages",
+      "description": "Bjarne Stroustrup crea C++ como extensión de C.",
+      "url": "https://en.wikipedia.org/wiki/C%2B%2B",
+      "importance": 2
+    },
+    {
+      "id": "perl",
+      "title": "Perl",
+      "year": 1987,
+      "category": "languages",
+      "description": "Larry Wall crea Perl para scripting de Unix.",
+      "url": "https://en.wikipedia.org/wiki/Perl",
+      "importance": 1
+    },
+    {
+      "id": "www",
+      "title": "World Wide Web",
+      "year": 1989,
+      "category": "internet",
+      "description": "Tim Berners-Lee inventa la WWW en el CERN.",
+      "url": "https://en.wikipedia.org/wiki/World_Wide_Web",
+      "importance": 3
+    },
+    {
+      "id": "linux",
+      "title": "Linux",
+      "year": 1991,
+      "category": "opensource",
+      "description": "Linus Torvalds publica el kernel Linux.",
+      "url": "https://en.wikipedia.org/wiki/Linux",
+      "importance": 3
+    },
+    {
+      "id": "python",
+      "title": "Python 1.0",
+      "year": 1991,
+      "category": "languages",
+      "description": "Guido van Rossum publica Python 1.0.",
+      "url": "https://en.wikipedia.org/wiki/Python_1.0",
+      "importance": 3
+    },
+    {
+      "id": "www-browser",
+      "title": "Primer navegador web",
+      "year": 1990,
+      "category": "internet",
+      "description": "Tim Berners-Lee crea el primer navegador: WorldWideWeb.",
+      "url": "https://en.wikipedia.org/wiki/WorldWideWeb",
+      "importance": 2
+    },
+    {
+      "id": "usb",
+      "title": "USB 1.0",
+      "year": 1996,
+      "category": "hardware",
+      "description": "Universal Serial Bus, el conector que lo cambia todo.",
+      "url": "https://en.wikipedia.org/wiki/USB",
+      "importance": 2
+    },
+    {
+      "id": "java",
+      "title": "Java",
+      "year": 1995,
+      "category": "languages",
+      "description": "Sun Microsystems lanza Java: 'Write once, run anywhere'.",
+      "url": "https://en.wikipedia.org/wiki/Java_(programming_language)",
+      "importance": 3
+    },
+    {
+      "id": "javascript",
+      "title": "JavaScript",
+      "year": 1995,
+      "category": "languages",
+      "description": "Brendan Eich crea JavaScript en Netscape en 10 días.",
+      "url": "https://en.wikipedia.org/wiki/JavaScript",
+      "importance": 3
+    },
+    {
+      "id": "windows-95",
+      "title": "Windows 95",
+      "year": 1995,
+      "category": "tools",
+      "description": "Microsoft lanza Windows 95 con menú Iniciar.",
+      "url": "https://en.wikipedia.org/wiki/Windows_95",
+      "importance": 2
+    },
+    {
+      "id": "ie",
+      "title": "Internet Explorer",
+      "year": 1995,
+      "category": "internet",
+      "description": "Microsoft entra en la guerra de navegadores.",
+      "url": "https://en.wikipedia.org/wiki/Internet_Explorer",
+      "importance": 1
+    },
+    {
+      "id": "google",
+      "title": "Google",
+      "year": 1998,
+      "category": "companies",
+      "description": "Larry Page y Sergey Brin fundan Google en un garaje.",
+      "url": "https://en.wikipedia.org/wiki/Google",
+      "importance": 3
+    },
+    {
+      "id": "php",
+      "title": "PHP 3.0",
+      "year": 1998,
+      "category": "languages",
+      "description": "PHP se relanza con soporte para bases de datos.",
+      "url": "https://en.wikipedia.org/wiki/PHP",
+      "importance": 1
+    },
+    {
+      "id": "xml",
+      "title": "XML 1.0",
+      "year": 1998,
+      "category": "tools",
+      "description": "W3C publica XML 1.0, estándar para datos estructurados.",
+      "url": "https://en.wikipedia.org/wiki/XML",
+      "importance": 1
+    },
+    {
+      "id": "napster",
+      "title": "Napster",
+      "year": 1999,
+      "category": "internet",
+      "description": "P2P cambia la distribución de música para siempre.",
+      "url": "https://en.wikipedia.org/wiki/Napster",
+      "importance": 1
+    },
+    {
+      "id": "mac-os-x",
+      "title": "Mac OS X",
+      "year": 2001,
+      "category": "tools",
+      "description": "Apple lanza OS X con base Unix.",
+      "url": "https://en.wikipedia.org/wiki/MacOS",
+      "importance": 2
+    },
+    {
+      "id": "ipod",
+      "title": "iPod",
+      "year": 2001,
+      "category": "hardware",
+      "description": "Apple revoluciona la música portable.",
+      "url": "https://en.wikipedia.org/wiki/IPod",
+      "importance": 2
+    },
+    {
+      "id": "wiki",
+      "title": "Wikipedia",
+      "year": 2001,
+      "category": "internet",
+      "description": "Jimmy Wales y Larry Sanger lanzan Wikipedia.",
+      "url": "https://en.wikipedia.org/wiki/Wikipedia",
+      "importance": 2
+    },
+    {
+      "id": "ruby",
+      "title": "Ruby",
+      "year": 2000,
+      "category": "languages",
+      "description": "Ruby 1.6 ganando popularidad en Japón.",
+      "url": "https://en.wikipedia.org/wiki/Ruby_(programming_language)",
+      "importance": 1
+    },
+    {
+      "id": "ruby-on-rails",
+      "title": "Ruby on Rails",
+      "year": 2004,
+      "category": "frameworks",
+      "description": "David Heinemeier Hansson crea Rails.",
+      "url": "https://en.wikipedia.org/wiki/Ruby_on_Rails",
+      "importance": 2
+    },
+    {
+      "id": "facebook",
+      "title": "Facebook",
+      "year": 2004,
+      "category": "companies",
+      "description": "Mark Zuckerberg lanza Facebook desde Harvard.",
+      "url": "https://en.wikipedia.org/wiki/Facebook",
+      "importance": 3
+    },
+    {
+      "id": "github",
+      "title": "GitHub",
+      "year": 2008,
+      "category": "opensource",
+      "description": "Chris Wanstrath, PJ Hyett y Tom Preston-Werner fundan GitHub.",
+      "url": "https://en.wikipedia.org/wiki/GitHub",
+      "importance": 3
+    },
+    {
+      "id": "android",
+      "title": "Android",
+      "year": 2008,
+      "category": "tools",
+      "description": "Google lanza Android, el SO móvil más usado del mundo.",
+      "url": "https://en.wikipedia.org/wiki/Android_(operating_system)",
+      "importance": 3
+    },
+    {
+      "id": "chrome",
+      "title": "Google Chrome",
+      "year": 2008,
+      "category": "internet",
+      "description": "Chrome entra en la guerra de navegadores con motor V8.",
+      "url": "https://en.wikipedia.org/wiki/Google_Chrome",
+      "importance": 2
+    },
+    {
+      "id": "nodejs",
+      "title": "Node.js",
+      "year": 2009,
+      "category": "frameworks",
+      "description": "Ryan Dahl crea Node.js con motor V8 de Chrome.",
+      "url": "https://en.wikipedia.org/wiki/Node.js",
+      "importance": 3
+    },
+    {
+      "id": "docker",
+      "title": "Docker",
+      "year": 2013,
+      "category": "tools",
+      "description": "Solomon Hykes presenta Docker en PyCon.",
+      "url": "https://en.wikipedia.org/wiki/Docker_(software)",
+      "importance": 3
+    },
+    {
+      "id": "swift",
+      "title": "Swift",
+      "year": 2014,
+      "category": "languages",
+      "description": "Apple lanza Swift como sucesor de Objective-C.",
+      "url": "https://en.wikipedia.org/wiki/Swift_(programming_language)",
+      "importance": 2
+    },
+    {
+      "id": "react",
+      "title": "React",
+      "year": 2013,
+      "category": "frameworks",
+      "description": "Facebook libera React para interfaces de usuario.",
+      "url": "https://en.wikipedia.org/wiki/React_(JavaScript_library)",
+      "importance": 3
+    },
+    {
+      "id": "angular",
+      "title": "Angular 2",
+      "year": 2016,
+      "category": "frameworks",
+      "description": "Google relanza Angular (antes AngularJS) con TypeScript.",
+      "url": "https://en.wikipedia.org/wiki/Angular_(web_framework)",
+      "importance": 2
+    },
+    {
+      "id": "vue",
+      "title": "Vue.js",
+      "year": 2014,
+      "category": "frameworks",
+      "description": "Evan You crea Vue.js, framework progresivo.",
+      "url": "https://en.wikipedia.org/wiki/Vue.js",
+      "importance": 2
+    },
+    {
+      "id": "rust",
+      "title": "Rust 1.0",
+      "year": 2015,
+      "category": "languages",
+      "description": "Rust 1.0: seguridad sin garbage collector.",
+      "url": "https://en.wikipedia.org/wiki/Rust_(programming_language)",
+      "importance": 2
+    },
+    {
+      "id": "go",
+      "title": "Go 1.0",
+      "year": 2012,
+      "category": "languages",
+      "description": "Google lanza Go 1.0, lenguaje para sistemas concurrentes.",
+      "url": "https://en.wikipedia.org/wiki/Go_(programming_language)",
+      "importance": 2
+    },
+    {
+      "id": "kubernetes",
+      "title": "Kubernetes",
+      "year": 2014,
+      "category": "tools",
+      "description": "Google libera Kubernetes para orquestación de contenedores.",
+      "url": "https://en.wikipedia.org/wiki/Kubernetes",
+      "importance": 3
+    },
+    {
+      "id": "tensorflow",
+      "title": "TensorFlow",
+      "year": 2015,
+      "category": "ai",
+      "description": "Google libera TensorFlow para machine learning.",
+      "url": "https://en.wikipedia.org/wiki/TensorFlow",
+      "importance": 3
+    },
+    {
+      "id": "transformers",
+      "title": "Transformers",
+      "year": 2017,
+      "category": "ai",
+      "description": "Google publica 'Attention Is All You Need', nace la arquitectura Transformer.",
+      "url": "https://arxiv.org/abs/1706.03762",
+      "importance": 3
+    },
+    {
+      "id": "iphone-x",
+      "title": "iPhone X",
+      "year": 2017,
+      "category": "hardware",
+      "description": "Apple elimina el botón Home, llega Face ID.",
+      "url": "https://en.wikipedia.org/wiki/IPhone_X",
+      "importance": 1
+    },
+    {
+      "id": "gpt-2",
+      "title": "GPT-2",
+      "year": 2019,
+      "category": "ai",
+      "description": "OpenAI lanza GPT-2, 1.5B parámetros.",
+      "url": "https://en.wikipedia.org/wiki/GPT-2",
+      "importance": 2
+    },
+    {
+      "id": "deno",
+      "title": "Deno 1.0",
+      "year": 2020,
+      "category": "frameworks",
+      "description": "Ryan Dahl lanza Deno como alternativa a Node.js.",
+      "url": "https://en.wikipedia.org/wiki/Deno",
+      "importance": 1
+    },
+    {
+      "id": "apple-m1",
+      "title": "Apple M1",
+      "year": 2020,
+      "category": "hardware",
+      "description": "Apple Silicon M1: ARM para Mac, revolución de rendimiento.",
+      "url": "https://en.wikipedia.org/wiki/Apple_M1",
+      "importance": 3
+    },
+    {
+      "id": "gpt-3",
+      "title": "GPT-3",
+      "year": 2020,
+      "category": "ai",
+      "description": "OpenAI lanza GPT-3 con 175B parámetros.",
+      "url": "https://en.wikipedia.org/wiki/GPT-3",
+      "importance": 3
+    },
+    {
+      "id": "gh-copilot",
+      "title": "GitHub Copilot",
+      "year": 2021,
+      "category": "ai",
+      "description": "GitHub lanza Copilot: asistente de código con IA.",
+      "url": "https://en.wikipedia.org/wiki/GitHub_Copilot",
+      "importance": 2
+    },
+    {
+      "id": "chatgpt",
+      "title": "ChatGPT",
+      "year": 2022,
+      "category": "ai",
+      "description": "OpenAI lanza ChatGPT, IA que llega a 100M usuarios en 2 meses.",
+      "url": "https://en.wikipedia.org/wiki/ChatGPT",
+      "importance": 3
+    },
+    {
+      "id": "gpt-4",
+      "title": "GPT-4",
+      "year": 2023,
+      "category": "ai",
+      "description": "OpenAI lanza GPT-4, modelo multimodal.",
+      "url": "https://en.wikipedia.org/wiki/GPT-4",
+      "importance": 3
+    },
+    {
+      "id": "llama",
+      "title": "Meta LLaMA",
+      "year": 2023,
+      "category": "ai",
+      "description": "Meta libera LLaMA, LLM open source.",
+      "url": "https://en.wikipedia.org/wiki/LLaMA",
+      "importance": 2
+    },
+    {
+      "id": "bun",
+      "title": "Bun",
+      "year": 2022,
+      "category": "frameworks",
+      "description": "Jarred Sumner crea Bun, runtime JS ultrarrápido.",
+      "url": "https://en.wikipedia.org/wiki/Bun_(software)",
+      "importance": 1
+    },
+    {
+      "id": "astro",
+      "title": "Astro",
+      "year": 2021,
+      "category": "frameworks",
+      "description": "Astro: framework web island-first para sitios content-driven.",
+      "url": "https://en.wikipedia.org/wiki/Astro_(web_framework)",
+      "importance": 1
+    },
+    {
+      "id": "tailwind",
+      "title": "Tailwind CSS",
+      "year": 2017,
+      "category": "frameworks",
+      "description": "Adam Wathan crea Tailwind CSS, CSS utility-first.",
+      "url": "https://en.wikipedia.org/wiki/Tailwind_CSS",
+      "importance": 2
+    },
+    {
+      "id": "nextjs",
+      "title": "Next.js",
+      "year": 2016,
+      "category": "frameworks",
+      "description": "Vercel lanza Next.js para React SSR.",
+      "url": "https://en.wikipedia.org/wiki/Next.js",
+      "importance": 2
+    },
+    {
+      "id": "svelte",
+      "title": "Svelte",
+      "year": 2016,
+      "category": "frameworks",
+      "description": "Rich Harris crea Svelte, compilador de componentes.",
+      "url": "https://en.wikipedia.org/wiki/Svelte",
+      "importance": 1
+    },
+    {
+      "id": "typescript",
+      "title": "TypeScript",
+      "year": 2012,
+      "category": "languages",
+      "description": "Microsoft lanza TypeScript, JavaScript con tipos.",
+      "url": "https://en.wikipedia.org/wiki/TypeScript",
+      "importance": 3
+    },
+    {
+      "id": "vscode",
+      "title": "Visual Studio Code",
+      "year": 2015,
+      "category": "tools",
+      "description": "Microsoft lanza VS Code, editor que domina el mercado.",
+      "url": "https://en.wikipedia.org/wiki/Visual_Studio_Code",
+      "importance": 2
+    },
+    {
+      "id": "git",
+      "title": "Git",
+      "year": 2005,
+      "category": "tools",
+      "description": "Linus Torvalds crea Git para el kernel Linux.",
+      "url": "https://en.wikipedia.org/wiki/Git",
+      "importance": 3
+    },
+    {
+      "id": "aws",
+      "title": "Amazon Web Services",
+      "year": 2006,
+      "category": "internet",
+      "description": "AWS lanza EC2 y S3, nace la nube moderna.",
+      "url": "https://en.wikipedia.org/wiki/Amazon_Web_Services",
+      "importance": 3
+    },
+    {
+      "id": "iphone",
+      "title": "iPhone",
+      "year": 2007,
+      "category": "hardware",
+      "description": "Steve Jobs presenta el iPhone, revoluciona los móviles.",
+      "url": "https://en.wikipedia.org/wiki/IPhone",
+      "importance": 3
+    },
+    {
+      "id": "app-store",
+      "title": "App Store",
+      "year": 2008,
+      "category": "internet",
+      "description": "Apple abre la App Store, nace la economía de apps.",
+      "url": "https://en.wikipedia.org/wiki/App_Store_(iOS)",
+      "importance": 2
+    },
+    {
+      "id": "sqlite",
+      "title": "SQLite",
+      "year": 2000,
+      "category": "tools",
+      "description": "Richard Hipp crea SQLite, la BD más desplegada del mundo.",
+      "url": "https://en.wikipedia.org/wiki/SQLite",
+      "importance": 2
+    },
+    {
+      "id": "wifi",
+      "title": "Wi-Fi",
+      "year": 1999,
+      "category": "internet",
+      "description": "Wi-Fi Alliance crea el estándar 802.11b.",
+      "url": "https://en.wikipedia.org/wiki/Wi-Fi",
+      "importance": 2
+    },
+    {
+      "id": "bluetooth",
+      "title": "Bluetooth",
+      "year": 1999,
+      "category": "internet",
+      "description": "Bluetooth 1.0: conectividad inalámbrica corta distancia.",
+      "url": "https://en.wikipedia.org/wiki/Bluetooth",
+      "importance": 1
+    },
+    {
+      "id": "google-cloud",
+      "title": "Google Cloud",
+      "year": 2008,
+      "category": "internet",
+      "description": "Google lanza App Engine, su entrada al cloud.",
+      "url": "https://en.wikipedia.org/wiki/Google_Cloud",
+      "importance": 1
+    },
+    {
+      "id": "azure",
+      "title": "Microsoft Azure",
+      "year": 2010,
+      "category": "internet",
+      "description": "Microsoft lanza Azure, su plataforma cloud.",
+      "url": "https://en.wikipedia.org/wiki/Microsoft_Azure",
+      "importance": 2
+    },
+    {
+      "id": "vue-3",
+      "title": "Vue 3",
+      "year": 2020,
+      "category": "frameworks",
+      "description": "Vue 3 con Composition API y mejor rendimiento.",
+      "url": "https://vuejs.org/",
+      "importance": 1
+    },
+    {
+      "id": "svelte-5",
+      "title": "Svelte 5 (Runes)",
+      "year": 2024,
+      "category": "frameworks",
+      "description": "Svelte 5 con Runes, reactividad basada en signals.",
+      "url": "https://svelte.dev/",
+      "importance": 1
+    },
+    {
+      "id": "solidjs",
+      "title": "SolidJS",
+      "year": 2021,
+      "category": "frameworks",
+      "description": "Ryan Carniato crea SolidJS, reactividad sin Virtual DOM.",
+      "url": "https://www.solidjs.com/",
+      "importance": 1
+    },
+    {
+      "id": "htmx",
+      "title": "htmx",
+      "year": 2020,
+      "category": "frameworks",
+      "description": "htmx: HTML extendido para interactividad sin JS.",
+      "url": "https://htmx.org/",
+      "importance": 1
+    },
+    {
+      "id": "alpine",
+      "title": "Alpine.js",
+      "year": 2019,
+      "category": "frameworks",
+      "description": "Alpine.js: jQuery moderno en 15KB.",
+      "url": "https://alpinejs.dev/",
+      "importance": 1
+    },
+    {
+      "id": "postgres",
+      "title": "PostgreSQL",
+      "year": 1996,
+      "category": "tools",
+      "description": "PostgreSQL 6.5, la BD open source más avanzada.",
+      "url": "https://en.wikipedia.org/wiki/PostgreSQL",
+      "importance": 2
+    },
+    {
+      "id": "mongodb",
+      "title": "MongoDB",
+      "year": 2009,
+      "category": "tools",
+      "description": "MongoDB 1.0: base de datos NoSQL popular.",
+      "url": "https://en.wikipedia.org/wiki/MongoDB",
+      "importance": 1
+    },
+    {
+      "id": "redis",
+      "title": "Redis",
+      "year": 2009,
+      "category": "tools",
+      "description": "Salvatore Sanfilippo crea Redis, caché en memoria.",
+      "url": "https://en.wikipedia.org/wiki/Redis",
+      "importance": 2
+    },
+    {
+      "id": "terraform",
+      "title": "Terraform",
+      "year": 2014,
+      "category": "tools",
+      "description": "HashiCorp lanza Terraform, infraestructura como código.",
+      "url": "https://en.wikipedia.org/wiki/Terraform",
+      "importance": 2
+    },
+    {
+      "id": "ansible",
+      "title": "Ansible",
+      "year": 2012,
+      "category": "tools",
+      "description": "Michael DeHaan crea Ansible, automatización sin agentes.",
+      "url": "https://en.wikipedia.org/wiki/Ansible",
+      "importance": 1
+    },
+    {
+      "id": "vagrant",
+      "title": "Vagrant",
+      "year": 2010,
+      "category": "tools",
+      "description": "Mitchell Hashimoto crea Vagrant para VMs reproducibles.",
+      "url": "https://en.wikipedia.org/wiki/Vagrant_(software)",
+      "importance": 1
+    },
+    {
+      "id": "webpack",
+      "title": "Webpack",
+      "year": 2012,
+      "category": "tools",
+      "description": "Tobias Koppers crea Webpack, bundler de módulos.",
+      "url": "https://en.wikipedia.org/wiki/Webpack",
+      "importance": 2
+    },
+    {
+      "id": "vite",
+      "title": "Vite",
+      "year": 2020,
+      "category": "tools",
+      "description": "Evan You crea Vite, dev server ultrarrápido.",
+      "url": "https://en.wikipedia.org/wiki/Vite_(software)",
+      "importance": 2
+    },
+    {
+      "id": "esbuild",
+      "title": "esbuild",
+      "year": 2020,
+      "category": "tools",
+      "description": "Evan Wallace crea esbuild, bundler en Go 100x más rápido.",
+      "url": "https://esbuild.github.io/",
+      "importance": 1
+    },
+    {
+      "id": "turbo",
+      "title": "Turborepo",
+      "year": 2021,
+      "category": "tools",
+      "description": "Vercel adquiere Turborepo, monorepos incrementales.",
+      "url": "https://turbo.build/",
+      "importance": 1
+    },
+    {
+      "id": "neon",
+      "title": "Neon",
+      "year": 2022,
+      "category": "tools",
+      "description": "Neon: PostgreSQL serverless en la nube.",
+      "url": "https://neon.tech/",
+      "importance": 1
+    },
+    {
+      "id": "planetscale",
+      "title": "PlanetScale",
+      "year": 2022,
+      "category": "tools",
+      "description": "PlanetScale: MySQL serverless branching.",
+      "url": "https://planetscale.com/",
+      "importance": 1
+    },
+    {
+      "id": "supabase",
+      "title": "Supabase",
+      "year": 2020,
+      "category": "tools",
+      "description": "Supabase: alternativa open source a Firebase.",
+      "url": "https://supabase.com/",
+      "importance": 1
+    },
+    {
+      "id": "firebase",
+      "title": "Firebase",
+      "year": 2012,
+      "category": "tools",
+      "description": "Google adquiere Firebase, plataforma para apps.",
+      "url": "https://en.wikipedia.org/wiki/Firebase",
+      "importance": 2
+    },
+    {
+      "id": "netlify",
+      "title": "Netlify",
+      "year": 2014,
+      "category": "internet",
+      "description": "Netlify: hosting JAMstack con deploy automático.",
+      "url": "https://www.netlify.com/",
+      "importance": 1
+    },
+    {
+      "id": "vercel",
+      "title": "Vercel",
+      "year": 2015,
+      "category": "internet",
+      "description": "Vercel (antes ZEIT): plataforma para Next.js.",
+      "url": "https://vercel.com/",
+      "importance": 2
+    },
+    {
+      "id": "surge",
+      "title": "Surge.sh",
+      "year": 2014,
+      "category": "internet",
+      "description": "Surge: deploy estático desde CLI.",
+      "url": "https://surge.sh/",
+      "importance": 1
+    },
+    {
+      "id": "cloudflare",
+      "title": "Cloudflare",
+      "year": 2010,
+      "category": "internet",
+      "description": "Cloudflare: CDN y protección DDoS.",
+      "url": "https://www.cloudflare.com/",
+      "importance": 2
+    },
+    {
+      "id": "stripe",
+      "title": "Stripe",
+      "year": 2010,
+      "category": "internet",
+      "description": "Stripe: pagos online para desarrolladores.",
+      "url": "https://stripe.com/",
+      "importance": 2
+    },
+    {
+      "id": "figma",
+      "title": "Figma",
+      "year": 2016,
+      "category": "tools",
+      "description": "Figma: diseño de interfaces colaborativo en navegador.",
+      "url": "https://www.figma.com/",
+      "importance": 2
+    },
+    {
+      "id": "notion",
+      "title": "Notion",
+      "year": 2016,
+      "category": "tools",
+      "description": "Notion: workspace todo-en-uno.",
+      "url": "https://www.notion.so/",
+      "importance": 1
+    },
+    {
+      "id": "slack",
+      "title": "Slack",
+      "year": 2013,
+      "category": "tools",
+      "description": "Slack revoluciona la comunicación en equipo.",
+      "url": "https://slack.com/",
+      "importance": 2
+    },
+    {
+      "id": "discord",
+      "title": "Discord",
+      "year": 2015,
+      "category": "tools",
+      "description": "Discord: chat de voz para gamers y comunidades.",
+      "url": "https://discord.com/",
+      "importance": 1
+    },
+    {
+      "id": "openai",
+      "title": "OpenAI",
+      "year": 2015,
+      "category": "companies",
+      "description": "Sam Altman, Elon Musk y otros fundan OpenAI.",
+      "url": "https://en.wikipedia.org/wiki/OpenAI",
+      "importance": 3
+    },
+    {
+      "id": "deepmind",
+      "title": "DeepMind",
+      "year": 2010,
+      "category": "ai",
+      "description": "Demis Hassabis funda DeepMind, IA para investigación.",
+      "url": "https://en.wikipedia.org/wiki/DeepMind",
+      "importance": 2
+    },
+    {
+      "id": "alphago",
+      "title": "AlphaGo",
+      "year": 2016,
+      "category": "ai",
+      "description": "DeepMind's AlphaGo vence al campeón mundial de Go.",
+      "url": "https://en.wikipedia.org/wiki/AlphaGo",
+      "importance": 2
+    },
+    {
+      "id": "gpt-4-turbo",
+      "title": "GPT-4 Turbo",
+      "year": 2023,
+      "category": "ai",
+      "description": "OpenAI lanza GPT-4 Turbo con 128k contexto.",
+      "url": "https://openai.com/",
+      "importance": 2
+    },
+    {
+      "id": "claude",
+      "title": "Claude 3",
+      "year": 2024,
+      "category": "ai",
+      "description": "Anthropic lanza Claude 3, rival de GPT-4.",
+      "url": "https://www.anthropic.com/",
+      "importance": 2
+    },
+    {
+      "id": "llama-3",
+      "title": "LLaMA 3",
+      "year": 2024,
+      "category": "ai",
+      "description": "Meta lanza LLaMA 3, modelo open source de 405B.",
+      "url": "https://llama.meta.com/",
+      "importance": 2
+    },
+    {
+      "id": "mistral",
+      "title": "Mistral AI",
+      "year": 2023,
+      "category": "ai",
+      "description": "Mistral AI: startup francesa de LLMs eficientes.",
+      "url": "https://mistral.ai/",
+      "importance": 1
+    },
+    {
+      "id": "deepseek",
+      "title": "DeepSeek-V3",
+      "year": 2024,
+      "category": "ai",
+      "description": "DeepSeek-V3: modelo chino open source de alto rendimiento.",
+      "url": "https://github.com/deepseek-ai",
+      "importance": 1
+    },
+    {
+      "id": "ollama",
+      "title": "Ollama",
+      "year": 2023,
+      "category": "ai",
+      "description": "Ollama: ejecuta LLMs localmente con un clic.",
+      "url": "https://ollama.com/",
+      "importance": 2
+    },
+    {
+      "id": "llamacpp",
+      "title": "llama.cpp",
+      "year": 2023,
+      "category": "ai",
+      "description": "Georgi Gerganov crea llama.cpp, inferencia en CPU.",
+      "url": "https://github.com/ggerganov/llama.cpp",
+      "importance": 2
+    },
+    {
+      "id": "midudev",
+      "title": "Midudev",
+      "year": 2020,
+      "category": "companies",
+      "description": "Miguel Ángel (Midudev) crea contenido tech en español.",
+      "url": "https://midu.dev/",
+      "importance": 1
+    },
+    {
+      "id": "mouredev",
+      "title": "MoureDev",
+      "year": 2020,
+      "category": "companies",
+      "description": "Brais Moure (MoureDev) crea contenido tech en español.",
+      "url": "https://moure.dev/",
+      "importance": 1
+    },
+    {
+      "id": "arduino",
+      "title": "Arduino",
+      "year": 2005,
+      "category": "hardware",
+      "description": "Arduino: plataforma de hardware abierto para makers.",
+      "url": "https://www.arduino.cc/",
+      "importance": 2
+    },
+    {
+      "id": "raspberry",
+      "title": "Raspberry Pi",
+      "year": 2012,
+      "category": "hardware",
+      "description": "Raspberry Pi: computadora de $35 para educación.",
+      "url": "https://www.raspberrypi.com/",
+      "importance": 2
+    },
+    {
+      "id": "esp32",
+      "title": "ESP32",
+      "year": 2016,
+      "category": "hardware",
+      "description": "Espressif lanza ESP32, WiFi+BT barato para IoT.",
+      "url": "https://www.espressif.com/",
+      "importance": 1
+    },
+    {
+      "id": "nvidia-gpu",
+      "title": "NVIDIA CUDA",
+      "year": 2007,
+      "category": "hardware",
+      "description": "NVIDIA lanza CUDA, computación paralela en GPU.",
+      "url": "https://developer.nvidia.com/cuda-toolkit",
+      "importance": 2
+    },
+    {
+      "id": "arm",
+      "title": "ARM Holdings",
+      "year": 1990,
+      "category": "hardware",
+      "description": "ARM: arquitectura RISC que domina móviles e IoT.",
+      "url": "https://en.wikipedia.org/wiki/Arm_Holdings",
+      "importance": 2
+    },
+    {
+      "id": "nft",
+      "title": "NFTs y Web3",
+      "year": 2021,
+      "category": "internet",
+      "description": "Explosión de NFTs, blockchain y Web3.",
+      "url": "https://en.wikipedia.org/wiki/Non-fungible_token",
+      "importance": 1
+    },
+    {
+      "id": "crypto",
+      "title": "Bitcoin",
+      "year": 2009,
+      "category": "internet",
+      "description": "Satoshi Nakamoto publica Bitcoin, primera criptomoneda.",
+      "url": "https://en.wikipedia.org/wiki/Bitcoin",
+      "importance": 2
+    },
+    {
+      "id": "ethereum",
+      "title": "Ethereum",
+      "year": 2015,
+      "category": "internet",
+      "description": "Vitalik Buterin lanza Ethereum, blockchain programmable.",
+      "url": "https://en.wikipedia.org/wiki/Ethereum",
+      "importance": 2
+    },
+    {
+      "id": "nostr",
+      "title": "Nostr",
+      "year": 2020,
+      "category": "internet",
+      "description": "Nostr: protocolo descentralizado para redes sociales.",
+      "url": "https://en.wikipedia.org/wiki/Nostr",
+      "importance": 1
+    },
+    {
+      "id": "mastodon",
+      "title": "Mastodon",
+      "year": 2016,
+      "category": "internet",
+      "description": "Mastodon: red social descentralizada tipo Twitter.",
+      "url": "https://en.wikipedia.org/wiki/Mastodon_(social_network)",
+      "importance": 1
+    },
+    {
+      "id": "matrix",
+      "title": "Matrix",
+      "year": 2019,
+      "category": "internet",
+      "description": "Matrix: protocolo abierto para comunicación descentralizada.",
+      "url": "https://matrix.org/",
+      "importance": 1
+    },
+    {
+      "id": "wasm",
+      "title": "WebAssembly",
+      "year": 2017,
+      "category": "languages",
+      "description": "WASM: código binario para la web, rendimiento nativo.",
+      "url": "https://webassembly.org/",
+      "importance": 2
+    },
+    {
+      "id": "dart-3",
+      "title": "Dart 3",
+      "year": 2023,
+      "category": "languages",
+      "description": "Dart 3 con patrones y clases selladas.",
+      "url": "https://dart.dev/",
+      "importance": 1
+    },
+    {
+      "id": "kotlin-2",
+      "title": "Kotlin 2.0",
+      "year": 2024,
+      "category": "languages",
+      "description": "Kotlin 2.0 con K2 compiler, más rápido.",
+      "url": "https://kotlinlang.org/",
+      "importance": 1
+    },
+    {
+      "id": "python-3-12",
+      "title": "Python 3.12",
+      "year": 2023,
+      "category": "languages",
+      "description": "Python 3.12 con mejor rendimiento y f-strings mejorados.",
+      "url": "https://www.python.org/",
+      "importance": 1
+    },
+    {
+      "id": "java-21",
+      "title": "Java 21 LTS",
+      "year": 2023,
+      "category": "languages",
+      "description": "Java 21 con virtual threads y pattern matching.",
+      "url": "https://openjdk.org/",
+      "importance": 1
+    },
+    {
+      "id": "zig",
+      "title": "Zig",
+      "year": 2016,
+      "category": "languages",
+      "description": "Zig: lenguaje de sistemas moderno y seguro.",
+      "url": "https://ziglang.org/",
+      "importance": 1
+    },
+    {
+      "id": "elixir",
+      "title": "Elixir",
+      "year": 2011,
+      "category": "languages",
+      "description": "Elixir: funcional, concurrente, sobre la BEAM.",
+      "url": "https://elixir-lang.org/",
+      "importance": 1
+    },
+    {
+      "id": "clojure",
+      "title": "Clojure",
+      "year": 2007,
+      "category": "languages",
+      "description": "Rich Hickey crea Clojure, Lisp para la JVM.",
+      "url": "https://clojure.org/",
+      "importance": 1
+    },
+    {
+      "id": "haskell",
+      "title": "Haskell",
+      "year": 1990,
+      "category": "languages",
+      "description": "Haskell: lenguaje funcional puro, estándar lazy.",
+      "url": "https://www.haskell.org/",
+      "importance": 1
+    },
+    {
+      "id": "scala",
+      "title": "Scala",
+      "year": 2004,
+      "category": "languages",
+      "description": "Martin Odersky crea Scala, POO funcional para JVM.",
+      "url": "https://www.scala-lang.org/",
+      "importance": 1
+    },
+    {
+      "id": "erlang",
+      "title": "Erlang",
+      "year": 1986,
+      "category": "languages",
+      "description": "Ericsson crea Erlang para telecomunicaciones.",
+      "url": "https://www.erlang.org/",
+      "importance": 1
+    },
+    {
+      "id": "lua",
+      "title": "Lua",
+      "year": 1993,
+      "category": "languages",
+      "description": "Lua: lenguaje de scripting ligero para嵌入式.",
+      "url": "https://www.lua.org/",
+      "importance": 1
+    },
+    {
+      "id": "r-lang",
+      "title": "R",
+      "year": 2000,
+      "category": "languages",
+      "description": "R: lenguaje para estadística y análisis de datos.",
+      "url": "https://www.r-project.org/",
+      "importance": 1
+    },
+    {
+      "id": "matlab",
+      "title": "MATLAB",
+      "year": 1984,
+      "category": "languages",
+      "description": "MathWorks lanza MATLAB para cálculo numérico.",
+      "url": "https://www.mathworks.com/",
+      "importance": 1
+    },
+    {
+      "id": "assembly",
+      "title": "Assembly",
+      "year": 1970,
+      "category": "languages",
+      "description": "Lenguaje ensamblador: código máquina legible.",
+      "url": "https://en.wikipedia.org/wiki/Assembly_language",
+      "importance": 2
+    },
+    {
+      "id": "fortran",
+      "title": "FORTRAN",
+      "year": 1970,
+      "category": "languages",
+      "description": "FORTRAN 77: dominante en cálculo científico.",
+      "url": "https://en.wikipedia.org/wiki/Fortran",
+      "importance": 1
+    },
+    {
+      "id": "cobol",
+      "title": "COBOL",
+      "year": 1970,
+      "category": "languages",
+      "description": "COBOL: todavía en sistemas bancarios 50 años después.",
+      "url": "https://en.wikipedia.org/wiki/COBOL",
+      "importance": 1
+    },
+    {
+      "id": "basic",
+      "title": "BASIC",
+      "year": 1970,
+      "category": "languages",
+      "description": "BASIC democratiza la programación en los 70-80.",
+      "url": "https://en.wikipedia.org/wiki/BASIC",
+      "importance": 1
+    },
+    {
+      "id": "apple-watch",
+      "title": "Apple Watch",
+      "year": 2015,
+      "category": "hardware",
+      "description": "Apple Watch: el smartwatch más vendido del mundo.",
+      "url": "https://en.wikipedia.org/wiki/Apple_Watch",
+      "importance": 1
+    },
+    {
+      "id": "airpods",
+      "title": "AirPods",
+      "year": 2016,
+      "category": "hardware",
+      "description": "Apple AirPods: auriculares true wireless.",
+      "url": "https://en.wikipedia.org/wiki/AirPods",
+      "importance": 1
+    },
+    {
+      "id": "meta-quest",
+      "title": "Meta Quest",
+      "year": 2019,
+      "category": "hardware",
+      "description": "Oculus Quest: realidad virtual standalone.",
+      "url": "https://www.meta.com/quest/",
+      "importance": 1
+    },
+    {
+      "id": "apple-vision",
+      "title": "Apple Vision Pro",
+      "year": 2023,
+      "category": "hardware",
+      "description": "Apple Vision Pro: computación espacial.",
+      "url": "https://www.apple.com/apple-vision-pro/",
+      "importance": 2
+    },
+    {
+      "id": "tesla",
+      "title": "Tesla Model S",
+      "year": 2012,
+      "category": "hardware",
+      "description": "Tesla Model S: coche eléctrico que cambia la industria.",
+      "url": "https://www.tesla.com/",
+      "importance": 1
+    },
+    {
+      "id": "spacex",
+      "title": "SpaceX",
+      "year": 2002,
+      "category": "companies",
+      "description": "Elon Musk funda SpaceX para colonizar Marte.",
+      "url": "https://www.spacex.com/",
+      "importance": 2
+    },
+    {
+      "id": "nasa-mars",
+      "title": "Mars Rover Perseverance",
+      "year": 2021,
+      "category": "hardware",
+      "description": "NASA aterriza el rover Perseverance en Marte.",
+      "url": "https://mars.nasa.gov/mars2020/",
+      "importance": 1
+    },
+    {
+      "id": "crispr",
+      "title": "CRISPR",
+      "year": 2012,
+      "category": "ai",
+      "description": "CRISPR-Cas9: edición genética con IA.",
+      "url": "https://en.wikipedia.org/wiki/CRISPR",
+      "importance": 2
+    },
+    {
+      "id": "quantum",
+      "title": "IBM Quantum",
+      "year": 2016,
+      "category": "hardware",
+      "description": "IBM lanza IBM Quantum Experience, computación cuántica accesible.",
+      "url": "https://www.ibm.com/quantum",
+      "importance": 1
+    },
+    {
+      "id": "starlink",
+      "title": "Starlink",
+      "year": 2019,
+      "category": "internet",
+      "description": "SpaceX lanza Starlink, internet vía satélite.",
+      "url": "https://www.starlink.com/",
+      "importance": 1
+    },
+    {
+      "id": "5g",
+      "title": "5G",
+      "year": 2019,
+      "category": "internet",
+      "description": "5G: nueva generación de redes móviles.",
+      "url": "https://en.wikipedia.org/wiki/5G",
+      "importance": 1
+    },
+    {
+      "id": "safari",
+      "title": "Safari",
+      "year": 2003,
+      "category": "internet",
+      "description": "Apple lanza Safari para Mac.",
+      "url": "https://en.wikipedia.org/wiki/Safari_(web_browser)",
+      "importance": 1
+    },
+    {
+      "id": "firefox",
+      "title": "Firefox",
+      "year": 2004,
+      "category": "internet",
+      "description": "Firefox 1.0: el navegador open source que desafía a IE.",
+      "url": "https://en.wikipedia.org/wiki/Firefox",
+      "importance": 2
+    },
+    {
+      "id": "opera",
+      "title": "Opera",
+      "year": 1995,
+      "category": "internet",
+      "description": "Opera: pionero en innovación de navegadores.",
+      "url": "https://en.wikipedia.org/wiki/Opera_(web_browser)",
+      "importance": 1
+    },
+    {
+      "id": "ie6",
+      "title": "Internet Explorer 6",
+      "year": 2001,
+      "category": "internet",
+      "description": "IE6 domina el mercado con 95% de cuota.",
+      "url": "https://en.wikipedia.org/wiki/Internet_Explorer_6",
+      "importance": 1
+    },
+    {
+      "id": "youtube",
+      "title": "YouTube",
+      "year": 2005,
+      "category": "companies",
+      "description": "Chad Hurley, Steve Chen y Jawed Karim fundan YouTube.",
+      "url": "https://en.wikipedia.org/wiki/YouTube",
+      "importance": 3
+    },
+    {
+      "id": "twitter",
+      "title": "Twitter",
+      "year": 2006,
+      "category": "companies",
+      "description": "Jack Dorsey publica el primer tweet.",
+      "url": "https://en.wikipedia.org/wiki/Twitter",
+      "importance": 2
+    },
+    {
+      "id": "instagram",
+      "title": "Instagram",
+      "year": 2010,
+      "category": "companies",
+      "description": "Kevin Systrom y Mike Krieger lanzan Instagram.",
+      "url": "https://en.wikipedia.org/wiki/Instagram",
+      "importance": 2
+    },
+    {
+      "id": "tiktok",
+      "title": "TikTok",
+      "year": 2016,
+      "category": "companies",
+      "description": "ByteDance lanza TikTok (Douyin en China).",
+      "url": "https://en.wikipedia.org/wiki/TikTok",
+      "importance": 2
+    },
+    {
+      "id": "uber",
+      "title": "Uber",
+      "year": 2009,
+      "category": "companies",
+      "description": "Uber revoluciona el transporte.",
+      "url": "https://en.wikipedia.org/wiki/Uber",
+      "importance": 1
+    },
+    {
+      "id": "airbnb",
+      "title": "Airbnb",
+      "year": 2008,
+      "category": "companies",
+      "description": "Airbnb: alquiler de habitaciones entre particulares.",
+      "url": "https://en.wikipedia.org/wiki/Airbnb",
+      "importance": 1
+    },
+    {
+      "id": "spotify",
+      "title": "Spotify",
+      "year": 2008,
+      "category": "companies",
+      "description": "Daniel Ek lanza Spotify, streaming de música.",
+      "url": "https://en.wikipedia.org/wiki/Spotify",
+      "importance": 2
+    },
+    {
+      "id": "netflix",
+      "title": "Netflix Streaming",
+      "year": 2007,
+      "category": "companies",
+      "description": "Netflix empieza streaming, fin del DVD.",
+      "url": "https://en.wikipedia.org/wiki/Netflix",
+      "importance": 2
+    },
+    {
+      "id": "amazon",
+      "title": "Amazon",
+      "year": 1994,
+      "category": "companies",
+      "description": "Jeff Bezos funda Amazon como librería online.",
+      "url": "https://en.wikipedia.org/wiki/Amazon_(company)",
+      "importance": 2
+    },
+    {
+      "id": "apple-cupertino",
+      "title": "Apple Park",
+      "year": 2017,
+      "category": "companies",
+      "description": "Apple se muda a Apple Park, su nueva sede.",
+      "url": "https://en.wikipedia.org/wiki/Apple_Park",
+      "importance": 1
+    },
+    {
+      "id": "microsoft-nokia",
+      "title": "Microsoft compra Nokia",
+      "year": 2013,
+      "category": "companies",
+      "description": "Microsoft compra la división de dispositivos de Nokia.",
+      "url": "https://en.wikipedia.org/wiki/Microsoft_Nokia",
+      "importance": 1
+    },
+    {
+      "id": "yahoo-verizon",
+      "title": "Yahoo → Verizon",
+      "year": 2017,
+      "category": "companies",
+      "description": "Verizon compra Yahoo por $4.48B.",
+      "url": "https://en.wikipedia.org/wiki/Yahoo!",
+      "importance": 1
+    },
+    {
+      "id": "github-copilot-x",
+      "title": "GitHub Copilot X",
+      "year": 2023,
+      "category": "ai",
+      "description": "GitHub expande Copilot con chat, voice y more.",
+      "url": "https://github.com/features/copilot",
+      "importance": 1
+    },
+    {
+      "id": "cursor",
+      "title": "Cursor",
+      "year": 2023,
+      "category": "tools",
+      "description": "Cursor: editor de código con IA integrada.",
+      "url": "https://www.cursor.sh/",
+      "importance": 2
+    },
+    {
+      "id": "v0",
+      "title": "Vercel v0",
+      "year": 2023,
+      "category": "ai",
+      "description": "Vercel lanza v0: generador de UI con IA.",
+      "url": "https://v0.dev/",
+      "importance": 1
+    },
+    {
+      "id": "bolt",
+      "title": "Bolt.new",
+      "year": 2024,
+      "category": "ai",
+      "description": "Bolt.new: generar apps completas con IA en el navegador.",
+      "url": "https://bolt.new/",
+      "importance": 1
+    },
+    {
+      "id": "replit-ai",
+      "title": "Replit AI",
+      "year": 2023,
+      "category": "ai",
+      "description": "Replit integra IA para codear desde el navegador.",
+      "url": "https://replit.com/",
+      "importance": 1
+    },
+    {
+      "id": "npm",
+      "title": "npm",
+      "year": 2010,
+      "category": "tools",
+      "description": "Isaac Schlueter crea npm, gestor de paquetes de Node.",
+      "url": "https://www.npmjs.com/",
+      "importance": 2
+    },
+    {
+      "id": "yarn",
+      "title": "Yarn",
+      "year": 2016,
+      "category": "tools",
+      "description": "Facebook lanza Yarn, alternativa a npm.",
+      "url": "https://yarnpkg.com/",
+      "importance": 1
+    },
+    {
+      "id": "pnpm",
+      "title": "pnpm",
+      "year": 2017,
+      "category": "tools",
+      "description": "pnpm: gestor de paquetes eficiente con hard links.",
+      "url": "https://pnpm.io/",
+      "importance": 1
+    },
+    {
+      "id": "bun-1",
+      "title": "Bun 1.0",
+      "year": 2023,
+      "category": "frameworks",
+      "description": "Bun 1.0: runtime JS que desafía a Node y Deno.",
+      "url": "https://bun.sh/",
+      "importance": 1
+    },
+    {
+      "id": "biome",
+      "title": "Biome",
+      "year": 2023,
+      "category": "tools",
+      "description": "Biome (antes Rome): linting y formateo en Rust.",
+      "url": "https://biomejs.dev/",
+      "importance": 1
+    },
+    {
+      "id": "oxc",
+      "title": "Oxc",
+      "year": 2023,
+      "category": "tools",
+      "description": "Oxc: parser y linter ultra-rápido en Rust.",
+      "url": "https://oxc-project.github.io/",
+      "importance": 1
+    },
+    {
+      "id": "ruff",
+      "title": "Ruff",
+      "year": 2022,
+      "category": "tools",
+      "description": "Ruff: linter de Python 10-100x más rápido en Rust.",
+      "url": "https://docs.astral.sh/ruff/",
+      "importance": 1
+    },
+    {
+      "id": "uv",
+      "title": "uv",
+      "year": 2024,
+      "category": "tools",
+      "description": "uv: gestor de paquetes de Python en Rust, 10-100x más rápido.",
+      "url": "https://docs.astral.sh/uv/",
+      "importance": 1
+    },
+    {
+      "id": "turso",
+      "title": "Turso",
+      "year": 2022,
+      "category": "tools",
+      "description": "Turso: SQLite distribuido en el edge.",
+      "url": "https://turso.tech/",
+      "importance": 1
+    },
+    {
+      "id": "libsql",
+      "title": "libSQL",
+      "year": 2023,
+      "category": "opensource",
+      "description": "libSQL: fork de SQLite open source.",
+      "url": "https://github.com/tursodatabase/libsql",
+      "importance": 1
+    },
+    {
+      "id": "duckdb",
+      "title": "DuckDB",
+      "year": 2019,
+      "category": "tools",
+      "description": "DuckDB: SQLite para analytics, OLAP embebido.",
+      "url": "https://duckdb.org/",
+      "importance": 1
+    },
+    {
+      "id": "clickhouse",
+      "title": "ClickHouse",
+      "year": 2016,
+      "category": "tools",
+      "description": "ClickHouse: base de datos columnar ultrarrápida.",
+      "url": "https://clickhouse.com/",
+      "importance": 1
+    },
+    {
+      "id": "influxdb",
+      "title": "InfluxDB",
+      "year": 2013,
+      "category": "tools",
+      "description": "InfluxDB: base de datos para series temporales.",
+      "url": "https://www.influxdata.com/",
+      "importance": 1
+    },
+    {
+      "id": "neo4j",
+      "title": "Neo4j",
+      "year": 2007,
+      "category": "tools",
+      "description": "Neo4j: base de datos de grafos.",
+      "url": "https://neo4j.com/",
+      "importance": 1
+    },
+    {
+      "id": "elasticsearch",
+      "title": "Elasticsearch",
+      "year": 2010,
+      "category": "tools",
+      "description": "Elasticsearch: motor de búsqueda y analytics.",
+      "url": "https://www.elastic.co/",
+      "importance": 1
+    },
+    {
+      "id": "grafana",
+      "title": "Grafana",
+      "year": 2014,
+      "category": "tools",
+      "description": "Grafana: dashboards de observabilidad.",
+      "url": "https://grafana.com/",
+      "importance": 1
+    },
+    {
+      "id": "prometheus",
+      "title": "Prometheus",
+      "year": 2012,
+      "category": "tools",
+      "description": "Prometheus: monitoreo y alerting time-series.",
+      "url": "https://prometheus.io/",
+      "importance": 1
+    },
+    {
+      "id": "nginx",
+      "title": "Nginx",
+      "year": 2004,
+      "category": "tools",
+      "description": "Igor Sysoev crea Nginx, web server de alto rendimiento.",
+      "url": "https://nginx.org/",
+      "importance": 2
+    },
+    {
+      "id": "caddy",
+      "title": "Caddy",
+      "year": 2015,
+      "category": "tools",
+      "description": "Caddy: web server con HTTPS automático.",
+      "url": "https://caddyserver.com/",
+      "importance": 1
+    },
+    {
+      "id": "traefik",
+      "title": "Traefik",
+      "year": 2016,
+      "category": "tools",
+      "description": "Traefik: reverse proxy cloud-native.",
+      "url": "https://traefik.io/",
+      "importance": 1
+    },
+    {
+      "id": "hugo",
+      "title": "Hugo",
+      "year": 2013,
+      "category": "frameworks",
+      "description": "Hugo: generador de sitios estáticos en Go.",
+      "url": "https://gohugo.io/",
+      "importance": 1
+    },
+    {
+      "id": "jekyll",
+      "title": "Jekyll",
+      "year": 2008,
+      "category": "frameworks",
+      "description": "Tom Preston-Werner crea Jekyll para blogs estáticos.",
+      "url": "https://jekyllrb.com/",
+      "importance": 1
+    },
+    {
+      "id": "11ty",
+      "title": "Eleventy",
+      "year": 2018,
+      "category": "frameworks",
+      "description": "Eleventy: generador de sitios estáticos simple.",
+      "url": "https://www.11ty.dev/",
+      "importance": 1
+    },
+    {
+      "id": "remix",
+      "title": "Remix",
+      "year": 2021,
+      "category": "frameworks",
+      "description": "Remix: framework web full-stack para React.",
+      "url": "https://remix.run/",
+      "importance": 1
+    },
+    {
+      "id": "solidstart",
+      "title": "SolidStart",
+      "year": 2022,
+      "category": "frameworks",
+      "description": "SolidStart: meta-framework para SolidJS.",
+      "url": "https://start.solidjs.com/",
+      "importance": 1
+    },
+    {
+      "id": "nuxt",
+      "title": "Nuxt",
+      "year": 2016,
+      "category": "frameworks",
+      "description": "Nuxt: framework Vue para SSR/SSG.",
+      "url": "https://nuxt.com/",
+      "importance": 1
+    },
+    {
+      "id": "sveltekit",
+      "title": "SvelteKit",
+      "year": 2021,
+      "category": "frameworks",
+      "description": "SvelteKit: framework web para Svelte.",
+      "url": "https://kit.svelte.dev/",
+      "importance": 1
+    },
+    {
+      "id": "astro-2",
+      "title": "Astro 2.0",
+      "year": 2023,
+      "category": "frameworks",
+      "description": "Astro 2.0 con Content Collections y server islands.",
+      "url": "https://astro.build/",
+      "importance": 1
+    },
+    {
+      "id": "laravel-11",
+      "title": "Laravel 11",
+      "year": 2024,
+      "category": "frameworks",
+      "description": "Laravel 11: framework PHP más popular.",
+      "url": "https://laravel.com/",
+      "importance": 1
+    },
+    {
+      "id": "django-5",
+      "title": "Django 5",
+      "year": 2023,
+      "category": "frameworks",
+      "description": "Django 5: framework Python para web.",
+      "url": "https://www.djangoproject.com/",
+      "importance": 1
+    },
+    {
+      "id": "fastapi",
+      "title": "FastAPI",
+      "year": 2018,
+      "category": "frameworks",
+      "description": "Sebastián Ramírez crea FastAPI para Python.",
+      "url": "https://fastapi.tiangolo.com/",
+      "importance": 2
+    },
+    {
+      "id": "fiber",
+      "title": "Fiber",
+      "year": 2020,
+      "category": "frameworks",
+      "description": "Fiber: framework web ultrarrápido en Go.",
+      "url": "https://gofiber.io/",
+      "importance": 1
+    },
+    {
+      "id": "actix",
+      "title": "Actix Web",
+      "year": 2017,
+      "category": "frameworks",
+      "description": "Actix Web: framework Rust de alto rendimiento.",
+      "url": "https://actix.rs/",
+      "importance": 1
+    },
+    {
+      "id": "rails-7",
+      "title": "Rails 7",
+      "year": 2021,
+      "category": "frameworks",
+      "description": "Rails 7: sin JavaScript, import maps y Hotwire.",
+      "url": "https://rubyonrails.org/",
+      "importance": 1
+    },
+    {
+      "id": "spring-boot-3",
+      "title": "Spring Boot 3",
+      "year": 2022,
+      "category": "frameworks",
+      "description": "Spring Boot 3: Java 17+ y GraalVM native images.",
+      "url": "https://spring.io/",
+      "importance": 1
+    },
+    {
+      "id": "dotnet-8",
+      "title": ".NET 8",
+      "year": 2023,
+      "category": "frameworks",
+      "description": ".NET 8: plataforma unificada de Microsoft.",
+      "url": "https://dotnet.microsoft.com/",
+      "importance": 1
+    },
+    {
+      "id": "blazor",
+      "title": "Blazor",
+      "year": 2018,
+      "category": "frameworks",
+      "description": "Blazor: C# en el navegador via WebAssembly.",
+      "url": "https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor",
+      "importance": 1
+    },
+    {
+      "id": "htmx-1",
+      "title": "htmx 1.0",
+      "year": 2020,
+      "category": "frameworks",
+      "description": "htmx: HTML extendido para interactividad sin JS.",
+      "url": "https://htmx.org/",
+      "importance": 1
+    },
+    {
+      "id": "pytorch",
+      "title": "PyTorch",
+      "year": 2016,
+      "category": "ai",
+      "description": "Facebook lanza PyTorch, framework de ML flexible.",
+      "url": "https://pytorch.org/",
+      "importance": 3
+    },
+    {
+      "id": "keras",
+      "title": "Keras",
+      "year": 2015,
+      "category": "ai",
+      "description": "François Chollet crea Keras, API de DL amigable.",
+      "url": "https://keras.io/",
+      "importance": 1
+    },
+    {
+      "id": "scikit-learn",
+      "title": "scikit-learn",
+      "year": 2010,
+      "category": "ai",
+      "description": "scikit-learn: ML en Python, simple y efectivo.",
+      "url": "https://scikit-learn.org/",
+      "importance": 1
+    },
+    {
+      "id": "pandas",
+      "title": "pandas",
+      "year": 2008,
+      "category": "ai",
+      "description": "Wes McKinney crea pandas para análisis de datos.",
+      "url": "https://pandas.pydata.org/",
+      "importance": 2
+    },
+    {
+      "id": "numpy",
+      "title": "NumPy",
+      "year": 2005,
+      "category": "ai",
+      "description": "NumPy: arrays n-dimensional para cálculo numérico.",
+      "url": "https://numpy.org/",
+      "importance": 2
+    },
+    {
+      "id": "jupyter",
+      "title": "Jupyter",
+      "year": 2014,
+      "category": "tools",
+      "description": "Jupyter: notebooks interactivos para ciencia de datos.",
+      "url": "https://jupyter.org/",
+      "importance": 2
+    },
+    {
+      "id": "huggingface",
+      "title": "Hugging Face",
+      "year": 2016,
+      "category": "ai",
+      "description": "Hugging Face: GitHub de la IA con modelos open source.",
+      "url": "https://huggingface.co/",
+      "importance": 2
+    },
+    {
+      "id": "langchain",
+      "title": "LangChain",
+      "year": 2022,
+      "category": "ai",
+      "description": "LangChain: framework para apps con LLMs.",
+      "url": "https://www.langchain.com/",
+      "importance": 1
+    },
+    {
+      "id": "llamaindex",
+      "title": "LlamaIndex",
+      "year": 2022,
+      "category": "ai",
+      "description": "LlamaIndex: framework para RAG.",
+      "url": "https://www.llamaindex.ai/",
+      "importance": 1
+    },
+    {
+      "id": "stable-diffusion",
+      "title": "Stable Diffusion",
+      "year": 2022,
+      "category": "ai",
+      "description": "Stability AI lanza Stable Diffusion, generación de imágenes.",
+      "url": "https://stability.ai/",
+      "importance": 2
+    },
+    {
+      "id": "dalle",
+      "title": "DALL-E",
+      "year": 2021,
+      "category": "ai",
+      "description": "OpenAI lanza DALL-E, imágenes desde texto.",
+      "url": "https://openai.com/dall-e-3",
+      "importance": 2
+    },
+    {
+      "id": "midjourney",
+      "title": "Midjourney",
+      "year": 2022,
+      "category": "ai",
+      "description": "Midjourney: generación de arte con IA.",
+      "url": "https://www.midjourney.com/",
+      "importance": 2
+    },
+    {
+      "id": "whisper",
+      "title": "Whisper",
+      "year": 2022,
+      "category": "ai",
+      "description": "OpenAI Whisper: reconocimiento de voz open source.",
+      "url": "https://openai.com/research/whisper",
+      "importance": 1
+    },
+    {
+      "id": "elevenlabs",
+      "title": "ElevenLabs",
+      "year": 2022,
+      "category": "ai",
+      "description": "ElevenLabs: síntesis de voz ultrarrealista.",
+      "url": "https://elevenlabs.io/",
+      "importance": 1
+    },
+    {
+      "id": "perplexity",
+      "title": "Perplexity AI",
+      "year": 2022,
+      "category": "ai",
+      "description": "Perplexity: motor de búsqueda con IA.",
+      "url": "https://www.perplexity.ai/",
+      "importance": 1
+    },
+    {
+      "id": "gemini",
+      "title": "Google Gemini",
+      "year": 2023,
+      "category": "ai",
+      "description": "Google lanza Gemini, su modelo multimodal.",
+      "url": "https://deepmind.google/technologies/gemini/",
+      "importance": 2
+    },
+    {
+      "id": "groq",
+      "title": "Groq",
+      "year": 2023,
+      "category": "ai",
+      "description": "Groq: inferencia de LLMs ultra-rápida con LPU.",
+      "url": "https://groq.com/",
+      "importance": 1
+    },
+    {
+      "id": "together",
+      "title": "Together AI",
+      "year": 2022,
+      "category": "ai",
+      "description": "Together AI: plataforma open source para LLMs.",
+      "url": "https://www.together.ai/",
+      "importance": 1
+    },
+    {
+      "id": "replicate",
+      "title": "Replicate",
+      "year": 2019,
+      "category": "ai",
+      "description": "Replicate: ejecuta modelos de IA en la nube.",
+      "url": "https://replicate.com/",
+      "importance": 1
+    },
+    {
+      "id": "runway",
+      "title": "Runway",
+      "year": 2018,
+      "category": "ai",
+      "description": "Runway: IA para edición de video.",
+      "url": "https://runwayml.com/",
+      "importance": 1
+    },
+    {
+      "id": "suno",
+      "title": "Suno AI",
+      "year": 2023,
+      "category": "ai",
+      "description": "Suno: IA que genera música con letra.",
+      "url": "https://suno.com/",
+      "importance": 1
+    },
+    {
+      "id": "udio",
+      "title": "Udio",
+      "year": 2024,
+      "category": "ai",
+      "description": "Udio: alternativa a Suno para música con IA.",
+      "url": "https://www.udio.com/",
+      "importance": 1
+    },
+    {
+      "id": "waymo",
+      "title": "Waymo",
+      "year": 2009,
+      "category": "ai",
+      "description": "Google crea Waymo para coches autónomos.",
+      "url": "https://waymo.com/",
+      "importance": 1
+    },
+    {
+      "id": "tesla-ai",
+      "title": "Tesla Autopilot",
+      "year": 2014,
+      "category": "ai",
+      "description": "Tesla lanza Autopilot, conducción asistida.",
+      "url": "https://www.tesla.com/autopilot",
+      "importance": 1
+    },
+    {
+      "id": "bsd",
+      "title": "BSD Unix",
+      "year": 1978,
+      "category": "opensource",
+      "description": "BSD: variante de Unix que inspira a Linux.",
+      "url": "https://en.wikipedia.org/wiki/Berkeley_Software_Distribution",
+      "importance": 1
+    },
+    {
+      "id": "gnu",
+      "title": "GNU",
+      "year": 1983,
+      "category": "opensource",
+      "description": "Richard Stallman lanza el proyecto GNU.",
+      "url": "https://www.gnu.org/",
+      "importance": 2
+    },
+    {
+      "id": "gpl",
+      "title": "GPL",
+      "year": 1989,
+      "category": "opensource",
+      "description": "Stallman crea la licencia GPL.",
+      "url": "https://www.gnu.org/licenses/gpl-3.0.html",
+      "importance": 2
+    },
+    {
+      "id": "apache",
+      "title": "Apache HTTP Server",
+      "year": 1995,
+      "category": "opensource",
+      "description": "Apache se convierte en el servidor web más usado.",
+      "url": "https://httpd.apache.org/",
+      "importance": 1
+    },
+    {
+      "id": "debian",
+      "title": "Debian",
+      "year": 1993,
+      "category": "opensource",
+      "description": "Ian Murdock crea Debian, distro base de muchas.",
+      "url": "https://www.debian.org/",
+      "importance": 1
+    },
+    {
+      "id": "ubuntu",
+      "title": "Ubuntu",
+      "year": 2004,
+      "category": "opensource",
+      "description": "Canonical lanza Ubuntu, Linux para todos.",
+      "url": "https://ubuntu.com/",
+      "importance": 2
+    },
+    {
+      "id": "fedora",
+      "title": "Fedora",
+      "year": 2003,
+      "category": "opensource",
+      "description": "Fedora: distro comunitaria de Red Hat.",
+      "url": "https://fedoraproject.org/",
+      "importance": 1
+    },
+    {
+      "id": "arch",
+      "title": "Arch Linux",
+      "year": 2002,
+      "category": "opensource",
+      "description": "Arch Linux: distro rolling release para avanzados.",
+      "url": "https://archlinux.org/",
+      "importance": 1
+    },
+    {
+      "id": "freebsd",
+      "title": "FreeBSD",
+      "year": 1993,
+      "category": "opensource",
+      "description": "FreeBSD: sistema operativo derivado de BSD.",
+      "url": "https://www.freebsd.org/",
+      "importance": 1
+    },
+    {
+      "id": "openbsd",
+      "title": "OpenBSD",
+      "year": 1995,
+      "category": "opensource",
+      "description": "Theo de Raadt crea OpenBSD, enfocado en seguridad.",
+      "url": "https://www.openbsd.org/",
+      "importance": 1
+    },
+    {
+      "id": "netbsd",
+      "title": "NetBSD",
+      "year": 1993,
+      "category": "opensource",
+      "description": "NetBSD: portabilidad como objetivo.",
+      "url": "https://www.netbsd.org/",
+      "importance": 1
+    },
+    {
+      "id": "vim",
+      "title": "Vim",
+      "year": 1991,
+      "category": "tools",
+      "description": "Bram Moolenaar crea Vim.",
+      "url": "https://www.vim.org/",
+      "importance": 2
+    },
+    {
+      "id": "emacs",
+      "title": "Emacs",
+      "year": 1976,
+      "category": "tools",
+      "description": "Richard Stallman crea Emacs.",
+      "url": "https://www.gnu.org/software/emacs/",
+      "importance": 1
+    },
+    {
+      "id": "neovim",
+      "title": "Neovim",
+      "year": 2014,
+      "category": "tools",
+      "description": "Neovim: fork de Vim con mejoras modernas.",
+      "url": "https://neovim.io/",
+      "importance": 1
+    },
+    {
+      "id": "helix",
+      "title": "Helix",
+      "year": 2021,
+      "category": "tools",
+      "description": "Helix: editor modal moderno en Rust.",
+      "url": "https://helix-editor.com/",
+      "importance": 1
+    },
+    {
+      "id": "zellij",
+      "title": "Zellij",
+      "year": 2021,
+      "category": "tools",
+      "description": "Zellij: multiplexor de terminal en Rust.",
+      "url": "https://zellij.dev/",
+      "importance": 1
+    },
+    {
+      "id": "tmux",
+      "title": "tmux",
+      "year": 2007,
+      "category": "tools",
+      "description": "tmux: multiplexor de terminal.",
+      "url": "https://github.com/tmux/tmux",
+      "importance": 1
+    },
+    {
+      "id": "alacritty",
+      "title": "Alacritty",
+      "year": 2017,
+      "category": "tools",
+      "description": "Alacritty: terminal GPU-acelerada en Rust.",
+      "url": "https://alacritty.org/",
+      "importance": 1
+    },
+    {
+      "id": "warp",
+      "title": "Warp",
+      "year": 2022,
+      "category": "tools",
+      "description": "Warp: terminal moderna con IA.",
+      "url": "https://www.warp.dev/",
+      "importance": 1
+    },
+    {
+      "id": "fig",
+      "title": "Fig (Amazon)",
+      "year": 2021,
+      "category": "tools",
+      "description": "Fig: autocompletado en terminal para devs.",
+      "url": "https://fig.io/",
+      "importance": 1
+    },
+    {
+      "id": "nix",
+      "title": "Nix",
+      "year": 2003,
+      "category": "tools",
+      "description": "Nix: gestor de paquetes declarativo.",
+      "url": "https://nixos.org/",
+      "importance": 1
+    },
+    {
+      "id": "guix",
+      "title": "GNU Guix",
+      "year": 2012,
+      "category": "tools",
+      "description": "GNU Guix: sistema de paquetes funcional.",
+      "url": "https://guix.gnu.org/",
+      "importance": 1
+    },
+    {
+      "id": "flatpak",
+      "title": "Flatpak",
+      "year": 2015,
+      "category": "tools",
+      "description": "Flatpak: empaquetado universal para Linux.",
+      "url": "https://flatpak.org/",
+      "importance": 1
+    },
+    {
+      "id": "snap",
+      "title": "Snap",
+      "year": 2014,
+      "category": "tools",
+      "description": "Ubuntu Snap: paquetes universales.",
+      "url": "https://snapcraft.io/",
+      "importance": 1
+    },
+    {
+      "id": "appimage",
+      "title": "AppImage",
+      "year": 2004,
+      "category": "tools",
+      "description": "AppImage: apps portables para Linux.",
+      "url": "https://appimage.org/",
+      "importance": 1
+    },
+    {
+      "id": "apple-intelligence",
+      "title": "Apple Intelligence",
+      "year": 2024,
+      "category": "news",
+      "description": "Apple presenta Apple Intelligence: IA integrada en iPhone, iPad y Mac con privacidad en el dispositivo.",
+      "url": "https://www.apple.com/apple-intelligence/",
+      "importance": 3
+    },
+    {
+      "id": "ios-18",
+      "title": "iOS 18",
+      "year": 2024,
+      "category": "news",
+      "description": "iOS 18 con personalización total de pantalla inicio y control中心.",
+      "url": "https://developer.apple.com/ios/",
+      "importance": 2
+    },
+    {
+      "id": "iphone-16",
+      "title": "iPhone 16",
+      "year": 2024,
+      "category": "news",
+      "description": "iPhone 16 con botón Camera Control y chip A18.",
+      "url": "https://www.apple.com/iphone-16/",
+      "importance": 2
+    },
+    {
+      "id": "macbook-pro-m4",
+      "title": "MacBook Pro M4",
+      "year": 2024,
+      "category": "news",
+      "description": "Apple lanza MacBook Pro con chip M4 Pro y M4 Max.",
+      "url": "https://www.apple.com/macbook-pro/",
+      "importance": 2
+    },
+    {
+      "id": "windows-11-24h2",
+      "title": "Windows 11 24H2",
+      "year": 2024,
+      "category": "news",
+      "description": "Microsoft actualiza Windows 11 con Recall, Copilot+ y nuevas funciones IA.",
+      "url": "https://www.microsoft.com/windows/windows-11",
+      "importance": 2
+    },
+    {
+      "id": "copilot-plus",
+      "title": "Copilot+ PCs",
+      "year": 2024,
+      "category": "news",
+      "description": "Microsoft presenta PCs con NPU dedicado para IA local.",
+      "url": "https://www.microsoft.com/copilot-plus-pcs",
+      "importance": 2
+    },
+    {
+      "id": "samsung-galaxy-s24",
+      "title": "Samsung Galaxy S24",
+      "year": 2024,
+      "category": "news",
+      "description": "Samsung Galaxy S24 con Galaxy AI: traducción en tiempo real, circles to search.",
+      "url": "https://www.samsung.com/galaxy-s24/",
+      "importance": 2
+    },
+    {
+      "id": "pixel-8",
+      "title": "Google Pixel 8",
+      "year": 2023,
+      "category": "news",
+      "description": "Google Pixel 8 con chip Tensor G3 y funciones IA avanzadas.",
+      "url": "https://store.google.com/product/pixel_8",
+      "importance": 1
+    },
+    {
+      "id": "openai-devday-2023",
+      "title": "OpenAI DevDay",
+      "year": 2023,
+      "category": "news",
+      "description": "OpenAI presenta GPTs, Assistants API y preço reducido en DevDay.",
+      "url": "https://openai.com/blog/devday",
+      "importance": 3
+    },
+    {
+      "id": "gpt-4o",
+      "title": "GPT-4o",
+      "year": 2024,
+      "category": "news",
+      "description": "OpenAI lanza GPT-4o: multimodal nativo, voz en tiempo real, 2x más rápido.",
+      "url": "https://openai.com/index/hello-gpt-4o/",
+      "importance": 3
+    },
+    {
+      "id": "gpt-4o-mini",
+      "title": "GPT-4o mini",
+      "year": 2024,
+      "category": "news",
+      "description": "OpenAI lanza GPT-4o mini: modelo pequeño y barato para apps.",
+      "url": "https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/",
+      "importance": 2
+    },
+    {
+      "id": "o1-preview",
+      "title": "OpenAI o1",
+      "year": 2024,
+      "category": "news",
+      "description": "OpenAI lanza o1: modelo de razonamiento que piensa antes de responder.",
+      "url": "https://openai.com/index/learning-to-reason-with-llm/",
+      "importance": 3
+    },
+    {
+      "id": "o3",
+      "title": "OpenAI o3",
+      "year": 2024,
+      "category": "news",
+      "description": "OpenAI anuncia o3: siguiente generación de razonamiento con ARC-AGI récord.",
+      "url": "https://openai.com/index/deliberative-alignment/",
+      "importance": 2
+    },
+    {
+      "id": "claude-3-5-sonnet",
+      "title": "Claude 3.5 Sonnet",
+      "year": 2024,
+      "category": "news",
+      "description": "Anthropic lanza Claude 3.5 Sonnet: supera a GPT-4 en múltiples benchmarks.",
+      "url": "https://www.anthropic.com/news/claude-3-5-sonnet",
+      "importance": 2
+    },
+    {
+      "id": "claude-artifacts",
+      "title": "Claude Artifacts",
+      "year": 2024,
+      "category": "news",
+      "description": "Anthropic lanza Artifacts: crear apps y documentos directamente en Claude.",
+      "url": "https://www.anthropic.com/news/artifacts",
+      "importance": 2
+    },
+    {
+      "id": "gemini-2",
+      "title": "Gemini 2.0",
+      "year": 2024,
+      "category": "news",
+      "description": "Google lanza Gemini 2.0 Flash: modelo multimodal de nueva generación.",
+      "url": "https://deepmind.google/technologies/gemini/",
+      "importance": 2
+    },
+    {
+      "id": "google-ai-overview",
+      "title": "Google AI Overviews",
+      "year": 2024,
+      "category": "news",
+      "description": "Google integra respuestas IA en resultados de búsqueda (AI Overviews).",
+      "url": "https://blog.google/products/search/generative-ai-google-search/",
+      "importance": 2
+    },
+    {
+      "id": "deepseek-r1",
+      "title": "DeepSeek-R1",
+      "year": 2025,
+      "category": "news",
+      "description": "DeepSeek lanza R1: modelo de razonamiento open source que rivaliza con o1.",
+      "url": "https://github.com/deepseek-ai/DeepSeek-R1",
+      "importance": 3
+    },
+    {
+      "id": "deepseek-v3-news",
+      "title": "DeepSeek-V3",
+      "year": 2024,
+      "category": "news",
+      "description": "DeepSeek-V3: modelo chino open source con 671B parámetros, entrenado por $5.6M.",
+      "url": "https://github.com/deepseek-ai/DeepSeek-V3",
+      "importance": 2
+    },
+    {
+      "id": "llama-3-1",
+      "title": "Meta LLaMA 3.1",
+      "year": 2024,
+      "category": "news",
+      "description": "Meta libera LLaMA 3.1 405B: el mayor modelo open source hasta la fecha.",
+      "url": "https://llama.meta.com/",
+      "importance": 2
+    },
+    {
+      "id": "mistral-large-2",
+      "title": "Mistral Large 2",
+      "year": 2024,
+      "category": "news",
+      "description": "Mistral lanza Large 2: 123B parámetros, multilingüe, open weight.",
+      "url": "https://mistral.ai/news/mistral-large-2/",
+      "importance": 1
+    },
+    {
+      "id": "gemma-2",
+      "title": "Google Gemma 2",
+      "year": 2024,
+      "category": "news",
+      "description": "Google lanza Gemma 2: modelos open source de 2B a 27B parámetros.",
+      "url": "https://blog.google/technology/developers/gemma-2/",
+      "importance": 1
+    },
+    {
+      "id": "apple-m4",
+      "title": "Apple M4",
+      "year": 2024,
+      "category": "news",
+      "description": "Apple presenta chip M4: 38 TOPS de NPU, 10-core CPU.",
+      "url": "https://www.apple.com/newsroom/2024/05/apple-introduces-m4/",
+      "importance": 2
+    },
+    {
+      "id": "nvidia-blackwell",
+      "title": "NVIDIA Blackwell",
+      "year": 2024,
+      "category": "news",
+      "description": "NVIDIA presenta B200: chip Blackwell con 208B transistores para IA.",
+      "url": "https://www.nvidia.com/en-us/data-center/technologies/blackwell-architecture/",
+      "importance": 2
+    },
+    {
+      "id": "amd-mi300",
+      "title": "AMD MI300X",
+      "year": 2024,
+      "category": "news",
+      "description": "AMD lanza MI300X: acelerador IA con 192GB HBM3 para data centers.",
+      "url": "https://www.amd.com/en/products/accelerators/instinct/mi300.html",
+      "importance": 1
+    },
+    {
+      "id": "qualcomm-snapdragon-x",
+      "title": "Snapdragon X Elite",
+      "year": 2024,
+      "category": "news",
+      "description": "Qualcomm lanza Snapdragon X Elite: ARM para Windows con 45 TOPS NPU.",
+      "url": "https://www.qualcomm.com/products/mobile/snapdragon/x-series",
+      "importance": 1
+    },
+    {
+      "id": "meta-ray-ban",
+      "title": "Meta Ray-Ban AI",
+      "year": 2024,
+      "category": "news",
+      "description": "Meta integra IA multimodal en las gafas Ray-Ban Meta.",
+      "url": "https://www.meta.com/quest/accessories/ray-ban-meta/",
+      "importance": 1
+    },
+    {
+      "id": "humane-ai-pin",
+      "title": "Humane AI Pin",
+      "year": 2024,
+      "category": "news",
+      "description": "Humane lanza AI Pin: dispositivo IA portátil con proyección láser.",
+      "url": "https://humane.com/",
+      "importance": 1
+    },
+    {
+      "id": "rabbit-r1",
+      "title": "Rabbit R1",
+      "year": 2024,
+      "category": "news",
+      "description": "Rabbit lanza R1: dispositivo IA con Large Action Model.",
+      "url": "https://www.rabbit.tech/",
+      "importance": 1
+    },
+    {
+      "id": "eu-ai-act",
+      "title": "EU AI Act",
+      "year": 2024,
+      "category": "news",
+      "description": "Unión Europea aprueba el AI Act: primera regulación global de IA.",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+      "importance": 3
+    },
+    {
+      "id": "github-copilot-free",
+      "title": "Copilot Gratis",
+      "year": 2024,
+      "category": "news",
+      "description": "GitHub ofrece Copilot gratis para desarrolladores individuales.",
+      "url": "https://github.com/features/copilot#free",
+      "importance": 2
+    },
+    {
+      "id": "cursor-ai-editor",
+      "title": "Cursor popular",
+      "year": 2024,
+      "category": "news",
+      "description": "Cursor se convierte en el editor IA más popular, superando a VS Code en crecimiento.",
+      "url": "https://www.cursor.sh/",
+      "importance": 2
+    },
+    {
+      "id": "bolt-new-launch",
+      "title": "Bolt.new",
+      "year": 2024,
+      "category": "news",
+      "description": "StackBlitz lanza Bolt.new: generar apps completas con IA en el navegador.",
+      "url": "https://bolt.new/",
+      "importance": 2
+    },
+    {
+      "id": "v0-launch",
+      "title": "Vercel v0",
+      "year": 2023,
+      "category": "news",
+      "description": "Vercel lanza v0: generador de interfaces UI con IA.",
+      "url": "https://v0.dev/",
+      "importance": 2
+    },
+    {
+      "id": "google-venus",
+      "title": "Google Gemini Live",
+      "year": 2024,
+      "category": "news",
+      "description": "Google lanza Gemini Live: conversación de voz natural con IA.",
+      "url": "https://blog.google/products/gemini/google-gemini-live/",
+      "importance": 2
+    },
+    {
+      "id": "openai-realtime",
+      "title": "OpenAI Realtime API",
+      "year": 2024,
+      "category": "news",
+      "description": "OpenAI lanza Realtime API: voz y visión en tiempo real para apps.",
+      "url": "https://openai.com/index/realtime-api/",
+      "importance": 2
+    },
+    {
+      "id": "anthropic-computer-use",
+      "title": "Claude Computer Use",
+      "year": 2024,
+      "category": "news",
+      "description": "Anthropic lanza Computer Use: Claude controla tu ordenador.",
+      "url": "https://www.anthropic.com/news/3-5-sonnet-computer-use",
+      "importance": 2
+    },
+    {
+      "id": "openai-searchgpt",
+      "title": "SearchGPT",
+      "year": 2024,
+      "category": "news",
+      "description": "OpenAI anuncia SearchGPT: motor de búsqueda con IA conversacional.",
+      "url": "https://openai.com/index/searchgpt-prototype/",
+      "importance": 1
+    },
+    {
+      "id": "apple-mac-mini-m4",
+      "title": "Mac mini M4",
+      "year": 2024,
+      "category": "news",
+      "description": "Apple lanza Mac mini M4: el Mac más pequeño y potente.",
+      "url": "https://www.apple.com/mac-mini/",
+      "importance": 1
+    },
+    {
+      "id": "surface-laptop-7",
+      "title": "Surface Laptop 7",
+      "year": 2024,
+      "category": "news",
+      "description": "Microsoft Surface Laptop 7 con chip Snapdragon X y Copilot+.",
+      "url": "https://www.microsoft.com/surface/devices/surface-laptop-7th-edition",
+      "importance": 1
+    },
+    {
+      "id": "samsung-galaxy-z-fold6",
+      "title": "Galaxy Z Fold 6",
+      "year": 2024,
+      "category": "news",
+      "description": "Samsung Galaxy Z Fold 6: plegable más delgado con Galaxy AI.",
+      "url": "https://www.samsung.com/galaxy-z-fold6/",
+      "importance": 1
+    },
+    {
+      "id": "oneplus-13",
+      "title": "OnePlus 13",
+      "year": 2025,
+      "category": "news",
+      "description": "OnePlus 13 con Snapdragon 8 Elite y 6000mAh.",
+      "url": "https://www.oneplus.com/13",
+      "importance": 1
+    },
+    {
+      "id": "nvidia-rtx-50",
+      "title": "NVIDIA RTX 5090",
+      "year": 2025,
+      "category": "news",
+      "description": "NVIDIA presenta RTX 5090: Blackwell para gaming con DLSS 4.",
+      "url": "https://www.nvidia.com/geforce/rtx-5090/",
+      "importance": 2
+    },
+    {
+      "id": "iphone-se-4",
+      "title": "iPhone SE 4",
+      "year": 2025,
+      "category": "news",
+      "description": "Apple lanza iPhone SE 4: primer SE con Face ID y chip A18.",
+      "url": "https://www.apple.com/iphone-se/",
+      "importance": 1
+    },
+    {
+      "id": "microsoft-copilot-2025",
+      "title": "Copilot 2025",
+      "year": 2025,
+      "category": "news",
+      "description": "Microsoft renueva Copilot: agente autónomo para empresas.",
+      "url": "https://www.microsoft.com/copilot",
+      "importance": 2
+    },
+    {
+      "id": "google-gemini-25",
+      "title": "Gemini 2.5 Pro",
+      "year": 2025,
+      "category": "news",
+      "description": "Google lanza Gemini 2.5 Pro: thinking model con 1M contexto.",
+      "url": "https://deepmind.google/technologies/gemini/",
+      "importance": 2
+    },
+    {
+      "id": "openai-gpt-45",
+      "title": "GPT-4.5",
+      "year": 2025,
+      "category": "news",
+      "description": "OpenAI lanza GPT-4.5: modelo más grande y capaz de OpenAI.",
+      "url": "https://openai.com/index/gpt-4-5/",
+      "importance": 2
+    },
+    {
+      "id": "claude-3-7-sonnet",
+      "title": "Claude 3.7 Sonnet",
+      "year": 2025,
+      "category": "news",
+      "description": "Anthropic lanza Claude 3.7 Sonnet: thinking extensible y más rápido.",
+      "url": "https://www.anthropic.com/news/claude-3-7-sonnet",
+      "importance": 2
+    },
+    {
+      "id": "xiaomi-15",
+      "title": "Xiaomi 15",
+      "year": 2025,
+      "category": "news",
+      "description": "Xiaomi 15 con Snapdragon 8 Elite y Leica optics.",
+      "url": "https://www.mi.com/global/product/xiaomi-15/",
+      "importance": 1
+    },
+    {
+      "id": "meta-quest-3s",
+      "title": "Meta Quest 3S",
+      "year": 2024,
+      "category": "news",
+      "description": "Meta lanza Quest 3S: RV accesible desde $299.",
+      "url": "https://www.meta.com/quest/quest-3s/",
+      "importance": 1
+    },
+    {
+      "id": "apple-intelligence-2025",
+      "title": "Apple Intelligence 2.0",
+      "year": 2025,
+      "category": "news",
+      "description": "Apple amplía Apple Intelligence a más idiomas y dispositivos.",
+      "url": "https://www.apple.com/apple-intelligence/",
+      "importance": 1
+    },
+    {
+      "id": "tesla-robotaxi",
+      "title": "Tesla Cybercab",
+      "year": 2024,
+      "category": "news",
+      "description": "Tesla presenta Cybercab: taxi autónomo sin volante.",
+      "url": "https://www.tesla.com/AI",
+      "importance": 2
+    },
+    {
+      "id": "waymo-expansion",
+      "title": "Waymo expansion",
+      "year": 2024,
+      "category": "news",
+      "description": "Waymo expande coches autónomos a San Francisco, LA y Phoenix.",
+      "url": "https://waymo.com/",
+      "importance": 1
+    },
+    {
+      "id": "spacex-starship",
+      "title": "SpaceX Starship",
+      "year": 2024,
+      "category": "news",
+      "description": "SpaceX logra primer aterrizaje del Starship, cohete más grande jamás construido.",
+      "url": "https://www.spacex.com/starship",
+      "importance": 2
+    },
+    {
+      "id": "eu-dsa",
+      "title": "EU DSA",
+      "year": 2024,
+      "category": "news",
+      "description": "Unión Europea activa el Digital Services Act: regulación de plataformas digitales.",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/digital-services-act-package",
+      "importance": 1
+    },
+    {
+      "id": "nvidia-nim",
+      "title": "NVIDIA NIM",
+      "year": 2024,
+      "category": "news",
+      "description": "NVIDIA lanza NIM: microservicios optimizados para inferencia IA.",
+      "url": "https://www.nvidia.com/en-us/ai/",
+      "importance": 1
+    },
+    {
+      "id": "huggingface-smol",
+      "title": "SmolLM",
+      "year": 2024,
+      "category": "news",
+      "description": "Hugging Face lanza SmolLM: modelos pequeños para edge devices.",
+      "url": "https://huggingface.co/HuggingFaceTB",
+      "importance": 1
+    },
+    {
+      "id": "ollama-04",
+      "title": "Ollama 0.4",
+      "year": 2024,
+      "category": "news",
+      "description": "Ollama 0.4: soporte para vision models y multimodal local.",
+      "url": "https://ollama.com/blog/vision-models",
+      "importance": 1
+    },
+    {
+      "id": "perplexity-pro",
+      "title": "Perplexity Pro",
+      "year": 2024,
+      "category": "news",
+      "description": "Perplexity lanza Pro: búsqueda IA con fuentes verificadas.",
+      "url": "https://www.perplexity.ai/pro",
+      "importance": 1
+    },
+    {
+      "id": "news-microsoft-founded",
+      "title": "Microsoft fundada",
+      "year": 1975,
+      "category": "news",
+      "description": "Bill Gates y Paul Allen fundan Microsoft para desarrollar software para el Altair 8800.",
+      "url": "https://en.wikipedia.org/wiki/Microsoft",
+      "importance": 3
+    },
+    {
+      "id": "news-apple-founded",
+      "title": "Apple Computer fundada",
+      "year": 1976,
+      "category": "news",
+      "description": "Steve Jobs, Steve Wozniak y Ronald Wayne fundan Apple en un garaje de Los Altos.",
+      "url": "https://en.wikipedia.org/wiki/Apple_Inc.",
+      "importance": 3
+    },
+    {
+      "id": "news-intel-8086",
+      "title": "Intel 8086",
+      "year": 1978,
+      "category": "news",
+      "description": "Intel lanza el 8086, primer procesador de la familia x86 que dominará el mundo.",
+      "url": "https://en.wikipedia.org/wiki/Intel_8086",
+      "importance": 2
+    },
+    {
+      "id": "news-ibm-pc",
+      "title": "IBM PC",
+      "year": 1981,
+      "category": "news",
+      "description": "IBM presenta el Personal Computer. Estándar de facto de la informática personal.",
+      "url": "https://en.wikipedia.org/wiki/IBM_Personal_Computer",
+      "importance": 3
+    },
+    {
+      "id": "news-macintosh-launch",
+      "title": "Macintosh sale a la venta",
+      "year": 1984,
+      "category": "news",
+      "description": "El Macintosh llega a las tiendas con el famoso anuncio '1984' de Ridley Scott.",
+      "url": "https://en.wikipedia.org/wiki/Macintosh_128K",
+      "importance": 2
+    },
+    {
+      "id": "news-windows-1",
+      "title": "Windows 1.0",
+      "year": 1985,
+      "category": "news",
+      "description": "Microsoft lanza Windows 1.0, interfaz gráfica sobre MS-DOS.",
+      "url": "https://en.wikipedia.org/wiki/Windows_1.0",
+      "importance": 2
+    },
+    {
+      "id": "news-nsfnet",
+      "title": "NSFNET",
+      "year": 1986,
+      "category": "news",
+      "description": "NSFNET conecta universidades de EE.UU., precursora de Internet moderna.",
+      "url": "https://en.wikipedia.org/wiki/National_Science_Foundation_Network",
+      "importance": 2
+    },
+    {
+      "id": "news-mosaic",
+      "title": "Mosaic Browser",
+      "year": 1993,
+      "category": "news",
+      "description": "Mosaic: el primer navegador web popular que cambia Internet para siempre.",
+      "url": "https://en.wikipedia.org/wiki/Mosaic_(web_browser)",
+      "importance": 3
+    },
+    {
+      "id": "news-amazon-founded",
+      "title": "Amazon fundada",
+      "year": 1994,
+      "category": "news",
+      "description": "Jeff Bezos funda Amazon como librería online desde su garaje.",
+      "url": "https://en.wikipedia.org/wiki/Amazon_(company)",
+      "importance": 2
+    },
+    {
+      "id": "news-netscape-ipo",
+      "title": "Netscape IPO",
+      "year": 1995,
+      "category": "news",
+      "description": "Netscape se hace público. El browser war empieza. Internet explota.",
+      "url": "https://en.wikipedia.org/wiki/Netscape",
+      "importance": 3
+    },
+    {
+      "id": "news-bombilla",
+      "title": "Yahoo! y AltaVista",
+      "year": 1995,
+      "category": "news",
+      "description": "Yahoo! (1994) y AltaVista (1995) popularizan los buscadores web.",
+      "url": "https://en.wikipedia.org/wiki/Yahoo!",
+      "importance": 1
+    },
+    {
+      "id": "news-napster-launch",
+      "title": "Napster lanza P2P",
+      "year": 1999,
+      "category": "news",
+      "description": "Napster revoluciona la distribución de música con peer-to-peer.",
+      "url": "https://en.wikipedia.org/wiki/Napster",
+      "importance": 2
+    },
+    {
+      "id": "news-dotcom-crash",
+      "title": "Burbuja punto com",
+      "year": 2000,
+      "category": "news",
+      "description": "El NASDAQ se desploma. Miles de startups cierran. El mundo tech cambia para siempre.",
+      "url": "https://en.wikipedia.org/wiki/Dot-com_bubble",
+      "importance": 3
+    },
+    {
+      "id": "news-wikipedia",
+      "title": "Wikipedia lanza",
+      "year": 2001,
+      "category": "news",
+      "description": "Jimmy Wales lanza Wikipedia, la enciclopedia libre que cambia el conocimiento.",
+      "url": "https://en.wikipedia.org/wiki/Wikipedia",
+      "importance": 2
+    },
+    {
+      "id": "news-myspace",
+      "title": "MySpace #1",
+      "year": 2003,
+      "category": "news",
+      "description": "MySpace se convierte en la red social más grande, superando a Google.",
+      "url": "https://en.wikipedia.org/wiki/Myspace",
+      "importance": 1
+    },
+    {
+      "id": "news-firefox-launch",
+      "title": "Firefox 1.0",
+      "year": 2004,
+      "category": "news",
+      "description": "Firefox 1.0 desafía a Internet Explorer. El browser war regresa.",
+      "url": "https://en.wikipedia.org/wiki/Firefox",
+      "importance": 2
+    },
+    {
+      "id": "news-youtube-launch",
+      "title": "YouTube lanza",
+      "year": 2005,
+      "category": "news",
+      "description": "YouTube cambia para siempre cómo consumimos vídeo en Internet.",
+      "url": "https://en.wikipedia.org/wiki/YouTube",
+      "importance": 3
+    },
+    {
+      "id": "news-aws-ec2",
+      "title": "AWS EC2 lanza",
+      "year": 2006,
+      "category": "news",
+      "description": "Amazon lanza EC2 y S3. La nube empieza. El cloud computing nace.",
+      "url": "https://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud",
+      "importance": 3
+    },
+    {
+      "id": "news-iphone-launch",
+      "title": "iPhone presentado",
+      "year": 2007,
+      "category": "news",
+      "description": "Steve Jobs presenta el iPhone. 'Un iPod, un teléfono, un dispositivo de Internet'.",
+      "url": "https://en.wikipedia.org/wiki/iPhone_(1st_generation)",
+      "importance": 3
+    },
+    {
+      "id": "news-android-launch",
+      "title": "Android lanza",
+      "year": 2008,
+      "category": "news",
+      "description": "Google lanza Android. El sistema operativo móvil más usado del mundo nace.",
+      "url": "https://en.wikipedia.org/wiki/Android_(operating_system)",
+      "importance": 3
+    },
+    {
+      "id": "news-app-store",
+      "title": "App Store abre",
+      "year": 2008,
+      "category": "news",
+      "description": "Apple abre la App Store. La economía de apps mueve miles de millones.",
+      "url": "https://en.wikipedia.org/wiki/App_Store_(iOS)",
+      "importance": 2
+    },
+    {
+      "id": "news-bitcoin-paper",
+      "title": "Bitcoin whitepaper",
+      "year": 2009,
+      "category": "news",
+      "description": "Satoshi Nakamoto publica el whitepaper de Bitcoin. La blockchain nace.",
+      "url": "https://en.wikipedia.org/wiki/Bitcoin",
+      "importance": 2
+    },
+    {
+      "id": "news-instagram-launch",
+      "title": "Instagram lanza",
+      "year": 2010,
+      "category": "news",
+      "description": "Instagram lanza y alcanza 1M de usuarios en 2 meses.",
+      "url": "https://en.wikipedia.org/wiki/Instagram",
+      "importance": 2
+    },
+    {
+      "id": "news-ipad-launch",
+      "title": "iPad lanza",
+      "year": 2010,
+      "category": "news",
+      "description": "Apple presenta el iPad. La tableta moderna llega al mercado.",
+      "url": "https://en.wikipedia.org/wiki/iPad_(1st_generation)",
+      "importance": 2
+    },
+    {
+      "id": "news-watson-jeopardy",
+      "title": "Watson gana Jeopardy",
+      "year": 2011,
+      "category": "news",
+      "description": "IBM Watson vence a humanos en Jeopardy. La IA sale de los laboratorios.",
+      "url": "https://en.wikipedia.org/wiki/Watson_(artificial_intelligence)",
+      "importance": 2
+    },
+    {
+      "id": "news-dropbox-unicorn",
+      "title": "Dropbox unicornio",
+      "year": 2011,
+      "category": "news",
+      "description": "Dropbox alcanza $4B de valoración. La era de los startups unicornio empieza.",
+      "url": "https://en.wikipedia.org/wiki/Dropbox",
+      "importance": 1
+    },
+    {
+      "id": "news-tesla-model-s",
+      "title": "Tesla Model S",
+      "year": 2012,
+      "category": "news",
+      "description": "Tesla lanza el Model S. Los coches eléctricos se vuelven cool.",
+      "url": "https://en.wikipedia.org/wiki/Tesla_Model_S",
+      "importance": 2
+    },
+    {
+      "id": "news-ps4",
+      "title": "PlayStation 4",
+      "year": 2013,
+      "category": "news",
+      "description": "Sony lanza PS4, dominando la consola de nueva generación.",
+      "url": "https://en.wikipedia.org/wiki/PlayStation_4",
+      "importance": 1
+    },
+    {
+      "id": "news-docker-conainers",
+      "title": "Docker containers",
+      "year": 2013,
+      "category": "news",
+      "description": "Docker populariza los contenedores. DevOps cambia para siempre.",
+      "url": "https://en.wikipedia.org/wiki/Docker_(software)",
+      "importance": 2
+    },
+    {
+      "id": "news-flappy-bird",
+      "title": "Flappy Bird viral",
+      "year": 2014,
+      "category": "news",
+      "description": "Flappy Bird se viraliza y su creador lo retira. El mobile gaming explota.",
+      "url": "https://en.wikipedia.org/wiki/Flappy_Bird",
+      "importance": 1
+    },
+    {
+      "id": "news-apple-watch",
+      "title": "Apple Watch presenta",
+      "year": 2014,
+      "category": "news",
+      "description": "Apple presenta Apple Watch. Los smartwatches llegan al mainstream.",
+      "url": "https://en.wikipedia.org/wiki/Apple_Watch",
+      "importance": 2
+    },
+    {
+      "id": "news-christmas-day-outage",
+      "title": "PSN y Xbox caen",
+      "year": 2014,
+      "category": "news",
+      "description": "Hackers Anonymous tumban PSN y Xbox Live en Navidad.",
+      "url": "https://en.wikipedia.org/wiki/PlayStation_Network",
+      "importance": 1
+    },
+    {
+      "id": "news-tesla-autopilot",
+      "title": "Tesla Autopilot",
+      "year": 2015,
+      "category": "news",
+      "description": "Tesla lanza Autopilot: conducción asistida con IA.",
+      "url": "https://en.wikipedia.org/wiki/Tesla_Autopilot",
+      "importance": 2
+    },
+    {
+      "id": "news-alphago",
+      "title": "AlphaGo vence a Lee Sedol",
+      "year": 2016,
+      "category": "news",
+      "description": "DeepMind AlphaGo vence al campeón mundial de Go. La IA supera a humanos.",
+      "url": "https://en.wikipedia.org/wiki/AlphaGo_v_Lee_Sedol",
+      "importance": 3
+    },
+    {
+      "id": "news-pokemon-go",
+      "title": "Pokémon GO",
+      "year": 2016,
+      "category": "news",
+      "description": "Pokémon GO se viraliza. AR llega al mainstream. 500M de descargas.",
+      "url": "https://en.wikipedia.org/wiki/Pok%C3%A9mon_Go",
+      "importance": 2
+    },
+    {
+      "id": "news-snapchat-ipo",
+      "title": "Snapchat IPO",
+      "year": 2017,
+      "category": "news",
+      "description": "Snap se hace público. Las stories dominan las redes sociales.",
+      "url": "https://en.wikipedia.org/wiki/Snap_Inc.",
+      "importance": 1
+    },
+    {
+      "id": "news-bitcoin-20k",
+      "title": "Bitcoin alcanza $20.000",
+      "year": 2017,
+      "category": "news",
+      "description": "Bitcoin alcanza los $20.000. La fiebre del bitcoin llega al mainstream.",
+      "url": "https://en.wikipedia.org/wiki/History_of_bitcoin",
+      "importance": 2
+    },
+    {
+      "id": "news-gdpr",
+      "title": "GDPR entra en vigor",
+      "year": 2018,
+      "category": "news",
+      "description": "El RGPD europeo entra en vigor. La privacidad de datos cambia para siempre.",
+      "url": "https://en.wikipedia.org/wiki/General_Data_Protection_Regulation",
+      "importance": 2
+    },
+    {
+      "id": "news-fortnite",
+      "title": "Fortnite Battle Royale",
+      "year": 2018,
+      "category": "news",
+      "description": "Fortnite alcanza 200M de jugadores. Los battle royale dominan.",
+      "url": "https://en.wikipedia.org/wiki/Fortnite",
+      "importance": 1
+    },
+    {
+      "id": "news-5g-rollout",
+      "title": "5G despliegue",
+      "year": 2019,
+      "category": "news",
+      "description": "Corea del Sur lanza 5G comercial. La nueva generación de red empieza.",
+      "url": "https://en.wikipedia.org/wiki/5G",
+      "importance": 2
+    },
+    {
+      "id": "news-tiktok-explosion",
+      "title": "TikTok explota",
+      "year": 2019,
+      "category": "news",
+      "description": "TikTok supera 1.500M de descargas. Los vídeos cortos dominan.",
+      "url": "https://en.wikipedia.org/wiki/TikTok",
+      "importance": 2
+    },
+    {
+      "id": "news-covid-remote",
+      "title": "COVID remote work",
+      "year": 2020,
+      "category": "news",
+      "description": "La pandemia obliga al trabajo remoto. Zoom crece 30x. El mundo digitaliza.",
+      "url": "https://en.wikipedia.org/wiki/COVID-19_pandemic",
+      "importance": 3
+    },
+    {
+      "id": "news-clubhouse",
+      "title": "Clubhouse viral",
+      "year": 2021,
+      "category": "news",
+      "description": "Clubhouse explota con audio en vivo. Twitter Spaces copia la idea.",
+      "url": "https://en.wikipedia.org/wiki/Clubhouse_(app)",
+      "importance": 1
+    },
+    {
+      "id": "news-nft-boom",
+      "title": "NFTs explotan",
+      "year": 2021,
+      "category": "news",
+      "description": "Beeple vende un NFT por $69M. Los NFTs llegan al mainstream.",
+      "url": "https://en.wikipedia.org/wiki/Non-fungible_token",
+      "importance": 2
+    },
+    {
+      "id": "news-facebook-meta",
+      "title": "Facebook → Meta",
+      "year": 2021,
+      "category": "news",
+      "description": "Facebook cambia su nombre a Meta. El metaverso se convierte en buzzword.",
+      "url": "https://en.wikipedia.org/wiki/Meta_Platforms",
+      "importance": 2
+    },
+    {
+      "id": "news-chip-shortage",
+      "title": "Crisis de chips",
+      "year": 2021,
+      "category": "news",
+      "description": "La escasez de semiconductores para chips afecta a coches y electrónica global.",
+      "url": "https://en.wikipedia.org/wiki/2020s_global_chip_shortage",
+      "importance": 2
+    },
+    {
+      "id": "news-twitter-sale",
+      "title": "Musk compra Twitter",
+      "year": 2022,
+      "category": "news",
+      "description": "Elon Musk compra Twitter por $44B. La red social más polémica cambia de dueño.",
+      "url": "https://en.wikipedia.org/wiki/Acquisition_of_Twitter_by_Elon_Musk",
+      "importance": 3
+    },
+    {
+      "id": "news-chatgpt-launch",
+      "title": "ChatGPT lanza",
+      "year": 2022,
+      "category": "news",
+      "description": "OpenAI lanza ChatGPT. 100M de usuarios en 2 meses. La IA llega al mainstream.",
+      "url": "https://en.wikipedia.org/wiki/ChatGPT",
+      "importance": 3
+    },
+    {
+      "id": "news-stable-diffusion",
+      "title": "Stable Diffusion",
+      "year": 2022,
+      "category": "news",
+      "description": "Stability AI lanza Stable Diffusion: generación de imágenes open source.",
+      "url": "https://en.wikipedia.org/wiki/Stable_Diffusion",
+      "importance": 2
+    },
+    {
+      "id": "news-altair-8800",
+      "title": "Altair 8800",
+      "year": 1975,
+      "category": "news",
+      "description": "MITS lanza el Altair 8800. La revolución del PC personal empieza.",
+      "url": "https://en.wikipedia.org/wiki/Altair_8800",
+      "importance": 2
+    },
+    {
+      "id": "news-apple-II-success",
+      "title": "Apple II éxito masivo",
+      "year": 1977,
+      "category": "news",
+      "description": "El Apple II se convierte en el PC doméstico más vendido. VisiCalc llega.",
+      "url": "https://en.wikipedia.org/wiki/Apple_II",
+      "importance": 2
+    },
+    {
+      "id": "news-cpm",
+      "title": "CP/M domina",
+      "year": 1980,
+      "category": "news",
+      "description": "CP/M es el SO estándar antes de MS-DOS. Gary Kildall pierde el contrato con IBM.",
+      "url": "https://en.wikipedia.org/wiki/CP/M",
+      "importance": 1
+    },
+    {
+      "id": "news-msdos-ibm",
+      "title": "MS-DOS para IBM PC",
+      "year": 1981,
+      "category": "news",
+      "description": "Microsoft vende MS-DOS a IBM por $50.000. El mayor negocio de la historia.",
+      "url": "https://en.wikipedia.org/wiki/MS-DOS",
+      "importance": 3
+    },
+    {
+      "id": "news-compact-portable",
+      "title": "Compaq Portable",
+      "year": 1983,
+      "category": "news",
+      "description": "Compaq lanza el primer PC compatible con IBM. La industria del clone empieza.",
+      "url": "https://en.wikipedia.org/wiki/Compaq_Portable",
+      "importance": 1
+    },
+    {
+      "id": "news-amiga-launch",
+      "title": "Commodore Amiga",
+      "year": 1985,
+      "category": "news",
+      "description": "El Commodore Amiga revoluciona multimedia: vídeo, sonido y gráficos avanzados.",
+      "url": "https://en.wikipedia.org/wiki/Amiga",
+      "importance": 2
+    },
+    {
+      "id": "news-super-mario",
+      "title": "Super Mario Bros",
+      "year": 1985,
+      "category": "news",
+      "description": "Nintendo lanza Super Mario Bros. El gaming popular conquista el mundo.",
+      "url": "https://en.wikipedia.org/wiki/Super_Mario_Bros.",
+      "importance": 2
+    },
+    {
+      "id": "news-geoCities",
+      "title": "GeoCities",
+      "year": 1994,
+      "category": "news",
+      "description": "GeoCities permite a cualquiera crear su página web. La web 1.0 popular.",
+      "url": "https://en.wikipedia.org/wiki/GeoCities",
+      "importance": 1
+    },
+    {
+      "id": "news-ie4",
+      "title": "Internet Explorer 4",
+      "year": 1997,
+      "category": "news",
+      "description": "Microsoft integra IE4 en Windows. El browser war contra Netscape se intensifica.",
+      "url": "https://en.wikipedia.org/wiki/Internet_Explorer_4",
+      "importance": 1
+    },
+    {
+      "id": "news-google-founded",
+      "title": "Google fundado",
+      "year": 1998,
+      "category": "news",
+      "description": "Larry Page y Sergey Brin fundan Google en un garaje de Stanford.",
+      "url": "https://en.wikipedia.org/wiki/Google",
+      "importance": 3
+    },
+    {
+      "id": "news-palm-pilot",
+      "title": "Palm Pilot",
+      "year": 1997,
+      "category": "news",
+      "description": "Palm lanza el Pilot: el PDA que populariza la informática portátil.",
+      "url": "https://en.wikipedia.org/wiki/Palm_Pilot",
+      "importance": 1
+    },
+    {
+      "id": "news-xbox-launch",
+      "title": "Xbox lanza",
+      "year": 2001,
+      "category": "news",
+      "description": "Microsoft entra en la consola con Xbox. Halo cambia el gaming.",
+      "url": "https://en.wikipedia.org/wiki/Xbox_(console)",
+      "importance": 2
+    },
+    {
+      "id": "news-2001-space",
+      "title": "Mac OS X",
+      "year": 2001,
+      "category": "news",
+      "description": "Apple lanza Mac OS X: Unix para consumidores. El Mac moderno nace.",
+      "url": "https://en.wikipedia.org/wiki/MacOS",
+      "importance": 2
+    },
+    {
+      "id": "news-skype",
+      "title": "Skype lanza",
+      "year": 2003,
+      "category": "news",
+      "description": "Skype populariza las llamadas VoIP gratuitas. Las telecom cambian.",
+      "url": "https://en.wikipedia.org/wiki/Skype",
+      "importance": 1
+    },
+    {
+      "id": "news-nintendo-ds",
+      "title": "Nintendo DS",
+      "year": 2004,
+      "category": "news",
+      "description": "Nintendo DS con pantallas táctiles. El gaming portátil se reinventa.",
+      "url": "https://en.wikipedia.org/wiki/Nintendo_DS",
+      "importance": 1
+    },
+    {
+      "id": "news-google-maps",
+      "title": "Google Maps",
+      "year": 2005,
+      "category": "news",
+      "description": "Google lanza Maps. Los mapas digitales cambian la navegación.",
+      "url": "https://en.wikipedia.org/wiki/Google_Maps",
+      "importance": 2
+    },
+    {
+      "id": "news-web-2-0",
+      "title": "Web 2.0",
+      "year": 2004,
+      "category": "news",
+      "description": "Tim O'Reilly acuña 'Web 2.0'. AJAX, blogs, wikis y redes sociales.",
+      "url": "https://en.wikipedia.org/wiki/Web_2.0",
+      "importance": 2
+    },
+    {
+      "id": "news-wii-launch",
+      "title": "Nintendo Wii",
+      "year": 2006,
+      "category": "news",
+      "description": "Nintendo Wii revoluciona el gaming con controles de movimiento.",
+      "url": "https://en.wikipedia.org/wiki/Wii",
+      "importance": 1
+    },
+    {
+      "id": "news-kindle",
+      "title": "Amazon Kindle",
+      "year": 2007,
+      "category": "news",
+      "description": "Amazon lanza Kindle. Los e-readers llegan al mainstream.",
+      "url": "https://en.wikipedia.org/wiki/Amazon_Kindle",
+      "importance": 1
+    },
+    {
+      "id": "news-netflix-streaming",
+      "title": "Netflix streaming",
+      "year": 2007,
+      "category": "news",
+      "description": "Netflix empieza streaming. El fin del DVD y el nacimiento del streaming.",
+      "url": "https://en.wikipedia.org/wiki/Netflix",
+      "importance": 2
+    },
+    {
+      "id": "news-spotify-launch",
+      "title": "Spotify lanza",
+      "year": 2008,
+      "category": "news",
+      "description": "Spotify lanza en Suecia. El streaming de música cambia la industria.",
+      "url": "https://en.wikipedia.org/wiki/Spotify",
+      "importance": 2
+    },
+    {
+      "id": "news-obama-campaign",
+      "title": "Obama usa redes sociales",
+      "year": 2008,
+      "category": "news",
+      "description": "La campaña de Obama usa Facebook y Twitter. Las redes llegan a la política.",
+      "url": "https://en.wikipedia.org/wiki/Barack_Obama_2008_presidential_campaign",
+      "importance": 1
+    },
+    {
+      "id": "news-ipad-tablet",
+      "title": "iPad crea categoría",
+      "year": 2010,
+      "category": "news",
+      "description": "El iPad crea la categoría de tablet. Competidores aparecen en meses.",
+      "url": "https://en.wikipedia.org/wiki/iPad_(1st_generation)",
+      "importance": 2
+    },
+    {
+      "id": "news-path-angry-birds",
+      "title": "Angry Birds viral",
+      "year": 2010,
+      "category": "news",
+      "description": "Angry Birds se descarga 10M de veces. Los juegos móviles explotan.",
+      "url": "https://en.wikipedia.org/wiki/Angry_Birds",
+      "importance": 1
+    },
+    {
+      "id": "news-instagram-1m",
+      "title": "Instagram 1M usuarios",
+      "year": 2010,
+      "category": "news",
+      "description": "Instagram alcanza 1M de usuarios en 2 meses. La era del social visual.",
+      "url": "https://en.wikipedia.org/wiki/Instagram",
+      "importance": 2
+    },
+    {
+      "id": "news-siri",
+      "title": "Siri en iPhone 4S",
+      "year": 2011,
+      "category": "news",
+      "description": "Apple integra Siri. Los asistentes de voz llegan a los móviles.",
+      "url": "https://en.wikipedia.org/wiki/Siri",
+      "importance": 1
+    },
+    {
+      "id": "news-linkedin-ipo",
+      "title": "LinkedIn IPO",
+      "year": 2011,
+      "category": "news",
+      "description": "LinkedIn se hace público. Las redes sociales profesionales se validan.",
+      "url": "https://en.wikipedia.org/wiki/LinkedIn",
+      "importance": 1
+    },
+    {
+      "id": "news-kickstarter",
+      "title": "Kickstarter boom",
+      "year": 2012,
+      "category": "news",
+      "description": "Kickstarter financia proyectos masivamente. El crowdfunding llega al mainstream.",
+      "url": "https://en.wikipedia.org/wiki/Kickstarter",
+      "importance": 1
+    },
+    {
+      "id": "news-google-glass",
+      "title": "Google Glass",
+      "year": 2013,
+      "category": "news",
+      "description": "Google presenta Glass. Los wearables llegan, pero fracasan con el público.",
+      "url": "https://en.wikipedia.org/wiki/Google_Glass",
+      "importance": 1
+    },
+    {
+      "id": "news-tesla-supercharger",
+      "title": "Tesla Supercharger",
+      "year": 2012,
+      "category": "news",
+      "description": "Tesla construye la red de supercargadores. Los coches eléctricos son viables.",
+      "url": "https://en.wikipedia.org/wiki/Tesla_Supercharger",
+      "importance": 1
+    },
+    {
+      "id": "news-minecraft",
+      "title": "Minecraft 1.0",
+      "year": 2011,
+      "category": "news",
+      "description": "Minecraft sale de beta. El juego indie más vendido de la historia.",
+      "url": "https://en.wikipedia.org/wiki/Minecraft",
+      "importance": 2
+    },
+    {
+      "id": "news-snapchat-stories",
+      "title": "Snapchat Stories",
+      "year": 2013,
+      "category": "news",
+      "description": "Snapchat inventa las Stories. Instagram y Facebook las copian.",
+      "url": "https://en.wikipedia.org/wiki/Snapchat",
+      "importance": 2
+    },
+    {
+      "id": "news-uber-launch",
+      "title": "Uber lanza",
+      "year": 2012,
+      "category": "news",
+      "description": "Uber lanza en San Francisco. La economía gig empieza.",
+      "url": "https://en.wikipedia.org/wiki/Uber",
+      "importance": 2
+    },
+    {
+      "id": "news-whatsapp-facebook",
+      "title": "Facebook compra WhatsApp",
+      "year": 2014,
+      "category": "news",
+      "description": "Facebook paga $19B por WhatsApp. La mayor adquisición de una app.",
+      "url": "https://en.wikipedia.org/wiki/Facebook_acquisition_of_WhatsApp",
+      "importance": 2
+    },
+    {
+      "id": "news-amazon-echo",
+      "title": "Amazon Echo/Alexa",
+      "year": 2014,
+      "category": "news",
+      "description": "Amazon lanza Echo con Alexa. Los asistentes inteligentes llegan a casa.",
+      "url": "https://en.wikipedia.org/wiki/Amazon_Echo",
+      "importance": 2
+    },
+    {
+      "id": "news-slack-launch",
+      "title": "Slack lanza",
+      "year": 2014,
+      "category": "news",
+      "description": "Slack revoluciona la comunicación en equipo. Los chats de empresa cambian.",
+      "url": "https://en.wikipedia.org/wiki/Slack_(software)",
+      "importance": 1
+    },
+    {
+      "id": "news-apple-music",
+      "title": "Apple Music",
+      "year": 2015,
+      "category": "news",
+      "description": "Apple lanza Apple Music. Spotify ahora tiene competencia real.",
+      "url": "https://en.wikipedia.org/wiki/Apple_Music",
+      "importance": 1
+    },
+    {
+      "id": "news-uber-autonomous",
+      "title": "Uber autónomo",
+      "year": 2016,
+      "category": "news",
+      "description": "Uber prueba coches autónomos en Pittsburgh. La carrera AV se intensifica.",
+      "url": "https://en.wikipedia.org/wiki/Uber#Autonomous_vehicles",
+      "importance": 1
+    },
+    {
+      "id": "news-ico-boom",
+      "title": "ICO boom",
+      "year": 2017,
+      "category": "news",
+      "description": "Las ICO recaudan miles de millones. La burbuja cripto crece.",
+      "url": "https://en.wikipedia.org/wiki/Initial_coin_offering",
+      "importance": 1
+    },
+    {
+      "id": "news-faceid",
+      "title": "Face ID",
+      "year": 2017,
+      "category": "news",
+      "description": "Apple presenta Face ID. El reconocimiento facial reemplaza Touch ID.",
+      "url": "https://en.wikipedia.org/wiki/Face_ID",
+      "importance": 1
+    },
+    {
+      "id": "news-fortnite-crossplay",
+      "title": "Fortnite crossplay",
+      "year": 2018,
+      "category": "news",
+      "description": "Fortnite logra crossplay entre todas las plataformas. El gaming se une.",
+      "url": "https://en.wikipedia.org/wiki/Fortnite",
+      "importance": 1
+    },
+    {
+      "id": "news-quantum-supremacy",
+      "title": "Google supremacy cuántica",
+      "year": 2019,
+      "category": "news",
+      "description": "Google logra supremacy cuántica con Sycamore. 200 segundos vs 10.000 años.",
+      "url": "https://en.wikipedia.org/wiki/Quantum_supremacy",
+      "importance": 2
+    },
+    {
+      "id": "news-zoom-boom",
+      "title": "Zoom explode",
+      "year": 2020,
+      "category": "news",
+      "description": "Zoom pasa de 10M a 300M usuarios. Videoconferencias se vuelven normales.",
+      "url": "https://en.wikipedia.org/wiki/Zoom_(software)",
+      "importance": 2
+    },
+    {
+      "id": "news-gme-short-squeeze",
+      "title": "GameStop squeeze",
+      "year": 2021,
+      "category": "news",
+      "description": "Reddit vs Wall Street. GameStop sube 1.700%. Los memes mueven mercados.",
+      "url": "https://en.wikipedia.org/wiki/GameStop_short_squeeze",
+      "importance": 2
+    },
+    {
+      "id": "news-intel-4004-chip",
+      "title": "Intel 4004 primer chip",
+      "year": 1971,
+      "category": "news",
+      "description": "Intel presenta el 4004: el primer microprocesador comercial del mundo.",
+      "url": "https://en.wikipedia.org/wiki/Intel_4004",
+      "importance": 2
+    },
+    {
+      "id": "news-atari-pong",
+      "title": "Atari Pong",
+      "year": 1972,
+      "category": "news",
+      "description": "Atari lanza Pong. Los videojuegos comerciales nacen.",
+      "url": "https://en.wikipedia.org/wiki/Pong",
+      "importance": 2
+    },
+    {
+      "id": "news-motorola-dynatac",
+      "title": "Primer móvil",
+      "year": 1973,
+      "category": "news",
+      "description": "Motorola DynaTAC: la primera llamada de teléfono móvil de la historia.",
+      "url": "https://en.wikipedia.org/wiki/Motorola_DynaTAC",
+      "importance": 2
+    },
+    {
+      "id": "news-visicalc",
+      "title": "VisiCalc",
+      "year": 1979,
+      "category": "news",
+      "description": "VisiCalc: la primera hoja de cálculo. El Apple II se vuelve imprescindible.",
+      "url": "https://en.wikipedia.org/wiki/VisiCalc",
+      "importance": 2
+    },
+    {
+      "id": "news-commodore-64",
+      "title": "Commodore 64",
+      "year": 1982,
+      "category": "news",
+      "description": "Commodore 64: el PC doméstico más vendido de la historia (17M unidades).",
+      "url": "https://en.wikipedia.org/wiki/Commodore_64",
+      "importance": 2
+    },
+    {
+      "id": "news-nsfnet-1987",
+      "title": "NSFNET backbone",
+      "year": 1987,
+      "category": "news",
+      "description": "NSFNET amplía su backbone a T1. Internet crece entre universidades.",
+      "url": "https://en.wikipedia.org/wiki/National_Science_Foundation_Network",
+      "importance": 1
+    },
+    {
+      "id": "news-worldwide-web-1989",
+      "title": "WWW propuesto",
+      "year": 1989,
+      "category": "news",
+      "description": "Tim Berners-Lee propone la World Wide Web en el CERN.",
+      "url": "https://en.wikipedia.org/wiki/World_Wide_Web",
+      "importance": 3
+    },
+    {
+      "id": "news-nsfnet-1990",
+      "title": "NSFNET vs ARPANET",
+      "year": 1990,
+      "category": "news",
+      "description": "ARPANET se retira. NSFNET se convierte en la columna vertebral de Internet.",
+      "url": "https://en.wikipedia.org/wiki/NSFNET",
+      "importance": 1
+    },
+    {
+      "id": "news-linux-1991",
+      "title": "Linux publicado",
+      "year": 1991,
+      "category": "news",
+      "description": "Linus Torvalds publica Linux en comp.os.minix. El kernel open source nace.",
+      "url": "https://en.wikipedia.org/wiki/Linux",
+      "importance": 3
+    },
+    {
+      "id": "news-amiga-1992",
+      "title": "Amiga多媒体",
+      "year": 1992,
+      "category": "news",
+      "description": "El Amiga domina multimedia: vídeo, audio y gráficos superiores a PC.",
+      "url": "https://en.wikipedia.org/wiki/Amiga",
+      "importance": 1
+    },
+    {
+      "id": "news-web-netscape-1996",
+      "title": "Netscape Navigator 3",
+      "year": 1996,
+      "category": "news",
+      "description": "Netscape Navigator domina los navegadores con 80% de cuota.",
+      "url": "https://en.wikipedia.org/wiki/Netscape_Navigator",
+      "importance": 1
+    },
+    {
+      "id": "news-xbox-live-2002",
+      "title": "Xbox Live",
+      "year": 2002,
+      "category": "news",
+      "description": "Microsoft lanza Xbox Live. El gaming online en consola empieza.",
+      "url": "https://en.wikipedia.org/wiki/Xbox_Live",
+      "importance": 1
+    },
+    {
+      "id": "news-apollo-13",
+      "title": "Apollo 13",
+      "year": 1970,
+      "category": "news",
+      "description": "NASA Apollo 13: 'Houston, we've got a problem'. La tecnología salva vidas.",
+      "url": "https://en.wikipedia.org/wiki/Apollo_13",
+      "importance": 2
+    },
+    {
+      "id": "news-magnavox-odyssey",
+      "title": "Atari fundada",
+      "year": 1974,
+      "category": "news",
+      "description": "Nolan Bushnell funda Atari. Los videojuegos industriales nacen.",
+      "url": "https://en.wikipedia.org/wiki/Atari",
+      "importance": 2
+    },
+    {
+      "id": "news-neo-geo",
+      "title": "Nintendo Game Boy",
+      "year": 1989,
+      "category": "news",
+      "description": "Nintendo lanza Game Boy. Tetris y Pokémon conquistan el mundo portátil.",
+      "url": "https://en.wikipedia.org/wiki/Game_Boy",
+      "importance": 2
+    },
+    {
+      "id": "news-morris-worm",
+      "title": "Morris Worm",
+      "year": 1988,
+      "category": "news",
+      "description": "El Morris Worm: primer gusano de Internet. 6000 ordenadores infectados. La ciberseguridad importa.",
+      "url": "https://en.wikipedia.org/wiki/Morris_worm",
+      "importance": 2
+    }
   ]
 }
