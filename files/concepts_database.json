@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 54,
+    "total_concepts": 55,
     "categories": [
       "css_moderno",
       "devops",
@@ -11,7 +11,7 @@
       "patrones_diseno",
       "poo"
     ],
-    "last_scraped": "2026-09-05T20:02:06.984330"
+    "last_scraped": "2026-09-06T03:21:29.179875"
   },
   "concepts": [
     {
@@ -1009,6 +1009,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-05T20:01:31.279281"
+    },
+    {
+      "title": "Node.js avanzado: child_process, worker_threads, Cluster y estrategias de escalado",
+      "summary": "Node.js es monohilo por diseño, pero eso no significa que esté limitado a un único procesador o proceso. El módulochild_process, losworker_threadsy el móduloclusterofrecen mecanismos distintos para es",
+      "explanation": "Node.js es monohilo por diseño, pero eso no significa que esté limitado a un único procesador o proceso. El módulochild_process, losworker_threadsy el móduloclusterofrecen mecanismos distintos para escalar según el tipo de carga: tareas CPU-intensivas, procesos externos o distribución de conexiones de red.child_process: lanzar procesos externos El módulochild_processpermite ejecutar comandos del sistema, otros scripts Node o cualquier ejecutable externo. Las tres funciones principales sonexec,spawnyfork:import { exec, spawn, fork } from 'child_process';\nimport { promisify } from 'util';\n\n// exec: para comandos cortos que devuelven texto (buffera la salida)\nconst execAsync = promisify(exec);\n\nasync function obtenerDiskUsage() {\n  const { stdout, stderr } = await execAsync('df -h /');\n  if (stderr) throw new Error(stderr);\n  return stdout;\n}\n\n// spawn: para procesos de larga duración o salida grande (streaming)\nfunction ejecutarFFmpeg(entrada, salida) {\n  return new Promise((resolve, reject) => {\n    const proceso = spawn('ffmpeg', [\n      '-i', entrada,\n      '-c:v', 'libx264',\n      '-preset', 'fast',\n      salida,\n    ]);\n\n    proceso.stderr.on('data', d => process.stderr.write(d));\n    proceso.on('close', code => {\n      if (code === 0) resolve(salida);\n      else reject(new Error(`FFmpeg salió con código ${code}`));\n    });\n  });\n}\n\n// fork: especializado para otros scripts Node.js (incluye canal IPC)\nconst hijo = fork('./worker.js');\n\nhijo.send({ tarea: 'procesar', datos:",
+      "code_example": "import { exec, spawn, fork } from 'child_process';\nimport { promisify } from 'util';\n\n// exec: para comandos cortos que devuelven texto (buffera la salida)\nconst execAsync = promisify(exec);\n\nasync function obtenerDiskUsage() {\n  const { stdout, stderr } = await execAsync('df -h /');\n  if (stderr) throw new Error(stderr);\n  return stdout;\n}\n\n// spawn: para procesos de larga duración o salida grande (streaming)\nfunction ejecutarFFmpeg(entrada, salida) {\n  return new Promise((resolve, reject) => {\n    const proceso = spawn('ffmpeg', [\n      '-i', entrada,\n      '-c:v', 'libx264',\n      '-preset', 'fast',\n      salida,\n    ]);\n\n    proceso.stderr.on('data', d => process.stderr.write(d));\n    proceso.on('close', code => {\n      if (code === 0) resolve(salida);\n      else reject(new Error(`FFmpeg salió con código ${code}`));\n    });\n  });\n}\n\n// fork: especializado para otros scripts Node.js (incluye canal IPC)\nconst hijo = fork('./worker.js');\n\nhijo.send({ tarea: 'procesar', datos: [1, 2, 3] });\n\nhijo.on('message', (msg) => {\n  console.log('Resultado del hijo:', msg.resultado);\n});\n\nhijo.on('exit', (code) => {\n  console.log(`Hijo terminó con código ${code}`);\n});",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-06T03:20:48.856260"
     }
   ]
 }
