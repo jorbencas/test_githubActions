@@ -134,7 +134,7 @@ scripts/
 │   └── send_telegram.py        Notificaciones Telegram (solo noticias, traducción inteligente + resúmenes)
 ├── tools/                🔧 Utilidades de mantenimiento
 │   ├── clean_news.py           Validación de enlaces
-│   ├── fix_images.py           Pipeline de imágenes (Unsplash + Gemini + WebP/AVIF)
+│   ├── fix_images.py           Pipeline de imágenes (WebP/AVIF + portadas locales)
 │   ├── hunt_challenges.py      Generación de retos con IA
 │   ├── make_cover_collage.py   Collages de portadas
 │   ├── optimize.py             Optimización de imágenes del dashboard
@@ -147,7 +147,7 @@ scripts/
 │   └── cache.py                    Cache pluggable (FileCache + CacheManager)
 ├── tips_generator.py         💡 Tips diarios de IT (Gemini + fallback a DB, nunca repite)
 ├── ai_tools_generator.py     🛠️  Herramientas IA (Gemini + fallback a DB, 150 categorías)
-├── saludo_imagen.py          🌅 Imagen de saludo diaria (Gemini → Unsplash → PIL fallback)
+├── saludo_imagen.py          🌅 Imagen de saludo diaria (Gemini → PIL fallback)
 └── solutions/            💡 Base de datos de soluciones
     ├── solutions_db.py            Lookup + generación de soluciones
     └── solutions_data.py          105+ soluciones curadas en 12 lenguajes
@@ -191,7 +191,7 @@ Todos los scripts se ejecutan con `python -m` desde la raíz del proyecto:
 
 | Comando | Descripción | Cuándo usarlo |
 |---------|-------------|---------------|
-| `python -m scripts.tools.fix_images --blog-path blog` | Pipeline de imágenes (Unsplash + Gemini) | Cuando hay posts sin imágenes |
+| `python -m scripts.tools.fix_images --blog-path blog` | Pipeline de imágenes (portadas locales) | Cuando hay posts sin imágenes |
 | `python -m scripts.tools.make_cover_collage --ci --blog-path blog` | Collages de portada | Para generar portadas compuestas |
 | `python -m scripts.tools.hunt_challenges` | Generación de retos con IA | Cuando quieres nuevos retos |
 | `python -m scripts.tools.clean_news` | Validación de enlaces | Para limpiar enlaces rotos |
@@ -419,7 +419,6 @@ Los recaps semanales archivan automáticamente posts viejos (>2 semanas) y fuerz
 | `MAILGUN_DOMAIN` | Dominio de Mailgun |
 | `EMAIL_USER` | Email de destino |
 | `BLOG_TOKEN` | Token de checkout del blog |
-| `UNSPLASH_ACCESS_KEY` | API key de Unsplash (fix_images) |
 | `SALUDO_CHAT_ID` | Chat/grupo para saludos (fallback: `TELEGRAM_CHAT_ID`) |
 | `AI_TOOLS_CHAT_ID` | Chat/grupo para herramientas IA (fallback: `TELEGRAM_CHAT_ID`) |
 
@@ -438,7 +437,7 @@ Variables del repositorio:
 - **Constants** — configuraciones de fuentes (515 fuentes), templates de email, templates de retos
 - **Dual sources** — extracción YouTube + web scraping, renderizado de chips en ambas secciones
 - **Email templates** — placeholders, headers de fuente, secciones de vídeo, estilos de botones
-- **Pipeline de imágenes** — fetching de Unsplash, generación de banners con Gemini, conversión WebP/AVIF
+- **Pipeline de imágenes** — generación de portadas locales, conversión WebP/AVIF
 - **AI features** — 150 categorías, DB tools, generador de herramientas IA, saludo por hora/festivos
 - **Resources** — paginación, limpieza, reorden, gestión de tarjetas, dedup cross-file, fix de cards malformados
 - **Solutions** — lookup en base de datos, generación multi-lenguaje, edge cases

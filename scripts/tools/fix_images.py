@@ -1,14 +1,12 @@
 import re
 import json
 import asyncio
-import aiohttp
 import base64
 import unicodedata
 import shutil
 import subprocess
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
-from io import BytesIO
 import random
 from typing import Dict, Any, List, Tuple, Optional, Callable
 
@@ -22,8 +20,6 @@ except ImportError:
 # ==============================================================================
 # CONFIGURACIÓN FUSIONADA Y ENTORNO
 # ==============================================================================
-ACCESS_KEY: Optional[str] = __import__('os').getenv("UNSPLASH_ACCESS_KEY")
-
 BASE_DIR: Path = Path(__file__).resolve().parent
 ROOT_DIR: Path = BASE_DIR.parent
 
@@ -196,60 +192,6 @@ def process_svg_fallback(input_path: Path, out_dir: Path, filename: str) -> None
 # ==============================================================================
 # AUXILIARES DE TEXTO
 # ==============================================================================
-def clean_query(text: str) -> str:
-    words: List[str] = text.replace("/", "_").replace("\\", "_").replace("-", "_").split("_")
-    keep: List[str] = []
-    for w in words:
-        wl = w.lower()
-        if len(w) <= 2 and wl in ("de", "en", "la", "el", "un", "una", "y", "e", "o", "a", "su", "lo"):
-            continue
-        if wl in ("guia", "tutorial", "como"):
-            continue
-        keep.append(w)
-    return " ".join(keep)
-
-TECH_HINTS_MAP: List[tuple[List[str], List[str]]] = [
-    (["python", "javascript", "typescript", "rust", "go", "java", "c#", "c++", "ruby", "zig"],
-     ["programming language", "code editor", "developer setup", "software"]),
-    (["docker", "deploy", "devops", "kubernetes", "ci/cd", "terraform"],
-     ["devops", "server infrastructure", "cloud computing", "automation"]),
-    (["design", "ux", "ui", "css", "tailwind", "figma", "frontend"],
-     ["web design", "minimal interface", "creative technology", "modern ui"]),
-    (["machine learning", "ia", "inteligencia artificial", "neural", "deep learning", "pytorch", "tensorflow"],
-     ["artificial intelligence", "neural network abstract", "tech brain", "future"]),
-    (["seguridad", "security", "hacking", "ciberseguridad", "cybersecurity"],
-     ["cybersecurity", "data protection", "digital lock", "network security"]),
-    (["base de datos", "database", "sql", "nosql", "big data", "data"],
-     ["data center", "database abstract", "server room", "big data"]),
-    (["mobile", "android", "ios", "flutter", "react native", "app"],
-     ["mobile technology", "smartphone", "app development", "digital"]),
-    (["raspberry", "arduino", "iot", "embedded", "hardware"],
-     ["circuit board", "electronics", "hardware hacking", "maker"]),
-    (["linux", "terminal", "bash", "unix", "command line"],
-     ["linux terminal", "command line", "developer terminal", "hacker screen"]),
-    (["api", "rest", "graphql", "microservicios", "backend"],
-     ["network programming", "server architecture", "api development", "backend"]),
-]
-
-DEFAULT_TECH_HINTS: List[str] = ["modern technology", "digital workspace", "abstract tech", "minimalist"]
-
-def build_unsplash_query(title: str, tags: List[str], content_snippet: str = "") -> str:
-    parts: List[str] = []
-    parts.extend(tags[:3])
-    cleaned: str = clean_query(title)
-    if cleaned:
-        parts.append(cleaned)
-
-    lower: str = content_snippet.lower()
-    tech_hints: List[str] = DEFAULT_TECH_HINTS
-    for keywords, hints in TECH_HINTS_MAP:
-        if any(kw in lower for kw in keywords):
-            tech_hints = hints
-            break
-
-    parts.extend(tech_hints[:4])
-    return " ".join(p for p in parts if p)
-
 def slugify(text: str) -> str:
     text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii')
     return re.sub(r'[\W_]+', '_', text.lower()).strip('_')
@@ -257,38 +199,6 @@ def slugify(text: str) -> str:
 def build_srcset(images: List[Tuple[str, int]], prefix: str) -> str:
     return ", ".join([f"{prefix}/{n} {s}w" for n, s in images])
 
-async def search_unsplash(session: aiohttp.ClientSession, query: str) -> Optional[Dict[str, Any]]:
-    if not ACCESS_KEY or not query.strip():
-        return None
-    if query in cache:
-        return cache[query]
-    url: str = "https://api.unsplash.com/search/photos"
-    params: Dict[str, str] = {"query": query, "per_page": "5", "orientation": "landscape", "content_filter": "high"}
-    headers: Dict[str, str] = {"Authorization": f"Client-ID {ACCESS_KEY}"}
-    try:
-        async with session.get(url, params=params, headers=headers, timeout=15) as r:
-            if r.status != 200:
-                cache[query] = None
-                save_cache()
-                return None
-            data: Dict[str, Any] = await r.json()
-            if not data.get("results"):
-                cache[query] = None
-                save_cache()
-                return None
-            results: List[Dict[str, Any]] = data["results"]
-            best: Dict[str, Any] = max(results, key=lambda p: p.get("likes", 0))
-            cache[query] = best
-            save_cache()
-            return best
-    except Exception:
-        cache[query] = None
-        save_cache()
-        return None
-
-# ==============================================================================
-# MOTOR GRÁFICO (IDE VECTOR CANVAS)
-# ==============================================================================
 def section_theme(section: str) -> Dict[str, str]:
     """Paleta de color por sección para las portadas generadas localmente."""
     if section and section in SECTION_COLORS:
@@ -458,7 +368,7 @@ def compress_and_save_adaptive(
 # ==============================================================================
 # PROCESAMIENTO DE ARCHIVOS INDIVIDUALES
 # ==============================================================================
-async def process_file(session: aiohttp.ClientSession, path: Path, semaphore: asyncio.Semaphore) -> None:
+async def process_file(session: None, path: Path, semaphore: asyncio.Semaphore) -> None:
     # Usamos el semáforo para adquirir un espacio bloqueante y controlar los hilos asíncronos
     async with semaphore:
         try:
@@ -494,12 +404,7 @@ async def process_file(session: aiohttp.ClientSession, path: Path, semaphore: as
             if fm_image:
                 portada_existe: bool = (current_folder / f"{base_name}_cover-1200.webp").exists()
                 if not portada_existe:
-                    res: Dict[str, Any] = await search_all_providers(session, fm_title, content, fm_tags)
-                    if res["source"] == "local_gen":
-                        img: Image.Image = generate_local_banner(res["title"], section_theme(section))
-                    else:
-                        async with session.get(res["url"], headers={"User-Agent": "Mozilla"}, timeout=15) as r:
-                            img = Image.open(BytesIO(await r.read())) if r.status == 200 else Image.new('RGB', (1200,630), "#0f141c")
+                    img: Image.Image = generate_local_banner(fm_title, section_theme(section))
                     
                     if img.mode in ("RGBA", "P"): 
                         img = img.convert("RGB")
@@ -525,12 +430,7 @@ async def process_file(session: aiohttp.ClientSession, path: Path, semaphore: as
                     if full_local_path.exists() and full_local_path.is_file():
                         img = Image.open(full_local_path)
                     else:
-                        res = await search_all_providers(session, alt if alt.strip() else fm_title, content, fm_tags)
-                        if res["source"] == "local_gen":
-                            img = generate_local_banner(res["title"], section_theme(section))
-                        else:
-                            async with session.get(res["url"], headers={"User-Agent": "Mozilla"}, timeout=15) as r:
-                                img = Image.open(BytesIO(await r.read())) if r.status == 200 else Image.new('RGB', (1200,630), "#0f141c")
+                        img = generate_local_banner(alt if alt.strip() else fm_title, section_theme(section))
 
                     if img.mode in ("RGBA", "P"): 
                         img = img.convert("RGB")
@@ -563,35 +463,23 @@ async def process_file(session: aiohttp.ClientSession, path: Path, semaphore: as
         except Exception as e:
             print(f"❌ Error al procesar el archivo {path.name}: {e}")
 
-async def search_all_providers(session: aiohttp.ClientSession, title: str, content_snippet: str = "", tags: Optional[List[str]] = None) -> Dict[str, Any]:
-    query: str = build_unsplash_query(title, tags or [], content_snippet)
-    photo: Optional[Dict[str, Any]] = await search_unsplash(session, query)
-    if photo: 
-        return {"url": photo["urls"]["raw"], "source": "unsplash"}
-    return {"source": "local_gen", "title": title}
-
 # ==============================================================================
 # ORQUESTADOR (BÚSQUEDA RECURSIVA CONTROLADA POR SEMÁFORO)
 # ==============================================================================
 async def process_posts() -> None:
-    # Agregamos timeouts estrictos a nivel sesión HTTP
-    timeout_config = aiohttp.ClientTimeout(total=30, connect=10, sock_read=10)
-    connector = aiohttp.TCPConnector(limit=10)
-    
     # Creamos el semáforo para racionar la ejecución asíncrona de archivos
     semaphore = asyncio.Semaphore(MAX_CONCURRENT_FILES)
     
-    async with aiohttp.ClientSession(connector=connector, timeout=timeout_config) as session:
-        target_path: Path = Path(TARGET_DIR)
-        if not target_path.exists(): 
-            return
-        
-        files: List[Path] = list(target_path.rglob("*.md")) + list(target_path.rglob("*.mdx"))
-        
-        # Pasamos el semáforo a cada corrutina
-        tasks = [process_file(session, file_path, semaphore) for file_path in files]
-        if tasks: 
-            await asyncio.gather(*tasks)
+    target_path: Path = Path(TARGET_DIR)
+    if not target_path.exists(): 
+        return
+    
+    files: List[Path] = list(target_path.rglob("*.md")) + list(target_path.rglob("*.mdx"))
+    
+    # Pasamos el semáforo a cada corrutina
+    tasks = [process_file(None, file_path, semaphore) for file_path in files]
+    if tasks: 
+        await asyncio.gather(*tasks)
     save_cache()
 
 SECTION_COLORS: Dict[str, Dict[str, str]] = {
