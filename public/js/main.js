@@ -58,17 +58,18 @@ class App {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth < 768 ? 1.5 : 2));
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 1.4;
+    this.renderer.toneMappingExposure = 1.5;
   }
 
   _initScene() {
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0xf0f4f8);
-    this.scene.fog = new THREE.FogExp2(0xf0f4f8, 0.012);
+    this.scene.background = new THREE.Color(0xf8fafc);
+    this.scene.fog = new THREE.FogExp2(0xf8fafc, 0.01);
 
     const aspect = window.innerWidth / window.innerHeight;
-    this.camera = new THREE.PerspectiveCamera(60, aspect, 0.1, 500);
-    this.camera.position.set(0, 8, 25);
+    this.camera = new THREE.PerspectiveCamera(55, aspect, 0.1, 600);
+    const startZ = window.innerWidth < 768 ? 30 : 22;
+    this.camera.position.set(0, 8, startZ);
     this.camera.lookAt(0, 6, 0);
   }
 
@@ -204,6 +205,7 @@ class App {
     this.mouse.y = -(clientY / window.innerHeight) * 2 + 1;
 
     this.raycaster.setFromCamera(this.mouse, this.camera);
+    this.raycaster.params.Mesh = { threshold: 0.3 };
     const meshes = this.timeline ? this.timeline.getMeshes() : [];
     const hits = this.raycaster.intersectObjects(meshes, false);
 
@@ -238,6 +240,7 @@ class App {
     if (this._isDragging) return;
 
     this.raycaster.setFromCamera(this.mouse, this.camera);
+    this.raycaster.params.Mesh = { threshold: 0.3 };
     const meshes = this.timeline ? this.timeline.getMeshes() : [];
     const hits = this.raycaster.intersectObjects(meshes, false);
 
