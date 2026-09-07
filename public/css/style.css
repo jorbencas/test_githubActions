@@ -307,21 +307,223 @@ html, body {
   50% { opacity: 1; transform: translateX(-50%) translateX(5px); }
 }
 
-/* ===== MOBILE ===== */
-@media (max-width: 768px) {
+/* ===== RESPONSIVE: ALL RESOLUTIONS ===== */
+
+/* Small phones (320-374px) */
+@media (max-width: 374px) {
+  .card { width: 150px; }
+  .card-img, .card-img-placeholder { height: 90px; }
+  .card-body { padding: 8px 10px; }
+  .card-title { font-size: 11px; }
+  .card-desc { font-size: 9px; }
+  .card-category { font-size: 8px; padding: 2px 6px; }
+  .year-label { font-size: 44px; }
+  .year-display { font-size: 28px; }
+  .era-label { font-size: 8px; letter-spacing: 1px; }
+  .logo { font-size: 11px; letter-spacing: 1px; }
+  #header { padding: 8px 10px; }
+  .timeline-track { padding: 70px 20px 55px; }
+  .year-group { min-width: 220px; }
+  .year-cards { gap: 8px; padding: 0 4px; }
+  .scroll-hint { display: none; }
+  .year-bar { height: 36px; padding: 0 12px 4px; }
+  .year-bar-line { left: 12px; right: 12px; bottom: 16px; }
+  .year-bar-dot { bottom: 12px; width: 6px; height: 6px; }
+  .year-tick { font-size: 8px; padding: 2px 2px; }
+  .year-dot { width: 8px; height: 8px; border-width: 2px; }
+  .vignette { background: radial-gradient(ellipse at center, transparent 15%, rgba(5, 2, 0, 0.9) 100%); }
+  .parallax-el { display: none; }
+}
+
+/* Regular phones (375-479px) */
+@media (min-width: 375px) and (max-width: 479px) {
+  .card { width: 170px; }
+  .card-img, .card-img-placeholder { height: 100px; }
+  .card-body { padding: 10px 12px; }
+  .card-title { font-size: 12px; }
+  .card-desc { font-size: 9px; }
+  .card-category { font-size: 8px; }
+  .year-label { font-size: 52px; }
+  .year-display { font-size: 32px; }
+  .era-label { font-size: 8px; letter-spacing: 1px; }
+  .logo { font-size: 12px; }
+  #header { padding: 10px 14px; }
+  .timeline-track { padding: 70px 30px 55px; }
+  .year-group { min-width: 250px; }
+  .year-cards { gap: 10px; padding: 0 6px; }
+  .scroll-hint { display: none; }
+  .year-bar { height: 38px; padding: 0 16px 5px; }
+  .year-bar-line { left: 16px; right: 16px; bottom: 17px; }
+  .year-bar-dot { bottom: 13px; }
+  .year-tick { font-size: 9px; padding: 2px 3px; }
+  .year-dot { width: 9px; height: 9px; border-width: 2px; }
+  .vignette { background: radial-gradient(ellipse at center, transparent 18%, rgba(5, 2, 0, 0.88) 100%); }
+}
+
+/* Large phones / small tablets (480-639px) */
+@media (min-width: 480px) and (max-width: 639px) {
   .card { width: 190px; }
   .card-img, .card-img-placeholder { height: 110px; }
   .card-title { font-size: 12px; }
   .card-desc { font-size: 10px; }
   .year-label { font-size: 60px; }
-  .year-display { font-size: 36px; }
+  .year-display { font-size: 38px; }
   .era-label { font-size: 9px; }
-  #header { padding: 12px 16px; }
+  .logo { font-size: 13px; }
+  #header { padding: 12px 18px; }
+  .timeline-track { padding: 75px 40px 60px; }
+  .year-group { min-width: 280px; }
+  .year-cards { gap: 12px; }
   .scroll-hint { display: none; }
   .year-bar { height: 40px; padding: 0 20px 6px; }
   .year-bar-line { left: 20px; right: 20px; bottom: 18px; }
   .year-bar-dot { bottom: 14px; }
-  .year-tick { font-size: 9px; padding: 2px 3px; }
+  .year-tick { font-size: 9px; }
   .year-dot { width: 10px; height: 10px; border-width: 2px; }
-  .vignette { background: radial-gradient(ellipse at center, transparent 20%, rgba(5, 2, 0, 0.85) 100%); }
+}
+
+/* Tablets portrait (640-768px) */
+@media (min-width: 640px) and (max-width: 768px) {
+  .card { width: 210px; }
+  .card-img, .card-img-placeholder { height: 120px; }
+  .card-title { font-size: 13px; }
+  .year-label { font-size: 70px; }
+  .year-display { font-size: 44px; }
+  .era-label { font-size: 10px; }
+  .timeline-track { padding: 78px 50px 65px; }
+  .year-group { min-width: 300px; }
+  .year-bar { height: 45px; padding: 0 30px 8px; }
+  .year-bar-line { left: 30px; right: 30px; bottom: 20px; }
+  .year-bar-dot { bottom: 16px; }
+  .scroll-hint { display: flex; }
+}
+
+/* Tablets landscape / small laptops (769-1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .card { width: 220px; }
+  .card-img, .card-img-placeholder { height: 130px; }
+  .year-label { font-size: 75px; }
+  .year-display { font-size: 50px; }
+  .timeline-track { padding: 80px 55px 68px; }
+  .year-group { min-width: 310px; }
+  .year-bar { height: 48px; padding: 0 35px 9px; }
+  .year-bar-line { left: 35px; right: 35px; bottom: 21px; }
+  .year-bar-dot { bottom: 17px; }
+}
+
+/* Regular laptops (1025-1280px) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .card { width: 230px; }
+  .year-label { font-size: 80px; }
+  .year-display { font-size: 56px; }
+  .timeline-track { padding: 80px 60px 70px; }
+  .year-group { min-width: 320px; }
+}
+
+/* Large screens (1281-1536px) */
+@media (min-width: 1281px) and (max-width: 1536px) {
+  .card { width: 250px; }
+  .card-img, .card-img-placeholder { height: 150px; }
+  .year-label { font-size: 90px; }
+  .year-display { font-size: 64px; }
+  .timeline-track { padding: 80px 80px 70px; }
+  .year-group { min-width: 350px; }
+  .year-cards { gap: 16px; }
+}
+
+/* Ultra-wide (1537px+) */
+@media (min-width: 1537px) {
+  .card { width: 270px; }
+  .card-img, .card-img-placeholder { height: 160px; }
+  .card-title { font-size: 14px; }
+  .card-desc { font-size: 12px; }
+  .year-label { font-size: 100px; }
+  .year-display { font-size: 72px; }
+  .era-label { font-size: 13px; }
+  .logo { font-size: 16px; }
+  #header { padding: 20px 32px; }
+  .timeline-track { padding: 80px 100px 70px; }
+  .year-group { min-width: 380px; }
+  .year-cards { gap: 18px; }
+  .year-bar { height: 55px; padding: 0 60px 12px; }
+  .year-bar-line { left: 60px; right: 60px; bottom: 24px; }
+  .year-bar-dot { bottom: 20px; width: 10px; height: 10px; }
+  .year-tick { font-size: 11px; }
+}
+
+/* Landscape phones */
+@media (max-height: 500px) and (orientation: landscape) {
+  .card { width: 160px; }
+  .card-img, .card-img-placeholder { height: 80px; }
+  .card-body { padding: 6px 8px; }
+  .card-title { font-size: 10px; }
+  .card-desc { font-size: 8px; }
+  .card-category { font-size: 7px; padding: 2px 5px; }
+  .year-label { font-size: 40px; padding: 10px 0 8px; }
+  .year-display { font-size: 28px; }
+  .era-label { font-size: 8px; }
+  .logo { font-size: 10px; }
+  #header { padding: 6px 12px; }
+  .timeline-track { padding: 50px 20px 40px; }
+  .year-group { min-width: 200px; }
+  .year-cards { gap: 6px; }
+  .scroll-hint { display: none; }
+  .year-bar { height: 32px; padding: 0 12px 3px; }
+  .year-bar-line { left: 12px; right: 12px; bottom: 14px; }
+  .year-bar-dot { bottom: 10px; width: 6px; height: 6px; }
+  .year-tick { font-size: 8px; padding: 1px 2px; }
+  .year-dot { width: 7px; height: 7px; border-width: 1px; }
+  .vignette { background: radial-gradient(ellipse at center, transparent 25%, rgba(5, 2, 0, 0.8) 100%); }
+  .parallax-el { opacity: 0.03 !important; }
+}
+
+/* Tall portrait (iPads, large tablets) */
+@media (min-height: 900px) and (orientation: portrait) {
+  .year-label { font-size: 90px; }
+  .timeline-track { padding: 90px 60px 80px; }
+}
+
+/* Touch devices - disable hover effects */
+@media (hover: none) {
+  .card:hover {
+    transform: none !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    border-color: var(--border);
+    background: var(--bg-card);
+  }
+  .card:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.15s;
+  }
+  .card-link { display: none; }
+  .year-tick:hover { color: var(--text-muted); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .parallax-el { display: none; }
+  .scroll-hint { display: none; }
+}
+
+/* High DPI screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .card { backdrop-filter: blur(20px); }
+}
+
+/* Print */
+@media print {
+  .era-bg, .era-overlay, .parallax-layer, #fx-canvas, .vignette,
+  .year-bar, .scroll-hint, #loading { display: none !important; }
+  .timeline-container { position: static; overflow: visible; }
+  .timeline-track { display: block; width: auto; padding: 20px; }
+  .year-group { opacity: 1; transform: none; min-width: auto; page-break-inside: avoid; }
+  .card { opacity: 1; transform: none; width: 200px; display: inline-block; vertical-align: top; margin: 8px; }
+  body { background: white; color: black; overflow: visible; }
+  #header { position: static; background: none; }
+  .year-display { color: black; text-shadow: none; }
 }

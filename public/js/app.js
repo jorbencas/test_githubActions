@@ -249,7 +249,10 @@ class App {
     this._loadData();
     this._animate();
 
-    window.addEventListener('resize', () => this._resizeCanvas());
+    window.addEventListener('resize', () => {
+      this._resizeCanvas();
+      this._buildParallaxElements(this.currentEra);
+    });
   }
 
   _resizeCanvas() {
@@ -258,11 +261,15 @@ class App {
   }
 
   _initSmoke() {
-    for (let i = 0; i < 18; i++) this.smokeParticles.push(new SmokeParticle(this.fxCanvas, this.currentEra));
+    const vw = window.innerWidth;
+    const count = vw < 480 ? 6 : vw < 768 ? 10 : 18;
+    for (let i = 0; i < count; i++) this.smokeParticles.push(new SmokeParticle(this.fxCanvas, this.currentEra));
   }
 
   _initEmbers() {
-    for (let i = 0; i < 25; i++) this.embers.push(new EmberParticle(this.fxCanvas));
+    const vw = window.innerWidth;
+    const count = vw < 480 ? 8 : vw < 768 ? 15 : 25;
+    for (let i = 0; i < count; i++) this.embers.push(new EmberParticle(this.fxCanvas));
   }
 
   _preloadEraImages() {
@@ -284,20 +291,25 @@ class App {
     [this.parallaxBack, this.parallaxMid, this.parallaxFront].forEach(el => el.innerHTML = '');
     this.parallaxEls = { back: [], mid: [], front: [] };
 
+    // Scale parallax elements on small screens
+    const vw = window.innerWidth;
+    const scale = vw < 480 ? 0.4 : vw < 768 ? 0.6 : vw < 1024 ? 0.8 : 1;
+
     era.parallax.forEach(el => {
       const layerIdx = el.speed < 0.05 ? 0 : el.speed < 0.07 ? 1 : 2;
       const layer = [this.parallaxBack, this.parallaxMid, this.parallaxFront][layerIdx];
       const name = ['back', 'mid', 'front'][layerIdx];
 
+      const scaledSize = Math.round(el.size * scale);
       const div = document.createElement('div');
       div.className = 'parallax-el';
       div.dataset.speed = el.speed;
       div.style.left = `${el.x}%`;
       div.style.top = `${el.y}%`;
-      div.style.width = `${el.size}px`;
-      div.style.height = `${el.size}px`;
+      div.style.width = `${scaledSize}px`;
+      div.style.height = `${scaledSize}px`;
       div.style.opacity = el.opacity;
-      div.innerHTML = this._eraSVG(el, era);
+      div.innerHTML = this._eraSVG({ ...el, size: scaledSize }, era);
       layer.appendChild(div);
       this.parallaxEls[name].push(div);
     });
