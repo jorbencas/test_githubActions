@@ -1053,5 +1053,17 @@
     "relevancia": 2,
     "pelicula": "Eixam",
     "enviada": true
+  },
+  {
+    "titulo": "Trailer de Enjambre (Eixam) subtitulado en español (HD)",
+    "url": "https://www.youtube.com/watch?v=xTaeyPOfUyQ",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-07T21:30:08.293900",
+    "medio": "Cine maldito",
+    "imagen": "https://i.ytimg.com/vi/xTaeyPOfUyQ/hqdefault.jpg",
+    "tipo": "trailer",
+    "relevancia": 1,
+    "pelicula": "Eixam",
+    "enviada": true
   }
 ]
