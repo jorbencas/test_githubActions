@@ -26,18 +26,24 @@ html, body {
   transition: background 1.5s ease;
 }
 
-/* FX Canvas (smoke/particles) */
-.fx-canvas {
-  position: fixed; inset: 0; z-index: 0;
+/* Parallax layers */
+.parallax-layer {
+  position: fixed; inset: 0;
   pointer-events: none;
-  opacity: 0.6;
+  will-change: transform;
 }
 
-/* BG Gradient overlay */
-.bg-gradient {
-  position: fixed; inset: 0; z-index: 0;
-  pointer-events: none;
-  transition: opacity 1.5s ease;
+#fx-canvas { z-index: 1; opacity: 0.5; }
+#bg-gradient { z-index: 0; }
+#parallax-back { z-index: 0; }
+#parallax-mid { z-index: 0; }
+#parallax-front { z-index: 0; }
+
+/* SVG parallax elements */
+.parallax-el {
+  position: absolute;
+  opacity: 0.06;
+  transition: opacity 1.5s;
 }
 
 /* Loading */
@@ -65,9 +71,8 @@ html, body {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
   padding: 16px 24px;
-  background: linear-gradient(180deg, var(--bg) 40%, transparent 100%);
   pointer-events: none;
-  transition: background 1.5s ease;
+  transition: background 1.5s;
 }
 #header > * { pointer-events: auto; }
 .logo { font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
@@ -77,12 +82,12 @@ html, body {
   font-size: 48px; font-weight: 200; font-family: var(--mono);
   color: var(--accent);
   user-select: none; line-height: 1;
-  transition: color 1.5s, text-shadow 0.3s;
+  transition: color 1.5s;
 }
 
 /* Scroll Container */
 .timeline-container {
-  position: fixed; inset: 0; z-index: 1;
+  position: fixed; inset: 0; z-index: 2;
   overflow-x: auto; overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -96,6 +101,32 @@ html, body {
   padding: 80px 60px 70px;
   gap: 0;
   width: max-content;
+  position: relative;
+}
+
+/* Timeline line */
+.timeline-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 0;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.timeline-line-inner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--accent) 5%,
+    var(--accent) 95%,
+    transparent 100%
+  );
+  opacity: 0.2;
+  transition: background 1.5s;
 }
 
 /* Year Group */
@@ -104,6 +135,22 @@ html, body {
   flex-direction: column;
   min-width: 320px;
   position: relative;
+  z-index: 1;
+  justify-content: center;
+}
+
+.year-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--accent), 0 0 12px var(--accent);
+  z-index: 2;
+  transition: background 1.5s, box-shadow 1.5s;
 }
 
 .year-label {
@@ -120,7 +167,6 @@ html, body {
   line-height: 1;
   padding: 24px 0 20px;
   flex-shrink: 0;
-  transition: background 1.5s;
 }
 
 .year-cards {
@@ -170,7 +216,7 @@ html, body {
 .card-img-placeholder::after {
   content: '';
   position: absolute; inset: 0;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ccircle cx='50' cy='50' r='30' stroke='%23000' fill='none' opacity='0.04' stroke-width='1'/%3E%3Ccircle cx='50' cy='50' r='15' stroke='%23000' fill='none' opacity='0.03' stroke-width='1'/%3E%3Cline x1='20' y1='50' x2='80' y2='50' stroke='%23000' opacity='0.02' stroke-width='1'/%3E%3Cline x1='50' y1='20' x2='50' y2='80' stroke='%23000' opacity='0.02' stroke-width='1'/%3E%3C/svg%3E") repeat;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ccircle cx='50' cy='50' r='30' stroke='%23000' fill='none' opacity='0.04' stroke-width='1'/%3E%3Ccircle cx='50' cy='50' r='15' stroke='%23000' fill='none' opacity='0.03' stroke-width='1'/%3E%3C/svg%3E") repeat;
 }
 
 .card-body { padding: 12px 14px; }
@@ -227,7 +273,6 @@ html, body {
   bottom: 0; left: 0; right: 0;
   z-index: 100;
   height: 50px;
-  background: linear-gradient(0deg, var(--bg) 60%, transparent 100%);
   display: flex;
   align-items: flex-end;
   padding: 0 40px 10px;
@@ -298,4 +343,5 @@ html, body {
   .year-bar-line { left: 20px; right: 20px; bottom: 18px; }
   .year-bar-dot { bottom: 14px; }
   .year-tick { font-size: 9px; padding: 2px 3px; }
+  .year-dot { width: 8px; height: 8px; border-width: 2px; }
 }
