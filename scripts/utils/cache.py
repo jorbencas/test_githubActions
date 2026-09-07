@@ -1,6 +1,3 @@
-
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from utils.constants_downloadfile import ENLACE_KEY, TS_KEY
 #!/usr/bin/env python3
 """
 cache.py — Sistema de caché reutilizable con backend pluggable (SOLID).
@@ -20,6 +17,11 @@ Uso:
       cache.mark_sent(item[ENLACE_KEY])
   cache.flush()
 """
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.constants_downloadfile import ENLACE_KEY, TS_KEY
 
 import json
 import logging

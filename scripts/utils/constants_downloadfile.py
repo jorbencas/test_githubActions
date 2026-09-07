@@ -1,3 +1,7 @@
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import os
 CONFIG = {
     "TELEGRAM_TOKEN": os.getenv("TELEGRAM_BOT_TOKEN"),
@@ -263,7 +267,6 @@ TELEGRAM_DASHBOARD_URL = "https://jorbencasdownloaderdocument.surge.sh"
 TELEGRAM_MENSAJE_TEMPLATE = "{icono} *{titulo}*\n📰 `{fuente}` | `{fecha}`\n\n{cuerpo}\n🔗 [Abrir noticia]({enlace})\n🌐 [Ver más en el Dashboard]({dashboard_url})"
 
 # ── Re-exports para compatibilidad (imports existentes siguen funcionando) ──
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from utils.constants_sources import FUENTES  # noqa: E402, F401
 from utils.constants_templates import (  # noqa: E402, F401
     HTML_TEMPLATE, EMAIL_TEMPLATE, MD_TEMPLATE,
