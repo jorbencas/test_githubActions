@@ -91,9 +91,12 @@ html, body {
   background: linear-gradient(180deg, rgba(5, 2, 0, 0.85) 0%, transparent 100%);
 }
 #header > * { pointer-events: auto; }
-.logo { font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #f5e6d0; }
+.logo { font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #f5e6d0; flex-shrink: 0; }
 .logo span { color: var(--accent); font-weight: 400; }
-.header-center { position: absolute; left: 50%; transform: translateX(-50%); }
+.header-center {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
 .year-display {
   font-size: 56px; font-weight: 200; font-family: var(--mono);
   color: var(--accent); user-select: none; line-height: 1;
@@ -104,6 +107,7 @@ html, body {
   font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
   color: var(--text-muted); font-family: var(--mono);
   transition: color 0.5s, opacity 0.5s;
+  white-space: nowrap;
 }
 
 /* ===== SCROLL CONTAINER ===== */
@@ -322,11 +326,11 @@ html, body {
   .card-desc { font-size: 9px; }
   .card-category { font-size: 8px; padding: 2px 6px; }
   .year-label { font-size: 44px; }
-  .year-display { font-size: 28px; }
-  .era-label { font-size: 8px; letter-spacing: 1px; }
-  .logo { font-size: 11px; letter-spacing: 1px; }
+  .year-display { font-size: 26px; }
+  .era-label { display: none; }
+  .logo { font-size: 10px; letter-spacing: 1px; }
   #header { padding: 8px 10px; }
-  .timeline-track { padding: 70px 20px 55px; }
+  .timeline-track { padding: 55px 20px 45px; }
   .year-group { min-width: 220px; }
   .year-cards { gap: 8px; padding: 0 4px; }
   .scroll-hint { display: none; }
@@ -348,11 +352,11 @@ html, body {
   .card-desc { font-size: 9px; }
   .card-category { font-size: 8px; }
   .year-label { font-size: 52px; }
-  .year-display { font-size: 32px; }
+  .year-display { font-size: 30px; }
   .era-label { font-size: 8px; letter-spacing: 1px; }
-  .logo { font-size: 12px; }
-  #header { padding: 10px 14px; }
-  .timeline-track { padding: 70px 30px 55px; }
+  .logo { font-size: 11px; }
+  #header { padding: 10px 12px; }
+  .timeline-track { padding: 58px 25px 48px; }
   .year-group { min-width: 250px; }
   .year-cards { gap: 10px; padding: 0 6px; }
   .scroll-hint { display: none; }
@@ -371,11 +375,11 @@ html, body {
   .card-title { font-size: 12px; }
   .card-desc { font-size: 10px; }
   .year-label { font-size: 60px; }
-  .year-display { font-size: 38px; }
+  .year-display { font-size: 36px; }
   .era-label { font-size: 9px; }
-  .logo { font-size: 13px; }
-  #header { padding: 12px 18px; }
-  .timeline-track { padding: 75px 40px 60px; }
+  .logo { font-size: 12px; }
+  #header { padding: 12px 16px; }
+  .timeline-track { padding: 65px 35px 55px; }
   .year-group { min-width: 280px; }
   .year-cards { gap: 12px; }
   .scroll-hint { display: none; }
@@ -464,11 +468,11 @@ html, body {
   .card-desc { font-size: 8px; }
   .card-category { font-size: 7px; padding: 2px 5px; }
   .year-label { font-size: 40px; padding: 10px 0 8px; }
-  .year-display { font-size: 28px; }
-  .era-label { font-size: 8px; }
+  .year-display { font-size: 24px; }
+  .era-label { display: none; }
   .logo { font-size: 10px; }
-  #header { padding: 6px 12px; }
-  .timeline-track { padding: 50px 20px 40px; }
+  #header { padding: 6px 10px; }
+  .timeline-track { padding: 45px 20px 38px; }
   .year-group { min-width: 200px; }
   .year-cards { gap: 6px; }
   .scroll-hint { display: none; }
