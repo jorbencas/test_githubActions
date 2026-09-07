@@ -59,6 +59,7 @@ html, body {
   position: fixed; inset: 0; z-index: 5;
   pointer-events: none;
   background: radial-gradient(ellipse at center, transparent 30%, rgba(5, 2, 0, 0.75) 100%);
+  opacity: 0.8;
 }
 
 /* ===== LOADING ===== */
@@ -288,6 +289,7 @@ html, body {
 .year-bar-inner {
   display: flex; gap: 0; width: 100%; justify-content: space-between;
   position: relative; z-index: 1;
+  overflow: hidden;
 }
 .year-tick {
   font-size: 10px; font-family: var(--mono);
@@ -488,7 +490,7 @@ html, body {
 /* Tall portrait (iPads, large tablets) */
 @media (min-height: 900px) and (orientation: portrait) {
   .year-label { font-size: 90px; }
-  .timeline-track { padding: 90px 60px 80px; }
+  .timeline-track { padding: 90px 60px 130px; }
 }
 
 /* Touch devices - disable hover effects */

@@ -506,7 +506,9 @@ class App {
   }
 
   _setupScrollAnimations() {
-    const options = { root: this.container, threshold: 0.1, rootMargin: '0px 100px 0px 100px' };
+    const vw = window.innerWidth;
+    const rootMarginRight = vw < 480 ? '50px' : '100px';
+    const options = { root: this.container, threshold: 0.1, rootMargin: `80px ${rootMarginRight}px 120px ${rootMarginRight}px` };
 
     // Year groups observer
     const groupObserver = new IntersectionObserver((entries) => {
@@ -522,7 +524,7 @@ class App {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
       });
-    }, { root: this.container, threshold: 0.05, rootMargin: '0px 200px 0px 200px' });
+    }, { root: this.container, threshold: 0.05, rootMargin: `80px ${rootMarginRight}px 120px ${rootMarginRight}px` });
 
     this.track.querySelectorAll('.card').forEach(c => cardObserver.observe(c));
   }
