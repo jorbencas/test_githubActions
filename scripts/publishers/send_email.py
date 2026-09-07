@@ -20,8 +20,9 @@ from collections import defaultdict
 import requests
 from google import genai
 
-from scripts.utils.constants_downloadfile import CONFIG, EMAIL_TEMPLATE, EMAIL_ROW_TEMPLATE, EMAIL_SOURCE_HEADER, EMAIL_VIDEO_HEADER, EMAIL_VIDEO_ROW, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, ID_VIDEO_KEY, BADGE_KEY, VAL_TECH, TIPO_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES
-from scripts.utils.common import load_json, save_json, resumir_noticia
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.constants_downloadfile import CONFIG, EMAIL_TEMPLATE, EMAIL_ROW_TEMPLATE, EMAIL_SOURCE_HEADER, EMAIL_VIDEO_HEADER, EMAIL_VIDEO_ROW, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, ID_VIDEO_KEY, BADGE_KEY, VAL_TECH, TIPO_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES
+from utils.common import load_json, save_json, resumir_noticia
 
 os.makedirs(LOGS_DIR, exist_ok=True)
 logging.basicConfig(
@@ -153,6 +154,8 @@ async def traducir_titulo(titulo: str, client) -> str:
             response = client.models.generate_content(model=modelo, contents=prompt)
             if response and response.text:
                 import json as _json
+import sys
+from pathlib import Path
                 data = _json.loads(response.text.strip().removeprefix("```json").removesuffix("```").strip())
                 trads = data.get("traducciones", [])
                 if trads and trads[0].get("tr"):

@@ -60,7 +60,8 @@
       "category": "hardware",
       "description": "Primera CPU comercial de un solo chip. 2300 transistores, 740 kHz.",
       "url": "https://en.wikipedia.org/wiki/Intel_4004",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "ethernet",
@@ -69,7 +70,8 @@
       "category": "internet",
       "description": "Robert Metcalfe inventa Ethernet en Xerox PARC.",
       "url": "https://en.wikipedia.org/wiki/Ethernet",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "c-language",
@@ -78,7 +80,8 @@
       "category": "languages",
       "description": "Dennis Ritchie crea el lenguaje C en Bell Labs.",
       "url": "https://en.wikipedia.org/wiki/C_(programming_language)",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "sql",
@@ -87,7 +90,8 @@
       "category": "languages",
       "description": "IBM desarrolla SEQUEL (después SQL) para bases de datos.",
       "url": "https://en.wikipedia.org/wiki/SQL",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "apple-ii",
@@ -96,7 +100,8 @@
       "category": "hardware",
       "description": "Steve Jobs y Steve Wozniak lanzan el Apple II, primer PC popular.",
       "url": "https://en.wikipedia.org/wiki/Apple_II",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "ms-dos",
@@ -105,7 +110,8 @@
       "category": "tools",
       "description": "Microsoft compra QDOS y lo renombra MS-DOS para el IBM PC.",
       "url": "https://en.wikipedia.org/wiki/MS-DOS",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "tcp-ip",
@@ -114,7 +120,8 @@
       "category": "internet",
       "description": "ARPANET adopta TCP/IP, nace Internet.",
       "url": "https://en.wikipedia.org/wiki/Internet",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "macintosh",
@@ -123,7 +130,8 @@
       "category": "hardware",
       "description": "Primer PC con interfaz gráfica de usuario popular.",
       "url": "https://en.wikipedia.org/wiki/Macintosh",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "c-plus-plus",
@@ -132,7 +140,8 @@
       "category": "languages",
       "description": "Bjarne Stroustrup crea C++ como extensión de C.",
       "url": "https://en.wikipedia.org/wiki/C%2B%2B",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "perl",
@@ -141,7 +150,8 @@
       "category": "languages",
       "description": "Larry Wall crea Perl para scripting de Unix.",
       "url": "https://en.wikipedia.org/wiki/Perl",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "www",
@@ -150,7 +160,8 @@
       "category": "internet",
       "description": "Tim Berners-Lee inventa la WWW en el CERN.",
       "url": "https://en.wikipedia.org/wiki/World_Wide_Web",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "linux",
@@ -159,7 +170,8 @@
       "category": "opensource",
       "description": "Linus Torvalds publica el kernel Linux.",
       "url": "https://en.wikipedia.org/wiki/Linux",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #14b8a6, #0f766e)"
     },
     {
       "id": "python",
@@ -168,7 +180,8 @@
       "category": "languages",
       "description": "Guido van Rossum publica Python 1.0.",
       "url": "https://en.wikipedia.org/wiki/Python_1.0",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "www-browser",
@@ -177,7 +190,8 @@
       "category": "internet",
       "description": "Tim Berners-Lee crea el primer navegador: WorldWideWeb.",
       "url": "https://en.wikipedia.org/wiki/WorldWideWeb",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "usb",
@@ -186,7 +200,8 @@
       "category": "hardware",
       "description": "Universal Serial Bus, el conector que lo cambia todo.",
       "url": "https://en.wikipedia.org/wiki/USB",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "java",
@@ -195,7 +210,8 @@
       "category": "languages",
       "description": "Sun Microsystems lanza Java: 'Write once, run anywhere'.",
       "url": "https://en.wikipedia.org/wiki/Java_(programming_language)",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "javascript",
@@ -204,7 +220,8 @@
       "category": "languages",
       "description": "Brendan Eich crea JavaScript en Netscape en 10 días.",
       "url": "https://en.wikipedia.org/wiki/JavaScript",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "windows-95",
@@ -213,7 +230,8 @@
       "category": "tools",
       "description": "Microsoft lanza Windows 95 con menú Iniciar.",
       "url": "https://en.wikipedia.org/wiki/Windows_95",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "ie",
@@ -222,7 +240,8 @@
       "category": "internet",
       "description": "Microsoft entra en la guerra de navegadores.",
       "url": "https://en.wikipedia.org/wiki/Internet_Explorer",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "google",
@@ -231,7 +250,8 @@
       "category": "companies",
       "description": "Larry Page y Sergey Brin fundan Google en un garaje.",
       "url": "https://en.wikipedia.org/wiki/Google",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
     },
     {
       "id": "php",
@@ -240,7 +260,8 @@
       "category": "languages",
       "description": "PHP se relanza con soporte para bases de datos.",
       "url": "https://en.wikipedia.org/wiki/PHP",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "xml",
@@ -249,7 +270,8 @@
       "category": "tools",
       "description": "W3C publica XML 1.0, estándar para datos estructurados.",
       "url": "https://en.wikipedia.org/wiki/XML",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "napster",
@@ -258,7 +280,8 @@
       "category": "internet",
       "description": "P2P cambia la distribución de música para siempre.",
       "url": "https://en.wikipedia.org/wiki/Napster",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "mac-os-x",
@@ -267,7 +290,8 @@
       "category": "tools",
       "description": "Apple lanza OS X con base Unix.",
       "url": "https://en.wikipedia.org/wiki/MacOS",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "ipod",
@@ -276,7 +300,8 @@
       "category": "hardware",
       "description": "Apple revoluciona la música portable.",
       "url": "https://en.wikipedia.org/wiki/IPod",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "wiki",
@@ -285,7 +310,8 @@
       "category": "internet",
       "description": "Jimmy Wales y Larry Sanger lanzan Wikipedia.",
       "url": "https://en.wikipedia.org/wiki/Wikipedia",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "ruby",
@@ -294,7 +320,8 @@
       "category": "languages",
       "description": "Ruby 1.6 ganando popularidad en Japón.",
       "url": "https://en.wikipedia.org/wiki/Ruby_(programming_language)",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "ruby-on-rails",
@@ -303,7 +330,8 @@
       "category": "frameworks",
       "description": "David Heinemeier Hansson crea Rails.",
       "url": "https://en.wikipedia.org/wiki/Ruby_on_Rails",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "facebook",
@@ -312,7 +340,8 @@
       "category": "companies",
       "description": "Mark Zuckerberg lanza Facebook desde Harvard.",
       "url": "https://en.wikipedia.org/wiki/Facebook",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
     },
     {
       "id": "github",
@@ -321,7 +350,8 @@
       "category": "opensource",
       "description": "Chris Wanstrath, PJ Hyett y Tom Preston-Werner fundan GitHub.",
       "url": "https://en.wikipedia.org/wiki/GitHub",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #14b8a6, #0f766e)"
     },
     {
       "id": "android",
@@ -330,7 +360,8 @@
       "category": "tools",
       "description": "Google lanza Android, el SO móvil más usado del mundo.",
       "url": "https://en.wikipedia.org/wiki/Android_(operating_system)",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "chrome",
@@ -339,7 +370,8 @@
       "category": "internet",
       "description": "Chrome entra en la guerra de navegadores con motor V8.",
       "url": "https://en.wikipedia.org/wiki/Google_Chrome",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "nodejs",
@@ -348,7 +380,8 @@
       "category": "frameworks",
       "description": "Ryan Dahl crea Node.js con motor V8 de Chrome.",
       "url": "https://en.wikipedia.org/wiki/Node.js",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "docker",
@@ -357,7 +390,8 @@
       "category": "tools",
       "description": "Solomon Hykes presenta Docker en PyCon.",
       "url": "https://en.wikipedia.org/wiki/Docker_(software)",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "swift",
@@ -366,7 +400,8 @@
       "category": "languages",
       "description": "Apple lanza Swift como sucesor de Objective-C.",
       "url": "https://en.wikipedia.org/wiki/Swift_(programming_language)",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "react",
@@ -375,7 +410,8 @@
       "category": "frameworks",
       "description": "Facebook libera React para interfaces de usuario.",
       "url": "https://en.wikipedia.org/wiki/React_(JavaScript_library)",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "angular",
@@ -384,7 +420,8 @@
       "category": "frameworks",
       "description": "Google relanza Angular (antes AngularJS) con TypeScript.",
       "url": "https://en.wikipedia.org/wiki/Angular_(web_framework)",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "vue",
@@ -393,7 +430,8 @@
       "category": "frameworks",
       "description": "Evan You crea Vue.js, framework progresivo.",
       "url": "https://en.wikipedia.org/wiki/Vue.js",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "rust",
@@ -402,7 +440,8 @@
       "category": "languages",
       "description": "Rust 1.0: seguridad sin garbage collector.",
       "url": "https://en.wikipedia.org/wiki/Rust_(programming_language)",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "go",
@@ -411,7 +450,8 @@
       "category": "languages",
       "description": "Google lanza Go 1.0, lenguaje para sistemas concurrentes.",
       "url": "https://en.wikipedia.org/wiki/Go_(programming_language)",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "kubernetes",
@@ -420,7 +460,8 @@
       "category": "tools",
       "description": "Google libera Kubernetes para orquestación de contenedores.",
       "url": "https://en.wikipedia.org/wiki/Kubernetes",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "tensorflow",
@@ -429,7 +470,8 @@
       "category": "ai",
       "description": "Google libera TensorFlow para machine learning.",
       "url": "https://en.wikipedia.org/wiki/TensorFlow",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "transformers",
@@ -438,7 +480,8 @@
       "category": "ai",
       "description": "Google publica 'Attention Is All You Need', nace la arquitectura Transformer.",
       "url": "https://arxiv.org/abs/1706.03762",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "iphone-x",
@@ -447,7 +490,8 @@
       "category": "hardware",
       "description": "Apple elimina el botón Home, llega Face ID.",
       "url": "https://en.wikipedia.org/wiki/IPhone_X",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "gpt-2",
@@ -456,7 +500,8 @@
       "category": "ai",
       "description": "OpenAI lanza GPT-2, 1.5B parámetros.",
       "url": "https://en.wikipedia.org/wiki/GPT-2",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "deno",
@@ -465,7 +510,8 @@
       "category": "frameworks",
       "description": "Ryan Dahl lanza Deno como alternativa a Node.js.",
       "url": "https://en.wikipedia.org/wiki/Deno",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "apple-m1",
@@ -474,7 +520,8 @@
       "category": "hardware",
       "description": "Apple Silicon M1: ARM para Mac, revolución de rendimiento.",
       "url": "https://en.wikipedia.org/wiki/Apple_M1",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "gpt-3",
@@ -483,7 +530,8 @@
       "category": "ai",
       "description": "OpenAI lanza GPT-3 con 175B parámetros.",
       "url": "https://en.wikipedia.org/wiki/GPT-3",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "gh-copilot",
@@ -492,7 +540,8 @@
       "category": "ai",
       "description": "GitHub lanza Copilot: asistente de código con IA.",
       "url": "https://en.wikipedia.org/wiki/GitHub_Copilot",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "chatgpt",
@@ -501,7 +550,8 @@
       "category": "ai",
       "description": "OpenAI lanza ChatGPT, IA que llega a 100M usuarios en 2 meses.",
       "url": "https://en.wikipedia.org/wiki/ChatGPT",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "gpt-4",
@@ -510,7 +560,8 @@
       "category": "ai",
       "description": "OpenAI lanza GPT-4, modelo multimodal.",
       "url": "https://en.wikipedia.org/wiki/GPT-4",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "llama",
@@ -519,7 +570,8 @@
       "category": "ai",
       "description": "Meta libera LLaMA, LLM open source.",
       "url": "https://en.wikipedia.org/wiki/LLaMA",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "bun",
@@ -528,7 +580,8 @@
       "category": "frameworks",
       "description": "Jarred Sumner crea Bun, runtime JS ultrarrápido.",
       "url": "https://en.wikipedia.org/wiki/Bun_(software)",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "astro",
@@ -537,7 +590,8 @@
       "category": "frameworks",
       "description": "Astro: framework web island-first para sitios content-driven.",
       "url": "https://en.wikipedia.org/wiki/Astro_(web_framework)",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "tailwind",
@@ -546,7 +600,8 @@
       "category": "frameworks",
       "description": "Adam Wathan crea Tailwind CSS, CSS utility-first.",
       "url": "https://en.wikipedia.org/wiki/Tailwind_CSS",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "nextjs",
@@ -555,7 +610,8 @@
       "category": "frameworks",
       "description": "Vercel lanza Next.js para React SSR.",
       "url": "https://en.wikipedia.org/wiki/Next.js",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "svelte",
@@ -564,7 +620,8 @@
       "category": "frameworks",
       "description": "Rich Harris crea Svelte, compilador de componentes.",
       "url": "https://en.wikipedia.org/wiki/Svelte",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "typescript",
@@ -573,7 +630,8 @@
       "category": "languages",
       "description": "Microsoft lanza TypeScript, JavaScript con tipos.",
       "url": "https://en.wikipedia.org/wiki/TypeScript",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "vscode",
@@ -582,7 +640,8 @@
       "category": "tools",
       "description": "Microsoft lanza VS Code, editor que domina el mercado.",
       "url": "https://en.wikipedia.org/wiki/Visual_Studio_Code",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "git",
@@ -591,7 +650,8 @@
       "category": "tools",
       "description": "Linus Torvalds crea Git para el kernel Linux.",
       "url": "https://en.wikipedia.org/wiki/Git",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "aws",
@@ -600,7 +660,8 @@
       "category": "internet",
       "description": "AWS lanza EC2 y S3, nace la nube moderna.",
       "url": "https://en.wikipedia.org/wiki/Amazon_Web_Services",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "iphone",
@@ -609,7 +670,8 @@
       "category": "hardware",
       "description": "Steve Jobs presenta el iPhone, revoluciona los móviles.",
       "url": "https://en.wikipedia.org/wiki/IPhone",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "app-store",
@@ -618,7 +680,8 @@
       "category": "internet",
       "description": "Apple abre la App Store, nace la economía de apps.",
       "url": "https://en.wikipedia.org/wiki/App_Store_(iOS)",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "sqlite",
@@ -627,7 +690,8 @@
       "category": "tools",
       "description": "Richard Hipp crea SQLite, la BD más desplegada del mundo.",
       "url": "https://en.wikipedia.org/wiki/SQLite",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "wifi",
@@ -636,7 +700,8 @@
       "category": "internet",
       "description": "Wi-Fi Alliance crea el estándar 802.11b.",
       "url": "https://en.wikipedia.org/wiki/Wi-Fi",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "bluetooth",
@@ -645,7 +710,8 @@
       "category": "internet",
       "description": "Bluetooth 1.0: conectividad inalámbrica corta distancia.",
       "url": "https://en.wikipedia.org/wiki/Bluetooth",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "google-cloud",
@@ -654,7 +720,8 @@
       "category": "internet",
       "description": "Google lanza App Engine, su entrada al cloud.",
       "url": "https://en.wikipedia.org/wiki/Google_Cloud",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "azure",
@@ -663,7 +730,8 @@
       "category": "internet",
       "description": "Microsoft lanza Azure, su plataforma cloud.",
       "url": "https://en.wikipedia.org/wiki/Microsoft_Azure",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "vue-3",
@@ -672,7 +740,8 @@
       "category": "frameworks",
       "description": "Vue 3 con Composition API y mejor rendimiento.",
       "url": "https://vuejs.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "svelte-5",
@@ -681,7 +750,8 @@
       "category": "frameworks",
       "description": "Svelte 5 con Runes, reactividad basada en signals.",
       "url": "https://svelte.dev/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "solidjs",
@@ -690,7 +760,8 @@
       "category": "frameworks",
       "description": "Ryan Carniato crea SolidJS, reactividad sin Virtual DOM.",
       "url": "https://www.solidjs.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "htmx",
@@ -699,7 +770,8 @@
       "category": "frameworks",
       "description": "htmx: HTML extendido para interactividad sin JS.",
       "url": "https://htmx.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "alpine",
@@ -708,7 +780,8 @@
       "category": "frameworks",
       "description": "Alpine.js: jQuery moderno en 15KB.",
       "url": "https://alpinejs.dev/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "postgres",
@@ -717,7 +790,8 @@
       "category": "tools",
       "description": "PostgreSQL 6.5, la BD open source más avanzada.",
       "url": "https://en.wikipedia.org/wiki/PostgreSQL",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "mongodb",
@@ -726,7 +800,8 @@
       "category": "tools",
       "description": "MongoDB 1.0: base de datos NoSQL popular.",
       "url": "https://en.wikipedia.org/wiki/MongoDB",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "redis",
@@ -735,7 +810,8 @@
       "category": "tools",
       "description": "Salvatore Sanfilippo crea Redis, caché en memoria.",
       "url": "https://en.wikipedia.org/wiki/Redis",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "terraform",
@@ -744,7 +820,8 @@
       "category": "tools",
       "description": "HashiCorp lanza Terraform, infraestructura como código.",
       "url": "https://en.wikipedia.org/wiki/Terraform",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "ansible",
@@ -753,7 +830,8 @@
       "category": "tools",
       "description": "Michael DeHaan crea Ansible, automatización sin agentes.",
       "url": "https://en.wikipedia.org/wiki/Ansible",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "vagrant",
@@ -762,7 +840,8 @@
       "category": "tools",
       "description": "Mitchell Hashimoto crea Vagrant para VMs reproducibles.",
       "url": "https://en.wikipedia.org/wiki/Vagrant_(software)",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "webpack",
@@ -771,7 +850,8 @@
       "category": "tools",
       "description": "Tobias Koppers crea Webpack, bundler de módulos.",
       "url": "https://en.wikipedia.org/wiki/Webpack",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "vite",
@@ -780,7 +860,8 @@
       "category": "tools",
       "description": "Evan You crea Vite, dev server ultrarrápido.",
       "url": "https://en.wikipedia.org/wiki/Vite_(software)",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "esbuild",
@@ -789,7 +870,8 @@
       "category": "tools",
       "description": "Evan Wallace crea esbuild, bundler en Go 100x más rápido.",
       "url": "https://esbuild.github.io/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "turbo",
@@ -798,7 +880,8 @@
       "category": "tools",
       "description": "Vercel adquiere Turborepo, monorepos incrementales.",
       "url": "https://turbo.build/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "neon",
@@ -807,7 +890,8 @@
       "category": "tools",
       "description": "Neon: PostgreSQL serverless en la nube.",
       "url": "https://neon.tech/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "planetscale",
@@ -816,7 +900,8 @@
       "category": "tools",
       "description": "PlanetScale: MySQL serverless branching.",
       "url": "https://planetscale.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "supabase",
@@ -825,7 +910,8 @@
       "category": "tools",
       "description": "Supabase: alternativa open source a Firebase.",
       "url": "https://supabase.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "firebase",
@@ -834,7 +920,8 @@
       "category": "tools",
       "description": "Google adquiere Firebase, plataforma para apps.",
       "url": "https://en.wikipedia.org/wiki/Firebase",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "netlify",
@@ -843,7 +930,8 @@
       "category": "internet",
       "description": "Netlify: hosting JAMstack con deploy automático.",
       "url": "https://www.netlify.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "vercel",
@@ -852,7 +940,8 @@
       "category": "internet",
       "description": "Vercel (antes ZEIT): plataforma para Next.js.",
       "url": "https://vercel.com/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "surge",
@@ -861,7 +950,8 @@
       "category": "internet",
       "description": "Surge: deploy estático desde CLI.",
       "url": "https://surge.sh/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "cloudflare",
@@ -870,7 +960,8 @@
       "category": "internet",
       "description": "Cloudflare: CDN y protección DDoS.",
       "url": "https://www.cloudflare.com/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "stripe",
@@ -879,7 +970,8 @@
       "category": "internet",
       "description": "Stripe: pagos online para desarrolladores.",
       "url": "https://stripe.com/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "figma",
@@ -888,7 +980,8 @@
       "category": "tools",
       "description": "Figma: diseño de interfaces colaborativo en navegador.",
       "url": "https://www.figma.com/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "notion",
@@ -897,7 +990,8 @@
       "category": "tools",
       "description": "Notion: workspace todo-en-uno.",
       "url": "https://www.notion.so/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "slack",
@@ -906,7 +1000,8 @@
       "category": "tools",
       "description": "Slack revoluciona la comunicación en equipo.",
       "url": "https://slack.com/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "discord",
@@ -915,7 +1010,8 @@
       "category": "tools",
       "description": "Discord: chat de voz para gamers y comunidades.",
       "url": "https://discord.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "openai",
@@ -924,7 +1020,8 @@
       "category": "companies",
       "description": "Sam Altman, Elon Musk y otros fundan OpenAI.",
       "url": "https://en.wikipedia.org/wiki/OpenAI",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
     },
     {
       "id": "deepmind",
@@ -933,7 +1030,8 @@
       "category": "ai",
       "description": "Demis Hassabis funda DeepMind, IA para investigación.",
       "url": "https://en.wikipedia.org/wiki/DeepMind",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "alphago",
@@ -942,7 +1040,8 @@
       "category": "ai",
       "description": "DeepMind's AlphaGo vence al campeón mundial de Go.",
       "url": "https://en.wikipedia.org/wiki/AlphaGo",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "gpt-4-turbo",
@@ -951,7 +1050,8 @@
       "category": "ai",
       "description": "OpenAI lanza GPT-4 Turbo con 128k contexto.",
       "url": "https://openai.com/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "claude",
@@ -960,7 +1060,8 @@
       "category": "ai",
       "description": "Anthropic lanza Claude 3, rival de GPT-4.",
       "url": "https://www.anthropic.com/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "llama-3",
@@ -969,7 +1070,8 @@
       "category": "ai",
       "description": "Meta lanza LLaMA 3, modelo open source de 405B.",
       "url": "https://llama.meta.com/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "mistral",
@@ -978,7 +1080,8 @@
       "category": "ai",
       "description": "Mistral AI: startup francesa de LLMs eficientes.",
       "url": "https://mistral.ai/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "deepseek",
@@ -987,7 +1090,8 @@
       "category": "ai",
       "description": "DeepSeek-V3: modelo chino open source de alto rendimiento.",
       "url": "https://github.com/deepseek-ai",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "ollama",
@@ -996,7 +1100,8 @@
       "category": "ai",
       "description": "Ollama: ejecuta LLMs localmente con un clic.",
       "url": "https://ollama.com/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "llamacpp",
@@ -1005,7 +1110,8 @@
       "category": "ai",
       "description": "Georgi Gerganov crea llama.cpp, inferencia en CPU.",
       "url": "https://github.com/ggerganov/llama.cpp",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "midudev",
@@ -1014,7 +1120,8 @@
       "category": "companies",
       "description": "Miguel Ángel (Midudev) crea contenido tech en español.",
       "url": "https://midu.dev/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
     },
     {
       "id": "mouredev",
@@ -1023,7 +1130,8 @@
       "category": "companies",
       "description": "Brais Moure (MoureDev) crea contenido tech en español.",
       "url": "https://moure.dev/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
     },
     {
       "id": "arduino",
@@ -1032,7 +1140,8 @@
       "category": "hardware",
       "description": "Arduino: plataforma de hardware abierto para makers.",
       "url": "https://www.arduino.cc/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "raspberry",
@@ -1041,7 +1150,8 @@
       "category": "hardware",
       "description": "Raspberry Pi: computadora de $35 para educación.",
       "url": "https://www.raspberrypi.com/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "esp32",
@@ -1050,7 +1160,8 @@
       "category": "hardware",
       "description": "Espressif lanza ESP32, WiFi+BT barato para IoT.",
       "url": "https://www.espressif.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "nvidia-gpu",
@@ -1059,7 +1170,8 @@
       "category": "hardware",
       "description": "NVIDIA lanza CUDA, computación paralela en GPU.",
       "url": "https://developer.nvidia.com/cuda-toolkit",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "arm",
@@ -1068,7 +1180,8 @@
       "category": "hardware",
       "description": "ARM: arquitectura RISC que domina móviles e IoT.",
       "url": "https://en.wikipedia.org/wiki/Arm_Holdings",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "nft",
@@ -1077,7 +1190,8 @@
       "category": "internet",
       "description": "Explosión de NFTs, blockchain y Web3.",
       "url": "https://en.wikipedia.org/wiki/Non-fungible_token",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "crypto",
@@ -1086,7 +1200,8 @@
       "category": "internet",
       "description": "Satoshi Nakamoto publica Bitcoin, primera criptomoneda.",
       "url": "https://en.wikipedia.org/wiki/Bitcoin",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "ethereum",
@@ -1095,7 +1210,8 @@
       "category": "internet",
       "description": "Vitalik Buterin lanza Ethereum, blockchain programmable.",
       "url": "https://en.wikipedia.org/wiki/Ethereum",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "nostr",
@@ -1104,7 +1220,8 @@
       "category": "internet",
       "description": "Nostr: protocolo descentralizado para redes sociales.",
       "url": "https://en.wikipedia.org/wiki/Nostr",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "mastodon",
@@ -1113,7 +1230,8 @@
       "category": "internet",
       "description": "Mastodon: red social descentralizada tipo Twitter.",
       "url": "https://en.wikipedia.org/wiki/Mastodon_(social_network)",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "matrix",
@@ -1122,7 +1240,8 @@
       "category": "internet",
       "description": "Matrix: protocolo abierto para comunicación descentralizada.",
       "url": "https://matrix.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "wasm",
@@ -1131,7 +1250,8 @@
       "category": "languages",
       "description": "WASM: código binario para la web, rendimiento nativo.",
       "url": "https://webassembly.org/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "dart-3",
@@ -1140,7 +1260,8 @@
       "category": "languages",
       "description": "Dart 3 con patrones y clases selladas.",
       "url": "https://dart.dev/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "kotlin-2",
@@ -1149,7 +1270,8 @@
       "category": "languages",
       "description": "Kotlin 2.0 con K2 compiler, más rápido.",
       "url": "https://kotlinlang.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "python-3-12",
@@ -1158,7 +1280,8 @@
       "category": "languages",
       "description": "Python 3.12 con mejor rendimiento y f-strings mejorados.",
       "url": "https://www.python.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "java-21",
@@ -1167,7 +1290,8 @@
       "category": "languages",
       "description": "Java 21 con virtual threads y pattern matching.",
       "url": "https://openjdk.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "zig",
@@ -1176,7 +1300,8 @@
       "category": "languages",
       "description": "Zig: lenguaje de sistemas moderno y seguro.",
       "url": "https://ziglang.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "elixir",
@@ -1185,7 +1310,8 @@
       "category": "languages",
       "description": "Elixir: funcional, concurrente, sobre la BEAM.",
       "url": "https://elixir-lang.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "clojure",
@@ -1194,7 +1320,8 @@
       "category": "languages",
       "description": "Rich Hickey crea Clojure, Lisp para la JVM.",
       "url": "https://clojure.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "haskell",
@@ -1203,7 +1330,8 @@
       "category": "languages",
       "description": "Haskell: lenguaje funcional puro, estándar lazy.",
       "url": "https://www.haskell.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "scala",
@@ -1212,7 +1340,8 @@
       "category": "languages",
       "description": "Martin Odersky crea Scala, POO funcional para JVM.",
       "url": "https://www.scala-lang.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "erlang",
@@ -1221,7 +1350,8 @@
       "category": "languages",
       "description": "Ericsson crea Erlang para telecomunicaciones.",
       "url": "https://www.erlang.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "lua",
@@ -1230,7 +1360,8 @@
       "category": "languages",
       "description": "Lua: lenguaje de scripting ligero para嵌入式.",
       "url": "https://www.lua.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "r-lang",
@@ -1239,7 +1370,8 @@
       "category": "languages",
       "description": "R: lenguaje para estadística y análisis de datos.",
       "url": "https://www.r-project.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "matlab",
@@ -1248,7 +1380,8 @@
       "category": "languages",
       "description": "MathWorks lanza MATLAB para cálculo numérico.",
       "url": "https://www.mathworks.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "assembly",
@@ -1257,7 +1390,8 @@
       "category": "languages",
       "description": "Lenguaje ensamblador: código máquina legible.",
       "url": "https://en.wikipedia.org/wiki/Assembly_language",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "fortran",
@@ -1266,7 +1400,8 @@
       "category": "languages",
       "description": "FORTRAN 77: dominante en cálculo científico.",
       "url": "https://en.wikipedia.org/wiki/Fortran",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "cobol",
@@ -1275,7 +1410,8 @@
       "category": "languages",
       "description": "COBOL: todavía en sistemas bancarios 50 años después.",
       "url": "https://en.wikipedia.org/wiki/COBOL",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "basic",
@@ -1284,7 +1420,8 @@
       "category": "languages",
       "description": "BASIC democratiza la programación en los 70-80.",
       "url": "https://en.wikipedia.org/wiki/BASIC",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
     },
     {
       "id": "apple-watch",
@@ -1293,7 +1430,8 @@
       "category": "hardware",
       "description": "Apple Watch: el smartwatch más vendido del mundo.",
       "url": "https://en.wikipedia.org/wiki/Apple_Watch",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "airpods",
@@ -1302,7 +1440,8 @@
       "category": "hardware",
       "description": "Apple AirPods: auriculares true wireless.",
       "url": "https://en.wikipedia.org/wiki/AirPods",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "meta-quest",
@@ -1311,7 +1450,8 @@
       "category": "hardware",
       "description": "Oculus Quest: realidad virtual standalone.",
       "url": "https://www.meta.com/quest/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "apple-vision",
@@ -1320,7 +1460,8 @@
       "category": "hardware",
       "description": "Apple Vision Pro: computación espacial.",
       "url": "https://www.apple.com/apple-vision-pro/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "tesla",
@@ -1329,7 +1470,8 @@
       "category": "hardware",
       "description": "Tesla Model S: coche eléctrico que cambia la industria.",
       "url": "https://www.tesla.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "spacex",
@@ -1338,7 +1480,8 @@
       "category": "companies",
       "description": "Elon Musk funda SpaceX para colonizar Marte.",
       "url": "https://www.spacex.com/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
     },
     {
       "id": "nasa-mars",
@@ -1347,7 +1490,8 @@
       "category": "hardware",
       "description": "NASA aterriza el rover Perseverance en Marte.",
       "url": "https://mars.nasa.gov/mars2020/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "crispr",
@@ -1356,7 +1500,8 @@
       "category": "ai",
       "description": "CRISPR-Cas9: edición genética con IA.",
       "url": "https://en.wikipedia.org/wiki/CRISPR",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "quantum",
@@ -1365,7 +1510,8 @@
       "category": "hardware",
       "description": "IBM lanza IBM Quantum Experience, computación cuántica accesible.",
       "url": "https://www.ibm.com/quantum",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
     },
     {
       "id": "starlink",
@@ -1374,7 +1520,8 @@
       "category": "internet",
       "description": "SpaceX lanza Starlink, internet vía satélite.",
       "url": "https://www.starlink.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "5g",
@@ -1383,7 +1530,8 @@
       "category": "internet",
       "description": "5G: nueva generación de redes móviles.",
       "url": "https://en.wikipedia.org/wiki/5G",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "safari",
@@ -1392,7 +1540,8 @@
       "category": "internet",
       "description": "Apple lanza Safari para Mac.",
       "url": "https://en.wikipedia.org/wiki/Safari_(web_browser)",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "firefox",
@@ -1401,7 +1550,8 @@
       "category": "internet",
       "description": "Firefox 1.0: el navegador open source que desafía a IE.",
       "url": "https://en.wikipedia.org/wiki/Firefox",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "opera",
@@ -1410,7 +1560,8 @@
       "category": "internet",
       "description": "Opera: pionero en innovación de navegadores.",
       "url": "https://en.wikipedia.org/wiki/Opera_(web_browser)",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "ie6",
@@ -1419,7 +1570,8 @@
       "category": "internet",
       "description": "IE6 domina el mercado con 95% de cuota.",
       "url": "https://en.wikipedia.org/wiki/Internet_Explorer_6",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
     },
     {
       "id": "youtube",
@@ -1428,7 +1580,8 @@
       "category": "companies",
       "description": "Chad Hurley, Steve Chen y Jawed Karim fundan YouTube.",
       "url": "https://en.wikipedia.org/wiki/YouTube",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
     },
     {
       "id": "twitter",
@@ -1437,7 +1590,8 @@
       "category": "companies",
       "description": "Jack Dorsey publica el primer tweet.",
       "url": "https://en.wikipedia.org/wiki/Twitter",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
     },
     {
       "id": "instagram",
@@ -1446,7 +1600,8 @@
       "category": "companies",
       "description": "Kevin Systrom y Mike Krieger lanzan Instagram.",
       "url": "https://en.wikipedia.org/wiki/Instagram",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
     },
     {
       "id": "tiktok",
@@ -1455,7 +1610,8 @@
       "category": "companies",
       "description": "ByteDance lanza TikTok (Douyin en China).",
       "url": "https://en.wikipedia.org/wiki/TikTok",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
     },
     {
       "id": "uber",
@@ -1464,7 +1620,8 @@
       "category": "companies",
       "description": "Uber revoluciona el transporte.",
       "url": "https://en.wikipedia.org/wiki/Uber",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
     },
     {
       "id": "airbnb",
@@ -1473,7 +1630,8 @@
       "category": "companies",
       "description": "Airbnb: alquiler de habitaciones entre particulares.",
       "url": "https://en.wikipedia.org/wiki/Airbnb",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
     },
     {
       "id": "spotify",
@@ -1482,7 +1640,8 @@
       "category": "companies",
       "description": "Daniel Ek lanza Spotify, streaming de música.",
       "url": "https://en.wikipedia.org/wiki/Spotify",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
     },
     {
       "id": "netflix",
@@ -1491,7 +1650,8 @@
       "category": "companies",
       "description": "Netflix empieza streaming, fin del DVD.",
       "url": "https://en.wikipedia.org/wiki/Netflix",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
     },
     {
       "id": "amazon",
@@ -1500,7 +1660,8 @@
       "category": "companies",
       "description": "Jeff Bezos funda Amazon como librería online.",
       "url": "https://en.wikipedia.org/wiki/Amazon_(company)",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
     },
     {
       "id": "apple-cupertino",
@@ -1509,7 +1670,8 @@
       "category": "companies",
       "description": "Apple se muda a Apple Park, su nueva sede.",
       "url": "https://en.wikipedia.org/wiki/Apple_Park",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
     },
     {
       "id": "microsoft-nokia",
@@ -1518,7 +1680,8 @@
       "category": "companies",
       "description": "Microsoft compra la división de dispositivos de Nokia.",
       "url": "https://en.wikipedia.org/wiki/Microsoft_Nokia",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
     },
     {
       "id": "yahoo-verizon",
@@ -1527,7 +1690,8 @@
       "category": "companies",
       "description": "Verizon compra Yahoo por $4.48B.",
       "url": "https://en.wikipedia.org/wiki/Yahoo!",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
     },
     {
       "id": "github-copilot-x",
@@ -1536,7 +1700,8 @@
       "category": "ai",
       "description": "GitHub expande Copilot con chat, voice y more.",
       "url": "https://github.com/features/copilot",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "cursor",
@@ -1545,7 +1710,8 @@
       "category": "tools",
       "description": "Cursor: editor de código con IA integrada.",
       "url": "https://www.cursor.sh/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "v0",
@@ -1554,7 +1720,8 @@
       "category": "ai",
       "description": "Vercel lanza v0: generador de UI con IA.",
       "url": "https://v0.dev/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "bolt",
@@ -1563,7 +1730,8 @@
       "category": "ai",
       "description": "Bolt.new: generar apps completas con IA en el navegador.",
       "url": "https://bolt.new/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "replit-ai",
@@ -1572,7 +1740,8 @@
       "category": "ai",
       "description": "Replit integra IA para codear desde el navegador.",
       "url": "https://replit.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "npm",
@@ -1581,7 +1750,8 @@
       "category": "tools",
       "description": "Isaac Schlueter crea npm, gestor de paquetes de Node.",
       "url": "https://www.npmjs.com/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "yarn",
@@ -1590,7 +1760,8 @@
       "category": "tools",
       "description": "Facebook lanza Yarn, alternativa a npm.",
       "url": "https://yarnpkg.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "pnpm",
@@ -1599,7 +1770,8 @@
       "category": "tools",
       "description": "pnpm: gestor de paquetes eficiente con hard links.",
       "url": "https://pnpm.io/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "bun-1",
@@ -1608,7 +1780,8 @@
       "category": "frameworks",
       "description": "Bun 1.0: runtime JS que desafía a Node y Deno.",
       "url": "https://bun.sh/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "biome",
@@ -1617,7 +1790,8 @@
       "category": "tools",
       "description": "Biome (antes Rome): linting y formateo en Rust.",
       "url": "https://biomejs.dev/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "oxc",
@@ -1626,7 +1800,8 @@
       "category": "tools",
       "description": "Oxc: parser y linter ultra-rápido en Rust.",
       "url": "https://oxc-project.github.io/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "ruff",
@@ -1635,7 +1810,8 @@
       "category": "tools",
       "description": "Ruff: linter de Python 10-100x más rápido en Rust.",
       "url": "https://docs.astral.sh/ruff/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "uv",
@@ -1644,7 +1820,8 @@
       "category": "tools",
       "description": "uv: gestor de paquetes de Python en Rust, 10-100x más rápido.",
       "url": "https://docs.astral.sh/uv/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "turso",
@@ -1653,7 +1830,8 @@
       "category": "tools",
       "description": "Turso: SQLite distribuido en el edge.",
       "url": "https://turso.tech/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "libsql",
@@ -1662,7 +1840,8 @@
       "category": "opensource",
       "description": "libSQL: fork de SQLite open source.",
       "url": "https://github.com/tursodatabase/libsql",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #14b8a6, #0f766e)"
     },
     {
       "id": "duckdb",
@@ -1671,7 +1850,8 @@
       "category": "tools",
       "description": "DuckDB: SQLite para analytics, OLAP embebido.",
       "url": "https://duckdb.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "clickhouse",
@@ -1680,7 +1860,8 @@
       "category": "tools",
       "description": "ClickHouse: base de datos columnar ultrarrápida.",
       "url": "https://clickhouse.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "influxdb",
@@ -1689,7 +1870,8 @@
       "category": "tools",
       "description": "InfluxDB: base de datos para series temporales.",
       "url": "https://www.influxdata.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "neo4j",
@@ -1698,7 +1880,8 @@
       "category": "tools",
       "description": "Neo4j: base de datos de grafos.",
       "url": "https://neo4j.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "elasticsearch",
@@ -1707,7 +1890,8 @@
       "category": "tools",
       "description": "Elasticsearch: motor de búsqueda y analytics.",
       "url": "https://www.elastic.co/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "grafana",
@@ -1716,7 +1900,8 @@
       "category": "tools",
       "description": "Grafana: dashboards de observabilidad.",
       "url": "https://grafana.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "prometheus",
@@ -1725,7 +1910,8 @@
       "category": "tools",
       "description": "Prometheus: monitoreo y alerting time-series.",
       "url": "https://prometheus.io/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "nginx",
@@ -1734,7 +1920,8 @@
       "category": "tools",
       "description": "Igor Sysoev crea Nginx, web server de alto rendimiento.",
       "url": "https://nginx.org/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "caddy",
@@ -1743,7 +1930,8 @@
       "category": "tools",
       "description": "Caddy: web server con HTTPS automático.",
       "url": "https://caddyserver.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "traefik",
@@ -1752,7 +1940,8 @@
       "category": "tools",
       "description": "Traefik: reverse proxy cloud-native.",
       "url": "https://traefik.io/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "hugo",
@@ -1761,7 +1950,8 @@
       "category": "frameworks",
       "description": "Hugo: generador de sitios estáticos en Go.",
       "url": "https://gohugo.io/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "jekyll",
@@ -1770,7 +1960,8 @@
       "category": "frameworks",
       "description": "Tom Preston-Werner crea Jekyll para blogs estáticos.",
       "url": "https://jekyllrb.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "11ty",
@@ -1779,7 +1970,8 @@
       "category": "frameworks",
       "description": "Eleventy: generador de sitios estáticos simple.",
       "url": "https://www.11ty.dev/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "remix",
@@ -1788,7 +1980,8 @@
       "category": "frameworks",
       "description": "Remix: framework web full-stack para React.",
       "url": "https://remix.run/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "solidstart",
@@ -1797,7 +1990,8 @@
       "category": "frameworks",
       "description": "SolidStart: meta-framework para SolidJS.",
       "url": "https://start.solidjs.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "nuxt",
@@ -1806,7 +2000,8 @@
       "category": "frameworks",
       "description": "Nuxt: framework Vue para SSR/SSG.",
       "url": "https://nuxt.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "sveltekit",
@@ -1815,7 +2010,8 @@
       "category": "frameworks",
       "description": "SvelteKit: framework web para Svelte.",
       "url": "https://kit.svelte.dev/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "astro-2",
@@ -1824,7 +2020,8 @@
       "category": "frameworks",
       "description": "Astro 2.0 con Content Collections y server islands.",
       "url": "https://astro.build/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "laravel-11",
@@ -1833,7 +2030,8 @@
       "category": "frameworks",
       "description": "Laravel 11: framework PHP más popular.",
       "url": "https://laravel.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "django-5",
@@ -1842,7 +2040,8 @@
       "category": "frameworks",
       "description": "Django 5: framework Python para web.",
       "url": "https://www.djangoproject.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "fastapi",
@@ -1851,7 +2050,8 @@
       "category": "frameworks",
       "description": "Sebastián Ramírez crea FastAPI para Python.",
       "url": "https://fastapi.tiangolo.com/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "fiber",
@@ -1860,7 +2060,8 @@
       "category": "frameworks",
       "description": "Fiber: framework web ultrarrápido en Go.",
       "url": "https://gofiber.io/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "actix",
@@ -1869,7 +2070,8 @@
       "category": "frameworks",
       "description": "Actix Web: framework Rust de alto rendimiento.",
       "url": "https://actix.rs/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "rails-7",
@@ -1878,7 +2080,8 @@
       "category": "frameworks",
       "description": "Rails 7: sin JavaScript, import maps y Hotwire.",
       "url": "https://rubyonrails.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "spring-boot-3",
@@ -1887,7 +2090,8 @@
       "category": "frameworks",
       "description": "Spring Boot 3: Java 17+ y GraalVM native images.",
       "url": "https://spring.io/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "dotnet-8",
@@ -1896,7 +2100,8 @@
       "category": "frameworks",
       "description": ".NET 8: plataforma unificada de Microsoft.",
       "url": "https://dotnet.microsoft.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "blazor",
@@ -1905,7 +2110,8 @@
       "category": "frameworks",
       "description": "Blazor: C# en el navegador via WebAssembly.",
       "url": "https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "htmx-1",
@@ -1914,7 +2120,8 @@
       "category": "frameworks",
       "description": "htmx: HTML extendido para interactividad sin JS.",
       "url": "https://htmx.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
     },
     {
       "id": "pytorch",
@@ -1923,7 +2130,8 @@
       "category": "ai",
       "description": "Facebook lanza PyTorch, framework de ML flexible.",
       "url": "https://pytorch.org/",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "keras",
@@ -1932,7 +2140,8 @@
       "category": "ai",
       "description": "François Chollet crea Keras, API de DL amigable.",
       "url": "https://keras.io/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "scikit-learn",
@@ -1941,7 +2150,8 @@
       "category": "ai",
       "description": "scikit-learn: ML en Python, simple y efectivo.",
       "url": "https://scikit-learn.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "pandas",
@@ -1950,7 +2160,8 @@
       "category": "ai",
       "description": "Wes McKinney crea pandas para análisis de datos.",
       "url": "https://pandas.pydata.org/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "numpy",
@@ -1959,7 +2170,8 @@
       "category": "ai",
       "description": "NumPy: arrays n-dimensional para cálculo numérico.",
       "url": "https://numpy.org/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "jupyter",
@@ -1968,7 +2180,8 @@
       "category": "tools",
       "description": "Jupyter: notebooks interactivos para ciencia de datos.",
       "url": "https://jupyter.org/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "huggingface",
@@ -1977,7 +2190,8 @@
       "category": "ai",
       "description": "Hugging Face: GitHub de la IA con modelos open source.",
       "url": "https://huggingface.co/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "langchain",
@@ -1986,7 +2200,8 @@
       "category": "ai",
       "description": "LangChain: framework para apps con LLMs.",
       "url": "https://www.langchain.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "llamaindex",
@@ -1995,7 +2210,8 @@
       "category": "ai",
       "description": "LlamaIndex: framework para RAG.",
       "url": "https://www.llamaindex.ai/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "stable-diffusion",
@@ -2004,7 +2220,8 @@
       "category": "ai",
       "description": "Stability AI lanza Stable Diffusion, generación de imágenes.",
       "url": "https://stability.ai/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "dalle",
@@ -2013,7 +2230,8 @@
       "category": "ai",
       "description": "OpenAI lanza DALL-E, imágenes desde texto.",
       "url": "https://openai.com/dall-e-3",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "midjourney",
@@ -2022,7 +2240,8 @@
       "category": "ai",
       "description": "Midjourney: generación de arte con IA.",
       "url": "https://www.midjourney.com/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "whisper",
@@ -2031,7 +2250,8 @@
       "category": "ai",
       "description": "OpenAI Whisper: reconocimiento de voz open source.",
       "url": "https://openai.com/research/whisper",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "elevenlabs",
@@ -2040,7 +2260,8 @@
       "category": "ai",
       "description": "ElevenLabs: síntesis de voz ultrarrealista.",
       "url": "https://elevenlabs.io/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "perplexity",
@@ -2049,7 +2270,8 @@
       "category": "ai",
       "description": "Perplexity: motor de búsqueda con IA.",
       "url": "https://www.perplexity.ai/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "gemini",
@@ -2058,7 +2280,8 @@
       "category": "ai",
       "description": "Google lanza Gemini, su modelo multimodal.",
       "url": "https://deepmind.google/technologies/gemini/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "groq",
@@ -2067,7 +2290,8 @@
       "category": "ai",
       "description": "Groq: inferencia de LLMs ultra-rápida con LPU.",
       "url": "https://groq.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "together",
@@ -2076,7 +2300,8 @@
       "category": "ai",
       "description": "Together AI: plataforma open source para LLMs.",
       "url": "https://www.together.ai/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "replicate",
@@ -2085,7 +2310,8 @@
       "category": "ai",
       "description": "Replicate: ejecuta modelos de IA en la nube.",
       "url": "https://replicate.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "runway",
@@ -2094,7 +2320,8 @@
       "category": "ai",
       "description": "Runway: IA para edición de video.",
       "url": "https://runwayml.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "suno",
@@ -2103,7 +2330,8 @@
       "category": "ai",
       "description": "Suno: IA que genera música con letra.",
       "url": "https://suno.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "udio",
@@ -2112,7 +2340,8 @@
       "category": "ai",
       "description": "Udio: alternativa a Suno para música con IA.",
       "url": "https://www.udio.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "waymo",
@@ -2121,7 +2350,8 @@
       "category": "ai",
       "description": "Google crea Waymo para coches autónomos.",
       "url": "https://waymo.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "tesla-ai",
@@ -2130,7 +2360,8 @@
       "category": "ai",
       "description": "Tesla lanza Autopilot, conducción asistida.",
       "url": "https://www.tesla.com/autopilot",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
     },
     {
       "id": "bsd",
@@ -2139,7 +2370,8 @@
       "category": "opensource",
       "description": "BSD: variante de Unix que inspira a Linux.",
       "url": "https://en.wikipedia.org/wiki/Berkeley_Software_Distribution",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #14b8a6, #0f766e)"
     },
     {
       "id": "gnu",
@@ -2148,7 +2380,8 @@
       "category": "opensource",
       "description": "Richard Stallman lanza el proyecto GNU.",
       "url": "https://www.gnu.org/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #14b8a6, #0f766e)"
     },
     {
       "id": "gpl",
@@ -2157,7 +2390,8 @@
       "category": "opensource",
       "description": "Stallman crea la licencia GPL.",
       "url": "https://www.gnu.org/licenses/gpl-3.0.html",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #14b8a6, #0f766e)"
     },
     {
       "id": "apache",
@@ -2166,7 +2400,8 @@
       "category": "opensource",
       "description": "Apache se convierte en el servidor web más usado.",
       "url": "https://httpd.apache.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #14b8a6, #0f766e)"
     },
     {
       "id": "debian",
@@ -2175,7 +2410,8 @@
       "category": "opensource",
       "description": "Ian Murdock crea Debian, distro base de muchas.",
       "url": "https://www.debian.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #14b8a6, #0f766e)"
     },
     {
       "id": "ubuntu",
@@ -2184,7 +2420,8 @@
       "category": "opensource",
       "description": "Canonical lanza Ubuntu, Linux para todos.",
       "url": "https://ubuntu.com/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #14b8a6, #0f766e)"
     },
     {
       "id": "fedora",
@@ -2193,7 +2430,8 @@
       "category": "opensource",
       "description": "Fedora: distro comunitaria de Red Hat.",
       "url": "https://fedoraproject.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #14b8a6, #0f766e)"
     },
     {
       "id": "arch",
@@ -2202,7 +2440,8 @@
       "category": "opensource",
       "description": "Arch Linux: distro rolling release para avanzados.",
       "url": "https://archlinux.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #14b8a6, #0f766e)"
     },
     {
       "id": "freebsd",
@@ -2211,7 +2450,8 @@
       "category": "opensource",
       "description": "FreeBSD: sistema operativo derivado de BSD.",
       "url": "https://www.freebsd.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #14b8a6, #0f766e)"
     },
     {
       "id": "openbsd",
@@ -2220,7 +2460,8 @@
       "category": "opensource",
       "description": "Theo de Raadt crea OpenBSD, enfocado en seguridad.",
       "url": "https://www.openbsd.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #14b8a6, #0f766e)"
     },
     {
       "id": "netbsd",
@@ -2229,7 +2470,8 @@
       "category": "opensource",
       "description": "NetBSD: portabilidad como objetivo.",
       "url": "https://www.netbsd.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #14b8a6, #0f766e)"
     },
     {
       "id": "vim",
@@ -2238,7 +2480,8 @@
       "category": "tools",
       "description": "Bram Moolenaar crea Vim.",
       "url": "https://www.vim.org/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "emacs",
@@ -2247,7 +2490,8 @@
       "category": "tools",
       "description": "Richard Stallman crea Emacs.",
       "url": "https://www.gnu.org/software/emacs/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "neovim",
@@ -2256,7 +2500,8 @@
       "category": "tools",
       "description": "Neovim: fork de Vim con mejoras modernas.",
       "url": "https://neovim.io/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "helix",
@@ -2265,7 +2510,8 @@
       "category": "tools",
       "description": "Helix: editor modal moderno en Rust.",
       "url": "https://helix-editor.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "zellij",
@@ -2274,7 +2520,8 @@
       "category": "tools",
       "description": "Zellij: multiplexor de terminal en Rust.",
       "url": "https://zellij.dev/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "tmux",
@@ -2283,7 +2530,8 @@
       "category": "tools",
       "description": "tmux: multiplexor de terminal.",
       "url": "https://github.com/tmux/tmux",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "alacritty",
@@ -2292,7 +2540,8 @@
       "category": "tools",
       "description": "Alacritty: terminal GPU-acelerada en Rust.",
       "url": "https://alacritty.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "warp",
@@ -2301,7 +2550,8 @@
       "category": "tools",
       "description": "Warp: terminal moderna con IA.",
       "url": "https://www.warp.dev/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "fig",
@@ -2310,7 +2560,8 @@
       "category": "tools",
       "description": "Fig: autocompletado en terminal para devs.",
       "url": "https://fig.io/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "nix",
@@ -2319,7 +2570,8 @@
       "category": "tools",
       "description": "Nix: gestor de paquetes declarativo.",
       "url": "https://nixos.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "guix",
@@ -2328,7 +2580,8 @@
       "category": "tools",
       "description": "GNU Guix: sistema de paquetes funcional.",
       "url": "https://guix.gnu.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "flatpak",
@@ -2337,7 +2590,8 @@
       "category": "tools",
       "description": "Flatpak: empaquetado universal para Linux.",
       "url": "https://flatpak.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "snap",
@@ -2346,7 +2600,8 @@
       "category": "tools",
       "description": "Ubuntu Snap: paquetes universales.",
       "url": "https://snapcraft.io/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "appimage",
@@ -2355,7 +2610,8 @@
       "category": "tools",
       "description": "AppImage: apps portables para Linux.",
       "url": "https://appimage.org/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #10b981, #047857)"
     },
     {
       "id": "apple-intelligence",
@@ -2364,7 +2620,8 @@
       "category": "news",
       "description": "Apple presenta Apple Intelligence: IA integrada en iPhone, iPad y Mac con privacidad en el dispositivo.",
       "url": "https://www.apple.com/apple-intelligence/",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "ios-18",
@@ -2373,7 +2630,8 @@
       "category": "news",
       "description": "iOS 18 con personalización total de pantalla inicio y control中心.",
       "url": "https://developer.apple.com/ios/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "iphone-16",
@@ -2382,7 +2640,8 @@
       "category": "news",
       "description": "iPhone 16 con botón Camera Control y chip A18.",
       "url": "https://www.apple.com/iphone-16/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "macbook-pro-m4",
@@ -2391,7 +2650,8 @@
       "category": "news",
       "description": "Apple lanza MacBook Pro con chip M4 Pro y M4 Max.",
       "url": "https://www.apple.com/macbook-pro/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "windows-11-24h2",
@@ -2400,7 +2660,8 @@
       "category": "news",
       "description": "Microsoft actualiza Windows 11 con Recall, Copilot+ y nuevas funciones IA.",
       "url": "https://www.microsoft.com/windows/windows-11",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "copilot-plus",
@@ -2409,7 +2670,8 @@
       "category": "news",
       "description": "Microsoft presenta PCs con NPU dedicado para IA local.",
       "url": "https://www.microsoft.com/copilot-plus-pcs",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "samsung-galaxy-s24",
@@ -2418,7 +2680,8 @@
       "category": "news",
       "description": "Samsung Galaxy S24 con Galaxy AI: traducción en tiempo real, circles to search.",
       "url": "https://www.samsung.com/galaxy-s24/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "pixel-8",
@@ -2427,7 +2690,8 @@
       "category": "news",
       "description": "Google Pixel 8 con chip Tensor G3 y funciones IA avanzadas.",
       "url": "https://store.google.com/product/pixel_8",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "openai-devday-2023",
@@ -2436,7 +2700,8 @@
       "category": "news",
       "description": "OpenAI presenta GPTs, Assistants API y preço reducido en DevDay.",
       "url": "https://openai.com/blog/devday",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "gpt-4o",
@@ -2445,7 +2710,8 @@
       "category": "news",
       "description": "OpenAI lanza GPT-4o: multimodal nativo, voz en tiempo real, 2x más rápido.",
       "url": "https://openai.com/index/hello-gpt-4o/",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "gpt-4o-mini",
@@ -2454,7 +2720,8 @@
       "category": "news",
       "description": "OpenAI lanza GPT-4o mini: modelo pequeño y barato para apps.",
       "url": "https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "o1-preview",
@@ -2463,7 +2730,8 @@
       "category": "news",
       "description": "OpenAI lanza o1: modelo de razonamiento que piensa antes de responder.",
       "url": "https://openai.com/index/learning-to-reason-with-llm/",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "o3",
@@ -2472,7 +2740,8 @@
       "category": "news",
       "description": "OpenAI anuncia o3: siguiente generación de razonamiento con ARC-AGI récord.",
       "url": "https://openai.com/index/deliberative-alignment/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "claude-3-5-sonnet",
@@ -2481,7 +2750,8 @@
       "category": "news",
       "description": "Anthropic lanza Claude 3.5 Sonnet: supera a GPT-4 en múltiples benchmarks.",
       "url": "https://www.anthropic.com/news/claude-3-5-sonnet",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "claude-artifacts",
@@ -2490,7 +2760,8 @@
       "category": "news",
       "description": "Anthropic lanza Artifacts: crear apps y documentos directamente en Claude.",
       "url": "https://www.anthropic.com/news/artifacts",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "gemini-2",
@@ -2499,7 +2770,8 @@
       "category": "news",
       "description": "Google lanza Gemini 2.0 Flash: modelo multimodal de nueva generación.",
       "url": "https://deepmind.google/technologies/gemini/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "google-ai-overview",
@@ -2508,7 +2780,8 @@
       "category": "news",
       "description": "Google integra respuestas IA en resultados de búsqueda (AI Overviews).",
       "url": "https://blog.google/products/search/generative-ai-google-search/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "deepseek-r1",
@@ -2517,7 +2790,8 @@
       "category": "news",
       "description": "DeepSeek lanza R1: modelo de razonamiento open source que rivaliza con o1.",
       "url": "https://github.com/deepseek-ai/DeepSeek-R1",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "deepseek-v3-news",
@@ -2526,7 +2800,8 @@
       "category": "news",
       "description": "DeepSeek-V3: modelo chino open source con 671B parámetros, entrenado por $5.6M.",
       "url": "https://github.com/deepseek-ai/DeepSeek-V3",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "llama-3-1",
@@ -2535,7 +2810,8 @@
       "category": "news",
       "description": "Meta libera LLaMA 3.1 405B: el mayor modelo open source hasta la fecha.",
       "url": "https://llama.meta.com/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "mistral-large-2",
@@ -2544,7 +2820,8 @@
       "category": "news",
       "description": "Mistral lanza Large 2: 123B parámetros, multilingüe, open weight.",
       "url": "https://mistral.ai/news/mistral-large-2/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "gemma-2",
@@ -2553,7 +2830,8 @@
       "category": "news",
       "description": "Google lanza Gemma 2: modelos open source de 2B a 27B parámetros.",
       "url": "https://blog.google/technology/developers/gemma-2/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "apple-m4",
@@ -2562,7 +2840,8 @@
       "category": "news",
       "description": "Apple presenta chip M4: 38 TOPS de NPU, 10-core CPU.",
       "url": "https://www.apple.com/newsroom/2024/05/apple-introduces-m4/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "nvidia-blackwell",
@@ -2571,7 +2850,8 @@
       "category": "news",
       "description": "NVIDIA presenta B200: chip Blackwell con 208B transistores para IA.",
       "url": "https://www.nvidia.com/en-us/data-center/technologies/blackwell-architecture/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "amd-mi300",
@@ -2580,7 +2860,8 @@
       "category": "news",
       "description": "AMD lanza MI300X: acelerador IA con 192GB HBM3 para data centers.",
       "url": "https://www.amd.com/en/products/accelerators/instinct/mi300.html",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "qualcomm-snapdragon-x",
@@ -2589,7 +2870,8 @@
       "category": "news",
       "description": "Qualcomm lanza Snapdragon X Elite: ARM para Windows con 45 TOPS NPU.",
       "url": "https://www.qualcomm.com/products/mobile/snapdragon/x-series",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "meta-ray-ban",
@@ -2598,7 +2880,8 @@
       "category": "news",
       "description": "Meta integra IA multimodal en las gafas Ray-Ban Meta.",
       "url": "https://www.meta.com/quest/accessories/ray-ban-meta/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "humane-ai-pin",
@@ -2607,7 +2890,8 @@
       "category": "news",
       "description": "Humane lanza AI Pin: dispositivo IA portátil con proyección láser.",
       "url": "https://humane.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "rabbit-r1",
@@ -2616,7 +2900,8 @@
       "category": "news",
       "description": "Rabbit lanza R1: dispositivo IA con Large Action Model.",
       "url": "https://www.rabbit.tech/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "eu-ai-act",
@@ -2625,7 +2910,8 @@
       "category": "news",
       "description": "Unión Europea aprueba el AI Act: primera regulación global de IA.",
       "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "github-copilot-free",
@@ -2634,7 +2920,8 @@
       "category": "news",
       "description": "GitHub ofrece Copilot gratis para desarrolladores individuales.",
       "url": "https://github.com/features/copilot#free",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "cursor-ai-editor",
@@ -2643,7 +2930,8 @@
       "category": "news",
       "description": "Cursor se convierte en el editor IA más popular, superando a VS Code en crecimiento.",
       "url": "https://www.cursor.sh/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "bolt-new-launch",
@@ -2652,7 +2940,8 @@
       "category": "news",
       "description": "StackBlitz lanza Bolt.new: generar apps completas con IA en el navegador.",
       "url": "https://bolt.new/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "v0-launch",
@@ -2661,7 +2950,8 @@
       "category": "news",
       "description": "Vercel lanza v0: generador de interfaces UI con IA.",
       "url": "https://v0.dev/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "google-venus",
@@ -2670,7 +2960,8 @@
       "category": "news",
       "description": "Google lanza Gemini Live: conversación de voz natural con IA.",
       "url": "https://blog.google/products/gemini/google-gemini-live/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "openai-realtime",
@@ -2679,7 +2970,8 @@
       "category": "news",
       "description": "OpenAI lanza Realtime API: voz y visión en tiempo real para apps.",
       "url": "https://openai.com/index/realtime-api/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "anthropic-computer-use",
@@ -2688,7 +2980,8 @@
       "category": "news",
       "description": "Anthropic lanza Computer Use: Claude controla tu ordenador.",
       "url": "https://www.anthropic.com/news/3-5-sonnet-computer-use",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "openai-searchgpt",
@@ -2697,7 +2990,8 @@
       "category": "news",
       "description": "OpenAI anuncia SearchGPT: motor de búsqueda con IA conversacional.",
       "url": "https://openai.com/index/searchgpt-prototype/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "apple-mac-mini-m4",
@@ -2706,7 +3000,8 @@
       "category": "news",
       "description": "Apple lanza Mac mini M4: el Mac más pequeño y potente.",
       "url": "https://www.apple.com/mac-mini/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "surface-laptop-7",
@@ -2715,7 +3010,8 @@
       "category": "news",
       "description": "Microsoft Surface Laptop 7 con chip Snapdragon X y Copilot+.",
       "url": "https://www.microsoft.com/surface/devices/surface-laptop-7th-edition",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "samsung-galaxy-z-fold6",
@@ -2724,7 +3020,8 @@
       "category": "news",
       "description": "Samsung Galaxy Z Fold 6: plegable más delgado con Galaxy AI.",
       "url": "https://www.samsung.com/galaxy-z-fold6/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "oneplus-13",
@@ -2733,7 +3030,8 @@
       "category": "news",
       "description": "OnePlus 13 con Snapdragon 8 Elite y 6000mAh.",
       "url": "https://www.oneplus.com/13",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "nvidia-rtx-50",
@@ -2742,7 +3040,8 @@
       "category": "news",
       "description": "NVIDIA presenta RTX 5090: Blackwell para gaming con DLSS 4.",
       "url": "https://www.nvidia.com/geforce/rtx-5090/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "iphone-se-4",
@@ -2751,7 +3050,8 @@
       "category": "news",
       "description": "Apple lanza iPhone SE 4: primer SE con Face ID y chip A18.",
       "url": "https://www.apple.com/iphone-se/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "microsoft-copilot-2025",
@@ -2760,7 +3060,8 @@
       "category": "news",
       "description": "Microsoft renueva Copilot: agente autónomo para empresas.",
       "url": "https://www.microsoft.com/copilot",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "google-gemini-25",
@@ -2769,7 +3070,8 @@
       "category": "news",
       "description": "Google lanza Gemini 2.5 Pro: thinking model con 1M contexto.",
       "url": "https://deepmind.google/technologies/gemini/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "openai-gpt-45",
@@ -2778,7 +3080,8 @@
       "category": "news",
       "description": "OpenAI lanza GPT-4.5: modelo más grande y capaz de OpenAI.",
       "url": "https://openai.com/index/gpt-4-5/",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "claude-3-7-sonnet",
@@ -2787,7 +3090,8 @@
       "category": "news",
       "description": "Anthropic lanza Claude 3.7 Sonnet: thinking extensible y más rápido.",
       "url": "https://www.anthropic.com/news/claude-3-7-sonnet",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "xiaomi-15",
@@ -2796,7 +3100,8 @@
       "category": "news",
       "description": "Xiaomi 15 con Snapdragon 8 Elite y Leica optics.",
       "url": "https://www.mi.com/global/product/xiaomi-15/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "meta-quest-3s",
@@ -2805,7 +3110,8 @@
       "category": "news",
       "description": "Meta lanza Quest 3S: RV accesible desde $299.",
       "url": "https://www.meta.com/quest/quest-3s/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "apple-intelligence-2025",
@@ -2814,7 +3120,8 @@
       "category": "news",
       "description": "Apple amplía Apple Intelligence a más idiomas y dispositivos.",
       "url": "https://www.apple.com/apple-intelligence/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "tesla-robotaxi",
@@ -2823,7 +3130,8 @@
       "category": "news",
       "description": "Tesla presenta Cybercab: taxi autónomo sin volante.",
       "url": "https://www.tesla.com/AI",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "waymo-expansion",
@@ -2832,7 +3140,8 @@
       "category": "news",
       "description": "Waymo expande coches autónomos a San Francisco, LA y Phoenix.",
       "url": "https://waymo.com/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "spacex-starship",
@@ -2841,7 +3150,8 @@
       "category": "news",
       "description": "SpaceX logra primer aterrizaje del Starship, cohete más grande jamás construido.",
       "url": "https://www.spacex.com/starship",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "eu-dsa",
@@ -2850,7 +3160,8 @@
       "category": "news",
       "description": "Unión Europea activa el Digital Services Act: regulación de plataformas digitales.",
       "url": "https://digital-strategy.ec.europa.eu/en/policies/digital-services-act-package",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "nvidia-nim",
@@ -2859,7 +3170,8 @@
       "category": "news",
       "description": "NVIDIA lanza NIM: microservicios optimizados para inferencia IA.",
       "url": "https://www.nvidia.com/en-us/ai/",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "huggingface-smol",
@@ -2868,7 +3180,8 @@
       "category": "news",
       "description": "Hugging Face lanza SmolLM: modelos pequeños para edge devices.",
       "url": "https://huggingface.co/HuggingFaceTB",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "ollama-04",
@@ -2877,7 +3190,8 @@
       "category": "news",
       "description": "Ollama 0.4: soporte para vision models y multimodal local.",
       "url": "https://ollama.com/blog/vision-models",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "perplexity-pro",
@@ -2886,7 +3200,8 @@
       "category": "news",
       "description": "Perplexity lanza Pro: búsqueda IA con fuentes verificadas.",
       "url": "https://www.perplexity.ai/pro",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-microsoft-founded",
@@ -2895,7 +3210,8 @@
       "category": "news",
       "description": "Bill Gates y Paul Allen fundan Microsoft para desarrollar software para el Altair 8800.",
       "url": "https://en.wikipedia.org/wiki/Microsoft",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-apple-founded",
@@ -2904,7 +3220,8 @@
       "category": "news",
       "description": "Steve Jobs, Steve Wozniak y Ronald Wayne fundan Apple en un garaje de Los Altos.",
       "url": "https://en.wikipedia.org/wiki/Apple_Inc.",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-intel-8086",
@@ -2913,7 +3230,8 @@
       "category": "news",
       "description": "Intel lanza el 8086, primer procesador de la familia x86 que dominará el mundo.",
       "url": "https://en.wikipedia.org/wiki/Intel_8086",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-ibm-pc",
@@ -2922,7 +3240,8 @@
       "category": "news",
       "description": "IBM presenta el Personal Computer. Estándar de facto de la informática personal.",
       "url": "https://en.wikipedia.org/wiki/IBM_Personal_Computer",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-macintosh-launch",
@@ -2931,7 +3250,8 @@
       "category": "news",
       "description": "El Macintosh llega a las tiendas con el famoso anuncio '1984' de Ridley Scott.",
       "url": "https://en.wikipedia.org/wiki/Macintosh_128K",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-windows-1",
@@ -2940,7 +3260,8 @@
       "category": "news",
       "description": "Microsoft lanza Windows 1.0, interfaz gráfica sobre MS-DOS.",
       "url": "https://en.wikipedia.org/wiki/Windows_1.0",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-nsfnet",
@@ -2949,7 +3270,8 @@
       "category": "news",
       "description": "NSFNET conecta universidades de EE.UU., precursora de Internet moderna.",
       "url": "https://en.wikipedia.org/wiki/National_Science_Foundation_Network",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-mosaic",
@@ -2958,7 +3280,8 @@
       "category": "news",
       "description": "Mosaic: el primer navegador web popular que cambia Internet para siempre.",
       "url": "https://en.wikipedia.org/wiki/Mosaic_(web_browser)",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-amazon-founded",
@@ -2967,7 +3290,8 @@
       "category": "news",
       "description": "Jeff Bezos funda Amazon como librería online desde su garaje.",
       "url": "https://en.wikipedia.org/wiki/Amazon_(company)",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-netscape-ipo",
@@ -2976,7 +3300,8 @@
       "category": "news",
       "description": "Netscape se hace público. El browser war empieza. Internet explota.",
       "url": "https://en.wikipedia.org/wiki/Netscape",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-bombilla",
@@ -2985,7 +3310,8 @@
       "category": "news",
       "description": "Yahoo! (1994) y AltaVista (1995) popularizan los buscadores web.",
       "url": "https://en.wikipedia.org/wiki/Yahoo!",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-napster-launch",
@@ -2994,7 +3320,8 @@
       "category": "news",
       "description": "Napster revoluciona la distribución de música con peer-to-peer.",
       "url": "https://en.wikipedia.org/wiki/Napster",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-dotcom-crash",
@@ -3003,7 +3330,8 @@
       "category": "news",
       "description": "El NASDAQ se desploma. Miles de startups cierran. El mundo tech cambia para siempre.",
       "url": "https://en.wikipedia.org/wiki/Dot-com_bubble",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-wikipedia",
@@ -3012,7 +3340,8 @@
       "category": "news",
       "description": "Jimmy Wales lanza Wikipedia, la enciclopedia libre que cambia el conocimiento.",
       "url": "https://en.wikipedia.org/wiki/Wikipedia",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-myspace",
@@ -3021,7 +3350,8 @@
       "category": "news",
       "description": "MySpace se convierte en la red social más grande, superando a Google.",
       "url": "https://en.wikipedia.org/wiki/Myspace",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-firefox-launch",
@@ -3030,7 +3360,8 @@
       "category": "news",
       "description": "Firefox 1.0 desafía a Internet Explorer. El browser war regresa.",
       "url": "https://en.wikipedia.org/wiki/Firefox",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-youtube-launch",
@@ -3039,7 +3370,8 @@
       "category": "news",
       "description": "YouTube cambia para siempre cómo consumimos vídeo en Internet.",
       "url": "https://en.wikipedia.org/wiki/YouTube",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-aws-ec2",
@@ -3048,7 +3380,8 @@
       "category": "news",
       "description": "Amazon lanza EC2 y S3. La nube empieza. El cloud computing nace.",
       "url": "https://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-iphone-launch",
@@ -3057,7 +3390,8 @@
       "category": "news",
       "description": "Steve Jobs presenta el iPhone. 'Un iPod, un teléfono, un dispositivo de Internet'.",
       "url": "https://en.wikipedia.org/wiki/iPhone_(1st_generation)",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-android-launch",
@@ -3066,7 +3400,8 @@
       "category": "news",
       "description": "Google lanza Android. El sistema operativo móvil más usado del mundo nace.",
       "url": "https://en.wikipedia.org/wiki/Android_(operating_system)",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-app-store",
@@ -3075,7 +3410,8 @@
       "category": "news",
       "description": "Apple abre la App Store. La economía de apps mueve miles de millones.",
       "url": "https://en.wikipedia.org/wiki/App_Store_(iOS)",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-bitcoin-paper",
@@ -3084,7 +3420,8 @@
       "category": "news",
       "description": "Satoshi Nakamoto publica el whitepaper de Bitcoin. La blockchain nace.",
       "url": "https://en.wikipedia.org/wiki/Bitcoin",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-instagram-launch",
@@ -3093,7 +3430,8 @@
       "category": "news",
       "description": "Instagram lanza y alcanza 1M de usuarios en 2 meses.",
       "url": "https://en.wikipedia.org/wiki/Instagram",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-ipad-launch",
@@ -3102,7 +3440,8 @@
       "category": "news",
       "description": "Apple presenta el iPad. La tableta moderna llega al mercado.",
       "url": "https://en.wikipedia.org/wiki/iPad_(1st_generation)",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-watson-jeopardy",
@@ -3111,7 +3450,8 @@
       "category": "news",
       "description": "IBM Watson vence a humanos en Jeopardy. La IA sale de los laboratorios.",
       "url": "https://en.wikipedia.org/wiki/Watson_(artificial_intelligence)",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-dropbox-unicorn",
@@ -3120,7 +3460,8 @@
       "category": "news",
       "description": "Dropbox alcanza $4B de valoración. La era de los startups unicornio empieza.",
       "url": "https://en.wikipedia.org/wiki/Dropbox",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-tesla-model-s",
@@ -3129,7 +3470,8 @@
       "category": "news",
       "description": "Tesla lanza el Model S. Los coches eléctricos se vuelven cool.",
       "url": "https://en.wikipedia.org/wiki/Tesla_Model_S",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-ps4",
@@ -3138,7 +3480,8 @@
       "category": "news",
       "description": "Sony lanza PS4, dominando la consola de nueva generación.",
       "url": "https://en.wikipedia.org/wiki/PlayStation_4",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-docker-conainers",
@@ -3147,7 +3490,8 @@
       "category": "news",
       "description": "Docker populariza los contenedores. DevOps cambia para siempre.",
       "url": "https://en.wikipedia.org/wiki/Docker_(software)",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-flappy-bird",
@@ -3156,7 +3500,8 @@
       "category": "news",
       "description": "Flappy Bird se viraliza y su creador lo retira. El mobile gaming explota.",
       "url": "https://en.wikipedia.org/wiki/Flappy_Bird",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-apple-watch",
@@ -3165,7 +3510,8 @@
       "category": "news",
       "description": "Apple presenta Apple Watch. Los smartwatches llegan al mainstream.",
       "url": "https://en.wikipedia.org/wiki/Apple_Watch",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-christmas-day-outage",
@@ -3174,7 +3520,8 @@
       "category": "news",
       "description": "Hackers Anonymous tumban PSN y Xbox Live en Navidad.",
       "url": "https://en.wikipedia.org/wiki/PlayStation_Network",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-tesla-autopilot",
@@ -3183,7 +3530,8 @@
       "category": "news",
       "description": "Tesla lanza Autopilot: conducción asistida con IA.",
       "url": "https://en.wikipedia.org/wiki/Tesla_Autopilot",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-alphago",
@@ -3192,7 +3540,8 @@
       "category": "news",
       "description": "DeepMind AlphaGo vence al campeón mundial de Go. La IA supera a humanos.",
       "url": "https://en.wikipedia.org/wiki/AlphaGo_v_Lee_Sedol",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-pokemon-go",
@@ -3201,7 +3550,8 @@
       "category": "news",
       "description": "Pokémon GO se viraliza. AR llega al mainstream. 500M de descargas.",
       "url": "https://en.wikipedia.org/wiki/Pok%C3%A9mon_Go",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-snapchat-ipo",
@@ -3210,7 +3560,8 @@
       "category": "news",
       "description": "Snap se hace público. Las stories dominan las redes sociales.",
       "url": "https://en.wikipedia.org/wiki/Snap_Inc.",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-bitcoin-20k",
@@ -3219,7 +3570,8 @@
       "category": "news",
       "description": "Bitcoin alcanza los $20.000. La fiebre del bitcoin llega al mainstream.",
       "url": "https://en.wikipedia.org/wiki/History_of_bitcoin",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-gdpr",
@@ -3228,7 +3580,8 @@
       "category": "news",
       "description": "El RGPD europeo entra en vigor. La privacidad de datos cambia para siempre.",
       "url": "https://en.wikipedia.org/wiki/General_Data_Protection_Regulation",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-fortnite",
@@ -3237,7 +3590,8 @@
       "category": "news",
       "description": "Fortnite alcanza 200M de jugadores. Los battle royale dominan.",
       "url": "https://en.wikipedia.org/wiki/Fortnite",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-5g-rollout",
@@ -3246,7 +3600,8 @@
       "category": "news",
       "description": "Corea del Sur lanza 5G comercial. La nueva generación de red empieza.",
       "url": "https://en.wikipedia.org/wiki/5G",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-tiktok-explosion",
@@ -3255,7 +3610,8 @@
       "category": "news",
       "description": "TikTok supera 1.500M de descargas. Los vídeos cortos dominan.",
       "url": "https://en.wikipedia.org/wiki/TikTok",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-covid-remote",
@@ -3264,7 +3620,8 @@
       "category": "news",
       "description": "La pandemia obliga al trabajo remoto. Zoom crece 30x. El mundo digitaliza.",
       "url": "https://en.wikipedia.org/wiki/COVID-19_pandemic",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-clubhouse",
@@ -3273,7 +3630,8 @@
       "category": "news",
       "description": "Clubhouse explota con audio en vivo. Twitter Spaces copia la idea.",
       "url": "https://en.wikipedia.org/wiki/Clubhouse_(app)",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-nft-boom",
@@ -3282,7 +3640,8 @@
       "category": "news",
       "description": "Beeple vende un NFT por $69M. Los NFTs llegan al mainstream.",
       "url": "https://en.wikipedia.org/wiki/Non-fungible_token",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-facebook-meta",
@@ -3291,7 +3650,8 @@
       "category": "news",
       "description": "Facebook cambia su nombre a Meta. El metaverso se convierte en buzzword.",
       "url": "https://en.wikipedia.org/wiki/Meta_Platforms",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-chip-shortage",
@@ -3300,7 +3660,8 @@
       "category": "news",
       "description": "La escasez de semiconductores para chips afecta a coches y electrónica global.",
       "url": "https://en.wikipedia.org/wiki/2020s_global_chip_shortage",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-twitter-sale",
@@ -3309,7 +3670,8 @@
       "category": "news",
       "description": "Elon Musk compra Twitter por $44B. La red social más polémica cambia de dueño.",
       "url": "https://en.wikipedia.org/wiki/Acquisition_of_Twitter_by_Elon_Musk",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-chatgpt-launch",
@@ -3318,7 +3680,8 @@
       "category": "news",
       "description": "OpenAI lanza ChatGPT. 100M de usuarios en 2 meses. La IA llega al mainstream.",
       "url": "https://en.wikipedia.org/wiki/ChatGPT",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-stable-diffusion",
@@ -3327,7 +3690,8 @@
       "category": "news",
       "description": "Stability AI lanza Stable Diffusion: generación de imágenes open source.",
       "url": "https://en.wikipedia.org/wiki/Stable_Diffusion",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-altair-8800",
@@ -3336,7 +3700,8 @@
       "category": "news",
       "description": "MITS lanza el Altair 8800. La revolución del PC personal empieza.",
       "url": "https://en.wikipedia.org/wiki/Altair_8800",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-apple-II-success",
@@ -3345,7 +3710,8 @@
       "category": "news",
       "description": "El Apple II se convierte en el PC doméstico más vendido. VisiCalc llega.",
       "url": "https://en.wikipedia.org/wiki/Apple_II",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-cpm",
@@ -3354,7 +3720,8 @@
       "category": "news",
       "description": "CP/M es el SO estándar antes de MS-DOS. Gary Kildall pierde el contrato con IBM.",
       "url": "https://en.wikipedia.org/wiki/CP/M",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-msdos-ibm",
@@ -3363,7 +3730,8 @@
       "category": "news",
       "description": "Microsoft vende MS-DOS a IBM por $50.000. El mayor negocio de la historia.",
       "url": "https://en.wikipedia.org/wiki/MS-DOS",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-compact-portable",
@@ -3372,7 +3740,8 @@
       "category": "news",
       "description": "Compaq lanza el primer PC compatible con IBM. La industria del clone empieza.",
       "url": "https://en.wikipedia.org/wiki/Compaq_Portable",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-amiga-launch",
@@ -3381,7 +3750,8 @@
       "category": "news",
       "description": "El Commodore Amiga revoluciona multimedia: vídeo, sonido y gráficos avanzados.",
       "url": "https://en.wikipedia.org/wiki/Amiga",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-super-mario",
@@ -3390,7 +3760,8 @@
       "category": "news",
       "description": "Nintendo lanza Super Mario Bros. El gaming popular conquista el mundo.",
       "url": "https://en.wikipedia.org/wiki/Super_Mario_Bros.",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-geoCities",
@@ -3399,7 +3770,8 @@
       "category": "news",
       "description": "GeoCities permite a cualquiera crear su página web. La web 1.0 popular.",
       "url": "https://en.wikipedia.org/wiki/GeoCities",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-ie4",
@@ -3408,7 +3780,8 @@
       "category": "news",
       "description": "Microsoft integra IE4 en Windows. El browser war contra Netscape se intensifica.",
       "url": "https://en.wikipedia.org/wiki/Internet_Explorer_4",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-google-founded",
@@ -3417,7 +3790,8 @@
       "category": "news",
       "description": "Larry Page y Sergey Brin fundan Google en un garaje de Stanford.",
       "url": "https://en.wikipedia.org/wiki/Google",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-palm-pilot",
@@ -3426,7 +3800,8 @@
       "category": "news",
       "description": "Palm lanza el Pilot: el PDA que populariza la informática portátil.",
       "url": "https://en.wikipedia.org/wiki/Palm_Pilot",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-xbox-launch",
@@ -3435,7 +3810,8 @@
       "category": "news",
       "description": "Microsoft entra en la consola con Xbox. Halo cambia el gaming.",
       "url": "https://en.wikipedia.org/wiki/Xbox_(console)",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-2001-space",
@@ -3444,7 +3820,8 @@
       "category": "news",
       "description": "Apple lanza Mac OS X: Unix para consumidores. El Mac moderno nace.",
       "url": "https://en.wikipedia.org/wiki/MacOS",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-skype",
@@ -3453,7 +3830,8 @@
       "category": "news",
       "description": "Skype populariza las llamadas VoIP gratuitas. Las telecom cambian.",
       "url": "https://en.wikipedia.org/wiki/Skype",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-nintendo-ds",
@@ -3462,7 +3840,8 @@
       "category": "news",
       "description": "Nintendo DS con pantallas táctiles. El gaming portátil se reinventa.",
       "url": "https://en.wikipedia.org/wiki/Nintendo_DS",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-google-maps",
@@ -3471,7 +3850,8 @@
       "category": "news",
       "description": "Google lanza Maps. Los mapas digitales cambian la navegación.",
       "url": "https://en.wikipedia.org/wiki/Google_Maps",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-web-2-0",
@@ -3480,7 +3860,8 @@
       "category": "news",
       "description": "Tim O'Reilly acuña 'Web 2.0'. AJAX, blogs, wikis y redes sociales.",
       "url": "https://en.wikipedia.org/wiki/Web_2.0",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-wii-launch",
@@ -3489,7 +3870,8 @@
       "category": "news",
       "description": "Nintendo Wii revoluciona el gaming con controles de movimiento.",
       "url": "https://en.wikipedia.org/wiki/Wii",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-kindle",
@@ -3498,7 +3880,8 @@
       "category": "news",
       "description": "Amazon lanza Kindle. Los e-readers llegan al mainstream.",
       "url": "https://en.wikipedia.org/wiki/Amazon_Kindle",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-netflix-streaming",
@@ -3507,7 +3890,8 @@
       "category": "news",
       "description": "Netflix empieza streaming. El fin del DVD y el nacimiento del streaming.",
       "url": "https://en.wikipedia.org/wiki/Netflix",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-spotify-launch",
@@ -3516,7 +3900,8 @@
       "category": "news",
       "description": "Spotify lanza en Suecia. El streaming de música cambia la industria.",
       "url": "https://en.wikipedia.org/wiki/Spotify",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-obama-campaign",
@@ -3525,7 +3910,8 @@
       "category": "news",
       "description": "La campaña de Obama usa Facebook y Twitter. Las redes llegan a la política.",
       "url": "https://en.wikipedia.org/wiki/Barack_Obama_2008_presidential_campaign",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-ipad-tablet",
@@ -3534,7 +3920,8 @@
       "category": "news",
       "description": "El iPad crea la categoría de tablet. Competidores aparecen en meses.",
       "url": "https://en.wikipedia.org/wiki/iPad_(1st_generation)",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-path-angry-birds",
@@ -3543,7 +3930,8 @@
       "category": "news",
       "description": "Angry Birds se descarga 10M de veces. Los juegos móviles explotan.",
       "url": "https://en.wikipedia.org/wiki/Angry_Birds",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-instagram-1m",
@@ -3552,7 +3940,8 @@
       "category": "news",
       "description": "Instagram alcanza 1M de usuarios en 2 meses. La era del social visual.",
       "url": "https://en.wikipedia.org/wiki/Instagram",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-siri",
@@ -3561,7 +3950,8 @@
       "category": "news",
       "description": "Apple integra Siri. Los asistentes de voz llegan a los móviles.",
       "url": "https://en.wikipedia.org/wiki/Siri",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-linkedin-ipo",
@@ -3570,7 +3960,8 @@
       "category": "news",
       "description": "LinkedIn se hace público. Las redes sociales profesionales se validan.",
       "url": "https://en.wikipedia.org/wiki/LinkedIn",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-kickstarter",
@@ -3579,7 +3970,8 @@
       "category": "news",
       "description": "Kickstarter financia proyectos masivamente. El crowdfunding llega al mainstream.",
       "url": "https://en.wikipedia.org/wiki/Kickstarter",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-google-glass",
@@ -3588,7 +3980,8 @@
       "category": "news",
       "description": "Google presenta Glass. Los wearables llegan, pero fracasan con el público.",
       "url": "https://en.wikipedia.org/wiki/Google_Glass",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-tesla-supercharger",
@@ -3597,7 +3990,8 @@
       "category": "news",
       "description": "Tesla construye la red de supercargadores. Los coches eléctricos son viables.",
       "url": "https://en.wikipedia.org/wiki/Tesla_Supercharger",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-minecraft",
@@ -3606,7 +4000,8 @@
       "category": "news",
       "description": "Minecraft sale de beta. El juego indie más vendido de la historia.",
       "url": "https://en.wikipedia.org/wiki/Minecraft",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-snapchat-stories",
@@ -3615,7 +4010,8 @@
       "category": "news",
       "description": "Snapchat inventa las Stories. Instagram y Facebook las copian.",
       "url": "https://en.wikipedia.org/wiki/Snapchat",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-uber-launch",
@@ -3624,7 +4020,8 @@
       "category": "news",
       "description": "Uber lanza en San Francisco. La economía gig empieza.",
       "url": "https://en.wikipedia.org/wiki/Uber",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-whatsapp-facebook",
@@ -3633,7 +4030,8 @@
       "category": "news",
       "description": "Facebook paga $19B por WhatsApp. La mayor adquisición de una app.",
       "url": "https://en.wikipedia.org/wiki/Facebook_acquisition_of_WhatsApp",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-amazon-echo",
@@ -3642,7 +4040,8 @@
       "category": "news",
       "description": "Amazon lanza Echo con Alexa. Los asistentes inteligentes llegan a casa.",
       "url": "https://en.wikipedia.org/wiki/Amazon_Echo",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-slack-launch",
@@ -3651,7 +4050,8 @@
       "category": "news",
       "description": "Slack revoluciona la comunicación en equipo. Los chats de empresa cambian.",
       "url": "https://en.wikipedia.org/wiki/Slack_(software)",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-apple-music",
@@ -3660,7 +4060,8 @@
       "category": "news",
       "description": "Apple lanza Apple Music. Spotify ahora tiene competencia real.",
       "url": "https://en.wikipedia.org/wiki/Apple_Music",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-uber-autonomous",
@@ -3669,7 +4070,8 @@
       "category": "news",
       "description": "Uber prueba coches autónomos en Pittsburgh. La carrera AV se intensifica.",
       "url": "https://en.wikipedia.org/wiki/Uber#Autonomous_vehicles",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-ico-boom",
@@ -3678,7 +4080,8 @@
       "category": "news",
       "description": "Las ICO recaudan miles de millones. La burbuja cripto crece.",
       "url": "https://en.wikipedia.org/wiki/Initial_coin_offering",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-faceid",
@@ -3687,7 +4090,8 @@
       "category": "news",
       "description": "Apple presenta Face ID. El reconocimiento facial reemplaza Touch ID.",
       "url": "https://en.wikipedia.org/wiki/Face_ID",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-fortnite-crossplay",
@@ -3696,7 +4100,8 @@
       "category": "news",
       "description": "Fortnite logra crossplay entre todas las plataformas. El gaming se une.",
       "url": "https://en.wikipedia.org/wiki/Fortnite",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-quantum-supremacy",
@@ -3705,7 +4110,8 @@
       "category": "news",
       "description": "Google logra supremacy cuántica con Sycamore. 200 segundos vs 10.000 años.",
       "url": "https://en.wikipedia.org/wiki/Quantum_supremacy",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-zoom-boom",
@@ -3714,7 +4120,8 @@
       "category": "news",
       "description": "Zoom pasa de 10M a 300M usuarios. Videoconferencias se vuelven normales.",
       "url": "https://en.wikipedia.org/wiki/Zoom_(software)",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-gme-short-squeeze",
@@ -3723,7 +4130,8 @@
       "category": "news",
       "description": "Reddit vs Wall Street. GameStop sube 1.700%. Los memes mueven mercados.",
       "url": "https://en.wikipedia.org/wiki/GameStop_short_squeeze",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-intel-4004-chip",
@@ -3732,7 +4140,8 @@
       "category": "news",
       "description": "Intel presenta el 4004: el primer microprocesador comercial del mundo.",
       "url": "https://en.wikipedia.org/wiki/Intel_4004",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-atari-pong",
@@ -3741,7 +4150,8 @@
       "category": "news",
       "description": "Atari lanza Pong. Los videojuegos comerciales nacen.",
       "url": "https://en.wikipedia.org/wiki/Pong",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-motorola-dynatac",
@@ -3750,7 +4160,8 @@
       "category": "news",
       "description": "Motorola DynaTAC: la primera llamada de teléfono móvil de la historia.",
       "url": "https://en.wikipedia.org/wiki/Motorola_DynaTAC",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-visicalc",
@@ -3759,7 +4170,8 @@
       "category": "news",
       "description": "VisiCalc: la primera hoja de cálculo. El Apple II se vuelve imprescindible.",
       "url": "https://en.wikipedia.org/wiki/VisiCalc",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-commodore-64",
@@ -3768,7 +4180,8 @@
       "category": "news",
       "description": "Commodore 64: el PC doméstico más vendido de la historia (17M unidades).",
       "url": "https://en.wikipedia.org/wiki/Commodore_64",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-nsfnet-1987",
@@ -3777,7 +4190,8 @@
       "category": "news",
       "description": "NSFNET amplía su backbone a T1. Internet crece entre universidades.",
       "url": "https://en.wikipedia.org/wiki/National_Science_Foundation_Network",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-worldwide-web-1989",
@@ -3786,7 +4200,8 @@
       "category": "news",
       "description": "Tim Berners-Lee propone la World Wide Web en el CERN.",
       "url": "https://en.wikipedia.org/wiki/World_Wide_Web",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-nsfnet-1990",
@@ -3795,7 +4210,8 @@
       "category": "news",
       "description": "ARPANET se retira. NSFNET se convierte en la columna vertebral de Internet.",
       "url": "https://en.wikipedia.org/wiki/NSFNET",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-linux-1991",
@@ -3804,7 +4220,8 @@
       "category": "news",
       "description": "Linus Torvalds publica Linux en comp.os.minix. El kernel open source nace.",
       "url": "https://en.wikipedia.org/wiki/Linux",
-      "importance": 3
+      "importance": 3,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-amiga-1992",
@@ -3813,7 +4230,8 @@
       "category": "news",
       "description": "El Amiga domina multimedia: vídeo, audio y gráficos superiores a PC.",
       "url": "https://en.wikipedia.org/wiki/Amiga",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-web-netscape-1996",
@@ -3822,7 +4240,8 @@
       "category": "news",
       "description": "Netscape Navigator domina los navegadores con 80% de cuota.",
       "url": "https://en.wikipedia.org/wiki/Netscape_Navigator",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-xbox-live-2002",
@@ -3831,7 +4250,8 @@
       "category": "news",
       "description": "Microsoft lanza Xbox Live. El gaming online en consola empieza.",
       "url": "https://en.wikipedia.org/wiki/Xbox_Live",
-      "importance": 1
+      "importance": 1,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-apollo-13",
@@ -3840,7 +4260,8 @@
       "category": "news",
       "description": "NASA Apollo 13: 'Houston, we've got a problem'. La tecnología salva vidas.",
       "url": "https://en.wikipedia.org/wiki/Apollo_13",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-magnavox-odyssey",
@@ -3849,7 +4270,8 @@
       "category": "news",
       "description": "Nolan Bushnell funda Atari. Los videojuegos industriales nacen.",
       "url": "https://en.wikipedia.org/wiki/Atari",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-neo-geo",
@@ -3858,7 +4280,8 @@
       "category": "news",
       "description": "Nintendo lanza Game Boy. Tetris y Pokémon conquistan el mundo portátil.",
       "url": "https://en.wikipedia.org/wiki/Game_Boy",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     },
     {
       "id": "news-morris-worm",
@@ -3867,7 +4290,8 @@
       "category": "news",
       "description": "El Morris Worm: primer gusano de Internet. 6000 ordenadores infectados. La ciberseguridad importa.",
       "url": "https://en.wikipedia.org/wiki/Morris_worm",
-      "importance": 2
+      "importance": 2,
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
     }
   ]
 }

@@ -21,9 +21,10 @@ import edge_tts
 import requests
 from google import genai
 
-from scripts.utils.cache import CacheManager, FileCache
-from scripts.utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_TTS_VOZ_EN, TELEGRAM_DASHBOARD_URL, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY, TS_KEY, NOTICIAS_FILENAME, TELEGRAM_SENT_FILENAME, TELEGRAM_VOICE_SENT_FILENAME, LOGS_DIR, LOG_FILES, FUENTES_INGLES
-from scripts.utils.common import load_json, save_json
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.cache import CacheManager, FileCache
+from utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_TTS_VOZ_EN, TELEGRAM_DASHBOARD_URL, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY, TS_KEY, NOTICIAS_FILENAME, TELEGRAM_SENT_FILENAME, TELEGRAM_VOICE_SENT_FILENAME, LOGS_DIR, LOG_FILES, FUENTES_INGLES
+from utils.common import load_json, save_json
 
 os.makedirs(LOGS_DIR, exist_ok=True)
 logging.basicConfig(
@@ -303,6 +304,8 @@ async def run():
 
     # Filtrar noticias recientes (últimas 24h) y que no estén en caché
     from datetime import timedelta
+import sys
+from pathlib import Path
     cutoff = datetime.now() - timedelta(hours=24)
     recientes = []
     for n in historial:

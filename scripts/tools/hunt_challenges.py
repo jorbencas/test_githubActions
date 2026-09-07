@@ -10,15 +10,16 @@ from datetime import datetime
 from google import genai
 from slugify import slugify
 
-from scripts.utils.constants_retos import (
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.constants_retos import (
     CONFIG,
     WEBS_RETOS,
     RETO_MD_TEMPLATE,
     PROMPT_IMAGEN_TEMPLATE_RETO
 )
-from scripts.utils.utils_retos import obtener_solucion_ia, generar_imagen_noticia, traducir_titulos_ia
+from utils.utils_retos import obtener_solucion_ia, generar_imagen_noticia, traducir_titulos_ia
 try:
-    from scripts.solutions.solutions_db import lookup as db_lookup, generate_generic
+    from solutions.solutions_db import lookup as db_lookup, generate_generic
 except ImportError:
     def db_lookup(titulo, lang):
         return None
@@ -278,5 +279,6 @@ async def hunt(offline=False):
 
 if __name__ == "__main__":
     import sys
+from pathlib import Path
     is_offline = "--offline" in sys.argv
     asyncio.run(hunt(offline=is_offline))

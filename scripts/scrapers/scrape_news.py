@@ -17,9 +17,10 @@ from logging.handlers import RotatingFileHandler
 
 import aiohttp
 
-from scripts.utils.constants_downloadfile import CONFIG, FUENTES, YT_KEY, URL_KEY, TIPO_KEY, QUICK_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY, ID_VIDEO_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES
-from scripts.scrapers.scraper_base import ScraperPro
-from scripts.utils.common import load_json, save_json, traducir_titulos_ia, deduplicar_items
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.constants_downloadfile import CONFIG, FUENTES, YT_KEY, URL_KEY, TIPO_KEY, QUICK_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY, ID_VIDEO_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES
+from scrapers.scraper_base import ScraperPro
+from utils.common import load_json, save_json, traducir_titulos_ia, deduplicar_items
 
 os.makedirs(LOGS_DIR, exist_ok=True)
 logging.basicConfig(
@@ -97,6 +98,8 @@ async def run():
     if nuevos:
         try:
             import google.genai as genai
+import sys
+from pathlib import Path
 
             client_tr = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
             nuevos = await traducir_titulos_ia(nuevos, client_tr)

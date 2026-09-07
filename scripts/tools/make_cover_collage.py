@@ -37,7 +37,8 @@ for i, a in enumerate(list(__import__("sys").argv)):
 ROOT = Path(_argv_blog_path).resolve() if _argv_blog_path else Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from scripts.tools.fix_images import compress_and_save_adaptive, IMG_DIR, SIZES, slugify
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from tools.fix_images import compress_and_save_adaptive, IMG_DIR, SIZES, slugify
 
 CANVAS_W = 1400
 CANVAS_H = 900
@@ -289,6 +290,7 @@ class DevServerRouteProvider(SourceProvider):
         try:
             # Wait for server to be ready
             import socket
+import sys
             for _ in range(60):
                 time.sleep(1)
                 try:

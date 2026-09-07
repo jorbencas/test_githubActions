@@ -23,7 +23,8 @@ try:
 except ImportError:
     pillow_avif = None
 
-from scripts.utils.constants_downloadfile import CONFIG, OPTIMIZED_CACHE_FILENAME
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.constants_downloadfile import CONFIG, OPTIMIZED_CACHE_FILENAME
 
 # ───────────────────────── Configuration ─────────────────────────
 INPUT_DIR = CONFIG.get("IMAGES_FOLDER", "images")
@@ -192,6 +193,7 @@ def optimize_svg(path, out_dir, filename):
     with open(path, "r", encoding="utf-8", errors="ignore") as f:
         content = f.read()
     import re
+import sys
     content = re.sub(r"<!--.*?-->", "", content, flags=re.DOTALL)
     content = re.sub(r"\s+", " ", content).strip()
     with open(out_path, "w", encoding="utf-8") as f: f.write(content)

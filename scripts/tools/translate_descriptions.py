@@ -19,7 +19,8 @@ import re
 import sys
 from pathlib import Path
 
-from scripts.utils.lang_es import looks_english
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.lang_es import looks_english
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 FILES_DIR = SCRIPT_DIR.parent.parent / "files"

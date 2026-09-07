@@ -16,12 +16,15 @@ from logging.handlers import RotatingFileHandler
 
 import aiohttp
 
-from scripts.utils.constants_downloadfile import (
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.constants_downloadfile import (
     CONFIG, ENLACE_KEY, TITULO_KEY, DESCRIPCION_KEY, LENGUAJE_KEY,
     ESTRELLAS_KEY, FUENTE_KEY, TIPO_KEY, TS_KEY, LOGS_DIR, LOG_FILES,
     TIPO_VAL_HERRAMIENTA,
 )
-from scripts.utils.common import load_json, save_json
+from utils.common import load_json, save_json
+import sys
+from pathlib import Path
 
 os.makedirs(LOGS_DIR, exist_ok=True)
 logging.basicConfig(

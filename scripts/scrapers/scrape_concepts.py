@@ -29,7 +29,8 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
-from scripts.utils.constants_downloadfile import (
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.constants_downloadfile import (
     CONFIG, LOGS_DIR, LOG_FILES,
     CONCEPTS_FILENAME, CONCEPTS_PATH_DEFAULT,
     CONCEPTS_MAX, CONCEPTS_PRUNE_BATCH, CONCEPTS_MIN_INTERVIEW,

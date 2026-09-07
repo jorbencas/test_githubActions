@@ -25,7 +25,10 @@ from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
 from typing import Any
 
-from scripts.utils.constants_downloadfile import ENLACE_KEY, TS_KEY
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.constants_downloadfile import ENLACE_KEY, TS_KEY
+import sys
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 

@@ -5,7 +5,10 @@ import requests
 from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from scripts.utils.constants_downloadfile import CONFIG, TIPO_KEY, ENLACE_KEY, TITULO_KEY, TS_KEY, ULTIMA_VERIF_KEY, NOTICIAS_FILENAME
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.constants_downloadfile import CONFIG, TIPO_KEY, ENLACE_KEY, TITULO_KEY, TS_KEY, ULTIMA_VERIF_KEY, NOTICIAS_FILENAME
+import sys
+from pathlib import Path
 
 
 def limpiar_y_validar_historial(historial):

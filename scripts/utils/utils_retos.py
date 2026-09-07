@@ -4,10 +4,13 @@ import re
 import asyncio
 import logging
 from slugify import slugify
-from scripts.utils.common import _generar_imagen_noticia
-from scripts.utils.constants_retos import CONFIG, PROMPT_IMAGEN_TEMPLATE_RETO
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.common import _generar_imagen_noticia
+from utils.constants_retos import CONFIG, PROMPT_IMAGEN_TEMPLATE_RETO
 try:
-    from scripts.solutions.solutions_db import lookup, generate_generic
+    from solutions.solutions_db import lookup, generate_generic
+import sys
+from pathlib import Path
 except ImportError:
     def lookup(titulo, lang):
         return None

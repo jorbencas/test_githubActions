@@ -9,7 +9,8 @@ from slugify import slugify
 from bs4 import BeautifulSoup
 import requests
 from PIL import Image
-from scripts.utils.constants_downloadfile import CONFIG, PROMPT_IMAGEN_TEMPLATE, PROMPT_RESUMIR_NOTICIA, PROMPT_RESUMIR_LOTE, PROMPT_RECAP_SEMANAL, PROMPT_TRADUCIR_TITULOS, FALLBACK_IMAGE_URL, FALLBACK_RECAP_INTRO, ORIGEN_KEY, VAL_RSS, ENLACE_KEY, TITULO_KEY, CATEGORIA_KEY, FUENTE_KEY, BADGE_KEY
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.constants_downloadfile import CONFIG, PROMPT_IMAGEN_TEMPLATE, PROMPT_RESUMIR_NOTICIA, PROMPT_RESUMIR_LOTE, PROMPT_RECAP_SEMANAL, PROMPT_TRADUCIR_TITULOS, FALLBACK_IMAGE_URL, FALLBACK_RECAP_INTRO, ORIGEN_KEY, VAL_RSS, ENLACE_KEY, TITULO_KEY, CATEGORIA_KEY, FUENTE_KEY, BADGE_KEY
 
 logger = logging.getLogger("scraper")
 
@@ -394,6 +395,7 @@ def normalizar_url(url: str) -> str:
         return ""
     # Preserve YouTube video IDs (v= param) and other query-based IDs
     from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
+import sys
     parsed = urlparse(url)
     params = parse_qs(parsed.query)
     # For YouTube, keep the v= parameter in the normalized URL

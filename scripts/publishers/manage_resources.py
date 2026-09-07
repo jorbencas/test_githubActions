@@ -13,7 +13,8 @@ from urllib.parse import urlparse
 
 from google import genai
 
-from scripts.utils.constants_downloadfile import CONFIG, BLOG_PATH_DEFAULT, HERRAMIENTAS_PATH_DEFAULT
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.constants_downloadfile import CONFIG, BLOG_PATH_DEFAULT, HERRAMIENTAS_PATH_DEFAULT
 
 RESOURCES_PER_FILE = 500
 SECTION_ID = "nuevas-herramientas"
