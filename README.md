@@ -15,13 +15,14 @@
 ![Email](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/send_email_workflow.yml?branch=master&style=flat-square&label=Email&logo=github)
 ![Telegram](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/send_telegram_workflow.yml?branch=master&style=flat-square&label=Telegram&logo=github)
 ![AI Tools](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_ai_tools.yml?branch=master&style=flat-square&label=AI%20Tools&logo=github)
+![Tips](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_tips.yml?branch=master&style=flat-square&label=Tips&logo=github)
 ![Cleanup](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/clean_news.yml?branch=master&style=flat-square&label=Cleanup&logo=github)
 ![Challenges](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/hunt_challenges.yml?branch=master&style=flat-square&label=Challenges&logo=github)
 ![Optimize](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/optimize_images.yml?branch=master&style=flat-square&label=Optimize&logo=github)
 ![Dashboard](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/dashboard_update.yml?branch=master&style=flat-square&label=Dashboard&logo=github)
 ![Tests](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/tests.yml?branch=master&style=flat-square&label=Tests&logo=github)
 
-Ecosistema de automatización tech que ejecuta **15 workflows de GitHub Actions** formando un pipeline de contenido completamente automatizado. Recolecta de **515 fuentes** (158 canales YouTube, 151 feeds RSS, 107 sitios de web scraping, 89 GitHub Topics, 8 GitHub Repos, 1 Product Hunt, 1 GitHub Collection), procesa con **IA (Gemini)** y distribuye contenido a múltiples canales.
+Ecosistema de automatización tech que ejecuta **16 workflows de GitHub Actions** formando un pipeline de contenido completamente automatizado. Recolecta de **547 fuentes** (158 canales YouTube, 161 feeds RSS, 225 sitios de web scraping, 89 GitHub Topics, 5 GitHub Repos, 1 Product Hunt), procesa con **IA (Gemini)** y distribuye contenido a múltiples canales.
 
 **Por qué existe:** Cada día aparecen decenas de noticias, vídeos y herramientas nuevas en el mundo tech. Seguir el ritmo manualmente es imposible. Este proyecto lo hace automáticamente: scrapear, procesar, traducir, generar contenido con IA y distribuirlo — todo sin intervención manual.
 
@@ -33,11 +34,11 @@ Ecosistema de automatización tech que ejecuta **15 workflows de GitHub Actions*
 
 El ecosistema funciona como una fábrica de contenido tech con 6 etapas principales:
 
-### 1. 🌐 Scraping — Recolección de datos de 515 fuentes
+### 1. 🌐 Scraping — Recolección de datos de 547 fuentes
 
 El scraping es la base de todo. Sin datos, no hay contenido que procesar. El sistema tiene **3 niveles de frecuencia**:
 
-- **Cada hora** (`scrape_hourly`): Las fuentes más rápidas (150 RSS + 43 web scraping). Estas fuentes publican noticias cada pocos minutos y necesitan estar al día.
+- **Cada hora** (`scrape_hourly`): Las fuentes más rápidas (161 RSS + 225 web scraping). Estas fuentes publican noticias cada pocos minutos y necesitan estar al día.
 - **Cada 6 horas** (`scrape_6h`): Fuentes estándar que publican menos frecuentemente. Incluye auto-detección de herramientas IA.
 - **Una vez al día** (`daily_resources`): GitHub Topics y repos. Estos cambian menos a menudo.
 
@@ -67,10 +68,10 @@ El contenido procesado se distribuye a:
 
 Cada 3 horas se envían tips de IT por Telegram:
 
-- **Tips mixtos**: 5 generados por Gemini + 5 de la base de datos estática (399 tips)
-- **Nunca repite**: tracking en `tips_history.json`
-- **Mala/Buena práctica**: contrastes prácticos con código
-- **22 categorías**: docker, git, linux, bases de datos, seguridad, programación...
+- **Tips mixtos** — Gemini genera tips frescos más 5 de la base de datos estática (708 tips)
+- **Nunca repite** — tracking en `tips_history.json`
+- **Mala/Buena práctica** — contrastes prácticos con código
+- **80 categorías** — docker, git, linux, bases de datos, seguridad, programación...
 
 ### 5. 🛠️ Herramientas IA — Auto-detección y distribución
 
@@ -93,25 +94,24 @@ Cada 3 horas se envía una imagen de saludo (Buenos días / Buenas noches):
 
 ---
 
-## 📡 Sources — 515 Total
+## 📡 Sources — 547 Total
 
 | Categoría | Cantidad | Ejemplos | Por qué |
 |-----------|----------|----------|---------|
 | YouTube channels | 158 | MoureDev, Fernando Herrera, The Engineer's Digest | Tutoriales y noticias en vídeo |
-| RSS feeds | 151 | TechCrunch, The Verge, Wired, Ars Technica | Noticias tech de primera mano |
-| Web scraping | 107 | Anthropic, Ollama, Mistral, LangChain, Mozilla Hanks | Blogs de empresas de IA |
+| RSS feeds | 161 | TechCrunch, The Verge, Wired, Ars Technica | Noticias tech de primera mano |
+| Web scraping | 225 | Anthropic, Ollama, Mistral, LangChain, Mozilla Hacks | Blogs de empresas de IA |
 | Dual (YT + Web) | 4 | MoureDev, Midudev, Carlos Azaustre, Xataka | Fuentes que publican en ambos canales |
 | GitHub Topics | 89 | AI, LLM, Docker, Kubernetes, CSS, HTML | Repositorios trending |
-| GitHub Collections | 1 | AI Tools | Colecciones curadas |
-| GitHub Repos | 8 | OpenWiki, Meetily, AutoPR, PR-Agent | Proyectos específicos |
+| GitHub Repos | 5 | OpenWiki, Meetily, AutoPR, PR-Agent | Proyectos específicos |
 | Product Hunt | 1 | Top products daily | Nuevos productos |
 
 ### Quick sources (hourly tier)
 
 Las fuentes con `quick: True` se scrapean cada hora porque publican con frecuencia:
 
-- **RSS (150)**: TechCrunch, The Verge, Wired, Ars Technica, Google Blog, Vercel, Docker, Kubernetes, HN, Stack Overflow, Dev.to, NVIDIA...
-- **Web scraping (43)**: Anthropic Research, Ollama Blog, Mistral News, Cohere, LangChain, Google Developers, HuggingFace Papers, Mozilla Hacks...
+- **RSS (161)**: TechCrunch, The Verge, Wired, Ars Technica, Google Blog, Vercel, Docker, Kubernetes, HN, Stack Overflow, Dev.to, NVIDIA...
+- **Web scraping (225)**: Anthropic Research, Ollama Blog, Mistral News, Cohere, LangChain, Google Developers, HuggingFace Papers, Mozilla Hacks...
 - **Chinese AI**: QbitAI (量子位), 36氪 AI, Qwen, DeepSeek, 01.AI, THUDM/ChatGLM
 
 ---
@@ -120,11 +120,15 @@ Las fuentes con `quick: True` se scrapean cada hora porque publican con frecuenc
 
 ```
 scripts/
-├── scrapers/             🌐 Recolección de datos de 515 fuentes
+├── scrapers/             🌐 Recolección de datos de 547 fuentes
 │   ├── scraper_base.py         Extractores YouTube, Web, ScraperPro (soporte dual source)
 │   ├── scrape_news.py          RSS + web + YouTube news (tier estándar incluye dual sources)
 │   ├── scrape_tools.py         GitHub Trending + Product Hunt
 │   ├── scrape_ai_tools.py      Auto-detección de herramientas IA (HF API + GitHub Search)
+│   ├── scrape_agent_skills.py  Scraping skills de agentes IA
+│   ├── scrape_concepts.py      Scraping conceptos de programación
+│   ├── scrape_eixam.py         Scraping película "Eixam" → Telegram
+│   ├── scrape_publicapis.py    Scraping APIs públicas
 │   └── screenshot_helper.mjs   Helper de screenshots con Playwright
 ├── publishers/           📤 Generación y distribución de contenido
 │   ├── generate_weekly.py      Recap semanal con IA + dashboard HTML (SSR)
@@ -138,25 +142,39 @@ scripts/
 │   ├── hunt_challenges.py      Generación de retos con IA
 │   ├── make_cover_collage.py   Collages de portadas
 │   ├── optimize.py             Optimización de imágenes del dashboard
-│   └── downloadFile.py         (legacy) Monolito original
+│   └── bump_updated_dates.py   Estampa updatedDate en frontmatter
 ├── utils/                🧰 Módulos compartidos
-│   ├── constants_downloadfile.py   Fuentes, templates, configuración
+│   ├── constants_sources.py        Definición de FUENTES (547 fuentes)
+│   ├── constants_downloadfile.py   Re-export de fuentes, templates, configuración
 │   ├── constants_retos.py          Configuración de retos
+│   ├── constants_templates.py      Templates HTML, email, markdown, prompts IA
+│   ├── constants_mdtools.py        Constants para herramientas markdown
 │   ├── common.py                   Helpers de JSON, URL, dedup, AI (soporte flag traducido)
-│   ├── utils_retos.py              Utilidades de retos
-│   └── cache.py                    Cache pluggable (FileCache + CacheManager)
+│   ├── lang_es.py                  Detección de idioma castellano
+│   ├── cache.py                    Cache pluggable (FileCache + CacheManager)
+│   ├── ai_categories.json          166 categorías de herramientas IA
+│   ├── ai_tools_database.json      DB de herramientas IA
+│   ├── concepts_database.json      DB de conceptos de programación
+│   ├── saludos_config.json         Configuración de saludos
+│   └── tips_database.json          Base de datos de tips (708 tips)
 ├── tips_generator.py         💡 Tips diarios de IT (Gemini + fallback a DB, nunca repite)
-├── ai_tools_generator.py     🛠️  Herramientas IA (Gemini + fallback a DB, 150 categorías)
+├── ai_tools_generator.py     🛠️  Herramientas IA (Gemini + fallback a DB, 166 categorías)
 ├── saludo_imagen.py          🌅 Imagen de saludo diaria (Gemini → PIL fallback)
 └── solutions/            💡 Base de datos de soluciones
     ├── solutions_db.py            Lookup + generación de soluciones
-    └── solutions_data.py          105+ soluciones curadas en 12 lenguajes
+    └── solutions_data.py          107 soluciones curadas
 tests/                    ✅ Suite de tests pytest (168 tests)
 ├── test_cache.py / test_constants_downloadfile.py
 ├── test_constants_retos.py / test_fix_images.py
 ├── test_manage_resources.py / test_solutions_db.py
 ├── test_ai_features.py / test_utils.py
+├── test_bump_updated_dates.py / test_tips_generator.py
 └── test_solutions_db.py
+public/                   🕰️ Tech Timeline (Surge.sh)
+├── index.html            Timeline interactiva 1970-2025
+├── css/style.css         Estilos + 14 breakpoints responsive
+├── js/app.js             Lógica: parallax, smoke, embers, IntersectionObserver
+└── data/events.json      424 eventos con imágenes Wikipedia
 ```
 
 ---
@@ -199,21 +217,21 @@ Todos los scripts se ejecutan con `python -m` desde la raíz del proyecto:
 
 ### 💡 Tips de IT
 
-| Comando | Descripción | Cuándo usarlo |
-|---------|-------------|---------------|
-| `python scripts/tips_generator.py` | Envía 10 tips por Telegram | Para probar el envío |
-| `python scripts/tips_generator.py --dry-run` | Previsualiza los tips sin enviar | Siempre antes de enviar |
-| `python scripts/tips_generator.py --list-categories` | Lista las categorías de tips | Para ver qué categorías hay |
-| `python scripts/tips_generator.py --stats` | Estadísticas de la base de tips | Para ver cuántos tips quedan |
+| Comando | Descripción |
+|---------|-------------|
+| `python -m scripts.tips_generator` | Envía 10 tips por Telegram |
+| `python -m scripts.tips_generator --dry-run` | Previsualiza los tips sin enviar |
+| `python -m scripts.tips_generator --list-categories` | Lista las categorías de tips |
+| `python -m scripts.tips_generator --stats` | Estadísticas de la base de tips |
 
 ### 🛠️ AI Tools
 
-| Comando | Descripción | Cuándo usarlo |
-|---------|-------------|---------------|
-| `python scripts/ai_tools_generator.py` | Envía herramienta IA por Telegram | Para probar el envío |
-| `python scripts/ai_tools_generator.py --dry-run` | Previsualiza sin enviar | Siempre antes de enviar |
-| `python scripts/ai_tools_generator.py --list-categories` | Lista las 150 categorías | Para ver qué categorías hay |
-| `python scripts/ai_tools_generator.py --stats` | Estadísticas de la base | Para ver cuántas herramientas quedan |
+| Comando | Descripción |
+|---------|-------------|
+| `python -m scripts.ai_tools_generator` | Envía herramienta IA por Telegram |
+| `python -m scripts.ai_tools_generator --dry-run` | Previsualiza sin enviar |
+| `python -m scripts.ai_tools_generator --list-categories` | Lista las 166 categorías |
+| `python -m scripts.ai_tools_generator --stats` | Estadísticas de la base |
 
 ### ✅ Testing
 
@@ -224,7 +242,7 @@ Todos los scripts se ejecutan con `python -m` desde la raíz del proyecto:
 
 ---
 
-## 🤖 GitHub Actions — 14 Workflows
+## 🤖 GitHub Actions — 16 Workflows
 
 | Workflow | Horario | Qué hace | Por qué |
 |----------|---------|----------|---------|
@@ -233,12 +251,15 @@ Todos los scripts se ejecutan con `python -m` desde la raíz del proyecto:
 | **scrape_6h** | Cada 6 horas | Scraping estándar + auto-detección IA | Fuentes que publican menos |
 | **daily_resources** | Diario 06:00 UTC | Scraping herramientas + gestión resources.mdx | GitHub Topics cambian poco |
 | **daily_ai_tools** | Cada 3 horas | Herramientas IA via Telegram (Gemini + DB) | Contenido fresco para el bot |
+| **daily_tips** | Cada 3 horas | Tips IT via Telegram (Gemini + DB) | Tips prácticos diarios |
+| **daily_saludo** | Cada 3 horas | Imágenes Buenos días/noches (Gemini → Telegram) | Saludos automatizados |
 | **send_email** | Diario 09:00 UTC | Newsletter Mailgun (agrupada por fuente + vídeos) | Resumen diario por email |
 | **send_telegram** | Cada 30 min | Telegram + TTS (cache para dedup) | Noticias en tiempo real |
 | **clean_news** | Trimestral | Validación de enlaces | Mantener links vivos |
 | **hunt_challenges** | Manual | Generación de retos con IA | Cuando hay cuota disponible |
 | **optimize_images** | Dispatch desde blog | Optimización de imágenes | Para el blog |
 | **dashboard_update** | Push (JS/CSS/Python/data) | Regenerar + deploy dashboard | Actualizaciones automáticas |
+| **translate_descriptions** | Manual | Traducción de descripciones al castellano | Cuando hay descripciones sin traducir |
 | **tests** | Push/PR a master | pytest (168 tests) | Calidad de código |
 | **eixam_scrape** | Cada 6 horas | Scraping película "Eixam" → Telegram | Seguimiento de la película |
 
@@ -248,7 +269,7 @@ Todos los scripts se ejecutan con `python -m` desde la raíz del proyecto:
 ┌─────────────────────────────────────────────────────────────────────┐
 │                        RECOLECCIÓN DE DATOS                         │
 ├─────────────────────────────────────────────────────────────────────┤
-│  scrape_hourly   →  cada hora  →  quick sources (150 RSS + 43 web) │
+│  scrape_hourly   →  cada hora  →  quick sources (161 RSS + 225 web)│
 │  scrape_6h       →  cada 6h    →  scraping estándar + auto IA      │
 │  daily_resources →  diario     →  herramientas (89 GitHub Topics)   │
 └─────────────────────────────────────────────────────────────────────┘
@@ -281,10 +302,11 @@ Todos los scripts se ejecutan con `python -m` desde la raíz del proyecto:
 │                        MANTENIMIENTO                                │
 ├─────────────────────────────────────────────────────────────────────┤
 │  clean_news       →  trimestral →  Validación de enlaces           │
-│  hunt_challenges  →  semanal   →  Retos con IA                    │
+│  hunt_challenges  →  manual    →  Retos con IA                    │
 │  optimize_images  →  dispatch  →  Optimización de imágenes        │
-│  daily_tips      →  cada 3h   →  Tips IT (Gemini + DB)           │
-│  daily_ai_tools  →  cada 3h   →  Herramientas IA (auto + Gemini) │
+│  daily_tips       →  cada 3h   →  Tips IT (Gemini + DB)           │
+│  daily_ai_tools   →  cada 3h   →  Herramientas IA (auto + Gemini) │
+│  daily_saludo     →  cada 3h   →  Imágenes saludo (Gemini)        │
 │  tests            →  en push   →  168 tests pytest                │
 └─────────────────────────────────────────────────────────────────────┘
 ```
@@ -295,8 +317,8 @@ Todos los scripts se ejecutan con `python -m` desde la raíz del proyecto:
 
 Tips diarios de IT enviados a Telegram cada 3 horas via `tips_generator.py`:
 
-- **Generación mixta** — Gemini genera tips frescos (5) más 5 de la base de datos estática, 10 total por ejecución
-- **Fallback a DB estática** — 399 tips curados en 22 categorías (docker, git, linux, bases de datos, seguridad, programación...)
+- **Generación mixta** — Gemini genera tips frescos más 5 de la base de datos estática, 10 total por ejecución
+- **Fallback a DB estática** — 708 tips curados en 80 categorías (docker, git, linux, bases de datos, seguridad, programación...)
 - **Nunca repite** — tracking de títulos enviados en `tips_history.json` (persistido via GitHub Actions Cache)
 - **Mala/Buena práctica** — tips prácticos incluyen contraste estructurado `❌ Mala práctica / ✅ Buena práctica`
 - **Recuperación por agotamiento** — cuando la DB se agota, Gemini genera el lote completo
@@ -312,7 +334,7 @@ Herramientas IA enviadas a Telegram cada 3 horas via `ai_tools_generator.py`:
   - **GitHub Search API** — repos de IA con 200+ estrellas, actualizados recientemente
   - **Product Hunt** — productos top del día
 - **Generación con Gemini** — Gemini genera herramientas frescas usando candidatos auto-detectados como **ALTA PRIORIDAD**, con fallback a una base de datos estática de 107 herramientas curadas
-- **150 categorías** — categorizadas en `ai_categories.json` para selección variada
+- **166 categorías** — categorizadas en `ai_categories.json` para selección variada
 - **Formato completo** — cada herramienta incluye: nombre claro, para qué sirve, enlace oficial (`url`), workflow, posibles integraciones (`combinaciones`), y restricciones/clave (`restricciones`)
 - **Nunca repite** — tracking de herramientas enviadas en `ai_tools_history.json` (persistido via GitHub Actions Cache)
 - **Prioridad multi-fuente** — herramientas encontradas en múltiples fuentes (HF + GitHub) obtienen máxima prioridad en el prompt de Gemini
@@ -391,23 +413,6 @@ Cada fuente tiene un color e icono personalizado:
 
 ---
 
-## 📊 Dashboard
-
-Desplegado en Surge.sh. Completamente **server-side rendered (SSR)** — Python genera un único `index.html` con todo el contenido pre-renderizado (noticias, vídeos de YouTube, ranking de GitHub). JavaScript es mínimo y solo maneja filtros interactivos, pestañas y búsqueda.
-
-**Mejoras recientes de UI:**
-- **ResourceCard mejorado** — nuevas props `headline`, `features`, `platform` para descripciones estructuradas (retrocompatible)
-- **Chips de fuente dual** — fuentes con YouTube y web (MoureDev, Midudev, Carlos Azaustre, Xataka) muestran chips de filtro en ambas secciones
-- **Filtros de canal separados** — filtro de noticias usa `news_items` (sin YouTube), filtro de vídeo usa `video_items` (sin web)
-- **Badges de tipo** — `📄 Noticia`, `📡 RSS`, `🔧 Herramienta` en tarjetas de noticias; `🎬 Video`, `🩳 Short`, `🔴 Directo` en tarjetas de vídeo
-- **Footer** — "Creado con ❤️ y sin ánimo de lucro por @jorbencas" + disclaimer (sin contenido alojado)
-- **Dark theme** — gradiente de título de noticias usa `#60a5fa → #3b82f6` en modo oscuro
-- **Traducción** — solo nuevos elementos traducidos, flag `traducido` previene re-traducción
-
-Los recaps semanales archivan automáticamente posts viejos (>2 semanas) y fuerzan un-post-por-semana para SEO. Las noticias se agrupan por fuente con deduplicación antes de renderizar.
-
----
-
 ## 🕰️ Tech Timeline
 
 Timeline interactiva de la historia de la tecnología (1970-2025), desplegada en Surge.sh.
@@ -439,6 +444,23 @@ Se despliega automáticamente via GitHub Actions en Surge.sh cuando se push-a `p
 
 ---
 
+## 📊 Dashboard
+
+Desplegado en Surge.sh. Completamente **server-side rendered (SSR)** — Python genera un único `index.html` con todo el contenido pre-renderizado (noticias, vídeos de YouTube, ranking de GitHub). JavaScript es mínimo y solo maneja filtros interactivos, pestañas y búsqueda.
+
+**Mejoras recientes de UI:**
+- **ResourceCard mejorado** — nuevas props `headline`, `features`, `platform` para descripciones estructuradas (retrocompatible)
+- **Chips de fuente dual** — fuentes con YouTube y web (MoureDev, Midudev, Carlos Azaustre, Xataka) muestran chips de filtro en ambas secciones
+- **Filtros de canal separados** — filtro de noticias usa `news_items` (sin YouTube), filtro de vídeo usa `video_items` (sin web)
+- **Badges de tipo** — `📄 Noticia`, `📡 RSS`, `🔧 Herramienta` en tarjetas de noticias; `🎬 Video`, `🩳 Short`, `🔴 Directo` en tarjetas de vídeo
+- **Footer** — "Creado con ❤️ y sin ánimo de lucro por @jorbencas" + disclaimer (sin contenido alojado)
+- **Dark theme** — gradiente de título de noticias usa `#60a5fa → #3b82f6` en modo oscuro
+- **Traducción** — solo nuevos elementos traducidos, flag `traducido` previene re-traducción
+
+Los recaps semanales archivan automáticamente posts viejos (>2 semanas) y fuerzan un-post-por-semana para SEO. Las noticias se agrupan por fuente con deduplicación antes de renderizar.
+
+---
+
 ## 🔐 GitHub Secrets
 
 | Secret | Descripción |
@@ -452,6 +474,10 @@ Se despliega automáticamente via GitHub Actions en Surge.sh cuando se push-a `p
 | `BLOG_TOKEN` | Token de checkout del blog |
 | `SALUDO_CHAT_ID` | Chat/grupo para saludos (fallback: `TELEGRAM_CHAT_ID`) |
 | `AI_TOOLS_CHAT_ID` | Chat/grupo para herramientas IA (fallback: `TELEGRAM_CHAT_ID`) |
+| `TIPS_CHAT_ID` | Chat/grupo para tips IT (fallback: `TELEGRAM_CHAT_ID`) |
+| `TOKEN_API_ID` | API ID para Telethon (scraper) |
+| `SURGE_TOKEN` | Token de Surge.sh para deploy |
+| `DOWNLOADER_API_TOKEN` | Token para el scraper de YouTube |
 
 Variables del repositorio:
 
@@ -465,14 +491,16 @@ Variables del repositorio:
 
 168 tests pytest cubriendo:
 - **Cache** — FileCache, CacheManager, expiración, TTL, limpieza de flush
-- **Constants** — configuraciones de fuentes (515 fuentes), templates de email, templates de retos
+- **Constants** — configuraciones de fuentes (547 fuentes), templates de email, templates de retos
 - **Dual sources** — extracción YouTube + web scraping, renderizado de chips en ambas secciones
 - **Email templates** — placeholders, headers de fuente, secciones de vídeo, estilos de botones
 - **Pipeline de imágenes** — generación de portadas locales, conversión WebP/AVIF
-- **AI features** — 150 categorías, DB tools, generador de herramientas IA, saludo por hora/festivos
+- **AI features** — 166 categorías, DB tools, generador de herramientas IA, saludo por hora/festivos
 - **Resources** — paginación, limpieza, reorden, gestión de tarjetas, dedup cross-file, fix de cards malformados
 - **Solutions** — lookup en base de datos, generación multi-lenguaje, edge cases
 - **Utilities** — helpers de JSON, validación de URLs, deduplicación, integración AI, soporte flag `traducido`
+- **Tips** — generador de tips, base de datos, categorías
+- **Bump dates** — actualización de fechas en frontmatter
 
 ---
 
@@ -512,13 +540,13 @@ Workflow `eixam_scrape` que recopila toda la información sobre la película **"
 
 ```bash
 # Recopilar y archivar (sin enviar)
-python scripts/scrapers/scrape_eixam.py
+python -m scripts.scrapers.scrape_eixam
 
 # Dry-run (mostrar sin guardar)
-python scripts/scrapers/scrape_eixam.py --dry-run
+python -m scripts.scrapers.scrape_eixam --dry-run
 
 # Enviar a Telegram
-python scripts/scrapers/scrape_eixam.py --enviar
+python -m scripts.scrapers.scrape_eixam --enviar
 ```
 
 ---
