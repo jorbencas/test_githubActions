@@ -31,14 +31,16 @@ class App {
     this.track = document.getElementById('timeline-track');
     this.yearDisplay = document.getElementById('year-display');
     this.yearBarInner = document.getElementById('year-bar-inner');
+    this.yearBarDot = document.getElementById('year-bar-dot');
     this.scrollHint = document.getElementById('scroll-hint');
     this.loadingEl = document.getElementById('loading');
+    this.bgLayer = document.getElementById('bg-layer');
 
     this.currentYear = YEAR_MIN;
     this.events = [];
 
     this._bindScroll();
-    this._bindButtons();
+    this._startMusic();
     this._loadData();
   }
 
@@ -46,57 +48,73 @@ class App {
     let scrollTimeout;
     this.container.addEventListener('scroll', () => {
       this._updateYearFromScroll();
+      this._updateDot();
       this._hideScrollHint();
       clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => this._highlightNearestYear(), 100);
+      scrollTimeout = setTimeout(() => this._updateYearFromScroll(), 100);
     }, { passive: true });
   }
 
-  _bindButtons() {
-    const btnMusic = document.getElementById('btn-music');
-    if (btnMusic) {
-      btnMusic.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this._toggleMusic(btnMusic);
-      });
-    }
-  }
-
-  _toggleMusic(btn) {
-    if (!this.audioCtx) {
+  _startMusic() {
+    try {
       this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      this._startAmbient();
-      btn.classList.add('active');
-    } else if (this.audioCtx.state === 'running') {
-      this.audioCtx.suspend();
-      btn.classList.remove('active');
-    } else {
-      this.audioCtx.resume();
-      btn.classList.add('active');
+      const ctx = this.audioCtx;
+
+      // Pad layer 1 - deep drone
+      const osc1 = ctx.createOscillator();
+      const gain1 = ctx.createGain();
+      osc1.type = 'sine'; osc1.frequency.value = 55;
+      gain1.gain.value = 0.025;
+      osc1.connect(gain1); gain1.connect(ctx.destination);
+      osc1.start();
+
+      // Pad layer 2 - fifth
+      const osc2 = ctx.createOscillator();
+      const gain2 = ctx.createGain();
+      osc2.type = 'sine'; osc2.frequency.value = 82.5;
+      gain2.gain.value = 0.018;
+      osc2.connect(gain2); gain2.connect(ctx.destination);
+      osc2.start();
+
+      // Pad layer 3 - octave
+      const osc3 = ctx.createOscillator();
+      const gain3 = ctx.createGain();
+      osc3.type = 'sine'; osc3.frequency.value = 110;
+      gain3.gain.value = 0.012;
+      osc3.connect(gain3); gain3.connect(ctx.destination);
+      osc3.start();
+
+      // LFO for movement
+      const lfo = ctx.createOscillator();
+      const lfoGain = ctx.createGain();
+      lfo.type = 'sine'; lfo.frequency.value = 0.05;
+      lfoGain.gain.value = 8;
+      lfo.connect(lfoGain);
+      lfoGain.connect(osc1.frequency);
+      lfoGain.connect(osc2.frequency);
+      lfo.start();
+
+      // High shimmer
+      const osc4 = ctx.createOscillator();
+      const gain4 = ctx.createGain();
+      const filter = ctx.createBiquadFilter();
+      osc4.type = 'triangle'; osc4.frequency.value = 440;
+      filter.type = 'lowpass'; filter.frequency.value = 800; filter.Q.value = 2;
+      gain4.gain.value = 0.006;
+      osc4.connect(filter); filter.connect(gain4); gain4.connect(ctx.destination);
+      osc4.start();
+
+      // LFO for shimmer volume
+      const lfo2 = ctx.createOscillator();
+      const lfo2Gain = ctx.createGain();
+      lfo2.type = 'sine'; lfo2.frequency.value = 0.08;
+      lfo2Gain.gain.value = 0.004;
+      lfo2.connect(lfo2Gain);
+      lfo2Gain.connect(gain4.gain);
+      lfo2.start();
+    } catch (e) {
+      console.warn('Audio failed:', e);
     }
-  }
-
-  _startAmbient() {
-    const ctx = this.audioCtx;
-    const osc1 = ctx.createOscillator();
-    const osc2 = ctx.createOscillator();
-    const gain = ctx.createGain();
-    const lfo = ctx.createOscillator();
-    const lfoGain = ctx.createGain();
-
-    osc1.type = 'sine'; osc1.frequency.value = 110;
-    osc2.type = 'sine'; osc2.frequency.value = 165;
-    lfo.type = 'sine'; lfo.frequency.value = 0.1;
-    lfoGain.gain.value = 15;
-    gain.gain.value = 0.03;
-
-    lfo.connect(lfoGain);
-    lfoGain.connect(osc1.frequency);
-    osc1.connect(gain);
-    osc2.connect(gain);
-    gain.connect(ctx.destination);
-
-    osc1.start(); osc2.start(); lfo.start();
   }
 
   _updateYearFromScroll() {
@@ -125,19 +143,32 @@ class App {
       this.yearDisplay.textContent = closestYear;
       this.yearDisplay.classList.add('active');
       clearTimeout(this._yearTimeout);
-      this._yearTimeout = setTimeout(() => this.yearDisplay.classList.remove('active'), 600);
+      this._yearTimeout = setTimeout(() => this.yearDisplay.classList.remove('active'), 500);
       this._highlightYearTick(closestYear);
     }
+  }
+
+  _updateDot() {
+    const scrollLeft = this.container.scrollLeft;
+    const maxScroll = this.container.scrollWidth - this.container.clientWidth;
+    if (maxScroll <= 0) return;
+
+    const bar = document.querySelector('.year-bar');
+    const barRect = bar.getBoundingClientRect();
+    const lineLeft = 40;
+    const lineRight = barRect.width - 40;
+    const lineWidth = lineRight - lineLeft;
+
+    const progress = scrollLeft / maxScroll;
+    const dotX = lineLeft + progress * lineWidth;
+
+    this.yearBarDot.style.left = `${dotX}px`;
   }
 
   _highlightYearTick(year) {
     this.yearBarInner.querySelectorAll('.year-tick').forEach(t => {
       t.classList.toggle('active', parseInt(t.dataset.year) === year);
     });
-  }
-
-  _highlightNearestYear() {
-    this._updateYearFromScroll();
   }
 
   _hideScrollHint() {
@@ -180,7 +211,6 @@ class App {
   _buildTimeline() {
     this.track.innerHTML = '';
 
-    // Group events by year
     const byYear = {};
     this.events.forEach(ev => {
       const y = ev.year;
@@ -188,7 +218,6 @@ class App {
       byYear[y].push(ev);
     });
 
-    // Create year groups
     for (let year = YEAR_MIN; year <= YEAR_MAX; year++) {
       const yearEvents = byYear[year] || [];
       if (yearEvents.length === 0) continue;
@@ -206,9 +235,7 @@ class App {
       cardsRow.className = 'year-cards';
 
       yearEvents.sort((a, b) => (a.importance || 0) - (b.importance || 0));
-      yearEvents.forEach(ev => {
-        cardsRow.appendChild(this._createCard(ev));
-      });
+      yearEvents.forEach(ev => cardsRow.appendChild(this._createCard(ev)));
 
       group.appendChild(cardsRow);
       this.track.appendChild(group);
@@ -237,9 +264,7 @@ class App {
 
   _scrollToYear(year) {
     const grp = this.track.querySelector(`[data-year="${year}"]`);
-    if (grp) {
-      grp.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    }
+    if (grp) grp.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
   }
 
   async _loadData() {
@@ -247,22 +272,16 @@ class App {
       const resp = await fetch('data/events.json');
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
       const data = await resp.json();
-
       this.events = data.events || [];
 
       this._buildTimeline();
       this._buildYearBar();
 
-      setTimeout(() => {
-        this.loadingEl.classList.add('hidden');
-      }, 400);
+      setTimeout(() => this.loadingEl.classList.add('hidden'), 400);
     } catch (err) {
       console.error('Failed to load events:', err);
       const sub = this.loadingEl.querySelector('.loader-sub');
-      if (sub) {
-        sub.textContent = 'Error al cargar. Reintentando...';
-        sub.style.color = '#ef4444';
-      }
+      if (sub) { sub.textContent = 'Error. Reintentando...'; sub.style.color = '#ef4444'; }
       setTimeout(() => this._loadData(), 3000);
     }
   }

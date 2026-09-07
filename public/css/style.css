@@ -1,16 +1,17 @@
-/* Tech Timeline — 2D Horizontal Cards */
-
 :root {
-  --bg: #f8fafc;
-  --bg-card: #ffffff;
-  --bg-card-hover: #f1f5f9;
-  --text: #0f172a;
-  --text-dim: #475569;
-  --text-muted: #94a3b8;
-  --accent: #2563eb;
-  --accent-dim: rgba(37, 99, 235, 0.08);
-  --border: rgba(0, 0, 0, 0.08);
-  --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --bg: #0a0e1a;
+  --bg-card: rgba(15, 23, 42, 0.85);
+  --bg-card-hover: rgba(30, 41, 59, 0.9);
+  --text: #f1f5f9;
+  --text-dim: #94a3b8;
+  --text-muted: #64748b;
+  --accent: #38bdf8;
+  --accent2: #818cf8;
+  --accent3: #a78bfa;
+  --accent-dim: rgba(56, 189, 248, 0.1);
+  --border: rgba(255, 255, 255, 0.06);
+  --glow: rgba(56, 189, 248, 0.15);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   --font: 'Inter', -apple-system, sans-serif;
   --mono: 'JetBrains Mono', monospace;
 }
@@ -26,63 +27,66 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* SVG Background Layer */
+.bg-layer {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1' fill='%2338bdf8' opacity='0.08'/%3E%3C/svg%3E") repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M0 100 Q50 80 100 100 T200 100' stroke='%2338bdf8' fill='none' opacity='0.03' stroke-width='1'/%3E%3Cpath d='M0 60 Q50 40 100 60 T200 60' stroke='%23818cf8' fill='none' opacity='0.02' stroke-width='1'/%3E%3C/svg%3E") repeat,
+    radial-gradient(ellipse at 20% 50%, rgba(56, 189, 248, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(129, 140, 248, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(167, 139, 250, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
 /* Loading */
 #loading {
   position: fixed; inset: 0; z-index: 1000;
   background: var(--bg);
   display: flex; align-items: center; justify-content: center;
-  transition: opacity 0.4s, visibility 0.4s;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
 }
 #loading.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 .loader { display: flex; flex-direction: column; align-items: center; gap: 16px; }
 .loader-ring {
-  width: 36px; height: 36px;
-  border: 2.5px solid var(--border);
+  width: 32px; height: 32px;
+  border: 2px solid var(--border);
   border-top-color: var(--accent);
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
-.loader-title { font-size: 14px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
-.loader-sub { font-size: 11px; color: var(--text-dim); font-family: var(--mono); }
+.loader-title { font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); }
+.loader-sub { font-size: 10px; color: var(--text-muted); font-family: var(--mono); }
 
 /* Header */
 #header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 20px;
-  background: linear-gradient(180deg, var(--bg) 50%, transparent 100%);
+  padding: 16px 24px;
+  background: linear-gradient(180deg, var(--bg) 40%, transparent 100%);
   pointer-events: none;
 }
 #header > * { pointer-events: auto; }
-.logo { font-size: 15px; font-weight: 700; letter-spacing: 0.5px; }
+.logo { font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
 .logo span { color: var(--accent); font-weight: 400; }
 .header-center {
   position: absolute; left: 50%; transform: translateX(-50%);
 }
 .year-display {
-  font-size: 42px; font-weight: 200; font-family: var(--mono);
-  color: var(--accent); opacity: 1; transition: opacity 0.3s;
+  font-size: 48px; font-weight: 200; font-family: var(--mono);
+  color: var(--accent);
+  text-shadow: 0 0 40px var(--glow), 0 0 80px rgba(56, 189, 248, 0.08);
   user-select: none; line-height: 1;
+  transition: text-shadow 0.3s;
 }
-.year-display.active { opacity: 1; }
-.header-right { display: flex; gap: 6px; }
-.btn-icon {
-  width: 36px; height: 36px;
-  border: 1px solid var(--border); border-radius: 8px;
-  background: rgba(255,255,255,0.8); color: var(--text-dim);
-  cursor: pointer; display: flex; align-items: center; justify-content: center;
-  transition: all 0.15s; backdrop-filter: blur(8px);
-}
-.btn-icon:hover, .btn-icon.active {
-  border-color: var(--accent); color: var(--accent);
-  background: var(--accent-dim);
+.year-display.active {
+  text-shadow: 0 0 40px var(--glow), 0 0 80px rgba(56, 189, 248, 0.15), 0 0 120px rgba(56, 189, 248, 0.05);
 }
 
 /* Scroll Container */
 .timeline-container {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  position: fixed; inset: 0; z-index: 1;
   overflow-x: auto; overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -93,7 +97,7 @@ html, body {
   display: flex;
   align-items: stretch;
   height: 100%;
-  padding: 70px 40px 60px;
+  padding: 80px 60px 70px;
   gap: 0;
   width: max-content;
 }
@@ -102,25 +106,29 @@ html, body {
 .year-group {
   display: flex;
   flex-direction: column;
-  min-width: 300px;
+  min-width: 320px;
   position: relative;
 }
 
 .year-label {
-  font-size: 72px;
+  font-size: 80px;
   font-weight: 800;
   font-family: var(--mono);
-  color: rgba(0, 0, 0, 0.04);
+  background: linear-gradient(180deg, var(--accent) 0%, transparent 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.08;
   user-select: none;
   text-align: center;
   line-height: 1;
-  padding: 20px 0 16px;
+  padding: 24px 0 20px;
   flex-shrink: 0;
 }
 
 .year-cards {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   flex: 1;
   align-items: flex-start;
   padding: 0 8px;
@@ -130,57 +138,64 @@ html, body {
 .card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
-  width: 220px;
+  width: 230px;
+  backdrop-filter: blur(12px);
 }
 .card:hover {
   background: var(--bg-card-hover);
-  border-color: rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow);
+  border-color: rgba(56, 189, 248, 0.2);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(56, 189, 248, 0.1);
 }
 
 .card-img {
   width: 100%;
-  height: 130px;
+  height: 140px;
   object-fit: cover;
   display: block;
-  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
 }
 .card-img-placeholder {
   width: 100%;
-  height: 130px;
+  height: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 36px;
-  opacity: 0.3;
+  font-size: 40px;
+  position: relative;
+  overflow: hidden;
+}
+.card-img-placeholder::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ccircle cx='50' cy='50' r='30' stroke='%23fff' fill='none' opacity='0.06' stroke-width='1'/%3E%3Ccircle cx='50' cy='50' r='15' stroke='%23fff' fill='none' opacity='0.04' stroke-width='1'/%3E%3Cline x1='20' y1='50' x2='80' y2='50' stroke='%23fff' opacity='0.03' stroke-width='1'/%3E%3Cline x1='50' y1='20' x2='50' y2='80' stroke='%23fff' opacity='0.03' stroke-width='1'/%3E%3C/svg%3E") repeat;
 }
 
 .card-body {
-  padding: 10px 12px;
+  padding: 12px 14px;
 }
 
 .card-category {
   display: inline-block;
-  padding: 2px 6px;
-  border-radius: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
   font-size: 9px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 .card-title {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   line-height: 1.35;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -189,7 +204,7 @@ html, body {
 
 .card-desc {
   font-size: 11px;
-  line-height: 1.45;
+  line-height: 1.5;
   color: var(--text-dim);
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -201,33 +216,56 @@ html, body {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  margin-top: 6px;
+  margin-top: 8px;
   font-size: 10px;
   font-weight: 500;
   color: var(--accent);
   text-decoration: none;
   opacity: 0;
-  transition: opacity 0.15s;
+  transition: opacity 0.2s;
 }
 .card:hover .card-link { opacity: 1; }
 
-/* Year Bar (bottom) */
+/* Year Bar */
 .year-bar {
   position: fixed;
   bottom: 0; left: 0; right: 0;
   z-index: 100;
-  height: 44px;
-  background: linear-gradient(0deg, var(--bg) 50%, transparent 100%);
+  height: 50px;
+  background: linear-gradient(0deg, var(--bg) 60%, transparent 100%);
   display: flex;
   align-items: flex-end;
-  padding: 0 20px 8px;
+  padding: 0 40px 10px;
 }
+
+.year-bar-line {
+  position: absolute;
+  bottom: 22px;
+  left: 40px; right: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), var(--accent-dim), var(--border), transparent);
+}
+
+.year-bar-dot {
+  position: absolute;
+  bottom: 18px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--glow), 0 0 24px rgba(56, 189, 248, 0.1);
+  transition: left 0.3s ease;
+  pointer-events: none;
+}
+
 .year-bar-inner {
   display: flex;
   gap: 0;
   width: 100%;
   justify-content: space-between;
+  position: relative;
+  z-index: 1;
 }
+
 .year-tick {
   font-size: 10px;
   font-family: var(--mono);
@@ -235,43 +273,45 @@ html, body {
   cursor: pointer;
   padding: 3px 5px;
   border-radius: 4px;
-  transition: all 0.15s;
+  transition: all 0.2s;
   white-space: nowrap;
 }
-.year-tick:hover { color: var(--accent); background: var(--accent-dim); }
-.year-tick.active { color: var(--accent); font-weight: 600; }
+.year-tick:hover { color: var(--accent); }
+.year-tick.active { color: var(--accent); font-weight: 700; }
 
 /* Scroll Hint */
 .scroll-hint {
   position: fixed;
-  bottom: 54px; left: 50%; transform: translateX(-50%);
+  bottom: 60px; left: 50%; transform: translateX(-50%);
   z-index: 100;
   display: flex; align-items: center; gap: 6px;
-  padding: 5px 10px;
+  padding: 6px 14px;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 10px; color: var(--text-dim);
-  animation: pulse 2s infinite;
-  transition: opacity 0.3s;
-  box-shadow: var(--shadow);
+  border-radius: 20px;
+  font-size: 11px; color: var(--text-dim);
+  backdrop-filter: blur(8px);
+  animation: hintPulse 2.5s ease-in-out infinite;
+  transition: opacity 0.4s;
 }
 .scroll-hint.hidden { opacity: 0; pointer-events: none; }
-@keyframes pulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
+@keyframes hintPulse {
+  0%, 100% { opacity: 0.4; transform: translateX(-50%) translateX(0); }
+  50% { opacity: 1; transform: translateX(-50%) translateX(4px); }
 }
 
 /* Mobile */
 @media (max-width: 768px) {
-  .card { width: 180px; }
+  .card { width: 190px; }
   .card-img, .card-img-placeholder { height: 110px; }
-  .card-title { font-size: 11px; }
-  .card-desc { font-size: 10px; -webkit-line-clamp: 2; }
-  .year-label { font-size: 56px; }
-  .year-display { font-size: 32px; }
-  #header { padding: 10px 14px; }
+  .card-title { font-size: 12px; }
+  .card-desc { font-size: 10px; }
+  .year-label { font-size: 60px; }
+  .year-display { font-size: 36px; }
+  #header { padding: 12px 16px; }
   .scroll-hint { display: none; }
-  .year-bar { height: 36px; padding-bottom: 4px; }
+  .year-bar { height: 40px; padding: 0 20px 6px; }
+  .year-bar-line { left: 20px; right: 20px; bottom: 18px; }
+  .year-bar-dot { bottom: 14px; }
   .year-tick { font-size: 9px; padding: 2px 3px; }
 }

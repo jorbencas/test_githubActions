@@ -4,19 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tech Timeline — La Historia de la Tecnología</title>
-  <meta name="description" content="Cronograma interactivo de la historia de la tecnología desde 1970 hasta hoy.">
   <link rel="stylesheet" href="css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div id="bg-layer" class="bg-layer"></div>
+
   <div id="loading">
     <div class="loader">
       <div class="loader-ring"></div>
       <div class="loader-text">
         <span class="loader-title">Tech Timeline</span>
-        <span class="loader-sub">Cargando cronograma...</span>
+        <span class="loader-sub">Cargando...</span>
       </div>
     </div>
   </div>
@@ -28,13 +29,6 @@
     <div class="header-center">
       <div id="year-display" class="year-display">1970</div>
     </div>
-    <div class="header-right">
-      <button id="btn-music" class="btn-icon" title="Música ambient">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
-        </svg>
-      </button>
-    </div>
   </header>
 
   <div id="timeline-container" class="timeline-container">
@@ -42,14 +36,16 @@
   </div>
 
   <div id="year-bar" class="year-bar">
+    <div id="year-bar-line" class="year-bar-line"></div>
     <div id="year-bar-inner" class="year-bar-inner"></div>
+    <div id="year-bar-dot" class="year-bar-dot"></div>
   </div>
 
   <div id="scroll-hint" class="scroll-hint">
-    <span>Desliza para explorar</span>
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M5 12h14M12 5l7 7-7 7"/>
     </svg>
+    <span>Desliza para explorar</span>
   </div>
 
   <script type="module" src="js/app.js"></script>
