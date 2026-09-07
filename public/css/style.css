@@ -46,7 +46,7 @@ html, body {
   overflow: hidden;
   z-index: 2;
 }
-#fx-canvas { z-index: 3; opacity: 0.7; pointer-events: none; }
+#fx-canvas { position: fixed; inset: 0; z-index: 3; opacity: 0.7; pointer-events: none; }
 #parallax-front { z-index: 4; }
 
 .parallax-el {
