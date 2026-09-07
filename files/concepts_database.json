@@ -2,16 +2,17 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 58,
+    "total_concepts": 59,
     "categories": [
       "css_moderno",
       "devops",
       "habilidades",
       "interfaces",
       "patrones_diseno",
-      "poo"
+      "poo",
+      "rag_ai"
     ],
-    "last_scraped": "2026-09-06T20:07:15.043592"
+    "last_scraped": "2026-09-07T03:18:50.856734"
   },
   "concepts": [
     {
@@ -1081,6 +1082,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-06T20:06:38.103618"
+    },
+    {
+      "title": "Diagnóstico en Node.js: AsyncLocalStorage, diagnostics_channel, --prof y GC tracking",
+      "summary": "Node.js incluye herramientas nativas de diagnóstico que van mucho más allá del simpleconsole.log.AsyncLocalStoragepropaga contexto por cadenas asíncronas sin pasar parámetros,diagnostics_channelpermit",
+      "explanation": "Node.js incluye herramientas nativas de diagnóstico que van mucho más allá del simpleconsole.log.AsyncLocalStoragepropaga contexto por cadenas asíncronas sin pasar parámetros,diagnostics_channelpermite observabilidad desacoplada, y las herramientas de profiling de V8 revelan cuellos de botella reales en producción.AsyncLocalStorage: contexto de request sin prop drilling En aplicaciones web, necesitas propagar información de contexto (el ID de la petición, el usuario autenticado, el trace ID) a través de toda la cadena asíncrona sin tener que pasarlo como argumento en cada función.AsyncLocalStorageresuelve esto de forma transparente:import { AsyncLocalStorage } from 'async_hooks';\n\n// Crear el store del contexto\nconst contextoRequest = new AsyncLocalStorage();\n\n// Middleware Express que inicializa el contexto\nfunction middlewareContexto(req, res, next) {\n  const contexto = {\n    requestId: crypto.randomUUID(),\n    usuario: req.user?.id ?? 'anónimo',\n    inicio: Date.now(),\n    logs: [],\n  };\n\n  contextoRequest.run(contexto, () => {\n    next(); // Todo el código en la cadena de middlewares ve este contexto\n  });\n}\n\n// Logger que obtiene el requestId automáticamente\nfunction log(nivel, mensaje, datos = {}) {\n  const ctx = contextoRequest.getStore();\n  const entrada = {\n    timestamp: new Date().toISOString(),\n    requestId: ctx?.requestId ?? 'sin-contexto',\n    usuario: ctx?.usuario,\n    nivel,\n    mensaje,\n    ...datos,\n  };\n  console.log(JSON.stringify(entrada));\n  ctx?.logs.p",
+      "code_example": "import { AsyncLocalStorage } from 'async_hooks';\n\n// Crear el store del contexto\nconst contextoRequest = new AsyncLocalStorage();\n\n// Middleware Express que inicializa el contexto\nfunction middlewareContexto(req, res, next) {\n  const contexto = {\n    requestId: crypto.randomUUID(),\n    usuario: req.user?.id ?? 'anónimo',\n    inicio: Date.now(),\n    logs: [],\n  };\n\n  contextoRequest.run(contexto, () => {\n    next(); // Todo el código en la cadena de middlewares ve este contexto\n  });\n}\n\n// Logger que obtiene el requestId automáticamente\nfunction log(nivel, mensaje, datos = {}) {\n  const ctx = contextoRequest.getStore();\n  const entrada = {\n    timestamp: new Date().toISOString(),\n    requestId: ctx?.requestId ?? 'sin-contexto',\n    usuario: ctx?.usuario,\n    nivel,\n    mensaje,\n    ...datos,\n  };\n  console.log(JSON.stringify(entrada));\n  ctx?.logs.push(entrada);\n}\n\n// Función de negocio  no necesita recibir el contexto como argumento\nasync function obtenerPedidos(userId) {\n  log('info', 'Consultando pedidos', { userId });\n  const pedidos = await db.query('SELECT * FROM pedidos WHERE user_id = $1', [userId]);\n  log('info', 'Pedidos obtenidos', { count: pedidos.length });\n  return pedidos;\n}\n\n// Ruta Express\napp.get('/pedidos', middlewareContexto, async (req, res) => {\n  const pedidos = await obtenerPedidos(req.query.userId);\n  const ctx = contextoRequest.getStore();\n  log('info', 'Request completada', { duracion: Date.now() - ctx.inicio });\n  res.json(pedidos);\n});",
+      "use_cases": [],
+      "difficulty": 3,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "rag_ai"
+      ],
+      "cat": "rag_ai",
+      "scraped_at": "2026-09-07T03:18:13.471873"
     }
   ]
 }
