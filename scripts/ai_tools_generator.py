@@ -18,7 +18,8 @@ from datetime import datetime
 from pathlib import Path
 
 import requests
-from scripts.utils.lang_es import looks_english
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from utils.lang_es import looks_english
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 CATS_PATH = SCRIPT_DIR / "utils" / "ai_categories.json"
