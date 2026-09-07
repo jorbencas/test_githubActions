@@ -151,7 +151,7 @@ scripts/
 └── solutions/            💡 Base de datos de soluciones
     ├── solutions_db.py            Lookup + generación de soluciones
     └── solutions_data.py          105+ soluciones curadas en 12 lenguajes
-tests/                    ✅ Suite de tests pytest (134 tests)
+tests/                    ✅ Suite de tests pytest (168 tests)
 ├── test_cache.py / test_constants_downloadfile.py
 ├── test_constants_retos.py / test_fix_images.py
 ├── test_manage_resources.py / test_solutions_db.py
@@ -219,7 +219,7 @@ Todos los scripts se ejecutan con `python -m` desde la raíz del proyecto:
 
 | Comando | Descripción |
 |---------|-------------|
-| `python -m pytest tests/ -v` | Ejecutar todos los tests (134 tests) |
+| `python -m pytest tests/ -v` | Ejecutar todos los tests (168 tests) |
 | `python -m pytest tests/test_solutions_db.py -v` | Ejecutar un suite específico |
 
 ---
@@ -239,7 +239,7 @@ Todos los scripts se ejecutan con `python -m` desde la raíz del proyecto:
 | **hunt_challenges** | Manual | Generación de retos con IA | Cuando hay cuota disponible |
 | **optimize_images** | Dispatch desde blog | Optimización de imágenes | Para el blog |
 | **dashboard_update** | Push (JS/CSS/Python/data) | Regenerar + deploy dashboard | Actualizaciones automáticas |
-| **tests** | Push/PR a master | pytest (134 tests) | Calidad de código |
+| **tests** | Push/PR a master | pytest (168 tests) | Calidad de código |
 | **eixam_scrape** | Cada 6 horas | Scraping película "Eixam" → Telegram | Seguimiento de la película |
 
 ### Arquitectura de Workflows
@@ -285,7 +285,7 @@ Todos los scripts se ejecutan con `python -m` desde la raíz del proyecto:
 │  optimize_images  →  dispatch  →  Optimización de imágenes        │
 │  daily_tips      →  cada 3h   →  Tips IT (Gemini + DB)           │
 │  daily_ai_tools  →  cada 3h   →  Herramientas IA (auto + Gemini) │
-│  tests            →  en push   →  134 tests pytest                │
+│  tests            →  en push   →  168 tests pytest                │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -408,6 +408,37 @@ Los recaps semanales archivan automáticamente posts viejos (>2 semanas) y fuerz
 
 ---
 
+## 🕰️ Tech Timeline
+
+Timeline interactiva de la historia de la tecnología (1970-2025), desplegada en Surge.sh.
+
+**Características:**
+- **424 eventos** en 9 categorías (languages, frameworks, tools, AI, hardware, internet, companies, opensource, news)
+- **168 noticias** cubriendo todos los años desde 1970
+- **Imágenes reales** de Unsplash como fondos por era (circuitos, PCs retro, internet, smartphones, IA)
+- **6 eras temáticas** con colores, humo y partículas únicas por década
+- **Efecto teatro** — parallax de 3 capas que se mueven al hacer scroll
+- **Elementos SVG** por era (circuitos, floppys, globos, teléfonos, cerebros)
+- **Scroll animations** — tarjetas y años aparecen al hacer scroll (IntersectionObserver)
+- **Música ambient** — dron profundo + crujido de fuego (Web Audio API)
+- **Responsive** — funciona en todas las resoluciones (320px → ultra-wide)
+
+### Estructura
+
+```
+public/
+├── index.html          HTML principal
+├── css/style.css       Estilos + 14 breakpoints responsive
+├── js/app.js           Lógica: parallax, smoke, embers, IntersectionObserver
+└── data/events.json    424 eventos con imágenes Wikipedia
+```
+
+### Despliegue
+
+Se despliega automáticamente via GitHub Actions en Surge.sh cuando se push-a `public/`.
+
+---
+
 ## 🔐 GitHub Secrets
 
 | Secret | Descripción |
@@ -432,7 +463,7 @@ Variables del repositorio:
 
 ## 🧪 Test Coverage
 
-134 tests pytest cubriendo:
+168 tests pytest cubriendo:
 - **Cache** — FileCache, CacheManager, expiración, TTL, limpieza de flush
 - **Constants** — configuraciones de fuentes (515 fuentes), templates de email, templates de retos
 - **Dual sources** — extracción YouTube + web scraping, renderizado de chips en ambas secciones
