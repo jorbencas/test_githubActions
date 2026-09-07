@@ -395,7 +395,6 @@ def normalizar_url(url: str) -> str:
         return ""
     # Preserve YouTube video IDs (v= param) and other query-based IDs
     from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
-import sys
     parsed = urlparse(url)
     params = parse_qs(parsed.query)
     # For YouTube, keep the v= parameter in the normalized URL

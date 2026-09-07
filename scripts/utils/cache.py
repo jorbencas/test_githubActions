@@ -1,3 +1,6 @@
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.constants_downloadfile import ENLACE_KEY, TS_KEY
 #!/usr/bin/env python3
 """
 cache.py — Sistema de caché reutilizable con backend pluggable (SOLID).
@@ -25,10 +28,6 @@ from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
 from typing import Any
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from utils.constants_downloadfile import ENLACE_KEY, TS_KEY
-import sys
-from pathlib import Path
 
 logger = logging.getLogger(__name__)
 

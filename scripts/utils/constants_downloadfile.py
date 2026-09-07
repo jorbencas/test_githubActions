@@ -266,8 +266,6 @@ TELEGRAM_MENSAJE_TEMPLATE = "{icono} *{titulo}*\n📰 `{fuente}` | `{fecha}`\n\n
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from utils.constants_sources import FUENTES  # noqa: E402, F401
 from utils.constants_templates import (  # noqa: E402, F401
-import sys
-from pathlib import Path
     HTML_TEMPLATE, EMAIL_TEMPLATE, MD_TEMPLATE,
     PROMPT_IMAGEN_TEMPLATE, PROMPT_RESUMIR_LOTE, PROMPT_RESUMIR_NOTICIA,
     PROMPT_RECAP_SEMANAL, PROMPT_TRADUCIR_TITULOS,

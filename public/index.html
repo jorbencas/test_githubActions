@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech Timeline — La Historia de la Tecnología en 3D</title>
-  <meta name="description" content="Cronograma interactivo 3D de la historia de la tecnología desde 1970 hasta hoy. Construido con Three.js.">
+  <title>Tech Timeline — La Historia de la Tecnología</title>
+  <meta name="description" content="Cronograma interactivo de la historia de la tecnología desde 1970 hasta hoy.">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -22,105 +21,48 @@
     </div>
   </div>
 
-  <canvas id="timeline-canvas"></canvas>
-
   <header id="header">
     <div class="header-left">
       <h1 class="logo">Tech <span>Timeline</span></h1>
-      <span class="subtitle">1970 — Presente</span>
     </div>
     <div class="header-center">
       <div id="year-display" class="year-display">1970</div>
     </div>
     <div class="header-right">
       <button id="btn-music" class="btn-icon" title="Música ambient">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M9 18V5l12-2v13"/>
-          <circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
         </svg>
       </button>
-      <button id="btn-reset" class="btn-icon" title="Reset vista">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-          <path d="M3 3v5h5"/>
+      <button id="btn-reset" class="btn-icon" title="Volver al inicio">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
         </svg>
       </button>
     </div>
   </header>
 
-  <button id="mobile-filters-toggle" class="mobile-filters-toggle" title="Filtros">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="16" y2="12"/><line x1="4" y1="18" x2="12" y2="18"/>
-    </svg>
-  </button>
+  <div id="timeline-container" class="timeline-container">
+    <div id="timeline-track" class="timeline-track"></div>
+  </div>
 
-  <aside id="filters" class="filters">
-    <button class="filter-btn active" data-category="all">Todos</button>
-    <button class="filter-btn" data-category="languages" style="--cat-color: #00d4ff">
-      <span class="filter-dot"></span>Lenguajes
-    </button>
-    <button class="filter-btn" data-category="frameworks" style="--cat-color: #a855f7">
-      <span class="filter-dot"></span>Frameworks
-    </button>
-    <button class="filter-btn" data-category="tools" style="--cat-color: #10b981">
-      <span class="filter-dot"></span>Herramientas
-    </button>
-    <button class="filter-btn" data-category="ai" style="--cat-color: #f59e0b">
-      <span class="filter-dot"></span>IA/ML
-    </button>
-    <button class="filter-btn" data-category="hardware" style="--cat-color: #ef4444">
-      <span class="filter-dot"></span>Hardware
-    </button>
-    <button class="filter-btn" data-category="internet" style="--cat-color: #3b82f6">
-      <span class="filter-dot"></span>Internet
-    </button>
-    <button class="filter-btn" data-category="companies" style="--cat-color: #ec4899">
-      <span class="filter-dot"></span>Empresas
-    </button>
-    <button class="filter-btn" data-category="opensource" style="--cat-color: #14b8a6">
-      <span class="filter-dot"></span>Open Source
-    </button>
-  </aside>
-
-  <div id="event-panel" class="event-panel hidden">
-    <button id="panel-close" class="panel-close">&times;</button>
-    <div class="panel-category"></div>
-    <h2 class="panel-title"></h2>
-    <div class="panel-year"></div>
-    <p class="panel-description"></p>
-    <a class="panel-link" href="#" target="_blank" rel="noopener">
-      Saber más
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-        <polyline points="15 3 21 3 21 9"/>
-        <line x1="10" y1="14" x2="21" y2="3"/>
-      </svg>
-    </a>
+  <div id="year-bar" class="year-bar">
+    <div id="year-bar-inner" class="year-bar-inner"></div>
   </div>
 
   <div id="stats" class="stats">
-    <span id="stat-total">0 eventos</span>
-    <span class="stat-sep">·</span>
-    <span id="stat-visible">0 visibles</span>
+    <span id="stat-total">0 noticias</span>
     <span class="stat-sep">·</span>
     <span id="stat-year">1970</span>
   </div>
 
   <div id="scroll-hint" class="scroll-hint">
-    <span>Scroll para explorar</span>
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M12 5v14M5 12l7 7 7-7"/>
+    <span>Desliza para explorar</span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M5 12h14M12 5l7 7-7 7"/>
     </svg>
   </div>
 
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
-    }
-  }
-  </script>
-  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>
