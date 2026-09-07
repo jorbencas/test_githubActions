@@ -61,7 +61,8 @@
       "description": "Primera CPU comercial de un solo chip. 2300 transistores, 740 kHz.",
       "url": "https://en.wikipedia.org/wiki/Intel_4004",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Intel_C4004.jpg/330px-Intel_C4004.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "ethernet",
@@ -81,7 +82,8 @@
       "description": "Dennis Ritchie crea el lenguaje C en Bell Labs.",
       "url": "https://en.wikipedia.org/wiki/C_(programming_language)",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/C1stEdition.svg/330px-C1stEdition.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "sql",
@@ -101,7 +103,8 @@
       "description": "Steve Jobs y Steve Wozniak lanzan el Apple II, primer PC popular.",
       "url": "https://en.wikipedia.org/wiki/Apple_II",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Apple_II-IMG_7064.jpg/330px-Apple_II-IMG_7064.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "ms-dos",
@@ -121,7 +124,8 @@
       "description": "ARPANET adopta TCP/IP, nace Internet.",
       "url": "https://en.wikipedia.org/wiki/Internet",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Internet_map_1024_-_transparent%2C_inverted.png/330px-Internet_map_1024_-_transparent%2C_inverted.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "macintosh",
@@ -161,7 +165,8 @@
       "description": "Tim Berners-Lee inventa la WWW en el CERN.",
       "url": "https://en.wikipedia.org/wiki/World_Wide_Web",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Chrome_on_Linux.png/330px-Chrome_on_Linux.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "linux",
@@ -171,7 +176,8 @@
       "description": "Linus Torvalds publica el kernel Linux.",
       "url": "https://en.wikipedia.org/wiki/Linux",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #14b8a6, #0f766e)"
+      "gradient": "linear-gradient(135deg, #14b8a6, #0f766e)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/330px-Tux.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "python",
@@ -211,7 +217,8 @@
       "description": "Sun Microsystems lanza Java: 'Write once, run anywhere'.",
       "url": "https://en.wikipedia.org/wiki/Java_(programming_language)",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)",
+      "image": "https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/330px-Java_programming_language_logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "javascript",
@@ -221,7 +228,8 @@
       "description": "Brendan Eich crea JavaScript en Netscape en 10 días.",
       "url": "https://en.wikipedia.org/wiki/JavaScript",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Logo_of_TC39.svg/330px-Logo_of_TC39.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "windows-95",
@@ -251,7 +259,8 @@
       "description": "Larry Page y Sergey Brin fundan Google en un garaje.",
       "url": "https://en.wikipedia.org/wiki/Google",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Googleplex_HQ_%28cropped%29.jpg/330px-Googleplex_HQ_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "php",
@@ -341,7 +350,8 @@
       "description": "Mark Zuckerberg lanza Facebook desde Harvard.",
       "url": "https://en.wikipedia.org/wiki/Facebook",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)",
+      "image": "https://upload.wikimedia.org/wikipedia/en/6/64/Facebook_user_page.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled"
     },
     {
       "id": "github",
@@ -351,7 +361,8 @@
       "description": "Chris Wanstrath, PJ Hyett y Tom Preston-Werner fundan GitHub.",
       "url": "https://en.wikipedia.org/wiki/GitHub",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #14b8a6, #0f766e)"
+      "gradient": "linear-gradient(135deg, #14b8a6, #0f766e)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/330px-GitHub_Invertocat_Logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "android",
@@ -381,7 +392,8 @@
       "description": "Ryan Dahl crea Node.js con motor V8 de Chrome.",
       "url": "https://en.wikipedia.org/wiki/Node.js",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/330px-Node.js_logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "docker",
@@ -391,7 +403,8 @@
       "description": "Solomon Hykes presenta Docker en PyCon.",
       "url": "https://en.wikipedia.org/wiki/Docker_(software)",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #10b981, #047857)"
+      "gradient": "linear-gradient(135deg, #10b981, #047857)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Docker_commands_screenshot.webp/330px-Docker_commands_screenshot.webp?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "swift",
@@ -411,7 +424,8 @@
       "description": "Facebook libera React para interfaces de usuario.",
       "url": "https://en.wikipedia.org/wiki/React_(JavaScript_library)",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)"
+      "gradient": "linear-gradient(135deg, #a855f7, #6b21a8)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/React_Logo_SVG.svg/330px-React_Logo_SVG.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "angular",
@@ -471,7 +485,8 @@
       "description": "Google libera TensorFlow para machine learning.",
       "url": "https://en.wikipedia.org/wiki/TensorFlow",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/TensorFlow_logo.svg/330px-TensorFlow_logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "transformers",
@@ -551,7 +566,8 @@
       "description": "OpenAI lanza ChatGPT, IA que llega a 100M usuarios en 2 meses.",
       "url": "https://en.wikipedia.org/wiki/ChatGPT",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)"
+      "gradient": "linear-gradient(135deg, #f59e0b, #b45309)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/OpenAI_logo_2025_%28symbol%29.svg/330px-OpenAI_logo_2025_%28symbol%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "gpt-4",
@@ -631,7 +647,8 @@
       "description": "Microsoft lanza TypeScript, JavaScript con tipos.",
       "url": "https://en.wikipedia.org/wiki/TypeScript",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)"
+      "gradient": "linear-gradient(135deg, #00d4ff, #0066cc)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Typescript.svg/330px-Typescript.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "vscode",
@@ -651,7 +668,8 @@
       "description": "Linus Torvalds crea Git para el kernel Linux.",
       "url": "https://en.wikipedia.org/wiki/Git",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #10b981, #047857)"
+      "gradient": "linear-gradient(135deg, #10b981, #047857)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Git-logo.svg/330px-Git-logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "aws",
@@ -661,7 +679,8 @@
       "description": "AWS lanza EC2 y S3, nace la nube moderna.",
       "url": "https://en.wikipedia.org/wiki/Amazon_Web_Services",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)"
+      "gradient": "linear-gradient(135deg, #3b82f6, #1d4ed8)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Amazon_Web_Services_2025.svg/330px-Amazon_Web_Services_2025.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "iphone",
@@ -671,7 +690,8 @@
       "description": "Steve Jobs presenta el iPhone, revoluciona los móviles.",
       "url": "https://en.wikipedia.org/wiki/IPhone",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)"
+      "gradient": "linear-gradient(135deg, #ef4444, #991b1b)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/IPhone_17_Pro_Vector.svg/330px-IPhone_17_Pro_Vector.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "app-store",
@@ -1021,7 +1041,8 @@
       "description": "Sam Altman, Elon Musk y otros fundan OpenAI.",
       "url": "https://en.wikipedia.org/wiki/OpenAI",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/1515_Third_Street.jpg/330px-1515_Third_Street.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "deepmind",
@@ -1581,7 +1602,8 @@
       "description": "Chad Hurley, Steve Chen y Jawed Karim fundan YouTube.",
       "url": "https://en.wikipedia.org/wiki/YouTube",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)"
+      "gradient": "linear-gradient(135deg, #ec4899, #9d174d)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Youtube_interface%2C_showing_search_results_of_Burger_Recipe.png/330px-Youtube_interface%2C_showing_search_results_of_Burger_Recipe.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "twitter",
@@ -3211,7 +3233,8 @@
       "description": "Bill Gates y Paul Allen fundan Microsoft para desarrollar software para el Altair 8800.",
       "url": "https://en.wikipedia.org/wiki/Microsoft",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Aerial_Microsoft_West_Campus_August_2009.jpg/330px-Aerial_Microsoft_West_Campus_August_2009.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "news-apple-founded",
@@ -3221,7 +3244,8 @@
       "description": "Steve Jobs, Steve Wozniak y Ronald Wayne fundan Apple en un garaje de Los Altos.",
       "url": "https://en.wikipedia.org/wiki/Apple_Inc.",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/330px-Apple_logo_black.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "news-intel-8086",
@@ -3241,7 +3265,8 @@
       "description": "IBM presenta el Personal Computer. Estándar de facto de la informática personal.",
       "url": "https://en.wikipedia.org/wiki/IBM_Personal_Computer",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/IBM_Personal_Computer_badge_recreation.svg/330px-IBM_Personal_Computer_badge_recreation.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "news-macintosh-launch",
@@ -3281,7 +3306,8 @@
       "description": "Mosaic: el primer navegador web popular que cambia Internet para siempre.",
       "url": "https://en.wikipedia.org/wiki/Mosaic_(web_browser)",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/NCSA_Mosaic_Browser_Screenshot.png/330px-NCSA_Mosaic_Browser_Screenshot.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "news-amazon-founded",
@@ -3331,7 +3357,8 @@
       "description": "El NASDAQ se desploma. Miles de startups cierran. El mundo tech cambia para siempre.",
       "url": "https://en.wikipedia.org/wiki/Dot-com_bubble",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Nasdaq_Composite_dot-com_bubble.svg/330px-Nasdaq_Composite_dot-com_bubble.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "news-wikipedia",
@@ -3381,7 +3408,8 @@
       "description": "Amazon lanza EC2 y S3. La nube empieza. El cloud computing nace.",
       "url": "https://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/AWS_Simple_Icons_Compute_Amazon_EC2_Instances.svg/330px-AWS_Simple_Icons_Compute_Amazon_EC2_Instances.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "news-iphone-launch",
@@ -3391,7 +3419,8 @@
       "description": "Steve Jobs presenta el iPhone. 'Un iPod, un teléfono, un dispositivo de Internet'.",
       "url": "https://en.wikipedia.org/wiki/iPhone_(1st_generation)",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/IPhone_1st_Gen.svg/330px-IPhone_1st_Gen.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "news-android-launch",
@@ -3621,7 +3650,8 @@
       "description": "La pandemia obliga al trabajo remoto. Zoom crece 30x. El mundo digitaliza.",
       "url": "https://en.wikipedia.org/wiki/COVID-19_pandemic",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Covid-19_SP_-_UTI_V._Nova_Cachoeirinha.jpg/330px-Covid-19_SP_-_UTI_V._Nova_Cachoeirinha.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "news-clubhouse",
@@ -3681,7 +3711,8 @@
       "description": "OpenAI lanza ChatGPT. 100M de usuarios en 2 meses. La IA llega al mainstream.",
       "url": "https://en.wikipedia.org/wiki/ChatGPT",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/OpenAI_logo_2025_%28symbol%29.svg/330px-OpenAI_logo_2025_%28symbol%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "news-stable-diffusion",
@@ -3791,7 +3822,8 @@
       "description": "Larry Page y Sergey Brin fundan Google en un garaje de Stanford.",
       "url": "https://en.wikipedia.org/wiki/Google",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Googleplex_HQ_%28cropped%29.jpg/330px-Googleplex_HQ_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "news-palm-pilot",
@@ -4201,7 +4233,8 @@
       "description": "Tim Berners-Lee propone la World Wide Web en el CERN.",
       "url": "https://en.wikipedia.org/wiki/World_Wide_Web",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Chrome_on_Linux.png/330px-Chrome_on_Linux.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "news-nsfnet-1990",
@@ -4221,7 +4254,8 @@
       "description": "Linus Torvalds publica Linux en comp.os.minix. El kernel open source nace.",
       "url": "https://en.wikipedia.org/wiki/Linux",
       "importance": 3,
-      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)"
+      "gradient": "linear-gradient(135deg, #6366f1, #4338ca)",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Tux.svg/330px-Tux.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail"
     },
     {
       "id": "news-amiga-1992",
