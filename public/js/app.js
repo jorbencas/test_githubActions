@@ -31,8 +31,6 @@ class App {
     this.track = document.getElementById('timeline-track');
     this.yearDisplay = document.getElementById('year-display');
     this.yearBarInner = document.getElementById('year-bar-inner');
-    this.statTotal = document.getElementById('stat-total');
-    this.statYear = document.getElementById('stat-year');
     this.scrollHint = document.getElementById('scroll-hint');
     this.loadingEl = document.getElementById('loading');
 
@@ -57,14 +55,6 @@ class App {
   }
 
   _bindButtons() {
-    const btnReset = document.getElementById('btn-reset');
-    if (btnReset) {
-      btnReset.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.container.scrollTo({ left: 0, behavior: 'smooth' });
-      });
-    }
-
     const btnMusic = document.getElementById('btn-music');
     if (btnMusic) {
       btnMusic.addEventListener('click', (e) => {
@@ -181,7 +171,6 @@ class App {
     if (closestYear !== this.currentYear) {
       this.currentYear = closestYear;
       this.yearDisplay.textContent = closestYear;
-      this.statYear.textContent = closestYear;
       this.yearDisplay.classList.add('active');
       clearTimeout(this._yearTimeout);
       this._yearTimeout = setTimeout(() => this.yearDisplay.classList.remove('active'), 600);
@@ -280,7 +269,6 @@ class App {
       const data = await resp.json();
 
       this.events = data.events || [];
-      this.statTotal.textContent = `${this.events.length} noticias`;
 
       this._buildTimeline();
       this._buildYearBar();

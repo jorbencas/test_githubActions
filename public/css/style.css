@@ -1,16 +1,16 @@
 /* Tech Timeline — 2D Horizontal Cards */
 
 :root {
-  --bg: #0f172a;
-  --bg-card: #1e293b;
-  --bg-card-hover: #273548;
-  --text: #f1f5f9;
-  --text-dim: #94a3b8;
-  --text-muted: #64748b;
-  --accent: #38bdf8;
-  --accent-dim: rgba(56, 189, 248, 0.15);
-  --border: rgba(255, 255, 255, 0.06);
-  --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --bg: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --text: #0f172a;
+  --text-dim: #475569;
+  --text-muted: #94a3b8;
+  --accent: #2563eb;
+  --accent-dim: rgba(37, 99, 235, 0.08);
+  --border: rgba(0, 0, 0, 0.08);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
   --font: 'Inter', -apple-system, sans-serif;
   --mono: 'JetBrains Mono', monospace;
 }
@@ -63,10 +63,10 @@ html, body {
 }
 .year-display {
   font-size: 42px; font-weight: 200; font-family: var(--mono);
-  color: var(--accent); opacity: 0.3; transition: opacity 0.3s;
+  color: var(--accent); opacity: 1; transition: opacity 0.3s;
   user-select: none; line-height: 1;
 }
-.year-display.active { opacity: 0.8; }
+.year-display.active { opacity: 1; }
 .header-right { display: flex; gap: 6px; }
 .btn-icon {
   width: 36px; height: 36px;
@@ -115,7 +115,7 @@ html, body {
   font-size: 64px;
   font-weight: 800;
   font-family: var(--mono);
-  color: rgba(255, 255, 255, 0.04);
+  color: rgba(0, 0, 0, 0.05);
   user-select: none;
   margin-bottom: 12px;
   text-align: center;
@@ -249,34 +249,20 @@ html, body {
 .year-tick:hover { color: var(--accent); background: var(--accent-dim); }
 .year-tick.active { color: var(--accent); font-weight: 600; }
 
-/* Stats */
-.stats {
-  position: fixed;
-  bottom: 54px; left: 50%; transform: translateX(-50%);
-  z-index: 100;
-  display: flex; align-items: center; gap: 8px;
-  padding: 5px 12px;
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  backdrop-filter: blur(8px);
-  font-size: 10px; font-family: var(--mono); color: var(--text-muted);
-}
-.stat-sep { color: var(--border); }
-
 /* Scroll Hint */
 .scroll-hint {
   position: fixed;
-  bottom: 100px; left: 50%; transform: translateX(-50%);
+  bottom: 60px; left: 50%; transform: translateX(-50%);
   z-index: 100;
   display: flex; align-items: center; gap: 6px;
   padding: 6px 12px;
-  background: rgba(15, 23, 42, 0.8);
+  background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 6px;
   font-size: 11px; color: var(--text-dim);
   animation: pulse 2s infinite;
   transition: opacity 0.3s;
+  box-shadow: var(--shadow);
 }
 .scroll-hint.hidden { opacity: 0; pointer-events: none; }
 @keyframes pulse {
@@ -293,7 +279,6 @@ html, body {
   .card-desc { font-size: 10px; -webkit-line-clamp: 2; }
   .year-display { font-size: 32px; }
   #header { padding: 10px 14px; }
-  .stats { bottom: 52px; font-size: 9px; }
   .scroll-hint { display: none; }
   .year-bar { height: 40px; padding-bottom: 6px; }
   .year-tick { font-size: 9px; padding: 3px 4px; }
