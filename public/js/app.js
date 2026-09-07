@@ -36,11 +36,9 @@ class App {
 
     this.currentYear = YEAR_MIN;
     this.events = [];
-    this.years = {};
 
     this._bindScroll();
     this._bindButtons();
-    this._bindYearBar();
     this._loadData();
   }
 
@@ -86,15 +84,10 @@ class App {
     const lfo = ctx.createOscillator();
     const lfoGain = ctx.createGain();
 
-    osc1.type = 'sine';
-    osc1.frequency.value = 110;
-    osc2.type = 'sine';
-    osc2.frequency.value = 165;
-
-    lfo.type = 'sine';
-    lfo.frequency.value = 0.1;
+    osc1.type = 'sine'; osc1.frequency.value = 110;
+    osc2.type = 'sine'; osc2.frequency.value = 165;
+    lfo.type = 'sine'; lfo.frequency.value = 0.1;
     lfoGain.gain.value = 15;
-
     gain.gain.value = 0.03;
 
     lfo.connect(lfoGain);
@@ -103,48 +96,7 @@ class App {
     osc2.connect(gain);
     gain.connect(ctx.destination);
 
-    osc1.start();
-    osc2.start();
-    lfo.start();
-  }
-
-  _bindYearBar() {
-    const ticks = this.yearBarInner.querySelectorAll('.year-tick');
-    ticks.forEach(tick => {
-      tick.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const year = parseInt(tick.dataset.year);
-        this._scrollToYear(year);
-      });
-    });
-  }
-
-  _buildYearBar() {
-    this.yearBarInner.innerHTML = '';
-    for (let y = YEAR_MIN; y <= YEAR_MAX; y += 5) {
-      const tick = document.createElement('div');
-      tick.className = 'year-tick';
-      tick.dataset.year = y;
-      tick.textContent = y;
-      tick.addEventListener('click', () => this._scrollToYear(y));
-      this.yearBarInner.appendChild(tick);
-    }
-    // Add final year
-    if (YEAR_MAX % 5 !== 0) {
-      const tick = document.createElement('div');
-      tick.className = 'year-tick';
-      tick.dataset.year = YEAR_MAX;
-      tick.textContent = YEAR_MAX;
-      tick.addEventListener('click', () => this._scrollToYear(YEAR_MAX));
-      this.yearBarInner.appendChild(tick);
-    }
-  }
-
-  _scrollToYear(year) {
-    const col = this.track.querySelector(`[data-year="${year}"]`);
-    if (col) {
-      col.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    }
+    osc1.start(); osc2.start(); lfo.start();
   }
 
   _updateYearFromScroll() {
@@ -152,16 +104,16 @@ class App {
     const containerWidth = this.container.clientWidth;
     const center = scrollLeft + containerWidth / 2;
 
-    const columns = this.track.querySelectorAll('.year-column');
+    const groups = this.track.querySelectorAll('.year-group');
     let closestYear = YEAR_MIN;
     let closestDist = Infinity;
 
-    columns.forEach(col => {
-      const rect = col.getBoundingClientRect();
+    groups.forEach(grp => {
+      const rect = grp.getBoundingClientRect();
       const containerRect = this.container.getBoundingClientRect();
-      const colCenter = rect.left + rect.width / 2 - containerRect.left + scrollLeft;
-      const dist = Math.abs(colCenter - center);
-      const year = parseInt(col.dataset.year);
+      const grpCenter = rect.left + rect.width / 2 - containerRect.left + scrollLeft;
+      const dist = Math.abs(grpCenter - center);
+      const year = parseInt(grp.dataset.year);
       if (dist < closestDist) {
         closestDist = dist;
         closestYear = year;
@@ -236,29 +188,57 @@ class App {
       byYear[y].push(ev);
     });
 
-    // Create columns for each year
+    // Create year groups
     for (let year = YEAR_MIN; year <= YEAR_MAX; year++) {
-      const col = document.createElement('div');
-      col.className = 'year-column';
-      col.dataset.year = year;
+      const yearEvents = byYear[year] || [];
+      if (yearEvents.length === 0) continue;
+
+      const group = document.createElement('div');
+      group.className = 'year-group';
+      group.dataset.year = year;
 
       const label = document.createElement('div');
       label.className = 'year-label';
       label.textContent = year;
-      col.appendChild(label);
+      group.appendChild(label);
 
-      const cardsContainer = document.createElement('div');
-      cardsContainer.className = 'year-cards';
+      const cardsRow = document.createElement('div');
+      cardsRow.className = 'year-cards';
 
-      const yearEvents = byYear[year] || [];
       yearEvents.sort((a, b) => (a.importance || 0) - (b.importance || 0));
-
       yearEvents.forEach(ev => {
-        cardsContainer.appendChild(this._createCard(ev));
+        cardsRow.appendChild(this._createCard(ev));
       });
 
-      col.appendChild(cardsContainer);
-      this.track.appendChild(col);
+      group.appendChild(cardsRow);
+      this.track.appendChild(group);
+    }
+  }
+
+  _buildYearBar() {
+    this.yearBarInner.innerHTML = '';
+    for (let y = YEAR_MIN; y <= YEAR_MAX; y += 5) {
+      const tick = document.createElement('div');
+      tick.className = 'year-tick';
+      tick.dataset.year = y;
+      tick.textContent = y;
+      tick.addEventListener('click', () => this._scrollToYear(y));
+      this.yearBarInner.appendChild(tick);
+    }
+    if (YEAR_MAX % 5 !== 0) {
+      const tick = document.createElement('div');
+      tick.className = 'year-tick';
+      tick.dataset.year = YEAR_MAX;
+      tick.textContent = YEAR_MAX;
+      tick.addEventListener('click', () => this._scrollToYear(YEAR_MAX));
+      this.yearBarInner.appendChild(tick);
+    }
+  }
+
+  _scrollToYear(year) {
+    const grp = this.track.querySelector(`[data-year="${year}"]`);
+    if (grp) {
+      grp.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     }
   }
 
