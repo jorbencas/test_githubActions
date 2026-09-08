@@ -179,17 +179,29 @@ Timeline interactiva de la historia de la tecnología (1970-2025), desplegada en
 
 ---
 
-## 📊 Dashboard
+## 📊 Dashboard — Tech Timeline
 
-Desplegado en Surge.sh. **Server-side rendered (SSR)** — Python genera un único `index.html` con todo el contenido pre-renderizado.
+Desplegado en Surge.sh. Experiencia inmersiva de scroll horizontal 2D que recorre la historia de la tecnología (1970-2025).
 
 **Características:**
-- ResourceCard con `headline`, `features`, `platform`
-- Chips de fuente dual (YouTube + web)
-- Filtros de canal separados
-- Badges de tipo (`📄 Noticia`, `🎬 Video`, etc.)
-- Dark theme con gradiente
-- Traducción inteligente (flag `traducido`)
+- **6 eras temáticas** con imágenes reales de Unsplash (Mainframes, PC, Internet, Web 2.0, Móvil, IA)
+- **Parallax 3 capas** (back, mid, front) con efecto teatro
+- **Partículas canvas** (humo + brasas) con colores por era
+- **Música ambiente** (Web Audio API, generada proceduralmente)
+- **Animaciones scroll** (IntersectionObserver) con efecto fade-in
+- **Año dinámico** que cambia al hacer scroll
+- **Línea temporal** con puntos de eventos interactivos
+- **Responsive** (320px → ultra-wide, landscape, touch, reduced motion)
+- **424 eventos** de historia tech (1970-2025)
+
+**Estructura:**
+```
+public/
+├── index.html          ← HTML principal
+├── css/style.css       ← Dark theme + 14 breakpoints responsive
+├── js/app.js           ← Lógica: eras, parallax, partículas, audio, scroll
+└── data/events.json    ← 424 eventos de historia tech
+```
 
 ---
 
