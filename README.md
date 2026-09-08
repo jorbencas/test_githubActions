@@ -20,7 +20,7 @@
 
 Ecosistema de automatización tech que ejecuta **16 workflows de GitHub Actions** formando un pipeline de contenido completamente automatizado. Recolecta de **547 fuentes** (158 canales YouTube, 161 feeds RSS, 225 sitios de web scraping, 89 GitHub Topics, 5 GitHub Repos, 1 Product Hunt), procesa con **IA (Gemini)** y distribuye contenido a múltiples canales.
 
-**[🚀 News Dashboard](http://jorbencasdownloaderdocument.surge.sh)**
+**[🚀 News Dashboard](http://jorbencasdownloaderdocument.surge.sh)** · **[📖 Blog: Tech Pulse](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard)** · **[🔧 Instalación](https://blog-jorbencas.vercel.app/posts/instalacion-tech-pulse)**
 
 </div>
 
@@ -28,14 +28,16 @@ Ecosistema de automatización tech que ejecuta **16 workflows de GitHub Actions*
 
 ## 📋 Overview
 
-| Fase | Descripción | Frecuencia |
-|------|-------------|------------|
-| 🌐 **Scraping** | Recolección de datos de 547 fuentes | Cada hora / 6h / diario |
-| 🤖 **IA** | Procesamiento con Gemini (resúmenes, traducción) | En cada scraping |
-| 📤 **Publicación** | Distribución multicanal (Email, Telegram, Dashboard) | Diario / cada 30min |
-| 💡 **Tips** | Contenido generado con IA (708 tips, 80 categorías) | Cada 3 horas |
-| 🛠️ **Herramientas** | Auto-detección de herramientas IA (166 categorías) | Cada 3 horas |
-| 🌅 **Saludos** | Imágenes generadas con IA | Cada 3 horas |
+> **[📖 Leer más en el blog](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard)** — Explicación detallada de la arquitectura y decisiones de diseño.
+
+| Fase | Descripción | Frecuencia | Blog |
+|------|-------------|------------|------|
+| 🌐 **Scraping** | Recolección de datos de 547 fuentes | Cada hora / 6h / diario | [📖](https://blog-jorbencas.vercel.app/posts/instalacion-tech-pulse) |
+| 🤖 **IA** | Procesamiento con Gemini (resúmenes, traducción) | En cada scraping | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
+| 📤 **Publicación** | Distribución multicanal (Email, Telegram, Dashboard) | Diario / cada 30min | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
+| 💡 **Tips** | Contenido generado con IA (708 tips, 80 categorías) | Cada 3 horas | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
+| 🛠️ **Herramientas** | Auto-detección de herramientas IA (166 categorías) | Cada 3 horas | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
+| 🌅 **Saludos** | Imágenes generadas con IA | Cada 3 horas | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
 
 ---
 
@@ -267,6 +269,18 @@ python -m scripts.scrapers.scrape_eixam          # Recopilar y archivar
 python -m scripts.scrapers.scrape_eixam --dry-run  # Dry-run
 python -m scripts.scrapers.scrape_eixam --enviar   # Enviar a Telegram
 ```
+
+---
+
+## 📚 Blog Posts
+
+Artículos relacionados en [blog-jorbencas.vercel.app](https://blog-jorbencas.vercel.app):
+
+| Post | Descripción |
+|------|-------------|
+| [Tech Pulse: Dashboard Automatizado](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) | Arquitectura completa del ecosistema |
+| [Instalación de Tech Pulse](https://blog-jorbencas.vercel.app/posts/instalacion-tech-pulse) | Guía paso a paso de configuración |
+| [Devjobs Automation Suite](https://blog-jorbencas.vercel.app/proyectos/devjobs-automation-suite) | Pipeline de video, bots IA y scrapers |
 
 ---
 
