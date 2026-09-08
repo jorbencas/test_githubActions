@@ -12,8 +12,10 @@ import asyncio
 import json
 import logging
 import os
+import sys
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
+from pathlib import Path
 
 import aiohttp
 
@@ -98,9 +100,6 @@ async def run():
     if nuevos:
         try:
             import google.genai as genai
-import sys
-from pathlib import Path
-
             client_tr = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
             nuevos = await traducir_titulos_ia(nuevos, client_tr)
         except Exception as e:
