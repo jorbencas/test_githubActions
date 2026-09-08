@@ -2,12 +2,17 @@
 """
 scrape_publicapis.py — Extrae APIs de publicapis.io y las guarda en formato compatible con el pipeline de recursos.
 Salida: files/publicapis_apis.json (formato igual a herramientas.json para manage_resources.py).
+
+Incluye detección automática de pricing: visita la web de cada API y busca indicadores
+de planes de pago (pricing, plans, enterprise, etc.)
 """
 import json
 import logging
+import re
 import sys
 from datetime import datetime
 from pathlib import Path
+from urllib.parse import urljoin
 
 import requests
 from bs4 import BeautifulSoup
@@ -24,10 +29,24 @@ PRICING_OVERRIDES = {
     "Connexun": "paid",  # 500€/month - incorrectly marked as free on publicapis.io
 }
 
+# Palabras clave que indican planes de pago
+PAID_KEYWORDS = [
+    "pricing", "plans", "enterprise", "business", "pro plan", "starter plan",
+    "basic plan", "premium", "per month", "per year", "/mo", "/yr",
+    "starts at", "starting at", "price", "subscription", "free tier",
+    "free plan", "limited free", "free trial", "credit card",
+]
+
+# Palabras clave que indican que es completamente gratuito
+FREE_KEYWORDS = [
+    "completely free", "100% free", "no credit card", "always free",
+    "free forever", "no payment", "open source", "github.com",
+]
+
 
 def fetch_page(url: str) -> str | None:
     try:
-        r = requests.get(url, timeout=20, headers={"User-Agent": "Mozilla/5.0"})
+        r = requests.get(url, timeout=15, headers={"User-Agent": "Mozilla/5.0"})
         r.raise_for_status()
         return r.text
     except Exception as e:
@@ -35,16 +54,74 @@ def fetch_page(url: str) -> str | None:
         return None
 
 
-def parse_resources(html: str) -> list[dict]:
-    """Parse resources from publicapis.io HTML page.
-
-    Structure per card:
-        div.api-card
-          a.logo[href]          → link to detail page (/slug)
-          div.meta
-            div.card-head > a   → title text + div.category
-            div.meta > a        → description text
+def check_pricing_from_website(api_url: str) -> str:
+    """Visita la web de la API y busca indicadores de pricing.
+    
+    Returns: "free", "paid", "freemium", o "" (desconocido)
     """
+    try:
+        # Normalizar URL
+        if not api_url.startswith("http"):
+            return ""
+        
+        html = fetch_page(api_url)
+        if not html:
+            return ""
+        
+        soup = BeautifulSoup(html, "html.parser")
+        text = soup.get_text().lower()
+        
+        # Buscar enlaces a páginas de pricing
+        pricing_links = []
+        for a in soup.find_all("a", href=True):
+            href = a["href"].lower()
+            link_text = a.get_text().lower()
+            if any(kw in href or kw in link_text for kw in ["pricing", "plans", "enterprise", "business"]):
+                pricing_links.append(a["href"])
+        
+        # Si hay enlaces a pricing, probablemente tiene planes de pago
+        if pricing_links:
+            # Visitar la primera página de pricing para más detalles
+            pricing_url = urljoin(api_url, pricing_links[0])
+            pricing_html = fetch_page(pricing_url)
+            if pricing_html:
+                pricing_text = pricing_html.lower()
+                
+                # Buscar precios específicos
+                price_patterns = [
+                    r'\$\d+', r'€\d+', r'£\d+',
+                    r'\d+\s*/\s*month', r'\d+\s*/\s*year',
+                    r'per\s+month', r'per\s+year',
+                ]
+                for pattern in price_patterns:
+                    if re.search(pattern, pricing_text):
+                        return "paid"
+                
+                # Buscar indicadores de free tier
+                if any(kw in pricing_text for kw in FREE_KEYWORDS):
+                    return "freemium"
+                
+                # Si tiene página de pricing pero no encontramos precios claros
+                return "paid"
+        
+        # Buscar en el texto principal indicadores de pago
+        for kw in PAID_KEYWORDS:
+            if kw in text:
+                # Verificar si también hay indicadores de free
+                if any(fk in text for fk in FREE_KEYWORDS):
+                    return "freemium"
+                return "paid"
+        
+        # No se encontraron indicadores de pago
+        return "free"
+        
+    except Exception as e:
+        logger.debug(f"Error checking pricing for {api_url}: {e}")
+        return ""
+
+
+def parse_resources(html: str) -> list[dict]:
+    """Parse resources from publicapis.io HTML page."""
     soup = BeautifulSoup(html, "html.parser")
     resources = []
 
@@ -60,7 +137,7 @@ def parse_resources(html: str) -> list[dict]:
         if href.startswith("/"):
             href = BASE_URL + href
 
-        # Title: text inside card-head > a, minus the category div text
+        # Title
         inner_a = card.select_one("div.card-head > a")
         if not inner_a:
             continue
@@ -88,6 +165,35 @@ def parse_resources(html: str) -> list[dict]:
             "pricing": PRICING_OVERRIDES.get(title, ""),
         })
 
+    return resources
+
+
+def enrich_pricing(resources: list[dict]) -> list[dict]:
+    """Enriquece los recursos con información de pricing de sus webs."""
+    logger.info("🔍 Verificando pricing de APIs...")
+    checked = 0
+    enriched = 0
+    
+    for r in resources:
+        # Si ya tiene pricing (override), saltar
+        if r.get("pricing"):
+            continue
+        
+        # Solo verificar APIs nuevas o sin pricing
+        api_url = r.get("enlace", "")
+        if not api_url or "publicapis.io" in api_url:
+            continue
+        
+        pricing = check_pricing_from_website(api_url)
+        if pricing:
+            r["pricing"] = pricing
+            enriched += 1
+        
+        checked += 1
+        if checked % 50 == 0:
+            logger.info(f"  Verificadas {checked} APIs ({enriched} con pricing encontrado)")
+    
+    logger.info(f"✅ Pricing verificado: {checked} APIs revisadas, {enriched} con pricing detectado")
     return resources
 
 
@@ -180,6 +286,8 @@ def main():
     logger.info(f"📊 Total extraído: {len(resources)} APIs")
 
     if resources:
+        # Enriquecer con pricing solo para APIs nuevas
+        resources = enrich_pricing(resources)
         save_resources(resources)
         cats = {}
         for r in resources:
@@ -188,6 +296,15 @@ def main():
         print("\n📈 Resumen por categoría:")
         for cat, count in sorted(cats.items(), key=lambda x: -x[1])[:15]:
             print(f"  {cat}: {count}")
+        
+        # Resumen de pricing
+        pricing_counts = {}
+        for r in resources:
+            p = r.get("pricing", "unknown")
+            pricing_counts[p] = pricing_counts.get(p, 0) + 1
+        print("\n💰 Resumen de pricing:")
+        for p, count in sorted(pricing_counts.items(), key=lambda x: -x[1]):
+            print(f"  {p}: {count}")
     else:
         logger.warning("⚠️ No se encontraron APIs")
 
