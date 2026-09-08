@@ -154,8 +154,6 @@ async def traducir_titulo(titulo: str, client) -> str:
             response = client.models.generate_content(model=modelo, contents=prompt)
             if response and response.text:
                 import json as _json
-import sys
-from pathlib import Path
                 data = _json.loads(response.text.strip().removeprefix("```json").removesuffix("```").strip())
                 trads = data.get("traducciones", [])
                 if trads and trads[0].get("tr"):
