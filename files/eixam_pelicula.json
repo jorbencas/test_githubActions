@@ -1065,5 +1065,17 @@
     "relevancia": 1,
     "pelicula": "Eixam",
     "enviada": true
+  },
+  {
+    "titulo": "ENJAMBRE (EIXAM) | Tráiler Oficial VOSE",
+    "url": "https://www.youtube.com/watch?v=UPjcLBiKe8M",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-08T04:31:56.981995",
+    "medio": "acontrafilms",
+    "imagen": "https://i.ytimg.com/vi/UPjcLBiKe8M/hqdefault.jpg",
+    "tipo": "trailer",
+    "relevancia": 1,
+    "pelicula": "Eixam",
+    "enviada": true
   }
 ]
