@@ -20,7 +20,7 @@
 
 Ecosistema de automatización tech que ejecuta **16 workflows de GitHub Actions** formando un pipeline de contenido completamente automatizado. Recolecta de **547 fuentes** (158 canales YouTube, 161 feeds RSS, 225 sitios de web scraping, 89 GitHub Topics, 5 GitHub Repos, 1 Product Hunt), procesa con **IA (Gemini)** y distribuye contenido a múltiples canales.
 
-**[🚀 News Dashboard](http://jorbencasdownloaderdocument.surge.sh)** · **[📧 Newsletter](mailto:jorbencas@gmail.com)** · **[💬 Telegram](https://t.me/jorbencas)**
+**[🚀 News Dashboard](http://jorbencasdownloaderdocument.surge.sh)**
 
 </div>
 
