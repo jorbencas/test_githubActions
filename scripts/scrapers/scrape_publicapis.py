@@ -18,6 +18,12 @@ logger = logging.getLogger("scrape_publicapis")
 BASE_URL = "https://publicapis.io"
 OUTPUT_FILE = Path("files/publicapis_apis.json")
 
+# Overrides manuales para APIs con información incorrecta en publicapis.io
+# Formato: {"titulo": "pricing"}
+PRICING_OVERRIDES = {
+    "Connexun": "paid",  # 500€/month - incorrectly marked as free on publicapis.io
+}
+
 
 def fetch_page(url: str) -> str | None:
     try:
@@ -79,6 +85,7 @@ def parse_resources(html: str) -> list[dict]:
             "subtipo": "api",
             "descripcion": description[:200],
             "categoria": cat_text or "📊 APIs",
+            "pricing": PRICING_OVERRIDES.get(title, ""),
         })
 
     return resources
