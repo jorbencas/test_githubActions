@@ -10,7 +10,9 @@ import json
 import logging
 import os
 import re
+import sys
 from datetime import datetime
+from pathlib import Path
 from urllib.parse import urljoin
 
 import aiohttp
@@ -20,8 +22,6 @@ from bs4 import BeautifulSoup
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from utils.constants_downloadfile import ALL_KEYWORDS, CATEGORIAS, CONFIG, clasificar_noticia, YT_KEY, RSS_KEY, URL_KEY, TIPO_KEY, SUBTIPO_KEY, SELECTOR_KEY, ORIGEN_KEY, BADGE_KEY, TIPO_VAL_HERRAMIENTA, TIPO_VAL_NOTICIA, TIPO_VAL_VIDEO, TIPO_VAL_SHORTS, TIPO_VAL_LIVE, SUB_VAL_GITHUB, SUB_VAL_GITHUB_TOPIC, SUB_VAL_GITHUB_COLLECTION, SUB_VAL_PRODUCTHUNT, VAL_RSS, VAL_TECH, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, CATEGORIA_KEY, ESTRELLAS_KEY, DESCRIPCION_KEY, LENGUAJE_KEY, REPO_KEY, TS_KEY, F_KEY, FECHA_REAL_KEY, FECHA_PUB_KEY, ID_VIDEO_KEY, IMAGEN_URL_KEY, AVATARS_CACHE_FILENAME
 from xml.etree import ElementTree
-import sys
-from pathlib import Path
 
 logger = logging.getLogger("scraper_base")
 
