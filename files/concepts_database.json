@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 59,
+    "total_concepts": 69,
     "categories": [
       "css_moderno",
       "devops",
@@ -10,9 +10,10 @@
       "interfaces",
       "patrones_diseno",
       "poo",
-      "rag_ai"
+      "rag_ai",
+      "seguridad_web"
     ],
-    "last_scraped": "2026-09-07T03:18:50.856734"
+    "last_scraped": "2026-09-08T20:50:16.907108"
   },
   "concepts": [
     {
@@ -1100,6 +1101,186 @@
       ],
       "cat": "rag_ai",
       "scraped_at": "2026-09-07T03:18:13.471873"
+    },
+    {
+      "title": "Proc macros en Rust: implementar derive macros personalizadas con syn y quote",
+      "summary": "Las macros procedurales (proc macros) de Rust son funciones que reciben código Rust como entrada y devuelven código Rust como salida, todo en tiempo de compilación. A diferencia de las macros declarat",
+      "explanation": "Las macros procedurales (proc macros) de Rust son funciones que reciben código Rust como entrada y devuelven código Rust como salida, todo en tiempo de compilación. A diferencia de las macros declarativas (macro_rules!), que trabajan con patrones de tokens, las proc macros tienen acceso a la estructura sintáctica completa del código. Hay tres tipos:Derive macros:#[derive(MiMacro)]generan código a partir de una struct o enum.Attribute macros:#[mi_atributo]transforman el item al que se aplican.Function-like macros:mi_macro!()similares a las declarativas pero más potentes.Crear el crate de proc macros Las proc macros deben estar en un crate separado conproc-macro = trueenCargo.toml:# Cargo.toml del crate de macros\n[package]\nname = \"mi-derive\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\nproc-macro = true\n\n[dependencies]\nsyn = { version = \"2\", features = [\"full\"] }\nquote = \"1\"\nproc-macro2 = \"1\" Los tres crates son indispensables:syn: parsea el código Rust de entrada a un AST (árbol sintáctico).quote: genera código Rust de salida interpolando variables.proc-macro2: tipos de tokens más ergonómicos que los del compilador.Una derive macro básica",
+      "code_example": "# Cargo.toml del crate de macros\n[package]\nname = \"mi-derive\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[lib]\nproc-macro = true\n\n[dependencies]\nsyn = { version = \"2\", features = [\"full\"] }\nquote = \"1\"\nproc-macro2 = \"1\"",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "seguridad_web"
+      ],
+      "cat": "seguridad_web",
+      "scraped_at": "2026-09-08T20:49:34.536445"
+    },
+    {
+      "title": "Swift Charts: Chart, BarMark, LineMark, PointMark y personalización en SwiftUI",
+      "summary": "Swift Charts es el framework nativo de Apple para visualización de datos en SwiftUI, disponible desde iOS 16. Sustituye a las librerías de terceros para la mayoría de casos de uso y se integra de form",
+      "explanation": "Swift Charts es el framework nativo de Apple para visualización de datos en SwiftUI, disponible desde iOS 16. Sustituye a las librerías de terceros para la mayoría de casos de uso y se integra de forma natural con el sistema de diseño de SwiftUI, incluyendo modo oscuro, Dynamic Type y accesibilidad sin configuración adicional.La estructura básica: Chart y Mark Un gráfico en Swift Charts se compone de un contenedorCharty uno o más tipos de marca (mark). Cada marca representa un elemento visual: barra, línea, punto, área o regla:import Charts\nimport SwiftUI\n\nstruct VentasMensuales: View {\n    let datos = [\n        (mes: \"Ene\", ventas: 120),\n        (mes: \"Feb\", ventas: 95),\n        (mes: \"Mar\", ventas: 180),\n        (mes: \"Abr\", ventas: 145),\n        (mes: \"May\", ventas: 210),\n    ]\n\n    var body: some View {\n        Chart(datos, id: .mes) { item in\n            BarMark(\n                x: .value(\"Mes\", item.mes),\n                y: .value(\"Ventas\", item.ventas)\n            )\n        }\n        .frame(height: 300)\n        .padding()\n    }\n}BarMark, LineMark, PointMark y AreaMark Cada tipo de marca tiene su propio uso.BarMarkpara barras,LineMarkpara líneas temporales,PointMarkpara dispersión yAreaMarkpara resaltar áreas bajo una curva:struct GraficoLineas: View {\n    let temperaturas = [\n        (dia: 1, ciudad: \"Madrid\", temp: 24.0),\n        (dia: 2, ciudad: \"Madrid\", temp: 27.0),\n        (dia: 3, ciudad: \"Madrid\", temp: 22.0),\n        (dia: 1, ciudad: \"Barcelona\", temp: 26.0),\n ",
+      "code_example": "import Charts\nimport SwiftUI\n\nstruct VentasMensuales: View {\n    let datos = [\n        (mes: \"Ene\", ventas: 120),\n        (mes: \"Feb\", ventas: 95),\n        (mes: \"Mar\", ventas: 180),\n        (mes: \"Abr\", ventas: 145),\n        (mes: \"May\", ventas: 210),\n    ]\n\n    var body: some View {\n        Chart(datos, id: .mes) { item in\n            BarMark(\n                x: .value(\"Mes\", item.mes),\n                y: .value(\"Ventas\", item.ventas)\n            )\n        }\n        .frame(height: 300)\n        .padding()\n    }\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-08T20:49:36.235132"
+    },
+    {
+      "title": "ctypes y cffi en Python: llamar a librerías C desde Python sin escribir extensiones",
+      "summary": "Python es un lenguaje de scripting de alto nivel, pero a veces necesitas acceder a funciones de una librería C del sistema, llamar a una DLL nativa o usar código C ya existente sin la complejidad de e",
+      "explanation": "Python es un lenguaje de scripting de alto nivel, pero a veces necesitas acceder a funciones de una librería C del sistema, llamar a una DLL nativa o usar código C ya existente sin la complejidad de escribir una extensión en C. Los módulosctypesycffipermiten hacer exactamente eso: llamar a código C compilado desde Python puro, con cero compilación adicional en el caso más simple.ctypes: cargar librerías del sistemaimport ctypes\nimport sys\n\n# Cargar la librería C estándar\nif sys.platform == 'linux':\n    libc = ctypes.CDLL('libc.so.6')\nelif sys.platform == 'darwin':\n    libc = ctypes.CDLL('libc.dylib')\nelse:\n    libc = ctypes.cdll.msvcrt   # Windows\n\n# Llamar a strlen\nlibc.strlen.restype = ctypes.c_size_t\nlibc.strlen.argtypes = [ctypes.c_char_p]\n\ncadena = b\"Hola Python\"\nlongitud = libc.strlen(cadena)\nprint(f\"strlen('{cadena.decode()}') = {longitud}\")   # 11restype y argtypes: definir la firma Siempre debes especificarrestypeyargtypes. Sin ellos, ctypes asume que la función devuelveinty que los argumentos se pasan sin conversión, lo que puede causar crashes o resultados incorrectos en funciones que devuelven punteros o doubles.import ctypes\nimport ctypes.util\n\n# Cargar libm (funciones matemáticas)\nlibm_nombre = ctypes.util.find_library('m')\nlibm = ctypes.CDLL(libm_nombre)\n\n# Definir la firma de pow(double, double) -> double\nlibm.pow.restype = ctypes.c_double\nlibm.pow.argtypes = [ctypes.c_double, ctypes.c_double]\n\nresultado = libm.pow(2.0, 10.0)\nprint(f\"2^10 = {resultado}\")   # 1",
+      "code_example": "import ctypes\nimport sys\n\n# Cargar la librería C estándar\nif sys.platform == 'linux':\n    libc = ctypes.CDLL('libc.so.6')\nelif sys.platform == 'darwin':\n    libc = ctypes.CDLL('libc.dylib')\nelse:\n    libc = ctypes.cdll.msvcrt   # Windows\n\n# Llamar a strlen\nlibc.strlen.restype = ctypes.c_size_t\nlibc.strlen.argtypes = [ctypes.c_char_p]\n\ncadena = b\"Hola Python\"\nlongitud = libc.strlen(cadena)\nprint(f\"strlen('{cadena.decode()}') = {longitud}\")   # 11",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-08T20:49:37.926691"
+    },
+    {
+      "title": "Protocolo iterador avanzado en JavaScript: return(), throw(), iteradores lazy e infinitos",
+      "summary": "El protocolo iterador de JavaScript define cómo los objetos exponen secuencias de valores para su consumo confor...of, spread y desestructuración. Más allá del uso básico, los métodosreturn()ythrow()d",
+      "explanation": "El protocolo iterador de JavaScript define cómo los objetos exponen secuencias de valores para su consumo confor...of, spread y desestructuración. Más allá del uso básico, los métodosreturn()ythrow()del protocolo permiten gestionar la limpieza de recursos y la propagación de errores, los iteradores lazy e infinitos generan valores bajo demanda, y los Iterator Helpers de ES2025 encadenan transformaciones sin crear arrays intermedios.El protocolo iterador completo Un iterador cumple el protocolo cuando expone un métodonext()que devuelve{ value, done }. Pero el protocolo también define dos métodos opcionales:return()para liberación anticipada de recursos ythrow()para inyectar errores:class RecursoConLimpieza {\n  #abierto = false;\n  #datos;\n\n  constructor(datos) {\n    this.#datos = datos;\n    this.#abierto = true;\n    console.log('Recurso abierto');\n  }\n\n  [Symbol.iterator]() {\n    let indice = 0;\n    const datos = this.#datos;\n    const cerrar = () => {\n      if (this.#abierto) {\n        this.#abierto = false;\n        console.log('Recurso cerrado');\n      }\n    };\n\n    return {\n      next: () => {\n        if (!this.#abierto) return { value: undefined, done: true };\n        if (indice >= datos.length) {\n          cerrar();\n          return { value: undefined, done: true };\n        }\n        return { value: datos[indice++], done: false };\n      },\n\n      // Llamado cuando for...of termina antes de llegar al final (break, return, throw)\n      return: (valor) => {\n        cerrar(); ",
+      "code_example": "class RecursoConLimpieza {\n  #abierto = false;\n  #datos;\n\n  constructor(datos) {\n    this.#datos = datos;\n    this.#abierto = true;\n    console.log('Recurso abierto');\n  }\n\n  [Symbol.iterator]() {\n    let indice = 0;\n    const datos = this.#datos;\n    const cerrar = () => {\n      if (this.#abierto) {\n        this.#abierto = false;\n        console.log('Recurso cerrado');\n      }\n    };\n\n    return {\n      next: () => {\n        if (!this.#abierto) return { value: undefined, done: true };\n        if (indice >= datos.length) {\n          cerrar();\n          return { value: undefined, done: true };\n        }\n        return { value: datos[indice++], done: false };\n      },\n\n      // Llamado cuando for...of termina antes de llegar al final (break, return, throw)\n      return: (valor) => {\n        cerrar(); // Limpiar el recurso aunque no hayamos llegado al final\n        return { value: valor, done: true };\n      },\n\n      // Llamado si se inyecta un error desde fuera\n      throw: (error) => {\n        cerrar();\n        throw error;\n      },\n    };\n  }\n}\n\nconst recurso = new RecursoConLimpieza([1, 2, 3, 4, 5]);\nfor (const valor of recurso) {\n  if (valor === 3) break; // return() se llama automáticamente\n  console.log(valor);\n}\n// \"Recurso abierto\", 1, 2, \"Recurso cerrado\"  limpieza garantizada",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-08T20:49:39.298888"
+    },
+    {
+      "title": "GATs en Rust: Generic Associated Types para abstracciones más potentes",
+      "summary": "Los Generic Associated Types (GATs), estabilizados en Rust 1.65, permiten que los tipos asociados en un trait lleven parámetros genéricos propios, incluyendo lifetimes. Antes de los GATs, ciertos patr",
+      "explanation": "Los Generic Associated Types (GATs), estabilizados en Rust 1.65, permiten que los tipos asociados en un trait lleven parámetros genéricos propios, incluyendo lifetimes. Antes de los GATs, ciertos patrones de abstracción simplemente no se podían expresar en Rust estable. El ejemplo más conocido que motivó los GATs es elstreaming iteratorolending iterator: un iterador que presta (lends) sus elementos en lugar de devolverlos por valor. Con el traitIteratorestándar, cada elemento debe ser independiente del iterador. Con GATs, el elemento puede vivir tanto como la referencia al iterador.El problema sin GATs: LendingIterator Imagina que quieres un iterador sobre líneas de un fichero que evite copiar cada línea. El iterador reutiliza el mismo buffer para cada línea:// Lo que queremos hacer:\ntrait LendingIterator {\n    type Item<'a> where Self: 'a;  // <-- GAT: Item lleva un lifetime propio\n    fn next(&mut self) -> Option<Self::Item<'_>>;\n}\n\n// Sin GATs, esto no es posible: no podemos expresar\n// que Item depende del lifetime de &mut self Con el traitIteratorestándar,next(&mut self) -> Option<Self::Item>exige queItemsea independiente del iterador. No puedes devolver una referencia al interior del iterador. Con GATs, sí puedes.GATs en acción: un LendingIterator realuse std::io::{BufRead, BufReader, Read};\n\n// El trait con GAT\ntrait LendingIterator {\n    type Item<'a> where Self: 'a;\n    fn next(&mut self) -> Option<Self::Item<'_>>;\n}\n\n// Implementación: iterador sobre líneas de un Bu",
+      "code_example": "// Lo que queremos hacer:\ntrait LendingIterator {\n    type Item<'a> where Self: 'a;  // <-- GAT: Item lleva un lifetime propio\n    fn next(&mut self) -> Option<Self::Item<'_>>;\n}\n\n// Sin GATs, esto no es posible: no podemos expresar\n// que Item depende del lifetime de &mut self",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "habilidades"
+      ],
+      "cat": "habilidades",
+      "scraped_at": "2026-09-08T20:49:41.010822"
+    },
+    {
+      "title": "Core Data en Swift: NSManagedObject, NSFetchRequest, NSPersistentContainer y migraciones",
+      "summary": "Core Data es el framework de persistencia de Apple y, a pesar de su curva de aprendizaje, sigue siendo la opción más potente para almacenar datos estructurados en iOS y macOS. ConNSPersistentContainer",
+      "explanation": "Core Data es el framework de persistencia de Apple y, a pesar de su curva de aprendizaje, sigue siendo la opción más potente para almacenar datos estructurados en iOS y macOS. ConNSPersistentContainer,NSManagedObjectyNSFetchRequestpuedes tener un stack de persistencia completo funcionando en menos de veinte líneas de código.Configurar el stack: NSPersistentContainer NSPersistentContainerencapsula toda la infraestructura de Core Data: el modelo de datos, el coordinador persistente y el contexto principal. La inicialización mínima es:import CoreData\n\nclass PersistenceController {\n    static let shared = PersistenceController()\n\n    let container: NSPersistentContainer\n\n    init(inMemory: Bool = false) {\n        container = NSPersistentContainer(name: \"MiModelo\") // nombre del .xcdatamodeld\n        if inMemory {\n            container.persistentStoreDescriptions.first?.url =\n                URL(fileURLWithPath: \"/dev/null\")\n        }\n        container.loadPersistentStores { _, error in\n            if let error {\n                fatalError(\"Core Data no pudo cargar: (error)\")\n            }\n        }\n        container.viewContext.automaticallyMergesChangesFromParent = true\n    }\n} El flaginMemoryresulta muy útil en tests y en previews de SwiftUI: los datos nunca se escriben a disco y desaparecen al terminar el proceso.NSManagedObject: trabajar con entidades Cada entidad del modelo genera una subclase deNSManagedObject. Con la generación automática de Xcode, cada atributo se convier",
+      "code_example": "import CoreData\n\nclass PersistenceController {\n    static let shared = PersistenceController()\n\n    let container: NSPersistentContainer\n\n    init(inMemory: Bool = false) {\n        container = NSPersistentContainer(name: \"MiModelo\") // nombre del .xcdatamodeld\n        if inMemory {\n            container.persistentStoreDescriptions.first?.url =\n                URL(fileURLWithPath: \"/dev/null\")\n        }\n        container.loadPersistentStores { _, error in\n            if let error {\n                fatalError(\"Core Data no pudo cargar: (error)\")\n            }\n        }\n        container.viewContext.automaticallyMergesChangesFromParent = true\n    }\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-08T20:49:42.386622"
+    },
+    {
+      "title": "importlib en Python: importar módulos dinámicamente, sistemas de plugins y reload",
+      "summary": "El móduloimportlibexpone la maquinaria interna del sistema de imports de Python. Con él puedes importar módulos especificando su nombre como cadena de texto, cargar ficheros.pydesde rutas arbitrarias ",
+      "explanation": "El móduloimportlibexpone la maquinaria interna del sistema de imports de Python. Con él puedes importar módulos especificando su nombre como cadena de texto, cargar ficheros.pydesde rutas arbitrarias fuera delsys.path, recargar módulos en caliente durante el desarrollo y construir sistemas de plugins que se descubren automáticamente sin tocar el código principal.importlib.import_module(): importar por nombreimport importlib\n\n# Equivalente a: import json\njson = importlib.import_module('json')\nprint(json.dumps({\"clave\": \"valor\"}))\n\n# Equivalente a: from pathlib import Path\nPath = importlib.import_module('pathlib').Path\nprint(Path('/tmp').exists())\n\n# Importar submódulos\nlogging_handlers = importlib.import_module('logging.handlers')\nprint(dir(logging_handlers))Importación dinámica según configuraciónimport importlib\n\nBACKENDS_DISPONIBLES = {\n    'json': 'json',\n    'yaml': 'yaml',\n    'toml': 'tomllib',\n}\n\ndef cargar_backend(nombre: str):\n    modulo_nombre = BACKENDS_DISPONIBLES.get(nombre)\n    if not modulo_nombre:\n        raise ValueError(f\"Backend desconocido: {nombre}\")\n    try:\n        return importlib.import_module(modulo_nombre)\n    except ImportError as e:\n        raise ImportError(f\"No se pudo cargar el backend '{nombre}': {e}\") from e\n\n\n# Cargar según configuración en tiempo de ejecución\nbackend_nombre = 'json'  # podría venir de una variable de entorno\nbackend = cargar_backend(backend_nombre)\nprint(backend.dumps({\"config\": True}))importlib.util: cargar ficheros desde ",
+      "code_example": "import importlib\n\n# Equivalente a: import json\njson = importlib.import_module('json')\nprint(json.dumps({\"clave\": \"valor\"}))\n\n# Equivalente a: from pathlib import Path\nPath = importlib.import_module('pathlib').Path\nprint(Path('/tmp').exists())\n\n# Importar submódulos\nlogging_handlers = importlib.import_module('logging.handlers')\nprint(dir(logging_handlers))",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-08T20:49:44.127311"
+    },
+    {
+      "title": "R y Python juntos: reticulate para usar librerías Python desde R",
+      "summary": "La guerra entre R y Python es un debate estéril. En la práctica, muchos equipos usan los dos: R para estadística clásica, modelos lineales y visualización; Python para deep learning, APIs y producción",
+      "explanation": "La guerra entre R y Python es un debate estéril. En la práctica, muchos equipos usan los dos: R para estadística clásica, modelos lineales y visualización; Python para deep learning, APIs y producción. El paquete reticulate hace que ambos lenguajes puedan ejecutarse en la misma sesión, compartiendo objetos sin necesidad de exportar e importar archivos. reticulate incrusta un intérprete Python dentro de R. Puedes importar cualquier módulo Python, llamar funciones Python desde código R, pasar objetos de un lenguaje al otro y mezclar bloques de código en el mismo script o documento Quarto.Instalación y configuracióninstall.packages(\"reticulate\")\nlibrary(reticulate)\n\n# Ver qué instalaciones de Python detecta reticulate\npy_discover_config()\n\n# Especificar una instalación concreta\nuse_python(\"/usr/bin/python3\")\nuse_virtualenv(\"mi_entorno\")       # entorno virtual\nuse_condaenv(\"base\", required = TRUE)  # entorno conda\n\n# Crear y usar un entorno virtual gestionado por reticulate\nvirtualenv_create(\"r-reticulate\")\nuse_virtualenv(\"r-reticulate\", required = TRUE)\n\n# Instalar paquetes Python desde R\npy_install(c(\"numpy\", \"pandas\", \"scikit-learn\", \"matplotlib\"),\n           envname = \"r-reticulate\")\n\n# Verificar configuración activa\npy_config()Importar módulos y llamar funciones Pythonlibrary(reticulate)\n\n# Importar módulos Python\nnp  <- import(\"numpy\")\npd  <- import(\"pandas\")\nplt <- import(\"matplotlib.pyplot\")\n\n# Usar numpy desde R\narr <- np$array(c(1.0, 2.0, 3.0, 4.0, 5.0))\nnp$mean(arr)  ",
+      "code_example": "install.packages(\"reticulate\")\nlibrary(reticulate)\n\n# Ver qué instalaciones de Python detecta reticulate\npy_discover_config()\n\n# Especificar una instalación concreta\nuse_python(\"/usr/bin/python3\")\nuse_virtualenv(\"mi_entorno\")       # entorno virtual\nuse_condaenv(\"base\", required = TRUE)  # entorno conda\n\n# Crear y usar un entorno virtual gestionado por reticulate\nvirtualenv_create(\"r-reticulate\")\nuse_virtualenv(\"r-reticulate\", required = TRUE)\n\n# Instalar paquetes Python desde R\npy_install(c(\"numpy\", \"pandas\", \"scikit-learn\", \"matplotlib\"),\n           envname = \"r-reticulate\")\n\n# Verificar configuración activa\npy_config()",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-08T20:49:47.486957"
+    },
+    {
+      "title": "El ecosistema de paquetes de Julia: Pkg.jl y las librerías esenciales en 2026",
+      "summary": "El gestor de paquetesPkg.jlviene integrado con Julia desde el principio. No es un addon externo como pip o npm: es parte de la instalación base y tiene reproducibilidad de entornos por diseño. Si vien",
+      "explanation": "El gestor de paquetesPkg.jlviene integrado con Julia desde el principio. No es un addon externo como pip o npm: es parte de la instalación base y tiene reproducibilidad de entornos por diseño. Si vienes de Python, el modelo se parece más al de Rust con Cargo que al de pip con virtualenv.Pkg.jl: uso básico Hay dos formas de usar Pkg: el modo interactivo en el REPL (pulsando]) o llamando a las funciones directamente conusing Pkg:# Modo función (en scripts o código)\nusing Pkg\n\nPkg.add(\"DataFrames\")              # instalar paquete\nPkg.add([\"CSV\", \"Plots\", \"Flux\"])  # varios a la vez\nPkg.update()                       # actualizar todos\nPkg.update(\"DataFrames\")           # actualizar uno\nPkg.remove(\"DataFrames\")           # desinstalar\nPkg.status()                       # ver paquetes instalados# Modo interactivo (en el REPL, pulsar ] para entrar en modo Pkg)\n# pkg> add DataFrames\n# pkg> add CSV Plots Flux\n# pkg> update\n# pkg> remove DataFrames\n# pkg> status\n# pkg> instantiate   (instalar lo que indica Manifest.toml)Entornos con Project.toml y Manifest.toml Cada proyecto Julia tiene dos ficheros de dependencias.Project.tomldeclara las dependencias directas con rangos de versión aceptables.Manifest.tomlcaptura las versiones exactas de todas las dependencias (incluyendo las transitivas) para reproducibilidad total.# Activar un entorno local (crea Project.toml y Manifest.toml en el directorio actual)\nPkg.activate(\".\")\n\n# O activar al arrancar Julia:\n# julia --project=.\n\n# Una vez act",
+      "code_example": "# Modo función (en scripts o código)\nusing Pkg\n\nPkg.add(\"DataFrames\")              # instalar paquete\nPkg.add([\"CSV\", \"Plots\", \"Flux\"])  # varios a la vez\nPkg.update()                       # actualizar todos\nPkg.update(\"DataFrames\")           # actualizar uno\nPkg.remove(\"DataFrames\")           # desinstalar\nPkg.status()                       # ver paquetes instalados",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-08T20:49:49.152209"
+    },
+    {
+      "title": "Lua en Neovim: configurar y extender el editor con Lua en lugar de Vimscript",
+      "summary": "Durante décadas, personalizar Vim significaba escribir Vimscript: un lenguaje peculiar, con una sintaxis que mezcla comandos Ex con expresiones, difícil de depurar y prácticamente imposible de reutili",
+      "explanation": "Durante décadas, personalizar Vim significaba escribir Vimscript: un lenguaje peculiar, con una sintaxis que mezcla comandos Ex con expresiones, difícil de depurar y prácticamente imposible de reutilizar entre proyectos. Neovim cambió eso en 2021 con la versión 0.5, que convirtió Lua (con LuaJIT) en el lenguaje de primera clase para configuración y plugins. La diferencia es notable: código Lua es código normal, con modules, closures, tablas y todas las herramientas que ya conocemos.init.lua: el nuevo punto de entrada En lugar de~/.config/nvim/init.vim, Neovim carga~/.config/nvim/init.luasi existe. Desde ahí puedes llamar a cualquier función de la API de Neovim, cargar módulos propios o configurar plugins:-- ~/.config/nvim/init.lua\n\n-- Opciones del editor (equivalente a :set en init.vim)\nvim.opt.number         = true        -- números de línea absolutos\nvim.opt.relativenumber = true        -- + relativos\nvim.opt.tabstop        = 4\nvim.opt.shiftwidth     = 4\nvim.opt.expandtab      = true        -- tabs -> espacios\nvim.opt.wrap           = false\nvim.opt.ignorecase     = true\nvim.opt.smartcase      = true        -- mayúsculas anulan ignorecase\nvim.opt.termguicolors  = true        -- colores de 24 bits\nvim.opt.updatetime     = 250         -- ms para CursorHold\nvim.opt.signcolumn     = \"yes\"       -- columna izquierda siempre visible\n\n-- Variables globales (equivalente a let g:)\nvim.g.mapleader      = \" \"           -- Espacio como leader\nvim.g.maplocalleader = \"\\\"\n\n-- Cargar módulo",
+      "code_example": "-- ~/.config/nvim/init.lua\n\n-- Opciones del editor (equivalente a :set en init.vim)\nvim.opt.number         = true        -- números de línea absolutos\nvim.opt.relativenumber = true        -- + relativos\nvim.opt.tabstop        = 4\nvim.opt.shiftwidth     = 4\nvim.opt.expandtab      = true        -- tabs -> espacios\nvim.opt.wrap           = false\nvim.opt.ignorecase     = true\nvim.opt.smartcase      = true        -- mayúsculas anulan ignorecase\nvim.opt.termguicolors  = true        -- colores de 24 bits\nvim.opt.updatetime     = 250         -- ms para CursorHold\nvim.opt.signcolumn     = \"yes\"       -- columna izquierda siempre visible\n\n-- Variables globales (equivalente a let g:)\nvim.g.mapleader      = \" \"           -- Espacio como leader\nvim.g.maplocalleader = \"\\\"\n\n-- Cargar módulos propios\nrequire(\"mi_config.keymaps\")\nrequire(\"mi_config.lsp\")\nrequire(\"mi_config.plugins\")",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-08T20:49:50.482903"
     }
   ]
 }
