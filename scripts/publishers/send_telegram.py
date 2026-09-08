@@ -14,8 +14,10 @@ import json
 import logging
 import os
 import re
-from datetime import datetime
+import sys
+from datetime import datetime, timedelta
 from logging.handlers import RotatingFileHandler
+from pathlib import Path
 
 import edge_tts
 import requests
@@ -303,9 +305,6 @@ async def run():
     client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
 
     # Filtrar noticias recientes (últimas 24h) y que no estén en caché
-    from datetime import timedelta
-import sys
-from pathlib import Path
     cutoff = datetime.now() - timedelta(hours=24)
     recientes = []
     for n in historial:
