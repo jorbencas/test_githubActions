@@ -65,7 +65,6 @@ scripts/
 │   ├── scrape_ai_tools.py        Auto-detección de herramientas IA
 │   ├── scrape_agent_skills.py    Scraping skills de agentes IA
 │   ├── scrape_concepts.py        Scraping conceptos de programación
-│   ├── scrape_eixam.py           Scraping película "Eixam"
 │   └── scrape_publicapis.py      Scraping APIs públicas
 ├── publishers/               📤 Generación y distribución
 │   ├── generate_weekly.py        Recap semanal + dashboard HTML
@@ -160,7 +159,6 @@ public/                       🕰️ Tech Timeline (Surge.sh)
 | `optimize_images` | Dispatch | Optimización de imágenes |
 | `dashboard_update` | Push (JS/CSS/Python) | Regenerar + deploy dashboard |
 | `tests` | Push/PR a master | pytest (168 tests) |
-| `eixam_scrape` | Cada 6 horas | Scraping película "Eixam" |
 | `translate_descriptions` | Manual | Traducción de descripciones |
 
 ---
@@ -269,18 +267,6 @@ Fallback de traducción en workflows:
 - **Ollama + Qwen 2.5 1.5B** en runner de Actions
 - **Modelo cacheado** (`actions/cache`)
 - **Fallback de Gemini** — si falla, usa Qwen local
-
----
-
-## 🎬 Eixam — Película
-
-Workflow `eixam_scrape` para la película **"Eixam"** (Enjambre, 2026).
-
-```bash
-python -m scripts.scrapers.scrape_eixam          # Recopilar y archivar
-python -m scripts.scrapers.scrape_eixam --dry-run  # Dry-run
-python -m scripts.scrapers.scrape_eixam --enviar   # Enviar a Telegram
-```
 
 ---
 
