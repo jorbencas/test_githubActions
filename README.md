@@ -65,7 +65,7 @@ scripts/
 │   ├── scrape_ai_tools.py        Auto-detección de herramientas IA
 │   ├── scrape_agent_skills.py    Scraping skills de agentes IA
 │   ├── scrape_concepts.py        Scraping conceptos de programación
-│   └── scrape_publicapis.py      Scraping APIs públicas
+│   └── scrape_publicapis.py      Scraping APIs públicas (con detección pricing)
 ├── publishers/               📤 Generación y distribución
 │   ├── generate_weekly.py        Recap semanal + dashboard HTML
 │   ├── manage_resources.py       Gestión de resources.mdx
