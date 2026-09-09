@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 75,
+    "total_concepts": 78,
     "categories": [
       "css_moderno",
       "devops",
@@ -13,7 +13,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-09T10:55:31.597640"
+    "last_scraped": "2026-09-09T16:04:43.004077"
   },
   "concepts": [
     {
@@ -1391,6 +1391,60 @@
       ],
       "cat": "interfaces",
       "scraped_at": "2026-09-09T10:55:28.596903"
+    },
+    {
+      "title": "Rust sin std: desarrollo embebido y no_std para microcontroladores",
+      "summary": "Cuando programas para un microcontrolador, no tienes sistema operativo, no tienes gestor de memoria dinámica y no tienes las utilidades del sistema en las que se basastd. Rust lo resuelve con#![no_std",
+      "explanation": "Cuando programas para un microcontrolador, no tienes sistema operativo, no tienes gestor de memoria dinámica y no tienes las utilidades del sistema en las que se basastd. Rust lo resuelve con#![no_std]: un atributo que desactiva la biblioteca estándar y permite usar solocore(tipos primitivos, traits y operaciones básicas sin dependencias del SO).#![no_std]\n#![no_main]\n\nuse core::panic::PanicInfo;\n\n#[panic_handler]\nfn panic(_info: &PanicInfo) -> ! {\n    loop {}  // En bare metal, detén el programa\n}\n\n#[no_mangle]\npub extern \"C\" fn main() -> ! {\n    loop {}\n} #![no_std]elimina la biblioteca estándar.#![no_main]indica que no hay funciónmainconvencional (el punto de entrada lo define el runtime del microcontrolador). El atributo#[panic_handler]es obligatorio: define qué hacer cuando el código entra en pánico.El ecosistema embedded de Rust Rust para embedded tiene capas bien definidas:core: el subconjunto de std sin heap ni OS. Siempre disponible.alloc: tipos que necesitan heap (Vec,String,Box). Disponible si defines un allocator.embedded-hal: traits para periféricos (GPIO, SPI, I2C, UART). La capa de abstracción de hardware.HAL de chip: implementaciones de embedded-hal para chips específicos (rp2040-hal, stm32f4xx-hal, nrf-hal...).embedded-hal: la capa de abstracción El crateembedded-haldefine traits para interactuar con periféricos de hardware. Si escribes código contra estos traits, funciona en cualquier microcontrolador que los implemente:use embedded_hal::digital::OutputPin;\n",
+      "code_example": "#![no_std]\n#![no_main]\n\nuse core::panic::PanicInfo;\n\n#[panic_handler]\nfn panic(_info: &PanicInfo) -> ! {\n    loop {}  // En bare metal, detén el programa\n}\n\n#[no_mangle]\npub extern \"C\" fn main() -> ! {\n    loop {}\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "habilidades"
+      ],
+      "cat": "habilidades",
+      "scraped_at": "2026-09-09T16:04:00.410349"
+    },
+    {
+      "title": "WidgetKit en Swift: Widget, TimelineProvider, TimelineEntry y actualización programada",
+      "summary": "WidgetKit permite añadir widgets a la pantalla de inicio y a la pantalla de bloqueo de iOS. A diferencia de las extensiones de hoy en día, los widgets no son vistas interactivas en tiempo real, sino i",
+      "explanation": "WidgetKit permite añadir widgets a la pantalla de inicio y a la pantalla de bloqueo de iOS. A diferencia de las extensiones de hoy en día, los widgets no son vistas interactivas en tiempo real, sino instantáneas programadas que el sistema renderiza y muestra cuando lo necesita. Entender este modelo es clave para implementar widgets correctamente.La estructura básica: Widget, TimelineProvider y TimelineEntry Un widget se compone de tres piezas: laentradacon los datos en un momento dado (TimelineEntry), elproveedorque decide qué entradas generar y cuándo (TimelineProvider), y lavistaque renderiza cada entrada.import WidgetKit\nimport SwiftUI\n\n// 1. Entrada: los datos de una snapshot concreta\nstruct EntradaClima: TimelineEntry {\n    let date: Date\n    let temperatura: Double\n    let ciudad: String\n    let icono: String\n}\n\n// 2. Proveedor: genera las entradas del timeline\nstruct ProveedorClima: TimelineProvider {\n    // Vista placeholder mientras se cargan datos reales\n    func placeholder(in context: Context) -> EntradaClima {\n        EntradaClima(date: Date(), temperatura: 22.0, ciudad: \"Madrid\", icono: \"sun.max\")\n    }\n\n    // Snapshot para la galería de widgets\n    func getSnapshot(in context: Context, completion: @escaping (EntradaClima) -> Void) {\n        let entrada = EntradaClima(date: Date(), temperatura: 22.0, ciudad: \"Madrid\", icono: \"sun.max\")\n        completion(entrada)\n    }\n\n    // Timeline completo: array de entradas y política de recarga\n    func getTimeline(in co",
+      "code_example": "import WidgetKit\nimport SwiftUI\n\n// 1. Entrada: los datos de una snapshot concreta\nstruct EntradaClima: TimelineEntry {\n    let date: Date\n    let temperatura: Double\n    let ciudad: String\n    let icono: String\n}\n\n// 2. Proveedor: genera las entradas del timeline\nstruct ProveedorClima: TimelineProvider {\n    // Vista placeholder mientras se cargan datos reales\n    func placeholder(in context: Context) -> EntradaClima {\n        EntradaClima(date: Date(), temperatura: 22.0, ciudad: \"Madrid\", icono: \"sun.max\")\n    }\n\n    // Snapshot para la galería de widgets\n    func getSnapshot(in context: Context, completion: @escaping (EntradaClima) -> Void) {\n        let entrada = EntradaClima(date: Date(), temperatura: 22.0, ciudad: \"Madrid\", icono: \"sun.max\")\n        completion(entrada)\n    }\n\n    // Timeline completo: array de entradas y política de recarga\n    func getTimeline(in context: Context, completion: @escaping (Timeline) -> Void) {\n        Task {\n            let clima = await obtenerClima()\n            let ahora = Date()\n            let entradas = (0..<12).map { hora in\n                EntradaClima(\n                    date: ahora.addingTimeInterval(Double(hora) * 3600),\n                    temperatura: clima.temperatura,\n                    ciudad: clima.ciudad,\n                    icono: clima.icono\n                )\n            }\n            let timeline = Timeline(entries: entradas, policy: .atEnd)\n            completion(timeline)\n        }\n    }\n}\n\n// 3. Vista del widget\nstruct VistaClima: View {\n    var entry: EntradaClima\n\n    var body: some View {\n        VStack {\n            Image(systemName: entry.icono)\n                .font(.largeTitle)\n            Text(\"(entry.temperatura, format: .number.precision(.fractionLength(1)))°\")\n                .font(.title2.bold())\n            Text(entry.ciudad)\n                .font(.caption)\n        }\n        .containerBackground(.blue.gradient, for: .widget)\n    }\n}\n\n// 4. Definición del widget\nstruct ClimaWidget: Widget {\n    let kind: String = \"ClimaWidget\"\n\n    var body: some WidgetConfiguration {\n        StaticConfiguration(kind: kind, provider: ProveedorClima()) { entry in\n            VistaClima(entry: entry)\n        }\n        .configurationDisplayName(\"Clima\")\n        .description(\"Muestra la temperatura actual.\")\n        .supportedFamilies([.systemSmall, .systemMedium])\n    }\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-09T16:04:01.987599"
+    },
+    {
+      "title": "Profiling en Python: cProfile, line_profiler, dis y entender el bytecode",
+      "summary": "Optimizar código Python sin medir primero es uno de los errores más comunes: dedicar horas a acelerar una función que apenas se llama una vez por hora mientras el verdadero cuello de botella pasa desa",
+      "explanation": "Optimizar código Python sin medir primero es uno de los errores más comunes: dedicar horas a acelerar una función que apenas se llama una vez por hora mientras el verdadero cuello de botella pasa desapercibido. Las herramientas deprofilingte dicendóndegasta tiempo tu programa antes de que toques una sola línea. Este tutorial cubrecProfile,line_profiler,memory_profilerydiscon ejemplos reales.timeit: medir operaciones pequeñasimport timeit\n\n# Comparar concatenación de strings vs join\ntiempo_concat = timeit.timeit(\n    'resultado = \"\"; [resultado := resultado + s for s in palabras]',\n    setup='palabras = [\"hola\"] * 1000',\n    number=1000\n)\n\ntiempo_join = timeit.timeit(\n    '\"\".join(palabras)',\n    setup='palabras = [\"hola\"] * 1000',\n    number=1000\n)\n\nprint(f\"Concatenación: {tiempo_concat:.4f}s\")\nprint(f\"join:          {tiempo_join:.4f}s\")\nprint(f\"join es {tiempo_concat/tiempo_join:.1f}x más rápido\")# En Jupyter o IPython:\n# %timeit sorted(lista)\n# %timeit lista.sort()cProfile: perfil de funcionesimport cProfile\nimport pstats\nfrom pstats import SortKey\n\n\ndef funcion_lenta():\n    \"\"\"Suma de cuadrados de forma ineficiente.\"\"\"\n    total = 0\n    for i in range(100_000):\n        total += i ** 2\n    return total\n\n\ndef funcion_principal():\n    for _ in range(10):\n        funcion_lenta()\n    return \"listo\"\n\n\n# Perfilar una función directamente\nwith cProfile.Profile() as perfil:\n    funcion_principal()\n\nstats = pstats.Stats(perfil)\nstats.sort_stats(SortKey.CUMULATIVE)\nstats.print_stats(",
+      "code_example": "import timeit\n\n# Comparar concatenación de strings vs join\ntiempo_concat = timeit.timeit(\n    'resultado = \"\"; [resultado := resultado + s for s in palabras]',\n    setup='palabras = [\"hola\"] * 1000',\n    number=1000\n)\n\ntiempo_join = timeit.timeit(\n    '\"\".join(palabras)',\n    setup='palabras = [\"hola\"] * 1000',\n    number=1000\n)\n\nprint(f\"Concatenación: {tiempo_concat:.4f}s\")\nprint(f\"join:          {tiempo_join:.4f}s\")\nprint(f\"join es {tiempo_concat/tiempo_join:.1f}x más rápido\")",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-09T16:04:03.756606"
     }
   ]
 }
