@@ -1077,5 +1077,29 @@
     "relevancia": 1,
     "pelicula": "Eixam",
     "enviada": true
+  },
+  {
+    "titulo": "Las novedades de la taquilla pertenecen al cine español: ‘Cronos’ y ‘Enjambre’ encabezan los estrenos de la cartelera",
+    "url": "https://www.msn.com/entretenimiento/cine/las-novedades-de-la-taquilla-pertenecen-al-cine-espa%C3%B1ol-cronos-y-enjambre-encabezan-los-estrenos-de-la-cartelera/ar-AA2bxjme",
+    "fecha_pub": "Thu, 03 Sep 2026 22:00:18 GMT",
+    "fecha_ts": "2026-09-09T20:55:09.278888",
+    "medio": "Okdiario on MSN",
+    "imagen": "",
+    "tipo": "poster",
+    "relevancia": 4,
+    "pelicula": "Eixam",
+    "enviada": true
+  },
+  {
+    "titulo": "[ENTREVISTAS] EIXAM | Pablo Molinero y Cristina Fernández Pintado: ¿Podemos escapar de lo que somos?",
+    "url": "https://www.youtube.com/watch?v=1s6NUVALKhU",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-09T20:55:16.211414",
+    "medio": "MARIA ALABAMA  🎬 CINE Y GATITOS",
+    "imagen": "https://i.ytimg.com/vi/1s6NUVALKhU/hqdefault.jpg",
+    "tipo": "entrevista",
+    "relevancia": 2,
+    "pelicula": "Eixam",
+    "enviada": true
   }
 ]
