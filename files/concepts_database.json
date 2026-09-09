@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 70,
+    "total_concepts": 75,
     "categories": [
       "css_moderno",
       "devops",
@@ -13,7 +13,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-09T03:30:07.465151"
+    "last_scraped": "2026-09-09T10:55:31.597640"
   },
   "concepts": [
     {
@@ -1299,6 +1299,98 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-09T03:29:27.529746"
+    },
+    {
+      "title": "Quarto en R: documentos reproducibles que combinan código, resultados y narrativa",
+      "summary": "Quarto es el sistema de publicación científica de Posit (la empresa antes conocida como RStudio) y el sucesor natural de R Markdown. Lo que lo diferencia es que ya no está atado a R: soporta R, Python",
+      "explanation": "Quarto es el sistema de publicación científica de Posit (la empresa antes conocida como RStudio) y el sucesor natural de R Markdown. Lo que lo diferencia es que ya no está atado a R: soporta R, Python, Julia y Observable JS en el mismo documento, con el mismo motor de renderizado y la misma sintaxis Markdown. Un archivo.qmdpuede tener bloques de R y Python mezclados, y Quarto se encarga de ejecutarlos y componer el resultado. Quarto 1.4, lanzado en 2024, introdujo los dashboards interactivos como formato nativo, sin necesidad de Shiny para los casos de uso más simples.Estructura de un documento Quarto Un archivo.qmdtiene una cabecera YAML y cuerpo en Markdown con bloques de código ejecutables:# Ejemplo de archivo informe.qmd\n# ---\n# title: \"Análisis de ventas 2025\"\n# author: \"Equipo de datos\"\n# date: today\n# format:\n#   html:\n#     toc: true\n#     toc-depth: 3\n#     theme: cosmo\n#     code-fold: true\n#     fig-width: 8\n#     fig-height: 5\n#   pdf:\n#     geometry: margin=2cm\n# execute:\n#   echo: true\n#   warning: false\n#   cache: true\n# ---\n#\n# ## Carga de datos\n#\n# ```{r}\n# #| label: carga-datos\n# #| message: false\n# library(tidyverse)\n# datos <- read_csv(\"ventas_2025.csv\")\n# glimpse(datos)\n# ```\n#\n# ## Resumen estadístico\n#\n# ```{r}\n# #| label: resumen\n# datos |>\n#   group_by(region, trimestre) |>\n#   summarise(\n#     total    = sum(importe),\n#     media    = mean(importe),\n#     n_pedidos = n(),\n#     .groups = \"drop\"\n#   ) |>\n#   knitr::kable(digits = 2)\n# ```Renderizar do",
+      "code_example": "# Ejemplo de archivo informe.qmd\n# ---\n# title: \"Análisis de ventas 2025\"\n# author: \"Equipo de datos\"\n# date: today\n# format:\n#   html:\n#     toc: true\n#     toc-depth: 3\n#     theme: cosmo\n#     code-fold: true\n#     fig-width: 8\n#     fig-height: 5\n#   pdf:\n#     geometry: margin=2cm\n# execute:\n#   echo: true\n#   warning: false\n#   cache: true\n# ---\n#\n# ## Carga de datos\n#\n# ```{r}\n# #| label: carga-datos\n# #| message: false\n# library(tidyverse)\n# datos <- read_csv(\"ventas_2025.csv\")\n# glimpse(datos)\n# ```\n#\n# ## Resumen estadístico\n#\n# ```{r}\n# #| label: resumen\n# datos |>\n#   group_by(region, trimestre) |>\n#   summarise(\n#     total    = sum(importe),\n#     media    = mean(importe),\n#     n_pedidos = n(),\n#     .groups = \"drop\"\n#   ) |>\n#   knitr::kable(digits = 2)\n# ```",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-09T10:54:37.575526"
+    },
+    {
+      "title": "Diferenciación automática en Julia: Zygote.jl, ForwardDiff y cómo Julia lo hace diferente",
+      "summary": "La diferenciación automática (AD) es lo que permite entrenar redes neuronales y optimizar funciones matemáticas sin derivar a mano. PyTorch y TensorFlow la implementan en C++. Julia la implementa en J",
+      "explanation": "La diferenciación automática (AD) es lo que permite entrenar redes neuronales y optimizar funciones matemáticas sin derivar a mano. PyTorch y TensorFlow la implementan en C++. Julia la implementa en Julia, y eso tiene consecuencias prácticas: puedes diferenciar a través de cualquier función Julia, incluidos tus propios solvers de ecuaciones diferenciales o código de simulación física.Dos modos de diferenciación automática Hay dos formas de calcular gradientes automáticamente, y Julia tiene paquetes para cada una:Forward mode (modo forward):calcula la derivada de una salida respecto a una entrada al mismo tiempo que evalúa la función. Eficiente cuando hay pocas entradas y muchas salidas.Reverse mode (modo backward):hace un primer paso forward guardando el grafo de operaciones, luego un paso backward para propagar gradientes. Eficiente cuando hay muchas entradas y pocas salidas. Este es el que usa el backpropagation en redes neuronales.ForwardDiff.jl: modo forward ForwardDiff.jlimplementa el modo forward con números duales. No construye ningún grafo: simplemente evalúa la función con números que llevan la derivada incorporada como segunda componente.using ForwardDiff\n\n# Gradiente de una función escalar\nf(x) = x^3 + 2*x^2 - x + 1\ndf = ForwardDiff.derivative(f, 3.0)  # f'(3) = 3*9 + 4*3 - 1 = 38\n\n# Gradiente de función multivariable\ng(x) = x[1]^2 + x[1]*x[2] + x[2]^2\ngrad_g = ForwardDiff.gradient(g, [2.0, 3.0])  # [7.0, 7.0]\n\n# Jacobiana (matriz de derivadas parciales)\nh(x) = [x[",
+      "code_example": "using ForwardDiff\n\n# Gradiente de una función escalar\nf(x) = x^3 + 2*x^2 - x + 1\ndf = ForwardDiff.derivative(f, 3.0)  # f'(3) = 3*9 + 4*3 - 1 = 38\n\n# Gradiente de función multivariable\ng(x) = x[1]^2 + x[1]*x[2] + x[2]^2\ngrad_g = ForwardDiff.gradient(g, [2.0, 3.0])  # [7.0, 7.0]\n\n# Jacobiana (matriz de derivadas parciales)\nh(x) = [x[1]^2 + x[2], x[1]*x[2]]\nJ = ForwardDiff.jacobian(h, [2.0, 3.0])\n# Resultado: [[4.0, 1.0], [3.0, 2.0]]\n\n# Hesiana (segunda derivada)\nH = ForwardDiff.hessian(g, [2.0, 3.0])",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-09T10:54:39.277879"
+    },
+    {
+      "title": "LuaJIT y la FFI: rendimiento cercano a C con la comodidad de un lenguaje de scripting",
+      "summary": "La interpretación de Lua estándar es rápida para un lenguaje de scripting: la VM de bytecode de Lua 5.4 supera a Python en muchos benchmarks. Pero LuaJIT va un paso más allá. LuaJIT es una implementac",
+      "explanation": "La interpretación de Lua estándar es rápida para un lenguaje de scripting: la VM de bytecode de Lua 5.4 supera a Python en muchos benchmarks. Pero LuaJIT va un paso más allá. LuaJIT es una implementación alternativa de Lua 5.1 con un compilador JIT (Just-In-Time) que transforma los hot paths de código Lua en código máquina nativo durante la ejecución. El resultado es un rendimiento que en bucles numéricos densos se acerca y a veces iguala al de C compilado con gcc -O2.LuaJIT: historia y estado actual LuaJIT fue creado por Mike Pall y lanzado en 2005. La versión 2.1 (actualmente en beta, con git HEAD activo) es la más moderna y la que usan OpenResty, Defold, y otros entornos de producción. LuaJIT implementa Lua 5.1, no 5.4: no tiene integers nativos ni to-be-closed variables, pero sí closures, corrutinas, metatables y todos los fundamentos del lenguaje. El JIT de LuaJIT usa una técnica llamadatracing JIT: en lugar de compilar funciones enteras, compila trazas (secuencias lineales de bytecodes que pasan por los mismos caminos repetidamente). Esto lo hace especialmente eficaz en bucles internos donde la mayoría del tiempo se gasta.Rendimiento: qué esperar-- Benchmark: suma de 100 millones de enteros\n-- Este código con LuaJIT 2.1 es ~30-50x más rápido que Lua 5.4\n\nlocal function suma_bucle(n)\n    local s = 0\n    for i = 1, n do\n        s = s + i\n    end\n    return s\nend\n\nlocal t0 = os.clock()\nlocal resultado = suma_bucle(100000000)\nlocal t1 = os.clock()\n\nprint(string.format(\"Re",
+      "code_example": "-- Benchmark: suma de 100 millones de enteros\n-- Este código con LuaJIT 2.1 es ~30-50x más rápido que Lua 5.4\n\nlocal function suma_bucle(n)\n    local s = 0\n    for i = 1, n do\n        s = s + i\n    end\n    return s\nend\n\nlocal t0 = os.clock()\nlocal resultado = suma_bucle(100000000)\nlocal t1 = os.clock()\n\nprint(string.format(\"Resultado: %d\", resultado))\nprint(string.format(\"Tiempo: %.3f segundos\", t1 - t0))\n-- Con LuaJIT 2.1: ~0.05s\n-- Con Lua 5.4:    ~1.5s\n-- Con Python 3.12: ~5-8s",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-09T10:54:40.661309"
+    },
+    {
+      "title": "Testing en Gleam: gleeunit y cómo escribir tests en un lenguaje tipado sin excepciones",
+      "summary": "El sistema de tipos de Gleam ya elimina en compilación una buena parte de los bugs que en otros lenguajes solo se detectan con tests. Pero los tipos no lo comprueban todo: la lógica de negocio, los ca",
+      "explanation": "El sistema de tipos de Gleam ya elimina en compilación una buena parte de los bugs que en otros lenguajes solo se detectan con tests. Pero los tipos no lo comprueban todo: la lógica de negocio, los casos límite, el comportamiento de funciones con efectos secundarios, todo eso necesita tests. Gleam tienegleeunit, su framework de testing oficial, y el comandogleam testpara ejecutarlos.Configurar gleeunit gleeunit se añade como dependencia de desarrollo. Si creas un proyecto congleam new, ya viene incluido engleam.toml. Si no, puedes añadirlo manualmente:gleam add --dev gleeunit El ficherogleam.toml:[dev-dependencies]\ngleeunit = \">= 1.0.0\" Los ficheros de test van en el directoriotest/del proyecto y tienen el sufijo_test.gleam:mi_proyecto/\n??? src/\n?   ??? mi_proyecto.gleam\n??? test/\n?   ??? mi_proyecto_test.gleam\n??? gleam.tomlEscribir el primer test// test/mi_proyecto_test.gleam\nimport gleeunit\nimport gleeunit/should\nimport mi_proyecto\n\npub fn main() {\n  gleeunit.main()\n}\n\npub fn suma_test() {\n  mi_proyecto.suma(2, 3)\n  |> should.equal(5)\n}\n\npub fn suma_negativa_test() {\n  mi_proyecto.suma(-1, -2)\n  |> should.equal(-3)\n}",
+      "code_example": "gleam add --dev gleeunit",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-09T10:54:42.366928"
+    },
+    {
+      "title": "Propiedades lógicasOrganiza tus páginas con coleccionesGuarda y categoriza el contenido según tus preferencias.",
+      "summary": "Un patrón de interfaz de usuario muy común es una etiqueta de texto con un ícono intercalado complementario. El ícono se ubica a la izquierda del texto con un pequeño espacio entre ellos\nproporcionada",
+      "explanation": "Un patrón de interfaz de usuario muy común es una etiqueta de texto con un ícono intercalado complementario. El ícono se ubica a la izquierda del texto con un pequeño espacio entre ellos\nproporcionada pormargin-righten el ícono.\nSin embargo, sí hay un problema,\nya que esto solo funcionará\ncuando la dirección del texto sea de izquierda a derecha.\nSi la dirección del texto cambia de derecha a izquierda (que es como leen los idiomas como el árabe), el ícono se ubicará contra el texto. ¿Cómo se explica esto en los CSS?\nLas propiedades lógicas te permiten resolver estas situaciones. Entre muchos otros beneficios, ofrecen compatibilidad automática y gratuita para la internacionalización.\nAyudan a crear un frontend más inclusivo y resiliente. Las propiedades físicas de las partes superior, derecha, inferior e izquierda se refieren a las dimensiones físicas del viewport.\nSon como una rosa de los vientos en un mapa.\nLas propiedades lógicas, por otro lado,\nhacen referencia a los bordes de un cuadro en relación con elflujo de contenido.\nPor lo tanto, pueden cambiar si cambian la dirección del texto o el modo de escritura.\nEste es un gran cambio de los estilos direccionales,\ny nos da mucha más flexibilidad a la hora de definir el estilo de nuestras interfaces.",
+      "code_example": ".my-element{max-width:150px;max-height:100px;}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "css",
+      "interview_relevant": true,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "web.dev",
+      "tags": [
+        "css",
+        "modern",
+        "interfaces"
+      ],
+      "cat": "interfaces",
+      "scraped_at": "2026-09-09T10:55:28.596903"
     }
   ]
 }
