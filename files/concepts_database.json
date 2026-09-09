@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 69,
+    "total_concepts": 70,
     "categories": [
       "css_moderno",
       "devops",
@@ -13,7 +13,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-08T20:50:16.907108"
+    "last_scraped": "2026-09-09T03:30:07.465151"
   },
   "concepts": [
     {
@@ -1281,6 +1281,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-08T20:49:50.482903"
+    },
+    {
+      "title": "El patrón Observable en JavaScript: reactividad, streams de eventos y mini-RxJS desde cero",
+      "summary": "El patrón Observable es el modelo mental detrás de librerías como RxJS y del proposalObservableque avanza hacia el estándar. Mientras que una Promesa resuelve un único valor, un Observable puede emiti",
+      "explanation": "El patrón Observable es el modelo mental detrás de librerías como RxJS y del proposalObservableque avanza hacia el estándar. Mientras que una Promesa resuelve un único valor, un Observable puede emitir múltiples valores a lo largo del tiempo y permite cancelar la suscripción para limpiar recursos. Entender cómo funciona por dentro hace que RxJS sea mucho más fácil de usar.Implementación mínima desde cero Un Observable es esencialmente una función que, cuando se suscribe, empieza a emitir valores. La suscripción devuelve una forma de cancelar:class Observable {\n  #fn;\n\n  constructor(fn) {\n    this.#fn = fn;\n  }\n\n  subscribe(observador) {\n    // Normalizar: aceptar función o { next, error, complete }\n    const obs = typeof observador === 'function'\n      ? { next: observador }\n      : observador;\n\n    let activo = true;\n\n    const suscriptor = {\n      next: (valor) => { if (activo) obs.next?.(valor); },\n      error: (err)  => { if (activo) { activo = false; obs.error?.(err); } },\n      complete: ()  => { if (activo) { activo = false; obs.complete?.(); } },\n    };\n\n    // Ejecutar la función productora y obtener la limpieza\n    const limpieza = this.#fn(suscriptor);\n\n    return {\n      unsubscribe: () => {\n        activo = false;\n        limpieza?.();\n      },\n    };\n  }\n}\n\n// Observable de eventos DOM\nfunction fromEvent(elemento, evento) {\n  return new Observable(({ next }) => {\n    elemento.addEventListener(evento, next);\n    return () => elemento.removeEventListener(evento, n",
+      "code_example": "class Observable {\n  #fn;\n\n  constructor(fn) {\n    this.#fn = fn;\n  }\n\n  subscribe(observador) {\n    // Normalizar: aceptar función o { next, error, complete }\n    const obs = typeof observador === 'function'\n      ? { next: observador }\n      : observador;\n\n    let activo = true;\n\n    const suscriptor = {\n      next: (valor) => { if (activo) obs.next?.(valor); },\n      error: (err)  => { if (activo) { activo = false; obs.error?.(err); } },\n      complete: ()  => { if (activo) { activo = false; obs.complete?.(); } },\n    };\n\n    // Ejecutar la función productora y obtener la limpieza\n    const limpieza = this.#fn(suscriptor);\n\n    return {\n      unsubscribe: () => {\n        activo = false;\n        limpieza?.();\n      },\n    };\n  }\n}\n\n// Observable de eventos DOM\nfunction fromEvent(elemento, evento) {\n  return new Observable(({ next }) => {\n    elemento.addEventListener(evento, next);\n    return () => elemento.removeEventListener(evento, next);\n  });\n}\n\n// Observable de interval\nfunction interval(ms) {\n  return new Observable(({ next, complete }) => {\n    let contador = 0;\n    const id = setInterval(() => next(contador++), ms);\n    return () => clearInterval(id);\n  });\n}\n\n// Uso\nconst suscripcion = interval(500).subscribe(n => console.log('tick:', n));\nsetTimeout(() => suscripcion.unsubscribe(), 3000); // Para a los 3 segundos",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-09T03:29:27.529746"
     }
   ]
 }

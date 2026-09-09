@@ -1,5 +1,19 @@
 [
     {
+        "titulo": "Gobernar modelos con la sincronización de MLflow y Amazon SageMaker AI Model Registry: Parte 1",
+        "enlace": "https://aws.amazon.com/blogs/machine-learning/govern-models-with-mlflow-and-amazon-sagemaker-ai-model-registry-sync-part-1/",
+        "fuente": "AWS ML",
+        "tipo": "noticia",
+        "f": "09/09",
+        "fecha_publicacion": "2026-09-08T09:03:20-08:00",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "09/09/2026",
+        "ts": "2026-09-09T03:28:41.666996",
+        "traducido": true
+    },
+    {
         "titulo": "Televisor LG muestra escaneo de LAN en busca de teléfonos de terceros y otros dispositivos",
         "enlace": "https://arstechnica.com/gadgets/2026/09/lg-tv-shown-capable-of-tracking-user-activity-even-when-offline/",
         "fuente": "Ars Technica",
