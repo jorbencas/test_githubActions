@@ -1,0 +1,143 @@
+---
+draft: false
+title: "🏆 RETO: Tabla de Multiplicar"
+description: "Genera la tabla de multiplicar de un número dado del 1 al 10. Ejercicio clásico de bucles que practica iteración, formateo de salida y operaciones aritméticas repetitivas."
+pubDate: "2026-06-28"
+tags: ["retos", "iniciación", "multilenguaje"]
+slug: "reto-tabla-de-multiplicar"
+image: "img/guia_tabla_de_multiplicar/guia_tabla_de_multiplicar_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Iniciación"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Tabla de Multiplicar
+
+### 📝 Descripción del Reto
+Genera la tabla de multiplicar de un número dado del 1 al 10. Por ejemplo, para el 5: 5x1=5, 5x2=10, ..., 5x10=50. Ejercicio clásico de programación que practica bucles, formateo de salida y operaciones aritméticas.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Bucle for | Iterar del 1 al 10, multiplicar en cada paso | O(n) |
+| List comprehension | Generar lista de tuplas (i, n*i) | O(n) |
+| Función recursiva | Llamada recursiva con contador | O(n) |
+
+### 🌍 Dónde se usa
+- **Educación**: aplicaciones de aprendizaje de matemáticas
+- **Generación de datos**: crear conjuntos de prueba para algoritmos
+- **Hojas de cálculo**: llenar celdas con fórmulas de multiplicación
+- **Juegos educativos**: practicar tablas de multiplicar de forma interactiva
+
+<Challenge 
+  nivel="Iniciación" 
+  mision="Genera la tabla de multiplicar de un número del 1 al 10." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `5` | `[5, 10, 15, 20, 25, 30, 35, 40, 45, 50]` |
+| `1` | `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]` |
+| `0` | `[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]` |
+| `10` | `[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Iterar del 1 al 10, multiplicar cada número por la entrada. **Ejemplo:** para 5: 5×1=5, 5×2=10, ..., 5×10=50.
+
+### ⚙️ Paso 2: Implementación
+Usar un bucle for del 1 al 10. En cada iteración, calcular n*i y almacenar o imprimir el resultado.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n)
+**Complejidad espacial:** O(n)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def tabla_multiplicar(n):
+    return [n * i for i in range(1, 11)]
+
+print(tabla_multiplicar(5))   # [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+print(tabla_multiplicar(1))   # [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+print(tabla_multiplicar(0))   # [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+print(tabla_multiplicar(10))  # [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+```
+
+```javascript
+function tablaMultiplicar(n) {
+  const resultado = [];
+  for (let i = 1; i <= 10; i++) {
+    resultado.push(n * i);
+  }
+  return resultado;
+}
+console.log(tablaMultiplicar(5));  // [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+console.log(tablaMultiplicar(1));  // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+console.log(tablaMultiplicar(0));  // [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+console.log(tablaMultiplicar(10)); // [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+```
+
+```java
+import java.util.ArrayList;
+
+public class TablaMultiplicar {
+    public static ArrayList<Integer> tablaMultiplicar(int n) {
+        ArrayList<Integer> resultado = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            resultado.add(n * i);
+        }
+        return resultado;
+    }
+    public static void main(String[] args) {
+        System.out.println(tablaMultiplicar(5));  // [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+        System.out.println(tablaMultiplicar(1));  // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        System.out.println(tablaMultiplicar(0));  // [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        System.out.println(tablaMultiplicar(10)); // [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    }
+}
+```
+
+```typescript
+function tablaMultiplicar(n: number): number[] {
+  const resultado: number[] = [];
+  for (let i = 1; i <= 10; i++) {
+    resultado.push(n * i);
+  }
+  return resultado;
+}
+console.log(tablaMultiplicar(5));  // [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+console.log(tablaMultiplicar(1));  // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+console.log(tablaMultiplicar(0));  // [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+console.log(tablaMultiplicar(10)); // [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Inicial 01: Suma de Dígitos", href: "/retos/reto-inicial-01-suma-de-digitos/" },
+    { title: "Fibonacci Recursivo", href: "/retos/reto-fibonacci-recursivo/" },
+  ]} />

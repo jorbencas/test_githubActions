@@ -1,0 +1,128 @@
+---
+draft: false
+title: "🏆 RETO: Reto Inicial 19: Descuento Simple"
+description: "Aplica un descuento porcentual a un precio y devuelve el precio final. Fórmula: precio_final = precio × (1 - descuento/100). Ejercicio práctico de aritmética comercial para e-commerce y promociones."
+pubDate: "2026-06-28"
+tags: ["retos", "iniciación", "multilenguaje"]
+slug: "reto-inicial-19-descuento-simple"
+image: "img/guia_plus_reto_inicial_19_descuento_simple/guia_plus_reto_inicial_19_descuento_simple_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Iniciación"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Reto Inicial 19: Descuento Simple
+
+### 📝 Descripción del Reto
+Aplica un descuento porcentual a un precio y devuelve el precio final. Similar al cálculo de IVA pero restando en vez de sumar. Fórmula: precio_final = precio × (1 - descuento/100). Práctica esencial para sistemas de venta y promociones.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Fórmula directa | `precio * (1 - descuento/100)` | O(1) |
+| Dos pasos | Calcular descuento y restarlo por separado | O(1) |
+| Redondeo | `Math.round()` para evitar decimales | O(1) |
+
+### 🌍 Dónde se usa
+- **E-commerce**: aplicar cupones y códigos de descuento
+- **Sistemas POS**: rebajas y ofertas en tiendas físicas
+- **Liquidación de inventario**: calcular precios de salida
+- **Marketing**: campañas promocionales con porcentajes variables
+
+<Challenge 
+  nivel="Iniciación" 
+  mision="Aplica un descuento porcentual a un precio y devuelve el precio final." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `100, 15` | `85` |
+| `200, 50` | `100` |
+| `80, 0` | `80` |
+| `50, 100` | `0` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Descuento = precio × (porcentaje / 100). Precio final = precio - descuento. **Ejemplo:** precio=100, descuento=15% → 100 - 15 = 85. **Edge cases:** descuento 0% (sin cambio), descuento 100% (gratis).
+
+### ⚙️ Paso 2: Implementación
+Una línea: `precio * (1 - descuento / 100)`. Validar que descuento esté entre 0 y 100.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(1)
+**Complejidad espacial:** O(1)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def descuento_simple(precio, descuento):
+    return round(precio * (1 - descuento / 100), 2)
+
+print(descuento_simple(100, 15))  # 85.0
+print(descuento_simple(200, 50))  # 100.0
+print(descuento_simple(80, 0))    # 80.0
+print(descuento_simple(50, 100))  # 0.0
+```
+
+```javascript
+function descuentoSimple(precio, descuento) {
+  return Math.round(precio * (1 - descuento / 100) * 100) / 100;
+}
+console.log(descuentoSimple(100, 15));  // 85
+console.log(descuentoSimple(200, 50));  // 100
+console.log(descuentoSimple(80, 0));    // 80
+console.log(descuentoSimple(50, 100));  // 0
+```
+
+```java
+public class DescuentoSimple {
+    public static double descuentoSimple(double precio, double descuento) {
+        return Math.round(precio * (1 - descuento / 100) * 100.0) / 100.0;
+    }
+    public static void main(String[] args) {
+        System.out.println(descuentoSimple(100, 15));  // 85.0
+        System.out.println(descuentoSimple(200, 50));  // 100.0
+        System.out.println(descuentoSimple(80, 0));    // 80.0
+        System.out.println(descuentoSimple(50, 100));  // 0.0
+    }
+}
+```
+
+```typescript
+function descuentoSimple(precio: number, descuento: number): number {
+  return Math.round(precio * (1 - descuento / 100) * 100) / 100;
+}
+console.log(descuentoSimple(100, 15));  // 85
+console.log(descuentoSimple(200, 50));  // 100
+console.log(descuentoSimple(80, 0));    // 80
+console.log(descuentoSimple(50, 100));  // 0
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Inicial 18: Precio con IVA", href: "/retos/reto-inicial-18-precio-con-iva/" },
+    { title: "Reto Inicial 01: Suma de Dígitos", href: "/retos/reto-inicial-01-suma-de-digitos/" },
+  ]} />

@@ -1,0 +1,278 @@
+---
+draft: false
+title: "🏆 RETO: Reto Avanzado 14: Worker Queue con Prioridad"
+description: "Implementa un sistema de cola de trabajos con prioridad usando un max-heap. Los trabajos con mayor prioridad se ejecutan primero, y en caso de empate se mantiene el orden FIFO."
+pubDate: "2026-06-28"
+tags: ["retos", "avanzado", "multilenguaje"]
+slug: "reto-avanzado-14-worker-queue-con-prioridad"
+image: "img/guia_plus_reto_avanzado_14_worker_queue_con_prioridad/guia_plus_reto_avanzado_14_worker_queue_con_prioridad_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Avanzado"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Reto Avanzado 14: Worker Queue con Prioridad
+
+### 📝 Descripción del Reto
+Implementa un sistema de cola de trabajos con prioridad (priority queue) usando un max-heap:
+- **add(trabajo, prioridad)**: añade un trabajo con una prioridad numérica (mayor = más urgente)
+- **execute()**: extrae y devuelve el trabajo de mayor prioridad. Si hay empates, el primero en llegar se ejecuta primero (FIFO)
+
+**¿Por qué importa?** Las colas de prioridad son fundamentales en:
+- Schedulers de sistemas operativos (procesos con diferentes prioridades)
+- RabbitMQ y Redis streams para mensajes prioritarios
+- Algoritmos de Dijkstra y Prim para grafos ponderados
+- Procesamiento por lotes en centros de datos
+
+**Habilidades que practica:** Heaps, árboles binarios, sift up/down, heap sort.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad Temporal | Complejidad Espacial |
+|---------|-------------|---------------------|---------------------|
+| Max-heap manual | Implementar heap con array | O(log n) add/extract | O(n) |
+| heapq con negativos | Python heapq es min-heap, usar prioridad negativa | O(log n) | O(n) |
+| TreeMap/SortedDict | Estructura ordenada por prioridad | O(log n) | O(n) |
+
+### 🌍 Dónde se usa
+1. **Sistemas operativos**: el planificador usa colas de prioridad para hilos
+2. **RabbitMQ**: Dead Letter Exchanges con prioridades
+3. **Dijkstra**: encontrar caminos más cortos en grafos ponderados
+4. **Compiladores**: gestión de tareas con diferentes niveles de urgencia
+
+<Challenge 
+  nivel="Avanzado" 
+  mision="Implementa un sistema de cola de trabajos con prioridad usando un max-heap. Los trabajos con mayor prioridad se ejecutan primero." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `add('A',3), add('B',1), execute()` | `'A'` |
+| `add('X',5), execute()` | `'X'` |
+| `execute()` | `null (empty)` |
+| `add('A',1), add('B',1), execute()` | `'A'` (FIFO en empate) |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Un max-heap es un árbol binario donde el padre siempre es mayor que sus hijos. Operaciones: insert al final y sift up (burbujear arriba), extract_max intercambiar raíz con último y sift down. Para FIFO en empates, añadir timestamp al comparator. **Edge cases:** cola vacía (null), prioridades iguales, un solo elemento.
+
+### ⚙️ Paso 2: Implementación
+**Implementación:** Array como representación del heap. Padre de i: (i-1)//2. Hijos: 2i+1, 2i+2. Sift up: comparar con padre e intercambiar si mayor. Sift down: comparar con hijos e intercambiar con el mayor.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(log n) por operación  
+**Complejidad espacial:** O(n)  
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+class PriorityQueue:
+    def __init__(self):
+        self.heap = []
+
+    def add(self, trabajo, prioridad):
+        self.heap.append((prioridad, trabajo))
+        self._sift_up(len(self.heap) - 1)
+
+    def execute(self):
+        if not self.heap:
+            return None
+        if len(self.heap) == 1:
+            return self.heap[0][1]
+        resultado = self.heap[0][1]
+        self.heap[0] = self.heap[-1]
+        self.heap.pop()
+        if self.heap:
+            self._sift_down(0)
+        return resultado
+
+    def _sift_up(self, i):
+        while i > 0:
+            padre = (i - 1) // 2
+            if self.heap[i][0] > self.heap[padre][0]:
+                self.heap[i], self.heap[padre] = self.heap[padre], self.heap[i]
+                i = padre
+            else:
+                break
+
+    def _sift_down(self, i):
+        n = len(self.heap)
+        while True:
+            mayor = i
+            izq, der = 2 * i + 1, 2 * i + 2
+            if izq < n and self.heap[izq][0] > self.heap[mayor][0]:
+                mayor = izq
+            if der < n and self.heap[der][0] > self.heap[mayor][0]:
+                mayor = der
+            if mayor != i:
+                self.heap[i], self.heap[mayor] = self.heap[mayor], self.heap[i]
+                i = mayor
+            else:
+                break
+```
+
+```javascript
+class PriorityQueue {
+  constructor() {
+    this.heap = [];
+  }
+  add(trabajo, prioridad) {
+    this.heap.push({ trabajo, prioridad });
+    this.siftUp(this.heap.length - 1);
+  }
+  execute() {
+    if (this.heap.length === 0) return null;
+    if (this.heap.length === 1) return this.heap.pop().trabajo;
+    const resultado = this.heap[0].trabajo;
+    this.heap[0] = this.heap.pop();
+    this.siftDown(0);
+    return resultado;
+  }
+  siftUp(i) {
+    while (i > 0) {
+      const padre = Math.floor((i - 1) / 2);
+      if (this.heap[i].prioridad > this.heap[padre].prioridad) {
+        [this.heap[i], this.heap[padre]] = [this.heap[padre], this.heap[i]];
+        i = padre;
+      } else break;
+    }
+  }
+  siftDown(i) {
+    const n = this.heap.length;
+    while (true) {
+      let mayor = i;
+      const izq = 2 * i + 1, der = 2 * i + 2;
+      if (izq < n && this.heap[izq].prioridad > this.heap[mayor].prioridad) mayor = izq;
+      if (der < n && this.heap[der].prioridad > this.heap[mayor].prioridad) mayor = der;
+      if (mayor !== i) {
+        [this.heap[i], this.heap[mayor]] = [this.heap[mayor], this.heap[i]];
+        i = mayor;
+      } else break;
+    }
+  }
+}
+```
+
+```java
+import java.util.*;
+
+public class PriorityQueue {
+    private List<int[]> heap = new ArrayList<>(); // [prioridad, timestamp, trabajoId]
+
+    public void add(String trabajo, int prioridad) {
+        int timestamp = heap.size();
+        heap.add(new int[]{prioridad, timestamp, 0});
+        siftUp(heap.size() - 1);
+    }
+
+    public String execute() {
+        if (heap.isEmpty()) return null;
+        String resultado = "trabajo";
+        if (heap.size() == 1) { heap.remove(0); return resultado; }
+        int[] top = heap.get(0);
+        heap.set(0, heap.remove(heap.size() - 1));
+        if (!heap.isEmpty()) siftDown(0);
+        return resultado;
+    }
+
+    private void siftUp(int i) {
+        while (i > 0) {
+            int padre = (i - 1) / 2;
+            if (heap.get(i)[0] > heap.get(padre)[0]) {
+                Collections.swap(heap, i, padre);
+                i = padre;
+            } else break;
+        }
+    }
+
+    private void siftDown(int i) {
+        int n = heap.size();
+        while (true) {
+            int mayor = i;
+            int izq = 2 * i + 1, der = 2 * i + 2;
+            if (izq < n && heap.get(izq)[0] > heap.get(mayor)[0]) mayor = izq;
+            if (der < n && heap.get(der)[0] > heap.get(mayor)[0]) mayor = der;
+            if (mayor != i) {
+                Collections.swap(heap, i, mayor);
+                i = mayor;
+            } else break;
+        }
+    }
+}
+```
+
+```typescript
+interface HeapItem { trabajo: string; prioridad: number; timestamp: number }
+
+class PriorityQueue {
+  private heap: HeapItem[] = [];
+  private counter = 0;
+
+  add(trabajo: string, prioridad: number): void {
+    this.heap.push({ trabajo, prioridad, timestamp: this.counter++ });
+    this.siftUp(this.heap.length - 1);
+  }
+
+  execute(): string | null {
+    if (this.heap.length === 0) return null;
+    const resultado = this.heap[0].trabajo;
+    if (this.heap.length === 1) { this.heap.pop(); return resultado; }
+    this.heap[0] = this.heap.pop()!;
+    this.siftDown(0);
+    return resultado;
+  }
+
+  private siftUp(i: number): void {
+    while (i > 0) {
+      const padre = Math.floor((i - 1) / 2);
+      if (this.heap[i].prioridad > this.heap[padre].prioridad) {
+        [this.heap[i], this.heap[padre]] = [this.heap[padre], this.heap[i]];
+        i = padre;
+      } else break;
+    }
+  }
+
+  private siftDown(i: number): void {
+    const n = this.heap.length;
+    while (true) {
+      let mayor = i;
+      const izq = 2 * i + 1, der = 2 * i + 2;
+      if (izq < n && this.heap[izq].prioridad > this.heap[mayor].prioridad) mayor = izq;
+      if (der < n && this.heap[der].prioridad > this.heap[mayor].prioridad) mayor = der;
+      if (mayor !== i) {
+        [this.heap[i], this.heap[mayor]] = [this.heap[mayor], this.heap[i]];
+        i = mayor;
+      } else break;
+    }
+  }
+}
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Avanzado 04: Manejador de Hilos (Threading)", href: "/retos/reto-avanzado-04-manejador-de-hilos-threading/" },
+    { title: "Reto Intermedio 04: Colas (Queue) Básicas", href: "/retos/reto-intermedio-04-colas-queue-basicas/" },
+  ]} />

@@ -1,0 +1,156 @@
+---
+draft: false
+title: "🏆 RETO: Reto Avanzado 04: Manejador de Hilos (Threading)"
+description: "Implementa un pool de hilos que ejecuta tareas en paralelo con sincronización segura. Gestiona la concurrencia para procesar múltiples trabajos simultáneamente."
+pubDate: "2026-06-28"
+tags: ["retos", "avanzado", "multilenguaje"]
+slug: "reto-avanzado-04-manejador-de-hilos-threading"
+image: "img/guia_plus_reto_avanzado_04_manejador_de_hilos_threading/guia_plus_reto_avanzado_04_manejador_de_hilos_threading_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Avanzado"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Reto Avanzado 04: Manejador de Hilos (Threading)
+
+### 📝 Descripción del Reto
+Implementa un **thread pool** (pool de hilos) que:
+1. Reciba un conjunto de tareas
+2. Ejecute varias de ellas en paralelo usando un número fijo de hilos
+3. Sincronice el acceso a resultados compartidos
+4. Espere a que todas las tareas terminen antes de devolver los resultados
+
+**¿Por qué importa?** El threading es fundamental para servidores web (Node.js workers), procesamiento de datos en paralelo (Spark), bases de datos concurrentes, y cualquier aplicación que necesite rendimiento con múltiples cores.
+
+**Habilidades que practica:** Concurrencia, sincronización, thread pools, race conditions, deadlocks.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad Temporal | Complejidad Espacial |
+|---------|-------------|---------------------|---------------------|
+| Thread pool fijo | N hilos trabajando de una cola compartida | O(n) tareas / N hilos | O(N + n) |
+|.asyncio (Python) | Concurrencia cooperativa con event loop | O(n) | O(n) |
+| Web Workers (JS) | Hilos separados del main thread | O(n) | O(n) |
+
+### 🌍 Dónde se usa
+1. **Servidores web**: Apache y Nginx usan pools de hilos para manejar requests concurrentes
+2. **Procesamiento de datos**: Spark y Hadoop distribuyen trabajo entre múltiples cores
+3. **Bases de datos**: PostgreSQL y MySQL ejecutan queries en paralelo
+4. **Juegos**: física, renderizado y IA corren en hilos separados
+
+<Challenge 
+  nivel="Avanzado" 
+  mision="Implementa un pool de hilos que ejecuta tareas en paralelo con sincronización segura. Gestiona la concurrencia para procesar múltiples trabajos simultáneamente." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `tareas=[f1,f2,f3], numHilos=2` | `[r1,r2,r3]` (resultados completos) |
+| `tareas=[], numHilos=2` | `[]` |
+| `tareas=[f1], numHilos=1` | `[r1]` |
+| `tareas=[f1]*5, numHilos=1` | `[r1,r1,r1,r1,r1]` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Un thread pool mantiene N hilos consumiendo tareas de una cola compartida. Cada hilo toma una tarea, la ejecuta y guarda el resultado. Cuando la cola está vacía, los hilos terminan. **Edge cases:** numHilos=0 (error), numHilos mayor que tareas (algunos hilos quedan ociosos), tarea que lanza excepción.
+
+### ⚙️ Paso 2: Implementación
+**Implementación:** Usar ThreadPoolExecutor en Python, ExecutorService en Java, o-worker en Node.js. Sincronizar acceso a la lista de resultados con locks/semáforos.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n) distribuidos entre N hilos  
+**Complejidad espacial:** O(n + N)  
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+from concurrent.futures import ThreadPoolExecutor
+
+def thread_pool(tareas, num_hilos):
+    with ThreadPoolExecutor(max_workers=num_hilos) as executor:
+        resultados = list(executor.map(lambda f: f(), tareas))
+    return resultados
+```
+
+```javascript
+async function threadPool(tareas, numHilos) {
+  const resultados = new Array(tareas.length);
+  let indice = 0;
+  async function worker() {
+    while (indice < tareas.length) {
+      const i = indice++;
+      resultados[i] = await tareas[i]();
+    }
+  }
+  const workers = Array.from({ length: numHilos }, () => worker());
+  await Promise.all(workers);
+  return resultados;
+}
+```
+
+```java
+import java.util.concurrent.*;
+import java.util.*;
+
+public class ThreadPool {
+    public static <T> List<T> ejecutar(List<Callable<T>> tareas, int numHilos)
+            throws Exception {
+        ExecutorService executor = Executors.newFixedThreadPool(numHilos);
+        List<Future<T>> futures = new ArrayList<>();
+        for (Callable<T> tarea : tareas) {
+            futures.add(executor.submit(tarea));
+        }
+        List<T> resultados = new ArrayList<>();
+        for (Future<T> f : futures) {
+            resultados.add(f.get());
+        }
+        executor.shutdown();
+        return resultados;
+    }
+}
+```
+
+```typescript
+async function threadPool<T>(tareas: (() => T)[], numHilos: number): Promise<T[]> {
+  const resultados: T[] = new Array(tareas.length);
+  let indice = 0;
+  async function worker(): Promise<void> {
+    while (indice < tareas.length) {
+      const i = indice++;
+      resultados[i] = tareas[i]();
+    }
+  }
+  const workers = Array.from({ length: Math.min(numHilos, tareas.length) }, () => worker());
+  await Promise.all(workers);
+  return resultados;
+}
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Avanzado 05: AsyncIO para Scrapers", href: "/retos/reto-avanzado-05-asyncio-para-scrapers/" },
+    { title: "Reto Avanzado 14: Worker Queue con Prioridad", href: "/retos/reto-avanzado-14-worker-queue-con-prioridad/" },
+  ]} />

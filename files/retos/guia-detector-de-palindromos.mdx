@@ -1,0 +1,140 @@
+---
+draft: false
+title: "🏆 RETO: Detector de Palíndromos"
+description: "Comprueba si una palabra o frase es palíndromo (se lee igual al revés), ignorando espacios, puntuación y mayúsculas. Ejercicio clásico de manipulación de strings y normalización de texto."
+pubDate: "2026-06-28"
+tags: ["retos", "iniciación", "multilenguaje"]
+slug: "reto-detector-de-palindromos"
+image: "img/guia_detector_de_palindromos/guia_detector_de_palindromos_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Iniciación"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Detector de Palíndromos
+
+### 📝 Descripción del Reto
+Comprueba si una palabra o frase es un palíndromo: que se lee igual de izquierda a derecha que de derecha a izquierda, ignorando espacios, signos de puntuación y diferencias entre mayúsculas y minúsculas. Ejemplos: "Ana" → true, "A man, a plan, a canal: Panama" → true, "hola" → false.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Inversión de cadena | Normalizar y comparar con su inversa | O(n) tiempo, O(n) espacio |
+| Two pointers | Comparar desde ambos extremos hacia el centro | O(n) tiempo, O(1) espacio |
+| Recursivo | Comparar primer y último, recursión con subcadena | O(n) tiempo, O(n) pila |
+
+### 🌍 Dónde se usa
+- **Bioinformática**: secuencias palindrómicas en ADN son relevantes en genética
+- **Validación de datos**: verificar simetría en códigos postales o identificadores
+- **Compresión de datos**: algoritmos que explotan simetría en secuencias
+- **Análisis literario**: detectar figuras retóricas palindrómicas en textos
+
+<Challenge 
+  nivel="Iniciación" 
+  mision="Comprueba si una palabra o frase es palíndromo." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `Ana` | `true` |
+| `hola` | `false` |
+| `A man a plan a canal Panama` | `true` |
+| `` | `true` |
+| `a1a` | `true` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Un palíndromo es simétrico. Primero normalizar: convertir a minúsculas y eliminar no-alfanuméricos. Luego comparar con su inversa. **Ejemplo:** "A man, a plan, a canal: Panama" → "amanaplanacanalpanama" → reverso = "amanaplanacanalpanama" → true.
+
+### ⚙️ Paso 2: Implementación
+1) Convertir a minúsculas. 2) Eliminar no-alfanuméricos con regex. 3) Comparar con inversa.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n)
+**Complejidad espacial:** O(n)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+import re
+
+def es_palindromo(s):
+    limpio = re.sub(r'[^a-z0-9]', '', s.lower())
+    return limpio == limpio[::-1]
+
+print(es_palindromo('Ana'))          # True
+print(es_palindromo('hola'))         # False
+print(es_palindromo('A man a plan a canal Panama'))  # True
+print(es_palindromo(''))             # True
+print(es_palindromo('a1a'))          # True
+```
+
+```javascript
+function esPalindromo(s) {
+  const limpio = s.toLowerCase().replace(/[^a-z0-9]/g, '');
+  return limpio === limpio.split('').reverse().join('');
+}
+console.log(esPalindromo('Ana'));  // true
+console.log(esPalindromo('hola')); // false
+console.log(esPalindromo('A man a plan a canal Panama')); // true
+console.log(esPalindromo(''));     // true
+console.log(esPalindromo('a1a'));  // true
+```
+
+```java
+public class Palindromo {
+    public static boolean esPalindromo(String s) {
+        String l = s.toLowerCase().replaceAll("[^a-z0-9]", "");
+        return l.equals(new StringBuilder(l).reverse().toString());
+    }
+    public static void main(String[] args) {
+        System.out.println(esPalindromo("Ana"));  // true
+        System.out.println(esPalindromo("hola")); // false
+        System.out.println(esPalindromo("A man a plan a canal Panama")); // true
+        System.out.println(esPalindromo(""));     // true
+        System.out.println(esPalindromo("a1a"));  // true
+    }
+}
+```
+
+```typescript
+function esPalindromo(s: string): boolean {
+  const limpio = s.toLowerCase().replace(/[^a-z0-9]/g, '');
+  return limpio === limpio.split('').reverse().join('');
+}
+console.log(esPalindromo('Ana'));  // true
+console.log(esPalindromo('hola')); // false
+console.log(esPalindromo('A man a plan a canal Panama')); // true
+console.log(esPalindromo(''));     // true
+console.log(esPalindromo('a1a'));  // true
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Contador de Vocales", href: "/retos/reto-contador-de-vocales/" },
+    { title: "Reto Inicial 30: Limpieza de Texto", href: "/retos/reto-inicial-30-limpieza-de-texto/" },
+  ]} />

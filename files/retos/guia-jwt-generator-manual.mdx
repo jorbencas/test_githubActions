@@ -1,0 +1,179 @@
+---
+draft: false
+title: "🏆 RETO: JWT Generator Manual"
+description: "Implementa un generador JWT manual: crea tokens JWT con header, payload y signature usando HMAC-SHA256, sin usar librerías JWT."
+pubDate: "2026-06-28"
+tags: ["retos", "avanzado", "multilenguaje"]
+slug: "reto-jwt-generator-manual"
+image: "img/guia_jwt_generator_manual/guia_jwt_generator_manual_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Avanzado"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: JWT Generator Manual
+
+### 📝 Descripción del Reto
+Implementa un generador de tokens JWT manualmente: codifica el header y payload en Base64URL, firma con HMAC-SHA256 usando un secreto, y retorna el token completo en formato `header.payload.signature`. No uses librerías JWT como `jsonwebtoken` o `PyJWT`.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Base64URL + HMAC | Codificar partes, firmar con hash | O(n) |
+| JWS compact | Implementar el estándar RFC 7515 | O(n) |
+| JWT sin firma | Solo crear header.payload (para debugging) | O(n) |
+
+### 🌍 Dónde se usa
+- **Autenticación**: tokens en APIs REST y OAuth 2.0
+- **Microservicios**: autorización entre servicios (service mesh)
+- **Sesiones**: stateless session management
+- **Blockchain**: tokens de identidad descentralizada
+
+<Challenge 
+  nivel="Avanzado" 
+  mision="Implementa un generador JWT manual con HMAC-SHA256." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `{sub:"123", name:"Ana"}`, secreto | Token JWT con 3 partes separadas por `.` |
+| Header fijo `{alg:"HS256",typ:"JWT"}` | `"eyJhbGciOiJIUzI1NiJ9..."` |
+| Mismo payload + mismo secreto | Mismo token (determinista) |
+| Payload vacío `{}` | Token válido con payload vacío |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Un JWT tiene 3 partes: header (`{"alg":"HS256","typ":"JWT"}`), payload (datos del usuario), y signature (HMAC-SHA256 de header.payload con el secreto). Cada parte se codifica en Base64URL (sin padding). **Caso límite:** payload vacío, secreto vacío, caracteres especiales en payload.
+
+### ⚙️ Paso 2: Implementación
+1. Codificar header y payload como JSON → Base64URL.
+2. Calcular HMAC-SHA256 de `header_b64.payload_b64` con el secreto.
+3. Retornar `header_b64.payload_b64.signature_b64`.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n) — n es el tamaño del payload.
+**Complejidad espacial:** O(n) — para las cadenas generadas.
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+import hashlib
+import hmac
+import base64
+import json
+
+def b64url_encode(data):
+    return base64.urlsafe_b64encode(data).rstrip(b'=').decode()
+
+def crear_jwt(payload, secreto):
+    header = {"alg": "HS256", "typ": "JWT"}
+    header_b64 = b64url_encode(json.dumps(header, separators=(',', ':')).encode())
+    payload_b64 = b64url_encode(json.dumps(payload, separators=(',', ':')).encode())
+    mensaje = f"{header_b64}.{payload_b64}"
+    signature = hmac.new(secreto.encode(), mensaje.encode(), hashlib.sha256).digest()
+    signature_b64 = b64url_encode(signature)
+    return f"{mensaje}.{signature_b64}"
+
+token = crear_jwt({"sub": "123", "name": "Ana"}, "secreto123")
+print(token)  # eyJhbGciOiJIUzI1NiJ9...
+```
+
+```javascript
+function b64urlEncode(data) {
+  return Buffer.from(data).toString('base64url');
+}
+
+function crearJWT(payload, secreto) {
+  const header = { alg: "HS256", typ: "JWT" };
+  const headerB64 = b64urlEncode(JSON.stringify(header));
+  const payloadB64 = b64urlEncode(JSON.stringify(payload));
+  const mensaje = `${headerB64}.${payloadB64}`;
+
+  const crypto = require('crypto');
+  const signature = crypto.createHmac('sha256', secreto).update(mensaje).digest('base64url');
+  return `${mensaje}.${signature}`;
+}
+
+console.log(crearJWT({ sub: "123", name: "Ana" }, "secreto123"));
+```
+
+```java
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.util.Base64;
+import java.nio.charset.StandardCharsets;
+
+public class JWTGenerator {
+    private static String b64urlEncode(String data) {
+        return Base64.getUrlEncoder().withoutPadding()
+            .encodeToString(data.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public static String crearJWT(String payload, String secreto) throws Exception {
+        String header = "{\"alg\":\"HS256\",\"typ\":\"JWT\"}";
+        String headerB64 = b64urlEncode(header);
+        String payloadB64 = b64urlEncode(payload);
+        String mensaje = headerB64 + "." + payloadB64;
+
+        Mac mac = Mac.getInstance("HmacSHA256");
+        mac.init(new SecretKeySpec(secreto.getBytes(), "HmacSHA256"));
+        byte[] signature = mac.doFinal(mensaje.getBytes(StandardCharsets.UTF_8));
+        String signatureB64 = Base64.getUrlEncoder().withoutPadding().encodeToString(signature);
+
+        return mensaje + "." + signatureB64;
+    }
+
+    public static void main(String[] args) throws Exception {
+        System.out.println(crearJWT("{\"sub\":\"123\",\"name\":\"Ana\"}", "secreto123"));
+    }
+}
+```
+
+```typescript
+function b64urlEncode(data: string): string {
+  return Buffer.from(data).toString('base64url');
+}
+
+function crearJWT(payload: Record<string, any>, secreto: string): string {
+  const header = { alg: "HS256", typ: "JWT" };
+  const headerB64 = b64urlEncode(JSON.stringify(header));
+  const payloadB64 = b64urlEncode(JSON.stringify(payload));
+  const mensaje = `${headerB64}.${payloadB64}`;
+
+  const crypto = require('crypto');
+  const signature = crypto.createHmac('sha256', secreto).update(mensaje).digest('base64url');
+  return `${mensaje}.${signature}`;
+}
+
+console.log(crearJWT({ sub: "123", name: "Ana" }, "secreto123"));
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Cifrado César Básico", href: "/retos/reto-cifrado-cesar-basico/" },
+    { title: "Reto Avanzado 06: Middleware de Seguridad", href: "/retos/reto-avanzado-06-middleware-de-seguridad/" },
+  ]} />

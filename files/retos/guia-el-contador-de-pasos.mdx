@@ -1,0 +1,159 @@
+---
+draft: false
+title: "🏆 RETO: El Contador de Pasos"
+description: "Dado un número entero n, calcula el mínimo número de pasos para reducirlo a 0: en cada paso puedes restar 1 o dividir entre 2 si es par."
+pubDate: "2026-06-28"
+tags: ["retos", "iniciación", "multilenguaje"]
+slug: "reto-el-contador-de-pasos"
+image: "img/guia_el_contador_de_pasos/guia_el_contador_de_pasos_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Iniciación"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: El Contador de Pasos
+
+### 📝 Descripción del Reto
+Dado un número entero `n`, calcula el mínimo número de pasos para reducirlo a 0. En cada paso puedes: (1) restar 1 si el número es impar, o (2) dividir entre 2 si es par. Implementa la solución de forma eficiente sin usar recursión excesiva.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Iterativo greedy | Si es par dividir, si es par restar, contar pasos | O(log n) |
+| Recursivo | Llamada recursiva con memoización | O(log n) |
+| Bitwise | Contar bits: pasos = número de bits 1 + posición del bit más alto | O(log n) |
+
+### 🌍 Dónde se usa
+- **Optimización de procesos**: minimizar operaciones en pipelines
+- **Juegos**: mecánicas de reducción de recursos
+- **Criptografía**: análisis de complejidad de operaciones en anillos
+- **Educación**: introducción a greedy algorithms
+
+<Challenge 
+  nivel="Iniciación" 
+  mision="Calcula el mínimo número de pasos para reducir n a 0 dividiendo entre 2 o restando 1." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `8` | `3` (8→4→2→1→0, 3 pasos: dividir 3 veces) |
+| `7` | `4` (7→6→3→2→1→0: -1,/2,-1,/2,-1) |
+| `1` | `1` |
+| `0` | `0` |
+| `15` | `5` (15→14→7→6→3→2→1→0: 5 pasos) |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Es un problema greedy. Si `n` es par, dividir entre 2 siempre es mejor (reduce más rápido). Si es impar, restar 1 para hacerlo par. **Caso límite:** n=0 (0 pasos), n=1 (1 paso).
+
+### ⚙️ Paso 2: Implementación
+Iterar mientras `n > 0`: si es par, dividir entre 2; si es impar, restar 1. Contar cada operación.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(log n) — cada división reduce el número a la mitad.
+**Complejidad espacial:** O(1) — solo contadores.
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def contar_pasos(n):
+    pasos = 0
+    while n > 0:
+        if n % 2 == 0:
+            n //= 2
+        else:
+            n -= 1
+        pasos += 1
+    return pasos
+
+print(contar_pasos(8))   # 3
+print(contar_pasos(7))   # 4
+print(contar_pasos(1))   # 1
+print(contar_pasos(0))   # 0
+print(contar_pasos(15))  # 5
+```
+
+```javascript
+function contarPasos(n) {
+  let pasos = 0;
+  while (n > 0) {
+    if (n % 2 === 0) n = Math.floor(n / 2);
+    else n -= 1;
+    pasos++;
+  }
+  return pasos;
+}
+console.log(contarPasos(8));   // 3
+console.log(contarPasos(7));   // 4
+console.log(contarPasos(1));   // 1
+console.log(contarPasos(0));   // 0
+console.log(contarPasos(15));  // 5
+```
+
+```java
+public class ContadorPasos {
+    public static int contarPasos(int n) {
+        int pasos = 0;
+        while (n > 0) {
+            if (n % 2 == 0) n /= 2;
+            else n -= 1;
+            pasos++;
+        }
+        return pasos;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(contarPasos(8));   // 3
+        System.out.println(contarPasos(7));   // 4
+        System.out.println(contarPasos(1));   // 1
+        System.out.println(contarPasos(0));   // 0
+        System.out.println(contarPasos(15));  // 5
+    }
+}
+```
+
+```typescript
+function contarPasos(n: number): number {
+  let pasos = 0;
+  while (n > 0) {
+    if (n % 2 === 0) n = Math.floor(n / 2);
+    else n -= 1;
+    pasos++;
+  }
+  return pasos;
+}
+console.log(contarPasos(8));   // 3
+console.log(contarPasos(7));   // 4
+console.log(contarPasos(1));   // 1
+console.log(contarPasos(0));   // 0
+console.log(contarPasos(15));  // 5
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Juego de Adivinar Número", href: "/retos/reto-juego-de-adivinar-numero/" },
+    { title: "Lista de Compras", href: "/retos/reto-lista-de-compras/" },
+  ]} />

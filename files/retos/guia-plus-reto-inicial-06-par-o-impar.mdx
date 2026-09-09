@@ -1,0 +1,125 @@
+---
+draft: false
+title: "🏆 RETO: Reto Inicial 06: Par o Impar"
+description: "Determina si un número entero es par o impar usando el operador módulo (%). Un número es par si n % 2 == 0, e impar si n % 2 == 1. Ejercicio fundamental para entender operaciones aritméticas básicas y el operador módulo."
+pubDate: "2026-06-28"
+tags: ["retos", "iniciación", "multilenguaje"]
+slug: "reto-inicial-06-par-o-impar"
+image: "img/guia_plus_reto_inicial_06_par_o_impar/guia_plus_reto_inicial_06_par_o_impar_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Iniciación"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Reto Inicial 06: Par o Impar
+
+### 📝 Descripción del Reto
+Determina si un número entero es par o impar. Un número par es divisible exactamente entre 2 (resto 0), mientras que un impar deja resto 1. Este ejercicio introduce el operador módulo (%), esencial en juegos (turnos alternados), validación de datos y procesamiento cíclico.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Operador módulo | `n % 2 == 0` — directo y legible | O(1) |
+| Bitwise AND | `n & 1 == 0` — más eficiente a nivel de hardware | O(1) |
+| División entera | Verificar si `n / 2 * 2 == n` | O(1) |
+
+### 🌍 Dónde se usa
+- **Juegos**: alternar turnos entre jugadores (par = jugador 1, impar = jugador 2)
+- **Interfaces gráficas**: generar patrones de tablero tipo ajedrez (checkerboard)
+- **Procesamiento de datos**: filtrar elementos pares/impares de una lista
+- **Validación de documentos**: números de identificación que siguen reglas de paridad
+
+<Challenge 
+  nivel="Iniciación" 
+  mision="Determina si un número entero es par o impar usando el operador módulo." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `4` | `Par` |
+| `7` | `Impar` |
+| `0` | `Par` |
+| `-12` | `Par` |
+| `1` | `Impar` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** La paridad se determina con el operador módulo: `n % 2` devuelve el resto de dividir entre 2. Si el resto es 0 → par; si es 1 → impar. **Ejemplo:** 4 ÷ 2 = 2 resto 0 → Par. 7 ÷ 2 = 3 resto 1 → Impar. **Edge cases:** número 0 (es par), negativos (funciona igual), números grandes (solo una operación).
+
+### ⚙️ Paso 2: Implementación
+Usamos el operador módulo `%` en una línea. Alternativa bitwise: `n & 1` revisa el último bit del binario (0 = par, 1 = impar).
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(1)
+**Complejidad espacial:** O(1)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def par_o_impar(n):
+    return 'Par' if n % 2 == 0 else 'Impar'
+
+print(par_o_impar(4))   # Par
+print(par_o_impar(7))   # Impar
+print(par_o_impar(-12)) # Par
+```
+
+```javascript
+function parOImpar(n) {
+  return n % 2 === 0 ? 'Par' : 'Impar';
+}
+console.log(parOImpar(4));  // Par
+console.log(parOImpar(7));  // Impar
+console.log(parOImpar(-12)); // Par
+```
+
+```java
+public class ParOImpar {
+    public static String parOImpar(int n) {
+        return n % 2 == 0 ? "Par" : "Impar";
+    }
+    public static void main(String[] args) {
+        System.out.println(parOImpar(4));   // Par
+        System.out.println(parOImpar(7));   // Impar
+        System.out.println(parOImpar(-12)); // Par
+    }
+}
+```
+
+```typescript
+function parOImpar(n: number): string {
+  return n % 2 === 0 ? 'Par' : 'Impar';
+}
+console.log(parOImpar(4));   // Par
+console.log(parOImpar(7));   // Impar
+console.log(parOImpar(-12)); // Par
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Inicial 01: Suma de Dígitos", href: "/retos/reto-inicial-01-suma-de-digitos/" },
+    { title: "Reto Inicial 15: Año Bisiesto", href: "/retos/reto-inicial-15-ano-bisiesto/" },
+  ]} />

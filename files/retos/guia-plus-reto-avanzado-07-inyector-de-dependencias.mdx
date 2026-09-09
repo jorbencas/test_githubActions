@@ -1,0 +1,206 @@
+---
+draft: false
+title: "🏆 RETO: Reto Avanzado 07: Inyector de Dependencias"
+description: "Implementa un contenedor de inyección de dependencias que registre, resuelva y gestione dependencias entre clases. Las dependencias se inyectan automáticamente al crear instancias."
+pubDate: "2026-06-28"
+tags: ["retos", "avanzado", "multilenguaje"]
+slug: "reto-avanzado-07-inyector-de-dependencias"
+image: "img/guia_plus_reto_avanzado_07_inyector_de_dependencias/guia_plus_reto_avanzado_07_inyector_de_dependencias_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Avanzado"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Reto Avanzado 07: Inyector de Dependencias
+
+### 📝 Descripción del Reto
+Implementa un **contenedor de inyección de dependencias (DI container)** que:
+1. **Registre** clases o instancias con un identificador único
+2. **Resuelva** dependencias inyectando automáticamente las dependencias declaradas
+3. **Detecte** ciclos de dependencias
+4. **Gestione** el ciclo de vida (singleton vs transient)
+
+**¿Por qué importa?** Spring (Java), Angular (TypeScript) y Django (Python) usan DI containers. La inyección de dependencias permite código desacoplado, testeable y mantenible. Es uno de los principios SOLID (Dependency Inversion).
+
+**Habilidades que practica:** Inversión de dependencias, programación orientada a objetos, patrones de diseño, detección de ciclos.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad Temporal | Complejidad Espacial |
+|---------|-------------|---------------------|---------------------|
+| Container con registro | Mapa de nombre → fábrica/instancia | O(1) resolución | O(n) |
+| Decoradores | Anotaciones que declaran dependencias | O(1) | O(n) |
+| Resolución recursiva | Resolver dependencias al pedirlas, memoizar | O(d) d=profundidad | O(n) |
+
+### 🌍 Dónde se usa
+1. **Spring Boot**: @Autowired inyecta dependencias automáticamente
+2. **Angular**: @Injectable() y providers gestionan el DI
+3. **Django**: settings de INSTALLED_APPS usan patrones similares
+4. **Testing**: mockear dependencias para unit tests aislados
+
+<Challenge 
+  nivel="Avanzado" 
+  mision="Implementa un contenedor de inyección de dependencias que registre, resuelva y gestione dependencias entre clases." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `register('logger', Logger), resolve('logger')` | `instancia Logger` |
+| `register('db', Database), register('repo', Repository), resolve('repo')` | `Repository con Database inyectada` |
+| `register('a', A), register('b', B), A depende de B, B depende de A` | `error: ciclo detectado` |
+| `register('x', X), resolve('y')` | `error: no encontrado` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** El contenedor mantiene un registro de fábricas (funciones constructoras). Al resolver, construye la instancia inyectando dependencias declaradas. Para detectar ciclos, usar un set de resolución en progreso. **Edge cases:** dependencia no registrada, ciclo de dependencias, singleton vs transient.
+
+### ⚙️ Paso 2: Implementación
+**Implementación:** Container con register(nombre, factory) y resolve(nombre). Usar recursión con memoización para construir instancias. Set temporal para detectar ciclos durante la resolución.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(d) donde d = profundidad de dependencias  
+**Complejidad espacial:** O(n) para el registro + O(d) pila de resolución  
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+class Container:
+    def __init__(self):
+        self.registros = {}
+        self.singletons = {}
+    
+    def register(self, nombre, factory, singleton=False):
+        self.registros[nombre] = (factory, singleton)
+    
+    def resolve(self, nombre, _resolving=None):
+        _resolving = _resolving or set()
+        if nombre in _resolving:
+            raise Exception(f"Ciclo detectado: {nombre}")
+        if nombre in self.singletons:
+            return self.singletons[nombre]
+        if nombre not in self.registros:
+            raise Exception(f"Dependencia no encontrada: {nombre}")
+        factory, singleton = self.registros[nombre]
+        _resolving.add(nombre)
+        try:
+            import inspect
+            params = inspect.signature(factory).parameters
+            deps = {k: self.resolve(k, _resolving.copy()) for k in params}
+            instance = factory(**deps)
+        except TypeError:
+            instance = factory()
+        if singleton:
+            self.singletons[nombre] = instance
+        return instance
+```
+
+```javascript
+class Container {
+  constructor() {
+    this.registros = new Map();
+    this.singletons = new Map();
+  }
+  register(nombre, factory, singleton = false) {
+    this.registros.set(nombre, { factory, singleton });
+  }
+  resolve(nombre, resolving = new Set()) {
+    if (resolving.has(nombre)) throw new Error(`Ciclo detectado: ${nombre}`);
+    if (this.singletons.has(nombre)) return this.singletons.get(nombre);
+    if (!this.registros.has(nombre)) throw new Error(`No encontrado: ${nombre}`);
+    const { factory, singleton } = this.registros.get(nombre);
+    resolving.add(nombre);
+    const instance = factory(this);
+    if (singleton) this.singletons.set(nombre, instance);
+    return instance;
+  }
+}
+```
+
+```java
+import java.util.*;
+import java.util.function.*;
+
+public class Container {
+    private Map<String, Function<Container, Object>> registros = new HashMap<>();
+    private Map<String, Object> singletons = new HashMap<>();
+
+    public void register(String nombre, Function<Container, Object> factory) {
+        registros.put(nombre, factory);
+    }
+
+    public void registerSingleton(String nombre, Function<Container, Object> factory) {
+        registros.put(nombre, factory);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T resolve(String nombre, Set<String> resolving) {
+        if (resolving.contains(nombre))
+            throw new RuntimeException("Ciclo detectado: " + nombre);
+        if (singletons.containsKey(nombre))
+            return (T) singletons.get(nombre);
+        if (!registros.containsKey(nombre))
+            throw new RuntimeException("No encontrado: " + nombre);
+        resolving.add(nombre);
+        T instance = (T) registros.get(nombre).apply(this);
+        singletons.put(nombre, instance);
+        return instance;
+    }
+
+    public <T> T resolve(String nombre) {
+        return resolve(nombre, new HashSet<>());
+    }
+}
+```
+
+```typescript
+type Factory = (container: Container) => any;
+
+class Container {
+  private registros = new Map<string, { factory: Factory; singleton: boolean }>();
+  private singletons = new Map<string, any>();
+
+  register(nombre: string, factory: Factory, singleton = false): void {
+    this.registros.set(nombre, { factory, singleton });
+  }
+
+  resolve<T>(nombre: string, resolving = new Set<string>()): T {
+    if (resolving.has(nombre)) throw new Error(`Ciclo detectado: ${nombre}`);
+    if (this.singletons.has(nombre)) return this.singletons.get(nombre) as T;
+    if (!this.registros.has(nombre)) throw new Error(`No encontrado: ${nombre}`);
+    const { factory, singleton } = this.registros.get(nombre)!;
+    resolving.add(nombre);
+    const instance = factory(this) as T;
+    if (singleton) this.singletons.set(nombre, instance);
+    return instance;
+  }
+}
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Patrón Singleton (Logger)", href: "/retos/reto-patron-singleton-logger/" },
+    { title: "Reto Avanzado 08: Patrón Strategy en APIs", href: "/retos/reto-avanzado-08-patron-strategy-en-apis/" },
+  ]} />

@@ -1,0 +1,160 @@
+---
+draft: false
+title: "🏆 RETO: Juego de Adivinar Número"
+description: "Implementa un juego donde el jugador intenta adivinar un número entre 1 y 100. El juego indica si el intento es alto, bajo o correcto. Práctica de bucles, condicionales y entrada del usuario."
+pubDate: "2026-06-28"
+tags: ["retos", "intermedio", "multilenguaje"]
+slug: "reto-juego-de-adivinar-numero"
+image: "img/guia_juego_de_adivinar_numero/guia_juego_de_adivinar_numero_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Intermedio"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Juego de Adivinar Número
+
+### 📝 Descripción del Reto
+Implementa un juego donde un número secreto (1-100) debe ser adivinado. En cada intento el jugador recibe pista: "demasiado alto", "demasiado bajo" o "¡correcto!". El juego termina cuando acierta o se queda sin intentos (máximo 10).
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Bucle con contador | while con max_intentos, input del usuario | O(max_intentos) |
+| Recursivo | Llamada recursiva con estado actualizado | O(max_intentos) pila |
+| Búsqueda binaria | Estrategia óptima del jugador: siempre probar el medio | O(log n) intentos |
+
+### 🌍 Dónde se usa
+- **Juegos digitales**: mecánicas de adivinanza y sorteo
+- **Educación**: enseñar lógica y estrategia a niños
+- **Sorteos**: selección aleatoria de ganadores
+- **Testing**: generar datos aleatorios para pruebas
+
+<Challenge 
+  nivel="Intermedio" 
+  mision="Implementa un juego de adivinar número con pistas de alto/bajo." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada (secuencia de intentos) | Salida esperada |
+|---------|-----------------|
+| `[50, 25, 75, 37, 62, 31, 56, 44, 50]` (secreto=50) | `¡Correcto en 9 intentos!` |
+| `[50, 25, 12, 6, 3, 1, 2, 4, 5, 7]` (secreto=8) | `Sin intentos. El número era 8` |
+| `[50]` (secreto=50) | `¡Correcto en 1 intento!` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Generar número secreto aleatorio (1-100). Bucle hasta 10 intentos: leer input, comparar, dar pista. **Edge cases:** número fuera de rango, no numérico.
+
+### ⚙️ Paso 2: Implementación
+Usar `random.randint(1, 100)` para el número. Bucle while con contador. Comparar y guiar al jugador.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(max_intentos)
+**Complejidad espacial:** O(1)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+import random
+
+def juego_adivinar():
+    secreto = random.randint(1, 100)
+    intentos = 10
+    for i in range(intentos):
+        intento = int(input(f"Intento {i+1}/{intentos} - Tu número: "))
+        if intento == secreto:
+            return f"¡Correcto en {i+1} intentos!"
+        elif intento < secreto:
+            print("Demasiado bajo")
+        else:
+            print("Demasiado alto")
+    return f"Sin intentos. El número era {secreto}"
+
+# Para test sin input:
+def juego_adivinar_test(secuencia, secreto):
+    for i, intento in enumerate(secuencia):
+        if intento == secreto:
+            return f"¡Correcto en {i+1} intentos!"
+        elif intento < secreto:
+            pass  # "Demasiado bajo"
+        else:
+            pass  # "Demasiado alto"
+    return f"Sin intentos. El número era {secreto}"
+
+print(juego_adivinar_test([50, 25, 75, 37, 62, 31, 56, 44, 50], 50))  # ¡Correcto en 9!
+print(juego_adivinar_test([50, 25, 12, 6, 3, 1, 2, 4, 5, 7], 8))      # Sin intentos
+```
+
+```javascript
+function juegoAdivinarTest(secuencia, secreto) {
+  for (let i = 0; i < secuencia.length; i++) {
+    if (secuencia[i] === secreto) {
+      return `¡Correcto en ${i + 1} intentos!`;
+    }
+  }
+  return `Sin intentos. El número era ${secreto}`;
+}
+console.log(juegoAdivinarTest([50, 25, 75, 37, 62, 31, 56, 44, 50], 50)); // ¡Correcto en 9!
+console.log(juegoAdivinarTest([50, 25, 12, 6, 3, 1, 2, 4, 5, 7], 8));     // Sin intentos
+```
+
+```java
+import java.util.Random;
+
+public class JuegoAdivinar {
+    public static String juegoTest(int[] secuencia, int secreto) {
+        for (int i = 0; i < secuencia.length; i++) {
+            if (secuencia[i] == secreto) {
+                return "¡Correcto en " + (i + 1) + " intentos!";
+            }
+        }
+        return "Sin intentos. El número era " + secreto;
+    }
+    public static void main(String[] args) {
+        System.out.println(juegoTest(new int[]{50, 25, 75, 37, 62, 31, 56, 44, 50}, 50));
+        System.out.println(juegoTest(new int[]{50, 25, 12, 6, 3, 1, 2, 4, 5, 7}, 8));
+    }
+}
+```
+
+```typescript
+function juegoAdivinarTest(secuencia: number[], secreto: number): string {
+  for (let i = 0; i < secuencia.length; i++) {
+    if (secuencia[i] === secreto) {
+      return `¡Correcto en ${i + 1} intentos!`;
+    }
+  }
+  return `Sin intentos. El número era ${secreto}`;
+}
+console.log(juegoAdivinarTest([50, 25, 75, 37, 62, 31, 56, 44, 50], 50)); // ¡Correcto en 9!
+console.log(juegoAdivinarTest([50, 25, 12, 6, 3, 1, 2, 4, 5, 7], 8));     // Sin intentos
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "El Contador de Pasos", href: "/retos/reto-el-contador-de-pasos/" },
+    { title: "Máximo de Tres Números", href: "/retos/reto-maximo-de-tres-numeros/" },
+  ]} />

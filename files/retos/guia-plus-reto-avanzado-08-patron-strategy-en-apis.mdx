@@ -1,0 +1,278 @@
+---
+draft: false
+title: "🏆 RETO: Reto Avanzado 08: Patrón Strategy en APIs"
+description: "Implementa el patrón Strategy para que una API pueda cambiar dinámicamente su estrategia de serialización (JSON, XML, CSV) sin modificar el código del handler."
+pubDate: "2026-06-28"
+tags: ["retos", "avanzado", "multilenguaje"]
+slug: "reto-avanzado-08-patron-strategy-en-apis"
+image: "img/guia_plus_reto_avanzado_08_patron_strategy_en_apis/guia_plus_reto_avanzado_08_patron_strategy_en_apis_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Avanzado"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Reto Avanzado 08: Patrón Strategy en APIs
+
+### 📝 Descripción del Reto
+Implementa el patrón Strategy para que una API pueda cambiar dinámicamente su estrategia de serialización de respuestas. Dados datos y un formato solicitado, el sistema debe:
+1. Aceptar datos crudos (array de objetos)
+2. Serializar según la estrategia elegida (JSON, XML, CSV)
+3. Permitir cambiar de estrategia en tiempo de ejecución
+
+**¿Por qué importa?** Las APIs REST sirven datos en múltiples formatos. Un mismo endpoint puede devolver JSON, XML o CSV según el cliente (app móvil, front web, Excel). El patrón Strategy permite cambiar comportamiento sin modificar el código existente.
+
+**Habilidades que practica:** Patrón Strategy, polimorfismo, serialización, principios SOLID (Open/Closed).
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad Temporal | Complejidad Espacial |
+|---------|-------------|---------------------|---------------------|
+| Clases Strategy | Interfaz con implementaciones concretas | O(n) | O(n) |
+| Funciones como estrategia | Pasar función de serialización como parámetro | O(n) | O(n) |
+| Mapa de estrategias | Diccionario nombre → función | O(1) lookup + O(n) | O(n) |
+
+### 🌍 Dónde se usa
+1. **APIs REST**: Content-Type determina formato de respuesta (JSON, XML, YAML)
+2. **Compiladores**: diferentes estrategias de optimización según target
+3. **Pagos**: cambiar estrategia de pago (Stripe, PayPal, transferencia) dinámicamente
+4. **Compresión**: elegir algoritmo de compresión según tipo de archivo
+
+<Challenge 
+  nivel="Avanzado" 
+  mision="Implementa el patrón Strategy para que una API pueda cambiar dinámicamente su estrategia de serialización (JSON, XML, CSV) sin modificar el código del handler." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `datos=[{a:1}], formato='json'` | `'[{\"a\":1}]'` |
+| `datos=[{a:1}], formato='csv'` | `'a\n1'` |
+| `datos=[{a:1,b:2}], formato='xml'` | `'<row><a>1</a><b>2</b></row>'` |
+| `datos=[], formato='json'` | `'[]'` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Definir una interfaz Strategy con método serialize(datos). Crear implementaciones concretas para JSON, XML y CSV. Un contexto mantiene la estrategia actual y puede cambiarla. **Edge cases:** datos vacíos, campos con caracteres especiales (commas en CSV), datos anidados.
+
+### ⚙️ Paso 2: Implementación
+**Implementación:** Interfaz/protocolo Strategy con serialize(). Clases concretas: JsonStrategy, XmlStrategy, CsvStrategy. Contexto que usa la estrategia actual.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n) para serializar n registros  
+**Complejidad espacial:** O(n) para la salida serializada  
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+from abc import ABC, abstractmethod
+import json
+
+class Strategy(ABC):
+    @abstractmethod
+    def serialize(self, datos):
+        pass
+
+class JsonStrategy(Strategy):
+    def serialize(self, datos):
+        return json.dumps(datos)
+
+class CsvStrategy(Strategy):
+    def serialize(self, datos):
+        if not datos:
+            return ""
+        headers = datos[0].keys()
+        lines = [",".join(headers)]
+        for obj in datos:
+            lines.append(",".join(str(obj.get(h, "")) for h in headers))
+        return "\n".join(lines)
+
+class XmlStrategy(Strategy):
+    def serialize(self, datos):
+        lines = []
+        for obj in datos:
+            inner = "".join(f"<{k}>{v}</{k}>" for k, v in obj.items())
+            lines.append(f"<row>{inner}</row>")
+        return "".join(lines)
+
+class Serializador:
+    def __init__(self, strategy):
+        self.strategy = strategy
+    
+    def set_strategy(self, strategy):
+        self.strategy = strategy
+    
+    def serialize(self, datos):
+        return self.strategy.serialize(datos)
+```
+
+```javascript
+class JsonStrategy {
+  serialize(datos) {
+    return JSON.stringify(datos);
+  }
+}
+
+class CsvStrategy {
+  serialize(datos) {
+    if (!datos.length) return "";
+    const headers = Object.keys(datos[0]);
+    const lines = [headers.join(",")];
+    for (const obj of datos) {
+      lines.push(headers.map(h => obj[h] ?? "").join(","));
+    }
+    return lines.join("\n");
+  }
+}
+
+class XmlStrategy {
+  serialize(datos) {
+    return datos.map(obj => {
+      const inner = Object.entries(obj)
+        .map(([k, v]) => `<${k}>${v}</${k}>`)
+        .join("");
+      return `<row>${inner}</row>`;
+    }).join("");
+  }
+}
+
+class Serializador {
+  constructor(strategy) {
+    this.strategy = strategy;
+  }
+  setStrategy(strategy) {
+    this.strategy = strategy;
+  }
+  serialize(datos) {
+    return this.strategy.serialize(datos);
+  }
+}
+```
+
+```java
+import java.util.*;
+import java.util.stream.*;
+
+public interface Strategy {
+    String serialize(List<Map<String, Object>> datos);
+}
+
+public class JsonStrategy implements Strategy {
+    public String serialize(List<Map<String, Object>> datos) {
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = 0; i < datos.size(); i++) {
+            if (i > 0) sb.append(",");
+            sb.append("{");
+            Map<String, Object> obj = datos.get(i);
+            int j = 0;
+            for (Map.Entry<String, Object> e : obj.entrySet()) {
+                if (j > 0) sb.append(",");
+                sb.append("\"").append(e.getKey()).append("\":\"").append(e.getValue()).append("\"");
+                j++;
+            }
+            sb.append("}");
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+}
+
+public class CsvStrategy implements Strategy {
+    public String serialize(List<Map<String, Object>> datos) {
+        if (datos.isEmpty()) return "";
+        List<String> headers = new ArrayList<>(datos.get(0).keySet());
+        StringBuilder sb = new StringBuilder(String.join(",", headers));
+        for (Map<String, Object> obj : datos) {
+            sb.append("\n");
+            sb.append(headers.stream()
+                .map(h -> String.valueOf(obj.getOrDefault(h, "")))
+                .collect(Collectors.joining(",")));
+        }
+        return sb.toString();
+    }
+}
+
+public class Serializador {
+    private Strategy strategy;
+    public Serializador(Strategy s) { this.strategy = s; }
+    public void setStrategy(Strategy s) { this.strategy = s; }
+    public String serialize(List<Map<String, Object>> datos) {
+        return strategy.serialize(datos);
+    }
+}
+```
+
+```typescript
+interface Strategy {
+  serialize(datos: Record<string, any>[]): string;
+}
+
+class JsonStrategy implements Strategy {
+  serialize(datos: Record<string, any>[]): string {
+    return JSON.stringify(datos);
+  }
+}
+
+class CsvStrategy implements Strategy {
+  serialize(datos: Record<string, any>[]): string {
+    if (!datos.length) return "";
+    const headers = Object.keys(datos[0]);
+    const lines = [headers.join(",")];
+    for (const obj of datos) {
+      lines.push(headers.map(h => obj[h] ?? "").join(","));
+    }
+    return lines.join("\n");
+  }
+}
+
+class XmlStrategy implements Strategy {
+  serialize(datos: Record<string, any>[]): string {
+    return datos.map(obj => {
+      const inner = Object.entries(obj)
+        .map(([k, v]) => `<${k}>${v}</${k}>`)
+        .join("");
+      return `<row>${inner}</row>`;
+    }).join("");
+  }
+}
+
+class Serializador {
+  private strategy: Strategy;
+  constructor(strategy: Strategy) {
+    this.strategy = strategy;
+  }
+  setStrategy(strategy: Strategy) {
+    this.strategy = strategy;
+  }
+  serialize(datos: Record<string, any>[]): string {
+    return this.strategy.serialize(datos);
+  }
+}
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Avanzado 07: Inyector de Dependencias", href: "/retos/reto-avanzado-07-inyector-de-dependencias/" },
+    { title: "Reto Avanzado 06: Middleware de Seguridad", href: "/retos/reto-avanzado-06-middleware-de-seguridad/" },
+  ]} />

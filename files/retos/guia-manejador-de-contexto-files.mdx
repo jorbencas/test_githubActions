@@ -1,0 +1,237 @@
+---
+draft: false
+title: "🏆 RETO: Manejador de Contexto (Files)"
+description: "Implementa un manejador de contexto para archivos que abra, lea, escriba y cierre archivos de forma segura, incluso si ocurren errores."
+pubDate: "2026-06-28"
+tags: ["retos", "intermedio", "multilenguaje"]
+slug: "reto-manejador-de-contexto-files"
+image: "img/guia_manejador_de_contexto_files/guia_manejador_de_contexto_files_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Intermedio"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Manejador de Contexto (Files)
+
+### 📝 Descripción del Reto
+Implementa un manejador de contexto para archivos que garantice la apertura y cierre seguro de archivos. Debe soportar: leer contenido completo, escribir contenido, y asegurar que el archivo se cierre correctamente incluso si ocurre una excepción durante la operación.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Context Manager (with) | `with open()` en Python, try-finally en otros | O(n) |
+| RAII pattern | Resource Acquisition Is Initialization (C++/Java) | O(n) |
+| Disposable pattern | IDisposable en C#, AutoCloseable en Java | O(n) |
+
+### 🌍 Dónde se usa
+- **ETL pipelines**: lectura/escritura segura de archivos de datos
+- **Logging**: escribir logs sin perder datos por crashes
+- **Configuración**: leer/escribir archivos de config de forma segura
+- **Backup**: copiar archivos con manejo de errores
+
+<Challenge 
+  nivel="Intermedio" 
+  mision="Implementa un manejador de contexto para archivos con apertura y cierre seguro." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| Escribir "hola" en archivo, leerlo | `"hola"` |
+| Leer archivo inexistente | Error controlado (mensaje o null) |
+| Escribir sin cierre previo | El archivo se cierra automáticamente |
+| Archivo vacío | `""` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** El patrón Context Manager asegura que los recursos (archivos) se liberen correctamente. En Python se usa `with`, en Java try-with-resources, en JS/TS se usa `try/finally`. **Caso límite:** archivo no existe, permisos denegados, disco lleno.
+
+### ⚙️ Paso 2: Implementación
+1. Definir una clase/método que maneje apertura y cierre.
+2. Implementar leer y escribir como operaciones internas.
+3. Garantizar cierre en el bloque `finally` o equivalente.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n) — n es el tamaño del archivo leído/escrito.
+**Complejidad espacial:** O(n) — para el contenido del archivo.
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+import os
+
+class ManejadorArchivos:
+    def __init__(self, ruta):
+        self.ruta = ruta
+        self.archivo = None
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if self.archivo and not self.archivo.closed:
+            self.archivo.close()
+        return False
+
+    def leer(self):
+        with open(self.ruta, 'r') as f:
+            return f.read()
+
+    def escribir(self, contenido):
+        with open(self.ruta, 'w') as f:
+            f.write(contenido)
+
+# Uso con context manager
+with ManejadorArchivos("test.txt") as m:
+    m.escribir("hola mundo")
+    print(m.leer())  # "hola mundo"
+
+# Lectura segura con manejo de error
+try:
+    with ManejadorArchivos("no_existe.txt") as m:
+        print(m.leer())
+except FileNotFoundError:
+    print("Archivo no encontrado")
+```
+
+```javascript
+const fs = require('fs').promises;
+
+class ManejadorArchivos {
+  constructor(ruta) { this.ruta = ruta; }
+
+  async usar(callback) {
+    try {
+      const resultado = await callback(this);
+      return resultado;
+    } finally {
+      // En JS/TS no hay cierre explícito para promesas de archivo
+      // pero garantizamos limpieza con finally
+    }
+  }
+
+  async leer() {
+    return await fs.readFile(this.ruta, 'utf-8');
+  }
+
+  async escribir(contenido) {
+    await fs.writeFile(this.ruta, contenido, 'utf-8');
+  }
+}
+
+// Uso
+async function main() {
+  const m = new ManejadorArchivos("test.txt");
+  await m.escribir("hola mundo");
+  console.log(await m.leer());  // "hola mundo"
+
+  try {
+    const m2 = new ManejadorArchivos("no_existe.txt");
+    console.log(await m2.leer());
+  } catch (e) {
+    console.log("Archivo no encontrado");
+  }
+}
+main();
+```
+
+```java
+import java.io.*;
+import java.nio.file.*;
+
+public class ManejadorArchivos implements AutoCloseable {
+    private String ruta;
+    private BufferedWriter writer;
+
+    public ManejadorArchivos(String ruta) { this.ruta = ruta; }
+
+    public String leer() throws IOException {
+        return Files.readString(Path.of(ruta));
+    }
+
+    public void escribir(String contenido) throws IOException {
+        Files.writeString(Path.of(ruta), contenido);
+    }
+
+    @Override
+    public void close() throws Exception {
+        if (writer != null) writer.close();
+    }
+
+    public static void main(String[] args) {
+        try (ManejadorArchivos m = new ManejadorArchivos("test.txt")) {
+            m.escribir("hola mundo");
+            System.out.println(m.leer());  // hola mundo
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+```
+
+```typescript
+import * as fs from 'fs/promises';
+
+class ManejadorArchivos {
+  constructor(private ruta: string) {}
+
+  async usar<T>(callback: (m: ManejadorArchivos) => Promise<T>): Promise<T> {
+    try {
+      return await callback(this);
+    } finally {
+      // Garantiza limpieza
+    }
+  }
+
+  async leer(): Promise<string> {
+    return await fs.readFile(this.ruta, 'utf-8');
+  }
+
+  async escribir(contenido: string): Promise<void> {
+    await fs.writeFile(this.ruta, contenido, 'utf-8');
+  }
+}
+
+async function main() {
+  const m = new ManejadorArchivos("test.txt");
+  await m.escribir("hola mundo");
+  console.log(await m.leer());  // "hola mundo"
+
+  try {
+    const m2 = new ManejadorArchivos("no_existe.txt");
+    console.log(await m2.leer());
+  } catch (e) {
+    console.log("Archivo no encontrado");
+  }
+}
+main();
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Consumo de API Mock", href: "/retos/reto-consumo-de-api-mock/" },
+    { title: "Reto Intermedio 12: Procesador de JSON", href: "/retos/reto-intermedio-12-procesador-de-json/" },
+  ]} />

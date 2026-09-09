@@ -1,0 +1,196 @@
+---
+draft: false
+title: "🏆 RETO: Reto Intermedio 12: Procesador de JSON"
+description: "Procesa datos en formato JSON: parsea una cadena JSON que contiene una lista de objetos, filtra por una condición dada y devuelve los resultados transformados como JSON."
+pubDate: "2026-06-28"
+tags: ["retos", "intermedio", "multilenguaje"]
+slug: "reto-intermedio-12-procesador-de-json"
+image: "img/guia_plus_reto_intermedio_12_procesador_de_json/guia_plus_reto_intermedio_12_procesador_de_json_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Intermedio"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Reto Intermedio 12: Procesador de JSON
+
+### 📝 Descripción del Reto
+Recibe una cadena JSON que contiene una lista de objetos y una condición de filtro en formato string (por ejemplo `"a>1"` o `n=="x"`). Debes:
+1. Parsear la cadena JSON a una lista de objetos
+2. Filtrar los objetos que cumplan la condición
+3. Devolver el resultado como cadena JSON
+
+**¿Por qué importa?** El procesamiento de JSON es la base de cualquier API REST. Cada petition HTTP que recibe o devuelve datos usa JSON. Filtrar y transformar datos es una tarea diaria en ETL, configuraciones y backends.
+
+**Habilidades que practica:** Parsing de JSON, evaluación segura de expresiones simples, filtrado de colecciones, serialización.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad Temporal | Complejidad Espacial |
+|---------|-------------|---------------------|---------------------|
+| Parse + eval simple | Parsear JSON, evaluar condición con eval() | O(n) | O(n) |
+| Parse + switch/regex | Parsear JSON, extraer campo/op/valor, comparar manualmente | O(n) | O(n) |
+| JSONPath expresión | Usar librería JSONPath para consultas | O(n) | O(n) |
+
+### 🌍 Dónde se usa
+1. **APIs REST**: filtrar resultados de endpoints como `/api/users?age>18`
+2. **ETL pipelines**: transformar datos entre sistemas en procesos de ingestión
+3. **Configuraciones**: leer y filtrar archivos de configuración JSON
+4. **Bases NoSQL**: MongoDB y DynamoDB almacenan y consultan documentos JSON
+
+<Challenge 
+  nivel="Intermedio" 
+  mision="Procesa datos en formato JSON: parsea una cadena JSON que contiene una lista de objetos, filtra por una condición dada y devuelve los resultados transformados como JSON." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `'[{"a":1},{"a":2}]', 'a>1'` | `[{"a":2}]` |
+| `'[]', 'x'` | `[]` |
+| `[{"n":"x"}], 'n=="x"'` | `[{"n":"x"}]` |
+| `'[{"a":1},{"a":2},{"a":3}]', 'a>2'` | `[{"a":3}]` |
+| `'[{"x":5}]', 'x==5'` | `[{"x":5}]` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Dado un string JSON que contiene una lista de objetos, se debe filtrar según una condición simple del tipo `campo>valor`, `campo<valor`, o `campo=="valor"`. **Edge cases:** JSON vacío, campo faltante, tipos de dato incorrectos, operador no soportado.
+
+### ⚙️ Paso 2: Implementación
+**Implementación:** Parsear con json.loads (Python) o JSON.parse (JS). Parsear la condición para extraer campo, operador y valor. Filtrar con filter() y devolver json.dumps/JSON.stringify.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n)  
+**Complejidad espacial:** O(n)  
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+import json
+
+def procesar_json(json_str, condicion):
+    datos = json.loads(json_str)
+    if not datos:
+        return json.dumps([])
+    campo, op, valor = condicion.replace('"', '').replace("'", "").split('>' if '>' in condicion else '<' if '<' in condicion else '==')
+    campo = campo.strip()
+    valor = valor.strip()
+    resultado = []
+    for obj in datos:
+        v = obj.get(campo)
+        if v is None:
+            continue
+        if op == '>' and v > float(valor):
+            resultado.append(obj)
+        elif op == '<' and v < float(valor):
+            resultado.append(obj)
+        elif op == '==' and (v == float(valor) or v == valor):
+            resultado.append(obj)
+    return json.dumps(resultado)
+```
+
+```javascript
+function procesarJson(jsonStr, condicion) {
+  const datos = JSON.parse(jsonStr);
+  const match = condicion.match(/^(\w+)\s*(>=|<=|==|!=|>|<)\s*(.+)$/);
+  if (!match) return JSON.stringify([]);
+  const [, campo, op, valorRaw] = match;
+  const valor = isNaN(valorRaw) ? valorRaw.replace(/['"]/g, '') : Number(valorRaw);
+  const resultado = datos.filter(obj => {
+    const v = obj[campo];
+    if (v === undefined) return false;
+    switch (op) {
+      case '>': return v > valor;
+      case '<': return v < valor;
+      case '>=': return v >= valor;
+      case '<=': return v <= valor;
+      case '==': return v == valor;
+      case '!=': return v != valor;
+      default: return false;
+    }
+  });
+  return JSON.stringify(resultado);
+}
+```
+
+```java
+import org.json.*;
+import java.util.*;
+
+public class ProcesadorJson {
+    public static String procesar(String jsonStr, String condicion) {
+        JSONArray datos = new JSONArray(jsonStr);
+        JSONArray resultado = new JSONArray();
+        String[] parts = condicion.split("(>=|<=|==|!=|>|<)");
+        String campo = parts[0].trim();
+        String op = condicion.replaceAll("[\\w\\s\"']", "").trim();
+        String valStr = parts[1].trim().replace("\"", "");
+        for (int i = 0; i < datos.length(); i++) {
+            JSONObject obj = datos.getJSONObject(i);
+            if (!obj.has(campo)) continue;
+            Object v = obj.get(campo);
+            double numVal = Double.parseDouble(valStr);
+            double numV = (v instanceof Number) ? ((Number) v).doubleValue() : 0;
+            boolean match = false;
+            switch (op) {
+                case ">": match = numV > numVal; break;
+                case "<": match = numV < numVal; break;
+                case "==": match = v.toString().equals(valStr) || numV == numVal; break;
+            }
+            if (match) resultado.put(obj);
+        }
+        return resultado.toString();
+    }
+}
+```
+
+```typescript
+function procesarJson(jsonStr: string, condicion: string): string {
+  const datos: Record<string, any>[] = JSON.parse(jsonStr);
+  const match = condicion.match(/^(\w+)\s*(>=|<=|==|!=|>|<)\s*(.+)$/);
+  if (!match) return JSON.stringify([]);
+  const [, campo, op, valorRaw] = match;
+  const valor = isNaN(Number(valorRaw)) ? valorRaw.replace(/['"]/g, '') : Number(valorRaw);
+  const resultado = datos.filter(obj => {
+    const v = obj[campo];
+    if (v === undefined) return false;
+    switch (op) {
+      case '>': return v > valor;
+      case '<': return v < valor;
+      case '>=': return v >= valor;
+      case '<=': return v <= valor;
+      case '==': return v == valor;
+      case '!=': return v != valor;
+      default: return false;
+    }
+  });
+  return JSON.stringify(resultado);
+}
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Avanzado 10: Validador de Esquema JSON", href: "/retos/reto-avanzado-10-validador-de-esquema-json/" },
+    { title: "Consumo de API Mock", href: "/retos/reto-consumo-de-api-mock/" },
+  ]} />

@@ -1,0 +1,128 @@
+---
+draft: false
+title: "🏆 RETO: Reto Inicial 11: Área de Triángulo"
+description: "Calcula el área de un triángulo dados su base y altura usando la fórmula (base × altura) / 2. Ejercicio clásico de geometría computacional que practica operaciones aritméticas y validación de entradas."
+pubDate: "2026-06-28"
+tags: ["retos", "iniciación", "multilenguaje"]
+slug: "reto-inicial-11-area-de-triangulo"
+image: "img/guia_plus_reto_inicial_11_area_de_triangulo/guia_plus_reto_inicial_11_area_de_triangulo_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Iniciación"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Reto Inicial 11: Área de Triángulo
+
+### 📝 Descripción del Reto
+Calcula el área de un triángulo dados su base y altura usando la fórmula (base × altura) / 2. Ejercicio que introduce la traducción de fórmulas matemáticas a código y la validación de parámetros numéricos positivos.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Fórmula directa | (base × altura) / 2 | O(1) |
+| Con validación | Verificar base > 0 y altura > 0 antes de calcular | O(1) |
+| Fórmula de Herón | Usando los tres lados (requiere más cálculos) | O(1) |
+
+### 🌍 Dónde se usa
+- **Construcción**: cálculo de materiales para techos y superficies triangulares
+- **Gráficos por computadora**: rasterización de triángulos en motores 3D
+- **Cartografía**: cálculo de áreas en mapas y terrenos
+- **Ingeniería civil**: diseño de estructuras y cálculo de cargas
+
+<Challenge 
+  nivel="Iniciación" 
+  mision="Calcula el área de un triángulo dados su base y altura usando la fórmula (base × altura) / 2." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `3, 4` | `6` |
+| `5, 5` | `12.5` |
+| `0, 5` | `0` |
+| `10, 2` | `10` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** El área se calcula como base × altura / 2. **Ejemplo:** base=3, altura=4 → 3×4/2 = 6. **Edge cases:** base o altura cero (área 0), valores negativos (no válidos).
+
+### ⚙️ Paso 2: Implementación
+Función que recibe base y altura, valida que sean positivas, aplica la fórmula y devuelve el resultado.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(1)
+**Complejidad espacial:** O(1)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def area_triangulo(base, altura):
+    return (base * altura) / 2
+
+print(area_triangulo(3, 4))   # 6.0
+print(area_triangulo(5, 5))   # 12.5
+print(area_triangulo(0, 5))   # 0.0
+print(area_triangulo(10, 2))  # 10.0
+```
+
+```javascript
+function areaTriangulo(base, altura) {
+  return (base * altura) / 2;
+}
+console.log(areaTriangulo(3, 4));   // 6
+console.log(areaTriangulo(5, 5));   // 12.5
+console.log(areaTriangulo(0, 5));   // 0
+console.log(areaTriangulo(10, 2));  // 10
+```
+
+```java
+public class AreaTriangulo {
+    public static double areaTriangulo(double base, double altura) {
+        return (base * altura) / 2;
+    }
+    public static void main(String[] args) {
+        System.out.println(areaTriangulo(3, 4));   // 6.0
+        System.out.println(areaTriangulo(5, 5));   // 12.5
+        System.out.println(areaTriangulo(0, 5));   // 0.0
+        System.out.println(areaTriangulo(10, 2));  // 10.0
+    }
+}
+```
+
+```typescript
+function areaTriangulo(base: number, altura: number): number {
+  return (base * altura) / 2;
+}
+console.log(areaTriangulo(3, 4));   // 6
+console.log(areaTriangulo(5, 5));   // 12.5
+console.log(areaTriangulo(0, 5));   // 0
+console.log(areaTriangulo(10, 2));  // 10
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Inicial 24: Raíz Cuadrada (Redondeada)", href: "/retos/reto-inicial-24-raiz-cuadrada-redondeada/" },
+    { title: "Reto Inicial 10: Celsius a Kelvin", href: "/retos/reto-inicial-10-celsius-a-kelvin/" },
+  ]} />

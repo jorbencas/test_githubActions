@@ -1,0 +1,128 @@
+---
+draft: false
+title: "🏆 RETO: Reto Inicial 10: Celsius a Kelvin"
+description: "Convierte grados Celsius a Kelvin usando la fórmula K = C + 273.15. Ejercicio de transformación directa que introducirte a funciones matemáticas y manejo de punto flotante."
+pubDate: "2026-06-28"
+tags: ["retos", "iniciación", "multilenguaje"]
+slug: "reto-inicial-10-celsius-a-kelvin"
+image: "img/guia_plus_reto_inicial_10_celsius_a_kelvin/guia_plus_reto_inicial_10_celsius_a_kelvin_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Iniciación"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Reto Inicial 10: Celsius a Kelvin
+
+### 📝 Descripción del Reto
+Convierte grados Celsius a Kelvin usando la fórmula K = C + 273.15. Kelvin es la escala absoluta de temperatura donde 0 K es el cero absoluto (-273.15°C). Conversión directa que practica operaciones aritméticas con decimales y el uso de constantes matemáticas.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Suma directa | K = C + 273.15 — una línea | O(1) |
+| Función con validación | Verificar que C >= -273.15 antes de convertir | O(1) |
+| Redondeo | Redondear resultado a 2 decimales para precisión | O(1) |
+
+### 🌍 Dónde se usa
+- **Meteorología**: estaciones de monitoreo que reportan en Kelvin
+- **Ciencia**: experimentos de laboratorio que requieren escala absoluta
+- **Industria**: procesos de manufacturing controlados por temperatura
+- **APIs de clima**: conversión entre unidades para usuarios internacionales
+
+<Challenge 
+  nivel="Iniciación" 
+  mision="Convierte grados Celsius a Kelvin usando la fórmula K = C + 273.15." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `0` | `273.15` |
+| `100` | `373.15` |
+| `-273.15` | `0` |
+| `25` | `298.15` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** La conversión es directa: K = C + 273.15. **Ejemplo:** 0°C → 273.15 K, 100°C → 373.15 K. **Edge cases:** cero absoluto (-273.15°C = 0 K), valores negativos.
+
+### ⚙️ Paso 2: Implementación
+Función que suma 273.15 al valor de entrada. Validar que la entrada sea numérica.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(1)
+**Complejidad espacial:** O(1)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def celsius_a_kelvin(c):
+    return c + 273.15
+
+print(celsius_a_kelvin(0))      # 273.15
+print(celsius_a_kelvin(100))    # 373.15
+print(celsius_a_kelvin(-273.15)) # 0.0
+print(celsius_a_kelvin(25))     # 298.15
+```
+
+```javascript
+function celsiusAKelvin(c) {
+  return c + 273.15;
+}
+console.log(celsiusAKelvin(0));       // 273.15
+console.log(celsiusAKelvin(100));     // 373.15
+console.log(celsiusAKelvin(-273.15)); // 0
+console.log(celsiusAKelvin(25));      // 298.15
+```
+
+```java
+public class CelsiusAKelvin {
+    public static double celsiusAKelvin(double c) {
+        return c + 273.15;
+    }
+    public static void main(String[] args) {
+        System.out.println(celsiusAKelvin(0));       // 273.15
+        System.out.println(celsiusAKelvin(100));     // 373.15
+        System.out.println(celsiusAKelvin(-273.15)); // 0.0
+        System.out.println(celsiusAKelvin(25));      // 298.15
+    }
+}
+```
+
+```typescript
+function celsiusAKelvin(c: number): number {
+  return c + 273.15;
+}
+console.log(celsiusAKelvin(0));       // 273.15
+console.log(celsiusAKelvin(100));     // 373.15
+console.log(celsiusAKelvin(-273.15)); // 0
+console.log(celsiusAKelvin(25));      // 298.15
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Inicial 18: Precio con IVA", href: "/retos/reto-inicial-18-precio-con-iva/" },
+    { title: "Reto Inicial 19: Descuento Simple", href: "/retos/reto-inicial-19-descuento-simple/" },
+  ]} />

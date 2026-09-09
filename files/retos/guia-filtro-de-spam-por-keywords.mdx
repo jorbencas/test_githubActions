@@ -1,0 +1,135 @@
+---
+draft: false
+title: "🏆 RETO: Filtro de Spam por Keywords"
+description: "Implementa un filtro que detecta si un mensaje contiene palabras clave de spam. Dada una lista de keywords prohibidas, retorna true si alguna aparece en el texto (case-insensitive)."
+pubDate: "2026-06-28"
+tags: ["retos", "intermedio", "multilenguaje"]
+slug: "reto-filtro-de-spam-por-keywords"
+image: "img/guia_filtro_de_spam_por_keywords/guia_filtro_de_spam_por_keywords_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Intermedio"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Filtro de Spam por Keywords
+
+### 📝 Descripción del Reto
+Implementa un filtro de spam: dado un mensaje y una lista de keywords prohibidas, retorna true si alguna keyword aparece en el texto (ignorando mayúsculas/minúsculas). Ejercicio que practica búsqueda en strings, normalización de texto y lógica de filtrado.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Búsqueda lineal | Para cada keyword, verificar si está en el texto | O(k × n) |
+| Set de palabras | Tokenizar texto y verificar intersección con keywords | O(n + k) |
+| Regex | Construir patrón alternado de keywords | O(n × k) |
+
+### 🌍 Dónde se usa
+- **Moderación de contenido**: filtrar comentarios ofensivos en redes sociales
+- **Email**: detectar spam en bandejas de entrada
+- **Chatbots**: evitar respuestas con contenido no deseado
+- **Juegos**: filtrar lenguaje inapropiado en chat multijugador
+
+<Challenge 
+  nivel="Intermedio" 
+  mision="Implementa un filtro que detecte keywords de spam en un mensaje." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `'Compra ahora!!!', ['comprar', 'gratis']` | `true` |
+| `'Hola que tal', ['comprar', 'gratis']` | `false` |
+| `'GRATIS para ti', ['gratis']` | `true` |
+| `'Hola mundo', []` | `false` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Convertir tanto el mensaje como las keywords a minúsculas. Verificar si alguna keyword aparece como substring en el mensaje. **Ejemplo:** 'Compra ahora!!!' + ['comprar'] → 'compra ahora!!!'.includes('comprar') → true. **Edge cases:** lista vacía (false), keyword vacía (cuidado), mensajes con puntuación.
+
+### ⚙️ Paso 2: Implementación
+Normalizar a minúsculas. Para cada keyword, verificar si está contenida en el texto normalizado.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(k × n) donde k = número de keywords, n = longitud del texto
+**Complejidad espacial:** O(n)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def es_spam(mensaje, keywords):
+    mensaje_lower = mensaje.lower()
+    return any(kw.lower() in mensaje_lower for kw in keywords)
+
+print(es_spam('Compra ahora!!!', ['comprar', 'gratis']))   # True
+print(es_spam('Hola que tal', ['comprar', 'gratis']))       # False
+print(es_spam('GRATIS para ti', ['gratis']))                 # True
+print(es_spam('Hola mundo', []))                              # False
+```
+
+```javascript
+function esSpam(mensaje, keywords) {
+  const mensajeLower = mensaje.toLowerCase();
+  return keywords.some(kw => mensajeLower.includes(kw.toLowerCase()));
+}
+console.log(esSpam('Compra ahora!!!', ['comprar', 'gratis'])); // true
+console.log(esSpam('Hola que tal', ['comprar', 'gratis']));    // false
+console.log(esSpam('GRATIS para ti', ['gratis']));              // true
+console.log(esSpam('Hola mundo', []));                          // false
+```
+
+```java
+public class FiltroSpam {
+    public static boolean esSpam(String mensaje, String[] keywords) {
+        String mensajeLower = mensaje.toLowerCase();
+        for (String kw : keywords) {
+            if (mensajeLower.contains(kw.toLowerCase())) return true;
+        }
+        return false;
+    }
+    public static void main(String[] args) {
+        System.out.println(esSpam("Compra ahora!!!", new String[]{"comprar", "gratis"})); // true
+        System.out.println(esSpam("Hola que tal", new String[]{"comprar", "gratis"}));    // false
+        System.out.println(esSpam("GRATIS para ti", new String[]{"gratis"}));              // true
+        System.out.println(esSpam("Hola mundo", new String[]{}));                          // false
+    }
+}
+```
+
+```typescript
+function esSpam(mensaje: string, keywords: string[]): boolean {
+  const mensajeLower = mensaje.toLowerCase();
+  return keywords.some(kw => mensajeLower.includes(kw.toLowerCase()));
+}
+console.log(esSpam('Compra ahora!!!', ['comprar', 'gratis'])); // true
+console.log(esSpam('Hola que tal', ['comprar', 'gratis']));    // false
+console.log(esSpam('GRATIS para ti', ['gratis']));              // true
+console.log(esSpam('Hola mundo', []));                          // false
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Intermedio 38: Validador de ISBN", href: "/retos/reto-intermedio-38-validador-de-isbn/" },
+    { title: "Reto Inicial 30: Limpieza de Texto", href: "/retos/reto-inicial-30-limpieza-de-texto/" },
+  ]} />

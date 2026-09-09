@@ -1,0 +1,202 @@
+---
+draft: false
+title: "🏆 RETO: Eliminar Duplicados"
+description: "Dada una lista, elimina los elementos duplicados manteniendo el orden. Practica con conjuntos (sets) y estructuras de datos."
+pubDate: "2026-06-28"
+tags: ["retos", "intermedio", "multilenguaje"]
+slug: "reto-eliminar-duplicados"
+image: "img/guia_eliminar_duplicados/guia_eliminar_duplicados_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Intermedio"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Eliminar Duplicados
+
+### 📝 Descripción del Reto
+Dada una lista de elementos, elimina los duplicados manteniendo el orden original de aparición.
+
+Eliminar duplicados es un problema que aparece constantemente en el día a día: limpiar una lista de emails importados de un CSV, obtener categorías únicas de un catálogo de productos, o deduplicar resultados de una búsqueda. La clave está en elegir la estructura de datos correcta — y aquí es donde entra la diferencia entre unSolution O(n²) y uno O(n).
+
+| Regla | Detalle |
+|-------|---------|
+| Entrada | Lista/array de elementos (números, strings, etc.) |
+| Salida | Lista sin duplicados, manteniendo el orden original |
+| Orden | Respetar el primer orden de aparición |
+| Ejemplo | `[1, 2, 2, 3, 1]` → `[1, 2, 3]` |
+
+### 💡 Posibles enfoques
+
+| Enfoque | Cómo funciona | Complejidad |
+|---------|---------------|-------------|
+| **Set + lista** | Recorrer, ir añadiendo a un set para verificar si ya vimos el elemento | O(n) tiempo, O(n) espacio |
+| **Bucle doble** | Para cada elemento, buscar en los anteriores si ya existe | O(n²) tiempo, O(1) espacio |
+| **Ordenar + uniq** | Ordenar primero, luego eliminar consecutivos iguales | O(n log n) tiempo |
+
+### 🌍 Dónde se usa en la vida real
+
+- **Limpieza de datos**: Deduplicar listas de emails, teléfonos, IDs de usuario
+- **Bases de datos**: `SELECT DISTINCT` es exactamente este problema
+- **Análisis de logs**: Obtener IPs únicas que han accedido a un servidor
+- **APIs**: Devolver categorías/etiquetas únicas de un catálogo
+
+<Challenge 
+  nivel="Intermedio" 
+  mision="Resuelve el desafío 'Eliminar Duplicados'. Implementa una solución completa siguiendo las mejores prácticas de..." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `[1, 2, 2, 3, 1]` | `[1, 2, 3]` |
+| `["a", "b", "a", "c"]` | `["a", "b", "c"]` |
+| `[1, 1, 1, 1]` | `[1]` |
+| `[]` | `[]` |
+| `[1, 2, 3]` | `[1, 2, 3]` (sin cambios) |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+
+**Análisis del problema:** Necesitamos recorrer la lista y, para cada elemento, decidir si ya lo hemos visto antes. Si no, lo añadimos al resultado. Si ya lo vistimos, lo saltamos. La clave es: ¿cómo sabemos rápido si un elemento ya apareció?
+
+**Ejemplo concreto:**
+```
+[1, 2, 2, 3, 1]
+ ↓  ↓  ↓  ↓  ↓
+1 → nuevo → resultado: [1]
+2 → nuevo → resultado: [1, 2]
+2 → ya visto → saltar
+3 → nuevo → resultado: [1, 2, 3]
+1 → ya visto → saltar
+```
+
+**Edge cases:** Lista vacía (devolver []), lista sin duplicados (devolver tal cual), todos duplicados (devolver uno solo), elementos de tipos mixtos.
+
+### ⚙️ Paso 2: Implementación
+
+**Implementación paso a paso:**
+1. Crear un conjunto (set) vacío para rastrear elementos vistos
+2. Crear una lista resultado vacía
+3. Recorrer cada elemento de la entrada
+4. Si el elemento NO está en el conjunto de vistos:
+   - Añadirlo a la lista resultado
+   - Añadirlo al conjunto de vistos
+5. Devolver la lista resultado
+
+**En Python:** `set()` para vistos + lista para resultado. También se puede usar `dict.fromkeys()` que preserva el orden (Python 3.7+).
+
+**En JavaScript:** `new Set()` + `Array.from()` o `[...new Set()]`
+
+**En Java:** `LinkedHashSet` (preserva orden) o `HashSet` + `ArrayList`
+
+**En TypeScript:** Igual que JS pero con tipado: `Set<T>`
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n) — recorremos la lista una sola vez
+**Complejidad espacial:** O(n) — el set puede contener hasta n elementos
+
+**Comparación de enfoques:**
+
+| Enfoque | Tiempo | Espacio | Notas |
+|---------|--------|---------|-------|
+| Set + lista | O(n) | O(n) | Mejor opción general |
+| Bucle doble | O(n²) | O(1) | Sin estructuras extra, pero lento |
+| Ordenar + uniq | O(n log n) | O(1) | Cambia el orden original |
+
+**Aplicaciones reales:**
+-  — SQL hace exactamente esto
+- Limpieza de datos en pipelines ETL
+- Obtener tags/categorías únicas en APIs REST
+- Deduplicar IPs en análisis de logs de seguridad
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def eliminar_duplicados(lista):
+    vistos = set()
+    resultado = []
+    for elem in lista:
+        if elem not in vistos:
+            vistos.add(elem)
+            resultado.append(elem)
+    return resultado
+
+print(eliminar_duplicados([1, 2, 2, 3, 1]))  # [1, 2, 3]
+print(eliminar_duplicados(["a", "b", "a"])) # ["a", "b"]
+
+```
+
+```javascript
+function eliminarDuplicados(lista) {
+  const vistos = new Set();
+  return lista.filter(elem => {
+    if (vistos.has(elem)) return false;
+    vistos.add(elem);
+    return true;
+  });
+}
+
+console.log(eliminarDuplicados([1, 2, 2, 3, 1])); // [1, 2, 3]
+console.log(eliminarDuplicados(['a', 'b', 'a'])); // ['a', 'b']
+
+```
+
+```java
+import java.util.*;
+
+public class EliminarDuplicados {
+    public static <T> List<T> eliminarDuplicados(List<T> lista) {
+        Set<T> vistos = new LinkedHashSet<>(lista);
+        return new ArrayList<>(vistos);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(eliminarDuplicados(Arrays.asList(1, 2, 2, 3, 1))); // [1, 2, 3]
+        System.out.println(eliminarDuplicados(Arrays.asList('a', 'b', 'a'))); // [a, b]
+    }
+}
+
+```
+
+```typescript
+function eliminarDuplicados<T>(lista: T[]): T[] {
+  const vistos = new Set<T>();
+  return lista.filter(elem => {
+    if (vistos.has(elem)) return false;
+    vistos.add(elem);
+    return true;
+  });
+}
+
+console.log(eliminarDuplicados([1, 2, 2, 3, 1])); // [1, 2, 3]
+console.log(eliminarDuplicados(['a', 'b', 'a'])); // ['a', 'b']
+
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Filtro de Spam por Keywords", href: "/retos/reto-filtro-de-spam-por-keywords/" },
+    { title: "Reto Intermedio 38: Validador de ISBN", href: "/retos/reto-intermedio-38-validador-de-isbn/" },
+  ]} />

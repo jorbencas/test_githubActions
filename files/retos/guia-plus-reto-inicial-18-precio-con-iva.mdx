@@ -1,0 +1,128 @@
+---
+draft: false
+title: "🏆 RETO: Reto Inicial 18: Precio con IVA"
+description: "Calcula el precio final de un producto aplicando un porcentaje de IVA. Dado el precio base y el porcentaje, devuelve el total: precio + (precio × porcentaje/100). Ejercicio práctico de aritmética comercial."
+pubDate: "2026-06-28"
+tags: ["retos", "iniciación", "multilenguaje"]
+slug: "reto-inicial-18-precio-con-iva"
+image: "img/guia_plus_reto_inicial_18_precio_con_iva/guia_plus_reto_inicial_18_precio_con_iva_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Iniciación"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Reto Inicial 18: Precio con IVA
+
+### 📝 Descripción del Reto
+Calcula el precio final de un producto aplicando un porcentaje de IVA. Dado el precio base y el porcentaje de IVA, devuelve el total. El IVA (Impuesto sobre el Valor Añadido) es un impuesto que se aplica en la mayoría de países sobre productos y servicios.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Fórmula directa | `precio * (1 + iva/100)` | O(1) |
+| Dos pasos | Calcular impuesto y sumarlo por separado | O(1) |
+| Redondeo | Usar `Math.round()` para evitar decimales | O(1) |
+
+### 🌍 Dónde se usa
+- **Sistemas POS**: cálculo automático del total en cajas registradoras
+- **E-commerce**: carritos de compra que muestran precio con impuestos
+- **Facturación electrónica**: generar facturas con desglose de IVA
+- **Contabilidad**: registros fiscales y declaraciones de impuestos
+
+<Challenge 
+  nivel="Iniciación" 
+  mision="Calcula el precio final de un producto aplicando un porcentaje de IVA." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `100, 21` | `121` |
+| `50, 10` | `55` |
+| `200, 0` | `200` |
+| `15.99, 7` | `17.11` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Total = precio_base + precio_base × (IVA / 100). **Ejemplo:** precio=100, IVA=21% → 100 + 100×0.21 = 121. **Edge cases:** IVA 0%, precio cero.
+
+### ⚙️ Paso 2: Implementación
+Función pura que recibe precio y porcentaje, calcula y devuelve el total. Manejar precisión decimal con redondeo.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(1)
+**Complejidad espacial:** O(1)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def precio_con_iva(precio, iva):
+    return round(precio * (1 + iva / 100), 2)
+
+print(precio_con_iva(100, 21))    # 121.0
+print(precio_con_iva(50, 10))     # 55.0
+print(precio_con_iva(200, 0))     # 200.0
+print(precio_con_iva(15.99, 7))   # 17.11
+```
+
+```javascript
+function precioConIva(precio, iva) {
+  return Math.round(precio * (1 + iva / 100) * 100) / 100;
+}
+console.log(precioConIva(100, 21));   // 121
+console.log(precioConIva(50, 10));    // 55
+console.log(precioConIva(200, 0));    // 200
+console.log(precioConIva(15.99, 7));  // 17.11
+```
+
+```java
+public class PrecioConIva {
+    public static double precioConIva(double precio, double iva) {
+        return Math.round(precio * (1 + iva / 100) * 100.0) / 100.0;
+    }
+    public static void main(String[] args) {
+        System.out.println(precioConIva(100, 21));   // 121.0
+        System.out.println(precioConIva(50, 10));    // 55.0
+        System.out.println(precioConIva(200, 0));    // 200.0
+        System.out.println(precioConIva(15.99, 7));  // 17.11
+    }
+}
+```
+
+```typescript
+function precioConIva(precio: number, iva: number): number {
+  return Math.round(precio * (1 + iva / 100) * 100) / 100;
+}
+console.log(precioConIva(100, 21));   // 121
+console.log(precioConIva(50, 10));    // 55
+console.log(precioConIva(200, 0));    // 200
+console.log(precioConIva(15.99, 7));  // 17.11
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Inicial 19: Descuento Simple", href: "/retos/reto-inicial-19-descuento-simple/" },
+    { title: "Reto Inicial 10: Celsius a Kelvin", href: "/retos/reto-inicial-10-celsius-a-kelvin/" },
+  ]} />

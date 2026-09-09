@@ -1,0 +1,283 @@
+---
+draft: false
+title: "🏆 RETO: Reto Avanzado 06: Middleware de Seguridad"
+description: "Implementa un sistema de middlewares para filtrar peticiones HTTP por IP, headers de autenticación y rate limiting. Cada middleware valida una condición antes de pasar al siguiente."
+pubDate: "2026-06-28"
+tags: ["retos", "avanzado", "multilenguaje"]
+slug: "reto-avanzado-06-middleware-de-seguridad"
+image: "img/guia_plus_reto_avanzado_06_middleware_de_seguridad/guia_plus_reto_avanzado_06_middleware_de_seguridad_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Avanzado"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Reto Avanzado 06: Middleware de Seguridad
+
+### 📝 Descripción del Reto
+Implementa un sistema de middlewares que valide peticiones HTTP antes de que lleguen al handler principal. Los middlewares deben:
+1. **Rate Limiter**: limitar peticiones por IP (máximo N por ventana de tiempo)
+2. **Auth Validator**: verificar que el header `Authorization` contenga un token válido
+3. **IP Blocker**: bloquear IPs en una lista negra
+
+Los middlewares se encadenan: si alguno falla, la petición se rechaza con el error correspondiente.
+
+**¿Por qué importa?** Express.js (Node.js), Spring Boot (Java) y Django (Python) usan middlewares para seguridad. Cada petición a tu API debe pasar por validación de autenticación, rate limiting y filtrado de IPs maliciosas.
+
+**Habilidades que practica:** Patrón middleware/chain of responsibility, closures, manejo de estado, programación funcional.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad Temporal | Complejidad Espacial |
+|---------|-------------|---------------------|---------------------|
+| Cadena de funciones | Cada middleware llama al siguiente o rechaza | O(1) por middleware | O(k) k=middlewares |
+| Decoradores | Anotaciones que envuelven la función | O(1) | O(1) |
+| Pipeline funcional | Composición de funciones puras | O(1) | O(1) |
+
+### 🌍 Dónde se usa
+1. **APIs REST**: Express.js usa middleware para CORS, body-parser, auth
+2. **Gateways**: AWS API Gateway y Kong aplican rate limiting y auth
+3. **CDNs**: Cloudflare filtra tráfico malicioso con middlewares de seguridad
+4. **Microservicios**: cada servicio valida tokens JWT en su pipeline
+
+<Challenge 
+  nivel="Avanzado" 
+  mision="Implementa un sistema de middlewares para filtrar peticiones HTTP por IP, headers de autenticación y rate limiting." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `req={ip:'1.2.3.4',headers:{auth:'token123'}}, middlewares=[auth]` | `ok` |
+| `req={ip:'blocked',headers:{}}, middlewares=[ipBlocker]` | `blocked` |
+| `req={ip:'1.2.3.4'}, middlewares=[rateLimiter(max=2)]` | `ok` (1ra y 2da), `rate limited` (3ra) |
+| `req={ip:'1.2.3.4',headers:{}}, middlewares=[auth]` | `unauthorized` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Cada middleware es una función que recibe la petición y una función next. Si la validación pasa, llama a next(). Si falla, devuelve error. Los middlewares se componen en cadena. **Edge cases:** petición sin headers, IP vacía, rate limiter con ventana expirada.
+
+### ⚙️ Paso 2: Implementación
+**Implementación:** Función compose que encadena middlewares. Cada middleware tiene firma `(req, next) => resultado`. Rate limiter usa mapa de IPs con timestamps.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(k) donde k = número de middlewares  
+**Complejidad espacial:** O(n) para rate limiter (n = IPs únicas)  
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+import time
+
+class MiddlewareChain:
+    def __init__(self):
+        self.middlewares = []
+    
+    def use(self, middleware):
+        self.middlewares.append(middleware)
+    
+    def execute(self, req):
+        for mw in self.middlewares:
+            result = mw(req)
+            if result is not None:
+                return result
+        return {"status": "ok"}
+
+def auth_middleware(req):
+    token = req.get("headers", {}).get("Authorization")
+    if not token:
+        return {"status": "unauthorized"}
+    return None
+
+def ip_blocker(blocked_ips):
+    def middleware(req):
+        if req.get("ip") in blocked_ips:
+            return {"status": "blocked"}
+        return None
+    return middleware
+
+def rate_limiter(max_requests, window=60):
+    requests = {}
+    def middleware(req):
+        ip = req.get("ip")
+        now = time.time()
+        if ip not in requests:
+            requests[ip] = []
+        requests[ip] = [t for t in requests[ip] if now - t < window]
+        if len(requests[ip]) >= max_requests:
+            return {"status": "rate limited"}
+        requests[ip].append(now)
+        return None
+    return middleware
+```
+
+```javascript
+class MiddlewareChain {
+  constructor() {
+    this.middlewares = [];
+  }
+  use(mw) {
+    this.middlewares.push(mw);
+  }
+  execute(req) {
+    for (const mw of this.middlewares) {
+      const result = mw(req);
+      if (result !== null) return result;
+    }
+    return { status: "ok" };
+  }
+}
+
+function authMiddleware(req) {
+  const token = req.headers?.Authorization || req.headers?.authorization;
+  if (!token) return { status: "unauthorized" };
+  return null;
+}
+
+function ipBlocker(blockedIps) {
+  return function (req) {
+    if (blockedIps.includes(req.ip)) return { status: "blocked" };
+    return null;
+  };
+}
+
+function rateLimiter(maxRequests, window = 60) {
+  const requests = {};
+  return function (req) {
+    const now = Date.now();
+    const ip = req.ip;
+    if (!requests[ip]) requests[ip] = [];
+    requests[ip] = requests[ip].filter(t => now - t < window * 1000);
+    if (requests[ip].length >= maxRequests) return { status: "rate limited" };
+    requests[ip].push(now);
+    return null;
+  };
+}
+```
+
+```java
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class MiddlewareChain {
+    private List<Middleware> middlewares = new ArrayList<>();
+
+    public void use(Middleware mw) {
+        middlewares.add(mw);
+    }
+
+    public Map<String, Object> execute(Map<String, Object> req) {
+        for (Middleware mw : middlewares) {
+            Map<String, Object> result = mw.process(req);
+            if (result != null) return result;
+        }
+        return Map.of("status", "ok");
+    }
+
+    public interface Middleware {
+        Map<String, Object> process(Map<String, Object> req);
+    }
+
+    public static Middleware authMiddleware() {
+        return req -> {
+            Map<String, String> headers = (Map<String, String>) req.get("headers");
+            if (headers == null || !headers.containsKey("Authorization"))
+                return Map.of("status", "unauthorized");
+            return null;
+        };
+    }
+
+    public static Middleware ipBlocker(Set<String> blocked) {
+        return req -> {
+            if (blocked.contains(req.get("ip")))
+                return Map.of("status", "blocked");
+            return null;
+        };
+    }
+
+    public static Middleware rateLimiter(int maxRequests) {
+        ConcurrentHashMap<String, List<Long>> requests = new ConcurrentHashMap<>();
+        return req -> {
+            String ip = (String) req.get("ip");
+            long now = System.currentTimeMillis();
+            requests.computeIfAbsent(ip, k -> new ArrayList<>());
+            List<Long> times = requests.get(ip);
+            times.removeIf(t -> now - t > 60000);
+            if (times.size() >= maxRequests) return Map.of("status", "rate limited");
+            times.add(now);
+            return null;
+        };
+    }
+}
+```
+
+```typescript
+type Middleware = (req: any) => { status: string } | null;
+
+class MiddlewareChain {
+  private middlewares: Middleware[] = [];
+  use(mw: Middleware) {
+    this.middlewares.push(mw);
+  }
+  execute(req: any): { status: string } {
+    for (const mw of this.middlewares) {
+      const result = mw(req);
+      if (result !== null) return result;
+    }
+    return { status: "ok" };
+  }
+}
+
+function authMiddleware(req: any): { status: string } | null {
+  const token = req.headers?.Authorization || req.headers?.authorization;
+  if (!token) return { status: "unauthorized" };
+  return null;
+}
+
+function ipBlocker(blockedIps: string[]): Middleware {
+  return (req) => {
+    if (blockedIps.includes(req.ip)) return { status: "blocked" };
+    return null;
+  };
+}
+
+function rateLimiter(maxRequests: number, window = 60): Middleware {
+  const requests: Record<string, number[]> = {};
+  return (req) => {
+    const now = Date.now();
+    const ip = req.ip;
+    if (!requests[ip]) requests[ip] = [];
+    requests[ip] = requests[ip].filter(t => now - t < window * 1000);
+    if (requests[ip].length >= maxRequests) return { status: "rate limited" };
+    requests[ip].push(now);
+    return null;
+  };
+}
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "JWT Generator Manual", href: "/retos/reto-jwt-generator-manual/" },
+    { title: "Reto Avanzado 08: Patrón Strategy en APIs", href: "/retos/reto-avanzado-08-patron-strategy-en-apis/" },
+  ]} />

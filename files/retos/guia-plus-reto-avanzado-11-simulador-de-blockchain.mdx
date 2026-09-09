@@ -1,0 +1,318 @@
+---
+draft: false
+title: "🏆 RETO: Reto Avanzado 11: Simulador de Blockchain"
+description: "Implementa una cadena de bloques simple con validación de integridad mediante hashes SHA-256 y prueba de trabajo (proof of work). Cada bloque enlaza al hash del anterior."
+pubDate: "2026-06-28"
+tags: ["retos", "avanzado", "multilenguaje"]
+slug: "reto-avanzado-11-simulador-de-blockchain"
+image: "img/guia_plus_reto_avanzado_11_simulador_de_blockchain/guia_plus_reto_avanzado_11_simulador_de_blockchain_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Avanzado"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Reto Avanzado 11: Simulador de Blockchain
+
+### 📝 Descripción del Reto
+Implementa una cadena de bloques (blockchain) simplificada con:
+1. **Bloque**: contiene índice, timestamp, datos, hash del bloque anterior, nonce, y su propio hash
+2. **Proof of Work**: minar bloques incrementando el nonce hasta que el hash empiece por N ceros
+3. **Validación**: verificar que toda la cadena sea íntegra (cada hash apunta al anterior correcto)
+4. **Tamper detection**: si alguien modifica un bloque, la cadena se invalida
+
+**¿Por qué importa?** Blockchain es la tecnología detrás de Bitcoin, Ethereum y otras criptomonedas. También se usa en certificación de documentos, trazabilidad de supply chain, votación electrónica y registros inmutables.
+
+**Habilidades que practica:** Hashing (SHA-256), proof of work, cadenas de datos enlazadas, immutabilidad.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad Temporal | Complejidad Espacial |
+|---------|-------------|---------------------|---------------------|
+| Lista enlazada + hash | Cada bloque referencia al anterior por hash | O(1) inserción | O(n) |
+| Árbol de Merkle | Hashing en estructura de árbol para verificación | O(log n) verificación | O(n) |
+| Proof of work por fuerza bruta | Incrementar nonce hasta cumplir dificultad | O(16^d) d=dificultad | O(1) |
+
+### 🌍 Dónde se usa
+1. **Criptomonedas**: Bitcoin y Ethereum usan blockchain para transacciones
+2. **Supply chain**: Walmart rastrea productos desde granja hasta tienda
+3. **Certificación**: notarizar documentos con hash inmutable
+4. **DeFi**: contratos inteligentes en Ethereum
+
+<Challenge 
+  nivel="Avanzado" 
+  mision="Implementa una cadena de bloques simple con validación de integridad mediante hashes SHA-256 y prueba de trabajo (proof of work)." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `crearCadena(), addBloque('tx1')` | `cadena valida` |
+| `cadena con 2 bloques, modificarBloque(0)` | `cadena invalida` |
+| `addBloque(''), addBloque('abc')` | `2 bloques` |
+| `cadena vacía` | `genesis unico` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Cada bloque contiene datos, su propio hash, el hash del bloque anterior, y un nonce. La cadena es válida si cada bloque apunta al hash correcto del anterior. Proof of work: incrementar nonce hasta que el hash empiece por 'dificultad' ceros. **Edge cases:** cadena vacía (solo genesis), bloque con datos vacíos, nonce que nunca encuentra solución, hash collisions.
+
+### ⚙️ Paso 2: Implementación
+**Implementación:** Clase Bloque con índice, timestamp, datos, prev_hash, nonce, hash. Método mine_block(dificultad). Clase Blockchain con lista de bloques y método is_chain_valid.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(1) inserción, O(n) verificación, O(16^d) minería  
+**Complejidad espacial:** O(n)  
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+import hashlib
+import time
+
+class Bloque:
+    def __init__(self, indice, datos, prev_hash):
+        self.indice = indice
+        self.timestamp = time.time()
+        self.datos = datos
+        self.prev_hash = prev_hash
+        self.nonce = 0
+        self.hash = self.calcular_hash()
+
+    def calcular_hash(self):
+        contenido = f"{self.indice}{self.timestamp}{self.datos}{self.prev_hash}{self.nonce}"
+        return hashlib.sha256(contenido.encode()).hexdigest()
+
+    def minar(self, dificultad):
+        while not self.hash.startswith('0' * dificultad):
+            self.nonce += 1
+            self.hash = self.calcular_hash()
+
+class Blockchain:
+    def __init__(self, dificultad=2):
+        self.dificultad = dificultad
+        self.cadena = [self._crear_genesis()]
+
+    def _crear_genesis(self):
+        return Bloque(0, "Genesis", "0")
+
+    def add_bloque(self, datos):
+        prev = self.cadena[-1]
+        bloque = Bloque(len(self.cadena), datos, prev.hash)
+        bloque.minar(self.dificultad)
+        self.cadena.append(bloque)
+
+    def es_valida(self):
+        for i in range(1, len(self.cadena)):
+            actual = self.cadena[i]
+            anterior = self.cadena[i - 1]
+            if actual.hash != actual.calcular_hash():
+                return False
+            if actual.prev_hash != anterior.hash:
+                return False
+        return True
+```
+
+```javascript
+const crypto = require('crypto');
+
+class Bloque {
+  constructor(indice, datos, prevHash) {
+    this.indice = indice;
+    this.timestamp = Date.now();
+    this.datos = datos;
+    this.prevHash = prevHash;
+    this.nonce = 0;
+    this.hash = this.calcularHash();
+  }
+  calcularHash() {
+    const contenido = `${this.indice}${this.timestamp}${this.datos}${this.prevHash}${this.nonce}`;
+    return crypto.createHash('sha256').update(contenido).digest('hex');
+  }
+  minar(dificultad) {
+    while (!this.hash.startsWith('0'.repeat(dificultad))) {
+      this.nonce++;
+      this.hash = this.calcularHash();
+    }
+  }
+}
+
+class Blockchain {
+  constructor(dificultad = 2) {
+    this.dificultad = dificultad;
+    this.cadena = [this.crearGenesis()];
+  }
+  crearGenesis() { return new Bloque(0, "Genesis", "0"); }
+  addBloque(datos) {
+    const prev = this.cadena[this.cadena.length - 1];
+    const bloque = new Bloque(this.cadena.length, datos, prev.hash);
+    bloque.minar(this.dificultad);
+    this.cadena.push(bloque);
+  }
+  esValida() {
+    for (let i = 1; i < this.cadena.length; i++) {
+      const actual = this.cadena[i];
+      const anterior = this.cadena[i - 1];
+      if (actual.hash !== actual.calcularHash()) return false;
+      if (actual.prevHash !== anterior.hash) return false;
+    }
+    return true;
+  }
+}
+```
+
+```java
+import java.security.MessageDigest;
+import java.util.*;
+
+public class Bloque {
+    public int indice;
+    public long timestamp;
+    public String datos;
+    public String prevHash;
+    public int nonce = 0;
+    public String hash;
+
+    public Bloque(int indice, String datos, String prevHash) {
+        this.indice = indice;
+        this.timestamp = System.currentTimeMillis();
+        this.datos = datos;
+        this.prevHash = prevHash;
+        this.hash = calcularHash();
+    }
+
+    public String calcularHash() {
+        try {
+            String contenido = indice + "" + timestamp + datos + prevHash + nonce;
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = md.digest(contenido.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashBytes) sb.append(String.format("%02x", b));
+            return sb.toString();
+        } catch (Exception e) { throw new RuntimeException(e); }
+    }
+
+    public void minar(int dificultad) {
+        String prefijo = "0".repeat(dificultad);
+        while (!hash.startsWith(prefijo)) {
+            nonce++;
+            hash = calcularHash();
+        }
+    }
+}
+
+public class Blockchain {
+    private List<Bloque> cadena = new ArrayList<>();
+    private int dificultad;
+
+    public Blockchain(int dificultad) {
+        this.dificultad = dificultad;
+        cadena.add(new Bloque(0, "Genesis", "0"));
+    }
+
+    public void addBloque(String datos) {
+        Bloque prev = cadena.get(cadena.size() - 1);
+        Bloque bloque = new Bloque(cadena.size(), datos, prev.hash);
+        bloque.minar(dificultad);
+        cadena.add(bloque);
+    }
+
+    public boolean esValida() {
+        for (int i = 1; i < cadena.size(); i++) {
+            Bloque actual = cadena.get(i);
+            Bloque anterior = cadena.get(i - 1);
+            if (!actual.hash.equals(actual.calcularHash())) return false;
+            if (!actual.prevHash.equals(anterior.hash)) return false;
+        }
+        return true;
+    }
+}
+```
+
+```typescript
+import * as crypto from 'crypto';
+
+class Bloque {
+  indice: number;
+  timestamp: number;
+  datos: string;
+  prevHash: string;
+  nonce: number;
+  hash: string;
+
+  constructor(indice: number, datos: string, prevHash: string) {
+    this.indice = indice;
+    this.timestamp = Date.now();
+    this.datos = datos;
+    this.prevHash = prevHash;
+    this.nonce = 0;
+    this.hash = this.calcularHash();
+  }
+
+  calcularHash(): string {
+    const contenido = `${this.indice}${this.timestamp}${this.datos}${this.prevHash}${this.nonce}`;
+    return crypto.createHash('sha256').update(contenido).digest('hex');
+  }
+
+  minar(dificultad: number): void {
+    const prefijo = '0'.repeat(dificultad);
+    while (!this.hash.startsWith(prefijo)) {
+      this.nonce++;
+      this.hash = this.calcularHash();
+    }
+  }
+}
+
+class Blockchain {
+  private cadena: Bloque[];
+  private dificultad: number;
+
+  constructor(dificultad = 2) {
+    this.dificultad = dificultad;
+    this.cadena = [new Bloque(0, "Genesis", "0")];
+  }
+
+  addBloque(datos: string): void {
+    const prev = this.cadena[this.cadena.length - 1];
+    const bloque = new Bloque(this.cadena.length, datos, prev.hash);
+    bloque.minar(this.dificultad);
+    this.cadena.push(bloque);
+  }
+
+  esValida(): boolean {
+    for (let i = 1; i < this.cadena.length; i++) {
+      const actual = this.cadena[i];
+      const anterior = this.cadena[i - 1];
+      if (actual.hash !== actual.calcularHash()) return false;
+      if (actual.prevHash !== anterior.hash) return false;
+    }
+    return true;
+  }
+}
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Avanzado 10: Validador de Esquema JSON", href: "/retos/reto-avanzado-10-validador-de-esquema-json/" },
+    { title: "JWT Generator Manual", href: "/retos/reto-jwt-generator-manual/" },
+  ]} />

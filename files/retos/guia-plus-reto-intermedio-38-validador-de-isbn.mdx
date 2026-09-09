@@ -1,0 +1,200 @@
+---
+draft: false
+title: "🏆 RETO: Reto Intermedio 38: Validador de ISBN"
+description: "Valida un número ISBN-10 o ISBN-13 según su algoritmo de checksum. Los ISBN son identificadores únicos de libros que incluyen dígitos de verificación para detectar errores."
+pubDate: "2026-06-28"
+tags: ["retos", "intermedio", "multilenguaje"]
+slug: "reto-intermedio-38-validador-de-isbn"
+image: "img/guia_plus_reto_intermedio_38_validador_de_isbn/guia_plus_reto_intermedio_38_validador_de_isbn_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Intermedio"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Reto Intermedio 38: Validador de ISBN
+
+### 📝 Descripción del Reto
+Un ISBN (International Standard Book Number) es un identificador único de libros con un dígito de verificación calculado mediante checksum:
+
+- **ISBN-10**: 10 dígitos. La suma de (dígito × posición desde la izquierda, empezando en 10) debe ser múltiplo de 11. El último carácter puede ser 'X' (valor 10)
+- **ISBN-13**: 13 dígitos. La suma ponderada con patrón (1,3,1,3,1,3,...) debe ser múltiplo de 10
+
+La entrada puede incluir guiones o espacios que deben ignorarse.
+
+**¿Por qué importa?** Los ISBN se usan en bibliotecas, librerías online (Amazon), sistemas de inventario editorial y cualquier plataforma de venta de libros. Validar el ISBN evita errores de datos y fraudes.
+
+**Habilidades que practica:** Manipulación de strings, aritmética modular, normalización de entrada, algoritmos de validación.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad Temporal | Complejidad Espacial |
+|---------|-------------|---------------------|---------------------|
+| Suma ponderada directa | Calcular checksum según fórmula ISBN | O(n) | O(1) |
+| Regex para limpiar | Eliminar guiones/espacios con regex, luego validar | O(n) | O(n) |
+| Doble pass | Un pass para limpiar, otro para checksum | O(n) | O(1) |
+
+### 🌍 Dónde se usa
+1. **Librerías online**: Amazon, Book Depository validan ISBN al registrar libros
+2. **Bibliotecas**: sistemas como Koha usan ISBN para catálogos
+3. **Imprentas**: verifican ISBN antes de imprimir material editorial
+4. **Registros de comercio**: facturas y pedidos de libros requieren ISBN válido
+
+<Challenge 
+  nivel="Intermedio" 
+  mision="Valida un número ISBN-10 o ISBN-13 según su algoritmo de checksum. Los ISBN son identificadores únicos de libros que incluyen dígitos de verificación para detectar errores." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `'0-306-40615-2'` | `true` |
+| `'978-0-306-40615-7'` | `true` |
+| `'1234567890'` | `false` |
+| `''` | `false` |
+| `'0-306-40615-X'` | `true` |
+| `'0-306-40615-3'` | `false` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Limpiar guiones/espacios, verificar longitud (10 o 13), calcular checksum según tipo. ISBN-10: suma de dígito*(10-posición) mod 11 == 0. ISBN-13: suma de dígito*(1 o 3 alternadamente) mod 10 == 0. **Edge cases:** X solo puede ser el último carácter de ISBN-10, longitud incorrecta, caracteres no numéricos.
+
+### ⚙️ Paso 2: Implementación
+**Implementación:** 1) Limpiar el string con replace. 2) Verificar longitud. 3) Calcular checksum iterando sobre cada carácter. 4) Para ISBN-10, manejar X como valor 10.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n)  
+**Complejidad espacial:** O(1)  
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def es_isbn_valido(s):
+    s = s.replace('-', '').replace(' ', '')
+    if len(s) == 10:
+        total = 0
+        for i, c in enumerate(s):
+            if c == 'X':
+                total += 10 * (10 - i)
+            elif c.isdigit():
+                total += int(c) * (10 - i)
+            else:
+                return False
+        return total % 11 == 0
+    elif len(s) == 13:
+        if not s.isdigit():
+            return False
+        total = sum(int(c) * (1 if i % 2 == 0 else 3) for i, c in enumerate(s))
+        return total % 10 == 0
+    return False
+```
+
+```javascript
+function esIsbnValido(s) {
+  s = s.replace(/-/g, '').replace(/ /g, '');
+  if (s.length === 10) {
+    let total = 0;
+    for (let i = 0; i < 10; i++) {
+      if (s[i] === 'X') {
+        total += 10 * (10 - i);
+      } else if (!isNaN(s[i])) {
+        total += parseInt(s[i]) * (10 - i);
+      } else {
+        return false;
+      }
+    }
+    return total % 11 === 0;
+  } else if (s.length === 13) {
+    if (!/^\d+$/.test(s)) return false;
+    let total = 0;
+    for (let i = 0; i < 13; i++) {
+      total += parseInt(s[i]) * (i % 2 === 0 ? 1 : 3);
+    }
+    return total % 10 === 0;
+  }
+  return false;
+}
+```
+
+```java
+public class ValidadorIsbn {
+    public static boolean esIsbnValido(String s) {
+        s = s.replace("-", "").replace(" ", "");
+        if (s.length() == 10) {
+            int total = 0;
+            for (int i = 0; i < 10; i++) {
+                char c = s.charAt(i);
+                if (c == 'X') {
+                    total += 10 * (10 - i);
+                } else if (Character.isDigit(c)) {
+                    total += (c - '0') * (10 - i);
+                } else {
+                    return false;
+                }
+            }
+            return total % 11 == 0;
+        } else if (s.length() == 13) {
+            if (!s.matches("\\d+")) return false;
+            int total = 0;
+            for (int i = 0; i < 13; i++) {
+                total += (s.charAt(i) - '0') * (i % 2 == 0 ? 1 : 3);
+            }
+            return total % 10 == 0;
+        }
+        return false;
+    }
+}
+```
+
+```typescript
+function esIsbnValido(s: string): boolean {
+  s = s.replace(/-/g, '').replace(/ /g, '');
+  if (s.length === 10) {
+    let total = 0;
+    for (let i = 0; i < 10; i++) {
+      if (s[i] === 'X') {
+        total += 10 * (10 - i);
+      } else if (!isNaN(Number(s[i]))) {
+        total += parseInt(s[i]) * (10 - i);
+      } else {
+        return false;
+      }
+    }
+    return total % 11 === 0;
+  } else if (s.length === 13) {
+    if (!/^\d+$/.test(s)) return false;
+    let total = 0;
+    for (let i = 0; i < 13; i++) {
+      total += parseInt(s[i]) * (i % 2 === 0 ? 1 : 3);
+    }
+    return total % 10 === 0;
+  }
+  return false;
+}
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Filtro de Spam por Keywords", href: "/retos/reto-filtro-de-spam-por-keywords/" },
+    { title: "Eliminar Duplicados", href: "/retos/reto-eliminar-duplicados/" },
+  ]} />

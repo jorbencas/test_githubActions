@@ -1,0 +1,132 @@
+---
+draft: false
+title: "🏆 RETO: Generador de Nicknames"
+description: "Genera un nickname a partir de un nombre completo tomando las primeras letras de cada palabra. Ejercicio de manipulación de strings que practica split, join y formateo de texto."
+pubDate: "2026-06-28"
+tags: ["retos", "iniciación", "multilenguaje"]
+slug: "reto-generador-de-nicknames"
+image: "img/guia_generador_de_nicknames/guia_generador_de_nicknames_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Iniciación"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Generador de Nicknames
+
+### 📝 Descripción del Reto
+Genera un nickname a partir de un nombre completo tomando las primeras letras de cada palabra. Ejemplo: "Juan Carlos García" → "JCG". Práctica de split de cadenas, filtrado y formateo de salida.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Split + map | Separar palabras, tomar primera letra de cada una | O(n) |
+| Bucle | Recorrer caracteres, detectar inicio de palabras | O(n) |
+| Regex | `r'\b(\w)'` para capturar primera letra de cada palabra | O(n) |
+
+### 🌍 Dónde se usa
+- **Redes sociales**: generar usernames a partir de nombres reales
+- **Sistemas corporativos**: crear identificadores de empleado
+- **Juegos**: generar tags cortos para jugadores
+- **Bases de datos**: crear códigos abreviados de entidades
+
+<Challenge 
+  nivel="Iniciación" 
+  mision="Genera un nickname tomando las primeras letras de cada palabra del nombre." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `'Juan Carlos García'` | `'JCG'` |
+| `'Ana María'` | `'AM'` |
+| `'Pedro'` | `'P'` |
+| `'maría jose torres'` | `'MJT'` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Separar el nombre en palabras, tomar la primera letra de cada una y unirlas. **Ejemplo:** "Juan Carlos García" → ["Juan", "Carlos", "García"] → ["J", "C", "G"] → "JCG".
+
+### ⚙️ Paso 2: Implementación
+Usar `split(' ')` para separar, `map` o list comprehension para tomar la primera letra, `join` para unir.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n)
+**Complejidad espacial:** O(n)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def generar_nickname(nombre):
+    return ''.join(palabra[0].upper() for palabra in nombre.split())
+
+print(generar_nickname('Juan Carlos García'))  # JCG
+print(generar_nickname('Ana María'))            # AM
+print(generar_nickname('Pedro'))                # P
+print(generar_nickname('maría jose torres'))    # MJT
+```
+
+```javascript
+function generarNickname(nombre) {
+  return nombre.split(' ').map(p => p[0].toUpperCase()).join('');
+}
+console.log(generarNickname('Juan Carlos García'));  // JCG
+console.log(generarNickname('Ana María'));            // AM
+console.log(generarNickname('Pedro'));                // P
+console.log(generarNickname('maría jose torres'));    // MJT
+```
+
+```java
+public class GeneradorNicknames {
+    public static String generarNickname(String nombre) {
+        StringBuilder sb = new StringBuilder();
+        for (String palabra : nombre.split(" ")) {
+            sb.append(Character.toUpperCase(palabra.charAt(0)));
+        }
+        return sb.toString();
+    }
+    public static void main(String[] args) {
+        System.out.println(generarNickname("Juan Carlos García")); // JCG
+        System.out.println(generarNickname("Ana María"));           // AM
+        System.out.println(generarNickname("Pedro"));               // P
+        System.out.println(generarNickname("maría jose torres"));   // MJT
+    }
+}
+```
+
+```typescript
+function generarNickname(nombre: string): string {
+  return nombre.split(' ').map(p => p[0].toUpperCase()).join('');
+}
+console.log(generarNickname('Juan Carlos García')); // JCG
+console.log(generarNickname('Ana María'));           // AM
+console.log(generarNickname('Pedro'));               // P
+console.log(generarNickname('maría jose torres'));   // MJT
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Contador de Vocales", href: "/retos/reto-contador-de-vocales/" },
+    { title: "El Reclutador de la Banda", href: "/retos/reto-el-reclutador-de-la-banda/" },
+  ]} />

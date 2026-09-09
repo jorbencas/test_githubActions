@@ -1,0 +1,188 @@
+---
+draft: false
+title: "🏆 RETO: Reto Intermedio 03: Simulador de Pila (Stack)"
+description: "Implementa una pila (stack) con operaciones push, pop, peek y isEmpty. Estructura LIFO fundamental en informática."
+pubDate: "2026-06-28"
+tags: ["retos", "intermedio", "multilenguaje"]
+slug: "reto-intermedio-03-simulador-de-pila-stack"
+image: "img/guia_plus_reto_intermedio_03_simulador_de_pila_stack/guia_plus_reto_intermedio_03_simulador_de_pila_stack_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Intermedio"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Reto Intermedio 03: Simulador de Pila (Stack)
+
+### 📝 Descripción del Reto
+Implementa una pila (stack) con operaciones push, pop, peek y isEmpty.
+
+Una pila es una de las estructuras de datos más fundamentales de la informática. El navegador usa una pila para el historial de "atrás", el compilador usa una pila para validar paréntesis balanceados, y el sistema operativo usa una pila para gestionar las llamadas a funciones. Entender cómo funciona una pila no es solo un ejercicio académico — es entender cómo funciona el software que usas a diario.
+
+| Operación | Qué hace | Ejemplo |
+|-----------|----------|---------|
+| `push(v)` | Añade `v` al tope de la pila | push(1) → [1] |
+| `pop()` | Elimina y devuelve el tope | pop() → 1, pila queda [] |
+| `peek()` | Devuelve el tope sin eliminar | peek() → 1, pila sigue [1] |
+| `isEmpty()` | Devuelve `true` si la pila está vacía | isEmpty() → true |
+
+### 💡 Posibles enfoques
+
+| Enfoque | Cómo funciona | Ventaja |
+|---------|---------------|---------|
+| **Array/lista** | Usar una lista dinámica como almacenamiento | Simple, operaciones O(1) amortizado |
+| **Nodos enlazados** | Cada nodo apunta al siguiente (tope) | Inserción/eliminación O(1) garantizado |
+| **Con capacidad fija** | Array estático con índice tope | Eficiente en memoria, sin realloc |
+
+### 🌍 Dónde se usa en la vida real
+
+- **Historial del navegador**: Cada página que visitas se hace push a una pila. "Atrás" es un pop.
+- **Llamadas a funciones**: El call stack del intérprete de JavaScript es una pila. Cuando llamas a una función, se hace push; cuando termina, pop.
+- **Validación de paréntesis**: `({[]})` se valida con una pila: push de abiertos, pop de cerrados.
+- **Deshacer (Undo)**: Cada acción se guarda en una pila. Ctrl+Z es un pop.
+
+<Challenge 
+  nivel="Intermedio" 
+  mision="Implementa una pila (stack) con operaciones push, pop, peek y isEmpty. Estructura LIFO fundamental en informática." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Operaciones | Salida esperada |
+|-------------|-----------------|
+| `push(1), push(2), pop()` | `2` |
+| `push(5), peek()` | `5` |
+| `isEmpty()` (pila vacía) | `true` |
+| `push(3), pop(), pop()` | `null` (error controlado) |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+
+**Análisis del problema:** Una pila sigue el principio LIFO (Last In, First Out) — el último elemento en entrar es el primero en salir. Las operaciones que necesitamos son: `push` (añadir al tope), `pop` (sacar del tope), `peek` (mirar el tope sin sacar), y `isEmpty` (saber si está vacía).
+
+**Ejemplo concreto:** 
+```
+push(1) → [1]
+push(2) → [1, 2]
+push(3) → [1, 2, 3]
+pop()   → devuelve 3, queda [1, 2]
+peek()  → devuelve 2, sigue [1, 2]
+```
+
+**Edge cases:** pop en pila vacía (¿lanzar error o devolver null?), pila con un solo elemento, capacidad máxima si se usa array fijo.
+
+### ⚙️ Paso 2: Implementación
+
+**Implementación paso a paso:**
+1. Crear una clase `Pila` con un array interno como almacenamiento
+2. `push(v)`: Añadir `v` al final del array (esto es el tope)
+3. `pop()`: Sacar y devolver el último elemento del array. Si está vacía, devolver null
+4. `peek()`: Devolver el último elemento sin eliminarlo
+5. `isEmpty()`: Verificar si el array tiene longitud 0
+
+**Nota:** En Python se puede usar una lista con `append()` y `pop()`. En JavaScript, `push()` y `pop()` del array. En Java, `java.util.Stack` o `ArrayDeque` (recomendado). En TypeScript, se añade tipado genérico.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(1) para todas las operaciones (push, pop, peek, isEmpty)  
+**Complejidad espacial:** O(n) donde n es el número de elementos en la pila
+
+**Comparación de implementaciones:**
+
+| Implementación | push | pop | peek | Notas |
+|----------------|------|-----|------|-------|
+| Array/lista | O(1) amortizado | O(1) | O(1) | Más simple,realloc ocasional |
+| Nodos enlazados | O(1) | O(1) | O(1) | Sin realloc, más memoria por nodo |
+| Array fijo | O(1) | O(1) | O(1) | Sin realloc, capacidad limitada |
+
+**Aplicaciones reales:**
+- Historial de navegador (pila de páginas visitadas)
+- Call stack de funciones (JavaScript, Python, Java)
+- Validación de paréntesis balanceados
+- Sistema de undo/redo en editores
+- Algoritmos de backtracking (DFS en grafos)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+class Pila:
+ def __init__(self): self.s = []
+ def push(self, v): self.s.append(v)
+ def pop(self): return self.s.pop() if self.s else None
+ def peek(self): return self.s[-1] if self.s else None
+```
+
+```javascript
+class Pila {
+  constructor() { this.items = []; }
+  push(v) { this.items.push(v); }
+  pop() { return this.items.length ? this.items.pop() : null; }
+  peek() { return this.items.length ? this.items[this.items.length - 1] : null; }
+  isEmpty() { return this.items.length === 0; }
+}
+
+const pila = new Pila();
+pila.push(1); pila.push(2); pila.push(3);
+console.log(pila.pop());   // 3
+console.log(pila.peek());  // 2
+console.log(pila.isEmpty()); // false
+```
+
+```java
+public class Pila {
+    private java.util.Stack<Integer> stack = new java.util.Stack<>();
+
+    public void push(int v) { stack.push(v); }
+    public Integer pop() { return stack.isEmpty() ? null : stack.pop(); }
+    public Integer peek() { return stack.isEmpty() ? null : stack.peek(); }
+    public boolean isEmpty() { return stack.isEmpty(); }
+
+    public static void main(String[] args) {
+        Pila p = new Pila();
+        p.push(1); p.push(2); p.push(3);
+        System.out.println(p.pop());    // 3
+        System.out.println(p.peek());   // 2
+        System.out.println(p.isEmpty()); // false
+    }
+}
+```
+
+```typescript
+class Pila<T> {
+  private items: T[] = [];
+  push(v: T): void { this.items.push(v); }
+  pop(): T | null { return this.items.length ? this.items.pop()! : null; }
+  peek(): T | null { return this.items.length ? this.items[this.items.length - 1] : null; }
+  isEmpty(): boolean { return this.items.length === 0; }
+}
+
+const pila = new Pila<number>();
+pila.push(1); pila.push(2); pila.push(3);
+console.log(pila.pop());    // 3
+console.log(pila.peek());   // 2
+console.log(pila.isEmpty()); // false
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Intermedio 04: Colas (Queue) Básicas", href: "/retos/reto-intermedio-04-colas-queue-basicas/" },
+    { title: "Reto Intermedio 30: Manejador de Historial (Undo)", href: "/retos/reto-intermedio-30-manejador-de-historial-undo/" },
+  ]} />

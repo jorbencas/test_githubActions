@@ -1,0 +1,125 @@
+---
+draft: false
+title: "🏆 RETO: Reto Inicial 07: Invertir Palabra"
+description: "Dada una cadena de texto, devuélvela escrita al revés. Por ejemplo, 'hola' → 'aloh'. Clásico de entrevistas técnicas que practica manipulación de strings, slicing y métodos de transformación de colecciones."
+pubDate: "2026-06-28"
+tags: ["retos", "iniciación", "multilenguaje"]
+slug: "reto-inicial-07-invertir-palabra"
+image: "img/guia_plus_reto_inicial_07_invertir_palabra/guia_plus_reto_inicial_07_invertir_palabra_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Iniciación"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Reto Inicial 07: Invertir Palabra
+
+### 📝 Descripción del Reto
+Dada una cadena de texto, devuélvela escrita al revés. Por ejemplo, si la entrada es "hola", la salida debe ser "aloh". Problema clásico de manipulación de strings que aparece en entrevistas técnicas y pruebas de lógica. Trabaja la comprensión de cómo los lenguajes manejan las cadenas como secuencias inmutables de caracteres.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Slicing (Python) | `s[::-1]` — conciso y nativo | O(n) |
+| Split/Reverse/Join | `s.split('').reverse().join('')` — multi-lenguaje | O(n) |
+| Two pointers | Intercambiar desde ambos extremos hacia el centro | O(n) tiempo, O(1) espacio |
+
+### 🌍 Dónde se usa
+- **Procesamiento de texto**: algoritmos de compresión (LZW), análisis de cadenas
+- **Verificación de palíndromos**: paso previo para detectar palabras simétricas
+- **Bioinformática**: cadenas de ADN se leen en direcciones específicas
+- **Serialización**: ordenamiento inverso de datos en sistemas
+
+<Challenge 
+  nivel="Iniciación" 
+  mision="Dada una cadena de texto, devuélvela escrita al revés." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `hola` | `aloh` |
+| `Python` | `nohtyP` |
+| `abcba` | `abcba` |
+| `` | `` |
+| `a` | `a` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Invertir una cadena significa recorrer sus caracteres en orden inverso. **Ejemplo:** "Python" → [P,y,t,h,o,n] → [n,o,h,t,y,P] → "nohtyP". **Edge cases:** cadena vacía (devuelve vacía), palíndromo ("abcba" → "abcba"), un solo carácter ("a" → "a").
+
+### ⚙️ Paso 2: Implementación
+En Python: `s[::-1]` con slicing paso negativo. En JS/TS: `split('').reverse().join('')`. En Java: `StringBuilder.reverse()`.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n)
+**Complejidad espacial:** O(n)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def invertir(s):
+    return s[::-1]
+
+print(invertir('hola'))    # aloh
+print(invertir('Python'))  # nohtyP
+print(invertir('abcba'))   # abcba
+```
+
+```javascript
+function invertir(s) {
+  return s.split('').reverse().join('');
+}
+console.log(invertir('hola'));    // aloh
+console.log(invertir('Python'));  // nohtyP
+console.log(invertir('abcba'));   // abcba
+```
+
+```java
+public class Invertir {
+    public static String invertir(String s) {
+        return new StringBuilder(s).reverse().toString();
+    }
+    public static void main(String[] args) {
+        System.out.println(invertir("hola"));    // aloh
+        System.out.println(invertir("Python"));  // nohtyP
+        System.out.println(invertir("abcba"));   // abcba
+    }
+}
+```
+
+```typescript
+function invertir(s: string): string {
+  return s.split('').reverse().join('');
+}
+console.log(invertir('hola'));    // aloh
+console.log(invertir('Python'));  // nohtyP
+console.log(invertir('abcba'));   // abcba
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Detector de Palíndromos", href: "/retos/reto-detector-de-palindromos/" },
+    { title: "Contador de Vocales", href: "/retos/reto-contador-de-vocales/" },
+  ]} />

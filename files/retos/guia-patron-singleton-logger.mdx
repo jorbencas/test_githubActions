@@ -1,0 +1,247 @@
+---
+draft: false
+title: "🏆 RETO: Patrón Singleton (Logger)"
+description: "Implementa el patrón Singleton para una clase Logger: garantiza que solo exista una instancia global del logger y que todas las llamadas usen la misma."
+pubDate: "2026-06-28"
+tags: ["retos", "avanzado", "multilenguaje"]
+slug: "reto-patron-singleton-logger"
+image: "img/guia_patron_singleton_logger/guia_patron_singleton_logger_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Avanzado"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Patrón Singleton (Logger)
+
+### 📝 Descripción del Reto
+Implementa el patrón Singleton para un Logger: garantiza que solo exista una instancia global del logger en toda la aplicación. El logger debe: mantener un historial de mensajes, tener métodos `info()`, `warn()`, `error()`, y retornar siempre la misma instancia al crear múltiples objetos.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Clase estática con instancia | Variable estática privada + getInstance() | O(1) |
+| Decorador/módulo level | Singleton a nivel de módulo (JS) | O(1) |
+| Metaclass (Python) | Controlar creación de instancias vía metaclass | O(1) |
+
+### 🌍 Dónde se usa
+- **Logging**: un solo logger que escribe a archivo/stdout
+- **Connection pools**: pool de conexiones compartido
+- **Configuración**: config global de la aplicación
+- **Cache**: cache compartido entre módulos
+
+<Challenge 
+  nivel="Avanzado" 
+  mision="Implementa el patrón Singleton para una clase Logger con historial de mensajes." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `Logger()` × 2 | Misma instancia (`a === b`) |
+| `logger.info("hola")` | `"[INFO] hola"` en historial |
+| `logger.warn("cuidado")` | `"[WARN] cuidado"` en historial |
+| `logger.error("fallo")` | `"[ERROR] fallo"` en historial |
+| `logger.getHistorial()` | Array con todos los mensajes registrados |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** El Singleton controla la creación de instancias: si ya existe una, la retorna; si no, la crea. El Logger almacena un array de mensajes con timestamp y nivel. **Caso límite:** múltiples hilos (thread safety en Java), primer acceso vs. posteriores.
+
+### ⚙️ Paso 2: Implementación
+1. Variable estática/privada para la instancia.
+2. Método `getInstance()` que retorna la instancia existente o crea una nueva.
+3. Métodos `info()`, `warn()`, `error()` que agregan al historial.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(1) por cada operación de logging.
+**Complejidad espacial:** O(n) — n es el número de mensajes en el historial.
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+from datetime import datetime
+
+class Logger:
+    _instancia = None
+    _historial = []
+
+    def __new__(cls):
+        if cls._instancia is None:
+            cls._instancia = super().__new__(cls)
+            cls._historial = []
+        return cls._instancia
+
+    def _log(self, nivel, mensaje):
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        entry = f"[{nivel}] {mensaje}"
+        self._historial.append(entry)
+        print(f"{timestamp} {entry}")
+
+    def info(self, mensaje): self._log("INFO", mensaje)
+    def warn(self, mensaje): self._log("WARN", mensaje)
+    def error(self, mensaje): self._log("ERROR", mensaje)
+    def get_historial(self): return list(self._historial)
+
+a = Logger()
+b = Logger()
+print(a is b)  # True
+
+a.info("hola")
+a.warn("cuidado")
+a.error("fallo")
+print(a.get_historial())  # ['[INFO] hola', '[WARN] cuidado', '[ERROR] fallo']
+```
+
+```javascript
+class Logger {
+  static #instancia = null;
+  #historial = [];
+
+  constructor() {
+    if (Logger.#instancia) return Logger.#instancia;
+    Logger.#instancia = this;
+  }
+
+  static getInstance() {
+    if (!Logger.#instancia) Logger.#instancia = new Logger();
+    return Logger.#instancia;
+  }
+
+  #log(nivel, mensaje) {
+    const timestamp = new Date().toISOString();
+    const entry = `[${nivel}] ${mensaje}`;
+    this.#historial.push(entry);
+    console.log(`${timestamp} ${entry}`);
+  }
+
+  info(mensaje) { this.#log("INFO", mensaje); }
+  warn(mensaje) { this.#log("WARN", mensaje); }
+  error(mensaje) { this.#log("ERROR", mensaje); }
+  getHistorial() { return [...this.#historial]; }
+}
+
+const a = Logger.getInstance();
+const b = Logger.getInstance();
+console.log(a === b);  // true
+
+a.info("hola");
+a.warn("cuidado");
+a.error("fallo");
+console.log(a.getHistorial());
+// ['[INFO] hola', '[WARN] cuidado', '[ERROR] fallo']
+```
+
+```java
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Logger {
+    private static volatile Logger instancia;
+    private final List<String> historial = new ArrayList<>();
+    private final DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    private Logger() {}
+
+    public static Logger getInstance() {
+        if (instancia == null) {
+            synchronized (Logger.class) {
+                if (instancia == null) {
+                    instancia = new Logger();
+                }
+            }
+        }
+        return instancia;
+    }
+
+    private void log(String nivel, String mensaje) {
+        String timestamp = LocalDateTime.now().format(fmt);
+        String entry = "[" + nivel + "] " + mensaje;
+        historial.add(entry);
+        System.out.println(timestamp + " " + entry);
+    }
+
+    public void info(String mensaje) { log("INFO", mensaje); }
+    public void warn(String mensaje) { log("WARN", mensaje); }
+    public void error(String mensaje) { log("ERROR", mensaje); }
+    public List<String> getHistorial() { return List.copyOf(historial); }
+
+    public static void main(String[] args) {
+        Logger a = Logger.getInstance();
+        Logger b = Logger.getInstance();
+        System.out.println(a == b);  // true
+
+        a.info("hola");
+        a.warn("cuidado");
+        a.error("fallo");
+        System.out.println(a.getHistorial());
+    }
+}
+```
+
+```typescript
+class Logger {
+  private static instancia: Logger;
+  private historial: string[] = [];
+
+  private constructor() {}
+
+  static getInstance(): Logger {
+    if (!Logger.instancia) Logger.instancia = new Logger();
+    return Logger.instancia;
+  }
+
+  private log(nivel: string, mensaje: string): void {
+    const timestamp = new Date().toISOString();
+    const entry = `[${nivel}] ${mensaje}`;
+    this.historial.push(entry);
+    console.log(`${timestamp} ${entry}`);
+  }
+
+  info(mensaje: string): void { this.log("INFO", mensaje); }
+  warn(mensaje: string): void { this.log("WARN", mensaje); }
+  error(mensaje: string): void { this.log("ERROR", mensaje); }
+  getHistorial(): string[] { return [...this.historial]; }
+}
+
+const a = Logger.getInstance();
+const b = Logger.getInstance();
+console.log(a === b);  // true
+
+a.info("hola");
+a.warn("cuidado");
+a.error("fallo");
+console.log(a.getHistorial());
+// ['[INFO] hola', '[WARN] cuidado', '[ERROR] fallo']
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Avanzado 07: Inyector de Dependencias", href: "/retos/reto-avanzado-07-inyector-de-dependencias/" },
+    { title: "Reto Avanzado 08: Patrón Strategy en APIs", href: "/retos/reto-avanzado-08-patron-strategy-en-apis/" },
+    { title: "Reto Avanzado 09: Cache Decorator (Memoization)", href: "/retos/reto-avanzado-09-cache-decorator-memoization/" },
+  ]} />

@@ -1,0 +1,162 @@
+---
+draft: false
+title: "🏆 RETO: Consistencia de Base de Datos"
+description: "Valida la integridad referencial de una base de datos: verifica que todas las foreign keys apunten a registros existentes en la tabla padre."
+pubDate: "2026-06-28"
+tags: ["retos", "avanzado", "multilenguaje"]
+slug: "reto-consistencia-de-base-de-datos"
+image: "img/guia_consistencia_de_base_de_datos/guia_consistencia_de_base_de_datos_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Avanzado"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Consistencia de Base de Datos
+
+### 📝 Descripción del Reto
+Implementa un validador de integridad referencial: dado un conjunto de tablas con registros y definiciones de foreign keys, verifica que cada valor de foreign key en la tabla hija exista como primary key en la tabla padre. Devuelve una lista de registros inconsistentes.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| HashSet de PKs | Construir sets de primary keys padres y verificar cada FK | O(P + H) |
+| Merge sort por ID | Ordenar tablas y hacer merge para detectar inconsistencias | O(n log n) |
+| JOIN relational | Simular un LEFT JOIN y filtrar los NULL | O(P × H) |
+
+### 🌍 Dónde se usa
+- **Migraciones de BD**: verificar integridad antes/después de migrar datos
+- **ETL pipelines**: validar referencias cruzadas entre sistemas
+- **Testing de APIs**: comprobar que CRUD no rompe relaciones
+- **Auditorías de datos**: detectar huérfanos en producción
+
+<Challenge 
+  nivel="Avanzado" 
+  mision="Valida la integridad referencial verificando que cada foreign key apunte a un registro existente." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| Padres: `[{id:1},{id:2}]`, Hijos: `[{id:1,parent_id:1},{id:2,parent_id:3}]` | `[{id:2,parent_id:3}]` (FK 3 no existe) |
+| Padres: `[{id:1}]`, Hijos: `[{id:1,parent_id:1}]` | `[]` (sin inconsistencias) |
+| Padres: `[]`, Hijos: `[]` | `[]` |
+| Padres: `[{id:1}]`, Hijos: `[{id:1,parent_id:2}]` | `[{id:1,parent_id:2}]` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Extraer todos los IDs de la tabla padre en un Set. Luego recorrer la tabla hija y verificar que cada `parent_id` exista en el Set. Si no existe, ese registro es inconsistente. **Caso límite:** tablas vacías, FK nula.
+
+### ⚙️ Paso 2: Implementación
+1. Construir un `HashSet` con los IDs de la tabla padre.
+2. Filtrar la tabla hija: quedarse solo con registros cuyo `parent_id` NO esté en el Set.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(P + H) — crear el set es O(P), verificar cada hija es O(H) con búsqueda O(1).
+**Complejidad espacial:** O(P) — para el HashSet de primary keys.
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def validar_integridad(padres, hijos, fk="parent_id"):
+    pk_set = {p["id"] for p in padres}
+    return [h for h in hijos if h.get(fk) not in pk_set]
+
+print(validar_integridad(
+    [{"id": 1}, {"id": 2}],
+    [{"id": 1, "parent_id": 1}, {"id": 2, "parent_id": 3}]
+))
+# [{'id': 2, 'parent_id': 3}]
+
+print(validar_integridad([{"id": 1}], [{"id": 1, "parent_id": 1}]))
+# []
+```
+
+```javascript
+function validarIntegridad(padres, hijos, fk = "parent_id") {
+  const pkSet = new Set(padres.map(p => p.id));
+  return hijos.filter(h => !pkSet.has(h[fk]));
+}
+console.log(validarIntegridad(
+  [{id:1},{id:2}],
+  [{id:1,parent_id:1},{id:2,parent_id:3}]
+));
+// [{id:2,parent_id:3}]
+
+console.log(validarIntegridad([{id:1}], [{id:1,parent_id:1}]));
+// []
+```
+
+```java
+import java.util.*;
+import java.util.stream.*;
+
+public class ConsistenciaBD {
+    public static List<Map<String,Object>> validarIntegridad(
+            List<Map<String,Object>> padres,
+            List<Map<String,Object>> hijos,
+            String fk) {
+        Set<Object> pkSet = padres.stream()
+            .map(p -> p.get("id"))
+            .collect(Collectors.toSet());
+        return hijos.stream()
+            .filter(h -> !pkSet.contains(h.get(fk)))
+            .collect(Collectors.toList());
+    }
+
+    public static void main(String[] args) {
+        var padres = List.of(Map.of("id",1), Map.of("id",2));
+        var hijos = List.of(
+            Map.of("id",1,"parent_id",1),
+            Map.of("id",2,"parent_id",3)
+        );
+        System.out.println(validarIntegridad(padres, hijos, "parent_id"));
+        // [{id=2, parent_id=3}]
+    }
+}
+```
+
+```typescript
+interface Record { id: number; [key: string]: any; }
+
+function validarIntegridad(padres: Record[], hijos: Record[], fk = "parent_id"): Record[] {
+  const pkSet = new Set(padres.map(p => p.id));
+  return hijos.filter(h => !pkSet.has(h[fk]));
+}
+console.log(validarIntegridad(
+  [{id:1},{id:2}],
+  [{id:1,parent_id:1},{id:2,parent_id:3}]
+));
+// [{id:2,parent_id:3}]
+
+console.log(validarIntegridad([{id:1}], [{id:1,parent_id:1}]));
+// []
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Optimización de Consultas", href: "/retos/reto-optimizacion-de-consultas/" },
+    { title: "Reto Intermedio 12: Procesador de JSON", href: "/retos/reto-intermedio-12-procesador-de-json/" },
+  ]} />

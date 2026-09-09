@@ -1,0 +1,231 @@
+---
+draft: false
+title: "🏆 RETO: Reto Avanzado 02: Grafos (BFS/DFS)"
+description: "Implementa los algoritmos de recorrido BFS (amplitud) y DFS (profundidad) en un grafo representado como lista de adyacencia. Explora nodos nivel por nivel (BFS) o rama por rama (DFS)."
+pubDate: "2026-06-28"
+tags: ["retos", "avanzado", "multilenguaje"]
+slug: "reto-avanzado-02-grafos-bfs-dfs"
+image: "img/guia_plus_reto_avanzado_02_grafos_bfs_dfs/guia_plus_reto_avanzado_02_grafos_bfs_dfs_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Avanzado"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Reto Avanzado 02: Grafos (BFS/DFS)
+
+### 📝 Descripción del Reto
+Implementa dos algoritmos fundamentales de recorrido de grafos:
+
+- **BFS (Breadth-First Search)**: Recorre el grafo nivel por nivel usando una cola. Visita primero todos los vecinos directos antes de pasar al siguiente nivel
+- **DFS (Depth-First Search)**: Recorre el grafo explorando una rama completa antes de retroceder usando una pila (o recursión)
+
+Dado un grafo representado como lista de adyacencia y un nodo inicial, devuelve el orden de visita para cada algoritmo.
+
+**¿Por qué importa?** BFS se usa para encontrar el camino más corto en grafos no ponderados (GPS, redes sociales). DFS se usa para detectar ciclos, ordenamiento topológico, y puzzle solving (laberintos).
+
+**Habilidades que practica:** Grafos, colas, pilas, recursión, BFS/DFS, complejidad temporal.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad Temporal | Complejidad Espacial |
+|---------|-------------|---------------------|---------------------|
+| BFS con cola | Usar cola para visitar nivel por nivel | O(V + E) | O(V) |
+| DFS recursivo | Llamadas recursivas para explorar ramas | O(V + E) | O(V) pila de llamadas |
+| DFS iterativo con pila | Usar pila explícita en vez de recursión | O(V + E) | O(V) |
+
+### 🌍 Dónde se usa
+1. **GPS y navegación**: BFS encuentra caminos más cortos en redes de carreteras
+2. **Redes sociales**: encontrar personas conectadas a N distancia (Facebook, LinkedIn)
+3. **Juegos**: pathfinding en laberintos y estrategias en tiempo real
+4. **Compiladores**: análisis de dependencias y ordenamiento topológico
+
+<Challenge 
+  nivel="Avanzado" 
+  mision="Implementa los algoritmos de recorrido BFS (amplitud) y DFS (profundidad) en un grafo representado como lista de adyacencia." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `grafo={0:[1,2],1:[0,3],2:[0],3:[1]}, inicio=0` | `BFS: [0,1,2,3], DFS: [0,1,3,2]` |
+| `grafo={0:[1],1:[0]}, inicio=0` | `BFS: [0,1], DFS: [0,1]` |
+| `grafo={0:[]}, inicio=0` | `BFS: [0], DFS: [0]` |
+| `grafo={0:[1,2,3],1:[0],2:[0],3:[0]}, inicio=0` | `BFS: [0,1,2,3]` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** BFS usa una cola y un set de visitados. DFS puede ser recursivo o iterativo con pila. Ambos necesitan un set para evitar ciclos. **Edge cases:** grafo vacío, nodo aislado, grafo con ciclos, un solo nodo.
+
+### ⚙️ Paso 2: Implementación
+**Implementación BFS:** Cola con nodo inicial, mientras la cola no esté vacía, desencolar, marcar visitado, encolar vecinos no visitados. **Implementación DFS:** Recursiva con set de visitados, o iterativa con pila explícita.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(V + E) para ambos  
+**Complejidad espacial:** O(V) para visitados y estructura auxiliar  
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+from collections import deque
+
+def bfs(grafo, inicio):
+    visitados = set()
+    cola = deque([inicio])
+    resultado = []
+    while cola:
+        nodo = cola.popleft()
+        if nodo in visitados:
+            continue
+        visitados.add(nodo)
+        resultado.append(nodo)
+        for vecino in grafo.get(nodo, []):
+            if vecino not in visitados:
+                cola.append(vecino)
+    return resultado
+
+def dfs(grafo, inicio):
+    visitados = set()
+    resultado = []
+    def _dfs(nodo):
+        if nodo in visitados:
+            return
+        visitados.add(nodo)
+        resultado.append(nodo)
+        for vecino in grafo.get(nodo, []):
+            _dfs(vecino)
+    _dfs(inicio)
+    return resultado
+```
+
+```javascript
+function bfs(grafo, inicio) {
+  const visitados = new Set();
+  const cola = [inicio];
+  const resultado = [];
+  while (cola.length > 0) {
+    const nodo = cola.shift();
+    if (visitados.has(nodo)) continue;
+    visitados.add(nodo);
+    resultado.push(nodo);
+    for (const vecino of grafo[nodo] || []) {
+      if (!visitados.has(vecino)) cola.push(vecino);
+    }
+  }
+  return resultado;
+}
+
+function dfs(grafo, inicio) {
+  const visitados = new Set();
+  const resultado = [];
+  function _dfs(nodo) {
+    if (visitados.has(nodo)) return;
+    visitados.add(nodo);
+    resultado.push(nodo);
+    for (const vecino of grafo[nodo] || []) {
+      _dfs(vecino);
+    }
+  }
+  _dfs(inicio);
+  return resultado;
+}
+```
+
+```java
+import java.util.*;
+
+public class Grafos {
+    public static List<Integer> bfs(Map<Integer, List<Integer>> grafo, int inicio) {
+        Set<Integer> visitados = new HashSet<>();
+        Queue<Integer> cola = new LinkedList<>();
+        List<Integer> resultado = new ArrayList<>();
+        cola.add(inicio);
+        while (!cola.isEmpty()) {
+            int nodo = cola.poll();
+            if (visitados.contains(nodo)) continue;
+            visitados.add(nodo);
+            resultado.add(nodo);
+            for (int v : grafo.getOrDefault(nodo, Collections.emptyList())) {
+                if (!visitados.contains(v)) cola.add(v);
+            }
+        }
+        return resultado;
+    }
+
+    public static List<Integer> dfs(Map<Integer, List<Integer>> grafo, int inicio) {
+        Set<Integer> visitados = new HashSet<>();
+        List<Integer> resultado = new ArrayList<>();
+        dfsRec(grafo, inicio, visitados, resultado);
+        return resultado;
+    }
+
+    private static void dfsRec(Map<Integer, List<Integer>> grafo, int nodo,
+                               Set<Integer> visitados, List<Integer> res) {
+        if (visitados.contains(nodo)) return;
+        visitados.add(nodo);
+        res.add(nodo);
+        for (int v : grafo.getOrDefault(nodo, Collections.emptyList())) {
+            dfsRec(grafo, v, visitados, res);
+        }
+    }
+}
+```
+
+```typescript
+function bfs(grafo: Record<number, number[]>, inicio: number): number[] {
+  const visitados = new Set<number>();
+  const cola = [inicio];
+  const resultado: number[] = [];
+  while (cola.length > 0) {
+    const nodo = cola.shift()!;
+    if (visitados.has(nodo)) continue;
+    visitados.add(nodo);
+    resultado.push(nodo);
+    for (const vecino of grafo[nodo] || []) {
+      if (!visitados.has(vecino)) cola.push(vecino);
+    }
+  }
+  return resultado;
+}
+
+function dfs(grafo: Record<number, number[]>, inicio: number): number[] {
+  const visitados = new Set<number>();
+  const resultado: number[] = [];
+  function _dfs(nodo: number): void {
+    if (visitados.has(nodo)) return;
+    visitados.add(nodo);
+    resultado.push(nodo);
+    for (const vecino of grafo[nodo] || []) {
+      _dfs(vecino);
+    }
+  }
+  _dfs(inicio);
+  return resultado;
+}
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Avanzado 01: Árboles Binarios de Búsqueda", href: "/retos/reto-avanzado-01-arboles-binarios-de-busqueda/" },
+    { title: "Reto Intermedio 10: Transposición de Matrices", href: "/retos/reto-intermedio-10-transposicion-de-matrices/" },
+  ]} />

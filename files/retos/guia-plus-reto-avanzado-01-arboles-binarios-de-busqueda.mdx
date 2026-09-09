@@ -1,0 +1,256 @@
+---
+draft: false
+title: "🏆 RETO: Reto Avanzado 01: Árboles Binarios de Búsqueda"
+description: "Implementa un Árbol Binario de Búsqueda (BST) con inserción y búsqueda. Cada nodo tiene un valor, hijo izquierdo (menor) y derecho (mayor)."
+pubDate: "2026-06-28"
+tags: ["retos", "avanzado", "multilenguaje"]
+slug: "reto-avanzado-01-arboles-binarios-de-busqueda"
+image: "img/guia_plus_reto_avanzado_01_arboles_binarios_de_busqueda/guia_plus_reto_avanzado_01_arboles_binarios_de_busqueda_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Avanzado"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Reto Avanzado 01: Árboles Binarios de Búsqueda
+
+### 📝 Descripción del Reto
+Implementa un Árbol Binario de Búsqueda (BST) con operaciones de inserción y búsqueda.
+
+Los árboles binarios de búsqueda son una de las estructuras de datos más importantes de la informática. Cuando usas un diccionario en Python, un `Map` en Java, o un `Object` en JavaScript con muchas claves, internamente se está usando algo similar a un BST (o su variante balanceada). La ventaja sobre una lista es que la búsqueda pasa de O(n) a O(log n) — y eso marca la diferencia cuando tienes millones de elementos.
+
+| Operación | Qué hace | Ejemplo con BST [5, 3, 7, 1, 9] |
+|-----------|----------|--------------------------------|
+| `insertar(v)` | Añade `v` en la posición correcta | insertar(4) → va como hijo derecho de 3 |
+| `buscar(v)` | Devuelve `true` si `v` existe en el árbol | buscar(7) → true |
+| Estructura | Cada nodo: valor, hijo izquierdo (< padre), hijo derecho (> padre) | 5 → izq: 3, der: 7 |
+
+### 💡 Posibles enfoques
+
+| Enfoque | Cómo funciona | Complejidad |
+|---------|---------------|-------------|
+| **Recursivo** | Insertar/buscar llamándose a sí mismo en left/right | O(log n) promedio, O(n) peor caso |
+| **Iterativo** | Bucle while comparando en cada nivel | O(log n) promedio, menos overhead de pila |
+| **Con clase Node** | Clase con atributos val, left, right | Más legible, OOP |
+
+### 🌍 Dónde se usa en la vida real
+
+- **Diccionarios en memoria**: Búsqueda rápida de palabras/claves
+- **Índices de bases de datos**: Los B-trees (variantes de BST) son la base de los índices SQL
+- **Sistemas de archivos**: Ext4 usa árboles B+ para organizar archivos
+- **Compiladores**: Árboles de sintaxis abstracta (AST) son árboles binarios
+- **Juegos**: Árboles de decisión para IA
+
+<Challenge 
+  nivel="Avanzado" 
+  mision="Implementa un Árbol Binario de Búsqueda (BST) con inserción y búsqueda. Cada nodo tiene un valor, hijo izquierdo..." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Operaciones | Salida esperada |
+|-------------|-----------------|
+| `insertar(5,3,7,1,9), buscar(7)` | `true` |
+| `insertar(5,3,7), buscar(4)` | `false` |
+| `insertar(), buscar(1)` | `false` (árbol vacío) |
+| `insertar(1,2,3), buscar(3)` | `true` (árbol degenerado a lista) |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+
+**Análisis del problema:** Un BST es una estructura donde para cada nodo, todos los valores del subárbol izquierdo son menores y los del derecho son mayores. Esta propiedad permite búsqueda binaria: en cada paso descartas la mitad del árbol.
+
+**Ejemplo concreto — insertar 5, 3, 7, 1, 9:**
+```
+    5          5          5          5          5
+   /          /          / \        / \        / \
+  3    →     3    →     3   7  →  3   7  →   3   7
+            /          /          / \        / \ / \
+           1          1          1   9      1  9
+```
+
+**Buscar 7:** Empezamos en 5 → 7 > 5, ir a la derecha → 7 == 7, encontrado.
+**Buscar 4:** Empezamos en 5 → 4 < 5, ir a la izquierda → 4 > 3, ir a la derecha → null, no encontrado.
+
+**Edge cases:** Árbol vacío (root = null), valores duplicados (decidir: ignorar o ir a la derecha), inserción en orden (degenera a lista, pierde eficiencia).
+
+### ⚙️ Paso 2: Implementación
+
+**Implementación paso a paso:**
+1. Crear una clase `Node` con `val`, `left` y `right`
+2. **Insertar**: Si el árbol está vacío, crear nodo raíz. Si el valor es menor que el nodo actual, ir a la izquierda; si es mayor, ir a la derecha. Repetir recursivamente hasta encontrar un null
+3. **Buscar**: Si el nodo actual es null, no existe. Si el valor coincide, encontrado. Si es menor, buscar en left; si es mayor, buscar en right
+4. **Sugerencia**: También implementar recorridos (in-order, pre-order, post-order) para ver todos los elementos
+
+**Nota sobre Python:** Los nombres `left`/`right` son más descriptivos que `l`/`r`. En producción, considera árboles AVL o Red-Black para evitar la degeneración a lista.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:**
+- Inserción: O(log n) promedio, O(n) peor caso
+- Búsqueda: O(log n) promedio, O(n) peor caso
+
+**Complejidad espacial:** O(n) para almacenar n nodos, O(log n) de pila de llamadas en recursión
+
+**El problema de la degeneración:**
+Si insertas elementos en orden (1, 2, 3, 4, 5), el BST se convierte en una lista enlazada y la búsqueda pierde eficiencia. Soluciones:
+- **Árbol AVL**: Se auto-balancea en cada inserción
+- **Red-Black Tree**: Balanceo menos estricto pero más eficiente en inserciones
+- **B-tree**: Usado en bases de datos para datos en disco
+
+**Aplicaciones reales:**
+- Índices de bases de datos (B-trees, variantes de BST)
+- Diccionarios en memoria (Java TreeMap, C++ std::map)
+- Compiladores (AST — árboles de sintaxis abstracta)
+- Sistemas de archivos (Ext4, NTFS)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+def insert(root, val):
+    if not root:
+        return Node(val)
+    if val < root.val:
+        root.left = insert(root.left, val)
+    else:
+        root.right = insert(root.right, val)
+    return root
+
+def search(root, val):
+    if not root:
+        return False
+    if val == root.val:
+        return True
+    elif val < root.val:
+        return search(root.left, val)
+    else:
+        return search(root.right, val)
+
+# Ejemplo
+root = None
+for v in [5, 3, 7, 1, 9]:
+    root = insert(root, v)
+print(search(root, 7))  # True
+print(search(root, 4))  # False
+```
+
+```javascript
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function insert(root, val) {
+  if (!root) return new Node(val);
+  if (val < root.val) root.left = insert(root.left, val);
+  else root.right = insert(root.right, val);
+  return root;
+}
+
+function search(root, val) {
+  if (!root) return false;
+  if (val === root.val) return true;
+  return val < root.val ? search(root.left, val) : search(root.right, val);
+}
+
+// Ejemplo
+let root = null;
+[5, 3, 7, 1, 9].forEach(v => root = insert(root, v));
+console.log(search(root, 7)); // true
+console.log(search(root, 4)); // false
+```
+
+```java
+class Node {
+    int val;
+    Node left, right;
+    Node(int v) { val = v; }
+}
+
+public class BST {
+    Node root;
+
+    void insert(int val) { root = insertRec(root, val); }
+    Node insertRec(Node n, int val) {
+        if (n == null) return new Node(val);
+        if (val < n.val) n.left = insertRec(n.left, val);
+        else n.right = insertRec(n.right, val);
+        return n;
+    }
+
+    boolean search(int val) { return searchRec(root, val); }
+    boolean searchRec(Node n, int val) {
+        if (n == null) return false;
+        if (val == n.val) return true;
+        return val < n.val ? searchRec(n.left, val) : searchRec(n.right, val);
+    }
+
+    public static void main(String[] args) {
+        BST tree = new BST();
+        for (int v : new int[]{5, 3, 7, 1, 9}) tree.insert(v);
+        System.out.println(tree.search(7)); // true
+        System.out.println(tree.search(4)); // false
+    }
+}
+```
+
+```typescript
+class TreeNode {
+  val: number;
+  left: TreeNode | null = null;
+  right: TreeNode | null = null;
+  constructor(val: number) { this.val = val; }
+}
+
+function insert(root: TreeNode | null, val: number): TreeNode {
+  if (!root) return new TreeNode(val);
+  if (val < root.val) root.left = insert(root.left, val);
+  else root.right = insert(root.right, val);
+  return root;
+}
+
+function search(root: TreeNode | null, val: number): boolean {
+  if (!root) return false;
+  if (val === root.val) return true;
+  return val < root.val ? search(root.left, val) : search(root.right, val);
+}
+
+// Ejemplo
+let root: TreeNode | null = null;
+[5, 3, 7, 1, 9].forEach(v => root = insert(root, v));
+console.log(search(root, 7)); // true
+console.log(search(root, 4)); // false
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Avanzado 02: Grafos (BFS/DFS)", href: "/retos/reto-avanzado-02-grafos-bfs-dfs/" },
+    { title: "Motor de Búsqueda Binaria", href: "/retos/reto-motor-de-busqueda-binaria/" },
+  ]} />

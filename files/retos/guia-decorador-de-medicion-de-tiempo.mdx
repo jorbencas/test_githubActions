@@ -1,0 +1,174 @@
+---
+draft: false
+title: "🏆 RETO: Decorador de Medición de Tiempo"
+description: "Implementa un decorador que mida el tiempo de ejecución de funciones: mide y reporta cuánto tarda cada función en ejecutarse."
+pubDate: "2026-06-28"
+tags: ["retos", "avanzado", "multilenguaje"]
+slug: "reto-decorador-de-medicion-de-tiempo"
+image: "img/guia_decorador_de_medicion_de_tiempo/guia_decorador_de_medicion_de_tiempo_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Avanzado"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Decorador de Medición de Tiempo
+
+### 📝 Descripción del Reto
+Implementa un decorador que envuelva cualquier función y mida su tiempo de ejecución. El decorador debe: (1) ejecutar la función original, (2) medir el tiempo con nanosegundos de precisión, (3) retornar el resultado original, (4) registrar el tiempo transcurrido. En Python usa `@decorator`, en JS/TS usa Higher-Order Functions, en Java usa Wrapper pattern.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Decorator pattern (wrapper) | Envolver la función con medición antes/después | O(1) overhead |
+| Proxy object | Usar Proxy para interceptar llamadas | O(1) overhead |
+| AOP (Aspect-Oriented) | Aplicar con aspectos en tiempo de compilación | O(1) overhead |
+
+### 🌍 Dónde se usa
+- **Performance profiling**: medir bottlenecks en producción
+- **Monitoring**: Datadog, New Relic miden tiempo de funciones automáticamente
+- **Rate limiting**: medir tiempo entre llamadas para throttling
+- **Benchmarking**: comparar rendimiento de algoritmos
+
+<Challenge 
+  nivel="Avanzado" 
+  mision="Implementa un decorador que mida el tiempo de ejecución de funciones." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `decorar_suma(1,2)` | `3` (con side-effect: imprime tiempo) |
+| `decorar_sleep(0.01)` | `None` (con tiempo ~10ms) |
+| `decorar_upper("hola")` | `"HOLA"` (con tiempo registrado) |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** El decorador debe interceptar la llamada a la función, registrar el timestamp antes y después, calcular la diferencia, y retornar el resultado original sin modificarlo. **Caso límite:** función que lanza excepción (el decorador debe propagarla tras medir), funciones con 0 argumentos.
+
+### ⚙️ Paso 2: Implementación
+1. Medir tiempo antes de la llamada.
+2. Ejecutar la función con los argumentos originales.
+3. Medir tiempo después.
+4. Imprimir la diferencia.
+5. Retornar el resultado.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(1) de overhead (solo mediciones de tiempo).
+**Complejidad espacial:** O(1) adicional.
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+import time
+import functools
+
+def medir_tiempo(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        inicio = time.perf_counter()
+        resultado = func(*args, **kwargs)
+        fin = time.perf_counter()
+        print(f"[{func.__name__}] {fin - inicio:.6f}s")
+        return resultado
+    return wrapper
+
+@medir_tiempo
+def suma(a, b):
+    return a + b
+
+@medir_tiempo
+def upper(texto):
+    return texto.upper()
+
+print(suma(1, 2))       # 3 (imprime tiempo)
+print(upper("hola"))    # HOLA (imprime tiempo)
+```
+
+```javascript
+function medirTiempo(func) {
+  return function(...args) {
+    const inicio = performance.now();
+    const resultado = func.apply(this, args);
+    const fin = performance.now();
+    console.log(`[${func.name}] ${(fin - inicio).toFixed(6)}ms`);
+    return resultado;
+  };
+}
+
+function suma(a, b) { return a + b; }
+const sumaMedida = medirTiempo(suma);
+console.log(sumaMedida(1, 2));  // 3 (imprime tiempo)
+
+const upperMedida = medirTiempo(t => t.toUpperCase());
+console.log(upperMedida("hola"));  // HOLA (imprime tiempo)
+```
+
+```java
+public class DecoradorTiempo {
+    @FunctionalInterface
+    interface Funcion<T, R> {
+        R ejecutar(T... args);
+    }
+
+    public static <R> R medirTiempo(Funcion<Object, R> func, Object... args) {
+        long inicio = System.nanoTime();
+        R resultado = func.ejecutar(args);
+        long fin = System.nanoTime();
+        System.out.printf("[función] %.6fs%n", (fin - inicio) / 1_000_000_000.0);
+        return resultado;
+    }
+
+    public static void main(String[] args) {
+        var resultado = medirTiempo(a -> (int)a[0] + (int)a[1], 1, 2);
+        System.out.println(resultado); // 3
+    }
+}
+```
+
+```typescript
+function medirTiempo<T extends (...args: any[]) => any>(func: T): T {
+  return ((...args: any[]) => {
+    const inicio = performance.now();
+    const resultado = func(...args);
+    const fin = performance.now();
+    console.log(`[${func.name}] ${(fin - inicio).toFixed(6)}ms`);
+    return resultado;
+  }) as T;
+}
+
+function suma(a: number, b: number): number { return a + b; }
+const sumaMedida = medirTiempo(suma);
+console.log(sumaMedida(1, 2));  // 3
+
+const upperMedida = medirTiempo((t: string) => t.toUpperCase());
+console.log(upperMedida("hola"));  // HOLA
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Avanzado 09: Cache Decorator (Memoization)", href: "/retos/reto-avanzado-09-cache-decorator-memoization/" },
+    { title: "Reto Avanzado 07: Inyector de Dependencias", href: "/retos/reto-avanzado-07-inyector-de-dependencias/" },
+  ]} />

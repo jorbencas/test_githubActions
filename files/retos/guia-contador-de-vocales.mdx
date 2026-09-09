@@ -1,0 +1,149 @@
+---
+draft: false
+title: "🏆 RETO: Contador de Vocales"
+description: "Cuenta el número de vocales (a, e, i, o, u) en una cadena de texto. Ejercicio clásico de recorrido de strings que practica iteración, condicionales y conjuntos de caracteres."
+pubDate: "2026-06-28"
+tags: ["retos", "iniciación", "multilenguaje"]
+slug: "reto-contador-de-vocales"
+image: "img/guia_contador_de_vocales/guia_contador_de_vocales_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Iniciación"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Contador de Vocales
+
+### 📝 Descripción del Reto
+Cuenta el número de vocales (a, e, i, o, u) en una cadena de texto. Ignorar mayúsculas/minúsculas. Ejercicio que practica recorrido de strings, condicionales y uso de conjuntos para verificación de pertenencia.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Bucle + condicional | Recorrer cada carácter, verificar si es vocal | O(n) |
+| Filtrado funcional | `sum(1 for c in s.lower() if c in vocales)` | O(n) |
+| Expresión regular | `len(re.findall(r'[aeiou]', s.lower()))` | O(n) |
+
+### 🌍 Dónde se usa
+- **Análisis de texto**: frecuencia de letras en lingüística computacional
+- **Juegos de palabras**: generar puntuación en Scrabble o similar
+- **Criptografía**: análisis frecuencial para romper cifrados simples
+- **Procesamiento de lenguaje natural**: tokenización y análisis léxico
+
+<Challenge 
+  nivel="Iniciación" 
+  mision="Cuenta el número de vocales en una cadena de texto." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `'hola'` | `2` |
+| `'Python'` | `1` |
+| `'aeiou'` | `5` |
+| `'xyz'` | `0` |
+| `''` | `0` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Recorrer cada carácter de la cadena y contar si pertenece al conjunto de vocales (a, e, i, o, u). **Ejemplo:** 'hola' → h(no), o(sí), l(no), a(sí) = 2 vocales. **Edge cases:** cadena vacía (0), sin vocales (0), todas vocales (longitud).
+
+### ⚙️ Paso 2: Implementación
+Definir el conjunto de vocales, recorrer con un bucle, incrementar contador cuando el carácter esté en el conjunto.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n)
+**Complejidad espacial:** O(1)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def contar_vocales(s):
+    vocales = set('aeiouAEIOU')
+    return sum(1 for c in s if c in vocales)
+
+print(contar_vocales('hola'))    # 2
+print(contar_vocales('Python'))  # 1
+print(contar_vocales('aeiou'))   # 5
+print(contar_vocales('xyz'))     # 0
+print(contar_vocales(''))        # 0
+```
+
+```javascript
+function contarVocales(s) {
+  const vocales = 'aeiouAEIOU';
+  let count = 0;
+  for (const c of s) {
+    if (vocales.includes(c)) count++;
+  }
+  return count;
+}
+console.log(contarVocales('hola'));    // 2
+console.log(contarVocales('Python'));  // 1
+console.log(contarVocales('aeiou'));   // 5
+console.log(contarVocales('xyz'));     // 0
+console.log(contarVocales(''));        // 0
+```
+
+```java
+public class ContadorVocales {
+    public static int contarVocales(String s) {
+        String vocales = "aeiouAEIOU";
+        int count = 0;
+        for (char c : s.toCharArray()) {
+            if (vocales.indexOf(c) != -1) count++;
+        }
+        return count;
+    }
+    public static void main(String[] args) {
+        System.out.println(contarVocales("hola"));    // 2
+        System.out.println(contarVocales("Python"));  // 1
+        System.out.println(contarVocales("aeiou"));   // 5
+        System.out.println(contarVocales("xyz"));     // 0
+        System.out.println(contarVocales(""));        // 0
+    }
+}
+```
+
+```typescript
+function contarVocales(s: string): number {
+  const vocales = 'aeiouAEIOU';
+  let count = 0;
+  for (const c of s) {
+    if (vocales.includes(c)) count++;
+  }
+  return count;
+}
+console.log(contarVocales('hola'));    // 2
+console.log(contarVocales('Python'));  // 1
+console.log(contarVocales('aeiou'));   // 5
+console.log(contarVocales('xyz'));     // 0
+console.log(contarVocales(''));        // 0
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Detector de Palíndromos", href: "/retos/reto-detector-de-palindromos/" },
+    { title: "Reto Inicial 07: Invertir Palabra", href: "/retos/reto-inicial-07-invertir-palabra/" },
+  ]} />

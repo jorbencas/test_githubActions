@@ -1,0 +1,128 @@
+---
+draft: false
+title: "🏆 RETO: Máximo de Tres Números"
+description: "Dado un array de tres números, encuentra el máximo. Ejercicio fundamental de lógica condicional que practica comparaciones y uso de funciones built-in de max."
+pubDate: "2026-06-28"
+tags: ["retos", "iniciación", "multilenguaje"]
+slug: "reto-maximo-de-tres-numeros"
+image: "img/guia_maximo_de_tres_numeros/guia_maximo_de_tres_numeros_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Iniciación"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Máximo de Tres Números
+
+### 📝 Descripción del Reto
+Dado un array de exactamente tres números, encuentra el valor máximo. Ejercicio que practica comparaciones condicionales y el uso de funciones de utilidad como `max()` o equivalentes.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Función max | `max(arr)` — directo y legible | O(1) |
+| Comparaciones encadenadas | if/else comparando a>b, a>c, b>c | O(1) |
+| Ordenamiento | `sorted(arr)[-1]` — ordena y toma el último | O(1) (3 elementos) |
+
+### 🌍 Dónde se usa
+- **Sistemas de puntuación**: encontrar la mejor calificación
+- **Juegos**: determinar ganador entre tres jugadores
+- **Análisis de datos**: encontrar valor máximo en conjunto pequeño
+- **Algoritmos**: paso intermedio en problemas de optimización
+
+<Challenge 
+  nivel="Iniciación" 
+  mision="Encuentra el máximo de un array de tres números." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `[3, 7, 2]` | `7` |
+| `[10, 5, 10]` | `10` |
+| `[-1, -5, -2]` | `-1` |
+| `[0, 0, 0]` | `0` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** De tres números, el mayor es aquel que no es menor que ninguno de los otros dos. **Ejemplo:** [3, 7, 2] → 7 es mayor que 3 y que 2 → máximo = 7. **Edge cases:** todos iguales, negativos, ceros.
+
+### ⚙️ Paso 2: Implementación
+Usar función `max()` nativa del lenguaje. Alternativamente, comparaciones manuales.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(1)
+**Complejidad espacial:** O(1)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def maximo_de_tres(arr):
+    return max(arr)
+
+print(maximo_de_tres([3, 7, 2]))    # 7
+print(maximo_de_tres([10, 5, 10]))  # 10
+print(maximo_de_tres([-1, -5, -2])) # -1
+print(maximo_de_tres([0, 0, 0]))    # 0
+```
+
+```javascript
+function maximoDeTres(arr) {
+  return Math.max(...arr);
+}
+console.log(maximoDeTres([3, 7, 2]));    // 7
+console.log(maximoDeTres([10, 5, 10]));  // 10
+console.log(maximoDeTres([-1, -5, -2])); // -1
+console.log(maximoDeTres([0, 0, 0]));    // 0
+```
+
+```java
+public class MaximoDeTres {
+    public static int maximoDeTres(int[] arr) {
+        return Math.max(arr[0], Math.max(arr[1], arr[2]));
+    }
+    public static void main(String[] args) {
+        System.out.println(maximoDeTres(new int[]{3, 7, 2}));    // 7
+        System.out.println(maximoDeTres(new int[]{10, 5, 10}));  // 10
+        System.out.println(maximoDeTres(new int[]{-1, -5, -2})); // -1
+        System.out.println(maximoDeTres(new int[]{0, 0, 0}));    // 0
+    }
+}
+```
+
+```typescript
+function maximoDeTres(arr: number[]): number {
+  return Math.max(...arr);
+}
+console.log(maximoDeTres([3, 7, 2]));    // 7
+console.log(maximoDeTres([10, 5, 10]));  // 10
+console.log(maximoDeTres([-1, -5, -2])); // -1
+console.log(maximoDeTres([0, 0, 0]));    // 0
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Inicial 01: Suma de Dígitos", href: "/retos/reto-inicial-01-suma-de-digitos/" },
+    { title: "Reto Inicial 06: Par o Impar", href: "/retos/reto-inicial-06-par-o-impar/" },
+  ]} />

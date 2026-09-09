@@ -1,0 +1,193 @@
+---
+draft: false
+title: "🏆 RETO: Reto Intermedio 30: Manejador de Historial (Undo)"
+description: "Implementa un sistema de historial con capacidad de deshacer (undo) y rehacer (redo) usando dos pilas. Cada acción nueva vacía el historial de redo."
+pubDate: "2026-06-28"
+tags: ["retos", "intermedio", "multilenguaje"]
+slug: "reto-intermedio-30-manejador-de-historial-undo"
+image: "img/guia_plus_reto_intermedio_30_manejador_de_historial_undo/guia_plus_reto_intermedio_30_manejador_de_historial_undo_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Intermedio"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Reto Intermedio 30: Manejador de Historial (Undo)
+
+### 📝 Descripción del Reto
+Implementa un sistema de historial (como el de un editor de texto) con tres operaciones:
+- **add(accion)**: registra una acción nueva. Si había acciones en redo, se descartan
+- **undo()**: deshace la última acción y la mueve a la pila de redo. Devuelve el estado actual
+- **redo()**: rehace la última acción deshecha. Devuelve el estado actual
+
+**¿Por qué importa?** Casi todos los editores de texto, IDEs, herramientas de diseño (Photoshop, Figma) y terminales implementan undo/redo. Es un patrón fundamental en UX y en la gestión de estado de aplicaciones.
+
+**Habilidades que practica:** Uso de pilas (stacks), gestión de estado, patrón Command.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad Temporal | Complejidad Espacial |
+|---------|-------------|---------------------|---------------------|
+| Dos pilas | Pila de acciones y pila de deshechas | O(1) por operación | O(n) |
+| Array con índice | Array + puntero de posición actual | O(1) add/undo/redo | O(n) |
+| Lista circular | Buffer circular con capacidad fija | O(1) | O(k) k=capacidad |
+
+### 🌍 Dónde se usa
+1. **Editores de texto**: Ctrl+Z / Ctrl+Y en VS Code, Word, etc.
+2. **Herramientas de diseño**: Photoshop, Figma, GIMP mantienen historial de acciones
+3. **Terminales**: bash mantiene historial de comandos con flechas arriba/abajo
+4. **Bases de datos**: transacciones con rollback/commit usan principios similares
+
+<Challenge 
+  nivel="Intermedio" 
+  mision="Implementa un sistema de historial con capacidad de deshacer (undo) y rehacer (redo) usando dos pilas. Cada acción nueva vacía el historial de redo." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `add('a'), add('b'), undo()` | `'a'` |
+| `add('x'), undo(), redo()` | `'x'` |
+| `undo()` | `null` |
+| `add('a'), add('b'), undo(), add('c')` | `'ac'` |
+| `add('a'), add('b'), undo(), undo(), redo()` | `'a'` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Se mantienen dos pilas: una de acciones realizadas y otra de acciones deshechas. Al hacer undo, la acción actual pasa a la pila de redo. Al hacer una acción nueva, se vacía la pila de redo. **Edge cases:** undo sin acciones (null), redo sin acciones (null), add después de undo descarta redo.
+
+### ⚙️ Paso 2: Implementación
+**Implementación:** Clase Historial con métodos: add(accion), undo(), redo(). Usar dos listas como pilas (append/pop). El estado actual se reconstruye concatenando la pila de acciones.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(1) por operación  
+**Complejidad espacial:** O(n)  
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+class Historial:
+    def __init__(self):
+        self.acciones = []
+        self.deshacer = []
+
+    def add(self, accion):
+        self.acciones.append(accion)
+        self.deshacer = []
+
+    def undo(self):
+        if self.acciones:
+            self.deshacer.append(self.acciones.pop())
+            return ''.join(self.acciones)
+        return None
+
+    def redo(self):
+        if self.deshacer:
+            self.acciones.append(self.deshacer.pop())
+            return ''.join(self.acciones)
+        return None
+```
+
+```javascript
+class Historial {
+  constructor() {
+    this.acciones = [];
+    this.deshacer = [];
+  }
+  add(accion) {
+    this.acciones.push(accion);
+    this.deshacer = [];
+  }
+  undo() {
+    if (this.acciones.length === 0) return null;
+    this.deshacer.push(this.acciones.pop());
+    return this.acciones.join('');
+  }
+  redo() {
+    if (this.deshacer.length === 0) return null;
+    this.acciones.push(this.deshacer.pop());
+    return this.acciones.join('');
+  }
+}
+```
+
+```java
+import java.util.*;
+
+public class Historial {
+    private List<String> acciones = new ArrayList<>();
+    private List<String> deshacer = new ArrayList<>();
+
+    public void add(String accion) {
+        acciones.add(accion);
+        deshacer.clear();
+    }
+
+    public String undo() {
+        if (acciones.isEmpty()) return null;
+        deshacer.add(acciones.remove(acciones.size() - 1));
+        StringBuilder sb = new StringBuilder();
+        for (String a : acciones) sb.append(a);
+        return sb.toString();
+    }
+
+    public String redo() {
+        if (deshacer.isEmpty()) return null;
+        acciones.add(deshacer.remove(deshacer.size() - 1));
+        StringBuilder sb = new StringBuilder();
+        for (String a : acciones) sb.append(a);
+        return sb.toString();
+    }
+}
+```
+
+```typescript
+class Historial {
+  private acciones: string[] = [];
+  private deshacer: string[] = [];
+
+  add(accion: string): void {
+    this.acciones.push(accion);
+    this.deshacer = [];
+  }
+
+  undo(): string | null {
+    if (this.acciones.length === 0) return null;
+    this.deshacer.push(this.acciones.pop()!);
+    return this.acciones.join('');
+  }
+
+  redo(): string | null {
+    if (this.deshacer.length === 0) return null;
+    this.acciones.push(this.deshacer.pop()!);
+    return this.acciones.join('');
+  }
+}
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Intermedio 03: Simulador de Pila (Stack)", href: "/retos/reto-intermedio-03-simulador-de-pila-stack/" },
+    { title: "Reto Avanzado 09: Cache Decorator (Memoization)", href: "/retos/reto-avanzado-09-cache-decorator-memoization/" },
+  ]} />

@@ -1,0 +1,204 @@
+---
+draft: false
+title: "🏆 RETO: Motor de Búsqueda Binaria"
+description: "Implementa el algoritmo de búsqueda binaria: dado un array ordenado y un objetivo, encuentra su índice en O(log n) o indica que no existe."
+pubDate: "2026-06-28"
+tags: ["retos", "avanzado", "multilenguaje"]
+slug: "reto-motor-de-busqueda-binaria"
+image: "img/guia_motor_de_busqueda_binaria/guia_motor_de_busqueda_binaria_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Avanzado"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Motor de Búsqueda Binaria
+
+### 📝 Descripción del Reto
+Implementa búsqueda binaria: dado un array ordenado de números y un valor objetivo, encuentra el índice del objetivo o retorna -1 si no existe. La búsqueda debe ser iterativa con complejidad O(log n). También implementa una variante recursiva.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Iterativo | Dividir el array a la mitad en cada paso | O(log n) |
+| Recursivo | Llamada recursiva con mitades del array | O(log n) |
+| Búsqueda con duplicados | Encontrar primera/última aparición | O(log n) |
+
+### 🌍 Dónde se usa
+- **Bases de datos**: índices B-Tree para búsquedas en disco
+- **Sistemas de archivos**: localización de archivos en directorios
+- **Compiladores**: búsqueda de tokens en tablas de símbolos
+- **Juegos**: detección de colisiones con spatial partitioning
+
+<Challenge 
+  nivel="Avanzado" 
+  mision="Implementa búsqueda binaria iterativa y recursiva en arrays ordenados." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `[1,3,5,7,9,11]`, objetivo `7` | `3` |
+| `[1,3,5,7,9,11]`, objetivo `6` | `-1` |
+| `[2]`, objetivo `2` | `0` |
+| `[]`, objetivo `1` | `-1` |
+| `[1,2,3,4,5]`, objetivo `1` | `0` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** El array está ordenado. Comparar el objetivo con el elemento central: si es igual, retornar el índice; si es menor, buscar en la mitad izquierda; si es mayor, buscar en la mitad derecha. Repetir hasta encontrar o agotar el rango. **Caso límite:** array vacío, un solo elemento, objetivo en los extremos.
+
+### ⚙️ Paso 2: Implementación
+1. Inicializar `izq = 0`, `der = n - 1`.
+2. Calcular `mid = (izq + der) / 2`.
+3. Comparar y ajustar izq/der.
+4. Si `izq > der`, retornar -1.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(log n) — el espacio de búsqueda se reduce a la mitad en cada paso.
+**Complejidad espacial:** O(1) iterativo, O(log n) recursivo (pila de llamadas).
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def busqueda_binaria(arr, objetivo):
+    izq, der = 0, len(arr) - 1
+    while izq <= der:
+        mid = (izq + der) // 2
+        if arr[mid] == objetivo:
+            return mid
+        elif arr[mid] < objetivo:
+            izq = mid + 1
+        else:
+            der = mid - 1
+    return -1
+
+def busqueda_binaria_rec(arr, objetivo, izq=0, der=None):
+    if der is None:
+        der = len(arr) - 1
+    if izq > der:
+        return -1
+    mid = (izq + der) // 2
+    if arr[mid] == objetivo:
+        return mid
+    elif arr[mid] < objetivo:
+        return busqueda_binaria_rec(arr, objetivo, mid + 1, der)
+    else:
+        return busqueda_binaria_rec(arr, objetivo, izq, mid - 1)
+
+print(busqueda_binaria([1,3,5,7,9,11], 7))   # 3
+print(busqueda_binaria([1,3,5,7,9,11], 6))   # -1
+print(busqueda_binaria([2], 2))               # 0
+print(busqueda_binaria([], 1))                # -1
+print(busqueda_binaria_rec([1,3,5,7,9,11], 7))  # 3
+```
+
+```javascript
+function busquedaBinaria(arr, objetivo) {
+  let izq = 0, der = arr.length - 1;
+  while (izq <= der) {
+    const mid = Math.floor((izq + der) / 2);
+    if (arr[mid] === objetivo) return mid;
+    else if (arr[mid] < objetivo) izq = mid + 1;
+    else der = mid - 1;
+  }
+  return -1;
+}
+
+function busquedaBinariaRec(arr, objetivo, izq = 0, der = arr.length - 1) {
+  if (izq > der) return -1;
+  const mid = Math.floor((izq + der) / 2);
+  if (arr[mid] === objetivo) return mid;
+  else if (arr[mid] < objetivo) return busquedaBinariaRec(arr, objetivo, mid + 1, der);
+  else return busquedaBinariaRec(arr, objetivo, izq, mid - 1);
+}
+
+console.log(busquedaBinaria([1,3,5,7,9,11], 7));  // 3
+console.log(busquedaBinaria([1,3,5,7,9,11], 6));  // -1
+console.log(busquedaBinaria([2], 2));              // 0
+console.log(busquedaBinaria([], 1));               // -1
+console.log(busquedaBinariaRec([1,3,5,7,9,11], 7)); // 3
+```
+
+```java
+public class BusquedaBinaria {
+    public static int busquedaBinaria(int[] arr, int objetivo) {
+        int izq = 0, der = arr.length - 1;
+        while (izq <= der) {
+            int mid = izq + (der - izq) / 2;
+            if (arr[mid] == objetivo) return mid;
+            else if (arr[mid] < objetivo) izq = mid + 1;
+            else der = mid - 1;
+        }
+        return -1;
+    }
+
+    public static int busquedaBinariaRec(int[] arr, int objetivo, int izq, int der) {
+        if (izq > der) return -1;
+        int mid = izq + (der - izq) / 2;
+        if (arr[mid] == objetivo) return mid;
+        else if (arr[mid] < objetivo) return busquedaBinariaRec(arr, objetivo, mid + 1, der);
+        else return busquedaBinariaRec(arr, objetivo, izq, mid - 1);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(busquedaBinaria(new int[]{1,3,5,7,9,11}, 7));  // 3
+        System.out.println(busquedaBinaria(new int[]{1,3,5,7,9,11}, 6));  // -1
+        System.out.println(busquedaBinaria(new int[]{2}, 2));              // 0
+        System.out.println(busquedaBinariaRec(new int[]{1,3,5,7,9,11}, 7, 0, 5)); // 3
+    }
+}
+```
+
+```typescript
+function busquedaBinaria(arr: number[], objetivo: number): number {
+  let izq = 0, der = arr.length - 1;
+  while (izq <= der) {
+    const mid = Math.floor((izq + der) / 2);
+    if (arr[mid] === objetivo) return mid;
+    else if (arr[mid] < objetivo) izq = mid + 1;
+    else der = mid - 1;
+  }
+  return -1;
+}
+
+function busquedaBinariaRec(arr: number[], objetivo: number, izq = 0, der = arr.length - 1): number {
+  if (izq > der) return -1;
+  const mid = Math.floor((izq + der) / 2);
+  if (arr[mid] === objetivo) return mid;
+  else if (arr[mid] < objetivo) return busquedaBinariaRec(arr, objetivo, mid + 1, der);
+  else return busquedaBinariaRec(arr, objetivo, izq, mid - 1);
+}
+
+console.log(busquedaBinaria([1,3,5,7,9,11], 7));  // 3
+console.log(busquedaBinaria([1,3,5,7,9,11], 6));  // -1
+console.log(busquedaBinaria([2], 2));              // 0
+console.log(busquedaBinariaRec([1,3,5,7,9,11], 7)); // 3
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Ordenamiento por Burbuja", href: "/retos/reto-ordenamiento-por-burbuja/" },
+    { title: "Reto Avanzado 01: Árboles Binarios de Búsqueda", href: "/retos/reto-avanzado-01-arboles-binarios-de-busqueda/" },
+  ]} />

@@ -1,0 +1,176 @@
+---
+draft: false
+title: "🏆 RETO: Reto Intermedio 04: Colas (Queue) Básicas"
+description: "Implementa una cola (queue) con operaciones enqueue, dequeue, front e isEmpty. La cola es una estructura FIFO fundamental para gestionar elementos en orden de llegada."
+pubDate: "2026-06-28"
+tags: ["retos", "intermedio", "multilenguaje"]
+slug: "reto-intermedio-04-colas-queue-basicas"
+image: "img/guia_plus_reto_intermedio_04_colas_queue_basicas/guia_plus_reto_intermedio_04_colas_queue_basicas_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Intermedio"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Reto Intermedio 04: Colas (Queue) Básicas
+
+### 📝 Descripción del Reto
+Una cola (queue) es una estructura de datos donde el primer elemento en entrar es el primero en salir (FIFO — First In, First Out). Debes implementar una cola con cuatro operaciones:
+- **enqueue(v)**: inserta el valor v al final de la cola
+- **dequeue()**: elimina y devuelve el elemento del frente, o null si está vacía
+- **front()**: devuelve el elemento del frente sin eliminarlo, o null si está vacía
+- **isEmpty()**: devuelve true si la cola está vacía
+
+**¿Por qué importa?** Las colas aparecen en sistemas de impresión (trabajos en cola), BFS en grafos, buffers de datos, sistemas de mensajes como RabbitMQ, y colas de tareas en servidores web.
+
+**Habilidades que practica:** Estructuras de datos lineales, manejo de punteros/índices, complejidad temporal de operaciones.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad Temporal | Complejidad Espacial |
+|---------|-------------|---------------------|---------------------|
+| Array con push/shift | Usar array y desplazar con shift() | O(n) dequeue | O(n) |
+| Deque / ArrayDeque | Usar estructura doblemente enlazada | O(1) amortizado | O(n) |
+| Lista enlazada con punteros | Nodo con puntero next, tail pointer | O(1) todas | O(n) |
+
+### 🌍 Dónde se usa
+1. **Sistemas de impresión**: los documentos se encolan y se imprimen en orden de llegada
+2. **BFS en grafos**: recorridos por niveles usan colas para explorar vecinos
+3. **Colas de mensajes**: RabbitMQ, Kafka y SQS gestionan mensajes con colas
+4. **Scheduling de procesos**: el planificador del SO usa colas para gestionar hilos
+
+<Challenge 
+  nivel="Intermedio" 
+  mision="Implementa una cola (queue) con operaciones enqueue, dequeue, front e isEmpty. La cola es una estructura FIFO fundamental para gestionar elementos en orden de llegada." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `enqueue(1), enqueue(2), dequeue()` | `1` |
+| `enqueue(5), front()` | `5` |
+| `isEmpty()` | `true` |
+| `enqueue(3), dequeue(), dequeue()` | `null` |
+| `enqueue(1), enqueue(2), front(), dequeue(), front()` | `1, 1, 2` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Una cola sigue el principio FIFO. Operaciones: enqueue inserta al final, dequeue elimina del frente, front mira el frente, isEmpty verifica si está vacía. **Ejemplo concreto:** enqueue(1), enqueue(2), enqueue(3), dequeue() → 1, front() → 2. **Edge cases:** dequeue en cola vacía devuelve null, front en cola vacía devuelve null.
+
+### ⚙️ Paso 2: Implementación
+**Implementación:** Usar collections.deque en Python (O(1) amortizado), ArrayDeque en Java, o lista enlazada con punteros head/tail. En JavaScript, un array con push/shift funciona pero shift es O(n). La versión con lista enlazada es O(1) para todas las operaciones.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(1) amortizado con deque  
+**Complejidad espacial:** O(n)  
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+from collections import deque
+
+class Cola:
+    def __init__(self):
+        self.q = deque()
+
+    def enqueue(self, v):
+        self.q.append(v)
+
+    def dequeue(self):
+        return self.q.popleft() if self.q else None
+
+    def front(self):
+        return self.q[0] if self.q else None
+
+    def isEmpty(self):
+        return len(self.q) == 0
+```
+
+```javascript
+class Cola {
+  constructor() {
+    this.items = [];
+  }
+  enqueue(v) {
+    this.items.push(v);
+  }
+  dequeue() {
+    return this.items.length ? this.items.shift() : null;
+  }
+  front() {
+    return this.items.length ? this.items[0] : null;
+  }
+  isEmpty() {
+    return this.items.length === 0;
+  }
+}
+```
+
+```java
+import java.util.*;
+
+public class Cola {
+    private LinkedList<Integer> queue = new LinkedList<>();
+
+    public void enqueue(int v) {
+        queue.addLast(v);
+    }
+
+    public Integer dequeue() {
+        return queue.isEmpty() ? null : queue.removeFirst();
+    }
+
+    public Integer front() {
+        return queue.isEmpty() ? null : queue.getFirst();
+    }
+
+    public boolean isEmpty() {
+        return queue.isEmpty();
+    }
+}
+```
+
+```typescript
+class Cola<T> {
+  private items: T[] = [];
+  enqueue(v: T): void {
+    this.items.push(v);
+  }
+  dequeue(): T | null {
+    return this.items.length ? this.items.shift()! : null;
+  }
+  front(): T | null {
+    return this.items.length ? this.items[0] : null;
+  }
+  isEmpty(): boolean {
+    return this.items.length === 0;
+  }
+}
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Intermedio 03: Simulador de Pila (Stack)", href: "/retos/reto-intermedio-03-simulador-de-pila-stack/" },
+    { title: "Reto Avanzado 14: Worker Queue con Prioridad", href: "/retos/reto-avanzado-14-worker-queue-con-prioridad/" },
+  ]} />

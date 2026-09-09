@@ -1,0 +1,200 @@
+---
+draft: false
+title: "🏆 RETO: Buscador de Minas (Lógica)"
+description: "Implementa la lógica de un buscaminas: dado un tablero con minas, calcula el número de minas adyacentes para cada celda vacía."
+pubDate: "2026-06-28"
+tags: ["retos", "intermedio", "multilenguaje"]
+slug: "reto-buscador-de-minas-logica"
+image: "img/guia_buscador_de_minas_logica/guia_buscador_de_minas_logica_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Intermedio"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Buscador de Minas (Lógica)
+
+### 📝 Descripción del Reto
+Implementa la lógica de un buscaminas: dado un tablero 2D donde `'M'` representa una mina y `'.'` representa una celda vacía, calcula para cada celda vacía el número de minas adyacentes (horizontal, vertical y diagonal). Devuelve el tablero resultante donde las celtas vacías se reemplazan por el conteo como string.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Recorrido 8 direcciones | Para cada celda vacía, contar minas en las 8 direcciones vecinas | O(m×n) |
+| Propagación desde minas | Desde cada mina, incrementar contadores en vecinos | O(m×n) |
+| Búsqueda por offsets | Usar array de offsets `[(-1,-1), (-1,0), ...]` para los 8 vecinos | O(m×n) |
+
+### 🌍 Dónde se usa
+- **Juegos**: el clásico Minesweeper de Windows
+- **Simulaciones militares**: detección de zonas peligrosas
+- **Análisis espacial**: mapas de densidad de riesgo en GIS
+- **Robótica**: navegación con obstáculos en grids
+
+<Challenge 
+  nivel="Intermedio" 
+  mision="Implementa la lógica de un buscaminas calculando minas adyacentes para cada celda." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `[['M','.','.'],['.','.','.'],['.','.','M']]` | `[['M','1','1'],['1','2','1'],['1','1','M']]` |
+| `[['M','M'],['M','M']]` | `[['M','M'],['M','M']]` |
+| `[['.','.','.'],['.','.','.'],['.','.','.']]` | `[['0','0','0'],['0','0','0'],['0','0','0']]` |
+| `[['M']]` | `[['M']]` |
+| `[['.','M'],['M','.']]` | `[['2','M'],['M','2']]` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Recorrer cada celda del tablero. Si es mina (`'M'`), dejarla igual. Si es vacía (`'.'`), contar cuántas minas hay en las 8 celdas vecinas (arriba, abajo, izquierda, derecha y 4 diagonales). **Caso límite:** tablero 1×1, bordes del tablero (no acceder fuera de límites).
+
+### ⚙️ Paso 2: Implementación
+Usar un array de offsets para las 8 direcciones. Para cada celda vacía, iterar los offsets y contar vecinos que sean `'M'`. Reemplazar `'.'` por el conteo como string.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(m×n) — se recorre cada celda y se miran 8 vecinos constantes.
+**Complejidad espacial:** O(m×n) — para el tablero resultante.
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def buscar_minas(tablero):
+    filas = len(tablero)
+    cols = len(tablero[0])
+    resultado = [fila[:] for fila in tablero]
+    offsets = [(-1,-1),(-1,0),(-1,1),(0,-1),(0,1),(1,-1),(1,0),(1,1)]
+
+    for i in range(filas):
+        for j in range(cols):
+            if tablero[i][j] == '.':
+                count = 0
+                for di, dj in offsets:
+                    ni, nj = i + di, j + dj
+                    if 0 <= ni < filas and 0 <= nj < cols and tablero[ni][nj] == 'M':
+                        count += 1
+                resultado[i][j] = str(count)
+    return resultado
+
+print(buscar_minas([['M','.','.'],['.','.','.'],['.','.','M']]))
+# [['M','1','1'],['1','2','1'],['1','1','M']]
+print(buscar_minas([['M','M'],['M','M']]))
+# [['M','M'],['M','M']]
+print(buscar_minas([['.','M'],['M','.']]))
+# [['2','M'],['M','2']]
+```
+
+```javascript
+function buscarMinas(tablero) {
+  const filas = tablero.length;
+  const cols = tablero[0].length;
+  const resultado = tablero.map(f => [...f]);
+  const offsets = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]];
+
+  for (let i = 0; i < filas; i++) {
+    for (let j = 0; j < cols; j++) {
+      if (tablero[i][j] === '.') {
+        let count = 0;
+        for (const [di, dj] of offsets) {
+          const ni = i + di, nj = j + dj;
+          if (ni >= 0 && ni < filas && nj >= 0 && nj < cols && tablero[ni][nj] === 'M') count++;
+        }
+        resultado[i][j] = String(count);
+      }
+    }
+  }
+  return resultado;
+}
+console.log(buscarMinas([['M','.','.'],['.','.','.'],['.','.','M']]));
+// [['M','1','1'],['1','2','1'],['1','1','M']]
+console.log(buscarMinas([['.','M'],['M','.']]));
+// [['2','M'],['M','2']]
+```
+
+```java
+public class BuscadorMinas {
+    public static String[][] buscarMinas(char[][] tablero) {
+        int filas = tablero.length, cols = tablero[0].length;
+        String[][] resultado = new String[filas][cols];
+        int[][] offsets = {{-1,-1},{-1,0},{-1,1},{0,-1},{0,1},{1,-1},{1,0},{1,1}};
+
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (tablero[i][j] == 'M') {
+                    resultado[i][j] = "M";
+                } else {
+                    int count = 0;
+                    for (int[] off : offsets) {
+                        int ni = i + off[0], nj = j + off[1];
+                        if (ni >= 0 && ni < filas && nj >= 0 && nj < cols && tablero[ni][nj] == 'M') count++;
+                    }
+                    resultado[i][j] = String.valueOf(count);
+                }
+            }
+        }
+        return resultado;
+    }
+
+    public static void main(String[] args) {
+        char[][] tablero = {{'M','.','.'},{'.','.','.'},{'.','.','M'}};
+        String[][] res = buscarMinas(tablero);
+        for (String[] row : res) System.out.println(java.util.Arrays.toString(row));
+        // [M, 1, 1]
+        // [1, 2, 1]
+        // [1, 1, M]
+    }
+}
+```
+
+```typescript
+function buscarMinas(tablero: string[][]): string[][] {
+  const filas = tablero.length;
+  const cols = tablero[0].length;
+  const resultado = tablero.map(f => [...f]);
+  const offsets = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]];
+
+  for (let i = 0; i < filas; i++) {
+    for (let j = 0; j < cols; j++) {
+      if (tablero[i][j] === '.') {
+        let count = 0;
+        for (const [di, dj] of offsets) {
+          const ni = i + di, nj = j + dj;
+          if (ni >= 0 && ni < filas && nj >= 0 && nj < cols && tablero[ni][nj] === 'M') count++;
+        }
+        resultado[i][j] = String(count);
+      }
+    }
+  }
+  return resultado;
+}
+console.log(buscarMinas([['M','.','.'],['.','.','.'],['.','.','M']]));
+// [['M','1','1'],['1','2','1'],['1','1','M']]
+console.log(buscarMinas([['.','M'],['M','.']]));
+// [['2','M'],['M','2']]
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Juego de Adivinar Número", href: "/retos/reto-juego-de-adivinar-numero/" },
+    { title: "Reto Intermedio 15: Juego de Palabras (Anagramas)", href: "/retos/reto-intermedio-15-juego-de-palabras-anagramas/" },
+  ]} />

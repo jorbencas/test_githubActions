@@ -1,0 +1,164 @@
+---
+draft: false
+title: "🏆 RETO: El Reclutador de la Banda"
+description: "Filtra y selecciona miembros de una banda según criterios: instrumento, nivel de experiencia y disponibilidad para tocar en un evento."
+pubDate: "2026-06-28"
+tags: ["retos", "iniciación", "multilenguaje"]
+slug: "reto-el-reclutador-de-la-banda"
+image: "img/guia_el_reclutador_de_la_banda/guia_el_reclutador_de_la_banda_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Iniciación"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: El Reclutador de la Banda
+
+### 📝 Descripción del Reto
+Dada una lista de músicos con sus atributos (nombre, instrumento, nivel de experiencia y disponibilidad), filtra y retorna solo aquellos que cumplan con los criterios del evento: instrumento requerido, nivel mínimo de experiencia y que estén disponibles. Ordena el resultado por experiencia (mayor primero).
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Filter + Sort | Filtrar con condiciones múltiples, luego ordenar | O(n log n) |
+| Two-pass | Primera pasada filtra, segunda pasada ordena | O(n log n) |
+| Divide and conquer | Separar por instrumento, luego filtrar nivel | O(n log n) |
+
+### 🌍 Dónde se usa
+- **Recruiting**: filtrar candidatos por skills y disponibilidad
+- **Eventos**: seleccionar proveedores que cumplan requisitos
+- **Gaming**: componer equipos según stats de personajes
+- **RRHH**: matching de empleados a proyectos
+
+<Challenge 
+  nivel="Iniciación" 
+  mision="Filtra músicos por instrumento, nivel de experiencia y disponibilidad." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| Músicos: `[{name:"Ana",inst:"guitarra",exp:5,disp:true},{name:"Luis",inst:"bajo",exp:3,disp:true}]`, Crit: guitarra, min_exp:2 | `[{name:"Ana",...}]` |
+| Músicos: `[{name:"Ana",inst:"guitarra",exp:5,disp:false}]`, Crit: guitarra, min_exp:2 | `[]` (no disponible) |
+| Músicos: `[]`, Crit: guitarra, min_exp:2 | `[]` |
+| Músicos: `[{name:"A",inst:"guitarra",exp:1,disp:true},{name:"B",inst:"guitarra",exp:3,disp:true}]`, Crit: guitarra, min_exp:2 | `[{name:"B",...}]` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Recorrer la lista y aplicar tres filtros: instrumento igual al requerido, experiencia >= mínimo, y disponibilidad == true. Luego ordenar por experiencia descendente. **Caso límite:** lista vacía, nadie cumple criterios.
+
+### ⚙️ Paso 2: Implementación
+1. Filtrar por instrumento, nivel y disponibilidad.
+2. Ordenar por experiencia descendente.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n log n) — dominada por la ordenación.
+**Complejidad espacial:** O(n) — para la lista filtrada.
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def reclutar(musicos, instrumento, nivel_min):
+    filtrados = [m for m in musicos
+                 if m["inst"] == instrumento
+                 and m["exp"] >= nivel_min
+                 and m["disp"]]
+    return sorted(filtrados, key=lambda m: m["exp"], reverse=True)
+
+banda = [
+    {"name": "Ana", "inst": "guitarra", "exp": 5, "disp": True},
+    {"name": "Luis", "inst": "bajo", "exp": 3, "disp": True},
+    {"name": "Marta", "inst": "guitarra", "exp": 2, "disp": True},
+    {"name": "Pedro", "inst": "guitarra", "exp": 7, "disp": False},
+]
+print(reclutar(banda, "guitarra", 2))
+# [{'name': 'Ana', ...}, {'name': 'Marta', ...}]
+```
+
+```javascript
+function reclutar(musicos, instrumento, nivelMin) {
+  return musicos
+    .filter(m => m.inst === instrumento && m.exp >= nivelMin && m.disp)
+    .sort((a, b) => b.exp - a.exp);
+}
+const banda = [
+  {name:"Ana",inst:"guitarra",exp:5,disp:true},
+  {name:"Luis",inst:"bajo",exp:3,disp:true},
+  {name:"Marta",inst:"guitarra",exp:2,disp:true},
+  {name:"Pedro",inst:"guitarra",exp:7,disp:false},
+];
+console.log(reclutar(banda, "guitarra", 2));
+// [{name:'Ana',...}, {name:'Marta',...}]
+```
+
+```java
+import java.util.*;
+import java.util.stream.*;
+
+public class ReclutadorBanda {
+    public static List<Map<String,Object>> reclutar(
+            List<Map<String,Object>> musicos, String instrumento, int nivelMin) {
+        return musicos.stream()
+            .filter(m -> m.get("inst").equals(instrumento)
+                      && (int)m.get("exp") >= nivelMin
+                      && (boolean)m.get("disp"))
+            .sorted((a, b) -> (int)b.get("exp") - (int)a.get("exp"))
+            .collect(Collectors.toList());
+    }
+
+    public static void main(String[] args) {
+        var banda = List.of(
+            Map.of("name","Ana","inst","guitarra","exp",5,"disp",true),
+            Map.of("name","Luis","inst","bajo","exp",3,"disp",true),
+            Map.of("name","Marta","inst","guitarra","exp",2,"disp",true)
+        );
+        System.out.println(reclutar(banda, "guitarra", 2));
+    }
+}
+```
+
+```typescript
+interface Musico { name: string; inst: string; exp: number; disp: boolean; }
+
+function reclutar(musicos: Musico[], instrumento: string, nivelMin: number): Musico[] {
+  return musicos
+    .filter(m => m.inst === instrumento && m.exp >= nivelMin && m.disp)
+    .sort((a, b) => b.exp - a.exp);
+}
+const banda: Musico[] = [
+  {name:"Ana",inst:"guitarra",exp:5,disp:true},
+  {name:"Luis",inst:"bajo",exp:3,disp:true},
+  {name:"Marta",inst:"guitarra",exp:2,disp:true},
+  {name:"Pedro",inst:"guitarra",exp:7,disp:false},
+];
+console.log(reclutar(banda, "guitarra", 2));
+// [{name:'Ana',...}, {name:'Marta',...}]
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Generador de Nicknames", href: "/retos/reto-generador-de-nicknames/" },
+    { title: "Lista de Compras", href: "/retos/reto-lista-de-compras/" },
+  ]} />

@@ -1,0 +1,286 @@
+---
+draft: false
+title: "🏆 RETO: Gestión de Inventario (OOP)"
+description: "Implementa un sistema de inventario con POO: clase Producto con stock, y clase Inventario con operaciones de agregar, vender, buscar y reportar."
+pubDate: "2026-06-28"
+tags: ["retos", "intermedio", "multilenguaje"]
+slug: "reto-gestion-de-inventario-oop"
+image: "img/guia_gestion_de_inventario_oop/guia_gestion_de_inventario_oop_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Intermedio"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Gestión de Inventario (OOP)
+
+### 📝 Descripción del Reto
+Implementa un sistema de gestión de inventario usando POO. Necesitas una clase `Producto` (id, nombre, precio, cantidad) y una clase `Inventario` que permita: agregar productos, vender (reducir stock), buscar por nombre, obtener el valor total del inventario y listar productos con stock bajo.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| HashMap + Clases | Map de productos por ID, clases con métodos | O(1) por operación |
+| Lista ordenada | Array ordenado, búsqueda binaria | O(log n) búsqueda |
+| Árbol BST | Árbol binario de búsqueda por nombre | O(log n) búsqueda |
+
+### 🌍 Dónde se usa
+- **E-commerce**: control de stock de tiendas online
+- **Logística**: gestión de almacenes y centros de distribución
+- **Retail**: sistemas POS y control de mercancía
+- **Industria**: inventario de materias primas y componentes
+
+<Challenge 
+  nivel="Intermedio" 
+  mision="Implementa un sistema de inventario con clases Producto e Inventario." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `inventario.agregar("A1", "Laptop", 999.99, 10)` | `True` |
+| `inventario.vender("A1", 3)` | `True` (queda 7) |
+| `inventario.vender("A1", 10)` | `False` (stock insuficiente) |
+| `inventario.buscar("Laptop")` | `{id:"A1", nombre:"Laptop", ...}` |
+| `inventario.valor_total()` | `6999.93` (7 × 999.99) |
+| `inventario.stock_bajo(5)` | `[{id:"A1", cantidad:7}]` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Crear dos clases. `Producto` almacena datos y validaciones. `Inventario` gestiona una colección de productos con operaciones CRUD básicas. **Caso límite:** vender más de lo disponible, producto duplicado, buscar inexistente.
+
+### ⚙️ Paso 2: Implementación
+1. `Producto`: constructor con validación de precio/cantidad positivos.
+2. `Inventario`: HashMap por ID, métodos agregar/vender/buscar/valor_total/stock_bajo.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(1) para agregar/vender/buscar (HashMap), O(n) para valor_total y stock_bajo.
+**Complejidad espacial:** O(n) — para almacenar los productos.
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+class Producto:
+    def __init__(self, id, nombre, precio, cantidad):
+        self.id = id
+        self.nombre = nombre
+        self.precio = precio
+        self.cantidad = cantidad
+
+    def __repr__(self):
+        return f"Producto({self.id}, {self.nombre}, {self.precio}, {self.cantidad})"
+
+class Inventario:
+    def __init__(self):
+        self.productos = {}
+
+    def agregar(self, id, nombre, precio, cantidad):
+        if id in self.productos:
+            return False
+        self.productos[id] = Producto(id, nombre, precio, cantidad)
+        return True
+
+    def vender(self, id, cantidad):
+        if id not in self.productos or self.productos[id].cantidad < cantidad:
+            return False
+        self.productos[id].cantidad -= cantidad
+        return True
+
+    def buscar(self, nombre):
+        for p in self.productos.values():
+            if p.nombre == nombre:
+                return p
+        return None
+
+    def valor_total(self):
+        return sum(p.precio * p.cantidad for p in self.productos.values())
+
+    def stock_bajo(self, umbral):
+        return [p for p in self.productos.values() if p.cantidad < umbral]
+
+inv = Inventario()
+inv.agregar("A1", "Laptop", 999.99, 10)
+print(inv.vender("A1", 3))       # True
+print(inv.vender("A1", 10))      # False
+print(inv.buscar("Laptop"))       # Producto(A1, Laptop, 999.99, 7)
+print(inv.valor_total())          # 6999.93
+```
+
+```javascript
+class Producto {
+  constructor(id, nombre, precio, cantidad) {
+    this.id = id;
+    this.nombre = nombre;
+    this.precio = precio;
+    this.cantidad = cantidad;
+  }
+}
+
+class Inventario {
+  constructor() { this.productos = new Map(); }
+
+  agregar(id, nombre, precio, cantidad) {
+    if (this.productos.has(id)) return false;
+    this.productos.set(id, new Producto(id, nombre, precio, cantidad));
+    return true;
+  }
+
+  vender(id, cantidad) {
+    const p = this.productos.get(id);
+    if (!p || p.cantidad < cantidad) return false;
+    p.cantidad -= cantidad;
+    return true;
+  }
+
+  buscar(nombre) {
+    for (const p of this.productos.values()) {
+      if (p.nombre === nombre) return p;
+    }
+    return null;
+  }
+
+  valorTotal() {
+    let total = 0;
+    for (const p of this.productos.values()) total += p.precio * p.cantidad;
+    return total;
+  }
+
+  stockBajo(umbral) {
+    return [...this.productos.values()].filter(p => p.cantidad < umbral);
+  }
+}
+
+const inv = new Inventario();
+inv.agregar("A1", "Laptop", 999.99, 10);
+console.log(inv.vender("A1", 3));       // true
+console.log(inv.vender("A1", 10));      // false
+console.log(inv.buscar("Laptop"));      // Producto {id:"A1",...}
+console.log(inv.valorTotal());          // 6999.93
+```
+
+```java
+import java.util.*;
+
+class Producto {
+    String id, nombre;
+    double precio;
+    int cantidad;
+    Producto(String id, String nombre, double precio, int cantidad) {
+        this.id = id; this.nombre = nombre; this.precio = precio; this.cantidad = cantidad;
+    }
+    public String toString() { return "Producto(" + id + ", " + nombre + ", " + precio + ", " + cantidad + ")"; }
+}
+
+class Inventario {
+    Map<String, Producto> productos = new HashMap<>();
+    boolean agregar(String id, String nombre, double precio, int cantidad) {
+        if (productos.containsKey(id)) return false;
+        productos.put(id, new Producto(id, nombre, precio, cantidad));
+        return true;
+    }
+    boolean vender(String id, int cantidad) {
+        Producto p = productos.get(id);
+        if (p == null || p.cantidad < cantidad) return false;
+        p.cantidad -= cantidad;
+        return true;
+    }
+    Producto buscar(String nombre) {
+        for (Producto p : productos.values()) if (p.nombre.equals(nombre)) return p;
+        return null;
+    }
+    double valorTotal() {
+        return productos.values().stream().mapToDouble(p -> p.precio * p.cantidad).sum();
+    }
+}
+
+public class GestionInventario {
+    public static void main(String[] args) {
+        Inventario inv = new Inventario();
+        inv.agregar("A1", "Laptop", 999.99, 10);
+        System.out.println(inv.vender("A1", 3));       // true
+        System.out.println(inv.vender("A1", 10));      // false
+        System.out.println(inv.buscar("Laptop"));       // Producto(A1, Laptop, ...)
+        System.out.println(inv.valorTotal());           // 6999.93
+    }
+}
+```
+
+```typescript
+class Producto {
+  constructor(
+    public id: string,
+    public nombre: string,
+    public precio: number,
+    public cantidad: number
+  ) {}
+}
+
+class Inventario {
+  private productos = new Map<string, Producto>();
+
+  agregar(id: string, nombre: string, precio: number, cantidad: number): boolean {
+    if (this.productos.has(id)) return false;
+    this.productos.set(id, new Producto(id, nombre, precio, cantidad));
+    return true;
+  }
+
+  vender(id: string, cantidad: number): boolean {
+    const p = this.productos.get(id);
+    if (!p || p.cantidad < cantidad) return false;
+    p.cantidad -= cantidad;
+    return true;
+  }
+
+  buscar(nombre: string): Producto | null {
+    for (const p of this.productos.values()) {
+      if (p.nombre === nombre) return p;
+    }
+    return null;
+  }
+
+  valorTotal(): number {
+    let total = 0;
+    for (const p of this.productos.values()) total += p.precio * p.cantidad;
+    return total;
+  }
+
+  stockBajo(umbral: number): Producto[] {
+    return [...this.productos.values()].filter(p => p.cantidad < umbral);
+  }
+}
+
+const inv = new Inventario();
+inv.agregar("A1", "Laptop", 999.99, 10);
+console.log(inv.vender("A1", 3));       // true
+console.log(inv.vender("A1", 10));      // false
+console.log(inv.buscar("Laptop"));      // Producto {id:"A1",...}
+console.log(inv.valorTotal());          // 6999.93
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Lista de Compras", href: "/retos/reto-lista-de-compras/" },
+    { title: "Patrón Singleton (Logger)", href: "/retos/reto-patron-singleton-logger/" },
+  ]} />

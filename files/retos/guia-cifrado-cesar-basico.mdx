@@ -1,0 +1,163 @@
+---
+draft: false
+title: "🏆 RETO: Cifrado César Básico"
+description: "Implementa el cifrado César: desplaza cada letra del alfabeto N posiciones. Ejercicio clásico de criptografía que practica aritmética modular y manipulación de caracteres."
+pubDate: "2026-06-28"
+tags: ["retos", "intermedio", "multilenguaje"]
+slug: "reto-cifrado-cesar-basico"
+image: "img/guia_cifrado_cesar_basico/guia_cifrado_cesar_basico_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Intermedio"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Cifrado César Básico
+
+### 📝 Descripción del Reto
+Implementa el cifrado César: dado un texto y un desplazamiento N, desplaza cada letra N posiciones en el alfabeto (circular). 'A' con N=3 → 'D'. 'Z' con N=1 → 'A'. Las letras se mantienen en su caso (mayúsculas/minúsculas). Los no-alfanuméricos no se modifican.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Aritmética modular | `(ord(c) - base + n) % 26 + base` | O(n) |
+| Tabla de mapeo | Crear diccionario de desplazamiento previamente | O(n) |
+| Dos alfabetos | Indexar en alfabeto original, mapear al desplazado | O(n) |
+
+### 🌍 Dónde se usa
+- **Criptografía histórica**: el cifrado más antiguo conocido (Julio César)
+- **Educación**: introducir conceptos de seguridad de la información
+- **Juegos**: puzzles y escape rooms con pistas codificadas
+- **Ciberseguridad**: base para entender cifrados más complejos
+
+<Challenge 
+  nivel="Intermedio" 
+  mision="Implementa el cifrado César desplazando cada letra N posiciones." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `'ABC', 3` | `'DEF'` |
+| `'xyz', 3` | `'abc'` |
+| `'Hello, World!', 5` | `'Mjqqt, Btwqi!'` |
+| `'ABC', 26` | `'ABC'` |
+| `'abc', 0` | `'abc'` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Cada letra se desplaza N posiciones circularmente dentro de su rango (a-z o A-Z). **Ejemplo:** 'H' (72) + 5 = 'M' (77). 'z' (122) + 1 → 'a' (97) por circularidad. **Fórmula:** `nueva_pos = (posición_actual - base + desplazamiento) % 26 + base`.
+
+### ⚙️ Paso 2: Implementación
+Para cada carácter: si es letra, calcular nueva posición con módulo 26. Si no es letra, dejarlo igual.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n)
+**Complejidad espacial:** O(n)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def cifrado_cesar(texto, n):
+    resultado = []
+    for c in texto:
+        if c.isalpha():
+            base = ord('A') if c.isupper() else ord('a')
+            nueva_pos = (ord(c) - base + n) % 26
+            resultado.append(chr(base + nueva_pos))
+        else:
+            resultado.append(c)
+    return ''.join(resultado)
+
+print(cifrado_cesar('ABC', 3))             # DEF
+print(cifrado_cesar('xyz', 3))             # abc
+print(cifrado_cesar('Hello, World!', 5))   # Mjqqt, Btwqi!
+print(cifrado_cesar('ABC', 26))            # ABC
+print(cifrado_cesar('abc', 0))             # abc
+```
+
+```javascript
+function cifradoCesar(texto, n) {
+  return texto.split('').map(c => {
+    if (/[a-zA-Z]/.test(c)) {
+      const base = c === c.toUpperCase() ? 65 : 97;
+      return String.fromCharCode(((c.charCodeAt(0) - base + n) % 26) + base);
+    }
+    return c;
+  }).join('');
+}
+console.log(cifradoCesar('ABC', 3));           // DEF
+console.log(cifradoCesar('xyz', 3));           // abc
+console.log(cifradoCesar('Hello, World!', 5)); // Mjqqt, Btwqi!
+console.log(cifradoCesar('ABC', 26));          // ABC
+console.log(cifradoCesar('abc', 0));           // abc
+```
+
+```java
+public class CifradoCesar {
+    public static String cifradoCesar(String texto, int n) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : texto.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char base = Character.isUpperCase(c) ? 'A' : 'a';
+                char nuevo = (char) ((c - base + n) % 26 + base);
+                sb.append(nuevo);
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+    public static void main(String[] args) {
+        System.out.println(cifradoCesar("ABC", 3));             // DEF
+        System.out.println(cifradoCesar("xyz", 3));             // abc
+        System.out.println(cifradoCesar("Hello, World!", 5));   // Mjqqt, Btwqi!
+        System.out.println(cifradoCesar("ABC", 26));            // ABC
+        System.out.println(cifradoCesar("abc", 0));             // abc
+    }
+}
+```
+
+```typescript
+function cifradoCesar(texto: string, n: number): string {
+  return texto.split('').map(c => {
+    if (/[a-zA-Z]/.test(c)) {
+      const base = c === c.toUpperCase() ? 65 : 97;
+      return String.fromCharCode(((c.charCodeAt(0) - base + n) % 26) + base);
+    }
+    return c;
+  }).join('');
+}
+console.log(cifradoCesar('ABC', 3));           // DEF
+console.log(cifradoCesar('xyz', 3));           // abc
+console.log(cifradoCesar('Hello, World!', 5)); // Mjqqt, Btwqi!
+console.log(cifradoCesar('ABC', 26));          // ABC
+console.log(cifradoCesar('abc', 0));           // abc
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "JWT Generator Manual", href: "/retos/reto-jwt-generator-manual/" },
+    { title: "Filtro de Spam por Keywords", href: "/retos/reto-filtro-de-spam-por-keywords/" },
+  ]} />

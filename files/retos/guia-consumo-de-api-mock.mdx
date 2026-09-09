@@ -1,0 +1,181 @@
+---
+draft: false
+title: "🏆 RETO: Consumo de API Mock"
+description: "Simula el consumo de una API REST usando datos mock. Practica manejo de objetos JSON, funciones asíncronas y estructuras de datos anidadas."
+pubDate: "2026-06-28"
+tags: ["retos", "intermedio", "multilenguaje"]
+slug: "reto-consumo-de-api-mock"
+image: "img/guia_consumo_de_api_mock/guia_consumo_de_api_mock_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Intermedio"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Consumo de API Mock
+
+### 📝 Descripción del Reto
+Simula el consumo de una API REST de usuarios usando datos mock. Implementa operaciones GET (obtener todos), GET por ID, y filtrado por campos. Practica manejo de objetos JSON, estructuras de datos anidadas y diseño de interfaces de API.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Array de objetos | Buscar con filter/find en array mock | O(n) por consulta |
+| Diccionario por ID | Indexar por ID para acceso O(1) | O(1) por ID, O(n) por filtro |
+| Simulación async | Usar Promises/async para simular latencia | O(n) |
+
+### 🌍 Dónde se usa
+- **Frontend**: consumo de APIs durante desarrollo antes de tener backend
+- **Testing**: mockear respuestas de API en pruebas unitarias
+- **Prototipado**: crear MVP sin backend real
+- **Demostraciones**: mostrar funcionalidad con datos ficticios
+
+<Challenge 
+  nivel="Intermedio" 
+  mision="Simula consumo de API REST con operaciones GET y filtrado sobre datos mock." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Operación | Entrada | Salida esperada |
+|---------|---------|-----------------|
+| GET all | - | `[{id:1, nombre:'Ana'}, ...]` |
+| GET by ID | `1` | `{id:1, nombre:'Ana'}` |
+| GET by ID | `99` | `null` |
+| Filter | `{'ciudad':'Madrid'}` | `[{id:1, ...}, {id:3, ...}]` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Crear un array de objetos mock con campos id, nombre, email, ciudad. Implementar métodos: getAll(), getById(id), filterBy(field, value). **Edge cases:** ID no existe (null), filtro sin resultados (array vacío).
+
+### ⚙️ Paso 2: Implementación
+Crear clase/conjunto de funciones que encapsulen el array mock. Usar find, filter para consultas.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n) por filtro, O(1) por ID (si indexado)
+**Complejidad espacial:** O(n)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+class APIMock:
+    def __init__(self):
+        self.usuarios = [
+            {"id": 1, "nombre": "Ana", "ciudad": "Madrid"},
+            {"id": 2, "nombre": "Luis", "ciudad": "Barcelona"},
+            {"id": 3, "nombre": "María", "ciudad": "Madrid"},
+        ]
+    
+    def get_all(self):
+        return self.usuarios
+    
+    def get_by_id(self, id):
+        return next((u for u in self.usuarios if u["id"] == id), None)
+    
+    def filter_by(self, campo, valor):
+        return [u for u in self.usuarios if u.get(campo) == valor]
+
+api = APIMock()
+print(api.get_all())
+print(api.get_by_id(1))              # {'id': 1, 'nombre': 'Ana', 'ciudad': 'Madrid'}
+print(api.get_by_id(99))             # None
+print(api.filter_by("ciudad", "Madrid"))  # Ana, María
+```
+
+```javascript
+class APIMock {
+  constructor() {
+    this.usuarios = [
+      { id: 1, nombre: "Ana", ciudad: "Madrid" },
+      { id: 2, nombre: "Luis", ciudad: "Barcelona" },
+      { id: 3, nombre: "María", ciudad: "Madrid" },
+    ];
+  }
+  getAll() { return this.usuarios; }
+  getById(id) { return this.usuarios.find(u => u.id === id) || null; }
+  filterBy(campo, valor) { return this.usuarios.filter(u => u[campo] === valor); }
+}
+
+const api = new APIMock();
+console.log(api.getAll());
+console.log(api.getById(1));           // { id: 1, nombre: 'Ana', ciudad: 'Madrid' }
+console.log(api.getById(99));          // null
+console.log(api.filterBy("ciudad", "Madrid")); // Ana, María
+```
+
+```java
+import java.util.*;
+import java.util.stream.*;
+
+public class APIMock {
+    private List<Map<String, Object>> usuarios = List.of(
+        Map.of("id", 1, "nombre", "Ana", "ciudad", "Madrid"),
+        Map.of("id", 2, "nombre", "Luis", "ciudad", "Barcelona"),
+        Map.of("id", 3, "nombre", "María", "ciudad", "Madrid")
+    );
+    
+    public List<Map<String, Object>> getAll() { return usuarios; }
+    
+    public Map<String, Object> getById(int id) {
+        return usuarios.stream().filter(u -> (int)u.get("id") == id).findFirst().orElse(null);
+    }
+    
+    public List<Map<String, Object>> filterBy(String campo, Object valor) {
+        return usuarios.stream().filter(u -> u.get(campo).equals(valor)).collect(Collectors.toList());
+    }
+    
+    public static void main(String[] args) {
+        APIMock api = new APIMock();
+        System.out.println(api.getAll());
+        System.out.println(api.getById(1));
+        System.out.println(api.filterBy("ciudad", "Madrid"));
+    }
+}
+```
+
+```typescript
+interface Usuario { id: number; nombre: string; ciudad: string; }
+
+class APIMock {
+  private usuarios: Usuario[] = [
+    { id: 1, nombre: "Ana", ciudad: "Madrid" },
+    { id: 2, nombre: "Luis", ciudad: "Barcelona" },
+    { id: 3, nombre: "María", ciudad: "Madrid" },
+  ];
+  getAll(): Usuario[] { return this.usuarios; }
+  getById(id: number): Usuario | null { return this.usuarios.find(u => u.id === id) || null; }
+  filterBy(campo: keyof Usuario, valor: string): Usuario[] { return this.usuarios.filter(u => u[campo] === valor); }
+}
+
+const api = new APIMock();
+console.log(api.getAll());
+console.log(api.getById(1));
+console.log(api.filterBy("ciudad", "Madrid"));
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Manejador de Contexto (Files)", href: "/retos/reto-manejador-de-contexto-files/" },
+    { title: "Reto Intermedio 12: Procesador de JSON", href: "/retos/reto-intermedio-12-procesador-de-json/" },
+  ]} />

@@ -1,0 +1,177 @@
+---
+draft: false
+title: "🏆 RETO: Compresor de Cadenas (RLE)"
+description: "Implementa la compresión Run-Length Encoding: reemplaza secuencias de caracteres repetidos por el carácter seguido del conteo. 'AABBBCC' → 'A2B3C2'. Algoritmo clásico de compresión de datos."
+pubDate: "2026-06-28"
+tags: ["retos", "avanzado", "multilenguaje"]
+slug: "reto-compresor-de-cadenas-rle"
+image: "img/guia_compresor_de_cadenas_rle/guia_compresor_de_cadenas_rle_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Avanzado"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Compresor de Cadenas (RLE)
+
+### 📝 Descripción del Reto
+Implementa Run-Length Encoding (RLE): comprime una cadena reemplazando secuencias de caracteres repetidos por el carácter seguido de su conteo. 'AABBBCC' → 'A2B3C2'. Si un carácter aparece una vez, solo se escribe sin número. Algoritmo clásico de compresión usado en imágenes BMP y fax.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Bucle con contador | Recorrer, contar repeticiones consecutivas | O(n) |
+| GroupBy funcional | Agrupar caracteres consecutivos iguales | O(n) |
+| Dos punteros | Uno lee, otro cuenta repeticiones | O(n) |
+
+### 🌍 Dónde se usa
+- **Compresión de imágenes**: formato BMP usa RLE internamente
+- **Transmisión de datos**: comprimir datos antes de enviar por red
+- **Almacenamiento**: reducir tamaño de archivos con datos repetitivos
+- **Bioinformática**: comprimir secuencias de ADN repetitivas
+
+<Challenge 
+  nivel="Avanzado" 
+  mision="Implementa Run-Length Encoding para comprimir cadenas con caracteres repetidos." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `'AABBBCC'` | `'A2B3C2'` |
+| `'ABC'` | `'A1B1C1'` o `'ABC'` |
+| `'AAaaBB'` | `'A2a2B2'` |
+| `''` | `''` |
+| `'A'` | `'A'` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Recorrer la cadena contando caracteres consecutivos iguales. **Ejemplo:** 'AABBBCC' → A:2, B:3, C:2 → "A2B3C2". **Edge cases:** cadena vacía, un solo carácter, sin repeticiones.
+
+### ⚙️ Paso 2: Implementación
+Bucle que cuenta repeticiones del carácter actual. Cuando cambia, guardar carácter + conteo.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n)
+**Complejidad espacial:** O(n)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def rle_comprimir(s):
+    if not s:
+        return ''
+    resultado = []
+    count = 1
+    for i in range(1, len(s)):
+        if s[i] == s[i-1]:
+            count += 1
+        else:
+            resultado.append(s[i-1] + str(count))
+            count = 1
+    resultado.append(s[-1] + str(count))
+    return ''.join(resultado)
+
+print(rle_comprimir('AABBBCC'))  # A2B3C2
+print(rle_comprimir('ABC'))      # A1B1C1
+print(rle_comprimir('AAaaBB'))   # A2a2B2
+print(rle_comprimir(''))         # 
+print(rle_comprimir('A'))        # A1
+```
+
+```javascript
+function rleComprimir(s) {
+  if (!s) return '';
+  let resultado = '';
+  let count = 1;
+  for (let i = 1; i <= s.length; i++) {
+    if (i < s.length && s[i] === s[i-1]) {
+      count++;
+    } else {
+      resultado += s[i-1] + count;
+      count = 1;
+    }
+  }
+  return resultado;
+}
+console.log(rleComprimir('AABBBCC')); // A2B3C2
+console.log(rleComprimir('ABC'));     // A1B1C1
+console.log(rleComprimir('AAaaBB'));  // A2a2B2
+console.log(rleComprimir(''));        // 
+console.log(rleComprimir('A'));       // A1
+```
+
+```java
+public class RLE {
+    public static String rleComprimir(String s) {
+        if (s.isEmpty()) return '';
+        StringBuilder sb = new StringBuilder();
+        int count = 1;
+        for (int i = 1; i <= s.length(); i++) {
+            if (i < s.length() && s.charAt(i) == s.charAt(i-1)) {
+                count++;
+            } else {
+                sb.append(s.charAt(i-1)).append(count);
+                count = 1;
+            }
+        }
+        return sb.toString();
+    }
+    public static void main(String[] args) {
+        System.out.println(rleComprimir("AABBBCC")); // A2B3C2
+        System.out.println(rleComprimir("ABC"));     // A1B1C1
+        System.out.println(rleComprimir("AAaaBB"));  // A2a2B2
+        System.out.println(rleComprimir(""));        // 
+        System.out.println(rleComprimir("A"));       // A1
+    }
+}
+```
+
+```typescript
+function rleComprimir(s: string): string {
+  if (!s) return '';
+  let resultado = '';
+  let count = 1;
+  for (let i = 1; i <= s.length; i++) {
+    if (i < s.length && s[i] === s[i-1]) {
+      count++;
+    } else {
+      resultado += s[i-1] + count;
+      count = 1;
+    }
+  }
+  return resultado;
+}
+console.log(rleComprimir('AABBBCC')); // A2B3C2
+console.log(rleComprimir('ABC'));     // A1B1C1
+console.log(rleComprimir('AAaaBB'));  // A2a2B2
+console.log(rleComprimir(''));        // 
+console.log(rleComprimir('A'));       // A1
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Avanzado 19: Compresión Huffman", href: "/retos/reto-avanzado-19-compresion-huffman/" },
+    { title: "Reto Avanzado 20: Diff de Archivos (Levenshtein)", href: "/retos/reto-avanzado-20-diff-de-archivos-levenshtein/" },
+  ]} />

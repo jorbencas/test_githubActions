@@ -1,0 +1,133 @@
+---
+draft: false
+title: "🏆 RETO: Reto Inicial 15: Año Bisiesto"
+description: "Determina si un año es bisiesto según el calendario gregoriano: divisible entre 4, excepto si es divisible entre 100, a menos que sea divisible entre 400. Ejercicio clásico de lógica condicional compuesta."
+pubDate: "2026-06-28"
+tags: ["retos", "iniciación", "multilenguaje"]
+slug: "reto-inicial-15-ano-bisiesto"
+image: "img/guia_plus_reto_inicial_15_ano_bisiesto/guia_plus_reto_inicial_15_ano_bisiesto_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Iniciación"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Reto Inicial 15: Año Bisiesto
+
+### 📝 Descripción del Reto
+Determina si un año es bisiesto según las reglas del calendario gregoriano: un año es bisiesto si es divisible entre 4, excepto los años de siglo (divisibles entre 100) que no son bisiestos, a menos que sean divisibles entre 400. Ejercicio perfecto para practicar operadores lógicos AND, OR y precedencia.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Condición compuesta | `(y%4==0 and y%100!=0) or (y%400==0)` | O(1) |
+| Negaciones encadenadas | `y%4!=0 ? false : (y%100!=0 ? true : y%400==0)` | O(1) |
+| Librería estándar | `calendar.isleap(y)` en Python | O(1) |
+
+### 🌍 Dónde se usa
+- **Sistemas de calendario**: planificación de eventos y recordatorios anuales
+- **Cálculo de días entre fechas**: contratos, suscripciones, intereses
+- **Base de datos**: campos de tipo fecha que necesitan validación
+- **Hojas de cálculo**: fórmulas deExcel/Sheets para planificación
+
+<Challenge 
+  nivel="Iniciación" 
+  mision="Determina si un año es bisiesto según las reglas del calendario gregoriano." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `2024` | `true` |
+| `2023` | `false` |
+| `1900` | `false` |
+| `2000` | `true` |
+| `2400` | `true` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Un año es bisiesto si: (divisible entre 4 Y NO entre 100) O (divisible entre 400). **Ejemplo:** 2024 → sí (divisible entre 4, no entre 100). 1900 → no (divisible entre 100, no entre 400). 2000 → sí (divisible entre 400).
+
+### ⚙️ Paso 2: Implementación
+Evaluar la condición compuesta: `(año % 4 == 0 and año % 100 != 0) or (año % 400 == 0)`.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(1)
+**Complejidad espacial:** O(1)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def es_bisiesto(año):
+    return (año % 4 == 0 and año % 100 != 0) or (año % 400 == 0)
+
+print(es_bisiesto(2024))  # True
+print(es_bisiesto(2023))  # False
+print(es_bisiesto(1900))  # False
+print(es_bisiesto(2000))  # True
+print(es_bisiesto(2400))  # True
+```
+
+```javascript
+function esBisiesto(año) {
+  return (año % 4 === 0 && año % 100 !== 0) || (año % 400 === 0);
+}
+console.log(esBisiesto(2024)); // true
+console.log(esBisiesto(2023)); // false
+console.log(esBisiesto(1900)); // false
+console.log(esBisiesto(2000)); // true
+console.log(esBisiesto(2400)); // true
+```
+
+```java
+public class AnoBisiesto {
+    public static boolean esBisiesto(int año) {
+        return (año % 4 == 0 && año % 100 != 0) || (año % 400 == 0);
+    }
+    public static void main(String[] args) {
+        System.out.println(esBisiesto(2024)); // true
+        System.out.println(esBisiesto(2023)); // false
+        System.out.println(esBisiesto(1900)); // false
+        System.out.println(esBisiesto(2000)); // true
+        System.out.println(esBisiesto(2400)); // true
+    }
+}
+```
+
+```typescript
+function esBisiesto(año: number): boolean {
+  return (año % 4 === 0 && año % 100 !== 0) || (año % 400 === 0);
+}
+console.log(esBisiesto(2024)); // true
+console.log(esBisiesto(2023)); // false
+console.log(esBisiesto(1900)); // false
+console.log(esBisiesto(2000)); // true
+console.log(esBisiesto(2400)); // true
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Inicial 06: Par o Impar", href: "/retos/reto-inicial-06-par-o-impar/" },
+    { title: "Reto Inicial 01: Suma de Dígitos", href: "/retos/reto-inicial-01-suma-de-digitos/" },
+  ]} />

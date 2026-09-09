@@ -1,0 +1,212 @@
+---
+draft: false
+title: "🏆 RETO: Optimización de Consultas"
+description: "Implementa un optimizador de consultas SQL simplificadas: reescribe consultas con filtros redundantes, orden innecesario o subconsultas optimizables."
+pubDate: "2026-06-28"
+tags: ["retos", "avanzado", "multilenguaje"]
+slug: "reto-optimizacion-de-consultas"
+image: "img/guia_optimizacion_de_consultas/guia_optimizacion_de_consultas_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Avanzado"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Optimización de Consultas
+
+### 📝 Descripción del Reto
+Implementa un optimizador de consultas SQL simplificadas. Dada una consulta representada como un objeto con `select`, `from`, `where`, `order_by` y `limit`, aplica reglas de optimización: eliminar columnas no usadas en select, eliminar ORDER BY sin necesidad, fusionar filtros WHERE, y detectar subconsultas que pueden ser aplanadas.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Reglas de reescritura | Aplicar reglas DAG (Directed Acyclic Graph) | O(n) por regla |
+| Plan de ejecución | Construir y optimizar un plan de ejecución | O(n log n) |
+| Cost-based optimizer | Evaluar costo de cada plan candidato | O(2^n) peor caso |
+
+### 🌍 Dónde se usa
+- **PostgreSQL/MySQL**: el optimizador de consultas interno
+- **Data warehouses**: BigQuery, Snowflake optimizan consultas masivas
+- **ORMs**: SQLAlchemy, Sequelize generan SQL optimizado
+- **Data lakes**: Spark Catalyst optimizer reescribe planes
+
+<Challenge 
+  nivel="Avanzado" 
+  mision="Implementa un optimizador de consultas SQL con reglas de reescritura." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `{select:["*"], from:"users", where:["age>18"], order_by:["name"]}` | Eliminar order_by si select no lo necesita |
+| `{select:["name","age"], from:"users", where:["age>18","age<60"]}` | Fusionar where: `"age>18 AND age<60"` |
+| `{select:["id"], from:"users", where:["active=true"]}` | Mantener (ya optimizado) |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Las consultas SQL se pueden representar como objetos estructurados. Un optimizador aplica reglas de reescritura para mejorar el rendimiento sin cambiar el resultado semántico. **Reglas típicas:** (1) eliminar ORDER BY si LIMIT no está presente y no hay dependencias, (2) fusionar filtros AND, (3) eliminar columnas no referenciadas.
+
+### ⚙️ Paso 2: Implementación
+1. Parsear la consulta en estructura de datos.
+2. Aplicar reglas de optimización secuencialmente.
+3. Reconstruir la consulta optimizada.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n) — cada regla recorre las partes de la consulta una vez.
+**Complejidad espacial:** O(n) — para la consulta resultante.
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def optimizar_consulta(consulta):
+    opt = dict(consulta)
+
+    # Regla 1: Fusionar filtros WHERE
+    if "where" in opt and len(opt["where"]) > 1:
+        opt["where"] = [" AND ".join(opt["where"])]
+
+    # Regla 2: Eliminar ORDER BY si SELECT no tiene columnas específicas
+    if "order_by" in opt and opt.get("select") == ["*"]:
+        del opt["order_by"]
+
+    # Regla 3: Eliminar SELECT duplicados
+    if "select" in opt:
+        seen = []
+        for col in opt["select"]:
+            if col not in seen:
+                seen.append(col)
+        opt["select"] = seen
+
+    return opt
+
+q1 = {"select": ["*"], "from": "users", "where": ["age>18"], "order_by": ["name"]}
+print(optimizar_consulta(q1))  # Sin order_by
+
+q2 = {"select": ["name","age"], "from": "users", "where": ["age>18","age<60"]}
+print(optimizar_consulta(q2))  # where fusionado
+```
+
+```javascript
+function optimizarConsulta(consulta) {
+  const opt = { ...consulta };
+
+  // Regla 1: Fusionar filtros WHERE
+  if (opt.where && opt.where.length > 1) {
+    opt.where = [opt.where.join(" AND ")];
+  }
+
+  // Regla 2: Eliminar ORDER BY si SELECT es *
+  if (opt.order_by && JSON.stringify(opt.select) === JSON.stringify(["*"])) {
+    delete opt.order_by;
+  }
+
+  // Regla 3: Eliminar SELECT duplicados
+  if (opt.select) {
+    opt.select = [...new Set(opt.select)];
+  }
+
+  return opt;
+}
+
+console.log(optimizarConsulta({select:["*"],from:"users",where:["age>18"],order_by:["name"]}));
+// {select:["*"],from:"users",where:["age>18"]}
+
+console.log(optimizarConsulta({select:["name","age"],from:"users",where:["age>18","age<60"]}));
+// {select:["name","age"],from:"users",where:["age>18 AND age<60"]}
+```
+
+```java
+import java.util.*;
+import java.util.stream.*;
+
+public class OptimizadorConsultas {
+    public static Map<String, Object> optimizar(Map<String, Object> consulta) {
+        Map<String, Object> opt = new LinkedHashMap<>(consulta);
+
+        // Regla 1: Fusionar filtros WHERE
+        if (opt.containsKey("where")) {
+            List<String> where = (List<String>) opt.get("where");
+            if (where.size() > 1) {
+                opt.put("where", List.of(String.join(" AND ", where)));
+            }
+        }
+
+        // Regla 2: Eliminar ORDER BY si SELECT es *
+        if (opt.containsKey("order_by") && opt.get("select").equals(List.of("*"))) {
+            opt.remove("order_by");
+        }
+
+        return opt;
+    }
+
+    public static void main(String[] args) {
+        var q1 = new LinkedHashMap<>(Map.of(
+            "select", List.of("*"), "from", "users",
+            "where", List.of("age>18"), "order_by", List.of("name")
+        ));
+        System.out.println(optimizar(q1));
+    }
+}
+```
+
+```typescript
+interface Consulta {
+  select: string[];
+  from: string;
+  where?: string[];
+  order_by?: string[];
+  limit?: number;
+}
+
+function optimizarConsulta(consulta: Consulta): Consulta {
+  const opt: any = { ...consulta };
+
+  // Regla 1: Fusionar filtros WHERE
+  if (opt.where && opt.where.length > 1) {
+    opt.where = [opt.where.join(" AND ")];
+  }
+
+  // Regla 2: Eliminar ORDER BY si SELECT es *
+  if (opt.order_by && JSON.stringify(opt.select) === JSON.stringify(["*"])) {
+    delete opt.order_by;
+  }
+
+  // Regla 3: Eliminar SELECT duplicados
+  if (opt.select) {
+    opt.select = [...new Set(opt.select)];
+  }
+
+  return opt;
+}
+
+console.log(optimizarConsulta({select:["*"],from:"users",where:["age>18"],order_by:["name"]}));
+console.log(optimizarConsulta({select:["name","age"],from:"users",where:["age>18","age<60"]}));
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Avanzado 03: Optimización de Rutas (Greedy)", href: "/retos/reto-avanzado-03-optimizacion-de-rutas-greedy/" },
+    { title: "Consistencia de Base de Datos", href: "/retos/reto-consistencia-de-base-de-datos/" },
+  ]} />

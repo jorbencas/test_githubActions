@@ -1,0 +1,136 @@
+---
+draft: false
+title: "🏆 RETO: Reto Inicial 24: Raíz Cuadrada (Redondeada)"
+description: "Calcula la raíz cuadrada de un número y redondea al entero más cercano. Introduce el uso de funciones matemáticas de la librería estándar como sqrt() y round()."
+pubDate: "2026-06-28"
+tags: ["retos", "iniciación", "multilenguaje"]
+slug: "reto-inicial-24-raiz-cuadrada-redondeada"
+image: "img/guia_plus_reto_inicial_24_raiz_cuadrada_redondeada/guia_plus_reto_inicial_24_raiz_cuadrada_redondeada_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Iniciación"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Reto Inicial 24: Raíz Cuadrada (Redondeada)
+
+### 📝 Descripción del Reto
+Calcula la raíz cuadrada de un número y la redondea al entero más cercano. Usa las funciones `sqrt()` de la librería matemática y `round()` para el redondeo. Ejercicio que introduce el uso de bibliotecas estándar y manejo de números de punto flotante.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| sqrt + round | `round(sqrt(n))` — directo | O(log n) |
+| Aproximación Newton | Método iterativo sin librería | O(log n) |
+| Potencia 0.5 | `n ** 0.5` luego round | O(log n) |
+
+### 🌍 Dónde se usa
+- **Gráficos 3D**: cálculo de distancias euclidianas entre puntos
+- **Procesamiento de señales**: normalización y cálculo de magnitudes
+- **Estadística**: desviación estándar y varianza
+- **Física**: cinemática, órbitas, movimiento browniano
+
+<Challenge 
+  nivel="Iniciación" 
+  mision="Calcula la raíz cuadrada de un número y redondea al entero más cercano." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `10` | `3` |
+| `16` | `4` |
+| `25` | `5` |
+| `2` | `1` |
+| `0` | `0` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Se usa `sqrt()` para obtener la raíz cuadrada y `round()` para redondear. **Ejemplo:** 10 → sqrt(10) ≈ 3.162 → redondeado → 3. **Edge cases:** número negativo (dominio inválido), cero (0).
+
+### ⚙️ Paso 2: Implementación
+`round(sqrt(n))`. Manejar excepción para números negativos.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(log n)
+**Complejidad espacial:** O(1)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+import math
+
+def raiz_cuadrada(n):
+    return round(math.sqrt(n))
+
+print(raiz_cuadrada(10))  # 3
+print(raiz_cuadrada(16))  # 4
+print(raiz_cuadrada(25))  # 5
+print(raiz_cuadrada(2))   # 1
+print(raiz_cuadrada(0))   # 0
+```
+
+```javascript
+function raizCuadrada(n) {
+  return Math.round(Math.sqrt(n));
+}
+console.log(raizCuadrada(10)); // 3
+console.log(raizCuadrada(16)); // 4
+console.log(raizCuadrada(25)); // 5
+console.log(raizCuadrada(2));  // 1
+console.log(raizCuadrada(0));  // 0
+```
+
+```java
+public class RaizCuadrada {
+    public static int raizCuadrada(double n) {
+        return (int) Math.round(Math.sqrt(n));
+    }
+    public static void main(String[] args) {
+        System.out.println(raizCuadrada(10)); // 3
+        System.out.println(raizCuadrada(16)); // 4
+        System.out.println(raizCuadrada(25)); // 5
+        System.out.println(raizCuadrada(2));  // 1
+        System.out.println(raizCuadrada(0));  // 0
+    }
+}
+```
+
+```typescript
+function raizCuadrada(n: number): number {
+  return Math.round(Math.sqrt(n));
+}
+console.log(raizCuadrada(10)); // 3
+console.log(raizCuadrada(16)); // 4
+console.log(raizCuadrada(25)); // 5
+console.log(raizCuadrada(2));  // 1
+console.log(raizCuadrada(0));  // 0
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Inicial 11: Área de Triángulo", href: "/retos/reto-inicial-11-area-de-triangulo/" },
+    { title: "Reto Inicial 10: Celsius a Kelvin", href: "/retos/reto-inicial-10-celsius-a-kelvin/" },
+  ]} />

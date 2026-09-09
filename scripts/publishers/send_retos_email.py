@@ -38,9 +38,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger("retos_email")
 
-# Ruta a los retos del blog (repo hermano)
-_RETOS_BASE = Path(__file__).resolve().parent.parent.parent.parent / "blog" / "src" / "content" / "auto-challenges"
-RETOS_DIR = _RETOS_BASE if _RETOS_BASE.exists() else Path("/home/jorge/dev/blog/src/content/auto-challenges")
+# Ruta a los retos (copiados del blog)
+RETOS_DIR = Path(__file__).resolve().parent.parent.parent / "files" / "retos"
 
 # Estilos por dificultad
 DIFFICULTY_STYLES = {

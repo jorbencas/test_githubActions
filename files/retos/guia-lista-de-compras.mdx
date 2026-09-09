@@ -1,0 +1,176 @@
+---
+draft: false
+title: "🏆 RETO: Lista de Compras"
+description: "Implementa un gestor de lista de compras con operaciones: agregar, eliminar, mostrar y buscar items. Ejercicio práctico de arrays y operaciones CRUD básicas."
+pubDate: "2026-06-28"
+tags: ["retos", "iniciación", "multilenguaje"]
+slug: "reto-lista-de-compras"
+image: "img/guia_lista_de_compras/guia_lista_de_compras_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Iniciación"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Lista de Compras
+
+### 📝 Descripción del Reto
+Implementa un gestor de lista de compras con operaciones: agregar item, eliminar item, mostrar la lista completa y buscar un item. Ejercicio que practica arrays, métodos de colección y operaciones CRUD básicas.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| Array + métodos | push, splice, filter, includes | O(n) por operación |
+| Clase con estado | Objeto que encapsula la lista y sus operaciones | O(n) por operación |
+| Set | Usar Set para evitar duplicados | O(1) búsqueda |
+
+### 🌍 Dónde se usa
+- **Apps móviles**: listas de tareas, compras, pendientes
+- **E-commerce**: carritos de compra con add/remove/update
+- **Gestión de inventario**: seguimiento de productos
+- **Planificación**: listas de tareas y seguimiento de progreso
+
+<Challenge 
+  nivel="Iniciación" 
+  mision="Implementa un gestor de lista de compras con operaciones CRUD." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Operación | Entrada | Salida esperada |
+|---------|---------|-----------------|
+| Agregar | `'leche'` | `['leche']` |
+| Agregar | `'pan'` | `['leche', 'pan']` |
+| Eliminar | `'leche'` | `['pan']` |
+| Buscar | `'pan'` | `True` |
+| Buscar | `'leche'` | `False` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Mantener un array/lista de items. Implementar funciones para agregar (append), eliminar (remove), mostrar (list) y buscar (in). **Edge cases:** eliminar item que no existe, buscar en lista vacía.
+
+### ⚙️ Paso 2: Implementación
+Usar métodos nativos del array: push para agregar, splice/filter para eliminar, includes para buscar.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n) por operación de eliminación/búsqueda
+**Complejidad espacial:** O(n)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+class ListaCompras:
+    def __init__(self):
+        self.items = []
+    
+    def agregar(self, item):
+        self.items.append(item)
+    
+    def eliminar(self, item):
+        if item in self.items:
+            self.items.remove(item)
+    
+    def mostrar(self):
+        return self.items
+    
+    def buscar(self, item):
+        return item in self.items
+
+lista = ListaCompras()
+lista.agregar('leche')
+lista.agregar('pan')
+print(lista.mostrar())       # ['leche', 'pan']
+lista.eliminar('leche')
+print(lista.mostrar())       # ['pan']
+print(lista.buscar('pan'))   # True
+print(lista.buscar('leche')) # False
+```
+
+```javascript
+class ListaCompras {
+  constructor() { this.items = []; }
+  agregar(item) { this.items.push(item); }
+  eliminar(item) { this.items = this.items.filter(i => i !== item); }
+  mostrar() { return this.items; }
+  buscar(item) { return this.items.includes(item); }
+}
+
+const lista = new ListaCompras();
+lista.agregar('leche');
+lista.agregar('pan');
+console.log(lista.mostrar());       // ['leche', 'pan']
+lista.eliminar('leche');
+console.log(lista.mostrar());       // ['pan']
+console.log(lista.buscar('pan'));   // true
+console.log(lista.buscar('leche')); // false
+```
+
+```java
+import java.util.ArrayList;
+
+public class ListaCompras {
+    private ArrayList<String> items = new ArrayList<>();
+    
+    public void agregar(String item) { items.add(item); }
+    public void eliminar(String item) { items.remove(item); }
+    public ArrayList<String> mostrar() { return items; }
+    public boolean buscar(String item) { return items.contains(item); }
+    
+    public static void main(String[] args) {
+        ListaCompras lista = new ListaCompras();
+        lista.agregar("leche");
+        lista.agregar("pan");
+        System.out.println(lista.mostrar());       // [leche, pan]
+        lista.eliminar("leche");
+        System.out.println(lista.mostrar());       // [pan]
+        System.out.println(lista.buscar("pan"));   // true
+        System.out.println(lista.buscar("leche")); // false
+    }
+}
+```
+
+```typescript
+class ListaCompras {
+  private items: string[] = [];
+  agregar(item: string) { this.items.push(item); }
+  eliminar(item: string) { this.items = this.items.filter(i => i !== item); }
+  mostrar(): string[] { return this.items; }
+  buscar(item: string): boolean { return this.items.includes(item); }
+}
+
+const lista = new ListaCompras();
+lista.agregar('leche');
+lista.agregar('pan');
+console.log(lista.mostrar());       // ['leche', 'pan']
+lista.eliminar('leche');
+console.log(lista.mostrar());       // ['pan']
+console.log(lista.buscar('pan'));   // true
+console.log(lista.buscar('leche')); // false
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Gestión de Inventario (OOP)", href: "/retos/reto-gestion-de-inventario-oop/" },
+    { title: "El Contador de Pasos", href: "/retos/reto-el-contador-de-pasos/" },
+  ]} />

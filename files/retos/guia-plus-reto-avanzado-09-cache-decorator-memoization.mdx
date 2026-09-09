@@ -1,0 +1,202 @@
+---
+draft: false
+title: "🏆 RETO: Reto Avanzado 09: Cache Decorator (Memoization)"
+description: "Implementa un decorador de caché que almacene los resultados de llamadas a funciones para evitar recalcular lo mismo. Soporta TTL (time-to-live) para expiración automática."
+pubDate: "2026-06-28"
+tags: ["retos", "avanzado", "multilenguaje"]
+slug: "reto-avanzado-09-cache-decorator-memoization"
+image: "img/guia_plus_reto_avanzado_09_cache_decorator_memoization/guia_plus_reto_avanzado_09_cache_decorator_memoization_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Avanzado"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Reto Avanzado 09: Cache Decorator (Memoization)
+
+### 📝 Descripción del Reto
+Implementa un **decorador de caché (memoization)** que:
+1. Almacene los resultados de llamadas a una función
+2. Para llamadas repetidas con los mismos argumentos, devuelva el resultado cacheado
+3. Soporte **TTL (time-to-live)**: las entradas expiran después de N segundos
+4. Sea transparente: el código que usa la función no necesita cambios
+
+**¿Por qué importa?** La memoization es clave para optimizar funciones recursivas (Fibonacci), llamadas a API repetitivas, consultas a base de datos, y cálculos pesados en producción. React, Python functools y Redis usan caching extensamente.
+
+**Habilidades que practica:** Decoradores, closures, manejo de estado, complejidad temporal vs espacio.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad Temporal | Complejidad Espacial |
+|---------|-------------|---------------------|---------------------|
+| HashMap + args como key | Serializar argumentos como clave de caché | O(1) lookup | O(n) entradas |
+| LRU Cache | Caché con límite de tamaño y eviction | O(1) | O(capacity) |
+| TTL con timestamps | Guardar timestamp y verificar expiración | O(1) | O(n) |
+
+### 🌍 Dónde se usa
+1. **React**: useMemo() y React Query cachean datos de API
+2. **Python**: @functools.lru_cache decora funciones recursivas
+3. **Redis**: caché distribuido para APIs de alto tráfico
+4. **Compiladores**: memoización de parsing en builds incrementales
+
+<Challenge 
+  nivel="Avanzado" 
+  mision="Implementa un decorador de caché que almacene los resultados de llamadas a funciones para evitar recalcular lo mismo. Soporta TTL para expiración automática." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `memo(fibo)(5)` | `5` (calculado 1 vez) |
+| `memo(fibo)(5)` | `5` (cacheado, 0 cálculos) |
+| `memo(f, ttl=1)(x)` seguido de llamada después de 2s | `recalculado` |
+| `memo(f)(1), memo(f)(2)` | `2 cálculos diferentes` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Un decorador envuelve una función y mantiene un caché interno. Al llamar, verificar si la clave (argumentos serializados) existe en caché y no ha expirado. Si existe, devolver cacheado. Si no, calcular, almacenar y devolver. **Edge cases:** argumentos no serializables, TTL expirado, caché vacía, funciones con efectos secundarios.
+
+### ⚙️ Paso 2: Implementación
+**Implementación:** En Python, usar functools.wraps para mantener metadata. En JS, closure con WeakMap o Map. Clave = JSON.stringify(args). Valor = un objeto con el resultado y el timestamp.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(1) amortizado en caché hit  
+**Complejidad espacial:** O(n) n = entradas en caché  
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+import time
+from functools import wraps
+
+def memo(ttl=None):
+    def decorator(func):
+        cache = {}
+        @wraps(func)
+        def wrapper(*args):
+            key = args
+            now = time.time()
+            if key in cache:
+                result, ts = cache[key]
+                if ttl is None or now - ts < ttl:
+                    return result
+            result = func(*args)
+            cache[key] = (result, now)
+            return result
+        wrapper.cache_clear = lambda: cache.clear()
+        return wrapper
+    return decorator
+
+@memo(ttl=5)
+def fibo(n):
+    if n < 2: return n
+    return fibo(n-1) + fibo(n-2)
+```
+
+```javascript
+function memo(func, ttl = null) {
+  const cache = new Map();
+  return function (...args) {
+    const key = JSON.stringify(args);
+    const now = Date.now();
+    if (cache.has(key)) {
+      const { result, ts } = cache.get(key);
+      if (ttl === null || now - ts < ttl * 1000) return result;
+    }
+    const result = func.apply(this, args);
+    cache.set(key, { result, ts: now });
+    return result;
+  };
+}
+
+const fibo = memo(function (n) {
+  return n < 2 ? n : fibo(n - 1) + fibo(n - 2);
+}, 5);
+```
+
+```java
+import java.util.*;
+import java.util.function.*;
+
+public class Memoize<T> {
+    private final Function<T, T> func;
+    private final long ttlMs;
+    private final Map<List<Object>, MemoEntry> cache = new HashMap<>();
+
+    private static class MemoEntry {
+        Object result;
+        long timestamp;
+        MemoEntry(Object r, long t) { result = r; timestamp = t; }
+    }
+
+    public Memoize(Function<T, T> func, long ttlMs) {
+        this.func = func;
+        this.ttlMs = ttlMs;
+    }
+
+    @SuppressWarnings("unchecked")
+    public T apply(T arg) {
+        List<Object> key = Arrays.asList(arg);
+        MemoEntry entry = cache.get(key);
+        long now = System.currentTimeMillis();
+        if (entry != null && (ttlMs == 0 || now - entry.timestamp < ttlMs)) {
+            return (T) entry.result;
+        }
+        T result = func.apply(arg);
+        cache.put(key, new MemoEntry(result, now));
+        return result;
+    }
+}
+```
+
+```typescript
+function memo<T extends (...args: any[]) => any>(
+  func: T,
+  ttlMs: number | null = null
+): T {
+  const cache = new Map<string, { result: ReturnType<T>; ts: number }>();
+  return function (...args: Parameters<T>): ReturnType<T> {
+    const key = JSON.stringify(args);
+    const now = Date.now();
+    if (cache.has(key)) {
+      const { result, ts } = cache.get(key)!;
+      if (ttlMs === null || now - ts < ttlMs) return result;
+    }
+    const result = func(...args);
+    cache.set(key, { result, ts: now });
+    return result;
+  } as T;
+}
+
+const fibo = memo(function fibo(n: number): number {
+  return n < 2 ? n : fibo(n - 1) + fibo(n - 2);
+});
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Decorador de Medición de Tiempo", href: "/retos/reto-decorador-de-medicion-de-tiempo/" },
+    { title: "Fibonacci Recursivo", href: "/retos/reto-fibonacci-recursivo/" },
+    { title: "Patrón Singleton (Logger)", href: "/retos/reto-patron-singleton-logger/" },
+  ]} />

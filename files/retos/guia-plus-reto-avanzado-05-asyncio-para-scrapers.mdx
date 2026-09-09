@@ -1,0 +1,187 @@
+---
+draft: false
+title: "🏆 RETO: Reto Avanzado 05: AsyncIO para Scrapers"
+description: "Implementa un scraper asíncrono que descargue múltiples páginas web en paralelo usando asyncio. En lugar de descargar secuencialmente, ejecuta todas las peticiones concurrentemente."
+pubDate: "2026-06-28"
+tags: ["retos", "avanzado", "multilenguaje"]
+slug: "reto-avanzado-05-asyncio-para-scrapers"
+image: "img/guia_plus_reto_avanzado_05_asyncio_para_scrapers/guia_plus_reto_avto_avanzado_05_asyncio_para_scrapers_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Avanzado"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Reto Avanzado 05: AsyncIO para Scrapers
+
+### 📝 Descripción del Reto
+Implementa un scraper web asíncrono que:
+1. Reciba una lista de URLs
+2. Descargue todas las páginas de forma concurrente (no secuencial)
+3. Extraiga información específica de cada página (título, enlaces, etc.)
+4. Devuelva los resultados como lista de objetos procesados
+
+**¿Por qué importa?** Los scrapers asíncronos son esenciales para monitoreo de precios (Amazon), agregación de noticias, SEO analysis, y recolección de datos para machine learning. Descargar 1000 páginas secuencialmente puede tardar horas; de forma asíncrona, minutos.
+
+**Habilidades que practica:** Programación asíncrona, async/await, concurrencia I/O-bound, manejo de errores en red.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad Temporal | Complejidad Espacial |
+|---------|-------------|---------------------|---------------------|
+| asyncio.gather | Ejecutar todas las peticiones en paralelo | O(n × tiempo_red) | O(n) |
+| Secuencial | Descargar una por una (lento) | O(n × tiempo_red) | O(1) |
+| Semáforo | Limitar concurrencia a K peticiones simultáneas | O(n × tiempo_red / K) | O(K) |
+
+### 🌍 Dónde se usa
+1. **Monitoreo de precios**: scraping de Amazon, eBay para alertas de ofertas
+2. **Agregación de noticias**: recolectar artículos de múltiples fuentes
+3. **SEO**: analizar posiciones de búsqueda en tiempo real
+4. **Ciencia de datos**: recolectar datasets de redes sociales o APIs públicas
+
+<Challenge 
+  nivel="Avanzado" 
+  mision="Implementa un scraper asíncrono que descargue múltiples páginas web en paralelo usando asyncio." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `urls=['http://a.com','http://b.com']` | `[{url, titulo, enlaces}]` |
+| `urls=[]` | `[]` |
+| `urls=['http://invalido']` | `[{url, error}]` |
+| `urls=['http://a.com']*3` | `[3 resultados]` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Usar async/await para lanzar múltiples peticiones HTTP concurrentemente. asyncio.gather ejecuta todas las corrutinas en paralelo y espera a que terminen todas. **Edge cases:** URL inválida (error de red), timeout, respuesta no-200, contenido no-HTML.
+
+### ⚙️ Paso 2: Implementación
+**Implementación:** Definir función async de descarga, usar gather para ejecutar todas las URLs, manejar errores con try/except en cada petición individual.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n) en paralelo (depende de red)  
+**Complejidad espacial:** O(n)  
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+import asyncio
+import aiohttp
+
+async def descargar_pagina(session, url):
+    try:
+        async with session.get(url, timeout=aiohttp.ClientTimeout(total=10)) as resp:
+            html = await resp.text()
+            titulo = html.split('<title>')[1].split('</title>')[0] if '<title>' in html else ''
+            return {"url": url, "titulo": titulo, "status": resp.status}
+    except Exception as e:
+        return {"url": url, "error": str(e)}
+
+async def scraper(urls):
+    async with aiohttp.ClientSession() as session:
+        tareas = [descargar_pagina(session, url) for url in urls]
+        return await asyncio.gather(*tareas)
+```
+
+```javascript
+async function scraper(urls) {
+  async function descargar(url) {
+    try {
+      const resp = await fetch(url);
+      const html = await resp.text();
+      const match = html.match(/<title>(.*?)<\/title>/);
+      return { url, titulo: match ? match[1] : '', status: resp.status };
+    } catch (e) {
+      return { url, error: e.message };
+    }
+  }
+  return Promise.all(urls.map(descargar));
+}
+```
+
+```java
+import java.net.http.*;
+import java.util.concurrent.*;
+import java.util.*;
+import java.util.regex.*;
+
+public class ScraperAsync {
+    public static List<Map<String, Object>> scraper(List<String> urls) throws Exception {
+        HttpClient client = HttpClient.newHttpClient();
+        ExecutorService executor = Executors.newFixedThreadPool(urls.size());
+        List<Future<Map<String, Object>>> futures = new ArrayList<>();
+        for (String url : urls) {
+            futures.add(executor.submit(() -> {
+                Map<String, Object> result = new HashMap<>();
+                result.put("url", url);
+                try {
+                    HttpRequest req = HttpRequest.newBuilder().uri(URI.create(url)).build();
+                    HttpResponse<String> resp = client.send(req, HttpResponse.BodyHandlers.ofString());
+                    result.put("status", resp.statusCode());
+                    Matcher m = Pattern.compile("<title>(.*?)</title>").matcher(resp.body());
+                    result.put("titulo", m.find() ? m.group(1) : "");
+                } catch (Exception e) {
+                    result.put("error", e.getMessage());
+                }
+                return result;
+            }));
+        }
+        List<Map<String, Object>> resultados = new ArrayList<>();
+        for (Future<Map<String, Object>> f : futures) {
+            resultados.add(f.get());
+        }
+        executor.shutdown();
+        return resultados;
+    }
+}
+```
+
+```typescript
+interface ScrapeResult {
+  url: string;
+  titulo?: string;
+  error?: string;
+}
+
+async function scraper(urls: string[]): Promise<ScrapeResult[]> {
+  async function descargar(url: string): Promise<ScrapeResult> {
+    try {
+      const resp = await fetch(url);
+      const html = await resp.text();
+      const match = html.match(/<title>(.*?)<\/title>/);
+      return { url, titulo: match ? match[1] : '' };
+    } catch (e: any) {
+      return { url, error: e.message };
+    }
+  }
+  return Promise.all(urls.map(descargar));
+}
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Avanzado 04: Manejador de Hilos (Threading)", href: "/retos/reto-avanzado-04-manejador-de-hilos-threading/" },
+    { title: "Consumo de API Mock", href: "/retos/reto-consumo-de-api-mock/" },
+  ]} />

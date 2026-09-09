@@ -1,0 +1,136 @@
+---
+draft: false
+title: "🏆 RETO: Verificador de Edad"
+description: "Dada una edad, verifica si la persona es mayor de edad (>=18), menor de edad (<18) o exactamente 18 años. Ejercicio de lógica condicional con múltiples ramificaciones."
+pubDate: "2026-06-28"
+tags: ["retos", "iniciación", "multilenguaje"]
+slug: "reto-verificador-de-edad"
+image: "img/guia_verificador_de_edad/guia_verificador_de_edad_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Iniciación"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+# 🎯 Desafío: Verificador de Edad
+
+### 📝 Descripción del Reto
+Dada una edad, clasifica en: "Menor de edad" (menor que 18), "Mayor de edad" (18 o más) o "Exactamente 18" (igual a 18). Ejercicio de lógica condicional con múltiples ramificaciones que practica la toma de decisiones en código.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| if/else if/else | Clasificación directa con tres ramas | O(1) |
+| Match/switch | Usar expresión match en Python o switch en otros | O(1) |
+| Diccionario de rangos | Mapear rangos a clasificaciones | O(1) |
+
+### 🌍 Dónde se usa
+- **Sitios web**: verificar edad para contenido restringido (alcohol, juegos)
+- **Formularios de registro**: validar requisitos de edad para servicios
+- **Sistemas de seguridad**: control de acceso según categoría de edad
+- **Legislación**: aplicar leyes diferentes según tramos de edad
+
+<Challenge 
+  nivel="Iniciación" 
+  mision="Clasifica una edad en menor de edad, mayor de edad o exactamente 18 años." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `15` | `Menor de edad` |
+| `18` | `Exactamente 18` |
+| `25` | `Mayor de edad` |
+| `0` | `Menor de edad` |
+| `65` | `Mayor de edad` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Tres ramas condicionales: si edad < 18 → menor; si edad == 18 → exactamente 18; si edad > 18 → mayor. **Edge cases:** edad 0 (menor), edad negativa (inválido), edad muy alta.
+
+### ⚙️ Paso 2: Implementación
+Usar if/else if/else para las tres condiciones. Validar que la edad sea positiva.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(1)
+**Complejidad espacial:** O(1)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def verificar_edad(edad):
+    if edad < 18:
+        return 'Menor de edad'
+    elif edad == 18:
+        return 'Exactamente 18'
+    else:
+        return 'Mayor de edad'
+
+print(verificar_edad(15))  # Menor de edad
+print(verificar_edad(18))  # Exactamente 18
+print(verificar_edad(25))  # Mayor de edad
+```
+
+```javascript
+function verificarEdad(edad) {
+  if (edad < 18) return 'Menor de edad';
+  if (edad === 18) return 'Exactamente 18';
+  return 'Mayor de edad';
+}
+console.log(verificarEdad(15)); // Menor de edad
+console.log(verificarEdad(18)); // Exactamente 18
+console.log(verificarEdad(25)); // Mayor de edad
+```
+
+```java
+public class VerificadorEdad {
+    public static String verificarEdad(int edad) {
+        if (edad < 18) return "Menor de edad";
+        if (edad == 18) return "Exactamente 18";
+        return "Mayor de edad";
+    }
+    public static void main(String[] args) {
+        System.out.println(verificarEdad(15)); // Menor de edad
+        System.out.println(verificarEdad(18)); // Exactamente 18
+        System.out.println(verificarEdad(25)); // Mayor de edad
+    }
+}
+```
+
+```typescript
+function verificarEdad(edad: number): string {
+  if (edad < 18) return 'Menor de edad';
+  if (edad === 18) return 'Exactamente 18';
+  return 'Mayor de edad';
+}
+console.log(verificarEdad(15)); // Menor de edad
+console.log(verificarEdad(18)); // Exactamente 18
+console.log(verificarEdad(25)); // Mayor de edad
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Inicial 15: Año Bisiesto", href: "/retos/reto-inicial-15-ano-bisiesto/" },
+    { title: "Reto Inicial 18: Precio con IVA", href: "/retos/reto-inicial-18-precio-con-iva/" },
+  ]} />

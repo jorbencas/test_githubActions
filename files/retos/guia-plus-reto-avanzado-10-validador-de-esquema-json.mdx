@@ -1,0 +1,221 @@
+---
+draft: false
+title: "🏆 RETO: Reto Avanzado 10: Validador de Esquema JSON"
+description: "Implementa un validador de esquemas que verifique si un objeto JSON cumple con un esquema definido: tipos requeridos, valores enum, rangos numéricos y objetos anidados."
+pubDate: "2026-06-28"
+tags: ["retos", "avanzado", "multilenguaje"]
+slug: "reto-avanzado-10-validador-de-esquema-json"
+image: "img/guia_plus_reto_avanzado_10_validador_de_esquema_json/guia_plus_reto_avanzado_10_validador_de_esquema_json_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Avanzado"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Reto Avanzado 10: Validador de Esquema JSON
+
+### 📝 Descripción del Reto
+Implementa un validador de esquemas JSON que verifique si un objeto cumple con las reglas definidas:
+- **type**: tipo de dato esperado (string, number, boolean, object, array)
+- **required**: campos obligatorios
+- **properties**: definición de campos y sus tipos
+- **enum**: valores permitidos
+- **min/max**: rangos numéricos
+- **nested**: esquemas anidados para objetos dentro del objeto
+
+**¿Por qué importa?** JSON Schema es el estándar para validar datos en APIs REST, configuraciones, y archivos de datos. Express-validator, Ajv (JS) y Pydantic (Python) usan principios similares para garantizar que los datos son correctos antes de procesarlos.
+
+**Habilidades que practica:** Validación de datos, recursión, patrones de diseño, schemas.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad Temporal | Complejidad Espacial |
+|---------|-------------|---------------------|---------------------|
+| Validación recursiva | Recorrer esquema y datos recursivamente | O(n) n=tamaño esquema | O(d) d=profundidad |
+| JSON Schema validator | Usar librería estándar | O(n) | O(n) |
+| Transform + comparar | Convertir datos y comparar con plantilla | O(n) | O(n) |
+
+### 🌍 Dónde se usa
+1. **APIs REST**: validar request bodies antes de procesar
+2. **Configuraciones**: verificar que config.json tiene la estructura correcta
+3. **Formularios**: validación de datos en tiempo real
+4. **Testing**: verificar que la respuesta de una API tiene el formato esperado
+
+<Challenge 
+  nivel="Avanzado" 
+  mision="Implementa un validador de esquemas JSON que verifique si un objeto cumple con las reglas definidas: tipos requeridos, valores enum, rangos numéricos y objetos anidados." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `datos={nombre:"Ana",edad:25}, esquema={nombre:{type:"string"},edad:{type:"number",min:0}}` | `true` |
+| `datos={nombre:"Ana"}, esquema={nombre:{type:"string"},edad:{type:"number",required:true}}` | `false` |
+| `datos={tipo:"admin"}, esquema={tipo:{type:"string",enum:["admin","user"]}}` | `true` |
+| `datos={tipo:"superadmin"}, esquema={tipo:{type:"string",enum:["admin","user"]}}` | `false` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Para cada campo en el esquema, verificar: 1) si es required, existe en datos. 2) El tipo coincide. 3) Si tiene enum, el valor está permitido. 4) Si tiene min/max, el valor está en rango. 5) Si el esquema es un objeto anidado, validar recursivamente. **Edge cases:** campo faltante no-required (ok), tipo incorrecto, enum vacío, nested object.
+
+### ⚙️ Paso 2: Implementación
+**Implementación:** Función recursiva que recorre el esquema. Para cada campo, aplica todas las reglas. Si el campo es un objeto con properties, recursa.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n) donde n = campos en esquema  
+**Complejidad espacial:** O(d) d = profundidad de anidamiento  
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+def validar_esquema(datos, esquema):
+    for campo, reglas in esquema.items():
+        if reglas.get("required") and campo not in datos:
+            return False
+        if campo not in datos:
+            continue
+        valor = datos[campo]
+        tipo = reglas.get("type")
+        if tipo and not _verificar_tipo(valor, tipo):
+            return False
+        if "enum" and valor not in reglas["enum"]:
+            return False
+        if "min" in reglas and isinstance(valor, (int, float)):
+            if valor < reglas["min"]:
+                return False
+        if "max" in reglas and isinstance(valor, (int, float)):
+            if valor > reglas["max"]:
+                return False
+        if tipo == "object" and "properties" in reglas:
+            if not validar_esquema(valor, reglas["properties"]):
+                return False
+    return True
+
+def _verificar_tipo(valor, tipo):
+    tipos = {"string": str, "number": (int, float), "boolean": bool, "object": dict, "array": list}
+    return isinstance(valor, tipos.get(tipo, object))
+```
+
+```javascript
+function validarEsquema(datos, esquema) {
+  for (const [campo, reglas] of Object.entries(esquema)) {
+    if (reglas.required && !(campo in datos)) return false;
+    if (!(campo in datos)) continue;
+    const valor = datos[campo];
+    if (reglas.type && !verificarTipo(valor, reglas.type)) return false;
+    if (reglas.enum && !reglas.enum.includes(valor)) return false;
+    if ("min" in reglas && typeof valor === "number" && valor < reglas.min) return false;
+    if ("max" in reglas && typeof valor === "number" && valor > reglas.max) return false;
+    if (reglas.type === "object" && reglas.properties) {
+      if (!validarEsquema(valor, reglas.properties)) return false;
+    }
+  }
+  return true;
+}
+
+function verificarTipo(valor, tipo) {
+  const mapa = { string: "string", number: "number", boolean: "boolean", object: "object", array: "object" };
+  if (tipo === "number") return typeof valor === "number";
+  if (tipo === "array") return Array.isArray(valor);
+  return typeof valor === mapa[tipo];
+}
+```
+
+```java
+import java.util.*;
+
+public class ValidadorEsquema {
+    public static boolean validar(Map<String, Object> datos, Map<String, Object> esquema) {
+        for (Map.Entry<String, Object> entry : esquema.entrySet()) {
+            String campo = entry.getKey();
+            Map<String, Object> reglas = (Map<String, Object>) entry.getValue();
+            if (Boolean.TRUE.equals(reglas.get("required")) && !datos.containsKey(campo))
+                return false;
+            if (!datos.containsKey(campo)) continue;
+            Object valor = datos.get(campo);
+            String tipo = (String) reglas.get("type");
+            if (tipo != null && !verificarTipo(valor, tipo)) return false;
+            List<Object> enumVals = (List<Object>) reglas.get("enum");
+            if (enumVals != null && !enumVals.contains(valor)) return false;
+            if (reglas.containsKey("min") && valor instanceof Number)
+                if (((Number) valor).doubleValue() < ((Number) reglas.get("min")).doubleValue()) return false;
+            if (reglas.containsKey("max") && valor instanceof Number)
+                if (((Number) valor).doubleValue() > ((Number) reglas.get("max")).doubleValue()) return false;
+            if ("object".equals(tipo) && reglas.containsKey("properties"))
+                if (!validar((Map<String, Object>) valor, (Map<String, Object>) reglas.get("properties")))
+                    return false;
+        }
+        return true;
+    }
+
+    private static boolean verificarTipo(Object valor, String tipo) {
+        switch (tipo) {
+            case "string": return valor instanceof String;
+            case "number": return valor instanceof Number;
+            case "boolean": return valor instanceof Boolean;
+            case "object": return valor instanceof Map;
+            case "array": return valor instanceof List;
+            default: return false;
+        }
+    }
+}
+```
+
+```typescript
+interface SchemaRule {
+  type?: string;
+  required?: boolean;
+  enum?: any[];
+  min?: number;
+  max?: number;
+  properties?: Record<string, SchemaRule>;
+}
+
+function validarEsquema(datos: Record<string, any>, esquema: Record<string, SchemaRule>): boolean {
+  for (const [campo, reglas] of Object.entries(esquema)) {
+    if (reglas.required && !(campo in datos)) return false;
+    if (!(campo in datos)) continue;
+    const valor = datos[campo];
+    if (reglas.type && !verificarTipo(valor, reglas.type)) return false;
+    if (reglas.enum && !reglas.enum.includes(valor)) return false;
+    if ("min" in reglas && typeof valor === "number" && valor < reglas.min!) return false;
+    if ("max" in reglas && typeof valor === "number" && valor > reglas.max!) return false;
+    if (reglas.type === "object" && reglas.properties) {
+      if (!validarEsquema(valor, reglas.properties)) return false;
+    }
+  }
+  return true;
+}
+
+function verificarTipo(valor: any, tipo: string): boolean {
+  if (tipo === "array") return Array.isArray(valor);
+  return typeof valor === tipo;
+}
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Intermedio 12: Procesador de JSON", href: "/retos/reto-intermedio-12-procesador-de-json/" },
+    { title: "Reto Avanzado 11: Simulador de Blockchain", href: "/retos/reto-avanzado-11-simulador-de-blockchain/" },
+  ]} />

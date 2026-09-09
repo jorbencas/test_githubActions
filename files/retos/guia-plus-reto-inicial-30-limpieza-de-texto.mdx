@@ -1,0 +1,139 @@
+---
+draft: false
+title: "🏆 RETO: Reto Inicial 30: Limpieza de Texto"
+description: "Limpia una cadena de texto eliminando caracteres no deseados: espacios extra, signos de puntuación, y normalizando a minúsculas. Ejercicio fundamental de procesamiento de strings y expresiones regulares."
+pubDate: "2026-06-28"
+tags: ["retos", "iniciación", "multilenguaje"]
+slug: "reto-inicial-30-limpieza-de-texto"
+image: "img/guia_plus_reto_inicial_30_limpieza_de_texto/guia_plus_reto_inicial_30_limpieza_de_texto_cover-1200.webp"
+author: "Jorge Beneyto Castelló"
+difficulty: "Iniciación"
+languages: ["python", "javascript", "java", "typescript"]
+---
+
+import Challenge from '@components/Challenge.astro';
+import CodeTabs from '@components/CodeTabs.svelte';
+import RelatedRetos from '@components/RelatedRetos.svelte';
+
+
+# 🎯 Desafío: Reto Inicial 30: Limpieza de Texto
+
+### 📝 Descripción del Reto
+Limpia una cadena de texto eliminando caracteres no deseados: espacios extra al inicio/final, signos de puntuación, y convirtiendo a minúsculas. Transforma '  HOLA   MUNDO!  ' en 'hola mundo'. Práctica esencial para sanitización de input y preparación de datos.
+
+### 📊 Posibles enfoques
+
+| Enfoque | Descripción | Complejidad |
+|---------|-------------|-------------|
+| strip + lowercase | `s.strip().lower()` — solo espacios | O(n) |
+| Regex | `re.sub(r'[^a-z0-9\s]', '', s.lower())` — completo | O(n) |
+| Split + join | ` ' '.join(s.split())` — normalizar espacios | O(n) |
+
+### 🌍 Dónde se usa
+- **NLP / IA**: preparar texto para análisis de sentimiento y modelos
+- **Bases de datos**: sanitizar datos de usuarios antes de insertar
+- **Búsqueda de texto**: normalizar queries para búsqueda full-text
+- **Logs**: limpiar y estandarizar mensajes de sistema
+
+<Challenge 
+  nivel="Iniciación" 
+  mision="Limpia una cadena de texto eliminando caracteres no deseados y normalizando." 
+/>
+
+<hr />
+
+### 🧪 Casos de Prueba
+
+| Entrada | Salida esperada |
+|---------|-----------------|
+| `'  HOLA   MUNDO!  '` | `'hola mundo'` |
+| `'Python!!!'` | `'python'` |
+| `''` | `''` |
+| `'  a  b  c  '` | `'a b c'` |
+
+<hr />
+
+## 💡 Guía de Solución Paso a Paso
+
+<details>
+<summary><b>Ver explicación y código 🛠️ (¡No hagas spoiler!)</b></summary>
+<div class="details-content">
+
+### 🏗️ Paso 1: Análisis de la lógica
+**Análisis del problema:** Aplicar transformaciones: trim (eliminar espacios extremos), lower (minúsculas), eliminar puntuación con regex. **Ejemplo:** '  HOLA   MUNDO!  ' → trim → 'HOLA   MUNDO!' → lower → 'hola   mundo!' → regex → 'hola   mundo' → normalizar espacios → 'hola mundo'.
+
+### ⚙️ Paso 2: Implementación
+Usar expresiones regulares para reemplazar caracteres no deseados. En Python: `re.sub(r'[^a-z0-9\s]', '', s.lower())` seguido de normalizar espacios.
+
+### 🚀 Paso 3: Complejidad y Optimización
+
+**Complejidad temporal:** O(n)
+**Complejidad espacial:** O(n)
+
+### 💻 Código de la Solución
+
+<CodeTabs client:load>
+
+```python
+import re
+
+def limpiar_texto(s):
+    limpio = s.strip().lower()
+    limpio = re.sub(r'[^a-z0-9\s]', '', limpio)
+    return ' '.join(limpio.split())
+
+print(limpiar_texto('  HOLA   MUNDO!  '))  # hola mundo
+print(limpiar_texto('Python!!!'))           # python
+print(limpiar_texto(''))                    # 
+print(limpiar_texto('  a  b  c  '))        # a b c
+```
+
+```javascript
+function limpiarTexto(s) {
+  return s.trim().toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\s+/g, ' ');
+}
+console.log(limpiarTexto('  HOLA   MUNDO!  ')); // hola mundo
+console.log(limpiarTexto('Python!!!'));          // python
+console.log(limpiarTexto(''));                   // 
+console.log(limpiarTexto('  a  b  c  '));       // a b c
+```
+
+```java
+public class LimpiezaDeTexto {
+    public static String limpiarTexto(String s) {
+        return s.trim().toLowerCase()
+            .replaceAll("[^a-z0-9\\s]", "")
+            .replaceAll("\\s+", " ");
+    }
+    public static void main(String[] args) {
+        System.out.println(limpiarTexto("  HOLA   MUNDO!  ")); // hola mundo
+        System.out.println(limpiarTexto("Python!!!"));          // python
+        System.out.println(limpiarTexto(""));                   // 
+        System.out.println(limpiarTexto("  a  b  c  "));       // a b c
+    }
+}
+```
+
+```typescript
+function limpiarTexto(s: string): string {
+  return s.trim().toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\s+/g, ' ');
+}
+console.log(limpiarTexto('  HOLA   MUNDO!  ')); // hola mundo
+console.log(limpiarTexto('Python!!!'));          // python
+console.log(limpiarTexto(''));                   // 
+console.log(limpiarTexto('  a  b  c  '));       // a b c
+```
+
+</CodeTabs>
+
+</div>
+</details>
+<hr />
+<RelatedRetos items={[
+    { title: "Reto Inicial 07: Invertir Palabra", href: "/retos/reto-inicial-07-invertir-palabra/" },
+    { title: "Filtro de Spam por Keywords", href: "/retos/reto-filtro-de-spam-por-keywords/" },
+  ]} />
