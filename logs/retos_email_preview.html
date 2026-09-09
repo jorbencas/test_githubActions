@@ -34,7 +34,7 @@
 <body style="margin: 0; padding: 0; background: linear-gradient(180deg, #fefce8 0%, #fef3c7 100%); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased;">
     
     <div style="display: none; max-height: 0px; overflow: hidden;">
-        3 retos de programación · dificultad Avanzado · soluciones en 4 lenguajes
+        2 retos de programación · dificultad Avanzado · soluciones en 4 lenguajes
     </div>
 
     <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="container dark-card" style="max-width: 600px; background-color: #ffffff; margin: 30px auto; border-radius: 12px; box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08); overflow: hidden; border: 1px solid #e2e8f0;">
@@ -145,47 +145,6 @@ def memo(ttl=None):
                     <!-- CTA -->
                     <div style="margin-top: 10px;">
                         <a href="https://blog-jorbencas.vercel.app/retos/reto-avanzado-09-cache-decorator-memoization" target="_blank" style="display: inline-block; font-size: 11px; font-weight: 600; color: #b45309; text-decoration: none; background: #fffbeb; padding: 5px 12px; border-radius: 6px; border: 1px solid #fde68a;">Ver reto completo →</a>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </td>
-</tr>
-<tr>
-    <td style="padding: 16px 0; border-bottom: 1px solid #fef3c7;">
-        <table width="100%" border="0" cellpadding="0" cellspacing="0">
-            <tr>
-                <td style="vertical-align: top;">
-                    <!-- Difficulty badge -->
-                    <div style="margin-bottom: 8px;">
-                        <span style="display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px; background: #fce7f3; color: #9d174d; border: 1px solid #fbcfe8;">🔴 Avanzado</span>
-                        <span style="font-size: 11px; color: #94a3b8; margin-left: 8px;">python, javascript, java, typescript</span>
-                    </div>
-                    <!-- Title -->
-                    <a href="https://blog-jorbencas.vercel.app/retos/reto-avanzado-10-validador-de-esquema-json" target="_blank" style="color: #0f172a; text-decoration: none; font-weight: 700; font-size: 16px; line-height: 1.4; display: block; margin-bottom: 6px;">🏆 RETO: Reto Avanzado 10: Validador de Esquema JSON</a>
-                    <!-- Description -->
-                    <p style="color: #64748b; font-size: 13px; line-height: 1.5; margin: 0 0 10px 0;">Resuelve este desafío de programación.</p>
-                    <!-- Code preview -->
-                    <div class="code-block dark-code" style="background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 14px 16px; margin: 8px 0; overflow-x: auto;">
-    <p style="margin: 0 0 6px 0; font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">Python</p>
-    <pre style="margin: 0; font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace; font-size: 12px; line-height: 1.6; color: #e2e8f0; white-space: pre-wrap; word-break: break-all;">def validar_esquema(datos, esquema):
-    for campo, reglas in esquema.items():
-        if reglas.get("required") and campo not in datos:
-            return False
-        if campo not in datos:
-            continue
-        valor = datos[campo]
-        tipo = reglas.get("type")
-        if tipo and not _verificar_tipo(valor, tipo):
-            return False
-        if "enum" and valor not in reglas["enum"]:
-            return False
-        if "min" in reglas and isinstance(valor, (int, float)):
-    </pre>
-</div>
-                    <!-- CTA -->
-                    <div style="margin-top: 10px;">
-                        <a href="https://blog-jorbencas.vercel.app/retos/reto-avanzado-10-validador-de-esquema-json" target="_blank" style="display: inline-block; font-size: 11px; font-weight: 600; color: #b45309; text-decoration: none; background: #fffbeb; padding: 5px 12px; border-radius: 6px; border: 1px solid #fde68a;">Ver reto completo →</a>
                     </div>
                 </td>
             </tr>
