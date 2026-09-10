@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 78,
+    "total_concepts": 80,
     "categories": [
       "css_moderno",
       "devops",
@@ -13,7 +13,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-10T10:48:56.841854"
+    "last_scraped": "2026-09-10T15:58:36.925796"
   },
   "concepts": [
     {
@@ -1445,6 +1445,42 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-09T16:04:03.756606"
+    },
+    {
+      "title": "AppIntents en Swift: Shortcuts, integración con Siri, AppShortcut y parámetros",
+      "summary": "AppIntents, disponible desde iOS 16, es el framework de Apple para exponer funcionalidades de tu app a Shortcuts, Siri y el sistema de acciones rápidas. Sustituye al antiguo SiriKit con un modelo decl",
+      "explanation": "AppIntents, disponible desde iOS 16, es el framework de Apple para exponer funcionalidades de tu app a Shortcuts, Siri y el sistema de acciones rápidas. Sustituye al antiguo SiriKit con un modelo declarativo mucho más flexible: cualquier función de la app se puede convertir en un intent en pocas líneas.Crear un intent básico: AppIntent Un intent es una estructura que conforma el protocoloAppIntent. El requisito mínimo es untitley el métodoperform():import AppIntents\n\nstruct AbrirTareaIntent: AppIntent {\n    static var title: LocalizedStringResource = \"Abrir tarea\"\n    static var description = IntentDescription(\"Abre una tarea específica de la app.\")\n\n    func perform() async throws -> some IntentResult {\n        // Navegar a la lista de tareas\n        return .result()\n    }\n} Para parámetros, usa el wrapper@Parameter:struct CrearTareaIntent: AppIntent {\n    static var title: LocalizedStringResource = \"Crear tarea\"\n\n    @Parameter(title: \"Título de la tarea\")\n    var titulo: String\n\n    @Parameter(title: \"Fecha límite\")\n    var fechaLimite: Date?\n\n    @Parameter(title: \"Prioridad\", default: .media)\n    var prioridad: Prioridad\n\n    func perform() async throws -> some IntentResult & ProvidesDialog {\n        let tarea = TareaManager.shared.crear(\n            titulo: titulo,\n            fecha: fechaLimite,\n            prioridad: prioridad\n        )\n        return .result(dialog: \"Tarea '(tarea.titulo)' creada.\")\n    }\n}@Parameter con tipos personalizados Para que los parámetros a",
+      "code_example": "import AppIntents\n\nstruct AbrirTareaIntent: AppIntent {\n    static var title: LocalizedStringResource = \"Abrir tarea\"\n    static var description = IntentDescription(\"Abre una tarea específica de la app.\")\n\n    func perform() async throws -> some IntentResult {\n        // Navegar a la lista de tareas\n        return .result()\n    }\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-10T15:57:53.703270"
+    },
+    {
+      "title": "Dockerizar aplicaciones Python: Dockerfile optimizado, multi-stage, .dockerignore y Compose",
+      "summary": "Dockerizar una aplicación Python correctamente va más allá de escribir unFROM pythony copiar el código. Un Dockerfile bien optimizado aprovecha la caché de capas de Docker para que las reconstruccione",
+      "explanation": "Dockerizar una aplicación Python correctamente va más allá de escribir unFROM pythony copiar el código. Un Dockerfile bien optimizado aprovecha la caché de capas de Docker para que las reconstrucciones sean rápidas, produce imágenes pequeñas con--slimy multi-stage builds, y sigue las mejores prácticas de seguridad ejecutando como usuario no-root. Este tutorial cubre cinco ejemplos completos listos para producción.Imagen base: python:3.13-slim# Comparativa de tamaños:\n# python:3.13           ~1.02 GB\n# python:3.13-slim      ~138 MB   Debian con paquetes mínimos\n# python:3.13-alpine    ~53 MB    Alpine Linux, pero problemas con wheels\n# python:3.13-slim-bookworm    Debian Bookworm (más reciente)\n\n# Recomendación para producción: python:3.13-slim-bookwormDockerfile básico con caché de dependencias# Dockerfile\nFROM python:3.13-slim-bookworm\n\nWORKDIR /app\n\n# Copiar solo requirements PRIMERO para cachear esta capa\nCOPY requirements.txt .\nRUN pip install --no-cache-dir --upgrade pip && \n    pip install --no-cache-dir -r requirements.txt\n\n# Copiar el código DESPUÉS (esta capa se invalida con cada cambio de código)\nCOPY . .\n\n# Usuario no-root\nRUN adduser --disabled-password --no-create-home appuser\nUSER appuser\n\nEXPOSE 8000\nCMD [\"python\", \"-m\", \"uvicorn\", \"main:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]Multi-stage build: imagen de producción mínima# Dockerfile con multi-stage\n# ?? Etapa 1: Builder ??????????????????????????????????????????????\nFROM python:3.13-slim-bookworm AS bu",
+      "code_example": "# Comparativa de tamaños:\n# python:3.13           ~1.02 GB\n# python:3.13-slim      ~138 MB   Debian con paquetes mínimos\n# python:3.13-alpine    ~53 MB    Alpine Linux, pero problemas con wheels\n# python:3.13-slim-bookworm    Debian Bookworm (más reciente)\n\n# Recomendación para producción: python:3.13-slim-bookworm",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-10T15:57:55.496351"
     }
   ]
 }
