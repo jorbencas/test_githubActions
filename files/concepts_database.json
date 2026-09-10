@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 80,
+    "total_concepts": 81,
     "categories": [
       "css_moderno",
       "devops",
@@ -13,7 +13,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-10T15:58:36.925796"
+    "last_scraped": "2026-09-10T20:31:36.864825"
   },
   "concepts": [
     {
@@ -1481,6 +1481,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-10T15:57:55.496351"
+    },
+    {
+      "title": "Rust 2024 Edition: let chains, gen blocks, async closures y cambios de la nueva edición",
+      "summary": "Rust lanza una nueva edición cada tres años. Las ediciones permiten introducir cambios incompatibles hacia atrás en la sintaxis sin romper el código existente: cada crate declara en suCargo.tomlcon qu",
+      "explanation": "Rust lanza una nueva edición cada tres años. Las ediciones permiten introducir cambios incompatibles hacia atrás en la sintaxis sin romper el código existente: cada crate declara en suCargo.tomlcon qué edición compila, y el compilador aplica las reglas de esa edición. Rust 2024 se estabilizó en Rust 1.85 (febrero de 2025). Trae cuatro cambios principales: let chains, gen blocks, async closures con el traitAsyncFny un cambio en cómo se declaran los bloquesunsafe extern.# Para usar la edición 2024:\n[package]\nname = \"mi-crate\"\nedition = \"2024\"Let chains: combinar if let con && Uno de los cambios más pedidos en Rust. Antes de la edición 2024, combinar múltiples condicionesif letrequería anidar:// Edición anterior: anidamiento forzado\nfn procesar(config: &Config) {\n    if let Some(usuario) = config.get_usuario() {\n        if let Some(email) = usuario.get_email() {\n            if email.contains('@') {\n                println!(\"Email válido: {}\", email);\n            }\n        }\n    }\n}\n\n// Rust 2024: let chains con &&\nfn procesar(config: &Config) {\n    if let Some(usuario) = config.get_usuario()\n        && let Some(email) = usuario.get_email()\n        && email.contains('@')\n    {\n        println!(\"Email válido: {}\", email);\n    }\n} Los let chains también funcionan enwhile let:while let Some(item) = iter.next()\n    && item.es_valido()\n    && let Ok(procesado) = procesar(item)\n{\n    guardar(procesado);\n}",
+      "code_example": "# Para usar la edición 2024:\n[package]\nname = \"mi-crate\"\nedition = \"2024\"",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-10T20:30:50.430329"
     }
   ]
 }
