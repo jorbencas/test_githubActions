@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 scrape_agent_skills.py — Scrapea skills de agentes IA desde múltiples fuentes.
-Fuentes: skills.sh, agentskills.io, GitHub Topics.
+Fuentes: skills.sh, agentskills.io, GitHub Topics, mattpocock/skills.
 Guarda en files/agent_skills.json.
 
 Uso:
@@ -12,8 +12,10 @@ import json
 import logging
 import os
 import re
+import sys
 from datetime import datetime
 from logging.handlers import RotatingFileHandler
+from pathlib import Path
 
 import aiohttp
 
@@ -23,8 +25,6 @@ from utils.constants_downloadfile import (
     FUENTE_KEY, TIPO_KEY, TS_KEY, LOGS_DIR, LOG_FILES,
 )
 from utils.common import load_json, save_json
-import sys
-from pathlib import Path
 
 os.makedirs(LOGS_DIR, exist_ok=True)
 logging.basicConfig(
@@ -215,6 +215,70 @@ async def fetch_github_skills(session: aiohttp.ClientSession) -> list:
     return items
 
 
+async def fetch_mattpocock_skills(session: aiohttp.ClientSession) -> list:
+    """Fetch skills de mattpocock/skills (★258k) - el repo de skills más famoso."""
+    items = []
+    try:
+        # Obtener estructura de skills
+        url = "https://api.github.com/repos/mattpocock/skills/contents/skills"
+        async with session.get(url, timeout=aiohttp.ClientTimeout(total=20)) as resp:
+            if resp.status != 200:
+                logger.warning(f"mattpocock/skills returned {resp.status}")
+                return []
+            categories = await resp.json()
+        
+        for cat in categories:
+            if cat.get("type") != "dir" or cat["name"] in ("deprecated", "in-progress"):
+                continue
+            
+            # Obtener skills de cada categoría
+            cat_url = f"https://api.github.com/repos/mattpocock/skills/contents/skills/{cat['name']}"
+            async with session.get(cat_url, timeout=aiohttp.ClientTimeout(total=20)) as resp:
+                if resp.status != 200:
+                    continue
+                skills = await resp.json()
+            
+            for skill in skills:
+                if skill.get("type") != "dir":
+                    continue
+                name = skill["name"]
+                
+                # Obtener README de cada skill para la descripción
+                readme_url = f"https://raw.githubusercontent.com/mattpocock/skills/main/skills/{cat['name']}/{name}/SKILL.md"
+                desc = ""
+                try:
+                    async with session.get(readme_url, timeout=aiohttp.ClientTimeout(total=10)) as resp:
+                        if resp.status == 200:
+                            content = await resp.text()
+                            # Extraer descripción del frontmatter o primera línea
+                            lines = content.split("\n")
+                            for line in lines[1:10]:
+                                if line.startswith("description:"):
+                                    desc = line.split(":", 1)[1].strip().strip('"').strip("'")
+                                    break
+                                if line.startswith("#"):
+                                    desc = line.lstrip("#").strip()
+                                    break
+                except Exception:
+                    pass
+                
+                items.append({
+                    TITULO_KEY: f"mattpocock/{name}",
+                    ENLACE_KEY: f"https://github.com/mattpocock/skills/tree/main/skills/{cat['name']}/{name}",
+                    DESCRIPCION_KEY: desc[:200] or f"Skill de Matt Pocock: {name}",
+                    FUENTE_KEY: "mattpocock/skills",
+                    TIPO_KEY: "skill",
+                    "_stars": 258669,
+                    "_category": cat["name"],
+                    "_source_type": "mattpocock",
+                })
+        
+        logger.info(f"🎯 mattpocock/skills: {len(items)} skills obtenidas")
+    except Exception as e:
+        logger.error(f"❌ Error mattpocock/skills: {e}")
+    return items
+
+
 def deduplicate(all_items: list) -> list:
     """Elimina duplicados por URL, manteniendo la entrada de mayor calidad."""
     seen = {}
@@ -239,13 +303,14 @@ async def run():
     
     connector = aiohttp.TCPConnector(ssl=False)
     async with aiohttp.ClientSession(connector=connector) as session:
-        skills_sh, agentskills, github = await asyncio.gather(
+        skills_sh, agentskills, github, mattpocock = await asyncio.gather(
             fetch_skills_sh(session),
             fetch_agentskills_io(session),
             fetch_github_skills(session),
+            fetch_mattpocock_skills(session),
         )
     
-    all_items = deduplicate(skills_sh + agentskills + github)
+    all_items = deduplicate(skills_sh + agentskills + github + mattpocock)
     
     # Añadir timestamp
     now = datetime.now().isoformat()
