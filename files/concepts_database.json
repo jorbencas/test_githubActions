@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 81,
+    "total_concepts": 84,
     "categories": [
       "css_moderno",
       "devops",
@@ -13,7 +13,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-11T10:45:54.431263"
+    "last_scraped": "2026-09-11T16:01:48.670437"
   },
   "concepts": [
     {
@@ -1499,6 +1499,60 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-10T20:30:50.430329"
+    },
+    {
+      "title": "Traits avanzados en Rust: tipos asociados, regla huérfana, newtype y default implementations",
+      "summary": "Los traits son el mecanismo central de abstracción en Rust. Más allá del uso básico conimpl Trait for Tipo, el lenguaje ofrece cuatro herramientas avanzadas que permiten diseñar APIs más expresivas y ",
+      "explanation": "Los traits son el mecanismo central de abstracción en Rust. Más allá del uso básico conimpl Trait for Tipo, el lenguaje ofrece cuatro herramientas avanzadas que permiten diseñar APIs más expresivas y seguras: los tipos asociados, las implementaciones por defecto, la orphan rule con el patrón newtype, y los supertraits.Tipos asociados frente a parámetros genéricos Cuando un trait necesita trabajar con un tipo relacionado, existen dos enfoques. Los parámetros genéricos (trait Conversor<T>) permiten múltiples implementaciones para el mismo tipo base. Los tipos asociados (type Salidadentro del trait) solo permiten una implementación por tipo, lo que simplifica la sintaxis de uso y evita ambigüedades.// Con parámetro genérico: se puede implementar varias veces\ntrait ConversorGenerico<T> {\n    fn convertir(&self) -> T;\n}\n\n// Con tipo asociado: una sola implementación posible\ntrait Conversor {\n    type Salida;\n    fn convertir(&self) -> Self::Salida;\n}\n\nstruct Celsius(f64);\nstruct Fahrenheit(f64);\n\nimpl Conversor for Celsius {\n    type Salida = Fahrenheit;\n    fn convertir(&self) -> Fahrenheit {\n        Fahrenheit(self.0 * 9.0 / 5.0 + 32.0)\n    }\n}\n\nfn main() {\n    let c = Celsius(100.0);\n    let f = c.convertir();\n    println!(\"{} °C = {} °F\", c.0, f.0); // 100 °C = 212 °F\n} El trait estándarIteratorusa tipo asociado (type Item) precisamente para evitar que un mismo iterador deba especificar el tipo en cada llamada.Implementaciones por defecto Un trait puede proporcionar implementa",
+      "code_example": "// Con parámetro genérico: se puede implementar varias veces\ntrait ConversorGenerico<T> {\n    fn convertir(&self) -> T;\n}\n\n// Con tipo asociado: una sola implementación posible\ntrait Conversor {\n    type Salida;\n    fn convertir(&self) -> Self::Salida;\n}\n\nstruct Celsius(f64);\nstruct Fahrenheit(f64);\n\nimpl Conversor for Celsius {\n    type Salida = Fahrenheit;\n    fn convertir(&self) -> Fahrenheit {\n        Fahrenheit(self.0 * 9.0 / 5.0 + 32.0)\n    }\n}\n\nfn main() {\n    let c = Celsius(100.0);\n    let f = c.convertir();\n    println!(\"{} °C = {} °F\", c.0, f.0); // 100 °C = 212 °F\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "habilidades"
+      ],
+      "cat": "habilidades",
+      "scraped_at": "2026-09-11T16:01:06.928993"
+    },
+    {
+      "title": "TipKit en Swift: mostrar tips de onboarding con reglas, frecuencia y TipView en SwiftUI",
+      "summary": "TipKit es el framework de Apple para mostrar tips contextuales de onboarding en apps iOS 17 y posteriores. La ventaja principal sobre gestionar manualmenteUserDefaultso contadores de uso es que TipKit",
+      "explanation": "TipKit es el framework de Apple para mostrar tips contextuales de onboarding en apps iOS 17 y posteriores. La ventaja principal sobre gestionar manualmenteUserDefaultso contadores de uso es que TipKit se encarga del almacenamiento, la frecuencia de visualización y la evaluación de reglas de forma declarativa.Definir un tip: el protocolo Tip Un tip es una estructura que conforma el protocoloTip. El requisito mínimo es untitley, opcionalmente, unmessageeimage:import TipKit\n\nstruct TipFiltros: Tip {\n    var title: Text {\n        Text(\"Filtra tus resultados\")\n    }\n\n    var message: Text? {\n        Text(\"Usa el botón de filtro para mostrar solo las tareas del día de hoy.\")\n    }\n\n    var image: Image? {\n        Image(systemName: \"line.3.horizontal.decrease.circle\")\n    }\n}Mostrar tips con TipView y popoverTip Hay dos formas de mostrar un tip: inline conTipViewo como popover con el modificador.popoverTip:struct ListaTareas: View {\n    private let tipFiltros = TipFiltros()\n\n    var body: some View {\n        VStack {\n            // Tip inline: ocupa espacio en la jerarquía de vistas\n            TipView(tipFiltros, arrowEdge: .bottom)\n\n            List(tareas) { tarea in\n                TareaRow(tarea: tarea)\n            }\n        }\n        .toolbar {\n            ToolbarItem {\n                Button(action: mostrarFiltros) {\n                    Image(systemName: \"line.3.horizontal.decrease.circle\")\n                }\n                // Tip como popover sobre el botón\n                .",
+      "code_example": "import TipKit\n\nstruct TipFiltros: Tip {\n    var title: Text {\n        Text(\"Filtra tus resultados\")\n    }\n\n    var message: Text? {\n        Text(\"Usa el botón de filtro para mostrar solo las tareas del día de hoy.\")\n    }\n\n    var image: Image? {\n        Image(systemName: \"line.3.horizontal.decrease.circle\")\n    }\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-11T16:01:08.280821"
+    },
+    {
+      "title": "Protocol Buffers y gRPC en Python: definir servicios, generar código y streaming bidireccional",
+      "summary": "Protocol Buffers(protobuf) es el sistema de serialización binaria de Google, ygRPCes el framework RPC que se construye sobre él. Juntos permiten definir la interfaz de un servicio en un fichero.protoy",
+      "explanation": "Protocol Buffers(protobuf) es el sistema de serialización binaria de Google, ygRPCes el framework RPC que se construye sobre él. Juntos permiten definir la interfaz de un servicio en un fichero.protoy generar automáticamente el código cliente y servidor en Python (o en cualquier otro lenguaje soportado). El resultado es comunicación entre servicios más rápida y menos verbosa que REST+JSON, con contratos tipados y verificados en compilación.Instalación# pip install grpcio grpcio-tools\n# El compilador protoc viene incluido en grpcio-toolsDefinir mensajes y servicios en .proto# calculadora.proto\nsyntax = \"proto3\";\npackage calculadora;\n\n// Mensajes de datos\nmessage OperacionRequest {\n    double a = 1;\n    double b = 2;\n    string operacion = 3;  // \"sumar\", \"restar\", \"multiplicar\", \"dividir\"\n}\n\nmessage ResultadoResponse {\n    double resultado = 1;\n    bool exito = 2;\n    string error = 3;\n}\n\nmessage NumeroRequest {\n    int32 n = 1;\n}\n\nmessage SecuenciaResponse {\n    repeated int64 numeros = 1;   // lista de enteros\n}\n\nmessage EstadisticasResponse {\n    double media = 1;\n    double maximo = 2;\n    double minimo = 3;\n    map<string, int32> frecuencias = 4;   // map de string a int\n}\n\n// Definición del servicio con los cuatro tipos de RPC\nservice Calculadora {\n    // Unary: petición-respuesta simple\n    rpc Calcular (OperacionRequest) returns (ResultadoResponse);\n\n    // Server streaming: el servidor envía múltiples respuestas\n    rpc GenerarFibonacci (NumeroRequest) returns (stream",
+      "code_example": "# pip install grpcio grpcio-tools\n# El compilador protoc viene incluido en grpcio-tools",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "interfaces"
+      ],
+      "cat": "interfaces",
+      "scraped_at": "2026-09-11T16:01:09.970128"
     }
   ]
 }
