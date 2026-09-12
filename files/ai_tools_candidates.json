@@ -1,5 +1,18 @@
 [
     {
+        "titulo": "unsloth/Qwen3.8-27B-GGUF",
+        "enlace": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF",
+        "descripcion": "[] gguf, qwen3_5, unsloth — by ",
+        "lenguaje": "Python",
+        "estrellas": "3922",
+        "fuente": "HuggingFace Models",
+        "tipo": "herramienta",
+        "_downloads": 11529203,
+        "_likes": 3922,
+        "_pipeline": "",
+        "_source_type": "hf_model"
+    },
+    {
         "titulo": "Qwen/Qwen3-VL-8B-Instruct",
         "enlace": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct",
         "descripcion": "[image-text-to-text] transformers, safetensors, qwen3_vl — by ",
