@@ -1,5 +1,44 @@
 [
     {
+        "titulo": "¿Dónde está el iPhone 18 básico? Posibles características, diferencias con el iPhone 18 Pro, precio y fecha de lanzamiento del iPhone más vendido",
+        "enlace": "https://www.computerhoy.com/moviles/donde-esta-iphone-18-basico-posibles-caracteristicas-diferencias-con-iphone-18-pro-precio-fecha-lanzamiento-iphone-mas-vendido_7035104_0.html",
+        "fuente": "ComputerHoy",
+        "tipo": "noticia",
+        "f": "12/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "12/09/2026",
+        "ts": "2026-09-12T03:29:10.486005"
+    },
+    {
+        "titulo": "How to Connect to HMRC's Making Tax Digital API: A Beginner's Guide",
+        "enlace": "https://www.freecodecamp.org/news/how-to-connect-to-hmrc-making-tax-digital-api/",
+        "fuente": "freeCodeCamp",
+        "tipo": "noticia",
+        "f": "12/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "12/09/2026",
+        "ts": "2026-09-12T03:29:24.297203"
+    },
+    {
+        "titulo": "How to Prevent Race Conditions in Django",
+        "enlace": "https://www.freecodecamp.org/news/how-to-prevent-race-conditions-in-django/",
+        "fuente": "freeCodeCamp",
+        "tipo": "noticia",
+        "f": "12/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "12/09/2026",
+        "ts": "2026-09-12T03:29:24.297581"
+    },
+    {
         "titulo": "Algunas compañías de satélites todavía tienen apetito por los servicios de lanzamiento boutique.",
         "enlace": "https://arstechnica.com/space/2026/09/some-satellite-companies-still-have-an-appetite-for-boutique-launch-services/",
         "fuente": "Ars Technica",
