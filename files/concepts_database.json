@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 84,
+    "total_concepts": 86,
     "categories": [
       "css_moderno",
       "devops",
@@ -13,7 +13,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-12T10:15:24.224293"
+    "last_scraped": "2026-09-12T17:25:30.876185"
   },
   "concepts": [
     {
@@ -1553,6 +1553,42 @@
       ],
       "cat": "interfaces",
       "scraped_at": "2026-09-11T16:01:09.970128"
+    },
+    {
+      "title": "Trait objects en Rust: dyn Trait, object safety, Boxy despacho dinámico",
+      "summary": "Los trait objects permiten trabajar con valores de tipos distintos a través de un interfaz común, sin saber en tiempo de compilación cuál es el tipo concreto. A diferencia de los genéricos, que genera",
+      "explanation": "Los trait objects permiten trabajar con valores de tipos distintos a través de un interfaz común, sin saber en tiempo de compilación cuál es el tipo concreto. A diferencia de los genéricos, que generan código especializado para cada tipo (despacho estático), los trait objects usan una vtable para resolver la llamada en runtime (despacho dinámico).Box<dyn Trait>: almacenar valores de tipos heterogéneos El uso más habitual esBox<dyn Trait>. ElBoxcoloca el valor en el heap y el punterodyn Traitlleva asociada una vtable con las direcciones de los métodos implementados por ese tipo concreto.trait Figura {\n    fn area(&self) -> f64;\n    fn nombre(&self) -> &str\n}\n\nstruct Circulo { radio: f64 }\nstruct Rectangulo { ancho: f64, alto: f64 }\n\nimpl Figura for Circulo {\n    fn area(&self) -> f64 { std::f64::consts::PI * self.radio * self.radio }\n    fn nombre(&self) -> &str { \"Círculo\" }\n}\n\nimpl Figura for Rectangulo {\n    fn area(&self) -> f64 { self.ancho * self.alto }\n    fn nombre(&self) -> &str { \"Rectángulo\" }\n}\n\nfn area_total(figuras: &[Box<dyn Figura>]) -> f64 {\n    figuras.iter().map(|f| f.area()).sum()\n}\n\nfn main() {\n    let figuras: Vec<Box<dyn Figura>> = vec![\n        Box::new(Circulo { radio: 3.0 }),\n        Box::new(Rectangulo { ancho: 4.0, alto: 5.0 }),\n        Box::new(Circulo { radio: 1.5 }),\n    ];\n\n    for f in &figuras {\n        println!(\"{}: {:.2}\", f.nombre(), f.area());\n    }\n    println!(\"Total: {:.2}\", area_total(&figuras));\n}Arc<dyn Trait + Send + Sync> para comp",
+      "code_example": "trait Figura {\n    fn area(&self) -> f64;\n    fn nombre(&self) -> &str\n}\n\nstruct Circulo { radio: f64 }\nstruct Rectangulo { ancho: f64, alto: f64 }\n\nimpl Figura for Circulo {\n    fn area(&self) -> f64 { std::f64::consts::PI * self.radio * self.radio }\n    fn nombre(&self) -> &str { \"Círculo\" }\n}\n\nimpl Figura for Rectangulo {\n    fn area(&self) -> f64 { self.ancho * self.alto }\n    fn nombre(&self) -> &str { \"Rectángulo\" }\n}\n\nfn area_total(figuras: &[Box<dyn Figura>]) -> f64 {\n    figuras.iter().map(|f| f.area()).sum()\n}\n\nfn main() {\n    let figuras: Vec<Box<dyn Figura>> = vec![\n        Box::new(Circulo { radio: 3.0 }),\n        Box::new(Rectangulo { ancho: 4.0, alto: 5.0 }),\n        Box::new(Circulo { radio: 1.5 }),\n    ];\n\n    for f in &figuras {\n        println!(\"{}: {:.2}\", f.nombre(), f.area());\n    }\n    println!(\"Total: {:.2}\", area_total(&figuras));\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-12T17:24:50.577452"
+    },
+    {
+      "title": "CloudKit en Swift: CKDatabase, CKRecord, consultas y sincronización con iCloud",
+      "summary": "CloudKit es el servicio de Apple para sincronizar datos con iCloud sin gestionar un servidor propio. Los datos se almacenan en los servidores de Apple y el sistema se encarga de distribuirlos entre lo",
+      "explanation": "CloudKit es el servicio de Apple para sincronizar datos con iCloud sin gestionar un servidor propio. Los datos se almacenan en los servidores de Apple y el sistema se encarga de distribuirlos entre los dispositivos del usuario. La integración con iOS es estrecha: autenticación gratuita, cuotas generosas en la base de datos privada y soporte nativo en Core Data conNSPersistentCloudKitContainer.CKContainer y CKDatabase El punto de entrada esCKContainer, que contiene tres bases de datos con diferente ámbito de acceso:import CloudKit\n\nlet contenedor = CKContainer.default()\n\n// Base de datos privada: datos del usuario, solo visibles para él\nlet bbddPrivada = contenedor.privateCloudDatabase\n\n// Base de datos pública: datos visibles para todos los usuarios de la app\nlet bbddPublica = contenedor.publicCloudDatabase\n\n// Base de datos compartida: para funcionalidades de colaboración (iOS 15+)\nlet bbddCompartida = contenedor.sharedCloudDatabaseCKRecord: crear y guardar registros CKRecordes el equivalente a una fila en una tabla. Se identifica por unCKRecord.IDque combina un nombre y una zona:// Crear un registro\nlet id = CKRecord.ID(recordName: UUID().uuidString)\nlet nota = CKRecord(recordType: \"Nota\", recordID: id)\nnota[\"titulo\"] = \"Compras\" as CKRecordValue\nnota[\"contenido\"] = \"Leche, pan, huevos\" as CKRecordValue\nnota[\"fecha\"] = Date() as CKRecordValue\n\n// Guardar en iCloud\nbbddPrivada.save(nota) { registro, error in\n    if let error {\n        print(\"Error guardando: (error)\")\n      ",
+      "code_example": "import CloudKit\n\nlet contenedor = CKContainer.default()\n\n// Base de datos privada: datos del usuario, solo visibles para él\nlet bbddPrivada = contenedor.privateCloudDatabase\n\n// Base de datos pública: datos visibles para todos los usuarios de la app\nlet bbddPublica = contenedor.publicCloudDatabase\n\n// Base de datos compartida: para funcionalidades de colaboración (iOS 15+)\nlet bbddCompartida = contenedor.sharedCloudDatabase",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-12T17:24:52.366661"
     }
   ]
 }
