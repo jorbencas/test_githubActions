@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 87,
+    "total_concepts": 88,
     "categories": [
       "concurrency",
       "css_moderno",
@@ -14,7 +14,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-13T15:45:26.098137"
+    "last_scraped": "2026-09-13T20:27:09.420594"
   },
   "concepts": [
     {
@@ -1608,6 +1608,24 @@
       ],
       "cat": "concurrency",
       "scraped_at": "2026-09-13T15:44:49.103237"
+    },
+    {
+      "title": "Tipos avanzados en Rust: never type !, DST, type alias e impl Trait en retorno",
+      "summary": "El sistema de tipos de Rust tiene varias características que van más allá de los tipos básicos: el never type para funciones que nunca retornan, los tipos de tamaño dinámico (DST) para valores cuyo ta",
+      "explanation": "El sistema de tipos de Rust tiene varias características que van más allá de los tipos básicos: el never type para funciones que nunca retornan, los tipos de tamaño dinámico (DST) para valores cuyo tamaño no se conoce en compilación, los alias de tipo para simplificar firmas complejas, yimpl Traitcomo alternativa ergonómica a los genéricos.El never type ! El tipo!(pronunciado \"never\") representa computaciones que nunca producen un valor: funciones que siempre hacen panic, bucles infinitos o llamadas aprocess::exit. El compilador lo conoce y lo usa para inferir tipos en expresiones comomatch.use std::process;\n\n// Función que nunca retorna: tipo de retorno !\nfn abortar(mensaje: &str) -> ! {\n    eprintln!(\"Error fatal: {mensaje}\");\n    process::exit(1);\n}\n\nfn dividir(a: f64, b: f64) -> f64 {\n    if b == 0.0 {\n        abortar(\"División por cero\"); // ! es compatible con cualquier tipo\n    }\n    a / b\n}\n\nfn main() {\n    // continue en un bucle también tiene tipo !\n    let mut suma = 0u32;\n    for s in [\"1\", \"dos\", \"3\", \"4\"] {\n        let n: u32 = match s.parse() {\n            Ok(v) => v,\n            Err(_) => {\n                println!(\"'{s}' no es un número, ignorando\");\n                continue // tipo !  compatible con u32 en el match\n            }\n        };\n        suma += n;\n    }\n    println!(\"Suma: {suma}\"); // Suma: 8\n}Tipos de tamaño dinámico: str y [T] LosDST(Dynamically Sized Types) son tipos cuyo tamaño el compilador no puede conocer en tiempo de compilación. Los más",
+      "code_example": "use std::process;\n\n// Función que nunca retorna: tipo de retorno !\nfn abortar(mensaje: &str) -> ! {\n    eprintln!(\"Error fatal: {mensaje}\");\n    process::exit(1);\n}\n\nfn dividir(a: f64, b: f64) -> f64 {\n    if b == 0.0 {\n        abortar(\"División por cero\"); // ! es compatible con cualquier tipo\n    }\n    a / b\n}\n\nfn main() {\n    // continue en un bucle también tiene tipo !\n    let mut suma = 0u32;\n    for s in [\"1\", \"dos\", \"3\", \"4\"] {\n        let n: u32 = match s.parse() {\n            Ok(v) => v,\n            Err(_) => {\n                println!(\"'{s}' no es un número, ignorando\");\n                continue // tipo !  compatible con u32 en el match\n            }\n        };\n        suma += n;\n    }\n    println!(\"Suma: {suma}\"); // Suma: 8\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-13T20:26:32.460780"
     }
   ]
 }
