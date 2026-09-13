@@ -47,6 +47,9 @@
 
 ### Data files
 - `files/noticias_historico.json` — full news history (max 900 entries)
+- `files/eixam_pelicula.json` — archived Eixam (Enjambre) movie info (trailers, news, reviews)
+- `files/eixam_imdb_parental.json` — snapshot of the 2 IMDb Parental Guide pages watched for changes (change → Telegram message)
+- `files/el_nido_pelicula.json` — archived "El nido" (2026, Hugo Stuven/Filmax) movie info, including nudity/sex reporting
 - `files/herramientas.json` — discovered tools from GitHub + Product Hunt (max 200)
 - `files/ai_tools_candidates.json` — auto-detected AI tools (HF + GitHub, max 50)
 - `files/avatars_cache.json` — YouTube channel avatar cache
@@ -61,6 +64,13 @@
 - **News** → `scrape_news.py` → `files/noticias_historico.json`
 - **Tools** → `scrape_tools.py` → `files/herramientas.json`
 - **AI Tools Auto-Scrape** → `scrape_ai_tools.py` → `files/ai_tools_candidates.json`
+- **Movie info (Eixam)** → `scrape_eixam.py` → `files/eixam_pelicula.json` (also watches IMDb parental pages via `imdb_parental.py`)
+- **Movie info (El nido 2026)** → `scrape_el_nido.py` → `files/el_nido_pelicula.json`
+
+The movie scrapers use a shared SOLID engine:
+- `movie_scraper_base.py` — generic engine (SRP): `MovieConfig` (data only), `RelevanceFilter` (relevancia), `MovieClassifier` (clasificación), `MovieNewsScraper` (recopilar/anexar/cargar/validar_ia), `TelegramNewsSender` (enviar) y `ejecutar()` (orquestación). Se configura pasando una `MovieConfig` (OCP/DIP): queries, señales, anios, titulos_clave, clasificador, `ia_prompt`, y `regla_extra` (hook de relevancia).
+- `imdb_parental.py` — `IMDBParentalMonitor` (SRP: vigila fichas de Guía Parental de IMDb y envía a Telegram si cambia el texto).
+- `scrape_eixam.py` / `scrape_el_nido.py` — son SOLO config (`*_CONFIG`) + entry point (`main()`); NO mutan globals del motor. Regla especial de Eixam (doble título "eixam+enjambre") vive en `_regla_extra_eixam`.
 - **Weekly recap** → `generate_weekly.py` → `auto-news/YYYY-W{week}-tech-recap.md`
   - Auto-archives recaps >2 weeks old to `auto-news/archive/`
   - SEO: one post per week max (dedup by week slug)
@@ -82,6 +92,8 @@
 | `optimize_images.yml` | Dispatch from blog | Image optimization for blog |
 | `tests.yml` | Push/PR to master | pytest (89 tests) |
 | `dashboard_update.yml` | Push (JS/CSS/Python) | Regenerate + deploy dashboard |
+| `eixam_scrape.yml` | Every 6h (:17) | Scrape Eixam + IMDb parental → commit JSON |
+| `el_nido_scrape.yml` | Every 6h (:47) | Scrape "El nido" (2026) → commit JSON |
 
 ### Modular pipeline (each script is independent)
 

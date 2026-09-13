@@ -27,10 +27,13 @@ NEWS_PATH = SCRIPT_DIR.parent / "files" / "noticias_historico.json"
 TOOLS_PATH = SCRIPT_DIR.parent / "files" / "herramientas.json"
 CONCEPTS_PATH = SCRIPT_DIR / "utils" / "concepts_database.json"
 
+sys.path.insert(0, str(SCRIPT_DIR))
+from utils.telegram_client import TelegramClient
+
 # ── Telegram config ──
 BOT_TOKEN = os.environ.get("TIPS_BOT_TOKEN", "")
 CHAT_ID = os.environ.get("TIPS_CHAT_ID", "")
-API_URL = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+_client = TelegramClient(bot_token=BOT_TOKEN, chat_id=CHAT_ID)
 
 # ── Gemini config ──
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
@@ -1345,15 +1348,10 @@ def send_telegram(text):
         print("   Configura las variables de entorno o usa --dry-run.")
         return False
 
-    payload = {
-        "chat_id": CHAT_ID,
-        "text": text,
-        "parse_mode": "Markdown",
-        "disable_web_page_preview": True,
-    }
-
     try:
-        resp = requests.post(API_URL, json=payload, timeout=30)
+        resp = _client.send_message(text, parse_mode="Markdown", disable_web_page_preview=True, timeout=30)
+        if resp is None:
+            return False
         if resp.status_code == 200:
             print("✅ Mensaje enviado a Telegram.")
             return True

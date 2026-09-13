@@ -23,32 +23,20 @@ import re
 import sys
 import time
 from datetime import datetime
-from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 import requests
 from bs4 import BeautifulSoup
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.logging_setup import setup_logging
 from utils.constants_downloadfile import (
     CONFIG, LOGS_DIR, LOG_FILES,
     CONCEPTS_FILENAME, CONCEPTS_PATH_DEFAULT,
     CONCEPTS_MAX, CONCEPTS_PRUNE_BATCH, CONCEPTS_MIN_INTERVIEW,
 )
 
-os.makedirs(LOGS_DIR, exist_ok=True)
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        RotatingFileHandler(
-            os.path.join(LOGS_DIR, LOG_FILES.get("concepts", "concepts.log")),
-            maxBytes=1024 * 1024 * 5, backupCount=3, encoding="utf-8",
-        ),
-        logging.StreamHandler(),
-    ],
-)
-logger = logging.getLogger("concepts")
+logger = setup_logging("concepts", LOG_FILES["concepts"], LOGS_DIR)
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",

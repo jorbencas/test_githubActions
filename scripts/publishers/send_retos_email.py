@@ -17,26 +17,17 @@ import re
 import sys
 from datetime import datetime
 from pathlib import Path
-from logging.handlers import RotatingFileHandler
 
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.logging_setup import setup_logging
 from utils.constants_downloadfile import CONFIG, LOGS_DIR, LOG_FILES
 from utils.constants_templates import (
     RETOS_EMAIL_TEMPLATE, RETOS_EMAIL_ROW, RETOS_CODE_PREVIEW,
 )
 
-os.makedirs(LOGS_DIR, exist_ok=True)
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        RotatingFileHandler(os.path.join(LOGS_DIR, LOG_FILES.get("email", "email.log")), maxBytes=1024*1024*5, backupCount=5, encoding="utf-8"),
-        logging.StreamHandler(),
-    ],
-)
-logger = logging.getLogger("retos_email")
+logger = setup_logging("retos_email", LOG_FILES["retos_email"], LOGS_DIR)
 
 # Ruta a los retos (copiados del blog)
 RETOS_DIR = Path(__file__).resolve().parent.parent.parent / "files" / "retos"

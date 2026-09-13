@@ -11,7 +11,6 @@ import json
 import logging
 import os
 import sys
-from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 import aiohttp
@@ -20,19 +19,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from utils.constants_downloadfile import CONFIG, FUENTES, TIPO_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY, HERRAMIENTAS_FILENAME, LOGS_DIR, LOG_FILES
 from utils.common import load_json, save_json
 from scrapers.scraper_base import ScraperPro
-import sys
-from pathlib import Path
+from utils.logging_setup import setup_logging
 
-os.makedirs(LOGS_DIR, exist_ok=True)
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        RotatingFileHandler(os.path.join(LOGS_DIR, LOG_FILES["tools"]), maxBytes=1024 * 1024 * 5, backupCount=5, encoding="utf-8"),
-        logging.StreamHandler(),
-    ],
-)
-logger = logging.getLogger("tools")
+logger = setup_logging("tools", LOG_FILES["tools"], LOGS_DIR)
 
 
 async def get_homepage_from_github(session: aiohttp.ClientSession, repo: str) -> str | None:

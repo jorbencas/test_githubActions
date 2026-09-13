@@ -14,7 +14,6 @@ import logging
 import os
 import sys
 from datetime import datetime
-from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 import aiohttp
@@ -23,17 +22,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from utils.constants_downloadfile import CONFIG, FUENTES, YT_KEY, URL_KEY, TIPO_KEY, QUICK_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY, ID_VIDEO_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES
 from scrapers.scraper_base import ScraperPro
 from utils.common import load_json, save_json, traducir_titulos_ia, deduplicar_items
+from utils.logging_setup import setup_logging
 
-os.makedirs(LOGS_DIR, exist_ok=True)
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        RotatingFileHandler(os.path.join(LOGS_DIR, LOG_FILES["news"]), maxBytes=1024 * 1024 * 5, backupCount=5, encoding="utf-8"),
-        logging.StreamHandler(),
-    ],
-)
-logger = logging.getLogger("news")
+logger = setup_logging("news", LOG_FILES["news"], LOGS_DIR)
 
 
 

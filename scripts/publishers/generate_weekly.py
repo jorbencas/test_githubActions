@@ -18,12 +18,12 @@ import re
 import shutil
 import sys
 from datetime import datetime
-from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
-from google import genai
+import google.genai as genai
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.logging_setup import setup_logging
 from utils.constants_downloadfile import CONFIG, HTML_TEMPLATE, MD_TEMPLATE, SKILLS, LLMS, LENGUAJES, FRAMEWORKS, LIBRERIAS, CATEGORIAS, JS_CONFIG, FALLBACK_GITHUB_IMAGE, FALLBACK_SNEAK_PEEK, FALLBACK_NOTA_PERSONAL, SUBTIPO_KEY, TIPO_KEY, ORIGEN_KEY, SUB_VAL_GITHUB, TIPO_VAL_NOTICIA, VAL_RSS, ENLACE_KEY, FUENTE_KEY, TS_KEY, FECHA_PUB_KEY, CATEGORIA_KEY, ESTRELLAS_KEY, TITULO_KEY, FECHA_REAL_KEY, ID_VIDEO_KEY, LENGUAJE_KEY, DESCRIPCION_KEY, SUB_VAL_GITHUB_TOPIC, SUB_VAL_GITHUB_COLLECTION, SUB_VAL_PRODUCTHUNT, TIPO_VAL_HERRAMIENTA, TIPO_VAL_VIDEO, TIPO_VAL_SHORTS, TIPO_VAL_LIVE, FUENTES, YT_KEY, NOTICIAS_FILENAME, HERRAMIENTAS_FILENAME, LOGS_DIR, LOG_FILES, DASHBOARD_DIR, DASHBOARD_HTML, AUTO_NEWS_DIR, BLOG_AUTO_NEWS_REL
 
 # Acceder a valores anidados dentro de JS_CONFIG
@@ -33,16 +33,7 @@ EMOJIS_CATEGORIA_MAP = {v: JS_CONFIG.get("EMOJIS_CATEGORIA", "⚡🤖💻🐳�
 from scrapers.scraper_base import ScraperPro
 from utils.common import load_json, save_json, generar_imagen_noticia, obtener_recap_semanal_ia, deduplicar_items, traducir_titulos_ia
 
-os.makedirs(LOGS_DIR, exist_ok=True)
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        RotatingFileHandler(os.path.join(LOGS_DIR, LOG_FILES["weekly"]), maxBytes=1024 * 1024 * 5, backupCount=5, encoding="utf-8"),
-        logging.StreamHandler(),
-    ],
-)
-logger = logging.getLogger("weekly")
+logger = setup_logging("weekly", LOG_FILES["weekly"], LOGS_DIR)
 
 
 

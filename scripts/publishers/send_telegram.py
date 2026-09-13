@@ -16,34 +16,26 @@ import os
 import re
 import sys
 from datetime import datetime, timedelta
-from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 import edge_tts
-import requests
 from google import genai
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.logging_setup import setup_logging
 from utils.cache import CacheManager, FileCache
+from utils.telegram_client import TelegramClient
 from utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_TTS_VOZ_EN, TELEGRAM_DASHBOARD_URL, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY, TS_KEY, NOTICIAS_FILENAME, TELEGRAM_SENT_FILENAME, TELEGRAM_VOICE_SENT_FILENAME, LOGS_DIR, LOG_FILES, FUENTES_INGLES
 from utils.common import load_json, save_json
 
-os.makedirs(LOGS_DIR, exist_ok=True)
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        RotatingFileHandler(os.path.join(LOGS_DIR, LOG_FILES["telegram"]), maxBytes=1024 * 1024 * 5, backupCount=5, encoding="utf-8"),
-        logging.StreamHandler(),
-    ],
-)
-logger = logging.getLogger("telegram")
+logger = setup_logging("telegram", LOG_FILES["telegram"], LOGS_DIR)
 
 SENT_LOG = TELEGRAM_SENT_FILENAME
 VOICE_SENT_LOG = TELEGRAM_VOICE_SENT_FILENAME
 
 CACHE = CacheManager(FileCache(SENT_LOG), ttl_hours=168)  # 7 días
 VOICE_CACHE = CacheManager(FileCache(VOICE_SENT_LOG), ttl_hours=24)  # 1 día
+_client = TelegramClient()
 
 # Emojis para stripping del texto de voz
 EMOJI_PATTERN = re.compile(
@@ -143,24 +135,24 @@ async def traducir_titulo(titulo: str, client) -> str:
 
 
 def enviar_mensaje(texto: str, chat_id: str, token: str, reply_markup: dict | None = None) -> bool:
-    url = f"https://api.telegram.org/bot{token}/sendMessage"
-    payload = {
-        "chat_id": chat_id,
-        "text": texto,
-        "parse_mode": "Markdown",
-        "disable_web_page_preview": False,
-    }
-    if reply_markup:
-        payload["reply_markup"] = json.dumps(reply_markup, ensure_ascii=False)
     try:
-        r = requests.post(url, data=payload, timeout=15)
+        r = _client.send_message(
+            texto, chat_id=chat_id, token=token,
+            parse_mode="Markdown", disable_web_page_preview=False,
+            reply_markup=reply_markup, timeout=15,
+        )
+        if r is None:
+            return False
         if r.ok:
             return True
         logger.warning(f"⚠️ Telegram error (sin markdown): {r.text}")
-        payload.pop("parse_mode")
-        payload["text"] = texto.replace("_", " ").replace("*", "").replace("[", "").replace("]", "")
-        r = requests.post(url, data=payload, timeout=15)
-        return r.ok
+        texto_limpio = texto.replace("_", " ").replace("*", "").replace("[", "").replace("]", "")
+        r = _client.send_message(
+            texto_limpio, chat_id=chat_id, token=token,
+            parse_mode=None, disable_web_page_preview=False,
+            timeout=15,
+        )
+        return bool(r is not None and r.ok)
     except Exception as e:
         logger.error(f"❌ Error enviando mensaje: {e}")
         return False
@@ -200,19 +192,12 @@ async def enviar_audio_voz(titulares: list[tuple[str, str]], chat_id: str, token
         try:
             communicate = edge_tts.Communicate(texto_parte, voz)
             await communicate.save(audio_path)
-            url = f"https://api.telegram.org/bot{token}/sendVoice"
-            with open(audio_path, "rb") as f:
-                files = {"voice": (audio_path, f, "audio/mpeg")}
-                caption = f"Resumen diario ({lang_label})" if total_partes == 1 else f"Resumen diario ({lang_label}) ({i+1}/{total_partes})"
-                payload = {
-                    "chat_id": chat_id,
-                    "caption": caption,
-                }
-                r = requests.post(url, data=payload, files=files, timeout=120)
+            caption = f"Resumen diario ({lang_label})" if total_partes == 1 else f"Resumen diario ({lang_label}) ({i+1}/{total_partes})"
+            r = _client.send_voice(audio_path, caption, chat_id=chat_id, token=token, timeout=120)
             if os.path.exists(audio_path):
                 os.remove(audio_path)
-            if not r.ok:
-                logger.warning(f"⚠️ Audio {lang_label} falló: {r.text[:100]}")
+            if r is None or not r.ok:
+                logger.warning(f"⚠️ Audio {lang_label} falló: {r.text[:100] if r is not None else 'sin token/chat'}")
                 enviado_ok = False
             else:
                 logger.info(f"✅ Audio {lang_label} enviado ({len(oraciones)} titulares, voz: {voz})")

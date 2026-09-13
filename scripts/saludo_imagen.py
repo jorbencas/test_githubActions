@@ -25,6 +25,8 @@ from pathlib import Path
 import requests
 
 SCRIPT_DIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(SCRIPT_DIR))
+from utils.telegram_client import TelegramClient
 CONFIG_PATH = SCRIPT_DIR / "utils" / "saludos_config.json"
 HISTORY_PATH = SCRIPT_DIR.parent / "saludos_history.json"
 IMAGES_DIR = SCRIPT_DIR.parent / "files" / "saludos"
@@ -32,6 +34,7 @@ HISTORY_MAX = 60
 
 BOT_TOKEN = os.environ.get("TIPS_BOT_TOKEN", "")
 CHAT_ID = os.environ.get("SALUDO_CHAT_ID", os.environ.get("TIPS_CHAT_ID", "-1004296712840"))
+_client = TelegramClient(bot_token=BOT_TOKEN, chat_id=CHAT_ID)
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 TZ_OFFSET = float((os.environ.get("SALUDOS_TZ_OFFSET") or "").strip() or "0")
 
@@ -472,11 +475,10 @@ def send_photo(image_bytes, caption):
     if not BOT_TOKEN or not CHAT_ID:
         print("⚠️  TIPS_BOT_TOKEN o TIPS_CHAT_ID no configurados.")
         return False
-    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendPhoto"
     try:
-        files = {"photo": ("saludo.png", image_bytes, "image/png")}
-        payload = {"chat_id": CHAT_ID, "caption": caption}
-        resp = requests.post(url, data=payload, files=files, timeout=90)
+        resp = _client.send_photo(("saludo.png", image_bytes, "image/png"), caption=caption, parse_mode=None, timeout=90)
+        if resp is None:
+            return False
         if resp.status_code == 200:
             print("✅ Imagen enviada a Telegram.")
             return True

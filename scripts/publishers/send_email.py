@@ -16,26 +16,18 @@ import os
 import sys
 from datetime import datetime
 from pathlib import Path
-from logging.handlers import RotatingFileHandler
-
 from collections import defaultdict
 import requests
 from google import genai
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.logging_setup import setup_logging
 from utils.constants_downloadfile import CONFIG, EMAIL_TEMPLATE, EMAIL_ROW_TEMPLATE, EMAIL_SOURCE_HEADER, EMAIL_VIDEO_HEADER, EMAIL_VIDEO_ROW, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, ID_VIDEO_KEY, BADGE_KEY, VAL_TECH, TIPO_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES
 from utils.common import load_json, save_json, resumir_noticia
+from utils.logging_setup import setup_logging
 
 os.makedirs(LOGS_DIR, exist_ok=True)
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        RotatingFileHandler(os.path.join(LOGS_DIR, LOG_FILES["email"]), maxBytes=1024 * 1024 * 5, backupCount=5, encoding="utf-8"),
-        logging.StreamHandler(),
-    ],
-)
-logger = logging.getLogger("email")
+logger = setup_logging("email", LOG_FILES["email"], LOGS_DIR)
 
 # Colores e iconos por fuente
 SOURCE_STYLES = {

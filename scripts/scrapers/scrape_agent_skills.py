@@ -14,7 +14,6 @@ import os
 import re
 import sys
 from datetime import datetime
-from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 import aiohttp
@@ -25,20 +24,9 @@ from utils.constants_downloadfile import (
     FUENTE_KEY, TIPO_KEY, TS_KEY, LOGS_DIR, LOG_FILES,
 )
 from utils.common import load_json, save_json
+from utils.logging_setup import setup_logging
 
-os.makedirs(LOGS_DIR, exist_ok=True)
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        RotatingFileHandler(
-            os.path.join(LOGS_DIR, "agent_skills.log"),
-            maxBytes=1024 * 1024 * 5, backupCount=3, encoding="utf-8",
-        ),
-        logging.StreamHandler(),
-    ],
-)
-logger = logging.getLogger("agent_skills")
+logger = setup_logging("agent_skills", "agent_skills.log", LOGS_DIR, backup_count=3)
 
 AGENT_SKILLS_FILENAME = "agent_skills.json"
 

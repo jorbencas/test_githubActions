@@ -1,11 +1,11 @@
-name: "[EIXAM] 🎬 Recopilar toda la info de la película Enjambre"
+name: "[EL NIDO] 🎬 Recopilar info de la película El nido (2026)"
 on:
   schedule:
-    - cron: "17 */6 * * *"   # Cada 6 horas: 00:17, 06:17, 12:17, 18:17 UTC
+    - cron: "47 */6 * * *"   # Cada 6 horas: 00:47, 06:47, 12:47, 18:47 UTC
   workflow_dispatch:
 
 jobs:
-  recopilar_eixam:
+  recopilar_el_nido:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -22,7 +22,7 @@ jobs:
         run: |
           git status
           test -d scripts/scrapers && echo "Éxito: scripts/scrapers presente"
-          test -f scripts/scrapers/scrape_eixam.py && echo "Éxito: scrape_eixam.py presente"
+          test -f scripts/scrapers/scrape_el_nido.py && echo "Éxito: scrape_el_nido.py presente"
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -35,23 +35,23 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests BeautifulSoup4 google-genai
 
-      - name: 🎬 Recopilar información sobre Eixam (Enjambre) y enviar novedades al canal de imágenes
+      - name: 🎬 Recopilar información sobre El nido (2026) y enviar novedades al canal de imágenes
         id: scrape
         env:
           TIPS_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           SALUDO_CHAT_ID: ${{ secrets.SALUDO_CHAT_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python scripts/scrapers/scrape_eixam.py --enviar
+        run: python scripts/scrapers/scrape_el_nido.py --enviar
 
       - name: 💾 Commit del archivo acumulado (persistencia duradera)
         if: always()
         run: |
-          git config user.name "eixam-bot"
-          git config user.email "eixam-bot@users.noreply.github.com"
-          git add files/eixam_pelicula.json files/eixam_imdb_parental.json
+          git config user.name "el-nido-bot"
+          git config user.email "el-nido-bot@users.noreply.github.com"
+          git add files/el_nido_pelicula.json
           if git diff --cached --quiet; then
-            echo "Sin cambios en eixam_pelicula.json"
+            echo "Sin cambios en el_nido_pelicula.json"
           else
-            git commit -m "[eixam] actualizar registro e IMDb Parental de la película Enjambre"
+            git commit -m "[el nido] actualizar registro de la película El nido (2026)"
             git push origin HEAD:master
           fi

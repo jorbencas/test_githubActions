@@ -1,6 +1,64 @@
-# Contexto — test_githubActions (Jul 2026)
+# Contexto — test_githubActions (Sep 2026)
 
 ## Cambios recientes
+
+### Refactor SOLID del motor de películas — 12/09/2026
+- Los dos scrapers (Eixam y "El nido") comparten ahora un motor genérico SOLID en
+  `scripts/scrapers/movie_scraper_base.py`:
+  - **SRP**: `MovieConfig` (solo datos), `RelevanceFilter` (relevancia),
+    `MovieClassifier` (clasificación), `MovieNewsScraper` (recopilar/anexar/
+    cargar/validar_ia), `TelegramNewsSender` (envío) y `ejecutar()` (orquestación).
+  - **OCP**: se añade una película con una nueva `MovieConfig` (queries, señales,
+    anios, titulos_clave, clasificador, `ia_prompt`, `regla_extra`) sin tocar el motor.
+  - **LSP/ISP/DIP**: `MovieNewsScraper` depende de `MovieConfig`, no de globals.
+  - La regla especial de Eixam (doble título "eixam+enjambre") se inyecta como
+    hook `regla_extra`; el prompt IA de cada película se inyecta con `ia_prompt`.
+- `scrape_eixam.py` y `scrape_el_nido.py` quedan como **config + entry point**:
+  ya NO mutan globals del motor (antes `scrape_el_nido.py` sobrescribía las
+  constantes de `scrape_eixam` vía monkey-patching; ahora es data-driven).
+- Nuevo `scripts/scrapers/imdb_parental.py`: la vigilancia de Guía Parental de
+  IMDb se extrae a `IMDBParentalMonitor` (SRP), usado por `scrape_eixam.py`.
+- Comportamiento verificado idéntico: dry-run Eixam (93 archivados + 1 nuevo,
+  tipos coherentes), dry-run El nido (≈57-58), smoke test de relevancia de ambas
+  configs. Sin cambios en CLI, JSON, workflows ni envíos a Telegram.
+
+### Nuevo: recopilación de la película "El nido" (2026) — 12/09/2026
+- Nuevo script `scripts/scrapers/scrape_el_nido.py`: recopila y archiva toda la información
+  sobre la película **"El nido" (2026)**, thriller/terror psicológico de Hugo Stuven (Filmax)
+  con Michelle Jenner, estrenada en cines el **11/09/2026** (hoy). El usuario la llamó "2029",
+  pero IMDb y todas las fuentes confirman que es la misma del `tt39163611` → 2026.
+- **Reutiliza el motor de `scrape_eixam.py`** → tras el refactor SOLID de hoy, ambos
+  usan `movie_scraper_base.py` (MovieNewsScraper + RelevanceFilter + TelegramNewsSender).
+  Este scraper se define como una `MovieConfig` propia con `ia_prompt` de "El nido",
+  sin tocar el motor ni los globals de Eixam. Para eso se hicieron data-driven:
+  - Las búsquedas extra inline ("enjambre/eixam") pasaron a la global `QUERIES_EXTRA`.
+  - El filtro obligatorio de título pasó a la global `TITULOS_CLAVE` (antes tuple hardcodeada).
+- **Enfoque desnudez/sexo**: se añadieron búsquedas explícitas ("El nido desnudos", "sexo",
+  "desnudez", "tetas", "escenas de sexo", "guía parental", "spoilers/final explicado"),
+  se vigilan sitios de reseñas/spoilers (letterboxd, reddit, kids-in-mind, screenit, imdb
+  parents guide, decine21...) y `SENALES_CINE`/`CLASIFICADOR` incluyen términos de contenido
+  adulto (clasificación tipo "sexo") para que esos titulares pasen el filtro de relevancia.
+- Anti falsos positivos "El nido": señales fuertes del reparto/productora (hugo stuven,
+  michelle jenner, luisa gavasa, pablo derqui, dylan radley, filmax, velasco, santiago lallana,
+  césar de nicolás, año 2026) + señales negativas de nidos de pájaros/naturaleza y de otras
+  obras homónimas (The Nest/Sean Durkin, El nido 1980, película mexicana 2021...) + años
+  distintos de 2026 en `ANIOS_OTROS`. Validación opcional con Gemini (prompt propio).
+- Salida acumulada en `files/el_nido_pelicula.json`.
+- Nuevo workflow `.github/workflows/el_nido_scrape.yml`: cada 6 horas (`47 */6 * * *`) +
+  `workflow_dispatch`, con `--enviar` y commit del JSON a master (persistencia duradera).
+- La guía parental de IMDb de El nido (`tt39163611`) ya la vigila `scrape_eixam.py`; el
+  scraper de El nido no la duplica.
+
+### Nuevo: vigilancia de Guía Parental de IMDb para Eixam — 12/09/2026
+- `scrape_eixam.py` ahora vigila las 2 fichas de Guía Parental de IMDb de la película:
+  `tt39163611` (El nido) y `tt37076898` (Enjambre). Con `--enviar` (usado por
+  `eixam_scrape.yml`) compara el texto scrapeado con el snapshot de
+  `files/eixam_imdb_parental.json`; si cambia, envía 1 mensaje a Telegram con el texto.
+- IMDb bloquea requests directos (HTTP 202/challenge) → el script intenta con requests y,
+  si falla, cae al lector público `r.jina.ai` (usa headers por defecto; con nuestros
+  headers de navegador jina responde 403).
+- La primera ejecución solo fija la línea base (sin enviar); los cambios posteriores
+  envían mensaje. `eixam_scrape.yml` persiste ahora también `eixam_imdb_parental.json`.
 
 ### Nuevo: recopilación de la película Eixam (Enjambre) — 20/08/2026
 - Nuevo script `scripts/scrapers/scrape_eixam.py`: recopila y archiva Toda la información

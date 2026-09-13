@@ -13,7 +13,6 @@ import logging
 import os
 import sys
 from datetime import datetime, timedelta
-from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 import aiohttp
@@ -25,22 +24,9 @@ from utils.constants_downloadfile import (
     TIPO_VAL_HERRAMIENTA,
 )
 from utils.common import load_json, save_json
-import sys
-from pathlib import Path
+from utils.logging_setup import setup_logging
 
-os.makedirs(LOGS_DIR, exist_ok=True)
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        RotatingFileHandler(
-            os.path.join(LOGS_DIR, LOG_FILES["tools"]),
-            maxBytes=1024 * 1024 * 5, backupCount=5, encoding="utf-8",
-        ),
-        logging.StreamHandler(),
-    ],
-)
-logger = logging.getLogger("ai_tools")
+logger = setup_logging("ai_tools", LOG_FILES["tools"], LOGS_DIR)
 
 CANDIDATES_FILENAME = "ai_tools_candidates.json"
 

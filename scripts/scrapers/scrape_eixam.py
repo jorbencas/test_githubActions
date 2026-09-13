@@ -1,549 +1,113 @@
 #!/usr/bin/env python3
 """
-scrape_eixam.py — Recopila TODA la información disponible sobre la película
-"Eixam" (Enjambre, 2026), thriller rural dirigido por Óscar Bernàcer.
+scrape_eixam.py — Configuración y entry point de la recopilación de información
+sobre la película "Eixam" (Enjambre, 2026), thriller rural de Óscar Bernàcer.
 
-Reúne y va archivando a lo largo del tiempo: trailers, fotos, artículos,
-noticias, críticas, reviews, primeras impresiones, pósters, primeras imágenes,
-críticas de todos los medios y entrevistas a actores.
+El motor genérico (MovieNewsScraper, relevancia, Telegram, etc.) está en
+movie_scraper_base.py (SOLID: SRP + OCP + DIP). Este módulo solo define la
+configuración específica de Eixam, la regla extra de relevancia (doble título)
+y el flujo main que añade la vigilancia de IMDb Parental.
 
-La salida se acumula (deduplicada por URL) en:
-    files/eixam_pelicula.json
-
-Cada entrada se clasifica por tipo (trailer, foto, poster, entrevista, critica,
-noticia, video, fotograma, otro) y se guarda con su fecha, medio y enlace.
+La salida se acumula (deduplicada por URL) en files/eixam_pelicula.json.
 
 Uso:
     python scripts/scrapers/scrape_eixam.py                 # recopila y archiva
     python scripts/scrapers/scrape_eixam.py --dry-run       # muestra sin guardar
     python scripts/scrapers/scrape_eixam.py --enviar        # además envía resumen a Telegram
+
+    Con --enviar también se vigilan las 2 fichas de Guía Parental de IMDb
+    (tt39163611 / tt37076898) y se envía 1 mensaje si cambia su texto.
 """
 import argparse
-import asyncio
-import html
-import json
-import os
-import re
 import sys
-from datetime import datetime
 from pathlib import Path
-from urllib.parse import quote_plus
-
-import requests
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_DIR = SCRIPT_DIR.parent.parent
-sys.path.insert(0, str(REPO_DIR))
+sys.path.insert(0, str(SCRIPT_DIR))
 
-PELICULA = "Eixam"
-PELICULA_ES = "Enjambre"
-OUTPUT_PATH = Path(REPO_DIR) / "files" / "eixam_pelicula.json"
-
-# Términos de búsqueda con variantes (título original + título español)
-QUERIES = [
-    "Eixam Óscar Bernàcer",
-    "Eixam película",
-    "Eixam Enjambre 2026",
-    "Enjambre película Óscar Bernàcer",
-    "Enjambre 2026 película",
-    "Enjambre óscar bernacer estreno",
-    "Eixam crítica",
-    "Enjambre crítica reseña",
-    "Eixam tráiler trailer",
-    "Enjambre tráiler oficial",
-    "Eixam Pablo Molinero",
-    "eixam Cristina Fernández Pintado",
-    "eixam Malpàs",
-    "eixam Bejís rodaje",
-    # ── Nuevas búsquedas ──
-    "Eixam película española",
-    "Eixam thriller rural",
-    "Eixam estreno cines",
-    "Enjambre película española",
-    "Enjambre thriller rural",
-    "Enjambre estreno cines",
-    "Eixam reparto actores",
-    "Enjambre reparto actores",
-    "Eixam Pablo Derqui",
-    "Enjambre Pablo Derqui",
-    "Eixam Marta Belenguer",
-    "Enjambre Marta Belenguer",
-    "Eixam Atlàntida Mallorca",
-    "Enjambre Atlàntida Mallorca",
-    "Eixam Nakamura Films",
-    "Enjambre Nakamura Films",
-    "Eixam A Contracorriente Films",
-    "Enjambre A Contracorriente Films",
-]
-
-# Términos para vídeos de YouTube (más cortos y orientados a tráilers/clips)
-YT_QUERIES = [
-    "eixam película",
-    "eixam enjambre tráiler",
-    "eixam óscar bernàcer",
-    "enjambre eixam estreno 2026",
-    "eixam thriller rural",
-]
-
-# Búsquedas en Contraste (revista de cine, WordPress RSS)
-CONTRASTE_QUERIES = [
-    "eixam enjambre",
-    "enjambre eixam",
-    "eixam bernàcer",
-]
-
-# Directorios / medios de reseñas específicos consultados vía Google News.
-# SOLO se busca el título original "eixam" (referencia inequívoca de esta película),
-# porque "enjambre" mezclaría fichas de otras películas homónimas (2020, 2003...).
-SITIOS_RESENIAS = [
-    ("decine21.com", "eixam"),
-    ("decine21.com", "enjambre 2026"),
-    ("contraste.info", "eixam"),
-    ("contraste.info", "enjambre bernàcer"),
-    ("butacaancha", "eixam"),
-    ("fotogramas.es", "eixam"),
-    ("cinemaldito.com", "eixam"),
-    ("aullidos.com", "eixam"),
-    ("ecartelera", "eixam"),
-    ("sensa cine", "eixam"),
-    ("filmaffinity", "eixam"),
-    ("cineuropa.org", "eixam"),
-    ("labutaca.net", "eixam"),
-    ("dirigido.es", "eixam"),
-    ("espinof.com", "eixam"),
-    ("title-magazine.com", "eixam"),
-    ("elcineenlauva.com", "eixam"),
-    ("cinemanía", "eixam"),
-    ("elcomercio.es", "eixam"),
-    ("elpais.com", "eixam"),
-    ("elmundo.es", "eixam"),
-    ("laregion.es", "eixam"),
-    ("20minutos.es", "eixam"),
-    ("buzzfeed.com", "eixam"),
-    ("timeout.com", "eixam"),
-    ("indiewire.com", "eixam"),
-    ("variety.com", "eixam"),
-    ("hollywoodreporter.com", "eixam"),
-    # ── Nuevas fuentes ──
-    ("cadenaser.com", "eixam"),
-    ("rtve.es", "eixam"),
-    ("europapress.es", "eixam"),
-    ("efeservices.com", "eixam"),
-    ("laverdad.es", "eixam"),
-    ("levante-emv.com", "eixam"),
-    ("informacion.es", "eixam"),
-    ("diarioinformacion.com", "eixam"),
-    ("abc.es", "eixam"),
-    ("larazon.es", "eixam"),
-    ("elperiodico.com", "eixam"),
-    ("nius.es", "eixam"),
-    ("lasprovincias.es", "eixam"),
-    ("superfilmes.es", "eixam"),
-    ("cineuropa.org", "enjambre 2026"),
-    ("imdb.com", "eixam"),
-    ("themoviedb.org", "eixam"),
-]
-
-# Redes sociales del distribuidor y productora — se buscan vía Google News sin site:
-REDES_SOCIALES = [
-    "acontracorrientefilms eixam instagram",
-    "acontracorrientefilms enjambre instagram",
-    "atlantidamallorca eixam instagram",
-    "atlantidamallorca enjambre instagram",
-    "acontracorrientefilms eixam twitter",
-    "acontracorrientefilms enjambre twitter",
-    "atlantidamallorca eixam twitter",
-    "atlantidamallorca enjambre twitter",
-    "acontracorrientefilms eixam x.com",
-    "atlantidamallorca eixam x.com",
-    "nakamura films eixam instagram",
-    "nakamura films enjambre instagram",
-    "nakamura films eixam twitter",
-    "nakamura films enjambre twitter",
-    "nakamura films eixam x.com",
-]
-
-# URLs directas de Filmaffinity (críticas de usuarios y profesionales)
-# Se buscan vía Bing porque Filmaffinity bloquea peticiones directas (403)
-# NOTA: Filmaffinity no aparece bien en Bing News, se usa Bing Web como fallback
-FILMAFFINITY_QUERIES = [
-    "site:filmaffinity.com eixam",
-    "site:filmaffinity.com enjambre 2026",
-    "filmaffinity eixam crítica",
-    "filmaffinity enjambre reseña",
-]
-
-# Fuentes directas de cine adicionales (scrapeo directo)
-FUENTES_CINE_DIRECTAS = [
-    {"url": "https://www.cinemaldito.com/?s=eixam", "selector": "article a[href]", "medio": "Cinemaldito"},
-    {"url": "https://www.aullidos.com/?s=eixam", "selector": "article a[href]", "medio": "Aullidos"},
-    {"url": "https://www.ecartelera.com/buscar/?q=eixam", "selector": "a[href*='/peliculas/']", "medio": "ECartelera"},
-    {"url": "https://www.sensacine.com/buscar/?q=eixam", "selector": "a[href*='/peliculas/']", "medio": "SensaCine"},
-    {"url": "https://www.cineuropa.org/es/?s=eixam", "selector": "article a[href]", "medio": "Cineuropa"},
-    {"url": "https://www.labutaca.net/buscar/?s=eixam", "selector": "article a[href]", "medio": "La Butaca"},
-    {"url": "https://www.espinof.com/buscar/?s=eixam", "selector": "article a[href]", "medio": "Espinof"},
-    {"url": "https://www.cinemania.es/?s=eixam", "selector": "article a[href]", "medio": "Cinemania"},
-]
-
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
-    "Accept": "application/xml,application/json,text/html,*/*;q=0.8",
-    "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",
-}
-
-BOT_TOKEN = os.environ.get("TIPS_BOT_TOKEN", "")
-# Se envía al mismo canal/secret que usa el envío de imágenes de buenos días (SALUDO_CHAT_ID)
-CHAT_ID = os.environ.get("SALUDO_CHAT_ID", os.environ.get("TIPS_CHAT_ID", ""))
+from movie_scraper_base import (
+    MovieConfig, MovieNewsScraper, TelegramNewsSender, ejecutar,
+)
+from imdb_parental import IMDBParentalMonitor
 
 # =============================================================================
-# Sistema de relevancia: señales positivas y negativas para evitar falsos positivos
-# "Enjambre" aparece en muchas obras y contextos (serie Donald Glover/Swarm,
-# películas homónimas, abejas/apicultura, aviación, iOS, ciencia, etc.).
-# Solo aceptamos resultados con suficientes señales positivas y ninguna negativa.
+# Configuración específica de "Eixam" (Enjambre, 2026)
 # =============================================================================
 
-# Señales fuertes y específicas de ESTA película (la vuelven inequívoca)
-SENALES_FUERTES = [
-    "óscar bernàcer", "oscar bernacer", "bernàcer", "pablo molinero",
-    "cristina fernández pintado", "cristina fernandez pintado",
-    "maría maroto", "maria maroto", "pablo derqui", "marta belenguer",
-    "jordi aguilar", "glòria march", "gloria march", "àngel fígols",
-    "àngel fígols", "malpàs", "bejís", "bejis", "a contracorriente",
-    "nadal", "lluc", "silvia", "alba", "comunidad valenciana",
-    "atlàntida mallorca", "atlantida mallorca", "corte y confección",
-    "nakamura films", "primer largometraje de ficción",
+OUTPUT_PATH = REPO_DIR / "files" / "eixam_pelicula.json"
+IMDB_PARENTAL_PATH = REPO_DIR / "files" / "eixam_imdb_parental.json"
+IMDB_PARENTAL_URLS = [
+    "https://www.imdb.com/es-es/title/tt39163611/parentalguide/?ref_=tt_stry_pg",
+    "https://www.imdb.com/es-es/title/tt37076898/parentalguide/?ref_=tt_stry_pg",
 ]
 
-# Señales positivas genéricas de cine/película (refuerzan pero no bastan solas)
-SENALES_CINE = [
-    "película", "pelicula", "cine", "film", "estreno", "largometraje",
-    "tráiler", "trailer", "reparto", "director", "dirección", "direccion",
-    "crítica", "critica", "reseña", "resena", "review", "cartel", "póster",
-    "poster", "fotograma", "rodaje", "taquilla", "pantalla", "cineasta",
-    "industria del cine", "actores", "actriz", "guion", "banda sonora",
-]
 
-# Contextos de "enjambre" que NO son esta película (se descartan siempre)
-SENALES_NEGATIVAS = [
-    "abeja", "abejas", "apicultura", "colmena", "drones", "apiario",
-    "miel", "polinización", "polinizacion",
-    "donald glover", "swarm", "prime video series", "serie de prime video",
-    "hipnotic", "laurent bouzereau", "el exterminador", "exterminador",
-    "battle fish", "thor", "marvel", "avengers", "avispas", "machos enjambre",
-    "avispa", "jugador", "torneo", "ciencia", "investigación", "investigacion",
-    "genética", "genetica", "ordenador", "computadora", "apple", "ios",
-    "teléfono", "telefono", "avión", "avion", "helicóptero", "helicoptero",
-    "la nueva serie", "serie de la semana", "recomendada", "recomienda",
-]
-
-# Años de estrenos de otras películas/series homónimas "Enjambre" que NO son la nuestra:
-# si el título menciona un año distinto de 2026, es otra obra (fichas de decine21, etc.).
-ANIOS_OTROS = ["2020", "2003", "2005", "2014", "2021", "2019", "2022", "2013", "2025"]
-
-# Umbral de puntuación: mínimo de señales positivas para aceptar
-UMBRAL_POSITIVAS = 2
-
-
-def _relevancia(titulo: str) -> int:
-    """Devuelve el nº de señales positivas (fuertes + cine) de un título,
-    o -1 si contiene una señal negativa inequívoca."""
-    texto = titulo.lower()
-    if any(neg in texto for neg in SENALES_NEGATIVAS):
-        return -1
-    puntuacion = 0
-    for s in SENALES_FUERTES:
-        if s in texto:
-            puntuacion += 1
-    for s in SENALES_CINE:
-        if s in texto:
-            puntuacion += 1
-    return puntuacion
-
-
-def _es_relevante(titulo: str) -> bool:
-    """Acepta solo lo claramente relacionado con la película Eixam (Enjambre)."""
-    texto = titulo.lower()
-    punt = _relevancia(texto)
-    if punt < 0:
-        return False
-    # Fichas de otras películas/series homónimas: si el título indica un año
-    # distinto de 2026, no es la nuestra.
-    if any(a in texto for a in ANIOS_OTROS):
-        return False
-    # Requiere que aparezca el título de la peli o el director
-    if not any(k in texto for k in ("eixam", "enjambre", "bernàcer", "oscar bernacer", "óscar bernàcer")):
-        return False
-    # Si el título menciona AMBOS títulos (Enjambre y Eixam), es la misma película:
-    # señal muy fuerte que basta con un solo refuerzo de cine.
+def _regla_extra_eixam(texto: str, punt: int):
+    """Regla especial de Eixam (OCP hook en MovieConfig.regla_extra):
+    Si el titular contiene AMBOS títulos (eixam + enjambre), basta un solo
+    refuerzo de cine (punt >= 1). Si contiene "eixam" pero punt==0 y no hay
+    ninguna señal de cine (nombre propio en ciencia: 'enjambre de Eixam'), rechazar."""
     if "eixam" in texto and "enjambre" in texto:
         return punt >= 1
-    # Filtrar el grupo "eixam" suelto en nombre propio (ciencia: enjambre de Eixam)
-    if "eixam" in texto and punt == 0 and not any(c in texto for c in SENALES_CINE):
+    if "eixam" in texto and punt == 0 and not any(c in texto for c in EIXAM_CONFIG.senales_cine):
         return False
-    return punt >= UMBRAL_POSITIVAS
+    return None
 
 
-def _url_real(url: str) -> str:
-    """Extrae la URL destino real de servidores de redirección (Bing apiclick)."""
-    from urllib.parse import unquote
-    m = re.search(r"[?&]url=", url)
-    if m:
-        real = unquote(url.split(m.group(0), 1)[1].split("&")[0])
-        if real.startswith(("http://", "https://")):
-            url = real
-    m = re.search(r"https?://[^\s\"<>]+", url)
-    url = m.group(0) if m else url
-    # Normaliza los espejos regionales de MSN (es-us/es-ve/es-mx → mismo artículo)
-    if "msn.com/" in url:
-        url = re.sub(r"https?://[^/]+/[a-z]{2}-[a-z]{2}/", "https://www.msn.com/", url)
-        # Une variantes de categoría (other/cine/entretenimiento/noticias...) del mismo
-        # contenido: conserva solo dominio + slug del artículo (vi-... o id-...).
-        slug = re.search(r"/(?:vi-|id-?|AA)[A-Za-z0-9_-]+", url)
-        if slug:
-            url = "https://www.msn.com" + slug.group(0)
-    return url
-
-# Palabras que orientan la clasificación por tipo de contenido
-CLASIFICADOR = [
-    ("trailer", ["tráiler", "trailer", "trailer oficial", "teaser"]),
-    ("poster", ["póster", "poster", "cartel"]),
-    ("entrevista", ["entrevista", "interview"]),
-    ("critica", ["crítica", "critica", "reseña", "review", "críticas"]),
-    ("forograma", ["fotograma", "frame"]),
-    ("foto", ["foto", "fotograf", "imágenes", "imagenes", "imagen", "imágenes"]),
-    ("video", ["vídeo", "video", "clip"]),
-    ("noticia", ["estreno", "primeras imágenes", "primera imagen", "rodaje", "se anuncia"]),
-]
+def _ia_prompt_eixam(numerados: str) -> str:
+    return (
+        "Eres un experto en cine. Determina cuáles de los siguientes titulares se refieren "
+        "EXCLUSIVAMENTE a la película española 'Eixam' (Enjambre, 2026), un thriller rural "
+        "dirigido por Óscar Bernàcer con Pablo Molinero y Cristina Fernández Pintado, cuya "
+        "historia transcurre en la aldea de Malpàs.\n"
+        "NO cuentan: otras películas/series llamadas 'Enjambre' (ej. Swarm de Donald Glover, "
+        "Hypnotic, series de abejas/apicultura, ciencia, aviación).\n"
+        "Responde SOLO con la lista de números de los titulares que SÍ son sobre esta película, "
+        "separados por comas, sin texto adicional. Ejemplo: 1,3,5\n\n"
+        f"{numerados}"
+    )
 
 
-def clasificar(texto: str) -> str:
-    t = texto.lower()
-    for tipo, palabras in CLASIFICADOR:
-        for p in palabras:
-            if p in t:
-                return tipo
-    return "noticia"
-
-
-def _rss_google(termino: str, ventana: str = "3h") -> list:
-    url = f"https://news.google.com/rss/search?q={quote_plus(termino)}+when:{ventana}&hl=es&gl=ES&ceid=ES:es"
-    items = []
-    try:
-        r = requests.get(url, timeout=8, headers=HEADERS)
-        if r.status_code != 200 or "<html" in r.text[:500].lower():
-            return []
-        texto = r.text
-        regex = re.compile(
-            r"<item>.*?<title>(.*?)</title>.*?<link>(.*?)</link>.*?<pubDate>(.*?)</pubDate>.*?</item>",
-            re.S,
-        )
-        for m in regex.finditer(texto):
-            titulo = html.unescape(m.group(1)).strip()
-            enlace = html.unescape(m.group(2)).strip()
-            enlace = re.sub(r"^<\!\[CDATA\[|\]\]>$", "", enlace)
-            fecha = m.group(3).strip()
-            img_url = ""
-            im = re.search(r"<img.*?src=\"(.*?)\"", m.group(0))
-            if im:
-                img_url = html.unescape(im.group(1))
-            items.append({
-                "titulo": titulo, "url": enlace, "fecha_pub": fecha, "fecha_ts": datetime.now().isoformat(),
-                "medio": "Google News", "imagen": img_url,
-            })
-    except Exception as e:
-        print(f"  ⚠️  Google RSS error ({termino}): {e}")
-    return items
-
-
-def _rss_youtube(termino: str) -> list:
-    """Busca vídeos en YouTube (resultados del buscador) extrayendo 'ytInitialData'
-    del HTML, ya que el RSS oficial está deshabilitado (400)."""
-    url = f"https://www.youtube.com/results?search_query={quote_plus(termino)}"
-    items = []
-    try:
-        r = requests.get(url, timeout=25, headers=HEADERS)
-        if r.status_code != 200:
-            print(f"  ⚠️  YouTube status {r.status_code} ({termino})")
-            return []
-        import json
-        m = re.search(r"var ytInitialData = (\{.*?\});</script>", r.text, re.S)
-        if not m:
-            return []
-        data = json.loads(m.group(1))
-        vistos = set()
-
-        def _caminar(o):
-            if isinstance(o, dict):
-                v = o.get("videoRenderer")
-                if v:
-                    vid = v.get("videoId", "")
-                    ti = (v.get("title", {}).get("runs", [{}])[0].get("text", "")
-                          or v.get("title", {}).get("simpleText", ""))
-                    canal = v.get("ownerText", {}).get("runs", [{}])[0].get("text", "")
-                    if vid and vid not in vistos:
-                        vistos.add(vid)
-                        items.append({
-                            "titulo": ti, "url": f"https://www.youtube.com/watch?v={vid}",
-                            "fecha_pub": "", "fecha_ts": datetime.now().isoformat(),
-                            "medio": canal or "YouTube", "imagen": f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg",
-                        })
-                for val in o.values():
-                    _caminar(val)
-            elif isinstance(o, list):
-                for x in o:
-                    _caminar(x)
-
-        _caminar(data)
-    except Exception as e:
-        print(f"  ⚠️  YouTube error ({termino}): {e}")
-    return items
-
-
-def _rss_contraste(termino: str) -> list:
-    """Busca en Contraste.info (revista de cine) usando su feed RSS de búsqueda
-    de WordPress (los directorios de reseñas a menudo salen tarde)."""
-    url = f"https://contraste.info/search/{quote_plus(termino)}/feed/rss2/"
-    items = []
-    try:
-        r = requests.get(url, timeout=20, headers=HEADERS)
-        if r.status_code != 200:
-            return []
-        texto = r.text
-        regex = re.compile(r"<item>(.*?)</item>", re.S)
-        for m in regex.finditer(texto):
-            item = m.group(0)
-            titulo = html.unescape(re.search(r"<title>(.*?)</title>", item, re.S).group(1)).strip() if re.search(r"<title>(.*?)</title>", item, re.S) else ""
-            enlace = html.unescape(re.search(r"<link>(.*?)</link>", item, re.S).group(1)).strip() if re.search(r"<link>(.*?)</link>", item, re.S) else ""
-            fecha = html.unescape(re.search(r"<pubDate>(.*?)</pubDate>", item, re.S).group(1)).strip() if re.search(r"<pubDate>(.*?)</pubDate>", item, re.S) else ""
-            if titulo and enlace:
-                items.append({
-                    "titulo": titulo, "url": enlace, "fecha_pub": fecha, "fecha_ts": datetime.now().isoformat(),
-                    "medio": "Contraste", "imagen": "",
-                })
-    except Exception as e:
-        print(f"  ⚠️  Contraste error ({termino}): {e}")
-    return items
-
-
-def _rss_bing(termino: str) -> list:
-    url = f"https://www.bing.com/news/search?q={quote_plus(termino)}&format=rss"
-    items = []
-    try:
-        r = requests.get(url, timeout=10, headers=HEADERS)
-        if r.status_code != 200:
-            return []
-        texto = r.text
-        regex = re.compile(r"<item>.*?</item>", re.S)
-        for m in regex.finditer(texto):
-            item = m.group(0)
-            titulo = html.unescape(re.search(r"<title>(.*?)</title>", item, re.S).group(1)).strip() if re.search(r"<title>(.*?)</title>", item, re.S) else ""
-            enlace = html.unescape(re.search(r"<link>(.*?)</link>", item, re.S).group(1)).strip() if re.search(r"<link>(.*?)</link>", item, re.S) else ""
-            fecha = html.unescape(re.search(r"<pubDate>(.*?)</pubDate>", item, re.S).group(1)).strip() if re.search(r"<pubDate>(.*?)</pubDate>", item, re.S) else ""
-            fuente = html.unescape(re.search(r"<News:Source>(.*?)</News:Source>", item, re.S).group(1)).strip() if re.search(r"<News:Source>(.*?)</News:Source>", item, re.S) else ""
-            img_url = ""
-            im = re.search(r"<News:Image.*?<News:Url>(.*?)</News:Url>", item, re.S) or re.search(r"<Image.*?<Url>(.*?)</Url>", item, re.S)
-            if im:
-                img_url = html.unescape(im.group(1))
-            if titulo and enlace:
-                items.append({
-                    "titulo": titulo, "url": enlace, "fecha_pub": fecha, "fecha_ts": datetime.now().isoformat(),
-                    "medio": fuente or "Bing News", "imagen": img_url,
-                })
-    except Exception as e:
-        print(f"  ⚠️  Bing RSS error ({termino}): {e}")
-    return items
-
-
-def _scrape_filmaffinity() -> list:
-    """Busca críticas de Filmaffinity vía Bing (sitio bloquea peticiones directas)."""
-    items = []
-    for query in FILMAFFINITY_QUERIES:
-        try:
-            bing_items = _rss_bing(query)
-            for it in bing_items:
-                url = it.get("url", "")
-                titulo = it.get("titulo", "")
-                # Filtrar solo resultados de filmaffinity.com
-                if "filmaffinity.com" not in url:
-                    continue
-                # Determinar si es crítica de usuario o profesional
-                es_profesional = any(k in titulo.lower() for k in (
-                    "crítica de prensa", "critica de prensa", "reseña de prensa",
-                    "review de prensa", "crítica profesional", "critica profesional",
-                ))
-                es_usuario = any(k in titulo.lower() for k in (
-                    "opinión de usuarios", "opiniones de usuarios", "crítica de usuario",
-                    "critica de usuario", "reseña de usuario",
-                ))
-                if es_profesional:
-                    it["tipo"] = "critica_profesional"
-                elif es_usuario:
-                    it["tipo"] = "critica_usuario"
-                else:
-                    it["tipo"] = "critica"
-                it["medio"] = "Filmaffinity"
-                items.append(it)
-        except Exception as e:
-            print(f"  ⚠️  Filmaffinity Bing error: {e}")
-    return items
-
-
-def _scrape_cine_directo() -> list:
-    """Scrapea fuentes de cine directamente (sin Bing)."""
-    items = []
-    for fuente in FUENTES_CINE_DIRECTAS:
-        try:
-            url = fuente["url"]
-            selector = fuente.get("selector", "a[href]")
-            medio = fuente.get("medio", "Cine")
-            r = requests.get(url, timeout=15, headers=HEADERS)
-            if r.status_code != 200:
-                continue
-            # Buscar enlaces que contengan "eixam" o "enjambre"
-            links = re.findall(r'href="([^"]*)"[^>]*>([^<]*)</a>', r.text, re.S)
-            for href, texto in links:
-                texto_limpio = html.unescape(re.sub(r'<[^>]+>', '', texto)).strip()
-                if not texto_limpio or len(texto_limpio) < 5:
-                    continue
-                texto_lower = texto_limpio.lower()
-                if not any(k in texto_lower for k in ("eixam", "enjambre", "bernàcer", "oscar bernacer")):
-                    continue
-                if href.startswith("/"):
-                    from urllib.parse import urljoin
-                    href = urljoin(url, href)
-                items.append({
-                    "titulo": texto_limpio, "url": href, "fecha_pub": "", "fecha_ts": datetime.now().isoformat(),
-                    "medio": medio, "imagen": "", "tipo": "critica",
-                })
-        except Exception as e:
-            print(f"  ⚠️  Fuente cine directa error ({fuente.get('medio', '?')}): {e}")
-    return items
-
-
-def _anexar(items, resultados, vistos):
-    """Añade a resultados los items relevantes y no duplicados."""
-    for it in items:
-        if not _es_relevante(it["titulo"]):
-            continue
-        url = _url_real(it["url"])
-        if not url or url in vistos:
-            continue
-        vistos.add(url)
-        it["url"] = url
-        it["tipo"] = clasificar(it["titulo"])
-        it["relevancia"] = _relevancia(it["titulo"])
-        it["pelicula"] = PELICULA
-        resultados.append(it)
-
-
-def recopilar() -> list:
-    resultados = []
-    vistos = set()
-    # Priorizar Bing (Google bloquea peticiones automatizadas)
-    for termino in QUERIES:
-        _anexar(_rss_bing(termino), resultados, vistos)
-    # Búsquedas adicionales con "enjambre" vía Bing
-    enjambre_queries = [
+EIXAM_CONFIG = MovieConfig(
+    pelicula="Eixam",
+    pelicula_es="Enjambre",
+    output_path=OUTPUT_PATH,
+    queries=[
+        "Eixam Óscar Bernàcer",
+        "Eixam película",
+        "Eixam Enjambre 2026",
+        "Enjambre película Óscar Bernàcer",
+        "Enjambre 2026 película",
+        "Enjambre óscar bernacer estreno",
+        "Eixam crítica",
+        "Enjambre crítica reseña",
+        "Eixam tráiler trailer",
+        "Enjambre tráiler oficial",
+        "Eixam Pablo Molinero",
+        "eixam Cristina Fernández Pintado",
+        "eixam Malpàs",
+        "eixam Bejís rodaje",
+        "Eixam película española",
+        "Eixam thriller rural",
+        "Eixam estreno cines",
+        "Enjambre película española",
+        "Enjambre thriller rural",
+        "Enjambre estreno cines",
+        "Eixam reparto actores",
+        "Enjambre reparto actores",
+        "Eixam Pablo Derqui",
+        "Enjambre Pablo Derqui",
+        "Eixam Marta Belenguer",
+        "Enjambre Marta Belenguer",
+        "Eixam Atlàntida Mallorca",
+        "Enjambre Atlàntida Mallorca",
+        "Eixam Nakamura Films",
+        "Enjambre Nakamura Films",
+        "Eixam A Contracorriente Films",
+        "Enjambre A Contracorriente Films",
+    ],
+    queries_extra=[
         "enjambre película 2026",
         "enjambre bernàcer",
         "enjambre película valenciana",
@@ -557,11 +121,6 @@ def recopilar() -> list:
         "enjambre Atlàntida Mallorca",
         "enjambre Nakamura Films",
         "enjambre A Contracorriente Films",
-    ]
-    for termino in enjambre_queries:
-        _anexar(_rss_bing(termino), resultados, vistos)
-    # Búsquedas adicionales con "eixam" vía Bing
-    eixam_queries = [
         "eixam película española",
         "eixam thriller rural",
         "eixam estreno cines",
@@ -571,78 +130,144 @@ def recopilar() -> list:
         "eixam Atlàntida Mallorca",
         "eixam Nakamura Films",
         "eixam A Contracorriente Films",
-    ]
-    for termino in eixam_queries:
-        _anexar(_rss_bing(termino), resultados, vistos)
-    for termino in YT_QUERIES:
-        _anexar(_rss_youtube(termino), resultados, vistos)
-    for termino in CONTRASTE_QUERIES:
-        _anexar(_rss_contraste(termino), resultados, vistos)
-    # Filmaffinity: críticas de usuarios y profesionales
-    _anexar(_scrape_filmaffinity(), resultados, vistos)
-    # Fuentes de cine directas (sin Bing)
-    _anexar(_scrape_cine_directo(), resultados, vistos)
-    # Medios de reseñas — Bing con site: para cada dominio
-    for dominio, termino in SITIOS_RESENIAS:
-        for it in _rss_bing(f"site:{dominio} {termino}"):
-            _anexar([it], resultados, vistos)
-    # Redes sociales del distribuidor y productora (Instagram, Twitter/X)
-    for termino in REDES_SOCIALES:
-        for it in _rss_bing(termino):
-            _anexar([it], resultados, vistos)
-    return resultados
-
-
-def cargar_existente():
-    if OUTPUT_PATH.exists():
-        try:
-            return json.loads(OUTPUT_PATH.read_text(encoding="utf-8"))
-        except Exception:
-            return []
-    return []
-
-
-# =============================================================================
-# Validación opcional con IA (Gemini). Se usa cuando hay GEMINI_API_KEY para
-# descartar falsos positivos difíciles de identificar solo con reglas.
-# =============================================================================
-def _validar_ia(items) -> list:
-    """Usa Gemini para confirmar si cada título pertenece a la película
-    Eixam (Enjambre) de Óscar Bernàcer. Devuelve los items confirmados."""
-    api_key = os.environ.get("GEMINI_API_KEY", "")
-    if not api_key:
-        return items
-    if not items:
-        return items
-    try:
-        from google import genai
-        client = genai.Client(api_key=api_key)
-        numerados = "\n".join(f"{i+1}. {it['titulo']} — {it['url']}" for i, it in enumerate(items))
-        prompt = (
-            "Eres un experto en cine. Determina cuáles de los siguientes titulares se refieren "
-            "EXCLUSIVAMENTE a la película española 'Eixam' (Enjambre, 2026), un thriller rural "
-            "dirigido por Óscar Bernàcer con Pablo Molinero y Cristina Fernández Pintado, cuya "
-            "historia transcurre en la aldea de Malpàs.\n"
-            "NO cuentan: otras películas/series llamadas 'Enjambre' (ej. Swarm de Donald Glover, "
-            "Hypnotic, series de abejas/apicultura, ciencia, aviación).\n"
-            "Responde SOLO con la lista de números de los titulares que SÍ son sobre esta película, "
-            "separados por comas, sin texto adicional. Ejemplo: 1,3,5\n\n"
-            f"{numerados}"
-        )
-        resp = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
-        texto = (resp.text or "").strip()
-        aceptados = set()
-        for part in re.findall(r"\d+", texto):
-            idx = int(part)
-            if 1 <= idx <= len(items):
-                aceptados.add(idx - 1)
-        if not aceptados and texto:
-            # Si la IA no devuelve nada pero hay texto, no filtramos (fail-open parcial):
-            return items
-        return [it for i, it in enumerate(items) if i in aceptados]
-    except Exception as e:
-        print(f"  ⚠️  Validación IA opcional no disponible ({e}) — sigo con filtros locales.")
-        return items
+    ],
+    yt_queries=[
+        "eixam película",
+        "eixam enjambre tráiler",
+        "eixam óscar bernàcer",
+        "enjambre eixam estreno 2026",
+        "eixam thriller rural",
+    ],
+    contraste_queries=[
+        "eixam enjambre",
+        "enjambre eixam",
+        "eixam bernàcer",
+    ],
+    sitios_resenias=[
+        ("decine21.com", "eixam"),
+        ("decine21.com", "enjambre 2026"),
+        ("contraste.info", "eixam"),
+        ("contraste.info", "enjambre bernàcer"),
+        ("butacaancha", "eixam"),
+        ("fotogramas.es", "eixam"),
+        ("cinemaldito.com", "eixam"),
+        ("aullidos.com", "eixam"),
+        ("ecartelera", "eixam"),
+        ("sensa cine", "eixam"),
+        ("filmaffinity", "eixam"),
+        ("cineuropa.org", "eixam"),
+        ("labutaca.net", "eixam"),
+        ("dirigido.es", "eixam"),
+        ("espinof.com", "eixam"),
+        ("title-magazine.com", "eixam"),
+        ("elcineenlauva.com", "eixam"),
+        ("cinemanía", "eixam"),
+        ("elcomercio.es", "eixam"),
+        ("elpais.com", "eixam"),
+        ("elmundo.es", "eixam"),
+        ("laregion.es", "eixam"),
+        ("20minutos.es", "eixam"),
+        ("buzzfeed.com", "eixam"),
+        ("timeout.com", "eixam"),
+        ("indiewire.com", "eixam"),
+        ("variety.com", "eixam"),
+        ("hollywoodreporter.com", "eixam"),
+        ("cadenaser.com", "eixam"),
+        ("rtve.es", "eixam"),
+        ("europapress.es", "eixam"),
+        ("efeservices.com", "eixam"),
+        ("laverdad.es", "eixam"),
+        ("levante-emv.com", "eixam"),
+        ("informacion.es", "eixam"),
+        ("diarioinformacion.com", "eixam"),
+        ("abc.es", "eixam"),
+        ("larazon.es", "eixam"),
+        ("elperiodico.com", "eixam"),
+        ("nius.es", "eixam"),
+        ("lasprovincias.es", "eixam"),
+        ("superfilmes.es", "eixam"),
+        ("cineuropa.org", "enjambre 2026"),
+        ("imdb.com", "eixam"),
+        ("themoviedb.org", "eixam"),
+    ],
+    redes_sociales=[
+        "acontracorrientefilms eixam instagram",
+        "acontracorrientefilms enjambre instagram",
+        "atlantidamallorca eixam instagram",
+        "atlantidamallorca enjambre instagram",
+        "acontracorrientefilms eixam twitter",
+        "acontracorrientefilms enjambre twitter",
+        "atlantidamallorca eixam twitter",
+        "atlantidamallorca enjambre twitter",
+        "acontracorrientefilms eixam x.com",
+        "atlantidamallorca eixam x.com",
+        "nakamura films eixam instagram",
+        "nakamura films enjambre instagram",
+        "nakamura films eixam twitter",
+        "nakamura films enjambre twitter",
+        "nakamura films eixam x.com",
+    ],
+    filmaffinity_queries=[
+        "site:filmaffinity.com eixam",
+        "site:filmaffinity.com enjambre 2026",
+        "filmaffinity eixam crítica",
+        "filmaffinity enjambre reseña",
+    ],
+    fuentes_cine_directas=[
+        {"url": "https://www.cinemaldito.com/?s=eixam", "selector": "article a[href]", "medio": "Cinemaldito"},
+        {"url": "https://www.aullidos.com/?s=eixam", "selector": "article a[href]", "medio": "Aullidos"},
+        {"url": "https://www.ecartelera.com/buscar/?q=eixam", "selector": "a[href*='/peliculas/']", "medio": "ECartelera"},
+        {"url": "https://www.sensacine.com/buscar/?q=eixam", "selector": "a[href*='/peliculas/']", "medio": "SensaCine"},
+        {"url": "https://www.cineuropa.org/es/?s=eixam", "selector": "article a[href]", "medio": "Cineuropa"},
+        {"url": "https://www.labutaca.net/buscar/?s=eixam", "selector": "article a[href]", "medio": "La Butaca"},
+        {"url": "https://www.espinof.com/buscar/?s=eixam", "selector": "article a[href]", "medio": "Espinof"},
+        {"url": "https://www.cinemania.es/?s=eixam", "selector": "article a[href]", "medio": "Cinemania"},
+    ],
+    senales_fuertes=[
+        "óscar bernàcer", "oscar bernacer", "bernàcer", "pablo molinero",
+        "cristina fernández pintado", "cristina fernandez pintado",
+        "maría maroto", "maria maroto", "pablo derqui", "marta belenguer",
+        "jordi aguilar", "glòria march", "gloria march", "àngel fígols",
+        "àngel fígols", "malpàs", "bejís", "bejis", "a contracorriente",
+        "nadal", "lluc", "silvia", "alba", "comunidad valenciana",
+        "atlàntida mallorca", "atlantida mallorca", "corte y confección",
+        "nakamura films", "primer largometraje de ficción",
+    ],
+    senales_cine=[
+        "película", "pelicula", "cine", "film", "estreno", "largometraje",
+        "tráiler", "trailer", "reparto", "director", "dirección", "direccion",
+        "crítica", "critica", "reseña", "resena", "review", "cartel", "póster",
+        "poster", "fotograma", "rodaje", "taquilla", "pantalla", "cineasta",
+        "industria del cine", "actores", "actriz", "guion", "banda sonora",
+    ],
+    senales_negativas=[
+        "abeja", "abejas", "apicultura", "colmena", "drones", "apiario",
+        "miel", "polinización", "polinizacion",
+        "donald glover", "swarm", "prime video series", "serie de prime video",
+        "hipnotic", "laurent bouzereau", "el exterminador", "exterminador",
+        "battle fish", "thor", "marvel", "avengers", "avispas", "machos enjambre",
+        "avispa", "jugador", "torneo", "ciencia", "investigación", "investigacion",
+        "genética", "genetica", "ordenador", "computadora", "apple", "ios",
+        "teléfono", "telefono", "avión", "avion", "helicóptero", "helicoptero",
+        "la nueva serie", "serie de la semana", "recomendada", "recomienda",
+    ],
+    anios_otros=["2020", "2003", "2005", "2014", "2021", "2019", "2022", "2013", "2025"],
+    umbral_positivas=2,
+    titulos_clave=("eixam", "enjambre", "bernàcer", "oscar bernacer", "óscar bernàcer"),
+    clasificador=[
+        ("trailer", ["tráiler", "trailer", "trailer oficial", "teaser"]),
+        ("poster", ["póster", "poster", "cartel"]),
+        ("entrevista", ["entrevista", "interview"]),
+        ("critica", ["crítica", "critica", "reseña", "review", "críticas"]),
+        ("forograma", ["fotograma", "frame"]),
+        ("foto", ["foto", "fotograf", "imágenes", "imagenes", "imagen", "imágenes"]),
+        ("video", ["vídeo", "video", "clip"]),
+        ("noticia", ["estreno", "primeras imágenes", "primera imagen", "rodaje", "se anuncia"]),
+    ],
+    ia_prompt=_ia_prompt_eixam,
+    ia_model="gemini-2.5-flash",
+    regla_extra=_regla_extra_eixam,
+)
 
 
 def main():
@@ -651,134 +276,18 @@ def main():
     parser.add_argument("--enviar", action="store_true", help="Envía resumen a Telegram")
     args = parser.parse_args()
 
-    print(f"🎬 Recopilando información sobre '{PELICULA}' ({PELICULA_ES})...")
+    scraper = MovieNewsScraper(EIXAM_CONFIG)
+    notifier = TelegramNewsSender()
 
-    nuevos = recopilar()
-    # Filtrado adicional con IA (solo si hay GEMINI_API_KEY) para reducir falsos positivos
-    nuevos = _validar_ia(nuevos)
-    existentes = cargar_existente()
-    urls_existentes = {e["url"] for e in existentes}
+    ejecutar(scraper, dry_run=args.dry_run, enviar=args.enviar, notifier=notifier)
 
-    realmente_nuevos = [n for n in nuevos if n["url"] not in urls_existentes]
-
-    # Conteo por tipo de lo que hay acumulado + lo nuevo
-    todos = existentes + realmente_nuevos
-    por_tipo = {}
-    for t in todos:
-        tipo = t.get("tipo", "noticia")
-        por_tipo[tipo] = por_tipo.get(tipo, 0) + 1
-
-    print(f"\n📚 Previamente archivados: {len(existentes)}")
-    print(f"✨ Nuevos encontrados ahora: {len(realmente_nuevos)}")
-    print(f"📊 Total archivo: {len(todos)}")
-    print("\nDistribución por tipo:")
-    for tipo, n in sorted(por_tipo.items(), key=lambda x: -x[1]):
-        print(f"   • {tipo}: {n}")
-
-    if realmente_nuevos:
-        print("\n🆕 Nuevos elementos:")
-        for n in realmente_nuevos[:30]:
-            print(f"   [{n['tipo']}] {n['titulo'][:80]}")
-            print(f"        {n['url']}")
-
-    if args.dry_run:
-        print("\n--- DRY RUN: no se guarda nada ---")
-        return
-
-    if realmente_nuevos:
-        OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-        OUTPUT_PATH.write_text(json.dumps(todos, ensure_ascii=False, indent=2), encoding="utf-8")
-        print(f"\n💾 Guardado: {len(todos)} entradas en {OUTPUT_PATH}")
-    else:
-        print("\n✅ Sin novedades: no hay contenido nuevo que archivar.")
-
-    # Filtrar lo que realmente se debe enviar: items nuevos SIN enviar
-    # (los que ya tienen enviada=True se saltan)
-    por_enviar = [n for n in realmente_nuevos if not n.get("enviada", False)]
-
-    if args.enviar and por_enviar:
-        enviados = _enviar_telegram(por_enviar, por_tipo, len(todos), todos)
-        if enviados:
-            # Marcar en "todos" los que se enviaron
-            urls_enviadas = {e["url"] for e in enviados}
-            for item in todos:
-                if item["url"] in urls_enviadas:
-                    item["enviada"] = True
-            # Re-guardar con los flags enviada=True
-            OUTPUT_PATH.write_text(json.dumps(todos, ensure_ascii=False, indent=2), encoding="utf-8")
-            print(f"💾 Archivo actualizado: {len(urls_enviadas)} items marcados como enviados.")
-    elif args.enviar:
-        print("\n📭 No hay elementos nuevos sin enviar.")
-
-
-def _enviar_telegram(nuevos, por_tipo, total, todos=None):
-    if not BOT_TOKEN or not CHAT_ID:
-        print("⚠️  TIPS_BOT_TOKEN / SALUDO_CHAT_ID no configurados; no se envía.")
-        return
-    try:
-        menciones = {
-            "trailer": "🎬", "video": "🎬", "foto": "🖼️", "poster": "🎞️",
-            "critica": "📝", "noticia": "📰", "entrevista": "🎙️", "fotograma": "🗂️",
-        }
-
-        def _send_message(msg):
-            try:
-                url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
-                r = requests.post(url, data={"chat_id": CHAT_ID, "text": msg, "parse_mode": "Markdown"}, timeout=60)
-                return r.status_code == 200
-            except Exception:
-                return False
-
-        def _send_photo(it):
-            """Envía la foto/thumbnail de la entrada con título + tipo + enlace de caption.
-            Si no hay imagen o falla Telegram, cae al mensaje de texto con el enlace."""
-            emoji = menciones.get(it.get("tipo", "•"), "•")
-            caption = (f"{emoji} *[{it.get('tipo', 'noticia')}]* {it.get('titulo', '').replace('*', '')}"
-                       f"\n{it.get('url', '')}")
-            img = (it.get("imagen") or "").strip()
-            if img:
-                try:
-                    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendPhoto"
-                    r = requests.post(url, data={"chat_id": CHAT_ID, "photo": img,
-                                                 "caption": caption, "parse_mode": "Markdown"}, timeout=60)
-                    if r.status_code == 200:
-                        return True
-                except Exception:
-                    pass  # falla a texto
-            return _send_message(f"{emoji} *[{it.get('tipo', 'noticia')}]* {it.get('titulo', '').replace('*', '')}\n{it.get('url', '')}")
-
-        if not nuevos:
-            if todos:
-                # Registro completo acumulado (texto + enlaces), partido si es grande
-                lista = [f"{menciones.get(e['tipo'], '•')} [{e['tipo']}] {e['titulo'].replace('*', '')}"
-                         f"\n{e['url']}" for e in todos]
-                parte = ["*Registro completo acumulado:*"]
-                bloque = ""
-                for linea in lista:
-                    if bloque and len(bloque) + len(linea) + 1 > 3500:
-                        parte.append(bloque)
-                        bloque = linea
-                    else:
-                        bloque = f"{bloque}\n{linea}" if bloque else linea
-                if bloque:
-                    parte.append(bloque)
-                for p in parte:
-                    _send_message(p)
-            else:
-                _send_message("_No hay contenido nuevo desde la última vez._")
-        else:
-            # Cada novedad con su imagen + enlace
-            enviados = []
-            for n in nuevos:
-                if _send_photo(n):
-                    enviados.append(n)
-
-            print(f"✅ Enviado a Telegram ({len(enviados)} novedad(es))."
-                  if enviados else "❌ Telegram: falló algún envío.")
-            return enviados
-    except Exception as e:
-        print(f"❌ Error enviando Telegram: {e}")
-        return []
+    if args.enviar:
+        print("\n🛡️ Comprobando Guía Parental de IMDb...")
+        parental = IMDBParentalMonitor(
+            urls=IMDB_PARENTAL_URLS,
+            path=IMDB_PARENTAL_PATH,
+        )
+        parental.comprobar(dry_run=args.dry_run)
 
 
 if __name__ == "__main__":

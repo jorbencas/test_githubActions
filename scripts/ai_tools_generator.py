@@ -17,9 +17,9 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-import requests
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from utils.lang_es import looks_english
+from utils.telegram_client import TelegramClient
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 CATS_PATH = SCRIPT_DIR / "utils" / "ai_categories.json"
@@ -33,7 +33,7 @@ AGENT_SKILLS_PATH = SCRIPT_DIR.parent / "files" / "agent_skills.json"
 
 BOT_TOKEN = os.environ.get("TIPS_BOT_TOKEN", "")
 CHAT_ID = os.environ.get("AI_TOOLS_CHAT_ID", os.environ.get("TIPS_CHAT_ID", "-1004380905505"))
-API_URL = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+_client = TelegramClient(bot_token=BOT_TOKEN, chat_id=CHAT_ID)
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
 CATS = {"categorias": {}, "meta": {}}
@@ -606,15 +606,10 @@ def send_telegram(text):
         print("   Configura las variables de entorno o usa --dry-run.")
         return False
 
-    payload = {
-        "chat_id": CHAT_ID,
-        "text": text,
-        "parse_mode": "Markdown",
-        "disable_web_page_preview": True,
-    }
-
     try:
-        resp = requests.post(API_URL, json=payload, timeout=30)
+        resp = _client.send_message(text, parse_mode="Markdown", disable_web_page_preview=True, timeout=30)
+        if resp is None:
+            return False
         if resp.status_code == 200:
             print("✅ Mensaje enviado a Telegram.")
             return True
