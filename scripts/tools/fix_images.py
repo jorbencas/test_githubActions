@@ -89,72 +89,11 @@ def save_cache() -> None:
 # ==============================================================================
 # ALGORITMO SSIM (Structural Similarity Index)
 # ==============================================================================
-def _channel_stats(
-    pixels_a: List[int], pixels_b: List[int], width: int, height: int
-) -> Tuple[float, float, float, float, float]:
-    n: int = width * height
-    if n == 0: 
-        return 0.0, 0.0, 0.0, 0.0, 0.0
-    sum_a: float = 0.0
-    sum_b: float = 0.0
-    sum_aa: float = 0.0
-    sum_bb: float = 0.0
-    sum_ab: float = 0.0
-    for i in range(n):
-        a: int = pixels_a[i]
-        b: int = pixels_b[i]
-        sum_a += a
-        sum_b += b
-        sum_aa += a * a
-        sum_bb += b * b
-        sum_ab += a * b
-    m_a: float = sum_a / n
-    m_b: float = sum_b / n
-    var_a: float = max((sum_aa / n) - (m_a ** 2), 0.0)
-    var_b: float = max((sum_bb / n) - (m_b ** 2), 0.0)
-    cov_ab: float = (sum_ab / n) - (m_a * m_b)
-    return m_a, m_b, var_a, var_b, cov_ab
+from utils.image_ops import (
+    compute_ssim, find_optimal_quality, strip_metadata, constrain_size,
+    MAX_WIDTH, SSIM_THRESHOLD, QUALITY_START, QUALITY_MIN, QUALITY_STEP, WEBP_METHOD,
+)
 
-def compute_ssim(img1: Image.Image, img2: Image.Image) -> float:
-    C1: float = (0.01 * 255) ** 2
-    C2: float = (0.03 * 255) ** 2
-    t_size: Tuple[int, int] = (160, 160)
-    a: Image.Image = img1.convert("L").resize(t_size, Image.LANCZOS)
-    b: Image.Image = img2.convert("L").resize(t_size, Image.LANCZOS)
-    px_a: List[int] = list(a.tobytes())
-    px_b: List[int] = list(b.tobytes())
-    m_a, m_b, v_a, v_b, c_ab = _channel_stats(px_a, px_b, 160, 160)
-    num: float = (2 * m_a * m_b + C1) * (2 * c_ab + C2)
-    den: float = (m_a ** 2 + m_b ** 2 + C1) * (v_a + v_b + C2)
-    return num / den if den != 0.0 else 1.0
-
-def find_optimal_quality(
-    original: Image.Image, save_func: Callable[[int], Image.Image], start: int = QUALITY_START, min_q: int = QUALITY_MIN
-) -> int:
-    best_q: int = start
-    for q in range(start, min_q - 1, -QUALITY_STEP):
-        compressed: Image.Image = save_func(q)
-        if compute_ssim(original, compressed) >= SSIM_THRESHOLD:
-            best_q = q
-        else:
-            break
-    return best_q
-
-# ==============================================================================
-# PREPARACIÓN DE IMAGEN (STRIP & CONSTRAIN)
-# ==============================================================================
-def strip_metadata(img: Image.Image) -> Image.Image:
-    clean: Image.Image = Image.new(img.mode, img.size)
-    clean.paste(img)
-    return clean
-
-def constrain_size(img: Image.Image, max_width: int = 1200) -> Image.Image:
-    if img.width > max_width:
-        ratio: float = max_width / img.width
-        img = img.resize((max_width, int(img.height * ratio)), Image.LANCZOS)
-    return img
-
-# ==============================================================================
 # OPERACIONES COMPLEMENTARIAS (GIF / SVG)
 # ==============================================================================
 def process_gif_fallback(input_path: Path, out_dir: Path, base_name: str) -> None:

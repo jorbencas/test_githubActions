@@ -15,6 +15,8 @@ import math
 import os
 import shutil
 import subprocess
+import re
+import sys
 from pathlib import Path
 from PIL import Image
 
@@ -45,56 +47,13 @@ ALL_SUPPORTED = SUPPORTED_RASTER + SUPPORTED_GIF + SUPPORTED_SVG
 
 
 # ───────────────────────── SSIM (Pillow-only) ─────────────────────────
-def _channel_stats(pixels_a, pixels_b, width, height):
-    n = width * height
-    if n == 0: return 0, 0, 0, 0, 0
-    sum_a = sum_b = sum_aa = sum_bb = sum_ab = 0
-    for i in range(n):
-        a, b = pixels_a[i], pixels_b[i]
-        sum_a += a; sum_b += b
-        sum_aa += a*a; sum_bb += b*b
-        sum_ab += a*b
-    m_a, m_b = sum_a/n, sum_b/n
-    var_a = max((sum_aa/n) - (m_a**2), 0)
-    var_b = max((sum_bb/n) - (m_b**2), 0)
-    cov_ab = (sum_ab/n) - (m_a*m_b)
-    return m_a, m_b, var_a, var_b, cov_ab
-
-def compute_ssim(img1, img2):
-    C1, C2 = (0.01*255)**2, (0.03*255)**2
-    t_size = (160, 160)
-    a = img1.convert("L").resize(t_size, Image.LANCZOS)
-    b = img2.convert("L").resize(t_size, Image.LANCZOS)
-    px_a, px_b = list(a.tobytes()), list(b.tobytes())
-    m_a, m_b, v_a, v_b, c_ab = _channel_stats(px_a, px_b, 160, 160)
-    num = (2*m_a*m_b + C1) * (2*c_ab + C2)
-    den = (m_a**2 + m_b**2 + C1) * (v_a + v_b + C2)
-    return num/den if den != 0 else 1.0
-
-
-# ───────────────────────── Image Processing ─────────────────────────
-def strip_metadata(img):
-    clean = Image.new(img.mode, img.size)
-    clean.paste(img)
-    return clean
-
-def constrain_size(img, max_width=MAX_WIDTH):
-    if img.width > max_width:
-        ratio = max_width / img.width
-        img = img.resize((max_width, int(img.height * ratio)), Image.LANCZOS)
-    return img
-
-def find_optimal_quality(original, save_func, start=QUALITY_START, min_q=QUALITY_MIN):
-    best_q = start
-    for q in range(start, min_q - 1, -QUALITY_STEP):
-        compressed = save_func(q)
-        if compute_ssim(original, compressed) >= SSIM_THRESHOLD:
-            best_q = q
-        else:
-            break
-    return best_q
-
-
+# ==============================================================================
+# ALGORITMO SSIM Y PREPARACIÓN DE IMAGEN (COMPARTIDO — utils/image_ops)
+# ==============================================================================
+from utils.image_ops import (
+    compute_ssim, strip_metadata, constrain_size, find_optimal_quality,
+    MAX_WIDTH, SSIM_THRESHOLD, QUALITY_START, QUALITY_MIN, QUALITY_STEP, WEBP_METHOD,
+)
 def optimize_raster(input_path, out_dir, filename):
     img = Image.open(input_path)
     orig_size = os.path.getsize(input_path)
@@ -192,8 +151,6 @@ def optimize_svg(path, out_dir, filename):
     out_path = os.path.join(out_dir, filename)
     with open(path, "r", encoding="utf-8", errors="ignore") as f:
         content = f.read()
-    import re
-import sys
     content = re.sub(r"<!--.*?-->", "", content, flags=re.DOTALL)
     content = re.sub(r"\s+", " ", content).strip()
     with open(out_path, "w", encoding="utf-8") as f: f.write(content)

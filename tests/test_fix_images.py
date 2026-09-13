@@ -2,8 +2,10 @@ from pathlib import Path
 from io import BytesIO
 from PIL import Image
 
-from scripts.tools.fix_images import (
+from scripts.utils.image_ops import (
     compute_ssim, _channel_stats, strip_metadata, constrain_size,
+)
+from scripts.tools.fix_images import (
     slugify, build_srcset, generate_placeholder,
 )
 
