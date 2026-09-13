@@ -2,8 +2,9 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 86,
+    "total_concepts": 87,
     "categories": [
+      "concurrency",
       "css_moderno",
       "devops",
       "habilidades",
@@ -13,7 +14,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-13T11:15:04.733789"
+    "last_scraped": "2026-09-13T15:45:26.098137"
   },
   "concepts": [
     {
@@ -1589,6 +1590,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-12T17:24:52.366661"
+    },
+    {
+      "title": "StoreKit 2 en Swift: In-App Purchases con Product, Transaction y subscripciones",
+      "summary": "StoreKit 2 es la API de Apple para compras dentro de la app, disponible desde iOS 15. Frente a la versión original, StoreKit 2 usaasync/awaitde forma nativa, elimina la necesidad delSKPaymentQueuey ha",
+      "explanation": "StoreKit 2 es la API de Apple para compras dentro de la app, disponible desde iOS 15. Frente a la versión original, StoreKit 2 usaasync/awaitde forma nativa, elimina la necesidad delSKPaymentQueuey hace que la verificación de recibos sea directa en el cliente sin servidor. El resultado es un código más limpio y una integración más sencilla.Cargar productos: Product.products El primer paso es cargar los productos configurados en App Store Connect.Product.products(for:)devuelve solo los identificadores válidos; los que no existen se ignoran:import StoreKit\n\nclass TiendaVM: ObservableObject {\n    @Published var productos: [Product] = []\n    @Published var cargando = false\n\n    let identificadores = [\n        \"com.miapp.pro_mensual\",\n        \"com.miapp.pro_anual\",\n        \"com.miapp.pack_creditos_10\"\n    ]\n\n    func cargarProductos() async {\n        cargando = true\n        defer { Task { @MainActor in cargando = false } }\n        do {\n            productos = try await Product.products(for: identificadores)\n        } catch {\n            print(\"Error cargando productos: (error)\")\n        }\n    }\n} CadaProducttiene propiedades comodisplayName,description,displayPrice(precio formateado con la moneda local) ytype(consumable, non-consumable, autoRenewable, nonRenewable).Iniciar compras: PurchaseResult Para comprar un producto, llama aproduct.purchase()y maneja los tres estados de resultado:func comprar(_ producto: Product) async {\n    do {\n        let resultado = try await producto.pur",
+      "code_example": "import StoreKit\n\nclass TiendaVM: ObservableObject {\n    @Published var productos: [Product] = []\n    @Published var cargando = false\n\n    let identificadores = [\n        \"com.miapp.pro_mensual\",\n        \"com.miapp.pro_anual\",\n        \"com.miapp.pack_creditos_10\"\n    ]\n\n    func cargarProductos() async {\n        cargando = true\n        defer { Task { @MainActor in cargando = false } }\n        do {\n            productos = try await Product.products(for: identificadores)\n        } catch {\n            print(\"Error cargando productos: (error)\")\n        }\n    }\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "concurrency"
+      ],
+      "cat": "concurrency",
+      "scraped_at": "2026-09-13T15:44:49.103237"
     }
   ]
 }
