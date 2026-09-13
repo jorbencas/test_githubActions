@@ -3,6 +3,7 @@ import sys
 import json
 import asyncio
 import base64
+from io import BytesIO
 import unicodedata
 import shutil
 import subprocess
