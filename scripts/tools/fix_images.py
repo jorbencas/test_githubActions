@@ -1,4 +1,5 @@
 import re
+import sys
 import json
 import asyncio
 import base64
@@ -89,6 +90,8 @@ def save_cache() -> None:
 # ==============================================================================
 # ALGORITMO SSIM (Structural Similarity Index)
 # ==============================================================================
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 from utils.image_ops import (
     compute_ssim, find_optimal_quality, strip_metadata, constrain_size,
     MAX_WIDTH, SSIM_THRESHOLD, QUALITY_START, QUALITY_MIN, QUALITY_STEP, WEBP_METHOD,
