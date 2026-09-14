@@ -230,6 +230,13 @@ EL_NIDO_CONFIG = MovieConfig(
     ia_prompt=_ia_prompt_el_nido,
     ia_model="gemini-2.5-flash",
     regla_extra=None,
+    filtro_adulto=[
+        "desnud", "sexo", "erótic", "erotico", "tetas", "topless",
+        "guía parental", "guia parental", "parental guide", "mpaa",
+        "escenas de sexo", "contenido sexual", "nudity", "sex scene",
+        "no recomendada para menores", "no apta para menores",
+        "+18", "xxx", "calificación", "calificacion", "rating",
+    ],
 )
 
 

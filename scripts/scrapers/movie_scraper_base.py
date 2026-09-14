@@ -85,6 +85,9 @@ class MovieConfig:
     # Hook de relevancia extra (OCP): ejecutar texto,punt → None (usar umbral) |
     # True (aceptar) | False (rechazar). Por defecto sin reglas extra.
     regla_extra: Optional[Callable[[str, int], Optional[bool]]] = None
+    # Filtro de contenido adulto: si se define, solo muestra noticias que contengan
+    # palabras clave de esta lista (sexo, desnudez, etc.)
+    filtro_adulto: List[str] = field(default_factory=list)
 
 
 # =============================================================================
@@ -100,6 +103,7 @@ class RelevanceFilter:
         self._umbral = config.umbral_positivas
         self._claves = config.titulos_clave
         self._regla_extra = config.regla_extra
+        self._filtro_adulto = config.filtro_adulto
 
     def puntuacion(self, texto: str) -> int:
         """Puntuación negativa si hay señal inequívoca de otra obra; 0-N en
@@ -128,6 +132,10 @@ class RelevanceFilter:
         # Debe aparecer el título de la película, el director u otra señal clave
         if not any(k in texto for k in self._claves):
             return False
+        # Filtro de contenido adulto: si está activo, solo mostrar noticias con contenido sexual
+        if self._filtro_adulto:
+            if not any(palabra in texto for palabra in self._filtro_adulto):
+                return False
         # Hook de reglas extra (OCP): permite subclases/configs ajustar la lógica
         # sin modificar esta función. Ej.: la regla "eixam + enjambre juntos" de Eixam.
         if self._regla_extra is not None:
