@@ -1,5 +1,31 @@
 [
     {
+        "titulo": "Breaking the Vision-Action Shortcut: Latent Interface Training for Generalizable Robotics Foundation Models",
+        "enlace": "https://huggingface.co/papers/2609.12641",
+        "fuente": "HuggingFace Papers",
+        "tipo": "noticia",
+        "f": "14/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "https://cdn-avatars.huggingface.co/v1/production/uploads/630ca0817dacb93b33506ce7/ZYUmpSMsa5Whihw3me2Bw.png",
+        "fecha_real": "14/09/2026",
+        "ts": "2026-09-14T03:45:20.911426"
+    },
+    {
+        "titulo": "Tres voces mundiales de la IA lanzan la misma advertencia: la humanidad corre peligro",
+        "enlace": "https://www.businessinsider.es/tecnologia/tres-voces-mundiales-ia-lanzan-misma-advertencia-humanidad-corre-peligro_7035788_0.html",
+        "fuente": "Business Insider Tecnología",
+        "tipo": "noticia",
+        "f": "14/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "14/09/2026",
+        "ts": "2026-09-14T03:45:22.455125"
+    },
+    {
         "titulo": "Unvaccinated Pennsylvania woman died of measles complications, coroner says",
         "enlace": "https://arstechnica.com/health/2026/09/unvaccinated-pennsylvania-woman-died-of-measles-complications-coroner-says/",
         "fuente": "Ars Technica",
