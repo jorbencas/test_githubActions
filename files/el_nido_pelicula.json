@@ -677,5 +677,29 @@
     "relevancia": 2,
     "pelicula": "El nido",
     "enviada": true
+  },
+  {
+    "titulo": "Hugo Stuven, director de 'El nido': \"La maldad no solo está en el exterior; también puede estar dentro de ti mismo\"",
+    "url": "https://www.msn.com/noticias/otras/hugo-stuven-director-de-el-nido-la-maldad-no-solo-est%C3%A1-en-el-exterior-tambi%C3%A9n-puede-estar-dentro-de-ti-mismo/ar-AA2c44nx",
+    "fecha_pub": "Thu, 10 Sep 2026 21:00:06 GMT",
+    "fecha_ts": "2026-09-14T22:03:17.070282",
+    "medio": "Valencia Plaza on MSN",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "El nido",
+    "enviada": true
+  },
+  {
+    "titulo": "EL NIDO. Pablo Derqui es Velasco. 11 de septiembre en cines.",
+    "url": "https://www.youtube.com/watch?v=DFnn61mw-c0",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-14T22:03:25.712779",
+    "medio": "Filmax",
+    "imagen": "https://i.ytimg.com/vi/DFnn61mw-c0/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "El nido",
+    "enviada": true
   }
 ]
