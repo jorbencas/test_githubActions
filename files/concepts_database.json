@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 88,
+    "total_concepts": 90,
     "categories": [
       "concurrency",
       "css_moderno",
@@ -14,7 +14,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-14T12:02:46.375035"
+    "last_scraped": "2026-09-14T18:04:17.831817"
   },
   "concepts": [
     {
@@ -1626,6 +1626,42 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-13T20:26:32.460780"
+    },
+    {
+      "title": "Closures avanzadas en Rust: FnOnce, FnMut, Fn, move closures y punteros de función fn",
+      "summary": "Las closures de Rust son funciones anónimas que pueden capturar variables del entorno donde se definen. El compilador infiere automáticamente si la closure captura por referencia, por referencia mutab",
+      "explanation": "Las closures de Rust son funciones anónimas que pueden capturar variables del entorno donde se definen. El compilador infiere automáticamente si la closure captura por referencia, por referencia mutable o por valor, y asigna uno de los tres traits:Fn,FnMutoFnOnce. Entender la diferencia entre ellos es clave para escribir código correcto y eficiente.FnOnce, FnMut y Fn: la jerarquía de captura Los tres traits forman una jerarquía de restricciones:FnOncees el más general (solo puede llamarse una vez porque mueve valores del entorno),FnMutpuede llamarse varias veces mutando el entorno, yFnes el más restrictivo (puede llamarse cualquier número de veces sin mutar nada).fn aplicar_una_vez<F: FnOnce() -> String>(f: F) -> String {\n    f() // f se consume aquí; no puede volver a llamarse\n}\n\nfn aplicar_veces<F: Fn(u32) -> u32>(f: F, n: u32) -> Vec<u32> {\n    (0..n).map(|i| f(i)).collect()\n}\n\nfn acumular<F: FnMut(u32) -> u32>(mut f: F, valores: &[u32]) -> Vec<u32> {\n    valores.iter().map(|&v| f(v)).collect()\n}\n\nfn main() {\n    let nombre = String::from(\"Rust\");\n    // FnOnce: mueve `nombre` al llamarse\n    let saludo = move || format!(\"Hola, {}!\", nombre);\n    println!(\"{}\", aplicar_una_vez(saludo));\n\n    // Fn: captura por referencia, reutilizable\n    let factor = 3u32;\n    let multiplicar = |x| x * factor;\n    println!(\"{:?}\", aplicar_veces(multiplicar, 5)); // [0,3,6,9,12]\n\n    // FnMut: captura por referencia mutable, acumula estado\n    let mut acum = 0u32;\n    let con_acumulador = ",
+      "code_example": "fn aplicar_una_vez<F: FnOnce() -> String>(f: F) -> String {\n    f() // f se consume aquí; no puede volver a llamarse\n}\n\nfn aplicar_veces<F: Fn(u32) -> u32>(f: F, n: u32) -> Vec<u32> {\n    (0..n).map(|i| f(i)).collect()\n}\n\nfn acumular<F: FnMut(u32) -> u32>(mut f: F, valores: &[u32]) -> Vec<u32> {\n    valores.iter().map(|&v| f(v)).collect()\n}\n\nfn main() {\n    let nombre = String::from(\"Rust\");\n    // FnOnce: mueve `nombre` al llamarse\n    let saludo = move || format!(\"Hola, {}!\", nombre);\n    println!(\"{}\", aplicar_una_vez(saludo));\n\n    // Fn: captura por referencia, reutilizable\n    let factor = 3u32;\n    let multiplicar = |x| x * factor;\n    println!(\"{:?}\", aplicar_veces(multiplicar, 5)); // [0,3,6,9,12]\n\n    // FnMut: captura por referencia mutable, acumula estado\n    let mut acum = 0u32;\n    let con_acumulador = |v: u32| { acum += v; acum };\n    println!(\"{:?}\", acumular(con_acumulador, &[1, 2, 3, 4])); // [1,3,6,10]\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-14T18:03:35.252583"
+    },
+    {
+      "title": "MapKit con SwiftUI: Map, Marker, Annotation, cameraBounds y búsqueda de lugares",
+      "summary": "MapKit en SwiftUI recibió una renovación completa con iOS 17. La nueva API declarativa conMap,Marker,Annotationy los overlays integrados permite construir mapas ricos en pocas líneas, sin necesidad de",
+      "explanation": "MapKit en SwiftUI recibió una renovación completa con iOS 17. La nueva API declarativa conMap,Marker,Annotationy los overlays integrados permite construir mapas ricos en pocas líneas, sin necesidad de recurrir aUIViewRepresentablepara la mayoría de casos de uso.Map con MapCameraPosition El contenedor principal esMap. Para controlar la región visible y la cámara, se usaMapCameraPosition:import MapKit\nimport SwiftUI\n\nstruct MapaBasico: View {\n    @State private var posicion: MapCameraPosition = .region(\n        MKCoordinateRegion(\n            center: CLLocationCoordinate2D(latitude: 40.4168, longitude: -3.7038),\n            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)\n        )\n    )\n\n    var body: some View {\n        Map(position: $posicion)\n            .ignoresSafeArea()\n    }\n} Otras opciones de posición:.camera(MapCamera(centerCoordinate:distance:heading:pitch:))para una cámara 3D,.automaticpara que MapKit decida y.userLocation(fallback:)para centrar en el usuario.Marker y Annotation: marcadores personalizados Markermuestra un pin estándar del sistema con un icono opcional.Annotationpermite una vista SwiftUI completamente personalizada:struct PuntoInteres: Identifiable {\n    let id = UUID()\n    let nombre: String\n    let coordenadas: CLLocationCoordinate2D\n    let categoria: String\n}\n\nstruct MapaPOI: View {\n    let puntos: [PuntoInteres]\n    @State private var posicion: MapCameraPosition = .automatic\n\n    var body: some View {\n        Map(position: $pos",
+      "code_example": "import MapKit\nimport SwiftUI\n\nstruct MapaBasico: View {\n    @State private var posicion: MapCameraPosition = .region(\n        MKCoordinateRegion(\n            center: CLLocationCoordinate2D(latitude: 40.4168, longitude: -3.7038),\n            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)\n        )\n    )\n\n    var body: some View {\n        Map(position: $posicion)\n            .ignoresSafeArea()\n    }\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-14T18:03:36.746819"
     }
   ]
 }
