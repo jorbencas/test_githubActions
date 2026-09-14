@@ -11032,5 +11032,17 @@
         "descripcion": "Search news content in real-time by taking advantage of the sophisticated technology of Connexun that crawls and indexes thousands of sources every day. Analysing the published content becomes easy wi",
         "categoria": "News",
         "pricing": "paid"
+    },
+    {
+        "titulo": "TranscriptFetch",
+        "enlace": "https://publicapis.io/transcriptfetch-api",
+        "fuente": "Public APIs",
+        "tipo": "herramienta",
+        "f": "14/09",
+        "fecha_publicacion": "",
+        "subtipo": "api",
+        "descripcion": "Turn YouTube, TikTok, and Instagram videos into transcripts and structured data. Timestamped, LLM-ready, one API call.",
+        "categoria": "Development",
+        "pricing": ""
     }
 ]
