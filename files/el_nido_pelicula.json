@@ -557,5 +557,29 @@
     "tipo": "trailer",
     "relevancia": 5,
     "pelicula": "El nido"
+  },
+  {
+    "titulo": "EL NIDO. La dirección y el guion. 11 de septiembre en cines.",
+    "url": "https://www.youtube.com/watch?v=PsIsHIUNdd4",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-14T05:27:29.167318",
+    "medio": "Filmax",
+    "imagen": "https://i.ytimg.com/vi/PsIsHIUNdd4/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "El nido",
+    "enviada": true
+  },
+  {
+    "titulo": "Michelle Jenner protagoniza 'El nido', un thriller sobre las raíces familiares de la maldad",
+    "url": "https://www.abc.es/play/cine/michelle-jenner-protagoniza-nido-thriller-sobre-raices-20260909094235-nt.html",
+    "fecha_pub": "Wed, 09 Sep 2026 00:42:00 GMT",
+    "fecha_ts": "2026-09-14T05:28:09.781009",
+    "medio": "ABC",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "El nido",
+    "enviada": true
   }
 ]
