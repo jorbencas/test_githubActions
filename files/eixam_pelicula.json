@@ -1113,5 +1113,17 @@
     "relevancia": 3,
     "pelicula": "Eixam",
     "enviada": true
+  },
+  {
+    "titulo": "Quién es quién en 'Eixam', el 'cluedo' rural de Óscar Bernàcer",
+    "url": "https://valenciaplaza.com/cine-audiovisual-valencia-comunitat-valenciana/quien-es-quien-en-eixam-el-cluedo-rural-de-oscar-bernacer",
+    "fecha_pub": "Mon, 31 Aug 2026 23:00:00 GMT",
+    "fecha_ts": "2026-09-15T04:51:33.619316",
+    "medio": "Valencia Plaza",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Eixam",
+    "enviada": true
   }
 ]
