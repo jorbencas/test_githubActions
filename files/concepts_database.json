@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 90,
+    "total_concepts": 92,
     "categories": [
       "concurrency",
       "css_moderno",
@@ -14,7 +14,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-15T11:17:01.644169"
+    "last_scraped": "2026-09-15T16:27:31.982851"
   },
   "concepts": [
     {
@@ -1662,6 +1662,42 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-14T18:03:36.746819"
+    },
+    {
+      "title": "Iteradores avanzados en Rust: implementar Iterator, fold, scan, flatten y collect tipado",
+      "summary": "El traitIteratorde Rust es uno de los más potentes de la biblioteca estándar. Implementándolo en tus propios tipos obtienes acceso gratuito a más de setenta métodos adaptadores. Más allá del uso básic",
+      "explanation": "El traitIteratorde Rust es uno de los más potentes de la biblioteca estándar. Implementándolo en tus propios tipos obtienes acceso gratuito a más de setenta métodos adaptadores. Más allá del uso básico conmapyfilter, la librería estándar ofrece combinadores avanzados comofold,scan,flatten,flat_map,chain,zipypeekableque permiten expresar transformaciones complejas de forma concisa y eficiente.Implementar Iterator desde cero Cualquier tipo puede convertirse en iterador implementando el traitIterator: solo es obligatorio definir el tipo asociadoItemy el métodonext(). El resto de métodos tiene implementaciones por defecto construidas sobrenext().struct Fibonacci {\n    a: u64,\n    b: u64,\n}\n\nimpl Fibonacci {\n    fn nuevo() -> Self {\n        Fibonacci { a: 0, b: 1 }\n    }\n}\n\nimpl Iterator for Fibonacci {\n    type Item = u64;\n\n    fn next(&mut self) -> Option<u64> {\n        let siguiente = self.a + self.b;\n        self.a = self.b;\n        self.b = siguiente;\n        Some(self.a) // infinito: siempre devuelve Some\n    }\n}\n\nfn main() {\n    let primeros_diez: Vec<u64> = Fibonacci::nuevo().take(10).collect();\n    println!(\"{:?}\", primeros_diez);\n    // [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]\n\n    let suma_menores_100: u64 = Fibonacci::nuevo()\n        .take_while(|&n| n < 100)\n        .sum();\n    println!(\"Suma Fibonacci < 100: {suma_menores_100}\"); // 142\n}fold y scan: acumuladores con y sin estado visible foldreduce un iterador a un único valor acumulando con una función binaria.scanhace lo",
+      "code_example": "struct Fibonacci {\n    a: u64,\n    b: u64,\n}\n\nimpl Fibonacci {\n    fn nuevo() -> Self {\n        Fibonacci { a: 0, b: 1 }\n    }\n}\n\nimpl Iterator for Fibonacci {\n    type Item = u64;\n\n    fn next(&mut self) -> Option<u64> {\n        let siguiente = self.a + self.b;\n        self.a = self.b;\n        self.b = siguiente;\n        Some(self.a) // infinito: siempre devuelve Some\n    }\n}\n\nfn main() {\n    let primeros_diez: Vec<u64> = Fibonacci::nuevo().take(10).collect();\n    println!(\"{:?}\", primeros_diez);\n    // [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]\n\n    let suma_menores_100: u64 = Fibonacci::nuevo()\n        .take_while(|&n| n < 100)\n        .sum();\n    println!(\"Suma Fibonacci < 100: {suma_menores_100}\"); // 142\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-15T16:26:55.166818"
+    },
+    {
+      "title": "Accesibilidad en SwiftUI: VoiceOver, accessibilityLabel, Traits, Actions y Dynamic Type",
+      "summary": "La accesibilidad en SwiftUI es una de las áreas donde el framework brilla de forma especial: muchos controles son accesibles por defecto con VoiceOver sin ningún trabajo adicional. Sin embargo, las in",
+      "explanation": "La accesibilidad en SwiftUI es una de las áreas donde el framework brilla de forma especial: muchos controles son accesibles por defecto con VoiceOver sin ningún trabajo adicional. Sin embargo, las interfaces personalizadas necesitan anotaciones explícitas. Aprenderlas no solo ayuda a usuarios con discapacidad, sino que también mejora la integración con Siri y los controles de voz.accessibilityLabel y accessibilityHint accessibilityLabeldescribe qué es el elemento.accessibilityHintexplica qué ocurre al activarlo. VoiceOver lee primero el label y después, opcionalmente, el hint:import SwiftUI\n\nstruct BotonesAccesibles: View {\n    @State private var favorito = false\n\n    var body: some View {\n        Button(action: { favorito.toggle() }) {\n            Image(systemName: favorito ? \"heart.fill\" : \"heart\")\n        }\n        .accessibilityLabel(favorito ? \"Quitar de favoritos\" : \"Añadir a favoritos\")\n        .accessibilityHint(\"Doble toque para cambiar.\")\n\n        // Para imágenes decorativas que VoiceOver debe ignorar:\n        Image(\"fondo-decorativo\")\n            .accessibilityHidden(true)\n    }\n}Traits: comportamiento de los elementos Los traits informan a VoiceOver de la función del elemento, permitiendo una interacción más natural:struct TipoDeElemento: View {\n    var body: some View {\n        VStack {\n            // Encabezado de sección (VoiceOver lo anuncia como \"Encabezado\")\n            Text(\"Sección de configuración\")\n                .accessibilityAddTraits(.isHeader)\n\n  ",
+      "code_example": "import SwiftUI\n\nstruct BotonesAccesibles: View {\n    @State private var favorito = false\n\n    var body: some View {\n        Button(action: { favorito.toggle() }) {\n            Image(systemName: favorito ? \"heart.fill\" : \"heart\")\n        }\n        .accessibilityLabel(favorito ? \"Quitar de favoritos\" : \"Añadir a favoritos\")\n        .accessibilityHint(\"Doble toque para cambiar.\")\n\n        // Para imágenes decorativas que VoiceOver debe ignorar:\n        Image(\"fondo-decorativo\")\n            .accessibilityHidden(true)\n    }\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "interfaces"
+      ],
+      "cat": "interfaces",
+      "scraped_at": "2026-09-15T16:26:56.461280"
     }
   ]
 }
