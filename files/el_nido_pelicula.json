@@ -737,5 +737,100 @@
     "relevancia": 2,
     "pelicula": "El nido",
     "enviada": true
+  },
+  {
+    "titulo": "Hugo Stuven: “España le debe muchísimo al cine de género, aunque ahora se esté olvidando”",
+    "url": "https://cronicaglobal.elespanol.com/creacion/20260910/hugo-stuven-espana-debe-muchisimo-genero-ahora-olvidando/1003742790966_0.html",
+    "fecha_pub": "Wed, 09 Sep 2026 21:00:00 GMT",
+    "fecha_ts": "2026-09-15T12:08:12.176238",
+    "medio": "Crónica Global",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "El nido"
+  },
+  {
+    "titulo": "La vida actual de Michelle Jenner: sus proyectos, su discreta relación con su pareja, Hugo Stuven y su faceta como madre",
+    "url": "https://www.telecinco.es/famosos/20260914/michelle-jenner-vida-actual-proyectos-pareja-hugo-stuven-madre-hijo_18_020123443.html",
+    "fecha_pub": "Sun, 13 Sep 2026 22:15:00 GMT",
+    "fecha_ts": "2026-09-15T12:08:12.176363",
+    "medio": "Telecinco",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "El nido",
+    "enviada": true
+  },
+  {
+    "titulo": "Michelle Jenner: «En España se tiene que hacer más cine de terror»",
+    "url": "https://www.lasprovincias.es/pantallas/cine/michelle-jenner-espana-cine-terror-20260907000810-ntrc.html",
+    "fecha_pub": "Fri, 11 Sep 2026 15:08:00 GMT",
+    "fecha_ts": "2026-09-15T12:08:17.295349",
+    "medio": "Las Provincias",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "El nido",
+    "enviada": true
+  },
+  {
+    "titulo": "Luisa Gavasa, actriz: \"Tengo 75 años, acabo de empezar en el gimnasio y quiero hacer boxeo\"",
+    "url": "https://www.heraldo.es/noticias/ocio-y-cultura/2026/09/09/luisa-gavasa-actriz-tengo-75-anos-acabo-empezar-gimnasio-quiero-hacer-boxeo-2050229.html",
+    "fecha_pub": "Tue, 08 Sep 2026 22:00:00 GMT",
+    "fecha_ts": "2026-09-15T12:08:18.102021",
+    "medio": "Heraldo de Aragón",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "El nido",
+    "enviada": true
+  },
+  {
+    "titulo": "Entrevista a Hugo Stuven: Así trabaja un director de cine",
+    "url": "https://www.youtube.com/watch?v=rXi3WLqFPNs",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-15T12:08:20.873851",
+    "medio": "242 PELÍCULAS DESPUÉS ",
+    "imagen": "https://i.ytimg.com/vi/rXi3WLqFPNs/hqdefault.jpg",
+    "tipo": "entrevista",
+    "relevancia": 3,
+    "pelicula": "El nido",
+    "enviada": true
+  },
+  {
+    "titulo": "Michelle Jenner, madrina de 'Días de cine'",
+    "url": "https://www.rtve.es/rtve/20260910/michelle-jenner-madrina-dias-cine/17219465.shtml",
+    "fecha_pub": "Thu, 10 Sep 2026 03:03:00 GMT",
+    "fecha_ts": "2026-09-15T12:08:38.938948",
+    "medio": "RTVE",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "El nido",
+    "enviada": true
+  },
+  {
+    "titulo": "Hugo Stuven saca su lado más romántico con Michelle Jenner y comparte una imagen inédita con ella que lo dice todo",
+    "url": "https://www.msn.com/noticias/otras/hugo-stuven-saca-su-lado-m%C3%A1s-rom%C3%A1ntico-con-michelle-jenner-y-comparte-una-imagen-in%C3%A9dita-con-ella-que-lo-dice-todo/ar-AA2c5b1a",
+    "fecha_pub": "Sat, 12 Sep 2026 08:07:45 GMT",
+    "fecha_ts": "2026-09-15T12:08:44.219731",
+    "medio": "HOLA.com on MSN",
+    "imagen": "",
+    "tipo": "foto",
+    "relevancia": 2,
+    "pelicula": "El nido",
+    "enviada": true
+  },
+  {
+    "titulo": "Hugo Stuven saca su lado más romántico con Michelle Jenner y comparte una imagen inédita con ella que lo dice todo",
+    "url": "https://www.msn.com/entretenimiento/celebridades/hugo-stuven-saca-su-lado-m%C3%A1s-rom%C3%A1ntico-con-michelle-jenner-y-comparte-una-imagen-in%C3%A9dita-con-ella-que-lo-dice-todo/ar-AA2c5b1a",
+    "fecha_pub": "Sat, 12 Sep 2026 08:07:45 GMT",
+    "fecha_ts": "2026-09-15T12:08:44.733373",
+    "medio": "HOLA.com on MSN",
+    "imagen": "",
+    "tipo": "foto",
+    "relevancia": 2,
+    "pelicula": "El nido",
+    "enviada": true
   }
 ]
