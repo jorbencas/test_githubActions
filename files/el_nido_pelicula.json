@@ -701,5 +701,41 @@
     "relevancia": 4,
     "pelicula": "El nido",
     "enviada": true
+  },
+  {
+    "titulo": "El Nido - Trailer Ufficiale (HD) by Film&Clips",
+    "url": "https://www.youtube.com/watch?v=7Wu7hvytfu4",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-15T05:22:09.043882",
+    "medio": "Film&Clips",
+    "imagen": "https://i.ytimg.com/vi/7Wu7hvytfu4/hqdefault.jpg",
+    "tipo": "trailer",
+    "relevancia": 2,
+    "pelicula": "El nido",
+    "enviada": true
+  },
+  {
+    "titulo": "Entrevista a Luisa Gavasa y Michelle Jenner / El Nido /Estreno en cines el 11 de Septiembre",
+    "url": "https://www.youtube.com/watch?v=PCIhjpAoOXc",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-15T05:22:10.059935",
+    "medio": "CSA Media Press",
+    "imagen": "https://i.ytimg.com/vi/PCIhjpAoOXc/hqdefault.jpg",
+    "tipo": "entrevista",
+    "relevancia": 5,
+    "pelicula": "El nido",
+    "enviada": true
+  },
+  {
+    "titulo": "EL NIDO (2026) - El TERROR detrás de la protección. Critica",
+    "url": "https://www.youtube.com/watch?v=2yyv7N5PYlo",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-15T05:22:10.059997",
+    "medio": "SecretosDeCine",
+    "imagen": "https://i.ytimg.com/vi/2yyv7N5PYlo/hqdefault.jpg",
+    "tipo": "critica",
+    "relevancia": 2,
+    "pelicula": "El nido",
+    "enviada": true
   }
 ]
