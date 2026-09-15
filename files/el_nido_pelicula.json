@@ -832,5 +832,29 @@
     "relevancia": 2,
     "pelicula": "El nido",
     "enviada": true
+  },
+  {
+    "titulo": "EL NIDO. El hogar de la película. Ya en cines.",
+    "url": "https://www.youtube.com/watch?v=K712xhCBuME",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-15T17:16:52.916607",
+    "medio": "Filmax",
+    "imagen": "https://i.ytimg.com/vi/K712xhCBuME/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "El nido",
+    "enviada": true
+  },
+  {
+    "titulo": "El nido - Tráiler Oficial de la película",
+    "url": "https://www.youtube.com/watch?v=Cg-mN756aWw",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-15T17:16:52.917108",
+    "medio": "filmfilicos",
+    "imagen": "https://i.ytimg.com/vi/Cg-mN756aWw/hqdefault.jpg",
+    "tipo": "trailer",
+    "relevancia": 2,
+    "pelicula": "El nido",
+    "enviada": true
   }
 ]
