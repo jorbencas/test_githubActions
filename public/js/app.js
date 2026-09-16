@@ -221,6 +221,7 @@ class App {
     this.yearBarInner = document.getElementById('year-bar-inner');
     this.yearBarNeedle = document.getElementById('year-bar-needle');
     this.yearBarLabel = document.getElementById('year-bar-label');
+    this.yearBarTickMarks = document.getElementById('year-bar-tick-marks');
     this.scrollHint = document.getElementById('scroll-hint');
     this.loadingEl = document.getElementById('loading');
     this.eraBg = document.getElementById('era-bg');
@@ -533,11 +534,26 @@ class App {
 
   _buildYearBar() {
     this.yearBarInner.innerHTML = '';
+    this.yearBarTickMarks.innerHTML = '';
     for (let y = YEAR_MIN; y <= YEAR_MAX; y += 5) {
       const tick = document.createElement('div');
       tick.className = 'year-tick'; tick.dataset.year = y; tick.textContent = y;
       tick.addEventListener('click', () => this._scrollToYear(y));
       this.yearBarInner.appendChild(tick);
+
+      // Tick mark on track
+      const mark = document.createElement('div');
+      mark.className = 'year-bar-tick-mark major';
+      mark.style.left = `${((y - YEAR_MIN) / (YEAR_MAX - YEAR_MIN)) * 100}%`;
+      this.yearBarTickMarks.appendChild(mark);
+    }
+    // Minor ticks
+    for (let y = YEAR_MIN; y <= YEAR_MAX; y++) {
+      if (y % 5 === 0) continue;
+      const mark = document.createElement('div');
+      mark.className = 'year-bar-tick-mark';
+      mark.style.left = `${((y - YEAR_MIN) / (YEAR_MAX - YEAR_MIN)) * 100}%`;
+      this.yearBarTickMarks.appendChild(mark);
     }
     if (YEAR_MAX % 5 !== 0) {
       const tick = document.createElement('div');
