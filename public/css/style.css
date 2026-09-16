@@ -279,6 +279,7 @@ html, body {
 .year-bar-indicator {
   position: relative; height: 36px; margin: 0 40px;
   pointer-events: none;
+  overflow: hidden;
 }
 
 /* Track line with era segments */
@@ -404,6 +405,7 @@ html, body {
   position: relative; z-index: 1;
   overflow: hidden;
   padding: 0 20px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .year-tick {

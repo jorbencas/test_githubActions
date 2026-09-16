@@ -439,13 +439,27 @@ class App {
     const maxScroll = this.container.scrollWidth - this.container.clientWidth;
     if (maxScroll <= 0) return;
     const progress = this.scrollLeft / maxScroll;
-    const xPos = 40 + progress * (window.innerWidth - 80);
+
+    // Needle position based on year range (not scroll)
+    const yearProgress = (this.currentYear - YEAR_MIN) / (YEAR_MAX - YEAR_MIN);
+    const indicator = document.querySelector('.year-bar-indicator');
+    const indWidth = indicator ? indicator.clientWidth : window.innerWidth - 80;
+    const xPos = yearProgress * indWidth;
+
     this.yearBarNeedle.style.left = `${xPos}px`;
     this.yearBarLabel.style.left = `${xPos}px`;
     this.yearBarLabel.textContent = this.currentYear;
     this.yearBarLabel.style.color = this.currentEra.accent;
     this.yearBarLabel.style.borderColor = this.currentEra.accent + '50';
     this.yearBarNeedle.style.background = this.currentEra.accent;
+
+    // Scroll the year ticks to follow the needle
+    const innerWidth = this.yearBarInner.scrollWidth;
+    const visibleWidth = this.yearBarInner.clientWidth;
+    if (innerWidth > visibleWidth) {
+      const tickOffset = yearProgress * (innerWidth - visibleWidth);
+      this.yearBarInner.style.transform = `translateX(${-tickOffset}px)`;
+    }
   }
 
   _highlightYearTick(year) {
