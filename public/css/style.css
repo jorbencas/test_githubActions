@@ -270,80 +270,67 @@ html, body {
 /* ===== YEAR BAR ===== */
 .year-bar {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
-  height: 64px; display: flex; align-items: center;
+  height: 70px; display: flex; flex-direction: column; justify-content: flex-end;
   padding: 0 40px 0;
   background: linear-gradient(0deg, rgba(5, 2, 0, 0.95) 0%, rgba(5, 2, 0, 0.7) 60%, transparent 100%);
   border-top: 1px solid rgba(230, 126, 34, 0.08);
 }
-.year-bar-line {
-  position: absolute; top: 50%; left: 40px; right: 40px; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(230, 126, 34, 0.15), transparent);
-  transform: translateY(-2px);
+.year-bar-indicator {
+  position: absolute; top: 6px; left: 40px; right: 40px; height: 28px;
+  pointer-events: none;
+}
+.year-bar-track {
+  position: absolute; top: 50%; left: 0; right: 0; height: 2px;
+  background: rgba(230, 126, 34, 0.1);
+  transform: translateY(-50%);
+}
+.year-bar-needle {
+  position: absolute; top: 0; width: 2px; height: 100%;
+  background: var(--accent);
+  transform: translateX(-50%);
+  transition: left 0.3s ease, background 0.5s;
+}
+.year-bar-needle::before {
+  content: '';
+  position: absolute; top: -4px; left: 50%;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+  transform: translateX(-50%);
+  box-shadow: 0 0 12px rgba(230, 126, 34, 0.6);
+}
+.year-bar-needle::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 50%;
+  width: 0; height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--accent);
+  transform: translateX(-50%);
 }
 .year-bar-dot {
-  position: absolute; top: 50%;
-  width: 14px; height: 14px; border-radius: 50%;
-  background: var(--accent);
-  box-shadow:
-    0 0 20px rgba(230, 126, 34, 0.6),
-    0 0 40px rgba(230, 126, 34, 0.3),
-    0 0 4px rgba(230, 126, 34, 0.9);
-  transition: left 0.3s ease, background 0.5s, box-shadow 0.5s;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-}
-.year-bar-dot::before {
-  content: '';
-  position: absolute;
-  inset: -6px;
-  border-radius: 50%;
-  border: 1.5px solid var(--accent);
-  opacity: 0.4;
-  animation: dotPulse 2s ease-in-out infinite;
-}
-.year-bar-dot::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: 100%;
-  width: 1px;
-  height: 20px;
-  background: linear-gradient(to top, var(--accent), transparent);
-  transform: translateX(-50%);
-  opacity: 0.5;
-}
-@keyframes dotPulse {
-  0%, 100% { transform: scale(1); opacity: 0.4; }
-  50% { transform: scale(1.6); opacity: 0; }
+  display: none;
 }
 .year-bar-label {
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%;
+  position: absolute; top: -2px; left: 50%;
   transform: translateX(-50%);
   font-family: var(--mono);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--accent);
   white-space: nowrap;
-  padding: 3px 10px;
-  background: rgba(5, 2, 0, 0.85);
-  border: 1px solid rgba(230, 126, 34, 0.25);
-  border-radius: 6px;
+  padding: 2px 8px;
+  background: rgba(5, 2, 0, 0.9);
+  border: 1px solid rgba(230, 126, 34, 0.3);
+  border-radius: 4px;
   backdrop-filter: blur(8px);
   letter-spacing: 0.5px;
   pointer-events: none;
   transition: left 0.3s ease, color 0.5s, border-color 0.5s;
+  z-index: 3;
 }
-.year-bar-label::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 5px solid transparent;
-  border-top-color: rgba(230, 126, 34, 0.25);
+.year-bar-line {
+  position: absolute; bottom: 50%; left: 40px; right: 40px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(230, 126, 34, 0.12), transparent);
 }
 .year-bar-inner {
   display: flex; gap: 0; width: 100%; justify-content: space-between;
@@ -398,11 +385,9 @@ html, body {
   .year-cards { gap: 8px; padding: 0 4px; }
   .scroll-hint { display: none; }
   .year-bar { height: 44px; padding: 0 12px; }
-  .year-bar-line { left: 12px; right: 12px; top: 50%; }
-  .year-bar-dot { top: 50%; width: 8px; height: 8px; }
-  .year-bar-dot::before { inset: -4px; }
-  .year-bar-dot::after { height: 14px; }
-  .year-bar-label { font-size: 10px; padding: 2px 8px; bottom: calc(100% + 4px); }
+  .year-bar-line { left: 12px; right: 12px; bottom: 50%; }
+  .year-bar-indicator { top: 4px; left: 12px; right: 12px; height: 20px; }
+  .year-bar-label { font-size: 9px; padding: 1px 6px; }
   .year-tick { font-size: 8px; padding: 2px 2px; }
   .year-dot { width: 8px; height: 8px; border-width: 2px; }
   .vignette { background: radial-gradient(ellipse at center, transparent 15%, rgba(5, 2, 0, 0.9) 100%); }
@@ -427,8 +412,8 @@ html, body {
   .year-cards { gap: 10px; padding: 0 6px; }
   .scroll-hint { display: none; }
   .year-bar { height: 46px; padding: 0 16px; }
-  .year-bar-line { left: 16px; right: 16px; top: 50%; }
-  .year-bar-dot { top: 50%; width: 10px; height: 10px; }
+  .year-bar-line { left: 16px; right: 16px; bottom: 50%; }
+  .year-bar-indicator { top: 4px; left: 16px; right: 16px; height: 22px; }
   .year-tick { font-size: 9px; padding: 2px 3px; }
   .year-dot { width: 9px; height: 9px; border-width: 2px; }
   .vignette { background: radial-gradient(ellipse at center, transparent 18%, rgba(5, 2, 0, 0.88) 100%); }
@@ -450,8 +435,8 @@ html, body {
   .year-cards { gap: 12px; }
   .scroll-hint { display: none; }
   .year-bar { height: 48px; padding: 0 20px; }
-  .year-bar-line { left: 20px; right: 20px; top: 50%; }
-  .year-bar-dot { top: 50%; width: 12px; height: 12px; }
+  .year-bar-line { left: 20px; right: 20px; bottom: 50%; }
+  .year-bar-indicator { top: 5px; left: 20px; right: 20px; height: 24px; }
   .year-tick { font-size: 9px; }
   .year-dot { width: 10px; height: 10px; border-width: 2px; }
 }
@@ -467,8 +452,8 @@ html, body {
   .timeline-track { padding: 78px 50px 110px; }
   .year-group { min-width: 300px; }
   .year-bar { height: 50px; padding: 0 30px; }
-  .year-bar-line { left: 30px; right: 30px; top: 50%; }
-  .year-bar-dot { top: 50%; width: 12px; height: 12px; }
+  .year-bar-line { left: 30px; right: 30px; bottom: 50%; }
+  .year-bar-indicator { top: 5px; left: 30px; right: 30px; height: 26px; }
   .scroll-hint { display: flex; }
 }
 
@@ -481,8 +466,8 @@ html, body {
   .timeline-track { padding: 80px 55px 115px; }
   .year-group { min-width: 310px; }
   .year-bar { height: 52px; padding: 0 35px; }
-  .year-bar-line { left: 35px; right: 35px; top: 50%; }
-  .year-bar-dot { top: 50%; width: 13px; height: 13px; }
+  .year-bar-line { left: 35px; right: 35px; bottom: 50%; }
+  .year-bar-indicator { top: 5px; left: 35px; right: 35px; height: 28px; }
 }
 
 /* Regular laptops (1025-1280px) */
@@ -520,10 +505,9 @@ html, body {
   .year-group { min-width: 380px; }
   .year-cards { gap: 18px; }
   .year-bar { height: 58px; padding: 0 60px; }
-  .year-bar-line { left: 60px; right: 60px; top: 50%; }
-  .year-bar-dot { top: 50%; width: 16px; height: 16px; }
-  .year-bar-dot::before { inset: -8px; }
-  .year-bar-dot::after { height: 24px; }
+  .year-bar-line { left: 60px; right: 60px; bottom: 50%; }
+  .year-bar-indicator { top: 6px; left: 60px; right: 60px; height: 30px; }
+  .year-bar-label { font-size: 12px; padding: 3px 10px; }
   .year-tick { font-size: 11px; }
 }
 
@@ -544,11 +528,9 @@ html, body {
   .year-group { min-width: 200px; }
   .year-cards { gap: 6px; }
   .scroll-hint { display: none; }
-  .year-bar { height: 40px; padding: 0 12px; }
-  .year-bar-line { left: 12px; right: 12px; top: 50%; }
-  .year-bar-dot { top: 50%; width: 8px; height: 8px; }
-  .year-bar-dot::before { display: none; }
-  .year-bar-dot::after { display: none; }
+  .year-bar { height: 38px; padding: 0 12px; }
+  .year-bar-line { left: 12px; right: 12px; bottom: 50%; }
+  .year-bar-indicator { display: none; }
   .year-bar-label { display: none; }
   .year-tick { font-size: 8px; padding: 1px 2px; }
   .year-dot { width: 7px; height: 7px; border-width: 1px; }

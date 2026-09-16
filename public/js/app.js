@@ -219,7 +219,7 @@ class App {
     this.yearDisplay = document.getElementById('year-display');
     this.eraLabel = document.getElementById('era-label');
     this.yearBarInner = document.getElementById('year-bar-inner');
-    this.yearBarDot = document.getElementById('year-bar-dot');
+    this.yearBarNeedle = document.getElementById('year-bar-needle');
     this.yearBarLabel = document.getElementById('year-bar-label');
     this.scrollHint = document.getElementById('scroll-hint');
     this.loadingEl = document.getElementById('loading');
@@ -440,11 +440,12 @@ class App {
     if (maxScroll <= 0) return;
     const progress = this.scrollLeft / maxScroll;
     const xPos = 40 + progress * (window.innerWidth - 80);
-    this.yearBarDot.style.left = `${xPos}px`;
+    this.yearBarNeedle.style.left = `${xPos}px`;
     this.yearBarLabel.style.left = `${xPos}px`;
     this.yearBarLabel.textContent = this.currentYear;
     this.yearBarLabel.style.color = this.currentEra.accent;
-    this.yearBarLabel.style.borderColor = this.currentEra.accent + '40';
+    this.yearBarLabel.style.borderColor = this.currentEra.accent + '50';
+    this.yearBarNeedle.style.background = this.currentEra.accent;
   }
 
   _highlightYearTick(year) {
