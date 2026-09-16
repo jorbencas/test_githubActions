@@ -507,7 +507,7 @@ class App {
 
   _setupScrollAnimations() {
     const vw = window.innerWidth;
-    const rootMarginRight = vw < 480 ? '50px' : '100px';
+    const rootMarginRight = vw < 480 ? 50 : 100;
     const options = { root: this.container, threshold: 0.1, rootMargin: `80px ${rootMarginRight}px 120px ${rootMarginRight}px` };
 
     // Year groups observer
