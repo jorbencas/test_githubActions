@@ -270,7 +270,7 @@ html, body {
 /* ===== YEAR BAR ===== */
 .year-bar {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
-  height: 56px; display: flex; align-items: center;
+  height: 64px; display: flex; align-items: center;
   padding: 0 40px 0;
   background: linear-gradient(0deg, rgba(5, 2, 0, 0.95) 0%, rgba(5, 2, 0, 0.7) 60%, transparent 100%);
   border-top: 1px solid rgba(230, 126, 34, 0.08);
@@ -282,13 +282,68 @@ html, body {
 }
 .year-bar-dot {
   position: absolute; top: 50%;
-  width: 10px; height: 10px; border-radius: 50%;
+  width: 14px; height: 14px; border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 16px rgba(230, 126, 34, 0.5), 0 0 4px rgba(230, 126, 34, 0.8);
-  transition: left 0.3s ease;
+  box-shadow:
+    0 0 20px rgba(230, 126, 34, 0.6),
+    0 0 40px rgba(230, 126, 34, 0.3),
+    0 0 4px rgba(230, 126, 34, 0.9);
+  transition: left 0.3s ease, background 0.5s, box-shadow 0.5s;
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 2;
+}
+.year-bar-dot::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  opacity: 0.4;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+.year-bar-dot::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  width: 1px;
+  height: 20px;
+  background: linear-gradient(to top, var(--accent), transparent);
+  transform: translateX(-50%);
+  opacity: 0.5;
+}
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.6); opacity: 0; }
+}
+.year-bar-label {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+  padding: 3px 10px;
+  background: rgba(5, 2, 0, 0.85);
+  border: 1px solid rgba(230, 126, 34, 0.25);
+  border-radius: 6px;
+  backdrop-filter: blur(8px);
+  letter-spacing: 0.5px;
+  pointer-events: none;
+  transition: left 0.3s ease, color 0.5s, border-color 0.5s;
+}
+.year-bar-label::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(230, 126, 34, 0.25);
 }
 .year-bar-inner {
   display: flex; gap: 0; width: 100%; justify-content: space-between;
@@ -342,9 +397,12 @@ html, body {
   .year-group { min-width: 220px; }
   .year-cards { gap: 8px; padding: 0 4px; }
   .scroll-hint { display: none; }
-  .year-bar { height: 40px; padding: 0 12px; }
+  .year-bar { height: 44px; padding: 0 12px; }
   .year-bar-line { left: 12px; right: 12px; top: 50%; }
-  .year-bar-dot { top: 50%; width: 6px; height: 6px; }
+  .year-bar-dot { top: 50%; width: 8px; height: 8px; }
+  .year-bar-dot::before { inset: -4px; }
+  .year-bar-dot::after { height: 14px; }
+  .year-bar-label { font-size: 10px; padding: 2px 8px; bottom: calc(100% + 4px); }
   .year-tick { font-size: 8px; padding: 2px 2px; }
   .year-dot { width: 8px; height: 8px; border-width: 2px; }
   .vignette { background: radial-gradient(ellipse at center, transparent 15%, rgba(5, 2, 0, 0.9) 100%); }
@@ -368,9 +426,9 @@ html, body {
   .year-group { min-width: 250px; }
   .year-cards { gap: 10px; padding: 0 6px; }
   .scroll-hint { display: none; }
-  .year-bar { height: 42px; padding: 0 16px; }
+  .year-bar { height: 46px; padding: 0 16px; }
   .year-bar-line { left: 16px; right: 16px; top: 50%; }
-  .year-bar-dot { top: 50%; }
+  .year-bar-dot { top: 50%; width: 10px; height: 10px; }
   .year-tick { font-size: 9px; padding: 2px 3px; }
   .year-dot { width: 9px; height: 9px; border-width: 2px; }
   .vignette { background: radial-gradient(ellipse at center, transparent 18%, rgba(5, 2, 0, 0.88) 100%); }
@@ -391,9 +449,9 @@ html, body {
   .year-group { min-width: 280px; }
   .year-cards { gap: 12px; }
   .scroll-hint { display: none; }
-  .year-bar { height: 44px; padding: 0 20px; }
+  .year-bar { height: 48px; padding: 0 20px; }
   .year-bar-line { left: 20px; right: 20px; top: 50%; }
-  .year-bar-dot { top: 50%; }
+  .year-bar-dot { top: 50%; width: 12px; height: 12px; }
   .year-tick { font-size: 9px; }
   .year-dot { width: 10px; height: 10px; border-width: 2px; }
 }
@@ -408,9 +466,9 @@ html, body {
   .era-label { font-size: 10px; }
   .timeline-track { padding: 78px 50px 110px; }
   .year-group { min-width: 300px; }
-  .year-bar { height: 48px; padding: 0 30px; }
+  .year-bar { height: 50px; padding: 0 30px; }
   .year-bar-line { left: 30px; right: 30px; top: 50%; }
-  .year-bar-dot { top: 50%; }
+  .year-bar-dot { top: 50%; width: 12px; height: 12px; }
   .scroll-hint { display: flex; }
 }
 
@@ -422,9 +480,9 @@ html, body {
   .year-display { font-size: 50px; }
   .timeline-track { padding: 80px 55px 115px; }
   .year-group { min-width: 310px; }
-  .year-bar { height: 50px; padding: 0 35px; }
+  .year-bar { height: 52px; padding: 0 35px; }
   .year-bar-line { left: 35px; right: 35px; top: 50%; }
-  .year-bar-dot { top: 50%; }
+  .year-bar-dot { top: 50%; width: 13px; height: 13px; }
 }
 
 /* Regular laptops (1025-1280px) */
@@ -461,9 +519,11 @@ html, body {
   .timeline-track { padding: 80px 100px 120px; }
   .year-group { min-width: 380px; }
   .year-cards { gap: 18px; }
-  .year-bar { height: 55px; padding: 0 60px; }
+  .year-bar { height: 58px; padding: 0 60px; }
   .year-bar-line { left: 60px; right: 60px; top: 50%; }
-  .year-bar-dot { top: 50%; width: 10px; height: 10px; }
+  .year-bar-dot { top: 50%; width: 16px; height: 16px; }
+  .year-bar-dot::before { inset: -8px; }
+  .year-bar-dot::after { height: 24px; }
   .year-tick { font-size: 11px; }
 }
 
@@ -484,9 +544,12 @@ html, body {
   .year-group { min-width: 200px; }
   .year-cards { gap: 6px; }
   .scroll-hint { display: none; }
-  .year-bar { height: 36px; padding: 0 12px; }
+  .year-bar { height: 40px; padding: 0 12px; }
   .year-bar-line { left: 12px; right: 12px; top: 50%; }
-  .year-bar-dot { top: 50%; width: 6px; height: 6px; }
+  .year-bar-dot { top: 50%; width: 8px; height: 8px; }
+  .year-bar-dot::before { display: none; }
+  .year-bar-dot::after { display: none; }
+  .year-bar-label { display: none; }
   .year-tick { font-size: 8px; padding: 1px 2px; }
   .year-dot { width: 7px; height: 7px; border-width: 1px; }
   .vignette { background: radial-gradient(ellipse at center, transparent 25%, rgba(5, 2, 0, 0.8) 100%); }

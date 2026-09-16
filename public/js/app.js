@@ -220,6 +220,7 @@ class App {
     this.eraLabel = document.getElementById('era-label');
     this.yearBarInner = document.getElementById('year-bar-inner');
     this.yearBarDot = document.getElementById('year-bar-dot');
+    this.yearBarLabel = document.getElementById('year-bar-label');
     this.scrollHint = document.getElementById('scroll-hint');
     this.loadingEl = document.getElementById('loading');
     this.eraBg = document.getElementById('era-bg');
@@ -438,7 +439,12 @@ class App {
     const maxScroll = this.container.scrollWidth - this.container.clientWidth;
     if (maxScroll <= 0) return;
     const progress = this.scrollLeft / maxScroll;
-    this.yearBarDot.style.left = `${40 + progress * (window.innerWidth - 80)}px`;
+    const xPos = 40 + progress * (window.innerWidth - 80);
+    this.yearBarDot.style.left = `${xPos}px`;
+    this.yearBarLabel.style.left = `${xPos}px`;
+    this.yearBarLabel.textContent = this.currentYear;
+    this.yearBarLabel.style.color = this.currentEra.accent;
+    this.yearBarLabel.style.borderColor = this.currentEra.accent + '40';
   }
 
   _highlightYearTick(year) {
