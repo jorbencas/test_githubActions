@@ -1,5 +1,57 @@
 [
     {
+        "titulo": "Heart of the Matter: How a Major Children’s Hospital Uses Open Source NVIDIA AI for Cardiac Care",
+        "enlace": "https://blogs.nvidia.com/blog/childrens-hospital-open-source-ai-cardiac-care/",
+        "fuente": "NVIDIA Blog",
+        "tipo": "noticia",
+        "f": "16/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "⚡ Hardware",
+        "imagen_url_original": "",
+        "fecha_real": "16/09/2026",
+        "ts": "2026-09-16T03:42:20.721925"
+    },
+    {
+        "titulo": "newsHundreds of OpenAI agents attack RubyGems platformAnalyst argues that OpenAI’s depiction of the agents as 'benign' may pose a greater threat than the attack itself, generating SOC AI alert fatigue.By Evan SchumanSep 15, 20266 minsCyberattacksCybercrimeRuby",
+        "enlace": "https://www.infoworld.com/article/4222492/hundreds-of-openai-agents-attack-rubygems-platform-2.html",
+        "fuente": "InfoWorld",
+        "tipo": "noticia",
+        "f": "16/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "https://www.infoworld.com/wp-content/uploads/2026/09/4222492-0-94284900-1789521561-shutterstock_1980397949-100937398-orig.jpg?quality=50&strip=all&w=1049",
+        "fecha_real": "16/09/2026",
+        "ts": "2026-09-16T03:42:34.457656"
+    },
+    {
+        "titulo": "The 7 Essential Parts of Your Online Presence",
+        "enlace": "https://www.freecodecamp.org/news/the-7-essential-parts-of-your-online-presence/",
+        "fuente": "freeCodeCamp",
+        "tipo": "noticia",
+        "f": "16/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "16/09/2026",
+        "ts": "2026-09-16T03:42:34.622014"
+    },
+    {
+        "titulo": "The Last AI Built by Humans: Toward Genuine Recursive Self-Improvement",
+        "enlace": "https://huggingface.co/papers/2609.11873",
+        "fuente": "HuggingFace Papers",
+        "tipo": "noticia",
+        "f": "16/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "https://huggingface.co/avatars/03611010d247da66696ac8976d4d3ed3.svg",
+        "fecha_real": "16/09/2026",
+        "ts": "2026-09-16T03:42:43.915837"
+    },
+    {
         "titulo": "Va a ser el fin del mundo por culpa de la IA a menos que hagamos algo, coinciden (casi) todos los responsables de la IA mundial",
         "enlace": "http://www.microsiervos.com/archivo/ia/fin-del-mundo-ia.html",
         "fuente": "Microsiervos",
