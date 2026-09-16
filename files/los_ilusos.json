@@ -447,5 +447,17 @@
     "tipo": "noticia",
     "relevancia": 3,
     "pelicula": "Los ilusos 13+13"
+  },
+  {
+    "titulo": "Jonás Trueba, cineasta: \"Siempre tuve la idea de darle a ‘Los ilusos’ una segunda oportunidad\"",
+    "url": "https://www.youtube.com/watch?v=JT6YlsTn3Is",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-16T21:38:20.062804",
+    "medio": "Infobae España",
+    "imagen": "https://i.ytimg.com/vi/JT6YlsTn3Is/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
