@@ -665,16 +665,14 @@ async def run():
     ahora = datetime.now()
     fecha_h = ahora.strftime("%d/%m/%Y")
 
-    client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
-
-    # Traducir títulos pendientes antes de renderizar
-    historial = await traducir_titulos_ia(historial, client)
-    save_json(path_json, historial)
-
     if args.dashboard_only:
         logger.info("ℹ️ Modo --dashboard-only: saltando recap IA y PR.")
         resumen_ia = "Resumen generado localmente sin IA."
     else:
+        client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
+        # Traducir títulos pendientes antes de renderizar
+        historial = await traducir_titulos_ia(historial, client)
+        save_json(path_json, historial)
         noticias_web = [n for n in historial if n.get(TIPO_KEY) in (TIPO_VAL_NOTICIA, "news")]
         resumen_ia = await generar_recap(historial, client, blog_path=args.blog_path)
         if not resumen_ia or "no ha sido posible" in resumen_ia or len(resumen_ia) < 50:

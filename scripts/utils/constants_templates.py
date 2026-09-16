@@ -19,7 +19,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <meta name="twitter:creator" content="@jorbencas">
     <meta id="api-base-token" content="{downloader_api_token}">
     <link rel="canonical" href="https://jorbencasdownloaderdocument.surge.sh">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <title>Tech Pulse Dashboard — Jorge Beneyto Castell\u00f3</title>
     <script type="application/ld+json">
     {{
@@ -95,7 +95,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </footer>
     </div>
 </body>
-<script src="script.js"></script>
+<script src="js/dashboard.js"></script>
 </html>
 """
 
