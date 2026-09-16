@@ -868,5 +868,29 @@
     "relevancia": 2,
     "pelicula": "El nido",
     "enviada": true
+  },
+  {
+    "titulo": "EL NIDO. Luisa Gavasa es Elena. 11 de septiembre en cines.",
+    "url": "https://www.youtube.com/watch?v=ciH4OQf8o0Q",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-16T05:16:08.164546",
+    "medio": "Filmax",
+    "imagen": "https://i.ytimg.com/vi/ciH4OQf8o0Q/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "El nido",
+    "enviada": true
+  },
+  {
+    "titulo": "EL NIDO. La atmósfera y aspecto visual. 11 de septiembre en cines.",
+    "url": "https://www.youtube.com/watch?v=r853lnXNY2Q",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-16T05:16:08.164683",
+    "medio": "Filmax",
+    "imagen": "https://i.ytimg.com/vi/r853lnXNY2Q/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "El nido",
+    "enviada": true
   }
 ]
