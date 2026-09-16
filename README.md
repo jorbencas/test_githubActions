@@ -18,9 +18,9 @@
 [![AI Tools](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_ai_tools.yml?branch=master&style=flat-square&label=AI%20Tools&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
 [![Tips](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_tips.yml?branch=master&style=flat-square&label=Tips&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
 
-Ecosistema de automatización tech que ejecuta **16 workflows de GitHub Actions** formando un pipeline de contenido completamente automatizado. Recolecta de **547 fuentes** (158 canales YouTube, 161 feeds RSS, 225 sitios de web scraping, 89 GitHub Topics, 5 GitHub Repos, 1 Product Hunt), procesa con **IA (Gemini)** y distribuye contenido a múltiples canales.
+Ecosistema de automatización tech que ejecuta **19 workflows de GitHub Actions** formando un pipeline de contenido completamente automatizado. Recolecta de **547 fuentes** (158 canales YouTube, 161 feeds RSS, 225 sitios de web scraping, 89 GitHub Topics, 5 GitHub Repos, 1 Product Hunt), procesa con **IA (Gemini)** y distribuye contenido a múltiples canales.
 
-**[🚀 News Dashboard](http://jorbencasdownloaderdocument.surge.sh)** · **[📖 Blog: Tech Pulse](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard)** · **[🔧 Instalación](https://blog-jorbencas.vercel.app/posts/instalacion-tech-pulse)**
+**[🚀 Landing Page](http://jorbencasdownloaderdocument.surge.sh)** · **[📖 Blog: Tech Pulse](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard)** · **[🔧 Instalación](https://blog-jorbencas.vercel.app/posts/instalacion-tech-pulse)**
 
 </div>
 
@@ -38,6 +38,27 @@ Ecosistema de automatización tech que ejecuta **16 workflows de GitHub Actions*
 | 💡 **Tips** | Contenido generado con IA (708 tips, 80 categorías) | Cada 3 horas | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
 | 🛠️ **Herramientas** | Auto-detección de herramientas IA (166 categorías) | Cada 3 horas | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
 | 🌅 **Saludos** | Imágenes generadas con IA | Cada 3 horas | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
+
+---
+
+## 🏠 Landing Page
+
+La landing ([jorbencasdownloaderdocument.surge.sh](http://jorbencasdownloaderdocument.surge.sh)) es un menú principal con acceso a las 3 secciones:
+
+| Sección | URL | Descripción |
+|---------|-----|-------------|
+| 🔥 **Tech Timeline** | `/timeline.html` | Timeline interactiva de la historia de la tecnología (1970-2025) |
+| 📰 **News Dashboard** | `/dashboard.html` | 9.800+ noticias tech de 100+ fuentes RSS |
+| 🛠️ **Markdown Tools** | `/mdtools/` | Cheatsheets, snippets, tablas, presentaciones y exportación PDF |
+
+**Diseño de la landing:**
+- Formas romboidales decorativas flotantes con animación
+- Grid de fondo con máscara radial
+- Tarjetas con `clip-path` romboide
+- Iconos dentro de rombos giratorios con hover
+- Stats por sección (años, noticias, herramientas)
+- Línea de escaneo animada inferior
+- Responsive (mobile ↔ desktop)
 
 ---
 
@@ -75,6 +96,7 @@ scripts/
 │   ├── manage_resources.py       Gestión de resources.mdx
 │   ├── merge_freefordev.py       Merge de recursos free-for-dev
 │   ├── send_email.py             Newsletter Mailgun
+│   ├── send_retos_email.py       Retos de programación por email
 │   └── send_telegram.py          Notificaciones Telegram + TTS
 ├── tools/                    🔧 Utilidades de mantenimiento
 │   ├── clean_news.py             Validación de enlaces
@@ -93,8 +115,20 @@ scripts/
 └── solutions/                💡 Base de datos de soluciones
     ├── solutions_db.py            Lookup + generación
     └── solutions_data.py          107 soluciones curadas
-tests/                        ✅ Suite de tests pytest (168 tests)
-public/                       🕰️ Tech Timeline (Surge.sh)
+tests/                        ✅ Suite de tests pytest (183 tests)
+public/                       🌐 Landing + Timeline + Dashboard + Tools
+├── index.html                ← Landing page principal
+├── timeline.html             ← Tech Timeline interactiva
+├── dashboard.html            ← News Dashboard (9.800+ noticias)
+├── mdtools/                  ← Herramientas Markdown
+├── css/
+│   ├── style.css             ← Dark theme timeline + 14 breakpoints
+│   └── dashboard.css         ← Estilos news dashboard
+├── js/
+│   ├── app.js                ← Timeline: eras, parallax, partículas, audio
+│   └── dashboard.js          ← Dashboard: filtros, búsqueda, lazy loading
+└── data/
+    └── events.json           ← 424 eventos de historia tech
 ```
 
 ---
@@ -118,8 +152,10 @@ public/                       🕰️ Tech Timeline (Surge.sh)
 | Comando | Descripción |
 |---------|-------------|
 | `python -m scripts.publishers.generate_weekly --blog-path blog` | Generar recap semanal + dashboard |
+| `python -m scripts.publishers.generate_weekly --dashboard-only` | Regenerar solo el dashboard HTML |
 | `python -m scripts.publishers.send_email` | Enviar newsletter Mailgun |
 | `python -m scripts.publishers.send_email --dry-run` | Previsualizar email sin enviar |
+| `python -m scripts.publishers.send_retos_email --max-retos 3` | Enviar retos de programación por email |
 | `python -m scripts.publishers.send_telegram` | Enviar notificación Telegram con TTS |
 | `python -m scripts.publishers.send_telegram --dry-run` | Previsualizar Telegram sin enviar |
 
@@ -143,12 +179,12 @@ public/                       🕰️ Tech Timeline (Surge.sh)
 
 | Comando | Descripción |
 |---------|-------------|
-| `python -m pytest tests/ -v` | Ejecutar todos los tests (168 tests) |
+| `python -m pytest tests/ -v` | Ejecutar todos los tests (183 tests) |
 | `python -m pytest tests/test_solutions_db.py -v` | Ejecutar un suite específico |
 
 ---
 
-## 🤖 GitHub Actions — 18 Workflows
+## 🤖 GitHub Actions — 19 Workflows
 
 | Workflow | Horario | Descripción |
 |----------|---------|-------------|
@@ -161,6 +197,7 @@ public/                       🕰️ Tech Timeline (Surge.sh)
 | `daily_saludo` | Cada 3 horas | Imágenes Buenos días/noches |
 | `send_email` | Diario 09:00 UTC | Newsletter Mailgun |
 | `send_telegram` | Cada 30 min | Telegram + TTS |
+| `send_retos_email` | Diario | Retos de programación por email |
 | `clean_news` | Trimestral | Validación de enlaces |
 | `hunt_challenges` | Manual | Generación de retos con IA |
 | `optimize_images` | Dispatch | Optimización de imágenes |
@@ -175,7 +212,7 @@ public/                       🕰️ Tech Timeline (Surge.sh)
 
 ## 🕰️ Tech Timeline
 
-Timeline interactiva de la historia de la tecnología (1970-2025), desplegada en Surge.sh.
+Timeline interactiva de la historia de la tecnología (1970-2025), desplegada en Surge.sh (`/timeline.html`).
 
 - **424 eventos** en 9 categorías
 - **Imágenes reales** de Unsplash como fondos por era
@@ -183,39 +220,44 @@ Timeline interactiva de la historia de la tecnología (1970-2025), desplegada en
 - **Efecto teatro** — parallax de 3 capas
 - **Scroll animations** — IntersectionObserver
 - **Música ambient** — Web Audio API
+- **Year-bar** — barra de navegación inferior con ticks por año y dot animado
 - **Responsive** — 320px → ultra-wide
-
----
-
-## 📊 Dashboard — Tech Timeline
-
-Desplegado en Surge.sh. Experiencia inmersiva de scroll horizontal 2D que recorre la historia de la tecnología (1970-2025).
-
-**Características:**
-- **6 eras temáticas** con imágenes reales de Unsplash (Mainframes, PC, Internet, Web 2.0, Móvil, IA)
-- **Parallax 3 capas** (back, mid, front) con efecto teatro
-- **Partículas canvas** (humo + brasas) con colores por era
-- **Música ambiente** (Web Audio API, generada proceduralmente)
-- **Animaciones scroll** (IntersectionObserver) con efecto fade-in
-- **Año dinámico** que cambia al hacer scroll
-- **Línea temporal** con puntos de eventos interactivos
-- **Responsive** (320px → ultra-wide, landscape, touch, reduced motion)
-- **424 eventos** de historia tech (1970-2025)
 
 **Estructura:**
 ```
 public/
-├── index.html          ← HTML principal
-├── css/style.css       ← Dark theme + 14 breakpoints responsive
-├── js/app.js           ← Lógica: eras, parallax, partículas, audio, scroll
-└── data/events.json    ← 424 eventos de historia tech
+├── timeline.html         ← HTML principal
+├── css/style.css         ← Dark theme + 14 breakpoints responsive
+├── js/app.js             ← Lógica: eras, parallax, partículas, audio, scroll
+└── data/events.json      ← 424 eventos de historia tech
+```
+
+---
+
+## 📊 News Dashboard
+
+Dashboard de noticias tech (`/dashboard.html`) con 9.800+ noticias de 100+ fuentes RSS.
+
+**Características:**
+- **Filtros por canal** — chips interactivos para filtrar por fuente
+- **Búsqueda en tiempo real** — filtrado instantáneo por texto
+- **Lazy loading** — carga progresiva de noticias
+- **Dark mode automático** — selon preferencias del sistema
+- **Responsive** — 320px → ultra-wide
+
+**Estructura:**
+```
+public/
+├── dashboard.html        ← HTML del dashboard
+├── css/dashboard.css     ← Estilos del news dashboard
+└── js/dashboard.js       ← Filtros, búsqueda, lazy loading
 ```
 
 ---
 
 ## 🧪 Test Coverage
 
-168 tests pytest cubriendo:
+183 tests pytest cubriendo:
 
 | Módulo | Tests |
 |--------|-------|
@@ -229,6 +271,7 @@ public/
 | Solutions | Lookup, generación multi-lenguaje |
 | Utilities | JSON, URLs, dedup, AI, traducción |
 | Tips | Generador, base de datos, categorías |
+| Movie scrapers | El nido, Nueve reinas, Los ilusos (15 tests) |
 
 ---
 
@@ -257,6 +300,7 @@ public/
 - **Resúmenes persistidos** — guardados en JSON
 - **Sección de vídeos** — YouTube con thumbnail y duración
 - **Diseño responsive** — móvil y escritorio
+- **Retos de programación** — email dedicado con soluciones y código
 
 ---
 
