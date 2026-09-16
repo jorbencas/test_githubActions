@@ -582,7 +582,7 @@ class App {
 
   async _loadData() {
     try {
-      const resp = await fetch('./data/events.json');
+      const resp = await fetch('/data/events.json');
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
       const data = await resp.json();
       this.events = data.events || [];
