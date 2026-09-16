@@ -65,7 +65,11 @@ scripts/
 │   ├── scrape_ai_tools.py        Auto-detección de herramientas IA
 │   ├── scrape_agent_skills.py    Scraping skills de agentes IA
 │   ├── scrape_concepts.py        Scraping conceptos de programación
-│   └── scrape_publicapis.py      Scraping APIs públicas (con detección pricing)
+│   ├── scrape_publicapis.py      Scraping APIs públicas (con detección pricing)
+│   ├── movie_scraper_base.py     Motor genérico SOLID para películas/series
+│   ├── scrape_el_nido.py         Película "El nido" (2026)
+│   ├── scrape_nueve_reinas.py    Serie "Nueve reinas" (Netflix, 2027)
+│   └── scrape_los_ilusos.py      Película "Los ilusos 13+13" (2026)
 ├── publishers/               📤 Generación y distribución
 │   ├── generate_weekly.py        Recap semanal + dashboard HTML
 │   ├── manage_resources.py       Gestión de resources.mdx
@@ -105,6 +109,9 @@ public/                       🕰️ Tech Timeline (Surge.sh)
 | `python -m scripts.scrapers.scrape_news --tier light` | Scraping ligero (solo quick sources) |
 | `python -m scripts.scrapers.scrape_tools` | GitHub Trending + Product Hunt |
 | `python -m scripts.scrapers.scrape_ai_tools` | Auto-detección de herramientas IA |
+| `python scripts/scrapers/scrape_el_nido.py --dry-run` | Scraper película "El nido" (2026) |
+| `python scripts/scrapers/scrape_nueve_reinas.py --dry-run` | Scraper serie "Nueve reinas" (Netflix) |
+| `python scripts/scrapers/scrape_los_ilusos.py --dry-run` | Scraper película "Los ilusos 13+13" (2026) |
 
 ### 📤 Publicación
 
@@ -141,7 +148,7 @@ public/                       🕰️ Tech Timeline (Surge.sh)
 
 ---
 
-## 🤖 GitHub Actions — 16 Workflows
+## 🤖 GitHub Actions — 18 Workflows
 
 | Workflow | Horario | Descripción |
 |----------|---------|-------------|
@@ -158,8 +165,11 @@ public/                       🕰️ Tech Timeline (Surge.sh)
 | `hunt_challenges` | Manual | Generación de retos con IA |
 | `optimize_images` | Dispatch | Optimización de imágenes |
 | `dashboard_update` | Push (JS/CSS/Python) | Regenerar + deploy dashboard |
-| `tests` | Push/PR a master | pytest (168 tests) |
+| `tests` | Push/PR a master | pytest |
 | `translate_descriptions` | Manual | Traducción de descripciones |
+| `el_nido_scrape` | Cada 6h (:47) | Scraping "El nido" (2026) |
+| `nueve_reinas_scrape` | Cada 6h (:23) | Scraping "Nueve reinas" (Netflix) |
+| `los_ilusos_scrape` | Cada 6h (:37) | Scraping "Los ilusos 13+13" (2026) |
 
 ---
 
