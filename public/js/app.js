@@ -506,15 +506,12 @@ class App {
   }
 
   _setupScrollAnimations() {
-    const vw = window.innerWidth;
-    const rootMarginRight = vw < 480 ? '50px' : '100px';
-
     // Year groups observer
     const groupObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
       });
-    }, { threshold: 0.1, rootMargin: `80px ${rootMarginRight} 120px ${rootMarginRight}` });
+    }, { threshold: 0.1 });
 
     this.track.querySelectorAll('.year-group').forEach(g => groupObserver.observe(g));
 
@@ -523,7 +520,7 @@ class App {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
       });
-    }, { threshold: 0.05, rootMargin: `80px ${rootMarginRight} 120px ${rootMarginRight}` });
+    }, { threshold: 0.05 });
 
     this.track.querySelectorAll('.card').forEach(c => cardObserver.observe(c));
   }
