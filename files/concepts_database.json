@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 92,
+    "total_concepts": 94,
     "categories": [
       "concurrency",
       "css_moderno",
@@ -14,7 +14,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-16T10:59:24.537298"
+    "last_scraped": "2026-09-16T16:18:54.269282"
   },
   "concepts": [
     {
@@ -1698,6 +1698,42 @@
       ],
       "cat": "interfaces",
       "scraped_at": "2026-09-15T16:26:56.461280"
+    },
+    {
+      "title": "Concurrencia avanzada en Rust: Arc>, RwLock, atómicos y canales mpsc",
+      "summary": "La concurrencia en Rust es segura por diseño: el sistema de ownership y el sistema de tipos impiden las carreras de datos en tiempo de compilación. Para los casos en que varios hilos necesitan acceder",
+      "explanation": "La concurrencia en Rust es segura por diseño: el sistema de ownership y el sistema de tipos impiden las carreras de datos en tiempo de compilación. Para los casos en que varios hilos necesitan acceder o modificar el mismo estado, la biblioteca estándar ofrece cuatro herramientas fundamentales:Arc<Mutex<T>>,RwLock, los tipos atómicos y los canalesmpsc.Arc<Mutex<T>>: estado compartido mutable entre hilos Arc(Atomic Reference Counted) permite que múltiples hilos sean propietarios del mismo dato.Mutexgarantiza que solo un hilo lo modifica a la vez. La combinaciónArc<Mutex<T>>es el patrón estándar para estado compartido mutable.use std::sync::{Arc, Mutex};\nuse std::thread;\n\nfn main() {\n    let contador = Arc::new(Mutex::new(0u64));\n\n    let handles: Vec<_> = (0..8).map(|_| {\n        let c = Arc::clone(&contador);\n        thread::spawn(move || {\n            for _ in 0..1000 {\n                let mut guard = c.lock().unwrap();\n                *guard += 1;\n            } // guard se libera aquí (Drop)\n        })\n    }).collect();\n\n    for h in handles {\n        h.join().unwrap();\n    }\n\n    println!(\"Contador final: {}\", *contador.lock().unwrap()); // 8000\n\n    // Error típico: Mutex poisoning\n    // Si un hilo hace panic mientras sostiene el lock, el Mutex queda envenenado.\n    // lock().unwrap() hace panic en el hilo siguiente.\n    // Para manejar esto sin propagar el panic:\n    let seguro = Arc::new(Mutex::new(0));\n    let resultado = std::panic::catch_unwind(|| {\n        let mut g",
+      "code_example": "use std::sync::{Arc, Mutex};\nuse std::thread;\n\nfn main() {\n    let contador = Arc::new(Mutex::new(0u64));\n\n    let handles: Vec<_> = (0..8).map(|_| {\n        let c = Arc::clone(&contador);\n        thread::spawn(move || {\n            for _ in 0..1000 {\n                let mut guard = c.lock().unwrap();\n                *guard += 1;\n            } // guard se libera aquí (Drop)\n        })\n    }).collect();\n\n    for h in handles {\n        h.join().unwrap();\n    }\n\n    println!(\"Contador final: {}\", *contador.lock().unwrap()); // 8000\n\n    // Error típico: Mutex poisoning\n    // Si un hilo hace panic mientras sostiene el lock, el Mutex queda envenenado.\n    // lock().unwrap() hace panic en el hilo siguiente.\n    // Para manejar esto sin propagar el panic:\n    let seguro = Arc::new(Mutex::new(0));\n    let resultado = std::panic::catch_unwind(|| {\n        let mut g = seguro.lock().unwrap();\n        *g = 99;\n        panic!(\"fallo intencional\");\n    });\n    println!(\"Panic capturado: {}\", resultado.is_err());\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-16T16:18:14.600394"
+    },
+    {
+      "title": "Localización en Swift: String Catalog, LocalizedStringResource, plurales y formateo",
+      "summary": "Localizar una app significa adaptarla a los idiomas y convenciones de cada mercado. Xcode 15 introdujo elString Catalog(.xcstrings), un formato de fichero que unifica los antiguos.stringsy.stringsdict",
+      "explanation": "Localizar una app significa adaptarla a los idiomas y convenciones de cada mercado. Xcode 15 introdujo elString Catalog(.xcstrings), un formato de fichero que unifica los antiguos.stringsy.stringsdicten una interfaz visual y una representación JSON editable. Junto aLocalizedStringResourcey los estilos de formateo de la librería estándar, Swift tiene hoy el mejor soporte de localización de su historia.String Catalog: el nuevo formato de Xcode 15 Al crear un ficheroLocalizable.xcstringsen el proyecto, Xcode extrae automáticamente las cadenas al construir y permite gestionar traducciones con estado (new, needs review, translated) en una interfaz visual. El fichero es JSON editable por herramientas externas:// En el código Swift, sin cambios respecto a antes:\nText(\"welcome.title\")\n// o\nText(\"Bienvenido a la app\")\n\n// Xcode 15 los detecta y los añade al catálogo automáticamente\n// en el siguiente build.String(localized:) y LocalizedStringResource Para cadenas fuera de vistas SwiftUI (en ViewModels, modelos o capas de servicio), usaString(localized:):// String localizada en runtime\nlet mensaje = String(localized: \"error.red.titulo\",\n                     defaultValue: \"Sin conexión\",\n                     bundle: .main,\n                     comment: \"Título cuando no hay red\")\n\n// Con tabla específica (fichero .xcstrings diferente de Localizable)\nlet boton = String(localized: \"btn.confirmar\",\n                   table: \"Botones\",\n                   defaultValue: \"Confirmar\") Localized",
+      "code_example": "// En el código Swift, sin cambios respecto a antes:\nText(\"welcome.title\")\n// o\nText(\"Bienvenido a la app\")\n\n// Xcode 15 los detecta y los añade al catálogo automáticamente\n// en el siguiente build.",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-16T16:18:16.255411"
     }
   ]
 }
