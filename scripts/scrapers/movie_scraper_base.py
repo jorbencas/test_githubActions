@@ -1,7 +1,7 @@
 """
 movie_scraper_base.py — Motor genérico de recopilación de noticias de películas.
 
-Implementa todas las capacidades de scraping de scrape_eixam.py (Bing News,
+Implementa todas las capacidades de scraping (Bing News,
 YouTube, Contraste.info, Filmaffinity, fuentes directas de cine, relevancia
 con señales, clasificación, envío a Telegram) de forma genérica y configurable,
 siguiendo principios SOLID:
@@ -24,7 +24,7 @@ Uso típico:
     notifier = TelegramNewsSender()   # lee env BOT_TOKEN/CHAT_ID
     ejecutar(scraper, dry_run=True, enviar=False, notifier=notifier)
 
-Entradas concretas (scrape_eixam.py, scrape_el_nido.py) proporcionan la config.
+Entradas concretas (scrape_el_nido.py) proporcionan la config.
 """
 import html
 import json
@@ -137,7 +137,7 @@ class RelevanceFilter:
             if not any(palabra in texto for palabra in self._filtro_adulto):
                 return False
         # Hook de reglas extra (OCP): permite subclases/configs ajustar la lógica
-        # sin modificar esta función. Ej.: la regla "eixam + enjambre juntos" de Eixam.
+        # sin modificar esta función.
         if self._regla_extra is not None:
             resultado = self._regla_extra(texto, punt)
             if resultado is not None:
@@ -550,7 +550,7 @@ class TelegramNewsSender:
 def ejecutar(scraper: MovieNewsScraper, dry_run: bool = False, enviar: bool = False,
              notifier: TelegramNewsSender = None):
     """Ejecuta el flujo completo: recopilar → filtrar → mostrar → (guardar) → (enviar).
-    Comportamiento idéntico al main() original de scrape_eixam.py, sin la
+    Comportamiento idéntico al main() original, sin la
     parte de IMDb parental (que se orquesta desde el entry point concreto)."""
     cfg = scraper.config
     print(f"🎬 Recopilando información sobre '{cfg.pelicula}' ({cfg.pelicula_es})...")

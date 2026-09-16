@@ -2,7 +2,7 @@
 imdb_parental.py — SRP: vigila las fichas de Guía Parental de IMDb y notifica
 si el texto scrapeado cambia entre ejecuciones.
 
-Extraído de scrape_eixam.py para separar la responsabilidad (SRP) y reutilizarse
+Separado como módulo independiente para reutilizarse
 en cualquier scraper que necesite monitorizar páginas de parental de IMDb.
 
 Uso:

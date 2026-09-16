@@ -280,8 +280,6 @@ def main():
 
     ejecutar(scraper, dry_run=args.dry_run, enviar=args.enviar, notifier=notifier)
 
-    print("\nℹ️  La guía parental de IMDb de 'El nido' (tt39163611) ya se vigila en scrape_eixam.py.")
-
 
 if __name__ == "__main__":
     main()
