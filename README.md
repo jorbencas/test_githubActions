@@ -220,7 +220,7 @@ Timeline interactiva de la historia de la tecnología (1970-2025), desplegada en
 - **Efecto teatro** — parallax de 3 capas
 - **Scroll animations** — IntersectionObserver
 - **Música ambient** — Web Audio API
-- **Year-bar** — barra de navegación inferior con ticks por año y dot animado
+- **Year-bar** — barra de navegación con track coloreado por eras, needle con glow y ticks interactivos
 - **Responsive** — 320px → ultra-wide
 
 **Estructura:**
