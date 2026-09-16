@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Timeline — La Historia de la Tecnología</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Era background layers -->
+  <div id="era-bg" class="era-bg"></div>
+  <div id="era-overlay" class="era-overlay"></div>
+
+  <!-- Parallax layers -->
+  <div id="parallax-back" class="parallax-layer" data-speed="0.08"></div>
+  <div id="parallax-mid" class="parallax-layer" data-speed="0.2"></div>
+  <canvas id="fx-canvas" class="fx-canvas"></canvas>
+  <div id="parallax-front" class="parallax-layer" data-speed="0.4"></div>
+
+  <!-- Vignette -->
+  <div class="vignette"></div>
+
+  <!-- Loading -->
+  <div id="loading">
+    <div class="loader">
+      <div class="loader-fire"></div>
+      <div class="loader-text">
+        <span class="loader-title">Tech Timeline</span>
+        <span class="loader-sub">Encendiendo la hoguera...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header id="header">
+    <div class="header-left">
+      <h1 class="logo">Tech <span>Timeline</span></h1>
+    </div>
+    <div class="header-center">
+      <div id="year-display" class="year-display">1970</div>
+    </div>
+    <div class="era-label" id="era-label">La Edad de los Mainframes</div>
+  </header>
+
+  <!-- Timeline -->
+  <div id="timeline-container" class="timeline-container">
+    <div id="timeline-track" class="timeline-track"></div>
+  </div>
+
+  <!-- Year Bar -->
+  <div id="year-bar" class="year-bar">
+    <div id="year-bar-line" class="year-bar-line"></div>
+    <div id="year-bar-inner" class="year-bar-inner"></div>
+    <div id="year-bar-dot" class="year-bar-dot"></div>
+  </div>
+
+  <!-- Scroll Hint -->
+  <div id="scroll-hint" class="scroll-hint">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M5 12h14M12 5l7 7-7 7"/>
+    </svg>
+    <span>Desliza para explorar</span>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

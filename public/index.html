@@ -3,68 +3,287 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech Timeline — La Historia de la Tecnología</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>Tech Pulse — Jorge Beneyto Castelló</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg-card: rgba(255,255,255,0.03);
+      --bg-card-hover: rgba(255,255,255,0.08);
+      --text: #f0f0f5;
+      --text-dim: #8888aa;
+      --accent: #6366f1;
+      --accent2: #a855f7;
+      --accent3: #ec4899;
+      --border: rgba(255,255,255,0.06);
+      --glow: rgba(99,102,241,0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Animated gradient background */
+    .bg-gradient {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 30%, rgba(99,102,241,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 70%, rgba(168,85,247,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 50% 50%, rgba(236,72,153,0.06) 0%, transparent 60%);
+      animation: bgPulse 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgPulse {
+      0% { opacity: 0.6; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.05); }
+    }
+
+    /* Floating particles */
+    .particles {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(99,102,241,0.4);
+      border-radius: 50%;
+      animation: float linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* Content */
+    .content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 40px 24px;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .logo {
+      font-size: clamp(36px, 8vw, 72px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: logoGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes logoGlow {
+      0% { filter: brightness(1); }
+      100% { filter: brightness(1.2); }
+    }
+
+    .subtitle {
+      font-size: clamp(14px, 2.5vw, 18px);
+      color: var(--text-dim);
+      margin-bottom: 60px;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    /* Cards Grid */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      width: 100%;
+    }
+
+    .card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 32px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      padding: 1px;
+      background: linear-gradient(135deg, transparent 40%, var(--accent) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(99,102,241,0.15);
+    }
+
+    .card-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+      display: block;
+      transition: transform 0.4s;
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.15) rotate(-5deg);
+    }
+
+    .card-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    .card-tag {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: rgba(99,102,241,0.1);
+      color: var(--accent);
+    }
+
+    .card:nth-child(2) .card-tag {
+      background: rgba(168,85,247,0.1);
+      color: var(--accent2);
+    }
+
+    .card:nth-child(3) .card-tag {
+      background: rgba(236,72,153,0.1);
+      color: var(--accent3);
+    }
+
+    /* Footer */
+    .footer {
+      position: relative;
+      z-index: 10;
+      margin-top: 60px;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 32px 24px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Era background layers -->
-  <div id="era-bg" class="era-bg"></div>
-  <div id="era-overlay" class="era-overlay"></div>
+  <div class="bg-gradient"></div>
 
-  <!-- Parallax layers -->
-  <div id="parallax-back" class="parallax-layer" data-speed="0.08"></div>
-  <div id="parallax-mid" class="parallax-layer" data-speed="0.2"></div>
-  <canvas id="fx-canvas" class="fx-canvas"></canvas>
-  <div id="parallax-front" class="parallax-layer" data-speed="0.4"></div>
+  <div class="particles" id="particles"></div>
 
-  <!-- Vignette -->
-  <div class="vignette"></div>
+  <div class="content">
+    <h1 class="logo">Tech Pulse</h1>
+    <p class="subtitle">Explora la tecnología desde distintas perspectivas</p>
 
-  <!-- Loading -->
-  <div id="loading">
-    <div class="loader">
-      <div class="loader-fire"></div>
-      <div class="loader-text">
-        <span class="loader-title">Tech Timeline</span>
-        <span class="loader-sub">Encendiendo la hoguera...</span>
-      </div>
+    <div class="cards">
+      <a href="timeline.html" class="card">
+        <span class="card-icon">🔥</span>
+        <h2 class="card-title">Tech Timeline</h2>
+        <p class="card-desc">Recorre la historia de la tecnología desde los mainframes hasta la IA generativa. Eventos interactivos con parallax y animaciones.</p>
+        <span class="card-tag">Interactivo</span>
+      </a>
+
+      <a href="dashboard.html" class="card">
+        <span class="card-icon">📰</span>
+        <h2 class="card-title">News Dashboard</h2>
+        <p class="card-desc">Noticias tech en tiempo real de más de 100 fuentes RSS. Filtros, búsqueda y dark mode automático.</p>
+        <span class="card-tag">9.800+ noticias</span>
+      </a>
+
+      <a href="mdtools/" class="card">
+        <span class="card-icon">🛠️</span>
+        <h2 class="card-title">Markdown Tools</h2>
+        <p class="card-desc">Herramientas para trabajar con Markdown: cheatsheets, snippets, tablas, presentaciones y exportación a PDF.</p>
+        <span class="card-tag">Utilidades</span>
+      </a>
     </div>
   </div>
 
-  <!-- Header -->
-  <header id="header">
-    <div class="header-left">
-      <h1 class="logo">Tech <span>Timeline</span></h1>
-    </div>
-    <div class="header-center">
-      <div id="year-display" class="year-display">1970</div>
-    </div>
-    <div class="era-label" id="era-label">La Edad de los Mainframes</div>
-  </header>
-
-  <!-- Timeline -->
-  <div id="timeline-container" class="timeline-container">
-    <div id="timeline-track" class="timeline-track"></div>
+  <div class="footer">
+    Hecho con <span style="color:#ef4444;">♥</span> por <a href="https://github.com/jorbencas">Jorge Beneyto Castelló</a>
   </div>
 
-  <!-- Year Bar -->
-  <div id="year-bar" class="year-bar">
-    <div id="year-bar-line" class="year-bar-line"></div>
-    <div id="year-bar-inner" class="year-bar-inner"></div>
-    <div id="year-bar-dot" class="year-bar-dot"></div>
-  </div>
-
-  <!-- Scroll Hint -->
-  <div id="scroll-hint" class="scroll-hint">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M5 12h14M12 5l7 7-7 7"/>
-    </svg>
-    <span>Desliza para explorar</span>
-  </div>
-
-  <script type="module" src="js/app.js"></script>
+  <script>
+    // Create floating particles
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 40; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDuration = (8 + Math.random() * 12) + 's';
+      p.style.animationDelay = Math.random() * 10 + 's';
+      p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
+      container.appendChild(p);
+    }
+  </script>
 </body>
 </html>
