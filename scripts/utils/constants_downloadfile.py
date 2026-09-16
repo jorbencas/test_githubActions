@@ -41,6 +41,7 @@ LOG_FILES = {
     "weekly": "weekly.log",
     "telegram": "telegram.log",
     "email": "email.log",
+    "retos_email": "retos_email.log",
 }
 DASHBOARD_DIR = "public"
 DASHBOARD_HTML = "public/index.html"
