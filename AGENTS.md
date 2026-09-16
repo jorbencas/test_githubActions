@@ -47,7 +47,9 @@
 
 ### Data files
 - `files/noticias_historico.json` — full news history (max 900 entries)
-- `files/el_nido_pelicula.json` — archived "El nido" (2026, Hugo Stuven/Filmax) movie info, including nudity/sex reporting
+- `files/el_nido_pelicula.json` — archived "El nido" (2026, Hugo Stuven/Filmax) movie info
+- `files/nueve_reinas.json` — archived "Nueve reinas" (Netflix, 2027) series info
+- `files/los_ilusos.json` — archived "Los ilusos 13+13" (2026, Jonás Trueba) movie info
 - `files/herramientas.json` — discovered tools from GitHub + Product Hunt (max 200)
 - `files/ai_tools_candidates.json` — auto-detected AI tools (HF + GitHub, max 50)
 - `files/avatars_cache.json` — YouTube channel avatar cache
@@ -63,11 +65,13 @@
 - **Tools** → `scrape_tools.py` → `files/herramientas.json`
 - **AI Tools Auto-Scrape** → `scrape_ai_tools.py` → `files/ai_tools_candidates.json`
 - **Movie info (El nido 2026)** → `scrape_el_nido.py` → `files/el_nido_pelicula.json`
+- **Series info (Nueve reinas, Netflix)** → `scrape_nueve_reinas.py` → `files/nueve_reinas.json`
+- **Movie info (Los ilusos 13+13)** → `scrape_los_ilusos.py` → `files/los_ilusos.json`
 
-The movie scrapers use a shared SOLID engine:
+The movie/series scrapers use a shared SOLID engine:
 - `movie_scraper_base.py` — generic engine (SRP): `MovieConfig` (data only), `RelevanceFilter` (relevancia), `MovieClassifier` (clasificación), `MovieNewsScraper` (recopilar/anexar/cargar/validar_ia), `TelegramNewsSender` (enviar) y `ejecutar()` (orquestación). Se configura pasando una `MovieConfig` (OCP/DIP): queries, señales, anios, titulos_clave, clasificador, `ia_prompt`, y `regla_extra` (hook de relevancia).
 - `imdb_parental.py` — `IMDBParentalMonitor` (SRP: vigila fichas de Guía Parental de IMDb y envía a Telegram si cambia el texto).
-- `scrape_el_nido.py` — es SOLO config (`EL_NIDO_CONFIG`) + entry point (`main()`); NO muta globals del motor.
+- `scrape_el_nido.py` / `scrape_nueve_reinas.py` / `scrape_los_ilusos.py` — son SOLO config + entry point; NO mutan globals del motor.
 - **Weekly recap** → `generate_weekly.py` → `auto-news/YYYY-W{week}-tech-recap.md`
   - Auto-archives recaps >2 weeks old to `auto-news/archive/`
   - SEO: one post per week max (dedup by week slug)
@@ -90,6 +94,8 @@ The movie scrapers use a shared SOLID engine:
 | `tests.yml` | Push/PR to master | pytest (89 tests) |
 | `dashboard_update.yml` | Push (JS/CSS/Python) | Regenerate + deploy dashboard |
 | `el_nido_scrape.yml` | Every 6h (:47) | Scrape "El nido" (2026) → commit JSON |
+| `nueve_reinas_scrape.yml` | Every 6h (:23) | Scrape "Nueve reinas" (Netflix) → commit JSON |
+| `los_ilusos_scrape.yml` | Every 6h (:37) | Scrape "Los ilusos 13+13" (2026) → commit JSON |
 
 ### Modular pipeline (each script is independent)
 

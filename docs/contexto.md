@@ -2,6 +2,20 @@
 
 ## Cambios recientes
 
+### Nuevos scrapers: "Nueve reinas" y "Los ilusos 13+13" — 16/09/2026
+- Nuevo `scripts/scrapers/scrape_nueve_reinas.py`: recopila noticias sobre la serie
+  **"Nueve reinas" (Netflix, 2027)**, adaptación de la película argentina de Fabián Bielinsky,
+  con Álvaro Morte, Patrick Criado, Aura Garrido y José Coronado. Ambientada en el Madrid de 2012.
+  - `senales_negativas` excluye la película original (2000), "Criminal" (2004), "Bluffmaster" (2005).
+  - `anios_otros` excluye años anteriores a 2026.
+  - Workflow: `.github/workflows/nueve_reinas_scrape.yml` (cada 6h, :23).
+- Nuevo `scripts/scrapers/scrape_los_ilusos.py`: recopila noticias sobre la película
+  **"Los ilusos 13+13" (2026)**, revisión/reworked de "Los ilusos" (2013) de Jonás Trueba,
+  con Francesco Carril, Aura Garrido y Vito Sanz.
+  - `senales_negativas` excluye la película original (2013) y otras películas de Trueba.
+  - `anios_otros` excluye años anteriores a 2026.
+  - Workflow: `.github/workflows/los_ilusos_scrape.yml` (cada 6h, :37).
+
 ### Refactor SOLID del motor de películas — 12/09/2026
 - El scraper de "El nido" usa un motor genérico SOLID en
   `scripts/scrapers/movie_scraper_base.py`:
