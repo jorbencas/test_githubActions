@@ -368,7 +368,6 @@ class App {
     this.yearDisplay.style.color = era.accent;
     this.eraLabel.style.color = era.accent;
     this.eraLabel.textContent = era.label;
-    this.yearBarDot.style.background = era.accent;
 
     // Parallax
     this._buildParallaxElements(era);
