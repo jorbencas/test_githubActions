@@ -6,25 +6,22 @@
   <title>Tech Pulse — Jorge Beneyto Castelló</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0a0a0f;
-      --bg-card: rgba(255,255,255,0.03);
-      --bg-card-hover: rgba(255,255,255,0.08);
-      --text: #f0f0f5;
-      --text-dim: #8888aa;
-      --accent: #6366f1;
-      --accent2: #a855f7;
-      --accent3: #ec4899;
-      --border: rgba(255,255,255,0.06);
-      --glow: rgba(99,102,241,0.15);
+      --bg: #06060a;
+      --text: #e8e6f0;
+      --text-dim: #7a7890;
+      --accent: #6c5ce7;
+      --accent2: #00cec9;
+      --accent3: #fd79a8;
+      --border: rgba(255,255,255,0.04);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Inter', -apple-system, sans-serif;
+      font-family: 'Inter', sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
@@ -32,29 +29,24 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      overflow-x: hidden;
       position: relative;
     }
 
-    /* Animated gradient background */
-    .bg-gradient {
+    /* ── Grid de fondo ── */
+    .grid-bg {
       position: fixed;
       inset: 0;
       z-index: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 20% 30%, rgba(99,102,241,0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 80% at 80% 70%, rgba(168,85,247,0.10) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 50% at 50% 50%, rgba(236,72,153,0.06) 0%, transparent 60%);
-      animation: bgPulse 8s ease-in-out infinite alternate;
+      background-image:
+        linear-gradient(rgba(108,92,231,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108,92,231,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 70%);
     }
 
-    @keyframes bgPulse {
-      0% { opacity: 0.6; transform: scale(1); }
-      100% { opacity: 1; transform: scale(1.05); }
-    }
-
-    /* Floating particles */
-    .particles {
+    /* ── Rombos flotantes decorativos ── */
+    .rhombus-field {
       position: fixed;
       inset: 0;
       z-index: 1;
@@ -62,156 +54,264 @@
       overflow: hidden;
     }
 
-    .particle {
+    .rhombus {
       position: absolute;
-      width: 2px;
-      height: 2px;
-      background: rgba(99,102,241,0.4);
-      border-radius: 50%;
-      animation: float linear infinite;
+      border: 1px solid rgba(108,92,231,0.08);
+      transform: rotate(45deg);
+      animation: drift linear infinite;
     }
 
-    @keyframes float {
-      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+    .rhombus:nth-child(1) { width: 80px; height: 80px; top: 10%; left: 5%; animation-duration: 25s; }
+    .rhombus:nth-child(2) { width: 40px; height: 40px; top: 20%; right: 10%; animation-duration: 18s; animation-delay: -5s; border-color: rgba(0,206,201,0.08); }
+    .rhombus:nth-child(3) { width: 120px; height: 120px; bottom: 15%; left: 15%; animation-duration: 30s; animation-delay: -10s; }
+    .rhombus:nth-child(4) { width: 60px; height: 60px; top: 60%; right: 20%; animation-duration: 22s; animation-delay: -8s; border-color: rgba(253,121,168,0.08); }
+    .rhombus:nth-child(5) { width: 30px; height: 30px; top: 40%; left: 30%; animation-duration: 15s; animation-delay: -3s; }
+    .rhombus:nth-child(6) { width: 100px; height: 100px; bottom: 30%; right: 8%; animation-duration: 28s; animation-delay: -12s; border-color: rgba(0,206,201,0.06); }
+
+    @keyframes drift {
+      0%, 100% { transform: rotate(45deg) translate(0, 0); }
+      25% { transform: rotate(45deg) translate(15px, -20px); }
+      50% { transform: rotate(45deg) translate(-10px, 15px); }
+      75% { transform: rotate(45deg) translate(20px, 10px); }
     }
 
-    /* Content */
+    /* ── Líneas de conexión ── */
+    .connections {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .connections svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .conn-line {
+      stroke: rgba(108,92,231,0.04);
+      stroke-width: 1;
+      stroke-dasharray: 4 8;
+    }
+
+    /* ── Contenido ── */
     .content {
       position: relative;
       z-index: 10;
       text-align: center;
       padding: 40px 24px;
-      max-width: 900px;
+      max-width: 1000px;
       width: 100%;
     }
 
+    /* ── Logo con rombo ── */
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .logo-rhombus {
+      width: 48px;
+      height: 48px;
+      border: 2px solid var(--accent);
+      transform: rotate(45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .logo-rhombus::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      transform: rotate(0deg);
+    }
+
+    .logo-rhombus-small {
+      width: 20px;
+      height: 20px;
+      border: 1.5px solid var(--accent2);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
     .logo {
-      font-size: clamp(36px, 8vw, 72px);
-      font-weight: 800;
-      letter-spacing: -2px;
-      margin-bottom: 8px;
-      background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+      font-size: clamp(40px, 8vw, 64px);
+      font-weight: 900;
+      letter-spacing: -3px;
+      line-height: 1;
+    }
+
+    .logo .tech {
+      color: var(--text);
+    }
+
+    .logo .pulse {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: logoGlow 3s ease-in-out infinite alternate;
     }
 
-    @keyframes logoGlow {
-      0% { filter: brightness(1); }
-      100% { filter: brightness(1.2); }
-    }
-
-    .subtitle {
-      font-size: clamp(14px, 2.5vw, 18px);
+    .tagline {
+      font-size: 15px;
       color: var(--text-dim);
       margin-bottom: 60px;
-      font-weight: 300;
-      letter-spacing: 0.5px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
-    /* Cards Grid */
+    /* ── Cards ── */
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
       width: 100%;
     }
 
     .card {
       position: relative;
-      background: var(--bg-card);
+      background: rgba(255,255,255,0.015);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 40px 32px;
       text-decoration: none;
       color: inherit;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       overflow: hidden;
-      cursor: pointer;
+      padding: 40px 28px 32px;
+      clip-path: polygon(
+        0 12px, 12px 0, calc(100% - 12px) 0, 100% 12px,
+        100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px)
+      );
     }
 
     .card::before {
       content: '';
       position: absolute;
-      inset: 0;
-      border-radius: 20px;
-      padding: 1px;
-      background: linear-gradient(135deg, transparent 40%, var(--accent) 100%);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
       opacity: 0;
       transition: opacity 0.4s;
     }
 
-    .card:hover::before {
-      opacity: 1;
-    }
+    .card:nth-child(2)::before { background: linear-gradient(90deg, transparent, var(--accent2), transparent); }
+    .card:nth-child(3)::before { background: linear-gradient(90deg, transparent, var(--accent3), transparent); }
+
+    .card:hover::before { opacity: 1; }
 
     .card:hover {
-      background: var(--bg-card-hover);
-      transform: translateY(-8px);
-      box-shadow: 0 20px 60px rgba(99,102,241,0.15);
+      background: rgba(255,255,255,0.035);
+      transform: translateY(-4px);
     }
+
+    /* ── Icono romboide ── */
+    .card-icon-wrap {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 24px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-icon-rhombus {
+      position: absolute;
+      inset: 0;
+      border: 1.5px solid rgba(108,92,231,0.2);
+      transform: rotate(45deg);
+      transition: all 0.4s;
+    }
+
+    .card:nth-child(2) .card-icon-rhombus { border-color: rgba(0,206,201,0.2); }
+    .card:nth-child(3) .card-icon-rhombus { border-color: rgba(253,121,168,0.2); }
+
+    .card:hover .card-icon-rhombus {
+      border-color: rgba(108,92,231,0.5);
+      transform: rotate(45deg) scale(1.1);
+    }
+
+    .card:nth-child(2):hover .card-icon-rhombus { border-color: rgba(0,206,201,0.5); }
+    .card:nth-child(3):hover .card-icon-rhombus { border-color: rgba(253,121,168,0.5); }
 
     .card-icon {
-      font-size: 48px;
-      margin-bottom: 20px;
-      display: block;
-      transition: transform 0.4s;
-    }
-
-    .card:hover .card-icon {
-      transform: scale(1.15) rotate(-5deg);
+      font-size: 28px;
+      position: relative;
+      z-index: 2;
     }
 
     .card-title {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 700;
       margin-bottom: 10px;
       letter-spacing: -0.5px;
     }
 
     .card-desc {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text-dim);
-      line-height: 1.6;
+      line-height: 1.7;
+      margin-bottom: 20px;
     }
 
-    .card-tag {
-      display: inline-block;
-      margin-top: 16px;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      background: rgba(99,102,241,0.1);
+    /* ── Stats inline ── */
+    .card-stats {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-stat {
+      text-align: center;
+    }
+
+    .card-stat-val {
+      font-size: 18px;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
       color: var(--accent);
     }
 
-    .card:nth-child(2) .card-tag {
-      background: rgba(168,85,247,0.1);
-      color: var(--accent2);
+    .card:nth-child(2) .card-stat-val { color: var(--accent2); }
+    .card:nth-child(3) .card-stat-val { color: var(--accent3); }
+
+    .card-stat-label {
+      font-size: 10px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 2px;
     }
 
-    .card:nth-child(3) .card-tag {
-      background: rgba(236,72,153,0.1);
-      color: var(--accent3);
-    }
-
-    /* Footer */
+    /* ── Footer ── */
     .footer {
       position: relative;
       z-index: 10;
       margin-top: 60px;
-      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
       color: var(--text-dim);
+    }
+
+    .footer-rhombus {
+      width: 8px;
+      height: 8px;
+      border: 1px solid var(--accent);
+      transform: rotate(45deg);
+      flex-shrink: 0;
     }
 
     .footer a {
@@ -223,67 +323,157 @@
       text-decoration: underline;
     }
 
-    /* Responsive */
-    @media (max-width: 640px) {
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
       .cards {
         grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
       }
 
-      .card {
-        padding: 32px 24px;
+      .logo-wrapper {
+        flex-wrap: wrap;
       }
+    }
+
+    /* ── Línea animada inferior ── */
+    .scan-line {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), var(--accent3), transparent);
+      z-index: 100;
+      animation: scan 4s linear infinite;
+      opacity: 0.4;
+    }
+
+    @keyframes scan {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
     }
   </style>
 </head>
 <body>
-  <div class="bg-gradient"></div>
+  <!-- Grid de fondo -->
+  <div class="grid-bg"></div>
 
-  <div class="particles" id="particles"></div>
+  <!-- Rombos decorativos -->
+  <div class="rhombus-field">
+    <div class="rhombus"></div>
+    <div class="rhombus"></div>
+    <div class="rhombus"></div>
+    <div class="rhombus"></div>
+    <div class="rhombus"></div>
+    <div class="rhombus"></div>
+  </div>
 
+  <!-- Conexiones -->
+  <div class="connections">
+    <svg viewBox="0 0 1920 1080" preserveAspectRatio="none">
+      <line class="conn-line" x1="10%" y1="20%" x2="35%" y2="45%"/>
+      <line class="conn-line" x1="65%" y1="15%" x2="90%" y2="50%"/>
+      <line class="conn-line" x1="20%" y1="70%" x2="50%" y2="85%"/>
+      <line class="conn-line" x1="70%" y1="60%" x2="85%" y2="80%"/>
+    </svg>
+  </div>
+
+  <!-- Contenido -->
   <div class="content">
-    <h1 class="logo">Tech Pulse</h1>
-    <p class="subtitle">Explora la tecnología desde distintas perspectivas</p>
+    <div class="logo-wrapper">
+      <div class="logo-rhombus-small"></div>
+      <div class="logo-rhombus"></div>
+      <h1 class="logo">
+        <span class="tech">Tech</span> <span class="pulse">Pulse</span>
+      </h1>
+      <div class="logo-rhombus"></div>
+      <div class="logo-rhombus-small"></div>
+    </div>
+
+    <p class="tagline">Explora la tecnología en tres dimensiones</p>
 
     <div class="cards">
+      <!-- Timeline -->
       <a href="timeline.html" class="card">
-        <span class="card-icon">🔥</span>
+        <div class="card-icon-wrap">
+          <div class="card-icon-rhombus"></div>
+          <span class="card-icon">🔥</span>
+        </div>
         <h2 class="card-title">Tech Timeline</h2>
-        <p class="card-desc">Recorre la historia de la tecnología desde los mainframes hasta la IA generativa. Eventos interactivos con parallax y animaciones.</p>
-        <span class="card-tag">Interactivo</span>
+        <p class="card-desc">Recorre la historia de la tecnología desde los mainframes hasta la IA generativa. Navegación interactiva por eventos con parallax.</p>
+        <div class="card-stats">
+          <div class="card-stat">
+            <div class="card-stat-val">55+</div>
+            <div class="card-stat-label">Años</div>
+          </div>
+          <div class="card-stat">
+            <div class="card-stat-val">9</div>
+            <div class="card-stat-label">Categorías</div>
+          </div>
+          <div class="card-stat">
+            <div class="card-stat-val">∞</div>
+            <div class="card-stat-label">Scroll</div>
+          </div>
+        </div>
       </a>
 
+      <!-- Dashboard -->
       <a href="dashboard.html" class="card">
-        <span class="card-icon">📰</span>
+        <div class="card-icon-wrap">
+          <div class="card-icon-rhombus"></div>
+          <span class="card-icon">📰</span>
+        </div>
         <h2 class="card-title">News Dashboard</h2>
-        <p class="card-desc">Noticias tech en tiempo real de más de 100 fuentes RSS. Filtros, búsqueda y dark mode automático.</p>
-        <span class="card-tag">9.800+ noticias</span>
+        <p class="card-desc">Noticias tech en tiempo real de más de 100 fuentes RSS. Filtros por categoría, búsqueda y tema claro/oscuro automático.</p>
+        <div class="card-stats">
+          <div class="card-stat">
+            <div class="card-stat-val">9.8k</div>
+            <div class="card-stat-label">Noticias</div>
+          </div>
+          <div class="card-stat">
+            <div class="card-stat-val">100+</div>
+            <div class="card-stat-label">Fuentes</div>
+          </div>
+          <div class="card-stat">
+            <div class="card-stat-val">24/7</div>
+            <div class="card-stat-label">Auto</div>
+          </div>
+        </div>
       </a>
 
+      <!-- Markdown Tools -->
       <a href="mdtools/" class="card">
-        <span class="card-icon">🛠️</span>
+        <div class="card-icon-wrap">
+          <div class="card-icon-rhombus"></div>
+          <span class="card-icon">🛠️</span>
+        </div>
         <h2 class="card-title">Markdown Tools</h2>
         <p class="card-desc">Herramientas para trabajar con Markdown: cheatsheets, snippets, tablas, presentaciones y exportación a PDF.</p>
-        <span class="card-tag">Utilidades</span>
+        <div class="card-stats">
+          <div class="card-stat">
+            <div class="card-stat-val">5</div>
+            <div class="card-stat-label">Tools</div>
+          </div>
+          <div class="card-stat">
+            <div class="card-stat-val">PDF</div>
+            <div class="card-stat-label">Export</div>
+          </div>
+          <div class="card-stat">
+            <div class="card-stat-val">★</div>
+            <div class="card-stat-label">Gratis</div>
+          </div>
+        </div>
       </a>
     </div>
   </div>
 
   <div class="footer">
-    Hecho con <span style="color:#ef4444;">♥</span> por <a href="https://github.com/jorbencas">Jorge Beneyto Castelló</a>
+    <div class="footer-rhombus"></div>
+    <span>Hecho por <a href="https://github.com/jorbencas">Jorge Beneyto Castelló</a></span>
+    <div class="footer-rhombus"></div>
   </div>
 
-  <script>
-    // Create floating particles
-    const container = document.getElementById('particles');
-    for (let i = 0; i < 40; i++) {
-      const p = document.createElement('div');
-      p.className = 'particle';
-      p.style.left = Math.random() * 100 + '%';
-      p.style.animationDuration = (8 + Math.random() * 12) + 's';
-      p.style.animationDelay = Math.random() * 10 + 's';
-      p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
-      container.appendChild(p);
-    }
-  </script>
+  <div class="scan-line"></div>
 </body>
 </html>
