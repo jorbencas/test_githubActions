@@ -15,8 +15,8 @@
 [![Resources](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_resources.yml?branch=master&style=flat-square&label=Resources&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
 [![Email](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/send_email_workflow.yml?branch=master&style=flat-square&label=Email&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
 [![Telegram](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/send_telegram_workflow.yml?branch=master&style=flat-square&label=Telegram&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
-[![AI Tools](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_ai_tools.yml?branch=master&style=flat-square&label=AI%20Tools&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
-[![Tips](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_tips.yml?branch=master&style=flat-square&label=Tips&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
+[![AI Tools](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_content.yml?branch=master&style=flat-square&label=AI%20Tools&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
+[![Tips](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_content.yml?branch=master&style=flat-square&label=Tips&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
 
 Ecosistema de automatización tech que ejecuta **16 workflows de GitHub Actions** formando un pipeline de contenido completamente automatizado. Recolecta de **547 fuentes** (158 canales YouTube, 161 feeds RSS, 225 sitios de web scraping, 89 GitHub Topics, 5 GitHub Repos, 1 Product Hunt), procesa con **IA (Gemini)** y distribuye contenido a múltiples canales.
 
@@ -25,6 +25,13 @@ Ecosistema de automatización tech que ejecuta **16 workflows de GitHub Actions*
 </div>
 
 ---
+
+<!-- DYNAMIC_BADGES_START -->
+![Noticias](https://img.shields.io/badge/Noticias-10.658-3b82f6?style=for-the-badge&logo=newsblur&logoColor=white)
+![Fuentes](https://img.shields.io/badge/Fuentes-185-8b5cf6?style=for-the-badge&logo=newsblur&logoColor=white)
+![Herramientas](https://img.shields.io/badge/Herramientas-200-10b981?style=for-the-badge&logo=newsblur&logoColor=white)
+![Actualizado](https://img.shields.io/badge/Actualizado-17/09/2026-f59e0b?style=for-the-badge&logo=newsblur&logoColor=white)
+<!-- DYNAMIC_BADGES_END -->
 
 ## 📋 Overview
 
