@@ -18,7 +18,7 @@
 [![AI Tools](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_ai_tools.yml?branch=master&style=flat-square&label=AI%20Tools&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
 [![Tips](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_tips.yml?branch=master&style=flat-square&label=Tips&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
 
-Ecosistema de automatización tech que ejecuta **19 workflows de GitHub Actions** formando un pipeline de contenido completamente automatizado. Recolecta de **547 fuentes** (158 canales YouTube, 161 feeds RSS, 225 sitios de web scraping, 89 GitHub Topics, 5 GitHub Repos, 1 Product Hunt), procesa con **IA (Gemini)** y distribuye contenido a múltiples canales.
+Ecosistema de automatización tech que ejecuta **17 workflows de GitHub Actions** formando un pipeline de contenido completamente automatizado. Recolecta de **547 fuentes** (158 canales YouTube, 161 feeds RSS, 225 sitios de web scraping, 89 GitHub Topics, 5 GitHub Repos, 1 Product Hunt), procesa con **IA (Gemini)** y distribuye contenido a múltiples canales.
 
 **[🚀 Landing Page](http://jorbencasdownloaderdocument.surge.sh)** · **[📖 Blog: Tech Pulse](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard)** · **[🔧 Instalación](https://blog-jorbencas.vercel.app/posts/instalacion-tech-pulse)**
 
@@ -184,7 +184,7 @@ public/                       🌐 Landing + Timeline + Dashboard + Tools
 
 ---
 
-## 🤖 GitHub Actions — 19 Workflows
+## 🤖 GitHub Actions — 17 Workflows
 
 | Workflow | Horario | Descripción |
 |----------|---------|-------------|
@@ -192,21 +192,18 @@ public/                       🌐 Landing + Timeline + Dashboard + Tools
 | `scrape_hourly` | Cada hora | Scraping ligero (RSS + quick sources) |
 | `scrape_6h` | Cada 6 horas | Scraping estándar + auto-detección IA |
 | `daily_resources` | Diario 06:00 UTC | Scraping herramientas + gestión resources.mdx |
-| `daily_ai_tools` | Cada 3 horas | Herramientas IA via Telegram |
-| `daily_tips` | Cada 3 horas | Tips IT via Telegram |
+| `daily_content` | Cada 3 horas | Tips IT + Herramientas IA via Telegram |
 | `daily_saludo` | Cada 3 horas | Imágenes Buenos días/noches |
+| `movie_scrapers` | Cada 6 horas | El nido + Nueve reinas + Los ilusos |
 | `send_email` | Diario 09:00 UTC | Newsletter Mailgun |
 | `send_telegram` | Cada 30 min | Telegram + TTS |
-| `send_retos_email` | Diario | Retos de programación por email |
+| `send_retos_email` | Mié/Sáb 10:00 | Retos de programación por email |
 | `clean_news` | Trimestral | Validación de enlaces |
 | `hunt_challenges` | Manual | Generación de retos con IA |
 | `optimize_images` | Dispatch | Optimización de imágenes |
 | `dashboard_update` | Push (JS/CSS/Python) | Regenerar + deploy dashboard |
 | `tests` | Push/PR a master | pytest |
 | `translate_descriptions` | Manual | Traducción de descripciones |
-| `el_nido_scrape` | Cada 6h (:47) | Scraping "El nido" (2026) |
-| `nueve_reinas_scrape` | Cada 6h (:23) | Scraping "Nueve reinas" (Netflix) |
-| `los_ilusos_scrape` | Cada 6h (:37) | Scraping "Los ilusos 13+13" (2026) |
 
 ---
 

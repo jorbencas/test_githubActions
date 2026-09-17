@@ -1,0 +1,138 @@
+name: "🎬 Movie/Series Scrapers (cada 6h)"
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # Cada 6 horas: 00:00, 06:00, 12:00, 18:00 UTC
+  workflow_dispatch:
+
+jobs:
+  el_nido:
+    name: "🎬 El nido (2026)"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests BeautifulSoup4 google-genai
+
+      - name: 🎬 Recopilar El nido (2026)
+        env:
+          TIPS_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          SALUDO_CHAT_ID: ${{ secrets.SALUDO_CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/scrapers/scrape_el_nido.py --enviar
+
+      - name: 💾 Commit
+        if: always()
+        run: |
+          git config user.name "el-nido-bot"
+          git config user.email "el-nido-bot@users.noreply.github.com"
+          git add files/el_nido_pelicula.json
+          if git diff --cached --quiet; then
+            echo "Sin cambios"
+          else
+            git commit -m "[el nido] actualizar registro de la película"
+            git push origin HEAD:master
+          fi
+
+  nueve_reinas:
+    name: "🎬 Nueve reinas (Netflix)"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests BeautifulSoup4 google-genai
+
+      - name: 🎬 Recopilar Nueve reinas
+        env:
+          TIPS_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          SALUDO_CHAT_ID: ${{ secrets.SALUDO_CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/scrapers/scrape_nueve_reinas.py --enviar
+
+      - name: 💾 Commit
+        if: always()
+        run: |
+          git config user.name "nueve-reinas-bot"
+          git config user.email "nueve-reinas-bot@users.noreply.github.com"
+          git add files/nueve_reinas.json
+          if git diff --cached --quiet; then
+            echo "Sin cambios"
+          else
+            git commit -m "[nueve reinas] actualizar registro de la serie"
+            git push origin HEAD:master
+          fi
+
+  los_ilusos:
+    name: "🎬 Los ilusos 13+13 (2026)"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          ref: master
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests BeautifulSoup4 google-genai
+
+      - name: 🎬 Recopilar Los ilusos 13+13
+        env:
+          TIPS_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          SALUDO_CHAT_ID: ${{ secrets.SALUDO_CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/scrapers/scrape_los_ilusos.py --enviar
+
+      - name: 💾 Commit
+        if: always()
+        run: |
+          git config user.name "los-ilusos-bot"
+          git config user.email "los-ilusos-bot@users.noreply.github.com"
+          git add files/los_ilusos.json
+          if git diff --cached --quiet; then
+            echo "Sin cambios"
+          else
+            git commit -m "[los ilusos] actualizar registro de la película"
+            git push origin HEAD:master
+          fi
