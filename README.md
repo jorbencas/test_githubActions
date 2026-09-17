@@ -18,7 +18,7 @@
 [![AI Tools](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_ai_tools.yml?branch=master&style=flat-square&label=AI%20Tools&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
 [![Tips](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_tips.yml?branch=master&style=flat-square&label=Tips&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
 
-Ecosistema de automatización tech que ejecuta **17 workflows de GitHub Actions** formando un pipeline de contenido completamente automatizado. Recolecta de **547 fuentes** (158 canales YouTube, 161 feeds RSS, 225 sitios de web scraping, 89 GitHub Topics, 5 GitHub Repos, 1 Product Hunt), procesa con **IA (Gemini)** y distribuye contenido a múltiples canales.
+Ecosistema de automatización tech que ejecuta **16 workflows de GitHub Actions** formando un pipeline de contenido completamente automatizado. Recolecta de **547 fuentes** (158 canales YouTube, 161 feeds RSS, 225 sitios de web scraping, 89 GitHub Topics, 5 GitHub Repos, 1 Product Hunt), procesa con **IA (Gemini)** y distribuye contenido a múltiples canales.
 
 **[🚀 Landing Page](http://jorbencasdownloaderdocument.surge.sh)** · **[📖 Blog: Tech Pulse](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard)** · **[🔧 Instalación](https://blog-jorbencas.vercel.app/posts/instalacion-tech-pulse)**
 
@@ -184,7 +184,7 @@ public/                       🌐 Landing + Timeline + Dashboard + Tools
 
 ---
 
-## 🤖 GitHub Actions — 17 Workflows
+## 🤖 GitHub Actions — 16 Workflows
 
 | Workflow | Horario | Descripción |
 |----------|---------|-------------|
