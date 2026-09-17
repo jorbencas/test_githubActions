@@ -2,7 +2,7 @@
   "meta": {
     "version": "2.0",
     "description": "Base de datos de tips diarios de IT - 5 tips por día, sin repetir",
-    "total_tips": 463,
+    "total_tips": 718,
     "categories": [
       "linux",
       "windows",
@@ -5842,6 +5842,86 @@
       "title": "Completar con Tab",
       "body": "Pulsa Tab dos veces para autocompletar comandos, rutas y opciones.",
       "difficulty": 1,
+      "type": "trick"
+    },
+    {
+      "id": 709,
+      "cat": "javascript",
+      "title": "AbortController para limpiar listeners en SPA",
+      "body": "En aplicaciones SPA con ClientRouter (Astro, SvelteKit, Next.js), los <script is:inline> se re-ejecutan en cada navegación, acumulando event listeners. Usa AbortController para limpiar todos los listeners de golpe antes de re-registrarlos: const controller = new AbortController(); element.addEventListener('click', handler, { signal: controller.signal }); Al navegar, llama controller.abort() y todos los listeners asociados se eliminan automáticamente.",
+      "difficulty": 3,
+      "type": "trick"
+    },
+    {
+      "id": 710,
+      "cat": "javascript",
+      "title": "Referencia persistente para removeEventListener",
+      "body": "removeEventListener solo funciona si pasas la misma referencia de función que usaste en addEventListener. Si creas la función dentro de un closure que se re-ejecuta, cada ejecución crea una función nueva y el remove anterior no la encuentra. Guarda la referencia en un alcance que persista (window._handler, variable en módulo) para que removeEventListener pueda encontrarla.",
+      "difficulty": 2,
+      "type": "tip"
+    },
+    {
+      "id": 711,
+      "cat": "javascript",
+      "title": "RAF throttle para scroll handlers",
+      "body": "Los eventos de scroll se disparan hasta 60 veces por segundo. Usa requestAnimationFrame con una bandera ticking para limitar las ejecuciones a una por frame: let ticking = false; function onScroll() { if (!ticking) { requestAnimationFrame(() => { /* lógica */; ticking = false; }); ticking = true; } }. Esto reduce drásticamente el trabajo del navegador durante el scroll.",
+      "difficulty": 2,
+      "type": "tip"
+    },
+    {
+      "id": 712,
+      "cat": "javascript",
+      "title": "Dedup de atributos DOM en scroll",
+      "body": "Cuando actualizas un atributo aria-valuenow o style en cada frame de scroll, el navegador recalcula el árbol de accesibilidad y el layout innecesariamente. Guarda el último valor y solo actualiza si cambió: if (newVal !== lastVal) { lastVal = newVal; el.setAttribute('aria-valuenow', newVal); }. Esto elimina escrituras redundantes al DOM.",
+      "difficulty": 2,
+      "type": "tip"
+    },
+    {
+      "id": 713,
+      "cat": "javascript",
+      "title": "searchGeneration para cancelar búsquedas stale",
+      "body": "Cuando el usuario escribe rápido, las búsquedas anteriores pueden completarse después de las nuevas, sobrescribiendo resultados correctos. Usa un contador de generación: const gen = ++searchGeneration; await pagefind.search(query); if (gen !== searchGeneration) return; Cada tecla incrementa el contador, y los resultados antiguos se descartan silenciosamente.",
+      "difficulty": 3,
+      "type": "trick"
+    },
+    {
+      "id": 714,
+      "cat": "javascript",
+      "title": "IntersectionObserver con rootMargin para lazy loading",
+      "body": "En lugar de procesar todos los elementos del DOM al cargar, usa IntersectionObserver con rootMargin de 300-500px para procesar solo los elementos cerca del viewport. Esto reduce el trabajo inicial y mejora el Time to Interactive. Combina con requestIdleCallback para procesar durante los momentos de ocio del navegador.",
+      "difficulty": 2,
+      "type": "tip"
+    },
+    {
+      "id": 715,
+      "cat": "javascript",
+      "title": "innerHTML vs DOM API para contenido estático",
+      "body": "Crear elementos con document.createElement, setAttribute y appendChild es más lento que construir el HTML como string y asignarlo con innerHTML cuando el contenido es estático y no contiene input del usuario. Para badges, iconos SVG simples y layouts que no cambian, innerHTML es significativamente más rápido y el código más legible.",
+      "difficulty": 1,
+      "type": "tip"
+    },
+    {
+      "id": 716,
+      "cat": "javascript",
+      "title": "Delegación de eventos vs listeners individuales",
+      "body": "Cuando tienes N elementos del mismo tipo (botones de copiar, chips de filtro), en lugar de añadir un listener a cada uno, añade un solo listener al padre o al document y usa event.target.closest() para detectar cuál se clicó. Esto reduce los listeners de N a 1 y funciona incluso con elementos añadidos dinámicamente.",
+      "difficulty": 2,
+      "type": "tip"
+    },
+    {
+      "id": 717,
+      "cat": "javascript",
+      "title": "contain-content para aislar reflows",
+      "body": "La propiedad CSS contain: content (o contain: layout style paint) le dice al navegador que el contenido de un elemento es independiente del resto del documento. Esto permite al navegador optimizar recálculos de layout, evitando que cambios dentro del contenedor se propaguen hacia afuera. Úsalo en wrappers de componentes y bloques de código.",
+      "difficulty": 2,
+      "type": "tip"
+    },
+    {
+      "id": 718,
+      "cat": "javascript",
+      "title": "window._state para persistir entre re-ejecuciones",
+      "body": "Los scripts is:inline en Astro se re-ejecutan en cada navegación SPA. Para que el estado (listeners, referencias, configuración) sobreviva entre re-ejecuciones, guárdalo en window: if (!window._myState) window._myState = {}; const S = window._myState;. Así las funciones de cleanup pueden encontrar las referencias anteriores y eliminar los listeners correctamente.",
+      "difficulty": 3,
       "type": "trick"
     }
   ]

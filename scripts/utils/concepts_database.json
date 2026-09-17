@@ -1,7 +1,7 @@
 {
   "meta": {
     "generated": true,
-    "count": 283
+    "count": 287
   },
   "concepts": [
     {
@@ -5475,6 +5475,106 @@
       "interview_answer": "TypeVar permite polimorfismo. Sin TypeVar solo un tipo específico.",
       "source": "static",
       "tags": [],
+      "type": "concepto"
+    },
+    {
+      "id": "c0284",
+      "cat": "javascript",
+      "title": "Event Listener Leaks en SPA",
+      "summary": "Acumulación progresiva de event listeners en navegación SPA que degrada el rendimiento.",
+      "explanation": "En frameworks con Client-Side Routing (Astro ClientRouter, SvelteKit, Next.js), los scripts is:inline se re-ejecutan en cada navegación. Si cada ejecución registra listeners con addEventListener sin eliminar los anteriores, se produce una acumulación progresiva.\n\nDespués de 5 navegaciones, un componente que registra 4 listeners por ejecución tendrá 20 listeners activos en el documento. Cada click o tecla dispara los 20 handlers simultáneamente, causando ejecuciones múltiples del mismo código, duplicación de efectos secundarios y degradación progresiva del rendimiento.\n\nLa solución es usar AbortController: cada inicialización aborta el controlador anterior, eliminando todos sus listeners de golpe, y crea uno nuevo. Alternativamente, se puede guardar la referencia del handler en window para que removeEventListener pueda encontrarla entre re-ejecuciones.",
+      "code_example": "// Patrón AbortController\nlet searchAbort = null;\n\nfunction init() {\n  if (searchAbort) searchAbort.abort();\n  searchAbort = new AbortController();\n  const signal = searchAbort.signal;\n\n  input.addEventListener('input', handler, { signal });\n  document.addEventListener('click', handler2, { signal });\n  // Al navegar, abort() elimina todos los listeners\n}\n\ndocument.addEventListener('astro:page-load', init);",
+      "use_cases": [
+        "Componentes con listeners en Astro ClientRouter",
+        "Búsquedas con debounce en SPA",
+        "Modales y overlays reutilizados"
+      ],
+      "difficulty": 3,
+      "language": "javascript",
+      "interview_relevant": true,
+      "interview_question": "¿Cómo evitas la acumulación de event listeners en una SPA?",
+      "interview_answer": "Usando AbortController: cada inicialización aborta el controlador anterior (que elimina todos sus listeners) y crea uno nuevo con los listeners actualizados. También se puede almacenar la referencia del handler en un alcance persistente para usar removeEventListener.",
+      "source": "static",
+      "tags": [
+        "memory-leak",
+        "spa",
+        "performance"
+      ],
+      "type": "concepto"
+    },
+    {
+      "id": "c0285",
+      "cat": "javascript",
+      "title": "requestAnimationFrame Throttle",
+      "summary": "Limitar ejecuciones de scroll/resize a una por frame del navegador.",
+      "explanation": "Los eventos de scroll y resize se disparan hasta 60 veces por segundo (una por frame). Si el handler realiza cálculos costosos o manipula el DOM, esto puede causar jank (tartamudeo visual). requestAnimationFrame (rAF) sincroniza la ejecución con el ciclo de repintado del navegador.\n\nEl patrón consiste en usar una bandera ticking: cuando se dispara el evento, se verifica si ya hay un frame programado. Si no, se programa uno con rAF y se marca ticking como true. Cuando rAF ejecuta el callback, realiza el trabajo y marca ticking como false, permitiendo programar el siguiente frame.\n\nEsto garantiza como máximo una ejecución por frame (típicamente 16.6ms), eliminando la acumulación de trabajo y mejorando la fluidez del scroll. Es el patrón estándar para scroll handlers en producción.",
+      "code_example": "let ticking = false;\n\nfunction onScroll() {\n  if (!ticking) {\n    requestAnimationFrame(() => {\n      // Lógica pesada: cálculos, DOM reads, updates\n      const scrolled = window.scrollY;\n      progressBar.style.width = scrolled + '%';\n      ticking = false;\n    });\n    ticking = true;\n  }\n}\n\nwindow.addEventListener('scroll', onScroll, { passive: true });",
+      "use_cases": [
+        "Scroll handlers que actualizan la UI",
+        "Parallax y animaciones basadas en scroll",
+        "Lectura de posiciones de elementos para scroll-spy"
+      ],
+      "difficulty": 2,
+      "language": "javascript",
+      "interview_relevant": true,
+      "interview_question": "¿Cómo optimizas un scroll handler que causa jank?",
+      "interview_answer": "Usando requestAnimationFrame con una bandera ticking para limitar a una ejecución por frame, y opciones passive: true en addEventListener para que el navegador no espere a cancelar el scroll.",
+      "source": "static",
+      "tags": [
+        "performance",
+        "scroll",
+        "animation"
+      ],
+      "type": "concepto"
+    },
+    {
+      "id": "c0286",
+      "cat": "javascript",
+      "title": "IntersectionObserver para Lazy Processing",
+      "summary": "Procesar elementos del DOM solo cuando están cerca del viewport.",
+      "explanation": "IntersectionObserver detecta cuándo un elemento entra o sale del viewport sin forzar cálculos de layout. A diferencia de getBoundingClientRect() que fuerza un reflow del documento, IntersectionObserver funciona de forma asíncrona y no bloquea el hilo principal.\n\nEl parámetro rootMargin define una zona de amortiguación alrededor del viewport. Con rootMargin: '300px', el observer se activa cuando el elemento está a 300px del viewport, permitiendo procesarlo antes de que sea visible. Esto es ideal para lazy loading, pre-cálculos y elementos que necesitan preparación.\n\nCombinado con requestIdleCallback, se puede procesar durante los momentos de ocio del navegador, maximizando el rendimiento. El patrón es: observer detecta intersección → unobserve → programar trabajo con rIC → procesar cuando el navegador esté libre.",
+      "code_example": "const observer = new IntersectionObserver(\n  (entries) => {\n    entries.forEach(entry => {\n      if (entry.isIntersecting) {\n        observer.unobserve(entry.target);\n        if ('requestIdleCallback' in window) {\n          requestIdleCallback(() => enhance(entry.target), { timeout: 200 });\n        } else {\n          enhance(entry.target);\n        }\n      }\n    });\n  },\n  { rootMargin: '300px' }\n);\n\ndocument.querySelectorAll('pre').forEach(el => observer.observe(el));",
+      "use_cases": [
+        "Lazy loading de imágenes y componentes",
+        "Procesamiento de bloques de código fuera de viewport",
+        "Precarga de datos para contenido cercano"
+      ],
+      "difficulty": 2,
+      "language": "javascript",
+      "interview_relevant": true,
+      "interview_question": "¿Cuál es la diferencia entre IntersectionObserver y getBoundingClientRect para detectar visibilidad?",
+      "interview_answer": "getBoundingClientRect fuerza un reflow síncrono del documento, es costoso en cada frame. IntersectionObserver es asíncrono, no fuerza reflow, y el browser optimiza internamente la detección de intersección. Para lazy loading, IntersectionObserver es siempre preferible.",
+      "source": "static",
+      "tags": [
+        "performance",
+        "lazy-loading",
+        "observer"
+      ],
+      "type": "concepto"
+    },
+    {
+      "id": "c0287",
+      "cat": "javascript",
+      "title": "Search Generation Pattern",
+      "summary": "Patrón para cancelar resultados obsoletos en búsquedas asíncronas.",
+      "explanation": "Cuando el usuario escribe rápido en un campo de búsqueda, cada tecla dispara una nueva petición. Si las respuestas llegan en orden incorrecto (la primera más lenta que la segunda), los resultados más antiguos sobrescriben los más recientes. Esto causa que el usuario vea resultados de una query anterior.\n\nEl patrón searchGeneration usa un contador que se incrementa con cada nueva búsqueda. Después de cada operación asíncrona (pagefind.search, Promise.all), se verifica si el contador sigue siendo el mismo. Si no, significa que se inició una búsqueda más reciente y los resultados actuales deben descartarse.\n\nEs más ligero que AbortController (no requiere cleanup de controllers) y funciona incluso cuando las búsquedas no soportan abort. Es el patrón estándar para autocomplete y búsqueda en tiempo real.",
+      "code_example": "let searchGeneration = 0;\n\nasync function search(query) {\n  const gen = ++searchGeneration;\n  showLoading();\n\n  const results = await pagefind.search(query);\n  if (gen !== searchGeneration) return; // descartado\n\n  const items = await Promise.all(\n    results.slice(0, 8).map(r => r.data())\n  );\n  if (gen !== searchGeneration) return; // descartado\n\n  renderResults(items); // solo se ejecuta si es la búsqueda más reciente\n}",
+      "use_cases": [
+        "Autocomplete con debounce",
+        "Búsqueda en tiempo real",
+        "Filtros con petición asíncrona"
+      ],
+      "difficulty": 2,
+      "language": "javascript",
+      "interview_relevant": true,
+      "interview_question": "¿Cómo evitas que resultados de búsquedas anteriores sobrescriban los nuevos?",
+      "interview_answer": "Con un contador de generación: cada búsqueda incrementa el contador, y después de cada await se verifica si el contador sigue igual. Si cambió, se descartan los resultados porque ya hay una búsqueda más reciente en progreso.",
+      "source": "static",
+      "tags": [
+        "async",
+        "search",
+        "pattern"
+      ],
       "type": "concepto"
     }
   ]
