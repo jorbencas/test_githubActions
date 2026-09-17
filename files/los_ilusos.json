@@ -615,5 +615,17 @@
     "relevancia": 2,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "Entrevista JONÁS TRUEBA ¿Qué piensa realmente Jonás Trueba del cine actual?",
+    "url": "https://www.youtube.com/watch?v=IP9KsVnvXAw",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-17T21:14:24.440496",
+    "medio": "242 PELÍCULAS DESPUÉS ",
+    "imagen": "https://i.ytimg.com/vi/IP9KsVnvXAw/hqdefault.jpg",
+    "tipo": "entrevista",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
