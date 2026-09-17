@@ -275,6 +275,7 @@ class WebExtractor(BaseExtractor):
                   "atom": "http://www.w3.org/2005/Atom",
                   "media": "http://search.yahoo.com/mrss/"}
             channel = root.find("channel")
+            channel_title = channel.findtext("title", "") if channel is not None else ""
             items_xml = channel.findall("item") if channel is not None else []
             if not items_xml:
                 items_xml = root.findall(".//{http://www.w3.org/2005/Atom}entry")
@@ -297,6 +298,13 @@ class WebExtractor(BaseExtractor):
                 enlace = i.findtext("link", "")
                 fecha = i.findtext("pubDate", "") or i.findtext("dc:date", "", ns)
                 if titulo and enlace:
+                    if titulo.strip() == channel_title.strip():
+                        desc = i.findtext("description", "") or i.findtext("content:encoded", "", ns)
+                        desc = re.sub(r"<[^>]+>", "", html.unescape(desc)).strip()
+                        if len(desc) > 140:
+                            desc = desc[:137] + "..."
+                        if desc:
+                            titulo = desc
                     item = self.generar_item_base(titulo, enlace, nombre, TIPO_VAL_NOTICIA, fecha)
                     item.update({
                         BADGE_KEY: VAL_TECH,

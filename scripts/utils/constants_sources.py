@@ -640,4 +640,14 @@ FUENTES = {
     # Comunidades
     "GitHub Blog": {"rss": "https://github.blog/news-insights/feed/", "quick": True},
     "Slashdot": {"rss": "http://rss.slashdot.org/Slashdot/slashdotMain", "quick": True},
+    # ── Redes Sociales / Mastodon RSS ──
+    "Mastodon - @simonw": {"rss": "https://mastodon.social/@simonw.rss", "quick": True, "solo_tech": True},
+    "Mastodon - @antirez": {"rss": "https://mastodon.social/@antirez.rss", "quick": True, "solo_tech": True},
+    "Mastodon - @gruber": {"rss": "https://mastodon.social/@gruber.rss", "quick": True, "solo_tech": True},
+    "Mastodon - @sama": {"rss": "https://mastodon.social/@sama.rss", "quick": True, "solo_tech": True},
+    "Mastodon - @sarah11918": {"rss": "https://mastodon.social/@sarah11918.rss", "quick": True, "solo_tech": True},
+    "Mastodon - @cassidyjames": {"rss": "https://mastodon.social/@cassidyjames.rss", "quick": True, "solo_tech": True},
+    "Mastodon - @popey": {"rss": "https://mastodon.social/@popey.rss", "quick": True, "solo_tech": True},
+    "Mastodon - @molly0xfff": {"rss": "https://mastodon.social/@molly0xfff.rss", "quick": True, "solo_tech": True},
+    "Mastodon - @nickytonline": {"rss": "https://mastodon.social/@nickytonline.rss", "quick": True, "solo_tech": True},
 }
