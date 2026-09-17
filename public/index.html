@@ -3,7 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0e0e18">
+  <meta name="description" content="Tech Pulse — Explora la tecnología en tres dimensiones: historia interactiva, noticias en tiempo real y herramientas Markdown. Creado por Jorge Beneyto Castelló.">
+  <meta name="author" content="Jorge Beneyto Castelló">
+  <meta property="og:title" content="Tech Pulse — Explora la tecnología en tres dimensiones">
+  <meta property="og:description" content="Historia interactiva de la tecnología, dashboard de noticias en tiempo real y herramientas Markdown. Todo en un solo lugar.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jorbencasdownloaderdocument.surge.sh">
+  <meta property="og:site_name" content="Tech Pulse">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@jorbencas">
+  <meta name="twitter:creator" content="@jorbencas">
+  <link rel="canonical" href="https://jorbencasdownloaderdocument.surge.sh">
+  <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
   <title>Tech Pulse — Jorge Beneyto Castelló</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Tech Pulse",
+    "url": "https://jorbencasdownloaderdocument.surge.sh",
+    "author": { "@type": "Person", "name": "Jorge Beneyto Castelló", "url": "https://github.com/jorbencas" },
+    "description": "Explora la tecnología en tres dimensiones: historia interactiva, noticias en tiempo real y herramientas Markdown."
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -334,6 +357,41 @@
       .logo-wrapper {
         flex-wrap: wrap;
       }
+    }
+
+    @media (max-height: 500px) and (orientation: landscape) {
+      body {
+        justify-content: flex-start;
+        padding-top: 16px;
+      }
+      .content {
+        padding: 16px 20px;
+      }
+      .logo-wrapper {
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .logo-rhombus { width: 28px; height: 28px; }
+      .logo-rhombus-small { width: 14px; height: 14px; }
+      .logo { font-size: clamp(24px, 5vw, 36px); }
+      .tagline { font-size: 11px; margin-bottom: 20px; letter-spacing: 1px; }
+      .cards {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        max-width: 100%;
+      }
+      .card { padding: 20px 16px 16px; }
+      .card-icon-wrap { width: 40px; height: 40px; margin-bottom: 12px; }
+      .card-icon { font-size: 20px; }
+      .card-title { font-size: 14px; margin-bottom: 6px; }
+      .card-desc { font-size: 11px; margin-bottom: 10px; line-height: 1.5; }
+      .card-stats { gap: 12px; padding-top: 10px; }
+      .card-stat-val { font-size: 14px; }
+      .card-stat-label { font-size: 9px; }
+      .footer { margin-top: 16px; font-size: 10px; }
+      .rhombus-field { display: none; }
+      .connections { display: none; }
+      .scan-line { opacity: 0.2; }
     }
 
     /* ── Línea animada inferior ── */
