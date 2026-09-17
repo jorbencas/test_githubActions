@@ -642,6 +642,10 @@ FUENTES = {
     "Slashdot": {"rss": "http://rss.slashdot.org/Slashdot/slashdotMain", "quick": True},
     # ── Herramientas / Testing ──
     "Maestro Blog": {"rss": "https://maestro.dev/blog/rss.xml", "quick": True},
+    # ── Directorios de Herramientas / Productos ──
+    "Product Hunt": {"rss": "https://www.producthunt.com/feed", "quick": True},
+    "TLDR Tech": {"rss": "https://tldr.tech/api/rss/tech", "quick": True},
+    "TLDR AI": {"rss": "https://tldr.tech/api/rss/ai", "quick": True},
     # ── Redes Sociales / Mastodon RSS ──
     "Mastodon - @simonw": {"rss": "https://mastodon.social/@simonw.rss", "quick": True, "solo_tech": True},
     "Mastodon - @antirez": {"rss": "https://mastodon.social/@antirez.rss", "quick": True, "solo_tech": True},
