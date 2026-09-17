@@ -30,3 +30,22 @@
 
   .output-header { flex-direction: column; gap: 12px; align-items: flex-start; }
 }
+
+/* Landscape phones */
+@media (max-height: 500px) and (orientation: landscape) {
+  .main-nav { position: relative; }
+  .nav-inner { height: 44px; padding: 0 12px; gap: 12px; }
+  .nav-brand { font-size: 0.95rem; }
+  .nav-back { font-size: 0.75rem; padding: 3px 8px; }
+  .nav-links a { font-size: 0.8rem; padding: 4px 10px; }
+  .main-content { padding: 12px 16px 30px; }
+  .hero { padding: 16px 0; }
+  .hero h1 { font-size: 1.4rem; }
+  .hero-subtitle { font-size: 0.85rem; }
+  .tools-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .tool-card { padding: 16px; }
+  .tool-icon { font-size: 1.8rem; margin-bottom: 8px; }
+  .tool-card h3 { font-size: 0.95rem; }
+  .tool-card p { font-size: 0.78rem; line-height: 1.4; }
+  .site-footer { padding: 12px 16px; font-size: 0.78rem; }
+}
