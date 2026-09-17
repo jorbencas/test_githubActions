@@ -8,15 +8,20 @@
 ![License](https://img.shields.io/github/license/jorbencas/test_githubActions?style=for-the-badge)
 ![Tests](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/tests.yml?branch=master&style=for-the-badge&label=Tests&logo=github)
 ![Surge](https://img.shields.io/badge/Surge-Live-00ADD8?style=for-the-badge&logo=vercel&label=Dashboard)
-
-[![Scraper](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/scraper_workflow.yml?branch=master&style=flat-square&label=Scraper&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
-[![Hourly](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/scrape_hourly_workflow.yml?branch=master&style=flat-square&label=Hourly&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
-[![6h](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/scrape_6h_workflow.yml?branch=master&style=flat-square&label=Every%206h&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
-[![Resources](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_resources.yml?branch=master&style=flat-square&label=Resources&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
-[![Email](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/send_email_workflow.yml?branch=master&style=flat-square&label=Email&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
-[![Telegram](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/send_telegram_workflow.yml?branch=master&style=flat-square&label=Telegram&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
-[![AI Tools](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_content.yml?branch=master&style=flat-square&label=AI%20Tools&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
-[![Tips](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_content.yml?branch=master&style=flat-square&label=Tips&logo=github)](https://github.com/jorbencas/test_githubActions/actions)
+![Scraper](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/scraper_workflow.yml?branch=master&style=for-the-badge&label=Scraper&logo=github)
+![Hourly](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/scrape_hourly_workflow.yml?branch=master&style=for-the-badge&label=Hourly&logo=github)
+![6h](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/scrape_6h_workflow.yml?branch=master&style=for-the-badge&label=Every%206h&logo=github)
+![Resources](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_resources.yml?branch=master&style=for-the-badge&label=Resources&logo=github)
+![Email](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/send_email_workflow.yml?branch=master&style=for-the-badge&label=Email&logo=github)
+![Telegram](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/send_telegram_workflow.yml?branch=master&style=for-the-badge&label=Telegram&logo=github)
+![AI Tools](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_content.yml?branch=master&style=for-the-badge&label=AI%20Tools&logo=github)
+![Tips](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_content.yml?branch=master&style=for-the-badge&label=Tips&logo=github)
+<!-- DYNAMIC_BADGES_START -->
+![Noticias](https://img.shields.io/badge/Noticias-10.658-3b82f6?style=for-the-badge&logo=newsblur&logoColor=white)
+![Fuentes](https://img.shields.io/badge/Fuentes-185-8b5cf6?style=for-the-badge&logo=newsblur&logoColor=white)
+![Herramientas](https://img.shields.io/badge/Herramientas-200-10b981?style=for-the-badge&logo=newsblur&logoColor=white)
+![Actualizado](https://img.shields.io/badge/Actualizado-17/09/2026-f59e0b?style=for-the-badge&logo=newsblur&logoColor=white)
+<!-- DYNAMIC_BADGES_END -->
 
 Ecosistema de automatización tech que ejecuta **16 workflows de GitHub Actions** formando un pipeline de contenido completamente automatizado. Recolecta de **547 fuentes** (158 canales YouTube, 161 feeds RSS, 225 sitios de web scraping, 89 GitHub Topics, 5 GitHub Repos, 1 Product Hunt), procesa con **IA (Gemini)** y distribuye contenido a múltiples canales.
 
@@ -25,13 +30,6 @@ Ecosistema de automatización tech que ejecuta **16 workflows de GitHub Actions*
 </div>
 
 ---
-
-<!-- DYNAMIC_BADGES_START -->
-![Noticias](https://img.shields.io/badge/Noticias-10.658-3b82f6?style=for-the-badge&logo=newsblur&logoColor=white)
-![Fuentes](https://img.shields.io/badge/Fuentes-185-8b5cf6?style=for-the-badge&logo=newsblur&logoColor=white)
-![Herramientas](https://img.shields.io/badge/Herramientas-200-10b981?style=for-the-badge&logo=newsblur&logoColor=white)
-![Actualizado](https://img.shields.io/badge/Actualizado-17/09/2026-f59e0b?style=for-the-badge&logo=newsblur&logoColor=white)
-<!-- DYNAMIC_BADGES_END -->
 
 ## 📋 Overview
 

@@ -81,11 +81,11 @@ def update_readme():
     if re.search(pattern, content, re.DOTALL):
         new_content = re.sub(pattern, replacement, content, flags=re.DOTALL)
     else:
-        marker = "## 📋 Overview"
+        marker = "![Tips]"
         if marker in content:
             new_content = content.replace(
                 marker,
-                f"{replacement}\n\n{marker}",
+                f"{marker}\n{replacement}",
             )
         else:
             new_content = content + f"\n\n{replacement}\n"
