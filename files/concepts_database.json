@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 94,
+    "total_concepts": 96,
     "categories": [
       "concurrency",
       "css_moderno",
@@ -14,7 +14,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-17T11:09:05.401697"
+    "last_scraped": "2026-09-17T16:25:52.159742"
   },
   "concepts": [
     {
@@ -1734,6 +1734,42 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-16T16:18:16.255411"
+    },
+    {
+      "title": "Rayon en Rust: iteradores paralelos con par_iter, par_sort y ThreadPool",
+      "summary": "Rayon es la biblioteca de paralelismo de datos más usada en el ecosistema Rust. Su API imita la de los iteradores estándar: en la mayoría de los casos basta con cambiar.iter()por.par_iter()para distri",
+      "explanation": "Rayon es la biblioteca de paralelismo de datos más usada en el ecosistema Rust. Su API imita la de los iteradores estándar: en la mayoría de los casos basta con cambiar.iter()por.par_iter()para distribuir el trabajo entre todos los núcleos disponibles. Rayon gestiona automáticamente un pool de hilos y el reparto de tareas mediante work-stealing.De iter() a par_iter(): el cambio mínimo Rayon implementa los mismos adaptadores que los iteradores estándar (map,filter,sum,collect). El compilador garantiza que las closures pasadas a Rayon seanSend; si no lo son, obtendrás un error claro en compilación, no una carrera de datos en runtime.[dependencies]\nrayon = \"1.10\"use rayon::prelude::*;\n\nfn es_primo(n: u64) -> bool {\n    if n < 2 { return false; }\n    if n == 2 { return true; }\n    if n % 2 == 0 { return false; }\n    let raiz = (n as f64).sqrt() as u64 + 1;\n    (3..raiz).step_by(2).all(|i| n % i != 0)\n}\n\nfn main() {\n    let rango: Vec<u64> = (2..=1_000_000).collect();\n\n    // Versión secuencial\n    let primos_seq: Vec<u64> = rango.iter()\n        .filter(|&&n| es_primo(n))\n        .copied()\n        .collect();\n\n    // Versión paralela: cambio mínimo\n    let primos_par: Vec<u64> = rango.par_iter()\n        .filter(|&&n| es_primo(n))\n        .copied()\n        .collect();\n\n    println!(\"Primos hasta 1M: {}\", primos_seq.len());\n    println!(\"Paralelo coincide: {}\", primos_seq == primos_par);\n}par_sort: ordenación paralela Rayon también ofrecepar_sortypar_sort_bypara ordenar slices en pa",
+      "code_example": "[dependencies]\nrayon = \"1.10\"",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-17T16:25:13.336718"
+    },
+    {
+      "title": "visionOS en Swift: RealityView, Immersive Spaces, Entity y programación espacial",
+      "summary": "visionOS es el sistema operativo de Apple Vision Pro, disponible desde 2024. Combina SwiftUI con RealityKit para crear experiencias espaciales que mezclan objetos 3D con la interfaz 2D habitual de una",
+      "explanation": "visionOS es el sistema operativo de Apple Vision Pro, disponible desde 2024. Combina SwiftUI con RealityKit para crear experiencias espaciales que mezclan objetos 3D con la interfaz 2D habitual de una app. La curva de aprendizaje es menor de lo que parece: la mayor parte de SwiftUI funciona igual, y el espacio 3D se añade de forma incremental.El modelo de espacio en visionOS visionOS define tres modos de experiencia:Window: ventana 2D flotante, idéntica a una app macOS o iOS.Volume: caja 3D con contenido RealityKit visible desde todos los ángulos.Immersive Space: el usuario entra en un espacio que puede ocupar todo el campo de visión.import SwiftUI\nimport RealityKit\n\n@main\nstruct MiAppVision: App {\n    var body: some Scene {\n        // Ventana estándar\n        WindowGroup {\n            ContentView()\n        }\n\n        // Volumen 3D\n        WindowGroup(id: \"cubo3d\") {\n            VistaVolumen()\n        }\n        .windowStyle(.volumetric)\n        .defaultSize(width: 0.4, height: 0.4, depth: 0.4, in: .meters)\n\n        // Espacio inmersivo\n        ImmersiveSpace(id: \"espacio\") {\n            EspacioInmersivo()\n        }\n        .immersionStyle(selection: .constant(.mixed), in: .mixed, .progressive, .full)\n    }\n}RealityView: objetos 3D en SwiftUI RealityViewes el puente entre SwiftUI y RealityKit. Permite crear y actualizar entidades 3D como si fueran vistas SwiftUI:struct VistaEsfera: View {\n    var body: some View {\n        RealityView { contenido in\n            // Crear una esf",
+      "code_example": "import SwiftUI\nimport RealityKit\n\n@main\nstruct MiAppVision: App {\n    var body: some Scene {\n        // Ventana estándar\n        WindowGroup {\n            ContentView()\n        }\n\n        // Volumen 3D\n        WindowGroup(id: \"cubo3d\") {\n            VistaVolumen()\n        }\n        .windowStyle(.volumetric)\n        .defaultSize(width: 0.4, height: 0.4, depth: 0.4, in: .meters)\n\n        // Espacio inmersivo\n        ImmersiveSpace(id: \"espacio\") {\n            EspacioInmersivo()\n        }\n        .immersionStyle(selection: .constant(.mixed), in: .mixed, .progressive, .full)\n    }\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-17T16:25:14.854301"
     }
   ]
 }
