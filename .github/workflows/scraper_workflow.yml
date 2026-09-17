@@ -69,6 +69,7 @@ jobs:
           git add src/content/auto-news/ || true
           git diff --quiet && git diff --staged --quiet && echo "No hay cambios" && exit 0
           git commit -m "[news] actualización semanal automática"
+          git pull --rebase origin main
           git push origin main
           echo "✅ Push realizado a jorbencas/blog"
       - name: 📝 Push changes a test_githubActions

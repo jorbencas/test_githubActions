@@ -71,6 +71,7 @@ jobs:
           git add src/content/posts/resources*.mdx
           git diff --quiet && git diff --staged --quiet && echo "No hay cambios" && exit 0
           git commit -m "[recursos] actualización automática de recursos"
+          git pull --rebase origin main
           git push origin main
           echo "✅ Push realizado a jorbencas/blog"
 

@@ -40,7 +40,7 @@ jobs:
             git config user.name jorbencas
             git config user.email jorbencas@gmail.com
             git add src/content/auto-challenges/*.mdx
-            git diff --quiet && git diff --staged --quiet || (git commit -m "🚀 IA: Nuevos retos de programación generados" && git push)
+            git diff --quiet && git diff --staged --quiet || (git commit -m "🚀 IA: Nuevos retos de programación generados" && git pull --rebase origin main && git push)
           else
             echo "No hay retos nuevos que añadir"
           fi
