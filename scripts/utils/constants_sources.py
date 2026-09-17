@@ -640,6 +640,8 @@ FUENTES = {
     # Comunidades
     "GitHub Blog": {"rss": "https://github.blog/news-insights/feed/", "quick": True},
     "Slashdot": {"rss": "http://rss.slashdot.org/Slashdot/slashdotMain", "quick": True},
+    # ── Herramientas / Testing ──
+    "Maestro Blog": {"rss": "https://maestro.dev/blog/rss.xml", "quick": True},
     # ── Redes Sociales / Mastodon RSS ──
     "Mastodon - @simonw": {"rss": "https://mastodon.social/@simonw.rss", "quick": True, "solo_tech": True},
     "Mastodon - @antirez": {"rss": "https://mastodon.social/@antirez.rss", "quick": True, "solo_tech": True},
