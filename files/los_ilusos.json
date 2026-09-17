@@ -603,5 +603,17 @@
     "relevancia": 3,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "Jonás Trueba regresa a Gijón para presentar un nuevo montaje de 'Los ilusos', 13 años después de su estreno",
+    "url": "https://www.elcomercio.es/gijon/jonas-trueba-regresa-gijon-presentar-nuevo-montaje-ilusos-20260917132322-nt.html",
+    "fecha_pub": "Thu, 17 Sep 2026 04:23:00 GMT",
+    "fecha_ts": "2026-09-17T16:48:30.424837",
+    "medio": "El Comercio",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
