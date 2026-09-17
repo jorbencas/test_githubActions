@@ -641,9 +641,9 @@ FUENTES = {
     "GitHub Blog": {"rss": "https://github.blog/news-insights/feed/", "quick": True},
     "Slashdot": {"rss": "http://rss.slashdot.org/Slashdot/slashdotMain", "quick": True},
     # ── Herramientas / Testing ──
-    "Maestro Blog": {"rss": "https://maestro.dev/blog/rss.xml", "quick": True},
+    "Maestro Blog": {"rss": "https://maestro.dev/blog/rss.xml", "quick": True, "tipo": "herramienta"},
     # ── Directorios de Herramientas / Productos ──
-    "Product Hunt": {"rss": "https://www.producthunt.com/feed", "quick": True},
+    "Product Hunt": {"rss": "https://www.producthunt.com/feed", "quick": True, "tipo": "herramienta"},
     "TLDR Tech": {"rss": "https://tldr.tech/api/rss/tech", "quick": True},
     "TLDR AI": {"rss": "https://tldr.tech/api/rss/ai", "quick": True},
     # ── Redes Sociales / Mastodon RSS ──
