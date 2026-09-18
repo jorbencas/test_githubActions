@@ -975,5 +975,53 @@
     "tipo": "noticia",
     "relevancia": 4,
     "pelicula": "Nueve reinas"
+  },
+  {
+    "titulo": "Netflix: Estos son los cinco programas que llegan esta semana",
+    "url": "https://www.elsiglodedurango.com.mx/noticia/2026/netflix-estos-son-los-cinco-programas-que-llegan-esta-semana.html",
+    "fecha_pub": "Tue, 15 Sep 2026 04:58:00 GMT",
+    "fecha_ts": "2026-09-18T04:26:18.593398",
+    "medio": "El Siglo de Durango",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix va más allá de 'Los Bridgerton': la miniserie polaca de 6 episodios que te hará viajar a la Varsovia del siglo XIX",
+    "url": "https://www.cinemania.es/cinemania/series/netflix-bridgerton-miniserie-polaca-6-episodios-varsovia-siglo-xix_7038141_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-18T04:26:33.205933",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix encuentra a la Oompa Loompa triste que se hizo viral por un festival cutre y le da la \"experiencia Wonka que merecía\"",
+    "url": "https://www.cinemania.es/gonzoo/netflix-busca-oompa-loompa-triste-que-se-hizo-viral-por-un-festival-cutre-le-da-experiencia-wonka-que-merecia_7038038_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-18T04:26:33.206070",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Qué ver hoy en Netflix, Amazon Prime Video y otras plataformas: sábado 5 de septiembre de 2026",
+    "url": "https://www.cinemania.es/cinemania/noticias/que-ver-hoy-netflix-amazon-prime-video-otras-plataformas-sabado-5-septiembre-2026_7032958_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-18T04:26:33.206106",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "video",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
