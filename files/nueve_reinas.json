@@ -1023,5 +1023,53 @@
     "relevancia": 2,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Crítica de 'Monstruo: La historia de Lizzie Borden', la miniserie de Netflix: venganza, redención y feminismo barato",
+    "url": "https://www.cinemania.es/cinemania/series/monstruo-lizzie-borden-miniserie-netflix-critica-venganza-redencion-feminismo-barato_7038418_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-18T16:17:33.276474",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "critica",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "La desconocida hija de Warren Beatty y Annette Bening: quién es la nueva asesina estrella de Netflix",
+    "url": "https://www.cinemania.es/cinemania/series/ella-beatty-hija-warren-beatty-annette-bening-protagoniza-lizzie-borden-netflix_7038213_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-18T16:17:33.276505",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "En solo 2 días ya es número 1 de Netflix: la miniserie holandesa de 7 episodios que adapta un exitoso bestseller",
+    "url": "https://www.cinemania.es/cinemania/series/miniserie-holandesa-netflix-7-episodios-adapta-bestseller_7038538_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-18T16:17:33.276554",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Qué ver hoy en Netflix, Amazon Prime Video y otras plataformas: domingo 6 de septiembre de 2026",
+    "url": "https://www.cinemania.es/cinemania/noticias/que-ver-hoy-netflix-amazon-prime-video-otras-plataformas-domingo-6-septiembre-2026_7033016_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-18T16:17:33.276741",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "video",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
