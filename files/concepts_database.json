@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 96,
+    "total_concepts": 97,
     "categories": [
       "concurrency",
       "css_moderno",
@@ -14,7 +14,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-18T10:43:37.876523"
+    "last_scraped": "2026-09-18T15:59:13.513964"
   },
   "concepts": [
     {
@@ -1770,6 +1770,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-17T16:25:14.854301"
+    },
+    {
+      "title": "Core ML y Create ML en Swift: entrenar modelos, hacer predicciones e integrar Vision",
+      "summary": "Core ML es el framework de Apple para ejecutar modelos de machine learning en dispositivos iOS y macOS, usando la CPU, la GPU o el Neural Engine según el caso. Create ML es la herramienta complementar",
+      "explanation": "Core ML es el framework de Apple para ejecutar modelos de machine learning en dispositivos iOS y macOS, usando la CPU, la GPU o el Neural Engine según el caso. Create ML es la herramienta complementaria para entrenar esos modelos en macOS sin salir del ecosistema Apple. La integración entre ambos es directa: entrenas en Create ML y despliegas con Core ML.Entrenar modelos con Create ML Create ML tiene una interfaz visual en macOS (app Create ML) y una API programática para automatizar el entrenamiento. El ejemplo más común es la clasificación de imágenes:import CreateML\n\n// Entrenar un clasificador de imágenes desde código\nlet datosEntrenamiento = URL(fileURLWithPath: \"/datos/entrenamiento\")\n// La estructura de carpetas define las clases:\n// entrenamiento/gatos/ ? imágenes de gatos\n// entrenamiento/perros/ ? imágenes de perros\n\nlet parametros = MLImageClassifier.ModelParameters(\n    validation: .split(strategy: .automatic),\n    maxIterations: 20,\n    augmentationOptions: [.flip, .rotate, .blur]\n)\n\ndo {\n    let clasificador = try MLImageClassifier(\n        trainingData: .labeledDirectories(at: datosEntrenamiento),\n        parameters: parametros\n    )\n\n    // Evaluar métricas\n    let metricas = clasificador.trainingMetrics\n    print(\"Exactitud: (metricas.classificationError)%\")\n\n    // Guardar el modelo entrenado como .mlmodel\n    let destino = URL(fileURLWithPath: \"/modelos/ClasificadorMascotas.mlmodel\")\n    try clasificador.write(to: destino, metadata: MLModelMetadata(\n       ",
+      "code_example": "import CreateML\n\n// Entrenar un clasificador de imágenes desde código\nlet datosEntrenamiento = URL(fileURLWithPath: \"/datos/entrenamiento\")\n// La estructura de carpetas define las clases:\n// entrenamiento/gatos/ ? imágenes de gatos\n// entrenamiento/perros/ ? imágenes de perros\n\nlet parametros = MLImageClassifier.ModelParameters(\n    validation: .split(strategy: .automatic),\n    maxIterations: 20,\n    augmentationOptions: [.flip, .rotate, .blur]\n)\n\ndo {\n    let clasificador = try MLImageClassifier(\n        trainingData: .labeledDirectories(at: datosEntrenamiento),\n        parameters: parametros\n    )\n\n    // Evaluar métricas\n    let metricas = clasificador.trainingMetrics\n    print(\"Exactitud: (metricas.classificationError)%\")\n\n    // Guardar el modelo entrenado como .mlmodel\n    let destino = URL(fileURLWithPath: \"/modelos/ClasificadorMascotas.mlmodel\")\n    try clasificador.write(to: destino, metadata: MLModelMetadata(\n        author: \"MiApp\",\n        shortDescription: \"Clasificador gatos vs perros\",\n        version: \"1.0\"\n    ))\n} catch {\n    print(\"Error entrenando: (error)\")\n}",
+      "use_cases": [],
+      "difficulty": 1,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "habilidades"
+      ],
+      "cat": "habilidades",
+      "scraped_at": "2026-09-18T15:58:34.014973"
     }
   ]
 }
