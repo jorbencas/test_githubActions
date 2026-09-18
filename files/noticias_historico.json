@@ -1,5 +1,31 @@
 [
     {
+        "titulo": "ResearchWhen Language Isn't the Whole Story: What ROK-FORTRESS Reveals About Multilingual AI Safety",
+        "enlace": "https://scale.com/blog/rok-fortress-multilingual-ai-safety",
+        "fuente": "Scale AI",
+        "tipo": "noticia",
+        "f": "18/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "https://cdn.sanity.io/images/50zba0eo/production/fa6343e916e4296c066d878d3b3da141f28f81b1-1920x1080.png?auto=format&q=80",
+        "fecha_real": "18/09/2026",
+        "ts": "2026-09-18T03:33:58.924730"
+    },
+    {
+        "titulo": "Hands-On Evolution of Deep Learning – Geoffrey Hinton’s AI Legacy",
+        "enlace": "https://www.freecodecamp.org/news/hands-on-evolution-of-deep-learning-geoffrey-hinton-s-ai-legacy/",
+        "fuente": "freeCodeCamp",
+        "tipo": "noticia",
+        "f": "18/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "18/09/2026",
+        "ts": "2026-09-18T03:34:11.116810"
+    },
+    {
         "titulo": "Khosla-backed Mazama Energy just raised $135M to drill deeper into super-hot-rock geothermal",
         "enlace": "https://techcrunch.com/2026/09/17/khosla-backed-mazama-energy-just-raised-135m-to-drill-deeper-into-super-hot-rock-geothermal/",
         "fuente": "TechCrunch",
