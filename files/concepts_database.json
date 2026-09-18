@@ -2,8 +2,9 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 97,
+    "total_concepts": 99,
     "categories": [
+      "bases_datos",
       "concurrency",
       "css_moderno",
       "devops",
@@ -14,7 +15,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-18T15:59:13.513964"
+    "last_scraped": "2026-09-18T20:33:29.395290"
   },
   "concepts": [
     {
@@ -1788,6 +1789,42 @@
       ],
       "cat": "habilidades",
       "scraped_at": "2026-09-18T15:58:34.014973"
+    },
+    {
+      "title": "iOS 27 ya está aquí: Siri con Gemini, App Intents obligatorio y lo que cambia de verdad para developers",
+      "summary": "iOS 27 lleva cuatro días en la calle. Salió el 14 de septiembre de 2026 y, a diferencia de lo que suelen contar los artículos sobre \"el futuro del desarrollo iOS\", aquí no hace falta especular: ya se ",
+      "explanation": "iOS 27 lleva cuatro días en la calle. Salió el 14 de septiembre de 2026 y, a diferencia de lo que suelen contar los artículos sobre \"el futuro del desarrollo iOS\", aquí no hace falta especular: ya se puede instalar, ya hay apps en la App Store adaptadas y ya hay desarrolladores peleándose con los cambios en producción. Así que en vez de imaginar cómo será programar para iPhone en 2030, vamos a lo concreto: qué ha cambiado de verdad con esta versión y con Swift 6.2, y qué toca hacer ya con el código.Siri se reconstruye con un modelo de Google por debajo El titular más comentado de este ciclo es que la nueva Siri de iOS 27 funciona sobre un modelo de Gemini de Google, adaptado a medida para Apple. No es un rumor: Apple ha licenciado un modelo de aproximadamente 1,2 billones de parámetros por un acuerdo que ronda los mil millones de dólares al año, según ha confirmadoel propio blog de Google. El resultado es una Siri capaz de entender peticiones en lenguaje natural bastante más complejas y de ejecutar acciones dentro de las apps de terceros, no solo dentro de las suyas propias. Para quien programa, el dato importante no es de dónde saca Apple el modelo, sino cómo se conecta esa Siri con tu app. Y ahí es donde entra el cambio que de verdad obliga a moverse.App Intents deja de ser una opción Apple ha dado por muerto SiriKit en WWDC 2026: sigue funcionando, mostrará avisos de compilación deprecados y en algún momento dejará de hacerlo. La nueva Siri solo llama a las apps a través d",
+      "code_example": "import AppIntents\n\nstruct BuscarPedidoIntent: AppIntent {\n    static var title: LocalizedStringResource = \"Buscar pedido\"\n    static var description = IntentDescription(\"Consulta el estado de un pedido por su número\")\n\n    @Parameter(title: \"Número de pedido\")\n    var numeroPedido: String\n\n    // Streaming: Siri puede mostrar resultados parciales mientras se resuelve\n    func perform() async throws -> some IntentResult & ProvidesDialog {\n        let pedido = try await PedidosService.shared.buscar(numeroPedido)\n        let dialogo = \"Tu pedido (numeroPedido) está (pedido.estado).\"\n        return .result(dialog: IntentDialog(stringLiteral: dialogo))\n    }\n}\n\nstruct PedidosShortcuts: AppShortcutsProvider {\n    static var appShortcuts: [AppShortcut] {\n        AppShortcut(\n            intent: BuscarPedidoIntent(),\n            phrases: [\"Busca mi pedido en (.applicationName)\"],\n            shortTitle: \"Buscar pedido\",\n            systemImageName: \"shippingbox\"\n        )\n    }\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-18T20:32:53.451112"
+    },
+    {
+      "title": "Testing avanzado en Rust: tests de integración, mockall para mocks y proptest para property testing",
+      "summary": "Rust facilita el testing desde el primer momento con soporte integrado encargo test. Más allá de los unit tests básicos, el ecosistema ofrece herramientas para tests de integración, mocks automáticos,",
+      "explanation": "Rust facilita el testing desde el primer momento con soporte integrado encargo test. Más allá de los unit tests básicos, el ecosistema ofrece herramientas para tests de integración, mocks automáticos, property-based testing y benchmarks estadísticos, todo ello sin salir del flujo habitual de trabajo con Cargo.Tests de integración en el directorio tests/ Los tests unitarios viven en el mismo archivo que el código, dentro de#[cfg(test)]. Los tests de integración van en el directoriotests/en la raíz del crate: cada archivo es un binario independiente que importa la biblioteca como si fuera un usuario externo. Solo tienen acceso a la API pública.// src/lib.rs\npub fn dividir(a: f64, b: f64) -> Result<f64, String> {\n    if b == 0.0 {\n        return Err(\"División por cero\".into());\n    }\n    Ok(a / b)\n}\n\npub fn raiz_cuadrada(x: f64) -> Result<f64, String> {\n    if x < 0.0 {\n        return Err(format!(\"{x} es negativo; raíz no definida en reales\"))\n    }\n    Ok(x.sqrt())\n}// tests/matematicas.rs\nuse mi_crate::{dividir, raiz_cuadrada};\n\n#[test]\nfn test_division_ok() {\n    assert!((dividir(10.0, 4.0).unwrap() - 2.5).abs() < f64::EPSILON);\n}\n\n#[test]\nfn test_division_por_cero() {\n    assert!(dividir(5.0, 0.0).is_err());\n}\n\n#[test]\nfn test_raiz_negativa() {\n    let err = raiz_cuadrada(-4.0).unwrap_err();\n    assert!(err.contains(\"negativo\"));\n}\n\n#[test]\n#[should_panic(expected = \"índice fuera\")]\nfn test_panic_esperado() {\n    let v = vec![1, 2, 3];\n    let _ = v[10]; // debe hacer panic\n",
+      "code_example": "// src/lib.rs\npub fn dividir(a: f64, b: f64) -> Result<f64, String> {\n    if b == 0.0 {\n        return Err(\"División por cero\".into());\n    }\n    Ok(a / b)\n}\n\npub fn raiz_cuadrada(x: f64) -> Result<f64, String> {\n    if x < 0.0 {\n        return Err(format!(\"{x} es negativo; raíz no definida en reales\"))\n    }\n    Ok(x.sqrt())\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "bases_datos"
+      ],
+      "cat": "bases_datos",
+      "scraped_at": "2026-09-18T20:32:54.935924"
     }
   ]
 }
