@@ -290,7 +290,6 @@ class DevServerRouteProvider(SourceProvider):
         try:
             # Wait for server to be ready
             import socket
-import sys
             for _ in range(60):
                 time.sleep(1)
                 try:
