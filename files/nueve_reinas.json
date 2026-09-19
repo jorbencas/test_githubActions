@@ -1071,5 +1071,112 @@
     "relevancia": 2,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Trailer - Nueve Reinas",
+    "url": "https://www.youtube.com/watch?v=z-Z6XylRyJI",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-19T04:23:36.279554",
+    "medio": "dahevik",
+    "imagen": "https://i.ytimg.com/vi/z-Z6XylRyJI/hqdefault.jpg",
+    "tipo": "trailer",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "NUEVE REINAS: El Clásico Argentino Estrena Serie en España",
+    "url": "https://www.youtube.com/watch?v=fV267APJ17w",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-19T04:23:36.280398",
+    "medio": "Noticias LAT | Última Hora",
+    "imagen": "https://i.ytimg.com/vi/fV267APJ17w/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "BERLIN | Cameo Álvaro Morte | Netflix",
+    "url": "https://www.youtube.com/watch?v=a8up3icb9dU",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-19T04:23:36.905183",
+    "medio": "La Casa De Papel",
+    "imagen": "https://i.ytimg.com/vi/a8up3icb9dU/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Pedro Alonso y Álvaro Morte leen tweets de fans | La Casa de Papel : Parte 5 | Netflix",
+    "url": "https://www.youtube.com/watch?v=FUYiXl6FYHI",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-19T04:23:36.905457",
+    "medio": "La Casa De Papel",
+    "imagen": "https://i.ytimg.com/vi/FUYiXl6FYHI/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Kiti Mánver y la importancia de las abuelas en la ficción | Dos tumbas | Netflix España",
+    "url": "https://www.youtube.com/watch?v=o2w-DWyRErI",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-19T04:23:36.905594",
+    "medio": "Netflix España",
+    "imagen": "https://i.ytimg.com/vi/o2w-DWyRErI/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "La Noche de la Merluza | La Casa de Papel Parte 5, Vol. 2 | Netflix",
+    "url": "https://www.youtube.com/watch?v=0fEJLveh-uQ",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-19T04:23:36.905729",
+    "medio": "La Casa De Papel",
+    "imagen": "https://i.ytimg.com/vi/0fEJLveh-uQ/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Hablamos con Álvaro Morte, Hovik Keuchkerian y Kiti Mánver | Dos tumbas | Netflix España",
+    "url": "https://www.youtube.com/watch?v=Tl7_dPlLNr0",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-19T04:23:36.906230",
+    "medio": "Netflix España",
+    "imagen": "https://i.ytimg.com/vi/Tl7_dPlLNr0/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas"
+  },
+  {
+    "titulo": "La desconocida hija de Warren Beatty y Annette Bening: quién es la nueva asesina estrella de Netflix",
+    "url": "https://www.cinemania.es/cinemania/series/ella-beatty-lizzie-borden-netflix_7038213_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-19T04:23:45.061605",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "La miniserie que ha roto Netflix: 8 episodios que se han convertido de inmediato en lo más visto de la plataforma",
+    "url": "https://www.cinemania.es/cinemania/series/timonel-netflix-young-adult-episodios-miniserie_7036184_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-19T04:23:45.061680",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
