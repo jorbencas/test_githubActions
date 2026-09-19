@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 99,
+    "total_concepts": 100,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -15,7 +15,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-19T10:27:48.034449"
+    "last_scraped": "2026-09-19T15:31:05.398937"
   },
   "concepts": [
     {
@@ -1825,6 +1825,24 @@
       ],
       "cat": "bases_datos",
       "scraped_at": "2026-09-18T20:32:54.935924"
+    },
+    {
+      "title": "ARKit y RealityKit en Swift: detección de planos, AR anchors y escenas aumentadas con SwiftUI",
+      "summary": "ARKit detecta el entorno físico y RealityKit renderiza objetos 3D sobre él. La combinación de ambos permite colocar muebles virtuales en un salón, ver cómo queda un cuadro en la pared o construir jueg",
+      "explanation": "ARKit detecta el entorno físico y RealityKit renderiza objetos 3D sobre él. La combinación de ambos permite colocar muebles virtuales en un salón, ver cómo queda un cuadro en la pared o construir juegos que usan el suelo y las mesas de la habitación real. Con SwiftUI, la integración es más sencilla que con UIKit gracias aARViewen unUIViewRepresentable.Configurar ARKit: ARWorldTrackingConfiguration ARKit usa la cámara y los sensores del dispositivo para construir un mapa del entorno. La configuración más completa esARWorldTrackingConfiguration:import ARKit\nimport RealityKit\n\nclass ARCoordinator: NSObject, ARSessionDelegate {\n    var arView: ARView?\n\n    func configurar() {\n        let config = ARWorldTrackingConfiguration()\n        config.planeDetection = [.horizontal, .vertical]  // Detectar suelo, techo y paredes\n        config.environmentTexturing = .automatic           // Reflexiones realistas\n\n        // Oclusión de personas (A14 en adelante)\n        if ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentationWithDepth) {\n            config.frameSemantics.insert(.personSegmentationWithDepth)\n        }\n\n        arView?.session.run(config, options: [.resetTracking, .removeExistingAnchors])\n        arView?.session.delegate = self\n    }\n\n    // Cuando se detecta un nuevo plano\n    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {\n        for anchor in anchors {\n            if let plano = anchor as? ARPlaneAnchor {\n                print(\"Plano (pla",
+      "code_example": "import ARKit\nimport RealityKit\n\nclass ARCoordinator: NSObject, ARSessionDelegate {\n    var arView: ARView?\n\n    func configurar() {\n        let config = ARWorldTrackingConfiguration()\n        config.planeDetection = [.horizontal, .vertical]  // Detectar suelo, techo y paredes\n        config.environmentTexturing = .automatic           // Reflexiones realistas\n\n        // Oclusión de personas (A14 en adelante)\n        if ARWorldTrackingConfiguration.supportsFrameSemantics(.personSegmentationWithDepth) {\n            config.frameSemantics.insert(.personSegmentationWithDepth)\n        }\n\n        arView?.session.run(config, options: [.resetTracking, .removeExistingAnchors])\n        arView?.session.delegate = self\n    }\n\n    // Cuando se detecta un nuevo plano\n    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {\n        for anchor in anchors {\n            if let plano = anchor as? ARPlaneAnchor {\n                print(\"Plano (plano.alignment == .horizontal ? \"horizontal\" : \"vertical\") detectado\")\n            }\n        }\n    }\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-19T15:30:25.340713"
     }
   ]
 }
