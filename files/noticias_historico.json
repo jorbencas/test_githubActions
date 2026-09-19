@@ -1,5 +1,33 @@
 [
     {
+        "titulo": "Cómo los asistentes de codificación con IA pueden ayudarte a depurar sin escribir el código por ti",
+        "enlace": "https://www.freecodecamp.org/news/how-ai-coding-assistants-can-help-you-debug-without-writing-the-code-for-you/",
+        "fuente": "freeCodeCamp",
+        "tipo": "noticia",
+        "f": "19/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "19/09/2026",
+        "ts": "2026-09-19T03:31:09.540889",
+        "traducido": true
+    },
+    {
+        "titulo": "Consejos y aprendizajes de IAEntendiendo los embeddings y la búsqueda vectorial en aplicaciones de IAExplora los fundamentos de los embeddings y la búsqueda vectorial en IA, sus características clave, aplicaciones y desafíos que impactan el desarrollo de la IA.September 18, 2026",
+        "enlace": "https://cleverai.app/es/blog/entendiendo-embeddings-y-busqueda-vectorial-en-aplicaciones-ia",
+        "fuente": "CleverAI",
+        "tipo": "noticia",
+        "f": "19/09",
+        "fecha_publicacion": "2026-09-18T22:02:58.026Z",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "https://cleverai.app/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgenius-ai-app-test-1.appspot.com%2Fblog%2Ffeatured%2FvXvxZ3IwZt8JamKIuCOkW.webp&w=3840&q=75",
+        "fecha_real": "19/09/2026",
+        "ts": "2026-09-19T03:31:16.140786",
+        "traducido": true
+    },
+    {
         "titulo": "La gira de prensa de Tilly Norwood va tan bien como cabría esperar para una IA",
         "enlace": "https://techcrunch.com/2026/09/18/tilly-norwoods-press-tour-is-going-about-as-well-as-youd-expect-for-an-ai/",
         "fuente": "TechCrunch",
