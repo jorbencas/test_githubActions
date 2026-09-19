@@ -1,5 +1,33 @@
 [
     {
+        "titulo": "Claude Fable 5",
+        "enlace": "https://docs.anthropic.com/docs/en/release-notes/system-prompts/claude-fable-5",
+        "fuente": "Claude Blog",
+        "tipo": "noticia",
+        "f": "19/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "19/09/2026",
+        "ts": "2026-09-19T20:10:31.199785",
+        "traducido": true
+    },
+    {
+        "titulo": "Claude Opus 4.8",
+        "enlace": "https://docs.anthropic.com/docs/en/release-notes/system-prompts/claude-opus-4-8",
+        "fuente": "Claude Blog",
+        "tipo": "noticia",
+        "f": "19/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "19/09/2026",
+        "ts": "2026-09-19T20:10:31.200109",
+        "traducido": true
+    },
+    {
         "titulo": "Materiales",
         "enlace": "https://www.xataka.com/categoria/materiales",
         "fuente": "Xataka",

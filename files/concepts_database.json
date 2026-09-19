@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 100,
+    "total_concepts": 101,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -15,7 +15,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-19T15:31:05.398937"
+    "last_scraped": "2026-09-19T20:11:53.199624"
   },
   "concepts": [
     {
@@ -1843,6 +1843,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-19T15:30:25.340713"
+    },
+    {
+      "title": "Cargo avanzado en Rust: workspaces, features condicionales, build.rs y cargo-expand",
+      "summary": "Cargo es mucho más que un gestor de dependencias. Ofrece workspaces para organizar proyectos con múltiples crates, features para compilación condicional, build scripts para generación de código previa",
+      "explanation": "Cargo es mucho más que un gestor de dependencias. Ofrece workspaces para organizar proyectos con múltiples crates, features para compilación condicional, build scripts para generación de código previa a la compilación, y herramientas comocargo-expandpara depurar macros. Dominar estas funcionalidades permite escalar proyectos Rust de forma ordenada.Workspaces: proyectos multicrate con Cargo.lock compartido Un workspace agrupa varios crates relacionados bajo un únicoCargo.tomlraíz. Todos comparten el mismoCargo.lock, lo que garantiza versiones coherentes de dependencias en todo el proyecto. Los comandos de Cargo afectan a todos los crates por defecto, o a uno concreto con-p nombre_crate.// Estructura de directorios:\n// mi-proyecto/\n//   Cargo.toml        (workspace root)\n//   core/\n//     Cargo.toml\n//     src/lib.rs\n//   api/\n//     Cargo.toml\n//     src/main.rs\n//   cli/\n//     Cargo.toml\n//     src/main.rs# Cargo.toml (raíz del workspace)\n[workspace]\nmembers = [\"core\", \"api\", \"cli\"]\nresolver = \"2\"\n\n[workspace.dependencies]\nserde = { version = \"1\", features = [\"derive\"] }\ntokio = { version = \"1\", features = [\"full\"] }\n\n# core/Cargo.toml\n[package]\nname = \"core\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[dependencies]\nserde = { workspace = true }\n\n# api/Cargo.toml\n[package]\nname = \"api\"\nversion = \"0.1.0\"\nedition = \"2021\"\n\n[dependencies]\ncore = { path = \"../core\" }\ntokio = { workspace = true }// Comandos útiles con workspace:\n// cargo build -p core          -- compilar solo core\n// ca",
+      "code_example": "// Estructura de directorios:\n// mi-proyecto/\n//   Cargo.toml        (workspace root)\n//   core/\n//     Cargo.toml\n//     src/lib.rs\n//   api/\n//     Cargo.toml\n//     src/main.rs\n//   cli/\n//     Cargo.toml\n//     src/main.rs",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-19T20:11:15.518235"
     }
   ]
 }
