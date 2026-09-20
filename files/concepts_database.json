@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 101,
+    "total_concepts": 102,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -15,7 +15,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-20T12:15:13.053451"
+    "last_scraped": "2026-09-20T15:15:57.333295"
   },
   "concepts": [
     {
@@ -1861,6 +1861,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-19T20:11:15.518235"
+    },
+    {
+      "title": "Distributed Actors en Swift: actores distribuidos, sistemas de clústeres y Swift Distributed",
+      "summary": "Losdistributed actorsde Swift, introducidos en Swift 5.7, extienden el modelo de actores para que puedan vivir en procesos o máquinas distintas. La llamada a un método de un actor remoto se ve igual q",
+      "explanation": "Losdistributed actorsde Swift, introducidos en Swift 5.7, extienden el modelo de actores para que puedan vivir en procesos o máquinas distintas. La llamada a un método de un actor remoto se ve igual que la de uno local, con una única diferencia sintáctica: todas las llamadas deben serasync throws. El sistema de tipos garantiza que no puedes olvidarte de gestionar la red o la serialización.Declarar un actor distribuido La única diferencia con un actor normal es la palabra clavedistributed. Los métodos que quieras llamar desde otro proceso también deben marcarse condistributed:import Distributed\n\n// Sistema de actores distribuidos (necesario para el runtime)\ntypealias DefaultDistributedActorSystem = LocalTestingDistributedActorSystem\n\ndistributed actor ContadorDistribuido {\n    var valor: Int = 0\n\n    // Este método puede llamarse desde otro proceso\n    distributed func incrementar() {\n        valor += 1\n    }\n\n    distributed func obtenerValor() -> Int {\n        valor\n    }\n\n    // Este método solo es accesible localmente\n    func resetear() {\n        valor = 0\n    }\n}\n\n// Uso:\nlet contador = ContadorDistribuido(actorSystem: sistema)\ntry await contador.incrementar()\nlet v = try await contador.obtenerValor()  // siempre async throws en distributedClusterSystem de swift-distributed-actors Para producción, el paquete oficialswift-distributed-actorsproporciona un sistema de clústeres TCP:import DistributedCluster\n\n// Nodo 1 (servidor)\nlet sistema = await ClusterSystem(\"nodo1\") { s",
+      "code_example": "import Distributed\n\n// Sistema de actores distribuidos (necesario para el runtime)\ntypealias DefaultDistributedActorSystem = LocalTestingDistributedActorSystem\n\ndistributed actor ContadorDistribuido {\n    var valor: Int = 0\n\n    // Este método puede llamarse desde otro proceso\n    distributed func incrementar() {\n        valor += 1\n    }\n\n    distributed func obtenerValor() -> Int {\n        valor\n    }\n\n    // Este método solo es accesible localmente\n    func resetear() {\n        valor = 0\n    }\n}\n\n// Uso:\nlet contador = ContadorDistribuido(actorSystem: sistema)\ntry await contador.incrementar()\nlet v = try await contador.obtenerValor()  // siempre async throws en distributed",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-20T15:15:18.950511"
     }
   ]
 }
