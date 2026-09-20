@@ -1,7 +1,7 @@
-name: "[NOTICIAS] 🌐 Scraping Semidiario (tier standard)"
+name: "[NOTICIAS] 🌐 Scraping Horario (todo en 1: light + standard + AI tools + concepts)"
 on:
   schedule:
-    - cron: "0 */6 * * *" # Cada 6 horas
+    - cron: "0 * * * *" # Cada hora (el de menos tiempo → regla del usuario)
   workflow_dispatch:
 
 concurrency:
@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  scrape_6h:
+  scrape_all:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -45,13 +45,6 @@ jobs:
           fi
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      - name: Cache Ollama models (compartida con el bot)
-        if: steps.ping.outputs.needed == 'true'
-        uses: actions/cache@v4
-        with:
-          path: ~/.ollama
-          key: ollama-qwen2.5-1.5b
-          restore-keys: ollama-
       - name: 🦙 Instalar y arrancar Ollama (fallback traducción)
         if: steps.ping.outputs.needed == 'true'
         run: |
@@ -64,7 +57,7 @@ jobs:
             sleep 1
           done
           ollama list | grep -q qwen2.5:1.5b || ollama pull qwen2.5:1.5b
-      - name: 💻 Scrape news (tier standard — web sources)
+      - name: 💻 Scrape news (tier standard — web + RSS)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           OLLAMA_MODEL: qwen2.5:1.5b
@@ -80,6 +73,6 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add files/noticias_historico.json files/avatars_cache.json files/ai_tools_candidates.json files/concepts_database.json
-          git diff --quiet --cached || git commit -m "[bot] 6h scrape (tier standard + ai tools + concepts)"
+          git diff --quiet --cached || git commit -m "[bot] scrape hourly (tier standard + AI tools + concepts)"
           git pull --rebase origin master
           git push origin master

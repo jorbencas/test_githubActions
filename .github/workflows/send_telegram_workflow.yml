@@ -50,6 +50,7 @@ jobs:
             echo "Sin cambios en badges."
           else
             git commit -m "📊 Actualizar badges del README [skip ci]"
+            git checkout -- .
             git pull --rebase origin master
             git push origin master
           fi
