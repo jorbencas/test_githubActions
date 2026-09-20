@@ -9,8 +9,7 @@
 ![Tests](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/tests.yml?branch=master&style=for-the-badge&label=Tests&logo=github)
 ![Surge](https://img.shields.io/badge/Surge-Live-00ADD8?style=for-the-badge&logo=vercel&label=Dashboard)
 ![Scraper](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/scraper_workflow.yml?branch=master&style=for-the-badge&label=Scraper&logo=github)
-![Hourly](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/scrape_hourly_workflow.yml?branch=master&style=for-the-badge&label=Hourly&logo=github)
-![6h](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/scrape_6h_workflow.yml?branch=master&style=for-the-badge&label=Every%206h&logo=github)
+![Scrape](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/scrape_all_workflow.yml?branch=master&style=for-the-badge&label=Scrape%201h&logo=github)
 ![Resources](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_resources.yml?branch=master&style=for-the-badge&label=Resources&logo=github)
 ![Email](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/send_email_workflow.yml?branch=master&style=for-the-badge&label=Email&logo=github)
 ![Telegram](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/send_telegram_workflow.yml?branch=master&style=for-the-badge&label=Telegram&logo=github)
@@ -37,7 +36,7 @@ Ecosistema de automatización tech que ejecuta **16 workflows de GitHub Actions*
 
 | Fase | Descripción | Frecuencia | Blog |
 |------|-------------|------------|------|
-| 🌐 **Scraping** | Recolección de datos de 547 fuentes | Cada hora / 6h / diario | [📖](https://blog-jorbencas.vercel.app/posts/instalacion-tech-pulse) |
+| 🌐 **Scraping** | Recolección de datos de 547 fuentes | Cada hora | [📖](https://blog-jorbencas.vercel.app/posts/instalacion-tech-pulse) |
 | 🤖 **IA** | Procesamiento con Gemini (resúmenes, traducción) | En cada scraping | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
 | 📤 **Publicación** | Distribución multicanal (Email, Telegram, Dashboard) | Diario / cada 30min | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
 | 💡 **Tips** | Contenido generado con IA (708 tips, 80 categorías) | Cada 3 horas | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
@@ -189,13 +188,12 @@ public/                       🌐 Landing + Timeline + Dashboard + Tools
 
 ---
 
-## 🤖 GitHub Actions — 16 Workflows
+## 🤖 GitHub Actions — 15 Workflows
 
 | Workflow | Horario | Descripción |
 |----------|---------|-------------|
 | `scraper_workflow` | Sáb 07:00 UTC | Recap semanal + portadas → PR al blog |
-| `scrape_hourly` | Cada hora | Scraping ligero (RSS + quick sources) |
-| `scrape_6h` | Cada 6 horas | Scraping estándar + auto-detección IA |
+| `scrape_all` | Cada hora | Scraping completo (light + standard + AI tools + concepts) |
 | `daily_resources` | Diario 06:00 UTC | Scraping herramientas + gestión resources.mdx |
 | `daily_content` | Cada 3 horas | Tips IT + Herramientas IA via Telegram |
 | `daily_saludo` | Cada 3 horas | Imágenes Buenos días/noches |
