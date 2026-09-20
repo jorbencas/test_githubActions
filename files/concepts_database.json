@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 102,
+    "total_concepts": 103,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -15,7 +15,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-20T15:15:57.333295"
+    "last_scraped": "2026-09-20T18:27:58.959137"
   },
   "concepts": [
     {
@@ -1879,6 +1879,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-20T15:15:18.950511"
+    },
+    {
+      "title": "Herramientas del ecosistema Rust: clippy avanzado, cargo-audit, flamegraph y miri",
+      "summary": "El ecosistema de herramientas de Rust va mucho más allá del compilador y Cargo.clippycon sus lints avanzados,cargo-auditpara vulnerabilidades conocidas,cargo-flamegraphpara perfilar CPU,miripara detec",
+      "explanation": "El ecosistema de herramientas de Rust va mucho más allá del compilador y Cargo.clippycon sus lints avanzados,cargo-auditpara vulnerabilidades conocidas,cargo-flamegraphpara perfilar CPU,miripara detectar comportamiento indefinido ycargo-denypara política de dependencias forman juntos un pipeline de calidad que pocos lenguajes pueden igualar.clippy avanzado: pedantic, nursery y allow selectivo clippyincluye grupos de lints con distintos niveles de agresividad. El grupoclippy::pedanticactiva advertencias útiles pero que pueden generar falsos positivos;clippy::nurseryañade lints experimentales. Puedes silenciar lints individuales con#[allow]donde el aviso no es aplicable.// Activar grupos completos desde la línea de comandos:\n// cargo clippy -- -W clippy::pedantic -W clippy::nursery\n\n// O en código (afecta a todo el crate):\n#![warn(clippy::pedantic)]\n#![warn(clippy::nursery)]\n#![allow(clippy::module_name_repetitions)] // silenciar un lint concreto\n\n// Lints útiles de pedantic:\nfn suma_positivos(v: &[i32]) -> i32 {\n    // clippy::pedantic sugiere usar filter_map en lugar de filter+map\n    v.iter().filter(|&&x| x > 0).sum()\n    // Sugerencia: v.iter().filter(|&&x| x > 0).sum()\n}\n\n// #[allow] localizado solo donde hace falta:\n#[allow(clippy::cast_possible_truncation)]\nfn truncar_a_u8(n: u32) -> u8 {\n    n as u8 // clippy lo marcaría sin el allow\n}\n\n// clippy::nursery: redundant_clone, cognitive_complexity...\nfn procesar(datos: Vec<String>) -> Vec<String> {\n    datos.into_iter()\n   ",
+      "code_example": "// Activar grupos completos desde la línea de comandos:\n// cargo clippy -- -W clippy::pedantic -W clippy::nursery\n\n// O en código (afecta a todo el crate):\n#![warn(clippy::pedantic)]\n#![warn(clippy::nursery)]\n#![allow(clippy::module_name_repetitions)] // silenciar un lint concreto\n\n// Lints útiles de pedantic:\nfn suma_positivos(v: &[i32]) -> i32 {\n    // clippy::pedantic sugiere usar filter_map en lugar de filter+map\n    v.iter().filter(|&&x| x > 0).sum()\n    // Sugerencia: v.iter().filter(|&&x| x > 0).sum()\n}\n\n// #[allow] localizado solo donde hace falta:\n#[allow(clippy::cast_possible_truncation)]\nfn truncar_a_u8(n: u32) -> u8 {\n    n as u8 // clippy lo marcaría sin el allow\n}\n\n// clippy::nursery: redundant_clone, cognitive_complexity...\nfn procesar(datos: Vec<String>) -> Vec<String> {\n    datos.into_iter()\n         .filter(|s| !s.is_empty())\n         .map(|s| s.to_uppercase())\n         .collect()\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-20T18:27:07.345321"
     }
   ]
 }
