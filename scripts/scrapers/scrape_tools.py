@@ -83,7 +83,7 @@ async def run():
             return await scr.extraer(session, nombre, info)
 
     connector = aiohttp.TCPConnector(ssl=False)
-    async with aiohttp.ClientSession(connector=connector) as session:
+    async with aiohttp.ClientSession(connector=connector, max_field_size=65536, max_line_size=65536) as session:
         tareas = [con_semaforo(session, nombre, info) for nombre, info in tool_sources.items()]
         resultados_agrupados = await asyncio.gather(*tareas)
 

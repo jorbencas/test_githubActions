@@ -290,7 +290,7 @@ async def run():
     skills_path = os.path.join(CONFIG["FOLDER"], AGENT_SKILLS_FILENAME)
     
     connector = aiohttp.TCPConnector(ssl=False)
-    async with aiohttp.ClientSession(connector=connector) as session:
+    async with aiohttp.ClientSession(connector=connector, max_field_size=65536, max_line_size=65536) as session:
         skills_sh, agentskills, github, mattpocock = await asyncio.gather(
             fetch_skills_sh(session),
             fetch_agentskills_io(session),

@@ -199,7 +199,7 @@ async def run():
             pass
 
     connector = aiohttp.TCPConnector(ssl=False)
-    async with aiohttp.ClientSession(connector=connector) as session:
+    async with aiohttp.ClientSession(connector=connector, max_field_size=65536, max_line_size=65536) as session:
         hf_models, hf_spaces, gh_repos = await asyncio.gather(
             fetch_hf_models(session),
             fetch_hf_spaces(session),

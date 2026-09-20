@@ -66,7 +66,7 @@ async def run():
     connector = aiohttp.TCPConnector(ssl=False)
     news_sources = _filtrar_fuentes_por_tier(args.tier)
 
-    async with aiohttp.ClientSession(connector=connector) as session:
+    async with aiohttp.ClientSession(connector=connector, max_field_size=65536, max_line_size=65536) as session:
         tareas = [con_semaforo(session, nombre, info) for nombre, info in news_sources.items()]
         resultados_agrupados = await asyncio.gather(*tareas)
 
