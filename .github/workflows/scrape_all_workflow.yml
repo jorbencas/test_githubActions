@@ -73,6 +73,7 @@ jobs:
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add files/noticias_historico.json files/avatars_cache.json files/ai_tools_candidates.json files/concepts_database.json
-          git diff --quiet --cached || git commit -m "[bot] scrape hourly (tier standard + AI tools + concepts)"
+          git diff --quiet --cached || git commit -m "[bot] 1h scrape (light + standard + AI tools + concepts)"
+          git checkout -- .
           git pull --rebase origin master
           git push origin master
