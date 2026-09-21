@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 104,
+    "total_concepts": 106,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -10,12 +10,13 @@
       "devops",
       "habilidades",
       "interfaces",
+      "multithread",
       "patrones_diseno",
       "poo",
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-21T08:29:34.447890"
+    "last_scraped": "2026-09-21T15:35:14.636000"
   },
   "concepts": [
     {
@@ -1915,6 +1916,42 @@
       ],
       "cat": "rag_ai",
       "scraped_at": "2026-09-21T08:28:56.046614"
+    },
+    {
+      "title": "Swift en el servidor: Swift NIO, Vapor en Linux, Docker y despliegue en producción",
+      "summary": "Swift en el servidor es una realidad madura en 2026. El ecosistema se apoya en dos pilares: Swift NIO, el framework de I/O asíncrono de bajo nivel creado por Apple, y Vapor, el framework web de alto n",
+      "explanation": "Swift en el servidor es una realidad madura en 2026. El ecosistema se apoya en dos pilares: Swift NIO, el framework de I/O asíncrono de bajo nivel creado por Apple, y Vapor, el framework web de alto nivel más adoptado que corre sobre NIO. Ambos funcionan en Linux, lo que abre la puerta a despliegues en contenedores Docker con imágenes de apenas 80 MB.Swift NIO: el motor asíncrono Swift NIO es un framework de I/O sin bloqueo basado en el modelo de event loop. Raramente se usa directamente en aplicaciones; es la base sobre la que corren Vapor, gRPC en Swift y el cliente HTTP de AWS SDK for Swift:import NIO\nimport NIOPosix\n\n// Servidor TCP mínimo con NIO\nlet grupo = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)\ndefer { try? grupo.syncShutdownGracefully() }\n\nlet arranque = ServerBootstrap(group: grupo)\n    .serverChannelOption(.backlog, value: 256)\n    .serverChannelOption(.socketOption(.so_reuseaddr), value: 1)\n    .childChannelInitializer { canal in\n        canal.pipeline.addHandlers([\n            ByteToMessageHandler(LineBasedFrameDecoder()),\n            MiManejador()\n        ])\n    }\n\nlet canal = try arranque.bind(host: \"0.0.0.0\", port: 8080).wait()\nprint(\"Servidor escuchando en (canal.localAddress!)\")\ntry canal.closeFuture.wait() El antipatrón más frecuente con NIO es bloquear el EventLoop con trabajo síncrono pesado. Nunca hagas llamadas síncronas a base de datos, I/O de ficheros o computación intensiva desde el loop:// MAL: bloquea el EventLoop\neventLoop.e",
+      "code_example": "import NIO\nimport NIOPosix\n\n// Servidor TCP mínimo con NIO\nlet grupo = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)\ndefer { try? grupo.syncShutdownGracefully() }\n\nlet arranque = ServerBootstrap(group: grupo)\n    .serverChannelOption(.backlog, value: 256)\n    .serverChannelOption(.socketOption(.so_reuseaddr), value: 1)\n    .childChannelInitializer { canal in\n        canal.pipeline.addHandlers([\n            ByteToMessageHandler(LineBasedFrameDecoder()),\n            MiManejador()\n        ])\n    }\n\nlet canal = try arranque.bind(host: \"0.0.0.0\", port: 8080).wait()\nprint(\"Servidor escuchando en (canal.localAddress!)\")\ntry canal.closeFuture.wait()",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "multithread"
+      ],
+      "cat": "multithread",
+      "scraped_at": "2026-09-21T15:34:34.185616"
+    },
+    {
+      "title": "Un servidor MCP, siete catálogos Iceberg: lo que hace falta para llegar a cada uno",
+      "summary": "Apache Iceberg resolvió hace tiempo el problema de tener tablas gigantes en un almacén de objetos sin perder consistencia. Lo que todavía generaba dudas era otra cosa: si construyes un servidorMCPpara",
+      "explanation": "Apache Iceberg resolvió hace tiempo el problema de tener tablas gigantes en un almacén de objetos sin perder consistencia. Lo que todavía generaba dudas era otra cosa: si construyes un servidorMCPpara que un agente lea esas tablas, ¿hace falta escribir un servidor distinto por cada catálogo, o basta con uno solo? Un desarrollador que firma comoxbill9se puso a comprobarlo con siete catálogos reales a la vez, y publicó el código y los resultados en abierto. El repositorio se llamalakehouse-iceberg-2026, y la pieza que nos interesa vive eniceberg-mcp-hosts/servers/iceberg_mcp.py: un servidor MCP de menos de lo que esperarías, sin el SDK oficial de MCP de por medio, que habla JSON-RPC línea a línea por stdin/stdout. Nada de dependencias que puedan romperse con el tiempo.Cuatro herramientas, todas de solo lectura El servidor expone exactamente cuatro tools, y las cuatro son de solo lectura, nada de escrituras:iceberg_list_tables todas las tablas del catálogo, comonamespace.tablaiceberg_describe_table columnas, particionado, snapshots y la ubicación del metadatoiceberg_count_rows el número exacto de filas, sacado del resumen del snapshoticeberg_scan_table unas cuantas filas de muestra, más un conteo exacto y el mínimo y máximo de una columna La gracia está en que el protocolo REST de Iceberg es el mismo lo mires donde lo mires, así que en teoría el mismo servidor debería funcionar contra cualquier catálogo que lo hable. La prueba consistió en comprobar justo eso, sin ningún mod",
+      "code_example": "CATALOG ERROR while scanning dbo.probe_table: ModuleNotFoundError: No module named 'adlfs'.\n\nCATALOG ERROR while scanning probe_ns.probe_table: ModuleNotFoundError: No module named 's3fs'.\n\nCATALOG ERROR while listing tables: MissingDependencyException: Missing Dependency:\nUsing the login credential provider requires an additional dependency.\nYou will need to pip install \"botocore[crt]\" before proceeding.",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-21T15:34:35.715776"
     }
   ]
 }
