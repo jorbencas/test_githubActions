@@ -1,12 +1,13 @@
 /**
  * Tech Pulse Dashboard — News Dashboard JavaScript
- * Renders news from JSON with lazy loading, infinite scroll, and filtering.
+ * Renders news + GitHub trending from JSON with lazy loading, infinite scroll, and filtering.
  */
 (function () {
   'use strict';
 
   var BATCH_SIZE = 50;
   var NEWS_JSON_URL = '/data/news.json';
+  var GITHUB_JSON_URL = '/data/github.json';
 
   var allNews = [];
   var filteredNews = [];
@@ -21,6 +22,7 @@
   var newsEnd = document.getElementById('news-end');
   var newsSearch = document.getElementById('news-search');
   var statsBar = document.getElementById('stats-bar');
+  var githubRanking = document.getElementById('github-ranking');
 
   function esc(s) {
     if (!s) return '';
@@ -135,6 +137,48 @@
       + '<div class="stat-card"><b>' + total + '</b><span>Mostrando</span></div>';
   }
 
+  function buildChannelFilters() {
+    var container = document.getElementById('news-channel-filters');
+    if (!container) return;
+    var counts = {};
+    allNews.forEach(function (item) {
+      var src = item.fn || '';
+      counts[src] = (counts[src] || 0) + 1;
+    });
+    var sorted = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; });
+    var html = '<button class="chip active" data-channel="all">Todos</button>';
+    sorted.forEach(function (src) {
+      html += '<button class="chip" data-channel="' + esc(src) + '">'
+        + '<img src="https://www.google.com/s2/favicons?domain=' + esc(src.toLowerCase().replace(/ /g, '')) + '&sz=32" class="chip-icon" alt="" width="14" height="14" loading="lazy">'
+        + esc(src) + ' (' + counts[src] + ')</button>';
+    });
+    container.innerHTML = html;
+    // Re-attach click handlers
+    var chips = container.querySelectorAll('.chip');
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var channel = chip.dataset.channel;
+        if (channel === 'all') {
+          activeChannels = [];
+          chips.forEach(function (c) { c.classList.remove('active'); });
+          chip.classList.add('active');
+        } else {
+          var allBtn = container.querySelector('.chip[data-channel="all"]');
+          if (allBtn) allBtn.classList.remove('active');
+          chip.classList.toggle('active');
+          activeChannels = [];
+          chips.forEach(function (c) {
+            if (c.classList.contains('active') && c.dataset.channel !== 'all') {
+              activeChannels.push(c.dataset.channel);
+            }
+          });
+          if (activeChannels.length === 0 && allBtn) allBtn.classList.add('active');
+        }
+        applyFilters();
+      });
+    });
+  }
+
   // ── Load news JSON ──
   function loadNews() {
     if (dataLoaded) return;
@@ -146,6 +190,7 @@
       .then(function (data) {
         allNews = data;
         filteredNews = data.slice();
+        buildChannelFilters();
         updateStats();
         newsLoading.style.display = 'none';
         appendNews();
@@ -183,37 +228,6 @@
     });
   }
 
-  // ── Channel chip filters ──
-  var chipContainers = document.querySelectorAll('.chip-container');
-  chipContainers.forEach(function (container) {
-    var chips = container.querySelectorAll('.chip');
-    chips.forEach(function (chip) {
-      chip.addEventListener('click', function () {
-        var channel = chip.dataset.channel;
-
-        if (channel === 'all') {
-          activeChannels = [];
-          chips.forEach(function (c) { c.classList.remove('active'); });
-          chip.classList.add('active');
-        } else {
-          var allBtn = container.querySelector('.chip[data-channel="all"]');
-          if (allBtn) allBtn.classList.remove('active');
-          chip.classList.toggle('active');
-          activeChannels = [];
-          chips.forEach(function (c) {
-            if (c.classList.contains('active') && c.dataset.channel !== 'all') {
-              activeChannels.push(c.dataset.channel);
-            }
-          });
-          if (activeChannels.length === 0 && allBtn) {
-            allBtn.classList.add('active');
-          }
-        }
-        applyFilters();
-      });
-    });
-  });
-
   // ── Load more button ──
   if (newsLoadMore) {
     newsLoadMore.addEventListener('click', function () {
@@ -236,37 +250,6 @@
     }, { rootMargin: '400px' });
     scrollObserver.observe(scrollSentinel);
   }
-
-  // ── Video search ──
-  var videoSearch = document.getElementById('video-search');
-  if (videoSearch) {
-    videoSearch.addEventListener('input', function (e) {
-      var query = e.target.value.toLowerCase();
-      document.querySelectorAll('.video-card').forEach(function (card) {
-        var title = (card.querySelector('.video-title') || {}).textContent || '';
-        var meta = (card.querySelector('.video-meta') || {}).textContent || '';
-        var match = title.toLowerCase().indexOf(query) !== -1 || meta.toLowerCase().indexOf(query) !== -1;
-        card.style.display = match ? '' : 'none';
-      });
-    });
-  }
-
-  // ── Multimedia tabs ──
-  var multimediaTabs = document.querySelectorAll('#multimedia-tabs .chip');
-  multimediaTabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      multimediaTabs.forEach(function (t) { t.classList.remove('active'); });
-      tab.classList.add('active');
-      var tabType = tab.dataset.tab;
-      document.querySelectorAll('.video-card').forEach(function (card) {
-        if (tabType === 'all') {
-          card.style.display = '';
-        } else {
-          card.style.display = card.dataset.type === tabType ? '' : 'none';
-        }
-      });
-    });
-  });
 
   // ── GitHub filter ──
   var githubFilter = document.getElementById('github-filter');
@@ -313,6 +296,34 @@
     });
   }
 
-  // ── Init: load news on DOM ready ──
+  // ── Load GitHub trending JSON ──
+  function loadGitHub() {
+    if (!githubRanking) return;
+    fetch(GITHUB_JSON_URL)
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        var fragment = document.createDocumentFragment();
+        data.forEach(function (item) {
+          var el = document.createElement('div');
+          el.className = 'github-item';
+          el.dataset.lang = item.lang || '';
+          el.innerHTML = '<span class="rank">#' + item.rank + '</span>'
+            + '<div class="github-info">'
+            + '<a href="' + esc(item.url) + '" target="_blank" rel="noopener" class="github-name">' + esc(item.name) + '</a>'
+            + '<span class="github-desc">' + esc(item.desc) + '</span>'
+            + '</div>'
+            + '<div class="github-stars">⭐ ' + item.stars.toLocaleString() + ' <span class="badge-lang">' + esc(item.lang) + '</span></div>';
+          fragment.appendChild(el);
+        });
+        githubRanking.innerHTML = '';
+        githubRanking.appendChild(fragment);
+      })
+      .catch(function (err) {
+        console.error('Error loading GitHub data:', err);
+      });
+  }
+
+  // ── Init: load news + GitHub on DOM ready ──
   loadNews();
+  loadGitHub();
 })();
