@@ -387,6 +387,32 @@ def render_github_ranking(herramientas: list) -> str:
 
 
 
+def generar_news_json(news_items: list, avatars: dict) -> None:
+    """Exporta noticias a JSON ligero para carga dinámica en el cliente."""
+    items_json = []
+    for item in news_items:
+        fuente = item.get(FUENTE_KEY, "")
+        items_json.append({
+            "t": item.get(TITULO_KEY, "Sin título"),
+            "e": item.get(ENLACE_KEY, "#"),
+            "f": _escape_html(fuente),
+            "fn": _norm_channel(fuente),
+            "ts": _item_timestamp(item),
+            "fp": item.get(FECHA_PUB_KEY, ""),
+            "c": item.get(CATEGORIA_KEY, ""),
+            "tp": item.get(TIPO_KEY, TIPO_VAL_NOTICIA),
+            "o": item.get(ORIGEN_KEY, ""),
+            "b": item.get("badge", ""),
+            "ic": _favicon_src(fuente, avatars),
+        })
+
+    data_dir = os.path.join("public", "data")
+    os.makedirs(data_dir, exist_ok=True)
+    with open(os.path.join(data_dir, "news.json"), "w", encoding="utf-8") as f:
+        json.dump(items_json, f, ensure_ascii=False, separators=(",", ":"))
+    logger.info(f"📦 news.json generado ({len(items_json)} items, {os.path.getsize(os.path.join(data_dir, 'news.json')) / 1024:.0f} KB)")
+
+
 def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen_ia):
     historial.sort(key=lambda x: x.get(TS_KEY, ""), reverse=True)
     herramientas_github = [
@@ -403,7 +429,9 @@ def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen
     stats_html = render_stats(historial)
     video_items = [n for n in historial if n.get(ID_VIDEO_KEY)]
     news_items = [n for n in historial if not n.get(ID_VIDEO_KEY)]
-    news_list_html = render_news_list(news_items, avatars_known)
+    # News: exportar a JSON para carga dinámica, HTML queda vacío
+    generar_news_json(news_items, avatars_known)
+    news_list_html = ""  # Shell vacío — JS renderiza desde news.json
     news_search_html = render_search_input("Buscar noticias...", "news-search")
     # Fuentes duales (url + yt) deben mostrar chips en ambas secciones
     dual_source_names = [name for name, info in FUENTES.items() if "url" in info and "yt" in info]

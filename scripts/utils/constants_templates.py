@@ -7,6 +7,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0a0604" media="(prefers-color-scheme: dark)">
     <meta name="author" content="Jorge Beneyto Castelló">
     <meta name="description" content="Tech Pulse Dashboard — Resumen inteligente de noticias tech, v\u00eddeos y contenido curado por Jorge Beneyto Castell\u00f3. Actualizado diariamente con IA.">
     <meta property="og:title" content="Tech Pulse Dashboard — Jorge Beneyto Castell\u00f3">
@@ -20,6 +22,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <meta id="api-base-token" content="{downloader_api_token}">
     <link rel="canonical" href="https://jorbencasdownloaderdocument.surge.sh">
     <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <title>Tech Pulse Dashboard — Jorge Beneyto Castell\u00f3</title>
     <script type="application/ld+json">
     {{
@@ -64,6 +69,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             <div id="news-channel-filters" class="chip-container">{news_channel_filters_html}</div>
         </details>
         <ul id="news-list" class="news-list">{news_list_html}</ul>
+        <div id="news-loading" class="news-loading" style="display:none;">
+            <div class="skeleton-item"></div><div class="skeleton-item"></div><div class="skeleton-item"></div>
+            <div class="skeleton-item"></div><div class="skeleton-item"></div><div class="skeleton-item"></div>
+        </div>
+        <button id="news-load-more" class="load-more-btn" style="display:none;">Cargar más noticias</button>
+        <div id="news-end" class="news-end" style="display:none;">No hay más noticias</div>
 
         <h2>\U0001f3ac Multimedia</h2>
         <div class="filter-section" id="multimedia-filter-section">
