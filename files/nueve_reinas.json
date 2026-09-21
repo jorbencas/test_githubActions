@@ -1226,5 +1226,29 @@
     "relevancia": 2,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Netflix va más allá de 'Los Bridgerton': la miniserie polaca de 6 episodios que te hará viajar a la Varsovia del siglo XIX",
+    "url": "https://www.cinemania.es/cinemania/series/netflix-bridgerton-miniserie-polaca-varsovia-siglo-xix_7038141_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-21T12:38:22.379551",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Qué ver hoy en Netflix, Amazon Prime Video y otras plataformas: domingo 20 de septiembre de 2026",
+    "url": "https://www.cinemania.es/cinemania/series/que-ver-hoy-netflix-amazon-prime-video-otras-plataformas-domingo-20-septiembre-2026_7038142_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-21T12:38:22.379591",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "video",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
