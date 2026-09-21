@@ -1,5 +1,31 @@
 [
     {
+        "titulo": "Consejos y aprendizajes de IAEntendiendo la IA multimodal: El futuro de combinar texto, imagen y vozLa IA multimodal está revolucionando cómo interactuamos con la tecnología al combinar texto, imágenes y voz para experiencias más ricas. Este artículo explora sus aplicaciones y desafíos.September 20, 2026",
+        "enlace": "https://cleverai.app/es/blog/entendiendo-la-ia-multimodal-futuro-combinando-texto-imagen-voz",
+        "fuente": "CleverAI",
+        "tipo": "noticia",
+        "f": "21/09",
+        "fecha_publicacion": "2026-09-20T23:02:32.166Z",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "https://cleverai.app/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgenius-ai-app-test-1.appspot.com%2Fblog%2Ffeatured%2FlJOcn9K0qRcad3QlgM-NT.webp&w=3840&q=75",
+        "fecha_real": "21/09/2026",
+        "ts": "2026-09-21T02:46:47.576529"
+    },
+    {
+        "titulo": "Grounded Skill Synthesis from Code at Scale for Agentic Intelligence",
+        "enlace": "https://huggingface.co/papers/2609.05571",
+        "fuente": "HuggingFace Papers",
+        "tipo": "noticia",
+        "f": "21/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "https://cdn-avatars.huggingface.co/v1/production/uploads/68e9c86d2551cb38000fa77c/qG2KcieHqYFuWXi2-weuP.jpeg",
+        "fecha_real": "21/09/2026",
+        "ts": "2026-09-21T02:46:49.403488"
+    },
+    {
         "titulo": "Errores comunes sobre IA en todos lados",
         "enlace": "https://blog.donweb.com/ia-todos-lados-2026/#errores-comunes-sobre-ia-en-todos-lados",
         "fuente": "DonWeb IA",
