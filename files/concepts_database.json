@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 103,
+    "total_concepts": 104,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -15,7 +15,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-21T02:47:46.460869"
+    "last_scraped": "2026-09-21T08:29:34.447890"
   },
   "concepts": [
     {
@@ -1897,6 +1897,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-20T18:27:07.345321"
+    },
+    {
+      "title": "C++ y sus rarezas de diseño: por qué la compatibilidad hacia atrás lo explica casi todo",
+      "summary": "Hace unas semanas corrió por YouTube un vídeo de más de cincuenta minutos con un título que no deja lugar a dudas: «el peor lenguaje de programación de la historia». No hacía falta ver la miniatura pa",
+      "explanation": "Hace unas semanas corrió por YouTube un vídeo de más de cincuenta minutos con un título que no deja lugar a dudas: «el peor lenguaje de programación de la historia». No hacía falta ver la miniatura para saber de qué lenguaje hablaba. Es C++, otra vez. El vídeo genera la reacción de siempre: los que llevan años con C++ asienten a la mitad de las cosas, y los que vienen de otro lenguaje alucinan con el resto. Casi nadie para a pensar por qué un lenguaje que lleva desde 1985 en manos de algunas de las mentes más capaces de la industria sigue arrastrando decisiones que parecen sacadas de una broma. No es que a nadie se le haya ocurrido arreglarlas, es que arreglarlas costaría más de lo que aportan.const empezó llamándose readonly Coge cualquier fragmento de C++ moderno y vas a encontrarconstpor todas partes. Lo curioso es que Bjarne Stroustrup no lo llamó así al principio. En sus notas sobre la historia del lenguaje cuenta que sus primeros ejemplos usaban la palabrareadonly, y que en algún momento decidió queconstquedaba mejor en frases comoconst int c = 10;que la alternativa conreadonlydelante. El cambio se hizo con una sustitución global en el código fuente de C with Classes, el antecesor directo de C++, allá por 1981. Lo que parece un detalle de nombres esconde algo más interesante:constnació con dos trabajos distintos a la vez, marcar constantes simbólicas sin recurrir a macros del preprocesador y declarar que un objeto en memoria no se puede tocar. C adoptó la palabra más ta",
+      "code_example": "int valor = 10;\n\nconst int* p1 = &valor;   // el VALOR al que apunta no se puede tocar\nint* const p2 = &valor;   // el PUNTERO no se puede redirigir\n\n*p1 = 20;      // error de compilación\np1 = nullptr;  // esto sí compila, el puntero puede cambiar\n\n*p2 = 20;      // esto compila, el valor sí puede cambiar\np2 = nullptr;  // error de compilación, el puntero es fijo",
+      "use_cases": [],
+      "difficulty": 3,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "rag_ai"
+      ],
+      "cat": "rag_ai",
+      "scraped_at": "2026-09-21T08:28:56.046614"
     }
   ]
 }
