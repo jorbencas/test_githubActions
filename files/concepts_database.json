@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 106,
+    "total_concepts": 107,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -16,7 +16,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-21T15:35:14.636000"
+    "last_scraped": "2026-09-21T20:15:27.400766"
   },
   "concepts": [
     {
@@ -1952,6 +1952,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-21T15:34:35.715776"
+    },
+    {
+      "title": "thiserror y anyhow en Rust: manejo de errores ergonómico para librerías y aplicaciones",
+      "summary": "El manejo de errores en Rust conResult<T, E>y el operador?es ergonómico, pero definir los tipos de error manualmente resulta tedioso. Las bibliotecasthiserroryanyhowson las dos soluciones de facto:thi",
+      "explanation": "El manejo de errores en Rust conResult<T, E>y el operador?es ergonómico, pero definir los tipos de error manualmente resulta tedioso. Las bibliotecasthiserroryanyhowson las dos soluciones de facto:thiserrorpara librerías que exponen errores tipados,anyhowpara aplicaciones y binarios que priorizan la propagación con contexto sobre la tipificación exhaustiva.thiserror: errores tipados para librerías thiserrorgenera implementaciones destd::error::Error,DisplayyFroma partir de un derive macro. El resultado es un enum de error limpio y bien documentado que los usuarios de tu librería pueden inspeccionar y manejar de forma exhaustiva.// [dependencies]\n// thiserror = \"2\"\n\nuse thiserror::Error;\nuse std::path::PathBuf;\n\n#[derive(Error, Debug)]\npub enum ErrorApp {\n    #[error(\"archivo no encontrado: {0}\")]\n    ArchivoNoEncontrado(PathBuf),\n\n    #[error(\"error de parseo en línea {linea}: {mensaje}\")]\n    ErrorParseo { linea: usize, mensaje: String },\n\n    #[error(\"valor fuera de rango: {valor} no está en [{min}, {max}]\")]\n    ValorFueraDeRango { valor: f64, min: f64, max: f64 },\n\n    #[error(\"error de E/S\")]\n    Io(#[from] std::io::Error),\n\n    #[error(\"error de red\")]\n    Red(#[source] Box<dyn std::error::Error + Send + Sync>),\n}\n\nfn leer_config(path: &std::path::Path) -> Result<String, ErrorApp> {\n    std::fs::read_to_string(path)\n        .map_err(|e| if e.kind() == std::io::ErrorKind::NotFound {\n            ErrorApp::ArchivoNoEncontrado(path.to_owned())\n        } else {\n            E",
+      "code_example": "// [dependencies]\n// thiserror = \"2\"\n\nuse thiserror::Error;\nuse std::path::PathBuf;\n\n#[derive(Error, Debug)]\npub enum ErrorApp {\n    #[error(\"archivo no encontrado: {0}\")]\n    ArchivoNoEncontrado(PathBuf),\n\n    #[error(\"error de parseo en línea {linea}: {mensaje}\")]\n    ErrorParseo { linea: usize, mensaje: String },\n\n    #[error(\"valor fuera de rango: {valor} no está en [{min}, {max}]\")]\n    ValorFueraDeRango { valor: f64, min: f64, max: f64 },\n\n    #[error(\"error de E/S\")]\n    Io(#[from] std::io::Error),\n\n    #[error(\"error de red\")]\n    Red(#[source] Box<dyn std::error::Error + Send + Sync>),\n}\n\nfn leer_config(path: &std::path::Path) -> Result<String, ErrorApp> {\n    std::fs::read_to_string(path)\n        .map_err(|e| if e.kind() == std::io::ErrorKind::NotFound {\n            ErrorApp::ArchivoNoEncontrado(path.to_owned())\n        } else {\n            ErrorApp::Io(e)\n        })\n}\n\nfn parsear_porcentaje(s: &str, linea: usize) -> Result<f64, ErrorApp> {\n    let v: f64 = s.trim().parse().map_err(|_| ErrorApp::ErrorParseo {\n        linea,\n        mensaje: format!(\"'{s}' no es un número\"),\n    })?;\n    if v < 0.0 || v > 100.0 {\n        return Err(ErrorApp::ValorFueraDeRango { valor: v, min: 0.0, max: 100.0 });\n    }\n    Ok(v)\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-21T20:14:51.000752"
     }
   ]
 }
