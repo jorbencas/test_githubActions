@@ -1250,5 +1250,41 @@
     "relevancia": 2,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Cuándo estrena Netflix la película de David Fincher con Brad Pitt y guion de Tarantino: 'Las nuevas desventuras de Cliff Booth",
+    "url": "https://www.cinemania.es/cinemania/noticias/cliff-booth-fecha-estreno-netflix-pelicula-fincher-tarantino-brad-pitt_7039423_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-21T21:55:45.987083",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "La miniserie de Netflix de la que todos hablan en San Sebastián: 'Mis muertos tristes' es terror social sin censura",
+    "url": "https://www.cinemania.es/cinemania/series/mis-muertos-tristes-miniserie-netflix-festival-san-sebastian-terror-social_7039477_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-21T21:55:45.987125",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Stephen King alucina con la miniserie de terror que llega a Netflix esta semana: \"¡Qué idea tan genial!\"",
+    "url": "https://www.cinemania.es/cinemania/series/stephen-king-miniserie-terror-muertos-tristes-netflix-estreno_7039369_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-21T21:55:45.987157",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
