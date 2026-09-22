@@ -24,8 +24,8 @@
   inset: 0;
   z-index: 0;
   background-image:
-    linear-gradient(rgba(230,126,34,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(230,126,34,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(59,130,246,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.05) 1px, transparent 1px);
   background-size: 60px 60px;
   mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 70%);
   -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 30%, transparent 70%);
@@ -39,7 +39,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), var(--accent-hover), transparent);
+  background: linear-gradient(90deg, transparent, #3b82f6, #60a5fa, transparent);
   z-index: 100;
   animation: scan 4s linear infinite;
   opacity: 0.4;
