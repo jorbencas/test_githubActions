@@ -627,5 +627,29 @@
     "relevancia": 2,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "Filmin en octubre 2026: Tarantino, Jonás Trueba y un mapa de personajes en crisis",
+    "url": "https://www.escribiendocine.com/noticias/2026/09/22/25351-filmin-en-octubre-2026-tarantino-jonas-trueba-y-un-mapa-de-personajes-en-crisis",
+    "fecha_pub": "Mon, 21 Sep 2026 17:00:00 GMT",
+    "fecha_ts": "2026-09-22T21:11:42.498871",
+    "medio": "EscribiendoCine",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
+  },
+  {
+    "titulo": "TAI BOX en la CINETECA con Jonás Trueba y 'Los Ilusos'",
+    "url": "https://www.youtube.com/watch?v=hbWYaao7laQ",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-22T21:11:45.013608",
+    "medio": "Escuela Universitaria de Artes TAI",
+    "imagen": "https://i.ytimg.com/vi/hbWYaao7laQ/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
