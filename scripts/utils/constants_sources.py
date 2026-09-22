@@ -642,6 +642,19 @@ FUENTES = {
     "Slashdot": {"rss": "http://rss.slashdot.org/Slashdot/slashdotMain", "quick": True},
     # ── Herramientas / Testing ──
     "Maestro Blog": {"rss": "https://maestro.dev/blog/rss.xml", "quick": True, "tipo": "herramienta"},
+    # ── AI Model Benchmarks / Leaderboards ──
+    "LMSYS Blog": {"rss": "https://lmsys.org/blog/feed.xml", "quick": True, "tipo": "noticia"},
+    "Artificial Analysis": {"url": "https://artificialanalysis.ai/", "selector": "a[href*='/leaderboards/'], a[href*='/blog/']", "tipo": "noticia"},
+    "OpenRouter Blog": {"url": "https://openrouter.ai/blog", "selector": "article a[href]", "tipo": "noticia"},
+    "Hugging Face Papers": {"rss": "https://huggingface.co/papers/rss", "quick": True, "tipo": "noticia"},
+    "LiveBench": {"url": "https://livebench.ai/", "selector": "a[href]", "tipo": "noticia"},
+    "Papers With Code": {"rss": "https://paperswithcode.com/rss", "quick": True, "tipo": "noticia"},
+    # ── Recursos / Herramientas gratuitas ──
+    "It's FOSS": {"rss": "https://itsfoss.com/feed/", "quick": True, "tipo": "herramienta"},
+    "Free for Dev": {"url": "https://free-for.dev/", "selector": "li > a[href]", "tipo": "recurso_blog"},
+    "UptimeRobot Blog": {"rss": "https://blog.uptimerobot.com/rss/", "quick": True, "tipo": "herramienta"},
+    "CallMeBot": {"url": "https://www.callmebot.com/", "selector": "a[href*='/blog/'], article a[href]", "tipo": "herramienta"},
+    "Awesome Self Hosted": {"url": "https://github.com/awesome-selfhosted/awesome-selfhosted", "selector": "li > a[href]", "tipo": "recurso_blog"},
     # ── Directorios de Herramientas / Productos ──
     "Product Hunt": {"rss": "https://www.producthunt.com/feed", "quick": True, "tipo": "herramienta"},
     "TLDR Tech": {"rss": "https://tldr.tech/api/rss/tech", "quick": True},
