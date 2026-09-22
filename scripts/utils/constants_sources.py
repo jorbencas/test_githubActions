@@ -389,6 +389,9 @@ FUENTES = {
     "DeepSeek": {"url": "https://deepseek.com/blog", "selector": "article h2 a"},
     "Qwen": {"url": "https://qwen.readthedocs.io/en/latest/", "selector": "article h2 a"},
     "AI21 Labs": {"url": "https://www.ai21.com/blog", "selector": "article h2 a"},
+    # ── Decision Models / System One (Jev, Kev) ──
+    "TypeSafe AI Blog": {"url": "https://typesafe.ai/blog", "selector": "article a[href]", "tipo": "noticia"},
+    "Kev (open-source Jev)": {"url": "https://github.com/jaredpalmer/kev", "selector": "article a[href]", "tipo": "herramienta"},
     # ── Más fuentes IA y tecnología ──
     "The Decoder": {"url": "https://the-decoder.com/", "selector": "article a[href]"},
     "MarkTechPost": {"url": "https://www.marktechpost.com/", "selector": "h3 a[href]"},
