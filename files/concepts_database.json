@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 108,
+    "total_concepts": 109,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -16,7 +16,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-22T13:51:06.774149"
+    "last_scraped": "2026-09-22T17:55:34.131087"
   },
   "concepts": [
     {
@@ -1988,6 +1988,24 @@
       ],
       "cat": "interfaces",
       "scraped_at": "2026-09-22T13:50:24.119473"
+    },
+    {
+      "title": "tracing en Rust: logging estructurado, spans, eventos y subscribers con tracing-subscriber",
+      "summary": "tracinges la biblioteca de observabilidad estándar en el ecosistema Rust async. A diferencia del logging tradicional basado en líneas de texto,tracingregistra eventos estructurados con campos tipados ",
+      "explanation": "tracinges la biblioteca de observabilidad estándar en el ecosistema Rust async. A diferencia del logging tradicional basado en líneas de texto,tracingregistra eventos estructurados con campos tipados y agrupa el trabajo relacionado en spans con inicio y fin medibles. Esto permite correlacionar eventos en sistemas con múltiples hilos o tareas async concurrentes.Eventos y campos tipados Los eventos entracingse registran con las macrostrace!,debug!,info!,warn!yerror!. Los campos pueden ser cualquier tipo que implementefmt::Debugo los traits de tracing, y se pasan como pares clave-valor.// [dependencies]\n// tracing = \"0.1\"\n// tracing-subscriber = { version = \"0.3\", features = [\"env-filter\", \"json\"] }\n\nuse tracing::{info, warn, error, debug};\n\nfn procesar_pedido(id: u64, importe: f64) -> Result<String, String> {\n    debug!(pedido_id = id, importe = importe, \"iniciando procesamiento\");\n\n    if importe <= 0.0 {\n        warn!(pedido_id = id, importe = importe, \"importe inválido\");\n        return Err(format!(\"importe {importe} inválido\"));\n    }\n\n    if importe > 10_000.0 {\n        info!(pedido_id = id, importe = importe, \"pedido de alto valor, requiere revisión\");\n    }\n\n    Ok(format!(\"Pedido {id} procesado: {importe:.2}\"))\n}\n\nfn main() {\n    tracing_subscriber::fmt::init(); // formato texto simple a stderr\n\n    match procesar_pedido(1001, 250.0) {\n        Ok(msg) => info!(mensaje = msg, \"pedido completado\"),\n        Err(e) => error!(error = e, \"fallo en pedido\"),\n    }\n    let _ =",
+      "code_example": "// [dependencies]\n// tracing = \"0.1\"\n// tracing-subscriber = { version = \"0.3\", features = [\"env-filter\", \"json\"] }\n\nuse tracing::{info, warn, error, debug};\n\nfn procesar_pedido(id: u64, importe: f64) -> Result<String, String> {\n    debug!(pedido_id = id, importe = importe, \"iniciando procesamiento\");\n\n    if importe <= 0.0 {\n        warn!(pedido_id = id, importe = importe, \"importe inválido\");\n        return Err(format!(\"importe {importe} inválido\"));\n    }\n\n    if importe > 10_000.0 {\n        info!(pedido_id = id, importe = importe, \"pedido de alto valor, requiere revisión\");\n    }\n\n    Ok(format!(\"Pedido {id} procesado: {importe:.2}\"))\n}\n\nfn main() {\n    tracing_subscriber::fmt::init(); // formato texto simple a stderr\n\n    match procesar_pedido(1001, 250.0) {\n        Ok(msg) => info!(mensaje = msg, \"pedido completado\"),\n        Err(e) => error!(error = e, \"fallo en pedido\"),\n    }\n    let _ = procesar_pedido(1002, -5.0);\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-22T17:54:51.328504"
     }
   ]
 }
