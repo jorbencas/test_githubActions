@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 107,
+    "total_concepts": 108,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -16,7 +16,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-22T08:10:14.419969"
+    "last_scraped": "2026-09-22T13:51:06.774149"
   },
   "concepts": [
     {
@@ -1970,6 +1970,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-21T20:14:51.000752"
+    },
+    {
+      "title": "Swift OpenAPI Generator: generar cliente y servidor a partir de una spec OpenAPI",
+      "summary": "Swift OpenAPI Generator es el plugin oficial de Apple para generar código Swift seguro en tipos a partir de una especificación OpenAPI 3.0 (YAML o JSON). El enfoquespec-firstinvierte el flujo habitual",
+      "explanation": "Swift OpenAPI Generator es el plugin oficial de Apple para generar código Swift seguro en tipos a partir de una especificación OpenAPI 3.0 (YAML o JSON). El enfoquespec-firstinvierte el flujo habitual: primero defines el contrato de la API y después generas el cliente o el servidor automáticamente. El resultado es que cliente y servidor están siempre sincronizados con la spec.Añadir el plugin como dependencia SPM El generador se integra como plugin de Swift Package Manager. Al construir el paquete, genera el código Swift automáticamente:// Package.swift\n// swift-tools-version: 5.9\nimport PackageDescription\n\nlet package = Package(\n    name: \"MiProyecto\",\n    platforms: [.macOS(.v13), .iOS(.v16)],\n    dependencies: [\n        .package(url: \"https://github.com/apple/swift-openapi-generator\", from: \"1.0.0\"),\n        .package(url: \"https://github.com/apple/swift-openapi-runtime\", from: \"1.0.0\"),\n        .package(url: \"https://github.com/apple/swift-openapi-urlsession\", from: \"1.0.0\"),\n        // Para el servidor con Vapor:\n        .package(url: \"https://github.com/swift-server/swift-openapi-vapor\", from: \"1.0.0\"),\n    ],\n    targets: [\n        .target(\n            name: \"MiCliente\",\n            dependencies: [\n                .product(name: \"OpenAPIRuntime\", package: \"swift-openapi-runtime\"),\n                .product(name: \"OpenAPIURLSession\", package: \"swift-openapi-urlsession\"),\n            ],\n            plugins: [\n                .plugin(name: \"OpenAPIGenerator\", package: \"swif",
+      "code_example": "// Package.swift\n// swift-tools-version: 5.9\nimport PackageDescription\n\nlet package = Package(\n    name: \"MiProyecto\",\n    platforms: [.macOS(.v13), .iOS(.v16)],\n    dependencies: [\n        .package(url: \"https://github.com/apple/swift-openapi-generator\", from: \"1.0.0\"),\n        .package(url: \"https://github.com/apple/swift-openapi-runtime\", from: \"1.0.0\"),\n        .package(url: \"https://github.com/apple/swift-openapi-urlsession\", from: \"1.0.0\"),\n        // Para el servidor con Vapor:\n        .package(url: \"https://github.com/swift-server/swift-openapi-vapor\", from: \"1.0.0\"),\n    ],\n    targets: [\n        .target(\n            name: \"MiCliente\",\n            dependencies: [\n                .product(name: \"OpenAPIRuntime\", package: \"swift-openapi-runtime\"),\n                .product(name: \"OpenAPIURLSession\", package: \"swift-openapi-urlsession\"),\n            ],\n            plugins: [\n                .plugin(name: \"OpenAPIGenerator\", package: \"swift-openapi-generator\")\n            ]\n        )\n    ]\n)",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "interfaces"
+      ],
+      "cat": "interfaces",
+      "scraped_at": "2026-09-22T13:50:24.119473"
     }
   ]
 }

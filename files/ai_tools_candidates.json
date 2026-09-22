@@ -1,5 +1,18 @@
 [
     {
+        "titulo": "google/gemma-4-26B-A4B-it",
+        "enlace": "https://huggingface.co/google/gemma-4-26B-A4B-it",
+        "descripcion": "[image-text-to-text] transformers, safetensors, gemma4 — by ",
+        "lenguaje": "Python",
+        "estrellas": "1535",
+        "fuente": "HuggingFace Models",
+        "tipo": "herramienta",
+        "_downloads": 10293404,
+        "_likes": 1535,
+        "_pipeline": "image-text-to-text",
+        "_source_type": "hf_model"
+    },
+    {
         "titulo": "unsloth/Qwen3.8-27B-GGUF",
         "enlace": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF",
         "descripcion": "[] gguf, qwen3_5, unsloth — by ",
