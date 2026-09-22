@@ -1,5 +1,44 @@
 [
     {
+        "titulo": "Pese a los llamamientos para frenar el ritmo, Anthropic y OpenAI lanzan nuevos modelos de inteligencia artificial",
+        "enlace": "https://www.elmundo.es/tecnologia/2026/09/22/6ab2f298e4d4d806778b45a3.html",
+        "fuente": "El Mundo Tecnología",
+        "tipo": "noticia",
+        "f": "22/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "22/09/2026",
+        "ts": "2026-09-22T23:25:06.878496"
+    },
+    {
+        "titulo": "Qualcomm divide la gama alta de Android en dos con los Snapdragon 8 Elite Gen 6 y 8 Elite Extreme Gen 6",
+        "enlace": "https://www.elmundo.es/tecnologia/2026/09/22/6ab2f8b921efa02b0c8b45ac.html",
+        "fuente": "El Mundo Tecnología",
+        "tipo": "noticia",
+        "f": "22/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "⚡ Hardware",
+        "imagen_url_original": "",
+        "fecha_real": "22/09/2026",
+        "ts": "2026-09-22T23:25:06.880155"
+    },
+    {
+        "titulo": "#531 AI labs shipped agents before agreeing how to report failures",
+        "enlace": "https://aiweekly.co/issues/ai-labs-shipped-agents-before-agreeing-how-to-report",
+        "fuente": "AI Weekly",
+        "tipo": "noticia",
+        "f": "22/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "22/09/2026",
+        "ts": "2026-09-22T23:25:13.629340"
+    },
+    {
         "titulo": "Monté mi propia nube con este pequeño servidor",
         "enlace": "https://www.youtube.com/watch?v=P6Mr5c0T1DQ",
         "fuente": "Midudev",
