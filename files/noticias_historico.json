@@ -1,5 +1,47 @@
 [
     {
+        "titulo": "¿Cómo portar un tema de blog de Jekyll a Python: Lecciones de haberlo hecho realmente?",
+        "enlace": "https://www.freecodecamp.org/news/how-to-build-a-reading-focused-blog-with-python-markdown-and-github-pages-for-free/",
+        "fuente": "freeCodeCamp",
+        "tipo": "noticia",
+        "f": "22/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "",
+        "fecha_real": "22/09/2026",
+        "ts": "2026-09-22T02:47:24.615632",
+        "traducido": true
+    },
+    {
+        "titulo": "De uno a más, de más a uno: Entrenamiento iterativo de expertos consciente de la categoría para agentes de ingeniería de software",
+        "enlace": "https://huggingface.co/papers/2609.23377",
+        "fuente": "HuggingFace Papers",
+        "tipo": "noticia",
+        "f": "22/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "https://cdn-avatars.huggingface.co/v1/production/uploads/65c0bd9635d20dadfe84c138/g2QszWd3adV8P1srWKsYn.png",
+        "fecha_real": "22/09/2026",
+        "ts": "2026-09-22T02:47:33.904245",
+        "traducido": true
+    },
+    {
+        "titulo": "Logics-MLLM",
+        "enlace": "https://huggingface.co/Logics-MLLM",
+        "fuente": "HuggingFace Papers",
+        "tipo": "noticia",
+        "f": "22/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "💡 General",
+        "imagen_url_original": "https://cdn-avatars.huggingface.co/v1/production/uploads/65c0bd9635d20dadfe84c138/g2QszWd3adV8P1srWKsYn.png",
+        "fecha_real": "22/09/2026",
+        "ts": "2026-09-22T02:47:33.904487",
+        "traducido": true
+    },
+    {
         "titulo": "Sánchez reclama “un nuevo contrato social” para abordar la IA: “La autorregulación no funciona”",
         "enlace": "https://elpais.com/tecnologia/2026-09-21/sanchez-reclama-un-nuevo-contrato-social-de-la-ia-antes-de-viajar-a-la-cumbre-de-la-onu-en-nueva-york.html",
         "fuente": "El País Tecnología",
