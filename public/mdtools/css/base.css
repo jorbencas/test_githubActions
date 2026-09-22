@@ -6,10 +6,10 @@
   --bg-input: #0e0e18;
   --text: #f5e6d0;
   --text-muted: #8b7355;
-  --accent: #e67e22;
-  --accent-hover: #d35400;
-  --accent-soft: rgba(230, 126, 34, 0.15);
-  --border: rgba(255, 180, 100, 0.08);
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --accent-soft: rgba(59, 130, 246, 0.15);
+  --border: rgba(59, 130, 246, 0.12);
   --radius: 8px;
   --radius-lg: 12px;
   --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);

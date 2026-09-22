@@ -21,32 +21,32 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0a0604;
-    --bg-card: rgba(15, 10, 5, 0.92);
-    --bg-card-hover: rgba(25, 18, 8, 0.96);
-    --text: #f5e6d0;
-    --text-dim: #c4a882;
-    --text-muted: #8b7355;
-    --accent: #e67e22;
-    --accent-hover: #d35400;
-    --border: rgba(255, 180, 100, 0.08);
-    --border-hover: rgba(255, 180, 100, 0.15);
+    --bg: #0e0e18;
+    --bg-card: rgba(10, 10, 25, 0.92);
+    --bg-card-hover: rgba(15, 15, 35, 0.96);
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --text-muted: #64748b;
+    --accent: #3b82f6;
+    --accent-hover: #60a5fa;
+    --border: rgba(59, 130, 246, 0.12);
+    --border-hover: rgba(59, 130, 246, 0.25);
     --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.4);
   }
 }
 
 [data-theme="dark"] {
-  --bg: #0a0604;
-  --bg-card: rgba(15, 10, 5, 0.92);
-  --bg-card-hover: rgba(25, 18, 8, 0.96);
-  --text: #f5e6d0;
-  --text-dim: #c4a882;
-  --text-muted: #8b7355;
-  --accent: #e67e22;
-  --accent-hover: #d35400;
-  --border: rgba(255, 180, 100, 0.08);
-  --border-hover: rgba(255, 180, 100, 0.15);
+  --bg: #0e0e18;
+  --bg-card: rgba(10, 10, 25, 0.92);
+  --bg-card-hover: rgba(15, 15, 35, 0.96);
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --text-muted: #64748b;
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --border: rgba(59, 130, 246, 0.12);
+  --border-hover: rgba(59, 130, 246, 0.25);
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
@@ -58,17 +58,17 @@
 }
 
 [data-theme="dark"] .header-gradient {
-  background: linear-gradient(135deg, #e67e22, #d35400);
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
   -webkit-background-clip: text;
   background-clip: text;
 }
 
 [data-theme="dark"] ::-webkit-scrollbar-thumb {
-  background: rgba(230, 126, 34, 0.2);
+  background: rgba(59, 130, 246, 0.2);
 }
 
 [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
-  background: rgba(230, 126, 34, 0.35);
+  background: rgba(59, 130, 246, 0.35);
 }
 
 * {
@@ -156,7 +156,7 @@ header {
 .header-gradient {
   font-size: 28px;
   font-weight: 800;
-  background: linear-gradient(135deg, #e67e22, #d35400);
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -206,7 +206,7 @@ header {
 .stat-card:hover {
   box-shadow: var(--shadow-hover);
   transform: translateY(-2px);
-  border-color: rgba(230, 126, 34, 0.2);
+  border-color: rgba(59, 130, 246, 0.2);
 }
 
 .stat-card b {
@@ -255,7 +255,7 @@ h2 {
 .search-input:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .search-input::placeholder {
@@ -424,8 +424,8 @@ h2 {
 }
 
 .badge-rss {
-  background: rgba(230, 126, 34, 0.1);
-  color: #e67e22;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
 }
 
 .badge-news {
@@ -444,8 +444,8 @@ h2 {
   border-radius: 4px;
   font-size: 11px;
   font-weight: 600;
-  background: rgba(230, 126, 34, 0.08);
-  color: #e67e22;
+  background: rgba(59, 130, 246, 0.08);
+  color: #60a5fa;
 }
 
 .badge-cat {
@@ -929,16 +929,16 @@ h2 {
 
 @media (prefers-color-scheme: dark) {
   ::-webkit-scrollbar-thumb {
-    background: rgba(230, 126, 34, 0.2);
+    background: rgba(59, 130, 246, 0.2);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(230, 126, 34, 0.35);
+    background: rgba(59, 130, 246, 0.35);
   }
 }
 
 /* Selection */
 ::selection {
-  background: rgba(230, 126, 34, 0.2);
+  background: rgba(59, 130, 246, 0.2);
   color: var(--text);
 }
 
@@ -962,7 +962,7 @@ h2 {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent 0%, rgba(230, 126, 34, 0.03) 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(59, 130, 246, 0.03) 50%, transparent 100%);
   animation: shimmer 1.5s infinite;
 }
 
@@ -990,7 +990,7 @@ h2 {
   background: var(--bg-card-hover);
   border-color: var(--accent);
   color: var(--accent);
-  box-shadow: 0 0 12px rgba(230, 126, 34, 0.15);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.15);
 }
 
 .load-more-btn:active {
