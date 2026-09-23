@@ -1,9 +1,9 @@
 /* ── base.css: Variables, reset, tipografía base ── */
 :root {
-  --bg: #0e0e18;
+  --bg: #0a0604;
   --bg-surface: rgba(15, 10, 5, 0.92);
   --bg-surface-hover: rgba(25, 18, 8, 0.96);
-  --bg-input: #0e0e18;
+  --bg-input: #0a0604;
   --text: #e2e8f0;
   --text-muted: #94a3b8;
   --accent: #3b82f6;

@@ -21,7 +21,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0e0e18;
+    --bg: #0a0604;
     --bg-card: rgba(10, 10, 25, 0.92);
     --bg-card-hover: rgba(15, 15, 35, 0.96);
     --text: #e2e8f0;
@@ -37,7 +37,7 @@
 }
 
 [data-theme="dark"] {
-  --bg: #0e0e18;
+  --bg: #0a0604;
   --bg-card: rgba(10, 10, 25, 0.92);
   --bg-card-hover: rgba(15, 15, 35, 0.96);
   --text: #e2e8f0;
