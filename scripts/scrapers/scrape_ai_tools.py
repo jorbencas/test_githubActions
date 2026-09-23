@@ -117,9 +117,9 @@ async def fetch_hf_spaces(session: aiohttp.ClientSession) -> list:
 async def fetch_github_ai_repos(session: aiohttp.ClientSession) -> list:
     """Fetch trending AI repos from GitHub Search API."""
     queries = [
-        "ai+tool+stars:>200 pushed:>2025-06-01",
-        "llm+agent+stars:>200 pushed:>2025-06-01",
-        "ai+assistant+stars:>200 pushed:>2025-06-01",
+        "ai tool stars:>200 pushed:>2025-06-01",
+        "llm agent stars:>200 pushed:>2025-06-01",
+        "ai assistant stars:>200 pushed:>2025-06-01",
     ]
     items = []
     seen_urls = set()
