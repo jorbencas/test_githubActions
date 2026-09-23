@@ -27,6 +27,7 @@ FUENTES = {
     "TechCrunch": {"url": "https://techcrunch.com/category/artificial-intelligence/"},
     "GitHub Blog": {"url": "https://github.blog/category/engineering/", "selector": "article a[href]"},
     "Google AI": {"url": "https://blog.google/technology/ai/", "selector": "article a[href]"},
+    "Futurism": {"url": "https://futurism.com/category/technology/", "selector": "article a[href]"},
     "NVIDIA Blog": {"url": "https://blogs.nvidia.com/blog/category/deep-learning/", "selector": "article a[href]"},
     "Ars Technica": {"url": "https://arstechnica.com/gadgets/"},
     "Slashdot": {"url": "https://slashdot.org/", "selector": "article a[href]"},
