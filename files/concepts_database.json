@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 110,
+    "total_concepts": 111,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -16,7 +16,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-23T14:02:14.734743"
+    "last_scraped": "2026-09-23T18:49:40.909265"
   },
   "concepts": [
     {
@@ -2024,6 +2024,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-23T14:01:35.760705"
+    },
+    {
+      "title": "clap en Rust: CLIs con subcomandos, derive API, validación de argumentos y ayuda automática",
+      "summary": "clapes la biblioteca de parsing de argumentos de línea de comandos más usada en Rust. Su Derive API permite definir la interfaz de una CLI directamente sobre structs y enums anotados, sin código de pa",
+      "explanation": "clapes la biblioteca de parsing de argumentos de línea de comandos más usada en Rust. Su Derive API permite definir la interfaz de una CLI directamente sobre structs y enums anotados, sin código de parsing manual. El resultado son herramientas con subcomandos, validación de tipos, ayuda automática y variables de entorno con muy pocas líneas de código.Derive API básica: Parser y argumentos tipados Con#[derive(Parser)]y las anotaciones#[arg], clap infiere el tipo de cada argumento, si es obligatorio u opcional, si admite múltiples valores y cómo se llama en la ayuda. Los tiposOption<T>producen argumentos opcionales; los tiposVec<T>permiten repetir el flag.// [dependencies]\n// clap = { version = \"4\", features = [\"derive\"] }\n\nuse clap::Parser;\n\n/// Herramienta para comprimir archivos\n#[derive(Parser, Debug)]\n#[command(name = \"compresor\", version = \"1.0\", author)]\nstruct Args {\n    /// Archivos de entrada (uno o más)\n    #[arg(required = true)]\n    entradas: Vec<String>,\n\n    /// Archivo de salida\n    #[arg(short, long, default_value = \"salida.zip\")]\n    output: String,\n\n    /// Nivel de compresión (1-9)\n    #[arg(short, long, default_value_t = 6, value_parser = clap::value_parser!(u8).range(1..=9))]\n    nivel: u8,\n\n    /// Modo verboso\n    #[arg(short, long)]\n    verbose: bool,\n}\n\nfn main() {\n    let args = Args::parse();\n    if args.verbose {\n        println!(\"Comprimiendo {:?} ? {} (nivel {})\", args.entradas, args.output, args.nivel);\n    }\n    // ... lógica de compresión\n}Subc",
+      "code_example": "// [dependencies]\n// clap = { version = \"4\", features = [\"derive\"] }\n\nuse clap::Parser;\n\n/// Herramienta para comprimir archivos\n#[derive(Parser, Debug)]\n#[command(name = \"compresor\", version = \"1.0\", author)]\nstruct Args {\n    /// Archivos de entrada (uno o más)\n    #[arg(required = true)]\n    entradas: Vec<String>,\n\n    /// Archivo de salida\n    #[arg(short, long, default_value = \"salida.zip\")]\n    output: String,\n\n    /// Nivel de compresión (1-9)\n    #[arg(short, long, default_value_t = 6, value_parser = clap::value_parser!(u8).range(1..=9))]\n    nivel: u8,\n\n    /// Modo verboso\n    #[arg(short, long)]\n    verbose: bool,\n}\n\nfn main() {\n    let args = Args::parse();\n    if args.verbose {\n        println!(\"Comprimiendo {:?} ? {} (nivel {})\", args.entradas, args.output, args.nivel);\n    }\n    // ... lógica de compresión\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-23T18:49:03.763442"
     }
   ]
 }
