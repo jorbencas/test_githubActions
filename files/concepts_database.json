@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 109,
+    "total_concepts": 110,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -16,7 +16,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-23T08:12:49.353456"
+    "last_scraped": "2026-09-23T14:02:14.734743"
   },
   "concepts": [
     {
@@ -2006,6 +2006,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-22T17:54:51.328504"
+    },
+    {
+      "title": "Rendimiento avanzado en Swift: ARC, Copy-on-Write propio, allocations y técnicas de bajo nivel",
+      "summary": "El rendimiento de Swift es cercano al de C en la mayoría de escenarios gracias al compilador LLVM y a la ausencia de un recolector de basura. Sin embargo, hay patrones que introducen overhead invisibl",
+      "explanation": "El rendimiento de Swift es cercano al de C en la mayoría de escenarios gracias al compilador LLVM y a la ausencia de un recolector de basura. Sin embargo, hay patrones que introducen overhead invisible: retenciones de ARC no previstas, allocaciones en el heap cuando debería haber structs, y el boxing de protocolos con existenciales. Conocer estos mecanismos es lo que separa el código que funciona del código que escala.Cómo funciona ARC y su coste real Swift usa Automatic Reference Counting (ARC) para gestionar la memoria de las clases. Cada vez que una referencia se crea o destruye, el contador de referencias se actualiza con una operación atómica. Las operaciones atómicas son más caras que las operaciones normales porque requieren sincronización entre núcleos:// Cada asignación de referencia genera retain/release implícitos\nclass Nodo {\n    var siguiente: Nodo?\n    let valor: Int\n    init(_ valor: Int) { self.valor = valor }\n}\n\n// Cada iteración hace retain/release de cada nodo\nfunc sumarValores(_ lista: [Nodo]) -> Int {\n    lista.reduce(0) { $0 + $1.valor }  // retain/release por cada $1\n}\n\n// Mejor: usar structs cuando no necesitas identidad de objeto\nstruct NodoStruct {\n    var siguiente: NodoStruct?  // cuidado: puede ser recursivo infinito\n    let valor: Int\n} Para medir el número real de allocaciones, usa Instruments con el template \"Allocations\" o el flag de compilación-sanitize=address.Retener ciclos: weak y unowned Los retain cycles hacen que los objetos nunca se li",
+      "code_example": "// Cada asignación de referencia genera retain/release implícitos\nclass Nodo {\n    var siguiente: Nodo?\n    let valor: Int\n    init(_ valor: Int) { self.valor = valor }\n}\n\n// Cada iteración hace retain/release de cada nodo\nfunc sumarValores(_ lista: [Nodo]) -> Int {\n    lista.reduce(0) { $0 + $1.valor }  // retain/release por cada $1\n}\n\n// Mejor: usar structs cuando no necesitas identidad de objeto\nstruct NodoStruct {\n    var siguiente: NodoStruct?  // cuidado: puede ser recursivo infinito\n    let valor: Int\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-23T14:01:35.760705"
     }
   ]
 }
