@@ -40,6 +40,9 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TOKEN_API_ID: ${{ secrets.TOKEN_API_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TG_API_ID: ${{ secrets.TG_API_ID }}
+          TG_API_HASH: ${{ secrets.TG_API_HASH }}
+          TG_SESSION_STRING: ${{ secrets.TG_SESSION_STRING }}
         run: python -m scripts.publishers.send_telegram
       - name: 💾 Commit badges actualizados
         run: |

@@ -260,13 +260,11 @@ def load_blog_resources_for_message(count=5):
 
 
 def _translate_descriptions_batch(items):
-    """Traduce por lotes las 'descripcion' que estén en inglés a castellano usando Gemini.
+    """Traduce por lotes las 'descripcion' que estén en inglés a castellano.
 
-    Realiza una sola llamada a Gemini con todas las descripciones a traducir
-    para minimizar latencia y consumo de tokens. Si Gemini no está disponible
-    o falla, devuelve los items sin modificar (fallback al inglés original).
+    Fallback: Gemini → Telegram translate → original.
     """
-    if not GEMINI_API_KEY or not items:
+    if not items:
         return items
 
     to_translate = [
@@ -277,41 +275,59 @@ def _translate_descriptions_batch(items):
     if not to_translate:
         return items
 
+    # Fallback 1: Gemini
+    if GEMINI_API_KEY:
+        try:
+            from google import genai
+            client = genai.Client(api_key=GEMINI_API_KEY)
+
+            numbered = "\n".join(f"{pos}|{desc}" for pos, (_, desc) in enumerate(to_translate))
+            prompt = (
+                "Traduce cada línea del siguiente listado al castellano. "
+                "El formato es ID|texto. Devuelve EXACTAMENTE el mismo formato "
+                "ID|texto_traducido, una línea por item, sin añadir nada más. "
+                "Conserva nombres propios, marcas, URLs tal cual.\n\n"
+                + numbered
+            )
+            response = client.models.generate_content(
+                model="gemini-2.5-flash", contents=prompt,
+            )
+            text = response.text.strip() if response.text else ""
+
+            translations = {}
+            for line in text.splitlines():
+                if "|" in line:
+                    parts = line.split("|", 1)
+                    try:
+                        idx = int(parts[0].strip())
+                        translations[idx] = parts[1].strip()
+                    except ValueError:
+                        continue
+
+            for local_pos, (orig_idx, _) in enumerate(to_translate):
+                if local_pos in translations and translations[local_pos]:
+                    items[orig_idx]["descripcion"] = translations[local_pos]
+
+            if translations:
+                print(f"🌐 Traducidas {len(translations)}/{len(to_translate)} descripciones en → es (Gemini)")
+                return items
+        except Exception as e:
+            print(f"⚠️ Gemini falló, intentando Telegram translate: {e}")
+
+    # Fallback 2: Telegram translate
     try:
-        from google import genai
-        client = genai.Client(api_key=GEMINI_API_KEY)
-
-        numbered = "\n".join(f"{pos}|{desc}" for pos, (_, desc) in enumerate(to_translate))
-        prompt = (
-            "Traduce cada línea del siguiente listado al castellano. "
-            "El formato es ID|texto. Devuelve EXACTAMENTE el mismo formato "
-            "ID|texto_traducido, una línea por item, sin añadir nada más. "
-            "Conserva nombres propios, marcas, URLs tal cual.\n\n"
-            + numbered
-        )
-        response = client.models.generate_content(
-            model="gemini-2.5-flash", contents=prompt,
-        )
-        text = response.text.strip() if response.text else ""
-
-        translations = {}
-        for line in text.splitlines():
-            if "|" in line:
-                parts = line.split("|", 1)
-                try:
-                    idx = int(parts[0].strip())
-                    translations[idx] = parts[1].strip()
-                except ValueError:
-                    continue
-
-        for local_pos, (orig_idx, _) in enumerate(to_translate):
-            if local_pos in translations and translations[local_pos]:
-                items[orig_idx]["descripcion"] = translations[local_pos]
-
-        if translations:
-            print(f"🌐 Traducidas {len(translations)}/{len(to_translate)} descripciones en → es")
+        import asyncio
+        from utils.telegram_translate import translate_batch
+        texts = [desc for _, desc in to_translate]
+        loop = asyncio.new_event_loop()
+        translated = loop.run_until_complete(translate_batch(texts))
+        loop.close()
+        for (orig_idx, _), new_text in zip(to_translate, translated):
+            if new_text:
+                items[orig_idx]["descripcion"] = new_text
+        print(f"🌐 Traducidas {len(to_translate)} descripciones en → es (Telegram)")
     except Exception as e:
-        print(f"⚠️ Error traduciendo descripciones (manteniendo inglés): {e}")
+        print(f"⚠️ Telegram translate falló, manteniendo inglés: {e}")
 
     return items
 

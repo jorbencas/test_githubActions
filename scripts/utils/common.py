@@ -331,9 +331,38 @@ async def traducir_titulos_ia(noticias: list, client) -> list:
             continue
 
     # Gemini falló en todos los modelos → fallback con IA local (Ollama)
-    _traducir_con_ollama(noticias, indices_traducir, lineas)
+    ollama_ok = _traducir_con_ollama(noticias, indices_traducir, lineas)
+
+    # Fallback: Telegram translate
+    if ollama_ok < len(indices_traducir):
+        _traducir_con_telegram(noticias, indices_traducir)
 
     return noticias
+
+
+def _traducir_con_telegram(noticias: list, indices: list):
+    """Fallback: traduce títulos con Telegram messages.translateText (Telethon)."""
+    try:
+        import asyncio
+        from utils.telegram_translate import translate_to_spanish
+        loop = asyncio.new_event_loop()
+        ok = 0
+        for i in indices:
+            if noticias[i].get('traducido'):
+                continue
+            titulo = noticias[i].get('titulo', '').strip()
+            if not titulo:
+                continue
+            result = loop.run_until_complete(translate_to_spanish(titulo))
+            if result:
+                noticias[i]['titulo'] = result
+                noticias[i]['traducido'] = True
+                ok += 1
+        loop.close()
+        if ok:
+            logger.info(f"📱 {ok} títulos traducidos con Telegram translate")
+    except Exception as e:
+        logger.warning(f"⚠️ Fallback Telegram translate falló: {e}")
 
 
 def _traducir_con_ollama(noticias: list, indices: list, lineas: list):

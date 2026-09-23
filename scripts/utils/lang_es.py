@@ -77,9 +77,11 @@ TEXTO:
 
 
 def translate_description_async(text: str, client) -> str:
-    """Traduce una descripción en inglés a castellano usando el cliente Gemini ya inicializado."""
+    """Traduce una descripción en inglés a castellano. Fallback: Gemini → Telegram."""
     if not text or not text.strip():
         return text
+
+    # Fallback 1: Gemini
     try:
         response = client.models.generate_content(
             model="gemini-2.5-flash",
@@ -90,4 +92,17 @@ def translate_description_async(text: str, client) -> str:
             return out[:500]
     except Exception:
         pass
+
+    # Fallback 2: Telegram translate
+    try:
+        import asyncio
+        from utils.telegram_translate import translate_to_spanish
+        loop = asyncio.new_event_loop()
+        result = loop.run_until_complete(translate_to_spanish(text))
+        loop.close()
+        if result:
+            return result[:500]
+    except Exception:
+        pass
+
     return text

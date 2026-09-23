@@ -117,7 +117,7 @@ def detectar_idioma(texto: str, fuente: str = "") -> str:
 
 
 async def traducir_titulo(titulo: str, client) -> str:
-    """Traduce un título al español usando Gemini."""
+    """Traduce un título al español. Fallback: Gemini → Telegram translate."""
     modelos = CONFIG.get("AI_MODELS", ["gemini-2.5-flash", "gemini-2.5-pro"])
     prompt = PROMPT_TRADUCIR_TITULOS.format(texto_a_traducir=f"0|{titulo}")
     for modelo in modelos:
@@ -131,6 +131,14 @@ async def traducir_titulo(titulo: str, client) -> str:
                     return trads[0]["tr"]
         except Exception:
             continue
+    # Fallback: Telegram translate
+    try:
+        from utils.telegram_translate import translate_to_spanish
+        result = await translate_to_spanish(titulo)
+        if result:
+            return result
+    except Exception:
+        pass
     return titulo
 
 

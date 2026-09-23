@@ -37,6 +37,9 @@ jobs:
           TIPS_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TIPS_CHAT_ID: ${{ secrets.TIPS_CHAT_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TG_API_ID: ${{ secrets.TG_API_ID }}
+          TG_API_HASH: ${{ secrets.TG_API_HASH }}
+          TG_SESSION_STRING: ${{ secrets.TG_SESSION_STRING }}
         run: python scripts/tips_generator.py
 
       - name: 💾 Guardar historial
@@ -78,6 +81,9 @@ jobs:
           TIPS_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           AI_TOOLS_CHAT_ID: ${{ secrets.AI_TOOLS_CHAT_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TG_API_ID: ${{ secrets.TG_API_ID }}
+          TG_API_HASH: ${{ secrets.TG_API_HASH }}
+          TG_SESSION_STRING: ${{ secrets.TG_SESSION_STRING }}
         run: python scripts/ai_tools_generator.py
 
       - name: 💾 Guardar historial
