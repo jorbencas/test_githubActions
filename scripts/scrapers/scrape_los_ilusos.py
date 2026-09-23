@@ -32,15 +32,17 @@ OUTPUT_PATH = REPO_DIR / "files" / "los_ilusos.json"
 
 def _ia_prompt_los_ilusos(numerados: str) -> str:
     return (
-        "Eres un experto en cine. Determina cuáles de los siguientes titulares se refieren "
-        "EXCLUSIVAMENTE a la película 'Los ilusos 13+13' (2026), de Jonás Trueba, "
-        "una revisión/reworked de su película 'Los ilusos' (2013), con Francesco Carril, "
-        "Aura Garrido y Vito Sanz.\n"
-        "NO cuentan: la película original 'Los ilusos' (2013) ni otras películas del director "
-        "Jonás Trueba (La reconquista, La virgen de agosto, etc.).\n"
-        "SÍ cuentan: noticias sobre la película 'Los ilusos 13+13', estreno, crítica, "
-        "entrevistas, festivales, distribución.\n"
-        "Responde SOLO con la lista de números de los titulares que SÍ son sobre esta película, "
+        "Eres un experto en cine. De los siguientes titulares, identifica SOLO los que "
+        "contengan información sobre la FECHA DE ESTRENO o DISPONIBILIDAD en una "
+        "plataforma de streaming o venta digital de la película 'Los ilusos 13+13' (2026) "
+        "de Jonás Trueba.\n"
+        "NO cuentan: críticas, reseñas, entrevistas, tráilers, festivales, rodaje, "
+        "noticias sobre el director, ni nada que no sea una fecha concreta de estreno "
+        "en plataforma (Filmin, Netflix, Amazon, Apple TV, etc.).\n"
+        "SÍ cuentan: 'se estrena en Filmin el X', 'disponible en Netflix desde X', "
+        "'estreno digital el X', ' sale en plataforma X'.\n"
+        "Si ningún titular contiene una fecha de estreno en plataforma, responde: NINGUNO\n"
+        "Responde SOLO con la lista de números de los titulares que SÍ son relevantes, "
         "separados por comas, sin texto adicional. Ejemplo: 1,3,5\n\n"
         f"{numerados}"
     )
@@ -51,29 +53,20 @@ LOS_ILUSOS_CONFIG = MovieConfig(
     pelicula_es="Los ilusos 13+13",
     output_path=OUTPUT_PATH,
     queries=[
-        "Los ilusos 13+13 película",
-        "Los ilusos 13+13 Jonás Trueba",
-        "Los ilusos 13+13 2026",
-        "Los ilusos 13+13 Francesco Carril",
-        "Los ilusos 13+13 Aura Garrido",
-        "Los ilusos 13+13 Vito Sanz",
-        "Los ilusos 13+13 estreno",
-        "Los ilusos 13+13 crítica",
-        "Los ilusos 13+13 reseña",
-        "Los ilusos 13+13 trailer",
-        "Los ilusos 13+13 cinemaldito",
-        "Los ilusos 13+13 fotogramas",
-        "Los ilusos 13+13 filmaffinity",
-        "The Wishful Thinkers 13+13",
-        "Los ilusos Trueba 2026",
+        "Los ilusos 13+13 estreno plataforma",
+        "Los ilusos 13+13 Filmin",
+        "Los ilusos 13+13 Netflix",
+        "Los ilusos 13+13 Amazon Prime Video",
+        "Los ilusos 13+13 Apple TV",
+        "Los ilusos 13+13 digital",
+        "Los ilusos 13+13 streaming",
+        "Los ilusos 13+13 disponible",
     ],
     queries_extra=[
-        "Los ilusos 13+13 Jonás Trueba estreno",
-        "Los ilusos 13+13 Jonás Trueba crítica",
-        "Los ilusos 13+13 Madrid cine",
-        "Los ilusos 13+13 Golem Madrid",
-        "Los ilusos 13+13 Los Ilusos Films",
-        "Los ilusos 13+13 revised reworked",
+        "Los ilusos 13+13 estreno octubre",
+        "Los ilusos 13+13 estreno noviembre",
+        "Los ilusos 13+13 venta digital",
+        "Los ilusos 13+13 VOD",
     ],
     yt_queries=[
         "Los ilusos 13+13",
