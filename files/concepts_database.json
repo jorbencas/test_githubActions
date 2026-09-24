@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 142,
+    "total_concepts": 143,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -16,7 +16,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-24T15:41:23.225898"
+    "last_scraped": "2026-09-24T19:46:51.874018"
   },
   "concepts": [
     {
@@ -2651,6 +2651,24 @@
       ],
       "cat": "concurrency",
       "scraped_at": "2026-09-24T15:40:44.458142"
+    },
+    {
+      "title": "Axum en Rust: servidor HTTP con handlers, extractors, middleware y Router",
+      "summary": "Axum es el framework web del ecosistema Tokio. Construido sobre Tower y Hyper, comparte el mismo modelo de middleware que el resto de la comunidad async de Rust y ofrece verificación de tipos en compi",
+      "explanation": "Axum es el framework web del ecosistema Tokio. Construido sobre Tower y Hyper, comparte el mismo modelo de middleware que el resto de la comunidad async de Rust y ofrece verificación de tipos en compilación para los handlers. Es la opción recomendada cuando ya se usa Tokio como runtime.Router y handlers async básicos Un servidor Axum se define con unRouterque asocia rutas con handlers. Los handlers son funciones async que pueden devolver cualquier tipo que implementeIntoResponse. Axum infiere automáticamente qué extractors necesita cada handler a partir de los tipos de los argumentos.// [dependencies]\n// axum = \"0.7\"\n// tokio = { version = \"1\", features = [\"full\"] }\n// serde = { version = \"1\", features = [\"derive\"] }\n// serde_json = \"1\"\n\nuse axum::{Router, routing::{get, post}, response::Json, http::StatusCode};\nuse serde::{Deserialize, Serialize};\n\n#[derive(Serialize)]\nstruct Respuesta {\n    mensaje: String,\n    ok: bool,\n}\n\nasync fn raiz() -> &'static str {\n    \"Hola desde Axum\"\n}\n\nasync fn estado() -> Json<Respuesta> {\n    Json(Respuesta { mensaje: \"servidor activo\".into(), ok: true })\n}\n\nasync fn no_encontrado() -> (StatusCode, &'static str) {\n    (StatusCode::NOT_FOUND, \"ruta no encontrada\")\n}\n\n#[tokio::main]\nasync fn main() {\n    let app = Router::new()\n        .route(\"/\", get(raiz))\n        .route(\"/estado\", get(estado))\n        .fallback(no_encontrado);\n\n    let listener = tokio::net::TcpListener::bind(\"0.0.0.0:3000\").await.unwrap();\n    println!(\"Escuchando en http:/",
+      "code_example": "// [dependencies]\n// axum = \"0.7\"\n// tokio = { version = \"1\", features = [\"full\"] }\n// serde = { version = \"1\", features = [\"derive\"] }\n// serde_json = \"1\"\n\nuse axum::{Router, routing::{get, post}, response::Json, http::StatusCode};\nuse serde::{Deserialize, Serialize};\n\n#[derive(Serialize)]\nstruct Respuesta {\n    mensaje: String,\n    ok: bool,\n}\n\nasync fn raiz() -> &'static str {\n    \"Hola desde Axum\"\n}\n\nasync fn estado() -> Json<Respuesta> {\n    Json(Respuesta { mensaje: \"servidor activo\".into(), ok: true })\n}\n\nasync fn no_encontrado() -> (StatusCode, &'static str) {\n    (StatusCode::NOT_FOUND, \"ruta no encontrada\")\n}\n\n#[tokio::main]\nasync fn main() {\n    let app = Router::new()\n        .route(\"/\", get(raiz))\n        .route(\"/estado\", get(estado))\n        .fallback(no_encontrado);\n\n    let listener = tokio::net::TcpListener::bind(\"0.0.0.0:3000\").await.unwrap();\n    println!(\"Escuchando en http://0.0.0.0:3000\");\n    axum::serve(listener, app).await.unwrap();\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T19:46:14.275881"
     }
   ]
 }
