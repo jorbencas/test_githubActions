@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 140,
+    "total_concepts": 142,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -16,7 +16,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-24T10:56:05.919149"
+    "last_scraped": "2026-09-24T15:41:23.225898"
   },
   "concepts": [
     {
@@ -2615,6 +2615,42 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-24T12:21:06.433859"
+    },
+    {
+      "title": "El navegador ya es un sistema operativo (y casi nadie se ha dado cuenta)",
+      "summary": "Hace poco estuve trasteando con un conversor de vídeo que corre entero en el navegador: sin servidor, sin subir nada a ningún sitio. El usuario elige un archivo, FFmpeg compilado a WebAssembly lo proc",
+      "explanation": "Hace poco estuve trasteando con un conversor de vídeo que corre entero en el navegador: sin servidor, sin subir nada a ningún sitio. El usuario elige un archivo, FFmpeg compilado a WebAssembly lo procesa ahí mismo y al final descarga el resultado. Mi primera reacción fue pensar que aquello no podía funcionar de verdad. La segunda, después de mirar cómo estaba montado, fue darme cuenta de que el navegador ya no es lo que era hace cinco años. Seguimos pensando en él como un visor de documentos con esteroides. Pero tiene acceso al sistema de archivos, una base de datos local persistente, la capacidad de ejecutar binarios casi a velocidad nativa y un proceso en segundo plano que intercepta cada petición de red antes de que salga. Eso ya no es una capa de presentación. Es un runtime completo. Y aquí está el problema: la mayoría seguimos escribiendo código como si el navegador fuera solo una ventana hacia el servidor. Ese desfase es exactamente el sitio donde se acumula el backend que sobra.WebAssembly no va (solo) de rendimiento Cuando alguien menciona WebAssembly, lo primero que viene a la cabeza son juegos, motores 3D o simulaciones físicas. Y sí, ahí brilla. Pero la idea de fondo es otra: WASM te permite ejecutar en el navegador código que jamás se escribió pensando en el navegador.",
+      "code_example": "const [fileHandle] = await window.showOpenFilePicker();\nconst file = await fileHandle.getFile();\nconst contents = await file.text();",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "bases_datos"
+      ],
+      "cat": "bases_datos",
+      "scraped_at": "2026-09-24T15:40:42.939220"
+    },
+    {
+      "title": "Concurrencia Swift avanzada: custom executors, aislamiento de datos y actores globales propios",
+      "summary": "La concurrencia avanzada de Swift va más allá deasync/awaity los actores básicos. Loscustom executorspermiten controlar exactamente en qué hilo corre un actor; los actores globales propios (@globalAct",
+      "explanation": "La concurrencia avanzada de Swift va más allá deasync/awaity los actores básicos. Loscustom executorspermiten controlar exactamente en qué hilo corre un actor; los actores globales propios (@globalActor) crean dominios de aislamiento reutilizables;nonisolateddeclara que un método no necesita aislamiento; yassumeIsolatedresuelve los casos donde el compilador no puede verificar el aislamiento pero el desarrollador sabe que es correcto.Custom executors con SerialExecutor Por defecto, los actores usan el cooperative thread pool de Swift. Un custom executor redirige la ejecución a un hilo específico, útil para integrar con APIs que exigen ejecutarse siempre en el mismo hilo (OpenGL, SQLite en modo WAL, librerías C con estado por hilo):import Foundation\n\n// 1. Crear el executor: un SerialDispatchQueueExecutor\nfinal class HiloFijoExecutor: SerialExecutor {\n    private let queue: DispatchQueue\n\n    init(etiqueta: String) {\n        self.queue = DispatchQueue(label: etiqueta)\n    }\n\n    func enqueue(_ trabajo: consuming ExecutorJob) {\n        let trabajoCopy = UnownedJob(trabajo)\n        queue.async {\n            trabajoCopy.runSynchronously(on: self.asUnownedSerialExecutor())\n        }\n    }\n\n    func asUnownedSerialExecutor() -> UnownedSerialExecutor {\n        UnownedSerialExecutor(ordinary: self)\n    }\n}\n\n// 2. Actor que usa el executor personalizado\nactor BaseDatosActor {\n    // El executor garantiza que todo el código del actor\n    // corre en esta queue específica\n    nonisolated",
+      "code_example": "import Foundation\n\n// 1. Crear el executor: un SerialDispatchQueueExecutor\nfinal class HiloFijoExecutor: SerialExecutor {\n    private let queue: DispatchQueue\n\n    init(etiqueta: String) {\n        self.queue = DispatchQueue(label: etiqueta)\n    }\n\n    func enqueue(_ trabajo: consuming ExecutorJob) {\n        let trabajoCopy = UnownedJob(trabajo)\n        queue.async {\n            trabajoCopy.runSynchronously(on: self.asUnownedSerialExecutor())\n        }\n    }\n\n    func asUnownedSerialExecutor() -> UnownedSerialExecutor {\n        UnownedSerialExecutor(ordinary: self)\n    }\n}\n\n// 2. Actor que usa el executor personalizado\nactor BaseDatosActor {\n    // El executor garantiza que todo el código del actor\n    // corre en esta queue específica\n    nonisolated var unownedExecutor: UnownedSerialExecutor {\n        ejecutor.asUnownedSerialExecutor()\n    }\n\n    private let ejecutor = HiloFijoExecutor(etiqueta: \"com.miapp.bbdd\")\n    private var conexion: OpaquePointer?  // Conexión SQLite, por ejemplo\n\n    init() {\n        // La inicialización también corre en el executor\n    }\n\n    func consultar(_ sql: String) -> [[String: Any]] {\n        // Corre en el hilo de 'ejecutor', seguro para SQLite\n        []\n    }\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "concurrency"
+      ],
+      "cat": "concurrency",
+      "scraped_at": "2026-09-24T15:40:44.458142"
     }
   ]
 }
