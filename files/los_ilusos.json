@@ -548,5 +548,17 @@
     "relevancia": 3,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "TAI BOX en la CINETECA con Jonás Trueba y 'Los Ilusos'",
+    "url": "https://www.youtube.com/watch?v=hbWYaao7laQ",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-24T11:34:25.926396",
+    "medio": "Escuela Universitaria de Artes TAI",
+    "imagen": "https://i.ytimg.com/vi/hbWYaao7laQ/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
