@@ -1418,5 +1418,29 @@
     "relevancia": 3,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Netflix mueve ficha y recupera esta distopía: 40 episodios para una de las mejores series de ciencia ficción de Prime Video",
+    "url": "https://www.cinemania.es/cinemania/series/hombre-castillo-netflix-prime-video-serie-distopia_7039674_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-24T21:26:20.324624",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "video",
+    "relevancia": 5,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix se fija en el terrorista estadounidense más célebre con esta película protagonizada por Russell Crowe",
+    "url": "https://www.cinemania.es/cinemania/noticias/unabomber-russell-crowe-netflix-pelicula-terrorista_7037996_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-24T21:26:20.324772",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
