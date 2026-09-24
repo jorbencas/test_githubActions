@@ -1370,5 +1370,53 @@
     "relevancia": 2,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Nueve Reinas - Trailer",
+    "url": "https://www.youtube.com/watch?v=2Si5bkr4Zyg",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-24T17:00:55.011341",
+    "medio": "cartelerahispana",
+    "imagen": "https://i.ytimg.com/vi/2Si5bkr4Zyg/hqdefault.jpg",
+    "tipo": "trailer",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "'Monstruo: La historia de Lizzie Borden': ¿qué es real y qué es ficción en la miniserie de Netflix?",
+    "url": "https://www.cinemania.es/cinemania/series/monstruo-historia-lizzie-borden-real-ficcion-miniserie-netflix_7039176_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-24T17:01:04.754497",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Pérez-Reverte dicta sentencia sobre la nueva miniserie de Netflix que adapta su novela 'El problema final': \"Ya me dirá usted\"",
+    "url": "https://www.cinemania.es/cinemania/series/perez-reverte-sentencia-miniserie-netflix-problema-final_7039418_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-24T17:01:04.754539",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Crítica de 'El problema final': Netflix adapta a Pérez-Reverte con un clásico misterio de círculo cerrado que se ve en un suspiro",
+    "url": "https://www.cinemania.es/cinemania/series/critica-problema-final-netflix-adapta-perez-reverte-con-un-clasico-misterio-circulo-cerrado-que-se-ve-un-suspiro_7040943_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-24T17:01:04.754560",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "critica",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
