@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 111,
+    "total_concepts": 140,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -16,7 +16,7 @@
       "rag_ai",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-24T05:45:45.607894"
+    "last_scraped": "2026-09-24T12:21:35.299334"
   },
   "concepts": [
     {
@@ -2042,6 +2042,579 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-23T18:49:03.763442"
+    },
+    {
+      "title": "Patrón Singleton",
+      "summary": "Singletones un patrón de diseño creacional que nos permite asegurarnos de que una clase tenga una única instancia, a la vez que proporciona un punto de acceso global a dicha instancia. El patrón Singl...",
+      "explanation": "Singletones un patrón de diseño creacional que nos permite asegurarnos de que una clase tenga una única instancia, a la vez que proporciona un punto de acceso global a dicha instancia. El patrón Singleton resuelve dos problemas al mismo tiempo, vulnerando elPrincipio de responsabilidad única: Garantizar que una clase tenga una única instancia. ¿Por qué querría alguien controlar cuántas instancias tiene una clase? El motivo más habitual es controlar el acceso a algún recurso compartido, por ejemplo, una base de datos o un archivo. Funciona así: imagina que has creado un objeto y al cabo de un tiempo decides crear otro nuevo. En lugar de recibir un objeto nuevo, obtendrás el que ya habías creado.",
+      "code_example": "// La clase Base de datos define el método `obtenerInstancia`\n// que permite a los clientes acceder a la misma instancia de\n// una conexión de la base de datos a través del programa.\nclass Database is\n    // El campo para almacenar la instancia singleton debe\n    // declararse estático.\n    private static field instance: Database\n\n    // El constructor del singleton siempre debe ser privado\n    // para evitar llamadas de construcción directas con el\n    // operador `new`.\n    private constructor Database() is\n        // Algún código de inicialización, como la propia\n        // conexión al servidor de una base de datos.\n        // ...\n\n    // El método estático que controla el acceso a la instancia\n    // singleton.\n    public static method getInstance() is\n        if (Database.instance == null) then\n            acquireThreadLock() and then\n                // Garantiza que la instancia aún no se ha\n                // inicializado por otro hilo mientras ésta ha\n                // estado esperando el desbloqueo.\n                if (Database.instance == null) then\n                    Database.instance = new Database()\n        return Database.instance\n\n    // Por último, cualquier singleton debe definir cierta\n    // lógica de negocio que pueda ejecutarse en su instancia.\n    public method query(sql) is\n        // Por ejemplo, todas las consultas a la base de datos\n        // de una aplicación pasan por este método. Por lo\n        // tanto, aquí puedes colocar lógica de regularización\n        // (throttling) o de envío a la memoria caché.\n        // ...\n\nclass Application is\n    method main() is\n        Database foo = Database.getInstance()\n        foo.query(\"SELECT ...\")\n        // ...\n        Database bar = Database.getInstance()\n        bar.query(\"SELECT ...\")\n        // La variable `bar` contendrá el mismo objeto que la\n        // variable `foo`.",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Singleton?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "singleton"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:19:37.099901"
+    },
+    {
+      "title": "Patrón Factory Method",
+      "summary": "Factory Methodes un patrón de diseño creacional que proporciona una interfaz para crear objetos en una superclase, mientras permite a las subclases alterar el tipo de objetos que se crearán. Imagina q...",
+      "explanation": "Factory Methodes un patrón de diseño creacional que proporciona una interfaz para crear objetos en una superclase, mientras permite a las subclases alterar el tipo de objetos que se crearán. Imagina que estás creando una aplicación de gestión logística. La primera versión de tu aplicación sólo es capaz de manejar el transporte en camión, por lo que la mayor parte de tu código se encuentra dentro de la claseCamión. Al cabo de un tiempo, tu aplicación se vuelve bastante popular. Cada día recibes decenas de peticiones de empresas de transporte marítimo para que incorpores la logística por mar a la aplicación. Añadir una nueva clase al programa no es tan sencillo si el resto del código ya está acoplado a clases existentes.",
+      "code_example": "// La clase creadora declara el método fábrica que debe devolver\n// un objeto de una clase de producto. Normalmente, las\n// subclases de la creadora proporcionan la implementación de\n// este método.\nclass Dialog is\n    // La creadora también puede proporcionar cierta\n    // implementación por defecto del método fábrica.\n    abstract method createButton():Button\n\n    // Observa que, a pesar de su nombre, la principal\n    // responsabilidad de la creadora no es crear productos.\n    // Normalmente contiene cierta lógica de negocio que depende\n    // de los objetos de producto devueltos por el método\n    // fábrica. Las subclases pueden cambiar indirectamente esa\n    // lógica de negocio sobrescribiendo el método fábrica y\n    // devolviendo desde él un tipo diferente de producto.\n    method render() is\n        // Invoca el método fábrica para crear un objeto de\n        // producto.\n        Button okButton = createButton()\n        // Ahora utiliza el producto.\n        okButton.onClick(closeDialog)\n        okButton.render()\n\n\n// Los creadores concretos sobrescriben el método fábrica para\n// cambiar el tipo de producto resultante.\nclass WindowsDialog extends Dialog is\n    method createButton():Button is\n        return new WindowsButton()\n\nclass WebDialog extends Dialog is\n    method createButton():Button is\n        return new HTMLButton()\n\n\n// La interfaz de producto declara las operaciones que todos los\n// productos concretos deben implementar.\ninterface Button is\n    method render()\n    method onClick(f)\n\n// Los productos concretos proporcionan varias implementaciones\n// de la interfaz de producto.\n\nclass WindowsButton implements Button is\n    method render(a, b) is\n        // Representa un botón en estilo Windows.\n    method onClick(f) is\n        // Vincula un evento clic de OS nativo.\n\nclass HTMLButton implements Button is\n    method render(a, b) is\n        // Devuelve una representación HTML de un botón.\n    method onClick(f) is\n        // Vincula un evento clic de navegador web.\n\nclass Application is\n    field dialog: Dialog\n\n    // La aplicación elige un tipo de creador dependiendo de la\n    // configuración actual o los ajustes del entorno.\n    method initialize() is\n        config = readApplicationConfigFile()\n\n        if (config.OS == \"Windows\") then\n            dialog = new WindowsDialog()\n        else if (config.OS == \"Web\") then\n            dialog = new WebDialog()\n        else\n            throw new Exception(\"Error! Unknown operating system.\")\n\n    // El código cliente funciona con una instancia de un\n    // creador concreto, aunque a través de su interfaz base.\n    // Siempre y cuando el cliente siga funcionando con el\n    // creador a través de la interfaz base, puedes pasarle\n    // cualquier subclase del creador.\n    method main() is\n        this.initialize()\n        dialog.render()",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Factory Method?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "factory-method"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:19:38.286365"
+    },
+    {
+      "title": "Patrón Abstract Factory",
+      "summary": "Abstract Factoryes un patrón de diseño creacional que nos permite producir familias de objetos relacionados sin especificar sus clases concretas. Imagina que estás creando un simulador de tienda de mu...",
+      "explanation": "Abstract Factoryes un patrón de diseño creacional que nos permite producir familias de objetos relacionados sin especificar sus clases concretas. Imagina que estás creando un simulador de tienda de muebles. Tu código está compuesto por clases que representan lo siguiente: Una familia de productos relacionados, digamos:Silla+Sofá+Mesilla. Algunas variantes de esta familia. Por ejemplo, los productosSilla+Sofá+Mesillaestán disponibles en estas variantes:Moderna,Victoriana,ArtDecó.",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Abstract Factory?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "abstract-factory"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:19:39.487540"
+    },
+    {
+      "title": "Patrón Builder",
+      "summary": "Builderes un patrón de diseño creacional que nos permite construir objetos complejos paso a paso. El patrón nos permite producir distintos tipos y representaciones de un objeto empleando el mismo códi...",
+      "explanation": "Builderes un patrón de diseño creacional que nos permite construir objetos complejos paso a paso. El patrón nos permite producir distintos tipos y representaciones de un objeto empleando el mismo código de construcción. Imagina un objeto complejo que requiere una inicialización laboriosa, paso a paso, de muchos campos y objetos anidados. Normalmente, este código de inicialización está sepultado dentro de un monstruoso constructor con una gran cantidad de parámetros. O, peor aún: disperso por todo el código cliente. Crear una subclase por cada configuración posible de un objeto puede complicar demasiado el programa. Por ejemplo, pensemos en cómo crear un objetoCasa. Para construir una casa sencilla, debemos construir cuatro paredes y un piso, así como instalar una puerta, colocar un par de ventanas y ponerle un tejado. Pero ¿qué pasa si quieres una casa más grande y luminosa, con un jardín y otros extras (como sistema de calefacción, instalación de fontanería y cableado eléctrico)?",
+      "code_example": "class Pizza {\n    Pizza(int size) { ... }\n    Pizza(int size, boolean cheese) { ... }\n    Pizza(int size, boolean cheese, boolean pepperoni) { ... }\n    // ...",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Builder?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "builder"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:19:40.725206"
+    },
+    {
+      "title": "Patrón Prototype",
+      "summary": "Prototypees un patrón de diseño creacional que nos permite copiar objetos existentes sin que el código dependa de sus clases. Digamos que tienes un objeto y quieres crear una copia exacta de él. ¿Cómo...",
+      "explanation": "Prototypees un patrón de diseño creacional que nos permite copiar objetos existentes sin que el código dependa de sus clases. Digamos que tienes un objeto y quieres crear una copia exacta de él. ¿Cómo lo harías? En primer lugar, debes crear un nuevo objeto de la misma clase. Después debes recorrer todos los campos del objeto original y copiar sus valores en el nuevo objeto. ¡Bien! Pero hay una trampa. No todos los objetos se pueden copiar de este modo, porque algunos de los campos del objeto pueden ser privados e invisibles desde fuera del propio objeto. No siemprees posible copiar un objeto “desde fuera”.",
+      "code_example": "// Prototipo base.\nabstract class Shape is\n    field X: int\n    field Y: int\n    field color: string\n\n    // Un constructor normal.\n    constructor Shape() is\n        // ...\n\n    // El constructor prototipo. Un nuevo objeto se inicializa\n    // con valores del objeto existente.\n    constructor Shape(source: Shape) is\n        this()\n        this.X = source.X\n        this.Y = source.Y\n        this.color = source.color\n\n    // La operación clonar devuelve una de las subclases de\n    // Shape (Forma).\n    abstract method clone():Shape\n\n\n// Prototipo concreto. El método de clonación crea un nuevo\n// objeto y lo pasa al constructor. Hasta que el constructor\n// termina, tiene una referencia a un nuevo clon. De este modo\n// nadie tiene acceso a un clon a medio terminar. Esto garantiza\n// la consistencia del resultado de la clonación.\nclass Rectangle extends Shape is\n    field width: int\n    field height: int\n\n    constructor Rectangle(source: Rectangle) is\n        // Para copiar campos privados definidos en la clase\n        // padre es necesaria una llamada a un constructor\n        // padre.\n        super(source)\n        this.width = source.width\n        this.height = source.height\n\n    method clone():Shape is\n        return new Rectangle(this)\n\n\nclass Circle extends Shape is\n    field radius: int\n\n    constructor Circle(source: Circle) is\n        super(source)\n        this.radius = source.radius\n\n    method clone():Shape is\n        return new Circle(this)\n\n\n// En alguna parte del código cliente.\nclass Application is\n    field shapes: array of Shape\n\n    constructor Application() is\n        Circle circle = new Circle()\n        circle.X = 10\n        circle.Y = 10\n        circle.radius = 20\n        shapes.add(circle)\n\n        Circle anotherCircle = circle.clone()\n        shapes.add(anotherCircle)\n        // La variable `anotherCircle` (otroCírculo) contiene\n        // una copia exacta del objeto `circle`.\n\n        Rectangle rectangle = new Rectangle()\n        rectangle.width = 10\n        rectangle.height = 20\n        shapes.add(rectangle)\n\n    method businessLogic() is\n        // Prototype es genial porque te permite producir una\n        // copia de un objeto sin conocer nada de su tipo.\n        Array shapesCopy = new Array of Shapes.\n\n        // Por ejemplo, no conocemos los elementos exactos de la\n        // matriz de formas. Lo único que sabemos es que son\n        // todas formas. Pero, gracias al polimorfismo, cuando\n        // invocamos el método `clonar` en una forma, el\n        // programa comprueba su clase real y ejecuta el método\n        // de clonación adecuado definido en dicha clase. Por\n        // eso obtenemos los clones adecuados en lugar de un\n        // grupo de simples objetos Shape.\n        foreach (s in shapes) do\n            shapesCopy.add(s.clone())\n\n        // La matriz `shapesCopy` contiene copias exactas del\n        // hijo de la matriz `shape`.",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Prototype?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "prototype"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:19:42.377240"
+    },
+    {
+      "title": "Patrón Adapter",
+      "summary": "Adapteres un patrón de diseño estructural que permite la colaboración entre objetos con interfaces incompatibles. Imagina que estás creando una aplicación de monitoreo del mercado de valores. La aplic...",
+      "explanation": "Adapteres un patrón de diseño estructural que permite la colaboración entre objetos con interfaces incompatibles. Imagina que estás creando una aplicación de monitoreo del mercado de valores. La aplicación descarga la información de bolsa desde varias fuentes en formato XML para presentarla al usuario con bonitos gráficos y diagramas. En cierto momento, decides mejorar la aplicación integrando una inteligente biblioteca de análisis de una tercera persona. Pero hay una trampa: la biblioteca de análisis solo funciona con datos en formato JSON. No puedes utilizar la biblioteca de análisis “tal cual” porque ésta espera los datos en un formato que es incompatible con tu aplicación.",
+      "code_example": "// Digamos que tienes dos clases con interfaces compatibles:\n// RoundHole (HoyoRedondo) y RoundPeg (PiezaRedonda).\nclass RoundHole is\n    constructor RoundHole(radius) { ... }\n\n    method getRadius() is\n        // Devuelve el radio del agujero.\n\n    method fits(peg: RoundPeg) is\n        return this.getRadius() >= peg.getRadius()\n\nclass RoundPeg is\n    constructor RoundPeg(radius) { ... }\n\n    method getRadius() is\n        // Devuelve el radio de la pieza.\n\n\n// Pero hay una clase incompatible: SquarePeg (PiezaCuadrada).\nclass SquarePeg is\n    constructor SquarePeg(width) { ... }\n\n    method getWidth() is\n        // Devuelve la anchura de la pieza cuadrada.\n\n\n// Una clase adaptadora te permite encajar piezas cuadradas en\n// hoyos redondos. Extiende la clase RoundPeg para permitir a\n// los objetos adaptadores actuar como piezas redondas.\nclass SquarePegAdapter extends RoundPeg is\n    // En realidad, el adaptador contiene una instancia de la\n    // clase SquarePeg.\n    private field peg: SquarePeg\n\n    constructor SquarePegAdapter(peg: SquarePeg) is\n        this.peg = peg\n\n    method getRadius() is\n        // El adaptador simula que es una pieza redonda con un\n        // radio que pueda albergar la pieza cuadrada que el\n        // adaptador envuelve.\n        return peg.getWidth() * Math.sqrt(2) / 2\n\n\n// En algún punto del código cliente.\nhole = new RoundHole(5)\nrpeg = new RoundPeg(5)\nhole.fits(rpeg) // verdadero\n\nsmall_sqpeg = new SquarePeg(5)\nlarge_sqpeg = new SquarePeg(10)\nhole.fits(small_sqpeg) // esto no compila (tipos incompatibles)\n\nsmall_sqpeg_adapter = new SquarePegAdapter(small_sqpeg)\nlarge_sqpeg_adapter = new SquarePegAdapter(large_sqpeg)\nhole.fits(small_sqpeg_adapter) // verdadero\nhole.fits(large_sqpeg_adapter) // falso",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Adapter?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "adapter"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:19:43.736853"
+    },
+    {
+      "title": "Patrón Bridge",
+      "summary": "Bridgees un patrón de diseño estructural que te permite dividir una clase grande, o un grupo de clases estrechamente relacionadas, en dos jerarquías separadas (abstracción e implementación) que pueden...",
+      "explanation": "Bridgees un patrón de diseño estructural que te permite dividir una clase grande, o un grupo de clases estrechamente relacionadas, en dos jerarquías separadas (abstracción e implementación) que pueden desarrollarse independientemente la una de la otra. ¿Abstracción?¿Implementación? ¿Asusta? Mantengamos la calma y veamos un ejemplo sencillo. Digamos que tienes una clase geométricaFormacon un par de subclases:CírculoyCuadrado. Deseas extender esta jerarquía de clase para que incorpore colores, por lo que planeas crear las subclases de formaRojoyAzul. Sin embargo, como ya tienes dos subclases, tienes que crear cuatro combinaciones de clase, comoCírculoAzulyCuadradoRojo. El número de combinaciones de clase crece en progresión geométrica.",
+      "code_example": "// La \"abstracción\" define la interfaz para la parte de\n// \"control\" de las dos jerarquías de clase. Mantiene una\n// referencia a un objeto de la jerarquía de \"implementación\" y\n// delega todo el trabajo real a este objeto.\nclass RemoteControl is\n    protected field device: Device\n    constructor RemoteControl(device: Device) is\n        this.device = device\n    method togglePower() is\n        if (device.isEnabled()) then\n            device.disable()\n        else\n            device.enable()\n    method volumeDown() is\n        device.setVolume(device.getVolume() - 10)\n    method volumeUp() is\n        device.setVolume(device.getVolume() + 10)\n    method channelDown() is\n        device.setChannel(device.getChannel() - 1)\n    method channelUp() is\n        device.setChannel(device.getChannel() + 1)\n\n\n// Puedes extender clases de la jerarquía de abstracción\n// independientemente de las clases de dispositivo.\nclass AdvancedRemoteControl extends RemoteControl is\n    method mute() is\n        device.setVolume(0)\n\n\n// La interfaz de \"implementación\" declara métodos comunes a\n// todas las clases concretas de implementación. No tiene por\n// qué coincidir con la interfaz de la abstracción. De hecho,\n// las dos interfaces pueden ser completamente diferentes.\n// Normalmente, la interfaz de implementación únicamente\n// proporciona operaciones primitivas, mientras que la\n// abstracción define operaciones de más alto nivel con base en\n// las primitivas.\ninterface Device is\n    method isEnabled()\n    method enable()\n    method disable()\n    method getVolume()\n    method setVolume(percent)\n    method getChannel()\n    method setChannel(channel)\n\n\n// Todos los dispositivos siguen la misma interfaz.\nclass Tv implements Device is\n    // ...\n\nclass Radio implements Device is\n    // ...\n\n\n// En algún lugar del código cliente.\ntv = new Tv()\nremote = new RemoteControl(tv)\nremote.togglePower()\n\nradio = new Radio()\nremote = new AdvancedRemoteControl(radio)",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Bridge?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "bridge"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:19:44.930779"
+    },
+    {
+      "title": "Patrón Composite",
+      "summary": "Compositees un patrón de diseño estructural que te permite componer objetos en estructuras de árbol y trabajar con esas estructuras como si fueran objetos individuales. El uso del patrón Composite sól...",
+      "explanation": "Compositees un patrón de diseño estructural que te permite componer objetos en estructuras de árbol y trabajar con esas estructuras como si fueran objetos individuales. El uso del patrón Composite sólo tiene sentido cuando el modelo central de tu aplicación puede representarse en forma de árbol. Por ejemplo, imagina que tienes dos tipos de objetos:ProductosyCajas. UnaCajapuede contener variosProductosasí como cierto número deCajasmás pequeñas. EstasCajaspequeñas también pueden contener algunosProductoso inclusoCajasmás pequeñas, y así sucesivamente. Digamos que decides crear un sistema de pedidos que utiliza estas clases. Los pedidos pueden contener productos sencillos sin envolver, así como cajas llenas de productos... y otras cajas. ¿Cómo determinarás el precio total de ese pedido?",
+      "code_example": "// La interfaz componente declara operaciones comunes para\n// objetos simples y complejos de una composición.\ninterface Graphic is\n    method move(x, y)\n    method draw()\n\n// La clase hoja representa objetos finales de una composición.\n// Un objeto hoja no puede tener ningún subobjeto. Normalmente,\n// son los objetos hoja los que hacen el trabajo real, mientras\n// que los objetos compuestos se limitan a delegar a sus\n// subcomponentes.\nclass Dot implements Graphic is\n    field x, y\n\n    constructor Dot(x, y) { ... }\n\n    method move(x, y) is\n        this.x += x, this.y += y\n\n    method draw() is\n        // Dibuja un punto en X e Y.\n\n// Todas las clases de componente pueden extender otros\n// componentes.\nclass Circle extends Dot is\n    field radius\n\n    constructor Circle(x, y, radius) { ... }\n\n    method draw() is\n        // Dibuja un círculo en X y Y con radio R.\n\n// La clase compuesta representa componentes complejos que\n// pueden tener hijos. Normalmente los objetos compuestos\n// delegan el trabajo real a sus hijos y después \"recapitulan\"\n// el resultado.\nclass CompoundGraphic implements Graphic is\n    field children: array of Graphic\n\n    // Un objeto compuesto puede añadir o eliminar otros\n    // componentes (tanto simples como complejos) a o desde su\n    // lista hija.\n    method add(child: Graphic) is\n        // Añade un hijo a la matriz de hijos.\n\n    method remove(child: Graphic) is\n        // Elimina un hijo de la matriz de hijos.\n\n    method move(x, y) is\n        foreach (child in children) do\n            child.move(x, y)\n\n    // Un compuesto ejecuta su lógica primaria de una forma\n    // particular. Recorre recursivamente todos sus hijos,\n    // recopilando y recapitulando sus resultados. Debido a que\n    // los hijos del compuesto pasan esas llamadas a sus propios\n    // hijos y así sucesivamente, se recorre todo el árbol de\n    // objetos como resultado.\n    method draw() is\n        // 1. Para cada componente hijo:\n        //     - Dibuja el componente.\n        //     - Actualiza el rectángulo delimitador.\n        // 2. Dibuja un rectángulo de línea punteada utilizando\n        // las coordenadas de delimitación.\n\n\n// El código cliente trabaja con todos los componentes a través\n// de su interfaz base. De esta forma el código cliente puede\n// soportar componentes de hoja simples así como compuestos\n// complejos.\nclass ImageEditor is\n    field all: CompoundGraphic\n\n    method load() is\n        all = new CompoundGraphic()\n        all.add(new Dot(1, 2))\n        all.add(new Circle(5, 3, 10))\n        // ...\n\n    // Combina componentes seleccionados para formar un\n    // componente compuesto complejo.\n    method groupSelected(components: array of Graphic) is\n        group = new CompoundGraphic()\n        foreach (component in components) do\n            group.add(component)\n            all.remove(component)\n        all.add(group)\n        // Se dibujarán todos los componentes.\n        all.draw()",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Composite?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "composite"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:19:46.502260"
+    },
+    {
+      "title": "Patrón Decorator",
+      "summary": "Decoratores un patrón de diseño estructural que te permite añadir funcionalidades a objetos colocando estos objetos dentro de objetos encapsuladores especiales que contienen estas funcionalidades. Ima...",
+      "explanation": "Decoratores un patrón de diseño estructural que te permite añadir funcionalidades a objetos colocando estos objetos dentro de objetos encapsuladores especiales que contienen estas funcionalidades. Imagina que estás trabajando en una biblioteca de notificaciones que permite a otros programas notificar a sus usuarios acerca de eventos importantes. La versión inicial de la biblioteca se basaba en la claseNotificadorque solo contaba con unos cuantos campos, un constructor y un único métodosend. El método podía aceptar un argumento de mensaje de un cliente y enviar el mensaje a una lista de correos electrónicos que se pasaban a la clase notificadora a través de su constructor. Una aplicación de un tercero que actuaba como cliente debía crear y configurar el objeto notificador una vez y después utilizarlo cada vez que sucediera algo importante. Un programa puede utilizar la clase notificadora para enviar notificaciones sobre eventos importantes a un grupo predefinido de correos electrónicos.",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Decorator?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "decorator"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:19:47.735127"
+    },
+    {
+      "title": "Patrón Facade",
+      "summary": "Facadees un patrón de diseño estructural que proporciona una interfaz simplificada a una biblioteca, un framework o cualquier otro grupo complejo de clases. Imagina que debes lograr que tu código trab...",
+      "explanation": "Facadees un patrón de diseño estructural que proporciona una interfaz simplificada a una biblioteca, un framework o cualquier otro grupo complejo de clases. Imagina que debes lograr que tu código trabaje con un amplio grupo de objetos que pertenecen a una sofisticada biblioteca oframework. Normalmente, debes inicializar todos esos objetos, llevar un registro de las dependencias, ejecutar los métodos en el orden correcto y así sucesivamente. Como resultado, la lógica de negocio de tus clases se vería estrechamente acoplada a los detalles de implementación de las clases de terceros, haciéndola difícil de comprender y mantener. Una fachada es una clase que proporciona una interfaz simple a un subsistema complejo que contiene muchas partes móviles. Una fachada puede proporcionar una funcionalidad limitada en comparación con trabajar directamente con el subsistema. Sin embargo, tan solo incluye las funciones realmente importantes para los clientes.",
+      "code_example": "// Estas son algunas de las clases de un framework de conversión\n// de video de un tercero. No controlamos ese código, por lo que\n// no podemos simplificarlo.\n\nclass VideoFile\n// ...\n\nclass OggCompressionCodec\n// ...\n\nclass MPEG4CompressionCodec\n// ...\n\nclass CodecFactory\n// ...\n\nclass BitrateReader\n// ...\n\nclass AudioMixer\n// ...\n\n\n// Creamos una clase fachada para esconder la complejidad del\n// framework tras una interfaz simple. Es una solución de\n// equilibrio entre funcionalidad y simplicidad.\nclass VideoConverter is\n    method convert(filename, format):File is\n        file = new VideoFile(filename)\n        sourceCodec = (new CodecFactory).extract(file)\n        if (format == \"mp4\")\n            destinationCodec = new MPEG4CompressionCodec()\n        else\n            destinationCodec = new OggCompressionCodec()\n        buffer = BitrateReader.read(filename, sourceCodec)\n        result = BitrateReader.convert(buffer, destinationCodec)\n        result = (new AudioMixer()).fix(result)\n        return new File(result)\n\n// Las clases Application no dependen de un millón de clases\n// proporcionadas por el complejo framework. Además, si decides\n// cambiar los frameworks, sólo tendrás de volver a escribir la\n// clase fachada.\nclass Application is\n    method main() is\n        convertor = new VideoConverter()\n        mp4 = convertor.convert(\"funny-cats-video.ogg\", \"mp4\")\n        mp4.save()",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Facade?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "facade"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:19:49.307296"
+    },
+    {
+      "title": "Patrón Flyweight",
+      "summary": "Flyweightes un patrón de diseño estructural que te permite mantener más objetos dentro de la cantidad disponible de RAM compartiendo las partes comunes del estado entre varios objetos en lugar de mant...",
+      "explanation": "Flyweightes un patrón de diseño estructural que te permite mantener más objetos dentro de la cantidad disponible de RAM compartiendo las partes comunes del estado entre varios objetos en lugar de mantener toda la información en cada objeto. Para divertirte un poco después de largas horas de trabajo, decides crear un sencillo videojuego en el que los jugadores se tienen que mover por un mapa disparándose entre sí. Decides implementar un sistema de partículas realistas que lo distinga de otros juegos. Grandes cantidades de balas, misiles y metralla de las explosiones volarán por todo el mapa, ofreciendo una apasionante experiencia al jugador. Al terminarlo, subes el último cambio, compilas el juego y se lo envias a un amigo para una partida de prueba. Aunque el juego funcionaba sin problemas en tu máquina, tu amigo no logró jugar durante mucho tiempo. En su computadora el juego se paraba a los pocos minutos de empezar. Tras dedicar varias horas a revisar los registros de depuración, descubres que el juego se paraba debido a una cantidad insuficiente de RAM. Resulta que el equipo de tu amigo es mucho menos potente que tu computadora, y esa es la razón por la que el problema surgió tan rápido en su máquina. El problema estaba relacionado con tu sistema de partículas. Cada partícula, como una bala, un misil o un trozo de metralla, estaba representada por un objeto separado que contenía gran cantidad de datos. En cierto momento, cuando la masacre alcanzaba su punto culminante en la",
+      "code_example": "// La clase flyweight contiene una parte del estado de un árbol.\n// Estos campos almacenan valores que son únicos para cada árbol\n// en particular. Por ejemplo, aquí no encontrarás las\n// coordenadas del árbol. Pero la textura y los colores que\n// comparten muchos árboles sí están aquí. Ya que esta cantidad\n// de datos suele ser GRANDE, dedicarás mucha memoria a\n// mantenerla en cada objeto árbol. En lugar de eso, podemos\n// extraer la textura, el color y otros datos repetidos y\n// colocarlos en un objeto independiente que muchos objetos\n// individuales del árbol pueden referenciar.\nclass TreeType is\n    field name\n    field color\n    field texture\n    constructor TreeType(name, color, texture) { ... }\n    method draw(canvas, x, y) is\n        // 1. Crea un mapa de bits de un tipo, color y textura\n        // concretos.\n        // 2. Dibuja el mapa de bits en el lienzo con las\n        // coordenadas X y Y.\n\n\n// La fábrica flyweight decide si reutiliza el flyweight\n// existente o si crea un nuevo objeto.\nclass TreeFactory is\n    static field treeTypes: collection of tree types\n    static method getTreeType(name, color, texture) is\n        type = treeTypes.find(name, color, texture)\n        if (type == null)\n            type = new TreeType(name, color, texture)\n            treeTypes.add(type)\n        return type\n\n// El objeto contextual contiene la parte extrínseca del estado\n// del árbol. Una aplicación puede crear millones de ellas, ya\n// que son muy pequeñas: dos coordenadas en números enteros y un\n// campo de referencia.\nclass Tree is\n    field x,y\n    field type: TreeType\n    constructor Tree(x, y, type) { ... }\n    method draw(canvas) is\n        type.draw(canvas, this.x, this.y)\n\n// Las clases Tree y Forest son los clientes de flyweight.\n// Puedes fusionarlas si no tienes la intención de desarrollar\n// más la clase Tree.\nclass Forest is\n    field trees: collection of Trees\n\n    method plantTree(x, y, name, color, texture) is\n        type = TreeFactory.getTreeType(name, color, texture)\n        tree = new Tree(x, y, type)\n        trees.add(tree)\n\n    method draw(canvas) is\n        foreach (tree in trees) do\n            tree.draw(canvas)",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Flyweight?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "flyweight"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:19:50.542106"
+    },
+    {
+      "title": "Patrón Proxy",
+      "summary": "Proxyes un patrón de diseño estructural que te permite proporcionar un sustituto o marcador de posición para otro objeto. Un proxy controla el acceso al objeto original, permitiéndote hacer algo antes...",
+      "explanation": "Proxyes un patrón de diseño estructural que te permite proporcionar un sustituto o marcador de posición para otro objeto. Un proxy controla el acceso al objeto original, permitiéndote hacer algo antes o después de que la solicitud llegue al objeto original. ¿Por qué querrías controlar el acceso a un objeto? Imagina que tienes un objeto enorme que consume una gran cantidad de recursos del sistema. Lo necesitas de vez en cuando, pero no siempre. Las consultas a las bases de datos pueden ser muy lentas. Puedes llevar a cabo una implementación diferida, es decir, crear este objeto sólo cuando sea realmente necesario. Todos los clientes del objeto tendrán que ejecutar algún código de inicialización diferida. Lamentablemente, esto seguramente generará una gran cantidad de código duplicado.",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Proxy?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "proxy"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:19:51.780191"
+    },
+    {
+      "title": "Patrón Chain of Responsibility",
+      "summary": "Chain of Responsibilityes un patrón de diseño de comportamiento que te permite pasar solicitudes a lo largo de una cadena de manejadores. Al recibir una solicitud, cada manejador decide si la procesa ...",
+      "explanation": "Chain of Responsibilityes un patrón de diseño de comportamiento que te permite pasar solicitudes a lo largo de una cadena de manejadores. Al recibir una solicitud, cada manejador decide si la procesa o si la pasa al siguiente manejador de la cadena. Imagina que estás trabajando en un sistema de pedidos online. Quieres restringir el acceso al sistema de forma que únicamente los usuarios autenticados puedan generar pedidos. Además, los usuarios que tengan permisos administrativos deben tener pleno acceso a todos los pedidos. Tras planificar un poco, te das cuenta de que estas comprobaciones deben realizarse secuencialmente. La aplicación puede intentar autenticar a un usuario en el sistema cuando reciba una solicitud que contenga las credenciales del usuario. Sin embargo, si esas credenciales no son correctas y la autenticación falla, no hay razón para proceder con otras comprobaciones. La solicitud debe pasar una serie de comprobaciones antes de que el propio sistema de pedidos pueda gestionarla.",
+      "code_example": "// La interfaz manejadora declara un método para ejecutar una\n// solicitud.\ninterface ComponentWithContextualHelp is\n    method showHelp()\n\n\n// La clase base para componentes simples.\nabstract class Component implements ComponentWithContextualHelp is\n    field tooltipText: string\n\n    // El contenedor del componente actúa como el siguiente\n    // eslabón de la cadena de manejadores.\n    protected field container: Container\n\n    // El componente muestra una pista si tiene un texto de\n    // ayuda asignado. De lo contrario, reenvía la llamada al\n    // contenedor, si es que existe.\n    method showHelp() is\n        if (tooltipText != null)\n            // Muestra la pista.\n        else\n            container.showHelp()\n\n\n// Los contenedores pueden contener componentes simples y otros\n// contenedores como hijos. Las relaciones de la cadena se\n// establecen aquí. La clase hereda el comportamiento showHelp\n// (mostrarAyuda) de su padre.\nabstract class Container extends Component is\n    protected field children: array of Component\n\n    method add(child) is\n        children.add(child)\n        child.container = this\n\n\n// Los componentes primitivos pueden estar bien con la\n// implementación de la ayuda por defecto...\nclass Button extends Component is\n    // ...\n\n// Pero los componentes complejos pueden sobrescribir la\n// implementación por defecto. Si no puede proporcionarse el\n// texto de ayuda de una nueva forma, el componente siempre\n// puede invocar la implementación base (véase la clase\n// Componente).\nclass Panel extends Container is\n    field modalHelpText: string\n\n    method showHelp() is\n        if (modalHelpText != null)\n            // Muestra una ventana modal con el texto de ayuda.\n        else\n            super.showHelp()\n\n// ...igual que arriba...\nclass Dialog extends Container is\n    field wikiPageURL: string\n\n    method showHelp() is\n        if (wikiPageURL != null)\n            // Abre la página de ayuda wiki.\n        else\n            super.showHelp()\n\n\n// Código cliente.\nclass Application is\n    // Cada aplicación configura la cadena de forma diferente.\n    method createUI() is\n        dialog = new Dialog(\"Budget Reports\")\n        dialog.wikiPageURL = \"http://...\"\n        panel = new Panel(0, 0, 400, 800)\n        panel.modalHelpText = \"This panel does...\"\n        ok = new Button(250, 760, 50, 20, \"OK\")\n        ok.tooltipText = \"This is an OK button that...\"\n        cancel = new Button(320, 760, 50, 20, \"Cancel\")\n        // ...\n        panel.add(ok)\n        panel.add(cancel)\n        dialog.add(panel)\n\n    // Imagina lo que pasa aquí.\n    method onF1KeyPress() is\n        component = this.getComponentAtMouseCoords()\n        component.showHelp()",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Chain of Responsibility?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "chain-of-responsibility"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:19:53.004206"
+    },
+    {
+      "title": "Patrón Command",
+      "summary": "Commandes un patrón de diseño de comportamiento que convierte una solicitud en un objeto independiente que contiene toda la información sobre la solicitud. Esta transformación te permite parametrizar ...",
+      "explanation": "Commandes un patrón de diseño de comportamiento que convierte una solicitud en un objeto independiente que contiene toda la información sobre la solicitud. Esta transformación te permite parametrizar los métodos con diferentes solicitudes, retrasar o poner en cola la ejecución de una solicitud y soportar operaciones que no se pueden realizar. Imagina que estás trabajando en una nueva aplicación de edición de texto. Tu tarea actual consiste en crear una barra de herramientas con unos cuantos botones para varias operaciones del editor. Creaste una claseBotónmuy limpia que puede utilizarse para los botones de la barra de herramientas y también para botones genéricos en diversos diálogos. Todos los botones de la aplicación provienen de la misma clase. Aunque todos estos botones se parecen, se supone que hacen cosas diferentes. ¿Dónde pondrías el código para los varios gestores de clics de estos botones? La solución más simple consiste en crear cientos de subclases para cada lugar donde se utilice el botón. Estas subclases contendrán el código que deberá ejecutarse con el clic en un botón.",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Command?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "command"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:19:54.229108"
+    },
+    {
+      "title": "Patrón Iterator",
+      "summary": "Iteratores un patrón de diseño de comportamiento que te permite recorrer elementos de una colección sin exponer su representación subyacente (lista, pila, árbol, etc.). Las colecciones son de los tipo...",
+      "explanation": "Iteratores un patrón de diseño de comportamiento que te permite recorrer elementos de una colección sin exponer su representación subyacente (lista, pila, árbol, etc.). Las colecciones son de los tipos de datos más utilizados en programación. Sin embargo, una colección tan solo es un contenedor para un grupo de objetos. La mayoría de las colecciones almacena sus elementos en simples listas, pero algunas de ellas se basan en pilas, árboles, grafos y otras estructuras complejas de datos. Independientemente de cómo se estructure una colección, debe aportar una forma de acceder a sus elementos de modo que otro código pueda utilizar dichos elementos. Debe haber una forma de recorrer cada elemento de la colección sin acceder a los mismos elementos una y otra vez.",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Iterator?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "iterator"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:19:55.437079"
+    },
+    {
+      "title": "Patrón Mediator",
+      "summary": "Mediatores un patrón de diseño de comportamiento que te permite reducir las dependencias caóticas entre objetos. El patrón restringe las comunicaciones directas entre los objetos, forzándolos a colabo...",
+      "explanation": "Mediatores un patrón de diseño de comportamiento que te permite reducir las dependencias caóticas entre objetos. El patrón restringe las comunicaciones directas entre los objetos, forzándolos a colaborar únicamente a través de un objeto mediador. Digamos que tienes un diálogo para crear y editar perfiles de cliente. Consiste en varios controles de formulario, como campos de texto, casillas, botones, etc. Las relaciones entre los elementos de la interfaz de usuario pueden volverse caóticas cuando la aplicación crece. Algunos de los elementos del formulario pueden interactuar con otros. Por ejemplo, al seleccionar la casilla “tengo un perro” puede aparecer un campo de texto oculto para introducir el nombre del perro. Otro ejemplo es el botón de envío que tiene que validar los valores de todos los campos antes de guardar la información.",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Mediator?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "mediator"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:19:56.968662"
+    },
+    {
+      "title": "Patrón Memento",
+      "summary": "Mementoes un patrón de diseño de comportamiento que te permite guardar y restaurar el estado previo de un objeto sin revelar los detalles de su implementación. Imagina que estás creando una aplicación...",
+      "explanation": "Mementoes un patrón de diseño de comportamiento que te permite guardar y restaurar el estado previo de un objeto sin revelar los detalles de su implementación. Imagina que estás creando una aplicación de edición de texto. Además de editar texto, tu programa puede formatearlo, asi como insertar imágenes en línea, etc. En cierto momento, decides permitir a los usuarios deshacer cualquier operación realizada en el texto. Esta función se ha vuelto tan habitual en los últimos años que hoy en día todo el mundo espera que todas las aplicaciones la tengan. Para la implementación eliges la solución directa. Antes de realizar cualquier operación, la aplicación registra el estado de todos los objetos y lo guarda en un almacenamiento. Más tarde, cuando un usuario decide revertir una acción, la aplicación extrae la últimainstantáneadel historial y la utiliza para restaurar el estado de todos los objetos. Antes de ejecutar una operación, la aplicación guarda una instantánea del estado de los objetos, que más tarde se puede utilizar para restaurar objetos a su estado previo.",
+      "code_example": "// El originador contiene información importante que puede\n// cambiar con el paso del tiempo. También define un método para\n// guardar su estado dentro de un memento, y otro método para\n// restaurar el estado a partir de él.\nclass Editor is\n    private field text, curX, curY, selectionWidth\n\n    method setText(text) is\n        this.text = text\n\n    method setCursor(x, y) is\n        this.curX = x\n        this.curY = y\n\n    method setSelectionWidth(width) is\n        this.selectionWidth = width\n\n    // Guarda el estado actual dentro de un memento.\n    method createSnapshot():Snapshot is\n        // El memento es un objeto inmutable; ese es el motivo\n        // por el que el originador pasa su estado a los\n        // parámetros de su constructor.\n        return new Snapshot(this, text, curX, curY, selectionWidth)\n\n// La clase memento almacena el estado pasado del editor.\nclass Snapshot is\n    private field editor: Editor\n    private field text, curX, curY, selectionWidth\n\n    constructor Snapshot(editor, text, curX, curY, selectionWidth) is\n        this.editor = editor\n        this.text = text\n        this.curX = x\n        this.curY = y\n        this.selectionWidth = selectionWidth\n\n    // En cierto punto, puede restaurarse un estado previo del\n    // editor utilizando un objeto memento.\n    method restore() is\n        editor.setText(text)\n        editor.setCursor(curX, curY)\n        editor.setSelectionWidth(selectionWidth)\n\n// Un objeto de comando puede actuar como cuidador. En este\n// caso, el comando obtiene un memento justo antes de cambiar el\n// estado del originador. Cuando se solicita deshacer, restaura\n// el estado del originador a partir del memento.\nclass Command is\n    private field backup: Snapshot\n\n    method makeBackup() is\n        backup = editor.createSnapshot()\n\n    method undo() is\n        if (backup != null)\n            backup.restore()\n    // ...",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Memento?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "memento"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:19:58.250104"
+    },
+    {
+      "title": "Patrón Observer",
+      "summary": "Observeres un patrón de diseño de comportamiento que te permite definir un mecanismo de suscripción para notificar a varios objetos sobre cualquier evento que le suceda al objeto que están observando....",
+      "explanation": "Observeres un patrón de diseño de comportamiento que te permite definir un mecanismo de suscripción para notificar a varios objetos sobre cualquier evento que le suceda al objeto que están observando. Imagina que tienes dos tipos de objetos: un objetoClientey un objetoTienda. El cliente está muy interesado en una marca particular de producto (digamos, un nuevo modelo de iPhone) que estará disponible en la tienda muy pronto. El cliente puede visitar la tienda cada día para comprobar la disponibilidad del producto. Pero, mientras el producto está en camino, la mayoría de estos viajes serán en vano. Visita a la tienda vs. envío de spam",
+      "code_example": "// La clase notificadora base incluye código de gestión de\n// suscripciones y métodos de notificación.\nclass EventManager is\n    private field listeners: hash map of event types and listeners\n\n    method subscribe(eventType, listener) is\n        listeners.add(eventType, listener)\n\n    method unsubscribe(eventType, listener) is\n        listeners.remove(eventType, listener)\n\n    method notify(eventType, data) is\n        foreach (listener in listeners.of(eventType)) do\n            listener.update(data)\n\n// El notificador concreto contiene lógica de negocio real, de\n// interés para algunos suscriptores. Podemos derivar esta clase\n// de la notificadora base, pero esto no siempre es posible en\n// el mundo real porque puede que la notificadora concreta sea\n// ya una subclase. En este caso, puedes modificar la lógica de\n// la suscripción con composición, como hicimos aquí.\nclass Editor is\n    public field events: EventManager\n    private field file: File\n\n    constructor Editor() is\n        events = new EventManager()\n\n    // Los métodos de la lógica de negocio pueden notificar los\n    // cambios a los suscriptores.\n    method openFile(path) is\n        this.file = new File(path)\n        events.notify(\"open\", file.name)\n\n    method saveFile() is\n        file.write()\n        events.notify(\"save\", file.name)\n\n    // ...\n\n\n// Aquí está la interfaz suscriptora. Si tu lenguaje de\n// programación soporta tipos funcionales, puedes sustituir toda\n// la jerarquía suscriptora por un grupo de funciones.\n\n\ninterface EventListener is\n    method update(filename)\n\n// Los suscriptores concretos reaccionan a las actualizaciones\n// emitidas por el notificador al que están unidos.\nclass LoggingListener implements EventListener is\n    private field log: File\n    private field message: string\n\n    constructor LoggingListener(log_filename, message) is\n        this.log = new File(log_filename)\n        this.message = message\n\n    method update(filename) is\n        log.write(replace('%s',filename,message))\n\nclass EmailAlertsListener implements EventListener is\n    private field email: string\n    private field message: string\n\n    constructor EmailAlertsListener(email, message) is\n        this.email = email\n        this.message = message\n\n    method update(filename) is\n        system.email(email, replace('%s',filename,message))\n\n\n// Una  aplicación puede configurar notificadores y suscriptores\n// durante el tiempo de ejecución.\nclass Application is\n    method config() is\n        editor = new Editor()\n\n        logger = new LoggingListener(\n            \"/path/to/log.txt\",\n            \"Someone has opened the file: %s\")\n        editor.events.subscribe(\"open\", logger)\n\n        emailAlerts = new EmailAlertsListener(\n            \"admin@example.com\",\n            \"Someone has changed the file: %s\")\n        editor.events.subscribe(\"save\", emailAlerts)",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Observer?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "observer"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:19:59.485758"
+    },
+    {
+      "title": "Patrón State",
+      "summary": "Statees un patrón de diseño de comportamiento que permite a un objeto alterar su comportamiento cuando su estado interno cambia. Parece como si el objeto cambiara su clase. La idea principal es que, e...",
+      "explanation": "Statees un patrón de diseño de comportamiento que permite a un objeto alterar su comportamiento cuando su estado interno cambia. Parece como si el objeto cambiara su clase. La idea principal es que, en cualquier momento dado, un programa puede encontrarse en un númerofinitodeestados. Dentro de cada estado único, el programa se comporta de forma diferente y puede cambiar de un estado a otro instantáneamente. Sin embargo, dependiendo de un estado actual, el programa puede cambiar o no a otros estados. Estas normas de cambio llamadastransicionestambién son finitas y predeterminadas. También puedes aplicar esta solución a los objetos. Imagina que tienes una claseDocumento. Un documento puede encontrarse en uno de estos tres estados:Borrador,ModeraciónyPublicado. El métodopublicardel documento funciona de forma ligeramente distinta en cada estado: Posibles estados y transiciones de un objeto de documento.",
+      "code_example": "class Document is\n    field state: string\n    // ...\n    method publish() is\n        switch (state)\n            \"draft\":\n                state = \"moderation\"\n                break\n            \"moderation\":\n                if (currentUser.role == \"admin\")\n                    state = \"published\"\n                break\n            \"published\":\n                // No hacer nada.\n                break\n    // ...",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón State?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "state"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:20:00.692916"
+    },
+    {
+      "title": "Patrón Strategy",
+      "summary": "Strategyes un patrón de diseño de comportamiento que te permite definir una familia de algoritmos, colocar cada uno de ellos en una clase separada y hacer sus objetos intercambiables. Un día decidiste...",
+      "explanation": "Strategyes un patrón de diseño de comportamiento que te permite definir una familia de algoritmos, colocar cada uno de ellos en una clase separada y hacer sus objetos intercambiables. Un día decidiste crear una aplicación de navegación para viajeros ocasionales. La aplicación giraba alrededor de un bonito mapa que ayudaba a los usuarios a orientarse rápidamente en cualquier ciudad. Una de las funciones más solicitadas para la aplicación era la planificación automática de rutas. Un usuario debía poder introducir una dirección y ver la ruta más rápida a ese destino mostrado en el mapa. La primera versión de la aplicación sólo podía generar las rutas sobre carreteras. Las personas que viajaban en coche estaban locas de alegría. Pero, aparentemente, no a todo el mundo le gusta conducir durante sus vacaciones. De modo que, en la siguiente actualización, añadiste una opción para crear rutas a pie. Después, añadiste otra opción para permitir a las personas utilizar el transporte público en sus rutas.",
+      "code_example": "// La interfaz estrategia declara operaciones comunes a todas\n// las versiones soportadas de algún algoritmo. El contexto\n// utiliza esta interfaz para invocar el algoritmo definido por\n// las estrategias concretas.\ninterface Strategy is\n    method execute(a, b)\n\n// Las estrategias concretas implementan el algoritmo mientras\n// siguen la interfaz estrategia base. La interfaz las hace\n// intercambiables en el contexto.\nclass ConcreteStrategyAdd implements Strategy is\n    method execute(a, b) is\n        return a + b\n\nclass ConcreteStrategySubtract implements Strategy is\n    method execute(a, b) is\n        return a - b\n\nclass ConcreteStrategyMultiply implements Strategy is\n    method execute(a, b) is\n        return a * b\n\n// El contexto define la interfaz de interés para los clientes.\nclass Context is\n    // El contexto mantiene una referencia a uno de los objetos\n    // de estrategia. El contexto no conoce la clase concreta de\n    // una estrategia. Debe trabajar con todas las estrategias a\n    // través de la interfaz estrategia.\n    private strategy: Strategy\n\n    // Normalmente, el contexto acepta una estrategia a través\n    // del constructor y también proporciona un setter\n    // (modificador) para poder cambiar la estrategia durante el\n    // tiempo de ejecución.\n    method setStrategy(Strategy strategy) is\n        this.strategy = strategy\n\n    // El contexto delega parte del trabajo al objeto de\n    // estrategia en lugar de implementar varias versiones del\n    // algoritmo por su cuenta.\n    method executeStrategy(int a, int b) is\n        return strategy.execute(a, b)\n\n\n// El código cliente elige una estrategia concreta y la pasa al\n// contexto. El cliente debe conocer las diferencias entre\n// estrategias para elegir la mejor opción.\nclass ExampleApplication is\n    method main() is\n        Create context object.\n\n        Read first number.\n        Read last number.\n        Read the desired action from user input.\n\n        if (action == addition) then\n            context.setStrategy(new ConcreteStrategyAdd())\n\n        if (action == subtraction) then\n            context.setStrategy(new ConcreteStrategySubtract())\n\n        if (action == multiplication) then\n            context.setStrategy(new ConcreteStrategyMultiply())\n\n        result = context.executeStrategy(First number, Second number)\n\n        Print result.",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Strategy?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "strategy"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:20:02.142375"
+    },
+    {
+      "title": "Patrón Template Method",
+      "summary": "Template Methodes un patrón de diseño de comportamiento que define el esqueleto de un algoritmo en la superclase pero permite que las subclases sobrescriban pasos del algoritmo sin cambiar su estructu...",
+      "explanation": "Template Methodes un patrón de diseño de comportamiento que define el esqueleto de un algoritmo en la superclase pero permite que las subclases sobrescriban pasos del algoritmo sin cambiar su estructura. Imagina que estás creando una aplicación de minería de datos que analiza documentos corporativos. Los usuarios suben a la aplicación documentos en varios formatos (PDF, DOC, CSV) y ésta intenta extraer la información relevante de estos documentos en un formato uniforme. La primera versión de la aplicación sólo funcionaba con archivos DOC. La siguiente versión podía soportar archivos CSV. Un mes después, le “enseñaste” a extraer datos de archivos PDF. Las clases de minería de datos contenían mucho código duplicado.",
+      "code_example": "// La clase abstracta define un método plantilla que contiene un\n// esqueleto de algún algoritmo compuesto por llamadas,\n// normalmente a operaciones primitivas abstractas. Las\n// subclases concretas implementan estas operaciones, pero dejan\n// el propio método plantilla intacto.\nclass GameAI is\n    // El método plantilla define el esqueleto de un algoritmo.\n    method turn() is\n        collectResources()\n        buildStructures()\n        buildUnits()\n        attack()\n\n    // Algunos de los pasos se pueden implementar directamente\n    // en una clase base.\n    method collectResources() is\n        foreach (s in this.builtStructures) do\n            s.collect()\n\n    // Y algunos de ellos pueden definirse como abstractos.\n    abstract method buildStructures()\n    abstract method buildUnits()\n\n    // Una clase puede tener varios métodos plantilla.\n    method attack() is\n        enemy = closestEnemy()\n        if (enemy == null)\n            sendScouts(map.center)\n        else\n            sendWarriors(enemy.position)\n\n    abstract method sendScouts(position)\n    abstract method sendWarriors(position)\n\n// Las clases concretas tienen que implementar todas las\n// operaciones abstractas de la clase base, pero no deben\n// sobrescribir el propio método plantilla.\nclass OrcsAI extends GameAI is\n    method buildStructures() is\n        if (there are some resources) then\n            // Construye granjas, después cuarteles y después\n            // fortaleza.\n\n    method buildUnits() is\n        if (there are plenty of resources) then\n            if (there are no scouts)\n                // Crea peón y añádelo al grupo de exploradores.\n            else\n                // Crea soldado, añádelo al grupo de guerreros.\n\n    // ...\n\n    method sendScouts(position) is\n        if (scouts.length > 0) then\n            // Envía exploradores a posición.\n\n    method sendWarriors(position) is\n        if (warriors.length > 5) then\n            // Envía guerreros a posición.\n\n// Las subclases también pueden sobrescribir algunas operaciones\n// con una implementación por defecto.\nclass MonstersAI extends GameAI is\n    method collectResources() is\n        // Los monstruos no recopilan recursos.\n\n    method buildStructures() is\n        // Los monstruos no construyen estructuras.\n\n    method buildUnits() is\n        // Los monstruos no construyen unidades.",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Template Method?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "template-method"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:20:03.866777"
+    },
+    {
+      "title": "Patrón Visitor",
+      "summary": "Visitores un patrón de diseño de comportamiento que te permite separar algoritmos de los objetos sobre los que operan. Imagina que tu equipo desarrolla una aplicación que funciona con información geog...",
+      "explanation": "Visitores un patrón de diseño de comportamiento que te permite separar algoritmos de los objetos sobre los que operan. Imagina que tu equipo desarrolla una aplicación que funciona con información geográfica estructurada como un enorme grafo. Cada nodo del grafo puede representar una entidad compleja, como una ciudad, pero también cosas más específicas, como industrias, áreas turísticas, etc. Los nodos están conectados con otros si hay un camino entre los objetos reales que representan. Técnicamente, cada tipo de nodo está representado por su propia clase, mientras que cada nodo específico es un objeto. En cierto momento, te surge la tarea de implementar la exportación del grafo a formato XML. Al principio, el trabajo parece bastante sencillo. Planificaste añadir un método de exportación a cada clase de nodo y después aprovechar la recursión para recorrer cada nodo del grafo, ejecutando el método de exportación. La solución era sencilla y elegante: gracias al polimorfismo, no acoplabas el código que invocaba el método de exportación a clases concretas de nodos. Lamentablemente, el arquitecto del sistema no te permitió alterar las clases de nodo existentes. Dijo que el código ya estaba en producción y no quería arriesgarse a que se descompusiera por culpa de un potencial error en tus cambios.",
+      "code_example": "class ExportVisitor implements Visitor is\n    method doForCity(City c) { ... }\n    method doForIndustry(Industry f) { ... }\n    method doForSightSeeing(SightSeeing ss) { ... }\n    // ...",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": true,
+      "interview_question": "¿Cuándo usarías el patrón Visitor?",
+      "interview_answer": "",
+      "source": "refactoring.guru",
+      "tags": [
+        "design-patterns",
+        "gof",
+        "visitor"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:20:05.234391"
+    },
+    {
+      "title": "Join the DEV Community",
+      "summary": "DEV Community is a community of 4,109,189 amazing developers DEV Community— A space to discuss and keep up software development and manage your software career Built onForem— theopen sourcesoftware th",
+      "explanation": "DEV Community is a community of 4,109,189 amazing developers DEV Community— A space to discuss and keep up software development and manage your software career Built onForem— theopen sourcesoftware that powersDEVand other inclusive communities. Made with love andRuby on Rails. DEV Community©2016 - 2026.",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "dev.to",
+      "tags": [
+        "refactoring",
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:20:47.248611"
+    },
+    {
+      "title": "Dakota Huang",
+      "summary": "Building things with Python, Go, and JavaScript. Love automating everything. FastAPI, Django, TypeScript, C++, PostgreSQL, Java, Rust, Redis A side project for automating routine dev workflows with Py",
+      "explanation": "Building things with Python, Go, and JavaScript. Love automating everything. FastAPI, Django, TypeScript, C++, PostgreSQL, Java, Rust, Redis A side project for automating routine dev workflows with Python. Open source collaboration and tech discussions",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "dev.to",
+      "tags": [
+        "refactoring",
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:20:49.021934"
+    },
+    {
+      "title": "Giorgi Kobaidze",
+      "summary": "A web application that shows real-time notifications when planes fly over your location. AI-Powered Notion Workspace Management Clean, organize, and command your Notion workspace with AI. Powered by t",
+      "explanation": "A web application that shows real-time notifications when planes fly over your location. AI-Powered Notion Workspace Management Clean, organize, and command your Notion workspace with AI. Powered by the Notion MCP. A synthwave driving experience through your DEV Community articles Six AI personas debate any topic using Edward de Bono's Six Thinking Hats framework. Powered by Gemma 4 via Ollama. Runs fully local.",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "dev.to",
+      "tags": [
+        "programming",
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:20:55.083049"
+    },
+    {
+      "title": "Denys Shulhin",
+      "summary": "Full-stack .NET developer with a backend focus. Building ClipboardX for Android + Windows. Writing about things I learn while turning side projects into production software. DEV Community— A space to ",
+      "explanation": "Full-stack .NET developer with a backend focus. Building ClipboardX for Android + Windows. Writing about things I learn while turning side projects into production software. DEV Community— A space to discuss and keep up software development and manage your software career Built onForem— theopen sourcesoftware that powersDEVand other inclusive communities. Made with love andRuby on Rails. DEV Community©2016 - 2026.",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "dev.to",
+      "tags": [
+        "programming",
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:20:56.288183"
+    },
+    {
+      "title": "Remo H. Jansen",
+      "summary": "Technical Lead @ Marsh. Former TypeScript Microsoft MVP, writer, speaker, technology-lover, and OSS enthusiast. Author of InversifyJS. TypeScript, Applied AI, Agentic Engineering, Agentic SDLCM, JavaS",
+      "explanation": "Technical Lead @ Marsh. Former TypeScript Microsoft MVP, writer, speaker, technology-lover, and OSS enthusiast. Author of InversifyJS. TypeScript, Applied AI, Agentic Engineering, Agentic SDLCM, JavaScript, Node.js, React, C#, OSS Low level programing (3D Engines, Operating Systems, ISAs, etc). Consulting and corporate training services, speaking at conferences and meetups.",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "dev.to",
+      "tags": [
+        "career",
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:20:59.798490"
+    },
+    {
+      "title": "Carlos Oliva Pascual",
+      "summary": "Weekly guides on Claude Code, React & AI tools → stacknotice.com Create an account to connect with Carlos Oliva Pascual. You can also sign in below to proceed if you already have an account. DEV Commu",
+      "explanation": "Weekly guides on Claude Code, React & AI tools → stacknotice.com Create an account to connect with Carlos Oliva Pascual. You can also sign in below to proceed if you already have an account. DEV Community— A space to discuss and keep up software development and manage your software career Built onForem— theopen sourcesoftware that powersDEVand other inclusive communities.",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "dev.to",
+      "tags": [
+        "career",
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:21:01.824250"
+    },
+    {
+      "title": "SameerQaisar17",
+      "summary": "Learning Python one article at a time. I write beginner-friendly tutorials for people who are exactly where I was 3 months ago. PythonTechnical WritingContent WritingBloggingGitHubLearning in Public C",
+      "explanation": "Learning Python one article at a time. I write beginner-friendly tutorials for people who are exactly where I was 3 months ago. PythonTechnical WritingContent WritingBloggingGitHubLearning in Public Currently learning Python and technical writing. I write beginner-friendly tutorials for people who are exactly where I was 3 months ago. Create an account to connect with SameerQaisar17. You can also sign in below to proceed if you already have an account.",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "dev.to",
+      "tags": [
+        "beginners",
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-24T12:21:06.433859"
     }
   ]
 }
