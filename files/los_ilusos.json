@@ -560,5 +560,17 @@
     "relevancia": 2,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "'Los Ilusos 13+13' - Teaser tráiler",
+    "url": "https://www.youtube.com/watch?v=Wgpn19mzQF8",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-24T17:00:49.837502",
+    "medio": "Camera&Light Mag",
+    "imagen": "https://i.ytimg.com/vi/Wgpn19mzQF8/hqdefault.jpg",
+    "tipo": "trailer",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
