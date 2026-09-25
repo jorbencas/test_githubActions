@@ -2,7 +2,7 @@ name: "[PROJECTS] Generate & Send Projects (local in test_githubActions)"
 
 on:
   schedule:
-    - cron: '0 9 * * 1'  # Cada lunes 9:00 UTC
+    - cron: '0 * * * *'  # Cada hora (minuto 0 de cada hora)
   workflow_dispatch:
     inputs:
       count:
@@ -48,7 +48,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       AI_PROVIDER: ${{ github.event.inputs.ai_provider || vars.AI_PROVIDER || 'gemini' }}
       AI_MODEL: ${{ vars.AI_MODEL || 'gemini-1.5-flash' }}
-      PROJECTS_PER_RUN: ${{ github.event.inputs.count || vars.PROJECTS_PER_RUN || '5' }}
+      PROJECTS_PER_RUN: ${{ github.event.inputs.count || vars.PROJECTS_PER_RUN || '3' }}
       SCRAPE_TUWEB_DEV: ${{ vars.SCRAPE_TUWEB_DEV || 'true' }}
       DATA_DIR: ./data
 
@@ -77,6 +77,7 @@ jobs:
         run: |
           cd project_generator
           ARGS=()
+          COUNT="${{ github.event.inputs.count || vars.PROJECTS_PER_RUN || '3' }}"
           if [[ -n "${{ github.event.inputs.nivel }}" ]]; then
             ARGS+=(--nivel "${{ github.event.inputs.nivel }}")
           fi
@@ -86,7 +87,7 @@ jobs:
           if [[ -n "${{ github.event.inputs.lenguaje }}" ]]; then
             ARGS+=(--lenguaje "${{ github.event.inputs.lenguaje }}")
           fi
-          python -m src.main generate "${ARGS[@]}" --send-telegram
+          python -m src.main generate --count "$COUNT" "${ARGS[@]}" --send-telegram
         env:
           PYTHONPATH: project_generator/src
           AI_PROVIDER: ${{ github.event.inputs.ai_provider || vars.AI_PROVIDER || 'gemini' }}
