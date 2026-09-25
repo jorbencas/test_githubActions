@@ -1,0 +1,45 @@
+name: "[PROJECTS] Generate Projects → Dispatch to test_githubActions"
+on:
+  schedule:
+    - cron: '0 9 * * 1'  # Cada lunes 9:00 UTC
+  workflow_dispatch:
+    inputs:
+      count:
+        description: 'Número de proyectos a generar'
+        required: false
+        default: '5'
+        type: string
+      nivel:
+        description: 'Filtrar por nivel (junior/semisenior/senior)'
+        required: false
+        type: string
+      scope:
+        description: 'Filtrar por scope (miniproyecto/proyecto/multiproyecto)'
+        required: false
+        type: string
+      lenguaje:
+        description: 'Filtrar por lenguaje (python/javascript/typescript/csharp/go/rust)'
+        required: false
+        type: string
+      ai_provider:
+        description: 'Proveedor IA (openai/anthropic/gemini/deterministic)'
+        required: false
+        default: 'gemini'
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  dispatch_to_test_githubactions:
+    name: Dispatch to test_githubActions
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Trigger project generation in test_githubActions
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.GH_PAT }}
+          repository: jorbencas/test_githubActions
+          event-type: generate_projects
+          client-payload: '{"count": "${{ github.event.inputs.count || vars.PROJECTS_PER_RUN || 5 }}", "nivel": "${{ github.event.inputs.nivel }}", "scope": "${{ github.event.inputs.scope }}", "lenguaje": "${{ github.event.inputs.lenguaje }}", "ai_provider": "${{ github.event.inputs.ai_provider || vars.AI_PROVIDER || 'gemini' }}"}'

@@ -1,0 +1,298 @@
+{
+  "proyectos": [
+    {
+      "proyecto": {
+        "id": "det_8517",
+        "titulo": "API REST para gestión de inventario multi-almacén",
+        "descripcion_corta": "FastAPI + PostgreSQL + Redis cache",
+        "descripcion_detallada": "FastAPI + PostgreSQL + Redis cache. Nivel: semisenior. Scope: proyecto. Incluye: Multi-tenant, Stock tiempo real, Alertas bajo stock, Audit log",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "fastapi",
+              "categoria": "framework",
+              "descripcion": null,
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": null
+            },
+            {
+              "nombre": "sqlalchemy",
+              "categoria": "orm",
+              "descripcion": null,
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": null
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "redis",
+              "categoria": "cache",
+              "descripcion": null,
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": null
+            },
+            {
+              "nombre": "alembic",
+              "categoria": "migraciones",
+              "descripcion": null,
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": null
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Multi-tenant",
+          "Stock tiempo real",
+          "Alertas bajo stock",
+          "Audit log"
+        ],
+        "casos_uso": [
+          "Usuario multi-tenant",
+          "Usuario stock tiempo real",
+          "Usuario alertas bajo stock",
+          "Usuario audit log"
+        ],
+        "reglas_negocio": [],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 3,
+        "prerequisitos": [
+          "Conocimientos de python",
+          "Git básico"
+        ],
+        "riesgos": [
+          "Scope creep",
+          "Tiempo limitado"
+        ],
+        "ideas_extensión": [
+          "Añadir tests",
+          "CI/CD",
+          "Documentación"
+        ],
+        "fuente_inspiracion": "template_deterministico",
+        "fecha_generacion": "2024-01-01T00:00:00",
+        "hash_unicidad": "68eac8153d33f321"
+      },
+      "metadata": {
+        "provider": "deterministic:templates",
+        "prompt_hash": "5a9309938dd4950c"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "det_2819",
+        "titulo": "Dashboard de métricas en tiempo real con WebSockets",
+        "descripcion_corta": "React + Socket.io + Chart.js para monitoring",
+        "descripcion_detallada": "React + Socket.io + Chart.js para monitoring. Nivel: semisenior. Scope: proyecto. Incluye: Métricas live, Alertas visuales, Historial, Multi-usuario",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "fullstack"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "react",
+              "categoria": "framework",
+              "descripcion": null,
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": null
+            },
+            {
+              "nombre": "socket.io",
+              "categoria": "realtime",
+              "descripcion": null,
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": null
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "chart.js",
+              "categoria": "visualizacion",
+              "descripcion": null,
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": null
+            },
+            {
+              "nombre": "zustand",
+              "categoria": "state",
+              "descripcion": null,
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": null
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Métricas live",
+          "Alertas visuales",
+          "Historial",
+          "Multi-usuario"
+        ],
+        "casos_uso": [
+          "Usuario métricas live",
+          "Usuario alertas visuales",
+          "Usuario historial",
+          "Usuario multi-usuario"
+        ],
+        "reglas_negocio": [],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 3,
+        "prerequisitos": [
+          "Conocimientos de typescript",
+          "Git básico"
+        ],
+        "riesgos": [
+          "Scope creep",
+          "Tiempo limitado"
+        ],
+        "ideas_extensión": [
+          "Añadir tests",
+          "CI/CD",
+          "Documentación"
+        ],
+        "fuente_inspiracion": "template_deterministico",
+        "fecha_generacion": "2024-01-01T00:00:00",
+        "hash_unicidad": "671746088acf77e5"
+      },
+      "metadata": {
+        "provider": "deterministic:templates",
+        "prompt_hash": "5a9309938dd4950c"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "det_5014",
+        "titulo": "Microservicio de procesamiento de pedidos con gRPC",
+        "descripcion_corta": "ASP.NET Core + gRPC + Entity Framework",
+        "descripcion_detallada": "ASP.NET Core + gRPC + Entity Framework. Nivel: senior. Scope: multiproyecto. Incluye: CQRS, Event sourcing, Health checks, Distributed tracing",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "microservicio",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "csharp",
+          "frameworks": [
+            {
+              "nombre": "asp.net core",
+              "categoria": "framework",
+              "descripcion": null,
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": null
+            },
+            {
+              "nombre": "grpc",
+              "categoria": "comunicacion",
+              "descripcion": null,
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": null
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "entity framework core",
+              "categoria": "orm",
+              "descripcion": null,
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": null
+            },
+            {
+              "nombre": "mediatr",
+              "categoria": "patrones",
+              "descripcion": null,
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": null
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "CQRS",
+          "Event sourcing",
+          "Health checks",
+          "Distributed tracing"
+        ],
+        "casos_uso": [
+          "Usuario cqrs",
+          "Usuario event sourcing",
+          "Usuario health checks",
+          "Usuario distributed tracing"
+        ],
+        "reglas_negocio": [],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos de csharp",
+          "Git básico"
+        ],
+        "riesgos": [
+          "Scope creep",
+          "Tiempo limitado"
+        ],
+        "ideas_extensión": [
+          "Añadir tests",
+          "CI/CD",
+          "Documentación"
+        ],
+        "fuente_inspiracion": "template_deterministico",
+        "fecha_generacion": "2024-01-01T00:00:00",
+        "hash_unicidad": "0b7c4cc679e2db3a"
+      },
+      "metadata": {
+        "provider": "deterministic:templates",
+        "prompt_hash": "5a9309938dd4950c"
+      }
+    }
+  ],
+  "ultimos_hashes": [
+    "68eac8153d33f321",
+    "671746088acf77e5",
+    "0b7c4cc679e2db3a"
+  ],
+  "total_generados": 3,
+  "fecha_ultima_generacion": "2026-09-25T13:20:09.866741"
+}
