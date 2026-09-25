@@ -2,31 +2,8 @@ name: "[PROJECTS] Generate & Send Projects (local in test_githubActions)"
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Cada hora (minuto 0 de cada hora)
+    - cron: '0 */4 * * *'  # Cada 4 horas (00:00, 04:00, 08:00, 12:00, 16:00, 20:00 UTC)
   workflow_dispatch:
-    inputs:
-      count:
-        description: "Number of projects to generate"
-        required: false
-        default: "5"
-        type: string
-      nivel:
-        description: "Filter by level (junior/semisenior/senior)"
-        required: false
-        type: string
-      scope:
-        description: "Filter by scope (miniproyecto/proyecto/multiproyecto)"
-        required: false
-        type: string
-      lenguaje:
-        description: "Filter by language (python/javascript/typescript/csharp/go/rust)"
-        required: false
-        type: string
-      ai_provider:
-        description: "AI provider (openai/anthropic/gemini/deterministic)"
-        required: false
-        default: "gemini"
-        type: string
 
 concurrency:
   group: generate-projects-${{ github.ref }}
@@ -46,9 +23,9 @@ jobs:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      AI_PROVIDER: ${{ github.event.inputs.ai_provider || vars.AI_PROVIDER || 'gemini' }}
+      AI_PROVIDER: ${{ vars.AI_PROVIDER || 'gemini' }}
       AI_MODEL: ${{ vars.AI_MODEL || 'gemini-1.5-flash' }}
-      PROJECTS_PER_RUN: ${{ github.event.inputs.count || vars.PROJECTS_PER_RUN || '3' }}
+      PROJECTS_PER_RUN: ${{ vars.PROJECTS_PER_RUN || '3' }}
       SCRAPE_TUWEB_DEV: ${{ vars.SCRAPE_TUWEB_DEV || 'true' }}
       DATA_DIR: ./data
 
@@ -76,21 +53,10 @@ jobs:
         id: generate
         run: |
           cd project_generator
-          ARGS=()
-          COUNT="${{ github.event.inputs.count || vars.PROJECTS_PER_RUN || '3' }}"
-          if [[ -n "${{ github.event.inputs.nivel }}" ]]; then
-            ARGS+=(--nivel "${{ github.event.inputs.nivel }}")
-          fi
-          if [[ -n "${{ github.event.inputs.scope }}" ]]; then
-            ARGS+=(--scope "${{ github.event.inputs.scope }}")
-          fi
-          if [[ -n "${{ github.event.inputs.lenguaje }}" ]]; then
-            ARGS+=(--lenguaje "${{ github.event.inputs.lenguaje }}")
-          fi
-          python -m src.main generate --count "$COUNT" "${ARGS[@]}" --send-telegram
+          python -m src.main generate --count "${PROJECTS_PER_RUN}" --send-telegram
         env:
           PYTHONPATH: project_generator/src
-          AI_PROVIDER: ${{ github.event.inputs.ai_provider || vars.AI_PROVIDER || 'gemini' }}
+          AI_PROVIDER: ${{ vars.AI_PROVIDER || 'gemini' }}
 
       - name: Upload history artifact
         uses: actions/upload-artifact@v4
