@@ -111,4 +111,4 @@ jobs:
             git push origin master
           fi
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ github.token }}
