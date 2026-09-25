@@ -1,5 +1,19 @@
 [
     {
+        "titulo": "Dentro de SeaHack: 24 horas para construir una startup de IA",
+        "enlace": "https://www.freecodecamp.org/news/inside-seahack-24-hours-to-build-an-ai-startup/",
+        "fuente": "freeCodeCamp",
+        "tipo": "noticia",
+        "f": "25/09",
+        "fecha_publicacion": "",
+        "badge": "Tech",
+        "categoria": "🤖 IA",
+        "imagen_url_original": "",
+        "fecha_real": "25/09/2026",
+        "ts": "2026-09-25T01:05:32.423230",
+        "traducido": true
+    },
+    {
         "titulo": "De forma sorprendente, España es bastante más pro-IA que los países de su entorno",
         "enlace": "https://www.xataka.com/robotica-e-ia/forma-sorprendente-espana-bastante-pro-ia-que-paises-su-entorno",
         "fuente": "Xataka",
