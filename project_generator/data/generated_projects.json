@@ -286,13 +286,109 @@
         "provider": "deterministic:templates",
         "prompt_hash": "5a9309938dd4950c"
       }
+    },
+    {
+      "proyecto": {
+        "id": "det_1638",
+        "titulo": "CLI de gestión de tareas con persistencia local",
+        "descripcion_corta": "Gestor de tareas en terminal con SQLite y rich",
+        "descripcion_detallada": "Gestor de tareas en terminal con SQLite y rich. Nivel: junior. Scope: miniproyecto. Incluye: CRUD tareas, Filtrado por etiquetas, Exportar JSON/CSV, Recordatorios",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "typer",
+              "categoria": "framework",
+              "descripcion": null,
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": null
+            },
+            {
+              "nombre": "rich",
+              "categoria": "ui",
+              "descripcion": null,
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": null
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "sqlite3",
+              "categoria": "db",
+              "descripcion": null,
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": null
+            },
+            {
+              "nombre": "pydantic",
+              "categoria": "validacion",
+              "descripcion": null,
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": null
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "CRUD tareas",
+          "Filtrado por etiquetas",
+          "Exportar JSON/CSV",
+          "Recordatorios"
+        ],
+        "casos_uso": [
+          "Usuario crud tareas",
+          "Usuario filtrado por etiquetas",
+          "Usuario exportar json/csv",
+          "Usuario recordatorios"
+        ],
+        "reglas_negocio": [],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 1,
+        "prerequisitos": [
+          "Conocimientos de python",
+          "Git básico"
+        ],
+        "riesgos": [
+          "Scope creep",
+          "Tiempo limitado"
+        ],
+        "ideas_extensión": [
+          "Añadir tests",
+          "CI/CD",
+          "Documentación"
+        ],
+        "fuente_inspiracion": "template_deterministico",
+        "fecha_generacion": "2024-01-01T00:00:00",
+        "hash_unicidad": "92a69fe916bd274d"
+      },
+      "metadata": {
+        "provider": "deterministic:templates",
+        "prompt_hash": "1fd3337e91a6ed02"
+      }
     }
   ],
   "ultimos_hashes": [
     "68eac8153d33f321",
     "671746088acf77e5",
-    "0b7c4cc679e2db3a"
+    "0b7c4cc679e2db3a",
+    "92a69fe916bd274d"
   ],
-  "total_generados": 3,
-  "fecha_ultima_generacion": "2026-09-25T13:20:09.866741"
+  "total_generados": 4,
+  "fecha_ultima_generacion": "2026-09-25T13:35:15.915188"
 }
