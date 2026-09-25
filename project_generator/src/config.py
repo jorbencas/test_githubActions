@@ -9,26 +9,24 @@ class Settings(BaseSettings):
     telegram_bot_token: str = Field(..., alias="TELEGRAM_BOT_TOKEN")
     telegram_reports_channel_id: int = Field(..., alias="TELEGRAM_REPORTS_PROYECTOS_CHANNEL_ID")
     
-    # AI Providers (al menos uno requerido)
-    openai_api_key: Optional[str] = Field(None, alias="OPENAI_API_KEY")
-    anthropic_api_key: Optional[str] = Field(None, alias="ANTHROPIC_API_KEY")
-    gemini_api_key: Optional[str] = Field(None, alias="GEMINI_API_KEY")
+    # AI (solo Gemini)
+    gemini_api_key: str = Field(..., alias="GEMINI_API_KEY")
+    ai_model: str = Field("gemini-1.5-flash", alias="AI_MODEL")
     
     # Configuración generación
-    ai_provider: str = Field("openai", alias="AI_PROVIDER")  # openai, anthropic, gemini
-    ai_model: str = Field("gpt-4o-mini", alias="AI_MODEL")
-    projects_per_run: int = Field(5, alias="PROJECTS_PER_RUN")
+    projects_per_run: int = Field(3, alias="PROJECTS_PER_RUN")
+    scrape_tuweb_dev: bool = Field(True, alias="SCRAPE_TUWEB_DEV")
     
     # Persistencia
     data_dir: str = Field("./data", alias="DATA_DIR")
     history_file: str = Field("generated_projects.json", alias="HISTORY_FILE")
     
     # Scraper opcional
-    scrape_tuweb_dev: bool = Field(False, alias="SCRAPE_TUWEB_DEV")
+    scrape_tuweb_dev: bool = Field(True, alias="SCRAPE_TUWEB_DEV")
     tuweb_dev_url: str = Field("https://tuweb.dev/", alias="TUWEB_DEV_URL")
     
     # Scheduler
-    cron_schedule: str = Field("0 9 * * 1", alias="CRON_SCHEDULE")  # Lunes 9am
+    cron_schedule: str = Field("0 */4 * * *", alias="CRON_SCHEDULE")
     
     class Config:
         env_file = ".env"

@@ -21,7 +21,6 @@ jobs:
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_REPORTS_PROYECTOS_CHANNEL_ID: ${{ secrets.TELEGRAM_REPORTS_PROYECTOS_CHANNEL_ID }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      AI_PROVIDER: ${{ vars.AI_PROVIDER || 'gemini' }}
       AI_MODEL: ${{ vars.AI_MODEL || 'gemini-1.5-flash' }}
       PROJECTS_PER_RUN: ${{ vars.PROJECTS_PER_RUN || '3' }}
       SCRAPE_TUWEB_DEV: ${{ vars.SCRAPE_TUWEB_DEV || 'true' }}
@@ -54,7 +53,6 @@ jobs:
           python -m src.main generate --count "${PROJECTS_PER_RUN}" --send-telegram
         env:
           PYTHONPATH: project_generator/src
-          AI_PROVIDER: ${{ vars.AI_PROVIDER || 'gemini' }}
 
       - name: Upload history artifact
         uses: actions/upload-artifact@v4

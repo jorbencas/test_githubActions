@@ -39,15 +39,7 @@ class ProjectGenerator:
     
     def _init_provider(self):
         if self.provider is None:
-            api_key = None
-            if settings.ai_provider == "openai":
-                api_key = settings.openai_api_key
-            elif settings.ai_provider == "anthropic":
-                api_key = settings.anthropic_api_key
-            elif settings.ai_provider == "gemini":
-                api_key = settings.gemini_api_key
-            
-            self.provider = get_provider(settings.ai_provider, api_key, settings.ai_model)
+            self.provider = get_provider("gemini", settings.gemini_api_key, settings.ai_model)
     
     def _get_inspiration_sources(self) -> List[Dict]:
         sources = []
