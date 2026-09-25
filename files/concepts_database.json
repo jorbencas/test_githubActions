@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 143,
+    "total_concepts": 144,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -14,9 +14,10 @@
       "patrones_diseno",
       "poo",
       "rag_ai",
+      "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-25T12:38:19.107945"
+    "last_scraped": "2026-09-25T17:44:01.956503"
   },
   "concepts": [
     {
@@ -2669,6 +2670,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-24T19:46:14.275881"
+    },
+    {
+      "title": "SQLx en Rust: queries tipadas en compilación, async, migraciones y PostgreSQL",
+      "summary": "SQLx es el toolkit de base de datos async para Rust que verifica tus queries SQL contra la base de datos real en tiempo de compilación, antes de ejecutar el código. Si la query tiene un error de sinta",
+      "explanation": "SQLx es el toolkit de base de datos async para Rust que verifica tus queries SQL contra la base de datos real en tiempo de compilación, antes de ejecutar el código. Si la query tiene un error de sintaxis, referencia una columna que no existe o devuelve un tipo incompatible con el struct de destino, obtienes un error de compilación, no un panic en producción.Conexión con PgPool y configuración básica SQLx trabaja con pools de conexiones.PgPoolgestiona un conjunto de conexiones a PostgreSQL y las reutiliza entre peticiones. El pool esCloneySend + Sync, por lo que puede compartirse fácilmente con Axum o Tokio.// [dependencies]\n// sqlx = { version = \"0.8\", features = [\"runtime-tokio\", \"postgres\", \"chrono\", \"uuid\"] }\n// tokio = { version = \"1\", features = [\"full\"] }\n\nuse sqlx::PgPool;\n\n#[tokio::main]\nasync fn main() -> Result<(), sqlx::Error> {\n    let database_url = std::env::var(\"DATABASE_URL\")\n        .unwrap_or_else(|_| \"postgres://user:pass@localhost/midb\".into());\n\n    let pool = PgPool::connect(&database_url).await?;\n\n    // Verificar conexión\n    let row: (i32,) = sqlx::query_as(\"SELECT 1\").fetch_one(&pool).await?;\n    println!(\"Conexión OK: {}\", row.0);\n\n    // Configurar pool con opciones avanzadas\n    let pool_config = sqlx::postgres::PgPoolOptions::new()\n        .max_connections(20)\n        .min_connections(2)\n        .acquire_timeout(std::time::Duration::from_secs(5))\n        .connect(&database_url)\n        .await?;\n\n    println!(\"Pool configurado con {} conexiones má",
+      "code_example": "// [dependencies]\n// sqlx = { version = \"0.8\", features = [\"runtime-tokio\", \"postgres\", \"chrono\", \"uuid\"] }\n// tokio = { version = \"1\", features = [\"full\"] }\n\nuse sqlx::PgPool;\n\n#[tokio::main]\nasync fn main() -> Result<(), sqlx::Error> {\n    let database_url = std::env::var(\"DATABASE_URL\")\n        .unwrap_or_else(|_| \"postgres://user:pass@localhost/midb\".into());\n\n    let pool = PgPool::connect(&database_url).await?;\n\n    // Verificar conexión\n    let row: (i32,) = sqlx::query_as(\"SELECT 1\").fetch_one(&pool).await?;\n    println!(\"Conexión OK: {}\", row.0);\n\n    // Configurar pool con opciones avanzadas\n    let pool_config = sqlx::postgres::PgPoolOptions::new()\n        .max_connections(20)\n        .min_connections(2)\n        .acquire_timeout(std::time::Duration::from_secs(5))\n        .connect(&database_url)\n        .await?;\n\n    println!(\"Pool configurado con {} conexiones máximas\", pool_config.size());\n    Ok(())\n}",
+      "use_cases": [],
+      "difficulty": 3,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "rendering"
+      ],
+      "cat": "rendering",
+      "scraped_at": "2026-09-25T17:43:20.052507"
     }
   ]
 }
