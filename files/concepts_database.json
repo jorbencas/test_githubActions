@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 144,
+    "total_concepts": 145,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-26T13:35:18.558312"
+    "last_scraped": "2026-09-26T17:35:22.809453"
   },
   "concepts": [
     {
@@ -2688,6 +2688,24 @@
       ],
       "cat": "rendering",
       "scraped_at": "2026-09-25T17:43:20.052507"
+    },
+    {
+      "title": "Tokio avanzado en Rust: select!, join!, spawn_blocking, tokio::sync y cancellation tokens",
+      "summary": "Tokio es el runtime async más usado en Rust, pero su uso avanzado va mucho más allá detokio::mainyspawn. Coordinar múltiples futures conselect!yjoin!, delegar trabajo CPU-intensivo conspawn_blocking, ",
+      "explanation": "Tokio es el runtime async más usado en Rust, pero su uso avanzado va mucho más allá detokio::mainyspawn. Coordinar múltiples futures conselect!yjoin!, delegar trabajo CPU-intensivo conspawn_blocking, compartir estado con las primitivas detokio::syncy propagar cancelaciones conCancellationTokenson las herramientas que distinguen un uso básico de uno profesional.select!: ejecutar el primer future que complete tokio::select!ejecuta varios futures concurrentemente y devuelve el resultado del primero en completar, cancelando los demás. Es el mecanismo principal para implementar timeouts, carreras entre operaciones y escape de bucles de espera.use tokio::time::{sleep, Duration, timeout};\nuse tokio::sync::oneshot;\n\nasync fn operacion_lenta() -> String {\n    sleep(Duration::from_millis(200)).await;\n    \"resultado de la operación\".into()\n}\n\nasync fn fallback() -> String {\n    sleep(Duration::from_millis(100)).await;\n    \"fallback (más rápido)\".into()\n}\n\n#[tokio::main]\nasync fn main() {\n    // select!: gana el primero\n    let ganador = tokio::select! {\n        r = operacion_lenta() => format!(\"operación: {r}\"),\n        r = fallback()        => format!(\"fallback: {r}\"),\n    };\n    println!(\"{ganador}\"); // fallback: fallback (más rápido)\n\n    // timeout como sugar sobre select!\n    match timeout(Duration::from_millis(50), operacion_lenta()).await {\n        Ok(r)  => println!(\"completado: {r}\"),\n        Err(_) => println!(\"timeout después de 50ms\"),\n    }\n\n    // Cancelación con canal on",
+      "code_example": "use tokio::time::{sleep, Duration, timeout};\nuse tokio::sync::oneshot;\n\nasync fn operacion_lenta() -> String {\n    sleep(Duration::from_millis(200)).await;\n    \"resultado de la operación\".into()\n}\n\nasync fn fallback() -> String {\n    sleep(Duration::from_millis(100)).await;\n    \"fallback (más rápido)\".into()\n}\n\n#[tokio::main]\nasync fn main() {\n    // select!: gana el primero\n    let ganador = tokio::select! {\n        r = operacion_lenta() => format!(\"operación: {r}\"),\n        r = fallback()        => format!(\"fallback: {r}\"),\n    };\n    println!(\"{ganador}\"); // fallback: fallback (más rápido)\n\n    // timeout como sugar sobre select!\n    match timeout(Duration::from_millis(50), operacion_lenta()).await {\n        Ok(r)  => println!(\"completado: {r}\"),\n        Err(_) => println!(\"timeout después de 50ms\"),\n    }\n\n    // Cancelación con canal oneshot\n    let (tx, mut rx) = oneshot::channel::<()>();\n    let handle = tokio::spawn(async move {\n        loop {\n            tokio::select! {\n                _ = &mut rx => { println!(\"tarea cancelada\"); break; }\n                _ = sleep(Duration::from_millis(20)) => {\n                    println!(\"tick...\");\n                }\n            }\n        }\n    });\n    sleep(Duration::from_millis(70)).await;\n    let _ = tx.send(());\n    handle.await.unwrap();\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "seguridad_web"
+      ],
+      "cat": "seguridad_web",
+      "scraped_at": "2026-09-26T17:34:42.108703"
     }
   ]
 }
