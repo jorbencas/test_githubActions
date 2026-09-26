@@ -52,10 +52,11 @@ class _ClienteFalso:
         raise self.excepcion
 
 
-def _proveedor(cliente) -> ap.GeminiProvider:
+def _proveedor(cliente, models="gemini-2.5-flash-lite") -> ap.GeminiProvider:
     prov = ap.GeminiProvider.__new__(ap.GeminiProvider)
     prov.api_key = "test-key"
-    prov.model = "gemini-2.5-flash-lite"
+    prov.models = [m.strip() for m in models.split(",") if m.strip()]
+    prov.model = prov.models[0]
     prov.client = cliente
     return prov
 
@@ -131,3 +132,75 @@ def test_cmd_generate_no_tumba_el_job_con_el_tope_agotado():
 
     assert resultado == []
     assert not enviados, "no debe enviar nada a Telegram si no se generó nada"
+
+
+# ── Cadena de modelos ────────────────────────────────────────────────────────
+
+class _ClientePorModelo:
+    """Responde solo a los modelos de `disponibles`; el resto da 404."""
+
+    def __init__(self, disponibles, error=404):
+        self.disponibles = disponibles
+        self.error = error
+        self.llamadas = []
+
+    def _responder(self, model=None, **_kwargs):
+        self.llamadas.append(model)
+        if model not in self.disponibles:
+            if self.error == 404:
+                raise ge.ClientError(
+                    404, {"error": {"message": "models/x is not found", "status": "NOT_FOUND"}}, None
+                )
+            raise self.error
+        return types.SimpleNamespace(text='{"proyectos": []}')
+
+    @property
+    def models(self):
+        return types.SimpleNamespace(generate_content=self._responder)
+
+
+def test_la_lista_de_modelos_se_prueba_en_orden():
+    prov = ap.GeminiProvider.__new__(ap.GeminiProvider)
+    prov.models = [m.strip() for m in "a, b ,c".split(",") if m.strip()]
+    assert prov.models == ["a", "b", "c"]
+
+
+def test_si_el_primer_modelo_no_existe_pasa_al_siguiente():
+    """Es el caso que motivó el fallback: flash-lite sin 404 disponible."""
+    cliente = _ClientePorModelo({"gemini-2.5-flash"})
+    prov = _proveedor(cliente, "gemini-2.5-flash-lite,gemini-2.5-flash")
+
+    respuesta = asyncio.run(prov.generate("p", "s"))
+
+    assert respuesta == '{"proyectos": []}'
+    assert cliente.llamadas == ["gemini-2.5-flash-lite", "gemini-2.5-flash"]
+
+
+def test_si_el_primer_modelo_no_tiene_cuota_pasa_al_siguiente():
+    """El cupo es por modelo, así que el siguiente puede seguir teniendo."""
+    cliente = _ClientePorModelo(
+        {"gemini-2.5-flash"},
+        error=_error_429(ERROR_TOPE_DIARIO),
+    )
+    prov = _proveedor(cliente, "gemini-2.5-flash-lite,gemini-2.5-flash")
+
+    respuesta = asyncio.run(prov.generate("p", "s"))
+
+    assert respuesta == '{"proyectos": []}'
+    assert cliente.llamadas == ["gemini-2.5-flash-lite", "gemini-2.5-flash"]
+
+
+def test_si_ningun_modelo_sirve_el_ultimo_error_propaga():
+    """Con un solo modelo, un 404 debe seguir siendo un fallo ruidoso."""
+    cliente = _ClientePorModelo(set())
+    prov = _proveedor(cliente, "gemini-2.5-flash-lite")
+
+    with pytest.raises(ap.ModelNotAvailableError):
+        asyncio.run(prov.generate("p", "s"))
+
+
+def test_el_nombre_del_modelo_refleja_toda_la_cadena():
+    prov = ap.GeminiProvider.__new__(ap.GeminiProvider)
+    prov.models = ["gemini-2.5-flash-lite", "gemini-2.5-flash"]
+    prov.model = prov.models[0]
+    assert prov.get_model_name() == "gemini:gemini-2.5-flash-lite > gemini-2.5-flash"

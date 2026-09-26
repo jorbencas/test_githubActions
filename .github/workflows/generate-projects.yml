@@ -39,10 +39,11 @@ jobs:
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_REPORTS_PROYECTOS_CHANNEL_ID: ${{ secrets.TELEGRAM_REPORTS_PROYECTOS_CHANNEL_ID }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      # La cuota free tier es por proyecto Y modelo (20/día), y este repo la
-      # comparten los workflows de scraping, que van a gemini-2.5-flash. Con
-      # flash-lite el generador tiene cupo propio y deja de competir por él.
-      AI_MODEL: ${{ vars.AI_MODEL || 'gemini-2.5-flash-lite' }}
+      # Lista de modelos probados en orden (AI_MODEL admite comas). La cuota
+      # free tier es por proyecto Y modelo (20/día) y la comparten los workflows
+      # de scraping, así que el segundo modelo es una reserva: si flash-lite no
+      # existe para la key o se queda sin cupo, salta a flash.
+      AI_MODEL: ${{ vars.AI_MODEL || 'gemini-2.5-flash-lite,gemini-2.5-flash' }}
       PROJECTS_PER_RUN: ${{ inputs.count || vars.PROJECTS_PER_RUN || '3' }}
       SCRAPE_TUWEB_DEV: ${{ vars.SCRAPE_TUWEB_DEV || 'true' }}
       # En CI no debe enmascararse un fallo de Gemini con plantillas fijas

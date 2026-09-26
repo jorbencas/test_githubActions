@@ -36,6 +36,18 @@ def _es_tope_diario(exc: Exception) -> bool:
     return "perday" in texto or "free_tier" in texto or "requestsperday" in texto
 
 
+def _es_error_404(exc: Exception) -> bool:
+    """True si el modelo no existe o no está habilitado (404 NOT_FOUND)."""
+    try:
+        from google.genai import errors as genai_errors
+    except ImportError:
+        return False
+    if not isinstance(exc, genai_errors.ClientError) or getattr(exc, "code", None) != 404:
+        return False
+    texto = str(exc).lower()
+    return "not_found" in texto or "not found" in texto or "404" in texto
+
+
 def _espera_sugerida_por_la_api(exc: Exception) -> Optional[float]:
     """Segundos que indica la propia API en el RetryInfo del error 429."""
     match = _RETRY_DELAY_RE.search(str(exc))
@@ -45,13 +57,15 @@ def _espera_sugerida_por_la_api(exc: Exception) -> Optional[float]:
 
 
 def _debe_reintentar(exc: Exception) -> bool:
-    """Los 429 los gestiona `_generate_con_reintentos`; tenacity solo el resto.
+    """Los 429 los gestiona `_llamar_con_reintentos`; tenacity solo el resto.
 
     Sin esto los reintentos se multiplican (3 del bucle x 3 de tenacity = 9
     llamadas) y un límite de ritmo se convierte en una tanda de peticiones
-    inútiles.
+    inútiles. Los AIProviderError tampoco se reintentan: un 404 o una respuesta
+    vacía no son transitorios, y reintentarlos solo los envuelve en RetryError,
+    que esconde la causa real.
     """
-    if isinstance(exc, QuotaExhaustedError):
+    if isinstance(exc, AIProviderError):
         return False
     return not _es_error_429(exc)
 
@@ -67,12 +81,23 @@ class AIProvider(ABC):
         pass
 
 
+class ModelNotAvailableError(AIProviderError):
+    """El modelo no existe o no está disponible para esta API key (404)."""
+
+
 class GeminiProvider(AIProvider):
-    """Proveedor Gemini sobre el SDK `google-genai` (mismo que el resto del repo)."""
+    """Proveedor Gemini sobre el SDK `google-genai` (mismo que el resto del repo).
+
+    `model` admite una lista separada por comas y se prueba en orden. Se pasa al
+    siguiente cuando el anterior no está disponible (404) o se ha quedado sin
+    cuota (429). Como el cupo del free tier es por modelo, esta lista también
+    sirve de reserva: no es solo un mecanismo de errores.
+    """
 
     def __init__(self, api_key: str, model: str = "gemini-2.5-flash"):
         self.api_key = api_key
-        self.model = model
+        self.models = [m.strip() for m in str(model).split(",") if m.strip()] or ["gemini-2.5-flash"]
+        self.model = self.models[0]
         self.client = None
         self._init_client()
 
@@ -97,17 +122,32 @@ class GeminiProvider(AIProvider):
             "max_output_tokens": max_tokens,
             "response_mime_type": "application/json",
         }
-        # `system_instruction` solo existe en los modelos 2.x (en 1.x iba dentro del prompt)
-        if self.model.startswith("gemini-2"):
+        return await self._probar_modelos(prompt, system_prompt, config)
+
+    def _preparar_contenidos(self, model: str, prompt: str, system_prompt: str, config: Dict[str, Any]):
+        """`system_instruction` solo existe en los modelos 2.x (en 1.x iba en el prompt)."""
+        config = dict(config)
+        if model.startswith("gemini-2"):
             config["system_instruction"] = system_prompt
-            contents = prompt
-        else:
-            contents = f"{system_prompt}\n\n{prompt}"
+            return prompt, config
+        return f"{system_prompt}\n\n{prompt}", config
 
-        return await self._generate_con_reintentos(contents, config)
+    async def _probar_modelos(self, prompt: str, system_prompt: str, config: Dict[str, Any]) -> str:
+        """Recorre la lista de modelos saltando los que no sirven."""
+        for posicion, model in enumerate(self.models):
+            contents, config_modelo = self._preparar_contenidos(model, prompt, system_prompt, config)
+            try:
+                return await self._llamar_con_reintentos(model, contents, config_modelo)
+            except (ModelNotAvailableError, QuotaExhaustedError) as e:
+                if posicion == len(self.models) - 1:
+                    raise
+                siguiente = self.models[posicion + 1]
+                motivo = "sin cuota" if isinstance(e, QuotaExhaustedError) else "no disponible"
+                print(f"[!] {model} {motivo}; pruebo {siguiente}.")
+        raise AIProviderError(f"ningún modelo de {self.models} respondió")
 
-    async def _generate_con_reintentos(self, contents: str, config: Dict[str, Any]) -> str:
-        """Llama a Gemini separando el 429 transitorio del tope diario de cuota.
+    async def _llamar_con_reintentos(self, model: str, contents: str, config: Dict[str, Any]) -> str:
+        """Llama a un modelo separando el 429 transitorio del tope diario de cuota.
 
         El SDK reintenta por su cuenta los 429, pero con esperas fijas de
         segundos: si la API pide 41s no llega a reintentar a tiempo y el error
@@ -119,16 +159,18 @@ class GeminiProvider(AIProvider):
             try:
                 response = await asyncio.to_thread(
                     self.client.models.generate_content,
-                    model=self.model,
+                    model=model,
                     contents=contents,
                     config=config,
                 )
             except Exception as e:
+                if _es_error_404(e):
+                    raise ModelNotAvailableError(f"{model} no está disponible para esta API key") from e
                 if not _es_error_429(e):
                     raise
                 if _es_tope_diario(e):
                     raise QuotaExhaustedError(
-                        f"Cuota diaria de {self.model} agotada (free tier: 20 peticiones/día "
+                        f"Cuota diaria de {model} agotada (free tier: 20 peticiones/día "
                         "por proyecto y modelo). Es una cuota compartida: la consumen también "
                         "los workflows de scraping, así que puede agotarse aunque este "
                         "workflow no haya enviado ni una petición."
@@ -136,18 +178,21 @@ class GeminiProvider(AIProvider):
                 espera = _espera_sugerida_por_la_api(e)
                 if espera is None or intento == 2:
                     raise
-                print(f"[!] Gemini limitado por cuota (429), reintento {intento + 1}/3 en {espera:.0f}s")
+                print(f"[!] {model} limitado por cuota (429), reintento {intento + 1}/3 en {espera:.0f}s")
                 await asyncio.sleep(espera)
                 continue
 
             if not response or not response.text:
-                raise AIProviderError(f"Gemini devolvió respuesta vacía (modelo={self.model})")
+                raise AIProviderError(f"Gemini devolvió respuesta vacía (modelo={model})")
+
             return response.text
 
         raise AIProviderError(f"Gemini no devolvió contenido (modelo={self.model})")
 
     def get_model_name(self) -> str:
-        return f"gemini:{self.model}"
+        if len(self.models) == 1:
+            return f"gemini:{self.model}"
+        return f"gemini:{' > '.join(self.models)}"
 
 
 class DeterministicProvider(AIProvider):

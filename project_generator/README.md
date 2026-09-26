@@ -83,7 +83,7 @@ Ve a **Settings → Secrets and variables → Actions → New repository secret*
 
 | Variable | Default | Descripción |
 |----------|---------|-------------|
-| `AI_MODEL` | `gemini-2.5-flash` | Modelo Gemini (debe ser serie 2.x) |
+| `AI_MODEL` | `gemini-2.5-flash-lite,gemini-2.5-flash` | Modelos Gemini en orden, separados por comas (2.x). Se pasa al siguiente si el anterior da 404 o se queda sin cuota |
 | `PROJECTS_PER_RUN` | `3` | Proyectos por ejecución |
 | `SCRAPE_TUWEB_DEV` | `true` | Activar scraper de tuweb.dev |
 
