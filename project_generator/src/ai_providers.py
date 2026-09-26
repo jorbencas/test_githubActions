@@ -2,7 +2,58 @@ from abc import ABC, abstractmethod
 from typing import Optional, Dict, Any
 import asyncio
 import json
-from tenacity import retry, stop_after_attempt, wait_exponential
+import re
+from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception
+
+
+class AIProviderError(RuntimeError):
+    """Fallo genérico de un proveedor de IA."""
+
+
+class QuotaExhaustedError(AIProviderError):
+    """La cuota diaria del free tier de Gemini está agotada.
+
+    Reintentar es inútil: el límite es por día, proyecto y modelo, no por
+    minuto, así que solo se recupera al día siguiente.
+    """
+
+
+_RETRY_DELAY_RE = re.compile(r"retry in ([\d.]+)\s*s", re.IGNORECASE)
+
+
+def _es_error_429(exc: Exception) -> bool:
+    """True si la excepción es un 429 RESOURCE_EXHAUSTED del SDK de Gemini."""
+    try:
+        from google.genai import errors as genai_errors
+    except ImportError:
+        return False
+    return isinstance(exc, genai_errors.ClientError) and getattr(exc, "code", None) == 429
+
+
+def _es_tope_diario(exc: Exception) -> bool:
+    """True si el 429 agota la cuota diaria, no solo el ritmo por minuto."""
+    texto = str(exc).lower()
+    return "perday" in texto or "free_tier" in texto or "requestsperday" in texto
+
+
+def _espera_sugerida_por_la_api(exc: Exception) -> Optional[float]:
+    """Segundos que indica la propia API en el RetryInfo del error 429."""
+    match = _RETRY_DELAY_RE.search(str(exc))
+    if not match:
+        return None
+    return min(float(match.group(1)), 120.0)
+
+
+def _debe_reintentar(exc: Exception) -> bool:
+    """Los 429 los gestiona `_generate_con_reintentos`; tenacity solo el resto.
+
+    Sin esto los reintentos se multiplican (3 del bucle x 3 de tenacity = 9
+    llamadas) y un límite de ritmo se convierte en una tanda de peticiones
+    inútiles.
+    """
+    if isinstance(exc, QuotaExhaustedError):
+        return False
+    return not _es_error_429(exc)
 
 
 class AIProvider(ABC):
@@ -32,7 +83,11 @@ class GeminiProvider(AIProvider):
             raise RuntimeError("google-genai package not installed. Run: pip install google-genai")
         self.client = genai.Client(api_key=self.api_key)
 
-    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, min=2, max=10),
+        retry=retry_if_exception(_debe_reintentar),
+    )
     async def generate(self, prompt: str, system_prompt: str, temperature: float = 0.7, max_tokens: int = 4000) -> str:
         if not self.client:
             self._init_client()
@@ -49,15 +104,47 @@ class GeminiProvider(AIProvider):
         else:
             contents = f"{system_prompt}\n\n{prompt}"
 
-        response = await asyncio.to_thread(
-            self.client.models.generate_content,
-            model=self.model,
-            contents=contents,
-            config=config,
-        )
-        if not response or not response.text:
-            raise RuntimeError(f"Gemini devolvió respuesta vacía (modelo={self.model})")
-        return response.text
+        return await self._generate_con_reintentos(contents, config)
+
+    async def _generate_con_reintentos(self, contents: str, config: Dict[str, Any]) -> str:
+        """Llama a Gemini separando el 429 transitorio del tope diario de cuota.
+
+        El SDK reintenta por su cuenta los 429, pero con esperas fijas de
+        segundos: si la API pide 41s no llega a reintentar a tiempo y el error
+        sale como RetryError, que oculta que el problema es la cuota. Aquí se
+        respeta el RetryInfo del servidor y, si el límite es diario, se
+        aborta sin reintentar.
+        """
+        for intento in range(3):
+            try:
+                response = await asyncio.to_thread(
+                    self.client.models.generate_content,
+                    model=self.model,
+                    contents=contents,
+                    config=config,
+                )
+            except Exception as e:
+                if not _es_error_429(e):
+                    raise
+                if _es_tope_diario(e):
+                    raise QuotaExhaustedError(
+                        f"Cuota diaria de {self.model} agotada (free tier: 20 peticiones/día "
+                        "por proyecto y modelo). Es una cuota compartida: la consumen también "
+                        "los workflows de scraping, así que puede agotarse aunque este "
+                        "workflow no haya enviado ni una petición."
+                    ) from e
+                espera = _espera_sugerida_por_la_api(e)
+                if espera is None or intento == 2:
+                    raise
+                print(f"[!] Gemini limitado por cuota (429), reintento {intento + 1}/3 en {espera:.0f}s")
+                await asyncio.sleep(espera)
+                continue
+
+            if not response or not response.text:
+                raise AIProviderError(f"Gemini devolvió respuesta vacía (modelo={self.model})")
+            return response.text
+
+        raise AIProviderError(f"Gemini no devolvió contenido (modelo={self.model})")
 
     def get_model_name(self) -> str:
         return f"gemini:{self.model}"

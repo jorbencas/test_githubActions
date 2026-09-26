@@ -15,6 +15,7 @@ from generator import ProjectGenerator, main as generator_main
 from telegram_sender import send_to_telegram
 from models import Nivel, Scope, Lenguaje, TipoProyecto
 from config import settings
+from ai_providers import QuotaExhaustedError
 
 
 def parse_nivel(value: str) -> Nivel:
@@ -54,13 +55,22 @@ async def cmd_generate(args):
     preferred_languages = [parse_lenguaje(args.lenguaje)] if args.lenguaje else None
     preferred_types = [parse_tipo(args.tipo)] if args.tipo else None
     
-    projects = await generator.generate_projects(
-        count=args.count,
-        preferred_levels=preferred_levels,
-        preferred_scopes=preferred_scopes,
-        preferred_languages=preferred_languages,
-        preferred_types=preferred_types
-    )
+    try:
+        projects = await generator.generate_projects(
+            count=args.count,
+            preferred_levels=preferred_levels,
+            preferred_scopes=preferred_scopes,
+            preferred_languages=preferred_languages,
+            preferred_types=preferred_types
+        )
+    except QuotaExhaustedError as e:
+        # Un tope de cuota es una condición del plan, no un defecto del código:
+        # se avisa pero no se tumba el job, que quedaría rojo cada 4 horas de
+        # forma permanente. La anotación aparece en la UI de Actions.
+        print(f"\n[!] {e}")
+        print("::warning::Cuota diaria de Gemini agotada: ejecución omitida, "
+              "historial sin cambios y sin envío a Telegram.")
+        return []
     
     if args.send_telegram and projects:
         print(f"\n[*] Enviando {len(projects)} proyectos a Telegram...")

@@ -7,7 +7,7 @@ from pathlib import Path
 
 from config import settings
 from models import Proyecto, ProyectoGenerado, HistorialProyectos, Nivel, Scope, TipoProyecto, Lenguaje
-from ai_providers import get_provider, AIProvider, DeterministicProvider
+from ai_providers import get_provider, AIProvider, DeterministicProvider, QuotaExhaustedError
 from prompts import SYSTEM_PROMPT, build_user_prompt, validate_project_json
 from scrapers import scrape_all_sources
 
@@ -128,6 +128,13 @@ class ProjectGenerator:
                 temperature=0.8,
                 max_tokens=8000
             )
+        except QuotaExhaustedError as e:
+            # El fallback determinista tampoco arregla un tope de cuota: solo
+            # produciría las mismas plantillas de siempre. Se propaga para que
+            # main.py lo trate como ejecución omitida.
+            print(f"[!] {e}")
+            print("[!] Ejecución omitida: no se toca el historial ni se envía nada a Telegram.")
+            raise
         except Exception as e:
             if not settings.allow_deterministic_fallback:
                 print(f"[✗] AI generation failed y ALLOW_DETERMINISTIC_FALLBACK=false: {e}")

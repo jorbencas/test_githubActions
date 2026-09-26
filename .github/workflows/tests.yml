@@ -21,3 +21,9 @@ jobs:
           pip install -r requirements.txt
       - name: Run tests
         run: python -m pytest tests/ -v
+      # project_generator tiene sus propias deps (httpx, pydantic-settings,
+      # python-telegram-bot, lxml) que no están en el requirements raíz.
+      - name: Install project_generator dependencies
+        run: pip install -r project_generator/requirements.txt
+      - name: Run project_generator tests
+        run: python -m pytest project_generator/tests/ -v
