@@ -5,6 +5,8 @@ from datetime import datetime
 from typing import List, Optional, Dict, Any
 from pathlib import Path
 
+from pydantic import ValidationError
+
 from config import settings
 from models import Proyecto, ProyectoGenerado, HistorialProyectos, Nivel, Scope, TipoProyecto, Lenguaje
 from ai_providers import get_provider, AIProvider, DeterministicProvider, QuotaExhaustedError
@@ -172,7 +174,17 @@ class ProjectGenerator:
             existing_hashes.append(proj_hash)
             
             # Crear objeto Proyecto
-            proyecto = Proyecto(**p_data)
+            # Un solo item raro de la IA (una URL en formato distinto, un enum
+            # inesperado) no puede costar el resto de la generación, así que
+            # este proyecto se descarta y el run continúa.
+            try:
+                proyecto = Proyecto(**p_data)
+            except ValidationError as e:
+                titulo = p_data.get("titulo", "?")[:60]
+                primer_error = str(e).splitlines()[2] if len(str(e).splitlines()) > 2 else e
+                print(f"[!] Descartado '{titulo}': {primer_error.strip()}")
+                continue
+            
             generado = ProyectoGenerado(proyecto=proyecto, metadata={
                 "provider": self.provider.get_model_name(),
                 "prompt_hash": hashlib.md5(user_prompt.encode()).hexdigest()[:16]

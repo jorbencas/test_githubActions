@@ -1,6 +1,59 @@
 import json
 from typing import List, Dict, Optional
+from pydantic import HttpUrl, TypeAdapter, ValidationError
 from models import Nivel, Scope, TipoProyecto, Lenguaje, Herramienta, TechStack
+
+
+_ADAPTER_URL = TypeAdapter(HttpUrl)
+
+# Lo que los modelos devuelven cuando no saben una URL. Todo esto es una cadena
+# no vacía, así que un `if not valor` no lo detecta y reventaba la validación.
+_URLS_VACIAS = {
+    "", "-", "--", "n/a", "na", "n/d", "none", "null", "nil", "no", "?",
+    "no disponible", "sin url", "desconocido", "unknown", "no aplica",
+}
+
+
+def _url_es_valida(valor) -> bool:
+    """True solo si la cadena es una URL que Pydantic puede parsear."""
+    if not isinstance(valor, str) or valor.strip().lower() in _URLS_VACIAS:
+        return False
+    try:
+        _ADAPTER_URL.validate_python(valor.strip())
+        return True
+    except ValidationError:
+        return False
+
+
+def limpiar_tech_stack(tech_stack) -> dict:
+    """Normaliza los items de Herramienta para que no revienten al construir el modelo.
+
+    El prompt pide `url_docs` como texto, así que el modelo responde cosas como
+    "N/A" cuando no la conoce. Pydantic exige HttpUrl y un solo item malo
+    tumbaba la ejecución entera, descartando los proyectos válidos del resto.
+    """
+    if not isinstance(tech_stack, dict):
+        return tech_stack
+
+    for lista in ("frameworks", "librerias", "bases_datos", "infraestructura",
+                  "ia_ml", "testing", "otros"):
+        items = tech_stack.get(lista)
+        if not isinstance(items, list):
+            tech_stack[lista] = []
+            continue
+
+        limpios = []
+        for item in items:
+            if not isinstance(item, dict):
+                continue  # el modelo a veces devuelve strings sueltos
+            if not item.get("nombre") or not item.get("categoria"):
+                continue  # ambos son obligatorios en Herramienta
+            if not _url_es_valida(item.get("url_docs")):
+                item["url_docs"] = None
+            limpios.append(item)
+        tech_stack[lista] = limpios
+
+    return tech_stack
 
 
 SYSTEM_PROMPT = """Eres un arquitecto de software senior que genera ideas de proyectos técnicos reales, funcionales y útiles.
@@ -18,6 +71,7 @@ REGLAS ESTRICTAS (OBLIGATORIAS):
 10. NO proyectos solo iOS (Android OK, cross-platform OK)
 11. Incluir: funcionalidades clave, casos de uso, reglas de negocio, complejidad, tiempo estimado, prerequisitos, riesgos, ideas de extensión
 12. Fuente de inspiración: "tuweb.dev", "tips_telegram", "ia_generativa", "manual"
+13. Si un campo no aplica, usa null. NUNCA pongas "N/A", "-", "none" ni texto vacío donde se espere una URL o un número: en `url_docs` o una URL válida (https://...) o null
 
 FORMATO DE SALIDA (JSON estricto):
 {
@@ -32,7 +86,7 @@ FORMATO DE SALIDA (JSON estricto):
       "tipo": ["web", "api", ...],
       "tech_stack": {
         "lenguaje_principal": "python|javascript|typescript|csharp|go|rust",
-        "frameworks": [{"nombre": "str", "categoria": "framework", "descripcion": "str", "version_sugerida": "str", "url_docs": "str", "por_que": "str"}],
+        "frameworks": [{"nombre": "str", "categoria": "framework", "descripcion": "str", "version_sugerida": "str", "url_docs": "URL válida o null", "por_que": "str"}],
         "librerias": [...],
         "bases_datos": [...],
         "infraestructura": [...],
@@ -154,6 +208,10 @@ def validate_project_json(data: dict) -> List[dict]:
             lang = p["tech_stack"]["lenguaje_principal"]
             if lang not in [e.value for e in Lenguaje]:
                 p["tech_stack"]["lenguaje_principal"] = "python"
+
+        # Normalizar herramientas: sin esto un url_docs inválido tumba el run
+        if isinstance(p.get("tech_stack"), dict):
+            limpiar_tech_stack(p["tech_stack"])
         
         # Asegurar arrays
         for field in ["funcionalidades_clave", "casos_uso", "reglas_negocio", "recursos_externos", "prerequisitos", "riesgos", "ideas_extension"]:
