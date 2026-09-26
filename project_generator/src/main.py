@@ -181,6 +181,26 @@ async def cmd_scrape(args):
         print(f"   {idea['descripcion'][:150]}...")
 
 
+async def cmd_quota(args):
+    """Muestra el límite real de cuota de cada modelo de la cadena."""
+    import quota as quota_mod
+
+    modelos = None
+    if args.modelos:
+        modelos = [m.strip() for m in args.modelos.split(",") if m.strip()]
+        print(f"[*] Sondeando: {', '.join(modelos)}")
+    else:
+        print(f"[*] Sondeando los modelos conocidos (usa --modelos para acotar)")
+    print("[!] Cada sondeo gasta 1 petición del cupo diario de ese modelo.\n")
+
+    resultados = await quota_mod.sondear_todos(settings.gemini_api_key, modelos)
+    print(quota_mod.formatear(resultados))
+
+    disponibles = [r for r in resultados if r.get("estado") == "disponible"]
+    print(f"\n[*] {len(disponibles)}/{len(resultados)} modelos disponibles.")
+    print("[*] El cupo es por proyecto y por modelo, así que suma entre modelos distintos.")
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Project Generator - Generador automático de ideas de proyectos",
@@ -191,6 +211,7 @@ Ejemplos:
   python -m src.main generate --count 5 --nivel senior --scope multiproyecto --lenguaje python --send-telegram
   python -m src.main history --list 20 --stats
   python -m src.main send --count 5
+  python -m src.main quota --modelos gemini-2.5-flash,gemini-2.5-flash-lite
   python -m src.main test-telegram
   python -m src.main scrape
         """
@@ -227,7 +248,16 @@ Ejemplos:
     # Scrape
     scrape_parser = subparsers.add_parser('scrape', help='Probar scrapers')
     scrape_parser.set_defaults(func=cmd_scrape)
-    
+
+    # Quota
+    quota_parser = subparsers.add_parser(
+        'quota',
+        help='Ver el límite real de cuota de cada modelo (gasta 1 petición por modelo)'
+    )
+    quota_parser.add_argument('--modelos', help='Lista separada por comas (por defecto, los conocidos)')
+    quota_parser.set_defaults(func=cmd_quota)
+
+
     args = parser.parse_args()
     
     # Ejecutar comando

@@ -11,8 +11,10 @@ class Settings(BaseSettings):
     # IA (solo Gemini)
     gemini_api_key: str = Field(..., alias="GEMINI_API_KEY")
     # Lista separada por comas, se prueban en orden. El cupo del free tier es
-    # por modelo, así que tener un segundo en la lista es una reserva real.
-    ai_model: str = Field("gemini-2.5-flash-lite,gemini-2.5-flash", alias="AI_MODEL")
+    # por modelo, así que tener varios en la lista es una reserva real.
+    ai_model: str = Field(
+        "gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.0-flash-lite", alias="AI_MODEL"
+    )
 
     # Configuración generación
     projects_per_run: int = Field(3, alias="PROJECTS_PER_RUN")

@@ -83,7 +83,7 @@ Ve a **Settings → Secrets and variables → Actions → New repository secret*
 
 | Variable | Default | Descripción |
 |----------|---------|-------------|
-| `AI_MODEL` | `gemini-2.5-flash-lite,gemini-2.5-flash` | Modelos Gemini en orden, separados por comas (2.x). Se pasa al siguiente si el anterior da 404 o se queda sin cuota |
+| `AI_MODEL` | `gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.0-flash-lite` | Modelos Gemini en orden, separados por comas (2.x). Se pasa al siguiente si el anterior da 404 o se queda sin cuota |
 | `PROJECTS_PER_RUN` | `3` | Proyectos por ejecución |
 | `SCRAPE_TUWEB_DEV` | `true` | Activar scraper de tuweb.dev |
 
@@ -118,7 +118,22 @@ python -m src.main test-telegram
 
 # Probar scrapers
 python -m src.main scrape
+
+# Ver el límite real de cuota de cada modelo (gasta 1 petición por modelo)
+python -m src.main quota
+python -m src.main quota --modelos gemini-2.5-flash,gemini-2.0-flash
 ```
+
+### Cuota de Gemini
+
+El free tier tiene un límite de peticiones **por día, por proyecto y por modelo**
+(Google no publica las cifras; solo se ven en AI Studio o en el propio error 429).
+Como el límite es por modelo, usar varios modelos **suma**: la cadena `AI_MODEL` se
+prueba en orden y cada uno es un cubo independiente.
+
+`python -m src.main quota` sondea cada modelo y devuelve su límite real, leído de
+las cabeceras `x-ratelimit-*` y del cuerpo del 429. Ojo: **cada sondeo gasta 1
+petición** del cupo diario del modelo sondeado.
 
 ## Ejemplo de Proyecto Generado
 

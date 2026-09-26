@@ -15,11 +15,18 @@ CONFIG = {
     "IMAGES_FOLDER": "images",
     "IMAGES_PATH_PREFIX": "public/optimizado",
     # La cuota del free tier es por día, proyecto Y modelo (20 peticiones), y la
-    # comparten todos los workflows del repo. flash-lite va al final a propósito:
-    # solo se llega a él cuando flash y pro ya están agotados, así que su cupo
-    # sigue libre y amplifica capacidad sin quitarle preferencia a los modelos
-    # buenos mientras tengan cuota.
-    "AI_MODELS": ["gemini-2.5-flash", "gemini-2.5-pro", "gemini-2.5-flash-lite"],
+    # comparten todos los workflows del repo. El cupo de cada modelo es
+    # independiente, así que añadir más al final es cuota extra gratis: solo se
+    # llega a ellos cuando los anteriores están agotados, y un 404 pasa al
+    # siguiente sin romper nada. Para saber cuánto da cada uno de verdad:
+    # `python -m src.main quota` (ojo: cada sondeo gasta 1 petición diaria).
+    "AI_MODELS": [
+        "gemini-2.5-flash",
+        "gemini-2.5-pro",
+        "gemini-2.5-flash-lite",
+        "gemini-2.0-flash-lite",
+        "gemini-2.0-flash",
+    ],
     "IMAGE_MODELS": ["imagen-3.0-generate-002"], # Fallback para imagen
     "NEWS_DIR": "auto-news"
 }

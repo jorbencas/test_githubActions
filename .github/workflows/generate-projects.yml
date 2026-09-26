@@ -40,10 +40,11 @@ jobs:
       TELEGRAM_REPORTS_PROYECTOS_CHANNEL_ID: ${{ secrets.TELEGRAM_REPORTS_PROYECTOS_CHANNEL_ID }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       # Lista de modelos probados en orden (AI_MODEL admite comas). La cuota
-      # free tier es por proyecto Y modelo (20/día) y la comparten los workflows
-      # de scraping, así que el segundo modelo es una reserva: si flash-lite no
-      # existe para la key o se queda sin cupo, salta a flash.
-      AI_MODEL: ${{ vars.AI_MODEL || 'gemini-2.5-flash-lite,gemini-2.5-flash' }}
+      # free tier es por proyecto Y modelo y la comparten los workflows de
+      # scraping, así que los siguientes son reserva: si flash-lite no existe
+      # para la key o se queda sin cupo, se pasa al siguiente. Para ver el
+      # límite real de cada uno: python -m src.main quota
+      AI_MODEL: ${{ vars.AI_MODEL || 'gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.0-flash-lite' }}
       PROJECTS_PER_RUN: ${{ inputs.count || vars.PROJECTS_PER_RUN || '3' }}
       SCRAPE_TUWEB_DEV: ${{ vars.SCRAPE_TUWEB_DEV || 'true' }}
       # En CI no debe enmascararse un fallo de Gemini con plantillas fijas
