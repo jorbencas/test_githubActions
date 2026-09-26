@@ -14,7 +14,12 @@ CONFIG = {
     "FOLDER": "files",
     "IMAGES_FOLDER": "images",
     "IMAGES_PATH_PREFIX": "public/optimizado",
-    "AI_MODELS": ["gemini-2.5-flash", "gemini-2.5-pro"],
+    # La cuota del free tier es por día, proyecto Y modelo (20 peticiones), y la
+    # comparten todos los workflows del repo. flash-lite va al final a propósito:
+    # solo se llega a él cuando flash y pro ya están agotados, así que su cupo
+    # sigue libre y amplifica capacidad sin quitarle preferencia a los modelos
+    # buenos mientras tengan cuota.
+    "AI_MODELS": ["gemini-2.5-flash", "gemini-2.5-pro", "gemini-2.5-flash-lite"],
     "IMAGE_MODELS": ["imagen-3.0-generate-002"], # Fallback para imagen
     "NEWS_DIR": "auto-news"
 }
