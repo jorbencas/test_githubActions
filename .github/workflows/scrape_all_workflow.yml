@@ -57,7 +57,16 @@ jobs:
             sleep 1
           done
           ollama list | grep -q qwen2.5:1.5b || ollama pull qwen2.5:1.5b
-      - name: 💻 Scrape news (tier standard — web + RSS)
+      - name: 💻 Scrape news (tier light — RSS + fuentes rápidas)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OLLAMA_MODEL: qwen2.5:1.5b
+          OLLAMA_DISABLED: ${{ steps.ping.outputs.needed == 'true' && '0' || '1' }}
+          TG_API_ID: ${{ secrets.TG_API_ID }}
+          TG_API_HASH: ${{ secrets.TG_API_HASH }}
+          TG_SESSION_STRING: ${{ secrets.TG_SESSION_STRING }}
+        run: python -m scripts.scrapers.scrape_news --tier light
+      - name: 💻 Scrape news (tier standard — fuentes web)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           OLLAMA_MODEL: qwen2.5:1.5b
