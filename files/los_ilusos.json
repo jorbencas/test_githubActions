@@ -596,5 +596,29 @@
     "relevancia": 3,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "Los Ilusos 13+13",
+    "url": "https://www.sensacine.com/peliculas/pelicula-220188/sesiones/cerca-de-72703/",
+    "fecha_pub": "Thu, 11 Apr 2013 17:00:00 GMT",
+    "fecha_ts": "2026-09-26T16:15:49.801879",
+    "medio": "Sensacine",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
+  },
+  {
+    "titulo": "Cartel de la película Los ilusos 13+13 - Foto 1",
+    "url": "https://www.sensacine.com/peliculas/pelicula-1000048420/fotos/detalle/?cmediafile=9002083290",
+    "fecha_pub": "Thu, 02 Jul 2026 12:31:00 GMT",
+    "fecha_ts": "2026-09-26T16:15:49.802007",
+    "medio": "Sensacine",
+    "imagen": "",
+    "tipo": "poster",
+    "relevancia": 3,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
