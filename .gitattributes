@@ -1,0 +1,9 @@
+# Evita el churn LF<->CRLF en el Project Generator (sin esto Git convierte
+# LF<->CRLF en cada checkout y los diffs salen como "fichero entero cambiado").
+project_generator/**/*.py    text eol=lf
+project_generator/**/*.md    text eol=lf
+project_generator/**/*.json  text eol=lf
+project_generator/**/*.yml   text eol=lf
+project_generator/**/*.txt   text eol=lf
+project_generator/.env.example text eol=lf
+.github/workflows/*.yml       text eol=lf

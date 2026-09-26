@@ -1,9 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import Optional, List, Dict, Any
+from typing import Optional, Dict, Any
+import asyncio
 import json
-import os
 from tenacity import retry, stop_after_attempt, wait_exponential
-import httpx
 
 
 class AIProvider(ABC):
@@ -17,104 +16,49 @@ class AIProvider(ABC):
         pass
 
 
-class OpenAIProvider(AIProvider):
-    def __init__(self, api_key: str, model: str = "gpt-4o-mini"):
-        self.api_key = api_key
-        self.model = model
-        self.client = None
-        self._init_client()
-    
-    def _init_client(self):
-        try:
-            from openai import AsyncOpenAI
-            self.client = AsyncOpenAI(api_key=self.api_key)
-        except ImportError:
-            raise RuntimeError("openai package not installed. Run: pip install openai")
-    
-    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
-    async def generate(self, prompt: str, system_prompt: str, temperature: float = 0.7, max_tokens: int = 4000) -> str:
-        if not self.client:
-            self._init_client()
-        
-        response = await self.client.chat.completions.create(
-            model=self.model,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=temperature,
-            max_tokens=max_tokens,
-            response_format={"type": "json_object"}
-        )
-        return response.choices[0].message.content
-    
-    def get_model_name(self) -> str:
-        return f"openai:{self.model}"
-
-
-class AnthropicProvider(AIProvider):
-    def __init__(self, api_key: str, model: str = "claude-3-5-sonnet-20241022"):
-        self.api_key = api_key
-        self.model = model
-        self.client = None
-        self._init_client()
-    
-    def _init_client(self):
-        try:
-            from anthropic import AsyncAnthropic
-            self.client = AsyncAnthropic(api_key=self.api_key)
-        except ImportError:
-            raise RuntimeError("anthropic package not installed. Run: pip install anthropic")
-    
-    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
-    async def generate(self, prompt: str, system_prompt: str, temperature: float = 0.7, max_tokens: int = 4000) -> str:
-        if not self.client:
-            self._init_client()
-        
-        response = await self.client.messages.create(
-            model=self.model,
-            max_tokens=max_tokens,
-            temperature=temperature,
-            system=system_prompt,
-            messages=[{"role": "user", "content": prompt}]
-        )
-        return response.content[0].text
-    
-    def get_model_name(self) -> str:
-        return f"anthropic:{self.model}"
-
-
 class GeminiProvider(AIProvider):
-    def __init__(self, api_key: str, model: str = "gemini-1.5-flash"):
+    """Proveedor Gemini sobre el SDK `google-genai` (mismo que el resto del repo)."""
+
+    def __init__(self, api_key: str, model: str = "gemini-2.5-flash"):
         self.api_key = api_key
         self.model = model
         self.client = None
         self._init_client()
-    
+
     def _init_client(self):
         try:
-            import google.generativeai as genai
-            genai.configure(api_key=self.api_key)
-            self.client = genai.GenerativeModel(self.model)
+            from google import genai
         except ImportError:
-            raise RuntimeError("google-generativeai package not installed. Run: pip install google-generativeai")
-    
+            raise RuntimeError("google-genai package not installed. Run: pip install google-genai")
+        self.client = genai.Client(api_key=self.api_key)
+
     @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
     async def generate(self, prompt: str, system_prompt: str, temperature: float = 0.7, max_tokens: int = 4000) -> str:
         if not self.client:
             self._init_client()
-        
-        full_prompt = f"{system_prompt}\n\n{prompt}"
-        response = await self.client.generate_content_async(
-            full_prompt,
-            generation_config={
-                "temperature": temperature,
-                "max_output_tokens": max_tokens,
-                "response_mime_type": "application/json"
-            }
+
+        config = {
+            "temperature": temperature,
+            "max_output_tokens": max_tokens,
+            "response_mime_type": "application/json",
+        }
+        # `system_instruction` solo existe en los modelos 2.x (en 1.x iba dentro del prompt)
+        if self.model.startswith("gemini-2"):
+            config["system_instruction"] = system_prompt
+            contents = prompt
+        else:
+            contents = f"{system_prompt}\n\n{prompt}"
+
+        response = await asyncio.to_thread(
+            self.client.models.generate_content,
+            model=self.model,
+            contents=contents,
+            config=config,
         )
+        if not response or not response.text:
+            raise RuntimeError(f"Gemini devolvió respuesta vacía (modelo={self.model})")
         return response.text
-    
+
     def get_model_name(self) -> str:
         return f"gemini:{self.model}"
 
@@ -248,21 +192,13 @@ class DeterministicProvider(AIProvider):
 
 
 def get_provider(provider_name: str, api_key: Optional[str], model: str) -> AIProvider:
-    provider_name = provider_name.lower()
-    
-    if provider_name == "openai":
-        if not api_key:
-            raise ValueError("OPENAI_API_KEY required for OpenAI provider")
-        return OpenAIProvider(api_key, model)
-    elif provider_name == "anthropic":
-        if not api_key:
-            raise ValueError("ANTHROPIC_API_KEY required for Anthropic provider")
-        return AnthropicProvider(api_key, model)
-    elif provider_name == "gemini":
+    provider_name = (provider_name or "gemini").lower()
+
+    if provider_name == "gemini":
         if not api_key:
             raise ValueError("GEMINI_API_KEY required for Gemini provider")
         return GeminiProvider(api_key, model)
     elif provider_name == "deterministic":
         return DeterministicProvider()
     else:
-        raise ValueError(f"Unknown provider: {provider_name}")
+        raise ValueError(f"Unknown provider: {provider_name} (solo 'gemini' o 'deterministic')")

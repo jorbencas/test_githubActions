@@ -126,11 +126,13 @@ class TuWebDevScraper:
 class TipsTelegramScraper:
     """Extrae ideas de la base de datos de tips del bot de Telegram"""
     
-    def __init__(self, tips_db_path: str = "/home/jorge/dev/devjobs/downloader_telegram/data/tips_database.json"):
+    def __init__(self, tips_db_path: Optional[str] = None):
         self.tips_db_path = tips_db_path
     
     def extract_ideas(self) -> List[Dict]:
         import json
+        if not self.tips_db_path:
+            return []
         try:
             with open(self.tips_db_path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
@@ -165,7 +167,7 @@ class TipsTelegramScraper:
         return any(kw in text_lower for kw in project_keywords)
 
 
-async def scrape_all_sources(tuweb_url: str, tips_db_path: str) -> List[Dict]:
+async def scrape_all_sources(tuweb_url: str, tips_db_path: Optional[str] = None) -> List[Dict]:
     all_ideas = []
     
     # Scraper tuweb.dev

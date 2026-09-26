@@ -7,15 +7,27 @@ from pathlib import Path
 from telegram import Bot
 from telegram.constants import ParseMode
 from telegram.error import TelegramError
+from telegram.helpers import escape_markdown
 
 from models import ProyectoGenerado, Proyecto
 from config import settings
 
 
+def _esc(text: str) -> str:
+    """Escapa texto dinámico para el modo Markdown legacy de Telegram.
+
+    Sin esto, cualquier `_` (scikit_learn) o `*` en títulos y nombres de
+    herramientas hace que Telegram rechace el mensaje entero.
+    """
+    return escape_markdown(str(text or ""))
+
+
 class TelegramReporter:
-    def __init__(self):
+    def __init__(self, provider_name: str = None):
         self.bot: Optional[Bot] = None
         self.channel_id = settings.telegram_reports_channel_id
+        # El provider real usado se inyecta desde el generador (metadata de cada proyecto)
+        self.provider_name = provider_name or f"gemini:{settings.ai_model}"
     
     async def initialize(self):
         if not self.bot:
@@ -94,39 +106,40 @@ class TelegramReporter:
         msg += f"📊 **Total:** {total} proyectos\n\n"
         
         msg += "📈 **Distribución:**\n"
-        msg += f"  • Niveles: {', '.join(f'{k}({v})' for k,v in sorted(niveles.items()))}\n"
-        msg += f"  • Scopes: {', '.join(f'{k}({v})' for k,v in sorted(scopes.items()))}\n"
-        msg += f"  • Lenguajes: {', '.join(f'{k}({v})' for k,v in sorted(lenguajes.items()))}\n"
-        msg += f"  • Tipos: {', '.join(f'{k}({v})' for k,v in sorted(tipos.items()))}\n"
+        msg += f"  • Niveles: {', '.join(f'{_esc(k)}({v})' for k,v in sorted(niveles.items()))}\n"
+        msg += f"  • Scopes: {', '.join(f'{_esc(k)}({v})' for k,v in sorted(scopes.items()))}\n"
+        msg += f"  • Lenguajes: {', '.join(f'{_esc(k)}({v})' for k,v in sorted(lenguajes.items()))}\n"
+        msg += f"  • Tipos: {', '.join(f'{_esc(k)}({v})' for k,v in sorted(tipos.items()))}\n"
         msg += f"  • Con IA: {con_ia}/{total}\n"
         
-        msg += f"\n🤖 Generado con: `{settings.ai_provider}:{settings.ai_model}`\n"
-        msg += f"🔗 Historial: {settings.data_dir}/{settings.history_file}"
+        msg += f"\n🤖 Generado con: `{self.provider_name}`\n"
+        # La ruta va en code span: contiene '_' y Telegram lo rechazaría escapado o no fuera de ahí
+        msg += f"🔗 Historial: `{settings.data_dir}/{settings.history_file}`"
         
         return msg
     
     def _build_project_message(self, p: Proyecto, index: int, total: int) -> str:
-        msg = f"📋 **[{index}/{total}] {p.titulo}**\n\n"
-        msg += f"📝 {p.descripcion_corta}\n\n"
+        msg = f"📋 **[{index}/{total}] {_esc(p.titulo)}**\n\n"
+        msg += f"📝 {_esc(p.descripcion_corta)}\n\n"
         
-        msg += f"🎯 **Nivel:** {p.nivel.value.title()} | **Scope:** {p.scope.value.title()}\n"
-        msg += f"🏷️ **Tipos:** {', '.join(t.value for t in p.tipo)}\n"
-        msg += f"💻 **Lenguaje:** {p.tech_stack.lenguaje_principal.value}\n\n"
+        msg += f"🎯 **Nivel:** {_esc(p.nivel.value.title())} | **Scope:** {_esc(p.scope.value.title())}\n"
+        msg += f"🏷️ **Tipos:** {', '.join(_esc(t.value) for t in p.tipo)}\n"
+        msg += f"💻 **Lenguaje:** {_esc(p.tech_stack.lenguaje_principal.value)}\n\n"
         
-        # Tech Stack resumido
+        # Tech Stack resumido (Herramienta es un modelo Pydantic: acceso por atributo)
         stack_parts = []
         if p.tech_stack.frameworks:
-            fw = [f"{f['nombre']} ({f.get('por_que', '')[:40]})" for f in p.tech_stack.frameworks[:3]]
+            fw = [f"{_esc(f.nombre)} ({_esc((f.por_que or '')[:40])})" for f in p.tech_stack.frameworks[:3]]
             stack_parts.append(f"🔧 **Frameworks:** {', '.join(fw)}")
         if p.tech_stack.librerias:
-            libs = [l['nombre'] for l in p.tech_stack.librerias[:4]]
-            stack_parts.append(f"📚 **Libs:** {', '.join(libs)}")
+            libs = [l.nombre for l in p.tech_stack.librerias[:4]]
+            stack_parts.append(f"📚 **Libs:** {', '.join(_esc(x) for x in libs)}")
         if p.tech_stack.bases_datos:
-            dbs = [d['nombre'] for d in p.tech_stack.bases_datos[:2]]
-            stack_parts.append(f"🗄️ **BD:** {', '.join(dbs)}")
+            dbs = [d.nombre for d in p.tech_stack.bases_datos[:2]]
+            stack_parts.append(f"🗄️ **BD:** {', '.join(_esc(x) for x in dbs)}")
         if p.tech_stack.ia_ml:
-            ia = [i['nombre'] for i in p.tech_stack.ia_ml[:2]]
-            stack_parts.append(f"🤖 **IA/ML:** {', '.join(ia)}")
+            ia = [i.nombre for i in p.tech_stack.ia_ml[:2]]
+            stack_parts.append(f"🤖 **IA/ML:** {', '.join(_esc(x) for x in ia)}")
         
         if stack_parts:
             msg += "\n".join(stack_parts) + "\n\n"
@@ -134,26 +147,27 @@ class TelegramReporter:
         # Funcionalidades
         if p.funcionalidades_clave:
             funcs = p.funcionalidades_clave[:6]
-            msg += f"⚡ **Funcionalidades:** {', '.join(funcs)}\n"
+            msg += f"⚡ **Funcionalidades:** {', '.join(_esc(f) for f in funcs)}\n"
         
         # IA
         if p.por_que_ia:
-            msg += f"🧠 **IA:** {p.por_que_ia} (`{p.cliente_ia_sugerido}`)\n"
+            msg += f"🧠 **IA:** {_esc(p.por_que_ia)} (`{_esc(p.cliente_ia_sugerido)}`)\n"
         
         # Estimaciones
-        msg += f"⏱️ **Tiempo:** ~{p.tiempo_estimado_semanas} sem | **Complejidad:** {p.complejidad_estimada}\n"
+        msg += f"⏱️ **Tiempo:** ~{p.tiempo_estimado_semanas} sem | **Complejidad:** {_esc(p.complejidad_estimada)}\n"
         
         # Prerequisitos clave
         if p.prerequisitos:
-            msg += f"📋 **Requisitos:** {', '.join(p.prerequisitos[:3])}\n"
+            msg += f"📋 **Requisitos:** {', '.join(_esc(r) for r in p.prerequisitos[:3])}\n"
         
         # Riesgos
         if p.riesgos:
-            msg += f"⚠️ **Riesgos:** {', '.join(p.riesgos[:2])}\n"
+            msg += f"⚠️ **Riesgos:** {', '.join(_esc(r) for r in p.riesgos[:2])}\n"
         
         # Fuente
-        msg += f"💡 **Fuente:** {p.fuente_inspiracion}\n"
-        msg += f"🆔 **ID:** `{p.id}` | **Hash:** `{p.hash_unicidad}`"
+        if p.fuente_inspiracion:
+            msg += f"💡 **Fuente:** {_esc(p.fuente_inspiracion)}\n"
+        msg += f"🆔 **ID:** `{_esc(p.id)}` | **Hash:** `{_esc(p.hash_unicidad)}`"
         
         return msg
     
@@ -164,7 +178,7 @@ class TelegramReporter:
         data = {
             "generated_at": datetime.now().isoformat(),
             "count": len(projects),
-            "provider": f"{settings.ai_provider}:{settings.ai_model}",
+            "provider": self.provider_name,
             "projects": [gp.proyecto.model_dump(mode='json') for gp in projects]
         }
         
@@ -187,7 +201,7 @@ class TelegramReporter:
             Path(temp_path).unlink(missing_ok=True)
 
 
-async def send_to_telegram(projects: List[ProyectoGenerado]) -> bool:
+async def send_to_telegram(projects: List[ProyectoGenerado], provider_name: str = None) -> bool:
     """Función de conveniencia"""
-    reporter = TelegramReporter()
+    reporter = TelegramReporter(provider_name=provider_name)
     return await reporter.send_project_report(projects)

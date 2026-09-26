@@ -10,3 +10,8 @@ __pycache__/
 skills-lock.json
 telegram_sent.json
 telegram_voice_sent.json
+
+# Project Generator
+project_generator/data/scraper_cache.json
+project_generator/.env
+project_generator/src/__pycache__/

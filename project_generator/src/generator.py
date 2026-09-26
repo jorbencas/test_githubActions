@@ -12,6 +12,15 @@ from prompts import SYSTEM_PROMPT, build_user_prompt, validate_project_json
 from scrapers import scrape_all_sources
 
 
+def _strip_json_fences(text: str) -> str:
+    """Quita vallas ```json ... ``` que algunos modelos añaden pese a response_mime_type."""
+    cleaned = text.strip()
+    if cleaned.startswith("```"):
+        cleaned = cleaned.removeprefix("```json").removeprefix("```")
+        cleaned = cleaned.removesuffix("```").strip()
+    return cleaned
+
+
 class ProjectGenerator:
     def __init__(self):
         self.data_dir = Path(settings.data_dir)
@@ -44,9 +53,9 @@ class ProjectGenerator:
     def _get_inspiration_sources(self) -> List[Dict]:
         sources = []
         
-        # Tips de Telegram
-        tips_path = "/home/jorge/dev/devjobs/downloader_telegram/data/tips_database.json"
-        if os.path.exists(tips_path):
+        # Tips de Telegram (BD local, opcional)
+        tips_path = settings.tips_database_path
+        if tips_path and os.path.exists(tips_path):
             try:
                 with open(tips_path, 'r', encoding='utf-8') as f:
                     tips_data = json.load(f)
@@ -59,6 +68,8 @@ class ProjectGenerator:
                     })
             except Exception:
                 pass
+        elif tips_path:
+            print(f"[!] tips_database_path no encontrado: {tips_path}")
         
         return sources
     
@@ -67,8 +78,7 @@ class ProjectGenerator:
             return []
         
         try:
-            tips_path = "/home/jorge/dev/devjobs/downloader_telegram/data/tips_database.json"
-            ideas = await scrape_all_sources(settings.tuweb_dev_url, tips_path)
+            ideas = await scrape_all_sources(settings.tuweb_dev_url, settings.tips_database_path)
             return ideas
         except Exception as e:
             print(f"[!] Error scraping external sources: {e}")
@@ -110,6 +120,7 @@ class ProjectGenerator:
         print(f"[*] Existing projects: {len(existing_hashes)}")
         
         # Generar
+        requested_model = self.provider.get_model_name()
         try:
             response = await self.provider.generate(
                 prompt=user_prompt,
@@ -118,21 +129,22 @@ class ProjectGenerator:
                 max_tokens=8000
             )
         except Exception as e:
-            print(f"[!] AI generation failed: {e}")
-            # Fallback a determinístico
-            if not isinstance(self.provider, DeterministicProvider):
-                print("[*] Falling back to deterministic provider...")
-                self.provider = DeterministicProvider()
-                response = await self.provider.generate(
-                    prompt=user_prompt,
-                    system_prompt=SYSTEM_PROMPT
-                )
-            else:
+            if not settings.allow_deterministic_fallback:
+                print(f"[✗] AI generation failed y ALLOW_DETERMINISTIC_FALLBACK=false: {e}")
                 raise
+            if isinstance(self.provider, DeterministicProvider):
+                raise
+            print(f"[!] AI generation failed ({requested_model}): {e}")
+            print("[!] Falling back to deterministic provider (ALLOW_DETERMINISTIC_FALLBACK=true)")
+            self.provider = DeterministicProvider()
+            response = await self.provider.generate(
+                prompt=user_prompt,
+                system_prompt=SYSTEM_PROMPT
+            )
         
         # Parsear y validar
         try:
-            data = json.loads(response)
+            data = json.loads(_strip_json_fences(response))
             validated = validate_project_json(data)
         except json.JSONDecodeError as e:
             print(f"[!] Invalid JSON from AI: {e}")
@@ -188,7 +200,7 @@ async def main():
         print(f"{'='*60}")
         print(f"📝 {p.descripcion_corta}")
         print(f"🔧 Lenguaje: {p.tech_stack.lenguaje_principal.value}")
-        print(f"📦 Frameworks: {[f['nombre'] for f in p.tech_stack.frameworks]}")
+        print(f"📦 Frameworks: {[f.nombre for f in p.tech_stack.frameworks]}")
         print(f"⚡ Funcionalidades: {', '.join(p.funcionalidades_clave[:5])}")
         if p.por_que_ia:
             print(f"🤖 IA: {p.por_que_ia} (cliente: {p.cliente_ia_sugerido})")

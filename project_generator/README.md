@@ -1,6 +1,9 @@
 # Project Generator 🚀
 
-Generador automático de ideas de proyectos de software funcionales, útiles y variados. Se ejecuta vía GitHub Actions (cron) y envía los resultados a un canal privado de Telegram.
+Generador automático de ideas de proyectos de software funcionales, útiles y variados. Se ejecuta vía GitHub Actions (cron cada 4 h) y envía los resultados a un canal privado de Telegram.
+
+> Vive en `test_githubActions/project_generator/`. Se migró desde `devjobs`; aquí ya no
+> depende de ningún otro repositorio.
 
 ## Características
 
@@ -9,7 +12,7 @@ Generador automático de ideas de proyectos de software funcionales, útiles y v
 - **Lenguajes**: Python, JavaScript, TypeScript, C#, Go, Rust
 - **Tipos**: Web, API, CLI, Mobile, Desktop, Fullstack, Microservicio, Bot, IA/ML, Datos, DevOps, Testing, Seguridad
 - **Tech Stack detallado**: Frameworks, librerías, BD, infra, IA/ML, testing con justificación por herramienta
-- **IA integrada**: Especifica cuándo y por qué usar IA (OpenAI, Anthropic, Gemini, local)
+- **IA integrada**: Genera con Gemini; cada proyecto especifica cuándo y por qué usar IA (OpenAI, Anthropic, Gemini, local)
 - **Anti-duplicados**: Sistema de hashes para no repetir proyectos
 - **Fuentes de inspiración**: Tips de Telegram, tuweb.dev (scraper), plantillas determinísticas
 - **Persistencia**: Historial JSON local + artefacto en GitHub Actions
@@ -72,9 +75,7 @@ Ve a **Settings → Secrets and variables → Actions → New repository secret*
 |--------|-------------|---------|
 | `TELEGRAM_BOT_TOKEN` | Token de @BotFather | `123456789:ABCdef...` |
 | `TELEGRAM_REPORTS_PROYECTOS_CHANNEL_ID` | ID del canal privado | `-1001234567890` |
-| `OPENAI_API_KEY` | Key de OpenAI | `sk-...` |
-| `ANTHROPIC_API_KEY` | Key de Anthropic (opcional) | `sk-ant-...` |
-| `GEMINI_API_KEY` | Key de Google Gemini (opcional) | `...` |
+| `GEMINI_API_KEY` | Key de Google AI Studio | `...` |
 
 ### Variables de GitHub (OPCIONALES)
 
@@ -82,21 +83,21 @@ Ve a **Settings → Secrets and variables → Actions → New repository secret*
 
 | Variable | Default | Descripción |
 |----------|---------|-------------|
-| `AI_PROVIDER` | `openai` | `openai`, `anthropic`, `gemini`, `deterministic` |
-| `AI_MODEL` | `gpt-4o-mini` | Modelo específico del proveedor |
-| `PROJECTS_PER_RUN` | `5` | Proyectos por ejecución |
+| `AI_MODEL` | `gemini-2.5-flash` | Modelo Gemini (debe ser serie 2.x) |
+| `PROJECTS_PER_RUN` | `3` | Proyectos por ejecución |
 | `SCRAPE_TUWEB_DEV` | `true` | Activar scraper de tuweb.dev |
 
 ### Obtener Channel ID de Telegram
 
 ```bash
-# Opción 1: Usando el script del proyecto
-cd /home/jorge/dev/devjobs/downloader_telegram/app
-python get_channel_id.py "reportes proyectos"
+# Listar los chats recientes que el bot puede ver
+python -m src.get_channel_id
 
-# Opción 2: Usando el generador
+# Filtrar por nombre
+python -m src.get_channel_id "reportes proyectos"
+
+# O mandar un mensaje de prueba al canal configurado
 python -m src.main test-telegram
-# El bot enviará un mensaje de prueba y mostrará el channel_id
 ```
 
 ## Uso CLI
@@ -171,20 +172,24 @@ python -m src.main scrape
 
 ```
 project_generator/
-├── .github/workflows/
-│   └── generate-projects.yml      # GitHub Action cron
+├── data/
+│   └── generated_projects.json    # Historial persistente (dedup + committeado por el bot)
 ├── src/
 │   ├── config.py                  # Settings (pydantic-settings)
 │   ├── models.py                  # Modelos Pydantic (Proyecto, TechStack, etc.)
-│   ├── ai_providers.py            # Abstracción IA (OpenAI, Anthropic, Gemini, Deterministic)
+│   ├── ai_providers.py            # Gemini (google-genai) + fallback determinista
 │   ├── prompts.py                 # System prompt + user prompt builder + validación
 │   ├── scrapers.py                # Scrapers tuweb.dev + tips Telegram
 │   ├── generator.py               # Orquestador principal
 │   ├── telegram_sender.py         # Envío formateado a Telegram Bot API
+│   ├── get_channel_id.py          # Helper para localizar el channel_id
 │   └── main.py                    # CLI entry point
 ├── requirements.txt
 ├── .env.example
+├── SECRETS.md
 └── README.md
+
+Workflow: `.github/workflows/generate-projects.yml` (en la raíz del repo).
 ```
 
 ## Personalización
@@ -193,7 +198,8 @@ project_generator/
 
 1. Crear clase en `ai_providers.py` heredando de `AIProvider`
 2. Implementar `generate()` y `get_model_name()`
-3. Registrar en `get_provider()`
+3. Registrar en `get_provider()` y añadir el campo de settings en `config.py`
+4. Exponer la clave como secret del workflow
 
 ### Añadir nueva fuente de inspiración
 
@@ -222,7 +228,10 @@ Editar `DeterministicProvider._load_templates()` en `ai_providers.py`
 | `TELEGRAM_BOT_TOKEN` inválido | Verificar en @BotFather, regenerar si necesario |
 | `CHANNEL_ID` no encontrado | Bot debe ser admin en el canal. Usar `get_channel_id.py` |
 | Rate limit Telegram | Action espera 0.5s entre mensajes. Reducir `PROJECTS_PER_RUN` |
-| IA devuelve JSON inválido | Reintenta automáticamente (3x). Revisa `AI_MODEL` válido |
+| IA devuelve JSON inválido | Reintenta automáticamente (3x). Revisa que `AI_MODEL` sea un modelo 2.x válido |
+| `429` / cuota agotada de Gemini | Espera al reset diario o baja `PROJECTS_PER_RUN` |
+| Siempre salen los mismos proyectos | `ALLOW_DETERMINISTIC_FALLBACK=true` está enmascarando un fallo de Gemini. Ponlo a `false` para verlo |
+| `Could not open requirements file` | El workflow no debe tener `working-directory: project_generator` **y** prefijar las rutas con `project_generator/` |
 | Duplicados constantes | Limpia `data/generated_projects.json` o aumenta `temperature` |
 
 ## Licencia

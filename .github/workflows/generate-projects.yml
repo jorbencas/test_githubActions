@@ -1,29 +1,49 @@
-name: "[PROJECTS] Generate & Send Projects (local in test_githubActions)"
+name: "[PROJECTS] Generate & Send Projects"
 
 on:
   schedule:
     - cron: '0 */4 * * *'  # Cada 4 horas (00:00, 04:00, 08:00, 12:00, 16:00, 20:00 UTC)
   workflow_dispatch:
+    inputs:
+      count:
+        description: 'Número de proyectos a generar'
+        required: false
+        default: '3'
+        type: string
+      nivel:
+        description: 'Filtrar por nivel (junior/semisenior/senior)'
+        required: false
+        type: string
+      scope:
+        description: 'Filtrar por scope (miniproyecto/proyecto/multiproyecto)'
+        required: false
+        type: string
+      lenguaje:
+        description: 'Filtrar por lenguaje (python/javascript/typescript/csharp/go/rust)'
+        required: false
+        type: string
 
 concurrency:
   group: generate-projects-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: write  # para committear el historial
+
 jobs:
   generate_and_send:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    defaults:
-      run:
-        working-directory: project_generator
 
     env:
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_REPORTS_PROYECTOS_CHANNEL_ID: ${{ secrets.TELEGRAM_REPORTS_PROYECTOS_CHANNEL_ID }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      AI_MODEL: ${{ vars.AI_MODEL || 'gemini-1.5-flash' }}
-      PROJECTS_PER_RUN: ${{ vars.PROJECTS_PER_RUN || '3' }}
+      AI_MODEL: ${{ vars.AI_MODEL || 'gemini-2.5-flash' }}
+      PROJECTS_PER_RUN: ${{ inputs.count || vars.PROJECTS_PER_RUN || '3' }}
       SCRAPE_TUWEB_DEV: ${{ vars.SCRAPE_TUWEB_DEV || 'true' }}
+      # En CI no debe enmascararse un fallo de Gemini con plantillas fijas
+      ALLOW_DETERMINISTIC_FALLBACK: 'false'
       DATA_DIR: ./data
 
     steps:
@@ -40,19 +60,26 @@ jobs:
           cache-dependency-path: project_generator/requirements.txt
 
       - name: Install dependencies
-        run: |
-          pip install -r project_generator/requirements.txt
+        run: pip install -r project_generator/requirements.txt
 
       - name: Create data directory
         run: mkdir -p project_generator/data
 
       - name: Generate projects
-        id: generate
         run: |
+          set -euo pipefail
           cd project_generator
-          python -m src.main generate --count "${PROJECTS_PER_RUN}" --send-telegram
-        env:
-          PYTHONPATH: project_generator/src
+          ARGS=()
+          if [[ -n "${{ inputs.nivel }}" ]]; then
+            ARGS+=(--nivel "${{ inputs.nivel }}")
+          fi
+          if [[ -n "${{ inputs.scope }}" ]]; then
+            ARGS+=(--scope "${{ inputs.scope }}")
+          fi
+          if [[ -n "${{ inputs.lenguaje }}" ]]; then
+            ARGS+=(--lenguaje "${{ inputs.lenguaje }}")
+          fi
+          python -m src.main generate --count "$PROJECTS_PER_RUN" "${ARGS[@]}" --send-telegram
 
       - name: Upload history artifact
         uses: actions/upload-artifact@v4
@@ -63,15 +90,14 @@ jobs:
 
       - name: Commit history if changed
         run: |
+          set -euo pipefail
           cd project_generator
-          if git diff --quiet data/generated_projects.json; then
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/generated_projects.json
+          if git diff --cached --quiet; then
             echo "No changes in history"
           else
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/generated_projects.json
             git commit -m "chore: update project history [skip ci]"
-            git push origin master
+            git push origin HEAD:master
           fi
-        env:
-          GITHUB_TOKEN: ${{ github.token }}

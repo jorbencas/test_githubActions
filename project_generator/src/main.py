@@ -64,7 +64,8 @@ async def cmd_generate(args):
     
     if args.send_telegram and projects:
         print(f"\n[*] Enviando {len(projects)} proyectos a Telegram...")
-        success = await send_to_telegram(projects)
+        provider_name = projects[0].metadata.get("provider")
+        success = await send_to_telegram(projects, provider_name=provider_name)
         if success:
             print("[✓] Enviado correctamente a Telegram")
         else:
@@ -125,7 +126,8 @@ async def cmd_send(args):
     projects = history.proyectos[-args.count:] if args.count else history.proyectos
     
     print(f"[*] Enviando {len(projects)} proyectos a Telegram...")
-    success = await send_to_telegram(projects)
+    provider_name = projects[-1].metadata.get("provider")
+    success = await send_to_telegram(projects, provider_name=provider_name)
     
     if success:
         print("[✓] Enviado correctamente")
@@ -161,7 +163,7 @@ async def cmd_scrape(args):
     from scrapers import scrape_all_sources
     
     print("[*] Scrapeando fuentes externas...")
-    ideas = await scrape_all_sources(settings.tuweb_dev_url, "/home/jorge/dev/devjobs/downloader_telegram/data/tips_database.json")
+    ideas = await scrape_all_sources(settings.tuweb_dev_url, settings.tips_database_path)
     
     print(f"\n[✓] {len(ideas)} ideas encontradas:")
     for i, idea in enumerate(ideas[:10], 1):

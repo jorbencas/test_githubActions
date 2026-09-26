@@ -22,7 +22,7 @@
 - edge-tts for Telegram voice messages (Spanish voice)
 - Mailgun API for email newsletters
 - Surge.sh for static dashboard deployment
-- GitHub Actions for automation (11 workflows)
+- GitHub Actions for automation (16 workflows)
 
 ## Repository
 - `jorbencas/test_githubActions` (branch: master)
@@ -83,8 +83,8 @@ The movie/series scrapers use a shared SOLID engine:
 | Workflow | Trigger | Action |
 |----------|---------|--------|
 | `scraper_workflow.yml` | Saturday 07:00 UTC | Generate weekly recap + portadas → PR to blog |
-| `scrape_hourly_workflow.yml` | Every hour | Light scrape (RSS + quick sources) |
-| `scrape_6h_workflow.yml` | Every 6 hours | Standard scrape + AI tools auto-scrape |
+| `scrape_all_workflow.yml` | Every hour | Light + standard scrape + AI tools + concepts |
+| `generate-projects.yml` | Every 4 hours | Project Generator (Gemini) → Telegram + commit history |
 | `daily_resources.yml` | Daily 06:00 UTC | Tools scrape + resources.mdx management |
 | `send_email_workflow.yml` | Daily 09:00 UTC | Send Mailgun newsletter |
 | `send_telegram_workflow.yml` | Every 30 min | Send Telegram with TTS audio |
@@ -93,9 +93,7 @@ The movie/series scrapers use a shared SOLID engine:
 | `optimize_images.yml` | Dispatch from blog | Image optimization for blog |
 | `tests.yml` | Push/PR to master | pytest (89 tests) |
 | `dashboard_update.yml` | Push (JS/CSS/Python) | Regenerate + deploy dashboard |
-| `el_nido_scrape.yml` | Every 6h (:47) | Scrape "El nido" (2026) → commit JSON |
-| `nueve_reinas_scrape.yml` | Every 6h (:23) | Scrape "Nueve reinas" (Netflix) → commit JSON |
-| `los_ilusos_scrape.yml` | Every 6h (:37) | Scrape "Los ilusos 13+13" (2026) → commit JSON |
+| `movie_scrapers.yml` | Every 6h (:23/:37/:47) | Scrape "Nueve reinas", "Los ilusos", "El nido" → commit JSON |
 
 ### Modular pipeline (each script is independent)
 
@@ -107,8 +105,17 @@ The movie/series scrapers use a shared SOLID engine:
 5. **Email** (`send_email.py`): Mailgun newsletter
 6. **Telegram** (`send_telegram.py`): Telegram with edge-tts audio
 
+## Project Generator (`project_generator/`)
+Generador de ideas de proyectos con Gemini, enviado a un canal de Telegram. **Migrado desde `devjobs`** (antes se disparaba vía `repository_dispatch`; ahora es local con cron propio).
+
+- CLI: `python -m src.main generate|history|send|test-telegram|scrape`
+- IA: solo Gemini vía `google-genai` (`gemini-2.5-flash`); el fallback determinista existe pero el workflow pone `ALLOW_DETERMINISTIC_FALLBACK=false` para no enmascarar fallos
+- Anti-duplicados por hash en `data/generated_projects.json` (commiteado por el bot)
+- **Al editar el workflow**: nada de `defaults.run.working-directory` en pasos que ya prefijan rutas con `project_generator/`
+- Docs: `project_generator/README.md` + `project_generator/SECRETS.md`
+
 ## Secrets (GitHub)
-`TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `GEMINI_API_KEY`, `MAILGUN_API_KEY`, `MAILGUN_DOMAIN`, `EMAIL_USER`, `BLOG_TOKEN`, `UNSPLASH_ACCESS_KEY`
+`TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `GEMINI_API_KEY`, `MAILGUN_API_KEY`, `MAILGUN_DOMAIN`, `EMAIL_USER`, `BLOG_TOKEN`, `UNSPLASH_ACCESS_KEY`, `TG_API_ID`, `TG_API_HASH`, `TG_SESSION_STRING`, `TELEGRAM_REPORTS_PROYECTOS_CHANNEL_ID`
 
 ## Workflow
 1. Always run scripts from repo root (auto-chdir not needed).
