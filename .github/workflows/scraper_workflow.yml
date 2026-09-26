@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: master
       - name: 🕑 Ajuste de Horario (Verano vs Invierno)
@@ -28,7 +28,7 @@ jobs:
             echo "Estamos en horario de INVIERNO. Procediendo."
           fi
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: 'pip'
@@ -39,7 +39,7 @@ jobs:
 
       # ── Fase 1: Blog checkout (necesario para escribir recap + portadas) ──
       - name: 📂 Checkout blog repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: jorbencas/blog
           path: blog
