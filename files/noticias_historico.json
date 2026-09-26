@@ -3435,20 +3435,6 @@
         "traducido": true
     },
     {
-        "titulo": "Claude Opus 5.5",
-        "enlace": "https://docs.anthropic.com/docs/en/release-notes/system-prompts/claude-opus-5-5",
-        "fuente": "Claude Blog",
-        "tipo": "noticia",
-        "f": "22/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "22/09/2026",
-        "ts": "2026-09-22T17:52:47.912711",
-        "traducido": true
-    },
-    {
         "titulo": "How Reactiv Automates Mobile Commerce 80% Faster with Amazon Bedrock AgentCore",
         "enlace": "https://aws.amazon.com/blogs/machine-learning/how-reactiv-automates-mobile-commerce-80-faster-with-amazon-bedrock-agentcore/",
         "fuente": "AWS ML",
@@ -3530,62 +3516,6 @@
         "imagen_url_original": "https://www.infoworld.com/wp-content/uploads/2026/09/4225022-0-94250700-1790088852-insider-threat-shadow-worker-laptop.jpg?quality=50&strip=all&w=1044",
         "fecha_real": "22/09/2026",
         "ts": "2026-09-22T17:53:02.214752",
-        "traducido": true
-    },
-    {
-        "titulo": "Claude Opus 5.5 is now available in DevinClaude Opus 5.5 is now live in Devin Desktop and Devin CLI. It is the new #1 on FrontierCode 1.1, edging out Fable 5 and GPT-6 Astra at less than a tenth of the cost of Fable 5.September 22, 20261 min read",
-        "enlace": "https://www.infoworld.com/article/4224647/the-eu-cloud-sovereignty-trap-when-rules-outrun-reality.html",
-        "fuente": "InfoWorld",
-        "tipo": "noticia",
-        "f": "22/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "📊 Negocios",
-        "imagen_url_original": "",
-        "fecha_real": "22/09/2026",
-        "ts": "2026-09-22T17:53:02.218467",
-        "traducido": true
-    },
-    {
-        "titulo": "Claude Opus 5.5 is now available in DevinClaude Opus 5.5 is now live in Devin Desktop and Devin CLI. It is the new #1 on FrontierCode 1.1, edging out Fable 5 and GPT-6 Astra at less than a tenth of the cost of Fable 5.September 22, 20261 min read",
-        "enlace": "https://aibytes.blog/tutorials/run-qwen-38-27b-locally-the-2026-gpu-guide",
-        "fuente": "AI Bytes",
-        "tipo": "noticia",
-        "f": "22/09",
-        "fecha_publicacion": "2026-09-22T14:43:08.492Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "https://aibytes.blog/_next/image?url=%2Fimages%2Farticles%2Frun-qwen-38-27b-locally-the-2026-gpu-guide%2Fhome-workstation-open-pc-case-rtx.webp&w=3840&q=75",
-        "fecha_real": "22/09/2026",
-        "ts": "2026-09-22T17:53:07.289861",
-        "traducido": true
-    },
-    {
-        "titulo": "Claude Opus 5.5 is now available in DevinClaude Opus 5.5 is now live in Devin Desktop and Devin CLI. It is the new #1 on FrontierCode 1.1, edging out Fable 5 and GPT-6 Astra at less than a tenth of the cost of Fable 5.September 22, 20261 min read",
-        "enlace": "https://cleverai.app/es/blog/fundamentos-del-prompt-engineering-para-mejores-resultados-de-ai",
-        "fuente": "CleverAI",
-        "tipo": "noticia",
-        "f": "22/09",
-        "fecha_publicacion": "2026-09-22T16:02:32.362Z",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "https://cleverai.app/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgenius-ai-app-test-1.appspot.com%2Fblog%2Ffeatured%2FsRoOf-D7YscgkLdZPNnkd.webp&w=3840&q=75",
-        "fecha_real": "22/09/2026",
-        "ts": "2026-09-22T17:53:11.949810",
-        "traducido": true
-    },
-    {
-        "titulo": "Claude Opus 5.5",
-        "enlace": "https://www.businessinsider.es/tecnologia/anthropic-presenta-claude-opus-5-5-un-modelo-mas-rentable-ia-justo-antes-su-debut-bolsa_7040047_0.html",
-        "fuente": "Business Insider Tecnología",
-        "tipo": "noticia",
-        "f": "22/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "22/09/2026",
-        "ts": "2026-09-22T17:53:15.568102",
         "traducido": true
     },
     {
@@ -5283,20 +5213,6 @@
         "traducido": true
     },
     {
-        "titulo": "Tabla: Productos con IA lanzados o anunciados en CES 2026",
-        "enlace": "https://blog.donweb.com/ia-todos-lados-2026/#tabla-productos-con-ia-lanzados-o-anunciados-en-ces-2026",
-        "fuente": "DonWeb IA",
-        "tipo": "noticia",
-        "f": "20/09",
-        "fecha_publicacion": "2026-04-14T07:06:54-03:00",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "20/09/2026",
-        "ts": "2026-09-20T21:08:35.737942",
-        "traducido": true
-    },
-    {
         "titulo": "Cómo saber dónde has estado según Google Maps: puedes consultar todos tus viajes",
         "enlace": "https://www.adslzone.net/noticias/internet/como-saber-ubicacion-google-maps/",
         "fuente": "ADSL Zone",
@@ -5378,20 +5294,6 @@
         "imagen_url_original": "https://the-decoder.com/wp-content/uploads/2026/09/qwen_image_demo.png",
         "fecha_real": "20/09/2026",
         "ts": "2026-09-20T18:26:18.576877",
-        "traducido": true
-    },
-    {
-        "titulo": "Los desafíos reales: privacidad, integración y criterio",
-        "enlace": "https://blog.donweb.com/ia-todos-lados-2026/#los-desafios-reales-privacidad-integracion-y-criterio",
-        "fuente": "DonWeb IA",
-        "tipo": "noticia",
-        "f": "20/09",
-        "fecha_publicacion": "2026-04-14T07:06:54-03:00",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "",
-        "fecha_real": "20/09/2026",
-        "ts": "2026-09-20T18:26:22.760909",
         "traducido": true
     },
     {
@@ -5540,19 +5442,6 @@
         "ts": "2026-09-20T15:14:53.479522"
     },
     {
-        "titulo": "Las 7 tendencias que definen la proliferación de IA en 2026",
-        "enlace": "https://blog.donweb.com/ia-todos-lados-2026/#las-7-tendencias-que-definen-la-proliferacion-de-ia-en-2026",
-        "fuente": "DonWeb IA",
-        "tipo": "noticia",
-        "f": "20/09",
-        "fecha_publicacion": "2026-04-14T07:06:54-03:00",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "20/09/2026",
-        "ts": "2026-09-20T15:14:57.136642"
-    },
-    {
         "titulo": "Ucrania lleva cuatro años cazando rusos con drones. Ahora ha convertido el desierto de África en un nuevo frente de la guerra",
         "enlace": "https://www.xataka.com/magnet/ucrania-lleva-cuatro-anos-cazando-rusos-drones-ahora-ha-convertido-desierto-africa-nuevo-frente-guerra",
         "fuente": "Xataka",
@@ -5595,20 +5484,6 @@
         "traducido": true
     },
     {
-        "titulo": "Más allá del hogar: la IA conquista las empresas",
-        "enlace": "https://blog.donweb.com/ia-todos-lados-2026/#mas-alla-del-hogar-la-ia-conquista-las-empresas",
-        "fuente": "DonWeb IA",
-        "tipo": "noticia",
-        "f": "20/09",
-        "fecha_publicacion": "2026-04-14T07:06:54-03:00",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "20/09/2026",
-        "ts": "2026-09-20T12:14:04.558845",
-        "traducido": true
-    },
-    {
         "titulo": "¿Qué es Hugging Face y por qué todo el mundo habla de esta plataforma de inteligencia artificial?",
         "enlace": "https://www.computerhoy.com/tecnologia/que-es-hugging-face-por-que-todo-mundo-habla-esta-plataforma-inteligencia-artificial_7034320_0.html",
         "fuente": "ComputerHoy",
@@ -5648,20 +5523,6 @@
         "imagen_url_original": "https://the-decoder.com/wp-content/uploads/2026/09/near-daily-ai-use-doubled-e1789898304147.png",
         "fecha_real": "20/09/2026",
         "ts": "2026-09-20T10:47:11.068363",
-        "traducido": true
-    },
-    {
-        "titulo": "Dentro de tu hogar: cómo la IA rediseña los electrodomésticos cotidianos",
-        "enlace": "https://blog.donweb.com/ia-todos-lados-2026/#dentro-de-tu-hogar-como-la-ia-redisena-los-electrodomesticos-cotidianos",
-        "fuente": "DonWeb IA",
-        "tipo": "noticia",
-        "f": "20/09",
-        "fecha_publicacion": "2026-04-14T07:06:54-03:00",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "20/09/2026",
-        "ts": "2026-09-20T10:47:15.240373",
         "traducido": true
     },
     {
@@ -5970,20 +5831,6 @@
         "origen": "rss",
         "fecha_real": "20/09/2026",
         "ts": "2026-09-20T10:41:00.034560",
-        "traducido": true
-    },
-    {
-        "titulo": "El CES 2026: electrodomésticos y gadgets presentan su lado inteligente",
-        "enlace": "https://blog.donweb.com/ia-todos-lados-2026/#el-ces-2026-electrodomesticos-y-gadgets-presentan-su-lado-inteligente",
-        "fuente": "DonWeb IA",
-        "tipo": "noticia",
-        "f": "20/09",
-        "fecha_publicacion": "2026-04-14T07:06:54-03:00",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "",
-        "fecha_real": "20/09/2026",
-        "ts": "2026-09-20T10:41:05.973976",
         "traducido": true
     },
     {
@@ -6688,19 +6535,6 @@
         "origen": "rss",
         "fecha_real": "20/09/2026",
         "ts": "2026-09-20T05:44:06.032795"
-    },
-    {
-        "titulo": "¿Qué significa “IA hasta en la sopa”? La frase que captura 2026",
-        "enlace": "https://blog.donweb.com/ia-todos-lados-2026/#que-significa-ia-hasta-en-la-sopa-la-frase-que-captura-2026",
-        "fuente": "DonWeb IA",
-        "tipo": "noticia",
-        "f": "20/09",
-        "fecha_publicacion": "2026-04-14T07:06:54-03:00",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "",
-        "fecha_real": "20/09/2026",
-        "ts": "2026-09-20T05:44:10.046662"
     },
     {
         "titulo": "OpenAI's GPT-5.6 Sol Sets New Record: Sub-100ms Response Time Changes Everything",
@@ -8186,20 +8020,6 @@
         "traducido": true
     },
     {
-        "titulo": "Claude Opus 4.8",
-        "enlace": "https://docs.anthropic.com/docs/en/release-notes/system-prompts/claude-opus-4-8",
-        "fuente": "Claude Blog",
-        "tipo": "noticia",
-        "f": "19/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "19/09/2026",
-        "ts": "2026-09-19T20:10:31.200109",
-        "traducido": true
-    },
-    {
         "titulo": "Materiales",
         "enlace": "https://www.xataka.com/categoria/materiales",
         "fuente": "Xataka",
@@ -9281,19 +9101,6 @@
         "ts": "2026-09-19T17:48:10.325039"
     },
     {
-        "titulo": "The Good, the Bad and the Ugly in Cybersecurity – Week 33 (2026)",
-        "enlace": "https://www.sentinelone.com/blog/the-good-the-bad-and-the-ugly-in-cybersecurity-week-33-8/",
-        "fuente": "SentinelOne Labs",
-        "tipo": "noticia",
-        "f": "19/09",
-        "fecha_publicacion": "Fri, 14 Aug 2026 15:21:37 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "19/09/2026",
-        "ts": "2026-09-19T17:48:14.117087"
-    },
-    {
         "titulo": "Agentic security is the billion-dollar challenge for some clever startup to solve",
         "enlace": "https://www.theregister.com/security/2026/09/19/agentic-security-is-the-billion-dollar-challenge-for-some-clever-startup-to-solve/5297546",
         "fuente": "The Register Security",
@@ -9464,34 +9271,6 @@
         "imagen_url_original": "",
         "fecha_real": "19/09/2026",
         "ts": "2026-09-19T15:29:34.662500",
-        "traducido": true
-    },
-    {
-        "titulo": "Claude Fable 5.1",
-        "enlace": "https://docs.anthropic.com/docs/en/release-notes/system-prompts/claude-fable-5-1",
-        "fuente": "Claude Blog",
-        "tipo": "noticia",
-        "f": "19/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "19/09/2026",
-        "ts": "2026-09-19T15:29:37.794343",
-        "traducido": true
-    },
-    {
-        "titulo": "Claude Opus 5",
-        "enlace": "https://docs.anthropic.com/docs/en/release-notes/system-prompts/claude-opus-5",
-        "fuente": "Claude Blog",
-        "tipo": "noticia",
-        "f": "19/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "19/09/2026",
-        "ts": "2026-09-19T15:29:37.794662",
         "traducido": true
     },
     {
@@ -10542,20 +10321,6 @@
         "origen": "rss",
         "fecha_real": "19/09/2026",
         "ts": "2026-09-19T14:11:47.866815",
-        "traducido": true
-    },
-    {
-        "titulo": "Lo bueno, lo malo y lo feo en Ciberseguridad – Semana 35 (2026)",
-        "enlace": "https://www.sentinelone.com/blog/the-good-the-bad-and-the-ugly-in-cybersecurity-week-35-8/",
-        "fuente": "SentinelOne Labs",
-        "tipo": "noticia",
-        "f": "19/09",
-        "fecha_publicacion": "Fri, 28 Aug 2026 16:01:30 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "19/09/2026",
-        "ts": "2026-09-19T14:11:52.127840",
         "traducido": true
     },
     {
@@ -27829,20 +27594,6 @@
         "traducido": true
     },
     {
-        "titulo": "Informe de desalineación del modelo de OpenAI",
-        "enlace": "https://openai.com/index/model-misalignment-reporting-framework/",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "17/09",
-        "fecha_publicacion": "Thu, 17 Sep 2026 07:21:19 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "17/09/2026",
-        "ts": "2026-09-17T11:01:10.185203",
-        "traducido": true
-    },
-    {
         "titulo": "Por qué los archivos .tar.gz no se pueden combinar con cat",
         "enlace": "https://alexwlchan.net/2026/cat-confusion/",
         "fuente": "Lobsters",
@@ -31054,19 +30805,6 @@
         "origen": "rss",
         "fecha_real": "17/09/2026",
         "ts": "2026-09-17T00:07:28.808249"
-    },
-    {
-        "titulo": "Today’s NYT Connections: Sports Edition Hints and Answers for Sept. 17, #724",
-        "enlace": "https://www.cnet.com/tech/gaming/todays-nyt-connections-sports-edition-hints-and-answers-for-sept-17-724/",
-        "fuente": "CNET",
-        "tipo": "noticia",
-        "f": "17/09",
-        "fecha_publicacion": "2026-09-16T22:09:50Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "17/09/2026",
-        "ts": "2026-09-17T00:07:28.808282"
     },
     {
         "titulo": "10 Household Materials That’ll Clog Your Drain Quickly",
@@ -35826,19 +35564,6 @@
         "ts": "2026-09-16T13:09:47.997047"
     },
     {
-        "titulo": "Mistral X Mozilla: Private, Multilingual AI Browsing",
-        "enlace": "https://mistral.ai/news/mistral-x-mozilla/",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "16/09",
-        "fecha_publicacion": "Wed, 16 Sep 2026 08:08:57 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "16/09/2026",
-        "ts": "2026-09-16T13:09:47.997059"
-    },
-    {
         "titulo": "A software thing I built: GPS on a 25MHz 486-SX",
         "enlace": "https://forum.vcfed.org/index.php?threads/a-software-thing-i-built-gps-on-a-25mhz-486-sx.1258966/",
         "fuente": "Hacker News",
@@ -36019,19 +35744,6 @@
         "origen": "rss",
         "fecha_real": "16/09/2026",
         "ts": "2026-09-16T13:09:49.490299"
-    },
-    {
-        "titulo": "Consejos y aprendizajes de IAEntendiendo el uso responsable de la IA: privacidad, sesgo y verificaciónExplora los aspectos clave del uso responsable de la IA, centrándote en la privacidad, el sesgo y la verificación para construir confianza en las tecnologías de IA.September 16, 2026",
-        "enlace": "https://cleverai.app/es/blog/entendiendo-el-uso-responsable-de-la-ia-privacidad-bias-verificacion",
-        "fuente": "CleverAI",
-        "tipo": "noticia",
-        "f": "16/09",
-        "fecha_publicacion": "2026-09-16T12:02:16.025Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "https://cleverai.app/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgenius-ai-app-test-1.appspot.com%2Fblog%2Ffeatured%2FrJCf3Jdwxn-M73RBrb9wf.webp&w=3840&q=75",
-        "fecha_real": "16/09/2026",
-        "ts": "2026-09-16T13:09:52.491535"
     },
     {
         "titulo": "Building the materials foundation for AI",
@@ -49723,20 +49435,6 @@
         "traducido": true
     },
     {
-        "titulo": "Atacantes explotan activamente una vulnerabilidad crítica en el plugin WooCommerce Wholesale Lead Capture",
-        "enlace": "https://www.wordfence.com/blog/2026/09/attackers-actively-exploiting-critical-vulnerability-in-woocommerce-wholesale-lead-capture-plugin/",
-        "fuente": "Wordfence Blog",
-        "tipo": "noticia",
-        "f": "14/09",
-        "fecha_publicacion": "Mon, 14 Sep 2026 18:49:14 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "14/09/2026",
-        "ts": "2026-09-14T21:32:02.418329",
-        "traducido": true
-    },
-    {
         "titulo": "Cómo los atacantes abusan de VSS y cómo Huntress lo detecta",
         "enlace": "https://www.huntress.com/blog/vss-abuse-explained",
         "fuente": "Huntress Blog",
@@ -56781,20 +56479,6 @@
         "origen": "rss",
         "fecha_real": "13/09/2026",
         "ts": "2026-09-13T22:54:29.897378",
-        "traducido": true
-    },
-    {
-        "titulo": "Claude Fable 5 lee un gráfico con menos del 1%. Todavía no puede contar hasta 23",
-        "enlace": "https://pub.towardsai.net/claude-fable-5-reads-a-chart-to-under-1-it-still-cant-count-to-23-0673ae0c7c4c?source=rss----98111c9905da---4",
-        "fuente": "Towards AI",
-        "tipo": "noticia",
-        "f": "13/09",
-        "fecha_publicacion": "Sun, 13 Sep 2026 22:01:01 GMT",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "13/09/2026",
-        "ts": "2026-09-13T22:54:29.897398",
         "traducido": true
     },
     {
@@ -70913,20 +70597,6 @@
         "traducido": true
     },
     {
-        "titulo": "Consejos y aprendizajes de IAEntendiendo la arquitectura Transformer en español",
-        "enlace": "https://cleverai.app/es/blog/entendiendo-la-arquitectura-transformer-en-espanol",
-        "fuente": "CleverAI",
-        "tipo": "noticia",
-        "f": "11/09",
-        "fecha_publicacion": "2026-09-11T04:02:27.454Z",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "https://cleverai.app/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgenius-ai-app-test-1.appspot.com%2Fblog%2Ffeatured%2F7gUeY0i8o1P_Q8QPy_AsW.webp&w=3840&q=75",
-        "fecha_real": "11/09/2026",
-        "ts": "2026-09-11T08:35:47.744087",
-        "traducido": true
-    },
-    {
         "titulo": "La ciberseguridad con IA es un juego del gato y el ratón",
         "enlace": "https://stackoverflow.blog/2026/09/11/ai-cybersecurity-is-a-cat-and-mouse-game/",
         "fuente": "Stack Overflow Blog",
@@ -79359,20 +79029,6 @@
         "traducido": true
     },
     {
-        "titulo": "Claude Fable 5.1 + GPT-6 Astra: Dos agentes de codificación, un flujo de trabajo",
-        "enlace": "https://dev.to/denisbabkevich/claude-fable-51-gpt-6-astra-two-coding-agents-one-workflow-1g75",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "10/09",
-        "fecha_publicacion": "Thu, 10 Sep 2026 10:15:46 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "10/09/2026",
-        "ts": "2026-09-10T10:40:43.883131",
-        "traducido": true
-    },
-    {
         "titulo": "Uptime Kuma: Por qué el HTTP 200 puede ocultar una aplicación rota",
         "enlace": "https://dev.to/anthonygarces/uptime-kuma-why-http-200-can-hide-a-broken-app-2hkj",
         "fuente": "Dev.to",
@@ -86163,20 +85819,6 @@
         "traducido": true
     },
     {
-        "titulo": "Autoalojamiento",
-        "enlace": "https://www.lesswrong.com/posts/uDAWPNwPJfEY7oroF/self-hosting",
-        "fuente": "LessWrong AI",
-        "tipo": "noticia",
-        "f": "09/09",
-        "fecha_publicacion": "Wed, 09 Sep 2026 13:45:01 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "09/09/2026",
-        "ts": "2026-09-09T17:35:00.370587",
-        "traducido": true
-    },
-    {
         "titulo": "Registros de infostealers exponen tokens de IA reproducibles que pueden eludir la MFA",
         "enlace": "https://thehackernews.com/2026/09/infostealer-logs-expose-replayable-ai.html",
         "fuente": "The Hacker News",
@@ -88609,20 +88251,6 @@
         "origen": "rss",
         "fecha_real": "09/09/2026",
         "ts": "2026-09-09T13:25:57.290003",
-        "traducido": true
-    },
-    {
-        "titulo": "Claude Fable resuelve un cifrado histórico",
-        "enlace": "https://www.schneier.com/blog/archives/2026/09/claude-fable-solves-a-historical-cipher.html",
-        "fuente": "Schneier on Security",
-        "tipo": "noticia",
-        "f": "09/09",
-        "fecha_publicacion": "2026-09-09T11:08:26Z",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "09/09/2026",
-        "ts": "2026-09-09T13:25:56.889720",
         "traducido": true
     },
     {
@@ -108606,19 +108234,6 @@
         "ts": "2026-09-05T19:57:59.963251"
     },
     {
-        "titulo": "The Good, the Bad and the Ugly in Cybersecurity – Week 32 (2026)",
-        "enlace": "https://www.sentinelone.com/blog/the-good-the-bad-and-the-ugly-in-cybersecurity-week-32-8/",
-        "fuente": "SentinelOne Labs",
-        "tipo": "noticia",
-        "f": "05/09",
-        "fecha_publicacion": "Fri, 07 Aug 2026 13:00:57 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "05/09/2026",
-        "ts": "2026-09-05T19:58:06.746452"
-    },
-    {
         "titulo": "Artificial Analysis overhauls its Intelligence Index after GPT-6 Astra scoring drew skepticism",
         "enlace": "https://the-decoder.com/artificial-analysis-overhauls-its-intelligence-index-after-gpt-6-astra-scoring-drew-skepticism/",
         "fuente": "The Decoder RSS",
@@ -109982,20 +109597,6 @@
         "traducido": true
     },
     {
-        "titulo": "Lo bueno, lo malo y lo feo en ciberseguridad – Semana 34 (2026).",
-        "enlace": "https://www.sentinelone.com/blog/the-good-the-bad-and-the-ugly-in-cybersecurity-week-34-8/",
-        "fuente": "SentinelOne Labs",
-        "tipo": "noticia",
-        "f": "05/09",
-        "fecha_publicacion": "Fri, 21 Aug 2026 13:00:56 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "05/09/2026",
-        "ts": "2026-09-05T15:47:36.093703",
-        "traducido": true
-    },
-    {
         "titulo": "Siete minutos con un chatbot superaron a una hoja informativa en la reducción de creencias conspirativas en dos experimentos.",
         "enlace": "https://the-decoder.com/seven-minutes-with-a-chatbot-beat-a-fact-sheet-at-reducing-conspiracy-beliefs-in-two-experiments/",
         "fuente": "The Decoder RSS",
@@ -110226,19 +109827,6 @@
         "imagen_url_original": "",
         "fecha_real": "05/09/2026",
         "ts": "2026-09-05T14:43:30.745599"
-    },
-    {
-        "titulo": "Explore models in Google AI Studio",
-        "enlace": "https://aistudio.google.com",
-        "fuente": "Google AI Dev",
-        "tipo": "noticia",
-        "f": "05/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "05/09/2026",
-        "ts": "2026-09-05T14:43:36.827672"
     },
     {
         "titulo": "OpenAI shares prompting tips for GPT-6 Astra including a blocklist of slop words",
@@ -110472,20 +110060,6 @@
         "origen": "rss",
         "fecha_real": "05/09/2026",
         "ts": "2026-09-05T12:23:04.139308",
-        "traducido": true
-    },
-    {
-        "titulo": "Novedades en la plataforma web en mayo",
-        "enlace": "https://web.dev/blog/web-platform-05-2026?hl=en",
-        "fuente": "web.dev",
-        "tipo": "noticia",
-        "f": "05/09",
-        "fecha_publicacion": "Fri, 29 May 2026 07:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "05/09/2026",
-        "ts": "2026-09-05T12:23:06.782846",
         "traducido": true
     },
     {
@@ -111382,20 +110956,6 @@
         "origen": "rss",
         "fecha_real": "05/09/2026",
         "ts": "2026-09-05T12:23:32.497357",
-        "traducido": true
-    },
-    {
-        "titulo": "Guía de respuesta a incidentes para investigaciones de AWS CloudTrail – Parte 2",
-        "enlace": "https://aws.amazon.com/blogs/security/incident-response-guide-for-aws-cloudtrail-investigations-part-2/",
-        "fuente": "AWS Security Blog",
-        "tipo": "noticia",
-        "f": "05/09",
-        "fecha_publicacion": "Thu, 03 Sep 2026 21:15:53 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "05/09/2026",
-        "ts": "2026-09-05T12:23:38.177666",
         "traducido": true
     },
     {
@@ -125511,19 +125071,6 @@
         "ts": "2026-09-03T15:58:44.078754"
     },
     {
-        "titulo": "Claude Fable 5.1 decoded a centuries-old royalist message hidden in plain sight since 1653",
-        "enlace": "https://the-decoder.com/claude-fable-5-1-decoded-a-centuries-old-royalist-message-hidden-in-plain-sight-since-1653/",
-        "fuente": "The Decoder RSS",
-        "tipo": "noticia",
-        "f": "03/09",
-        "fecha_publicacion": "Thu, 03 Sep 2026 14:15:28 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "03/09/2026",
-        "ts": "2026-09-03T15:58:50.262080"
-    },
-    {
         "titulo": "AI systems are reaching out to philosophers and scientists with questions about their own consciousness",
         "enlace": "https://the-decoder.com/ai-systems-are-reaching-out-to-philosophers-and-scientists-with-questions-about-their-own-consciousness/",
         "fuente": "The Decoder RSS",
@@ -138443,20 +137990,6 @@
         "traducido": true
     },
     {
-        "titulo": "Claude Fable 5.1 acaba de encontrar un error que cuatro años de ingenieros no pudieron",
-        "enlace": "https://pub.towardsai.net/claude-fable-5-1-just-found-a-bug-four-years-of-engineers-couldnt-cc7fd9ba4ac5?source=rss----98111c9905da---4",
-        "fuente": "Towards AI",
-        "tipo": "noticia",
-        "f": "02/09",
-        "fecha_publicacion": "Wed, 02 Sep 2026 03:44:33 GMT",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "02/09/2026",
-        "ts": "2026-09-02T08:25:26.611004",
-        "traducido": true
-    },
-    {
         "titulo": "Por qué tu pipeline RAG necesita un re-ranker (y cómo funcionan realmente los codificadores cruzados)",
         "enlace": "https://pub.towardsai.net/why-your-rag-pipeline-needs-a-re-ranker-and-how-cross-encoders-actually-work-57c1b4e8a9ad?source=rss----98111c9905da---4",
         "fuente": "Towards AI",
@@ -139620,20 +139153,6 @@
         "origen": "rss",
         "fecha_real": "02/09/2026",
         "ts": "2026-09-02T03:01:22.332123",
-        "traducido": true
-    },
-    {
-        "titulo": "Claude Fable 5.1 ya está disponible en GitHub Copilot",
-        "enlace": "https://github.blog/changelog/2026-09-01-claude-fable-5-1-generally-available-in-github-copilot",
-        "fuente": "GitHub Changelog",
-        "tipo": "noticia",
-        "f": "02/09",
-        "fecha_publicacion": "Tue, 01 Sep 2026 14:29:23 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "02/09/2026",
-        "ts": "2026-09-02T03:01:35.824503",
         "traducido": true
     },
     {
@@ -141456,19 +140975,6 @@
         "ts": "2026-09-01T20:35:34.029363"
     },
     {
-        "titulo": "Claude Fable 5.1 and Claude Mythos 5.1",
-        "enlace": "https://www.anthropic.com/claude-fable-and-mythos-5-1",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "Tue, 01 Sep 2026 17:53:53 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T20:35:34.029384"
-    },
-    {
         "titulo": "The creator of Jujutsu has joined ERSC",
         "enlace": "https://ersc.io/blog/martin-joins-ersc",
         "fuente": "Hacker News",
@@ -141883,19 +141389,6 @@
         "origen": "rss",
         "fecha_real": "01/09/2026",
         "ts": "2026-09-01T20:35:46.310847"
-    },
-    {
-        "titulo": "Claude Fable 5.1 now available on AI Gateway",
-        "enlace": "https://vercel.com/changelog/claude-fable-5-1-now-available-on-ai-gateway",
-        "fuente": "Vercel Blog",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "2026-09-01T00:00:00.000Z",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T20:35:49.340339"
     },
     {
         "titulo": "Can mid-training survive RL",
