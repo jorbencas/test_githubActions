@@ -244,6 +244,7 @@ Editar `DeterministicProvider._load_templates()` en `ai_providers.py`
 | `CHANNEL_ID` no encontrado | Bot debe ser admin en el canal. Usar `get_channel_id.py` |
 | Rate limit Telegram | Action espera 0.5s entre mensajes. Reducir `PROJECTS_PER_RUN` |
 | IA devuelve JSON inválido | Reintenta automáticamente (3x). Revisa que `AI_MODEL` sea un modelo 2.x válido |
+| `agotó el presupuesto de salida (MAX_TOKENS)` | A todos los proyectos juntos no les caben en una respuesta. Se salvan los que llegaron enteros y, si no queda ninguno, se reintenta con uno solo. Para evitarlo: baja `PROJECTS_PER_RUN` y mantén `GEMINI_THINKING_BUDGET=0` |
 | `429` / cuota agotada de Gemini | Espera al reset diario o baja `PROJECTS_PER_RUN` |
 | Siempre salen los mismos proyectos | `ALLOW_DETERMINISTIC_FALLBACK=true` está enmascarando un fallo de Gemini. Ponlo a `false` para verlo |
 | `Could not open requirements file` | El workflow no debe tener `working-directory: project_generator` **y** prefijar las rutas con `project_generator/` |

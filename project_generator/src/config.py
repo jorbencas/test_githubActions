@@ -15,6 +15,11 @@ class Settings(BaseSettings):
     ai_model: str = Field(
         "gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.0-flash-lite", alias="AI_MODEL"
     )
+    # Presupuesto de "razonamiento" de los 2.5. Se paga con el mismo cupo de
+    # salida que el JSON, así que va en 0: el esquema ya va entero en el prompt.
+    # Súbelo (p. ej. 1024) si prefieres que el modelo reflexione antes de
+    # responder, aceptando que la respuesta puede salir cortada.
+    gemini_thinking_budget: int = Field(0, alias="GEMINI_THINKING_BUDGET")
 
     # Configuración generación
     projects_per_run: int = Field(3, alias="PROJECTS_PER_RUN")

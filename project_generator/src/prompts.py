@@ -72,6 +72,12 @@ REGLAS ESTRICTAS (OBLIGATORIAS):
 11. Incluir: funcionalidades clave, casos de uso, reglas de negocio, complejidad, tiempo estimado, prerequisitos, riesgos, ideas de extensión
 12. Fuente de inspiración: "tuweb.dev", "tips_telegram", "ia_generativa", "manual"
 13. Si un campo no aplica, usa null. NUNCA pongas "N/A", "-", "none" ni texto vacío donde se espere una URL o un número: en `url_docs` o una URL válida (https://...) o null
+14. CONCISO, es obligatorio: la respuesta completa cabe en un solo JSON. Límites por proyecto:
+    - descripcion_corta máx. 200 caracteres, descripcion_detallada máx. 500
+    - máx. 4 elementos por lista del tech_stack (frameworks, librerias, bases_datos, infraestructura, ia_ml, testing, otros); si una lista no aporta, déjala vacía []
+    - máx. 6 funcionalidades_clave, 5 casos_uso, 5 reglas_negocio, 5 riesgos, 4 ideas de extensión
+    - una frase por herramienta en descripcion y por_que, sin párrafos
+    Si te quedas sin sitio, recorta detalle antes que dejar el JSON a medias: un JSON incompleto no vale nada
 
 FORMATO DE SALIDA (JSON estricto):
 {
@@ -170,6 +176,58 @@ EJEMPLOS DE BUENA JUSTIFICACIÓN HERRAMIENTA:
 Genera SOLO el JSON válido. Sin markdown, sin explicaciones extra."""
     
     return prompt
+
+
+def recuperar_proyectos(texto: str) -> List[dict]:
+    """Salva los proyectos completos de un JSON cortado por falta de tokens.
+
+    Si la respuesta se corta a mitad, `json.loads` falla y se pierde todo, aunque
+    los dos primeros proyectos vinieran enteros. Se recorre el texto contando
+    llaves fuera de las comillas y se recoge cada objeto que llegue a cerrar; el
+    último, que queda a medias, se descarta.
+    """
+    if not isinstance(texto, str) or '"proyectos"' not in texto:
+        return []
+
+    corchete = texto.find("[", texto.find('"proyectos"'))
+    if corchete == -1:
+        return []
+
+    recuperados: List[dict] = []
+    profundidad = 0
+    inicio_objeto = None
+    en_cadena = False
+    escapado = False
+
+    for posicion in range(corchete + 1, len(texto)):
+        caracter = texto[posicion]
+
+        if escapado:
+            escapado = False
+            continue
+        if en_cadena:
+            if caracter == "\\":
+                escapado = True
+            elif caracter == '"':
+                en_cadena = False
+            continue
+
+        if caracter == '"':
+            en_cadena = True
+        elif caracter == "{":
+            if profundidad == 0:
+                inicio_objeto = posicion
+            profundidad += 1
+        elif caracter == "}":
+            profundidad -= 1
+            if profundidad == 0 and inicio_objeto is not None:
+                try:
+                    recuperados.append(json.loads(texto[inicio_objeto:posicion + 1]))
+                except json.JSONDecodeError:
+                    pass
+                inicio_objeto = None
+
+    return recuperados
 
 
 def validate_project_json(data: dict) -> List[dict]:

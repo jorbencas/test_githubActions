@@ -9,9 +9,25 @@ from pydantic import ValidationError
 
 from config import settings
 from models import Proyecto, ProyectoGenerado, HistorialProyectos, Nivel, Scope, TipoProyecto, Lenguaje
-from ai_providers import get_provider, AIProvider, DeterministicProvider, QuotaExhaustedError
-from prompts import SYSTEM_PROMPT, build_user_prompt, validate_project_json
+from ai_providers import (
+    get_provider,
+    AIProvider,
+    DeterministicProvider,
+    QuotaExhaustedError,
+    ResponseTruncatedError,
+)
+from prompts import (
+    SYSTEM_PROMPT,
+    build_user_prompt,
+    validate_project_json,
+    recuperar_proyectos,
+)
 from scrapers import scrape_all_sources
+
+# Presupuesto de salida por petición. Los 2.5 admiten 64K, pero en la cadena
+# está también 2.0-flash-lite, que solo da 8192: el proveedor recorta a lo que
+# admita cada modelo, así que aquí se pide alto sin arriesgarse a un 400.
+MAX_TOKENS_GENERACION = 16384
 
 
 def _strip_json_fences(text: str) -> str:
@@ -97,7 +113,7 @@ class ProjectGenerator:
         
         count = count or settings.projects_per_run
         self._init_provider()
-        
+
         # Obtener fuentes de inspiración
         inspiration = self._get_inspiration_sources()
         external = await self._get_external_inspiration()
@@ -107,15 +123,18 @@ class ProjectGenerator:
         existing_hashes = [p.proyecto.hash_unicidad for p in self.history.proyectos]
         
         # Construir prompt
-        user_prompt = build_user_prompt(
-            count=count,
-            existing_hashes=existing_hashes,
-            inspiration_sources=inspiration,
-            preferred_levels=preferred_levels,
-            preferred_scopes=preferred_scopes,
-            preferred_languages=preferred_languages,
-            preferred_types=preferred_types
-        )
+        def construir_prompt(cantidad: int) -> str:
+            return build_user_prompt(
+                count=cantidad,
+                existing_hashes=existing_hashes,
+                inspiration_sources=inspiration,
+                preferred_levels=preferred_levels,
+                preferred_scopes=preferred_scopes,
+                preferred_languages=preferred_languages,
+                preferred_types=preferred_types
+            )
+
+        user_prompt = construir_prompt(count)
         
         print(f"[*] Generating {count} projects using {self.provider.get_model_name()}...")
         print(f"[*] Inspiration sources: {len(inspiration)}")
@@ -123,13 +142,25 @@ class ProjectGenerator:
         
         # Generar
         requested_model = self.provider.get_model_name()
+
+        async def pedir(cantidad: int):
+            """Pide `cantidad` proyectos. Devuelve (texto, came_cortado)."""
+            try:
+                texto = await self.provider.generate(
+                    prompt=construir_prompt(cantidad),
+                    system_prompt=SYSTEM_PROMPT,
+                    temperature=0.8,
+                    max_tokens=MAX_TOKENS_GENERACION
+                )
+                return texto, False
+            except ResponseTruncatedError as e:
+                # No es un fallo de cuota: la respuesta llegó a medias. Se
+                # conserva el texto porque suele traer proyectos ya enteros.
+                print(f"[!] {e}")
+                return e.texto, True
+
         try:
-            response = await self.provider.generate(
-                prompt=user_prompt,
-                system_prompt=SYSTEM_PROMPT,
-                temperature=0.8,
-                max_tokens=8000
-            )
+            response, truncado = await pedir(count)
         except QuotaExhaustedError as e:
             # El fallback determinista tampoco arregla un tope de cuota: solo
             # produciría las mismas plantillas de siempre. Se propaga para que
@@ -146,22 +177,47 @@ class ProjectGenerator:
             print(f"[!] AI generation failed ({requested_model}): {e}")
             print("[!] Falling back to deterministic provider (ALLOW_DETERMINISTIC_FALLBACK=true)")
             self.provider = DeterministicProvider()
-            response = await self.provider.generate(
+            response, truncado = await self.provider.generate(
                 prompt=user_prompt,
                 system_prompt=SYSTEM_PROMPT
-            )
-        
+            ), False
+
         # Parsear y validar
         try:
             data = json.loads(_strip_json_fences(response))
             validated = validate_project_json(data)
         except json.JSONDecodeError as e:
             print(f"[!] Invalid JSON from AI: {e}")
-            print(f"Response preview: {response[:500]}")
-            return []
+            rescued = recuperar_proyectos(_strip_json_fences(response))
+            if not rescued:
+                print(f"Response preview: {response[:500]}")
+                validated = []
+            else:
+                print(f"[!] Respuesta cortada, pero {len(rescued)} proyecto(s) ya habían "
+                      f"llegado completos: se aprovechan.")
+                validated = validate_project_json({"proyectos": rescued})
         except ValueError as e:
             print(f"[!] Validation error: {e}")
-            return []
+            validated = []
+
+        # Si aun así no hay nada y fue por falta de tokens, un reintento con un
+        # solo proyecto cabe de sobra. Cuesta una petición, pero es la diferencia
+        # entre mandar 3 proyectos a Telegram o no mandar nada.
+        if not validated and truncado and count > 1:
+            print("[*] Nada aprovechable: reintento con un solo proyecto (una petición más).")
+            try:
+                respuesta, _ = await pedir(1)
+            except QuotaExhaustedError as e:
+                print(f"[!] {e}")
+                print("[!] Ejecución omitida: no se toca el historial ni se envía nada a Telegram.")
+                raise
+            try:
+                validated = validate_project_json(json.loads(_strip_json_fences(respuesta)))
+            except (json.JSONDecodeError, ValueError) as e:
+                print(f"[!] Segundo intento tampoco ha servido: {e}")
+                validated = recuperar_proyectos(_strip_json_fences(respuesta))
+                validated = validate_project_json({"proyectos": validated}) if validated else []
+
         
         # Filtrar duplicados por hash
         new_projects = []

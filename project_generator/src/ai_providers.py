@@ -5,6 +5,8 @@ import json
 import re
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception
 
+from config import settings
+
 
 class AIProviderError(RuntimeError):
     """Fallo genérico de un proveedor de IA."""
@@ -85,6 +87,41 @@ class ModelNotAvailableError(AIProviderError):
     """El modelo no existe o no está disponible para esta API key (404)."""
 
 
+class ResponseTruncatedError(AIProviderError):
+    """El modelo se quedó sin presupuesto de salida (`finish_reason=MAX_TOKENS`).
+
+    No es un fallo de cuota ni de formato: la respuesta llegó bien pero cortada a
+    mitad, típicamente porque el JSON pedido no cabía en `max_output_tokens`.
+    Se guarda el texto en `.texto` porque suele traer proyectos ya completos:
+    mejor rescatarlos que tirarlos por no poder parsear el final.
+    """
+
+    def __init__(self, mensaje: str, texto: str = ""):
+        super().__init__(mensaje)
+        self.texto = texto or ""
+
+
+# Tope de salida que admite cada familia. Se pide un valor alto y se recorta aquí
+# en lugar de dejar que la API lo rechace: `max_output_tokens` por encima del
+# máximo del modelo es un 400 y tiraba la generación entera.
+# Los 2.5 dan 64K de salida; nos quedamos en 32K, de sobra para este JSON y
+# lejos del límite real.
+_TOPE_SALIDA = (
+    ("gemini-2.5", 32768),
+    ("gemini-2.0", 8192),
+    ("gemini-1.5", 8192),
+    ("gemini-1.0", 8192),
+)
+_TOPE_SALIDA_DEFECTO = 8192
+
+
+def _tope_salida(model: str) -> int:
+    for prefijo, tope in _TOPE_SALIDA:
+        if model.startswith(prefijo):
+            return tope
+    return _TOPE_SALIDA_DEFECTO
+
+
 class GeminiProvider(AIProvider):
     """Proveedor Gemini sobre el SDK `google-genai` (mismo que el resto del repo).
 
@@ -127,8 +164,25 @@ class GeminiProvider(AIProvider):
     def _preparar_contenidos(self, model: str, prompt: str, system_prompt: str, config: Dict[str, Any]):
         """`system_instruction` solo existe en los modelos 2.x (en 1.x iba en el prompt)."""
         config = dict(config)
+
+        # Recorta la petición al tope real del modelo (ver _TOPE_SALIDA).
+        pedido = config.get("max_output_tokens")
+        tope = _tope_salida(model)
+        if pedido and pedido > tope:
+            print(f"[!] {model}: max_output_tokens {pedido} > {tope}, recortado")
+            config["max_output_tokens"] = tope
+
         if model.startswith("gemini-2"):
             config["system_instruction"] = system_prompt
+            # El "razonamiento" se paga con el mismo presupuesto de salida: con
+            # thinking activo el JSON se queda sin sitio y sale cortado. Aquí el
+            # esquema ya va íntegro en el prompt, así que no aporta nada.
+            #
+            # Solo 2.5+ entiende thinking_config; en 2.0 mandarlo es un 400, y
+            # 2.0-flash-lite está en la cadena como reserva, así que la
+            # comprobación tiene que ser por versión y no "empieza por gemini-2".
+            if model.startswith("gemini-2.5"):
+                config["thinking_config"] = {"thinking_budget": settings.gemini_thinking_budget}
             return prompt, config
         return f"{system_prompt}\n\n{prompt}", config
 
@@ -184,6 +238,21 @@ class GeminiProvider(AIProvider):
 
             if not response or not response.text:
                 raise AIProviderError(f"Gemini devolvió respuesta vacía (modelo={model})")
+
+            # Sin esta comprobación la respuesta cortada pasaba por buena y el
+            # error aparecía más abajo como "JSON inválido", sin decir por qué.
+            finish = getattr(response, "finish_reason", None)
+            if finish and "MAX_TOKENS" in str(finish):
+                uso = getattr(response, "usage_metadata", None)
+                detalle = ""
+                if uso is not None and getattr(uso, "candidates_token_count", None):
+                    detalle = f" ({uso.candidates_token_count} tokens de salida)"
+                raise ResponseTruncatedError(
+                    f"{model} agotó el presupuesto de salida ({finish}){detalle}: "
+                    "la respuesta llega cortada y el JSON no se puede leer. "
+                    "Baja el número de proyectos por petición o sube MAX_TOKENS.",
+                    texto=response.text,
+                )
 
             return response.text
 
