@@ -147,11 +147,7 @@ class TelegramReporter:
         msg += f"  • Tipos: {', '.join(f'{_esc(k)}({v})' for k,v in sorted(tipos.items()))}\n"
         msg += f"  • Con IA: {con_ia}/{total}\n"
         
-        msg += f"\n🤖 Generado con: `{self.provider_name}`\n"
-        # La ruta va en code span: contiene '_' y Telegram lo rechazaría escapado o no fuera de ahí
-        msg += f"🔗 Historial: `{settings.data_dir}/{settings.history_file}`"
-        
-        return msg
+        return msg.rstrip()
     
     def _build_project_message(self, p: Proyecto, index: int, total: int) -> str:
         msg = f"📋 **[{index}/{total}] {_esc(p.titulo)}**\n\n"
@@ -201,10 +197,9 @@ class TelegramReporter:
         
         # Fuente
         if p.fuente_inspiracion:
-            msg += f"💡 **Fuente:** {_esc(p.fuente_inspiracion)}\n"
-        msg += f"🆔 **ID:** `{_esc(p.id)}` | **Hash:** `{_esc(p.hash_unicidad)}`"
+            msg += f"💡 **Fuente:** {_esc(p.fuente_inspiracion)}"
         
-        return msg
+        return msg.rstrip()
     
     async def _send_json_file(self, projects: List[ProyectoGenerado]):
         """Envía el JSON completo como archivo adjunto"""
