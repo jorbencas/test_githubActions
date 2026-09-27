@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 145,
+    "total_concepts": 148,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-27T14:59:48.894760"
+    "last_scraped": "2026-09-27T18:55:19.233854"
   },
   "concepts": [
     {
@@ -2706,6 +2706,60 @@
       ],
       "cat": "seguridad_web",
       "scraped_at": "2026-09-26T17:34:42.108703"
+    },
+    {
+      "title": "ProxySQL 2.7 vs 3.0: el salto de versión puesto a prueba con datos reales",
+      "summary": "Pasar de ProxySQL 2.7 a 3.0 suena a salto de versión mayor, de esos que dan pereza meter en producción sin motivo. La empresa francesaPmaControl, que desarrolla herramientas de monitorización para MyS",
+      "explanation": "Pasar de ProxySQL 2.7 a 3.0 suena a salto de versión mayor, de esos que dan pereza meter en producción sin motivo. La empresa francesaPmaControl, que desarrolla herramientas de monitorización para MySQL y MariaDB, acaba de publicar un dato concreto que merece la pena mirar con lupa: en sus pruebas, la misma comprobación de caché de ProxySQL pasó de8,1 a 2,0 milisegundosde media al actualizar de la serie 2.7 a la 3.0. Un 75% menos de tiempo, o lo que es lo mismo, algo más de cuatro veces más rápido. El titular es llamativo, y hay que leerlo con cuidado: no mide el rendimiento de ProxySQL enrutando tráfico de una aplicación real, sino una consulta muy concreta contra su interfaz de administración. Vamos a ver qué se probó exactamente, qué hay detrás del cambio de versión y cómo encaja con lo que sabemos de ProxySQL en otros benchmarks.Qué es ProxySQL, por si no lo conoces ProxySQL es un proxy que se coloca entre la aplicación y los servidores MySQL o MariaDB (desde hace poco también PostgreSQL). Reparte las consultas entre varios backends, cachea resultados, reescribe queries sobre la marcha con reglas y expone todo eso a través de unainterfaz de administraciónque se consulta con SQL normal y corriente, como si fuera una base de datos más. Por debajo, esa interfaz de administración usa SQLite.El cambio real no es solo el número de versión El salto de 2.x a 3.0 coincide con algo más de fondo: en marzo de 2026, el equipo de ProxySQL anunció unanueva estrategia de publicación en t",
+      "code_example": "-- Primera consulta: reglas de caché activas y sus contadores de coincidencia\nSELECT r.rule_id, r.cache_ttl, r.digest,\n       r.match_digest, r.match_pattern,\n       COALESCE(h.hits, 0) AS hits\nFROM runtime_mysql_query_rules r\nLEFT JOIN stats_mysql_query_rules h\n  ON h.rule_id = r.rule_id\nWHERE r.active = 1 AND r.cache_ttl > 0\nORDER BY r.rule_id;\n\n-- Segunda consulta: contadores de caché y tamaño configurado\nSELECT Variable_Name AS name, Variable_Value AS value\nFROM stats_mysql_global\nWHERE Variable_Name IN (\n    'Query_Cache_count_GET', 'Query_Cache_count_GET_OK',\n    'Query_Cache_count_SET', 'Query_Cache_Memory_bytes',\n    'Query_Cache_Entries', 'Query_Cache_Purged'\n)\nUNION ALL\nSELECT variable_name, variable_value\nFROM global_variables\nWHERE variable_name = 'mysql-query_cache_size_MB';",
+      "use_cases": [],
+      "difficulty": 3,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-27T18:54:43.206857"
+    },
+    {
+      "title": "15 errores con bases de datos que tarde o temprano te pasan factura",
+      "summary": "Un bug en el código se pilla en un code review. Un problema de servidor salta en el panel de monitorización antes de que nadie se entere. Pero un problema de base de datos casi nunca avisa. Se queda a",
+      "explanation": "Un bug en el código se pilla en un code review. Un problema de servidor salta en el panel de monitorización antes de que nadie se entere. Pero un problema de base de datos casi nunca avisa. Se queda ahí, agazapado, hasta que la tabla crece, entra tráfico real o alguien lanza la query equivocada un viernes a las seis de la tarde. La mayoría de estos fallos no son errores de sintaxis. Son decisiones de diseño que parecían razonables el primer día y que se convierten en un problema serio dos años después, cuando ya no es tan fácil deshacerlas. Repasamos quince de los más habituales, con ejemplos en SQL, PHP y algún caso real que ya ha pasado factura a empresas conocidas.1. Usar SELECT * en el código de la aplicación SELECT *es cómodo de escribir y una mala idea a la larga. El problema no es solo de rendimiento, aunque también: si la tabla tiene columnas de texto largo o BLOBs que no vas a usar, cada consulta arrastra más datos de los necesarios por la red y ocupa más memoria en el cliente. El problema gordo es otro: acopla tu código a la forma exacta de la tabla en ese momento. Si un compañero añade una columna nueva o renombra una existente, cualquierfetch_assoc()o mapeo con un ORM que dependa del orden o del nombre de las columnas puede romperse sin que nadie haya tocado esa parte del código.-- Mal: arrastra columnas que no necesitas y te ata al esquema actual\nSELECT * FROM pedidos WHERE id_cliente = 482;\n\n-- Bien: explícito y a prueba de cambios en la tabla\nSELECT id, total, ",
+      "code_example": "-- Mal: arrastra columnas que no necesitas y te ata al esquema actual\nSELECT * FROM pedidos WHERE id_cliente = 482;\n\n-- Bien: explícito y a prueba de cambios en la tabla\nSELECT id, total, estado, fecha_creacion\nFROM pedidos\nWHERE id_cliente = 482;",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-27T18:54:44.722272"
+    },
+    {
+      "title": "Serde avanzado en Rust: serializers propios, flatten, skip_serializing_if, rename_all y untagged",
+      "summary": "Serde es la biblioteca de serialización y deserialización estándar en el ecosistema Rust. Más allá del derive básico, ofrece una colección de atributos para renombrar campos, omitir valores, aplanar s",
+      "explanation": "Serde es la biblioteca de serialización y deserialización estándar en el ecosistema Rust. Más allá del derive básico, ofrece una colección de atributos para renombrar campos, omitir valores, aplanar structs anidadas, manejar enums polimórficos y aplicar transformaciones personalizadas. Dominar estos atributos es imprescindible para integrarse con APIs externas que no siguen las convenciones de Rust.rename_all: adaptar convenciones de nombres Las APIs REST suelen usar camelCase o snake_case en JSON, mientras que Rust usa snake_case en structs.#[serde(rename_all = \"camelCase\")]convierte automáticamente todos los nombres de campos al formato indicado.use serde::{Deserialize, Serialize};\n\n#[derive(Serialize, Deserialize, Debug)]\n#[serde(rename_all = \"camelCase\")]\nstruct PerfilUsuario {\n    primer_nombre: String,\n    apellido: String,\n    fecha_nacimiento: String,\n    codigo_postal: String,\n}\n\nfn main() {\n    let perfil = PerfilUsuario {\n        primer_nombre: \"Alice\".into(),\n        apellido: \"García\".into(),\n        fecha_nacimiento: \"1990-05-15\".into(),\n        codigo_postal: \"28001\".into(),\n    };\n\n    let json = serde_json::to_string_pretty(&perfil).unwrap();\n    println!(\"{json}\");\n    // { \"primerNombre\": \"Alice\", \"apellido\": \"García\", ... }\n\n    // rename_all acepta: \"camelCase\", \"PascalCase\", \"SCREAMING_SNAKE_CASE\",\n    // \"kebab-case\", \"lowercase\", \"UPPERCASE\", \"snake_case\"\n}skip_serializing_if: campos opcionales #[serde(skip_serializing_if = \"Option::is_none\")]omite el ",
+      "code_example": "use serde::{Deserialize, Serialize};\n\n#[derive(Serialize, Deserialize, Debug)]\n#[serde(rename_all = \"camelCase\")]\nstruct PerfilUsuario {\n    primer_nombre: String,\n    apellido: String,\n    fecha_nacimiento: String,\n    codigo_postal: String,\n}\n\nfn main() {\n    let perfil = PerfilUsuario {\n        primer_nombre: \"Alice\".into(),\n        apellido: \"García\".into(),\n        fecha_nacimiento: \"1990-05-15\".into(),\n        codigo_postal: \"28001\".into(),\n    };\n\n    let json = serde_json::to_string_pretty(&perfil).unwrap();\n    println!(\"{json}\");\n    // { \"primerNombre\": \"Alice\", \"apellido\": \"García\", ... }\n\n    // rename_all acepta: \"camelCase\", \"PascalCase\", \"SCREAMING_SNAKE_CASE\",\n    // \"kebab-case\", \"lowercase\", \"UPPERCASE\", \"snake_case\"\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-27T18:54:46.201917"
     }
   ]
 }
