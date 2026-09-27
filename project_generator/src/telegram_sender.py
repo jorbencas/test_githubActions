@@ -35,6 +35,40 @@ class TelegramReporter:
             # Verificar conexión
             me = await self.bot.get_me()
             print(f"[✓] Bot connected: @{me.username}")
+
+    async def verificar_canal(self) -> tuple:
+        """Comprueba, ANTES de generar nada, que el bot puede escribir en el canal.
+
+        Telegram responde "Chat not found" igual si el ID está mal que si el bot
+        ya no está en el canal, así que sin esta comprobación te enteras del
+        problema cuando ya has gastado la generación y los proyectos han quedado
+        guardados en el historial (donde no se vuelven a generar).
+
+        Devuelve (ok, diagnóstico).
+        """
+        try:
+            await self.initialize()
+            chat = await self.bot.get_chat(self.channel_id)
+        except Exception as e:
+            return False, self._diagnostico_chat_no_encontrado(e)
+
+        extra = f" @{chat.username}" if getattr(chat, "username", None) else ""
+        print(f"[✓] Canal accesible: {chat.title}{extra} (id {chat.id})")
+        return True, ""
+
+    def _diagnostico_chat_no_encontrado(self, error) -> str:
+        """Traduce el error opaco de Telegram a las tres causas reales."""
+        motivo = str(error).strip()
+        return (
+            f"El bot no puede escribir en el canal {self.channel_id}: {motivo}\n"
+            "  Causa más probable, de más a menos probable:\n"
+            "   1. El bot no está en el canal, o perdió permisos de administrador.\n"
+            "      Añádelo como admin (con permiso de publicar) y vuelve a probar.\n"
+            "   2. El secret TELEGRAM_REPORTS_PROYECTOS_CHANNEL_ID está mal.\n"
+            "      Los IDs de canal empiezan por -100; los de grupo, no.\n"
+            "   3. El canal se convirtió o se recreó y el ID ha cambiado.\n"
+            "  Para ver los datos reales: python -m src.get_channel_id"
+        )
     
     async def send_project_report(self, projects: List[ProyectoGenerado]) -> bool:
         if not projects:
@@ -54,6 +88,7 @@ class TelegramReporter:
             print(f"[✓] Summary sent to channel {self.channel_id}")
         except TelegramError as e:
             print(f"[✗] Failed to send summary: {e}")
+            print(self._diagnostico_chat_no_encontrado(e))
             return False
         
         # Enviar cada proyecto como mensaje separado (o en lote si son pocos)

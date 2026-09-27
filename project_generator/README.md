@@ -116,6 +116,9 @@ python -m src.main send --count 5
 # Probar Telegram
 python -m src.main test-telegram
 
+# Ver si el bot puede escribir en el canal (lo comprueba el generate antes de generar)
+python -m src.get_channel_id
+
 # Probar scrapers
 python -m src.main scrape
 
@@ -243,6 +246,8 @@ Editar `DeterministicProvider._load_templates()` en `ai_providers.py`
 | `TELEGRAM_BOT_TOKEN` inválido | Verificar en @BotFather, regenerar si necesario |
 | `CHANNEL_ID` no encontrado | Bot debe ser admin en el canal. Usar `get_channel_id.py` |
 | Rate limit Telegram | Action espera 0.5s entre mensajes. Reducir `PROJECTS_PER_RUN` |
+| `Chat not found` al enviar | El token funciona (el bot se conecta), pero no puede escribir en el canal. O el bot no está en él o perdió permisos de admin, o el secret `TELEGRAM_REPORTS_PROYECTOS_CHANNEL_ID` está mal. `generate` ahora lo comprueba **antes** de generar, para no quemar proyectos en el historial. Diagnóstico: `python -m src.get_channel_id` |
+| Hay proyectos en el historial que nunca salieron | Se saltó el envío. Reenvíalos con `python -m src.main send --count 3` |
 | IA devuelve JSON inválido | Reintenta automáticamente (3x). Revisa que `AI_MODEL` sea un modelo 2.x válido |
 | `agotó el presupuesto de salida (MAX_TOKENS)` | A todos los proyectos juntos no les caben en una respuesta. Se salvan los que llegaron enteros y, si no queda ninguno, se reintenta con uno solo. Para evitarlo: baja `PROJECTS_PER_RUN` y mantén `GEMINI_THINKING_BUDGET=0` |
 | `429` / cuota agotada de Gemini | Espera al reset diario o baja `PROJECTS_PER_RUN` |

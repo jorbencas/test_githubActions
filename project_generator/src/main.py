@@ -12,7 +12,7 @@ from typing import List, Optional
 sys.path.insert(0, str(Path(__file__).parent))
 
 from generator import ProjectGenerator, main as generator_main
-from telegram_sender import send_to_telegram
+from telegram_sender import send_to_telegram, TelegramReporter
 from models import Nivel, Scope, Lenguaje, TipoProyecto
 from config import settings
 from ai_providers import QuotaExhaustedError
@@ -54,6 +54,25 @@ async def cmd_generate(args):
     preferred_scopes = [parse_scope(args.scope)] if args.scope else None
     preferred_languages = [parse_lenguaje(args.lenguaje)] if args.lenguaje else None
     preferred_types = [parse_tipo(args.tipo)] if args.tipo else None
+
+    # Preflight: si el bot no puede escribir en el canal, no tiene sentido generar.
+    # Los proyectos generados se guardan en el historial y el workflow lo commitea,
+    # así que sus hashes pasan a "ya hechos": generarlos sin poder enviarlos los
+    # quema para siempre. Mejor no gastarlos.
+    #
+    # getattr porque el flag es opcional y hay llamadas que montan un args sin él.
+    if args.send_telegram and not getattr(args, 'saltar_preflight', False):
+        reporter = TelegramReporter()
+        ok, diagnostico = await reporter.verificar_canal()
+        if not ok:
+            print(f"\n[✗] {diagnostico}")
+            print("[!] No se genera nada: los proyectos que se guardan en el historial "
+                  "no se vuelven a generar, y sin canal no se podrían enviar.")
+            print("[!] Cuando lo arregles, recupera lo ya generado con: "
+                  "python -m src.main send --count 3")
+            print("::warning::Telegram inaccesible: generación omitida para no "
+                  "quemar proyectos en el historial.")
+            return []
     
     try:
         projects = await generator.generate_projects(
@@ -79,7 +98,12 @@ async def cmd_generate(args):
         if success:
             print("[✓] Enviado correctamente a Telegram")
         else:
-            print("[✗] Error enviando a Telegram")
+            print(f"[✗] Error enviando {len(projects)} proyecto(s) a Telegram")
+            print(f"[!] Los {len(projects)} proyecto(s) están en el historial y NO se "
+                  f"vuelven a generar. Cuando el canal esté bien, envíalos con:")
+            print(f"    python -m src.main send --count {len(projects)}")
+            print("::warning::Telegram no pudo enviar los proyectos; están en el "
+                  "historial y se pueden reenviar con 'src.main send'.")
             sys.exit(1)
     
     return projects
@@ -227,6 +251,9 @@ Ejemplos:
     gen_parser.add_argument('--lenguaje', choices=['python', 'javascript', 'typescript', 'csharp', 'go', 'rust'], help='Filtrar por lenguaje')
     gen_parser.add_argument('--tipo', choices=['web', 'api', 'cli', 'mobile', 'desktop', 'fullstack', 'microservicio', 'bot', 'ia_ml', 'datos', 'devops', 'testing', 'seguridad'], help='Filtrar por tipo')
     gen_parser.add_argument('--send-telegram', action='store_true', help='Enviar resultados a Telegram')
+    gen_parser.add_argument('--saltar-preflight', action='store_true',
+                            help='Generar aunque el canal de Telegram no responda '
+                                 '(los proyectos quedan en el historial sin enviar)')
     gen_parser.set_defaults(func=cmd_generate)
     
     # History
