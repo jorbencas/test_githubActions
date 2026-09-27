@@ -751,6 +751,376 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "2f703e832581e3d9"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a2b1c3d4e5f67890",
+        "titulo": "Analizador de Sentimiento para Reseñas de Productos",
+        "descripcion_corta": "API RESTful que analiza el sentimiento de reseñas de productos usando NLP.",
+        "descripcion_detallada": "Desarrollo de una API RESTful en Python utilizando FastAPI para procesar y analizar el sentimiento de texto de reseñas de productos. La API consumirá un modelo de NLP pre-entrenado o uno entrenado para clasificar reseñas como positivas, negativas o neutras. Incluye endpoints para análisis masivo y para análisis individual de texto. Se implementará una base de datos ligera para almacenar resultados y metadatos de las reseñas analizadas. El objetivo es proporcionar una herramienta rápida para que las empresas comprendan la opinión de sus clientes.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python 3.7+ basado en type hints estándar de Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Alto rendimiento, validación automática de datos con Pydantic, generación automática de documentación OpenAPI/Swagger UI, fácil de usar para crear APIs robustas."
+            },
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "framework",
+              "descripcion": "SQL toolkit y Object Relational Mapper (ORM) para Python.",
+              "version_sugerida": "2.0.20",
+              "url_docs": "https://www.sqlalchemy.org/",
+              "por_que": "Proporciona una forma flexible y potente de interactuar con bases de datos relacionales, permitiendo abstracción y portabilidad."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "spaCy",
+              "categoria": "libreria",
+              "descripcion": "Librería para Procesamiento Avanzado de Lenguaje Natural (NLP) en Python.",
+              "version_sugerida": "3.7.0",
+              "url_docs": "https://spacy.io/",
+              "por_que": "Ofrece modelos eficientes y pre-entrenados para análisis de sentimiento, tokenización y otras tareas de NLP necesarias para el proyecto."
+            },
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Librería de manipulación y análisis de datos.",
+              "version_sugerida": "2.1.1",
+              "url_docs": "https://pandas.pydata.org/",
+              "por_que": "Útil para preprocesar datos de reseñas y manejar los resultados del análisis de sentimiento de manera eficiente."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_de_datos",
+              "descripcion": "Sistema de gestión de bases de datos objeto-relacional.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/",
+              "por_que": "Robusto, escalable y soporta tipos de datos complejos (JSONB) si fuera necesario para metadatos adicionales de las reseñas."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la API y sus dependencias, asegurando un entorno de ejecución consistente y facilitando el despliegue."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "spaCy (Modelos pre-entrenados)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de NLP para análisis de sentimiento y procesamiento de texto.",
+              "version_sugerida": "3.7.0",
+              "url_docs": "https://spacy.io/models",
+              "por_que": "Proporciona funcionalidades listas para usar para análisis de sentimiento, reduciendo el tiempo de desarrollo."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.2",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests claros y mantenibles, con soporte para fixtures y plugins."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis de sentimiento en texto (positivo, negativo, neutro).",
+          "API RESTful para procesamiento individual y masivo.",
+          "Almacenamiento de resultados y metadatos.",
+          "Documentación interactiva de la API (Swagger UI).",
+          "Contenerización para despliegue."
+        ],
+        "casos_uso": [
+          "Empresas analizando feedback de clientes en reseñas de e-commerce.",
+          "Monitorización de la reputación de marca en redes sociales (adaptando la fuente).",
+          "Identificación de tendencias de opinión sobre productos o servicios.",
+          "Sistemas de soporte al cliente para priorizar tickets basados en sentimiento."
+        ],
+        "reglas_negocio": [
+          "Las reseñas deben ser procesadas en lotes de máximo 1000 elementos.",
+          "El score de sentimiento se devolverá en una escala de -1 a 1.",
+          "Los resultados se guardarán asociando un ID único a cada análisis.",
+          "La API responderá con códigos de estado HTTP estándar (200, 400, 500)."
+        ],
+        "por_que_ia": "Se utiliza NLP para analizar el sentimiento del texto de las reseñas, clasificándolas automáticamente sin intervención manual.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "Dataset de reseñas de productos (ej. Amazon Reviews Dataset)."
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos sólidos de Python y APIs RESTful.",
+          "Comprensión básica de NLP y machine learning.",
+          "Familiaridad con Docker."
+        ],
+        "riesgos": [
+          "La precisión del análisis de sentimiento puede variar según el dominio y la calidad del modelo.",
+          "Manejo de idiomas no soportados por el modelo NLP.",
+          "Escalabilidad de la API bajo alta carga de peticiones.",
+          "Gestión de dependencias y versiones de librerías."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "2a6d9f0b1c3e4a5b"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "65b50464023c5789"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f0e9d8c7b6a54321",
+        "titulo": "Generador de Documentación Técnica a partir de Código",
+        "descripcion_corta": "Herramienta CLI que escanea código fuente y genera documentación técnica básica.",
+        "descripcion_detallada": "Una aplicación de línea de comandos (CLI) escrita en Go que analiza archivos de código fuente (Python, JavaScript) para extraer información relevante como funciones, clases, parámetros y comentarios de documentación (docstrings). Utiliza esta información para generar un archivo Markdown con la estructura de la documentación técnica. El objetivo es automatizar la creación de documentación inicial para proyectos de software, facilitando la incorporación de nuevos desarrolladores y el mantenimiento.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "go-flags",
+              "categoria": "libreria",
+              "descripcion": "Parseo de flags de línea de comandos para Go.",
+              "version_sugerida": "1.5.0",
+              "url_docs": "https://github.com/jessevdk/go-flags",
+              "por_que": "Facilita la creación de interfaces de línea de comandos intuitivas, permitiendo definir opciones y argumentos."
+            },
+            {
+              "nombre": "tree-sitter",
+              "categoria": "libreria",
+              "descripcion": "Arboles de sintaxis abstracta (AST) para múltiples lenguajes.",
+              "version_sugerida": "0.20.0",
+              "url_docs": "https://tree-sitter.github.io/tree-sitter/",
+              "por_que": "Permite parsear código fuente de manera robusta y obtener una representación estructurada (AST) para su análisis."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "testing (built-in Go)",
+              "categoria": "testing",
+              "descripcion": "Package estándar de Go para escritura de tests unitarios y de integración.",
+              "version_sugerida": "1.21",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Integrado en el lenguaje, permite escribir y ejecutar tests de manera sencilla y eficiente para verificar la funcionalidad de la CLI."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Escaneo de directorios y archivos de código fuente.",
+          "Parseo de sintaxis para Python y JavaScript.",
+          "Extracción de funciones, clases y docstrings.",
+          "Generación de documentación en formato Markdown.",
+          "Interfaz de línea de comandos configurable."
+        ],
+        "casos_uso": [
+          "Generar documentación inicial para nuevos proyectos de software.",
+          "Actualizar documentación de código existente de forma semi-automatizada.",
+          "Integrar la herramienta en pipelines CI/CD para generar documentación en cada build.",
+          "Ayudar a desarrolladores junior a entender la estructura del código."
+        ],
+        "reglas_negocio": [
+          "Solo se procesarán archivos con extensiones .py y .js.",
+          "Los comentarios de documentación deben seguir el formato estándar (ej. docstrings de Python).",
+          "La salida se generará en el directorio actual o en uno especificado.",
+          "Se ignorarán los archivos y directorios definidos en un archivo de configuración (opcional)."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Go.",
+          "Comprensión de estructuras de datos (AST).",
+          "Familiaridad con la línea de comandos."
+        ],
+        "riesgos": [
+          "La complejidad de los lenguajes puede dificultar el parseo correcto.",
+          "Soporte limitado a los lenguajes implementados.",
+          "Los comentarios de documentación mal formateados pueden no ser extraídos.",
+          "Manejo de casos límite y código mal formado."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:05:00Z",
+        "hash_unicidad": "b1a0c2d3e4f56789"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "65b50464023c5789"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c8a7b6e5d4f3a2b1",
+        "titulo": "Sistema de Gestión de Tareas Colaborativo (Web)",
+        "descripcion_corta": "Aplicación web fullstack para la gestión de tareas en equipo con notificaciones.",
+        "descripcion_detallada": "Desarrollo de una aplicación web fullstack utilizando React para el frontend y Node.js con Express para el backend. Los usuarios podrán registrarse, crear proyectos, añadir tareas, asignar responsables, establecer fechas límite y marcar el estado de las tareas. Se implementará un sistema de notificaciones en tiempo real (usando WebSockets) para alertar a los usuarios sobre cambios en las tareas o nuevas asignaciones. La persistencia de datos se realizará en una base de datos NoSQL como MongoDB.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "fullstack",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "javascript",
+          "frameworks": [
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Component-based architecture facilita la creación de UIs complejas y reactivas, ideal para dashboards dinámicos."
+            },
+            {
+              "nombre": "Express.js",
+              "categoria": "framework",
+              "descripcion": "Framework web minimalista y flexible para Node.js.",
+              "version_sugerida": "4.18.2",
+              "url_docs": "https://expressjs.com/",
+              "por_que": "Proporciona una base sólida para construir APIs RESTful y manejar la lógica del lado del servidor de manera eficiente."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Socket.IO",
+              "categoria": "libreria",
+              "descripcion": "Librería para comunicación bidireccional en tiempo real entre clientes y servidor.",
+              "version_sugerida": "4.7.2",
+              "url_docs": "https://socket.io/",
+              "por_que": "Permite implementar notificaciones instantáneas y actualizaciones de estado sin necesidad de recargar la página."
+            },
+            {
+              "nombre": "Axios",
+              "categoria": "libreria",
+              "descripcion": "Cliente HTTP basado en promesas para el navegador y Node.js.",
+              "version_sugerida": "1.5.0",
+              "url_docs": "https://axios-http.com/",
+              "por_que": "Simplifica la realización de peticiones HTTP desde el frontend al backend."
+            },
+            {
+              "nombre": "Mongoose",
+              "categoria": "libreria",
+              "descripcion": "Framework de modelado de objetos MongoDB para Node.js.",
+              "version_sugerida": "7.6.0",
+              "url_docs": "https://mongoosejs.com/",
+              "por_que": "Proporciona una estructura para definir esquemas de datos y validar la información antes de guardarla en MongoDB."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "MongoDB",
+              "categoria": "base_de_datos",
+              "descripcion": "Base de datos NoSQL orientada a documentos.",
+              "version_sugerida": "7.0",
+              "url_docs": "https://www.mongodb.com/",
+              "por_que": "Su modelo flexible de documentos es ideal para almacenar información de tareas y proyectos con estructuras potencialmente variables."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita la configuración del entorno de desarrollo (Node.js, MongoDB) y el despliegue de la aplicación completa."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Permite realizar testing unitario y de integración tanto para el frontend (React) como para el backend (Node.js/Express)."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Autenticación y autorización de usuarios.",
+          "Creación y gestión de proyectos y tareas.",
+          "Asignación de tareas a miembros del equipo.",
+          "Notificaciones en tiempo real vía WebSockets.",
+          "Actualización del estado de tareas en vivo."
+        ],
+        "casos_uso": [
+          "Equipos de desarrollo gestionando sprints y tareas.",
+          "Agencias de marketing coordinando campañas.",
+          "Estudiantes colaborando en proyectos académicos.",
+          "Freelancers organizando su carga de trabajo y comunicándose con clientes."
+        ],
+        "reglas_negocio": [
+          "Solo los miembros asignados a un proyecto pueden ver/modificar sus tareas.",
+          "Las tareas deben tener un título y un responsable asignado.",
+          "Las fechas límite deben ser válidas y posteriores a la fecha de creación.",
+          "Las notificaciones se envían solo a los usuarios relevantes para el cambio."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de JavaScript (frontend y backend).",
+          "Experiencia con React y Node.js/Express.",
+          "Comprensión de bases de datos NoSQL (MongoDB).",
+          "Familiaridad con WebSockets."
+        ],
+        "riesgos": [
+          "Gestión de la concurrencia en las actualizaciones de tareas.",
+          "Complejidad en la implementación y escalabilidad de WebSockets.",
+          "Seguridad en la autenticación y autorización de usuarios.",
+          "Manejo de errores y consistencia de datos entre frontend y backend."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:10:00Z",
+        "hash_unicidad": "e1f0d9c8b7a65432"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "65b50464023c5789"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -760,8 +1130,11 @@
     "92a69fe916bd274d",
     "f1793359d3a271b4",
     "4a1d08e83c26a7f0",
-    "b9f8e7d6c5a1b2c3"
+    "b9f8e7d6c5a1b2c3",
+    "2a6d9f0b1c3e4a5b",
+    "b1a0c2d3e4f56789",
+    "e1f0d9c8b7a65432"
   ],
-  "total_generados": 7,
-  "fecha_ultima_generacion": "2026-09-27T11:08:13.229498"
+  "total_generados": 10,
+  "fecha_ultima_generacion": "2026-09-27T16:18:11.727665"
 }
