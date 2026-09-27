@@ -180,6 +180,11 @@ class TelegramReporter:
             funcs = p.funcionalidades_clave[:6]
             msg += f"⚡ **Funcionalidades:** {', '.join(_esc(f) for f in funcs)}\n"
         
+        # Casos de uso: se generaban y se guardaban, pero no se mostraban
+        if p.casos_uso:
+            usos = "\n".join(f"  • {_esc(u)}" for u in p.casos_uso[:3])
+            msg += f"🎯 **Casos de uso:**\n{usos}\n"
+        
         # IA
         if p.por_que_ia:
             msg += f"🧠 **IA:** {_esc(p.por_que_ia)} (`{_esc(p.cliente_ia_sugerido)}`)\n"

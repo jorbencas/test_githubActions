@@ -92,6 +92,41 @@ def test_el_mensaje_del_proyecto_sigue_tiene_el_contenido():
     assert "python" in mensaje
 
 
+# --- Casos de uso: se generaban pero no se mostraban ---------------------------
+
+def test_los_casos_de_uso_ahora_aparecen():
+    _, mensaje = _mensajes()
+    assert "Casos de uso" in mensaje
+    assert "Revisar contratos" in mensaje
+
+
+def test_los_casos_de_uso_van_en_varias_lineas():
+    """Son frases completas, no caben en una línea como las funcionalidades."""
+    proyecto = _proyecto()
+    proyecto.casos_uso = [
+        "Revisar contratos de proveedores",
+        "Comparar versiones de una póliza",
+        "Detectar cláusulas que cambian",
+        "Este cuarto no debe salir",
+    ]
+    reporter = TelegramReporter()
+    mensaje = reporter._build_project_message(proyecto, 1, 1)
+    assert "Revisar contratos de proveedores" in mensaje
+    assert "Comparar versiones de una póliza" in mensaje
+    assert "Detectar cláusulas que cambian" in mensaje
+    assert "Este cuarto no debe salir" not in mensaje, "se cortan a 3"
+
+
+def test_un_proyecto_sin_casos_de_uso_no_deja_el_titulo_colgado():
+    proyecto = _proyecto()
+    proyecto.casos_uso = []
+    reporter = TelegramReporter()
+    mensaje = reporter._build_project_message(proyecto, 1, 1)
+    assert "Casos de uso" not in mensaje
+    assert "Funcionalidades" in mensaje
+    assert mensaje == mensaje.rstrip()
+
+
 def test_el_modelo_sigue_estando_en_el_json_adjunto():
     """Quitarlo del texto no significa perderlo: va en el archivo de datos."""
     reporter = TelegramReporter(provider_name="gemini:gemini-2.5-flash-lite")
