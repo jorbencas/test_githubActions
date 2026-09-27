@@ -381,14 +381,387 @@
         "provider": "deterministic:templates",
         "prompt_hash": "1fd3337e91a6ed02"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f1793359d3",
+        "titulo": "API de Gestión de Proyectos Colaborativos",
+        "descripcion_corta": "API RESTful para gestionar proyectos, tareas, usuarios y comentarios en un entorno colaborativo.",
+        "descripcion_detallada": "Este proyecto consiste en una API RESTful robusta que permite la creación y gestión de proyectos, asignación de tareas a usuarios, seguimiento del progreso y comentarios en tiempo real. Utiliza autenticación JWT para asegurar el acceso y se integra con un servicio de notificaciones para alertar a los usuarios sobre cambios importantes. El diseño se enfoca en la escalabilidad y mantenibilidad, siguiendo principios de arquitectura limpia.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web asíncrono de alto rendimiento para construir APIs.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece validación automática de datos con Pydantic, generación de documentación OpenAPI y excelente rendimiento asíncrono."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "Toolkit SQL y ORM para Python.",
+              "version_sugerida": "2.0.20",
+              "url_docs": "https://docs.sqlalchemy.org/",
+              "por_que": "Proporciona una forma potente y flexible de interactuar con la base de datos relacional."
+            },
+            {
+              "nombre": "python-jose",
+              "categoria": "libreria",
+              "descripcion": "Implementación de JSON Web Token (JWT).",
+              "version_sugerida": "3.3.0",
+              "url_docs": "https://python-jose.readthedocs.io/",
+              "por_que": "Necesario para la autenticación y autorización segura de usuarios mediante tokens."
+            },
+            {
+              "nombre": "websockets",
+              "categoria": "libreria",
+              "descripcion": "Implementación de WebSockets para comunicación bidireccional.",
+              "version_sugerida": "10.4",
+              "url_docs": "https://websockets.readthedocs.io/",
+              "por_que": "Permite la notificación en tiempo real de actualizaciones de proyectos y tareas a los clientes."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos objeto-relacional.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto, escalable y soporta tipos de datos avanzados como JSONB para metadatos flexibles."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura entornos de desarrollo y producción consistentes y facilita el despliegue."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests robustos y mantenibles con fixtures y plugins."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Autenticación y autorización de usuarios (JWT)",
+          "Gestión CRUD de proyectos",
+          "Gestión CRUD de tareas (asignación, estados)",
+          "Sistema de comentarios por tarea",
+          "Notificaciones en tiempo real (WebSockets)",
+          "Roles de usuario y permisos"
+        ],
+        "casos_uso": [
+          "Equipos de desarrollo colaborando en sprints",
+          "Gestión de tareas para freelancers",
+          "Seguimiento de hitos en proyectos personales",
+          "Coordinación de eventos",
+          "Gestión de flujos de trabajo simples"
+        ],
+        "reglas_negocio": [
+          "Solo los miembros de un proyecto pueden ver/modificar sus detalles.",
+          "Las tareas solo pueden ser asignadas a usuarios válidos.",
+          "Los comentarios solo pueden añadirse a tareas existentes.",
+          "Los administradores tienen permisos completos.",
+          "La creación de proyectos requiere un nombre y descripción."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y programación asíncrona.",
+          "Comprensión de principios RESTful API.",
+          "Familiaridad con bases de datos relacionales.",
+          "Conceptos básicos de autenticación JWT."
+        ],
+        "riesgos": [
+          "Complejidad en la gestión de permisos de usuario.",
+          "Escalabilidad de WebSockets bajo alta carga.",
+          "Manejo de concurrencia en actualizaciones de tareas.",
+          "Seguridad en la validación de entradas.",
+          "Mantenimiento de la documentación de la API."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f1793359d3a271b4"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "2f703e832581e3d9"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "4a1d08e83c",
+        "titulo": "Analizador de Sentimiento de Comentarios de Productos",
+        "descripcion_corta": "Herramienta web para analizar el sentimiento de reseñas de productos utilizando IA.",
+        "descripcion_detallada": "Una aplicación web fullstack que permite a los usuarios ingresar texto de reseñas de productos y obtener un análisis de sentimiento (positivo, negativo, neutral). Utiliza un modelo de lenguaje pre-entrenado para la clasificación del texto. La interfaz web es simple y permite ver el porcentaje de cada sentimiento para un conjunto de reseñas.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Flask",
+              "categoria": "framework",
+              "descripcion": "Microframework web para Python.",
+              "version_sugerida": "2.3.0",
+              "url_docs": "https://flask.palletsprojects.com/",
+              "por_que": "Ligero y fácil de empezar para crear la API backend y servir la interfaz web simple."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "NLTK",
+              "categoria": "libreria",
+              "descripcion": "Plataforma para construir programas Python para trabajar con datos de lenguaje humano.",
+              "version_sugerida": "3.8",
+              "url_docs": "https://www.nltk.org/",
+              "por_que": "Útil para preprocesamiento básico de texto, aunque el análisis principal lo hará el modelo de IA."
+            },
+            {
+              "nombre": "Transformers (Hugging Face)",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca para modelos de NLP pre-entrenados.",
+              "version_sugerida": "4.30.0",
+              "url_docs": "https://huggingface.co/docs/transformers/index",
+              "por_que": "Proporciona acceso fácil a modelos de PNL de última generación para clasificación de texto."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [
+            {
+              "nombre": "BERT o similar (via Transformers)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de transformadores para comprensión del lenguaje natural.",
+              "version_sugerida": null,
+              "url_docs": "https://huggingface.co/docs/transformers/model_doc/bert",
+              "por_que": "Excelentes para tareas de clasificación de texto como el análisis de sentimiento, ofreciendo alta precisión."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Unittest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing integrado en Python.",
+              "version_sugerida": "3.8",
+              "url_docs": "https://docs.python.org/3/library/unittest.html",
+              "por_que": "Suficiente para pruebas básicas de la API y lógica de la aplicación para un proyecto junior."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "HTML/CSS/JavaScript",
+              "categoria": "otros",
+              "descripcion": "Tecnologías frontend básicas.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Para crear la interfaz de usuario simple de la aplicación web."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Interfaz web para ingresar texto de reseñas.",
+          "API endpoint para recibir y procesar texto.",
+          "Análisis de sentimiento del texto de entrada.",
+          "Visualización de resultados (positivo, negativo, neutral).",
+          "Uso de modelos de PNL pre-entrenados."
+        ],
+        "casos_uso": [
+          "Empresas analizando feedback de clientes.",
+          "Investigadores de mercado evaluando la opinión pública.",
+          "Desarrolladores de productos entendiendo la recepción.",
+          "Cualquier persona interesada en el sentimiento de textos."
+        ],
+        "reglas_negocio": [
+          "El texto de entrada no debe estar vacío.",
+          "El análisis se realizará sobre el texto proporcionado.",
+          "Los resultados se presentarán como porcentajes de sentimiento.",
+          "Se utilizará un modelo de IA específico para la clasificación."
+        ],
+        "por_que_ia": "Se utiliza IA (modelos de PNL como BERT) para realizar la tarea principal de clasificar el sentimiento del texto de las reseñas de productos, superando la complejidad de un enfoque basado en reglas o léxicos simples.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "Modelos pre-entrenados de Hugging Face (e.g., `distilbert-base-uncased-finetuned-sst-2-english`)"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Python y Flask.",
+          "Comprensión de conceptos de IA/ML y PNL.",
+          "Nociones de HTML, CSS y JavaScript."
+        ],
+        "riesgos": [
+          "Precisión limitada del modelo de IA para textos ambiguos o sarcásticos.",
+          "Dependencia de librerías externas que pueden cambiar.",
+          "Manejo de grandes volúmenes de texto puede ser lento.",
+          "Configuración inicial del entorno de IA."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:01:00Z",
+        "hash_unicidad": "4a1d08e83c26a7f0"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "2f703e832581e3d9"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "b9f8e7d6c5",
+        "titulo": "CLI para Gestión de Tareas con Sincronización en Nube",
+        "descripcion_corta": "Herramienta de línea de comandos para gestionar tareas, sincronizada con una base de datos en la nube.",
+        "descripcion_detallada": "Una aplicación de línea de comandos (CLI) que permite a los usuarios añadir, listar, completar y eliminar tareas. Las tareas se almacenan localmente para acceso rápido y se sincronizan automáticamente con una base de datos remota (e.g., Firebase/Supabase) para permitir el acceso desde múltiples dispositivos o usuarios. Se prioriza una experiencia de usuario fluida en la terminal.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "api",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "Cobra",
+              "categoria": "libreria",
+              "descripcion": "Framework para crear CLIs potentes en Go.",
+              "version_sugerida": "1.26.0",
+              "url_docs": "https://github.com/spf13/cobra",
+              "por_que": "Facilita la creación de comandos, subcomandos y flags para la aplicación CLI."
+            },
+            {
+              "nombre": "Firebase Admin SDK (Go)",
+              "categoria": "libreria",
+              "descripcion": "SDK para interactuar con Firebase desde el backend.",
+              "version_sugerida": "3.11.0",
+              "url_docs": "https://firebase.google.com/docs/admin/setup",
+              "por_que": "Permite la autenticación, acceso a Firestore/Realtime Database para la sincronización de datos."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "Firestore (via Firebase)",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos NoSQL en la nube, escalable y flexible.",
+              "version_sugerida": null,
+              "url_docs": "https://firebase.google.com/docs/firestore",
+              "por_que": "Ideal para sincronización de datos en tiempo real y acceso desde múltiples clientes/dispositivos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Firebase",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de desarrollo de aplicaciones móviles y web.",
+              "version_sugerida": null,
+              "url_docs": "https://firebase.google.com/",
+              "por_que": "Proporciona la base de datos, autenticación y hosting necesarios para la sincronización en la nube."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Testing (Go built-in)",
+              "categoria": "testing",
+              "descripcion": "Framework de testing estándar de Go.",
+              "version_sugerida": "1.20",
+              "url_docs": "https://go.dev/doc/tutorial/testing",
+              "por_que": "Adecuado para escribir tests unitarios y de integración para la lógica de la CLI y la sincronización."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Comandos CLI: add, list, complete, delete.",
+          "Almacenamiento local de tareas (e.g., archivo JSON).",
+          "Sincronización automática con base de datos en la nube (Firestore).",
+          "Manejo de conflictos básicos de sincronización.",
+          "Autenticación de usuario simple (opcional)."
+        ],
+        "casos_uso": [
+          "Gestión de tareas personales en múltiples dispositivos.",
+          "Pequeños equipos colaborando en listas de tareas simples.",
+          "Usuarios que prefieren la línea de comandos para productividad.",
+          "Seguimiento de tareas offline con sincronización posterior."
+        ],
+        "reglas_negocio": [
+          "Cada tarea debe tener una descripción.",
+          "Las tareas pueden tener un estado (pendiente/completada).",
+          "La sincronización ocurre al iniciar la aplicación y al realizar cambios.",
+          "Los conflictos de sincronización simples se resuelven con la última escritura."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 3,
+        "prerequisitos": [
+          "Conocimientos de Go (sintaxis, concurrencia básica).",
+          "Familiaridad con el uso de la terminal y CLIs.",
+          "Comprensión de conceptos de bases de datos NoSQL y sincronización.",
+          "Configuración básica de Firebase."
+        ],
+        "riesgos": [
+          "Complejidad en el manejo robusto de conflictos de sincronización.",
+          "Dependencia de servicios externos (Firebase).",
+          "Manejo de errores de red durante la sincronización.",
+          "Seguridad de las credenciales de Firebase.",
+          "Experiencia de usuario inconsistente entre diferentes terminales."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:02:00Z",
+        "hash_unicidad": "b9f8e7d6c5a1b2c3"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "2f703e832581e3d9"
+      }
     }
   ],
   "ultimos_hashes": [
     "68eac8153d33f321",
     "671746088acf77e5",
     "0b7c4cc679e2db3a",
-    "92a69fe916bd274d"
+    "92a69fe916bd274d",
+    "f1793359d3a271b4",
+    "4a1d08e83c26a7f0",
+    "b9f8e7d6c5a1b2c3"
   ],
-  "total_generados": 4,
-  "fecha_ultima_generacion": "2026-09-25T13:35:15.915188"
+  "total_generados": 7,
+  "fecha_ultima_generacion": "2026-09-27T11:08:13.229498"
 }
