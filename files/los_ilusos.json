@@ -620,5 +620,29 @@
     "relevancia": 3,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "Los Ilusos 13+13",
+    "url": "https://www.sensacine.com/peliculas/pelicula-220188/sesiones/cerca-de-72540/",
+    "fecha_pub": "Thu, 11 Apr 2013 17:00:00 GMT",
+    "fecha_ts": "2026-09-28T05:08:06.089956",
+    "medio": "Sensacine",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
+  },
+  {
+    "titulo": "'Los ilusos 13+13': Jonás Trueba regresa a la película \"cero\" que definió su universo",
+    "url": "https://www.msn.com/entretenimiento/cine/los-ilusos-13-13-jon%C3%A1s-trueba-regresa-a-la-pel%C3%ADcula-cero-que-defini%C3%B3-su-universo/ar-AA24SGkY",
+    "fecha_pub": "Thu, 04 Jun 2026 19:04:00 GMT",
+    "fecha_ts": "2026-09-28T05:08:20.665005",
+    "medio": "MSN",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]

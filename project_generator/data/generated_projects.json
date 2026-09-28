@@ -1121,6 +1121,937 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "65b50464023c5789"
       }
+    },
+    {
+      "proyecto": {
+        "id": "d9a6b7c8e9f0a1b2",
+        "titulo": "Gestor de Tareas con IA para Priorización",
+        "descripcion_corta": "Aplicación web para gestionar tareas, con IA que sugiere prioridades y descompone tareas complejas.",
+        "descripcion_detallada": "Un sistema fullstack que permite a los usuarios crear, organizar y seguir sus tareas. La característica principal es la integración de IA para analizar las descripciones de las tareas, sugerir niveles de prioridad basados en urgencia y complejidad percibida, y proponer sub-tareas para desglosar trabajos grandes. Incluye funcionalidades de colaboración básica y recordatorios.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "fullstack",
+          "web",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Alto rendimiento asíncrono, validación de datos con Pydantic, generación automática de documentación OpenAPI, ideal para APIs."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario interactivas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Component-based architecture, virtual DOM for efficient updates, large ecosystem, suitable for complex SPAs."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "Toolkit SQL y Object-Relational Mapper (ORM) para Python.",
+              "version_sugerida": "2.0.20",
+              "url_docs": "https://www.sqlalchemy.org/",
+              "por_que": "Abstracción potente para interactuar con bases de datos relacionales, soporta patrones como Unit of Work y Repository."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones con type hints de Python.",
+              "version_sugerida": "2.4.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para FastAPI, proporciona validación de datos robusta y serialización automática de modelos."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema gestor de bases de datos objeto-relacional de código abierto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Soporte robusto para tipos de datos complejos (JSONB), transacciones ACID, escalabilidad y fiabilidad."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la aplicación y sus dependencias para un despliegue consistente y aislado."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API",
+              "categoria": "ia_ml",
+              "descripcion": "Acceso a modelos de lenguaje avanzados para tareas de NLP.",
+              "version_sugerida": null,
+              "url_docs": "https://platform.openai.com/docs/api-reference",
+              "por_que": "Se usa para analizar texto de tareas, sugerir prioridades y generar sub-tareas, aprovechando la capacidad de comprensión y generación de lenguaje natural."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.2",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests claros y mantenibles con fixtures, parametrización y un rico ecosistema de plugins."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de tareas",
+          "Sugerencia de prioridad de tareas basada en IA",
+          "Desglose de tareas complejas en sub-tareas (IA)",
+          "Interfaz de usuario reactiva y moderna",
+          "Autenticación de usuarios",
+          "Notificaciones"
+        ],
+        "casos_uso": [
+          "Profesionales que gestionan múltiples proyectos",
+          "Estudiantes que organizan sus estudios",
+          "Equipos colaborando en tareas",
+          "Usuarios que buscan mejorar su productividad",
+          "Personas con dificultades para priorizar o planificar"
+        ],
+        "reglas_negocio": [
+          "Las tareas deben tener un título.",
+          "Las prioridades sugeridas por IA son solo recomendaciones.",
+          "Las sub-tareas deben estar asociadas a una tarea principal.",
+          "Los usuarios solo pueden editar sus propias tareas (a menos que compartan proyecto).",
+          "Los recordatorios se configuran por tarea."
+        ],
+        "por_que_ia": "La IA se utiliza para interpretar la semántica de las descripciones de las tareas y así poder sugerir prioridades de forma inteligente y proponer descomposiciones lógicas de tareas complejas, mejorando la planificación y eficiencia del usuario.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de OpenAI",
+          "Documentación de FastAPI",
+          "Documentación de React"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y JavaScript.",
+          "Comprensión de desarrollo web fullstack (frontend/backend).",
+          "Familiaridad con bases de datos relacionales.",
+          "Conceptos básicos de APIs RESTful.",
+          "Experiencia con control de versiones (Git)."
+        ],
+        "riesgos": [
+          "Calidad de las sugerencias de IA puede variar.",
+          "Complejidad en la integración del frontend y backend.",
+          "Gestión de concurrencia en tareas colaborativas.",
+          "Costos asociados al uso de la API de IA.",
+          "Escalabilidad de la base de datos bajo alta carga."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "d9a6b7c8e9f0a1b2"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "86b4906ea822c157"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4e5f6a7b8",
+        "titulo": "Analizador de Sentimiento de Comentarios de Productos",
+        "descripcion_corta": "API que analiza el sentimiento de comentarios de productos y los clasifica.",
+        "descripcion_detallada": "Un servicio de API RESTful que recibe texto de comentarios de usuarios sobre productos. Utiliza modelos de Procesamiento de Lenguaje Natural (PLN) para determinar el sentimiento (positivo, negativo, neutro) y extraer temas clave. Ideal para que las empresas monitoricen la opinión del cliente y mejoren sus productos.",
+        "nivel": "semisenior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Alto rendimiento asíncrono, validación de datos con Pydantic, generación automática de documentación OpenAPI, ideal para APIs de IA."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Transformers (Hugging Face)",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca para descargar y usar modelos pre-entrenados de NLP.",
+              "version_sugerida": "4.33.1",
+              "url_docs": "https://huggingface.co/docs/transformers/index",
+              "por_que": "Proporciona acceso fácil a modelos SOTA para análisis de sentimiento y extracción de temas, simplificando la implementación de IA."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones con type hints de Python.",
+              "version_sugerida": "2.4.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para FastAPI, proporciona validación de datos robusta y serialización automática de modelos de entrada/salida."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita la portabilidad y el despliegue del servicio de API, incluyendo sus dependencias de modelos de IA."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Modelos pre-entrenados (Hugging Face)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de NLP como BERT, RoBERTa para tareas de clasificación de texto.",
+              "version_sugerida": null,
+              "url_docs": "https://huggingface.co/models?pipeline_tag=text-classification",
+              "por_que": "Permiten realizar análisis de sentimiento y extracción de temas con alta precisión sin necesidad de entrenar modelos desde cero."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.2",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite crear tests de integración para la API y tests unitarios para la lógica de procesamiento de texto."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Endpoint para análisis de sentimiento de texto.",
+          "Clasificación de sentimiento (positivo, negativo, neutro).",
+          "Extracción de temas clave del comentario.",
+          "Validación de entrada de texto.",
+          "Respuesta estructurada con resultados del análisis."
+        ],
+        "casos_uso": [
+          "Empresas analizando feedback de clientes.",
+          "Monitorización de redes sociales.",
+          "Sistemas de gestión de reputación online.",
+          "Investigación de mercado sobre percepción de productos.",
+          "Plataformas de e-commerce para entender opiniones."
+        ],
+        "reglas_negocio": [
+          "La entrada debe ser texto.",
+          "Se debe devolver una puntuación de confianza para cada clasificación.",
+          "El servicio debe manejar texto vacío o nulo de forma controlada.",
+          "La API debe responder en un tiempo razonable (< 2 segundos).",
+          "Los temas extraídos deben ser relevantes para el comentario."
+        ],
+        "por_que_ia": "Se utilizan modelos de PLN pre-entrenados (como los de Hugging Face) para clasificar automáticamente el sentimiento y extraer la esencia temática de los comentarios de texto, automatizando un proceso que sería manual y costoso.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "Hugging Face Hub",
+          "Documentación de FastAPI"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 3,
+        "prerequisitos": [
+          "Conocimientos de Python.",
+          "Comprensión de APIs RESTful.",
+          "Familiaridad con librerías de IA/ML para NLP.",
+          "Experiencia con Docker.",
+          "Conocimientos básicos de Git."
+        ],
+        "riesgos": [
+          "La precisión de los modelos de IA puede ser insuficiente para casos específicos.",
+          "Dependencia de librerías externas (Hugging Face).",
+          "Optimización del rendimiento para manejar grandes volúmenes de peticiones.",
+          "Gestión de errores en la inferencia de modelos.",
+          "Posibles sesgos en los modelos pre-entrenados."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:05:00Z",
+        "hash_unicidad": "a1b2c3d4e5f6a7b8"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "86b4906ea822c157"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c3d4e5f6a7b8c9d0",
+        "titulo": "Sistema de Monitoreo y Alertas de Logs de Aplicaciones",
+        "descripcion_corta": "CLI para centralizar y analizar logs de aplicaciones, con alertas personalizables.",
+        "descripcion_detallada": "Una herramienta de línea de comandos (CLI) que permite a los desarrolladores y administradores de sistemas agregar (push) logs de diferentes aplicaciones a un sistema centralizado. La CLI puede configurarse para analizar estos logs en tiempo real, identificar patrones de error o anomalías, y disparar alertas configurables (email, Slack).",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "devops",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "Cobra",
+              "categoria": "libreria",
+              "descripcion": "Framework para crear CLIs potentes y modulares en Go.",
+              "version_sugerida": "1.27.0",
+              "url_docs": "https://github.com/spf13/cobra",
+              "por_que": "Simplifica la creación de comandos, subcomandos, flags y la gestión de la ayuda para la CLI."
+            },
+            {
+              "nombre": "Logrus",
+              "categoria": "libreria",
+              "descripcion": "Hookable JSON / logger para Go (remplazo de Log4j para Go).",
+              "version_sugerida": "1.10.0",
+              "url_docs": "https://github.com/sirupsen/logrus",
+              "por_que": "Permite logging estructurado (JSON) que es más fácil de parsear y analizar, con niveles de severidad configurables."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "SQLite",
+              "categoria": "base_datos",
+              "descripcion": "Motor de base de datos SQL embebido, ligero y sin servidor.",
+              "version_sugerida": "3.43.0",
+              "url_docs": "https://www.sqlite.org/docs.html",
+              "por_que": "Ideal para una CLI simple, no requiere un servidor de BD separado, almacena los datos localmente o en un archivo."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Make",
+              "categoria": "infraestructura",
+              "descripcion": "Utilidad para gestionar la compilación de programas.",
+              "version_sugerida": null,
+              "url_docs": "https://www.gnu.org/software/make/",
+              "por_que": "Simplifica el proceso de construcción y empaquetado de la CLI, definiendo tareas comunes como build, test, install."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Paquete estándar de Go para escribir tests.",
+              "version_sugerida": null,
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Integrado en el lenguaje, permite escribir tests unitarios y de integración de forma nativa."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Envío de logs a un backend centralizado (SQLite).",
+          "Configuración de patrones de búsqueda para logs.",
+          "Generación de alertas basadas en patrones encontrados.",
+          "Soporte para múltiples destinos de alerta (stdout, email básico).",
+          "Comandos para inicializar, enviar logs y configurar alertas."
+        ],
+        "casos_uso": [
+          "Desarrolladores que necesitan ver logs de sus microservicios en un solo lugar.",
+          "SysAdmins que configuran alertas tempranas de problemas.",
+          "Equipos que buscan simplificar la agregación de logs.",
+          "Proyectos pequeños/medianos sin presupuesto para soluciones SIEM complejas.",
+          "Entornos de desarrollo y testing."
+        ],
+        "reglas_negocio": [
+          "Los logs deben incluir timestamp y nivel de severidad.",
+          "Las alertas solo se disparan si el patrón coincide X veces en Y minutos.",
+          "La configuración de alertas se guarda en un archivo (ej. JSON o YAML).",
+          "El nivel de log para el envío a SQLite es configurable.",
+          "El envío de email requiere configuración básica (SMTP server/port/credentials)."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Documentación de Go",
+          "Documentación de Cobra",
+          "Documentación de Logrus"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Go.",
+          "Comprensión de la línea de comandos y sus usos.",
+          "Entendimiento de formatos de log comunes.",
+          "Familiaridad con Git.",
+          "Conceptos básicos de bases de datos (SQL)."
+        ],
+        "riesgos": [
+          "Gestión de concurrencia si muchos logs llegan a la vez.",
+          "Complejidad en la configuración de alertas avanzadas.",
+          "Seguridad del envío de credenciales para alertas por email.",
+          "Rendimiento de SQLite con volúmenes muy altos de logs.",
+          "Manejo de diferentes formatos de log de entrada."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tips_telegram",
+        "fecha_generacion": "2023-10-27T10:10:00Z",
+        "hash_unicidad": "c3d4e5f6a7b8c9d0"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "86b4906ea822c157"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f0a1b2c3d4e5f6a7",
+        "titulo": "Asistente de Configuración de Entornos de Desarrollo",
+        "descripcion_corta": "Herramienta CLI para generar y gestionar configuraciones de Docker y scripts de inicialización para proyectos.",
+        "descripcion_detallada": "Una utilidad de línea de comandos (CLI) diseñada para simplificar la configuración de entornos de desarrollo. Permite a los desarrolladores generar rápidamente archivos `docker-compose.yml` y `Dockerfile` básicos adaptados a diferentes tipos de proyectos (web, API, etc.) y lenguajes. Incluye la generación de scripts de inicialización (`entrypoint.sh`) y la posibilidad de añadir configuraciones predefinidas para bases de datos comunes (PostgreSQL, MySQL, Redis). El objetivo es reducir el tiempo y la fricción inicial al comenzar un nuevo proyecto o al configurar un nuevo desarrollador en un proyecto existente. Soporta la personalización de variables de entorno y la inclusión de linters/formatters.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "Typer",
+              "categoria": "framework",
+              "descripcion": "Framework para construir CLIs rápidas y fáciles en Python.",
+              "version_sugerida": "0.9.0",
+              "url_docs": "https://typer.tiangolo.com/",
+              "por_que": "Facilita la creación de interfaces de línea de comandos robustas con autocompletado y validación automática de tipos."
+            },
+            {
+              "nombre": "Jinja2",
+              "categoria": "libreria",
+              "descripcion": "Sistema de plantillas para Python.",
+              "version_sugerida": "3.1.2",
+              "url_docs": "https://jinja.palletsprojects.com/",
+              "por_que": "Permite generar archivos de configuración (Dockerfiles, docker-compose.yml) dinámicamente a partir de plantillas."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Es la tecnología central para la gestión de entornos de desarrollo reproducibles que la herramienta configurará."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.2",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir tests de manera sencilla y efectiva para la lógica de generación y la CLI."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Generación de Dockerfile y docker-compose.yml",
+          "Soporte para múltiples lenguajes/frameworks base",
+          "Creación de scripts de inicialización",
+          "Configuración de bases de datos comunes",
+          "Personalización mediante plantillas y variables"
+        ],
+        "casos_uso": [
+          "Nuevo desarrollador uniéndose a un proyecto existente",
+          "Inicio rápido de un nuevo proyecto personal",
+          "Estandarización de entornos de desarrollo en un equipo",
+          "Pruebas rápidas de diferentes configuraciones de stack"
+        ],
+        "reglas_negocio": [
+          "Los archivos generados deben ser sintácticamente correctos.",
+          "Las plantillas deben ser fácilmente extensibles.",
+          "La CLI debe proporcionar feedback claro al usuario.",
+          "Se debe permitir la sobreescritura de archivos existentes con confirmación."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Docker Hub para imágenes base",
+          "Documentación de bases de datos"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Docker y docker-compose",
+          "Familiaridad con la línea de comandos"
+        ],
+        "riesgos": [
+          "Complejidad al soportar demasiadas combinaciones de stack.",
+          "Mantenimiento de las plantillas actualizadas.",
+          "Curva de aprendizaje de la CLI si no es intuitiva."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f0a1b2c3d4e5f6a7"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "e89f3175d35826b2"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "a8f3e1d0c9b7a654",
+        "titulo": "Generador de Patrones de Diseño Asistido por IA",
+        "descripcion_corta": "Herramienta web para generar y visualizar patrones de diseño de software con explicaciones y ejemplos.",
+        "descripcion_detallada": "Una aplicación web que permite a los desarrolladores explorar y generar patrones de diseño de software. El usuario puede seleccionar un problema o un contexto, y la IA sugerirá patrones de diseño relevantes (ej. Factory, Singleton, Observer). La herramienta mostrará una descripción detallada del patrón, cuándo usarlo, cuándo no, y generará un fragmento de código de ejemplo en un lenguaje seleccionado. Incluye visualizaciones simples del diagrama del patrón (ej. UML básico). El objetivo es facilitar el aprendizaje y la aplicación de patrones de diseño en proyectos reales.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y de alto rendimiento para construir APIs.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Permite crear APIs robustas rápidamente con tipado automático, validación de datos con Pydantic y documentación OpenAPI generada automáticamente."
+            },
+            {
+              "nombre": "Streamlit",
+              "categoria": "framework",
+              "descripcion": "Framework para crear aplicaciones web de data science y ML interactivas.",
+              "version_sugerida": "1.25.0",
+              "url_docs": "https://docs.streamlit.io/",
+              "por_que": "Facilita la creación de interfaces de usuario interactivas para la exploración de modelos de IA y la visualización de patrones sin necesidad de experiencia profunda en frontend."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en anotaciones de tipo Python.",
+              "version_sugerida": "2.4.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Fundamental para la validación de entrada/salida en FastAPI y para definir estructuras de datos claras para los patrones."
+            },
+            {
+              "nombre": "Diagrams",
+              "categoria": "libreria",
+              "descripcion": "Permite crear diagramas de arquitectura de software como código.",
+              "version_sugerida": "0.25.0",
+              "url_docs": "https://diagrams.mingrammer.com/",
+              "por_que": "Genera visualizaciones de los patrones de diseño directamente desde código Python, facilitando la comprensión."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y facilita el despliegue de la aplicación web y su API."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API (GPT-3.5/4)",
+              "categoria": "ia_ml",
+              "descripcion": "Acceso a modelos de lenguaje grandes para generación de texto y código.",
+              "version_sugerida": null,
+              "url_docs": "https://platform.openai.com/docs/api-reference",
+              "por_que": "Utilizado para generar explicaciones detalladas de los patrones, cuándo usarlos y para generar fragmentos de código de ejemplo adaptados al contexto."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/en/latest/",
+              "por_que": "Permite escribir tests de unidad y de integración para la API y la lógica de generación de patrones de forma sencilla y eficiente."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Selección de problema/contexto para sugerencia de patrones",
+          "Generación de descripciones y casos de uso de patrones",
+          "Generación de código de ejemplo en múltiples lenguajes (inicialmente Python/Java)",
+          "Visualización básica de diagramas de patrones",
+          "API para acceso programático a la información de patrones"
+        ],
+        "casos_uso": [
+          "Desarrolladores junior aprendiendo patrones de diseño",
+          "Equipos buscando la mejor solución arquitectónica para un problema",
+          "Educadores creando material didáctico sobre patrones de diseño",
+          "Refactorización de código heredado aplicando patrones conocidos",
+          "Generación rápida de código boilerplate para patrones comunes"
+        ],
+        "reglas_negocio": [
+          "Los patrones sugeridos deben ser relevantes para el contexto proporcionado por el usuario.",
+          "El código generado debe ser sintácticamente correcto para el lenguaje seleccionado.",
+          "Las explicaciones deben ser claras, concisas y basadas en principios de diseño de software.",
+          "La interfaz debe ser intuitiva y fácil de usar para desarrolladores.",
+          "Se deben manejar adecuadamente los errores de la API de IA y proporcionar feedback al usuario."
+        ],
+        "por_que_ia": "La IA (LLM) es fundamental para generar de forma dinámica y contextualizada las explicaciones, casos de uso y fragmentos de código de los patrones de diseño, adaptándose a las entradas del usuario.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "https://refactoring.guru/",
+          "https://sourcemaking.com/design_patterns"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y principios de diseño de software.",
+          "Comprensión de APIs RESTful.",
+          "Familiaridad con el uso de APIs de IA (OpenAI).",
+          "Conceptos básicos de contenedores (Docker)."
+        ],
+        "riesgos": [
+          "La calidad de las respuestas de la IA puede variar y requerir ajustes en el prompt.",
+          "La generación de código puede contener errores sutiles o no ser óptima.",
+          "Mantener la coherencia en las explicaciones y ejemplos entre diferentes patrones.",
+          "La dependencia de APIs externas (OpenAI) puede introducir latencia o costos.",
+          "La visualización de diagramas puede ser compleja de implementar de forma genérica."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "a8f3e1d0c9b7a654"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "30b49b38ceb7b046"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "b2c3d4e5f6a7b8c9",
+        "titulo": "Asistente de Refactorización de Código Basado en IA",
+        "descripcion_corta": "Herramienta CLI que analiza código y sugiere refactorizaciones asistidas por IA.",
+        "descripcion_detallada": "Una herramienta de línea de comandos (CLI) que se integra con repositorios de código (ej. Git). Analiza archivos de código fuente, identifica 'code smells' y sugiere refactorizaciones específicas (ej. extraer método, renombrar variable, simplificar condicional). Las sugerencias se basan en análisis estático y son enriquecidas por un modelo de IA que comprende el contexto y las mejores prácticas. El usuario puede revisar, aceptar o rechazar las sugerencias, y la herramienta puede aplicar automáticamente las refactorizaciones aceptadas.",
+        "nivel": "senior",
+        "scope": "proyecto",
+        "tipo": [
+          "cli",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Typer",
+              "categoria": "framework",
+              "descripcion": "Framework para crear aplicaciones CLI con Python.",
+              "version_sugerida": "0.9.0",
+              "url_docs": "https://typer.tiangolo.com/",
+              "por_que": "Simplifica la creación de interfaces de línea de comandos robustas y fáciles de usar, con autocompletado y validación de argumentos."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "AST (Abstract Syntax Trees)",
+              "categoria": "libreria",
+              "descripcion": "Módulo estándar de Python para analizar la estructura del código fuente Python.",
+              "version_sugerida": null,
+              "url_docs": "https://docs.python.org/3/library/ast.html",
+              "por_que": "Permite el análisis estático detallado del código fuente Python para identificar patrones estructurales y 'code smells'."
+            },
+            {
+              "nombre": "Rope",
+              "categoria": "libreria",
+              "descripcion": "Potente biblioteca para refactorización de código Python.",
+              "version_sugerida": "0.75",
+              "url_docs": "https://github.com/dtolnay/rope",
+              "por_que": "Proporciona las funcionalidades para realizar las operaciones de refactorización de forma segura y automática sobre el código."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Git",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de control de versiones distribuido.",
+              "version_sugerida": null,
+              "url_docs": "https://git-scm.com/doc",
+              "por_que": "Esencial para interactuar con los repositorios de código, leer el estado actual y, opcionalmente, crear branches o commits con las refactorizaciones."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Anthropic Claude API",
+              "categoria": "ia_ml",
+              "descripcion": "API para interactuar con los modelos Claude de Anthropic.",
+              "version_sugerida": null,
+              "url_docs": "https://docs.anthropic.com/claude/reference/getting-started-with-the-api",
+              "por_que": "Utilizado para interpretar el contexto del código, identificar 'code smells' complejos que el análisis estático solo no detecta, y sugerir refactorizaciones semánticamente correctas."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/en/latest/",
+              "por_que": "Imprescindible para testear la lógica de análisis estático, las operaciones de refactorización y las interacciones con la IA."
+            },
+            {
+              "nombre": "Coverage.py",
+              "categoria": "testing",
+              "descripcion": "Herramienta para medir la cobertura de código de las pruebas.",
+              "version_sugerida": "7.2.0",
+              "url_docs": "https://coverage.readthedocs.io/",
+              "por_que": "Asegura que las pruebas cubran adecuadamente la lógica de la herramienta, especialmente las complejas interacciones de refactorización."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis estático de código Python usando AST.",
+          "Identificación de 'code smells' comunes y complejos.",
+          "Sugerencias de refactorización contextualizadas por IA.",
+          "Aplicación automática de refactorizaciones aceptadas.",
+          "Integración con Git para análisis de repositorios."
+        ],
+        "casos_uso": [
+          "Mejora continua de la calidad del código en proyectos existentes.",
+          "Asistencia a desarrolladores junior para escribir código más limpio.",
+          "Automatización de tareas de mantenimiento de código.",
+          "Adopción de mejores prácticas de codificación en equipos.",
+          "Reducción de deuda técnica de forma proactiva."
+        ],
+        "reglas_negocio": [
+          "La herramienta debe operar sobre copias del código o branches para evitar modificaciones accidentales.",
+          "Las sugerencias de la IA deben ser claramente distinguibles de las basadas puramente en análisis estático.",
+          "El usuario debe tener control total sobre qué refactorizaciones se aplican.",
+          "La herramienta debe manejar diferentes versiones de Python y sus sintaxis.",
+          "Se debe priorizar la seguridad y la integridad del código fuente durante las refactorizaciones."
+        ],
+        "por_que_ia": "La IA es necesaria para ir más allá del análisis sintáctico y semántico básico. Permite entender la intención del código, detectar patrones de anti-patrones y sugerir refactorizaciones que mejoren la legibilidad, mantenibilidad y eficiencia de forma inteligente.",
+        "cliente_ia_sugerido": "anthropic",
+        "recursos_externos": [
+          "https://refactoring.com/catalog/",
+          "https://martinfowler.com/bliki/CodeSmell.html"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia sólida en Python y sus ecosistemas.",
+          "Conocimiento profundo de patrones de diseño y principios SOLID.",
+          "Experiencia con herramientas CLI y sistemas de control de versiones (Git).",
+          "Familiaridad con el análisis de código y AST.",
+          "Comprensión de cómo interactuar con APIs de IA."
+        ],
+        "riesgos": [
+          "La IA puede malinterpretar el código o sugerir refactorizaciones incorrectas o innecesarias.",
+          "Las operaciones de refactorización automática pueden corromper el código si no se manejan con extremo cuidado.",
+          "La integración con múltiples lenguajes (si se expande) aumenta la complejidad.",
+          "El rendimiento del análisis y la consulta a la IA puede ser un cuello de botella.",
+          "Dependencia de la calidad y disponibilidad de la API de IA externa."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "b2c3d4e5f6a7b8c9"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "30b49b38ceb7b046"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c1d2e3f4a5b6c7d8",
+        "titulo": "Monitor de Rendimiento de APIs con Detección de Anomalías",
+        "descripcion_corta": "Servicio que monitoriza APIs, detecta anomalías en latencia y errores usando IA.",
+        "descripcion_detallada": "Un microservicio que actúa como un agente de monitorización pasiva. Recibe logs o métricas (latencia, códigos de respuesta, volumen de peticiones) de otras APIs o servicios. Utiliza técnicas de análisis de series temporales y modelos de IA para detectar patrones anómalos (ej. picos de latencia, aumento de errores 4xx/5xx, caídas de tráfico) que podrían indicar problemas. Envía alertas a sistemas de notificación (ej. Slack, PagerDuty) cuando se detectan anomalías significativas.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "microservicio",
+          "api",
+          "ia_ml",
+          "datos",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web de alto rendimiento para Go.",
+              "version_sugerida": "1.18.0",
+              "url_docs": "https://gin-gonic.com/docs/",
+              "por_que": "Proporciona una base robusta y eficiente para construir la API que recibirá las métricas y para servir la propia lógica de monitorización."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Prometheus client_golang",
+              "categoria": "libreria",
+              "descripcion": "Librería cliente para instrumentación de aplicaciones Go con Prometheus.",
+              "version_sugerida": "1.14.0",
+              "url_docs": "https://github.com/prometheus/client_golang",
+              "por_que": "Permite exponer métricas de la propia aplicación de monitorización en un formato compatible con Prometheus, facilitando la observabilidad."
+            },
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Librería para manipulación y análisis de datos.",
+              "version_sugerida": "2.1.1",
+              "url_docs": "https://pandas.pydata.org/docs/",
+              "por_que": "Aunque Go es el lenguaje principal, Pandas se usaría si se implementan los modelos de IA en Python (ej. en un servicio separado o para prototipado rápido)."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "TimescaleDB",
+              "categoria": "bases_datos",
+              "descripcion": "Base de datos de series temporales construida sobre PostgreSQL.",
+              "version_sugerida": "2.12.0",
+              "url_docs": "https://docs.timescale.com/",
+              "por_que": "Optimizada para almacenar y consultar grandes volúmenes de datos de series temporales (métricas, logs) de forma eficiente."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Prometheus",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de monitorización y alertas de código abierto.",
+              "version_sugerida": "2.45.0",
+              "url_docs": "https://prometheus.io/docs/introduction/overview/",
+              "por_que": "Estándar de facto para la recolección de métricas en entornos de microservicios. Se usará para recolectar métricas de las APIs monitorizadas y del propio servicio."
+            },
+            {
+              "nombre": "Grafana",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de análisis y visualización de métricas.",
+              "version_sugerida": "10.1.0",
+              "url_docs": "https://grafana.com/docs/",
+              "por_que": "Permite crear dashboards visuales para monitorizar las métricas de las APIs y el estado del sistema de monitorización."
+            },
+            {
+              "nombre": "Docker & Docker Compose",
+              "categoria": "infraestructura",
+              "descripcion": "Contenedores para empaquetar y ejecutar aplicaciones.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita el despliegue y la gestión del microservicio, junto con sus dependencias como TimescaleDB, Prometheus y Grafana."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Prophet (Librería Python/R)",
+              "categoria": "ia_ml",
+              "descripcion": "Librería para predicción de series temporales.",
+              "version_sugerida": "1.1.5",
+              "url_docs": "https://facebook.github.io/prophet/",
+              "por_que": "Utilizado para modelar las series temporales de métricas (latencia, errores) y detectar desviaciones significativas como anomalías."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Framework de testing incorporado en Go.",
+              "version_sugerida": null,
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Esencial para escribir pruebas unitarias y de integración para la API y la lógica de procesamiento de métricas en Go."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Recepción de métricas de latencia y errores vía API.",
+          "Almacenamiento eficiente de series temporales en TimescaleDB.",
+          "Detección de anomalías en métricas usando Prophet.",
+          "Generación de alertas configurables.",
+          "Exposición de métricas propias para monitorización (Prometheus).",
+          "Dashboard en Grafana para visualización."
+        ],
+        "casos_uso": [
+          "Monitorizar la disponibilidad y rendimiento de microservicios críticos.",
+          "Detectar proactivamente problemas en producción antes de que afecten a los usuarios.",
+          "Reducir el tiempo medio de detección (MTTD) y resolución (MTTR) de incidentes.",
+          "Evaluar el impacto de despliegues en el rendimiento de las APIs.",
+          "Obtener visibilidad sobre el comportamiento histórico de las métricas."
+        ],
+        "reglas_negocio": [
+          "Las métricas deben ser agregadas o procesadas antes del análisis de anomalías para evitar ruido.",
+          "Los umbrales de alerta deben ser configurables por el usuario.",
+          "El sistema debe ser escalable para manejar un alto volumen de métricas.",
+          "Se debe mantener un historial de anomalías detectadas y alertas generadas.",
+          "La privacidad de los datos de las APIs monitorizadas debe ser respetada (solo métricas, no payloads)."
+        ],
+        "por_que_ia": "La detección de anomalías en series temporales es un caso de uso clásico de Machine Learning. Modelos como Prophet permiten identificar patrones complejos y desviaciones sutiles que serían difíciles de detectar con reglas estáticas o umbrales simples, adaptándose a la estacionalidad y tendencias de las métricas.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "https://prometheus.io/docs/introduction/whatis/",
+          "https://grafana.com/docs/grafana/latest/introduction/"
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 8,
+        "prerequisitos": [
+          "Experiencia con Go y desarrollo de microservicios.",
+          "Conocimientos de sistemas de monitorización (Prometheus, Grafana).",
+          "Comprensión de bases de datos de series temporales.",
+          "Familiaridad con conceptos de Machine Learning para series temporales.",
+          "Experiencia con Docker y orquestación (Docker Compose)."
+        ],
+        "riesgos": [
+          "Generación de falsos positivos (alertas innecesarias) o falsos negativos (no detectar problemas reales).",
+          "La complejidad de configurar y ajustar los modelos de IA para diferentes tipos de métricas.",
+          "La escalabilidad del sistema para manejar grandes volúmenes de datos de series temporales.",
+          "La integración con diversos sistemas de notificación puede ser compleja.",
+          "Mantenimiento de la infraestructura de monitorización (Prometheus, Grafana, TimescaleDB)."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "c1d2e3f4a5b6c7d8"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "30b49b38ceb7b046"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -1133,8 +2064,15 @@
     "b9f8e7d6c5a1b2c3",
     "2a6d9f0b1c3e4a5b",
     "b1a0c2d3e4f56789",
-    "e1f0d9c8b7a65432"
+    "e1f0d9c8b7a65432",
+    "d9a6b7c8e9f0a1b2",
+    "a1b2c3d4e5f6a7b8",
+    "c3d4e5f6a7b8c9d0",
+    "f0a1b2c3d4e5f6a7",
+    "a8f3e1d0c9b7a654",
+    "b2c3d4e5f6a7b8c9",
+    "c1d2e3f4a5b6c7d8"
   ],
-  "total_generados": 10,
-  "fecha_ultima_generacion": "2026-09-27T16:18:11.727665"
+  "total_generados": 17,
+  "fecha_ultima_generacion": "2026-09-28T10:28:16.083793"
 }
