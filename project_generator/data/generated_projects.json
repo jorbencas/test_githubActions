@@ -1519,6 +1519,109 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "86b4906ea822c157"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f0a1b2c3d4e5f6a7",
+        "titulo": "Asistente de Configuración de Entornos de Desarrollo",
+        "descripcion_corta": "Herramienta CLI para generar y gestionar configuraciones de Docker y scripts de inicialización para proyectos.",
+        "descripcion_detallada": "Una utilidad de línea de comandos (CLI) diseñada para simplificar la configuración de entornos de desarrollo. Permite a los desarrolladores generar rápidamente archivos `docker-compose.yml` y `Dockerfile` básicos adaptados a diferentes tipos de proyectos (web, API, etc.) y lenguajes. Incluye la generación de scripts de inicialización (`entrypoint.sh`) y la posibilidad de añadir configuraciones predefinidas para bases de datos comunes (PostgreSQL, MySQL, Redis). El objetivo es reducir el tiempo y la fricción inicial al comenzar un nuevo proyecto o al configurar un nuevo desarrollador en un proyecto existente. Soporta la personalización de variables de entorno y la inclusión de linters/formatters.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "Typer",
+              "categoria": "framework",
+              "descripcion": "Framework para construir CLIs rápidas y fáciles en Python.",
+              "version_sugerida": "0.9.0",
+              "url_docs": "https://typer.tiangolo.com/",
+              "por_que": "Facilita la creación de interfaces de línea de comandos robustas con autocompletado y validación automática de tipos."
+            },
+            {
+              "nombre": "Jinja2",
+              "categoria": "libreria",
+              "descripcion": "Sistema de plantillas para Python.",
+              "version_sugerida": "3.1.2",
+              "url_docs": "https://jinja.palletsprojects.com/",
+              "por_que": "Permite generar archivos de configuración (Dockerfiles, docker-compose.yml) dinámicamente a partir de plantillas."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Es la tecnología central para la gestión de entornos de desarrollo reproducibles que la herramienta configurará."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.2",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir tests de manera sencilla y efectiva para la lógica de generación y la CLI."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Generación de Dockerfile y docker-compose.yml",
+          "Soporte para múltiples lenguajes/frameworks base",
+          "Creación de scripts de inicialización",
+          "Configuración de bases de datos comunes",
+          "Personalización mediante plantillas y variables"
+        ],
+        "casos_uso": [
+          "Nuevo desarrollador uniéndose a un proyecto existente",
+          "Inicio rápido de un nuevo proyecto personal",
+          "Estandarización de entornos de desarrollo en un equipo",
+          "Pruebas rápidas de diferentes configuraciones de stack"
+        ],
+        "reglas_negocio": [
+          "Los archivos generados deben ser sintácticamente correctos.",
+          "Las plantillas deben ser fácilmente extensibles.",
+          "La CLI debe proporcionar feedback claro al usuario.",
+          "Se debe permitir la sobreescritura de archivos existentes con confirmación."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Docker Hub para imágenes base",
+          "Documentación de bases de datos"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Docker y docker-compose",
+          "Familiaridad con la línea de comandos"
+        ],
+        "riesgos": [
+          "Complejidad al soportar demasiadas combinaciones de stack.",
+          "Mantenimiento de las plantillas actualizadas.",
+          "Curva de aprendizaje de la CLI si no es intuitiva."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f0a1b2c3d4e5f6a7"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "e89f3175d35826b2"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -1534,8 +1637,9 @@
     "e1f0d9c8b7a65432",
     "d9a6b7c8e9f0a1b2",
     "a1b2c3d4e5f6a7b8",
-    "c3d4e5f6a7b8c9d0"
+    "c3d4e5f6a7b8c9d0",
+    "f0a1b2c3d4e5f6a7"
   ],
-  "total_generados": 13,
-  "fecha_ultima_generacion": "2026-09-27T22:46:38.390809"
+  "total_generados": 14,
+  "fecha_ultima_generacion": "2026-09-28T03:20:16.655830"
 }
