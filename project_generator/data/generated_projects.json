@@ -2052,6 +2052,296 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "30b49b38ceb7b046"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f4c2b0a1d3e5f79c",
+        "titulo": "Generador de Rutas de Viaje Inteligente",
+        "descripcion_corta": "App web que sugiere itinerarios de viaje personalizados usando IA y datos de lugares.",
+        "descripcion_detallada": "Una aplicación web fullstack que permite a los usuarios ingresar sus destinos, intereses (ej. arte, gastronomía, aventura), duración y presupuesto. Utiliza un modelo de IA para analizar estos datos junto con información de puntos de interés (POIs) de la zona, reseñas y horarios, para generar un itinerario de viaje diario optimizado. Incluye mapas interactivos, opciones de reserva integradas (opcional) y la posibilidad de guardar y compartir rutas.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs.",
+              "version_sugerida": "0.110.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Alto rendimiento asíncrono, validación automática de datos con Pydantic, generación de documentación OpenAPI."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Biblioteca JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Componentización eficiente, Virtual DOM para actualizaciones rápidas, ecosistema robusto."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en type hints.",
+              "version_sugerida": "2.7.1",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para FastAPI para validar datos de entrada/salida y serialización."
+            },
+            {
+              "nombre": "Langchain",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por modelos de lenguaje.",
+              "version_sugerida": "0.1.18",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Orquesta la interacción con LLMs, gestión de prompts, y encadenamiento de pasos para la generación de itinerarios."
+            },
+            {
+              "nombre": "Leaflet",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca JavaScript de mapas interactivos.",
+              "version_sugerida": "1.9.4",
+              "url_docs": "https://leafletjs.com/",
+              "por_que": "Para mostrar los itinerarios y POIs en un mapa interactivo en el frontend."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto.",
+              "version_sugerida": "16.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Soporte robusto para datos geoespaciales (con PostGIS opcional) y JSONB para almacenar metadatos de POIs."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Asegura entornos de desarrollo y producción consistentes y aislados."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API (GPT-4/GPT-3.5)",
+              "categoria": "ia_ml",
+              "descripcion": "Acceso a modelos de lenguaje avanzados para generación de texto y razonamiento.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://platform.openai.com/docs/api-reference",
+              "por_que": "Para la generación de descripciones creativas de lugares, sugerencias de actividades y la estructuración lógica de los itinerarios."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Fixtures flexibles y una sintaxis clara para escribir tests unitarios y de integración."
+            },
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para JavaScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Para pruebas unitarias y de integración del frontend React."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Generación de itinerarios personalizados basados en preferencias.",
+          "Integración de mapas interactivos con POIs.",
+          "Búsqueda y filtrado de lugares de interés.",
+          "Guardado y compartición de rutas.",
+          "Interfaz de usuario intuitiva."
+        ],
+        "casos_uso": [
+          "Planificar un viaje de fin de semana a una ciudad desconocida.",
+          "Descubrir actividades únicas en un destino de vacaciones.",
+          "Optimizar un itinerario para maximizar el tiempo.",
+          "Compartir planes de viaje con amigos o familiares.",
+          "Obtener sugerencias de lugares para visitar según intereses."
+        ],
+        "reglas_negocio": [
+          "Los itinerarios deben ser coherentes en tiempo y ubicación.",
+          "Se deben priorizar los intereses del usuario.",
+          "Los resultados deben incluir estimaciones de tiempo para cada actividad.",
+          "La información de POIs debe ser lo más actualizada posible.",
+          "Respetar los límites de presupuesto si se especifican."
+        ],
+        "por_que_ia": "Utiliza un LLM (GPT) para la generación de texto creativo, interpretación de preferencias del usuario y estructuración lógica de los itinerarios, complementando la lógica algorítmica tradicional.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "APIs de geolocalización (ej. Google Maps API, Mapbox)",
+          "Bases de datos de POIs (ej. Foursquare API, Wikidata)",
+          "APIs de reserva de vuelos/hoteles (opcional)"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos sólidos de Python y JavaScript.",
+          "Experiencia con frameworks web (FastAPI, React).",
+          "Comprensión de APIs RESTful.",
+          "Familiaridad con bases de datos SQL.",
+          "Conceptos básicos de IA/ML y prompts engineering."
+        ],
+        "riesgos": [
+          "Calidad y disponibilidad de los datos externos (POIs, horarios).",
+          "Costos asociados al uso de APIs de IA.",
+          "Complejidad en la optimización de rutas multi-criterio.",
+          "Latencia en la generación de itinerarios.",
+          "Asegurar la diversidad y originalidad de las sugerencias."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:00:00Z",
+        "hash_unicidad": "f4c2b0a1d3e5f79c"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "68242e2627bd96cc"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "a8b7c6d5e4f3a2b1",
+        "titulo": "Asistente de Código con Resumen Contextual",
+        "descripcion_corta": "Herramienta CLI que ayuda a entender código y genera resúmenes de funciones/clases.",
+        "descripcion_detallada": "Una aplicación de línea de comandos (CLI) que se integra con repositorios de código (Git). Al ejecutarla sobre un archivo o selección de código, utiliza IA para analizar la estructura, identificar la lógica principal y generar un resumen conciso de la función o clase. Permite al usuario preguntar sobre partes específicas del código y obtener explicaciones contextuales. Ideal para onboarding de nuevos miembros o para entender bases de código complejas.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Typer",
+              "categoria": "framework",
+              "descripcion": "Framework para construir CLIs en Python basado en type hints.",
+              "version_sugerida": "0.9.0",
+              "url_docs": "https://typer.tiangolo.com/",
+              "por_que": "Simplifica la creación de interfaces de línea de comandos robustas y fáciles de usar."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Tree-sitter",
+              "categoria": "libreria",
+              "descripcion": "Parser incremental para múltiples lenguajes de programación.",
+              "version_sugerida": "0.22.0",
+              "url_docs": "https://tree-sitter.github.io/tree-sitter/",
+              "por_que": "Permite analizar la estructura sintáctica del código de forma confiable y eficiente."
+            },
+            {
+              "nombre": "OpenAI Python Client",
+              "categoria": "libreria",
+              "descripcion": "Cliente oficial para interactuar con la API de OpenAI.",
+              "version_sugerida": "1.20.0",
+              "url_docs": "https://github.com/openai/openai-python",
+              "por_que": "Facilita la integración con los modelos de lenguaje de OpenAI para la generación de resúmenes y explicaciones."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API (GPT-3.5 Turbo)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo de lenguaje para tareas de generación y comprensión de texto.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://platform.openai.com/docs/models/gpt-3-5",
+              "por_que": "Suficientemente potente para generar resúmenes de código y responder preguntas contextuales de manera económica."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Para pruebas unitarias de los parsers y la lógica de interacción con la IA."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "GitPython",
+              "categoria": "otros",
+              "descripcion": "Biblioteca para interactuar con repositorios Git.",
+              "version_sugerida": "3.1.41",
+              "url_docs": "https://gitpython.readthedocs.io/",
+              "por_que": "Para obtener información del repositorio y el historial de cambios si es necesario."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Análisis de sintaxis de código fuente.",
+          "Generación de resúmenes de funciones y clases.",
+          "Explicación de fragmentos de código.",
+          "Soporte para múltiples lenguajes (Python, JavaScript, etc.).",
+          "Integración con Git."
+        ],
+        "casos_uso": [
+          "Entender rápidamente una función desconocida en un proyecto.",
+          "Generar documentación básica para código existente.",
+          "Ayudar a nuevos desarrolladores a familiarizarse con la base de código.",
+          "Responder preguntas sobre la lógica de un script.",
+          "Obtener una visión general de la complejidad de un módulo."
+        ],
+        "reglas_negocio": [
+          "El análisis de código debe ser preciso para el lenguaje detectado.",
+          "Los resúmenes deben ser concisos y claros.",
+          "Las explicaciones deben basarse estrictamente en el contexto del código proporcionado.",
+          "Se debe manejar adecuadamente los errores de parseo.",
+          "La interacción con la API de IA debe ser optimizada para reducir costos."
+        ],
+        "por_que_ia": "La IA es crucial para la comprensión semántica del código, la generación de resúmenes legibles por humanos y la capacidad de responder preguntas abiertas sobre la lógica implementada.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "Documentación de Tree-sitter para diferentes lenguajes."
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Python.",
+          "Comprensión de estructuras de datos y algoritmos.",
+          "Familiaridad con la línea de comandos.",
+          "Conceptos básicos de APIs REST."
+        ],
+        "riesgos": [
+          "Precisión del análisis sintáctico para lenguajes complejos o código mal formado.",
+          "Calidad de los resúmenes generados por la IA.",
+          "Dependencia de la API de OpenAI y sus costos.",
+          "Manejo de archivos muy grandes o proyectos extensos.",
+          "Seguridad al procesar código sensible."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:00:00Z",
+        "hash_unicidad": "a8b7c6d5e4f3a2b1"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "68242e2627bd96cc"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -2071,8 +2361,10 @@
     "f0a1b2c3d4e5f6a7",
     "a8f3e1d0c9b7a654",
     "b2c3d4e5f6a7b8c9",
-    "c1d2e3f4a5b6c7d8"
+    "c1d2e3f4a5b6c7d8",
+    "f4c2b0a1d3e5f79c",
+    "a8b7c6d5e4f3a2b1"
   ],
-  "total_generados": 17,
-  "fecha_ultima_generacion": "2026-09-28T10:28:16.083793"
+  "total_generados": 19,
+  "fecha_ultima_generacion": "2026-09-28T19:10:09.851536"
 }
