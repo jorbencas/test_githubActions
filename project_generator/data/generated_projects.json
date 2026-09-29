@@ -2582,6 +2582,393 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "0c093b7f0a66d8dc"
       }
+    },
+    {
+      "proyecto": {
+        "id": "6b2a0f1d7e8c4a9b",
+        "titulo": "API de Monitorización de Logs con Alertas Inteligentes",
+        "descripcion_corta": "API RESTful para centralizar y analizar logs, con alertas inteligentes basadas en patrones de IA.",
+        "descripcion_detallada": "Desarrollar una API RESTful que permita a los usuarios enviar logs de diversas fuentes. La API almacenará estos logs en una base de datos optimizada para búsquedas rápidas y análisis. Se integrará un módulo de IA para detectar anomalías y patrones sospechosos en los logs, generando alertas inteligentes. Los usuarios podrán configurar umbrales y reglas para las alertas. Soporte para diferentes formatos de log y la posibilidad de exportar datos de análisis.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece alto rendimiento asíncrono, validación automática de datos con Pydantic y documentación interactiva OpenAPI/Swagger UI."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en anotaciones de tipo.",
+              "version_sugerida": "2.4.0",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para la validación de esquemas de datos de entrada y salida en FastAPI, asegurando la integridad de los logs."
+            },
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Librería para manipulación y análisis de datos.",
+              "version_sugerida": "2.1.0",
+              "url_docs": "https://pandas.pydata.org/docs/",
+              "por_que": "Facilita la agregación, filtrado y transformación de datos de logs para el análisis y la detección de patrones."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Suite de herramientas para machine learning.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://scikit-learn.org/stable/",
+              "por_que": "Proporciona algoritmos para detección de anomalías y clasificación que pueden ser aplicados a los patrones de logs."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "Elasticsearch",
+              "categoria": "base_de_datos",
+              "descripcion": "Motor de búsqueda y analítica distribuido.",
+              "version_sugerida": "8.x",
+              "url_docs": "https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html",
+              "por_que": "Ideal para indexar y buscar grandes volúmenes de datos de log de forma rápida y escalable, con capacidades analíticas."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para el desarrollo, envío y ejecución de aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/engine/",
+              "por_que": "Permite empaquetar la aplicación y sus dependencias, asegurando un entorno de desarrollo y producción consistente."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Detección de Anomalías (Isolation Forest)",
+              "categoria": "ia_ml",
+              "descripcion": "Algoritmo para identificar puntos de datos inusuales.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html",
+              "por_que": "Eficiente para detectar eventos anómalos en el flujo de logs sin necesidad de entrenamiento supervisado previo."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.2",
+              "url_docs": "https://docs.pytest.org/en/stable/",
+              "por_que": "Facilita la escritura de pruebas unitarias y de integración, con un sistema de fixtures potente."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "API RESTful para recepción y consulta de logs.",
+          "Indexación y búsqueda eficiente de logs.",
+          "Detección de anomalías en logs mediante IA.",
+          "Sistema de alertas configurables.",
+          "Soporte para múltiples formatos de log.",
+          "Exportación de datos de análisis."
+        ],
+        "casos_uso": [
+          "Monitorización de seguridad de aplicaciones.",
+          "Análisis de rendimiento de sistemas distribuidos.",
+          "Detección proactiva de incidentes.",
+          "Auditoría de eventos del sistema.",
+          "Centralización de logs de diferentes microservicios."
+        ],
+        "reglas_negocio": [
+          "Los logs deben tener un formato estructurado (JSON).",
+          "Los niveles de alerta se configuran por el usuario.",
+          "La detección de anomalías se basa en patrones históricos.",
+          "Las consultas a la API deben ser autenticadas.",
+          "Los datos de log se retienen por un periodo configurable."
+        ],
+        "por_que_ia": "Se utiliza IA para identificar patrones de comportamiento anómalos o sospechosos en los logs que serían difíciles de detectar manualmente o con reglas estáticas, permitiendo una respuesta más rápida a incidentes de seguridad o rendimiento.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo de APIs RESTful.",
+          "Comprensión de conceptos de bases de datos NoSQL y búsqueda de texto.",
+          "Nociones de Machine Learning para detección de anomalías."
+        ],
+        "riesgos": [
+          "Rendimiento de Elasticsearch con grandes volúmenes de datos.",
+          "Precisión del modelo de IA para detección de anomalías.",
+          "Escalabilidad de la API bajo alta carga de ingesta de logs.",
+          "Gestión de falsos positivos/negativos en las alertas.",
+          "Seguridad en el manejo de logs sensibles."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "6b2a0f1d7e8c4a9b"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "f9118acde3ee9f37"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "4f9a1b2c3d4e5f6a",
+        "titulo": "Generador de Contenido Educativo con IA",
+        "descripcion_corta": "Herramienta web que genera resúmenes, cuestionarios y flashcards a partir de texto.",
+        "descripcion_detallada": "Una aplicación web fullstack que permite a los usuarios pegar o subir texto (artículos, capítulos de libros) y utilizar IA para generar material de estudio. Las funcionalidades incluyen: resumen automático del texto, creación de preguntas de opción múltiple y respuestas cortas, y generación de flashcards para memorización. La interfaz será intuitiva, permitiendo al usuario seleccionar el tipo de contenido a generar y ajustar parámetros como la longitud del resumen o la dificultad de las preguntas.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "javascript",
+          "frameworks": [
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/learn",
+              "por_que": "Permite crear componentes de UI reutilizables y una experiencia de usuario interactiva y dinámica para la aplicación web."
+            },
+            {
+              "nombre": "Express.js",
+              "categoria": "framework",
+              "descripcion": "Framework de Node.js para construir aplicaciones web y APIs.",
+              "version_sugerida": "4.18.2",
+              "url_docs": "https://expressjs.com/en/guide/routing.html",
+              "por_que": "Facilita la creación de endpoints de API para interactuar con el modelo de IA y gestionar las solicitudes del frontend."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "OpenAI API Client (Node.js)",
+              "categoria": "libreria",
+              "descripcion": "Cliente oficial para interactuar con la API de OpenAI.",
+              "version_sugerida": "4.x",
+              "url_docs": "https://github.com/openai/openai-node",
+              "por_que": "Permite enviar texto al modelo de lenguaje de OpenAI para realizar el resumen y la generación de preguntas/flashcards."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Vercel",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desplegar aplicaciones web frontend y serverless.",
+              "version_sugerida": null,
+              "url_docs": "https://vercel.com/docs",
+              "por_que": "Simplifica el despliegue de la aplicación React y las funciones serverless de Express.js."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "GPT-3.5 Turbo / GPT-4",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de lenguaje grandes de OpenAI.",
+              "version_sugerida": null,
+              "url_docs": "https://platform.openai.com/docs/models",
+              "por_que": "Capaces de comprender y generar texto coherente, realizar resúmenes y formular preguntas basadas en un contexto dado."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/docs/getting-started",
+              "por_que": "Permite escribir pruebas unitarias para los componentes de React y las funciones de la API."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Generación de resúmenes de texto.",
+          "Creación de preguntas de opción múltiple.",
+          "Generación de preguntas de respuesta corta.",
+          "Creación de flashcards para memorización.",
+          "Interfaz de usuario intuitiva.",
+          "Soporte para pegar o subir texto."
+        ],
+        "casos_uso": [
+          "Estudiantes que necesitan resumir apuntes.",
+          "Profesores creando material de estudio.",
+          "Cualquier persona que quiera aprender un tema nuevo de forma eficiente.",
+          "Preparación para exámenes.",
+          "Facilitar la comprensión de textos largos."
+        ],
+        "reglas_negocio": [
+          "El texto de entrada debe ser procesable.",
+          "La generación de contenido se realiza bajo demanda del usuario.",
+          "Se deben respetar los límites de uso de la API de OpenAI.",
+          "El contenido generado es una ayuda al estudio, no un sustituto del aprendizaje profundo.",
+          "La interfaz debe ser accesible."
+        ],
+        "por_que_ia": "La IA es fundamental para la funcionalidad principal de la aplicación: la comprensión y transformación del texto de entrada en formatos educativos útiles (resúmenes, preguntas, flashcards) de manera automática y escalable.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de OpenAI"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de HTML, CSS y JavaScript.",
+          "Familiaridad con React y Node.js/Express.",
+          "Entender cómo usar APIs externas (OpenAI)."
+        ],
+        "riesgos": [
+          "Costos asociados al uso de la API de OpenAI.",
+          "Calidad variable del contenido generado por la IA.",
+          "Manejo de textos muy largos o complejos.",
+          "Dependencia de la disponibilidad de la API de OpenAI.",
+          "Diseño de una UI/UX efectiva."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:01:00Z",
+        "hash_unicidad": "4f9a1b2c3d4e5f6a"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "f9118acde3ee9f37"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "e8a7f6d5c4b3a201",
+        "titulo": "Optimizador de Rutas para Entregas Locales (CLI)",
+        "descripcion_corta": "Herramienta CLI para calcular la ruta más eficiente para múltiples entregas.",
+        "descripcion_detallada": "Una aplicación de línea de comandos (CLI) que toma una lista de direcciones y un punto de partida, y calcula la ruta óptima para visitar todas las direcciones y regresar al punto de partida. Utiliza APIs de mapas para obtener distancias y tiempos de viaje estimados, y algoritmos de optimización (como el problema del viajante de comercio) para encontrar la secuencia de visitas más eficiente. Ideal para repartidores, técnicos de servicio o cualquier persona que necesite planificar múltiples paradas.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "cli",
+          "api",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "Google Maps Platform APIs (Directions, Distance Matrix)",
+              "categoria": "libreria",
+              "descripcion": "APIs para obtener datos de rutas, distancias y tiempos de viaje.",
+              "version_sugerida": null,
+              "url_docs": "https://developers.google.com/maps/documentation/directions/overview",
+              "por_que": "Proporciona datos geográficos y de tráfico en tiempo real necesarios para calcular la eficiencia de las rutas."
+            },
+            {
+              "nombre": "Cobra",
+              "categoria": "libreria",
+              "descripcion": "Framework para la creación de CLIs potentes en Go.",
+              "version_sugerida": "1.27.0",
+              "url_docs": "https://github.com/spf13/cobra",
+              "por_que": "Facilita la creación de comandos, subcomandos, flags y argumentos para la CLI de Go."
+            },
+            {
+              "nombre": "Go-algoritm (TSP solver)",
+              "categoria": "libreria",
+              "descripcion": "Implementación de algoritmos de optimización, incluyendo el Problema del Viajante de Comercio (TSP).",
+              "version_sugerida": null,
+              "url_docs": "https://github.com/gyuho/goroni",
+              "por_que": "Contiene algoritmos eficientes para resolver el problema de encontrar la ruta más corta a través de múltiples puntos."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Make",
+              "categoria": "infraestructura",
+              "descripcion": "Utilidad para gestionar la compilación de programas.",
+              "version_sugerida": null,
+              "url_docs": "https://www.gnu.org/software/make/",
+              "por_que": "Simplifica el proceso de compilación de la aplicación Go para diferentes sistemas operativos."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go Testing Package",
+              "categoria": "testing",
+              "descripcion": "Package estándar de Go para escribir tests.",
+              "version_sugerida": null,
+              "url_docs": "https://go.dev/blog/testing",
+              "por_que": "Permite crear pruebas unitarias y de integración para la lógica de la CLI y la interacción con las APIs externas."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Entrada de direcciones vía línea de comandos.",
+          "Cálculo de rutas óptimas usando Google Maps API.",
+          "Resolución del Problema del Viajante de Comercio (TSP).",
+          "Salida de la ruta optimizada y tiempos estimados.",
+          "Soporte para puntos de inicio y fin.",
+          "Manejo de errores y validación de direcciones."
+        ],
+        "casos_uso": [
+          "Repartidores de última milla optimizando su ruta diaria.",
+          "Técnicos de servicio planificando visitas a clientes.",
+          "Empresas de logística calculando rutas eficientes.",
+          "Planificación de tours o recorridos turísticos.",
+          "Gestión de tareas de campo."
+        ],
+        "reglas_negocio": [
+          "Se requiere una clave de API válida para Google Maps Platform.",
+          "El número de paradas está limitado por la API de Google Maps.",
+          "Las direcciones deben ser geocodificables.",
+          "La ruta calculada busca minimizar el tiempo total de viaje.",
+          "La herramienta debe proporcionar feedback claro al usuario."
+        ],
+        "por_que_ia": "null",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Google Maps Platform APIs (Directions API, Distance Matrix API)",
+          "API Key para Google Maps Platform"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos de Go y desarrollo de aplicaciones CLI.",
+          "Comprensión de APIs RESTful.",
+          "Entender conceptos básicos de algoritmos de optimización (TSP)."
+        ],
+        "riesgos": [
+          "Costos asociados al uso intensivo de Google Maps API.",
+          "Limitaciones en la cantidad de peticiones a la API.",
+          "Precisión de los datos de distancia/tiempo de Google Maps.",
+          "Complejidad computacional para un gran número de paradas.",
+          "Manejo de direcciones ambiguas o incorrectas."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:02:00Z",
+        "hash_unicidad": "e8a7f6d5c4b3a201"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "f9118acde3ee9f37"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -2605,8 +2992,11 @@
     "f4c2b0a1d3e5f79c",
     "a8b7c6d5e4f3a2b1",
     "5a4b3c2d1e0f9a8b",
-    "e8f7a6b5c4d3e2f1"
+    "e8f7a6b5c4d3e2f1",
+    "6b2a0f1d7e8c4a9b",
+    "4f9a1b2c3d4e5f6a",
+    "e8a7f6d5c4b3a201"
   ],
-  "total_generados": 21,
-  "fecha_ultima_generacion": "2026-09-29T17:32:12.238865"
+  "total_generados": 24,
+  "fecha_ultima_generacion": "2026-09-29T23:24:05.864801"
 }
