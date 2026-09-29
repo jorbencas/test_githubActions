@@ -2342,6 +2342,246 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "68242e2627bd96cc"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4e5f6a7b8",
+        "titulo": "Asistente de Código con IA",
+        "descripcion_corta": "Herramienta web que ayuda a generar y refactorizar código usando IA.",
+        "descripcion_detallada": "Una aplicación web full-stack que permite a los desarrolladores interactuar con un modelo de lenguaje grande (LLM) para generar fragmentos de código, explicar código existente, sugerir refactorizaciones y encontrar errores potenciales. La interfaz de usuario será intuitiva, permitiendo pegar código, escribir prompts y recibir sugerencias. Se integrará con APIs de modelos de IA populares. El objetivo es acelerar el ciclo de desarrollo y mejorar la calidad del código.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs, con validación automática de datos y documentación interactiva.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece alto rendimiento asíncrono, integración Pydantic para validación de datos y generación automática de OpenAPI, ideal para la API de backend."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario declarativas y componentizadas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear una interfaz de usuario interactiva y reactiva para la aplicación web de manera eficiente."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos basada en anotaciones de tipo de Python.",
+              "version_sugerida": "2.5.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Utilizada por FastAPI para la validación automática de datos de entrada y salida, asegurando la integridad de la API."
+            },
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para simplificar la creación de aplicaciones impulsadas por LLMs.",
+              "version_sugerida": "0.1.0",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Facilita la integración con diversos modelos de IA y la orquestación de prompts y cadenas de procesamiento para la generación y análisis de código."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la aplicación y sus dependencias para un despliegue consistente y reproducible en diferentes entornos."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API",
+              "categoria": "ia_ml",
+              "descripcion": "Interfaz de programación de aplicaciones para acceder a modelos de lenguaje avanzados.",
+              "version_sugerida": null,
+              "url_docs": "https://platform.openai.com/docs/api-reference",
+              "por_que": "Proporciona acceso a modelos potentes como GPT-3.5 o GPT-4 para tareas de generación, explicación y refactorización de código."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir tests de unidad y de integración de manera sencilla y eficiente para la API y la lógica de negocio."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Generación de código a partir de prompts.",
+          "Refactorización y optimización de código existente.",
+          "Explicación de fragmentos de código.",
+          "Detección de posibles errores y anti-patrones.",
+          "Interfaz web interactiva para desarrolladores."
+        ],
+        "casos_uso": [
+          "Ayudar a desarrolladores junior a entender código complejo.",
+          "Acelerar la escritura de código repetitivo o boilerplate.",
+          "Sugerir mejoras de rendimiento o legibilidad en el código.",
+          "Facilitar la migración de código entre lenguajes o versiones.",
+          "Servir como herramienta de aprendizaje y exploración de código."
+        ],
+        "reglas_negocio": [
+          "Las respuestas de IA deben ser formateadas como código o explicaciones claras.",
+          "Se debe implementar control de acceso para prevenir abuso.",
+          "Los prompts y respuestas pueden tener un límite de tamaño.",
+          "Se debe registrar el uso para análisis y monitorización.",
+          "La aplicación debe manejar errores de la API de IA de forma elegante."
+        ],
+        "por_que_ia": "Se utiliza IA (LLMs) para entender el contexto del código proporcionado por el usuario y generar o modificar código de manera inteligente, similar a un asistente de programación.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo web (backend/frontend).",
+          "Comprensión de APIs RESTful.",
+          "Familiaridad con modelos de lenguaje y prompting.",
+          "Cuenta de API de un proveedor de LLM (ej. OpenAI)."
+        ],
+        "riesgos": [
+          "La calidad de las sugerencias de IA puede variar.",
+          "Costos asociados al uso de APIs de IA.",
+          "Posibles problemas de seguridad al procesar código de terceros.",
+          "Dependencia de la disponibilidad y latencia de los servicios de IA.",
+          "Dificultad para manejar lenguajes de programación muy esotéricos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "5a4b3c2d1e0f9a8b"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "0c093b7f0a66d8dc"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "d1e2f3a4b5c6d7e8",
+        "titulo": "Generador de Documentación Técnica",
+        "descripcion_corta": "Herramienta CLI que genera documentación técnica a partir de código fuente.",
+        "descripcion_detallada": "Una utilidad de línea de comandos (CLI) que analiza el código fuente de un proyecto (Python, JavaScript) y genera automáticamente documentación técnica básica. Puede extraer información de docstrings, comentarios específicos y estructuras de código (clases, funciones). La documentación generada podría ser en formato Markdown o HTML, lista para ser integrada en repositorios o sitios web.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "ast",
+              "categoria": "libreria",
+              "descripcion": "Módulo de Python para analizar la estructura abstracta del árbol de sintaxis.",
+              "version_sugerida": null,
+              "url_docs": "https://docs.python.org/3/library/ast.html",
+              "por_que": "Permite parsear el código fuente de Python y extraer información sobre módulos, clases, funciones y docstrings de manera programática."
+            },
+            {
+              "nombre": "Markdown",
+              "categoria": "libreria",
+              "descripcion": "Librería para generar archivos Markdown.",
+              "version_sugerida": "3.3.7",
+              "url_docs": "https://python-markdown.github.io/",
+              "por_que": "Se usa para formatear la información extraída del código en un archivo Markdown legible."
+            },
+            {
+              "nombre": "Click",
+              "categoria": "libreria",
+              "descripcion": "Framework para crear CLIs atractivas en Python.",
+              "version_sugerida": "8.1.7",
+              "url_docs": "https://click.palletsprojects.com/",
+              "por_que": "Facilita la creación de una interfaz de línea de comandos robusta, con manejo de argumentos, opciones y subcomandos."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "unittest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing integrado en la librería estándar de Python.",
+              "version_sugerida": null,
+              "url_docs": "https://docs.python.org/3/library/unittest.html",
+              "por_que": "Permite escribir tests básicos para verificar que el análisis del código y la generación de documentación funcionan correctamente."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis de archivos Python y JavaScript.",
+          "Extracción de docstrings y comentarios.",
+          "Generación de listado de funciones y clases.",
+          "Salida en formato Markdown.",
+          "Interfaz de línea de comandos simple."
+        ],
+        "casos_uso": [
+          "Documentar rápidamente un módulo o librería.",
+          "Generar una base de documentación para proyectos pequeños.",
+          "Ayudar a desarrolladores a cumplir con las buenas prácticas de documentación.",
+          "Integrar la generación de documentación en pipelines CI/CD básicos.",
+          "Crear documentación interna para equipos."
+        ],
+        "reglas_negocio": [
+          "La herramienta debe poder ejecutarse desde la terminal.",
+          "Se debe especificar el directorio de entrada y el archivo de salida.",
+          "Se priorizará la información de docstrings sobre comentarios sueltos.",
+          "La herramienta debe manejar errores de parseo de código de forma controlada.",
+          "Soportar al menos un lenguaje (Python) inicialmente."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": null,
+        "recursos_externos": [
+          "Código fuente de proyectos Python/JavaScript."
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 1,
+        "prerequisitos": [
+          "Conocimientos básicos de Python.",
+          "Comprensión de la estructura de código (funciones, clases).",
+          "Familiaridad con la línea de comandos.",
+          "Entendimiento de formatos como Markdown."
+        ],
+        "riesgos": [
+          "Dificultad para parsear código complejo o con sintaxis no estándar.",
+          "El soporte para JavaScript puede requerir librerías adicionales y ser menos robusto.",
+          "La calidad de la documentación generada depende de la calidad de los docstrings/comentarios.",
+          "Mantenimiento de la compatibilidad con diferentes versiones de Python.",
+          "Puede no ser suficiente para documentación de proyectos grandes y complejos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "e8f7a6b5c4d3e2f1"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "0c093b7f0a66d8dc"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -2363,8 +2603,10 @@
     "b2c3d4e5f6a7b8c9",
     "c1d2e3f4a5b6c7d8",
     "f4c2b0a1d3e5f79c",
-    "a8b7c6d5e4f3a2b1"
+    "a8b7c6d5e4f3a2b1",
+    "5a4b3c2d1e0f9a8b",
+    "e8f7a6b5c4d3e2f1"
   ],
-  "total_generados": 19,
-  "fecha_ultima_generacion": "2026-09-29T10:22:27.274471"
+  "total_generados": 21,
+  "fecha_ultima_generacion": "2026-09-29T17:32:12.238865"
 }
