@@ -1,5 +1,37 @@
 [
     {
+        "titulo": "firecrawl/firecrawl",
+        "enlace": "https://github.com/firecrawl/firecrawl",
+        "descripcion": "🔥 Supercharge your AI agents with data from the web and beyond. A web data API to search, scrape, and access more sources.",
+        "lenguaje": "TypeScript",
+        "estrellas": "186637",
+        "fuente": "GitHub Search",
+        "tipo": "herramienta",
+        "_stars": 186637,
+        "_topics": [
+            "ai",
+            "ai-agents",
+            "ai-crawler",
+            "ai-scraping",
+            "ai-search",
+            "crawler",
+            "data-extraction",
+            "html-to-markdown",
+            "llm",
+            "markdown",
+            "scraper",
+            "scraping",
+            "web-crawler",
+            "web-data",
+            "web-data-extraction",
+            "web-scraper",
+            "web-scraping",
+            "web-search",
+            "webscraping"
+        ],
+        "_source_type": "github_repo"
+    },
+    {
         "titulo": "openclaw/openclaw",
         "enlace": "https://github.com/openclaw/openclaw",
         "descripcion": "The AI that really does things. Any OS. Any Platform. The lobster way. 🦞 ",
