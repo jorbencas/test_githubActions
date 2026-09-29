@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 149,
+    "total_concepts": 150,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-29T13:43:07.441499"
+    "last_scraped": "2026-09-29T19:06:33.905703"
   },
   "concepts": [
     {
@@ -2778,6 +2778,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-28T21:02:30.066298"
+    },
+    {
+      "title": "Benchmarks y profiling en Rust: criterion, flamegraph y técnicas de optimización",
+      "summary": "Medir el rendimiento correctamente es tan importante como optimizar. Sin mediciones fiables cualquier \"optimización\" puede ser contraproducente o invisible. El flujo correcto en Rust es: primero bench",
+      "explanation": "Medir el rendimiento correctamente es tan importante como optimizar. Sin mediciones fiables cualquier \"optimización\" puede ser contraproducente o invisible. El flujo correcto en Rust es: primero benchmark estadístico con criterion para cuantificar el problema, luego flamegraph para localizar el cuello de botella, y solo entonces aplicar técnicas de optimización verificando que la mejora es real.Benchmarks estadísticos con criterion criterion ejecuta cada función de benchmark miles de veces, estima la varianza, descarta outliers y calcula intervalos de confianza. Detecta automáticamente regresiones entre ejecuciones y genera informes HTML comparativos.// Cargo.toml\n// [dev-dependencies]\n// criterion = { version = \"0.5\", features = [\"html_reports\"] }\n//\n// [[bench]]\n// name = \"procesamiento\"\n// harness = false\n\n// benches/procesamiento.rs\nuse criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion};\n\nfn buscar_lineal(datos: &[u32], objetivo: u32) -> bool {\n    datos.iter().any(|&x| x == objetivo)\n}\n\nfn buscar_binaria(datos: &[u32], objetivo: u32) -> bool {\n    datos.binary_search(&objetivo).is_ok()\n}\n\nfn benchmark_busqueda(c: &mut Criterion) {\n    let mut grupo = c.benchmark_group(\"busqueda\");\n\n    for tamanio in [100usize, 1_000, 10_000, 100_000] {\n        let datos: Vec<u32> = (0..tamanio as u32).collect();\n        let objetivo = tamanio as u32 / 2; // elemento en el centro\n\n        grupo.bench_with_input(BenchmarkId::new(\"lineal\", tamanio), &tamanio, |",
+      "code_example": "// Cargo.toml\n// [dev-dependencies]\n// criterion = { version = \"0.5\", features = [\"html_reports\"] }\n//\n// [[bench]]\n// name = \"procesamiento\"\n// harness = false\n\n// benches/procesamiento.rs\nuse criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion};\n\nfn buscar_lineal(datos: &[u32], objetivo: u32) -> bool {\n    datos.iter().any(|&x| x == objetivo)\n}\n\nfn buscar_binaria(datos: &[u32], objetivo: u32) -> bool {\n    datos.binary_search(&objetivo).is_ok()\n}\n\nfn benchmark_busqueda(c: &mut Criterion) {\n    let mut grupo = c.benchmark_group(\"busqueda\");\n\n    for tamanio in [100usize, 1_000, 10_000, 100_000] {\n        let datos: Vec<u32> = (0..tamanio as u32).collect();\n        let objetivo = tamanio as u32 / 2; // elemento en el centro\n\n        grupo.bench_with_input(BenchmarkId::new(\"lineal\", tamanio), &tamanio, |b, _| {\n            b.iter(|| buscar_lineal(black_box(&datos), black_box(objetivo)))\n        });\n\n        grupo.bench_with_input(BenchmarkId::new(\"binaria\", tamanio), &tamanio, |b, _| {\n            b.iter(|| buscar_binaria(black_box(&datos), black_box(objetivo)))\n        });\n    }\n\n    grupo.finish();\n}\n\ncriterion_group!(benches, benchmark_busqueda);\ncriterion_main!(benches);\n\n// Ejecutar: cargo bench\n// Ver informe HTML: target/criterion/report/index.html",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-29T19:05:55.619610"
     }
   ]
 }
