@@ -1645,5 +1645,89 @@
     "relevancia": 3,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Un Nobel y 20 libros después, Orhan Pamuk consigue una serie en Netflix",
+    "url": "https://www.nytimes.com/es/2026/02/13/espanol/mundo/orhan-pamuk-serie-netflix.html",
+    "fecha_pub": "Fri, 13 Feb 2026 02:06:00 GMT",
+    "fecha_ts": "2026-09-29T22:09:57.851369",
+    "medio": "nytimes.com",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix promociona ‘La bola negra’ en EEUU como “película del año” y hay reacciones: “España merece el Oscar\"",
+    "url": "https://www.cinemania.es/cinemania/noticias/netflix-promociona-bola-negra-mejor-pelicula-2026-oscar_7042924_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-29T22:10:18.083079",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Confirmado por Netflix: esta es la fecha de estreno de la nueva adaptación de 'Orgullo y prejuicio'",
+    "url": "https://www.cinemania.es/cinemania/series/orgullo-prejuicio-netflix-streaming-serie-olivia-colman_7039291_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-29T22:10:18.083175",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Final explicado de 'El problema final', la miniserie de Netflix: ¿quién es el asesino y que le motivó a cometer los crímenes?",
+    "url": "https://www.cinemania.es/cinemania/series/problema-final-asesino-final-explicado-miniserie-netflix_7041318_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-29T22:10:18.083191",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "'El de Matthew Perry': Netflix enseña el documental que estrenará en el aniversario de la muerte del actor de 'Friends'",
+    "url": "https://www.cinemania.es/cinemania/series/matthew-perry-netflix-documental-aniversario-muerte-actor-friends_7042775_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-29T22:10:18.083207",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Más allá de 'La amiga estupenda': la adaptación de Elena Ferrante en una miniserie escondida dentro de Netflix",
+    "url": "https://www.cinemania.es/cinemania/series/vida-mentirosa-adultos-netflix-elena-ferrante-amiga-estupenda_7039774_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-09-29T22:10:18.083351",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "La serie del creador de 'Entrevías' que se estrena hoy en Netflix y protagoniza Luis Zahera: tiene nueve episodios y está ambientada en Galicia",
+    "url": "https://www.abc.es/play/series/noticias/serie-creador-entrevias-estrena-hoy-netflix-protagoniza-20251003123136-nt.html",
+    "fecha_pub": "Fri, 03 Oct 2025 09:10:00 GMT",
+    "fecha_ts": "2026-09-29T22:10:21.613327",
+    "medio": "ABC",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
