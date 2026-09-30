@@ -3428,6 +3428,381 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "360a55dc929bdd54"
       }
+    },
+    {
+      "proyecto": {
+        "id": "01f2a3b4c5d6e7f8",
+        "titulo": "API de Gestión de Tareas Colaborativas",
+        "descripcion_corta": "API RESTful para crear, asignar y seguir tareas en equipos, con notificaciones y roles.",
+        "descripcion_detallada": "Una API robusta que permite la gestión de proyectos y tareas en un entorno colaborativo. Los usuarios pueden registrarse, crear proyectos, definir tareas, asignarlas a miembros del equipo con roles específicos (admin, editor, viewer) y establecer fechas límite. Incluye un sistema de notificaciones para actualizaciones de tareas y comentarios. Soporta búsqueda avanzada de tareas y filtrado por estado, asignado y proyecto. La autenticación se basa en JWT.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y de alto rendimiento para construir APIs con Python 3.7+ basado en type hints estándar de Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece validación automática de datos con Pydantic, generación automática de documentación interactiva (Swagger UI/ReDoc) y soporte asíncrono para alta concurrencia."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "SQL toolkit y Object Relational Mapper (ORM) para Python.",
+              "version_sugerida": "2.0.20",
+              "url_docs": "https://www.sqlalchemy.org/",
+              "por_que": "Permite interactuar con la base de datos de forma ORM, facilitando la gestión de modelos y consultas complejas de manera segura y eficiente."
+            },
+            {
+              "nombre": "python-jose",
+              "categoria": "libreria",
+              "descripcion": "JSON Web Token (JWT) implementation para Python.",
+              "version_sugerida": "3.3.0",
+              "url_docs": "https://python-jose.readthedocs.io/",
+              "por_que": "Fundamental para la implementación de la autenticación basada en tokens JWT, asegurando la comunicación segura entre cliente y servidor."
+            },
+            {
+              "nombre": "passlib",
+              "categoria": "libreria",
+              "descripcion": "Hashing de contraseñas para Python.",
+              "version_sugerida": "1.7.4",
+              "url_docs": "https://passlib.readthedocs.io/",
+              "por_que": "Proporciona mecanismos seguros y robustos para el hashing de contraseñas de usuarios, protegiendo la información sensible."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos objeto-relacional de código abierto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Ofrece fiabilidad, robustez y soporte para tipos de datos avanzados (JSONB), ideal para almacenar datos relacionales y metadatos flexibles."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.6",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita la creación de entornos de desarrollo y producción consistentes, simplifica el despliegue y la gestión de dependencias."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.2",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir tests de forma sencilla y potente, con un sistema de fixtures flexible y una amplia gama de plugins para mejorar la cobertura y el reporte."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Autenticación y autorización basada en JWT",
+          "Creación y gestión de proyectos",
+          "Asignación de tareas con roles de usuario",
+          "Sistema de notificaciones en tiempo real (futura extensión)",
+          "Búsqueda y filtrado avanzado de tareas",
+          "Auditoría de cambios en tareas"
+        ],
+        "casos_uso": [
+          "Gestión de proyectos ágiles",
+          "Organización de tareas en equipos remotos",
+          "Seguimiento de incidencias",
+          "Planificación de hitos y entregables",
+          "Colaboración en flujos de trabajo complejos"
+        ],
+        "reglas_negocio": [
+          "Solo los administradores pueden crear/eliminar proyectos.",
+          "Las tareas solo pueden ser asignadas a miembros del proyecto.",
+          "Las fechas límite de las tareas no pueden ser anteriores a la fecha de creación.",
+          "Los roles definen los permisos de acceso y modificación.",
+          "Los comentarios solo se pueden añadir a tareas existentes."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "https://fastapi.tiangolo.com/",
+          "https://www.sqlalchemy.org/",
+          "https://docs.docker.com/"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos de Python y principios REST.",
+          "Comprensión de bases de datos relacionales.",
+          "Familiaridad con Docker."
+        ],
+        "riesgos": [
+          "Complejidad en la gestión de roles y permisos.",
+          "Escalabilidad de la base de datos bajo alta carga.",
+          "Seguridad en la autenticación y autorización.",
+          "Mantenimiento de la documentación de la API.",
+          "Gestión de notificaciones en tiempo real."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "01f2a3b4c5d6e7f8"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "252dc67b41cefe71"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4e5f6a7b9",
+        "titulo": "Optimizador de Rutas para Entregas Locales",
+        "descripcion_corta": "Herramienta CLI para calcular la ruta más eficiente entre múltiples puntos de entrega.",
+        "descripcion_detallada": "Una aplicación de línea de comandos (CLI) que toma una lista de direcciones y una ubicación de partida, y utiliza un servicio de mapas para calcular la ruta óptima que minimiza la distancia y el tiempo de viaje. Ideal para repartidores, técnicos de servicio o cualquier persona que necesite planificar múltiples paradas.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "Typer",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca para crear aplicaciones CLI rápidas, fáciles y extensibles basadas en type hints estándar de Python.",
+              "version_sugerida": "0.9.0",
+              "url_docs": "https://typer.tiangolo.com/",
+              "por_que": "Simplifica la creación de interfaces de línea de comandos, manejando argumentos, opciones y validaciones de forma automática."
+            },
+            {
+              "nombre": "Requests",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca HTTP para Python, sencilla y elegante.",
+              "version_sugerida": "2.31.0",
+              "url_docs": "https://requests.readthedocs.io/",
+              "por_que": "Facilita la interacción con APIs externas, como los servicios de mapas para obtener datos de geocodificación y cálculo de rutas."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.2",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite crear tests unitarios y de integración para la lógica de la CLI y las interacciones con la API externa."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Google Maps API (Directions/Distance Matrix)",
+              "categoria": "otros",
+              "descripcion": "Servicios web para obtener datos de mapas y rutas.",
+              "version_sugerida": null,
+              "url_docs": "https://developers.google.com/maps/documentation/directions/overview",
+              "por_que": "Proporciona la funcionalidad principal para el cálculo de rutas y tiempos de viaje entre múltiples ubicaciones."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Parseo de direcciones desde archivo o argumentos.",
+          "Cálculo de ruta óptima usando API de mapas.",
+          "Visualización de la ruta y tiempos estimados.",
+          "Soporte para múltiples servicios de mapas (futura extensión).",
+          "Exportación de la ruta a formato GPX o KML."
+        ],
+        "casos_uso": [
+          "Repartidores planificando su ruta diaria.",
+          "Técnicos de servicio optimizando visitas.",
+          "Logística de última milla.",
+          "Planificación de rutas personales para recados.",
+          "Vehículos de emergencia calculando la ruta más rápida."
+        ],
+        "reglas_negocio": [
+          "La ubicación de partida es obligatoria.",
+          "Se debe proporcionar al menos una dirección de destino.",
+          "Las direcciones deben ser geocodificables por el servicio de mapas.",
+          "Se respetan los límites de uso de la API de mapas.",
+          "El tiempo de viaje se calcula considerando el tráfico en tiempo real (si la API lo soporta)."
+        ],
+        "por_que_ia": "Se utiliza la API de Google Maps para el cálculo de rutas, que internamente emplea algoritmos de optimización y modelos de tráfico para determinar la ruta más eficiente.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "https://typer.tiangolo.com/",
+          "https://requests.readthedocs.io/",
+          "https://developers.google.com/maps/documentation/directions/overview"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Python y línea de comandos.",
+          "Comprensión de APIs REST.",
+          "Una clave API para Google Maps."
+        ],
+        "riesgos": [
+          "Dependencia de servicios externos (API de mapas).",
+          "Costos asociados al uso de la API de mapas.",
+          "Manejo de errores de geocodificación o rutas no encontradas.",
+          "Complejidad en la optimización de rutas con muchos puntos.",
+          "Cambios en la interfaz de la API de mapas."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:05:00Z",
+        "hash_unicidad": "a1b2c3d4e5f6a7b9"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "252dc67b41cefe71"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "b9c8d7e6f5a4b3c2",
+        "titulo": "Asistente de Codificación con IA para Documentación",
+        "descripcion_corta": "Plugin para IDE que genera documentación (docstrings) a partir del código usando IA.",
+        "descripcion_detallada": "Un plugin para VS Code (o similar) que analiza funciones y clases en Python, y utiliza un modelo de lenguaje grande (LLM) para generar automáticamente docstrings explicativas y comentarios. El usuario puede invocar la generación y revisar/editar el resultado. Soporta diferentes estilos de docstrings (Google, NumPy, reStructuredText).",
+        "nivel": "senior",
+        "scope": "proyecto",
+        "tipo": [
+          "ia_ml",
+          "desktop",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "VS Code Extension API",
+              "categoria": "framework",
+              "descripcion": "API para desarrollar extensiones para Visual Studio Code.",
+              "version_sugerida": "1.70.0",
+              "url_docs": "https://code.visualstudio.com/api",
+              "por_que": "Permite integrar la funcionalidad de generación de documentación directamente en el entorno de desarrollo del programador."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "LangChain JS",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por LLMs.",
+              "version_sugerida": "0.0.200",
+              "url_docs": "https://js.langchain.com/",
+              "por_que": "Facilita la integración con diferentes modelos de lenguaje y la orquestación de cadenas de prompts para la generación de texto coherente."
+            },
+            {
+              "nombre": "Tree-sitter",
+              "categoria": "libreria",
+              "descripcion": "Parser incremental de código fuente.",
+              "version_sugerida": "0.20.8",
+              "url_docs": "https://tree-sitter.github.io/tree-sitter/",
+              "por_que": "Permite analizar la estructura del código fuente de forma eficiente y precisa para identificar funciones, clases y parámetros."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "GitHub Actions",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de CI/CD integrada en GitHub.",
+              "version_sugerida": null,
+              "url_docs": "https://github.com/features/actions",
+              "por_que": "Automatiza el proceso de build, test y publicación de la extensión de VS Code."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API (GPT-4/GPT-3.5)",
+              "categoria": "ia_ml",
+              "descripcion": "Interfaz de programación de aplicaciones para los modelos de lenguaje de OpenAI.",
+              "version_sugerida": null,
+              "url_docs": "https://platform.openai.com/docs/api-reference",
+              "por_que": "Proporciona acceso a modelos de IA de última generación capaces de comprender el código y generar documentación de alta calidad."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Permite escribir tests unitarios y de integración para la lógica de la extensión y la interacción con la API de IA."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis de código Python para identificar funciones y clases.",
+          "Generación automática de docstrings (Google, NumPy, reST).",
+          "Soporte para diferentes modelos de lenguaje (OpenAI).",
+          "Integración fluida con VS Code.",
+          "Edición y revisión de docstrings generadas.",
+          "Soporte para comentarios de código."
+        ],
+        "casos_uso": [
+          "Acelerar la documentación de proyectos existentes.",
+          "Mejorar la consistencia de la documentación.",
+          "Ayudar a desarrolladores junior a escribir mejores docstrings.",
+          "Facilitar la adopción de estándares de documentación.",
+          "Reducir el tiempo dedicado a tareas repetitivas de documentación."
+        ],
+        "reglas_negocio": [
+          "La generación de docstrings solo se aplica a funciones y clases definidas por el usuario.",
+          "El usuario debe tener una clave API válida para el servicio de IA.",
+          "Se deben respetar los términos de uso de la API de IA.",
+          "La extensión no modifica el código fuente sin confirmación explícita del usuario.",
+          "Se permite al usuario configurar el estilo de docstring preferido."
+        ],
+        "por_que_ia": "Se utiliza un LLM (como GPT-4) para comprender la semántica y el propósito del código fuente (funciones, clases, argumentos) y generar descripciones textuales (docstrings) que expliquen su funcionamiento, parámetros, retornos y posibles excepciones.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "https://code.visualstudio.com/api",
+          "https://js.langchain.com/",
+          "https://platform.openai.com/docs/api-reference"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia en desarrollo de extensiones para VS Code (TypeScript/JavaScript).",
+          "Conocimientos de la estructura de código Python (AST o similar).",
+          "Experiencia con APIs de IA y manejo de prompts.",
+          "Comprensión de diferentes estilos de docstrings."
+        ],
+        "riesgos": [
+          "Calidad variable de la documentación generada por la IA.",
+          "Costos elevados del uso de la API de IA.",
+          "Latencia en la generación de la documentación.",
+          "Manejo de errores de red y de la API de IA.",
+          "Complejidad en el análisis preciso de código complejo o ambiguo."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:10:00Z",
+        "hash_unicidad": "b9c8d7e6f5a4b3c2"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "252dc67b41cefe71"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -3457,8 +3832,11 @@
     "e8a7f6d5c4b3a201",
     "e4f8d1c9b2a76053",
     "a9b8c7d6e5f4a3b2",
-    "c1d2e3f4a5b6c7d9"
+    "c1d2e3f4a5b6c7d9",
+    "01f2a3b4c5d6e7f8",
+    "a1b2c3d4e5f6a7b9",
+    "b9c8d7e6f5a4b3c2"
   ],
-  "total_generados": 27,
-  "fecha_ultima_generacion": "2026-09-30T17:31:36.366119"
+  "total_generados": 30,
+  "fecha_ultima_generacion": "2026-09-30T23:24:20.308637"
 }
