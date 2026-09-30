@@ -2969,6 +2969,465 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "f9118acde3ee9f37"
       }
+    },
+    {
+      "proyecto": {
+        "id": "e4f8d1c9b2a76053",
+        "titulo": "Plataforma de Auditoría de Código y Calidad (CodeAudit Pro)",
+        "descripcion_corta": "Plataforma web para analizar la calidad del código, detectar vulnerabilidades y aplicar estándares de estilo, con informes personalizables y seguimiento de métricas.",
+        "descripcion_detallada": "Desarrollar una plataforma integral que permita a los equipos de desarrollo subir repositorios de código (o conectar con ellos) para realizar auditorías automáticas de calidad, seguridad y cumplimiento de estándares. Generará informes detallados, permitirá la configuración de reglas personalizadas y ofrecerá un dashboard para visualizar métricas de salud del código a lo largo del tiempo. Integrará herramientas de análisis estático y dinámico, y podría usar IA para categorizar hallazgos o sugerir soluciones.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "fullstack",
+          "devops",
+          "seguridad"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "Next.js",
+              "categoria": "framework",
+              "descripcion": "Framework React para aplicaciones web fullstack, con renderizado híbrido y optimización de rendimiento.",
+              "version_sugerida": "14.x",
+              "url_docs": "https://nextjs.org/docs",
+              "por_que": "Proporciona una base sólida para la interfaz de usuario y la API, permitiendo un desarrollo fullstack eficiente con TypeScript."
+            },
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework para construir aplicaciones del lado del servidor escalables y eficientes, basado en TypeScript y principios de OOP.",
+              "version_sugerida": "10.x",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Ideal para la API backend, ofreciendo una arquitectura modular, inyección de dependencias y tipado robusto con TypeScript."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "ESLint",
+              "categoria": "linter",
+              "descripcion": "Herramienta de linting para JavaScript y TypeScript que ayuda a mantener la calidad del código y detectar errores.",
+              "version_sugerida": "8.x",
+              "url_docs": "https://eslint.org/docs/",
+              "por_que": "Esencial para aplicar estándares de código, detectar problemas de estilo y posibles errores en el frontend y backend."
+            },
+            {
+              "nombre": "SonarQube Scanner",
+              "categoria": "analizador_codigo",
+              "descripcion": "Cliente para interactuar con SonarQube, una plataforma de calidad de código y análisis de seguridad.",
+              "version_sugerida": "5.x",
+              "url_docs": "https://docs.sonarqube.org/latest/analyzing-source-code/scanners/sonarscanner/",
+              "por_que": "Permite integrar el análisis estático de código en el pipeline, ofreciendo métricas de calidad y seguridad."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos_relacional",
+              "descripcion": "Base de datos relacional robusta, extensible y de código abierto, conocida por su fiabilidad y características avanzadas.",
+              "version_sugerida": "15.x",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Almacena datos de proyectos, configuraciones de reglas, resultados de auditorías y usuarios, aprovechando su integridad y JSONB."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "contenedorizacion",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores aislados.",
+              "version_sugerida": "24.x",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita la creación de entornos de desarrollo consistentes y el despliegue de la aplicación de forma portátil."
+            },
+            {
+              "nombre": "Kubernetes",
+              "categoria": "orquestacion_contenedores",
+              "descripcion": "Sistema de orquestación de contenedores de código abierto para automatizar el despliegue, escalado y gestión de aplicaciones.",
+              "version_sugerida": "1.28.x",
+              "url_docs": "https://kubernetes.io/docs/",
+              "por_que": "Permite escalar la plataforma, gestionar los microservicios de análisis y asegurar alta disponibilidad."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API",
+              "categoria": "modelo_lenguaje",
+              "descripcion": "Interfaz para acceder a los modelos de lenguaje de OpenAI, como GPT-4, para tareas de generación y análisis de texto.",
+              "version_sugerida": "latest",
+              "url_docs": "https://platform.openai.com/docs/api-reference",
+              "por_que": "Se utilizará para generar resúmenes de hallazgos complejos o sugerir refactorizaciones de código basadas en patrones comunes."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "framework_testing",
+              "descripcion": "Framework de testing de JavaScript que se enfoca en la simplicidad y el rendimiento.",
+              "version_sugerida": "29.x",
+              "url_docs": "https://jestjs.io/docs/getting-started",
+              "por_que": "Para pruebas unitarias y de integración de los componentes frontend con React y el backend con NestJS."
+            },
+            {
+              "nombre": "Cypress",
+              "categoria": "testing_e2e",
+              "descripcion": "Herramienta de testing end-to-end de nueva generación construida para la web moderna.",
+              "version_sugerida": "13.x",
+              "url_docs": "https://docs.cypress.io/",
+              "por_que": "Permite simular interacciones de usuario en la interfaz web para asegurar que la aplicación funciona como se espera."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Git",
+              "categoria": "control_versiones",
+              "descripcion": "Sistema de control de versiones distribuido para rastrear cambios en el código fuente.",
+              "version_sugerida": "2.x",
+              "url_docs": "https://git-scm.com/doc",
+              "por_que": "Es la base para la integración con repositorios de código y el seguimiento de versiones de los proyectos auditados."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Conexión con repositorios Git (GitHub, GitLab, Bitbucket)",
+          "Análisis estático de código (SAST) con herramientas como SonarQube",
+          "Generación de informes de calidad y seguridad del código",
+          "Dashboard de métricas de código (deuda técnica, vulnerabilidades, cobertura)",
+          "Configuración de reglas de auditoría personalizadas por proyecto",
+          "Notificaciones de nuevos hallazgos o regresiones en la calidad"
+        ],
+        "casos_uso": [
+          "Un líder técnico configura una auditoría para un nuevo microservicio.",
+          "Un desarrollador revisa los hallazgos de seguridad antes de un pull request.",
+          "Un QA verifica la cobertura de pruebas de un módulo crítico.",
+          "Un auditor de seguridad genera un informe de cumplimiento para un cliente.",
+          "Un manager evalúa la deuda técnica acumulada en un proyecto."
+        ],
+        "reglas_negocio": [
+          "Los usuarios deben autenticarse y tener roles (admin, desarrollador, auditor).",
+          "Solo los administradores pueden configurar reglas globales de auditoría.",
+          "Los informes deben ser exportables en formatos comunes (PDF, CSV).",
+          "El historial de auditorías debe ser inmutable y auditable.",
+          "Las métricas de calidad deben actualizarse tras cada análisis de código."
+        ],
+        "por_que_ia": "La IA (LLM) se utilizará para analizar descripciones de vulnerabilidades o problemas complejos detectados por las herramientas SAST, y generar explicaciones más claras, sugerencias de remediación y resúmenes ejecutivos para los informes.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "SonarQube Documentation",
+          "OWASP Top 10",
+          "SANS Top 25 Software Errors"
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 24,
+        "prerequisitos": [
+          "Conocimientos avanzados de TypeScript y desarrollo web fullstack.",
+          "Experiencia con Docker, Kubernetes y CI/CD.",
+          "Familiaridad con herramientas de análisis de código estático (SAST).",
+          "Experiencia en diseño de APIs RESTful y microservicios."
+        ],
+        "riesgos": [
+          "Complejidad de integración con múltiples herramientas de análisis de código.",
+          "Gestión de grandes volúmenes de datos de resultados de auditorías.",
+          "Falsos positivos/negativos en los análisis de seguridad y calidad.",
+          "Escalabilidad del sistema para manejar múltiples proyectos y repositorios.",
+          "Mantener la privacidad y seguridad del código fuente de los clientes."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2024-07-30T10:00:00Z",
+        "hash_unicidad": "e4f8d1c9b2a76053"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "360a55dc929bdd54"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "a9b8c7d6e5f4a3b2",
+        "titulo": "Monitor de Precios de Criptomonedas con Alertas",
+        "descripcion_corta": "Aplicación de escritorio multiplataforma para monitorear precios de criptomonedas en tiempo real y configurar alertas personalizadas.",
+        "descripcion_detallada": "Desarrollar una aplicación de escritorio que permita a los usuarios seguir los precios en tiempo real de sus criptomonedas favoritas de diferentes exchanges. Los usuarios podrán configurar alertas personalizadas basadas en umbrales de precios, cambios porcentuales o volumen de trading. La aplicación deberá ser ligera, fácil de usar y mostrar gráficos históricos de precios. Se conectará a APIs de exchanges para obtener los datos.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "desktop",
+          "api",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Fyne",
+              "categoria": "framework_gui",
+              "descripcion": "Framework de Go para construir interfaces gráficas de usuario multiplataforma.",
+              "version_sugerida": "2.x",
+              "url_docs": "https://developer.fyne.io/docs/",
+              "por_que": "Permite crear una aplicación de escritorio nativa y multiplataforma con Go, manteniendo un rendimiento eficiente."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "go-resty",
+              "categoria": "cliente_http",
+              "descripcion": "Cliente HTTP para Go, diseñado para ser fácil de usar y extensible.",
+              "version_sugerida": "2.x",
+              "url_docs": "https://github.com/go-resty/resty",
+              "por_que": "Facilita las solicitudes HTTP a las APIs de los exchanges de criptomonedas para obtener datos de precios."
+            },
+            {
+              "nombre": "gjson",
+              "categoria": "parser_json",
+              "descripcion": "Librería ultrarrápida para Go que permite obtener valores de JSON sin unmarshalear la estructura completa.",
+              "version_sugerida": "1.x",
+              "url_docs": "https://github.com/tidwall/gjson",
+              "por_que": "Optimiza el parseo de grandes respuestas JSON de las APIs de los exchanges, mejorando el rendimiento."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "SQLite",
+              "categoria": "base_datos_empotrada",
+              "descripcion": "Base de datos relacional ligera, empotrada y sin servidor, ideal para aplicaciones de escritorio.",
+              "version_sugerida": "3.x",
+              "url_docs": "https://www.sqlite.org/docs.html",
+              "por_que": "Almacena la configuración del usuario, las criptomonedas seguidas y el historial de alertas de forma local."
+            }
+          ],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "framework_testing",
+              "descripcion": "El paquete de pruebas estándar de Go para escribir pruebas unitarias y de rendimiento.",
+              "version_sugerida": "std",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Utilizado para asegurar la lógica de negocio, el parseo de datos y la gestión de alertas del proyecto."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "WebSocket",
+              "categoria": "protocolo_comunicacion",
+              "descripcion": "Protocolo de comunicación que permite una comunicación bidireccional full-duplex sobre una única conexión TCP.",
+              "version_sugerida": "RFC6455",
+              "url_docs": "https://developer.mozilla.org/es/docs/Web/API/WebSockets_API",
+              "por_que": "Para recibir actualizaciones de precios en tiempo real de los exchanges de criptomonedas de manera eficiente."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Visualización de precios de criptomonedas en tiempo real.",
+          "Configuración de alertas de precios (subida/bajada, % de cambio).",
+          "Soporte para múltiples exchanges (ej. Binance, Coinbase).",
+          "Gráficos históricos de precios para diferentes períodos.",
+          "Lista de criptomonedas favoritas con seguimiento rápido.",
+          "Notificaciones de escritorio para alertas activadas."
+        ],
+        "casos_uso": [
+          "Un inversor configura una alerta cuando Bitcoin supera los 70.000 USD.",
+          "Un trader monitorea el precio de Ethereum y el volumen de trading.",
+          "Un usuario novato busca información sobre el historial de precios de una altcoin.",
+          "Un entusiasta quiere ser notificado si su cripto favorita baja un 5% en 24 horas.",
+          "Un desarrollador quiere una herramienta ligera para seguir el mercado sin abrir el navegador."
+        ],
+        "reglas_negocio": [
+          "Las alertas deben ser persistentes y activarse incluso si la aplicación se reinicia.",
+          "Los precios deben mostrarse en la moneda preferida del usuario (USD, EUR, etc.).",
+          "Las fuentes de datos de los exchanges deben ser configurables y fiables.",
+          "La aplicación debe manejar errores de conexión con las APIs de exchanges.",
+          "El historial de precios local debe tener un límite de almacenamiento para no sobrecargar el disco."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Binance API Documentation",
+          "Coinbase API Documentation",
+          "Coingecko API Documentation"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 8,
+        "prerequisitos": [
+          "Conocimientos intermedios de Go y programación concurrente.",
+          "Familiaridad con APIs REST y WebSockets.",
+          "Comprensión básica de bases de datos SQL (SQLite).",
+          "Conocimientos de desarrollo de GUIs con Fyne (o similar)."
+        ],
+        "riesgos": [
+          "Cambios frecuentes en las APIs de los exchanges de criptomonedas.",
+          "Latencia en la recepción de datos de precios en tiempo real.",
+          "Manejo de la diversidad de formatos de datos entre diferentes exchanges.",
+          "Garantizar la precisión y fiabilidad de los datos mostrados.",
+          "Optimización del consumo de recursos para una aplicación de escritorio."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "manual",
+        "fecha_generacion": "2024-07-30T10:00:00Z",
+        "hash_unicidad": "a9b8c7d6e5f4a3b2"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "360a55dc929bdd54"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c1d2e3f4a5b6c7d9",
+        "titulo": "Microservicio de Notificaciones Multi-canal",
+        "descripcion_corta": "Un microservicio Go para enviar notificaciones a través de múltiples canales (email, SMS, push) con plantillas y un sistema de colas.",
+        "descripcion_detallada": "Diseñar y construir un microservicio de backend en Go que centralice el envío de notificaciones. Los clientes pueden consumir una API REST para enviar mensajes, especificando el canal, el destinatario y los datos de la plantilla. El servicio debe ser robusto, escalable y utilizar un sistema de colas para procesar las notificaciones de forma asíncrona, garantizando la entrega y ofreciendo resiliencia ante fallos externos. Soportará plantillas personalizables para cada tipo de notificación.",
+        "nivel": "senior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "microservicio",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework_web",
+              "descripcion": "Framework HTTP rápido para Go, diseñado para construir APIs RESTful y microservicios.",
+              "version_sugerida": "1.x",
+              "url_docs": "https://gin-gonic.com/docs/",
+              "por_que": "Proporciona un router HTTP de alto rendimiento y fácil de usar para manejar las peticiones de envío de notificaciones."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "go-redis",
+              "categoria": "cliente_redis",
+              "descripcion": "Cliente Redis para Go, con soporte para Pub/Sub y clúster.",
+              "version_sugerida": "9.x",
+              "url_docs": "https://github.com/go-redis/redis",
+              "por_que": "Se usará para la caché de plantillas y para implementar un sistema de colas simple de mensajes (ej. con listas de Redis)."
+            },
+            {
+              "nombre": "SendGrid Go",
+              "categoria": "cliente_email",
+              "descripcion": "Librería oficial de SendGrid para Go, para enviar correos electrónicos de forma programática.",
+              "version_sugerida": "7.x",
+              "url_docs": "https://github.com/sendgrid/sendgrid-go",
+              "por_que": "Facilita la integración con el servicio de email transaccional SendGrid para el envío de notificaciones por correo."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos_relacional",
+              "descripcion": "Base de datos relacional robusta, extensible y de código abierto.",
+              "version_sugerida": "15.x",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Almacenará las plantillas de notificación, el historial de envíos y las configuraciones de los canales."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "RabbitMQ",
+              "categoria": "broker_mensajes",
+              "descripcion": "Broker de mensajes de código abierto que implementa el estándar AMQP.",
+              "version_sugerida": "3.x",
+              "url_docs": "https://www.rabbitmq.com/documentation.html",
+              "por_que": "Actúa como cola de mensajes fiable para desacoplar el envío de notificaciones del resto del microservicio, garantizando la entrega."
+            },
+            {
+              "nombre": "Docker",
+              "categoria": "contenedorizacion",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores aislados.",
+              "version_sugerida": "24.x",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Empaqueta el microservicio y sus dependencias (Redis, PostgreSQL, RabbitMQ) para un desarrollo y despliegue consistentes."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "framework_testing",
+              "descripcion": "El paquete de pruebas estándar de Go para escribir pruebas unitarias y de rendimiento.",
+              "version_sugerida": "std",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Esencial para asegurar la lógica de negocio, el manejo de plantillas y la interacción con los servicios de envío de notificaciones."
+            },
+            {
+              "nombre": "Testify",
+              "categoria": "libreria_assertion",
+              "descripcion": "Conjunto de utilidades de testing para Go que complementa el paquete 'testing' estándar.",
+              "version_sugerida": "1.x",
+              "url_docs": "https://github.com/stretchr/testify",
+              "por_que": "Proporciona asserts y mocks más legibles y potentes para las pruebas unitarias y de integración."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Twilio Go Helper Library",
+              "categoria": "cliente_sms",
+              "descripcion": "Librería oficial de Twilio para Go, para interactuar con la API de Twilio (SMS, voz).",
+              "version_sugerida": "1.x",
+              "url_docs": "https://github.com/twilio/twilio-go",
+              "por_que": "Permite el envío de notificaciones por SMS de manera sencilla y programática a través de Twilio."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "API REST para el envío de notificaciones.",
+          "Soporte para múltiples canales: Email (SendGrid), SMS (Twilio), Push (ej. Firebase).",
+          "Sistema de plantillas de notificaciones personalizables.",
+          "Cola de mensajes asíncrona para procesamiento y reintentos.",
+          "Registro y seguimiento del estado de las notificaciones.",
+          "Gestión de suscriptores y preferencias de notificación."
+        ],
+        "casos_uso": [
+          "Una aplicación e-commerce envía un email de confirmación de pedido.",
+          "Un sistema de monitoreo envía un SMS de alerta crítica a los administradores.",
+          "Una app móvil envía una notificación push sobre una nueva característica.",
+          "Un usuario actualiza sus preferencias de notificación para no recibir SMS de marketing.",
+          "Un administrador revisa el historial de notificaciones fallidas para depurar un problema."
+        ],
+        "reglas_negocio": [
+          "Los mensajes deben ser entregados una vez y solo una vez (at-least-once con idempotencia).",
+          "Las plantillas deben ser seguras y evitar inyección de contenido malicioso.",
+          "Se deben manejar los reintentos para notificaciones fallidas con un backoff exponencial.",
+          "Las credenciales de los servicios externos deben estar seguras y rotarse.",
+          "Los usuarios deben poder darse de baja de canales específicos de notificación."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "SendGrid API Docs",
+          "Twilio API Docs",
+          "Firebase Cloud Messaging Docs"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 12,
+        "prerequisitos": [
+          "Conocimientos avanzados de Go, concurrencia y diseño de microservicios.",
+          "Experiencia con RabbitMQ o sistemas de colas similares.",
+          "Familiaridad con Docker y despliegue de servicios.",
+          "Comprensión de patrones de diseño para servicios robustos (circuit breakers, retries)."
+        ],
+        "riesgos": [
+          "Fallos de los proveedores externos de servicios de notificación (email, SMS, push).",
+          "Latencia en el envío de notificaciones en momentos de alta carga.",
+          "Gestión de la consistencia de los estados de notificación.",
+          "Problemas de seguridad con credenciales y datos sensibles de los usuarios.",
+          "Manejo de la complejidad de múltiples plantillas y personalización."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "manual",
+        "fecha_generacion": "2024-07-30T10:00:00Z",
+        "hash_unicidad": "c1d2e3f4a5b6c7d9"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "360a55dc929bdd54"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -2995,8 +3454,11 @@
     "e8f7a6b5c4d3e2f1",
     "6b2a0f1d7e8c4a9b",
     "4f9a1b2c3d4e5f6a",
-    "e8a7f6d5c4b3a201"
+    "e8a7f6d5c4b3a201",
+    "e4f8d1c9b2a76053",
+    "a9b8c7d6e5f4a3b2",
+    "c1d2e3f4a5b6c7d9"
   ],
-  "total_generados": 24,
-  "fecha_ultima_generacion": "2026-09-30T03:44:43.659873"
+  "total_generados": 27,
+  "fecha_ultima_generacion": "2026-09-30T17:31:36.366119"
 }
