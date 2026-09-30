@@ -1729,5 +1729,17 @@
     "relevancia": 4,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Netflix prepara una serie basada en Nueve reinas: José Coronado y Álvaro Morte encabezan el elenco",
+    "url": "https://www.lagaceta.com.ar/nota/1156124/espectaculos/netflix-prepara-serie-basada-nueve-reinas-jose-coronado-lvaro-morte-encabezan-elenco.html",
+    "fecha_pub": "Wed, 30 Sep 2026 05:16:00 GMT",
+    "fecha_ts": "2026-09-30T12:24:46.598523",
+    "medio": "LA GACETA",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 6,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
