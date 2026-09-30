@@ -1,5 +1,18 @@
 [
     {
+        "titulo": "google/gemma-4-31B-it",
+        "enlace": "https://huggingface.co/google/gemma-4-31B-it",
+        "descripcion": "[image-text-to-text] transformers, safetensors, gemma4 — by ",
+        "lenguaje": "Python",
+        "estrellas": "3972",
+        "fuente": "HuggingFace Models",
+        "tipo": "herramienta",
+        "_downloads": 9904107,
+        "_likes": 3972,
+        "_pipeline": "image-text-to-text",
+        "_source_type": "hf_model"
+    },
+    {
         "titulo": "firecrawl/firecrawl",
         "enlace": "https://github.com/firecrawl/firecrawl",
         "descripcion": "🔥 Supercharge your AI agents with data from the web and beyond. A web data API to search, scrape, and access more sources.",
