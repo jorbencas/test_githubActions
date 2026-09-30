@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 150,
+    "total_concepts": 151,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-09-30T10:14:37.001818"
+    "last_scraped": "2026-09-30T16:39:23.796112"
   },
   "concepts": [
     {
@@ -2796,6 +2796,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-29T19:05:55.619610"
+    },
+    {
+      "title": "SIMD y optimización low-level en Rust: target_feature, std::simd y técnicas de bajo nivel",
+      "summary": "Cuando los benchmarks muestran que el cuello de botella es el procesamiento puro de datos numéricos, Rust permite descender hasta el nivel de las instrucciones SIMD del procesador. Constd::simden nigh",
+      "explanation": "Cuando los benchmarks muestran que el cuello de botella es el procesamiento puro de datos numéricos, Rust permite descender hasta el nivel de las instrucciones SIMD del procesador. Constd::simden nightly se obtiene una API portable entre arquitecturas; constd::archse accede a intrinsics AVX2/SSE4.2 específicos de x86. Ambas rutas pueden coexistir en el mismo codebase.target_feature y detección en tiempo de compilación El atributo#[target_feature(enable = \"avx2\")]compila una función con las instrucciones SIMD habilitadas aunque el target global no las use. La función debe marcarse comounsafeporque invocarla en hardware que no soporte AVX2 produce una instrucción ilegal.// Comprobar features disponibles en el host de compilación:\n// RUSTFLAGS=\"-C target-cpu=native\" cargo build --release\n\n// Antipatrón: habilitar target_feature en todo el binario\n// [profile.release]\n// rustflags = [\"-C\", \"target-feature=+avx2\"]\n// Problema: el binario no arrancará en CPUs sin AVX2\n\n// CORRECTO: habilitar solo para funciones concretas\n#[cfg(target_arch = \"x86_64\")]\n#[target_feature(enable = \"avx2\")]\nunsafe fn suma_avx2(datos: &[f32]) -> f32 {\n    // Esta función solo puede llamarse si is_x86_feature_detected!(\"avx2\") == true\n    datos.iter().sum()\n}\n\nfn suma_segura(datos: &[f32]) -> f32 {\n    #[cfg(target_arch = \"x86_64\")]\n    if is_x86_feature_detected!(\"avx2\") {\n        return unsafe { suma_avx2(datos) };\n    }\n    datos.iter().sum() // fallback escalar\n}\n\nfn main() {\n    let datos: Vec<f32> =",
+      "code_example": "// Comprobar features disponibles en el host de compilación:\n// RUSTFLAGS=\"-C target-cpu=native\" cargo build --release\n\n// Antipatrón: habilitar target_feature en todo el binario\n// [profile.release]\n// rustflags = [\"-C\", \"target-feature=+avx2\"]\n// Problema: el binario no arrancará en CPUs sin AVX2\n\n// CORRECTO: habilitar solo para funciones concretas\n#[cfg(target_arch = \"x86_64\")]\n#[target_feature(enable = \"avx2\")]\nunsafe fn suma_avx2(datos: &[f32]) -> f32 {\n    // Esta función solo puede llamarse si is_x86_feature_detected!(\"avx2\") == true\n    datos.iter().sum()\n}\n\nfn suma_segura(datos: &[f32]) -> f32 {\n    #[cfg(target_arch = \"x86_64\")]\n    if is_x86_feature_detected!(\"avx2\") {\n        return unsafe { suma_avx2(datos) };\n    }\n    datos.iter().sum() // fallback escalar\n}\n\nfn main() {\n    let datos: Vec<f32> = (1..=1000).map(|x| x as f32).collect();\n    println!(\"Suma: {}\", suma_segura(&datos)); // 500500\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-09-30T16:38:45.263558"
     }
   ]
 }
