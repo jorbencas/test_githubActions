@@ -3803,6 +3803,450 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "252dc67b41cefe71"
       }
+    },
+    {
+      "proyecto": {
+        "id": "3a4b5c6d7e8f9a0b",
+        "titulo": "Generador de Documentación Técnica con IA",
+        "descripcion_corta": "Herramienta que genera documentación técnica (READMEs, comentarios) a partir de código fuente usando IA.",
+        "descripcion_detallada": "Este proyecto es una herramienta CLI que analiza el código fuente de un proyecto (Python, JavaScript) y utiliza un modelo de lenguaje grande (LLM) para generar automáticamente documentación técnica. Puede crear archivos README.md, añadir comentarios de función/clase y sugerir explicaciones para fragmentos de código complejos. El objetivo es mejorar la mantenibilidad del código y facilitar la incorporación de nuevos desarrolladores a un proyecto. Se enfoca en la integración con repositorios Git para sugerir commits de documentación y en la configuración personalizable de los estilos de documentación.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "cli",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs, con validación de datos automática y documentación interactiva.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Proporciona una API robusta para interactuar con el LLM y para futuras integraciones, con tipado automático y validación Pydantic."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para simplificar la creación de aplicaciones con LLMs.",
+              "version_sugerida": "0.1.0",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Facilita la orquestación de llamadas al LLM, el manejo de prompts y la integración con diferentes modelos."
+            },
+            {
+              "nombre": "tree-sitter",
+              "categoria": "libreria",
+              "descripcion": "Analizador incremental para múltiples lenguajes de programación.",
+              "version_sugerida": "0.22.0",
+              "url_docs": "https://tree-sitter.github.io/tree-sitter/",
+              "por_que": "Permite un análisis sintáctico preciso del código fuente para extraer información estructurada."
+            },
+            {
+              "nombre": "Click",
+              "categoria": "libreria",
+              "descripcion": "Framework para crear aplicaciones de línea de comandos bonitas.",
+              "version_sugerida": "8.1.7",
+              "url_docs": "https://click.palletsprojects.com/",
+              "por_que": "Simplifica la creación de una interfaz CLI intuitiva para el generador de documentación."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, aislando dependencias."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API",
+              "categoria": "ia_ml",
+              "descripcion": "Interfaz de programación de aplicaciones para acceder a modelos de lenguaje de OpenAI.",
+              "version_sugerida": "n/a",
+              "url_docs": "https://platform.openai.com/docs/api-reference",
+              "por_que": "Proporciona acceso a modelos potentes para la generación de texto y explicación de código."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python que facilita la escritura de tests simples y escalables.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite crear pruebas unitarias y de integración robustas para la CLI y la API."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Generación automática de README.md",
+          "Incrustación de comentarios en funciones/clases",
+          "Análisis de sintaxis de código fuente",
+          "Soporte para Python y JavaScript",
+          "Integración con Git para sugerencias de commit",
+          "Configuración personalizable de estilo de documentación"
+        ],
+        "casos_uso": [
+          "Mejorar la documentación de proyectos open-source",
+          "Acelerar la documentación en equipos de desarrollo",
+          "Facilitar el onboarding de nuevos miembros al equipo",
+          "Mantener la documentación sincronizada con el código",
+          "Generar explicaciones para código heredado o complejo"
+        ],
+        "reglas_negocio": [
+          "La documentación generada debe ser coherente con el estilo del código existente.",
+          "El usuario debe poder configurar el nivel de detalle de la documentación.",
+          "Se deben manejar adecuadamente los errores de análisis de código.",
+          "Las credenciales de la API de IA deben ser gestionadas de forma segura.",
+          "El proceso de generación no debe modificar el código fuente original sin confirmación."
+        ],
+        "por_que_ia": "Se utiliza IA (LLM) para comprender el contexto del código y generar explicaciones y documentación coherente y natural, tareas que serían extremadamente complejas y laboriosas de implementar mediante reglas deterministas.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "GitHub API (opcional para integración)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos de Python y análisis sintáctico.",
+          "Comprensión de los modelos de lenguaje y sus capacidades.",
+          "Familiaridad con el uso de APIs externas.",
+          "Nociones de Git y control de versiones."
+        ],
+        "riesgos": [
+          "La calidad de la documentación generada puede ser inconsistente.",
+          "Dependencia de la disponibilidad y coste de la API de IA.",
+          "Posibles sesgos o información incorrecta generada por el LLM.",
+          "Complejidad en el análisis de lenguajes de programación con sintaxis muy complejas o DSLs.",
+          "Dificultad para integrar con todos los estilos de codificación existentes."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "3a4b5c6d7e8f9a0b"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "6425acc28d0c23c7"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f1e2d3c4b5a6f7e8",
+        "titulo": "Asistente de Código Personalizado (Pair Programmer Virtual)",
+        "descripcion_corta": "API que actúa como un pair programmer virtual, sugiriendo código, refactorizaciones y detectando errores.",
+        "descripcion_detallada": "Se trata de una API RESTful que, dada una base de código (o fragmentos de ella) y un contexto (como un ticket de Jira o una descripción de tarea), ofrece sugerencias de código, ayuda a la refactorización, detecta posibles bugs o anti-patrones, y explica secciones de código. Utiliza un LLM avanzado y técnicas de análisis de código para proporcionar asistencia contextual y personalizada, simulando la interacción con un programador humano experimentado. Se enfoca en la integración con IDEs y herramientas de desarrollo.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web de alto rendimiento para Go, con un enfoque en la simplicidad y la extensibilidad.",
+              "version_sugerida": "1.21.2",
+              "url_docs": "https://gin-gonic.com/",
+              "por_que": "Proporciona una base robusta y eficiente para la API RESTful, manejando el enrutamiento y las peticiones de forma óptima."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "GPT Go Client",
+              "categoria": "libreria",
+              "descripcion": "Cliente oficial o de terceros para interactuar con la API de OpenAI desde Go.",
+              "version_sugerida": "n/a",
+              "url_docs": "https://github.com/openai/openai-go",
+              "por_que": "Permite la integración directa y eficiente con los modelos de lenguaje de OpenAI para la generación de sugerencias y análisis."
+            },
+            {
+              "nombre": "go/ast",
+              "categoria": "libreria",
+              "descripcion": "Paquete estándar de Go para analizar la estructura abstracta de sintaxis (AST) de código Go.",
+              "version_sugerida": "n/a",
+              "url_docs": "https://pkg.go.dev/go/ast",
+              "por_que": "Habilita el análisis profundo del código Go para identificar patrones, errores y oportunidades de refactorización."
+            },
+            {
+              "nombre": "Otel Go",
+              "categoria": "libreria",
+              "descripcion": "Implementación de OpenTelemetry para Go, facilitando la observabilidad.",
+              "version_sugerida": "1.19.0",
+              "url_docs": "https://opentelemetry.io/docs/collector/",
+              "por_que": "Permite instrumentar la API para monitorizar el rendimiento, rastrear peticiones y recopilar métricas clave."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "Redis",
+              "categoria": "bases_datos",
+              "descripcion": "Almacén de estructura de datos en memoria, utilizado como base de datos, caché y message broker.",
+              "version_sugerida": "7.2",
+              "url_docs": "https://redis.io/docs/",
+              "por_que": "Se usa para cachear respuestas frecuentes del LLM, almacenar estados de conversación y como message queue para procesar tareas asíncronas."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Kubernetes",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de orquestación de contenedores para automatizar el despliegue, escalado y gestión.",
+              "version_sugerida": "1.28",
+              "url_docs": "https://kubernetes.io/docs/concepts/",
+              "por_que": "Proporciona la escalabilidad y resiliencia necesarias para una API de IA de alto tráfico, gestionando los microservicios."
+            },
+            {
+              "nombre": "Prometheus",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de monitorización y alertas, ideal para entornos de microservicios.",
+              "version_sugerida": "2.47",
+              "url_docs": "https://prometheus.io/docs/",
+              "por_que": "Recopila métricas de la API y la infraestructura para monitorizar el rendimiento y detectar anomalías."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Paquete estándar de Go para escribir tests unitarios y de benchmark.",
+              "version_sugerida": "n/a",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Permite crear tests unitarios para la lógica de la API y los manejadores."
+            },
+            {
+              "nombre": "Testify",
+              "categoria": "testing",
+              "descripcion": "Conjunto de herramientas de testing para Go, incluyendo aserciones.",
+              "version_sugerida": "1.8.4",
+              "url_docs": "https://github.com/stretchr/testify",
+              "por_que": "Simplifica la escritura de aserciones en los tests, haciéndolos más legibles y robustos."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "OpenAPI (Swagger)",
+              "categoria": "otros",
+              "descripcion": "Especificación para describir APIs RESTful de forma estandarizada.",
+              "version_sugerida": "3.0.0",
+              "url_docs": "https://swagger.io/specification/",
+              "por_que": "Define la estructura de la API, permitiendo la generación automática de documentación interactiva y validación de esquemas."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Sugerencias de código contextuales (autocompletado inteligente).",
+          "Detección de bugs y vulnerabilidades de seguridad.",
+          "Asistencia en refactorización de código.",
+          "Explicación de fragmentos de código complejos.",
+          "Generación de código boilerplate a partir de descripciones.",
+          "Integración con sistemas de tickets (ej. Jira)."
+        ],
+        "casos_uso": [
+          "Asistir a desarrolladores junior en tareas complejas.",
+          "Acelerar el desarrollo de nuevas funcionalidades.",
+          "Mejorar la calidad y seguridad del código base.",
+          "Facilitar la comprensión de código existente.",
+          "Reducir el tiempo dedicado a la escritura de código repetitivo."
+        ],
+        "reglas_negocio": [
+          "Las sugerencias de código deben respetar el estilo y las convenciones del proyecto.",
+          "La API debe ser escalable para manejar picos de demanda.",
+          "La privacidad del código fuente del usuario es primordial (no almacenar código sin permiso).",
+          "Las respuestas deben ser rápidas para una experiencia de usuario fluida.",
+          "Se debe permitir la configuración del modelo de IA y sus parámetros."
+        ],
+        "por_que_ia": "La IA (LLM) es fundamental para entender el código, su contexto y generar sugerencias de programación coherentes y útiles, así como para detectar patrones de errores que van más allá de la simple verificación sintáctica.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de sistemas de tickets (Jira, GitHub Issues)"
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 12,
+        "prerequisitos": [
+          "Experiencia sólida en Go y desarrollo de APIs RESTful.",
+          "Conocimiento profundo de patrones de diseño y arquitectura de software.",
+          "Comprensión de modelos de lenguaje y técnicas de procesamiento de lenguaje natural.",
+          "Experiencia con sistemas de orquestación (Kubernetes) y monitorización.",
+          "Familiaridad con el análisis de Abstract Syntax Trees (AST)."
+        ],
+        "riesgos": [
+          "Costes elevados asociados al uso intensivo de la API de IA.",
+          "Latencia en las respuestas del LLM que afecte la experiencia del usuario.",
+          "Posibles 'alucinaciones' o información incorrecta generada por la IA.",
+          "Complejidad en la gestión del estado y contexto a lo largo de interacciones prolongadas.",
+          "Seguridad y privacidad de los datos del código fuente del cliente."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:01:00Z",
+        "hash_unicidad": "f1e2d3c4b5a6f7e8"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "6425acc28d0c23c7"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "a7b8c9d0e1f2a3b4",
+        "titulo": "Optimizador de Rutas de Entrega con Predicción de Tráfico",
+        "descripcion_corta": "API que optimiza rutas de entrega considerando tráfico en tiempo real y predicciones.",
+        "descripcion_detallada": "Esta API calcula las rutas óptimas para flotas de vehículos de entrega, integrando datos de tráfico en tiempo real y predicciones basadas en IA. Los usuarios (empresas de logística, repartidores) definen puntos de recogida y entrega, y la API devuelve una secuencia de paradas optimizada, minimizando el tiempo de viaje y el consumo de combustible. Incorpora la posibilidad de reoptimizar rutas dinámicamente ante imprevistos (atascos, accidentes).",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de Node.js para construir aplicaciones del lado del servidor eficientes y escalables.",
+              "version_sugerida": "10.1.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Proporciona una arquitectura modular y organizada (inspirada en Angular) para la API, facilitando la escalabilidad y el mantenimiento."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Mapbox Directions API",
+              "categoria": "libreria",
+              "descripcion": "Servicio para calcular rutas y tiempos de viaje entre ubicaciones.",
+              "version_sugerida": "n/a",
+              "url_docs": "https://docs.mapbox.com/api/navigation/directions/",
+              "por_que": "Proporciona datos de ruteo y tiempos de viaje precisos, que son la base para la optimización."
+            },
+            {
+              "nombre": "Turf.js",
+              "categoria": "libreria",
+              "descripcion": "Módulo para análisis geoespacial en JavaScript.",
+              "version_sugerida": "6.5.0",
+              "url_docs": "https://turfjs.org/",
+              "por_que": "Utilizado para operaciones geoespaciales como cálculo de distancias, polígonos y manipulación de coordenadas."
+            },
+            {
+              "nombre": "@tensorflow/tfjs-node",
+              "categoria": "libreria",
+              "descripcion": "Permite ejecutar modelos de TensorFlow en Node.js.",
+              "version_sugerida": "4.13.0",
+              "url_docs": "https://www.tensorflow.org/js/guide/nodejs",
+              "por_que": "Necesario para ejecutar modelos de predicción de tráfico entrenados o pre-entrenados directamente en el backend."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL con PostGIS",
+              "categoria": "bases_datos",
+              "descripcion": "Extensión espacial para PostgreSQL que permite almacenar y consultar datos geoespaciales.",
+              "version_sugerida": "15.4",
+              "url_docs": "https://postgis.net/documentation/",
+              "por_que": "Almacena eficientemente datos de rutas, ubicaciones, y potencialmente datos históricos de tráfico para análisis."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita la gestión del entorno de la API y sus dependencias, incluyendo TensorFlow."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Modelo de Predicción de Tráfico (Custom/Pre-trained)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo de Machine Learning que predice la congestión del tráfico futuro basado en datos históricos y en tiempo real.",
+              "version_sugerida": "v1.0",
+              "url_docs": null,
+              "por_que": "Mejora la precisión de los tiempos de viaje estimados, permitiendo una planificación de rutas más realista y eficiente."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript, compatible con Node.js.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Permite escribir pruebas unitarias y de integración para la lógica de la API y las funciones geoespaciales."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Optimización de múltiples paradas de entrega.",
+          "Integración con datos de tráfico en tiempo real.",
+          "Predicción de tráfico futuro basada en IA.",
+          "Reoptimización dinámica de rutas.",
+          "Cálculo de tiempos y distancias estimados.",
+          "Interfaz API RESTful para fácil integración."
+        ],
+        "casos_uso": [
+          "Empresas de logística y reparto de última milla.",
+          "Servicios de entrega de comida a domicilio.",
+          "Flotas de vehículos de mantenimiento o servicio técnico.",
+          "Planificación de rutas para comerciales o visitadores médicos.",
+          "Gestión de eventos con múltiples ubicaciones."
+        ],
+        "reglas_negocio": [
+          "La API debe priorizar la minimización del tiempo total de viaje.",
+          "Los tiempos de viaje deben ser realistas considerando el tráfico predicho.",
+          "Se debe permitir al usuario definir ventanas de tiempo para recogidas/entregas.",
+          "La API debe ser capaz de manejar un número considerable de paradas por ruta.",
+          "Los datos de tráfico y predicción deben actualizarse periódicamente."
+        ],
+        "por_que_ia": "La IA se usa para predecir patrones de tráfico futuros basándose en datos históricos y en tiempo real, lo cual es crucial para una optimización de rutas precisa y eficiente que no se base únicamente en condiciones estáticas.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "Servicio de mapas (Mapbox, Google Maps API)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 8,
+        "prerequisitos": [
+          "Conocimientos de TypeScript y Node.js.",
+          "Comprensión de algoritmos de optimización de rutas (ej. Problema del Viajante de Comercio - TSP).",
+          "Familiaridad con conceptos de geoespacialidad y APIs de mapas.",
+          "Nociones de Machine Learning y uso de librerías como TensorFlow.js.",
+          "Experiencia con bases de datos SQL y extensiones espaciales."
+        ],
+        "riesgos": [
+          "La precisión de las predicciones de tráfico puede variar significativamente.",
+          "Dependencia de servicios externos de mapas y tráfico (costes, disponibilidad, cambios de API).",
+          "Complejidad en el manejo de grandes volúmenes de datos geoespaciales.",
+          "El rendimiento de la optimización puede degradarse con un número muy alto de paradas.",
+          "Requiere entrenamiento o fine-tuning de modelos de IA si se usan modelos locales."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:02:00Z",
+        "hash_unicidad": "a7b8c9d0e1f2a3b4"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "6425acc28d0c23c7"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -3835,8 +4279,11 @@
     "c1d2e3f4a5b6c7d9",
     "01f2a3b4c5d6e7f8",
     "a1b2c3d4e5f6a7b9",
-    "b9c8d7e6f5a4b3c2"
+    "b9c8d7e6f5a4b3c2",
+    "3a4b5c6d7e8f9a0b",
+    "f1e2d3c4b5a6f7e8",
+    "a7b8c9d0e1f2a3b4"
   ],
-  "total_generados": 30,
-  "fecha_ultima_generacion": "2026-09-30T23:24:20.308637"
+  "total_generados": 33,
+  "fecha_ultima_generacion": "2026-10-01T03:51:27.743438"
 }
