@@ -668,5 +668,17 @@
     "relevancia": 2,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "Reparto Los ilusos 13+13",
+    "url": "https://www.sensacine.com/peliculas/pelicula-1000048420/reparto/",
+    "fecha_pub": "Thu, 02 Jul 2026 12:31:00 GMT",
+    "fecha_ts": "2026-10-01T22:36:08.263363",
+    "medio": "Sensacine",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
