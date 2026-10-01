@@ -1837,5 +1837,52 @@
     "relevancia": 4,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Netflix: la nueva serie que adapta una de las grandes joyas del cine argentino",
+    "url": "https://www.mdzol.com/tendencias/2026/10/1/netflix-la-nueva-serie-que-adapta-una-de-las-grandes-joyas-del-cine-argentino-1984988.html",
+    "fecha_pub": "Thu, 01 Oct 2026 12:19:00 GMT",
+    "fecha_ts": "2026-10-01T22:35:48.055044",
+    "medio": "MDZ Online",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "\"Nueve reinas\" vuelve como serie: de la Buenos Aires de Bielinsky a la Madrid de la crisis",
+    "url": "https://www.ellitoral.com/escenarios-sociedad/reinas-serie-espanola-remake-netflix-jose-coronado-patrick-criado-alvaro-morte-aura-garrido-margarida-corceiro-fabian-bielinsky-ricardo-darin-gaston-pauls-leticia-bredice-criminal-john-c-reilly-diego-luna-maggie-gyllenhaal_0_y3d2kVbLJE.html",
+    "fecha_pub": "Thu, 01 Oct 2026 09:05:00 GMT",
+    "fecha_ts": "2026-10-01T22:35:48.055088",
+    "medio": "El Litoral",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Ben Affleck confiesa haber usado IA \"para un montón de cosas\" en su nueva película con Netflix",
+    "url": "https://www.cinemania.es/cinemania/noticias/ben-affleck-inteligencia-artificial-animales-netflix_7043679_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-01T22:36:03.376872",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Muere a los 47 años Fabián Bielinsky, director de 'Nueve Reinas'",
+    "url": "https://elpais.com/cultura/2006/06/29/actualidad/1151532003_850215.html",
+    "fecha_pub": "Thu, 29 Jun 2006 11:16:00 GMT",
+    "fecha_ts": "2026-10-01T22:36:06.664416",
+    "medio": "EL PAÍS",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas"
   }
 ]
