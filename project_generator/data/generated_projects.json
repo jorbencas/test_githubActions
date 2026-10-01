@@ -4247,6 +4247,311 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "6425acc28d0c23c7"
       }
+    },
+    {
+      "proyecto": {
+        "id": "d8e1f7a3b9c2d4e5",
+        "titulo": "Monitor de Costos Cloud con Alertas Inteligentes",
+        "descripcion_corta": "API que consume métricas de costos de servicios cloud, detecta anomalías y genera alertas personalizadas.",
+        "descripcion_detallada": "Este proyecto es una API RESTful que se integra con proveedores de cloud (AWS, GCP, Azure) para recolectar datos de costos. Utiliza un motor de reglas y un modelo de IA básico para detectar picos anómalos o tendencias inesperadas. Las alertas se envían a través de webhooks o notificaciones (ej. Slack, email). Permite definir presupuestos y umbrales de alerta personalizados. Se enfoca en la observabilidad de gastos para optimizar la infraestructura.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "datos",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno de alto rendimiento para construir APIs.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece tipado automático, validación de datos con Pydantic, generación automática de documentación OpenAPI y excelente rendimiento asíncrono."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Boto3",
+              "categoria": "libreria",
+              "descripcion": "SDK de AWS para Python.",
+              "version_sugerida": "1.28.0",
+              "url_docs": "https://boto3.amazonaws.com/v1/documentation/api/latest/index.html",
+              "por_que": "Permite interactuar programáticamente con los servicios de AWS para obtener métricas de costos."
+            },
+            {
+              "nombre": "google-cloud-billing",
+              "categoria": "libreria",
+              "descripcion": "Cliente de facturación de Google Cloud para Python.",
+              "version_sugerida": "1.13.0",
+              "url_docs": "https://cloud.google.com/python/docs/reference/billing/latest",
+              "por_que": "Accede a los datos de costos y uso de la plataforma Google Cloud."
+            },
+            {
+              "nombre": "azure-identity",
+              "categoria": "libreria",
+              "descripcion": "Manejo de autenticación para servicios Azure.",
+              "version_sugerida": "1.10.0",
+              "url_docs": "https://learn.microsoft.com/en-us/python/api/azure-identity/?view=azure-python-sdk",
+              "por_que": "Facilita la autenticación segura con la API de Azure para recuperar información de costos."
+            },
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca para análisis y manipulación de datos.",
+              "version_sugerida": "2.0.3",
+              "url_docs": "https://pandas.pydata.org/docs/",
+              "por_que": "Eficaz para procesar y analizar las series temporales de datos de costos."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto.",
+              "version_sugerida": "15.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Almacena de forma persistente los datos de costos históricos, configuraciones de alertas y metadatos de usuarios, con soporte para JSONB si fuera necesario."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de contenedores para desarrollo, envío y ejecución de aplicaciones.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, facilitando la gestión de dependencias y la portabilidad."
+            },
+            {
+              "nombre": "Celery",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de colas de tareas distribuido.",
+              "version_sugerida": "5.3.1",
+              "url_docs": "https://docs.celeryq.dev/en/stable/",
+              "por_que": "Gestiona la recolección de datos de costos y el envío de notificaciones de forma asíncrona y escalable."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/en/stable/",
+              "por_que": "Facilita la escritura de tests robustos y mantenibles, con un sistema de fixtures potente para la gestión de dependencias de prueba."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Conexión con múltiples proveedores cloud (AWS, GCP, Azure)",
+          "Recolección y almacenamiento de métricas de costos históricas",
+          "Detección de anomalías en el gasto (picos, tendencias)",
+          "Sistema de alertas configurables (webhooks, Slack, email)",
+          "Definición de presupuestos y umbrales de gasto",
+          "API RESTful para gestión y consulta de datos"
+        ],
+        "casos_uso": [
+          "Optimización de costos en infraestructura cloud",
+          "Prevención de sobrecostos inesperados",
+          "Monitoreo del presupuesto de TI en tiempo real",
+          "Auditoría de gastos cloud",
+          "Integración con sistemas de ticketing para gestión de incidentes de costos"
+        ],
+        "reglas_negocio": [
+          "El gasto diario excede el 150% del promedio semanal.",
+          "El gasto de un servicio específico aumenta más del 50% en 24 horas.",
+          "El gasto acumulado del mes supera el 80% del presupuesto definido.",
+          "Se detecta un patrón de gasto inusual no recurrente.",
+          "Las alertas solo se disparan si la anomalía persiste por más de 1 hora."
+        ],
+        "por_que_ia": "La detección de anomalías utiliza un enfoque estadístico simple y un modelo de regresión lineal para identificar desviaciones significativas del gasto esperado, permitiendo la detección proactiva de sobrecostos.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "APIs de facturación de AWS, GCP, Azure",
+          "APIs de notificación (Slack, SendGrid)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de APIs RESTful",
+          "Experiencia con SDKs de proveedores cloud",
+          "Comprensión de conceptos de facturación cloud",
+          "Familiaridad con bases de datos relacionales"
+        ],
+        "riesgos": [
+          "Cambios frecuentes en las APIs de los proveedores cloud.",
+          "Complejidad en la normalización de datos entre diferentes proveedores.",
+          "Gestión de credenciales seguras para acceso a las cuentas cloud.",
+          "Escalabilidad de la recolección de datos para grandes cuentas.",
+          "Falsos positivos/negativos en la detección de anomalías."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "d8e1f7a3b9c2d4e5"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "70e8778a86bd9b5d"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "e5f6a7b8c9d0e1f2",
+        "titulo": "Sistema de Gestión de Reservas de Salas Colaborativas",
+        "descripcion_corta": "Aplicación web Fullstack para reservar salas de reuniones y recursos compartidos.",
+        "descripcion_detallada": "Este proyecto es una aplicación web Fullstack que permite a los usuarios ver la disponibilidad de salas de reuniones, reservar franjas horarias, y gestionar recursos asociados (proyectores, pizarras). Incluye autenticación de usuarios, notificaciones de confirmación/cancelación, y un panel de administración para gestionar salas, usuarios y políticas de reserva. Se busca optimizar el uso de espacios de oficina y facilitar la colaboración.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "fullstack",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de Node.js para construir aplicaciones del lado del servidor eficientes y escalables.",
+              "version_sugerida": "10.1.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Proporciona una arquitectura modular y organizada (inspirada en Angular), con soporte para TypeScript, inyección de dependencias y patrones de diseño robustos."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Biblioteca de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/learn",
+              "por_que": "Permite crear componentes de UI reutilizables y gestionar el estado de la aplicación de manera eficiente para una experiencia de usuario fluida."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "TypeORM",
+              "categoria": "libreria",
+              "descripcion": "ORM para TypeScript y JavaScript.",
+              "version_sugerida": "0.2.45",
+              "url_docs": "https://typeorm.io/",
+              "por_que": "Facilita la interacción con la base de datos mediante el mapeo objeto-relacional, mejorando la productividad y la seguridad del código."
+            },
+            {
+              "nombre": "Zod",
+              "categoria": "libreria",
+              "descripcion": "Validación de esquemas para TypeScript.",
+              "version_sugerida": "3.22.4",
+              "url_docs": "https://zod.dev/",
+              "por_que": "Proporciona validación robusta de datos tanto en el backend (NestJS) como en el frontend (React) para asegurar la integridad de la información."
+            },
+            {
+              "nombre": "Axios",
+              "categoria": "libreria",
+              "descripcion": "Cliente HTTP basado en promesas para navegador y Node.js.",
+              "version_sugerida": "1.5.0",
+              "url_docs": "https://axios-http.com/docs/intro",
+              "por_que": "Simplifica la comunicación entre el frontend React y la API backend de NestJS."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto.",
+              "version_sugerida": "15.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto y escalable para almacenar información de usuarios, salas, reservas y auditoría, con buen soporte para transacciones."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de contenedores para desarrollo, envío y ejecución de aplicaciones.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Permite empaquetar la aplicación (backend, frontend, base de datos) para un despliegue consistente y simplificado."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/docs/getting-started",
+              "por_que": "Ampliamente utilizado en el ecosistema Node.js/React para testing unitario, de integración y end-to-end."
+            },
+            {
+              "nombre": "Supertest",
+              "categoria": "testing",
+              "descripcion": "Utilidad para testing de APIs HTTP.",
+              "version_sugerida": "6.3.3",
+              "url_docs": "https://github.com/visionmedia/supertest",
+              "por_que": "Facilita la escritura de tests de integración para la API de NestJS."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Visualización de calendario de disponibilidad de salas",
+          "Creación y gestión de reservas de salas",
+          "Autenticación y autorización de usuarios (ej. OAuth2)",
+          "Notificaciones por email para confirmaciones y recordatorios",
+          "Panel de administración para configurar salas y políticas",
+          "Búsqueda avanzada de salas por capacidad o equipamiento"
+        ],
+        "casos_uso": [
+          "Reservar una sala para una reunión de equipo.",
+          "Verificar la disponibilidad de salas en un día específico.",
+          "Gestionar el inventario de salas y recursos de oficina.",
+          "Evitar conflictos de reserva.",
+          "Facilitar la planificación de eventos corporativos."
+        ],
+        "reglas_negocio": [
+          "Las reservas no pueden solaparse en el tiempo para la misma sala.",
+          "Los usuarios solo pueden cancelar sus propias reservas.",
+          "Se requiere autenticación para realizar reservas.",
+          "Las salas tienen capacidades máximas de asistentes.",
+          "Las políticas de reserva (duración máxima, antelación) son configurables por el administrador."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Servicio de envío de emails (ej. SendGrid, Nodemailer con SMTP)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos de TypeScript",
+          "Experiencia con frameworks frontend (React) y backend (Node.js/NestJS)",
+          "Comprensión de bases de datos relacionales y ORMs",
+          "Familiaridad con conceptos de autenticación web (JWT, OAuth)"
+        ],
+        "riesgos": [
+          "Gestión de concurrencia en las reservas (race conditions).",
+          "Complejidad en la lógica de validación de políticas de reserva.",
+          "Experiencia de usuario deficiente si el calendario no es intuitivo.",
+          "Seguridad en la gestión de credenciales de usuario.",
+          "Escalabilidad de la base de datos bajo alta carga de reservas."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "e5f6a7b8c9d0e1f2"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "70e8778a86bd9b5d"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -4282,8 +4587,10 @@
     "b9c8d7e6f5a4b3c2",
     "3a4b5c6d7e8f9a0b",
     "f1e2d3c4b5a6f7e8",
-    "a7b8c9d0e1f2a3b4"
+    "a7b8c9d0e1f2a3b4",
+    "d8e1f7a3b9c2d4e5",
+    "e5f6a7b8c9d0e1f2"
   ],
-  "total_generados": 33,
-  "fecha_ultima_generacion": "2026-10-01T17:56:00.692246"
+  "total_generados": 35,
+  "fecha_ultima_generacion": "2026-10-01T23:39:42.640276"
 }
