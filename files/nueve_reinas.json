@@ -1789,5 +1789,53 @@
     "relevancia": 5,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "José Coronado arrasa en Netflix con una de las mejores series españolas: tiene 12 capítulos y es ideal para maratonear",
+    "url": "https://www.lagaceta.com.ar/nota/1156274/espectaculos/jose-coronado-arrasa-netflix-mejores-series-espanolas-tiene-12-capitulos-ideal-para-maratonear.html",
+    "fecha_pub": "Thu, 01 Oct 2026 05:27:00 GMT",
+    "fecha_ts": "2026-10-01T12:59:25.741261",
+    "medio": "LA GACETA",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 6,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix y Filmin sellan una alianza histórica: así lo vas a notar con tu suscripción desde hoy mismo",
+    "url": "https://www.cinemania.es/cinemania/noticias/netflix-filmin-alianza-catalogo-suscripcion_7043646_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-01T12:59:41.679106",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Giro radical de David Fincher a su carrera: abandona Netflix después de 13 años trabajando para la plataforma",
+    "url": "https://www.cinemania.es/cinemania/noticias/david-fincher-abandona-netflix-13-anos-trabajando-plataforma_7043127_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-01T12:59:41.679328",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "'Orgullo y prejuicio': la miniserie de Netflix confirma la fecha de estreno de esta nueva adaptación de Jane Austen",
+    "url": "https://www.cinemania.es/cinemania/series/orgullo-prejuicio-miniserie-netflix-streaming-fecha-estreno_7039291_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-01T12:59:41.679353",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
