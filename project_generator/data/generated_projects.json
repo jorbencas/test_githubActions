@@ -4552,6 +4552,401 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "70e8778a86bd9b5d"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4e5f6a7b8",
+        "titulo": "AI-Powered Code Review Assistant",
+        "descripcion_corta": "Asistente de revisión de código que usa IA para sugerir mejoras y detectar posibles bugs.",
+        "descripcion_detallada": "Este proyecto es un asistente de revisión de código que se integra con repositorios Git. Utiliza modelos de lenguaje grandes (LLMs) para analizar el código, identificar patrones de errores comunes, sugerir optimizaciones de rendimiento, verificar el cumplimiento de estándares de codificación y generar documentación básica. El objetivo es acelerar el proceso de revisión de código y mejorar la calidad general del mismo. El sistema permitirá a los desarrolladores enviar fragmentos de código o commits completos para su análisis, recibiendo retroalimentación detallada y accionable.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web de alto rendimiento para construir APIs con Python 3.7+ basado en tipado estándar de Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Permite la creación rápida de APIs robustas con validación de datos automática y documentación interactiva (Swagger UI)."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por modelos de lenguaje.",
+              "version_sugerida": "0.1.0",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Facilita la integración con LLMs, la gestión de prompts y la orquestación de cadenas de procesamiento de texto para el análisis de código."
+            },
+            {
+              "nombre": "GitPython",
+              "categoria": "libreria",
+              "descripcion": "Módulo para interactuar con repositorios Git.",
+              "version_sugerida": "0.3.43",
+              "url_docs": "https://gitpython.readthedocs.io/",
+              "por_que": "Necesario para clonar repositorios, leer historial y obtener el código fuente a analizar."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, facilitando la gestión de dependencias."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "GPT-4",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo de lenguaje grande de OpenAI.",
+              "version_sugerida": null,
+              "url_docs": "https://openai.com/gpt-4",
+              "por_que": "Capacidad avanzada para entender y generar código, identificar patrones complejos y ofrecer explicaciones detalladas."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests claros y mantenibles, con soporte para fixtures y generación de informes de cobertura."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis de código fuente para detectar bugs y vulnerabilidades.",
+          "Sugerencias de optimización de rendimiento y estilo de código.",
+          "Generación automática de documentación básica.",
+          "Integración con repositorios Git (clonación y checkout).",
+          "Interfaz web para interactuar con el asistente.",
+          "API REST para integración programática."
+        ],
+        "casos_uso": [
+          "Revisión de Pull Requests.",
+          "Análisis de código heredado para refactorización.",
+          "Ayuda a desarrolladores junior a mejorar su código.",
+          "Verificación de cumplimiento de estándares de codificación.",
+          "Generación rápida de documentación para funciones/clases."
+        ],
+        "reglas_negocio": [
+          "El análisis se limita a los lenguajes configurados.",
+          "La profundidad del análisis puede ser configurada por el usuario.",
+          "Se respetan las credenciales de acceso al repositorio Git.",
+          "Los resultados del análisis se presentan de forma clara y priorizada.",
+          "Se registran las interacciones y los resultados para auditoría."
+        ],
+        "por_que_ia": "Se utiliza IA (LLM) para la comprensión profunda del código fuente, la identificación de patrones complejos y la generación de sugerencias contextualizadas que van más allá de un análisis estático tradicional.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de OpenAI",
+          "Repositorios Git (GitHub, GitLab, Bitbucket)"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos sólidos de Python y desarrollo web.",
+          "Experiencia con APIs REST y control de versiones (Git).",
+          "Comprensión de modelos de lenguaje y sus capacidades.",
+          "Acceso a una clave API de OpenAI."
+        ],
+        "riesgos": [
+          "Costos asociados al uso de la API de OpenAI.",
+          "Posibles falsos positivos o negativos en el análisis de código.",
+          "Latencia en la respuesta del análisis de código complejo.",
+          "Seguridad de las credenciales de acceso a repositorios.",
+          "Dificultad para cubrir todos los lenguajes de programación y frameworks."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "b1f2a3d4e5c6b7a8"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "89a39183244a4930"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c1d2e3f4a5b6c7d9",
+        "titulo": "Smart Inventory Management API",
+        "descripcion_corta": "API para gestión de inventario con predicción de demanda y alertas de stock.",
+        "descripcion_detallada": "Una API RESTful que permite gestionar el inventario de productos de manera eficiente. Incluye funcionalidades para agregar, actualizar, eliminar y consultar productos. La característica principal es la predicción de la demanda futura basada en datos históricos de ventas y patrones estacionales, utilizando modelos de series temporales. Además, genera alertas automáticas cuando el stock de un producto está bajo o en riesgo de agotarse, y sugiere cuándo y cuánto reordenar. Ideal para pequeñas y medianas empresas que buscan optimizar su gestión de stock.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Flask",
+              "categoria": "framework",
+              "descripcion": "Microframework web para Python.",
+              "version_sugerida": "2.3.0",
+              "url_docs": "https://flask.palletsprojects.com/",
+              "por_que": "Ligero y flexible, ideal para construir APIs RESTful eficientes y escalables."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca para manipulación y análisis de datos.",
+              "version_sugerida": "2.1.0",
+              "url_docs": "https://pandas.pydata.org/",
+              "por_que": "Esencial para la carga, limpieza y preprocesamiento de los datos históricos de ventas y stock."
+            },
+            {
+              "nombre": "Statsmodels",
+              "categoria": "libreria",
+              "descripcion": "Módulo para la estimación de modelos estadísticos.",
+              "version_sugerida": "0.14.0",
+              "url_docs": "https://www.statsmodels.org/",
+              "por_que": "Proporciona implementaciones de modelos de series temporales (como ARIMA) para la predicción de demanda."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "bases_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto.",
+              "version_sugerida": "15.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto, confiable y con buen soporte para tipos de datos complejos, ideal para almacenar información de productos y transacciones."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la API y sus dependencias, facilitando el despliegue y la gestión en diferentes entornos."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "ARIMA/SARIMA",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de predicción de series temporales.",
+              "version_sugerida": null,
+              "url_docs": "https://www.statsmodels.org/stable/tsa.html",
+              "por_que": "Adecuados para predecir la demanda futura basándose en patrones históricos y estacionalidad de los datos de ventas."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Esencial para asegurar la fiabilidad de la API, probando endpoints, lógica de negocio y predicciones."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Gestión CRUD de productos y niveles de stock.",
+          "API REST para acceso a datos de inventario.",
+          "Predicción de demanda de productos (series temporales).",
+          "Alertas personalizables de bajo stock.",
+          "Sugerencias de reordenamiento de inventario.",
+          "Panel de control básico (interfaz web simple)."
+        ],
+        "casos_uso": [
+          "Optimizar niveles de stock para reducir costos de almacenamiento y evitar roturas.",
+          "Automatizar el proceso de alerta y sugerencia de reordenamiento.",
+          "Predecir la demanda futura para una mejor planificación.",
+          "Centralizar la gestión de inventario para múltiples puntos de venta.",
+          "Integrar la gestión de inventario con sistemas de ventas (POS)."
+        ],
+        "reglas_negocio": [
+          "El umbral de alerta de stock es configurable por producto o globalmente.",
+          "La frecuencia de reentrenamiento del modelo de predicción es configurable.",
+          "Se registra cada transacción de entrada/salida de stock.",
+          "Los niveles de stock no pueden ser negativos.",
+          "Se requiere autenticación para acceder a la API."
+        ],
+        "por_que_ia": "Se utiliza IA (modelos de series temporales como ARIMA) para predecir la demanda futura de productos, permitiendo una gestión proactiva del inventario y la optimización de los niveles de stock.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Documentación de Statsmodels",
+          "Estándares de APIs REST"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo de APIs REST.",
+          "Comprensión de bases de datos relacionales (SQL).",
+          "Fundamentos de estadística y series temporales.",
+          "Experiencia con librerías de análisis de datos (Pandas)."
+        ],
+        "riesgos": [
+          "La precisión de la predicción de demanda puede variar significativamente.",
+          "Se requiere un volumen de datos históricos suficiente para un buen entrenamiento.",
+          "Gestión de la concurrencia en las actualizaciones de stock.",
+          "Escalabilidad de la base de datos con grandes volúmenes de transacciones.",
+          "Mantenimiento y reentrenamiento periódico de los modelos de IA."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:05:00Z",
+        "hash_unicidad": "d9e8f7a6b5c4d3e2"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "89a39183244a4930"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "e8a7f6d5c4b3a201",
+        "titulo": "Real-time Collaborative Whiteboard",
+        "descripcion_corta": "Pizarra virtual colaborativa en tiempo real con chat integrado.",
+        "descripcion_detallada": "Una aplicación web fullstack que permite a múltiples usuarios colaborar en una pizarra virtual en tiempo real. Los usuarios pueden dibujar, escribir texto, insertar imágenes y formas. Los cambios se reflejan instantáneamente para todos los participantes conectados a la misma sesión. Incluye un chat integrado para la comunicación entre colaboradores. Utiliza WebSockets para la comunicación en tiempo real y ofrece funcionalidades básicas de guardado y carga de pizarras.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "web",
+          "fullstack"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "javascript",
+          "frameworks": [
+            {
+              "nombre": "Node.js",
+              "categoria": "framework",
+              "descripcion": "Entorno de ejecución de JavaScript del lado del servidor.",
+              "version_sugerida": "18.0.0",
+              "url_docs": "https://nodejs.org/en/docs/",
+              "por_que": "Permite construir la API backend y manejar la lógica de los WebSockets de forma eficiente."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Biblioteca de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Facilita la creación de componentes de UI interactivos y la gestión del estado de la pizarra."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Socket.IO",
+              "categoria": "libreria",
+              "descripcion": "Librería para comunicación en tiempo real bidireccional y basada en eventos.",
+              "version_sugerida": "4.7.0",
+              "url_docs": "https://socket.io/docs/v4/",
+              "por_que": "Esencial para sincronizar los dibujos y mensajes del chat entre todos los clientes conectados en tiempo real."
+            },
+            {
+              "nombre": "Konva.js",
+              "categoria": "libreria",
+              "descripcion": "Librería de canvas 2D para aplicaciones de escritorio y móviles.",
+              "version_sugerida": "9.2.0",
+              "url_docs": "https://konvajs.org/",
+              "por_que": "Simplifica el dibujo de formas, texto e imágenes en el elemento canvas del navegador y la gestión de eventos de dibujo."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "MongoDB",
+              "categoria": "bases_datos",
+              "descripcion": "Base de datos NoSQL orientada a documentos.",
+              "version_sugerida": "7.0",
+              "url_docs": "https://www.mongodb.com/docs/",
+              "por_que": "Almacenamiento flexible de las sesiones de pizarra y los mensajes del chat, ideal para datos semiestructurados."
+            }
+          ],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript.",
+              "version_sugerida": "29.0.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Permite escribir tests unitarios y de integración para la lógica del frontend y el backend."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Dibujo en tiempo real (líneas, formas, texto).",
+          "Sincronización de cambios entre múltiples usuarios.",
+          "Chat integrado para comunicación.",
+          "Creación y gestión de sesiones de pizarra.",
+          "Guardado y carga de pizarras.",
+          "Soporte para insertar imágenes."
+        ],
+        "casos_uso": [
+          "Brainstorming en equipo remoto.",
+          "Clases o tutoriales interactivos.",
+          "Diseño colaborativo de prototipos.",
+          "Reuniones virtuales donde se necesita visualizar ideas.",
+          "Toma de notas compartida."
+        ],
+        "reglas_negocio": [
+          "Cada pizarra tiene un identificador único.",
+          "Los usuarios se unen a una sesión mediante un enlace o código.",
+          "Los cambios se guardan automáticamente cada cierto intervalo.",
+          "El historial de chat se conserva mientras la sesión está activa.",
+          "Se implementa un sistema básico de permisos (creador vs editor)."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Documentación de Socket.IO",
+          "Documentación de React",
+          "MDN Web Docs"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos básicos de HTML, CSS y JavaScript.",
+          "Familiaridad con React y Node.js.",
+          "Entendimiento de conceptos de WebSockets.",
+          "Experiencia con bases de datos NoSQL (MongoDB)."
+        ],
+        "riesgos": [
+          "Manejo de la concurrencia y resolución de conflictos en dibujos.",
+          "Escalabilidad de los WebSockets con un gran número de usuarios concurrentes.",
+          "Latencia en la sincronización de dibujos en redes lentas.",
+          "Persistencia de datos y recuperación de sesiones.",
+          "Complejidad en la gestión del estado en el frontend."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:10:00Z",
+        "hash_unicidad": "e8a7f6d5c4b3a202"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "89a39183244a4930"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -4589,8 +4984,11 @@
     "f1e2d3c4b5a6f7e8",
     "a7b8c9d0e1f2a3b4",
     "d8e1f7a3b9c2d4e5",
-    "e5f6a7b8c9d0e1f2"
+    "e5f6a7b8c9d0e1f2",
+    "b1f2a3d4e5c6b7a8",
+    "d9e8f7a6b5c4d3e2",
+    "e8a7f6d5c4b3a202"
   ],
-  "total_generados": 35,
-  "fecha_ultima_generacion": "2026-10-01T23:39:42.640276"
+  "total_generados": 38,
+  "fecha_ultima_generacion": "2026-10-02T03:49:17.456356"
 }
