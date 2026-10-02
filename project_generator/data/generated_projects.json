@@ -5087,6 +5087,427 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "b422a76b279de026"
       }
+    },
+    {
+      "proyecto": {
+        "id": "d5c8a1b0e9f7c3d4",
+        "titulo": "Asistente de Documentación Técnica IA",
+        "descripcion_corta": "Herramienta web para generar y refinar documentación técnica de código usando IA.",
+        "descripcion_detallada": "Una aplicación web fullstack que permite a los desarrolladores pegar fragmentos de código o URLs de repositorios y utilizar un modelo de IA para generar documentación técnica (como READMEs, comentarios de código, o explicaciones de funciones). Permite refinar la documentación generada mediante prompts interactivos. Ideal para mejorar la calidad y consistencia de la documentación en proyectos de software.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web rápido para construir APIs con Python 3.7+, basado en tipado estándar de Python y Pydantic.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Excelente rendimiento asíncrono, validación de datos automática con Pydantic y generación interactiva de documentación OpenAPI."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario interactivas y declarativas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear componentes de UI reutilizables y gestionar el estado de la aplicación de forma eficiente para una experiencia de usuario fluida."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en anotaciones de tipo de Python.",
+              "version_sugerida": "2.5.0",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Fundamental para FastAPI para la validación de datos de entrada/salida y la serialización/deserialización de modelos de datos."
+            },
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por modelos de lenguaje.",
+              "version_sugerida": "0.1.0",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Facilita la orquestación de llamadas a modelos de lenguaje, manejo de prompts, y la integración con otras herramientas para construir flujos de IA complejos."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la aplicación y sus dependencias para un despliegue consistente y aislado en diferentes entornos."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API",
+              "categoria": "ia_ml",
+              "descripcion": "Interfaz de programación de aplicaciones para acceder a modelos de lenguaje avanzados.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://platform.openai.com/docs/api-reference",
+              "por_que": "Proporciona acceso a potentes modelos de lenguaje (como GPT-4) para la generación y refinamiento de texto de alta calidad."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests claros y concisos, con un sistema robusto de fixtures y plugins para mejorar la cobertura."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Generación automática de READMEs a partir de código.",
+          "Generación de comentarios de código para funciones/clases.",
+          "Refinamiento interactivo de documentación existente.",
+          "Soporte para múltiples lenguajes de programación (inicialmente Python, JS).",
+          "Interfaz web intuitiva para subir código o pegar texto."
+        ],
+        "casos_uso": [
+          "Acelerar la creación de documentación para nuevos proyectos.",
+          "Mejorar la documentación de código legado.",
+          "Mantener la consistencia en la documentación de equipos grandes.",
+          "Ayudar a desarrolladores junior a escribir mejor documentación.",
+          "Generar explicaciones de código complejas para no técnicos."
+        ],
+        "reglas_negocio": [
+          "La documentación generada debe ser clara y concisa.",
+          "El usuario debe poder especificar el nivel de detalle deseado.",
+          "Se debe gestionar el uso de la API de IA para controlar costos.",
+          "Proteger la privacidad del código subido por los usuarios.",
+          "La interfaz debe ser responsive y accesible."
+        ],
+        "por_que_ia": "Se utiliza IA (LLMs) para la generación de texto natural y coherente, capaz de entender el contexto del código y producir explicaciones técnicas detalladas, superando las limitaciones de las herramientas de generación de documentación estáticas.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "OpenAI API Documentation",
+          "FastAPI Documentation",
+          "React Documentation"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo web backend (API REST).",
+          "Conocimientos básicos de JavaScript y frontend (React).",
+          "Entender los conceptos de LLMs y prompts.",
+          "Configuración de entorno de desarrollo con Docker."
+        ],
+        "riesgos": [
+          "Dependencia de la API de OpenAI y sus costos.",
+          "Calidad variable de la documentación generada por la IA.",
+          "Posibles problemas de seguridad al procesar código de usuario.",
+          "Complejidad en la gestión del estado de la interfaz React.",
+          "Dificultad para manejar lenguajes de programación muy diversos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "d5c8a1b0e9f7c3d4"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "dba98d9fe469d50d"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f1e0d9c7b5a3f1e0",
+        "titulo": "Sistema de Gestión de Incidentes con Enrutamiento Inteligente",
+        "descripcion_corta": "API para gestionar incidentes y enrutarlos automáticamente al equipo correcto usando IA.",
+        "descripcion_detallada": "Una API RESTful que centraliza la recepción y gestión de incidentes (ej. de monitorización, de soporte). Utiliza IA para clasificar la severidad y el tipo de incidente, y para determinar el equipo o persona más adecuada para resolverlo basándose en datos históricos y disponibilidad. Permite el seguimiento del estado del incidente y notificaciones.",
+        "nivel": "senior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin Web Framework",
+              "categoria": "framework",
+              "descripcion": "Framework web HTTP de alto rendimiento para Go.",
+              "version_sugerida": "1.9.1",
+              "url_docs": "https://gin-gonic.com/",
+              "por_que": "Proporciona un router robusto y middleware para construir APIs RESTful eficientes y escalables con Go."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "GORM",
+              "categoria": "libreria",
+              "descripcion": "ORM completo para Go.",
+              "version_sugerida": "1.25.4",
+              "url_docs": "https://gorm.io/",
+              "por_que": "Simplifica la interacción con la base de datos relacional, permitiendo definir modelos de datos y realizar operaciones CRUD de manera eficiente."
+            },
+            {
+              "nombre": "Go Embeddings",
+              "categoria": "libreria",
+              "descripcion": "Librerías para generar y usar embeddings de texto en Go.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://pkg.go.dev/embed",
+              "por_que": "Necesario para preprocesar descripciones de incidentes y permitir la comparación semántica para la clasificación y enrutamiento."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "bases_datos",
+              "descripcion": "Sistema de gestión de bases de datos objeto-relacional.",
+              "version_sugerida": "15.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Soporte robusto para transacciones, tipos de datos avanzados (JSONB), y escalabilidad necesaria para almacenar datos de incidentes y metadatos de enrutamiento."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad y el aislamiento de la aplicación y sus dependencias durante el desarrollo y despliegue."
+            },
+            {
+              "nombre": "MinIO",
+              "categoria": "infraestructura",
+              "descripcion": "Almacenamiento de objetos compatible con S3.",
+              "version_sugerida": "2023-09-25T20-11-53Z",
+              "url_docs": "https://min.io/",
+              "por_que": "Almacenamiento escalable y económico para logs de incidentes o datos adjuntos, accesible vía API S3."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Modelo de Embeddings Local (ej. Sentence-BERT)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos pre-entrenados para generar representaciones vectoriales de texto.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://www.sbert.net/",
+              "por_que": "Permite clasificar y agrupar incidentes por similitud semántica sin depender de APIs externas, controlando la privacidad de los datos."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Paquete estándar de Go para escribir pruebas unitarias y de benchmark.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Integrado en el lenguaje, permite escribir tests básicos y avanzados de forma nativa."
+            },
+            {
+              "nombre": "Testify",
+              "categoria": "testing",
+              "descripcion": "Conjunto de 'helper' de testing para Go.",
+              "version_sugerida": "1.8.4",
+              "url_docs": "https://pkg.go.dev/github.com/stretchr/testify",
+              "por_que": "Proporciona aserciones más expresivas y útiles para escribir tests más legibles y mantenibles."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Recepción de incidentes vía API REST.",
+          "Clasificación automática de incidentes (severidad, tipo).",
+          "Enrutamiento inteligente a equipos/personas basado en IA.",
+          "Seguimiento del ciclo de vida del incidente (abierto, en progreso, cerrado).",
+          "Notificaciones personalizables (ej. email, Slack)."
+        ],
+        "casos_uso": [
+          "Gestión centralizada de alertas de sistemas de monitorización.",
+          "Canal único para reportes de errores de usuarios.",
+          "Automatización del triage inicial de incidentes de seguridad.",
+          "Optimización del tiempo de respuesta a incidentes críticos.",
+          "Reducción de la carga manual en equipos de operaciones y soporte."
+        ],
+        "reglas_negocio": [
+          "Cada incidente debe tener un ID único.",
+          "El sistema debe registrar todas las transiciones de estado de un incidente.",
+          "El enrutamiento debe priorizar la disponibilidad del equipo asignado.",
+          "Los datos históricos de resolución deben usarse para mejorar el enrutamiento.",
+          "Se debe mantener un log de auditoría de las acciones realizadas sobre los incidentes."
+        ],
+        "por_que_ia": "Se utiliza IA (modelos de embeddings) para entender la semántica de las descripciones de los incidentes, permitiendo una clasificación y enrutamiento más precisos y adaptativos que las reglas manuales, aprendiendo de la resolución de incidentes pasados.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "Go Documentation",
+          "Gin Framework Docs",
+          "PostgreSQL Docs",
+          "Sentence-BERT Models"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia sólida con Go y desarrollo de APIs REST.",
+          "Conocimientos de bases de datos relacionales (SQL, PostgreSQL).",
+          "Comprensión de Machine Learning, específicamente embeddings de texto.",
+          "Experiencia con Docker y herramientas de orquestación básica.",
+          "Conceptos de diseño de sistemas distribuidos y APIs."
+        ],
+        "riesgos": [
+          "La precisión del enrutamiento IA puede ser insuficiente inicialmente.",
+          "Requiere un volumen significativo de datos históricos para ser efectivo.",
+          "Complejidad en el mantenimiento y actualización de los modelos de IA.",
+          "Integración con múltiples sistemas de notificación puede ser tediosa.",
+          "Escalabilidad de la base de datos y del servicio de IA bajo alta carga."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:01:00Z",
+        "hash_unicidad": "f1e0d9c7b5a3f1e0"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "dba98d9fe469d50d"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "a0b1c2d3e4f5a0b1",
+        "titulo": "Optimizador de Rutas de Entrega para Flotas Pequeñas",
+        "descripcion_corta": "Aplicación web para calcular rutas de entrega eficientes para múltiples destinos.",
+        "descripcion_detallada": "Una aplicación web que permite a los usuarios ingresar una lista de direcciones de entrega y la ubicación de partida. Utiliza un algoritmo de optimización (como el del problema del viajante) y datos de tráfico en tiempo real (si es posible) para calcular la ruta más eficiente, minimizando tiempo y distancia. Diseñada para pequeñas empresas de logística o reparto.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "web",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "javascript",
+          "frameworks": [
+            {
+              "nombre": "Vue.js",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "3.3.4",
+              "url_docs": "https://vuejs.org/guide/introduction.html",
+              "por_que": "Facilidad de aprendizaje y uso, ideal para un frontend interactivo y para desarrolladores junior."
+            },
+            {
+              "nombre": "Express.js",
+              "categoria": "framework",
+              "descripcion": "Framework de aplicación web minimalista y flexible para Node.js.",
+              "version_sugerida": "4.18.2",
+              "url_docs": "https://expressjs.com/",
+              "por_que": "Proporciona una base sólida para construir la API RESTful necesaria para manejar las solicitudes del frontend y la lógica de optimización."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Axios",
+              "categoria": "libreria",
+              "descripcion": "Cliente HTTP basado en promesas para el navegador y Node.js.",
+              "version_sugerida": "1.5.0",
+              "url_docs": "https://axios-http.com/",
+              "por_que": "Simplifica la realización de peticiones HTTP desde el frontend Vue.js a la API de Express.js."
+            },
+            {
+              "nombre": "Google Maps API (Directions/Distance Matrix)",
+              "categoria": "libreria",
+              "descripcion": "APIs para obtener datos de rutas, distancias y tiempos estimados de viaje.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://developers.google.com/maps",
+              "por_que": "Proporciona datos geográficos y de enrutamiento esenciales para calcular la eficiencia de las rutas."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Vitest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing moderno y rápido para proyectos JavaScript/TypeScript.",
+              "version_sugerida": "1.0.0",
+              "url_docs": "https://vitest.dev/",
+              "por_que": "Se integra bien con el ecosistema Vite/Vue y ofrece una experiencia de testing rápida y eficiente."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Vite",
+              "categoria": "otros",
+              "descripcion": "Herramienta de build next-generation para frontend.",
+              "version_sugerida": "4.4.9",
+              "url_docs": "https://vitejs.dev/",
+              "por_que": "Proporciona un servidor de desarrollo extremadamente rápido y optimiza el build para la aplicación Vue.js."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Entrada de múltiples direcciones de entrega.",
+          "Cálculo de la ruta óptima usando algoritmo TSP.",
+          "Visualización de la ruta en un mapa interactivo.",
+          "Estimación de tiempo y distancia total del recorrido.",
+          "Posibilidad de añadir/eliminar paradas fácilmente."
+        ],
+        "casos_uso": [
+          "Repartidores de paquetería optimizando su jornada.",
+          "Servicios de catering planificando entregas múltiples.",
+          "Empresas de mantenimiento programando visitas técnicas.",
+          "Cualquier negocio con entregas a domicilio en varias ubicaciones.",
+          "Planificación de rutas personales para recados múltiples."
+        ],
+        "reglas_negocio": [
+          "El número de paradas está limitado por la API de Google Maps.",
+          "La ruta calculada es una sugerencia; el usuario puede modificarla.",
+          "Se debe informar al usuario si no se pueden obtener datos de ruta.",
+          "Las direcciones deben ser válidas y geocodificables.",
+          "La aplicación debe manejar errores de forma graciosa."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Google Maps Platform APIs Documentation",
+          "Vue.js Documentation",
+          "Express.js Documentation"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de JavaScript, HTML y CSS.",
+          "Comprensión de conceptos de APIs REST.",
+          "Familiaridad con un framework frontend (Vue.js recomendado).",
+          "Entender el Problema del Viajante (TSP) a nivel conceptual.",
+          "Creación de cuenta en Google Cloud Platform para usar las APIs de Maps."
+        ],
+        "riesgos": [
+          "La dependencia de Google Maps API puede generar costos.",
+          "La optimización TSP es computacionalmente costosa para muchas paradas.",
+          "La calidad de los datos de tráfico en tiempo real puede variar.",
+          "La interfaz de usuario puede volverse compleja con muchas opciones.",
+          "La geocodificación de direcciones puede fallar para entradas ambiguas."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:02:00Z",
+        "hash_unicidad": "a0b1c2d3e4f5a0b1"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "dba98d9fe469d50d"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -5128,8 +5549,11 @@
     "b1f2a3d4e5c6b7a8",
     "d9e8f7a6b5c4d3e2",
     "e8a7f6d5c4b3a202",
-    "c7d8e9f0a1b2c3d4"
+    "c7d8e9f0a1b2c3d4",
+    "d5c8a1b0e9f7c3d4",
+    "f1e0d9c7b5a3f1e0",
+    "a0b1c2d3e4f5a0b1"
   ],
-  "total_generados": 39,
-  "fecha_ultima_generacion": "2026-10-02T10:16:50.359469"
+  "total_generados": 42,
+  "fecha_ultima_generacion": "2026-10-02T17:21:16.576794"
 }
