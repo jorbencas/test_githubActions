@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 151,
+    "total_concepts": 152,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-10-02T06:35:29.400670"
+    "last_scraped": "2026-10-02T13:30:38.563331"
   },
   "concepts": [
     {
@@ -2814,6 +2814,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-09-30T16:38:45.263558"
+    },
+    {
+      "title": "Sistema de archivos en la Nube diferente y adecuado para empresas",
+      "summary": "La gestión de documentos digitales se ha convertido en una tarea habitual para cualquier empresa. Guardar archivos, compartirlos entre empleados, controlar quién puede acceder a cada carpeta y mantene",
+      "explanation": "La gestión de documentos digitales se ha convertido en una tarea habitual para cualquier empresa. Guardar archivos, compartirlos entre empleados, controlar quién puede acceder a cada carpeta y mantener la información protegida son necesidades habituales. En este ámbito apareceCloud para empresasDataprius, una solución desarrollada específicamente para el entorno profesional que propone una forma de trabajar diferente a la de los discos virtuales tradicionales. Dataprius funciona como un sistema de archivos alojado en la nube en el que la empresa mantiene un repositorio centralizado de documentación. La principal diferencia respecto a servicios conocidos como Google Drive, Dropbox u OneDrive está en su funcionamiento:no necesita depender de un disco virtual ni de la sincronización permanente de carpetaspara acceder a los documentos. Los usuarios pueden trabajar directamente sobre los archivos almacenados en la plataforma.Una nube pensada desde el principio para las empresas Dataprius se presenta como una herramienta creada para organizaciones y equipos de trabajo. Su estructura se basa en un árbol de carpetas común, similar al que utilizan habitualmente las empresas en sus servidores internos. Los administradores pueden definir qué usuarios tienen acceso a cada área y qué documentación pueden consultar o modificar. Este planteamiento permite centralizar los archivos y evitar que toda la documentación tenga que estar repartida entre los discos duros de los distintos ordenadores",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-10-02T13:29:58.952100"
     }
   ]
 }
