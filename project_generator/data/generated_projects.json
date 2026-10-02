@@ -4947,6 +4947,146 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "89a39183244a4930"
       }
+    },
+    {
+      "proyecto": {
+        "id": "c7d8e9f0a1b2c3d4",
+        "titulo": "Asistente de Codificación Ética y Accesible",
+        "descripcion_corta": "Plugin para IDE que evalúa el código en busca de sesgos, accesibilidad y buenas prácticas éticas.",
+        "descripcion_detallada": "Un plugin para entornos de desarrollo integrados (IDE) como VS Code. Utiliza análisis estático de código y modelos de lenguaje (LLM) para identificar potenciales sesgos en nombres de variables, comentarios, o lógica del código. También verifica el cumplimiento de pautas de accesibilidad (WCAG) y sugiere alternativas más éticas y accesibles. Dirigido a promover el desarrollo de software responsable.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "devops",
+          "ia_ml",
+          "testing",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "VS Code Extension API",
+              "categoria": "framework",
+              "descripcion": "API para construir extensiones para Visual Studio Code.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://code.visualstudio.com/api",
+              "por_que": "Proporciona los medios para integrar el análisis directamente en el flujo de trabajo del desarrollador dentro del IDE."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "ESLint",
+              "categoria": "libreria",
+              "descripcion": "Analizador estático de código para identificar problemas en JavaScript y JSX.",
+              "version_sugerida": "8.50.0",
+              "url_docs": "https://eslint.org/",
+              "por_que": "Base para el análisis estático de código; se pueden añadir reglas personalizadas para ética y accesibilidad."
+            },
+            {
+              "nombre": "Axway Amplify CLI",
+              "categoria": "libreria",
+              "descripcion": "Herramientas para construir y desplegar aplicaciones.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://github.com/Axway/amplify-cli",
+              "por_que": "Contiene utilidades que pueden ser adaptadas para el análisis de código y la interacción con APIs de IA."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones dentro de contenedores.",
+              "version_sugerida": "24.0.6",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Para empaquetar el servicio de análisis de IA y facilitar su despliegue y actualización."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Claude 3 Opus",
+              "categoria": "modelo_ia",
+              "descripcion": "Modelo de lenguaje grande de Anthropic, enfocado en razonamiento complejo y seguridad.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://www.anthropic.com/index/claude-3",
+              "por_que": "Adecuado para analizar el contexto del código, identificar sesgos sutiles y evaluar el cumplimiento de directrices éticas y de accesibilidad complejas."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript centrado en simplicidad.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Permite probar las reglas de ESLint y la lógica de la extensión del IDE de manera efectiva."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "WCAG Guidelines",
+              "categoria": "otros",
+              "descripcion": "Pautas de Accesibilidad para el Contenido Web.",
+              "version_sugerida": "2.1",
+              "url_docs": "https://www.w3.org/WAI/standards-guidelines/wcag/",
+              "por_que": "Fuente principal para definir las reglas de verificación de accesibilidad del código."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Análisis estático de código en tiempo real dentro del IDE.",
+          "Identificación de lenguaje potencialmente sesgado o excluyente.",
+          "Verificación de cumplimiento básico de estándares de accesibilidad (WCAG).",
+          "Sugerencias de refactorización para mejorar ética y accesibilidad.",
+          "Integración con el sistema de linting y diagnóstico del IDE."
+        ],
+        "casos_uso": [
+          "Ayudar a los desarrolladores a escribir código más inclusivo y ético.",
+          "Reducir la introducción de sesgos inconscientes en el software.",
+          "Mejorar la accesibilidad de las aplicaciones web y móviles.",
+          "Educar a los desarrolladores sobre prácticas de codificación responsable.",
+          "Cumplir con normativas y estándares de accesibilidad."
+        ],
+        "reglas_negocio": [
+          "El análisis se realiza localmente o a través de una API segura para proteger la privacidad del código.",
+          "Las sugerencias de IA se presentan como recomendaciones, no como imposiciones.",
+          "La configuración de las reglas de análisis es personalizable por el usuario o equipo.",
+          "Se debe mantener actualizada la base de conocimientos sobre ética y accesibilidad.",
+          "El rendimiento del plugin no debe degradar significativamente la experiencia del IDE."
+        ],
+        "por_que_ia": "Los LLMs como Claude 3 Opus son necesarios para comprender el contexto y la sutileza del lenguaje utilizado en el código y los comentarios, identificando sesgos y violaciones de principios éticos/accesibilidad que el análisis estático tradicional no puede detectar.",
+        "cliente_ia_sugerido": "anthropic",
+        "recursos_externos": [
+          "API de Anthropic",
+          "Documentación WCAG",
+          "Reglas ESLint personalizadas"
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia avanzada en desarrollo frontend/backend con TypeScript.",
+          "Conocimiento de los principios de accesibilidad web (WCAG).",
+          "Comprensión de conceptos de ética en IA y desarrollo de software.",
+          "Experiencia en desarrollo de extensiones para IDE (VS Code).",
+          "Acceso a API de Anthropic."
+        ],
+        "riesgos": [
+          "Falsos positivos/negativos en la detección de sesgos y problemas de accesibilidad.",
+          "Interpretación subjetiva de lo que constituye 'código ético'.",
+          "Rendimiento del análisis en bases de código muy grandes.",
+          "Costos asociados al uso de la API de IA.",
+          "Mantener la extensión compatible con futuras versiones del IDE y las APIs de IA."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:02Z",
+        "hash_unicidad": "c7d8e9f0a1b2c3d4"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "b422a76b279de026"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -4987,8 +5127,9 @@
     "e5f6a7b8c9d0e1f2",
     "b1f2a3d4e5c6b7a8",
     "d9e8f7a6b5c4d3e2",
-    "e8a7f6d5c4b3a202"
+    "e8a7f6d5c4b3a202",
+    "c7d8e9f0a1b2c3d4"
   ],
-  "total_generados": 38,
-  "fecha_ultima_generacion": "2026-10-02T03:49:17.456356"
+  "total_generados": 39,
+  "fecha_ultima_generacion": "2026-10-02T10:16:50.359469"
 }
