@@ -1884,5 +1884,53 @@
     "tipo": "noticia",
     "relevancia": 3,
     "pelicula": "Nueve reinas"
+  },
+  {
+    "titulo": "Netflix y cines",
+    "url": "https://www.ecartelera.com/noticias/netflix-cambia-estrategia-cines-guerreras-kpop-84047/",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-03T16:07:23.865672",
+    "medio": "ECartelera",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "'Al este del Edén': Florence Pugh derrama maldad en la miniserie que Netflix llevaba años buscando",
+    "url": "https://www.cinemania.es/cinemania/series/este-eden-florence-pugh-miniserie-netflix_7043596_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-03T16:07:26.075812",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Qué ver hoy en Netflix, Amazon Prime Video y otras plataformas: sábado 3 de octubre de 2026",
+    "url": "https://www.cinemania.es/cinemania/noticias/que-ver-hoy-netflix-amazon-prime-video-otras-plataformas-sabado-3-octubre-2026_7044154_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-03T16:07:26.075836",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "video",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "100% de críticas positivas: la épica película de guerra que los fans de 'Shôgun' están descubriendo en Netflix",
+    "url": "https://www.cinemania.es/cinemania/noticias/invasion-insurreccion-netflix-pelicula-guerra-shogun_7039760_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-03T16:07:26.075903",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "critica",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
