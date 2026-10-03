@@ -6206,6 +6206,256 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "d8987f1744a03f32"
       }
+    },
+    {
+      "proyecto": {
+        "id": "b3a1c9d0e2f4a1b3",
+        "titulo": "Analizador de Sentimiento de Opiniones de Productos",
+        "descripcion_corta": "API REST para analizar el sentimiento de reseñas de productos utilizando modelos de IA pre-entrenados.",
+        "descripcion_detallada": "Desarrollar una API RESTful utilizando FastAPI que reciba texto de reseñas de productos y devuelva un análisis de sentimiento (positivo, negativo, neutro) y las razones principales detrás de esa clasificación. Se integrarán modelos de NLP pre-entrenados para la tarea de clasificación de sentimiento y extracción de aspectos. La API permitirá la evaluación de grandes volúmenes de texto de forma eficiente y escalable, proporcionando insights valiosos para la mejora de productos y la experiencia del cliente. Se incluirán endpoints para la gestión de modelos y la monitorización básica.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python 3.7+, basado en tipos estándar de Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece alto rendimiento, validación de datos con Pydantic, documentación interactiva (Swagger UI/ReDoc) y es ideal para APIs asíncronas."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Hugging Face Transformers",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca para descargar y usar modelos de NLP pre-entrenados, incluyendo clasificadores de sentimiento.",
+              "version_sugerida": "4.30.0",
+              "url_docs": "https://huggingface.co/docs/transformers/index",
+              "por_que": "Proporciona acceso fácil a modelos de vanguardia para análisis de texto y simplifica la integración de IA en la aplicación."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en anotaciones de tipo de Python.",
+              "version_sugerida": "2.0.0",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para FastAPI para definir esquemas de datos, validar entradas/salidas de la API y mejorar la robustez del código."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de contenedores para empaquetar, distribuir y ejecutar aplicaciones.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y producción, facilitando el despliegue y la escalabilidad de la API."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Análisis de Sentimiento",
+              "categoria": "ia_ml",
+              "descripcion": "Clasificación del texto de entrada en categorías de sentimiento (positivo, negativo, neutro).",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Permite entender la opinión general de los clientes sobre un producto a partir de sus reseñas."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing popular para Python que facilita la escritura de tests.",
+              "version_sugerida": "7.0.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite crear tests robustos y parametrizados para la API, asegurando la funcionalidad y la corrección de los análisis de sentimiento."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Endpoint para análisis de sentimiento de texto.",
+          "Clasificación de texto en positivo, negativo, neutro.",
+          "Extracción de aspectos clave de las reseñas.",
+          "Documentación interactiva de la API (Swagger UI).",
+          "Validación de datos de entrada/salida."
+        ],
+        "casos_uso": [
+          "Analizar miles de reseñas de clientes para un producto específico.",
+          "Identificar tendencias de opinión en el mercado.",
+          "Monitorizar la reputación de marca a través de comentarios.",
+          "Proporcionar feedback a equipos de producto sobre áreas de mejora.",
+          "Automatizar la categorización de feedback de usuarios."
+        ],
+        "reglas_negocio": [
+          "El texto de entrada debe ser procesado antes del análisis.",
+          "La API debe devolver un código de estado apropiado para cada respuesta.",
+          "Los modelos de IA cargados deben ser compatibles con las entradas.",
+          "Se debe manejar el caso de texto vacío o irrelevante.",
+          "Se deben registrar los errores de procesamiento para depuración."
+        ],
+        "por_que_ia": "Se utiliza IA (modelos pre-entrenados de NLP) para la clasificación automática del sentimiento en texto, una tarea compleja que requiere comprensión del lenguaje natural.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "Modelos de Hugging Face (ej. BERT, RoBERTa para clasificación de sentimiento)."
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo de APIs REST.",
+          "Comprensión básica de Machine Learning y NLP.",
+          "Familiaridad con Docker."
+        ],
+        "riesgos": [
+          "La precisión del modelo de IA puede variar según el dominio del texto.",
+          "El rendimiento puede degradarse con textos muy largos o complejos.",
+          "La gestión de dependencias de modelos de IA puede ser compleja.",
+          "Escalabilidad bajo alta carga de peticiones.",
+          "Posible necesidad de fine-tuning de modelos para dominios específicos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "b3a1c9d0e2f4a1b3"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "eb395f700ba908a2"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c4d5e6f7a8b9c0d1",
+        "titulo": "Generador de Documentación Técnica Automática",
+        "descripcion_corta": "Herramienta CLI para generar documentación técnica a partir de código fuente y comentarios.",
+        "descripcion_detallada": "Desarrollar una herramienta de línea de comandos (CLI) que escanee un proyecto de código fuente (Python inicialmente) y genere documentación técnica en formatos como Markdown o HTML. La herramienta analizará los comentarios del código (docstrings), la estructura de clases/funciones y las dependencias para crear una documentación coherente y actualizada. Permitirá la configuración a través de un archivo (ej. `docgen.yml`) y la inclusión de secciones personalizadas.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Typer",
+              "categoria": "framework",
+              "descripcion": "Framework para construir aplicaciones CLI en Python basado en type hints.",
+              "version_sugerida": "0.9.0",
+              "url_docs": "https://typer.tiangolo.com/",
+              "por_que": "Simplifica la creación de interfaces de línea de comandos robustas y fáciles de usar, con autocompletado y validación automática de argumentos."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pygments",
+              "categoria": "libreria",
+              "descripcion": "Lexer y Syntax Highlighter para Python.",
+              "version_sugerida": "2.15.0",
+              "url_docs": "https://pygments.org/docs/",
+              "por_que": "Permite colorear el código fuente en la documentación generada, mejorando la legibilidad."
+            },
+            {
+              "nombre": "Markdown",
+              "categoria": "libreria",
+              "descripcion": "Implementación de Python para convertir Markdown a HTML.",
+              "version_sugerida": "3.4.0",
+              "url_docs": "https://python-markdown.readthedocs.io/en/latest/",
+              "por_que": "Facilita la generación de documentación en formato Markdown, un estándar popular y fácil de leer."
+            },
+            {
+              "nombre": "PyYAML",
+              "categoria": "libreria",
+              "descripcion": "Procesamiento de archivos YAML en Python.",
+              "version_sugerida": "6.0",
+              "url_docs": "https://pyyaml.org/wiki/PyYAMLDocumentation",
+              "por_que": "Para leer y parsear el archivo de configuración de la herramienta CLI."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.0.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Para escribir tests unitarios y de integración para la lógica de análisis de código y generación de documentos."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "AST (Abstract Syntax Trees)",
+              "categoria": "otros",
+              "descripcion": "Módulo de Python para analizar la estructura del código fuente.",
+              "version_sugerida": null,
+              "url_docs": "https://docs.python.org/3/library/ast.html",
+              "por_que": "Es fundamental para parsear el código Python y extraer información sobre clases, funciones, argumentos y docstrings de forma programática."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Escaneo de archivos Python.",
+          "Extracción de docstrings y firmas de funciones/clases.",
+          "Generación de archivos Markdown.",
+          "Soporte para configuración vía archivo YAML.",
+          "Resaltado de sintaxis de código."
+        ],
+        "casos_uso": [
+          "Generar documentación para librerías de Python.",
+          "Mantener la documentación de APIs actualizada automáticamente.",
+          "Crear guías de inicio rápido para proyectos.",
+          "Facilitar la incorporación de nuevos desarrolladores al equipo.",
+          "Documentar código legacy."
+        ],
+        "reglas_negocio": [
+          "La herramienta debe manejar errores de parseo de código gracefully.",
+          "Los comentarios/docstrings deben seguir un formato consistente (ej. reStructuredText o Google style).",
+          "El archivo de configuración debe ser validado.",
+          "Se debe permitir especificar el directorio de entrada y salida.",
+          "La salida debe ser fácil de integrar en sistemas de documentación existentes (ej. MkDocs, Sphinx)."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": null,
+        "recursos_externos": [
+          "Documentación oficial de Python sobre el módulo `ast`.",
+          "Especificaciones de formatos de documentación (Markdown, HTML)."
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos de Python y su sistema de módulos.",
+          "Comprensión de la estructura del código fuente y comentarios (docstrings).",
+          "Familiaridad con herramientas CLI y manejo de argumentos."
+        ],
+        "riesgos": [
+          "Soporte limitado a un solo lenguaje (Python) inicialmente.",
+          "Complejidad en el parseo de código complejo o con metaprogramación.",
+          "La calidad de la documentación generada depende de la calidad de los comentarios en el código.",
+          "Manejo de diferentes estilos de docstrings.",
+          "Integración con flujos de CI/CD."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:10:00Z",
+        "hash_unicidad": "c4d5e6f7a8b9c0d1"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "eb395f700ba908a2"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -6255,8 +6505,10 @@
     "f1a2b3c4d5e6f7a8",
     "e1f2a3b4c5d6e7f8",
     "f2a3b4c5d6e7f8a9",
-    "6b9a1f8c2d0e4b7a"
+    "6b9a1f8c2d0e4b7a",
+    "b3a1c9d0e2f4a1b3",
+    "c4d5e6f7a8b9c0d1"
   ],
-  "total_generados": 47,
-  "fecha_ultima_generacion": "2026-10-03T18:58:18.050550"
+  "total_generados": 49,
+  "fecha_ultima_generacion": "2026-10-03T22:37:42.965278"
 }
