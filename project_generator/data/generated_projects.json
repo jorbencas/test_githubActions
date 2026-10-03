@@ -6072,6 +6072,140 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "e80d9f93473cf77d"
       }
+    },
+    {
+      "proyecto": {
+        "id": "6b9a1f8c2d0e4b7a",
+        "titulo": "Sistema de Gestión de Tareas Colaborativo",
+        "descripcion_corta": "Plataforma web para la asignación, seguimiento y colaboración en tareas entre equipos.",
+        "descripcion_detallada": "Desarrollo de una aplicación web full-stack que permite a los usuarios crear proyectos, asignar tareas a miembros del equipo, establecer plazos, prioridades y estados. Incluye funcionalidades de chat integrado por tarea/proyecto, notificaciones en tiempo real y un panel de control visual para el seguimiento del progreso. Se enfoca en la usabilidad y la colaboración fluida. Ideal para equipos pequeños y medianos que buscan optimizar su flujo de trabajo.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "fullstack",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework Node.js progresivo para construir aplicaciones del lado del servidor eficientes y escalables, promueve la arquitectura modular y el uso de TypeScript.",
+              "version_sugerida": "^10.0.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Proporciona una estructura robusta para el backend, con módulos, inyección de dependencias y excelente soporte para TypeScript."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario interactivas y declarativas.",
+              "version_sugerida": "^18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear componentes de UI reutilizables y gestionar el estado de la aplicación de forma eficiente para una experiencia de usuario dinámica."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Prisma",
+              "categoria": "ORM",
+              "descripcion": "ORM de próxima generación para Node.js y TypeScript, simplifica la interacción con la base de datos.",
+              "version_sugerida": "^5.10.0",
+              "url_docs": "https://www.prisma.io/docs",
+              "por_que": "Ofrece un esquema de base de datos unificado, migraciones automáticas y un cliente de base de datos fuertemente tipado."
+            },
+            {
+              "nombre": "Socket.IO",
+              "categoria": "Real-time",
+              "descripcion": "Librería para comunicación bidireccional en tiempo real entre navegadores y servidores.",
+              "version_sugerida": "^4.7.0",
+              "url_docs": "https://socket.io/docs/v4/index.html",
+              "por_que": "Permite la implementación de notificaciones instantáneas y funcionalidades de chat en la aplicación."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "Base de Datos Relacional",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto de código abierto robusto y confiable.",
+              "version_sugerida": "16.x",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Excelente para datos estructurados, soporta JSONB para flexibilidad y es altamente escalable y confiable."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "Contenedores",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.x",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura entornos de desarrollo y producción consistentes, facilitando la implementación y el escalado."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "Framework de Testing",
+              "descripcion": "Framework de testing de JavaScript amigable para desarrolladores.",
+              "version_sugerida": "^29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Proporciona una solución completa para testing unitario y de integración, con funcionalidades como snapshots y mocks."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de proyectos y tareas",
+          "Asignación de tareas a usuarios",
+          "Seguimiento de estados y prioridades",
+          "Notificaciones en tiempo real (WebSockets)",
+          "Chat integrado por tarea/proyecto",
+          "Dashboard de visualización de progreso"
+        ],
+        "casos_uso": [
+          "Gestión de proyectos ágiles",
+          "Organización de tareas en equipos remotos",
+          "Seguimiento de bug fixes y features",
+          "Planificación de hitos y entregables",
+          "Colaboración en flujos de trabajo creativos"
+        ],
+        "reglas_negocio": [
+          "Solo los miembros del proyecto pueden ver/editar sus tareas",
+          "Las tareas deben tener un título y una descripción",
+          "Las notificaciones se activan por cambios de estado o menciones",
+          "El creador de la tarea puede asignarla a otros",
+          "Los roles de usuario (admin, miembro) definen permisos"
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos sólidos de TypeScript y JavaScript.",
+          "Experiencia con frameworks backend (Node.js) y frontend (React).",
+          "Comprensión de bases de datos relacionales y ORMs.",
+          "Familiaridad con WebSockets para comunicación en tiempo real."
+        ],
+        "riesgos": [
+          "Gestión de concurrencia en actualizaciones de tareas.",
+          "Complejidad en la sincronización de datos en tiempo real.",
+          "Escalabilidad de la base de datos con muchos proyectos/tareas.",
+          "Diseño de UI/UX intuitivo para facilitar la adopción.",
+          "Seguridad en la autenticación y autorización de usuarios."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "manual",
+        "fecha_generacion": "2024-03-15T10:00:00Z",
+        "hash_unicidad": "6b9a1f8c2d0e4b7a"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "d8987f1744a03f32"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -6120,8 +6254,9 @@
     "c1a2b3d4e5f6a7b8",
     "f1a2b3c4d5e6f7a8",
     "e1f2a3b4c5d6e7f8",
-    "f2a3b4c5d6e7f8a9"
+    "f2a3b4c5d6e7f8a9",
+    "6b9a1f8c2d0e4b7a"
   ],
-  "total_generados": 46,
-  "fecha_ultima_generacion": "2026-10-03T15:38:03.463784"
+  "total_generados": 47,
+  "fecha_ultima_generacion": "2026-10-03T18:58:18.050550"
 }
