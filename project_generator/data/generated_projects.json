@@ -5946,6 +5946,132 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "dca05d771437a8de"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f2a3b4c5d6e7f8a9",
+        "titulo": "Analizador de Sentimiento de Comentarios de Productos",
+        "descripcion_corta": "API REST para analizar el sentimiento de reseñas de productos usando modelos de NLP.",
+        "descripcion_detallada": "Desarrollar una API RESTful que reciba texto de comentarios de productos y devuelva un análisis de sentimiento (positivo, negativo, neutro) y las frases clave que influyeron en la clasificación. Utilizará un modelo pre-entrenado de NLP para la clasificación y técnicas de explicación de modelos. La API permitirá integrar este análisis en plataformas de e-commerce para monitorizar la satisfacción del cliente.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno de alto rendimiento para construir APIs con Python 3.7+ basado en type hints estándar de Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece validación automática de datos con Pydantic, generación automática de documentación interactiva (Swagger UI/ReDoc) y excelente rendimiento asíncrono."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Transformers (Hugging Face)",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca para descargar y usar modelos de NLP pre-entrenados.",
+              "version_sugerida": "4.30.0",
+              "url_docs": "https://huggingface.co/docs/transformers/index",
+              "por_que": "Proporciona acceso fácil a modelos SOTA para análisis de sentimiento y otras tareas de NLP, simplificando la implementación."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos basada en type hints de Python.",
+              "version_sugerida": "2.0.0",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Usado por FastAPI para la validación de datos de entrada y salida, asegurando la integridad de los datos y mejorando la robustez de la API."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Permite empaquetar la API y sus dependencias de forma aislada, asegurando la reproducibilidad y facilitando el despliegue en cualquier entorno."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "BERT (o similar)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de transformadores para tareas de Procesamiento de Lenguaje Natural.",
+              "version_sugerida": null,
+              "url_docs": "https://huggingface.co/docs/transformers/model_doc_pipeline/sentiment-analysis",
+              "por_que": "Ofrece alta precisión en la clasificación de sentimiento y puede ser afinado para dominios específicos."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/en/latest/",
+              "por_que": "Facilita la escritura de tests de unidad y de integración para la API, incluyendo fixtures y parametrización."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis de sentimiento en texto (positivo/negativo/neutro)",
+          "Extracción de frases clave influyentes",
+          "API RESTful para integración",
+          "Documentación interactiva de la API (Swagger UI)",
+          "Contenedorización con Docker"
+        ],
+        "casos_uso": [
+          "Monitorización de reputación de marca en e-commerce.",
+          "Análisis rápido de feedback de clientes.",
+          "Identificación de tendencias en opiniones de usuarios.",
+          "Soporte a decisiones de producto basadas en sentimiento del cliente.",
+          "Filtrado automático de comentarios negativos en foros."
+        ],
+        "reglas_negocio": [
+          "El texto de entrada no debe exceder los 1000 caracteres.",
+          "La API debe responder en menos de 500ms para peticiones estándar.",
+          "Se debe manejar texto en español e inglés.",
+          "La puntuación de sentimiento debe estar en el rango [-1, 1].",
+          "Las frases clave deben tener una longitud mínima de 3 palabras."
+        ],
+        "por_que_ia": "Se utiliza IA (modelos de NLP pre-entrenados como BERT) para clasificar el sentimiento del texto de manera automática y precisa, superando enfoques basados en reglas o diccionarios. La extracción de frases clave también se apoya en técnicas de IA para identificar las partes más relevantes del comentario.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "https://huggingface.co/models"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo de APIs REST.",
+          "Comprensión básica de Machine Learning y NLP.",
+          "Familiaridad con Docker."
+        ],
+        "riesgos": [
+          "La precisión del modelo puede variar según el dominio específico del producto.",
+          "Latencia alta si el modelo es muy grande o los recursos son limitados.",
+          "Manejo de sarcasmo y lenguaje ambiguo puede ser un desafío.",
+          "Costos de inferencia si se usa un servicio cloud de IA.",
+          "Actualizaciones de librerías pueden introducir incompatibilidades."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f2a3b4c5d6e7f8a9"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "e80d9f93473cf77d"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -5993,8 +6119,9 @@
     "a0b1c2d3e4f5a0b1",
     "c1a2b3d4e5f6a7b8",
     "f1a2b3c4d5e6f7a8",
-    "e1f2a3b4c5d6e7f8"
+    "e1f2a3b4c5d6e7f8",
+    "f2a3b4c5d6e7f8a9"
   ],
-  "total_generados": 45,
-  "fecha_ultima_generacion": "2026-10-03T09:37:49.779512"
+  "total_generados": 46,
+  "fecha_ultima_generacion": "2026-10-03T15:38:03.463784"
 }
