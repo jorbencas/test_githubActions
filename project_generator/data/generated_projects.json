@@ -5660,6 +5660,292 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "05e1bec9de930447"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f1a2b3c4d5e6f7a8",
+        "titulo": "Gestor de Tareas con IA para Priorización Inteligente",
+        "descripcion_corta": "Aplicación web para gestionar tareas, con IA que sugiere prioridades y plazos basados en el historial y la urgencia.",
+        "descripcion_detallada": "Desarrollo de una aplicación web fullstack que permite a los usuarios crear, organizar y seguir el progreso de sus tareas. La característica principal es un módulo de IA que analiza las tareas (descripción, fecha límite, etiquetas, progreso) y, basándose en modelos de aprendizaje automático, sugiere una priorización automática y estima plazos realistas. La IA aprende del comportamiento del usuario y de la finalización de tareas pasadas para mejorar sus predicciones con el tiempo. Incluye funcionalidades como notificaciones, colaboración básica y visualización del progreso.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web asíncrono para construir APIs, con validación de datos y documentación automática.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Alto rendimiento y facilidad para integrar IA gracias a Pydantic y su naturaleza asíncrona."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario interactivas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Componentización eficiente y ecosistema robusto para el frontend."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones mediante anotaciones de tipo de Python.",
+              "version_sugerida": "2.4.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para FastAPI para la validación de esquemas de datos de entrada y salida."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Librería de Machine Learning para Python.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://scikit-learn.org/stable/",
+              "por_que": "Proporciona algoritmos eficientes para la clasificación y regresión, útiles para la priorización y estimación de plazos."
+            },
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Librería para manipulación y análisis de datos.",
+              "version_sugerida": "2.1.1",
+              "url_docs": "https://pandas.pydata.org/docs/",
+              "por_que": "Facilita la carga, limpieza y preprocesamiento de los datos históricos de tareas para el modelo de IA."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema gestor de bases de datos relacional objeto.",
+              "version_sugerida": "15.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto para almacenar datos de usuarios, tareas y metadatos, con soporte para JSONB si es necesario."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la aplicación y sus dependencias para un despliegue consistente y aislado."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/en/stable/",
+              "por_que": "Facilita la escritura de tests unitarios, de integración y de E2E para la API y la lógica de negocio."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de tareas",
+          "API RESTful para operaciones CRUD",
+          "Módulo de priorización y estimación de plazos con IA",
+          "Interfaz de usuario reactiva",
+          "Notificaciones personalizables",
+          "Visualización del progreso de tareas"
+        ],
+        "casos_uso": [
+          "Gestión de proyectos personales",
+          "Organización de tareas en equipos pequeños",
+          "Seguimiento de hitos y entregables",
+          "Ayuda a la planificación diaria/semanal",
+          "Mejora de la productividad personal"
+        ],
+        "reglas_negocio": [
+          "Las tareas deben tener un título.",
+          "Las tareas pueden tener una fecha límite opcional.",
+          "El sistema debe registrar el historial de finalización de tareas.",
+          "La IA solo sugiere, el usuario tiene la decisión final sobre la prioridad.",
+          "Los datos del usuario son privados y solo se usan para mejorar su experiencia."
+        ],
+        "por_que_ia": "La IA se utiliza para analizar el patrón de creación, finalización y urgencia de las tareas, aprendiendo del comportamiento del usuario para predecir prioridades óptimas y plazos realistas, mejorando la eficiencia en la gestión de tareas.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python, FastAPI, React.",
+          "Comprensión básica de Machine Learning (clasificación/regresión).",
+          "Experiencia con bases de datos SQL.",
+          "Familiaridad con Docker."
+        ],
+        "riesgos": [
+          "La precisión del modelo de IA puede ser baja inicialmente.",
+          "La integración entre frontend y backend puede ser compleja.",
+          "Escalabilidad de la base de datos con muchos usuarios/tareas.",
+          "Gestión de la privacidad de los datos del usuario.",
+          "Sobreajuste del modelo de IA a datos limitados."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f1a2b3c4d5e6f7a8"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "dca05d771437a8de"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "e1f2a3b4c5d6e7f8",
+        "titulo": "Monitor de Rendimiento de API con Alertas Inteligentes",
+        "descripcion_corta": "Servicio que monitoriza APIs externas, detecta anomalías y genera alertas personalizadas.",
+        "descripcion_detallada": "Un microservicio que actúa como un sistema de monitoreo y alerta para APIs externas. Realiza peticiones periódicas a endpoints definidos, mide latencia, tasa de errores y disponibilidad. Utiliza análisis de series temporales y detección de anomalías para identificar comportamientos inusuales que no necesariamente dispararían alertas basadas en umbrales fijos. Las alertas se pueden configurar para ser enviadas por diversos canales (email, Slack, webhook).",
+        "nivel": "senior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "microservicio",
+          "devops",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web de alto rendimiento para Go.",
+              "version_sugerida": "1.21.0",
+              "url_docs": "https://gin-gonic.com/docs/",
+              "por_que": "Optimizado para alto rendimiento, ideal para un microservicio que maneja muchas peticiones de monitoreo."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Prometheus client_golang",
+              "categoria": "libreria",
+              "descripcion": "Librería cliente para instrumentar aplicaciones Go con métricas de Prometheus.",
+              "version_sugerida": "1.16.0",
+              "url_docs": "https://github.com/prometheus/client_golang",
+              "por_que": "Permite exponer métricas de monitoreo (latencia, errores) de forma estándar para ser recolectadas por Prometheus."
+            },
+            {
+              "nombre": "AnomalyDetection (NumPy/SciPy)",
+              "categoria": "libreria",
+              "descripcion": "Funciones matemáticas y científicas para Python.",
+              "version_sugerida": "Numpy 1.26.0, SciPy 1.11.0",
+              "url_docs": "https://numpy.org/doc/stable/,%20https://scipy.org/docs/",
+              "por_que": "Se usa indirectamente o se implementan algoritmos de detección de anomalías basados en estadísticas y series temporales."
+            },
+            {
+              "nombre": "Net/http",
+              "categoria": "libreria",
+              "descripcion": "Librería estándar de Go para clientes HTTP.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://pkg.go.dev/net/http",
+              "por_que": "Para realizar las peticiones HTTP a las APIs externas a monitorear de forma eficiente."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "Redis",
+              "categoria": "base_datos",
+              "descripcion": "Almacén de datos en memoria, rápido y versátil.",
+              "version_sugerida": "7.0",
+              "url_docs": "https://redis.io/docs/",
+              "por_que": "Para almacenar temporalmente métricas, estados de alerta y configuraciones de monitoreo, permitiendo acceso rápido."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Prometheus",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de monitoreo y alertas.",
+              "version_sugerida": "2.45.0",
+              "url_docs": "https://prometheus.io/docs/introduction/overview/",
+              "por_que": "Para recolectar, almacenar y consultar las métricas expuestas por el microservicio y configurar alertas básicas."
+            },
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Para empaquetar el microservicio y sus dependencias, asegurando un despliegue consistente."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Framework de testing integrado en Go.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Para escribir tests unitarios y de integración para la lógica del microservicio."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Configuración de endpoints a monitorear.",
+          "Medición de latencia, tasa de errores y disponibilidad.",
+          "Detección de anomalías en series temporales de métricas.",
+          "Sistema de alertas configurables (email, Slack, webhook).",
+          "Exposición de métricas para Prometheus.",
+          "Interfaz de configuración simple (ej. archivo JSON/YAML o API)."
+        ],
+        "casos_uso": [
+          "Monitorear la salud de APIs críticas para el negocio.",
+          "Detectar degradaciones de rendimiento antes de que impacten a los usuarios.",
+          "Integrar con sistemas de ticketing para automatizar la creación de incidencias.",
+          "Validar el rendimiento de despliegues de nuevas versiones de APIs.",
+          "Proporcionar visibilidad del estado de servicios externos."
+        ],
+        "reglas_negocio": [
+          "Las peticiones de monitoreo no deben exceder el 10% del tráfico normal de la API objetivo.",
+          "Los umbrales de alerta para errores y latencia son configurables.",
+          "Las anomalías detectadas deben tener un score de confianza asociado.",
+          "El servicio debe ser tolerante a fallos de APIs externas monitoreadas.",
+          "Los canales de notificación deben ser configurables por el usuario."
+        ],
+        "por_que_ia": "Se aplica detección de anomalías en series temporales de métricas (latencia, errores) para identificar patrones inusuales que no serían capturados por umbrales fijos, permitiendo una alerta temprana de problemas potenciales.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia con Go y desarrollo de microservicios.",
+          "Conocimientos de sistemas de monitoreo (Prometheus).",
+          "Comprensión de métricas, latencia y disponibilidad.",
+          "Familiaridad con el análisis de series temporales y detección de anomalías.",
+          "Experiencia con Docker y Redis."
+        ],
+        "riesgos": [
+          "Generación de falsos positivos/negativos por el algoritmo de anomalías.",
+          "Manejo de alta concurrencia de peticiones de monitoreo.",
+          "Complejidad en la configuración de alertas y canales.",
+          "Dependencia de servicios externos para las notificaciones.",
+          "Mantener la fiabilidad del propio servicio de monitoreo."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "e1f2a3b4c5d6e7f8"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "dca05d771437a8de"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -5705,8 +5991,10 @@
     "d5c8a1b0e9f7c3d4",
     "f1e0d9c7b5a3f1e0",
     "a0b1c2d3e4f5a0b1",
-    "c1a2b3d4e5f6a7b8"
+    "c1a2b3d4e5f6a7b8",
+    "f1a2b3c4d5e6f7a8",
+    "e1f2a3b4c5d6e7f8"
   ],
-  "total_generados": 43,
-  "fecha_ultima_generacion": "2026-10-03T03:34:07.370496"
+  "total_generados": 45,
+  "fecha_ultima_generacion": "2026-10-03T09:37:49.779512"
 }
