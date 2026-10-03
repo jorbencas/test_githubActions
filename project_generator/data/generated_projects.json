@@ -5508,6 +5508,158 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "dba98d9fe469d50d"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f4b3a2c1d0e9f8a7",
+        "titulo": "Sistema de Gestión de Tareas con IA",
+        "descripcion_corta": "WebApp Fullstack para gestionar tareas, con IA para priorización y asignación inteligente.",
+        "descripcion_detallada": "Desarrollo de una aplicación web fullstack que permite a los usuarios crear, organizar y seguir el progreso de sus tareas. La aplicación integrará un modelo de IA para analizar las descripciones de las tareas, sugerir prioridades basadas en urgencia y complejidad, y proponer la asignación a miembros del equipo si aplica. Incluirá funcionalidades como notificaciones, filtros avanzados y reportes de progreso. El objetivo es optimizar la gestión del tiempo y la carga de trabajo del equipo mediante la automatización de decisiones inteligentes.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "fullstack",
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python, basado en tipos estándar de Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Proporciona alto rendimiento, validación automática de datos con Pydantic y generación de documentación OpenAPI."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería JavaScript declarativa para construir interfaces de usuario interactivas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear componentes reutilizables y una experiencia de usuario fluida y reactiva."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "Toolkit SQL y Object Relational Mapper (ORM) para Python.",
+              "version_sugerida": "2.0.19",
+              "url_docs": "https://www.sqlalchemy.org/",
+              "por_que": "Facilita la interacción con la base de datos relacional de manera programática y segura."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en anotaciones de tipo de Python.",
+              "version_sugerida": "2.4.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para FastAPI para validar datos de entrada/salida y serialización."
+            },
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por modelos de lenguaje.",
+              "version_sugerida": "0.0.300",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Orquesta las llamadas a modelos de IA, manejo de prompts y cadenas de razonamiento para la priorización de tareas."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto de código abierto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto, escalable y soporta tipos de datos JSONB para flexibilidad en metadatos de tareas."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura entornos de desarrollo y producción consistentes y facilita el despliegue."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "GPT-3.5-turbo",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo de lenguaje grande de OpenAI para generación de texto y comprensión.",
+              "version_sugerida": "latest",
+              "url_docs": "https://platform.openai.com/docs/models/gpt-3-5",
+              "por_que": "Se utiliza para analizar el texto de las tareas y generar sugerencias de priorización y asignación."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir tests claros y concisos, con una rica colección de plugins y soporte para pruebas asíncronas."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de tareas",
+          "Priorización inteligente de tareas (IA)",
+          "Asignación sugerida de tareas (IA)",
+          "Notificaciones personalizables",
+          "Reportes de progreso y rendimiento",
+          "Autenticación de usuarios"
+        ],
+        "casos_uso": [
+          "Gestión de proyectos personales",
+          "Organización de tareas en equipos pequeños",
+          "Seguimiento de hitos en proyectos",
+          "Automatización de la asignación de trabajo",
+          "Mejora de la productividad individual y grupal"
+        ],
+        "reglas_negocio": [
+          "Las tareas deben tener un título y una descripción.",
+          "Los usuarios pueden asignar fechas de vencimiento a las tareas.",
+          "La IA solo sugiere, la asignación final puede ser manual.",
+          "Las notificaciones se activan por cambios de estado o vencimientos cercanos.",
+          "Los roles de usuario definen permisos de acceso y gestión."
+        ],
+        "por_que_ia": "La IA se usa para analizar el lenguaje natural de las descripciones de las tareas, identificar palabras clave relacionadas con urgencia, complejidad y dependencias, y así generar sugerencias de priorización y asignación que mejoren la eficiencia del equipo.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y JavaScript.",
+          "Comprensión de principios de desarrollo web (frontend/backend).",
+          "Familiaridad con bases de datos relacionales.",
+          "Entendimiento básico de APIs RESTful."
+        ],
+        "riesgos": [
+          "La precisión de la IA puede variar y requerir ajuste fino.",
+          "Complejidad en la integración del frontend y backend.",
+          "Manejo de datos sensibles de usuarios y tareas.",
+          "Escalabilidad de la base de datos y la API bajo carga.",
+          "Dependencia de servicios externos de IA (costos, disponibilidad)."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "c1a2b3d4e5f6a7b8"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "05e1bec9de930447"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -5552,8 +5704,9 @@
     "c7d8e9f0a1b2c3d4",
     "d5c8a1b0e9f7c3d4",
     "f1e0d9c7b5a3f1e0",
-    "a0b1c2d3e4f5a0b1"
+    "a0b1c2d3e4f5a0b1",
+    "c1a2b3d4e5f6a7b8"
   ],
-  "total_generados": 42,
-  "fecha_ultima_generacion": "2026-10-02T23:31:57.883664"
+  "total_generados": 43,
+  "fecha_ultima_generacion": "2026-10-03T03:34:07.370496"
 }
