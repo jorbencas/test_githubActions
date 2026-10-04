@@ -32,7 +32,7 @@ import os
 import re
 import sys
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Callable, List, Optional, Tuple
 from urllib.parse import quote_plus
@@ -50,6 +50,21 @@ HEADERS = {
 
 BOT_TOKEN = os.environ.get("TIPS_BOT_TOKEN", "")
 CHAT_ID = os.environ.get("SALUDO_CHAT_ID", os.environ.get("TIPS_CHAT_ID", ""))
+
+# Determinar fecha de ejecución (para filtrar noticias del día)
+def _get_execution_date():
+    """Obtiene la fecha de ejecución desde variable de entorno o fecha actual UTC."""
+    exec_date_str = os.environ.get("EXECUTION_DATE") or os.environ.get("RUN_DATE") or os.environ.get("TODAY")
+    if exec_date_str:
+        try:
+            # Aceptar YYYY-MM-DD
+            return datetime.strptime(exec_date_str.split("T")[0], "%Y-%m-%d").date()
+        except Exception:
+            pass
+    # Por defecto usar fecha UTC actual
+    return datetime.now(timezone.utc).date()
+
+EXECUTION_DATE = _get_execution_date()
 
 
 # =============================================================================
@@ -199,7 +214,10 @@ class MovieNewsScraper:
     # Fetchers
     # ------------------------------------------------------------------
     @staticmethod
-    def _rss_google(termino: str, ventana: str = "3h") -> list:
+    def _rss_google(termino: str, ventana: str = None) -> list:
+        # Usar ventana del día si no se especifica
+        if ventana is None:
+            ventana = os.environ.get("NEWS_WINDOW", "1d")
         url = f"https://news.google.com/rss/search?q={quote_plus(termino)}+when:{ventana}&hl=es&gl=ES&ceid=ES:es"
         items = []
         try:
@@ -221,7 +239,7 @@ class MovieNewsScraper:
                 if im:
                     img_url = html.unescape(im.group(1))
                 items.append({
-                    "titulo": titulo, "url": enlace, "fecha_pub": fecha, "fecha_ts": datetime.now().isoformat(),
+                    "titulo": titulo, "url": enlace, "fecha_pub": fecha, "fecha_ts": datetime.now(timezone.utc).isoformat(),
                     "medio": "Google News", "imagen": img_url,
                 })
         except Exception as e:
@@ -257,7 +275,7 @@ class MovieNewsScraper:
                             vistos.add(vid)
                             items.append({
                                 "titulo": ti, "url": f"https://www.youtube.com/watch?v={vid}",
-                                "fecha_pub": "", "fecha_ts": datetime.now().isoformat(),
+                                "fecha_pub": "", "fecha_ts": datetime.now(timezone.utc).isoformat(),
                                 "medio": canal or "YouTube", "imagen": f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg",
                             })
                     for val in o.values():
@@ -290,7 +308,7 @@ class MovieNewsScraper:
                 fecha = html.unescape(re.search(r"<pubDate>(.*?)</pubDate>", item, re.S).group(1)).strip() if re.search(r"<pubDate>(.*?)</pubDate>", item, re.S) else ""
                 if titulo and enlace:
                     items.append({
-                        "titulo": titulo, "url": enlace, "fecha_pub": fecha, "fecha_ts": datetime.now().isoformat(),
+                        "titulo": titulo, "url": enlace, "fecha_pub": fecha, "fecha_ts": datetime.now(timezone.utc).isoformat(),
                         "medio": "Contraste", "imagen": "",
                     })
         except Exception as e:
@@ -319,7 +337,7 @@ class MovieNewsScraper:
                     img_url = html.unescape(im.group(1))
                 if titulo and enlace:
                     items.append({
-                        "titulo": titulo, "url": enlace, "fecha_pub": fecha, "fecha_ts": datetime.now().isoformat(),
+                        "titulo": titulo, "url": enlace, "fecha_pub": fecha, "fecha_ts": datetime.now(timezone.utc).isoformat(),
                         "medio": fuente or "Bing News", "imagen": img_url,
                     })
         except Exception as e:
@@ -380,7 +398,7 @@ class MovieNewsScraper:
                         from urllib.parse import urljoin
                         href = urljoin(url, href)
                     items.append({
-                        "titulo": texto_limpio, "url": href, "fecha_pub": "", "fecha_ts": datetime.now().isoformat(),
+                        "titulo": texto_limpio, "url": href, "fecha_pub": "", "fecha_ts": datetime.now(timezone.utc).isoformat(),
                         "medio": medio, "imagen": "", "tipo": "critica",
                     })
             except Exception as e:
@@ -393,6 +411,21 @@ class MovieNewsScraper:
     def _anexar(self, items, resultados, vistos):
         """Añade a resultados los items relevantes y no duplicados."""
         for it in items:
+            # Filtrar por fecha de ejecución (solo noticias del día en que se ejecuta)
+            try:
+                fecha_str = it.get("fecha_pub") or it.get("fecha_ts") or ""
+                item_date = None
+                # Intentar extraer YYYY-MM-DD
+                m = re.search(r"(\d{4}-\d{2}-\d{2})", fecha_str)
+                if m:
+                    item_date = datetime.fromisoformat(m.group(1)).date()
+                # Si tiene fecha y no coincide con fecha de ejecución, descartar
+                if item_date and item_date != EXECUTION_DATE:
+                    continue
+            except Exception:
+                # Si no podemos parsear, incluirlo (fail-open)
+                pass
+
             if not self._filter.es_relevante(it["titulo"]):
                 continue
             url = self.url_real(it["url"])
