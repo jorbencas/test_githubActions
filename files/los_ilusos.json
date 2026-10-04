@@ -680,5 +680,17 @@
     "relevancia": 2,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "Jonás Trueba - Las intenciones al filmar \"Los ilusos\"",
+    "url": "https://www.youtube.com/watch?v=pDKm3eKsweg",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-04T05:37:30.434280",
+    "medio": "Cátedra Ingmar Bergman UNAM",
+    "imagen": "https://i.ytimg.com/vi/pDKm3eKsweg/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
