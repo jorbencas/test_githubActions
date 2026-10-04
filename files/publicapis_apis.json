@@ -11044,5 +11044,17 @@
         "descripcion": "Turn YouTube, TikTok, and Instagram videos into transcripts and structured data. Timestamped, LLM-ready, one API call.",
         "categoria": "Development",
         "pricing": ""
+    },
+    {
+        "titulo": "Firma.dev",
+        "enlace": "https://publicapis.io/firma-dev-api",
+        "fuente": "Public APIs",
+        "tipo": "herramienta",
+        "f": "04/10",
+        "fecha_publicacion": "",
+        "subtipo": "api",
+        "descripcion": "E-signature API for embedding signing into your product or sending contracts at scale. Pay-as-you-go at €0.049 per envelope, no monthly minimums or per-seat fees.",
+        "categoria": "Documents & Productivity",
+        "pricing": ""
     }
 ]
