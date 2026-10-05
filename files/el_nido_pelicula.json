@@ -892,5 +892,16 @@
     "relevancia": 2,
     "pelicula": "El nido",
     "enviada": true
+  },
+  {
+    "titulo": "Alguien voló sobre el nido del cuco (1975) · Resumen sin spoilers · Nota 8,4",
+    "url": "https://www.youtube.com/watch?v=Umw1sk0l5_0",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-05T14:23:30.568869+00:00",
+    "medio": "La Butaca Feliz",
+    "imagen": "https://i.ytimg.com/vi/Umw1sk0l5_0/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "El nido"
   }
 ]
