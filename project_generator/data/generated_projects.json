@@ -6456,6 +6456,143 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "eb395f700ba908a2"
       }
+    },
+    {
+      "proyecto": {
+        "id": "6a1b2c3d4e5f6a7b",
+        "titulo": "Sistema de Gestión de Proyectos Colaborativo",
+        "descripcion_corta": "Plataforma web para la gestión de tareas, seguimiento de progreso y comunicación en equipos de desarrollo.",
+        "descripcion_detallada": "Una aplicación web fullstack que permite a los equipos crear proyectos, asignar tareas, establecer fechas límite, y colaborar mediante comentarios y notificaciones. Incluye un tablero Kanban visual para el seguimiento del progreso y la gestión del flujo de trabajo. Los usuarios pueden registrarse, crear sus propios proyectos y unirse a proyectos de otros. Se enfoca en la usabilidad y la integración fluida de herramientas de comunicación.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "fullstack",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework Node.js progresivo para la construcción de aplicaciones del lado del servidor eficientes, confiables y escalables.",
+              "version_sugerida": "10.x",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Proporciona una arquitectura modular robusta (inspirada en Angular) y un ecosistema maduro para construir APIs RESTful escalables."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Una biblioteca de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.x",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear UIs interactivas y declarativas con un modelo de componentes reutilizables y eficiente."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Prisma",
+              "categoria": "ORM",
+              "descripcion": "Próxima generación de ORM para Node.js y TypeScript.",
+              "version_sugerida": "5.x",
+              "url_docs": "https://www.prisma.io/docs",
+              "por_que": "Ofrece una experiencia de desarrollo de bases de datos tipo-segura y simplifica las migraciones y las consultas."
+            },
+            {
+              "nombre": "Socket.IO",
+              "categoria": "libreria",
+              "descripcion": "Librería para la comunicación en tiempo real bidireccional entre navegadores y servidores.",
+              "version_sugerida": "4.x",
+              "url_docs": "https://socket.io/docs/v4/",
+              "por_que": "Permite la implementación de notificaciones en tiempo real y actualizaciones del tablero Kanban sin recargar la página."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_de_datos",
+              "descripcion": "Sistema de gestión de bases de datos objeto-relacional de código abierto.",
+              "version_sugerida": "15.x",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Soporte robusto para tipos de datos complejos (JSONB) y escalabilidad para almacenar datos de proyectos y usuarios."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.x",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Asegura entornos de desarrollo y producción consistentes y simplifica el despliegue de la aplicación."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript divertido, y hoy, para todo.",
+              "version_sugerida": "29.x",
+              "url_docs": "https://jestjs.io/docs/getting-started",
+              "por_que": "Framework integral para pruebas unitarias e de integración con soporte para mocking y snapshots."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de proyectos",
+          "Asignación de tareas con fechas límite",
+          "Tablero Kanban visual",
+          "Colaboración en tiempo real (comentarios, notificaciones)",
+          "Autenticación y autorización de usuarios",
+          "Búsqueda de proyectos y tareas"
+        ],
+        "casos_uso": [
+          "Equipos de desarrollo que necesitan organizar su trabajo",
+          "Gestores de proyectos que quieren visualizar el progreso",
+          "Freelancers que manejan múltiples clientes y proyectos",
+          "Estudiantes colaborando en proyectos académicos",
+          "Equipos remotos que necesitan una herramienta centralizada"
+        ],
+        "reglas_negocio": [
+          "Solo los miembros de un proyecto pueden ver/modificar sus tareas.",
+          "Las tareas solo pueden asignarse a miembros del proyecto.",
+          "Las fechas límite no pueden ser anteriores a la fecha de creación.",
+          "Cada usuario debe tener un email único.",
+          "El progreso de una tarea solo puede actualizarse si el usuario tiene permisos."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "https://github.com/nestjs/nest",
+          "https://react.dev/",
+          "https://www.prisma.io/"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos sólidos de TypeScript y JavaScript.",
+          "Comprensión de principios de desarrollo web (REST, HTTP).",
+          "Familiaridad con bases de datos relacionales.",
+          "Experiencia básica con control de versiones (Git)."
+        ],
+        "riesgos": [
+          "Complejidad en la sincronización en tiempo real de múltiples usuarios.",
+          "Gestión de permisos y roles de usuario puede volverse compleja.",
+          "Escalabilidad de la base de datos bajo alta carga.",
+          "Seguridad en la autenticación y autorización.",
+          "Curva de aprendizaje de NestJS y Prisma para desarrolladores novatos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-02T10:00:00Z",
+        "hash_unicidad": "c0d1e2f3a4b5c6d7"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "8855c7d4a3b1e77b"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -6507,8 +6644,9 @@
     "f2a3b4c5d6e7f8a9",
     "6b9a1f8c2d0e4b7a",
     "b3a1c9d0e2f4a1b3",
-    "c4d5e6f7a8b9c0d1"
+    "c4d5e6f7a8b9c0d1",
+    "c0d1e2f3a4b5c6d7"
   ],
-  "total_generados": 49,
-  "fecha_ultima_generacion": "2026-10-05T11:08:02.760695"
+  "total_generados": 50,
+  "fecha_ultima_generacion": "2026-10-06T04:35:21.659188"
 }
