@@ -704,5 +704,17 @@
     "relevancia": 2,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "Cineclub virtual del Instituto Cervantes «Cita con el cine»: «Los ilusos 13+13»",
+    "url": "https://www.youtube.com/watch?v=cmVRUEW6jjE",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-06T18:16:26.227082+00:00",
+    "medio": "Red de Bibliotecas del Instituto Cervantes (RBIC)",
+    "imagen": "https://i.ytimg.com/vi/cmVRUEW6jjE/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
