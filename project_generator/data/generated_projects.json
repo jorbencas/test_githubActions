@@ -6865,6 +6865,418 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "83710dce6b8491eb"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f1a3b5c7d9e1f3a5",
+        "titulo": "Sistema de Gestión de Proyectos Personalizado",
+        "descripcion_corta": "Plataforma web para organizar tareas, hitos y recursos de proyectos personales o pequeños equipos.",
+        "descripcion_detallada": "Desarrollo de una aplicación web full-stack que permite a los usuarios crear y gestionar proyectos. Incluye funcionalidades para definir tareas, asignar responsables, establecer fechas límite, seguir el progreso y visualizar el estado general del proyecto mediante tableros Kanban o listas. Se integra con un sistema de notificaciones para recordatorios y actualizaciones. El objetivo es ofrecer una alternativa flexible y personalizable a herramientas más complejas, enfocada en la simplicidad y la eficiencia para el usuario individual o equipos pequeños.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "fullstack"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Django",
+              "categoria": "framework",
+              "descripcion": "Framework web Python robusto y de alto nivel que fomenta el desarrollo rápido y limpio.",
+              "version_sugerida": "4.2",
+              "url_docs": "https://docs.djangoproject.com/en/4.2/",
+              "por_que": "ORM potente, admin integrado, seguridad incorporada y gran comunidad para desarrollo fullstack rápido."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Biblioteca JavaScript declarativa para construir interfaces de usuario.",
+              "version_sugerida": "18.2",
+              "url_docs": "https://react.dev/",
+              "por_que": "Componentización eficiente, Virtual DOM para rendimiento y un ecosistema maduro para SPAs."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Django REST framework",
+              "categoria": "libreria",
+              "descripcion": "Toolkit para construir Web APIs en Django.",
+              "version_sugerida": "3.14",
+              "url_docs": "https://www.django-rest-framework.org/",
+              "por_que": "Facilita la creación de APIs RESTful consumibles por el frontend de React."
+            },
+            {
+              "nombre": "Axios",
+              "categoria": "libreria",
+              "descripcion": "Cliente HTTP basado en promesas para el navegador y Node.js.",
+              "version_sugerida": "1.5",
+              "url_docs": "https://axios-http.com/",
+              "por_que": "Simplifica las peticiones HTTP entre el frontend React y el backend Django."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto de código abierto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Fiabilidad, soporte para tipos de datos avanzados (JSONB) y escalabilidad para datos de proyectos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Asegura entornos de desarrollo y producción consistentes y facilita el despliegue."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests unitarios y de integración para el backend."
+            },
+            {
+              "nombre": "React Testing Library",
+              "categoria": "testing",
+              "descripcion": "Librería para testear componentes React de forma intuitiva.",
+              "version_sugerida": "14.0",
+              "url_docs": "https://testing-library.com/docs/react-testing-library/intro/",
+              "por_que": "Promueve buenas prácticas de testing enfocadas en la experiencia del usuario en el frontend."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de proyectos",
+          "Definición y asignación de tareas",
+          "Seguimiento de progreso (Kanban/Lista)",
+          "Fechas límite y recordatorios",
+          "Visualización de estado del proyecto",
+          "Notificaciones personalizables"
+        ],
+        "casos_uso": [
+          "Gestión de proyectos personales (ej: aprendizaje, hobbies)",
+          "Organización de tareas para pequeños equipos de trabajo",
+          "Seguimiento de hitos en proyectos académicos",
+          "Planificación de eventos o actividades",
+          "Control de tareas para freelancers"
+        ],
+        "reglas_negocio": [
+          "Cada tarea debe pertenecer a un proyecto.",
+          "Las tareas pueden tener un responsable asignado.",
+          "Las fechas límite no pueden ser anteriores a la fecha de creación.",
+          "Solo los miembros autorizados de un proyecto pueden modificar sus tareas.",
+          "Las notificaciones se activan por cambios de estado o proximidad de fecha límite."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "https://docs.djangoproject.com/en/4.2/",
+          "https://react.dev/",
+          "https://www.postgresql.org/docs/"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y JavaScript.",
+          "Comprensión de principios de desarrollo web (frontend/backend).",
+          "Familiaridad con bases de datos relacionales.",
+          "Experiencia básica con Git."
+        ],
+        "riesgos": [
+          "Complejidad en la sincronización de datos entre frontend y backend.",
+          "Dificultad para diseñar una UI/UX intuitiva y eficiente.",
+          "Gestión inadecuada de notificaciones (demasiadas o muy pocas).",
+          "Problemas de rendimiento con un gran número de tareas/proyectos.",
+          "Seguridad en la gestión de permisos de usuario."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f1a3b5c7d9e1f3a5"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "7a76dea6db6bb242"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "a8b0c2d4e6f8a0b2",
+        "titulo": "Asistente de Código con IA para Documentación Técnica",
+        "descripcion_corta": "Herramienta CLI que genera documentación técnica (docstrings, README) a partir de código fuente usando IA.",
+        "descripcion_detallada": "Desarrollo de una herramienta de línea de comandos (CLI) que analiza archivos de código fuente (Python, JavaScript) y utiliza modelos de lenguaje grandes (LLMs) para generar automáticamente documentación técnica. Esto incluye docstrings para funciones y clases, y secciones explicativas para archivos README. El objetivo es agilizar el proceso de documentación, mejorar la calidad y consistencia del código, y reducir la carga de trabajo de los desarrolladores. La herramienta permitirá configurar el nivel de detalle y el estilo de la documentación generada.",
+        "nivel": "semisenior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "ia_ml",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Typer",
+              "categoria": "framework",
+              "descripcion": "Framework para construir CLIs en Python basado en type hints.",
+              "version_sugerida": "0.9.0",
+              "url_docs": "https://typer.tiangolo.com/",
+              "por_que": "Facilita la creación de interfaces de línea de comandos robustas y amigables con autocompletado."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "OpenAI Python Client",
+              "categoria": "libreria",
+              "descripcion": "Cliente oficial de OpenAI para interactuar con sus APIs.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://github.com/openai/openai-python",
+              "por_que": "Permite el acceso programático a modelos como GPT-4 para la generación de texto de documentación."
+            },
+            {
+              "nombre": "Tree-sitter",
+              "categoria": "libreria",
+              "descripcion": "Parser incremental para varios lenguajes de programación.",
+              "version_sugerida": "0.22.0",
+              "url_docs": "https://tree-sitter.github.io/tree-sitter/",
+              "por_que": "Proporciona un análisis sintáctico robusto del código fuente para identificar funciones, clases, etc."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [
+            {
+              "nombre": "GPT-4",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo de lenguaje grande de OpenAI con capacidades avanzadas de generación de texto.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://platform.openai.com/docs/models/gpt-4",
+              "por_que": "Excelente para comprender el contexto del código y generar documentación coherente y detallada."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Esencial para probar la CLI, la lógica de análisis de código y las interacciones con la API de IA."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis de código fuente (Python, JS)",
+          "Generación automática de docstrings",
+          "Creación de secciones README",
+          "Configuración de estilo y detalle de documentación",
+          "Soporte para múltiples archivos/directorios"
+        ],
+        "casos_uso": [
+          "Mejorar la documentación de proyectos open source.",
+          "Acelerar la generación de documentación en equipos de desarrollo.",
+          "Establecer estándares de documentación consistentes.",
+          "Ayudar a desarrolladores junior a escribir mejor documentación.",
+          "Automatizar la creación de documentación para APIs."
+        ],
+        "reglas_negocio": [
+          "La herramienta debe solicitar confirmación antes de sobrescribir archivos existentes.",
+          "Se debe permitir especificar los lenguajes de programación a analizar.",
+          "La clave de API de IA debe ser proporcionada por el usuario (variable de entorno).",
+          "El nivel de detalle de la documentación debe ser configurable.",
+          "Se deben manejar errores de análisis de código y de la API de IA de forma elegante."
+        ],
+        "por_que_ia": "Se utiliza IA (LLM como GPT-4) para comprender el código fuente (funciones, clases, parámetros) y generar descripciones textuales coherentes y contextualmente relevantes para docstrings y READMEs, una tarea que sería tediosa y propensa a inconsistencias si se hiciera manualmente.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "https://typer.tiangolo.com/",
+          "https://github.com/openai/openai-python",
+          "https://tree-sitter.github.io/tree-sitter/"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 3,
+        "prerequisitos": [
+          "Conocimientos de Python y su ecosistema CLI.",
+          "Comprensión de estructuras de código y documentación técnica.",
+          "Acceso a una clave API de OpenAI.",
+          "Familiaridad con el uso de herramientas de línea de comandos."
+        ],
+        "riesgos": [
+          "La calidad de la documentación generada por la IA puede ser inconsistente.",
+          "Costos asociados al uso de la API de IA.",
+          "Dificultad para analizar correctamente código complejo o con sintaxis poco común.",
+          "Manejo de diferentes estilos de codificación y convenciones.",
+          "Dependencia de la disponibilidad y cambios en la API de OpenAI."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:05:00Z",
+        "hash_unicidad": "a8b0c2d4e6f8a0b2"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "7a76dea6db6bb242"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "e3f5a7c9b1d3e5a7",
+        "titulo": "Monitor de Rendimiento de APIs con Notificaciones Inteligentes",
+        "descripcion_corta": "Servicio que monitoriza la latencia y el estado de APIs externas y notifica sobre anomalías.",
+        "descripcion_detallada": "Creación de un microservicio que realiza peticiones periódicas a un conjunto de APIs definidas por el usuario para monitorizar su latencia de respuesta y código de estado HTTP. Utiliza umbrales configurables para detectar degradaciones de rendimiento o fallos. Cuando se detecta una anomalía, genera una notificación inteligente (ej: agrupando alertas similares, calculando la probabilidad de fallo) enviada a través de canales configurables (Slack, email, webhook). El objetivo es proporcionar una visibilidad proactiva del estado de las dependencias externas de un sistema.",
+        "nivel": "senior",
+        "scope": "proyecto",
+        "tipo": [
+          "microservicio",
+          "api",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web HTTP de alto rendimiento para Go.",
+              "version_sugerida": "1.19",
+              "url_docs": "https://gin-gonic.com/",
+              "por_que": "Rendimiento óptimo para el microservicio de monitorización y facilidad para definir rutas API."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Prometheus Go client",
+              "categoria": "libreria",
+              "descripcion": "Librería cliente para instrumentar aplicaciones Go con métricas de Prometheus.",
+              "version_sugerida": "1.17",
+              "url_docs": "https://github.com/prometheus/client_golang",
+              "por_que": "Permite exponer métricas de latencia y estado para que Prometheus las recoja y visualice."
+            },
+            {
+              "nombre": "Go-cron",
+              "categoria": "libreria",
+              "descripcion": "Planificador de tareas para Go.",
+              "version_sugerida": "3.0",
+              "url_docs": "https://github.com/robfig/cron",
+              "por_que": "Facilita la programación de las comprobaciones periódicas de las APIs a monitorizar."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "Redis",
+              "categoria": "base_datos",
+              "descripcion": "Almacén de estructura de datos en memoria.",
+              "version_sugerida": "7.0",
+              "url_docs": "https://redis.io/docs/",
+              "por_que": "Utilizado para almacenar temporalmente el estado de las alertas y para el rate limiting de notificaciones."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Prometheus",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de monitorización y alertas.",
+              "version_sugerida": "2.45",
+              "url_docs": "https://prometheus.io/docs/introduction/overview/",
+              "por_que": "Recolección y almacenamiento de métricas, y motor principal para la definición de reglas de alerta."
+            },
+            {
+              "nombre": "Alertmanager",
+              "categoria": "infraestructura",
+              "descripcion": "Componente para gestionar alertas de Prometheus.",
+              "version_sugerida": "0.25",
+              "url_docs": "https://prometheus.io/docs/alerting/latest/alertmanager/",
+              "por_que": "Enrutamiento, agrupación y envío de notificaciones basadas en las alertas generadas por Prometheus."
+            },
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para el desarrollo y despliegue de aplicaciones en contenedores.",
+              "version_sugerida": "24.0",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Empaquetado y despliegue consistentes del microservicio y sus dependencias."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Framework de testing nativo de Go.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Para escribir tests unitarios y de integración para la lógica del microservicio."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Monitorización de latencia y estado de APIs externas.",
+          "Configuración de umbrales de alerta personalizables.",
+          "Generación de alertas inteligentes (agrupación, deduplicación).",
+          "Notificaciones multicanal (Slack, email, webhooks).",
+          "Exposición de métricas para Prometheus.",
+          "Gestión de la configuración de APIs a monitorizar."
+        ],
+        "casos_uso": [
+          "Monitorizar la disponibilidad de servicios de terceros (ej: pasarelas de pago, APIs externas).",
+          "Detectar degradación de rendimiento antes de que afecte a los usuarios finales.",
+          "Alertar a equipos de operaciones sobre problemas en microservicios dependientes.",
+          "Validar el rendimiento de APIs desplegadas en diferentes entornos.",
+          "Integrar con sistemas de gestión de incidentes."
+        ],
+        "reglas_negocio": [
+          "Las comprobaciones de API deben ser configurables en frecuencia.",
+          "Se deben definir al menos un canal de notificación.",
+          "Las alertas deben tener un periodo de 'cool-down' para evitar spam.",
+          "La configuración de APIs a monitorizar debe ser persistente.",
+          "El servicio debe ser tolerante a fallos de APIs individuales sin detenerse."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "https://gin-gonic.com/",
+          "https://prometheus.io/docs/introduction/overview/",
+          "https://redis.io/docs/"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia sólida con Go y concurrencia.",
+          "Conocimientos de arquitecturas de microservicios.",
+          "Comprensión de sistemas de monitorización (Prometheus, Grafana).",
+          "Experiencia con Docker y orquestación básica.",
+          "Familiaridad con redes y protocolos HTTP."
+        ],
+        "riesgos": [
+          "Falsos positivos/negativos en las alertas debido a umbrales mal configurados.",
+          "Sobrecarga de notificaciones en caso de incidentes generalizados.",
+          "Complejidad en la gestión de la configuración dinámica de APIs.",
+          "Problemas de rendimiento del propio microservicio si se monitorizan demasiadas APIs.",
+          "Seguridad en la gestión de credenciales para APIs protegidas."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:10:00Z",
+        "hash_unicidad": "e3f5a7c9b1d3e5a7"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "7a76dea6db6bb242"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -6919,8 +7331,11 @@
     "c4d5e6f7a8b9c0d1",
     "c0d1e2f3a4b5c6d7",
     "f4b8c1d0e2f7a3b9",
-    "d8e9f0a1b2c3d4e5"
+    "d8e9f0a1b2c3d4e5",
+    "f1a3b5c7d9e1f3a5",
+    "a8b0c2d4e6f8a0b2",
+    "e3f5a7c9b1d3e5a7"
   ],
-  "total_generados": 52,
-  "fecha_ultima_generacion": "2026-10-06T14:42:04.400474"
+  "total_generados": 55,
+  "fecha_ultima_generacion": "2026-10-06T20:45:59.943169"
 }
