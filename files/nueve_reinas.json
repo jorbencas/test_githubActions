@@ -1932,5 +1932,77 @@
     "relevancia": 3,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "«East of Eden»: Florence Pugh, Zoe Kazan y la historia detrás de la nueva serie de Netflix",
+    "url": "https://www.youtube.com/watch?v=tOCBupXC4zk",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-06T18:16:44.322903+00:00",
+    "medio": "Golden Stars Hub",
+    "imagen": "https://i.ytimg.com/vi/tOCBupXC4zk/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Florence Pugh protagoniza una brillante miniserie de Netflix y su personaje es imposible de olvidar",
+    "url": "https://www.cinemania.es/cinemania/series/este-eden-east-eden-critica-miniserie-florence-pugh-netflix_7044136_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-06T18:16:53.087573+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix tarda, pero no olvida: esta serie de hace 4 años acaba de empezar a preparar su segunda temporada",
+    "url": "https://www.cinemania.es/cinemania/series/watcher-netflix-serie-temporada-2-ryan-murphy_7045084_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-06T18:16:53.087619+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "'Machos alfa' no es el final: Netflix estrena la temporada 2 de su remake más divertido",
+    "url": "https://www.cinemania.es/cinemania/series/machos-verdad-netflix-temporada-2-machos-alfa-final_7041633_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-06T18:16:53.087712+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Qué ver hoy en Netflix, Amazon Prime Video y otras plataformas: domingo 4 de octubre de 2026",
+    "url": "https://www.cinemania.es/cinemania/noticias/que-ver-hoy-netflix-amazon-prime-video-otras-plataformas-domingo-4-octubre-2026_7044185_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-06T18:16:53.087771+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "video",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Qué ver hoy en Netflix, Amazon Prime Video y otras plataformas: sábado 26 de septiembre de 2026",
+    "url": "https://www.cinemania.es/cinemania/noticias/que-ver-hoy-netflix-amazon-prime-video-otras-plataformas-sabado-26-septiembre-2026_7040961_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-06T18:16:53.087885+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "video",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
