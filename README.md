@@ -275,6 +275,81 @@ public/
 
 ---
 
+## 📅 Integración Google Calendar
+
+El proyecto tiene configuradas las credenciales de Google OAuth en el archivo `.env` (copia de `mecano_prueba_web/.env`):
+
+```bash
+# Google OAuth
+GOOGLE_CLIENT_ID=your-client-id
+GOOGLE_CLIENT_SECRET=your-client-secret
+GOOGLE_CALLBACK_URL=http://localhost/api/auth/google/callback
+```
+
+### Configuración en Google Cloud Console
+
+1. **Habilitar Google Calendar API**:
+   - Ve a [Google Cloud Console](https://console.cloud.google.com/)
+   - Selecciona tu proyecto → **APIs y servicios** → **Biblioteca**
+   - Busca **"Google Calendar API"** → **Habilitar**
+
+2. **Configurar OAuth Consent Screen**:
+   - **APIs y servicios** → **Pantalla de consentimiento OAuth**
+   - Añade scope: `https://www.googleapis.com/auth/calendar`
+   - Añade usuarios de prueba si está en "Testing"
+
+3. **Verificar Redirect URI**:
+   - En **Credenciales** → tu OAuth 2.0 Client ID
+   - **Authorized redirect URIs**: `http://localhost/api/auth/google/callback`
+   - Para producción: añade tu dominio real
+
+### Ejemplo de uso (Python)
+
+```python
+from google_auth_oauthlib.flow import Flow
+from googleapiclient.discovery import build
+
+SCOPES = ['https://www.googleapis.com/auth/calendar']
+
+flow = Flow.from_client_config(
+    {
+        "web": {
+            "client_id": os.getenv("GOOGLE_CLIENT_ID"),
+            "client_secret": os.getenv("GOOGLE_CLIENT_SECRET"),
+            "redirect_uris": [os.getenv("GOOGLE_CALLBACK_URL")],
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+            "token_uri": "https://oauth2.googleapis.com/token"
+        }
+    },
+    scopes=['https://www.googleapis.com/auth/calendar']
+)
+
+# 1. Generar URL de autorización
+auth_url, _ = flow.authorization_url(prompt='consent', access_type='offline')
+
+# 2. Tras callback, obtener token
+flow.fetch_token(authorization_response=callback_url)
+
+# 3. Usar Calendar API
+service = build('calendar', 'v3', credentials=flow.credentials)
+events = service.events().list(calendarId='primary').execute()
+```
+
+### Scopes disponibles:
+
+| Scope | Permisos |
+|-------|----------|
+| `https://www.googleapis.com/auth/calendar` | Lectura/escritura completa |
+| `https://www.googleapis.com/auth/calendar.readonly` | Solo lectura |
+| `https://www.googleapis.com/auth/calendar.events` | Solo eventos |
+
+⚠️ **Importante**:
+- Callback URL `http://localhost/api/auth/google/callback` solo funciona en local. Para producción, añade tu dominio real en Google Cloud Console.
+- **Scopes**: Usa `calendar.readonly` para solo lectura, `calendar` para lectura/escritura.
+- **Refresh token**: Guárdalo para no tener que re-autenticar cada vez.
+
+---
+
 ## 🔐 GitHub Secrets
 
 | Secret | Descripción |
