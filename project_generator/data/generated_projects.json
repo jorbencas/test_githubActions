@@ -7277,6 +7277,247 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "7a76dea6db6bb242"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f8a3b1c4d5e6f7a8",
+        "titulo": "Herramienta de Análisis de Sentimiento para Feedback de Usuarios",
+        "descripcion_corta": "Analiza y clasifica el sentimiento del feedback de usuarios para identificar áreas de mejora.",
+        "descripcion_detallada": "Esta herramienta toma texto de feedback de usuarios (ej. comentarios de aplicaciones, encuestas) y utiliza un modelo de lenguaje para clasificar el sentimiento como positivo, negativo o neutro. Proporciona un dashboard para visualizar tendencias y áreas problemáticas comunes, ayudando a los equipos de producto a priorizar mejoras. Permite la ingesta de datos vía API o carga de archivos CSV.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Alta performance, validación automática de datos con Pydantic, documentación OpenAPI generada automáticamente."
+            },
+            {
+              "nombre": "Streamlit",
+              "categoria": "framework",
+              "descripcion": "Framework para crear aplicaciones web de data science de forma sencilla.",
+              "version_sugerida": "1.20.0",
+              "url_docs": "https://docs.streamlit.io/",
+              "por_que": "Permite crear rápidamente dashboards interactivos para visualizar los resultados del análisis de sentimiento sin necesidad de conocimientos profundos de frontend."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Librería para manipulación y análisis de datos.",
+              "version_sugerida": "2.0.0",
+              "url_docs": "https://pandas.pydata.org/docs/",
+              "por_que": "Fundamental para cargar, procesar y analizar los datos de feedback de usuarios antes de pasarlos al modelo de IA."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Librería para machine learning.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://scikit-learn.org/stable/",
+              "por_que": "Útil para preprocesamiento de texto (ej. TF-IDF) y para entrenar modelos de clasificación si se opta por un enfoque no basado en LLMs grandes."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, facilitando la gestión de dependencias."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Transformers (Hugging Face)",
+              "categoria": "ia_ml",
+              "descripcion": "Librería para modelos de NLP pre-entrenados.",
+              "version_sugerida": "4.30.0",
+              "url_docs": "https://huggingface.co/docs/transformers/index",
+              "por_que": "Proporciona acceso fácil a modelos de lenguaje avanzados para análisis de sentimiento, simplificando la implementación."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir tests claros y concisos para la lógica de la aplicación y los endpoints de la API."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "API REST para recepción de feedback",
+          "Análisis de sentimiento de texto (positivo, negativo, neutro)",
+          "Dashboard interactivo con visualizaciones de tendencias",
+          "Soporte para carga de archivos CSV",
+          "Identificación de temas recurrentes en feedback negativo",
+          "Gestión básica de usuarios y autenticación"
+        ],
+        "casos_uso": [
+          "Empresas analizando comentarios de sus aplicaciones móviles",
+          "Equipos de producto evaluando la satisfacción del cliente en encuestas",
+          "Soporte al cliente priorizando tickets basados en urgencia/sentimiento",
+          "Investigadores de mercado midiendo la percepción de una marca",
+          "Desarrolladores recibiendo feedback temprano sobre nuevas features"
+        ],
+        "reglas_negocio": [
+          "El feedback debe ser procesado en un máximo de 5 minutos tras su recepción.",
+          "La clasificación de sentimiento debe tener una precisión mínima del 80% en datos de validación.",
+          "Los datos de usuarios anónimos deben ser manejados de forma segura.",
+          "El dashboard solo mostrará datos agregados y anonimizados.",
+          "Se debe permitir la configuración de umbrales para alertas de sentimiento negativo."
+        ],
+        "por_que_ia": "Se utiliza IA (modelos de NLP pre-entrenados) para realizar el análisis de sentimiento del texto del feedback, tarea que requiere comprensión del lenguaje natural y es la funcionalidad central de la aplicación.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "https://huggingface.co/models?pipeline_tag=text-classification&sort=downloads"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo web.",
+          "Comprensión básica de Machine Learning y NLP.",
+          "Familiaridad con APIs REST.",
+          "Experiencia con herramientas de visualización de datos."
+        ],
+        "riesgos": [
+          "Precisión insuficiente del modelo de sentimiento en dominios específicos.",
+          "Latencia alta en el procesamiento si los modelos son muy grandes.",
+          "Gestión de grandes volúmenes de datos puede requerir optimización.",
+          "Costos de inferencia si se usan APIs de modelos externos.",
+          "Privacidad y seguridad de los datos de feedback."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f8a3b1c4d5e6f7a8"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "bf5a2580f2b7d0af"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "e9f0a1b2c3d4e5f6",
+        "titulo": "Sistema de Gestión de Inventario para Pequeños Comercios (CLI)",
+        "descripcion_corta": "Herramienta CLI para gestionar el inventario de pequeños negocios de forma eficiente.",
+        "descripcion_detallada": "Una aplicación de línea de comandos que permite a pequeños comerciantes registrar, actualizar y consultar su inventario. Soporta operaciones como añadir nuevos productos, ajustar cantidades, marcar productos como agotados, generar reportes de stock bajo y buscar productos por nombre o código. Diseñada para ser rápida y fácil de usar para usuarios no técnicos.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "Rich",
+              "categoria": "libreria",
+              "descripcion": "Librería para añadir texto enriquecido y estilos a la terminal.",
+              "version_sugerida": "13.0.0",
+              "url_docs": "https://rich.readthedocs.io/en/latest/",
+              "por_que": "Mejora la experiencia de usuario de la CLI con colores, tablas y formato, haciendo la información más legible."
+            },
+            {
+              "nombre": "Click",
+              "categoria": "libreria",
+              "descripcion": "Framework para crear CLIs bonitas y composables.",
+              "version_sugerida": "8.1.0",
+              "url_docs": "https://click.palletsprojects.com/",
+              "por_que": "Facilita la creación de comandos, subcomandos y manejo de argumentos/opciones de forma estructurada."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "SQLite",
+              "categoria": "bases_datos",
+              "descripcion": "Motor de base de datos SQL embebido.",
+              "version_sugerida": "3.40.0",
+              "url_docs": "https://www.sqlite.org/docs.html",
+              "por_que": "Ideal para aplicaciones de escritorio o CLI pequeñas, no requiere un servidor separado y los datos se almacenan en un único archivo."
+            }
+          ],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "unittest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing unitario incorporado en Python.",
+              "version_sugerida": "3.11",
+              "url_docs": "https://docs.python.org/3/library/unittest.html",
+              "por_que": "Permite escribir y ejecutar pruebas unitarias para la lógica del negocio de forma estándar."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Añadir, editar y eliminar productos",
+          "Ajuste de stock (entrada/salida)",
+          "Consulta de inventario por nombre/código",
+          "Reporte de productos con bajo stock",
+          "Búsqueda avanzada de productos",
+          "Exportación de inventario a CSV"
+        ],
+        "casos_uso": [
+          "Una pequeña tienda de barrio gestionando sus productos.",
+          "Un artesano llevando control de materiales y productos terminados.",
+          "Un puesto de mercado organizando su mercancía.",
+          "Un autónomo administrando herramientas y equipos.",
+          "Hogares gestionando colecciones o inventario personal."
+        ],
+        "reglas_negocio": [
+          "El código de producto debe ser único.",
+          "La cantidad de stock no puede ser negativa.",
+          "Los precios deben ser números positivos.",
+          "Los reportes de bajo stock se basan en un umbral configurable por el usuario.",
+          "Cada operación de ajuste de stock debe registrar fecha y usuario (si aplica)."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Python.",
+          "Comprensión de comandos de terminal.",
+          "Nociones de bases de datos relacionales (SQL)."
+        ],
+        "riesgos": [
+          "Curva de aprendizaje para usuarios no familiarizados con CLI.",
+          "Pérdida de datos si el archivo SQLite se corrompe.",
+          "Manejo de errores en la entrada del usuario puede ser complejo.",
+          "Escalabilidad limitada para inventarios muy grandes."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:01:00Z",
+        "hash_unicidad": "e9f0a1b2c3d4e5f6"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "bf5a2580f2b7d0af"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -7334,8 +7575,10 @@
     "d8e9f0a1b2c3d4e5",
     "f1a3b5c7d9e1f3a5",
     "a8b0c2d4e6f8a0b2",
-    "e3f5a7c9b1d3e5a7"
+    "e3f5a7c9b1d3e5a7",
+    "f8a3b1c4d5e6f7a8",
+    "e9f0a1b2c3d4e5f6"
   ],
-  "total_generados": 55,
-  "fecha_ultima_generacion": "2026-10-06T20:45:59.943169"
+  "total_generados": 57,
+  "fecha_ultima_generacion": "2026-10-07T04:01:34.778963"
 }
