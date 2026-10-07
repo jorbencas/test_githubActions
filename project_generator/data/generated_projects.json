@@ -7641,6 +7641,177 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "1151b3f408c18d37"
       }
+    },
+    {
+      "proyecto": {
+        "id": "b1c2d3e4f5a6b7c8",
+        "titulo": "Monitor de Rendimiento de APIs con Alertas Inteligentes",
+        "descripcion_corta": "Servicio que monitoriza APIs, detecta anomalías y notifica sobre problemas.",
+        "descripcion_detallada": "Un microservicio que realiza peticiones periódicas a endpoints de APIs configuradas por el usuario. Monitoriza métricas clave (latencia, tasa de errores, tamaño de respuesta) y utiliza IA para detectar patrones anómalos o degradación del rendimiento. Envía notificaciones a través de Slack, email o webhooks cuando se detectan problemas.",
+        "nivel": "senior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "microservicio",
+          "ia_ml",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web HTTP de alto rendimiento para Go.",
+              "version_sugerida": "1.19.0",
+              "url_docs": "https://gin-gonic.com/docs/",
+              "por_que": "Proporciona una base robusta y rápida para la API de configuración y reporte de métricas."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Prometheus client_golang",
+              "categoria": "libreria",
+              "descripcion": "Librería cliente de Go para instrumentación con Prometheus.",
+              "version_sugerida": "1.16.0",
+              "url_docs": "https://github.com/prometheus/client_golang",
+              "por_que": "Permite exponer métricas de rendimiento del propio microservicio para su monitorización."
+            },
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Librería para análisis y manipulación de datos.",
+              "version_sugerida": "2.1.1",
+              "url_docs": "https://pandas.pydata.org/docs/",
+              "por_que": "Se usará para el análisis offline de series temporales de métricas y entrenamiento de modelos (si se implementa localmente)."
+            },
+            {
+              "nombre": "Statsmodels",
+              "categoria": "libreria",
+              "descripcion": "Paquete para la estimación de muchos modelos estadísticos.",
+              "version_sugerida": "0.14.0",
+              "url_docs": "https://www.statsmodels.org/stable/index.html",
+              "por_que": "Proporciona algoritmos para detección de anomalías y forecasting en series temporales."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "bases_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional de código abierto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Almacena la configuración de las APIs a monitorizar, umbrales de alerta y datos históricos de métricas."
+            },
+            {
+              "nombre": "Redis",
+              "categoria": "bases_datos",
+              "descripcion": "Almacén de datos en memoria clave-valor.",
+              "version_sugerida": "7.2",
+              "url_docs": "https://redis.io/docs/",
+              "por_que": "Utilizado como caché para reducir la carga en PostgreSQL y como buffer para las métricas antes de su persistencia."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Esencial para empaquetar y desplegar el microservicio y sus dependencias."
+            },
+            {
+              "nombre": "Prometheus",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de monitorización y alertas.",
+              "version_sugerida": "2.47.0",
+              "url_docs": "https://prometheus.io/docs/",
+              "por_que": "Recopila las métricas expuestas por el microservicio y las almacena para visualización y alertas."
+            },
+            {
+              "nombre": "Grafana",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de análisis y visualización de métricas.",
+              "version_sugerida": "10.2.0",
+              "url_docs": "https://grafana.com/docs/",
+              "por_que": "Visualiza las métricas recopiladas por Prometheus, permitiendo a los usuarios ver el estado de sus APIs."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Prophet (o similar)",
+              "categoria": "ia_ml",
+              "descripcion": "Librería de Facebook para predecir series temporales.",
+              "version_sugerida": "1.1.5",
+              "url_docs": "https://facebook.github.io/prophet/",
+              "por_que": "Se utiliza para modelar patrones temporales en las métricas y detectar anomalías que se desvían de estos patrones."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Framework de testing integrado en Go.",
+              "version_sugerida": null,
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Para escribir tests unitarios y de integración para la lógica del microservicio."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Configuración de endpoints de API a monitorizar.",
+          "Monitorización periódica de latencia, errores, etc.",
+          "Detección de anomalías en métricas usando IA.",
+          "Sistema de alertas configurable (Slack, email, webhooks).",
+          "Dashboard para visualización de métricas históricas."
+        ],
+        "casos_uso": [
+          "Monitorizar la disponibilidad y rendimiento de APIs críticas.",
+          "Recibir alertas proactivas antes de que los usuarios finales detecten problemas.",
+          "Identificar cuellos de botella o degradación gradual del rendimiento.",
+          "Validar el impacto de despliegues en el rendimiento de la API.",
+          "Centralizar la monitorización de múltiples APIs de terceros."
+        ],
+        "reglas_negocio": [
+          "Las peticiones de monitorización no deben exceder un umbral configurable para no sobrecargar las APIs objetivo.",
+          "Las alertas se agruparán para evitar ruido excesivo (ej. misma alerta repetida).",
+          "Los datos históricos de métricas se retendrán por un período configurable.",
+          "La configuración de APIs y alertas debe estar protegida por autenticación.",
+          "El modelo de detección de anomalías se re-entrenará periódicamente o bajo demanda."
+        ],
+        "por_que_ia": "La IA se usa para ir más allá de las alertas basadas en umbrales fijos. Permite detectar anomalías sutiles o patrones de degradación que serían difíciles de definir manualmente, aprendiendo el comportamiento 'normal' de la API y alertando sobre desviaciones significativas.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "https://prometheus.io/docs/introduction/overview/",
+          "https://grafana.com/docs/grafana/latest/introduction/what-is-grafana/"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia en Go y desarrollo de microservicios.",
+          "Conocimientos de sistemas de monitorización (Prometheus, Grafana).",
+          "Comprensión de métricas de rendimiento de APIs.",
+          "Familiaridad con la detección de anomalías y series temporales.",
+          "Experiencia con bases de datos relacionales y NoSQL."
+        ],
+        "riesgos": [
+          "Falsos positivos/negativos en la detección de anomalías.",
+          "Complejidad en la configuración y ajuste fino del modelo de IA.",
+          "Mantenimiento de la infraestructura de monitorización (Prometheus, Grafana).",
+          "Escalabilidad del servicio para monitorizar un gran número de APIs.",
+          "Dependencia de librerías externas para el análisis de series temporales."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:00:01Z",
+        "hash_unicidad": "b1c2d3e4f5a6b7c8"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "b1309d5f1efb6bf8"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -7701,8 +7872,9 @@
     "e3f5a7c9b1d3e5a7",
     "f8a3b1c4d5e6f7a8",
     "e9f0a1b2c3d4e5f6",
-    "b3a7d9f1e8c5a201"
+    "b3a7d9f1e8c5a201",
+    "b1c2d3e4f5a6b7c8"
   ],
-  "total_generados": 58,
-  "fecha_ultima_generacion": "2026-10-07T15:01:40.200184"
+  "total_generados": 59,
+  "fecha_ultima_generacion": "2026-10-07T20:58:08.109993"
 }
