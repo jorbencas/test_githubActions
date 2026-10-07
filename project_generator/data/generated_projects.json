@@ -7518,6 +7518,129 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "bf5a2580f2b7d0af"
       }
+    },
+    {
+      "proyecto": {
+        "id": "b3a7d9f1e8c5a201",
+        "titulo": "Analizador de Sentimiento de Opiniones de Clientes",
+        "descripcion_corta": "API REST para analizar el sentimiento de textos de opiniones de clientes usando modelos de NLP.",
+        "descripcion_detallada": "Desarrollar una API RESTful que reciba texto de opiniones de clientes (ej: reviews de productos, comentarios de redes sociales) y devuelva un análisis de sentimiento (positivo, negativo, neutral) junto con una puntuación de confianza. Se utilizarán modelos pre-entrenados de NLP para la clasificación del sentimiento. La API será escalable y robusta, con logging y métricas para monitorización. Ideal para empresas que necesitan entender rápidamente la percepción de sus clientes.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python 3.7+ basado en type hints estándar de Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Rendimiento asíncrono, validación automática de datos con Pydantic, generación automática de documentación OpenAPI."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Hugging Face Transformers",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca para descargar y usar modelos de Transformadores pre-entrenados para NLP.",
+              "version_sugerida": "4.30.0",
+              "url_docs": "https://huggingface.co/docs/transformers/index",
+              "por_que": "Proporciona acceso fácil a modelos de última generación para análisis de sentimiento y otras tareas de NLP."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en type hints de Python.",
+              "version_sugerida": "2.0.0",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Utilizado por FastAPI para la validación de requests y la serialización de responses, asegurando la integridad de los datos."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, facilita la gestión de dependencias."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "BERT (o similar)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo de lenguaje basado en Transformer para comprensión del lenguaje natural.",
+              "version_sugerida": null,
+              "url_docs": "https://huggingface.co/bert-base-uncased",
+              "por_que": "Excelente rendimiento en tareas de clasificación de texto como el análisis de sentimiento."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python que facilita la escritura de tests simples y escalables.",
+              "version_sugerida": "7.0.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Potente sistema de fixtures, buena integración con FastAPI (TestClient), y generación de reportes de cobertura."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis de sentimiento en texto",
+          "Puntuación de confianza",
+          "API RESTful para integración",
+          "Manejo de múltiples lenguajes (opcional)",
+          "Logging y métricas"
+        ],
+        "casos_uso": [
+          "Monitorizar la reputación de marca en redes sociales",
+          "Analizar el feedback de encuestas de clientes",
+          "Clasificar automáticamente reviews de productos",
+          "Identificar tendencias de opinión en el mercado",
+          "Soportar chatbots con comprensión emocional"
+        ],
+        "reglas_negocio": [
+          "El texto de entrada no debe ser nulo o vacío.",
+          "La respuesta debe incluir un sentimiento (positivo, negativo, neutral) y una confianza (0.0-1.0).",
+          "Se deben manejar errores de procesamiento de NLP de forma elegante.",
+          "La API debe responder en menos de 2 segundos para textos de hasta 1000 caracteres."
+        ],
+        "por_que_ia": "Se utiliza IA (modelos de NLP pre-entrenados) para la clasificación automática del sentimiento del texto, lo cual es la funcionalidad central del proyecto y no podría lograrse de manera efectiva sin ML.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "https://huggingface.co/models?pipeline_tag=text-classification&sort=downloads"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos de Python y APIs REST",
+          "Comprensión básica de Machine Learning y NLP",
+          "Familiaridad con Docker"
+        ],
+        "riesgos": [
+          "La precisión del modelo de NLP puede variar según el dominio y el idioma.",
+          "La gestión de recursos computacionales para la inferencia puede ser un desafío.",
+          "Dependencia de librerías externas de IA/NLP.",
+          "Latencia de respuesta si el modelo es muy grande o la carga es alta."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "b3a7d9f1e8c5a201"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "1151b3f408c18d37"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -7577,8 +7700,9 @@
     "a8b0c2d4e6f8a0b2",
     "e3f5a7c9b1d3e5a7",
     "f8a3b1c4d5e6f7a8",
-    "e9f0a1b2c3d4e5f6"
+    "e9f0a1b2c3d4e5f6",
+    "b3a7d9f1e8c5a201"
   ],
-  "total_generados": 57,
-  "fecha_ultima_generacion": "2026-10-07T04:01:34.778963"
+  "total_generados": 58,
+  "fecha_ultima_generacion": "2026-10-07T15:01:40.200184"
 }
