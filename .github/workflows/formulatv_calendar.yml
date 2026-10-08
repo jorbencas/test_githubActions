@@ -1,0 +1,70 @@
+name: FormulaTV Calendar Scraper
+
+on:
+  schedule:
+    - cron: '0 6 */2 * *'  # Cada 2 días a las 06:00 UTC
+  workflow_dispatch:  # Ejecución manual
+
+permissions:
+  contents: read
+
+jobs:
+  scrape:
+    name: Scrape FormulaTV & Create Calendar Events
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    env:
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      GOOGLE_CALLBACK_URL: ${{ secrets.GOOGLE_CALLBACK_URL }}
+      GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
+      GOOGLE_TOKEN_JSON: ${{ secrets.GOOGLE_TOKEN_JSON }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4 google-auth google-auth-oauthlib google-api-python-client
+
+      - name: Prepare Google credentials
+        run: |
+          mkdir -p config
+          if [ -n "$GOOGLE_CREDENTIALS_JSON" ]; then
+            echo "$GOOGLE_CREDENTIALS_JSON" > config/google_credentials.json
+          fi
+          if [ -n "$GOOGLE_TOKEN_JSON" ]; then
+            echo "$GOOGLE_TOKEN_JSON" > config/google_token.json
+          fi
+
+      - name: Run FormulaTV scraper
+        run: |
+          python scripts/scrape_formulatv_espana.py --crear-eventos --guardar-json
+
+      - name: Upload results artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: formulatv-results
+          path: files/formulatv_espana_series.json
+          retention-days: 30
+
+      - name: Notify on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '❌ FormulaTV Scraper Failed',
+              body: `The FormulaTV calendar scraper workflow failed. Check the logs for details.\n\nWorkflow: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
+            })
