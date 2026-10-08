@@ -52,6 +52,40 @@ OUTPUT_PATH = OUTPUT_DIR / 'formulatv_espana_series.json'
 FORMULATV_BASE = "https://www.formulatv.com"
 FORMULATV_CALENDARIO = f"{FORMULATV_BASE}/calendario/series/"
 
+# Cadenas/plataformas españolas (para filtrar solo series españolas)
+# Incluye: broadcasters españoles + plataformas streaming que producen originales españoles
+# Excluye: cadenas US tradicionales (CBS, NBC, ABC, Hulu, etc.)
+CADENAS_ESPAÑOLAS = {
+    # Movistar (principal productor español)
+    'movistar+', 'movistar plus', 'movistar', '#0', '#vamos',
+    # RTVE (público)
+    'rtve', 'la 1', 'la 2', 'clan', 'teledeporte', '24h', 'rtve play',
+    # Atresmedia
+    'atresplayer', 'atresmedia', 'antena 3', 'la sexta', 'nova', 'mega', 'neox', 'atrplayer premium',
+    # Mediaset
+    'mediaset', 'telecinco', 'cuatro', 'factoría de ficción', 'energy', 'divinity', 'be mad', 'mitv', 'mitele',
+    # Filmin (plataforma española)
+    'filmin',
+    # Grandes plataformas streaming que producen originales españoles
+    'netflix', 'prime video', 'disney+', 'hbo max', 'max', 'paramount+', 'skyshowtime',
+    'apple tv+', 'rakuten tv', 'rakuten',
+    # Canales autonómicos/regionales
+    'telemadrid', 'tv3', 'canal sur', 'eitb', 'etb', 'à punt', 'cmm', 'tpa', 'ib3', 'tv canaria', '7rm', 'cyltv', 'aragon tv', 'tvgalicia',
+    # Otros canales españoles
+    'paramount network españa', 'paramount network',
+    'disney channel españa', 'disney channel',
+    'nickelodeon españa', 'nickelodeon',
+    'boing españa', 'boing',
+    'discovery max', 'dkiss', 'gtv',
+}
+
+def _es_cadena_española(cadena: str) -> bool:
+    """Verifica si una cadena/plataforma es española."""
+    if not cadena:
+        return False
+    cadena_lower = cadena.lower().strip()
+    return any(c in cadena_lower for c in CADENAS_ESPAÑOLAS)
+
 
 class GoogleCalendarManager:
     """Gestor de Google Calendar para crear eventos de estrenos."""
@@ -184,7 +218,7 @@ class FormulaTVScraper:
             print(f"  ❌ Error descargando {url}: {e}")
             return None
 
-    def _parse_calendar_pills(self, html: str) -> List[Dict]:
+    def _parse_calendar_pills(self, html: str, solo_españolas: bool = True) -> List[Dict]:
         """Extrae series de los atributos data-tip de las píldoras del calendario."""
         import re
         soup = BeautifulSoup(html, 'html.parser')
@@ -227,6 +261,10 @@ class FormulaTVScraper:
 
                 # Cadena/Plataforma
                 cadena = data_tip.get('plat', '') or data_tip.get('plat-logo', '')
+
+                # FILTRO: Solo series de cadenas/plataformas españolas (si se solicita)
+                if solo_españolas and not _es_cadena_española(cadena):
+                    continue
 
                 # Género
                 genero = data_tip.get('genre', '')
@@ -277,7 +315,7 @@ class FormulaTVScraper:
 
         return series
 
-    def scrape_current_month(self) -> List[Dict]:
+    def scrape_current_month(self, solo_españolas: bool = True) -> List[Dict]:
         """Scrapea el mes actual del calendario FormulaTV."""
         print(f"🔍 Scrapeando FormulaTV calendario (mes actual)...")
 
@@ -286,7 +324,7 @@ class FormulaTVScraper:
             print("  ❌ No se pudo descargar la página")
             return []
 
-        series = self._parse_calendar_pills(html)
+        series = self._parse_calendar_pills(html, solo_españolas=solo_españolas)
 
         # Deduplicar
         seen = set()
@@ -343,13 +381,15 @@ def main():
     parser.add_argument("--dry-run", action="store_true", help="Muestra resultados sin guardar/crear eventos")
     parser.add_argument("--crear-eventos", action="store_true", help="Crea eventos en Google Calendar")
     parser.add_argument("--guardar-json", action="store_true", help="Guarda resultados en JSON")
+    parser.add_argument("--solo-españolas", action="store_true", default=True, help="Filtrar solo series de plataformas españolas (default: True)")
+    parser.add_argument("--todas", action="store_false", dest="solo_españolas", help="No filtrar por plataforma (todas las series)")
 
     args = parser.parse_args()
 
     print(f"🎬 Scraper FormulaTV Series España (mes actual)")
 
     scraper = FormulaTVScraper()
-    series = scraper.scrape_current_month()
+    series = scraper.scrape_current_month(solo_españolas=args.solo_españolas)
 
     if not series:
         print("⚠️ No se encontraron series")
