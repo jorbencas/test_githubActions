@@ -7812,6 +7812,411 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "b1309d5f1efb6bf8"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4e5f6g7h8",
+        "titulo": "Plataforma de Gestión de Incidentes y Soportes (PGI)",
+        "descripcion_corta": "Plataforma web para gestionar tickets de soporte técnico, incidentes y tareas, con asignación, seguimiento de estados y notificaciones.",
+        "descripcion_detallada": "Desarrollar una aplicación web fullstack que permita a equipos de TI y soporte gestionar de manera eficiente incidentes, solicitudes de servicio y tareas internas. Incluye gestión de usuarios, roles, creación y asignación de tickets, seguimiento de estados, prioridades, comentarios y adjuntos. Un dashboard proveerá métricas clave sobre el rendimiento del equipo y la resolución de incidentes. Se busca una interfaz de usuario intuitiva y un backend robusto.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "fullstack"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "Next.js",
+              "categoria": "framework",
+              "descripcion": "Framework React para construir aplicaciones web fullstack, con renderizado híbrido y optimizaciones de rendimiento.",
+              "version_sugerida": "14.x",
+              "url_docs": "https://nextjs.org/docs",
+              "por_que": "Permite una experiencia de desarrollo unificada para frontend y backend, con rendimiento optimizado para la interfaz de usuario."
+            },
+            {
+              "nombre": "Express.js",
+              "categoria": "framework",
+              "descripcion": "Framework minimalista y flexible para construir APIs y aplicaciones web en Node.js.",
+              "version_sugerida": "4.x",
+              "url_docs": "https://expressjs.com/",
+              "por_que": "Ofrece una base sólida y ligera para construir la API RESTful que Next.js consumirá, permitiendo flexibilidad en la lógica de negocio."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Zod",
+              "categoria": "libreria",
+              "descripcion": "Librería de validación de esquemas para TypeScript, con inferencia de tipos.",
+              "version_sugerida": "3.x",
+              "url_docs": "https://zod.dev/",
+              "por_que": "Asegura la robustez de los datos de entrada y salida de la API, con validación en tiempo de ejecución y tipado estático."
+            },
+            {
+              "nombre": "React Hook Form",
+              "categoria": "libreria",
+              "descripcion": "Librería eficiente y performante para la gestión de formularios en React.",
+              "version_sugerida": "7.x",
+              "url_docs": "https://react-hook-form.com/",
+              "por_que": "Simplifica la creación de formularios complejos con validación y manejo de estado optimizado."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos relacional de código abierto, robusta y con soporte para JSONB.",
+              "version_sugerida": "15.x",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Ideal para almacenar datos estructurados de tickets, usuarios y estados, con fiabilidad y extensibilidad."
+            },
+            {
+              "nombre": "Prisma ORM",
+              "categoria": "libreria",
+              "descripcion": "ORM de próxima generación para Node.js y TypeScript que genera un cliente de base de datos seguro.",
+              "version_sugerida": "5.x",
+              "url_docs": "https://www.prisma.io/docs/",
+              "por_que": "Facilita la interacción con PostgreSQL de manera segura y tipada, reduciendo errores y acelerando el desarrollo."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.x",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Proporciona un entorno de desarrollo reproducible y facilita el despliegue de la aplicación y la base de datos."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de pruebas de JavaScript con énfasis en la simplicidad.",
+              "version_sugerida": "29.x",
+              "url_docs": "https://jestjs.io/docs/en/getting-started",
+              "por_que": "Para pruebas unitarias y de integración de las funciones de backend y los componentes de React, asegurando la calidad del código."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Tailwind CSS",
+              "categoria": "libreria",
+              "descripcion": "Framework CSS utilitario para construir rápidamente interfaces de usuario personalizadas.",
+              "version_sugerida": "3.x",
+              "url_docs": "https://tailwindcss.com/docs",
+              "por_que": "Permite un desarrollo rápido y flexible de la interfaz de usuario con clases de utilidad, manteniendo la consistencia visual."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Creación, edición y eliminación de tickets de soporte",
+          "Asignación de tickets a usuarios/equipos",
+          "Seguimiento del estado y prioridad de los tickets",
+          "Comentarios y adjuntos en cada ticket",
+          "Dashboard con métricas de rendimiento",
+          "Sistema de notificaciones por email para actualizaciones"
+        ],
+        "casos_uso": [
+          "Un usuario final reporta un problema técnico y crea un ticket.",
+          "Un agente de soporte asigna el ticket a un especialista.",
+          "El especialista actualiza el estado del ticket y añade comentarios.",
+          "Un gerente revisa el dashboard para ver el rendimiento del equipo.",
+          "El sistema notifica al usuario final sobre la resolución de su problema."
+        ],
+        "reglas_negocio": [
+          "Solo usuarios autorizados pueden crear, editar o resolver tickets.",
+          "Un ticket debe tener al menos un título y una descripción.",
+          "La asignación de tickets solo puede hacerse a usuarios con rol de agente/especialista.",
+          "El cambio de estado de un ticket debe seguir un flujo predefinido (e.g., Abierto -> En Progreso -> Resuelto -> Cerrado).",
+          "Las notificaciones se envían automáticamente al creador y asignado del ticket en cada cambio importante."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Servicio de envío de emails (ej. SendGrid, Mailgun)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos avanzados de TypeScript y React",
+          "Experiencia con Node.js y Express.js",
+          "Familiaridad con bases de datos relacionales (PostgreSQL)",
+          "Comprensión de Docker y principios de contenedores"
+        ],
+        "riesgos": [
+          "Complejidad en la gestión de estados y transiciones de tickets.",
+          "Escalabilidad del sistema de notificaciones en un entorno de alto volumen.",
+          "Seguridad de la información sensible en los tickets y adjuntos.",
+          "Optimización de consultas a la base de datos para dashboards con muchas métricas.",
+          "Manejo de concurrencia en la edición de tickets."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "manual",
+        "fecha_generacion": "2024-07-30T10:00:00Z",
+        "hash_unicidad": "b2c3d4e5f6g7h8i9"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "834a9e37e5c21f74"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c9d0e1f2a3b4c5d6",
+        "titulo": "Microservicio de Procesamiento de Imágenes con Rust",
+        "descripcion_corta": "Microservicio robusto y de alto rendimiento para procesar imágenes (redimensionar, aplicar filtros, convertir formatos) usando Rust.",
+        "descripcion_detallada": "Desarrollar un microservicio RESTful en Rust que reciba imágenes, aplique diversas operaciones como redimensionamiento, recorte, aplicación de filtros básicos (escala de grises, sepia) y conversión entre formatos comunes (JPEG, PNG, WebP). El servicio debe ser altamente eficiente y capaz de manejar un gran volumen de solicitudes, aprovechando las capacidades de concurrencia y seguridad de memoria de Rust. Se integrará con un almacenamiento de objetos para guardar las imágenes procesadas.",
+        "nivel": "senior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "microservicio"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "rust",
+          "frameworks": [
+            {
+              "nombre": "Actix-web",
+              "categoria": "framework",
+              "descripcion": "Framework web potente y rápido para Rust, basado en el actor model.",
+              "version_sugerida": "4.x",
+              "url_docs": "https://actix.rs/",
+              "por_que": "Ofrece un rendimiento excepcional y concurrencia asíncrona, crucial para un microservicio de procesamiento intensivo."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "image",
+              "categoria": "libreria",
+              "descripcion": "Crate para manipulación de imágenes en Rust, con soporte para varios formatos y operaciones.",
+              "version_sugerida": "0.24.x",
+              "url_docs": "https://docs.rs/image/latest/image/",
+              "por_que": "Proporciona las funcionalidades básicas y avanzadas para cargar, manipular y guardar imágenes de diferentes tipos."
+            },
+            {
+              "nombre": "tokio",
+              "categoria": "libreria",
+              "descripcion": "Runtime asíncrono para Rust que permite construir aplicaciones de red rápidas y fiables.",
+              "version_sugerida": "1.x",
+              "url_docs": "https://tokio.rs/",
+              "por_que": "Es la base para la ejecución asíncrona de Actix-web y para operaciones de E/S no bloqueantes, como la lectura y escritura de imágenes."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "MinIO",
+              "categoria": "infraestructura",
+              "descripcion": "Almacenamiento de objetos compatible con S3, ideal para desarrollo y entornos on-premise.",
+              "version_sugerida": "RELEASE.2024-07-29T19-48-27Z",
+              "url_docs": "https://min.io/docs/minio/linux/index.html",
+              "por_que": "Actúa como un almacenamiento eficiente y escalable para las imágenes originales y procesadas, desacoplando el servicio."
+            },
+            {
+              "nombre": "Kubernetes",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de orquestación de contenedores de código abierto para automatizar el despliegue, escalado y gestión de aplicaciones.",
+              "version_sugerida": "1.29.x",
+              "url_docs": "https://kubernetes.io/docs/",
+              "por_que": "Para desplegar el microservicio de manera escalable, gestionando múltiples instancias y garantizando alta disponibilidad."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "cargo test",
+              "categoria": "testing",
+              "descripcion": "Herramienta de testing integrada de Rust para pruebas unitarias e de integración.",
+              "version_sugerida": "latest",
+              "url_docs": "https://doc.rust-lang.org/cargo/commands/cargo-test.html",
+              "por_que": "Se utiliza para asegurar la corrección de las funciones de procesamiento de imágenes y la lógica del API."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "OpenAPI (Swagger)",
+              "categoria": "estandar",
+              "descripcion": "Estándar para describir APIs RESTful, permitiendo la generación de documentación interactiva.",
+              "version_sugerida": "3.0",
+              "url_docs": "https://swagger.io/specification/",
+              "por_que": "Para definir y documentar claramente los endpoints del microservicio, facilitando su consumo por otros servicios o clientes."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Carga de imágenes vía API (multipart/form-data)",
+          "Redimensionamiento de imágenes a diferentes escalas",
+          "Aplicación de filtros (grayscale, sepia, blur)",
+          "Conversión de formatos (JPEG a PNG, PNG a WebP, etc.)",
+          "Almacenamiento de imágenes procesadas en MinIO",
+          "Generación de URLs de acceso a imágenes procesadas"
+        ],
+        "casos_uso": [
+          "Un sitio web de e-commerce sube la imagen de un producto y solicita varias versiones redimensionadas.",
+          "Una aplicación móvil solicita una versión de una imagen con un filtro específico.",
+          "Un servicio de backend necesita convertir todas las imágenes subidas a formato WebP para optimización.",
+          "Un usuario sube una foto y la aplicación la procesa para mostrar una miniatura y una versión con marca de agua.",
+          "Un sistema de gestión de contenido almacena diferentes variantes de una imagen para diferentes contextos."
+        ],
+        "reglas_negocio": [
+          "El tamaño máximo de imagen de entrada es de 10MB.",
+          "Solo se permiten formatos de imagen específicos (JPEG, PNG, GIF, BMP, WebP).",
+          "Las operaciones de redimensionamiento deben mantener la relación de aspecto por defecto, a menos que se especifique lo contrario.",
+          "Las imágenes procesadas deben almacenarse con un nombre de archivo único y un prefijo que indique la operación realizada.",
+          "Se debe implementar un mecanismo de autenticación y autorización para el acceso a la API."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Credenciales de acceso a MinIO (o AWS S3)."
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimiento profundo de Rust, incluyendo programación asíncrona y gestión de memoria.",
+          "Experiencia en desarrollo de microservicios y APIs RESTful.",
+          "Familiaridad con almacenamiento de objetos (S3-compatible).",
+          "Experiencia con Docker y Kubernetes."
+        ],
+        "riesgos": [
+          "Optimización del rendimiento para operaciones de imagen muy intensivas.",
+          "Manejo de errores robusto para archivos de imagen corruptos o no válidos.",
+          "Gestión de la concurrencia y los recursos (memoria/CPU) bajo alta carga.",
+          "Seguridad de los endpoints de la API y el acceso al almacenamiento de objetos.",
+          "Compatibilidad con una amplia gama de formatos y versiones de imágenes."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "manual",
+        "fecha_generacion": "2024-07-30T10:00:00Z",
+        "hash_unicidad": "d0e1f2a3b4c5d6e7"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "834a9e37e5c21f74"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "e8f9a0b1c2d3e4f5",
+        "titulo": "CLI de Sincronización de Archivos Bidireccional",
+        "descripcion_corta": "Herramienta CLI para sincronizar archivos y directorios de forma bidireccional entre una máquina local y un servidor remoto via SSH.",
+        "descripcion_detallada": "Crear una herramienta de línea de comandos (CLI) que permita a los usuarios sincronizar directorios de forma bidireccional entre su sistema local y un servidor remoto. La herramienta debe detectar cambios en ambos lados (nuevos archivos, archivos modificados, archivos eliminados) y aplicar las actualizaciones correspondientes, resolviendo conflictos de manera configurable. Utilizará SSH para la comunicación segura con el servidor remoto. Se enfocará en la robustez, la velocidad y la facilidad de uso.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "cli"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Click",
+              "categoria": "framework",
+              "descripcion": "Paquete para crear impresionantes interfaces de línea de comandos en Python.",
+              "version_sugerida": "8.x",
+              "url_docs": "https://click.palletsprojects.com/en/8.x/",
+              "por_que": "Facilita la creación de una CLI robusta y fácil de usar, con parsing de argumentos, subcomandos y ayuda automática."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "paramiko",
+              "categoria": "libreria",
+              "descripcion": "Implementación de SSHv2 para Python, que proporciona tanto un cliente como un servidor SSH.",
+              "version_sugerida": "3.x",
+              "url_docs": "https://www.paramiko.org/",
+              "por_que": "Permite establecer conexiones seguras SSH para transferir archivos y ejecutar comandos en el servidor remoto."
+            },
+            {
+              "nombre": "watchdog",
+              "categoria": "libreria",
+              "descripcion": "Librería para monitorizar eventos del sistema de archivos en tiempo real.",
+              "version_sugerida": "4.x",
+              "url_docs": "https://python-watchdog.readthedocs.io/en/stable/",
+              "por_que": "Utilizado para detectar automáticamente cambios en los directorios locales y disparar la sincronización."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de pruebas rico y flexible para Python.",
+              "version_sugerida": "8.x",
+              "url_docs": "https://docs.pytest.org/en/stable/",
+              "por_que": "Para escribir pruebas unitarias de las funciones de sincronización, detección de cambios y manejo de SSH."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "GitPython",
+              "categoria": "libreria",
+              "descripcion": "Librería para interactuar con repositorios Git, utilizada para el versionado de configuraciones.",
+              "version_sugerida": "3.x",
+              "url_docs": "https://gitpython.readthedocs.io/en/stable/",
+              "por_que": "Opcionalmente, para manejar versiones de archivos si se requiere un historial más allá de la última sincronización."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Sincronización bidireccional de directorios",
+          "Detección de archivos nuevos, modificados y eliminados",
+          "Resolución configurable de conflictos (ej. 'last modified wins')",
+          "Modo de sincronización en tiempo real (watch mode)",
+          "Exclusión de archivos/directorios mediante patrones (ej. .gitignore)",
+          "Gestión de perfiles de conexión SSH"
+        ],
+        "casos_uso": [
+          "Un desarrollador mantiene un entorno de desarrollo local sincronizado con un servidor de staging.",
+          "Un diseñador sincroniza sus archivos de diseño con un servidor de activos multimedia.",
+          "Un administrador de sistemas sincroniza archivos de configuración entre su máquina y varios servidores.",
+          "Un usuario quiere tener una copia de seguridad actualizada de un directorio importante en un servidor remoto.",
+          "Un equipo colabora en archivos compartidos, asegurándose de que todos tienen la última versión."
+        ],
+        "reglas_negocio": [
+          "Los archivos más recientes deben prevalecer en caso de conflicto de modificación, a menos que se configure lo contrario.",
+          "Los archivos eliminados localmente deben eliminarse en el remoto y viceversa, con opción de confirmación.",
+          "La autenticación SSH debe soportar claves y contraseñas.",
+          "La configuración de sincronización debe ser persistente y específica por proyecto o perfil.",
+          "Los patrones de exclusión deben ser compatibles con la sintaxis de .gitignore."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Servidor remoto accesible vía SSH"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos sólidos de Python y desarrollo CLI.",
+          "Familiaridad con SSH y administración básica de sistemas Linux.",
+          "Comprensión de sistemas de archivos y operaciones de E/S.",
+          "Experiencia con Git para el manejo de versiones (opcional)."
+        ],
+        "riesgos": [
+          "Manejo de conflictos complejos que resulten en pérdida de datos si no se gestionan adecuadamente.",
+          "Rendimiento deficiente al sincronizar directorios muy grandes o con muchos archivos.",
+          "Vulnerabilidades de seguridad en la gestión de credenciales SSH.",
+          "Errores de sincronización por problemas de red o permisos de archivos.",
+          "Diferencias en sistemas de archivos (sensibilidad a mayúsculas/minúsculas, caracteres especiales)."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "manual",
+        "fecha_generacion": "2024-07-30T10:00:00Z",
+        "hash_unicidad": "f9a0b1c2d3e4f5a6"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "834a9e37e5c21f74"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -7873,8 +8278,11 @@
     "f8a3b1c4d5e6f7a8",
     "e9f0a1b2c3d4e5f6",
     "b3a7d9f1e8c5a201",
-    "b1c2d3e4f5a6b7c8"
+    "b1c2d3e4f5a6b7c8",
+    "b2c3d4e5f6g7h8i9",
+    "d0e1f2a3b4c5d6e7",
+    "f9a0b1c2d3e4f5a6"
   ],
-  "total_generados": 59,
-  "fecha_ultima_generacion": "2026-10-07T20:58:08.109993"
+  "total_generados": 62,
+  "fecha_ultima_generacion": "2026-10-08T04:14:36.021767"
 }
