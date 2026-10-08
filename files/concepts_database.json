@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 152,
+    "total_concepts": 154,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-10-08T01:32:32.307672"
+    "last_scraped": "2026-10-08T08:21:15.710830"
   },
   "concepts": [
     {
@@ -2832,6 +2832,42 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-10-02T13:29:58.952100"
+    },
+    {
+      "title": "¿Se está convirtiendo Swift en el Rust de Apple?",
+      "summary": "Cada vez que Apple presenta una versión nueva de Swift, la lista de novedades incluye términos que hasta hace poco se asociaban a Rust: tipos que no se pueden copiar, propiedad única de los valores, p",
+      "explanation": "Cada vez que Apple presenta una versión nueva de Swift, la lista de novedades incluye términos que hasta hace poco se asociaban a Rust: tipos que no se pueden copiar, propiedad única de los valores, préstamos de memoria, comprobación de carreras de datos en compilación. De ahí la pregunta que circula entre desarrolladores: ¿se está convirtiendo Swift en el Rust de Apple? La respuesta corta es que se parece más cada año en las herramientas, pero no en la filosofía. Conviene repasar qué ha llegado, qué sigue siendo distinto y por qué Apple lo hace.El punto de partida: ARC y seguridad por defecto Swift nació en 2014 como un lenguaje seguro de alto nivel. Su modelo de memoria se basa en el recuento automático de referencias (ARC): el compilador inserta las operaciones de retención y liberación, y los valores (struct,enum) se copian con semántica de valor, a menudo con copia diferida. Es cómodo y evita la mayoría de los errores de memoria clásicos, pero tiene costes: contadores atómicos, asignaciones en el montículo y ciclos de referencias que el programador debe romper conweakounowned. Rust resuelve el mismo problema de otra manera. No hay recolector ni contadores por defecto: la propiedad y los préstamos se verifican en compilación, y el coste en ejecución es nulo. La diferencia clave es cuándo se decide quién posee un valor: en Rust, en compilación y de forma obligatoria; en Swift, tradicionalmente en ejecución y de forma implícita.Qué ha incorporado Swift en estos añosTipos no",
+      "code_example": "struct Archivo: ~Copyable {\n    private let descriptor: Int32\n\n    init(descriptor: Int32) { self.descriptor = descriptor }\n\n    deinit { close(descriptor) }          // se cierra al perder el dueño\n\n    borrowing func leer() { /* solo lectura, sin tomar posesión */ }\n    consuming func cerrar() { /* el llamador pierde el valor */ }\n}\n\nlet a = Archivo(descriptor: abrir())\na.leer()\na.cerrar()\n// a.leer()   // error de compilación: 'a' ya se consumió",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-10-08T08:20:32.271682"
+    },
+    {
+      "title": "Qué viene después de Tailwind: UnoCSS, Master CSS, Open Props y el CSS nativo",
+      "summary": "El 9 de septiembre de 2026, Adam Wathan anunció que Tailwind Labs pasa a formar parte de Shopify. El framework de utilidades CSS que se instala más de 110 millones de veces por semana según el propio ",
+      "explanation": "El 9 de septiembre de 2026, Adam Wathan anunció que Tailwind Labs pasa a formar parte de Shopify. El framework de utilidades CSS que se instala más de 110 millones de veces por semana según el propio anuncio tendrá, por fin, un propietario con espalda financiera. También llega con una explicación incómoda: el negocio que lo sostenía, la venta de componentes y plantillas, se ha resentido con las herramientas de programación asistida por IA, que generan interfaces completas sin que nadie compre nada. Los datos oficiales son sencillos. Tailwind CSS y el resto de proyectos abiertos siguen con licencia MIT y con el mismo equipo al frente, ahora con el respaldo de Shopify. En el lado comercial, la empresa deja de intentar crecer: Tailwind Plus y ui.sh siguen disponibles para quienes ya los tenían, pero se cierran las altas de clientes nuevos. Nadie se queda sin librería, pero la pregunta que se hace medio sector es qué hay más allá de Tailwind y, sobre todo, si el CSS nativo va a terminar haciendo innecesaria la capa intermedia.Por qué Tailwind marcó una época (y dónde chocaba) Tailwind llegó para sustituir a Bootstrap en el imaginario de muchos equipos: en lugar de componentes ya hechos, ofrecía clases de utilidad (p-4,text-sm,bg-red-500) que se combinan directamente en el HTML. La versión 4, publicada a comienzos de 2025, simplificó la configuración con un enfoque «CSS first» y la línea 4.3, de mayo de 2026, añadió utilidades para estilar barras de desplazamiento, más propiedades",
+      "code_example": "rules: [\n  [/^m-(d+)$/, ([, d]) => ({ margin: `${d / 4}rem` })],\n],\nvariants: [\n  {\n    match: s => s.startsWith('hover:') ? s.slice(6) : null,\n    selector: s => `${s}:hover`,\n  },\n]",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "interfaces"
+      ],
+      "cat": "interfaces",
+      "scraped_at": "2026-10-08T08:20:34.022533"
     }
   ]
 }
