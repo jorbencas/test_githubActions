@@ -234,20 +234,19 @@ def enviar_telegram(mensaje: str, chat_id: str, token: str, topic_id: Optional[s
 
 
 def formatear_mensaje(series: List[Dict]) -> str:
-    """Formatea el mensaje para Telegram estilo noticias."""
+    """Formatea el mensaje para Telegram estilo noticias (esquema solicitado)."""
     if not series:
         return ""
 
-    hoy_str = datetime.now().strftime('%d de %B de %Y').capitalize()
     meses = ['enero','febrero','marzo','abril','mayo','junio',
              'julio','agosto','septiembre','octubre','noviembre','diciembre']
     hoy = datetime.now()
     hoy_fmt = f"{hoy.day} de {meses[hoy.month-1]} de {hoy.year}"
 
     lines = [
-        f"🎬 <b>Estrenos de HOY</b> — {hoy_fmt}",
+        f"📰 <b>Estrenos del día: {hoy_fmt}</b>",
         "",
-        "📺 <b>Series y películas que se estrenan hoy en plataformas españolas:</b>",
+        "¡Buenos días! Aquí están los estrenos de hoy en plataformas españolas. 👇",
         ""
     ]
 
@@ -266,11 +265,11 @@ def formatear_mensaje(series: List[Dict]) -> str:
             genero = f" ({s['genero']})" if s.get('genero') else ""
             temp = f" T{s['temporadas']}" if s.get('temporadas', 1) > 1 else ""
             tipo = " 🎬 Película" if s.get('capitulos') in ['?', '1', 1] and s.get('temporadas', 1) == 1 else f"{temp}"
-            lines.append(f"  🎬 <b>{titulo}</b>{genero}{tipo}")
+            lines.append(f"🔸 <b>{titulo}</b>{genero}{tipo}")
             if s.get('sinopsis'):
-                lines.append(f"     _{s['sinopsis'][:200]}_")
+                lines.append(f"     {s['sinopsis'][:200]}")
             if s.get('url'):
-                lines.append(f"     🔗 <a href=\"{s['url']}\">Ver en FormulaTV</a>")
+                lines.append(f"     🔗 Leer artículo ({s['url']})")
         lines.append("")
 
     lines.append("📡 <i>Fuente: FormulaTV calendario</i>")
