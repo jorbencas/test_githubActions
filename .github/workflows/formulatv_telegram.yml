@@ -16,7 +16,7 @@ jobs:
 
     env:
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      SALUDO_CHAT_ID: ${{ secrets.SALUDO_CHAT_ID }}
       TELEGRAM_REPORT_IMG_TOPIC_ID: ${{ secrets.TELEGRAM_REPORT_IMG_TOPIC_ID }}
 
     steps:
@@ -38,7 +38,7 @@ jobs:
           python scripts/scrape_formulatv_telegram.py --crear-eventos --guardar-json || true
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SALUDO_CHAT_ID: ${{ secrets.SALUDO_CHAT_ID }}
           TELEGRAM_REPORT_IMG_TOPIC_ID: ${{ secrets.TELEGRAM_REPORT_IMG_TOPIC_ID }}
 
       - name: Upload sent log artifact

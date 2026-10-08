@@ -36,6 +36,8 @@ SENT_FILE = OUTPUT_DIR / 'formulatv_sent.json'
 FORMULATV_BASE = "https://www.formulatv.com"
 FORMULATV_CALENDARIO = f"{FORMULATV_BASE}/calendario/series/"
 
+# Usa SALUDO_CHAT_ID (mismo que saludo/greetings) para el topic "report img"
+
 # Cadenas/plataformas españolas (producen originales españoles)
 CADENAS_ESPAÑOLAS = {
     'movistar+', 'movistar plus', 'movistar', '#0', '#vamos',
@@ -287,8 +289,8 @@ def main():
 
     args = parser.parse_args()
 
-    # Config desde env o args
-    chat_id = args.chat_id or os.getenv('TELEGRAM_CHAT_ID')
+    # Config desde env o args - usa SALUDO_CHAT_ID (mismo que saludo/greetings)
+    chat_id = args.chat_id or os.getenv('SALUDO_CHAT_ID') or os.getenv('TELEGRAM_CHAT_ID')
     topic_id = args.topic_id or os.getenv('TELEGRAM_REPORT_IMG_TOPIC_ID')
     token = args.token or os.getenv('TELEGRAM_BOT_TOKEN')
 

@@ -7,7 +7,7 @@ Configura en: **Settings → Secrets and variables → Actions → New repositor
 | Secret | Descripción | Ejemplo |
 |--------|-------------|---------|
 | `TELEGRAM_BOT_TOKEN` | Token del bot (de @BotFather) | `123456789:ABCdefGhIJKlmNoPQRsTUVwxyZ` |
-| `TELEGRAM_CHAT_ID` | ID del chat/grupo/canal destino | `-1001234567890` o `@canal` |
+| `SALUDO_CHAT_ID` | ID del chat/grupo/canal destino (el mismo que usan los saludos/greetings) | `-1001234567890` o `@canal` |
 | `TELEGRAM_REPORT_IMG_TOPIC_ID` | Topic ID del foro "report img" (opcional) | `123` |
 
 ---
@@ -19,17 +19,15 @@ Configura en: **Settings → Secrets and variables → Actions → New repositor
 2. `/newbot` → nombre → username (debe terminar en `bot`)
 3. Copia el **token** → añade como secret `TELEGRAM_BOT_TOKEN`
 
-### 2. Obtener Chat ID
-**Opción A: Grupo/Canal público**
-- Añade el bot al grupo/canal como admin
-- El chat ID es el username (ej: `@mi_canal`) o el ID numérico
+### 2. Obtener Chat ID (usa SALUDO_CHAT_ID)
+**El mismo ID que usan los saludos/greetings diarios**
 
-**Opción B: Grupo privado**
-- Añade el bot al grupo
-- Envía un mensaje
-- Visita: `https://api.telegram.org/bot<TOKEN>/getUpdates`
-- Busca `"chat":{"id":-1001234567890,...}` → ese es el chat ID
-- Añade como secret `TELEGRAM_CHAT_ID`
+Si ya tienes configurados los saludos automáticos, **usa ese mismo chat ID**:
+
+1. **Grupo/Canal público**: username (ej: `@mi_canal`) o ID numérico
+2. **Grupo privado**: ve a `https://api.telegram.org/bot<TOKEN>/getUpdates`, busca `"chat":{"id":-1001234567890,...}`
+
+Añade como secret `SALUDO_CHAT_ID` (mismo valor que usas para los saludos diarios).
 
 ### 3. Topic ID (foro "report img") - Opcional
 Si el chat es un **grupo con temas (foro)**:
