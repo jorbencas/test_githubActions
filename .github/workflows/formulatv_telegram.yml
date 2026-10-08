@@ -2,7 +2,7 @@ name: FormulaTV Daily Premieres → Telegram
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # Cada 30 minutos
+    - cron: '15,45 * * * *'  # Cada 30 minutos (minutos 15 y 45) - offset de send_telegram
   workflow_dispatch:  # Ejecución manual
 
 permissions:
