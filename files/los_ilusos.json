@@ -716,5 +716,53 @@
     "relevancia": 3,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "Entrevista JONÁS TRUEBA ¿Qué piensa realmente Jonás Trueba del cine actual?",
+    "url": "https://www.youtube.com/watch?v=IP9KsVnvXAw",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-08T13:16:43.768189+00:00",
+    "medio": "242 PELÍCULAS DESPUÉS ",
+    "imagen": "https://i.ytimg.com/vi/IP9KsVnvXAw/hqdefault.jpg",
+    "tipo": "entrevista",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
+  },
+  {
+    "titulo": "JONÁS TRUEBA E ITSASO ARANA: \"Incluso cuando no hacemos una película, pensamos en la historia\"",
+    "url": "https://www.youtube.com/watch?v=O7yYPNzUEeU",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-08T13:16:43.768488+00:00",
+    "medio": "Radio 3 Extra",
+    "imagen": "https://i.ytimg.com/vi/O7yYPNzUEeU/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
+  },
+  {
+    "titulo": "El cine nos hace mejores | Jonás Trueba | TEDxMadridSalon",
+    "url": "https://www.youtube.com/watch?v=v2WkUFvVkvI",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-08T13:16:43.768520+00:00",
+    "medio": "TEDx Talks",
+    "imagen": "https://i.ytimg.com/vi/v2WkUFvVkvI/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
+  },
+  {
+    "titulo": "Los Ilusos 13+13",
+    "url": "https://www.sensacine.com/peliculas/pelicula-220188/sesiones/",
+    "fecha_pub": "Thu, 11 Apr 2013 17:00:00 GMT",
+    "fecha_ts": "2026-10-08T13:16:53.604822+00:00",
+    "medio": "Sensacine",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
