@@ -1,18 +1,21 @@
 #!/usr/bin/env python3
 """
-scrape_tmdb_espana_octubre.py — Scraper de series españolas para un mes/año usando TMDB API.
-Crea eventos en Google Calendar. Funciona en GitHub Actions (sin navegador).
+scrape_tvmaze_espana_future.py — Scraper TVMaze para series españolas con fechas futuras.
+Usa TVMaze API (gratis, sin key) buscando shows con country ES y premiereDate futura.
+Crea eventos en Google Calendar a las 09:00 con recordatorio 30 min.
+Evita duplicados. Funciona en GitHub Actions (sin navegador, sin API key).
 
 Uso:
-    python scripts/scrape_tmdb_espana_octubre.py --year 2026 --month 10
-    python scripts/scrape_tmdb_espana_octubre.py --year 2026 --month 10 --dry-run
-    python scripts/scrape_tmdb_espana_octubre.py --year 2026 --month 10 --crear-eventos
-    python scripts/scrape_tmdb_espana_octubre.py --year 2026 --month 10 --guardar-json
+    python scripts/scrape_tvmaze_espana_future.py --year 2026 --month 10
+    python scripts/scrape_tvmaze_espana_future.py --year 2026 --month 10 --dry-run
+    python scripts/scrape_tvmaze_espana_future.py --year 2026 --month 10 --crear-eventos
+    python scripts/scrape_tvmaze_espana_future.py --year 2026 --month 10 --guardar-json
 """
 import argparse
 import json
 import os
 import sys
+import time
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import List, Dict, Any, Optional
@@ -40,10 +43,9 @@ CONFIG_DIR = REPO_DIR / 'config'
 CREDENTIALS_FILE = CONFIG_DIR / 'google_credentials.json'
 TOKEN_FILE = CONFIG_DIR / 'google_token.json'
 OUTPUT_DIR = REPO_DIR / 'files'
-OUTPUT_PATH = OUTPUT_DIR / 'tmdb_espana_series.json'
+OUTPUT_PATH = OUTPUT_DIR / 'tvmaze_espana_series.json'
 
-TMDB_API_KEY = os.getenv('TMDB_API_KEY')
-TMDB_BASE_URL = "https://api.themoviedb.org/3"
+TVMAZE_BASE_URL = "https://api.tvmaze.com"
 
 
 class GoogleCalendarManager:
@@ -94,10 +96,10 @@ class GoogleCalendarManager:
                 print(f"  ⚠️  {serie.get('titulo')}: Fecha inválida '{fecha_estreno}'")
                 return False
 
-            # Verificar duplicados: buscar evento con mismo título en la misma fecha
+            # Verificar duplicados
             start_of_day = fecha_dt.replace(hour=0, minute=0, second=0, microsecond=0).isoformat() + 'Z'
             end_of_day = fecha_dt.replace(hour=23, minute=59, second=59, microsecond=0).isoformat() + 'Z'
-            
+
             existing = self.service.events().list(
                 calendarId='primary',
                 timeMin=start_of_day,
@@ -113,9 +115,9 @@ class GoogleCalendarManager:
 
             protagonistas_str = ', '.join(serie.get('protagonistas', []))
 
-            # Evento a las 09:00 (no all-day)
+            # Evento a las 09:00, duración 1h
             start_dt = fecha_dt.replace(hour=9, minute=0, second=0, microsecond=0)
-            end_dt = start_dt + timedelta(hours=1)  # Duración 1 hora
+            end_dt = start_dt + timedelta(hours=1)
 
             evento = {
                 'summary': f"🎬 Estreno: {serie['titulo']}",
@@ -123,10 +125,10 @@ class GoogleCalendarManager:
                     f"🎬 Estreno: {serie['titulo']}\n\n"
                     f"📅 Fecha: {fecha_estreno}\n"
                     f"🎭 Género: {serie.get('genero', 'N/A')}\n"
-                    f"🎬 Director: {serie.get('director', 'N/A')}\n"
+                    f"🎬 Cadena: {serie.get('cadena', 'N/A')}\n"
                     f"👥 Protagonistas: {protagonistas_str or 'N/A'}\n"
                     f"📺 Temporadas: {serie.get('temporadas', 1)} | Capítulos: {serie.get('capitulos', '?')}\n\n"
-                    f"🔗 TMDB: https://www.themoviedb.org/tv/{serie.get('tmdb_id', '')}\n"
+                    f"🔗 TVMaze: https://www.tvmaze.com/shows/{serie.get('tvmaze_id', '')}\n"
                 ),
                 'start': {
                     'dateTime': start_dt.isoformat(),
@@ -139,7 +141,7 @@ class GoogleCalendarManager:
                 'reminders': {
                     'useDefault': False,
                     'overrides': [
-                        {'method': 'popup', 'minutes': 30},  # 30 min antes
+                        {'method': 'popup', 'minutes': 30},
                     ],
                 },
             }
@@ -157,92 +159,124 @@ class GoogleCalendarManager:
             return False
 
 
-class TMDBSpainScraper:
-    """Scraper de series españolas usando TMDB API."""
+class TVMazeSpainScraper:
+    """Scraper de series españolas usando TVMaze API (gratis, sin key)."""
 
     def __init__(self):
-        if not TMDB_API_KEY:
-            raise ValueError("TMDB_API_KEY no configurado en entorno")
         self.session = requests.Session()
-        self.session.params = {
-            'api_key': TMDB_API_KEY,
-            'language': 'es-ES',
-        }
+        self.session.headers.update({
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36'
+        })
 
-    def _fetch(self, endpoint: str, params: dict = None) -> dict:
-        url = f"{TMDB_BASE_URL}{endpoint}"
+    def _fetch(self, endpoint: str, params: dict = None) -> Any:
+        url = f"{TVMAZE_BASE_URL}{endpoint}"
         try:
             response = self.session.get(url, params=params or {}, timeout=15)
             response.raise_for_status()
             return response.json()
         except Exception as e:
-            print(f"  ❌ Error API TMDB: {e}")
-            return {}
+            print(f"  ❌ Error API TVMaze: {e}")
+            return None
+
+    def _fetch_show_details(self, show_id: int) -> Optional[Dict]:
+        """Obtiene detalles completos de un show (embed cast, crew, episodes)."""
+        data = self._fetch(f"/shows/{show_id}", {"embed": "cast,crew,episodes"})
+        return data
+
+    def _is_spanish_show(self, show: dict) -> bool:
+        """Verifica si un show es español basándose en network/webChannel country."""
+        network = show.get('network') or show.get('webChannel')
+        if network and network.get('country'):
+            return network['country'].get('code') == 'ES'
+        return False
 
     def scrape_month(self, year: int, month: int) -> List[Dict]:
         """Busca series españolas que se estrenan en el mes/año dado."""
-        print(f"🔍 Buscando series españolas: {month:02d}/{year} (TMDB)...")
+        print(f"🔍 Buscando series españolas: {month:02d}/{year} (TVMaze)...")
 
         all_series = []
-        page = 1
-        total_pages = 1
+        page = 0
+        empty_pages = 0
 
-        while page <= total_pages:
-            data = self._fetch("/discover/tv", {
-                "with_origin_country": "ES",
-                "first_air_date.gte": f"{year:04d}-{month:02d}-01",
-                "first_air_date.lte": f"{year:04d}-{month:02d}-31",
-                "sort_by": "first_air_date.asc",
-                "page": page,
-                "include_adult": False,
-            })
-
-            results = data.get("results", [])
-            if not results:
+        while page < 100 and empty_pages < 5:  # Límite seguridad
+            data = self._fetch("/shows", {"page": page})
+            if not data:
                 break
 
-            for serie in results:
-                origin = serie.get("origin_country", [])
-                if "ES" not in origin:
+            page_found = 0
+            for show in data:
+                if not self._is_spanish_show(show):
                     continue
 
-                first_air = serie.get("first_air_date", "")
-                if not first_air:
+                # Verificar si tiene fecha de estreno en el mes/año objetivo
+                premiered = show.get('premiered')
+                if not premiered:
                     continue
 
                 try:
-                    air_date = datetime.fromisoformat(first_air)
+                    air_date = datetime.fromisoformat(premiered)
                     if air_date.month != month or air_date.year != year:
                         continue
                 except:
                     continue
 
                 # Obtener detalles completos
-                detalles = self._fetch(f"/tv/{serie['id']}", {
-                    "append_to_response": "credits,external_ids"
-                })
+                show_id = show['id']
+                detalles = self._fetch_show_details(show_id)
+                if not detalles:
+                    continue
 
-                generos = [g['name'] for g in detalles.get('genres', [])]
-                creadores = [c['name'] for c in detalles.get('created_by', [])]
-                cast = [c['name'] for c in detalles.get('credits', {}).get('cast', [])[:5]]
+                # Géneros
+                generos = detalles.get('genres', [])
+
+                # Creadores
+                creadores = []
+                for crew in detalles.get('_embedded', {}).get('crew', []):
+                    if crew.get('type') in ('Creator', 'Executive Producer', 'Writer'):
+                        person = crew.get('person', {})
+                        if person.get('name'):
+                            creadores.append(person['name'])
+
+                # Reparto
+                protagonistas = []
+                for cast_member in detalles.get('_embedded', {}).get('cast', [])[:5]:
+                    person = cast_member.get('person', {})
+                    if person.get('name'):
+                        protagonistas.append(person['name'])
+
+                # Cadena
+                network = show.get('network') or show.get('webChannel')
+                cadena = network.get('name', '') if network else ''
+
+                # Episodios
+                episodes = detalles.get('_embedded', {}).get('episodes', [])
+                temporadas = max([e.get('season', 0) for e in episodes]) if episodes else 1
+                capitulos = len(episodes) if episodes else '?'
+
+                # Sinopsis
+                sinopsis = detalles.get('summary', '').replace('<p>', '').replace('</p>', '').replace('<b>', '').replace('</b>', '').replace('<i>', '').replace('</i>', '')[:500] if detalles.get('summary') else ''
 
                 all_series.append({
-                    'titulo': serie['name'],
-                    'fecha_estreno': first_air,
+                    'titulo': show['name'],
+                    'fecha_estreno': premiered,
                     'genero': ', '.join(generos),
-                    'director': ', '.join(creadores) if creadores else '',
-                    'protagonistas': cast,
-                    'temporadas': detalles.get('number_of_seasons', 1),
-                    'capitulos': detalles.get('number_of_episodes', '?'),
-                    'sinopsis': detalles.get('overview', '')[:500],
-                    'tmdb_id': serie['id'],
-                    'poster': f"https://image.tmdb.org/t/p/w500{serie.get('poster_path')}" if serie.get('poster_path') else None,
-                    'vote_average': serie.get('vote_average', 0),
+                    'cadena': cadena,
+                    'protagonistas': protagonistas,
+                    'temporadas': temporadas,
+                    'capitulos': capitulos,
+                    'sinopsis': sinopsis,
+                    'tvmaze_id': show_id,
                     'fecha_scrape': datetime.now().isoformat(),
                 })
+                page_found += 1
 
-            total_pages = data.get("total_pages", 1)
+            if page_found == 0:
+                empty_pages += 1
+            else:
+                empty_pages = 0
+
             page += 1
+            time.sleep(0.1)
 
         print(f"  ✅ Encontradas {len(all_series)} series españolas")
         return all_series
@@ -277,7 +311,7 @@ def crear_eventos_google_calendar(series: List[Dict]) -> int:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Scraper series España TMDB + Google Calendar")
+    parser = argparse.ArgumentParser(description="Scraper series España TVMaze + Google Calendar")
     parser.add_argument("--year", type=int, required=True, help="Año (ej: 2026)")
     parser.add_argument("--month", type=int, required=True, help="Mes 1-12")
     parser.add_argument("--dry-run", action="store_true", help="Muestra resultados sin guardar/crear eventos")
@@ -290,14 +324,9 @@ def main():
         print("❌ Mes debe ser 1-12")
         return
 
-    if not TMDB_API_KEY:
-        print("❌ Falta TMDB_API_KEY en variables de entorno")
-        print("   Consigue tu API key gratis en: https://www.themoviedb.org/settings/api")
-        return
+    print(f"🎬 Scraper TVMaze Series España - {args.month:02d}/{args.year}")
 
-    print(f"🎬 Scraper TMDB Series España - {args.month:02d}/{args.year}")
-
-    scraper = TMDBSpainScraper()
+    scraper = TVMazeSpainScraper()
     series = scraper.scrape_month(args.year, args.month)
 
     if not series:
@@ -306,13 +335,12 @@ def main():
 
     print(f"\n📺 Series encontradas ({len(series)}):")
     for s in series:
-        print(f"  📅 {s['fecha_estreno']} - {s['titulo']} ({s.get('genero', 'N/A')}) ★ {s.get('vote_average', 0)}")
+        print(f"  📅 {s['fecha_estreno']} - {s['titulo']} ({s.get('genero', 'N/A')})")
 
     if args.dry_run:
         print("\n🔍 DRY RUN - No se guardan ni crean eventos")
         return
 
-    # Merge con estado anterior
     anteriores = cargar_estado_anterior()
     series_por_key = {f"{s['titulo']}|{s['fecha_estreno']}": s for s in anteriores}
 
