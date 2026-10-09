@@ -8217,6 +8217,149 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "834a9e37e5c21f74"
       }
+    },
+    {
+      "proyecto": {
+        "id": "0e1f2a3b4c5d6e7f",
+        "titulo": "Analizador de Sentimiento de Feedback de Usuarios",
+        "descripcion_corta": "API REST para analizar el sentimiento del feedback de usuarios y categorizarlo automáticamente.",
+        "descripcion_detallada": "Este proyecto consiste en una API RESTful que permite a las empresas procesar y analizar el feedback de sus usuarios. Utilizando modelos de procesamiento de lenguaje natural (PLN), la API determinará el sentimiento general (positivo, negativo, neutro) de cada entrada de feedback y la categorizará según temas predefinidos o detectados. Los resultados se almacenarán en una base de datos y estarán disponibles a través de la API para su consulta y visualización en dashboards externos. Ideal para equipos de producto y soporte que buscan entender mejor a sus clientes.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python 3.7+ basado en type hints estándar de Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Proporciona alto rendimiento, validación automática de datos con Pydantic y generación de documentación interactiva (Swagger UI/ReDoc)."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "NLTK",
+              "categoria": "libreria",
+              "descripcion": "Suite de bibliotecas y modelos para procesamiento de lenguaje natural en Python.",
+              "version_sugerida": "3.8.0",
+              "url_docs": "https://www.nltk.org/",
+              "por_que": "Ofrece herramientas para tokenización, lematización y análisis de sentimientos básico, útil para preprocesamiento de texto."
+            },
+            {
+              "nombre": "Transformers (Hugging Face)",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca que proporciona modelos de transformadores pre-entrenados para PLN.",
+              "version_sugerida": "4.30.0",
+              "url_docs": "https://huggingface.co/docs/transformers/",
+              "por_que": "Permite acceder y utilizar modelos avanzados de PLN, como BERT o RoBERTa, para análisis de sentimiento y clasificación de texto con alta precisión."
+            },
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "SQL toolkit y Object-Relational Mapper (ORM) para Python.",
+              "version_sugerida": "2.0.0",
+              "url_docs": "https://docs.sqlalchemy.org/",
+              "por_que": "Facilita la interacción con la base de datos relacional, permitiendo definir modelos de datos y realizar consultas de forma segura y eficiente."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos objeto-relacional de código abierto.",
+              "version_sugerida": "15.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto, escalable y soporta tipos de datos avanzados como JSONB, ideal para almacenar tanto datos estructurados como feedback semi-estructurado."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de contenedores para desarrollar, enviar y ejecutar aplicaciones.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura un entorno de desarrollo y producción consistente y reproducible, simplificando la gestión de dependencias y el despliegue."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Análisis de Sentimiento y Clasificación de Texto",
+              "categoria": "ia_ml",
+              "descripcion": "Utilización de modelos pre-entrenados (ej. DistilBERT) para determinar el sentimiento y categorizar el texto del feedback.",
+              "version_sugerida": "N/A",
+              "url_docs": null,
+              "por_que": "Permite extraer insights valiosos del feedback no estructurado de los usuarios de forma automática y escalable."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.0.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests claros y mantenibles, con un sistema de fixtures potente para la configuración de pruebas."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "API para recibir feedback de usuarios",
+          "Análisis de sentimiento (positivo/negativo/neutro)",
+          "Clasificación automática de feedback por temas",
+          "Almacenamiento persistente de resultados",
+          "Endpoint para consulta de análisis"
+        ],
+        "casos_uso": [
+          "Empresas analizando reviews de productos",
+          "Soporte técnico clasificando tickets",
+          "Equipos de marketing midiendo la reacción a campañas",
+          "Gestión de comentarios en redes sociales"
+        ],
+        "reglas_negocio": [
+          "El feedback debe ser texto.",
+          "La categorización se basa en modelos pre-entrenados.",
+          "Los resultados del análisis se asocian a la entrada original.",
+          "La API debe responder en formato JSON.",
+          "Se implementará rate limiting para proteger la API."
+        ],
+        "por_que_ia": "Se utiliza IA (modelos de PLN) para procesar el lenguaje natural del feedback de los usuarios, extrayendo automáticamente el sentimiento y la temática, lo cual sería inviable realizar manualmente a gran escala.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "Modelos Hugging Face",
+          "API de análisis de sentimiento"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos de Python y APIs REST",
+          "Comprensión básica de PLN",
+          "Familiaridad con Docker"
+        ],
+        "riesgos": [
+          "Precisión limitada de los modelos de PLN en dominios específicos.",
+          "Escalabilidad de la infraestructura de IA.",
+          "Manejo de idiomas no soportados por los modelos.",
+          "Costos de inferencia de modelos complejos.",
+          "Seguridad de la API y datos sensibles."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "0e1f2a3b4c5d6e7f"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "37493269716c2901"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -8281,8 +8424,9 @@
     "b1c2d3e4f5a6b7c8",
     "b2c3d4e5f6g7h8i9",
     "d0e1f2a3b4c5d6e7",
-    "f9a0b1c2d3e4f5a6"
+    "f9a0b1c2d3e4f5a6",
+    "0e1f2a3b4c5d6e7f"
   ],
-  "total_generados": 62,
-  "fecha_ultima_generacion": "2026-10-09T04:19:42.871275"
+  "total_generados": 63,
+  "fecha_ultima_generacion": "2026-10-09T20:31:04.353640"
 }
