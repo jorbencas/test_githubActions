@@ -2016,5 +2016,77 @@
     "relevancia": 4,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Las curiosidades más sorprendentes de “Nueve Reinas”, a 25 años de su estreno",
+    "url": "https://www.youtube.com/watch?v=fdRIFkMNthk",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-09T22:32:48.727300+00:00",
+    "medio": "Todo Noticias",
+    "imagen": "https://i.ytimg.com/vi/fdRIFkMNthk/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Las mejores miniseries de Netflix: lista definitiva de imprescindibles más allá de 'Al este del Edén' y 'Adolescencia'",
+    "url": "https://www.cinemania.es/cinemania/series/netflix-miniseries-ver-joyas-puente-pilar-2026_7045580_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-09T22:32:59.052862+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Arrasa en Netflix uno de los mayores fracasos de Russell Crowe: fue un batacazo en cines pero es la más vista en streaming",
+    "url": "https://www.cinemania.es/cinemania/noticias/russell-crowe-fracaso-cines-netflix-pelicula-mas-vista_7046058_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-09T22:32:59.052902+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Crítica de 'Animales': Ben Affleck lleva su solidez a Netflix con un thriller intenso y retorcido",
+    "url": "https://www.cinemania.es/cinemania/criticas/critica-animales-netflix-ben-affleck-thriller-intenso-retorcido_7046712_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-09T22:32:59.052919+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "critica",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "El caso Daniel Sancho en Netflix: Martiño Rivas protagoniza la miniserie de ficción que se rodará en Tailandia",
+    "url": "https://www.cinemania.es/cinemania/series/caso-daniel-sancho-netflix-martino-rivas-miniserie-tailandia_7047156_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-09T22:32:59.052937+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "'Los Bridgerton' da la sorpresa: Netflix confirma el spin-off que todos los fans esperaban",
+    "url": "https://www.cinemania.es/cinemania/series/bridgerton-netflix-spin-off-violet_7046622_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-09T22:32:59.053072+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
