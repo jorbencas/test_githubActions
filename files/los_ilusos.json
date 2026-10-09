@@ -776,5 +776,17 @@
     "relevancia": 3,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "Los ilusos 13+13",
+    "url": "https://www.sensacine.com/peliculas/pelicula-1000048420/sesiones/cerca-de-72170/",
+    "fecha_pub": "Thu, 04 Jun 2026 17:00:00 GMT",
+    "fecha_ts": "2026-10-09T22:32:59.750666+00:00",
+    "medio": "Sensacine",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
