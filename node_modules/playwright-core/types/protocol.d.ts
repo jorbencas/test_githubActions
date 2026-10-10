@@ -407,6 +407,24 @@ duration of the page.
        */
       removeAdFrames: Page.FrameId[];
     }
+    /**
+     * An ad script.
+Note: when the script is a transitive ad script, we only fill in the
+immediate ancestor script in the provenance's adScriptAncestry field (as its
+first entry), rather than filling in the full ancestry. This saves work for
+the backend, and the frontend can reconstruct the full ancestry if
+necessary.
+     */
+    export interface AdScript {
+      /**
+       * The script ID.
+       */
+      scriptId: Runtime.ScriptId;
+      /**
+       * The ad provenance.
+       */
+      provenance: Network.AdProvenance;
+    }
     
     
     /**
@@ -416,6 +434,16 @@ duration of the page.
     }
     export type getAdMetricsReturnValue = {
       metrics: AdMetrics;
+    }
+    /**
+     * Retrieves ad scripts for the current page. To minimize payload size, this
+only returns the newly tracked ad scripts since the last call to
+getAdScripts (i.e., the delta).
+     */
+    export type getAdScriptsParameters = {
+    }
+    export type getAdScriptsReturnValue = {
+      newScripts: AdScript[];
     }
   }
   
@@ -689,9 +717,15 @@ percentage [0 - 100] for scroll driven animations
        */
       animations: string[];
       /**
-       * Set the current time of each animation.
+       * Set each animation to the same time.
        */
-      currentTime: number;
+      currentTime?: number;
+      /**
+       * Set each animation to a different time. If set, should have the same
+length as animations. Exactly one of currentTime or currentTimes should
+be set.
+       */
+      currentTimes?: number[];
     }
     export type seekAnimationsReturnValue = {
     }
@@ -773,7 +807,7 @@ percentage [0 - 100] for scroll driven animations
     export interface AffectedFrame {
       frameId: Page.FrameId;
     }
-    export type CookieExclusionReason = "ExcludeSameSiteUnspecifiedTreatedAsLax"|"ExcludeSameSiteNoneInsecure"|"ExcludeSameSiteLax"|"ExcludeSameSiteStrict"|"ExcludeDomainNonASCII"|"ExcludeThirdPartyCookieBlockedInFirstPartySet"|"ExcludeThirdPartyPhaseout"|"ExcludePortMismatch"|"ExcludeSchemeMismatch";
+    export type CookieExclusionReason = "ExcludeSameSiteUnspecifiedTreatedAsLax"|"ExcludeSameSiteNoneInsecure"|"ExcludeSameSiteLax"|"ExcludeSameSiteStrict"|"ExcludeDomainNonASCII"|"ExcludeThirdPartyPhaseout"|"ExcludePortMismatch"|"ExcludeSchemeMismatch";
     export type CookieWarningReason = "WarnSameSiteUnspecifiedCrossSiteContext"|"WarnSameSiteNoneInsecure"|"WarnSameSiteUnspecifiedLaxAllowUnsafe"|"WarnSameSiteStrictLaxDowngradeStrict"|"WarnSameSiteStrictCrossDowngradeStrict"|"WarnSameSiteStrictCrossDowngradeLax"|"WarnSameSiteLaxCrossDowngradeStrict"|"WarnSameSiteLaxCrossDowngradeLax"|"WarnAttributeValueExceedsMaxSize"|"WarnDomainNonASCII"|"WarnThirdPartyPhaseout"|"WarnCrossSiteRedirectDowngradeChangesInclusion"|"WarnDeprecationTrialMetadata"|"WarnThirdPartyCookieHeuristic";
     export type CookieOperation = "SetCookie"|"ReadCookie";
     /**
@@ -1036,7 +1070,7 @@ Should be updated alongside RequestIdTokenStatus in
 third_party/blink/public/mojom/devtools/inspector_issue.mojom to include
 all cases except for success.
      */
-    export type FederatedAuthRequestIssueReason = "ShouldEmbargo"|"TooManyRequests"|"WellKnownHttpNotFound"|"WellKnownNoResponse"|"WellKnownBlockedByConnectionAllowlist"|"WellKnownInvalidResponse"|"WellKnownListEmpty"|"WellKnownInvalidContentType"|"ConfigNotInWellKnown"|"WellKnownTooBig"|"ConfigHttpNotFound"|"ConfigNoResponse"|"ConfigBlockedByConnectionAllowlist"|"ConfigInvalidResponse"|"ConfigInvalidContentType"|"IdpNotPotentiallyTrustworthy"|"DisabledInSettings"|"DisabledInFlags"|"ErrorFetchingSignin"|"InvalidSigninResponse"|"AccountsHttpNotFound"|"AccountsNoResponse"|"AccountsBlockedByConnectionAllowlist"|"AccountsInvalidResponse"|"AccountsListEmpty"|"AccountsInvalidContentType"|"IdTokenHttpNotFound"|"IdTokenNoResponse"|"IdTokenBlockedByConnectionAllowlist"|"IdTokenInvalidResponse"|"IdTokenIdpErrorResponse"|"IdTokenCrossSiteIdpErrorResponse"|"IdTokenInvalidRequest"|"IdTokenInvalidContentType"|"ErrorIdToken"|"Canceled"|"RpPageNotVisible"|"SilentMediationFailure"|"NotSignedInWithIdp"|"MissingTransientUserActivation"|"ReplacedByActiveMode"|"RelyingPartyOriginIsOpaque"|"TypeNotMatching"|"UiDismissedNoEmbargo"|"CorsError"|"SuppressedBySegmentationPlatform";
+    export type FederatedAuthRequestIssueReason = "ShouldEmbargo"|"TooManyRequests"|"WellKnownHttpNotFound"|"WellKnownNoResponse"|"WellKnownBlockedByConnectionAllowlist"|"WellKnownInvalidResponse"|"WellKnownListEmpty"|"WellKnownInvalidContentType"|"ConfigNotInWellKnown"|"WellKnownTooBig"|"ConfigHttpNotFound"|"ConfigNoResponse"|"ConfigBlockedByConnectionAllowlist"|"ConfigInvalidResponse"|"ConfigInvalidContentType"|"IdpNotPotentiallyTrustworthy"|"DisabledInSettings"|"DisabledInFlags"|"ErrorFetchingSignin"|"InvalidSigninResponse"|"AccountsHttpNotFound"|"AccountsNoResponse"|"AccountsBlockedByConnectionAllowlist"|"AccountsInvalidResponse"|"AccountsListEmpty"|"AccountsInvalidContentType"|"IdTokenHttpNotFound"|"IdTokenNoResponse"|"IdTokenBlockedByConnectionAllowlist"|"IdTokenInvalidResponse"|"IdTokenIdpErrorResponse"|"IdTokenCrossSiteIdpErrorResponse"|"IdTokenInvalidRequest"|"IdTokenInvalidContentType"|"ErrorIdToken"|"Canceled"|"RpPageNotVisible"|"SilentMediationFailure"|"NotSignedInWithIdp"|"MissingTransientUserActivation"|"ReplacedByActiveMode"|"RelyingPartyOriginIsOpaque"|"TypeNotMatching"|"UiDismissedNoEmbargo"|"CorsError"|"SuppressedBySegmentationPlatform"|"PopupBlockedByConnectionAllowlist";
     export interface FederatedAuthUserInfoRequestIssueDetails {
       federatedAuthUserInfoRequestIssueReason: FederatedAuthUserInfoRequestIssueReason;
     }
@@ -1054,7 +1088,7 @@ third_party/blink/public/mojom/devtools/inspector_issue.mojom.
 Should be updated alongside EmailVerificationRequestResult in
 third_party/blink/public/mojom/devtools/inspector_issue.mojom.
      */
-    export type EmailVerificationRequestIssueReason = "InvalidEmail"|"DnsFetchFailed"|"DnsInvalidRecord"|"WellKnownHttpNotFound"|"WellKnownNoResponse"|"WellKnownInvalidResponse"|"WellKnownListEmpty"|"WellKnownInvalidContentType"|"WellKnownMissingIssuanceEndpoint"|"WellKnownIssuanceEndpointCrossOrigin"|"WellKnownUnsupportedSigningAlgorithm"|"TokenHttpNotFound"|"TokenNoResponse"|"TokenInvalidResponse"|"TokenInvalidContentType"|"TokenMalformedSdJwt"|"TokenInvalidSdJwt"|"KeyBindingSigningFailed"|"RpOriginIsOpaque"|"WellKnownMissingAccountsEndpoint"|"UserLoggedOut"|"WellKnownAccountsEndpointCrossOrigin"|"AccountsHttpNotFound"|"AccountsNoResponse"|"AccountsInvalidResponse"|"AccountsInvalidContentType"|"AccountsEmptyList"|"EmailVerificationWellKnownHttpNotFound"|"EmailVerificationWellKnownNoResponse"|"EmailVerificationWellKnownInvalidResponse"|"EmailVerificationWellKnownInvalidContentType"|"JwksHttpNotFound"|"JwksInvalidResponse"|"TokenVerificationSdJwtUnsupportedHeaderAlg"|"TokenVerificationSdJwtInvalidTyp"|"TokenVerificationSdJwtMissingIss"|"TokenVerificationSdJwtMissingIat"|"TokenVerificationSdJwtMissingCnf"|"TokenVerificationSdJwtMissingEmail"|"TokenVerificationSdJwtInvalidIssuedAt"|"TokenVerificationSdJwtInvalidIssuer"|"TokenVerificationSdJwtJwksMissingKeys"|"TokenVerificationSdJwtSignatureFailed"|"TokenVerificationSdJwtInvalidEmailVerified"|"TokenVerificationSdJwtInvalidEmail"|"TokenVerificationSdJwtInvalidHolderKey"|"TokenVerificationKbInvalidTyp"|"TokenVerificationKbMissingAud"|"TokenVerificationKbMissingNonce"|"TokenVerificationKbMissingIat"|"TokenVerificationKbMissingSdHash"|"TokenVerificationKbInvalidIssuedAt"|"TokenVerificationKbInvalidAudience"|"TokenVerificationKbInvalidNonce"|"TokenVerificationKbInvalidSdHash"|"TokenVerificationKbMissingCnf"|"TokenVerificationKbSignatureFailed";
+    export type EmailVerificationRequestIssueReason = "InvalidEmail"|"DnsFetchFailed"|"DnsInvalidRecord"|"WellKnownHttpNotFound"|"WellKnownNoResponse"|"WellKnownInvalidResponse"|"WellKnownListEmpty"|"WellKnownInvalidContentType"|"WellKnownMissingIssuanceEndpoint"|"WellKnownIssuanceEndpointCrossOrigin"|"WellKnownUnsupportedSigningAlgorithm"|"TokenHttpNotFound"|"TokenNoResponse"|"TokenInvalidResponse"|"TokenInvalidContentType"|"TokenMalformedSdJwt"|"TokenInvalidSdJwt"|"KeyBindingSigningFailed"|"RpOriginIsOpaque"|"WellKnownMissingAccountsEndpoint"|"UserLoggedOut"|"WellKnownAccountsEndpointCrossOrigin"|"AccountsHttpNotFound"|"AccountsNoResponse"|"AccountsInvalidResponse"|"AccountsInvalidContentType"|"AccountsEmptyList"|"EmailVerificationWellKnownHttpNotFound"|"EmailVerificationWellKnownNoResponse"|"EmailVerificationWellKnownInvalidResponse"|"EmailVerificationWellKnownInvalidContentType"|"JwksHttpNotFound"|"JwksInvalidResponse"|"TokenVerificationSdJwtUnsupportedHeaderAlg"|"TokenVerificationSdJwtInvalidTyp"|"TokenVerificationSdJwtMissingIss"|"TokenVerificationSdJwtMissingIat"|"TokenVerificationSdJwtMissingCnf"|"TokenVerificationSdJwtMissingEmail"|"TokenVerificationSdJwtInvalidIssuedAt"|"TokenVerificationSdJwtInvalidIssuer"|"TokenVerificationSdJwtJwksMissingKeys"|"TokenVerificationSdJwtSignatureFailed"|"TokenVerificationSdJwtInvalidEmailVerified"|"TokenVerificationSdJwtInvalidEmail"|"TokenVerificationSdJwtInvalidHolderKey"|"TokenVerificationKbInvalidTyp"|"TokenVerificationKbMissingAud"|"TokenVerificationKbMissingNonce"|"TokenVerificationKbMissingIat"|"TokenVerificationKbMissingSdHash"|"TokenVerificationKbInvalidIssuedAt"|"TokenVerificationKbInvalidAudience"|"TokenVerificationKbInvalidNonce"|"TokenVerificationKbInvalidSdHash"|"TokenVerificationKbMissingCnf"|"TokenVerificationKbSignatureFailed"|"CrossOriginIframeNotSupported";
     /**
      * This issue tracks client hints related issues. It's used to deprecate old
 features, encourage the use of new ones, and provide general guidance.
@@ -1183,6 +1217,15 @@ Used for messages that reference a specific permission name
        */
       disableReason?: string;
     }
+    export type WebInstallIssueReason = "ManifestParsingOrNetworkError"|"StartUrlInvalid"|"ManifestMissingNameOrShortName"|"ManifestMissingId"|"NoManifest";
+    /**
+     * This issue reports a failure involving a web app manifest used by a Web
+Install operation.
+     */
+    export interface WebInstallIssueDetails {
+      manifestUrl?: string;
+      reason: WebInstallIssueReason;
+    }
     /**
      * The issue warns about blocked calls to privacy sensitive APIs via the
 Selective Permissions Intervention.
@@ -1223,7 +1266,7 @@ Selective Permissions Intervention.
 optional fields in InspectorIssueDetails to convey more specific
 information about the kind of issue.
      */
-    export type InspectorIssueCode = "CookieIssue"|"MixedContentIssue"|"BlockedByResponseIssue"|"HeavyAdIssue"|"ContentSecurityPolicyIssue"|"SharedArrayBufferIssue"|"CorsIssue"|"QuirksModeIssue"|"PartitioningBlobURLIssue"|"NavigatorUserAgentIssue"|"GenericIssue"|"DeprecationIssue"|"ClientHintIssue"|"FederatedAuthRequestIssue"|"BounceTrackingIssue"|"CookieDeprecationMetadataIssue"|"StylesheetLoadingIssue"|"FederatedAuthUserInfoRequestIssue"|"PropertyRuleIssue"|"SharedDictionaryIssue"|"ElementAccessibilityIssue"|"SRIMessageSignatureIssue"|"UnencodedDigestIssue"|"ConnectionAllowlistIssue"|"UserReidentificationIssue"|"PermissionElementIssue"|"PerformanceIssue"|"SelectivePermissionsInterventionIssue"|"EmailVerificationRequestIssue"|"LazyLoadImageIssue";
+    export type InspectorIssueCode = "CookieIssue"|"MixedContentIssue"|"BlockedByResponseIssue"|"HeavyAdIssue"|"ContentSecurityPolicyIssue"|"SharedArrayBufferIssue"|"CorsIssue"|"QuirksModeIssue"|"PartitioningBlobURLIssue"|"NavigatorUserAgentIssue"|"GenericIssue"|"DeprecationIssue"|"ClientHintIssue"|"FederatedAuthRequestIssue"|"BounceTrackingIssue"|"CookieDeprecationMetadataIssue"|"StylesheetLoadingIssue"|"FederatedAuthUserInfoRequestIssue"|"PropertyRuleIssue"|"SharedDictionaryIssue"|"ElementAccessibilityIssue"|"SRIMessageSignatureIssue"|"UnencodedDigestIssue"|"ConnectionAllowlistIssue"|"UserReidentificationIssue"|"PermissionElementIssue"|"PerformanceIssue"|"SelectivePermissionsInterventionIssue"|"EmailVerificationRequestIssue"|"LazyLoadImageIssue"|"WebInstallIssue";
     /**
      * This struct holds a list of optional fields with additional information
 specific to the kind of issue. When adding a new issue code, please also
@@ -1260,6 +1303,7 @@ add a new optional field to this type.
       selectivePermissionsInterventionIssueDetails?: SelectivePermissionsInterventionIssueDetails;
       emailVerificationRequestIssueDetails?: EmailVerificationRequestIssueDetails;
       lazyLoadImageIssueDetails?: LazyLoadImageIssueDetails;
+      webInstallIssueDetails?: WebInstallIssueDetails;
     }
     /**
      * A unique id for a DevTools inspector issue. Allows other entities (e.g.
@@ -2220,6 +2264,21 @@ or 'allowAndName'.
       arguments: string[];
     }
     /**
+     * Adds or updates a mock camera in the shared video capture device list for
+test automation. The mock camera is not scoped to a particular page or
+frame and is removed when the DevTools session that created it disconnects.
+     */
+    export type addMockCameraParameters = {
+      /**
+       * Required non-empty identifier for the mock camera. This is mapped to an
+internal virtual-device identifier and is not the MediaDeviceInfo.deviceId
+exposed to the page.
+       */
+      deviceId: string;
+    }
+    export type addMockCameraReturnValue = {
+    }
+    /**
      * Get Chrome histograms.
      */
     export type getHistogramsParameters = {
@@ -2360,6 +2419,25 @@ without the site actually being enrolled. Only supported on page targets.
       url: string;
     }
     export type addPrivacySandboxEnrollmentOverrideReturnValue = {
+    }
+    /**
+     * Gets the current globally-applied privacy control status
+See https://www.w3.org/TR/gpc/#get-global-privacy-control
+     */
+    export type getGlobalPrivacyControlParameters = {
+    }
+    export type getGlobalPrivacyControlReturnValue = {
+      gpc: boolean;
+    }
+    /**
+     * Sets and then gets the current globally-applied privacy control status
+See https://www.w3.org/TR/gpc/#set-global-privacy-control
+     */
+    export type setGlobalPrivacyControlParameters = {
+      gpc: boolean;
+    }
+    export type setGlobalPrivacyControlReturnValue = {
+      gpc: boolean;
     }
   }
   
@@ -5844,6 +5922,21 @@ if there are multiple invokers, this is just an estimate.
       nodeIds: NodeId[];
     }
     /**
+     * Returns candidate nodes that are configured as triggers for the given popover.
+     */
+    export type getImplicitAnchorCandidatesParameters = {
+      /**
+       * Id of the popover HTMLElement.
+       */
+      nodeId: NodeId;
+    }
+    export type getImplicitAnchorCandidatesReturnValue = {
+      /**
+       * Candidate elements that can invoke this popover.
+       */
+      backendNodeIds: BackendNodeId[];
+    }
+    /**
      * When enabling, this API forces an element to gain interest in its target,
 keeping interest active until disabled.
      */
@@ -5858,6 +5951,52 @@ keeping interest active until disabled.
       enable: boolean;
     }
     export type forceShowInterestReturnValue = {
+    }
+    /**
+     * Sets a spelling or grammar error marker on the given range of text.
+See https://github.com/Igalia/explainers/blob/main/force-spelling-grammar-markers/README.md
+Note: exactly one between nodeId, backendNodeId and objectId should be passed
+to identify the node.
+     */
+    export type setTextMarkerParameters = {
+      /**
+       * Identifier of the node.
+       */
+      nodeId?: NodeId;
+      /**
+       * Identifier of the backend node.
+       */
+      backendNodeId?: BackendNodeId;
+      /**
+       * JavaScript object id of the node wrapper.
+       */
+      objectId?: Runtime.RemoteObjectId;
+      /**
+       * The type of marker to set on the given range of text.
+       */
+      type: "spelling"|"grammar";
+      /**
+       * Start offset into the element's rendered text in UTF-16 code units.
+For a text control, an offset into the control's value.
+Offsets count text in DOM order and do not enter shadow trees.
+To mark text inside a shadow tree, pass the element inside the shadow tree.
+       */
+      start: number;
+      /**
+       * End offset (exclusive) in the same units and space as start.
+       */
+      end: number;
+    }
+    export type setTextMarkerReturnValue = {
+    }
+    /**
+     * Clears the spelling and grammar error text markers overlapping the ranges
+set by setTextMarker in this session. These markers are also removed when
+the DOM domain is disabled or the session ends.
+     */
+    export type clearTextMarkersParameters = {
+    }
+    export type clearTextMarkersReturnValue = {
     }
   }
   
@@ -7267,6 +7406,16 @@ useful for emulating mobile device orientation lock behavior in
 responsive design mode.
        */
       screenOrientationLockEmulation?: boolean;
+      /**
+       * Viewport meta tag behavior. Default: `default`. Note: if `mobile` is `true`,
+the viewport meta tag is always enabled.
+       */
+      viewportMeta?: "enable"|"default";
+      /**
+       * Text layout mode. Default: `default`. Note: if `mobile` is `true`,
+mobile text layout mode (text autosizing) is always enabled.
+       */
+      textLayoutMode?: "mobile"|"default";
     }
     export type setDeviceMetricsOverrideReturnValue = {
     }
@@ -8549,6 +8698,46 @@ domain before body is received results in an undefined behavior.
        * Returns the directory object at the path.
        */
       directory: Directory;
+    }
+  }
+  
+  /**
+   * This domain provides commands to trigger the "Find in page" feature.
+   */
+  export namespace FindInPage {
+    
+    
+    /**
+     * Forwards `query` to the find-in-page facility, starting a new find session.
+Where exactly the search starts from is implementation-specific.
+     */
+    export type findFirstParameters = {
+      query: string;
+    }
+    export type findFirstReturnValue = {
+    }
+    /**
+     * Moves to the next match for the query passed to the most recent
+findFirst() call.
+     */
+    export type findNextParameters = {
+    }
+    export type findNextReturnValue = {
+    }
+    /**
+     * Moves to the previous match for the query passed to the most recent
+findFirst() call.
+     */
+    export type findPrevParameters = {
+    }
+    export type findPrevReturnValue = {
+    }
+    /**
+     * Ends the current find session, if any, and clears its highlighting.
+     */
+    export type stopParameters = {
+    }
+    export type stopReturnValue = {
     }
   }
   
@@ -11070,11 +11259,11 @@ This is a temporary ability and it will be removed in the future.
     /**
      * Types of reasons why a cookie may not be stored from a response.
      */
-    export type SetCookieBlockedReason = "SecureOnly"|"SameSiteStrict"|"SameSiteLax"|"SameSiteUnspecifiedTreatedAsLax"|"SameSiteNoneInsecure"|"UserPreferences"|"ThirdPartyPhaseout"|"ThirdPartyBlockedInFirstPartySet"|"SyntaxError"|"SchemeNotSupported"|"OverwriteSecure"|"InvalidDomain"|"InvalidPrefix"|"UnknownError"|"SchemefulSameSiteStrict"|"SchemefulSameSiteLax"|"SchemefulSameSiteUnspecifiedTreatedAsLax"|"NameValuePairExceedsMaxSize"|"DisallowedCharacter"|"NoCookieContent";
+    export type SetCookieBlockedReason = "SecureOnly"|"SameSiteStrict"|"SameSiteLax"|"SameSiteUnspecifiedTreatedAsLax"|"SameSiteNoneInsecure"|"UserPreferences"|"ThirdPartyPhaseout"|"SyntaxError"|"SchemeNotSupported"|"OverwriteSecure"|"InvalidDomain"|"InvalidPrefix"|"UnknownError"|"SchemefulSameSiteStrict"|"SchemefulSameSiteLax"|"SchemefulSameSiteUnspecifiedTreatedAsLax"|"NameValuePairExceedsMaxSize"|"DisallowedCharacter"|"NoCookieContent";
     /**
      * Types of reasons why a cookie may not be sent with a request.
      */
-    export type CookieBlockedReason = "SecureOnly"|"NotOnPath"|"DomainMismatch"|"SameSiteStrict"|"SameSiteLax"|"SameSiteUnspecifiedTreatedAsLax"|"SameSiteNoneInsecure"|"UserPreferences"|"ThirdPartyPhaseout"|"ThirdPartyBlockedInFirstPartySet"|"UnknownError"|"SchemefulSameSiteStrict"|"SchemefulSameSiteLax"|"SchemefulSameSiteUnspecifiedTreatedAsLax"|"NameValuePairExceedsMaxSize"|"PortMismatch"|"SchemeMismatch"|"AnonymousContext";
+    export type CookieBlockedReason = "SecureOnly"|"NotOnPath"|"DomainMismatch"|"SameSiteStrict"|"SameSiteLax"|"SameSiteUnspecifiedTreatedAsLax"|"SameSiteNoneInsecure"|"UserPreferences"|"ThirdPartyPhaseout"|"UnknownError"|"SchemefulSameSiteStrict"|"SchemefulSameSiteLax"|"SchemefulSameSiteUnspecifiedTreatedAsLax"|"NameValuePairExceedsMaxSize"|"PortMismatch"|"SchemeMismatch"|"AnonymousContext";
     /**
      * Types of reasons why a cookie should have been blocked by 3PCD but is exempted for the request.
      */
@@ -11532,6 +11721,9 @@ known to be an ad, but provenance tracking information is unavailable.
       filterlistRule?: string;
       /**
        * The script ancestry that created the ad, if any.
+Note: depending on the context, this may represent the full ancestry up
+to the root script, or it may contain only one script representing the
+immediate ancestor.
        */
       adScriptAncestry?: AdAncestry;
     }
@@ -11818,7 +12010,7 @@ one.
       /**
        * The reason for a session being deleted.
        */
-      deletionReason: "Expired"|"FailedToRestoreKey"|"FailedToUnwrapKey"|"StoragePartitionCleared"|"ClearBrowsingData"|"ServerRequested"|"InvalidSessionParams"|"RefreshFatalError"|"DevTools";
+      deletionReason: "Expired"|"FailedToRestoreKey"|"FailedToUnwrapKey"|"StoragePartitionCleared"|"ClearBrowsingData"|"ServerRequested"|"InvalidSessionParams"|"RefreshFatalError"|"DevTools"|"Replaced";
     }
     /**
      * Session event details specific to challenges.
@@ -13393,6 +13585,47 @@ Page reload is required before the new cookie behavior will be observed
     }
     export type ContrastAlgorithm = "aa"|"aaa"|"apca";
     /**
+     * Configuration for Inset-Modified Containing Block (IMCB) and CSS Anchor Positioning highlight.
+     */
+    export interface ImcbHighlightConfig {
+      /**
+       * Border color for the Inset-Modified Containing Block (default: transparent).
+       */
+      imcbBorderColor?: DOM.RGBA;
+      /**
+       * Background fill color for the Inset-Modified Containing Block (default: transparent).
+       */
+      imcbBackgroundColor?: DOM.RGBA;
+      /**
+       * Fill color for the inset modifiers area (difference between CB and IMCB).
+       */
+      insetsBackgroundColor?: DOM.RGBA;
+      /**
+       * Hatch color for the inset modifiers area.
+       */
+      insetsHatchColor?: DOM.RGBA;
+      /**
+       * Border color for the referenced target anchor element(s) (when element is anchor-positioned).
+       */
+      anchorBorderColor?: DOM.RGBA;
+      /**
+       * Background fill color for the referenced target anchor element(s) (when element is anchor-positioned).
+       */
+      anchorBackgroundColor?: DOM.RGBA;
+      /**
+       * Whether to render the 3x3 position-area grid lines when position-area is used.
+       */
+      showPositionAreaGrid?: boolean;
+      /**
+       * Line color for the 3x3 position-area grid lines.
+       */
+      positionAreaGridLineColor?: DOM.RGBA;
+      /**
+       * Fill color for the active region within the position-area grid.
+       */
+      positionAreaActiveRegionColor?: DOM.RGBA;
+    }
+    /**
      * Configuration data for the highlighting of page elements.
      */
     export interface HighlightConfig {
@@ -13472,6 +13705,10 @@ Page reload is required before the new cookie behavior will be observed
        * The container query container highlight configuration (default: all transparent).
        */
       containerQueryContainerHighlightConfig?: ContainerQueryContainerHighlightConfig;
+      /**
+       * The IMCB highlight configuration (default: all transparent).
+       */
+      imcbHighlightConfig?: ImcbHighlightConfig;
     }
     export type ColorFormat = "rgb"|"hsl"|"hwb"|"hex";
     /**
@@ -14332,7 +14569,7 @@ supported yet.
 in services/network/public/cpp/permissions_policy/permissions_policy_features.json5.
 LINT.IfChange(PermissionsPolicyFeature)
      */
-    export type PermissionsPolicyFeature = "accelerometer"|"all-screens-capture"|"ambient-light-sensor"|"aria-notify"|"autofill"|"autoplay"|"bluetooth"|"browsing-topics"|"camera"|"captured-surface-control"|"ch-dpr"|"ch-device-memory"|"ch-downlink"|"ch-ect"|"ch-prefers-color-scheme"|"ch-prefers-reduced-motion"|"ch-prefers-reduced-transparency"|"ch-rtt"|"ch-save-data"|"ch-ua"|"ch-ua-arch"|"ch-ua-bitness"|"ch-ua-high-entropy-values"|"ch-ua-platform"|"ch-ua-model"|"ch-ua-mobile"|"ch-ua-form-factors"|"ch-ua-full-version"|"ch-ua-full-version-list"|"ch-ua-platform-version"|"ch-ua-wow64"|"ch-viewport-height"|"ch-viewport-width"|"ch-width"|"clipboard-read"|"clipboard-write"|"compute-pressure"|"controlled-frame"|"cross-origin-isolated"|"deferred-fetch"|"deferred-fetch-minimal"|"device-attributes"|"digital-credentials-create"|"digital-credentials-get"|"direct-sockets"|"direct-sockets-multicast"|"display-capture"|"document-domain"|"encrypted-media"|"execution-while-out-of-viewport"|"execution-while-not-rendered"|"focus-without-user-activation"|"fullscreen"|"frobulate"|"gamepad"|"geolocation"|"gyroscope"|"hid"|"identity-credentials-get"|"idle-detection"|"interest-cohort"|"keyboard-map"|"language-detector"|"language-model"|"local-fonts"|"local-network"|"local-network-access"|"loopback-network"|"magnetometer"|"manual-text"|"media-playback-while-not-visible"|"microphone"|"midi"|"on-device-speech-recognition"|"otp-credentials"|"payment"|"picture-in-picture"|"private-state-token-issuance"|"private-state-token-redemption"|"publickey-credentials-create"|"publickey-credentials-get"|"rewriter"|"screen-wake-lock"|"serial"|"shared-storage"|"shared-storage-select-url"|"smart-card"|"speaker-selection"|"storage-access"|"sub-apps"|"summarizer"|"sync-xhr"|"tools"|"translator"|"unload"|"usb"|"usb-unrestricted"|"vertical-scroll"|"web-app-installation"|"webnn"|"web-printing"|"web-share"|"window-management"|"writer"|"xr-spatial-tracking";
+    export type PermissionsPolicyFeature = "accelerometer"|"all-screens-capture"|"ambient-light-sensor"|"aria-notify"|"autofill"|"autoplay"|"bluetooth"|"browsing-topics"|"camera"|"captured-surface-control"|"ch-dpr"|"ch-device-memory"|"ch-downlink"|"ch-ect"|"ch-prefers-color-scheme"|"ch-prefers-reduced-motion"|"ch-prefers-reduced-transparency"|"ch-rtt"|"ch-save-data"|"ch-ua"|"ch-ua-arch"|"ch-ua-bitness"|"ch-ua-high-entropy-values"|"ch-ua-platform"|"ch-ua-model"|"ch-ua-mobile"|"ch-ua-form-factors"|"ch-ua-full-version"|"ch-ua-full-version-list"|"ch-ua-platform-version"|"ch-ua-wow64"|"ch-viewport-height"|"ch-viewport-width"|"ch-width"|"clipboard-read"|"clipboard-write"|"compute-pressure"|"controlled-frame"|"cross-origin-isolated"|"deferred-fetch"|"deferred-fetch-minimal"|"device-attributes"|"digital-credentials-create"|"digital-credentials-get"|"direct-sockets"|"direct-sockets-multicast"|"display-capture"|"document-domain"|"encrypted-media"|"execution-while-out-of-viewport"|"execution-while-not-rendered"|"focus-without-user-activation"|"fullscreen"|"frobulate"|"gamepad"|"geolocation"|"gyroscope"|"haptics"|"hid"|"identity-credentials-get"|"idle-detection"|"interest-cohort"|"keyboard-map"|"language-detector"|"language-model"|"local-fonts"|"local-network"|"local-network-access"|"loopback-network"|"magnetometer"|"manual-text"|"media-playback-while-not-visible"|"microphone"|"midi"|"on-device-speech-recognition"|"otp-credentials"|"payment"|"picture-in-picture"|"private-state-token-issuance"|"private-state-token-redemption"|"publickey-credentials-create"|"publickey-credentials-get"|"publickey-credentials-remote-client-data-json"|"rewriter"|"screen-wake-lock"|"serial"|"shared-storage"|"shared-storage-select-url"|"smart-card"|"speaker-selection"|"storage-access"|"sub-apps"|"summarizer"|"sync-xhr"|"tools"|"translator"|"unload"|"usb"|"usb-unrestricted"|"vertical-scroll"|"web-app-installation"|"webnn"|"web-printing"|"web-share"|"window-management"|"writer"|"xr-spatial-tracking";
     /**
      * Reason for a permissions policy feature to be disabled.
      */
@@ -14585,6 +14822,10 @@ Example URLs: http://www.google.com/file.html -> "google.com"
        * Frame swap timestamp.
        */
       timestamp?: Network.TimeSinceEpoch;
+      /**
+       * Frame swap timestamp as monotonic time.
+       */
+      monotonicTimestamp?: Network.MonotonicTime;
     }
     /**
      * Javascript dialog type.
@@ -14922,6 +15163,24 @@ https://github.com/WICG/manifest-incubations/blob/gh-pages/scope_extensions-expl
       shortcuts?: Shortcut[];
       startUrl?: string;
       themeColor?: string;
+    }
+    export interface SubApp {
+      /**
+       * Display name of the sub-app.
+       */
+      name: string;
+      /**
+       * Scope of the sub-app.
+       */
+      scope: string;
+      /**
+       * Manifest id of the sub-app.
+       */
+      manifestId: string;
+      /**
+       * Start URL of the sub-app.
+       */
+      startUrl: string;
     }
     /**
      * The type of a frameNavigated event.
@@ -15607,7 +15866,7 @@ navigations when a new window context is created.
       primaryIcon?: binary;
     }
     /**
-     * Returns the unique (PWA) app id.
+     * Returns the unique (PWA) app id, along with IWA bundle ID and parent app info.
 Only returns values if the feature flag 'WebAppEnableManifestId' is enabled
      */
     export type getAppIdParameters = {
@@ -15621,6 +15880,30 @@ Only returns values if the feature flag 'WebAppEnableManifestId' is enabled
        * Recommendation for manifest's id attribute to match current id computed from start_url
        */
       recommendedId?: string;
+      /**
+       * The bundle ID for an Isolated Web App (IWA)
+       */
+      bundleId?: string;
+      /**
+       * The name of the parent app if this app is a Sub-App
+       */
+      parentAppName?: string;
+    }
+    /**
+     * Returns the list of installed child Sub-Apps for the inspected parent app.
+     */
+    export type getSubAppsParameters = {
+    }
+    export type getSubAppsReturnValue = {
+      subApps: SubApp[];
+    }
+    /**
+     * Returns the list of sibling Sub-Apps sharing the same parent app if the inspected context is a Sub-App.
+     */
+    export type getSiblingSubAppsParameters = {
+    }
+    export type getSiblingSubAppsReturnValue = {
+      subApps: SubApp[];
     }
     export type getAdScriptAncestryParameters = {
       frameId: FrameId;
@@ -16224,9 +16507,21 @@ unavailable.
        */
       maxHeight?: number;
       /**
-       * Send every n-th frame.
+       * Send every n-th frame. Must be a positive integer.
        */
       everyNthFrame?: number;
+      /**
+       * Maximum number of frames sent until screencastFrameAck is required.
+Defaults to 3. Must be a positive integer.
+       */
+      maxFramesInFlight?: number;
+      /**
+       * By default, after screencastFrameAck arrives, the next produced frame is sent.
+Passing this flag enables storing the last produced frame in memory, which is
+immediately sent upon screencastFrameAck. This way, overall performance is
+traded for a better latency.
+       */
+      sendLastFrame?: boolean;
     }
     export type startScreencastReturnValue = {
     }
@@ -16762,6 +17057,12 @@ filter out the ones that aren't necessary to the developers.
       key: PreloadingAttemptKey;
       pipelineId: PreloadPipelineId;
       status: PreloadingStatus;
+      /**
+       * The action currently performed by this attempt. This differs from
+`key.action` after a prerender-until-script attempt is upgraded in place
+to a full prerender.
+       */
+      effectiveAction?: SpeculationAction;
       prerenderStatus?: PrerenderFinalStatus;
       /**
        * This is used to give users more information about the name of Mojo interface
@@ -17106,6 +17407,50 @@ be handled by the DevTools client and should be answered with `handleCertificate
     export type ServiceWorkerVersionRunningStatus = "stopped"|"starting"|"running"|"stopping";
     export type ServiceWorkerVersionStatus = "new"|"installing"|"installed"|"activating"|"activated"|"redundant";
     /**
+     * Mostly corresponds to `RouterCondition` in ServiceWorker spec
+(https://www.w3.org/TR/service-workers/#dictdef-routercondition)
+     */
+    export interface ServiceWorkerRouterCondition {
+      /**
+       * Plain text, or JSON serialization of URLPatternInit or URLPattern
+       */
+      urlPattern?: string;
+      requestMethod?: string;
+      requestMode?: string;
+      requestDestination?: string;
+      runningStatus?: ServiceWorkerVersionRunningStatus;
+      or?: ServiceWorkerRouterCondition[];
+      not?: ServiceWorkerRouterCondition;
+    }
+    export type ServiceWorkerRouterSourceType = "cache"|"fetchEvent"|"network"|"raceNetworkAndFetchHandler"|"raceNetworkAndCache"|"sourceDict";
+    /**
+     * https://www.w3.org/TR/service-workers/#dictdef-routersourcedict
+     */
+    export interface ServiceWorkerRouterSourceDict {
+      cacheName: string;
+    }
+    /**
+     * Corresponds to `RouterSource` in the spec while the representation is different as follows.
+(https://www.w3.org/TR/service-workers/#typedefdef-routersource)
+- `RouterSourceEnum`: `type` equals `cache`, `sourceDict` is null.
+- `RouterSourceDict`: `type` equals `sourceDict`, `sourceDict` has valid value.
+     */
+    export interface ServiceWorkerRouterSource {
+      type: ServiceWorkerRouterSourceType;
+      /**
+       * Non-empty iff `type` equals "sourceDict".
+       */
+      sourceDict?: ServiceWorkerRouterSourceDict;
+    }
+    export interface ServiceWorkerRouterRule {
+      condition: ServiceWorkerRouterCondition;
+      source: ServiceWorkerRouterSource;
+      /**
+       * Rule ID assigned by the browser. Unique within each ServiceWorkerVersion.
+       */
+      id: number;
+    }
+    /**
      * ServiceWorker version.
      */
     export interface ServiceWorkerVersion {
@@ -17125,7 +17470,13 @@ For cached script it is the last time the cache entry was validated.
       scriptResponseTime?: number;
       controlledClients?: Target.TargetID[];
       targetId?: Target.TargetID;
+      /**
+       * Migration to `typedRouterRules` is in progress. The browser sends either
+`routerRules` or `typedRouterRules`.
+TODO(crbug.com/540469610): Remove `routerRules` after the migration.
+       */
       routerRules?: string;
+      typedRouterRules?: ServiceWorkerRouterRule[];
     }
     /**
      * ServiceWorker error message.
@@ -17621,7 +17972,7 @@ Microsoft: https://learn.microsoft.com/en-us/windows/win32/api/winscard/nf-winsc
     /**
      * Enum of possible storage types.
      */
-    export type StorageType = "cookies"|"file_systems"|"indexeddb"|"local_storage"|"shader_cache"|"websql"|"service_workers"|"cache_storage"|"shared_storage"|"storage_buckets"|"all"|"other";
+    export type StorageType = "cookies"|"file_systems"|"indexeddb"|"local_storage"|"shader_cache"|"websql"|"service_workers"|"cache_storage"|"storage_buckets"|"all"|"other";
     /**
      * Usage for a storage type.
      */
@@ -17644,187 +17995,50 @@ Tokens from that issuer.
       count: number;
     }
     /**
-     * Enum of shared storage access scopes.
+     * Details of a stored Private Verification Token.
      */
-    export type SharedStorageAccessScope = "window"|"sharedStorageWorklet"|"header";
-    /**
-     * Enum of shared storage access methods.
-     */
-    export type SharedStorageAccessMethod = "addModule"|"createWorklet"|"selectURL"|"run"|"batchUpdate"|"set"|"append"|"delete"|"clear"|"get"|"keys"|"values"|"entries"|"length"|"remainingBudget";
-    /**
-     * Struct for a single key-value pair in an origin's shared storage.
-     */
-    export interface SharedStorageEntry {
-      key: string;
-      value: string;
-    }
-    /**
-     * Details for an origin's shared storage.
-     */
-    export interface SharedStorageMetadata {
+    export interface PrivateVerificationToken {
       /**
-       * Time when the origin's shared storage was last created.
+       * Unique identifier of the token in the database.
+       */
+      id: string;
+      /**
+       * Origin of the token issuer.
+       */
+      issuerOrigin: string;
+      /**
+       * Public key ID used to issue the token.
+       */
+      keyId: number;
+      /**
+       * Expiration timestamp in seconds since the epoch.
+       */
+      expiration: Network.TimeSinceEpoch;
+      /**
+       * Token creation timestamp in seconds since the epoch.
        */
       creationTime: Network.TimeSinceEpoch;
       /**
-       * Number of key-value pairs stored in origin's shared storage.
+       * Token protocol version.
        */
-      length: number;
+      version: number;
       /**
-       * Current amount of bits of entropy remaining in the navigation budget.
+       * Base64-encoded serialized token.
        */
-      remainingBudget: number;
-      /**
-       * Total number of bytes stored as key-value pairs in origin's shared
-storage.
-       */
-      bytesUsed: number;
+      token: string;
     }
     /**
-     * Represents a dictionary object passed in as privateAggregationConfig to
-run or selectURL.
+     * Configuration for a Private Verification Tokens issuer.
      */
-    export interface SharedStoragePrivateAggregationConfig {
+    export interface PrivateVerificationTokensIssuerConfig {
       /**
-       * The chosen aggregation service deployment.
+       * Origin of the token issuer.
        */
-      aggregationCoordinatorOrigin?: string;
+      issuerOrigin: string;
       /**
-       * The context ID provided.
+       * Origins authorized to redeem tokens from this issuer.
        */
-      contextId?: string;
-      /**
-       * Configures the maximum size allowed for filtering IDs.
-       */
-      filteringIdMaxBytes: number;
-      /**
-       * The limit on the number of contributions in the final report.
-       */
-      maxContributions?: number;
-    }
-    /**
-     * Pair of reporting metadata details for a candidate URL for `selectURL()`.
-     */
-    export interface SharedStorageReportingMetadata {
-      eventType: string;
-      reportingUrl: string;
-    }
-    /**
-     * Bundles a candidate URL with its reporting metadata.
-     */
-    export interface SharedStorageUrlWithMetadata {
-      /**
-       * Spec of candidate URL.
-       */
-      url: string;
-      /**
-       * Any associated reporting metadata.
-       */
-      reportingMetadata: SharedStorageReportingMetadata[];
-    }
-    /**
-     * Bundles the parameters for shared storage access events whose
-presence/absence can vary according to SharedStorageAccessType.
-     */
-    export interface SharedStorageAccessParams {
-      /**
-       * Spec of the module script URL.
-Present only for SharedStorageAccessMethods: addModule and
-createWorklet.
-       */
-      scriptSourceUrl?: string;
-      /**
-       * String denoting "context-origin", "script-origin", or a custom
-origin to be used as the worklet's data origin.
-Present only for SharedStorageAccessMethod: createWorklet.
-       */
-      dataOrigin?: string;
-      /**
-       * Name of the registered operation to be run.
-Present only for SharedStorageAccessMethods: run and selectURL.
-       */
-      operationName?: string;
-      /**
-       * ID of the operation call.
-Present only for SharedStorageAccessMethods: run and selectURL.
-       */
-      operationId?: string;
-      /**
-       * Whether or not to keep the worket alive for future run or selectURL
-calls.
-Present only for SharedStorageAccessMethods: run and selectURL.
-       */
-      keepAlive?: boolean;
-      /**
-       * Configures the private aggregation options.
-Present only for SharedStorageAccessMethods: run and selectURL.
-       */
-      privateAggregationConfig?: SharedStoragePrivateAggregationConfig;
-      /**
-       * The operation's serialized data in bytes (converted to a string).
-Present only for SharedStorageAccessMethods: run and selectURL.
-TODO(crbug.com/401011862): Consider updating this parameter to binary.
-       */
-      serializedData?: string;
-      /**
-       * Array of candidate URLs' specs, along with any associated metadata.
-Present only for SharedStorageAccessMethod: selectURL.
-       */
-      urlsWithMetadata?: SharedStorageUrlWithMetadata[];
-      /**
-       * Spec of the URN:UUID generated for a selectURL call.
-Present only for SharedStorageAccessMethod: selectURL.
-       */
-      urnUuid?: string;
-      /**
-       * Key for a specific entry in an origin's shared storage.
-Present only for SharedStorageAccessMethods: set, append, delete, and
-get.
-       */
-      key?: string;
-      /**
-       * Value for a specific entry in an origin's shared storage.
-Present only for SharedStorageAccessMethods: set and append.
-       */
-      value?: string;
-      /**
-       * Whether or not to set an entry for a key if that key is already present.
-Present only for SharedStorageAccessMethod: set.
-       */
-      ignoreIfPresent?: boolean;
-      /**
-       * A number denoting the (0-based) order of the worklet's
-creation relative to all other shared storage worklets created by
-documents using the current storage partition.
-Present only for SharedStorageAccessMethods: addModule, createWorklet.
-       */
-      workletOrdinal?: number;
-      /**
-       * Hex representation of the DevTools token used as the TargetID for the
-associated shared storage worklet.
-Present only for SharedStorageAccessMethods: addModule, createWorklet,
-run, selectURL, and any other SharedStorageAccessMethod when the
-SharedStorageAccessScope is sharedStorageWorklet.
-       */
-      workletTargetId?: Target.TargetID;
-      /**
-       * Name of the lock to be acquired, if present.
-Optionally present only for SharedStorageAccessMethods: batchUpdate,
-set, append, delete, and clear.
-       */
-      withLock?: string;
-      /**
-       * If the method has been called as part of a batchUpdate, then this
-number identifies the batch to which it belongs.
-Optionally present only for SharedStorageAccessMethods:
-batchUpdate (required), set, append, delete, and clear.
-       */
-      batchUpdateId?: string;
-      /**
-       * Number of modifier methods sent in batch.
-Present only for SharedStorageAccessMethod: batchUpdate.
-       */
-      batchSize?: number;
+      redeemerOrigins: string[];
     }
     export type StorageBucketsDurability = "relaxed"|"strict";
     export interface StorageBucket {
@@ -17844,23 +18058,6 @@ Present only for SharedStorageAccessMethod: batchUpdate.
       quota: number;
       persistent: boolean;
       durability: StorageBucketsDurability;
-    }
-    /**
-     * A single Related Website Set object.
-     */
-    export interface RelatedWebsiteSet {
-      /**
-       * The primary site of this set, along with the ccTLDs if there is any.
-       */
-      primarySites: string[];
-      /**
-       * The associated sites of this set, along with the ccTLDs if there is any.
-       */
-      associatedSites: string[];
-      /**
-       * The service sites of this set, along with the ccTLDs if there is any.
-       */
-      serviceSites: string[];
     }
     
     /**
@@ -17943,83 +18140,16 @@ Present only for SharedStorageAccessMethod: batchUpdate.
        */
       bucketId: string;
     }
-    /**
-     * Shared storage was accessed by the associated page.
-The following parameters are included in all events.
-     */
-    export type sharedStorageAccessedPayload = {
-      /**
-       * Time of the access.
-       */
-      accessTime: Network.TimeSinceEpoch;
-      /**
-       * Enum value indicating the access scope.
-       */
-      scope: SharedStorageAccessScope;
-      /**
-       * Enum value indicating the Shared Storage API method invoked.
-       */
-      method: SharedStorageAccessMethod;
-      /**
-       * DevTools Frame Token for the primary frame tree's root.
-       */
-      mainFrameId: Page.FrameId;
-      /**
-       * Serialization of the origin owning the Shared Storage data.
-       */
-      ownerOrigin: string;
-      /**
-       * Serialization of the site owning the Shared Storage data.
-       */
-      ownerSite: string;
-      /**
-       * The sub-parameters wrapped by `params` are all optional and their
-presence/absence depends on `type`.
-       */
-      params: SharedStorageAccessParams;
-    }
-    /**
-     * A shared storage run or selectURL operation finished its execution.
-The following parameters are included in all events.
-     */
-    export type sharedStorageWorkletOperationExecutionFinishedPayload = {
-      /**
-       * Time that the operation finished.
-       */
-      finishedTime: Network.TimeSinceEpoch;
-      /**
-       * Time, in microseconds, from start of shared storage JS API call until
-end of operation execution in the worklet.
-       */
-      executionTime: number;
-      /**
-       * Enum value indicating the Shared Storage API method invoked.
-       */
-      method: SharedStorageAccessMethod;
-      /**
-       * ID of the operation call.
-       */
-      operationId: string;
-      /**
-       * Hex representation of the DevTools token used as the TargetID for the
-associated shared storage worklet.
-       */
-      workletTargetId: Target.TargetID;
-      /**
-       * DevTools Frame Token for the primary frame tree's root.
-       */
-      mainFrameId: Page.FrameId;
-      /**
-       * Serialization of the origin owning the Shared Storage data.
-       */
-      ownerOrigin: string;
-    }
     export type storageBucketCreatedOrUpdatedPayload = {
       bucketInfo: StorageBucketInfo;
     }
     export type storageBucketDeletedPayload = {
       bucketId: string;
     }
+    /**
+     * Private Verification Tokens have been stored or deleted.
+     */
+    export type privateVerificationTokensUpdatedPayload = void;
     
     /**
      * Returns a storage key given a frame id.
@@ -18271,70 +18401,46 @@ Leaves other stored data, including the issuer's Redemption Records, intact.
       didDeleteTokens: boolean;
     }
     /**
-     * Gets metadata for an origin's shared storage.
+     * Returns all stored Private Verification Tokens for the current browsing
+context.
      */
-    export type getSharedStorageMetadataParameters = {
-      ownerOrigin: string;
+    export type getPrivateVerificationTokensParameters = {
     }
-    export type getSharedStorageMetadataReturnValue = {
-      metadata: SharedStorageMetadata;
+    export type getPrivateVerificationTokensReturnValue = {
+      tokens: PrivateVerificationToken[];
     }
     /**
-     * Gets the entries in an given origin's shared storage.
+     * Returns the configured Private Verification Tokens issuers and their redeemer
+origins.
      */
-    export type getSharedStorageEntriesParameters = {
-      ownerOrigin: string;
+    export type getPrivateVerificationTokensIssuerConfigsParameters = {
     }
-    export type getSharedStorageEntriesReturnValue = {
-      entries: SharedStorageEntry[];
+    export type getPrivateVerificationTokensIssuerConfigsReturnValue = {
+      configs: PrivateVerificationTokensIssuerConfig[];
     }
     /**
-     * Sets entry with `key` and `value` for a given origin's shared storage.
+     * Removes all Private Verification Tokens issued by the provided issuerOrigin.
      */
-    export type setSharedStorageEntryParameters = {
-      ownerOrigin: string;
-      key: string;
-      value: string;
-      /**
-       * If `ignoreIfPresent` is included and true, then only sets the entry if
-`key` doesn't already exist.
-       */
-      ignoreIfPresent?: boolean;
+    export type clearPrivateVerificationTokensParameters = {
+      issuerOrigin: string;
     }
-    export type setSharedStorageEntryReturnValue = {
+    export type clearPrivateVerificationTokensReturnValue = {
     }
     /**
-     * Deletes entry for `key` (if it exists) for a given origin's shared storage.
+     * Removes a specific Private Verification Token by its ID.
      */
-    export type deleteSharedStorageEntryParameters = {
-      ownerOrigin: string;
-      key: string;
+    export type deletePrivateVerificationTokenParameters = {
+      tokenId: string;
     }
-    export type deleteSharedStorageEntryReturnValue = {
+    export type deletePrivateVerificationTokenReturnValue = {
     }
     /**
-     * Clears all entries for a given origin's shared storage.
+     * Set tracking for Private Verification Tokens.
      */
-    export type clearSharedStorageEntriesParameters = {
-      ownerOrigin: string;
-    }
-    export type clearSharedStorageEntriesReturnValue = {
-    }
-    /**
-     * Resets the budget for `ownerOrigin` by clearing all budget withdrawals.
-     */
-    export type resetSharedStorageBudgetParameters = {
-      ownerOrigin: string;
-    }
-    export type resetSharedStorageBudgetReturnValue = {
-    }
-    /**
-     * Enables/disables issuing of sharedStorageAccessed events.
-     */
-    export type setSharedStorageTrackingParameters = {
+    export type setPrivateVerificationTokensTrackingParameters = {
       enable: boolean;
     }
-    export type setSharedStorageTrackingReturnValue = {
+    export type setPrivateVerificationTokensTrackingReturnValue = {
     }
     /**
      * Set tracking for a storage key's buckets.
@@ -18360,15 +18466,6 @@ Leaves other stored data, including the issuer's Redemption Records, intact.
     }
     export type runBounceTrackingMitigationsReturnValue = {
       deletedSites: string[];
-    }
-    /**
-     * Returns the effective Related Website Sets in use by this profile for the browser
-session. The effective Related Website Sets will not change during a browser session.
-     */
-    export type getRelatedWebsiteSetsParameters = {
-    }
-    export type getRelatedWebsiteSetsReturnValue = {
-      sets: RelatedWebsiteSet[];
     }
   }
   
@@ -19984,6 +20081,14 @@ See https://w3c.github.io/webauthn/#signature-counter
        */
       untrustedContent?: boolean;
       /**
+       * A hint indicating that executing the tool will result in consequential actions, ex: booking a flight, transferring money.
+       */
+      consequential?: boolean;
+      /**
+       * If true, indicates that the tool is intended for debugging and developer tooling rather than end-user interactions.
+       */
+      debugging?: boolean;
+      /**
        * If the declarative tool was declared with the autosubmit attribute.
        */
       autosubmit?: boolean;
@@ -20338,6 +20443,14 @@ variables as its properties.
        * Location in the source code where scope ends
        */
       endLocation?: Location;
+      /**
+       * True if the scope does not declare any variables.
+Only present if true.
+Empty scopes are retained in the scope chain because
+they can be targeted via `evaluateOnCallFrame` (using `scopeNumber`) or
+matched against scopes in source maps.
+       */
+      empty?: boolean;
     }
     /**
      * Search match for resource.
@@ -21809,7 +21922,7 @@ per value in the scope of one CDP call.
 NOTE: If you change anything here, make sure to also update
 `subtype` in `ObjectPreview` and `PropertyPreview` below.
        */
-      subtype?: "array"|"null"|"node"|"regexp"|"date"|"map"|"set"|"weakmap"|"weakset"|"iterator"|"generator"|"error"|"proxy"|"promise"|"typedarray"|"arraybuffer"|"dataview"|"webassemblymemory"|"wasmvalue"|"trustedtype";
+      subtype?: "array"|"null"|"node"|"regexp"|"date"|"map"|"set"|"weakmap"|"weakset"|"iterator"|"generator"|"error"|"proxy"|"promise"|"typedarray"|"arraybuffer"|"dataview"|"webassemblymemory"|"wasmvalue"|"deferredmodule"|"trustedtype";
       /**
        * Object class (constructor) name. Specified for `object` type values only.
        */
@@ -21865,7 +21978,7 @@ The result value is json ML array.
       /**
        * Object subtype hint. Specified for `object` type values only.
        */
-      subtype?: "array"|"null"|"node"|"regexp"|"date"|"map"|"set"|"weakmap"|"weakset"|"iterator"|"generator"|"error"|"proxy"|"promise"|"typedarray"|"arraybuffer"|"dataview"|"webassemblymemory"|"wasmvalue"|"trustedtype";
+      subtype?: "array"|"null"|"node"|"regexp"|"date"|"map"|"set"|"weakmap"|"weakset"|"iterator"|"generator"|"error"|"proxy"|"promise"|"typedarray"|"arraybuffer"|"dataview"|"webassemblymemory"|"wasmvalue"|"deferredmodule"|"trustedtype";
       /**
        * String representation of the object.
        */
@@ -21903,7 +22016,7 @@ The result value is json ML array.
       /**
        * Object subtype hint. Specified for `object` type values only.
        */
-      subtype?: "array"|"null"|"node"|"regexp"|"date"|"map"|"set"|"weakmap"|"weakset"|"iterator"|"generator"|"error"|"proxy"|"promise"|"typedarray"|"arraybuffer"|"dataview"|"webassemblymemory"|"wasmvalue"|"trustedtype";
+      subtype?: "array"|"null"|"node"|"regexp"|"date"|"map"|"set"|"weakmap"|"weakset"|"iterator"|"generator"|"error"|"proxy"|"promise"|"typedarray"|"arraybuffer"|"dataview"|"webassemblymemory"|"wasmvalue"|"deferredmodule"|"trustedtype";
     }
     export interface EntryPreview {
       /**
@@ -23016,10 +23129,9 @@ Error was thrown.
     "Storage.cacheStorageListUpdated": Storage.cacheStorageListUpdatedPayload;
     "Storage.indexedDBContentUpdated": Storage.indexedDBContentUpdatedPayload;
     "Storage.indexedDBListUpdated": Storage.indexedDBListUpdatedPayload;
-    "Storage.sharedStorageAccessed": Storage.sharedStorageAccessedPayload;
-    "Storage.sharedStorageWorkletOperationExecutionFinished": Storage.sharedStorageWorkletOperationExecutionFinishedPayload;
     "Storage.storageBucketCreatedOrUpdated": Storage.storageBucketCreatedOrUpdatedPayload;
     "Storage.storageBucketDeleted": Storage.storageBucketDeletedPayload;
+    "Storage.privateVerificationTokensUpdated": Storage.privateVerificationTokensUpdatedPayload;
     "Target.attachedToTarget": Target.attachedToTargetPayload;
     "Target.detachedFromTarget": Target.detachedFromTargetPayload;
     "Target.receivedMessageFromTarget": Target.receivedMessageFromTargetPayload;
@@ -23251,10 +23363,9 @@ Error was thrown.
     ["Storage.cacheStorageListUpdated"]: [Storage.cacheStorageListUpdatedPayload];
     ["Storage.indexedDBContentUpdated"]: [Storage.indexedDBContentUpdatedPayload];
     ["Storage.indexedDBListUpdated"]: [Storage.indexedDBListUpdatedPayload];
-    ["Storage.sharedStorageAccessed"]: [Storage.sharedStorageAccessedPayload];
-    ["Storage.sharedStorageWorkletOperationExecutionFinished"]: [Storage.sharedStorageWorkletOperationExecutionFinishedPayload];
     ["Storage.storageBucketCreatedOrUpdated"]: [Storage.storageBucketCreatedOrUpdatedPayload];
     ["Storage.storageBucketDeleted"]: [Storage.storageBucketDeletedPayload];
+    ["Storage.privateVerificationTokensUpdated"]: [Storage.privateVerificationTokensUpdatedPayload];
     ["Target.attachedToTarget"]: [Target.attachedToTargetPayload];
     ["Target.detachedFromTarget"]: [Target.detachedFromTargetPayload];
     ["Target.receivedMessageFromTarget"]: [Target.receivedMessageFromTargetPayload];
@@ -23320,6 +23431,7 @@ Error was thrown.
     "Accessibility.getChildAXNodes": Accessibility.getChildAXNodesParameters;
     "Accessibility.queryAXTree": Accessibility.queryAXTreeParameters;
     "Ads.getAdMetrics": Ads.getAdMetricsParameters;
+    "Ads.getAdScripts": Ads.getAdScriptsParameters;
     "Animation.disable": Animation.disableParameters;
     "Animation.enable": Animation.enableParameters;
     "Animation.getCurrentTime": Animation.getCurrentTimeParameters;
@@ -23367,6 +23479,7 @@ Error was thrown.
     "Browser.crashGpuProcess": Browser.crashGpuProcessParameters;
     "Browser.getVersion": Browser.getVersionParameters;
     "Browser.getBrowserCommandLine": Browser.getBrowserCommandLineParameters;
+    "Browser.addMockCamera": Browser.addMockCameraParameters;
     "Browser.getHistograms": Browser.getHistogramsParameters;
     "Browser.getHistogram": Browser.getHistogramParameters;
     "Browser.getWindowBounds": Browser.getWindowBoundsParameters;
@@ -23376,6 +23489,8 @@ Error was thrown.
     "Browser.setDockTile": Browser.setDockTileParameters;
     "Browser.executeBrowserCommand": Browser.executeBrowserCommandParameters;
     "Browser.addPrivacySandboxEnrollmentOverride": Browser.addPrivacySandboxEnrollmentOverrideParameters;
+    "Browser.getGlobalPrivacyControl": Browser.getGlobalPrivacyControlParameters;
+    "Browser.setGlobalPrivacyControl": Browser.setGlobalPrivacyControlParameters;
     "CSS.addRule": CSS.addRuleParameters;
     "CSS.collectClassNames": CSS.collectClassNamesParameters;
     "CSS.createStyleSheet": CSS.createStyleSheetParameters;
@@ -23480,7 +23595,10 @@ Error was thrown.
     "DOM.getQueryingDescendantsForContainer": DOM.getQueryingDescendantsForContainerParameters;
     "DOM.getAnchorElement": DOM.getAnchorElementParameters;
     "DOM.forceShowPopover": DOM.forceShowPopoverParameters;
+    "DOM.getImplicitAnchorCandidates": DOM.getImplicitAnchorCandidatesParameters;
     "DOM.forceShowInterest": DOM.forceShowInterestParameters;
+    "DOM.setTextMarker": DOM.setTextMarkerParameters;
+    "DOM.clearTextMarkers": DOM.clearTextMarkersParameters;
     "DOMDebugger.getEventListeners": DOMDebugger.getEventListenersParameters;
     "DOMDebugger.removeDOMBreakpoint": DOMDebugger.removeDOMBreakpointParameters;
     "DOMDebugger.removeEventListenerBreakpoint": DOMDebugger.removeEventListenerBreakpointParameters;
@@ -23585,6 +23703,10 @@ Error was thrown.
     "Fetch.getResponseBody": Fetch.getResponseBodyParameters;
     "Fetch.takeResponseBodyAsStream": Fetch.takeResponseBodyAsStreamParameters;
     "FileSystem.getDirectory": FileSystem.getDirectoryParameters;
+    "FindInPage.findFirst": FindInPage.findFirstParameters;
+    "FindInPage.findNext": FindInPage.findNextParameters;
+    "FindInPage.findPrev": FindInPage.findPrevParameters;
+    "FindInPage.stop": FindInPage.stopParameters;
     "HeadlessExperimental.beginFrame": HeadlessExperimental.beginFrameParameters;
     "HeadlessExperimental.disable": HeadlessExperimental.disableParameters;
     "HeadlessExperimental.enable": HeadlessExperimental.enableParameters;
@@ -23731,6 +23853,8 @@ Error was thrown.
     "Page.getInstallabilityErrors": Page.getInstallabilityErrorsParameters;
     "Page.getManifestIcons": Page.getManifestIconsParameters;
     "Page.getAppId": Page.getAppIdParameters;
+    "Page.getSubApps": Page.getSubAppsParameters;
+    "Page.getSiblingSubApps": Page.getSiblingSubAppsParameters;
     "Page.getAdScriptAncestry": Page.getAdScriptAncestryParameters;
     "Page.getFrameTree": Page.getFrameTreeParameters;
     "Page.getLayoutMetrics": Page.getLayoutMetricsParameters;
@@ -23833,17 +23957,14 @@ Error was thrown.
     "Storage.untrackIndexedDBForStorageKey": Storage.untrackIndexedDBForStorageKeyParameters;
     "Storage.getTrustTokens": Storage.getTrustTokensParameters;
     "Storage.clearTrustTokens": Storage.clearTrustTokensParameters;
-    "Storage.getSharedStorageMetadata": Storage.getSharedStorageMetadataParameters;
-    "Storage.getSharedStorageEntries": Storage.getSharedStorageEntriesParameters;
-    "Storage.setSharedStorageEntry": Storage.setSharedStorageEntryParameters;
-    "Storage.deleteSharedStorageEntry": Storage.deleteSharedStorageEntryParameters;
-    "Storage.clearSharedStorageEntries": Storage.clearSharedStorageEntriesParameters;
-    "Storage.resetSharedStorageBudget": Storage.resetSharedStorageBudgetParameters;
-    "Storage.setSharedStorageTracking": Storage.setSharedStorageTrackingParameters;
+    "Storage.getPrivateVerificationTokens": Storage.getPrivateVerificationTokensParameters;
+    "Storage.getPrivateVerificationTokensIssuerConfigs": Storage.getPrivateVerificationTokensIssuerConfigsParameters;
+    "Storage.clearPrivateVerificationTokens": Storage.clearPrivateVerificationTokensParameters;
+    "Storage.deletePrivateVerificationToken": Storage.deletePrivateVerificationTokenParameters;
+    "Storage.setPrivateVerificationTokensTracking": Storage.setPrivateVerificationTokensTrackingParameters;
     "Storage.setStorageBucketTracking": Storage.setStorageBucketTrackingParameters;
     "Storage.deleteStorageBucket": Storage.deleteStorageBucketParameters;
     "Storage.runBounceTrackingMitigations": Storage.runBounceTrackingMitigationsParameters;
-    "Storage.getRelatedWebsiteSets": Storage.getRelatedWebsiteSetsParameters;
     "SystemInfo.getInfo": SystemInfo.getInfoParameters;
     "SystemInfo.getFeatureState": SystemInfo.getFeatureStateParameters;
     "SystemInfo.getProcessInfo": SystemInfo.getProcessInfoParameters;
@@ -23986,6 +24107,7 @@ Error was thrown.
     "Accessibility.getChildAXNodes": Accessibility.getChildAXNodesReturnValue;
     "Accessibility.queryAXTree": Accessibility.queryAXTreeReturnValue;
     "Ads.getAdMetrics": Ads.getAdMetricsReturnValue;
+    "Ads.getAdScripts": Ads.getAdScriptsReturnValue;
     "Animation.disable": Animation.disableReturnValue;
     "Animation.enable": Animation.enableReturnValue;
     "Animation.getCurrentTime": Animation.getCurrentTimeReturnValue;
@@ -24033,6 +24155,7 @@ Error was thrown.
     "Browser.crashGpuProcess": Browser.crashGpuProcessReturnValue;
     "Browser.getVersion": Browser.getVersionReturnValue;
     "Browser.getBrowserCommandLine": Browser.getBrowserCommandLineReturnValue;
+    "Browser.addMockCamera": Browser.addMockCameraReturnValue;
     "Browser.getHistograms": Browser.getHistogramsReturnValue;
     "Browser.getHistogram": Browser.getHistogramReturnValue;
     "Browser.getWindowBounds": Browser.getWindowBoundsReturnValue;
@@ -24042,6 +24165,8 @@ Error was thrown.
     "Browser.setDockTile": Browser.setDockTileReturnValue;
     "Browser.executeBrowserCommand": Browser.executeBrowserCommandReturnValue;
     "Browser.addPrivacySandboxEnrollmentOverride": Browser.addPrivacySandboxEnrollmentOverrideReturnValue;
+    "Browser.getGlobalPrivacyControl": Browser.getGlobalPrivacyControlReturnValue;
+    "Browser.setGlobalPrivacyControl": Browser.setGlobalPrivacyControlReturnValue;
     "CSS.addRule": CSS.addRuleReturnValue;
     "CSS.collectClassNames": CSS.collectClassNamesReturnValue;
     "CSS.createStyleSheet": CSS.createStyleSheetReturnValue;
@@ -24146,7 +24271,10 @@ Error was thrown.
     "DOM.getQueryingDescendantsForContainer": DOM.getQueryingDescendantsForContainerReturnValue;
     "DOM.getAnchorElement": DOM.getAnchorElementReturnValue;
     "DOM.forceShowPopover": DOM.forceShowPopoverReturnValue;
+    "DOM.getImplicitAnchorCandidates": DOM.getImplicitAnchorCandidatesReturnValue;
     "DOM.forceShowInterest": DOM.forceShowInterestReturnValue;
+    "DOM.setTextMarker": DOM.setTextMarkerReturnValue;
+    "DOM.clearTextMarkers": DOM.clearTextMarkersReturnValue;
     "DOMDebugger.getEventListeners": DOMDebugger.getEventListenersReturnValue;
     "DOMDebugger.removeDOMBreakpoint": DOMDebugger.removeDOMBreakpointReturnValue;
     "DOMDebugger.removeEventListenerBreakpoint": DOMDebugger.removeEventListenerBreakpointReturnValue;
@@ -24251,6 +24379,10 @@ Error was thrown.
     "Fetch.getResponseBody": Fetch.getResponseBodyReturnValue;
     "Fetch.takeResponseBodyAsStream": Fetch.takeResponseBodyAsStreamReturnValue;
     "FileSystem.getDirectory": FileSystem.getDirectoryReturnValue;
+    "FindInPage.findFirst": FindInPage.findFirstReturnValue;
+    "FindInPage.findNext": FindInPage.findNextReturnValue;
+    "FindInPage.findPrev": FindInPage.findPrevReturnValue;
+    "FindInPage.stop": FindInPage.stopReturnValue;
     "HeadlessExperimental.beginFrame": HeadlessExperimental.beginFrameReturnValue;
     "HeadlessExperimental.disable": HeadlessExperimental.disableReturnValue;
     "HeadlessExperimental.enable": HeadlessExperimental.enableReturnValue;
@@ -24397,6 +24529,8 @@ Error was thrown.
     "Page.getInstallabilityErrors": Page.getInstallabilityErrorsReturnValue;
     "Page.getManifestIcons": Page.getManifestIconsReturnValue;
     "Page.getAppId": Page.getAppIdReturnValue;
+    "Page.getSubApps": Page.getSubAppsReturnValue;
+    "Page.getSiblingSubApps": Page.getSiblingSubAppsReturnValue;
     "Page.getAdScriptAncestry": Page.getAdScriptAncestryReturnValue;
     "Page.getFrameTree": Page.getFrameTreeReturnValue;
     "Page.getLayoutMetrics": Page.getLayoutMetricsReturnValue;
@@ -24499,17 +24633,14 @@ Error was thrown.
     "Storage.untrackIndexedDBForStorageKey": Storage.untrackIndexedDBForStorageKeyReturnValue;
     "Storage.getTrustTokens": Storage.getTrustTokensReturnValue;
     "Storage.clearTrustTokens": Storage.clearTrustTokensReturnValue;
-    "Storage.getSharedStorageMetadata": Storage.getSharedStorageMetadataReturnValue;
-    "Storage.getSharedStorageEntries": Storage.getSharedStorageEntriesReturnValue;
-    "Storage.setSharedStorageEntry": Storage.setSharedStorageEntryReturnValue;
-    "Storage.deleteSharedStorageEntry": Storage.deleteSharedStorageEntryReturnValue;
-    "Storage.clearSharedStorageEntries": Storage.clearSharedStorageEntriesReturnValue;
-    "Storage.resetSharedStorageBudget": Storage.resetSharedStorageBudgetReturnValue;
-    "Storage.setSharedStorageTracking": Storage.setSharedStorageTrackingReturnValue;
+    "Storage.getPrivateVerificationTokens": Storage.getPrivateVerificationTokensReturnValue;
+    "Storage.getPrivateVerificationTokensIssuerConfigs": Storage.getPrivateVerificationTokensIssuerConfigsReturnValue;
+    "Storage.clearPrivateVerificationTokens": Storage.clearPrivateVerificationTokensReturnValue;
+    "Storage.deletePrivateVerificationToken": Storage.deletePrivateVerificationTokenReturnValue;
+    "Storage.setPrivateVerificationTokensTracking": Storage.setPrivateVerificationTokensTrackingReturnValue;
     "Storage.setStorageBucketTracking": Storage.setStorageBucketTrackingReturnValue;
     "Storage.deleteStorageBucket": Storage.deleteStorageBucketReturnValue;
     "Storage.runBounceTrackingMitigations": Storage.runBounceTrackingMitigationsReturnValue;
-    "Storage.getRelatedWebsiteSets": Storage.getRelatedWebsiteSetsReturnValue;
     "SystemInfo.getInfo": SystemInfo.getInfoReturnValue;
     "SystemInfo.getFeatureState": SystemInfo.getFeatureStateReturnValue;
     "SystemInfo.getProcessInfo": SystemInfo.getProcessInfoReturnValue;

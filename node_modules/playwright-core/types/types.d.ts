@@ -2454,8 +2454,17 @@ export interface Page {
 
   /**
    * Gets the full HTML contents of the page, including the doctype.
+   * @param options
    */
-  content(): Promise<string>;
+  content(options?: {
+    /**
+     * When true, contents of open shadow roots are included as
+     * [declarative shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM#declaratively_with_html),
+     * i.e. `<template shadowrootmode="open">` elements nested inside their host elements. Closed shadow roots are never
+     * included. Defaults to `false`.
+     */
+    includeShadow?: boolean;
+  }): Promise<string>;
 
   /**
    * Get the browser context that the page belongs to.
@@ -3146,6 +3155,25 @@ export interface Page {
      */
     exact?: boolean;
   }): Locator;
+
+  /**
+   * Locate element by its aria ref. Refs like `[ref=e2]` are reported by
+   * [page.ariaSnapshot([options])](https://playwright.dev/docs/api/class-page#page-aria-snapshot) when called with the
+   * `"ai"` mode, and resolve against the latest snapshot taken in the element's frame.
+   *
+   * **Usage**
+   *
+   * Consider the following aria snapshot.
+   *
+   * You can locate the button by its ref:
+   *
+   * ```js
+   * await page.getByRef('e2').click();
+   * ```
+   *
+   * @param ref Aria ref of the element, for example `e2` or `f1e3`.
+   */
+  getByRef(ref: string): Locator;
 
   /**
    * Allows locating elements by their [ARIA role](https://www.w3.org/TR/wai-aria-1.2/#roles),
@@ -5872,6 +5900,22 @@ export interface Page {
 
   touchscreen: Touchscreen;
 
+  /**
+   * Tools that the main frame registers through the experimental [WebMCP](https://playwright.dev/docs/api/class-webmcp)
+   * browser API. Shortcut for [frame.webmcp](https://playwright.dev/docs/api/class-frame#frame-webmcp) of
+   * [page.mainFrame()](https://playwright.dev/docs/api/class-page#page-main-frame), see
+   * [WebMCP](https://playwright.dev/docs/api/class-webmcp) for details.
+   *
+   * **Usage**
+   *
+   * ```js
+   * const tools = await page.webmcp.tools();
+   * const result = await page.webmcp.callTool('add', { a: 2, b: 40 });
+   * ```
+   *
+   */
+  webmcp: WebMCP;
+
   [Symbol.asyncDispose](): Promise<void>;
 }
 
@@ -6937,8 +6981,17 @@ export interface Frame {
 
   /**
    * Gets the full HTML contents of the frame, including the doctype.
+   * @param options
    */
-  content(): Promise<string>;
+  content(options?: {
+    /**
+     * When true, contents of open shadow roots are included as
+     * [declarative shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM#declaratively_with_html),
+     * i.e. `<template shadowrootmode="open">` elements nested inside their host elements. Closed shadow roots are never
+     * included. Defaults to `false`.
+     */
+    includeShadow?: boolean;
+  }): Promise<string>;
 
   /**
    * **NOTE** Use locator-based [locator.dblclick([options])](https://playwright.dev/docs/api/class-locator#locator-dblclick)
@@ -9113,6 +9166,12 @@ export interface Frame {
      */
     waitUntil?: "load"|"domcontentloaded"|"networkidle"|"commit";
   }): Promise<void>;
+
+  /**
+   * Tools that the frame registers through the experimental [WebMCP](https://playwright.dev/docs/api/class-webmcp)
+   * browser API. See [WebMCP](https://playwright.dev/docs/api/class-webmcp) for details.
+   */
+  webmcp: WebMCP;
 }
 
 /**
@@ -10601,6 +10660,12 @@ export interface BrowserContext {
 
   /**
    * @param offline Whether to emulate network being offline for the browser context.
+   *
+   * **NOTE** Offline emulation only affects requests that go through the browser's regular network stack, such as page
+   * navigations, `fetch()`, `XMLHttpRequest` and WebSockets. It does not affect WebRTC traffic: established
+   * `RTCPeerConnection`s keep sending and receiving media over UDP. To test WebRTC connection loss, interrupt the
+   * connection outside the browser, for example by stopping the TURN server or using an OS-level firewall.
+   *
    */
   setOffline(offline: boolean): Promise<void>;
 
@@ -10682,8 +10747,8 @@ export interface BrowserContext {
     /**
      * Set to `true` to include the context's virtual WebAuthn
      * [browserContext.credentials](https://playwright.dev/docs/api/class-browsercontext#browser-context-credentials)
-     * (passkeys) in the storage state snapshot. The captured credentials carry their private keys, so they can be
-     * re-seeded into a later context via the
+     * (passkeys) in the storage state snapshot. The captured credentials carry their private keys and signature counters,
+     * so they can be re-seeded into a later context via the
      * [`storageState`](https://playwright.dev/docs/api/class-browser#browser-new-context-option-storage-state) option or
      * [browserContext.setStorageState(storageState)](https://playwright.dev/docs/api/class-browsercontext#browser-context-set-storage-state).
      * Note that restoring the storage state that contains credentials will automatically install the virtual WebAuthn
@@ -11435,8 +11500,8 @@ export interface Browser {
 
     /**
      * Whether the `meta viewport` tag is taken into account and touch events are enabled. isMobile is a part of device,
-     * so you don't actually need to set it manually. Defaults to `false` and is not supported in Firefox. Learn more
-     * about [mobile emulation](https://playwright.dev/docs/emulation#ismobile).
+     * so you don't actually need to set it manually. Defaults to `false`. Learn more about
+     * [mobile emulation](https://playwright.dev/docs/emulation#ismobile).
      */
     isMobile?: boolean;
 
@@ -11571,6 +11636,12 @@ export interface Browser {
       };
 
       /**
+       * Frame rate of the recorded videos in frames per second. Defaults to `25`. Firefox and WebKit currently capture up
+       * to 25 frames per second.
+       */
+      fps?: number;
+
+      /**
        * If specified, enables visual annotations on interacted elements during video recording.
        */
       showActions?: {
@@ -11585,7 +11656,7 @@ export interface Browser {
         position?: "top-left"|"top"|"top-right"|"bottom-left"|"bottom"|"bottom-right";
 
         /**
-         * Font size of the action title in pixels. Defaults to `24`.
+         * Font size of the action title in pixels. Defaults to `24`. Deprecated, use `style.title` instead.
          */
         fontSize?: number;
 
@@ -11594,6 +11665,26 @@ export interface Browser {
          * the previous action point to the next one. `"none"` disables the cursor decoration.
          */
         cursor?: "none"|"pointer";
+
+        /**
+         * Styles of the action decorations.
+         */
+        style?: {
+          /**
+           * CSS declarations for the zero-sized marker centered on the action point. Not shown when omitted.
+           */
+          point?: string;
+
+          /**
+           * CSS declarations for the box that covers the target element. Not shown when omitted.
+           */
+          highlight?: string;
+
+          /**
+           * CSS declarations for the action title.
+           */
+          title?: string;
+        };
       };
     };
 
@@ -14382,7 +14473,7 @@ export interface Locator {
    * multiple elements match the locator, throws.
    * @param options
    */
-  elementHandle(options?: { timeout?: number }): Promise<ElementHandle<SVGElement | HTMLElement>>;
+  elementHandle(options?: { timeout?: number, signal?: AbortSignal }): Promise<ElementHandle<SVGElement | HTMLElement>>;
   /**
    * Highlight the corresponding element(s) on the screen. Useful for debugging, don't commit the code that uses
    * [locator.highlight([options])](https://playwright.dev/docs/api/class-locator#locator-highlight).
@@ -16404,6 +16495,24 @@ export interface Locator {
    * Returns a new locator that uses best practices for referencing the matched element, prioritizing test ids, aria
    * roles, and other user-facing attributes over CSS selectors. This is useful for converting implementation-detail
    * selectors into more resilient, human-readable locators.
+   *
+   * **Usage**
+   *
+   * An agent can pick an element by its ref from an
+   * [page.ariaSnapshot([options])](https://playwright.dev/docs/api/class-page#page-aria-snapshot) taken in the `"ai"`
+   * mode. Refs only work for the latest snapshot. Normalize the ref locator and convert it to a string to get resilient
+   * locator code in your language, the same way `codegen` does.
+   *
+   * Consider the following aria snapshot.
+   *
+   * You can turn the ref into locator code:
+   *
+   * ```js
+   * const normalized = await page.getByRef('e2').normalize();
+   * console.log(normalized.toString());
+   * // getByRole('button', { name: 'Submit' })
+   * ```
+   *
    */
   normalize(): Promise<Locator>;
 
@@ -17294,6 +17403,27 @@ export interface Locator {
      */
     timeout?: number;
   }): Promise<void>;
+
+  /**
+   * Returns a locator that matches this locator's elements inside each element matched by
+   * [`locator`](https://playwright.dev/docs/api/class-locator#locator-within-option-locator).
+   *
+   * Note that relative locators, such as
+   * [locator.nth(index)](https://playwright.dev/docs/api/class-locator#locator-nth) or
+   * [locator.first()](https://playwright.dev/docs/api/class-locator#locator-first), are resolved separately inside each
+   * matched parent. In the example below, `page.getByRole('cell').nth(2)` picks the third cell of every row, not the
+   * third cell in the whole table.
+   *
+   * **Usage**
+   *
+   * ```js
+   * const thirdColumn = page.getByRole('cell').nth(2).within(page.getByRole('row'));
+   * await expect(thirdColumn).toHaveText(['Apple', 'Banana', 'Cherry']);
+   * ```
+   *
+   * @param locator Locator matching the parent elements to search within.
+   */
+  within(locator: Locator): Locator;
 }
 
 /**
@@ -17782,8 +17912,8 @@ export interface BrowserType<Unused = {}> {
 
     /**
      * Whether the `meta viewport` tag is taken into account and touch events are enabled. isMobile is a part of device,
-     * so you don't actually need to set it manually. Defaults to `false` and is not supported in Firefox. Learn more
-     * about [mobile emulation](https://playwright.dev/docs/emulation#ismobile).
+     * so you don't actually need to set it manually. Defaults to `false`. Learn more about
+     * [mobile emulation](https://playwright.dev/docs/emulation#ismobile).
      */
     isMobile?: boolean;
 
@@ -17918,6 +18048,12 @@ export interface BrowserType<Unused = {}> {
       };
 
       /**
+       * Frame rate of the recorded videos in frames per second. Defaults to `25`. Firefox and WebKit currently capture up
+       * to 25 frames per second.
+       */
+      fps?: number;
+
+      /**
        * If specified, enables visual annotations on interacted elements during video recording.
        */
       showActions?: {
@@ -17932,7 +18068,7 @@ export interface BrowserType<Unused = {}> {
         position?: "top-left"|"top"|"top-right"|"bottom-left"|"bottom"|"bottom-right";
 
         /**
-         * Font size of the action title in pixels. Defaults to `24`.
+         * Font size of the action title in pixels. Defaults to `24`. Deprecated, use `style.title` instead.
          */
         fontSize?: number;
 
@@ -17941,6 +18077,26 @@ export interface BrowserType<Unused = {}> {
          * the previous action point to the next one. `"none"` disables the cursor decoration.
          */
         cursor?: "none"|"pointer";
+
+        /**
+         * Styles of the action decorations.
+         */
+        style?: {
+          /**
+           * CSS declarations for the zero-sized marker centered on the action point. Not shown when omitted.
+           */
+          point?: string;
+
+          /**
+           * CSS declarations for the box that covers the target element. Not shown when omitted.
+           */
+          highlight?: string;
+
+          /**
+           * CSS declarations for the action title.
+           */
+          title?: string;
+        };
       };
     };
 
@@ -17991,7 +18147,7 @@ export interface BrowserType<Unused = {}> {
     strictSelectors?: boolean;
 
     /**
-     * Maximum time in milliseconds to wait for the browser instance to start. Defaults to `30000` (30 seconds). Pass `0`
+     * Maximum time in milliseconds to wait for the browser instance to start. Defaults to `180000` (3 minutes). Pass `0`
      * to disable timeout.
      */
     timeout?: number;
@@ -18190,7 +18346,7 @@ export interface BrowserType<Unused = {}> {
     };
 
     /**
-     * Maximum time in milliseconds to wait for the browser instance to start. Defaults to `30000` (30 seconds). Pass `0`
+     * Maximum time in milliseconds to wait for the browser instance to start. Defaults to `180000` (3 minutes). Pass `0`
      * to disable timeout.
      */
     timeout?: number;
@@ -18656,6 +18812,7 @@ export interface Screencast {
       height: number;
     };
     quality?: number;
+    fps?: number;
   }): Promise<Disposable>;
   /**
    * Removes action decorations.
@@ -18685,6 +18842,8 @@ export interface Screencast {
 
     /**
      * Font size of the action title in pixels. Defaults to `24`.
+     * @deprecated Use `title` in [`style`](https://playwright.dev/docs/api/class-screencast#screencast-show-actions-option-style)
+     * instead, for example `style: { title: 'font-size: 32px' }`.
      */
     fontSize?: number;
 
@@ -18692,6 +18851,44 @@ export interface Screencast {
      * Position of the action title overlay. Defaults to `"top-right"`.
      */
     position?: "top-left"|"top"|"top-right"|"bottom-left"|"bottom"|"bottom-right";
+
+    /**
+     * Styles of the action decorations. All decorations fade out over
+     * [`duration`](https://playwright.dev/docs/api/class-screencast#screencast-show-actions-option-duration).
+     *
+     * **Usage**
+     *
+     * ```js
+     * await page.screencast.showActions({
+     *   style: {
+     *     point: 'width: 20px; height: 20px; border-radius: 50%; background: red',
+     *     highlight: 'outline: 2px solid #333; background: rgba(0, 128, 255, .15)',
+     *     title: 'font-size: 16px',
+     *   },
+     * });
+     * ```
+     *
+     */
+    style?: {
+      /**
+       * CSS declarations for the marker at the action point. The marker is positioned at the action point, has zero size
+       * and is centered on the point, so its size and look come from this style. Not shown when omitted.
+       */
+      point?: string;
+
+      /**
+       * CSS declarations for the box that covers the target element. The box is positioned and sized to the element bounds.
+       * Not shown when omitted.
+       */
+      highlight?: string;
+
+      /**
+       * CSS declarations for the action title, for example `'font-size: 32px; background: #333'`. The title is placed
+       * according to
+       * [`position`](https://playwright.dev/docs/api/class-screencast#screencast-show-actions-option-position).
+       */
+      title?: string;
+    };
   }): Promise<Disposable>;
 
   /**
@@ -19520,6 +19717,139 @@ export interface APIRequest {
  * `APIRequestContext` object will have its own isolated cookie storage.
  */
 export interface APIRequestContext {
+  /**
+   * Adds cookies into this request context. They will be sent with matching subsequent requests. For
+   * [browserContext.request](https://playwright.dev/docs/api/class-browsercontext#browser-context-request) and
+   * [page.request](https://playwright.dev/docs/api/class-page#page-request), this is equivalent to calling
+   * [browserContext.addCookies(cookies)](https://playwright.dev/docs/api/class-browsercontext#browser-context-add-cookies)
+   * on the corresponding browser context.
+   *
+   * **Usage**
+   *
+   * ```js
+   * await request.addCookies([cookieObject1, cookieObject2]);
+   * ```
+   *
+   * @param cookies
+   */
+  addCookies(cookies: ReadonlyArray<{
+    name: string;
+
+    value: string;
+
+    /**
+     * Either `url` or both `domain` and `path` are required. Optional.
+     */
+    url?: string;
+
+    /**
+     * For the cookie to apply to all subdomains as well, prefix domain with a dot, like this: ".example.com". Either
+     * `url` or both `domain` and `path` are required. Optional.
+     */
+    domain?: string;
+
+    /**
+     * Either `url` or both `domain` and `path` are required. Optional.
+     */
+    path?: string;
+
+    /**
+     * Unix time in seconds. Optional.
+     */
+    expires?: number;
+
+    /**
+     * Optional.
+     */
+    httpOnly?: boolean;
+
+    /**
+     * Optional.
+     */
+    secure?: boolean;
+
+    /**
+     * Optional.
+     */
+    sameSite?: "Strict"|"Lax"|"None";
+
+    /**
+     * For partitioned third-party cookies (aka
+     * [CHIPS](https://developer.mozilla.org/en-US/docs/Web/Privacy/Guides/Privacy_sandbox/Partitioned_cookies)), the
+     * partition key. Optional.
+     */
+    partitionKey?: string;
+  }>): Promise<void>;
+
+  /**
+   * Removes cookies from this request context. Accepts optional filter. For
+   * [browserContext.request](https://playwright.dev/docs/api/class-browsercontext#browser-context-request) and
+   * [page.request](https://playwright.dev/docs/api/class-page#page-request), this is equivalent to calling
+   * [browserContext.clearCookies([options])](https://playwright.dev/docs/api/class-browsercontext#browser-context-clear-cookies)
+   * on the corresponding browser context.
+   *
+   * **Usage**
+   *
+   * ```js
+   * await request.clearCookies();
+   * await request.clearCookies({ name: 'session-id' });
+   * await request.clearCookies({ domain: 'my-origin.com' });
+   * await request.clearCookies({ domain: /.*my-origin\.com/ });
+   * await request.clearCookies({ path: '/api/v1' });
+   * await request.clearCookies({ name: 'session-id', domain: 'my-origin.com' });
+   * ```
+   *
+   * @param options
+   */
+  clearCookies(options?: {
+    /**
+     * Only removes cookies with the given domain.
+     */
+    domain?: string|RegExp;
+
+    /**
+     * Only removes cookies with the given name.
+     */
+    name?: string|RegExp;
+
+    /**
+     * Only removes cookies with the given path.
+     */
+    path?: string|RegExp;
+  }): Promise<void>;
+
+  /**
+   * If no URLs are specified, this method returns all cookies. If URLs are specified, only cookies that affect those
+   * URLs are returned. For
+   * [browserContext.request](https://playwright.dev/docs/api/class-browsercontext#browser-context-request) and
+   * [page.request](https://playwright.dev/docs/api/class-page#page-request), this is equivalent to calling
+   * [browserContext.cookies([urls])](https://playwright.dev/docs/api/class-browsercontext#browser-context-cookies) on
+   * the corresponding browser context.
+   * @param urls Optional list of URLs.
+   */
+  cookies(urls?: string|ReadonlyArray<string>): Promise<Array<{
+    name: string;
+
+    value: string;
+
+    domain: string;
+
+    path: string;
+
+    /**
+     * Unix time in seconds.
+     */
+    expires: number;
+
+    httpOnly: boolean;
+
+    secure: boolean;
+
+    sameSite: "Strict"|"Lax"|"None";
+
+    partitionKey?: string;
+  }>>;
+
   /**
    * Sends HTTP(S) [DELETE](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request and returns its
    * response. The method will populate request cookies from the context and update context cookies from the response.
@@ -20467,6 +20797,7 @@ export interface Clock {
   /**
    * Install fake implementations for the following time-related functions:
    * - `Date`
+   * - `Temporal.Now`
    * - `setTimeout`
    * - `clearTimeout`
    * - `setInterval`
@@ -20713,7 +21044,7 @@ export interface Coverage {
    * **NOTE** Anonymous scripts are ones that don't have an associated url. These are scripts that are dynamically
    * created on the page using `eval` or `new Function`. If
    * [`reportAnonymousScripts`](https://playwright.dev/docs/api/class-coverage#coverage-start-js-coverage-option-report-anonymous-scripts)
-   * is set to `true`, anonymous scripts will have `__playwright_evaluation_script__` as their URL.
+   * is set to `true`, anonymous scripts will have an empty string as their URL.
    *
    * @param options
    */
@@ -20864,7 +21195,7 @@ export interface Coverage {
  *
  * **Usage: save credentials in the storage state, restore later**
  *
- * See [authentication guide](https://playwright.dev/docs/auth) for examples of using saving and resotring the storage state.
+ * See [authentication guide](https://playwright.dev/docs/auth) for examples of using saving and restoring the storage state.
  *
  * **Defaults**
  */
@@ -20882,6 +21213,8 @@ export interface Credentials {
    * [`userHandle`](https://playwright.dev/docs/api/class-credentials#credentials-create-option-user-handle),
    * [`privateKey`](https://playwright.dev/docs/api/class-credentials#credentials-create-option-private-key) and
    * [`publicKey`](https://playwright.dev/docs/api/class-credentials#credentials-create-option-public-key) together.
+   * Pass [`signCount`](https://playwright.dev/docs/api/class-credentials#credentials-create-option-sign-count) as well
+   * to continue from the signature counter the relying party has already seen.
    *
    * Call [credentials.install()](https://playwright.dev/docs/api/class-credentials#credentials-install) before
    * navigating to a page that uses WebAuthn.
@@ -20903,6 +21236,13 @@ export interface Credentials {
      * Base64url-encoded SPKI (DER) public key. Auto-generated if omitted.
      */
     publicKey?: string;
+
+    /**
+     * Initial value of the [signature counter](https://www.w3.org/TR/webauthn-2/#signature-counter). The counter is
+     * incremented by one on every successful `navigator.credentials.get()` assertion, so the first assertion reports
+     * `signCount + 1`. Defaults to `0`.
+     */
+    signCount?: number;
 
     /**
      * Base64url-encoded user handle. Auto-generated if omitted.
@@ -20933,6 +21273,11 @@ export interface Credentials {
      * Base64url-encoded SPKI (DER) public key.
      */
     publicKey: string;
+
+    /**
+     * Signature counter, the value reported to the relying party in the most recent assertion.
+     */
+    signCount: number;
   }>;
 
   /**
@@ -20951,8 +21296,8 @@ export interface Credentials {
    * [credentials.create(rpId[, options])](https://playwright.dev/docs/api/class-credentials#credentials-create) and
    * credentials the page registered itself by calling `navigator.credentials.create()`.
    *
-   * Each returned credential includes its private and public keys, so a passkey the app just registered can be saved
-   * and re-seeded into a later test with
+   * Each returned credential includes its private and public keys and the current signature counter, so a passkey the
+   * app just registered can be saved and re-seeded into a later test with
    * [credentials.create(rpId[, options])](https://playwright.dev/docs/api/class-credentials#credentials-create) — see
    * the second example in the class overview.
    * @param options
@@ -20977,6 +21322,8 @@ export interface Credentials {
     privateKey: string;
 
     publicKey: string;
+
+    signCount: number;
   }>>;
 
   /**
@@ -21918,7 +22265,7 @@ export interface Keyboard {
    * **Usage**
    *
    * ```js
-   * page.keyboard.insertText('嗨');
+   * await page.keyboard.insertText('嗨');
    * ```
    *
    * **NOTE** Modifier keys DO NOT effect `keyboard.insertText`. Holding down `Shift` will not type the text in upper
@@ -22413,7 +22760,7 @@ export interface Request {
   /**
    * Contains the request's resource type as it was perceived by the rendering engine. ResourceType will be one of the
    * following: `document`, `stylesheet`, `image`, `media`, `font`, `script`, `texttrack`, `xhr`, `fetch`,
-   * `eventsource`, `websocket`, `manifest`, `other`.
+   * `eventsource`, `websocket`, `manifest`, `beacon`, `ping`, `cspreport`, `other`.
    */
   resourceType(): string;
 
@@ -22578,9 +22925,10 @@ export interface Response {
   headers(): { [key: string]: string; };
 
   /**
-   * An array with all the request HTTP headers associated with this response. Unlike
+   * An array with all the response HTTP headers associated with this response. Unlike
    * [response.allHeaders()](https://playwright.dev/docs/api/class-response#response-all-headers), header names are NOT
-   * lower-cased. Headers with multiple entries, such as `Set-Cookie`, appear in the array multiple times.
+   * lower-cased. Headers with multiple entries, such as `Set-Cookie`, appear in the array multiple times. Some browser
+   * network stacks combine multiple field values before reporting them, so separate entries are not always available.
    */
   headersArray(): Promise<Array<{
     /**
@@ -23200,7 +23548,9 @@ export interface Tracing {
   groupEnd(): Promise<void>;
 
   /**
-   * Start tracing.
+   * Start tracing. Disposing the returned [Disposable](https://playwright.dev/docs/api/class-disposable) stops tracing
+   * without saving the trace, similarly to calling
+   * [tracing.stop([options])](https://playwright.dev/docs/api/class-tracing#tracing-stop) without a path.
    *
    * **NOTE** You probably want to
    * [enable tracing in your config file](https://playwright.dev/docs/api/class-testoptions#test-options-trace) instead
@@ -23275,10 +23625,13 @@ export interface Tracing {
      * Trace name to be shown in the Trace Viewer.
      */
     title?: string;
-  }): Promise<void>;
+  }): Promise<Disposable>;
 
   /**
-   * Start a new trace chunk. If you'd like to record multiple traces on the same
+   * Start a new trace chunk. Disposing the returned [Disposable](https://playwright.dev/docs/api/class-disposable)
+   * stops the chunk without saving it, similarly to calling
+   * [tracing.stopChunk([options])](https://playwright.dev/docs/api/class-tracing#tracing-stop-chunk) without a path. If
+   * you'd like to record multiple traces on the same
    * [BrowserContext](https://playwright.dev/docs/api/class-browsercontext), use
    * [tracing.start([options])](https://playwright.dev/docs/api/class-tracing#tracing-start) once, and then create
    * multiple trace chunks with
@@ -23320,7 +23673,7 @@ export interface Tracing {
      * Trace name to be shown in the Trace Viewer.
      */
     title?: string;
-  }): Promise<void>;
+  }): Promise<Disposable>;
 
   /**
    * Start recording a HAR (HTTP Archive) of network activity in this context. The HAR file is written to disk when
@@ -23475,6 +23828,112 @@ export interface WebError {
    * The page that produced this unhandled exception, if any.
    */
   page(): null|Page;
+}
+
+/**
+ * [WebMCP](https://playwright.dev/docs/api/class-webmcp) exposes the tools that a frame registers through the
+ * experimental [WebMCP](https://playwright.dev/docs/api/class-webmcp) browser API, `navigator.modelContext`. It lists
+ * the tools and calls them.
+ *
+ * Instances are accessed through [frame.webmcp](https://playwright.dev/docs/api/class-frame#frame-webmcp).
+ * [page.webmcp](https://playwright.dev/docs/api/class-page#page-webmcp) is the instance of the main frame.
+ *
+ * **NOTE** WebMCP is an experimental browser feature. Chromium enables it with the `--enable-features=WebMCP` launch
+ * argument, Firefox with the `dom.modelcontext.enabled` and `dom.modelcontext.testing.enabled` preferences. WebKit
+ * does not implement it.
+ *
+ * Tool names, descriptions, input schemas and results are provided by the page, so treat them as untrusted input.
+ *
+ * ```js
+ * const browser = await chromium.launch({ args: ['--enable-features=WebMCP'] });
+ * const page = await browser.newPage();
+ * await page.goto('https://example.com');
+ *
+ * for (const tool of await page.webmcp.tools())
+ *   console.log(tool.name, tool.description);
+ *
+ * const result = await page.webmcp.callTool('add', { a: 2, b: 40 });
+ * ```
+ *
+ */
+export interface WebMCP {
+  /**
+   * Calls a tool registered by the frame and returns its result. The result is whatever the tool's `execute` function
+   * resolved to, typically an object with a `content` array. A result with `isError: true` is returned as is. The
+   * method throws when the tool is not registered or its `execute` function throws.
+   *
+   * ```js
+   * const result = await page.webmcp.callTool('add', { a: 2, b: 40 });
+   * console.log(result.content[0].text); // "42"
+   * ```
+   *
+   * @param name Name of the tool, as reported by
+   * [webMCP.tools([options])](https://playwright.dev/docs/api/class-webmcp#web-mcp-tools).
+   * @param input Input for the tool, matching its `inputSchema`. Defaults to an empty object.
+   * @param options
+   */
+  callTool(name: string, input?: Serializable, options?: {
+    /**
+     * Maximum time in milliseconds. Defaults to `0` - no timeout. The default value can be changed via `actionTimeout`
+     * option in the config, or by using the
+     * [browserContext.setDefaultTimeout(timeout)](https://playwright.dev/docs/api/class-browsercontext#browser-context-set-default-timeout)
+     * or [page.setDefaultTimeout(timeout)](https://playwright.dev/docs/api/class-page#page-set-default-timeout) methods.
+     */
+    timeout?: number;
+  }): Promise<Serializable>;
+
+  /**
+   * Returns the tools currently registered by the frame. Throws if the browser was launched without WebMCP support, see
+   * the note above for the launch options that enable it.
+   *
+   * [page.webmcp](https://playwright.dev/docs/api/class-page#page-webmcp) covers the main frame only, child frames list
+   * their tools through their own [frame.webmcp](https://playwright.dev/docs/api/class-frame#frame-webmcp).
+   * @param options
+   */
+  tools(options?: {
+    /**
+     * Maximum time in milliseconds. Defaults to `0` - no timeout. The default value can be changed via `actionTimeout`
+     * option in the config, or by using the
+     * [browserContext.setDefaultTimeout(timeout)](https://playwright.dev/docs/api/class-browsercontext#browser-context-set-default-timeout)
+     * or [page.setDefaultTimeout(timeout)](https://playwright.dev/docs/api/class-page#page-set-default-timeout) methods.
+     */
+    timeout?: number;
+  }): Promise<Array<{
+    /**
+     * Tool name, unique within the frame.
+     */
+    name: string;
+
+    /**
+     * Tool description.
+     */
+    description: string;
+
+    /**
+     * JSON Schema of the tool input, when the page provides one.
+     */
+    inputSchema?: Serializable;
+
+    /**
+     * Hints the page provides about the tool.
+     */
+    annotations?: {
+      /**
+       * The tool does not modify any state.
+       */
+      readOnly?: boolean;
+
+      /**
+       * The tool output may contain third-party content.
+       */
+      untrustedContent?: boolean;
+
+      /**
+       * The tool takes a consequential action, such as placing an order.
+       */
+      consequential?: boolean;
+    };
+  }>>;
 }
 
 /**
@@ -23824,9 +24283,7 @@ export interface WebStorage {
  * ```
  *
  * **Supported Electron versions are:**
- * - v12.2.0+
- * - v13.4.0+
- * - v14+
+ * - v21+
  *
  * **Known issues:**
  *
@@ -24080,6 +24537,12 @@ export interface Electron {
       };
 
       /**
+       * Frame rate of the recorded videos in frames per second. Defaults to `25`. Firefox and WebKit currently capture up
+       * to 25 frames per second.
+       */
+      fps?: number;
+
+      /**
        * If specified, enables visual annotations on interacted elements during video recording.
        */
       showActions?: {
@@ -24094,7 +24557,7 @@ export interface Electron {
         position?: "top-left"|"top"|"top-right"|"bottom-left"|"bottom"|"bottom-right";
 
         /**
-         * Font size of the action title in pixels. Defaults to `24`.
+         * Font size of the action title in pixels. Defaults to `24`. Deprecated, use `style.title` instead.
          */
         fontSize?: number;
 
@@ -24103,6 +24566,26 @@ export interface Electron {
          * the previous action point to the next one. `"none"` disables the cursor decoration.
          */
         cursor?: "none"|"pointer";
+
+        /**
+         * Styles of the action decorations.
+         */
+        style?: {
+          /**
+           * CSS declarations for the zero-sized marker centered on the action point. Not shown when omitted.
+           */
+          point?: string;
+
+          /**
+           * CSS declarations for the box that covers the target element. Not shown when omitted.
+           */
+          highlight?: string;
+
+          /**
+           * CSS declarations for the action title.
+           */
+          title?: string;
+        };
       };
     };
 
@@ -24134,7 +24617,7 @@ export interface Electron {
  * - Android device or AVD Emulator.
  * - [ADB daemon](https://developer.android.com/studio/command-line/adb) running and authenticated with your device.
  *   Typically running `adb devices` is all you need to do.
- * - [`Chrome 87`](https://play.google.com/store/apps/details?id=com.android.chrome) or newer installed on the
+ * - [`Chrome 105`](https://play.google.com/store/apps/details?id=com.android.chrome) or newer installed on the
  *   device
  * - "Enable command line on non-rooted devices" enabled in `chrome://flags`.
  *
@@ -24654,8 +25137,8 @@ export interface AndroidDevice {
 
     /**
      * Whether the `meta viewport` tag is taken into account and touch events are enabled. isMobile is a part of device,
-     * so you don't actually need to set it manually. Defaults to `false` and is not supported in Firefox. Learn more
-     * about [mobile emulation](https://playwright.dev/docs/emulation#ismobile).
+     * so you don't actually need to set it manually. Defaults to `false`. Learn more about
+     * [mobile emulation](https://playwright.dev/docs/emulation#ismobile).
      */
     isMobile?: boolean;
 
@@ -24795,6 +25278,12 @@ export interface AndroidDevice {
       };
 
       /**
+       * Frame rate of the recorded videos in frames per second. Defaults to `25`. Firefox and WebKit currently capture up
+       * to 25 frames per second.
+       */
+      fps?: number;
+
+      /**
        * If specified, enables visual annotations on interacted elements during video recording.
        */
       showActions?: {
@@ -24809,7 +25298,7 @@ export interface AndroidDevice {
         position?: "top-left"|"top"|"top-right"|"bottom-left"|"bottom"|"bottom-right";
 
         /**
-         * Font size of the action title in pixels. Defaults to `24`.
+         * Font size of the action title in pixels. Defaults to `24`. Deprecated, use `style.title` instead.
          */
         fontSize?: number;
 
@@ -24818,6 +25307,26 @@ export interface AndroidDevice {
          * the previous action point to the next one. `"none"` disables the cursor decoration.
          */
         cursor?: "none"|"pointer";
+
+        /**
+         * Styles of the action decorations.
+         */
+        style?: {
+          /**
+           * CSS declarations for the zero-sized marker centered on the action point. Not shown when omitted.
+           */
+          point?: string;
+
+          /**
+           * CSS declarations for the box that covers the target element. Not shown when omitted.
+           */
+          highlight?: string;
+
+          /**
+           * CSS declarations for the action title.
+           */
+          title?: string;
+        };
       };
     };
 
@@ -25498,7 +26007,7 @@ export interface LaunchOptions {
   slowMo?: number;
 
   /**
-   * Maximum time in milliseconds to wait for the browser instance to start. Defaults to `30000` (30 seconds). Pass `0`
+   * Maximum time in milliseconds to wait for the browser instance to start. Defaults to `180000` (3 minutes). Pass `0`
    * to disable timeout.
    */
   timeout?: number;
@@ -25871,8 +26380,8 @@ export interface BrowserContextOptions {
 
   /**
    * Whether the `meta viewport` tag is taken into account and touch events are enabled. isMobile is a part of device,
-   * so you don't actually need to set it manually. Defaults to `false` and is not supported in Firefox. Learn more
-   * about [mobile emulation](https://playwright.dev/docs/emulation#ismobile).
+   * so you don't actually need to set it manually. Defaults to `false`. Learn more about
+   * [mobile emulation](https://playwright.dev/docs/emulation#ismobile).
    */
   isMobile?: boolean;
 
@@ -26007,6 +26516,12 @@ export interface BrowserContextOptions {
     };
 
     /**
+     * Frame rate of the recorded videos in frames per second. Defaults to `25`. Firefox and WebKit currently capture up
+     * to 25 frames per second.
+     */
+    fps?: number;
+
+    /**
      * If specified, enables visual annotations on interacted elements during video recording.
      */
     showActions?: {
@@ -26021,7 +26536,7 @@ export interface BrowserContextOptions {
       position?: "top-left"|"top"|"top-right"|"bottom-left"|"bottom"|"bottom-right";
 
       /**
-       * Font size of the action title in pixels. Defaults to `24`.
+       * Font size of the action title in pixels. Defaults to `24`. Deprecated, use `style.title` instead.
        */
       fontSize?: number;
 
@@ -26030,6 +26545,26 @@ export interface BrowserContextOptions {
        * the previous action point to the next one. `"none"` disables the cursor decoration.
        */
       cursor?: "none"|"pointer";
+
+      /**
+       * Styles of the action decorations.
+       */
+      style?: {
+        /**
+         * CSS declarations for the zero-sized marker centered on the action point. Not shown when omitted.
+         */
+        point?: string;
+
+        /**
+         * CSS declarations for the box that covers the target element. Not shown when omitted.
+         */
+        highlight?: string;
+
+        /**
+         * CSS declarations for the action title.
+         */
+        title?: string;
+      };
     };
   };
 

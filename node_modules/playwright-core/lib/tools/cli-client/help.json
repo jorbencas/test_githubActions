@@ -1,13 +1,14 @@
 {
-  "global": "Usage: playwright-cli <command> [args] [options]\nUsage: playwright-cli -s=<session> <command> [args] [options]\n\nCore:\n  open [url]                  open the browser\n  attach [name]               attach to a running playwright browser\n  close                       close the browser\n  detach                      detach from an attached browser\n  goto <url>                  navigate to a url\n  type <text>                 type text into editable element\n  click <target> [button]     perform click on a web page\n  dblclick <target> [button]  perform double click on a web page\n  fill <target> <text>        fill text into editable element\n  drag <startTarget> <endTarget> perform drag and drop between two elements\n  drop <target>               drop files or data onto an element\n  hover <target>              hover over element on page\n  select <target> <val>       select an option in a dropdown\n  upload <files...>           upload one or multiple files\n  check <target>              check a checkbox or radio button\n  uncheck <target>            uncheck a checkbox or radio button\n  snapshot [target]           capture page snapshot to obtain element ref\n  find [text]                 search the page snapshot for text or a regexp, returning matching nodes with surrounding context (like search snippets)\n  eval <func> [target]        evaluate javascript expression on page or element\n  dialog-accept [prompt]      accept a dialog\n  dialog-dismiss              dismiss a dialog\n  resize <w> <h>              resize the browser window\n  delete-data                 delete session data\n\nNavigation:\n  go-back                     go back to the previous page\n  go-forward                  go forward to the next page\n  reload                      reload the current page\n\nKeyboard:\n  press <key>                 press a key on the keyboard, `a`, `arrowleft`\n  keydown <key>               press a key down on the keyboard\n  keyup <key>                 press a key up on the keyboard\n\nMouse:\n  mousemove <x> <y>           move mouse to a given position\n  mousedown [button]          press mouse down\n  mouseup [button]            press mouse up\n  mousewheel <dx> <dy>        scroll mouse wheel\n\nSave as:\n  screenshot [target]         screenshot of the current page or element\n  pdf                         save page as pdf\n\nTabs:\n  tab-list                    list all tabs\n  tab-new [url]               create a new tab\n  tab-close [index]           close a browser tab\n  tab-select <index>          select a browser tab\n\nStorage:\n  state-load <filename>       loads browser storage (authentication) state from a file\n  state-save [filename]       saves the current storage (authentication) state to a file\n  cookie-list                 list all cookies (optionally filtered by domain/path)\n  cookie-get <name>           get a specific cookie by name\n  cookie-set <name> <value>   set a cookie with optional flags\n  cookie-delete <name>        delete a specific cookie\n  cookie-clear                clear all cookies\n  localstorage-list           list all localstorage key-value pairs\n  localstorage-get <key>      get a localstorage item by key\n  localstorage-set <key> <value> set a localstorage item\n  localstorage-delete <key>   delete a localstorage item\n  localstorage-clear          clear all localstorage\n  sessionstorage-list         list all sessionstorage key-value pairs\n  sessionstorage-get <key>    get a sessionstorage item by key\n  sessionstorage-set <key> <value> set a sessionstorage item\n  sessionstorage-delete <key> delete a sessionstorage item\n  sessionstorage-clear        clear all sessionstorage\n\nNetwork:\n  requests                    list all network requests since loading the page. each request is numbered for use with the `request` command.\n  request <index>             show full details (headers, body, response) of a single network request by its number from the `requests` command.\n  request-headers <index>     print only the request headers for a single network request by its number from the `requests` command.\n  request-body <index>        print only the request body for a single network request by its number from the `requests` command.\n  response-headers <index>    print only the response headers for a single network request by its number from the `requests` command.\n  response-body <index>       print the response body for a single network request by its number from the `requests` command. textual bodies are inlined; binary bodies are saved to a file and the path is printed.\n  route <pattern>             mock network requests matching a url pattern\n  route-list                  list all active network routes\n  unroute [pattern]           remove routes matching a pattern (or all routes)\n  network-state-set <state>   set the browser network state to online or offline\n\nDevTools:\n  console [min-level]         list console messages\n  run-code [code]             run playwright code snippet\n  recording-start             start recording user actions\n  recording-stop              stop recording user actions and print them as playwright code\n  tracing-start               start trace recording\n  tracing-stop                stop trace recording\n  video-start [filename]      start video recording\n  video-stop                  stop video recording\n  video-chapter <title>       add a chapter marker to the video recording\n  video-show-actions          annotate subsequent cli/mcp actions on the page with a callout that names the action and highlights the target element\n  video-hide-actions          stop annotating actions performed on the page\n  show                        show playwright dashboard\n  pause-at <location>         run the test up to a specific location and pause there\n  resume                      resume the test execution\n  step-over                   step over the next call in the test\n  generate-locator <target>   generate a playwright locator for the given element\n  highlight [target]          show (or with --hide, remove) a highlight overlay for an element; `--hide` without a target hides all page highlights.\n\nInstall:\n  install                     initialize workspace\n  install-browser [browser]   install browser\n\nBrowser sessions:\n  list                        list browser sessions\n  close-all                   close all browser sessions\n  kill-all                    forcefully kill all browser sessions (for stale/zombie processes)\n\nGlobal options:\n  --help [command]            print help\n  --json                      output response as JSON\n  --raw                       output only the result value, without status and code\n  --version                   print version",
+  "global": "Usage: playwright-cli <command> [args] [options]\nUsage: playwright-cli -s=<session> <command> [args] [options]\n\nCore:\n  open [url]                  open the browser\n  attach [name]               attach to a running playwright browser\n  close                       close the browser\n  detach                      detach from an attached browser\n  goto <url>                  navigate to a url\n  type <text>                 type text into editable element\n  click <target> [button]     perform click on a web page\n  dblclick <target> [button]  perform double click on a web page\n  fill <target> <text>        fill text into editable element\n  drag <startTarget> <endTarget> perform drag and drop between two elements\n  drop <target>               drop files or data onto an element\n  hover <target>              hover over element on page\n  select <target> <val>       select an option in a dropdown\n  upload <files...>           upload one or multiple files\n  check <target>              check a checkbox or radio button\n  uncheck <target>            uncheck a checkbox or radio button\n  snapshot [target]           capture page snapshot to obtain element ref\n  find [text]                 search the page snapshot for text or a regexp, returning matching nodes with surrounding context (like search snippets)\n  eval <func> [target]        evaluate javascript expression on page or element\n  dialog-accept [prompt]      accept a dialog\n  dialog-dismiss              dismiss a dialog\n  resize <w> <h>              resize the browser window\n  delete-data                 delete session data\n\nNavigation:\n  go-back                     go back to the previous page\n  go-forward                  go forward to the next page\n  reload                      reload the current page\n\nKeyboard:\n  press <key>                 press a key on the keyboard, `a`, `arrowleft`\n  keydown <key>               press a key down on the keyboard\n  keyup <key>                 press a key up on the keyboard\n\nMouse:\n  mousemove <x> <y>           move mouse to a given position\n  mousedown [button]          press mouse down\n  mouseup [button]            press mouse up\n  mousewheel <dx> <dy>        scroll mouse wheel\n\nSave as:\n  screenshot [target]         screenshot of the current page or element\n  pdf                         save page as pdf\n\nTabs:\n  tab-list                    list all tabs\n  tab-new [url]               create a new tab\n  tab-close [index]           close a browser tab\n  tab-select <index>          select a browser tab\n\nStorage:\n  state-load <filename>       loads browser storage (authentication) state from a file\n  state-save [filename]       saves the current storage (authentication) state to a file\n  cookie-list                 list all cookies (optionally filtered by domain/path)\n  cookie-get <name>           get a specific cookie by name\n  cookie-set <name> <value>   set a cookie with optional flags\n  cookie-delete <name>        delete a specific cookie\n  cookie-clear                clear all cookies\n  localstorage-list           list all localstorage key-value pairs\n  localstorage-get <key>      get a localstorage item by key\n  localstorage-set <key> <value> set a localstorage item\n  localstorage-delete <key>   delete a localstorage item\n  localstorage-clear          clear all localstorage\n  sessionstorage-list         list all sessionstorage key-value pairs\n  sessionstorage-get <key>    get a sessionstorage item by key\n  sessionstorage-set <key> <value> set a sessionstorage item\n  sessionstorage-delete <key> delete a sessionstorage item\n  sessionstorage-clear        clear all sessionstorage\n\nEmulation:\n  set-color-scheme <scheme>   emulate the light or dark color scheme\n  set-reduced-motion <motion> emulate the reduced motion preference\n  set-forced-colors <colors>  emulate forced colors mode\n  set-contrast <contrast>     emulate the preferred contrast\n  set-media <media>           emulate the css media type\n  clear-color-scheme          clear color scheme emulation\n  clear-reduced-motion        clear reduced motion emulation\n  clear-forced-colors         clear forced colors emulation\n  clear-contrast              clear preferred contrast emulation\n  clear-media                 clear css media type emulation\n\nNetwork:\n  requests                    list all network requests since loading the page. each request is numbered for use with the `request` command.\n  request <index>             show full details (headers, body, response) of a single network request by its number from the `requests` command.\n  request-headers <index>     print only the request headers for a single network request by its number from the `requests` command.\n  request-body <index>        print only the request body for a single network request by its number from the `requests` command.\n  response-headers <index>    print only the response headers for a single network request by its number from the `requests` command.\n  response-body <index>       print the response body for a single network request by its number from the `requests` command. textual bodies are inlined; binary bodies are saved to a file and the path is printed.\n  route <pattern>             mock network requests matching a url pattern\n  route-list                  list all active network routes\n  unroute [pattern]           remove routes matching a pattern (or all routes)\n  network-state-set <state>   set the browser network state to online or offline\n\nDevTools:\n  console [min-level]         list console messages\n  run-code [code]             run playwright code snippet\n  recording-start             start recording user actions\n  recording-stop              stop recording user actions and print them as playwright code\n  tracing-start               start trace recording\n  tracing-stop                stop trace recording\n  video-start [filename]      start video recording\n  video-stop                  stop video recording\n  video-chapter <title>       add a chapter marker to the video recording\n  video-show-actions          annotate subsequent cli/mcp actions on the page with a callout that names the action and, when styled, marks the action point and highlights the target element\n  video-hide-actions          stop annotating actions performed on the page\n  show                        show playwright dashboard\n  pause-at <location>         run the test up to a specific location and pause there\n  resume                      resume the test execution\n  step-over                   step over the next call in the test\n  generate-locator <target>   generate a playwright locator for the given element\n  highlight [target]          show (or with --hide, remove) a highlight overlay for an element; `--hide` without a target hides all page highlights.\n\nWebMCP:\n  webmcp-list                 list the webmcp tools registered by the page\n  webmcp-call <name>          call a webmcp tool registered by the page\n\nInstall:\n  install                     initialize workspace\n  install-browser [browser]   install browser\n\nBrowser sessions:\n  list                        list browser sessions\n  close-all                   close all browser sessions\n  kill-all                    forcefully kill all browser sessions (for stale/zombie processes)\n\nGlobal options:\n  --help [command]            print help\n  --json                      output response as JSON\n  --raw                       output only the result value, without status and code\n  --version                   print version",
   "commands": {
     "open": {
-      "help": "playwright-cli open [url]\n\nOpen the browser\n\nArguments:\n  [url]                       the url to navigate to\nOptions:\n  --browser                   browser or chrome channel to use, possible values: chrome, firefox, webkit, msedge.\n  --config                    path to the configuration file, defaults to .playwright/cli.config.json\n  --device                    emulate a specific device, for example \"iphone 15\".\n  --headed                    run browser in headed mode\n  --mobile                    emulate a generic mobile device (pixel 10 for chromium, iphone 17 for webkit). mobile pages are usually lighter, which saves tokens.\n  --persistent                use persistent browser profile\n  --profile                   path to a persistent user data directory.",
+      "help": "playwright-cli open [url]\n\nOpen the browser\n\nArguments:\n  [url]                       the url to navigate to\nOptions:\n  --browser                   browser or chrome channel to use, possible values: chrome, firefox, webkit, msedge.\n  --config                    path to the configuration file, defaults to .playwright/cli.config.json\n  --device                    emulate a specific device, for example \"iphone 15\".\n  --headed                    run browser in headed mode\n  --idle-timeout              shut the session down after this many milliseconds without a command. defaults to one hour for headless browsers, never for headed ones. pass 0 to disable.\n  --mobile                    emulate a generic mobile device (pixel 10 for chromium, iphone 17 for webkit). mobile pages are usually lighter, which saves tokens.\n  --persistent                use persistent browser profile\n  --profile                   path to a persistent user data directory.",
       "flags": {
         "browser": "string",
         "config": "string",
         "device": "string",
         "headed": "boolean",
+        "idle-timeout": "string",
         "mobile": "boolean",
         "persistent": "boolean",
         "profile": "string"
@@ -17,13 +18,14 @@
       ]
     },
     "attach": {
-      "help": "playwright-cli attach [name]\n\nAttach to a running Playwright browser\n\nArguments:\n  [name]                      bound browser name to attach to\nOptions:\n  --cdp                       connect to an existing browser via cdp endpoint url.\n  --endpoint                  playwright browser server endpoint to attach to.\n  --extension                 connect to browser extension, optionally specify browser name (e.g. --extension=chrome)\n  --config                    path to the configuration file, defaults to .playwright/cli.config.json\n  --session                   session name (defaults to bound browser name or \"default\")",
+      "help": "playwright-cli attach [name]\n\nAttach to a running Playwright browser\n\nArguments:\n  [name]                      bound browser name to attach to\nOptions:\n  --cdp                       connect to an existing browser via cdp endpoint url.\n  --endpoint                  playwright browser server endpoint to attach to.\n  --extension                 connect to browser extension, optionally specify browser name (e.g. --extension=chrome)\n  --config                    path to the configuration file, defaults to .playwright/cli.config.json\n  --session                   session name (defaults to bound browser name or \"default\")\n  --idle-timeout              detach after this many milliseconds without a command. attached browsers are never detached by default.",
       "flags": {
         "cdp": "string",
         "endpoint": "string",
         "extension": "string",
         "config": "string",
-        "session": "string"
+        "session": "string",
+        "idle-timeout": "string"
       },
       "args": [
         "name"
@@ -152,9 +154,11 @@
       ]
     },
     "find": {
-      "help": "playwright-cli find [text]\n\nSearch the page snapshot for text or a regexp, returning matching nodes with surrounding context (like search snippets)\n\nArguments:\n  [text]                      plain text to search for in the page snapshot (case-insensitive substring match)\nOptions:\n  --regex                     regular expression to search for in the page snapshot. provide either a text argument or --regex, not both.",
+      "help": "playwright-cli find [text]\n\nSearch the page snapshot for text or a regexp, returning matching nodes with surrounding context (like search snippets)\n\nArguments:\n  [text]                      plain text to search for in the page snapshot (case-insensitive substring match)\nOptions:\n  --regex                     regular expression to search for in the page snapshot. provide either a text argument or --regex, not both.\n  --filename                  save results to a file instead of returning them in the response.\n  --max-results               maximum number of matching items to return, unlimited by default.",
       "flags": {
-        "regex": "string"
+        "regex": "string",
+        "filename": "string",
+        "max-results": "string"
       },
       "args": [
         "text"
@@ -304,8 +308,10 @@
       "args": []
     },
     "tab-new": {
-      "help": "playwright-cli tab-new [url]\n\nCreate a new tab\n\nArguments:\n  [url]                       the url to navigate to in the new tab. if omitted, the new tab will be blank.",
-      "flags": {},
+      "help": "playwright-cli tab-new [url]\n\nCreate a new tab\n\nArguments:\n  [url]                       the url to navigate to in the new tab. if omitted, the new tab will be blank.\nOptions:\n  --isolated-context          name of an isolated browser context to create the tab in. tabs in the same isolated context share cookies and storage.",
+      "flags": {
+        "isolated-context": "string"
+      },
       "args": [
         "url"
       ]
@@ -450,6 +456,66 @@
       "flags": {},
       "args": []
     },
+    "set-color-scheme": {
+      "help": "playwright-cli set-color-scheme <scheme>\n\nEmulate the light or dark color scheme\n\nArguments:\n  <scheme>                    color scheme to emulate",
+      "flags": {},
+      "args": [
+        "scheme"
+      ]
+    },
+    "set-reduced-motion": {
+      "help": "playwright-cli set-reduced-motion <motion>\n\nEmulate the reduced motion preference\n\nArguments:\n  <motion>                    reduced motion preference to emulate",
+      "flags": {},
+      "args": [
+        "motion"
+      ]
+    },
+    "set-forced-colors": {
+      "help": "playwright-cli set-forced-colors <colors>\n\nEmulate forced colors mode\n\nArguments:\n  <colors>                    forced colors mode to emulate",
+      "flags": {},
+      "args": [
+        "colors"
+      ]
+    },
+    "set-contrast": {
+      "help": "playwright-cli set-contrast <contrast>\n\nEmulate the preferred contrast\n\nArguments:\n  <contrast>                  contrast preference to emulate",
+      "flags": {},
+      "args": [
+        "contrast"
+      ]
+    },
+    "set-media": {
+      "help": "playwright-cli set-media <media>\n\nEmulate the CSS media type\n\nArguments:\n  <media>                     css media type to emulate",
+      "flags": {},
+      "args": [
+        "media"
+      ]
+    },
+    "clear-color-scheme": {
+      "help": "playwright-cli clear-color-scheme \n\nClear color scheme emulation\n",
+      "flags": {},
+      "args": []
+    },
+    "clear-reduced-motion": {
+      "help": "playwright-cli clear-reduced-motion \n\nClear reduced motion emulation\n",
+      "flags": {},
+      "args": []
+    },
+    "clear-forced-colors": {
+      "help": "playwright-cli clear-forced-colors \n\nClear forced colors emulation\n",
+      "flags": {},
+      "args": []
+    },
+    "clear-contrast": {
+      "help": "playwright-cli clear-contrast \n\nClear preferred contrast emulation\n",
+      "flags": {},
+      "args": []
+    },
+    "clear-media": {
+      "help": "playwright-cli clear-media \n\nClear CSS media type emulation\n",
+      "flags": {},
+      "args": []
+    },
     "requests": {
       "help": "playwright-cli requests \n\nList all network requests since loading the page. Each request is numbered for use with the `request` command.\n\nOptions:\n  --static                    whether to include successful static resources like images, fonts, scripts, etc. defaults to false.\n  --filter                    only return requests whose url matches this regexp (e.g. \"/api/.*user\").\n  --clear                     whether to clear the network list",
       "flags": {
@@ -589,9 +655,11 @@
       "args": []
     },
     "video-start": {
-      "help": "playwright-cli video-start [filename]\n\nStart video recording\n\nArguments:\n  [filename]                  filename to save the video.\nOptions:\n  --size                      video frame size, e.g. \"800x600\". if not specified, the size of the recorded video will fit 800x800.",
+      "help": "playwright-cli video-start [filename]\n\nStart video recording\n\nArguments:\n  [filename]                  filename to save the video.\nOptions:\n  --size                      video frame size, e.g. \"800x600\". if not specified, the size of the recorded video will fit 800x800.\n  --fps                       video frame rate in frames per second, defaults to 25.\n  --cursor                    render an animated mouse cursor that travels to each action point. paces actions by 800ms so that the cursor has time to travel.",
       "flags": {
-        "size": "string"
+        "size": "string",
+        "fps": "string",
+        "cursor": "boolean"
       },
       "args": [
         "filename"
@@ -613,11 +681,14 @@
       ]
     },
     "video-show-actions": {
-      "help": "playwright-cli video-show-actions \n\nAnnotate subsequent CLI/MCP actions on the page with a callout that names the action and highlights the target element\n\nOptions:\n  --duration                  how long each action annotation stays on screen, in milliseconds. defaults to 500.\n  --position                  where to place the action title: top-left, top, top-right, bottom-left, bottom, bottom-right. defaults to top-right. (one of: top-left, top, top-right, bottom-left, bottom, bottom-right)\n  --cursor                    cursor decoration: \"pointer\" (default) animates a mouse pointer between action points; \"none\" disables it. (one of: none, pointer)",
+      "help": "playwright-cli video-show-actions \n\nAnnotate subsequent CLI/MCP actions on the page with a callout that names the action and, when styled, marks the action point and highlights the target element\n\nOptions:\n  --duration                  how long each action annotation stays on screen, in milliseconds. defaults to 500.\n  --position                  where to place the action title: top-left, top, top-right, bottom-left, bottom, bottom-right. defaults to top-right. (one of: top-left, top, top-right, bottom-left, bottom, bottom-right)\n  --cursor                    cursor decoration: \"pointer\" (default) animates a mouse pointer between action points; \"none\" disables it. (one of: none, pointer)\n  --point-style               css declarations for the zero-sized marker centered on the action point, e.g. \"width: 20px; height: 20px; border-radius: 50%; background: red\". not shown when omitted.\n  --highlight-style           css declarations for the box that covers the target element, e.g. \"outline: 2px solid #333\". not shown when omitted.\n  --title-style               css declarations for the action title, e.g. \"font-size: 16px\".",
       "flags": {
         "duration": "string",
         "position": "string",
-        "cursor": "string"
+        "cursor": "string",
+        "point-style": "string",
+        "highlight-style": "string",
+        "title-style": "string"
       },
       "args": []
     },
@@ -688,6 +759,21 @@
       "flags": {},
       "args": []
     },
+    "webmcp-list": {
+      "help": "playwright-cli webmcp-list \n\nList the WebMCP tools registered by the page\n",
+      "flags": {},
+      "args": []
+    },
+    "webmcp-call": {
+      "help": "playwright-cli webmcp-call <name>\n\nCall a WebMCP tool registered by the page\n\nArguments:\n  <name>                      name of the webmcp tool to call\nOptions:\n  --params                    tool input parameters as a json object, for example '{\"query\":\"cats\"}'\n  --frame                     frame that registered the tool, as reported by webmcp-list, when the tool name is ambiguous",
+      "flags": {
+        "params": "string",
+        "frame": "string"
+      },
+      "args": [
+        "name"
+      ]
+    },
     "tray": {
       "help": "playwright-cli tray \n\nRun tray\n",
       "flags": {},
@@ -713,6 +799,7 @@
     "force",
     "only-shell",
     "no-shell",
+    "cursor",
     "annotate",
     "kill",
     "hide",

@@ -33,14 +33,14 @@ The following npm packages are inlined into this bundle.
 - eventsource-parser@3.1.0 (https://github.com/rexxars/eventsource-parser)
 - eventsource@3.0.7 (https://github.com/EventSource/eventsource)
 - fast-deep-equal@3.1.3 (https://github.com/epoberezkin/fast-deep-equal)
-- fast-uri@3.1.3 (https://github.com/fastify/fast-uri)
+- fast-uri@3.1.7 (https://github.com/fastify/fast-uri)
 - get-east-asian-width@1.6.0 (https://github.com/sindresorhus/get-east-asian-width)
 - get-stream@9.0.1 (https://github.com/sindresorhus/get-stream)
 - graceful-fs@4.2.11 (https://github.com/isaacs/node-graceful-fs)
 - has-flag@4.0.0 (https://github.com/sindresorhus/has-flag)
 - https-proxy-agent@9.1.0 (https://github.com/TooTallNate/proxy-agents)
 - ini@7.0.0 (https://github.com/npm/ini)
-- ip-address@10.2.0 (https://github.com/beaugunderson/ip-address)
+- ip-address@10.7.2 (https://github.com/beaugunderson/ip-address)
 - is-docker@3.0.0 (https://github.com/sindresorhus/is-docker)
 - is-in-ssh@1.0.0 (https://github.com/sindresorhus/is-in-ssh)
 - is-inside-container@1.0.0 (https://github.com/sindresorhus/is-inside-container)
@@ -798,7 +798,7 @@ SOFTWARE.
 =========================================
 END OF fast-deep-equal@3.1.3 NOTICES AND INFORMATION
 
-%% fast-uri@3.1.3 NOTICES AND INFORMATION BEGIN HERE
+%% fast-uri@3.1.7 NOTICES AND INFORMATION BEGIN HERE
 =========================================
 Copyright (c) 2011-2021, Gary Court until https://github.com/garycourt/uri-js/commit/a1acf730b4bba3f1097c9f52e7d9d3aba8cdcaae
 Copyright (c) 2021-present The Fastify team <https://github.com/fastify/fastify#team>
@@ -831,7 +831,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 The complete list of contributors can be found at:
 - https://github.com/garycourt/uri-js/graphs/contributors
 =========================================
-END OF fast-uri@3.1.3 NOTICES AND INFORMATION
+END OF fast-uri@3.1.7 NOTICES AND INFORMATION
 
 %% get-east-asian-width@1.6.0 NOTICES AND INFORMATION BEGIN HERE
 =========================================
@@ -942,7 +942,7 @@ IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 =========================================
 END OF ini@7.0.0 NOTICES AND INFORMATION
 
-%% ip-address@10.2.0 NOTICES AND INFORMATION BEGIN HERE
+%% ip-address@10.7.2 NOTICES AND INFORMATION BEGIN HERE
 =========================================
 Copyright (C) 2011 by Beau Gunderson
 
@@ -964,7 +964,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 =========================================
-END OF ip-address@10.2.0 NOTICES AND INFORMATION
+END OF ip-address@10.7.2 NOTICES AND INFORMATION
 
 %% is-docker@3.0.0 NOTICES AND INFORMATION BEGIN HERE
 =========================================

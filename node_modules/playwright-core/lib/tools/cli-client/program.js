@@ -43,6 +43,7 @@ var import_session = require("./session");
 var import_package = require("../../package");
 var import_serverRegistry = require("../../serverRegistry");
 var import_minimist = require("./minimist");
+var import_bootstrap = require("../../bootstrap");
 const globalOptions = [
   "json",
   "raw",
@@ -74,7 +75,7 @@ async function program(options) {
   const commandName = args._?.[0];
   if (args.version || args.v) {
     output.version(options?.embedderVersion ?? clientInfo.version);
-    process.exit(0);
+    (0, import_bootstrap.processExit)(0);
   }
   const command = commandName && help.commands[commandName];
   if (args.help || args.h || !commandName) {
@@ -87,7 +88,7 @@ async function program(options) {
       lines.push(help.global);
       output.help(lines.join("\n\n"));
     }
-    process.exit(0);
+    (0, import_bootstrap.processExit)(0);
   }
   if (!command)
     output.errorUnknownCommand(commandName, help.global);
@@ -395,8 +396,11 @@ function validateFlags(args, command, output) {
       continue;
     if (globalOptions.includes(key))
       continue;
-    if (!(key in command.flags))
-      unknownFlags.push(key);
+    if (key in command.flags)
+      continue;
+    if (args[key] === false && `no-${key}` in command.flags)
+      continue;
+    unknownFlags.push(key);
   }
   if (unknownFlags.length)
     output.errorUnknownOption(unknownFlags, command.help);

@@ -142,6 +142,8 @@ to start the browser session.`);
       args.push(`--profile=${cliArgs.profile}`);
     if (cliArgs.config)
       args.push(`--config=${cliArgs.config}`);
+    if (cliArgs["idle-timeout"] !== void 0)
+      args.push(`--idle-timeout=${cliArgs["idle-timeout"]}`);
     if (cliArgs.extension)
       args.push("--extension");
     else if (cliArgs.cdp)
