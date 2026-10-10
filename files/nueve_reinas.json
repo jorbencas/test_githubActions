@@ -2088,5 +2088,76 @@
     "relevancia": 2,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Netflix prepara una nueva versión de Nueve reinas: José Coronado será el rival de los estafadores",
+    "url": "https://www.msn.com/entretenimiento/tv/netflix-prepara-una-nueva-versi%C3%B3n-de-nueve-reinas-jos%C3%A9-coronado-ser%C3%A1-el-rival-de-los-estafadores/ar-AA2dXnnO",
+    "fecha_pub": "Sat, 10 Oct 2026 10:36:00 GMT",
+    "fecha_ts": "2026-10-10T21:31:00.194092+00:00",
+    "medio": "Nación Flix on MSN",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 5,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix prepara una nueva versión de Nueve reinas: José Coronado será el rival de los estafadores",
+    "url": "https://www.msn.com/noticias/otras/netflix-prepara-una-nueva-versi%C3%B3n-de-nueve-reinas-jos%C3%A9-coronado-ser%C3%A1-el-rival-de-los-estafadores/ar-AA2dXnnO",
+    "fecha_pub": "Sat, 10 Oct 2026 10:36:00 GMT",
+    "fecha_ts": "2026-10-10T21:31:00.621784+00:00",
+    "medio": "Nación Flix on MSN",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 5,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Nueve reinas trailer",
+    "url": "https://www.youtube.com/watch?v=B05G_VEJZVU",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-10T21:31:07.125747+00:00",
+    "medio": "jonrust",
+    "imagen": "https://i.ytimg.com/vi/B05G_VEJZVU/hqdefault.jpg",
+    "tipo": "trailer",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas"
+  },
+  {
+    "titulo": "Despidos Netflix",
+    "url": "https://www.ecartelera.com/noticias/netflix-ronda-de-despidos-de-800-puestos-84063/",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-10T21:31:12.859766+00:00",
+    "medio": "ECartelera",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Qué ver hoy en Netflix, Amazon Prime Video y otras plataformas: sábado 10 de octubre de 2026",
+    "url": "https://www.cinemania.es/cinemania/noticias/que-ver-hoy-netflix-amazon-prime-video-otras-plataformas-sabado-10-octubre-2026_7046450_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-10T21:31:14.025327+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "video",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix planea despedir a 850 trabajadores, alrededor de un 5% de su plantilla",
+    "url": "https://www.cinemania.es/lainformacion/economia-y-finanzas/netflix-planea-despedir-850-trabajadores-alrededor-un-5-su-plantilla_7047302_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-10T21:31:14.025535+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
