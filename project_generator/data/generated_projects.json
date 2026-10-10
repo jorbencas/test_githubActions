@@ -8695,6 +8695,171 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "7036ae5ace7e7166"
       }
+    },
+    {
+      "proyecto": {
+        "id": "b8c7d6e5f4a3b2c1",
+        "titulo": "Optimizador de Rutas de Entrega con Predicción de Tráfico",
+        "descripcion_corta": "Aplicación web que optimiza rutas de entrega considerando predicciones de tráfico en tiempo real.",
+        "descripcion_detallada": "Se desarrollará una aplicación web que permita a las empresas de logística y reparto planificar las rutas más eficientes para sus vehículos. La aplicación integrará datos de tráfico en tiempo real y predicciones basadas en IA para calcular los tiempos de llegada estimados a cada destino. Los usuarios podrán definir puntos de entrega, prioridades y ventanas horarias. El sistema generará una secuencia óptima de paradas y la ruta visualizada en un mapa interactivo. El objetivo es reducir tiempos de entrega, consumo de combustible y costos operativos.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web HTTP de alto rendimiento para Go.",
+              "version_sugerida": "1.19.0",
+              "url_docs": "https://gin-gonic.com/",
+              "por_que": "Excelente rendimiento y bajo consumo de recursos, ideal para APIs de procesamiento intensivo."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Google Maps Platform APIs",
+              "categoria": "libreria",
+              "descripcion": "Servicios de mapas, rutas y geolocalización de Google.",
+              "version_sugerida": "null",
+              "url_docs": "https://developers.google.com/maps",
+              "por_que": "Proporciona datos de tráfico en tiempo real, cálculo de rutas y geocodificación esenciales para la funcionalidad."
+            },
+            {
+              "nombre": "GeoPandas",
+              "categoria": "libreria",
+              "descripcion": "Extensiones para GeoDataFrames de Pandas, permitiendo operaciones geoespaciales.",
+              "version_sugerida": "0.13.0",
+              "url_docs": "https://geopandas.org/",
+              "por_que": "Facilita el manejo y análisis de datos geoespaciales para la optimización de rutas."
+            },
+            {
+              "nombre": "OR-Tools",
+              "categoria": "libreria",
+              "descripcion": "Suite de software de Google para optimización combinatoria.",
+              "version_sugerida": "9.7.0",
+              "url_docs": "https://developers.google.com/optimization",
+              "por_que": "Incluye solvers potentes para problemas de ruteo de vehículos (VRP) y optimización de secuencias."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "Redis",
+              "categoria": "base_datos",
+              "descripcion": "Almacén de datos en memoria, usado como base de datos, caché y message broker.",
+              "version_sugerida": "7.0",
+              "url_docs": "https://redis.io/docs/",
+              "por_que": "Para almacenar temporalmente datos de tráfico y caché de rutas calculadas, mejorando la latencia."
+            },
+            {
+              "nombre": "PostGIS",
+              "categoria": "base_datos",
+              "descripcion": "Extensión espacial para la base de datos PostgreSQL.",
+              "version_sugerida": "3.3",
+              "url_docs": "https://postgis.net/documentation/",
+              "por_que": "Permite realizar consultas espaciales complejas y eficientes sobre las ubicaciones de entrega."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Kubernetes",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de orquestación de contenedores para automatizar el despliegue, escalado y gestión.",
+              "version_sugerida": "1.27",
+              "url_docs": "https://kubernetes.io/docs/home/",
+              "por_que": "Gestiona la alta disponibilidad y el escalado de los microservicios de enrutamiento y predicción."
+            },
+            {
+              "nombre": "Prometheus",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de monitorización y alertas de código abierto.",
+              "version_sugerida": "2.45.0",
+              "url_docs": "https://prometheus.io/docs/introduction/overview/",
+              "por_que": "Monitoriza el rendimiento de la API y los servicios de optimización, crucial para la fiabilidad."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "XGBoost",
+              "categoria": "ia_ml",
+              "descripcion": "Librería de boosting de gradiente optimizada.",
+              "version_sugerida": "2.0.0",
+              "url_docs": "https://xgboost.ai/documentation/",
+              "por_que": "Se utiliza para construir modelos de predicción de tráfico basados en datos históricos y variables contextuales."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Framework de testing integrado en Go.",
+              "version_sugerida": "null",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Permite escribir y ejecutar tests unitarios y de integración de forma nativa en Go."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Definición de múltiples puntos de entrega.",
+          "Optimización de rutas basada en VRP.",
+          "Integración de datos de tráfico en tiempo real.",
+          "Predicción de tráfico con IA.",
+          "Visualización interactiva de rutas en mapa.",
+          "Cálculo de ETAs y tiempos estimados."
+        ],
+        "casos_uso": [
+          "Una empresa de reparto define 50 entregas para un día.",
+          "El sistema calcula la ruta óptima considerando congestión vehicular esperada.",
+          "Un conductor consulta su ruta optimizada en un dispositivo móvil.",
+          "La empresa analiza el ahorro de tiempo y combustible logrado.",
+          "Ajuste dinámico de ruta si surgen imprevistos de tráfico."
+        ],
+        "reglas_negocio": [
+          "La ruta debe minimizar el tiempo total de viaje.",
+          "Se deben respetar las ventanas horarias de entrega especificadas.",
+          "El número de vehículos de reparto es limitado.",
+          "Los datos de tráfico deben actualizarse cada X minutos.",
+          "El sistema debe ofrecer al menos 2 alternativas de ruta."
+        ],
+        "por_que_ia": "La IA (XGBoost) se usa para predecir la congestión del tráfico basándose en datos históricos (hora del día, día de la semana, eventos) y datos en tiempo real, permitiendo una optimización de ruta más precisa y adaptativa que los algoritmos de enrutamiento estáticos.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Google Maps Platform APIs Documentation",
+          "OR-Tools Documentation",
+          "GeoPandas Tutorials"
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 12,
+        "prerequisitos": [
+          "Experiencia sólida con Go y desarrollo de APIs.",
+          "Conocimiento de algoritmos de optimización (VRP).",
+          "Experiencia con servicios de mapas y geolocalización.",
+          "Comprensión de modelos de Machine Learning para series temporales.",
+          "Conocimientos de bases de datos geoespaciales (PostGIS)."
+        ],
+        "riesgos": [
+          "Dependencia de APIs externas (Google Maps) y sus costos/límites.",
+          "Precisión de las predicciones de tráfico puede ser afectada por eventos no previstos.",
+          "Complejidad en la implementación y optimización de algoritmos VRP.",
+          "Escalabilidad del sistema para manejar miles de peticiones de rutas simultáneas.",
+          "Manejo de datos geoespaciales a gran escala."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "b8c7d6e5f4a3b2c1"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "8775b35bdc37492a"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -8762,8 +8927,9 @@
     "f9a0b1c2d3e4f5a6",
     "0e1f2a3b4c5d6e7f",
     "f9e8d7c6b5a4f3e2",
-    "b8a7f6e5d4c3b2a1"
+    "b8a7f6e5d4c3b2a1",
+    "b8c7d6e5f4a3b2c1"
   ],
-  "total_generados": 65,
-  "fecha_ultima_generacion": "2026-10-10T14:11:00.702562"
+  "total_generados": 66,
+  "fecha_ultima_generacion": "2026-10-10T19:41:47.749227"
 }
