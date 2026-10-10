@@ -8860,6 +8860,274 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "8775b35bdc37492a"
       }
+    },
+    {
+      "proyecto": {
+        "id": "b4c5d6e7f8a9b0c1",
+        "titulo": "Monitor de Rendimiento de APIs con Notificaciones",
+        "descripcion_corta": "Servicio que monitoriza la latencia y disponibilidad de APIs externas y notifica sobre incidentes.",
+        "descripcion_detallada": "Un servicio backend que realiza pings periódicos a endpoints de APIs configuradas por el usuario. Mide la latencia, el código de estado HTTP y la disponibilidad general. Si se detectan anomalías (tiempos de respuesta lentos, errores HTTP 5xx, indisponibilidad), envía notificaciones a través de varios canales.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "api",
+          "microservicio",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "net/http",
+              "categoria": "libreria",
+              "descripcion": "Paquete estándar de Go para realizar peticiones HTTP.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://pkg.go.dev/net/http",
+              "por_que": "Fundamental para interactuar con las APIs a monitorizar de forma eficiente y nativa en Go."
+            },
+            {
+              "nombre": "GORM",
+              "categoria": "libreria",
+              "descripcion": "ORM para Go con soporte para múltiples bases de datos.",
+              "version_sugerida": "1.25.7",
+              "url_docs": "https://gorm.io/",
+              "por_que": "Simplifica la interacción con la base de datos para almacenar configuraciones de APIs y logs de monitorización."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "SQLite",
+              "categoria": "base_datos",
+              "descripcion": "Motor de base de datos SQL embebido.",
+              "version_sugerida": "3.41.0",
+              "url_docs": "https://www.sqlite.org/",
+              "por_que": "Ligero y fácil de configurar para un miniproyecto, ideal para almacenar configuraciones y métricas sin un servidor de BD dedicado."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Contenerización de aplicaciones.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la aplicación y sus dependencias para un despliegue sencillo y reproducible."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "testing (built-in)",
+              "categoria": "testing",
+              "descripcion": "Framework de testing estándar de Go.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Proporciona las herramientas básicas para escribir tests unitarios y de integración para el servicio."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Cron",
+              "categoria": "otros",
+              "descripcion": "Planificador de tareas tipo Unix.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://man7.org/linux/man-pages/man1/cron.1.html",
+              "por_que": "Se puede usar en el host o dentro de un contenedor para programar la ejecución periódica de la lógica de monitorización."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Configuración de APIs a monitorizar (URL, método, headers)",
+          "Chequeos periódicos de disponibilidad y latencia",
+          "Registro de métricas de rendimiento",
+          "Detección de errores HTTP y timeouts",
+          "Notificaciones por email o webhook"
+        ],
+        "casos_uso": [
+          "Monitorización de servicios backend propios.",
+          "Seguimiento de la salud de APIs de terceros.",
+          "Alertas tempranas de problemas de producción.",
+          "Verificación de SLAs de servicios externos."
+        ],
+        "reglas_negocio": [
+          "Los chequeos se ejecutan cada X minutos (configurable).",
+          "Se considera caída si falla Y chequeos consecutivos.",
+          "Las notificaciones solo se envían tras la confirmación de un incidente.",
+          "Las métricas se almacenan por Z días."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "APIs de servicios de email (SendGrid, Mailgun)",
+          "Servicios de mensajería (Slack, Discord via webhooks)"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Go.",
+          "Comprensión de protocolos HTTP.",
+          "Familiaridad con Docker.",
+          "Conceptos básicos de bases de datos SQL."
+        ],
+        "riesgos": [
+          "Falsos positivos/negativos en las alertas.",
+          "Gestión de la configuración de muchas APIs.",
+          "Sobrecarga del servicio si se monitorizan demasiadas APIs frecuentemente.",
+          "Dependencia de servicios externos para notificaciones."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:01:00Z",
+        "hash_unicidad": "b4c5d6e7f8a9b0c1"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "3d4632bae516fb86"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c8d9e0f1a2b3c4d5",
+        "titulo": "Generador de Documentación Técnica con IA",
+        "descripcion_corta": "Herramienta CLI que genera documentación técnica a partir de código fuente y descripciones en lenguaje natural.",
+        "descripcion_detallada": "Una aplicación de línea de comandos que analiza código fuente (Python, JavaScript) y comentarios, o descripciones en Markdown, para generar documentación técnica coherente. Utiliza un LLM para interpretar el código, inferir la funcionalidad y escribir descripciones claras y estructuradas, además de ejemplos de uso.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "cli",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "Node.js",
+              "categoria": "runtime",
+              "descripcion": "Entorno de ejecución de JavaScript del lado del servidor.",
+              "version_sugerida": "20.x",
+              "url_docs": "https://nodejs.org/en/docs/",
+              "por_que": "Permite desarrollar aplicaciones CLI robustas y manejar operaciones asíncronas eficientemente."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Commander.js",
+              "categoria": "libreria",
+              "descripcion": "Librería para crear aplicaciones CLI en Node.js.",
+              "version_sugerida": "11.1.0",
+              "url_docs": "https://github.com/tj/commander.js",
+              "por_que": "Facilita la definición de comandos, opciones y argumentos para la interfaz de línea de comandos."
+            },
+            {
+              "nombre": "OpenAI API client",
+              "categoria": "libreria",
+              "descripcion": "Cliente oficial para interactuar con la API de OpenAI.",
+              "version_sugerida": "4.0.0",
+              "url_docs": "https://github.com/openai/openai-node",
+              "por_que": "Integración sencilla con modelos de lenguaje para la generación de texto y explicación de código."
+            },
+            {
+              "nombre": "Acorn",
+              "categoria": "libreria",
+              "descripcion": "Lector de JavaScript ligero y rápido.",
+              "version_sugerida": "8.11.3",
+              "url_docs": "https://github.com/acornjs/acorn",
+              "por_que": "Permite parsear código JavaScript en un Abstract Syntax Tree (AST) para su análisis."
+            },
+            {
+              "nombre": "Babel/parser",
+              "categoria": "libreria",
+              "descripcion": "Transpilador y parser de JavaScript.",
+              "version_sugerida": "7.23.5",
+              "url_docs": "https://babeljs.io/docs/babel-parser",
+              "por_que": "Alternativa robusta para parsear JavaScript moderno y obtener un AST detallado."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Contenedorización para un entorno de ejecución consistente.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura que la CLI funcione de manera predecible independientemente del sistema operativo del usuario."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "GPT-4o",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo multimodal de OpenAI.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://platform.openai.com/docs/models/gpt-4o",
+              "por_que": "Excelente capacidad para comprender código fuente, comentarios y lenguaje natural para generar documentación técnica precisa."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para JavaScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Proporciona un entorno completo para testing, incluyendo aserciones, mocks y cobertura de código."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis de código fuente (Python, JS)",
+          "Generación de descripciones de funciones/clases con IA",
+          "Creación de ejemplos de uso básicos",
+          "Soporte para comentarios de código (docstrings, JSDoc)",
+          "Salida en formato Markdown",
+          "Configuración de prompts para la IA"
+        ],
+        "casos_uso": [
+          "Documentar rápidamente librerías y componentes.",
+          "Generar borradores de documentación para APIs.",
+          "Ayudar a desarrolladores junior a documentar su código.",
+          "Crear ejemplos de código para tutoriales."
+        ],
+        "reglas_negocio": [
+          "La herramienta debe soportar al menos Python y JavaScript.",
+          "Los prompts a la IA son personalizables.",
+          "El código fuente analizado no se almacena permanentemente.",
+          "La salida debe ser compatible con generadores de documentación como MkDocs o Docusaurus."
+        ],
+        "por_que_ia": "La IA es fundamental para interpretar la semántica del código, inferir la intención del desarrollador y generar descripciones y ejemplos de uso que van más allá de la simple introspección del código.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "APIs de modelos de lenguaje (OpenAI, Anthropic, Gemini)."
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos de TypeScript/JavaScript.",
+          "Experiencia con Node.js y CLI.",
+          "Comprensión de Abstract Syntax Trees (AST).",
+          "Familiaridad con el uso de APIs de IA.",
+          "Entorno de desarrollo Node.js y Docker."
+        ],
+        "riesgos": [
+          "La calidad de la documentación generada puede ser inconsistente.",
+          "Costos asociados al uso de la API de IA.",
+          "Manejo de código complejo o ambiguo.",
+          "Dependencia de la disponibilidad y rendimiento de la API de IA.",
+          "Dificultad para parsear correctamente todos los lenguajes/frameworks."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:02:00Z",
+        "hash_unicidad": "c8d9e0f1a2b3c4d5"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "3d4632bae516fb86"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -8928,8 +9196,10 @@
     "0e1f2a3b4c5d6e7f",
     "f9e8d7c6b5a4f3e2",
     "b8a7f6e5d4c3b2a1",
-    "b8c7d6e5f4a3b2c1"
+    "b8c7d6e5f4a3b2c1",
+    "b4c5d6e7f8a9b0c1",
+    "c8d9e0f1a2b3c4d5"
   ],
-  "total_generados": 66,
-  "fecha_ultima_generacion": "2026-10-10T19:41:47.749227"
+  "total_generados": 68,
+  "fecha_ultima_generacion": "2026-10-10T23:09:48.190575"
 }
