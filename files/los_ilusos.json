@@ -788,5 +788,16 @@
     "relevancia": 2,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "Los primeros rodajes de Jonás Trueba, Aura Garrido y Francesco Carril",
+    "url": "https://www.youtube.com/watch?v=NB_kEwJOPFY",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-10T21:30:59.869054+00:00",
+    "medio": "Sección Oficial",
+    "imagen": "https://i.ytimg.com/vi/NB_kEwJOPFY/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Los ilusos 13+13"
   }
 ]
