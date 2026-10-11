@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 154,
+    "total_concepts": 156,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-10-11T08:10:14.470335"
+    "last_scraped": "2026-10-11T15:18:13.136102"
   },
   "concepts": [
     {
@@ -2868,6 +2868,42 @@
       ],
       "cat": "interfaces",
       "scraped_at": "2026-10-08T08:20:34.022533"
+    },
+    {
+      "title": "xargs: la guía práctica del comando que une todos los demás",
+      "summary": "Cualquiera que haya pasado un rato en una terminal ha vistoxargsen una respuesta de Stack Overflow, lo ha copiado y ha seguido con su vida. Pocos lo escriben de memoria. Y sin embargo es la pieza que ",
+      "explanation": "Cualquiera que haya pasado un rato en una terminal ha vistoxargsen una respuesta de Stack Overflow, lo ha copiado y ha seguido con su vida. Pocos lo escriben de memoria. Y sin embargo es la pieza que permite conectar comandos que producen listas con comandos que esperan argumentos, que es justo donde las tuberías se quedan cortas.El problema que resuelve La tubería|conecta la salida estándar de un comando con la entrada estándar del siguiente. Funciona bien con programas pensados para leer de stdin, comogrep:cat files.txt | grep \"error\" Pero muchos programas (rm,mv,git checkout,kill) no leen stdin: esperan los datos como argumentos. Esto no hace nada útil:echo \"file.txt\" | rm Ahí entraxargs, cuyo trabajo se resume en una frase:lee stdin y lo convierte en argumentos de otro comando.echo \"file.txt\" | xargs rm",
+      "code_example": "cat files.txt | grep \"error\"",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-10-11T15:17:32.793922"
+    },
+    {
+      "title": "RTX Spark contra MacBook M5 Max: por qué el ancho de banda manda en los LLM locales",
+      "summary": "El 31 de mayo de 2026, en la keynote de NVIDIA en el GTC Taipei, la compañía presentó junto a Microsoft elRTX Spark, su primer procesador Arm para PC con Windows. Las primeras reacciones dieron por am",
+      "explanation": "El 31 de mayo de 2026, en la keynote de NVIDIA en el GTC Taipei, la compañía presentó junto a Microsoft elRTX Spark, su primer procesador Arm para PC con Windows. Las primeras reacciones dieron por amortizado al MacBook. Para quien quiere ejecutar modelos de lenguaje en local, sin embargo, la cifra que de verdad manda sobre la velocidad es otra, y ahí el portátil de Apple sigue por delante.Qué es el RTX Spark Es un único paquete con tres piezas que comparten memoria, el mismo esquema que Apple popularizó con Apple Silicon:CPU Grace de 20 núcleos: diez Cortex-X925 de rendimiento y diez Cortex-A725 de eficiencia, diseñada con MediaTek.GPU Blackwell RTX con 6.144 núcleos CUDA, con núcleos RT y Tensor.Hasta 128 GB de memoria LPDDR5X unificada, compartida y coherente entre CPU y GPU.Hasta 1 petaflop de cómputo FP4, la cifra que NVIDIA usa para defender que se pueden ejecutar modelos de 120.000 millones de parámetros con contextos de un millón de tokens. Los portátiles y sobremesas compactos llegarán en otoño de 2026 de la mano de ASUS, Dell, HP, Lenovo, Microsoft y MSI, con Acer y Gigabyte después. A fecha de hoy no hay precios definitivos ni análisis independientes con un equipo real.La cifra que decide la velocidad: el ancho de banda En la fase de generación, cada token obliga a leer de memoria prácticamente todos los pesos del modelo (y la caché KV cuando el contexto es largo). Las unidades de cálculo terminan enseguida y esperan los siguientes datos. La generación está limitad",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "seguridad_web"
+      ],
+      "cat": "seguridad_web",
+      "scraped_at": "2026-10-11T15:17:34.513101"
     }
   ]
 }
