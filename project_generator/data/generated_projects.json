@@ -9515,6 +9515,419 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "af2c053796fe08d4"
       }
+    },
+    {
+      "proyecto": {
+        "id": "b2a0c8d6f4e2a1b0",
+        "titulo": "Generador de Documentación Técnica con IA",
+        "descripcion_corta": "Crea automáticamente documentación técnica a partir de código fuente y descripciones.",
+        "descripcion_detallada": "Este proyecto es una herramienta web que permite a los desarrolladores subir fragmentos de código o repositorios completos. Utilizando modelos de lenguaje avanzados, analiza el código para inferir su funcionalidad, propósito y posibles casos de uso. Genera documentación en formatos como Markdown o reStructuredText, incluyendo explicaciones de funciones, parámetros, ejemplos de uso y diagramas básicos si es posible. Se enfoca en reducir el tiempo dedicado a la documentación manual, mejorando la mantenibilidad y colaboración del software.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python 3.7+ basado en tipado estándar de Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece alto rendimiento asíncrono, validación automática de datos con Pydantic y generación de documentación interactiva OpenAPI/Swagger."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en anotaciones de tipo de Python.",
+              "version_sugerida": "2.5.0",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para FastAPI para definir esquemas de datos y validar entradas/salidas de la API de forma robusta."
+            },
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por modelos de lenguaje.",
+              "version_sugerida": "0.1.0",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Facilita la integración con LLMs, el manejo de prompts, la orquestación de cadenas de llamadas y la conexión con fuentes de datos externas."
+            },
+            {
+              "nombre": "tree-sitter",
+              "categoria": "libreria",
+              "descripcion": "Analizador incremental para múltiples lenguajes de programación.",
+              "version_sugerida": "0.22.0",
+              "url_docs": "https://tree-sitter.github.io/tree-sitter/",
+              "por_que": "Permite un análisis sintáctico preciso del código fuente en diversos lenguajes, fundamental para la extracción de información estructural."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, simplificando la gestión de dependencias."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API (GPT-4/GPT-3.5)",
+              "categoria": "ia_ml",
+              "descripcion": "Interfaz para acceder a modelos de lenguaje avanzados de OpenAI.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://platform.openai.com/docs/api-reference",
+              "por_que": "Proporciona la capacidad de generación de texto y comprensión de código necesaria para analizar y documentar el código fuente."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests unitarios y de integración, con un sistema de fixtures robusto y buena integración con el ecosistema Python."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Carga de archivos de código o URL de repositorios.",
+          "Análisis sintáctico para extracción de estructura de código.",
+          "Generación automática de descripciones funcionales.",
+          "Soporte para múltiples lenguajes de programación (Python, JS, Java).",
+          "Exportación de documentación en Markdown.",
+          "Interfaz web intuitiva para usuarios."
+        ],
+        "casos_uso": [
+          "Documentar código legacy sin documentación.",
+          "Acelerar la creación de documentación para nuevos proyectos.",
+          "Generar resúmenes técnicos de librerías o frameworks.",
+          "Ayudar a desarrolladores junior a entender bases de código complejas.",
+          "Mantener la documentación sincronizada con el código."
+        ],
+        "reglas_negocio": [
+          "El usuario debe autenticarse para subir código.",
+          "Límite de tamaño para archivos/repositorios subidos.",
+          "La IA solo procesará código, no datos sensibles.",
+          "La documentación generada es una ayuda, no reemplaza la revisión humana.",
+          "Soporte limitado a los lenguajes configurados."
+        ],
+        "por_que_ia": "Se utiliza IA para analizar la estructura semántica del código fuente, inferir intenciones de los desarrolladores y generar descripciones coherentes y útiles, tareas que son complejas y tediosas de automatizar con métodos tradicionales.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de OpenAI",
+          "GitHub API (opcional para clonar repos)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y frameworks web.",
+          "Comprensión de análisis de código y AST (Abstract Syntax Tree).",
+          "Familiaridad con APIs de IA y manejo de prompts.",
+          "Experiencia básica con Docker."
+        ],
+        "riesgos": [
+          "Precisión de la documentación generada por IA puede variar.",
+          "Costos asociados al uso de APIs de IA.",
+          "Manejo de código propietario y sensible.",
+          "Complejidad en el análisis de lenguajes con sintaxis muy complejas.",
+          "Escalabilidad del sistema al procesar grandes repositorios."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "b2a0c8d6f4e2a1b0"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "30309f0cc1fc7493"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "a1b8c4d2e6f0a3b1",
+        "titulo": "Monitor de Rendimiento de APIs con Alertas Inteligentes",
+        "descripcion_corta": "Sistema de monitoreo y alerta para APIs, detectando anomalías y cuellos de botella.",
+        "descripcion_detallada": "Esta herramienta observa el tráfico de una o varias APIs (entrante o saliente), recopilando métricas clave como latencia, tasa de errores, uso de recursos y patrones de tráfico. Utiliza análisis estadístico y, opcionalmente, modelos de ML para detectar anomalías o desviaciones significativas del comportamiento normal. Cuando se detecta un problema, genera alertas personalizables a través de múltiples canales (email, Slack, PagerDuty). El objetivo es proporcionar visibilidad proactiva sobre la salud de las APIs.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "api",
+          "microservicio",
+          "datos",
+          "ia_ml",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin Gonic",
+              "categoria": "framework",
+              "descripcion": "Framework web HTTP de alto rendimiento para Go.",
+              "version_sugerida": "1.9.0",
+              "url_docs": "https://gin-gonic.com/",
+              "por_que": "Proporciona una base robusta y de baja latencia para construir los microservicios de recolección y procesamiento de métricas."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Prometheus client_golang",
+              "categoria": "libreria",
+              "descripcion": "Librería cliente para exponer métricas de Prometheus en aplicaciones Go.",
+              "version_sugerida": "1.16.0",
+              "url_docs": "https://pkg.go.dev/github.com/prometheus/client_golang",
+              "por_que": "Estándar de facto para métricas en sistemas distribuidos, permite instrumentar los servicios para que Prometheus pueda recolectarlas."
+            },
+            {
+              "nombre": "AnomalyDetection (Python)",
+              "categoria": "libreria",
+              "descripcion": "Implementaciones de algoritmos de detección de anomalías.",
+              "version_sugerida": "0.1.0",
+              "url_docs": "https://github.com/twitter/AnomalyDetection",
+              "por_que": "Proporciona métodos estadísticos para identificar puntos de datos inusuales en series temporales, útil para detectar picos de error o latencia."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "Prometheus",
+              "categoria": "bases_datos",
+              "descripcion": "Sistema de monitoreo y alertas de código abierto.",
+              "version_sugerida": "2.45.0",
+              "url_docs": "https://prometheus.io/docs/",
+              "por_que": "Almacena las series temporales de métricas de forma eficiente y permite consultas complejas para análisis y visualización."
+            },
+            {
+              "nombre": "TimescaleDB",
+              "categoria": "bases_datos",
+              "descripcion": "Base de datos de series temporales de código abierto construida sobre PostgreSQL.",
+              "version_sugerida": "2.12.0",
+              "url_docs": "https://docs.timescale.com/",
+              "por_que": "Ofrece capacidades SQL sobre datos de series temporales, ideal para almacenar y consultar métricas históricas para análisis más profundos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker & Docker Compose",
+              "categoria": "infraestructura",
+              "descripcion": "Contenedores para desarrollo y orquestación de multi-contenedor.",
+              "version_sugerida": "24.0.0 & 2.20.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar y ejecutar los microservicios de monitoreo de forma aislada y reproducible."
+            },
+            {
+              "nombre": "Grafana",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de análisis y visualización de métricas.",
+              "version_sugerida": "10.1.0",
+              "url_docs": "https://grafana.com/docs/",
+              "por_que": "Visualiza las métricas recolectadas por Prometheus/TimescaleDB en dashboards interactivos, facilitando la identificación de problemas."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Statsmodels (Python)",
+              "categoria": "ia_ml",
+              "descripcion": "Paquete de Python para la estimación de modelos estadísticos, realización de pruebas estadísticas y exploración de datos.",
+              "version_sugerida": "0.14.0",
+              "url_docs": "https://www.statsmodels.org/",
+              "por_que": "Proporciona herramientas estadísticas robustas para el análisis de series temporales y la detección de anomalías sin necesidad de modelos complejos de ML."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Framework de testing nativo de Go.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Permite escribir pruebas unitarias y de integración para los microservicios Go."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Recolección de métricas de latencia y errores de APIs.",
+          "Detección de anomalías en series temporales de métricas.",
+          "Generación de alertas configurables (email, Slack).",
+          "Visualización de métricas en dashboards (Grafana).",
+          "Monitorización de APIs internas y externas.",
+          "Análisis de causa raíz básica."
+        ],
+        "casos_uso": [
+          "Alertar proactivamente sobre caídas de rendimiento de la API.",
+          "Identificar servicios o endpoints problemáticos.",
+          "Monitorizar el impacto de despliegues en el rendimiento de la API.",
+          "Entender patrones de uso y picos de tráfico.",
+          "Mejorar el tiempo de respuesta ante incidentes (MTTR)."
+        ],
+        "reglas_negocio": [
+          "Las métricas deben ser recolectadas con una frecuencia configurable.",
+          "Las reglas de alerta deben ser definibles por el usuario.",
+          "Los datos históricos de métricas se conservarán por un periodo definido.",
+          "La información de las APIs monitorizadas es sensible y debe protegerse.",
+          "Se debe asegurar la alta disponibilidad del sistema de monitoreo."
+        ],
+        "por_que_ia": "Se utiliza IA (modelos estadísticos y detección de anomalías) para identificar patrones inusuales en las métricas de la API que podrían indicar problemas, superando la detección basada en umbrales fijos y permitiendo la detección de anomalías sutiles o emergentes.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "API de Slack (para notificaciones)",
+          "API de PagerDuty (opcional)"
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 10,
+        "prerequisitos": [
+          "Experiencia sólida en Go y desarrollo de microservicios.",
+          "Conocimientos de sistemas de monitoreo (Prometheus, Grafana).",
+          "Comprensión de métricas de sistemas y redes.",
+          "Experiencia con bases de datos de series temporales (PostgreSQL/TimescaleDB).",
+          "Familiaridad con Docker y orquestación básica."
+        ],
+        "riesgos": [
+          "Generación de falsos positivos/negativos en las alertas.",
+          "Escalabilidad del sistema de recolección y almacenamiento de métricas.",
+          "Complejidad en la configuración y mantenimiento de las reglas de alerta.",
+          "Seguridad de los datos de métricas y credenciales de notificación.",
+          "Dependencia de servicios externos para notificaciones (Slack, PagerDuty)."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:05:00Z",
+        "hash_unicidad": "a1b8c4d2e6f0a3b1"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "30309f0cc1fc7493"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c5d7e9f1a3b5c7d9",
+        "titulo": "Asistente de Aprendizaje Personalizado (CLI)",
+        "descripcion_corta": "Herramienta CLI que adapta el contenido de aprendizaje a tu progreso y estilo.",
+        "descripcion_detallada": "Este proyecto es una aplicación de línea de comandos que actúa como un tutor personal para el aprendizaje de habilidades técnicas. El usuario define un tema de interés y un nivel de conocimiento. La herramienta proporciona material de estudio (textos, enlaces, ejercicios), evalúa las respuestas del usuario y ajusta la dificultad y el tipo de contenido presentado. Utiliza un modelo de IA para comprender las respuestas y adaptar el plan de estudio, ofreciendo explicaciones personalizadas y sugiriendo recursos adicionales según sea necesario.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "Rich",
+              "categoria": "libreria",
+              "descripcion": "Librería de Python para texto enriquecido en la terminal.",
+              "version_sugerida": "13.6.0",
+              "url_docs": "https://rich.readthedocs.io/",
+              "por_que": "Mejora la experiencia de usuario de la CLI con formato de texto, colores, tablas y barras de progreso."
+            },
+            {
+              "nombre": "OpenAI client",
+              "categoria": "libreria",
+              "descripcion": "Cliente oficial de Python para la API de OpenAI.",
+              "version_sugerida": "1.0.0",
+              "url_docs": "https://github.com/openai/openai-python",
+              "por_que": "Permite interactuar fácilmente con los modelos de IA para procesar el contenido de aprendizaje y las respuestas del usuario."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "SQLite",
+              "categoria": "bases_datos",
+              "descripcion": "Motor de base de datos SQL embebido.",
+              "version_sugerida": "3.43.0",
+              "url_docs": "https://www.sqlite.org/docs.html",
+              "por_que": "Almacena de forma simple el progreso del usuario, temas de interés y contenido de aprendizaje localmente, sin necesidad de un servidor de BD separado."
+            }
+          ],
+          "infraestructura": [],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API (GPT-3.5 Turbo)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo de lenguaje conversacional para generación de texto y comprensión.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://platform.openai.com/docs/models/gpt-3-5",
+              "por_que": "Se usa para entender las preguntas del usuario, evaluar respuestas a ejercicios y adaptar el material de estudio al nivel de comprensión."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir pruebas para la lógica de la CLI, la interacción con la IA y la gestión de datos en SQLite."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Definición de temas y objetivos de aprendizaje.",
+          "Presentación de material de estudio (texto, enlaces).",
+          "Evaluación de respuestas a ejercicios cortos.",
+          "Adaptación dinámica del contenido según el progreso.",
+          "Interfaz de línea de comandos interactiva.",
+          "Guardado y reanudación del progreso del usuario."
+        ],
+        "casos_uso": [
+          "Aprender un nuevo lenguaje de programación.",
+          "Estudiar un framework o librería específica.",
+          "Repasar conceptos técnicos antes de una entrevista.",
+          "Practicar resolución de problemas de algoritmos.",
+          "Seguir un plan de estudio personalizado para certificaciones."
+        ],
+        "reglas_negocio": [
+          "El usuario debe especificar un tema de aprendizaje válido.",
+          "Las respuestas del usuario se envían a la IA para evaluación.",
+          "El contenido generado por IA debe ser revisado por el usuario.",
+          "El progreso se guarda automáticamente al finalizar una sesión.",
+          "Límite de uso de la API de IA para controlar costos."
+        ],
+        "por_que_ia": "La IA es fundamental para personalizar la experiencia de aprendizaje, interpretando las respuestas del usuario, evaluando su comprensión y adaptando dinámicamente el material y la dificultad, lo cual sería muy complejo de replicar con lógica programada tradicional.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de OpenAI"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Python.",
+          "Comprensión de cómo interactuar con APIs externas.",
+          "Familiaridad con el uso de la terminal y aplicaciones CLI.",
+          "Conocimientos básicos de bases de datos SQL (SQLite)."
+        ],
+        "riesgos": [
+          "Dependencia de la disponibilidad y costo de la API de IA.",
+          "Calidad variable de las respuestas y adaptaciones de la IA.",
+          "Manejo de errores en la interacción con la API y la base de datos.",
+          "Experiencia de usuario limitada en una CLI.",
+          "Necesidad de curar contenido inicial de calidad."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:10:00Z",
+        "hash_unicidad": "c5d7e9f1a3b5c7d9"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "30309f0cc1fc7493"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -9588,8 +10001,11 @@
     "c8d9e0f1a2b3c4d5",
     "7a1b2c3d4e5f6a7b",
     "8b2c3d4e5f6a7b8c",
-    "9c3d4e5f6a7b8c9d"
+    "9c3d4e5f6a7b8c9d",
+    "b2a0c8d6f4e2a1b0",
+    "a1b8c4d2e6f0a3b1",
+    "c5d7e9f1a3b5c7d9"
   ],
-  "total_generados": 71,
-  "fecha_ultima_generacion": "2026-10-11T10:32:41.384284"
+  "total_generados": 74,
+  "fecha_ultima_generacion": "2026-10-11T17:15:40.669455"
 }
