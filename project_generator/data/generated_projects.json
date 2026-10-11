@@ -9128,6 +9128,393 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "3d4632bae516fb86"
       }
+    },
+    {
+      "proyecto": {
+        "id": "7a1b2c3d4e5f6a7b",
+        "titulo": "Analizador de Sentimiento de Opiniones de Productos",
+        "descripcion_corta": "API REST para analizar el sentimiento de reseñas de productos, detectando aspectos positivos y negativos.",
+        "descripcion_detallada": "Desarrollo de una API RESTful utilizando FastAPI que ingiere texto de reseñas de productos y devuelve un análisis de sentimiento detallado. Identifica las emociones principales (positivo, negativo, neutral), extrae palabras clave asociadas a cada sentimiento y proporciona una puntuación de sentimiento general. Se integra con un modelo de IA pre-entrenado para la clasificación de texto y utiliza una base de datos para almacenar los resultados y las reseñas procesadas, permitiendo consultas futuras y seguimiento de tendencias.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web de Python para construir APIs con alto rendimiento, basado en type hints de Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Proporciona validación automática de datos con Pydantic, generación automática de documentación OpenAPI y excelente rendimiento asíncrono."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Transformers (Hugging Face)",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca para descargar y usar modelos de NLP pre-entrenados para diversas tareas.",
+              "version_sugerida": "4.30.0",
+              "url_docs": "https://huggingface.co/docs/transformers/index",
+              "por_que": "Facilita la integración de modelos avanzados de PNL para el análisis de sentimiento sin necesidad de entrenarlos desde cero."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones mediante type hints de Python.",
+              "version_sugerida": "2.0.0",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para FastAPI para definir esquemas de datos y validar las peticiones y respuestas de la API."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema gestor de bases de datos relacional objeto de código abierto.",
+              "version_sugerida": "15.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Soporta tipos de datos complejos y JSONB, útil para almacenar datos de texto y metadatos de análisis. Fiable y escalable."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "20.10.0",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Permite empaquetar la API y sus dependencias, asegurando un entorno de ejecución consistente y facilitando el despliegue."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "BERT (o similar)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo Transformer para tareas de comprensión del lenguaje natural.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://huggingface.co/bert-base-uncased",
+              "por_que": "Proporciona una base sólida para la clasificación de texto y la extracción de características semánticas, crucial para el análisis de sentimiento."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.0.0",
+              "url_docs": "https://docs.pytest.org/en/latest/",
+              "por_que": "Facilita la escritura de tests para la API, incluyendo pruebas de integración y de componentes."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "API REST para análisis de sentimiento",
+          "Extracción de palabras clave",
+          "Puntuación de sentimiento general",
+          "Almacenamiento de resultados en BD",
+          "Documentación OpenAPI automática"
+        ],
+        "casos_uso": [
+          "Análisis de feedback de clientes",
+          "Monitorización de reputación de marca",
+          "Identificación de áreas de mejora de productos",
+          "Clasificación automática de comentarios",
+          "Integración con plataformas de e-commerce"
+        ],
+        "reglas_negocio": [
+          "El texto de entrada debe ser procesado para eliminar ruido.",
+          "La puntuación de sentimiento debe estar en el rango [-1, 1].",
+          "Las palabras clave deben estar asociadas a un sentimiento específico.",
+          "Se debe mantener un historial de análisis por producto.",
+          "Las peticiones a la API deben ser validadas."
+        ],
+        "por_que_ia": "Se utiliza un modelo de lenguaje pre-entrenado (como BERT) para clasificar el sentimiento del texto de las reseñas y extraer características relevantes, lo cual es una tarea compleja de Procesamiento del Lenguaje Natural.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "https://huggingface.co/models?pipeline_tag=text-classification&sort=downloads"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo web.",
+          "Comprensión básica de APIs RESTful.",
+          "Familiaridad con conceptos de Machine Learning y NLP."
+        ],
+        "riesgos": [
+          "La precisión del modelo de IA puede variar según el dominio del producto.",
+          "La gestión de grandes volúmenes de datos de reseñas puede ser un desafío.",
+          "La latencia de la inferencia del modelo puede afectar el rendimiento de la API.",
+          "Dependencia de librerías externas de IA y sus actualizaciones.",
+          "Necesidad de ajustar el modelo para obtener mejores resultados en dominios específicos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:00:00Z",
+        "hash_unicidad": "7a1b2c3d4e5f6a7b"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "af2c053796fe08d4"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "8b2c3d4e5f6a7b8c",
+        "titulo": "Sistema de Gestión de Tareas Colaborativo",
+        "descripcion_corta": "Aplicación web fullstack para la gestión de proyectos y tareas, con funcionalidades de colaboración en tiempo real.",
+        "descripcion_detallada": "Una aplicación web fullstack que permite a los equipos crear proyectos, asignar tareas, establecer plazos y seguir el progreso. Incluye un chat integrado por proyecto y notificaciones en tiempo real para mantener a todos informados. Se utiliza WebSockets para la actualización instantánea del estado de las tareas y los mensajes. La autenticación de usuarios se maneja de forma segura, y los datos se persisten en una base de datos relacional.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "fullstack",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de Node.js para construir aplicaciones del lado del servidor eficientes y escalables.",
+              "version_sugerida": "10.0.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Proporciona una arquitectura modular robusta (inspirada en Angular) y excelente soporte para TypeScript, facilitando la organización del código backend."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/learn",
+              "por_que": "Permite crear componentes de UI reutilizables y una experiencia de usuario interactiva y moderna."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Socket.IO",
+              "categoria": "libreria",
+              "descripcion": "Librería para la comunicación bidireccional en tiempo real entre navegadores y servidores.",
+              "version_sugerida": "4.7.0",
+              "url_docs": "https://socket.io/docs/v4/",
+              "por_que": "Esencial para implementar la funcionalidad de chat y las notificaciones en tiempo real de manera eficiente."
+            },
+            {
+              "nombre": "Prisma",
+              "categoria": "libreria",
+              "descripcion": "Next-generation ORM para Node.js y TypeScript.",
+              "version_sugerida": "5.0.0",
+              "url_docs": "https://www.prisma.io/docs/",
+              "por_que": "Simplifica la interacción con la base de datos, ofreciendo tipado seguro y migraciones automáticas."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema gestor de bases de datos relacional de código abierto.",
+              "version_sugerida": "15.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto para almacenar datos estructurados de proyectos y tareas, con buen soporte para relaciones y transacciones."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para el desarrollo y despliegue de aplicaciones en contenedores.",
+              "version_sugerida": "20.10.0",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Facilita la configuración del entorno de desarrollo y el despliegue de la aplicación completa (frontend, backend, DB)."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript con enfoque en simplicidad.",
+              "version_sugerida": "29.0.0",
+              "url_docs": "https://jestjs.io/docs/getting-started",
+              "por_que": "Estándar para testing en el ecosistema de JavaScript/TypeScript, útil para probar tanto el frontend como el backend."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de proyectos",
+          "Asignación de tareas con fechas límite",
+          "Chat en tiempo real por proyecto",
+          "Notificaciones push (web)",
+          "Autenticación de usuarios segura",
+          "Tablero de control de progreso"
+        ],
+        "casos_uso": [
+          "Gestión de sprints en equipos ágiles",
+          "Coordinación de tareas en proyectos personales",
+          "Seguimiento de hitos en proyectos de software",
+          "Organización de eventos",
+          "Colaboración en trabajos académicos"
+        ],
+        "reglas_negocio": [
+          "Solo los miembros del proyecto pueden ver y modificar sus tareas.",
+          "Las tareas deben tener un título y una descripción.",
+          "Los usuarios deben ser invitados a los proyectos.",
+          "Los mensajes del chat deben ser persistentes dentro del proyecto.",
+          "Las notificaciones se envían por cambios de estado en tareas asignadas."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos sólidos de TypeScript y JavaScript.",
+          "Experiencia con frameworks frontend (React) y backend (Node.js/NestJS).",
+          "Comprensión de bases de datos relacionales y ORMs.",
+          "Familiaridad con WebSockets."
+        ],
+        "riesgos": [
+          "La complejidad de la concurrencia en tiempo real puede ser alta.",
+          "La escalabilidad de WebSockets puede ser un desafío bajo alta carga.",
+          "Mantener la sincronización entre el estado del frontend y el backend.",
+          "Gestión de permisos y roles de usuario puede volverse compleja.",
+          "Dependencia de librerías de terceros para funcionalidades críticas."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:01:00Z",
+        "hash_unicidad": "8b2c3d4e5f6a7b8c"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "af2c053796fe08d4"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "9c3d4e5f6a7b8c9d",
+        "titulo": "Optimizador de Rutas de Entrega con IA",
+        "descripcion_corta": "Herramienta CLI que optimiza secuencias de entrega para múltiples paradas, considerando tráfico y tiempos estimados.",
+        "descripcion_detallada": "Una aplicación de línea de comandos (CLI) que toma una lista de direcciones y un punto de partida, y calcula la ruta más eficiente para visitar todas las direcciones. Utiliza la API de Google Maps para obtener tiempos de viaje estimados y considerar las condiciones de tráfico en tiempo real. La optimización se realiza mediante un algoritmo heurístico (como el algoritmo genético o simulated annealing) para encontrar una solución cercana a la óptima para el problema del viajante (TSP).",
+        "nivel": "senior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "ia_ml",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "Google Maps Platform APIs",
+              "categoria": "libreria",
+              "descripcion": "Conjunto de APIs para integrar datos de mapas, rutas y lugares en aplicaciones.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://developers.google.com/maps",
+              "por_que": "Proporciona datos de tráfico en tiempo real y cálculo de distancias/tiempos de viaje, esenciales para la optimización de rutas."
+            },
+            {
+              "nombre": "Go-Rune (ejemplo de librería TSP)",
+              "categoria": "libreria",
+              "descripcion": "Librerías para resolver el problema del viajante (TSP) en Go.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://github.com/golang-collections/go-rune",
+              "por_que": "Implementa algoritmos de optimización para encontrar rutas eficientes, adaptado al problema específico de planificación de entregas."
+            },
+            {
+              "nombre": "Cobra CLI",
+              "categoria": "libreria",
+              "descripcion": "Framework para crear aplicaciones CLI potentes en Go.",
+              "version_sugerida": "1.8.0",
+              "url_docs": "https://github.com/spf13/cobra",
+              "por_que": "Facilita la creación de una interfaz de línea de comandos robusta con subcomandos, flags y validación de argumentos."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [
+            {
+              "nombre": "Algoritmo Genético / Simulated Annealing",
+              "categoria": "ia_ml",
+              "descripcion": "Técnicas de optimización heurística para problemas complejos.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://en.wikipedia.org/wiki/Genetic_algorithm,%20https://en.wikipedia.org/wiki/Simulated_annealing",
+              "por_que": "Son adecuados para resolver el Problema del Viajante (TSP) de manera eficiente cuando el número de paradas es grande, buscando soluciones sub-óptimas pero rápidas."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Go Testing Package",
+              "categoria": "testing",
+              "descripcion": "Framework de testing incorporado en Go.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://go.dev/doc/tutorial/testing",
+              "por_que": "Permite escribir y ejecutar pruebas unitarias y de integración para las diferentes partes de la CLI."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Cálculo de ruta óptima para múltiples entregas",
+          "Integración con Google Maps para tráfico en tiempo real",
+          "Soporte para diferentes algoritmos de optimización",
+          "Interfaz de línea de comandos (CLI)",
+          "Exportación de la ruta calculada"
+        ],
+        "casos_uso": [
+          "Optimización de rutas para repartidores",
+          "Planificación de servicios técnicos a domicilio",
+          "Logística de última milla",
+          "Gestión de flotas de vehículos",
+          "Planificación de recorridos turísticos personalizados"
+        ],
+        "reglas_negocio": [
+          "Se debe proporcionar al menos un punto de partida y una dirección de destino.",
+          "El número de direcciones a visitar no debe exceder un límite práctico (ej. 50).",
+          "Las claves de API para Google Maps deben ser gestionadas de forma segura.",
+          "El cálculo debe priorizar la minimización del tiempo total de viaje.",
+          "La salida debe ser clara y fácil de interpretar."
+        ],
+        "por_que_ia": "Se utilizan algoritmos de optimización heurística (como algoritmos genéticos o simulated annealing) para resolver el Problema del Viajante (TSP), que es NP-hard. Estos algoritmos buscan encontrar una solución muy buena (cercana a la óptima) en un tiempo computacional razonable, lo cual es crucial para la planificación de rutas con muchas paradas.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "https://developers.google.com/maps/documentation/routes/overview",
+          "https://developers.google.com/maps/documentation/directions/overview"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia avanzada con Go.",
+          "Comprensión de algoritmos de optimización y complejidad computacional.",
+          "Conocimiento de APIs externas y manejo de claves de API.",
+          "Familiaridad con la creación de herramientas CLI."
+        ],
+        "riesgos": [
+          "El costo de las llamadas a la API de Google Maps puede ser significativo.",
+          "La precisión de los datos de tráfico puede variar.",
+          "Los algoritmos de optimización pueden ser computacionalmente intensivos para un gran número de paradas.",
+          "La implementación correcta de algoritmos complejos puede ser propensa a errores.",
+          "Dependencia de la disponibilidad y cambios en la API de Google Maps."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:02:00Z",
+        "hash_unicidad": "9c3d4e5f6a7b8c9d"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "af2c053796fe08d4"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -9198,8 +9585,11 @@
     "b8a7f6e5d4c3b2a1",
     "b8c7d6e5f4a3b2c1",
     "b4c5d6e7f8a9b0c1",
-    "c8d9e0f1a2b3c4d5"
+    "c8d9e0f1a2b3c4d5",
+    "7a1b2c3d4e5f6a7b",
+    "8b2c3d4e5f6a7b8c",
+    "9c3d4e5f6a7b8c9d"
   ],
-  "total_generados": 68,
-  "fecha_ultima_generacion": "2026-10-10T23:09:48.190575"
+  "total_generados": 71,
+  "fecha_ultima_generacion": "2026-10-11T03:40:34.181637"
 }
