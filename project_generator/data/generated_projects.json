@@ -9928,6 +9928,157 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "30309f0cc1fc7493"
       }
+    },
+    {
+      "proyecto": {
+        "id": "d5e6f7a8b9c0d1e2",
+        "titulo": "Gestor de Tareas Colaborativo con Chat",
+        "descripcion_corta": "Aplicación web fullstack para gestión de tareas con chat integrado por proyecto.",
+        "descripcion_detallada": "Una aplicación web que permite a equipos crear y gestionar proyectos, asignar tareas, establecer fechas límite y colaborar mediante un chat en tiempo real asociado a cada proyecto. Los usuarios pueden registrarse, crear equipos, invitar a otros miembros, definir proyectos, añadir tareas con estados (pendiente, en progreso, completada), y comunicarse directamente dentro del contexto del proyecto. Se enfoca en la simplicidad y la colaboración fluida. Utiliza WebSockets para el chat en tiempo real y notificaciones instantáneas de cambios en tareas.",
+        "nivel": "semisenior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "web",
+          "fullstack",
+          "api",
+          "bot"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "Next.js",
+              "categoria": "framework",
+              "descripcion": "Framework de React para renderizado en servidor (SSR), generación estática (SSG) y desarrollo fullstack.",
+              "version_sugerida": "13.5.0",
+              "url_docs": "https://nextjs.org/",
+              "por_que": "Permite construir una aplicación web moderna y performante con React, manejando tanto el frontend como el backend (API routes) de forma integrada."
+            },
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de Node.js para construir aplicaciones del lado del servidor eficientes, fiables y escalables.",
+              "version_sugerida": "10.1.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Proporciona una arquitectura modular y escalable para el backend, facilitando la gestión de la lógica de negocio, la API y los WebSockets."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Socket.IO",
+              "categoria": "libreria",
+              "descripcion": "Librería para la comunicación bidireccional en tiempo real entre clientes y servidores web.",
+              "version_sugerida": "4.7.2",
+              "url_docs": "https://socket.io/",
+              "por_que": "Esencial para implementar la funcionalidad de chat en tiempo real y notificaciones instantáneas de cambios en las tareas."
+            },
+            {
+              "nombre": "Prisma",
+              "categoria": "libreria",
+              "descripcion": "ORM de próxima generación para Node.js y TypeScript, simplifica la interacción con la base de datos.",
+              "version_sugerida": "5.4.0",
+              "url_docs": "https://www.prisma.io/",
+              "por_que": "Facilita la definición del esquema de la base de datos y la realización de operaciones CRUD de manera segura y eficiente."
+            },
+            {
+              "nombre": "Tailwind CSS",
+              "categoria": "libreria",
+              "descripcion": "Framework CSS de utilidad que permite construir diseños personalizados rápidamente.",
+              "version_sugerida": "3.3.5",
+              "url_docs": "https://tailwindcss.com/",
+              "por_que": "Acelera el desarrollo del frontend al proporcionar clases de utilidad predefinidas para un estilizado rápido y consistente."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "bases_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto de código abierto.",
+              "version_sugerida": "15.0",
+              "url_docs": "https://www.postgresql.org/",
+              "por_que": "Ofrece fiabilidad, robustez y soporte para JSONB si se necesitan campos más flexibles, ideal para almacenar proyectos, tareas y usuarios."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker Compose",
+              "categoria": "infraestructura",
+              "descripcion": "Herramienta para definir y ejecutar aplicaciones Docker multi-contenedor.",
+              "version_sugerida": "2.20.2",
+              "url_docs": "https://docs.docker.com/compose/",
+              "por_que": "Simplifica la configuración y ejecución del entorno de desarrollo local, incluyendo la base de datos y los servicios backend/frontend."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript para encontrar cualquier cosa. Alegre, simple y con poder.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Permite escribir tests unitarios y de integración para el frontend y backend (Node.js) de forma unificada."
+            },
+            {
+              "nombre": "Cypress",
+              "categoria": "testing",
+              "descripcion": "Herramienta de testing end-to-end para todo lo que se ejecuta en un navegador.",
+              "version_sugerida": "13.3.0",
+              "url_docs": "https://www.cypress.io/",
+              "por_que": "Se utiliza para probar la aplicación web completa desde la perspectiva del usuario, incluyendo la interacción con el chat."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Autenticación y gestión de usuarios/equipos.",
+          "Creación y gestión de proyectos y tareas.",
+          "Asignación de tareas a miembros del equipo.",
+          "Chat en tiempo real por proyecto.",
+          "Notificaciones en tiempo real (cambios de estado de tareas, mensajes)."
+        ],
+        "casos_uso": [
+          "Un equipo de desarrollo gestiona sus sprints y tareas diarias.",
+          "Un equipo de marketing planifica y ejecuta campañas.",
+          "Estudiantes colaboran en un proyecto grupal.",
+          "Un gestor asigna responsabilidades a su equipo.",
+          "Comunicación rápida sobre el progreso de una tarea específica."
+        ],
+        "reglas_negocio": [
+          "Solo los miembros de un equipo pueden ver y modificar sus proyectos.",
+          "Las tareas solo pueden ser asignadas a miembros del equipo.",
+          "El historial de chat de un proyecto debe ser persistente.",
+          "Las notificaciones deben ser claras y no intrusivas.",
+          "Los roles de usuario (ej. admin de equipo) pueden tener permisos específicos."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 8,
+        "prerequisitos": [
+          "Experiencia con TypeScript y Node.js/React.",
+          "Comprensión de arquitecturas fullstack y APIs REST.",
+          "Conocimiento de bases de datos relacionales (SQL).",
+          "Familiaridad con WebSockets y aplicaciones en tiempo real.",
+          "Conocimientos de Docker."
+        ],
+        "riesgos": [
+          "La gestión de la concurrencia en el chat y las actualizaciones de tareas puede ser compleja.",
+          "La escalabilidad de WebSockets para muchos usuarios concurrentes.",
+          "Seguridad en la autenticación y autorización de usuarios y equipos.",
+          "Complejidad en la implementación de notificaciones fiables.",
+          "Manejo de errores en la base de datos y la red."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "d5e6f7a8b9c0d1e2"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "aed088538bcb8584"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -10004,8 +10155,9 @@
     "9c3d4e5f6a7b8c9d",
     "b2a0c8d6f4e2a1b0",
     "a1b8c4d2e6f0a3b1",
-    "c5d7e9f1a3b5c7d9"
+    "c5d7e9f1a3b5c7d9",
+    "d5e6f7a8b9c0d1e2"
   ],
-  "total_generados": 74,
-  "fecha_ultima_generacion": "2026-10-11T23:25:27.470120"
+  "total_generados": 75,
+  "fecha_ultima_generacion": "2026-10-12T04:04:02.676031"
 }
