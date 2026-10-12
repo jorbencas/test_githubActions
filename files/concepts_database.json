@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 156,
+    "total_concepts": 157,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-10-12T11:35:07.186372"
+    "last_scraped": "2026-10-12T20:46:28.870262"
   },
   "concepts": [
     {
@@ -2904,6 +2904,24 @@
       ],
       "cat": "seguridad_web",
       "scraped_at": "2026-10-11T15:17:34.513101"
+    },
+    {
+      "title": "Arca Mail Backup: copias de seguridad del correo en tu propio almacenamiento",
+      "summary": "Perder el correo es más fácil de lo que parece: una cuenta suspendida, un cambio de proveedor, un borrado accidental o una migración mal hecha bastan para que años de mensajes desaparezcan.Arca Mail B",
+      "explanation": "Perder el correo es más fácil de lo que parece: una cuenta suspendida, un cambio de proveedor, un borrado accidental o una migración mal hecha bastan para que años de mensajes desaparezcan.Arca Mail Backupes un proyecto nuestro, de Color Vivo Internet, que busca resolver justo eso: copias de seguridad del correo que se guardan en un sitio que controlas tú. La app todavía no está publicada, pero llegará pronto al Mac App Store y a la Microsoft Store. La idea es sencilla: la aplicación se conecta a tus cuentas de correo, descarga los mensajes y los guarda en el destino que elijas. Todo el trabajo se hace en tu equipo, sin pasar por servidores intermedios nuestros, y las contraseñas se guardan en el llavero del sistema.Copias automáticas en segundo plano, que retoman el trabajo donde se interrumpió si se corta la conexión o se apaga el equipo.Búsqueda en todas las cuentas a la vez, incluidos los mensajes que ya se borraron del servidor pero siguen en la copia.Restauración en la misma cuenta.Por defecto solo vuelven los mensajes borrados, y lo hacen a una carpeta nueva para no generar duplicados.Importación de archivos .mbox(Google Takeout, Apple Mail, Thunderbird) como cuentas sin conexión.Ficha por cuentacon mensajes guardados, carpetas, destinos e historial de copias. Lo más interesante desde el punto de vista técnico es cómo se guarda todo. Los mensajes se almacenan enmbox estándar, con un archivo por carpeta y mes, acompañado de un manifiesto en JSON. Cada mensaje se conserv",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-10-12T20:45:48.433972"
     }
   ]
 }
