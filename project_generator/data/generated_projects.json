@@ -10079,6 +10079,142 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "aed088538bcb8584"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f8e7d6c5b4a3f2e1",
+        "titulo": "Asistente de Código para Documentación Técnica",
+        "descripcion_corta": "Herramienta CLI que genera documentación técnica a partir de código fuente y comentarios.",
+        "descripcion_detallada": "Una aplicación de línea de comandos (CLI) que analiza archivos de código fuente (Python, JavaScript, etc.) y genera automáticamente documentación técnica en formatos como Markdown o HTML. Utiliza IA para interpretar comentarios y docstrings, inferir la funcionalidad de las funciones/clases y crear descripciones coherentes y bien estructuradas. Puede integrarse con sistemas de control de versiones para generar documentación incremental o para ramas específicas. Se enfoca en la creación de READMEs, documentación de APIs y guías de contribución.",
+        "nivel": "senior",
+        "scope": "proyecto",
+        "tipo": [
+          "cli",
+          "api",
+          "ia_ml",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Typer",
+              "categoria": "framework",
+              "descripcion": "Framework para construir CLIs basado en type hints de Python.",
+              "version_sugerida": "0.9.0",
+              "url_docs": "https://typer.tiangolo.com/",
+              "por_que": "Simplifica la creación de interfaces de línea de comandos complejas con validación automática de argumentos y generación de ayuda."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Tree-sitter",
+              "categoria": "libreria",
+              "descripcion": "C-parser generator tool and an incremental parsing library.",
+              "version_sugerida": "0.22.0",
+              "url_docs": "https://tree-sitter.github.io/tree-sitter/",
+              "por_que": "Permite el análisis sintáctico robusto y eficiente de múltiples lenguajes de programación, creando Abstract Syntax Trees (ASTs)."
+            },
+            {
+              "nombre": "Jinja2",
+              "categoria": "libreria",
+              "descripcion": "Plantillas para Python.",
+              "version_sugerida": "3.1.2",
+              "url_docs": "https://jinja.palletsprojects.com/",
+              "por_que": "Permite generar archivos de documentación (Markdown, HTML) de forma dinámica usando plantillas y los datos extraídos del código."
+            },
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por LLMs.",
+              "version_sugerida": "0.0.350",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Facilita la integración con modelos de lenguaje grandes (LLMs) para la generación de texto descriptivo y la interpretación de código."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Git",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de control de versiones distribuido.",
+              "version_sugerida": "2.40.1",
+              "url_docs": "https://git-scm.com/doc",
+              "por_que": "Esencial para interactuar con repositorios de código fuente, obtener historial y generar documentación incremental."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API (GPT-4/GPT-3.5)",
+              "categoria": "ia_ml",
+              "descripcion": "Acceso a modelos de lenguaje avanzados para generación de texto.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://platform.openai.com/docs",
+              "por_que": "Se utiliza para interpretar docstrings, comentarios y la estructura del código para generar descripciones de alta calidad y coherentes."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.2",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Necesario para testear la lógica de parseo de código, la generación de plantillas y la integración con la API de IA."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Parseo de código fuente (Python, JS, TS, Go, Java).",
+          "Generación de documentación en Markdown.",
+          "Interpretación de docstrings y comentarios con IA.",
+          "Soporte para plantillas de documentación personalizadas.",
+          "Integración con Git para documentación basada en commits/ramas.",
+          "Generación de esquemas OpenAPI a partir de código (ej. FastAPI)."
+        ],
+        "casos_uso": [
+          "Un desarrollador genera automáticamente el README de un nuevo proyecto.",
+          "Un equipo actualiza la documentación de la API después de refactorizar el código.",
+          "Un contribuidor genera la documentación de una nueva feature.",
+          "Se crea documentación interna para bibliotecas privadas.",
+          "Se genera la documentación de un SDK para usuarios externos."
+        ],
+        "reglas_negocio": [
+          "La herramienta debe soportar al menos 5 lenguajes de programación populares.",
+          "Los comentarios de IA deben ser claramente diferenciados de los comentarios originales.",
+          "La generación de documentación debe ser configurable vía archivo de configuración.",
+          "Se debe permitir la exclusión de archivos o directorios específicos.",
+          "Los formatos de salida deben ser extensibles (ej. HTML, reStructuredText)."
+        ],
+        "por_que_ia": "La IA (LLMs como GPT-4) es crucial para interpretar el lenguaje natural en comentarios y docstrings, y para inferir la intención y el propósito de fragmentos de código, permitiendo generar descripciones detalladas y contextualmente relevantes que van más allá de la simple documentación de sintaxis.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia sólida en Python y desarrollo CLI.",
+          "Comprensión de análisis sintáctico (parsing) y Abstract Syntax Trees (ASTs).",
+          "Conocimiento de modelos de lenguaje (LLMs) y APIs de IA.",
+          "Familiaridad con sistemas de control de versiones (Git).",
+          "Experiencia con sistemas de CI/CD para automatización."
+        ],
+        "riesgos": [
+          "La precisión de la IA puede variar significativamente entre lenguajes y estilos de comentarios.",
+          "El parseo de código puede ser complejo y propenso a errores para lenguajes con sintaxis ambiguas.",
+          "La gestión de dependencias para múltiples lenguajes puede ser un desafío.",
+          "Costos asociados al uso intensivo de APIs de IA.",
+          "Mantener la compatibilidad con diferentes versiones de lenguajes y frameworks."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:05:00Z",
+        "hash_unicidad": "f8e7d6c5b4a3f2e1"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "540a5f6df29e7c5c"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -10156,8 +10292,9 @@
     "b2a0c8d6f4e2a1b0",
     "a1b8c4d2e6f0a3b1",
     "c5d7e9f1a3b5c7d9",
-    "d5e6f7a8b9c0d1e2"
+    "d5e6f7a8b9c0d1e2",
+    "f8e7d6c5b4a3f2e1"
   ],
-  "total_generados": 75,
-  "fecha_ultima_generacion": "2026-10-12T04:04:02.676031"
+  "total_generados": 76,
+  "fecha_ultima_generacion": "2026-10-12T17:18:09.874565"
 }
