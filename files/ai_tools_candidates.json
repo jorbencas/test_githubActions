@@ -1,5 +1,38 @@
 [
     {
+        "titulo": "morluto/rea",
+        "enlace": "https://github.com/morluto/rea",
+        "descripcion": "Reverse engineer anything with agents, from app behavior down to native binaries.",
+        "lenguaje": "TypeScript",
+        "estrellas": "112424",
+        "fuente": "GitHub Search",
+        "tipo": "herramienta",
+        "_stars": 112424,
+        "_topics": [
+            "agent-skills",
+            "ai-agents",
+            "binary-analysis",
+            "claude-code",
+            "cli",
+            "codex",
+            "cordis",
+            "ctf",
+            "decompiler",
+            "developer-tools",
+            "disassembler",
+            "dsh",
+            "dsh-plugin",
+            "ghidra",
+            "hopper",
+            "llm",
+            "mcp",
+            "model-context-protocol",
+            "reverse-engineering",
+            "static-analysis"
+        ],
+        "_source_type": "github_repo"
+    },
+    {
         "titulo": "google/gemma-4-31B-it",
         "enlace": "https://huggingface.co/google/gemma-4-31B-it",
         "descripcion": "[image-text-to-text] transformers, safetensors, gemma4 — by ",
