@@ -2159,5 +2159,64 @@
     "relevancia": 2,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Netflix estrena una miniserie de 3 episodios sobre el delincuente sexual que se escondía detrás de una gran escena de 'Joker'",
+    "url": "https://www.cinemania.es/cinemania/series/gary-glitter-netflix-miniserie-joker-delicuente-sexual_7041642_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-12T15:10:34.262879+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Qué ver hoy en Netflix, Amazon Prime Video y otras plataformas: domingo 11 de octubre de 2026",
+    "url": "https://www.cinemania.es/cinemania/noticias/que-ver-hoy-netflix-amazon-prime-video-otras-plataformas-domingo-11-octubre-2026_7046482_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-12T15:10:34.262936+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "video",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "La miniserie británica de 2 episodios que es perfecta si has visto 'El problema final' en Netflix y te gusta Agatha Christie",
+    "url": "https://www.cinemania.es/cinemania/series/miniserie-agatha-christie-matar-facil-problema-final_7040776_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-12T15:10:34.262978+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Muere Fabián Bielinsky, director de 'El Aura' y 'Nueve Reinas'",
+    "url": "https://www.europapress.es/cultura/cine-00128/noticia-muere-fabian-bielinsky-director-aura-nueve-reinas-20060629192740.html",
+    "fecha_pub": "Thu, 29 Jun 2006 14:27:00 GMT",
+    "fecha_ts": "2026-10-12T15:10:36.876847+00:00",
+    "medio": "Europa Press",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Muere de un infarto el director argentino Fabián Bielinsky, autor de 'Nueve Reinas'",
+    "url": "https://www.abc.es/cultura/abci-muere-infarto-director-argentino-fabian-bielinsky-autor-nueve-reinas-200606290300-1422235063376_noticia.html",
+    "fecha_pub": "Thu, 29 Jun 2006 12:38:00 GMT",
+    "fecha_ts": "2026-10-12T15:10:37.805293+00:00",
+    "medio": "ABC",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas"
   }
 ]
