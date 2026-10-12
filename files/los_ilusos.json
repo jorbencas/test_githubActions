@@ -811,5 +811,17 @@
     "relevancia": 3,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "24º Doclisboa | Heart Beat | Los ilusos 13 + 13 | Jonás Trueba",
+    "url": "https://www.youtube.com/watch?v=j3X-lHZqzsY",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-12T15:10:15.230496+00:00",
+    "medio": "Doclisboa",
+    "imagen": "https://i.ytimg.com/vi/j3X-lHZqzsY/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
