@@ -10472,6 +10472,256 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "e4e142a819df92e3"
       }
+    },
+    {
+      "proyecto": {
+        "id": "d3b3c4d5e6f7a8b9",
+        "titulo": "Analizador de Sentimiento de Comentarios de Producto",
+        "descripcion_corta": "API que analiza el sentimiento de comentarios de productos y lo clasifica (positivo, negativo, neutral).",
+        "descripcion_detallada": "Una API RESTful que consume comentarios de productos (de una base de datos o fuente externa) y utiliza un modelo de Procesamiento de Lenguaje Natural (PLN) para determinar el sentimiento general de cada comentario. Los resultados se almacenan y pueden ser consultados para obtener métricas sobre la satisfacción del cliente. Ideal para plataformas de e-commerce o sistemas de feedback.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno para construir APIs con Python, enfocado en alto rendimiento y facilidad de uso con validaciones Pydantic.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Permite crear APIs robustas y performantes con validación de datos automática y documentación OpenAPI generada."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "NLTK",
+              "categoria": "libreria",
+              "descripcion": "Suite de bibliotecas para procesamiento de lenguaje natural en Python.",
+              "version_sugerida": "3.8.1",
+              "url_docs": "https://www.nltk.org/",
+              "por_que": "Proporciona herramientas esenciales para preprocesamiento de texto y análisis de sentimiento."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca para machine learning en Python, con herramientas para clasificación y preprocesamiento.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://scikit-learn.org/",
+              "por_que": "Ofrece modelos de clasificación y métricas para evaluar el rendimiento del análisis de sentimiento."
+            },
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca para manipulación y análisis de datos.",
+              "version_sugerida": "2.1.0",
+              "url_docs": "https://pandas.pydata.org/",
+              "por_que": "Facilita la carga, transformación y análisis de los datos de comentarios y resultados."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional de código abierto.",
+              "version_sugerida": "15.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto para almacenar comentarios, resultados de análisis y metadatos, con soporte para JSONB si se requiere flexibilidad."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Asegura un entorno de desarrollo y despliegue consistente y reproducible."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir tests sencillos y potentes para la lógica de la API y el modelo de PLN."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Endpoint para recibir comentarios de productos.",
+          "Análisis de sentimiento en tiempo real o batch.",
+          "Clasificación de sentimiento (positivo, negativo, neutral).",
+          "Almacenamiento de resultados de análisis.",
+          "Endpoint para consultar resultados agregados."
+        ],
+        "casos_uso": [
+          "Monitorizar la opinión general de los clientes sobre un producto.",
+          "Identificar rápidamente productos con problemas de satisfacción.",
+          "Generar informes de sentimiento para equipos de producto.",
+          "Alertar sobre picos de comentarios negativos.",
+          "Analizar la efectividad de campañas de marketing a través del sentimiento."
+        ],
+        "reglas_negocio": [
+          "Los comentarios vacíos o con menos de 5 palabras se descartan.",
+          "El sentimiento se clasifica en tres categorías: positivo, negativo, neutral.",
+          "La API debe responder en menos de 500ms para peticiones individuales.",
+          "Se aplica un umbral de confianza para clasificar un sentimiento.",
+          "Los resultados se guardan asociando el ID del comentario original."
+        ],
+        "por_que_ia": "Se utiliza PLN para interpretar el texto no estructurado de los comentarios y extraer una métrica de sentimiento, lo cual es una tarea compleja que requiere modelos de machine learning.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo de APIs REST.",
+          "Comprensión básica de PLN y Machine Learning.",
+          "Experiencia con bases de datos relacionales.",
+          "Familiaridad con Docker."
+        ],
+        "riesgos": [
+          "La precisión del modelo de sentimiento puede variar según el dominio del producto.",
+          "El preprocesamiento del texto puede ser complejo (jerga, errores tipográficos).",
+          "Escalabilidad de la API bajo alta carga de comentarios.",
+          "Dependencia de librerías externas de PLN que pueden cambiar.",
+          "Gestión de datos sensibles si los comentarios contienen PII."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "d3b3c4d5e6f7a8b9"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "a5489d1c871a1f63"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f6e5d4c3b2a1f0e9",
+        "titulo": "Orquestador de Tareas CLI con Dependencias",
+        "descripcion_corta": "Herramienta CLI para definir y ejecutar flujos de trabajo con dependencias entre tareas.",
+        "descripcion_detallada": "Una utilidad de línea de comandos (CLI) escrita en Go que permite a los desarrolladores definir flujos de trabajo complejos como un conjunto de tareas interdependientes. Utiliza un archivo de configuración (ej. YAML) para especificar las tareas, sus comandos y sus dependencias. El orquestador se encarga de ejecutar las tareas en el orden correcto, manejando paralelismo donde sea posible y proporcionando retroalimentación clara sobre el estado de ejecución.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "cli",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "Cobra",
+              "categoria": "libreria",
+              "descripcion": "Framework para crear aplicaciones CLI potentes en Go.",
+              "version_sugerida": "1.27.0",
+              "url_docs": "https://github.com/spf13/cobra",
+              "por_que": "Proporciona una estructura robusta para comandos, subcomandos, flags y manejo de argumentos en la CLI."
+            },
+            {
+              "nombre": "Viper",
+              "categoria": "libreria",
+              "descripcion": "Herramienta para gestionar configuraciones en Go.",
+              "version_sugerida": "1.17.0",
+              "url_docs": "https://github.com/spf13/viper",
+              "por_que": "Permite leer la configuración de tareas y dependencias desde archivos (YAML, JSON, etc.) de forma flexible."
+            },
+            {
+              "nombre": "Go routines y channels",
+              "categoria": "libreria",
+              "descripcion": "Mecanismos nativos de Go para concurrencia.",
+              "version_sugerida": null,
+              "url_docs": "https://go.dev/tour/concurrency/1",
+              "por_que": "Esenciales para implementar la ejecución paralela de tareas y la gestión de dependencias de forma eficiente."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Make",
+              "categoria": "infraestructura",
+              "descripcion": "Utilidad para gestionar la compilación de programas.",
+              "version_sugerida": null,
+              "url_docs": "https://www.gnu.org/software/make/",
+              "por_que": "Puede usarse para simplificar el proceso de build y test de la propia herramienta CLI."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Testing nativo de Go",
+              "categoria": "testing",
+              "descripcion": "Framework de testing incorporado en el lenguaje Go.",
+              "version_sugerida": null,
+              "url_docs": "https://go.dev/doc/tutorial/testing",
+              "por_que": "Proporciona las herramientas necesarias para escribir tests unitarios y de integración para la lógica de orquestación."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Definición de tareas y sus comandos asociados.",
+          "Especificación de dependencias entre tareas (grafo dirigido acíclico).",
+          "Ejecución de tareas en paralelo cuando las dependencias lo permiten.",
+          "Manejo de errores y reintentos configurables.",
+          "Visualización del estado de ejecución (ej. árbol de tareas)."
+        ],
+        "casos_uso": [
+          "Automatización de pipelines de CI/CD.",
+          "Ejecución de migraciones de base de datos complejas.",
+          "Orquestación de tareas de procesamiento de datos en batch.",
+          "Gestión de despliegues multi-servicio.",
+          "Automatización de tareas de mantenimiento de sistemas."
+        ],
+        "reglas_negocio": [
+          "El archivo de configuración debe ser un formato válido (YAML).",
+          "No se permiten dependencias circulares entre tareas.",
+          "Las tareas deben tener un nombre único.",
+          "Los comandos de tarea se ejecutan en el entorno del usuario.",
+          "Si una tarea falla y no tiene reintentos, el flujo se detiene."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "https://github.com/go-yaml/yaml",
+          "https://pkg.go.dev/golang.org/x/sync/errgroup"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Experiencia sólida con Go y su ecosistema.",
+          "Comprensión de estructuras de datos (grafos) y algoritmos.",
+          "Conocimiento de la línea de comandos y scripts de shell.",
+          "Familiaridad con formatos de configuración como YAML."
+        ],
+        "riesgos": [
+          "La complejidad del grafo de dependencias puede ser difícil de depurar.",
+          "Manejo incorrecto de la concurrencia puede llevar a race conditions.",
+          "La portabilidad de los comandos ejecutados entre diferentes sistemas operativos.",
+          "La interfaz CLI puede volverse menos intuitiva con flujos muy grandes.",
+          "Gestión de secretos y credenciales para las tareas."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f6e5d4c3b2a1f0e9"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "a5489d1c871a1f63"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -10552,8 +10802,10 @@
     "d5e6f7a8b9c0d1e2",
     "f8e7d6c5b4a3f2e1",
     "a6b7c8d9e0f1a2b3",
-    "b9c0d1e2f3a4b5c6"
+    "b9c0d1e2f3a4b5c6",
+    "d3b3c4d5e6f7a8b9",
+    "f6e5d4c3b2a1f0e9"
   ],
-  "total_generados": 78,
-  "fecha_ultima_generacion": "2026-10-13T11:22:23.438926"
+  "total_generados": 80,
+  "fecha_ultima_generacion": "2026-10-13T18:48:54.217378"
 }
