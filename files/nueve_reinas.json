@@ -2218,5 +2218,17 @@
     "tipo": "noticia",
     "relevancia": 3,
     "pelicula": "Nueve reinas"
+  },
+  {
+    "titulo": "Netflix tiene una de las mejores películas argentinas para disfrutar durante el fin de semana largo",
+    "url": "https://www.mdzol.com/tendencias/2026/6/11/netflix-tiene-una-las-mejores-peliculas-argentinas-disfrutar-el-fin-semana-largo-1959611.html",
+    "fecha_pub": "Thu, 11 Jun 2026 10:45:00 GMT",
+    "fecha_ts": "2026-10-13T00:30:59.385555+00:00",
+    "medio": "mdz online",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
