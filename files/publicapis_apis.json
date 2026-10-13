@@ -11056,5 +11056,17 @@
         "descripcion": "E-signature API for embedding signing into your product or sending contracts at scale. Pay-as-you-go at €0.049 per envelope, no monthly minimums or per-seat fees.",
         "categoria": "Documents & Productivity",
         "pricing": ""
+    },
+    {
+        "titulo": "5DollarFootballAPI",
+        "enlace": "https://publicapis.io/5dollarfootballapi-api",
+        "fuente": "Public APIs",
+        "tipo": "herramienta",
+        "f": "13/10",
+        "fecha_publicacion": "",
+        "subtipo": "api",
+        "descripcion": "Cheap football (soccer) data API from $5/month, with a free tier. Fixtures, live scores, standings and tick-by-tick odds from bet365 and 19 other bookmakers, including corner and card lines.",
+        "categoria": "Sports & Fitness",
+        "pricing": ""
     }
 ]
