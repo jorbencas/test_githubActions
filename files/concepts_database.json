@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 157,
+    "total_concepts": 158,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-10-13T17:27:05.043147"
+    "last_scraped": "2026-10-13T22:12:45.954773"
   },
   "concepts": [
     {
@@ -2922,6 +2922,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-10-12T20:45:48.433972"
+    },
+    {
+      "title": "Rust se está comiendo las herramientas de Python: uv, Ruff, Polars, Pydantic y compañía",
+      "summary": "Si abres hoy elpyproject.tomlde un proyecto Python nuevo, es bastante probable que casi todo lo que lo rodea esté escrito en Rust: el gestor de paquetes, el linter, el formateador, el validador de dat",
+      "explanation": "Si abres hoy elpyproject.tomlde un proyecto Python nuevo, es bastante probable que casi todo lo que lo rodea esté escrito en Rust: el gestor de paquetes, el linter, el formateador, el validador de datos y hasta el comprobador de tipos. El lenguaje sigue siendo Python, pero el motor que lo sostiene cambia a gran velocidad. Repasamos qué proyectos lo protagonizan, qué cifras se pueden respaldar con fuentes oficiales y dónde el fenómeno deja de tener sentido. Los datos de popularidad (estrellas en GitHub) y las versiones están tomados del 13 de octubre de 2026.La ola en cinco líneasuv(Astral) reúne en un binario lo que antes hacían pip, pip-tools, pipx, Poetry, pyenv, twine y virtualenv.Ruffsustituye a Flake8 y sus plugins, isort, pydocstyle, pyupgrade y autoflake, y trae un formateador compatible con Black.Polarses la alternativa en Rust a pandas y acaba de llegar a la versión 2.0.Pydantic v2valida con un núcleo en Rust, y ese núcleo ya vive dentro del propio repositorio de Pydantic.PyO3 y maturinson las dos piezas que hacen que escribir una extensión de Python en Rust sea razonable.Gestión de paquetes: uv uvse presenta como «una sola herramienta para reemplazar pip, pip-tools, pipx, poetry, pyenv, twine, virtualenv y más». Su README afirma que es de 10 a 100 veces más rápido que pip. Conviene leer esa cifra con calma: susbenchmarksestán medidos en macOS, con Python 3.12.4 para las herramientas que no son uv y con eldocs-requirements.indel proyecto Trio como carga de trabajo, y",
+      "code_example": "uv init mi-proyecto\ncd mi-proyecto\nuv add requests flask\nuv run python app.py\nuvx ruff check .",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-10-13T22:12:05.396154"
     }
   ]
 }
