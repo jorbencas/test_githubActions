@@ -823,5 +823,41 @@
     "relevancia": 2,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "Los ilusos 13+13",
+    "url": "https://www.sensacine.com/peliculas/pelicula-1000048420/sesiones/?cgeocode=27414",
+    "fecha_pub": "Thu, 04 Jun 2026 17:00:00 GMT",
+    "fecha_ts": "2026-10-13T00:31:15.663649+00:00",
+    "medio": "Sensacine",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
+  },
+  {
+    "titulo": "Los cineastas Gala Hernández, Anna Cornudella, Fany de la Chica y Jonás Trueba visitarán el Musac este otoño",
+    "url": "https://www.msn.com/noticias/otras/los-cineastas-gala-hern%C3%A1ndez-anna-cornudella-fany-de-la-chica-y-jon%C3%A1s-trueba-visitar%C3%A1n-el-musac-este-oto%C3%B1o/ar-AA2c1X1y",
+    "fecha_pub": "Fri, 11 Sep 2026 11:07:00 GMT",
+    "fecha_ts": "2026-10-13T00:31:15.663722+00:00",
+    "medio": "MSN",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
+  },
+  {
+    "titulo": "Semblanza de Jonás Trueba, director de cine",
+    "url": "https://www.debate.com.mx/show/Semblanza-de-Jonas-Trueba-director-de-cine-20230113-0042.html",
+    "fecha_pub": "Fri, 13 Jan 2023 00:10:00 GMT",
+    "fecha_ts": "2026-10-13T00:31:16.278179+00:00",
+    "medio": "El Debate",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
