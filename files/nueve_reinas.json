@@ -2230,5 +2230,17 @@
     "relevancia": 2,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Netflix prepara la adaptación de unos de los clásicos del cine argentino",
+    "url": "https://www.eldestapeweb.com/cultura/netflix-prepara-adaptacion-clasicos-cine-argentino-202610139047",
+    "fecha_pub": "Tue, 13 Oct 2026 05:00:00 GMT",
+    "fecha_ts": "2026-10-13T14:02:15.681876+00:00",
+    "medio": "El Destape",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
