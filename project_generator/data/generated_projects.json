@@ -10722,6 +10722,153 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "a5489d1c871a1f63"
       }
+    },
+    {
+      "proyecto": {
+        "id": "d8b0c1e2f3a4b5c6",
+        "titulo": "Gestor de Tareas Inteligente con Asistente IA",
+        "descripcion_corta": "App web fullstack para gestionar tareas, con un asistente IA que sugiere prioridades y descompone tareas complejas.",
+        "descripcion_detallada": "Desarrollo de una aplicación web fullstack que permite a los usuarios crear, organizar y seguir sus tareas. La característica principal es un asistente impulsado por IA que analiza las tareas existentes, sugiere prioridades basadas en fechas límite y complejidad percibida, y puede descomponer tareas grandes en subtareas más manejables. Incluye autenticación de usuarios, categorización de tareas, notificaciones y un panel de control visual del progreso. El objetivo es mejorar la productividad del usuario mediante la automatización de la priorización y la planificación.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml",
+          "fullstack"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno de alto rendimiento para crear APIs.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Alto rendimiento asíncrono, validación de datos con Pydantic, generación automática de documentación OpenAPI."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería para construir interfaces de usuario interactivas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Component-based architecture, declarative UI, virtual DOM for efficient updates."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones.",
+              "version_sugerida": "2.5.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Validación de esquemas de datos para requests y responses en FastAPI, reduce errores."
+            },
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "Toolkit SQL y ORM para Python.",
+              "version_sugerida": "2.0.23",
+              "url_docs": "https://www.sqlalchemy.org/",
+              "por_que": "Abstracción de base de datos relacional, facilita las operaciones CRUD y la gestión de esquemas."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_de_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/",
+              "por_que": "Robusto, soporta JSONB para flexibilidad, buenas capacidades de indexación y transacciones ACID."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura entornos de desarrollo y producción consistentes, facilita el despliegue y la gestión de servicios."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API",
+              "categoria": "ia_ml",
+              "descripcion": "Acceso a modelos de lenguaje avanzados para procesamiento de texto.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://platform.openai.com/docs/introduction",
+              "por_que": "Para análisis de texto de tareas, generación de subtareas y sugerencias de priorización inteligente mediante modelos como GPT-4."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests unitarios y de integración, fixtures y parametrización."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de tareas con detalles (descripción, fecha límite, estado).",
+          "Asistente IA para sugerir prioridades y descomponer tareas.",
+          "Categorización y etiquetado de tareas.",
+          "Panel de control visual con progreso y resumen.",
+          "Autenticación y gestión de usuarios.",
+          "Notificaciones configurables."
+        ],
+        "casos_uso": [
+          "Profesionales gestionando sus proyectos y responsabilidades diarias.",
+          "Estudiantes organizando sus estudios y trabajos académicos.",
+          "Equipos pequeños colaborando en tareas compartidas.",
+          "Usuarios que buscan mejorar su productividad personal.",
+          "Planificación de eventos o hitos importantes."
+        ],
+        "reglas_negocio": [
+          "Las tareas deben tener un título.",
+          "Las tareas pueden tener una fecha límite opcional.",
+          "El estado de la tarea solo puede ser 'Pendiente', 'En Progreso' o 'Completada'.",
+          "La IA solo sugiere prioridades si hay al menos 5 tareas con fecha límite.",
+          "Las subtareas deben estar vinculadas a una tarea principal."
+        ],
+        "por_que_ia": "Se utiliza la IA para analizar el lenguaje natural de las descripciones de las tareas, identificar la complejidad, estimar el esfuerzo y sugerir una priorización dinámica. También se emplea para descomponer tareas complejas en pasos más pequeños y accionables, actuando como un asistente de productividad.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de OpenAI",
+          "Librerías de NLP (opcional, si se procesa localmente)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo web backend (APIs REST).",
+          "Experiencia con frameworks frontend como React.",
+          "Comprensión de bases de datos relacionales.",
+          "Familiaridad con el uso de APIs externas y manejo de claves API."
+        ],
+        "riesgos": [
+          "La calidad de las sugerencias de la IA puede variar.",
+          "La integración entre frontend y backend puede ser compleja.",
+          "La escalabilidad de la base de datos si hay muchos usuarios.",
+          "Costos asociados al uso de la API de IA.",
+          "Gestión de la concurrencia en las operaciones de tareas."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "d8b0c1e2f3a4b5c6"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "d278475545868280"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -10804,8 +10951,9 @@
     "a6b7c8d9e0f1a2b3",
     "b9c0d1e2f3a4b5c6",
     "d3b3c4d5e6f7a8b9",
-    "f6e5d4c3b2a1f0e9"
+    "f6e5d4c3b2a1f0e9",
+    "d8b0c1e2f3a4b5c6"
   ],
-  "total_generados": 80,
-  "fecha_ultima_generacion": "2026-10-13T18:48:54.217378"
+  "total_generados": 81,
+  "fecha_ultima_generacion": "2026-10-13T23:34:58.176150"
 }
