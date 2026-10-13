@@ -10215,6 +10215,263 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "540a5f6df29e7c5c"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a6b7c8d9e0f1a2b3",
+        "titulo": "Asistente de Programación con IA para Documentación Automática",
+        "descripcion_corta": "Genera automáticamente documentación técnica (docstrings, READMEs) para código usando IA.",
+        "descripcion_detallada": "Este proyecto es un IDE plugin (VS Code) que se integra con modelos de lenguaje grandes (LLMs) para analizar el código fuente y generar documentación técnica de alta calidad. Soporta varios lenguajes de programación (Python, JavaScript, TypeScript). El usuario puede seleccionar bloques de código o archivos enteros para generar docstrings, comentarios explicativos y actualizar secciones de un archivo README. La IA ayuda a comprender la lógica del código y a redactar explicaciones claras y concisas, reduciendo la carga manual de los desarrolladores y mejorando la mantenibilidad del software. Se enfoca en la precisión y la coherencia del estilo de documentación.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web para construir APIs asíncronas de alto rendimiento, con validación de datos y generación automática de documentación OpenAPI.",
+              "version_sugerida": "0.110.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ideal para crear la API que servirá como backend para el plugin del IDE, manejando las peticiones de análisis de código y las respuestas de la IA."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para simplificar la creación de aplicaciones con LLMs, facilitando la orquestación de prompts, modelos y agentes.",
+              "version_sugerida": "0.2.20",
+              "url_docs": "https://python.langchain.com/v0.2/docs/introduction/",
+              "por_que": "Proporciona abstracciones para interactuar con diferentes LLMs y cadenas de procesamiento, esencial para la generación de documentación."
+            },
+            {
+              "nombre": "tree-sitter",
+              "categoria": "libreria",
+              "descripcion": "Un parser incremental para múltiples lenguajes de programación, útil para análisis sintáctico robusto del código.",
+              "version_sugerida": "0.22.0",
+              "url_docs": "https://tree-sitter.github.io/tree-sitter/",
+              "por_que": "Permite analizar la estructura del código fuente de forma precisa antes de pasarlo a la IA, mejorando la calidad de la documentación generada."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores, asegurando entornos consistentes.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita el despliegue de la API de FastAPI y sus dependencias, permitiendo una ejecución reproducible en cualquier entorno."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python que facilita la escritura de pruebas simples y escalables.",
+              "version_sugerida": "8.2.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Esencial para asegurar la calidad y el correcto funcionamiento de la lógica de la API y las interacciones con las librerías de IA."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "VS Code Extension API",
+              "categoria": "otros",
+              "descripcion": "API para desarrollar extensiones personalizadas para el editor Visual Studio Code.",
+              "version_sugerida": null,
+              "url_docs": "https://code.visualstudio.com/api",
+              "por_que": "Es la interfaz principal para integrar la funcionalidad de generación de documentación directamente en el flujo de trabajo del desarrollador dentro de VS Code."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Generación de docstrings para funciones/clases",
+          "Creación/actualización de archivos README.md",
+          "Soporte multi-lenguaje (Python, JS, TS)",
+          "Análisis de código con AST para contexto",
+          "Integración con VS Code",
+          "Configuración de prompts y modelos de IA"
+        ],
+        "casos_uso": [
+          "Acelerar la escritura de documentación técnica",
+          "Mejorar la consistencia de la documentación",
+          "Facilitar la incorporación de nuevos desarrolladores",
+          "Mantener el código actualizado con su documentación",
+          "Reducir el tiempo dedicado a tareas repetitivas"
+        ],
+        "reglas_negocio": [
+          "La documentación generada debe ser revisable y editable por el usuario.",
+          "El plugin debe manejar errores de red y de la API de IA de forma elegante.",
+          "Se debe permitir la configuración de la verbosidad de la documentación.",
+          "El análisis de código debe ser lo suficientemente robusto para evitar errores de parsing.",
+          "Las credenciales de la API de IA deben ser gestionadas de forma segura."
+        ],
+        "por_que_ia": "Se utiliza IA (LLMs) para comprender la semántica y la lógica del código fuente, permitiendo generar explicaciones y documentación detallada que serían tediosas de escribir manualmente. La IA es clave para la naturalidad y profundidad de la documentación generada.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de OpenAI (GPT-4/GPT-3.5 Turbo)",
+          "Documentación de VS Code Extension API"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo web (APIs REST)",
+          "Familiaridad con VS Code y su ecosistema de extensiones",
+          "Comprensión de conceptos de LLMs y prompt engineering",
+          "Experiencia básica con Tree-sitter o parsers de código"
+        ],
+        "riesgos": [
+          "La calidad de la documentación generada puede variar.",
+          "Dependencia de servicios externos de IA (costos, disponibilidad).",
+          "Complejidad en el manejo de diferentes estilos de código y lenguajes.",
+          "La integración con VS Code puede requerir ajustes constantes.",
+          "Posibles problemas de seguridad al manejar código sensible."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2024-07-21T10:00:00Z",
+        "hash_unicidad": "a6b7c8d9e0f1a2b3"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "e4e142a819df92e3"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "b9c0d1e2f3a4b5c6",
+        "titulo": "Generador de Contenido Educativo Interactivo",
+        "descripcion_corta": "Crea cuestionarios, flashcards y resúmenes a partir de texto o PDFs.",
+        "descripcion_detallada": "Aplicación web que permite a educadores y estudiantes generar material de estudio interactivo a partir de contenido existente. Los usuarios suben un documento (texto plano, PDF) o pegan texto, y la IA lo procesa para crear cuestionarios de opción múltiple, preguntas de respuesta corta, flashcards y resúmenes concisos. Se enfoca en la extracción de puntos clave y la formulación de preguntas relevantes. La interfaz web es intuitiva, permitiendo la personalización de los materiales generados antes de su descarga o uso directo en la plataforma. Ideal para preparar exámenes, repasar temas o crear material didáctico rápidamente.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "javascript",
+          "frameworks": [
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario declarativas y eficientes.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/docs/getting-started.html",
+              "por_que": "Facilita la creación de una interfaz de usuario interactiva y reactiva para subir archivos y visualizar el contenido generado."
+            },
+            {
+              "nombre": "Express.js",
+              "categoria": "framework",
+              "descripcion": "Framework web minimalista y flexible para Node.js, ideal para construir APIs RESTful.",
+              "version_sugerida": "4.18.2",
+              "url_docs": "https://expressjs.com/en/api.html",
+              "por_que": "Se usa para crear la API backend que recibe el texto/archivos, interactúa con el modelo de IA y devuelve el contenido generado."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "pdf-parse",
+              "categoria": "libreria",
+              "descripcion": "Librería de Node.js para extraer texto de archivos PDF.",
+              "version_sugerida": "1.1.1",
+              "url_docs": "https://www.npmjs.com/package/pdf-parse",
+              "por_que": "Permite procesar archivos PDF subidos por el usuario para extraer el texto que será analizado por la IA."
+            },
+            {
+              "nombre": "LangChain.js",
+              "categoria": "libreria",
+              "descripcion": "Framework para simplificar la creación de aplicaciones con LLMs en JavaScript.",
+              "version_sugerida": "0.2.0",
+              "url_docs": "https://js.langchain.com/v0.2/docs/introduction/",
+              "por_que": "Facilita la integración con modelos de IA para la generación de preguntas, flashcards y resúmenes a partir del texto extraído."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Vercel/Netlify",
+              "categoria": "infraestructura",
+              "descripcion": "Plataformas de despliegue para aplicaciones frontend y serverless.",
+              "version_sugerida": null,
+              "url_docs": "https://vercel.com/docs",
+              "por_que": "Ideal para desplegar la aplicación React y la API serverless de Express de forma sencilla y escalable."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para JavaScript, fácil de usar y con buen soporte para React.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/docs/getting-started",
+              "por_que": "Se utiliza para probar los componentes de React y la lógica de la API."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Carga de archivos PDF y texto plano.",
+          "Generación de cuestionarios (opción múltiple, respuesta corta).",
+          "Creación de flashcards.",
+          "Generación de resúmenes de texto.",
+          "Vista previa y edición del contenido generado.",
+          "Descarga del material (ej. JSON, TXT)."
+        ],
+        "casos_uso": [
+          "Estudiantes creando material de estudio para exámenes.",
+          "Profesores generando cuestionarios para sus clases.",
+          "Profesionales resumiendo documentos largos.",
+          "Creación rápida de contenido educativo interactivo.",
+          "Herramienta de apoyo al aprendizaje autodidacta."
+        ],
+        "reglas_negocio": [
+          "El tamaño de los archivos subidos o el texto pegado debe tener un límite.",
+          "El contenido generado debe ser claramente diferenciado del original.",
+          "La calidad de la generación depende de la claridad del texto de entrada.",
+          "Los usuarios deben aceptar términos de uso relacionados con la IA y el contenido.",
+          "Se debe gestionar el número de peticiones para evitar abusos."
+        ],
+        "por_que_ia": "La IA (LLMs) es fundamental para comprender el contenido del texto de entrada, identificar los conceptos clave y formular preguntas o resúmenes coherentes y relevantes, simulando el proceso de un tutor humano.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de OpenAI para generación de texto.",
+          "Documentación de React y Express.js."
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de JavaScript, React y Node.js/Express.",
+          "Comprensión de cómo interactuar con APIs externas.",
+          "Familiaridad con el concepto de prompt engineering.",
+          "Experiencia básica con manejo de archivos."
+        ],
+        "riesgos": [
+          "La calidad de la generación de preguntas puede ser inconsistente.",
+          "Limitaciones en el procesamiento de PDFs complejos o mal formateados.",
+          "Dependencia de la disponibilidad y costo de la API de IA.",
+          "Posibles problemas de derechos de autor si el contenido original está protegido.",
+          "La interfaz puede volverse lenta con textos muy largos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2024-07-21T10:00:00Z",
+        "hash_unicidad": "b9c0d1e2f3a4b5c6"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "e4e142a819df92e3"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -10293,8 +10550,10 @@
     "a1b8c4d2e6f0a3b1",
     "c5d7e9f1a3b5c7d9",
     "d5e6f7a8b9c0d1e2",
-    "f8e7d6c5b4a3f2e1"
+    "f8e7d6c5b4a3f2e1",
+    "a6b7c8d9e0f1a2b3",
+    "b9c0d1e2f3a4b5c6"
   ],
-  "total_generados": 76,
-  "fecha_ultima_generacion": "2026-10-12T17:18:09.874565"
+  "total_generados": 78,
+  "fecha_ultima_generacion": "2026-10-13T01:47:40.374308"
 }
