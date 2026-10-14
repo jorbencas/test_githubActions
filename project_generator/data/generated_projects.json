@@ -10869,6 +10869,419 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "d278475545868280"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4e5f6a7b8",
+        "titulo": "Monitor de Costos de APIs Cloud",
+        "descripcion_corta": "API que rastrea y notifica sobre el uso y costos de APIs cloud de terceros.",
+        "descripcion_detallada": "Desarrolla una API backend que se integra con proveedores de APIs cloud (ej. OpenAI, AWS, Google Cloud). El sistema consumirá las métricas de uso y costos proporcionadas por estos proveedores, las almacenará en una base de datos y generará alertas personalizadas cuando se superen umbrales de gasto predefinidos o se detecten anomalías en el uso. Incluye un dashboard simple para visualización. El objetivo es ayudar a los equipos a controlar y optimizar sus gastos en servicios de terceros.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "web",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y de alto rendimiento para construir APIs con Python 3.7+ basado en tipado estándar de Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece validación automática de datos con Pydantic, generación automática de documentación OpenAPI/Swagger UI, y es asíncrono para manejar múltiples llamadas a APIs externas eficientemente."
+            },
+            {
+              "nombre": "Celery",
+              "categoria": "framework",
+              "descripcion": "Sistema distribuido de colas de tareas para ejecutar operaciones asíncronas en segundo plano.",
+              "version_sugerida": "5.3.0",
+              "url_docs": "https://docs.celeryq.dev/",
+              "por_que": "Esencial para realizar las llamadas periódicas a las APIs de los proveedores de nube y el procesamiento de datos sin bloquear la API principal, permitiendo escalabilidad."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en anotaciones de tipo de Python.",
+              "version_sugerida": "2.4.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Usada por FastAPI para definir esquemas de datos y validar las respuestas de las APIs externas y las solicitudes entrantes."
+            },
+            {
+              "nombre": "Requests",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca HTTP síncrona para humanos.",
+              "version_sugerida": "2.31.0",
+              "url_docs": "https://requests.readthedocs.io/",
+              "por_que": "Simplifica la realización de peticiones HTTP a las APIs de los proveedores de nube para obtener métricas de uso y costos."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos objeto-relacional de código abierto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusta para almacenar datos históricos de uso y costos, soporta JSONB para metadatos flexibles y transacciones ACID para integridad."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/compose/",
+              "por_que": "Permite empaquetar la aplicación y sus dependencias (API, worker Celery, BD) para un despliegue y ejecución consistentes en cualquier entorno."
+            },
+            {
+              "nombre": "Redis",
+              "categoria": "infraestructura",
+              "descripcion": "Almacén de estructuras de datos en memoria de código abierto.",
+              "version_sugerida": "7.2",
+              "url_docs": "https://redis.io/docs/",
+              "por_que": "Necesario como broker de mensajes para Celery, facilitando la comunicación entre la API y los workers de tareas asíncronas."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python que facilita la escritura de tests simples y escalables.",
+              "version_sugerida": "7.4.2",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir tests unitarios y de integración para la API y la lógica de procesamiento de datos de forma organizada y eficiente."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Conexión con APIs de proveedores cloud (ej. OpenAI, AWS).",
+          "Almacenamiento histórico de métricas de uso y costos.",
+          "Configuración de alertas personalizadas (umbrales, anomalías).",
+          "Notificaciones de alertas (email, Slack).",
+          "API para consulta de datos históricos y configuración.",
+          "Dashboard básico para visualización de costos."
+        ],
+        "casos_uso": [
+          "Un equipo de desarrollo quiere monitorizar el gasto de su suscripción a una API de IA.",
+          "Una empresa busca controlar los costos de sus microservicios desplegados en la nube.",
+          "Un CTO necesita visibilidad sobre el gasto total en servicios cloud de terceros.",
+          "Detectar picos inesperados de uso que puedan indicar un problema o un uso no autorizado.",
+          "Optimizar presupuestos mediante el seguimiento detallado de la inversión en APIs."
+        ],
+        "reglas_negocio": [
+          "Las credenciales de acceso a las APIs cloud deben ser gestionadas de forma segura (variables de entorno/secrets manager).",
+          "Los costos se agregan diariamente por servicio y por proveedor.",
+          "Las alertas se disparan solo si se supera un umbral o se detecta una desviación estadística significativa (ej. > 3 sigmas).",
+          "Los datos históricos se conservan durante un periodo configurable (ej. 1 año).",
+          "Las notificaciones deben ser configurables por usuario/equipo."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Documentación de APIs de proveedores cloud (OpenAI, AWS Cost Explorer, Google Cloud Billing API).",
+          "Guías de buenas prácticas para la gestión de costos en la nube."
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimiento de APIs RESTful y autenticación (API Keys, OAuth).",
+          "Experiencia con Python y frameworks web asíncronos.",
+          "Comprensión básica de bases de datos relacionales y colas de tareas.",
+          "Familiaridad con Docker y Docker Compose."
+        ],
+        "riesgos": [
+          "Cambios frecuentes en las APIs de los proveedores cloud pueden requerir actualizaciones constantes.",
+          "La seguridad de las credenciales de acceso es crítica.",
+          "La carga de datos puede ser intensiva si se monitorizan muchas APIs o un alto volumen de transacciones.",
+          "La complejidad de las estructuras de costos de algunos proveedores puede dificultar la agregación precisa.",
+          "La configuración de alertas puede volverse compleja si no se diseña bien."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "b0c1d2e3f4a5b6c7"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "f223a2d6acca6763"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f8e7d6c5b4a3f2e1",
+        "titulo": "Generador de Documentación Técnica Automática",
+        "descripcion_corta": "Herramienta CLI que genera documentación técnica a partir de código fuente y comentarios.",
+        "descripcion_detallada": "Desarrolla una herramienta de línea de comandos (CLI) que analiza el código fuente de un proyecto (Python, JavaScript/TypeScript) e integra la información de comentarios especiales (ej. JSDoc, docstrings) y la estructura del código (clases, funciones, tipos) para generar automáticamente documentación técnica en formatos como Markdown o HTML. Se busca facilitar la creación y mantenimiento de la documentación para desarrolladores.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "Click",
+              "categoria": "libreria",
+              "descripcion": "Framework de Python para crear interfaces de línea de comandos hermosas y composibles.",
+              "version_sugerida": "8.1.7",
+              "url_docs": "https://click.palletsprojects.com/",
+              "por_que": "Simplifica la creación de la interfaz CLI, incluyendo el manejo de argumentos, opciones y subcomandos de forma intuitiva."
+            },
+            {
+              "nombre": "AST (Abstract Syntax Trees)",
+              "categoria": "libreria",
+              "descripcion": "Módulo estándar de Python para analizar la estructura de programas Python.",
+              "version_sugerida": "3.11",
+              "url_docs": "https://docs.python.org/3/library/ast.html",
+              "por_que": "Permite analizar el código fuente Python de forma programática para extraer información sobre funciones, clases, métodos y comentarios."
+            },
+            {
+              "nombre": "Jinja2",
+              "categoria": "libreria",
+              "descripcion": "Modernes y diseñador-amigable motor de plantillas para Python.",
+              "version_sugerida": "3.1.2",
+              "url_docs": "https://jinja.palletsprojects.com/",
+              "por_que": "Se utiliza para generar los archivos de documentación (Markdown o HTML) a partir de las plantillas y los datos extraídos del código fuente."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python que facilita la escritura de tests simples y escalables.",
+              "version_sugerida": "7.4.2",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Para asegurar que el parser de código y el generador de documentos funcionen correctamente con diferentes estructuras de código y comentarios."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Tree-sitter (opcional)",
+              "categoria": "otros",
+              "descripcion": "Herramienta para construir parsers incrementales eficientes para múltiples lenguajes.",
+              "version_sugerida": "0.22.0",
+              "url_docs": "https://tree-sitter.org/",
+              "por_que": "Podría usarse como alternativa o complemento al módulo AST de Python para analizar código de otros lenguajes como JavaScript/TypeScript de forma más robusta."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Análisis de código fuente Python (usando AST).",
+          "Análisis de comentarios especiales (docstrings).",
+          "Soporte inicial para análisis de código JavaScript/TypeScript (con Tree-sitter o regex).",
+          "Generación de documentación en formato Markdown.",
+          "Uso de plantillas Jinja2 para personalizar la salida.",
+          "Interfaz CLI para configurar el análisis y la generación."
+        ],
+        "casos_uso": [
+          "Un desarrollador junior necesita ayuda para documentar su código.",
+          "Un equipo quiere estandarizar la generación de documentación técnica en sus proyectos.",
+          "Mantener la documentación de APIs y bibliotecas actualizada automáticamente.",
+          "Integrar la generación de documentación en un pipeline CI/CD.",
+          "Reducir el tiempo dedicado a la escritura manual de la documentación."
+        ],
+        "reglas_negocio": [
+          "La herramienta debe soportar al menos Python y JavaScript/TypeScript.",
+          "Los comentarios de documentación deben seguir un formato específico (ej. reStructuredText, JSDoc).",
+          "La salida debe ser fácilmente publicable (ej. en GitHub Pages, Read the Docs).",
+          "El usuario debe poder especificar directorios y archivos a incluir/excluir.",
+          "Se debe advertir al usuario si no se encuentran comentarios de documentación para ciertos elementos."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Documentación de Python (módulo AST, doctest).",
+          "Especificaciones de JSDoc.",
+          "Guías de estilo de documentación (ej. Google Python Style Guide)."
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos sólidos de Python.",
+          "Comprensión de la estructura de código fuente (AST, sintaxis).",
+          "Familiaridad con la línea de comandos y herramientas CLI.",
+          "Conocimiento de sistemas de control de versiones como Git."
+        ],
+        "riesgos": [
+          "El análisis de código de lenguajes dinámicos como JavaScript puede ser complejo y propenso a errores.",
+          "La correcta interpretación de comentarios y su asociación con el código puede ser difícil.",
+          "Mantener la compatibilidad con diferentes versiones de lenguajes y frameworks puede ser un desafío.",
+          "La extensión del soporte a otros lenguajes aumenta significativamente la complejidad.",
+          "La personalización de plantillas puede requerir conocimientos de Jinja2."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "c7b6a5f4e3d2c1b0"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "f223a2d6acca6763"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "d1e2f3a4b5c6d7e8",
+        "titulo": "Sistema de Recomendación de Contenido Personalizado",
+        "descripcion_corta": "Microservicio que recomienda artículos o productos basado en el historial de interacciones del usuario.",
+        "descripcion_detallada": "Implementa un microservicio que actúa como motor de recomendación. Recibe eventos de interacciones de usuario (vistas, clics, compras) a través de una API, los procesa y almacena, y expone otra API para obtener recomendaciones personalizadas para un usuario dado. Utiliza técnicas de filtrado colaborativo y/o basado en contenido. El objetivo es servir recomendaciones a otras aplicaciones (web, mobile) para mejorar la experiencia del usuario.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "microservicio",
+          "api",
+          "ia_ml",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web HTTP de alto rendimiento para Go.",
+              "version_sugerida": "1.9.1",
+              "url_docs": "https://gin-gonic.com/docs/",
+              "por_que": "Proporciona un router rápido y un middleware robusto para manejar las APIs de ingesta de eventos y de obtención de recomendaciones, optimizado para alto rendimiento."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Gorgonia (o similar)",
+              "categoria": "libreria",
+              "descripcion": "Librería de deep learning y machine learning en Go.",
+              "version_sugerida": "v1.0.0",
+              "url_docs": "https://github.com/gorgonia/gorgonia",
+              "por_que": "Permite implementar modelos de recomendación complejos (ej. redes neuronales, factorización de matrices) directamente en Go."
+            },
+            {
+              "nombre": "Go-Redis",
+              "categoria": "libreria",
+              "descripcion": "Cliente Redis para Go.",
+              "version_sugerida": "9.5.0",
+              "url_docs": "https://github.com/go-redis/redis",
+              "por_que": "Para interactuar eficientemente con Redis, usado como cache y para almacenar perfiles de usuario y datos de interacciones temporales."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL con TimescaleDB",
+              "categoria": "base_datos",
+              "descripcion": "Extensión de PostgreSQL para series temporales.",
+              "version_sugerida": "15 / 2.11.0",
+              "url_docs": "https://docs.timescale.com/",
+              "por_que": "Ideal para almacenar grandes volúmenes de datos de series temporales (eventos de usuario) de manera eficiente y permitir consultas rápidas sobre rangos de tiempo."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/compose/",
+              "por_que": "Esencial para empaquetar el microservicio, la base de datos y Redis, facilitando el despliegue y la gestión del entorno."
+            },
+            {
+              "nombre": "Redis",
+              "categoria": "infraestructura",
+              "descripcion": "Almacén de estructuras de datos en memoria de código abierto.",
+              "version_sugerida": "7.2",
+              "url_docs": "https://redis.io/docs/",
+              "por_que": "Utilizado como caché para recomendaciones precalculadas y para almacenar temporalmente datos de interacciones recientes, mejorando la latencia de respuesta."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Filtrado Colaborativo / Basado en Contenido",
+              "categoria": "ia_ml",
+              "descripcion": "Técnicas de sistemas de recomendación.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Son los algoritmos fundamentales para generar recomendaciones personalizadas basadas en el comportamiento del usuario y las características del contenido."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Paquete estándar de Go para escribir tests.",
+              "version_sugerida": "1.21",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Permite escribir tests unitarios y de integración para las APIs y la lógica de recomendación del microservicio."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "API para recibir eventos de interacciones de usuario (vistas, clics, etc.).",
+          "Procesamiento y almacenamiento de datos de interacciones.",
+          "Implementación de modelos de recomendación (ej. filtrado colaborativo).",
+          "API para obtener recomendaciones personalizadas para un usuario.",
+          "Uso de Redis como caché para mejorar la velocidad de respuesta.",
+          "Despliegue como microservicio independiente."
+        ],
+        "casos_uso": [
+          "Una plataforma de e-commerce quiere mostrar productos recomendados a sus usuarios.",
+          "Un sitio de noticias desea sugerir artículos relevantes a cada lector.",
+          "Una aplicación de streaming recomienda películas o series basadas en el historial de visualización.",
+          "Mejorar la retención de usuarios ofreciendo contenido personalizado.",
+          "Aumentar las conversiones (compras, clics) mediante recomendaciones precisas."
+        ],
+        "reglas_negocio": [
+          "Las recomendaciones deben ser actualizadas periódicamente (batch) y en tiempo real (streaming).",
+          "Se debe garantizar la privacidad de los datos del usuario, anonimizando o seudonimizando la información cuando sea posible.",
+          "El sistema debe poder manejar un alto volumen de eventos y solicitudes de recomendación.",
+          "Se deben definir métricas claras para evaluar la efectividad de las recomendaciones (CTR, tasa de conversión).",
+          "El sistema debe ser tolerante a fallos y escalable horizontalmente."
+        ],
+        "por_que_ia": "Se utiliza IA (modelos de recomendación como filtrado colaborativo o basado en contenido) para analizar patrones en el historial de interacciones del usuario y predecir qué otros ítems (artículos, productos) serán de su interés, personalizando la experiencia y aumentando la probabilidad de engagement.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Libros y artículos sobre Sistemas de Recomendación (ej. 'Recommender Systems Handbook').",
+          "Documentación de librerías de ML en Go (Gorgonia, GoLearn).",
+          "Investigación sobre algoritmos de filtrado colaborativo y basado en contenido."
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 8,
+        "prerequisitos": [
+          "Experiencia avanzada en Go y desarrollo de microservicios.",
+          "Conocimientos sólidos de bases de datos (SQL, series temporales) y sistemas de caching (Redis).",
+          "Comprensión de algoritmos de Machine Learning para sistemas de recomendación.",
+          "Experiencia con arquitecturas distribuidas y escalables.",
+          "Familiaridad con Docker y orquestación (Kubernetes)."
+        ],
+        "riesgos": [
+          "El 'cold start problem' (recomendar a usuarios nuevos o ítems nuevos) es un desafío común.",
+          "La calidad de las recomendaciones depende fuertemente de la calidad y cantidad de los datos de interacción.",
+          "Escalar el entrenamiento y la inferencia de modelos de ML puede ser computacionalmente costoso.",
+          "Mantener la relevancia de las recomendaciones a medida que cambian los gustos del usuario y el catálogo de ítems.",
+          "La integración con sistemas existentes puede ser compleja."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "e8d7c6b5a4f3e2d1"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "f223a2d6acca6763"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -10952,8 +11365,11 @@
     "b9c0d1e2f3a4b5c6",
     "d3b3c4d5e6f7a8b9",
     "f6e5d4c3b2a1f0e9",
-    "d8b0c1e2f3a4b5c6"
+    "d8b0c1e2f3a4b5c6",
+    "b0c1d2e3f4a5b6c7",
+    "c7b6a5f4e3d2c1b0",
+    "e8d7c6b5a4f3e2d1"
   ],
-  "total_generados": 81,
-  "fecha_ultima_generacion": "2026-10-14T03:19:12.859735"
+  "total_generados": 84,
+  "fecha_ultima_generacion": "2026-10-14T09:14:50.392133"
 }
