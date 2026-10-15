@@ -11583,6 +11583,264 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "5825bd7e784c2e99"
       }
+    },
+    {
+      "proyecto": {
+        "id": "c2c8b1a4-d3e5-4f7a-9b1c-d0e2f4a6b8c9",
+        "titulo": "Analizador de Sentimiento de Reseñas de Productos",
+        "descripcion_corta": "API REST que analiza el sentimiento de reseñas de productos utilizando modelos de PNL.",
+        "descripcion_detallada": "Este proyecto consiste en una API RESTful desarrollada en Python que permite a los usuarios enviar texto de reseñas de productos y recibir un análisis de sentimiento (positivo, negativo, neutral) junto con una puntuación de confianza. Utiliza bibliotecas de procesamiento de lenguaje natural (NLP) y un modelo pre-entrenado para la clasificación de texto. La API expone endpoints para procesar reseñas individuales o lotes, y almacena resultados básicos en una base de datos para auditoría. Ideal para plataformas de e-commerce o herramientas de análisis de mercado que necesiten comprender la opinión del cliente.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno de alto rendimiento para construir APIs con Python 3.7+ basado en tipado estándar de Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Proporciona validación automática de datos con Pydantic, generación interactiva de documentación OpenAPI, y excelente rendimiento asíncrono."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Transformers (Hugging Face)",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca para descargar y utilizar modelos pre-entrenados de NLP, incluyendo clasificadores de sentimiento.",
+              "version_sugerida": "4.30.0",
+              "url_docs": "https://huggingface.co/docs/transformers/index",
+              "por_que": "Facilita el acceso a modelos de PNL de última generación sin necesidad de entrenarlos desde cero, permitiendo una rápida implementación del análisis de sentimiento."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en anotaciones de tipo de Python.",
+              "version_sugerida": "2.0.0",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Se integra perfectamente con FastAPI para validar los datos de entrada y salida de la API, asegurando la integridad de los mismos."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "SQLite",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional ligero y autónomo.",
+              "version_sugerida": "3.40.0",
+              "url_docs": "https://www.sqlite.org/docs.html",
+              "por_que": "Suficiente para almacenar logs de análisis y metadatos básicos en un proyecto de alcance medio, fácil de configurar y usar sin un servidor dedicado."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la API y sus dependencias para asegurar un despliegue consistente y reproducible en diferentes entornos."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python que facilita la escritura de pruebas simples y complejas.",
+              "version_sugerida": "7.0.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite crear tests robustos para la API y el modelo de NLP, incluyendo fixtures y parametrización para una cobertura eficiente."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "API REST para análisis de sentimiento de texto.",
+          "Soporte para análisis de reseñas individuales y lotes.",
+          "Clasificación de sentimiento: positivo, negativo, neutral.",
+          "Puntuación de confianza para cada predicción.",
+          "Almacenamiento de resultados para auditoría básica.",
+          "Documentación interactiva de la API (Swagger UI/ReDoc)."
+        ],
+        "casos_uso": [
+          "Plataformas de e-commerce para monitorizar la opinión del cliente.",
+          "Empresas de marketing para evaluar la percepción de marca.",
+          "Analistas de mercado para identificar tendencias en comentarios de usuarios.",
+          "Desarrolladores de producto para obtener feedback rápido sobre nuevas funcionalidades.",
+          "Herramientas de gestión de reputación online."
+        ],
+        "reglas_negocio": [
+          "La API debe responder en menos de 2 segundos para solicitudes individuales.",
+          "El texto de entrada no debe exceder los 1000 caracteres por reseña.",
+          "La puntuación de confianza debe estar entre 0.0 y 1.0.",
+          "Solo se procesarán reseñas en inglés para la versión inicial.",
+          "Los resultados se almacenan por un máximo de 30 días."
+        ],
+        "por_que_ia": "Se utiliza un modelo pre-entrenado de Transformers (Hugging Face) para la clasificación de sentimiento, evitando la necesidad de un costoso entrenamiento de modelo y permitiendo resultados precisos rápidamente.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Modelos pre-entrenados de Hugging Face Hub (ej. 'distilbert-base-uncased-finetuned-sst-2-english')."
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo de APIs REST.",
+          "Comprensión básica de conceptos de PNL.",
+          "Familiaridad con el uso de Docker."
+        ],
+        "riesgos": [
+          "La precisión del modelo puede variar dependiendo del dominio específico de las reseñas.",
+          "Latencia de respuesta podría aumentar con lotes muy grandes.",
+          "Dependencia de bibliotecas externas y sus actualizaciones.",
+          "Manejo de errores y casos límite en el procesamiento de texto.",
+          "Costos asociados al uso de modelos más grandes o APIs de inferencia si se opta por cloud."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "c2c8b1a4d3e5f7a9"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "6bfb216304561489"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f1a2b3c4-d5e6-7f8a-9b0c-1d2e3f4a5b6c",
+        "titulo": "Optimizador de Rutas para Entregas con IA",
+        "descripcion_corta": "CLI tool que optimiza secuencias de entrega usando algoritmos de optimización y IA.",
+        "descripcion_detallada": "Esta herramienta de línea de comandos (CLI) toma una lista de direcciones y puntos de interés, y utiliza algoritmos de optimización (como el problema del viajante de comercio - TSP) junto con consideraciones de tráfico en tiempo real (obtenidas vía API externa) para generar la ruta de entrega más eficiente. La IA se usa para predecir tiempos de viaje en diferentes condiciones y refinar la solución del TSP. La salida es una secuencia ordenada de paradas con tiempos estimados de llegada y duración total del recorrido. Ideal para empresas de logística, repartidores o cualquier servicio que requiera planificar múltiples entregas de forma óptima.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "cli",
+          "ia_ml",
+          "datos",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Cobra",
+              "categoria": "framework",
+              "descripcion": "Framework para crear CLIs potentes y componibles en Go.",
+              "version_sugerida": "1.27.0",
+              "url_docs": "https://github.com/spf13/cobra",
+              "por_que": "Facilita la creación de comandos, subcomandos, flags y la gestión de argumentos de línea de comandos de manera estructurada."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Google Maps Platform APIs (Directions/Distance Matrix)",
+              "categoria": "libreria",
+              "descripcion": "APIs para obtener datos de enrutamiento, distancias y tiempos de viaje.",
+              "version_sugerida": "v2",
+              "url_docs": "https://developers.google.com/maps/documentation/directions/overview",
+              "por_que": "Proporciona datos de distancia y tiempo de viaje precisos, incluyendo información de tráfico en tiempo real, crucial para la optimización."
+            },
+            {
+              "nombre": "OR-Tools (Google)",
+              "categoria": "libreria",
+              "descripcion": "Suite de software de Google para optimización combinatoria.",
+              "version_sugerida": "9.7.0",
+              "url_docs": "https://developers.google.com/optimization/routing/tsp",
+              "por_que": "Ofrece solvers eficientes para problemas de optimización como el TSP, permitiendo encontrar soluciones de ruta óptimas o cuasi-óptimas."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la CLI y sus dependencias, facilitando su instalación y ejecución por parte de los usuarios finales."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Modelo de predicción de tráfico (ej. Red neuronal simple)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo simple para predecir la variación del tiempo de viaje basada en hora del día, día de la semana y condiciones históricas.",
+              "version_sugerida": "N/A",
+              "url_docs": null,
+              "por_que": "Mejora la precisión de la estimación del tiempo total de entrega al considerar patrones de tráfico que las APIs de mapas base no siempre capturan perfectamente."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Go Testing Package",
+              "categoria": "testing",
+              "descripcion": "Framework de testing nativo de Go.",
+              "version_sugerida": "go1.20",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Permite escribir tests unitarios y de integración para los diferentes módulos de la CLI, incluyendo la lógica de optimización y las interacciones con APIs externas."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Entrada de direcciones/puntos de interés vía CLI.",
+          "Integración con APIs de mapas para distancias y tiempos de viaje.",
+          "Algoritmo de optimización (TSP) para secuencias de ruta.",
+          "Consideración de tráfico en tiempo real y predicciones IA.",
+          "Generación de la ruta óptima y tiempos estimados.",
+          "Salida de resultados clara y utilizable (ej. JSON, CSV)."
+        ],
+        "casos_uso": [
+          "Empresas de reparto (comida, paquetes) para optimizar rutas diarias.",
+          "Servicios de mantenimiento técnico con múltiples visitas al día.",
+          "Logística de última milla.",
+          "Planificación de rutas para equipos de ventas o servicio técnico en campo.",
+          "Gestión de flotas de vehículos."
+        ],
+        "reglas_negocio": [
+          "El número de paradas a optimizar está limitado por la capacidad de las APIs externas y el solver.",
+          "Se requiere una clave API válida para los servicios de mapas.",
+          "La herramienta asume que el punto de partida y finalización es el mismo si no se especifica lo contrario.",
+          "Los tiempos de tráfico son estimaciones y pueden variar.",
+          "La IA solo se usa para refinar tiempos, no para decidir el orden de las paradas principales."
+        ],
+        "por_que_ia": "Se utiliza un modelo de IA simple para predecir la duración de los trayectos considerando factores como la hora del día y el día de la semana, complementando los datos de las APIs de mapas para una estimación de tiempo total más precisa y adaptada a patrones de tráfico conocidos.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Google Maps Platform API Key.",
+          "Datos históricos de tráfico (opcional, para entrenar modelo IA)."
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia con Go y desarrollo de aplicaciones CLI.",
+          "Conocimientos de algoritmos de optimización (TSP).",
+          "Comprensión de APIs REST y manejo de respuestas JSON.",
+          "Familiaridad con el uso de claves API y cuotas de servicios externos.",
+          "Conceptos básicos de machine learning para la parte de predicción de tráfico."
+        ],
+        "riesgos": [
+          "Costos asociados al uso intensivo de las APIs de Google Maps.",
+          "La complejidad del TSP puede hacer que la optimización sea lenta para un gran número de paradas.",
+          "Dependencia de la disponibilidad y precisión de las APIs externas.",
+          "La precisión del modelo de IA puede ser limitada sin datos específicos del dominio.",
+          "Manejo de errores de red y de las APIs externas."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:02:00Z",
+        "hash_unicidad": "f1a2b3c4d5e6f8a9"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "6bfb216304561489"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -11671,8 +11929,10 @@
     "c7b6a5f4e3d2c1b0",
     "e8d7c6b5a4f3e2d1",
     "e3c8b7a2f1d0e9c8",
-    "f9a8b7c6d5e4f3a2"
+    "f9a8b7c6d5e4f3a2",
+    "c2c8b1a4d3e5f7a9",
+    "f1a2b3c4d5e6f8a9"
   ],
-  "total_generados": 86,
-  "fecha_ultima_generacion": "2026-10-15T02:57:50.087243"
+  "total_generados": 88,
+  "fecha_ultima_generacion": "2026-10-15T08:47:57.860487"
 }
