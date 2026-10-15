@@ -11282,6 +11282,307 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "f223a2d6acca6763"
       }
+    },
+    {
+      "proyecto": {
+        "id": "e3c8b7a2f1d0e9c8",
+        "titulo": "Gestor de Tareas Inteligente con NLP",
+        "descripcion_corta": "App web para gestionar tareas que entiende comandos en lenguaje natural.",
+        "descripcion_detallada": "Desarrollo de una aplicación web Fullstack donde los usuarios pueden añadir, editar, eliminar y consultar sus tareas utilizando comandos en lenguaje natural. La aplicación interpretará las intenciones del usuario (ej: 'recuérdame llamar a mamá mañana a las 10 AM', 'listar tareas pendientes para el proyecto X') para crear o modificar las tareas. Se integrará un modelo de NLP para entender las peticiones y extraer entidades (fecha, hora, título, proyecto). La interfaz será simple y enfocada en la usabilidad. Incluye autenticación básica de usuarios.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web asíncrono de alto rendimiento para construir APIs.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Proporciona tipado automático, validación de datos con Pydantic, generación automática de documentación OpenAPI y un rendimiento excelente para aplicaciones web."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear interfaces de usuario declarativas, componentizadas y eficientes, facilitando el desarrollo del frontend interactivo."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en type hints de Python.",
+              "version_sugerida": "2.4.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Fundamental para FastAPI para definir modelos de datos y validar automáticamente las peticiones entrantes."
+            },
+            {
+              "nombre": "spaCy",
+              "categoria": "libreria",
+              "descripcion": "Librería para Procesamiento de Lenguaje Natural (NLP) avanzado en Python.",
+              "version_sugerida": "3.7.2",
+              "url_docs": "https://spacy.io/usage/models",
+              "por_que": "Ofrece modelos pre-entrenados y herramientas eficientes para el reconocimiento de entidades nombradas (NER), análisis sintáctico y comprensión del lenguaje natural."
+            },
+            {
+              "nombre": "Axios",
+              "categoria": "libreria",
+              "descripcion": "Cliente HTTP basado en promesas para el navegador y Node.js.",
+              "version_sugerida": "1.5.3",
+              "url_docs": "https://axios-http.com/",
+              "por_que": "Facilita la comunicación del frontend React con la API de FastAPI, manejando peticiones y respuestas de forma asíncrona."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto y escalable, soporta tipos de datos complejos y transacciones ACID, ideal para almacenar datos de usuarios y tareas."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Asegura un entorno de desarrollo y producción consistente y reproducible, simplificando la gestión de dependencias y el despliegue."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/en/latest/",
+              "por_que": "Facilita la escritura de tests claros y mantenibles, con soporte para fixtures y plugins que agilizan el proceso de testing."
+            },
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Permite probar componentes de React y la lógica del frontend de manera eficiente, con funcionalidades como snapshots y mocking."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Gestión de tareas (crear, leer, actualizar, eliminar)",
+          "Procesamiento de lenguaje natural para comandos de tareas",
+          "Extracción de entidades (fechas, horas, nombres)",
+          "Interfaz de usuario intuitiva",
+          "Autenticación de usuarios",
+          "Recordatorios básicos (simulados o integrados con el SO si es posible)"
+        ],
+        "casos_uso": [
+          "Un usuario añade una tarea escribiendo: 'Añadir tarea: comprar leche mañana por la mañana'.",
+          "Un usuario solicita ver todas sus tareas pendientes para el 'Proyecto Aniversario'.",
+          "Un usuario pide que se le recuerde 'llamar al médico el martes a las 15:00'.",
+          "El sistema parsea el comando y crea la tarea con la fecha y hora correctas.",
+          "El usuario puede marcar tareas como completadas."
+        ],
+        "reglas_negocio": [
+          "Las tareas deben tener un título.",
+          "Las fechas y horas extraídas deben ser válidas.",
+          "Los usuarios solo pueden ver y modificar sus propias tareas.",
+          "Comandos ambiguos deben solicitar aclaración al usuario.",
+          "El sistema debe manejar errores de parseo gracefully."
+        ],
+        "por_que_ia": "Se utiliza NLP (spaCy) para interpretar las intenciones del usuario a partir de texto libre, permitiendo una interacción más natural y eficiente que los formularios tradicionales. El objetivo es reducir la fricción al añadir y gestionar tareas.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "Modelos de lenguaje de spaCy"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y JavaScript.",
+          "Comprensión de APIs RESTful.",
+          "Familiaridad con frameworks web (FastAPI, React).",
+          "Conceptos básicos de NLP.",
+          "Manejo de bases de datos SQL."
+        ],
+        "riesgos": [
+          "La precisión del NLP puede ser limitada para comandos complejos o ambiguos.",
+          "La gestión de fechas y zonas horarias puede ser complicada.",
+          "La escalabilidad del backend si la base de datos crece mucho.",
+          "La integración frontend-backend puede presentar desafíos.",
+          "La seguridad de la autenticación de usuarios."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "e3c8b7a2f1d0e9c8"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "5825bd7e784c2e99"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f9a8b7c6d5e4f3a2",
+        "titulo": "Monitor de Rendimiento de APIs (Microservicios)",
+        "descripcion_corta": "Sistema de monitoreo para métricas clave de APIs (latencia, errores, RPS).",
+        "descripcion_detallada": "Desarrollo de un sistema distribuido para monitorizar el rendimiento de múltiples APIs (microservicios). El sistema recolectará métricas como latencia, tasa de peticiones por segundo (RPS) y tasa de errores (HTTP 5xx) de cada servicio expuesto. Se expondrá un dashboard web para visualizar estas métricas en tiempo real y se implementarán alertas básicas basadas en umbrales configurables. Cada microservicio deberá instrumentarse para enviar métricas a un colector central.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "microservicio",
+          "devops",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web de alto rendimiento escrito en Go.",
+              "version_sugerida": "1.19.9",
+              "url_docs": "https://gin-gonic.com/",
+              "por_que": "Ofrece un enrutamiento rápido y un middleware eficiente, ideal para construir la API del colector de métricas y el servicio de alertas."
+            },
+            {
+              "nombre": "Prometheus client_golang",
+              "categoria": "libreria",
+              "descripcion": "Librería cliente para instrumentar aplicaciones Go con Prometheus.",
+              "version_sugerida": "1.16.0",
+              "url_docs": "https://github.com/prometheus/client_golang",
+              "por_que": "Permite exponer métricas de forma nativa en el formato de Prometheus, facilitando la integración con el ecosistema de monitoreo."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Grafana",
+              "categoria": "libreria",
+              "descripcion": "Plataforma de análisis y visualización de métricas.",
+              "version_sugerida": "10.2.1",
+              "url_docs": "https://grafana.com/docs/",
+              "por_que": "Se utiliza como la interfaz principal para visualizar las métricas recolectadas por Prometheus, permitiendo crear dashboards personalizables."
+            },
+            {
+              "nombre": "Prometheus",
+              "categoria": "libreria",
+              "descripcion": "Sistema de monitoreo y alertas, y base de datos de series temporales.",
+              "version_sugerida": "2.47.2",
+              "url_docs": "https://prometheus.io/docs/introduction/overview/",
+              "por_que": "Es el estándar de facto para la recolección y almacenamiento de métricas en entornos de microservicios, actuando como el 'cerebro' del monitoreo."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Esencial para empaquetar los microservicios, el colector de métricas, Prometheus y Grafana, facilitando su despliegue y gestión."
+            },
+            {
+              "nombre": "Docker Compose",
+              "categoria": "infraestructura",
+              "descripcion": "Herramienta para definir y ejecutar aplicaciones Docker multi-contenedor.",
+              "version_sugerida": "2.20.2",
+              "url_docs": "https://docs.docker.com/compose/",
+              "por_que": "Simplifica la orquestación del entorno de desarrollo y pruebas, permitiendo levantar todos los componentes del sistema con un solo comando."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Paquete nativo de Go para escribir tests.",
+              "version_sugerida": "go1.21",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Permite escribir pruebas unitarias y de integración directamente en Go, asegurando la corrección del colector y los servicios instrumentados."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "OpenTelemetry SDK (Go)",
+              "categoria": "otros",
+              "descripcion": "APIs y SDKs para instrumentación de telemetría.",
+              "version_sugerida": "1.20.0",
+              "url_docs": "https://opentelemetry.io/docs/languages/go/",
+              "por_que": "Aunque Prometheus es el foco, OpenTelemetry proporciona un estándar más amplio para instrumentación que puede ser exportado a Prometheus, asegurando flexibilidad."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Recolección de métricas (latencia, RPS, errores) de APIs.",
+          "Exposición de métricas en formato Prometheus.",
+          "Dashboard web interactivo con Grafana.",
+          "Sistema de alertas basado en umbrales.",
+          "Instrumentación de microservicios (ejemplo en Go, adaptable a otros).",
+          "Colector centralizado de métricas."
+        ],
+        "casos_uso": [
+          "Un desarrollador despliega un nuevo microservicio y lo instrumenta para enviar métricas.",
+          "Un SRE monitoriza el dashboard para detectar picos de latencia en la API de autenticación.",
+          "El sistema dispara una alerta cuando la tasa de errores 5xx en la API de pagos supera el 5%.",
+          "Un equipo de producto revisa el RPS de la API de búsqueda para entender la carga de usuarios.",
+          "Se configura un nuevo panel en Grafana para visualizar el rendimiento de un servicio específico."
+        ],
+        "reglas_negocio": [
+          "Las métricas deben recolectarse cada 15 segundos.",
+          "Las alertas deben ser configurables por servicio y métrica.",
+          "Los datos históricos de métricas deben conservarse durante 30 días.",
+          "Solo los usuarios autorizados pueden ver los dashboards y configurar alertas.",
+          "Los servicios deben poder ser descubiertos automáticamente (o configurados manualmente)."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Documentación de Prometheus y Grafana",
+          "Guías de instrumentación de servicios"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia con Go y desarrollo de APIs.",
+          "Conocimientos de sistemas de monitoreo (Prometheus, Grafana).",
+          "Comprensión de arquitecturas de microservicios.",
+          "Experiencia con Docker y Docker Compose.",
+          "Fundamentos de métricas y series temporales."
+        ],
+        "riesgos": [
+          "La instrumentación de servicios existentes puede ser compleja o disruptiva.",
+          "La gestión del almacenamiento de series temporales puede requerir optimización.",
+          "La configuración de alertas puede generar ruido (falsos positivos/negativos).",
+          "La escalabilidad del colector de métricas bajo alta carga.",
+          "Dependencia de la correcta configuración de cada servicio."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f9a8b7c6d5e4f3a2"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "5825bd7e784c2e99"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -11368,8 +11669,10 @@
     "d8b0c1e2f3a4b5c6",
     "b0c1d2e3f4a5b6c7",
     "c7b6a5f4e3d2c1b0",
-    "e8d7c6b5a4f3e2d1"
+    "e8d7c6b5a4f3e2d1",
+    "e3c8b7a2f1d0e9c8",
+    "f9a8b7c6d5e4f3a2"
   ],
-  "total_generados": 84,
-  "fecha_ultima_generacion": "2026-10-14T22:56:58.558806"
+  "total_generados": 86,
+  "fecha_ultima_generacion": "2026-10-15T02:57:50.087243"
 }
