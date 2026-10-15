@@ -2242,5 +2242,101 @@
     "relevancia": 2,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "La ley de Alicia | Tráiler oficial | Netflix",
+    "url": "https://www.youtube.com/watch?v=nkodVSNUF9c",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-15T16:48:43.319308+00:00",
+    "medio": "Netflix Latinoamérica",
+    "imagen": "https://i.ytimg.com/vi/nkodVSNUF9c/hqdefault.jpg",
+    "tipo": "trailer",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix ya tiene su 'Widow's Bay': la miniserie de terror que es número 1 en España y en otros 80 países",
+    "url": "https://www.cinemania.es/cinemania/series/netflix-ya-tiene-su-widow-s-bay-miniserie-terror-numero-1-espana-otros-80-paises_7048029_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-15T16:48:50.950609+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "'La bola negra' lo cambia todo: Netflix le dará un giro de 180 grados a sus estrenos a partir de la película de los Javis",
+    "url": "https://www.cinemania.es/cinemania/noticias/bola-negra-cambia-netflix-giro-180-grados-sus-estrenos-los-javis_7049059_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-15T16:48:50.950649+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Greta Gerwig llega a Narnia: tráiler de 'El sobrino del mago', el mayor espectáculo de Netflix",
+    "url": "https://www.cinemania.es/cinemania/noticias/narnia-trailer-sobrino-mago-greta-gerwig-mayor-espectaculo-netflix_7048067_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-15T16:48:50.950723+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "trailer",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix planea despedir a 1.000 trabajadores, su mayor recorte de plantilla en cuatro años",
+    "url": "https://www.cinemania.es/lainformacion/empresas/netflix-planea-despedir-1-000-trabajadores-su-mayor-recorte-plantilla-cuatro-anos_7048783_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-15T16:48:50.950802+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "10 años después de su estreno, todavía lo puedes ver en Netflix: un lujoso thriller de acción con Luis Tosar y Mario Casas",
+    "url": "https://www.cinemania.es/cinemania/noticias/toro-mario-casas-luis-tosar-netflix-pelicula-accion_7042649_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-15T16:48:50.950813+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix adquiere los derechos audiovisuales exclusivos del Mundial 2030 en España",
+    "url": "https://www.cinemania.es/deportes/futbol/netflix-adquiere-los-derechos-audiovisuales-exclusivos-mundial-2030-espana_7048162_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-15T16:48:50.950825+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Reparto de 'Nueve reinas'",
+    "url": "https://www.ecartelera.com/peliculas/nueve-reinas/reparto/",
+    "fecha_pub": "Sat, 02 Sep 2017 01:40:00 GMT",
+    "fecha_ts": "2026-10-15T16:48:51.769485+00:00",
+    "medio": "Desnudos",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
