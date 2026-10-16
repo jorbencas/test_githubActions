@@ -12952,6 +12952,269 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "ebfc9103e89a045e"
       }
+    },
+    {
+      "proyecto": {
+        "id": "b1c2d3e4f5a67890",
+        "titulo": "Analizador de Sentimiento de Comentarios",
+        "descripcion_corta": "API REST para analizar el sentimiento de texto de comentarios de usuarios, utilizando modelos de ML pre-entrenados.",
+        "descripcion_detallada": "Desarrollo de una API RESTful que recibe texto de comentarios de usuarios y devuelve una puntuación de sentimiento (positivo, negativo, neutral) y un nivel de confianza. La API utiliza modelos de Machine Learning para el análisis de sentimiento, permitiendo a las empresas monitorear la opinión pública sobre sus productos o servicios en tiempo real. Se implementará un sistema de caché para mejorar el rendimiento de análisis recurrentes.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Flask",
+              "categoria": "framework",
+              "descripcion": "Microframework web para Python.",
+              "version_sugerida": "3.0.0",
+              "url_docs": "https://flask.palletsprojects.com/",
+              "por_que": "Sencillo y ligero para crear APIs RESTful rápidamente, ideal para un miniproyecto."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "NLTK",
+              "categoria": "libreria",
+              "descripcion": "Plataforma para construir programas Python para trabajar con datos de lenguaje humano.",
+              "version_sugerida": "3.8.1",
+              "url_docs": "https://www.nltk.org/",
+              "por_que": "Proporciona herramientas para el preprocesamiento de texto y acceso a corpus para análisis de sentimiento."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Librería de aprendizaje automático para Python.",
+              "version_sugerida": "1.3.2",
+              "url_docs": "https://scikit-learn.org/",
+              "por_que": "Incluye modelos pre-entrenados y herramientas para el análisis de sentimiento, simplificando la implementación."
+            },
+            {
+              "nombre": "Redis",
+              "categoria": "libreria",
+              "descripcion": "Almacén de estructuras de datos en memoria.",
+              "version_sugerida": "4.5.0",
+              "url_docs": "https://redis-py.readthedocs.io/",
+              "por_que": "Se usa para implementar un caché simple y mejorar la velocidad de respuesta para textos analizados previamente."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de contenedores para desarrollar, enviar y ejecutar aplicaciones.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la API y sus dependencias para una fácil implementación y ejecución."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Unittest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing incorporado en Python.",
+              "version_sugerida": "3.11",
+              "url_docs": "https://docs.python.org/3/library/unittest.html",
+              "por_que": "Suficiente para realizar pruebas unitarias básicas de la API y la lógica de análisis de sentimiento."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Endpoint POST para recibir texto.",
+          "Análisis de sentimiento (positivo, negativo, neutral).",
+          "Cálculo de confianza del sentimiento.",
+          "Caché de resultados para textos repetidos.",
+          "Documentación de la API (Swagger/OpenAPI)."
+        ],
+        "casos_uso": [
+          "Monitorización de redes sociales.",
+          "Análisis de feedback de clientes.",
+          "Evaluación de la opinión sobre campañas de marketing.",
+          "Clasificación automática de comentarios en foros.",
+          "Identificación de tendencias de opinión."
+        ],
+        "reglas_negocio": [
+          "El texto de entrada debe ser una cadena no vacía.",
+          "El sentimiento se clasifica en tres categorías: positivo, negativo, neutral.",
+          "La puntuación de confianza está entre 0 y 1.",
+          "Los resultados cacheados se sirven si la entrada coincide exactamente.",
+          "Se ignoran caracteres especiales y URLs en el análisis."
+        ],
+        "por_que_ia": "Se utiliza Machine Learning (NLTK, Scikit-learn) para procesar lenguaje natural y clasificar el sentimiento del texto, una tarea típica de NLP.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Python y APIs REST.",
+          "Comprensión de los fundamentos del Machine Learning y NLP.",
+          "Familiaridad con el uso de Docker."
+        ],
+        "riesgos": [
+          "La precisión del análisis de sentimiento puede ser limitada para textos ambiguos o sarcásticos.",
+          "La gestión de dependencias puede ser un problema sin un gestor de paquetes adecuado.",
+          "El rendimiento puede degradarse con un gran volumen de solicitudes sin optimización.",
+          "La configuración inicial de los modelos de ML puede requerir ajustes."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:05:00Z",
+        "hash_unicidad": "b1c2d3e4f5a67890"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "bfa95cbc0265afdc"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c1d2e3f4a5b67890",
+        "titulo": "Sistema de Monitorización de Logs con Alertas",
+        "descripcion_corta": "Microservicio Go para centralizar y analizar logs, generando alertas ante patrones anómalos.",
+        "descripcion_detallada": "Creación de un microservicio en Go que actúa como un colector y analizador de logs. Recibe logs de diversas fuentes (aplicaciones, servidores) a través de una API o un agente. Aplica reglas de filtrado y análisis para detectar patrones inusuales o errores críticos. Cuando se detecta una anomalía, el sistema genera una alerta que puede ser enviada a través de diferentes canales (email, Slack, webhooks). Incluye persistencia básica de logs y un dashboard simple.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "microservicio",
+          "api",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web HTTP de alto rendimiento para Go.",
+              "version_sugerida": "1.9.1",
+              "url_docs": "https://gin-gonic.com/",
+              "por_que": "Excelente rendimiento y facilidad de uso para construir la API de recepción de logs y la gestión de alertas."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Logrus",
+              "categoria": "libreria",
+              "descripcion": "Framework de logging estructurado para Go.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://github.com/sirupsen/logrus",
+              "por_que": "Facilita la generación de logs estructurados dentro del propio microservicio para una mejor observabilidad."
+            },
+            {
+              "nombre": "GORM",
+              "categoria": "libreria",
+              "descripcion": "ORM (Object-Relational Mapper) para Go.",
+              "version_sugerida": "2.20.0",
+              "url_docs": "https://gorm.io/",
+              "por_que": "Simplifica la interacción con la base de datos relacional para almacenar logs y reglas de alerta."
+            },
+            {
+              "nombre": "Sarama",
+              "categoria": "libreria",
+              "descripcion": "Cliente Kafka puro en Go.",
+              "version_sugerida": "1.41.0",
+              "url_docs": "https://github.com/Shopify/sarama",
+              "por_que": "Permite la integración con Kafka como fuente o destino de logs, común en arquitecturas de microservicios."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos objeto-relacional.",
+              "version_sugerida": "16",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto y escalable para almacenar grandes volúmenes de logs y metadatos de alertas."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Esencial para empaquetar el microservicio y sus dependencias, facilitando su despliegue y escalado."
+            },
+            {
+              "nombre": "Prometheus",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de monitorización y alertas.",
+              "version_sugerida": "2.47.2",
+              "url_docs": "https://prometheus.io/docs/",
+              "por_que": "Para exponer métricas del propio microservicio (ej. número de logs procesados, alertas generadas) y facilitar su monitorización."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Framework de testing incorporado en Go.",
+              "version_sugerida": "1.21",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Permite escribir pruebas unitarias y de integración para validar la lógica de procesamiento de logs y generación de alertas."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Recepción de logs vía HTTP (POST).",
+          "Análisis de logs basado en reglas configurables.",
+          "Detección de patrones anómalos (ej. picos de error).",
+          "Generación de alertas (email, Slack, webhook).",
+          "Persistencia de logs en PostgreSQL.",
+          "API para consulta de logs y estado de alertas."
+        ],
+        "casos_uso": [
+          "Monitorización centralizada de logs en un entorno de microservicios.",
+          "Detección proactiva de fallos en aplicaciones.",
+          "Auditoría de seguridad mediante análisis de logs.",
+          "Análisis de rendimiento de aplicaciones.",
+          "Notificación automática a equipos de operaciones."
+        ],
+        "reglas_negocio": [
+          "Los logs deben tener al menos un timestamp y un mensaje.",
+          "Las reglas de alerta deben ser configurables (ej. regex, umbrales).",
+          "Las alertas deben tener un nivel de severidad (info, warning, error).",
+          "El sistema debe ser capaz de manejar un alto volumen de logs concurrentes.",
+          "Los canales de notificación de alertas son configurables."
+        ],
+        "por_que_ia": "Aunque este proyecto se centra en reglas definidas, se podría extender con IA/ML para la detección de anomalías no predefinidas, utilizando modelos de detección de outliers o análisis de series temporales sobre métricas de logs.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia sólida con Go y concurrencia.",
+          "Conocimientos de arquitecturas de microservicios y sistemas distribuidos.",
+          "Comprensión de bases de datos y sistemas de colas (opcionalmente Kafka).",
+          "Experiencia con Docker y herramientas de orquestación (ej. Kubernetes)."
+        ],
+        "riesgos": [
+          "Escalabilidad del sistema para manejar grandes volúmenes de logs.",
+          "Complejidad en la gestión de reglas de alerta y falsos positivos/negativos.",
+          "Latencia en la detección y notificación de alertas.",
+          "Gestión de la persistencia y el ciclo de vida de los logs.",
+          "Seguridad en la recepción y manejo de logs sensibles."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:10:00Z",
+        "hash_unicidad": "c1d2e3f4a5b67890"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "bfa95cbc0265afdc"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -13050,8 +13313,10 @@
     "c1a0e7b5d9f3c8a2",
     "a1b2c3d4e5f67890",
     "b2c3d4e5f6789012",
-    "c3d4e5f678901234"
+    "c3d4e5f678901234",
+    "b1c2d3e4f5a67890",
+    "c1d2e3f4a5b67890"
   ],
-  "total_generados": 96,
-  "fecha_ultima_generacion": "2026-10-16T19:28:43.144324"
+  "total_generados": 98,
+  "fecha_ultima_generacion": "2026-10-16T22:27:14.713860"
 }
