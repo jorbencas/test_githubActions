@@ -12116,6 +12116,414 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "d9cac6ca57f2c9fc"
       }
+    },
+    {
+      "proyecto": {
+        "id": "b8a1d3e5f7c9a0b2",
+        "titulo": "Sistema Inteligente de Gestión de Tareas",
+        "descripcion_corta": "App web para organizar tareas con priorización inteligente y recordatorios predictivos.",
+        "descripcion_detallada": "Desarrolla una aplicación web full-stack que permita a los usuarios gestionar sus tareas diarias. El sistema debe ofrecer funcionalidades de creación, edición, eliminación y marcado de tareas. Incorpora un módulo de IA que analice el historial de tareas y la información del usuario (ej. fechas límite, complejidad estimada) para sugerir prioridades y predecir la probabilidad de cumplimiento, ajustando recordatorios de forma dinámica. Se busca optimizar la productividad del usuario mediante sugerencias proactivas y personalizadas, aprendiendo de sus patrones de trabajo.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Alto rendimiento asíncrono, validación automática de datos con Pydantic y generación de documentación OpenAPI."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Componentización eficiente y manejo del estado declarativo para una UI interactiva."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en type hints.",
+              "version_sugerida": "2.5.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para la validación de modelos de datos en FastAPI y para la estructura de la IA."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Librería para machine learning en Python.",
+              "version_sugerida": "1.3.2",
+              "url_docs": "https://scikit-learn.org/",
+              "por_que": "Proporciona algoritmos eficientes para la clasificación y regresión necesarios para la priorización predictiva."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_de_datos",
+              "descripcion": "Sistema gestor de bases de datos relacional objeto.",
+              "version_sugerida": "15.0",
+              "url_docs": "https://www.postgresql.org/",
+              "por_que": "Soporte robusto para datos relacionales de tareas y capacidad para extensiones que podrían usarse en el futuro."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para el desarrollo, envío y ejecución de aplicaciones en contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita la reproducibilidad del entorno de desarrollo y despliegue consistente."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests claros y la automatización de pruebas unitarias y de integración."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Gestión CRUD de tareas",
+          "Priorización inteligente automática",
+          "Recordatorios predictivos y adaptativos",
+          "Visualización del progreso del usuario",
+          "Autenticación y autorización de usuarios"
+        ],
+        "casos_uso": [
+          "Estudiantes organizando sus estudios",
+          "Profesionales gestionando proyectos",
+          "Personas planificando sus actividades diarias",
+          "Equipos colaborando en listas de tareas compartidas",
+          "Usuarios que buscan mejorar su productividad"
+        ],
+        "reglas_negocio": [
+          "Una tarea debe tener un título y una fecha límite opcional.",
+          "La prioridad se recalcula diariamente o al editar una tarea.",
+          "Los recordatorios se envían con antelación basada en la probabilidad de cumplimiento.",
+          "El sistema debe aprender de las tareas completadas a tiempo y las retrasadas.",
+          "Los datos del usuario deben ser privados y seguros."
+        ],
+        "por_que_ia": "Se utiliza IA para analizar patrones históricos de completitud de tareas, complejidad estimada y fechas límite, permitiendo predecir la probabilidad de éxito y ajustar dinámicamente las prioridades y recordatorios, optimizando así la gestión del tiempo del usuario.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos de Python y JavaScript.",
+          "Comprensión de principios de desarrollo web full-stack.",
+          "Nociones de machine learning y análisis de datos."
+        ],
+        "riesgos": [
+          "Precisión del modelo de IA puede variar.",
+          "Curva de aprendizaje de React para desarrolladores Python.",
+          "Gestión de estado compleja en la interfaz de usuario.",
+          "Escalabilidad de la base de datos con muchos usuarios y tareas.",
+          "Privacidad y seguridad de los datos del usuario."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "b8a1d3e5f7c9a0b2"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "5d689a32f5d7a58c"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "e0f2a4c6b8d1e3f5",
+        "titulo": "Monitor de Salud de Infraestructura Cloud",
+        "descripcion_corta": "API y Dashboard para monitorear métricas clave de servicios cloud y alertar sobre anomalías.",
+        "descripcion_detallada": "Construir una API RESTful que recoja métricas de servicios cloud (ej. CPU, memoria, latencia de red, errores de aplicación) a través de sus APIs nativas o agentes. Desarrollar un dashboard web simple para visualizar estas métricas en tiempo real y mostrar el estado general. Implementar un sistema de alertas basado en umbrales configurables y detección básica de anomalías (ej. picos inusuales). El objetivo es proporcionar una visión consolidada y proactiva del estado de la infraestructura.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "api",
+          "web",
+          "devops",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web de alto rendimiento escrito en Go.",
+              "version_sugerida": "1.21.1",
+              "url_docs": "https://gin-gonic.com/",
+              "por_que": "Excelente rendimiento para la API de recolección y agregación de métricas, con buen soporte para middleware."
+            },
+            {
+              "nombre": "Vue.js",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "3.3.4",
+              "url_docs": "https://vuejs.org/",
+              "por_que": "Facilita la creación de un dashboard interactivo y reactivo con una curva de aprendizaje manejable."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Prometheus client_golang",
+              "categoria": "libreria",
+              "descripcion": "Librería oficial de Go para instrumentar aplicaciones con Prometheus.",
+              "version_sugerida": "1.16.0",
+              "url_docs": "https://pkg.go.dev/github.com/prometheus/client_golang",
+              "por_que": "Permite exponer métricas de la API y de los servicios instrumentados en un formato compatible con Prometheus."
+            },
+            {
+              "nombre": "Cloud SDKs (AWS, GCP, Azure)",
+              "categoria": "libreria",
+              "descripcion": "SDKs oficiales para interactuar con servicios cloud.",
+              "version_sugerida": "latest",
+              "url_docs": null,
+              "por_que": "Necesarios para obtener métricas de los proveedores cloud específicos."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "Prometheus",
+              "categoria": "base_de_datos",
+              "descripcion": "Sistema de monitoreo y alertas de código abierto.",
+              "version_sugerida": "2.47.0",
+              "url_docs": "https://prometheus.io/",
+              "por_que": "Base de datos Time Series optimizada para métricas y motor principal del sistema de monitoreo."
+            },
+            {
+              "nombre": "Alertmanager",
+              "categoria": "base_de_datos",
+              "descripcion": "Componente para gestionar alertas de Prometheus.",
+              "version_sugerida": "0.25.0",
+              "url_docs": "https://prometheus.io/docs/alerting/latest/alertmanager/",
+              "por_que": "Encargado de enrutar, agrupar y silenciar alertas generadas por Prometheus."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Contenedores para empaquetar y ejecutar la aplicación.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita la orquestación y el despliegue de los componentes (API, Dashboard, Prometheus)."
+            },
+            {
+              "nombre": "Grafana",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de análisis y visualización de métricas.",
+              "version_sugerida": "10.2.0",
+              "url_docs": "https://grafana.com/",
+              "por_que": "Excelente para visualizar datos de Prometheus en dashboards personalizables y avanzados."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go Testing Package",
+              "categoria": "testing",
+              "descripcion": "Framework de testing nativo de Go.",
+              "version_sugerida": "go1.21",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Permite escribir pruebas unitarias y de integración de manera sencilla y eficiente para la API en Go."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Ingesta de métricas de servicios cloud.",
+          "API para exponer métricas.",
+          "Dashboard interactivo de métricas.",
+          "Configuración de alertas basadas en umbrales.",
+          "Detección básica de anomalías en series temporales."
+        ],
+        "casos_uso": [
+          "Monitorear la salud de servidores web.",
+          "Rastrear el rendimiento de bases de datos.",
+          "Detectar problemas de latencia en microservicios.",
+          "Alertar sobre picos de uso de recursos en instancias cloud.",
+          "Obtener una visión general del estado operativo de la infraestructura."
+        ],
+        "reglas_negocio": [
+          "Las métricas deben ser recolectadas cada minuto.",
+          "Los umbrales de alerta son configurables por el usuario.",
+          "Las anomalías se detectan comparando con el comportamiento histórico (ej. últimas 24h).",
+          "Los datos de métricas se retienen por 30 días.",
+          "Las notificaciones de alerta deben poder enviarse a través de múltiples canales (Slack, Email)."
+        ],
+        "por_que_ia": "Se usa IA básica para la detección de anomalías, comparando métricas actuales con patrones históricos para identificar desviaciones significativas que podrían indicar un problema subyacente no cubierto por umbrales simples.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia con Go y desarrollo de APIs RESTful.",
+          "Conocimientos de servicios cloud (AWS, GCP o Azure).",
+          "Comprensión de sistemas de monitoreo y métricas (Prometheus).",
+          "Familiaridad con Docker y orquestación básica."
+        ],
+        "riesgos": [
+          "Complejidad en la integración con múltiples proveedores cloud.",
+          "Gestión eficiente de grandes volúmenes de datos de métricas.",
+          "Optimización del rendimiento de la API y del dashboard.",
+          "Detección de falsos positivos/negativos en las alertas.",
+          "Seguridad en el acceso a las APIs de los servicios cloud."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:05:00Z",
+        "hash_unicidad": "e0f2a4c6b8d1e3f5"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "5d689a32f5d7a58c"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c1a0e7b5d9f3c8a2",
+        "titulo": "Asistente de Codificación con IA para Estudiantes",
+        "descripcion_corta": "Herramienta web que ayuda a estudiantes a entender y depurar código simple.",
+        "descripcion_detallada": "Crear una aplicación web interactiva donde los estudiantes puedan pegar fragmentos de código (Python/JavaScript inicialmente) y recibir explicaciones detalladas, sugerencias de mejora y ayuda para depurar errores comunes. La IA analizará el código proporcionado, identificará posibles problemas lógicos o sintácticos, explicará el funcionamiento del código paso a paso y ofrecerá correcciones o alternativas. El objetivo es servir como un tutor de programación accesible y personalizado, reforzando el aprendizaje.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "javascript",
+          "frameworks": [
+            {
+              "nombre": "Express.js",
+              "categoria": "framework",
+              "descripcion": "Framework de aplicación web minimalista para Node.js.",
+              "version_sugerida": "4.18.2",
+              "url_docs": "https://expressjs.com/",
+              "por_que": "Proporciona una estructura sencilla para crear la API backend que interactúa con el modelo de IA."
+            },
+            {
+              "nombre": "Vanilla JS / HTML / CSS",
+              "categoria": "framework",
+              "descripcion": "Tecnologías frontend estándar.",
+              "version_sugerida": "ES2022",
+              "url_docs": null,
+              "por_que": "Suficiente para una interfaz de usuario simple centrada en la entrada y salida de texto."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "OpenAI API Client",
+              "categoria": "libreria",
+              "descripcion": "Cliente oficial para interactuar con la API de OpenAI.",
+              "version_sugerida": "4.x",
+              "url_docs": "https://github.com/openai/openai-node",
+              "por_que": "Facilita el envío de código y prompts a modelos como GPT-3.5/4 para su análisis y explicación."
+            },
+            {
+              "nombre": "CodeMirror / Monaco Editor",
+              "categoria": "libreria",
+              "descripcion": "Editores de código embebibles para la web.",
+              "version_sugerida": "6.x / 0.39.0",
+              "url_docs": "https://codemirror.net/%20/%20https://microsoft.github.io/monaco-editor/",
+              "por_que": "Mejora la experiencia de usuario al pegar y visualizar código con resaltado de sintaxis."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Node.js",
+              "categoria": "infraestructura",
+              "descripcion": "Entorno de ejecución de JavaScript.",
+              "version_sugerida": "18.x",
+              "url_docs": "https://nodejs.org/",
+              "por_que": "Plataforma necesaria para ejecutar la aplicación backend Express.js."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para JavaScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Permite escribir pruebas unitarias para la lógica del backend y las interacciones con la API de IA."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Entrada de código fuente (Python, JS).",
+          "Explicación del funcionamiento del código.",
+          "Identificación y explicación de errores.",
+          "Sugerencias de refactorización y mejora.",
+          "Interfaz de usuario sencilla y clara."
+        ],
+        "casos_uso": [
+          "Estudiantes aprendiendo a programar.",
+          "Desarrolladores junior depurando scripts.",
+          "Educadores usando la herramienta para complementar clases.",
+          "Personas que necesitan entender fragmentos de código ajeno.",
+          "Autodidactas resolviendo ejercicios de programación."
+        ],
+        "reglas_negocio": [
+          "La longitud del código a analizar está limitada (ej. 1000 caracteres).",
+          "Se priorizan explicaciones claras y concisas.",
+          "El sistema debe indicar si el código es sintácticamente correcto.",
+          "Las respuestas de IA deben ser consistentes y útiles.",
+          "El uso de la API de IA está limitado por un plan de pago."
+        ],
+        "por_que_ia": "Se utiliza un modelo de lenguaje grande (LLM) como GPT-3.5/4 para analizar el código fuente, entender su lógica, identificar errores, generar explicaciones detalladas y proponer mejoras, actuando como un tutor de programación virtual.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de OpenAI (GPT-3.5 Turbo / GPT-4)"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de JavaScript y Node.js.",
+          "Comprensión de conceptos de programación.",
+          "Familiaridad con el uso de APIs externas.",
+          "Acceso a una clave API de OpenAI."
+        ],
+        "riesgos": [
+          "Costos asociados al uso de la API de OpenAI.",
+          "La calidad de las explicaciones de la IA puede variar.",
+          "Limitaciones en la comprensión de código muy complejo o específico.",
+          "Dependencia de la disponibilidad y latencia de la API externa.",
+          "Manejo de errores y timeouts en la comunicación con la IA."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:10:00Z",
+        "hash_unicidad": "c1a0e7b5d9f3c8a2"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "5d689a32f5d7a58c"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -12208,8 +12616,11 @@
     "c2c8b1a4d3e5f7a9",
     "f1a2b3c4d5e6f8a9",
     "f8a6b1c0d4e2f7a9",
-    "f0a3b1c8d6e4f2a0"
+    "f0a3b1c8d6e4f2a0",
+    "b8a1d3e5f7c9a0b2",
+    "e0f2a4c6b8d1e3f5",
+    "c1a0e7b5d9f3c8a2"
   ],
-  "total_generados": 90,
-  "fecha_ultima_generacion": "2026-10-16T08:42:56.870847"
+  "total_generados": 93,
+  "fecha_ultima_generacion": "2026-10-16T15:59:15.545303"
 }
