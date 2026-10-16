@@ -11841,6 +11841,138 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "6bfb216304561489"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f8a6b1c0d4e2f7a9",
+        "titulo": "Generador de Resúmenes de Artículos Científicos",
+        "descripcion_corta": "API para generar resúmenes concisos de artículos científicos usando IA.",
+        "descripcion_detallada": "Desarrollo de una API RESTful que ingiere texto de artículos científicos (PDF o texto plano) y utiliza un modelo de lenguaje grande (LLM) para generar resúmenes estructurados y concisos. La API permitirá configurar la longitud del resumen y el nivel de detalle. Incluirá un endpoint para subir archivos y otro para procesar texto directamente. Se implementarán mecanismos de validación de entrada y manejo de errores. El objetivo es ayudar a investigadores y estudiantes a revisar rápidamente la literatura científica. Se considerará la integración con bases de datos académicas para obtener metadatos si es posible.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python, basado en estándares de tipo de datos de Python y Pydantic.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Proporciona validación automática de datos, serialización, documentación interactiva (Swagger UI/ReDoc) y alto rendimiento asíncrono."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en anotaciones de tipo de Python.",
+              "version_sugerida": "2.5.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para FastAPI para definir esquemas de datos y validar las solicitudes entrantes y las respuestas salientes."
+            },
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para simplificar la creación de aplicaciones impulsadas por LLMs.",
+              "version_sugerida": "0.1.0",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Facilita la integración con diversos LLMs, el manejo de prompts y la orquestación de cadenas de procesamiento de texto para la generación de resúmenes."
+            },
+            {
+              "nombre": "PyMuPDF",
+              "categoria": "libreria",
+              "descripcion": "Binding de Python para la librería MuPDF, útil para extraer texto de archivos PDF.",
+              "version_sugerida": "1.23.8",
+              "url_docs": "https://pymupdf.readthedocs.io/",
+              "por_que": "Necesario para procesar la entrada de artículos en formato PDF y extraer su contenido textual."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la API y sus dependencias para un despliegue consistente y aislado en cualquier entorno."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API (GPT-3.5/4)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de lenguaje avanzados para procesamiento de lenguaje natural.",
+              "version_sugerida": null,
+              "url_docs": "https://platform.openai.com/docs",
+              "por_que": "Proporciona la capacidad de comprensión y generación de texto necesaria para resumir artículos científicos de manera efectiva."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests unitarios y de integración para la API, asegurando la correcta funcionalidad y el manejo de casos borde."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Carga de artículos en PDF y texto plano.",
+          "Generación de resúmenes personalizables (longitud, detalle).",
+          "API RESTful con documentación interactiva.",
+          "Manejo robusto de errores y validación de entrada.",
+          "Integración con LLM para la generación de texto."
+        ],
+        "casos_uso": [
+          "Investigadores revisando rápidamente la literatura.",
+          "Estudiantes obteniendo puntos clave de artículos académicos.",
+          "Plataformas de gestión de conocimiento automatizando la indexación.",
+          "Resumen de noticias o informes técnicos complejos."
+        ],
+        "reglas_negocio": [
+          "Los artículos deben ser procesables (PDF válido o texto).",
+          "La longitud del resumen debe estar dentro de rangos definidos (e.g., 100-500 palabras).",
+          "Se debe asegurar la privacidad de los documentos subidos.",
+          "El servicio debe responder en un tiempo razonable (< 30s para artículos estándar)."
+        ],
+        "por_que_ia": "La generación de resúmenes de texto complejo y específico como artículos científicos requiere capacidades avanzadas de comprensión y síntesis de lenguaje natural, que son el dominio de los Modelos de Lenguaje Grandes (LLMs).",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "arXiv API (para obtener artículos de ejemplo)",
+          "Open Access Subset de PubMed Central"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo de APIs RESTful.",
+          "Comprensión básica de cómo funcionan los LLMs y las APIs de IA.",
+          "Familiaridad con Docker y entornos de contenerización."
+        ],
+        "riesgos": [
+          "Calidad variable de los resúmenes generados por la IA.",
+          "Costos asociados al uso de APIs de LLMs.",
+          "Manejo de archivos PDF corruptos o con formato complejo.",
+          "Latencia en la respuesta debido a la llamada al LLM.",
+          "Limitaciones en el tamaño del contexto del LLM para artículos muy largos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f8a6b1c0d4e2f7a9"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "be6c391fa961b2f2"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -11931,8 +12063,9 @@
     "e3c8b7a2f1d0e9c8",
     "f9a8b7c6d5e4f3a2",
     "c2c8b1a4d3e5f7a9",
-    "f1a2b3c4d5e6f8a9"
+    "f1a2b3c4d5e6f8a9",
+    "f8a6b1c0d4e2f7a9"
   ],
-  "total_generados": 88,
-  "fecha_ultima_generacion": "2026-10-15T22:52:15.762870"
+  "total_generados": 89,
+  "fecha_ultima_generacion": "2026-10-16T02:55:29.992879"
 }
