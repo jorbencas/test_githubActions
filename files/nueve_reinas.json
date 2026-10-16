@@ -2338,5 +2338,29 @@
     "relevancia": 2,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Netflix ya tiene su 'Widow's Bay': la miniserie de terror que es número 1 en España y en otros 80 países",
+    "url": "https://www.cinemania.es/cinemania/series/netflix-maldicion-widows-bay-miniserie-terror-numero-1-espana-otros-80-paises_7048029_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-16T16:31:15.011530+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "'La bola negra' lo cambia todo: Netflix le dará un giro de 180 grados a sus estrenos a partir de la película de los Javis",
+    "url": "https://www.cinemania.es/cinemania/noticias/bola-negra-cambia-netflix-giro-180-grados-estreno-los-javis_7049059_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-16T16:31:15.011591+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
