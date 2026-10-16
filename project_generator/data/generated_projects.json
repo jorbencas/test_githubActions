@@ -12524,6 +12524,434 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "5d689a32f5d7a58c"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4e5f67890",
+        "titulo": "AI-Powered Code Review Assistant",
+        "descripcion_corta": "Asistente de revisión de código con IA que sugiere mejoras y detecta posibles bugs.",
+        "descripcion_detallada": "Un bot de GitHub que se integra con repositorios y analiza Pull Requests. Utiliza modelos de lenguaje grandes (LLMs) para comprender el contexto del código, identificar patrones de errores comunes, sugerir refactorizaciones y mejorar la legibilidad. El bot puede ser configurado para diferentes niveles de rigurosidad y tipos de análisis (seguridad, rendimiento, estilo). Permite a los desarrolladores recibir feedback temprano y mejorar la calidad del código de forma colaborativa.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "bot",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno para construir APIs con Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Rendimiento asíncrono, validación de datos con Pydantic, generación automática de documentación OpenAPI."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "PyGithub",
+              "categoria": "libreria",
+              "descripcion": "SDK de Python para interactuar con la API de GitHub.",
+              "version_sugerida": "1.59.0",
+              "url_docs": "https://pygithub.readthedocs.io/",
+              "por_que": "Permite la automatización de acciones en GitHub, como la lectura de PRs y la adición de comentarios."
+            },
+            {
+              "nombre": "Langchain",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por LLMs.",
+              "version_sugerida": "0.1.0",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Facilita la integración con modelos de IA, la gestión de prompts y la orquestación de flujos de trabajo complejos."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para el desarrollo, envío y ejecución de aplicaciones en contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, facilitando la gestión de dependencias."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API",
+              "categoria": "ia_ml",
+              "descripcion": "Acceso a modelos de lenguaje avanzados como GPT-4.",
+              "version_sugerida": "v1",
+              "url_docs": "https://platform.openai.com/docs/api-reference",
+              "por_que": "Proporciona capacidades de comprensión y generación de texto necesarias para el análisis de código y la sugerencia de mejoras."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests unitarios y de integración, con un sistema de fixtures robusto."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis de Pull Requests con IA",
+          "Detección de bugs y vulnerabilidades potenciales",
+          "Sugerencias de refactorización y mejora de estilo",
+          "Integración con GitHub como bot",
+          "Configuración de reglas de análisis personalizadas",
+          "Generación de comentarios en PRs con las sugerencias"
+        ],
+        "casos_uso": [
+          "Mejorar la calidad del código en equipos de desarrollo",
+          "Automatizar parte del proceso de revisión de código",
+          "Facilitar el aprendizaje de buenas prácticas de programación",
+          "Reducir el tiempo dedicado a revisiones manuales",
+          "Asegurar el cumplimiento de estándares de codificación"
+        ],
+        "reglas_negocio": [
+          "El bot solo actúa sobre Pull Requests abiertos.",
+          "Los comentarios de la IA deben ser claramente identificables.",
+          "Se puede configurar para ignorar ciertos archivos o directorios.",
+          "Los usuarios pueden definir umbrales de criticidad para las sugerencias.",
+          "Requiere autenticación OAuth para acceder a los repositorios."
+        ],
+        "por_que_ia": "Se utiliza IA generativa (LLMs) para analizar la semántica del código, identificar patrones complejos y generar sugerencias de mejora contextualizadas que van más allá de las reglas estáticas.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de GitHub",
+          "OpenAI API"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo web/API.",
+          "Comprensión de la API de GitHub.",
+          "Familiaridad con conceptos de revisión de código.",
+          "Acceso a una clave API de OpenAI."
+        ],
+        "riesgos": [
+          "Costos asociados al uso de la API de OpenAI.",
+          "Falsos positivos o negativos en las sugerencias de la IA.",
+          "Latencia en las respuestas del bot.",
+          "Manejo de grandes volúmenes de código.",
+          "Dependencia de la disponibilidad de la API de GitHub."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "a1b2c3d4e5f67890"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "ebfc9103e89a045e"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "b2c3d4e5f6789012",
+        "titulo": "Real-time Collaborative Whiteboard",
+        "descripcion_corta": "Pizarra colaborativa en tiempo real para equipos, con dibujo, texto y formas.",
+        "descripcion_detallada": "Una aplicación web fullstack que permite a múltiples usuarios dibujar, escribir texto y añadir formas geométricas en un lienzo compartido simultáneamente. Utiliza WebSockets para la comunicación en tiempo real, asegurando que todos los cambios se reflejen instantáneamente para todos los participantes. Guarda el estado del tablero para poder recuperarlo más tarde. Ideal para brainstorming, planificación y sesiones de diseño colaborativo.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "web",
+          "fullstack"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "javascript",
+          "frameworks": [
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Gestión eficiente del DOM y un ecosistema robusto para el desarrollo frontend."
+            },
+            {
+              "nombre": "Express.js",
+              "categoria": "framework",
+              "descripcion": "Framework web minimalista para Node.js.",
+              "version_sugerida": "4.18.2",
+              "url_docs": "https://expressjs.com/",
+              "por_que": "Proporciona una base sólida para la API del backend y la gestión de rutas."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Socket.IO",
+              "categoria": "libreria",
+              "descripcion": "Librería para comunicación bidireccional en tiempo real entre clientes y servidores.",
+              "version_sugerida": "4.7.2",
+              "url_docs": "https://socket.io/docs/v4/",
+              "por_que": "Facilita la implementación de la funcionalidad de colaboración en tiempo real, manejando la sincronización de eventos."
+            },
+            {
+              "nombre": "Fabric.js",
+              "categoria": "libreria",
+              "descripcion": "Librería de JavaScript para HTML5 canvas.",
+              "version_sugerida": "5.3.0",
+              "url_docs": "https://fabricjs.com/docs/",
+              "por_que": "Simplifica la manipulación de objetos gráficos (formas, texto, imágenes) en el canvas del navegador."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "MongoDB",
+              "categoria": "bases_datos",
+              "descripcion": "Base de datos NoSQL orientada a documentos.",
+              "version_sugerida": "7.0",
+              "url_docs": "https://www.mongodb.com/docs/",
+              "por_que": "Almacenamiento flexible del estado del tablero (objetos JSON), escalabilidad y facilidad de integración con Node.js."
+            }
+          ],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Permite escribir tests unitarios y de integración para el frontend y backend."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Dibujo a mano alzada",
+          "Inserción y edición de texto",
+          "Creación y manipulación de formas (rectángulos, círculos, líneas)",
+          "Colaboración en tiempo real a través de WebSockets",
+          "Guardado y carga del estado del tablero",
+          "Herramientas básicas de edición (mover, escalar, eliminar)"
+        ],
+        "casos_uso": [
+          "Sesiones de brainstorming en equipo",
+          "Planificación de proyectos y flujos de trabajo",
+          "Diseño colaborativo de interfaces o diagramas",
+          "Clases o tutoriales interactivos",
+          "Visualización de ideas en tiempo real"
+        ],
+        "reglas_negocio": [
+          "Cada tablero tiene un identificador único.",
+          "Las acciones de dibujo se transmiten a todos los clientes conectados al mismo tablero.",
+          "El último cambio realizado por un usuario se aplica.",
+          "Los datos del tablero se persisten en la base de datos.",
+          "Los usuarios pueden unirse a tableros existentes mediante un enlace."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": null,
+        "recursos_externos": [
+          "API de WebSockets"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de HTML, CSS y JavaScript.",
+          "Comprensión de conceptos de desarrollo frontend (React).",
+          "Nociones de desarrollo backend (Node.js, Express).",
+          "Entendimiento de WebSockets."
+        ],
+        "riesgos": [
+          "Manejo de concurrencia y posibles conflictos en las actualizaciones.",
+          "Escalabilidad de WebSockets para un gran número de usuarios concurrentes.",
+          "Gestión de desconexiones y reconexiones de clientes.",
+          "Diseño de una interfaz de usuario intuitiva."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:01:00Z",
+        "hash_unicidad": "b2c3d4e5f6789012"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "ebfc9103e89a045e"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c3d4e5f678901234",
+        "titulo": "Log Anomaly Detection System",
+        "descripcion_corta": "Sistema para detectar anomalías en logs de aplicaciones usando ML.",
+        "descripcion_detallada": "Una API que ingiere logs de diversas fuentes, los preprocesa y utiliza modelos de Machine Learning para identificar patrones anómalos o eventos inusuales que puedan indicar problemas de seguridad o fallos operativos. Las anomalías detectadas se almacenan y se pueden consultar a través de una API o enviar notificaciones. El sistema aprende continuamente de los logs entrantes para mejorar su precisión.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "datos",
+          "microservicio"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin Web Framework",
+              "categoria": "framework",
+              "descripcion": "Framework web de alto rendimiento para Go.",
+              "version_sugerida": "1.9.1",
+              "url_docs": "https://gin-gonic.com/docs/",
+              "por_que": "Eficiencia y velocidad para construir la API de ingesta y consulta de logs."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Go-Logrus",
+              "categoria": "libreria",
+              "descripcion": "Librería de logging estructurado para Go.",
+              "version_sugerida": "1.6.0",
+              "url_docs": "https://github.com/sirupsen/logrus",
+              "por_que": "Permite generar logs estructurados para facilitar el procesamiento posterior por el sistema de ML."
+            },
+            {
+              "nombre": "Pandas (via Python interop)",
+              "categoria": "libreria",
+              "descripcion": "Librería para análisis y manipulación de datos en Python.",
+              "version_sugerida": "2.1.1",
+              "url_docs": "https://pandas.pydata.org/docs/",
+              "por_que": "Extensivamente utilizada para preprocesamiento de datos y feature engineering en ML, accesible desde Go."
+            },
+            {
+              "nombre": "Scikit-learn (via Python interop)",
+              "categoria": "libreria",
+              "descripcion": "Librería de Machine Learning para Python.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://scikit-learn.org/stable/",
+              "por_que": "Proporciona algoritmos estándar para detección de anomalías (Isolation Forest, One-Class SVM)."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "Elasticsearch",
+              "categoria": "bases_datos",
+              "descripcion": "Motor de búsqueda y analítica distribuido.",
+              "version_sugerida": "8.10.0",
+              "url_docs": "https://www.elastic.co/elasticsearch/",
+              "por_que": "Almacenamiento y consulta eficiente de grandes volúmenes de logs, con capacidades de indexación y búsqueda."
+            },
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "bases_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional.",
+              "version_sugerida": "15.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Almacenamiento de metadatos del sistema, configuraciones y resultados de anomalías detectadas."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Contenerización de aplicaciones.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Aislamiento de servicios, despliegue consistente y orquestación con Docker Compose."
+            },
+            {
+              "nombre": "Kafka",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de streaming distribuido.",
+              "version_sugerida": "3.6.0",
+              "url_docs": "https://kafka.apache.org/documentation/",
+              "por_que": "Ingesta de logs en tiempo real y desacoplamiento entre el productor (aplicaciones) y el consumidor (sistema de ML)."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Isolation Forest",
+              "categoria": "ia_ml",
+              "descripcion": "Algoritmo de ML para detección de anomalías.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html",
+              "por_que": "Eficiente para detectar valores atípicos en conjuntos de datos de alta dimensionalidad como los logs."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Paquete estándar de Go para testing.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://go.dev/blog/examples",
+              "por_que": "Permite escribir pruebas unitarias y de integración para la lógica del backend en Go."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Go-Python bridge (e.g., `go-python`)",
+              "categoria": "otros",
+              "descripcion": "Permite llamar a código Python desde Go.",
+              "version_sugerida": "latest",
+              "url_docs": "https://github.com/sbinet/go-python",
+              "por_que": "Integración de librerías de ML de Python (Pandas, Scikit-learn) en la aplicación Go."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Ingesta de logs en tiempo real vía Kafka",
+          "Preprocesamiento y normalización de datos de logs",
+          "Detección de anomalías usando modelos de ML (ej. Isolation Forest)",
+          "Almacenamiento de logs en Elasticsearch",
+          "API para consulta de logs y anomalías detectadas",
+          "Generación de alertas para anomalías críticas"
+        ],
+        "casos_uso": [
+          "Monitoreo de seguridad para detectar intrusiones o actividades sospechosas.",
+          "Identificación temprana de errores o fallos en aplicaciones.",
+          "Optimización del rendimiento de sistemas detectando cuellos de botella.",
+          "Auditoría de sistemas y cumplimiento normativo.",
+          "Análisis de comportamiento de usuarios anómalo."
+        ],
+        "reglas_negocio": [
+          "Los logs deben tener un formato semi-estructurado para un preprocesamiento eficiente.",
+          "El umbral de anomalía es configurable.",
+          "El sistema debe ser capaz de reentrenar modelos periódicamente.",
+          "Se diferencian tipos de anomalías (ej. seguridad, rendimiento).",
+          "Retención de logs configurable en Elasticsearch."
+        ],
+        "por_que_ia": "Se utiliza IA (Machine Learning) para identificar patrones complejos y sutiles en los datos de logs que serían difíciles o imposibles de detectar mediante reglas manuales o análisis estadísticos simples, permitiendo la detección proactiva de incidentes.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Kafka",
+          "Elasticsearch",
+          "API de aplicaciones"
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 12,
+        "prerequisitos": [
+          "Experiencia sólida en Go y desarrollo de APIs.",
+          "Conocimientos de Python para ML y manipulación de datos.",
+          "Comprensión de arquitecturas basadas en microservicios y colas de mensajes.",
+          "Experiencia con Elasticsearch y bases de datos SQL.",
+          "Fundamentos de Machine Learning y detección de anomalías."
+        ],
+        "riesgos": [
+          "Complejidad en la integración Go-Python.",
+          "Rendimiento y escalabilidad del pipeline de procesamiento de logs.",
+          "Alta tasa de falsos positivos/negativos en la detección de anomalías.",
+          "Gestión y mantenimiento de modelos de ML en producción.",
+          "Volumen masivo de datos de logs y costos asociados de almacenamiento/procesamiento."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:02:00Z",
+        "hash_unicidad": "c3d4e5f678901234"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "ebfc9103e89a045e"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -12619,8 +13047,11 @@
     "f0a3b1c8d6e4f2a0",
     "b8a1d3e5f7c9a0b2",
     "e0f2a4c6b8d1e3f5",
-    "c1a0e7b5d9f3c8a2"
+    "c1a0e7b5d9f3c8a2",
+    "a1b2c3d4e5f67890",
+    "b2c3d4e5f6789012",
+    "c3d4e5f678901234"
   ],
-  "total_generados": 93,
-  "fecha_ultima_generacion": "2026-10-16T15:59:15.545303"
+  "total_generados": 96,
+  "fecha_ultima_generacion": "2026-10-16T19:28:43.144324"
 }
