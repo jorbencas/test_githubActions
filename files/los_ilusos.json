@@ -883,5 +883,29 @@
     "relevancia": 2,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "Las recomendaciones de Jaume Ripoll (La Reina Serpiente, Ciclo Jonás Trueba...) | Filmin",
+    "url": "https://www.youtube.com/watch?v=JDiP4VwXfRI",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-16T16:31:02.561817+00:00",
+    "medio": "Filmin",
+    "imagen": "https://i.ytimg.com/vi/JDiP4VwXfRI/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
+  },
+  {
+    "titulo": "Entrevista JONÁS TRUEBA: \"El cine sirve para hacer en una película lo que no te atreves en tu vida\"",
+    "url": "https://www.youtube.com/watch?v=o1Gxay-rh3Q",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-16T16:31:02.562800+00:00",
+    "medio": "elDiarioes",
+    "imagen": "https://i.ytimg.com/vi/o1Gxay-rh3Q/hqdefault.jpg",
+    "tipo": "entrevista",
+    "relevancia": 3,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
