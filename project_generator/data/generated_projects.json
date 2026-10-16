@@ -11973,6 +11973,149 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "be6c391fa961b2f2"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f0a3b1c8d6e4f2a0",
+        "titulo": "Monitor de Rendimiento de API con Alertas Inteligentes",
+        "descripcion_corta": "Servicio que monitoriza la latencia y errores de APIs externas, notificando anomalías con IA.",
+        "descripcion_detallada": "Desarrollar un sistema backend que consume endpoints de APIs configurables, mide su latencia y tasa de errores. Utiliza un modelo de IA para detectar patrones anómalos en el rendimiento que podrían indicar problemas. Envía notificaciones a través de varios canales (email, Slack) cuando se detectan anomalías o se superan umbrales predefinidos. La configuración de las APIs a monitorizar y los canales de notificación se gestionan a través de una API REST simple. Se enfoca en la resiliencia y la escalabilidad para manejar múltiples APIs simultáneamente.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "microservicio",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y de alto rendimiento para construir APIs con Python 3.7+, basado en tipado estándar de Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Proporciona validación automática de datos, serialización, documentación interactiva (Swagger UI/ReDoc) y soporte asíncrono para alta concurrencia."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Requests",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca HTTP simple y elegante para Python, facilitando el envío de peticiones HTTP.",
+              "version_sugerida": "2.31.0",
+              "url_docs": "https://requests.readthedocs.io/",
+              "por_que": "Esencial para interactuar con las APIs externas que necesitan ser monitorizadas de forma sencilla y robusta."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca de machine learning para Python, que incluye herramientas para clasificación, regresión, clustering y preprocesamiento.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://scikit-learn.org/stable/",
+              "por_que": "Permite implementar modelos de detección de anomalías (ej. Isolation Forest) sobre las métricas recolectadas para identificar patrones inusuales."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en anotaciones de tipo de Python.",
+              "version_sugerida": "2.4.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Se integra perfectamente con FastAPI para la validación de esquemas de entrada y salida, asegurando la integridad de los datos."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional de código abierto, conocido por su fiabilidad, robustez y rendimiento.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Almacena las métricas recolectadas, configuraciones de APIs y resultados de análisis, permitiendo consultas complejas y escalabilidad."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, facilitando la gestión de dependencias y la portabilidad."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Isolation Forest",
+              "categoria": "ia_ml",
+              "descripcion": "Algoritmo de machine learning para la detección de anomalías.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html",
+              "por_que": "Eficiente para detectar puntos de datos que son raros o inusuales en un conjunto de datos, ideal para métricas de rendimiento de API."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python que facilita la escritura de pruebas sencillas y escalables.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite crear tests robustos para la API, la lógica de monitorización y la detección de anomalías, con fixtures y plugins útiles."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Configuración dinámica de APIs a monitorizar",
+          "Monitorización de latencia y tasa de errores",
+          "Detección de anomalías basada en IA",
+          "Sistema de alertas multi-canal (email, Slack)",
+          "API REST para gestión de configuraciones",
+          "Dashboard básico de estado de APIs"
+        ],
+        "casos_uso": [
+          "Monitorear la disponibilidad y rendimiento de microservicios internos.",
+          "Alertar proactivamente a equipos de operaciones sobre degradación de servicios externos críticos.",
+          "Identificar patrones de uso inusuales o ataques de denegación de servicio (DoS) tempranos.",
+          "Proporcionar visibilidad centralizada del estado de salud de APIs clave.",
+          "Integrar con sistemas de ticketing para automatizar la creación de incidentes."
+        ],
+        "reglas_negocio": [
+          "La latencia promedio de una API no debe superar X ms en Y minutos.",
+          "La tasa de errores 5xx de una API no debe superar Z% en Y minutos.",
+          "Las anomalías detectadas por IA deben tener un umbral de confianza M.",
+          "Las notificaciones solo se enviarán si una anomalía persiste por N minutos.",
+          "Cada API monitorizada debe tener configurado al menos un canal de notificación."
+        ],
+        "por_que_ia": "Se utiliza IA (Isolation Forest) para detectar patrones de anomalías en las métricas de rendimiento (latencia, errores) que serían difíciles de identificar con reglas estáticas, permitiendo una detección más proactiva de problemas subyacentes o ataques.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo de APIs REST.",
+          "Comprensión de métricas de rendimiento de sistemas.",
+          "Fundamentos de machine learning para detección de anomalías.",
+          "Experiencia básica con bases de datos relacionales (SQL)."
+        ],
+        "riesgos": [
+          "Falsos positivos/negativos en la detección de anomalías por IA.",
+          "Sobrecarga del sistema monitor si se monitorizan demasiadas APIs con alta frecuencia.",
+          "Dificultad para ajustar los parámetros del modelo de IA a diferentes tipos de APIs.",
+          "Gestión de credenciales y autenticación para APIs externas seguras.",
+          "Fiabilidad de los canales de notificación externos (email, Slack)."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f0a3b1c8d6e4f2a0"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "d9cac6ca57f2c9fc"
+      }
     }
   ],
   "ultimos_hashes": [
@@ -12064,8 +12207,9 @@
     "f9a8b7c6d5e4f3a2",
     "c2c8b1a4d3e5f7a9",
     "f1a2b3c4d5e6f8a9",
-    "f8a6b1c0d4e2f7a9"
+    "f8a6b1c0d4e2f7a9",
+    "f0a3b1c8d6e4f2a0"
   ],
-  "total_generados": 89,
-  "fecha_ultima_generacion": "2026-10-16T02:55:29.992879"
+  "total_generados": 90,
+  "fecha_ultima_generacion": "2026-10-16T08:42:56.870847"
 }
