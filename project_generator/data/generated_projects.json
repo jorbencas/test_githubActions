@@ -13215,10 +13215,423 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "bfa95cbc0265afdc"
       }
+    },
+    {
+      "proyecto": {
+        "id": "1f4a7a4a9b2c1d0e",
+        "titulo": "Analizador de Sentimiento de Comentarios de Clientes",
+        "descripcion_corta": "API RESTful para analizar sentimiento de comentarios de clientes usando modelos de lenguaje.",
+        "descripcion_detallada": "Desarrollo de una API RESTful en Python que ingiere comentarios de clientes (ej. de encuestas, redes sociales) y devuelve un análisis de sentimiento (positivo, negativo, neutral) junto con una puntuación de confianza. Utiliza modelos pre-entrenados de Hugging Face para el análisis y FastAPI para la exposición de la API. Incluye endpoints para procesar texto individualmente o en lotes. Permite la integración con sistemas de gestión de clientes (CRM) o plataformas de análisis de datos.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python 3.7+ basado en type hints estándar de Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Rendimiento asíncrono, validación automática de datos con Pydantic, generación automática de documentación OpenAPI."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Transformers (Hugging Face)",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca para descargar y usar modelos de NLP pre-entrenados, incluyendo clasificadores de sentimiento.",
+              "version_sugerida": "4.30.0",
+              "url_docs": "https://huggingface.co/docs/transformers/index",
+              "por_que": "Proporciona acceso fácil a modelos SOTA para análisis de sentimiento sin necesidad de entrenarlos desde cero."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de ajustes de configuración con anotaciones de tipo de Python.",
+              "version_sugerida": "2.0.0",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Usado por FastAPI para la validación de esquemas de solicitud/respuesta, asegurando la integridad de los datos."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones dentro de contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la API y sus dependencias para un despliegue consistente en cualquier entorno y facilitar la ejecución de modelos de IA."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Clasificador de Sentimiento (BERT, RoBERTa)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de Transformers pre-entrenados para la tarea de clasificación de sentimiento.",
+              "version_sugerida": null,
+              "url_docs": "https://huggingface.co/models?pipeline_tag=text-classification&sort=downloads",
+              "por_que": "Ofrecen alta precisión para entender el tono emocional del texto del cliente."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de Python que facilita la escritura de pruebas simples y escalables.",
+              "version_sugerida": "7.0.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite crear pruebas unitarias y de integración para la API, asegurando su correcto funcionamiento y la fiabilidad del análisis de sentimiento."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis de sentimiento en texto.",
+          "Puntuación de confianza del sentimiento.",
+          "API RESTful con endpoints para texto único y lotes.",
+          "Validación de datos de entrada.",
+          "Documentación OpenAPI automática."
+        ],
+        "casos_uso": [
+          "Monitorizar la satisfacción del cliente en tiempo real.",
+          "Identificar áreas de mejora en productos/servicios.",
+          "Clasificar feedback de usuarios para priorización.",
+          "Automatizar la respuesta a comentarios negativos.",
+          "Analizar tendencias de opinión en redes sociales."
+        ],
+        "reglas_negocio": [
+          "La entrada debe ser texto válido.",
+          "El sentimiento se clasifica en positivo, negativo o neutral.",
+          "La API debe responder en menos de 500ms para peticiones individuales.",
+          "Los lotes de procesamiento no deben exceder 1000 comentarios.",
+          "Se debe manejar texto vacío o nulo adecuadamente."
+        ],
+        "por_que_ia": "Se utiliza IA (modelos de NLP pre-entrenados) para clasificar automáticamente el sentimiento del texto del cliente, lo cual es una tarea compleja que requiere comprensión del lenguaje natural.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "https://huggingface.co/models?pipeline_tag=text-classification"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimiento de Python y APIs RESTful.",
+          "Comprensión básica de Machine Learning y NLP.",
+          "Familiaridad con el uso de contenedores Docker."
+        ],
+        "riesgos": [
+          "La precisión del modelo puede variar según el dominio del texto.",
+          "La latencia puede ser alta para modelos muy grandes.",
+          "Manejo de idiomas distintos al inglés puede requerir modelos específicos.",
+          "Costos de infraestructura si se procesan grandes volúmenes.",
+          "Dependencia de librerías externas y sus actualizaciones."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "1f4a7a4a9b2c1d0e"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "98c7cfa300ffbb32"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "2a8b5c1d9e0f7a3b",
+        "titulo": "Optimizador de Rutas para Entregas Locales",
+        "descripcion_corta": "Aplicación web que optimiza rutas de entrega para múltiples destinos.",
+        "descripcion_detallada": "Una aplicación fullstack que permite a los usuarios ingresar una lista de direcciones de entrega y una ubicación de partida. Utiliza algoritmos de optimización (como el problema del viajante) para calcular la ruta más eficiente, minimizando distancia y tiempo. La interfaz web muestra la ruta en un mapa interactivo y permite guardar/exportar las rutas optimizadas. Orientada a pequeñas empresas de logística, repartidores o servicios de entrega.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "web",
+          "fullstack"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "javascript",
+          "frameworks": [
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Biblioteca de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Componentes reutilizables y un modelo declarativo para construir interfaces interactivas eficientes."
+            },
+            {
+              "nombre": "Express.js",
+              "categoria": "framework",
+              "descripcion": "Framework de aplicación web Node.js minimalista y flexible.",
+              "version_sugerida": "4.18.2",
+              "url_docs": "https://expressjs.com/",
+              "por_que": "Proporciona una base robusta para la API backend que maneja las solicitudes de optimización de rutas."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Leaflet",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca JavaScript de código abierto para mapas interactivos móviles.",
+              "version_sugerida": "1.9.0",
+              "url_docs": "https://leafletjs.com/",
+              "por_que": "Para visualizar la ruta optimizada en un mapa interactivo en el frontend."
+            },
+            {
+              "nombre": "jsprit",
+              "categoria": "libreria",
+              "descripcion": "Kit de herramientas de optimización de vehículos (VRP) para Java.",
+              "version_sugerida": "1.7.0",
+              "url_docs": "https://github.com/jsprit/jsprit",
+              "por_que": "Implementa algoritmos para resolver el problema del viajante y el problema de ruteo de vehículos (VRP)."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript divertido, fácil y unificado.",
+              "version_sugerida": "29.0.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Para escribir pruebas unitarias y de integración tanto para el frontend como para el backend."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Ingreso de múltiples direcciones de entrega.",
+          "Optimización de rutas usando algoritmos VRP/TSP.",
+          "Visualización de rutas en mapa interactivo.",
+          "Cálculo de distancia y tiempo estimado.",
+          "Guardado y exportación de rutas."
+        ],
+        "casos_uso": [
+          "Repartidores de última milla.",
+          "Servicios de mensajería y entrega.",
+          "Empresas de mantenimiento con visitas a domicilio.",
+          "Planificación de rutas de ventas.",
+          "Logística personal para múltiples recados."
+        ],
+        "reglas_negocio": [
+          "Se requiere al menos una dirección de destino.",
+          "La ubicación de partida es opcional (se asume la de la última entrega).",
+          "El número máximo de destinos por optimización es 50.",
+          "Las direcciones deben ser geocodificables.",
+          "La ruta optimizada debe ser un camino continuo sin cruces innecesarios."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "https://leafletjs.com/",
+          "https://github.com/jsprit/jsprit"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de HTML, CSS y JavaScript.",
+          "Familiaridad con React y Node.js/Express.",
+          "Comprensión de algoritmos de optimización (TSP/VRP)."
+        ],
+        "riesgos": [
+          "La precisión de la geocodificación puede afectar la ruta.",
+          "Los algoritmos de optimización pueden ser computacionalmente intensivos para muchas paradas.",
+          "Dependencia de APIs de mapas externas (si no se usa Leaflet localmente).",
+          "La interfaz de usuario puede volverse compleja con muchas opciones.",
+          "jsprit es una librería Java, requiere adaptación o buscar alternativa JS."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:05:00Z",
+        "hash_unicidad": "2a8b5c1d9e0f7a3b"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "98c7cfa300ffbb32"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "3c1d9e0f7a4b2a8b",
+        "titulo": "Sistema de Gestión de Tickets de Soporte Técnico con IA",
+        "descripcion_corta": "Plataforma web para gestionar tickets de soporte con categorización y priorización automática por IA.",
+        "descripcion_detallada": "Desarrollo de una aplicación web fullstack donde los usuarios pueden crear tickets de soporte técnico. El sistema utiliza IA para analizar el contenido del ticket (descripción, asunto) y categorizarlo automáticamente (ej. hardware, software, red) y asignarle una prioridad inicial (baja, media, alta). Los agentes de soporte pueden ver los tickets, actualizarlos y resolverlos. Incluye un panel de administración para la gestión de usuarios y categorías.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de Node.js para construir aplicaciones del lado del servidor eficientes, confiables y escalables.",
+              "version_sugerida": "10.0.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Arquitectura modular inspirada en Angular, uso de TypeScript, soporte para microservicios y buena integración con herramientas de IA."
+            },
+            {
+              "nombre": "Next.js",
+              "categoria": "framework",
+              "descripcion": "Framework de React que permite la renderización en el servidor, generación de sitios estáticos y más.",
+              "version_sugerida": "13.0.0",
+              "url_docs": "https://nextjs.org/",
+              "por_que": "Proporciona una experiencia de desarrollo moderna para el frontend, con SSR y optimizaciones de rendimiento."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "TypeORM",
+              "categoria": "libreria",
+              "descripcion": "ORM para TypeScript y JavaScript que permite conectar a diversas bases de datos.",
+              "version_sugerida": "0.2.45",
+              "url_docs": "https://typeorm.io/",
+              "por_que": "Facilita la interacción con la base de datos relacional de forma segura y estructurada usando tipos de TypeScript."
+            },
+            {
+              "nombre": "LangChain.js",
+              "categoria": "libreria",
+              "descripcion": "Framework para simplificar la creación de aplicaciones impulsadas por LLMs.",
+              "version_sugerida": "0.0.150",
+              "url_docs": "https://js.langchain.com/",
+              "por_que": "Orquesta llamadas a LLMs, manejo de prompts y cadenas para la clasificación y priorización de tickets."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "bases_datos",
+              "descripcion": "Sistema de gestión de bases de datos objeto-relacional de código abierto.",
+              "version_sugerida": "15.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto, escalable y soporta tipos de datos JSONB para almacenar metadatos de tickets o configuraciones de IA."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker & Docker Compose",
+              "categoria": "infraestructura",
+              "descripcion": "Contenedores para el desarrollo, envío y ejecución de aplicaciones; Compose para orquestar multi-contenedor.",
+              "version_sugerida": "24.0.0 / 2.20.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura entornos consistentes para backend, frontend, base de datos y servicios de IA/ML."
+            },
+            {
+              "nombre": "Kubernetes (opcional)",
+              "categoria": "infraestructura",
+              "descripcion": "Orquestador de contenedores para automatizar el despliegue, escalado y gestión de aplicaciones.",
+              "version_sugerida": "1.27",
+              "url_docs": "https://kubernetes.io/docs/home/",
+              "por_que": "Para escalar la aplicación y gestionar el despliegue en producción de forma robusta."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Clasificación y Priorización de Tickets",
+              "categoria": "ia_ml",
+              "descripcion": "Uso de LLMs para entender el texto del ticket y asignarlo a una categoría y nivel de prioridad.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Automatiza tareas manuales repetitivas, mejora el tiempo de respuesta inicial y la eficiencia del equipo de soporte."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Vitest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing rápido para JavaScript y TypeScript, compatible con la API de Jest.",
+              "version_sugerida": "1.0.0",
+              "url_docs": "https://vitest.dev/",
+              "por_que": "Ideal para el frontend Next.js y backend NestJS, ofreciendo velocidad y compatibilidad."
+            },
+            {
+              "nombre": "Cypress",
+              "categoria": "testing",
+              "descripcion": "Herramienta de testing end-to-end (E2E) para la web.",
+              "version_sugerida": "12.0.0",
+              "url_docs": "https://www.cypress.io/",
+              "por_que": "Para pruebas E2E completas de la aplicación web, simulando interacciones de usuario reales."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "OpenAI API",
+              "categoria": "otros",
+              "descripcion": "Interfaz de programación de aplicaciones para acceder a modelos de lenguaje avanzados de OpenAI.",
+              "version_sugerida": "1.0.0 (API)",
+              "url_docs": "https://platform.openai.com/docs/api-reference",
+              "por_que": "Potencia la clasificación y priorización de tickets mediante el uso de modelos como GPT-4 o GPT-3.5 Turbo."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de tickets de soporte.",
+          "Categorización automática de tickets por IA.",
+          "Priorización automática de tickets por IA.",
+          "Panel de administración para agentes y categorías.",
+          "Historial de actualizaciones y resolución de tickets."
+        ],
+        "casos_uso": [
+          "Centralizar la recepción de solicitudes de soporte técnico.",
+          "Reducir el tiempo de asignación de tickets al personal adecuado.",
+          "Mejorar la eficiencia del equipo de soporte mediante priorización inteligente.",
+          "Obtener métricas sobre tipos de problemas y tiempos de resolución.",
+          "Escalar el soporte a medida que crece la base de usuarios."
+        ],
+        "reglas_negocio": [
+          "Los tickets deben tener un título y una descripción.",
+          "Las categorías y prioridades deben ser predefinidas o generadas por IA.",
+          "Solo los usuarios con rol de 'agente' pueden asignar o resolver tickets.",
+          "El sistema debe registrar todas las modificaciones de un ticket.",
+          "Se debe notificar al usuario cuando su ticket sea resuelto."
+        ],
+        "por_que_ia": "La IA (LLMs a través de LangChain y OpenAI API) se utiliza para interpretar el lenguaje natural del contenido del ticket, permitiendo la clasificación automática de categorías y la asignación de prioridades, tareas que tradicionalmente requieren intervención manual y son propensas a errores o inconsistencias.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "https://js.langchain.com/",
+          "https://platform.openai.com/docs/api-reference"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia sólida con TypeScript, Node.js y frameworks modernos (NestJS, Next.js).",
+          "Conocimiento de bases de datos relacionales (PostgreSQL) y ORMs.",
+          "Comprensión de arquitecturas de aplicaciones web y APIs.",
+          "Familiaridad con el uso de APIs de IA (OpenAI) y librerías como LangChain.",
+          "Experiencia con Docker y principios de DevOps."
+        ],
+        "riesgos": [
+          "La precisión de la IA puede depender fuertemente de la calidad de los prompts y del modelo elegido.",
+          "Costos asociados al uso de APIs de IA externas (OpenAI).",
+          "La gestión de estados y flujos de trabajo complejos de tickets puede ser desafiante.",
+          "Escalabilidad de la base de datos y la aplicación bajo alta carga.",
+          "Seguridad de los datos de los tickets y la autenticación de usuarios."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:10:00Z",
+        "hash_unicidad": "3c1d9e0f7a4b2a8b"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "98c7cfa300ffbb32"
+      }
     }
   ],
   "ultimos_hashes": [
-    "68eac8153d33f321",
     "671746088acf77e5",
     "0b7c4cc679e2db3a",
     "92a69fe916bd274d",
@@ -13315,8 +13728,11 @@
     "b2c3d4e5f6789012",
     "c3d4e5f678901234",
     "b1c2d3e4f5a67890",
-    "c1d2e3f4a5b67890"
+    "c1d2e3f4a5b67890",
+    "1f4a7a4a9b2c1d0e",
+    "2a8b5c1d9e0f7a3b",
+    "3c1d9e0f7a4b2a8b"
   ],
-  "total_generados": 98,
-  "fecha_ultima_generacion": "2026-10-17T08:13:38.298833"
+  "total_generados": 101,
+  "fecha_ultima_generacion": "2026-10-17T14:52:22.408549"
 }
