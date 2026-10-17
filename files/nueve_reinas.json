@@ -2362,5 +2362,29 @@
     "relevancia": 3,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Netflix ya tiene su 'Widow's Bay': la miniserie de terror que es número 1 en España y en otros 80 países",
+    "url": "https://www.cinemania.es/cinemania/series/ver-netflix-bajo-superficie-miniserie-terror-mas-vista-espana-80-paises_7048029_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-17T20:27:44.889236+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "David Fincher rompe con Netflix tras 13 años: el verdadero motivo está en su nueva película con Brad Pitt",
+    "url": "https://www.cinemania.es/cinemania/noticias/david-fincher-rompe-netflix-cliff-booth-brad-pitt_7049656_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-17T20:27:44.889272+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
