@@ -907,5 +907,17 @@
     "relevancia": 3,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "Jonás Trueba (Director de \"Los Ilusos\") en Cines Zoco Majadahonda",
+    "url": "https://www.youtube.com/watch?v=WuBShRk6aX4",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-17T04:07:14.336558+00:00",
+    "medio": "Cines Zoco Majadahonda",
+    "imagen": "https://i.ytimg.com/vi/WuBShRk6aX4/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
