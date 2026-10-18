@@ -14039,12 +14039,430 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "0569fa09c2ae3baa"
       }
+    },
+    {
+      "proyecto": {
+        "id": "3e6f8a1b-2c4d-4e6f-8a1b-2c4d4e6f8a1b",
+        "titulo": "Gestor de Rutas de Entrega Optimizado",
+        "descripcion_corta": "App web para optimizar rutas de entrega usando algoritmos y visualización en mapa.",
+        "descripcion_detallada": "Desarrollo de una aplicación web fullstack que permite a empresas de logística planificar y optimizar rutas de entrega para múltiples vehículos. Utiliza algoritmos de optimización (como el del viajante) para minimizar distancias y tiempos, integrándose con APIs de mapas para visualización y seguimiento en tiempo real. Incluye gestión de flotas, asignación de tareas y reportes de eficiencia. Orientado a pequeñas y medianas empresas de reparto.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "fullstack"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Backend web framework moderno y rápido para construir APIs.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Alto rendimiento asíncrono, validación automática de datos con Pydantic, generación de documentación OpenAPI."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario interactivas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Componentización de la UI, manejo eficiente del estado, gran ecosistema y comunidad."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Google Maps API",
+              "categoria": "libreria",
+              "descripcion": "Servicios de mapas de Google para geolocalización, rutas y visualización.",
+              "version_sugerida": null,
+              "url_docs": "https://developers.google.com/maps",
+              "por_que": "Proporciona la funcionalidad de mapas, cálculo de distancias y optimización de rutas."
+            },
+            {
+              "nombre": "OR-Tools",
+              "categoria": "libreria",
+              "descripcion": "Suite de software de Google para optimización de operaciones.",
+              "version_sugerida": "9.8.0",
+              "url_docs": "https://developers.google.com/optimization",
+              "por_que": "Implementa algoritmos avanzados para problemas de ruteo y optimización combinatoria."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos con anotaciones de tipo de Python.",
+              "version_sugerida": "2.5.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para FastAPI para la validación automática de datos de entrada y salida."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema gestor de bases de datos relacional objeto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto, escalable, soporta tipos de datos geoespaciales (PostGIS) si se requiere más adelante, y transacciones ACID."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.6",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita el empaquetado de la aplicación y sus dependencias, asegurando entornos consistentes."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir tests claros y concisos, con un rico sistema de fixtures y plugins."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Optimización de rutas multi-vehículo",
+          "Visualización interactiva de rutas en mapa",
+          "Gestión de puntos de entrega y prioridades",
+          "Asignación automática de tareas a conductores",
+          "Seguimiento de progreso de entrega",
+          "Generación de reportes de eficiencia"
+        ],
+        "casos_uso": [
+          "Empresa de mensajería optimizando sus entregas diarias",
+          "Servicio de catering planificando rutas de reparto",
+          "Flota de vehículos de mantenimiento coordinando visitas",
+          "Comercio electrónico gestionando última milla",
+          "Logística de eventos planificando movimientos"
+        ],
+        "reglas_negocio": [
+          "Prioridad de entregas urgentes sobre estándar",
+          "Límite de horas de conducción por conductor",
+          "Capacidad máxima de carga por vehículo",
+          "Ventanas horarias de entrega específicas",
+          "Cálculo de ruta basado en tráfico en tiempo real (si la API lo soporta)"
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Google Maps API",
+          "OR-Tools"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos de Python y JavaScript",
+          "Comprensión de algoritmos de optimización",
+          "Familiaridad con APIs REST",
+          "Nociones de bases de datos relacionales"
+        ],
+        "riesgos": [
+          "Complejidad del algoritmo de optimización",
+          "Costos asociados a APIs de mapas",
+          "Manejo de datos geoespaciales imprecisos",
+          "Escalabilidad para grandes volúmenes de rutas",
+          "Integración con sistemas de terceros"
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "a8b1c2d3e4f5a6b7"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "1c2131e8107cbcac"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "4f5e6d7c-8b9a-0123-4567-890123456789",
+        "titulo": "Asistente de Escritura IA para Correos Electrónicos",
+        "descripcion_corta": "Bot de Telegram que ayuda a redactar correos electrónicos profesionales usando IA.",
+        "descripcion_detallada": "Un bot interactivo para Telegram que asiste a los usuarios en la redacción de correos electrónicos. El usuario proporciona el propósito del correo, el tono deseado (formal, informal, persuasivo, etc.) y puntos clave. El bot utiliza un modelo de lenguaje grande (LLM) para generar borradores de correos completos, que el usuario puede refinar o usar directamente. Soporta la personalización del estilo y la longitud del texto.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "bot",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "python-telegram-bot",
+              "categoria": "framework",
+              "descripcion": "Wrapper de Python para la API de bots de Telegram.",
+              "version_sugerida": "20.7",
+              "url_docs": "https://python-telegram-bot.org/",
+              "por_que": "Simplifica la interacción con la API de Telegram para crear y gestionar el bot."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "OpenAI Python Client",
+              "categoria": "libreria",
+              "descripcion": "Cliente oficial de Python para la API de OpenAI.",
+              "version_sugerida": "1.0.0",
+              "url_docs": "https://github.com/openai/openai-python",
+              "por_que": "Permite la integración fácil y segura con los modelos de generación de lenguaje de OpenAI."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Contenedores para empaquetar y ejecutar la aplicación.",
+              "version_sugerida": "24.0.6",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura un entorno de ejecución consistente y facilita el despliegue."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "GPT-3.5 Turbo",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo de lenguaje conversacional de OpenAI.",
+              "version_sugerida": "gpt-3.5-turbo",
+              "url_docs": "https://platform.openai.com/docs/models/gpt-3-5",
+              "por_que": "Excelente para generación de texto coherente y adaptable a diferentes estilos y tonos."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir pruebas unitarias y de integración para la lógica del bot y las llamadas a la API."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Generación de borradores de correo por propósito",
+          "Ajuste de tono (formal, informal, persuasivo)",
+          "Especificación de puntos clave a incluir",
+          "Personalización de longitud del texto",
+          "Edición y refinamiento de borradores generados",
+          "Historial básico de interacciones"
+        ],
+        "casos_uso": [
+          "Profesional redactando correos de seguimiento",
+          "Estudiante pidiendo información o referencias",
+          "Emprendedor escribiendo correos de ventas",
+          "Usuario buscando ayuda con la redacción formal",
+          "Persona que necesita ayuda para expresarse claramente"
+        ],
+        "reglas_negocio": [
+          "El bot no almacena conversaciones a largo plazo por defecto",
+          "Se limita el número de peticiones por usuario para controlar costos",
+          "El usuario debe aceptar los términos de uso de la API de IA",
+          "Los borradores generados son sugerencias, la responsabilidad final es del usuario",
+          "Tono por defecto es 'neutral/profesional' si no se especifica"
+        ],
+        "por_que_ia": "Utilización de un LLM (GPT-3.5 Turbo) para entender la intención del usuario y generar texto de correo electrónico natural y coherente, adaptándose a diferentes estilos y requerimientos.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "Telegram Bot API",
+          "OpenAI API"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Python",
+          "Comprensión de APIs REST",
+          "Cuenta de OpenAI con API key",
+          "Token de bot de Telegram"
+        ],
+        "riesgos": [
+          "Costos de la API de OpenAI",
+          "Calidad de la generación de texto puede variar",
+          "Seguridad de la API key",
+          "Manejo de errores de la API de Telegram y OpenAI",
+          "Interpretación incorrecta de la intención del usuario"
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tips_telegram",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "c2d3e4f5a6b7c8d9"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "1c2131e8107cbcac"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "5a6b7c8d-9e0f-1234-5678-901234567890",
+        "titulo": "Monitor de Rendimiento de APIs y Alertas",
+        "descripcion_corta": "Servicio de monitoreo que verifica la disponibilidad y latencia de APIs externas.",
+        "descripcion_detallada": "Un microservicio (o aplicación web) que periódicamente consulta un conjunto de URLs de APIs externas para verificar su disponibilidad (HTTP status codes) y latencia. Si una API falla o su respuesta excede un umbral de latencia configurado, el sistema genera una alerta. Las alertas se pueden enviar a través de diferentes canales (email, Slack, webhooks). Incluye un dashboard para visualizar el estado histórico y actual de las APIs monitoreadas.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "microservicio",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web HTTP de alto rendimiento para Go.",
+              "version_sugerida": "1.19.1",
+              "url_docs": "https://gin-gonic.com/docs/",
+              "por_que": "Rendimiento optimizado para el manejo de múltiples peticiones concurrentes y enrutamiento eficiente."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "net/http",
+              "categoria": "libreria",
+              "descripcion": "Paquete estándar de Go para clientes HTTP.",
+              "version_sugerida": null,
+              "url_docs": "https://pkg.go.dev/net/http",
+              "por_que": "Utilizado para realizar las peticiones a las APIs externas de forma eficiente y nativa."
+            },
+            {
+              "nombre": "Go-cron",
+              "categoria": "libreria",
+              "descripcion": "Librería para programar tareas periódicas en Go.",
+              "version_sugerida": "1.1.1",
+              "url_docs": "https://github.com/robfig/cron",
+              "por_que": "Permite ejecutar las verificaciones de las APIs en intervalos de tiempo definidos."
+            },
+            {
+              "nombre": "Slack SDK for Go",
+              "categoria": "libreria",
+              "descripcion": "SDK oficial de Slack para Go.",
+              "version_sugerida": "1.17.0",
+              "url_docs": "https://github.com/slack-go/slack",
+              "por_que": "Facilita el envío de notificaciones de alerta a canales de Slack."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "Redis",
+              "categoria": "base_datos",
+              "descripcion": "Almacén de datos en memoria.",
+              "version_sugerida": "7.2",
+              "url_docs": "https://redis.io/docs/",
+              "por_que": "Se usa para almacenar temporalmente el estado de las APIs, contadores de errores y para habilitar el pub/sub para alertas en tiempo real."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Contenedores para empaquetar la aplicación y sus dependencias.",
+              "version_sugerida": "24.0.6",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la portabilidad y consistencia del entorno de ejecución del microservicio."
+            },
+            {
+              "nombre": "Prometheus",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de monitoreo y alertas.",
+              "version_sugerida": "2.47.1",
+              "url_docs": "https://prometheus.io/docs/",
+              "por_que": "Recopila métricas (latencia, status codes) expuestas por el servicio para visualización y alertas avanzadas."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go Testing Package",
+              "categoria": "testing",
+              "descripcion": "Framework de testing estándar de Go.",
+              "version_sugerida": null,
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Proporciona las herramientas básicas para escribir pruebas unitarias y de integración en Go."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Grafana",
+              "categoria": "otros",
+              "descripcion": "Plataforma de análisis y visualización de métricas.",
+              "version_sugerida": "10.2.1",
+              "url_docs": "https://grafana.com/docs/",
+              "por_que": "Visualiza las métricas recolectadas por Prometheus, creando dashboards del estado de las APIs."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Verificación periódica de URLs de API",
+          "Medición de latencia de respuesta",
+          "Detección de errores HTTP (4xx, 5xx)",
+          "Configuración de umbrales de latencia",
+          "Sistema de alertas (email, Slack, webhook)",
+          "Dashboard de estado y historial"
+        ],
+        "casos_uso": [
+          "Monitorear la disponibilidad de microservicios internos",
+          "Verificar el estado de APIs de terceros críticas (ej. pasarelas de pago)",
+          "Alertar al equipo de operaciones ante caídas de servicios",
+          "Evaluar el rendimiento de APIs en diferentes regiones",
+          "Mantener un registro histórico de la salud de los servicios"
+        ],
+        "reglas_negocio": [
+          "El intervalo de monitoreo es configurable (ej. cada 1 minuto)",
+          "Se requiere un número mínimo de fallos consecutivos para disparar alerta",
+          "Los umbrales de latencia son configurables por API",
+          "Las notificaciones se envían a canales/usuarios predefinidos",
+          "Se registra la hora exacta de cada verificación y alerta"
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "APIs externas a monitorear",
+          "Slack API (para notificaciones)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Go",
+          "Comprensión de protocolos HTTP",
+          "Experiencia con Redis",
+          "Familiaridad con herramientas de monitoreo (Prometheus, Grafana)",
+          "Configuración de notificaciones (email, Slack)"
+        ],
+        "riesgos": [
+          "Falsos positivos/negativos en alertas",
+          "Sobrecarga del sistema de monitoreo si hay muchas APIs o alta frecuencia",
+          "Configuración compleja de reglas de alerta",
+          "Dependencia de la disponibilidad de los canales de notificación",
+          "Seguridad al almacenar credenciales de APIs externas"
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "d3e4f5a6b7c8d9e0"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "1c2131e8107cbcac"
+      }
     }
   ],
   "ultimos_hashes": [
-    "f1793359d3a271b4",
-    "4a1d08e83c26a7f0",
-    "b9f8e7d6c5a1b2c3",
     "2a6d9f0b1c3e4a5b",
     "b1a0c2d3e4f56789",
     "e1f0d9c8b7a65432",
@@ -14141,8 +14559,11 @@
     "3c1d9e0f7a4b2a8b",
     "3a1b2c3d4e5f6789",
     "4f5e6d7c8b9a0123",
-    "5a6b7c8d9e0f1234"
+    "5a6b7c8d9e0f1234",
+    "a8b1c2d3e4f5a6b7",
+    "c2d3e4f5a6b7c8d9",
+    "d3e4f5a6b7c8d9e0"
   ],
-  "total_generados": 104,
-  "fecha_ultima_generacion": "2026-10-18T02:48:11.171281"
+  "total_generados": 107,
+  "fecha_ultima_generacion": "2026-10-18T08:30:40.155174"
 }
