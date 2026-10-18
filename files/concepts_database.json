@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 158,
+    "total_concepts": 159,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-10-18T12:25:43.158238"
+    "last_scraped": "2026-10-18T16:21:19.631567"
   },
   "concepts": [
     {
@@ -2940,6 +2940,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-10-13T22:12:05.396154"
+    },
+    {
+      "title": "Snow UI: un framework de interfaces en Rust que ve la UI como un mundo de objetos",
+      "summary": "Rust ya tiene unos cuantos frameworks de interfaz gráfica (Iced, egui, Slint, Dioxus, Leptos), y a finales de septiembre ha aparecido otro:Snow UI. Su versión 0.0.1 se publicó en crates.io el 27 de se",
+      "explanation": "Rust ya tiene unos cuantos frameworks de interfaz gráfica (Iced, egui, Slint, Dioxus, Leptos), y a finales de septiembre ha aparecido otro:Snow UI. Su versión 0.0.1 se publicó en crates.io el 27 de septiembre de 2026 y el propio README resume el estado del proyecto con una frase sin adornos: «Current status: It works, initially, on desktop and web». Funciona, de momento, en escritorio y en web. Con esa versión nadie debería montar un producto encima. Aun así, la propuesta de diseño es distinta a la de sus competidores y merece una lectura con calma.Qué es Snow UI Es un framework de interfaces escrito en Rust que describe la pantalla con la propia sintaxis del lenguaje, sin HTML, sin JSX y sin un lenguaje de marcado aparte. Lo desarrolla una sola persona, que firma comoclia, con licencia Apache-2.0, edición 2024 de Rust y requisito de Rust 1.96. En el repositorio aparece un único producto que lo usa, la web del propio autor (clia.cc). Las plataformas objetivo son Windows, macOS, Linux, Android, iOS y web. Conviene leer esa lista como una intención y no como una garantía: el README solo da por funcionando escritorio y web, y los móviles siguen sin estar en la frase de estado.La idea: la interfaz como proyección de un mundo virtual",
+      "code_example": "use snow_ui::prelude::*;\n\npub fn world() -> World {\n    World {\n        root: obj!(Board {\n            width: VIEWPORT_WIDTH,\n            height: VIEWPORT_HEIGHT,\n            h_align: HAlign::Center,\n            v_align: VAlign::Middle,\n            children: list![Card {\n                children: list![\n                    Row { children: list![Text { text: \"Clock Example ?\" }] },\n                    Row { children: list![TextClock { format: \"%H:%M:%S\" }] },\n                ],\n            }],\n        }),\n        ..default()\n    }\n}\n\n#[cfg(not(target_arch = \"wasm32\"))]\nfn main() {\n    snow_ui::launch(world);\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "interfaces"
+      ],
+      "cat": "interfaces",
+      "scraped_at": "2026-10-18T16:20:42.462672"
     }
   ]
 }
