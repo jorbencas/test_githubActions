@@ -13629,12 +13629,419 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "98c7cfa300ffbb32"
       }
+    },
+    {
+      "proyecto": {
+        "id": "3a1b2c3d4e5f6789",
+        "titulo": "Sistema de Gestión de Incidencias con IA",
+        "descripcion_corta": "Plataforma web para registrar, priorizar y resolver incidencias técnicas, con IA para categorización automática.",
+        "descripcion_detallada": "Desarrollo de una aplicación web full-stack para la gestión de incidencias. Los usuarios podrán registrar nuevos tickets, asignar prioridades, realizar seguimiento del estado y añadir comentarios. Se integrará un modelo de IA para clasificar automáticamente el tipo de incidencia y sugerir técnicos responsables basándose en el historial y la descripción. Incluye notificaciones por email y un dashboard para visualizar métricas clave.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python, basado en Pydantic y tipado estándar.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece alto rendimiento asíncrono, validación de datos automática y generación de documentación OpenAPI interactiva."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario interactivas y declarativas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear componentes reutilizables y una experiencia de usuario fluida y reactiva en el frontend."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "Toolkit SQL y ORM para Python, diseñado para ser eficiente y fácil de usar.",
+              "version_sugerida": "2.0.20",
+              "url_docs": "https://www.sqlalchemy.org/",
+              "por_que": "Proporciona una abstracción potente y flexible para interactuar con la base de datos relacional."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestor de configuraciones con anotaciones de tipo de Python.",
+              "version_sugerida": "2.4.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para FastAPI, valida datos de entrada y salida, asegurando la integridad de la API."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca para machine learning en Python, con herramientas eficientes para análisis predictivo.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://scikit-learn.org/",
+              "por_que": "Facilita la implementación de modelos de clasificación para categorizar incidencias automáticamente."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos objeto-relacional de código abierto, muy robusto.",
+              "version_sugerida": "15.4",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Ofrece fiabilidad, soporte para tipos de datos avanzados (JSONB) y escalabilidad para almacenar incidencias y datos de usuarios."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la aplicación y sus dependencias, asegurando un entorno de desarrollo y producción consistente."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Clasificación de Texto",
+              "categoria": "ia_ml",
+              "descripcion": "Uso de modelos de Machine Learning para asignar categorías a incidencias basadas en su texto.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Automatiza la asignación de tipo de incidencia y el posible técnico responsable, reduciendo tiempos de respuesta."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing popular para Python que facilita la escritura de tests sencillos y escalables.",
+              "version_sugerida": "7.4.2",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Simplifica la creación de tests unitarios y de integración para la API y la lógica de negocio."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro y visualización de incidencias",
+          "Asignación automática de tipo y responsable",
+          "Seguimiento de estado y comentarios",
+          "Dashboard de métricas",
+          "Notificaciones por email"
+        ],
+        "casos_uso": [
+          "Un técnico registra una nueva incidencia de software.",
+          "El sistema clasifica automáticamente la incidencia como 'Bug' y la asigna al equipo de desarrollo.",
+          "Un usuario final reporta un problema de acceso.",
+          "La IA sugiere que la incidencia es de 'Permisos' y la reenvía al equipo de IT.",
+          "Un gestor revisa el dashboard para ver el volumen de incidencias abiertas."
+        ],
+        "reglas_negocio": [
+          "Las incidencias deben tener un título y una descripción.",
+          "Solo los usuarios autenticados pueden registrar incidencias.",
+          "La prioridad se puede establecer manualmente o ser sugerida por la IA.",
+          "Las notificaciones se envían al responsable asignado y al creador de la incidencia.",
+          "El estado de una incidencia solo puede ser modificado por personal autorizado."
+        ],
+        "por_que_ia": "Se utiliza IA (clasificación de texto con Scikit-learn) para automatizar la categorización de incidencias y sugerir asignaciones, optimizando el flujo de trabajo y reduciendo el tiempo de resolución.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "API de OpenAI (opcional para modelos más avanzados)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y JavaScript.",
+          "Comprensión de APIs RESTful.",
+          "Bases de desarrollo web (HTML, CSS).",
+          "Familiaridad con control de versiones (Git)."
+        ],
+        "riesgos": [
+          "La precisión de la clasificación de IA puede variar con datos limitados.",
+          "La integración entre frontend y backend puede ser compleja.",
+          "La gestión de estados y notificaciones puede volverse difícil de escalar.",
+          "La seguridad de los datos de las incidencias es crítica."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "3a1b2c3d4e5f6789"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "0569fa09c2ae3baa"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "4f5e6d7c8b9a0123",
+        "titulo": "Analizador de Sentimiento de Comentarios de Clientes",
+        "descripcion_corta": "API REST que analiza el sentimiento de texto de comentarios de clientes usando modelos de lenguaje.",
+        "descripcion_detallada": "Se desarrollará una API RESTful en Go que reciba texto (comentarios de clientes, reseñas, etc.) y devuelva una puntuación de sentimiento (positivo, negativo, neutro) y una explicación del análisis. Se utilizará un modelo de lenguaje pre-entrenado para la tarea de análisis de sentimiento. La API será escalable y robusta, pensada para integrarse con plataformas de e-commerce o redes sociales.",
+        "nivel": "senior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "microservicio"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web HTTP de alto rendimiento para Go.",
+              "version_sugerida": "1.20.2",
+              "url_docs": "https://gin-gonic.com/",
+              "por_que": "Proporciona un enrutamiento rápido y un middleware robusto, ideal para construir APIs eficientes."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Transformers (Hugging Face)",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca para modelos de Transformers, que facilita el uso de modelos pre-entrenados.",
+              "version_sugerida": "4.33.1",
+              "url_docs": "https://huggingface.co/docs/transformers/index",
+              "por_que": "Permite cargar y utilizar modelos de lenguaje avanzados para análisis de sentimiento de forma sencilla."
+            },
+            {
+              "nombre": "GORM",
+              "categoria": "libreria",
+              "descripcion": "ORM (Object Relational Mapper) completo para Go con soporte para varios backends de bases de datos.",
+              "version_sugerida": "1.25.4",
+              "url_docs": "https://gorm.io/",
+              "por_que": "Simplifica la interacción con la base de datos para almacenar y recuperar análisis de sentimiento si es necesario."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "Redis",
+              "categoria": "base_datos",
+              "descripcion": "Almacén de estructuras de datos en memoria de código abierto.",
+              "version_sugerida": "7.2.0",
+              "url_docs": "https://redis.io/docs/",
+              "por_que": "Se usará para caching de resultados de análisis frecuentes y como broker de mensajes si se necesita desacoplar el procesamiento."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la portabilidad y reproducibilidad del servicio, facilitando el despliegue y la gestión."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Análisis de Sentimiento",
+              "categoria": "ia_ml",
+              "descripcion": "Clasificación de texto para determinar la polaridad emocional (positiva, negativa, neutra).",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Proporciona insights automáticos sobre la percepción del cliente, permitiendo acciones rápidas."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Go Testing Package",
+              "categoria": "testing",
+              "descripcion": "El paquete estándar de Go para escribir pruebas unitarias y de benchmarking.",
+              "version_sugerida": null,
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Permite escribir pruebas robustas para la API y la lógica de procesamiento de lenguaje natural de forma nativa."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Endpoint POST para recibir texto.",
+          "Análisis de sentimiento en tiempo real.",
+          "Retorno de sentimiento (positivo/negativo/neutro) y score.",
+          "Explicación textual del análisis (opcional).",
+          "Caché para consultas repetidas."
+        ],
+        "casos_uso": [
+          "Una plataforma de e-commerce envía reseñas de productos para análisis.",
+          "Una red social analiza el sentimiento de los tweets sobre una marca.",
+          "Una empresa de encuestas procesa respuestas abiertas para medir satisfacción.",
+          "Monitorización de la reputación online en tiempo real.",
+          "Identificación temprana de crisis de reputación."
+        ],
+        "reglas_negocio": [
+          "La API debe responder en menos de 500ms para el 95% de las peticiones.",
+          "El texto de entrada no debe exceder los 5000 caracteres.",
+          "El modelo de IA debe ser actualizado periódicamente.",
+          "Los resultados del análisis se almacenarán en caché por 1 hora.",
+          "Se registrarán logs de todas las peticiones y respuestas."
+        ],
+        "por_que_ia": "Se utiliza un modelo de lenguaje pre-entrenado (via Hugging Face Transformers) para realizar análisis de sentimiento de forma precisa y eficiente sobre el texto proporcionado.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "Modelos de Hugging Face Hub"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 3,
+        "prerequisitos": [
+          "Experiencia sólida con Go.",
+          "Comprensión de arquitecturas de microservicios.",
+          "Conocimientos de Machine Learning y NLP.",
+          "Experiencia con Docker."
+        ],
+        "riesgos": [
+          "La latencia del modelo de IA puede afectar el rendimiento de la API.",
+          "La elección del modelo de IA adecuado es crucial para la precisión.",
+          "La gestión de dependencias de Python dentro de un microservicio Go puede ser compleja (si se usan bindings).",
+          "Escalabilidad de la infraestructura para manejar picos de carga."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:01:00Z",
+        "hash_unicidad": "4f5e6d7c8b9a0123"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "0569fa09c2ae3baa"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "5a6b7c8d9e0f1234",
+        "titulo": "Asistente de Codificación con IA para Desarrolladores Junior",
+        "descripcion_corta": "Herramienta CLI que ayuda a desarrolladores junior a escribir código proporcionando sugerencias y explicaciones.",
+        "descripcion_detallada": "Una aplicación de línea de comandos (CLI) que actúa como un asistente de codificación. Los desarrolladores junior pueden pegar fragmentos de código o describir lo que quieren hacer, y la herramienta utilizará un LLM para generar código, explicar conceptos complejos o sugerir refactorizaciones. Enfocado en lenguajes populares como Python y JavaScript.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "ia_ml",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "Click",
+              "categoria": "libreria",
+              "descripcion": "Framework para crear interfaces de línea de comandos hermosas en Python.",
+              "version_sugerida": "8.1.7",
+              "url_docs": "https://click.palletsprojects.com/",
+              "por_que": "Facilita la creación de comandos, subcomandos y el manejo de argumentos y opciones en la CLI."
+            },
+            {
+              "nombre": "OpenAI Python Client",
+              "categoria": "libreria",
+              "descripcion": "Cliente oficial de Python para interactuar con la API de OpenAI.",
+              "version_sugerida": "1.1.0",
+              "url_docs": "https://github.com/openai/openai-python",
+              "por_que": "Permite enviar prompts al modelo de lenguaje (GPT) y recibir las respuestas de forma estructurada."
+            },
+            {
+              "nombre": "Pygments",
+              "categoria": "libreria",
+              "descripcion": "Resaltador de sintaxis genérico para Python.",
+              "version_sugerida": "2.16.1",
+              "url_docs": "https://pygments.org/",
+              "por_que": "Mejora la legibilidad del código generado o explicado en la terminal."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [
+            {
+              "nombre": "Generación de Código",
+              "categoria": "ia_ml",
+              "descripcion": "Uso de modelos de lenguaje grandes (LLMs) para generar código fuente a partir de descripciones.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Ayuda a los desarrolladores junior a superar bloqueos, aprender nuevas sintaxis y acelerar el desarrollo."
+            },
+            {
+              "nombre": "Explicación de Código",
+              "categoria": "ia_ml",
+              "descripcion": "Capacidad de los LLMs para desglosar y explicar fragmentos de código.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Facilita la comprensión de código existente o de nuevas construcciones de lenguaje."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Unittest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing integrado en la librería estándar de Python.",
+              "version_sugerida": null,
+              "url_docs": "https://docs.python.org/3/library/unittest.html",
+              "por_que": "Permite crear tests básicos para la funcionalidad de la CLI y la interacción con la API de IA."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Generación de código Python/JavaScript a partir de descripción.",
+          "Explicación de fragmentos de código.",
+          "Sugerencias de refactorización.",
+          "Soporte para comandos de ayuda interactivos.",
+          "Resaltado de sintaxis en la salida."
+        ],
+        "casos_uso": [
+          "Un junior necesita escribir una función para leer un archivo CSV.",
+          "Pega el código de un ejemplo y pide una explicación detallada.",
+          "Recibe un fragmento de código y pide sugerencias para hacerlo más eficiente.",
+          "Pregunta cómo implementar un bucle 'for' en Python.",
+          "Obtiene ayuda para configurar un entorno de desarrollo básico."
+        ],
+        "reglas_negocio": [
+          "La herramienta debe ser fácil de instalar y usar vía pip.",
+          "Las respuestas de la IA deben ser claras y concisas.",
+          "Se debe gestionar adecuadamente el uso de la API de OpenAI (tokens, costes).",
+          "El código generado debe ser sintácticamente correcto.",
+          "Se debe advertir al usuario que el código generado es una sugerencia y debe ser revisado."
+        ],
+        "por_que_ia": "Se utiliza un LLM (como GPT-3.5 o GPT-4) a través de la API de OpenAI para entender las peticiones en lenguaje natural, generar código y proporcionar explicaciones detalladas, actuando como un tutor para desarrolladores junior.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de OpenAI"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Python.",
+          "Comprensión de cómo funcionan las APIs.",
+          "Familiaridad con la terminal.",
+          "Una cuenta de OpenAI con acceso a la API."
+        ],
+        "riesgos": [
+          "El coste de la API de OpenAI puede ser un factor limitante.",
+          "La calidad del código generado puede ser inconsistente.",
+          "Dependencia de la disponibilidad y latencia de la API de OpenAI.",
+          "Riesgo de que los usuarios confíen ciegamente en el código generado sin revisarlo."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:02:00Z",
+        "hash_unicidad": "5a6b7c8d9e0f1234"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "0569fa09c2ae3baa"
+      }
     }
   ],
   "ultimos_hashes": [
-    "671746088acf77e5",
-    "0b7c4cc679e2db3a",
-    "92a69fe916bd274d",
     "f1793359d3a271b4",
     "4a1d08e83c26a7f0",
     "b9f8e7d6c5a1b2c3",
@@ -13731,8 +14138,11 @@
     "c1d2e3f4a5b67890",
     "1f4a7a4a9b2c1d0e",
     "2a8b5c1d9e0f7a3b",
-    "3c1d9e0f7a4b2a8b"
+    "3c1d9e0f7a4b2a8b",
+    "3a1b2c3d4e5f6789",
+    "4f5e6d7c8b9a0123",
+    "5a6b7c8d9e0f1234"
   ],
-  "total_generados": 101,
-  "fecha_ultima_generacion": "2026-10-17T21:57:34.474870"
+  "total_generados": 104,
+  "fecha_ultima_generacion": "2026-10-18T02:48:11.171281"
 }
