@@ -919,5 +919,17 @@
     "relevancia": 2,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "Likes: Jonás Trueba: Cine, vida y primer amor | #0",
+    "url": "https://www.youtube.com/watch?v=uex5TuB3qJ4",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-18T15:45:37.527398+00:00",
+    "medio": "Qué Ver en Movistar Plus",
+    "imagen": "https://i.ytimg.com/vi/uex5TuB3qJ4/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
