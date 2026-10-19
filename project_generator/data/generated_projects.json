@@ -14889,10 +14889,149 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "e9a6bbfc8dcc93d5"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f7c9a0b2e1d3f5a7",
+        "titulo": "Sistema de Gestión de Proyectos Ágil",
+        "descripcion_corta": "Web app para gestionar tableros Kanban, tareas, sprints y equipos ágiles.",
+        "descripcion_detallada": "Una aplicación web full-stack que permite a los equipos de desarrollo gestionar sus proyectos utilizando metodologías ágiles. Los usuarios podrán crear tableros Kanban, definir tareas, asignar responsables, establecer fechas límite, y seguir el progreso a través de diferentes estados (To Do, In Progress, Done). Incluye funcionalidades para la gestión de sprints, seguimiento del tiempo y un panel de control básico con métricas de rendimiento del equipo. Se enfoca en la colaboración y la visibilidad del flujo de trabajo.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "fullstack"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework backend progresivo de Node.js para aplicaciones del lado del servidor eficientes y escalables.",
+              "version_sugerida": "10.x",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Arquitectura modular basada en módulos y controladores, fácil integración con TypeORM y soporte para patrones como dependency injection."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.x",
+              "url_docs": "https://react.dev/",
+              "por_que": "Component-based architecture, Virtual DOM for performance, and a large ecosystem for state management and routing."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "TypeORM",
+              "categoria": "libreria",
+              "descripcion": "ORM para TypeScript y JavaScript que soporta múltiples bases de datos.",
+              "version_sugerida": "0.2.x",
+              "url_docs": "https://typeorm.io/",
+              "por_que": "Mapeo de objetos a tablas relacionales, facilitando las operaciones CRUD y la gestión de esquemas de base de datos."
+            },
+            {
+              "nombre": "Tailwind CSS",
+              "categoria": "libreria",
+              "descripcion": "Framework CSS de utilidad que permite construir diseños rápidamente.",
+              "version_sugerida": "3.x",
+              "url_docs": "https://tailwindcss.com/",
+              "por_que": "Proporciona clases de utilidad predefinidas que agilizan el desarrollo de la interfaz de usuario sin escribir CSS personalizado."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_de_datos",
+              "descripcion": "Sistema de gestión de bases de datos objeto-relacional de código abierto.",
+              "version_sugerida": "15.x",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto, confiable, soporta tipos de datos avanzados como JSONB y tiene buena integración con TypeORM."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "20.x",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, simplifica la configuración y el aislamiento de servicios."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript.",
+              "version_sugerida": "29.x",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Fácil configuración, buena integración con React y NestJS, y soporta testing unitario, de integración y snapshots."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de tableros Kanban",
+          "Definición y asignación de tareas",
+          "Gestión de sprints y backlog",
+          "Seguimiento de progreso y estados",
+          "Panel de control con métricas básicas",
+          "Autenticación y autorización de usuarios"
+        ],
+        "casos_uso": [
+          "Equipos de desarrollo que usan Scrum o Kanban",
+          "Gestión de proyectos de software",
+          "Seguimiento de tareas para freelancers",
+          "Organización de proyectos personales",
+          "Colaboración en equipos remotos"
+        ],
+        "reglas_negocio": [
+          "Una tarea solo puede pertenecer a un sprint a la vez.",
+          "Solo los miembros asignados pueden modificar una tarea.",
+          "El estado de una tarea solo puede cambiar a un estado adyacente en el flujo.",
+          "Cada tablero pertenece a un único equipo.",
+          "Los usuarios deben estar autenticados para acceder a los tableros."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "https://docs.nestjs.com/",
+          "https://react.dev/",
+          "https://typeorm.io/",
+          "https://tailwindcss.com/",
+          "https://www.postgresql.org/docs/",
+          "https://jestjs.io/"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos sólidos de TypeScript y JavaScript.",
+          "Comprensión de patrones de diseño web (MVC, etc.).",
+          "Experiencia básica con bases de datos relacionales.",
+          "Familiaridad con metodologías ágiles."
+        ],
+        "riesgos": [
+          "Complejidad en la gestión del estado del frontend.",
+          "Escalabilidad de la base de datos con muchos usuarios y tareas.",
+          "Manejo de concurrencia en actualizaciones de tareas.",
+          "Curva de aprendizaje de NestJS para desarrolladores sin experiencia en Node.js.",
+          "Diseño UI/UX intuitivo para una buena adopción."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f7c9a0b2e1d3f5a7"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "fc1a5b2ef3461838"
+      }
     }
   ],
   "ultimos_hashes": [
-    "d9a6b7c8e9f0a1b2",
     "a1b2c3d4e5f6a7b8",
     "c3d4e5f6a7b8c9d0",
     "f0a1b2c3d4e5f6a7",
@@ -14991,8 +15130,9 @@
     "d3e4f5a6b7c8d9e0",
     "b0e4f2a6c8d1e3f5",
     "e3f5a1b7c9d0e2f4",
-    "f2a6c8d1e3f5b0a9"
+    "f2a6c8d1e3f5b0a9",
+    "f7c9a0b2e1d3f5a7"
   ],
-  "total_generados": 110,
-  "fecha_ultima_generacion": "2026-10-19T03:01:04.913233"
+  "total_generados": 111,
+  "fecha_ultima_generacion": "2026-10-19T09:33:06.547190"
 }
