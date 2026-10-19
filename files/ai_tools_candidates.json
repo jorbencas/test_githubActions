@@ -1,5 +1,57 @@
 [
     {
+        "titulo": "Comfy-Org/Qwen-Image-2.1",
+        "enlace": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1",
+        "descripcion": "[] diffusion-single-file, comfyui, base_model:Qwen/Qwen-Image-2.1 — by ",
+        "lenguaje": "Python",
+        "estrellas": "1156",
+        "fuente": "HuggingFace Models",
+        "tipo": "herramienta",
+        "_downloads": 11386917,
+        "_likes": 1156,
+        "_pipeline": "",
+        "_source_type": "hf_model"
+    },
+    {
+        "titulo": "google/vit-base-patch16-224",
+        "enlace": "https://huggingface.co/google/vit-base-patch16-224",
+        "descripcion": "[image-classification] transformers, pytorch, tf — by ",
+        "lenguaje": "Python",
+        "estrellas": "1039",
+        "fuente": "HuggingFace Models",
+        "tipo": "herramienta",
+        "_downloads": 13332668,
+        "_likes": 1039,
+        "_pipeline": "image-classification",
+        "_source_type": "hf_model"
+    },
+    {
+        "titulo": "Bingsu/adetailer",
+        "enlace": "https://huggingface.co/Bingsu/adetailer",
+        "descripcion": "[] ultralytics, pytorch, dataset:wider_face — by ",
+        "lenguaje": "Python",
+        "estrellas": "816",
+        "fuente": "HuggingFace Models",
+        "tipo": "herramienta",
+        "_downloads": 9183399,
+        "_likes": 816,
+        "_pipeline": "",
+        "_source_type": "hf_model"
+    },
+    {
+        "titulo": "Qwen/Qwen3-4B",
+        "enlace": "https://huggingface.co/Qwen/Qwen3-4B",
+        "descripcion": "[text-generation] transformers, safetensors, qwen3 — by ",
+        "lenguaje": "Python",
+        "estrellas": "765",
+        "fuente": "HuggingFace Models",
+        "tipo": "herramienta",
+        "_downloads": 11791470,
+        "_likes": 765,
+        "_pipeline": "text-generation",
+        "_source_type": "hf_model"
+    },
+    {
         "titulo": "morluto/rea",
         "enlace": "https://github.com/morluto/rea",
         "descripcion": "Reverse engineer anything with agents, from app behavior down to native binaries.",
