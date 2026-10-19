@@ -14460,12 +14460,438 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "1c2131e8107cbcac"
       }
+    },
+    {
+      "proyecto": {
+        "id": "b0e4f2a6c8d1e3f5",
+        "titulo": "Asistente de Resumen de Artículos Científicos",
+        "descripcion_corta": "Herramienta web para resumir automáticamente artículos científicos usando IA.",
+        "descripcion_detallada": "Una aplicación web fullstack que permite a los usuarios subir o enlazar artículos científicos (PDFs o URLs) y obtener resúmenes concisos generados por un modelo de lenguaje grande. Incluye gestión de usuarios, historial de resúmenes y opciones de personalización del resumen (longitud, enfoque). Ideal para investigadores, estudiantes y profesionales que necesitan procesar grandes volúmenes de literatura científica. La IA se utiliza para la comprensión del texto y la generación del resumen.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece alto rendimiento asíncrono, validación de datos automática con Pydantic y generación interactiva de documentación OpenAPI."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario interactivas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear componentes UI reutilizables y un estado de aplicación manejable para una experiencia de usuario fluida."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en anotaciones de tipo.",
+              "version_sugerida": "2.4.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Fundamental para la validación de datos de entrada en FastAPI y la definición de modelos de datos claros."
+            },
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por modelos de lenguaje.",
+              "version_sugerida": "0.1.0",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Simplifica la orquestación de llamadas a LLMs, el manejo de prompts y la integración con fuentes de datos para la generación de resúmenes."
+            },
+            {
+              "nombre": "PyMuPDF",
+              "categoria": "libreria",
+              "descripcion": "Librería para extraer texto e información de archivos PDF.",
+              "version_sugerida": "1.23.8",
+              "url_docs": "https://pymupdf.readthedocs.io/",
+              "por_que": "Necesaria para procesar los archivos PDF subidos por los usuarios y extraer el texto a ser resumido."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_de_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto de código abierto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto para almacenar datos de usuarios, metadatos de artículos y el historial de resúmenes, con soporte para JSONB si fuera necesario."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.6",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y facilita el despliegue consistente de la aplicación."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API (GPT-4/GPT-3.5)",
+              "categoria": "ia_ml",
+              "descripcion": "API para acceder a modelos de lenguaje avanzados.",
+              "version_sugerida": "v1",
+              "url_docs": "https://platform.openai.com/docs/api-reference",
+              "por_que": "Proporciona la capacidad de procesamiento de lenguaje natural necesaria para comprender y resumir artículos científicos de manera efectiva."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing popular para Python.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests unitarios y de integración, con un sistema de fixtures potente para la gestión de dependencias."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Subida de archivos PDF y enlace a URLs de artículos.",
+          "Generación automática de resúmenes de texto.",
+          "Gestión de cuentas de usuario y autenticación.",
+          "Historial de resúmenes generados.",
+          "Configuración de parámetros de resumen (longitud, estilo)."
+        ],
+        "casos_uso": [
+          "Estudiantes resumiendo lecturas académicas.",
+          "Investigadores revisando rápidamente la literatura.",
+          "Profesionales manteniéndose actualizados en su campo.",
+          "Búsqueda rápida de información clave en documentos largos."
+        ],
+        "reglas_negocio": [
+          "Los usuarios deben registrarse para acceder al historial.",
+          "El tamaño máximo de archivo para la subida es de 10MB.",
+          "Las URLs deben ser públicamente accesibles.",
+          "Los resúmenes generados son para uso informativo, no sustituyen la lectura original."
+        ],
+        "por_que_ia": "La IA es fundamental para la tarea principal de comprender el contenido complejo de los artículos científicos y generar resúmenes coherentes y precisos. Se utilizan modelos de lenguaje para el procesamiento del lenguaje natural (NLP).",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de OpenAI",
+          "Servicio de hosting para la web app (ej: Render, Vercel)",
+          "Base de datos PostgreSQL gestionada (ej: ElephantSQL, AWS RDS)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y JavaScript.",
+          "Comprensión de APIs RESTful.",
+          "Familiaridad con bases de datos SQL.",
+          "Acceso a una clave API de OpenAI."
+        ],
+        "riesgos": [
+          "Costos asociados al uso de la API de OpenAI.",
+          "Dificultad para extraer texto de PDFs mal formateados.",
+          "Precisión variable de los resúmenes dependiendo de la complejidad del artículo.",
+          "Manejo de errores y timeouts en llamadas a servicios externos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "b0e4f2a6c8d1e3f5"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "e9a6bbfc8dcc93d5"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "e3f5a1b7c9d0e2f4",
+        "titulo": "Sistema de Monitorización y Alertas de Logs Distribuidos",
+        "descripcion_corta": "Centraliza y analiza logs de múltiples servicios para detectar anomalías y enviar alertas.",
+        "descripcion_detallada": "Una plataforma de observabilidad que ingiere logs de diversas fuentes (microservicios, servidores) en una base de datos centralizada. Implementa análisis de logs en tiempo real para identificar patrones anómalos, errores críticos o eventos de seguridad. Permite configurar reglas de alerta personalizadas y notificar a los equipos a través de varios canales (email, Slack, PagerDuty). Ideal para equipos que gestionan infraestructuras complejas y distribuidas.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "api",
+          "microservicio",
+          "datos",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web HTTP de alto rendimiento para Go.",
+              "version_sugerida": "1.19.1",
+              "url_docs": "https://gin-gonic.com/",
+              "por_que": "Proporciona una base robusta y rápida para construir los microservicios de la API de ingesta y gestión de alertas."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Vector",
+              "categoria": "libreria",
+              "descripcion": "Agente de código abierto para recolectar, transformar y enviar telemetría.",
+              "version_sugerida": "0.30.0",
+              "url_docs": "https://vector.dev/",
+              "por_que": "Simplifica la recolección y el enrutamiento de logs desde múltiples fuentes hacia el sistema centralizado."
+            },
+            {
+              "nombre": "Prometheus client (Go)",
+              "categoria": "libreria",
+              "descripcion": "Librería cliente para instrumentar aplicaciones Go con métricas de Prometheus.",
+              "version_sugerida": "1.18.0",
+              "url_docs": "https://github.com/prometheus/client_golang",
+              "por_que": "Permite exponer métricas internas del sistema de monitorización para su propia observabilidad."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "Elasticsearch",
+              "categoria": "base_de_datos",
+              "descripcion": "Motor de búsqueda y análisis distribuido.",
+              "version_sugerida": "8.x",
+              "url_docs": "https://www.elastic.co/elasticsearch/",
+              "por_que": "Optimizado para la indexación y búsqueda rápida de grandes volúmenes de datos de logs, fundamental para el análisis en tiempo real."
+            },
+            {
+              "nombre": "Redis",
+              "categoria": "base_de_datos",
+              "descripcion": "Almacén de estructuras de datos en memoria.",
+              "version_sugerida": "7.0",
+              "url_docs": "https://redis.io/docs/",
+              "por_que": "Utilizado para la gestión de colas de alertas y el almacenamiento temporal de métricas de frecuencia para rate limiting."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker & Kubernetes",
+              "categoria": "infraestructura",
+              "descripcion": "Contenedores y orquestación para despliegue y escalado.",
+              "version_sugerida": "Docker 24.0.6, K8s 1.27",
+              "url_docs": "https://www.docker.com/,%20https://kubernetes.io/",
+              "por_que": "Permite desplegar los microservicios de forma escalable, resiliente y gestionada eficientemente."
+            },
+            {
+              "nombre": "Fluentd/Vector",
+              "categoria": "infraestructura",
+              "descripcion": "Recolectores de logs para la ingesta distribuida.",
+              "version_sugerida": "N/A (usado como agente)",
+              "url_docs": "https://fluentd.org/,%20https://vector.dev/",
+              "por_que": "Actúan como agentes de recolección de logs en los nodos de la aplicación, asegurando la captura de toda la información relevante."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Paquete estándar de Go para escribir tests.",
+              "version_sugerida": "N/A (estándar)",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Proporciona las funcionalidades básicas para tests unitarios y de benchmarking en Go."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Alertmanager",
+              "categoria": "otros",
+              "descripcion": "Componente del ecosistema Prometheus para el manejo de alertas.",
+              "version_sugerida": "0.25.0",
+              "url_docs": "https://prometheus.io/docs/alerting/latest/alertmanager/",
+              "por_que": "Gestiona la deduplicación, agrupación y enrutamiento de alertas generadas por Prometheus (o sistemas similares)."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Ingesta de logs en tiempo real desde múltiples fuentes.",
+          "Indexación y búsqueda rápida de logs (Elasticsearch).",
+          "Motor de reglas para detección de patrones y anomalías.",
+          "Sistema de alertas configurable con notificaciones multi-canal.",
+          "Dashboard de visualización de logs y estado de alertas."
+        ],
+        "casos_uso": [
+          "Monitorizar la salud de una arquitectura de microservicios.",
+          "Detectar y responder rápidamente a errores de producción.",
+          "Identificar intentos de intrusión o actividades sospechosas.",
+          "Realizar análisis forense post-incidente.",
+          "Optimizar el rendimiento de aplicaciones basándose en patrones de logs."
+        ],
+        "reglas_negocio": [
+          "Los logs deben retenerse durante un periodo configurable (ej: 30 días).",
+          "Las alertas solo deben dispararse si una condición se cumple durante X minutos.",
+          "Los usuarios deben tener roles para configurar alertas y ver logs.",
+          "Se debe implementar rate limiting para evitar sobrecarga de notificaciones.",
+          "La ingesta de logs debe ser tolerante a fallos de red temporales."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Servicio de mensajería (Slack, Twilio)",
+          "Servicio de email (SendGrid, SES)",
+          "Plataforma de orquestación (Kubernetes)"
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 8,
+        "prerequisitos": [
+          "Experiencia con Go y sistemas distribuidos.",
+          "Conocimientos de administración de sistemas y redes.",
+          "Comprensión de protocolos de logging y telemetría.",
+          "Familiaridad con Elasticsearch y Prometheus/Alertmanager."
+        ],
+        "riesgos": [
+          "Volumen masivo de datos de logs puede impactar el rendimiento y costo.",
+          "Complejidad en la configuración y mantenimiento de las reglas de alerta.",
+          "Latencia en la ingesta y procesamiento de logs puede retrasar las alertas.",
+          "Seguridad de los datos de logs sensibles.",
+          "Dependencia de servicios externos para notificaciones."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:01:00Z",
+        "hash_unicidad": "e3f5a1b7c9d0e2f4"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "e9a6bbfc8dcc93d5"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f2a6c8d1e3f5b0a9",
+        "titulo": "Generador de Rutinas de Ejercicio Personalizadas (CLI)",
+        "descripcion_corta": "Herramienta de línea de comandos para crear planes de entrenamiento basados en objetivos y equipo disponible.",
+        "descripcion_detallada": "Una aplicación CLI que interactúa con el usuario para recopilar información sobre sus objetivos de fitness (fuerza, resistencia, pérdida de peso), nivel de experiencia, tiempo disponible y equipo (gimnasio, casa, sin equipo). Utiliza una base de datos de ejercicios y lógica programada (potencialmente con IA para recomendaciones más avanzadas) para generar una rutina semanal o diaria personalizada. Guarda y gestiona las rutinas del usuario.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "Typer",
+              "categoria": "libreria",
+              "descripcion": "Framework para construir CLIs de aplicación en Python.",
+              "version_sugerida": "0.9.0",
+              "url_docs": "https://typer.tiangolo.com/",
+              "por_que": "Facilita la creación de interfaces de línea de comandos interactivas y bien estructuradas con validación automática de argumentos."
+            },
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "SQL toolkit y Object Relational Mapper (ORM) para Python.",
+              "version_sugerida": "2.0.20",
+              "url_docs": "https://www.sqlalchemy.org/",
+              "por_que": "Permite interactuar con la base de datos de ejercicios de forma orientada a objetos, simplificando la gestión de datos."
+            },
+            {
+              "nombre": "Anthropic Claude API",
+              "categoria": "libreria",
+              "descripcion": "Cliente Python para interactuar con la API de Claude.",
+              "version_sugerida": "0.7.0",
+              "url_docs": "https://docs.anthropic.com/claude/reference/getting-started-with-the-api",
+              "por_que": "Se usará para generar recomendaciones de ejercicios más dinámicas y personalizadas basadas en descripciones de objetivos."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "SQLite",
+              "categoria": "base_de_datos",
+              "descripcion": "Base de datos relacional ligera y autónoma.",
+              "version_sugerida": "3.43.0",
+              "url_docs": "https://www.sqlite.org/docs.html",
+              "por_que": "Ideal para una aplicación CLI local, no requiere un servidor separado y los datos se almacenan en un único archivo."
+            }
+          ],
+          "infraestructura": [],
+          "ia_ml": [
+            {
+              "nombre": "Claude Instant/3",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de lenguaje de Anthropic para generación de texto.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://www.anthropic.com/",
+              "por_que": "Se utilizará para interpretar los objetivos del usuario y sugerir ejercicios o estructuras de rutina que no estén explícitamente en la base de datos."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing popular para Python.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Esencial para asegurar que la lógica de generación de rutinas y la interacción con la CLI funcionen correctamente."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Interfaz CLI interactiva para recopilar preferencias.",
+          "Generación de rutinas de ejercicio personalizadas.",
+          "Base de datos de ejercicios con descripciones y grupos musculares.",
+          "Guardado y carga de perfiles y rutinas de usuario.",
+          "Recomendaciones de ejercicios asistidas por IA."
+        ],
+        "casos_uso": [
+          "Un usuario que empieza a entrenar en casa crea su primera rutina.",
+          "Un usuario intermedio busca variar su rutina actual.",
+          "Alguien con equipo limitado genera un plan de entrenamiento.",
+          "Usuarios que quieren seguir un plan estructurado sin pagar suscripciones."
+        ],
+        "reglas_negocio": [
+          "Se debe especificar al menos un objetivo principal.",
+          "El número de días de entrenamiento por semana no puede exceder 7.",
+          "Los ejercicios se agrupan por tipo (fuerza, cardio, flexibilidad).",
+          "La rutina generada debe intentar equilibrar grupos musculares a lo largo de la semana.",
+          "Los datos del usuario se guardan localmente en SQLite."
+        ],
+        "por_que_ia": "La IA (Claude) se usa para mejorar la personalización, interpretando objetivos de usuario más abstractos (ej: 'sentirme más enérgico') y sugiriendo ejercicios o estructuras de rutina que van más allá de una simple base de datos, aportando un toque más 'inteligente' a la generación.",
+        "cliente_ia_sugerido": "anthropic",
+        "recursos_externos": [
+          "API de Anthropic"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Python.",
+          "Comprensión de cómo interactuar con CLIs.",
+          "Conceptos básicos de bases de datos SQL y ORM."
+        ],
+        "riesgos": [
+          "La calidad de las rutinas generadas por IA puede ser inconsistente.",
+          "La base de datos de ejercicios puede ser limitada inicialmente.",
+          "La interfaz CLI puede ser menos intuitiva para usuarios no técnicos.",
+          "Gestión de dependencias y entorno de Python para la CLI."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:02:00Z",
+        "hash_unicidad": "f2a6c8d1e3f5b0a9"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "e9a6bbfc8dcc93d5"
+      }
     }
   ],
   "ultimos_hashes": [
-    "2a6d9f0b1c3e4a5b",
-    "b1a0c2d3e4f56789",
-    "e1f0d9c8b7a65432",
     "d9a6b7c8e9f0a1b2",
     "a1b2c3d4e5f6a7b8",
     "c3d4e5f6a7b8c9d0",
@@ -14562,8 +14988,11 @@
     "5a6b7c8d9e0f1234",
     "a8b1c2d3e4f5a6b7",
     "c2d3e4f5a6b7c8d9",
-    "d3e4f5a6b7c8d9e0"
+    "d3e4f5a6b7c8d9e0",
+    "b0e4f2a6c8d1e3f5",
+    "e3f5a1b7c9d0e2f4",
+    "f2a6c8d1e3f5b0a9"
   ],
-  "total_generados": 107,
-  "fecha_ultima_generacion": "2026-10-18T22:11:39.293138"
+  "total_generados": 110,
+  "fecha_ultima_generacion": "2026-10-19T03:01:04.913233"
 }
