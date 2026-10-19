@@ -15029,12 +15029,394 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "fc1a5b2ef3461838"
       }
+    },
+    {
+      "proyecto": {
+        "id": "12a3b4c5d6e7f8a9",
+        "titulo": "Asistente de Resúmenes de Documentos PDF",
+        "descripcion_corta": "Herramienta web para subir PDFs y obtener resúmenes generados por IA, con análisis de entidades clave.",
+        "descripcion_detallada": "Aplicación web fullstack que permite a los usuarios cargar archivos PDF. El backend extrae el texto del PDF, lo procesa y utiliza un modelo de lenguaje grande (LLM) para generar resúmenes concisos y extraer entidades importantes (personas, organizaciones, lugares). La interfaz de usuario muestra el documento original (paginado) y los resúmenes generados, permitiendo interactuar con ellos. Ideal para estudiantes, investigadores y profesionales que manejan gran cantidad de información.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "fullstack"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web asíncrono moderno para construir APIs con Python, destaca por su alto rendimiento y validación automática de datos.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece un rendimiento excelente para el procesamiento de texto y la interacción con la IA, además de generación automática de documentación OpenAPI."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario interactivas y declarativas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear una interfaz de usuario dinámica y reactiva para la carga de archivos y visualización de resúmenes."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "PyMuPDF",
+              "categoria": "libreria",
+              "descripcion": "Bindings de Python para MuPDF, una librería ligera para renderizado de PDF.",
+              "version_sugerida": "1.23.0",
+              "url_docs": "https://pymupdf.readthedocs.io/",
+              "por_que": "Esencial para la extracción de texto de alta fidelidad y eficiente de los documentos PDF."
+            },
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por modelos de lenguaje.",
+              "version_sugerida": "0.1.0",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Facilita la orquestación de llamadas a LLMs, el manejo de prompts y la integración de herramientas para resumir y extraer entidades."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, simplificando la gestión de dependencias."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "GPT-4o",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo de lenguaje multimodal avanzado de OpenAI.",
+              "version_sugerida": null,
+              "url_docs": "https://platform.openai.com/docs/models/gpt-4o",
+              "por_que": "Proporciona capacidades superiores para la generación de resúmenes precisos y la extracción de información relevante de textos complejos."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests unitarios y de integración para el backend y la lógica de procesamiento de documentos."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Carga de documentos PDF",
+          "Extracción de texto de PDFs",
+          "Generación de resúmenes inteligentes",
+          "Extracción de entidades clave (Nombres, Lugares, Organizaciones)",
+          "Visualización de PDF y resúmenes lado a lado",
+          "Interfaz de usuario amigable"
+        ],
+        "casos_uso": [
+          "Resumir artículos de investigación largos",
+          "Extraer información clave de informes empresariales",
+          "Obtener puntos principales de capítulos de libros",
+          "Analizar rápidamente documentos legales",
+          "Ayudar a estudiantes a comprender materiales de estudio"
+        ],
+        "reglas_negocio": [
+          "El tamaño máximo de archivo PDF es de 50MB.",
+          "Solo se admiten archivos con texto extraíble (no imágenes escaneadas sin OCR).",
+          "Los resúmenes no excederán el 20% de la longitud del texto original.",
+          "Las entidades extraídas deben ser de tipo Persona, Organización o Lugar.",
+          "Los usuarios deben registrarse para acceder a la funcionalidad."
+        ],
+        "por_que_ia": "Se utiliza IA (LLM) para la generación de resúmenes y la extracción de entidades, tareas que requieren comprensión del lenguaje natural y síntesis de información, superando las capacidades de métodos tradicionales.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y JavaScript.",
+          "Comprensión de APIs RESTful.",
+          "Familiaridad con frameworks web (FastAPI, React).",
+          "Nociones de procesamiento de documentos PDF.",
+          "Cuenta de OpenAI con clave API."
+        ],
+        "riesgos": [
+          "La calidad de la extracción de texto de PDFs complejos puede variar.",
+          "Costos asociados al uso de la API de OpenAI.",
+          "Manejo de archivos grandes puede requerir optimización.",
+          "Posibles inconsistencias en la extracción de entidades.",
+          "Rendimiento de la interfaz de usuario con documentos muy extensos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-15T10:00:00Z",
+        "hash_unicidad": "12a3b4c5d6e7f8a9"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "c0b277b799aae486"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "2b3c4d5e6f7a8b9c",
+        "titulo": "Sistema de Gestión de Tareas Colaborativo con Notificaciones",
+        "descripcion_corta": "Aplicación web para la gestión de tareas en equipo con asignación, seguimiento y notificaciones en tiempo real.",
+        "descripcion_detallada": "Una aplicación web fullstack que permite a los equipos crear, asignar y seguir el progreso de tareas. Soporta tableros tipo Kanban, fechas límite, prioridades y comentarios. Las notificaciones en tiempo real (vía WebSockets) informan a los usuarios sobre cambios importantes, asignaciones nuevas o vencimientos próximos. Diseñada para mejorar la productividad y la comunicación en equipos de desarrollo, marketing u otros.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "web",
+          "fullstack"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "javascript",
+          "frameworks": [
+            {
+              "nombre": "Express.js",
+              "categoria": "framework",
+              "descripcion": "Framework de aplicación web minimalista y flexible para Node.js.",
+              "version_sugerida": "4.18.2",
+              "url_docs": "https://expressjs.com/",
+              "por_que": "Proporciona una base robusta y escalable para construir la API backend de la aplicación de gestión de tareas."
+            },
+            {
+              "nombre": "Vue.js",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "3.3.4",
+              "url_docs": "https://vuejs.org/",
+              "por_que": "Permite desarrollar una interfaz de usuario reactiva y fácil de mantener para la visualización y gestión de tareas."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Socket.IO",
+              "categoria": "libreria",
+              "descripcion": "Librería para la comunicación en tiempo real bidireccional entre navegadores y servidores.",
+              "version_sugerida": "4.7.2",
+              "url_docs": "https://socket.io/",
+              "por_que": "Fundamental para implementar el sistema de notificaciones instantáneas sobre cambios en las tareas."
+            },
+            {
+              "nombre": "Axios",
+              "categoria": "libreria",
+              "descripcion": "Cliente HTTP basado en promesas para el navegador y Node.js.",
+              "version_sugerida": "1.5.0",
+              "url_docs": "https://axios-http.com/",
+              "por_que": "Simplifica la realización de peticiones HTTP desde el frontend Vue.js al backend Express.js."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "MongoDB",
+              "categoria": "bases_datos",
+              "descripcion": "Base de datos NoSQL orientada a documentos, flexible y escalable.",
+              "version_sugerida": "6.0",
+              "url_docs": "https://www.mongodb.com/docs/",
+              "por_que": "Su modelo de documentos es ideal para almacenar información de tareas y tableros de forma ágil."
+            }
+          ],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript, todo en uno.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Facilita la escritura de tests unitarios y de integración para el frontend y el backend."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de tableros de tareas (Kanban)",
+          "Asignación de tareas a miembros del equipo",
+          "Seguimiento del estado de las tareas (Pendiente, En Progreso, Completada)",
+          "Notificaciones en tiempo real vía WebSockets",
+          "Comentarios en tareas",
+          "Autenticación de usuarios"
+        ],
+        "casos_uso": [
+          "Organizar el flujo de trabajo de un equipo de desarrollo ágil.",
+          "Gestionar campañas de marketing y sus tareas asociadas.",
+          "Coordinar proyectos de diseño gráfico.",
+          "Planificar y ejecutar eventos.",
+          "Seguimiento de tareas en equipos remotos."
+        ],
+        "reglas_negocio": [
+          "Cada tarea debe tener un título y una descripción.",
+          "Las tareas solo pueden ser asignadas a usuarios registrados.",
+          "Un usuario puede tener múltiples roles (ej: administrador, miembro).",
+          "Las notificaciones se envían por eventos clave (asignación, cambio de estado, comentario).",
+          "Los tableros son privados para el equipo que los crea."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 3,
+        "prerequisitos": [
+          "Conocimientos básicos de JavaScript, HTML y CSS.",
+          "Comprensión de Node.js y Express.",
+          "Familiaridad con Vue.js.",
+          "Conceptos básicos de bases de datos NoSQL (MongoDB).",
+          "Entendimiento de WebSockets."
+        ],
+        "riesgos": [
+          "La escalabilidad de Socket.IO puede ser un desafío con muchos usuarios concurrentes.",
+          "Gestión de la autenticación y autorización de usuarios de forma segura.",
+          "La persistencia de datos en MongoDB debe ser manejada cuidadosamente.",
+          "Complejidad en la sincronización del estado entre el backend y el frontend."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-15T10:00:00Z",
+        "hash_unicidad": "2b3c4d5e6f7a8b9c"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "c0b277b799aae486"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "3c4d5e6f7a8b9c0d",
+        "titulo": "Optimizador de Rutas para Entregas Locales",
+        "descripcion_corta": "Herramienta CLI que optimiza secuencias de entrega dadas múltiples ubicaciones y restricciones.",
+        "descripcion_detallada": "Una aplicación de línea de comandos (CLI) que toma como entrada una lista de direcciones (o coordenadas) y un punto de inicio/fin, y calcula la ruta más eficiente para realizar las entregas. Considera restricciones como ventanas de tiempo y capacidad del vehículo. Utiliza APIs de mapas para obtener distancias y tiempos estimados, y algoritmos de optimización para resolver el problema del viajante (TSP) o variantes relacionadas.",
+        "nivel": "senior",
+        "scope": "proyecto",
+        "tipo": [
+          "cli",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "Google Maps Platform APIs",
+              "categoria": "libreria",
+              "descripcion": "APIs para obtener datos de mapas, rutas, distancias y tiempos de viaje.",
+              "version_sugerida": null,
+              "url_docs": "https://developers.google.com/maps",
+              "por_que": "Fuente principal para obtener datos geográficos precisos y calcular rutas entre puntos."
+            },
+            {
+              "nombre": "Gorilla Mux",
+              "categoria": "libreria",
+              "descripcion": "Potente router y dispatcher para el framework web Go.",
+              "version_sugerida": "1.8.0",
+              "url_docs": "https://pkg.go.dev/github.com/gorilla/mux",
+              "por_que": "Aunque es una CLI, podría exponer una API local para interactuar con el optimizador, y este router es eficiente."
+            },
+            {
+              "nombre": "Viper",
+              "categoria": "libreria",
+              "descripcion": "Librería completa para la configuración de aplicaciones Go.",
+              "version_sugerida": "1.17.0",
+              "url_docs": "https://github.com/spf13/viper",
+              "por_que": "Facilita la gestión de configuraciones, como claves API y parámetros de optimización, para la CLI."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la aplicación CLI con sus dependencias para una fácil distribución y ejecución en diferentes entornos."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Paquete estándar de Go para escribir tests.",
+              "version_sugerida": null,
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Proporciona las herramientas necesarias para escribir tests unitarios y de integración para la lógica de optimización y el manejo de datos."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Go CLI Argument Parsing",
+              "categoria": "otros",
+              "descripcion": "Bibliotecas estándar o de terceros para parsear argumentos de línea de comandos.",
+              "version_sugerida": null,
+              "url_docs": "https://pkg.go.dev/flag",
+              "por_que": "Esencial para definir y leer los parámetros de entrada de la aplicación CLI (lista de direcciones, punto de inicio, etc.)."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Entrada de direcciones/coordenadas vía CLI o archivo.",
+          "Cálculo de rutas optimizadas (mínima distancia/tiempo).",
+          "Soporte para múltiples paradas.",
+          "Consideración de ventanas de tiempo para entregas.",
+          "Validación de la viabilidad de la ruta.",
+          "Salida de la ruta optimizada (secuencia de paradas, distancia total, tiempo estimado)."
+        ],
+        "casos_uso": [
+          "Optimizar rutas para repartidores de última milla.",
+          "Planificar recorridos de servicio técnico.",
+          "Secuenciar visitas comerciales.",
+          "Gestionar logística de eventos con múltiples ubicaciones.",
+          "Planificación de rutas de mantenimiento de infraestructuras."
+        ],
+        "reglas_negocio": [
+          "La API de mapas se usará para obtener datos; los costos asociados son responsabilidad del usuario.",
+          "Se asume que el vehículo tiene capacidad ilimitada a menos que se especifique.",
+          "Las ventanas de tiempo son inclusivas (ej: 09:00-11:00 significa que la entrega debe ocurrir en ese rango).",
+          "El punto de inicio y fin de la ruta debe ser especificado.",
+          "La solución busca la ruta óptima global, no necesariamente la más rápida en tiempo real."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "API de Google Maps Platform (Routes API, Geocoding API)"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia sólida en Go.",
+          "Conocimiento de algoritmos de optimización (TSP).",
+          "Comprensión de APIs RESTful y servicios externos.",
+          "Familiaridad con el desarrollo de aplicaciones CLI.",
+          "Acceso a una clave API de Google Maps Platform."
+        ],
+        "riesgos": [
+          "Dependencia de servicios externos (Google Maps) y sus costos/limitaciones.",
+          "Complejidad algorítmica para optimizar rutas con muchas paradas y restricciones.",
+          "Manejo de errores y datos inválidos (direcciones mal formadas, etc.).",
+          "La latencia de la API de mapas puede afectar el rendimiento.",
+          "Necesidad de implementar lógica de reintento para llamadas a APIs externas."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-15T10:00:00Z",
+        "hash_unicidad": "3c4d5e6f7a8b9c0d"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "c0b277b799aae486"
+      }
     }
   ],
   "ultimos_hashes": [
-    "a1b2c3d4e5f6a7b8",
-    "c3d4e5f6a7b8c9d0",
-    "f0a1b2c3d4e5f6a7",
     "a8f3e1d0c9b7a654",
     "b2c3d4e5f6a7b8c9",
     "c1d2e3f4a5b6c7d8",
@@ -15131,8 +15513,11 @@
     "b0e4f2a6c8d1e3f5",
     "e3f5a1b7c9d0e2f4",
     "f2a6c8d1e3f5b0a9",
-    "f7c9a0b2e1d3f5a7"
+    "f7c9a0b2e1d3f5a7",
+    "12a3b4c5d6e7f8a9",
+    "2b3c4d5e6f7a8b9c",
+    "3c4d5e6f7a8b9c0d"
   ],
-  "total_generados": 111,
-  "fecha_ultima_generacion": "2026-10-19T09:33:06.547190"
+  "total_generados": 114,
+  "fecha_ultima_generacion": "2026-10-19T23:17:16.281240"
 }
