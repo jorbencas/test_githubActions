@@ -15810,12 +15810,414 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "9197e6a6485ce79a"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f1a2b3c4d5e67890",
+        "titulo": "Gestor Inteligente de Tareas con IA",
+        "descripcion_corta": "Aplicación web para organizar tareas, priorizarlas automáticamente usando IA y realizar seguimiento del progreso.",
+        "descripcion_detallada": "Desarrollo de una aplicación web full-stack que permite a los usuarios crear, gestionar y organizar sus tareas. La funcionalidad clave es la priorización inteligente de tareas basada en su descripción, fecha límite y nivel de urgencia percibido por un modelo de IA. La IA analizará el texto de la tarea para asignar una puntuación de prioridad. Incluirá un dashboard visual para el seguimiento del progreso y la gestión de proyectos. Se integrará con calendarios externos (Google Calendar) para sincronizar fechas límite.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "fullstack",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python 3.7+ basado en type hints estándar de Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Proporciona alto rendimiento asíncrono, validación de datos automática con Pydantic y generación de documentación interactiva (Swagger UI/ReDoc)."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Biblioteca JavaScript declarativa para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear componentes de UI reutilizables y gestiona eficientemente el estado de la aplicación para una experiencia de usuario fluida."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en anotaciones de tipo de Python.",
+              "version_sugerida": "2.5.0",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para FastAPI para definir modelos de datos y validar automáticamente las solicitudes entrantes y las respuestas salientes."
+            },
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "Kit de herramientas SQL y mapeador de objetos de Python.",
+              "version_sugerida": "2.0.20",
+              "url_docs": "https://www.sqlalchemy.org/",
+              "por_que": "Proporciona una forma robusta y flexible de interactuar con la base de datos relacional, manejando migraciones y modelos de datos."
+            },
+            {
+              "nombre": "OpenAI Python Client",
+              "categoria": "libreria",
+              "descripcion": "Cliente oficial de Python para la API de OpenAI.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://github.com/openai/openai-python",
+              "por_que": "Facilita la integración con los modelos de lenguaje de OpenAI para el análisis y la priorización de tareas."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacionales objeto de código abierto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto, confiable y soporta tipos de datos avanzados como JSONB, ideal para almacenar metadatos de tareas y configuraciones de usuario."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la aplicación y sus dependencias, asegurando un entorno de desarrollo y producción consistente y fácil de desplegar."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "GPT-3.5 Turbo",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo de lenguaje grande de OpenAI para tareas de procesamiento de lenguaje natural.",
+              "version_sugerida": null,
+              "url_docs": "https://platform.openai.com/docs/models/gpt-3-5",
+              "por_que": "Se utiliza para analizar el texto de las descripciones de las tareas y determinar su prioridad y urgencia, asignando una puntuación numérica."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de pruebas para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de pruebas unitarias y de integración claras y mantenibles para la API y la lógica de negocio."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de tareas",
+          "Priorización automática de tareas basada en IA",
+          "Dashboard visual de progreso",
+          "Integración con Google Calendar",
+          "Notificaciones personalizables"
+        ],
+        "casos_uso": [
+          "Gestión de proyectos personales",
+          "Organización de flujos de trabajo en equipos pequeños",
+          "Seguimiento de hitos y plazos",
+          "Automatización de la priorización de tareas diarias",
+          "Centralización de la información de tareas"
+        ],
+        "reglas_negocio": [
+          "Las tareas deben tener un título y opcionalmente una descripción.",
+          "La fecha límite es opcional pero influye en la prioridad.",
+          "El sistema asigna una puntuación de prioridad de 1 a 5.",
+          "Las tareas vencidas se marcan automáticamente.",
+          "Los usuarios pueden personalizar las reglas de priorización básicas."
+        ],
+        "por_que_ia": "Se utiliza un modelo de lenguaje grande (LLM) para analizar la semántica de las descripciones de las tareas, identificando palabras clave, urgencia implícita y contexto para asignar una puntuación de prioridad objetiva y consistente.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y JavaScript.",
+          "Comprensión de APIs RESTful.",
+          "Familiaridad con bases de datos relacionales.",
+          "Conocimientos básicos de diseño de UI/UX."
+        ],
+        "riesgos": [
+          "La precisión de la priorización de la IA puede variar.",
+          "Integración compleja con Google Calendar API.",
+          "Gestión de la autenticación y autorización de usuarios.",
+          "Escalabilidad de la aplicación bajo alta carga.",
+          "Costos asociados al uso de la API de OpenAI."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-15T10:00:00Z",
+        "hash_unicidad": "f1a2b3c4d5e67890"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "763219300da5654b"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "a7b8c9d0e1f23456",
+        "titulo": "Monitor de Rendimiento de Aplicaciones (APM) Ligero",
+        "descripcion_corta": "Servicio que recolecta y visualiza métricas de rendimiento (latencia, errores) de aplicaciones web y microservicios.",
+        "descripcion_detallada": "Creación de un sistema de monitorización de rendimiento de aplicaciones (APM) ligero. Consistirá en un agente (SDK) que se integra en aplicaciones backend y una API/Dashboard central para visualizar las métricas. El agente enviará datos de latencia, tasas de error y trazas de solicitudes a la API central. El dashboard mostrará estas métricas de forma agregada y permitirá filtrar por servicio, endpoint y tiempo. Utilizará una base de datos de series temporales para almacenar las métricas eficientemente.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "api",
+          "web",
+          "microservicio",
+          "devops",
+          "testing"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web HTTP de alto rendimiento para Go.",
+              "version_sugerida": "1.20.0",
+              "url_docs": "https://gin-gonic.com/",
+              "por_que": "Proporciona un enrutamiento rápido y un middleware robusto, ideal para construir la API de recolección de métricas y el backend del dashboard."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Prometheus client_golang",
+              "categoria": "libreria",
+              "descripcion": "Cliente oficial de Go para el ecosistema Prometheus.",
+              "version_sugerida": "1.16.0",
+              "url_docs": "https://github.com/prometheus/client_golang",
+              "por_que": "Facilita la instrumentación de aplicaciones Go para exponer métricas compatibles con Prometheus, que puede ser un objetivo de recolección."
+            },
+            {
+              "nombre": "OpenTelemetry Go SDK",
+              "categoria": "libreria",
+              "descripcion": "SDK de Go para OpenTelemetry, un estándar para la observabilidad.",
+              "version_sugerida": "1.20.0",
+              "url_docs": "https://opentelemetry.io/docs/collector/",
+              "por_que": "Permite instrumentar aplicaciones para enviar trazas, métricas y logs de forma estandarizada a diversos backends, incluyendo uno propio."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "TimescaleDB",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos de series temporales construida sobre PostgreSQL.",
+              "version_sugerida": "2.11.0",
+              "url_docs": "https://docs.timescale.com/",
+              "por_que": "Optimizado para almacenar y consultar grandes volúmenes de datos de series temporales (métricas), ofreciendo mejor rendimiento que PostgreSQL estándar para este caso de uso."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Esencial para empaquetar el agente, la API y el dashboard, permitiendo una fácil implementación y gestión en diferentes entornos."
+            },
+            {
+              "nombre": "Prometheus",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de monitorización y alertas de código abierto.",
+              "version_sugerida": "2.47.0",
+              "url_docs": "https://prometheus.io/docs/",
+              "por_que": "Puede ser utilizado como un sistema de recolección y alerta inicial, o como un componente que consulta las métricas almacenadas en TimescaleDB."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Framework de pruebas incorporado en Go.",
+              "version_sugerida": null,
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Permite escribir pruebas unitarias y de integración directamente en Go, cubriendo la lógica del agente y la API."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Grafana",
+              "categoria": "otros",
+              "descripcion": "Plataforma de análisis y visualización de métricas de código abierto.",
+              "version_sugerida": "10.2.0",
+              "url_docs": "https://grafana.com/docs/",
+              "por_que": "Excelente para visualizar los datos de series temporales de TimescaleDB, creando dashboards personalizables para el monitoreo del rendimiento."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Agente ligero para instrumentación de aplicaciones",
+          "API para recepción de métricas y trazas",
+          "Dashboard web para visualización de datos",
+          "Soporte para métricas de latencia y errores",
+          "Trazabilidad de solicitudes entre servicios"
+        ],
+        "casos_uso": [
+          "Monitoreo de la salud de microservicios en producción.",
+          "Identificación rápida de cuellos de botella de rendimiento.",
+          "Análisis de la causa raíz de errores en aplicaciones.",
+          "Visualización del impacto de despliegues en el rendimiento.",
+          "Establecimiento de bases de referencia (baselines) de rendimiento."
+        ],
+        "reglas_negocio": [
+          "Las métricas se recolectan cada 10 segundos por defecto.",
+          "Los datos se retienen durante 30 días.",
+          "Las trazas se almacenan asociadas a las métricas correspondientes.",
+          "Los endpoints de la API solo aceptan datos de servicios registrados.",
+          "Las alertas se configuran a nivel de servicio y umbral."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "OpenTelemetry (estándar de instrumentación)",
+          "Prometheus (monitorización y alertas)"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia con Go.",
+          "Conocimientos de arquitecturas de microservicios.",
+          "Comprensión de métricas de rendimiento de aplicaciones (latencia, tasa de error).",
+          "Familiaridad con bases de datos de series temporales.",
+          "Experiencia con Docker y orquestación (Docker Compose)."
+        ],
+        "riesgos": [
+          "El agente puede introducir una sobrecarga significativa en las aplicaciones monitorizadas.",
+          "La gestión de grandes volúmenes de datos de series temporales puede ser costosa.",
+          "La correcta instrumentación de diversas aplicaciones puede ser compleja.",
+          "La seguridad de la API de recolección de métricas es crítica.",
+          "Mantener la compatibilidad con estándares como OpenTelemetry."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-15T10:00:00Z",
+        "hash_unicidad": "a7b8c9d0e1f23456"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "763219300da5654b"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "b0c1d2e3f4a56789",
+        "titulo": "Generador de Documentación Técnica Automática",
+        "descripcion_corta": "Herramienta CLI que escanea código fuente y genera documentación técnica básica (README, diagramas).",
+        "descripcion_detallada": "Desarrollo de una herramienta de línea de comandos (CLI) que analiza código fuente de proyectos (Python, JavaScript) para generar automáticamente documentación técnica. Escaneará archivos de código para extraer información sobre funciones, clases, parámetros y tipos de retorno. Generará un archivo README.md con un resumen de la estructura del código y enlaces a la documentación detallada. Opcionalmente, podrá generar diagramas de dependencias simples (ej. diagrama de clases o módulos). Se integrará con herramientas de diagramación como PlantUML.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "ast",
+              "categoria": "libreria",
+              "descripcion": "Módulo para trabajar con el árbol de sintaxis abstracta (AST) de Python.",
+              "version_sugerida": null,
+              "url_docs": "https://docs.python.org/3/library/ast.html",
+              "por_que": "Permite analizar el código fuente de Python de forma programática para extraer información estructural sin necesidad de ejecutar el código."
+            },
+            {
+              "nombre": "Click",
+              "categoria": "libreria",
+              "descripcion": "Framework para crear interfaces de línea de comandos hermosas en Python.",
+              "version_sugerida": "8.1.7",
+              "url_docs": "https://click.palletsprojects.com/",
+              "por_que": "Simplifica la creación de comandos CLI, el manejo de argumentos, opciones y subcomandos de manera intuitiva."
+            },
+            {
+              "nombre": "PlantUML",
+              "categoria": "libreria",
+              "descripcion": "Herramienta para crear diagramas a partir de texto.",
+              "version_sugerida": "1.2023.11",
+              "url_docs": "https://plantuml.com/",
+              "por_que": "Se usará para generar diagramas de forma programática a partir de la información extraída del código, facilitando la visualización de la estructura."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de pruebas para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Proporciona una forma sencilla de escribir y ejecutar pruebas unitarias para la lógica de análisis y generación de documentación."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis de código fuente Python y JavaScript.",
+          "Extracción de información de funciones, clases y métodos.",
+          "Generación de archivo README.md con resumen.",
+          "Generación de diagramas de clases/módulos (opcional).",
+          "Soporte para diferentes lenguajes de programación (inicialmente Python)."
+        ],
+        "casos_uso": [
+          "Documentación rápida de proyectos pequeños y medianos.",
+          "Generación de documentación inicial para nuevos proyectos.",
+          "Ayuda a desarrolladores junior a entender la estructura del código.",
+          "Mantenimiento de documentación técnica actualizada.",
+          "Integración en pipelines CI/CD para generar documentación automáticamente."
+        ],
+        "reglas_negocio": [
+          "La herramienta debe ejecutarse desde la línea de comandos.",
+          "Debe poder especificar el directorio del código fuente a analizar.",
+          "El archivo README generado debe ser compatible con Markdown.",
+          "Los diagramas se generan en formato PNG o SVG.",
+          "Se prioriza la simplicidad y la facilidad de uso."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "PlantUML (para diagramas)"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Python.",
+          "Comprensión de la estructura del código fuente (funciones, clases).",
+          "Familiaridad con la línea de comandos (CLI).",
+          "Conceptos básicos de Markdown."
+        ],
+        "riesgos": [
+          "La complejidad del análisis de código puede crecer rápidamente con lenguajes más complejos.",
+          "La integración con PlantUML puede requerir dependencias externas.",
+          "La calidad de la documentación generada puede ser limitada para código complejo.",
+          "Soporte limitado para JavaScript inicialmente.",
+          "Manejo de casos borde y sintaxis no estándar."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-15T10:00:00Z",
+        "hash_unicidad": "b0c1d2e3f4a56789"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "763219300da5654b"
+      }
     }
   ],
   "ultimos_hashes": [
-    "f4c2b0a1d3e5f79c",
-    "a8b7c6d5e4f3a2b1",
-    "5a4b3c2d1e0f9a8b",
     "e8f7a6b5c4d3e2f1",
     "6b2a0f1d7e8c4a9b",
     "4f9a1b2c3d4e5f6a",
@@ -15912,8 +16314,11 @@
     "3c4d5e6f7a8b9c0d",
     "a2b1c3d4e5f67890",
     "b3d4e5f678901234",
-    "c4d5e6f789012345"
+    "c4d5e6f789012345",
+    "f1a2b3c4d5e67890",
+    "a7b8c9d0e1f23456",
+    "b0c1d2e3f4a56789"
   ],
-  "total_generados": 117,
-  "fecha_ultima_generacion": "2026-10-20T16:16:42.911029"
+  "total_generados": 120,
+  "fecha_ultima_generacion": "2026-10-20T22:54:57.982605"
 }
