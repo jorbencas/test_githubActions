@@ -15414,12 +15414,405 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "c0b277b799aae486"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a2b1c3d4e5f67890",
+        "titulo": "Plataforma de Gestión de Proyectos Ágiles",
+        "descripcion_corta": "Web app para Scrum/Kanban, con tableros, tareas, sprints y reportes.",
+        "descripcion_detallada": "Desarrollo de una aplicación web full-stack para la gestión de proyectos bajo metodologías ágiles como Scrum y Kanban. Incluye funcionalidades como tableros personalizables (drag-and-drop), creación y asignación de tareas, definición de sprints, seguimiento del progreso, y generación de reportes básicos de burndown y velocity. La aplicación busca ser una alternativa ligera a herramientas complejas, enfocada en la usabilidad y la colaboración en equipos pequeños y medianos.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "fullstack"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Biblioteca JavaScript para construir interfaces de usuario declarativas y basadas en componentes.",
+              "version_sugerida": "^18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear UIs interactivas y eficientes, gestionando el estado de la aplicación de forma reactiva."
+            },
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de Node.js para construir aplicaciones del lado del servidor eficientes, confiables y escalables.",
+              "version_sugerida": "^10.0.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Proporciona una arquitectura modular y organizada (inspirada en Angular) con soporte para TypeScript, facilitando el desarrollo backend robusto."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Prisma",
+              "categoria": "libreria",
+              "descripcion": "ORM de próxima generación para Node.js y TypeScript.",
+              "version_sugerida": "^5.0.0",
+              "url_docs": "https://www.prisma.io/",
+              "por_que": "Simplifica las interacciones con la base de datos, ofreciendo migración automática y un cliente de base de datos tipo-seguro."
+            },
+            {
+              "nombre": "Tailwind CSS",
+              "categoria": "libreria",
+              "descripcion": "Framework CSS de utilidad primero para construir rápidamente interfaces de usuario personalizadas.",
+              "version_sugerida": "^3.3.0",
+              "url_docs": "https://tailwindcss.com/",
+              "por_que": "Permite un diseño rápido y consistente a través de clases de utilidad, facilitando la creación de UIs responsivas."
+            },
+            {
+              "nombre": "React DnD",
+              "categoria": "libreria",
+              "descripcion": "Kit de herramientas para crear interacciones drag-and-drop en React.",
+              "version_sugerida": "^14.0.0",
+              "url_docs": "https://react-dnd.github.io/",
+              "por_que": "Esencial para implementar la funcionalidad de arrastrar y soltar en los tableros Kanban/Scrum."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos objeto-relacional de código abierto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/",
+              "por_que": "Soporta tipos de datos avanzados (JSONB), transacciones ACID y es escalable para manejar datos de proyectos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "latest",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite crear entornos de desarrollo y producción consistentes y reproducibles, facilitando el despliegue."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript divertido para todo tipo de proyectos.",
+              "version_sugerida": "^29.0.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Ofrece una experiencia de testing integrada con soporte para snapshots, mocking y cobertura."
+            },
+            {
+              "nombre": "React Testing Library",
+              "categoria": "testing",
+              "descripcion": "Librería para testear componentes React de forma accesible y centrada en el usuario.",
+              "version_sugerida": "^13.0.0",
+              "url_docs": "https://testing-library.com/docs/react-testing-library/intro/",
+              "por_que": "Fomenta buenas prácticas de testing al interactuar con el DOM como lo haría un usuario."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de tableros (Scrum/Kanban)",
+          "Sistema de tareas con estados y asignaciones",
+          "Gestión de Sprints y planificación",
+          "Funcionalidad Drag-and-Drop para tareas",
+          "Reportes de progreso (Burndown, Velocity)",
+          "Autenticación y autorización de usuarios"
+        ],
+        "casos_uso": [
+          "Equipos de desarrollo gestionando sus sprints.",
+          "Product Owners definiendo y priorizando tareas.",
+          "Scrum Masters monitorizando el progreso del sprint.",
+          "Gestores de proyecto supervisando el avance general.",
+          "Freelancers organizando su carga de trabajo."
+        ],
+        "reglas_negocio": [
+          "Un usuario solo puede modificar tareas asignadas o de su equipo.",
+          "Las tareas solo pueden moverse a columnas permitidas según su estado.",
+          "Los Sprints tienen fechas de inicio y fin definidas.",
+          "Los reportes se generan basados en los datos del sprint activo.",
+          "Los administradores pueden gestionar usuarios y proyectos."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "API de autenticación (ej. Auth0, Firebase Auth)",
+          "Servicio de notificaciones push (ej. Pusher)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos sólidos de TypeScript y React.",
+          "Comprensión de principios de gestión ágil.",
+          "Experiencia con bases de datos relacionales y ORMs.",
+          "Familiaridad con NestJS o frameworks backend similares."
+        ],
+        "riesgos": [
+          "Complejidad en la implementación del drag-and-drop en diferentes estados.",
+          "Escalabilidad de la base de datos con muchos proyectos/tareas.",
+          "Manejo eficiente del estado en React para UIs complejas.",
+          "Gestión de permisos y roles de usuario.",
+          "Posibles problemas de rendimiento en la generación de reportes."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "a2b1c3d4e5f67890"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "9197e6a6485ce79a"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "b3d4e5f678901234",
+        "titulo": "Analizador de Sentimiento de Comentarios de Usuarios",
+        "descripcion_corta": "API para analizar el sentimiento de texto usando modelos pre-entrenados.",
+        "descripcion_detallada": "Creación de una API RESTful que consume texto (comentarios de usuarios, reviews, etc.) y devuelve una puntuación de sentimiento (positivo, negativo, neutro) y posiblemente las emociones detectadas. Utilizará modelos de Machine Learning pre-entrenados y optimizados para análisis de texto en español e inglés. La API será desplegada en un entorno escalable, lista para ser integrada por otras aplicaciones que necesiten comprender la opinión de sus usuarios.",
+        "nivel": "senior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "microservicio"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python 3.7+ basado en type hints estándar de Python.",
+              "version_sugerida": "0.103.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Alto rendimiento, validación automática de datos con Pydantic, generación automática de documentación OpenAPI/Swagger."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Transformers (Hugging Face)",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca que proporciona miles de modelos pre-entrenados para procesamiento de lenguaje natural.",
+              "version_sugerida": "4.34.0",
+              "url_docs": "https://huggingface.co/docs/transformers/index",
+              "por_que": "Acceso fácil a modelos SOTA para análisis de sentimiento y otras tareas de NLP sin necesidad de entrenarlos desde cero."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestor de configuraciones usando anotaciones de tipo de Python.",
+              "version_sugerida": "2.4.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Utilizado por FastAPI para definir esquemas de datos y validar las peticiones entrantes y las respuestas salientes."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "latest",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Empaqueta la aplicación y sus dependencias (incluyendo modelos ML pesados) para un despliegue consistente."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Modelos de Transformers (ej. BERT, RoBERTa)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de lenguaje pre-entrenados para tareas de NLP.",
+              "version_sugerida": null,
+              "url_docs": "https://huggingface.co/models",
+              "por_que": "Proporcionan la base para realizar el análisis de sentimiento con alta precisión en diversos idiomas."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests para la API y la lógica de análisis de sentimiento, con soportes para fixtures y plugins."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Endpoint POST para análisis de sentimiento de texto.",
+          "Soporte multilingüe (Español, Inglés inicial).",
+          "Devolución de score de sentimiento (positivo/negativo/neutro).",
+          "Opcionalmente, detección de emociones básicas (alegría, tristeza, etc.).",
+          "Documentación interactiva de la API (Swagger UI)."
+        ],
+        "casos_uso": [
+          "Analizar el feedback de clientes en encuestas.",
+          "Monitorizar menciones de marca en redes sociales.",
+          "Evaluar la satisfacción del usuario en reviews de productos.",
+          "Clasificar automáticamente tickets de soporte.",
+          "Detectar tendencias de opinión en foros."
+        ],
+        "reglas_negocio": [
+          "La longitud del texto de entrada está limitada.",
+          "Se aceptan peticiones con formato JSON.",
+          "La API devuelve un código de estado HTTP apropiado (200, 400, 500).",
+          "Los modelos seleccionados son adecuados para el dominio de los comentarios.",
+          "Se manejan excepciones de forma controlada."
+        ],
+        "por_que_ia": "Se utilizan modelos pre-entrenados de la biblioteca Transformers (Hugging Face) para realizar el análisis de sentimiento del texto de entrada. Estos modelos han sido entrenados en grandes corpus de texto y son capaces de capturar matices lingüísticos para determinar la polaridad del texto.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "Servicio de despliegue (ej. AWS Lambda, Google Cloud Run, Heroku)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 3,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo de APIs RESTful.",
+          "Comprensión básica de Machine Learning y Procesamiento de Lenguaje Natural.",
+          "Experiencia con la librería Transformers de Hugging Face.",
+          "Familiaridad con Docker para despliegue."
+        ],
+        "riesgos": [
+          "La precisión del modelo puede variar según el idioma y el dominio específico.",
+          "El tamaño de los modelos puede requerir recursos de cómputo considerables (RAM, CPU/GPU).",
+          "Latencia en la respuesta si los modelos son muy grandes o el servidor está sobrecargado.",
+          "Necesidad de reentrenar o ajustar modelos para dominios muy específicos.",
+          "Gestión de dependencias de librerías de ML."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:01:00Z",
+        "hash_unicidad": "b3d4e5f678901234"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "9197e6a6485ce79a"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c4d5e6f789012345",
+        "titulo": "Monitor de Rendimiento de Sitios Web (CLI)",
+        "descripcion_corta": "Herramienta CLI para medir latencia, uptime y métricas básicas de sitios web.",
+        "descripcion_detallada": "Desarrollar una herramienta de línea de comandos (CLI) que permita a los usuarios monitorear el rendimiento de uno o varios sitios web. La herramienta medirá la latencia de respuesta (ping/HTTP GET), el código de estado HTTP, y el tiempo de carga aproximado. Podrá configurarse para ejecutarse periódicamente y enviar alertas básicas (ej. salida por consola, archivo de log) si un sitio deja de responder o su latencia supera un umbral. Enfocado en simplicidad y utilidad para desarrolladores y sysadmins.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "standard library net/http",
+              "categoria": "libreria",
+              "descripcion": "Paquete Go para realizar peticiones HTTP.",
+              "version_sugerida": "latest",
+              "url_docs": "https://pkg.go.dev/net/http",
+              "por_que": "Permite realizar peticiones HTTP GET y medir tiempos de respuesta de forma eficiente y nativa en Go."
+            },
+            {
+              "nombre": "standard library time",
+              "categoria": "libreria",
+              "descripcion": "Paquete Go para manejo de tiempos y duraciones.",
+              "version_sugerida": "latest",
+              "url_docs": "https://pkg.go.dev/time",
+              "por_que": "Necesario para medir la latencia, calcular duraciones y gestionar la periodicidad de las comprobaciones."
+            },
+            {
+              "nombre": "Cobra",
+              "categoria": "libreria",
+              "descripcion": "Framework popular para crear CLIs potentes en Go.",
+              "version_sugerida": "1.27.0",
+              "url_docs": "https://github.com/spf13/cobra",
+              "por_que": "Facilita la creación de comandos, subcomandos, flags y la gestión de argumentos de línea de comandos de forma estructurada."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "standard library testing",
+              "categoria": "testing",
+              "descripcion": "Paquete nativo de Go para escribir tests.",
+              "version_sugerida": "latest",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Permite escribir pruebas unitarias para las funciones de monitorización y manejo de configuración."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Go Modules",
+              "categoria": "otros",
+              "descripcion": "Sistema de gestión de dependencias para Go.",
+              "version_sugerida": "latest",
+              "url_docs": "https://go.dev/doc/modules",
+              "por_que": "Estándar para gestionar las dependencias del proyecto Go."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Comprobación de disponibilidad HTTP (GET).",
+          "Medición de latencia de respuesta.",
+          "Verificación de código de estado HTTP.",
+          "Configuración vía archivo (ej. YAML) o flags CLI.",
+          "Ejecución periódica de comprobaciones.",
+          "Registro básico de eventos en consola/archivo."
+        ],
+        "casos_uso": [
+          "Desarrolladores verificando si su sitio de staging está online.",
+          "Sysadmins monitorizando la salud de múltiples sitios web.",
+          "Testing de despliegues para asegurar que el sitio responde correctamente.",
+          "Monitorización rápida de sitios críticos sin configurar soluciones complejas.",
+          "Integración en scripts de CI/CD para validaciones post-despliegue."
+        ],
+        "reglas_negocio": [
+          "Se debe poder especificar una lista de URLs a monitorizar.",
+          "El intervalo de monitorización debe ser configurable.",
+          "Se debe poder definir un umbral de latencia para considerar un fallo.",
+          "Se debe poder definir códigos de estado HTTP esperados.",
+          "La herramienta debe reportar claramente el estado (OK/FAIL) de cada URL."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Servicio de notificación (ej. SendGrid para email, Twilio para SMS - opcional)"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Go.",
+          "Comprensión de protocolos HTTP y conceptos de redes.",
+          "Familiaridad con el uso de herramientas de línea de comandos.",
+          "Conocimientos básicos de archivos de configuración (YAML)."
+        ],
+        "riesgos": [
+          "Falsos positivos/negativos debidos a problemas de red intermitentes.",
+          "La latencia medida puede verse afectada por la ubicación del cliente CLI.",
+          "Manejo de sitios web que requieren autenticación o JavaScript complejo.",
+          "Complejidad al añadir alertas avanzadas (email, SMS).",
+          "Gestión de errores en la lectura de archivos de configuración."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:02:00Z",
+        "hash_unicidad": "c4d5e6f789012345"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "9197e6a6485ce79a"
+      }
     }
   ],
   "ultimos_hashes": [
-    "a8f3e1d0c9b7a654",
-    "b2c3d4e5f6a7b8c9",
-    "c1d2e3f4a5b6c7d8",
     "f4c2b0a1d3e5f79c",
     "a8b7c6d5e4f3a2b1",
     "5a4b3c2d1e0f9a8b",
@@ -15516,8 +15909,11 @@
     "f7c9a0b2e1d3f5a7",
     "12a3b4c5d6e7f8a9",
     "2b3c4d5e6f7a8b9c",
-    "3c4d5e6f7a8b9c0d"
+    "3c4d5e6f7a8b9c0d",
+    "a2b1c3d4e5f67890",
+    "b3d4e5f678901234",
+    "c4d5e6f789012345"
   ],
-  "total_generados": 114,
-  "fecha_ultima_generacion": "2026-10-19T23:17:16.281240"
+  "total_generados": 117,
+  "fecha_ultima_generacion": "2026-10-20T03:10:59.417810"
 }
