@@ -16627,10 +16627,154 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "eb1aa98e2c91a6e1"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f7b2a1c8d9e0f3a4",
+        "titulo": "AI-Powered Code Review Assistant",
+        "descripcion_corta": "Asistente de revisión de código con IA para detectar bugs, vulnerabilidades y mejorar la legibilidad.",
+        "descripcion_detallada": "Un asistente impulsado por IA que analiza Pull Requests (PRs) y sugerencias de código para identificar posibles errores, vulnerabilidades de seguridad y áreas de mejora en la legibilidad y el estilo del código. Se integra con plataformas como GitHub o GitLab para proporcionar feedback directo en los comentarios del PR. Utiliza modelos de lenguaje avanzados para entender el contexto del código y ofrecer sugerencias constructivas.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "devops",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python, basado en tipado estándar y validación de datos.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ideal para crear la API que procesará las solicitudes de análisis de código y devolverá las sugerencias de la IA."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "PyGithub",
+              "categoria": "libreria",
+              "descripcion": "API oficial para interactuar con la API REST de GitHub.",
+              "version_sugerida": "1.60.0",
+              "url_docs": "https://pygithub.readthedocs.io/en/stable/",
+              "por_que": "Para obtener información de los repositorios, leer diffs de código de los PRs y publicar comentarios."
+            },
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por modelos de lenguaje.",
+              "version_sugerida": "0.1.0",
+              "url_docs": "https://python.langchain.com/docs/get_started/introduction",
+              "por_que": "Simplifica la orquestación de llamadas a modelos de IA, el manejo de prompts y la integración con diferentes fuentes de datos (código)."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en tipado de Python.",
+              "version_sugerida": "2.5.0",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Fundamental en FastAPI para la validación de datos de entrada/salida y para definir modelos de datos."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Para empaquetar la aplicación y sus dependencias, asegurando un entorno de ejecución consistente y facilitando el despliegue."
+            },
+            {
+              "nombre": "GitHub Actions",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de CI/CD integrada en GitHub.",
+              "version_sugerida": "latest",
+              "url_docs": "https://docs.github.com/en/actions",
+              "por_que": "Para automatizar el proceso de análisis de código cuando se abren o actualizan PRs."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "GPT-4 / GPT-3.5 Turbo",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de lenguaje avanzados de OpenAI para comprensión y generación de texto.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://platform.openai.com/docs/models",
+              "por_que": "Para analizar el código fuente, identificar patrones de error, sugerir refactorizaciones y detectar vulnerabilidades."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing popular para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/en/stable/",
+              "por_que": "Para escribir tests unitarios y de integración para la API y la lógica de análisis de código."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis automático de código en PRs.",
+          "Detección de bugs comunes y anti-patrones.",
+          "Identificación de vulnerabilidades de seguridad básicas.",
+          "Sugerencias de mejora de legibilidad y estilo.",
+          "Integración con GitHub/GitLab.",
+          "Feedback directo en comentarios del PR."
+        ],
+        "casos_uso": [
+          "Mejorar la calidad del código antes de fusionar.",
+          "Reducir el tiempo de revisión manual de código.",
+          "Asegurar el cumplimiento de estándares de codificación.",
+          "Identificar riesgos de seguridad tempranamente.",
+          "Facilitar el aprendizaje de desarrolladores junior."
+        ],
+        "reglas_negocio": [
+          "Solo analizar código en `*.py`, `*.js`, `*.ts`.",
+          "Ignorar directorios como `node_modules`, `.venv`, `dist`.",
+          "El análisis se activa en eventos `pull_request` y `push`.",
+          "Las sugerencias se limitan a 10 por PR para evitar spam.",
+          "Las credenciales de la IA se gestionan a través de variables de entorno."
+        ],
+        "por_que_ia": "Se utiliza IA (modelos de lenguaje grandes como GPT) para comprender la semántica y el contexto del código, permitiendo una detección de errores y vulnerabilidades más avanzada que los linters estáticos tradicionales. La IA puede identificar patrones complejos y sugerir refactorizaciones significativas.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de GitHub/GitLab",
+          "OpenAI API"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo web.",
+          "Comprensión de APIs REST.",
+          "Familiaridad con sistemas de control de versiones (Git).",
+          "Acceso a una clave API de OpenAI."
+        ],
+        "riesgos": [
+          "Posibles falsos positivos/negativos en las detecciones de la IA.",
+          "Costos asociados al uso de la API de OpenAI.",
+          "Manejo seguro de credenciales de GitHub/GitLab y OpenAI.",
+          "La IA puede no entender contextos de código muy específicos o propietarios.",
+          "Latencia en la respuesta de la IA afectando la experiencia del usuario."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T00:00:00Z",
+        "hash_unicidad": "f7b2a1c8d9e0f3a4"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "a5b7b22a2aa4b726"
+      }
     }
   ],
   "ultimos_hashes": [
-    "e8a7f6d5c4b3a201",
     "e4f8d1c9b2a76053",
     "a9b8c7d6e5f4a3b2",
     "c1d2e3f4a5b6c7d9",
@@ -16729,8 +16873,9 @@
     "b0c1d2e3f4a56789",
     "a4e8e8c23c1d4f5e",
     "b8c9d0e1f2a34b5c",
-    "c9d0e1f2a3b45c6d"
+    "c9d0e1f2a3b45c6d",
+    "f7b2a1c8d9e0f3a4"
   ],
-  "total_generados": 123,
-  "fecha_ultima_generacion": "2026-10-21T03:05:51.689822"
+  "total_generados": 124,
+  "fecha_ultima_generacion": "2026-10-21T09:05:08.633677"
 }
