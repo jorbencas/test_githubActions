@@ -16772,10 +16772,130 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "a5b7b22a2aa4b726"
       }
+    },
+    {
+      "proyecto": {
+        "id": "9f1a2b3c4d5e6f78",
+        "titulo": "Generador de Resúmenes de Artículos con IA",
+        "descripcion_corta": "Herramienta web para resumir artículos largos usando modelos de lenguaje.",
+        "descripcion_detallada": "Una aplicación web que permite a los usuarios pegar URLs de artículos o texto directamente. Utiliza un modelo de IA para generar un resumen conciso del contenido. Ideal para estudiantes, investigadores o cualquier persona que necesite procesar grandes cantidades de información rápidamente. La interfaz será simple, enfocada en la funcionalidad principal: pegar contenido, seleccionar la longitud del resumen (opcional) y obtener el resultado. Se integrará con APIs de modelos de lenguaje para el procesamiento de texto.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "web",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Flask",
+              "categoria": "framework",
+              "descripcion": "Microframework web ligero y fácil de usar para crear la API y la interfaz.",
+              "version_sugerida": "2.3.x",
+              "url_docs": "https://flask.palletsprojects.com/",
+              "por_que": "Permite un desarrollo rápido de la API REST y la integración con el frontend."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Requests",
+              "categoria": "libreria",
+              "descripcion": "Para realizar peticiones HTTP a las URLs de los artículos y a la API de IA.",
+              "version_sugerida": "2.31.x",
+              "url_docs": "https://requests.readthedocs.io/",
+              "por_que": "Facilita la obtención del contenido de las URLs y la comunicación con servicios externos."
+            },
+            {
+              "nombre": "BeautifulSoup4",
+              "categoria": "libreria",
+              "descripcion": "Para parsear el HTML de las páginas web y extraer el texto principal.",
+              "version_sugerida": "4.12.x",
+              "url_docs": "https://www.crummy.com/software/BeautifulSoup/bs4/doc/",
+              "por_que": "Esencial para extraer el contenido textual limpio de las páginas web antes de enviarlo a la IA."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Gunicorn",
+              "categoria": "servidor_web",
+              "descripcion": "Servidor WSGI para servir la aplicación Flask en producción.",
+              "version_sugerida": "21.x",
+              "url_docs": "https://gunicorn.org/",
+              "por_que": "Proporciona un servidor robusto y escalable para la aplicación web en un entorno de producción."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API",
+              "categoria": "api_ia",
+              "descripcion": "Acceso a modelos de lenguaje avanzados para la generación de resúmenes.",
+              "version_sugerida": null,
+              "url_docs": "https://platform.openai.com/docs",
+              "por_que": "Ofrece modelos potentes y fáciles de usar para el procesamiento y resumen de texto natural."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para escribir y ejecutar pruebas unitarias y de integración.",
+              "version_sugerida": "7.x",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite crear un conjunto de pruebas automatizadas para asegurar la funcionalidad y la calidad del código."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Pegar URL de artículo",
+          "Pegar texto directamente",
+          "Generación de resumen con IA",
+          "Interfaz web simple"
+        ],
+        "casos_uso": [
+          "Resumir noticias rápidamente",
+          "Extraer puntos clave de documentos largos",
+          "Acelerar la investigación académica",
+          "Revisar contenido web de forma eficiente"
+        ],
+        "reglas_negocio": [
+          "El contenido a resumir no debe exceder un límite de tokens definido por la API de IA.",
+          "Las URLs deben ser válidas y accesibles.",
+          "Se debe manejar el error si la extracción de texto falla.",
+          "El resumen generado debe ser significativamente más corto que el original."
+        ],
+        "por_que_ia": "Se utiliza un modelo de lenguaje grande (LLM) para comprender el texto del artículo y generar un resumen coherente y conciso, tarea que sería muy compleja de implementar sin IA.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de modelos de lenguaje"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Python y Flask",
+          "Comprensión de APIs REST",
+          "Acceso a una API Key de OpenAI"
+        ],
+        "riesgos": [
+          "Costos asociados al uso de la API de IA.",
+          "Limitaciones en la longitud del texto de entrada/salida de la IA.",
+          "Dependencia de la disponibilidad y rendimiento de la API de IA.",
+          "Dificultad para extraer texto limpio de páginas web complejas."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-05T10:00:00Z",
+        "hash_unicidad": "9f1a2b3c4d5e6f78"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "4828b5b5dd3137c4"
+      }
     }
   ],
   "ultimos_hashes": [
-    "e4f8d1c9b2a76053",
     "a9b8c7d6e5f4a3b2",
     "c1d2e3f4a5b6c7d9",
     "01f2a3b4c5d6e7f8",
@@ -16874,8 +16994,9 @@
     "a4e8e8c23c1d4f5e",
     "b8c9d0e1f2a34b5c",
     "c9d0e1f2a3b45c6d",
-    "f7b2a1c8d9e0f3a4"
+    "f7b2a1c8d9e0f3a4",
+    "9f1a2b3c4d5e6f78"
   ],
-  "total_generados": 124,
-  "fecha_ultima_generacion": "2026-10-21T09:05:08.633677"
+  "total_generados": 125,
+  "fecha_ultima_generacion": "2026-10-21T22:59:49.230492"
 }
