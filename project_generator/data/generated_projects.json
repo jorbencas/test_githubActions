@@ -16215,12 +16215,421 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "763219300da5654b"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a4e8e8c2-3c1d-4f5e-8b1a-2c3d4e5f6789",
+        "titulo": "API de Gestión de Proyectos Colaborativa",
+        "descripcion_corta": "API RESTful para gestionar proyectos, tareas y usuarios con roles y permisos.",
+        "descripcion_detallada": "Desarrollar una API RESTful robusta utilizando Python y FastAPI que permita la creación y gestión de proyectos, asignación de tareas a usuarios, seguimiento del progreso y control de acceso basado en roles. Incluye autenticación JWT, validación de datos con Pydantic y despliegue en Docker. La API servirá como backend para una futura aplicación web o móvil.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y de alto rendimiento para construir APIs con Python 3.7+ basado en tipado estándar de Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Proporciona validación automática de datos, serialización, documentación interactiva (Swagger UI/ReDoc) y excelente rendimiento asíncrono."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "Toolkit SQL y ORM para Python que permite a los desarrolladores trabajar con bases de datos relacionales de manera eficiente.",
+              "version_sugerida": "2.0.0",
+              "url_docs": "https://www.sqlalchemy.org/",
+              "por_que": "Facilita la interacción con la base de datos, abstrae las diferencias entre SGBD y permite definir modelos de datos de forma orientada a objetos."
+            },
+            {
+              "nombre": "python-jose",
+              "categoria": "libreria",
+              "descripcion": "Implementación de JSON Web Token (JWT) para Python.",
+              "version_sugerida": "3.3.0",
+              "url_docs": "https://python-jose.readthedocs.io/",
+              "por_que": "Esencial para implementar la autenticación segura mediante tokens JWT para la API."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en anotaciones de tipo de Python.",
+              "version_sugerida": "2.4.0",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Integrado con FastAPI para definir esquemas de datos y validar automáticamente las solicitudes entrantes y las respuestas salientes."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto de código abierto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto, escalable y soporta tipos de datos avanzados como JSONB, ideal para almacenar información estructurada y semi-estructurada de proyectos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la aplicación y sus dependencias, asegurando un entorno de desarrollo y producción consistente y facilitando el despliegue."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests claros y mantenibles, con soporte para fixtures y parametrización, esencial para asegurar la calidad de la API."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Autenticación y autorización (JWT, roles)",
+          "Gestión CRUD de proyectos, tareas y usuarios",
+          "Asignación de tareas y seguimiento de progreso",
+          "Validación automática de datos de entrada/salida",
+          "Documentación interactiva de la API (Swagger/ReDoc)"
+        ],
+        "casos_uso": [
+          "Un gerente crea un nuevo proyecto y asigna tareas.",
+          "Un miembro del equipo actualiza el estado de su tarea.",
+          "Un administrador revisa el progreso general de todos los proyectos.",
+          "Un usuario se registra y recibe un token JWT.",
+          "El sistema valida que un campo obligatorio no se haya enviado."
+        ],
+        "reglas_negocio": [
+          "Solo los administradores pueden crear nuevos roles.",
+          "Un usuario solo puede ver y modificar sus propias tareas o las asignadas a su equipo.",
+          "El título del proyecto debe ser único.",
+          "Una tarea debe estar asociada a un proyecto existente.",
+          "La fecha de finalización de una tarea no puede ser anterior a la fecha de inicio."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Documentación oficial de FastAPI",
+          "Documentación oficial de SQLAlchemy",
+          "RFC 7519 (JWT)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos sólidos de Python.",
+          "Comprensión de principios RESTful.",
+          "Familiaridad con bases de datos relacionales.",
+          "Experiencia básica con Docker."
+        ],
+        "riesgos": [
+          "Complejidad en la gestión de permisos y roles si no se diseña bien.",
+          "Rendimiento de la base de datos con grandes volúmenes de datos.",
+          "Seguridad de la autenticación JWT si no se implementa correctamente.",
+          "Manejo de concurrencia en operaciones críticas."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-15T10:00:00Z",
+        "hash_unicidad": "a4e8e8c23c1d4f5e"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "eb1aa98e2c91a6e1"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "b8c9d0e1-f2a3-4b5c-6d7e-8f9a0b1c2d34",
+        "titulo": "Generador de Contenido Educativo con IA",
+        "descripcion_corta": "Herramienta web para generar resúmenes y preguntas de estudio a partir de texto.",
+        "descripcion_detallada": "Una aplicación web fullstack que utiliza un modelo de lenguaje grande (LLM) para procesar texto proporcionado por el usuario (ej. artículos, capítulos de libros) y generar automáticamente resúmenes concisos y preguntas de opción múltiple para facilitar el estudio. Implementado con un frontend interactivo y un backend robusto.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml",
+          "fullstack"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "Next.js",
+              "categoria": "framework",
+              "descripcion": "Framework de React para producción.",
+              "version_sugerida": "13.5.0",
+              "url_docs": "https://nextjs.org/docs",
+              "por_que": "Permite renderizado del lado del servidor (SSR) y generación estática (SSG) para un rendimiento óptimo y SEO, además de routing integrado y API routes."
+            },
+            {
+              "nombre": "Tailwind CSS",
+              "categoria": "framework",
+              "descripcion": "Framework CSS de utilidad.",
+              "version_sugerida": "3.3.0",
+              "url_docs": "https://tailwindcss.com/docs",
+              "por_que": "Acelera el desarrollo del frontend con clases de utilidad predefinidas, permitiendo crear interfaces de usuario rápidas y personalizadas."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "LangChain.js",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por LLMs.",
+              "version_sugerida": "0.0.170",
+              "url_docs": "https://js.langchain.com/docs/",
+              "por_que": "Orquesta las interacciones con el modelo de IA, simplifica el encadenamiento de prompts y la gestión de la memoria conversacional."
+            },
+            {
+              "nombre": "Zod",
+              "categoria": "libreria",
+              "descripcion": "Sistema de validación de esquemas para TypeScript.",
+              "version_sugerida": "3.22.0",
+              "url_docs": "https://zod.dev/",
+              "por_que": "Proporciona validación de datos robusta y tipada en el frontend y backend, mejorando la seguridad y la experiencia del desarrollador."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "MongoDB",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos NoSQL orientada a documentos.",
+              "version_sugerida": "7.0",
+              "url_docs": "https://www.mongodb.com/docs/",
+              "por_que": "Flexibilidad para almacenar texto original, resúmenes generados y preguntas, adaptándose a la naturaleza semi-estructurada del contenido."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Vercel",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desplegar aplicaciones frontend.",
+              "version_sugerida": "latest",
+              "url_docs": "https://vercel.com/docs",
+              "por_que": "Integración continua y despliegue fácil para aplicaciones Next.js, optimizado para rendimiento global."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API",
+              "categoria": "ia_ml",
+              "descripcion": "Interfaz de programación de aplicaciones para modelos de IA de OpenAI.",
+              "version_sugerida": "v1",
+              "url_docs": "https://platform.openai.com/docs/api-reference",
+              "por_que": "Acceso a modelos potentes (como GPT-4 o GPT-3.5-turbo) para la generación de resúmenes y preguntas de alta calidad."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/docs/getting-started",
+              "por_que": "Estándar en el ecosistema React/Next.js para pruebas unitarias y de integración, facilitando la validación del código."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Carga de texto o URL para procesar.",
+          "Generación de resúmenes personalizables (longitud).",
+          "Generación de preguntas de opción múltiple (número, dificultad).",
+          "Guardado y recuperación de sesiones de estudio.",
+          "Interfaz de usuario intuitiva y responsiva."
+        ],
+        "casos_uso": [
+          "Un estudiante carga un artículo de Wikipedia y obtiene un resumen y preguntas.",
+          "Un profesor procesa un capítulo de libro para crear material de estudio.",
+          "Un usuario guarda un conjunto de resúmenes y preguntas para repasar más tarde.",
+          "El sistema genera 5 preguntas de opción múltiple sobre un texto dado.",
+          "El usuario ajusta la longitud del resumen deseado."
+        ],
+        "reglas_negocio": [
+          "El texto de entrada no debe exceder los límites de tokens del modelo IA.",
+          "El número de preguntas generadas debe ser un entero positivo.",
+          "La longitud del resumen debe ser configurable (ej. corto, medio, largo).",
+          "Los resúmenes y preguntas generados deben ser relevantes para el texto original.",
+          "Se debe informar al usuario sobre el coste estimado (si aplica) o el uso de recursos IA."
+        ],
+        "por_que_ia": "Utilizamos un LLM para procesar el texto de entrada y generar contenido educativo (resúmenes y preguntas). Esto automatiza la creación de material de estudio, ahorrando tiempo y esfuerzo.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "Documentación de Next.js",
+          "Documentación de LangChain.js",
+          "API de OpenAI",
+          "Documentación de Vercel"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia avanzada con React y TypeScript.",
+          "Comprensión de desarrollo Fullstack (frontend/backend).",
+          "Conocimientos de APIs RESTful.",
+          "Familiaridad con el uso de APIs de IA (preferiblemente LLMs).",
+          "Experiencia con bases de datos NoSQL."
+        ],
+        "riesgos": [
+          "Calidad y precisión del contenido generado por la IA.",
+          "Costes asociados al uso de la API de IA.",
+          "Latencia en la generación de contenido.",
+          "Manejo de textos largos o complejos.",
+          "Dependencia de un proveedor de IA externo."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-15T10:01:00Z",
+        "hash_unicidad": "b8c9d0e1f2a34b5c"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "eb1aa98e2c91a6e1"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c9d0e1f2-a3b4-5c6d-7e8f-9a0b1c2d3456",
+        "titulo": "Monitor de Rendimiento de Microservicios",
+        "descripcion_corta": "CLI para monitorizar el estado y métricas de microservicios en tiempo real.",
+        "descripcion_detallada": "Una herramienta de línea de comandos (CLI) escrita en Go que se conecta a endpoints de salud y métricas de varios microservicios (expuestos via HTTP/gRPC). Muestra el estado, latencia y otras métricas clave en una interfaz TUI (Text User Interface) interactiva y actualizable, alertando sobre posibles problemas.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "cli",
+          "devops",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "tview",
+              "categoria": "libreria",
+              "descripcion": "Framework para crear interfaces de usuario de texto (TUI) en Go.",
+              "version_sugerida": "2023-07-12",
+              "url_docs": "https://github.com/rivo/tview",
+              "por_que": "Permite construir una interfaz interactiva y dinámica en la terminal para visualizar el estado de los microservicios."
+            },
+            {
+              "nombre": "Prometheus client_golang",
+              "categoria": "libreria",
+              "descripcion": "Client Go para interactuar con el ecosistema Prometheus.",
+              "version_sugerida": "1.16.0",
+              "url_docs": "https://github.com/prometheus/client_golang",
+              "por_que": "Facilita la exposición de métricas de la propia CLI y la lectura de métricas de otros servicios si exponen un endpoint compatible con Prometheus."
+            },
+            {
+              "nombre": "gRPC Go",
+              "categoria": "libreria",
+              "descripcion": "Implementación oficial de gRPC para Go.",
+              "version_sugerida": "1.58.0",
+              "url_docs": "https://grpc.io/docs/languages/go/",
+              "por_que": "Permite comunicarse de forma eficiente con microservicios que exponen su salud y métricas a través de gRPC."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Necesario si los microservicios a monitorizar están desplegados en contenedores, facilitando la configuración de red y acceso."
+            },
+            {
+              "nombre": "Prometheus",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de monitorización y alertas de código abierto.",
+              "version_sugerida": "2.47.0",
+              "url_docs": "https://prometheus.io/docs/",
+              "por_que": "Estándar de facto para la recolección de métricas en entornos de microservicios; la CLI puede actuar como un cliente adicional o consumir métricas expuestas por Prometheus."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Paquete estándar de Go para escribir tests.",
+              "version_sugerida": "go1.20",
+              "url_docs": "https://go.dev/doc/tutorial/testing",
+              "por_que": "Permite escribir pruebas unitarias y de integración para la lógica de la CLI, asegurando la corrección de la recolección y visualización de métricas."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Configuración de servicios a monitorizar (HTTP/gRPC).",
+          "Visualización TUI del estado (UP/DOWN) y latencia.",
+          "Actualización periódica de métricas.",
+          "Alertas visuales para servicios caídos o con alta latencia.",
+          "Posibilidad de añadir métricas personalizadas (ej. uso de CPU/RAM si están expuestas)."
+        ],
+        "casos_uso": [
+          "Un SRE monitoriza el estado de 10 microservicios críticos desde su terminal.",
+          "La CLI alerta visualmente cuando un servicio específico deja de responder.",
+          "Un desarrollador verifica la latencia de su nuevo microservicio durante las pruebas.",
+          "Se configura la CLI para que consulte endpoints de salud cada 5 segundos.",
+          "La interfaz muestra un resumen rápido del estado general del sistema."
+        ],
+        "reglas_negocio": [
+          "El tiempo de respuesta máximo aceptable para considerar un servicio 'UP' es configurable.",
+          "La CLI debe manejar errores de red (timeouts, desconexiones) de forma elegante.",
+          "La configuración de los servicios debe ser externa (ej. archivo JSON/YAML).",
+          "Se debe priorizar la información más crítica en la interfaz TUI.",
+          "La CLI no debe generar una carga excesiva sobre los servicios monitorizados."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Documentación de Go",
+          "Documentación de tview",
+          "Documentación de gRPC",
+          "Documentación de Prometheus"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos sólidos de Go.",
+          "Comprensión de protocolos HTTP y/o gRPC.",
+          "Familiaridad con conceptos de microservicios y monitorización.",
+          "Experiencia básica con interfaces de línea de comandos y TUI."
+        ],
+        "riesgos": [
+          "Complejidad en la gestión de la interfaz TUI.",
+          "Manejo de diferentes formatos de respuesta de métricas.",
+          "Sobrecarga de la red si se consultan demasiados servicios muy frecuentemente.",
+          "Seguridad al acceder a endpoints de servicios internos.",
+          "Mantenimiento de la configuración de servicios."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-15T10:02:00Z",
+        "hash_unicidad": "c9d0e1f2a3b45c6d"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "eb1aa98e2c91a6e1"
+      }
     }
   ],
   "ultimos_hashes": [
-    "e8f7a6b5c4d3e2f1",
-    "6b2a0f1d7e8c4a9b",
-    "4f9a1b2c3d4e5f6a",
     "e8a7f6d5c4b3a201",
     "e4f8d1c9b2a76053",
     "a9b8c7d6e5f4a3b2",
@@ -16317,8 +16726,11 @@
     "c4d5e6f789012345",
     "f1a2b3c4d5e67890",
     "a7b8c9d0e1f23456",
-    "b0c1d2e3f4a56789"
+    "b0c1d2e3f4a56789",
+    "a4e8e8c23c1d4f5e",
+    "b8c9d0e1f2a34b5c",
+    "c9d0e1f2a3b45c6d"
   ],
-  "total_generados": 120,
-  "fecha_ultima_generacion": "2026-10-20T22:54:57.982605"
+  "total_generados": 123,
+  "fecha_ultima_generacion": "2026-10-21T03:05:51.689822"
 }
