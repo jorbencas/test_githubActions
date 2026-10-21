@@ -2542,5 +2542,17 @@
     "relevancia": 3,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Las MEJORES SERIES NUEVAS en Netflix en 2026",
+    "url": "https://www.youtube.com/watch?v=XdelkxNlsBE",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-21T17:03:27.940065+00:00",
+    "medio": "CineGold Series",
+    "imagen": "https://i.ytimg.com/vi/XdelkxNlsBE/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
