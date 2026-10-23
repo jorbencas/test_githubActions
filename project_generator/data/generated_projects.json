@@ -17020,10 +17020,172 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "c9e26774d08aabac"
       }
+    },
+    {
+      "proyecto": {
+        "id": "b7c8d9e0f1a2b3c4",
+        "titulo": "Monitor de Salud de Microservicios con Alertas Inteligentes",
+        "descripcion_corta": "Sistema de monitoreo y alertas para microservicios usando métricas y logs.",
+        "descripcion_detallada": "Aplicación backend (API) que recolecta métricas (CPU, memoria, latencia, tasa de errores) y logs de diversos microservicios. Utiliza una base de datos de series temporales y aplica reglas de correlación y análisis de anomalías (IA/ML) para detectar problemas proactivamente. Genera alertas inteligentes y priorizadas a través de múltiples canales (Slack, Email, PagerDuty). Proporciona dashboards visuales para el estado general y detalles de cada servicio.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "api",
+          "microservicio",
+          "ia_ml",
+          "datos",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web HTTP de alto rendimiento para Go.",
+              "version_sugerida": "1.19.1",
+              "url_docs": "https://gin-gonic.com/docs/",
+              "por_que": "Construcción rápida de APIs RESTful, middleware para logging y autenticación."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Prometheus client (Go)",
+              "categoria": "libreria",
+              "descripcion": "Librería para instrumentar aplicaciones Go con métricas de Prometheus.",
+              "version_sugerida": "0.10.0",
+              "url_docs": "https://github.com/prometheus/client_golang",
+              "por_que": "Facilita la exposición de métricas personalizadas para que Prometheus las recolecte."
+            },
+            {
+              "nombre": "Logrus",
+              "categoria": "libreria",
+              "descripcion": "Hookable logger para Go.",
+              "version_sugerida": "1.10.0",
+              "url_docs": "https://github.com/sirupsen/logrus",
+              "por_que": "Logging estructurado y configurable para la aplicación de monitoreo."
+            },
+            {
+              "nombre": "NumPy",
+              "categoria": "libreria",
+              "descripcion": "Librería fundamental para computación científica en Python.",
+              "version_sugerida": "1.26.0",
+              "url_docs": "https://numpy.org/doc/",
+              "por_que": "Manipulación eficiente de datos numéricos para el análisis de métricas."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Librería de aprendizaje automático para Python.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://scikit-learn.org/stable/",
+              "por_que": "Implementación de algoritmos de detección de anomalías (ej. Isolation Forest)."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "Prometheus",
+              "categoria": "base_de_datos",
+              "descripcion": "Sistema de monitoreo y alertas de código abierto.",
+              "version_sugerida": "2.45.0",
+              "url_docs": "https://prometheus.io/docs/introduction/overview/",
+              "por_que": "Recolección, almacenamiento y consulta de series temporales de métricas."
+            },
+            {
+              "nombre": "Elasticsearch",
+              "categoria": "base_de_datos",
+              "descripcion": "Motor de búsqueda y analítica distribuido.",
+              "version_sugerida": "8.10.0",
+              "url_docs": "https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html",
+              "por_que": "Almacenamiento y búsqueda eficiente de logs de los microservicios."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Despliegue y aislamiento de los microservicios y el sistema de monitoreo."
+            },
+            {
+              "nombre": "Kubernetes",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de orquestación de contenedores.",
+              "version_sugerida": "1.27",
+              "url_docs": "https://kubernetes.io/docs/concepts/",
+              "por_que": "Gestión automatizada, escalado y despliegue de aplicaciones en contenedores."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Testify",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Go.",
+              "version_sugerida": "1.8.0",
+              "url_docs": "https://github.com/stretchr/testify",
+              "por_que": "Asertos y mocks para escribir tests unitarios y de integración en Go."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Recolección de métricas y logs de microservicios",
+          "Almacenamiento eficiente en bases de datos de series temporales y logs",
+          "Análisis de métricas para detección de anomalías",
+          "Correlación de eventos entre diferentes servicios",
+          "Generación de alertas priorizadas y ruteadas",
+          "Visualización de dashboards de salud del sistema"
+        ],
+        "casos_uso": [
+          "Identificar cuellos de botella de rendimiento en microservicios",
+          "Detectar fallos de servicio antes de que impacten a los usuarios",
+          "Investigar la causa raíz de incidentes correlacionando logs y métricas",
+          "Monitorizar la salud general de una arquitectura de microservicios",
+          "Alertar al equipo de operaciones sobre problemas críticos de producción"
+        ],
+        "reglas_negocio": [
+          "Las métricas deben recolectarse cada 30 segundos",
+          "Los logs deben indexarse para búsqueda en menos de 1 minuto",
+          "Una alerta solo se genera si una anomalía persiste por más de 5 minutos",
+          "Las alertas críticas deben enviarse a PagerDuty y Slack",
+          "Los datos de métricas se retienen por 30 días, los logs por 7 días"
+        ],
+        "por_que_ia": "Se utiliza IA/ML para detectar anomalías en series temporales de métricas que podrían indicar problemas, y para correlacionar eventos de logs que, individualmente, no parecen críticos pero juntos señalan un incidente.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "Agentes de monitoreo (ej. Prometheus Node Exporter, Fluentd/Filebeat)"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 7,
+        "prerequisitos": [
+          "Experiencia con Go y desarrollo de APIs",
+          "Conocimientos de Prometheus y Elasticsearch",
+          "Comprensión de arquitecturas de microservicios",
+          "Familiaridad con herramientas de orquestación (Kubernetes)",
+          "Conceptos básicos de Machine Learning para detección de anomalías"
+        ],
+        "riesgos": [
+          "Volumen de datos (métricas y logs) puede ser muy alto",
+          "Falsos positivos/negativos en la detección de anomalías",
+          "Complejidad en la configuración de reglas de correlación",
+          "Latencia en la recolección y procesamiento de datos",
+          "Seguridad en la recolección y almacenamiento de datos sensibles"
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:02Z",
+        "hash_unicidad": "b7c8d9e0f1a2b3c4"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "fe6c2c096b51017e"
+      }
     }
   ],
   "ultimos_hashes": [
-    "c1d2e3f4a5b6c7d9",
     "01f2a3b4c5d6e7f8",
     "a1b2c3d4e5f6a7b9",
     "b9c8d7e6f5a4b3c2",
@@ -17122,8 +17284,9 @@
     "c9d0e1f2a3b45c6d",
     "f7b2a1c8d9e0f3a4",
     "9f1a2b3c4d5e6f78",
-    "f0d8c1a7b2e3f4a5"
+    "f0d8c1a7b2e3f4a5",
+    "b7c8d9e0f1a2b3c4"
   ],
-  "total_generados": 126,
-  "fecha_ultima_generacion": "2026-10-22T22:56:46.595987"
+  "total_generados": 127,
+  "fecha_ultima_generacion": "2026-10-23T03:08:47.612598"
 }
