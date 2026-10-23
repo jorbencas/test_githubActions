@@ -2554,5 +2554,65 @@
     "relevancia": 4,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Ester Expósito será 'La Regenta' para Netflix: la película ya está rodándose",
+    "url": "https://www.cinemania.es/cinemania/noticias/ester-exposito-sera-regenta-para-netflix-serie-ya-esta-rodandose_7052532_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-23T16:55:22.720824+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "217,6 millones de visualizaciones después, Netflix estrena hoy la temporada 4 de uno de sus grandes éxitos",
+    "url": "https://www.cinemania.es/cinemania/series/lupin-netflix-cuarta-temporada-217-6-millones-visualizaciones-estreno-23-octubre_7050407_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-23T16:55:22.720896+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Luis Zahera vuelve a Netflix con un thriller de atracos sobre la crisis económica y el problema de la vivienda",
+    "url": "https://www.cinemania.es/cinemania/noticias/colision-netflix-luis-zahera-thriller-atracos-crisis-vivienda_7052530_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-23T16:55:22.721014+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Ni Netflix ni Prime Video: esta es la plataforma de streaming donde podrá verse en España 'La bola negra'",
+    "url": "https://www.cinemania.es/cinemania/noticias/bola-negra-streaming-espana-netflix-prime-video-movistar_7050635_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-23T16:55:22.721052+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "video",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Sale a la luz un vídeo de Ibai Llanos afirmando que nunca vendería 'La Velada' en Netflix y él reacciona: \"Plan maestro\"",
+    "url": "https://www.cinemania.es/gente/sale-luz-un-video-ibai-llanos-afirmando-que-nunca-venderia-velada-netflix-reacciona-plan-maestro_7051948_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-23T16:55:22.721068+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "video",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
