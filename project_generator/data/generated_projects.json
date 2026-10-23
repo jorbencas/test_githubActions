@@ -17489,10 +17489,169 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "f9dd9786e6686a37"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f8a1b2c3d4e5f678",
+        "titulo": "Gestor de Tareas Colaborativo con IA",
+        "descripcion_corta": "WebApp para gestionar tareas en equipo, con sugerencias de priorización y asignación por IA.",
+        "descripcion_detallada": "Una aplicación web fullstack que permite a los usuarios crear, asignar y seguir el progreso de tareas dentro de equipos. Incluye funcionalidades como tableros Kanban, notificaciones en tiempo real y un módulo de IA que analiza las tareas pendientes para sugerir prioridades y posibles asignaciones basadas en la carga de trabajo y habilidades inferidas de los usuarios. La IA ayuda a optimizar la distribución del trabajo y a identificar cuellos de botella.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web asíncrono para construir APIs de alto rendimiento con Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece validación de datos con Pydantic, generación automática de documentación OpenAPI y excelente rendimiento asíncrono."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario interactivas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear componentes de UI reutilizables y gestionar el estado de la aplicación de forma eficiente."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "Toolkit SQL y Object-Relational Mapper (ORM) para Python.",
+              "version_sugerida": "2.0.20",
+              "url_docs": "https://www.sqlalchemy.org/",
+              "por_que": "Facilita la interacción con la base de datos relacional de manera segura y eficiente, mapeando objetos Python a tablas SQL."
+            },
+            {
+              "nombre": "Socket.IO",
+              "categoria": "libreria",
+              "descripcion": "Librería para comunicación bidireccional en tiempo real entre navegadores y servidores.",
+              "version_sugerida": "4.7.2",
+              "url_docs": "https://socket.io/",
+              "por_que": "Esencial para las notificaciones en tiempo real y la actualización de tableros Kanban sin recargar la página."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca de aprendizaje automático para Python.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://scikit-learn.org/",
+              "por_que": "Proporciona herramientas para preprocesar datos y entrenar modelos simples de clasificación/regresión para sugerencias de tareas."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/",
+              "por_que": "Robusto, soporta JSONB para almacenar metadatos flexibles y es ideal para aplicaciones web complejas."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.6",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, simplificando la configuración."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API (GPT-3.5/4)",
+              "categoria": "ia_ml",
+              "descripcion": "API de modelos de lenguaje grandes para tareas de procesamiento de lenguaje natural y generación.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://platform.openai.com/docs/api-reference",
+              "por_que": "Se utiliza para analizar descripciones de tareas, inferir habilidades necesarias y sugerir la mejor asignación de tareas basándose en el contexto."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.2",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests claros y mantenibles, con fixtures y parametrización."
+            },
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para JavaScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Permite testear componentes de React de manera aislada y realizar pruebas de integración de la interfaz de usuario."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de proyectos y tareas",
+          "Tableros Kanban personalizables",
+          "Asignación de tareas a usuarios",
+          "Notificaciones en tiempo real",
+          "Sugerencias de priorización de tareas por IA",
+          "Recomendaciones de asignación de tareas por IA"
+        ],
+        "casos_uso": [
+          "Equipos de desarrollo de software gestionando sprints",
+          "Equipos de marketing planificando campañas",
+          "Gestión de proyectos personales y compartidos",
+          "Seguimiento de flujos de trabajo en pequeñas empresas",
+          "Organización de eventos"
+        ],
+        "reglas_negocio": [
+          "Las tareas deben tener un título y una descripción.",
+          "Las tareas pueden ser asignadas a uno o varios usuarios.",
+          "El estado de una tarea solo puede cambiar a un estado adyacente en el flujo Kanban.",
+          "Las sugerencias de IA se basan en tareas completadas previamente y la carga de trabajo actual.",
+          "Los usuarios solo pueden ver y modificar tareas de los proyectos a los que pertenecen."
+        ],
+        "por_que_ia": "La IA se utiliza para automatizar y optimizar la gestión de tareas, sugiriendo prioridades y asignaciones de manera inteligente, reduciendo la carga manual del gestor de proyectos y mejorando la eficiencia del equipo.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos de Python y JavaScript.",
+          "Experiencia con frameworks web (FastAPI, React).",
+          "Comprensión de bases de datos relacionales.",
+          "Familiaridad con conceptos de IA/ML básicos.",
+          "Entorno de desarrollo configurado con Docker."
+        ],
+        "riesgos": [
+          "Complejidad en la integración de la IA.",
+          "Escalabilidad de la base de datos con muchos usuarios y tareas.",
+          "Gestión de concurrencia en notificaciones en tiempo real.",
+          "Privacidad y seguridad de los datos de las tareas.",
+          "Precisión y sesgo en las sugerencias de la IA."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f8a1b2c3d4e5f678"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "80b9e7daebf9ea81"
+      }
     }
   ],
   "ultimos_hashes": [
-    "b9c8d7e6f5a4b3c2",
     "3a4b5c6d7e8f9a0b",
     "f1e2d3c4b5a6f7e8",
     "a7b8c9d0e1f2a3b4",
@@ -17591,8 +17750,9 @@
     "f0d8c1a7b2e3f4a5",
     "b7c8d9e0f1a2b3c4",
     "f9a7b1c3d5e8f0a2",
-    "c8d1e3f5a7b0c9d1"
+    "c8d1e3f5a7b0c9d1",
+    "f8a1b2c3d4e5f678"
   ],
-  "total_generados": 129,
-  "fecha_ultima_generacion": "2026-10-23T16:22:32.953791"
+  "total_generados": 130,
+  "fecha_ultima_generacion": "2026-10-23T22:51:45.150707"
 }
