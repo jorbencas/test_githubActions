@@ -17183,11 +17183,315 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "fe6c2c096b51017e"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f9a7b1c3d5e8f0a2",
+        "titulo": "Generador de Documentación Técnica Asistido por IA",
+        "descripcion_corta": "Crea documentación técnica de código (diagramas, descripciones) usando IA a partir del código fuente.",
+        "descripcion_detallada": "Este proyecto es una herramienta que analiza código fuente (Python, JavaScript) y genera documentación técnica automáticamente. Utiliza modelos de lenguaje para comprender la lógica del código, identificar clases, funciones y dependencias, y produce diagramas UML (usando PlantUML) y descripciones en formato Markdown. Ideal para equipos que necesitan mantener la documentación actualizada con el código de forma eficiente.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Excelente para crear APIs RESTful, validación de datos con Pydantic, generación automática de documentación OpenAPI."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "tree-sitter-python",
+              "categoria": "libreria",
+              "descripcion": "Parser incremental para código Python.",
+              "version_sugerida": "null",
+              "url_docs": "https://github.com/tree-sitter/tree-sitter-python",
+              "por_que": "Permite un análisis sintáctico robusto y eficiente del código fuente."
+            },
+            {
+              "nombre": "langchain",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por LLMs.",
+              "version_sugerida": "0.1.0",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Facilita la integración con modelos de IA, la gestión de prompts y la orquestación de tareas complejas."
+            },
+            {
+              "nombre": "plantuml",
+              "categoria": "libreria",
+              "descripcion": "Generador de diagramas UML desde texto.",
+              "version_sugerida": "null",
+              "url_docs": "https://plantuml.com/",
+              "por_que": "Permite generar diagramas de clases y secuencias a partir de la información extraída del código."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de contenedores para desarrollo, envío y ejecución de aplicaciones.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura un entorno de desarrollo y despliegue consistente y reproducible."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "GPT-4o",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo multimodal avanzado de OpenAI.",
+              "version_sugerida": "null",
+              "url_docs": "https://platform.openai.com/docs/models/gpt-4o",
+              "por_que": "Utilizado para la comprensión semántica del código, la generación de descripciones y la sugerencia de estructuras de documentación."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests unitarios y de integración para la API y la lógica de análisis de código."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis de código fuente (Python, JavaScript)",
+          "Generación de descripciones de funciones/clases en Markdown",
+          "Generación de diagramas UML (clases, secuencias) con PlantUML",
+          "API RESTful para interactuar con el generador",
+          "Interfaz web simple para subir código y ver resultados"
+        ],
+        "casos_uso": [
+          "Documentar rápidamente código legacy o nuevo",
+          "Mantener documentación sincronizada con el código",
+          "Generar diagramas para presentaciones o wikis internas",
+          "Facilitar el onboarding de nuevos desarrolladores",
+          "Mejorar la comprensión del código en equipos grandes"
+        ],
+        "reglas_negocio": [
+          "Solo se procesarán archivos de código fuente válidos.",
+          "La profundidad del análisis de código es configurable.",
+          "Los diagramas generados seguirán la sintaxis estándar de PlantUML.",
+          "Las descripciones generadas por IA se basarán en el contexto del código y comentarios existentes.",
+          "Se priorizará la legibilidad y claridad de la documentación generada."
+        ],
+        "por_que_ia": "Se utiliza IA (GPT-4o) para interpretar la semántica del código fuente, generar descripciones coherentes y estructurar la documentación, tareas que requieren comprensión contextual y generación de lenguaje natural.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "PlantUML Server (opcional, para renderizado online)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos de Python y principios de análisis de código.",
+          "Comprensión de APIs RESTful y desarrollo web básico.",
+          "Familiaridad con el uso de modelos de lenguaje grandes (LLMs).",
+          "Acceso a una API Key de OpenAI."
+        ],
+        "riesgos": [
+          "La precisión de la IA puede variar según la complejidad y el estilo del código.",
+          "La integración con diferentes lenguajes de programación puede ser compleja.",
+          "La generación de diagramas muy grandes puede ser lenta o ineficiente.",
+          "Costos asociados al uso de la API de OpenAI.",
+          "Seguridad y privacidad del código fuente subido."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2024-05-16T10:00:00Z",
+        "hash_unicidad": "f9a7b1c3d5e8f0a2"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "f9dd9786e6686a37"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c8d1e3f5a7b0c9d1",
+        "titulo": "Sistema de Recomendación de Rutas de Viaje Personalizadas",
+        "descripcion_corta": "Recomienda itinerarios de viaje dinámicos y personalizados basados en intereses y presupuesto.",
+        "descripcion_detallada": "Una aplicación web que, dada una ciudad de origen, destino, duración, presupuesto e intereses (ej. 'historia', 'gastronomía', 'naturaleza'), genera un itinerario de viaje detallado. Integra datos de APIs externas (transporte, alojamiento, eventos) y utiliza IA para optimizar la ruta, sugerir actividades y estimar costos. Permite al usuario refinar las sugerencias y guardar sus planes.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "Next.js",
+              "categoria": "framework",
+              "descripcion": "Framework React para producción.",
+              "version_sugerida": "14.0.0",
+              "url_docs": "https://nextjs.org/docs",
+              "por_que": "Renderizado del lado del servidor (SSR) y estático (SSG) para optimizar rendimiento y SEO, routing basado en archivos, API Routes integradas."
+            },
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de Node.js para la construcción de aplicaciones del lado del servidor eficientes y escalables.",
+              "version_sugerida": "10.0.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Arquitectura modular basada en módulos, inyección de dependencias, fácil integración con diferentes bases de datos y servicios."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Prisma",
+              "categoria": "libreria",
+              "descripcion": "ORM de próxima generación para Node.js y TypeScript.",
+              "version_sugerida": "5.0.0",
+              "url_docs": "https://www.prisma.io/docs",
+              "por_que": "Proporciona una abstracción segura y tipada para interactuar con la base de datos, simplificando las migraciones y consultas."
+            },
+            {
+              "nombre": "Axios",
+              "categoria": "libreria",
+              "descripcion": "Cliente HTTP basado en promesas para navegador y Node.js.",
+              "version_sugerida": "1.5.0",
+              "url_docs": "https://axios-http.com/",
+              "por_que": "Facilita la comunicación con APIs externas de transporte, alojamiento y eventos."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "bases_datos",
+              "descripcion": "Sistema de base de datos relacional de objetos.",
+              "version_sugerida": "15.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto, escalable, soporta JSONB para datos semiestructurados y extensiones geoespaciales (PostGIS)."
+            },
+            {
+              "nombre": "Redis",
+              "categoria": "bases_datos",
+              "descripcion": "Almacén de estructuras de datos en memoria.",
+              "version_sugerida": "7.0",
+              "url_docs": "https://redis.io/docs/",
+              "por_que": "Usado para caché de resultados de APIs externas y sesiones de usuario para mejorar el rendimiento."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Orquestación de servicios (frontend, backend, DBs) y despliegue consistente."
+            },
+            {
+              "nombre": "AWS (S3, EC2, RDS)",
+              "categoria": "infraestructura",
+              "descripcion": "Servicios de computación en la nube.",
+              "version_sugerida": "latest",
+              "url_docs": "https://aws.amazon.com/",
+              "por_que": "Para hosting escalable de la aplicación web, base de datos y almacenamiento de assets."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Google OR-Tools",
+              "categoria": "ia_ml",
+              "descripcion": "Suite de software de optimización de Google.",
+              "version_sugerida": "9.8",
+              "url_docs": "https://developers.google.com/optimization",
+              "por_que": "Para resolver el problema de optimización de rutas (TSP/VRP) y asignación de actividades."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript.",
+              "version_sugerida": "29.0.0",
+              "url_docs": "https://jestjs.io/docs/getting-started",
+              "por_que": "Para pruebas unitarias y de integración del frontend y backend."
+            },
+            {
+              "nombre": "Cypress",
+              "categoria": "testing",
+              "descripcion": "Herramienta de testing end-to-end.",
+              "version_sugerida": "13.0.0",
+              "url_docs": "https://docs.cypress.io/",
+              "por_que": "Para pruebas E2E de la aplicación web, simulando la interacción del usuario."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Generación de itinerarios de viaje personalizados",
+          "Integración con APIs de terceros (transporte, alojamiento, eventos)",
+          "Optimización de rutas y horarios usando algoritmos de optimización",
+          "Filtros por presupuesto, intereses y duración",
+          "Guardado y personalización de itinerarios"
+        ],
+        "casos_uso": [
+          "Planificar vacaciones o escapadas de fin de semana.",
+          "Descubrir actividades y lugares en una ciudad desconocida.",
+          "Encontrar opciones de viaje que se ajusten a un presupuesto específico.",
+          "Obtener sugerencias de rutas eficientes para maximizar el tiempo de visita.",
+          "Compartir planes de viaje con amigos o familiares."
+        ],
+        "reglas_negocio": [
+          "El presupuesto total del viaje no debe exceder el límite especificado.",
+          "Los intereses del usuario deben ser considerados al seleccionar actividades.",
+          "Se priorizarán opciones de transporte y alojamiento con buenas valoraciones.",
+          "Los itinerarios deben ser factibles en términos de tiempo y distancia.",
+          "Los datos de APIs externas deben ser cacheados para optimizar el rendimiento."
+        ],
+        "por_que_ia": "Se utiliza Google OR-Tools para resolver el complejo problema de optimización de rutas y asignación de actividades, encontrando el itinerario más eficiente dadas las restricciones y preferencias del usuario.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "APIs de Google Maps/Places, Skyscanner, Booking.com (o similares)",
+          "OpenWeatherMap API"
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 10,
+        "prerequisitos": [
+          "Experiencia sólida en TypeScript y frameworks como Next.js/NestJS.",
+          "Conocimientos de diseño de bases de datos relacionales y NoSQL.",
+          "Comprensión de algoritmos de optimización y grafos.",
+          "Experiencia con la integración de APIs externas y manejo de datos.",
+          "Familiaridad con servicios en la nube (AWS)."
+        ],
+        "riesgos": [
+          "Dependencia de la disponibilidad y calidad de las APIs externas.",
+          "Complejidad en la optimización de rutas con múltiples restricciones.",
+          "Manejo de grandes volúmenes de datos de diferentes fuentes.",
+          "Costos de infraestructura y APIs externas.",
+          "Mantenimiento de la lógica de negocio frente a cambios en las APIs."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-16T10:00:00Z",
+        "hash_unicidad": "c8d1e3f5a7b0c9d1"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "f9dd9786e6686a37"
+      }
     }
   ],
   "ultimos_hashes": [
-    "01f2a3b4c5d6e7f8",
-    "a1b2c3d4e5f6a7b9",
     "b9c8d7e6f5a4b3c2",
     "3a4b5c6d7e8f9a0b",
     "f1e2d3c4b5a6f7e8",
@@ -17285,8 +17589,10 @@
     "f7b2a1c8d9e0f3a4",
     "9f1a2b3c4d5e6f78",
     "f0d8c1a7b2e3f4a5",
-    "b7c8d9e0f1a2b3c4"
+    "b7c8d9e0f1a2b3c4",
+    "f9a7b1c3d5e8f0a2",
+    "c8d1e3f5a7b0c9d1"
   ],
-  "total_generados": 127,
-  "fecha_ultima_generacion": "2026-10-23T03:08:47.612598"
+  "total_generados": 129,
+  "fecha_ultima_generacion": "2026-10-23T09:03:15.301844"
 }
