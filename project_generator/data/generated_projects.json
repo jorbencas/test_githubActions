@@ -17649,11 +17649,297 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "80b9e7daebf9ea81"
       }
+    },
+    {
+      "proyecto": {
+        "id": "8d1e3f5a7b9c0d1e",
+        "titulo": "Asistente de Escritura IA con Revisión Colaborativa",
+        "descripcion_corta": "Plataforma web para escribir y revisar documentos asistidos por IA, con control de versiones y flujos de aprobación.",
+        "descripcion_detallada": "Este proyecto es una aplicación web fullstack que actúa como un asistente de escritura inteligente. Los usuarios pueden redactar documentos, y la IA sugiere mejoras, gramática, estilo y hasta contenido adicional basado en el contexto. Incluye funcionalidades de control de versiones (similar a Git) para rastrear cambios y un sistema de flujos de trabajo para que otros usuarios revisen, comenten y aprueben las ediciones. El objetivo es mejorar la calidad y eficiencia de la escritura colaborativa en equipos.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml",
+          "fullstack"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web asíncrono para construir APIs de alto rendimiento.",
+              "version_sugerida": "0.110.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Proporciona validación de datos con Pydantic, generación automática de documentación OpenAPI y excelente rendimiento asíncrono."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario interactivas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear componentes UI reutilizables y gestionar el estado de la aplicación de manera eficiente."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "ORM y toolkit SQL para Python.",
+              "version_sugerida": "2.0.29",
+              "url_docs": "https://docs.sqlalchemy.org/",
+              "por_que": "Facilita la interacción con la base de datos relacional de forma segura y portable."
+            },
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Librería para análisis y manipulación de datos.",
+              "version_sugerida": "2.2.2",
+              "url_docs": "https://pandas.pydata.org/docs/",
+              "por_que": "Útil para procesar y analizar datos generados por la IA o logs de uso."
+            },
+            {
+              "nombre": "Langchain",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por LLMs.",
+              "version_sugerida": "0.1.19",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Orquesta las interacciones con modelos de lenguaje, manejo de prompts y cadenas de ejecución."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto.",
+              "version_sugerida": "16",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Soporte robusto para JSONB, transacciones ACID y escalabilidad para almacenar documentos y metadatos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "26.1.4",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura entornos de desarrollo y producción consistentes y facilita el despliegue."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API (GPT-4/GPT-3.5 Turbo)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de lenguaje grandes para generación de texto, resumen y análisis.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://platform.openai.com/docs",
+              "por_que": "Proporciona capacidades avanzadas de procesamiento de lenguaje natural para asistir en la escritura y revisión."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "8.1.1",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir tests claros y concisos con fixtures potentes y un buen reporte de cobertura."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Edición de texto asistida por IA (sugerencias, correcciones)",
+          "Control de versiones de documentos",
+          "Flujos de trabajo de revisión y aprobación",
+          "Gestión de usuarios y permisos",
+          "Búsqueda semántica de documentos"
+        ],
+        "casos_uso": [
+          "Redacción de artículos de blog con sugerencias de estilo",
+          "Colaboración en la escritura de propuestas de negocio",
+          "Revisión de documentos legales con historial de cambios",
+          "Creación de contenido técnico asistido por IA",
+          "Gestión de borradores de documentación interna"
+        ],
+        "reglas_negocio": [
+          "Los usuarios solo pueden editar documentos que les han sido asignados o que poseen.",
+          "Los revisores deben aprobar o rechazar cambios explícitamente.",
+          "Se mantiene un historial inmutable de todas las versiones del documento.",
+          "Las sugerencias de IA se basan en el contenido del documento y un prompt predefinido.",
+          "El sistema notifica a los usuarios sobre asignaciones de revisión y comentarios."
+        ],
+        "por_que_ia": "Se utiliza IA (modelos de lenguaje grandes) para analizar el texto del documento y generar sugerencias contextuales de mejora, corrección gramatical, estilo y coherencia, así como para potenciar la búsqueda semántica.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y JavaScript.",
+          "Experiencia con frameworks web (FastAPI, React).",
+          "Comprensión de bases de datos relacionales y ORM.",
+          "Familiaridad con llamadas a APIs externas (OpenAI).",
+          "Conceptos básicos de control de versiones."
+        ],
+        "riesgos": [
+          "Latencia y costo de las llamadas a la API de IA.",
+          "Complejidad en la gestión del estado del frontend y backend.",
+          "Diseño de flujos de trabajo de aprobación flexibles y eficientes.",
+          "Seguridad de los documentos y datos de usuario.",
+          "Precisión y relevancia de las sugerencias de IA."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2024-05-15T10:00:00Z",
+        "hash_unicidad": "8d1e3f5a7b9c0d1e"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "24663b4b640f2683"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "b4d5e6f789012345",
+        "titulo": "Generador de Rutinas de Ejercicio Personalizadas",
+        "descripcion_corta": "Aplicación web que crea rutinas de ejercicio basadas en objetivos, equipo disponible y nivel del usuario.",
+        "descripcion_detallada": "Esta aplicación web permite a los usuarios definir sus objetivos de fitness (perder peso, ganar músculo, mejorar resistencia), el equipo disponible (gimnasio, casa, sin equipo) y su nivel de experiencia. Utilizando un conjunto de ejercicios y reglas predefinidas, genera una rutina semanal personalizada. La IA puede usarse para optimizar la progresión y sugerir variaciones. Incluye seguimiento del progreso y visualización de estadísticas.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "javascript",
+          "frameworks": [
+            {
+              "nombre": "Express.js",
+              "categoria": "framework",
+              "descripcion": "Framework web de Node.js minimalista y flexible.",
+              "version_sugerida": "4.19.2",
+              "url_docs": "https://expressjs.com/en/api.html",
+              "por_que": "Proporciona una base robusta para crear la API RESTful que servirá los datos de ejercicios y rutinas."
+            },
+            {
+              "nombre": "Vanilla JS / Alpine.js",
+              "categoria": "framework",
+              "descripcion": "JavaScript puro o un framework minimalista para añadir interactividad.",
+              "version_sugerida": "N/A / 3.13.7",
+              "url_docs": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+              "por_que": "Suficiente para la interfaz de usuario simple de esta aplicación, evitando la complejidad de un framework grande."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Axios",
+              "categoria": "libreria",
+              "descripcion": "Cliente HTTP basado en promesas para el navegador y Node.js.",
+              "version_sugerida": "1.7.2",
+              "url_docs": "https://axios-http.com/docs/intro",
+              "por_que": "Facilita las llamadas a la API backend desde el frontend para obtener o enviar datos."
+            },
+            {
+              "nombre": "Chart.js",
+              "categoria": "libreria",
+              "descripcion": "Librería de gráficos para JavaScript.",
+              "version_sugerida": "4.4.2",
+              "url_docs": "https://www.chartjs.org/docs/latest/",
+              "por_que": "Permite visualizar el progreso del usuario (ej. peso, repeticiones) de forma clara."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "SQLite",
+              "categoria": "base_datos",
+              "descripcion": "Motor de base de datos SQL embebido.",
+              "version_sugerida": "3.45.3",
+              "url_docs": "https://www.sqlite.org/docs.html",
+              "por_que": "Base de datos simple y ligera, ideal para un miniproyecto, no requiere servidor separado."
+            }
+          ],
+          "infraestructura": [],
+          "ia_ml": [
+            {
+              "nombre": "Reglas de Negocio + Algoritmo Simple",
+              "categoria": "ia_ml",
+              "descripcion": "Lógica programada para generar rutinas basadas en parámetros.",
+              "version_sugerida": "N/A",
+              "url_docs": null,
+              "por_que": "Para un miniproyecto junior, la IA se simula con lógica condicional que mapea objetivos y equipo a ejercicios."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/docs/getting-started",
+              "por_que": "Permite escribir tests unitarios para la lógica de generación de rutinas y tests de integración para la API."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Definición de perfil de usuario (objetivos, nivel, equipo).",
+          "Generación de rutinas de ejercicio semanales.",
+          "Base de datos de ejercicios con descripciones y videos (enlaces).",
+          "Seguimiento del progreso del usuario.",
+          "Visualización de estadísticas básicas."
+        ],
+        "casos_uso": [
+          "Un principiante crea su primera rutina de ejercicios en casa.",
+          "Un usuario intermedio ajusta su rutina según el equipo disponible en el gimnasio.",
+          "Alguien busca una rutina para mejorar su resistencia cardiovascular.",
+          "Seguimiento del volumen de entrenamiento semanal.",
+          "Planificación de ejercicios para diferentes grupos musculares."
+        ],
+        "reglas_negocio": [
+          "Se deben incluir al menos 3 tipos de ejercicios por rutina (ej. fuerza, cardio, flexibilidad).",
+          "La rutina debe adaptarse al equipo especificado (ej. no asignar sentadillas con barra si no hay barra).",
+          "Los ejercicios se asignan para maximizar el estímulo muscular según el objetivo.",
+          "El nivel del usuario determina la intensidad y el volumen (series/repeticiones).",
+          "Se deben evitar ejercicios contraindicados para objetivos específicos (ej. mucho impacto para articulaciones sensibles)."
+        ],
+        "por_que_ia": "En este miniproyecto, la 'IA' se implementa mediante un conjunto de reglas lógicas y condicionales (un enfoque de IA simbólica simple) para mapear las entradas del usuario (objetivos, equipo, nivel) a una rutina de ejercicios adecuada, simulando una toma de decisiones experta.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "APIs de YouTube para enlazar videos de ejercicios."
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de HTML, CSS y JavaScript.",
+          "Comprensión de Node.js y Express.js.",
+          "Nociones de bases de datos SQL (SQLite).",
+          "Familiaridad con el consumo de APIs REST.",
+          "Conceptos básicos de fitness y tipos de ejercicios."
+        ],
+        "riesgos": [
+          "La lógica de generación de rutinas puede volverse compleja rápidamente.",
+          "Calidad y variedad limitada de la base de datos de ejercicios.",
+          "La interfaz de usuario puede ser poco intuitiva si no se diseña bien.",
+          "La falta de personalización avanzada puede limitar la utilidad para usuarios experimentados.",
+          "Dependencia de APIs externas (ej. YouTube) que pueden cambiar."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:02:00Z",
+        "hash_unicidad": "b4d5e6f789012345"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "24663b4b640f2683"
+      }
     }
   ],
   "ultimos_hashes": [
-    "3a4b5c6d7e8f9a0b",
-    "f1e2d3c4b5a6f7e8",
     "a7b8c9d0e1f2a3b4",
     "d8e1f7a3b9c2d4e5",
     "e5f6a7b8c9d0e1f2",
@@ -17751,8 +18037,10 @@
     "b7c8d9e0f1a2b3c4",
     "f9a7b1c3d5e8f0a2",
     "c8d1e3f5a7b0c9d1",
-    "f8a1b2c3d4e5f678"
+    "f8a1b2c3d4e5f678",
+    "8d1e3f5a7b9c0d1e",
+    "b4d5e6f789012345"
   ],
-  "total_generados": 130,
-  "fecha_ultima_generacion": "2026-10-23T22:51:45.150707"
+  "total_generados": 132,
+  "fecha_ultima_generacion": "2026-10-24T03:03:55.329746"
 }
