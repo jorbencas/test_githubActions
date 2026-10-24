@@ -966,20 +966,6 @@
         "traducido": true
     },
     {
-        "titulo": "OBS Studio 33.0 lanzado con una actualización masiva a CEF, carga de plugins mejorada",
-        "enlace": "https://www.phoronix.com/news/OBS-Studio-33.0",
-        "fuente": "Phoronix",
-        "tipo": "noticia",
-        "f": "24/10",
-        "fecha_publicacion": "Fri, 23 Oct 2026 19:15:47 -0400",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "24/10/2026",
-        "ts": "2026-10-24T01:18:47.278841",
-        "traducido": true
-    },
-    {
         "titulo": "Quizás seas malo en las relaciones porque ni siquiera lo estás intentando",
         "enlace": "https://www.lesswrong.com/posts/uCH8iRd7TuAy5c6qD/maybe-you-suck-at-relationships-because-you-re-not-even",
         "fuente": "LessWrong AI",
@@ -2588,20 +2574,6 @@
         "traducido": true
     },
     {
-        "titulo": "Securing our frontier model training environment",
-        "enlace": "https://openai.com/index/securing-our-frontier-model-training-environment",
-        "fuente": "OpenAI Blog",
-        "tipo": "noticia",
-        "f": "23/10",
-        "fecha_publicacion": "Fri, 23 Oct 2026 10:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "23/10/2026",
-        "ts": "2026-10-23T19:42:33.931851",
-        "traducido": true
-    },
-    {
         "titulo": "Android lets you ‘bubble’ apps for easy access now – how it works",
         "enlace": "https://www.zdnet.com/tech/android-17-app-bubbles-how-to/",
         "fuente": "ZDNet",
@@ -4141,20 +4113,6 @@
         "traducido": true
     },
     {
-        "titulo": "OpenSSL 4.1.0",
-        "enlace": "https://github.com/openssl/openssl/releases/tag/openssl-4.1.0",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "23/10",
-        "fecha_publicacion": "Fri, 23 Oct 2026 12:42:44 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "23/10/2026",
-        "ts": "2026-10-23T15:35:20.624000",
-        "traducido": true
-    },
-    {
         "titulo": "Show HN: Hicimos que la IA escribiera una wiki a partir de 45.000 correos electrónicos de Enron, cada hecho citado",
         "enlace": "https://www.thisandthat.chat/enron/",
         "fuente": "Hacker News",
@@ -5216,20 +5174,6 @@
         "origen": "rss",
         "fecha_real": "23/10/2026",
         "ts": "2026-10-23T15:35:42.221204",
-        "traducido": true
-    },
-    {
-        "titulo": "El Reino Unido propone penas de prisión de 14 años para los saboteadores de cables submarinos",
-        "enlace": "https://www.helpnetsecurity.com/2026/10/23/uk-undersea-cable-sabotage-sentences/",
-        "fuente": "Help Net Security",
-        "tipo": "noticia",
-        "f": "23/10",
-        "fecha_publicacion": "Fri, 23 Oct 2026 12:37:41 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "23/10/2026",
-        "ts": "2026-10-23T15:35:43.285502",
         "traducido": true
     },
     {
@@ -7442,20 +7386,6 @@
         "traducido": true
     },
     {
-        "titulo": "Explora modelos en Google AI Studio",
-        "enlace": "https://aistudio.google.com?hl=es-419",
-        "fuente": "Google AI Dev",
-        "tipo": "noticia",
-        "f": "23/10",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "23/10/2026",
-        "ts": "2026-10-23T05:41:44.824991",
-        "traducido": true
-    },
-    {
         "titulo": "Ver los documentos de la API de Gemini",
         "enlace": "https://ai.google.dev/gemini-api/docs?hl=es-419",
         "fuente": "Google AI Dev",
@@ -8461,20 +8391,6 @@
         "imagen_url_original": "",
         "fecha_real": "23/10/2026",
         "ts": "2026-10-23T05:40:50.832461",
-        "traducido": true
-    },
-    {
-        "titulo": "NewTry Gemini 4 Argon, nuestro último modelo de vanguardia",
-        "enlace": "https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon",
-        "fuente": "Google AI Dev",
-        "tipo": "noticia",
-        "f": "23/10",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "23/10/2026",
-        "ts": "2026-10-23T00:23:02.489472",
         "traducido": true
     },
     {
@@ -11134,20 +11050,6 @@
         "traducido": true
     },
     {
-        "titulo": "Amazon renombra Kindle Unlimited a Kindle Plus y amplía el acceso a audiolibros",
-        "enlace": "https://www.theverge.com/tech/1016789/amazon-kindle-unlimited-plus-subscription-ai-audiobooks",
-        "fuente": "The Verge",
-        "tipo": "noticia",
-        "f": "22/10",
-        "fecha_publicacion": "2026-10-22T13:46:40-04:00",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "22/10/2026",
-        "ts": "2026-10-22T17:49:40.503497",
-        "traducido": true
-    },
-    {
         "titulo": "Elon Musk dice que Tesla venderá 5 millones de coches para 2030; las matemáticas dicen lo contrario",
         "enlace": "https://www.theverge.com/transportation/1016055/elon-musk-tesla-5-million-cars-2030-reality-check",
         "fuente": "The Verge",
@@ -13583,20 +13485,6 @@
         "traducido": true
     },
     {
-        "titulo": "Una cueva de Cantabria estuvo bloqueada durante 16.800 años. Dentro hay una vivienda de la Edad de Piedra con más de 4.600 objetos",
-        "enlace": "https://www.3djuegos.com/3djuegos-trivia/noticias/cueva-cantabria-estuvo-bloqueada-durante-16-800-anos-dentro-hay-vivienda-edad-piedra-4-600-objetos?utm_source=applesfera&utm_medium=network&utm_campaign=repost",
-        "fuente": "Applesfera",
-        "tipo": "noticia",
-        "f": "22/10",
-        "fecha_publicacion": "2026-10-22T12:11:42Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "",
-        "fecha_real": "22/10/2026",
-        "ts": "2026-10-22T12:47:56.389107",
-        "traducido": true
-    },
-    {
         "titulo": "Inteligencia de Amenazas (lectura de 8 min) Sala de Guerra: RCE en PHP Core “PHP2Shell” (CVE-2026-109618 / CVE-2026-109619) — Análisis y Estrategia de Defensa TRX 22 de octubre de 2026",
         "enlace": "https://www.hackthebox.com/blog/php2shell-php-rce-vulnerabilities",
         "fuente": "HackTheBox",
@@ -15543,20 +15431,6 @@
         "traducido": true
     },
     {
-        "titulo": "eMudhra saldrá del negocio global de certificados SSL/TLS",
-        "enlace": "https://analyticsindiamag.com/ai-news/emudhra-to-exit-global-ssltls-certificate-business",
-        "fuente": "Analytics India Magazine",
-        "tipo": "noticia",
-        "f": "22/10",
-        "fecha_publicacion": "Thu, 22 Oct 2026 12:16:39 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "22/10/2026",
-        "ts": "2026-10-22T12:46:38.493131",
-        "traducido": true
-    },
-    {
         "titulo": "Unicorn India Ventures lanza operaciones en EE. UU. para apoyar a startups indias de Deep-Tech",
         "enlace": "https://analyticsindiamag.com/ai-news/unicorn-india-ventures-launches-us-operations-to-back-indian-deep-tech-startups",
         "fuente": "Analytics India Magazine",
@@ -15711,20 +15585,6 @@
         "traducido": true
     },
     {
-        "titulo": "Claude Duet",
-        "enlace": "https://www.producthunt.com/products/claude",
-        "fuente": "Product Hunt RSS",
-        "tipo": "noticia",
-        "f": "22/10",
-        "fecha_publicacion": "2026-10-21T12:40:23-07:00",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "22/10/2026",
-        "ts": "2026-10-22T12:46:38.735064",
-        "traducido": true
-    },
-    {
         "titulo": "DeepCell",
         "enlace": "https://www.producthunt.com/products/deepcell",
         "fuente": "Product Hunt RSS",
@@ -15778,20 +15638,6 @@
         "origen": "rss",
         "fecha_real": "22/10/2026",
         "ts": "2026-10-22T12:46:38.735152"
-    },
-    {
-        "titulo": "ElevenLabs Realtime Translation",
-        "enlace": "https://www.producthunt.com/products/elevenlabs-realtime-translation",
-        "fuente": "Product Hunt RSS",
-        "tipo": "noticia",
-        "f": "22/10",
-        "fecha_publicacion": "2026-10-21T07:36:07-07:00",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "22/10/2026",
-        "ts": "2026-10-22T12:46:38.735177",
-        "traducido": true
     },
     {
         "titulo": "Causo",
@@ -16423,34 +16269,6 @@
         "traducido": true
     },
     {
-        "titulo": "Recomendación de divulgación de seguridad: Rotar las credenciales de la base de datos Redis",
-        "enlace": "https://blog.railway.com/p/security-disclosure-recommendation-rotate-redis-database-credentials",
-        "fuente": "Railway Blog",
-        "tipo": "noticia",
-        "f": "22/10",
-        "fecha_publicacion": "Thu, 22 Oct 2026 00:46:30 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "22/10/2026",
-        "ts": "2026-10-22T06:56:58.997811",
-        "traducido": true
-    },
-    {
-        "titulo": "Recomendación de divulgación de seguridad: Rotar las credenciales de la base de datos MongoDB",
-        "enlace": "https://blog.railway.com/p/security-disclosure-recommendation-rotate-mongodb-database-credentials",
-        "fuente": "Railway Blog",
-        "tipo": "noticia",
-        "f": "22/10",
-        "fecha_publicacion": "Thu, 22 Oct 2026 00:46:25 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "22/10/2026",
-        "ts": "2026-10-22T06:56:58.997834",
-        "traducido": true
-    },
-    {
         "titulo": "Recomendación de divulgación de seguridad: Revisar el uso inesperado en Stripe",
         "enlace": "https://blog.railway.com/p/security-disclosure-recommendation-check-for-unexpected-usage-in-stripe",
         "fuente": "Railway Blog",
@@ -16465,34 +16283,6 @@
         "traducido": true
     },
     {
-        "titulo": "Recomendación de divulgación de seguridad: Revisar el uso inesperado de OpenAI",
-        "enlace": "https://blog.railway.com/p/security-disclosure-recommendation-check-for-unexpected-openai-usage",
-        "fuente": "Railway Blog",
-        "tipo": "noticia",
-        "f": "22/10",
-        "fecha_publicacion": "Thu, 22 Oct 2026 00:46:08 GMT",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "22/10/2026",
-        "ts": "2026-10-22T06:56:58.997873",
-        "traducido": true
-    },
-    {
-        "titulo": "Recomendación de divulgación de seguridad: Revisar el uso inesperado de Anthropic",
-        "enlace": "https://blog.railway.com/p/security-disclosure-recommendation-check-for-unexpected-anthropic-usage",
-        "fuente": "Railway Blog",
-        "tipo": "noticia",
-        "f": "22/10",
-        "fecha_publicacion": "Thu, 22 Oct 2026 00:46:00 GMT",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "22/10/2026",
-        "ts": "2026-10-22T06:56:58.997881",
-        "traducido": true
-    },
-    {
         "titulo": "Recomendación de divulgación de seguridad: Volver a desplegar los buckets y reconectar GitHub después del restablecimiento de credenciales",
         "enlace": "https://blog.railway.com/p/security-disclosure-recommendation-redeploy-buckets-and-reconnect-github-after-the-credential-reset",
         "fuente": "Railway Blog",
@@ -16504,20 +16294,6 @@
         "origen": "rss",
         "fecha_real": "22/10/2026",
         "ts": "2026-10-22T06:56:58.997905",
-        "traducido": true
-    },
-    {
-        "titulo": "Recomendación de divulgación de seguridad: Rotar las credenciales de la base de datos PostgreSQL",
-        "enlace": "https://blog.railway.com/p/security-disclosure-recommendation-rotate-postgresql-database-credentials",
-        "fuente": "Railway Blog",
-        "tipo": "noticia",
-        "f": "22/10",
-        "fecha_publicacion": "Thu, 22 Oct 2026 00:45:42 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "22/10/2026",
-        "ts": "2026-10-22T06:56:58.997941",
         "traducido": true
     },
     {
@@ -18545,20 +18321,6 @@
         "traducido": true
     },
     {
-        "titulo": "Claude Duet",
-        "enlace": "https://claude.com/resources/articles/claude-duet",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "21/10",
-        "fecha_publicacion": "Wed, 21 Oct 2026 19:40:18 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "21/10/2026",
-        "ts": "2026-10-21T22:57:42.333838",
-        "traducido": true
-    },
-    {
         "titulo": "Show HN: Omnara – Alternativa de código abierto a los agentes gestionados de Claude",
         "enlace": "https://github.com/omnara-ai/omnara",
         "fuente": "Hacker News",
@@ -19426,20 +19188,6 @@
         "traducido": true
     },
     {
-        "titulo": "20/10/2026 Entrena Muse Glimmer gratis: Nuestra receta para superar a Jev",
-        "enlace": "https://fireworks.ai/blog/train-muse-glimmer-for-free",
-        "fuente": "Fireworks AI Blog",
-        "tipo": "noticia",
-        "f": "21/10",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "https://fireworks.ai/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffireworks-bw.709eb7d4.png&w=3840&q=75&dpl=dpl_GVxxuZZPRDftWPvwac6UfGyNxihj",
-        "fecha_real": "21/10/2026",
-        "ts": "2026-10-21T22:58:36.990364",
-        "traducido": true
-    },
-    {
         "titulo": "¡PHP en problemas!",
         "enlace": "https://www.youtube.com/watch?v=CuvRrItIdKs",
         "fuente": "Midudev",
@@ -19744,20 +19492,6 @@
         "origen": "rss",
         "fecha_real": "21/10/2026",
         "ts": "2026-10-21T19:52:55.861744",
-        "traducido": true
-    },
-    {
-        "titulo": "EA cierra BioWare",
-        "enlace": "https://www.theverge.com/games/1015647/ea-is-shutting-down-bioware",
-        "fuente": "The Verge",
-        "tipo": "noticia",
-        "f": "21/10",
-        "fecha_publicacion": "2026-10-21T13:19:07-04:00",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "21/10/2026",
-        "ts": "2026-10-21T19:52:55.861761",
         "traducido": true
     },
     {
@@ -20066,20 +19800,6 @@
         "origen": "rss",
         "fecha_real": "21/10/2026",
         "ts": "2026-10-21T19:53:08.810158",
-        "traducido": true
-    },
-    {
-        "titulo": "Claude Duet",
-        "enlace": "https://claude.com/product/claude-duet",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "21/10",
-        "fecha_publicacion": "Wed, 21 Oct 2026 19:14:01 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "21/10/2026",
-        "ts": "2026-10-21T19:53:08.810173",
         "traducido": true
     },
     {
@@ -21761,20 +21481,6 @@
         "traducido": true
     },
     {
-        "titulo": "Yaiza Canosa, exitosa empresaria española: “Conozco más fontaneros bajándose de un Land Rover que a desarrolladores”",
-        "enlace": "https://www.genbeta.com/laboral/yaiza-canosa-exitosa-empresaria-espanola-conozco-fontaneros-bajandose-land-rover-que-a-desarrolladores",
-        "fuente": "Genbeta",
-        "tipo": "noticia",
-        "f": "21/10",
-        "fecha_publicacion": "2026-10-21T14:01:41Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "",
-        "fecha_real": "21/10/2026",
-        "ts": "2026-10-21T15:54:08.480318",
-        "traducido": true
-    },
-    {
         "titulo": "El iPhone Duo de 2.300 euros desata una fiebre inédita por los plegables: se agota y acumula tres meses de espera",
         "enlace": "https://elpais.com/tecnologia/2026-10-21/el-iphone-duo-de-2300-euros-desata-una-fiebre-inedita-por-los-plegables-se-agota-y-acumula-tres-meses-de-espera.html",
         "fuente": "El País Tecnología",
@@ -22375,20 +22081,6 @@
         "traducido": true
     },
     {
-        "titulo": "Parchea el Planeta: coordinación de respuesta global mientras los agentes descubren vulnerabilidades",
-        "enlace": "https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities/",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "21/10",
-        "fecha_publicacion": "Wed, 21 Oct 2026 14:03:43 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "21/10/2026",
-        "ts": "2026-10-21T15:51:38.621930",
-        "traducido": true
-    },
-    {
         "titulo": "El derribo de No Kings es la razón por la que no deberías alquilar tu megáfono a Zuck",
         "enlace": "https://www.techdirt.com/2026/10/20/accident-or-not-the-no-kings-takedown-is-why-you-shouldnt-rent-your-megaphone-from-zuck/",
         "fuente": "Hacker News",
@@ -22470,20 +22162,6 @@
         "origen": "rss",
         "fecha_real": "21/10/2026",
         "ts": "2026-10-21T15:51:38.622066",
-        "traducido": true
-    },
-    {
-        "titulo": "Uso de miles de agentes de IA para descubrir nuevas pistas en datos biológicos",
-        "enlace": "https://openai.com/index/scaling-ai-research-for-complex-biological-data/",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "21/10",
-        "fecha_publicacion": "Wed, 21 Oct 2026 13:37:00 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "21/10/2026",
-        "ts": "2026-10-21T15:51:38.622075",
         "traducido": true
     },
     {
@@ -24556,20 +24234,6 @@
         "origen": "rss",
         "fecha_real": "21/10/2026",
         "ts": "2026-10-21T15:52:30.259710",
-        "traducido": true
-    },
-    {
-        "titulo": "La Biblioteca",
-        "enlace": "https://www.producthunt.com/products/querri",
-        "fuente": "Product Hunt RSS",
-        "tipo": "noticia",
-        "f": "21/10",
-        "fecha_publicacion": "2026-10-06T00:23:15-07:00",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "21/10/2026",
-        "ts": "2026-10-21T15:52:31.369701",
         "traducido": true
     },
     {
@@ -29453,20 +29117,6 @@
         "traducido": true
     },
     {
-        "titulo": "OpenAI adquiere Orchestra Bio",
-        "enlace": "https://openai.com/index/openai-to-acquire-orchestra-bio",
-        "fuente": "OpenAI Blog",
-        "tipo": "noticia",
-        "f": "20/10",
-        "fecha_publicacion": "Tue, 20 Oct 2026 00:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "20/10/2026",
-        "ts": "2026-10-20T21:08:00.676392",
-        "traducido": true
-    },
-    {
         "titulo": "Gemini en Android Auto ahora puede acceder a mis fotos, correos electrónicos y calendario – por qué estoy de acuerdo con eso (en su mayoría)",
         "enlace": "https://www.zdnet.com/tech/gemini-on-android-auto-can-look-through-my-photos-emails-and-calendar-now-im-cautiously-optimistic/",
         "fuente": "ZDNet",
@@ -29786,20 +29436,6 @@
         "imagen_url_original": "",
         "fecha_real": "20/10/2026",
         "ts": "2026-10-20T21:08:13.062441",
-        "traducido": true
-    },
-    {
-        "titulo": "Juez desestima demanda por abuso sexual de la hermana de Sam Altman",
-        "enlace": "https://www.engadget.com/2292346/judge-tosses-sexual-abuse-lawsuit-from-sam-altmans-sister/",
-        "fuente": "Engadget",
-        "tipo": "noticia",
-        "f": "20/10",
-        "fecha_publicacion": "Tue, 20 Oct 2026 20:53:25 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "20/10/2026",
-        "ts": "2026-10-20T21:08:12.292193",
         "traducido": true
     },
     {
@@ -30458,20 +30094,6 @@
         "origen": "rss",
         "fecha_real": "20/10/2026",
         "ts": "2026-10-20T21:08:53.708334",
-        "traducido": true
-    },
-    {
-        "titulo": "Lanzamientos de modelos 20/10/2026 Muse Spark Open en Fireworks: modelo de pesos abiertos de Meta, disponible en servidorless de EE. UU.",
-        "enlace": "https://fireworks.ai/blog/meta-muse-spark-open",
-        "fuente": "Fireworks AI Blog",
-        "tipo": "noticia",
-        "f": "20/10",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🐳 DevOps",
-        "imagen_url_original": "https://fireworks.ai/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffireworks-bw.709eb7d4.png&w=3840&q=75&dpl=dpl_2Db1aLCnoxRH2j7m7rd64ydGYMoU",
-        "fecha_real": "20/10/2026",
-        "ts": "2026-10-20T21:09:00.976721",
         "traducido": true
     },
     {
@@ -31213,19 +30835,6 @@
         "origen": "rss",
         "fecha_real": "20/10/2026",
         "ts": "2026-10-20T17:42:41.562237"
-    },
-    {
-        "titulo": "Launch HN: Respan (YC W24) – Open-source Rust AI gateway built around plugins",
-        "enlace": "https://news.ycombinator.com/item?id=50167583",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "20/10",
-        "fecha_publicacion": "Tue, 20 Oct 2026 15:09:29 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "20/10/2026",
-        "ts": "2026-10-20T17:42:41.562249"
     },
     {
         "titulo": "Facebook Pages require paid subscription to post more than two links per month",
@@ -35672,34 +35281,6 @@
         "traducido": true
     },
     {
-        "titulo": "Go rechazará cadenas de certificados que contengan ocho SPKI no confiables",
-        "enlace": "https://github.com/golang/go/issues/82345",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "20/10",
-        "fecha_publicacion": "Tue, 20 Oct 2026 03:05:07 +0000",
-        "badge": "Tech",
-        "categoria": "💻 Programación",
-        "origen": "rss",
-        "fecha_real": "20/10/2026",
-        "ts": "2026-10-20T06:58:56.511177",
-        "traducido": true
-    },
-    {
-        "titulo": "OpenBSD 8.0",
-        "enlace": "https://www.openbsd.org/80.html",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "20/10",
-        "fecha_publicacion": "Tue, 20 Oct 2026 02:06:40 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "20/10/2026",
-        "ts": "2026-10-20T06:58:56.511218",
-        "traducido": true
-    },
-    {
         "titulo": "Developing Taste",
         "enlace": "https://emilkowal.ski/ui/developing-taste",
         "fuente": "Hacker News",
@@ -39704,20 +39285,6 @@
         "traducido": true
     },
     {
-        "titulo": "MiniMax M3.1 Flash",
-        "enlace": "https://www.minimax.io/blog/minimax-m31f",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "19/10",
-        "fecha_publicacion": "Mon, 19 Oct 2026 16:39:09 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "19/10/2026",
-        "ts": "2026-10-19T18:08:15.365268",
-        "traducido": true
-    },
-    {
         "titulo": "Pentulive (Puppy Live) [video]",
         "enlace": "https://yle.fi/t/18-332106/fi",
         "fuente": "Hacker News",
@@ -39729,20 +39296,6 @@
         "origen": "rss",
         "fecha_real": "19/10/2026",
         "ts": "2026-10-19T18:08:15.365307",
-        "traducido": true
-    },
-    {
-        "titulo": "Lanzamiento HN: Laminar (YC S24) – Entrenamos un modelo para detectar fallos de agentes silenciosos",
-        "enlace": "https://news.ycombinator.com/item?id=50154029",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "19/10",
-        "fecha_publicacion": "Mon, 19 Oct 2026 16:00:18 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "19/10/2026",
-        "ts": "2026-10-19T18:08:15.365344",
         "traducido": true
     },
     {
@@ -40600,20 +40153,6 @@
         "traducido": true
     },
     {
-        "titulo": "@astrojs/vue@7.1.1",
-        "enlace": "https://github.com/withastro/astro/releases/tag/%40astrojs%2Fvue%407.1.1",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "19/10",
-        "fecha_publicacion": "2026-10-19T14:11:20Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "19/10/2026",
-        "ts": "2026-10-19T18:08:18.858514",
-        "traducido": true
-    },
-    {
         "titulo": "@astrojs/vercel@11.0.16",
         "enlace": "https://github.com/withastro/astro/releases/tag/%40astrojs%2Fvercel%4011.0.16",
         "fuente": "Astro GitHub Releases",
@@ -40639,20 +40178,6 @@
         "origen": "rss",
         "fecha_real": "19/10/2026",
         "ts": "2026-10-19T18:08:18.858567",
-        "traducido": true
-    },
-    {
-        "titulo": "@astrojs/cloudflare@15.0.0-beta.2",
-        "enlace": "https://github.com/withastro/astro/releases/tag/%40astrojs%2Fcloudflare%4015.0.0-beta.2",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "19/10",
-        "fecha_publicacion": "2026-10-19T14:52:34Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "19/10/2026",
-        "ts": "2026-10-19T18:08:18.858590",
         "traducido": true
     },
     {
@@ -44869,20 +44394,6 @@
         "traducido": true
     },
     {
-        "titulo": "Linux 7.3 lanzado con I/O más rápido, preparativos para AMD Zen 6 y más",
-        "enlace": "https://www.phoronix.com/news/Linux-7.3-Released",
-        "fuente": "Phoronix",
-        "tipo": "noticia",
-        "f": "19/10",
-        "fecha_publicacion": "Sun, 18 Oct 2026 19:28:09 -0400",
-        "badge": "Tech",
-        "categoria": "⚡ Hardware",
-        "origen": "rss",
-        "fecha_real": "19/10/2026",
-        "ts": "2026-10-19T00:41:25.711779",
-        "traducido": true
-    },
-    {
         "titulo": "Tiling Shell ahora admite la activación de diseño de botones del ratón",
         "enlace": "https://www.omgubuntu.co.uk/2026/10/tiling-shell-right-mouse-button-activation",
         "fuente": "OMG Ubuntu",
@@ -45076,20 +44587,6 @@
         "origen": "rss",
         "fecha_real": "18/10/2026",
         "ts": "2026-10-18T22:09:41.127053",
-        "traducido": true
-    },
-    {
-        "titulo": "Hombres en tecnología #YesAllMen",
-        "enlace": "https://www.youtube.com/watch?v=WXL6K1lhvt0",
-        "fuente": "Lobsters",
-        "tipo": "noticia",
-        "f": "18/10",
-        "fecha_publicacion": "Sun, 18 Oct 2026 13:35:01 -0500",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "18/10/2026",
-        "ts": "2026-10-18T22:09:41.495309",
         "traducido": true
     },
     {
@@ -50284,20 +49781,6 @@
         "traducido": true
     },
     {
-        "titulo": "Los desafíos reales: privacidad, integración y criterio",
-        "enlace": "https://blog.donweb.com/ia-todos-lados-2026/#los-desafios-reales-privacidad-integracion-y-criterio",
-        "fuente": "DonWeb IA",
-        "tipo": "noticia",
-        "f": "17/10",
-        "fecha_publicacion": "2026-04-14T07:06:54-03:00",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "",
-        "fecha_real": "17/10/2026",
-        "ts": "2026-10-17T19:00:32.472808",
-        "traducido": true
-    },
-    {
         "titulo": "El Chernóbil asturiano: el pueblo abandonado ubicado junto a una antigua central térmica que tiene cine, escuela, club social y hasta consultorio médico",
         "enlace": "https://www.xataka.com/magnet/chernobil-asturiano-pueblo-abandonado-ubicado-a-antigua-central-termica-que-tiene-cine-escuela-club-social-consultorio-medico",
         "fuente": "Xataka",
@@ -50519,20 +50002,6 @@
         "origen": "rss",
         "fecha_real": "17/10/2026",
         "ts": "2026-10-17T18:58:51.678710",
-        "traducido": true
-    },
-    {
-        "titulo": "Las 7 tendencias que definen la proliferación de IA en 2026",
-        "enlace": "https://blog.donweb.com/ia-todos-lados-2026/#las-7-tendencias-que-definen-la-proliferacion-de-ia-en-2026",
-        "fuente": "DonWeb IA",
-        "tipo": "noticia",
-        "f": "17/10",
-        "fecha_publicacion": "2026-04-14T07:06:54-03:00",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "17/10/2026",
-        "ts": "2026-10-17T18:58:55.604345",
         "traducido": true
     },
     {
@@ -50872,20 +50341,6 @@
         "traducido": true
     },
     {
-        "titulo": "Más allá del hogar: la IA conquista las empresas",
-        "enlace": "https://blog.donweb.com/ia-todos-lados-2026/#mas-alla-del-hogar-la-ia-conquista-las-empresas",
-        "fuente": "DonWeb IA",
-        "tipo": "noticia",
-        "f": "17/10",
-        "fecha_publicacion": "2026-04-14T07:06:54-03:00",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "17/10/2026",
-        "ts": "2026-10-17T16:48:59.453614",
-        "traducido": true
-    },
-    {
         "titulo": "La regla de \"100 más tu edad\" y la muerte de un presidente: cómo la medicina se equivocó durante décadas con la tensión arterial",
         "enlace": "https://www.xataka.com/medicina-y-salud/regla-100-tu-edad-muerte-presidente-como-medicina-se-equivoco-durante-decadas-tension-arterial",
         "fuente": "Xataka",
@@ -51135,20 +50590,6 @@
         "imagen_url_original": "",
         "fecha_real": "17/10/2026",
         "ts": "2026-10-17T16:47:20.098407",
-        "traducido": true
-    },
-    {
-        "titulo": "Dentro de tu hogar: cómo la IA rediseña los electrodomésticos cotidianos",
-        "enlace": "https://blog.donweb.com/ia-todos-lados-2026/#dentro-de-tu-hogar-como-la-ia-redisena-los-electrodomesticos-cotidianos",
-        "fuente": "DonWeb IA",
-        "tipo": "noticia",
-        "f": "17/10",
-        "fecha_publicacion": "2026-04-14T07:06:54-03:00",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "17/10/2026",
-        "ts": "2026-10-17T16:47:22.119534",
         "traducido": true
     },
     {
@@ -51754,20 +51195,6 @@
         "traducido": true
     },
     {
-        "titulo": "Introducción a la IA para DevelopersDuración:1h 42mIr al curso",
-        "enlace": "https://midu.dev/curso/intro-ia-para-devs",
-        "fuente": "Midudev",
-        "tipo": "noticia",
-        "f": "17/10",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "https://midu.dev/courses/intro-ia-para-devs.webp",
-        "fecha_real": "17/10/2026",
-        "ts": "2026-10-17T13:33:35.145962",
-        "traducido": true
-    },
-    {
         "titulo": "MediaMarkt tiene este iPad Pro en su outlet con doble descuento. Y en su configuración con 2 TB",
         "enlace": "https://www.applesfera.com/seleccion/mediamarkt-tiene-este-ipad-pro-su-outlet-doble-descuento-su-configuracion-2-tb",
         "fuente": "Applesfera",
@@ -51824,20 +51251,6 @@
         "traducido": true
     },
     {
-        "titulo": "Explore AI modelsQuickly evaluate AI models, develop prompts, and transform ideas into code.Google AI Studio",
-        "enlace": "https://aistudio.google.com/",
-        "fuente": "Google AI Dev",
-        "tipo": "noticia",
-        "f": "17/10",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "https://ai.google.dev/static/images/landing/gemini-start-building-card-integrate.svg",
-        "fecha_real": "17/10/2026",
-        "ts": "2026-10-17T13:33:45.800276",
-        "traducido": true
-    },
-    {
         "titulo": "Meta’s Muse Spark Open now available in Amazon SageMaker JumpStart",
         "enlace": "https://aws.amazon.com/blogs/machine-learning/metas-muse-spark-open-now-available-in-amazon-sagemaker-jumpstart/",
         "fuente": "AWS ML",
@@ -51849,20 +51262,6 @@
         "imagen_url_original": "",
         "fecha_real": "17/10/2026",
         "ts": "2026-10-17T13:33:46.344181",
-        "traducido": true
-    },
-    {
-        "titulo": "El CES 2026: electrodomésticos y gadgets presentan su lado inteligente",
-        "enlace": "https://blog.donweb.com/ia-todos-lados-2026/#el-ces-2026-electrodomesticos-y-gadgets-presentan-su-lado-inteligente",
-        "fuente": "DonWeb IA",
-        "tipo": "noticia",
-        "f": "17/10",
-        "fecha_publicacion": "2026-04-14T07:06:54-03:00",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "",
-        "fecha_real": "17/10/2026",
-        "ts": "2026-10-17T13:34:02.411264",
         "traducido": true
     },
     {
@@ -52062,34 +51461,6 @@
         "traducido": true
     },
     {
-        "titulo": "Novedades en la plataforma web en septiembre",
-        "enlace": "https://web.dev/blog/web-platform-09-2026?hl=en",
-        "fuente": "web.dev",
-        "tipo": "noticia",
-        "f": "17/10",
-        "fecha_publicacion": "Fri, 02 Oct 2026 07:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "17/10/2026",
-        "ts": "2026-10-17T13:32:12.354128",
-        "traducido": true
-    },
-    {
-        "titulo": "Novedades en la plataforma web en agosto",
-        "enlace": "https://web.dev/blog/web-platform-08-2026?hl=en",
-        "fuente": "web.dev",
-        "tipo": "noticia",
-        "f": "17/10",
-        "fecha_publicacion": "Fri, 28 Aug 2026 07:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "17/10/2026",
-        "ts": "2026-10-17T13:32:12.354253",
-        "traducido": true
-    },
-    {
         "titulo": "Programación concurrente intuitiva en cualquier idioma | Lingua Franca",
         "enlace": "https://www.lf-lang.org/",
         "fuente": "Lobsters",
@@ -52199,20 +51570,6 @@
         "imagen_url_original": "https://cleverai.app/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgenius-ai-app-test-1.appspot.com%2Fblog%2Ffeatured%2FXcMUjFZuSbDPPOfXsJ8Le.webp&w=3840&q=75",
         "fecha_real": "17/10/2026",
         "ts": "2026-10-17T13:32:18.300414",
-        "traducido": true
-    },
-    {
-        "titulo": "¿Qué significa “IA hasta en la sopa”? La frase que captura 2026",
-        "enlace": "https://blog.donweb.com/ia-todos-lados-2026/#que-significa-ia-hasta-en-la-sopa-la-frase-que-captura-2026",
-        "fuente": "DonWeb IA",
-        "tipo": "noticia",
-        "f": "17/10",
-        "fecha_publicacion": "2026-04-14T07:06:54-03:00",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "",
-        "fecha_real": "17/10/2026",
-        "ts": "2026-10-17T13:32:19.220138",
         "traducido": true
     },
     {
@@ -55995,20 +55352,6 @@
         "traducido": true
     },
     {
-        "titulo": "Muse Spark Open",
-        "enlace": "https://www.producthunt.com/products/muse-spark-open",
-        "fuente": "Product Hunt RSS",
-        "tipo": "noticia",
-        "f": "16/10",
-        "fecha_publicacion": "2026-10-15T13:13:34-07:00",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "16/10/2026",
-        "ts": "2026-10-16T22:25:23.287385",
-        "traducido": true
-    },
-    {
         "titulo": "Fallece Margaret Hamilton: Pionera de la ingeniería de software",
         "enlace": "https://www.youtube.com/watch?v=eHfdaCLNPQk",
         "fuente": "Midudev",
@@ -56565,20 +55908,6 @@
         "origen": "rss",
         "fecha_real": "16/10/2026",
         "ts": "2026-10-16T19:11:15.488762",
-        "traducido": true
-    },
-    {
-        "titulo": "Anthropic Console me cobró 100 veces de más la tarjeta debido a un error de entrada de internacionalización",
-        "enlace": "https://news.ycombinator.com/item?id=50121562",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "16/10",
-        "fecha_publicacion": "Fri, 16 Oct 2026 17:31:42 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "16/10/2026",
-        "ts": "2026-10-16T19:11:15.488780",
         "traducido": true
     },
     {
@@ -57335,20 +56664,6 @@
         "origen": "rss",
         "fecha_real": "16/10/2026",
         "ts": "2026-10-16T19:11:39.654604",
-        "traducido": true
-    },
-    {
-        "titulo": "Lo bueno, lo malo y lo feo en ciberseguridad - Semana 42 (2026)",
-        "enlace": "https://www.sentinelone.com/blog/the-good-the-bad-and-the-ugly-in-cybersecurity-week-42-8",
-        "fuente": "SentinelOne Labs",
-        "tipo": "noticia",
-        "f": "16/10",
-        "fecha_publicacion": "Fri, 16 Oct 2026 17:31:01 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "16/10/2026",
-        "ts": "2026-10-16T19:11:39.654639",
         "traducido": true
     },
     {
@@ -63170,20 +62485,6 @@
         "traducido": true
     },
     {
-        "titulo": "Claude Opus 5",
-        "enlace": "https://docs.anthropic.com/docs/en/release-notes/system-prompts/claude-opus-5",
-        "fuente": "Claude Blog",
-        "tipo": "noticia",
-        "f": "15/10",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "15/10/2026",
-        "ts": "2026-10-15T22:51:48.028364",
-        "traducido": true
-    },
-    {
         "titulo": "Nos pusimos manos a la obra con Muse de Meta —y quedamos perplejos con HomeView de Apple.",
         "enlace": "https://www.wired.com/story/uncanny-valley-podcast-we-got-hot-and-heavy-with-metas-muse-and-underwhelmed-by-apples-homeview/",
         "fuente": "Wired",
@@ -66485,20 +65786,6 @@
         "traducido": true
     },
     {
-        "titulo": "Brais Moure, programador, sobre el perfil mínimo de un desarrollador junior: \"¿Eres capaz de crear software de manera autónoma, con control, fundamentos y con IA?\"",
-        "enlace": "https://www.computerhoy.com/software/brais-moure-programador-sobre-perfil-minimo-un-desarrollador-junior-eres-capaz-crear-software-manera-autonoma-con-control-fundamentos-con-ia_7048967_0.html",
-        "fuente": "ComputerHoy",
-        "tipo": "noticia",
-        "f": "15/10",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "",
-        "fecha_real": "15/10/2026",
-        "ts": "2026-10-15T15:29:24.387800",
-        "traducido": true
-    },
-    {
         "titulo": "Cómo una compañía global de seguros y Scale están construyendo un Copilot en tiempo real con Nemotron",
         "enlace": "https://scale.com/blog/building-a-real-time-copilot-for-global-insurance-company",
         "fuente": "Scale AI",
@@ -68120,146 +67407,6 @@
         "origen": "rss",
         "fecha_real": "15/10/2026",
         "ts": "2026-10-15T15:26:58.082260",
-        "traducido": true
-    },
-    {
-        "titulo": "create-astro@5.3.0",
-        "enlace": "https://github.com/withastro/astro/releases/tag/create-astro%405.3.0",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "15/10",
-        "fecha_publicacion": "2026-10-15T14:45:48Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "15/10/2026",
-        "ts": "2026-10-15T15:26:59.113835",
-        "traducido": true
-    },
-    {
-        "titulo": "@astrojs/vue@7.1.0",
-        "enlace": "https://github.com/withastro/astro/releases/tag/%40astrojs%2Fvue%407.1.0",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "15/10",
-        "fecha_publicacion": "2026-10-15T14:46:39Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "15/10/2026",
-        "ts": "2026-10-15T15:26:59.113864",
-        "traducido": true
-    },
-    {
-        "titulo": "@astrojs/vercel@11.0.15",
-        "enlace": "https://github.com/withastro/astro/releases/tag/%40astrojs%2Fvercel%4011.0.15",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "15/10",
-        "fecha_publicacion": "2026-10-15T14:46:36Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "15/10/2026",
-        "ts": "2026-10-15T15:26:59.113889",
-        "traducido": true
-    },
-    {
-        "titulo": "@astrojs/upgrade@0.8.0",
-        "enlace": "https://github.com/withastro/astro/releases/tag/%40astrojs%2Fupgrade%400.8.0",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "15/10",
-        "fecha_publicacion": "2026-10-15T14:46:00Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "15/10/2026",
-        "ts": "2026-10-15T15:26:59.113912",
-        "traducido": true
-    },
-    {
-        "titulo": "@astrojs/telemetry@3.4.0",
-        "enlace": "https://github.com/withastro/astro/releases/tag/%40astrojs%2Ftelemetry%403.4.0",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "15/10",
-        "fecha_publicacion": "2026-10-15T14:45:57Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "15/10/2026",
-        "ts": "2026-10-15T15:26:59.113934",
-        "traducido": true
-    },
-    {
-        "titulo": "@astrojs/svelte@9.1.0",
-        "enlace": "https://github.com/withastro/astro/releases/tag/%40astrojs%2Fsvelte%409.1.0",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "15/10",
-        "fecha_publicacion": "2026-10-15T14:46:33Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "15/10/2026",
-        "ts": "2026-10-15T15:26:59.113956",
-        "traducido": true
-    },
-    {
-        "titulo": "@astrojs/solid-js@7.1.0",
-        "enlace": "https://github.com/withastro/astro/releases/tag/%40astrojs%2Fsolid-js%407.1.0",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "15/10",
-        "fecha_publicacion": "2026-10-15T14:45:51Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "15/10/2026",
-        "ts": "2026-10-15T15:26:59.113978",
-        "traducido": true
-    },
-    {
-        "titulo": "@astrojs/react@7.1.0",
-        "enlace": "https://github.com/withastro/astro/releases/tag/%40astrojs%2Freact%407.1.0",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "15/10",
-        "fecha_publicacion": "2026-10-15T14:46:06Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "15/10/2026",
-        "ts": "2026-10-15T15:26:59.114000",
-        "traducido": true
-    },
-    {
-        "titulo": "@astrojs/prism@4.1.0",
-        "enlace": "https://github.com/withastro/astro/releases/tag/%40astrojs%2Fprism%404.1.0",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "15/10",
-        "fecha_publicacion": "2026-10-15T14:45:45Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "15/10/2026",
-        "ts": "2026-10-15T15:26:59.114021",
-        "traducido": true
-    },
-    {
-        "titulo": "@astrojs/preact@6.1.0",
-        "enlace": "https://github.com/withastro/astro/releases/tag/%40astrojs%2Fpreact%406.1.0",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "15/10",
-        "fecha_publicacion": "2026-10-15T14:46:03Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "15/10/2026",
-        "ts": "2026-10-15T15:26:59.114042",
         "traducido": true
     },
     {
@@ -79700,20 +78847,6 @@
         "traducido": true
     },
     {
-        "titulo": "Introducción",
-        "enlace": "https://dev.to/yash6012/intro-1ban",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "14/10",
-        "fecha_publicacion": "Wed, 14 Oct 2026 06:53:36 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "14/10/2026",
-        "ts": "2026-10-14T06:58:45.880193",
-        "traducido": true
-    },
-    {
         "titulo": "Creé un flujo de trabajo de n8n que vuelve a reservar automáticamente los no presentados: así es como funciona",
         "enlace": "https://dev.to/aiautomationplaybook/i-built-an-n8n-workflow-that-rebooks-no-shows-automatically-heres-how-it-works-3h77",
         "fuente": "Dev.to",
@@ -80019,20 +79152,6 @@
         "origen": "rss",
         "fecha_real": "14/10/2026",
         "ts": "2026-10-14T06:58:56.269508",
-        "traducido": true
-    },
-    {
-        "titulo": "La Convención Constitucional Continua: Cómo los modelos de lenguaje revisan los documentos que los rigen",
-        "enlace": "https://www.lesswrong.com/posts/c9woewdY9ddsPqf3J/the-continual-constitutional-convention-how-language-models",
-        "fuente": "LessWrong AI",
-        "tipo": "noticia",
-        "f": "14/10",
-        "fecha_publicacion": "Tue, 13 Oct 2026 22:19:04 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "14/10/2026",
-        "ts": "2026-10-14T06:58:56.269575",
         "traducido": true
     },
     {
@@ -80929,20 +80048,6 @@
         "origen": "rss",
         "fecha_real": "14/10/2026",
         "ts": "2026-10-14T01:32:08.012952",
-        "traducido": true
-    },
-    {
-        "titulo": "Revisión de Compatibilidad de Actualización de Protocolo: Deribit",
-        "enlace": "https://dev.to/dannydoes_2abdf9c/protocol-upgrade-compatibility-review-deribit-32bc",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "14/10",
-        "fecha_publicacion": "Wed, 14 Oct 2026 01:30:39 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "14/10/2026",
-        "ts": "2026-10-14T01:32:07.910217",
         "traducido": true
     },
     {
@@ -87593,20 +86698,6 @@
         "traducido": true
     },
     {
-        "titulo": "Novedades en la plataforma web en junio",
-        "enlace": "https://web.dev/blog/web-platform-06-2026?hl=en",
-        "fuente": "web.dev",
-        "tipo": "noticia",
-        "f": "13/10",
-        "fecha_publicacion": "Tue, 30 Jun 2026 07:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "13/10/2026",
-        "ts": "2026-10-13T09:57:22.457800",
-        "traducido": true
-    },
-    {
         "titulo": "¿Siempre han sido los ingenieros de software trabajadores manuales?",
         "enlace": "https://ptrbrynt.com/posts/were-we-blue-collar-workers-all-along",
         "fuente": "Hacker News",
@@ -89952,20 +89043,6 @@
         "origen": "rss",
         "fecha_real": "13/10/2026",
         "ts": "2026-10-13T02:21:28.436689",
-        "traducido": true
-    },
-    {
-        "titulo": "Mistral Large 4 es de peso abierto, pero no es fácil de ejecutar",
-        "enlace": "https://pub.towardsai.net/mistral-large-4-is-open-weight-but-not-easy-to-run-36d94c7a3d40?source=rss----98111c9905da---4",
-        "fuente": "Towards AI",
-        "tipo": "noticia",
-        "f": "13/10",
-        "fecha_publicacion": "Mon, 12 Oct 2026 21:31:02 GMT",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "13/10/2026",
-        "ts": "2026-10-13T02:21:28.436704",
         "traducido": true
     },
     {
@@ -93580,20 +92657,6 @@
         "traducido": true
     },
     {
-        "titulo": "Brais Moure, experto en programación: \"Menos del 1% de la población mundial sabe programar. Somos el 1% al que puedes enfadar si con eso consigues venderle tu producto al otro 99%”",
-        "enlace": "https://www.computerhoy.com/software/brais-moure-experto-programacion-menos-1-poblacion-mundial-sabe-programar-somos-1-que-puedes-enfadar-si-con-eso-consigues-venderle-tu-producto-otro-99_7043158_0.html",
-        "fuente": "ComputerHoy",
-        "tipo": "noticia",
-        "f": "12/10",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "",
-        "fecha_real": "12/10/2026",
-        "ts": "2026-10-12T11:33:52.455951",
-        "traducido": true
-    },
-    {
         "titulo": "Nikhilesh Singh explica qué PC necesitas para ejecutar modelos de IA en local: hasta 128 GB de RAM y una RTX 5090",
         "enlace": "https://www.computerhoy.com/dispositivos/nikhilesh-singh-explica-que-pc-necesitas-para-ejecutar-modelos-ia-local-hasta-128-gb-ram-una-rtx-5090_7046611_0.html",
         "fuente": "ComputerHoy",
@@ -96997,20 +96060,6 @@
         "traducido": true
     },
     {
-        "titulo": "Los mejores contenidos de la semana en MuyComputer (DXLV)",
-        "enlace": "https://www.muycomputer.com/2026/10/11/los-mejores-contenidos-de-la-semana-en-muycomputer-dxlv/",
-        "fuente": "MuyComputer",
-        "tipo": "noticia",
-        "f": "11/10",
-        "fecha_publicacion": "Sun, 11 Oct 2026 19:35:36 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "11/10/2026",
-        "ts": "2026-10-11T19:50:33.615793",
-        "traducido": true
-    },
-    {
         "titulo": "Galaxy S27 podría corregir una vieja deuda de Samsung",
         "enlace": "https://www.muycomputer.com/2026/10/11/galaxy-s27-podria-corregir-una-vieja-deuda-de-samsung/",
         "fuente": "MuyComputer",
@@ -100318,19 +99367,6 @@
         "ts": "2026-10-11T01:27:47.457720"
     },
     {
-        "titulo": "Tabla: Productos con IA lanzados o anunciados en CES 2026",
-        "enlace": "https://blog.donweb.com/ia-todos-lados-2026/#tabla-productos-con-ia-lanzados-o-anunciados-en-ces-2026",
-        "fuente": "DonWeb IA",
-        "tipo": "noticia",
-        "f": "11/10",
-        "fecha_publicacion": "2026-04-14T07:06:54-03:00",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "11/10/2026",
-        "ts": "2026-10-11T01:27:47.824472"
-    },
-    {
         "titulo": "21 CFR Part 11 is where 'approve by email' shops quietly fail — a typed name is not a signature",
         "enlace": "https://dev.to/jwithfield_qa/21-cfr-part-11-is-where-approve-by-email-shops-quietly-fail-a-typed-name-is-not-a-signature-500p",
         "fuente": "Dev.to",
@@ -101282,20 +100318,6 @@
         "origen": "rss",
         "fecha_real": "10/10/2026",
         "ts": "2026-10-10T22:10:01.683392",
-        "traducido": true
-    },
-    {
-        "titulo": "Claude Haiku 5.5 Work Queues: Diseña colas de IA de alto volumen que sepan cuándo detenerse.",
-        "enlace": "https://pub.towardsai.net/claude-haiku-5-5-work-queues-design-high-volume-ai-pipelines-that-know-when-to-stop-83343a5f83cd?source=rss----98111c9905da---4",
-        "fuente": "Towards AI",
-        "tipo": "noticia",
-        "f": "10/10",
-        "fecha_publicacion": "Sat, 10 Oct 2026 19:31:01 GMT",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "10/10/2026",
-        "ts": "2026-10-10T22:10:01.683404",
         "traducido": true
     },
     {
@@ -102851,20 +101873,6 @@
         "traducido": true
     },
     {
-        "titulo": "Explora modelos en Google AI Studio",
-        "enlace": "https://aistudio.google.com",
-        "fuente": "Google AI Dev",
-        "tipo": "noticia",
-        "f": "10/10",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "10/10/2026",
-        "ts": "2026-10-10T13:19:17.775441",
-        "traducido": true
-    },
-    {
         "titulo": "Unos científicos dicen que llevábamos años calculando mal el polvo del hielo marciano. Y eso cambia lo que sabemos sobre su habitabilidad",
         "enlace": "https://www.xataka.com/espacio/todo-apunta-a-que-hielo-marte-esta-mucho-limpio-que-creiamos-eso-tiene-implicaciones-busqueda-vida",
         "fuente": "Xataka",
@@ -103971,20 +102979,6 @@
         "traducido": true
     },
     {
-        "titulo": "Lo bueno, lo malo y lo feo en ciberseguridad – Semana 35 (2026)",
-        "enlace": "https://www.sentinelone.com/blog/the-good-the-bad-and-the-ugly-in-cybersecurity-week-35-8/",
-        "fuente": "SentinelOne Labs",
-        "tipo": "noticia",
-        "f": "10/10",
-        "fecha_publicacion": "Fri, 28 Aug 2026 16:01:30 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "10/10/2026",
-        "ts": "2026-10-10T13:17:27.568053",
-        "traducido": true
-    },
-    {
         "titulo": "Dos caracteres abren un mundo de oportunidades de typosquatting en los navegadores Chromium",
         "enlace": "https://www.theregister.com/security/2026/10/10/two-characters-open-up-a-world-of-typosquatting-opportunities-in-chromium-browsers/5302383",
         "fuente": "The Register Security",
@@ -104442,20 +103436,6 @@
         "origen": "rss",
         "fecha_real": "10/10/2026",
         "ts": "2026-10-10T13:18:11.250728",
-        "traducido": true
-    },
-    {
-        "titulo": "Mistral Large 4 🧠, OpenAI Decisions API ❓, Nano Banana 2.1 🍌",
-        "enlace": "https://tldr.tech/ai/2026-10-07",
-        "fuente": "TLDR AI",
-        "tipo": "noticia",
-        "f": "10/10",
-        "fecha_publicacion": "Wed, 07 Oct 2026 00:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "10/10/2026",
-        "ts": "2026-10-10T13:18:12.472591",
         "traducido": true
     },
     {
@@ -104932,20 +103912,6 @@
         "origen": "rss",
         "fecha_real": "10/10/2026",
         "ts": "2026-10-10T06:35:32.312256",
-        "traducido": true
-    },
-    {
-        "titulo": "Claude Haiku 4.5 envía una pista falsa a la policía; Anthropic tarda 72 días en darse cuenta",
-        "enlace": "https://www.lesswrong.com/posts/NohAAhLDP42Kdqatr/claude-haiku-4-5-submits-false-police-tip-anthropic-takes-72",
-        "fuente": "LessWrong AI",
-        "tipo": "noticia",
-        "f": "10/10",
-        "fecha_publicacion": "Sat, 10 Oct 2026 04:43:21 GMT",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "10/10/2026",
-        "ts": "2026-10-10T06:35:34.221139",
         "traducido": true
     },
     {
@@ -110839,20 +109805,6 @@
         "traducido": true
     },
     {
-        "titulo": "LLM y agentes de grado de producción: una guía de campo",
-        "enlace": "https://stackoverflow.blog/2026/10/08/production-grade-llms-and-agents-a-field-guide/",
-        "fuente": "Stack Overflow Blog",
-        "tipo": "noticia",
-        "f": "09/10",
-        "fecha_publicacion": "Thu, 08 Oct 2026 20:22:56 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "09/10/2026",
-        "ts": "2026-10-09T08:17:31.981379",
-        "traducido": true
-    },
-    {
         "titulo": "Las nuevas reglas de Claude apuntan a fuentes falsas creadas para influir en las respuestas de la IA via @sejournal, @MattGSouthern",
         "enlace": "https://www.searchenginejournal.com/claude-rules-fake-sources-ai-answers/592456/",
         "fuente": "Search Engine Journal",
@@ -114152,20 +113104,6 @@
         "origen": "rss",
         "fecha_real": "08/10/2026",
         "ts": "2026-10-08T21:42:20.215553",
-        "traducido": true
-    },
-    {
-        "titulo": "Claude Haiku 5.5 Is Cheap Until 100k Tokens. Build a Tiny Price Gate in TypeScript.",
-        "enlace": "https://dev.to/bobbyhalljr/claude-haiku-55-is-cheap-until-100k-tokens-build-a-tiny-price-gate-in-typescript-3k4",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "08/10",
-        "fecha_publicacion": "Thu, 08 Oct 2026 21:40:03 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "08/10/2026",
-        "ts": "2026-10-08T21:42:20.215565",
         "traducido": true
     },
     {
@@ -119274,20 +118212,6 @@
         "traducido": true
     },
     {
-        "titulo": "Claude Haiku 5.5 🤖, matemapocalipsis 🧮, influencia del diseñador 👩🏻‍🎨",
-        "enlace": "https://tldr.tech/tech/2026-10-08",
-        "fuente": "TLDR Tech",
-        "tipo": "noticia",
-        "f": "08/10",
-        "fecha_publicacion": "Thu, 08 Oct 2026 00:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "08/10/2026",
-        "ts": "2026-10-08T16:02:31.837451",
-        "traducido": true
-    },
-    {
         "titulo": "UI Inteligente de ChatGPT 🧠, Claude Haiku 5.5 ⚡, modelos de terceros de Grok Bot 🤖",
         "enlace": "https://tldr.tech/ai/2026-10-08",
         "fuente": "TLDR AI",
@@ -121521,19 +120445,6 @@
         "ts": "2026-10-08T01:28:55.321750"
     },
     {
-        "titulo": "Claude Haiku 5.5 pricing jumps fivefold at 100,001 prompt tokens",
-        "enlace": "https://dev.to/importstatic/claude-haiku-55-pricing-jumps-fivefold-at-100001-prompt-tokens-53ok",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "08/10",
-        "fecha_publicacion": "Thu, 08 Oct 2026 01:03:42 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "08/10/2026",
-        "ts": "2026-10-08T01:28:55.321765"
-    },
-    {
         "titulo": "IP Reputation Scores Disagree. We Tested 8 IPs on 4 Free APIs",
         "enlace": "https://dev.to/mazijuacc/ip-reputation-scores-disagree-we-tested-8-ips-on-4-free-apis-40im",
         "fuente": "Dev.to",
@@ -121768,19 +120679,6 @@
         "ts": "2026-10-08T01:29:02.771343"
     },
     {
-        "titulo": "Claude Haiku 5.5 now available on AI Gateway",
-        "enlace": "https://vercel.com/changelog/claude-haiku-5-5-now-available-on-ai-gateway",
-        "fuente": "Vercel Blog",
-        "tipo": "noticia",
-        "f": "08/10",
-        "fecha_publicacion": "2026-10-07T00:00:00.000Z",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "08/10/2026",
-        "ts": "2026-10-08T01:29:04.058833"
-    },
-    {
         "titulo": "OpenAI Ultrafast mode now available on AI Gateway",
         "enlace": "https://vercel.com/changelog/openai-ultrafast-mode-now-available-on-ai-gateway",
         "fuente": "Vercel Blog",
@@ -122002,32 +120900,6 @@
         "ts": "2026-10-08T01:29:17.960413"
     },
     {
-        "titulo": "Claude Haiku 5.5 in GitHub Copilot",
-        "enlace": "https://github.blog/changelog/2026-10-07-claude-haiku-5-5-in-github-copilot",
-        "fuente": "GitHub Changelog",
-        "tipo": "noticia",
-        "f": "08/10",
-        "fecha_publicacion": "Wed, 07 Oct 2026 20:12:18 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "08/10/2026",
-        "ts": "2026-10-08T01:29:30.625124"
-    },
-    {
-        "titulo": "Claude Haiku 5.5 arrives with massive price cuts proving the AI pricing arms race is far from over",
-        "enlace": "https://the-decoder.com/claude-haiku-5-5-arrives-with-massive-price-cuts-proving-the-ai-pricing-arms-race-is-far-from-over/",
-        "fuente": "The Decoder RSS",
-        "tipo": "noticia",
-        "f": "08/10",
-        "fecha_publicacion": "Wed, 07 Oct 2026 18:49:23 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "08/10/2026",
-        "ts": "2026-10-08T01:29:35.173315"
-    },
-    {
         "titulo": "Anthropic Releases Claude Haiku 5.5: A Small Model With 1M Context Priced at $0.10 per Million Input Tokens",
         "enlace": "https://www.marktechpost.com/2026/10/07/anthropic-releases-claude-haiku-5-5-a-small-model-with-1m-context-priced-at-0-10-per-million-input-tokens/",
         "fuente": "MarkTechPost RSS",
@@ -122186,20 +121058,6 @@
         "imagen_url_original": "",
         "fecha_real": "07/10/2026",
         "ts": "2026-10-07T21:09:10.193773",
-        "traducido": true
-    },
-    {
-        "titulo": "Claude Haiku 5.5 ya está disponible en Devin.",
-        "enlace": "https://codeium.com/blog/claude-haiku-5-5",
-        "fuente": "Codeium",
-        "tipo": "noticia",
-        "f": "07/10",
-        "fecha_publicacion": "2026-10-07",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "https://codeium.com/_next/image?url=%2Fimages%2Fblog%2Fclaude-haiku-5-5%2Fcover.png&w=3840&q=75&dpl=dpl_9r46j3cx6HpiEUtedX3J3PWcMz2L",
-        "fecha_real": "07/10/2026",
-        "ts": "2026-10-07T21:09:14.341803",
         "traducido": true
     },
     {
@@ -133773,20 +132631,6 @@
         "traducido": true
     },
     {
-        "titulo": "@astrojs/node@11.1.7",
-        "enlace": "https://github.com/withastro/astro/releases/tag/%40astrojs%2Fnode%4011.1.7",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "06/10",
-        "fecha_publicacion": "2026-10-06T12:42:26Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "06/10/2026",
-        "ts": "2026-10-06T17:44:00.700132",
-        "traducido": true
-    },
-    {
         "titulo": "@astrojs/mdx@8.0.3",
         "enlace": "https://github.com/withastro/astro/releases/tag/%40astrojs%2Fmdx%408.0.3",
         "fuente": "Astro GitHub Releases",
@@ -139075,20 +137919,6 @@
         "traducido": true
     },
     {
-        "titulo": "El futuro de las matemáticas",
-        "enlace": "https://terrytao.wordpress.com/2026/10/05/the-future-of-mathematics/",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "05/10",
-        "fecha_publicacion": "Mon, 05 Oct 2026 19:22:40 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "05/10/2026",
-        "ts": "2026-10-05T23:34:23.523017",
-        "traducido": true
-    },
-    {
         "titulo": "Beam: El modelo de peso abierto 501B de Reflection",
         "enlace": "https://reflection.ai/blog/introducing-beam",
         "fuente": "Hacker News",
@@ -141450,20 +140280,6 @@
         "origen": "rss",
         "fecha_real": "05/10/2026",
         "ts": "2026-10-05T17:41:26.451451",
-        "traducido": true
-    },
-    {
-        "titulo": "El futuro de la independencia es la interdependencia",
-        "enlace": "https://onlys.ky/independence-is-interdependence/",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "05/10",
-        "fecha_publicacion": "Mon, 05 Oct 2026 15:30:08 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "05/10/2026",
-        "ts": "2026-10-05T17:41:26.451514",
         "traducido": true
     },
     {
@@ -152750,20 +151566,6 @@
         "traducido": true
     },
     {
-        "titulo": "Investigación en IA",
-        "enlace": "https://the-decoder.com/artificial-intelligence-news/ai-research/",
-        "fuente": "The Decoder",
-        "tipo": "noticia",
-        "f": "03/10",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "03/10/2026",
-        "ts": "2026-10-03T12:58:25.246928",
-        "traducido": true
-    },
-    {
         "titulo": "Consejos y aprendizajes de IAFundamentos de Ingeniería de Solicitudes para Mejores Resultados de IADescubre los principios esenciales de la ingeniería de solicitudes para mejorar efectivamente los resultados de IA. Aprende a crear solicitudes efectivas para diversas aplicaciones. 3 de octubre de 2026",
         "enlace": "https://cleverai.app/es/blog/fundamentos-de-ingenieria-de-solicitudes",
         "fuente": "CleverAI",
@@ -153657,20 +152459,6 @@
         "origen": "rss",
         "fecha_real": "03/10/2026",
         "ts": "2026-10-03T12:56:19.063889",
-        "traducido": true
-    },
-    {
-        "titulo": "@astrojs/cloudflare@15.0.0-beta.0",
-        "enlace": "https://github.com/withastro/astro/releases/tag/%40astrojs%2Fcloudflare%4015.0.0-beta.0",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "03/10",
-        "fecha_publicacion": "2026-10-01T10:38:02Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "03/10/2026",
-        "ts": "2026-10-03T12:56:20.695414",
         "traducido": true
     },
     {
@@ -159659,20 +158447,6 @@
         "traducido": true
     },
     {
-        "titulo": "¿Qué harás este fin de semana?",
-        "enlace": "https://lobste.rs/s/hfmcxi/what_are_you_doing_this_weekend",
-        "fuente": "Lobsters",
-        "tipo": "noticia",
-        "f": "02/10",
-        "fecha_publicacion": "Fri, 02 Oct 2026 03:18:01 -0500",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "02/10/2026",
-        "ts": "2026-10-02T13:26:39.054484",
-        "traducido": true
-    },
-    {
         "titulo": "Argumentos genéricos de constante y tú",
         "enlace": "https://blog.rust-lang.org/inside-rust/2026/10/02/generic-const-args-and-you/",
         "fuente": "Lobsters",
@@ -160440,20 +159214,6 @@
         "origen": "rss",
         "fecha_real": "02/10/2026",
         "ts": "2026-10-02T13:26:51.198077",
-        "traducido": true
-    },
-    {
-        "titulo": "astro@7.4.0-beta.1",
-        "enlace": "https://github.com/withastro/astro/releases/tag/astro%407.4.0-beta.1",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "02/10",
-        "fecha_publicacion": "2026-10-02T11:54:07Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "02/10/2026",
-        "ts": "2026-10-02T13:26:52.485047",
         "traducido": true
     },
     {
@@ -172514,20 +171274,6 @@
         "origen": "rss",
         "fecha_real": "30/09/2026",
         "ts": "2026-09-30T21:09:24.946387",
-        "traducido": true
-    },
-    {
-        "titulo": "Claude dice",
-        "enlace": "https://ohhfishal.net/Posts/claude",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "30/09",
-        "fecha_publicacion": "Wed, 30 Sep 2026 17:32:06 +0000",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "30/09/2026",
-        "ts": "2026-09-30T21:09:24.946394",
         "traducido": true
     },
     {
@@ -190463,20 +189209,6 @@
         "traducido": true
     },
     {
-        "titulo": "Hoja de Trucos de K9S",
-        "enlace": "https://dev.to/vcaunegre/k9s-cheatsheet-554f",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "28/09",
-        "fecha_publicacion": "Mon, 28 Sep 2026 20:44:22 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "28/09/2026",
-        "ts": "2026-09-28T20:59:49.077680",
-        "traducido": true
-    },
-    {
         "titulo": "Soy Médico de Urgencias. Después de Décadas Sin Tocar Código, Creé 3 Sitios Web con IA en un Mes — en Mi Teléfono.",
         "enlace": "https://dev.to/branislav_kuga_4118d3b3ab/im-an-er-doctor-after-decades-without-touching-code-i-built-3-websites-with-ai-in-one-month-on-5ccm",
         "fuente": "Dev.to",
@@ -199688,20 +198420,6 @@
         "traducido": true
     },
     {
-        "titulo": "El Futuro de la IA Generativa: Tendencias sin Exageraciones",
-        "enlace": "https://cleverai.app/es/blog/el-futuro-de-la-ai-generativa-tendencias-sin-exageraciones",
-        "fuente": "CleverAI",
-        "tipo": "noticia",
-        "f": "27/09",
-        "fecha_publicacion": "2026-09-27T08:02:29.372Z",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "https://cleverai.app/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fgenius-ai-app-test-1.appspot.com%2Fblog%2Ffeatured%2FR6LCMdqz9e2XUQvMBhur8.webp&w=3840&q=75",
-        "fecha_real": "27/09/2026",
-        "ts": "2026-09-27T09:42:59.865524",
-        "traducido": true
-    },
-    {
         "titulo": "Esa etiqueta de script de terceros que copiaste y pegaste probablemente está causando problemas",
         "enlace": "https://dev.to/anas_sheikh_2/that-third-party-script-tag-you-copy-pasted-is-probably-hurting-4pfi",
         "fuente": "Dev.to",
@@ -205074,34 +203792,6 @@
         "origen": "rss",
         "fecha_real": "26/09/2026",
         "ts": "2026-09-26T20:30:33.958765",
-        "traducido": true
-    },
-    {
-        "titulo": "@astrojs/partytown@2.1.8",
-        "enlace": "https://github.com/withastro/astro/releases/tag/%40astrojs%2Fpartytown%402.1.8",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "26/09",
-        "fecha_publicacion": "2026-09-22T18:54:53Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "26/09/2026",
-        "ts": "2026-09-26T20:30:33.958811",
-        "traducido": true
-    },
-    {
-        "titulo": "@astrojs/cloudflare@14.3.3",
-        "enlace": "https://github.com/withastro/astro/releases/tag/%40astrojs%2Fcloudflare%4014.3.3",
-        "fuente": "Astro GitHub Releases",
-        "tipo": "noticia",
-        "f": "26/09",
-        "fecha_publicacion": "2026-09-22T18:55:11Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "26/09/2026",
-        "ts": "2026-09-26T20:30:33.958902",
         "traducido": true
     },
     {
@@ -232544,20 +231234,6 @@
         "traducido": true
     },
     {
-        "titulo": "El futuro de la práctica: Permitir a los profesores crear interactivos de aprendizaje con UI generativa",
-        "enlace": "https://research.google/blog/the-future-of-practice-enabling-teachers-to-create-learning-interactives-with-generative-ui/",
-        "fuente": "Google Research",
-        "tipo": "noticia",
-        "f": "17/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "https://storage.googleapis.com/gweb-research2023-media/original_images/LearningInteractives4_Library.png",
-        "fecha_real": "17/09/2026",
-        "ts": "2026-09-17T21:01:27.524553",
-        "traducido": true
-    },
-    {
         "titulo": "Reduce el tiempo de contratación de candidatos de calidad con Amazon Connect Talent impulsado por IA",
         "enlace": "https://aws.amazon.com/blogs/machine-learning/reduce-time-to-hire-for-quality-candidates-with-ai-powered-amazon-connect-talent/",
         "fuente": "AWS ML",
@@ -250244,19 +248920,6 @@
         "ts": "2026-09-15T20:00:46.942372"
     },
     {
-        "titulo": "GEFS on OpenBSD: A Early Preview",
-        "enlace": "https://marc.info/?l=openbsd-tech&m=178948744271633&w=2",
-        "fuente": "Hacker News",
-        "tipo": "noticia",
-        "f": "15/09",
-        "fecha_publicacion": "Tue, 15 Sep 2026 17:12:19 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "15/09/2026",
-        "ts": "2026-09-15T20:00:46.942391"
-    },
-    {
         "titulo": "Jiga (YC W21) Is Hiring Product Engineer (Remote/US)",
         "enlace": "https://jiga.io/about-us/?ashby_jid=0b75d72d-c92b-4dca-8062-09d298ada0bd",
         "fuente": "Hacker News",
@@ -254104,20 +252767,6 @@
         "origen": "rss",
         "fecha_real": "15/09/2026",
         "ts": "2026-09-15T16:20:28.417960",
-        "traducido": true
-    },
-    {
-        "titulo": "Corea del Sur mete café en un reactor de plasma a 900 ºC y tarda 90 segundos en convertirlo en una alternativa al carbón",
-        "enlace": "https://www.elconfidencial.com/tecnologia/2026-09-15/eeuu-canon-plasma-cafe-combustible-carbon-1qrt_4376887/",
-        "fuente": "El Confidencial Teknautas",
-        "tipo": "noticia",
-        "f": "15/09",
-        "fecha_publicacion": "2026-09-15T14:40:00+02:00",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "15/09/2026",
-        "ts": "2026-09-15T16:20:28.417992",
         "traducido": true
     },
     {
@@ -268939,19 +267588,6 @@
         "ts": "2026-09-13T13:44:29.256858"
     },
     {
-        "titulo": "Context Engineering Inside the Harness: 4 Mechanisms That Beat Context Overflow and Goal Loss on Long-Horizon Tasks",
-        "enlace": "https://www.marktechpost.com/2026/09/12/context-engineering-inside-the-harness-4-mechanisms-that-beat-context-overflow-and-goal-loss-on-long-horizon-tasks/",
-        "fuente": "MarkTechPost RSS",
-        "tipo": "noticia",
-        "f": "13/09",
-        "fecha_publicacion": "Sun, 13 Sep 2026 05:56:03 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "13/09/2026",
-        "ts": "2026-09-13T13:44:29.256909"
-    },
-    {
         "titulo": "Survival of the Fittest (AI)",
         "enlace": "https://pub.towardsai.net/survival-of-the-fittest-ai-c7a1f4bb0f52?source=rss----98111c9905da---4",
         "fuente": "Towards AI",
@@ -276755,19 +275391,6 @@
         "ts": "2026-09-11T17:31:58.768944"
     },
     {
-        "titulo": "Rapidly scaling online storage to serve over 1 billion ChatGPT users",
-        "enlace": "https://openai.com/index/scaling-storage-one-billion-users-part-one",
-        "fuente": "OpenAI Blog",
-        "tipo": "noticia",
-        "f": "11/09",
-        "fecha_publicacion": "Fri, 11 Sep 2026 10:00:00 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "11/09/2026",
-        "ts": "2026-09-11T17:31:58.643146"
-    },
-    {
         "titulo": "The iPhone 18 Pro Max’s Battery Is a Beast, but Is the Extra Juice Worth the Upgrade?",
         "enlace": "https://www.cnet.com/tech/mobile/the-iphone-18-pro-maxs-battery-is-a-beast-but-save-100-and-stick-to-last-years-model-2/",
         "fuente": "CNET",
@@ -279551,19 +278174,6 @@
         "origen": "rss",
         "fecha_real": "11/09/2026",
         "ts": "2026-09-11T13:16:30.800953"
-    },
-    {
-        "titulo": "Context Engineering: Drift, Bloat, and Lost Attention",
-        "enlace": "https://pub.towardsai.net/context-engineering-drift-bloat-and-lost-attention-210b692fad4c?source=rss----98111c9905da---4",
-        "fuente": "Towards AI",
-        "tipo": "noticia",
-        "f": "11/09",
-        "fecha_publicacion": "Fri, 11 Sep 2026 13:01:02 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "11/09/2026",
-        "ts": "2026-09-11T13:16:30.800990"
     },
     {
         "titulo": "4 Lines Every CLAUDE.md File Needs (Most Don’t Have Them)",
@@ -300122,20 +298732,6 @@
         "traducido": true
     },
     {
-        "titulo": "Cómo sintonizar La Séptima, el nuevo canal de TDT en España: sin instalar nada y sin cambiar de televisor",
-        "enlace": "https://www.elconfidencial.com/tecnologia/2026-09-09/como-sintonizar-la-septima-nuevo-canal-sin-instalar-nada-ni-cambiar-tv-1qrt_4420041/",
-        "fuente": "El Confidencial Teknautas",
-        "tipo": "noticia",
-        "f": "09/09",
-        "fecha_publicacion": "2026-09-09T05:45:00+02:00",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "09/09/2026",
-        "ts": "2026-09-09T08:40:17.941759",
-        "traducido": true
-    },
-    {
         "titulo": "¿Te cuesta enviar audios? Puede tener que ver con cómo escuchas tu propia voz",
         "enlace": "https://lamenteesmaravillosa.com/te-cuesta-enviar-audios-como-escuchas-tu-propia-voz/",
         "fuente": "La Mente es Maravillosa",
@@ -300791,20 +299387,6 @@
         "origen": "rss",
         "fecha_real": "09/09/2026",
         "ts": "2026-09-09T03:14:39.252869",
-        "traducido": true
-    },
-    {
-        "titulo": "El futuro de los agentes de IA depende de la compresión del contexto",
-        "enlace": "https://pub.towardsai.net/the-future-of-ai-agents-depends-on-context-compression-35c6cadbdf40?source=rss----98111c9905da---4",
-        "fuente": "Towards AI",
-        "tipo": "noticia",
-        "f": "09/09",
-        "fecha_publicacion": "Wed, 09 Sep 2026 00:01:02 GMT",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "origen": "rss",
-        "fecha_real": "09/09/2026",
-        "ts": "2026-09-09T03:14:39.252881",
         "traducido": true
     },
     {
@@ -311149,19 +309731,6 @@
         "origen": "rss",
         "fecha_real": "07/09/2026",
         "ts": "2026-09-07T08:57:53.565628"
-    },
-    {
-        "titulo": "A Software Engineer’s Guide to Large Language Models",
-        "enlace": "https://pub.towardsai.net/a-software-engineers-guide-to-large-language-models-1efaac0fb805?source=rss----98111c9905da---4",
-        "fuente": "Towards AI",
-        "tipo": "noticia",
-        "f": "07/09",
-        "fecha_publicacion": "Mon, 07 Sep 2026 04:18:16 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "07/09/2026",
-        "ts": "2026-09-07T08:57:53.565692"
     },
     {
         "titulo": "OpenWiki In Production: A Realistic Setup & Review Guide",
@@ -323236,19 +321805,6 @@
         "origen": "rss",
         "fecha_real": "04/09/2026",
         "ts": "2026-09-04T21:15:42.158885"
-    },
-    {
-        "titulo": "Context Engineering Is the New Full-Stack Skill",
-        "enlace": "https://pub.towardsai.net/context-engineering-is-the-new-full-stack-skill-80cf1846482a?source=rss----98111c9905da---4",
-        "fuente": "Towards AI",
-        "tipo": "noticia",
-        "f": "04/09",
-        "fecha_publicacion": "Fri, 04 Sep 2026 21:01:02 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "04/09/2026",
-        "ts": "2026-09-04T21:15:48.926700"
     },
     {
         "titulo": "Enforcing SAIF at Runtime",
@@ -358382,19 +356938,6 @@
         "ts": "2026-09-01T07:18:11.340124"
     },
     {
-        "titulo": "Today’s NYT Mini Crossword Answers for Tuesday, Sept. 1",
-        "enlace": "https://www.cnet.com/tech/gaming/todays-nyt-mini-crossword-answers-for-tuesday-sept-1-2/",
-        "fuente": "CNET",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "2026-09-01T02:23:17Z",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T07:18:11.762669"
-    },
-    {
         "titulo": "Equifax Class Action: Last Day to Claim Part of the $2.2M Settlement",
         "enlace": "https://www.cnet.com/tech/equifax-customers-claim-2m-class-action-settlement__trashed/",
         "fuente": "CNET",
@@ -367885,19 +366428,6 @@
         "ts": "2026-09-01T07:19:20.094152"
     },
     {
-        "titulo": "Context Engineering Is Changing. Here’s What It Means for Data Scientists",
-        "enlace": "https://towardsdatascience.com/context-engineering-is-changing-heres-what-it-means-for-data-scientists/",
-        "fuente": "Towards Data Science",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "Sun, 30 Aug 2026 15:00:02 GMT",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T07:19:20.094188"
-    },
-    {
         "titulo": "Noisy Text in RAG: Typos, OCR, and the Gap Classical Spell-Check Leaves",
         "enlace": "https://towardsdatascience.com/noisy-text-in-rag-typos-ocr-and-the-gap-classical-spell-check-leaves/",
         "fuente": "Towards Data Science",
@@ -368227,58 +366757,6 @@
         "fecha_real": "01/09/2026",
         "ts": "2026-09-01T03:56:26.415317",
         "categoria": "💡 General"
-    },
-    {
-        "titulo": "NuevoCurso de Docker y DevOpsDuración:1h 43mIr al curso",
-        "enlace": "https://midu.dev/curso/curso-docker-devops",
-        "fuente": "Midudev",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🐳 DevOps",
-        "imagen_url_original": "https://midu.dev/courses/curso-docker-devops.webp",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T03:56:26.326106"
-    },
-    {
-        "titulo": "Curso de GitHub ActionsDuración:1h 44mIr al curso",
-        "enlace": "https://midu.dev/curso/curso-de-github-actions",
-        "fuente": "Midudev",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "https://midu.dev/courses/github-actions.webp",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T03:56:26.327032"
-    },
-    {
-        "titulo": "Desarrollo Web con IADuración:1h 21mIr al curso",
-        "enlace": "https://midu.dev/curso/desarrollo-web-con-ia",
-        "fuente": "Midudev",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "https://midu.dev/courses/desarrollo-web-con-ia.webp",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T03:56:26.327953"
-    },
-    {
-        "titulo": "Utility Types en TypeScriptDuración:32m 44sIr al curso",
-        "enlace": "https://midu.dev/curso/utility-types-en-typescript",
-        "fuente": "Midudev",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "imagen_url_original": "https://midu.dev/courses/utility-types.webp",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T03:56:26.329734"
     },
     {
         "titulo": "Por qué tu Mac merece un monitor 5K (y cuál he elegido)",
@@ -369563,19 +368041,6 @@
         "ts": "2026-09-01T03:56:35.059417"
     },
     {
-        "titulo": "Google AI for Developers",
-        "enlace": "https://ai.google.dev/",
-        "fuente": "Google AI Dev",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T03:56:35.705605"
-    },
-    {
         "titulo": "NewBuild with Gemini 3 Flash, our frontier intelligence built for speed and scale",
         "enlace": "https://aistudio.google.com/apps",
         "fuente": "Google AI Dev",
@@ -369587,58 +368052,6 @@
         "imagen_url_original": "",
         "fecha_real": "01/09/2026",
         "ts": "2026-09-01T03:56:35.706664"
-    },
-    {
-        "titulo": "View Gemini API docs",
-        "enlace": "https://ai.google.dev/gemini-api/docs",
-        "fuente": "Google AI Dev",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T03:56:35.708732"
-    },
-    {
-        "titulo": "Explore Google AI Edge",
-        "enlace": "https://ai.google.dev/edge",
-        "fuente": "Google AI Dev",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T03:56:35.711845"
-    },
-    {
-        "titulo": "Gemini Nano on AndroidUnlock low latency and cost effective generative AI features while keeping data on-device.Android docs",
-        "enlace": "https://developer.android.com/ai/gemini-nano",
-        "fuente": "Google AI Dev",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "https://ai.google.dev/static/images/landing/gemini-start-building-card-nano.svg",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T03:56:35.712859"
-    },
-    {
-        "titulo": "AI features for web appsIntegrate AI models like Gemini Nano into web apps with Chrome's built-in web platform APIs.AI on Chrome",
-        "enlace": "https://developer.chrome.com/docs/ai/built-in",
-        "fuente": "Google AI Dev",
-        "tipo": "noticia",
-        "f": "01/09",
-        "fecha_publicacion": "",
-        "badge": "Tech",
-        "categoria": "🤖 IA",
-        "imagen_url_original": "https://ai.google.dev/static/images/landing/gemini-start-building-card-nano.svg",
-        "fecha_real": "01/09/2026",
-        "ts": "2026-09-01T03:56:35.713883"
     },
     {
         "titulo": "From insight to action: The next phase of agentic cloud operations",
@@ -379169,20 +377582,6 @@
         "origen": "rss",
         "fecha_real": "30/08/2026",
         "ts": "2026-08-30T20:36:56.586055",
-        "traducido": true
-    },
-    {
-        "titulo": "Análisis de la superficie de vulnerabilidad de contratos inteligentes: Bitstamp",
-        "enlace": "https://dev.to/dannydoes_2abdf9c/smart-contract-vulnerability-surface-analysis-bitstamp-1ikj",
-        "fuente": "Dev.to",
-        "tipo": "noticia",
-        "f": "30/08",
-        "fecha_publicacion": "Sun, 30 Aug 2026 19:48:44 +0000",
-        "badge": "Tech",
-        "categoria": "💡 General",
-        "origen": "rss",
-        "fecha_real": "30/08/2026",
-        "ts": "2026-08-30T20:36:56.586081",
         "traducido": true
     },
     {
