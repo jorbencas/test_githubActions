@@ -17937,10 +17937,187 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "24663b4b640f2683"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a9f8e7d6c5b4a3f2",
+        "titulo": "Gestor Inteligente de Documentos",
+        "descripcion_corta": "Organiza y clasifica documentos automáticamente usando IA y OCR.",
+        "descripcion_detallada": "Sistema web para subir documentos (PDF, imágenes). Utiliza OCR para extraer texto y un modelo de IA (embeddings + clustering) para categorizar y etiquetar los documentos. Permite búsqueda semántica y resumen de contenido. Ideal para PYMEs o usuarios con gran volumen de papeleo.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno para construir APIs con Python 3.7+ basado en tipado estándar de Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Rendimiento asíncrono, validación automática de datos con Pydantic, generación automática de documentación OpenAPI."
+            },
+            {
+              "nombre": "Streamlit",
+              "categoria": "framework",
+              "descripcion": "Framework para crear y compartir aplicaciones web de ciencia de datos y machine learning fácilmente.",
+              "version_sugerida": "1.25.0",
+              "url_docs": "https://docs.streamlit.io/",
+              "por_que": "Interfaz de usuario intuitiva para la demostración y gestión del sistema sin necesidad de desarrollo frontend complejo."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Tesseract OCR",
+              "categoria": "libreria",
+              "descripcion": "Motor OCR de código abierto para extraer texto de imágenes y PDFs.",
+              "version_sugerida": "5.3.0",
+              "url_docs": "https://tesseract-ocr.github.io/",
+              "por_que": "Componente esencial para la digitalización y extracción de texto de documentos no estructurados."
+            },
+            {
+              "nombre": "PyMuPDF",
+              "categoria": "libreria",
+              "descripcion": "Bindings de Python para MuPDF, una librería ligera para renderizar PDF y XPS.",
+              "version_sugerida": "1.23.0",
+              "url_docs": "https://pymupdf.readthedocs.io/",
+              "por_que": "Manejo eficiente de PDFs, útil para preprocesamiento y extracción de texto o metadatos."
+            },
+            {
+              "nombre": "Sentence Transformers",
+              "categoria": "libreria",
+              "descripcion": "Librería para generar embeddings de texto y realizar búsquedas semánticas.",
+              "version_sugerida": "2.2.2",
+              "url_docs": "https://www.sbert.net/",
+              "por_que": "Crea representaciones vectoriales del contenido de los documentos para la clasificación y búsqueda semántica."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Librería de machine learning para Python, con herramientas para clustering y clasificación.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://scikit-learn.org/",
+              "por_que": "Implementación de algoritmos de clustering (ej. DBSCAN) para agrupar documentos similares."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_de_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto.",
+              "version_sugerida": "15.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Soporte para JSONB para almacenar metadatos, y extensiones como pgvector para búsqueda vectorial eficiente."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, facilitando la gestión de dependencias."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OCR (Tesseract)",
+              "categoria": "ia_ml",
+              "descripcion": "Extracción de texto de imágenes y PDFs.",
+              "version_sugerida": "5.3.0",
+              "url_docs": "https://tesseract-ocr.github.io/",
+              "por_que": "Necesario para convertir la información visual de los documentos en texto procesable."
+            },
+            {
+              "nombre": "Embeddings (Sentence Transformers)",
+              "categoria": "ia_ml",
+              "descripcion": "Generación de representaciones vectoriales del texto para análisis semántico.",
+              "version_sugerida": "2.2.2",
+              "url_docs": "https://www.sbert.net/",
+              "por_que": "Permite capturar el significado del contenido para la clasificación y búsqueda."
+            },
+            {
+              "nombre": "Clustering (Scikit-learn)",
+              "categoria": "ia_ml",
+              "descripcion": "Agrupación de documentos similares basada en sus embeddings.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://scikit-learn.org/",
+              "por_que": "Automatiza la organización de documentos en categorías temáticas."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests unitarios y de integración, con un sistema de fixtures robusto."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Carga de documentos",
+          "Extracción de texto (OCR)",
+          "Generación de embeddings",
+          "Clasificación automática de documentos",
+          "Búsqueda semántica",
+          "Resumen de contenido"
+        ],
+        "casos_uso": [
+          "Organización automática de facturas",
+          "Clasificación de currículums",
+          "Gestión de contratos",
+          "Archivo de informes técnicos",
+          "Indexación de artículos de investigación"
+        ],
+        "reglas_negocio": [
+          "Cada documento debe procesarse una vez.",
+          "El sistema debe manejar documentos con texto y sin texto (imágenes puras).",
+          "La precisión de la clasificación debe ser superior al 80% para categorías comunes.",
+          "Los documentos duplicados deben ser identificados.",
+          "Se debe permitir la re-clasificación manual si la automática falla."
+        ],
+        "por_que_ia": "Se utiliza IA para la extracción de texto (OCR), la generación de representaciones semánticas (embeddings) y la agrupación automática de documentos (clustering), permitiendo una organización y búsqueda eficientes sin intervención manual.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Tesseract OCR engine",
+          "Sentence Transformers models"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y APIs REST.",
+          "Comprensión básica de Machine Learning (embeddings, clustering).",
+          "Familiaridad con Docker."
+        ],
+        "riesgos": [
+          "Baja calidad de OCR en documentos escaneados de baja resolución.",
+          "Dificultad para clasificar documentos con contenido ambiguo o múltiple.",
+          "Escalabilidad del procesamiento de grandes volúmenes de documentos.",
+          "Costos de infraestructura para el almacenamiento y cómputo.",
+          "Necesidad de reentrenamiento periódico de modelos de IA."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "a9f8e7d6c5b4a3f2"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "333d5efad5cc8ec6"
+      }
     }
   ],
   "ultimos_hashes": [
-    "a7b8c9d0e1f2a3b4",
     "d8e1f7a3b9c2d4e5",
     "e5f6a7b8c9d0e1f2",
     "b1f2a3d4e5c6b7a8",
@@ -18039,8 +18216,9 @@
     "c8d1e3f5a7b0c9d1",
     "f8a1b2c3d4e5f678",
     "8d1e3f5a7b9c0d1e",
-    "b4d5e6f789012345"
+    "b4d5e6f789012345",
+    "a9f8e7d6c5b4a3f2"
   ],
-  "total_generados": 132,
-  "fecha_ultima_generacion": "2026-10-24T03:03:55.329746"
+  "total_generados": 133,
+  "fecha_ultima_generacion": "2026-10-24T08:35:37.204087"
 }
