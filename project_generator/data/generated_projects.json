@@ -18534,11 +18534,301 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "06f7c9070190909e"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f0e1d2c3b4a56789",
+        "titulo": "Sistema de Gestión de Proyectos con IA para Priorización",
+        "descripcion_corta": "Plataforma web para gestionar proyectos, tareas y equipos, con IA para priorizar y sugerir próximos pasos.",
+        "descripcion_detallada": "Una aplicación web full-stack que permite a los usuarios crear proyectos, definir tareas, asignar responsables y establecer plazos. La funcionalidad clave reside en un módulo de IA que analiza el progreso, la criticidad de las tareas y la carga de trabajo del equipo para sugerir prioridades y optimizar la asignación de recursos. Incluye tableros Kanban, seguimiento de tiempo y generación de informes básicos. El objetivo es mejorar la eficiencia y la toma de decisiones en la gestión de proyectos.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece alto rendimiento asíncrono, validación de datos con Pydantic y generación automática de documentación OpenAPI."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Biblioteca JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear interfaces de usuario declarativas y eficientes, facilitando el desarrollo del frontend interactivo."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "Toolkit SQL y ORM para Python.",
+              "version_sugerida": "2.0.23",
+              "url_docs": "https://www.sqlalchemy.org/",
+              "por_que": "Proporciona una forma robusta y segura de interactuar con la base de datos relacional, mapeando objetos Python a tablas."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en anotaciones de tipo de Python.",
+              "version_sugerida": "2.5.0",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para FastAPI, valida automáticamente los datos de entrada y salida, mejorando la robustez de la API."
+            },
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por modelos de lenguaje.",
+              "version_sugerida": "0.1.0",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Facilita la integración con LLMs para el análisis y la priorización inteligente de tareas."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacionales objeto.",
+              "version_sugerida": "15.4",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Ofrece fiabilidad, escalabilidad y soporte para tipos de datos avanzados (JSONB) que pueden ser útiles para metadatos de tareas."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite un entorno de desarrollo y despliegue consistente y reproducible para el backend y el frontend."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API (GPT-4)",
+              "categoria": "ia_ml",
+              "descripcion": "Acceso a modelos de lenguaje avanzados para tareas de razonamiento y generación.",
+              "version_sugerida": null,
+              "url_docs": "https://platform.openai.com/docs/models",
+              "por_que": "Se usa para analizar descripciones de tareas, estimar esfuerzos y sugerir prioridades basadas en el contexto del proyecto."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests robustos y la automatización de la ejecución de pruebas para la API y la lógica de negocio."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de proyectos y tareas",
+          "Asignación de roles y responsables",
+          "Tablero Kanban visual",
+          "Motor de priorización de tareas basado en IA",
+          "Seguimiento básico del tiempo",
+          "Generación de informes simples"
+        ],
+        "casos_uso": [
+          "Equipos de desarrollo que necesitan organizar su backlog.",
+          "Gestores de proyectos que buscan optimizar la asignación de recursos.",
+          "Freelancers que manejan múltiples clientes y proyectos.",
+          "Startups que necesitan una herramienta ágil de gestión.",
+          "Estudiantes que colaboran en proyectos académicos."
+        ],
+        "reglas_negocio": [
+          "Una tarea solo puede pertenecer a un proyecto.",
+          "Un usuario solo puede ser asignado a tareas si está en el proyecto.",
+          "Las prioridades sugeridas por IA deben ser confirmadas por un gestor.",
+          "El tiempo registrado debe ser asociado a una tarea específica.",
+          "Las fechas límite no pueden ser anteriores a la fecha de inicio."
+        ],
+        "por_que_ia": "Se utiliza IA (LLM) para analizar la descripción de las tareas, su criticidad percibida y el estado general del proyecto, con el fin de generar recomendaciones de priorización más inteligentes y contextualizadas que las reglas manuales simples.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de OpenAI para el modelo LLM."
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo web.",
+          "Experiencia con frameworks como FastAPI y React.",
+          "Comprensión de bases de datos relacionales.",
+          "Nociones de Machine Learning y APIs de IA."
+        ],
+        "riesgos": [
+          "La precisión de la IA para la priorización puede variar.",
+          "La integración entre el frontend y el backend puede ser compleja.",
+          "La escalabilidad de la base de datos bajo carga pesada.",
+          "Costos asociados al uso de la API de OpenAI.",
+          "Manejo de la autenticación y autorización de usuarios."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-07T10:00:00Z",
+        "hash_unicidad": "f0e1d2c3b4a56789"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "04db16c98b00f276"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "b9a8c7d6e5f43210",
+        "titulo": "Asistente de Escritura de Código con Contexto de Proyecto",
+        "descripcion_corta": "Plugin para IDE que sugiere código basado en el contexto global del proyecto y buenas prácticas.",
+        "descripcion_detallada": "Un plugin para IDEs populares (VS Code, JetBrains) que va más allá de la autocompletación básica. Analiza el código fuente existente en el proyecto, la estructura de carpetas, las dependencias y los comentarios para ofrecer sugerencias de código contextualmente relevantes. Utiliza modelos de lenguaje (LLM) para entender la intención del desarrollador y aplicar patrones de diseño y buenas prácticas. El objetivo es acelerar el desarrollo, reducir errores y mantener la consistencia del código.",
+        "nivel": "senior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "VS Code Extension API",
+              "categoria": "framework",
+              "descripcion": "API para crear extensiones para Visual Studio Code.",
+              "version_sugerida": "1.85.0",
+              "url_docs": "https://code.visualstudio.com/api",
+              "por_que": "Permite interactuar con el editor, el árbol de archivos y el lenguaje de programación para ofrecer sugerencias de código."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Tree-sitter",
+              "categoria": "libreria",
+              "descripcion": "Parser incremental para la creación de árboles de sintaxis abstracta.",
+              "version_sugerida": "0.22.4",
+              "url_docs": "https://tree-sitter.github.io/tree-sitter/",
+              "por_que": "Facilita el análisis sintáctico del código fuente de múltiples lenguajes de forma eficiente para extraer contexto."
+            },
+            {
+              "nombre": "OpenAI API Client",
+              "categoria": "libreria",
+              "descripcion": "Cliente oficial para interactuar con la API de OpenAI.",
+              "version_sugerida": "4.20.0",
+              "url_docs": "https://github.com/openai/openai-node",
+              "por_que": "Se usa para enviar el contexto del proyecto y las consultas al LLM y recibir las sugerencias de código."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Contenerización para empaquetar la extensión y sus dependencias.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura un entorno de ejecución consistente para la extensión y sus servicios auxiliares."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API (GPT-3.5 Turbo / GPT-4)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de lenguaje para generación y completado de código.",
+              "version_sugerida": null,
+              "url_docs": "https://platform.openai.com/docs/models",
+              "por_que": "El núcleo del asistente, genera sugerencias de código basadas en el contexto proporcionado del proyecto."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para JavaScript y TypeScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Se utiliza para probar la lógica de la extensión del IDE, la interacción con la API y el análisis de código."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "NPM/Yarn",
+              "categoria": "otros",
+              "descripcion": "Gestores de paquetes para Node.js y TypeScript.",
+              "version_sugerida": "10.2.4 (npm)",
+              "url_docs": "https://www.npmjs.com/",
+              "por_que": "Indispensable para gestionar las dependencias del proyecto TypeScript y construir la extensión."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Análisis de contexto del proyecto (archivos abiertos, dependencias).",
+          "Sugerencias de código basadas en LLM.",
+          "Integración con IDEs populares (VS Code).",
+          "Respeto de patrones de diseño y buenas prácticas.",
+          "Autocompletado inteligente de código.",
+          "Capacidad de aprender de las correcciones del usuario."
+        ],
+        "casos_uso": [
+          "Desarrolladores que buscan acelerar la escritura de código repetitivo.",
+          "Equipos que desean mantener un estándar de codificación consistente.",
+          "Novatos que necesitan guía sobre buenas prácticas.",
+          "Proyectos con bases de código grandes y complejas.",
+          "Desarrollo rápido de prototipos."
+        ],
+        "reglas_negocio": [
+          "No se debe enviar código sensible o propietario a la API externa sin consentimiento explícito.",
+          "Las sugerencias deben ser claramente distinguibles del código existente.",
+          "El rendimiento del IDE no debe degradarse significativamente.",
+          "Las sugerencias deben ser para lenguajes soportados por Tree-sitter y el LLM.",
+          "Se debe permitir al usuario configurar la clave API y el modelo a usar."
+        ],
+        "por_que_ia": "La IA (LLM) es fundamental para comprender el contexto semántico del código y las intenciones del desarrollador, permitiendo generar sugerencias de código que van más allá de la coincidencia de patrones sintácticos simples, e incorporando conocimiento de buenas prácticas y patrones de diseño.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de OpenAI para el modelo LLM.",
+          "Documentación de la API de extensiones del IDE."
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 3,
+        "prerequisitos": [
+          "Experiencia con TypeScript y desarrollo de extensiones para VS Code.",
+          "Comprensión de análisis de código y árboles de sintaxis abstracta (AST).",
+          "Conocimiento de APIs de LLMs (ej. OpenAI).",
+          "Familiaridad con herramientas de build y gestión de paquetes (NPM/Yarn).",
+          "Comprensión de patrones de diseño de software."
+        ],
+        "riesgos": [
+          "Privacidad y seguridad de los datos del código fuente.",
+          "Latencia de la API del LLM afectando la experiencia del usuario.",
+          "Costo de las llamadas a la API del LLM.",
+          "Complejidad en el análisis de código para lenguajes muy dinámicos o DSLs.",
+          "Mantenimiento y actualización de la extensión y sus dependencias."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2024-03-07T10:00:00Z",
+        "hash_unicidad": "b9a8c7d6e5f43210"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "04db16c98b00f276"
+      }
     }
   ],
   "ultimos_hashes": [
-    "d9e8f7a6b5c4d3e2",
-    "e8a7f6d5c4b3a202",
     "c7d8e9f0a1b2c3d4",
     "d5c8a1b0e9f7c3d4",
     "f1e0d9c7b5a3f1e0",
@@ -18636,8 +18926,10 @@
     "a9f8e7d6c5b4a3f2",
     "f2d8c1a7b3e4f5a6",
     "b5c6d7e8f9012345",
-    "c2d3e4f5a6b78901"
+    "c2d3e4f5a6b78901",
+    "f0e1d2c3b4a56789",
+    "b9a8c7d6e5f43210"
   ],
-  "total_generados": 136,
-  "fecha_ultima_generacion": "2026-10-25T08:55:05.924969"
+  "total_generados": 138,
+  "fecha_ultima_generacion": "2026-10-25T15:28:28.567154"
 }
