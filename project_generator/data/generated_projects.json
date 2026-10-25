@@ -18115,11 +18115,292 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "333d5efad5cc8ec6"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f2d8c1a7b3e4f5a6",
+        "titulo": "Generador de Documentación Técnica Asistido por IA",
+        "descripcion_corta": "Herramienta web que genera documentación técnica (READMEs, ADRs) a partir de código y descripciones, usando IA.",
+        "descripcion_detallada": "Una aplicación web fullstack que permite a los desarrolladores subir fragmentos de código o describir un proyecto, y utiliza un modelo de lenguaje grande (LLM) para generar automáticamente secciones de documentación como READMEs, Architectural Decision Records (ADRs), o explicaciones de funciones. El usuario puede refinar el contenido generado y exportarlo en formatos como Markdown. Ideal para equipos que buscan estandarizar y agilizar la creación de documentación.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python 3.7+ basado en type hints estándar de Python.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Proporciona validación automática de datos con Pydantic, generación automática de documentación OpenAPI, y alto rendimiento gracias a su naturaleza asíncrona."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear interfaces de usuario interactivas y declarativas, facilitando la gestión del estado y la creación de componentes reutilizables."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por LLMs.",
+              "version_sugerida": "0.1.0",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Simplifica la orquestación de llamadas a LLMs, manejo de prompts, y la integración con fuentes de datos para la generación de documentación coherente."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en type hints de Python.",
+              "version_sugerida": "2.5.0",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para la validación de datos de entrada/salida en FastAPI y para la definición de esquemas de datos claros."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura un entorno de desarrollo y despliegue consistente y reproducible para la API y la interfaz de usuario."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "GPT-4o",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo multimodal de última generación de OpenAI.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://openai.com/index/openai-api/",
+              "por_que": "Capacidad avanzada de comprensión y generación de texto para crear documentación técnica detallada y precisa a partir de código y descripciones."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests robustos y mantenibles para la lógica de la API y la integración con el modelo de IA."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Generación automática de READMEs a partir de código fuente.",
+          "Creación de ADRs (Architectural Decision Records) basados en descripciones.",
+          "Edición y refinamiento del contenido generado.",
+          "Soporte para múltiples formatos de salida (Markdown).",
+          "Integración con API de modelos de lenguaje avanzados."
+        ],
+        "casos_uso": [
+          "Acelerar la creación de documentación para nuevos proyectos.",
+          "Mantener actualizada la documentación técnica de forma eficiente.",
+          "Estandarizar el formato y la calidad de la documentación en un equipo.",
+          "Ayudar a desarrolladores junior a documentar su código.",
+          "Generar explicaciones de funciones complejas."
+        ],
+        "reglas_negocio": [
+          "La generación de documentación se basa en la calidad del prompt y del código proporcionado.",
+          "El usuario debe revisar y aprobar el contenido generado antes de exportarlo.",
+          "Las credenciales de la API de IA se gestionan de forma segura.",
+          "Se aplican límites de uso para controlar costos de la API de IA.",
+          "El código fuente subido no se almacena permanentemente sin consentimiento explícito."
+        ],
+        "por_que_ia": "Se utiliza IA (LLM) para la generación de texto natural y técnico, permitiendo la creación de documentación coherente y detallada a partir de información limitada (código, descripciones breves), lo cual sería tedioso y lento de hacer manualmente.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de OpenAI",
+          "Repositorios de código (GitHub, GitLab)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y frameworks web (FastAPI).",
+          "Experiencia con JavaScript y frameworks frontend (React).",
+          "Comprensión de los modelos de lenguaje (LLMs) y técnicas de prompting.",
+          "Familiaridad con Docker y control de versiones (Git)."
+        ],
+        "riesgos": [
+          "La calidad de la documentación generada puede variar.",
+          "Costos elevados por el uso de la API de IA.",
+          "Dependencia de servicios externos (API de IA).",
+          "Posibles problemas de seguridad al procesar código sensible.",
+          "Dificultad para integrar con lenguajes de programación muy exóticos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2024-05-14T10:00:00Z",
+        "hash_unicidad": "f2d8c1a7b3e4f5a6"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "b6c9e1e97e07d8f1"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "b5c6d7e8f9012345",
+        "titulo": "Monitor de Rendimiento de APIs con Detección de Anomalías",
+        "descripcion_corta": "Servicio que monitoriza APIs, detecta anomalías y genera alertas, usando ML.",
+        "descripcion_detallada": "Un sistema de monitorización que recopila métricas (latencia, tasa de errores, uso de recursos) de APIs expuestas. Utiliza algoritmos de Machine Learning para detectar patrones anómalos en estas métricas y generar alertas tempranas sobre posibles problemas de rendimiento o disponibilidad. Puede integrarse con sistemas de notificación como Slack o PagerDuty.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "devops",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "rust",
+          "frameworks": [
+            {
+              "nombre": "Actix-web",
+              "categoria": "framework",
+              "descripcion": "Framework web potente, rápido y seguro para Rust.",
+              "version_sugerida": "4.3.0",
+              "url_docs": "https://actix.rs/",
+              "por_que": "Proporciona un rendimiento excepcional y concurrencia para manejar la ingesta de métricas y servir la API de consulta de forma eficiente."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "TimescaleDB Toolkit",
+              "categoria": "libreria",
+              "descripcion": "Funciones y utilidades para series temporales en TimescaleDB.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://docs.timescale.com/api/latest/timescaledb_toolkit/",
+              "por_que": "Optimiza las operaciones de consulta y análisis sobre grandes volúmenes de datos de series temporales."
+            },
+            {
+              "nombre": "ndarray",
+              "categoria": "libreria",
+              "descripcion": "Librería para arrays multidimensionales en Rust.",
+              "version_sugerida": "0.15.0",
+              "url_docs": "https://crates.io/crates/ndarray",
+              "por_que": "Facilita las operaciones numéricas y matriciales necesarias para los algoritmos de detección de anomalías."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "TimescaleDB",
+              "categoria": "bases_datos",
+              "descripcion": "Base de datos de series temporales construida sobre PostgreSQL.",
+              "version_sugerida": "2.11.0",
+              "url_docs": "https://www.timescale.com/",
+              "por_que": "Especializada en el almacenamiento y consulta eficiente de datos de series temporales (métricas de API)."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Prometheus",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de monitorización y alertas.",
+              "version_sugerida": "2.45.0",
+              "url_docs": "https://prometheus.io/",
+              "por_que": "Estándar de facto para la recolección de métricas de servicios, actúa como fuente principal de datos para nuestro sistema."
+            },
+            {
+              "nombre": "Grafana",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de análisis y visualización de métricas.",
+              "version_sugerida": "10.0.0",
+              "url_docs": "https://grafana.com/",
+              "por_que": "Permite visualizar las métricas recolectadas y las anomalías detectadas de forma clara y personalizable."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Isolation Forest",
+              "categoria": "ia_ml",
+              "descripcion": "Algoritmo de Machine Learning para detección de anomalías.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html",
+              "por_que": "Eficaz para detectar puntos de datos anómalos en grandes conjuntos de datos, asumiendo que las anomalías son 'pocas y diferentes'."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Rust Test Framework",
+              "categoria": "testing",
+              "descripcion": "Framework de testing incorporado en Rust.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://doc.rust-lang.org/stable/book/ch11-01-writing-tests.html",
+              "por_que": "Permite escribir pruebas unitarias y de integración para la lógica de procesamiento de métricas y detección de anomalías."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Ingesta de métricas de rendimiento de APIs (latencia, errores).",
+          "Almacenamiento eficiente de series temporales.",
+          "Detección de anomalías mediante Isolation Forest.",
+          "Generación de alertas personalizables (Slack, email).",
+          "Dashboard para visualización de métricas y anomalías."
+        ],
+        "casos_uso": [
+          "Monitorizar la disponibilidad y rendimiento de APIs críticas.",
+          "Detectar problemas de rendimiento antes de que afecten a los usuarios.",
+          "Identificar patrones de ataque (ej. DDoS) por métricas anómalas.",
+          "Obtener insights sobre el comportamiento normal de la API.",
+          "Alertar proactivamente al equipo de operaciones sobre incidentes."
+        ],
+        "reglas_negocio": [
+          "Las métricas se agregan a intervalos configurables (ej. cada minuto).",
+          "La detección de anomalías se re-entrena periódicamente.",
+          "Los umbrales de alerta son configurables por el usuario.",
+          "Se definen 'ventanas de silencio' para evitar alertas durante mantenimientos programados.",
+          "Se requiere autenticación para acceder a la API de consulta y configuración."
+        ],
+        "por_que_ia": "Se utiliza Machine Learning (Isolation Forest) para identificar automáticamente patrones de comportamiento anómalos en las métricas de la API, yendo más allá de umbrales estáticos y permitiendo detectar problemas sutiles o emergentes que serían difíciles de predefinir manualmente.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Prometheus Exporters",
+          "APIs de notificación (Slack, PagerDuty)"
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 8,
+        "prerequisitos": [
+          "Experiencia sólida en Rust y desarrollo de sistemas de alto rendimiento.",
+          "Conocimientos profundos de series temporales y bases de datos (TimescaleDB).",
+          "Experiencia con sistemas de monitorización (Prometheus, Grafana).",
+          "Comprensión de algoritmos de Machine Learning para detección de anomalías.",
+          "Familiaridad con arquitecturas de microservicios y CI/CD."
+        ],
+        "riesgos": [
+          "Alta complejidad de configuración y mantenimiento del sistema.",
+          "Generación de falsos positivos o negativos en la detección de anomalías.",
+          "Rendimiento del sistema de ingesta y análisis bajo cargas muy altas.",
+          "Costos asociados al almacenamiento de grandes volúmenes de datos de series temporales.",
+          "Curva de aprendizaje pronunciada para el algoritmo de ML elegido."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-14T10:00:00Z",
+        "hash_unicidad": "b5c6d7e8f9012345"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "b6c9e1e97e07d8f1"
+      }
     }
   ],
   "ultimos_hashes": [
-    "d8e1f7a3b9c2d4e5",
-    "e5f6a7b8c9d0e1f2",
     "b1f2a3d4e5c6b7a8",
     "d9e8f7a6b5c4d3e2",
     "e8a7f6d5c4b3a202",
@@ -18217,8 +18498,10 @@
     "f8a1b2c3d4e5f678",
     "8d1e3f5a7b9c0d1e",
     "b4d5e6f789012345",
-    "a9f8e7d6c5b4a3f2"
+    "a9f8e7d6c5b4a3f2",
+    "f2d8c1a7b3e4f5a6",
+    "b5c6d7e8f9012345"
   ],
-  "total_generados": 133,
-  "fecha_ultima_generacion": "2026-10-24T22:13:16.490533"
+  "total_generados": 135,
+  "fecha_ultima_generacion": "2026-10-25T02:58:28.692406"
 }
