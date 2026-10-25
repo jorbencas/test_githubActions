@@ -18989,10 +18989,137 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "d9e07266bf900ef6"
       }
+    },
+    {
+      "proyecto": {
+        "id": "2a3b4c5d6e7f8g9h",
+        "titulo": "Asistente de Code Review con IA",
+        "descripcion_corta": "Herramienta web que analiza Pull Requests y sugiere mejoras de código y estilo usando IA.",
+        "descripcion_detallada": "Plataforma web que se integra con repositorios Git (GitHub, GitLab). Al recibir una notificación de nuevo Pull Request, la herramienta extrae las diferencias del código, las envía a un modelo de lenguaje grande (LLM) para su análisis. El LLM evalúa la calidad del código, posibles bugs, adherencia a estándares de estilo y seguridad. Las sugerencias se presentan de forma clara en la interfaz web, vinculadas a las líneas de código específicas. Permite a los desarrolladores y revisores mejorar la calidad del código de manera eficiente y consistente.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece alto rendimiento asíncrono, validación automática de datos con Pydantic y generación interactiva de documentación OpenAPI."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "GitPython",
+              "categoria": "libreria",
+              "descripcion": "Proporciona una API orientada a objetos para interactuar con repositorios Git.",
+              "version_sugerida": "3.1.30",
+              "url_docs": "https://gitpython.readthedocs.io/",
+              "por_que": "Facilita la clonación de repositorios, la extracción de diffs de commits y el acceso a la información del historial de Git de forma programática."
+            },
+            {
+              "nombre": "OpenAI Python Client",
+              "categoria": "libreria",
+              "descripcion": "Cliente oficial para interactuar con la API de OpenAI.",
+              "version_sugerida": "1.0.0",
+              "url_docs": "https://github.com/openai/openai-python",
+              "por_que": "Permite enviar el código y las instrucciones al modelo GPT para obtener análisis y sugerencias de mejora."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de contenedores para desarrollo, envío y ejecución de aplicaciones.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, facilitando la gestión de dependencias."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "GPT-4",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo de lenguaje avanzado de OpenAI.",
+              "version_sugerida": "null",
+              "url_docs": "https://openai.com/gpt-4",
+              "por_que": "Capaz de comprender código complejo, identificar patrones de error y generar sugerencias de mejora de alta calidad."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests robustos y la integración con herramientas de cobertura."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Integración con GitHub/GitLab vía webhooks.",
+          "Análisis de diffs de código en Pull Requests.",
+          "Generación de sugerencias de mejora de código por IA.",
+          "Visualización de comentarios de IA en la interfaz web.",
+          "Configuración de reglas de análisis personalizadas."
+        ],
+        "casos_uso": [
+          "Mejorar la calidad y consistencia del código en equipos de desarrollo.",
+          "Reducir el tiempo dedicado a revisiones manuales de código.",
+          "Identificar potenciales bugs y vulnerabilidades de seguridad tempranamente.",
+          "Facilitar el onboarding de nuevos miembros al equipo, estableciendo estándares.",
+          "Automatizar la verificación de adherencia a guías de estilo."
+        ],
+        "reglas_negocio": [
+          "El análisis se activa solo en Pull Requests de ramas específicas.",
+          "Se pueden definir umbrales de severidad para las sugerencias.",
+          "Los comentarios de la IA se marcan claramente como generados automáticamente.",
+          "El sistema solo accede a la información necesaria del repositorio (diffs).",
+          "Las claves de API de servicios externos se manejan de forma segura."
+        ],
+        "por_que_ia": "Se utiliza IA (GPT-4) para interpretar el código fuente, identificar patrones complejos, y generar sugerencias de mejora contextualmente relevantes que serían difíciles de codificar con reglas estáticas.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "GitHub API",
+          "GitLab API"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo web (API REST).",
+          "Comprensión de Git y flujos de trabajo de control de versiones.",
+          "Familiaridad con el uso de APIs de servicios de terceros.",
+          "Acceso a una clave de API de OpenAI."
+        ],
+        "riesgos": [
+          "Costos asociados al uso de la API de OpenAI.",
+          "Posibles falsos positivos o negativos en las sugerencias de la IA.",
+          "Manejo seguro de credenciales de acceso a repositorios.",
+          "Latencia en la respuesta del análisis de IA.",
+          "Dependencia de la disponibilidad y cambios en la API de OpenAI."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "c7b8a9d0e1f23456"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "09f3fadcdc27906b"
+      }
     }
   ],
   "ultimos_hashes": [
-    "d5c8a1b0e9f7c3d4",
     "f1e0d9c7b5a3f1e0",
     "a0b1c2d3e4f5a0b1",
     "c1a2b3d4e5f6a7b8",
@@ -19091,8 +19218,9 @@
     "c2d3e4f5a6b78901",
     "f0e1d2c3b4a56789",
     "b9a8c7d6e5f43210",
-    "e3b0c44298fc1234"
+    "e3b0c44298fc1234",
+    "c7b8a9d0e1f23456"
   ],
-  "total_generados": 139,
-  "fecha_ultima_generacion": "2026-10-25T18:42:03.016219"
+  "total_generados": 140,
+  "fecha_ultima_generacion": "2026-10-25T22:15:41.157730"
 }
