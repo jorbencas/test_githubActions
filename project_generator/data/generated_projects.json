@@ -18398,10 +18398,145 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "b6c9e1e97e07d8f1"
       }
+    },
+    {
+      "proyecto": {
+        "id": "c2d3e4f5a6b78901",
+        "titulo": "IoT Device Data Aggregator & Alerting",
+        "descripcion_corta": "Agrega datos de dispositivos IoT vía MQTT y dispara alertas basadas en umbrales definidos.",
+        "descripcion_detallada": "Sistema backend que se suscribe a un broker MQTT para recibir datos de telemetría de múltiples dispositivos IoT. Los datos recibidos se validan, procesan y almacenan en una base de datos de series temporales. Se configuran reglas de alerta (ej. temperatura > 30°C) que, al cumplirse, disparan notificaciones (ej. vía webhook, email). Diseñado para monitorizar entornos industriales, agrícolas o domésticos.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "datos",
+          "microservicio",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Go stdlib (net/http)",
+              "categoria": "framework",
+              "descripcion": "Librerías estándar de Go para networking, incluyendo servidor HTTP.",
+              "version_sugerida": "1.21",
+              "url_docs": "https://pkg.go.dev/net/http",
+              "por_que": "Suficiente para crear la API REST para configurar reglas y consultar datos, sin necesidad de un framework externo."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Paho MQTT Go Client",
+              "categoria": "libreria",
+              "descripcion": "Cliente MQTT para Go, permite suscribirse a topics y publicar mensajes.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://github.com/eclipse/paho.mqtt.golang",
+              "por_que": "Esencial para la comunicación con el broker MQTT, recibiendo los datos de los dispositivos IoT de forma eficiente."
+            },
+            {
+              "nombre": "InfluxDB Client Go",
+              "categoria": "libreria",
+              "descripcion": "Cliente oficial de Go para interactuar con InfluxDB.",
+              "version_sugerida": "2.0.0",
+              "url_docs": "https://github.com/influxdata/influxdb-client-go",
+              "por_que": "Permite escribir y leer datos de la base de datos de series temporales de manera optimizada."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "InfluxDB",
+              "categoria": "bases_datos",
+              "descripcion": "Base de datos de series temporales optimizada para el almacenamiento y consulta de datos de métricas y eventos.",
+              "version_sugerida": "2.7",
+              "url_docs": "https://docs.influxdata.com/",
+              "por_que": "Ideal para almacenar grandes volúmenes de datos de telemetría IoT con marcas de tiempo, permitiendo consultas eficientes por rango de tiempo."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita el despliegue y la gestión del servicio, así como la orquestación de dependencias como el broker MQTT y la base de datos."
+            },
+            {
+              "nombre": "Mosquitto (Broker MQTT)",
+              "categoria": "infraestructura",
+              "descripcion": "Broker MQTT ligero y de código abierto.",
+              "version_sugerida": "2.0.15",
+              "url_docs": "https://mosquitto.org/",
+              "por_que": "Actúa como el hub central para la ingesta de datos de los dispositivos IoT, permitiendo el desacoplamiento entre dispositivos y el backend."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Paquete estándar de Go para escribir tests unitarios y de benchmark.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Permite escribir tests unitarios para la lógica de procesamiento de datos, validación y disparo de alertas."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Conexión y suscripción a broker MQTT",
+          "Procesamiento y almacenamiento de series temporales",
+          "Definición y ejecución de reglas de alerta",
+          "Notificaciones vía Webhook",
+          "API para gestión de dispositivos y reglas"
+        ],
+        "casos_uso": [
+          "Monitorización de temperatura/humedad en almacenes",
+          "Seguimiento de consumo energético en edificios",
+          "Detección de anomalías en maquinaria industrial",
+          "Alertas de nivel en tanques de fluidos",
+          "Monitorización de parámetros ambientales en agricultura"
+        ],
+        "reglas_negocio": [
+          "Los datos se ingieren solo de topics MQTT autorizados.",
+          "Las reglas de alerta deben tener umbrales definidos (min/max).",
+          "Se implementa un cool-down period para evitar alertas repetidas.",
+          "La API de configuración solo es accesible tras autenticación.",
+          "Los datos antiguos se purgan automáticamente según política de retención."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "MQTT Protocol"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos de Go (Go routines, channels)",
+          "Comprensión del protocolo MQTT",
+          "Experiencia con bases de datos de series temporales (InfluxDB)",
+          "Familiaridad con Docker y contenedores"
+        ],
+        "riesgos": [
+          "Pérdida de datos si el broker MQTT o la base de datos no están disponibles.",
+          "Latencia en la recepción y procesamiento de datos.",
+          "Manejo de grandes volúmenes de datos y alta concurrencia.",
+          "Seguridad del broker MQTT y de los endpoints de la API.",
+          "Complejidad en la definición de reglas de alerta dinámicas."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-10T10:02:00Z",
+        "hash_unicidad": "c2d3e4f5a6b78901"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "06f7c9070190909e"
+      }
     }
   ],
   "ultimos_hashes": [
-    "b1f2a3d4e5c6b7a8",
     "d9e8f7a6b5c4d3e2",
     "e8a7f6d5c4b3a202",
     "c7d8e9f0a1b2c3d4",
@@ -18500,8 +18635,9 @@
     "b4d5e6f789012345",
     "a9f8e7d6c5b4a3f2",
     "f2d8c1a7b3e4f5a6",
-    "b5c6d7e8f9012345"
+    "b5c6d7e8f9012345",
+    "c2d3e4f5a6b78901"
   ],
-  "total_generados": 135,
-  "fecha_ultima_generacion": "2026-10-25T02:58:28.692406"
+  "total_generados": 136,
+  "fecha_ultima_generacion": "2026-10-25T08:55:05.924969"
 }
