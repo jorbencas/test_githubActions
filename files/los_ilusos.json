@@ -943,5 +943,17 @@
     "relevancia": 3,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "Reparto Los Ilusos 13+13",
+    "url": "https://www.sensacine.com/peliculas/pelicula-220188/reparto/",
+    "fecha_pub": "Fri, 16 Apr 2021 14:51:00 GMT",
+    "fecha_ts": "2026-10-25T04:25:17.466528+00:00",
+    "medio": "Sensacine",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
