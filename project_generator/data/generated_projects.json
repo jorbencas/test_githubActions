@@ -18826,10 +18826,172 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "04db16c98b00f276"
       }
+    },
+    {
+      "proyecto": {
+        "id": "e3b0c44298fc",
+        "titulo": "Sistema de Gestión de Incidencias con IA y Priorización Automática",
+        "descripcion_corta": "Plataforma web para reportar, gestionar y priorizar incidencias técnicas usando IA para categorización y asignación.",
+        "descripcion_detallada": "Desarrollo de una aplicación web full-stack donde los usuarios pueden registrar incidencias técnicas (bugs, solicitudes de soporte, etc.). El sistema utilizará un modelo de IA para categorizar automáticamente la incidencia, extraer información relevante y sugerirla a un equipo o persona específica basándose en su historial y especialización. Implementará un flujo de trabajo configurable para la aprobación, resolución y cierre de incidencias, con notificaciones y seguimiento del estado. La IA ayudará a reducir el tiempo de triaje manual y a mejorar la asignación de tareas, optimizando la resolución de problemas.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web asíncrono para construir APIs, con validación de datos y generación automática de documentación OpenAPI.",
+              "version_sugerida": "0.110.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Excelente rendimiento asíncrono, validación de datos con Pydantic, autogeneración de documentación interactiva (Swagger UI/ReDoc) y facilidad para crear APIs RESTful robustas."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario interactivas y declarativas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Componentización para UI reutilizable, manejo eficiente del estado y Virtual DOM para actualizaciones rápidas de la interfaz."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en anotaciones de tipo de Python.",
+              "version_sugerida": "2.7.1",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Integración nativa con FastAPI para validación de request/response y serialización/deserialización de datos."
+            },
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "Toolkit SQL y Object Relational Mapper (ORM) para Python.",
+              "version_sugerida": "2.0.29",
+              "url_docs": "https://docs.sqlalchemy.org/",
+              "por_que": "Abstracción potente para interactuar con bases de datos relacionales, facilitando la manipulación de datos y la gestión de esquemas."
+            },
+            {
+              "nombre": "OpenAI Python Client",
+              "categoria": "libreria",
+              "descripcion": "Cliente oficial de Python para interactuar con la API de OpenAI.",
+              "version_sugerida": "1.35.0",
+              "url_docs": "https://github.com/openai/openai-python",
+              "por_que": "Integración sencilla con modelos de lenguaje de OpenAI para tareas de clasificación y extracción de información."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto de código abierto.",
+              "version_sugerida": "16",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Soporte robusto para tipos de datos avanzados (JSONB), transacciones ACID y escalabilidad para almacenar incidencias y metadatos de usuarios."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura entornos de desarrollo y producción consistentes, facilita el despliegue y la gestión de servicios de la aplicación."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "GPT-4o",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo multimodal de última generación de OpenAI.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://platform.openai.com/docs/models/gpt-4",
+              "por_que": "Capacidad avanzada para entender y clasificar texto, extraer entidades clave y sugerir la asignación más adecuada de incidencias basadas en su contenido."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.4",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests claros y mantenibles, con un rico ecosistema de plugins y fixtures."
+            },
+            {
+              "nombre": "Vitest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing moderno para aplicaciones JavaScript/TypeScript.",
+              "version_sugerida": "1.6.0",
+              "url_docs": "https://vitest.dev/",
+              "por_que": "Integración sencilla con React, alta velocidad y soporte para módulos ES."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro y visualización de incidencias",
+          "Categorización automática por IA",
+          "Asignación inteligente de incidencias",
+          "Flujo de trabajo personalizable",
+          "Notificaciones en tiempo real",
+          "Panel de control de métricas"
+        ],
+        "casos_uso": [
+          "Un usuario reporta un bug en el sistema.",
+          "Un técnico recibe una incidencia y la asigna a un desarrollador.",
+          "El sistema sugiere automáticamente el desarrollador más adecuado para una nueva incidencia.",
+          "Un gerente supervisa el estado general de las incidencias abiertas.",
+          "Se genera un reporte semanal de incidencias resueltas y tiempo promedio de resolución."
+        ],
+        "reglas_negocio": [
+          "Las incidencias deben tener un título y una descripción.",
+          "Las incidencias críticas deben resolverse en menos de 24 horas.",
+          "Solo los administradores pueden cerrar incidencias.",
+          "La IA solo sugiere asignaciones; un humano debe confirmar.",
+          "Los usuarios pueden comentar sobre las incidencias."
+        ],
+        "por_que_ia": "La IA se utiliza para automatizar y optimizar el proceso de triaje y asignación de incidencias. Mediante el análisis del texto de la incidencia (descripción, título), la IA puede predecir la categoría más probable y sugerir al técnico o equipo más adecuado para resolverla, reduciendo el tiempo de espera y mejorando la eficiencia.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "Documentación de OpenAI API",
+          "Documentación de FastAPI",
+          "Documentación de React"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y JavaScript.",
+          "Comprensión de APIs RESTful.",
+          "Familiaridad con bases de datos relacionales.",
+          "Conceptos básicos de Machine Learning y procesamiento de lenguaje natural."
+        ],
+        "riesgos": [
+          "La precisión de la IA puede variar y requerir ajustes.",
+          "La integración entre frontend y backend puede ser compleja.",
+          "Escalabilidad de la base de datos bajo alta carga de incidencias.",
+          "Gestión de la autenticación y autorización de usuarios.",
+          "Latencia en las respuestas de la API de IA externa."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-07-18T10:00:00Z",
+        "hash_unicidad": "e3b0c44298fc1234"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "d9e07266bf900ef6"
+      }
     }
   ],
   "ultimos_hashes": [
-    "c7d8e9f0a1b2c3d4",
     "d5c8a1b0e9f7c3d4",
     "f1e0d9c7b5a3f1e0",
     "a0b1c2d3e4f5a0b1",
@@ -18928,8 +19090,9 @@
     "b5c6d7e8f9012345",
     "c2d3e4f5a6b78901",
     "f0e1d2c3b4a56789",
-    "b9a8c7d6e5f43210"
+    "b9a8c7d6e5f43210",
+    "e3b0c44298fc1234"
   ],
-  "total_generados": 138,
-  "fecha_ultima_generacion": "2026-10-25T15:28:28.567154"
+  "total_generados": 139,
+  "fecha_ultima_generacion": "2026-10-25T18:42:03.016219"
 }
