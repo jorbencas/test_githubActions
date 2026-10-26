@@ -19389,11 +19389,302 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "9cb03708cc7bc126"
       }
+    },
+    {
+      "proyecto": {
+        "id": "b2c3d4e5f67890a1",
+        "titulo": "Monitor de Disponibilidad de Sitios Web con Notificaciones",
+        "descripcion_corta": "Servicio web que verifica periódicamente la disponibilidad de URLs y notifica fallos.",
+        "descripcion_detallada": "Una aplicación web simple que permite a los usuarios registrar URLs de sitios web que desean monitorear. El sistema realiza pings HTTP periódicos a estas URLs para comprobar su estado. Si una URL no responde o devuelve un código de error HTTP (ej. 5xx), se registra el incidente y se notifica al usuario registrado a través de email. La interfaz web permite añadir/eliminar URLs, ver el historial de disponibilidad y configurar los umbrales de notificación. Diseñado para ser desplegado fácilmente en la nube.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Flask",
+              "categoria": "framework",
+              "descripcion": "Microframework web para Python, ligero y flexible.",
+              "version_sugerida": "3.0.0",
+              "url_docs": "https://flask.palletsprojects.com/",
+              "por_que": "Ideal para crear APIs y interfaces web sencillas con mínima sobrecarga."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Requests",
+              "categoria": "libreria",
+              "descripcion": "Librería HTTP para Python, elegante y simple.",
+              "version_sugerida": "2.31.0",
+              "url_docs": "https://requests.readthedocs.io/",
+              "por_que": "Facilita la realización de peticiones HTTP para verificar la disponibilidad de las URLs."
+            },
+            {
+              "nombre": "APScheduler",
+              "categoria": "libreria",
+              "descripcion": "Planificador de tareas en Python.",
+              "version_sugerida": "3.10.4",
+              "url_docs": "https://apscheduler.readthedocs.io/",
+              "por_que": "Permite programar las verificaciones periódicas de las URLs de forma eficiente."
+            },
+            {
+              "nombre": "Celery",
+              "categoria": "libreria",
+              "descripcion": "Sistema de colas de tareas distribuidas.",
+              "version_sugerida": "5.3.6",
+              "url_docs": "https://docs.celeryq.dev/",
+              "por_que": "Para ejecutar las tareas de monitorización en segundo plano de forma asíncrona y escalable."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "SQLite",
+              "categoria": "bases_datos",
+              "descripcion": "Base de datos relacional embebida.",
+              "version_sugerida": "3.44.0",
+              "url_docs": "https://www.sqlite.org/docs.html",
+              "por_que": "Suficiente para almacenar URLs y estado de disponibilidad en un proyecto pequeño, fácil de configurar."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la aplicación y sus dependencias para un despliegue sencillo y consistente."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Para probar la lógica de verificación de URLs y la interfaz de la API."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Gunicorn",
+              "categoria": "otros",
+              "descripcion": "Servidor WSGI HTTP para aplicaciones Python.",
+              "version_sugerida": "21.2.0",
+              "url_docs": "https://docs.gunicorn.org/",
+              "por_que": "Necesario para desplegar la aplicación Flask en un entorno de producción."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Registro y gestión de URLs a monitorear",
+          "Verificación periódica de disponibilidad (HTTP GET)",
+          "Notificación por email en caso de fallo",
+          "Visualización del estado actual y del historial",
+          "Configuración de intervalo de chequeo"
+        ],
+        "casos_uso": [
+          "Monitorear la disponibilidad de un sitio web personal o de un pequeño negocio.",
+          "Asegurar que un servicio crítico de terceros está operativo.",
+          "Recibir alertas tempranas de problemas en la infraestructura web.",
+          "Controlar la latencia de respuesta de los sitios monitoreados.",
+          "Validar despliegues de nuevas versiones de una web."
+        ],
+        "reglas_negocio": [
+          "Solo se permiten URLs válidas (formato http/https).",
+          "El intervalo de chequeo debe ser configurable y razonable (ej. > 1 min).",
+          "Las notificaciones de fallo solo se envían si el estado cambia de OK a Fallo.",
+          "Se implementa un mecanismo de reintento antes de marcar como fallo.",
+          "El usuario debe poder desactivar notificaciones temporalmente."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Documentación de Flask",
+          "Documentación de Requests",
+          "Documentación de APScheduler/Celery"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Python y Flask",
+          "Comprensión de peticiones HTTP",
+          "Configuración de envío de emails (SMTP)",
+          "Conceptos básicos de Docker"
+        ],
+        "riesgos": [
+          "Falsos positivos/negativos en la detección de caídas.",
+          "Problemas con la configuración del servidor SMTP.",
+          "Escalabilidad limitada si se usan muchas URLs con tareas síncronas.",
+          "El servidor de monitorización también puede caer.",
+          "Bloqueo por parte de sitios web que detectan scraping."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-12-01T10:05:00Z",
+        "hash_unicidad": "b2c3d4e5f67890a1"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "27ec3100a6e41caa"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c3d4e5f67890a1b2",
+        "titulo": "Gestor de Tareas Colaborativo con Sincronización en Tiempo Real",
+        "descripcion_corta": "Aplicación web fullstack para gestionar tareas en equipo con actualizaciones instantáneas.",
+        "descripcion_detallada": "Una aplicación web fullstack que permite a los usuarios crear equipos, invitar miembros y gestionar proyectos y tareas dentro de esos proyectos. Las tareas se pueden asignar, establecer fechas de vencimiento, prioridades y estados. La característica principal es la sincronización en tiempo real: cualquier cambio realizado por un miembro del equipo (crear tarea, actualizar estado, añadir comentario) se refleja instantáneamente para todos los demás miembros del equipo sin necesidad de recargar la página. Utiliza WebSockets para la comunicación en tiempo real y una base de datos robusta para persistencia.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "fullstack"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo Node.js para crear aplicaciones del lado del servidor eficientes y escalables.",
+              "version_sugerida": "10.3.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Proporciona una arquitectura modular basada en módulos, controladores y servicios, ideal para APIs y microservicios."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear componentes de UI reutilizables y gestionar el estado de la aplicación de forma declarativa."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Socket.IO",
+              "categoria": "libreria",
+              "descripcion": "Librería para comunicación bidireccional en tiempo real entre clientes y servidores web.",
+              "version_sugerida": "4.7.2",
+              "url_docs": "https://socket.io/docs/v4/",
+              "por_que": "Facilita la implementación de la sincronización de datos en tiempo real entre todos los clientes conectados."
+            },
+            {
+              "nombre": "TypeORM",
+              "categoria": "libreria",
+              "descripcion": "ORM para TypeScript y JavaScript que soporta múltiples bases de datos.",
+              "version_sugerida": "0.2.47",
+              "url_docs": "https://typeorm.io/",
+              "por_que": "Permite interactuar con la base de datos usando objetos de TypeScript, facilitando la gestión de datos."
+            },
+            {
+              "nombre": "Zod",
+              "categoria": "libreria",
+              "descripcion": "Sistema de validación de esquemas declarativos para TypeScript.",
+              "version_sugerida": "3.22.4",
+              "url_docs": "https://zod.dev/",
+              "por_que": "Valida los datos entrantes y salientes, asegurando la integridad de la aplicación."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "bases_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional de código abierto.",
+              "version_sugerida": "16.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto, escalable y soporta tipos de datos avanzados como JSONB, ideal para almacenar información de tareas y equipos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Simplifica la configuración del entorno de desarrollo y el despliegue de la aplicación fullstack."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript con enfoque en simplicidad.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Permite testear tanto el backend (NestJS) como el frontend (React) de manera unificada."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de equipos y proyectos",
+          "Creación, asignación y seguimiento de tareas",
+          "Fechas de vencimiento y prioridades",
+          "Actualizaciones de estado de tareas en tiempo real",
+          "Comentarios en tareas y notificaciones (in-app)"
+        ],
+        "casos_uso": [
+          "Gestión de proyectos ágiles en pequeños equipos.",
+          "Organización de tareas domésticas o personales compartidas.",
+          "Coordinación de equipos remotos.",
+          "Seguimiento del progreso de tareas en eventos o conferencias.",
+          "Flujo de trabajo simple para freelancers y sus clientes."
+        ],
+        "reglas_negocio": [
+          "Solo los miembros de un equipo pueden ver y modificar sus proyectos/tareas.",
+          "Las tareas solo pueden ser asignadas a miembros del mismo equipo.",
+          "El historial de cambios de una tarea se mantiene.",
+          "Los roles de usuario (admin, miembro) definen permisos.",
+          "La creación de nuevos equipos tiene un límite (configurable)."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Documentación de NestJS",
+          "Documentación de React",
+          "Documentación de Socket.IO",
+          "Documentación de PostgreSQL"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Experiencia con TypeScript y Node.js",
+          "Conocimientos de React y gestión de estado (Context API/Redux)",
+          "Comprensión de WebSockets",
+          "Familiaridad con ORMs y bases de datos SQL (PostgreSQL)",
+          "Conceptos de Docker"
+        ],
+        "riesgos": [
+          "Complejidad en la gestión de concurrencia y conflictos de datos en tiempo real.",
+          "Escalabilidad de WebSockets bajo alta carga de usuarios.",
+          "Manejo de desconexiones y reconexiones de clientes.",
+          "Seguridad en la autenticación y autorización de usuarios y equipos.",
+          "Curva de aprendizaje para el stack completo (NestJS, React, TypeORM, Socket.IO)."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-12-01T10:10:00Z",
+        "hash_unicidad": "c3d4e5f67890a1b2"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "27ec3100a6e41caa"
+      }
     }
   ],
   "ultimos_hashes": [
-    "c1a2b3d4e5f6a7b8",
-    "f1a2b3c4d5e6f7a8",
     "e1f2a3b4c5d6e7f8",
     "f2a3b4c5d6e7f8a9",
     "6b9a1f8c2d0e4b7a",
@@ -19491,8 +19782,10 @@
     "e3b0c44298fc1234",
     "c7b8a9d0e1f23456",
     "f4b1e0a7d3c9f8e2",
-    "e0f9a8b7c6d5e4f3"
+    "e0f9a8b7c6d5e4f3",
+    "b2c3d4e5f67890a1",
+    "c3d4e5f67890a1b2"
   ],
-  "total_generados": 142,
-  "fecha_ultima_generacion": "2026-10-26T09:37:48.208450"
+  "total_generados": 144,
+  "fecha_ultima_generacion": "2026-10-26T18:09:03.409704"
 }
