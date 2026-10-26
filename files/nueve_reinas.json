@@ -2674,5 +2674,41 @@
     "relevancia": 2,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Álvaro Morte y José Coronado encabezan la nueva apuesta criminal de Netflix que puede arrasar en la plataforma",
+    "url": "https://www.msn.com/entretenimiento/cine/%C3%A1lvaro-morte-y-jos%C3%A9-coronado-encabezan-la-nueva-apuesta-criminal-de-netflix-que-puede-arrasar-en-la-plataforma/ar-AA2g6gA6",
+    "fecha_pub": "Mon, 26 Oct 2026 06:22:38 GMT",
+    "fecha_ts": "2026-10-26T22:34:14.478881+00:00",
+    "medio": "A24 on MSN",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Álvaro Morte y José Coronado encabezan la nueva apuesta criminal de Netflix que puede arrasar en la plataforma",
+    "url": "https://www.msn.com/noticias/other/%C3%A1lvaro-morte-y-jos%C3%A9-coronado-encabezan-la-nueva-apuesta-criminal-de-netflix-que-puede-arrasar-en-la-plataforma/ar-AA2g6gA6",
+    "fecha_pub": "Mon, 26 Oct 2026 06:22:38 GMT",
+    "fecha_ts": "2026-10-26T22:34:14.679468+00:00",
+    "medio": "A24 on MSN",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Más allá de 'El inocente' y 'Contratiempo': Netflix pone fecha a lo nuevo de uno de los reyes del thriller español",
+    "url": "https://www.cinemania.es/cinemania/noticias/nombre-otro-mario-casas-eduard-fernandez-netflix_7050447_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-26T22:34:30.323032+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
