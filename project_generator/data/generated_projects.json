@@ -19117,11 +19117,281 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "09f3fadcdc27906b"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f4b1e0a7d3c9f8e2",
+        "titulo": "Sistema de Gestión de Conocimiento Colaborativo (CKMS)",
+        "descripcion_corta": "Plataforma web para centralizar, organizar y compartir conocimiento interno de equipos, impulsada por IA para resúmenes y búsqueda semántica.",
+        "descripcion_detallada": "Este proyecto es un sistema de gestión de conocimiento colaborativo (CKMS) basado en web. Permite a los usuarios crear, editar, organizar y buscar documentos, artículos y notas. La plataforma se enfoca en la colaboración en tiempo real y la gestión de versiones. Incorpora IA para generar resúmenes automáticos de documentos extensos y para habilitar una búsqueda semántica avanzada que entiende el contexto y la intención del usuario, yendo más allá de la simple coincidencia de palabras clave. Ideal para empresas que buscan mejorar la transferencia de conocimiento y reducir la duplicación de esfuerzos.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python basado en type hints.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Proporciona alto rendimiento, validación de datos automática con Pydantic, generación de documentación OpenAPI y es ideal para APIs."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario interactivas y declarativas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear componentes reutilizables y una experiencia de usuario dinámica y moderna para el frontend."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "Toolkit SQL y Object-Relational Mapper (ORM) para Python.",
+              "version_sugerida": "2.0.19",
+              "url_docs": "https://www.sqlalchemy.org/",
+              "por_que": "Facilita la interacción con la base de datos relacional usando un enfoque orientado a objetos y ORM."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en type hints de Python.",
+              "version_sugerida": "2.4.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para FastAPI para la validación de esquemas de datos entrantes y salientes, mejorando la robustez."
+            },
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por modelos de lenguaje.",
+              "version_sugerida": "0.0.300",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Simplifica la integración con LLMs para la generación de resúmenes y la implementación de búsqueda semántica."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_de_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto de código abierto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Ofrece robustez, escalabilidad, soporte para JSONB y capacidades avanzadas para almacenar y consultar datos estructurados y semi-estructurados."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Permite empaquetar la aplicación y sus dependencias, asegurando un entorno de desarrollo y producción consistente."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Sentence Transformers",
+              "categoria": "ia_ml",
+              "descripcion": "Librería para generar embeddings de texto y realizar búsqueda semántica.",
+              "version_sugerida": "2.2.2",
+              "url_docs": "https://www.sbert.net/",
+              "por_que": "Fundamental para la búsqueda semántica, permitiendo encontrar documentos basándose en el significado y no solo en palabras clave."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests claros y mantenibles con fixtures y una rica colección de plugins."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y edición de documentos (Markdown)",
+          "Control de versiones de documentos",
+          "Búsqueda semántica inteligente",
+          "Generación automática de resúmenes",
+          "Colaboración en tiempo real (básico)",
+          "Organización de contenido por categorías/tags"
+        ],
+        "casos_uso": [
+          "Centralizar documentación técnica de un equipo",
+          "Compartir mejores prácticas y lecciones aprendidas",
+          "Onboarding rápido de nuevos miembros al equipo",
+          "Base de conocimiento para soporte al cliente",
+          "Repositorio de ideas y propuestas"
+        ],
+        "reglas_negocio": [
+          "Solo usuarios autenticados pueden crear/editar contenido.",
+          "Los resúmenes de IA se generan bajo demanda o periódicamente.",
+          "La búsqueda semántica prioriza contenido relevante sobre coincidencias exactas.",
+          "Control de acceso basado en roles (opcional/extensión).",
+          "Historial de versiones inmutable para cada documento."
+        ],
+        "por_que_ia": "La IA se utiliza para mejorar la accesibilidad y la utilidad del conocimiento: la generación de resúmenes condensa información densa, y la búsqueda semántica permite a los usuarios encontrar información relevante de manera más intuitiva y rápida, superando las limitaciones de las búsquedas por palabras clave.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "OpenAI API (opcional para modelos más potentes de resumen/embedding)",
+          "Hugging Face Hub (para modelos de Sentence Transformers)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos sólidos de Python y JavaScript.",
+          "Comprensión de APIs RESTful.",
+          "Familiaridad con bases de datos relacionales.",
+          "Conceptos básicos de IA/ML y NLP."
+        ],
+        "riesgos": [
+          "La calidad de los resúmenes y la búsqueda semántica depende del modelo de IA elegido.",
+          "La gestión de la concurrencia en la edición colaborativa puede ser compleja.",
+          "Escalabilidad de la base de datos a medida que crece el contenido.",
+          "Integración de modelos de IA locales puede requerir hardware específico.",
+          "Curva de aprendizaje para la configuración y uso de LangChain."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f4b1e0a7d3c9f8e2"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "9cb03708cc7bc126"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "e0f9a8b7c6d5e4f3",
+        "titulo": "Asistente de Codificación con IA para Refactorización y Testing",
+        "descripcion_corta": "Herramienta CLI que asiste a desarrolladores sugiriendo refactorizaciones y generando tests unitarios básicos.",
+        "descripcion_detallada": "Este proyecto es una herramienta de línea de comandos (CLI) diseñada para integrarse en el flujo de trabajo de los desarrolladores. Utiliza un modelo de lenguaje grande (LLM) para analizar fragmentos de código (Python, JavaScript) y sugerir mejoras: posibles refactorizaciones para mejorar la legibilidad o eficiencia, y la generación de casos de prueba unitarios básicos para funciones y métodos. El objetivo es acelerar el proceso de desarrollo, mejorar la calidad del código y fomentar las buenas prácticas de testing.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "api",
+          "ia_ml",
+          "testing"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Typer",
+              "categoria": "framework",
+              "descripcion": "Librería para construir CLIs en Python basado en type hints.",
+              "version_sugerida": "0.9.0",
+              "url_docs": "https://typer.tiangolo.com/",
+              "por_que": "Simplifica la creación de interfaces de línea de comandos intuitivas y robustas."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "OpenAI Python Client",
+              "categoria": "libreria",
+              "descripcion": "Cliente oficial de Python para la API de OpenAI.",
+              "version_sugerida": "1.1.0",
+              "url_docs": "https://github.com/openai/openai-python",
+              "por_que": "Permite interactuar fácilmente con los modelos de OpenAI para obtener sugerencias de código y generación de tests."
+            },
+            {
+              "nombre": "Black",
+              "categoria": "libreria",
+              "descripcion": "Formateador de código Python inflexible.",
+              "version_sugerida": "23.7.0",
+              "url_docs": "https://github.com/psf/black",
+              "por_que": "Asegura que el código sugerido o generado siga un estándar de formato consistente."
+            },
+            {
+              "nombre": "Pytest",
+              "categoria": "libreria",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Se utiliza para ejecutar las pruebas unitarias generadas y verificar su corrección."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [
+            {
+              "nombre": "GPT-3.5 Turbo / GPT-4",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de lenguaje de OpenAI para tareas de generación de texto y código.",
+              "version_sugerida": null,
+              "url_docs": "https://openai.com/models/",
+              "por_que": "Capaces de entender código fuente y generar sugerencias de refactorización y código de pruebas unitarias."
+            }
+          ],
+          "testing": [],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis de fragmentos de código Python/JavaScript.",
+          "Sugerencias de refactorización de código.",
+          "Generación de tests unitarios básicos (con Pytest/Jest).",
+          "Integración con API de OpenAI.",
+          "Interfaz CLI amigable."
+        ],
+        "casos_uso": [
+          "Mejorar la legibilidad de funciones complejas.",
+          "Identificar y corregir código repetido.",
+          "Generar rápidamente casos de prueba para nuevas funcionalidades.",
+          "Asegurar cobertura de tests mínima para código existente.",
+          "Asistencia en el aprendizaje de patrones de refactorización."
+        ],
+        "reglas_negocio": [
+          "El usuario debe proporcionar un fragmento de código o un archivo.",
+          "La herramienta solo procesará código en Python o JavaScript.",
+          "Las sugerencias de refactorización son informativas y requieren revisión humana.",
+          "Los tests generados son básicos y pueden necesitar ajustes.",
+          "Requiere una clave API de OpenAI válida."
+        ],
+        "por_que_ia": "La IA (LLM) es fundamental para entender la semántica del código fuente, identificar patrones de diseño o anti-patrones, y generar código coherente y relevante tanto para la refactorización como para la creación de tests unitarios.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "OpenAI API"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos de Python.",
+          "Comprensión de conceptos de programación (refactorización, testing).",
+          "Familiaridad con el uso de APIs externas (OpenAI).",
+          "Conocimientos básicos de línea de comandos."
+        ],
+        "riesgos": [
+          "La calidad de las sugerencias de IA puede ser variable.",
+          "Posibles costos asociados al uso de la API de OpenAI.",
+          "Interpretación incorrecta del código por parte del LLM.",
+          "La generación de tests puede no cubrir todos los casos borde.",
+          "Dependencia de la disponibilidad y políticas de la API de OpenAI."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:02:00Z",
+        "hash_unicidad": "e0f9a8b7c6d5e4f3"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "9cb03708cc7bc126"
+      }
     }
   ],
   "ultimos_hashes": [
-    "f1e0d9c7b5a3f1e0",
-    "a0b1c2d3e4f5a0b1",
     "c1a2b3d4e5f6a7b8",
     "f1a2b3c4d5e6f7a8",
     "e1f2a3b4c5d6e7f8",
@@ -19219,8 +19489,10 @@
     "f0e1d2c3b4a56789",
     "b9a8c7d6e5f43210",
     "e3b0c44298fc1234",
-    "c7b8a9d0e1f23456"
+    "c7b8a9d0e1f23456",
+    "f4b1e0a7d3c9f8e2",
+    "e0f9a8b7c6d5e4f3"
   ],
-  "total_generados": 140,
-  "fecha_ultima_generacion": "2026-10-25T22:15:41.157730"
+  "total_generados": 142,
+  "fecha_ultima_generacion": "2026-10-26T02:57:12.391258"
 }
