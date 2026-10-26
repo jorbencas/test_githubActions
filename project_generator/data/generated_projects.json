@@ -19682,10 +19682,161 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "27ec3100a6e41caa"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f4a7b8c9d0e1f234",
+        "titulo": "Sistema de Gestión de Proyectos Ágil con IA",
+        "descripcion_corta": "Plataforma web para la gestión de proyectos ágiles (Scrum/Kanban) con insights generados por IA.",
+        "descripcion_detallada": "Desarrollo de una aplicación web full-stack para la gestión de proyectos, enfocada en metodologías ágiles. Incluirá funcionalidades como tableros Kanban/Scrum, gestión de tareas, sprints, backlogs y reportes de progreso. Se integrará un módulo de IA para analizar el sentimiento en los comentarios de las tareas, predecir cuellos de botella y sugerir optimizaciones en la asignación de recursos. La IA también generará resúmenes de la actividad del sprint y posibles riesgos. El objetivo es mejorar la eficiencia y la toma de decisiones en equipos de desarrollo.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "fullstack",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python, ideal para microservicios y aplicaciones web.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Alto rendimiento asíncrono, validación de datos con Pydantic y documentación OpenAPI automática."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería JavaScript declarativa para construir interfaces de usuario interactivas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Eficiencia en la creación de UIs dinámicas y componente reutilizables para el tablero."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "Toolkit SQL y ORM para Python, facilita la interacción con bases de datos relacionales.",
+              "version_sugerida": "2.0.23",
+              "url_docs": "https://www.sqlalchemy.org/",
+              "por_que": "Abstracción de la base de datos, manejo de modelos y migraciones de esquema."
+            },
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Librería para manipulación y análisis de datos.",
+              "version_sugerida": "2.1.1",
+              "url_docs": "https://pandas.pydata.org/",
+              "por_que": "Procesamiento de datos para el modelo de IA y generación de métricas."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Librería de machine learning para Python.",
+              "version_sugerida": "1.3.2",
+              "url_docs": "https://scikit-learn.org/",
+              "por_que": "Implementación de modelos de clasificación y regresión para análisis de sentimiento y predicción."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_de_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/",
+              "por_que": "Robustez, soporte para JSONB, transacciones ACID y escalabilidad para datos de proyecto."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Aislamiento de dependencias, despliegue consistente y entorno de desarrollo reproducible."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "NLTK",
+              "categoria": "ia_ml",
+              "descripcion": "Suite de librerías para el procesamiento del lenguaje natural en Python.",
+              "version_sugerida": "3.8.1",
+              "url_docs": "https://www.nltk.org/",
+              "por_que": "Preprocesamiento de texto para análisis de sentimiento y extracción de características."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilidad de uso, fixtures potentes y ejecución de tests en paralelo."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Tablero Kanban/Scrum personalizable",
+          "Gestión de tareas, sprints y backlogs",
+          "Análisis de sentimiento en comentarios de tareas",
+          "Predicción de cuellos de botella en flujos de trabajo",
+          "Generación de resúmenes de sprint y reportes de progreso",
+          "Sugerencias de optimización de recursos"
+        ],
+        "casos_uso": [
+          "Equipos ágiles gestionando sus proyectos",
+          "Product Owners monitorizando el progreso y riesgos",
+          "Scrum Masters identificando impedimentos",
+          "Analistas buscando métricas de rendimiento del equipo",
+          "Gestores obteniendo visibilidad del estado del proyecto"
+        ],
+        "reglas_negocio": [
+          "Las tareas deben tener un estado (ej: Pendiente, En Progreso, Hecho).",
+          "Los sprints tienen fechas de inicio y fin definidas.",
+          "Solo los usuarios con rol de manager pueden ver reportes avanzados.",
+          "El análisis de sentimiento se basa en un umbral de confianza configurable.",
+          "Las predicciones de cuellos de botella se actualizan diariamente."
+        ],
+        "por_que_ia": "Se usa IA para analizar texto (comentarios de tareas) y obtener insights que no son obvios con métricas tradicionales, como el sentimiento del equipo o la identificación temprana de problemas potenciales.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de metodologías ágiles (Scrum/Kanban)",
+          "Experiencia con Python y frameworks web",
+          "Bases de JavaScript y React",
+          "Comprensión de conceptos de Machine Learning y NLP"
+        ],
+        "riesgos": [
+          "Complejidad en la integración de la IA con la lógica de negocio.",
+          "Precisión variable de los modelos de IA en diferentes contextos.",
+          "Escalabilidad de la base de datos a medida que crecen los proyectos.",
+          "Curva de aprendizaje para usuarios no familiarizados con herramientas de gestión.",
+          "Mantenimiento de la infraestructura de IA."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f4a7b8c9d0e1f234"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "6a5bf4c5c6c04490"
+      }
     }
   ],
   "ultimos_hashes": [
-    "e1f2a3b4c5d6e7f8",
     "f2a3b4c5d6e7f8a9",
     "6b9a1f8c2d0e4b7a",
     "b3a1c9d0e2f4a1b3",
@@ -19784,8 +19935,9 @@
     "f4b1e0a7d3c9f8e2",
     "e0f9a8b7c6d5e4f3",
     "b2c3d4e5f67890a1",
-    "c3d4e5f67890a1b2"
+    "c3d4e5f67890a1b2",
+    "f4a7b8c9d0e1f234"
   ],
-  "total_generados": 144,
-  "fecha_ultima_generacion": "2026-10-26T18:09:03.409704"
+  "total_generados": 145,
+  "fecha_ultima_generacion": "2026-10-26T23:32:27.268817"
 }
