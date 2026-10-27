@@ -19966,10 +19966,129 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "b96227cb2240f4c9"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f8a7b6c5d4e3f2a1",
+        "titulo": "Asistente de Código con IA para Documentación Automática",
+        "descripcion_corta": "Herramienta CLI que genera documentación técnica (docstrings) para código Python usando IA.",
+        "descripcion_detallada": "Una utilidad de línea de comandos que analiza archivos de código Python y, utilizando un modelo de lenguaje grande (LLM), genera automáticamente docstrings de estilo Google o NumPy para funciones, clases y métodos. El usuario puede especificar el estilo de documentación deseado y el nivel de detalle. La herramienta puede integrarse en flujos de trabajo de desarrollo (CI/CD) para asegurar que el código se mantenga bien documentado, ahorrando tiempo a los desarrolladores y mejorando la mantenibilidad del software.",
+        "nivel": "semisenior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "api",
+          "ia_ml",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "OpenAI API (GPT-4/GPT-3.5)",
+              "categoria": "libreria",
+              "descripcion": "Interfaz para interactuar con los modelos de lenguaje de OpenAI.",
+              "version_sugerida": "1.0.0",
+              "url_docs": "https://platform.openai.com/docs/api-reference",
+              "por_que": "Accede a modelos potentes para la generación de texto natural y la comprensión de código fuente."
+            },
+            {
+              "nombre": "Tree-sitter",
+              "categoria": "libreria",
+              "descripcion": "C-gramáticas y un parser generativo para código fuente.",
+              "version_sugerida": "0.21.0",
+              "url_docs": "https://tree-sitter.github.io/tree-sitter/",
+              "por_que": "Permite analizar la estructura sintáctica del código Python de forma robusta para identificar funciones, clases y argumentos."
+            },
+            {
+              "nombre": "Click",
+              "categoria": "libreria",
+              "descripcion": "Kit de herramientas de composición para crear interfaces de línea de comandos.",
+              "version_sugerida": "8.1.7",
+              "url_docs": "https://click.palletsprojects.com/en/8.1.x/",
+              "por_que": "Facilita la creación de una CLI intuitiva y fácil de usar para el asistente."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para el desarrollo, envío y ejecución de aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Empaqueta la CLI y sus dependencias, incluyendo la configuración de la API key de OpenAI, para una fácil distribución y ejecución."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Para probar la lógica de parsing del código y las interacciones con la API de OpenAI (usando mocks)."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis de código Python para identificar elementos documentables",
+          "Generación de docstrings en formatos Google/NumPy",
+          "Soporte para diferentes modelos de IA (GPT-3.5, GPT-4)",
+          "Integración vía CLI en flujos de desarrollo",
+          "Posibilidad de especificar nivel de detalle de la documentación"
+        ],
+        "casos_uso": [
+          "Mejora de la documentación de código existente",
+          "Asegurar la documentación de nuevo código",
+          "Ayuda a desarrolladores junior a escribir docstrings",
+          "Integración en pipelines CI/CD para validación de documentación",
+          "Generación rápida de documentación para prototipos"
+        ],
+        "reglas_negocio": [
+          "No modificar código fuente existente, solo añadir docstrings",
+          "Respetar el estilo de documentación especificado por el usuario",
+          "Priorizar la precisión y claridad de la documentación generada",
+          "Manejar errores de forma elegante (ej. código no válido, problemas de API)",
+          "Permitir al usuario revisar y editar la documentación antes de confirmarla"
+        ],
+        "por_que_ia": "Se utiliza un LLM (como GPT-4) para comprender el código fuente Python y generar descripciones textuales coherentes y precisas (docstrings), una tarea que requiere comprensión semántica y generación de lenguaje natural.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "Documentación de Python (PEP 257)",
+          "Estilos de docstrings (Google, NumPy)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 3,
+        "prerequisitos": [
+          "Conocimientos de Python",
+          "Experiencia con APIs de IA (OpenAI)",
+          "Comprensión de la estructura del código Python",
+          "Manejo básico de la línea de comandos",
+          "Familiaridad con los estilos de documentación de Python"
+        ],
+        "riesgos": [
+          "Costo de las llamadas a la API de OpenAI",
+          "Calidad variable de la documentación generada por la IA",
+          "Manejo de código complejo o poco idiomático",
+          "Dependencia de un proveedor externo de IA",
+          "Posibles problemas de privacidad si se envían fragmentos de código sensible a la API"
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f8a7b6c5d4e3f2a1"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "f4100d019605863a"
+      }
     }
   ],
   "ultimos_hashes": [
-    "6b9a1f8c2d0e4b7a",
     "b3a1c9d0e2f4a1b3",
     "c4d5e6f7a8b9c0d1",
     "c0d1e2f3a4b5c6d7",
@@ -20068,8 +20187,9 @@
     "b2c3d4e5f67890a1",
     "c3d4e5f67890a1b2",
     "f4a7b8c9d0e1f234",
-    "b1c2d3e4f567890a"
+    "b1c2d3e4f567890a",
+    "f8a7b6c5d4e3f2a1"
   ],
-  "total_generados": 146,
-  "fecha_ultima_generacion": "2026-10-27T03:29:39.791440"
+  "total_generados": 147,
+  "fecha_ultima_generacion": "2026-10-27T09:33:29.904302"
 }
