@@ -2710,5 +2710,77 @@
     "relevancia": 2,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Matthew Perry: la ausencia más evidente en el documental de Netflix es imposible de obviar",
+    "url": "https://www.cinemania.es/cinemania/series/matthew-perry-documental-netflix-friends-ausencia_7053849_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-27T17:55:31.764438+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "'Animal', la serie sensación de Luis Zahera en Netflix, ya tiene fecha de estreno para la temporada 2",
+    "url": "https://www.cinemania.es/cinemania/series/animal-serie-luis-zahera-netflix-fecha-estreno-temporada-2_7054086_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-27T17:55:31.764480+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 5,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "No lleva ni 3 días y ya es número 1 en Netflix: la miniserie española de 6 episodios que arrasa",
+    "url": "https://www.cinemania.es/cinemania/series/netflix-numero-1-miniserie-espanola-6-episodios-arrasa_7053494_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-27T17:55:31.764548+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Ni Netflix ni Prime Video para ver 'La bola negra' en streaming: esta es la plataforma que la estrenará en España",
+    "url": "https://www.cinemania.es/cinemania/noticias/bola-negra-streaming-ver-espana-netflix-prime-video-movistar_7050635_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-27T17:55:31.764585+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "video",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Así fue el 'caso Aniceto', el asesinato machista ocurrido en Galicia que inspira a la nueva miniserie de Netflix 'El Crimen de Pazos'",
+    "url": "https://www.cinemania.es/galicia/caso-aniceto-asesinato-machista-ocurrido-galicia-inspira-nueva-miniserie-netflix-crimen-pazos_7053464_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-27T17:55:31.764608+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "\"Un problema de 280 millones de dólares\": la gran apuesta de Netflix siembra las dudas entre quienes la han visto",
+    "url": "https://www.cinemania.es/cinemania/noticias/cronicas-narnia-netflix-problema-280-millones_7051189_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-27T17:55:31.764620+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
