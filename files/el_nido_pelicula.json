@@ -903,5 +903,17 @@
     "tipo": "noticia",
     "relevancia": 2,
     "pelicula": "El nido"
+  },
+  {
+    "titulo": "EL DEBATE CON SPOILERS DE ASSASSIN'S CREED SHADOWS | El Nido Podcast Ep. 10",
+    "url": "https://www.youtube.com/watch?v=1yvWvuAHcvU",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-27T11:59:37.424555+00:00",
+    "medio": "Uyimero",
+    "imagen": "https://i.ytimg.com/vi/1yvWvuAHcvU/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "El nido",
+    "enviada": true
   }
 ]
