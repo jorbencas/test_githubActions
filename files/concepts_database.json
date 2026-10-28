@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 159,
+    "total_concepts": 161,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-10-28T06:34:19.418153"
+    "last_scraped": "2026-10-28T13:46:58.456442"
   },
   "concepts": [
     {
@@ -2958,6 +2958,42 @@
       ],
       "cat": "interfaces",
       "scraped_at": "2026-10-18T16:20:42.462672"
+    },
+    {
+      "title": "PixelRAG: recuperar información de capturas de pantalla en lugar de texto",
+      "summary": "Casi todos los sistemas RAG que consultan la web empiezan igual: descargan el HTML, lo convierten en texto, lo trocean y lo indexan. Un grupo de Berkeley (SkyLab, BAIR y Berkeley NLP) propone saltarse",
+      "explanation": "Casi todos los sistemas RAG que consultan la web empiezan igual: descargan el HTML, lo convierten en texto, lo trocean y lo indexan. Un grupo de Berkeley (SkyLab, BAIR y Berkeley NLP) propone saltarse ese paso. Su proyecto,PixelRAG, renderiza cada página como imagen, indexa las capturas y deja que un modelo de visión y lenguaje lea la respuesta directamente de los píxeles. El código está enGitHubcon licencia Apache-2.0 y el trabajo se describe en el paper «PixelRAG: Web Screenshots Beat Text for Retrieval-Augmented Generation» (arXiv 2606.28344, 1 de junio de 2026).Qué se pierde al convertir una web en texto Aplanar HTML a texto descarta justo lo que más cuesta recuperar después: tablas con celdas combinadas, columnas, gráficos, infoboxes, el orden visual de la página. Un fragmento de texto sacado de una tabla puede quedar sin sus cabeceras, y entonces el modelo lector no encuentra la cifra o, peor, la asocia a la fila equivocada. Los PDF y las presentaciones sufren lo mismo. PixelRAG parte de la idea contraria: si el contenido está pensado para verse, se indexa como se ve.Cómo funciona El flujo tiene cuatro piezas:Renderizado:la herramientapixelshotabre la página en Chromium (Playwright/CDP), o rasteriza un PDF, y la parte en tiles, es decir, trozos de captura de tamaño manejable.Embeddings:cada tile se convierte en un vector con Qwen3-VL-Embedding, afinado con LoRA sobre capturas de pantalla y datos contrastivos preparados para ello.Índice:los vectores van a un índice FAISS",
+      "code_example": "pip install pixelrag\n\npixelshot https://en.wikipedia.org/wiki/Python --output ./tiles\npixelshot paper.pdf -o ./tiles --dpi 200",
+      "use_cases": [],
+      "difficulty": 3,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "rag_ai"
+      ],
+      "cat": "rag_ai",
+      "scraped_at": "2026-10-28T13:46:19.867383"
+    },
+    {
+      "title": "Seis patrones de diseño de sistemas para escalar sin romperse",
+      "summary": "Montar una aplicación que funcione es una cosa y que aguante el crecimiento, los picos de tráfico y los fallos de las piezas que no controlas es otra bien distinta. El diseño de sistemas consiste en l",
+      "explanation": "Montar una aplicación que funcione es una cosa y que aguante el crecimiento, los picos de tráfico y los fallos de las piezas que no controlas es otra bien distinta. El diseño de sistemas consiste en lo segundo, y casi siempre se reduce a elegir la solución más simple que resuelva el problema que tienes delante, no la más vistosa ni la que más sale en las charlas. Esta guía junta seis familias de patrones que cubren buena parte de lo que se encuentra un equipo de backend cuando algo empieza a ir lento o a romperse: escalar lecturas, escalar escrituras, separar ambas con CQRS, enviar datos en tiempo real, sacar el trabajo pesado de la petición y aguantar fallos. Para cada una va el criterio de cuándo aplicarla y qué se paga a cambio.1. Escalar las lecturas En la mayoría de aplicaciones las lecturas superan con mucho a las escrituras, a menudo el 90 % del tráfico o más. Por eso, cuando el sistema se ralentiza, lo razonable es empezar por ahí: suele ser la mejora más barata.Índices bien elegidos Sin el índice adecuado, la base de datos recorre muchas más filas de las necesarias. Antes de añadir nada, mira el plan de ejecución de la consulta lenta:EXPLAIN\nSELECT *\nFROM orders\nWHERE user_id = 42 AND status = 'paid'\nORDER BY created_at DESC\nLIMIT 20;",
+      "code_example": "EXPLAIN\nSELECT *\nFROM orders\nWHERE user_id = 42 AND status = 'paid'\nORDER BY created_at DESC\nLIMIT 20;",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "bases_datos"
+      ],
+      "cat": "bases_datos",
+      "scraped_at": "2026-10-28T13:46:21.226022"
     }
   ]
 }
