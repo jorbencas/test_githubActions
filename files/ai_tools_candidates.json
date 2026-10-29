@@ -1,5 +1,34 @@
 [
     {
+        "titulo": "agentscope-ai/QwenPaw",
+        "enlace": "https://github.com/agentscope-ai/QwenPaw",
+        "descripcion": "Your Personal AI Assistant; easy to install, deploy on your own machine or on the cloud; supports multiple chat apps with easily extensible capabilities.",
+        "lenguaje": "TypeScript",
+        "estrellas": "36880",
+        "fuente": "GitHub Search",
+        "tipo": "herramienta",
+        "_stars": 36880,
+        "_topics": [
+            "agent",
+            "agent-harness",
+            "agentscope",
+            "ai-agent",
+            "ai-agents",
+            "chatbot",
+            "harness-engineering",
+            "llm-tools",
+            "llms",
+            "loop-engineering",
+            "mcp",
+            "personal-ai-assistant",
+            "self-hosted",
+            "skills",
+            "super-agent",
+            "webui"
+        ],
+        "_source_type": "github_repo"
+    },
+    {
         "titulo": "Comfy-Org/Qwen-Image-2.1",
         "enlace": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1",
         "descripcion": "[] diffusion-single-file, comfyui, base_model:Qwen/Qwen-Image-2.1 — by ",
