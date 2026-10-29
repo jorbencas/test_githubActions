@@ -2794,5 +2794,89 @@
     "relevancia": 4,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "La miniserie coreana que arrasa en Netflix: 12 episodios para los amantes del drama hospitalario",
+    "url": "https://www.cinemania.es/cinemania/series/doctora-x-netflix-miniserie-corea-hospital_7050976_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-29T22:41:07.656591+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "'Orgullo y prejuicio': la miniserie de Netflix lanza el tráiler de la nueva adaptación de Jane Austen",
+    "url": "https://www.cinemania.es/cinemania/series/orgullo-prejuicio-miniserie-netflix-streaming-trailer-fecha-estreno_7039291_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-29T22:41:07.656638+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "trailer",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "'Animal', la serie sensación de Luis Zahera en Netflix, ya tiene fecha de estreno para la temporada 2",
+    "url": "https://www.cinemania.es/cinemania/series/confirmado-animal-serie-luis-zahera-netflix-fecha-estreno-temporada-2_7054086_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-29T22:41:07.656739+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 5,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Confirmado por Netflix: fecha de estreno de su nueva serie true crime marca España",
+    "url": "https://www.cinemania.es/cinemania/series/confirmado-por-netflix-fecha-estreno-nueva-serie-true-crime-marca-espana_7053515_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-29T22:41:07.656769+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Sydney Sweeney se atreve con esta saga de ciencia ficción gracias a Netflix: \"'Romeo y Julieta' en el espacio, pero sin Shakespeare\"",
+    "url": "https://www.cinemania.es/cinemania/noticias/sydney-sweeney-se-atreve-saga-ciencia-ficcion-gracias-netflix-romeo-julieta-espacio-pero-sin-shakespeare_7054361_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-29T22:41:07.656791+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Jose Coronado, Jaime Lorente y Aura Garrido protagonizarán la nueva miniserie de Netflix basada en una novela superventas",
+    "url": "https://www.cinemania.es/cinemania/series/jose-coronado-jaime-lorente-aura-garrido-miniserie-netflix-novela-superventas_7054314_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-29T22:41:07.656809+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 5,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Ni Netflix ni Prime Video para ver 'La bola negra' en streaming: esta es la plataforma que la estrenará en España",
+    "url": "https://www.cinemania.es/cinemania/noticias/bola-negra-streaming-donde-ver-espana-netflix-prime-video-estreno-movistar_7050635_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-29T22:41:07.656826+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "video",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
