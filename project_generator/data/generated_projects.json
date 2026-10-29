@@ -20086,10 +20086,129 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "f4100d019605863a"
       }
+    },
+    {
+      "proyecto": {
+        "id": "c1a2b3d4e5f67890",
+        "titulo": "Automated Documentation Generator for APIs",
+        "descripcion_corta": "Genera automáticamente documentación interactiva (Swagger/OpenAPI) para APIs RESTful escritas en Go, analizando el código fuente.",
+        "descripcion_detallada": "Esta herramienta CLI analiza el código fuente de una API RESTful escrita en Go para generar automáticamente especificaciones OpenAPI (anteriormente Swagger). Escanea las rutas definidas, los métodos HTTP, los parámetros de entrada (path, query, body) y las estructuras de respuesta para crear un archivo JSON/YAML que describe la API. La especificación generada puede ser utilizada por herramientas como Swagger UI para ofrecer una interfaz interactiva donde los desarrolladores pueden probar los endpoints directamente. El objetivo es reducir el esfuerzo manual en la documentación de APIs y mantenerla sincronizada con el código.",
+        "nivel": "semisenior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "api",
+          "cli",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web de alto rendimiento para Go.",
+              "version_sugerida": "1.19.0",
+              "url_docs": "https://gin-gonic.com/",
+              "por_que": "Popular y eficiente para construir APIs RESTful en Go, con un buen sistema de enrutamiento que es fácil de analizar."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "go-swagger",
+              "categoria": "libreria",
+              "descripcion": "Herramientas para generar y consumir APIs OpenAPI.",
+              "version_sugerida": "0.28.0",
+              "url_docs": "https://github.com/go-swagger/go-swagger",
+              "por_que": "Ecosistema robusto para trabajar con especificaciones OpenAPI en Go, incluyendo generación de modelos y documentación."
+            },
+            {
+              "nombre": "ast",
+              "categoria": "libreria",
+              "descripcion": "Paquete para analizar código Go.",
+              "version_sugerida": "1.20",
+              "url_docs": "https://pkg.go.dev/go/ast",
+              "por_que": "Permite parsear el código fuente Go para identificar rutas, métodos y definiciones de estructuras de datos."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Make",
+              "categoria": "infraestructura",
+              "descripcion": "Utilidad para gestionar la compilación de programas.",
+              "version_sugerida": "4.4",
+              "url_docs": "https://www.gnu.org/software/make/",
+              "por_que": "Simplifica el proceso de compilación de la herramienta CLI y la ejecución de tareas comunes como el análisis y la generación."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Framework de testing nativo de Go.",
+              "version_sugerida": "1.20",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Integrado en el lenguaje, permite escribir tests unitarios para la lógica de análisis del código y generación de la especificación."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis estático del código Go para encontrar definiciones de rutas.",
+          "Identificación de métodos HTTP (GET, POST, PUT, DELETE, etc.).",
+          "Extracción de parámetros de ruta, query y cuerpo de las peticiones.",
+          "Mapeo de estructuras Go a modelos de datos OpenAPI.",
+          "Generación de archivo de especificación OpenAPI (JSON/YAML).",
+          "Soporte para la integración con Swagger UI."
+        ],
+        "casos_uso": [
+          "Generar documentación para una nueva API RESTful en Go.",
+          "Mantener la documentación actualizada automáticamente a medida que el código evoluciona.",
+          "Facilitar las pruebas de API usando herramientas como Swagger UI.",
+          "Proveer una especificación estándar para la integración con otros servicios.",
+          "Automatizar parte del proceso de CI/CD para la documentación de APIs."
+        ],
+        "reglas_negocio": [
+          "La herramienta debe soportar al menos un framework popular (Gin).",
+          "La salida debe ser un archivo JSON o YAML válido según la especificación OpenAPI 3.0.",
+          "Los comentarios en el código fuente pueden ser usados opcionalmente para añadir descripciones.",
+          "La herramienta debe manejar errores de análisis de código de forma elegante.",
+          "El proceso de análisis debe ser razonablemente rápido para código de tamaño medio."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "OpenAPI Specification (OAS)",
+          "Documentación de Go estándar"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos sólidos de Go y desarrollo de APIs RESTful.",
+          "Comprensión de la especificación OpenAPI/Swagger.",
+          "Familiaridad con el análisis de código fuente (AST).",
+          "Experiencia con herramientas CLI."
+        ],
+        "riesgos": [
+          "La complejidad del código Go (interfaces, genéricos) puede dificultar el análisis estático preciso.",
+          "La herramienta podría no soportar todas las formas de definir rutas o manejar parámetros.",
+          "La integración con diferentes frameworks de Go puede requerir adaptaciones significativas.",
+          "La correcta asignación de tipos de datos entre Go y OpenAPI puede ser un desafío.",
+          "Dependencia de librerías externas que pueden cambiar o ser descontinuadas."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "c1a2b3d4e5f67890"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "8e875a986c307712"
+      }
     }
   ],
   "ultimos_hashes": [
-    "b3a1c9d0e2f4a1b3",
     "c4d5e6f7a8b9c0d1",
     "c0d1e2f3a4b5c6d7",
     "f4b8c1d0e2f7a3b9",
@@ -20188,8 +20307,9 @@
     "c3d4e5f67890a1b2",
     "f4a7b8c9d0e1f234",
     "b1c2d3e4f567890a",
-    "f8a7b6c5d4e3f2a1"
+    "f8a7b6c5d4e3f2a1",
+    "c1a2b3d4e5f67890"
   ],
-  "total_generados": 147,
-  "fecha_ultima_generacion": "2026-10-29T14:54:40.890222"
+  "total_generados": 148,
+  "fecha_ultima_generacion": "2026-10-29T20:49:21.403388"
 }
