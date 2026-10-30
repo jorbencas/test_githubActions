@@ -3615,5 +3615,77 @@
     "tipo": "noticia",
     "relevancia": 4,
     "pelicula": "Nueve reinas"
+  },
+  {
+    "titulo": "La crítica internacional se rinde ante la nueva serie de época de Netflix basada en un clásico de la literatura universal: “Un drama familiar conmovedor”",
+    "url": "https://www.cosmopolitan.com/es/entretenimiento-cultura/a71912797/netflix-serie-epoca-la-casa-de-la-pradera-clasico-literatura/",
+    "fecha_pub": "Fri, 21 Aug 2026 00:34:00 GMT",
+    "fecha_ts": "2026-10-30T22:12:02.649303+00:00",
+    "medio": "Cosmopolitan",
+    "imagen": "",
+    "tipo": "critica",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Queen of Chess | Official Trailer | Netflix",
+    "url": "https://www.youtube.com/watch?v=OIXpiTJUmmM",
+    "fecha_pub": "",
+    "fecha_ts": "2026-10-30T22:12:05.951271+00:00",
+    "medio": "Moviefone",
+    "imagen": "https://i.ytimg.com/vi/OIXpiTJUmmM/hqdefault.jpg",
+    "tipo": "trailer",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "'Salvador', la nueva serie de Netflix sobre grupos neonazis con Luis Tosar y Claudia Salas",
+    "url": "https://www.ecartelera.com/noticias/salvador-serie-netflix-neonazis-luis-tosar-claudia-salas-77875/",
+    "fecha_pub": "Fri, 26 Jul 2024 10:04:00 GMT",
+    "fecha_ts": "2026-10-30T22:12:16.820766+00:00",
+    "medio": "Desnudos",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix ficha al 'viceverso' Isaac para protagonizar su nueva serie policiaca con José Coronado, basada en la novela 'Jotadé'",
+    "url": "https://www.eldiario.es/vertele/series/netflix-anuncia-nueva-serie-policiaca-jose-coronado-basada-novela-jotade-lanza-primeras-imagenes-santiago-diaz_1_13615922.html",
+    "fecha_pub": "Mon, 26 Oct 2026 09:47:00 GMT",
+    "fecha_ts": "2026-10-30T22:12:18.215045+00:00",
+    "medio": "eldiario.es",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix pone fecha de estreno a la nueva temporada de 'Animal': la exitosa serie de Luis Zahera vuelve con nuevos capítulos",
+    "url": "https://www.abc.es/play/series/noticias/netflix-pone-fecha-estreno-nueva-temporada-animal-20261027192622-nt.html",
+    "fecha_pub": "Tue, 27 Oct 2026 11:26:00 GMT",
+    "fecha_ts": "2026-10-30T22:12:19.731201+00:00",
+    "medio": "ABC",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 6,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Review of Nine Queens",
+    "url": "https://www.imdb.com/review/rw2238421/",
+    "fecha_pub": "Sun, 18 Apr 2010 17:00:00 GMT",
+    "fecha_ts": "2026-10-30T22:12:20.116219+00:00",
+    "medio": "imdb.com",
+    "imagen": "",
+    "tipo": "critica",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
