@@ -2878,5 +2878,29 @@
     "relevancia": 2,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "José Coronado protagoniza la nueva serie española de Netflix que combina misterio, crímenes y suspenso",
+    "url": "https://www.diariouno.com.ar/series-y-peliculas/jose-coronado-protagoniza-la-nueva-serie-espanola-netflix-que-combina-misterio-crimenes-y-suspenso-n1599853",
+    "fecha_pub": "Fri, 25 Sep 2026 02:09:00 GMT",
+    "fecha_ts": "2026-10-30T05:30:57.368943+00:00",
+    "medio": "diariouno.com.ar",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "La película argentina «Nueve reinas» se convertirá en serie con Álvaro Morte y Patrick Criado",
+    "url": "https://www.lavozdegalicia.es/noticia/television/2026/04/27/pelicula-argentina-nueve-reinas-convertira-serie-alvaro-morte-patrick-criado/00031777300727206144102.htm",
+    "fecha_pub": "Mon, 27 Apr 2026 08:00:00 GMT",
+    "fecha_ts": "2026-10-30T05:31:15.296781+00:00",
+    "medio": "La Voz de Galicia",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
