@@ -967,5 +967,41 @@
     "relevancia": 2,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "Los ilusos 13+13 - Tráiler oficial",
+    "url": "https://www.msn.com/vi-AA246j9c",
+    "fecha_pub": "Mon, 25 May 2026 23:39:00 GMT",
+    "fecha_ts": "2026-10-30T05:30:57.447884+00:00",
+    "medio": "MSN",
+    "imagen": "",
+    "tipo": "trailer",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
+  },
+  {
+    "titulo": "Jonás Trueba, Itsaso Arana y Vito Sanz celebran el fin del amor y el trabajo colectivo",
+    "url": "https://cadenaser.com/nacional/2024/08/27/jonas-trueba-itsaso-arana-y-vito-sanz-celebran-el-fin-del-amor-y-el-trabajo-colectivo-cadena-ser/",
+    "fecha_pub": "Tue, 27 Aug 2024 03:00:00 GMT",
+    "fecha_ts": "2026-10-30T05:31:11.717467+00:00",
+    "medio": "Cadena SER",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
+  },
+  {
+    "titulo": "'Los ilusos', de Jonás Trueba, y 'El hombre tranquilo', entre las películas de Los Jueves del Trueba",
+    "url": "https://www.diariovasco.com/v/20130426/cultura/ilusos-jonas-trueba-hombre-20130426.html",
+    "fecha_pub": "Thu, 25 Apr 2013 17:51:00 GMT",
+    "fecha_ts": "2026-10-30T05:31:15.744220+00:00",
+    "medio": "Diario",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
