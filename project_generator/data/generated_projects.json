@@ -20206,10 +20206,165 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "8e875a986c307712"
       }
+    },
+    {
+      "proyecto": {
+        "id": "d14e3a8f-7b1c-4d0e-8f3a-1e9f8d7c6b5a",
+        "titulo": "Sistema de Gestión de Proyectos Colaborativo con IA",
+        "descripcion_corta": "Plataforma web fullstack para gestión de proyectos, con IA para sugerencias de tareas y análisis de progreso.",
+        "descripcion_detallada": "Desarrollo de una aplicación web completa que permita a equipos gestionar proyectos, asignar tareas, seguir el progreso y colaborar en tiempo real. Incluirá funcionalidades de IA para analizar el avance del proyecto, predecir cuellos de botella y sugerir la asignación de tareas basadas en la carga de trabajo y habilidades de los miembros. Se integrará un chat para comunicación interna y un sistema de notificaciones.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "fullstack",
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs, con tipado Pydantic y documentación OpenAPI automática.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Excelente rendimiento asíncrono y validación de datos robusta para la API backend."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario interactivas y declarativas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear una UI dinámica y desacoplada para la aplicación web."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "ORM y toolkit SQL para Python, facilita la interacción con bases de datos relacionales.",
+              "version_sugerida": "2.0.20",
+              "url_docs": "https://www.sqlalchemy.org/",
+              "por_que": "Abstrae las interacciones con la base de datos, permitiendo un código más limpio y portable."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos basada en anotaciones de tipo de Python.",
+              "version_sugerida": "2.4.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para FastAPI para la validación automática de datos de entrada y salida."
+            },
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por modelos de lenguaje.",
+              "version_sugerida": "0.0.300",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Facilita la integración de modelos de IA para el análisis de texto y la generación de sugerencias."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto de código abierto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto, escalable y con buen soporte para JSONB, útil para metadatos de proyectos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura entornos de desarrollo y producción consistentes y simplifica el despliegue."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "GPT-4",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo de lenguaje grande de OpenAI, capaz de entender y generar texto complejo.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://openai.com/gpt-4/",
+              "por_que": "Utilizado para analizar el progreso del proyecto, predecir riesgos y sugerir tareas de forma inteligente."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python que facilita la escritura de pruebas simples y complejas.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Potente y flexible para escribir tests unitarios y de integración para el backend y la lógica de IA."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de proyectos y tareas",
+          "Colaboración en tiempo real (chat, comentarios)",
+          "Seguimiento de progreso y visualización de Gantt",
+          "Análisis de IA para predicción de cuellos de botella",
+          "Sugerencias de asignación de tareas basadas en IA",
+          "Sistema de notificaciones personalizables"
+        ],
+        "casos_uso": [
+          "Equipos de desarrollo gestionando sprints ágiles",
+          "Agencias de marketing coordinando campañas",
+          "Consultores realizando seguimiento de proyectos de clientes",
+          "Estudiantes colaborando en proyectos académicos",
+          "Gestión de tareas personales con asistencia de IA"
+        ],
+        "reglas_negocio": [
+          "Cada tarea debe pertenecer a un proyecto.",
+          "Las tareas pueden tener dependencias.",
+          "Los usuarios solo pueden ver y editar proyectos a los que han sido asignados.",
+          "El progreso de la tarea se actualiza manualmente o se infiere por IA.",
+          "Las sugerencias de IA se basan en datos históricos y carga de trabajo actual."
+        ],
+        "por_que_ia": "Se utiliza IA (GPT-4 vía LangChain) para analizar la descripción de las tareas, el progreso reportado y la carga de trabajo de los usuarios, con el fin de predecir posibles retrasos y sugerir la asignación óptima de nuevas tareas, mejorando la eficiencia del equipo.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de OpenAI",
+          "API de LangChain"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos sólidos de Python y JavaScript.",
+          "Experiencia con FastAPI y React.",
+          "Comprensión de patrones de diseño web fullstack.",
+          "Familiaridad con el uso de APIs de IA.",
+          "Conocimientos básicos de bases de datos SQL."
+        ],
+        "riesgos": [
+          "Complejidad en la integración de la IA y el backend.",
+          "Escalabilidad de la base de datos bajo alta carga.",
+          "Manejo de concurrencia en la colaboración en tiempo real.",
+          "Costos asociados al uso de la API de OpenAI.",
+          "Seguridad de los datos del proyecto."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "1a2b3c4d5e6f7890"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "469ed9f7de95acdf"
+      }
     }
   ],
   "ultimos_hashes": [
-    "c4d5e6f7a8b9c0d1",
     "c0d1e2f3a4b5c6d7",
     "f4b8c1d0e2f7a3b9",
     "d8e9f0a1b2c3d4e5",
@@ -20308,8 +20463,9 @@
     "f4a7b8c9d0e1f234",
     "b1c2d3e4f567890a",
     "f8a7b6c5d4e3f2a1",
-    "c1a2b3d4e5f67890"
+    "c1a2b3d4e5f67890",
+    "1a2b3c4d5e6f7890"
   ],
-  "total_generados": 148,
-  "fecha_ultima_generacion": "2026-10-30T04:07:56.999325"
+  "total_generados": 149,
+  "fecha_ultima_generacion": "2026-10-30T14:46:43.636016"
 }
