@@ -20541,11 +20541,301 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "6920798d88846bcf"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f7d3a1b9c8e0f2a1",
+        "titulo": "Generador de Documentación Técnica con IA",
+        "descripcion_corta": "Herramienta web que genera documentación técnica a partir de código fuente, usando IA para la explicación y resumen.",
+        "descripcion_detallada": "Aplicación web full-stack donde los usuarios suben fragmentos de código (Python, JavaScript, Go). La IA analiza el código, identifica patrones, explica la lógica y genera automáticamente la documentación en formato Markdown. Incluye un editor para refinar la documentación generada y opciones para exportarla. El objetivo es agilizar la creación de READMEs, comentarios de código y documentación interna.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs, con tipado automático y validación de datos.",
+              "version_sugerida": "0.110.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ideal para crear la API backend que procesará el código y se comunicará con el modelo de IA, gracias a su rendimiento y facilidad de uso."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario interactivas y declarativas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear una interfaz de usuario moderna y reactiva para la aplicación web."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en anotaciones de tipo de Python.",
+              "version_sugerida": "2.7.0",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Utilizado por FastAPI para la validación automática de requests y responses, asegurando la integridad de los datos."
+            },
+            {
+              "nombre": "Tree-sitter",
+              "categoria": "libreria",
+              "descripcion": "Un parser incremental para múltiples lenguajes de programación.",
+              "version_sugerida": "0.22.4",
+              "url_docs": "https://tree-sitter.github.io/tree-sitter/",
+              "por_que": "Necesario para analizar la estructura sintáctica del código fuente subido por el usuario de forma eficiente y precisa."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita la gestión de dependencias y la replicación del entorno de desarrollo y producción."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API (GPT-4o)",
+              "categoria": "ia_ml",
+              "descripcion": "Acceso a modelos de lenguaje avanzados para tareas de comprensión y generación de texto.",
+              "version_sugerida": null,
+              "url_docs": "https://platform.openai.com/docs/models/gpt-4o",
+              "por_que": "Se utiliza para analizar el código fuente, entender su propósito y generar explicaciones coherentes y detalladas en lenguaje natural."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python, con una sintaxis simple y potentes funcionalidades.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Para escribir pruebas unitarias y de integración robustas para la API y la lógica de procesamiento del código."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Carga de código fuente (Python, JS, Go)",
+          "Análisis sintáctico con Tree-sitter",
+          "Generación de documentación con IA (GPT-4o)",
+          "Editor Markdown para refinar resultados",
+          "Exportación de documentación (Markdown)",
+          "Interfaz de usuario web interactiva"
+        ],
+        "casos_uso": [
+          "Generar rápidamente READMEs para proyectos.",
+          "Documentar funciones y clases complejas.",
+          "Ayudar a desarrolladores junior a entender código existente.",
+          "Mantener la documentación técnica actualizada automáticamente.",
+          "Crear guías de estilo de código con explicaciones."
+        ],
+        "reglas_negocio": [
+          "El análisis de código se realiza en el backend para proteger la propiedad intelectual.",
+          "Los límites de tamaño de archivo y complejidad del código pueden aplicarse.",
+          "La generación de documentación está sujeta a los límites de la API de IA.",
+          "Los usuarios deben aceptar los términos de uso relacionados con la IA y la privacidad del código.",
+          "Se soporta un número limitado de lenguajes de programación inicialmente."
+        ],
+        "por_que_ia": "Se utiliza IA (GPT-4o) para interpretar la semántica del código y generar explicaciones en lenguaje natural, superando las limitaciones de los analizadores sintácticos estáticos.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de OpenAI",
+          "npm para dependencias de React"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y JavaScript (React).",
+          "Experiencia con APIs RESTful.",
+          "Familiaridad con el uso de contenedores (Docker).",
+          "Comprensión básica de análisis sintáctico de código."
+        ],
+        "riesgos": [
+          "La calidad de la documentación generada por IA puede variar.",
+          "Costos asociados al uso de la API de OpenAI.",
+          "Manejo de código muy complejo o ambiguo.",
+          "Seguridad y privacidad del código subido por los usuarios.",
+          "Dependencia de la disponibilidad y cambios en la API de OpenAI."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:00:00Z",
+        "hash_unicidad": "f7d3a1b9c8e0f2a1"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "63f2a1507c1e6bec"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "b8c9d0e1f2a3b4c5",
+        "titulo": "Asistente de Refactorización de Código con IA",
+        "descripcion_corta": "Herramienta CLI que sugiere y aplica refactorizaciones de código basadas en patrones de código muerto y complejidad.",
+        "descripcion_detallada": "Una herramienta de línea de comandos (CLI) que analiza un proyecto de código (inicialmente Python). Utiliza análisis estático y un modelo de IA para identificar código 'muerto' (no utilizado), funciones o clases de alta complejidad ciclomática y posibles mejoras de legibilidad. Ofrece sugerencias de refactorización y, opcionalmente, puede aplicar los cambios de forma segura (con backups o commits).",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "cli",
+          "ia_ml",
+          "devops",
+          "testing"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Typer",
+              "categoria": "framework",
+              "descripcion": "Framework para crear CLIs en Python basado en type hints.",
+              "version_sugerida": "0.9.0",
+              "url_docs": "https://typer.tiangolo.com/",
+              "por_que": "Simplifica la creación de la interfaz de línea de comandos, el manejo de argumentos y la validación de entradas."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "AST (Abstract Syntax Trees)",
+              "categoria": "libreria",
+              "descripcion": "Módulo estándar de Python para analizar la estructura sintáctica del código Python.",
+              "version_sugerida": null,
+              "url_docs": "https://docs.python.org/3/library/ast.html",
+              "por_que": "Esencial para realizar análisis estático profundo del código, identificar nodos y su relación."
+            },
+            {
+              "nombre": "Radon",
+              "categoria": "libreria",
+              "descripcion": "Herramienta para calcular métricas de complejidad de código Python.",
+              "version_sugerida": "4.3.0",
+              "url_docs": "https://radon.readthedocs.io/",
+              "por_que": "Proporciona métricas como la complejidad ciclomática, Halstead y LOC, útiles para identificar código complejo."
+            },
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para simplificar la creación de aplicaciones con LLMs.",
+              "version_sugerida": "0.1.15",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Orquesta las interacciones con el modelo de IA, gestionando prompts y parsing de respuestas para sugerencias de refactorización."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Git",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de control de versiones distribuido.",
+              "version_sugerida": "2.39.2",
+              "url_docs": "https://git-scm.com/doc",
+              "por_que": "Fundamental para gestionar los cambios en el código, permitiendo crear branches, commits y reverting de forma segura."
+            },
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Para empaquetar la CLI y sus dependencias, asegurando la consistencia entre entornos.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita la instalación y ejecución de la herramienta en diferentes sistemas operativos y entornos de CI/CD."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API (GPT-4o)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo de lenguaje avanzado para entender el contexto del código y sugerir refactorizaciones semánticas.",
+              "version_sugerida": null,
+              "url_docs": "https://platform.openai.com/docs/models/gpt-4o",
+              "por_que": "Complementa el análisis estático y métricas de complejidad, ofreciendo sugerencias sobre cómo mejorar la legibilidad, la eficiencia y la estructura del código basándose en patrones de programación."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Para probar exhaustivamente la CLI, el análisis estático, la integración con Radon y las interacciones con la IA."
+            },
+            {
+              "nombre": "Coverage.py",
+              "categoria": "testing",
+              "descripcion": "Generador de informes de cobertura de código.",
+              "version_sugerida": "7.2.5",
+              "url_docs": "https://coverage.readthedocs.io/",
+              "por_que": "Asegura que las pruebas cubran adecuadamente la lógica de la herramienta de refactorización."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis estático de código Python (AST).",
+          "Cálculo de complejidad ciclomática (Radon).",
+          "Identificación de código 'muerto'.",
+          "Sugerencias de refactorización basadas en IA.",
+          "Aplicación opcional y segura de refactorizaciones (con Git).",
+          "Interfaz CLI amigable (Typer)."
+        ],
+        "casos_uso": [
+          "Reducir la deuda técnica en proyectos Python.",
+          "Mejorar la mantenibilidad y legibilidad del código.",
+          "Identificar y eliminar código obsoleto o no utilizado.",
+          "Optimizar funciones y clases de alta complejidad.",
+          "Integrar como paso en pipelines CI/CD para mantener la calidad del código."
+        ],
+        "reglas_negocio": [
+          "Se requiere un proyecto Python válido para el análisis.",
+          "Las operaciones de refactorización destructivas requieren confirmación explícita.",
+          "La herramienta opera sobre una rama Git separada o un backup.",
+          "Se soporta un subconjunto de refactorizaciones inicialmente.",
+          "Las sugerencias de IA son recomendaciones, no órdenes."
+        ],
+        "por_que_ia": "La IA (GPT-4o) se usa para ir más allá del análisis sintáctico y métricas, comprendiendo la intención del código y sugiriendo refactorizaciones que mejoren la claridad y la eficiencia, algo que el análisis estático puro no puede hacer.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de OpenAI",
+          "Repositorios de código Python"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia sólida en Python y su ecosistema.",
+          "Comprensión de análisis estático de código y métricas de complejidad.",
+          "Conocimiento de Git y flujos de trabajo de desarrollo.",
+          "Experiencia con herramientas CLI y frameworks como Typer.",
+          "Familiaridad con el uso de APIs de IA (OpenAI)."
+        ],
+        "riesgos": [
+          "La aplicación automática de refactorizaciones podría introducir bugs.",
+          "La IA puede malinterpretar el código o sugerir refactorizaciones incorrectas.",
+          "El análisis de código muy grande puede ser lento o consumir mucha memoria.",
+          "Compatibilidad con diferentes versiones de Python y librerías.",
+          "Dependencia de la estabilidad y costos de la API de IA."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:00:00Z",
+        "hash_unicidad": "b8c9d0e1f2a3b4c5"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "63f2a1507c1e6bec"
+      }
     }
   ],
   "ultimos_hashes": [
-    "f4b8c1d0e2f7a3b9",
-    "d8e9f0a1b2c3d4e5",
     "f1a3b5c7d9e1f3a5",
     "a8b0c2d4e6f8a0b2",
     "e3f5a7c9b1d3e5a7",
@@ -20643,8 +20933,10 @@
     "f8a7b6c5d4e3f2a1",
     "c1a2b3d4e5f67890",
     "1a2b3c4d5e6f7890",
-    "d4e5f67890123456"
+    "d4e5f67890123456",
+    "f7d3a1b9c8e0f2a1",
+    "b8c9d0e1f2a3b4c5"
   ],
-  "total_generados": 150,
-  "fecha_ultima_generacion": "2026-10-31T10:09:13.983250"
+  "total_generados": 152,
+  "fecha_ultima_generacion": "2026-10-31T16:44:40.781860"
 }
