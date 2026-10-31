@@ -20833,12 +20833,469 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "63f2a1507c1e6bec"
       }
+    },
+    {
+      "proyecto": {
+        "id": "d5a1b2c3d4e5f6a7",
+        "titulo": "Sistema de Gestión de Incidencias con IA",
+        "descripcion_corta": "Plataforma web para reportar, gestionar y priorizar incidencias técnicas, con IA para clasificación automática.",
+        "descripcion_detallada": "Una aplicación web full-stack donde los usuarios pueden registrar incidencias (bugs, solicitudes, etc.) con descripciones, capturas de pantalla y severidad. El sistema utiliza un modelo de IA para clasificar automáticamente las incidencias por tipo y sugerir la prioridad basándose en el texto y metadatos. Los administradores pueden ver dashboards, asignar incidencias a equipos y seguir el progreso. Incluye notificaciones, historial y roles de usuario (reportero, asignado, administrador).",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs, con soporte para async y validación de datos automática.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ideal para APIs RESTful con alta concurrencia, validación de datos con Pydantic y generación automática de documentación OpenAPI."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario declarativas e interactivas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Componentes reutilizables y un modelo de programación eficiente para la UI, facilitando la creación de interfaces dinámicas."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "Toolkit SQL y ORM para Python, permite trabajar con bases de datos relacionales de forma eficiente.",
+              "version_sugerida": "2.0.23",
+              "url_docs": "https://www.sqlalchemy.org/",
+              "por_que": "Abstracción sobre la base de datos relacional, facilitando las operaciones CRUD y la gestión de esquemas."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en type hints de Python.",
+              "version_sugerida": "2.5.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para FastAPI para definir modelos de datos, validar entrada/salida y mejorar la seguridad de la API."
+            },
+            {
+              "nombre": "Transformers (Hugging Face)",
+              "categoria": "libreria",
+              "descripcion": "Proporciona miles de modelos pre-entrenados para tareas de NLP y herramientas para entrenarlos.",
+              "version_sugerida": "4.35.2",
+              "url_docs": "https://huggingface.co/docs/transformers/index",
+              "por_que": "Permite integrar fácilmente modelos de lenguaje para la clasificación automática de texto de las incidencias."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto de código abierto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto, escalable y soporta tipos de datos avanzados (JSONB), ideal para almacenar incidencias y metadatos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, facilitando la gestión de dependencias."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "BERT (via Transformers)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo Transformer para comprensión del lenguaje natural, útil para clasificación de texto.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://huggingface.co/docs/transformers/model_doc/bert",
+              "por_que": "Excelente para entender el contexto y la semántica del texto de las incidencias, permitiendo una clasificación precisa."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python que facilita la escritura de tests simples y escalables.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite crear tests unitarios y de integración robustos para la API y la lógica de negocio."
+            },
+            {
+              "nombre": "React Testing Library",
+              "categoria": "testing",
+              "descripcion": "Librería para testear componentes React de forma que se asemeje a como el usuario interactúa.",
+              "version_sugerida": "14.0.2",
+              "url_docs": "https://testing-library.com/docs/react-testing-library/intro/",
+              "por_que": "Fomenta mejores prácticas de testing en la UI, centrándose en la accesibilidad y la experiencia del usuario."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro y visualización de incidencias",
+          "Clasificación automática de incidencias por IA",
+          "Asignación y seguimiento de incidencias",
+          "Gestión de usuarios y roles",
+          "Notificaciones en tiempo real",
+          "Dashboard de resumen y métricas"
+        ],
+        "casos_uso": [
+          "Un usuario reporta un bug en el software.",
+          "Un técnico de soporte clasifica y asigna una nueva incidencia.",
+          "Un manager revisa el estado general de las incidencias abiertas.",
+          "El sistema sugiere la prioridad de una incidencia basada en su descripción.",
+          "Un equipo recibe una notificación sobre una incidencia asignada."
+        ],
+        "reglas_negocio": [
+          "Las incidencias deben tener título y descripción.",
+          "Solo usuarios autenticados pueden reportar incidencias.",
+          "Las incidencias se asignan a equipos o usuarios específicos.",
+          "La IA solo sugiere, la prioridad final la establece un humano.",
+          "El historial de cambios de una incidencia se registra"
+        ],
+        "por_que_ia": "Se utiliza un modelo de lenguaje (BERT) para analizar el texto de las descripciones de las incidencias, clasificándolas por tipo (bug, feature request, etc.) y sugiriendo una prioridad inicial, lo que agiliza el proceso de triaje y asignación.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos de Python y JavaScript.",
+          "Experiencia con frameworks web (FastAPI, React).",
+          "Comprensión de bases de datos relacionales.",
+          "Nociones de Machine Learning y NLP."
+        ],
+        "riesgos": [
+          "La precisión del modelo de IA puede ser insuficiente.",
+          "La escalabilidad de la base de datos bajo alta carga.",
+          "Complejidad en la gestión de estados de las incidencias.",
+          "Seguridad en el manejo de datos sensibles.",
+          "Integración de frontend y backend puede ser desafiante."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "d5a1b2c3d4e5f6a7"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "19428bc8c3787b09"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "e8f9a0b1c2d3e4f5",
+        "titulo": "Analizador de Redes Sociales con IA",
+        "descripcion_corta": "Herramienta CLI para recolectar y analizar menciones de marca en redes sociales, identificando tendencias y sentimiento.",
+        "descripcion_detallada": "Una aplicación de línea de comandos (CLI) que se conecta a APIs de redes sociales (ej. Twitter/X) para recolectar menciones de una marca o palabras clave específicas. Utiliza un modelo de IA para realizar análisis de sentimiento y topic modeling sobre los textos recolectados. Genera reportes en formato CSV o JSON con métricas clave como volumen de menciones, sentimiento promedio, temas recurrentes y usuarios influyentes. Diseñado para equipos de marketing y comunicación.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "cli",
+          "api",
+          "ia_ml",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "Tweepy",
+              "categoria": "libreria",
+              "descripcion": "Cliente de Python para la API de Twitter (X).",
+              "version_sugerida": "4.10.0",
+              "url_docs": "https://docs.tweepy.org/",
+              "por_que": "Facilita la autenticación y la recolección de datos de Twitter de forma programática."
+            },
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Librería para manipulación y análisis de datos.",
+              "version_sugerida": "2.1.3",
+              "url_docs": "https://pandas.pydata.org/docs/",
+              "por_que": "Estructura los datos recolectados en DataFrames, facilitando su procesamiento, análisis y exportación."
+            },
+            {
+              "nombre": "NLTK / spaCy",
+              "categoria": "libreria",
+              "descripcion": "Librerías para procesamiento del lenguaje natural en Python.",
+              "version_sugerida": "NLTK 3.8.6 / spaCy 3.7.2",
+              "url_docs": "https://www.nltk.org/%20/%20https://spacy.io/",
+              "por_que": "Proporcionan herramientas para tokenización, lematización y análisis de sentimiento (con modelos adicionales)."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Librería para machine learning en Python.",
+              "version_sugerida": "1.3.2",
+              "url_docs": "https://scikit-learn.org/stable/",
+              "por_que": "Contiene implementaciones eficientes de algoritmos para topic modeling (LDA) y análisis de sentimiento."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para crear, desplegar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Aisla las dependencias y facilita la ejecución del script CLI en cualquier entorno."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Topic Modeling (LDA)",
+              "categoria": "ia_ml",
+              "descripcion": "Algoritmo para descubrir temas abstractos que ocurren en una colección de documentos.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.LatentDirichletAllocation.html",
+              "por_que": "Identifica los temas principales discutidos en las menciones de redes sociales."
+            },
+            {
+              "nombre": "Análisis de Sentimiento",
+              "categoria": "ia_ml",
+              "descripcion": "Proceso de determinar la polaridad emocional (positiva, negativa, neutral) de un texto.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://github.com/cjhbes/nltk-sentiment",
+              "por_que": "Evalúa la percepción pública de la marca basándose en las menciones."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir tests unitarios para las funciones de recolección y análisis de datos, asegurando su correcto funcionamiento."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Click",
+              "categoria": "otros",
+              "descripcion": "Framework para crear CLIs bonitas y robustas en Python.",
+              "version_sugerida": "8.1.7",
+              "url_docs": "https://click.palletsprojects.com/",
+              "por_que": "Simplifica la creación de comandos, argumentos y opciones para la interfaz de línea de comandos."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Conexión a APIs de redes sociales (ej. Twitter/X).",
+          "Recolección de menciones por palabra clave.",
+          "Análisis de sentimiento de las menciones.",
+          "Identificación de temas principales (Topic Modeling).",
+          "Generación de reportes en CSV/JSON.",
+          "Interfaz de línea de comandos (CLI)."
+        ],
+        "casos_uso": [
+          "Un community manager monitoriza la reputación online de su marca.",
+          "Un analista de marketing identifica las quejas o elogios más comunes.",
+          "Un equipo de producto descubre temas emergentes relacionados con su sector.",
+          "Se genera un informe semanal del volumen y sentimiento de las menciones.",
+          "Se identifican usuarios influyentes que hablan de la marca."
+        ],
+        "reglas_negocio": [
+          "El análisis se realiza sobre datos públicos disponibles.",
+          "Las claves API deben ser gestionadas de forma segura.",
+          "El número de peticiones a las APIs debe respetar los límites de rate limiting.",
+          "Los reportes deben ser consistentes en formato.",
+          "El análisis de sentimiento puede tener un margen de error."
+        ],
+        "por_que_ia": "Se emplea Topic Modeling (LDA) para descubrir los temas latentes en grandes volúmenes de texto de redes sociales, y análisis de sentimiento para cuantificar la polaridad de las opiniones, proporcionando insights valiosos sobre la percepción pública de una marca o tema.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "API de Twitter/X (requiere cuenta de desarrollador)."
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python.",
+          "Experiencia con librerías de análisis de datos (Pandas).",
+          "Comprensión de NLP y Machine Learning.",
+          "Familiaridad con el uso de APIs REST.",
+          "Experiencia básica con la línea de comandos."
+        ],
+        "riesgos": [
+          "Cambios en las APIs de redes sociales que rompan la recolección.",
+          "Limitaciones en la precisión de los modelos de IA (sentimiento, topics).",
+          "Volumen de datos excesivo puede generar problemas de rendimiento.",
+          "Gestión de errores y excepciones durante la recolección.",
+          "Dependencia de servicios externos (APIs)."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "e8f9a0b1c2d3e4f5"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "19428bc8c3787b09"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f2a1b0c9d8e7f6a5",
+        "titulo": "Generador de Documentación Técnica Asistido por IA",
+        "descripcion_corta": "Herramienta que genera documentación técnica (READMEs, comentarios) a partir de código fuente usando IA.",
+        "descripcion_detallada": "Una aplicación de escritorio o web que analiza un proyecto de código fuente (Python, JavaScript, etc.) y genera automáticamente archivos de documentación como READMEs, comentarios de funciones/clases y diagramas básicos (ej. de dependencias). Utiliza un modelo de IA para entender el código, inferir su propósito y generar descripciones legibles y precisas. Ideal para desarrolladores que buscan acelerar la creación y mantenimiento de la documentación.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "desktop",
+          "web",
+          "api",
+          "ia_ml",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "Electron",
+              "categoria": "framework",
+              "descripcion": "Framework para crear aplicaciones de escritorio nativas con tecnologías web (HTML, CSS, JS).",
+              "version_sugerida": "27.0.0",
+              "url_docs": "https://www.electronjs.org/docs/latest",
+              "por_que": "Permite construir una aplicación de escritorio multiplataforma usando un stack web conocido, facilitando la interfaz y la integración con el sistema de archivos."
+            },
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de Node.js para construir aplicaciones del lado del servidor eficientes y escalables.",
+              "version_sugerida": "10.1.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Proporciona una arquitectura modular y robusta para la API backend que maneja la lógica de análisis de código y la interacción con la IA."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Tree-sitter",
+              "categoria": "libreria",
+              "descripcion": "Herramienta para construir parsers incrementales para lenguajes de programación.",
+              "version_sugerida": "0.22.0",
+              "url_docs": "https://tree-sitter.github.io/tree-sitter/",
+              "por_que": "Permite analizar la estructura sintáctica del código fuente de forma fiable para diferentes lenguajes."
+            },
+            {
+              "nombre": "LangChain.js",
+              "categoria": "libreria",
+              "descripcion": "Framework para simplificar la creación de aplicaciones impulsadas por LLMs.",
+              "version_sugerida": "0.0.170",
+              "url_docs": "https://js.langchain.com/",
+              "por_que": "Facilita la integración con modelos de lenguaje grandes (LLMs) para generar el texto de la documentación a partir de la información extraída del código."
+            },
+            {
+              "nombre": "Marked",
+              "categoria": "libreria",
+              "descripcion": "Implementación rápida de Markdown Parser y compiler.",
+              "version_sugerida": "5.1.1",
+              "url_docs": "https://marked.js.org/",
+              "por_que": "Convierte el texto generado por la IA en formato Markdown para READMEs y comentarios."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para contenerizar aplicaciones.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Permite empaquetar la aplicación Electron y su backend NestJS, facilitando la distribución y ejecución."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "GPT-4 / Claude 3",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de lenguaje grandes (LLMs) de última generación.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://openai.com/gpt-4/%20https://www.anthropic.com/index/claude-3",
+              "por_que": "Capaces de entender código complejo y generar descripciones coherentes y detalladas para la documentación."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript centrado en simplicidad.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Para testear tanto la lógica del backend (NestJS) como los componentes de la UI de la aplicación Electron."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis de código fuente (Python, JS, TS).",
+          "Generación automática de README.md.",
+          "Generación de comentarios JSDoc/Docstring para funciones/clases.",
+          "Soporte para diagramas básicos de dependencias.",
+          "Interfaz gráfica intuitiva (Electron).",
+          "Integración con APIs de LLMs (OpenAI, Anthropic)."
+        ],
+        "casos_uso": [
+          "Un desarrollador necesita crear un README para un nuevo proyecto rápidamente.",
+          "Un equipo quiere documentar funciones legacy con comentarios claros.",
+          "Un líder técnico genera diagramas de dependencias para entender la arquitectura.",
+          "Un desarrollador junior recibe ayuda de la IA para documentar su código.",
+          "Generar documentación consistente en múltiples proyectos."
+        ],
+        "reglas_negocio": [
+          "La herramienta debe soportar múltiples lenguajes de programación.",
+          "El análisis de código debe ser preciso y seguro (no modificar el código original).",
+          "Las claves API de los LLMs deben ser manejadas de forma segura.",
+          "La generación de documentación debe ser configurable (nivel de detalle, formato).",
+          "El usuario debe poder revisar y editar la documentación generada."
+        ],
+        "por_que_ia": "Los LLMs como GPT-4 o Claude 3 son excepcionalmente buenos entendiendo el código fuente, su lógica y propósito, permitiendo generar descripciones de alta calidad para funciones, clases y módulos, así como resúmenes para READMEs, que serían tediosos de escribir manualmente.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "APIs de modelos de lenguaje (OpenAI, Anthropic, etc.)."
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 8,
+        "prerequisitos": [
+          "Experiencia sólida en TypeScript y Node.js.",
+          "Conocimientos de arquitecturas de aplicaciones (cliente-servidor, microservicios).",
+          "Comprensión de parsers y análisis de código.",
+          "Experiencia con APIs de IA/LLMs.",
+          "Familiaridad con frameworks de testing."
+        ],
+        "riesgos": [
+          "La calidad de la documentación generada puede variar mucho según el LLM y el código.",
+          "Soporte limitado para lenguajes de programación menos comunes.",
+          "Costos asociados al uso de APIs de LLMs.",
+          "Complejidad en la integración de Tree-sitter para múltiples lenguajes.",
+          "Mantenimiento de la aplicación de escritorio y su backend."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f2a1b0c9d8e7f6a5"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "19428bc8c3787b09"
+      }
     }
   ],
   "ultimos_hashes": [
-    "f1a3b5c7d9e1f3a5",
-    "a8b0c2d4e6f8a0b2",
-    "e3f5a7c9b1d3e5a7",
     "f8a3b1c4d5e6f7a8",
     "e9f0a1b2c3d4e5f6",
     "b3a7d9f1e8c5a201",
@@ -20935,8 +21392,11 @@
     "1a2b3c4d5e6f7890",
     "d4e5f67890123456",
     "f7d3a1b9c8e0f2a1",
-    "b8c9d0e1f2a3b4c5"
+    "b8c9d0e1f2a3b4c5",
+    "d5a1b2c3d4e5f6a7",
+    "e8f9a0b1c2d3e4f5",
+    "f2a1b0c9d8e7f6a5"
   ],
-  "total_generados": 152,
-  "fecha_ultima_generacion": "2026-10-31T16:44:40.781860"
+  "total_generados": 155,
+  "fecha_ultima_generacion": "2026-10-31T23:00:23.221907"
 }
