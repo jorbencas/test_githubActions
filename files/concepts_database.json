@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 161,
+    "total_concepts": 162,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-01T08:34:54.775294"
+    "last_scraped": "2026-11-01T15:43:54.024862"
   },
   "concepts": [
     {
@@ -2994,6 +2994,24 @@
       ],
       "cat": "bases_datos",
       "scraped_at": "2026-10-28T13:46:21.226022"
+    },
+    {
+      "title": "ULID frente a UUID: identificadores únicos que se pueden ordenar por fecha",
+      "summary": "Un ULID (Universally Unique Lexicographically Sortable Identifier) ocupa los mismos 128 bits que un UUID, pero reserva los primeros 48 para una marca de tiempo. Eso hace que los identificadores se ord",
+      "explanation": "Un ULID (Universally Unique Lexicographically Sortable Identifier) ocupa los mismos 128 bits que un UUID, pero reserva los primeros 48 para una marca de tiempo. Eso hace que los identificadores se ordenen por fecha de creación sin columnas auxiliares. Michael Drogalis, creador de ShadowTraffic, lo ha recordado en una publicación de LinkedIn con una recomendación directa: si usas UUID, plantéate cambiarlos por ULID. Los comentarios dejaron claro que la decisión tiene más matices de los que parece. Este artículo es una adaptación del análisis publicado enadministraciondesistemas.com, ampliado con el punto de vista de quien escribe código y diseña esquemas.Anatomía de un ULID Un ULID se compone de 48 bits de marca de tiempo (milisegundos desde 1970) y 80 bits aleatorios. Se escribe con 26 caracteres en Base32 de Crockford, sin guiones, sin distinguir mayúsculas de minúsculas y sin las letras que se confunden fácilmente (I, L, O y U). Frente a los 36 caracteres de un UUID con guiones, resulta más corto y se selecciona entero con un doble clic. Drogalis lo explica con el ejemplo01HX2AY3TN3M5ZFA5TG2WZJZ6G: los 10 primeros caracteres (01HX2AY3TN) son la marca de tiempo y los 16 restantes (3M5ZFA5TG2WZJZ6G) la parte aleatoria. Como la codificación conserva el orden, para saber cuál de dos ULID es más antiguo basta una comparación alfabética de cadenas, sin decodificar nada.",
+      "code_example": "ALFABETO = \"0123456789ABCDEFGHJKMNPQRSTVWXYZ\"\n\ndef ulid_a_ms(ulid):\n    valor = 0\n    for c in ulid[:10]:\n        valor = valor * 32 + ALFABETO.index(c)\n    return valor\n\nimport datetime\nms = ulid_a_ms(\"01HX2AY3TN3M5ZFA5TG2WZJZ6G\")\nprint(datetime.datetime.fromtimestamp(ms / 1000, datetime.timezone.utc))\n# 2024-05-04 17:37:54.517000+00:00",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-01T15:43:16.879046"
     }
   ]
 }
