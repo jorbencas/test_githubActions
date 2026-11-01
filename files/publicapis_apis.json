@@ -11068,5 +11068,17 @@
         "descripcion": "Cheap football (soccer) data API from $5/month, with a free tier. Fixtures, live scores, standings and tick-by-tick odds from bet365 and 19 other bookmakers, including corner and card lines.",
         "categoria": "Sports & Fitness",
         "pricing": ""
+    },
+    {
+        "titulo": "DocSpring",
+        "enlace": "https://publicapis.io/docspring-api",
+        "fuente": "Public APIs",
+        "tipo": "herramienta",
+        "f": "01/11",
+        "fecha_publicacion": "",
+        "subtipo": "api",
+        "descripcion": "DocSpring fills PDF forms, Word documents, and HTML templates with JSON data and collects e-signatures via API.",
+        "categoria": "Documents & Productivity",
+        "pricing": ""
     }
 ]
