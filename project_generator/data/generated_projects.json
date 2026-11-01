@@ -21573,11 +21573,281 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "261cecabb53ab0ae"
       }
+    },
+    {
+      "proyecto": {
+        "id": "b4c5d6e7f8901234",
+        "titulo": "Asistente de Código con Contexto de Proyecto",
+        "descripcion_corta": "Herramienta CLI que integra LLMs para asistir en la escritura de código, entendiendo el contexto del proyecto actual.",
+        "descripcion_detallada": "Una aplicación de línea de comandos (CLI) que actúa como un copiloto de programación avanzado. El usuario puede hacer preguntas sobre el código, pedir refactorizaciones, generar tests o explicaciones de fragmentos de código. A diferencia de asistentes genéricos, esta herramienta analiza la estructura del proyecto (archivos, dependencias, etc.) para proporcionar respuestas más precisas y contextualmente relevantes. Utilizará embeddings para representar el código y buscar similitudes, permitiendo al LLM 'entender' el proyecto.",
+        "nivel": "senior",
+        "scope": "proyecto",
+        "tipo": [
+          "cli",
+          "api",
+          "ia_ml",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "rust",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "clap",
+              "categoria": "libreria",
+              "descripcion": "Framework para parsear argumentos de línea de comandos en Rust.",
+              "version_sugerida": "4.4.10",
+              "url_docs": "https://docs.rs/clap/",
+              "por_que": "Facilita la creación de una CLI robusta y fácil de usar, manejando argumentos y subcomandos de forma eficiente."
+            },
+            {
+              "nombre": "reqwest",
+              "categoria": "libreria",
+              "descripcion": "Cliente HTTP asíncrono y síncrono para Rust.",
+              "version_sugerida": "0.11.23",
+              "url_docs": "https://docs.rs/reqwest/",
+              "por_que": "Permite interactuar con APIs de modelos de lenguaje (como OpenAI o Anthropic) de forma eficiente y asíncrona."
+            },
+            {
+              "nombre": "tokenizers",
+              "categoria": "libreria",
+              "descripcion": "Implementación rápida de tokenizadores para modelos de NLP.",
+              "version_sugerida": "0.15.0",
+              "url_docs": "https://docs.rs/tokenizers/",
+              "por_que": "Necesario para preprocesar el texto del código antes de enviarlo a modelos de IA y para manejar la salida."
+            },
+            {
+              "nombre": "llm",
+              "categoria": "libreria",
+              "descripcion": "Bindings Rust para ejecutar modelos de lenguaje grandes localmente.",
+              "version_sugerida": "0.1.0",
+              "url_docs": "https://github.com/rustformers/llm",
+              "por_que": "Permite ejecutar modelos de IA localmente si el usuario prefiere no depender de APIs externas, ofreciendo más privacidad."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Git",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de control de versiones distribuido.",
+              "version_sugerida": "2.41.0",
+              "url_docs": "https://git-scm.com/",
+              "por_que": "Esencial para analizar la estructura y el historial del proyecto, permitiendo a la herramienta entender el contexto."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API / Anthropic API",
+              "categoria": "ia_ml",
+              "descripcion": "APIs para acceder a modelos de lenguaje avanzados (GPT-4, Claude).",
+              "version_sugerida": "N/A",
+              "url_docs": "https://platform.openai.com/docs/api-reference%20|%20https://docs.anthropic.com/claude/reference/getting-started-with-the-api",
+              "por_que": "Proporcionan la capacidad de procesamiento de lenguaje natural necesaria para entender consultas de código y generar respuestas coherentes."
+            },
+            {
+              "nombre": "Sentence Transformers (Python wrapper)",
+              "categoria": "ia_ml",
+              "descripcion": "Generación de embeddings de texto para búsqueda semántica.",
+              "version_sugerida": "2.6.0",
+              "url_docs": "https://www.sbert.net/",
+              "por_que": "Se usa para crear representaciones vectoriales (embeddings) del código del proyecto, permitiendo búsquedas semánticas eficientes y contextualización."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Rust built-in testing",
+              "categoria": "testing",
+              "descripcion": "Sistema de testing integrado en el lenguaje Rust.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://doc.rust-lang.org/stable/book/ch11-00-testing.html",
+              "por_que": "Permite escribir y ejecutar pruebas unitarias y de integración para la lógica de la CLI y las interacciones con las APIs de IA."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Generación de código boilerplate.",
+          "Explicación de fragmentos de código.",
+          "Sugerencias de refactorización context-aware.",
+          "Generación automática de tests unitarios.",
+          "Respuesta a preguntas sobre la base de código."
+        ],
+        "casos_uso": [
+          "Un desarrollador junior necesita entender una función compleja.",
+          "Un desarrollador quiere generar tests para una nueva funcionalidad.",
+          "Un equipo quiere refactorizar un módulo antiguo de forma segura.",
+          "Un desarrollador se pregunta cuál es la mejor forma de implementar un patrón específico en el proyecto.",
+          "Generar documentación inicial para una clase o módulo."
+        ],
+        "reglas_negocio": [
+          "La herramienta solo opera sobre repositorios Git inicializados.",
+          "Las consultas de código se envían a la API de IA seleccionada.",
+          "El análisis del proyecto se limita a los archivos accesibles por el usuario.",
+          "Los modelos de IA locales deben ser descargados explícitamente.",
+          "La herramienta respeta los archivos `.gitignore` al escanear el proyecto."
+        ],
+        "por_que_ia": "Se utiliza IA (LLMs) para procesar y generar lenguaje natural relacionado con el código. La generación de embeddings permite al sistema 'entender' el código fuente y la estructura del proyecto, proporcionando así asistencia más contextualizada y precisa que un simple chatbot de código.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "APIs de modelos de lenguaje (OpenAI, Anthropic, etc.)",
+          "Modelos de lenguaje Open Source (Llama, Mistral)"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia con Rust",
+          "Comprensión de estructuras de proyectos de software",
+          "Conocimiento de APIs de IA y procesamiento de texto",
+          "Familiaridad con la línea de comandos"
+        ],
+        "riesgos": [
+          "Dependencia de APIs de terceros (costos, latencia, disponibilidad).",
+          "Complejidad en la indexación y búsqueda eficiente de grandes bases de código.",
+          "Privacidad de los datos del código si se usan APIs externas.",
+          "Limitaciones de los modelos de IA en la comprensión de código muy específico o propietario.",
+          "Manejo de diferentes lenguajes de programación y ecosistemas."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-07T10:00:00Z",
+        "hash_unicidad": "b4c5d6e7f8901234"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "4bf8450585fb0bc0"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c6d7e8f901234567",
+        "titulo": "Monitor de Rendimiento de E-commerce (Backend)",
+        "descripcion_corta": "Microservicio que monitoriza métricas clave de rendimiento de una plataforma e-commerce.",
+        "descripcion_detallada": "Un microservicio desarrollado en Go que recolecta y expone métricas de rendimiento críticas de una plataforma e-commerce (tiempos de respuesta de API, tasas de error, latencia de base de datos, throughput de transacciones). Estas métricas son expuestas a través de una API y pueden ser enviadas a sistemas de monitorización externos. Incluye también lógica para detectar anomalías básicas en las métricas recolectadas.",
+        "nivel": "semisenior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "api",
+          "microservicio",
+          "datos",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin Gonic",
+              "categoria": "framework",
+              "descripcion": "Framework web de alto rendimiento para Go, inspirado en Martini pero con mejor rendimiento.",
+              "version_sugerida": "1.9.1",
+              "url_docs": "https://gin-gonic.com/",
+              "por_que": "Proporciona una forma rápida y eficiente de construir la API RESTful para exponer las métricas recolectadas."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Prometheus client_golang",
+              "categoria": "libreria",
+              "descripcion": "Librería cliente para instrumentar aplicaciones Go con métricas de Prometheus.",
+              "version_sugerida": "1.18.0",
+              "url_docs": "https://github.com/prometheus/client_golang",
+              "por_que": "Permite exponer métricas en el formato estándar de Prometheus, facilitando la integración con el ecosistema de monitorización."
+            },
+            {
+              "nombre": "go-ethereum (ethclient)",
+              "categoria": "libreria",
+              "descripcion": "Cliente Go para interactuar con una red Ethereum.",
+              "version_sugerida": "1.13.12",
+              "url_docs": "https://pkg.go.dev/github.com/ethereum/go-ethereum/ethclient",
+              "por_que": "Permite obtener métricas específicas de transacciones blockchain si el e-commerce opera con criptomonedas."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Prometheus",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de monitorización y alertas de código abierto.",
+              "version_sugerida": "2.47.2",
+              "url_docs": "https://prometheus.io/",
+              "por_que": "Es el estándar de facto para la recolección y visualización de métricas en entornos de microservicios, y este servicio se integra directamente con él."
+            },
+            {
+              "nombre": "Grafana",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de análisis y visualización de métricas.",
+              "version_sugerida": "10.3.1",
+              "url_docs": "https://grafana.com/",
+              "por_que": "Se utiliza para visualizar las métricas expuestas por el microservicio en dashboards interactivos, permitiendo un análisis profundo del rendimiento."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Paquete estándar de Go para escribir pruebas.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Permite crear pruebas unitarias y de integración para verificar la recolección y exposición de métricas."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Recolección de métricas de latencia y throughput.",
+          "Monitorización de tasas de error (HTTP 5xx, 4xx).",
+          "Exposición de métricas vía endpoint HTTP (Prometheus compatible).",
+          "Detección básica de anomalías (ej. picos de error).",
+          "Integración con sistemas de monitorización externos."
+        ],
+        "casos_uso": [
+          "Un SRE monitoriza el rendimiento de las APIs del e-commerce en tiempo real.",
+          "Un equipo de desarrollo recibe alertas automáticas cuando la tasa de errores supera un umbral.",
+          "Se analizan los tiempos de respuesta de la base de datos para identificar cuellos de botella.",
+          "Se correlacionan métricas de negocio (ej. ventas) con métricas técnicas (ej. latencia).",
+          "Se audita el rendimiento de las transacciones de pago."
+        ],
+        "reglas_negocio": [
+          "Las métricas deben ser recolectadas cada 15 segundos.",
+          "Los errores HTTP 5xx disparan una alerta inmediata.",
+          "Las métricas expuestas deben seguir la convención de nombres de Prometheus.",
+          "El microservicio debe ser stateless para facilitar el escalado.",
+          "Solo se monitorizan las APIs públicas del e-commerce."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Documentación de Prometheus y Grafana",
+          "APIs del E-commerce a monitorizar"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos de Go",
+          "Comprensión de métricas de rendimiento de aplicaciones",
+          "Familiaridad con Prometheus y Grafana",
+          "Conceptos básicos de microservicios"
+        ],
+        "riesgos": [
+          "Impacto en el rendimiento del e-commerce si la recolección de métricas es intrusiva.",
+          "Configuración incorrecta del scraping de Prometheus.",
+          "Falsos positivos en la detección de anomalías.",
+          "Mantenimiento de la compatibilidad con futuras versiones de Prometheus/Grafana.",
+          "Sobrecarga del microservicio si el e-commerce tiene un volumen de transacciones extremadamente alto."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-07T10:00:00Z",
+        "hash_unicidad": "c6d7e8f901234567"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "4bf8450585fb0bc0"
+      }
     }
   ],
   "ultimos_hashes": [
-    "b3a7d9f1e8c5a201",
-    "b1c2d3e4f5a6b7c8",
     "b2c3d4e5f6g7h8i9",
     "d0e1f2a3b4c5d6e7",
     "f9a0b1c2d3e4f5a6",
@@ -21675,8 +21945,10 @@
     "e8f9a0b1c2d3e4f5",
     "f2a1b0c9d8e7f6a5",
     "d353a8b1c2d4e5f6",
-    "a0b1c2d3e4f56789"
+    "a0b1c2d3e4f56789",
+    "b4c5d6e7f8901234",
+    "c6d7e8f901234567"
   ],
-  "total_generados": 157,
-  "fecha_ultima_generacion": "2026-11-01T14:41:30.148935"
+  "total_generados": 159,
+  "fecha_ultima_generacion": "2026-11-01T20:06:39.144397"
 }
