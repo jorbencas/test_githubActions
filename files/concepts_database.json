@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 162,
+    "total_concepts": 163,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-01T15:43:54.024862"
+    "last_scraped": "2026-11-01T20:05:25.271196"
   },
   "concepts": [
     {
@@ -3012,6 +3012,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-11-01T15:43:16.879046"
+    },
+    {
+      "title": "RustO!: un motor OCR en Rust puro, sin OpenCV ni C++",
+      "summary": "Quien haya puesto un OCR en producción conoce el problema: el modelo de reconocimiento es la parte pequeña y lo que da guerra es todo lo que lo rodea. Casi cualquier pipeline (Tesseract, EasyOCR, Rapi",
+      "explanation": "Quien haya puesto un OCR en producción conoce el problema: el modelo de reconocimiento es la parte pequeña y lo que da guerra es todo lo que lo rodea. Casi cualquier pipeline (Tesseract, EasyOCR, RapidOCR, PaddleOCR) delega en OpenCV la carga de imágenes, el redimensionado, los contornos, la dilatación y las transformaciones de perspectiva. Eso significa enlazar con bibliotecas C++ enormes, pelearse con el NDK en Android y cargar con imágenes de contenedor de cientos de megas. RustO! (rusto-rs), un proyecto de código abierto con licencia MIT de Muhamad Rizki, propone quitar OpenCV de la ecuación y reescribir todo en Rust: visión por computador e inferencia. El repositorio es relativamente joven (se creó en noviembre de 2025, va por la versión 0.3.2 del 25 de octubre de 2026 y suma unas 106 estrellas), pero ya publica paquetes para Rust, WebAssembly, Node, Python, Go, Java, Dart, Flutter, React, React Native, iOS, Android y .NET. Hemos leído el código y la documentación del repositorio para contarte qué hace de verdad, con ejemplos, y dónde conviene matizar lo que se ha dicho de él.Qué es y cómo está montado RustO! es un motor OCR basado en los modelos de PaddleOCR (PP-OCRv6, v5, v4 y v3) que ejecuta la inferencia conRTen, un motor de redes neuronales escrito en Rust puro que lee modelos ONNX y su propio formato.rten(FlatBuffers). Sobre él se apoya un pipeline clásico de dos etapas:Deteccióncon DBNet: produce un mapa de probabilidad de texto que se binariza, se dilata (opciona",
+      "code_example": "cargo add rusto-rs",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-01T20:04:46.564886"
     }
   ]
 }
