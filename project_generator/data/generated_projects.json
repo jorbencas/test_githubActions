@@ -21293,11 +21293,289 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "19428bc8c3787b09"
       }
+    },
+    {
+      "proyecto": {
+        "id": "d353a8b1c2d4e5f6",
+        "titulo": "Asistente de Código Inteligente",
+        "descripcion_corta": "IDE plugin que sugiere refactorizaciones y genera código boilerplate basado en contexto.",
+        "descripcion_detallada": "Este proyecto es un plugin para IDEs populares (VS Code, JetBrains) que actúa como un asistente de codificación inteligente. Utiliza un modelo de lenguaje grande (LLM) para comprender el contexto del código actual, sugerir refactorizaciones, generar código repetitivo (boilerplate) y ayudar en la depuración. El objetivo es aumentar la productividad del desarrollador y mejorar la calidad del código. Se integra con la API de OpenAI para el procesamiento del lenguaje y utiliza embeddings para la representación del código.",
+        "nivel": "senior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "desktop"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web asíncrono para construir APIs.",
+              "version_sugerida": "0.110.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Rendimiento asíncrono, validación de datos con Pydantic, generación automática de OpenAPI."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "openai",
+              "categoria": "libreria",
+              "descripcion": "Cliente oficial de Python para la API de OpenAI.",
+              "version_sugerida": "1.30.0",
+              "url_docs": "https://github.com/openai/openai-python",
+              "por_que": "Interacción directa con modelos como GPT-4 para generación y análisis de código."
+            },
+            {
+              "nombre": "tiktoken",
+              "categoria": "libreria",
+              "descripcion": "Tokenizador rápido de OpenAI.",
+              "version_sugerida": "0.7.0",
+              "url_docs": "https://github.com/openai/tiktoken",
+              "por_que": "Conteo preciso de tokens para optimizar el uso de la API y evitar exceder límites."
+            },
+            {
+              "nombre": "tree-sitter",
+              "categoria": "libreria",
+              "descripcion": "Parser incremental para árboles de sintaxis abstracta.",
+              "version_sugerida": "0.22.0",
+              "url_docs": "https://tree-sitter.github.io/tree-sitter/",
+              "por_que": "Análisis estructurado del código fuente para una mejor comprensión contextual por parte del LLM."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de contenedores para el desarrollo y despliegue.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Aislamiento de dependencias, reproducibilidad del entorno de desarrollo y despliegue de la API."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "GPT-4",
+              "categoria": "modelo_ia",
+              "descripcion": "Modelo de lenguaje grande de OpenAI para generación y comprensión de texto/código.",
+              "version_sugerida": "null",
+              "url_docs": "https://openai.com/gpt-4",
+              "por_que": "Capacidad avanzada para entender código, sugerir refactorizaciones y generar código boilerplate."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Fixtures flexibles, parametrización y ejecución de pruebas unitarias y de integración para la API."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "VS Code Extension API",
+              "categoria": "otros",
+              "descripcion": "API para desarrollar extensiones para Visual Studio Code.",
+              "version_sugerida": "null",
+              "url_docs": "https://code.visualstudio.com/api",
+              "por_que": "Permite la integración directa del asistente inteligente dentro del flujo de trabajo del desarrollador."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Generación de código boilerplate",
+          "Sugerencias de refactorización context-aware",
+          "Explicación de fragmentos de código",
+          "Integración con VS Code y JetBrains",
+          "Completado de código inteligente"
+        ],
+        "casos_uso": [
+          "Acelerar la creación de componentes repetitivos",
+          "Mejorar la legibilidad y mantenibilidad del código",
+          "Ayudar a desarrolladores junior a entender código complejo",
+          "Reducir el tiempo dedicado a tareas de codificación manual",
+          "Facilitar la adopción de patrones de diseño"
+        ],
+        "reglas_negocio": [
+          "El plugin debe ser agnóstico al lenguaje en la medida de lo posible, priorizando Python, JavaScript y Java.",
+          "Las sugerencias de código deben respetar las convenciones del lenguaje y el estilo del proyecto.",
+          "El uso de la API de OpenAI debe ser optimizado para minimizar costos.",
+          "Los datos del código del usuario no deben ser almacenados permanentemente por el servicio.",
+          "Se debe proporcionar feedback al usuario sobre el estado de la generación/análisis."
+        ],
+        "por_que_ia": "Utilización de LLMs (GPT-4) para comprender la semántica del código, generar código nuevo y proponer mejoras, superando las capacidades de las herramientas de autocompletado tradicionales.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "https://github.com/openai/openai-python",
+          "https://tree-sitter.github.io/tree-sitter/"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos sólidos de Python y desarrollo de APIs.",
+          "Experiencia con el desarrollo de plugins para IDEs (VS Code preferiblemente).",
+          "Comprensión de los conceptos de LLMs y APIs de IA.",
+          "Acceso a una clave API de OpenAI."
+        ],
+        "riesgos": [
+          "Dependencia de la disponibilidad y coste de la API de OpenAI.",
+          "Latencia en las respuestas del LLM puede afectar la experiencia de usuario.",
+          "La calidad de las sugerencias puede variar y requerir ajustes finos.",
+          "Manejo de la privacidad y seguridad del código del usuario.",
+          "Complejidad en la integración con diferentes IDEs."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2024-05-15T10:00:00Z",
+        "hash_unicidad": "d353a8b1c2d4e5f6"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "261cecabb53ab0ae"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "a0b1c2d3e4f56789",
+        "titulo": "Plataforma Colaborativa de Mapas Mentales Dinámicos",
+        "descripcion_corta": "Web app para crear y colaborar en mapas mentales que se actualizan en tiempo real.",
+        "descripcion_detallada": "Aplicación web full-stack que permite a múltiples usuarios crear, editar y visualizar mapas mentales de forma colaborativa. Utiliza WebSockets para la sincronización en tiempo real de los cambios realizados por los usuarios. Cada nodo del mapa mental puede contener texto, enlaces, imágenes y notas. La aplicación está diseñada para facilitar la lluvia de ideas, la planificación de proyectos y la organización de información de manera visual e interactiva.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "fullstack"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Componentización eficiente, manejo declarativo del estado y ecosistema robusto para la UI."
+            },
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de Node.js para construir aplicaciones del lado del servidor eficientes y escalables.",
+              "version_sugerida": "10.0.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Arquitectura modular basada en TypeScript, fácil integración con WebSockets y ORMs."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Socket.IO",
+              "categoria": "libreria",
+              "descripcion": "Librería para comunicación bidireccional en tiempo real entre clientes y servidor.",
+              "version_sugerida": "4.7.0",
+              "url_docs": "https://socket.io/docs/v4/",
+              "por_que": "Facilita la implementación de la sincronización de datos en tiempo real para la colaboración."
+            },
+            {
+              "nombre": "React Flow",
+              "categoria": "libreria",
+              "descripcion": "Librería para construir editores de nodos y gráficos en React.",
+              "version_sugerida": "18.0.0",
+              "url_docs": "https://reactflow.dev/",
+              "por_que": "Proporciona la base para la visualización y edición interactiva de los mapas mentales."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "bases_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto.",
+              "version_sugerida": "15.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Soporte para JSONB para almacenar la estructura del mapa mental de forma flexible y transacciones ACID."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de contenedores para el desarrollo y despliegue.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Consistencia entre entornos de desarrollo, testing y producción, facilitando el despliegue."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript.",
+              "version_sugerida": "29.5.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Testing unitario y de integración para el frontend y backend, con soporte para snapshots."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y edición de nodos y ramas",
+          "Colaboración en tiempo real",
+          "Soporte para texto, enlaces, imágenes y notas en nodos",
+          "Visualización interactiva del mapa mental",
+          "Guardado automático de cambios"
+        ],
+        "casos_uso": [
+          "Lluvia de ideas en equipo",
+          "Planificación de proyectos y tareas",
+          "Toma de apuntes colaborativa",
+          "Organización de información compleja",
+          "Visualización de relaciones entre conceptos"
+        ],
+        "reglas_negocio": [
+          "Solo los usuarios autenticados pueden crear o editar mapas mentales.",
+          "Los cambios realizados por un usuario se reflejan instantáneamente para todos los colaboradores del mismo mapa.",
+          "Los mapas mentales deben persistir en la base de datos.",
+          "Se debe mantener un historial de versiones limitado para cada mapa.",
+          "Los permisos de edición pueden ser definidos por el creador del mapa."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "https://reactflow.dev/",
+          "https://socket.io/docs/v4/"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos de TypeScript, React y Node.js/NestJS.",
+          "Comprensión de WebSockets y arquitecturas en tiempo real.",
+          "Experiencia con bases de datos relacionales (PostgreSQL).",
+          "Familiaridad con herramientas de frontend y backend."
+        ],
+        "riesgos": [
+          "Escalabilidad de WebSockets bajo alta concurrencia.",
+          "Manejo de conflictos de edición en tiempo real.",
+          "Complejidad en la gestión del estado del frontend.",
+          "Diseño de la estructura de datos del mapa mental para eficiencia.",
+          "Asegurar una experiencia de usuario fluida en dispositivos con ancho de banda limitado."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:00:00Z",
+        "hash_unicidad": "a0b1c2d3e4f56789"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "261cecabb53ab0ae"
+      }
     }
   ],
   "ultimos_hashes": [
-    "f8a3b1c4d5e6f7a8",
-    "e9f0a1b2c3d4e5f6",
     "b3a7d9f1e8c5a201",
     "b1c2d3e4f5a6b7c8",
     "b2c3d4e5f6g7h8i9",
@@ -21395,8 +21673,10 @@
     "b8c9d0e1f2a3b4c5",
     "d5a1b2c3d4e5f6a7",
     "e8f9a0b1c2d3e4f5",
-    "f2a1b0c9d8e7f6a5"
+    "f2a1b0c9d8e7f6a5",
+    "d353a8b1c2d4e5f6",
+    "a0b1c2d3e4f56789"
   ],
-  "total_generados": 155,
-  "fecha_ultima_generacion": "2026-10-31T23:00:23.221907"
+  "total_generados": 157,
+  "fecha_ultima_generacion": "2026-11-01T04:00:39.818360"
 }
