@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 163,
+    "total_concepts": 164,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-02T07:06:48.984930"
+    "last_scraped": "2026-11-02T17:47:44.220337"
   },
   "concepts": [
     {
@@ -3030,6 +3030,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-11-01T20:04:46.564886"
+    },
+    {
+      "title": "Rust como prueba de trabajo: por qué su coste importa cuando la IA hace el código gratis",
+      "summary": "Pídele a cualquier modelo de lenguaje un script rápido para quitar duplicados de un CSV y te devolverá Python. Pídele un ayudante de migración de usar y tirar y será Bash o Node. Casi nunca propondrá ",
+      "explanation": "Pídele a cualquier modelo de lenguaje un script rápido para quitar duplicados de un CSV y te devolverá Python. Pídele un ayudante de migración de usar y tirar y será Bash o Node. Casi nunca propondrá Rust para un proyecto de fin de semana, y con razón: compilar es lento, el directoriotarget/se come decenas de gigas y el ciclo de «escribir, fallar con el borrow checker, corregir» alarga cada iteración. Ese mismo hecho es el punto de partida de un ensayo de David Lee publicado en Medium el 23 de octubre de 2026, que sostiene algo contraintuitivo: cuando generar código cuesta casi cero, que un proyecto esté escrito en Rust se convierte en una señal útil. Conviene desarrollar la idea con más detalle, porque tiene una parte sólida y otra que necesita matices.El contexto: Rust y la IA, en todas las charlas del año La combinación de Rust e inteligencia artificial ha sido uno de los hilos de la temporada de conferencias. EnRustConf 2026, celebrada del 8 al 11 de septiembre en Montreal, el programa incluyó la charla «Good or Bad Vibes? Coding with AI in Rust», que parte de una observación incómoda: los modelos recientes ya escriben Rust que compila y pasa los tests, pero los problemas de fondo pueden seguir ahí. Que el código compile ya no es garantía de que sea correcto, aunque sí es un listón más alto que en la mayoría de lenguajes.La prueba de trabajo del código abierto El argumento central es una analogía con la prueba de trabajo de Bitcoin. En esa red, el coste computacional no e",
+      "code_example": "use std::rc::Rc;\nuse std::thread;\n\nfn main() {\n    let datos = Rc::new(vec![1, 2, 3]);\n    let copia = Rc::clone(&datos);\n\n    // error[E0277]: `Rc<Vec<i32>>` cannot be sent between threads safely\n    let h = thread::spawn(move || println!(\"{:?}\", copia));\n    h.join().unwrap();\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-02T17:47:07.549550"
     }
   ]
 }
