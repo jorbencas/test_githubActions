@@ -3687,5 +3687,17 @@
     "relevancia": 2,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "José Coronado es la gran estrella de la nueva serie de Netflix",
+    "url": "https://www.diariouno.com.ar/series-y-peliculas/jose-coronado-es-la-gran-estrella-la-nueva-serie-netflix-n1604967",
+    "fecha_pub": "Fri, 09 Oct 2026 12:20:00 GMT",
+    "fecha_ts": "2026-11-02T15:31:29.985489+00:00",
+    "medio": "diariouno.com.ar",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
