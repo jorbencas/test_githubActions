@@ -3699,5 +3699,17 @@
     "relevancia": 4,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Madrid, escenario de la nueva serie española de Netflix con Patrick Criado y Álvaro Morte como protagonistas",
+    "url": "https://www.mundodeportivo.com/elotromundo/television/20260428/1004176229/oficial-madrid-convierte-escenario-nueva-serie-espanola-netflix-tvp-dct.html",
+    "fecha_pub": "Tue, 28 Apr 2026 02:02:00 GMT",
+    "fecha_ts": "2026-11-03T00:52:00.787741+00:00",
+    "medio": "Mundo Deportivo",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 5,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
