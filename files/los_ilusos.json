@@ -1015,5 +1015,17 @@
     "relevancia": 3,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "'Los ilusos 13+13', revisitar la propia obra",
+    "url": "https://www.abc.es/play/cine/ilusos-1313-revisitar-propia-obra-20260605001600-nt.html",
+    "fecha_pub": "Thu, 04 Jun 2026 15:16:00 GMT",
+    "fecha_ts": "2026-11-03T00:51:40.238872+00:00",
+    "medio": "ABC",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
