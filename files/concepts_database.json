@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 164,
+    "total_concepts": 166,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-03T07:30:30.235731"
+    "last_scraped": "2026-11-03T15:46:14.261411"
   },
   "concepts": [
     {
@@ -3048,6 +3048,42 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-11-02T17:47:07.549550"
+    },
+    {
+      "title": "Alternativas a OpenRouter en 2026: qué gateway de IA elegir según tu caso",
+      "summary": "Cuando una aplicación habla con más de un modelo de IA, la integración deja de ser un detalle y se convierte en un problema de ingeniería: autenticación distinta en cada proveedor, formatos de petició",
+      "explanation": "Cuando una aplicación habla con más de un modelo de IA, la integración deja de ser un detalle y se convierte en un problema de ingeniería: autenticación distinta en cada proveedor, formatos de petición que no coinciden, errores que se gestionan de tres maneras y facturas repartidas por todas partes. Los gateways de IA existen para resolver eso, yOpenRouteres el más extendido. Pero no es la única opción, y según lo que priorices (coste, control de los datos u observabilidad) hay alternativas que encajan mejor. Esta es una comparación basada en la documentación oficial de cada servicio, con las cifras comprobadas en noviembre de 2026.Qué hace un gateway de IA Es una capa entre tu aplicación y los proveedores de modelos. Tu código habla con un único endpoint, normalmente compatible con la API de OpenAI, y el gateway se encarga de autenticarse con cada proveedor, traducir la petición y normalizar la respuesta. Según el producto, también ofrece:Enrutamiento y reintentos:si un proveedor falla, la petición pasa a otro sin que la aplicación se entere.Observabilidad:latencia, tokens, coste y errores en un solo panel.Control de gasto:presupuestos, límites de uso y claves por equipo o proyecto.Política de datos:qué se guarda de tus prompts y si se usan para entrenar. Si usas un solo modelo, probablemente no lo necesitas. Si enrutas tráfico entre varios proveedores con volumen, empieza a compensar.El punto de partida: OpenRouter Conviene saber con qué se compara. Según supágina de precio",
+      "code_example": "from openai import OpenAI\n\nclient = OpenAI(\n    base_url=\"https://router.requesty.ai/v1\",  # o la URL de tu proxy LiteLLM\n    api_key=\"tu-clave\",\n)\n\nresp = client.chat.completions.create(\n    model=\"anthropic/claude-sonnet-4-6\",  # el formato del id cambia según el servicio\n    messages=[{\"role\": \"user\", \"content\": \"Hola\"}],\n)",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "seguridad_web"
+      ],
+      "cat": "seguridad_web",
+      "scraped_at": "2026-11-03T15:45:36.791765"
+    },
+    {
+      "title": "¿Es Rust el lenguaje ideal para los LLM? Qué hay de real en inferencia, CUDA Rust y entrenamiento",
+      "summary": "Durante años, la respuesta a «¿en qué lenguaje se hace IA?» ha sido una sola palabra: Python. Sigue siéndolo para investigar y entrenar. Pero en 2026 Rust ha dejado de ser un invitado y aparece en sit",
+      "explanation": "Durante años, la respuesta a «¿en qué lenguaje se hace IA?» ha sido una sola palabra: Python. Sigue siéndolo para investigar y entrenar. Pero en 2026 Rust ha dejado de ser un invitado y aparece en sitios donde antes ni se planteaba: motores de inferencia, servidores de modelos locales y, desde septiembre, el propio desarrollo de kernels para GPU con respaldo directo de NVIDIA. La pregunta útil no es si Rust sustituye a Python, sino qué capas de la pila de un LLM salen ganando si se escriben en Rust, y cuáles no.Por qué Python manda (y por qué eso deja hueco) Python se impuso en aprendizaje automático por productividad, por ecosistema (PyTorch, Transformers, NumPy) y porque casi toda investigación nueva se publica primero con código en Python. Nada de eso ha cambiado. Lo que a menudo se pasa por alto es que Python rara vez hace el trabajo pesado. Las multiplicaciones de matrices las ejecutan kernels de CUDA, cuBLAS o código en C++; Python es el pegamento que los orquesta. Ese reparto crea dos zonas donde Rust compite con ventaja: elcódigo que rodea al modelo(servidor, colas, streaming, tokenización, gestión de memoria, concurrencia) y, cada vez más,el propio código de los kernels.Qué aporta Rust en producción Un servicio que atiende a miles de usuarios con un LLM tiene que repartir peticiones concurrentes, cargar modelos sin disparar la memoria, devolver tokens en streaming y coordinar la GPU sin bloqueos. Ahí cuentan tres cosas:Sin recolector de basura.Latencias más predecibl",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "seguridad_web"
+      ],
+      "cat": "seguridad_web",
+      "scraped_at": "2026-11-03T15:45:38.555954"
     }
   ]
 }
