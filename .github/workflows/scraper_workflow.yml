@@ -47,7 +47,7 @@ jobs:
           fetch-depth: 0
 
       # ── Fase 2: Generación semanal (lo ÚNICO que hace este workflow) ──
-      - name: 📝 Generate weekly recap + dashboard
+      - name: 📝 Generate weekly recap
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DOWNLOADER_API_TOKEN: ${{ secrets.DOWNLOADER_API_TOKEN }}

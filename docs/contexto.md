@@ -2,6 +2,25 @@
 
 ## Cambios recientes
 
+### Reescritura de la web: solo gestor de fuentes — 04/11/2026
+- **La web pasa a ser únicamente un gestor de fuentes** de scraping (decisión del usuario:
+  "borrar todo, solo fuentes" + persistencia visual sin tocar los scrapers).
+- Nueva web estática en `public/`:
+  - `index.html` — lista de las 572 fuentes (snapshot `data/fuentes.json`), filtros por tipo,
+    alta/baja con validación, exportar JSON, restaurar snapshot, tema dark/light.
+  - `css/fuentes.css` + `js/fuentes.js` — estilos y lógica; los cambios se guardan en
+    `localStorage` (`fuentes_web_v1`) y **no** modifican `FUENTES` del repo.
+- **Eliminado lo anterior**: `timeline.html`, `dashboard.html`, `css/`, `js/`, `mdtools/`,
+  `optimizado/`, `data/news.json`, `data/github.json`, `mdtools/` (raíz),
+  `scripts/utils/constants_mdtools.py` y `HTML_TEMPLATE` (en `constants_templates.py`).
+  Se conserva `public/data/events.json` (lo lee `scripts/scrape_october_calendar.py`).
+- **`scripts/publishers/generate_weekly.py`** (728 → 413 líneas): ya NO genera el dashboard
+  HTML ni `news.json` ni precarga avatares; solo el recap del blog. Eliminado el flag
+  `--dashboard-only` y la dependencia de `ScraperPro`.
+- **`.github/workflows/dashboard_update.yml`**: de "regenerar + deploy" a deploy estático
+  (`npx surge public …`) al hacer push que toque `public/**`.
+- README.md y AGENTS.md actualizados (secciones Timeline/Dashboard borradas).
+
 ### Nuevos scrapers: "Nueve reinas" y "Los ilusos 13+13" — 16/09/2026
 - Nuevo `scripts/scrapers/scrape_nueve_reinas.py`: recopila noticias sobre la serie
   **"Nueve reinas" (Netflix, 2027)**, adaptación de la película argentina de Fabián Bielinsky,

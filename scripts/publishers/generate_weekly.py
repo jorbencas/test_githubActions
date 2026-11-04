@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-generate_weekly.py — Genera el weekly recap + dashboard HTML + PR al blog.
+generate_weekly.py — Genera el weekly recap del blog (IA + archivado SEO).
 Toma los datos de noticias_historico.json y produce los entregables.
 
 Uso:
@@ -24,28 +24,11 @@ import google.genai as genai
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from utils.logging_setup import setup_logging
-from utils.constants_downloadfile import CONFIG, HTML_TEMPLATE, MD_TEMPLATE, SKILLS, LLMS, LENGUAJES, FRAMEWORKS, LIBRERIAS, CATEGORIAS, JS_CONFIG, FALLBACK_GITHUB_IMAGE, FALLBACK_SNEAK_PEEK, FALLBACK_NOTA_PERSONAL, SUBTIPO_KEY, TIPO_KEY, ORIGEN_KEY, SUB_VAL_GITHUB, TIPO_VAL_NOTICIA, VAL_RSS, ENLACE_KEY, FUENTE_KEY, TS_KEY, FECHA_PUB_KEY, CATEGORIA_KEY, ESTRELLAS_KEY, TITULO_KEY, FECHA_REAL_KEY, ID_VIDEO_KEY, LENGUAJE_KEY, DESCRIPCION_KEY, SUB_VAL_GITHUB_TOPIC, SUB_VAL_GITHUB_COLLECTION, SUB_VAL_PRODUCTHUNT, TIPO_VAL_HERRAMIENTA, TIPO_VAL_VIDEO, TIPO_VAL_SHORTS, TIPO_VAL_LIVE, FUENTES, YT_KEY, NOTICIAS_FILENAME, HERRAMIENTAS_FILENAME, LOGS_DIR, LOG_FILES, DASHBOARD_DIR, DASHBOARD_HTML, AUTO_NEWS_DIR, BLOG_AUTO_NEWS_REL
+from utils.constants_downloadfile import CONFIG, MD_TEMPLATE, SKILLS, LLMS, LENGUAJES, FRAMEWORKS, LIBRERIAS, CATEGORIAS, FALLBACK_GITHUB_IMAGE, FALLBACK_SNEAK_PEEK, FALLBACK_NOTA_PERSONAL, TIPO_KEY, ORIGEN_KEY, TIPO_VAL_NOTICIA, VAL_RSS, ENLACE_KEY, FUENTE_KEY, FECHA_PUB_KEY, CATEGORIA_KEY, TITULO_KEY, ID_VIDEO_KEY, SUB_VAL_GITHUB_TOPIC, SUB_VAL_GITHUB_COLLECTION, SUB_VAL_PRODUCTHUNT, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES, AUTO_NEWS_DIR, BLOG_AUTO_NEWS_REL
 
-# Acceder a valores anidados dentro de JS_CONFIG
-ALL_YT_CHANNELS = JS_CONFIG.get("ALL_YT_CHANNELS", [])
-TABS_MULTIMEDIA = JS_CONFIG.get("TABS_MULTIMEDIA", [])
-EMOJIS_CATEGORIA_MAP = {v: JS_CONFIG.get("EMOJIS_CATEGORIA", "⚡🤖💻🐳🔒📊🎓💡")[i] for i, v in enumerate(["Hardware", "IA", "Programacion", "DevOps", "Ciberseguridad", "Negocios", "General", "Otro"]) if i < len(JS_CONFIG.get("EMOJIS_CATEGORIA", "⚡🤖💻🐳🔒📊🎓💡"))}
-from scrapers.scraper_base import ScraperPro
 from utils.common import load_json, save_json, generar_imagen_noticia, obtener_recap_semanal_ia, deduplicar_items, traducir_titulos_ia
 
 logger = setup_logging("weekly", LOG_FILES["weekly"], LOGS_DIR)
-
-
-
-def cargar_herramientas() -> list:
-    path = os.path.join(CONFIG["FOLDER"], HERRAMIENTAS_FILENAME)
-    if os.path.exists(path):
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            return []
-    return []
 
 
 def archivar_recaps_antiguos(auto_news_dir: str, semana_actual: str) -> int:
@@ -72,15 +55,6 @@ def archivar_recaps_antiguos(auto_news_dir: str, semana_actual: str) -> int:
             except Exception as e:
                 logger.warning(f"⚠️ No se pudo archivar {fname}: {e}")
     return moved
-
-
-
-# ==============================================================================
-# FUNCIONES DE RENDERIZADO HTML (SSR)
-# ==============================================================================
-
-def _escape_html(text: str) -> str:
-    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;").replace("'", "&#39;")
 
 
 def _detectar_efemerides(dt: datetime) -> list[str]:
@@ -193,283 +167,13 @@ def _format_fecha_es(fecha: str) -> str:
     return f"{dia} de {mes} de {anio}"
 
 
-def _favicon_src(source_name: str, avatars: dict) -> str:
-    nombre_c = source_name.replace(" Shorts", "")
-    if nombre_c in avatars:
-        return avatars[nombre_c]
-    try:
-        from urllib.parse import urlparse
-        info = FUENTES.get(nombre_c, {})
-        for key in ("url", "rss", "yt"):
-            raw = info.get(key, "")
-            if raw:
-                domain = urlparse(raw).netloc
-                if domain:
-                    return f"https://www.google.com/s2/favicons?domain={domain}&sz=32"
-    except Exception:
-        pass
-    return f"https://www.google.com/s2/favicons?domain={nombre_c.lower().replace(' ', '')}.com&sz=32"
-
-
-def _item_timestamp(item: dict) -> str:
-    ts = item.get(TS_KEY) or item.get(FECHA_REAL_KEY) or ""
-    return str(ts)
-
-
-def render_stats(items: list) -> str:
-    total = len(items)
-    tech_count = sum(1 for i in items if i.get("badge") == "Tech")
-    multimedia_count = sum(1 for i in items if i.get(ID_VIDEO_KEY))
-    return (
-        f'<div class="stat-card"><b>{total}</b><span>Total</span></div>'
-        f'<div class="stat-card"><b>{tech_count}</b><span>Tech</span></div>'
-        f'<div class="stat-card"><b>{multimedia_count}</b><span>Multimedia</span></div>'
-    )
-
-
-def _news_type_badge(tipo: str, origen: str) -> str:
-    if origen == VAL_RSS:
-        return '<span class="badge-rss">📡 RSS</span>'
-    if tipo == TIPO_VAL_HERRAMIENTA:
-        return '<span class="badge-tool">🔧 Herramienta</span>'
-    return '<span class="badge-news">📄 Noticia</span>'
-
-
-def render_news_item(item: dict, avatars: dict) -> str:
-    titulo = _escape_html(item.get(TITULO_KEY, "Sin título"))
-    enlace = item.get(ENLACE_KEY, "#")
-    fuente = _escape_html(item.get(FUENTE_KEY, ""))
-    fuente_norm = _norm_channel(item.get(FUENTE_KEY, ""))
-    fecha_raw = item.get(FECHA_PUB_KEY, "")
-    badge = item.get("badge", "")
-    origen = item.get(ORIGEN_KEY, "")
-    ts = _item_timestamp(item)
-    categoria = item.get(CATEGORIA_KEY, "")
-    favicon = _favicon_src(fuente, avatars)
-
-    fecha = _format_fecha_es(fecha_raw)
-    tipo = item.get(TIPO_KEY, TIPO_VAL_NOTICIA)
-
-    badge_html = ""
-    if badge == "Tech":
-        badge_html = '<span class="badge-tech">Tech</span>'
-
-    tipo_badge_html = _news_type_badge(tipo, origen)
-
-    return (
-        f'<li class="news-item" data-source="{_escape_html(fuente_norm)}" data-category="{_escape_html(categoria)}" data-ts="{ts}">'
-        f'<a href="{enlace}" target="_blank" rel="noopener">'
-        f'<img class="favicon" src="{favicon}" alt="{fuente}" width="20" height="20" loading="lazy">'
-        f'<div class="news-text">'
-        f'<span class="news-title">{titulo}</span>'
-        f'<span class="news-meta">{tipo_badge_html}{badge_html}{fuente} · {fecha} <span class="badge-cat">{_escape_html(categoria)}</span></span>'
-        f'</div></a></li>'
-    )
-
-
-def render_news_list(items: list, avatars: dict) -> str:
-    return "".join(render_news_item(i, avatars) for i in items)
-
-
-def render_search_input(placeholder: str = "Buscar...", input_id: str = "news-search") -> str:
-    return f'<input type="text" id="{input_id}" class="search-input" placeholder="{placeholder}">'
-
-
-def _norm_channel(name: str) -> str:
-    return name.strip().replace(" Shorts", "").replace(" shorts", "")
-
-def render_channel_chips(items: list, state_key: str, avatars: dict, all_channels: list | None = None) -> str:
-    channels: dict[str, int] = {}
-    # Build case-insensitive lookup for dedup
-    seen_lower: dict[str, str] = {}
-    for item in items:
-        fuente = item.get(FUENTE_KEY, "")
-        if fuente:
-            fuente = _norm_channel(fuente)
-            channels[fuente] = channels.get(fuente, 0) + 1
-            seen_lower[fuente.lower()] = fuente
-
-    if all_channels:
-        for ch in all_channels:
-            ch_norm = _norm_channel(ch)
-            if ch_norm and ch_norm.lower() not in seen_lower:
-                channels[ch_norm] = 0
-                seen_lower[ch_norm.lower()] = ch_norm
-
-    html = f'<button class="chip active" data-channel="all">Todos</button>'
-    sorted_ch = sorted(channels.items(), key=lambda x: (-x[1] if x[1] > 0 else 1, x[0]))
-    for ch, count in sorted_ch:
-        favicon = _favicon_src(ch, avatars)
-        html += (
-            f'<button class="chip" data-channel="{_escape_html(ch)}">'
-            f'<img src="{favicon}" class="chip-icon" alt="" width="14" height="14" loading="lazy">'
-            f'{_escape_html(ch)} ({count})</button>'
-        )
-    return html
-
-
-def render_multimedia_tabs() -> str:
-    html = ""
-    for tab in TABS_MULTIMEDIA:
-        label = tab.get("label", "")
-        key = tab.get("id", "")
-        active = " active" if key == "youtube" else ""
-        html += f'<button class="chip{active}" data-tab="{key}">{label}</button>'
-    return html
-
-
-
-def _video_type_badge(tipo: str) -> str:
-    if tipo == TIPO_VAL_LIVE:
-        return '<span class="badge-video-live">🔴 Directo</span>'
-    elif tipo == TIPO_VAL_SHORTS:
-        return '<span class="badge-video-short">🩳 Short</span>'
-    else:
-        return '<span class="badge-video">🎬 Video</span>'
-
-
-def render_youtube_card(item: dict, avatars: dict) -> str:
-    titulo = _escape_html(item.get(TITULO_KEY, ""))
-    enlace = item.get(ENLACE_KEY, "#")
-    fuente = _escape_html(item.get(FUENTE_KEY, ""))
-    fuente_norm = _norm_channel(item.get(FUENTE_KEY, ""))
-    id_video = item.get(ID_VIDEO_KEY, "")
-    ts = _item_timestamp(item)
-    fecha = item.get(FECHA_REAL_KEY, "") or item.get(FECHA_PUB_KEY, "")
-    favicon = _favicon_src(fuente, avatars)
-    tipo = item.get(TIPO_KEY, TIPO_VAL_VIDEO)
-
-    thumbnail = f"https://img.youtube.com/vi/{id_video}/default.jpg" if id_video else ""
-    tipo_badge = _video_type_badge(tipo)
-
-    return (
-        f'<div class="video-card" data-source="{fuente_norm}" data-ts="{ts}" data-tipo="{tipo}">'
-        f'<a href="{enlace}" target="_blank" rel="noopener">'
-        f'<img src="{thumbnail}" alt="{titulo}" class="video-thumb" loading="lazy" onerror="this.src=\'https://via.placeholder.com/320x180?text=No+Preview\'">'
-        f'</a>'
-        f'<div class="video-info">'
-        f'<a href="{enlace}" target="_blank" rel="noopener" class="video-title">{titulo}</a>'
-        f'<span class="video-meta"><img src="{favicon}" class="chip-icon" alt="" width="14" height="14" loading="lazy"> {fuente} · {fecha} {tipo_badge}</span>'
-        f'</div></div>'
-    )
-
-
-def render_multimedia_content(items: list, avatars: dict) -> str:
-    html = ""
-    for item in items:
-        if item.get(ID_VIDEO_KEY):
-            html += render_youtube_card(item, avatars)
-    return html
-
-
-def render_github_ranking(herramientas: list) -> str:
-    html = ""
-    for i, h in enumerate(herramientas):
-        nombre = _escape_html(h.get(TITULO_KEY, ""))
-        enlace = h.get(ENLACE_KEY, "#")
-        estrellas = h.get(ESTRELLAS_KEY, "0")
-        lenguaje = _escape_html(h.get(LENGUAJE_KEY, ""))
-        desc = _escape_html(h.get(DESCRIPCION_KEY, "")[:120])
-
-        lang_badge = f'<span class="badge-lang">{lenguaje}</span>' if lenguaje else ""
-
-        html += (
-            f'<div class="github-item" data-lang="{lenguaje.lower()}">'
-            f'<span class="rank">#{i+1}</span>'
-            f'<div class="github-info">'
-            f'<a href="{enlace}" target="_blank" rel="noopener" class="github-name">{nombre}</a>'
-            f'<span class="github-desc">{desc}</span>'
-            f'</div>'
-            f'<div class="github-stars">⭐ {estrellas} {lang_badge}</div>'
-            f'</div>'
-        )
-    return html
-
-
-
-def generar_news_json(news_items: list, avatars: dict) -> None:
-    """Exporta noticias a JSON ligero para carga dinámica en el cliente."""
-    items_json = []
-    for item in news_items:
-        fuente = item.get(FUENTE_KEY, "")
-        items_json.append({
-            "t": item.get(TITULO_KEY, "Sin título"),
-            "e": item.get(ENLACE_KEY, "#"),
-            "f": _escape_html(fuente),
-            "fn": _norm_channel(fuente),
-            "ts": _item_timestamp(item),
-            "fp": item.get(FECHA_PUB_KEY, ""),
-            "c": item.get(CATEGORIA_KEY, ""),
-            "tp": item.get(TIPO_KEY, TIPO_VAL_NOTICIA),
-            "o": item.get(ORIGEN_KEY, ""),
-            "b": item.get("badge", ""),
-            "ic": _favicon_src(fuente, avatars),
-        })
-
-    data_dir = os.path.join("public", "data")
-    os.makedirs(data_dir, exist_ok=True)
-    with open(os.path.join(data_dir, "news.json"), "w", encoding="utf-8") as f:
-        json.dump(items_json, f, ensure_ascii=False, separators=(",", ":"))
-    logger.info(f"📦 news.json generado ({len(items_json)} items, {os.path.getsize(os.path.join(data_dir, 'news.json')) / 1024:.0f} KB)")
-
-
-def generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen_ia):
-    historial.sort(key=lambda x: x.get(TS_KEY, ""), reverse=True)
-    herramientas_github = [
-        h for h in herramientas
-        if h.get(SUBTIPO_KEY) == SUB_VAL_GITHUB and h.get(ESTRELLAS_KEY, "0").isdigit()
-    ]
-    herramientas_github.sort(key=lambda h: int(h.get(ESTRELLAS_KEY, "0")), reverse=True)
-    top_github = herramientas_github[:100]
-
-    # Completar avatares — only real cached avatars, no ui-avatars fallback
-    avatars_known = getattr(scr, "avatar_repo", None) and scr.avatar_repo.avatars or {}
-
-    # === Renderizar todas las secciones ===
-    stats_html = render_stats(historial)
-    video_items = [n for n in historial if n.get(ID_VIDEO_KEY)]
-    news_items = [n for n in historial if not n.get(ID_VIDEO_KEY)]
-    # News: exportar a JSON para carga dinámica, HTML queda vacío
-    generar_news_json(news_items, avatars_known)
-    news_list_html = ""  # Shell vacío — JS renderiza desde news.json
-    news_search_html = render_search_input("Buscar noticias...", "news-search")
-    # Fuentes duales (url + yt) deben mostrar chips en ambas secciones
-    dual_source_names = [name for name, info in FUENTES.items() if "url" in info and "yt" in info]
-    news_channel_filters_html = render_channel_chips(news_items, "canalNoticias", avatars_known, dual_source_names)
-    video_search_html = render_search_input("Buscar vídeos...", "video-search")
-    multimedia_tabs_html = render_multimedia_tabs()
-    video_channel_filters_html = render_channel_chips(video_items, "canalVideos", avatars_known, ALL_YT_CHANNELS)
-    multimedia_content_html = render_multimedia_content(historial, avatars_known)
-    github_ranking_html = render_github_ranking(top_github)
-
-    # === Escribir index.html con todo pre-renderizado ===
-    os.makedirs(DASHBOARD_DIR, exist_ok=True)
-    with open(DASHBOARD_HTML, "w", encoding="utf-8") as f:
-        f.write(
-            HTML_TEMPLATE.format(
-                fecha_hoy=fecha_h,
-                resumen=resumen_ia,
-                downloader_api_token=CONFIG.get("DOWNLOADER_API_TOKEN"),
-                stats_html=stats_html,
-                news_list_html=news_list_html,
-                news_search_html=news_search_html,
-                news_channel_filters_html=news_channel_filters_html,
-                video_search_html=video_search_html,
-                multimedia_tabs_html=multimedia_tabs_html,
-                video_channel_filters_html=video_channel_filters_html,
-                multimedia_content_html=multimedia_content_html,
-                github_ranking_html=github_ranking_html,
-            )
-        )
-
-    logger.info(f"✅ Dashboard HTML pre-renderizado ({len(historial)} registros, {len(top_github)} herramientas).")
-
-
 def badge_str(item: dict) -> str:
     return "`💻 Tech`"
 
+
 def origen_str(item: dict) -> str:
     return " `📡 RSS`" if item.get(ORIGEN_KEY) == VAL_RSS else ""
+
 
 async def generar_recap(noticias_web, client, blog_path: str | None = None) -> str | None:
     ahora = datetime.now()
@@ -674,14 +378,12 @@ async def generar_recap(noticias_web, client, blog_path: str | None = None) -> s
 
 
 async def run():
-    parser = argparse.ArgumentParser(description="Generate weekly recap + dashboard + PR")
+    parser = argparse.ArgumentParser(description="Generate weekly recap + blog PR")
     parser.add_argument("--no-pr", action="store_true", help="Skip PR creation")
-    parser.add_argument("--dashboard-only", action="store_true", help="Only regenerate dashboard HTML (skip AI recap and blog PR)")
     parser.add_argument("--blog-path", default=None, help="Path to blog checkout")
     args = parser.parse_args()
 
     logger.info("🚀 Iniciando generate_weekly.py")
-    scr = ScraperPro()
 
     path_json = os.path.join(CONFIG["FOLDER"], NOTICIAS_FILENAME)
     historial = load_json(path_json)
@@ -690,37 +392,19 @@ async def run():
         return
     historial = deduplicar_items(historial)
 
-    ahora = datetime.now()
-    fecha_h = ahora.strftime("%d/%m/%Y")
-
-    if args.dashboard_only:
-        logger.info("ℹ️ Modo --dashboard-only: saltando recap IA y PR.")
-        resumen_ia = "Resumen generado localmente sin IA."
-    else:
-        client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
-        # Traducir títulos pendientes antes de renderizar
-        historial = await traducir_titulos_ia(historial, client)
-        save_json(path_json, historial)
-        noticias_web = [n for n in historial if n.get(TIPO_KEY) in (TIPO_VAL_NOTICIA, "news")]
-        resumen_ia = await generar_recap(historial, client, blog_path=args.blog_path)
-        if not resumen_ia or "no ha sido posible" in resumen_ia or len(resumen_ia) < 50:
-            logger.warning("⚠️ Generando resumen de emergencia con titulares.")
-            titulares = [f"• {n['titulo']}" for n in noticias_web[:10]]
-            resumen_ia = "Resumen de hoy:\n\n" + "\n".join(titulares)
-
-    # Precargar avatares de todos los canales YouTube
-    for nombre, info in FUENTES.items():
-        if YT_KEY in info:
-            nombre_c = nombre.replace(" Shorts", "")
-            yt_url = info[YT_KEY]
-            scr.obtener_avatar_canal(nombre_c, yt_url)
-
-    herramientas = cargar_herramientas()
-    generar_dashboard_html(historial, herramientas, scr, fecha_h, ahora, resumen_ia or "Sin novedades hoy.")
-    scr.guardar_avatars()
+    client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
+    # Traducir títulos pendientes antes de renderizar
+    historial = await traducir_titulos_ia(historial, client)
+    save_json(path_json, historial)
+    noticias_web = [n for n in historial if n.get(TIPO_KEY) in (TIPO_VAL_NOTICIA, "news")]
+    resumen_ia = await generar_recap(historial, client, blog_path=args.blog_path)
+    if not resumen_ia or "no ha sido posible" in resumen_ia or len(resumen_ia) < 50:
+        logger.warning("⚠️ Generando resumen de emergencia con titulares.")
+        titulares = [f"• {n['titulo']}" for n in noticias_web[:10]]
+        resumen_ia = "Resumen de hoy:\n\n" + "\n".join(titulares)
 
     logger.info("✅ generate_weekly.py completado.")
-    if args.no_pr or args.dashboard_only:
+    if args.no_pr:
         logger.info("ℹ️ PR saltado.")
 
 

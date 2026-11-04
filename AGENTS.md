@@ -8,7 +8,7 @@
 - `python downloadFile.py` — (legacy) monolithic orchestrator
 - `python scrape_news.py` — scrape news sources (YouTube + web)
 - `python scrape_tools.py` — scrape tools (GitHub Trending + Product Hunt)
-- `python generate_weekly.py` — generate weekly recap MD + dashboard HTML
+- `python generate_weekly.py` — generate weekly recap MD (blog)
 - `python send_email.py` — send Mailgun newsletter
 - `python send_telegram.py` — send Telegram notification with TTS audio
 - `python clean_news.py` — validate links, prune dead entries
@@ -21,12 +21,12 @@
 - Pillow + pillow-avif-plugin for image optimization
 - edge-tts for Telegram voice messages (Spanish voice)
 - Mailgun API for email newsletters
-- Surge.sh for static dashboard deployment
+- Surge.sh for static web deployment (gestor de fuentes)
 - GitHub Actions for automation (16 workflows)
 
 ## Repository
 - `jorbencas/test_githubActions` (branch: master)
-- Deployed dashboard: `http://jorbencasdownloaderdocument.surge.sh`
+- Deployed web: `http://jorbencasdownloaderdocument.surge.sh` (gestor de fuentes)
 - Blog target: `jorbencas/blog` (auto-news + challenges via PR)
 
 ## Architecture
@@ -38,7 +38,7 @@
 | `scrape_news.py` | Scrape news + YouTube sources | scraper_base, utils |
 | `scrape_tools.py` | Scrape GitHub Trending + Product Hunt | scraper_base |
 | `scrape_ai_tools.py` | Auto-detect AI tools (HF API + GitHub Search) | aiohttp, constants_downloadfile |
-| `generate_weekly.py` | AI recap + dashboard HTML | constants_downloadfile, utils, scraper_base |
+| `generate_weekly.py` | AI recap (blog) | constants_downloadfile, utils |
 | `send_email.py` | Mailgun newsletter | constants_downloadfile |
 | `send_telegram.py` | Telegram with TTS audio | constants_downloadfile, edge-tts |
 | `downloadFile.py` | (legacy) old monolithic version | — |
@@ -57,8 +57,7 @@
 
 ### Output directories
 - `auto-news/` — weekly recap `.md` files (copied to blog via PR)
-- `public/` — static dashboard (`index.html` + JS + CSS + images)
-- `public/optimizado/` — optimized WebP/AVIF/WebM images
+- `public/` — web estática del gestor de fuentes (`index.html` + `css/fuentes.css` + `js/fuentes.js` + `data/`)
 
 ### Content pipeline
 - **News** → `scrape_news.py` → `files/noticias_historico.json`
@@ -76,7 +75,8 @@ The movie/series scrapers use a shared SOLID engine:
   - Auto-archives recaps >2 weeks old to `auto-news/archive/`
   - SEO: one post per week max (dedup by week slug)
   - News grouped by category before AI processing
-- **Dashboard** → `generate_weekly.py` → `public/` → Surge.sh
+- **Web (gestor de fuentes)** → `public/` (estático) → `dashboard_update.yml` → Surge.sh
+  - La web guarda cambios en `localStorage`; el snapshot `public/data/fuentes.json` es la fuente inicial (se actualiza exportando desde la web)
 - **PR to blog** → `scraper_workflow.yml` (copia auto-news + recursos + imágenes)
 
 ### GitHub Actions workflows
@@ -92,7 +92,7 @@ The movie/series scrapers use a shared SOLID engine:
 | `hunt_challenges.yml` | Weekly (Sun) | AI challenge generation |
 | `optimize_images.yml` | Dispatch from blog | Image optimization for blog |
 | `tests.yml` | Push/PR to master | pytest (89 tests) |
-| `dashboard_update.yml` | Push (JS/CSS/Python) | Regenerate + deploy dashboard |
+| `dashboard_update.yml` | Push (`public/**`) | Deploy gestor de fuentes a Surge |
 | `movie_scrapers.yml` | Every 6h (:23/:37/:47) | Scrape "Nueve reinas", "Los ilusos", "El nido" → commit JSON |
 
 ### Modular pipeline (each script is independent)
@@ -100,10 +100,11 @@ The movie/series scrapers use a shared SOLID engine:
 1. **News scraping** (`scrape_news.py`): YouTube + web sources → `noticias_historico.json`
 2. **Tools scraping** (`scrape_tools.py`): GitHub Trending + Product Hunt → `herramientas.json`
 3. **AI Tools auto-scrape** (`scrape_ai_tools.py`): HF API + GitHub Search → `ai_tools_candidates.json`
-4. **Weekly generation** (`generate_weekly.py`): AI recap (grouped by category) + dashboard → `auto-news/` + `public/`
+4. **Weekly generation** (`generate_weekly.py`): AI recap (grouped by category) → `auto-news/`
    - Auto-archives old recaps, enforces one-post-per-week SEO
-5. **Email** (`send_email.py`): Mailgun newsletter
-6. **Telegram** (`send_telegram.py`): Telegram with edge-tts audio
+5. **Web** (`public/`): gestor de fuentes (estático, sin backend) → Surge.sh
+6. **Email** (`send_email.py`): Mailgun newsletter
+7. **Telegram** (`send_telegram.py`): Telegram with edge-tts audio
 
 ## Project Generator (`project_generator/`)
 Generador de ideas de proyectos con Gemini, enviado a un canal de Telegram. **Migrado desde `devjobs`** (antes se disparaba vía `repository_dispatch`; ahora es local con cron propio).

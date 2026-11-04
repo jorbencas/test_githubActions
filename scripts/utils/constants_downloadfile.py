@@ -282,7 +282,7 @@ TELEGRAM_MENSAJE_TEMPLATE = "{icono} *{titulo}*\n📰 `{fuente}` | `{fecha}`\n\n
 # ── Re-exports para compatibilidad (imports existentes siguen funcionando) ──
 from utils.constants_sources import FUENTES  # noqa: E402, F401
 from utils.constants_templates import (  # noqa: E402, F401
-    HTML_TEMPLATE, EMAIL_TEMPLATE, MD_TEMPLATE,
+    EMAIL_TEMPLATE, MD_TEMPLATE,
     PROMPT_IMAGEN_TEMPLATE, PROMPT_RESUMIR_LOTE, PROMPT_RESUMIR_NOTICIA,
     PROMPT_RECAP_SEMANAL, PROMPT_TRADUCIR_TITULOS,
     EMAIL_SOURCE_HEADER, EMAIL_ROW_TEMPLATE,

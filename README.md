@@ -38,31 +38,39 @@ Ecosistema de automatización tech que ejecuta **16 workflows de GitHub Actions*
 |------|-------------|------------|------|
 | 🌐 **Scraping** | Recolección de datos de 547 fuentes | Cada hora | [📖](https://blog-jorbencas.vercel.app/posts/instalacion-tech-pulse) |
 | 🤖 **IA** | Procesamiento con Gemini (resúmenes, traducción) | En cada scraping | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
-| 📤 **Publicación** | Distribución multicanal (Email, Telegram, Dashboard) | Diario / cada 30min | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
+| 📤 **Publicación** | Distribución multicanal (Email, Telegram) | Diario / cada 30min | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
 | 💡 **Tips** | Contenido generado con IA (708 tips, 80 categorías) | Cada 3 horas | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
 | 🛠️ **Herramientas** | Auto-detección de herramientas IA (166 categorías) | Cada 3 horas | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
 | 🌅 **Saludos** | Imágenes generadas con IA | Cada 3 horas | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
 
 ---
 
-## 🏠 Landing Page
+## 🌐 Gestor de Fuentes (web)
 
-La landing ([jorbencasdownloaderdocument.surge.sh](http://jorbencasdownloaderdocument.surge.sh)) es un menú principal con acceso a las 3 secciones:
+La web ([jorbencasdownloaderdocument.surge.sh](http://jorbencasdownloaderdocument.surge.sh)) es un **gestor de fuentes de scraping** de una sola página:
 
-| Sección | URL | Descripción |
-|---------|-----|-------------|
-| 🔥 **Tech Timeline** | `/timeline.html` | Timeline interactiva de la historia de la tecnología (1970-2025) |
-| 📰 **News Dashboard** | `/dashboard.html` | 9.800+ noticias tech de 100+ fuentes RSS |
-| 🛠️ **Markdown Tools** | `/mdtools/` | Cheatsheets, snippets, tablas, presentaciones y exportación PDF |
+| Función | Detalle |
+|---------|---------|
+| 📋 **Lista completa** | Las 572 fuentes de `public/data/fuentes.json` con chips por tipo (🌐 web, ▶️ YouTube, 📡 RSS, 🐙 GitHub, 🛠 herramientas) |
+| 🔍 **Búsqueda y filtros** | Buscador por nombre/URL/selector + filtros por tipo con contadores en vivo |
+| ➕ **Alta de fuentes** | Formulario (nombre, tipo, URL, selector + opciones avanzadas: categoría, RSS, quick, org) |
+| 🗑 **Baja de fuentes** | Eliminación con confirmación en dos pasos |
+| 💾 **Persistencia local** | Los cambios se guardan en `localStorage`; botón **↺ Restaurar** vuelve al snapshot |
+| ⬇ **Exportar** | Descarga el estado actual como `fuentes.json` |
+| 🌗 **Tema** | Dark/light con preferencia guardada |
 
-**Diseño de la landing:**
-- Formas romboidales decorativas flotantes con animación
-- Grid de fondo con máscara radial
-- Tarjetas con `clip-path` romboide
-- Iconos dentro de rombos giratorios con hover
-- Stats por sección (años, noticias, herramientas)
-- Línea de escaneo animada inferior
-- Responsive (mobile ↔ desktop)
+**Flujo de cambios:** añade/borra en la web → **⬇ Exportar JSON** → reemplaza `public/data/fuentes.json` en el repo → push → el workflow `dashboard_update` despliega a Surge.
+
+**Estructura:**
+```
+public/
+├── index.html              ← Gestor de fuentes (una sola página)
+├── css/fuentes.css         ← Temas dark/light + responsive
+├── js/fuentes.js           ← Estado, localStorage, alta/baja, export
+└── data/
+    ├── fuentes.json        ← Snapshot de FUENTES (572 fuentes)
+    └── events.json         ← Eventos de la Tech Timeline (la lee scripts/scrape_october_calendar.py)
+```
 
 ---
 
@@ -96,7 +104,7 @@ scripts/
 │   ├── scrape_nueve_reinas.py    Serie "Nueve reinas" (Netflix, 2027)
 │   └── scrape_los_ilusos.py      Película "Los ilusos 13+13" (2026)
 ├── publishers/               📤 Generación y distribución
-│   ├── generate_weekly.py        Recap semanal + dashboard HTML
+│   ├── generate_weekly.py        Recap semanal (blog)
 │   ├── manage_resources.py       Gestión de resources.mdx
 │   ├── merge_freefordev.py       Merge de recursos free-for-dev
 │   ├── send_email.py             Newsletter Mailgun
@@ -120,19 +128,13 @@ scripts/
     ├── solutions_db.py            Lookup + generación
     └── solutions_data.py          107 soluciones curadas
 tests/                        ✅ Suite de tests pytest (183 tests)
-public/                       🌐 Landing + Timeline + Dashboard + Tools
-├── index.html                ← Landing page principal
-├── timeline.html             ← Tech Timeline interactiva
-├── dashboard.html            ← News Dashboard (9.800+ noticias)
-├── mdtools/                  ← Herramientas Markdown
-├── css/
-│   ├── style.css             ← Dark theme timeline + 14 breakpoints
-│   └── dashboard.css         ← Estilos news dashboard
-├── js/
-│   ├── app.js                ← Timeline: eras, parallax, partículas, audio
-│   └── dashboard.js          ← Dashboard: filtros, búsqueda, lazy loading
+public/                       🌐 Gestor de fuentes (web estática)
+├── index.html                ← Gestor de fuentes (lista + alta/baja)
+├── css/fuentes.css           ← Temas dark/light + responsive
+├── js/fuentes.js             ← Estado, localStorage, filtros, export
 └── data/
-    └── events.json           ← 424 eventos de historia tech
+    ├── fuentes.json          ← Snapshot de FUENTES (572 fuentes)
+    └── events.json           ← Eventos timeline (los usa scrape_october_calendar.py)
 ```
 
 ---
@@ -155,8 +157,7 @@ public/                       🌐 Landing + Timeline + Dashboard + Tools
 
 | Comando | Descripción |
 |---------|-------------|
-| `python -m scripts.publishers.generate_weekly --blog-path blog` | Generar recap semanal + dashboard |
-| `python -m scripts.publishers.generate_weekly --dashboard-only` | Regenerar solo el dashboard HTML |
+| `python -m scripts.publishers.generate_weekly --blog-path blog` | Generar recap semanal (blog) |
 | `python -m scripts.publishers.send_email` | Enviar newsletter Mailgun |
 | `python -m scripts.publishers.send_email --dry-run` | Previsualizar email sin enviar |
 | `python -m scripts.publishers.send_retos_email --max-retos 3` | Enviar retos de programación por email |
@@ -204,54 +205,9 @@ public/                       🌐 Landing + Timeline + Dashboard + Tools
 | `clean_news` | Trimestral | Validación de enlaces |
 | `hunt_challenges` | Manual | Generación de retos con IA |
 | `optimize_images` | Dispatch | Optimización de imágenes |
-| `dashboard_update` | Push (JS/CSS/Python) | Regenerar + deploy dashboard |
+| `dashboard_update` | Push (`public/**`) | Deploy del gestor de fuentes a Surge |
 | `tests` | Push/PR a master | pytest |
 | `translate_descriptions` | Manual | Traducción de descripciones |
-
----
-
-## 🕰️ Tech Timeline
-
-Timeline interactiva de la historia de la tecnología (1970-2025), desplegada en Surge.sh (`/timeline.html`).
-
-- **424 eventos** en 9 categorías
-- **Imágenes reales** de Unsplash como fondos por era
-- **6 eras temáticas** con colores, humo y partículas únicas
-- **Efecto teatro** — parallax de 3 capas
-- **Scroll animations** — IntersectionObserver
-- **Música ambient** — Web Audio API
-- **Year-bar** — barra de navegación con track coloreado por eras, needle con glow y ticks interactivos
-- **Responsive** — 320px → ultra-wide
-
-**Estructura:**
-```
-public/
-├── timeline.html         ← HTML principal
-├── css/style.css         ← Dark theme + 14 breakpoints responsive
-├── js/app.js             ← Lógica: eras, parallax, partículas, audio, scroll
-└── data/events.json      ← 424 eventos de historia tech
-```
-
----
-
-## 📊 News Dashboard
-
-Dashboard de noticias tech (`/dashboard.html`) con 9.800+ noticias de 100+ fuentes RSS.
-
-**Características:**
-- **Filtros por canal** — chips interactivos para filtrar por fuente
-- **Búsqueda en tiempo real** — filtrado instantáneo por texto
-- **Lazy loading** — carga progresiva de noticias
-- **Dark mode automático** — selon preferencias del sistema
-- **Responsive** — 320px → ultra-wide
-
-**Estructura:**
-```
-public/
-├── dashboard.html        ← HTML del dashboard
-├── css/dashboard.css     ← Estilos del news dashboard
-└── js/dashboard.js       ← Filtros, búsqueda, lazy loading
-```
 
 ---
 
