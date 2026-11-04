@@ -1027,5 +1027,17 @@
     "relevancia": 2,
     "pelicula": "Los ilusos 13+13",
     "enviada": true
+  },
+  {
+    "titulo": "Los Ilusos 13+13 : críticas de prensa",
+    "url": "https://www.sensacine.com/peliculas/pelicula-220188/criticas-prensa/",
+    "fecha_pub": "Mon, 17 May 2021 10:29:00 GMT",
+    "fecha_ts": "2026-11-04T14:20:35.339665+00:00",
+    "medio": "Sensacine",
+    "imagen": "",
+    "tipo": "critica",
+    "relevancia": 3,
+    "pelicula": "Los ilusos 13+13",
+    "enviada": true
   }
 ]
