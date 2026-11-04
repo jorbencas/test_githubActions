@@ -3843,5 +3843,77 @@
     "relevancia": 2,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Entrevista a Álvaro Morte | La Jarana en el Guadalquivir | Netflix España",
+    "url": "https://www.youtube.com/watch?v=gIOgDb7G3Cw",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-04T05:58:51.389491+00:00",
+    "medio": "Netflix España",
+    "imagen": "https://i.ytimg.com/vi/gIOgDb7G3Cw/hqdefault.jpg",
+    "tipo": "entrevista",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Más allá de 'La chica de nieve' y 'El cuco de cristal': Netflix te enganchará sin remedio a otra miniserie de su escritor favorito",
+    "url": "https://www.cinemania.es/cinemania/series/susurro-fuego-netflix-javier-castillo-serie-escritor_7052256_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-04T05:58:58.741913+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Mejor que 'Bajo la superficie': el creador de la miniserie tiene una joya de pura angustia psicológica escondida en Netflix",
+    "url": "https://www.cinemania.es/cinemania/series/bajo-superficie-sinner-netflix-joya-serie_7051759_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-04T05:58:58.741936+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Qué ver hoy en Netflix, Amazon Prime y otras plataformas: sábado 31 de octubre de 2026",
+    "url": "https://www.cinemania.es/cinemania/noticias/que-ver-hoy-netflix-amazon-prime-sabado-31-octubre-2026_7055119_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-04T05:58:58.742060+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix ficha a Ana Garcés tras salir de 'La Promesa' para protagonizar su nueva serie a lo 'The White Lotus'",
+    "url": "https://www.eldiario.es/vertele/noticias/netflix-ficha-ana-garces-salir-la-promesa-rtve-protagonizar-nueva-serie-the-white-lotus-canarias_1_12475010.html",
+    "fecha_pub": "Fri, 18 Jul 2025 07:03:00 GMT",
+    "fecha_ts": "2026-11-04T05:59:00.550280+00:00",
+    "medio": "eldiario.es",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix anuncia 'That Night', nueva serie con Clara Galle, Paula Usero y Claudia Salas que adaptará su novela homónima",
+    "url": "https://www.eldiario.es/vertele/noticias/netflix-anuncia-that-night-nueva-serie-clara-galle-paula-usero-claudia-salas-adaptara-novela-homonima_1_12026532.html",
+    "fecha_pub": "Tue, 04 Feb 2025 10:32:00 GMT",
+    "fecha_ts": "2026-11-04T05:59:00.550315+00:00",
+    "medio": "eldiario.es",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
