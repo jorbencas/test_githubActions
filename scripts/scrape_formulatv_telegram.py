@@ -1,24 +1,33 @@
 #!/usr/bin/env python3
 """
-scrape_formulatv_telegram.py — Scraper de estrenos HOY en FormulaTV → Telegram.
-Solo estrenos DE HOY (no días anteriores), filtro plataformas españolas,
-sin duplicados, envía a Telegram topic "report img".
-Sin Google Calendar, sin tokens, sin secrets.
+scrape_formulatv_telegram.py — Estrenos del día (series + películas) → Telegram topic "report img".
+
+Fuentes (sin tokens; HTML/JSON estático):
+  1. FormulaTV    — calendario de estrenos de series (data-tip)
+  2. SensaCine    — estrenos de cine en España
+  3. Filmaffinity — cartelera de estrenos en España (main.html)
+  4. TVMaze       — API schedule (ES), solo estrenos S1E1
+
+Reglas:
+  - SOLO items con fecha == fecha de ejecución (Europe/Madrid)
+  - Blocklist TITULOS_EXCLUIR (p. ej. "Los ilusos 13+13")
+  - Sin duplicados entre ejecuciones (files/formulatv_sent.json, clave titulo|fecha)
+  - Si una fuente falla, se envían las demás
 
 Uso:
     python scripts/scrape_formulatv_telegram.py
     python scripts/scrape_formulatv_telegram.py --dry-run
-    python scripts/scrape_formulatv_telegram.py --todas  # sin filtro español
+    python scripts/scrape_formulatv_telegram.py --todas  # sin filtro español (solo FormulaTV)
 """
 import argparse
 import json
 import os
 import re
 import sys
-import time
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from typing import Dict, List, Optional
+from zoneinfo import ZoneInfo
 
 import requests
 from bs4 import BeautifulSoup
@@ -27,16 +36,29 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_DIR = SCRIPT_DIR.parent.parent
 sys.path.insert(0, str(REPO_DIR / 'scripts'))
 
-from utils.common import load_json, save_json
-
 # Configuración
 OUTPUT_DIR = REPO_DIR / 'files'
 SENT_FILE = OUTPUT_DIR / 'formulatv_sent.json'
 
 FORMULATV_BASE = "https://www.formulatv.com"
 FORMULATV_CALENDARIO = f"{FORMULATV_BASE}/calendario/series/"
+SENSACINE_BASE = "https://www.sensacine.com"
+SENSACINE_ESTRENOS = f"{SENSACINE_BASE}/peliculas/estrenos/"
+FILMAFFINITY_MAIN = "https://www.filmaffinity.com/es/main.html"
+TVMAZE_SCHEDULE = "https://api.tvmaze.com/schedule"
 
-# Usa SALUDO_CHAT_ID (mismo que saludo/greetings) para el topic "report img"
+# Títulos que NUNCA se envían a este canal (substring, case-insensitive)
+TITULOS_EXCLUIR = [
+    "los ilusos 13+13",
+]
+
+MESES = {
+    "enero": 1, "febrero": 2, "marzo": 3, "abril": 4, "mayo": 5, "junio": 6,
+    "julio": 7, "agosto": 8, "septiembre": 9, "setiembre": 9, "octubre": 10,
+    "noviembre": 11, "diciembre": 12,
+    "ene": 1, "feb": 2, "mar": 3, "abr": 4, "may": 5, "jun": 6,
+    "jul": 7, "ago": 8, "sep": 9, "oct": 10, "nov": 11, "dic": 12,
+}
 
 # Cadenas/plataformas españolas (producen originales españoles)
 CADENAS_ESPAÑOLAS = {
@@ -50,6 +72,19 @@ CADENAS_ESPAÑOLAS = {
     'telemadrid', 'tv3', 'canal sur', 'eitb', 'etb', 'à punt', 'cmm', 'tpa', 'ib3', 'tv canaria', '7rm', 'cyltv', 'aragon tv', 'tvgalicia',
 }
 
+SESSION = requests.Session()
+SESSION.headers.update({
+    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
+})
+
+
+def fecha_ejecucion() -> date:
+    """Fecha de HOY en España (Europe/Madrid) — la referencia para filtrar."""
+    return datetime.now(ZoneInfo("Europe/Madrid")).date()
+
+
 def _es_cadena_española(cadena: str) -> bool:
     if not cadena:
         return False
@@ -57,142 +92,263 @@ def _es_cadena_española(cadena: str) -> bool:
     return any(c in cadena_lower for c in CADENAS_ESPAÑOLAS)
 
 
-class FormulaTVScraper:
-    def __init__(self):
-        self.session = requests.Session()
-        self.session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
-        })
+def _norm(texto: str) -> str:
+    return re.sub(r"\s+", " ", (texto or "")).strip().casefold()
 
-    def _fetch_page(self, url: str) -> Optional[str]:
-        try:
-            response = self.session.get(url, timeout=15)
-            response.raise_for_status()
-            return response.text
-        except Exception as e:
-            print(f"  ❌ Error descargando {url}: {e}")
+
+def excluido(titulo: str) -> bool:
+    """True si el título está en la blocklist (p. ej. 'Los ilusos 13+13')."""
+    t = _norm(titulo)
+    return any(b in t for b in TITULOS_EXCLUIR)
+
+
+def parse_fecha_es(texto: str, anio_default: int) -> Optional[date]:
+    """Parsea fechas en español → date.
+
+    Soporta: '30 de octubre de 2026', '(30 de octubre)', '30oct.'
+    Sin año (p. ej. Filmaffinity) usa `anio_default` (el año de ejecución).
+    """
+    if not texto:
+        return None
+    t = texto.strip().strip("()")
+    m = re.search(r"(\d{1,2})\s+de\s+([a-záéíóúñ]+)(?:\s+de\s+(\d{4}))?", t, re.I)
+    if m:
+        dia, mes_txt, anio = int(m.group(1)), m.group(2).lower(), m.group(3)
+    else:
+        m = re.search(r"(\d{1,2})\s*([a-záéíóú]{3})\.?", t, re.I)
+        if not m:
             return None
+        dia, mes_txt, anio = int(m.group(1)), m.group(2).lower(), None
+    if mes_txt not in MESES:
+        return None
+    anio = int(anio) if anio else anio_default
+    try:
+        return date(anio, MESES[mes_txt], dia)
+    except ValueError:
+        return None
 
-    def _parse_today_premieres(self, html: str, solo_españolas: bool = True) -> List[Dict]:
-        """Extrae SOLO estrenos de HOY del calendario."""
-        import re
-        soup = BeautifulSoup(html, 'html.parser')
-        series = []
 
-        pills = soup.find_all('a', class_=re.compile(r'cal-pill'))
-        hoy = datetime.now().date().isoformat()
+def _fetch(url: str, params: Optional[dict] = None) -> Optional[str]:
+    try:
+        response = SESSION.get(url, params=params or {}, timeout=15)
+        response.raise_for_status()
+        return response.text
+    except Exception as e:
+        print(f"  ❌ Error descargando {url}: {e}")
+        return None
 
-        for pill in pills:
-            try:
-                data_tip = {}
-                for attr, value in pill.attrs.items():
-                    if attr.startswith('data-tip-'):
-                        key = attr[len('data-tip-'):]
-                        data_tip[key] = value
 
-                if not data_tip:
-                    continue
+def _item(titulo: str, fecha: date, fuente: str, cadena: str, url: str,
+          sinopsis: str = "", capitulos: str = "?", temporadas: int = 1) -> Dict:
+    return {
+        'titulo': titulo,
+        'fecha_estreno': fecha.isoformat(),
+        'genero': '',
+        'cadena': cadena or fuente,
+        'protagonistas': [],
+        'temporadas': temporadas,
+        'capitulos': capitulos,
+        'sinopsis': sinopsis,
+        'url': url,
+        'fuente': fuente,
+        'fecha_scrape': datetime.now().isoformat(),
+    }
 
-                titulo = data_tip.get('title', '').strip()
-                if not titulo or len(titulo) < 3:
-                    continue
 
-                fecha_str = data_tip.get('date', '')
-                if not fecha_str:
-                    continue
+# =============================================================================
+# Fuente 1 — FormulaTV (calendario de estrenos de series)
+# =============================================================================
+def parse_formulatv(html: str, hoy: date, solo_espanolas: bool = True) -> List[Dict]:
+    """Extrae estrenos del calendario FormulaTV (pills con data-tip)."""
+    soup = BeautifulSoup(html, 'html.parser')
+    items: List[Dict] = []
+    hoy_str = hoy.isoformat()
 
-                # SOLO estrenos de HOY
-                if fecha_str != hoy:
-                    continue
+    for pill in soup.find_all('a', class_=re.compile(r'cal-pill')):
+        try:
+            data_tip = {}
+            for attr, value in pill.attrs.items():
+                if attr.startswith('data-tip-'):
+                    data_tip[attr[len('data-tip-'):]] = value
 
-                try:
-                    fecha_dt = datetime.fromisoformat(fecha_str)
-                except:
-                    continue
-
-                url = pill.get('href', '')
-                if url and url.startswith('/'):
-                    url = f"{FORMULATV_BASE}{url}"
-
-                cadena = data_tip.get('plat', '') or data_tip.get('plat-logo', '')
-
-                # Filtro plataformas españolas (configurable)
-                if solo_españolas and not _es_cadena_española(cadena):
-                    continue
-
-                genero = data_tip.get('genre', '')
-                try:
-                    temporadas = int(data_tip.get('temps', 1))
-                except:
-                    temporadas = 1
-                try:
-                    capitulos = int(data_tip.get('caps', '0'))
-                except:
-                    capitulos = '?'
-
-                descripcion = data_tip.get('desc', '')
-                if descripcion:
-                    descripcion = descripcion.replace('&#039;', "'").replace('"', '"').replace('&', '&')
-                    descripcion = re.sub(r'<[^>]+>', '', descripcion)[:500]
-
-                url = pill.get('href', '')
-                if url and url.startswith('/'):
-                    url = f"{FORMULATV_BASE}{url}"
-
-                series.append({
-                    'titulo': data_tip.get('title', '').strip(),
-                    'fecha_estreno': fecha_str,
-                    'genero': genero,
-                    'cadena': cadena,
-                    'protagonistas': [],
-                    'temporadas': int(data_tip.get('temps', 1)),
-                    'capitulos': data_tip.get('caps', '?'),
-                    'sinopsis': descripcion,
-                    'url': url if url.startswith('http') else f"{FORMULATV_BASE}{url}",
-                    'fuente': 'FormulaTV',
-                    'fecha_scrape': datetime.now().isoformat(),
-                })
-            except Exception as e:
-                print(f"  ⚠️ Error parseando: {e}")
+            if not data_tip:
                 continue
 
-        return series
+            titulo = (data_tip.get('title') or '').strip()
+            if not titulo or len(titulo) < 3:
+                continue
 
-    def scrape_today(self, solo_españolas: bool = True) -> List[Dict]:
-        print(f"🔍 Buscando estrenos DE HOY ({datetime.now().date()})...")
+            fecha_str = (data_tip.get('date') or '').strip()
+            if not fecha_str or fecha_str != hoy_str:
+                continue  # solo estrenos de HOY
 
-        html = self._fetch_page(FORMULATV_CALENDARIO)
-        if not html:
-            print("  ❌ No se pudo descargar")
-            return []
+            url = pill.get('href', '')
+            if url and url.startswith('/'):
+                url = f"{FORMULATV_BASE}{url}"
 
-        series = self._parse_today_premieres(html, solo_españolas=solo_españolas)
+            cadena = data_tip.get('plat', '') or data_tip.get('plat-logo', '')
+            if solo_espanolas and not _es_cadena_española(cadena):
+                continue
 
-        seen = set()
-        unicas = []
-        for s in series:
-            key = (s['titulo'], s['fecha_estreno'])
-            if key not in seen:
-                seen.add(key)
-                unicas.append(s)
+            genero = data_tip.get('genre', '')
+            try:
+                temporadas = int(data_tip.get('temps', 1))
+            except (TypeError, ValueError):
+                temporadas = 1
+            capitulos = data_tip.get('caps', '0') or '0'
 
-        print(f"  ✅ {len(unicas)} estrenos HOY")
-        return unicas
+            descripcion = data_tip.get('desc', '') or ''
+            if descripcion:
+                descripcion = descripcion.replace('&#039;', "'").replace('&quot;', '"').replace('&amp;', '&')
+                descripcion = re.sub(r'<[^>]+>', '', descripcion)[:500]
 
-    def _fetch_page(self, url: str) -> Optional[str]:
-        try:
-            response = self.session.get(url, timeout=15)
-            response.raise_for_status()
-            return response.text
+            it = _item(titulo, hoy, 'FormulaTV', cadena, url,
+                       sinopsis=descripcion, capitulos=capitulos, temporadas=temporadas)
+            it['genero'] = genero
+            items.append(it)
         except Exception as e:
-            print(f"  ❌ Error: {e}")
-            return None
+            print(f"  ⚠️ Error parseando pill: {e}")
+            continue
+
+    return items
 
 
+# =============================================================================
+# Fuente 2 — SensaCine (estrenos de cine en España)
+# =============================================================================
+def parse_sensacine(html: str, hoy: date) -> List[Dict]:
+    """Extrae estrenos de cine de sensacine.com/peliculas/estrenos/."""
+    soup = BeautifulSoup(html, 'html.parser')
+    items: List[Dict] = []
+
+    for card in soup.select('.entity-card-list'):
+        a = card.select_one('a.meta-title-link')
+        d = card.select_one('.meta-body-info span.date') or card.select_one('span.date')
+        if not a or not d:
+            continue
+        titulo = a.get_text(strip=True)
+        fecha = parse_fecha_es(d.get_text(strip=True), hoy.year)
+        if not titulo or not fecha:
+            continue
+        href = a.get('href', '')
+        url = href if href.startswith('http') else f"{SENSACINE_BASE}{href}"
+        items.append(_item(titulo, fecha, 'SensaCine', 'SensaCine', url))
+
+    return items
+
+
+# =============================================================================
+# Fuente 3 — Filmaffinity (cartelera con fechas en main.html)
+# =============================================================================
+def parse_filmaffinity(html: str, hoy: date) -> List[Dict]:
+    """Extrae estrenos de filmaffinity.com/es/main.html (fecha sin año → año actual)."""
+    soup = BeautifulSoup(html, 'html.parser')
+    items: List[Dict] = []
+
+    for small in soup.find_all('small'):
+        txt = small.get_text(strip=True)
+        if not re.match(r"^\(\d{1,2}\s+de\s+[a-záéíóúñ]+\)$", txt, re.I):
+            continue
+        fecha = parse_fecha_es(txt, hoy.year)
+        if not fecha:
+            continue
+        card = small.find_parent(class_='card-footer')
+        if not card:
+            continue
+        t_el = card.select_one('.mtitle')
+        link_el = small.find_parent('a')
+        if not t_el or not link_el:
+            continue
+        titulo = t_el.get_text(strip=True)
+        if not titulo:
+            continue
+        url = link_el.get('href', '')
+        items.append(_item(titulo, fecha, 'Filmaffinity', 'Filmaffinity', url))
+
+    return items
+
+
+# =============================================================================
+# Fuente 4 — TVMaze (schedule ES, solo estrenos S1E1)
+# =============================================================================
+def _limpiar_html(texto: str) -> str:
+    if not texto:
+        return ""
+    return re.sub(r'<[^>]+>', '', texto).strip()
+
+
+def parse_tvmaze(data: list, hoy: date) -> List[Dict]:
+    """Extrae estrenos de serie (temporada 1, episodio 1) del schedule de TVMaze ES."""
+    items: List[Dict] = []
+    hoy_str = hoy.isoformat()
+
+    for ep in data or []:
+        try:
+            if ep.get('season') != 1 or ep.get('number') != 1:
+                continue  # solo estrenos de serie nuevos
+            if ep.get('airdate') != hoy_str:
+                continue  # solo la fecha de ejecución
+            show = ep.get('show') or {}
+            net = show.get('network') or show.get('webChannel') or {}
+            cadena = net.get('name') if isinstance(net, dict) else None
+            titulo = (show.get('name') or ep.get('name') or '').strip()
+            if not titulo:
+                continue
+            items.append(_item(
+                titulo, hoy, 'TVMaze', cadena or 'TVMaze',
+                ep.get('url') or show.get('url') or '',
+                sinopsis=_limpiar_html(ep.get('summary') or show.get('summary') or ''),
+                capitulos='1',
+            ))
+        except Exception as e:
+            print(f"  ⚠️ Error parseando episodio TVMaze: {e}")
+            continue
+
+    return items
+
+
+# =============================================================================
+# Filtros centrales: fecha de ejecución + blocklist + dedup
+# =============================================================================
+def filtrar_estrenos(items: List[Dict], hoy: date) -> List[Dict]:
+    """Deja SOLO items con fecha == fecha de ejecución y fuera de la blocklist."""
+    out = []
+    for it in items:
+        if excluido(it.get('titulo', '')):
+            continue
+        if it.get('fecha_estreno') != hoy.isoformat():
+            continue
+        out.append(it)
+    return out
+
+
+def clave_item(it: Dict) -> str:
+    return f"{it.get('titulo', '')}|{it.get('fecha_estreno', '')}"
+
+
+def deduplicar(items: List[Dict]) -> List[Dict]:
+    """Quita duplicados dentro de la misma ejecución (clave titulo|fecha)."""
+    vistos = set()
+    unicos = []
+    for it in items:
+        k = clave_item(it)
+        if k in vistos:
+            continue
+        vistos.add(k)
+        unicos.append(it)
+    return unicos
+
+
+def filtrar_nuevos(items: List[Dict], enviados: set) -> List[Dict]:
+    """Quita los ya enviados en ejecuciones anteriores."""
+    return [it for it in items if clave_item(it) not in enviados]
+
+
+# =============================================================================
+# Telegram
+# =============================================================================
 def cargar_enviados() -> set:
-    """Carga set de títulos ya enviados (key: titulo|fecha)."""
+    """Carga set de claves ya enviadas (titulo|fecha)."""
     if SENT_FILE.exists():
         try:
             data = json.loads(SENT_FILE.read_text(encoding='utf-8'))
@@ -203,10 +359,9 @@ def cargar_enviados() -> set:
 
 
 def guardar_enviado(key: str):
-    """Añade key al set de enviados y guarda."""
+    """Añade clave al set de enviados y guarda (máx. 1000)."""
     enviados = cargar_enviados()
     enviados.add(key)
-    # Mantener solo últimos 1000 para no crecer indefinidamente
     if len(enviados) > 1000:
         enviados = set(list(enviados)[-1000:])
     SENT_FILE.parent.mkdir(parents=True, exist_ok=True)
@@ -214,7 +369,7 @@ def guardar_enviado(key: str):
 
 
 def enviar_telegram(mensaje: str, chat_id: str, token: str, topic_id: Optional[str] = None) -> bool:
-    """Envía mensaje a Telegram."""
+    """Envía mensaje a Telegram (topic 'report img' si se indica)."""
     url = f"https://api.telegram.org/bot{token}/sendMessage"
     data = {
         'chat_id': chat_id,
@@ -234,29 +389,27 @@ def enviar_telegram(mensaje: str, chat_id: str, token: str, topic_id: Optional[s
 
 
 def formatear_mensaje(series: List[Dict]) -> str:
-    """Formatea el mensaje para Telegram estilo noticias (esquema solicitado)."""
+    """Formatea el mensaje para Telegram agrupando por cadena/plataforma."""
     if not series:
         return ""
 
-    meses = ['enero','febrero','marzo','abril','mayo','junio',
-             'julio','agosto','septiembre','octubre','noviembre','diciembre']
-    hoy = datetime.now()
-    hoy_fmt = f"{hoy.day} de {meses[hoy.month-1]} de {hoy.year}"
+    meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+             'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
+    hoy = datetime.now(ZoneInfo("Europe/Madrid"))
+    hoy_fmt = f"{hoy.day} de {meses[hoy.month - 1]} de {hoy.year}"
 
     lines = [
         f"📰 <b>Estrenos del día: {hoy_fmt}</b>",
         "",
-        "¡Buenos días! Aquí están los estrenos de hoy en plataformas españolas. 👇",
+        "¡Buenos días! Aquí están los estrenos de hoy. 👇",
         ""
     ]
 
     # Agrupar por cadena/plataforma
-    por_cadena = {}
+    por_cadena: Dict[str, List[Dict]] = {}
     for s in series:
-        c = s.get('cadena', 'Sin plataforma')
-        if c not in por_cadena:
-            por_cadena[c] = []
-        por_cadena[c].append(s)
+        c = s.get('cadena') or s.get('fuente') or 'Sin plataforma'
+        por_cadena.setdefault(c, []).append(s)
 
     for cadena, items in sorted(por_cadena.items()):
         lines.append(f"📍 <b>{cadena}</b>")
@@ -272,16 +425,53 @@ def formatear_mensaje(series: List[Dict]) -> str:
                 lines.append(f"     🔗 Leer artículo ({s['url']})")
         lines.append("")
 
-    lines.append("📡 <i>Fuente: FormulaTV calendario</i>")
-    lines.append(f"🤖 <i>Bot automático — {datetime.now().strftime('%H:%M')}</i>")
+    fuentes = sorted({s.get('fuente', 'FormulaTV') for s in series})
+    lines.append(f"📡 <i>Fuentes: {' · '.join(fuentes)}</i>")
+    lines.append(f"🤖 <i>Bot automático — {hoy.strftime('%H:%M')}</i>")
 
     return "\n".join(lines)
 
 
+# =============================================================================
+# Orquestación
+# =============================================================================
+def recopilar_estrenos(hoy: date, solo_espanolas: bool = True) -> List[Dict]:
+    """Recopila estrenos de las 4 fuentes. Si una falla, siguen las demás."""
+    items: List[Dict] = []
+
+    # HTML: FormulaTV, SensaCine, Filmaffinity
+    for nombre, url, parse in (
+        ("FormulaTV", FORMULATV_CALENDARIO, lambda h: parse_formulatv(h, hoy, solo_espanolas)),
+        ("SensaCine", SENSACINE_ESTRENOS, lambda h: parse_sensacine(h, hoy)),
+        ("Filmaffinity", FILMAFFINITY_MAIN, lambda h: parse_filmaffinity(h, hoy)),
+    ):
+        html = _fetch(url)
+        if not html:
+            continue
+        try:
+            encontrados = parse(html)
+            print(f"  ✅ {nombre}: {len(encontrados)} anuncios parseados")
+            items += encontrados
+        except Exception as e:
+            print(f"  ⚠️ {nombre} falló (sigo con las demás): {e}")
+
+    # JSON: TVMaze
+    try:
+        r = SESSION.get(TVMAZE_SCHEDULE, params={'country': 'ES', 'date': hoy.isoformat()}, timeout=15)
+        r.raise_for_status()
+        encontrados = parse_tvmaze(r.json(), hoy)
+        print(f"  ✅ TVMaze: {len(encontrados)} S1E1 de hoy")
+        items += encontrados
+    except Exception as e:
+        print(f"  ⚠️ TVMaze falló (sigo con las demás): {e}")
+
+    return deduplicar(filtrar_estrenos(items, hoy))
+
+
 def main():
-    parser = argparse.ArgumentParser(description="Estrenos HOY FormulaTV → Telegram")
+    parser = argparse.ArgumentParser(description="Estrenos del día → Telegram (topic report img)")
     parser.add_argument("--dry-run", action="store_true", help="Muestra mensaje sin enviar")
-    parser.add_argument("--todas", action="store_true", help="Sin filtro plataformas españolas")
+    parser.add_argument("--todas", action="store_true", help="Sin filtro plataformas españolas (solo FormulaTV)")
     parser.add_argument("--chat-id", help="Telegram chat ID (sobrescribe env)")
     parser.add_argument("--topic-id", help="Telegram topic ID (report img)")
     parser.add_argument("--token", help="Telegram bot token (sobrescribe env)")
@@ -301,28 +491,23 @@ def main():
             print("❌ Falta TELEGRAM_CHAT_ID y/o TELEGRAM_BOT_TOKEN en env/args")
             return
 
-    print(f"🎬 Estrenos HOY FormulaTV → Telegram")
+    hoy = fecha_ejecucion()
+    print(f"🎬 Estrenos del día {hoy} (Europe/Madrid) → Telegram")
 
-    scraper = FormulaTVScraper()
-    series = scraper.scrape_today(solo_españolas=not args.todas)
+    todos = recopilar_estrenos(hoy, solo_espanolas=not args.todas)
 
-    if not series:
-        print("⚠️ No hay estrenos HOY")
+    if not todos:
+        print("⚠️ No hay estrenos hoy")
         return
 
     # Filtrar duplicados ya enviados
-    enviados = cargar_enviados()
-    nuevos = []
-    for s in series:
-        key = f"{s['titulo']}|{s['fecha_estreno']}"
-        if key not in enviados:
-            nuevos.append(s)
+    nuevos = filtrar_nuevos(todos, cargar_enviados())
 
     if not nuevos:
         print("✅ Todos los estrenos de hoy ya fueron enviados")
         return
 
-    print(f"\n📺 {len(nuevos)} estrenos NUEVOS de HOY:")
+    print(f"\n📺 {len(nuevos)} estrenos NUEVOS de hoy:")
     for s in nuevos:
         print(f"  📅 {s['fecha_estreno']} - {s['titulo']} ({s.get('cadena', 'N/A')})")
 
@@ -341,8 +526,7 @@ def main():
     if ok:
         print("✅ Mensaje enviado")
         for s in nuevos:
-            key = f"{s['titulo']}|{s['fecha_estreno']}"
-            guardar_enviado(key)
+            guardar_enviado(clave_item(s))
     else:
         print("❌ Error enviando")
 

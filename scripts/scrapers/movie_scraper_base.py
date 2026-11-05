@@ -36,6 +36,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Callable, List, Optional, Tuple
 from urllib.parse import quote_plus
+from zoneinfo import ZoneInfo
 
 import requests
 
@@ -53,7 +54,7 @@ CHAT_ID = os.environ.get("SALUDO_CHAT_ID", os.environ.get("TIPS_CHAT_ID", ""))
 
 # Determinar fecha de ejecución (para filtrar noticias del día)
 def _get_execution_date():
-    """Obtiene la fecha de ejecución desde variable de entorno o fecha actual UTC."""
+    """Obtiene la fecha de ejecución desde variable de entorno o fecha actual (Europe/Madrid)."""
     exec_date_str = os.environ.get("EXECUTION_DATE") or os.environ.get("RUN_DATE") or os.environ.get("TODAY")
     if exec_date_str:
         try:
@@ -61,8 +62,8 @@ def _get_execution_date():
             return datetime.strptime(exec_date_str.split("T")[0], "%Y-%m-%d").date()
         except Exception:
             pass
-    # Por defecto usar fecha UTC actual
-    return datetime.now(timezone.utc).date()
+    # Por defecto usar fecha actual de España (Europe/Madrid)
+    return datetime.now(ZoneInfo("Europe/Madrid")).date()
 
 EXECUTION_DATE = _get_execution_date()
 

@@ -2,7 +2,7 @@ name: FormulaTV Daily Premieres → Telegram
 
 on:
   schedule:
-    - cron: '15,45 * * * *'  # Cada 30 minutos (minutos 15 y 45) - offset de send_telegram
+    - cron: '5,20,35,50 * * * *'  # Cada 15 minutos (offset :05 → no choca con send_telegram en :00/:30)
   workflow_dispatch:  # Ejecución manual
 
 permissions:
@@ -33,9 +33,9 @@ jobs:
         run: |
           pip install requests beautifulsoup4
 
-      - name: Run FormulaTV scraper → Telegram
+      - name: Run estrenos del día → Telegram
         run: |
-          python scripts/scrape_formulatv_telegram.py --crear-eventos --guardar-json || true
+          python scripts/scrape_formulatv_telegram.py
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           SALUDO_CHAT_ID: ${{ secrets.SALUDO_CHAT_ID }}

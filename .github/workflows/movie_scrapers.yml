@@ -1,7 +1,7 @@
-name: "🎬 Movie/Series Scrapers (cada 6h)"
+name: "🎬 Movie/Series Scrapers (cada 3h)"
 on:
   schedule:
-    - cron: "0 */6 * * *"   # Cada 6 horas: 00:00, 06:00, 12:00, 18:00 UTC
+    - cron: "15 */3 * * *"   # Cada 3 horas (offset :15 → 00:15, 03:15, 06:15... UTC)
   workflow_dispatch:
 
 jobs:
@@ -124,7 +124,7 @@ jobs:
           TIPS_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           SALUDO_CHAT_ID: ${{ secrets.SALUDO_CHAT_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python scripts/scrapers/scrape_los_ilusos.py --enviar
+        run: python scripts/scrapers/scrape_los_ilusos.py
 
       - name: 💾 Commit
         if: always()

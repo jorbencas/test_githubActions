@@ -2,6 +2,24 @@
 
 ## Cambios recientes
 
+### Estrenos del día → topic "report img": +fuentes, +frecuencia y fecha estricta — 04/11/2026
+- **"Los ilusos 13+13" deja de enviarse a Telegram**: en `movie_scrapers.yml` se quitó
+  `--enviar` del job `los_ilusos` (sigue scrapeando y commiteando `files/los_ilusos.json`,
+  pero no manda fotos ni resúmenes). Blocklist extra `TITULOS_EXCLUIR` en el script de estrenos.
+- **`scrape_formulatv_telegram.py` ampliado** a 4 fuentes de estrenos (sin tokens):
+  FormulaTV (calendario series), SensaCine (`peliculas/estrenos/`),
+  Filmaffinity (`main.html`, fechas sin año → año actual) y TVMaze
+  (`schedule?country=ES`, solo S1E1 para no inundar). Si una fuente falla, se envían las demás.
+- **Fecha de ejecución estricta (Europe/Madrid)**: solo se envían items con
+  `fecha == hoy` en todos los parsers + filtro central `filtrar_estrenos()`.
+  `movie_scraper_base._get_execution_date()` cambia el fallback UTC → Europe/Madrid
+  (el filtro `item_date != EXECUTION_DATE → descartar` ya existía).
+- **Frecuencia**: `formulatv_telegram.yml` 30 min → **cada 15 min** (`5,20,35,50`);
+  `movie_scrapers.yml` 6h → **cada 3h** (`15 */3`, offset para no chocar con otros bots).
+- **Fix**: `formulatv_telegram.yml` pasaba `--crear-eventos --guardar-json` (flags inexistentes
+  con `|| true`) → nunca había enviado nada en CI; ahora ejecuta el script directo.
+- Nuevos tests: `tests/test_formulatv_estrenos.py` (parsers, fechas, blocklist, dedup).
+
 ### Reescritura de la web: solo gestor de fuentes — 04/11/2026
 - **La web pasa a ser únicamente un gestor de fuentes** de scraping (decisión del usuario:
   "borrar todo, solo fuentes" + persistencia visual sin tocar los scrapers).
