@@ -2,6 +2,23 @@
 
 ## Cambios recientes
 
+### Gestor de fuentes: etiquetas de proyecto + div explicativo — 05/11/2026
+- **Div explicativo en la web** (`section.contexto`): qué es el gestor y a qué proyecto
+  alimenta cada etiqueta — 📰 Noticias tech → histórico (newsletter/Telegram/recap),
+  🛠 Herramientas/dev → resources del blog, 🎬 Películas/series → topic «report img»,
+  📚 Otros/recursos — con **conteos en vivo** por proyecto.
+- **Etiqueta de proyecto derivada automáticamente** en `fuentes.js` (`proyectoDe()`):
+  1) campo explícito `proyecto` → 2) `tipo: herramienta` → 3) `tipo: recurso_blog` →
+  4) keywords de cine en nombre/URL (CINE_RE) → 5) tenga url/rss/yt → tech → 6) otros.
+  **No** se toca `constants_sources.py` ni `FUENTES`.
+- **UI**: chips de proyecto en segunda fila, columna **Proyecto** en la tabla con badge
+  (`.proy-*`), buscador que también casa por etiqueta de proyecto («cine» → las 4 fuentes
+  de estrenos), responsive ya apila la columna en móvil.
+- **+4 fuentes en `public/data/fuentes.json`** (572 → 576): FormulaTV Calendario,
+  SensaCine Estrenos, Filmaffinity Estrenos y TVMaze Schedule ES, con
+  `subtipo: estreno` y `proyecto: cine` (solo las lee la web; el script de estrenos
+  mantiene sus URLs propias).
+
 ### Estrenos del día → topic "report img": +fuentes, +frecuencia y fecha estricta — 04/11/2026
 - **"Los ilusos 13+13" deja de enviarse a Telegram**: en `movie_scrapers.yml` se quitó
   `--enviar` del job `los_ilusos` (sigue scrapeando y commiteando `files/los_ilusos.json`,

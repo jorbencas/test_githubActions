@@ -2511,5 +2511,25 @@
     "rss": "https://mastodon.social/@nickytonline.rss",
     "quick": true,
     "solo_tech": true
+  },
+  "FormulaTV Calendario": {
+    "url": "https://www.formulatv.com/calendario/series/",
+    "subtipo": "estreno",
+    "proyecto": "cine"
+  },
+  "SensaCine Estrenos": {
+    "url": "https://www.sensacine.com/peliculas/estrenos/",
+    "subtipo": "estreno",
+    "proyecto": "cine"
+  },
+  "Filmaffinity Estrenos": {
+    "url": "https://www.filmaffinity.com/es/main.html",
+    "subtipo": "estreno",
+    "proyecto": "cine"
+  },
+  "TVMaze Schedule ES": {
+    "rss": "https://api.tvmaze.com/schedule?country=ES",
+    "subtipo": "estreno",
+    "proyecto": "cine"
   }
 }

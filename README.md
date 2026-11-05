@@ -51,8 +51,9 @@ La web ([jorbencasdownloaderdocument.surge.sh](http://jorbencasdownloaderdocumen
 
 | Función | Detalle |
 |---------|---------|
-| 📋 **Lista completa** | Las 572 fuentes de `public/data/fuentes.json` con chips por tipo (🌐 web, ▶️ YouTube, 📡 RSS, 🐙 GitHub, 🛠 herramientas) |
-| 🔍 **Búsqueda y filtros** | Buscador por nombre/URL/selector + filtros por tipo con contadores en vivo |
+| ℹ️ **Contexto** | Div explicativo con qué es el gestor y qué alimenta cada proyecto (newsletter/Telegram, blog, topic «report img»…) con conteos en vivo |
+| 📋 **Lista completa** | Las 576 fuentes de `public/data/fuentes.json` con chips por tipo (🌐 web, ▶️ YouTube, 📡 RSS, 🐙 GitHub, 🛠 herramientas) y por proyecto (📰 Noticias tech, 🛠 Herramientas/dev, 🎬 Películas/series, 📚 Otros); la tabla muestra la columna **Proyecto** |
+| 🔍 **Búsqueda y filtros** | Buscador por nombre/URL/selector/**etiqueta de proyecto** + filtros por tipo y proyecto con contadores en vivo |
 | ➕ **Alta de fuentes** | Formulario (nombre, tipo, URL, selector + opciones avanzadas: categoría, RSS, quick, org) |
 | 🗑 **Baja de fuentes** | Eliminación con confirmación en dos pasos |
 | 💾 **Persistencia local** | Los cambios se guardan en `localStorage`; botón **↺ Restaurar** vuelve al snapshot |
@@ -68,7 +69,7 @@ public/
 ├── css/fuentes.css         ← Temas dark/light + responsive
 ├── js/fuentes.js           ← Estado, localStorage, alta/baja, export
 └── data/
-    ├── fuentes.json        ← Snapshot de FUENTES (572 fuentes)
+    ├── fuentes.json        ← Snapshot de FUENTES (576 fuentes)
     └── events.json         ← Eventos de la Tech Timeline (la lee scripts/scrape_october_calendar.py)
 ```
 
@@ -127,13 +128,13 @@ scripts/
 └── solutions/                💡 Base de datos de soluciones
     ├── solutions_db.py            Lookup + generación
     └── solutions_data.py          107 soluciones curadas
-tests/                        ✅ Suite de tests pytest (183 tests)
+tests/                        ✅ Suite de tests pytest (203 tests)
 public/                       🌐 Gestor de fuentes (web estática)
-├── index.html                ← Gestor de fuentes (lista + alta/baja)
+├── index.html                ← Gestor de fuentes (contexto + lista + alta/baja)
 ├── css/fuentes.css           ← Temas dark/light + responsive
 ├── js/fuentes.js             ← Estado, localStorage, filtros, export
 └── data/
-    ├── fuentes.json          ← Snapshot de FUENTES (572 fuentes)
+    ├── fuentes.json          ← Snapshot de FUENTES (576 fuentes)
     └── events.json           ← Eventos timeline (los usa scrape_october_calendar.py)
 ```
 

@@ -39,6 +39,41 @@
 
         <section class="stats" id="stats" aria-label="Estadísticas"></section>
 
+        <section class="contexto" aria-label="Qué es este gestor">
+            <h2>¿Qué es este gestor?</h2>
+            <p>
+                Aquí se dan de alta y de baja las <strong>fuentes de scraping</strong> que alimentan los
+                proyectos de automatización de <strong>Tech Pulse</strong>. Cada fuente pertenece a un
+                proyecto según para qué se usa:
+            </p>
+            <ul class="leyenda">
+                <li>
+                    <span class="badge proy proy-tech">📰 Noticias tech <b class="leyenda-count" id="cnt-tech">–</b></span>
+                    RSS/web/YouTube que alimentan el <strong>histórico de noticias</strong> → newsletter
+                    por email, avisos en Telegram y el recap semanal del blog.
+                </li>
+                <li>
+                    <span class="badge proy proy-herr">🛠 Herramientas/dev <b class="leyenda-count" id="cnt-herramientas">–</b></span>
+                    GitHub Topics, awesome lists y Product Hunt → se filtran como
+                    <strong>herramientas</strong> hacia los resources del blog.
+                </li>
+                <li>
+                    <span class="badge proy proy-cine">🎬 Películas/series <b class="leyenda-count" id="cnt-cine">–</b></span>
+                    Calendarios de estrenos (FormulaTV, SensaCine, Filmaffinity, TVMaze) → resumen
+                    diario al topic <strong>«report img»</strong> de Telegram. Los scrapers de películas
+                    concretas (El nido, Nueve reinas…) van por separado.
+                </li>
+                <li>
+                    <span class="badge proy proy-otros">📚 Otros/recursos <b class="leyenda-count" id="cnt-otros">–</b></span>
+                    Recursos para el blog y fuentes misceláneas.
+                </li>
+            </ul>
+            <p class="contexto-note">
+                La etiqueta de proyecto se deduce automáticamente de los campos de cada fuente
+                (tipo, URL, nombre). Tus cambios se guardan solo en este navegador.
+            </p>
+        </section>
+
         <section class="toolbar" aria-label="Herramientas">
             <div class="search-box">
                 <span class="search-icon" aria-hidden="true">⌕</span>
@@ -52,6 +87,14 @@
                 <button class="chip" data-type="rss" role="tab" aria-selected="false">📡 RSS</button>
                 <button class="chip" data-type="github" role="tab" aria-selected="false">🐙 GitHub</button>
                 <button class="chip" data-type="herramienta" role="tab" aria-selected="false">🛠 Herramientas</button>
+            </div>
+            <div class="chips" id="proy-filters" role="tablist" aria-label="Filtrar por proyecto">
+                <span class="chips-label">Proyecto:</span>
+                <button class="chip active" data-proy="todas" role="tab" aria-selected="true">Todas</button>
+                <button class="chip" data-proy="tech" role="tab" aria-selected="false">📰 Noticias tech</button>
+                <button class="chip" data-proy="herramientas" role="tab" aria-selected="false">🛠 Herramientas/dev</button>
+                <button class="chip" data-proy="cine" role="tab" aria-selected="false">🎬 Películas/series</button>
+                <button class="chip" data-proy="otros" role="tab" aria-selected="false">📚 Otros/recursos</button>
             </div>
             <div class="toolbar-actions">
                 <button id="btn-add" class="btn btn-primary" type="button">➕ Añadir fuente</button>
@@ -132,6 +175,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Nombre</th>
+                        <th scope="col">Proyecto</th>
                         <th scope="col">Tipos</th>
                         <th scope="col">Enlace</th>
                         <th scope="col" class="col-actions">Acciones</th>

@@ -12,6 +12,7 @@ const DATA_URL = 'data/fuentes.json';
 let original = {};   // snapshot del servidor (para restaurar)
 let state = {};      // estado de trabajo (lo que se ve/exporta)
 let filterType = 'todas';
+let filterProy = 'todas';
 let query = '';
 
 /* ── Tema ───────────────────────────────────────────────────── */
@@ -92,9 +93,35 @@ function matchesType(info, type) {
     }
 }
 
+/* ── Proyectos (etiqueta derivada de los campos de la fuente) ─ */
+const PROYECTOS = {
+    tech:         { label: '📰 Noticias tech',    cls: 'proy-tech',    aliases: 'noticias tech news' },
+    herramientas: { label: '🛠 Herramientas/dev', cls: 'proy-herr',    aliases: 'herramientas tools dev github awesome producthunt' },
+    cine:         { label: '🎬 Películas/series', cls: 'proy-cine',    aliases: 'cine peliculas pelicula series serie film estrenos television tv' },
+    otros:        { label: '📚 Otros/recursos',   cls: 'proy-otros',   aliases: 'otros recursos resources blog' },
+};
+
+const CINE_RE = /(^|[^\w])(cines?|pel[ií]culas?|series?|netflix|trailers?|estrenos?|tvmaze|formulatv|sensacine|filmaffinity|filmin|imdb|tmdb)(?![\w])/i;
+
+function proyectoDe(name, info) {
+    if (info.proyecto && PROYECTOS[info.proyecto]) return info.proyecto;
+    if (info.tipo === 'herramienta') return 'herramientas';
+    if (info.tipo === 'recurso_blog') return 'otros';
+    const hay = `${name} ${info.url || ''} ${info.rss || ''} ${info.yt || ''}`;
+    if (CINE_RE.test(hay)) return 'cine';
+    if (info.url || info.rss || info.yt) return 'tech';
+    return 'otros';
+}
+
+function matchesProy(name, info, proy) {
+    if (proy === 'todas') return true;
+    return proyectoDe(name, info) === proy;
+}
+
 function matchesQuery(name, info) {
     if (!query) return true;
-    const hay = (name + ' ' + Object.values(info).join(' ')).toLowerCase();
+    const proy = PROYECTOS[proyectoDe(name, info)];
+    const hay = (name + ' ' + Object.values(info).join(' ') + ' ' + proy.label + ' ' + proy.aliases).toLowerCase();
     return hay.includes(query);
 }
 
@@ -113,6 +140,18 @@ function renderStats() {
     $('stats').innerHTML = stats
         .map(([label, n]) => `<div class="stat"><b>${n}</b><span>${label}</span></div>`)
         .join('');
+}
+
+/* ── Contadores de la leyenda (div explicativo) ─────────────── */
+function renderLeyenda() {
+    const counts = { tech: 0, herramientas: 0, cine: 0, otros: 0 };
+    for (const name of Object.keys(state)) {
+        counts[proyectoDe(name, state[name])]++;
+    }
+    for (const key of Object.keys(counts)) {
+        const el = document.getElementById('cnt-' + key);
+        if (el) el.textContent = counts[key];
+    }
 }
 
 /* ── Badges ─────────────────────────────────────────────────── */
@@ -140,7 +179,10 @@ function escapeHtml(s) {
 /* ── Tabla ──────────────────────────────────────────────────── */
 function renderTable() {
     const tbody = $('tbody');
-    const names = Object.keys(state).filter((n) => matchesType(state[n], filterType) && matchesQuery(n, state[n]));
+    const names = Object.keys(state).filter((n) =>
+        matchesType(state[n], filterType) &&
+        matchesProy(n, state[n], filterProy) &&
+        matchesQuery(n, state[n]));
 
     tbody.innerHTML = '';
     $('search-count').textContent = names.length === Object.keys(state).length
@@ -168,6 +210,12 @@ function renderTable() {
         tdName.className = 'f-name';
         tdName.textContent = name;
         tr.appendChild(tdName);
+
+        const proy = PROYECTOS[proyectoDe(name, info)];
+        const tdProy = document.createElement('td');
+        tdProy.className = 'f-proy';
+        tdProy.innerHTML = `<span class="badge proy ${proy.cls}">${escapeHtml(proy.label)}</span>`;
+        tr.appendChild(tdProy);
 
         const tdBadges = document.createElement('td');
         tdBadges.className = 'badges';
@@ -235,6 +283,7 @@ function attachDelete(btn, name) {
 
 function render() {
     renderStats();
+    renderLeyenda();
     renderTable();
 }
 
@@ -248,6 +297,19 @@ document.querySelectorAll('#type-filters .chip').forEach((chip) => {
         chip.classList.add('active');
         chip.setAttribute('aria-selected', 'true');
         filterType = chip.dataset.type;
+        renderTable();
+    });
+});
+
+document.querySelectorAll('#proy-filters .chip').forEach((chip) => {
+    chip.addEventListener('click', () => {
+        document.querySelectorAll('#proy-filters .chip').forEach((c) => {
+            c.classList.remove('active');
+            c.setAttribute('aria-selected', 'false');
+        });
+        chip.classList.add('active');
+        chip.setAttribute('aria-selected', 'true');
+        filterProy = chip.dataset.proy;
         renderTable();
     });
 });

@@ -175,6 +175,65 @@ code {
 
 .stat span { font-size: .76rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; }
 
+/* ── Contexto (div explicativo de proyectos) ────────────────── */
+.contexto {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 18px;
+}
+
+.contexto h2 {
+    margin: 0 0 8px;
+    font-size: 1.02rem;
+    font-weight: 800;
+}
+
+.contexto p {
+    margin: 0 0 10px;
+    color: var(--text-muted);
+    font-size: .88rem;
+    line-height: 1.55;
+}
+
+.leyenda {
+    list-style: none;
+    margin: 0 0 10px;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+}
+
+.leyenda li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+    font-size: .85rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+}
+
+.leyenda li .badge { flex-shrink: 0; }
+
+.leyenda-count {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 0 6px;
+    background: rgba(127, 127, 127, .25);
+    border-radius: 99px;
+    font-size: .68rem;
+    font-weight: 700;
+    color: inherit;
+}
+
+.contexto-note {
+    font-size: .78rem !important;
+    opacity: .85;
+    margin-bottom: 0 !important;
+}
+
 /* ── Toolbar ────────────────────────────────────────────────── */
 .toolbar {
     display: flex;
@@ -230,6 +289,14 @@ code {
 }
 
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.chips-label {
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    align-self: center;
+    margin-right: 2px;
+}
 
 .chip {
     font: inherit;
@@ -373,6 +440,15 @@ code {
 .badge-news { background: rgba(234, 179, 8, .14); color: #eab308; border-color: rgba(234, 179, 8, .34); }
 .badge-quick { background: rgba(236, 72, 153, .13); color: #ec4899; border-color: rgba(236, 72, 153, .3); }
 .badge-sub { background: var(--chip-bg); color: var(--text-muted); border-color: var(--border); }
+
+/* Badges de proyecto (etiqueta derivada) */
+.badge.proy { display: inline-flex; align-items: center; gap: 4px; }
+.proy-tech  { background: rgba(59, 130, 246, .15); color: #3b82f6; border-color: rgba(59, 130, 246, .35); }
+.proy-herr  { background: rgba(16, 185, 129, .14); color: #10b981; border-color: rgba(16, 185, 129, .34); }
+.proy-cine  { background: rgba(249, 115, 22, .16); color: #f97316; border-color: rgba(249, 115, 22, .36); }
+.proy-otros { background: var(--chip-bg); color: var(--text-muted); border-color: var(--border); }
+
+.f-proy { white-space: nowrap; }
 
 .col-actions { text-align: right; }
 .row-actions { display: flex; justify-content: flex-end; }
