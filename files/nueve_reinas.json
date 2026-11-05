@@ -3915,5 +3915,65 @@
     "relevancia": 3,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "Antes de 'El crimen de Pazos': el documental que Netflix estrena para entender el caso que conmocionó a España",
+    "url": "https://www.cinemania.es/cinemania/noticias/crimen-pazos-desprotexida-netflix-documental-true-crime_7054613_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-05T06:23:56.000979+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "No lleva ni 7 días y ya arrasa en Netflix: la miniserie sueca de solo 4 episodios perfecta para una maratón",
+    "url": "https://www.cinemania.es/cinemania/series/no-lleva-ni-7-dias-ya-arrasa-netflix-miniserie-sueca-solo-4-episodios-perfecta-para-una-maraton_7056986_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-05T06:23:56.001043+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "No lleva ni 30 días y ya acumula casi 50 millones de visualizaciones: la miniserie de 6 episodios con la que Netflix ha conquistado el otoño",
+    "url": "https://www.cinemania.es/cinemania/noticias/no-lleva-ni-30-dias-ya-acumula-casi-50-millones-visualizaciones-miniserie-6-episodios-con-que-netflix-ha-conquistado-otono_7057126_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-05T06:23:56.001153+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix prueba una IA para ayudarte a elegir qué ver según tu estado de ánimo",
+    "url": "https://www.cinemania.es/tecnologia/aplicaciones/netflix-prueba-ia-ayudarte-elegir-que-ver-segun-estado-animo_7056954_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-05T06:23:56.001164+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Más allá de 'Los renglones torcidos de Dios': Netflix lanza el primer avance de la nueva película de Mario Casas",
+    "url": "https://www.cinemania.es/cinemania/noticias/mas-alla-los-renglones-torcidos-dios-nombre-otro-mario-casas-eduard-fernandez-netflix_7050447_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-05T06:23:56.001176+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
