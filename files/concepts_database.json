@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 166,
+    "total_concepts": 167,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-05T03:03:29.794871"
+    "last_scraped": "2026-11-05T10:44:22.126178"
   },
   "concepts": [
     {
@@ -3084,6 +3084,24 @@
       ],
       "cat": "seguridad_web",
       "scraped_at": "2026-11-03T15:45:38.555954"
+    },
+    {
+      "title": "Electron IPC en 2026: preload, contextBridge e invoke sin agujeros de seguridad",
+      "summary": "Una aplicación de Electron son, como mínimo, dos programas distintos que hablan entre sí: un proceso principal con acceso total al sistema y uno o varios renderers que pintan HTML y no deberían poder ",
+      "explanation": "Una aplicación de Electron son, como mínimo, dos programas distintos que hablan entre sí: un proceso principal con acceso total al sistema y uno o varios renderers que pintan HTML y no deberían poder tocar casi nada. Toda la funcionalidad que cruza esa frontera (abrir un archivo, leer una configuración, cambiar el título de la ventana, reaccionar a un menú) pasa por IPC. Si esa capa está mal diseñada, el resto de la seguridad de la app se queda en papel. Este artículo recorre el patrón actual con Electron 45, que es la rama estable en el momento de escribirlo (la 45.2.2 en npm), y construye un ejemplo mínimo pero completo con los cuatro flujos habituales. Si vienes denuestra primera app de escritorio con Electron, de 2016, verás que casi todo ha cambiado: lo que entonces se hacía conrequire('electron')directamente en la página hoy es justo lo que no se debe hacer.Tres actores: main, preload y renderer Para entender el IPC moderno hay que distinguir tres piezas:Proceso main.Corre en Node.js, crea las ventanas y es el único que debería tocar el sistema de archivos, los diálogos nativos o la red con privilegios.Renderer.Es la página web. Cuanto menos sepa de Electron, mejor.Script preload.Se ejecuta en el renderer antes de que cargue la página, pero en un contexto de JavaScript aislado. Es el único sitio donde convivenipcRenderery la página, y su trabajo es exponer una API pequeña y con nombre propio mediantecontextBridge. Los valores por defecto ya empujan en esa dirección, seg",
+      "code_example": "electron-ipc-demo/\n??? package.json\n??? main.js\n??? preload.js\n??? index.html\n??? renderer.js",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-05T10:43:44.239806"
     }
   ]
 }
