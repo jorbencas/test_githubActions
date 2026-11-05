@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 167,
+    "total_concepts": 169,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-05T10:44:22.126178"
+    "last_scraped": "2026-11-05T18:31:49.474875"
   },
   "concepts": [
     {
@@ -3102,6 +3102,42 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-11-05T10:43:44.239806"
+    },
+    {
+      "title": "ZCode, Claude Code, Grok Build y Codex: comparativa de agentes de programación (noviembre 2026)",
+      "summary": "ZCode, la aplicación de escritorio con la que Z.ai (la marca internacional de Zhipu AI) compite en el terreno de los agentes de programación, ha publicado ocho versiones entre el 22 de septiembre y el",
+      "explanation": "ZCode, la aplicación de escritorio con la que Z.ai (la marca internacional de Zhipu AI) compite en el terreno de los agentes de programación, ha publicado ocho versiones entre el 22 de septiembre y el 3 de noviembre de 2026. Leído de seguido, suchangelog oficialcuenta algo más interesante que una lista de arreglos: cómo una herramienta que nació como interfaz gráfica para un modelo propio va camino de ser una plataforma de orquestación con plugins, flujos de trabajo, control remoto y «computer use». Repasamos qué ha cambiado y lo ponemos al lado deClaude Code,Grok Build(el agente de terminal de xAI, que es lo que hoy se conoce como «Grok Code») yCodex, de OpenAI.Qué es ZCode ZCode es una aplicación de escritorio para macOS (Intel y Apple Silicon), Windows (x64 y ARM64) y Linux (en beta, con paquetes .deb, .rpm y .AppImage). Según su web, es el arnés oficial de GLM-5.3, el modelo de Z.ai orientado a razonamiento, programación y colaboración entre varios agentes, y lleva integrado GLM-5.3-Flash para tareas multimodales como interpretar capturas de pantalla. La aplicación en sí es gratuita: se paga el acceso al modelo mediante los planesGLM Codingo con clave propia. Aviso sobre las fuentes: varias comparativas de terceros publicadas desde su lanzamiento (julio de 2026) hablan de GLM-5.2. La web oficial ya habla de GLM-5.3, así que aquí nos quedamos con lo oficial y tratamos las cifras de benchmarks de las comparativas externas como cifras del fabricante, no verificadas de forma ",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-05T18:31:08.318416"
+    },
+    {
+      "title": "¿Qué errores de DNS ponen en peligro sus servicios en la nube?",
+      "summary": "La mayoría de las caídas de servicios en la nube no proceden de ataques espectaculares, sino de una entrada DNS mal configurada que nadie volvió a revisar tras implementarla hace tiempo. El sistema de",
+      "explanation": "La mayoría de las caídas de servicios en la nube no proceden de ataques espectaculares, sino de una entrada DNS mal configurada que nadie volvió a revisar tras implementarla hace tiempo. El sistema de nombres de dominio actúa como una guía telefónica invisible: si una entrada apunta mal, nadie localiza el servidor correcto. Para quien administra dominios e infraestructuras de manera cotidiana, este componente, pese a su discreción habitual, se comporta como el sistema nervioso de toda la arquitectura, transmitiendo señales constantes y coordinando conexiones que, si se interrumpen, afectan al funcionamiento completo del entorno. Un fallo silencioso, que permanece oculto durante días o incluso semanas sin que nadie lo detecte, puede provocar interrupciones inesperadas, fugas de información sensible o secuestro de tráfico hacia destinos maliciosos, todo ello sin que salte ninguna alarma evidente que advierta del problema. En las siguientes líneas se detallan cinco fallos concretos, con su síntoma, su causa y su corrección aplicable.Los cinco fallos de DNS que exponen su infraestructura cloud Antes de entrar en el catálogo conviene fijar una base técnica sólida. Una solución decloud dnspermite administrar zonas y registros de dominios e infraestructuras en la nube desde un único panel, lo que reduce el margen para los cinco fallos que verá a continuación. Centralizar la gestión evita la dispersión de configuraciones, uno de los orígenes más habituales de los problemas que se des",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-05T18:31:11.927147"
     }
   ]
 }
