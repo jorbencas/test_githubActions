@@ -21845,11 +21845,362 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "4bf8450585fb0bc0"
       }
+    },
+    {
+      "proyecto": {
+        "id": "0b8e7c1a2d3f4567",
+        "titulo": "Generador de Contenido Educativo IA",
+        "descripcion_corta": "Plataforma web para generar y organizar material didáctico personalizado usando IA.",
+        "descripcion_detallada": "Una aplicación web full-stack que permite a educadores o estudiantes crear contenido educativo (resúmenes, cuestionarios, explicaciones) a partir de textos o temas dados. Utiliza un modelo de lenguaje grande (LLM) para la generación de contenido y permite su organización en cursos o módulos. Incluye funcionalidades de edición básica y exportación a formatos comunes (PDF, Markdown). El objetivo es agilizar la creación de materiales de estudio adaptados a necesidades específicas.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web asíncrono moderno para construir APIs.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Alto rendimiento, validación automática de datos con Pydantic, generación automática de documentación OpenAPI."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Componentización eficiente, virtual DOM para actualizaciones rápidas de UI, gran ecosistema."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en type hints de Python.",
+              "version_sugerida": "2.5.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Esencial para FastAPI para validar datos de entrada/salida y serializar/deserializar JSON."
+            },
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por modelos de lenguaje.",
+              "version_sugerida": "0.1.0",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Facilita la integración con LLMs, la gestión de prompts, la creación de cadenas de procesamiento y el uso de agentes."
+            },
+            {
+              "nombre": "HTML-PDF",
+              "categoria": "libreria",
+              "descripcion": "Convierte HTML y CSS en PDF.",
+              "version_sugerida": "4.2.2",
+              "url_docs": "https://www.npmjs.com/package/html-pdf",
+              "por_que": "Permite exportar el contenido generado a formato PDF de manera sencilla desde el backend."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto, soporta JSONB para metadatos flexibles, escalable y confiable para almacenar usuarios y contenido."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.6",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura entornos de desarrollo y producción consistentes y reproducibles."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API",
+              "categoria": "ia_ml",
+              "descripcion": "Interfaz de programación de aplicaciones para modelos de IA de OpenAI.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://platform.openai.com/docs/api-reference",
+              "por_que": "Acceso a modelos potentes como GPT-4 para la generación de texto educativo de alta calidad."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests claros y la ejecución de pruebas unitarias y de integración para la API y lógica de negocio."
+            },
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para JavaScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Permite testear componentes de React y la lógica del frontend de manera eficiente."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Generación de resúmenes y explicaciones de texto.",
+          "Creación automática de cuestionarios.",
+          "Organización de contenido por temas/cursos.",
+          "Edición básica de contenido generado.",
+          "Exportación a PDF y Markdown.",
+          "Autenticación y gestión de usuarios."
+        ],
+        "casos_uso": [
+          "Profesores creando material suplementario para clases.",
+          "Estudiantes generando resúmenes de apuntes.",
+          "Formadores diseñando módulos de e-learning.",
+          "Creadores de contenido educativo rápido.",
+          "Investigadores organizando información."
+        ],
+        "reglas_negocio": [
+          "Límite de generación por usuario/día.",
+          "Contenido generado debe ser revisado por el usuario.",
+          "Los usuarios deben tener cuentas para guardar su trabajo.",
+          "Los prompts para la IA deben ser validados.",
+          "Exportaciones limitadas a ciertos formatos."
+        ],
+        "por_que_ia": "Utilización de LLMs para la generación de contenido educativo (resúmenes, explicaciones, preguntas) a partir de texto o temas proporcionados, agilizando la creación de materiales de estudio personalizados.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos sólidos de Python y JavaScript.",
+          "Experiencia con frameworks web (FastAPI, React).",
+          "Comprensión de APIs RESTful.",
+          "Familiaridad con bases de datos SQL.",
+          "Conceptos básicos de IA/LLMs."
+        ],
+        "riesgos": [
+          "Calidad variable del contenido generado por IA.",
+          "Costos asociados al uso de APIs de IA.",
+          "Latencia en la generación de contenido.",
+          "Seguridad de los datos del usuario.",
+          "Manejo de prompts y posibles 'jailbreaks'."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "0b8e7c1a2d3f4567"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "a403cdb6227673f0"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "2f3e4d5c6b7a8901",
+        "titulo": "Analizador de Sentimiento de Reseñas de Productos",
+        "descripcion_corta": "Herramienta para analizar el sentimiento y extraer temas clave de reseñas de productos.",
+        "descripcion_detallada": "Una aplicación de análisis de datos que ingiere reseñas de productos desde diferentes fuentes (CSV, bases de datos, APIs de marketplaces). Aplica técnicas de Procesamiento del Lenguaje Natural (PLN) para determinar el sentimiento general (positivo, negativo, neutro) y extraer los temas o aspectos más mencionados (ej. 'batería', 'pantalla', 'servicio al cliente'). Genera reportes visuales con gráficos y resúmenes para ayudar a las empresas a entender la opinión de sus clientes y mejorar sus productos.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "datos",
+          "api",
+          "ia_ml",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Flask",
+              "categoria": "framework",
+              "descripcion": "Microframework web para Python.",
+              "version_sugerida": "3.0.0",
+              "url_docs": "https://flask.palletsprojects.com/",
+              "por_que": "Ligero y flexible para crear la API de ingesta y consulta de datos, fácil de integrar con librerías de PLN."
+            },
+            {
+              "nombre": "Streamlit",
+              "categoria": "framework",
+              "descripcion": "Framework para crear aplicaciones web de ciencia de datos.",
+              "version_sugerida": "1.28.0",
+              "url_docs": "https://docs.streamlit.io/",
+              "por_que": "Permite crear rápidamente dashboards interactivos y visualizaciones de los resultados del análisis."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Librería para manipulación y análisis de datos.",
+              "version_sugerida": "2.1.1",
+              "url_docs": "https://pandas.pydata.org/docs/",
+              "por_que": "Esencial para la carga, limpieza y procesamiento de los datos de reseñas."
+            },
+            {
+              "nombre": "NLTK",
+              "categoria": "libreria",
+              "descripcion": "Plataforma líder para construir programas Python para trabajar con datos de lenguaje humano.",
+              "version_sugerida": "3.8.1",
+              "url_docs": "https://www.nltk.org/",
+              "por_que": "Proporciona herramientas básicas para tokenización, lematización y stop words, fundamentales en PLN."
+            },
+            {
+              "nombre": "spaCy",
+              "categoria": "libreria",
+              "descripcion": "Librería avanzada de PLN para Python.",
+              "version_sugerida": "3.7.2",
+              "url_docs": "https://spacy.io/usage/linguistic-features",
+              "por_que": "Ofrece modelos pre-entrenados eficientes para reconocimiento de entidades, análisis de dependencias y vectorización."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Librería para machine learning en Python.",
+              "version_sugerida": "1.3.2",
+              "url_docs": "https://scikit-learn.org/stable/",
+              "por_que": "Utilizada para entrenar modelos de clasificación de sentimiento y extracción de tópicos (LDA)."
+            },
+            {
+              "nombre": "Plotly",
+              "categoria": "libreria",
+              "descripcion": "Librería para crear visualizaciones interactivas.",
+              "version_sugerida": "5.18.0",
+              "url_docs": "https://plotly.com/python/",
+              "por_que": "Permite generar gráficos informativos y dinámicos para el dashboard."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Almacenamiento robusto para grandes volúmenes de reseñas y resultados de análisis, con soporte para JSON."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.6",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita el despliegue y la gestión de los diferentes componentes (API, dashboard)."
+            },
+            {
+              "nombre": "Celery",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema distribuido de colas de tareas.",
+              "version_sugerida": "5.3.4",
+              "url_docs": "https://docs.celeryq.dev/",
+              "por_que": "Gestiona el procesamiento asíncrono de grandes volúmenes de reseñas, evitando bloquear la API principal."
+            },
+            {
+              "nombre": "Redis",
+              "categoria": "infraestructura",
+              "descripcion": "Servidor de estructura de datos en memoria.",
+              "version_sugerida": "7.2.3",
+              "url_docs": "https://redis.io/docs/",
+              "por_que": "Actúa como backend de mensajes para Celery y caché para resultados frecuentes."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Modelos pre-entrenados spaCy / NLTK",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de lenguaje para tareas de PLN.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://spacy.io/models",
+              "por_que": "Base para tareas como tokenización, lematización, y reconocimiento de entidades."
+            },
+            {
+              "nombre": "TF-IDF / LDA",
+              "categoria": "ia_ml",
+              "descripcion": "Algoritmos para representación de texto y modelado de tópicos.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html",
+              "por_que": "Utilizados para la extracción de temas clave y la representación de documentos para el análisis de sentimiento."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Para pruebas unitarias de la lógica de PLN y API, y pruebas de integración con la cola de tareas."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Ingesta de reseñas desde CSV y APIs.",
+          "Análisis de sentimiento (positivo, negativo, neutro).",
+          "Extracción de temas clave y aspectos del producto.",
+          "Generación de reportes y visualizaciones (gráficos de barras, nubes de palabras).",
+          "API para consultar resultados de análisis.",
+          "Procesamiento asíncrono de grandes volúmenes de datos."
+        ],
+        "casos_uso": [
+          "Empresas analizando feedback de clientes para mejorar productos.",
+          "Equipos de marketing evaluando la recepción de campañas.",
+          "Investigadores de mercado entendiendo tendencias de consumo.",
+          "Gestores de producto identificando puntos débiles/fuertes.",
+          "Plataformas de e-commerce resumiendo opiniones de usuarios."
+        ],
+        "reglas_negocio": [
+          "El procesamiento de reseñas se realiza de forma asíncrona.",
+          "Los modelos de PLN pueden ser reentrenados o ajustados.",
+          "Se deben manejar diferentes idiomas si es necesario.",
+          "La extracción de temas se basa en la frecuencia y co-ocurrencia de palabras.",
+          "Los resultados del análisis se almacenan y son consultables vía API."
+        ],
+        "por_que_ia": "Aplicación de técnicas de Procesamiento del Lenguaje Natural (PLN) y Machine Learning para analizar texto no estructurado (reseñas de productos), clasificando el sentimiento e identificando temas relevantes de forma automática.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 8,
+        "prerequisitos": [
+          "Experiencia avanzada en Python y librerías de ciencia de datos (Pandas, Scikit-learn).",
+          "Conocimientos de PLN y algoritmos de Machine Learning.",
+          "Experiencia con bases de datos SQL y NoSQL.",
+          "Familiaridad con arquitecturas de microservicios y colas de mensajes.",
+          "Comprensión de APIs RESTful y frameworks web (Flask)."
+        ],
+        "riesgos": [
+          "Precisión limitada de los modelos de PLN en dominios específicos.",
+          "Complejidad en el manejo de datos multilingües.",
+          "Escalabilidad del sistema de procesamiento de colas.",
+          "Necesidad de reentrenamiento frecuente de modelos.",
+          "Gestión de recursos computacionales para el análisis."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "2f3e4d5c6b7a8901"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "a403cdb6227673f0"
+      }
     }
   ],
   "ultimos_hashes": [
-    "b2c3d4e5f6g7h8i9",
-    "d0e1f2a3b4c5d6e7",
     "f9a0b1c2d3e4f5a6",
     "0e1f2a3b4c5d6e7f",
     "f9e8d7c6b5a4f3e2",
@@ -21947,8 +22298,10 @@
     "d353a8b1c2d4e5f6",
     "a0b1c2d3e4f56789",
     "b4c5d6e7f8901234",
-    "c6d7e8f901234567"
+    "c6d7e8f901234567",
+    "0b8e7c1a2d3f4567",
+    "2f3e4d5c6b7a8901"
   ],
-  "total_generados": 159,
-  "fecha_ultima_generacion": "2026-11-05T00:42:11.609820"
+  "total_generados": 161,
+  "fecha_ultima_generacion": "2026-11-05T11:49:21.268488"
 }
