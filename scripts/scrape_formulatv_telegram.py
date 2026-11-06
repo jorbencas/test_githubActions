@@ -2,17 +2,20 @@
 """
 scrape_formulatv_telegram.py — Estrenos del día (series + películas) → Telegram topic "report img".
 
-Fuentes (sin tokens; HTML/JSON estático):
+Fuentes (sin tokens; HTML/JSON/XML estático):
   1. FormulaTV    — calendario de estrenos de series (data-tip)
   2. SensaCine    — estrenos de cine en España
   3. Filmaffinity — cartelera de estrenos en España (main.html)
   4. TVMaze       — API schedule (ES), solo estrenos S1E1
+  5. À Punt       — noticias de la serie "Bambalina" (notas de premsa + RSS)
 
 Reglas:
-  - SOLO items con fecha == fecha de ejecución (Europe/Madrid)
+  - Estrenos: SOLO items con fecha == fecha de ejecución (Europe/Madrid)
+  - Noticias À Punt: ventana de 14 días (se envían una sola vez vía dedup)
   - Blocklist TITULOS_EXCLUIR (p. ej. "Los ilusos 13+13")
   - Sin duplicados entre ejecuciones (files/formulatv_sent.json, clave titulo|fecha)
   - Si una fuente falla, se envían las demás
+  - Mensajes con parse_mode HTML: enlaces como <a href> y datos escapados
 
 Uso:
     python scripts/scrape_formulatv_telegram.py
@@ -24,7 +27,10 @@ import json
 import os
 import re
 import sys
-from datetime import date, datetime
+import xml.etree.ElementTree as ET
+from datetime import date, datetime, timedelta
+from email.utils import parsedate_to_datetime
+from html import escape as esc_html
 from pathlib import Path
 from typing import Dict, List, Optional
 from zoneinfo import ZoneInfo
@@ -46,6 +52,13 @@ SENSACINE_BASE = "https://www.sensacine.com"
 SENSACINE_ESTRENOS = f"{SENSACINE_BASE}/peliculas/estrenos/"
 FILMAFFINITY_MAIN = "https://www.filmaffinity.com/es/main.html"
 TVMAZE_SCHEDULE = "https://api.tvmaze.com/schedule"
+APUNT_NOTAS = "https://www.apuntmedia.es/sala-de-premsa/notes-de-premsa/"
+APUNT_RSS = "https://www.apuntmedia.es/rss"
+
+# Keywords de la fuente À Punt (noticias de series propias)
+NOTICIA_KEYWORDS = ["bambalina"]
+# Ventana de días hacia atrás para noticias (los estrenos son estrictos: solo hoy)
+VENTANA_NOTICIAS_DIAS = 14
 
 # Títulos que NUNCA se envían a este canal (substring, case-insensitive)
 TITULOS_EXCLUIR = [
@@ -139,7 +152,7 @@ def _fetch(url: str, params: Optional[dict] = None) -> Optional[str]:
 
 
 def _item(titulo: str, fecha: date, fuente: str, cadena: str, url: str,
-          sinopsis: str = "", capitulos: str = "?", temporadas: int = 1) -> Dict:
+          sinopsis: str = "", capitulos: Optional[str] = "?", temporadas: int = 1) -> Dict:
     return {
         'titulo': titulo,
         'fecha_estreno': fecha.isoformat(),
@@ -308,6 +321,79 @@ def parse_tvmaze(data: list, hoy: date) -> List[Dict]:
 
 
 # =============================================================================
+# Fuente 5 — À Punt (noticias de la serie "Bambalina")
+# =============================================================================
+def parse_apunt_notas(html: str) -> List[Dict]:
+    """Notas de prensa de apuntmedia.es que mencionan NOTICIA_KEYWORDS.
+
+    El listing /sala-de-premsa/notes-de-premsa/ trae por artículo un <article>
+    con enlace (title/texto) y fecha dd/mm/yyyy en .content-info.
+    """
+    soup = BeautifulSoup(html, 'html.parser')
+    items: List[Dict] = []
+    vistos = set()
+
+    for art in soup.find_all('article'):
+        try:
+            a = art.find('a', href=True)
+            if not a:
+                continue
+            url = a['href']
+            if url in vistos:
+                continue
+            titulo = (a.get('title') or a.get_text(' ', strip=True)).strip()
+            if not titulo:
+                continue
+            hay = f"{titulo} {url}".lower()
+            if not any(k in hay for k in NOTICIA_KEYWORDS):
+                continue
+            m = re.search(r"\b(\d{2})/(\d{2})/(\d{4})\b", art.get_text(' ', strip=True))
+            if not m:
+                continue
+            try:
+                fecha = date(int(m.group(3)), int(m.group(2)), int(m.group(1)))
+            except ValueError:
+                continue
+            p = art.find('p')
+            sinopsis = p.get_text(' ', strip=True)[:200] if p else ""
+            vistos.add(url)
+            items.append(_item(titulo, fecha, 'À Punt', 'À Punt', url,
+                               sinopsis=sinopsis, capitulos=None))
+        except Exception as e:
+            print(f"  ⚠️ Error parseando nota À Punt: {e}")
+            continue
+
+    return items
+
+
+def parse_apunt_rss(xml_text: str) -> List[Dict]:
+    """Items del RSS de À Punt que mencionan NOTICIA_KEYWORDS (artículos /noticies/)."""
+    items: List[Dict] = []
+    try:
+        root = ET.fromstring(xml_text)
+    except ET.ParseError as e:
+        print(f"  ⚠️ RSS À Punt ilegible: {e}")
+        return items
+
+    for node in root.findall('.//item'):
+        try:
+            titulo = (node.findtext('title') or '').strip()
+            url = (node.findtext('link') or '').strip()
+            if not titulo or not url:
+                continue
+            hay = f"{titulo} {url}".lower()
+            if not any(k in hay for k in NOTICIA_KEYWORDS):
+                continue
+            fecha = parsedate_to_datetime(node.findtext('pubDate') or '').date()
+            items.append(_item(titulo, fecha, 'À Punt', 'À Punt', url, capitulos=None))
+        except Exception as e:
+            print(f"  ⚠️ Error parseando item RSS À Punt: {e}")
+            continue
+
+    return items
+
+
+# =============================================================================
 # Filtros centrales: fecha de ejecución + blocklist + dedup
 # =============================================================================
 def filtrar_estrenos(items: List[Dict], hoy: date) -> List[Dict]:
@@ -317,6 +403,26 @@ def filtrar_estrenos(items: List[Dict], hoy: date) -> List[Dict]:
         if excluido(it.get('titulo', '')):
             continue
         if it.get('fecha_estreno') != hoy.isoformat():
+            continue
+        out.append(it)
+    return out
+
+
+def filtrar_noticias(items: List[Dict], hoy: date,
+                     ventana_dias: int = VENTANA_NOTICIAS_DIAS) -> List[Dict]:
+    """Noticias (fuente À Punt): blocklist + ventana [hoy - ventana_dias, hoy].
+
+    A diferencia de los estrenos, no exige fecha == hoy: una nota de premsa de
+    días anteriores sigue siendo válida y el dedup garantiza un solo envío.
+    """
+    desde = (hoy - timedelta(days=ventana_dias)).isoformat()
+    hoy_str = hoy.isoformat()
+    out = []
+    for it in items:
+        if excluido(it.get('titulo', '')):
+            continue
+        f = it.get('fecha_estreno', '')
+        if not (desde <= f <= hoy_str):
             continue
         out.append(it)
     return out
@@ -389,7 +495,10 @@ def enviar_telegram(mensaje: str, chat_id: str, token: str, topic_id: Optional[s
 
 
 def formatear_mensaje(series: List[Dict]) -> str:
-    """Formatea el mensaje para Telegram agrupando por cadena/plataforma."""
+    """Formatea el mensaje para Telegram (parse_mode HTML) agrupando por cadena.
+
+    Los datos interpolados van escapados y los enlaces son <a href> reales.
+    """
     if not series:
         return ""
 
@@ -412,21 +521,21 @@ def formatear_mensaje(series: List[Dict]) -> str:
         por_cadena.setdefault(c, []).append(s)
 
     for cadena, items in sorted(por_cadena.items()):
-        lines.append(f"📍 <b>{cadena}</b>")
+        lines.append(f"📍 <b>{esc_html(cadena)}</b>")
         for s in items:
-            titulo = s['titulo']
-            genero = f" ({s['genero']})" if s.get('genero') else ""
+            titulo = esc_html(s['titulo'])
+            genero = f" ({esc_html(s['genero'])})" if s.get('genero') else ""
             temp = f" T{s['temporadas']}" if s.get('temporadas', 1) > 1 else ""
             tipo = " 🎬 Película" if s.get('capitulos') in ['?', '1', 1] and s.get('temporadas', 1) == 1 else f"{temp}"
             lines.append(f"🔸 <b>{titulo}</b>{genero}{tipo}")
             if s.get('sinopsis'):
-                lines.append(f"     {s['sinopsis'][:200]}")
+                lines.append(f"     {esc_html(s['sinopsis'][:200])}")
             if s.get('url'):
-                lines.append(f"     🔗 Leer artículo ({s['url']})")
+                lines.append(f'     🔗 <a href="{esc_html(s["url"], quote=True)}">Leer artículo</a>')
         lines.append("")
 
     fuentes = sorted({s.get('fuente', 'FormulaTV') for s in series})
-    lines.append(f"📡 <i>Fuentes: {' · '.join(fuentes)}</i>")
+    lines.append(f"📡 <i>Fuentes: {esc_html(' · '.join(fuentes))}</i>")
     lines.append(f"🤖 <i>Bot automático — {hoy.strftime('%H:%M')}</i>")
 
     return "\n".join(lines)
@@ -436,8 +545,9 @@ def formatear_mensaje(series: List[Dict]) -> str:
 # Orquestación
 # =============================================================================
 def recopilar_estrenos(hoy: date, solo_espanolas: bool = True) -> List[Dict]:
-    """Recopila estrenos de las 4 fuentes. Si una falla, siguen las demás."""
+    """Recopila estrenos de las 4 fuentes + noticias À Punt. Si una falla, siguen las demás."""
     items: List[Dict] = []
+    noticias: List[Dict] = []
 
     # HTML: FormulaTV, SensaCine, Filmaffinity
     for nombre, url, parse in (
@@ -465,7 +575,28 @@ def recopilar_estrenos(hoy: date, solo_espanolas: bool = True) -> List[Dict]:
     except Exception as e:
         print(f"  ⚠️ TVMaze falló (sigo con las demás): {e}")
 
-    return deduplicar(filtrar_estrenos(items, hoy))
+    # Fuente 5 — À Punt: noticias de "Bambalina" (ventana de días, no solo hoy)
+    html = _fetch(APUNT_NOTAS)
+    if html:
+        try:
+            encontrados = parse_apunt_notas(html)
+            print(f"  ✅ À Punt notas: {len(encontrados)} noticias de Bambalina")
+            noticias += encontrados
+        except Exception as e:
+            print(f"  ⚠️ À Punt notas falló (sigo con las demás): {e}")
+
+    try:
+        r = SESSION.get(APUNT_RSS, timeout=15)
+        r.raise_for_status()
+        encontrados = parse_apunt_rss(r.text)
+        print(f"  ✅ À Punt RSS: {len(encontrados)} noticias de Bambalina")
+        noticias += encontrados
+    except Exception as e:
+        print(f"  ⚠️ À Punt RSS falló (sigo con las demás): {e}")
+
+    return deduplicar(
+        filtrar_estrenos(items, hoy) + filtrar_noticias(noticias, hoy)
+    )
 
 
 def main():

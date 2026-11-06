@@ -2,6 +2,29 @@
 
 ## Cambios recientes
 
+### Enlaces correctos en Telegram + noticias de "Bambalina" (À Punt) — 05/11/2026
+- **Report img** (`scrape_formulatv_telegram.py`): «Leer artículo» pasa de texto
+  crudo `🔗 Leer artículo (https://…)` a **`<a href>` azul clicable** con
+  `parse_mode: HTML` (ya se usaba HTML); todo lo interpolado (título, cadena,
+  sinopsis, fuentes) va escapado con `html.escape` para que un `&`/`<` no rompa
+  el parseo.
+- **Reporte tech** (`publishers/send_telegram.py`): nueva función pura
+  `construir_mensaje_noticia()` → **`💻 <b>título</b>` + `<a href="…">Abrir noticia</a>`**
+  en HTML (antes Markdown legacy `[Abrir noticia](url)` que se rompía con `_`/`(`
+  en la URL y el fallback mostraba `Abrir noticia(url)` en crudo). Fallback a
+  texto plano si Telegram rechaza el HTML; imports de `edge-tts`/`google-genai`
+  ahora son perezosos (el módulo se puede importar sin esas librerías).
+- **Fuente 5 en report img — À Punt / serie «Bambalina»**: `parse_apunt_notas()`
+  (notas de premsa de `apuntmedia.es/sala-de-premsa/notes-de-premsa/`, filtro por
+  keyword `bambalina`, fecha `dd/mm/yyyy`) + `parse_apunt_rss()` (RSS del sitio
+  con `ElementTree`, cubre artículos `/noticies/`). A diferencia de los estrenos
+  (fecha estricta == hoy), las noticias usan **ventana de 14 días**
+  (`filtrar_noticias()`); el dedup `titulo|fecha` garantiza un solo envío.
+  Salen en su grupo `📍 À Punt` sin tag «🎬 Película» (`capitulos=None`) y el pie
+  «Fuentes: …» incluye À Punt.
+- Tests: +11 (formato HTML/escapado del report img, parsers À Punt, ventana de
+  fechas, `construir_mensaje_noticia`) → **214 tests**.
+
 ### Gestor de fuentes: etiquetas de proyecto + div explicativo — 05/11/2026
 - **Div explicativo en la web** (`section.contexto`): qué es el gestor y a qué proyecto
   alimenta cada etiqueta — 📰 Noticias tech → histórico (newsletter/Telegram/recap),

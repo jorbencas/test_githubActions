@@ -274,3 +274,110 @@ def test_parse_tvmaze_lista_vacia():
 # =============================================================================
 def test_fecha_ejecucion_es_date():
     assert isinstance(ft.fecha_ejecucion(), date)
+
+
+# =============================================================================
+# Formato del mensaje (parse_mode HTML: enlaces reales + escapado)
+# =============================================================================
+def test_formatear_mensaje_link_es_anchor_html():
+    items = [ft._item("Serie X", HOY, "SensaCine", "SensaCine",
+                      "https://e.com/a?b=1&c=2")]
+    msg = ft.formatear_mensaje(items)
+    assert '<a href="https://e.com/a?b=1&amp;c=2">Leer artículo</a>' in msg
+    assert "Leer artículo (" not in msg
+
+
+def test_formatear_mensaje_escapa_datos():
+    items = [ft._item('Titular <b> & "raro"', HOY, "Cadena & Cia", "Cadena & Cia",
+                      "https://e.com/x", sinopsis='Sinopsis <script>alert(1)</script> & más')]
+    msg = ft.formatear_mensaje(items)
+    assert "<script>" not in msg
+    assert "&lt;b&gt;" in msg          # título escapado
+    assert "Cadena &amp; Cia" in msg   # cadena escapada
+    assert "&lt;script&gt;" in msg     # sinopsis escapada
+
+
+# =============================================================================
+# Fuente 5 — À Punt: noticias de la serie "Bambalina"
+# =============================================================================
+APUNT_NOTAS_HTML = """
+<html><body>
+<article class="content text-side" data-cid="1904888">
+  <a class="multimedia"
+     href="https://www.apuntmedia.es/sala-de-premsa/comenca-rodatge-bambalina_1_1904888.html"
+     title="Comença el rodatge de ‘Bambalina’"><picture></picture></a>
+  <div class="content-info">28/10/2026</div>
+  <div class="content-text"><p>La nova sèrie de ficció pròpia d’À Punt enceta el rodatge.</p></div>
+</article>
+<article class="content text-side" data-cid="1">
+  <a class="multimedia"
+     href="https://www.apuntmedia.es/sala-de-premsa/otra-noticia_1_1.html"
+     title="Otra noticia sin relación">x</a>
+  <div class="content-info">01/11/2026</div>
+</article>
+</body></html>
+"""
+
+APUNT_RSS_XML = """<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+  <item>
+    <title>Nueva entrega de Bambalina en À Punt</title>
+    <link>https://www.apuntmedia.es/noticies/cultura/bambalina-entrega.html</link>
+    <pubDate>Wed, 04 Nov 2026 10:00:00 +0100</pubDate>
+  </item>
+  <item>
+    <title>Deportes: resultado del fin de semana</title>
+    <link>https://www.apuntmedia.es/esports/futbol.html</link>
+    <pubDate>Wed, 04 Nov 2026 11:00:00 +0100</pubDate>
+  </item>
+</channel></rss>
+"""
+
+
+def test_parse_apunt_notas_filtra_keyword():
+    items = ft.parse_apunt_notas(APUNT_NOTAS_HTML)
+    assert len(items) == 1
+    it = items[0]
+    assert "Bambalina" in it["titulo"]
+    assert it["fecha_estreno"] == "2026-10-28"
+    assert it["cadena"] == "À Punt"
+    assert it["fuente"] == "À Punt"
+    assert it["capitulos"] is None
+    assert "rodatge" in it["sinopsis"]
+
+
+def test_parse_apunt_rss_filtra_keyword():
+    items = ft.parse_apunt_rss(APUNT_RSS_XML)
+    assert len(items) == 1
+    it = items[0]
+    assert "Bambalina" in it["titulo"]
+    assert it["fecha_estreno"] == "2026-11-04"
+    assert it["url"].endswith("bambalina-entrega.html")
+    assert it["capitulos"] is None
+
+
+def test_parse_apunt_rss_ilegible():
+    assert ft.parse_apunt_rss("no es xml <<<") == []
+
+
+def test_filtrar_noticias_ventana_14_dias():
+    nuevo = ft._item("Bambalina reciente", HOY, "À Punt", "À Punt",
+                     "https://x/1", capitulos=None)
+    limite = ft._item("Bambalina hace 14 días", date(2026, 10, 21), "À Punt",
+                      "À Punt", "https://x/2", capitulos=None)
+    viejo = ft._item("Bambalina antigua", date(2026, 10, 1), "À Punt",
+                     "À Punt", "https://x/3", capitulos=None)
+    futuro = ft._item("Bambalina futura", MANANA, "À Punt", "À Punt",
+                      "https://x/4", capitulos=None)
+    out = ft.filtrar_noticias([nuevo, limite, viejo, futuro], HOY)
+    assert [i["titulo"] for i in out] == ["Bambalina reciente", "Bambalina hace 14 días"]
+
+
+def test_noticias_a_punt_sin_tag_pelicula_y_grupo_propio():
+    it = ft._item("Comença el rodatge de Bambalina", HOY, "À Punt", "À Punt",
+                  "https://www.apuntmedia.es/sala-de-premsa/bambalina.html",
+                  capitulos=None)
+    msg = ft.formatear_mensaje([it])
+    assert "🎬 Película" not in msg
+    assert "📍 <b>À Punt</b>" in msg
+    assert '<a href="https://www.apuntmedia.es/sala-de-premsa/bambalina.html">Leer artículo</a>' in msg

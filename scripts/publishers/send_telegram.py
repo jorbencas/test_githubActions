@@ -16,10 +16,8 @@ import os
 import re
 import sys
 from datetime import datetime, timedelta
+from html import escape as esc_html
 from pathlib import Path
-
-import edge_tts
-from google import genai
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from utils.logging_setup import setup_logging
@@ -142,21 +140,37 @@ async def traducir_titulo(titulo: str, client) -> str:
     return titulo
 
 
-def enviar_mensaje(texto: str, chat_id: str, token: str, reply_markup: dict | None = None) -> bool:
+def construir_mensaje_noticia(titulo: str, url: str) -> tuple:
+    """Devuelve (html, plano) para una noticia del reporte tech.
+
+    - html: parse_mode HTML → «Abrir noticia» es un <a href> azul clicable
+      (nunca la URL cruda entre paréntesis).
+    - plano: fallback sin parse_mode si Telegram rechaza el HTML.
+    """
+    titulo = titulo or ""
+    url = url or ""
+    html = f'💻 <b>{esc_html(titulo)}</b>\n\n<a href="{esc_html(url, quote=True)}">Abrir noticia</a>'
+    plano = f"💻 {titulo}\n\n{url}"
+    return html, plano
+
+
+def enviar_mensaje(texto: str, chat_id: str, token: str,
+                   reply_markup: dict | None = None,
+                   texto_plano: str | None = None) -> bool:
     try:
         r = _client.send_message(
             texto, chat_id=chat_id, token=token,
-            parse_mode="Markdown", disable_web_page_preview=False,
+            parse_mode="HTML", disable_web_page_preview=False,
             reply_markup=reply_markup, timeout=15,
         )
         if r is None:
             return False
         if r.ok:
             return True
-        logger.warning(f"⚠️ Telegram error (sin markdown): {r.text}")
-        texto_limpio = texto.replace("_", " ").replace("*", "").replace("[", "").replace("]", "")
+        logger.warning(f"⚠️ Telegram error (HTML): {r.text}")
+        fallback = texto_plano if texto_plano is not None else re.sub(r'<[^>]+>', '', texto)
         r = _client.send_message(
-            texto_limpio, chat_id=chat_id, token=token,
+            fallback, chat_id=chat_id, token=token,
             parse_mode=None, disable_web_page_preview=False,
             timeout=15,
         )
@@ -171,6 +185,7 @@ async def enviar_audio_voz(titulares: list[tuple[str, str]], chat_id: str, token
     titulares: lista de (titulo, fuente) para detectar idioma."""
     if not titulares:
         return False
+    import edge_tts
 
     # Separar TODOS los titulares por idioma (no consecutivos)
     por_idioma = {"es": [], "en": []}
@@ -295,7 +310,12 @@ async def run():
         logger.info("📭 No hay noticias en el histórico.")
         return
 
-    client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
+    try:
+        from google import genai
+        client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
+    except Exception as e:
+        logger.warning(f"⚠️ Gemini no disponible ({e}); se usarán títulos originales")
+        client = None
 
     # Filtrar noticias recientes (últimas 24h) y que no estén en caché
     cutoff = datetime.now() - timedelta(hours=24)
@@ -326,7 +346,6 @@ async def run():
     titulares_enviados = []
 
     for n in nuevos:
-        icono = "💻"
         titulo_original = n[TITULO_KEY]
 
         if n.get('traducido'):
@@ -336,8 +355,7 @@ async def run():
             titulo_es = await traducir_titulo(titulo_original, client)
             n['traducido'] = True
 
-        titulo_safe = titulo_es.replace("_", "\\_").replace("*", "\\*").replace("[", "\\[").replace("`", "\\`")
-        mensaje = f"{icono} *{titulo_safe}*\n\n[Abrir noticia]({n[ENLACE_KEY]})"
+        mensaje, mensaje_plano = construir_mensaje_noticia(titulo_es, n[ENLACE_KEY])
 
         if args.dry_run:
             print(f"\n{'='*50}")
@@ -345,7 +363,7 @@ async def run():
             logger.info(f"📋 Dry-run: {titulo_es[:60]}...")
             continue
 
-        ok = enviar_mensaje(mensaje, chat_id, token)
+        ok = enviar_mensaje(mensaje, chat_id, token, texto_plano=mensaje_plano)
         if ok:
             logger.info(f"✅ Enviado: {titulo_es[:60]}...")
             CACHE.mark_sent(n.get(ENLACE_KEY, ""))
