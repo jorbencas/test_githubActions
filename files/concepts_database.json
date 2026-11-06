@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 169,
+    "total_concepts": 170,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-06T04:41:15.570906"
+    "last_scraped": "2026-11-06T12:43:30.649990"
   },
   "concepts": [
     {
@@ -3138,6 +3138,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-11-05T18:31:11.927147"
+    },
+    {
+      "title": "Autenticación JWT en Angular 22: interceptores, guards, refresh y dónde guardar el token",
+      "summary": "Autenticar una aplicación Angular con JWT es una de esas tareas que cualquiera ha visto resuelta en diez tutoriales distintos, casi todos con la misma receta: guardar el token enlocalStorage, añadirlo",
+      "explanation": "Autenticar una aplicación Angular con JWT es una de esas tareas que cualquiera ha visto resuelta en diez tutoriales distintos, casi todos con la misma receta: guardar el token enlocalStorage, añadirlo en un interceptor y poner un guard. Funciona, pero el Angular actual ya no se escribe así y buena parte de esas guías pasan por alto la decisión que de verdad importa, que es dónde vive el token y qué pasa cuando alguien consigue ejecutar JavaScript en tu página. Este artículo monta un flujo completo con las herramientas de Angular 22 (la rama estable en el momento de escribirlo, con la 22.2 publicada a finales de octubre de 2026): componentes standalone,provideHttpClientcon interceptores funcionales, guards como funciones, el estado de sesión ensignalsy renovación automática del token. Al final comparamos sin maquillaje las opciones de almacenamiento. Si necesitas repasar la base del framework, tienes antesTypeScript con Angular: decoradores, DI tipado, HttpClient y señales.Qué ha cambiado en Angular desde los tutoriales antiguos Conviene fijar el punto de partida, porque varias cosas que se daban por hechas ya no están:HttpClient viene incluido.Desde Angular 21 se puede inyectar sin configurar nada;provideHttpClientsolo hace falta para cambiar sus características, por ejemplo registrar interceptores.HttpClientModuleestá marcado como obsoleto.El backend por defecto esfetch.Si necesitas eventos de progreso de subida, la documentación indica pasar awithXhr().Los interceptores son",
+      "code_example": "// server.mjs · Node 20+, Express 5\nimport express from 'express';\nimport cookieParser from 'cookie-parser';\nimport jwt from 'jsonwebtoken';\nimport { createHash, randomBytes } from 'node:crypto';\n\nconst ACCESS_SECRET = process.env.JWT_SECRET;           // 32 bytes aleatorios como mínimo\nconst REFRESH_COOKIE = '__Secure-refresh';\nconst REFRESH_TTL_MS = 7 * 24 * 60 * 60 * 1000;          // 7 días\nconst COOKIE_OPTS = { httpOnly: true, secure: true, sameSite: 'strict', path: '/api/auth' };\n\n// En producción: tabla en base de datos o Redis, nunca un Map en memoria.\nconst refreshStore = new Map();                          // sha256(token) -> { user, expiresAt }\nconst sha256 = (value) => createHash('sha256').update(value).digest('hex');\n\nfunction issueAccessToken(user) {\n  return jwt.sign({ name: user.name, roles: user.roles }, ACCESS_SECRET, {\n    algorithm: 'HS256',\n    subject: String(user.id),\n    expiresIn: '10m',\n  });\n}\n\nfunction issueRefreshCookie(res, user) {\n  const raw = randomBytes(32).toString('base64url');\n  refreshStore.set(sha256(raw), { user, expiresAt: Date.now() + REFRESH_TTL_MS });\n  res.cookie(REFRESH_COOKIE, raw, { ...COOKIE_OPTS, maxAge: REFRESH_TTL_MS });\n}\n\nfunction requireAuth(req, res, next) {\n  const [scheme, token] = (req.headers.authorization ?? '').split(' ');\n  if (scheme !== 'Bearer' || !token) return res.sendStatus(401);\n  try {\n    // Fijar el algoritmo evita ataques de confusión (RFC 8725)\n    req.auth = jwt.verify(token, ACCESS_SECRET, { algorithms: ['HS256'] });\n    next();\n  } catch {\n    res.sendStatus(401);\n  }\n}\n\nconst app = express();\napp.use(express.json());\napp.use(cookieParser());\n\napp.post('/api/auth/login', async (req, res) => {\n  const user = await verifyCredentials(req.body.email, req.body.password); // tu lógica real (argon2, bcrypt...)\n  if (!user) return res.status(401).json({ message: 'Credenciales no válidas' });\n  issueRefreshCookie(res, user);\n  res.json({ accessToken: issueAccessToken(user), expiresIn: 600 });\n});\n\napp.post('/api/auth/refresh', (req, res) => {\n  const hash = sha256(req.cookies[REFRESH_COOKIE] ?? '');\n  const entry = refreshStore.get(hash);\n  refreshStore.delete(hash);                             // rotación: cada refresh token sirve una sola vez\n  if (!entry || entry.expiresAt < Date.now()) {\n    res.clearCookie(REFRESH_COOKIE, COOKIE_OPTS);\n    return res.sendStatus(401);\n  }\n  issueRefreshCookie(res, entry.user);\n  res.json({ accessToken: issueAccessToken(entry.user), expiresIn: 600 });\n});\n\napp.post('/api/auth/logout', (req, res) => {\n  refreshStore.delete(sha256(req.cookies[REFRESH_COOKIE] ?? ''));\n  res.clearCookie(REFRESH_COOKIE, COOKIE_OPTS);\n  res.sendStatus(204);\n});\n\napp.get('/api/profile', requireAuth, (req, res) => {\n  res.json({ id: req.auth.sub, name: req.auth.name, roles: req.auth.roles });\n});\n\napp.listen(3000);",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "seguridad_web"
+      ],
+      "cat": "seguridad_web",
+      "scraped_at": "2026-11-06T12:42:49.820955"
     }
   ]
 }
