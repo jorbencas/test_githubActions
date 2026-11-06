@@ -22198,11 +22198,300 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "a403cdb6227673f0"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a3b4c5d6e7f89012",
+        "titulo": "Generador de Documentación Técnica con IA",
+        "descripcion_corta": "API que genera documentación técnica (READMEs, diagramas) a partir de código fuente usando IA.",
+        "descripcion_detallada": "Una API RESTful que acepta código fuente (Python, JS, TS) y genera automáticamente documentación técnica esencial como archivos README.md, diagramas de arquitectura básicos (usando herramientas como PlantUML o Mermaid) y explicaciones de funciones complejas. Utiliza un modelo de lenguaje grande (LLM) para analizar el código, identificar patrones, explicar la lógica y formatear la documentación. Ideal para equipos que necesitan mantener la documentación actualizada sin un esfuerzo manual excesivo.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno para construir APIs con Python, enfocado en alto rendimiento y facilidad de uso.",
+              "version_sugerida": "0.110.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece tipado automático, validación de datos con Pydantic, generación automática de documentación OpenAPI y es asíncrono para alto rendimiento."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "langchain",
+              "categoria": "libreria",
+              "descripcion": "Framework para simplificar la creación de aplicaciones impulsadas por LLMs.",
+              "version_sugerida": "0.2.0",
+              "url_docs": "https://python.langchain.com/docs/get_started/introduction",
+              "por_que": "Facilita la integración con LLMs, el manejo de prompts y la orquestación de cadenas de procesamiento de texto."
+            },
+            {
+              "nombre": "tree-sitter",
+              "categoria": "libreria",
+              "descripcion": "Parser incremental para muchos lenguajes de programación.",
+              "version_sugerida": "0.22.0",
+              "url_docs": "https://tree-sitter.github.io/tree-sitter/",
+              "por_que": "Permite un análisis sintáctico robusto del código fuente de diferentes lenguajes."
+            },
+            {
+              "nombre": "pyplantuml",
+              "categoria": "libreria",
+              "descripcion": "Generador de diagramas PlantUML desde Python.",
+              "version_sugerida": "1.0.0",
+              "url_docs": "https://pypi.org/project/pyplantuml/",
+              "por_que": "Genera diagramas de secuencia o clases a partir de descripciones textuales o análisis de código."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, facilitando la ejecución de la API y sus dependencias."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API (GPT-4/GPT-3.5)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de lenguaje avanzados para generación y análisis de texto.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://platform.openai.com/docs/models",
+              "por_que": "Se utiliza para entender el código fuente, generar descripciones, explicar lógica compleja y formatear la documentación."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir tests de integración y unitarios de forma sencilla y con funcionalidades avanzadas como fixtures."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Análisis de código fuente multi-lenguaje.",
+          "Generación de READMEs con IA.",
+          "Creación de diagramas de arquitectura (PlantUML/Mermaid).",
+          "Explicación de fragmentos de código complejos.",
+          "API RESTful para integración continua."
+        ],
+        "casos_uso": [
+          "Generar documentación inicial para nuevos proyectos.",
+          "Actualizar READMEs automáticamente tras cambios en el código.",
+          "Integrar la generación de documentación en pipelines CI/CD.",
+          "Facilitar la comprensión de código heredado o complejo.",
+          "Mantener la documentación sincronizada con el desarrollo."
+        ],
+        "reglas_negocio": [
+          "La API debe soportar al menos Python y JavaScript/TypeScript.",
+          "La documentación generada debe ser en formato Markdown.",
+          "Los diagramas se generarán como imágenes o código fuente (PlantUML/Mermaid).",
+          "Se debe permitir la configuración del nivel de detalle de la documentación.",
+          "Gestión segura de credenciales de API para el LLM."
+        ],
+        "por_que_ia": "Se usa IA (LLM) para analizar la semántica del código fuente, entender su propósito, identificar componentes clave y generar descripciones coherentes y explicaciones detalladas, tareas que serían extremadamente complejas y laboriosas de automatizar con métodos tradicionales.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "https://plantuml.com/",
+          "https://mermaid.js.org/"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo de APIs.",
+          "Comprensión de análisis sintáctico de código.",
+          "Familiaridad con modelos de lenguaje y sus APIs.",
+          "Experiencia básica con Docker."
+        ],
+        "riesgos": [
+          "La calidad de la documentación generada por IA puede variar.",
+          "Costos asociados al uso de APIs de LLMs.",
+          "Complejidad en el análisis de código muy dinámico o meta-programado.",
+          "Seguridad al procesar código fuente externo.",
+          "Dependencia de servicios externos de IA."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-02-15T10:00:00Z",
+        "hash_unicidad": "a3b4c5d6e7f89012"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "80dac7e3e3bc151b"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c7d8e9f012345678",
+        "titulo": "Asistente de Compras Inteligente (Web App)",
+        "descripcion_corta": "Aplicación web que recomienda productos basándose en historial y preferencias del usuario.",
+        "descripcion_detallada": "Una aplicación web fullstack que permite a los usuarios registrarse, guardar productos de interés y ver recomendaciones personalizadas. Utiliza un enfoque de filtrado colaborativo y basado en contenido, potenciado por IA para entender las preferencias implícitas del usuario a partir de su historial de navegación y compras. Permite a los usuarios gestionar sus listas y ver detalles del producto.",
+        "nivel": "semisenior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "web",
+          "fullstack",
+          "ia_ml",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "Next.js",
+              "categoria": "framework",
+              "descripcion": "Framework React para producción, con renderizado del lado del servidor y generación estática.",
+              "version_sugerida": "14.1.0",
+              "url_docs": "https://nextjs.org/docs",
+              "por_que": "Facilita el desarrollo de aplicaciones web escalables y optimizadas para SEO, con SSR y SSG."
+            },
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de Node.js para construir aplicaciones del lado del servidor eficientes y escalables.",
+              "version_sugerida": "10.2.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Proporciona una arquitectura modular y escalable para la API backend, con soporte para TypeScript y patrones como Dependency Injection."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Prisma",
+              "categoria": "libreria",
+              "descripcion": "ORM de próxima generación para Node.js y TypeScript.",
+              "version_sugerida": "5.11.0",
+              "url_docs": "https://www.prisma.io/docs",
+              "por_que": "Simplifica la interacción con la base de datos, ofreciendo migraciones y autocompletado seguro para tipos."
+            },
+            {
+              "nombre": "TensorFlow.js",
+              "categoria": "libreria",
+              "descripcion": "Librería para definir, entrenar y ejecutar modelos de machine learning en JavaScript.",
+              "version_sugerida": "4.15.0",
+              "url_docs": "https://www.tensorflow.org/js/guide",
+              "por_que": "Permite ejecutar modelos de recomendación directamente en el cliente (navegador) o en el servidor Node.js."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "bases_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional de código abierto.",
+              "version_sugerida": "16.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Almacena datos de usuarios, productos, interacciones y permite consultas complejas para el sistema de recomendación."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita el empaquetado y despliegue del frontend, backend y base de datos."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Algoritmos de recomendación (Filtrado Colaborativo, Basado en Contenido)",
+              "categoria": "ia_ml",
+              "descripcion": "Técnicas para predecir las preferencias de un usuario.",
+              "version_sugerida": "N/A",
+              "url_docs": null,
+              "por_que": "Son el núcleo del sistema de recomendación, sugiriendo productos relevantes a los usuarios."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Se usa para tests unitarios y de integración tanto del frontend (React) como del backend (Node.js)."
+            },
+            {
+              "nombre": "Cypress",
+              "categoria": "testing",
+              "descripcion": "Herramienta de testing end-to-end para aplicaciones web.",
+              "version_sugerida": "13.6.0",
+              "url_docs": "https://www.cypress.io/",
+              "por_que": "Verifica el comportamiento de la aplicación web completa desde la perspectiva del usuario."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro y autenticación de usuarios.",
+          "Catálogo de productos con búsqueda y filtros.",
+          "Sistema de recomendaciones personalizadas (IA).",
+          "Gestión de listas de deseos/favoritos.",
+          "Visualización detallada de productos.",
+          "Interfaz de usuario moderna y responsive."
+        ],
+        "casos_uso": [
+          "Ayudar a los usuarios a descubrir productos que les interesen.",
+          "Mejorar la experiencia de compra online.",
+          "Aumentar la conversión y el valor medio del pedido.",
+          "Permitir a los usuarios organizar sus productos de interés.",
+          "Proporcionar una plataforma centralizada para explorar ofertas."
+        ],
+        "reglas_negocio": [
+          "Los usuarios deben registrarse para obtener recomendaciones personalizadas.",
+          "El sistema debe poder manejar un catálogo de miles de productos.",
+          "Las recomendaciones deben actualizarse periódicamente o bajo demanda.",
+          "Se debe respetar la privacidad del usuario y sus datos de navegación.",
+          "Los productos recomendados deben ser relevantes y estar disponibles."
+        ],
+        "por_que_ia": "La IA (filtrado colaborativo y basado en contenido) es fundamental para generar recomendaciones personalizadas y relevantes, analizando patrones de comportamiento de usuarios similares y las características de los productos para predecir qué le gustará a un usuario específico.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "https://www.tensorflow.org/js"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos sólidos de TypeScript, React y Node.js.",
+          "Experiencia con bases de datos relacionales (PostgreSQL) y ORMs (Prisma).",
+          "Comprensión de principios de sistemas de recomendación.",
+          "Familiaridad con frameworks de testing.",
+          "Experiencia con Docker."
+        ],
+        "riesgos": [
+          "Problema del 'arranque en frío': dificultad para recomendar a nuevos usuarios o sobre nuevos productos.",
+          "Escalabilidad del sistema de recomendación con grandes volúmenes de usuarios y productos.",
+          "Calidad de los datos de entrada (historial de usuario, descripciones de producto).",
+          "Complejidad en la implementación y ajuste de los algoritmos de IA.",
+          "Mantenimiento de la base de datos y la infraestructura."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-02-15T10:00:00Z",
+        "hash_unicidad": "c7d8e9f012345678"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "80dac7e3e3bc151b"
+      }
     }
   ],
   "ultimos_hashes": [
-    "f9a0b1c2d3e4f5a6",
-    "0e1f2a3b4c5d6e7f",
     "f9e8d7c6b5a4f3e2",
     "b8a7f6e5d4c3b2a1",
     "b8c7d6e5f4a3b2c1",
@@ -22300,8 +22589,10 @@
     "b4c5d6e7f8901234",
     "c6d7e8f901234567",
     "0b8e7c1a2d3f4567",
-    "2f3e4d5c6b7a8901"
+    "2f3e4d5c6b7a8901",
+    "a3b4c5d6e7f89012",
+    "c7d8e9f012345678"
   ],
-  "total_generados": 161,
-  "fecha_ultima_generacion": "2026-11-05T19:25:53.719515"
+  "total_generados": 163,
+  "fecha_ultima_generacion": "2026-11-06T00:42:19.508606"
 }
