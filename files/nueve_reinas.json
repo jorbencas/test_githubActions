@@ -4203,5 +4203,77 @@
     "relevancia": 4,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "'La bola negra' sigue dándole alegrías a Netflix y aumenta su presencia en cines estadounidenses",
+    "url": "https://www.cinemania.es/cinemania/noticias/bola-negra-sigue-dandole-alegrias-netflix-aumenta-su-presencia-cines-estadounidenses_7057989_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-07T17:45:42.978159+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix renueva su gran serie romántica (y religiosa) por una cuarta temporada poco después del estreno de la tercera",
+    "url": "https://www.cinemania.es/cinemania/series/netflix-renueva-su-gran-serie-romantica-religiosa-por-una-cuarta-temporada-poco-despues-estreno-tercera_7058485_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-07T17:45:42.978236+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 5,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "De los años 80 a la década de los 50: Netflix anuncia la precuela oficial de 'Stranger Things'",
+    "url": "https://www.cinemania.es/cinemania/series/los-anos-80-decada-los-50-netflix-anuncia-precuela-oficial-stranger-things_7058463_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-07T17:45:42.978251+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "'Chapapote': una comedia sobre el desastre del Prestige es el nuevo proyecto para Netflix del director de 'Rondallas'",
+    "url": "https://www.cinemania.es/cinemania/noticias/chapapote-comedia-prestige-netflix-director-rondallas_7056695_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-07T17:45:42.978373+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Qué ver hoy en Netflix, Amazon Prime Video y otras plataformas: lunes 2 de noviembre de 2026",
+    "url": "https://www.cinemania.es/cinemania/noticias/que-ver-hoy-netflix-amazon-prime-video-lunes-2-noviembre-2026_7055139_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-07T17:45:42.978395+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "video",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Qué ver hoy en Netflix, Amazon Prime Video y otras plataformas: sábado 7 de noviembre de 2026",
+    "url": "https://www.cinemania.es/cinemania/noticias/que-ver-hoy-netflix-amazon-prime-video-otras-plataformas-sabado-7-noviembre-2026_7057683_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-07T17:45:42.978408+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "video",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
