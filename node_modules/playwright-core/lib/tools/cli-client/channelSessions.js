@@ -92,44 +92,46 @@ async function isPortOpen(port) {
     socket.setTimeout(250, () => done(false));
   });
 }
+const linuxConfigHome = process.env.CHROME_CONFIG_HOME || process.env.XDG_CONFIG_HOME || import_path.default.join(import_os.default.homedir(), ".config");
+const linuxUserDataDir = (product) => process.env.CHROME_USER_DATA_DIR || import_path.default.join(linuxConfigHome, product);
 const channelToUserDataDir = /* @__PURE__ */ new Map([
   ["chrome", {
-    "linux": import_path.default.join(import_os.default.homedir(), ".config", "google-chrome"),
+    "linux": linuxUserDataDir("google-chrome"),
     "darwin": import_path.default.join(import_os.default.homedir(), "Library", "Application Support", "Google", "Chrome"),
     "win32": import_path.default.join(process.env.LOCALAPPDATA || import_path.default.join(import_os.default.homedir(), "AppData", "Local"), "Google", "Chrome", "User Data")
   }],
   ["chrome-beta", {
-    "linux": import_path.default.join(import_os.default.homedir(), ".config", "google-chrome-beta"),
+    "linux": linuxUserDataDir("google-chrome-beta"),
     "darwin": import_path.default.join(import_os.default.homedir(), "Library", "Application Support", "Google", "Chrome Beta"),
     "win32": import_path.default.join(process.env.LOCALAPPDATA || import_path.default.join(import_os.default.homedir(), "AppData", "Local"), "Google", "Chrome Beta", "User Data")
   }],
   ["chrome-dev", {
-    "linux": import_path.default.join(import_os.default.homedir(), ".config", "google-chrome-unstable"),
+    "linux": linuxUserDataDir("google-chrome-unstable"),
     "darwin": import_path.default.join(import_os.default.homedir(), "Library", "Application Support", "Google", "Chrome Dev"),
     "win32": import_path.default.join(process.env.LOCALAPPDATA || import_path.default.join(import_os.default.homedir(), "AppData", "Local"), "Google", "Chrome Dev", "User Data")
   }],
   ["chrome-canary", {
-    "linux": import_path.default.join(import_os.default.homedir(), ".config", "google-chrome-canary"),
+    "linux": linuxUserDataDir("google-chrome-canary"),
     "darwin": import_path.default.join(import_os.default.homedir(), "Library", "Application Support", "Google", "Chrome Canary"),
     "win32": import_path.default.join(process.env.LOCALAPPDATA || import_path.default.join(import_os.default.homedir(), "AppData", "Local"), "Google", "Chrome SxS", "User Data")
   }],
   ["msedge", {
-    "linux": import_path.default.join(import_os.default.homedir(), ".config", "microsoft-edge"),
+    "linux": linuxUserDataDir("microsoft-edge"),
     "darwin": import_path.default.join(import_os.default.homedir(), "Library", "Application Support", "Microsoft Edge"),
     "win32": import_path.default.join(process.env.LOCALAPPDATA || import_path.default.join(import_os.default.homedir(), "AppData", "Local"), "Microsoft", "Edge", "User Data")
   }],
   ["msedge-beta", {
-    "linux": import_path.default.join(import_os.default.homedir(), ".config", "microsoft-edge-beta"),
+    "linux": linuxUserDataDir("microsoft-edge-beta"),
     "darwin": import_path.default.join(import_os.default.homedir(), "Library", "Application Support", "Microsoft Edge Beta"),
     "win32": import_path.default.join(process.env.LOCALAPPDATA || import_path.default.join(import_os.default.homedir(), "AppData", "Local"), "Microsoft", "Edge Beta", "User Data")
   }],
   ["msedge-dev", {
-    "linux": import_path.default.join(import_os.default.homedir(), ".config", "microsoft-edge-dev"),
+    "linux": linuxUserDataDir("microsoft-edge-dev"),
     "darwin": import_path.default.join(import_os.default.homedir(), "Library", "Application Support", "Microsoft Edge Dev"),
     "win32": import_path.default.join(process.env.LOCALAPPDATA || import_path.default.join(import_os.default.homedir(), "AppData", "Local"), "Microsoft", "Edge Dev", "User Data")
   }],
   ["msedge-canary", {
-    "linux": import_path.default.join(import_os.default.homedir(), ".config", "microsoft-edge-canary"),
+    "linux": linuxUserDataDir("microsoft-edge-canary"),
     "darwin": import_path.default.join(import_os.default.homedir(), "Library", "Application Support", "Microsoft Edge Canary"),
     "win32": import_path.default.join(process.env.LOCALAPPDATA || import_path.default.join(import_os.default.homedir(), "AppData", "Local"), "Microsoft", "Edge SxS", "User Data")
   }]

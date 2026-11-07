@@ -5685,6 +5685,9 @@ export interface Page {
    * ```
    *
    * @param urlOrPredicate Request URL string, regex or predicate receiving [Request](https://playwright.dev/docs/api/class-request) object.
+   * When a [`baseURL`](https://playwright.dev/docs/api/class-browser#browser-new-context-option-base-url) via the
+   * context options was provided and the passed URL is a path, it gets merged via the
+   * [`new URL()`](https://developer.mozilla.org/en-US/docs/Web/API/URL/URL) constructor.
    * @param options
    */
   waitForRequest(urlOrPredicate: string|RegExp|((request: Request) => boolean|Promise<boolean>), options?: {
@@ -5875,10 +5878,11 @@ export interface Page {
    * **Usage**
    *
    * ```js
-   * page.screencast.on('screencastFrame', data => {
-   *   console.log('received frame, jpeg size:', data.length);
+   * await page.screencast.start({
+   *   onFrame: ({ data }) => {
+   *     console.log('received frame, jpeg size:', data.length);
+   *   },
    * });
-   * await page.screencast.start();
    * // ... perform actions ...
    * await page.screencast.stop();
    * ```
@@ -8417,7 +8421,7 @@ export interface Frame {
    * frame.selectOption('select#colors', { label: 'Blue' });
    *
    * // multiple selection
-   * frame.selectOption('select#colors', 'red', 'green', 'blue');
+   * frame.selectOption('select#colors', ['red', 'green', 'blue']);
    * ```
    *
    * @param selector A selector to query for.
@@ -10524,13 +10528,13 @@ export interface BrowserContext {
    * [WebSocketRoute](https://playwright.dev/docs/api/class-websocketroute) for more details and examples.
    *
    * ```js
-   * await context.routeWebSocket('/ws', async ws => {
-   *   ws.routeSend(message => {
+   * await context.routeWebSocket('/ws', ws => {
+   *   const server = ws.connectToServer();
+   *   ws.onMessage(message => {
    *     if (message === 'to-be-blocked')
    *       return;
-   *     ws.send(message);
+   *     server.send(message);
    *   });
-   *   await ws.connect();
    * });
    * ```
    *
@@ -14602,7 +14606,9 @@ export interface Locator {
    * [`mode`](https://playwright.dev/docs/api/class-locator#locator-aria-snapshot-option-mode), is different from a
    * default snapshot:
    * 1. Includes element references `[ref=e2]`. 2. Does not wait for an element matching the locator, and throws when
-   *    no elements match. 3. Includes snapshots of `<iframe>`s inside the target.
+   *    no elements match. 3. Includes snapshots of `<iframe>`s inside the target. 4. Can omit names that repeat
+   *    printed descendants, such as a heading containing a link. Names that identify dialogs, landmarks, groups,
+   *    tables and table headers are retained.
    * @param options
    */
   ariaSnapshot(options?: {
@@ -17471,6 +17477,10 @@ export interface BrowserType<Unused = {}> {
    *
    * @param endpointURL A CDP websocket endpoint or http url to connect to. For example `http://localhost:9222/` or
    * `ws://127.0.0.1:9222/devtools/browser/387adf4c-243f-4051-a181-46798f4a46f4`.
+   *
+   * Alternatively, a browser channel name such as `chrome` or `msedge` to connect to a browser with remote debugging
+   * enabled in its default user data directory. On Linux, Playwright uses `CHROME_USER_DATA_DIR` when set. Otherwise,
+   * it uses `CHROME_CONFIG_HOME`, then `XDG_CONFIG_HOME`, then `~/.config` to locate that directory.
    * @param options
    */
   connectOverCDP(endpointURL: string, options?: ConnectOverCDPOptions): Promise<Browser>;
@@ -17501,6 +17511,10 @@ export interface BrowserType<Unused = {}> {
    *
    * @param endpointURL A CDP websocket endpoint or http url to connect to. For example `http://localhost:9222/` or
    * `ws://127.0.0.1:9222/devtools/browser/387adf4c-243f-4051-a181-46798f4a46f4`.
+   *
+   * Alternatively, a browser channel name such as `chrome` or `msedge` to connect to a browser with remote debugging
+   * enabled in its default user data directory. On Linux, Playwright uses `CHROME_USER_DATA_DIR` when set. Otherwise,
+   * it uses `CHROME_CONFIG_HOME`, then `XDG_CONFIG_HOME`, then `~/.config` to locate that directory.
    * @param options
    */
   connectOverCDP(transport: ConnectOverCDPTransport, options?: ConnectOverCDPOptions): Promise<Browser>;
@@ -17535,6 +17549,10 @@ export interface BrowserType<Unused = {}> {
    *
    * @param endpointURL A CDP websocket endpoint or http url to connect to. For example `http://localhost:9222/` or
    * `ws://127.0.0.1:9222/devtools/browser/387adf4c-243f-4051-a181-46798f4a46f4`.
+   *
+   * Alternatively, a browser channel name such as `chrome` or `msedge` to connect to a browser with remote debugging
+   * enabled in its default user data directory. On Linux, Playwright uses `CHROME_USER_DATA_DIR` when set. Otherwise,
+   * it uses `CHROME_CONFIG_HOME`, then `XDG_CONFIG_HOME`, then `~/.config` to locate that directory.
    * @param options
    */
   connectOverCDP(options: ConnectOverCDPOptions & { wsEndpoint?: string }): Promise<Browser>;
@@ -18412,10 +18430,12 @@ export interface CDPSession {
   /**
    * @param method Protocol method name.
    * @param params Optional method parameters.
+   * @param options
    */
   send<T extends keyof Protocol.CommandParameters>(
     method: T,
-    params?: Protocol.CommandParameters[T]
+    params?: Protocol.CommandParameters[T],
+    options?: { timeout?: number, signal?: AbortSignal }
   ): Promise<Protocol.CommandReturnValues[T]>;
   /**
    * Emitted when the session is closed, either because the target was closed or `session.detach()` was called.
@@ -20789,8 +20809,9 @@ export interface Clock {
    * await page.clock.fastForward('30:00');
    * ```
    *
-   * @param ticks Time may be the number of milliseconds to advance the clock by or a human-readable string. Valid string formats are
-   * "08" for eight seconds, "01:00" for one minute and "02:34:10" for two hours, 34 minutes and ten seconds.
+   * @param ticks Time may be a finite number of milliseconds to advance the clock by or a human-readable string. Valid string
+   * formats are "08" for eight seconds, "01:00" for one minute and "02:34:10" for two hours, 34 minutes and ten
+   * seconds.
    */
   fastForward(ticks: number|string): Promise<void>;
 
@@ -20870,8 +20891,9 @@ export interface Clock {
    * await page.clock.runFor('30:00');
    * ```
    *
-   * @param ticks Time may be the number of milliseconds to advance the clock by or a human-readable string. Valid string formats are
-   * "08" for eight seconds, "01:00" for one minute and "02:34:10" for two hours, 34 minutes and ten seconds.
+   * @param ticks Time may be a finite number of milliseconds to advance the clock by or a human-readable string. Valid string
+   * formats are "08" for eight seconds, "01:00" for one minute and "02:34:10" for two hours, 34 minutes and ten
+   * seconds.
    */
   runFor(ticks: number|string): Promise<void>;
 
@@ -26042,9 +26064,9 @@ export interface ConnectOverCDPOptions {
 
   /**
    * When true, Playwright will not apply its default overrides to the existing default browser context. Specifically,
-   * [`acceptDownloads`](https://playwright.dev/docs/api/class-browser#browser-new-context-option-accept-downloads) is
-   * left at the browser's setting, focus emulation is not enabled, and media emulation options (such as
-   * [`colorScheme`](https://playwright.dev/docs/api/class-browser#browser-new-context-option-color-scheme),
+   * [`acceptDownloads`](https://playwright.dev/docs/api/class-browser#browser-new-context-option-accept-downloads) and
+   * font families are left at the browser's settings, focus emulation is not enabled, and media emulation options (such
+   * as [`colorScheme`](https://playwright.dev/docs/api/class-browser#browser-new-context-option-color-scheme),
    * [`reducedMotion`](https://playwright.dev/docs/api/class-browser#browser-new-context-option-reduced-motion),
    * [`forcedColors`](https://playwright.dev/docs/api/class-browser#browser-new-context-option-forced-colors), and
    * [`contrast`](https://playwright.dev/docs/api/class-browser#browser-new-context-option-contrast)) are not applied.
