@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 171,
+    "total_concepts": 172,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-08T07:09:36.646369"
+    "last_scraped": "2026-11-08T14:45:31.060372"
   },
   "concepts": [
     {
@@ -3174,6 +3174,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-11-07T11:29:11.121647"
+    },
+    {
+      "title": "De Angular Universal a SSR moderno: SEO, prerenderizado e hidratación en Angular",
+      "summary": "Durante años, que una aplicación Angular saliera bien en Google dependía de montar Angular Universal a mano, con su propio servidor Express, suAppServerModuley una buena dosis de paciencia. Ese modelo",
+      "explanation": "Durante años, que una aplicación Angular saliera bien en Google dependía de montar Angular Universal a mano, con su propio servidor Express, suAppServerModuley una buena dosis de paciencia. Ese modelo ha desaparecido. Desde Angular 17 el renderizado en servidor vive dentro del CLI en el paquete@angular/ssr, y las versiones posteriores han añadido algo más útil para el SEO que el SSR en sí: poder decidir ruta por ruta si una página se sirve renderizada en cada petición, generada en el build o directamente en el navegador. Este artículo repasa cómo queda todo en la documentación actual (Angular 22): configuración, modos de renderizado, hidratación, metadatos, datos estructurados y los errores conwindowydocumentque siguen rompiendo builds.Por qué una SPA pura sigue siendo un problema de SEO Googlebot ejecuta JavaScript, pero lo hace en una segunda fase y con recursos limitados. El resto de rastreadores (bots de redes sociales que generan las tarjetas al compartir, herramientas de previsualización, buena parte de los crawlers de IA) suelen leer solo el HTML que devuelve el servidor. Una SPA de cliente sirve un<app-root></app-root>vacío, y sin JavaScript no hay título, ni descripción, ni contenido que indexar. Con SSR o prerenderizado el HTML llega completo en la primera respuesta, y de paso mejora el tiempo hasta el primer contenido visible, que también cuenta para el posicionamiento.Activar SSR: proyecto nuevo o existente En un proyecto nuevo basta con la opción--ssr; en uno exi",
+      "code_example": "ng new mi-blog --ssr\n# o, en un proyecto que ya tienes\nng add @angular/ssr",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-08T14:44:52.185003"
     }
   ]
 }
