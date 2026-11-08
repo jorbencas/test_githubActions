@@ -1,5 +1,37 @@
 [
     {
+        "titulo": "OpenMontageInc/OpenMontage",
+        "enlace": "https://github.com/OpenMontageInc/OpenMontage",
+        "descripcion": "World's first open-source, agentic video production system. 12 production pipelines, 100+ tools, 700+ agent skill and production-knowledge files. Turn your AI coding assistant into a full video produc",
+        "lenguaje": "Python",
+        "estrellas": "78380",
+        "fuente": "GitHub Search",
+        "tipo": "herramienta",
+        "_stars": 78380,
+        "_topics": [
+            "agent",
+            "agentic-ai",
+            "ai",
+            "claude",
+            "copilot",
+            "cursor",
+            "elevenlabs",
+            "ffmpeg",
+            "flux",
+            "image-generation",
+            "open-source",
+            "openai",
+            "python",
+            "remotion",
+            "stable-diffusion",
+            "text-to-speech",
+            "text-to-video",
+            "video-generation",
+            "video-production"
+        ],
+        "_source_type": "github_repo"
+    },
+    {
         "titulo": "agentscope-ai/QwenPaw",
         "enlace": "https://github.com/agentscope-ai/QwenPaw",
         "descripcion": "Your Personal AI Assistant; easy to install, deploy on your own machine or on the cloud; supports multiple chat apps with easily extensible capabilities.",
