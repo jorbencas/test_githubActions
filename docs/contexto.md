@@ -2,6 +2,50 @@
 
 ## Cambios recientes
 
+### Más fuentes + dedup persistente en report img — 09/11/2026
+- **Fix de duplicados («siempre sale Bambalina»)**: el workflow `formulatv_telegram.yml`
+  solo subía `files/formulatv_sent.json` como artifact y nunca lo restauraba → cada run
+  arrancaba con el set de enviados vacío y las noticias de À Punt (ventana 14 días) se
+  reenviaban **cada 15 minutos**. Ahora se restaura/guarda con `actions/cache` (mismo
+  patrón que `send_telegram_workflow`: `key: formulatv-sent-<run_id>` + `restore-keys`).
+  Además `guardar_enviado` guarda una lista ordenada y descarta las claves más antiguas
+  (antes un `set` sin orden podía descartar recién añadidas al superar 1000).
+- **Fuente 6 — Movistar+**: `parse_movistar_estrenos()` lee la sección «Hoy en M+ Estrenos»
+  del canal (EPG SSR de `movistarplus.es`); solo la primera colección, las recomendaciones
+  («Si te gusta…», «Descubre…») se ignoran.
+- **Fuente 7 — RSS de noticias de series/cine**: `parse_rss_noticias()` genérico
+  (title + link + pubDate, admite Atom con fecha ISO vía `fromisoformat`) con
+  `NOTICIAS_RSS` = FormulaTV (`xml/formulatv.xml`), Fotogramas (`rss/all.xml`) y
+  SensaCine (`rss/noticias.xml`). Ventana de 14 días + dedup `titulo|fecha`, igual que À Punt.
+- **TVMaze ampliado**: estrenos de temporada (episodio 1 de **cualquier** temporada,
+  no solo S1E1) — S2E1/S3E1 también se envían.
+- **Backfill silencioso** (`partir_backfill` + `VENTANA_ENVIO_NOTICIAS_DIAS = 3`):
+  las noticias con más de 3 días se marcan como enviadas **sin enviar** → evita inundar
+  el canal con el histórico en la primera ejecución o tras una caída larga.
+- **FUENTES 572 → 627** (+55): 19 RSS dev (Julia Evans, Dan Luu, Simon Willison,
+  Pragmatic Engineer, Changelog, Python Insider, Node.js, Rust, Go, Kotlin, .NET, Spring,
+  Vue, Svelte, Deno, PostgreSQL, Android Developers, Netflix Tech, Stripe), 26 GitHub
+  Topics (rust, python, go, typescript, react, vuejs, nextjs, tailwindcss, postgresql,
+  sqlite, graphql, cli, neovim, vscode-extension, homelab, monitoring, observability, mcp,
+  embeddings, vector-database, browser-extension, voice-assistant, ffmpeg, home-automation,
+  raspberry-pi, self-hosted), 9 awesome lists (rust/go/react/vue/nodejs, public-apis,
+  awesome-llm-apps, awesome-mcp-servers, awesome-sysadmin) y OpenAlternative (RSS tools).
+- **Snapshot del gestor `public/data/fuentes.json` 576 → 636**: regenerado desde FUENTES
+  + entradas de scraper (se conservan las 4 de estrenos y se añaden `Movistar+ Estrenos`,
+  `FormulaTV/Fotogramas/SensaCine Noticias RSS` y `À Punt Noticias` con `proyecto: cine`).
+- **README**: contadores actualizados (18 workflows, 627 fuentes, 636 en el snapshot, 223 tests).
+- **Bug de rutas (causa raíz del dedup)**: `REPO_DIR = SCRIPT_DIR.parent.parent` sobraba
+  un nivel en los 5 scripts de la raíz de `scripts/` → `files/formulatv_sent.json`,
+  `config/google_token.json` y los JSON de estrenos se escribían **fuera del repo**
+  (`dev/files/`). Corregido a `SCRIPT_DIR.parent` en `scrape_formulatv_telegram`,
+  `scrape_formulatv_espana`, `scrape_tvmaze_espana(+future)` y `scrape_tmdb_espana_octubre`.
+- **Pre-seed**: `files/formulatv_sent.json` commiteado con las 124 claves actuales →
+  la primera ejecución tras el push no reenvía nada histórico.
+- **Tests 214 → 224**: parsers Movistar+/RSS (RSS+Atom), `partir_backfill`, TVMaze S2E1
+  y test de regresión de rutas (`REPO_DIR`/`SENT_FILE` dentro del repo).
+- Verificado en vivo con `--dry-run`: Movistar+ 18 estrenos, RSS FormulaTV 30 /
+  Fotogramas 50 / SensaCine 20, backfill de 33 noticias antiguas marcadas sin enviar.
+
 ### Enlaces correctos en Telegram + noticias de "Bambalina" (À Punt) — 05/11/2026
 - **Report img** (`scrape_formulatv_telegram.py`): «Leer artículo» pasa de texto
   crudo `🔗 Leer artículo (https://…)` a **`<a href>` azul clicable** con

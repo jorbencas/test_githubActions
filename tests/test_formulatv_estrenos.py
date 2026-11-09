@@ -1,7 +1,8 @@
 """
 test_formulatv_estrenos.py — Tests de parsers y filtros de estrenos del día
 (scrape_formulatv_telegram.py): fecha de ejecución (Europe/Madrid), blocklist
-("Los ilusos 13+13"), dedup y fuentes (FormulaTV, SensaCine, Filmaffinity, TVMaze).
+("Los ilusos 13+13"), dedup y fuentes (FormulaTV, SensaCine, Filmaffinity,
+TVMaze, Movistar+, À Punt, RSS de noticias y backfill silencioso).
 """
 import sys
 from datetime import date
@@ -381,3 +382,137 @@ def test_noticias_a_punt_sin_tag_pelicula_y_grupo_propio():
     assert "🎬 Película" not in msg
     assert "📍 <b>À Punt</b>" in msg
     assert '<a href="https://www.apuntmedia.es/sala-de-premsa/bambalina.html">Leer artículo</a>' in msg
+
+
+# =============================================================================
+# Fuente 6 — Movistar+ («Hoy en M+ Estrenos»)
+# =============================================================================
+MOVISTAR_HTML = """
+<html><body>
+<section><h2 class="section-header__title">Hoy en M+ Estrenos</h2>
+<div class="mplus-collection__content"><ul class="brand-carousel">
+  <li><div class="mplus-collection__date">05:05</div>
+    <a href="https://www.movistarplus.es/cine/frontera/ficha?tipo=E&id=1" class="mplus-collection__card">
+      <div class="mplus-collection__title">Cine</div>
+      <div class="mplus-collection__subtitle">Frontera</div></a></li>
+  <li><div class="mplus-collection__date">06:44</div>
+    <a href="https://www.movistarplus.es/cine/salt/ficha?tipo=E&id=2" class="mplus-collection__card">
+      <div class="mplus-collection__title">Cine</div>
+      <div class="mplus-collection__subtitle">Salt</div></a></li>
+</ul></div></section>
+<section><h2 class="section-header__title">Si te gusta M+ Estrenos te gustará…</h2>
+<div class="mplus-collection__content"><ul>
+  <li><a href="https://www.movistarplus.es/cine/otra/ficha?id=3">
+    <div class="mplus-collection__subtitle">Recomendación</div></a></li>
+</ul></div></section>
+</body></html>
+"""
+
+
+def test_parse_movistar_estrenos_solo_coleccion_hoy():
+    items = ft.parse_movistar_estrenos(MOVISTAR_HTML, HOY)
+    assert [i["titulo"] for i in items] == ["Frontera", "Salt"]
+    assert all(i["fecha_estreno"] == "2026-11-04" for i in items)
+    assert all(i["fuente"] == "Movistar+" for i in items)
+    assert items[0]["url"].startswith("https://www.movistarplus.es/cine/")
+
+
+def test_parse_movistar_estrenos_ignora_recomendaciones():
+    items = ft.parse_movistar_estrenos(MOVISTAR_HTML, HOY)
+    assert "Recomendación" not in [i["titulo"] for i in items]
+
+
+def test_parse_movistar_estrenos_sin_seccion_hoy():
+    assert ft.parse_movistar_estrenos("<html><body><p>nada</p></body></html>", HOY) == []
+
+
+# =============================================================================
+# Fuente 7 — RSS de noticias de series/cine
+# =============================================================================
+RSS_FORMULATV = """<?xml version="1.0"?>
+<rss version="2.0"><channel>
+  <title>FormulaTV</title>
+  <item>
+    <title>La 1 estrena serie nueva</title>
+    <link>https://www.formulatv.com/noticias/serie-nueva/</link>
+    <pubDate>Wed, 04 Nov 2026 08:00:00 +0100</pubDate>
+  </item>
+  <item>
+    <title>Sin enlace ni fecha</title>
+  </item>
+  <item>
+    <title>Otra noticia</title>
+    <link>https://www.formulatv.com/noticias/otra/</link>
+    <pubDate>Mon, 02 Nov 2026 10:00:00 +0100</pubDate>
+  </item>
+</channel></rss>
+"""
+
+
+def test_parse_rss_noticias_extrae_items_completos():
+    items = ft.parse_rss_noticias(RSS_FORMULATV, "FormulaTV")
+    assert len(items) == 2
+    assert items[0]["titulo"] == "La 1 estrena serie nueva"
+    assert items[0]["fecha_estreno"] == "2026-11-04"
+    assert items[0]["url"] == "https://www.formulatv.com/noticias/serie-nueva/"
+    assert items[0]["cadena"] == "FormulaTV"
+    assert items[0]["capitulos"] is None
+
+
+def test_parse_rss_noticias_acepta_fecha_iso():
+    rss = """<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom">
+      <entry><title>Atom item</title><link href="https://x/1"/>
+      <updated>2026-11-03T12:00:00Z</updated></entry></feed>"""
+    items = ft.parse_rss_noticias(rss, "Fotogramas")
+    assert len(items) == 1
+    assert items[0]["fecha_estreno"] == "2026-11-03"
+
+
+def test_parse_rss_noticias_ilegible():
+    assert ft.parse_rss_noticias("esto no es xml <<<", "SensaCine") == []
+
+
+# =============================================================================
+# Rutas del repo (regresión: REPO_DIR sobraba un nivel y files/ caía fuera)
+# =============================================================================
+def test_repo_dir_y_sent_file_dentro_del_repo():
+    repo = Path(__file__).resolve().parent.parent
+    assert ft.REPO_DIR == repo
+    assert ft.SENT_FILE == repo / 'files' / 'formulatv_sent.json'
+    assert (ft.REPO_DIR / 'scripts' / 'scrape_formulatv_telegram.py').exists()
+
+
+# =============================================================================
+# Backfill silencioso (noticias antiguas se marcan sin enviar)
+# =============================================================================
+def test_partir_backfill_noticias_viejas_no_se_envian():
+    vieja = dict(ft._item("Noticia de hace 10 días", date(2026, 10, 25),
+                          "Fotogramas", "Fotogramas", "https://x/1", capitulos=None),
+                 noticia=True)
+    reciente = dict(ft._item("Noticia de ayer", date(2026, 11, 3),
+                             "Fotogramas", "Fotogramas", "https://x/2", capitulos=None),
+                    noticia=True)
+    estreno = ft._item("Estreno de hoy", HOY, "SensaCine", "SensaCine", "https://x/3")
+    enviar, backfill = ft.partir_backfill([vieja, reciente, estreno], HOY)
+    assert [i["titulo"] for i in enviar] == ["Noticia de ayer", "Estreno de hoy"]
+    assert [i["titulo"] for i in backfill] == ["Noticia de hace 10 días"]
+
+
+def test_partir_backfill_estrenos_nunca_son_backfill():
+    estreno = ft._item("Estreno", HOY, "FormulaTV", "La 1", "https://x/1")
+    enviar, backfill = ft.partir_backfill([estreno], HOY)
+    assert len(enviar) == 1 and backfill == []
+
+
+# =============================================================================
+# TVMaze: estrenos de temporada (episodio 1 de cualquier temporada)
+# =============================================================================
+def test_parse_tvmaze_acepta_estrenos_de_temporada():
+    data = [
+        {"season": 2, "number": 1, "airdate": "2026-11-04",
+         "show": {"name": "Segunda Temporada", "network": {"name": "Movistar+"}}},
+        {"season": 2, "number": 2, "airdate": "2026-11-04",
+         "show": {"name": "Segunda Temporada"}},
+    ]
+    items = ft.parse_tvmaze(data, HOY)
+    assert [i["titulo"] for i in items] == ["Segunda Temporada"]

@@ -33,6 +33,13 @@ jobs:
         run: |
           pip install requests beautifulsoup4
 
+      - name: 🗄️ Restaurar enviados (dedup entre runs)
+        uses: actions/cache@v4
+        with:
+          path: files/formulatv_sent.json
+          key: formulatv-sent-${{ github.run_id }}
+          restore-keys: formulatv-sent-
+
       - name: Run estrenos del día → Telegram
         run: |
           python scripts/scrape_formulatv_telegram.py

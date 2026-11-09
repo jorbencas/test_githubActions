@@ -20,7 +20,7 @@ from typing import List, Dict, Any, Optional
 import requests
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-REPO_DIR = SCRIPT_DIR.parent.parent
+REPO_DIR = SCRIPT_DIR.parent  # scripts/ → raíz del repo (antes sobraba un nivel)
 sys.path.insert(0, str(REPO_DIR / 'scripts'))
 
 from utils.common import load_json, save_json

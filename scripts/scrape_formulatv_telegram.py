@@ -6,12 +6,16 @@ Fuentes (sin tokens; HTML/JSON/XML estático):
   1. FormulaTV    — calendario de estrenos de series (data-tip)
   2. SensaCine    — estrenos de cine en España
   3. Filmaffinity — cartelera de estrenos en España (main.html)
-  4. TVMaze       — API schedule (ES), solo estrenos S1E1
+  4. TVMaze       — API schedule (ES), estrenos de temporada (episodio 1 de cualquier temporada)
   5. À Punt       — noticias de la serie "Bambalina" (notas de premsa + RSS)
+  6. Movistar+    — «Hoy en M+ Estrenos» (EPG del canal de estrenos)
+  7. RSS series/cine — FormulaTV, Fotogramas y SensaCine (noticias con ventana + dedup)
 
 Reglas:
   - Estrenos: SOLO items con fecha == fecha de ejecución (Europe/Madrid)
-  - Noticias À Punt: ventana de 14 días (se envían una sola vez vía dedup)
+  - Noticias (À Punt + RSS): ventana de 14 días; se envían una sola vez vía dedup
+  - Backfill silencioso: noticias con más de VENTANA_ENVIO_NOTICIAS_DIAS días se
+    marcan como enviadas SIN enviar (evita inundar el canal en la primera ejecución)
   - Blocklist TITULOS_EXCLUIR (p. ej. "Los ilusos 13+13")
   - Sin duplicados entre ejecuciones (files/formulatv_sent.json, clave titulo|fecha)
   - Si una fuente falla, se envían las demás
@@ -32,14 +36,14 @@ from datetime import date, datetime, timedelta
 from email.utils import parsedate_to_datetime
 from html import escape as esc_html
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 from zoneinfo import ZoneInfo
 
 import requests
 from bs4 import BeautifulSoup
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-REPO_DIR = SCRIPT_DIR.parent.parent
+REPO_DIR = SCRIPT_DIR.parent  # scripts/ → raíz del repo (antes sobraba un nivel)
 sys.path.insert(0, str(REPO_DIR / 'scripts'))
 
 # Configuración
@@ -54,11 +58,20 @@ FILMAFFINITY_MAIN = "https://www.filmaffinity.com/es/main.html"
 TVMAZE_SCHEDULE = "https://api.tvmaze.com/schedule"
 APUNT_NOTAS = "https://www.apuntmedia.es/sala-de-premsa/notes-de-premsa/"
 APUNT_RSS = "https://www.apuntmedia.es/rss"
+MOVISTAR_ESTRENOS = "https://www.movistarplus.es/canal/m-plus-estrenos?id=mv1"
+# Fuentes RSS de noticias de series/cine → ventana + dedup (igual que À Punt)
+NOTICIAS_RSS = {
+    "FormulaTV": "https://www.formulatv.com/xml/formulatv.xml",
+    "Fotogramas": "https://www.fotogramas.es/rss/all.xml",
+    "SensaCine": "https://www.sensacine.com/rss/noticias.xml",
+}
 
 # Keywords de la fuente À Punt (noticias de series propias)
 NOTICIA_KEYWORDS = ["bambalina"]
 # Ventana de días hacia atrás para noticias (los estrenos son estrictos: solo hoy)
 VENTANA_NOTICIAS_DIAS = 14
+# Las noticias con más de N días se marcan como enviadas SIN enviar (backfill)
+VENTANA_ENVIO_NOTICIAS_DIAS = 3
 
 # Títulos que NUNCA se envían a este canal (substring, case-insensitive)
 TITULOS_EXCLUIR = [
@@ -282,7 +295,7 @@ def parse_filmaffinity(html: str, hoy: date) -> List[Dict]:
 
 
 # =============================================================================
-# Fuente 4 — TVMaze (schedule ES, solo estrenos S1E1)
+# Fuente 4 — TVMaze (schedule ES, estrenos de temporada: episodio 1)
 # =============================================================================
 def _limpiar_html(texto: str) -> str:
     if not texto:
@@ -291,14 +304,14 @@ def _limpiar_html(texto: str) -> str:
 
 
 def parse_tvmaze(data: list, hoy: date) -> List[Dict]:
-    """Extrae estrenos de serie (temporada 1, episodio 1) del schedule de TVMaze ES."""
+    """Extrae estrenos de temporada (episodio 1 de cualquier temporada) del schedule ES."""
     items: List[Dict] = []
     hoy_str = hoy.isoformat()
 
     for ep in data or []:
         try:
-            if ep.get('season') != 1 or ep.get('number') != 1:
-                continue  # solo estrenos de serie nuevos
+            if ep.get('number') != 1:
+                continue  # estrenos de temporada: S1E1, S2E1, S3E1…
             if ep.get('airdate') != hoy_str:
                 continue  # solo la fecha de ejecución
             show = ep.get('show') or {}
@@ -315,6 +328,82 @@ def parse_tvmaze(data: list, hoy: date) -> List[Dict]:
             ))
         except Exception as e:
             print(f"  ⚠️ Error parseando episodio TVMaze: {e}")
+            continue
+
+    return items
+
+
+# =============================================================================
+# Fuente 6 — Movistar+ («Hoy en M+ Estrenos», EPG del canal)
+# =============================================================================
+def parse_movistar_estrenos(html: str, hoy: date) -> List[Dict]:
+    """Extrae el EPG de hoy del canal M+ Estrenos (sección «Hoy en M+ Estrenos»).
+
+    Solo se toma el contenido de la primera colección («Hoy en…»); las
+    siguientes («Si te gusta…», «Descubre…») son recomendaciones y se ignoran.
+    """
+    soup = BeautifulSoup(html, 'html.parser')
+    items: List[Dict] = []
+
+    header = None
+    for h2 in soup.find_all('h2'):
+        if 'Hoy en M+ Estrenos' in h2.get_text(' ', strip=True):
+            header = h2
+            break
+    if not header:
+        return items
+
+    content = header.find_next(class_='mplus-collection__content')
+    if not content:
+        return items
+
+    for li in content.find_all('li'):
+        a = li.find('a', href=True)
+        sub = li.select_one('.mplus-collection__subtitle')
+        if not a or not sub:
+            continue
+        titulo = sub.get_text(strip=True)
+        if not titulo or len(titulo) < 2:
+            continue
+        items.append(_item(titulo, hoy, 'Movistar+', 'Movistar+', a['href']))
+
+    return items
+
+
+# =============================================================================
+# Fuente 7 — RSS de noticias de series/cine (FormulaTV, Fotogramas, SensaCine)
+# =============================================================================
+def parse_rss_noticias(xml_text: str, fuente: str) -> List[Dict]:
+    """Items de un feed RSS/Atom de noticias (title + link + pubDate/published)."""
+    items: List[Dict] = []
+    try:
+        root = ET.fromstring(xml_text)
+    except ET.ParseError as e:
+        print(f"  ⚠️ RSS {fuente} ilegible: {e}")
+        return items
+
+    for node in root.iter():
+        if node.tag.split('}')[-1].lower() not in ('item', 'entry'):
+            continue
+        try:
+            titulo = link = fecha_s = ''
+            for child in node:
+                tag = child.tag.split('}')[-1].lower()
+                if tag == 'title' and not titulo:
+                    titulo = (child.text or '').strip()
+                elif tag == 'link' and not link:
+                    link = (child.text or '').strip() or (child.get('href') or '').strip()
+                elif tag in ('pubdate', 'published', 'updated') and not fecha_s:
+                    fecha_s = (child.text or '').strip()
+            if not titulo or not link or not fecha_s:
+                continue
+            try:
+                fecha = parsedate_to_datetime(fecha_s).date()
+            except (TypeError, ValueError):
+                fecha = datetime.fromisoformat(fecha_s.replace('Z', '+00:00')).date()
+            items.append(_item(titulo, fecha, fuente, fuente, link, capitulos=None))
+        except Exception as e:
+            print(f"  ⚠️ Error parseando item RSS {fuente}: {e}")
             continue
 
     return items
@@ -465,13 +554,22 @@ def cargar_enviados() -> set:
 
 
 def guardar_enviado(key: str):
-    """Añade clave al set de enviados y guarda (máx. 1000)."""
-    enviados = cargar_enviados()
-    enviados.add(key)
-    if len(enviados) > 1000:
-        enviados = set(list(enviados)[-1000:])
+    """Añade clave al set de enviados y guarda (máx. 1000, se descartan las más antiguas)."""
+    lista: List[str] = []
+    if SENT_FILE.exists():
+        try:
+            data = json.loads(SENT_FILE.read_text(encoding='utf-8'))
+            if isinstance(data, list):
+                lista = [x for x in data if isinstance(x, str)]
+        except Exception:
+            lista = []
+    if key in lista:
+        lista.remove(key)
+    lista.append(key)
+    if len(lista) > 1000:
+        lista = lista[-1000:]
     SENT_FILE.parent.mkdir(parents=True, exist_ok=True)
-    SENT_FILE.write_text(json.dumps(list(enviados), ensure_ascii=False), encoding='utf-8')
+    SENT_FILE.write_text(json.dumps(lista, ensure_ascii=False), encoding='utf-8')
 
 
 def enviar_telegram(mensaje: str, chat_id: str, token: str, topic_id: Optional[str] = None) -> bool:
@@ -545,15 +643,16 @@ def formatear_mensaje(series: List[Dict]) -> str:
 # Orquestación
 # =============================================================================
 def recopilar_estrenos(hoy: date, solo_espanolas: bool = True) -> List[Dict]:
-    """Recopila estrenos de las 4 fuentes + noticias À Punt. Si una falla, siguen las demás."""
+    """Recopila estrenos de las fuentes + noticias (À Punt y RSS). Si una falla, siguen las demás."""
     items: List[Dict] = []
     noticias: List[Dict] = []
 
-    # HTML: FormulaTV, SensaCine, Filmaffinity
+    # HTML: FormulaTV, SensaCine, Filmaffinity, Movistar+
     for nombre, url, parse in (
         ("FormulaTV", FORMULATV_CALENDARIO, lambda h: parse_formulatv(h, hoy, solo_espanolas)),
         ("SensaCine", SENSACINE_ESTRENOS, lambda h: parse_sensacine(h, hoy)),
         ("Filmaffinity", FILMAFFINITY_MAIN, lambda h: parse_filmaffinity(h, hoy)),
+        ("Movistar+", MOVISTAR_ESTRENOS, lambda h: parse_movistar_estrenos(h, hoy)),
     ):
         html = _fetch(url)
         if not html:
@@ -570,7 +669,7 @@ def recopilar_estrenos(hoy: date, solo_espanolas: bool = True) -> List[Dict]:
         r = SESSION.get(TVMAZE_SCHEDULE, params={'country': 'ES', 'date': hoy.isoformat()}, timeout=15)
         r.raise_for_status()
         encontrados = parse_tvmaze(r.json(), hoy)
-        print(f"  ✅ TVMaze: {len(encontrados)} S1E1 de hoy")
+        print(f"  ✅ TVMaze: {len(encontrados)} estrenos de temporada de hoy")
         items += encontrados
     except Exception as e:
         print(f"  ⚠️ TVMaze falló (sigo con las demás): {e}")
@@ -594,9 +693,42 @@ def recopilar_estrenos(hoy: date, solo_espanolas: bool = True) -> List[Dict]:
     except Exception as e:
         print(f"  ⚠️ À Punt RSS falló (sigo con las demás): {e}")
 
+    # Fuente 7 — RSS de noticias de series/cine (ventana + dedup)
+    for nombre, url in NOTICIAS_RSS.items():
+        xml_text = _fetch(url)
+        if not xml_text:
+            continue
+        try:
+            encontrados = parse_rss_noticias(xml_text, nombre)
+            print(f"  ✅ RSS {nombre}: {len(encontrados)} noticias")
+            noticias += encontrados
+        except Exception as e:
+            print(f"  ⚠️ RSS {nombre} falló (sigo con las demás): {e}")
+
+    for n in noticias:
+        n['noticia'] = True
+
     return deduplicar(
         filtrar_estrenos(items, hoy) + filtrar_noticias(noticias, hoy)
     )
+
+
+def partir_backfill(nuevos: List[Dict], hoy: date) -> Tuple[List[Dict], List[Dict]]:
+    """Divide en (para_enviar, backfill).
+
+    Las noticias con fecha < hoy - VENTANA_ENVIO_NOTICIAS_DIAS se marcan como
+    enviadas sin enviar (backfill silencioso): evita inundar el canal con el
+    histórico en la primera ejecución o tras una caída larga.
+    """
+    corte = (hoy - timedelta(days=VENTANA_ENVIO_NOTICIAS_DIAS)).isoformat()
+    enviar: List[Dict] = []
+    backfill: List[Dict] = []
+    for it in nuevos:
+        if it.get('noticia') and it.get('fecha_estreno', '') < corte:
+            backfill.append(it)
+        else:
+            enviar.append(it)
+    return enviar, backfill
 
 
 def main():
@@ -638,25 +770,39 @@ def main():
         print("✅ Todos los estrenos de hoy ya fueron enviados")
         return
 
-    print(f"\n📺 {len(nuevos)} estrenos NUEVOS de hoy:")
-    for s in nuevos:
-        print(f"  📅 {s['fecha_estreno']} - {s['titulo']} ({s.get('cadena', 'N/A')})")
+    # Backfill silencioso: noticias antiguas se marcan sin enviar
+    para_enviar, backfill = partir_backfill(nuevos, hoy)
+    if backfill:
+        print(f"🗄️ {len(backfill)} noticias con más de {VENTANA_ENVIO_NOTICIAS_DIAS} días: "
+              f"se marcan sin enviar")
+
+    if not para_enviar:
+        if not args.dry_run:
+            for s in backfill:
+                guardar_enviado(clave_item(s))
+        print("✅ Nada nuevo que enviar" + (" (solo backfill)" if backfill else ""))
+        return
+
+    print(f"\n📺 {len(para_enviar)} elementos NUEVOS de hoy:")
+    for s in para_enviar:
+        marca = "📰" if s.get('noticia') else "📅"
+        print(f"  {marca} {s['fecha_estreno']} - {s['titulo']} ({s.get('cadena', 'N/A')})")
 
     if args.dry_run:
         print("\n🔍 DRY RUN - No se envía")
-        mensaje = formatear_mensaje(nuevos)
+        mensaje = formatear_mensaje(para_enviar)
         print("\n--- MENSAJE ---")
         print(mensaje)
         return
 
     # Enviar a Telegram
-    mensaje = formatear_mensaje(nuevos)
+    mensaje = formatear_mensaje(para_enviar)
     print(f"\n📤 Enviando a Telegram (chat: {chat_id}, topic: {topic_id or 'general'})...")
 
     ok = enviar_telegram(mensaje, chat_id, token, topic_id)
     if ok:
         print("✅ Mensaje enviado")
-        for s in nuevos:
+        for s in list(para_enviar) + backfill:
             guardar_enviado(clave_item(s))
     else:
         print("❌ Error enviando")

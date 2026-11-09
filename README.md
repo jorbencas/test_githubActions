@@ -22,7 +22,7 @@
 ![Actualizado](https://img.shields.io/badge/Actualizado-09/11/2026-f59e0b?style=for-the-badge&logo=newsblur&logoColor=white)
 <!-- DYNAMIC_BADGES_END -->
 
-Ecosistema de automatización tech que ejecuta **16 workflows de GitHub Actions** formando un pipeline de contenido completamente automatizado. Recolecta de **547 fuentes** (158 canales YouTube, 161 feeds RSS, 225 sitios de web scraping, 89 GitHub Topics, 5 GitHub Repos, 1 Product Hunt), procesa con **IA (Gemini)** y distribuye contenido a múltiples canales.
+Ecosistema de automatización tech que ejecuta **18 workflows de GitHub Actions** formando un pipeline de contenido completamente automatizado. Recolecta de **627 fuentes** (158 canales YouTube, 200 feeds RSS, 276 sitios de web scraping; 163 marcadas como herramientas, con 115 GitHub Topics), procesa con **IA (Gemini)** y distribuye contenido a múltiples canales.
 
 **[🚀 Landing Page](http://jorbencasdownloaderdocument.surge.sh)** · **[📖 Blog: Tech Pulse](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard)** · **[🔧 Instalación](https://blog-jorbencas.vercel.app/posts/instalacion-tech-pulse)**
 
@@ -36,7 +36,7 @@ Ecosistema de automatización tech que ejecuta **16 workflows de GitHub Actions*
 
 | Fase | Descripción | Frecuencia | Blog |
 |------|-------------|------------|------|
-| 🌐 **Scraping** | Recolección de datos de 547 fuentes | Cada hora | [📖](https://blog-jorbencas.vercel.app/posts/instalacion-tech-pulse) |
+| 🌐 **Scraping** | Recolección de datos de 627 fuentes | Cada hora | [📖](https://blog-jorbencas.vercel.app/posts/instalacion-tech-pulse) |
 | 🤖 **IA** | Procesamiento con Gemini (resúmenes, traducción) | En cada scraping | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
 | 📤 **Publicación** | Distribución multicanal (Email, Telegram) | Diario / cada 30min | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
 | 💡 **Tips** | Contenido generado con IA (708 tips, 80 categorías) | Cada 3 horas | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
@@ -52,7 +52,7 @@ La web ([jorbencasdownloaderdocument.surge.sh](http://jorbencasdownloaderdocumen
 | Función | Detalle |
 |---------|---------|
 | ℹ️ **Contexto** | Div explicativo con qué es el gestor y qué alimenta cada proyecto (newsletter/Telegram, blog, topic «report img»…) con conteos en vivo |
-| 📋 **Lista completa** | Las 576 fuentes de `public/data/fuentes.json` con chips por tipo (🌐 web, ▶️ YouTube, 📡 RSS, 🐙 GitHub, 🛠 herramientas) y por proyecto (📰 Noticias tech, 🛠 Herramientas/dev, 🎬 Películas/series, 📚 Otros); la tabla muestra la columna **Proyecto** |
+| 📋 **Lista completa** | Las 636 fuentes de `public/data/fuentes.json` con chips por tipo (🌐 web, ▶️ YouTube, 📡 RSS, 🐙 GitHub, 🛠 herramientas) y por proyecto (📰 Noticias tech, 🛠 Herramientas/dev, 🎬 Películas/series, 📚 Otros); la tabla muestra la columna **Proyecto** |
 | 🔍 **Búsqueda y filtros** | Buscador por nombre/URL/selector/**etiqueta de proyecto** + filtros por tipo y proyecto con contadores en vivo |
 | ➕ **Alta de fuentes** | Formulario (nombre, tipo, URL, selector + opciones avanzadas: categoría, RSS, quick, org) |
 | 🗑 **Baja de fuentes** | Eliminación con confirmación en dos pasos |
@@ -69,7 +69,7 @@ public/
 ├── css/fuentes.css         ← Temas dark/light + responsive
 ├── js/fuentes.js           ← Estado, localStorage, alta/baja, export
 └── data/
-    ├── fuentes.json        ← Snapshot de FUENTES (576 fuentes)
+    ├── fuentes.json        ← Snapshot de FUENTES (636 fuentes)
     └── events.json         ← Eventos de la Tech Timeline (la lee scripts/scrape_october_calendar.py)
 ```
 
@@ -128,13 +128,13 @@ scripts/
 └── solutions/                💡 Base de datos de soluciones
     ├── solutions_db.py            Lookup + generación
     └── solutions_data.py          107 soluciones curadas
-tests/                        ✅ Suite de tests pytest (203 tests)
+tests/                        ✅ Suite de tests pytest (224 tests)
 public/                       🌐 Gestor de fuentes (web estática)
 ├── index.html                ← Gestor de fuentes (contexto + lista + alta/baja)
 ├── css/fuentes.css           ← Temas dark/light + responsive
 ├── js/fuentes.js             ← Estado, localStorage, filtros, export
 └── data/
-    ├── fuentes.json          ← Snapshot de FUENTES (576 fuentes)
+    ├── fuentes.json          ← Snapshot de FUENTES (636 fuentes)
     └── events.json           ← Eventos timeline (los usa scrape_october_calendar.py)
 ```
 
@@ -185,7 +185,7 @@ public/                       🌐 Gestor de fuentes (web estática)
 
 | Comando | Descripción |
 |---------|-------------|
-| `python -m pytest tests/ -v` | Ejecutar todos los tests (183 tests) |
+| `python -m pytest tests/ -v` | Ejecutar todos los tests (224 tests) |
 | `python -m pytest tests/test_solutions_db.py -v` | Ejecutar un suite específico |
 
 ---
@@ -214,12 +214,12 @@ public/                       🌐 Gestor de fuentes (web estática)
 
 ## 🧪 Test Coverage
 
-183 tests pytest cubriendo:
+224 tests pytest cubriendo:
 
 | Módulo | Tests |
 |--------|-------|
 | Cache | FileCache, CacheManager, expiración, TTL |
-| Constants | 547 fuentes, templates email, retos |
+| Constants | 627 fuentes, templates email, retos |
 | Dual sources | YouTube + web scraping |
 | Email templates | Placeholders, headers, secciones vídeo |
 | Pipeline imágenes | Portadas locales, WebP/AVIF |

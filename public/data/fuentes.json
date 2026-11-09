@@ -2512,6 +2512,297 @@
     "quick": true,
     "solo_tech": true
   },
+  "Julia Evans": {
+    "rss": "https://jvns.ca/atom.xml",
+    "quick": true
+  },
+  "Dan Luu": {
+    "rss": "https://danluu.com/atom.xml",
+    "quick": true
+  },
+  "Simon Willison": {
+    "rss": "https://simonwillison.net/atom/everything/",
+    "quick": true
+  },
+  "Pragmatic Engineer": {
+    "rss": "https://blog.pragmaticengineer.com/rss/",
+    "quick": true
+  },
+  "Changelog Podcast": {
+    "rss": "https://changelog.com/feed",
+    "quick": true
+  },
+  "Python Insider": {
+    "rss": "https://blog.python.org/feeds/posts/default",
+    "quick": true
+  },
+  "Node.js Blog": {
+    "rss": "https://nodejs.org/en/feed/blog.xml",
+    "quick": true
+  },
+  "Rust Blog": {
+    "rss": "https://blog.rust-lang.org/feed.xml",
+    "quick": true
+  },
+  "Go Blog": {
+    "rss": "https://go.dev/blog/feed.atom",
+    "quick": true
+  },
+  "Kotlin Blog": {
+    "rss": "https://blog.jetbrains.com/kotlin/feed/",
+    "quick": true
+  },
+  ".NET Blog": {
+    "rss": "https://devblogs.microsoft.com/dotnet/feed/",
+    "quick": true
+  },
+  "Spring Blog": {
+    "rss": "https://spring.io/blog.atom",
+    "quick": true
+  },
+  "Vue Blog": {
+    "rss": "https://blog.vuejs.org/feed.xml",
+    "quick": true
+  },
+  "Svelte Blog": {
+    "rss": "https://svelte.dev/blog/rss.xml",
+    "quick": true
+  },
+  "Deno Blog": {
+    "rss": "https://deno.com/feed",
+    "quick": true
+  },
+  "PostgreSQL News": {
+    "rss": "https://www.postgresql.org/news.rss",
+    "quick": true
+  },
+  "Android Developers Blog": {
+    "rss": "https://android-developers.googleblog.com/feeds/posts/default",
+    "quick": true
+  },
+  "Netflix Tech Blog": {
+    "rss": "https://netflixtechblog.com/feed",
+    "quick": true
+  },
+  "Stripe Blog": {
+    "rss": "https://stripe.com/blog/feed.rss",
+    "quick": true
+  },
+  "GitHub Topic Rust": {
+    "url": "https://github.com/topics/rust?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic Python": {
+    "url": "https://github.com/topics/python?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic Go": {
+    "url": "https://github.com/topics/go?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic TypeScript": {
+    "url": "https://github.com/topics/typescript?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic React": {
+    "url": "https://github.com/topics/react?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic Vue": {
+    "url": "https://github.com/topics/vuejs?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic Next.js": {
+    "url": "https://github.com/topics/nextjs?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic Tailwind CSS": {
+    "url": "https://github.com/topics/tailwindcss?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic PostgreSQL": {
+    "url": "https://github.com/topics/postgresql?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic SQLite": {
+    "url": "https://github.com/topics/sqlite?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic GraphQL": {
+    "url": "https://github.com/topics/graphql?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic CLI": {
+    "url": "https://github.com/topics/cli?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic Neovim": {
+    "url": "https://github.com/topics/neovim?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic VS Code Extension": {
+    "url": "https://github.com/topics/vscode-extension?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic Homelab": {
+    "url": "https://github.com/topics/homelab?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic Monitoring": {
+    "url": "https://github.com/topics/monitoring?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic Observability": {
+    "url": "https://github.com/topics/observability?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic MCP": {
+    "url": "https://github.com/topics/mcp?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic Embeddings": {
+    "url": "https://github.com/topics/embeddings?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic Vector Database": {
+    "url": "https://github.com/topics/vector-database?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic Browser Extension": {
+    "url": "https://github.com/topics/browser-extension?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic Voice Assistant": {
+    "url": "https://github.com/topics/voice-assistant?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic FFmpeg": {
+    "url": "https://github.com/topics/ffmpeg?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic Home Automation": {
+    "url": "https://github.com/topics/home-automation?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic Raspberry Pi": {
+    "url": "https://github.com/topics/raspberry-pi?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "GitHub Topic Self Hosted": {
+    "url": "https://github.com/topics/self-hosted?o=desc&s=stars",
+    "tipo": "herramienta",
+    "subtipo": "github-topic",
+    "selector": "article a[href]"
+  },
+  "Awesome Rust": {
+    "url": "https://github.com/rust-unofficial/awesome-rust",
+    "tipo": "herramienta",
+    "subtipo": "awesome",
+    "selector": "article a[href], li a[href]"
+  },
+  "Awesome Go": {
+    "url": "https://github.com/avelino/awesome-go",
+    "tipo": "herramienta",
+    "subtipo": "awesome",
+    "selector": "article a[href], li a[href]"
+  },
+  "Awesome React": {
+    "url": "https://github.com/enaqx/awesome-react",
+    "tipo": "herramienta",
+    "subtipo": "awesome",
+    "selector": "article a[href], li a[href]"
+  },
+  "Awesome Vue": {
+    "url": "https://github.com/vuejs/awesome-vue",
+    "tipo": "herramienta",
+    "subtipo": "awesome",
+    "selector": "article a[href], li a[href]"
+  },
+  "Awesome Node.js": {
+    "url": "https://github.com/sindresorhus/awesome-nodejs",
+    "tipo": "herramienta",
+    "subtipo": "awesome",
+    "selector": "article a[href], li a[href]"
+  },
+  "Public APIs": {
+    "url": "https://github.com/public-apis/public-apis",
+    "tipo": "herramienta",
+    "subtipo": "awesome",
+    "selector": "article a[href], li a[href]"
+  },
+  "Awesome LLM Apps": {
+    "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
+    "tipo": "herramienta",
+    "subtipo": "awesome",
+    "selector": "article a[href], li a[href]"
+  },
+  "Awesome MCP Servers": {
+    "url": "https://github.com/punkpeye/awesome-mcp-servers",
+    "tipo": "herramienta",
+    "subtipo": "awesome",
+    "selector": "article a[href], li a[href]"
+  },
+  "Awesome SysAdmin": {
+    "url": "https://github.com/kahun/awesome-sysadmin",
+    "tipo": "herramienta",
+    "subtipo": "awesome",
+    "selector": "article a[href], li a[href]"
+  },
+  "OpenAlternative": {
+    "rss": "https://openalternative.co/rss/tools.xml",
+    "quick": true,
+    "tipo": "herramienta"
+  },
   "FormulaTV Calendario": {
     "url": "https://www.formulatv.com/calendario/series/",
     "subtipo": "estreno",
@@ -2530,6 +2821,31 @@
   "TVMaze Schedule ES": {
     "rss": "https://api.tvmaze.com/schedule?country=ES",
     "subtipo": "estreno",
+    "proyecto": "cine"
+  },
+  "Movistar+ Estrenos": {
+    "url": "https://www.movistarplus.es/canal/m-plus-estrenos?id=mv1",
+    "subtipo": "estreno",
+    "proyecto": "cine"
+  },
+  "FormulaTV Noticias RSS": {
+    "rss": "https://www.formulatv.com/xml/formulatv.xml",
+    "subtipo": "noticia",
+    "proyecto": "cine"
+  },
+  "Fotogramas Noticias RSS": {
+    "rss": "https://www.fotogramas.es/rss/all.xml",
+    "subtipo": "noticia",
+    "proyecto": "cine"
+  },
+  "SensaCine Noticias RSS": {
+    "rss": "https://www.sensacine.com/rss/noticias.xml",
+    "subtipo": "noticia",
+    "proyecto": "cine"
+  },
+  "À Punt Noticias": {
+    "rss": "https://www.apuntmedia.es/rss",
+    "subtipo": "noticia",
     "proyecto": "cine"
   }
 }
