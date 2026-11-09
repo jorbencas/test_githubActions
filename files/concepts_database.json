@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 172,
+    "total_concepts": 173,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-09T04:03:00.274778"
+    "last_scraped": "2026-11-09T12:48:32.421914"
   },
   "concepts": [
     {
@@ -3192,6 +3192,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-11-08T14:44:52.185003"
+    },
+    {
+      "title": "Smart contracts de Ethereum desde TypeScript: viem y ethers v6 tras la retirada de web3.js",
+      "summary": "Durante años, hablar con un contrato inteligente desde JavaScript significaba instalarweb3.js. Ese reinado terminó: ChainSafe anunció el 15 de enero de 2025 el cierre de la librería y archivó el repos",
+      "explanation": "Durante años, hablar con un contrato inteligente desde JavaScript significaba instalarweb3.js. Ese reinado terminó: ChainSafe anunció el 15 de enero de 2025 el cierre de la librería y archivó el repositorio a principios de marzo. Hoy el trabajo se reparte entreviemyethers v6, dos librerías con filosofías distintas pero con el mismo modelo mental: un cliente que lee, otro que firma y un ABI que describe el contrato. Este artículo recorre el ciclo completo contra la testnet Sepolia usando un contrato ERC-20: leer estado, enviar una transacción, esperar su confirmación y escuchar eventos. Cada ejemplo aparece en viem y en ethers para poder comparar la ergonomía real de ambas.Qué ha pasado con web3.js La información verificable es la siguiente. ChainSafe publicó en su blog«Web3.js to sunset»el 15 de enero de 2025. En él explica que las librerías se archivarían el 4 de marzo de 2025, que el acceso a npm pasaría a la Ethereum Foundation y que los desarrolladores debían migrar a alternativas que siguen creciendo, citando de forma expresa viem y ethers.js. El repositorio en GitHub figura como archivado y de solo lectura desde el 5 de marzo de 2025. La consecuencia práctica se ve en npm: la última versión estable deweb3es la 4.16.0, publicada en diciembre de 2024. No habrá correcciones de seguridad ni soporte para cambios de red futuros. Un proyecto nuevo no debería empezar con ella, y uno existente tiene que planificar la migración. Las dos librerías sucesoras siguen vivas: ethers es",
+      "code_example": "npm install viem ethers\n# .env  (nunca lo subas al repositorio)\nSEPOLIA_RPC_URL=https://TU-PROVEEDOR/sepolia\nPRIVATE_KEY=0x...clave_de_una_cartera_solo_de_pruebas\nWALLET_ADDRESS=0x...tu_direccion_publica",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "interfaces"
+      ],
+      "cat": "interfaces",
+      "scraped_at": "2026-11-09T12:47:56.491127"
     }
   ]
 }
