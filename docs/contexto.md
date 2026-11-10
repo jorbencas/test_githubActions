@@ -2,6 +2,18 @@
 
 ## Cambios recientes
 
+### Fuente Strands Agents Blog en el report de noticias — 10/11/2026
+- **Nueva fuente RSS en `FUENTES`**: `Strands Agents Blog`
+  (`https://strandsagents.com/blog/feed.xml`) en la sección «Fuentes IA especializadas»
+  → entra en el pipeline de scraping y en el report de noticias (`send_telegram`).
+  Verificada con el parser real (`WebExtractor.extraer_rss`): 12 items con `pubDate`
+  y enlaces correctos.
+- **`FUENTES_INGLES`**: +`strands` → los títulos en inglés se detectan como EN
+  (`detectar_idioma`) y se traducen antes de enviarse.
+- **Contadores**: FUENTES 627 → 628, snapshot 636 → 637 (regenerado preservando
+  formato CRLF y las 9 entradas extra de estrenos/noticias); README: 628 fuentes
+  y 201 feeds RSS.
+
 ### Más fuentes + dedup persistente en report img — 09/11/2026
 - **Fix de duplicados («siempre sale Bambalina»)**: el workflow `formulatv_telegram.yml`
   solo subía `files/formulatv_sent.json` como artifact y nunca lo restauraba → cada run

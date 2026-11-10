@@ -263,7 +263,7 @@ FUENTES_INGLES = [
     "wired", "verge", "techcrunch", "github", "openai", "hacker news",
     "ars", "nvidia", "anthropic", "venturebeat", "mit", "hugging face",
     "google ai", "deepmind", "dev.to",
-    "freecodecamp", "nethermind",
+    "freecodecamp", "nethermind", "strands",
 ]
 
 # ── Fallback values ──

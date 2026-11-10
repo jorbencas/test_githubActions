@@ -48,6 +48,7 @@ FUENTES = {
     "AssemblyAI": {"url": "https://www.assemblyai.com/blog/", "selector": "article h2 a"},
     "Cohere": {"url": "https://cohere.com/blog", "selector": "a[href*='/blog/'] h3"},
     "Scale AI": {"url": "https://scale.com/blog", "selector": "a[href*='/blog/']"},
+    "Strands Agents Blog": {"rss": "https://strandsagents.com/blog/feed.xml", "quick": True},
     "LangChain": {"url": "https://blog.langchain.dev/", "selector": "article h2 a"},
     "Pinecone": {"url": "https://www.pinecone.io/blog/", "selector": "a[href*='/blog/']"},
     "Weights & Biases": {"url": "https://wandb.ai/fully-connected", "selector": "article h2 a"},

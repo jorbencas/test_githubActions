@@ -180,6 +180,10 @@
     "url": "https://scale.com/blog",
     "selector": "a[href*='/blog/']"
   },
+  "Strands Agents Blog": {
+    "rss": "https://strandsagents.com/blog/feed.xml",
+    "quick": true
+  },
   "LangChain": {
     "url": "https://blog.langchain.dev/",
     "selector": "article h2 a"
