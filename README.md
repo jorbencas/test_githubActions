@@ -38,10 +38,10 @@ Ecosistema de automatización tech que ejecuta **18 workflows de GitHub Actions*
 |------|-------------|------------|------|
 | 🌐 **Scraping** | Recolección de datos de 628 fuentes | Cada hora | [📖](https://blog-jorbencas.vercel.app/posts/instalacion-tech-pulse) |
 | 🤖 **IA** | Procesamiento con Gemini (resúmenes, traducción) | En cada scraping | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
-| 📤 **Publicación** | Distribución multicanal (Email, Telegram) | Diario / cada 30min | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
-| 💡 **Tips** | Contenido generado con IA (708 tips, 80 categorías) | Cada 3 horas | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
+| 📤 **Publicación** | Distribución multicanal (Email, Telegram, report img) | Diario / cada 30min / estrenos cada 15min | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
+| 💡 **Tips** | Contenido generado con IA (718 tips, 73 categorías) | Cada 3 horas | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
 | 🛠️ **Herramientas** | Auto-detección de herramientas IA (166 categorías) | Cada 3 horas | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
-| 🌅 **Saludos** | Imágenes generadas con IA | Cada 3 horas | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
+| 🌅 **Saludos** | Imágenes generadas con IA | Manual (schedule ⛔ deshabilitado) | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
 
 ---
 
@@ -80,11 +80,13 @@ public/
 | Categoría | Cantidad | Ejemplos |
 |-----------|----------|----------|
 | YouTube channels | 158 | MoureDev, Fernando Herrera, The Engineer's Digest |
-| RSS feeds | 161 | TechCrunch, The Verge, Wired, Ars Technica |
-| Web scraping | 225 | Anthropic, Ollama, Mistral, LangChain, Mozilla Hacks |
-| GitHub Topics | 89 | AI, LLM, Docker, Kubernetes, CSS, HTML |
+| RSS feeds | 201 | TechCrunch, The Verge, Wired, Strands Agents |
+| Web scraping | 276 | Anthropic, Ollama, Mistral, LangChain, Mozilla Hacks |
+| GitHub Topics | 115 | AI, LLM, Docker, Kubernetes, CSS, HTML |
 | GitHub Repos | 5 | OpenWiki, Meetily, AutoPR, PR-Agent |
 | Product Hunt | 1 | Top products daily |
+
+> Los tipos se solapan (p. ej. MoureDev tiene URL + YouTube); el total único es de **628 fuentes**.
 
 ---
 
@@ -122,9 +124,17 @@ scripts/
 │   ├── lang_es.py                Detección de idioma
 │   ├── cache.py                  Cache pluggable
 │   └── ai_categories.json        166 categorías de herramientas IA
-├── tips_generator.py         💡 Tips diarios de IT
-├── ai_tools_generator.py     🛠️ Herramientas IA
-├── saludo_imagen.py          🌅 Imagen de saludo diaria
+├── scrape_formulatv_telegram.py  📡 Report img: estrenos del día → Telegram (cada 15 min)
+├── scrape_formulatv_espana.py    🎬 Estrenos FormulaTV España → calendario
+├── scrape_tvmaze_espana.py       📺 Estrenos TVMaze ES, episodio 1 (SxE1) --year --month
+├── scrape_tvmaze_espana_future.py📺 Próximos estrenos TVMaze ES
+├── scrape_tmdb_espana_octubre.py 🎬 Estrenos TMDb España --year --month
+├── google_calendar_filmaffinity.py 🔔 Filmaffinity → Google Calendar (workflow semanal)
+├── scrape_october_calendar.py    📅 Lee events.json del gestor de fuentes
+├── scrape_*_octubre*.py          🕰️ Scrapers históricos de octubre (legacy)
+├── tips_generator.py             💡 Tips diarios de IT
+├── ai_tools_generator.py         🛠️ Herramientas IA
+├── saludo_imagen.py              🌅 Imagen de saludo diaria
 └── solutions/                💡 Base de datos de soluciones
     ├── solutions_db.py            Lookup + generación
     └── solutions_data.py          107 soluciones curadas
@@ -153,6 +163,14 @@ public/                       🌐 Gestor de fuentes (web estática)
 | `python scripts/scrapers/scrape_el_nido.py --dry-run` | Scraper película "El nido" (2026) |
 | `python scripts/scrapers/scrape_nueve_reinas.py --dry-run` | Scraper serie "Nueve reinas" (Netflix) |
 | `python scripts/scrapers/scrape_los_ilusos.py --dry-run` | Scraper película "Los ilusos 13+13" (2026) |
+
+### 📡 Report img (estrenos)
+
+| Comando | Descripción |
+|---------|-------------|
+| `python scripts/scrape_formulatv_telegram.py --dry-run` | Estrenos del día → topic «report img» |
+| `python scripts/scrape_tvmaze_espana.py --year 2026 --month 11 --dry-run` | Estrenos TVMaze ES (SxE1) |
+| `python scripts/scrape_tmdb_espana_octubre.py --year 2026 --month 11 --dry-run` | Estrenos TMDb España |
 
 ### 📤 Publicación
 
@@ -190,7 +208,7 @@ public/                       🌐 Gestor de fuentes (web estática)
 
 ---
 
-## 🤖 GitHub Actions — 15 Workflows
+## 🤖 GitHub Actions — 18 Workflows
 
 | Workflow | Horario | Descripción |
 |----------|---------|-------------|
@@ -198,13 +216,16 @@ public/                       🌐 Gestor de fuentes (web estática)
 | `scrape_all` | Cada hora | Scraping completo (light + standard + AI tools + concepts) |
 | `daily_resources` | Diario 06:00 UTC | Scraping herramientas + gestión resources.mdx |
 | `daily_content` | Cada 3 horas | Tips IT + Herramientas IA via Telegram |
-| `daily_saludo` | Cada 3 horas | Imágenes Buenos días/noches |
-| `movie_scrapers` | Cada 6 horas | El nido + Nueve reinas + Los ilusos |
+| `generate-projects` | Cada 4 horas | Genera proyectos de empleo → Telegram |
+| `daily_saludo` | Manual ⛔ | Imágenes Buenos días/noches (schedule deshabilitado) |
+| `movie_scrapers` | Cada 3 horas | El nido + Nueve reinas + Los ilusos |
+| `filmaffinity_calendar` | Lun 06:00 UTC | Cartelera Filmaffinity → Google Calendar + Telegram |
 | `send_email` | Diario 09:00 UTC | Newsletter Mailgun |
-| `send_telegram` | Cada 30 min | Telegram + TTS |
+| `send_telegram` | Cada 30 min | Telegram + TTS (report de noticias) |
+| `formulatv_telegram` | Cada 15 min | Estrenos/series → topic «report img» (dedup persistente) |
 | `send_retos_email` | Mié/Sáb 10:00 | Retos de programación por email |
-| `clean_news` | Trimestral | Validación de enlaces |
-| `hunt_challenges` | Manual | Generación de retos con IA |
+| `clean_news` | Cada 4 meses | Validación de enlaces |
+| `hunt_challenges` | Dom 23:00 UTC | Generación de retos con IA |
 | `optimize_images` | Dispatch | Optimización de imágenes |
 | `dashboard_update` | Push (`public/**`) | Deploy del gestor de fuentes a Surge |
 | `tests` | Push/PR a master | pytest |
@@ -221,6 +242,7 @@ public/                       🌐 Gestor de fuentes (web estática)
 | Cache | FileCache, CacheManager, expiración, TTL |
 | Constants | 628 fuentes, templates email, retos |
 | Dual sources | YouTube + web scraping |
+| Estrenos & dedup | Movistar+, RSS, backfill, rutas (37 tests) |
 | Email templates | Placeholders, headers, secciones vídeo |
 | Pipeline imágenes | Portadas locales, WebP/AVIF |
 | AI features | 166 categorías, DB tools, saludo |
@@ -234,7 +256,7 @@ public/                       🌐 Gestor de fuentes (web estática)
 
 ## 📅 Integración Google Calendar
 
-El proyecto tiene configuradas las credenciales de Google OAuth en el archivo `.env` (copia de `mecano_prueba_web/.env`):
+Las credenciales de Google OAuth se usan en local (`.env`) y en CI (secrets `GOOGLE_CREDENTIALS` / `GOOGLE_TOKEN`, workflow `filmaffinity_calendar`):
 
 ```bash
 # Google OAuth
@@ -312,7 +334,8 @@ events = service.events().list(calendarId='primary').execute()
 | Secret | Descripción |
 |--------|-------------|
 | `TELEGRAM_BOT_TOKEN` | Token del bot de Telegram |
-| `TELEGRAM_CHAT_ID` | ID del chat/grupo |
+| `TELEGRAM_REPORT_IMG_TOPIC_ID` | Topic «report img» para estrenos (`formulatv_telegram`) |
+| `TELEGRAM_REPORTS_PROYECTOS_CHANNEL_ID` | Canal de proyectos de empleo (`generate-projects`) |
 | `GEMINI_API_KEY` | API key de Google AI Studio |
 | `MAILGUN_API_KEY` | API key de Mailgun |
 | `MAILGUN_DOMAIN` | Dominio de Mailgun |
@@ -322,6 +345,11 @@ events = service.events().list(calendarId='primary').execute()
 | `AI_TOOLS_CHAT_ID` | Chat/grupo para herramientas IA |
 | `TIPS_CHAT_ID` | Chat/grupo para tips IT |
 | `SURGE_TOKEN` | Token de Surge.sh |
+| `GOOGLE_CREDENTIALS` | Credenciales OAuth de Google (Filmaffinity → Calendar) |
+| `GOOGLE_TOKEN` | Token OAuth guardado de Google Calendar |
+| `TG_API_ID` / `TG_API_HASH` / `TG_SESSION_STRING` | Sesión Telethon de Telegram |
+| `TOKEN_API_ID` | API ID de Telegram (también usado como chat de noticias) |
+| `DOWNLOADER_API_TOKEN` | API token del scraper semanal (portadas) |
 
 ---
 
@@ -339,6 +367,7 @@ events = service.events().list(calendarId='primary').execute()
 ## 🤖 Telegram Notifications
 
 - **Solo noticias** — no envía enlaces de vídeo
+- **Report img** — estrenos y series cada 15 min (`formulatv_telegram`) con dedup persistente en `files/formulatv_sent.json` (`actions/cache`)
 - **Deduplicación** — GitHub Actions Cache
 - **TTL** — 7 días noticias, 24 horas audio
 - **Filtro de tiempo** — últimas 24 horas
