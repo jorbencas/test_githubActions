@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 173,
+    "total_concepts": 176,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-10T04:30:42.168301"
+    "last_scraped": "2026-11-10T13:16:54.071102"
   },
   "concepts": [
     {
@@ -3210,6 +3210,60 @@
       ],
       "cat": "interfaces",
       "scraped_at": "2026-11-09T12:47:56.491127"
+    },
+    {
+      "title": "Tu primera aplicación con Angular 22: de ng new a una lista de tareas con signals",
+      "summary": "Empezar con Angular hoy se parece poco a lo que se contaba en los tutoriales de hace unos años. Los módulos (NgModule) han dejado de ser la puerta de entrada, el archivo del componente raíz se llamaap",
+      "explanation": "Empezar con Angular hoy se parece poco a lo que se contaba en los tutoriales de hace unos años. Los módulos (NgModule) han dejado de ser la puerta de entrada, el archivo del componente raíz se llamaapp.ts, las aplicaciones nuevas nacen sinzone.jsy las pruebas unitarias corren sobre Vitest en lugar de Karma. A 4 de noviembre de 2026 la versión estable que publica npm para@angular/clies la 22.2, y es la que usamos en esta guía. El recorrido es completo: requisitos, instalación del CLI, qué pregunta y qué generang new, cómo se arranca la aplicación desdemain.ts, y una lista de tareas con signals, plantillas con control flow integrado y tests. Si ya conoces el lenguaje y quieres profundizar en inyección de dependencias oHttpClient, tienesTypeScript con Angular: decoradores, DI tipado, HttpClient y señales, y para una visión general del framework,Angular: el marco de trabajo de JavaScript para aplicaciones modernas.Requisitos: qué Node necesitas Angular solo soporta versiones de Node.js con soporte activo o de mantenimiento (LTS). La tabla de compatibilidad de la documentación oficial (angular.dev) fija para Angular 22 estos mínimos: En la práctica, con Node 22 o 24 recientes vas bien. Comprueba la versión instalada antes de seguir:node --version\nnpm --version",
+      "code_example": "node --version\nnpm --version",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-10T13:16:12.960493"
+    },
+    {
+      "title": "Magic Linking: plugin gratuito de WordPress para mejorar el enlazado interno",
+      "summary": "El enlazado interno es una de esas tareas de SEO que todo el mundo sabe que debería hacer y casi nadie hace de forma sistemática: al publicar un artículo nuevo cuesta acordarse de qué contenidos antig",
+      "explanation": "El enlazado interno es una de esas tareas de SEO que todo el mundo sabe que debería hacer y casi nadie hace de forma sistemática: al publicar un artículo nuevo cuesta acordarse de qué contenidos antiguos conviene enlazar, y con el tiempo se acumulan páginas huérfanas, enlaces rotos y entradas que nadie referencia.Magic Linkinges un plugin gratuito para WordPress que ataca exactamente eso desde el propio editor. Lo desarrollan Color Vivo y David Carrero, está publicado en eldirectorio oficial de plugins de WordPressy tiene web propia enmagiclinking.com. Lo repasamos con lo que dicen su ficha y su documentación, sin darle más méritos de los que tiene. El flujo es sencillo. Tras instalar el plugin se pulsa «Analyze my site» para que indexe el contenido (solo analiza cuando se le pide). A partir de ahí, en cualquier entrada o página aparece un panel en el editor de bloques, o una caja en el editor clásico, que sugiere frases del texto que se pueden enlazar a otros contenidos del sitio, cada una con el motivo de la sugerencia. Un clic inserta el enlace y se puede deshacer o rehacer desde la tarjeta o desde el historial. Solo se enlaza la frase elegida; el plugin no toca el resto del texto.Sugerencias entrantes y salientes Además de proponer enlaces desde la entrada que estás editando hacia otras (salientes), también muestra qué otras entradas podrían enlazar a la actual (entrantes). Cuando se acepta una sugerencia entrante, el plugin escribe en la otra entrada solo si el resto de ",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-10T13:16:14.486570"
+    },
+    {
+      "title": "Swift 7: qué se sabe realmente tras Swift 6.4 y qué es pura especulación",
+      "summary": "Circula por Medium y otros sitios una pieza titulada «Why Swift 7 Could Be Apple's Biggest Update Ever», firmada el 20 de julio de 2026, que presenta Swift 7 como algo casi inminente: fin del modo Swi",
+      "explanation": "Circula por Medium y otros sitios una pieza titulada «Why Swift 7 Could Be Apple's Biggest Update Ever», firmada el 20 de julio de 2026, que presenta Swift 7 como algo casi inminente: fin del modo Swift 5, tipos no copiables estabilizados, genéricos variádicos ampliados y «cambios de ruptura revisados» que se remontan a Swift 3. Conviene separar lo que ese texto acierta de lo que da por hecho sin fuente. A día de hoy, 10 de noviembre de 2026, Swift 7 no existe, no tiene fecha y no hay un anuncio oficial de que vaya a llegar con ninguna de esas medidas. Lo que sí hay es una hoja de ruta bastante visible en las propuestas de Swift Evolution y en las versiones 6.2, 6.3 y 6.4, y de ahí se pueden sacar conclusiones razonables.Dónde estamos: Swift 6.4, no Swift 7 La última versión estable es Swift 6.4, publicada a mediados de septiembre de 2026 (las fuentes consultadas dan el 14 o el 15 de septiembre). Se presentó en la WWDC26 y la página de instalación de swift.org ya ofrece el parche 6.4.2. Antes llegó Swift 6.3, el 24 de marzo de 2026, y antes Swift 6.2, el 15 de septiembre de 2025. Hay un error en el texto de Medium: afirma que 6.3 y 6.4 salieron con menos de dos semanas de diferencia, cuando entre una y otra pasaron casi seis meses. Tampoco aparece Swift 7 en el material oficial: ni en la sesión «What's new in Swift» de la WWDC26, ni en el boletín de junio de 2026 de swift.org, ni en el anuncio de Swift 6.3, ni en la cobertura de prensa del lanzamiento de 6.4. La propia sesión",
+      "code_example": "// SE-0493: await dentro de defer\nfunc procesar(_ sesion: Sesion) async throws {\n    defer {\n        await sesion.cerrar()\n    }\n    try await sesion.enviar(datos)\n}\n\n// Disponibilidad con anyAppleOS (sesión WWDC26)\n@available(anyAppleOS 27, *)\nfunc mostrarEstado() { /* ... */ }",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-10T13:16:16.009347"
     }
   ]
 }
