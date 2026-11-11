@@ -16,10 +16,10 @@
 ![AI Tools](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_content.yml?branch=master&style=for-the-badge&label=AI%20Tools&logo=github)
 ![Tips](https://img.shields.io/github/actions/workflow/status/jorbencas/test_githubActions/daily_content.yml?branch=master&style=for-the-badge&label=Tips&logo=github)
 <!-- DYNAMIC_BADGES_START -->
-![Noticias](https://img.shields.io/badge/Noticias-36.472-3b82f6?style=for-the-badge&logo=newsblur&logoColor=white)
+![Noticias](https://img.shields.io/badge/Noticias-36.582-3b82f6?style=for-the-badge&logo=newsblur&logoColor=white)
 ![Fuentes](https://img.shields.io/badge/Fuentes-221-8b5cf6?style=for-the-badge&logo=newsblur&logoColor=white)
 ![Herramientas](https://img.shields.io/badge/Herramientas-200-10b981?style=for-the-badge&logo=newsblur&logoColor=white)
-![Actualizado](https://img.shields.io/badge/Actualizado-10/11/2026-f59e0b?style=for-the-badge&logo=newsblur&logoColor=white)
+![Actualizado](https://img.shields.io/badge/Actualizado-11/11/2026-f59e0b?style=for-the-badge&logo=newsblur&logoColor=white)
 <!-- DYNAMIC_BADGES_END -->
 
 Ecosistema de automatización tech que ejecuta **18 workflows de GitHub Actions** formando un pipeline de contenido completamente automatizado. Recolecta de **628 fuentes** (158 canales YouTube, 201 feeds RSS, 276 sitios de web scraping; 163 marcadas como herramientas, con 115 GitHub Topics), procesa con **IA (Gemini)** y distribuye contenido a múltiples canales.
