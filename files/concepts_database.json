@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 177,
+    "total_concepts": 180,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-11T07:36:26.746931"
+    "last_scraped": "2026-11-11T15:50:15.499535"
   },
   "concepts": [
     {
@@ -3282,6 +3282,64 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-11-11T01:01:14.990588"
+    },
+    {
+      "title": "Login con Google en Android con Kotlin: Credential Manager, Compose y validación del token en servidor",
+      "summary": "Durante años, añadir «iniciar sesión con» a una app Android significaba elegir entre integrar un SDK por proveedor (Facebook, Twitter, Google, GitHub) o delegar todo en un servicio intermedio que pro",
+      "explanation": "Durante años, añadir «iniciar sesión con» a una app Android significaba elegir entre integrar un SDK por proveedor (Facebook, Twitter, Google, GitHub) o delegar todo en un servicio intermedio que prometía unificarlos. CloudRail fue uno de esos intermediarios, con una API única para el login social, pero su empresa abandonó esa línea de producto y sus SDKs figuran hoy como descontinuados. Del lado de Google también cambió el panorama:GoogleSignInClienty One Tap forman parte de las APIs heredadas, y la documentación oficial presenta Credential Manager como su reemplazo. Este artículo recorre la implementación actual del inicio de sesión con Google en Android con Kotlin: dependencias, los dos flujos de interfaz (hoja inferior y botón), una pantalla en Compose, el manejo de errores y, sobre todo, lo que casi nunca se explica bien, que es validar el ID token en tu servidor. Al final se ve cómo encajan Firebase Auth y otros proveedores como GitHub.Qué es Credential Manager y por qué importa Credential Manager es la API de Jetpack recomendada para el intercambio de credenciales en Android. Con una sola llamada unifica passkeys, contraseñas guardadas, «Sign in with Google» y otros inicios de sesión federados, y los presenta en una interfaz del sistema coherente. Funciona en móviles, Wear OS y Android XR, y se integra con gestores de contraseñas como Google Password Manager. Para el login con Google aporta tres cosas concretas: una hoja inferior que aparece sobre tu app sin sacar al ",
+      "code_example": "// gradle/libs.versions.toml\n[versions]\ncredentials = \"1.6.0\"\ngoogleid = \"1.2.1\"\n\n[libraries]\nandroidx-credentials = { module = \"androidx.credentials:credentials\", version.ref = \"credentials\" }\nandroidx-credentials-play = { module = \"androidx.credentials:credentials-play-services-auth\", version.ref = \"credentials\" }\ngoogleid = { module = \"com.google.android.libraries.identity.googleid:googleid\", version.ref = \"googleid\" }\n\n// app/build.gradle.kts\ndependencies {\n    implementation(libs.androidx.credentials)\n    implementation(libs.androidx.credentials.play)\n    implementation(libs.googleid)\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "seguridad_web"
+      ],
+      "cat": "seguridad_web",
+      "scraped_at": "2026-11-11T15:49:32.763389"
+    },
+    {
+      "title": "Memberships",
+      "summary": "Join the best dang community of front-end nerds anywhere! A monthly membership unlocks access to a growing list of perks, from a lively Discord server, shop discounts, free swag, and more as we add st",
+      "explanation": "Join the best dang community of front-end nerds anywhere! A monthly membership unlocks access to a growing list of perks, from a lively Discord server, shop discounts, free swag, and more as we add stuff along the way. Memberships start as low as $5/month. Gets you access to the CSS-Tricks Discord server. The Discord server and CSS-Tricks store discounts.",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "css",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "css-tricks",
+      "tags": [
+        "css",
+        "modern",
+        "css_moderno"
+      ],
+      "cat": "css_moderno",
+      "scraped_at": "2026-11-11T15:50:09.154380"
+    },
+    {
+      "title": "Newsletters",
+      "summary": "Handwritten. Twice a month. No spam.Sponsor it! [Geoff:]This is the first year I’ve lived where it snows in the winter. One morning our family woke up and smushed our faces against the glass door to t",
+      "explanation": "Handwritten. Twice a month. No spam.Sponsor it! [Geoff:]This is the first year I’ve lived where it snows in the winter. One morning our family woke up and smushed our faces against the glass door to the backyard to marvel at our mini winter wonderland. I never … [Geoff:]I think like lots of y’all, I’m not sure what to make of social media these days. There are two personal memories I have of when Twitter felt like magic. The first was seeing one of my earliest tweets … [Geoff:]I’ve developed a habit on CodePen where I start structing my CSS in cascade layers. Because I demo a lot of stuff, I often want the most relevant styles at the very top of the CSS. I’ve usually done …",
+      "code_example": ".overly#powerful .framework.widget {\n  color: maroon;\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "css",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "css-tricks",
+      "tags": [
+        "css",
+        "modern",
+        "css_moderno"
+      ],
+      "cat": "css_moderno",
+      "scraped_at": "2026-11-11T15:50:12.498639"
     }
   ]
 }
