@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 176,
+    "total_concepts": 177,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-10T20:44:58.308366"
+    "last_scraped": "2026-11-11T01:01:58.872110"
   },
   "concepts": [
     {
@@ -3264,6 +3264,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-11-10T13:16:16.009347"
+    },
+    {
+      "title": "rdnie: un driver en Rust para el DNIe que funciona igual en Linux, macOS y Windows",
+      "summary": "Firmar con el DNI electrónico desde una aplicación propia suele ser menos agradable de lo que parece. Entre la tarjeta y el programa hay capas (PC/SC, PKCS#11, OpenSC, drivers del sistema) y cada sist",
+      "explanation": "Firmar con el DNI electrónico desde una aplicación propia suele ser menos agradable de lo que parece. Entre la tarjeta y el programa hay capas (PC/SC, PKCS#11, OpenSC, drivers del sistema) y cada sistema operativo se comporta a su manera.rdnie, un proyecto de código abierto publicado en GitHub, intenta saltarse esas capas: es un driver escrito en Rust que habla directamente con el DNIe mediante APDU sobre PC/SC y que, según su documentación, se comporta igual en Linux, macOS y Windows.De dónde sale: un problema con el DNIe en macOS El origen es práctico. Su autor trabajaba en rFirma, una herramienta de firma electrónica, y al llevarla a macOS se encontró con que el DNIe no funcionaba bien. Según cuenta, el driver de tarjetas inteligentes que trae el sistema por defecto tiene un fallo: resetea la tarjeta a los pocos segundos (habla de unos 6) sin uso y la deja inutilizable. Con el driver CCID de Ludovic Rousseau el problema desaparece, pero pedir a los usuarios que cambien la configuración de su equipo no es una solución razonable. La alternativa era usar el mismo driver que emplea AutoFirma,JMulticard, escrito en Java. Eso obligaba a transpilar otro módulo y a arrastrar más dependencias, justo lo contrario de lo que buscaba: que el código fuera nativo de principio a fin. De ahí salió la decisión de portar JMulticard a Rust.Qué hace rdnie El crate está pensado para el DNIe 3.0 y 4.0 y cubre lo imprescindible para firmar:Localiza el DNIe entre los lectores conectados a partir d",
+      "code_example": "use rdnie::{DigestAlgorithm, PcscTransport, Pin, SIGNATURE_LABEL, Session};\nuse sha2::{Digest, Sha256};\n\nfn main() -> Result<(), rdnie::Error> {\n    let mut session = Session::open(PcscTransport::connect_first_dnie()?)?;\n    let signing = session\n        .private_key(SIGNATURE_LABEL)?\n        .expect(\"a DNIe has a signature key\");\n\n    let retries = session.pin_retries_left()?;\n    let pin = Pin::new(ask_holder_for_pin(retries));\n    let digest = Sha256::digest(b\"document\");\n    let signature = session.sign(&digest, DigestAlgorithm::Sha256, &signing, pin)?;\n    Ok(())\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-11T01:01:14.990588"
     }
   ]
 }
