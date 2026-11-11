@@ -1050,5 +1050,16 @@
     "tipo": "noticia",
     "relevancia": 2,
     "pelicula": "Los ilusos 13+13"
+  },
+  {
+    "titulo": "Los ilusos 13+13. Días de Cine TVE",
+    "url": "https://www.youtube.com/watch?v=PZtvvwiv0sk",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-11T06:20:14.361772+00:00",
+    "medio": "Cinemagavia",
+    "imagen": "https://i.ytimg.com/vi/PZtvvwiv0sk/hqdefault.jpg",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Los ilusos 13+13"
   }
 ]
