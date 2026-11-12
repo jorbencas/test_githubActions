@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 180,
+    "total_concepts": 181,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-12T03:35:26.462105"
+    "last_scraped": "2026-11-12T12:06:52.965977"
   },
   "concepts": [
     {
@@ -3340,6 +3340,24 @@
       ],
       "cat": "css_moderno",
       "scraped_at": "2026-11-11T15:50:12.498639"
+    },
+    {
+      "title": "Subida de ficheros con Spring Boot 4: MultipartFile, progreso real y seguridad sin atajos",
+      "summary": "Subir un fichero a un backend Java parece lo más sencillo del mundo hasta que alguien sube un ejecutable renombrado como.png, un nombre de fichero con../../o un vídeo de 2 GB a un endpoint pensado par",
+      "explanation": "Subir un fichero a un backend Java parece lo más sencillo del mundo hasta que alguien sube un ejecutable renombrado como.png, un nombre de fichero con../../o un vídeo de 2 GB a un endpoint pensado para avatares. Spring Boot 4 se lleva bien con todo esto, pero los valores por defecto no te protegen de lo importante. Aquí montamos un endpoint de subida completo con Spring MVC, almacenamiento en disco con la APIPath, validación del contenido real, errores en formatoProblemDetaily un cliente en el navegador con barra de progreso.Versiones y requisitos La documentación oficial de Spring Boot 4.1 indica que necesita como mínimo Java 17 y que funciona hasta Java 27, con Spring Framework 7 y Servlet 6.1 (Tomcat 11 o Jetty 12.1 como contenedores embebidos). Para un proyecto nuevo lo razonable es Java 25, que es la versión LTS actual; Java 26 salió en marzo de 2026 y es una versión de seis meses de soporte. El código de este artículo no usa ninguna característica en preview, así que sirve igual desde Java 17. La dependencia es la de siempre, el starter web:<dependency>\n    <groupId>org.springframework.boot</groupId>\n    <artifactId>spring-boot-starter-webmvc</artifactId>\n</dependency> Ojo con el nombre: en Spring Boot 4 el starter pasó a llamarsespring-boot-starter-webmvc. Si vienes de Boot 3, el antiguospring-boot-starter-websigue funcionando, pero la guía de migración lo marca como obsoleto y se eliminará en una versión futura.Los límites: la primera línea de defensa",
+      "code_example": "<dependency>\n    <groupId>org.springframework.boot</groupId>\n    <artifactId>spring-boot-starter-webmvc</artifactId>\n</dependency>",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-12T12:06:12.727205"
     }
   ]
 }
