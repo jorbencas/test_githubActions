@@ -11080,5 +11080,17 @@
         "descripcion": "DocSpring fills PDF forms, Word documents, and HTML templates with JSON data and collects e-signatures via API.",
         "categoria": "Documents & Productivity",
         "pricing": ""
+    },
+    {
+        "titulo": "Logimu",
+        "enlace": "https://publicapis.io/logimu-api",
+        "fuente": "Public APIs",
+        "tipo": "herramienta",
+        "f": "12/11",
+        "fecha_publicacion": "",
+        "subtipo": "api",
+        "descripcion": "Amazon and Walmart product data API. Access price history, Buy Box, BSR, seller offers, and live search results across 11 Amazon marketplaces and Walmart US.",
+        "categoria": "Data Access",
+        "pricing": ""
     }
 ]
