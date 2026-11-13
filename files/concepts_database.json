@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 181,
+    "total_concepts": 183,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-13T01:41:15.956031"
+    "last_scraped": "2026-11-13T09:02:13.279226"
   },
   "concepts": [
     {
@@ -3358,6 +3358,42 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-11-12T12:06:12.727205"
+    },
+    {
+      "title": "Hibernate 7 y SchemaManager: crear, validar y vaciar el esquema desde Java sin SchemaExport",
+      "summary": "Durante años, crear las tablas de una aplicación con Hibernate desde código significaba tirar deSchemaExport, dehibernate.hbm2ddl.autoo de un montaje propio conMetadataSourcesyServiceRegistry. Con Jak",
+      "explanation": "Durante años, crear las tablas de una aplicación con Hibernate desde código significaba tirar deSchemaExport, dehibernate.hbm2ddl.autoo de un montaje propio conMetadataSourcesyServiceRegistry. Con Jakarta Persistence 3.2 eso tiene ya una vía estándar: la interfazjakarta.persistence.SchemaManager, que se obtiene directamente delEntityManagerFactory. Hibernate 7 la implementa y la amplía con operaciones propias. La serie estable actual es la 7.4, con la 7.4.14.Final publicada el 25 de octubre de 2026, que exige Java 17 como mínimo y funciona hasta Java 26. Este artículo repasa qué ofreceSchemaManager, cómo se compara con las propiedades declarativas de siempre, para qué sirve de verdad (spoiler: sobre todo para tests y para generar scripts) y por qué en producción el esquema debería moverlo Flyway o Liquibase y no Hibernate.Qué ha cambiado respecto a SchemaExport y hbm2ddl En Hibernate 5 la claseorg.hibernate.tool.hbm2ddl.SchemaExportera la forma habitual de generar el DDL por código. Si abres hoy los JAR dehibernate-core6.6.59 y 7.4.14 comprobarás que el paqueteorg.hibernate.tool.hbm2ddlya no está en ninguno de los dos. Los ejemplos antiguos que montaban unStandardServiceRegistry, construían unMetadatay llamaban anew SchemaExport().create(...)dejan de compilar al migrar. La sustitución llegó en dos pasos. Hibernate 6.2 añadió su propia interfazorg.hibernate.relational.SchemaManager, marcada como@Incubating, para exportar, validar, limpiar y poblar el esquema «como comodidad pa",
+      "code_example": "<dependencies>\n    <dependency>\n        <groupId>org.hibernate.orm</groupId>\n        <artifactId>hibernate-core</artifactId>\n        <version>7.4.14.Final</version>\n    </dependency>\n    <dependency>\n        <groupId>com.h2database</groupId>\n        <artifactId>h2</artifactId>\n        <scope>runtime</scope>\n    </dependency>\n</dependencies>",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-13T09:01:25.039089"
+    },
+    {
+      "title": "Las 32 librerías de Python que todo ingeniero de IA debería conocer en 2026, ordenadas por relevancia",
+      "summary": "Las listas de «librerías imprescindibles para IA» suelen repetir los mismos veinte nombres en el orden de siempre: NumPy, Pandas, Scikit-learn, PyTorch, TensorFlow Sirven como mapa del aprendizaje au",
+      "explanation": "Las listas de «librerías imprescindibles para IA» suelen repetir los mismos veinte nombres en el orden de siempre: NumPy, Pandas, Scikit-learn, PyTorch, TensorFlow Sirven como mapa del aprendizaje automático clásico, pero se quedan cortas para lo que hace hoy un ingeniero de IA en Python, que pasa buena parte del día llamando a modelos de lenguaje, validando sus salidas, sirviendo modelos abiertos, montando recuperación aumentada (RAG) y orquestando agentes. Este repaso parte de esas veinte clásicas, añade doce que faltaban y las ordena todas por lo útiles que resultan a finales de 2026 para alguien que construye productos con IA. La posición indica lo probable que es que la necesites pronto y dice poco de su calidad. Las versiones que aparecen son las publicadas en PyPI a 13 de noviembre de 2026.El ranking de un vistazo Arrays y cálculo numérico, base de casi todo lo demás Deep learning: entrenamiento e inferencia",
+      "code_example": "import numpy as np\n\nemb = np.random.default_rng(42).normal(size=(1000, 384)).astype(np.float32)\nconsulta = emb[0]\n\n# similitud coseno de la consulta contra los 1.000 vectores, sin bucles\nsimilitud = emb @ consulta / (np.linalg.norm(emb, axis=1) * np.linalg.norm(consulta))\nprint(np.argsort(similitud)[::-1][:5])",
+      "use_cases": [],
+      "difficulty": 3,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "rag_ai"
+      ],
+      "cat": "rag_ai",
+      "scraped_at": "2026-11-13T09:01:26.684471"
     }
   ]
 }
