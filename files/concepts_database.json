@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 183,
+    "total_concepts": 184,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-14T02:54:23.628574"
+    "last_scraped": "2026-11-14T09:46:51.798652"
   },
   "concepts": [
     {
@@ -3394,6 +3394,24 @@
       ],
       "cat": "rag_ai",
       "scraped_at": "2026-11-13T09:01:26.684471"
+    },
+    {
+      "title": "Open Liberty y Jakarta EE 11 en un único JAR ejecutable con Maven",
+      "summary": "Open Liberty permite empaquetar el servidor, la configuración y la aplicación en un único fichero que se arranca conjava -jar. El resultado se parece mucho al «fat jar» de Spring Boot, pero con una di",
+      "explanation": "Open Liberty permite empaquetar el servidor, la configuración y la aplicación en un único fichero que se arranca conjava -jar. El resultado se parece mucho al «fat jar» de Spring Boot, pero con una diferencia de fondo: lo que corre dentro es un servidor de aplicaciones Jakarta EE completo, configurado a base defeaturesen unserver.xml. Desde la versión 26.0.0.5, Open Liberty soporta oficialmente Jakarta EE 11 (Platform, Web Profile y Core Profile), y la versión vigente a principios de noviembre de 2026 es la 26.0.0.11. Este artículo monta desde cero una API REST con Jakarta REST 4.0, CDI 4.1 y JSON-B 3.0, la empaqueta con elliberty-maven-pluginen un JAR ejecutable y explica qué ocurre por debajo, cómo configurarlo y en qué casos tiene sentido elegirlo frente a Spring Boot. Si quieres situar primero el estándar, tienes un repaso enJakarta EE 11 en 2026.Qué hay dentro de un JAR ejecutable de Liberty Un JAR ejecutable de Liberty contiene tres cosas: la instalación del runtime (reducida a lo necesario si se usaminify), el directorio del servidor con suserver.xmly la aplicación ya desplegada. Al ejecutarlo, el JAR se extrae en una ubicación temporal y el servidor se lanza en primer plano. Por defecto esa ubicación eswlpExtract/<nombre del jar>_nnnnnnnnnnnnnnnnnnndentro del directorio personal del usuario, y los ficheros de salida del servidor (logs, trabajo) se escriben ahí y se borran al parar el proceso. Es una diferencia práctica respecto a Spring Boot, cuyo ejecutable usa su pr",
+      "code_example": "tareas/\n??? pom.xml\n??? src/main/\n    ??? java/com/example/tareas/\n    ?   ??? Tarea.java\n    ?   ??? TareaRepositorio.java\n    ?   ??? TareaResource.java\n    ?   ??? TareasApplication.java\n    ??? liberty/config/\n        ??? server.xml",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-14T09:46:14.402553"
     }
   ]
 }
