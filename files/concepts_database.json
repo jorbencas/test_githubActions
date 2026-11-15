@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 184,
+    "total_concepts": 185,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-15T01:31:55.447519"
+    "last_scraped": "2026-11-15T08:45:54.145669"
   },
   "concepts": [
     {
@@ -3412,6 +3412,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-11-14T09:46:14.402553"
+    },
+    {
+      "title": "Tu primer programa en Java 25: ficheros compactos, main de instancia e IO.readln",
+      "summary": "Durante años, el primer programa en Java fue también el primer obstáculo: una clase pública, un métodopublic static void main(String[] args)y una llamada aSystem.out.println, cuatro conceptos que no t",
+      "explanation": "Durante años, el primer programa en Java fue también el primer obstáculo: una clase pública, un métodopublic static void main(String[] args)y una llamada aSystem.out.println, cuatro conceptos que no tienen nada que ver con lo que el principiante quiere hacer, que es mostrar un texto en pantalla. Con Java 25, publicado en septiembre de 2025 como versión de soporte a largo plazo, eso ha cambiado de forma definitiva: la JEP 512 (ficheros fuente compactos y métodosmainde instancia) dejó de ser una característica en preview y pasó a formar parte del lenguaje, sin--enable-previewy sin banderas especiales. Este artículo recorre lo que ofrece la versión final, qué reglas impone el lanzador, cómo funciona la nueva clasejava.lang.IOy cómo se ve todo junto en un ejemplo completo, un juego de adivinar el número, escrito en dos versiones: la moderna y la clásica conScanner. Si buscas un repaso más amplio de las novedades recientes del lenguaje, tienesJava moderno en 2026: records, sealed classes, pattern matching y text blocks.De cuatro conceptos a cero: el hola mundo antes y después El programa clásico necesita declarar una clase, hacer público su método principal, marcarlo como estático, recibir un array de cadenas que casi nunca se usa y acceder a la salida estándar a través deSystem.out:public class Hola {\n    public static void main(String[] args) {\n        System.out.println(\"Hola, mundo\");\n    }\n} En Java 25 el mismo programa cabe en un ficheroHola.javacon esto:void main() {\n    IO",
+      "code_example": "public class Hola {\n    public static void main(String[] args) {\n        System.out.println(\"Hola, mundo\");\n    }\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-15T08:45:15.124751"
     }
   ]
 }
