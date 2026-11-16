@@ -11092,5 +11092,17 @@
         "descripcion": "Amazon and Walmart product data API. Access price history, Buy Box, BSR, seller offers, and live search results across 11 Amazon marketplaces and Walmart US.",
         "categoria": "Data Access",
         "pricing": ""
+    },
+    {
+        "titulo": "OrbiSearch",
+        "enlace": "https://publicapis.io/orbisearch-api",
+        "fuente": "Public APIs",
+        "tipo": "herramienta",
+        "f": "16/11",
+        "fecha_publicacion": "",
+        "subtipo": "api",
+        "descripcion": "Email validation, email finder and company enrichment API that resolves catch-all and gateway-protected addresses, with real-time and bulk endpoints.",
+        "categoria": "Email",
+        "pricing": ""
     }
 ]
