@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 187,
+    "total_concepts": 188,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-17T01:27:58.472520"
+    "last_scraped": "2026-11-17T10:02:19.267789"
   },
   "concepts": [
     {
@@ -3466,6 +3466,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-11-17T01:27:26.071247"
+    },
+    {
+      "title": "Docker run o Docker Compose: cuándo basta un comando y cuándo necesitas un compose.yaml",
+      "summary": "Casi todo el mundo empieza condocker run: un comando, un contenedor, resultado inmediato. El problema llega cuando el comando ya ocupa cuatro líneas, hay una base de datos que tiene que arrancar antes",
+      "explanation": "Casi todo el mundo empieza condocker run: un comando, un contenedor, resultado inmediato. El problema llega cuando el comando ya ocupa cuatro líneas, hay una base de datos que tiene que arrancar antes que la aplicación y alguien del equipo pregunta cómo se levanta todo el entorno. Ahí aparece Docker Compose. Este artículo compara las dos herramientas con el mismo caso (una aplicación con PostgreSQL), traduce los flags dedocker runa su equivalente encompose.yamly deja claro dónde acaba cada una.Qué hace cada una docker runcrea e iniciauncontenedor a partir de una imagen. Todo lo que necesita (puertos, volúmenes, variables, red, política de reinicio) se pasa como flags en esa invocación. No hay nada guardado: si no apuntas el comando en alguna parte, la configuración vive solo en tu historial de la terminal. Docker Compose describe en un fichero YAML un conjunto de servicios, redes y volúmenes, y los gestiona como una unidad:docker compose uplo crea todo,docker compose downlo retira. El fichero se versiona con el código, así que el entorno es reproducible. Hoy Compose es un plugin del propio cliente Docker, y se invoca con un espacio,docker compose. El antiguo binario independientedocker-compose(versión 1, escrito en Python) dejó de recibir soporte en 2023, y conviene no mezclarlo con la sintaxis actual.El caso de partida: aplicación y PostgreSQL con docker run Para tener algo concreto, este sería el montaje de una aplicación propia (imagenmiapp) que habla con PostgreSQL 18 usa",
+      "code_example": "# 1. Red y volumen propios\ndocker network create appnet\ndocker volume create pgdata\n\n# 2. Base de datos con comprobación de salud\ndocker run -d --name db \n  --network appnet \n  -e POSTGRES_USER=app \n  -e POSTGRES_PASSWORD=cambia-esto \n  -e POSTGRES_DB=appdb \n  -v pgdata:/var/lib/postgresql \n  --health-cmd \"pg_isready -U app -d appdb\" \n  --health-interval 5s \n  --health-timeout 3s \n  --health-retries 5 \n  --restart unless-stopped \n  postgres:18\n\n# 3. Esperar a que la base de datos esté sana\nuntil [ \"$(docker inspect -f '{{.State.Health.Status}}' db)\" = \"healthy\" ]; do\n  sleep 1\ndone\n\n# 4. La aplicación\ndocker build -t miapp .\ndocker run -d --name app \n  --network appnet \n  -p 127.0.0.1:3000:3000 \n  -e DATABASE_URL=postgres://app:cambia-esto@db:5432/appdb \n  --restart unless-stopped \n  miapp",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "devops"
+      ],
+      "cat": "devops",
+      "scraped_at": "2026-11-17T10:01:46.509457"
     }
   ]
 }
