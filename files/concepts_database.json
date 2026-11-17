@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 188,
+    "total_concepts": 190,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-17T10:02:19.267789"
+    "last_scraped": "2026-11-17T19:03:16.770376"
   },
   "concepts": [
     {
@@ -3484,6 +3484,42 @@
       ],
       "cat": "devops",
       "scraped_at": "2026-11-17T10:01:46.509457"
+    },
+    {
+      "title": "Cómo usar dos cuentas de GitHub en el mismo equipo con SSH",
+      "summary": "Hacesgit pushy Git te respondeRepository not found. Revisas el remoto, la rama y los permisos y todo está en orden. Lo único raro es que en la misma máquina tienes dos cuentas de GitHub, una personal ",
+      "explanation": "Hacesgit pushy Git te respondeRepository not found. Revisas el remoto, la rama y los permisos y todo está en orden. Lo único raro es que en la misma máquina tienes dos cuentas de GitHub, una personal y otra del trabajo. Es un problema muy común y casi nunca está donde dice el mensaje de error. Esta guía explica por qué ocurre y cómo dejar las dos cuentas configuradas con SSH para que no vuelva a pasar.Por qué GitHub dice «not found» Cuando la cuenta con la que te autenticas no tiene acceso a un repositorio privado, GitHub responde «no encontrado» en lugar de «permiso denegado». Es deliberado: así no revela que ese repositorio existe. Si ves ese mensaje, lo primero que hay que preguntarse esquién cree GitHub que eres, no si el repositorio existe. Con HTTPS pasa a menudo esto: Git delega en uncredential helperque guarda el token en el llavero del sistema, y si ahí quedó el token de la cuenta personal, Git lo envía primero aunquegh auth statuste diga que la cuenta activa es la del trabajo. La herramientaghy Git guardan sus credenciales por separado, así que pueden contradecirse sin avisar. La solución más limpia es no depender de credenciales cacheadas y usaruna clave SSH por cuenta. Imagen: Pexels / Daniil KomovPaso 1: una clave por cuenta",
+      "code_example": "ssh-keygen -t ed25519 -C \"[email protected]\" -f ~/.ssh/id_ed25519_trabajo\nssh-keygen -t ed25519 -C \"[email protected]\" -f ~/.ssh/id_ed25519_personal",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "seguridad_web"
+      ],
+      "cat": "seguridad_web",
+      "scraped_at": "2026-11-17T19:02:37.182963"
+    },
+    {
+      "title": "Del teletipo al vi: por qué Unix tiene comandos de dos letras y se mueve con hjkl",
+      "summary": "Cuando alguien aprende vi se topa enseguida con dos rarezas: se mueve conh,j,kylen vez de con las flechas, y para salir de un modo hay que pulsar una tecla que parece estar en la otra punta del teclad",
+      "explanation": "Cuando alguien aprende vi se topa enseguida con dos rarezas: se mueve conh,j,kylen vez de con las flechas, y para salir de un modo hay que pulsar una tecla que parece estar en la otra punta del teclado. Con Unix pasa algo parecido, porque los comandos más usados son de dos letras (ls,cp,mv,rm) y casi todos callan cuando todo ha ido bien. Ninguna de esas decisiones era caprichosa. Las tomaron personas que tenían delante un teletipo lento, una línea de módem de 300 baudios o un terminal barato al que le faltaban teclas.Un teletipo de 10 caracteres por segundo A principios de los setenta, Ken Thompson y Dennis Ritchie programaban Unix en los Bell Labs de Murray Hill (Nueva Jersey) sobre minis de DEC, primero un PDP-7 y después un PDP-11. En su mesa no había pantalla. Había un teletipo, normalmente unTeletype Model 33 ASR, un aparato heredado de la telegrafía que imprimía sobre un rollo de papel continuo con un cilindro metálico y una cinta entintada. Un Teletype Model 33, el tipo de máquina con el que se escribió el primer Unix. Foto: Kai Wegner,Wikimedia Commons(CC BY 2.0). El Model 33 trabajaba en mayúsculas y hablaba por una línea serie a 110 baudios. Cada carácter viajaba con un bit de arranque, siete de datos, uno de paridad y dos de parada, es decir, 11 bits, así que el límite físico erandiez caracteres por segundo. Escribir un comando era oír cómo el martillo recorría el papel mientras la máquina imprimía el eco de lo que acababas de teclear. De ahí viene también/dev/tty:",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-17T19:02:38.850660"
     }
   ]
 }
