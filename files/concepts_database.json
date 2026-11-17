@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 185,
+    "total_concepts": 187,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-16T17:50:14.049381"
+    "last_scraped": "2026-11-17T01:27:58.472520"
   },
   "concepts": [
     {
@@ -3430,6 +3430,42 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-11-15T08:45:15.124751"
+    },
+    {
+      "title": "Cómo funciona un agente de voz con inteligencia artificial",
+      "summary": "La inteligencia artificial está transformando la atención telefónica de las empresas mediante sistemas capaces de mantener conversaciones, interpretar preguntas y realizar gestiones sin necesidad de q",
+      "explanation": "La inteligencia artificial está transformando la atención telefónica de las empresas mediante sistemas capaces de mantener conversaciones, interpretar preguntas y realizar gestiones sin necesidad de que intervenga un operador en cada llamada. Esta tecnología permite atender consultas en lenguaje natural, identificar las necesidades del interlocutor y ofrecer respuestas adaptadas al contexto, incluso cuando la conversación incluye cambios de tema o interrupciones. Detrás de esta capacidad existe una combinación de tecnologías que trabajan de forma coordinada. El reconocimiento automático del habla convierte la voz en información que puede procesarse, los modelos de lenguaje interpretan las solicitudes y los sistemas de síntesis generan respuestas habladas. Además, la conexión con herramientas empresariales permite queuna conversación telefónica se transforme en una acción concreta, como consultar una cita o registrar una solicitud.Qué es un agente de voz con IA y cómo procesa las llamadas Unagente de voz con inteligencia artificiales un sistema telefónico que utiliza tecnologías de procesamiento del lenguaje para conversar con las personas y gestionar determinadas tareas. A diferencia de los contestadores automáticos tradicionales, que suelen depender de opciones predefinidas, estos asistentes pueden interpretar expresiones diferentes que transmiten una misma intención y adaptar sus respuestas a la información recibida. Su funcionamiento se basa en varios componentes conectado",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "bases_datos"
+      ],
+      "cat": "bases_datos",
+      "scraped_at": "2026-11-17T01:27:16.214835"
+    },
+    {
+      "title": "Pirámide de tests en Java: JUnit 6, Testcontainers, Playwright y Gatling, cada uno en su nivel",
+      "summary": "Un proyecto Java con diez herramientas de testing y ninguna idea clara de para qué sirve cada una acaba teniendo una suite lenta, frágil y que nadie quiere ejecutar. La solución no pasa por elegir «la",
+      "explanation": "Un proyecto Java con diez herramientas de testing y ninguna idea clara de para qué sirve cada una acaba teniendo una suite lenta, frágil y que nadie quiere ejecutar. La solución no pasa por elegir «la mejor» librería, sino por colocar cada herramienta en el nivel que le corresponde: pruebas unitarias rápidas en la base, pruebas de integración con dependencias reales en el medio y unos pocos tests de extremo a extremo y de carga en la punta. Este mapa recorre las herramientas que se usan hoy en proyectos Java, con las versiones que figuran en Maven Central a principios de noviembre de 2026 y un ejemplo mínimo de cada una. Si buscas una introducción a la cultura de tests con JUnit y Mockito, la tienes enTesting en Java en 2026; aquí el foco es qué usar en cada capa.Resumen por niveles Lógica de negocio sin red ni base de datos Criterios de aceptación legibles por negocio",
+      "code_example": "import static org.assertj.core.api.Assertions.assertThat;\nimport static org.assertj.core.api.Assertions.assertThatThrownBy;\nimport static org.mockito.Mockito.when;\n\nimport java.math.BigDecimal;\nimport org.junit.jupiter.api.Test;\nimport org.junit.jupiter.api.extension.ExtendWith;\nimport org.junit.jupiter.params.ParameterizedTest;\nimport org.junit.jupiter.params.provider.CsvSource;\nimport org.mockito.InjectMocks;\nimport org.mockito.Mock;\nimport org.mockito.junit.jupiter.MockitoExtension;\n\ninterface ServicioDescuentos {\n    BigDecimal porcentaje(String codigoCliente);\n}\n\nclass Calculadora {\n    private final ServicioDescuentos descuentos;\n\n    Calculadora(ServicioDescuentos descuentos) {\n        this.descuentos = descuentos;\n    }\n\n    BigDecimal totalConDescuento(String cliente, BigDecimal importe) {\n        if (importe.signum() < 0) {\n            throw new IllegalArgumentException(\"El importe no puede ser negativo\");\n        }\n        BigDecimal pct = descuentos.porcentaje(cliente);\n        return importe.subtract(importe.multiply(pct).movePointLeft(2));\n    }\n}\n\n@ExtendWith(MockitoExtension.class)\nclass CalculadoraTest {\n\n    @Mock\n    ServicioDescuentos descuentos;\n\n    @InjectMocks\n    Calculadora calculadora;\n\n    @ParameterizedTest\n    @CsvSource({\"100.00, 10, 90.00\", \"50.00, 0, 50.00\", \"200.00, 25, 150.00\"})\n    void aplicaElDescuentoDelCliente(String importe, String pct, String esperado) {\n        when(descuentos.porcentaje(\"C-1\")).thenReturn(new BigDecimal(pct));\n\n        BigDecimal total = calculadora.totalConDescuento(\"C-1\", new BigDecimal(importe));\n\n        assertThat(total).isEqualByComparingTo(esperado);\n    }\n\n    @Test\n    void rechazaImportesNegativos() {\n        assertThatThrownBy(() -> calculadora.totalConDescuento(\"C-1\", new BigDecimal(\"-1\")))\n            .isInstanceOf(IllegalArgumentException.class)\n            .hasMessageContaining(\"negativo\");\n    }\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-17T01:27:26.071247"
     }
   ]
 }
