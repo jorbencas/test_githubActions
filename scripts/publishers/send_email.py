@@ -22,8 +22,9 @@ from google import genai
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from utils.logging_setup import setup_logging
-from utils.constants_downloadfile import CONFIG, EMAIL_TEMPLATE, EMAIL_ROW_TEMPLATE, EMAIL_SOURCE_HEADER, EMAIL_VIDEO_HEADER, EMAIL_VIDEO_ROW, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, ID_VIDEO_KEY, BADGE_KEY, VAL_TECH, TIPO_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES
+from utils.constants_downloadfile import CONFIG, EMAIL_TEMPLATE, EMAIL_ROW_TEMPLATE, EMAIL_SOURCE_HEADER, EMAIL_VIDEO_HEADER, EMAIL_VIDEO_ROW, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, ID_VIDEO_KEY, BADGE_KEY, VAL_TECH, TIPO_KEY, FECHA_PUB_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES
 from utils.common import load_json, save_json, resumir_noticia
+from utils.fechas import texto_es_reciente
 from utils.logging_setup import setup_logging
 
 os.makedirs(LOGS_DIR, exist_ok=True)
@@ -178,6 +179,14 @@ async def run():
     if not historial:
         logger.info("📭 No hay noticias para enviar.")
         return
+
+    # Regla ≤24 h: solo noticias publicadas hoy o en las últimas 24 horas
+    antes = len(historial)
+    historial = [n for n in historial
+                 if texto_es_reciente(n.get(FECHA_PUB_KEY, "")) is not False]
+    if antes != len(historial):
+        logger.info(f"🗓️ {antes - len(historial)} noticias descartadas: "
+                    f"publicadas con más de 24 h.")
 
     # Separar videos y noticias
     todos_videos = [n for n in historial if _es_multimedia(n)][:10]

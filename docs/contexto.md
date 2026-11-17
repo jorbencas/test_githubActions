@@ -2,6 +2,58 @@
 
 ## Cambios recientes
 
+### Nueva fuente RSS: Runesoft (homelab/tech) — 17/11/2026
+- **Origen**: enlace de tracking `links.runesoft.net/go/1a1eb269-…` → redirige a
+  `https://blog.runesoft.net/` (Ghost: «Homelabing, tecnología, servidores y mucho
+  más!»); **no estaba dada de alta** en `FUENTES`.
+- **`FUENTES`** (`constants_sources.py`, sección «RSS/Web: Linux, DevOps,
+  Infraestructura»): `Runesoft` → `rss: https://blog.runesoft.net/rss/` con
+  `quick: True` (tier light → scraping horario). Feed verificado en vivo: 15 items
+  con `title` + `link` + `pubDate` (último: 13/10/2026 → con la regla ≤24 h solo
+  entrarán las publicaciones frescas).
+- **Snapshot `public/data/fuentes.json`**: +1 entrada (637 → 638, formato CRLF
+  preservado).
+- **README**: contadores 628 → **629 fuentes**, 201 → **202 feeds RSS**, snapshot
+  637 → 638. Verificado: 629 total (158 YouTube, 202 RSS, 276 web, 163 herramientas).
+- Tests: 246 en verde (sin cambios en la suite).
+
+### Regla de recencia ≤24 h en TODAS las noticias + secciones por tipología — 17/11/2026
+- **Problema**: llegó a Telegram una noticia de «11 Abril 2026 Actualizado 11 Abril
+  2026, 20:32» — imperdonable. Se exige noticia de la fecha de envío o, como mucho,
+  las últimas 24 horas, **en todos los scrapers y envíos**, no solo en el topic
+  «report img».
+- **Nuevo módulo `scripts/utils/fechas.py`** (regla única compartida):
+  `parsear_fecha` (RFC822/RSS, ISO, español «11 abril 2026, 20:32», dd/mm/yyyy y
+  relativo «hace 3 días»), `es_reciente` (≤24 h; las fechas futuras no se descartan),
+  `texto_es_reciente` (True/False, o `None` si la fuente no da fecha → cada llamante
+  decide) y `extraer_fecha_de_texto` (busca una fecha absoluta dentro de un título;
+  los años sueltos «El nido (2026)» no cuentan). Las fechas sin hora se interpretan
+  a 00:00 (Europe/Madrid), así que «ayer» queda fuera de la ventana.
+- **`scrape_news`**: descarta los items con `fecha_publicacion` >24 h **antes de
+  guardarlo** en `noticias_historico.json` (también «hace 3 días» de YouTube).
+- **`send_telegram`** (mensajes individuales + resumen de voz) y **`send_email`**:
+  filtran por fecha de **publicación** — antes solo se miraba `ts` (fecha de scrapeo),
+  de modo que una noticia vieja scrapeada hoy se enviaba igual.
+- **`tips_generator.load_recent_news`**: las «NOTICIAS TECH DE HOY» del prompt de
+  Gemini también respetan ≤24 h.
+- **`movie_scraper_base`** (El nido / Nueve reinas / Los ilusos): el filtro anterior
+  solo entendía `YYYY-MM-DD` y hacía *fail-open* con los pubDates RFC822 (causa raíz
+  más probable del envío antiguo). Ahora `fecha_aceptable()` usa `parsear_fecha`; si
+  `fecha_pub` está vacío, se busca la fecha en el propio título («11 Abril 2026,
+  20:32») y solo se acepta si es reciente; YouTube aporta `publishedTimeText`
+  («hace 3 días» → fuera). Sin fecha detectable en ningún sitio → se acepta (no hay
+  evidencia de antigüedad).
+- **`scrape_formulatv_telegram` (topic «report img»)**: `VENTANA_NOTICIAS_DIAS = 14`
+  → `VENTANA_NOTICIAS_HORAS = 24`; con hora exacta (RSS/pubDate) → últimas 24 h, sin
+  hora (notas À Punt) → solo fecha de ejecución. Backfill `VENTANA_ENVIO_NOTICIAS_DIAS`
+  3 → 1. Los estrenos siguen estrictos: solo hoy.
+- **Mensaje con secciones separadas por tipología** (nunca se mezclan temas):
+  `📅 Estrenos del día` (agrupados por cadena) + `🗞️ Noticias (últimas 24 h)`
+  (agrupadas por fuente) en el mismo mensaje de report img.
+- **Tests 224 → 246**: nuevo `tests/test_fechas.py` (13), formulatv +2 (ventana 24 h,
+  regresión «11 Abril 2026» y secciones del mensaje), movie scrapers +7
+  (`TestFiltroFecha24h`). README/AGENTS.md actualizados.
+
 ### Fuente Strands Agents Blog en el report de noticias — 10/11/2026
 - **Nueva fuente RSS en `FUENTES`**: `Strands Agents Blog`
   (`https://strandsagents.com/blog/feed.xml`) en la sección «Fuentes IA especializadas»

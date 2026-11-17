@@ -3,14 +3,17 @@ test_movie_scrapers.py — Tests para los scrapers de películas/series
 usando el motor genérico SOLID (movie_scraper_base.py).
 """
 import sys
+from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import pytest
 
 SCRIPT_DIR = Path(__file__).resolve().parent.parent / "scripts" / "scrapers"
 sys.path.insert(0, str(SCRIPT_DIR))
 
-from movie_scraper_base import MovieConfig, MovieNewsScraper, RelevanceFilter, MovieClassifier
+from movie_scraper_base import (MovieConfig, MovieNewsScraper, RelevanceFilter,
+                                MovieClassifier, fecha_aceptable)
 
 
 # =============================================================================
@@ -179,3 +182,51 @@ class TestIAPrompts:
         assert "Los ilusos" in prompt
         assert "1. Titular de prueba" in prompt
         assert "Responde SOLO" in prompt
+
+
+# =============================================================================
+# Filtro de recencia ≤24 h (fecha de publicación, no de scrapeo)
+# =============================================================================
+
+REF = datetime(2026, 11, 17, 20, 0, tzinfo=ZoneInfo("Europe/Madrid"))
+
+
+class TestFiltroFecha24h:
+    """Regla: noticia de la fecha de envío o, como mucho, 24 horas."""
+
+    def test_pubdate_rfc822_antiguo_se_descarta(self):
+        # Regresión: el filtro anterior solo entendía YYYY-MM-DD y dejaba
+        # pasar pubDates RFC822 (p. ej. 11 Apr 2026).
+        item = {"fecha_pub": "Wed, 11 Apr 2026 20:32:00 +0200",
+                "titulo": "El nido: nuevo cartel"}
+        assert fecha_aceptable(item, ref=REF) is False
+
+    def test_pubdate_de_hoy_se_acepta(self):
+        item = {"fecha_pub": "Tue, 17 Nov 2026 08:00:00 +0000",
+                "titulo": "El nido: nuevo cartel"}
+        assert fecha_aceptable(item, ref=REF) is True
+
+    def test_relativo_hace_dias_se_descarta(self):
+        assert fecha_aceptable({"fecha_pub": "hace 3 días", "titulo": "X"},
+                               ref=REF) is False
+
+    def test_relativo_hace_horas_se_acepta(self):
+        assert fecha_aceptable({"fecha_pub": "hace 2 horas", "titulo": "X"},
+                               ref=REF) is True
+
+    def test_fecha_en_el_titulo_antigua_se_descarta(self):
+        item = {"fecha_pub": "",
+                "titulo": "Ficha actualizada 11 Abril 2026, 20:32 del reparto"}
+        assert fecha_aceptable(item, ref=REF) is False
+
+    def test_titulo_sin_fecha_se_acepta(self):
+        """Sin fecha detectable no hay evidencia de antigüedad (fail-open)."""
+        assert fecha_aceptable({"fecha_pub": "", "titulo": "El nido (2026) estreno"},
+                               ref=REF) is True
+        assert fecha_aceptable({"fecha_pub": "", "titulo": "Nueve reinas (2027)"},
+                               ref=REF) is True
+
+    def test_anio_suelo_en_titulo_no_es_fecha(self):
+        assert fecha_aceptable({"fecha_pub": "",
+                                "titulo": "Los ilusos 13+13 (2026): rodaje en Madrid"},
+                               ref=REF) is True

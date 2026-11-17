@@ -5,8 +5,9 @@ test_formulatv_estrenos.py — Tests de parsers y filtros de estrenos del día
 TVMaze, Movistar+, À Punt, RSS de noticias y backfill silencioso).
 """
 import sys
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import pytest
 
@@ -361,17 +362,36 @@ def test_parse_apunt_rss_ilegible():
     assert ft.parse_apunt_rss("no es xml <<<") == []
 
 
-def test_filtrar_noticias_ventana_14_dias():
-    nuevo = ft._item("Bambalina reciente", HOY, "À Punt", "À Punt",
-                     "https://x/1", capitulos=None)
-    limite = ft._item("Bambalina hace 14 días", date(2026, 10, 21), "À Punt",
-                      "À Punt", "https://x/2", capitulos=None)
-    viejo = ft._item("Bambalina antigua", date(2026, 10, 1), "À Punt",
-                     "À Punt", "https://x/3", capitulos=None)
-    futuro = ft._item("Bambalina futura", MANANA, "À Punt", "À Punt",
-                      "https://x/4", capitulos=None)
-    out = ft.filtrar_noticias([nuevo, limite, viejo, futuro], HOY)
-    assert [i["titulo"] for i in out] == ["Bambalina reciente", "Bambalina hace 14 días"]
+def test_filtrar_noticias_ventana_24h():
+    """Noticias: fecha de ejecución o, como mucho, las últimas 24 horas."""
+    ref = datetime(2026, 11, 4, 12, 0, tzinfo=ZoneInfo("Europe/Madrid"))
+    hoy = ft._item("Bambalina de hoy", HOY, "À Punt", "À Punt",
+                   "https://x/1", capitulos=None)
+    ayer_sin_hora = ft._item("Bambalina de ayer sin hora", AYER, "À Punt", "À Punt",
+                             "https://x/2", capitulos=None)
+    ayer_con_hora = ft._item("Bambalina de ayer con hora", AYER, "À Punt", "À Punt",
+                             "https://x/3", capitulos=None,
+                             fecha_hora="2026-11-03T14:00:00+01:00")  # 22h antes
+    vieja = ft._item("Bambalina antigua", date(2026, 10, 1), "À Punt", "À Punt",
+                     "https://x/4", capitulos=None)
+    futura = ft._item("Bambalina futura", MANANA, "À Punt", "À Punt",
+                      "https://x/5", capitulos=None)
+    out = ft.filtrar_noticias([hoy, ayer_sin_hora, ayer_con_hora, vieja, futura],
+                              HOY, ahora=ref)
+    assert [i["titulo"] for i in out] == ["Bambalina de hoy", "Bambalina de ayer con hora"]
+
+
+def test_filtrar_noticias_fecha_antigua_no_se_envia():
+    """Regresión: noticia de «11 Abril 2026» (con hora) jamás se envía."""
+    ref = datetime(2026, 11, 17, 20, 0, tzinfo=ZoneInfo("Europe/Madrid"))
+    abril = ft._item("Noticia actualizada 11 Abril 2026, 20:32", date(2026, 4, 11),
+                     "Fotogramas", "Fotogramas", "https://x/1", capitulos=None,
+                     fecha_hora="2026-04-11T20:32:00+02:00")
+    hoy = ft._item("Noticia de hoy", date(2026, 11, 17), "Fotogramas", "Fotogramas",
+                   "https://x/2", capitulos=None,
+                   fecha_hora="2026-11-17T09:00:00+01:00")
+    out = ft.filtrar_noticias([abril, hoy], date(2026, 11, 17), ahora=ref)
+    assert [i["titulo"] for i in out] == ["Noticia de hoy"]
 
 
 def test_noticias_a_punt_sin_tag_pelicula_y_grupo_propio():
@@ -382,6 +402,24 @@ def test_noticias_a_punt_sin_tag_pelicula_y_grupo_propio():
     assert "🎬 Película" not in msg
     assert "📍 <b>À Punt</b>" in msg
     assert '<a href="https://www.apuntmedia.es/sala-de-premsa/bambalina.html">Leer artículo</a>' in msg
+
+
+def test_formatear_mensaje_separa_estrenos_y_noticias():
+    """Secciones por tipología: estrenos y noticias nunca se mezclan."""
+    estreno = ft._item("Estreno X", HOY, "SensaCine", "SensaCine",
+                       "https://e.com/estreno")
+    noticia = dict(ft._item("Noticia Y", HOY, "Fotogramas", "Fotogramas",
+                            "https://e.com/noticia", capitulos=None),
+                   noticia=True)
+    msg = ft.formatear_mensaje([estreno, noticia])
+
+    assert "📅 <b>Estrenos del día" in msg
+    assert "🗞️ <b>Noticias (últimas 24 h)</b>" in msg
+
+    bloque_estrenos, bloque_noticias = msg.split("🗞️", 1)
+    bloque_noticias = "🗞️" + bloque_noticias
+    assert "Estreno X" in bloque_estrenos and "Noticia Y" not in bloque_estrenos
+    assert "Noticia Y" in bloque_noticias and "Estreno X" not in bloque_noticias
 
 
 # =============================================================================

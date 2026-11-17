@@ -13,9 +13,12 @@ Fuentes (sin tokens; HTML/JSON/XML estático):
 
 Reglas:
   - Estrenos: SOLO items con fecha == fecha de ejecución (Europe/Madrid)
-  - Noticias (À Punt + RSS): ventana de 14 días; se envían una sola vez vía dedup
+  - Noticias: ventana de 24 h — fecha de ejecución o, como mucho, las últimas
+    24 horas (si la fuente da hora exacta); sin hora → solo fecha de ejecución
   - Backfill silencioso: noticias con más de VENTANA_ENVIO_NOTICIAS_DIAS días se
     marcan como enviadas SIN enviar (evita inundar el canal en la primera ejecución)
+  - Bloques separados por tipología en el mensaje (📅 estrenos / 🗞️ noticias),
+    nunca se mezclan temas distintos en el mismo bloque
   - Blocklist TITULOS_EXCLUIR (p. ej. "Los ilusos 13+13")
   - Sin duplicados entre ejecuciones (files/formulatv_sent.json, clave titulo|fecha)
   - Si una fuente falla, se envían las demás
@@ -46,6 +49,8 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_DIR = SCRIPT_DIR.parent  # scripts/ → raíz del repo (antes sobraba un nivel)
 sys.path.insert(0, str(REPO_DIR / 'scripts'))
 
+from utils.fechas import es_reciente, parsear_fecha
+
 # Configuración
 OUTPUT_DIR = REPO_DIR / 'files'
 SENT_FILE = OUTPUT_DIR / 'formulatv_sent.json'
@@ -68,10 +73,11 @@ NOTICIAS_RSS = {
 
 # Keywords de la fuente À Punt (noticias de series propias)
 NOTICIA_KEYWORDS = ["bambalina"]
-# Ventana de días hacia atrás para noticias (los estrenos son estrictos: solo hoy)
-VENTANA_NOTICIAS_DIAS = 14
+# Ventana de recencia para noticias: fecha de ejecución o, como mucho, 24 horas
+# (los estrenos son estrictos: solo hoy)
+VENTANA_NOTICIAS_HORAS = 24
 # Las noticias con más de N días se marcan como enviadas SIN enviar (backfill)
-VENTANA_ENVIO_NOTICIAS_DIAS = 3
+VENTANA_ENVIO_NOTICIAS_DIAS = 1
 
 # Títulos que NUNCA se envían a este canal (substring, case-insensitive)
 TITULOS_EXCLUIR = [
@@ -165,10 +171,14 @@ def _fetch(url: str, params: Optional[dict] = None) -> Optional[str]:
 
 
 def _item(titulo: str, fecha: date, fuente: str, cadena: str, url: str,
-          sinopsis: str = "", capitulos: Optional[str] = "?", temporadas: int = 1) -> Dict:
+          sinopsis: str = "", capitulos: Optional[str] = "?", temporadas: int = 1,
+          fecha_hora: Optional[str] = None) -> Dict:
+    """Crea un item. `fecha_hora` (ISO con hora) solo lo dan las fuentes con
+    pubDate exacto; sin ella la recencia se evalúa solo a nivel de fecha."""
     return {
         'titulo': titulo,
         'fecha_estreno': fecha.isoformat(),
+        'fecha_hora': fecha_hora,
         'genero': '',
         'cadena': cadena or fuente,
         'protagonistas': [],
@@ -398,10 +408,12 @@ def parse_rss_noticias(xml_text: str, fuente: str) -> List[Dict]:
             if not titulo or not link or not fecha_s:
                 continue
             try:
-                fecha = parsedate_to_datetime(fecha_s).date()
+                fecha_dt = parsedate_to_datetime(fecha_s)
             except (TypeError, ValueError):
-                fecha = datetime.fromisoformat(fecha_s.replace('Z', '+00:00')).date()
-            items.append(_item(titulo, fecha, fuente, fuente, link, capitulos=None))
+                fecha_dt = datetime.fromisoformat(fecha_s.replace('Z', '+00:00'))
+            fecha = fecha_dt.date()
+            items.append(_item(titulo, fecha, fuente, fuente, link, capitulos=None,
+                               fecha_hora=fecha_dt.isoformat()))
         except Exception as e:
             print(f"  ⚠️ Error parseando item RSS {fuente}: {e}")
             continue
@@ -473,8 +485,9 @@ def parse_apunt_rss(xml_text: str) -> List[Dict]:
             hay = f"{titulo} {url}".lower()
             if not any(k in hay for k in NOTICIA_KEYWORDS):
                 continue
-            fecha = parsedate_to_datetime(node.findtext('pubDate') or '').date()
-            items.append(_item(titulo, fecha, 'À Punt', 'À Punt', url, capitulos=None))
+            fecha_dt = parsedate_to_datetime(node.findtext('pubDate') or '')
+            items.append(_item(titulo, fecha_dt.date(), 'À Punt', 'À Punt', url,
+                               capitulos=None, fecha_hora=fecha_dt.isoformat()))
         except Exception as e:
             print(f"  ⚠️ Error parseando item RSS À Punt: {e}")
             continue
@@ -498,20 +511,30 @@ def filtrar_estrenos(items: List[Dict], hoy: date) -> List[Dict]:
 
 
 def filtrar_noticias(items: List[Dict], hoy: date,
-                     ventana_dias: int = VENTANA_NOTICIAS_DIAS) -> List[Dict]:
-    """Noticias (fuente À Punt): blocklist + ventana [hoy - ventana_dias, hoy].
+                     ventana_horas: int = VENTANA_NOTICIAS_HORAS,
+                     ahora: Optional[datetime] = None) -> List[Dict]:
+    """Noticias: blocklist + recencia estricta (fecha de ejecución o ≤24 h).
 
-    A diferencia de los estrenos, no exige fecha == hoy: una nota de premsa de
-    días anteriores sigue siendo válida y el dedup garantiza un solo envío.
+    - Si la fuente da hora exacta (`fecha_hora`): se acepta solo si la
+      publicación no es anterior a `ahora - ventana_horas`.
+    - Sin hora: solo se acepta si la fecha coincide con la de ejecución
+      (no se puede demostrar que tenga ≤24 h → «es imperdonable» enviar más).
+
+    A diferencia de los estrenos no exige hora de publicación concreta, y el
+    dedup garantiza un solo envío.
     """
-    desde = (hoy - timedelta(days=ventana_dias)).isoformat()
+    ref = ahora or datetime.now(ZoneInfo("Europe/Madrid"))
     hoy_str = hoy.isoformat()
     out = []
     for it in items:
         if excluido(it.get('titulo', '')):
             continue
-        f = it.get('fecha_estreno', '')
-        if not (desde <= f <= hoy_str):
+        fecha_hora = it.get('fecha_hora')
+        if fecha_hora:
+            dt = parsear_fecha(fecha_hora, ref=ref)
+            if dt is None or not es_reciente(dt, ref=ref, horas=ventana_horas):
+                continue
+        elif it.get('fecha_estreno', '') != hoy_str:
             continue
         out.append(it)
     return out
@@ -593,8 +616,11 @@ def enviar_telegram(mensaje: str, chat_id: str, token: str, topic_id: Optional[s
 
 
 def formatear_mensaje(series: List[Dict]) -> str:
-    """Formatea el mensaje para Telegram (parse_mode HTML) agrupando por cadena.
+    """Formatea el mensaje para Telegram (parse_mode HTML).
 
+    Secciones separadas por tipología (nunca se mezclan temas):
+      📅 Estrenos del día — agrupados por cadena/plataforma
+      🗞️ Noticias (últimas 24 h) — agrupadas por fuente
     Los datos interpolados van escapados y los enlaces son <a href> reales.
     """
     if not series:
@@ -605,32 +631,53 @@ def formatear_mensaje(series: List[Dict]) -> str:
     hoy = datetime.now(ZoneInfo("Europe/Madrid"))
     hoy_fmt = f"{hoy.day} de {meses[hoy.month - 1]} de {hoy.year}"
 
-    lines = [
-        f"📰 <b>Estrenos del día: {hoy_fmt}</b>",
-        "",
-        "¡Buenos días! Aquí están los estrenos de hoy. 👇",
-        ""
-    ]
+    estrenos = [s for s in series if not s.get('noticia')]
+    noticias = [s for s in series if s.get('noticia')]
+    lines: List[str] = []
 
-    # Agrupar por cadena/plataforma
-    por_cadena: Dict[str, List[Dict]] = {}
-    for s in series:
-        c = s.get('cadena') or s.get('fuente') or 'Sin plataforma'
-        por_cadena.setdefault(c, []).append(s)
-
-    for cadena, items in sorted(por_cadena.items()):
-        lines.append(f"📍 <b>{esc_html(cadena)}</b>")
-        for s in items:
+    def _pintar_elems(elems: List[Dict]) -> List[str]:
+        out = []
+        for s in elems:
             titulo = esc_html(s['titulo'])
             genero = f" ({esc_html(s['genero'])})" if s.get('genero') else ""
             temp = f" T{s['temporadas']}" if s.get('temporadas', 1) > 1 else ""
             tipo = " 🎬 Película" if s.get('capitulos') in ['?', '1', 1] and s.get('temporadas', 1) == 1 else f"{temp}"
-            lines.append(f"🔸 <b>{titulo}</b>{genero}{tipo}")
+            out.append(f"🔸 <b>{titulo}</b>{genero}{tipo}")
             if s.get('sinopsis'):
-                lines.append(f"     {esc_html(s['sinopsis'][:200])}")
+                out.append(f"     {esc_html(s['sinopsis'][:200])}")
             if s.get('url'):
-                lines.append(f'     🔗 <a href="{esc_html(s["url"], quote=True)}">Leer artículo</a>')
-        lines.append("")
+                out.append(f'     🔗 <a href="{esc_html(s["url"], quote=True)}">Leer artículo</a>')
+        return out
+
+    def _pintar_grupo(items: List[Dict], clave: str) -> List[str]:
+        out = []
+        por_grupo: Dict[str, List[Dict]] = {}
+        for s in items:
+            g = s.get(clave) or s.get('fuente') or 'Sin plataforma'
+            por_grupo.setdefault(g, []).append(s)
+        for grupo, elems in sorted(por_grupo.items()):
+            out.append(f"📍 <b>{esc_html(grupo)}</b>")
+            out.extend(_pintar_elems(elems))
+            out.append("")
+        return out
+
+    if estrenos:
+        lines += [
+            f"📅 <b>Estrenos del día: {hoy_fmt}</b>",
+            "",
+            "¡Buenos días! Aquí están los estrenos de hoy. 👇",
+            "",
+        ]
+        lines += _pintar_grupo(estrenos, 'cadena')
+
+    if noticias:
+        if lines and lines[-1] != "":
+            lines.append("")
+        lines += [
+            f"🗞️ <b>Noticias (últimas {VENTANA_NOTICIAS_HORAS} h)</b>",
+            "",
+        ]
+        lines += _pintar_grupo(noticias, 'fuente')
 
     fuentes = sorted({s.get('fuente', 'FormulaTV') for s in series})
     lines.append(f"📡 <i>Fuentes: {esc_html(' · '.join(fuentes))}</i>")

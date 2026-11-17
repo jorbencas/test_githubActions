@@ -29,6 +29,7 @@ CONCEPTS_PATH = SCRIPT_DIR / "utils" / "concepts_database.json"
 
 sys.path.insert(0, str(SCRIPT_DIR))
 from utils.telegram_client import TelegramClient
+from utils.fechas import texto_es_reciente
 
 # ── Telegram config ──
 BOT_TOKEN = os.environ.get("TIPS_BOT_TOKEN", "")
@@ -624,6 +625,9 @@ def load_recent_news(count=15):
             data = json.load(f)
         if not isinstance(data, list):
             return []
+        # Regla ≤24 h: solo noticias publicadas hoy o en las últimas 24 horas
+        data = [x for x in data
+                if texto_es_reciente(x.get("fecha_publicacion", "")) is not False]
         recent = sorted(data, key=lambda x: x.get("ts", ""), reverse=True)[:count]
         result = []
         for item in recent:

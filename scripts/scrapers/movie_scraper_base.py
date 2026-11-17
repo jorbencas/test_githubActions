@@ -32,7 +32,7 @@ import os
 import re
 import sys
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, time, timedelta, timezone
 from pathlib import Path
 from typing import Callable, List, Optional, Tuple
 from urllib.parse import quote_plus
@@ -41,6 +41,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from utils.fechas import es_reciente, extraer_fecha_de_texto, parsear_fecha
 from utils.telegram_client import TelegramClient
 
 HEADERS = {
@@ -66,6 +67,36 @@ def _get_execution_date():
     return datetime.now(ZoneInfo("Europe/Madrid")).date()
 
 EXECUTION_DATE = _get_execution_date()
+
+
+def _ref_ejecucion() -> datetime:
+    """Instante de referencia del filtro de recencia (Europe/Madrid).
+
+    Por defecto, «ahora»; si se forzó EXECUTION_DATE a otro día, el final de
+    ese día (para runs de backfill/replay).
+    """
+    madrid = ZoneInfo("Europe/Madrid")
+    ahora = datetime.now(madrid)
+    if EXECUTION_DATE != ahora.date():
+        return datetime.combine(EXECUTION_DATE, time(23, 59), tzinfo=madrid)
+    return ahora
+
+
+def fecha_aceptable(item: dict, ref: datetime = None) -> bool:
+    """Regla única ≤24 h: True si la noticia es de hoy o de las últimas 24 h.
+
+    Se mira `fecha_pub` (RFC822/ISO/español/relativo «hace 2 días») y, si no
+    hay, se busca una fecha absoluta en el propio título (p. ej. «11 Abril
+    2026, 20:32»). Sin fecha detectable en ningún sitio → se acepta (no hay
+    evidencia de antigüedad).
+    """
+    ref = ref or _ref_ejecucion()
+    fecha = parsear_fecha(item.get("fecha_pub") or "", ref=ref)
+    if fecha is None:
+        fecha = extraer_fecha_de_texto(item.get("titulo") or "", ref=ref)
+    if fecha is None:
+        return True
+    return es_reciente(fecha, ref=ref)
 
 
 # =============================================================================
@@ -272,13 +303,19 @@ class MovieNewsScraper:
                         ti = (v.get("title", {}).get("runs", [{}])[0].get("text", "")
                               or v.get("title", {}).get("simpleText", ""))
                         canal = v.get("ownerText", {}).get("runs", [{}])[0].get("text", "")
-                        if vid and vid not in vistos:
-                            vistos.add(vid)
-                            items.append({
-                                "titulo": ti, "url": f"https://www.youtube.com/watch?v={vid}",
-                                "fecha_pub": "", "fecha_ts": datetime.now(timezone.utc).isoformat(),
-                                "medio": canal or "YouTube", "imagen": f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg",
-                            })
+                    if vid and vid not in vistos:
+                        vistos.add(vid)
+                        pub = ""
+                        pt = v.get("publishedTimeText")
+                        if isinstance(pt, dict):
+                            pub = pt.get("simpleText", "") or ""
+                        elif isinstance(pt, str):
+                            pub = pt
+                        items.append({
+                            "titulo": ti, "url": f"https://www.youtube.com/watch?v={vid}",
+                            "fecha_pub": pub, "fecha_ts": datetime.now(timezone.utc).isoformat(),
+                            "medio": canal or "YouTube", "imagen": f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg",
+                        })
                     for val in o.values():
                         _caminar(val)
                 elif isinstance(o, list):
@@ -410,22 +447,11 @@ class MovieNewsScraper:
     # Anexar filtrado
     # ------------------------------------------------------------------
     def _anexar(self, items, resultados, vistos):
-        """Añade a resultados los items relevantes y no duplicados."""
+        """Añade a resultados los items relevantes, recientes (≤24 h) y no duplicados."""
         for it in items:
-            # Filtrar por fecha de ejecución (solo noticias del día en que se ejecuta)
-            try:
-                fecha_str = it.get("fecha_pub") or it.get("fecha_ts") or ""
-                item_date = None
-                # Intentar extraer YYYY-MM-DD
-                m = re.search(r"(\d{4}-\d{2}-\d{2})", fecha_str)
-                if m:
-                    item_date = datetime.fromisoformat(m.group(1)).date()
-                # Si tiene fecha y no coincide con fecha de ejecución, descartar
-                if item_date and item_date != EXECUTION_DATE:
-                    continue
-            except Exception:
-                # Si no podemos parsear, incluirlo (fail-open)
-                pass
+            # Filtrar por fecha de publicación: hoy o, como mucho, 24 h atrás
+            if not fecha_aceptable(it):
+                continue
 
             if not self._filter.es_relevante(it["titulo"]):
                 continue

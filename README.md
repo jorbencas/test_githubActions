@@ -22,7 +22,7 @@
 ![Actualizado](https://img.shields.io/badge/Actualizado-17/11/2026-f59e0b?style=for-the-badge&logo=newsblur&logoColor=white)
 <!-- DYNAMIC_BADGES_END -->
 
-Ecosistema de automatización tech que ejecuta **18 workflows de GitHub Actions** formando un pipeline de contenido completamente automatizado. Recolecta de **628 fuentes** (158 canales YouTube, 201 feeds RSS, 276 sitios de web scraping; 163 marcadas como herramientas, con 115 GitHub Topics), procesa con **IA (Gemini)** y distribuye contenido a múltiples canales.
+Ecosistema de automatización tech que ejecuta **18 workflows de GitHub Actions** formando un pipeline de contenido completamente automatizado. Recolecta de **629 fuentes** (158 canales YouTube, 202 feeds RSS, 276 sitios de web scraping; 163 marcadas como herramientas, con 115 GitHub Topics), procesa con **IA (Gemini)** y distribuye contenido a múltiples canales.
 
 **[🚀 Landing Page](http://jorbencasdownloaderdocument.surge.sh)** · **[📖 Blog: Tech Pulse](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard)** · **[🔧 Instalación](https://blog-jorbencas.vercel.app/posts/instalacion-tech-pulse)**
 
@@ -36,7 +36,7 @@ Ecosistema de automatización tech que ejecuta **18 workflows de GitHub Actions*
 
 | Fase | Descripción | Frecuencia | Blog |
 |------|-------------|------------|------|
-| 🌐 **Scraping** | Recolección de datos de 628 fuentes | Cada hora | [📖](https://blog-jorbencas.vercel.app/posts/instalacion-tech-pulse) |
+| 🌐 **Scraping** | Recolección de datos de 629 fuentes | Cada hora | [📖](https://blog-jorbencas.vercel.app/posts/instalacion-tech-pulse) |
 | 🤖 **IA** | Procesamiento con Gemini (resúmenes, traducción) | En cada scraping | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
 | 📤 **Publicación** | Distribución multicanal (Email, Telegram, report img) | Diario / cada 30min / estrenos cada 15min | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
 | 💡 **Tips** | Contenido generado con IA (718 tips, 73 categorías) | Cada 3 horas | [📖](https://blog-jorbencas.vercel.app/proyectos/tech-pulse-dashboard) |
@@ -52,7 +52,7 @@ La web ([jorbencasdownloaderdocument.surge.sh](http://jorbencasdownloaderdocumen
 | Función | Detalle |
 |---------|---------|
 | ℹ️ **Contexto** | Div explicativo con qué es el gestor y qué alimenta cada proyecto (newsletter/Telegram, blog, topic «report img»…) con conteos en vivo |
-| 📋 **Lista completa** | Las 637 fuentes de `public/data/fuentes.json` con chips por tipo (🌐 web, ▶️ YouTube, 📡 RSS, 🐙 GitHub, 🛠 herramientas) y por proyecto (📰 Noticias tech, 🛠 Herramientas/dev, 🎬 Películas/series, 📚 Otros); la tabla muestra la columna **Proyecto** |
+| 📋 **Lista completa** | Las 638 fuentes de `public/data/fuentes.json` con chips por tipo (🌐 web, ▶️ YouTube, 📡 RSS, 🐙 GitHub, 🛠 herramientas) y por proyecto (📰 Noticias tech, 🛠 Herramientas/dev, 🎬 Películas/series, 📚 Otros); la tabla muestra la columna **Proyecto** |
 | 🔍 **Búsqueda y filtros** | Buscador por nombre/URL/selector/**etiqueta de proyecto** + filtros por tipo y proyecto con contadores en vivo |
 | ➕ **Alta de fuentes** | Formulario (nombre, tipo, URL, selector + opciones avanzadas: categoría, RSS, quick, org) |
 | 🗑 **Baja de fuentes** | Eliminación con confirmación en dos pasos |
@@ -69,7 +69,7 @@ public/
 ├── css/fuentes.css         ← Temas dark/light + responsive
 ├── js/fuentes.js           ← Estado, localStorage, alta/baja, export
 └── data/
-    ├── fuentes.json        ← Snapshot de FUENTES (637 fuentes)
+    ├── fuentes.json        ← Snapshot de FUENTES (638 fuentes)
     └── events.json         ← Eventos de la Tech Timeline (la lee scripts/scrape_october_calendar.py)
 ```
 
@@ -86,7 +86,7 @@ public/
 | GitHub Repos | 5 | OpenWiki, Meetily, AutoPR, PR-Agent |
 | Product Hunt | 1 | Top products daily |
 
-> Los tipos se solapan (p. ej. MoureDev tiene URL + YouTube); el total único es de **628 fuentes**.
+> Los tipos se solapan (p. ej. MoureDev tiene URL + YouTube); el total único es de **629 fuentes**.
 
 ---
 
@@ -138,13 +138,13 @@ scripts/
 └── solutions/                💡 Base de datos de soluciones
     ├── solutions_db.py            Lookup + generación
     └── solutions_data.py          107 soluciones curadas
-tests/                        ✅ Suite de tests pytest (224 tests)
+tests/                        ✅ Suite de tests pytest (246 tests)
 public/                       🌐 Gestor de fuentes (web estática)
 ├── index.html                ← Gestor de fuentes (contexto + lista + alta/baja)
 ├── css/fuentes.css           ← Temas dark/light + responsive
 ├── js/fuentes.js             ← Estado, localStorage, filtros, export
 └── data/
-    ├── fuentes.json          ← Snapshot de FUENTES (637 fuentes)
+    ├── fuentes.json          ← Snapshot de FUENTES (638 fuentes)
     └── events.json           ← Eventos timeline (los usa scrape_october_calendar.py)
 ```
 
@@ -203,7 +203,7 @@ public/                       🌐 Gestor de fuentes (web estática)
 
 | Comando | Descripción |
 |---------|-------------|
-| `python -m pytest tests/ -v` | Ejecutar todos los tests (224 tests) |
+| `python -m pytest tests/ -v` | Ejecutar todos los tests (246 tests) |
 | `python -m pytest tests/test_solutions_db.py -v` | Ejecutar un suite específico |
 
 ---
@@ -235,14 +235,14 @@ public/                       🌐 Gestor de fuentes (web estática)
 
 ## 🧪 Test Coverage
 
-224 tests pytest cubriendo:
+246 tests pytest cubriendo:
 
 | Módulo | Tests |
 |--------|-------|
 | Cache | FileCache, CacheManager, expiración, TTL |
-| Constants | 628 fuentes, templates email, retos |
+| Constants | 629 fuentes, templates email, retos |
 | Dual sources | YouTube + web scraping |
-| Estrenos & dedup | Movistar+, RSS, backfill, rutas (37 tests) |
+| Estrenos & dedup | Movistar+, RSS, backfill, rutas (39 tests) |
 | Email templates | Placeholders, headers, secciones vídeo |
 | Pipeline imágenes | Portadas locales, WebP/AVIF |
 | AI features | 166 categorías, DB tools, saludo |
@@ -250,7 +250,8 @@ public/                       🌐 Gestor de fuentes (web estática)
 | Solutions | Lookup, generación multi-lenguaje |
 | Utilities | JSON, URLs, dedup, AI, traducción |
 | Tips | Generador, base de datos, categorías |
-| Movie scrapers | El nido, Nueve reinas, Los ilusos (15 tests) |
+| Movie scrapers | El nido, Nueve reinas, Los ilusos (22 tests) |
+| Fechas & recencia | Parseo RFC822/ISO/español + regla ≤24 h (13 tests) |
 
 ---
 

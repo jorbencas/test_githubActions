@@ -19,9 +19,10 @@ from pathlib import Path
 import aiohttp
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from utils.constants_downloadfile import CONFIG, FUENTES, YT_KEY, URL_KEY, TIPO_KEY, QUICK_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY, ID_VIDEO_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES
+from utils.constants_downloadfile import CONFIG, FUENTES, YT_KEY, URL_KEY, TIPO_KEY, QUICK_KEY, TIPO_VAL_HERRAMIENTA, ENLACE_KEY, ID_VIDEO_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES, FECHA_PUB_KEY
 from scrapers.scraper_base import ScraperPro
 from utils.common import load_json, save_json, traducir_titulos_ia, deduplicar_items
+from utils.fechas import texto_es_reciente
 from utils.logging_setup import setup_logging
 
 logger = setup_logging("news", LOG_FILES["news"], LOGS_DIR)
@@ -84,6 +85,15 @@ async def run():
                 existing_urls.add(enlace)
             if id_vid:
                 existing_video_ids.add(id_vid)
+
+    # Regla ≤24 h: solo noticias publicadas hoy o en las últimas 24 horas.
+    # `texto_es_reciente` devuelve None si la fuente no da fecha (sin
+    # información de antigüedad → se conserva); False → fuera.
+    antes = len(nuevos)
+    nuevos = [n for n in nuevos if texto_es_reciente(n.get(FECHA_PUB_KEY)) is not False]
+    descartados = antes - len(nuevos)
+    if descartados:
+        logger.info(f"🗓️ {descartados} elementos descartados: publicados con más de 24 h.")
 
     nuevos = deduplicar_items(nuevos)
     logger.info(f"✨ Encontrados {len(nuevos)} nuevos elementos (tras dedup).")

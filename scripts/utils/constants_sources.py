@@ -220,6 +220,7 @@ FUENTES = {
     "Hacker News": {"rss": "https://hnrss.org/frontpage", "quick": True},
     "Lobsters": {"rss": "https://lobste.rs/rss", "quick": True},
     "InfoQ": {"rss": "https://www.infoq.com/feed/", "quick": True},
+    "Runesoft": {"rss": "https://blog.runesoft.net/rss/", "quick": True},
     # ── RSS/Web: General Tech, AI, Science ──
     "Ars Technica": {"rss": "https://feeds.arstechnica.com/arstechnica/index", "quick": True},
     "OpenAI Blog": {"rss": "https://openai.com/news/rss.xml", "quick": True},

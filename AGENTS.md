@@ -91,7 +91,7 @@ The movie/series scrapers use a shared SOLID engine:
 | `clean_news.yml` | Quarterly (Jan/Apr/Jul/Oct) | Validate links → prune dead entries |
 | `hunt_challenges.yml` | Weekly (Sun) | AI challenge generation |
 | `optimize_images.yml` | Dispatch from blog | Image optimization for blog |
-| `tests.yml` | Push/PR to master | pytest (89 tests) |
+| `tests.yml` | Push/PR to master | pytest (246 tests) |
 | `dashboard_update.yml` | Push (`public/**`) | Deploy gestor de fuentes a Surge |
 | `movie_scrapers.yml` | Every 6h (:23/:37/:47) | Scrape "Nueve reinas", "Los ilusos", "El nido" → commit JSON |
 

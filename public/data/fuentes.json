@@ -1006,6 +1006,10 @@
     "rss": "https://www.infoq.com/feed/",
     "quick": true
   },
+  "Runesoft": {
+    "rss": "https://blog.runesoft.net/rss/",
+    "quick": true
+  },
   "OpenAI Blog": {
     "rss": "https://openai.com/blog/rss.xml",
     "quick": true

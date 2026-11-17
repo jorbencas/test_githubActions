@@ -25,6 +25,7 @@ from utils.cache import CacheManager, FileCache
 from utils.telegram_client import TelegramClient
 from utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_TTS_VOZ_EN, TELEGRAM_DASHBOARD_URL, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY, TS_KEY, NOTICIAS_FILENAME, TELEGRAM_SENT_FILENAME, TELEGRAM_VOICE_SENT_FILENAME, LOGS_DIR, LOG_FILES, FUENTES_INGLES
 from utils.common import load_json, save_json
+from utils.fechas import texto_es_reciente
 
 logger = setup_logging("telegram", LOG_FILES["telegram"], LOGS_DIR)
 
@@ -317,11 +318,16 @@ async def run():
         logger.warning(f"⚠️ Gemini no disponible ({e}); se usarán títulos originales")
         client = None
 
-    # Filtrar noticias recientes (últimas 24h) y que no estén en caché
+    # Filtrar noticias recientes: publicación ≤24 h (no basta con que se haya
+    # scrapeado hoy) y que no estén en caché
     cutoff = datetime.now() - timedelta(hours=24)
     recientes = []
+    viejas = 0
     for n in historial:
         if n.get(ID_VIDEO_KEY):
+            continue
+        if texto_es_reciente(n.get(FECHA_PUB_KEY, "")) is False:
+            viejas += 1
             continue
         ts = n.get(TS_KEY, "")
         if ts:
@@ -333,6 +339,8 @@ async def run():
                 pass
         if CACHE.is_new(n.get(ENLACE_KEY, "")):
             recientes.append(n)
+    if viejas:
+        logger.info(f"🗓️ {viejas} noticias descartadas: publicadas con más de 24 h.")
 
     nuevos = recientes[:args.max_items]
     if not nuevos:
@@ -387,6 +395,8 @@ async def run():
             todas_hoy = []
             for n in historial:
                 if n.get(ID_VIDEO_KEY):
+                    continue
+                if texto_es_reciente(n.get(FECHA_PUB_KEY, "")) is False:
                     continue
                 ts = n.get(TS_KEY, "")
                 if ts:
