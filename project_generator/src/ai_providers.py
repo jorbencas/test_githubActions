@@ -143,7 +143,12 @@ class GeminiProvider(AIProvider):
             from google import genai
         except ImportError:
             raise RuntimeError("google-genai package not installed. Run: pip install google-genai")
-        self.client = genai.Client(api_key=self.api_key)
+        # v1beta: `system_instruction` (developer instruction) solo está
+        # habilitado ahí; en v1 la API devuelve 400 INVALID_ARGUMENT.
+        self.client = genai.Client(
+            api_key=self.api_key,
+            http_options={"api_version": "v1beta"},
+        )
 
     @retry(
         stop=stop_after_attempt(3),
