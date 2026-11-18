@@ -22489,12 +22489,432 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "80dac7e3e3bc151b"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f3b8a1c4",
+        "titulo": "Sistema de Monitorización y Alertas de Infraestructura Cloud",
+        "descripcion_corta": "Monitoriza métricas clave de AWS/GCP/Azure, genera alertas y visualiza datos en un dashboard.",
+        "descripcion_detallada": "Este proyecto permite monitorizar de forma centralizada el estado y rendimiento de la infraestructura desplegada en proveedores cloud como AWS, GCP o Azure. Recopila métricas clave (CPU, memoria, disco, red, servicios específicos), establece umbrales y dispara alertas configurables a través de diversos canales (email, Slack, webhooks). Incluye un dashboard interactivo para visualización en tiempo real y análisis histórico. El objetivo es proporcionar visibilidad completa y proactiva sobre la salud de la infraestructura, facilitando la detección temprana de problemas y la optimización de recursos.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "api",
+          "web",
+          "microservicio",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web de alto rendimiento para Go, ideal para construir APIs RESTful.",
+              "version_sugerida": "1.22.0",
+              "url_docs": "https://gin-gonic.com/docs/",
+              "por_que": "Proporciona un enrutamiento robusto y middleware útil para la API principal de monitorización."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Prometheus client_golang",
+              "categoria": "libreria",
+              "descripcion": "Librería para instrumentar aplicaciones Go con métricas compatibles con Prometheus.",
+              "version_sugerida": "1.19.0",
+              "url_docs": "https://github.com/prometheus/client_golang",
+              "por_que": "Permite exportar métricas de la aplicación y de los servicios cloud monitorizados a un sistema Prometheus."
+            },
+            {
+              "nombre": "AWS SDK for Go",
+              "categoria": "libreria",
+              "descripcion": "SDK oficial de AWS para interactuar con los servicios de la nube de Amazon.",
+              "version_sugerida": "2.x",
+              "url_docs": "https://aws.amazon.com/sdk-for-go/",
+              "por_que": "Necesario para recopilar métricas de servicios AWS como EC2, CloudWatch, S3."
+            },
+            {
+              "nombre": "Chart.js",
+              "categoria": "libreria",
+              "descripcion": "Librería JavaScript para crear gráficos y visualizaciones de datos.",
+              "version_sugerida": "4.4.1",
+              "url_docs": "https://www.chartjs.org/docs/",
+              "por_que": "Se utiliza en el frontend para visualizar las métricas recopiladas de forma clara y atractiva."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "Prometheus",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de monitorización y alertas de código abierto.",
+              "version_sugerida": "2.49.0",
+              "url_docs": "https://prometheus.io/docs/",
+              "por_que": "Almacena las series temporales de métricas recopiladas y permite la definición de reglas de alertas."
+            },
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacionales de código abierto.",
+              "version_sugerida": "16.1",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Almacena la configuración de alertas, usuarios, roles y metadatos de la infraestructura."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "25.0.3",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita el despliegue y la gestión de los microservicios de monitorización y sus dependencias."
+            },
+            {
+              "nombre": "Kubernetes",
+              "categoria": "infraestructura",
+              "descripcion": "Orquestador de contenedores para automatizar el despliegue, escalado y gestión de aplicaciones.",
+              "version_sugerida": "1.28",
+              "url_docs": "https://kubernetes.io/docs/home/",
+              "por_que": "Permite la orquestación y escalado automático de los microservicios de monitorización en producción."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Framework de testing nativo de Go.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Para escribir pruebas unitarias y de integración para los microservicios Go."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Recolección de métricas de múltiples clouds (AWS, GCP, Azure)",
+          "Configuración y disparo de alertas personalizadas",
+          "Dashboard interactivo para visualización de datos",
+          "Gestión de usuarios y permisos",
+          "Soporte para múltiples canales de notificación",
+          "API para consulta de métricas y estado"
+        ],
+        "casos_uso": [
+          "Monitorizar la salud de servidores y servicios en la nube.",
+          "Recibir notificaciones proactivas ante caídas o degradación del rendimiento.",
+          "Analizar tendencias de uso de recursos para optimización de costos.",
+          "Centralizar la visibilidad de infraestructuras multi-cloud.",
+          "Integrar alertas con sistemas de ticketing existentes."
+        ],
+        "reglas_negocio": [
+          "Las alertas solo se disparan si se superan umbrales definidos durante un tiempo mínimo.",
+          "Los usuarios solo pueden ver y configurar alertas para la infraestructura a la que tienen acceso.",
+          "Las métricas se recopilan con una frecuencia configurable por servicio.",
+          "Los datos históricos de métricas se retienen durante un periodo configurable.",
+          "Se requiere autenticación para acceder a la API y al dashboard."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "AWS CloudWatch API",
+          "GCP Monitoring API",
+          "Azure Monitor API"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 12,
+        "prerequisitos": [
+          "Conocimientos de Go y desarrollo backend.",
+          "Experiencia con servicios cloud (AWS, GCP, Azure).",
+          "Comprensión de métricas de sistemas y monitorización.",
+          "Familiaridad con Prometheus y Grafana (o similar)."
+        ],
+        "riesgos": [
+          "Complejidad en la integración con las APIs de los diferentes proveedores cloud.",
+          "Gestión del alto volumen de datos de métricas.",
+          "Seguridad en el acceso a las credenciales cloud.",
+          "Mantenimiento de la alta disponibilidad del propio sistema de monitorización.",
+          "Escalabilidad para soportar un gran número de recursos monitorizados."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-07T10:00:00Z",
+        "hash_unicidad": "dbf5ef9de4d0787e"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "02056005c21861c5"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "g8h7f6e5",
+        "titulo": "Generador Inteligente de Test Cases a partir de Requisitos",
+        "descripcion_corta": "Crea casos de prueba automáticamente a partir de descripciones de requisitos en lenguaje natural.",
+        "descripcion_detallada": "Esta herramienta utiliza procesamiento de lenguaje natural (PLN) y modelos de lenguaje grandes (LLMs) para analizar documentos de requisitos de software y generar casos de prueba de forma automática. Los usuarios pueden subir archivos de requisitos (ej. .txt, .md, .docx) o pegar texto, y la IA identificará escenarios, precondiciones, pasos y resultados esperados, estructurándolos en un formato de caso de prueba (ej. Gherkin, CSV). El objetivo es acelerar el proceso de QA, mejorar la cobertura de pruebas y asegurar que los requisitos se traducen correctamente en escenarios de validación, reduciendo errores manuales.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "ia_ml",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python.",
+              "version_sugerida": "0.109.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Permite crear una API robusta para recibir los requisitos y devolver los casos de prueba generados, con validación automática de datos."
+            },
+            {
+              "nombre": "Streamlit",
+              "categoria": "framework",
+              "descripcion": "Framework open-source para crear y compartir aplicaciones web para machine learning y ciencia de datos.",
+              "version_sugerida": "1.31.0",
+              "url_docs": "https://docs.streamlit.io/",
+              "por_que": "Facilita la creación de una interfaz web sencilla para subir archivos, ingresar texto y visualizar los resultados."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para simplificar la creación de aplicaciones con LLMs.",
+              "version_sugerida": "0.1.13",
+              "url_docs": "https://python.langchain.com/docs/",
+              "por_que": "Orquesta la interacción con el LLM, el manejo de prompts y el procesamiento de documentos para la generación de test cases."
+            },
+            {
+              "nombre": "python-docx",
+              "categoria": "libreria",
+              "descripcion": "Librería para leer y escribir archivos .docx.",
+              "version_sugerida": "1.1.0",
+              "url_docs": "https://python-docx.readthedocs.io/",
+              "por_que": "Permite procesar documentos de requisitos en formato .docx subidos por el usuario."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "25.0.3",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura un entorno de ejecución consistente para la aplicación y sus dependencias de IA."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API (GPT-4/GPT-3.5)",
+              "categoria": "ia_ml",
+              "descripcion": "Interfaz para acceder a los modelos de lenguaje de OpenAI.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://platform.openai.com/docs",
+              "por_que": "Proporciona la capacidad de PLN avanzada necesaria para entender los requisitos y generar casos de prueba estructurados."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.4",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Para realizar pruebas unitarias y de integración de la lógica de procesamiento de requisitos y la API."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Carga de documentos de requisitos (.txt, .md, .docx).",
+          "Análisis de texto para identificar escenarios de prueba.",
+          "Generación de casos de prueba en formato Gherkin (Given/When/Then).",
+          "Generación de casos de prueba en formato CSV.",
+          "Interfaz web intuitiva para la interacción.",
+          "Configuración de prompts para ajustar la generación."
+        ],
+        "casos_uso": [
+          "Acelerar la creación de suites de pruebas para nuevos features.",
+          "Mejorar la trazabilidad entre requisitos y casos de prueba.",
+          "Facilitar la adopción de BDD (Behavior-Driven Development).",
+          "Ayudar a testers junior a generar casos de prueba iniciales.",
+          "Validar la completitud y claridad de los documentos de requisitos."
+        ],
+        "reglas_negocio": [
+          "La generación de casos de prueba se basa en la interpretación del LLM del texto proporcionado.",
+          "El usuario debe revisar y validar los casos de prueba generados antes de usarlos.",
+          "Se permite la personalización de los prompts para guiar la generación.",
+          "El sistema maneja documentos de hasta un tamaño máximo especificado.",
+          "Los datos de requisitos y casos de prueba no se almacenan permanentemente."
+        ],
+        "por_que_ia": "Se utiliza un LLM (como GPT-4) para la comprensión del lenguaje natural de los requisitos y la generación estructurada de casos de prueba, imitando la capacidad humana de interpretar especificaciones y diseñar escenarios de validación.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo web (FastAPI).",
+          "Comprensión de los principios de QA y metodologías de testing.",
+          "Familiaridad con el uso de APIs de modelos de lenguaje (OpenAI).",
+          "Nociones básicas de PLN."
+        ],
+        "riesgos": [
+          "La calidad de los casos de prueba generados depende fuertemente del LLM y la calidad de los requisitos.",
+          "Posible generación de casos de prueba ambiguos o incorrectos.",
+          "Costos asociados al uso de la API de OpenAI.",
+          "Manejo de requisitos complejos o ambiguos puede ser un desafío para el LLM.",
+          "La interfaz web puede requerir ajustes para diferentes formatos de salida."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2024-03-07T10:00:00Z",
+        "hash_unicidad": "35cfbec8408c1903"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "02056005c21861c5"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "k5j4i3h2",
+        "titulo": "Sistema de Gestión de Inventario y Pedidos para Pequeños Negocios",
+        "descripcion_corta": "Gestiona stock de productos, crea pedidos de compra/venta y monitoriza niveles mínimos.",
+        "descripcion_detallada": "Una aplicación web completa para que pequeños negocios (tiendas minoristas, artesanos) gestionen su inventario y flujo de pedidos. Permite registrar productos con detalles (descripción, precio, stock actual, stock mínimo), crear pedidos de venta a clientes y pedidos de compra a proveedores. El sistema actualiza automáticamente el stock al registrar ventas y recepciones de mercancía. Ofrece alertas visuales cuando el stock de un producto cae por debajo del mínimo configurado. Incluye funcionalidades básicas de reportes de ventas e inventario.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "fullstack",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/docs",
+              "por_que": "Para crear una interfaz de usuario interactiva y reactiva para la gestión del inventario y los pedidos."
+            },
+            {
+              "nombre": "Express.js",
+              "categoria": "framework",
+              "descripcion": "Framework minimalista de Node.js para construir aplicaciones web y APIs.",
+              "version_sugerida": "4.18.2",
+              "url_docs": "https://expressjs.com/en/api.html",
+              "por_que": "Sirve como backend para manejar la lógica de negocio y la comunicación con la base de datos."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Axios",
+              "categoria": "libreria",
+              "descripcion": "Cliente HTTP basado en promesas para el navegador y Node.js.",
+              "version_sugerida": "1.6.7",
+              "url_docs": "https://axios-http.com/docs/intro",
+              "por_que": "Para realizar peticiones HTTP desde el frontend React al backend Express.js."
+            },
+            {
+              "nombre": "Zod",
+              "categoria": "libreria",
+              "descripcion": "Servicio de validación de esquemas y tipado TypeScript.",
+              "version_sugerida": "3.22.4",
+              "url_docs": "https://zod.dev/",
+              "por_que": "Para definir y validar esquemas de datos tanto en el backend como en el frontend, asegurando la consistencia."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "SQLite",
+              "categoria": "base_datos",
+              "descripcion": "Motor de base de datos SQL embebido, sin servidor y autocontenido.",
+              "version_sugerida": "3.41.0",
+              "url_docs": "https://www.sqlite.org/docs.html",
+              "por_que": "Solución simple y ligera para la persistencia de datos, ideal para un proyecto de alcance pequeño y para despliegues sencillos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "25.0.3",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la aplicación fullstack y su base de datos para un despliegue consistente."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript amigable.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/docs/getting-started",
+              "por_que": "Para realizar pruebas unitarias y de integración tanto del frontend React como del backend Express.js."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro y gestión de productos.",
+          "Seguimiento de niveles de stock (actual y mínimo).",
+          "Creación y gestión de pedidos de venta.",
+          "Creación y gestión de pedidos de compra.",
+          "Actualización automática de stock.",
+          "Alertas de bajo stock.",
+          "Reportes básicos de inventario y ventas."
+        ],
+        "casos_uso": [
+          "Una tienda pequeña puede saber qué productos necesita reponer.",
+          "Un artesano puede registrar las ventas de sus creaciones y ver cuánto stock le queda.",
+          "Un negocio puede llevar un control de los productos que ha vendido y comprado.",
+          "Facilitar la toma de decisiones sobre qué productos promocionar o liquidar.",
+          "Evitar roturas de stock de los productos más demandados."
+        ],
+        "reglas_negocio": [
+          "El stock mínimo es un umbral configurable por producto.",
+          "El stock se decrementa al completar un pedido de venta y se incrementa al recibir un pedido de compra.",
+          "No se pueden registrar ventas si el stock disponible es cero.",
+          "Los pedidos de venta y compra deben asociarse a un producto existente.",
+          "Los reportes de ventas solo incluyen transacciones completadas."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos básicos de TypeScript, React y Node.js/Express.",
+          "Comprensión de conceptos de bases de datos relacionales (SQL).",
+          "Familiaridad con el desarrollo web fullstack.",
+          "Conocimientos básicos de Git."
+        ],
+        "riesgos": [
+          "La interfaz de usuario puede volverse difícil de manejar con muchos productos/pedidos.",
+          "La simplicidad de SQLite puede ser una limitación a futuro para volúmenes muy altos de datos.",
+          "La falta de funcionalidades avanzadas (ej. lotes, números de serie) puede limitar su aplicabilidad a negocios más complejos.",
+          "La seguridad de la aplicación web debe ser considerada (autenticación, autorización).",
+          "La gestión de concurrencia en la actualización del stock podría ser un problema si hay muchas ventas simultáneas."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-07T10:00:00Z",
+        "hash_unicidad": "a5dc214b01de7af3"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "02056005c21861c5"
+      }
     }
   ],
   "ultimos_hashes": [
-    "f9e8d7c6b5a4f3e2",
-    "b8a7f6e5d4c3b2a1",
-    "b8c7d6e5f4a3b2c1",
     "b4c5d6e7f8a9b0c1",
     "c8d9e0f1a2b3c4d5",
     "7a1b2c3d4e5f6a7b",
@@ -22591,8 +23011,11 @@
     "0b8e7c1a2d3f4567",
     "2f3e4d5c6b7a8901",
     "a3b4c5d6e7f89012",
-    "c7d8e9f012345678"
+    "c7d8e9f012345678",
+    "dbf5ef9de4d0787e",
+    "35cfbec8408c1903",
+    "a5dc214b01de7af3"
   ],
-  "total_generados": 163,
-  "fecha_ultima_generacion": "2026-11-06T00:42:19.508606"
+  "total_generados": 166,
+  "fecha_ultima_generacion": "2026-11-18T16:54:43.225512"
 }
