@@ -59,7 +59,7 @@ def limpiar_tech_stack(tech_stack) -> dict:
 SYSTEM_PROMPT = """Eres un arquitecto de software senior que genera ideas de proyectos técnicos reales, funcionales y útiles.
 
 REGLAS ESTRICTAS (OBLIGATORIAS):
-1. NUNCA repitas proyectos ya generados (usa hash_unicidad para verificar)
+1. NUNCA repitas proyectos ya generados ni genere otros con tema/funcionalidad similar a los títulos listados en el prompt (mismo producto con otro nombre = repetido)
 2. Proyectos DEBEN ser funcionales y útiles en el mundo real
 3. Especifica NIVEL: junior / semisenior / senior
 4. Especifica SCOPE: miniproyecto (1-2 sem) / proyecto (3-6 sem) / multiproyecto (6+ sem)
@@ -126,15 +126,27 @@ def build_user_prompt(
     preferred_levels: Optional[List[Nivel]] = None,
     preferred_scopes: Optional[List[Scope]] = None,
     preferred_languages: Optional[List[Lenguaje]] = None,
-    preferred_types: Optional[List[TipoProyecto]] = None
+    preferred_types: Optional[List[TipoProyecto]] = None,
+    recent_projects: Optional[List[str]] = None,
 ) -> str:
     prompt = f"""Genera EXACTAMENTE {count} proyectos NUEVOS y DIFERENTES.
 
-PROYECTOS YA GENERADOS (NO REPETIR - hashes): {len(existing_hashes)} proyectos previos
-Hashes recientes: {existing_hashes[-20:] if existing_hashes else 'ninguno'}
-
-FUENTES DE INSPIRACIÓN DISPONIBLES ({len(inspiration_sources)} items):
+PROYECTOS YA GENERADOS (NO REPETIR NI ACERCARSE): {len(existing_hashes)} previos
 """
+    if recent_projects:
+        prompt += (
+            "Últimos títulos (NO repitas el tema ni la funcionalidad, "
+            "aunque cambies el nombre o el stack):\n"
+        )
+        for i, t in enumerate(recent_projects, 1):
+            prompt += f"{i}. {t}\n"
+    else:
+        prompt += "Hashes recientes: {}\n".format(
+            existing_hashes[-20:] if existing_hashes else "ninguno"
+        )
+    prompt += """
+FUENTES DE INSPIRACIÓN DISPONIBLES ({} items):
+""".format(len(inspiration_sources))
     
     for i, src in enumerate(inspiration_sources[:10], 1):
         prompt += f"\n{i}. [{src.get('fuente', 'desconocida')}] {src.get('titulo', 'Sin título')}: {src.get('descripcion', '')[:200]}"
@@ -156,8 +168,7 @@ FUENTES DE INSPIRACIÓN DISPONIBLES ({len(inspiration_sources)} items):
     prompt += """
 
 REQUISITOS CRÍTICOS:
-- Cada proyecto debe tener un hash_unicidad único (MD5 de titulo+lenguaje+descripcion_corta, primeros 16 chars)
-- NO uses hashes que ya existan en la lista
+- NO repitas títulos ni temas de la lista de proyectos ya generados (el hash lo recalcula el servidor; ocúpate de que el tema sea distinto)
 - Variedad real: mezcla niveles, scopes, lenguajes, tipos
 - Proyectos MOBILE permitidos (Flutter, React Native, MAUI) - NO solo iOS nativo
 - Si usas IA en el proyecto, JUSTIFÍCALO en por_que_ia (ej: "Clasificación de tickets con embeddings", "Generación de reportes con LLM", "Detección de anomalías en logs")
@@ -276,11 +287,15 @@ def validate_project_json(data: dict) -> List[dict]:
             if field not in p or not isinstance(p[field], list):
                 p[field] = []
         
-        # Generar hash si no existe
-        if "hash_unicidad" not in p:
-            import hashlib
-            content = f"{p['titulo']}{p['tech_stack'].get('lenguaje_principal', '')}{p['descripcion_corta']}"
-            p["hash_unicidad"] = hashlib.md5(content.encode()).hexdigest()[:16]
+        # Hash SIEMPRE recalculado en servidor (normalizado): el que manda la
+        # IA se ignora — con él no se puede fiar del filtro anti-duplicados.
+        from dedup import hash_unicidad
+        p["hash_unicidad"] = hash_unicidad(
+            p["titulo"],
+            p.get("tech_stack", {}).get("lenguaje_principal", "")
+            if isinstance(p.get("tech_stack"), dict) else "",
+            p.get("descripcion_corta", ""),
+        )
         
         # Fecha
         if "fecha_generacion" not in p:

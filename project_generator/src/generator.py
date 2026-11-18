@@ -22,6 +22,7 @@ from prompts import (
     validate_project_json,
     recuperar_proyectos,
 )
+from dedup import filtrar_nuevos, hash_unicidad
 from scrapers import scrape_all_sources
 
 # Presupuesto de salida por petición. Los 2.5 admiten 64K, pero en la cadena
@@ -119,19 +120,38 @@ class ProjectGenerator:
         external = await self._get_external_inspiration()
         inspiration.extend(external)
         
-        # Hashes existentes para evitar duplicados
-        existing_hashes = [p.proyecto.hash_unicidad for p in self.history.proyectos]
-        
+        # Hashes existentes: los guardados + los recalculados con la fórmula
+        # actual (los del historial antiguo se calcularon sin normalizar).
+        existing_hashes = set()
+        titulos_hist: List[str] = []
+        for p in self.history.proyectos:
+            pr = p.proyecto
+            existing_hashes.add(pr.hash_unicidad)
+            lang = pr.tech_stack.lenguaje_principal if pr.tech_stack else ""
+            existing_hashes.add(hash_unicidad(pr.titulo, lang, pr.descripcion_corta))
+            if pr.titulo:
+                titulos_hist.append(pr.titulo)
+
+        # Últimos 30 títulos reales para el prompt: la IA no puede evitar
+        # repetir temas si solo ve hashes hexadecimales.
+        recent_projects = [
+            f"{pr.proyecto.titulo} ({pr.proyecto.tech_stack.lenguaje_principal}, "
+            f"{','.join(pr.proyecto.tipo[:2])})"
+            for pr in self.history.proyectos[-30:]
+            if pr.proyecto.titulo
+        ]
+
         # Construir prompt
         def construir_prompt(cantidad: int) -> str:
             return build_user_prompt(
                 count=cantidad,
-                existing_hashes=existing_hashes,
+                existing_hashes=sorted(existing_hashes),
                 inspiration_sources=inspiration,
                 preferred_levels=preferred_levels,
                 preferred_scopes=preferred_scopes,
                 preferred_languages=preferred_languages,
-                preferred_types=preferred_types
+                preferred_types=preferred_types,
+                recent_projects=recent_projects,
             )
 
         user_prompt = construir_prompt(count)
@@ -219,16 +239,18 @@ class ProjectGenerator:
                 validated = validate_project_json({"proyectos": validated}) if validated else []
 
         
-        # Filtrar duplicados por hash
+        # Filtrar duplicados: hash exacto + similitud de título, también
+        # dentro del propio lote (la IA puede devolver 3 casi iguales).
+        aceptados, descartados = filtrar_nuevos(
+            validated,
+            hashes_existentes=existing_hashes,
+            titulos_existentes=titulos_hist,
+        )
+        for p_data, motivo in descartados:
+            print(f"[~] Skipping duplicate: {p_data.get('titulo', '?')} ({motivo})")
+
         new_projects = []
-        for p_data in validated:
-            proj_hash = p_data["hash_unicidad"]
-            if proj_hash in existing_hashes:
-                print(f"[~] Skipping duplicate: {p_data['titulo']} (hash: {proj_hash})")
-                continue
-            
-            existing_hashes.append(proj_hash)
-            
+        for p_data in aceptados:
             # Crear objeto Proyecto
             # Un solo item raro de la IA (una URL en formato distinto, un enum
             # inesperado) no puede costar el resto de la generación, así que

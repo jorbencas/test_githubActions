@@ -2,6 +2,28 @@
 
 ## Cambios recientes
 
+### Anti-duplicados en project_generator (hash normalizado + similitud) — 18/11/2026
+- **Problema**: el prompt solo mandaba hashes hexadecimales, inútiles para que
+  la IA evite repetir temas; el hash lo calculaba el modelo (fórmula libre) y
+  el filtro era igualdad exacta → «Gestor de tareas con FastAPI» vs «Gestor
+  de tareas FastAPI» pasaba.
+- **Nuevo `project_generator/src/dedup.py`**:
+  `normalizar_texto` (minúsculas/sin acentos), `hash_unicidad` (MD5 16 de
+  título normalizado+lenguaje+desc), `tokens_titulo` (sin stopwords; dígitos
+  se conservan: «Proyecto 0» ≠ «Proyecto 1»), `similitud_jaccard`,
+  `titulo_mas_similar` (umbral 0.55) y `filtrar_nuevos` (hash + similitud +
+  dedup intra-lote).
+- **`prompts.py`**: `build_user_prompt(..., recent_projects)` lista los
+  últimos **30 títulos reales** (`Título (lenguaje, tipo)`); `validate_project_json`
+  **recalcula siempre** el hash en servidor e ignora el que manda la IA;
+  SYSTEM_PROMPT/requisitos piden no repetir tema, no hash.
+- **`generator.py`**: historial → hashes guardados + recalculados con la
+  fórmula actual (los antiguos eran sin normalizar) + títulos; filtrado con
+  `filtrar_nuevos` antes de construir `Proyecto`.
+- **Tests**: nuevo `project_generator/tests/test_dedup.py` (15: hash estable
+  con acentos, Jaccard, intra-lote, hash siempre recalculado, títulos en el
+  prompt). **99 (project_generator) + 266 (repo) en verde**.
+
 ### Disponibilidad: fuentes vivas + enlaces vivos + job `check_disponibilidad` — 18/11/2026
 - **Petición**: además de la fecha (≤24 h desde el envío, ya hecha), que las
   noticias **estén disponibles**: (1) la fuente responda al scrapear y (2) el
