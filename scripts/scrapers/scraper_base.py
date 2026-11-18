@@ -540,12 +540,19 @@ class ScraperPro:
     def obtener_avatar_canal(self, nombre, url_canal):
         return self.avatar_repo.obtener_avatar(nombre, url_canal)
 
-    async def _extraer_yt(self, session, nombre, url):
+    def _anotar_fallo(self, fallos, nombre, motivo):
+        """Registra una fuente no disponible (log + lista `fallos` si se pasa)."""
+        logger.warning(f"⚠️ Fuente no disponible: {nombre} ({motivo})")
+        if fallos is not None:
+            fallos.append((nombre, motivo))
+
+    async def _extraer_yt(self, session, nombre, url, fallos=None):
         """Extrae videos de YouTube desde una URL de canal."""
         results = []
         try:
             async with session.get(url, timeout=20, headers=self.yt_extractor.headers) as response:
                 if response.status != 200:
+                    self._anotar_fallo(fallos, nombre, f"HTTP {response.status}")
                     return []
                 text = await response.text()
             logger.info(f"📺 Procesando fuente de YouTube: {nombre} ({url})")
@@ -565,14 +572,16 @@ class ScraperPro:
                 results = self.yt_extractor.ejecutar_fallback(text, nombre)
         except Exception as e:
             logger.error(f"❌ Error extrayendo YT {nombre}: {e}")
+            self._anotar_fallo(fallos, nombre, type(e).__name__)
         return results
 
-    async def _extraer_web(self, session, nombre, url, info):
+    async def _extraer_web(self, session, nombre, url, info, fallos=None):
         """Extrae noticias/herramientas desde una URL web."""
         results = []
         try:
             async with session.get(url, timeout=20, headers=self.yt_extractor.headers) as response:
                 if response.status != 200:
+                    self._anotar_fallo(fallos, nombre, f"HTTP {response.status}")
                     return []
                 text = await response.text()
             if info.get(TIPO_KEY) == TIPO_VAL_HERRAMIENTA:
@@ -583,9 +592,15 @@ class ScraperPro:
                 results = self.web_extractor.extraer_noticias(text, nombre, url, info)
         except Exception as e:
             logger.error(f"❌ Error extrayendo web {nombre}: {e}")
+            self._anotar_fallo(fallos, nombre, type(e).__name__)
         return results
 
-    async def extraer(self, session, nombre, info):
+    async def extraer(self, session, nombre, info, fallos=None):
+        """Extrae items de una fuente.
+
+        `fallos` (opcional): lista a la que se añaden tuplas (nombre, motivo)
+        cuando la fuente no está disponible (HTTP != 200 / excepción).
+        """
         target = info.get(YT_KEY) or info.get(URL_KEY) or info.get(RSS_KEY)
         results = []
         es_rss = RSS_KEY in info
@@ -593,6 +608,7 @@ class ScraperPro:
             if es_rss:
                 async with session.get(target, timeout=20, headers=self.yt_extractor.headers) as response:
                     if response.status != 200:
+                        self._anotar_fallo(fallos, nombre, f"HTTP {response.status}")
                         return []
                     text = await response.text()
                 logger.info(f"📡 Extrayendo RSS desde: {nombre} ({target})")
@@ -604,19 +620,29 @@ class ScraperPro:
                         if response.status == 200:
                             text = await response.text()
                             results = self.web_extractor.extraer_noticias(text, nombre, fallback_url, info)
+                        else:
+                            self._anotar_fallo(
+                                fallos, nombre,
+                                f"HTTP {response.status} (fallback web)",
+                            )
             elif YT_KEY in info and URL_KEY in info:
                 yt_url = info[YT_KEY]
                 web_url = info[URL_KEY]
                 logger.info(f"🔀 Fuente dual (YT + Web): {nombre}")
+                # Dual: solo se anota fallo si fallan AMBAS vías
+                parciales: list = []
                 yt_results, web_results = await asyncio.gather(
-                    self._extraer_yt(session, nombre, yt_url),
-                    self._extraer_web(session, nombre, web_url, info),
+                    self._extraer_yt(session, nombre, yt_url, parciales),
+                    self._extraer_web(session, nombre, web_url, info, parciales),
                 )
                 results = yt_results + web_results
+                if not results and fallos is not None:
+                    fallos.append((nombre, parciales[0][1] if parciales else "sin resultados"))
             elif YT_KEY in info:
-                results = await self._extraer_yt(session, nombre, target)
+                results = await self._extraer_yt(session, nombre, target, fallos)
             else:
-                results = await self._extraer_web(session, nombre, target, info)
+                results = await self._extraer_web(session, nombre, target, info, fallos)
         except Exception as e:
             print(f"❌ Error en fuente {nombre}: {e}")
+            self._anotar_fallo(fallos, nombre, type(e).__name__)
         return results

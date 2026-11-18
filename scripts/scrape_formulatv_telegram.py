@@ -50,6 +50,7 @@ REPO_DIR = SCRIPT_DIR.parent  # scripts/ → raíz del repo (antes sobraba un ni
 sys.path.insert(0, str(REPO_DIR / 'scripts'))
 
 from utils.fechas import es_reciente, parsear_fecha
+from utils.disponibilidad import filtrar_disponibles
 
 # Configuración
 OUTPUT_DIR = REPO_DIR / 'files'
@@ -755,9 +756,21 @@ def recopilar_estrenos(hoy: date, solo_espanolas: bool = True) -> List[Dict]:
     for n in noticias:
         n['noticia'] = True
 
-    return deduplicar(
+    combinados = deduplicar(
         filtrar_estrenos(items, hoy) + filtrar_noticias(noticias, hoy)
     )
+
+    # Enlaces vivos: solo las noticias con URL caída se descartan (los
+    # estrenos sin enlace o con enlace propio de calendario se conservan)
+    ids_muertos = set()
+    noticias_con_url = [i for i in combinados if i.get('noticia') and i.get('url')]
+    _, muertos = filtrar_disponibles(noticias_con_url, campo='url')
+    for it, motivo in muertos:
+        ids_muertos.add(id(it))
+        print(f"  🔗 Noticia descartada (enlace caído: {motivo}): {it.get('titulo', '')[:60]}")
+    if muertos:
+        print(f"  ⚠️ {len(muertos)} noticias descartadas: enlace caído")
+    return [i for i in combinados if id(i) not in ids_muertos]
 
 
 def partir_backfill(nuevos: List[Dict], hoy: date) -> Tuple[List[Dict], List[Dict]]:

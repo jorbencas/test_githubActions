@@ -2,6 +2,33 @@
 
 ## Cambios recientes
 
+### Disponibilidad: fuentes vivas + enlaces vivos + job `check_disponibilidad` — 18/11/2026
+- **Petición**: además de la fecha (≤24 h desde el envío, ya hecha), que las
+  noticias **estén disponibles**: (1) la fuente responda al scrapear y (2) el
+  enlace de cada noticia responda antes de enviar.
+- **Nuevo módulo `scripts/utils/disponibilidad.py`**:
+  `verificar_url` (HEAD con fallback GET si 405; OK = 2xx/3xx + 401/403/419/429/999
+  anti-bot/paywall; muerto = 404/410/5xx/timeout/SSL/conexión) y
+  `filtrar_disponibles` (ThreadPoolExecutor 8 hilos → (vivos, muertos) preservando
+  orden; items sin enlace se conservan) + `log_descartes`.
+- **Fuente viva al scrapear** (`scraper_base.py`): antes `HTTP != 200 → []` sin
+  avisar. Ahora `_anotar_fallo` loguea `⚠️ Fuente no disponible: X (motivo)` y
+  `extraer(..., fallos=None)` rellena la lista (dual YT+Web solo anota si fallan
+  ambas vías). `scrape_news` resume: `⚠️ N fuentes no disponibles: …`.
+- **Enlace vivo al enviar** (tras filtro ≤24 h): `send_telegram` (mensajes +
+  resumen de voz), `send_email` y `scrape_formulatv_telegram` (solo secciones
+  🗞️ noticias con URL; estrenos sin enlace se conservan) descartan enlaces caídos
+  con log `🔗 N descartadas: enlace caído (…)`.
+- **Nuevo CLI `scripts/tools/check_disponibilidad.py`**: comprueba todas las
+  fuentes de noticias de `FUENTES` (aiohttp) + los enlaces ≤24 h del histórico;
+  poda los caídos (`--sin-poda` para solo informe; `--solo-fuentes`/`--solo-enlaces`).
+  Verificado en vivo: 15 caídos de 3221 enlaces (404 de tabby/replicate, etc.).
+- **Job nuevo `check_disponibilidad` en `scrape_all_workflow.yml`** (tras
+  `scrape_all`, `if: always()`): instala deps → `python -m scripts.tools.check_disponibilidad`
+  → commit `[bot] check disponibilidad (poda enlaces caídos)` si hay poda.
+- **Tests**: nuevo `tests/test_disponibilidad.py` (20: códigos OK/muertos,
+  fallback GET, excepciones, orden, campo `url`). **266 en verde**.
+
 ### Nueva fuente RSS: Runesoft (homelab/tech) — 17/11/2026
 - **Origen**: enlace de tracking `links.runesoft.net/go/1a1eb269-…` → redirige a
   `https://blog.runesoft.net/` (Ghost: «Homelabing, tecnología, servidores y mucho

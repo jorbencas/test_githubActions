@@ -25,6 +25,7 @@ from utils.logging_setup import setup_logging
 from utils.constants_downloadfile import CONFIG, EMAIL_TEMPLATE, EMAIL_ROW_TEMPLATE, EMAIL_SOURCE_HEADER, EMAIL_VIDEO_HEADER, EMAIL_VIDEO_ROW, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, ID_VIDEO_KEY, BADGE_KEY, VAL_TECH, TIPO_KEY, FECHA_PUB_KEY, NOTICIAS_FILENAME, LOGS_DIR, LOG_FILES
 from utils.common import load_json, save_json, resumir_noticia
 from utils.fechas import texto_es_reciente
+from utils.disponibilidad import filtrar_disponibles, log_descartes
 from utils.logging_setup import setup_logging
 
 os.makedirs(LOGS_DIR, exist_ok=True)
@@ -191,6 +192,10 @@ async def run():
     # Separar videos y noticias
     todos_videos = [n for n in historial if _es_multimedia(n)][:10]
     historial = [n for n in historial if not _es_multimedia(n)]
+
+    # Enlaces vivos: solo se incluyen noticias cuya URL responde
+    historial, muertos = filtrar_disponibles(historial, campo=ENLACE_KEY)
+    log_descartes(muertos)
 
     client = genai.Client(api_key=CONFIG.get("GEMINI_KEY"))
     nuevos = historial[:args.max_items]

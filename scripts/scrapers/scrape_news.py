@@ -58,11 +58,12 @@ async def run():
     existing_video_ids = {n.get(ID_VIDEO_KEY) for n in historial if n.get(ID_VIDEO_KEY)}
 
     sem = asyncio.Semaphore(args.limit)
+    fallos: list = []  # (nombre, motivo) de fuentes no disponibles
 
     async def con_semaforo(session, nombre, info):
         async with sem:
             await asyncio.sleep(1)
-            return await scr.extraer(session, nombre, info)
+            return await scr.extraer(session, nombre, info, fallos=fallos)
 
     connector = aiohttp.TCPConnector(ssl=False)
     news_sources = _filtrar_fuentes_por_tier(args.tier)
@@ -70,6 +71,16 @@ async def run():
     async with aiohttp.ClientSession(connector=connector, max_field_size=65536, max_line_size=65536) as session:
         tareas = [con_semaforo(session, nombre, info) for nombre, info in news_sources.items()]
         resultados_agrupados = await asyncio.gather(*tareas)
+
+    if fallos:
+        unicos = {}
+        for nombre, motivo in fallos:
+            unicos.setdefault(nombre, motivo)
+        logger.warning(
+            f"⚠️ {len(unicos)} fuentes no disponibles: "
+            + ", ".join(f"{n} ({m})" for n, m in list(unicos.items())[:20])
+            + ("…" if len(unicos) > 20 else "")
+        )
 
     nuevos = []
     for lista_res in resultados_agrupados:

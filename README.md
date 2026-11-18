@@ -138,7 +138,7 @@ scripts/
 └── solutions/                💡 Base de datos de soluciones
     ├── solutions_db.py            Lookup + generación
     └── solutions_data.py          107 soluciones curadas
-tests/                        ✅ Suite de tests pytest (246 tests)
+tests/                        ✅ Suite de tests pytest (266 tests)
 public/                       🌐 Gestor de fuentes (web estática)
 ├── index.html                ← Gestor de fuentes (contexto + lista + alta/baja)
 ├── css/fuentes.css           ← Temas dark/light + responsive
@@ -203,7 +203,7 @@ public/                       🌐 Gestor de fuentes (web estática)
 
 | Comando | Descripción |
 |---------|-------------|
-| `python -m pytest tests/ -v` | Ejecutar todos los tests (246 tests) |
+| `python -m pytest tests/ -v` | Ejecutar todos los tests (266 tests) |
 | `python -m pytest tests/test_solutions_db.py -v` | Ejecutar un suite específico |
 
 ---
@@ -235,7 +235,7 @@ public/                       🌐 Gestor de fuentes (web estática)
 
 ## 🧪 Test Coverage
 
-246 tests pytest cubriendo:
+266 tests pytest cubriendo:
 
 | Módulo | Tests |
 |--------|-------|

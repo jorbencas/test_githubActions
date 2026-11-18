@@ -26,6 +26,7 @@ from utils.telegram_client import TelegramClient
 from utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_TTS_VOZ_EN, TELEGRAM_DASHBOARD_URL, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY, TS_KEY, NOTICIAS_FILENAME, TELEGRAM_SENT_FILENAME, TELEGRAM_VOICE_SENT_FILENAME, LOGS_DIR, LOG_FILES, FUENTES_INGLES
 from utils.common import load_json, save_json
 from utils.fechas import texto_es_reciente
+from utils.disponibilidad import filtrar_disponibles, log_descartes
 
 logger = setup_logging("telegram", LOG_FILES["telegram"], LOGS_DIR)
 
@@ -342,6 +343,10 @@ async def run():
     if viejas:
         logger.info(f"🗓️ {viejas} noticias descartadas: publicadas con más de 24 h.")
 
+    # Enlaces vivos: solo se envían noticias cuya URL responde
+    recientes, muertos = filtrar_disponibles(recientes, campo=ENLACE_KEY)
+    log_descartes(muertos)
+
     nuevos = recientes[:args.max_items]
     if not nuevos:
         logger.info("📭 No hay noticias nuevas desde el último envío.")
@@ -392,7 +397,7 @@ async def run():
             else:
                 cutoff_voz = datetime.now() - timedelta(hours=24)
                 logger.info("🎙️ No hay audio previo, usando últimas 24h")
-            todas_hoy = []
+            candidatos_voz = []
             for n in historial:
                 if n.get(ID_VIDEO_KEY):
                     continue
@@ -406,10 +411,14 @@ async def run():
                             continue
                     except (ValueError, AttributeError):
                         pass
-                titulo = n.get(TITULO_KEY, "")
-                fuente = n.get(FUENTE_KEY, "")
-                if titulo:
-                    todas_hoy.append((titulo, fuente))
+                if n.get(TITULO_KEY):
+                    candidatos_voz.append(n)
+
+            # Enlaces vivos también para el resumen de voz
+            vivos_voz, muertos_voz = filtrar_disponibles(candidatos_voz, campo=ENLACE_KEY)
+            if muertos_voz:
+                log_descartes(muertos_voz, contexto="noticias de voz")
+            todas_hoy = [(v[TITULO_KEY], v.get(FUENTE_KEY, "")) for v in vivos_voz]
 
             if todas_hoy:
                 logger.info(f"🎙️ Enviando resumen de voz diario ({len(todas_hoy)} noticias)...")
