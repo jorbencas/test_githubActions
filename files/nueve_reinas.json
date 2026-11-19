@@ -4827,5 +4827,29 @@
     "relevancia": 4,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "5,1 millones de visualizaciones en tan solo cinco días: 'The Body' ('El cuerpo'), la nueva serie de Netflix de la que todos hablan",
+    "url": "https://www.cinemania.es/cinemania/series/5-1-millones-visualizaciones-cinco-dias-the-body-cuerpo-nueva-serie-netflix_7062485_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-19T02:35:19.738877+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Confirmado por Netflix: 'El problema de los 3 cuerpos' regresará con una temporada 2 casi tres años después",
+    "url": "https://www.cinemania.es/cinemania/series/confirmado-por-netflix-problema-los-3-cuerpos-regresara-con-una-temporada-2-casi-tres-anos-despues_7062092_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-19T02:35:19.739036+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
