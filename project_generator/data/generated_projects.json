@@ -23533,11 +23533,348 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "de24689867a19204"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4e5f6",
+        "titulo": "Plataforma de Colaboración de Diseño con Feedback en Tiempo Real",
+        "descripcion_corta": "Plataforma web para que equipos colaboren en diseños, reciban feedback instantáneo y gestionen versiones.",
+        "descripcion_detallada": "Desarrolla una aplicación web Fullstack donde diseñadores y stakeholders puedan subir maquetas, añadir comentarios anotados directamente sobre el diseño y votar/responder a los comentarios de otros. La plataforma permitirá la gestión de versiones de los diseños, notificaciones en tiempo real de nuevas actividades y un sistema de roles para controlar el acceso y los permisos. Se integrará un módulo de IA para sugerir mejoras de diseño básicas basadas en principios de usabilidad y accesibilidad.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "fullstack",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "Next.js",
+              "categoria": "framework",
+              "descripcion": "Framework React para renderizado del lado del servidor y generación estática de sitios web, facilitando el SEO y el rendimiento.",
+              "version_sugerida": "14.x",
+              "url_docs": "https://nextjs.org/docs",
+              "por_que": "Proporciona una estructura robusta para aplicaciones React, con routing, optimización de imágenes y SSR/SSG que mejoran la experiencia de usuario y el desarrollo."
+            },
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de Node.js para construir aplicaciones del lado del servidor eficientes y escalables.",
+              "version_sugerida": "10.x",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Ofrece una arquitectura modular y organizada basada en patrones como Dependency Injection, facilitando la creación de APIs RESTful robustas y mantenibles."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "React",
+              "categoria": "libreria",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario interactivas.",
+              "version_sugerida": "18.x",
+              "url_docs": "https://react.dev/learn",
+              "por_que": "Es el núcleo del frontend, permitiendo la creación de componentes reutilizables y una gestión eficiente del estado de la UI."
+            },
+            {
+              "nombre": "Socket.IO",
+              "categoria": "libreria",
+              "descripcion": "Librería para comunicación bidireccional en tiempo real entre navegadores y servidores.",
+              "version_sugerida": "4.x",
+              "url_docs": "https://socket.io/docs/v4",
+              "por_que": "Esencial para habilitar las notificaciones instantáneas y la actualización de comentarios sin necesidad de recargar la página."
+            },
+            {
+              "nombre": "Tailwind CSS",
+              "categoria": "libreria",
+              "descripcion": "Framework CSS de utilidad para construir diseños rápidamente.",
+              "version_sugerida": "3.x",
+              "url_docs": "https://tailwindcss.com/docs",
+              "por_que": "Permite estilizar la interfaz de usuario de manera eficiente y consistente, acelerando el desarrollo visual."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional de código abierto.",
+              "version_sugerida": "15.x",
+              "url_docs": "https://www.postgresql.org/docs",
+              "por_que": "Ofrece robustez, soporte para tipos de datos avanzados (JSONB) y transacciones ACID, ideal para almacenar diseños, comentarios y metadatos de usuario."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.x",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, facilitando la gestión de dependencias y la escalabilidad."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API",
+              "categoria": "ia_ml",
+              "descripcion": "Interfaz de programación de aplicaciones para acceder a modelos de lenguaje avanzados de OpenAI.",
+              "version_sugerida": "v1",
+              "url_docs": "https://platform.openai.com/docs/api-reference",
+              "por_que": "Se usará para analizar las anotaciones de los usuarios y sugerir mejoras de diseño basadas en principios de usabilidad y accesibilidad, actuando como un asistente de diseño inteligente."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de JavaScript para pruebas de aplicaciones.",
+              "version_sugerida": "29.x",
+              "url_docs": "https://jestjs.io/docs/getting-started",
+              "por_que": "Permite escribir pruebas unitarias y de integración para el frontend y backend, asegurando la calidad y la estabilidad del código."
+            },
+            {
+              "nombre": "Cypress",
+              "categoria": "testing",
+              "descripcion": "Herramienta de testing end-to-end para aplicaciones web.",
+              "version_sugerida": "13.x",
+              "url_docs": "https://docs.cypress.io/",
+              "por_que": "Facilita la automatización de pruebas de flujo de usuario en el navegador, simulando interacciones reales."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Subida y visualización de diseños (imágenes/PDF)",
+          "Anotaciones y comentarios sobre elementos específicos del diseño",
+          "Sistema de votación y respuesta a comentarios",
+          "Gestión de versiones de diseño",
+          "Notificaciones en tiempo real",
+          "Sugerencias de mejora de diseño por IA"
+        ],
+        "casos_uso": [
+          "Equipos de diseño colaborando en prototipos",
+          "Revisiones de diseño con stakeholders remotos",
+          "Recopilación de feedback estructurado sobre maquetas",
+          "Seguimiento de la evolución de un diseño a través de versiones",
+          "Obtener recomendaciones básicas de usabilidad de forma automatizada"
+        ],
+        "reglas_negocio": [
+          "Solo usuarios autenticados pueden comentar o anotar",
+          "Los comentarios deben estar asociados a una versión específica del diseño",
+          "Los roles de usuario (editor, viewer) determinan las acciones permitidas",
+          "Las notificaciones se envían por nuevas actividades relevantes para el usuario",
+          "Las sugerencias de IA son informativas y no impositivas"
+        ],
+        "por_que_ia": "Se utiliza la IA para analizar el texto de las anotaciones y sugerir mejoras de diseño basadas en principios de usabilidad y accesibilidad, ayudando a los diseñadores a identificar posibles problemas.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "Figma API (para posible integración futura)",
+          "Librerías de procesamiento de imágenes para anotaciones"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de React y TypeScript",
+          "Comprensión de patrones de diseño de APIs RESTful",
+          "Familiaridad con bases de datos relacionales",
+          "Nociones de WebSockets"
+        ],
+        "riesgos": [
+          "Complejidad en la gestión de anotaciones sobre imágenes dinámicas",
+          "Optimización del rendimiento en tiempo real con muchos usuarios concurrentes",
+          "Asegurar la precisión y utilidad de las sugerencias de IA",
+          "Gestión de permisos y roles de forma granular"
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-10T10:00:00Z",
+        "hash_unicidad": "ffa6e9bf553a5d2e"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "b9fe8adb4f4d431b"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "b2c3d4e5f6a1",
+        "titulo": "Sistema de Tutoría Inteligente para Aprendizaje Adaptativo",
+        "descripcion_corta": "Plataforma web que adapta el contenido educativo y la dificultad según el progreso y estilo de aprendizaje del usuario.",
+        "descripcion_detallada": "Desarrollar una aplicación web que funcione como un tutor virtual. Los usuarios podrán acceder a módulos de aprendizaje sobre temas específicos. El sistema registrará el progreso del usuario, sus respuestas a ejercicios y su ritmo. Utilizando IA, adaptará la siguiente lección o ejercicio, ofreciendo explicaciones adicionales, ejemplos más sencillos o problemas más complejos según sea necesario. Se implementará un sistema de gamificación para mantener la motivación.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Django",
+              "categoria": "framework",
+              "descripcion": "Framework web de alto nivel para desarrollo rápido y diseño pragmático.",
+              "version_sugerida": "4.x",
+              "url_docs": "https://docs.djangoproject.com/en/stable/",
+              "por_que": "Proporciona una estructura robusta para la gestión de usuarios, contenido, y la creación de APIs, con ORM integrado y sistema de administración."
+            },
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python 3.7+ basado en tipado estándar de Python.",
+              "version_sugerida": "0.100.x",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ideal para construir microservicios de IA y APIs de procesamiento de datos de alto rendimiento, con validación automática de datos y documentación OpenAPI."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Librería para machine learning en Python.",
+              "version_sugerida": "1.3.x",
+              "url_docs": "https://scikit-learn.org/stable/",
+              "por_que": "Proporciona herramientas para modelar el progreso del estudiante y predecir áreas de dificultad, así como para implementar algoritmos de recomendación."
+            },
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Librería para análisis y manipulación de datos.",
+              "version_sugerida": "2.1.x",
+              "url_docs": "https://pandas.pydata.org/docs/",
+              "por_que": "Esencial para procesar y analizar los datos de interacción del usuario con la plataforma educativa."
+            },
+            {
+              "nombre": "NumPy",
+              "categoria": "libreria",
+              "descripcion": "Librería fundamental para la computación científica en Python.",
+              "version_sugerida": "1.26.x",
+              "url_docs": "https://numpy.org/doc/stable/",
+              "por_que": "Proporciona soporte para arrays y matrices multidimensionales, necesario para muchas operaciones de machine learning."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional de código abierto.",
+              "version_sugerida": "15.x",
+              "url_docs": "https://www.postgresql.org/docs",
+              "por_que": "Almacenará el contenido educativo, perfiles de usuario, progreso de aprendizaje y datos de interacción para análisis."
+            },
+            {
+              "nombre": "Redis",
+              "categoria": "base_datos",
+              "descripcion": "Almacén de estructuras de datos en memoria.",
+              "version_sugerida": "7.x",
+              "url_docs": "https://redis.io/docs",
+              "por_que": "Se utilizará para caching de contenido frecuentemente accedido y para la gestión de sesiones de usuario, mejorando el rendimiento."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.x",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la aplicación y sus dependencias, facilitando el despliegue y la gestión de microservicios (Django para web, FastAPI para IA)."
+            },
+            {
+              "nombre": "Nginx",
+              "categoria": "infraestructura",
+              "descripcion": "Servidor web y proxy inverso.",
+              "version_sugerida": "1.24.x",
+              "url_docs": "https://nginx.org/en/docs/",
+              "por_que": "Actuará como balanceador de carga y servidor estático para la aplicación Django, y como proxy para la API de FastAPI."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Modelos de Clasificación/Regresión",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de Machine Learning para predecir el nivel de dificultad o el área de mejora.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Para analizar el rendimiento del estudiante y determinar qué tipo de contenido o ejercicio presentar a continuación, creando una ruta de aprendizaje personalizada."
+            },
+            {
+              "nombre": "Embeddings de Texto",
+              "categoria": "ia_ml",
+              "descripcion": "Representaciones vectoriales de texto para capturar significado semántico.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Para encontrar similitudes entre preguntas, respuestas o conceptos, permitiendo la recomendación de material relacionado o la detección de malentendidos."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.x",
+              "url_docs": "https://docs.pytest.org/en/stable/",
+              "por_que": "Facilita la escritura de pruebas unitarias, de integración y de rendimiento para las aplicaciones Django y FastAPI, incluyendo los modelos de IA."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Gestión de perfiles y roles de estudiante/profesor",
+          "Catálogo de módulos de aprendizaje con contenido variado",
+          "Adaptación dinámica del contenido y ejercicios",
+          "Sistema de seguimiento de progreso y rendimiento",
+          "Mecanismos de gamificación (puntos, niveles, badges)",
+          "API para servir contenido y recibir feedback de progreso"
+        ],
+        "casos_uso": [
+          "Estudiantes que aprenden a su propio ritmo",
+          "Profesores que monitorizan el progreso de sus alumnos",
+          "Creación de itinerarios de aprendizaje personalizados",
+          "Identificación temprana de dificultades de aprendizaje",
+          "Plataforma de formación continua para profesionales"
+        ],
+        "reglas_negocio": [
+          "El contenido se presenta en orden lógico, pero puede ramificarse según el rendimiento",
+          "Las métricas de progreso deben ser claras y comprensibles para el usuario",
+          "La IA debe justificar sus recomendaciones de adaptación (ej. 'Dado que tuviste dificultad con X, aquí tienes un repaso')",
+          "Los datos de usuario deben ser privados y seguros",
+          "El sistema debe ser escalable para soportar un gran número de usuarios concurrentes"
+        ],
+        "por_que_ia": "La IA es central para el concepto de 'aprendizaje adaptativo'. Se usa para analizar el rendimiento del estudiante (respuestas correctas/incorrectas, tiempo empleado, patrones de error) y predecir qué tipo de material o ejercicio será más beneficioso a continuación, personalizando la experiencia educativa.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Modelos de lenguaje pre-entrenados (ej. para análisis de texto)",
+          "Dataset de ejemplos de aprendizaje (si disponible)"
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 12,
+        "prerequisitos": [
+          "Experiencia sólida en Python y frameworks web (Django/FastAPI)",
+          "Conocimientos de Machine Learning y Data Science",
+          "Comprensión de bases de datos relacionales y NoSQL",
+          "Experiencia con arquitecturas de microservicios y Docker"
+        ],
+        "riesgos": [
+          "Dificultad en la creación de modelos de IA precisos para la adaptación del aprendizaje",
+          "Necesidad de grandes volúmenes de datos para entrenar modelos efectivos",
+          "Complejidad en la gestión de la lógica de adaptación del contenido",
+          "Escalabilidad de la infraestructura para soportar el procesamiento de IA y el tráfico web concurrente"
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-10T10:05:00Z",
+        "hash_unicidad": "30fc267cc850b7a2"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "b9fe8adb4f4d431b"
+      }
     }
   ],
   "ultimos_hashes": [
-    "9c3d4e5f6a7b8c9d",
-    "b2a0c8d6f4e2a1b0",
     "a1b8c4d2e6f0a3b1",
     "c5d7e9f1a3b5c7d9",
     "d5e6f7a8b9c0d1e2",
@@ -23635,8 +23972,10 @@
     "16376cad7c88a4a6",
     "23900ee568e8d1ec",
     "c7e40f822fc8aa01",
-    "be5b9cf00de8c438"
+    "be5b9cf00de8c438",
+    "ffa6e9bf553a5d2e",
+    "30fc267cc850b7a2"
   ],
-  "total_generados": 170,
-  "fecha_ultima_generacion": "2026-11-19T12:26:49.063327"
+  "total_generados": 172,
+  "fecha_ultima_generacion": "2026-11-19T22:52:51.135434"
 }
