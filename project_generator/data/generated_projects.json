@@ -22912,11 +22912,296 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "02056005c21861c5"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4e5f6",
+        "titulo": "Sistema de Gestión de Permisos y Roles Dinámicos",
+        "descripcion_corta": "Gestión centralizada y dinámica de permisos y roles para aplicaciones web y microservicios, con auditoría de cambios.",
+        "descripcion_detallada": "Desarrollo de un sistema centralizado para definir, asignar y gestionar roles y permisos en múltiples aplicaciones. Soporta herencia de roles y asignaciones condicionales. Incluye un módulo de auditoría para rastrear todas las modificaciones en roles y permisos, crucial para cumplir normativas de seguridad y cumplimiento. El sistema actuará como una autoridad centralizada de autorización, consultada por los servicios que necesiten verificar los permisos de un usuario.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "api",
+          "microservicio",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web de alto rendimiento para Go, ideal para construir APIs RESTful eficientes.",
+              "version_sugerida": "1.22.0",
+              "url_docs": "https://gin-gonic.com/docs/",
+              "por_que": "Ofrece un enrutamiento robusto y middleware para manejar peticiones de autorización y auditoría de forma eficiente."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Casbin",
+              "categoria": "libreria",
+              "descripcion": "Librería de control de acceso de código abierto que soporta diversos modelos de autorización (RBAC, ABAC).",
+              "version_sugerida": "2.0",
+              "url_docs": "https://casbin.org/docs/overview/overview/",
+              "por_que": "Permite definir modelos de autorización flexibles y persistir las políticas en diferentes backends, facilitando la gestión de roles y permisos."
+            },
+            {
+              "nombre": "GORM",
+              "categoria": "libreria",
+              "descripcion": "ORM (Object-Relational Mapper) para Go, simplifica las interacciones con bases de datos SQL.",
+              "version_sugerida": "1.25.5",
+              "url_docs": "https://gorm.io/docs/",
+              "por_que": "Facilita el mapeo de modelos de datos Go a tablas de base de datos y simplifica las operaciones CRUD, incluyendo el logging de cambios para auditoría."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional de código abierto, conocido por su fiabilidad y características avanzadas.",
+              "version_sugerida": "16",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Soporta tipos de datos complejos y constraints, ideal para almacenar políticas de acceso y logs de auditoría con integridad referencial."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, facilitando la gestión de dependencias y la escalabilidad de los microservicios."
+            },
+            {
+              "nombre": "Nginx",
+              "categoria": "infraestructura",
+              "descripcion": "Servidor web y proxy inverso de alto rendimiento.",
+              "version_sugerida": "1.25.3",
+              "url_docs": "https://nginx.org/en/docs/",
+              "por_que": "Actúa como API Gateway, enrutando peticiones a los servicios y gestionando la autenticación/autorización inicial si se integra con un servicio de identidad."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Testify",
+              "categoria": "testing",
+              "descripcion": "Conjunto de herramientas de testing para Go, incluyendo aserciones y mocks.",
+              "version_sugerida": "1.10.0",
+              "url_docs": "https://pkg.go.dev/github.com/stretchr/testify",
+              "por_que": "Simplifica la escritura de tests unitarios y de integración para la lógica de autorización y la gestión de políticas."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Definición y gestión de roles y permisos",
+          "Asignación de roles a usuarios/grupos",
+          "Herencia de permisos entre roles",
+          "Verificación de permisos centralizada (API)",
+          "Auditoría de cambios en roles y permisos",
+          "Soporte para políticas RBAC y ABAC"
+        ],
+        "casos_uso": [
+          "Control de acceso en aplicaciones web multiusuario",
+          "Gestión de permisos en microservicios heterogéneos",
+          "Cumplimiento normativo (GDPR, HIPAA) a través de auditoría",
+          "Delegación de permisos administrativos",
+          "Integración con sistemas de identidad existentes"
+        ],
+        "reglas_negocio": [
+          "Un usuario puede tener múltiples roles.",
+          "Un rol puede heredar permisos de otros roles.",
+          "Los cambios en roles/permisos deben ser auditados.",
+          "Los servicios deben consultar la API central para verificar permisos.",
+          "Las políticas de acceso deben ser configurables sin redeploy."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 12,
+        "prerequisitos": [
+          "Conocimientos sólidos de Go.",
+          "Comprensión de patrones de diseño de microservicios.",
+          "Experiencia con bases de datos relacionales (PostgreSQL).",
+          "Familiaridad con conceptos de control de acceso (RBAC, ABAC)."
+        ],
+        "riesgos": [
+          "Complejidad en la gestión de políticas de acceso complejas.",
+          "Cuello de botella en la API de autorización si no se escala adecuadamente.",
+          "Errores en la lógica de herencia de permisos.",
+          "Seguridad de la API de autorización (vulnerabilidades de inyección).",
+          "Dificultad en la migración de sistemas de permisos existentes."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "manual",
+        "fecha_generacion": "2024-03-08T10:00:00Z",
+        "hash_unicidad": "16376cad7c88a4a6"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "544a85c5bc9ec630"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f7e8d9c0b1a2",
+        "titulo": "Plataforma de Simulación y Visualización de Redes Neuronales",
+        "descripcion_corta": "Herramienta web interactiva para diseñar, entrenar y visualizar redes neuronales simple.",
+        "descripcion_detallada": "Una aplicación web fullstack que permite a los usuarios construir arquitecturas de redes neuronales visualmente, configurar hiperparámetros, entrenar modelos con datasets pequeños y predefinidos, y visualizar el proceso de entrenamiento y la estructura de la red. Enfocado en la educación y experimentación rápida, sin requerir configuración local compleja.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "fullstack",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario declarativas y componentizadas.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/reference/react",
+              "por_que": "Facilita la creación de una UI interactiva y reactiva para el diseño visual de redes y la visualización de datos de entrenamiento."
+            },
+            {
+              "nombre": "Node.js con Express",
+              "categoria": "framework",
+              "descripcion": "Entorno de ejecución de JavaScript del lado del servidor y framework web minimalista.",
+              "version_sugerida": "20.10.0 (Node), 4.18.2 (Express)",
+              "url_docs": "https://nodejs.org/en/docs/,%20https://expressjs.com/en/api.html",
+              "por_que": "Proporciona un backend robusto para servir la aplicación, gestionar la carga de datos y orquestar el entrenamiento del modelo."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "TensorFlow.js",
+              "categoria": "libreria",
+              "descripcion": "Librería para definir, entrenar y ejecutar modelos de machine learning en el navegador y en Node.js.",
+              "version_sugerida": "4.15.5",
+              "url_docs": "https://www.tensorflow.org/js/guide",
+              "por_que": "Permite el entrenamiento y la inferencia de modelos de redes neuronales directamente en el frontend o backend, simplificando la arquitectura."
+            },
+            {
+              "nombre": "React Flow",
+              "categoria": "libreria",
+              "descripcion": "Librería para construir editores de nodos y gráficos interactivos en React.",
+              "version_sugerida": "11.10.3",
+              "url_docs": "https://reactflow.dev/docs/getting-started/",
+              "por_que": "Esencial para la interfaz visual de diseño de la red neuronal, permitiendo arrastrar y soltar nodos y conectarlos."
+            },
+            {
+              "nombre": "Chart.js",
+              "categoria": "libreria",
+              "descripcion": "Librería simple para crear gráficos en HTML5 Canvas.",
+              "version_sugerida": "4.4.1",
+              "url_docs": "https://www.chartjs.org/docs/latest/",
+              "por_que": "Utilizada para visualizar métricas de entrenamiento como la pérdida y la precisión a lo largo de las épocas."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "MongoDB",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos NoSQL orientada a documentos, flexible y escalable.",
+              "version_sugerida": "7.0",
+              "url_docs": "https://www.mongodb.com/docs/",
+              "por_que": "Almacena las definiciones de redes neuronales, configuraciones de entrenamiento y resultados de forma flexible y esquemática."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Facilita la configuración del entorno de desarrollo y despliegue, asegurando la consistencia entre el frontend y el backend."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "TensorFlow.js",
+              "categoria": "ia_ml",
+              "descripcion": "Librería para definir, entrenar y ejecutar modelos de machine learning en el navegador y en Node.js.",
+              "version_sugerida": "4.15.5",
+              "url_docs": "https://www.tensorflow.org/js/guide",
+              "por_que": "Núcleo del proyecto, permite implementar las redes neuronales y su entrenamiento sin depender de un backend Python pesado."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript para todo tipo de aplicaciones.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/docs/getting-started",
+              "por_que": "Proporciona un entorno completo para testear componentes React, lógica del backend y la interacción con TensorFlow.js."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Editor visual de redes neuronales (drag and drop)",
+          "Configuración de capas (densas, convolucionales, etc.)",
+          "Entrenamiento de modelos con datasets predefinidos (ej. MNIST)",
+          "Visualización del proceso de entrenamiento (loss, accuracy)",
+          "Visualización de la arquitectura de la red",
+          "Guardado y carga de arquitecturas de red"
+        ],
+        "casos_uso": [
+          "Estudiantes aprendiendo sobre redes neuronales.",
+          "Desarrolladores experimentando con arquitecturas rápidas.",
+          "Educadores demostrando conceptos de deep learning.",
+          "Prototipado rápido de ideas de modelos.",
+          "Visualización interactiva de la teoría de redes neuronales."
+        ],
+        "reglas_negocio": [
+          "El entrenamiento se realiza con datasets limitados para mantener la viabilidad en el navegador/Node.js.",
+          "La interfaz visual guía la creación de arquitecturas válidas.",
+          "Los hiperparámetros de entrenamiento son configurables.",
+          "Los resultados del entrenamiento son visibles en tiempo real.",
+          "Solo se soportan redes neuronales feedforward y convolucionales simples."
+        ],
+        "por_que_ia": "Se utiliza TensorFlow.js para permitir la definición, entrenamiento y ejecución de redes neuronales directamente en el entorno del navegador o Node.js, haciendo la plataforma accesible y fácil de usar sin necesidad de configuración de entornos de Python/GPU locales.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "Datasets públicos pequeños (ej. MNIST, Fashion MNIST)."
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos de JavaScript/TypeScript y React.",
+          "Comprensión básica de redes neuronales y machine learning.",
+          "Familiaridad con Node.js y Express.",
+          "Experiencia con bases de datos NoSQL (MongoDB)."
+        ],
+        "riesgos": [
+          "Limitaciones de rendimiento de TensorFlow.js en el navegador para modelos complejos.",
+          "Manejo de errores durante el entrenamiento y la visualización.",
+          "Curva de aprendizaje de la interfaz de diseño visual.",
+          "Gestión de memoria en el navegador durante el entrenamiento.",
+          "Seguridad de los datos de usuario si se implementan funcionalidades de guardado en la nube."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-08T10:00:00Z",
+        "hash_unicidad": "23900ee568e8d1ec"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "544a85c5bc9ec630"
+      }
     }
   ],
   "ultimos_hashes": [
-    "b4c5d6e7f8a9b0c1",
-    "c8d9e0f1a2b3c4d5",
     "7a1b2c3d4e5f6a7b",
     "8b2c3d4e5f6a7b8c",
     "9c3d4e5f6a7b8c9d",
@@ -23014,8 +23299,10 @@
     "c7d8e9f012345678",
     "dbf5ef9de4d0787e",
     "35cfbec8408c1903",
-    "a5dc214b01de7af3"
+    "a5dc214b01de7af3",
+    "16376cad7c88a4a6",
+    "23900ee568e8d1ec"
   ],
-  "total_generados": 166,
-  "fecha_ultima_generacion": "2026-11-18T16:54:43.225512"
+  "total_generados": 168,
+  "fecha_ultima_generacion": "2026-11-19T01:40:10.644297"
 }
