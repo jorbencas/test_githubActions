@@ -23199,11 +23199,343 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "544a85c5bc9ec630"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f0d9a1b3",
+        "titulo": "Plataforma de Gestión de Eventos y Registro con Notificaciones Personalizadas",
+        "descripcion_corta": "Web app para crear, gestionar y asistir a eventos, con notificaciones push personalizadas.",
+        "descripcion_detallada": "Sistema web fullstack para la creación, difusión y gestión de eventos. Permite a los organizadores definir detalles del evento, gestionar inscripciones y enviar comunicaciones. Los asistentes pueden buscar eventos, registrarse, recibir recordatorios y actualizaciones vía notificaciones push personalizadas basadas en sus intereses y la proximidad a eventos.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "fullstack",
+          "api",
+          "mobile"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "Next.js",
+              "categoria": "framework",
+              "descripcion": "Framework React para renderizado del lado del servidor y generación estática de sitios.",
+              "version_sugerida": "14.x",
+              "url_docs": "https://nextjs.org/docs",
+              "por_que": "Proporciona una estructura robusta para aplicaciones web fullstack, optimizando el rendimiento y la experiencia de desarrollo."
+            },
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de Node.js para construir aplicaciones del lado del servidor eficientes y escalables.",
+              "version_sugerida": "10.x",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Ofrece una arquitectura modular y patrones sólidos (DI, módulos) para la API backend, facilitando el mantenimiento y la escalabilidad."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "React Native",
+              "categoria": "framework",
+              "descripcion": "Framework para construir aplicaciones móviles nativas usando React.",
+              "version_sugerida": "0.73.x",
+              "url_docs": "https://reactnative.dev/docs/getting-started",
+              "por_que": "Permite compartir gran parte del código entre la aplicación web y móvil, acelerando el desarrollo de la app para iOS y Android."
+            },
+            {
+              "nombre": "Prisma",
+              "categoria": "ORM",
+              "descripcion": "Próxima generación de ORM para Node.js y TypeScript.",
+              "version_sugerida": "5.x",
+              "url_docs": "https://www.prisma.io/docs",
+              "por_que": "Facilita la interacción con la base de datos proporcionando un schema seguro y migraciones gestionadas."
+            },
+            {
+              "nombre": "Socket.IO",
+              "categoria": "libreria",
+              "descripcion": "Librería para comunicación bidireccional en tiempo real entre clientes y servidores.",
+              "version_sugerida": "4.x",
+              "url_docs": "https://socket.io/docs/v4/",
+              "por_que": "Habilita notificaciones push en tiempo real y actualizaciones instantáneas para los usuarios."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_de_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto.",
+              "version_sugerida": "16.x",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Ofrece robustez, transacciones ACID y soporte para tipos de datos avanzados, ideal para gestionar inscripciones y perfiles de usuario."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "contenedor",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.x",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Asegura entornos de desarrollo y producción consistentes y reproducibles."
+            },
+            {
+              "nombre": "AWS Amplify",
+              "categoria": "cloud",
+              "descripcion": "Servicio para construir y escalar aplicaciones web y móviles.",
+              "version_sugerida": null,
+              "url_docs": "https://aws.amazon.com/amplify/docs/",
+              "por_que": "Simplifica el despliegue y la gestión de la infraestructura backend, incluyendo bases de datos y autenticación."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Vitest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing rápido y modular para TypeScript.",
+              "version_sugerida": "1.x",
+              "url_docs": "https://vitest.dev/guide/",
+              "por_que": "Proporciona un entorno de testing moderno y rápido, compatible con el ecosistema Vite/Next.js."
+            },
+            {
+              "nombre": "Cypress",
+              "categoria": "testing",
+              "descripcion": "Herramienta de testing end-to-end para todo lo que se ejecuta en un navegador.",
+              "version_sugerida": "13.x",
+              "url_docs": "https://docs.cypress.io/",
+              "por_que": "Permite validar la funcionalidad completa de la aplicación web y móvil desde la perspectiva del usuario."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de eventos detallados",
+          "Sistema de registro de asistentes",
+          "Notificaciones push personalizadas (in-app y mobile)",
+          "Búsqueda y descubrimiento de eventos",
+          "Gestión de perfiles de usuario y preferencias",
+          "API para integración externa"
+        ],
+        "casos_uso": [
+          "Organizador de conferencias y talleres",
+          "Comunidades para organizar meetups",
+          "Plataforma para eventos culturales y deportivos",
+          "Empresas para anunciar eventos internos/externos",
+          "Creadores de contenido para interactuar con su audiencia"
+        ],
+        "reglas_negocio": [
+          "Un evento puede tener un número máximo de asistentes.",
+          "Los usuarios solo pueden registrarse a eventos activos.",
+          "Las notificaciones se activan según las preferencias del usuario y el tipo de evento.",
+          "El registro requiere confirmación por email (opcional).",
+          "Los organizadores pueden cancelar eventos y notificar a los inscritos."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "APIs de mapas (ej. Google Maps) para localización de eventos",
+          "Servicios de envío de notificaciones push (ej. Firebase Cloud Messaging)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos de TypeScript, React, Node.js",
+          "Comprensión de arquitecturas web fullstack",
+          "Experiencia básica con bases de datos relacionales",
+          "Familiaridad con desarrollo móvil cross-platform"
+        ],
+        "riesgos": [
+          "Complejidad en la sincronización de notificaciones push entre web y mobile.",
+          "Escalabilidad del servicio de notificaciones en tiempo real.",
+          "Gestión de la privacidad y el consentimiento de notificaciones.",
+          "Diseño de la UI/UX para una experiencia fluida en ambos entornos (web/mobile)."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-05T10:00:00Z",
+        "hash_unicidad": "c7e40f822fc8aa01"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "de24689867a19204"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "i5j4k3l2",
+        "titulo": "Sistema de Feedback y Mejora Continua con Análisis de Sentimiento IA",
+        "descripcion_corta": "Plataforma web para recopilar feedback de usuarios y analizarlo con IA para identificar áreas de mejora.",
+        "descripcion_detallada": "Aplicación web que centraliza el feedback de múltiples canales (formularios, emails, redes sociales). Utiliza IA para clasificar el sentimiento del feedback, identificar temas recurrentes y priorizar sugerencias. Los administradores pueden visualizar tendencias, generar reportes y asignar acciones de mejora.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin Gonic",
+              "categoria": "framework",
+              "descripcion": "Framework web HTTP de alto rendimiento escrito en Go.",
+              "version_sugerida": "1.x",
+              "url_docs": "https://gin-gonic.com/docs/",
+              "por_que": "Ofrece un enrutamiento eficiente y middleware para construir la API backend de manera rápida y escalable."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "GORM",
+              "categoria": "ORM",
+              "descripcion": "ORM completo para Go con soporte para PostgreSQL, MySQL, SQLite y MS SQL Server.",
+              "version_sugerida": "2.x",
+              "url_docs": "https://gorm.io/docs/",
+              "por_que": "Simplifica la interacción con la base de datos relacional, facilitando la persistencia de los datos de feedback."
+            },
+            {
+              "nombre": "GoCV",
+              "categoria": "libreria",
+              "descripcion": "Bindings de Go para la librería de visión por computadora OpenCV.",
+              "version_sugerida": "0.24.x",
+              "url_docs": "https://gocv.io/doc/",
+              "por_que": "Potencial para análisis de imágenes o videos si el feedback incluye contenido multimedia."
+            },
+            {
+              "nombre": "Transformers (Hugging Face via Python bridge)",
+              "categoria": "libreria",
+              "descripcion": "Librería para modelos de NLP pre-entrenados.",
+              "version_sugerida": "4.x",
+              "url_docs": "https://huggingface.co/docs/transformers/index",
+              "por_que": "Permite el acceso a modelos avanzados para análisis de sentimiento y clasificación de texto."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_de_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto.",
+              "version_sugerida": "16.x",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto para almacenar y consultar datos estructurados y semi-estructurados (JSONB para tags)."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "contenedor",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.x",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Asegura la consistencia del entorno de desarrollo y despliegue de la API y los modelos de IA."
+            },
+            {
+              "nombre": "RabbitMQ",
+              "categoria": "message_queue",
+              "descripcion": "Broker de mensajes de código abierto.",
+              "version_sugerida": "3.x",
+              "url_docs": "https://www.rabbitmq.com/documentation.html",
+              "por_que": "Desacopla la recepción de feedback del procesamiento de IA, permitiendo escalabilidad y resiliencia."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Análisis de Sentimiento",
+              "categoria": "nlp",
+              "descripcion": "Modelos pre-entrenados (ej. BERT, RoBERTa) para clasificar el sentimiento (positivo, negativo, neutro) del texto.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Automatiza la clasificación del tono emocional del feedback recibido."
+            },
+            {
+              "nombre": "Modelado de Temas (Topic Modeling)",
+              "categoria": "nlp",
+              "descripcion": "Algoritmos (ej. LDA, NMF) para descubrir temas abstractos en colecciones de documentos.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Identifica los temas o asuntos principales que preocupan a los usuarios en sus comentarios."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Testify",
+              "categoria": "testing",
+              "descripcion": "Conjunto de herramientas de testing para Go.",
+              "version_sugerida": "1.x",
+              "url_docs": "https://pkg.go.dev/github.com/stretchr/testify",
+              "por_que": "Proporciona aserciones y mocks útiles para escribir tests unitarios y de integración para la API."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Python Bridge (ej. `gopy`)",
+              "categoria": "interoperabilidad",
+              "descripcion": "Herramientas para llamar a código Python desde Go.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Permite integrar modelos de IA de librerías Python (como Transformers) en la aplicación Go."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Ingesta de feedback desde múltiples fuentes.",
+          "Análisis de sentimiento automático del texto.",
+          "Identificación y agrupación de temas recurrentes.",
+          "Dashboard para visualización de métricas de feedback.",
+          "Generación de reportes personalizables.",
+          "Sistema de asignación y seguimiento de acciones de mejora."
+        ],
+        "casos_uso": [
+          "Empresas SaaS para monitorizar satisfacción de usuarios.",
+          "Equipos de producto para priorizar funcionalidades.",
+          "Soporte al cliente para identificar problemas comunes.",
+          "Departamentos de marketing para entender la percepción de la marca.",
+          "Investigadores para analizar opiniones públicas."
+        ],
+        "reglas_negocio": [
+          "El feedback se clasifica automáticamente por sentimiento.",
+          "Los temas se identifican mediante algoritmos de NLP.",
+          "Los administradores pueden etiquetar manualmente el feedback.",
+          "Solo los usuarios autorizados pueden ver y gestionar el feedback.",
+          "Se generan alertas para feedback negativo de alta prioridad."
+        ],
+        "por_que_ia": "La IA es fundamental para procesar y entender grandes volúmenes de texto no estructurado. El análisis de sentimiento clasifica la polaridad emocional, mientras que el modelado de temas agrupa comentarios similares, permitiendo identificar patrones y priorizar acciones de mejora de forma eficiente.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "APIs de redes sociales para ingesta de comentarios.",
+          "Servicios de email para recepción de feedback."
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 7,
+        "prerequisitos": [
+          "Experiencia con Go y desarrollo de APIs.",
+          "Conocimientos de bases de datos relacionales (PostgreSQL).",
+          "Comprensión de NLP y técnicas de análisis de sentimiento.",
+          "Familiaridad con sistemas de colas de mensajes.",
+          "Experiencia básica con Python para integración de modelos de IA."
+        ],
+        "riesgos": [
+          "Precisión del análisis de sentimiento y modelado de temas en diferentes idiomas o jergas.",
+          "Latencia en el procesamiento de feedback, especialmente si se hace en tiempo real.",
+          "Escalabilidad del sistema de colas y workers de IA.",
+          "Complejidad en la integración entre Go y Python para los modelos de IA.",
+          "Coste asociado al uso de APIs de IA externas o al hosting de modelos propios."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2024-03-05T10:02:00Z",
+        "hash_unicidad": "be5b9cf00de8c438"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "de24689867a19204"
+      }
     }
   ],
   "ultimos_hashes": [
-    "7a1b2c3d4e5f6a7b",
-    "8b2c3d4e5f6a7b8c",
     "9c3d4e5f6a7b8c9d",
     "b2a0c8d6f4e2a1b0",
     "a1b8c4d2e6f0a3b1",
@@ -23301,8 +23633,10 @@
     "35cfbec8408c1903",
     "a5dc214b01de7af3",
     "16376cad7c88a4a6",
-    "23900ee568e8d1ec"
+    "23900ee568e8d1ec",
+    "c7e40f822fc8aa01",
+    "be5b9cf00de8c438"
   ],
-  "total_generados": 168,
-  "fecha_ultima_generacion": "2026-11-19T01:40:10.644297"
+  "total_generados": 170,
+  "fecha_ultima_generacion": "2026-11-19T12:26:49.063327"
 }
