@@ -25,7 +25,7 @@ from utils.cache import CacheManager, FileCache
 from utils.telegram_client import TelegramClient
 from utils.constants_downloadfile import CONFIG, TELEGRAM_TTS_VOZ, TELEGRAM_TTS_VOZ_EN, TELEGRAM_DASHBOARD_URL, PROMPT_TRADUCIR_TITULOS, ENLACE_KEY, FUENTE_KEY, TITULO_KEY, FECHA_PUB_KEY, F_KEY, ID_VIDEO_KEY, TS_KEY, NOTICIAS_FILENAME, TELEGRAM_SENT_FILENAME, TELEGRAM_VOICE_SENT_FILENAME, LOGS_DIR, LOG_FILES, FUENTES_INGLES
 from utils.common import load_json, save_json
-from utils.fechas import texto_es_reciente
+from utils.fechas import texto_es_reciente, MADRID
 from utils.disponibilidad import filtrar_disponibles, log_descartes
 
 logger = setup_logging("telegram", LOG_FILES["telegram"], LOGS_DIR)
@@ -347,93 +347,98 @@ async def run():
     recientes, muertos = filtrar_disponibles(recientes, campo=ENLACE_KEY)
     log_descartes(muertos)
 
-    nuevos = recientes[:args.max_items]
-    if not nuevos:
-        logger.info("📭 No hay noticias nuevas desde el último envío.")
-        return
-
-    logger.info(f"📰 {len(nuevos)} noticias nuevas para enviar.")
     chat_id = CONFIG["TELEGRAM_CHAT_ID"]
     token = CONFIG["TELEGRAM_TOKEN"]
 
-    titulares_enviados = []
+    nuevos = recientes[:args.max_items]
+    if nuevos:
+        logger.info(f"📰 {len(nuevos)} noticias nuevas para enviar.")
+        titulares_enviados = []
 
-    for n in nuevos:
-        titulo_original = n[TITULO_KEY]
+        for n in nuevos:
+            titulo_original = n[TITULO_KEY]
 
-        if n.get('traducido'):
-            titulo_es = titulo_original
-        else:
-            logger.info(f"🤖 Traduciendo: {titulo_original[:60]}...")
-            titulo_es = await traducir_titulo(titulo_original, client)
-            n['traducido'] = True
+            if n.get('traducido'):
+                titulo_es = titulo_original
+            else:
+                logger.info(f"🤖 Traduciendo: {titulo_original[:60]}...")
+                titulo_es = await traducir_titulo(titulo_original, client)
+                n['traducido'] = True
 
-        mensaje, mensaje_plano = construir_mensaje_noticia(titulo_es, n[ENLACE_KEY])
+            mensaje, mensaje_plano = construir_mensaje_noticia(titulo_es, n[ENLACE_KEY])
 
-        if args.dry_run:
-            print(f"\n{'='*50}")
-            print(mensaje)
-            logger.info(f"📋 Dry-run: {titulo_es[:60]}...")
-            continue
+            if args.dry_run:
+                print(f"\n{'='*50}")
+                print(mensaje)
+                logger.info(f"📋 Dry-run: {titulo_es[:60]}...")
+                continue
 
-        ok = enviar_mensaje(mensaje, chat_id, token, texto_plano=mensaje_plano)
-        if ok:
-            logger.info(f"✅ Enviado: {titulo_es[:60]}...")
-            CACHE.mark_sent(n.get(ENLACE_KEY, ""))
-            titulares_enviados.append(titulo_es)
-            await asyncio.sleep(1)
-        else:
-            logger.error(f"❌ Fallo al enviar: {titulo_es[:60]}")
+            ok = enviar_mensaje(mensaje, chat_id, token, texto_plano=mensaje_plano)
+            if ok:
+                logger.info(f"✅ Enviado: {titulo_es[:60]}...")
+                CACHE.mark_sent(n.get(ENLACE_KEY, ""))
+                titulares_enviados.append(titulo_es)
+                await asyncio.sleep(1)
+            else:
+                logger.error(f"❌ Fallo al enviar: {titulo_es[:60]}")
+    else:
+        logger.info("📭 No hay noticias nuevas desde el último envío.")
 
-    # Audio de voz: 1 vez al día con resumen de TODAS las noticias desde el último audio
+    # Audio de voz: 1 vez al día con resumen de TODAS las noticias desde el
+    # último audio. Independiente de si hay noticias nuevas de texto (antes un
+    # `return` temprano impedía llegar aquí cuando todo ya estaba en caché).
     if not args.dry_run:
-        hora_actual = datetime.now().hour
-        if args.force_voice or (not hoy_ya_se_envio_voz() and hora_actual >= 21):
-            # Recopilar TODAS las noticias desde el último audio enviado
-            ts_ultimo_audio = obtener_timestamp_ultimo_audio()
-            if ts_ultimo_audio:
-                cutoff_voz = ts_ultimo_audio
-                logger.info(f"🎙️ Buscando noticias desde último audio: {ts_ultimo_audio.strftime('%Y-%m-%d %H:%M')}")
-            else:
-                cutoff_voz = datetime.now() - timedelta(hours=24)
-                logger.info("🎙️ No hay audio previo, usando últimas 24h")
-            candidatos_voz = []
-            for n in historial:
-                if n.get(ID_VIDEO_KEY):
-                    continue
-                if texto_es_reciente(n.get(FECHA_PUB_KEY, "")) is False:
-                    continue
-                ts = n.get(TS_KEY, "")
-                if ts:
-                    try:
-                        fecha = datetime.fromisoformat(ts.replace("Z", "+00:00").replace("+00:00", ""))
-                        if fecha < cutoff_voz:
-                            continue
-                    except (ValueError, AttributeError):
-                        pass
-                if n.get(TITULO_KEY):
-                    candidatos_voz.append(n)
-
-            # Enlaces vivos también para el resumen de voz
-            vivos_voz, muertos_voz = filtrar_disponibles(candidatos_voz, campo=ENLACE_KEY)
-            if muertos_voz:
-                log_descartes(muertos_voz, contexto="noticias de voz")
-            todas_hoy = [(v[TITULO_KEY], v.get(FUENTE_KEY, "")) for v in vivos_voz]
-
-            if todas_hoy:
-                logger.info(f"🎙️ Enviando resumen de voz diario ({len(todas_hoy)} noticias)...")
-                ok = await enviar_audio_voz(todas_hoy, chat_id, token)
-                if ok:
-                    marcar_voz_enviada([t for t, _ in todas_hoy[:50]])
-                    logger.info("✅ Audio de voz enviado.")
+        try:
+            hora_actual = datetime.now(MADRID).hour
+            if args.force_voice or (not hoy_ya_se_envio_voz() and hora_actual >= 21):
+                # Recopilar TODAS las noticias desde el último audio enviado
+                ts_ultimo_audio = obtener_timestamp_ultimo_audio()
+                if ts_ultimo_audio:
+                    cutoff_voz = ts_ultimo_audio
+                    logger.info(f"🎙️ Buscando noticias desde último audio: {ts_ultimo_audio.strftime('%Y-%m-%d %H:%M')}")
                 else:
-                    logger.warning("⚠️ Fallo al enviar audio de voz.")
+                    cutoff_voz = datetime.now() - timedelta(hours=24)
+                    logger.info("🎙️ No hay audio previo, usando últimas 24h")
+                candidatos_voz = []
+                for n in historial:
+                    if n.get(ID_VIDEO_KEY):
+                        continue
+                    if texto_es_reciente(n.get(FECHA_PUB_KEY, "")) is False:
+                        continue
+                    ts = n.get(TS_KEY, "")
+                    if ts:
+                        try:
+                            fecha = datetime.fromisoformat(ts.replace("Z", "+00:00").replace("+00:00", ""))
+                            if fecha < cutoff_voz:
+                                continue
+                        except (ValueError, AttributeError):
+                            pass
+                    if n.get(TITULO_KEY):
+                        candidatos_voz.append(n)
+
+                # Enlaces vivos también para el resumen de voz
+                vivos_voz, muertos_voz = filtrar_disponibles(candidatos_voz, campo=ENLACE_KEY)
+                if muertos_voz:
+                    log_descartes(muertos_voz, contexto="noticias de voz")
+                todas_hoy = [(v[TITULO_KEY], v.get(FUENTE_KEY, "")) for v in vivos_voz]
+
+                if todas_hoy:
+                    logger.info(f"🎙️ Enviando resumen de voz diario ({len(todas_hoy)} noticias)...")
+                    ok = await enviar_audio_voz(todas_hoy, chat_id, token)
+                    if ok:
+                        marcar_voz_enviada([t for t, _ in todas_hoy[:50]])
+                        logger.info("✅ Audio de voz enviado.")
+                    else:
+                        logger.warning("⚠️ Fallo al enviar audio de voz.")
+                else:
+                    logger.info("ℹ️ No hay noticias hoy para audio.")
+            elif hoy_ya_se_envio_voz():
+                logger.info("ℹ️ Audio de voz ya enviado hoy. Saltando.")
             else:
-                logger.info("ℹ️ No hay noticias hoy para audio.")
-        elif hoy_ya_se_envio_voz():
-            logger.info("ℹ️ Audio de voz ya enviado hoy. Saltando.")
-        else:
-            logger.info(f"ℹ️ Audio de voz se enviará a las 21:00 (hora actual: {hora_actual}:00).")
+                logger.info(f"ℹ️ Audio de voz se enviará a las 21:00 (hora actual: {hora_actual}:00).")
+        except Exception:
+            # Un fallo del TTS/audio no debe impedir flush de textos ya enviados
+            logger.exception("⚠️ Error inesperado en el bloque de audio de voz.")
 
     if not args.dry_run:
         CACHE.flush()
