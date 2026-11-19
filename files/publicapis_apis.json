@@ -11104,5 +11104,17 @@
         "descripcion": "Email validation, email finder and company enrichment API that resolves catch-all and gateway-protected addresses, with real-time and bulk endpoints.",
         "categoria": "Email",
         "pricing": ""
+    },
+    {
+        "titulo": "Unipile",
+        "enlace": "https://publicapis.io/unipile-api",
+        "fuente": "Public APIs",
+        "tipo": "herramienta",
+        "f": "19/11",
+        "fecha_publicacion": "",
+        "subtipo": "api",
+        "descripcion": "Unipile offers a unified REST API layer to connect users' LinkedIn, WhatsApp, Instagram, Telegram, email (Gmail, Outlook, IMAP), and calendar (Google, Outlook) accounts. It enables sending and syncing",
+        "categoria": "Social",
+        "pricing": ""
     }
 ]
