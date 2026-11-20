@@ -33,8 +33,12 @@ logger = setup_logging("telegram", LOG_FILES["telegram"], LOGS_DIR)
 SENT_LOG = TELEGRAM_SENT_FILENAME
 VOICE_SENT_LOG = TELEGRAM_VOICE_SENT_FILENAME
 
+# Límites del resumen de voz (evita HTTP 413 de Telegram con audios gigantes)
+VOICE_MAX_POR_IDIOMA = 40
+VOICE_MAX_CHARS_IDIOMA = 3500
+VOICE_MAX_LOOKBACK_H = 48
+
 CACHE = CacheManager(FileCache(SENT_LOG), ttl_hours=168)  # 7 días
-VOICE_CACHE = CacheManager(FileCache(VOICE_SENT_LOG), ttl_hours=24)  # 1 día
 _client = TelegramClient()
 
 # Emojis para stripping del texto de voz
@@ -182,14 +186,31 @@ def enviar_mensaje(texto: str, chat_id: str, token: str,
         return False
 
 
-async def enviar_audio_voz(titulares: list[tuple[str, str]], chat_id: str, token: str) -> bool:
-    """Envía audio de voz: un audio por idioma (ES y EN), cada uno lo más largo posible.
-    titulares: lista de (titulo, fuente) para detectar idioma."""
+def _limitar_oraciones(oraciones: list[str]) -> list[str]:
+    """Recorta a VOICE_MAX_POR_IDIOMA y VOICE_MAX_CHARS_IDIOMA (más largos primero)."""
+    seleccion: list[str] = []
+    chars = 0
+    for texto in oraciones:
+        if len(seleccion) >= VOICE_MAX_POR_IDIOMA:
+            break
+        # +2 por el ". " de unión
+        if seleccion and chars + len(texto) + 2 > VOICE_MAX_CHARS_IDIOMA:
+            continue
+        seleccion.append(texto)
+        chars += len(texto) + (2 if seleccion[:-1] else 0)
+    return seleccion
+
+
+async def enviar_audio_voz(titulares: list[tuple[str, str]], chat_id: str, token: str) -> int:
+    """Envía audio de voz: un audio por idioma (ES y EN), con tope de tamaño.
+
+    titulares: lista de (titulo, fuente) para detectar idioma.
+    Devuelve el nº de idiomas enviados correctamente (0 = fallo total)."""
     if not titulares:
-        return False
+        return 0
     import edge_tts
 
-    # Separar TODOS los titulares por idioma (no consecutivos)
+    # Separar titulares por idioma (no consecutivos)
     por_idioma = {"es": [], "en": []}
     for titulo, fuente in titulares:
         texto = strip_emojis(titulo)
@@ -198,15 +219,23 @@ async def enviar_audio_voz(titulares: list[tuple[str, str]], chat_id: str, token
         idioma = detectar_idioma(texto, fuente)
         por_idioma[idioma].append(texto)
 
-    # Filtrar idiomas que tengan contenido
+    # Tope por idioma: evita MP3 de horas y HTTP 413
+    for idioma in por_idioma:
+        antes = len(por_idioma[idioma])
+        por_idioma[idioma] = _limitar_oraciones(por_idioma[idioma])
+        if antes > len(por_idioma[idioma]):
+            logger.info(
+                f"✂️ Audio {idioma.upper()}: {antes} → {len(por_idioma[idioma])} titulares (tope)"
+            )
+
     grupos = [(idioma, textos) for idioma, textos in por_idioma.items() if textos]
 
     if not grupos:
         logger.info("ℹ️ No hay texto para audio.")
-        return False
+        return 0
 
     logger.info(f"🎙️ Audio: {len(por_idioma['es'])} titulares ES, {len(por_idioma['en'])} titulares EN")
-    enviado_ok = True
+    enviados = 0
     total_partes = len(grupos)
 
     for i, (idioma, oraciones) in enumerate(grupos):
@@ -223,75 +252,67 @@ async def enviar_audio_voz(titulares: list[tuple[str, str]], chat_id: str, token
                 os.remove(audio_path)
             if r is None or not r.ok:
                 logger.warning(f"⚠️ Audio {lang_label} falló: {r.text[:100] if r is not None else 'sin token/chat'}")
-                enviado_ok = False
             else:
+                enviados += 1
                 logger.info(f"✅ Audio {lang_label} enviado ({len(oraciones)} titulares, voz: {voz})")
             await asyncio.sleep(2)
         except Exception as e:
             logger.error(f"⚠️ Error TTS {lang_label}: {e}")
             if os.path.exists(audio_path):
                 os.remove(audio_path)
-            enviado_ok = False
 
-    return enviado_ok
+    return enviados
 
 
-def hoy_ya_se_envio_voz() -> bool:
-    """Comprueba si ya se envió el audio de voz hoy."""
-    fecha_hoy = datetime.now().strftime("%Y-%m-%d")
-    # Intentar leer del CacheManager primero
-    try:
-        if hasattr(VOICE_CACHE, "_load"):
-            datos = VOICE_CACHE._load()
-            if isinstance(datos, dict) and datos.get("last_voice_date") == fecha_hoy:
-                return True
-    except Exception:
-        pass
-    # Fallback: leer directamente el archivo
+def _leer_estado_voz() -> dict:
+    """Lee el estado del audio de voz (last_voice_date / last_voice_ts / …)."""
     try:
         if os.path.exists(VOICE_SENT_LOG):
             with open(VOICE_SENT_LOG, "r", encoding="utf-8") as f:
                 datos = json.load(f)
-            if isinstance(datos, dict) and datos.get("last_voice_date") == fecha_hoy:
-                return True
+            if isinstance(datos, dict):
+                return datos
     except (json.JSONDecodeError, OSError):
         pass
-    return False
+    return {}
+
+
+def _escribir_estado_voz(datos: dict) -> None:
+    """Persiste el estado del audio de voz de forma atómica."""
+    tmp = VOICE_SENT_LOG + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(datos, f, ensure_ascii=False, indent=2)
+    os.replace(tmp, VOICE_SENT_LOG)
+
+
+def hoy_ya_se_envio_voz() -> bool:
+    """Comprueba si ya se envió el audio de voz hoy (fecha en hora Madrid)."""
+    fecha_hoy = datetime.now(MADRID).strftime("%Y-%m-%d")
+    return _leer_estado_voz().get("last_voice_date") == fecha_hoy
 
 
 def marcar_voz_enviada(noticias_titles: list[str] | None = None):
     """Marca que se envió el audio de voz, con timestamp y noticias incluidas."""
-    datos = {
-        "last_voice_date": datetime.now().strftime("%Y-%m-%d"),
-        "last_voice_ts": datetime.now().isoformat(),
+    ahora = datetime.now(MADRID)
+    datos = _leer_estado_voz()
+    datos.update({
+        "last_voice_date": ahora.strftime("%Y-%m-%d"),
+        "last_voice_ts": ahora.isoformat(),
         "news_count": len(noticias_titles) if noticias_titles else 0,
         "news_titles": (noticias_titles or [])[:50],
-    }
-    if hasattr(VOICE_CACHE, "_save"):
-        VOICE_CACHE._save(datos)
-    else:
-        with open(VOICE_SENT_LOG, "w") as f:
-            json.dump(datos, f)
+    })
+    _escribir_estado_voz(datos)
 
 
 def obtener_timestamp_ultimo_audio() -> datetime | None:
     """Obtiene el timestamp del último audio enviado."""
+    ts = _leer_estado_voz().get("last_voice_ts")
+    if not ts:
+        return None
     try:
-        if hasattr(VOICE_CACHE, "_load"):
-            datos = VOICE_CACHE._load()
-            if isinstance(datos, dict) and datos.get("last_voice_ts"):
-                return datetime.fromisoformat(datos["last_voice_ts"])
-    except Exception:
-        pass
-    try:
-        if os.path.exists(VOICE_SENT_LOG):
-            with open(VOICE_SENT_LOG, "r", encoding="utf-8") as f:
-                datos = json.load(f)
-            if isinstance(datos, dict) and datos.get("last_voice_ts"):
-                return datetime.fromisoformat(datos["last_voice_ts"])
-    except (json.JSONDecodeError, OSError):
-        pass
-    return None
+        return datetime.fromisoformat(ts)
+    except (ValueError, TypeError):
+        return None
 
 
 async def run():
@@ -390,14 +411,27 @@ async def run():
     if not args.dry_run:
         try:
             hora_actual = datetime.now(MADRID).hour
-            if args.force_voice or (not hoy_ya_se_envio_voz() and hora_actual >= 21):
-                # Recopilar TODAS las noticias desde el último audio enviado
+            # Ventana 19:00–23:59 Madrid (antes solo ≥21: casi ningún run de
+            # Actions caía ahí y el audio no salía).
+            if args.force_voice or (not hoy_ya_se_envio_voz() and hora_actual >= 19):
+                # Recopilar noticias desde el último audio, con tope de ventana
+                # para no acumular semanas enteras (→ MP3 gigante → HTTP 413).
+                # cutoff naive para poder comparar con TS_KEY (se parsea sin tz).
                 ts_ultimo_audio = obtener_timestamp_ultimo_audio()
+                cutoff_min = datetime.now() - timedelta(hours=VOICE_MAX_LOOKBACK_H)
                 if ts_ultimo_audio:
-                    cutoff_voz = ts_ultimo_audio
+                    if ts_ultimo_audio.tzinfo is not None:
+                        # A hora local naive del sistema (UTC en Actions) para
+                        # comparar con TS_KEY / datetime.now() sin tz.
+                        ts_ultimo_audio = ts_ultimo_audio.astimezone().replace(tzinfo=None)
+                    cutoff_voz = max(ts_ultimo_audio, cutoff_min)
+                    if cutoff_voz > ts_ultimo_audio:
+                        logger.info(
+                            f"🎙️ Último audio antiguo; limitando búsqueda a {VOICE_MAX_LOOKBACK_H} h"
+                        )
                     logger.info(f"🎙️ Buscando noticias desde último audio: {ts_ultimo_audio.strftime('%Y-%m-%d %H:%M')}")
                 else:
-                    cutoff_voz = datetime.now() - timedelta(hours=24)
+                    cutoff_voz = cutoff_min
                     logger.info("🎙️ No hay audio previo, usando últimas 24h")
                 candidatos_voz = []
                 for n in historial:
@@ -420,14 +454,19 @@ async def run():
                 vivos_voz, muertos_voz = filtrar_disponibles(candidatos_voz, campo=ENLACE_KEY)
                 if muertos_voz:
                     log_descartes(muertos_voz, contexto="noticias de voz")
+                # Más recientes primero (histórico puede no venir ordenado)
+                def _ts_n(n: dict) -> str:
+                    return n.get(TS_KEY, "") or n.get(FECHA_PUB_KEY, "") or ""
+                vivos_voz.sort(key=_ts_n, reverse=True)
                 todas_hoy = [(v[TITULO_KEY], v.get(FUENTE_KEY, "")) for v in vivos_voz]
 
                 if todas_hoy:
                     logger.info(f"🎙️ Enviando resumen de voz diario ({len(todas_hoy)} noticias)...")
-                    ok = await enviar_audio_voz(todas_hoy, chat_id, token)
-                    if ok:
+                    enviados = await enviar_audio_voz(todas_hoy, chat_id, token)
+                    if enviados > 0:
+                        # Basta un idioma OK para no reintentar y acumular más
                         marcar_voz_enviada([t for t, _ in todas_hoy[:50]])
-                        logger.info("✅ Audio de voz enviado.")
+                        logger.info(f"✅ Audio de voz enviado ({enviados} idioma(s)).")
                     else:
                         logger.warning("⚠️ Fallo al enviar audio de voz.")
                 else:
@@ -435,7 +474,7 @@ async def run():
             elif hoy_ya_se_envio_voz():
                 logger.info("ℹ️ Audio de voz ya enviado hoy. Saltando.")
             else:
-                logger.info(f"ℹ️ Audio de voz se enviará a las 21:00 (hora actual: {hora_actual}:00).")
+                logger.info(f"ℹ️ Audio de voz se enviará a partir de las 19:00 (hora actual: {hora_actual}:00).")
         except Exception:
             # Un fallo del TTS/audio no debe impedir flush de textos ya enviados
             logger.exception("⚠️ Error inesperado en el bloque de audio de voz.")

@@ -2,7 +2,13 @@ name: "[NOTICIAS] 🤖 Send Telegram Notification"
 on:
   schedule:
     - cron: "*/30 * * * *" # Cada 30 minutos
+    - cron: "0 19 * * *" # 19:00 UTC ≈ 20–21 h Madrid — ventana de audio
   workflow_dispatch:
+    inputs:
+      force_voice:
+        description: "Forzar envío de audio de voz (ignora límite diario)"
+        type: boolean
+        default: false
 
 concurrency:
   group: send-telegram-notifications-${{ github.ref }}
@@ -43,7 +49,12 @@ jobs:
           TG_API_ID: ${{ secrets.TG_API_ID }}
           TG_API_HASH: ${{ secrets.TG_API_HASH }}
           TG_SESSION_STRING: ${{ secrets.TG_SESSION_STRING }}
-        run: python -m scripts.publishers.send_telegram
+        run: |
+          if [ "${{ inputs.force_voice }}" = "true" ]; then
+            python -m scripts.publishers.send_telegram --force-voice
+          else
+            python -m scripts.publishers.send_telegram
+          fi
       - name: 💾 Commit badges actualizados
         run: |
           git config --local user.email "actions@github.com"
