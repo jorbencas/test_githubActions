@@ -23872,12 +23872,460 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "b9fe8adb4f4d431b"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f4a1b2c3d4e5f6a7",
+        "titulo": "Sistema de Gestión de Contratos Inteligente con IA",
+        "descripcion_corta": "Plataforma web para gestionar contratos, con IA para análisis de riesgos y resúmenes.",
+        "descripcion_detallada": "Una aplicación web fullstack que permite a las empresas gestionar su ciclo de vida de contratos. Los usuarios pueden subir contratos, categorizarlos y obtener resúmenes generados por IA. La IA también analiza los contratos para identificar cláusulas de riesgo potenciales, términos inusuales o faltantes, y compara términos con cláusulas estándar. Incluye un panel de control para visualizar métricas clave y alertas sobre contratos próximos a expirar o con riesgos identificados.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "fullstack",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y de alto rendimiento para construir APIs.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Rendimiento async, validación automática de datos con Pydantic, generación de documentación OpenAPI."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Biblioteca JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Component-based architecture, declarative UI, large ecosystem for building interactive frontends."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "LangChain",
+              "categoria": "libreria",
+              "descripcion": "Framework para desarrollar aplicaciones impulsadas por modelos de lenguaje.",
+              "version_sugerida": "0.0.350",
+              "url_docs": "https://python.langchain.com/",
+              "por_que": "Facilita la integración con modelos de lenguaje para resumen y análisis de texto de contratos."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones.",
+              "version_sugerida": "2.5.2",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Validación de esquemas de datos para la API y para la configuración de la IA."
+            },
+            {
+              "nombre": "PDFMiner.six",
+              "categoria": "libreria",
+              "descripcion": "Extracción de información de archivos PDF.",
+              "version_sugerida": "20231228",
+              "url_docs": "https://pdfminersix.readthedocs.io/",
+              "por_que": "Permite leer y extraer texto de los documentos de contrato en formato PDF."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_de_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/",
+              "por_que": "Soporte robusto para JSONB para almacenar metadatos de contratos y capacidad transaccional."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura un entorno de desarrollo y producción consistente y reproducible."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Modelos de Lenguaje Grandes (LLMs)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos pre-entrenados para tareas de procesamiento de lenguaje natural.",
+              "version_sugerida": null,
+              "url_docs": "https://platform.openai.com/docs/models",
+              "por_que": "Se utilizan para resumir contratos, identificar cláusulas de riesgo y extraer información clave de manera eficiente."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests unitarios y de integración, fixtures y manejo de dependencias."
+            },
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para JavaScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Para testing de componentes y funcionalidades del frontend React."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Carga y categorización de contratos (PDF, DOCX).",
+          "Resumen automático de contratos mediante IA.",
+          "Análisis de riesgos y detección de cláusulas anómalas con IA.",
+          "Visualización de métricas y KPIs de gestión de contratos.",
+          "Alertas de vencimiento y riesgos contractuales.",
+          "Búsqueda avanzada de contratos por contenido y metadatos."
+        ],
+        "casos_uso": [
+          "Departamento legal revisando nuevos contratos.",
+          "Equipo de compras analizando términos y condiciones.",
+          "Gestión de renovaciones y vencimientos de contratos.",
+          "Auditoría interna de cumplimiento contractual.",
+          "Identificación rápida de obligaciones y riesgos en un portafolio de contratos."
+        ],
+        "reglas_negocio": [
+          "Los contratos deben ser categorizados antes del análisis IA.",
+          "Los resúmenes IA deben ser revisables por un usuario.",
+          "Las alertas de riesgo se activan si la confianza del modelo es > 85%.",
+          "Los usuarios con rol 'Admin' pueden configurar parámetros de IA.",
+          "Historial de versiones para cada contrato modificado."
+        ],
+        "por_que_ia": "Se utiliza IA para procesar y entender el lenguaje natural de los contratos, automatizando tareas que de otro modo serían manuales y propensas a errores, como el resumen y la identificación de riesgos.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "API de OpenAI para procesamiento de lenguaje natural."
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos de Python y JavaScript (React).",
+          "Comprensión de APIs RESTful.",
+          "Familiaridad con bases de datos SQL.",
+          "Conceptos básicos de Machine Learning y Procesamiento de Lenguaje Natural."
+        ],
+        "riesgos": [
+          "Precisión variable de los modelos de IA en la interpretación de cláusulas complejas.",
+          "Manejo de grandes volúmenes de documentos PDF puede ser lento.",
+          "Seguridad y privacidad de los datos contractuales sensibles.",
+          "Costos asociados al uso de APIs de IA externas.",
+          "Curva de aprendizaje para la configuración y ajuste fino de los modelos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-05T10:00:00Z",
+        "hash_unicidad": "a0df219f523b1810"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "9e6616202b9bc9a7"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "g8h7i6j5k4l3m2n1",
+        "titulo": "Plataforma de Micro-Learning Adaptativo",
+        "descripcion_corta": "Sistema web que ofrece contenido educativo en píldoras, adaptándose al progreso del usuario.",
+        "descripcion_detallada": "Una aplicación web que proporciona un flujo constante de micro-lecciones (píldoras de conocimiento) sobre un tema específico. Utiliza un motor de recomendación para adaptar la secuencia y dificultad del contenido basándose en el rendimiento y las respuestas del usuario. Incluye seguimiento del progreso, gamificación (puntos, insignias) y la posibilidad de que los instructores suban y gestionen el contenido. El backend gestiona la lógica de adaptación y el frontend presenta las lecciones de forma interactiva.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "fullstack",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de Node.js para aplicaciones del lado del servidor construidas con TypeScript.",
+              "version_sugerida": "10.0.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Arquitectura modular, excelente soporte para TypeScript, escalabilidad y patrones de diseño robustos."
+            },
+            {
+              "nombre": "Vue.js",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "3.3.4",
+              "url_docs": "https://vuejs.org/",
+              "por_que": "Curva de aprendizaje suave, reactividad eficiente, buena integración con TypeScript y ecosistema maduro."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "TypeORM",
+              "categoria": "libreria",
+              "descripcion": "ORM para TypeScript y JavaScript que soporta múltiples bases de datos.",
+              "version_sugerida": "0.2.45",
+              "url_docs": "https://typeorm.io/",
+              "por_que": "Permite interactuar con la base de datos usando objetos TypeScript, facilitando la gestión de datos relacionales."
+            },
+            {
+              "nombre": "Axios",
+              "categoria": "libreria",
+              "descripcion": "Cliente HTTP basado en promesas para el navegador y Node.js.",
+              "version_sugerida": "1.5.0",
+              "url_docs": "https://axios-http.com/",
+              "por_que": "Simplifica las llamadas a la API del backend desde el frontend Vue.js."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_de_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/",
+              "por_que": "Capacidad para almacenar datos estructurados de usuarios, contenido y progreso de aprendizaje, con buen rendimiento."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita la configuración del entorno de desarrollo y despliegue, asegurando consistencia."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para JavaScript y TypeScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Testing integral para el backend NestJS y el frontend Vue.js, incluyendo snapshots y mocking."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de cursos de micro-learning.",
+          "Motor de recomendación adaptativa de contenido.",
+          "Seguimiento detallado del progreso del estudiante.",
+          "Sistema de gamificación (puntos, insignias, rankings).",
+          "Interfaz interactiva para la visualización de lecciones.",
+          "Gestión de roles (estudiante, instructor, administrador)."
+        ],
+        "casos_uso": [
+          "Empresas para formación continua de empleados.",
+          "Instituciones educativas para complementar currículos.",
+          "Plataformas de desarrollo profesional.",
+          "Individuos que buscan adquirir conocimientos de forma fragmentada y personalizada.",
+          "Marketing de contenidos para generar leads educativos."
+        ],
+        "reglas_negocio": [
+          "Cada lección debe tener una duración máxima de 5 minutos.",
+          "El sistema debe registrar la respuesta correcta/incorrecta a cada pregunta.",
+          "La dificultad de las siguientes lecciones aumenta si el usuario acierta > 80%.",
+          "Los puntos de gamificación se otorgan al completar lecciones y módulos.",
+          "Los instructores solo pueden gestionar contenido de los cursos que han creado."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Experiencia con TypeScript y Node.js.",
+          "Conocimientos de frameworks frontend como Vue.js.",
+          "Comprensión de bases de datos relacionales y ORMs.",
+          "Principios de diseño de UX/UI para aplicaciones web."
+        ],
+        "riesgos": [
+          "La complejidad del motor de recomendación puede subestimarse.",
+          "Mantener la motivación del usuario a largo plazo puede ser un desafío.",
+          "Escalabilidad de la base de datos con muchos usuarios y contenido.",
+          "Diseño de una interfaz de usuario intuitiva para la adaptación."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-05T10:00:00Z",
+        "hash_unicidad": "8a6672b56c054b88"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "9e6616202b9bc9a7"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "m1n2o3p4q5r6s7t8",
+        "titulo": "Analizador de Logs de Seguridad con Detección de Anomalías",
+        "descripcion_corta": "Servicio CLI que ingiere logs, detecta patrones anómalos y genera alertas.",
+        "descripcion_detallada": "Una herramienta de línea de comandos (CLI) escrita en Go que se conecta a diversas fuentes de logs (archivos locales, syslog, APIs de servicios cloud). Los logs se procesan y analizan en busca de patrones de seguridad sospechosos o anomalías utilizando algoritmos de detección de anomalías. Al detectar un evento anómalo, genera una alerta configurable (stdout, archivo, webhook). Ideal para equipos de seguridad que necesitan monitorizar la actividad de sistemas y aplicaciones en tiempo real.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "cli",
+          "api",
+          "datos",
+          "devops",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "Logrus",
+              "categoria": "libreria",
+              "descripcion": "Framework de logging para Go con ganchos y niveles personalizables.",
+              "version_sugerida": "1.10.0",
+              "url_docs": "https://github.com/sirupsen/logrus",
+              "por_que": "Proporciona una forma estructurada y flexible de manejar logs dentro de la aplicación CLI y el servicio."
+            },
+            {
+              "nombre": "Grok",
+              "categoria": "libreria",
+              "descripcion": "Utilidad para parsear texto no estructurado en estructuras de datos útiles.",
+              "version_sugerida": "v1.0.0",
+              "url_docs": "https://github.com/vjeantet/grok",
+              "por_que": "Permite extraer campos de logs de texto plano (ej. Apache, Nginx) usando patrones definidos."
+            },
+            {
+              "nombre": "ML-Anomaly",
+              "categoria": "libreria",
+              "descripcion": "Librería Go para detección de anomalías.",
+              "version_sugerida": "v0.1.0",
+              "url_docs": "https://github.com/influxdata/go-anodot-client",
+              "por_que": "Implementa algoritmos de detección de anomalías (ej. Isolation Forest) para identificar eventos inusuales en series temporales de logs."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "ClickHouse",
+              "categoria": "base_de_datos",
+              "descripcion": "Base de datos columnar OLAP de alto rendimiento.",
+              "version_sugerida": "23.8",
+              "url_docs": "https://clickhouse.com/",
+              "por_que": "Ideal para almacenar y consultar grandes volúmenes de logs de manera eficiente, permitiendo análisis rápidos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la CLI y sus dependencias para una fácil distribución y ejecución."
+            },
+            {
+              "nombre": "Prometheus",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de monitorización y alertas.",
+              "version_sugerida": "2.45.0",
+              "url_docs": "https://prometheus.io/",
+              "por_que": "Para exponer métricas de la CLI (ej. logs procesados, anomalías detectadas) y monitorizar su estado."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Isolation Forest",
+              "categoria": "ia_ml",
+              "descripcion": "Algoritmo de aprendizaje automático para detección de anomalías.",
+              "version_sugerida": null,
+              "url_docs": "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html",
+              "por_que": "Eficiente para detectar valores atípicos en grandes conjuntos de datos, adecuado para logs."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Paquete estándar de Go para escritura de pruebas.",
+              "version_sugerida": "go1.21",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Integrado en el lenguaje, permite escribir pruebas unitarias y de integración de forma nativa."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Syslog Protocol",
+              "categoria": "otros",
+              "descripcion": "Protocolo estándar para la transmisión de mensajes de log.",
+              "version_sugerida": null,
+              "url_docs": "https://datatracker.ietf.org/doc/html/rfc5424",
+              "por_que": "Permite la ingesta de logs desde múltiples fuentes de sistemas operativos y dispositivos de red."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Ingesta de logs desde múltiples fuentes (archivos, syslog, cloud).",
+          "Parseo de logs estructurados y no estructurados.",
+          "Detección de anomalías en logs usando ML.",
+          "Generación de alertas configurables (stdout, webhook).",
+          "Almacenamiento eficiente de logs en ClickHouse.",
+          "Interfaz CLI para configuración y ejecución."
+        ],
+        "casos_uso": [
+          "Monitorización de seguridad de servidores web.",
+          "Análisis de intentos de acceso no autorizados.",
+          "Detección temprana de ataques DDoS o intrusiones.",
+          "Auditoría de actividad de usuarios en sistemas críticos.",
+          "Identificación de fallos de configuración o errores de aplicación."
+        ],
+        "reglas_negocio": [
+          "Los patrones de logs se definen usando sintaxis Grok.",
+          "Los umbrales de anomalía son configurables por el usuario.",
+          "Las alertas por webhook solo se envían si el tipo de anomalía es 'crítico'.",
+          "Los logs más antiguos de 30 días se purgan automáticamente de ClickHouse.",
+          "Se registran logs de auditoría de las operaciones de la CLI."
+        ],
+        "por_que_ia": "Se utiliza IA (específicamente algoritmos de detección de anomalías como Isolation Forest) para identificar patrones de comportamiento inusuales en los flujos de logs que podrían indicar una brecha de seguridad, lo cual es difícil de lograr solo con reglas estáticas.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "Documentación de protocolos de red (Syslog)."
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 8,
+        "prerequisitos": [
+          "Experiencia sólida con Go.",
+          "Conocimientos de herramientas CLI y su desarrollo.",
+          "Comprensión de protocolos de red y sistemas de logging.",
+          "Fundamentos de análisis de datos y detección de anomalías.",
+          "Experiencia con bases de datos columnares (ClickHouse)."
+        ],
+        "riesgos": [
+          "Falsos positivos/negativos en la detección de anomalías.",
+          "Rendimiento de la ingesta y análisis de grandes volúmenes de logs.",
+          "Complejidad en la configuración de patrones Grok y modelos de anomalías.",
+          "Dependencia de la disponibilidad y formato de las fuentes de logs.",
+          "Gestión y mantenimiento de la base de datos ClickHouse."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-05T10:00:00Z",
+        "hash_unicidad": "084b5c6d9a9dde62"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "9e6616202b9bc9a7"
+      }
     }
   ],
   "ultimos_hashes": [
-    "a1b8c4d2e6f0a3b1",
-    "c5d7e9f1a3b5c7d9",
-    "d5e6f7a8b9c0d1e2",
     "f8e7d6c5b4a3f2e1",
     "a6b7c8d9e0f1a2b3",
     "b9c0d1e2f3a4b5c6",
@@ -23974,8 +24422,11 @@
     "c7e40f822fc8aa01",
     "be5b9cf00de8c438",
     "ffa6e9bf553a5d2e",
-    "30fc267cc850b7a2"
+    "30fc267cc850b7a2",
+    "a0df219f523b1810",
+    "8a6672b56c054b88",
+    "084b5c6d9a9dde62"
   ],
-  "total_generados": 172,
-  "fecha_ultima_generacion": "2026-11-19T22:52:51.135434"
+  "total_generados": 175,
+  "fecha_ultima_generacion": "2026-11-20T05:30:37.999694"
 }
