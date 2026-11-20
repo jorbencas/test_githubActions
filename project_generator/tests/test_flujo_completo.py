@@ -83,6 +83,7 @@ def _generador() -> ProjectGenerator:
     g.history_file = g.data_dir / "hist.json"
     g.history.proyectos = []
     g.history.ultimos_hashes = []
+    g.history.total_generados = 0
     g._init_provider = lambda: None
     g._get_inspiration_sources = lambda: []
     g._get_external_inspiration = lambda: _sin_espera()

@@ -79,14 +79,31 @@ REGLAS ESTRICTAS (OBLIGATORIAS):
     - una frase por herramienta en descripcion y por_que, sin párrafos
     Si te quedas sin sitio, recorta detalle antes que dejar el JSON a medias: un JSON incompleto no vale nada
 
+CALIDAD DE LA IDEA (tan importante como el formato):
+15. ANTI-CLICHÉ: prohíbo genéricos sin ángulo propio. Si el título suena a «plantilla de tutorial», descártalo. NO generes (salvo giro radical y justificado):
+    - analizador de sentimiento de reseñas / comentarios
+    - gestor de tareas o Kanban genérico «con chat y notificaciones»
+    - generador de documentación o README con LLM
+    - monitor de APIs / pinger con alertas
+    - optimizador de rutas TSP / reparto
+    - copiloto de código genérico, resumidor de textos, chatbot RAG de manual
+    - «X con IA» donde la IA no resuelve un problema real del usuario
+16. CONCRECIÓN: cada proyecto nace de un USUARIO y un PROBLEMA claros. En descripcion_corta responde: ¿para quién? ¿qué resuelve? ¿por qué importa?
+17. DIFERENCIADOR: en descripcion_detallada, la 1ª frase es el gancho (qué lo hace distinto de lo que ya existe); después dominio, flujo principal y límites del scope. Nada de «Esta aplicación permite a los usuarios…» vacío.
+18. CASOS_USO y REGLAS_NEGOCIO reales, no relleno: ej. «el jefe de turno rechaza una solicitud fuera de su centro de coste», no «Usuario usa el sistema».
+19. FUNCIONALIDADES accionables (verbo + objeto + condición), no etiquetas sueltas («Multi-tenant» solo no vale).
+20. TECH_STACK coherente con nivel/scope; el `por_que` justifica ESTA elección en ESTE proyecto (si el stack da igual, el proyecto es flojo).
+21. VARIEDAD de dominios: logística, salud, educación, administración local, industria, finanzas personales, energía, agricultura, deporte, eventos, hostelería… No todo SaaS para devs.
+22. PRIORIZA proyectos que un junior/semi pueda terminar y enseñar, o que un senior resolvería con una restricción interesante (offline, tiempo real, multi-tenant, cumplimiento legal, hardware barato).
+
 FORMATO DE SALIDA (JSON estricto):
 {
   "proyectos": [
     {
       "id": "uuid_corto",
-      "titulo": "string",
-      "descripcion_corta": "string (max 150 chars)",
-      "descripcion_detallada": "string (500-2000 chars)",
+      "titulo": "string (concreto, con dominio; sin «Proyecto de» ni «App para» vacíos)",
+      "descripcion_corta": "string (max 200 chars: para quién + problema + gancho)",
+      "descripcion_detallada": "string (300-500 chars: gancho, dominio, flujo, límites)",
       "nivel": "junior|semisenior|senior",
       "scope": "miniproyecto|proyecto|multiproyecto",
       "tipo": ["web", "api", ...],
@@ -145,7 +162,7 @@ PROYECTOS YA GENERADOS (NO REPETIR NI ACERCARSE): {len(existing_hashes)} previos
             existing_hashes[-20:] if existing_hashes else "ninguno"
         )
     prompt += """
-FUENTES DE INSPIRACIÓN DISPONIBLES ({} items):
+FUENTES DE INSPIRACIÓN DISPONIBLES ({} items) — usa el DOMINIO o el PROBLEMA de estas fuentes como punto de partida, no copies el título:
 """.format(len(inspiration_sources))
     
     for i, src in enumerate(inspiration_sources[:10], 1):
@@ -153,6 +170,8 @@ FUENTES DE INSPIRACIÓN DISPONIBLES ({} items):
     
     if len(inspiration_sources) > 10:
         prompt += f"\n... y {len(inspiration_sources) - 10} fuentes más"
+    if not inspiration_sources:
+        prompt += "(vacías — inventa dominios realistas de la lista del system prompt)\n"
     
     prompt += "\n\nPREFERENCIAS (opcional, pero intenta variar):"
     
@@ -169,13 +188,22 @@ FUENTES DE INSPIRACIÓN DISPONIBLES ({} items):
 
 REQUISITOS CRÍTICOS:
 - NO repitas títulos ni temas de la lista de proyectos ya generados (el hash lo recalcula el servidor; ocúpate de que el tema sea distinto)
-- Variedad real: mezcla niveles, scopes, lenguajes, tipos
+- Evita los clichés del SYSTEM_PROMPT (sentimiento, Kanban genérico, doc-LLM, pinger de APIs, TSP…): si uno aparece en los títulos recientes, ni siquiera lo gires
+- Variedad real: mezcla niveles, scopes, lenguajes, tipos Y dominios (no todo «herramienta para devs»)
+- Cada idea debe poder resumirse en 1 frase con usuario + problema + gancho; si no, descártala
 - Proyectos MOBILE permitidos (Flutter, React Native, MAUI) - NO solo iOS nativo
-- Si usas IA en el proyecto, JUSTIFÍCALO en por_que_ia (ej: "Clasificación de tickets con embeddings", "Generación de reportes con LLM", "Detección de anomalías en logs")
+- Si usas IA en el proyecto, JUSTIFÍCALO en por_que_ia con el problema concreto que resuelve (ej: "Clasificación de tickets con embeddings", "Detección de anomalías en logs"); si la IA es decorativa, no la uses
 - Tech stack debe ser COHERENTE con el nivel y scope
 - Junior: 1-2 frameworks, BD simple, testing básico
 - Senior: Arquitectura limpia, patrones avanzados, observabilidad, CI/CD, multi-servicio
-- Incluye SIEMPRE: por_que para cada herramienta del tech stack
+- Incluye SIEMPRE: por_que para cada herramienta del tech stack (específico del proyecto, no el manual de la tool)
+
+EJEMPLOS DE BUENA CALIDAD (mira el nivel de concreción, no el tema):
+- Título: "Visador de partes de trabajo para fontaneros sin cobertura"
+  corta: "App offline para que un fontanero en sótanos registre fotos, firmas y materiales; sincroniza al salir de la cueva."
+  casous: "El fontanero cierra el parte con firma en el móvil sin señal; la oficina lo ve al recuperar cobertura"
+- Herramienta: "SQLite: cero ops en el móvil, sync por lotes cuando hay red, suficiente para 10k partes"
+- Herramienta: "FastAPI: validación Pydantic de partes, Webhooks a la ERP, async para subida de fotos"
 
 EJEMPLOS DE BUENA JUSTIFICACIÓN HERRAMIENTA:
 - "FastAPI: tipado automático, validación Pydantic, OpenAPI nativo, rendimiento async"
