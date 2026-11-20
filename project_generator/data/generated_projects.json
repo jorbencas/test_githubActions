@@ -24323,12 +24323,406 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "9e6616202b9bc9a7"
       }
+    },
+    {
+      "proyecto": {
+        "id": "b3d4f5a1",
+        "titulo": "Sistema de Predicción de Consumo Energético Agrícola",
+        "descripcion_corta": "Plataforma web para agricultores que predice el consumo de agua y energía basado en datos meteorológicos y de cultivo, optimizando recursos.",
+        "descripcion_detallada": "Este sistema ayuda a agricultores a planificar el uso de agua y energía de forma eficiente. Al integrar datos históricos, pronósticos meteorológicos y características del cultivo (tipo, etapa de crecimiento), la IA predice las necesidades futuras. El dashboard visual permite ajustar riegos y consumos, reduciendo costes y desperdicio. El objetivo es democratizar el acceso a información predictiva avanzada para la agricultura sostenible.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Construcción rápida de APIs RESTful con validación de datos y documentación automática.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ideal para la API que servirá los datos y predicciones del modelo de IA a la interfaz web, gracias a su rendimiento y facilidad de uso."
+            },
+            {
+              "nombre": "Streamlit",
+              "categoria": "framework",
+              "descripcion": "Creación rápida de aplicaciones web interactivas para ciencia de datos y machine learning.",
+              "version_sugerida": "1.25.0",
+              "url_docs": "https://docs.streamlit.io/",
+              "por_que": "Permite construir el dashboard de visualización y la interfaz de usuario de forma ágil sin necesidad de experiencia profunda en frontend."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Manipulación y análisis de datos en estructuras tabulares.",
+              "version_sugerida": "2.1.0",
+              "url_docs": "https://pandas.pydata.org/docs/",
+              "por_que": "Esencial para el preprocesamiento de datos históricos, la integración de datos externos y la preparación de datos para el modelo de IA."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Herramientas para machine learning: clasificación, regresión, clustering y preprocesamiento.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://scikit-learn.org/stable/",
+              "por_que": "Proporciona algoritmos de regresión y series temporales robustos para construir el modelo de predicción de consumo."
+            },
+            {
+              "nombre": "Xarray",
+              "categoria": "libreria",
+              "descripcion": "Datos multidimensionales etiquetados, similar a Pandas pero para N-dimensiones.",
+              "version_sugerida": "2023.7.0",
+              "url_docs": "https://docs.xarray.dev/",
+              "por_que": "Útil para manejar datos meteorológicos y de sensores que a menudo tienen dimensiones geográficas y temporales."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto con extensiones potentes.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Almacenamiento robusto para datos históricos de cultivos y sensores, permitiendo consultas complejas y geoespaciales si es necesario."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Facilita la configuración del entorno de desarrollo y despliegue, asegurando consistencia entre entornos."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python que facilita la escritura de tests pequeños y escalables.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/en/stable/",
+              "por_que": "Permite escribir pruebas unitarias para la lógica de preprocesamiento y la API, y pruebas de integración para el flujo completo."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Ingesta de datos históricos de cultivo y consumo energético.",
+          "Integración con APIs de pronóstico meteorológico.",
+          "Modelo de ML para predecir consumo energético y hídrico.",
+          "Dashboard interactivo con visualización de predicciones y datos históricos.",
+          "Generación de alertas personalizadas para optimización de recursos."
+        ],
+        "casos_uso": [
+          "Un agricultor consulta la predicción de consumo de agua para la próxima semana y ajusta su plan de riego.",
+          "El sistema alerta al agricultor sobre un pico de consumo energético previsto para el fin de semana, sugiriendo optimizar el uso de maquinaria.",
+          "Un grupo de agricultores comparte datos anónimos para mejorar la precisión del modelo predictivo regional.",
+          "El agricultor revisa el consumo energético real vs. predicho para identificar ineficiencias."
+        ],
+        "reglas_negocio": [
+          "Los datos de cultivo deben incluir tipo, fecha de siembra y ubicación.",
+          "Los pronósticos meteorológicos deben ser para un radio de 50km del cultivo.",
+          "Las predicciones se actualizan diariamente.",
+          "Las alertas se disparan si la desviación entre predicho y real supera el 15%.",
+          "Los datos históricos de consumo deben tener al menos 2 años de antigüedad para el entrenamiento inicial."
+        ],
+        "por_que_ia": "La IA es crucial para modelar la compleja relación entre variables meteorológicas, características del cultivo y el consumo energético/hídrico, permitiendo predicciones precisas que no serían posibles con modelos deterministas simples.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "APIs de pronóstico meteorológico (ej. OpenWeatherMap, AccuWeather)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos de Python, bases de datos SQL y principios de Machine Learning.",
+          "Acceso a datos históricos de cultivos y consumo energético (simulados o reales).",
+          "API key para un servicio de pronóstico meteorológico."
+        ],
+        "riesgos": [
+          "Calidad y disponibilidad de los datos históricos de consumo.",
+          "Precisión del modelo de IA ante eventos climáticos extremos o no previstos.",
+          "Adopción por parte de los agricultores (curva de aprendizaje).",
+          "Integración con diversas APIs meteorológicas y de sensores."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-02T10:00:00Z",
+        "hash_unicidad": "acd2294808c8b740"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "36e41dc3674a1224"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c4d5e6f7",
+        "titulo": "Plataforma de Gestión de Residuos Orgánicos para Comunidades",
+        "descripcion_corta": "App web y móvil para que vecinos organicen la recogida y compostaje de residuos orgánicos, reduciendo desperdicio y coste.",
+        "descripcion_detallada": "Esta plataforma facilita la gestión descentralizada de residuos orgánicos en comunidades de vecinos o barrios. Permite a los usuarios registrar la cantidad de residuos que desean aportar, coordinar puntos de recogida y horarios, y seguir el proceso de compostaje. El sistema gamifica la participación y ofrece reportes sobre el impacto ambiental de la comunidad. El objetivo es crear un sistema de economía circular local, gestionado por los propios ciudadanos.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "mobile",
+          "api",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de Node.js para aplicaciones del lado del servidor eficientes y escalables.",
+              "version_sugerida": "10.0.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Proporciona una arquitectura modular y escalable (inspirada en Angular) para la API backend, facilitando la gestión de usuarios, residuos y la lógica de negocio."
+            },
+            {
+              "nombre": "React Native",
+              "categoria": "framework",
+              "descripcion": "Framework para construir aplicaciones móviles nativas usando React.",
+              "version_sugerida": "0.72.0",
+              "url_docs": "https://reactnative.dev/docs/getting-started",
+              "por_que": "Permite desarrollar una aplicación móvil multiplataforma (iOS y Android) compartiendo gran parte de la base de código con la interfaz web (si se usa React)."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Prisma",
+              "categoria": "libreria",
+              "descripcion": "ORM moderno para Node.js y TypeScript, simplifica las interacciones con la base de datos.",
+              "version_sugerida": "5.5.0",
+              "url_docs": "https://www.prisma.io/docs/",
+              "por_que": "Facilita la definición del esquema de la base de datos y las operaciones CRUD, mejorando la productividad y la seguridad."
+            },
+            {
+              "nombre": "Chart.js",
+              "categoria": "libreria",
+              "descripcion": "Librería JavaScript para crear gráficos interactivos y personalizables.",
+              "version_sugerida": "4.3.0",
+              "url_docs": "https://www.chartjs.org/docs/latest/",
+              "por_que": "Se usa en la interfaz web y móvil para visualizar el progreso del compostaje y el impacto ambiental de la comunidad."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto robusto.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Almacenará datos de usuarios, registros de residuos, ubicaciones de recogida y estado del compostaje, permitiendo consultas eficientes."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Contenedores para desarrollo y despliegue consistentes.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Simplifica la configuración del entorno de desarrollo local y el despliegue de la API y la base de datos."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript con enfoque en simplicidad.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/docs/getting-started",
+              "por_que": "Utilizado para pruebas unitarias y de integración del backend (NestJS) y para las pruebas de componentes en React Native."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro de usuarios y gestión de comunidades.",
+          "Planificación y visualización de puntos y horarios de recogida de orgánicos.",
+          "Seguimiento del estado del compostaje y notificaciones a los gestores.",
+          "Gamificación: puntos y rankings por contribución.",
+          "Reportes de impacto ambiental (reducción de CO2, toneladas compostadas)."
+        ],
+        "casos_uso": [
+          "Un vecino registra 5kg de restos de comida para la recogida del martes.",
+          "El gestor de la comunidad asigna los residuos registrados a un punto de recogida específico.",
+          "Los usuarios reciben una notificación cuando su 'lote' de compostaje ha alcanzado la madurez.",
+          "La comunidad visualiza en un gráfico cuántos kg de residuos han desviado del vertedero este mes.",
+          "Un nuevo vecino se une a la comunidad y recibe información sobre cómo participar."
+        ],
+        "reglas_negocio": [
+          "Cada comunidad debe tener al menos un gestor.",
+          "Los residuos solo pueden registrarse hasta 12 horas antes de la recogida.",
+          "El sistema debe calcular puntos de gamificación basados en peso y frecuencia.",
+          "Los reportes de impacto se actualizan semanalmente.",
+          "Los usuarios deben aceptar los términos de uso y la política de privacidad de la comunidad."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de TypeScript, Node.js, React Native y bases de datos SQL.",
+          "Comprensión de flujos de trabajo comunitarios y logística básica.",
+          "Familiaridad con el desarrollo de aplicaciones móviles."
+        ],
+        "riesgos": [
+          "Baja adopción o participación de los vecinos.",
+          "Logística compleja de recogida y compostaje en comunidades grandes.",
+          "Gestión de conflictos o mal uso del sistema.",
+          "Escalabilidad de la infraestructura a medida que crecen las comunidades."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-02T10:05:00Z",
+        "hash_unicidad": "faa9869bf55675f8"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "36e41dc3674a1224"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "e5f6a7b8",
+        "titulo": "Auditor de Accesibilidad Web para PYMES con Feedback IA",
+        "descripcion_corta": "Herramienta CLI que audita sitios web de PYMES para accesibilidad (WCAG), sugiriendo correcciones con IA.",
+        "descripcion_detallada": "Este proyecto ayuda a pequeñas y medianas empresas a cumplir con los estándares de accesibilidad web (WCAG). La herramienta CLI realiza un escaneo automatizado del sitio web, identifica violaciones comunes y, utilizando un modelo de lenguaje, genera sugerencias de mejora concretas y priorizadas. El enfoque está en proporcionar feedback accionable y fácil de entender para equipos técnicos no especializados en accesibilidad.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "api",
+          "ia_ml",
+          "testing",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Flask",
+              "categoria": "framework",
+              "descripcion": "Microframework web para Python, ligero y fácil de empezar.",
+              "version_sugerida": "2.3.0",
+              "url_docs": "https://flask.palletsprojects.com/en/2.3.x/",
+              "por_que": "Se usa para crear una API simple que exponga la funcionalidad de auditoría, permitiendo la integración con otros servicios o una futura interfaz web."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Playwright",
+              "categoria": "libreria",
+              "descripcion": "Framework para automatizar Chromium, Firefox y WebKit con una API unificada.",
+              "version_sugerida": "1.37.0",
+              "url_docs": "https://playwright.dev/python/docs/intro",
+              "por_que": "Permite navegar por el sitio web, extraer el DOM y simular interacciones para realizar el escaneo de accesibilidad de forma programática."
+            },
+            {
+              "nombre": "Axe-core",
+              "categoria": "libreria",
+              "descripcion": "Motor de reglas de accesibilidad de código abierto.",
+              "version_sugerida": "4.7.0",
+              "url_docs": "https://github.com/dequelabs/axe-core",
+              "por_que": "Integrado con Playwright, proporciona la lógica principal para detectar violaciones de las directrices WCAG."
+            },
+            {
+              "nombre": "Rich",
+              "categoria": "libreria",
+              "descripcion": "Librería para añadir texto enriquecido y formato bonito a la salida de la terminal.",
+              "version_sugerida": "13.5.0",
+              "url_docs": "https://rich.readthedocs.io/en/stable/",
+              "por_que": "Mejora la legibilidad de los resultados de la auditoría y el feedback en la CLI."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [
+            {
+              "nombre": "OpenAI API (GPT-3.5/4)",
+              "categoria": "ia_ml",
+              "descripcion": "Acceso a modelos de lenguaje avanzados para procesamiento de texto y generación.",
+              "version_sugerida": null,
+              "url_docs": "https://platform.openai.com/docs/api-reference",
+              "por_que": "Se utiliza para interpretar los hallazgos de axe-core y generar explicaciones y sugerencias de corrección en lenguaje natural, adaptadas a un público no experto."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/en/stable/",
+              "por_que": "Para probar la lógica de escaneo, la integración con axe-core y la generación de prompts para la IA."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Escaneo automatizado de URLs para identificar violaciones WCAG.",
+          "Integración con axe-core para detección de problemas de accesibilidad.",
+          "Generación de reportes CLI con violaciones y nivel de severidad.",
+          "Uso de IA para explicar las violaciones y proponer soluciones prácticas.",
+          "Soporte para auditorías básicas de páginas específicas o sitios completos."
+        ],
+        "casos_uso": [
+          "Un desarrollador web ejecuta la CLI en su proyecto local para verificar la accesibilidad antes del despliegue.",
+          "El propietario de una PYME usa la herramienta para obtener un informe rápido y entender qué mejorar en su web.",
+          "La IA sugiere cómo añadir texto alternativo a las imágenes de producto para mejorar la accesibilidad.",
+          "El reporte CLI indica que faltan etiquetas ARIA en un componente de navegación interactivo."
+        ],
+        "reglas_negocio": [
+          "La auditoría se centra en las pautas WCAG 2.1 nivel AA.",
+          "El número de páginas a auditar en modo gratuito está limitado (ej. 10 páginas).",
+          "Las sugerencias de IA deben ser claras y priorizadas por impacto.",
+          "El escaneo no debe sobrecargar el servidor web auditado (rate limiting)."
+        ],
+        "por_que_ia": "La IA (GPT) transforma los códigos de error técnicos de axe-core en explicaciones comprensibles y sugerencias de código o diseño accionables para desarrolladores y gestores de PYMES sin experiencia profunda en accesibilidad.",
+        "cliente_ia_sugerido": "openai",
+        "recursos_externos": [
+          "WCAG 2.1 Guidelines"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos de Python, scripting y manejo de terminal.",
+          "Nociones básicas de HTML, CSS y accesibilidad web.",
+          "API key de OpenAI."
+        ],
+        "riesgos": [
+          "La IA puede generar sugerencias incorrectas o irrelevantes.",
+          "Cobertura limitada de axe-core para todos los escenarios de accesibilidad complejos.",
+          "El escaneo puede ser lento para sitios web grandes o dinámicos.",
+          "Dependencia de la disponibilidad y coste de la API de OpenAI."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-02T10:10:00Z",
+        "hash_unicidad": "ec735198312f42e9"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "36e41dc3674a1224"
+      }
     }
   ],
   "ultimos_hashes": [
-    "f8e7d6c5b4a3f2e1",
-    "a6b7c8d9e0f1a2b3",
-    "b9c0d1e2f3a4b5c6",
     "d3b3c4d5e6f7a8b9",
     "f6e5d4c3b2a1f0e9",
     "d8b0c1e2f3a4b5c6",
@@ -24425,8 +24819,11 @@
     "30fc267cc850b7a2",
     "a0df219f523b1810",
     "8a6672b56c054b88",
-    "084b5c6d9a9dde62"
+    "084b5c6d9a9dde62",
+    "acd2294808c8b740",
+    "faa9869bf55675f8",
+    "ec735198312f42e9"
   ],
-  "total_generados": 175,
-  "fecha_ultima_generacion": "2026-11-20T05:30:37.999694"
+  "total_generados": 178,
+  "fecha_ultima_generacion": "2026-11-20T16:39:01.868628"
 }
