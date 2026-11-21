@@ -24720,12 +24720,465 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "36e41dc3674a1224"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4e5f6",
+        "titulo": "Gestor de Siniestros Agrícolas con Detección de Fraude IA",
+        "descripcion_corta": "App móvil para agricultores que permite registrar siniestros con fotos/vídeos y detectar patrones de fraude mediante IA, agilizando la tramitación de seguros.",
+        "descripcion_detallada": "Plataforma móvil y web para que agricultores reporten siniestros (granizo, plagas). La IA analiza las evidencias multimedia y los datos históricos para identificar posibles fraudes. El objetivo es reducir reclamaciones fraudulentas y acelerar el pago a agricultores honestos.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "mobile",
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "API REST para la gestión de siniestros y la orquestación de la IA.",
+              "version_sugerida": "0.110.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Alto rendimiento asíncrono, validación automática de datos con Pydantic, generación de documentación OpenAPI."
+            },
+            {
+              "nombre": "React Native",
+              "categoria": "framework",
+              "descripcion": "Aplicación móvil multiplataforma para que los agricultores registren siniestros.",
+              "version_sugerida": "0.74.1",
+              "url_docs": "https://reactnative.dev/",
+              "por_que": "Desarrollo rápido de apps móviles nativas para iOS y Android con una única base de código."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "OpenCV",
+              "categoria": "libreria",
+              "descripcion": "Procesamiento de imágenes y vídeos para la extracción de características.",
+              "version_sugerida": "4.9.0",
+              "url_docs": "https://opencv.org/docs/version/",
+              "por_que": "Fundamental para el análisis de las evidencias multimedia, detectando daños y anomalías."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Modelos de Machine Learning para la detección de fraude.",
+              "version_sugerida": "1.4.2",
+              "url_docs": "https://scikit-learn.org/stable/",
+              "por_que": "Proporciona algoritmos eficientes para entrenar modelos de clasificación y detección de anomalías."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos relacional para almacenar información de siniestros, usuarios y metadatos.",
+              "version_sugerida": "16",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Solidez, soporte para tipos de datos complejos (JSONB) y extensiones PostGIS para datos geográficos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Contenerización de la aplicación y sus servicios.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Asegura entornos de desarrollo y producción consistentes y facilita el despliegue."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Detección de Anomalías",
+              "categoria": "ia_ml",
+              "descripcion": "Identificar reclamaciones con características inusuales o inconsistentes respecto a siniestros típicos.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Permite detectar patrones de fraude que podrían pasar desapercibidos en una revisión manual."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para la API y los modelos de IA.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/en/stable/",
+              "por_que": "Facilita la escritura de tests claros, parametrizados y la integración con herramientas de cobertura."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro de siniestros con geolocalización",
+          "Carga de fotos y vídeos como evidencia",
+          "Análisis IA de evidencias para detección de patrones anómalos",
+          "Dashboard web para revisión de siniestros y alertas de fraude",
+          "Notificaciones push a agricultores sobre el estado de su siniestro",
+          "Gestión de usuarios (agricultores, peritos, administradores)"
+        ],
+        "casos_uso": [
+          "Un agricultor reporta daños por granizo en su cultivo de olivos desde su móvil.",
+          "El sistema IA marca la reclamación como sospechosa por inconsistencia entre las fotos y la descripción del evento.",
+          "Un perito revisa manualmente los siniestros marcados por la IA en el dashboard web.",
+          "El administrador configura umbrales de alerta para la detección de fraude.",
+          "Un agricultor recibe una notificación indicando que su siniestro ha sido aprobado."
+        ],
+        "reglas_negocio": [
+          "Los siniestros solo pueden ser registrados por usuarios verificados como agricultores.",
+          "La evidencia multimedia debe cumplir requisitos mínimos de calidad (resolución, duración).",
+          "Las reclamaciones marcadas como 'sospechosas' por la IA requieren revisión humana obligatoria.",
+          "El sistema debe mantener un historial auditable de todas las acciones sobre un siniestro.",
+          "Los peritos solo pueden aprobar o rechazar siniestros, no modificarlos."
+        ],
+        "por_que_ia": "La IA se utiliza para identificar patrones de fraude en las evidencias (fotos, vídeos, descripciones) y datos históricos de siniestros, reduciendo pérdidas para las aseguradoras y agilizando el proceso para los agricultores legítimos.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "API de geolocalización",
+          "Servicios de almacenamiento de archivos (ej. S3 compatible)"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 16,
+        "prerequisitos": [
+          "Conocimientos de desarrollo móvil (React Native)",
+          "Experiencia con desarrollo de APIs REST (Python/FastAPI)",
+          "Fundamentos de Machine Learning y procesamiento de imágenes",
+          "Configuración y despliegue de bases de datos (PostgreSQL)"
+        ],
+        "riesgos": [
+          "Baja calidad de las evidencias multimedia enviadas por los usuarios.",
+          "Dificultad para obtener un dataset suficientemente grande y etiquetado para entrenar el modelo de IA.",
+          "El modelo de IA puede generar falsos positivos (marcar como fraude siniestros legítimos) o falsos negativos (no detectar fraude).",
+          "Problemas de conectividad en zonas rurales para la carga de datos.",
+          "Resistencia al cambio por parte de los agricultores acostumbrados a procesos manuales."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:00:00Z",
+        "hash_unicidad": "0a166b7196075033"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "960cf499ef52c8ca"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f9e8d7c6b5a4",
+        "titulo": "Optimizador de Rutas de Recogida de Muestras Biológicas",
+        "descripcion_corta": "App web y móvil para laboratorios que optimiza las rutas de recogida de muestras biológicas, reduciendo tiempos y costes de desplazamiento.",
+        "descripcion_detallada": "Sistema para clínicas y laboratorios que gestiona la programación de recogidas de muestras biológicas. La aplicación calcula las rutas óptimas para los técnicos basándose en la ubicación de los puntos de recogida, horarios y prioridad de las muestras.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "mobile",
+          "api",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "API backend robusta para la gestión de pacientes, muestras, técnicos y rutas.",
+              "version_sugerida": "10.3.3",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Arquitectura modular, soporte para TypeScript, fácil integración de microservicios y patrones de diseño."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Interfaz web para administradores y personal de laboratorio.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Componentización eficiente, gestión de estado declarativa y gran ecosistema de librerías."
+            },
+            {
+              "nombre": "React Native",
+              "categoria": "framework",
+              "descripcion": "Aplicación móvil para los técnicos de recogida.",
+              "version_sugerida": "0.74.1",
+              "url_docs": "https://reactnative.dev/",
+              "por_que": "Permite desarrollar para iOS y Android con una base de código común, mostrando rutas y actualizando estados."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Google Maps Platform APIs",
+              "categoria": "libreria",
+              "descripcion": "Servicios de geocodificación, cálculo de rutas y visualización de mapas.",
+              "version_sugerida": null,
+              "url_docs": "https://developers.google.com/maps",
+              "por_que": "Proporciona funcionalidades avanzadas y precisas para la optimización de rutas y la visualización geográfica."
+            },
+            {
+              "nombre": "date-fns",
+              "categoria": "libreria",
+              "descripcion": "Manipulación y formateo de fechas y horas.",
+              "version_sugerida": "2.30.0",
+              "url_docs": "https://date-fns.org/",
+              "por_que": "Esencial para gestionar horarios de recogida, ventanas de tiempo y duraciones de trayecto."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "MongoDB",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos NoSQL para almacenar información de pacientes, muestras y logs.",
+              "version_sugerida": "7.0",
+              "url_docs": "https://www.mongodb.com/docs/",
+              "por_que": "Flexibilidad para almacenar datos semi-estructurados, escalabilidad y facilidad de integración con NestJS."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Nginx",
+              "categoria": "infraestructura",
+              "descripcion": "Servidor web y proxy inverso.",
+              "version_sugerida": "1.25.3",
+              "url_docs": "https://nginx.org/en/docs/",
+              "por_que": "Sirve los assets estáticos de la web app, balancea carga y gestiona SSL."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para la aplicación frontend y backend.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Entorno de testing completo, fácil configuración y soporte para mocks."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro de solicitudes de recogida de muestras",
+          "Asignación automática de técnicos basada en proximidad y carga de trabajo",
+          "Optimización de rutas dinámicas (problema del viajante dinámico)",
+          "Seguimiento en tiempo real de la ubicación de los técnicos",
+          "Actualización de estado de recogida (pendiente, en curso, completada)",
+          "Generación de informes de rutas y tiempos de recogida"
+        ],
+        "casos_uso": [
+          "Una clínica solicita la recogida de una muestra de sangre urgente para un paciente.",
+          "El sistema calcula la ruta más eficiente para el técnico más cercano, incluyendo esta recogida.",
+          "El técnico ve la ruta optimizada en su móvil y actualiza el estado al recoger la muestra.",
+          "El laboratorio puede ver en un mapa la ubicación de todos los técnicos y el progreso de las recogidas.",
+          "Un administrador revisa los tiempos medios de recogida por zona geográfica para identificar cuellos de botella."
+        ],
+        "reglas_negocio": [
+          "Las recogidas urgentes tienen prioridad sobre las rutinarias.",
+          "Los técnicos solo pueden ser asignados a recogidas dentro de su zona de cobertura asignada.",
+          "El sistema debe considerar ventanas de tiempo específicas para ciertas muestras (ej. refrigeración).",
+          "Cada recogida debe ser confirmada por el técnico y, opcionalmente, por el punto de origen.",
+          "Los datos de ubicación de los técnicos se registran solo mientras están activos en una ruta asignada."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "API de servicios de mapas (Google Maps, Mapbox)",
+          "Servicio de SMS/Notificaciones push"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 12,
+        "prerequisitos": [
+          "Experiencia con TypeScript y frameworks como NestJS/React",
+          "Conocimientos de desarrollo móvil multiplataforma (React Native)",
+          "Comprensión de algoritmos de optimización de rutas (TSP, VRP)",
+          "Manejo de APIs de terceros (ej. Google Maps)"
+        ],
+        "riesgos": [
+          "La complejidad del algoritmo de optimización de rutas puede ser muy alta en escenarios grandes.",
+          "La precisión de los datos de ubicación GPS en tiempo real puede variar.",
+          "La integración con sistemas de laboratorios existentes puede ser compleja.",
+          "La gestión de la concurrencia de actualizaciones de estado por múltiples técnicos.",
+          "Dependencia de servicios externos de mapas, con posibles costes y limitaciones."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:05:00Z",
+        "hash_unicidad": "9cb9bd1db5ee3cf4"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "960cf499ef52c8ca"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c3b4a5d6e7f8",
+        "titulo": "Plataforma de Gestión de Experiencias de Usuario (UX) en Tiempo Real",
+        "descripcion_corta": "Web app para equipos de producto que captura y analiza interacciones de usuario en tiempo real para identificar puntos de fricción y sugerir mejoras.",
+        "descripcion_detallada": "Herramienta para diseñadores UX y Product Managers que permite registrar y visualizar sesiones de usuario en vivo. Analiza patrones de navegación, clics, scrolls y errores para detectar problemas de usabilidad y proponer optimizaciones de interfaz.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "testing",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "API RESTful de alto rendimiento para la ingesta y procesamiento de eventos de usuario.",
+              "version_sugerida": "1.22.0",
+              "url_docs": "https://gin-gonic.com/docs/",
+              "por_que": "Framework web rápido y ligero, ideal para manejar un gran volumen de eventos en tiempo real."
+            },
+            {
+              "nombre": "Vue.js",
+              "categoria": "framework",
+              "descripcion": "Frontend interactivo para visualizar sesiones de usuario y métricas.",
+              "version_sugerida": "3.4.21",
+              "url_docs": "https://vuejs.org/guide/introduction.html",
+              "por_que": "Progresivo, fácil de integrar, reactivo y con un excelente ecosistema para dashboards complejos."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "WebSockets (gorilla/websocket)",
+              "categoria": "libreria",
+              "descripcion": "Comunicación bidireccional en tiempo real entre el navegador del usuario y el backend.",
+              "version_sugerida": "1.5.1",
+              "url_docs": "https://github.com/gorilla/websocket",
+              "por_que": "Permite la transmisión instantánea de eventos de interacción del usuario y la visualización en vivo."
+            },
+            {
+              "nombre": "ClickHouse Client (go-clickhouse)",
+              "categoria": "libreria",
+              "descripcion": "Cliente para interactuar con la base de datos analítica ClickHouse.",
+              "version_sugerida": "2.16.0",
+              "url_docs": "https://github.com/ClickHouse/clickhouse-go",
+              "por_que": "Optimizado para consultas analíticas rápidas sobre grandes volúmenes de datos de eventos."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "ClickHouse",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos columnar para almacenar y analizar grandes volúmenes de eventos de usuario.",
+              "version_sugerida": "23.8",
+              "url_docs": "https://clickhouse.com/docs/en/",
+              "por_que": "Rendimiento excepcional para análisis de series temporales y eventos, ideal para métricas de UX."
+            },
+            {
+              "nombre": "Redis",
+              "categoria": "base_datos",
+              "descripcion": "Almacenamiento en caché y gestión de sesiones.",
+              "version_sugerida": "7.2",
+              "url_docs": "https://redis.io/docs/",
+              "por_que": "Acelera el acceso a datos frecuentemente consultados y gestiona el estado de las sesiones en tiempo real."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Prometheus",
+              "categoria": "infraestructura",
+              "descripcion": "Monitorización y alertas del sistema.",
+              "version_sugerida": "2.48.0",
+              "url_docs": "https://prometheus.io/docs/introduction/overview/",
+              "por_que": "Recopila métricas detalladas del rendimiento de la API y los servicios, permitiendo detectar cuellos de botella."
+            },
+            {
+              "nombre": "Grafana",
+              "categoria": "infraestructura",
+              "descripcion": "Visualización de métricas y dashboards.",
+              "version_sugerida": "10.3.1",
+              "url_docs": "https://grafana.com/docs/",
+              "por_que": "Crea dashboards intuitivos para monitorizar el rendimiento y el comportamiento del usuario en tiempo real."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Framework de testing nativo de Go.",
+              "version_sugerida": null,
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Integración nativa para tests unitarios y de integración de la API."
+            },
+            {
+              "nombre": "Cypress",
+              "categoria": "testing",
+              "descripcion": "Testing end-to-end para la aplicación web.",
+              "version_sugerida": "13.6.0",
+              "url_docs": "https://www.cypress.io/",
+              "por_que": "Facilita la escritura de tests E2E interactivos y fiables para la interfaz de usuario."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Captura de eventos de usuario (clics, scrolls, entradas, errores) en tiempo real.",
+          "Visualización de sesiones de usuario en vivo (replay).",
+          "Análisis de patrones de navegación y embudos de conversión.",
+          "Identificación automática de errores de JavaScript en el frontend.",
+          "Dashboard interactivo con métricas clave de UX (tasa de rebote, tiempo en página, flujo de usuario).",
+          "Segmentación de usuarios basada en comportamiento y atributos."
+        ],
+        "casos_uso": [
+          "Un Product Manager observa una sesión en vivo y detecta que varios usuarios abandonan el carrito de compra en el mismo paso.",
+          "El equipo de UX utiliza los datos históricos para identificar que un botón importante tiene una tasa de clics muy baja.",
+          "Se detectan errores de JavaScript recurrentes en una página específica, alertando al equipo de desarrollo.",
+          "Se analiza el flujo de usuarios que completan un formulario para optimizar los campos y reducir la fricción.",
+          "Se comparan métricas de UX entre diferentes segmentos de usuarios (ej. nuevos vs. recurrentes)."
+        ],
+        "reglas_negocio": [
+          "La captura de eventos debe ser no intrusiva y cumplir con normativas de privacidad (GDPR, CCPA).",
+          "Los datos de sesiones solo se almacenan durante un periodo definido (ej. 30 días).",
+          "Los errores de JavaScript solo se registran si ocurren más de X veces en un periodo Y.",
+          "Los usuarios deben ser informados sobre la monitorización de su actividad (aviso de cookies/privacidad).",
+          "El acceso a las sesiones en vivo y datos históricos está restringido por roles de usuario."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Servicio de notificaciones (ej. Sentry para errores JS)",
+          "Herramientas de análisis web (Google Analytics - como referencia)"
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 24,
+        "prerequisitos": [
+          "Experiencia sólida en Go y sistemas distribuidos.",
+          "Dominio de frameworks frontend como Vue.js.",
+          "Conocimientos avanzados de bases de datos analíticas (ClickHouse).",
+          "Experiencia con WebSockets y arquitecturas en tiempo real.",
+          "Comprensión de principios de UX y análisis de datos de usuario."
+        ],
+        "riesgos": [
+          "Escalabilidad: manejar millones de eventos por minuto puede ser un desafío.",
+          "Privacidad: asegurar el cumplimiento normativo y la anonimización de datos es crítico.",
+          "Latencia: mantener la visualización en tiempo real con baja latencia.",
+          "Complejidad de la infraestructura: ClickHouse, Redis, Prometheus, Grafana configuran un stack complejo.",
+          "Integración con diferentes sitios web/aplicaciones puede requerir adaptaciones significativas del script de captura."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:10:00Z",
+        "hash_unicidad": "df72647e49ac63bc"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "960cf499ef52c8ca"
+      }
     }
   ],
   "ultimos_hashes": [
-    "d3b3c4d5e6f7a8b9",
-    "f6e5d4c3b2a1f0e9",
-    "d8b0c1e2f3a4b5c6",
     "b0c1d2e3f4a5b6c7",
     "c7b6a5f4e3d2c1b0",
     "e8d7c6b5a4f3e2d1",
@@ -24822,8 +25275,11 @@
     "084b5c6d9a9dde62",
     "acd2294808c8b740",
     "faa9869bf55675f8",
-    "ec735198312f42e9"
+    "ec735198312f42e9",
+    "0a166b7196075033",
+    "9cb9bd1db5ee3cf4",
+    "df72647e49ac63bc"
   ],
-  "total_generados": 178,
-  "fecha_ultima_generacion": "2026-11-20T16:39:01.868628"
+  "total_generados": 181,
+  "fecha_ultima_generacion": "2026-11-21T01:02:54.103631"
 }
