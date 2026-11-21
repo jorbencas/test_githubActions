@@ -25176,12 +25176,417 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "960cf499ef52c8ca"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f4b1c8d0",
+        "titulo": "Optimizador de Consumo de Fertilizantes para Agricultores Locales",
+        "descripcion_corta": "App móvil para agricultores que recomienda dosis de fertilizantes basadas en análisis de suelo y clima, reduciendo costos y impacto ambiental.",
+        "descripcion_detallada": "Plataforma móvil que permite a agricultores registrar análisis de suelo (manual o por sensor) y datos climáticos. Utiliza modelos de IA para recomendar las dosis óptimas de fertilizantes, mejorando el rendimiento del cultivo y minimizando el desperdicio y la contaminación. El objetivo es democratizar el acceso a prácticas de agricultura de precisión.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "mobile",
+          "api",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Backend API para servir las predicciones y gestionar datos.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Alto rendimiento asíncrono, validación automática de datos con Pydantic, y generación de documentación OpenAPI."
+            },
+            {
+              "nombre": "React Native",
+              "categoria": "framework",
+              "descripcion": "Aplicación móvil multiplataforma para Android e iOS.",
+              "version_sugerida": "0.72.0",
+              "url_docs": "https://reactnative.dev/",
+              "por_que": "Permite un desarrollo rápido y unificado para iOS y Android con una sola base de código."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Manipulación y análisis de datos de suelo y clima.",
+              "version_sugerida": "2.1.0",
+              "url_docs": "https://pandas.pydata.org/",
+              "por_que": "Esencial para la limpieza, transformación y análisis exploratorio de los datos agrícolas."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Modelos de machine learning para predicción.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://scikit-learn.org/",
+              "por_que": "Proporciona algoritmos robustos y fáciles de usar para la regresión y clasificación necesarias en la recomendación."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Almacenamiento persistente de datos de usuarios, parcelas, análisis y predicciones.",
+              "version_sugerida": "15.0",
+              "url_docs": "https://www.postgresql.org/",
+              "por_que": "Robusto para datos relacionales, soporta tipos de datos geoespaciales (PostGIS) si se requiere, y escalable."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Contenedorización de la API y la base de datos para desarrollo y despliegue.",
+              "version_sugerida": "24.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura entornos consistentes, facilita la gestión de dependencias y simplifica el despliegue."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para la API y lógica de negocio.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Potente sistema de fixtures y plugins, facilita la escritura de tests unitarios y de integración."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro de análisis de suelo y datos climáticos",
+          "Recomendación de dosis de fertilizantes basada en IA",
+          "Visualización histórica de datos y predicciones",
+          "Notificaciones personalizadas sobre condiciones óptimas",
+          "Sincronización de datos con el backend"
+        ],
+        "casos_uso": [
+          "Un agricultor consulta la app antes de aplicar fertilizante.",
+          "La app sugiere una mezcla específica de NPK para un cultivo y tipo de suelo.",
+          "El agricultor registra los resultados de un nuevo análisis de suelo.",
+          "La app alerta sobre cambios climáticos que afectan la absorción de nutrientes.",
+          "Un grupo de agricultores comparte datos anónimos para mejorar modelos."
+        ],
+        "reglas_negocio": [
+          "Las recomendaciones deben considerar los límites legales de aplicación de fertilizantes.",
+          "Los datos de suelo deben validarse antes de usarse en predicciones.",
+          "Los modelos de IA se reentrenarán trimestralmente con nuevos datos.",
+          "La privacidad de los datos del agricultor es primordial.",
+          "Las dosis recomendadas deben ser claras y fáciles de interpretar."
+        ],
+        "por_que_ia": "La IA predice la respuesta del cultivo a diferentes dosis de fertilizante basándose en complejos patrones de suelo, clima y tipo de cultivo, lo cual es difícil de modelar con reglas fijas.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "Datos históricos de clima local",
+          "Bases de datos de tipos de suelo y cultivos"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos de Python, React Native, bases de datos SQL.",
+          "Comprensión básica de machine learning y agricultura."
+        ],
+        "riesgos": [
+          "Precisión del modelo de IA puede variar con datos insuficientes o de baja calidad.",
+          "Adopción por parte de agricultores con menor alfabetización digital.",
+          "Integración con sensores de suelo puede ser compleja.",
+          "Mantenimiento de la infraestructura de datos y modelos.",
+          "Cambios regulatorios en el uso de fertilizantes."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f92d0215ad74fcaa"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "c830f068035a6d83"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "e9f8d7c6",
+        "titulo": "Gestor de Eventos Comunitarios Offline-First",
+        "descripcion_corta": "App móvil para organizadores de eventos pequeños que funciona sin conexión para registro y consulta de asistentes.",
+        "descripcion_detallada": "Aplicación móvil que permite a organizadores de eventos locales (ferias, mercados, talleres) gestionar registros de asistentes y consulta de información del evento, incluso en lugares con conectividad limitada. Los datos se sincronizan automáticamente cuando la conexión se restablece.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "mobile",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "Ionic",
+              "categoria": "framework",
+              "descripcion": "Framework para construir la aplicación móvil multiplataforma.",
+              "version_sugerida": "7.0.0",
+              "url_docs": "https://ionicframework.com/",
+              "por_que": "Permite crear aplicaciones nativas para iOS y Android usando tecnologías web (Angular/React/Vue) y soporta offline."
+            },
+            {
+              "nombre": "Express.js",
+              "categoria": "framework",
+              "descripcion": "API RESTful para la sincronización de datos y gestión de eventos.",
+              "version_sugerida": "4.18.2",
+              "url_docs": "https://expressjs.com/",
+              "por_que": "Framework minimalista y flexible para Node.js, ideal para crear APIs rápidas."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "LocalForage",
+              "categoria": "libreria",
+              "descripcion": "Abstracción para almacenamiento local tipo IndexedDB/WebSQL/LocalStorage.",
+              "version_sugerida": "1.10.0",
+              "url_docs": "https://localforage.github.io/",
+              "por_que": "Facilita la implementación del patrón offline-first, gestionando la persistencia de datos en el cliente."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "SQLite (vía Capacitor/Cordova)",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos local en el dispositivo móvil para persistencia offline.",
+              "version_sugerida": "3.41.0",
+              "url_docs": "https://www.sqlite.org/",
+              "por_que": "Ligera, robusta y estándar para bases de datos embebidas en aplicaciones móviles."
+            },
+            {
+              "nombre": "MongoDB",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos NoSQL para el backend de la API.",
+              "version_sugerida": "7.0",
+              "url_docs": "https://www.mongodb.com/",
+              "por_que": "Flexibilidad para almacenar datos de eventos y asistentes, con esquemas que pueden evolucionar."
+            }
+          ],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para la aplicación móvil y la API.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Fácil de configurar, soporta testing de React, y tiene buenas capacidades para mocking."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y edición de eventos locales",
+          "Registro de asistentes sin conexión a internet",
+          "Consulta offline de lista de asistentes y detalles del evento",
+          "Sincronización automática de datos al recuperar conexión",
+          "Gestión de múltiples eventos por organizador"
+        ],
+        "casos_uso": [
+          "Un organizador de mercado local registra asistentes en la entrada sin depender de WiFi.",
+          "Un asistente consulta la hora y lugar de una charla en su móvil offline.",
+          "Al volver a zona de cobertura, los nuevos registros se suben al servidor.",
+          "El organizador puede ver el aforo total del evento desde el backend.",
+          "Se pueden descargar listas de asistentes previas al evento."
+        ],
+        "reglas_negocio": [
+          "Los datos de asistentes registrados offline deben tener prioridad en la sincronización.",
+          "Los eventos deben poder configurarse como públicos o privados.",
+          "La capacidad máxima de asistentes por evento es configurable.",
+          "La app debe notificar al usuario sobre el estado de la sincronización.",
+          "Los datos del evento se cachean localmente al menos 7 días."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 3,
+        "prerequisitos": [
+          "Conocimientos de TypeScript, Ionic/Capacitor, Node.js.",
+          "Comprensión de patrones de aplicaciones offline-first."
+        ],
+        "riesgos": [
+          "Conflictos de datos durante la sincronización si varios dispositivos modifican lo mismo.",
+          "Gestión de la persistencia de datos en el cliente puede ser compleja.",
+          "Limitaciones de rendimiento en dispositivos de gama baja.",
+          "Aceptación por parte de organizadores no técnicos.",
+          "Seguridad de los datos transmitidos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:01:00Z",
+        "hash_unicidad": "9b084fc1756a4784"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "c830f068035a6d83"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c5d6e7f8",
+        "titulo": "Sistema de Control de Calidad de Manufactura con Visión por Computadora",
+        "descripcion_corta": "Solución de escritorio para inspección automática de piezas en línea de producción usando cámaras y IA.",
+        "descripcion_detallada": "Aplicación de escritorio que captura imágenes de piezas durante la manufactura, las analiza mediante modelos de visión por computadora para detectar defectos y las clasifica. Las piezas defectuosas se marcan o desvían automáticamente, mejorando la eficiencia y reduciendo errores humanos.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "desktop",
+          "api",
+          "ia_ml",
+          "testing"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "PyQt / PySide",
+              "categoria": "framework",
+              "descripcion": "Interfaz gráfica de usuario para control y visualización.",
+              "version_sugerida": "6.5.0",
+              "url_docs": "https://www.qt.io/product/development-tools",
+              "por_que": "Permite crear interfaces de usuario robustas y multiplataforma para aplicaciones de escritorio complejas."
+            },
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "API para servir modelos de IA y gestionar la comunicación con sistemas de control de planta.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Alto rendimiento para inferencia de modelos y fácil integración con sistemas externos."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "OpenCV",
+              "categoria": "libreria",
+              "descripcion": "Procesamiento de imágenes y visión por computadora.",
+              "version_sugerida": "4.8.0",
+              "url_docs": "https://opencv.org/",
+              "por_que": "Estándar de facto para manipulación de imágenes, detección de bordes, contornos y características."
+            },
+            {
+              "nombre": "TensorFlow / PyTorch",
+              "categoria": "libreria",
+              "descripcion": "Frameworks para entrenamiento y despliegue de modelos de deep learning.",
+              "version_sugerida": "2.13.0 / 2.13.0",
+              "url_docs": "https://www.tensorflow.org/%20/%20https://pytorch.org/",
+              "por_que": "Permiten construir y entrenar redes neuronales convolucionales (CNNs) para detección y clasificación de defectos."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "InfluxDB",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos Time Series para almacenar métricas de producción y calidad.",
+              "version_sugerida": "2.7",
+              "url_docs": "https://www.influxdata.com/",
+              "por_que": "Optimizado para el almacenamiento y consulta de datos de series temporales, ideal para monitoreo de producción."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "NVIDIA CUDA / cuDNN",
+              "categoria": "infraestructura",
+              "descripcion": "Aceleración por GPU para entrenamiento e inferencia de modelos de deep learning.",
+              "version_sugerida": "12.2 / 8.9",
+              "url_docs": "https://developer.nvidia.com/cuda-toolkit",
+              "por_que": "Fundamental para reducir drásticamente los tiempos de procesamiento en tareas de visión por computadora."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "CNNs (ej. ResNet, YOLO)",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos de Deep Learning para detección y clasificación de defectos.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Eficaces para aprender patrones complejos en imágenes y clasificar diferentes tipos de defectos."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Testing de la API, lógica de procesamiento de imágenes y modelos.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite la parametrización de tests para diferentes tipos de defectos y escenarios de imagen."
+            },
+            {
+              "nombre": "PyAutoGUI",
+              "categoria": "testing",
+              "descripcion": "Automatización de pruebas de la interfaz gráfica de usuario.",
+              "version_sugerida": "0.9.54",
+              "url_docs": "https://pyautogui.org/",
+              "por_que": "Útil para simular interacciones del usuario con la GUI y verificar flujos de trabajo."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Captura de imágenes en tiempo real desde cámaras industriales",
+          "Detección automática de defectos (rasguños, grietas, deformaciones)",
+          "Clasificación de defectos por tipo y severidad",
+          "Integración con sistemas de control para desvío de piezas",
+          "Dashboard de métricas de calidad y rendimiento"
+        ],
+        "casos_uso": [
+          "Una pieza defectuosa es identificada y desviada automáticamente de la línea de producción.",
+          "El operario visualiza en la GUI el tipo de defecto detectado y la imagen asociada.",
+          "Se generan alertas cuando la tasa de defectos supera un umbral predefinido.",
+          "Historial de inspecciones para análisis de tendencias de calidad.",
+          "El sistema se reentrena con nuevas imágenes de defectos para mejorar precisión."
+        ],
+        "reglas_negocio": [
+          "La tasa de falsos positivos debe ser inferior al 1%.",
+          "La tasa de falsos negativos debe ser inferior al 0.5%.",
+          "El tiempo de procesamiento por pieza no debe exceder los 500ms.",
+          "Los datos de inspección deben ser inmutables y auditables.",
+          "Se requiere calibración periódica de las cámaras y el sistema."
+        ],
+        "por_que_ia": "La visión por computadora con IA (CNNs) es esencial para identificar patrones complejos y sutiles en las imágenes de las piezas que serían imposibles de detectar mediante reglas de procesamiento de imágenes tradicionales o inspección manual.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "Imágenes de piezas con y sin defectos",
+          "Especificaciones de calidad del producto"
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 10,
+        "prerequisitos": [
+          "Experiencia en Python, desarrollo de escritorio (PyQt/PySide), visión por computadora (OpenCV).",
+          "Conocimientos sólidos de deep learning y frameworks como TensorFlow/PyTorch.",
+          "Comprensión de sistemas de control industrial."
+        ],
+        "riesgos": [
+          "Variabilidad en iluminación y oclusión en el entorno de producción.",
+          "Necesidad de grandes datasets etiquetados para entrenar modelos robustos.",
+          "Integración con hardware de cámaras y sistemas de control específicos.",
+          "Mantenimiento y reentrenamiento continuo de los modelos de IA.",
+          "Costos elevados de hardware (GPUs) y cámaras de alta resolución."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:02:00Z",
+        "hash_unicidad": "c9405bc8c0b68143"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "c830f068035a6d83"
+      }
     }
   ],
   "ultimos_hashes": [
-    "b0c1d2e3f4a5b6c7",
-    "c7b6a5f4e3d2c1b0",
-    "e8d7c6b5a4f3e2d1",
     "e3c8b7a2f1d0e9c8",
     "f9a8b7c6d5e4f3a2",
     "c2c8b1a4d3e5f7a9",
@@ -25278,8 +25683,11 @@
     "ec735198312f42e9",
     "0a166b7196075033",
     "9cb9bd1db5ee3cf4",
-    "df72647e49ac63bc"
+    "df72647e49ac63bc",
+    "f92d0215ad74fcaa",
+    "9b084fc1756a4784",
+    "c9405bc8c0b68143"
   ],
-  "total_generados": 181,
-  "fecha_ultima_generacion": "2026-11-21T01:02:54.103631"
+  "total_generados": 184,
+  "fecha_ultima_generacion": "2026-11-21T21:25:25.407431"
 }
