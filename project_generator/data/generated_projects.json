@@ -26408,12 +26408,438 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "0681d45657800ab1"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f4a3b2c1",
+        "titulo": "Sistema de Gestión de Muestras de Suelo para Agricultura de Precisión",
+        "descripcion_corta": "App móvil offline para agricultores que registra muestras de suelo, fotos y ubicaciones; sincroniza datos al tener conexión, optimizando el análisis y la fertilización.",
+        "descripcion_detallada": "Permite a los agricultores registrar muestras de suelo en campo, capturando fotos, notas y coordenadas GPS. Funciona offline y sincroniza automáticamente cuando hay conexión. Facilita la toma de decisiones sobre fertilizantes y tratamientos, mejorando el rendimiento de los cultivos.",
+        "nivel": "junior",
+        "scope": "proyecto",
+        "tipo": [
+          "mobile",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "React Native",
+              "categoria": "framework",
+              "descripcion": "Desarrollo de aplicaciones móviles nativas para iOS y Android con una única base de código.",
+              "version_sugerida": "0.73",
+              "url_docs": "https://reactnative.dev/",
+              "por_que": "Permite un desarrollo rápido de la app móvil multi-plataforma, ideal para el alcance junior y la necesidad de offline."
+            },
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python.",
+              "version_sugerida": "0.110",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Proporciona una API robusta y validada para la sincronización de datos desde la app móvil, con generación automática de documentación OpenAPI."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "WatermelonDB",
+              "categoria": "libreria",
+              "descripcion": "Base de datos reactiva y asíncrona para aplicaciones reactivas, con soporte offline.",
+              "version_sugerida": "0.26",
+              "url_docs": "https://nozbe.github.io/WatermelonDB/",
+              "por_que": "Fundamental para la funcionalidad offline de la app móvil, permitiendo almacenar y sincronizar datos eficientemente."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en anotaciones de tipo de Python.",
+              "version_sugerida": "2.7",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Asegura la integridad de los datos recibidos por la API desde la app móvil, validando esquemas de forma automática."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_de_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional de código abierto.",
+              "version_sugerida": "16",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Almacena de forma robusta los datos de las muestras de suelo y metadatos, permitiendo consultas complejas para análisis posteriores."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Facilita el despliegue consistente de la API y la base de datos en cualquier entorno."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para JavaScript y TypeScript.",
+              "version_sugerida": "29.7",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Permite escribir tests unitarios y de integración para la lógica de la app móvil y la API."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro de muestras de suelo con fotos y GPS",
+          "Modo de operación offline con sincronización automática",
+          "Visualización de muestras en mapa",
+          "Exportación de datos de muestras a CSV",
+          "Gestión de perfiles de agricultores"
+        ],
+        "casos_uso": [
+          "Un agricultor toma una muestra en una zona sin cobertura móvil y la guarda para sincronizarla más tarde.",
+          "Un técnico agrícola consulta las muestras recientes y sus ubicaciones en un mapa.",
+          "El agricultor exporta los datos de las muestras para analizarlos con herramientas externas.",
+          "El técnico agrícola revisa las fotos adjuntas a las muestras para evaluar el estado del suelo.",
+          "Varios agricultores de una cooperativa usan la app, sincronizando sus datos a la misma API."
+        ],
+        "reglas_negocio": [
+          "Las muestras solo se pueden registrar si el GPS está activado.",
+          "La sincronización requiere conexión a internet.",
+          "Los datos de muestra deben incluir al menos una foto o una nota.",
+          "Los datos sincronizados se marcan como 'procesados' en el dispositivo local.",
+          "Solo los usuarios autenticados pueden subir y ver sus muestras."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "APIs de geolocalización del dispositivo móvil",
+          "Servicios de almacenamiento en la nube para backups (opcional)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de TypeScript y React Native",
+          "Comprensión de bases de datos relacionales y APIs REST",
+          "Experiencia básica con Docker"
+        ],
+        "riesgos": [
+          "Problemas de sincronización de datos complejos en casos de red intermitente.",
+          "Manejo de permisos de acceso a la cámara y GPS en diferentes versiones de SO móvil.",
+          "Escalabilidad de la base de datos PostgreSQL ante un gran número de muestras.",
+          "Validación robusta de datos de entrada para evitar corrupción."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "f184c227d5eb7bc5"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "76b015ce18847d5c"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "g5h6i7j8",
+        "titulo": "Sistema de Gestión de Citas y Flujos de Pacientes para Clínicas Pequeñas",
+        "descripcion_corta": "Web app para clínicas pequeñas que optimiza la agenda de citas y gestiona el flujo de pacientes, reduciendo tiempos de espera y mejorando la experiencia.",
+        "descripcion_detallada": "Facilita la programación de citas, notifica a los pacientes sobre su turno y estima tiempos de espera. Permite al personal clínico gestionar el estado de cada paciente (espera, en consulta, finalizado), optimizando la asignación de recursos y minimizando cuellos de botella.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web de alto rendimiento escrito en Go.",
+              "version_sugerida": "1.22",
+              "url_docs": "https://gin-gonic.com/",
+              "por_que": "Proporciona una base robusta y rápida para la API del sistema, manejando eficientemente las solicitudes concurrentes de citas y estados de pacientes."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "GORM",
+              "categoria": "libreria",
+              "descripcion": "ORM (Object-Relational Mapper) para Go con soporte para múltiples bases de datos.",
+              "version_sugerida": "2.7",
+              "url_docs": "https://gorm.io/",
+              "por_que": "Simplifica la interacción con la base de datos PostgreSQL, permitiendo mapear modelos de Go a tablas de base de datos de forma intuitiva."
+            },
+            {
+              "nombre": "WebSockets (gorilla/websocket)",
+              "categoria": "libreria",
+              "descripcion": "Implementación de WebSockets para Go.",
+              "version_sugerida": "1.5",
+              "url_docs": "https://github.com/gorilla/websocket",
+              "por_que": "Permite la comunicación en tiempo real entre el backend y el frontend para notificar cambios en el estado de las citas y tiempos de espera."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_de_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional de código abierto.",
+              "version_sugerida": "16",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Almacena de forma confiable la información de pacientes, citas, personal médico y estados, asegurando la integridad de los datos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Asegura un entorno de desarrollo y producción consistente para la API y la base de datos."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Testify",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Go con aserciones enriquecidas.",
+              "version_sugerida": "1.10",
+              "url_docs": "https://github.com/stretchr/testify",
+              "por_que": "Facilita la escritura de tests unitarios y de integración robustos para la lógica de negocio de la API."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Programación y gestión de citas médicas.",
+          "Notificaciones push/SMS a pacientes sobre su turno.",
+          "Visualización del flujo de pacientes en tiempo real.",
+          "Estimación de tiempos de espera dinámicos.",
+          "Gestión de disponibilidad del personal médico."
+        ],
+        "casos_uso": [
+          "Una recepcionista programa una cita para un paciente, que recibe una confirmación por SMS.",
+          "Un paciente en la sala de espera ve en una pantalla que su turno está por comenzar.",
+          "El personal médico actualiza el estado de un paciente (ej. 'en consulta') y la pantalla de espera se actualiza.",
+          "La clínica ajusta la agenda al final del día para compensar retrasos.",
+          "Se genera un informe de tiempos de espera promedio por médico al final del mes."
+        ],
+        "reglas_negocio": [
+          "Las citas solo pueden programarse dentro del horario laboral del médico.",
+          "Los pacientes deben ser notificados al menos 1 hora antes de su cita.",
+          "El sistema debe evitar la sobre-programación de citas que exceda la capacidad del médico.",
+          "El estado de un paciente solo puede transicionar de 'espera' a 'en consulta' o 'cancelado'.",
+          "Las citas canceladas con menos de 24h de antelación incurren en una penalización (opcional)."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Servicio de envío de SMS (ej. Twilio)",
+          "Servicio de envío de push notifications (ej. Firebase Cloud Messaging)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos de Go y desarrollo de APIs REST",
+          "Experiencia con WebSockets para comunicación en tiempo real",
+          "Comprensión de bases de datos relacionales y ORMs",
+          "Experiencia con Docker"
+        ],
+        "riesgos": [
+          "Complejidad en la gestión de concurrencia para las actualizaciones de estado de pacientes.",
+          "Integración y fiabilidad de los servicios de notificación (SMS, Push).",
+          "Manejo de zonas horarias si la clínica opera en diferentes ubicaciones.",
+          "Escalabilidad de la base de datos ante un gran volumen de citas y pacientes."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:01:00Z",
+        "hash_unicidad": "0b6feaed6169f473"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "76b015ce18847d5c"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "k9l0m1n2",
+        "titulo": "Optimizador de Consumo de Energía para Edificios Inteligentes (IoT)",
+        "descripcion_corta": "API que ingiere datos de sensores IoT de edificios y aplica modelos para optimizar el consumo de energía, reduciendo costes y huella de carbono.",
+        "descripcion_detallada": "Una API que recibe datos de consumo energético y variables ambientales (temperatura, ocupación) de sensores IoT. Utiliza modelos predictivos para ajustar automáticamente sistemas de climatización y iluminación, logrando ahorros significativos y reduciendo el impacto ambiental.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "api",
+          "datos",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python.",
+              "version_sugerida": "0.110",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Permite crear una API de alto rendimiento para la ingesta de datos de sensores y la exposición de recomendaciones de optimización."
+            },
+            {
+              "nombre": "Pola.rs (Polars)",
+              "categoria": "framework",
+              "descripcion": "Framework de DataFrames en memoria con alto rendimiento escrito en Rust.",
+              "version_sugerida": "0.20",
+              "url_docs": "https://pola.rs/",
+              "por_que": "Procesa grandes volúmenes de datos de series temporales de sensores de manera eficiente para el entrenamiento y la inferencia de modelos."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Librería para manipulación y análisis de datos.",
+              "version_sugerida": "2.1",
+              "url_docs": "https://pandas.pydata.org/",
+              "por_que": "Utilizada para la preprocesamiento de datos y la exploración inicial antes del entrenamiento de modelos."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Librería para aprendizaje automático en Python.",
+              "version_sugerida": "1.3",
+              "url_docs": "https://scikit-learn.org/",
+              "por_que": "Proporciona algoritmos estándar para modelos de predicción de consumo y optimización."
+            },
+            {
+              "nombre": "MLflow",
+              "categoria": "libreria",
+              "descripcion": "Plataforma para gestionar el ciclo de vida del machine learning.",
+              "version_sugerida": "2.9",
+              "url_docs": "https://mlflow.org/",
+              "por_que": "Esencial para rastrear experimentos, gestionar modelos y desplegar el modelo de optimización de forma reproducible."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "TimescaleDB",
+              "categoria": "base_de_datos",
+              "descripcion": "Extensión de PostgreSQL para series temporales.",
+              "version_sugerida": "2.12",
+              "url_docs": "https://docs.timescale.com/",
+              "por_que": "Optimizado para almacenar y consultar eficientemente grandes volúmenes de datos de series temporales de sensores IoT."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Permite empaquetar la API, los modelos de ML y la base de datos para un despliegue y escalado consistentes."
+            },
+            {
+              "nombre": "Kubernetes",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de orquestación de contenedores.",
+              "version_sugerida": "1.27",
+              "url_docs": "https://kubernetes.io/",
+              "por_que": "Gestiona el despliegue, escalado y la alta disponibilidad de la API y los servicios de ML en producción."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Predicción de Series Temporales",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos para predecir valores futuros basados en datos históricos.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Permite predecir el consumo de energía y las condiciones ambientales para optimizar proactivamente los sistemas del edificio."
+            },
+            {
+              "nombre": "Optimización Basada en Restricciones",
+              "categoria": "ia_ml",
+              "descripcion": "Técnicas para encontrar la mejor solución dadas ciertas limitaciones.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Ajusta los parámetros de climatización e iluminación respetando el confort de los ocupantes y los límites operativos."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir tests unitarios para la API, tests de integración para el pipeline de datos y tests para los modelos de ML."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Ingesta de datos de sensores IoT en tiempo real.",
+          "Almacenamiento eficiente de series temporales.",
+          "Modelos predictivos de consumo energético y ocupación.",
+          "API para obtener recomendaciones de optimización.",
+          "Integración con sistemas de control de edificios (BMS)."
+        ],
+        "casos_uso": [
+          "La API recibe datos de temperatura y consumo eléctrico de un sensor en una oficina.",
+          "El modelo predictivo estima el consumo futuro basado en datos históricos y la previsión meteorológica.",
+          "El sistema envía comandos a la API del BMS para ajustar el termostato y las luces.",
+          "Un gestor de instalaciones revisa el ahorro energético logrado a través de un dashboard.",
+          "Se detectan patrones de consumo anómalos que podrían indicar un fallo en un equipo."
+        ],
+        "reglas_negocio": [
+          "Las recomendaciones de optimización deben mantener la temperatura interior dentro de un rango confortable (ej. 20-24°C).",
+          "El sistema solo puede ajustar sistemas que estén conectados y sean controlables vía BMS.",
+          "Los datos de sensores con timestamps fuera de rango deben ser descartados.",
+          "La frecuencia de ingesta de datos de cada sensor es configurable.",
+          "Se debe mantener un log detallado de todas las acciones de ajuste realizadas."
+        ],
+        "por_que_ia": "La IA es crucial para predecir patrones de consumo energético y variables ambientales, permitiendo realizar ajustes proactivos y optimizar el uso de recursos antes de que ocurran picos de demanda, lo cual es imposible con lógica determinista simple.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "APIs de proveedores de IoT para ingesta de datos (ej. MQTT, CoAP).",
+          "APIs de sistemas de gestión de edificios (BMS) para control de actuadores.",
+          "Servicios de predicción meteorológica."
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 12,
+        "prerequisitos": [
+          "Experiencia sólida en Python, FastAPI y ML.",
+          "Conocimientos profundos de series temporales y modelado predictivo.",
+          "Experiencia con bases de datos de series temporales (TimescaleDB).",
+          "Experiencia en despliegue y orquestación de aplicaciones (Docker, Kubernetes)."
+        ],
+        "riesgos": [
+          "Calidad y fiabilidad de los datos de los sensores IoT.",
+          "Complejidad en la integración con diversos sistemas BMS propietarios.",
+          "Precisión de los modelos predictivos ante cambios inesperados en el uso del edificio.",
+          "Escalabilidad de la infraestructura para manejar grandes volúmenes de datos en tiempo real.",
+          "Seguridad en la transmisión y almacenamiento de datos sensibles de consumo."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:02:00Z",
+        "hash_unicidad": "2ec433e05833fede"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "76b015ce18847d5c"
+      }
     }
   ],
   "ultimos_hashes": [
-    "b8a1d3e5f7c9a0b2",
-    "e0f2a4c6b8d1e3f5",
-    "c1a0e7b5d9f3c8a2",
     "a1b2c3d4e5f67890",
     "b2c3d4e5f6789012",
     "c3d4e5f678901234",
@@ -26510,8 +26936,11 @@
     "103ce884978855c7",
     "7c42617a24bc1124",
     "214807840a22d57a",
-    "ad3b5ba443047a4a"
+    "ad3b5ba443047a4a",
+    "f184c227d5eb7bc5",
+    "0b6feaed6169f473",
+    "2ec433e05833fede"
   ],
-  "total_generados": 190,
-  "fecha_ultima_generacion": "2026-11-22T15:52:38.511267"
+  "total_generados": 193,
+  "fecha_ultima_generacion": "2026-11-22T21:29:12.368698"
 }
