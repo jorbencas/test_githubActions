@@ -25996,12 +25996,421 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "d211be7a6d93ecc1"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4",
+        "titulo": "Gestor de Mantenimiento Predictivo para Maquinaria Textil",
+        "descripcion_corta": "Web app para talleres textiles que predice fallos en máquinas (telares, hiladoras) basándose en vibración y temperatura; reduce paradas no planificadas.",
+        "descripcion_detallada": "Plataforma web que integra datos de sensores (vibración, temperatura) de maquinaria textil para predecir fallos inminentes. El usuario (gerente de taller) recibe alertas tempranas para programar mantenimiento, minimizando paradas de producción y costes. El flujo principal es la ingesta de datos, el procesamiento de series temporales para detectar anomalías y la notificación al usuario.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "API REST y web para la ingesta de datos y presentación de resultados.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Alto rendimiento asíncrono para ingesta de datos y validación automática de esquemas con Pydantic."
+            },
+            {
+              "nombre": "Streamlit",
+              "categoria": "framework",
+              "descripcion": "Interfaz web interactiva para visualización de datos y alertas.",
+              "version_sugerida": "1.28.0",
+              "url_docs": "https://docs.streamlit.io/",
+              "por_que": "Desarrollo rápido de dashboards interactivos sin necesidad de frameworks frontend complejos."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Manipulación y análisis de datos de series temporales.",
+              "version_sugerida": "2.1.0",
+              "url_docs": "https://pandas.pydata.org/docs/",
+              "por_que": "Estructuras de datos eficientes (DataFrame) y herramientas de análisis para series temporales."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Modelos de machine learning para detección de anomalías.",
+              "version_sugerida": "1.3.0",
+              "url_docs": "https://scikit-learn.org/stable/",
+              "por_que": "Algoritmos robustos y fáciles de usar para la detección de patrones anómalos en los datos de sensores."
+            },
+            {
+              "nombre": "InfluxDB Client",
+              "categoria": "libreria",
+              "descripcion": "Cliente para interactuar con la base de datos de series temporales.",
+              "version_sugerida": "null",
+              "url_docs": "https://github.com/influxdata/influxdb-client-python",
+              "por_que": "Conexión eficiente y consulta de datos históricos y en tiempo real desde InfluxDB."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "InfluxDB",
+              "categoria": "bases_datos",
+              "descripcion": "Base de datos optimizada para series temporales.",
+              "version_sugerida": "2.7.0",
+              "url_docs": "https://docs.influxdata.com/",
+              "por_que": "Almacenamiento y consulta eficientes de grandes volúmenes de datos de sensores con marcas de tiempo."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Contenerización de la aplicación y sus dependencias.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura un entorno de ejecución consistente y facilita el despliegue y la gestión."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests unitarios y de integración con fixtures y parametrización."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Ingesta de datos de sensores (vibración, temperatura) vía API.",
+          "Almacenamiento y consulta eficiente de series temporales.",
+          "Detección de anomalías en patrones de datos para predecir fallos.",
+          "Generación de alertas personalizables para operarios.",
+          "Dashboard interactivo para visualizar estado de maquinaria y tendencias."
+        ],
+        "casos_uso": [
+          "Un gerente de taller recibe una alerta de alta probabilidad de fallo en telar X.",
+          "El operario consulta el dashboard para ver el historial de vibración del telar X.",
+          "Se planifica el mantenimiento preventivo del telar X antes de que ocurra la avería.",
+          "Se registra el mantenimiento realizado y se asocia a la alerta previa.",
+          "Se revisa el rendimiento del modelo de predicción con datos históricos."
+        ],
+        "reglas_negocio": [
+          "Las alertas se disparan si un parámetro (vibración/temperatura) excede un umbral dinámico configurado.",
+          "El sistema debe retener datos de sensores de al menos 1 año para análisis histórico.",
+          "Los usuarios pueden configurar umbrales de alerta y tipos de notificación.",
+          "Solo personal autorizado puede modificar la configuración del sistema o los modelos.",
+          "Los datos de sensores deben ser anonimizados antes de ser usados para entrenamiento general del modelo."
+        ],
+        "por_que_ia": "Se utilizan modelos de machine learning (ej. Isolation Forest, One-Class SVM) para detectar patrones anómalos en series temporales de vibración y temperatura, indicando un posible fallo inminente en la maquinaria. Esto va más allá de simples umbrales fijos.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "API de sensores de maquinaria textil (simulada o real)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y APIs REST.",
+          "Comprensión básica de series temporales y machine learning.",
+          "Familiaridad con bases de datos de series temporales (InfluxDB)."
+        ],
+        "riesgos": [
+          "Calidad de los datos de sensores (ruido, datos faltantes).",
+          "Dificultad para obtener datos de entrenamiento suficientes y representativos.",
+          "Adaptación del modelo a diferentes tipos de maquinaria textil.",
+          "Resistencia al cambio por parte del personal del taller.",
+          "Integración con sistemas de mantenimiento existentes."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "7c42617a24bc1124"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "0681d45657800ab1"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "e4f5g6h7",
+        "titulo": "Plataforma de Colaboración para Comités de Ética de Investigación",
+        "descripcion_corta": "Web app segura para comités de ética que facilita la revisión de protocolos de investigación, la comunicación y la toma de decisiones asíncrona.",
+        "descripcion_detallada": "Sistema web seguro donde los miembros de comités de ética de instituciones de investigación (universidades, hospitales) pueden cargar, revisar y comentar protocolos de investigación. Permite discusiones asíncronas, votaciones y seguimiento del estado de cada protocolo, garantizando la confidencialidad y el cumplimiento normativo (ej. HIPAA).",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "seguridad"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Backend robusto y escalable con arquitectura modular.",
+              "version_sugerida": "10.0.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Proporciona una estructura sólida para construir APIs seguras y mantenibles, con soporte para microservicios y patrones de diseño."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Frontend interactivo y dinámico para la interfaz de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Componentización eficiente y manejo del estado para una experiencia de usuario fluida."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "TypeORM",
+              "categoria": "libreria",
+              "descripcion": "ORM para interactuar con bases de datos relacionales.",
+              "version_sugerida": "0.2.45",
+              "url_docs": "https://typeorm.io/",
+              "por_que": "Abstracción de la base de datos, permitiendo usar PostgreSQL de forma segura y eficiente con TypeScript."
+            },
+            {
+              "nombre": "Passport.js",
+              "categoria": "libreria",
+              "descripcion": "Middleware de autenticación para Node.js.",
+              "version_sugerida": "0.6.7",
+              "url_docs": "https://www.passportjs.org/",
+              "por_que": "Implementación flexible y segura de autenticación basada en roles y permisos."
+            },
+            {
+              "nombre": "AWS SDK for JavaScript",
+              "categoria": "libreria",
+              "descripcion": "Interacción con servicios de AWS para almacenamiento seguro.",
+              "version_sugerida": "3.420.0",
+              "url_docs": "https://aws.amazon.com/sdk-for-javascript/",
+              "por_que": "Gestión segura de documentos sensibles (protocolos de investigación) en S3 con control de acceso."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "bases_datos",
+              "descripcion": "Base de datos relacional robusta y segura.",
+              "version_sugerida": "15.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Soporte para JSONB para metadatos flexibles, transacciones ACID y extensiones de seguridad."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "AWS (EC2, S3, RDS)",
+              "categoria": "infraestructura",
+              "descripcion": "Servicios cloud para alojamiento, almacenamiento y base de datos.",
+              "version_sugerida": "null",
+              "url_docs": "https://aws.amazon.com/",
+              "por_que": "Ofrece escalabilidad, seguridad y fiabilidad para una aplicación crítica y sensible."
+            },
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Contenerización para despliegue y consistencia.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita el despliegue en AWS y la gestión de entornos de desarrollo/producción."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para JavaScript/TypeScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Facilita tests unitarios, de integración y end-to-end con un entorno aislado."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "OpenAPI (Swagger)",
+              "categoria": "otros",
+              "descripcion": "Especificación para APIs RESTful.",
+              "version_sugerida": "3.0.0",
+              "url_docs": "https://swagger.io/specification/",
+              "por_que": "Documentación interactiva automática de la API para desarrolladores y usuarios."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Gestión segura de usuarios y roles (miembros del comité, investigadores).",
+          "Carga y versionado de protocolos de investigación (PDF, DOCX).",
+          "Sistema de revisión por pares asíncrona con comentarios y anotaciones.",
+          "Flujo de trabajo configurable para la aprobación de protocolos.",
+          "Módulo de votación y registro de decisiones del comité.",
+          "Auditoría de todas las acciones realizadas en la plataforma."
+        ],
+        "casos_uso": [
+          "Un investigador sube un nuevo protocolo para revisión ética.",
+          "Los miembros del comité reciben notificaciones de protocolos pendientes de revisión.",
+          "Un miembro anota secciones específicas de un protocolo y deja comentarios.",
+          "El comité vota la aprobación/rechazo de un protocolo en una sesión virtual.",
+          "Se genera un informe de auditoría de la revisión de un protocolo específico."
+        ],
+        "reglas_negocio": [
+          "Todos los documentos sensibles deben ser cifrados en reposo y en tránsito.",
+          "El acceso a protocolos está restringido solo a miembros autorizados del comité.",
+          "El historial de revisiones y votaciones de cada protocolo debe ser inmutable.",
+          "Los roles de usuario (ej. presidente del comité) tienen permisos elevados.",
+          "La plataforma debe cumplir con normativas de privacidad de datos (ej. GDPR, HIPAA)."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Normativas de ética de investigación locales/internacionales",
+          "API de servicios de AWS"
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 10,
+        "prerequisitos": [
+          "Experiencia sólida en TypeScript y frameworks backend/frontend (NestJS, React).",
+          "Conocimientos profundos de seguridad de aplicaciones web (autenticación, autorización, cifrado).",
+          "Experiencia con bases de datos relacionales (PostgreSQL) y ORMs.",
+          "Familiaridad con servicios cloud (AWS)."
+        ],
+        "riesgos": [
+          "Vulnerabilidades de seguridad que expongan datos sensibles de investigación.",
+          "Cumplimiento normativo complejo y cambiante.",
+          "Dificultad en la adopción por parte de comités con poca afinidad tecnológica.",
+          "Escalabilidad de la plataforma para grandes instituciones con muchos comités.",
+          "Gestión de versiones y auditoría de documentos complejos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "214807840a22d57a"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "0681d45657800ab1"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "k8l9m0n1",
+        "titulo": "Optimizador de Consumo de Agua en Granjas Solares Fotovoltaicas",
+        "descripcion_corta": "CLI tool que analiza datos meteorológicos y de producción para recomendar riego óptimo a granjas solares, reduciendo consumo de agua y maximizando eficiencia de paneles.",
+        "descripcion_detallada": "Herramienta de línea de comandos para gestores de granjas solares fotovoltaicas. Consume datos históricos y en tiempo real de estaciones meteorológicas (temperatura, humedad, lluvia, radiación solar) y de producción energética. Calcula la necesidad hídrica para la limpieza de paneles y recomienda la frecuencia y cantidad de riego para optimizar el balance entre coste del agua y ganancia energética.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "datos",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [],
+          "librerias": [
+            {
+              "nombre": "Requests",
+              "categoria": "libreria",
+              "descripcion": "Para consumir APIs de datos meteorológicos.",
+              "version_sugerida": "2.31.0",
+              "url_docs": "https://requests.readthedocs.io/",
+              "por_que": "Simple y robusta para realizar peticiones HTTP a servicios externos de pronóstico del tiempo."
+            },
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Manipulación de datos meteorológicos y de producción.",
+              "version_sugerida": "2.1.0",
+              "url_docs": "https://pandas.pydata.org/docs/",
+              "por_que": "Estructuras de datos (DataFrame) eficientes para el análisis y la limpieza de datos tabulares."
+            },
+            {
+              "nombre": "Click",
+              "categoria": "libreria",
+              "descripcion": "Creación de interfaces de línea de comandos.",
+              "version_sugerida": "8.1.7",
+              "url_docs": "https://click.palletsprojects.com/",
+              "por_que": "Facilita la creación de CLIs robustas con argumentos, opciones y subcomandos."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir tests para la lógica de cálculo y la interacción con APIs de forma sencilla."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Consumo de datos meteorológicos (temperatura, precipitación, humedad) vía API.",
+          "Análisis de datos de producción energética de la granja solar.",
+          "Cálculo de la pérdida de eficiencia por suciedad de paneles basada en modelos simples.",
+          "Recomendación de frecuencia y volumen de riego basado en predicción meteorológica.",
+          "Generación de informe simple de optimización y costes de agua."
+        ],
+        "casos_uso": [
+          "El gestor ejecuta el comando `solar-water-opt --location 'GranjaSur' --days 7`.",
+          "La herramienta consulta la API meteorológica para los próximos 7 días en 'GranjaSur'.",
+          "Calcula que la lluvia esperada es mínima y la temperatura alta, sugiriendo riego.",
+          "Recomienda regar paneles la noche del tercer día para minimizar evaporación.",
+          "Genera un informe indicando ahorro potencial de agua y ganancia energética estimada."
+        ],
+        "reglas_negocio": [
+          "Se prioriza el ahorro de agua sobre la ganancia marginal de energía si el coste del agua es alto.",
+          "No se recomienda riego si se esperan lluvias significativas (>5mm) en las próximas 48h.",
+          "La herramienta debe poder configurarse con los costes locales del agua y la electricidad.",
+          "Los datos de producción energética son opcionales pero mejoran la precisión de la recomendación.",
+          "Se deben considerar las horas de menor producción (noche/amanecer) para el riego."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "API de datos meteorológicos (ej. OpenWeatherMap, WeatherAPI)",
+          "Datos de producción de inversores solares (CSV/API)"
+        ],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 2,
+        "prerequisitos": [
+          "Conocimientos básicos de Python y manejo de CLIs.",
+          "Capacidad para interactuar con APIs REST.",
+          "Comprensión de conceptos básicos de meteorología y energía solar."
+        ],
+        "riesgos": [
+          "Fiabilidad y coste de las APIs de datos meteorológicos.",
+          "Calibración del modelo de pérdida de eficiencia por suciedad.",
+          "Integración con sistemas de riego automatizados (futura extensión).",
+          "Variabilidad climática extrema no cubierta por los pronósticos.",
+          "Falta de datos históricos de producción de la granja."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "ad3b5ba443047a4a"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "0681d45657800ab1"
+      }
     }
   ],
   "ultimos_hashes": [
-    "f1a2b3c4d5e6f8a9",
-    "f8a6b1c0d4e2f7a9",
-    "f0a3b1c8d6e4f2a0",
     "b8a1d3e5f7c9a0b2",
     "e0f2a4c6b8d1e3f5",
     "c1a0e7b5d9f3c8a2",
@@ -26098,8 +26507,11 @@
     "c9405bc8c0b68143",
     "850fe55959832a64",
     "1aa3ee302cc976cb",
-    "103ce884978855c7"
+    "103ce884978855c7",
+    "7c42617a24bc1124",
+    "214807840a22d57a",
+    "ad3b5ba443047a4a"
   ],
-  "total_generados": 187,
-  "fecha_ultima_generacion": "2026-11-22T04:50:08.076428"
+  "total_generados": 190,
+  "fecha_ultima_generacion": "2026-11-22T15:52:38.511267"
 }
