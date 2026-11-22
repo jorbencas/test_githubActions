@@ -25584,12 +25584,421 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "c830f068035a6d83"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4e5f6",
+        "titulo": "Gestor de Cosechas y Plagas para Huertos Urbanos con IA",
+        "descripcion_corta": "App móvil para huertos urbanos que identifica plagas y enfermedades vía foto, y sugiere tratamientos ecológicos, mejorando la salud de las plantas y la producción.",
+        "descripcion_detallada": "Una aplicación móvil que permite a los usuarios de huertos urbanos fotografiar sus plantas. La IA analiza la imagen para identificar plagas o enfermedades, y recomienda tratamientos ecológicos o preventivos, ayudando a mantener la salud del huerto y optimizar la cosecha sin químicos.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "mobile",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Backend API para servir modelos de IA y gestionar datos de usuarios y huertos.",
+              "version_sugerida": "0.110.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Alto rendimiento asíncrono y validación automática de datos con Pydantic, ideal para servir modelos de ML y gestionar requests concurrentes."
+            },
+            {
+              "nombre": "Flutter",
+              "categoria": "framework",
+              "descripcion": "Desarrollo de la aplicación móvil multiplataforma.",
+              "version_sugerida": "3.22.0",
+              "url_docs": "https://flutter.dev/docs",
+              "por_que": "Permite crear una interfaz de usuario nativa y fluida para iOS y Android desde una única base de código, ideal para un MVP de aplicación móvil."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pillow",
+              "categoria": "libreria",
+              "descripcion": "Procesamiento de imágenes para preprocesar fotos antes de enviarlas al modelo de IA.",
+              "version_sugerida": "10.3.0",
+              "url_docs": "https://pillow.readthedocs.io/",
+              "por_que": "Biblioteca estándar de Python para manipulación de imágenes, necesaria para redimensionar, recortar y aplicar filtros previos al análisis."
+            },
+            {
+              "nombre": "OpenCV",
+              "categoria": "libreria",
+              "descripcion": "Procesamiento avanzado de imágenes y detección de características.",
+              "version_sugerida": "4.9.0",
+              "url_docs": "https://docs.opencv.org/",
+              "por_que": "Puede ser útil para preprocesamiento más complejo o para la extracción de características que mejoren la precisión del modelo de IA en la identificación de plagas."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Almacenamiento persistente de datos de usuario, huertos, plantas y registros de diagnóstico.",
+              "version_sugerida": "16.x",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto, soporta tipos de datos avanzados como JSONB para metadatos, y escalabilidad para almacenar información detallada de múltiples huertos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Contenerización de la API y los modelos de IA para despliegue consistente.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y producción, facilitando el despliegue de la API y la gestión de dependencias del modelo de ML."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "TensorFlow Lite",
+              "categoria": "ia_ml",
+              "descripcion": "Ejecución de modelos de inferencia en el dispositivo móvil para identificación rápida.",
+              "version_sugerida": "2.16.0",
+              "url_docs": "https://www.tensorflow.org/lite",
+              "por_que": "Permite desplegar modelos de ML directamente en la aplicación móvil, reduciendo la latencia y la dependencia de la red para la identificación de plagas."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para la API de Python.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests robustos y parametrizados para la API, asegurando la correcta funcionalidad del backend y la integración con los modelos."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Identificación de plagas/enfermedades vía foto móvil",
+          "Sugerencia de tratamientos ecológicos personalizados",
+          "Registro de historial de tratamientos y estado de plantas",
+          "Recordatorios de riego y cuidado según tipo de planta",
+          "Base de datos de plantas y plagas con descripciones"
+        ],
+        "casos_uso": [
+          "Un usuario toma una foto de una hoja dañada y la app identifica 'mildiu'",
+          "La app sugiere 'infusión de ajo y bicarbonato' como tratamiento ecológico",
+          "Un usuario consulta el historial para ver qué se ha aplicado a un rosal",
+          "La app recuerda al usuario regar sus tomates a finales de semana",
+          "Un nuevo usuario busca información sobre cómo cuidar su albahaca"
+        ],
+        "reglas_negocio": [
+          "Solo se permiten imágenes con al menos el 30% de una hoja o tallo visible.",
+          "Los tratamientos sugeridos deben ser siempre de origen ecológico o biológico.",
+          "Cada planta registrada debe tener un tipo de planta válido de la base de datos.",
+          "Los datos de usuario son privados y solo se usan para la gestión del huerto.",
+          "La precisión de la identificación de plagas se mostrará al usuario (ej: 85% seguro)."
+        ],
+        "por_que_ia": "La IA se utiliza para la clasificación de imágenes de plantas, identificando visualmente plagas y enfermedades. Esto permite una diagnosis rápida y accesible sin necesidad de un experto botánico.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "Dataset de imágenes de plagas y enfermedades de plantas"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos básicos de desarrollo móvil con Flutter.",
+          "Comprensión de APIs RESTful.",
+          "Nociones de machine learning y procesamiento de imágenes.",
+          "Acceso a un dataset de imágenes de plagas/enfermedades para entrenamiento."
+        ],
+        "riesgos": [
+          "Precisión limitada del modelo de IA en condiciones de luz variables o con plantas no comunes.",
+          "Dificultad para obtener un dataset de imágenes diverso y de alta calidad.",
+          "Adopción por parte de usuarios no técnicos si la interfaz no es intuitiva.",
+          "El mantenimiento de modelos de IA puede ser complejo y requerir reentrenamiento."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:00:00Z",
+        "hash_unicidad": "850fe55959832a64"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "d211be7a6d93ecc1"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f7e8d9c0b1a2",
+        "titulo": "Simulador de Flujo de Carga en Redes Eléctricas Pequeñas",
+        "descripcion_corta": "Herramienta web para ingenieros y estudiantes que simula el comportamiento de redes eléctricas de baja/media tensión ante diferentes cargas y fallos.",
+        "descripcion_detallada": "Una aplicación web que permite modelar redes eléctricas pequeñas (distribución, industriales, etc.), definir cargas (consumo) y simular escenarios como sobrecargas o cortocircuitos. Visualiza flujos de potencia y voltajes para análisis de estabilidad y planificación.",
+        "nivel": "senior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Django",
+              "categoria": "framework",
+              "descripcion": "Framework web full-stack para la interfaz de usuario y la gestión de simulaciones.",
+              "version_sugerida": "5.0.x",
+              "url_docs": "https://docs.djangoproject.com/en/stable/",
+              "por_que": "Proporciona una estructura robusta y segura para construir la interfaz web, gestionar usuarios y orquestar las llamadas a los motores de simulación."
+            },
+            {
+              "nombre": "Celery",
+              "categoria": "framework",
+              "descripcion": "Sistema de colas de tareas asíncronas para ejecutar simulaciones de larga duración.",
+              "version_sugerida": "5.3.x",
+              "url_docs": "https://docs.celeryq.dev/",
+              "por_que": "Las simulaciones de redes eléctricas pueden ser computacionalmente intensivas; Celery permite ejecutarlas en background sin bloquear la interfaz web."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pandapower",
+              "categoria": "libreria",
+              "descripcion": "Herramienta para modelado, simulación y análisis de redes eléctricas.",
+              "version_sugerida": "5.x",
+              "url_docs": "https://pandapower.readthedocs.io/",
+              "por_que": "Es el núcleo de la simulación, proporciona las funcionalidades para crear la red, definir cargas y calcular flujos de potencia y voltajes."
+            },
+            {
+              "nombre": "NetworkX",
+              "categoria": "libreria",
+              "descripcion": "Manipulación y análisis de grafos.",
+              "version_sugerida": "3.x",
+              "url_docs": "https://networkx.org/documentation/stable/",
+              "por_que": "Útil para representar la topología de la red eléctrica como un grafo y realizar análisis de conectividad o caminos."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Almacenamiento de topologías de red, resultados de simulación y perfiles de carga.",
+              "version_sugerida": "16.x",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Soporta tipos de datos geométricos y JSONB, útiles para almacenar la topología de la red y los resultados estructurados de las simulaciones."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Redis",
+              "categoria": "infraestructura",
+              "descripcion": "Broker de mensajes para Celery y cacheo de resultados frecuentes.",
+              "version_sugerida": "7.x",
+              "url_docs": "https://redis.io/docs/",
+              "por_que": "Esencial como broker de tareas para Celery y puede usarse para cachear resultados de simulaciones comunes, mejorando el rendimiento."
+            },
+            {
+              "nombre": "Nginx",
+              "categoria": "infraestructura",
+              "descripcion": "Servidor web y proxy inverso para la aplicación Django.",
+              "version_sugerida": "1.24.x",
+              "url_docs": "https://nginx.org/en/docs/",
+              "por_que": "Sirve archivos estáticos eficientemente y actúa como proxy inverso para la aplicación Django, manejando el tráfico entrante y la terminación SSL."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para la lógica de simulación y la API.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir tests de unidad y de integración para la lógica de Pandapower y la API de Django, asegurando la corrección de las simulaciones."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Plotly/Dash",
+              "categoria": "otros",
+              "descripcion": "Librería para crear visualizaciones interactivas de datos y dashboards.",
+              "version_sugerida": "5.x",
+              "url_docs": "https://plotly.com/python/dash-framework/",
+              "por_que": "Ideal para crear gráficos interactivos de flujos de potencia, perfiles de voltaje y topologías de red directamente en la interfaz web."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Modelado visual de redes eléctricas (nodos, ramas, cargas)",
+          "Simulación de flujo de carga (potencia activa/reactiva, voltaje)",
+          "Análisis de escenarios de sobrecarga y cortocircuito",
+          "Visualización gráfica interactiva de resultados",
+          "Gestión de bibliotecas de componentes eléctricos (transformadores, líneas)"
+        ],
+        "casos_uso": [
+          "Un ingeniero eléctrico modela una subestación y simula el impacto de añadir una nueva carga industrial.",
+          "Un estudiante configura una red de distribución y observa caídas de voltaje bajo carga máxima.",
+          "Se simula un fallo monofásico en una línea para evaluar la respuesta del sistema.",
+          "Se genera un informe de resumen de la simulación con gráficos y tablas.",
+          "Se guarda una topología de red para reutilizarla en futuras simulaciones."
+        ],
+        "reglas_negocio": [
+          "Las simulaciones solo se ejecutan para redes de baja y media tensión (hasta 36kV).",
+          "La topología de la red debe ser conexa para una simulación válida.",
+          "Las cargas se definen en MW/MVAR o kVA, y los voltajes en kV.",
+          "Los resultados de simulación se conservan durante 30 días por defecto.",
+          "Los usuarios deben registrarse para guardar y ejecutar simulaciones."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Estándares de redes eléctricas (ej. IEEE)",
+          "Documentación de Pandapower"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 8,
+        "prerequisitos": [
+          "Conocimientos sólidos de ingeniería eléctrica y redes de potencia.",
+          "Experiencia con Python y frameworks web como Django.",
+          "Comprensión de bases de datos relacionales y sistemas de colas de tareas.",
+          "Familiaridad con librerías de visualización de datos."
+        ],
+        "riesgos": [
+          "La complejidad de las redes eléctricas puede llevar a tiempos de simulación muy largos.",
+          "La precisión de los resultados depende de la calidad del modelo y los datos de entrada.",
+          "La interfaz gráfica para el modelado de redes puede ser difícil de implementar de forma intuitiva.",
+          "Mantener la compatibilidad con diferentes versiones de librerías de simulación."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:01:00Z",
+        "hash_unicidad": "1aa3ee302cc976cb"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "d211be7a6d93ecc1"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "e0f1a2b3c4d5",
+        "titulo": "Auditoría de Accesibilidad Web para Contenido Dinámico (WCAG)",
+        "descripcion_corta": "Herramienta CLI que analiza páginas web con contenido dinámico (SPAs) para verificar el cumplimiento de las pautas WCAG de accesibilidad.",
+        "descripcion_detallada": "Una herramienta de línea de comandos que utiliza un navegador headless para cargar SPAs y evaluar la accesibilidad del contenido que se genera o modifica dinámicamente. Genera informes detallados sobre el cumplimiento de WCAG 2.1 AA, enfocándose en elementos interactivos y cambios de estado.",
+        "nivel": "semisenior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "cli",
+          "testing",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "Playwright",
+              "categoria": "framework",
+              "descripcion": "Automatización de navegadores para interactuar con SPAs y extraer información de accesibilidad.",
+              "version_sugerida": "1.44.1",
+              "url_docs": "https://playwright.dev/docs/",
+              "por_que": "Permite controlar navegadores headless (Chromium, Firefox, WebKit) para cargar SPAs, interactuar con elementos y ejecutar scripts de accesibilidad en el contexto de la página."
+            },
+            {
+              "nombre": "Commander.js",
+              "categoria": "framework",
+              "descripcion": "Creación de interfaces de línea de comandos robustas.",
+              "version_sugerida": "12.0.0",
+              "url_docs": "https://www.npmjs.com/package/commander",
+              "por_que": "Facilita la definición de comandos, opciones y argumentos para la CLI, haciendo la herramienta fácil de usar y configurar."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "axe-core",
+              "categoria": "libreria",
+              "descripcion": "Motor de análisis de accesibilidad para encontrar problemas en el DOM.",
+              "version_sugerida": "4.9.1",
+              "url_docs": "https://github.com/dequelin/axe-core",
+              "por_que": "Es el estándar de facto para el análisis automatizado de accesibilidad web, proporciona reglas detalladas de WCAG y se integra bien con Playwright."
+            },
+            {
+              "nombre": "JSDOM",
+              "categoria": "libreria",
+              "descripcion": "Simulación de un entorno DOM en Node.js.",
+              "version_sugerida": "21.1.0",
+              "url_docs": "https://github.com/jsdom/jsdom",
+              "por_que": "Aunque Playwright opera en un navegador real, JSDOM podría ser útil para análisis estáticos del HTML inicial o para procesar resultados fuera del contexto del navegador."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para la lógica de la CLI y las utilidades de análisis.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Un framework de testing popular y completo para JavaScript/TypeScript, adecuado para probar la lógica de la CLI y la integración con Playwright y axe-core."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Carga de SPAs usando navegador headless (Playwright)",
+          "Análisis de accesibilidad con axe-core post-renderizado",
+          "Soporte para WCAG 2.1 AA",
+          "Generación de informes en formatos (JSON, HTML)",
+          "Detección de contenido dinámico y cambios de estado"
+        ],
+        "casos_uso": [
+          "Un desarrollador frontend ejecuta la CLI en su proyecto React para detectar problemas de accesibilidad antes del despliegue.",
+          "Un equipo de QA audita una aplicación web compleja y genera un informe para el equipo de desarrollo.",
+          "Se integra la herramienta en un pipeline CI/CD para asegurar el cumplimiento de accesibilidad en cada commit.",
+          "Un auditor de accesibilidad utiliza la herramienta para obtener un primer pase automatizado.",
+          "Se genera un informe HTML con detalles de cada fallo y sugerencias de corrección."
+        ],
+        "reglas_negocio": [
+          "La herramienta debe esperar a que la SPA esté completamente cargada y estable antes de analizar.",
+          "Los informes deben indicar claramente el nivel de cumplimiento de WCAG y los criterios específicos fallidos.",
+          "Se debe permitir la configuración de qué reglas de WCAG aplicar.",
+          "La herramienta debe manejar errores de carga de página y timeouts de forma robusta.",
+          "El análisis se enfoca en el DOM accesible después de la ejecución de JavaScript."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "WCAG 2.1 AA guidelines",
+          "axe-core ruleset documentation"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Experiencia con Node.js y TypeScript.",
+          "Conocimientos de automatización de pruebas web con Playwright o similar.",
+          "Comprensión de las pautas WCAG de accesibilidad web.",
+          "Familiaridad con el desarrollo de herramientas CLI."
+        ],
+        "riesgos": [
+          "La naturaleza dinámica de las SPAs puede hacer que el análisis automatizado sea incompleto o propenso a falsos positivos/negativos.",
+          "La herramienta puede no detectar todos los problemas de accesibilidad, especialmente aquellos que requieren juicio humano.",
+          "La integración con CI/CD puede requerir configuración adicional y manejo de artefactos.",
+          "Dependencia de Playwright y axe-core, que pueden tener sus propias limitaciones."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:02:00Z",
+        "hash_unicidad": "103ce884978855c7"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "d211be7a6d93ecc1"
+      }
     }
   ],
   "ultimos_hashes": [
-    "e3c8b7a2f1d0e9c8",
-    "f9a8b7c6d5e4f3a2",
-    "c2c8b1a4d3e5f7a9",
     "f1a2b3c4d5e6f8a9",
     "f8a6b1c0d4e2f7a9",
     "f0a3b1c8d6e4f2a0",
@@ -25686,8 +26095,11 @@
     "df72647e49ac63bc",
     "f92d0215ad74fcaa",
     "9b084fc1756a4784",
-    "c9405bc8c0b68143"
+    "c9405bc8c0b68143",
+    "850fe55959832a64",
+    "1aa3ee302cc976cb",
+    "103ce884978855c7"
   ],
-  "total_generados": 184,
-  "fecha_ultima_generacion": "2026-11-21T21:25:25.407431"
+  "total_generados": 187,
+  "fecha_ultima_generacion": "2026-11-22T04:50:08.076428"
 }
