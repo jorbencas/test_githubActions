@@ -27277,12 +27277,434 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "45c930c4b1f1d2ae"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f4b8a1c3",
+        "titulo": "Sistema de Gestión de Cultivos Hidropónicos para Entornos Urbanos",
+        "descripcion_corta": "App para micro-agricultores urbanos: monitoriza y controla parámetros de cultivo hidropónico (pH, EC, luz) a distancia, optimizando crecimiento y minimizando desperdicio.",
+        "descripcion_detallada": "Plataforma web y móvil para pequeños productores hidropónicos en ciudades. Permite monitorizar en tiempo real niveles de pH, EC, temperatura del agua y luz. Controla automáticamente bombas y luces basándose en perfiles de cultivo, enviando alertas y resúmenes de crecimiento. Ideal para terrazas y espacios reducidos, haciendo la agricultura urbana más eficiente y accesible.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "mobile",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web ligero y rápido para construir APIs, con validación automática de datos y documentación interactiva.",
+              "version_sugerida": "0.110.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ideal para la API backend que gestionará la recepción de datos de sensores y el envío de comandos a actuadores, gracias a su rendimiento asíncrono y validación Pydantic."
+            },
+            {
+              "nombre": "React Native",
+              "categoria": "framework",
+              "descripcion": "Framework para construir aplicaciones móviles nativas multiplataforma usando React.",
+              "version_sugerida": "0.74.1",
+              "url_docs": "https://reactnative.dev/",
+              "por_que": "Permite desarrollar una única base de código para aplicaciones iOS y Android, facilitando el acceso remoto de los agricultores a sus cultivos."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "Toolkit SQL y Object-Relational Mapper (ORM) para Python.",
+              "version_sugerida": "2.0.29",
+              "url_docs": "https://www.sqlalchemy.org/",
+              "por_que": "Proporciona una abstracción robusta sobre la base de datos relacional, facilitando la gestión de datos de sensores y configuraciones de cultivo."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de configuraciones basada en type hints de Python.",
+              "version_sugerida": "2.7.1",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Fundamental en FastAPI para definir esquemas de datos claros y validados para la API, asegurando la integridad de los datos entrantes y salientes."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "bases_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional de código abierto.",
+              "version_sugerida": "16",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Soporta datos temporales de sensores y permite consultas complejas para el análisis de tendencias, además de JSONB para metadatos flexibles."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "26.1.4",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita el despliegue y la gestión de la API y la base de datos, asegurando entornos consistentes entre desarrollo y producción."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de Python.",
+              "version_sugerida": "8.2.1",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir pruebas unitarias y de integración para la API y la lógica de negocio de forma sencilla y potente."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Monitorización remota de pH, EC, temperatura y luz",
+          "Control automatizado de bombas de agua y luces",
+          "Alertas personalizables por umbrales de parámetros",
+          "Perfiles de cultivo predefinidos y personalizables",
+          "Visualización de históricos de datos",
+          "Interfaz móvil para acceso desde cualquier lugar"
+        ],
+        "casos_uso": [
+          "Agricultor urbano verifica el estado de su cultivo desde la oficina.",
+          "Sistema ajusta automáticamente el nivel de pH del agua de riego.",
+          "Usuario recibe alerta si la temperatura del agua excede el límite seguro.",
+          "Se aplica un perfil de cultivo específico para tomates cherry.",
+          "El sistema enciende las luces de crecimiento al anochecer."
+        ],
+        "reglas_negocio": [
+          "El pH debe mantenerse entre 5.5 y 6.5 para la mayoría de las plantas.",
+          "La conductividad eléctrica (EC) indica la concentración de nutrientes y debe estar dentro de rangos específicos.",
+          "Las alertas se envían solo si los parámetros se desvían del rango seguro por más de 15 minutos.",
+          "Los ciclos de luz son configurables por el usuario según el tipo de planta y etapa de crecimiento.",
+          "Los datos de sensores se guardan cada 5 minutos."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "APIs de servicios meteorológicos (opcional para ajustar riego/luz exterior)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos básicos de Python y desarrollo web/móvil.",
+          "Comprensión de principios de hidroponía.",
+          "Acceso a microcontroladores y sensores (e.g., ESP32, Arduino) para simulación o prototipo real."
+        ],
+        "riesgos": [
+          "Fiabilidad de los sensores y actuadores en entornos reales.",
+          "Latencia en la comunicación entre la API, la app móvil y los dispositivos IoT.",
+          "Seguridad de la conexión a los dispositivos IoT.",
+          "Escalabilidad para múltiples usuarios con muchos dispositivos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-16T10:00:00Z",
+        "hash_unicidad": "45c53719632484a5"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "4b5fcc6ff7ed7543"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "98765432",
+        "titulo": "Asistente de Composición Musical para Principiantes con IA",
+        "descripcion_corta": "Herramienta web que ayuda a músicos novatos a componer melodías y armonías básicas, sugiriendo notas y acordes basados en teoría musical y estilo.",
+        "descripcion_detallada": "Una aplicación web interactiva que permite a usuarios sin formación musical avanzada crear piezas sencillas. El usuario introduce una melodía o un ritmo, y la IA sugiere acordes compatibles, contramelodías o variaciones rítmicas. Soporta diferentes estilos (pop, rock, clásica simple) y exporta la composición en MIDI.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "javascript",
+          "frameworks": [
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.3.1",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear una UI interactiva y modular para el editor musical y la visualización de la IA."
+            },
+            {
+              "nombre": "Express.js",
+              "categoria": "framework",
+              "descripcion": "Framework de aplicación web minimalista para Node.js.",
+              "version_sugerida": "4.19.2",
+              "url_docs": "https://expressjs.com/",
+              "por_que": "Sirve como backend para la API que interactúa con el modelo de IA y gestiona las solicitudes del frontend."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Tone.js",
+              "categoria": "libreria",
+              "descripcion": "Framework para crear música en el navegador web.",
+              "version_sugerida": "0.14.40",
+              "url_docs": "https://tonejs.net/",
+              "por_que": "Proporciona las herramientas para la síntesis de audio, la secuenciación y la manipulación de notas y tiempos en el navegador."
+            },
+            {
+              "nombre": "MIDI.js",
+              "categoria": "libreria",
+              "descripcion": "Librería para reproducir y manipular archivos MIDI en el navegador.",
+              "version_sugerida": "null",
+              "url_docs": "https://github.com/mohayonao/midi.js",
+              "por_que": "Necesaria para la exportación de las composiciones generadas en formato MIDI."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [
+            {
+              "nombre": "Node.js",
+              "categoria": "infraestructura",
+              "descripcion": "Entorno de ejecución de JavaScript del lado del servidor.",
+              "version_sugerida": "20.11.1",
+              "url_docs": "https://nodejs.org/en/docs/",
+              "por_que": "Plataforma sobre la que se ejecuta el backend (Express.js) y se integra con librerías de IA."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "TensorFlow.js",
+              "categoria": "ia_ml",
+              "descripcion": "Librería para entrenar y ejecutar modelos de Machine Learning en JavaScript.",
+              "version_sugerida": "4.17.0",
+              "url_docs": "https://www.tensorflow.org/js",
+              "por_que": "Permite implementar modelos de generación musical directamente en el navegador o en el backend Node.js, facilitando la integración."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Proporciona un entorno completo para testear la lógica del frontend y las llamadas a la API."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Editor de melodías visual (piano roll)",
+          "Generación de acordes sugeridos basada en teoría musical.",
+          "Sugerencias de contramelodías y armonías.",
+          "Selección de estilo musical (pop, rock, etc.).",
+          "Reproducción en tiempo real de la composición.",
+          "Exportación a formato MIDI."
+        ],
+        "casos_uso": [
+          "Un principiante compone la base de una canción pop sin saber teoría avanzada.",
+          "Un músico explora diferentes progresiones de acordes para una melodía existente.",
+          "El sistema sugiere una línea de bajo armónicamente coherente.",
+          "El usuario selecciona un estilo 'clásico simple' para generar una pieza.",
+          "Exportar la melodía y los acordes a un DAW para seguir trabajando."
+        ],
+        "reglas_negocio": [
+          "La IA debe priorizar la creación de progresiones de acordes diatónicas.",
+          "Los estilos musicales deben influir en la probabilidad de ciertos acordes y ritmos.",
+          "La generación de contramelodías debe respetar las notas de la melodía principal.",
+          "La exportación MIDI debe incluir información de tempo y clave.",
+          "Las sugerencias de la IA deben ser configurables en su 'creatividad' vs 'conservadurismo'."
+        ],
+        "por_que_ia": "La IA se utiliza para generar sugerencias musicales (acordes, melodías, ritmos) que un principiante no podría crear por sí solo, basándose en patrones aprendidos de música existente y reglas de teoría musical. Esto reduce la barrera de entrada a la composición musical.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "Teoría musical básica (escalas, acordes, progresiones)."
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos de JavaScript, React y Node.js.",
+          "Comprensión básica de teoría musical.",
+          "Familiaridad con librerías de audio web (Web Audio API).",
+          "Conceptos de Machine Learning para generación de secuencias (opcional)."
+        ],
+        "riesgos": [
+          "Calidad de las sugerencias musicales de la IA.",
+          "Latencia en la generación de sugerencias si el modelo es muy complejo.",
+          "Compatibilidad de Tone.js y MIDI.js con diferentes navegadores.",
+          "Dificultad para modelar la 'creatividad' y la emoción humana en la música."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-16T10:05:00Z",
+        "hash_unicidad": "283271ec2a067471"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "4b5fcc6ff7ed7543"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4",
+        "titulo": "Sistema de Optimización de Rutas para Servicios de Emergencia Comunitarios",
+        "descripcion_corta": "App móvil offline-first para coordinadores de emergencias locales: optimiza asignación y rutas de vehículos y personal a incidentes en tiempo real, incluso sin conectividad.",
+        "descripcion_detallada": "Aplicación móvil para personal de respuesta a emergencias (bomberos voluntarios, protección civil) en áreas rurales o con conectividad limitada. Permite registrar incidentes, asignar recursos (vehículos, personal) y calcula la ruta óptima considerando tráfico local y disponibilidad. Funciona offline y sincroniza datos cuando la conexión se restablece.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "mobile",
+          "api",
+          "datos",
+          "devops"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "React Native",
+              "categoria": "framework",
+              "descripcion": "Framework para construir aplicaciones móviles nativas multiplataforma usando React.",
+              "version_sugerida": "0.74.1",
+              "url_docs": "https://reactnative.dev/",
+              "por_que": "Permite una única base de código para iOS y Android, crucial para la rápida adopción por parte de voluntarios y para mantener la coherencia."
+            },
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de Node.js para construir aplicaciones del lado del servidor eficientes y escalables.",
+              "version_sugerida": "10.3.9",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Proporciona una arquitectura robusta y modular para la API backend, facilitando la gestión de la lógica de ruteo, asignación y sincronización de datos."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "WatermelonDB",
+              "categoria": "libreria",
+              "descripcion": "Base de datos reactiva y de alto rendimiento para aplicaciones móviles.",
+              "version_sugerida": "0.17.0",
+              "url_docs": "https://nozbe.github.io/WatermelonDB/",
+              "por_que": "Esencial para la funcionalidad offline-first, gestiona la persistencia local de datos y la sincronización inteligente con el backend."
+            },
+            {
+              "nombre": "GraphHopper",
+              "categoria": "libreria",
+              "descripcion": "Motor de ruteo y optimización de rutas de código abierto.",
+              "version_sugerida": "8.0",
+              "url_docs": "https://github.com/graphhopper/graphhopper",
+              "por_que": "Proporciona algoritmos avanzados para el cálculo de rutas óptimas, considerando múltiples criterios y puntos de paso."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL con PostGIS",
+              "categoria": "bases_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional con extensiones geoespaciales.",
+              "version_sugerida": "16",
+              "url_docs": "https://postgis.net/docs/",
+              "por_que": "Permite almacenar y consultar datos geográficos eficientemente, fundamental para el cálculo de rutas y la geolocalización de incidentes y recursos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker & Docker Compose",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para contenedores y orquestación.",
+              "version_sugerida": "26.1.4",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Simplifica el despliegue de la API, la base de datos y otros servicios, asegurando entornos consistentes y reproducibles."
+            },
+            {
+              "nombre": "Nginx",
+              "categoria": "infraestructura",
+              "descripcion": "Servidor web y proxy inverso.",
+              "version_sugerida": "1.26.3",
+              "url_docs": "https://nginx.org/en/docs/",
+              "por_que": "Se utiliza como proxy inverso para la API de NestJS, manejando SSL, balanceo de carga y servido de archivos estáticos."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Vitest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing rápido para JavaScript y TypeScript.",
+              "version_sugerida": "1.6.0",
+              "url_docs": "https://vitest.dev/",
+              "por_que": "Ofrece una experiencia de desarrollo ágil para pruebas unitarias y de integración en el ecosistema React Native y NestJS."
+            },
+            {
+              "nombre": "Cypress",
+              "categoria": "testing",
+              "descripcion": "Herramienta de testing end-to-end para la web.",
+              "version_sugerida": "13.10.0",
+              "url_docs": "https://www.cypress.io/",
+              "por_que": "Permite simular interacciones de usuario completas en la aplicación móvil (a través de emuladores/dispositivos reales) y probar flujos de sincronización."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro offline de incidentes con geolocalización.",
+          "Asignación inteligente de recursos (personal, vehículos) a incidentes.",
+          "Cálculo de rutas óptimas y dinámicas para múltiples destinos.",
+          "Visualización de mapa con incidentes y ubicación de recursos.",
+          "Sincronización de datos automática y manual al recuperar conectividad.",
+          "Notificaciones push para alertas de incidentes y actualizaciones de ruta."
+        ],
+        "casos_uso": [
+          "Un coordinador asigna un vehículo y equipo a un incendio forestal sin cobertura móvil.",
+          "El sistema recalcula la ruta de un equipo médico al surgir un nuevo incidente crítico.",
+          "Un voluntario recibe la ubicación exacta del incidente y la ruta optimizada en su móvil.",
+          "Tras un evento, se sincronizan todos los informes de actividad y estado de los vehículos.",
+          "El sistema prioriza la asignación de recursos disponibles al incidente más grave."
+        ],
+        "reglas_negocio": [
+          "La asignación de recursos debe considerar la proximidad, tipo de recurso y nivel de emergencia.",
+          "Las rutas deben optimizarse para minimizar tiempo de llegada y/o distancia.",
+          "Los datos críticos (incidentes, asignaciones) deben tener alta prioridad en la sincronización.",
+          "Los vehículos/personal no disponibles (en otro incidente, mantenimiento) no deben ser asignados.",
+          "Se debe mantener un historial completo de asignaciones y rutas para auditorías."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Datos de mapas offline (e.g., OpenStreetMap).",
+          "Información de tráfico en tiempo real (si hay conectividad).",
+          "APIs de servicios meteorológicos (para previsión de riesgos)."
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 12,
+        "prerequisitos": [
+          "Experiencia avanzada en React Native y desarrollo móvil offline.",
+          "Sólidos conocimientos de TypeScript, Node.js y arquitecturas API.",
+          "Comprensión de sistemas de información geográfica (GIS) y algoritmos de ruteo.",
+          "Experiencia con bases de datos geoespaciales (PostGIS).",
+          "Familiaridad con metodologías ágiles y DevOps."
+        ],
+        "riesgos": [
+          "Gestión compleja de la sincronización de datos offline/online.",
+          "Precisión y fiabilidad de los algoritmos de ruteo en entornos variables.",
+          "Usabilidad de la interfaz móvil en situaciones de estrés y poca luz.",
+          "Escalabilidad del backend para manejar múltiples comunidades o eventos simultáneos.",
+          "Cumplimiento de normativas de protección de datos para información sensible."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-16T10:10:00Z",
+        "hash_unicidad": "fa64dfbba1383e24"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "4b5fcc6ff7ed7543"
+      }
     }
   ],
   "ultimos_hashes": [
-    "b1c2d3e4f5a67890",
-    "c1d2e3f4a5b67890",
-    "1f4a7a4a9b2c1d0e",
     "2a8b5c1d9e0f7a3b",
     "3c1d9e0f7a4b2a8b",
     "3a1b2c3d4e5f6789",
@@ -27379,8 +27801,11 @@
     "2ec433e05833fede",
     "00ad3180817a4945",
     "58a80eb5e5da9b56",
-    "8825db5d3609577a"
+    "8825db5d3609577a",
+    "45c53719632484a5",
+    "283271ec2a067471",
+    "fa64dfbba1383e24"
   ],
-  "total_generados": 196,
-  "fecha_ultima_generacion": "2026-11-23T05:29:41.251237"
+  "total_generados": 199,
+  "fecha_ultima_generacion": "2026-11-23T19:47:16.605996"
 }
