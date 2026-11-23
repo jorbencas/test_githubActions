@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 190,
+    "total_concepts": 191,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-23T10:10:40.071561"
+    "last_scraped": "2026-11-23T22:26:31.583071"
   },
   "concepts": [
     {
@@ -3520,6 +3520,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-11-17T19:02:38.850660"
+    },
+    {
+      "title": "API de Elecciones Generales 29N: guía con ejemplos en curl, JavaScript, PHP y Python",
+      "summary": "Faltan pocos días para las elecciones generales del 29 de noviembre de 2026 y las redacciones ya preparan sus coberturas. Para quien necesite los números en bruto y quiera pintarlos a su manera, exist",
+      "explanation": "Faltan pocos días para las elecciones generales del 29 de noviembre de 2026 y las redacciones ya preparan sus coberturas. Para quien necesite los números en bruto y quiera pintarlos a su manera, existe laAPI de Elecciones Generales de Generales29N: una API de resultados electorales en JSON que sirve el mismo material que alimenta la web, con escrutinio, participación, escaños y comparativa con la elección anterior. Esta guía recorre cómo funciona, qué devuelve cada fichero y cómo consumirla sin pasarse del límite de peticiones, con ejemplos en curl, JavaScript, PHP y Python. Aviso previo:el acceso es solo con clave (token) personal que concede Color Vivo. Sin clave todas las peticiones se rechazan, así que los ejemplos de este artículo usanTU_CLAVEcomo marcador y los valores de los JSON de ejemplo son ilustrativos, no resultados reales.Qué es esta API y para quién sirve La API publica los mismos ficheros JSON estáticos que consume la propia web deElecciones 29N, bajohttps://api.generales29n.com/v1/. Salen de un almacén en Cloudflare R2 y un Worker de Cloudflare se limita a comprobar la clave y entregar los ficheros tal cual. No hay servidor de aplicación en medio, lo que explica que se publique cada envío nuevo del Ministerio del Interior a los pocos segundos de recibirlo. Está pensada para medios y equipos técnicos que quieren maquetar sus propios gráficos, mapas o ticker de resultados. Si solo quieres mostrar los datos en tu web, no necesitas clave: loswidgets gratuitos par",
+      "code_example": "curl -H \"X-Api-Key: TU_CLAVE\" \n  https://api.generales29n.com/v1/congreso-2026-11/manifest.json",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "seguridad_web"
+      ],
+      "cat": "seguridad_web",
+      "scraped_at": "2026-11-23T22:25:51.055812"
     }
   ]
 }

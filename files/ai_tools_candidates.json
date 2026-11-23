@@ -1,5 +1,17 @@
 [
     {
+        "titulo": "YuyaoTechnology/MatterSeek",
+        "enlace": "https://huggingface.co/spaces/YuyaoTechnology/MatterSeek",
+        "descripcion": "[static space] static, region:us",
+        "lenguaje": "static",
+        "estrellas": "3582",
+        "fuente": "HuggingFace Spaces",
+        "tipo": "herramienta",
+        "_likes": 3582,
+        "_sdk": "static",
+        "_source_type": "hf_space"
+    },
+    {
         "titulo": "deepseek-ai/DeepSeek-V3.2",
         "enlace": "https://huggingface.co/deepseek-ai/DeepSeek-V3.2",
         "descripcion": "[text-generation] transformers, safetensors, deepseek_v32 — by ",
