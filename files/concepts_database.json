@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 191,
+    "total_concepts": 196,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-24T06:43:34.957062"
+    "last_scraped": "2026-11-24T18:38:58.504431"
   },
   "concepts": [
     {
@@ -3538,6 +3538,96 @@
       ],
       "cat": "seguridad_web",
       "scraped_at": "2026-11-23T22:25:51.055812"
+    },
+    {
+      "title": "El compilador de Rust activa por defecto el frontend paralelo en nightly: hasta un 44 % menos de tiempo en cargo check",
+      "summary": "Desde el 14 de noviembre de 2026, el compilador de Rust en el canalnightlyusa por defecto sufrontend paralelo. El anuncio es del equipo del compilador y lo firma Jakub Beránek el 16 de noviembre. El o",
+      "explanation": "Desde el 14 de noviembre de 2026, el compilador de Rust en el canalnightlyusa por defecto sufrontend paralelo. El anuncio es del equipo del compilador y lo firma Jakub Beránek el 16 de noviembre. El objetivo es encontrar los fallos que queden antes de estabilizarlo. Enstableno cambia nada: sigue compilando con un solo hilo en el frontend.Qué es el frontend paralelo y por qué importa Rustc lleva años usando varios hilos en elbackend, la parte que genera código con LLVM. Elfrontend, que incluye el análisis de tipos y elborrow checker, se ejecutaba en un único hilo, y eso limitaba la velocidad del compilador. El soporte para paralelizarlo existía desde hacía tiempo, pero no se activaba por defecto por distintos problemas. La opción se pudo probar en nightly hace tres años, con la idea de estabilizarla en 2024. No se logró. El año pasado, Vadim Petrochenkov y otros colaboradores retomaron el trabajo de forma coordinada, se corrigieron problemas antiguos y mejoró el rendimiento. Elobjetivo de proyecto de 2026incluye una batería de pruebas específica, activarlo en Cargo y un informe de estabilización.Cuánto acelera El equipo midió la compilación del últimocratede un grafo de dependencias con su suite debenchmarks. Estos son los cambios medios en tiempo real frente al frontend secuencial, compilando un solocratedesde cero:",
+      "code_example": "# .cargo/config.toml: probar con 8 hilos de frontend\n[build]\nrustflags = [\"-Zunstable-options\", \"--jobs-frontend=8\"]",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-24T18:38:14.809041"
+    },
+    {
+      "title": "Pasarelas MCP para desarrolladores: comparativa, nuevo protocolo sin estado y cómo probarlas",
+      "summary": "Conectar un agente a un servidor MCP es trivial: pegas una URL, apruebas un aviso y el agente empieza a llamar herramientas. El problema llega con el segundo agente, el quinto servidor y la pregunta d",
+      "explanation": "Conectar un agente a un servidor MCP es trivial: pegas una URL, apruebas un aviso y el agente empieza a llamar herramientas. El problema llega con el segundo agente, el quinto servidor y la pregunta de qué credenciales usa cada uno contra el CRM. Ahí aparece lapasarela MCP(MCP gateway). Este artículo parte de la comparativa «8 Best MCP Gateways», publicada el 23 de noviembre de 2026 en DEV Community por Varshith V Hegde, y la amplía con datos contrastados en GitHub y en las especificaciones, con más proyectos y con un cambio de protocolo que afecta directamente a cualquiera que despliegue una.Qué hace una pasarela MCP (y qué no) Una pasarela se sitúa entre los agentes y los servidores MCP. El servidor expone herramientas, el agente decide cuándo usarlas y la pasarela decide si la llamada puede llegar al servidor y qué vuelve. Las funciones habituales son:Agregación:muchos servidores detrás de un único endpoint, de modo que cada cliente configura una URL en lugar de diez.Autenticación:el inicio de sesión del lado del agente y las credenciales que se usan contra cada servidor, incluidos los flujos OAuth.Filtrado de herramientas:qué herramientas ve y puede ejecutar cada usuario, equipo o clave.Registro y trazas:cada llamada deja un rastro consultable.Coste de contexto:un catálogo grande de herramientas consume tokens solo por describirlo al modelo. Permitir que un agente conecte con el servidor MCP de GitHub es una decisión muy gruesa. Las preguntas reales son de nivel herramien",
+      "code_example": "# Descarga el catálogo y crea un perfil con el servidor de GitHub\ndocker mcp catalog pull mcp/docker-mcp-catalog\ndocker mcp profile create --name dev-tools \\\n  --server catalog://mcp/docker-mcp-catalog/github \\\n  --connect cursor\n\n# Arranca la pasarela con ese perfil\ndocker mcp gateway run --profile dev-tools\n\n# O expónla por HTTP en el puerto 8080\ndocker mcp gateway run --port 8080 --transport streaming",
+      "use_cases": [],
+      "difficulty": 3,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "seguridad_web"
+      ],
+      "cat": "seguridad_web",
+      "scraped_at": "2026-11-24T18:38:16.306074"
+    },
+    {
+      "title": "PHP 8.6 en Laravel y Filament: qué revisar antes de actualizar",
+      "summary": "PHP 8.6.0 salió el 19 de noviembre de 2026 y la pregunta habitual en equipos que mantienen una aplicación Laravel 13 con un panel Filament 5 es la misma: ¿se puede actualizar ya, qué va a aparecer en ",
+      "explanation": "PHP 8.6.0 salió el 19 de noviembre de 2026 y la pregunta habitual en equipos que mantienen una aplicación Laravel 13 con un panel Filament 5 es la misma: ¿se puede actualizar ya, qué va a aparecer en los logs y están listos los paquetes? La guía dePackstub sobre PHP 8.6 para aplicaciones Laravel y Filamentplantea ese recorrido; aquí lo ampliamos, lo contrastamos con las notas oficiales de PHP y actualizamos los datos de paquetes a 24 de noviembre de 2026. Para el panorama general de la versión, con ejemplos de cada novedad, tienes el artículoPHP 8.6: aplicación parcial de funciones, Duration, Poll API y comparativa con 8.2-8.5.Resumen rápidoComposer ya permite instalar en 8.6, porque rangos como^8.3lo incluyen.El primer paso barato es añadir un trabajo de CI con PHP 8.6 que pueda fallar sin bloquear, y activar el log de deprecaciones en staging.El paso a producción puede esperar a que tus paquetes clave prueben en 8.6 y tu hosting lo ofrezca. PHP 8.4 y 8.5 tienen soporte de sobra.Novedades de PHP 8.6 que aprovecha una app Laravelclamp() y SortDirection clamp()mantiene un valor entre dos límites y sustituye al parmin(max(...)), fácil de escribir al revés. Según la guía de Packstub, lanzaValueErrorsi el mínimo es mayor que el máximo. Un uso típico es acotar la paginación que llega por la petición:$perPage = clamp($request->integer('per_page', 25), 10, 100); SortDirectiones el enum estándar con los casosAscendingyDescending. Según Packstub, el constructor de consultas de Laravel",
+      "code_example": "$perPage = clamp($request->integer('per_page', 25), 10, 100);",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "css_moderno"
+      ],
+      "cat": "css_moderno",
+      "scraped_at": "2026-11-24T18:38:17.762927"
+    },
+    {
+      "title": "PHP 8.6: aplicación parcial de funciones, Duration, Poll API y comparativa con 8.2-8.5",
+      "summary": "El 19 de noviembre de 2026 el equipo de PHP publicóPHP 8.6.0, la versión que sustituye a PHP 8.5 en el calendario anual de lanzamientos. El anuncio oficial la presenta como una actualización important",
+      "explanation": "El 19 de noviembre de 2026 el equipo de PHP publicóPHP 8.6.0, la versión que sustituye a PHP 8.5 en el calendario anual de lanzamientos. El anuncio oficial la presenta como una actualización importante del lenguaje, con aplicación parcial de funciones, una clase para representar duraciones, una API de sondeo de streams, la funciónclamp(), un enum estándar para el orden de clasificación y valores por defecto en propiedadesreadonly. Repasamos las novedades con ejemplos, los cambios que pueden romper código y cómo queda frente a las demás ramas que aún reciben soporte.Partial Function Application: funciones a medias con?y... La novedad más visible de la sintaxis. Una llamada en la que uno o varios argumentos se sustituyen por el marcador?(o todos los restantes por...) no ejecuta la función: devuelve unClosureque acepta los argumentos que faltan.<?php\nfunction add(int $a, int $b, int $c = 0): int\n{\n    return $a + $b + $c;\n}\n\n$addOne = add(1, ?);          // \"?\" sustituye exactamente un argumento\nvar_dump($addOne(5));         // int(6)\n\n$addToOne = add(1, ...);      // \"...\" sustituye todos los restantes\nvar_dump($addToOne(2, 3));    // int(6)\n\n// Con cualquier callable, también funciones internas\n$stripSpaces = str_replace(' ', '', ?);\nvar_dump($stripSpaces('a b c')); // string(3) \"abc\" Es especialmente cómodo enarray_filter(),array_map()y similares, donde antes hacía falta una función anónima solo para fijar un argumento:version_compare(?, '8.6', '>=')sustituye afn ($v) => vers",
+      "code_example": "<?php\nfunction add(int $a, int $b, int $c = 0): int\n{\n    return $a + $b + $c;\n}\n\n$addOne = add(1, ?);          // \"?\" sustituye exactamente un argumento\nvar_dump($addOne(5));         // int(6)\n\n$addToOne = add(1, ...);      // \"...\" sustituye todos los restantes\nvar_dump($addToOne(2, 3));    // int(6)\n\n// Con cualquier callable, también funciones internas\n$stripSpaces = str_replace(' ', '', ?);\nvar_dump($stripSpaces('a b c')); // string(3) \"abc\"",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "css_moderno"
+      ],
+      "cat": "css_moderno",
+      "scraped_at": "2026-11-24T18:38:19.377518"
+    },
+    {
+      "title": "Por qué cambiar la contraseña cada 90 días no protege",
+      "summary": "Obligar a cambiar la contraseña cada 90 días lleva años en el punto de mira de los organismos de estándares, pero sigue siendo una de las reglas más repetidas en políticas corporativas, auditorías y c",
+      "explanation": "Obligar a cambiar la contraseña cada 90 días lleva años en el punto de mira de los organismos de estándares, pero sigue siendo una de las reglas más repetidas en políticas corporativas, auditorías y cuestionarios de seguro. David Carrero lo planteó hace unos días en LinkedIn y recogió el debate posterior en suboletín de carrero.es, donde lo cuenta con las reacciones de administradores, auditores y responsables de seguridad. Aquí va una versión técnica, contrastada con las fuentes oficiales.Qué dice NIST en realidad La referencia es la guíaNIST SP 800-63B, la que usan como base medio mundo de auditores. La revisión de 2017 ya desaconsejaba el cambio periódico de contraseñas. Larevisión 4, publicada en su versión definitiva a finales de julio de 2025, va un paso más allá: los verificadores no deben exigir cambios periódicos, y solo procede cambiar la contraseña cuando hay evidencia de que se ha comprometido. La misma guía prohíbe imponer reglas de composición (una mayúscula, un número, un símbolo) y pide comparar cada contraseña nueva con una lista de contraseñas filtradas, palabras de diccionario y términos previsibles, como el nombre del propio servicio. En cuanto a longitud, la guía fija un mínimo de15 caracteres cuando la contraseña es el único factor(8 si forma parte de una autenticación multifactor) y pide admitir al menos 64. No es una postura aislada: Microsoft retiró la caducidad de contraseñas de sus líneas base de seguridad de Windows en 2019 y el NCSC británico reco",
+      "code_example": "",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "poo"
+      ],
+      "cat": "poo",
+      "scraped_at": "2026-11-24T18:38:20.791147"
     }
   ]
 }
