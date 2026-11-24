@@ -2804,5 +2804,37 @@
     ],
     "url": "https://huggingface.co/spaces",
     "restricciones": "Gratis para spaces públicos."
+  },
+  {
+    "cat": "video_gen",
+    "tool": "OpenMontage",
+    "body": "Es un sistema de producción de video basado en agentes y de código abierto que integra múltiples pipelines y herramientas para automatizar la creación de videos.",
+    "workflow": "Define un guion -> Los agentes generan las escenas -> El sistema ensambla y produce el video final.",
+    "combinaciones": [
+      "agentes",
+      "automatizaciones",
+      "multimedia"
+    ],
+    "url": "https://github.com/OpenMontageInc/OpenMontage",
+    "restricciones": "Requiere instalación local y conocimientos técnicos para su despliegue y uso.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "agentes",
+    "tool": "QwenPaw",
+    "body": "Un asistente personal de IA de código abierto, diseñado para ser fácil de instalar y desplegar localmente o en la nube, con soporte para múltiples aplicaciones de chat.",
+    "workflow": "Instala la herramienta -> Conéctala a tu aplicación de chat preferida -> Interactúa con el asistente para diversas tareas.",
+    "combinaciones": [
+      "chatbot",
+      "ia_local",
+      "automatizaciones"
+    ],
+    "url": "https://github.com/agentscope-ai/QwenPaw",
+    "restricciones": "Requiere instalación y configuración, conocimientos técnicos para su despliegue.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
   }
 ]

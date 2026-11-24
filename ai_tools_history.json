@@ -1,9 +1,28 @@
 {
-  "sent_titles": [],
-  "sent_urls": [],
-  "sent_skills": [],
-  "sent_resources": [],
-  "last_run": null,
-  "total_runs": 0,
+  "sent_titles": [
+    "Quizlet con Q-Chat y Q-Create",
+    "Quizlet Plus",
+    "DeepL Translator",
+    "Zapier"
+  ],
+  "sent_urls": [
+    "https://quizlet.com/es",
+    "https://quizlet.com",
+    "https://www.deepl.com/es/translator",
+    "https://zapier.com"
+  ],
+  "sent_skills": [
+    "mattpocock resolving merge conflicts",
+    "tizzy916 humanities writing companion"
+  ],
+  "sent_resources": [
+    "pdf24",
+    "scrapeninja",
+    "databricks",
+    "open collective",
+    "mintlify"
+  ],
+  "last_run": "2026-11-24T19:47:50.079595",
+  "total_runs": 1,
   "db_exhausted": false
 }
