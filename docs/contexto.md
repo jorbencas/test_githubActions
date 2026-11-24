@@ -2,6 +2,39 @@
 
 ## Cambios recientes
 
+### Report 🧰 Herramientas IA: nunca repetir + pool ampliado — 24/11/2026
+- **Problema**: en el report de herramientas de Telegram (cada 3 h) salían
+  herramientas ya enviadas. Causas: (1) la salida de Gemini no se post-filtraba
+  (el prompt solo *pedía* no repetir y solo enseñaba `sent_titles[:200]`),
+  (2) `select_tools_from_db`/`select_skills_from_db` **reciclaban** la lista
+  entera al agotarse, (3) los recursos del blog **no se registraban** en el
+  historial, (4) sin dedup intra-lote ni por URL, (5) el historial vivía en
+  `actions/cache` (clave por `run_id`) → si el save fallaba/evicionaba, rollback
+  = repetición masiva.
+- **Filtro estricto** (`scripts/ai_tools_generator.py`): `_norm_name`
+  (minúsculas/sin acentos/puntuación) y `_norm_url` (sin www/query/slash),
+  `es_duplicado`/`filtrar_nuevos` (nombre **o** URL + dedup intra-lote).
+  Post-filtro **obligatorio** tras Gemini, al mezclar y de red de seguridad
+  final antes de enviar. `select_*` ya **no reciclan**: si queda poco, se envía
+  menos (log `⚠️ Solo N herramientas nuevas disponibles`).
+- **Historial ampliado**: `sent_urls`, `sent_skills` y `sent_resources`
+  (retrocompatibles) + se omite el envío si no queda nada nuevo
+  (`🛑 Nada nuevo que enviar`).
+- **Historial durable**: `daily_content.yml` deja `actions/cache` y
+  **commitea** `ai_tools_history.json` + `files/ai_tools_pool.json`
+  (`[bot] update ai tools history + pool`, `if: always()`). Efecto colateral:
+  `scrape_ai_tools.py` ya puede excluir enviados.
+- **Pool ampliado**: nuevo `files/ai_tools_pool.json` (DB curada + fichas
+  promocionadas). `promote_to_pool()` convierte hasta 10 candidatos reales/run
+  (`ai_tools_candidates.json` + `herramientas_merged.json` + `publicapis_apis.json`)
+  en fichas completas con categoría válida vía Gemini (validación estricta:
+  cat/`body`/`restricciones`/URL http). Prompt con hasta 2000 enviados,
+  candidatos 15→30 y trending 10→25 (desde `herramientas_merged.json`).
+- **DB estática**: 107 → **204 tools**, 49 → **142/166 categorías cubiertas**
+  (Topaz, Demucs, Suno, Ollama, LangChain ya existentes + Meshy, Opus Clip,
+  SAM 2, Axolotl, vLLM, Firecrawl, Vapi, aider, Zed…).
+- **Tests**: `TestNuncaRepiten` (+11) → **281 en verde**.
+
 ### Anti-duplicados en project_generator (hash normalizado + similitud) — 18/11/2026
 - **Problema**: el prompt solo mandaba hashes hexadecimales, inútiles para que
   la IA evite repetir temas; el hash lo calculaba el modelo (fórmula libre) y

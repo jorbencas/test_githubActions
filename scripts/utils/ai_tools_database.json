@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "DB estática de herramientas de IA por categoría. Fallback cuando Gemini no está disponible.",
-    "count": 107
+    "count": 204
   },
   "tools": [
     {
@@ -1501,6 +1501,1314 @@
       ],
       "url": "https://opencode.ai",
       "restricciones": "Documentación generada requiere revisión humana."
+    },
+    {
+      "id": 111,
+      "cat": "video_upscale",
+      "tool": "Topaz Video AI",
+      "body": "Escala y repara vídeos con IA hasta 4K conservando detalle y movimiento.",
+      "dific": 2,
+      "workflow": "Vídeo -> Upscale 4K -> Exportar",
+      "combinaciones": [
+        "video_edit",
+        "superres"
+      ],
+      "url": "https://www.topazlabs.com/topaz-video-ai",
+      "restricciones": "De pago; proceso lento sin GPU potente."
+    },
+    {
+      "id": 112,
+      "cat": "img_inpainting",
+      "tool": "IOPaint",
+      "body": "Elimina objetos y repinta zonas de imágenes con modelos locales open source.",
+      "dific": 1,
+      "workflow": "Imagen -> Máscara -> Inpaint -> Resultado",
+      "combinaciones": [
+        "img_edit",
+        "object_removal"
+      ],
+      "url": "https://github.com/Sanster/IOPaint",
+      "restricciones": "Open source; requiere GPU para modelos grandes."
+    },
+    {
+      "id": 113,
+      "cat": "img_outpainting",
+      "tool": "ClipDrop Uncrop",
+      "body": "Amplía el lienzo de una imagen generando el contenido que falta.",
+      "dific": 1,
+      "workflow": "Imagen -> Uncrop -> Recorte",
+      "combinaciones": [
+        "img_edit",
+        "img_gen"
+      ],
+      "url": "https://clipdrop.co",
+      "restricciones": "Freemium; API de pago para uso intensivo."
+    },
+    {
+      "id": 114,
+      "cat": "img_remove_bg",
+      "tool": "remove.bg",
+      "body": "Elimina fondos de fotos automáticamente con detección de sujeto.",
+      "dific": 1,
+      "workflow": "Foto -> Remove BG -> PNG transparente",
+      "combinaciones": [
+        "img_edit",
+        "thumbnail_ai"
+      ],
+      "url": "https://www.remove.bg",
+      "restricciones": "Freemium; resolución completa solo de pago."
+    },
+    {
+      "id": 115,
+      "cat": "audio_sep",
+      "tool": "Demucs",
+      "body": "Separa voces, batería e instrumentos de una mezcla de audio.",
+      "dific": 2,
+      "workflow": "Audio -> Separación de pistas -> Stem exports",
+      "combinaciones": [
+        "audio_edit",
+        "music_gen"
+      ],
+      "url": "https://github.com/facebookresearch/demucs",
+      "restricciones": "Open source; requiere GPU para archivos largos."
+    },
+    {
+      "id": 116,
+      "cat": "music_gen",
+      "tool": "Suno",
+      "body": "Compone canciones completas con voz e instrumentación a partir de una descripción.",
+      "dific": 1,
+      "workflow": "Idea -> Prompt -> Canción -> Exportar",
+      "combinaciones": [
+        "audio_gen",
+        "guiones_ai"
+      ],
+      "url": "https://suno.com",
+      "restricciones": "Freemium; créditos diarios limitados."
+    },
+    {
+      "id": 117,
+      "cat": "video_analysis",
+      "tool": "Google Gemini",
+      "body": "Analiza vídeo completo: detecta escenas, resume y responde preguntas sobre él.",
+      "dific": 2,
+      "workflow": "Vídeo -> Análisis -> Resumen",
+      "combinaciones": [
+        "video_summarizer",
+        "resumen_auto",
+        "llm_workflow"
+      ],
+      "url": "https://gemini.google.com",
+      "restricciones": "Límites de duración y tamaño según el plan."
+    },
+    {
+      "id": 118,
+      "cat": "video_summarizer",
+      "tool": "Opus Clip",
+      "body": "Convierte un vídeo largo en clips cortos virales con detección de momentos clave.",
+      "dific": 2,
+      "workflow": "Vídeo largo -> Clips -> Subtítulos",
+      "combinaciones": [
+        "video_edit",
+        "social_media_ai",
+        "video_caption"
+      ],
+      "url": "https://www.opus.pro",
+      "restricciones": "Freemium; minutos al mes limitados."
+    },
+    {
+      "id": 119,
+      "cat": "screen_rec",
+      "tool": "OBS Studio",
+      "body": "Graba pantalla, ventanas y fuentes con calidad profesional y mezcla en vivo.",
+      "dific": 1,
+      "workflow": "Pantalla -> Grabación -> Edición",
+      "combinaciones": [
+        "video_edit"
+      ],
+      "url": "https://obsproject.com",
+      "restricciones": "Open source; curva de configuración inicial."
+    },
+    {
+      "id": 120,
+      "cat": "3d_gen",
+      "tool": "Meshy",
+      "body": "Genera modelos 3D listos para juego desde texto o imagen.",
+      "dific": 2,
+      "workflow": "Prompt -> Malla -> Textura -> Exportar FBX",
+      "combinaciones": [
+        "img_gen"
+      ],
+      "url": "https://www.meshy.ai",
+      "restricciones": "Freemium; créditos limitados y modelos de pago."
+    },
+    {
+      "id": 121,
+      "cat": "video_caption",
+      "tool": "Captions",
+      "body": "Añade subtítulos automáticos con estilo animado y corrección con IA.",
+      "dific": 1,
+      "workflow": "Vídeo -> Transcripción -> Subtítulos",
+      "combinaciones": [
+        "subtitle_gen",
+        "transcripcion"
+      ],
+      "url": "https://www.captions.ai",
+      "restricciones": "Freemium; funciones avanzadas de pago."
+    },
+    {
+      "id": 122,
+      "cat": "video_pip",
+      "tool": "Kapwing",
+      "body": "Editor online con vídeo en imagen (PIP), capas y recorte automático.",
+      "dific": 1,
+      "workflow": "Clips -> Capas PIP -> Exportar",
+      "combinaciones": [
+        "video_edit"
+      ],
+      "url": "https://www.kapwing.com",
+      "restricciones": "Freemium; exporta con marca de agua sin plan."
+    },
+    {
+      "id": 123,
+      "cat": "thumbnail_ai",
+      "tool": "Fotor",
+      "body": "Diseña miniaturas con IA a partir de plantillas y texto generado.",
+      "dific": 1,
+      "workflow": "Idea -> Plantilla -> Miniatura",
+      "combinaciones": [
+        "img_gen",
+        "branding_ai"
+      ],
+      "url": "https://www.fotor.com",
+      "restricciones": "Freemium; descarga en alta solo de pago."
+    },
+    {
+      "id": 124,
+      "cat": "img2video",
+      "tool": "Kling AI",
+      "body": "Convierte una imagen estática en un clip cinematográfico con movimiento coherente.",
+      "dific": 2,
+      "workflow": "Imagen -> Prompt de movimiento -> Clip",
+      "combinaciones": [
+        "video_gen"
+      ],
+      "url": "https://klingai.com",
+      "restricciones": "Freemium; créditos diarios limitados."
+    },
+    {
+      "id": 125,
+      "cat": "video2video",
+      "tool": "EbSynth",
+      "body": "Transfiere el estilo de un fotograma a todo un vídeo manteniendo el movimiento.",
+      "dific": 3,
+      "workflow": "Frame clave -> Estilo -> Vídeo estilizado",
+      "combinaciones": [
+        "video_edit"
+      ],
+      "url": "https://ebsynth.com",
+      "restricciones": "Open source/ gratuito; funciona por segmentos cortos."
+    },
+    {
+      "id": 126,
+      "cat": "audio2video",
+      "tool": "Hedra",
+      "body": "Genera vídeos de personajes que hablan sincronizados con un audio.",
+      "dific": 2,
+      "workflow": "Audio -> Avatar parlante -> Vídeo",
+      "combinaciones": [
+        "lip_sync",
+        "avatar_ai"
+      ],
+      "url": "https://www.hedra.com",
+      "restricciones": "Freemium; minutos de vídeo limitados."
+    },
+    {
+      "id": 127,
+      "cat": "lip_sync",
+      "tool": "Wav2Lip",
+      "body": "Sincroniza los labios de un rostro con cualquier pista de voz.",
+      "dific": 3,
+      "workflow": "Vídeo + Audio -> Lip sync -> Exportar",
+      "combinaciones": [
+        "face_swap"
+      ],
+      "url": "https://github.com/Rudrabha/Wav2Lip",
+      "restricciones": "Open source; requiere GPU y da resultados medios en resolución alta."
+    },
+    {
+      "id": 128,
+      "cat": "face_swap",
+      "tool": "InsightFace",
+      "body": "Biblioteca de análisis e intercambio de rostros con modelos open source.",
+      "dific": 3,
+      "workflow": "Rostro fuente -> Swap -> Render",
+      "combinaciones": [
+        "avatar_ai"
+      ],
+      "url": "https://github.com/deepinsight/insightface",
+      "restricciones": "Open source; uso responsable obligatorio."
+    },
+    {
+      "id": 129,
+      "cat": "object_removal",
+      "tool": "ProPainter",
+      "body": "Elimina objetos y personas de un vídeo de forma temporalmente coherente.",
+      "dific": 3,
+      "workflow": "Vídeo -> Máscara -> Inpaint -> Exportar",
+      "combinaciones": [
+        "img_inpainting"
+      ],
+      "url": "https://github.com/sczhou/ProPainter",
+      "restricciones": "Open source; costoso en GPU con clips largos."
+    },
+    {
+      "id": 130,
+      "cat": "motion_tracking",
+      "tool": "MediaPipe",
+      "body": "Detecta cuerpo, manos y rostro en tiempo real para controlar animaciones.",
+      "dific": 2,
+      "workflow": "Vídeo -> Keypoints -> Tracking",
+      "combinaciones": [
+        "pose_estimation"
+      ],
+      "url": "https://developers.google.com/mediapipe",
+      "restricciones": "Open source; exactitud limitada con oclusiones."
+    },
+    {
+      "id": 131,
+      "cat": "colorization",
+      "tool": "DeOldify",
+      "body": "Colorea automáticamente vídeos y fotos antiguas con aspecto natural.",
+      "dific": 3,
+      "workflow": "Vídeo antiguo -> Coloreado -> Restauración",
+      "combinaciones": [
+        "superres"
+      ],
+      "url": "https://github.com/jantic/DeOldify",
+      "restricciones": "Open source; requiere GPU y ajuste manual para buenos resultados."
+    },
+    {
+      "id": 132,
+      "cat": "slowmo_ai",
+      "tool": "RIFE",
+      "body": "Interpola fotogramas para crear cámara lenta suave a partir de vídeo normal.",
+      "dific": 2,
+      "workflow": "Vídeo -> Interpolación -> Slow motion",
+      "combinaciones": [
+        "video_edit"
+      ],
+      "url": "https://github.com/megvii-research/RIFE",
+      "restricciones": "Open source; artefactos en escenas de mucho movimiento."
+    },
+    {
+      "id": 133,
+      "cat": "superres",
+      "tool": "Real-ESRGAN",
+      "body": "Aumenta la resolución de imágenes y fotogramas eliminando ruido y borrosidad.",
+      "dific": 2,
+      "workflow": "Imagen -> Upscale x4 -> Detalle",
+      "combinaciones": [
+        "img_upscale"
+      ],
+      "url": "https://github.com/xinntao/Real-ESRGAN",
+      "restricciones": "Open source; requiere GPU para volúmenes grandes."
+    },
+    {
+      "id": 134,
+      "cat": "depth_estimation",
+      "tool": "Depth Anything V2",
+      "body": "Estima el mapa de profundidad de cualquier imagen con modelos abiertos.",
+      "dific": 3,
+      "workflow": "Imagen -> Mapa de profundidad -> 3D",
+      "combinaciones": [
+        "3d_gen"
+      ],
+      "url": "https://github.com/DepthAnything/Depth-Anything-V2",
+      "restricciones": "Open source; precisa GPU para inferencia rápida."
+    },
+    {
+      "id": 135,
+      "cat": "pose_estimation",
+      "tool": "OpenPose",
+      "body": "Detecta esqueletos de cuerpo, cara y manos en imagen o vídeo.",
+      "dific": 3,
+      "workflow": "Vídeo -> Esqueletos -> Datos de pose",
+      "combinaciones": [
+        "motion_tracking"
+      ],
+      "url": "https://github.com/CMU-Perceptual-Computing-Lab/openpose",
+      "restricciones": "Open source; pesado en CPU, ideal con GPU."
+    },
+    {
+      "id": 136,
+      "cat": "segmentation",
+      "tool": "SAM 2",
+      "body": "Segmenta objetos en imágenes y vídeos con puntas interactivas.",
+      "dific": 2,
+      "workflow": "Clic -> Máscara -> Seguimiento en vídeo",
+      "combinaciones": [
+        "object_removal"
+      ],
+      "url": "https://github.com/facebookresearch/sam2",
+      "restricciones": "Open source; requiere GPU para vídeo."
+    },
+    {
+      "id": 137,
+      "cat": "stable_diff",
+      "tool": "Stable Diffusion WebUI",
+      "body": "Interfaz completa para generar imágenes con Stable Diffusion y sus extensiones.",
+      "dific": 2,
+      "workflow": "Prompt -> Muestreo -> Imagen",
+      "combinaciones": [
+        "img_gen",
+        "controlnet"
+      ],
+      "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui",
+      "restricciones": "Open source; necesita GPU con al menos 8 GB."
+    },
+    {
+      "id": 138,
+      "cat": "flux",
+      "tool": "FLUX.1 (Black Forest Labs)",
+      "body": "Modelo de generación de imágenes con excelente tipografía y fidelidad al prompt.",
+      "dific": 2,
+      "workflow": "Prompt -> FLUX -> Imagen",
+      "combinaciones": [
+        "img_gen"
+      ],
+      "url": "https://blackforestlabs.ai",
+      "restricciones": "Licencia abierta para uso no comercial; API de pago."
+    },
+    {
+      "id": 139,
+      "cat": "controlnet",
+      "tool": "ControlNet",
+      "body": "Guía la generación de imágenes con mapas de pose, bordes o profundidad.",
+      "dific": 3,
+      "workflow": "Bordes/pose -> ControlNet -> Imagen",
+      "combinaciones": [
+        "stable_diff",
+        "pose_estimation"
+      ],
+      "url": "https://github.com/lllyasviel/ControlNet",
+      "restricciones": "Open source; duplica el coste de GPU al usar condiciones."
+    },
+    {
+      "id": 140,
+      "cat": "lora",
+      "tool": "kohya_ss",
+      "body": "Entrena y gestiona adaptadores LoRA para personalizar modelos de imagen.",
+      "dific": 3,
+      "workflow": "Dataset -> Entrenamiento LoRA -> Inferencia",
+      "combinaciones": [
+        "fine_tuning",
+        "stable_diff"
+      ],
+      "url": "https://github.com/bmaltais/kohya_ss",
+      "restricciones": "Open source; requiere GPU y preparar el dataset."
+    },
+    {
+      "id": 141,
+      "cat": "fine_tuning",
+      "tool": "Axolotl",
+      "body": "Fine-tune modelos de lenguaje (LoRA/QLoRA) con configuración en YAML.",
+      "dific": 3,
+      "workflow": "Dataset -> Entrenamiento -> Modelo",
+      "combinaciones": [
+        "lora",
+        "ia_local"
+      ],
+      "url": "https://github.com/axolotl-ai-cloud/axolotl",
+      "restricciones": "Open source; curva técnica y GPU necesaria."
+    },
+    {
+      "id": 142,
+      "cat": "icml_video",
+      "tool": "Open-Sora",
+      "body": "Generador de vídeo open source con arquitectura transparente y reproducible.",
+      "dific": 3,
+      "workflow": "Prompt -> Open-Sora -> Clip",
+      "combinaciones": [
+        "video_gen"
+      ],
+      "url": "https://github.com/hpcaitech/Open-Sora",
+      "restricciones": "Open source; calidad por debajo de modelos comerciales."
+    },
+    {
+      "id": 143,
+      "cat": "bert",
+      "tool": "BERT (Google)",
+      "body": "Modelo de lenguaje bidireccional para clasificación y extracción de texto.",
+      "dific": 2,
+      "workflow": "Texto -> Embeddings BERT -> Clasificación",
+      "combinaciones": [
+        "nlp",
+        "embeddings"
+      ],
+      "url": "https://github.com/google-research/bert",
+      "restricciones": "Open source; modelos antiguos frente a LLMs modernos."
+    },
+    {
+      "id": 144,
+      "cat": "whisper",
+      "tool": "faster-whisper",
+      "body": "Transcripción y traducción de audio acelerada con implementación optimizada de Whisper.",
+      "dific": 2,
+      "workflow": "Audio -> Transcripción -> SRT",
+      "combinaciones": [
+        "transcripcion"
+      ],
+      "url": "https://github.com/SYSTRAN/faster-whisper",
+      "restricciones": "Open source; requiere GPU para tiempo real."
+    },
+    {
+      "id": 145,
+      "cat": "ollama",
+      "tool": "Ollama",
+      "body": "Ejecuta modelos de lenguaje localmente con un solo comando desde la terminal.",
+      "dific": 1,
+      "workflow": "Instalar -> Modelo local -> Chat/API",
+      "combinaciones": [
+        "ia_local",
+        "herramientas_terminal"
+      ],
+      "url": "https://ollama.com",
+      "restricciones": "Open source; el rendimiento depende de tu hardware."
+    },
+    {
+      "id": 146,
+      "cat": "gradio",
+      "tool": "Gradio",
+      "body": "Crea demos web interactivas de tus modelos de IA en minutos.",
+      "dific": 1,
+      "workflow": "Modelo -> Gradio -> Demo pública",
+      "combinaciones": [
+        "api_ai",
+        "website_ai"
+      ],
+      "url": "https://www.gradio.app",
+      "restricciones": "Open source; dominio compartido salvo plan."
+    },
+    {
+      "id": 147,
+      "cat": "nlp",
+      "tool": "spaCy",
+      "body": "Pipeline industrial de procesamiento de lenguaje natural en Python.",
+      "dific": 2,
+      "workflow": "Texto -> Tokens -> Entidades",
+      "combinaciones": [
+        "bert"
+      ],
+      "url": "https://spacy.io",
+      "restricciones": "Open source; modelos grandes necesitan RAM."
+    },
+    {
+      "id": 148,
+      "cat": "cv_ai",
+      "tool": "OpenCV",
+      "body": "Biblioteca de visión por computador para procesar imágenes y vídeo en tiempo real.",
+      "dific": 1,
+      "workflow": "Imagen -> Preprocesado -> Detección",
+      "combinaciones": [
+        "segmentation"
+      ],
+      "url": "https://opencv.org",
+      "restricciones": "Open source; documentación amplia pero dispersa."
+    },
+    {
+      "id": 149,
+      "cat": "asr",
+      "tool": "Vosk",
+      "body": "Reconocimiento de voz offline ligero para más de 20 idiomas.",
+      "dific": 2,
+      "workflow": "Audio -> ASR local -> Texto",
+      "combinaciones": [
+        "transcripcion",
+        "ia_local"
+      ],
+      "url": "https://alphacephei.com/vosk/",
+      "restricciones": "Open source; precisión menor que Whisper en ruido."
+    },
+    {
+      "id": 150,
+      "cat": "tesseract",
+      "tool": "Tesseract OCR",
+      "body": "Motor de OCR open source para extraer texto de imágenes y documentos escaneados.",
+      "dific": 2,
+      "workflow": "Escaneo -> OCR -> Texto",
+      "combinaciones": [
+        "ocr"
+      ],
+      "url": "https://github.com/tesseract-ocr/tesseract",
+      "restricciones": "Open source; precisa preprocesado con documentos sucios."
+    },
+    {
+      "id": 151,
+      "cat": "exam_prep",
+      "tool": "Quizlet",
+      "body": "Genera juegos de estudio, cuestionarios y tarjetas para preparar exámenes.",
+      "dific": 1,
+      "workflow": "Tema -> Tarjetas -> Test",
+      "combinaciones": [
+        "flashcards_ai",
+        "estudiar"
+      ],
+      "url": "https://quizlet.com",
+      "restricciones": "Freemium; funciones de IA solo en plan de pago."
+    },
+    {
+      "id": 152,
+      "cat": "aprendizaje_lang",
+      "tool": "Duolingo",
+      "body": "App de idiomas con lecciones cortas y repaso adaptativo por IA.",
+      "dific": 1,
+      "workflow": "Lección -> Práctica -> Racha",
+      "combinaciones": [
+        "repaso_espaciado"
+      ],
+      "url": "https://www.duolingo.com",
+      "restricciones": "Freemium; la ruta completa requiere suscripción."
+    },
+    {
+      "id": 153,
+      "cat": "libro_ai",
+      "tool": "NotebookLM",
+      "body": "Sube un libro o documento y conversa con él, con resúmenes y notas al margen.",
+      "dific": 1,
+      "workflow": "Libro -> Notebook -> Preguntas",
+      "combinaciones": [
+        "retrieval_rag",
+        "estudiar"
+      ],
+      "url": "https://notebooklm.google.com",
+      "restricciones": "Gratis con límites de fuentes y cuota diaria."
+    },
+    {
+      "id": 154,
+      "cat": "codigo_aprender",
+      "tool": "Mimo",
+      "body": "Aprende a programar con lecciones interactivas guiadas por IA.",
+      "dific": 1,
+      "workflow": "Reto -> Código -> Feedback",
+      "combinaciones": [
+        "estudiar"
+      ],
+      "url": "https://mimo.org",
+      "restricciones": "Freemium; rutas completas de pago."
+    },
+    {
+      "id": 155,
+      "cat": "repaso_espaciado",
+      "tool": "RemNote",
+      "body": "Notas con repaso espaciado automático extraído de lo que escribes.",
+      "dific": 1,
+      "workflow": "Notas -> Tarjetas -> Repaso",
+      "combinaciones": [
+        "second_brain",
+        "flashcards_ai"
+      ],
+      "url": "https://www.remnote.com",
+      "restricciones": "Freemium; funciones avanzadas de pago."
+    },
+    {
+      "id": 156,
+      "cat": "guia_estudio",
+      "tool": "Socratic by Google",
+      "body": "Explica paso a paso dudas de estudio a partir de una foto del enunciado.",
+      "dific": 1,
+      "workflow": "Foto -> Explicación -> Ejemplos",
+      "combinaciones": [
+        "tutor_ai",
+        "estudiar"
+      ],
+      "url": "https://socratic.org",
+      "restricciones": "Gratis; cobertura limitada a materias concretas."
+    },
+    {
+      "id": 157,
+      "cat": "practica_examen",
+      "tool": "Khanmigo",
+      "body": "Tutor de Khan Academy que guía sin dar la respuesta directa.",
+      "dific": 2,
+      "workflow": "Duda -> Preguntas guiadas -> Práctica",
+      "combinaciones": [
+        "tutor_ai",
+        "exam_prep"
+      ],
+      "url": "https://www.khanmigo.ai",
+      "restricciones": "De pago; requiere suscripción de Khan Academy."
+    },
+    {
+      "id": 158,
+      "cat": "social_media_ai",
+      "tool": "Buffer",
+      "body": "Programa y crea publicaciones para redes con ayuda de IA.",
+      "dific": 1,
+      "workflow": "Idea -> Post -> Programación",
+      "combinaciones": [
+        "marketing_ai"
+      ],
+      "url": "https://buffer.com",
+      "restricciones": "Freemium; canales y programas limitados."
+    },
+    {
+      "id": 159,
+      "cat": "speech_draft",
+      "tool": "Yoodli",
+      "body": "Ensayo de discursos con retroalimentación sobre ritmo, muletillas y claridad.",
+      "dific": 2,
+      "workflow": "Guion -> Ensayo -> Feedback",
+      "combinaciones": [
+        "presentacion_live"
+      ],
+      "url": "https://www.yoodli.ai",
+      "restricciones": "Freemium; informes completos de pago."
+    },
+    {
+      "id": 160,
+      "cat": "historias_interactive",
+      "tool": "Character.AI",
+      "body": "Crea personajes con los que conversar en historias interactivas.",
+      "dific": 1,
+      "workflow": "Personaje -> Diálogo ->rama",
+      "combinaciones": [
+        "storytelling_ai",
+        "chatbot"
+      ],
+      "url": "https://character.ai",
+      "restricciones": "Freemium; mensajes diarios limitados."
+    },
+    {
+      "id": 161,
+      "cat": "propuesta_ai",
+      "tool": "PandaDoc",
+      "body": "Genera propuestas comerciales con plantillas, firmas y seguimiento.",
+      "dific": 2,
+      "workflow": "Cliente -> Propuesta -> Firma",
+      "combinaciones": [
+        "email_gen",
+        "resumen_ejecutivo"
+      ],
+      "url": "https://www.pandadoc.com",
+      "restricciones": "Freemium; documentos ilimitados solo de pago."
+    },
+    {
+      "id": 162,
+      "cat": "adstxt_ai",
+      "tool": "AdCreative.ai",
+      "body": "Genera creatividades publicitarias y variantes de anuncio probadas.",
+      "dific": 2,
+      "workflow": "Producto -> Creatividades -> Test A/B",
+      "combinaciones": [
+        "marketing_ai",
+        "img_gen"
+      ],
+      "url": "https://www.adcreative.ai",
+      "restricciones": "De pago; créditos mensuales."
+    },
+    {
+      "id": 163,
+      "cat": "logo_gen",
+      "tool": "Looka",
+      "body": "Diseña logos y manual de marca con IA en minutos.",
+      "dific": 1,
+      "workflow": "Marca -> Bocetos -> Logo final",
+      "combinaciones": [
+        "branding_ai"
+      ],
+      "url": "https://looka.com",
+      "restricciones": "De pago; el logo completo requiere compra."
+    },
+    {
+      "id": 164,
+      "cat": "branding_ai",
+      "tool": "Brandmark",
+      "body": "Crea identidad de marca: logo, paleta, tipografías y aplicaciones.",
+      "dific": 2,
+      "workflow": "Nombre -> Identidad -> Brand kit",
+      "combinaciones": [
+        "logo_gen"
+      ],
+      "url": "https://brandmark.io",
+      "restricciones": "De pago; paquetes por proyecto."
+    },
+    {
+      "id": 165,
+      "cat": "website_ai",
+      "tool": "v0 by Vercel",
+      "body": "Genera interfaces web completas a partir de una descripción en lenguaje natural.",
+      "dific": 2,
+      "workflow": "Descripción -> Componentes -> Deploy",
+      "combinaciones": [
+        "code_gen"
+      ],
+      "url": "https://v0.dev",
+      "restricciones": "Freemium; créditos de generación limitados."
+    },
+    {
+      "id": 166,
+      "cat": "storytelling_ai",
+      "tool": "NovelAI",
+      "body": "Asistente narrativo para historias con continuidad de personajes y mundo.",
+      "dific": 2,
+      "workflow": "Idea -> Capítulo -> Historia",
+      "combinaciones": [
+        "guiones_ai"
+      ],
+      "url": "https://novelai.net",
+      "restricciones": "Freemium; suscripción por tokens de memoria."
+    },
+    {
+      "id": 167,
+      "cat": "rpa_ai",
+      "tool": "UiPath Autopilot",
+      "body": "Automatiza tareas repetitivas de escritorio con instrucciones en lenguaje natural.",
+      "dific": 3,
+      "workflow": "Tarea -> Flujo RPA -> Ejecución",
+      "combinaciones": [
+        "automatizaciones"
+      ],
+      "url": "https://www.uipath.com/product/autopilot",
+      "restricciones": "Enterprise; precio por robot/usuario."
+    },
+    {
+      "id": 168,
+      "cat": "auto_pipeline",
+      "tool": "Kestra",
+      "body": "Orquesta pipelines de datos y flujos de trabajo con definición en YAML.",
+      "dific": 2,
+      "workflow": "Evento -> Flujo -> Tareas",
+      "combinaciones": [
+        "data_pipeline",
+        "automatizaciones"
+      ],
+      "url": "https://kestra.io",
+      "restricciones": "Open source; la nube es de pago."
+    },
+    {
+      "id": 169,
+      "cat": "api_ai",
+      "tool": "OpenRouter",
+      "body": "Una sola API para acceder a decenas de modelos de LLM con facturación por uso.",
+      "dific": 2,
+      "workflow": "API key -> Request -> Respuesta",
+      "combinaciones": [
+        "gpt_api",
+        "llm_workflow"
+      ],
+      "url": "https://openrouter.ai",
+      "restricciones": "Pago por tokens; sin tier gratuito amplio."
+    },
+    {
+      "id": 170,
+      "cat": "voicebot",
+      "tool": "Vapi",
+      "body": "Crea asistentes de voz para llamadas con transcripción y respuestas en tiempo real.",
+      "dific": 3,
+      "workflow": "Llamada -> STT -> LLM -> Voz",
+      "combinaciones": [
+        "asr",
+        "audio_tts"
+      ],
+      "url": "https://vapi.ai",
+      "restricciones": "De pago por minuto de llamada."
+    },
+    {
+      "id": 171,
+      "cat": "scheduling_ai",
+      "tool": "Reclaim.ai",
+      "body": "Planifica automáticamente bloques de trabajo, reuniones y hábitos en tu calendario.",
+      "dific": 1,
+      "workflow": "Calendario -> Reglas -> Bloques",
+      "combinaciones": [
+        "automatizaciones"
+      ],
+      "url": "https://reclaim.ai",
+      "restricciones": "Freemium; sincronizaciones limitadas."
+    },
+    {
+      "id": 172,
+      "cat": "notificaciones_ai",
+      "tool": "IFTTT",
+      "body": "Conecta apps y servicios con reglas automáticas que disparan alertas.",
+      "dific": 1,
+      "workflow": "Evento -> Regla -> Notificación",
+      "combinaciones": [
+        "automatizaciones"
+      ],
+      "url": "https://ifttt.com",
+      "restricciones": "Freemium; applets limitados."
+    },
+    {
+      "id": 173,
+      "cat": "scraping_ai",
+      "tool": "Firecrawl",
+      "body": "Extrae contenido web limpio en markdown o JSON listo para LLMs.",
+      "dific": 2,
+      "workflow": "URL -> Crawl -> JSON",
+      "combinaciones": [
+        "data_pipeline"
+      ],
+      "url": "https://firecrawl.dev",
+      "restricciones": "Freemium; créditos de páginas limitados."
+    },
+    {
+      "id": 174,
+      "cat": "data_pipeline",
+      "tool": "Airbyte",
+      "body": "Sincroniza datos entre cientos de fuentes y destinos con conectores gestionados.",
+      "dific": 2,
+      "workflow": "Fuente -> Conector -> Destino",
+      "combinaciones": [
+        "etl_ai"
+      ],
+      "url": "https://airbyte.com",
+      "restricciones": "Open source; nube y destinos premium de pago."
+    },
+    {
+      "id": 175,
+      "cat": "funciones_ai",
+      "tool": "OpenAI Assistants API",
+      "body": "Define funciones (tools) que el modelo puede llamar para ejecutar acciones reales.",
+      "dific": 3,
+      "workflow": "Definición -> Tool call -> Ejecución",
+      "combinaciones": [
+        "api_ai",
+        "agentes"
+      ],
+      "url": "https://platform.openai.com",
+      "restricciones": "Pago por tokens; gestiones de estado complejas."
+    },
+    {
+      "id": 176,
+      "cat": "predictivo_ai",
+      "tool": "Obviously AI",
+      "body": "Predice resultados de negocio (churn, ventas) sin escribir código.",
+      "dific": 2,
+      "workflow": "Datos -> Modelo -> Predicción",
+      "combinaciones": [
+        "dataviz_ai"
+      ],
+      "url": "https://www.obviously.ai",
+      "restricciones": "De pago; por tabla/uso."
+    },
+    {
+      "id": 177,
+      "cat": "etl_ai",
+      "tool": "PandasAI",
+      "body": "Consulta y transforma DataFrames en lenguaje natural desde Python.",
+      "dific": 2,
+      "workflow": "CSV -> Pregunta -> Tabla",
+      "combinaciones": [
+        "data_pipeline"
+      ],
+      "url": "https://github.com/sinai-project/pandas-ai",
+      "restricciones": "Open source; requiere API key de LLM."
+    },
+    {
+      "id": 178,
+      "cat": "anomaly_det",
+      "tool": "WhyLabs",
+      "body": "Detecta anomalías y deriva de datos en pipelines de ML en producción.",
+      "dific": 3,
+      "workflow": "Logs -> Perfil -> Alerta",
+      "combinaciones": [
+        "monitorizacion",
+        "data_pipeline"
+      ],
+      "url": "https://whylabs.ai",
+      "restricciones": "Freemium; volumen de datos limitado."
+    },
+    {
+      "id": 179,
+      "cat": "digital_twin",
+      "tool": "NVIDIA Omniverse",
+      "body": "Simula entornos físicos y gemelos digitales conectados en tiempo real.",
+      "dific": 3,
+      "workflow": "Escena -> Simulación -> Gemelo",
+      "combinaciones": [
+        "simulacion_ai",
+        "3d_gen"
+      ],
+      "url": "https://www.nvidia.com/en-us/omniverse/",
+      "restricciones": "Requiere hardware NVIDIA potente."
+    },
+    {
+      "id": 180,
+      "cat": "simulacion_ai",
+      "tool": "NVIDIA Isaac Sim",
+      "body": "Simulador de robots para entrenar y validar políticas de IA antes de desplegar.",
+      "dific": 3,
+      "workflow": "Escena -> Entrenamiento -> Robot real",
+      "combinaciones": [
+        "digital_twin",
+        "agentes"
+      ],
+      "url": "https://developer.nvidia.com/isaac/sim",
+      "restricciones": "Requiere GPU NVIDIA y curva alta."
+    },
+    {
+      "id": 181,
+      "cat": "ai_transcribe_live",
+      "tool": "Krisp",
+      "body": "Transcripción y subtítulos en vivo mientras hablas, eliminando también ruido.",
+      "dific": 1,
+      "workflow": "Voz -> Transcripción -> Subtítulos",
+      "combinaciones": [
+        "asr",
+        "subtitle_gen"
+      ],
+      "url": "https://krisp.ai",
+      "restricciones": "Freemium; minutos de transcripción limitados."
+    },
+    {
+      "id": 182,
+      "cat": "ai_image_search",
+      "tool": "Google Lens",
+      "body": "Busca información, productos y texto a partir de una imagen.",
+      "dific": 1,
+      "workflow": "Foto -> Coincidencias -> Resultados",
+      "combinaciones": [
+        "ai_search"
+      ],
+      "url": "https://lens.google.com",
+      "restricciones": "Gratis; cobertura según región."
+    },
+    {
+      "id": 183,
+      "cat": "captura_notas",
+      "tool": "Microsoft Lens",
+      "body": "Escanea pizarras, documentos y recortes con mejora automática y OCR.",
+      "dific": 1,
+      "workflow": "Cámara -> Escaneo -> Nota",
+      "combinaciones": [
+        "ocr",
+        "notas_ai"
+      ],
+      "url": "https://www.microsoft.com/en-us/microsoft-lens",
+      "restricciones": "Gratis; exporta a OneNote/PDF."
+    },
+    {
+      "id": 184,
+      "cat": "prompt_playground",
+      "tool": "Promptfoo",
+      "body": "Evalúa y compara prompts y modelos con tests automatizados y en paralelo.",
+      "dific": 2,
+      "workflow": "Prompt -> Casos de prueba -> Informe",
+      "combinaciones": [
+        "compare_models",
+        "llm_workflow"
+      ],
+      "url": "https://www.promptfoo.dev",
+      "restricciones": "Open source; la nube y team features son de pago."
+    },
+    {
+      "id": 185,
+      "cat": "compare_models",
+      "tool": "LMSYS Chatbot Arena",
+      "body": "Compara modelos de lenguaje con votaciones ciegas de la comunidad.",
+      "dific": 1,
+      "workflow": "Duelo -> Votos -> Ranking",
+      "combinaciones": [
+        "prompt_playground"
+      ],
+      "url": "https://lmarena.ai",
+      "restricciones": "Gratis; no sustituye tests propios."
+    },
+    {
+      "id": 186,
+      "cat": "ia_local",
+      "tool": "LM Studio",
+      "body": "Interfaz de escritorio para descargar y conversar con modelos locales sin código.",
+      "dific": 1,
+      "workflow": "Descargar -> Chat -> API local",
+      "combinaciones": [
+        "ollama"
+      ],
+      "url": "https://lmstudio.ai",
+      "restricciones": "Gratis para uso personal; modelos según licencia."
+    },
+    {
+      "id": 187,
+      "cat": "ia_server",
+      "tool": "vLLM",
+      "body": "Servidor de inferencia de LLMs de alto rendimiento con serving optimizado.",
+      "dific": 3,
+      "workflow": "Modelo -> vLLM -> API",
+      "combinaciones": [
+        "ollama",
+        "devops"
+      ],
+      "url": "https://github.com/vllm-project/vllm",
+      "restricciones": "Open source; requiere GPU potente."
+    },
+    {
+      "id": 188,
+      "cat": "extensiones_navegador",
+      "tool": "Sider",
+      "body": "Asistente de IA integrado en el navegador para resumir, traducir y preguntar.",
+      "dific": 1,
+      "workflow": "Página -> Sidebar IA -> Acción",
+      "combinaciones": [
+        "resumen_auto"
+      ],
+      "url": "https://sider.ai",
+      "restricciones": "Freemium; consultas diarias limitadas."
+    },
+    {
+      "id": 189,
+      "cat": "navegador_ai",
+      "tool": "Brave Leo",
+      "body": "Asistente IA integrado en el navegador Brave para navegar y resumir.",
+      "dific": 1,
+      "workflow": "URL -> Leo -> Respuesta",
+      "combinaciones": [
+        "ai_search"
+      ],
+      "url": "https://brave.com/leo/",
+      "restricciones": "Gratis con límites de uso."
+    },
+    {
+      "id": 190,
+      "cat": "navegador_privacidad",
+      "tool": "Brave",
+      "body": "Navegador con bloqueo de rastreo y trackers por defecto.",
+      "dific": 1,
+      "workflow": "Navegación -> Bloqueo -> Privacidad",
+      "combinaciones": [
+        "seguridad"
+      ],
+      "url": "https://brave.com",
+      "restricciones": "Open source; ciertos sitios requieren ajustes."
+    },
+    {
+      "id": 191,
+      "cat": "navegadores",
+      "tool": "Vivaldi",
+      "body": "Navegador altamente personalizable con gestor de espacios y notas integradas.",
+      "dific": 1,
+      "workflow": "Pestañas -> Espacios -> Notas",
+      "combinaciones": [
+        "software_escritorio"
+      ],
+      "url": "https://vivaldi.com",
+      "restricciones": "Gratis; sincronización propia."
+    },
+    {
+      "id": 192,
+      "cat": "software_escritorio",
+      "tool": "Raycast",
+      "body": "Lanzador de escritorio con extensiones de IA para traducir, resumir y automatizar.",
+      "dific": 1,
+      "workflow": "Atajo -> Comando -> Acción",
+      "combinaciones": [
+        "herramientas_terminal"
+      ],
+      "url": "https://www.raycast.com",
+      "restricciones": "Freemium; extensiones Pro de pago."
+    },
+    {
+      "id": 193,
+      "cat": "herramientas_terminal",
+      "tool": "aider",
+      "body": "Edita código en tu repositorio desde la terminal conversando con un LLM.",
+      "dific": 2,
+      "workflow": "Terminal -> Diff -> Commit",
+      "combinaciones": [
+        "code_gen",
+        "editores_codigo"
+      ],
+      "url": "https://aider.chat",
+      "restricciones": "Open source; consume tokens de la API que uses."
+    },
+    {
+      "id": 194,
+      "cat": "editores_codigo",
+      "tool": "Zed",
+      "body": "Editor de código rápido con asistente IA integrado para edición en equipo.",
+      "dific": 1,
+      "workflow": "Abrir repo -> Edición -> Pair programming",
+      "combinaciones": [
+        "ide",
+        "code_gen"
+      ],
+      "url": "https://zed.dev",
+      "restricciones": "Open source; funciones de IA según proveedor."
+    },
+    {
+      "id": 195,
+      "cat": "control_versiones",
+      "tool": "GitButler",
+      "body": "Cliente de Git con ramas en paralelo y ayuda IA para commits y cambios.",
+      "dific": 1,
+      "workflow": "Cambios -> Ramas -> Merge",
+      "combinaciones": [
+        "devops"
+      ],
+      "url": "https://gitbutler.com",
+      "restricciones": "Freemium; funciones avanzadas de pago."
+    },
+    {
+      "id": 196,
+      "cat": "devops",
+      "tool": "Harness",
+      "body": "Plataforma de CI/CD y entrega continua con IA para revisar y optimizar pipelines.",
+      "dific": 3,
+      "workflow": "Código -> Pipeline -> Deploy",
+      "combinaciones": [
+        "monitorizacion"
+      ],
+      "url": "https://www.harness.io",
+      "restricciones": "Enterprise; precio por usuario."
+    },
+    {
+      "id": 197,
+      "cat": "monitorizacion",
+      "tool": "Datadog",
+      "body": "Observabilidad de infraestructura y apps con alertas y detección de anomalías.",
+      "dific": 3,
+      "workflow": "Métricas -> Dashboards -> Alertas",
+      "combinaciones": [
+        "anomaly_det"
+      ],
+      "url": "https://www.datadoghq.com",
+      "restricciones": "De pago; ingest por host."
+    },
+    {
+      "id": 198,
+      "cat": "base_datos",
+      "tool": "Supabase",
+      "body": "Backend open source con Postgres, auth, storage y búsqueda vectorial.",
+      "dific": 2,
+      "workflow": "DB -> API -> App",
+      "combinaciones": [
+        "vector_db",
+        "api_ai"
+      ],
+      "url": "https://supabase.com",
+      "restricciones": "Freemium; cuota por proyecto."
+    },
+    {
+      "id": 199,
+      "cat": "redes",
+      "tool": "Tailscale",
+      "body": "Red privada entre tus dispositivos con encriptación y acceso sin port forwarding.",
+      "dific": 1,
+      "workflow": "Dispositivo -> Red -> Acceso",
+      "combinaciones": [
+        "seguridad"
+      ],
+      "url": "https://tailscale.com",
+      "restricciones": "Freemium hasta 100 dispositivos."
+    },
+    {
+      "id": 200,
+      "cat": "virtualizacion",
+      "tool": "Docker",
+      "body": "Empaqueta aplicaciones en contenedores portables y reproducibles.",
+      "dific": 1,
+      "workflow": "Dockerfile -> Imagen -> Contenedor",
+      "combinaciones": [
+        "devops"
+      ],
+      "url": "https://www.docker.com",
+      "restricciones": "Gratis para uso personal; Desktop de pago en empresas."
+    },
+    {
+      "id": 201,
+      "cat": "explicador",
+      "tool": "Khan Academy",
+      "body": "Explicaciones paso a paso de cualquier tema con práctica asociada.",
+      "dific": 1,
+      "workflow": "Tema -> Lección -> Ejercicio",
+      "combinaciones": [
+        "tutor_ai",
+        "estudiar"
+      ],
+      "url": "https://www.khanacademy.org",
+      "restricciones": "Gratis; Khanmigo de pago."
+    },
+    {
+      "id": 202,
+      "cat": "idea_crosspoll",
+      "tool": "Miro AI",
+      "body": "Tablero colaborativo con IA para cruzar ideas, resumir y generar diagramas.",
+      "dific": 1,
+      "workflow": "Notas -> Tablero -> Conexiones",
+      "combinaciones": [
+        "mindmap",
+        "concept_combiner"
+      ],
+      "url": "https://miro.com",
+      "restricciones": "Freemium; tableros y edits limitados."
+    },
+    {
+      "id": 203,
+      "cat": "screen_rec",
+      "tool": "Screen Studio",
+      "body": "Graba pantalla con zoom automático del cursor y edición rápida.",
+      "dific": 1,
+      "workflow": "Grabación -> Auto-zoom -> Exportar",
+      "combinaciones": [
+        "thumbnail_ai"
+      ],
+      "url": "https://www.screen.studio",
+      "restricciones": "De pago; solo macOS."
+    },
+    {
+      "id": 204,
+      "cat": "3d_gen",
+      "tool": "Tripo3D",
+      "body": "Genera modelos 3D con texturas desde texto o una única imagen.",
+      "dific": 2,
+      "workflow": "Prompt -> Malla -> Textura",
+      "combinaciones": [
+        "img_gen"
+      ],
+      "url": "https://www.tripo3d.ai",
+      "restricciones": "Freemium; créditos diarios."
+    },
+    {
+      "id": 205,
+      "cat": "data_pipeline",
+      "tool": "dlt",
+      "body": "Carga de datos (ELT) declarativa en Python con esquemas que evolucionan.",
+      "dific": 2,
+      "workflow": "Fuente -> dlt -> Almacén",
+      "combinaciones": [
+        "etl_ai",
+        "api_ai"
+      ],
+      "url": "https://dlthub.com",
+      "restricciones": "Open source; soporte de pago."
+    },
+    {
+      "id": 206,
+      "cat": "nlp",
+      "tool": "Hugging Face Transformers",
+      "body": "Miles de modelos de lenguaje y visión listos para inferencia en Python.",
+      "dific": 2,
+      "workflow": "Modelo -> Pipeline -> Predicción",
+      "combinaciones": [
+        "embeddings",
+        "bert"
+      ],
+      "url": "https://huggingface.co/docs/transformers",
+      "restricciones": "Open source; modelos con licencias variables."
+    },
+    {
+      "id": 207,
+      "cat": "extra",
+      "tool": "Hugging Face Spaces",
+      "body": "Miles de demos de IA desplegadas que puedes probar y hacer fork.",
+      "dific": 1,
+      "workflow": "Space -> Probar -> Fork",
+      "combinaciones": [
+        "gradio"
+      ],
+      "url": "https://huggingface.co/spaces",
+      "restricciones": "Gratis para spaces públicos."
     }
   ]
 }

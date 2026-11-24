@@ -69,13 +69,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests google-genai
 
-      - name: 💾 Restaurar historial de herramientas IA
-        uses: actions/cache@v4
-        with:
-          path: ai_tools_history.json
-          key: ai-tools-history-${{ github.run_id }}
-          restore-keys: ai-tools-history-
-
       - name: 🧰 Enviar herramientas de IA
         env:
           TIPS_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -86,9 +79,15 @@ jobs:
           TG_SESSION_STRING: ${{ secrets.TG_SESSION_STRING }}
         run: python scripts/ai_tools_generator.py
 
-      - name: 💾 Guardar historial
+      # El historial vive en el repo (no en actions/cache): así no hay rollback
+      # por evicción de caché = repetición masiva de herramientas.
+      - name: 📝 Guardar historial + pool en el repo
         if: always()
-        uses: actions/cache/save@v4
-        with:
-          path: ai_tools_history.json
-          key: ai-tools-history-${{ github.run_id }}
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add files/ai_tools_pool.json
+          if [ -f ai_tools_history.json ]; then git add ai_tools_history.json; fi
+          git diff --quiet && git diff --staged --quiet || git commit -m "[bot] update ai tools history + pool"
+          git pull --rebase origin master
+          git push origin master

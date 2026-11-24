@@ -13,7 +13,9 @@ Uso:
 import json
 import os
 import random
+import re
 import sys
+import unicodedata
 from datetime import datetime
 from pathlib import Path
 
@@ -30,6 +32,13 @@ TOOLS_PATH = SCRIPT_DIR.parent / "files" / "herramientas.json"
 BLOG_RESOURCES_PATH = SCRIPT_DIR.parent / "files" / "recursos_blog.json"
 CANDIDATES_PATH = SCRIPT_DIR.parent / "files" / "ai_tools_candidates.json"
 AGENT_SKILLS_PATH = SCRIPT_DIR.parent / "files" / "agent_skills.json"
+POOL_PATH = SCRIPT_DIR.parent / "files" / "ai_tools_pool.json"
+MERGED_TOOLS_PATH = SCRIPT_DIR.parent / "files" / "herramientas_merged.json"
+PUBLICAPIS_PATH = SCRIPT_DIR.parent / "files" / "publicapis_apis.json"
+
+MAX_PROMOTE_PER_RUN = 10
+MAX_POOL_SIZE = 1500
+MAX_SENT_IN_PROMPT = 2000
 
 BOT_TOKEN = os.environ.get("TIPS_BOT_TOKEN", "")
 CHAT_ID = os.environ.get("AI_TOOLS_CHAT_ID", os.environ.get("TIPS_CHAT_ID", "-1004380905505"))
@@ -62,16 +71,90 @@ def load_database():
         return json.load(f)
 
 
+def _history_default():
+    return {
+        "sent_titles": [],
+        "sent_urls": [],
+        "sent_skills": [],
+        "sent_resources": [],
+        "last_run": None,
+        "total_runs": 0,
+        "db_exhausted": False,
+    }
+
+
 def load_history():
     if HISTORY_PATH.exists():
         with open(HISTORY_PATH, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return {"sent_titles": [], "last_run": None, "total_runs": 0, "db_exhausted": False}
+            data = json.load(f)
+        for key, default in _history_default().items():
+            data.setdefault(key, default)
+        return data
+    return _history_default()
 
 
 def save_history(history):
     with open(HISTORY_PATH, "w", encoding="utf-8") as f:
         json.dump(history, f, indent=2, ensure_ascii=False)
+
+
+# ── Normalización / anti-duplicados ──────────────────────────────────────────
+
+def _norm_name(value):
+    """Normaliza un nombre de herramienta/skill para comparar sin falsos positivos."""
+    text = (value or "").strip().lower()
+    text = unicodedata.normalize("NFKD", text)
+    text = "".join(c for c in text if not unicodedata.combining(c))
+    text = re.sub(r"[^a-z0-9]+", " ", text)
+    return " ".join(text.split())
+
+
+def _norm_url(value):
+    """Normaliza una URL para comparar (sin www, query, fragmento ni slash final)."""
+    text = (value or "").strip().lower()
+    text = re.sub(r"^https?://(www\.)?", "", text)
+    text = text.split("#", 1)[0].split("?", 1)[0]
+    return text.rstrip("/")
+
+
+def sent_sets(history):
+    """Devuelve (nombres, urls) normalizados ya enviados como herramientas."""
+    names = {_norm_name(t) for t in history.get("sent_titles", []) if _norm_name(t)}
+    urls = {_norm_url(u) for u in history.get("sent_urls", []) if _norm_url(u)}
+    return names, urls
+
+
+def es_duplicado(item, sent_names, sent_urls, k_name="tool", k_url="url"):
+    """True si el item ya se envió (por nombre o URL) o es inválido."""
+    name = _norm_name(item.get(k_name, ""))
+    if not name:
+        return True
+    if name in sent_names:
+        return True
+    url = _norm_url(item.get(k_url, ""))
+    if url and url in sent_urls:
+        return True
+    return False
+
+
+def filtrar_nuevos(items, sent_names, sent_urls, k_name="tool", k_url="url"):
+    """Filtra items ya enviados y duplicados DENTRO del propio lote."""
+    result = []
+    seen_names, seen_urls = set(), set()
+    for item in items:
+        if es_duplicado(item, sent_names, sent_urls, k_name, k_url):
+            continue
+        name = _norm_name(item.get(k_name, ""))
+        url = _norm_url(item.get(k_url, ""))
+        if name in seen_names:
+            continue
+        if url and url in seen_urls:
+            continue
+        seen_names.add(name)
+        if url:
+            seen_urls.add(url)
+        result.append(item)
+    return result
 
 
 def load_recent_news(count=15):
@@ -108,11 +191,9 @@ def load_agent_skills():
 
 
 def select_skills_from_db(skills, sent_titles, count=2):
-    """Selecciona skills aleatorias que no hayan sido enviadas."""
-    sent = set(sent_titles)
-    available = [s for s in skills if s.get("titulo", "") not in sent]
-    if not available:
-        available = skills[:]
+    """Selecciona skills que NO hayan sido enviadas. Nunca recicla: devuelve menos si hace falta."""
+    sent = {_norm_name(s) for s in sent_titles if _norm_name(s)}
+    available = [s for s in skills if _norm_name(s.get("titulo", "")) not in sent]
     random.shuffle(available)
     return available[:count]
 
@@ -177,11 +258,12 @@ def format_blog_resource_message(res, index):
     return "\n".join(lines)
 
 
-def load_recent_tools(count=10):
-    if not TOOLS_PATH.exists():
+def load_recent_tools(count=25):
+    path = MERGED_TOOLS_PATH if MERGED_TOOLS_PATH.exists() else TOOLS_PATH
+    if not path.exists():
         return []
     try:
-        with open(TOOLS_PATH, "r", encoding="utf-8") as f:
+        with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
         if not isinstance(data, list):
             return []
@@ -224,8 +306,11 @@ def load_blog_resources(count=20):
         return []
 
 
-def load_blog_resources_for_message(count=5):
-    """Load random blog resources for daily message (formatted for Telegram)."""
+def load_blog_resources_for_message(count=5, sent_titles=None):
+    """Load random blog resources for daily message (formatted for Telegram).
+
+    Nunca recicla: si solo quedan N nuevas, devuelve N (0 si no queda ninguna).
+    """
     if not BLOG_RESOURCES_PATH.exists():
         return []
     try:
@@ -233,6 +318,9 @@ def load_blog_resources_for_message(count=5):
             data = json.load(f)
         if not isinstance(data, list):
             return []
+        if sent_titles:
+            sent_names = {_norm_name(t) for t in sent_titles if _norm_name(t)}
+            data = [r for r in data if _norm_name(r.get("titulo", "")) not in sent_names]
         import random
         random.shuffle(data)
         result = []
@@ -359,20 +447,24 @@ def select_random_categories(count=5):
 
 
 def select_tools_from_db(database, history, count=5):
-    all_tools = database["tools"]
-    sent_titles = set(history.get("sent_titles", []))
-    available = [t for t in all_tools if t["tool"] not in sent_titles]
-    if len(available) < count:
-        available = all_tools
+    """Selección de la DB curada sin reciclar: si queda poco, devuelve menos."""
+    all_tools = database.get("tools", [])
+    sent_names, sent_urls = sent_sets(history)
+    available = [t for t in all_tools if not es_duplicado(t, sent_names, sent_urls)]
     random.shuffle(available)
+    return _diversify_by_cat(available, count)
+
+
+def _diversify_by_cat(available, count):
+    """Prioriza categorías distintas, sin repetir dentro del lote."""
     selected = []
     used_cats = set()
     for tool in available:
         if len(selected) >= count:
             break
-        if tool["cat"] not in used_cats:
+        if tool.get("cat") not in used_cats:
             selected.append(tool)
-            used_cats.add(tool["cat"])
+            used_cats.add(tool.get("cat"))
     if len(selected) < count:
         for tool in available:
             if len(selected) >= count:
@@ -380,6 +472,215 @@ def select_tools_from_db(database, history, count=5):
             if tool not in selected:
                 selected.append(tool)
     return selected[:count]
+
+
+def select_from_pool(pool_tools, history, count=5, prefer_cats=None):
+    """Selecciona del pool (DB + promocionadas) lo que NO esté ya enviado."""
+    sent_names, sent_urls = sent_sets(history)
+    available = [t for t in pool_tools if not es_duplicado(t, sent_names, sent_urls)]
+    if prefer_cats:
+        preferred = [t for t in available if t.get("cat") in set(prefer_cats)]
+        rest = [t for t in available if t.get("cat") not in set(prefer_cats)]
+        random.shuffle(preferred)
+        random.shuffle(rest)
+        ordered = _diversify_by_cat(preferred, count) + rest
+    else:
+        random.shuffle(available)
+        ordered = _diversify_by_cat(available, count)
+    result, used = [], set()
+    for tool in ordered:
+        if len(result) >= count:
+            break
+        key = _norm_name(tool.get("tool", ""))
+        if key and key not in used:
+            used.add(key)
+            result.append(tool)
+    return result
+
+
+# ── Pool ampliado (DB curada + fuentes promocionadas) ───────────────────────
+
+def load_pool(database=None):
+    """Carga files/ai_tools_pool.json; si no existe, lo siembra con la DB curada."""
+    if POOL_PATH.exists():
+        try:
+            with open(POOL_PATH, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            if isinstance(data, list) and data:
+                return data
+        except Exception:
+            pass
+    if database is None:
+        database = load_database()
+    return list(database.get("tools", []))
+
+
+def save_pool(pool):
+    POOL_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with open(POOL_PATH, "w", encoding="utf-8") as f:
+        json.dump(pool[:MAX_POOL_SIZE], f, indent=2, ensure_ascii=False)
+
+
+def load_promotion_candidates(history, pool, limit=MAX_PROMOTE_PER_RUN):
+    """Candidatos reales (HF/GitHub + herramientas + public APIs) aún no en el pool
+    ni ya enviados, con descripción suficiente para promoverlos."""
+    sent_names, sent_urls = sent_sets(history)
+    pool_urls = {_norm_url(t.get("url", "")) for t in pool if _norm_url(t.get("url", ""))}
+    pool_names = {_norm_name(t.get("tool", "")) for t in pool if _norm_name(t.get("tool", ""))}
+
+    sources = []
+    for path in (CANDIDATES_PATH, MERGED_TOOLS_PATH, PUBLICAPIS_PATH):
+        if not path.exists():
+            continue
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            if isinstance(data, list):
+                sources.extend(data)
+        except Exception:
+            continue
+
+    candidates, seen = [], set()
+    for item in sources:
+        if not isinstance(item, dict):
+            continue
+        titulo = item.get("titulo", "") or item.get("tool", "")
+        enlace = item.get("enlace", "") or item.get("url", "")
+        desc = item.get("descripcion", "") or item.get("body", "")
+        if not titulo or not enlace or len(desc) < 40:
+            continue
+        name_key, url_key = _norm_name(titulo), _norm_url(enlace)
+        if not name_key or name_key in pool_names or name_key in sent_names:
+            continue
+        if url_key in pool_urls or url_key in sent_urls:
+            continue
+        if name_key in seen:
+            continue
+        seen.add(name_key)
+        candidates.append({
+            "titulo": titulo,
+            "enlace": enlace,
+            "descripcion": desc[:400],
+            "lenguaje": item.get("lenguaje", ""),
+            "fuente": item.get("fuente", ""),
+        })
+        if len(candidates) >= limit:
+            break
+    return candidates
+
+
+def _validate_promoted(entry, source_item):
+    """Valida una ficha devuelta por Gemini para promoverla al pool."""
+    if not isinstance(entry, dict):
+        return None
+    cat = entry.get("cat", "")
+    tool = (entry.get("tool", "") or "").strip()
+    body = (entry.get("body", "") or "").strip()
+    restricciones = (entry.get("restricciones", "") or "").strip()
+    if cat not in CAT_EMOJI or not tool or not body or not restricciones:
+        return None
+    combos = [c for c in entry.get("combinaciones", []) if c in CAT_EMOJI][:5]
+    url = entry.get("url", "") or source_item.get("enlace", "")
+    if not url.startswith("http"):
+        return None
+    return {
+        "cat": cat,
+        "tool": tool,
+        "body": body[:300],
+        "workflow": (entry.get("workflow", "") or "").strip()[:200],
+        "combinaciones": combos,
+        "url": url,
+        "restricciones": restricciones[:200],
+        "dific": int(entry.get("dific", 1) or 1) if str(entry.get("dific", 1)) in ("1", "2", "3") else 1,
+        "source": "promoted",
+        "fuente_raw": source_item.get("fuente", ""),
+    }
+
+
+def promote_to_pool(pool, history, categories=None, max_promote=MAX_PROMOTE_PER_RUN):
+    """Convierte candidatos reales en fichas de herramienta (Gemini) y las añade al pool."""
+    if not GEMINI_API_KEY:
+        print("⚠️  Sin GEMINI_API_KEY: no se promueven candidatos al pool.")
+        return pool, 0
+    candidates = load_promotion_candidates(history, pool, limit=max_promote)
+    if not candidates:
+        print("📭 Sin candidatos nuevos para promover.")
+        return pool, 0
+    try:
+        from google import genai
+        client = genai.Client(api_key=GEMINI_API_KEY)
+    except Exception as e:
+        print(f"⚠️  Gemini no disponible para promoción: {e}")
+        return pool, 0
+
+    cats_str = ", ".join(sorted(ALL_CATEGORIES))
+    numbered = "\n".join(
+        f"{i}|{c['titulo']}|{c['descripcion']}|{c['enlace']}" for i, c in enumerate(candidates)
+    )
+    prompt = f"""Eres un curador de herramientas de IA. Convierte cada candidato del listado en una ficha
+de herramienta en español. Formato por línea: ID|titulo|descripcion|url
+
+=== CATEGORÍAS VÁLIDAS (usa EXACTAMENTE una de estas claves en "cat") ===
+{cats_str}
+
+=== REGLAS ===
+1. Asigna la categoría más adecuada de la lista (clave exacta).
+2. "tool": nombre real y conocido de la herramienta (sin emojis).
+3. "body": una frase clara en español de qué hace.
+4. "workflow": ejemplo corto de uso (ej. "Descarga -> Resumen -> Obsidian").
+5. "combinaciones": 2-3 categorías válidas de la lista con las que encaja.
+6. "url": la URL oficial tal cual aparece en el candidato.
+7. "restricciones": requisito o limitación clave (plan gratis, GPU, API de pago, etc.).
+8. "dific": 1, 2 o 3.
+9. Si el candidato no es una herramienta real de IA o no encaja en ninguna categoría, omídelo.
+
+=== CANDIDATOS ===
+{numbered}
+
+=== RESPUESTA ===
+SOLO el JSON array, sin markdown:
+[{{"id": 0, "cat": "...", "tool": "...", "body": "...", "workflow": "...", "combinaciones": [...], "url": "https://...", "restricciones": "...", "dific": 1}}, ...]"""
+
+    try:
+        response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
+        text = (response.text or "").strip()
+        if text.startswith("```"):
+            text = text.split("\n", 1)[1] if "\n" in text else text[3:]
+            if text.endswith("```"):
+                text = text[:-3]
+            text = text.strip()
+        generated = json.loads(text)
+    except Exception as e:
+        print(f"⚠️  Promoción fallida (Gemini): {e}")
+        return pool, 0
+
+    if not isinstance(generated, list):
+        return pool, 0
+
+    by_id = {i: c for i, c in enumerate(candidates)}
+    existing_names = {_norm_name(t.get("tool", "")) for t in pool}
+    added = 0
+    for entry in generated:
+        if added >= max_promote:
+            break
+        src = by_id.get(entry.get("id") if isinstance(entry.get("id"), int) else -1)
+        if src is None:
+            continue
+        valid = _validate_promoted(entry, src)
+        if not valid:
+            continue
+        key = _norm_name(valid["tool"])
+        if key in existing_names:
+            continue
+        existing_names.add(key)
+        pool.append(valid)
+        added += 1
+
+    if added:
+        print(f"➕ Promovidas {added} candidatos reales al pool de herramientas.")
+    else:
+        print("📭 Ningún candidato superó la validación de promoción.")
+    return pool, added
 
 
 def _cat_label(cat):
@@ -390,7 +691,7 @@ def _cat_label(cat):
 
 def build_gemini_prompt(categories, sent_titles, news, tools, candidates=None, blog_resources=None):
     cats_str = "\n".join(f"- {c} ({CAT_NAMES.get(c, c)})" for c in categories)
-    titles_str = "\n".join(sent_titles[:200]) if sent_titles else "(nunca se han enviado herramientas antes)"
+    titles_str = "\n".join(sent_titles[:MAX_SENT_IN_PROMPT]) if sent_titles else "(nunca se han enviado herramientas antes)"
     news_str = "\n".join(news[:15]) if news else "(no hay noticias recientes disponibles)"
     tools_str = "\n".join(tools[:10]) if tools else "(no hay herramientas trending disponibles)"
     candidates_str = "\n".join(candidates[:15]) if candidates else "(no hay candidatos auto-detectados)"
@@ -452,7 +753,7 @@ SOLO el JSON array, sin markdown, sin texto adicional:
 [{{"cat": "...", "tool": "...", "body": "...", "workflow": "...", "combinaciones": [...], "url": "https://...", "restricciones": "...", "dific": 1}}, ...]"""
 
 
-def generate_tools_gemini(count, categories, sent_titles):
+def generate_tools_gemini(count, categories, sent_titles, sent_names=None, sent_urls=None):
     if not GEMINI_API_KEY:
         print("⚠️  GEMINI_API_KEY no configurada. Solo se usarán tools de la DB.")
         return None
@@ -467,9 +768,12 @@ def generate_tools_gemini(count, categories, sent_titles):
         print(f"⚠️  Error al inicializar Gemini: {e}")
         return None
 
+    if sent_names is None or sent_urls is None:
+        sent_names, sent_urls = sent_sets({"sent_titles": sent_titles})
+
     news = load_recent_news(15)
     tools = load_recent_tools(10)
-    candidates = load_ai_candidates(15)
+    candidates = load_ai_candidates(30)
     blog_resources = load_blog_resources(15)
     prompt = build_gemini_prompt(categories, sent_titles, news, tools, candidates, blog_resources)
 
@@ -496,10 +800,12 @@ def generate_tools_gemini(count, categories, sent_titles):
                         t.setdefault("restricciones", "")
                         t.setdefault("dific", 1)
                         valid.append(t)
+            # FILTRO OBLIGATORIO: nunca reenviar nada ya enviado ni repetir en el lote
+            valid = filtrar_nuevos(valid, sent_names, sent_urls)
             if valid:
                 print(f"✅ Gemini generó {len(valid)} herramientas nuevas")
                 return valid[:count]
-        print("⚠️  Respuesta de Gemini no tiene formato válido")
+        print("⚠️  Respuesta de Gemini no tiene formato válido o todo era duplicado")
         return None
     except json.JSONDecodeError:
         print("⚠️  Gemini respondió con JSON inválido")
@@ -528,7 +834,8 @@ def mix_tools(gemini_tools, db_tools, total=5):
             added = True
         if not added:
             break
-    return mixed[:total]
+    # Sin duplicados intra-lote (nombre o URL normalizados)
+    return filtrar_nuevos(mixed[:total], set(), set())
 
 
 DIFFICULTY_BAR = {1: "●○○", 2: "●●○", 3: "●●●"}
@@ -654,12 +961,19 @@ def main():
     database = load_database()
     history = load_history()
     sent_titles = history.get("sent_titles", [])
+    sent_names, sent_urls = sent_sets(history)
 
     if show_stats:
+        pool = load_pool(database)
+        remaining = [t for t in pool if not es_duplicado(t, sent_names, sent_urls)]
         print("📊 Estadísticas del sistema de herramientas IA:")
-        print(f"   Tools en DB: {len(database['tools'])}")
-        print(f"   Tools enviados (total): {len(sent_titles)}")
-        print(f"   DB agotada: {'Sí' if history.get('db_exhausted') else 'No'}")
+        print(f"   Tools en DB curada: {len(database['tools'])}")
+        print(f"   Tools en pool (DB + promocionadas): {len(pool)}")
+        print(f"   Pool sin enviar: {len(remaining)}")
+        print(f"   Tools enviados (total): {len(sent_titles)} ({len(sent_urls)} con URL)")
+        print(f"   Skills enviadas: {len(history.get('sent_skills', []))}")
+        print(f"   Recursos enviados: {len(history.get('sent_resources', []))}")
+        print(f"   Pool agotado: {'Sí' if history.get('db_exhausted') else 'No'}")
         print(f"   Última ejecución: {history.get('last_run', 'Nunca')}")
         print(f"   Total ejecuciones: {history.get('total_runs', 0)}")
         print(f"   Categorías disponibles: {len(ALL_CATEGORIES)}")
@@ -672,40 +986,63 @@ def main():
     categories = select_random_categories(5)
     print(f"📂 Categorías de este batch: {', '.join(categories)}")
 
-    db_exhausted = history.get("db_exhausted", False)
+    # ── Pool ampliado: DB curada + candidatos reales promocionados ──
+    pool = load_pool(database)
+    if not dry_run:
+        pool, promoted = promote_to_pool(pool, history, categories)
+        if promoted:
+            save_pool(pool)
+    remaining = [t for t in pool if not es_duplicado(t, sent_names, sent_urls)]
+    print(f"🧰 Pool: {len(pool)} tools · {len(remaining)} sin enviar")
 
-    if db_exhausted:
-        print("🔄 DB agotada. Generando 5 herramientas con Gemini...")
-        gemini_tools = generate_tools_gemini(5, categories, sent_titles)
+    # ── Herramientas: Gemini (post-filtrado) + pool, nunca reciclando ──
+    gemini_tools = None
+    if GEMINI_API_KEY:
+        gemini_count = 5 if len(remaining) < 2 else 3
+        gemini_tools = generate_tools_gemini(
+            gemini_count, categories, sent_titles, sent_names, sent_urls
+        )
         if gemini_tools:
             for t in gemini_tools:
                 t["source"] = "gemini"
-            tools = gemini_tools
+    if not gemini_tools:
+        if not GEMINI_API_KEY:
+            print("⚠️  Sin GEMINI_API_KEY. Usando solo pool local...")
         else:
-            print("⚠️  Gemini no disponible. Reintentando con DB (puede repetir)...")
-            tools = select_tools_from_db(database, history, 5)
+            print("⚠️  Gemini sin resultados nuevos. Usando solo pool local...")
+
+    pool_needed = 5 - len(gemini_tools or [])
+    pool_tools = select_from_pool(pool, history, count=pool_needed, prefer_cats=categories)
+    if gemini_tools:
+        tools = mix_tools(gemini_tools, pool_tools, total=5)
     else:
-        print("🔄 Generando herramientas (Gemini + DB)...")
-        gemini_tools = generate_tools_gemini(3, categories, sent_titles)
-        if gemini_tools:
-            for t in gemini_tools:
-                t["source"] = "gemini"
-            db_tools = select_tools_from_db(database, history, 2)
-        else:
-            print("⚠️  Gemini no disponible. Usando solo DB...")
-            db_tools = select_tools_from_db(database, history, 5)
-        tools = mix_tools(gemini_tools, db_tools, total=5)
+        tools = pool_tools[:5]
+    # Red de seguridad final: jamás enviar nada ya enviado ni repetir en el lote
+    tools = filtrar_nuevos(tools, sent_names, sent_urls)
+    if len(tools) < 5:
+        print(f"⚠️  Solo {len(tools)} herramientas nuevas disponibles (pool sin reciclado).")
 
-    # Cargar y seleccionar agent skills
+    # Cargar y seleccionar agent skills (sin reciclar)
     all_skills = load_agent_skills()
-    skills = select_skills_from_db(all_skills, sent_titles, count=2)
+    skills = select_skills_from_db(all_skills, history.get("sent_skills", []), count=2)
     skills = _translate_descriptions_batch(skills)
     print(f"🎯 Skills seleccionadas: {len(skills)}")
 
-    # Cargar recursos del blog
-    blog_resources = load_blog_resources_for_message(5)
+    # Recursos del blog (sin reciclar)
+    blog_resources = load_blog_resources_for_message(
+        5, history.get("sent_resources", [])
+    )
     blog_resources = _translate_descriptions_batch(blog_resources)
     print(f"📚 Recursos del blog: {len(blog_resources)}")
+
+    if not tools and not skills and not blog_resources:
+        print("🛑 Nada nuevo que enviar: pool, skills y recursos agotados.")
+        print("   Se ampliarán fuentes en la próxima ejecución (promoción de candidatos).")
+        history["last_run"] = datetime.now().isoformat()
+        history["total_runs"] = history.get("total_runs", 0) + 1
+        history["db_exhausted"] = True
+        save_history(history)
+        return
 
     message = build_daily_message(tools, skills, blog_resources)
 
@@ -726,18 +1063,27 @@ def main():
     if send_telegram(message):
         for tool in tools:
             name = tool.get("tool", "")
-            if name and name not in sent_titles:
+            url = tool.get("url", "")
+            if name and _norm_name(name) not in sent_names:
                 history["sent_titles"].append(name)
+                sent_names.add(_norm_name(name))
+            if url and _norm_url(url) not in sent_urls:
+                history["sent_urls"].append(url)
+                sent_urls.add(_norm_url(url))
+        for skill in skills:
+            key = _norm_name(skill.get("titulo", ""))
+            if key and key not in history["sent_skills"]:
+                history["sent_skills"].append(key)
+        for res in blog_resources:
+            key = _norm_name(res.get("titulo", ""))
+            if key and key not in history["sent_resources"]:
+                history["sent_resources"].append(key)
         history["last_run"] = datetime.now().isoformat()
         history["total_runs"] = history.get("total_runs", 0) + 1
-        if not db_exhausted and len(database.get("tools", [])) > 0:
-            db_sent = sum(1 for t in tools if t.get("source") != "gemini")
-            if db_sent > 0:
-                remaining = len([t for t in database["tools"]
-                                 if t["tool"] not in set(history["sent_titles"])])
-                if remaining == 0:
-                    history["db_exhausted"] = True
-                    print("🔄 DB estática agotada. A partir de ahora solo Gemini.")
+        remaining_after = [t for t in pool if not es_duplicado(t, sent_names, sent_urls)]
+        history["db_exhausted"] = len(remaining_after) == 0
+        if history["db_exhausted"]:
+            print("🔄 Pool local agotado: solo Gemini + promoción de candidatos a partir de ahora.")
         save_history(history)
         print(f"📊 Total tools enviados: {len(history['sent_titles'])}")
 

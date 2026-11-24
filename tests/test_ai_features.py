@@ -8,6 +8,14 @@ from scripts.ai_tools_generator import (
     load_categories,
     format_tool_message,
     mix_tools,
+    _norm_name,
+    _norm_url,
+    filtrar_nuevos,
+    select_skills_from_db,
+    select_tools_from_db,
+    select_from_pool,
+    load_blog_resources_for_message,
+    _validate_promoted,
 )
 import scripts.ai_tools_generator as ai_gen
 from scripts.saludo_imagen import (
@@ -125,6 +133,96 @@ class TestAiToolsGenerator:
         d = [{"tool": f"d{i}", "cat": "y"} for i in range(3)]
         assert len(mix_tools(g, d, total=5)) == 5
         assert len(mix_tools(None, d, total=3)) == 3
+
+
+class TestNuncaRepiten:
+    """Filtro estricto: nada ya enviado vuelve a salir, ni siquiera en variantes."""
+
+    def test_norm_name_normaliza_variantes(self):
+        assert _norm_name("OpenAI Whisper") == _norm_name("openai-whisper!")
+        assert _norm_name("  Café   IA ") == _norm_name("cafe ia")
+        assert _norm_name("") == ""
+
+    def test_norm_url_quita_www_query_y_slash(self):
+        assert _norm_url("https://www.ejemplo.com/ruta/?utm=1#x") == "ejemplo.com/ruta"
+        assert _norm_url("HTTP://Ejemplo.com/Ruta/") == _norm_url("https://ejemplo.com/ruta")
+
+    def test_filtrar_nuevos_descarta_nombre_o_url_ya_enviados(self):
+        sent_names = {_norm_name("OpenAI Whisper")}
+        sent_urls = {_norm_url("https://openai.com/whisper")}
+        items = [
+            {"tool": "openai-whisper", "url": ""},
+            {"tool": "Otra tool", "url": "https://www.openai.com/whisper/"},
+            {"tool": "Nueva tool", "url": "https://nueva.dev"},
+        ]
+        out = filtrar_nuevos(items, sent_names, sent_urls)
+        assert [t["tool"] for t in out] == ["Nueva tool"]
+
+    def test_filtrar_nuevos_quita_duplicados_dentro_del_lote(self):
+        items = [
+            {"tool": "Foo", "url": "https://a.dev"},
+            {"tool": "foo!", "url": "https://b.dev"},
+            {"tool": "Bar", "url": "https://a.dev"},
+        ]
+        out = filtrar_nuevos(items, set(), set())
+        assert [t["tool"] for t in out] == ["Foo"]
+
+    def test_mix_tools_sin_duplicados_intra_lote(self):
+        g = [{"tool": "Whisper", "cat": "a"}]
+        d = [{"tool": "whisper!", "cat": "b"}, {"tool": "Otra", "cat": "c"}]
+        out = mix_tools(g, d, total=3)
+        names = [_norm_name(t["tool"]) for t in out]
+        assert len(names) == len(set(names))
+        assert len(out) == 2
+
+    def test_select_skills_no_recicla(self):
+        skills = [{"titulo": f"Skill {i}"} for i in range(3)]
+        assert select_skills_from_db(skills, ["Skill 0", "Skill 1", "Skill 2"], count=2) == []
+        out = select_skills_from_db(skills, ["Skill 0"], count=5)
+        assert len(out) == 2
+        assert all(s["titulo"] != "Skill 0" for s in out)
+
+    def test_select_pool_no_recicla(self):
+        pool = [{"tool": f"T{i}", "cat": "img_gen"} for i in range(3)]
+        assert select_from_pool(pool, {"sent_titles": ["T0", "T1", "T2"]}, count=5) == []
+
+    def test_select_pool_no_recicla_variantes_de_nombre(self):
+        pool = [{"tool": "OpenAI Whisper", "cat": "transcripcion", "url": "https://x.dev"}]
+        history = {"sent_titles": ["openai whisper!"], "sent_urls": []}
+        assert select_from_pool(pool, history, count=5) == []
+
+    def test_select_db_no_recicla(self):
+        database = {"tools": [
+            {"tool": "A", "cat": "img_gen"},
+            {"tool": "B", "cat": "code_gen"},
+        ]}
+        history = {"sent_titles": ["A", "B"]}
+        assert select_tools_from_db(database, history, count=5) == []
+
+    def test_recursos_blog_no_recicla_los_ya_enviados(self):
+        import scripts.ai_tools_generator as ai_gen
+        data = json.loads(ai_gen.BLOG_RESOURCES_PATH.read_text(encoding="utf-8"))
+        titles = [r.get("titulo", "") for r in data[:20] if r.get("titulo")]
+        assert titles
+        out = load_blog_resources_for_message(5, titles)
+        sent = {_norm_name(t) for t in titles}
+        assert len(out) <= 5
+        assert all(_norm_name(r.get("titulo", "")) not in sent for r in out)
+
+    def test_validate_promoted_exige_categoria_y_restricciones(self):
+        load_categories()
+        src = {"enlace": "https://huggingface.co/x", "fuente": "HF"}
+        good = {
+            "cat": "img_gen", "tool": "X Tool", "body": "Descripción.",
+            "workflow": "A -> B", "combinaciones": ["img_gen", "no_existe"],
+            "url": "https://x.dev", "restricciones": "Requiere GPU.", "dific": 2,
+        }
+        v = _validate_promoted(good, src)
+        assert v is not None
+        assert v["combinaciones"] == ["img_gen"]
+        assert _validate_promoted(dict(good, cat="no_existe"), src) is None
+        assert _validate_promoted(dict(good, restricciones="  "), src) is None
+        assert _validate_promoted(dict(good, url="ftp://mal"), src) is None
 
 
 class TestSaludoConfig:

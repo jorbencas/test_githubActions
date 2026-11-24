@@ -197,6 +197,7 @@ public/                       🌐 Gestor de fuentes (web estática)
 |---------|-------------|
 | `python -m scripts.ai_tools_generator` | Envía herramienta IA por Telegram |
 | `python -m scripts.ai_tools_generator --dry-run` | Previsualiza sin enviar |
+| `python -m scripts.ai_tools_generator --stats` | Pool, enviados y categorías |
 | `python -m scripts.ai_tools_generator --list-categories` | Lista las 166 categorías |
 
 ### ✅ Testing
@@ -369,6 +370,7 @@ events = service.events().list(calendarId='primary').execute()
 
 - **Solo noticias** — no envía enlaces de vídeo
 - **Report img** — estrenos y series cada 15 min (`formulatv_telegram`) con dedup persistente en `files/formulatv_sent.json` (`actions/cache`)
+- **Herramientas IA** — report cada 3 h **sin repetir nunca** (filtro por nombre/URL normalizados + red de seguridad); historial y pool commiteados en el repo (`ai_tools_history.json`, `files/ai_tools_pool.json`) en lugar de `actions/cache`
 - **Deduplicación** — GitHub Actions Cache
 - **TTL** — 7 días noticias, 24 horas audio
 - **Filtro de tiempo** — últimas 24 horas
