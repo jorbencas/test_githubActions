@@ -27702,12 +27702,427 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "4b5fcc6ff7ed7543"
       }
+    },
+    {
+      "proyecto": {
+        "id": "f8a3b1c9",
+        "titulo": "Sistema de Gestión de Inventario para Artesanos Locales con Trazabilidad",
+        "descripcion_corta": "App móvil offline-first para artesanos que registra materiales y productos terminados, permitiendo la trazabilidad de la materia prima al cliente final.",
+        "descripcion_detallada": "Permite a artesanos gestionar su inventario de materiales y productos de forma sencilla, incluso sin conexión. Registra la procedencia de materiales y a qué producto se destinaron, ofreciendo trazabilidad completa. Sincroniza datos al recuperar conectividad.",
+        "nivel": "junior",
+        "scope": "proyecto",
+        "tipo": [
+          "mobile",
+          "api",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "React Native",
+              "categoria": "framework",
+              "descripcion": "Desarrollo de aplicaciones móviles multiplataforma (iOS y Android) con una única base de código.",
+              "version_sugerida": "^0.70.0",
+              "url_docs": "https://reactnative.dev/docs/getting-started",
+              "por_que": "Permite crear una app móvil funcional para iOS y Android de forma eficiente para un junior, con capacidad offline."
+            },
+            {
+              "nombre": "Express.js",
+              "categoria": "framework",
+              "descripcion": "Framework web minimalista y flexible para Node.js, útil para construir APIs RESTful.",
+              "version_sugerida": "^4.18.2",
+              "url_docs": "https://expressjs.com/en/starter/hello-world.html",
+              "por_que": "Proporciona una estructura simple y robusta para la API backend que gestionará la sincronización de datos."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Realm",
+              "categoria": "libreria",
+              "descripcion": "Base de datos móvil nativa y ligera, optimizada para rendimiento y sincronización.",
+              "version_sugerida": "^10.23.0",
+              "url_docs": "https://realm.io/docs/javascript/latest/",
+              "por_que": "Ofrece persistencia local robusta y capacidades de sincronización (con Realm Sync) para el modo offline-first, crucial para artesanos sin conectividad constante."
+            },
+            {
+              "nombre": "Axios",
+              "categoria": "libreria",
+              "descripcion": "Cliente HTTP basado en promesas para el navegador y Node.js.",
+              "version_sugerida": "^1.4.0",
+              "url_docs": "https://axios-http.com/docs/intro",
+              "por_que": "Facilita las peticiones HTTP para sincronizar los datos locales con la API backend de forma sencilla y asíncrona."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "Realm Sync",
+              "categoria": "base_datos",
+              "descripcion": "Servicio de sincronización en la nube para bases de datos Realm.",
+              "version_sugerida": null,
+              "url_docs": "https://www.mongodb.com/docs/realm/sync/",
+              "por_que": "Permite la sincronización automática y offline de datos entre los dispositivos móviles de los artesanos y el backend."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "20.10.17",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Asegura un entorno de desarrollo y despliegue consistente para la API backend."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript declarativo y divertido.",
+              "version_sugerida": "^29.5.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Permite escribir tests unitarios y de integración para la lógica de la aplicación móvil y la API backend."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro offline de materiales y productos",
+          "Trazabilidad de materiales a productos terminados",
+          "Sincronización automática de datos al recuperar conexión",
+          "Visualización del inventario por lotes",
+          "Generación de reportes básicos de inventario"
+        ],
+        "casos_uso": [
+          "Un artesano registra la compra de cerámica y el lote específico",
+          "El artesano asigna parte de esa cerámica a la creación de un jarrón",
+          "El artesano vende el jarrón, registrando la salida y su trazabilidad",
+          "El cliente recibe un código QR que muestra el origen de los materiales del jarrón",
+          "El artesano consulta su inventario y la historia de cada material sin tener cobertura"
+        ],
+        "reglas_negocio": [
+          "Un material solo puede asignarse a un producto a la vez",
+          "La cantidad de material registrado no puede ser negativa",
+          "La sincronización de datos solo ocurre cuando hay conexión a internet",
+          "Los reportes deben incluir el origen y destino de los materiales",
+          "Los datos del cliente final solo se registran si el artesano lo desea"
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos básicos de JavaScript/TypeScript",
+          "Comprensión de conceptos de bases de datos NoSQL",
+          "Familiaridad con el desarrollo móvil (React Native es una ventaja)"
+        ],
+        "riesgos": [
+          "Dificultad en la implementación robusta del modo offline",
+          "Complejidad en la gestión de conflictos de sincronización",
+          "Curva de aprendizaje de Realm Sync para un equipo junior",
+          "Adopción por parte de los artesanos, que pueden no ser tecnológicamente avanzados",
+          "Escalabilidad de Realm Sync si hay muchos usuarios concurrentes"
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:00:00Z",
+        "hash_unicidad": "708d08b89dba263e"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "73b10e4d590420ca"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "g7h5f2d1",
+        "titulo": "Sistema de Gestión de Incidencias para Mantenimiento de Infraestructura Urbana",
+        "descripcion_corta": "Plataforma web para ciudadanos y técnicos que reporta y gestiona incidencias en mobiliario urbano, vías o servicios públicos de forma geolocalizada.",
+        "descripcion_detallada": "Permite a ciudadanos reportar incidencias (baches, farolas rotas, etc.) geolocalizadas y subir fotos. Los técnicos municipales gestionan el flujo de trabajo, asignan tareas y actualizan el estado. Se prioriza la geolocalización precisa y la gestión del ciclo de vida de la incidencia.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python 3.7+ basado en type hints estándar de Python.",
+              "version_sugerida": "^0.95.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece alto rendimiento, validación de datos automática (Pydantic) y generación de documentación OpenAPI, ideal para una API robusta y mantenible."
+            },
+            {
+              "nombre": "Leaflet",
+              "categoria": "framework",
+              "descripcion": "Librería JavaScript de código abierto para mapas interactivos móviles.",
+              "version_sugerida": "1.9.3",
+              "url_docs": "https://leafletjs.com/",
+              "por_que": "Esencial para la visualización y el registro de incidencias geolocalizadas en un mapa interactivo en la interfaz web."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "SQL toolkit y Object Relational Mapper (ORM) para Python.",
+              "version_sugerida": "^2.0.15",
+              "url_docs": "https://www.sqlalchemy.org/",
+              "por_que": "Proporciona una forma potente y flexible de interactuar con la base de datos relacional, manejando las relaciones entre incidencias, usuarios y técnicos."
+            },
+            {
+              "nombre": "Pydantic",
+              "categoria": "libreria",
+              "descripcion": "Validación de datos y gestión de ajustes basada en type hints de Python.",
+              "version_sugerida": "^2.0.0",
+              "url_docs": "https://docs.pydantic.dev/",
+              "por_que": "Utilizado por FastAPI para la validación automática de datos de entrada y serialización de salida, garantizando la integridad de los datos."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL con PostGIS",
+              "categoria": "base_datos",
+              "descripcion": "Sistema gestor de bases de datos objeto-relacional de código abierto, con extensiones para datos geoespaciales.",
+              "version_sugerida": "15",
+              "url_docs": "https://postgis.net/",
+              "por_que": "Permite almacenar y consultar eficientemente datos geográficos (ubicación de incidencias), fundamental para la funcionalidad principal."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker Compose",
+              "categoria": "infraestructura",
+              "descripcion": "Herramienta para definir y ejecutar aplicaciones Docker multi-contenedor.",
+              "version_sugerida": "2.17.3",
+              "url_docs": "https://docs.docker.com/compose/",
+              "por_que": "Facilita la configuración y el despliegue del entorno de desarrollo y producción, incluyendo la base de datos y la API."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de Python que facilita la escritura de pruebas.",
+              "version_sugerida": "^7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite crear tests robustos y parametrizados para la API y la lógica de negocio, asegurando la calidad del código."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Reporte de incidencias geolocalizadas con foto",
+          "Visualización de incidencias en mapa interactivo",
+          "Gestión del ciclo de vida de incidencias (abierta, en progreso, cerrada)",
+          "Asignación de incidencias a técnicos",
+          "Notificaciones a ciudadanos sobre el estado de su reporte"
+        ],
+        "casos_uso": [
+          "Un ciudadano reporta un bache en su calle a través de la web",
+          "Un técnico municipal ve la incidencia en el mapa y la asigna a su equipo",
+          "El equipo de mantenimiento arregla el bache y actualiza el estado a 'cerrado'",
+          "El ciudadano recibe una notificación indicando que su reporte ha sido resuelto",
+          "El ayuntamiento genera reportes de incidencias por zona o tipo para análisis"
+        ],
+        "reglas_negocio": [
+          "Las incidencias deben tener una ubicación geográfica válida",
+          "Las fotos subidas no deben exceder 10MB",
+          "Solo los técnicos autorizados pueden cambiar el estado de una incidencia",
+          "Los ciudadanos solo pueden ver el estado de sus propias incidencias",
+          "Las incidencias sin asignar caducan después de 30 días"
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Servicios de geocodificación (ej. Nominatim, Google Maps API)",
+          "Servicios de mapas base (ej. OpenStreetMap)"
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 8,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo web backend",
+          "Comprensión de APIs RESTful",
+          "Familiaridad con bases de datos relacionales y conceptos geoespaciales",
+          "Experiencia con frameworks frontend (para la parte del mapa)"
+        ],
+        "riesgos": [
+          "Integración y precisión de los servicios de geolocalización",
+          "Gestión de un alto volumen de reportes y concurrencia en la API",
+          "Diseño de una interfaz de usuario intuitiva para ciudadanos y técnicos",
+          "Seguridad en la gestión de datos sensibles (ubicaciones, fotos)",
+          "Escalabilidad de la base de datos PostGIS con grandes volúmenes de datos geoespaciales"
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:00:00Z",
+        "hash_unicidad": "b4c6375b827063c2"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "73b10e4d590420ca"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "h9j8k7l6",
+        "titulo": "Plataforma de Gestión de Eventos Deportivos Comunitarios con Inscripción y Seguimiento",
+        "descripcion_corta": "Web app para organizar carreras populares, torneos, etc. Gestiona inscripciones, pagos, horarios y resultados en tiempo real para participantes y organizadores.",
+        "descripcion_detallada": "Facilita la organización de eventos deportivos locales. Permite crear eventos, gestionar inscripciones (con pagos integrados), publicar horarios y seguir resultados en vivo. Los participantes pueden ver su estado y resultados; los organizadores tienen un dashboard completo.",
+        "nivel": "semisenior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "fullstack"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin Gonic",
+              "categoria": "framework",
+              "descripcion": "Framework web HTTP de alto rendimiento escrito en Go.",
+              "version_sugerida": "1.18.1",
+              "url_docs": "https://gin-gonic.com/docs/",
+              "por_que": "Ofrece un rendimiento excepcional para la API backend, crucial para el seguimiento en tiempo real de resultados y manejo de inscripciones concurrentes."
+            },
+            {
+              "nombre": "Vue.js",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "3.2.0",
+              "url_docs": "https://vuejs.org/v2/guide/",
+              "por_que": "Permite crear una interfaz de usuario interactiva y reactiva para el dashboard de organizadores y la vista de participantes."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "GORM",
+              "categoria": "libreria",
+              "descripcion": "ORM (Object-Relational Mapper) de Go con soporte para varios backends de bases de datos.",
+              "version_sugerida": "1.24.9",
+              "url_docs": "https://gorm.io/docs/",
+              "por_que": "Simplifica la interacción con la base de datos relacional, manejando las complejas relaciones entre eventos, participantes, inscripciones y resultados."
+            },
+            {
+              "nombre": "WebSockets (gorilla/websocket)",
+              "categoria": "libreria",
+              "descripcion": "Implementación de cliente y servidor WebSocket para Go.",
+              "version_sugerida": "1.5.0",
+              "url_docs": "https://github.com/gorilla/websocket",
+              "por_que": "Permite la comunicación en tiempo real entre el backend y el frontend para actualizar resultados y estados de inscripción sin recargar la página."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema gestor de bases de datos objeto-relacional de código abierto.",
+              "version_sugerida": "14",
+              "url_docs": "https://www.postgresql.org/",
+              "por_que": "Soporta transacciones ACID, datos relacionales complejos y escalabilidad, adecuado para la gestión de inscripciones y resultados de eventos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "20.10.17",
+              "url_docs": "https://docs.docker.com/get-started/",
+              "por_que": "Garantiza entornos de desarrollo y despliegue consistentes y reproducibles para la API Go y la aplicación Vue.js."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Paquete estándar de Go para escribir tests.",
+              "version_sugerida": null,
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Proporciona las herramientas básicas para pruebas unitarias y de integración en Go, esencial para la fiabilidad de la API."
+            },
+            {
+              "nombre": "Vitest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing rápido y nativo para ES modules.",
+              "version_sugerida": "^1.0.0",
+              "url_docs": "https://vitest.dev/",
+              "por_que": "Permite testear la interfaz de usuario de Vue.js de forma eficiente y con un setup mínimo."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Stripe",
+              "categoria": "otros",
+              "descripcion": "Plataforma de pagos para software.",
+              "version_sugerida": null,
+              "url_docs": "https://stripe.com/docs",
+              "por_que": "Integración de pagos segura y confiable para las inscripciones a los eventos deportivos."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de eventos deportivos",
+          "Sistema de inscripción online con pasarela de pago",
+          "Publicación de horarios y clasificaciones",
+          "Actualización de resultados en tiempo real vía WebSockets",
+          "Dashboard de administración para organizadores"
+        ],
+        "casos_uso": [
+          "Un organizador crea un nuevo evento de carrera popular",
+          "Un corredor se inscribe pagando la cuota a través de Stripe",
+          "El organizador sube los horarios de las diferentes mangas",
+          "Durante la carrera, los jueces introducen tiempos y se actualizan en vivo en la web",
+          "Los corredores consultan sus tiempos y posición final en la web"
+        ],
+        "reglas_negocio": [
+          "Las inscripciones se cierran X días antes del evento",
+          "Las cuotas de inscripción son diferentes según la fecha de inscripción",
+          "Los resultados deben ser validados por un administrador antes de publicarse",
+          "Cada participante tiene un ID único asociado a su inscripción",
+          "Los pagos deben ser confirmados antes de validar la inscripción"
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 10,
+        "prerequisitos": [
+          "Experiencia sólida en desarrollo Go y backend",
+          "Conocimientos de bases de datos relacionales y ORMs",
+          "Familiaridad con frameworks frontend (Vue.js)",
+          "Comprensión de WebSockets y comunicación en tiempo real",
+          "Experiencia con pasarelas de pago"
+        ],
+        "riesgos": [
+          "Gestión de la concurrencia durante el pico de inscripciones",
+          "Complejidad en la implementación y escalado de WebSockets",
+          "Integración robusta y segura con Stripe",
+          "Manejo de diferentes tipos de eventos y reglas (carreras, torneos, etc.)",
+          "Fiabilidad en la actualización de resultados en tiempo real"
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-05-15T10:00:00Z",
+        "hash_unicidad": "3ad0ec2daf55360d"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "73b10e4d590420ca"
+      }
     }
   ],
   "ultimos_hashes": [
-    "2a8b5c1d9e0f7a3b",
-    "3c1d9e0f7a4b2a8b",
-    "3a1b2c3d4e5f6789",
     "4f5e6d7c8b9a0123",
     "5a6b7c8d9e0f1234",
     "a8b1c2d3e4f5a6b7",
@@ -27804,8 +28219,11 @@
     "8825db5d3609577a",
     "45c53719632484a5",
     "283271ec2a067471",
-    "fa64dfbba1383e24"
+    "fa64dfbba1383e24",
+    "708d08b89dba263e",
+    "b4c6375b827063c2",
+    "3ad0ec2daf55360d"
   ],
-  "total_generados": 199,
-  "fecha_ultima_generacion": "2026-11-23T19:47:16.605996"
+  "total_generados": 202,
+  "fecha_ultima_generacion": "2026-11-24T04:34:55.930996"
 }
