@@ -4851,5 +4851,89 @@
     "relevancia": 3,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "'Navidad Sangrienta' aterriza en Netflix para animarnos las fiestas",
+    "url": "https://www.aullidos.com/noticia/45480/navidad-sangrienta-aterriza-netflix/",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-25T19:16:06.098355+00:00",
+    "medio": "Aullidos",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "La despedida de los Warren llega a Netflix. Crítica de 'Expediente Warren: El Último Rito'",
+    "url": "https://www.aullidos.com/noticia/45468/despedida-warren-llega-netflix-critica-expediente-warren-ultimo-rito/",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-25T19:16:06.098572+00:00",
+    "medio": "Aullidos",
+    "imagen": "",
+    "tipo": "critica",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix convierte en serie animada uno de los cómics más violentos de todos los tiempos",
+    "url": "https://www.cinemania.es/cinemania/series/grendel-netflix-serie-animada-comic-violento_7063169_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-25T19:16:11.396126+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Para ver después de 'El crimen de Pazos': el documental de Netflix que explica el caso real que conmocionó a España",
+    "url": "https://www.cinemania.es/cinemania/noticias/crimen-pazos-ver-despues-documental-desprotexida-netflix-true-crime_7054613_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-25T19:16:11.396220+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Más allá de 'El crimen de Pazos': la miniserie polaca de 4 episodios que se cuela en el top de lo más visto de Netflix",
+    "url": "https://www.cinemania.es/cinemania/series/crimen-pazos-miniserie-polaca-4-episodios-top-netflix_7064679_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-25T19:16:11.396340+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 4,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "El Black Friday llega al streaming: FlixOlé y Filmin lanzan sus ofertas, mientras Netflix se queda fuera",
+    "url": "https://www.cinemania.es/cinemania/noticias/black-friday-llega-streaming-flixole-filmin-lanzan-sus-ofertas-mientras-netflix-se-queda-fuera_7062751_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-25T19:16:11.396366+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Confirmado por Netflix: El documental autobiográfico de Rob Lowe ya tiene fecha de estreno",
+    "url": "https://www.cinemania.es/cinemania/noticias/rob-lowe-netflix-confirmado-documental-fecha-autobiografico_7062375_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-25T19:16:11.396384+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 3,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
