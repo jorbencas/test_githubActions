@@ -3,26 +3,43 @@
     "Quizlet con Q-Chat y Q-Create",
     "Quizlet Plus",
     "DeepL Translator",
-    "Zapier"
+    "Zapier",
+    "Argos Translate",
+    "Sider",
+    "Real-ESRGAN",
+    "faster-whisper",
+    "DeepL"
   ],
   "sent_urls": [
     "https://quizlet.com/es",
     "https://quizlet.com",
     "https://www.deepl.com/es/translator",
-    "https://zapier.com"
+    "https://zapier.com",
+    "https://github.com/argosopentech/argos-translate",
+    "https://sider.ai",
+    "https://github.com/xinntao/Real-ESRGAN",
+    "https://github.com/SYSTRAN/faster-whisper",
+    "https://www.deepl.com"
   ],
   "sent_skills": [
     "mattpocock resolving merge conflicts",
-    "tizzy916 humanities writing companion"
+    "tizzy916 humanities writing companion",
+    "elementalsouls claude osint",
+    "addyosmani agent skills"
   ],
   "sent_resources": [
     "pdf24",
     "scrapeninja",
     "databricks",
     "open collective",
-    "mintlify"
+    "mintlify",
+    "free to play games database",
+    "interactive cv",
+    "etherscan",
+    "screenshotapi net",
+    "sublime text"
   ],
-  "last_run": "2026-11-24T19:47:50.079595",
-  "total_runs": 1,
+  "last_run": "2026-11-25T03:52:18.789370",
+  "total_runs": 2,
   "db_exhausted": false
 }

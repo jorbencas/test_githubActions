@@ -2836,5 +2836,165 @@
     "dific": 2,
     "source": "promoted",
     "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "texto_gen",
+    "tool": "DeepSeek-V3.2",
+    "body": "Un modelo de lenguaje grande optimizado para la generación de texto, capaz de producir contenido coherente y relevante para diversas aplicaciones.",
+    "workflow": "Define un prompt creativo -> Genera texto explicativo -> Integra en tu documento.",
+    "combinaciones": [
+      "llm_workflow",
+      "code_gen",
+      "chatbot"
+    ],
+    "url": "https://huggingface.co/deepseek-ai/DeepSeek-V3.2",
+    "restricciones": "Requiere un entorno de inferencia con GPU para su ejecución.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "img2video",
+    "tool": "Wan-2.2",
+    "body": "Modelo de difusión que transforma imágenes estáticas en clips de video dinámicos y fluidos, ideal para la creación de contenido visual animado.",
+    "workflow": "Sube una imagen -> Configura parámetros en ComfyUI -> Genera el video resultante.",
+    "combinaciones": [
+      "comfyui",
+      "video_gen",
+      "multimedia"
+    ],
+    "url": "https://huggingface.co/Comfy-Org/Wan-2.2",
+    "restricciones": "Requiere ComfyUI instalado y una GPU compatible para su funcionamiento.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "img_gen",
+    "tool": "Z-Image-Turbo",
+    "body": "Un modelo de difusión para ComfyUI que genera imágenes de alta calidad a partir de descripciones de texto o referencias visuales.",
+    "workflow": "Introduce un prompt descriptivo -> Ejecuta en ComfyUI -> Obtiene una imagen detallada.",
+    "combinaciones": [
+      "comfyui",
+      "stable_diff",
+      "concept_to_visual"
+    ],
+    "url": "https://huggingface.co/Comfy-Org/Z-Image-Turbo",
+    "restricciones": "Requiere ComfyUI y una GPU potente para una generación eficiente.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "embeddings",
+    "tool": "paraphrase-multilingual-mpnet-base-v2",
+    "body": "Calcula la similitud semántica entre frases en múltiples idiomas, útil para la búsqueda de información y agrupamiento de textos.",
+    "workflow": "Introduce dos frases -> Obtiene su puntuación de similitud -> Usa para filtrar resultados de búsqueda.",
+    "combinaciones": [
+      "nlp",
+      "ai_search",
+      "retrieval_rag"
+    ],
+    "url": "https://huggingface.co/sentence-transformers/paraphrase-multilingual-mpnet-base-v2",
+    "restricciones": "Requiere conocimientos de programación para su implementación y uso.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "texto_gen",
+    "tool": "Qwen3-14B",
+    "body": "Un modelo de lenguaje grande versátil, diseñado para la generación de texto de alta calidad y comprensión de lenguaje natural en diversas tareas.",
+    "workflow": "Escribe un prompt específico -> Recibe texto generado -> Adapta para tu contenido.",
+    "combinaciones": [
+      "llm_workflow",
+      "chatbot",
+      "copywriting_ai"
+    ],
+    "url": "https://huggingface.co/Qwen/Qwen3-14B",
+    "restricciones": "Requiere recursos computacionales significativos para un rendimiento óptimo.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "multimodal_agents",
+    "tool": "Florence-2-base",
+    "body": "Modelo multimodal que procesa imágenes y texto de forma conjunta para generar descripciones, preguntas y respuestas contextualizadas.",
+    "workflow": "Sube una imagen y un prompt -> Obtiene una respuesta textual basada en el contenido visual y textual.",
+    "combinaciones": [
+      "nlp",
+      "ocr",
+      "texto_gen"
+    ],
+    "url": "https://huggingface.co/microsoft/Florence-2-base",
+    "restricciones": "Requiere GPU para un procesamiento rápido y eficiente de las consultas.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "audio_tts",
+    "tool": "audio.cpp-gguf",
+    "body": "Convierte texto en habla sintética de sonido natural utilizando un modelo ligero y cuantificado, ideal para aplicaciones de escritorio.",
+    "workflow": "Introduce texto escrito -> Genera archivo de audio con voz -> Reproduce en tu dispositivo.",
+    "combinaciones": [
+      "ia_local",
+      "audio_gen",
+      "speech_draft"
+    ],
+    "url": "https://huggingface.co/audio-cpp/audio.cpp-gguf",
+    "restricciones": "Requiere la implementación local con la biblioteca audio.cpp.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "predictivo_ai",
+    "tool": "Chronos-2",
+    "body": "Herramienta automatizada para la predicción de series temporales, ideal para análisis de tendencias y pronósticos en diversos dominios.",
+    "workflow": "Carga tus datos de series temporales -> El modelo predice valores futuros -> Visualiza los resultados.",
+    "combinaciones": [
+      "data_pipeline",
+      "etl_ai",
+      "monitorizacion"
+    ],
+    "url": "https://huggingface.co/autogluon/chronos-2",
+    "restricciones": "Requiere integración con la plataforma AutoGluon para su funcionalidad completa.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "img_gen",
+    "tool": "Qwen-Image-2.1",
+    "body": "Modelo de difusión para ComfyUI que permite la generación de imágenes de alta resolución a partir de descripciones textuales detalladas.",
+    "workflow": "Escribe un prompt creativo -> Genera imágenes en ComfyUI -> Edita para perfeccionar el resultado.",
+    "combinaciones": [
+      "comfyui",
+      "stable_diff",
+      "concept_to_visual"
+    ],
+    "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1",
+    "restricciones": "Requiere ComfyUI y una GPU potente para una experiencia óptima.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "predictivo_ai",
+    "tool": "ViT-base-patch16-224",
+    "body": "Un modelo Vision Transformer que clasifica imágenes en diversas categorías, fundamental para tareas de visión por computadora y análisis visual.",
+    "workflow": "Sube una imagen -> El modelo predice la categoría de la imagen -> Utiliza la etiqueta para organización.",
+    "combinaciones": [
+      "ai_image_search",
+      "anomaly_det",
+      "embeddings"
+    ],
+    "url": "https://huggingface.co/google/vit-base-patch16-224",
+    "restricciones": "Requiere un entorno de desarrollo para su implementación y uso efectivo.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
   }
 ]
