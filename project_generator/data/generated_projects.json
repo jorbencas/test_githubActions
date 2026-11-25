@@ -28836,12 +28836,446 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "f18523d601206ead"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4e5f6",
+        "titulo": "Gestor de Calidad de Aire Interior para Escuelas",
+        "descripcion_corta": "App móvil para que colegios monitoricen CO2 y VOCs, recibiendo alertas y recomendaciones de ventilación para mejorar la salud estudiantil.",
+        "descripcion_detallada": "Sistema que permite a escuelas registrar mediciones de CO2, VOCs y humedad de sensores de bajo coste. Genera informes de calidad del aire y emite alertas personalizadas sobre cuándo y cuánto ventilar, basándose en umbrales y ocupación, para prevenir la transmisión de enfermedades y mejorar la concentración.",
+        "nivel": "junior",
+        "scope": "proyecto",
+        "tipo": [
+          "mobile",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "React Native",
+              "categoria": "framework",
+              "descripcion": "Desarrollo de la aplicación móvil multiplataforma para iOS y Android.",
+              "version_sugerida": "0.73.x",
+              "url_docs": "https://reactnative.dev/",
+              "por_que": "Permite crear una única base de código para iOS y Android, reduciendo el tiempo de desarrollo y facilitando el mantenimiento para un proyecto junior."
+            },
+            {
+              "nombre": "Express.js",
+              "categoria": "framework",
+              "descripcion": "Creación de la API RESTful para la gestión de datos y la comunicación entre la app móvil y la base de datos.",
+              "version_sugerida": "4.18.x",
+              "url_docs": "https://expressjs.com/",
+              "por_que": "Framework minimalista y flexible para Node.js, ideal para construir APIs sencillas rápidamente y con buena documentación."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Axios",
+              "categoria": "libreria",
+              "descripcion": "Cliente HTTP para realizar peticiones desde la app móvil a la API.",
+              "version_sugerida": "1.6.x",
+              "url_docs": "https://axios-http.com/",
+              "por_que": "Simplifica las llamadas HTTP, maneja errores de forma centralizada y es fácil de integrar en React Native."
+            },
+            {
+              "nombre": "Chart.js",
+              "categoria": "libreria",
+              "descripcion": "Librería para la visualización de datos de calidad del aire en gráficos.",
+              "version_sugerida": "4.x",
+              "url_docs": "https://www.chartjs.org/",
+              "por_que": "Permite mostrar tendencias de CO2, VOCs y humedad de forma clara y visualmente atractiva dentro de la aplicación móvil."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "bases_datos",
+              "descripcion": "Base de datos relacional para almacenar mediciones de sensores, configuraciones de escuelas y alertas.",
+              "version_sugerida": "15.x",
+              "url_docs": "https://www.postgresql.org/",
+              "por_que": "Ofrece robustez, soporte para tipos de datos avanzados (como timestamps) y escalabilidad suficiente para el volumen de datos esperado."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Contenerización de la aplicación API y la base de datos para un despliegue y entorno de desarrollo consistentes.",
+              "version_sugerida": "24.x",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita la configuración del entorno de desarrollo y despliegue, asegurando que la API y la BD funcionen igual en cualquier máquina."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para la aplicación móvil y la API.",
+              "version_sugerida": "29.x",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Es el framework de testing estándar para JavaScript/React Native, fácil de configurar y con buen soporte para pruebas unitarias y de integración."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro manual de mediciones de CO2, VOCs y humedad.",
+          "Visualización de datos históricos en gráficos interactivos.",
+          "Generación de informes de calidad del aire por escuela.",
+          "Sistema de alertas personalizadas para ventilación.",
+          "Gestión de múltiples aulas por escuela."
+        ],
+        "casos_uso": [
+          "Un conserje registra las mediciones diarias de CO2 de varias aulas.",
+          "El director de una escuela revisa el informe semanal de calidad del aire para identificar problemas.",
+          "La aplicación envía una alerta al profesor de 3ºB indicando la necesidad de ventilar el aula.",
+          "Un responsable de salud escolar analiza tendencias a largo plazo para planificar mejoras."
+        ],
+        "reglas_negocio": [
+          "Umbral de alerta para CO2: > 1000 ppm.",
+          "Umbral de alerta para VOCs: > 500 ppb.",
+          "La ventilación recomendada se ajusta según el número de alumnos en el aula.",
+          "Los informes se generan semanalmente por defecto, pero pueden solicitarse bajo demanda."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Sensores de CO2 y VOCs de bajo coste (ej. MH-Z19B, SGP30)."
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos básicos de TypeScript y React Native.",
+          "Comprensión de APIs RESTful.",
+          "Familiaridad con bases de datos SQL.",
+          "Acceso a sensores de calidad de aire para pruebas."
+        ],
+        "riesgos": [
+          "La precisión de los sensores de bajo coste puede variar.",
+          "La adopción por parte del personal escolar puede ser lenta.",
+          "La gestión de múltiples tipos de sensores y sus calibraciones.",
+          "La falta de conectividad en algunas escuelas podría afectar la sincronización."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-01T10:00:00Z",
+        "hash_unicidad": "0b8740eb5b6e62e3"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "4c18efd6db476c26"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "g7h8i9j0k1l2",
+        "titulo": "Sistema de Gestión de Residuos Orgánicos para Restaurantes",
+        "descripcion_corta": "App web para restaurantes que rastrea la generación de residuos orgánicos, optimiza la recogida y facilita el cumplimiento de normativas de compostaje.",
+        "descripcion_detallada": "Plataforma web que ayuda a restaurantes a catalogar y cuantificar sus residuos orgánicos. Permite programar recogidas eficientes con proveedores de compostaje, generar reportes de impacto ambiental y asegurar el cumplimiento de regulaciones locales sobre gestión de residuos.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Django",
+              "categoria": "framework",
+              "descripcion": "Framework web robusto para el desarrollo del backend, incluyendo ORM, admin y autenticación.",
+              "version_sugerida": "4.2.x",
+              "url_docs": "https://docs.djangoproject.com/en/stable/",
+              "por_que": "Proporciona una estructura completa y segura, ideal para gestionar datos de negocio complejos como inventarios de residuos y programaciones de recogida."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Frontend interactivo y dinámico para la interfaz de usuario de la aplicación web.",
+              "version_sugerida": "18.x",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite construir interfaces de usuario componentizadas y reactivas, facilitando la gestión de formularios y visualizaciones de datos."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Django REST framework",
+              "categoria": "libreria",
+              "descripcion": "Herramienta para construir APIs RESTful sobre Django.",
+              "version_sugerida": "3.14.x",
+              "url_docs": "https://www.django-rest-framework.org/",
+              "por_que": "Facilita la serialización de modelos de datos y la creación de endpoints para la comunicación entre frontend y backend."
+            },
+            {
+              "nombre": "Chart.js",
+              "categoria": "libreria",
+              "descripcion": "Visualización de datos de generación de residuos y cumplimiento normativo.",
+              "version_sugerida": "4.x",
+              "url_docs": "https://www.chartjs.org/",
+              "por_que": "Permite mostrar gráficos claros sobre el tipo y cantidad de residuos, así como el progreso hacia objetivos de compostaje."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "bases_datos",
+              "descripcion": "Base de datos para almacenar información de restaurantes, tipos de residuos, registros de recogida y cumplimiento normativo.",
+              "version_sugerida": "15.x",
+              "url_docs": "https://www.postgresql.org/",
+              "por_que": "Soporta datos relacionales complejos, transacciones ACID y extensiones útiles para análisis de datos geoespaciales si se quisiera añadir esa funcionalidad."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Nginx",
+              "categoria": "infraestructura",
+              "descripcion": "Servidor web y proxy inverso para servir la aplicación frontend y gestionar las peticiones a la API.",
+              "version_sugerida": "1.24.x",
+              "url_docs": "https://nginx.org/en/docs/",
+              "por_que": "Alto rendimiento y fiabilidad para servir tráfico web, gestionar SSL y balancear carga si la aplicación crece."
+            },
+            {
+              "nombre": "Docker Compose",
+              "categoria": "infraestructura",
+              "descripcion": "Orquestación de contenedores para la aplicación web, API y base de datos durante el desarrollo y despliegue.",
+              "version_sugerida": "2.x",
+              "url_docs": "https://docs.docker.com/compose/",
+              "por_que": "Simplifica la gestión de múltiples servicios (frontend, backend, DB) en un entorno local y de producción."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para el backend de Django.",
+              "version_sugerida": "7.x",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Potente y flexible, con una gran comunidad y muchas extensiones, ideal para pruebas unitarias y de integración del backend."
+            },
+            {
+              "nombre": "React Testing Library",
+              "categoria": "testing",
+              "descripcion": "Librería para testear componentes de React de forma centrada en el usuario.",
+              "version_sugerida": "13.x",
+              "url_docs": "https://testing-library.com/docs/react-testing-library/intro/",
+              "por_que": "Fomenta la escritura de tests que reflejan cómo interactúa el usuario con la interfaz, resultando en tests más robustos."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro detallado de tipos y cantidades de residuos orgánicos.",
+          "Programación de recogidas con proveedores externos.",
+          "Generación de reportes de sostenibilidad y cumplimiento normativo.",
+          "Dashboard con métricas clave de generación de residuos.",
+          "Gestión de múltiples locales por cadena de restaurantes."
+        ],
+        "casos_uso": [
+          "Un chef registra los restos de comida del día y los clasifica como 'orgánico'.",
+          "El gerente programa una recogida de compostaje para el final de la semana.",
+          "La aplicación genera un informe trimestral para cumplir con la regulación municipal.",
+          "Un auditor revisa los reportes para verificar el cumplimiento de las políticas de sostenibilidad."
+        ],
+        "reglas_negocio": [
+          "Los residuos orgánicos deben separarse de otros tipos de basura.",
+          "Los proveedores de compostaje tienen rutas y horarios fijos.",
+          "Los reportes deben incluir el porcentaje de residuos desviados de vertedero.",
+          "Se aplican penalizaciones si no se cumple la normativa de compostaje."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "APIs de proveedores de servicios de compostaje (si existen).",
+          "Documentación de normativas locales de gestión de residuos."
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 8,
+        "prerequisitos": [
+          "Experiencia con Python y Django.",
+          "Conocimientos de JavaScript y React.",
+          "Comprensión de bases de datos relacionales.",
+          "Familiaridad con el desarrollo y despliegue de aplicaciones web."
+        ],
+        "riesgos": [
+          "La precisión en el registro de residuos por parte del personal puede ser un desafío.",
+          "La integración con sistemas de terceros (proveedores de recogida) puede ser compleja.",
+          "La variabilidad en las normativas locales requiere flexibilidad en el sistema.",
+          "La resistencia al cambio por parte de cocineros y gerentes."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-01T10:01:00Z",
+        "hash_unicidad": "94985ac223a57fac"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "4c18efd6db476c26"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "n9o0p1q2r3s4",
+        "titulo": "Asistente de Diagnóstico de Enfermedades de Cultivos Hortícolas",
+        "descripcion_corta": "App web con IA que ayuda a agricultores a identificar enfermedades en sus cultivos a partir de fotos, ofreciendo tratamientos y preventivos.",
+        "descripcion_detallada": "Sistema basado en IA que permite a agricultores subir fotos de hojas o frutos de cultivos hortícolas (tomate, pimiento, etc.). El modelo de visión por computador identifica posibles enfermedades, proporciona información detallada y sugiere tratamientos orgánicos o convencionales y medidas preventivas.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "API de alto rendimiento para servir el modelo de IA y gestionar las peticiones del frontend.",
+              "version_sugerida": "0.104.x",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Excelente rendimiento asíncrono, validación de datos con Pydantic y generación automática de documentación OpenAPI, ideal para desplegar modelos de ML."
+            },
+            {
+              "nombre": "Vue.js",
+              "categoria": "framework",
+              "descripcion": "Frontend moderno y reactivo para la interfaz de usuario.",
+              "version_sugerida": "3.x",
+              "url_docs": "https://vuejs.org/",
+              "por_que": "Curva de aprendizaje suave, buena documentación y un ecosistema maduro para construir interfaces de usuario interactivas."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "TensorFlow / Keras",
+              "categoria": "libreria",
+              "descripcion": "Librerías para construir, entrenar y desplegar el modelo de clasificación de imágenes.",
+              "version_sugerida": "2.15.x",
+              "url_docs": "https://www.tensorflow.org/",
+              "por_que": "Estándares de la industria para deep learning, con amplios recursos y soporte para despliegue en producción."
+            },
+            {
+              "nombre": "OpenCV",
+              "categoria": "libreria",
+              "descripcion": "Procesamiento de imágenes para preprocesamiento y análisis.",
+              "version_sugerida": "4.x",
+              "url_docs": "https://opencv.org/",
+              "por_que": "Esencial para la manipulación y preprocesamiento de imágenes antes de alimentar el modelo de ML."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL con PostGIS",
+              "categoria": "bases_datos",
+              "descripcion": "Almacenamiento de información sobre cultivos, enfermedades, tratamientos y datos geoespaciales de parcelas.",
+              "version_sugerida": "15.x",
+              "url_docs": "https://www.postgresql.org/",
+              "por_que": "Capacidad para manejar datos geoespaciales con PostGIS, útil para futuras expansiones relacionadas con la ubicación de los cultivos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker Swarm / Kubernetes",
+              "categoria": "infraestructura",
+              "descripcion": "Orquestación de contenedores para desplegar la API, el modelo de ML y la aplicación web de forma escalable.",
+              "version_sugerida": "latest",
+              "url_docs": "https://kubernetes.io/",
+              "por_que": "Permite gestionar el despliegue, escalado y la alta disponibilidad de los microservicios, incluyendo el servicio de inferencia de ML."
+            },
+            {
+              "nombre": "MLflow",
+              "categoria": "infraestructura",
+              "descripcion": "Gestión del ciclo de vida del modelo de Machine Learning (seguimiento de experimentos, versionado, despliegue).",
+              "version_sugerida": "2.x",
+              "url_docs": "https://mlflow.org/",
+              "por_que": "Fundamental para un desarrollo ML riguroso, permitiendo reproducibilidad y monitorización del rendimiento del modelo."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Modelo de Clasificación de Imágenes",
+              "categoria": "ia_ml",
+              "descripcion": "Red neuronal convolucional (CNN) entrenada para identificar enfermedades comunes en cultivos hortícolas.",
+              "version_sugerida": "v1.0",
+              "url_docs": null,
+              "por_que": "Permite automatizar el diagnóstico que tradicionalmente requiere un experto, haciéndolo accesible a más agricultores."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Testing para la API de FastAPI y la lógica de preprocesamiento de imágenes.",
+              "version_sugerida": "7.x",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Framework robusto para pruebas unitarias y de integración, esencial para la fiabilidad de la API y la lógica de ML."
+            },
+            {
+              "nombre": "Vitest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing moderno para el frontend de Vue.js.",
+              "version_sugerida": "1.x",
+              "url_docs": "https://vitest.dev/",
+              "por_que": "Rápido y compatible con la API de Jest, ideal para testear componentes Vue.js de manera eficiente."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Subida de imágenes de plantas afectadas por posibles enfermedades.",
+          "Identificación automática de la enfermedad con un porcentaje de confianza.",
+          "Recomendaciones de tratamientos (orgánicos y convencionales).",
+          "Sugerencias de medidas preventivas para evitar futuras infecciones.",
+          "Base de datos consultable de enfermedades y tratamientos."
+        ],
+        "casos_uso": [
+          "Un agricultor sube una foto de una hoja de tomate con manchas extrañas.",
+          "El sistema identifica 'Mildiu' con un 85% de confianza y sugiere un fungicida.",
+          "Un técnico agrícola consulta la base de datos para comparar síntomas de dos posibles enfermedades.",
+          "La aplicación alerta sobre la alta probabilidad de 'Oídio' si las condiciones climáticas persisten."
+        ],
+        "reglas_negocio": [
+          "El sistema solo soporta cultivos hortícolas especificados (ej. tomate, pimiento, pepino).",
+          "Las recomendaciones de tratamiento deben incluir advertencias sobre seguridad y dosificación.",
+          "La precisión del diagnóstico depende de la calidad de la imagen y la etapa de la enfermedad.",
+          "Se debe informar al usuario sobre la naturaleza probabilística del diagnóstico IA."
+        ],
+        "por_que_ia": "La IA (visión por computador) es crucial para automatizar la identificación de enfermedades a partir de imágenes, un proceso que tradicionalmente requiere la experiencia de un agrónomo y puede ser lento y costoso para el agricultor.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [
+          "Datasets de imágenes de enfermedades de cultivos (ej. PlantVillage dataset).",
+          "APIs de información agronómica y fitosanitaria."
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 16,
+        "prerequisitos": [
+          "Experiencia sólida en Python y desarrollo de APIs.",
+          "Conocimientos avanzados de Machine Learning (especialmente Computer Vision).",
+          "Experiencia con frameworks frontend como Vue.js.",
+          "Comprensión de arquitecturas de microservicios y despliegue en la nube."
+        ],
+        "riesgos": [
+          "La precisión del modelo de IA puede ser limitada por la calidad y variedad de las imágenes de entrenamiento.",
+          "La gestión y actualización continua del modelo de ML puede ser compleja.",
+          "La dependencia de la conectividad a internet para el diagnóstico en tiempo real.",
+          "La responsabilidad legal asociada a diagnósticos erróneos de enfermedades de cultivos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "ia_generativa",
+        "fecha_generacion": "2024-03-01T10:02:00Z",
+        "hash_unicidad": "7ea7a5a19a4e2ec5"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "4c18efd6db476c26"
+      }
     }
   ],
   "ultimos_hashes": [
-    "b0e4f2a6c8d1e3f5",
-    "e3f5a1b7c9d0e2f4",
-    "f2a6c8d1e3f5b0a9",
     "f7c9a0b2e1d3f5a7",
     "12a3b4c5d6e7f8a9",
     "2b3c4d5e6f7a8b9c",
@@ -28938,8 +29372,11 @@
     "e114bbd0e27371a0",
     "5ebdd53744673be2",
     "b11c6a77c98b8b57",
-    "be005cf8236f27b3"
+    "be005cf8236f27b3",
+    "0b8740eb5b6e62e3",
+    "94985ac223a57fac",
+    "7ea7a5a19a4e2ec5"
   ],
-  "total_generados": 207,
-  "fecha_ultima_generacion": "2026-11-25T13:50:46.720991"
+  "total_generados": 210,
+  "fecha_ultima_generacion": "2026-11-25T23:58:05.998934"
 }
