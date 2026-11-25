@@ -28386,12 +28386,459 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "4c47a3acb22fb978"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4e5f67890",
+        "titulo": "Sistema de Gestión de Calidad de Leche Cruda para Pequeñas Queserías",
+        "descripcion_corta": "App móvil para ganaderos que registra análisis de leche cruda (pH, temperatura, grasa), detectando lotes no aptos para queso antes de la entrega.",
+        "descripcion_detallada": "Aplicación móvil offline-first para ganaderos que simplifica el registro de parámetros fisicoquímicos de la leche cruda. Permite tomar decisiones rápidas sobre la aptitud del lote para la producción de queso, reduciendo mermas y asegurando la calidad del producto final en queserías artesanales.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "mobile",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "React Native",
+              "categoria": "framework",
+              "descripcion": "Desarrollo de aplicaciones móviles multiplataforma (iOS/Android) con una única base de código.",
+              "version_sugerida": "^0.73.0",
+              "url_docs": "https://reactnative.dev/docs/getting-started",
+              "por_que": "Permite un desarrollo rápido y eficiente de la aplicación móvil para ganaderos, cubriendo tanto Android como iOS con un solo proyecto."
+            },
+            {
+              "nombre": "Express.js",
+              "categoria": "framework",
+              "descripcion": "Framework web minimalista y flexible para Node.js.",
+              "version_sugerida": "^4.18.2",
+              "url_docs": "https://expressjs.com/",
+              "por_que": "Proporciona una API RESTful sencilla para la sincronización de datos desde la aplicación móvil y la gestión básica."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Realm",
+              "categoria": "libreria",
+              "descripcion": "Base de datos móvil nativa, rápida y fácil de usar.",
+              "version_sugerida": "^10.25.0",
+              "url_docs": "https://realm.io/docs/javascript/latest/",
+              "por_que": "Ofrece persistencia de datos offline en la aplicación móvil, con capacidades de sincronización automática cuando hay conexión."
+            },
+            {
+              "nombre": "Axios",
+              "categoria": "libreria",
+              "descripcion": "Cliente HTTP basado en promesas para el navegador y Node.js.",
+              "version_sugerida": "^1.6.0",
+              "url_docs": "https://axios-http.com/docs/intro",
+              "por_que": "Facilita las llamadas a la API RESTful de Express.js para enviar los datos de análisis de leche y recibir actualizaciones."
+            }
+          ],
+          "bases_datos": [],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript.",
+              "version_sugerida": "^29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Permite escribir pruebas unitarias y de integración para la lógica de la aplicación móvil y la API."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro offline de análisis de leche (pH, temp, grasa)",
+          "Validación de lotes según umbrales configurables",
+          "Sincronización automática de datos al recuperar conexión",
+          "Visualización histórica de análisis por lote/animal",
+          "Notificaciones sobre lotes no aptos"
+        ],
+        "casos_uso": [
+          "Ganadero registra datos en el establo sin cobertura",
+          "Sistema marca un lote como 'no apto' por pH bajo",
+          "Quesería recibe datos actualizados al final del día",
+          "Ganadero consulta historial de análisis para optimizar alimentación",
+          "Quesería rechaza entrega de leche no conforme"
+        ],
+        "reglas_negocio": [
+          "El pH debe estar entre 6.4 y 6.8.",
+          "La temperatura de la leche no debe superar los 4°C al momento del análisis.",
+          "El porcentaje de grasa debe ser superior al 3.5%.",
+          "Los datos se marcan como 'no aptos' si incumplen alguna regla.",
+          "Los datos solo se sincronizan si la conexión es estable."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 3,
+        "prerequisitos": [
+          "Conocimientos básicos de TypeScript y React Native.",
+          "Comprensión de APIs RESTful.",
+          "Acceso a un dispositivo Android/iOS para pruebas."
+        ],
+        "riesgos": [
+          "Problemas de sincronización de datos en redes inestables.",
+          "Complejidad en la gestión de la base de datos offline.",
+          "Adopción por parte de ganaderos con baja familiaridad tecnológica.",
+          "Definición de umbrales de calidad genéricos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-04-03T10:00:00Z",
+        "hash_unicidad": "5ebdd53744673be2"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "f18523d601206ead"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "b2c3d4e5f6789012",
+        "titulo": "Sistema de Verificación de Autenticidad de Documentos Históricos mediante IA",
+        "descripcion_corta": "Web app para historiadores y archiveros que usa IA para comparar estilos de escritura y detectar falsificaciones en documentos escaneados.",
+        "descripcion_detallada": "Plataforma web que permite a historiadores, archiveros y coleccionistas subir escaneos de documentos antiguos. Utiliza modelos de IA (OCR, análisis de patrones de escritura, incrustaciones de texto) para comparar el estilo de escritura con bases de datos de referencia y señalar posibles inconsistencias o falsificaciones.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Django",
+              "categoria": "framework",
+              "descripcion": "Framework web de alto nivel que fomenta el desarrollo rápido y el diseño limpio y pragmático.",
+              "version_sugerida": "4.2.7",
+              "url_docs": "https://docs.djangoproject.com/en/stable/",
+              "por_que": "Proporciona una estructura robusta para la gestión de usuarios, el almacenamiento de documentos y la provisión de una API segura para el front-end."
+            },
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python 3.7+ basado en type hints estándar de Python.",
+              "version_sugerida": "0.104.1",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Se utiliza para la API de inferencia de IA, aprovechando su rendimiento asíncrono y la validación automática de datos."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "OpenCV",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca de código abierto para visión por computadora y procesamiento de imágenes.",
+              "version_sugerida": "4.8.1",
+              "url_docs": "https://docs.opencv.org/4.x/",
+              "por_que": "Fundamental para preprocesar imágenes de documentos, realizar segmentación de texto y análisis de características visuales."
+            },
+            {
+              "nombre": "Tesseract OCR",
+              "categoria": "libreria",
+              "descripcion": "Motor de Reconocimiento Óptico de Caracteres (OCR).",
+              "version_sugerida": "5.3.3",
+              "url_docs": "https://tesseract-ocr.github.io/",
+              "por_que": "Convierte las imágenes escaneadas de los documentos en texto editable, necesario para el análisis de escritura."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca de aprendizaje automático para Python.",
+              "version_sugerida": "1.3.2",
+              "url_docs": "https://scikit-learn.org/stable/",
+              "por_que": "Proporciona algoritmos para clasificación, clustering y análisis de componentes principales para caracterizar estilos de escritura."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "bases_datos",
+              "descripcion": "Sistema de gestión de bases de datos objeto-relacional.",
+              "version_sugerida": "16",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Almacena de forma segura los metadatos de los documentos, los resultados de los análisis y las referencias de escritura."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.7",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, especialmente para las dependencias de IA."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Modelos de embeddings de texto",
+              "categoria": "ia_ml",
+              "descripcion": "Representaciones vectoriales de texto que capturan significado semántico.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://huggingface.co/docs/transformers/model_doc/auto",
+              "por_que": "Permite comparar la similitud estilística y de contenido entre fragmentos de texto de diferentes documentos."
+            },
+            {
+              "nombre": "Análisis de características de escritura",
+              "categoria": "ia_ml",
+              "descripcion": "Técnicas de visión por computadora para extraer características únicas de la caligrafía.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://docs.opencv.org/4.x/d1/d46/tutorial_py_geometric_transformations.html",
+              "por_que": "Identifica patrones como la inclinación de las letras, el espaciado y la forma de los trazos para la autenticación."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de Python.",
+              "version_sugerida": "7.4.3",
+              "url_docs": "https://docs.pytest.org/en/stable/",
+              "por_que": "Facilita la escritura de pruebas unitarias y de integración para la lógica de la API y los modelos de IA."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Carga de documentos escaneados (JPG, PNG, PDF)",
+          "Extracción de texto mediante OCR",
+          "Análisis comparativo de estilo de escritura",
+          "Generación de informe de probabilidad de falsificación",
+          "Gestión de base de datos de documentos de referencia"
+        ],
+        "casos_uso": [
+          "Un historiador verifica la autenticidad de una carta antigua.",
+          "Un archivero identifica un posible documento apócrifo.",
+          "Un coleccionista evalúa la originalidad de un manuscrito.",
+          "El sistema sugiere posibles autores basándose en el estilo.",
+          "Se genera un informe detallado para su uso forense/legal."
+        ],
+        "reglas_negocio": [
+          "La comparación se basa en métricas de similitud de embeddings y características visuales.",
+          "Se requiere un mínimo de 50 palabras para un análisis de escritura fiable.",
+          "Los documentos de referencia deben tener una fecha y autoría conocidas.",
+          "El sistema proporciona una puntuación de confianza, no una verdad absoluta.",
+          "Los documentos subidos se almacenan de forma segura y cifrada."
+        ],
+        "por_que_ia": "La IA es crucial para analizar patrones complejos y sutiles en la escritura a mano que son difíciles de detectar manualmente o con métodos tradicionales, permitiendo identificar posibles falsificaciones con mayor precisión.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia con Python y frameworks web como Django/FastAPI.",
+          "Conocimientos de bibliotecas de procesamiento de imágenes y OCR.",
+          "Comprensión de los principios básicos de Machine Learning y NLP.",
+          "Familiaridad con el despliegue de aplicaciones web y modelos de IA."
+        ],
+        "riesgos": [
+          "Precisión limitada en documentos muy dañados o con escritura muy simple.",
+          "Necesidad de grandes corpus de documentos de referencia para entrenar/validar modelos.",
+          "Costos computacionales elevados para el procesamiento de imágenes y la inferencia de IA.",
+          "Interpretación errónea de los resultados de probabilidad por parte de usuarios no expertos.",
+          "Protección de datos sensibles y propiedad intelectual de los documentos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-04-03T10:00:00Z",
+        "hash_unicidad": "b11c6a77c98b8b57"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "f18523d601206ead"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "d5e6f7a8b9012345",
+        "titulo": "Plataforma de Coordinación de Voluntariado para Respuesta a Desastres Naturales",
+        "descripcion_corta": "Aplicación web y móvil para ONGs que coordina voluntarios en tiempo real durante emergencias, asignando tareas según ubicación y habilidades.",
+        "descripcion_detallada": "Sistema centralizado para ONGs que gestiona la movilización de voluntarios ante desastres. Permite registrar voluntarios, sus habilidades y disponibilidad, y asignarles tareas en tiempo real basadas en su ubicación y las necesidades del momento, optimizando la respuesta y la ayuda humanitaria.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "web",
+          "mobile",
+          "api",
+          "bot"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web HTTP de alto rendimiento para Go.",
+              "version_sugerida": "1.21.2",
+              "url_docs": "https://gin-gonic.com/docs/",
+              "por_que": "Proporciona una API RESTful robusta y de baja latencia para la gestión de voluntarios, tareas y notificaciones en tiempo real."
+            },
+            {
+              "nombre": "Flutter",
+              "categoria": "framework",
+              "descripcion": "Kit de herramientas de UI de Google para crear aplicaciones compiladas nativamente para móvil, web y escritorio desde una única base de código.",
+              "version_sugerida": "3.16.0",
+              "url_docs": "https://docs.flutter.dev/",
+              "por_que": "Permite el desarrollo rápido de aplicaciones móviles intuitivas para voluntarios en campo, con capacidades offline."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "GORM",
+              "categoria": "libreria",
+              "descripcion": "ORM (Object-Relational Mapper) completo para Go.",
+              "version_sugerida": "2.20.12",
+              "url_docs": "https://gorm.io/docs/",
+              "por_que": "Simplifica la interacción con la base de datos PostgreSQL, mapeando objetos Go a tablas de base de datos."
+            },
+            {
+              "nombre": "WebSockets (gorilla/websocket)",
+              "categoria": "libreria",
+              "descripcion": "Implementación de cliente y servidor WebSocket para Go.",
+              "version_sugerida": "1.5.0",
+              "url_docs": "https://github.com/gorilla/websocket",
+              "por_que": "Esencial para la comunicación en tiempo real entre la plataforma y las aplicaciones móviles de voluntarios y coordinadores."
+            },
+            {
+              "nombre": "Twilio",
+              "categoria": "libreria",
+              "descripcion": "Plataforma de comunicación en la nube.",
+              "version_sugerida": "N/A (SDK)",
+              "url_docs": "https://www.twilio.com/docs/libraries/go",
+              "por_que": "Permite enviar notificaciones SMS a voluntarios que no tengan la app instalada o en caso de fallo de datos."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "bases_datos",
+              "descripcion": "Sistema de gestión de bases de datos objeto-relacional.",
+              "version_sugerida": "16",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Ofrece alta disponibilidad, escalabilidad y soporte para datos geoespaciales (PostGIS) necesarios para la localización de voluntarios y necesidades."
+            },
+            {
+              "nombre": "Redis",
+              "categoria": "bases_datos",
+              "descripcion": "Almacén de estructuras de datos en memoria.",
+              "version_sugerida": "7.2",
+              "url_docs": "https://redis.io/docs/",
+              "por_que": "Utilizado como caché para datos frecuentemente accedidos y como broker de mensajes para la comunicación en tiempo real (Pub/Sub)."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Kubernetes",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de orquestación de contenedores.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://kubernetes.io/docs/concepts/",
+              "por_que": "Permite el despliegue escalable y resiliente de los microservicios (API, WebSocket, Bot) y la base de datos."
+            },
+            {
+              "nombre": "Terraform",
+              "categoria": "infraestructura",
+              "descripcion": "Herramienta de Infraestructura como Código (IaC).",
+              "version_sugerida": "1.6.3",
+              "url_docs": "https://developer.hashicorp.com/terraform/docs",
+              "por_que": "Gestiona el aprovisionamiento y la configuración de la infraestructura en la nube de forma declarativa y reproducible."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Paquete estándar de Go para escritura de pruebas.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Para pruebas unitarias y de integración de la lógica del backend y la API."
+            },
+            {
+              "nombre": "Flutter testing",
+              "categoria": "testing",
+              "descripcion": "Conjunto de herramientas para testing en Flutter.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://docs.flutter.dev/testing",
+              "por_que": "Para pruebas unitarias, de widgets y de integración de la aplicación móvil."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Telegram Bot API",
+              "categoria": "bot",
+              "descripcion": "API para interactuar con bots de Telegram.",
+              "version_sugerida": "N/A",
+              "url_docs": "https://core.telegram.org/bots/api",
+              "por_que": "Permite notificar a los coordinadores de la ONG sobre nuevas solicitudes de voluntarios o cambios críticos en la situación."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Registro y gestión de perfiles de voluntarios (habilidades, ubicación)",
+          "Sistema de asignación de tareas geolocalizado",
+          "Notificaciones en tiempo real (push, SMS, Telegram)",
+          "Modo offline para la app móvil con sincronización posterior",
+          "Dashboard de visualización de necesidades y recursos en mapa",
+          "Gestión de turnos y horarios de voluntarios"
+        ],
+        "casos_uso": [
+          "Coordinador crea tarea 'Reparto de agua' en zona X.",
+          "Voluntarios cercanos reciben notificación y aceptan tarea.",
+          "Voluntario actualiza estado de tarea ('en progreso', 'completado') desde su móvil.",
+          "ONG recibe alerta SMS si no hay voluntarios disponibles para tarea crítica.",
+          "Coordinador visualiza en mapa la distribución de voluntarios activos."
+        ],
+        "reglas_negocio": [
+          "Las tareas se asignan preferentemente a voluntarios con las habilidades requeridas.",
+          "Los voluntarios deben confirmar la aceptación de una tarea en 5 minutos.",
+          "Las notificaciones SMS solo se envían si la app móvil no responde.",
+          "Los datos de ubicación de voluntarios se actualizan cada 30 segundos.",
+          "Solo personal autorizado de la ONG puede crear y asignar tareas críticas."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "APIs de mapas (ej. Mapbox, Google Maps) para visualización y geolocalización.",
+          "Servicio de envío de SMS (ej. Twilio)."
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 12,
+        "prerequisitos": [
+          "Experiencia avanzada en Go y desarrollo de microservicios.",
+          "Dominio de Flutter para aplicaciones móviles.",
+          "Conocimiento de bases de datos distribuidas y colas de mensajes.",
+          "Experiencia con orquestación de contenedores (Kubernetes).",
+          "Comprensión de protocolos de comunicación en tiempo real (WebSockets)."
+        ],
+        "riesgos": [
+          "Alta dependencia de la conectividad móvil en zonas de desastre.",
+          "Escalabilidad para manejar miles de voluntarios y tareas concurrentes.",
+          "Seguridad y privacidad de los datos de voluntarios y ubicaciones.",
+          "Complejidad en la gestión de la lógica de asignación de tareas bajo presión.",
+          "Integración con sistemas de otras ONGs o agencias gubernamentales."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-04-03T10:00:00Z",
+        "hash_unicidad": "be005cf8236f27b3"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "f18523d601206ead"
+      }
     }
   ],
   "ultimos_hashes": [
-    "a8b1c2d3e4f5a6b7",
-    "c2d3e4f5a6b7c8d9",
-    "d3e4f5a6b7c8d9e0",
     "b0e4f2a6c8d1e3f5",
     "e3f5a1b7c9d0e2f4",
     "f2a6c8d1e3f5b0a9",
@@ -28488,8 +28935,11 @@
     "b4c6375b827063c2",
     "3ad0ec2daf55360d",
     "034fd3d9e85d3b48",
-    "e114bbd0e27371a0"
+    "e114bbd0e27371a0",
+    "5ebdd53744673be2",
+    "b11c6a77c98b8b57",
+    "be005cf8236f27b3"
   ],
-  "total_generados": 204,
-  "fecha_ultima_generacion": "2026-11-25T03:19:56.172616"
+  "total_generados": 207,
+  "fecha_ultima_generacion": "2026-11-25T13:50:46.720991"
 }
