@@ -28120,11 +28120,275 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "73b10e4d590420ca"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4e5f6",
+        "titulo": "Sistema de Gestión de Riesgos de Inundación para Municipios Costeros",
+        "descripcion_corta": "Plataforma web para ayuntamientos que predice riesgos de inundación y planifica evacuaciones, integrando datos históricos y meteorológicos con IA.",
+        "descripcion_detallada": "Este sistema permite a los municipios costeros anticipar y gestionar mejor los riesgos de inundación. Al integrar datos históricos de mareas, topografía, previsiones meteorológicas y modelos de IA, proporciona mapas de riesgo dinámicos y planes de evacuación optimizados. El gancho es su enfoque proactivo en la seguridad ciudadana y la resiliencia urbana ante eventos climáticos extremos.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web asíncrono para construir APIs de alto rendimiento, ideal para servir modelos de IA y datos geoespaciales.",
+              "version_sugerida": "0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Proporciona validación automática de datos con Pydantic, generación de documentación OpenAPI y alta concurrencia para manejar peticiones de predicción y visualización."
+            },
+            {
+              "nombre": "Streamlit",
+              "categoria": "framework",
+              "descripcion": "Framework para crear aplicaciones web interactivas y dashboards de datos de forma rápida.",
+              "version_sugerida": "1.20.0",
+              "url_docs": "https://docs.streamlit.io/",
+              "por_que": "Permite crear rápidamente la interfaz de usuario para que los gestores municipales visualicen los mapas de riesgo, planes de evacuación y parámetros del modelo sin necesidad de un frontend complejo."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "GeoPandas",
+              "categoria": "libreria",
+              "descripcion": "Extiende las capacidades de Pandas para permitir operaciones espaciales sobre datos geográficos.",
+              "version_sugerida": "0.13.0",
+              "url_docs": "https://geopandas.org/en/stable/",
+              "por_que": "Esencial para el manejo y análisis de datos geoespaciales como modelos de elevación digital, capas de urbanización y datos de mareas."
+            },
+            {
+              "nombre": "XGBoost",
+              "categoria": "libreria",
+              "descripcion": "Implementación eficiente de árboles de decisión potenciados para machine learning.",
+              "version_sugerida": "2.0.0",
+              "url_docs": "https://xgboost.readthedocs.io/en/stable/",
+              "por_que": "Ofrece un buen equilibrio entre precisión y rendimiento para predecir la probabilidad de inundación basándose en múltiples variables."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL con PostGIS",
+              "categoria": "bases_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional con extensiones para datos geoespaciales.",
+              "version_sugerida": "15",
+              "url_docs": "https://postgis.net/",
+              "por_que": "Ideal para almacenar y consultar eficientemente datos geoespaciales (topografía, hidrografía) y datos históricos de eventos. PostGIS es el estándar de facto para GIS en bases de datos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y despliegue, facilitando la gestión de dependencias y la escalabilidad."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/en/stable/",
+              "por_que": "Permite escribir tests claros y mantenibles para la lógica de negocio, las APIs y los modelos de predicción, incluyendo tests para operaciones geoespaciales."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Generación de mapas de riesgo de inundación dinámicos",
+          "Simulación de escenarios de inundación basados en datos meteorológicos",
+          "Planificación y optimización de rutas de evacuación",
+          "Sistema de alertas tempranas para la población",
+          "Historial de eventos y análisis de recurrencia"
+        ],
+        "casos_uso": [
+          "Un gestor municipal consulta el mapa de riesgo para evaluar el impacto de una borrasca inminente.",
+          "El sistema genera automáticamente rutas de evacuación optimizadas para barrios específicos.",
+          "Se activa una alerta a los ciudadanos en zonas de alto riesgo ante una subida del nivel del mar pronosticada.",
+          "El equipo de protección civil planifica simulacros de evacuación basados en los escenarios generados.",
+          "Se analizan datos históricos para identificar puntos críticos recurrentes de inundación."
+        ],
+        "reglas_negocio": [
+          "El umbral de alerta se ajusta según la categoría del evento meteorológico.",
+          "Las rutas de evacuación priorizan accesibilidad para personas con movilidad reducida.",
+          "Los datos de mareas y previsiones meteorológicas deben tener una antigüedad máxima de 24 horas para ser válidos.",
+          "El sistema solo permite la planificación de evacuaciones en áreas con datos topográficos disponibles.",
+          "Los planes de evacuación generados deben ser aprobados por el comité de emergencias local."
+        ],
+        "por_que_ia": "La IA se utiliza para construir modelos predictivos que estiman la probabilidad y la extensión de las inundaciones basándose en la complejidad de variables geográficas, meteorológicas e históricas, superando las capacidades de los modelos deterministas simples.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "APIs de datos meteorológicos (ej. OpenWeatherMap)",
+          "Modelos Digitales de Elevación (DEM) de organismos geográficos nacionales",
+          "Datos históricos de mareas y corrientes"
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 24,
+        "prerequisitos": [
+          "Conocimientos avanzados de Python y data science.",
+          "Experiencia con librerías de procesamiento geoespacial.",
+          "Comprensión de modelos de machine learning y evaluación de riesgos.",
+          "Familiaridad con bases de datos espaciales (PostGIS)."
+        ],
+        "riesgos": [
+          "Calidad y disponibilidad de los datos geoespaciales y meteorológicos.",
+          "Complejidad en la validación y calibración de los modelos de IA.",
+          "Necesidad de infraestructura escalable para procesar grandes volúmenes de datos.",
+          "Resistencia al cambio por parte de administraciones públicas.",
+          "Cumplimiento normativo en la gestión de datos sensibles."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:00:00Z",
+        "hash_unicidad": "034fd3d9e85d3b48"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "4c47a3acb22fb978"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f6e5d4c3b2a1",
+        "titulo": "Plataforma Colaborativa de Diseño de Experimentos Agrícolas",
+        "descripcion_corta": "Web app para investigadores y agricultores que facilita el diseño, seguimiento y análisis de experimentos de campo, con validación estadística asistida por IA.",
+        "descripcion_detallada": "Esta plataforma permite a investigadores y agricultores diseñar experimentos de campo (ej. comparando variedades de cultivos, fertilizantes, métodos de riego) de forma colaborativa. Incluye herramientas para la aleatorización de parcelas, registro de datos (manual/IoT) y análisis estadísticos básicos. El diferenciador es la asistencia IA para sugerir diseños experimentales robustos y la validación estadística de resultados, democratizando la agricultura de precisión.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "ia_ml",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de Node.js para aplicaciones del lado del servidor escalables y eficientes.",
+              "version_sugerida": "9.0.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Proporciona una arquitectura modular (inspirada en Angular) y soporte para TypeScript, facilitando la organización del código y la creación de APIs robustas para la gestión de experimentos."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Librería de JavaScript para construir interfaces de usuario.",
+              "version_sugerida": "18.2.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear una interfaz de usuario interactiva y reactiva para el diseño y visualización de experimentos, facilitando la colaboración en tiempo real."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Statsmodels",
+              "categoria": "libreria",
+              "descripcion": "Librería de Python para la estimación de modelos estadísticos, pruebas estadísticas y exploración de datos.",
+              "version_sugerida": "0.14.0",
+              "url_docs": "https://www.statsmodels.org/stable/index.html",
+              "por_que": "Se utiliza en el backend (vía API) para realizar análisis estadísticos como ANOVA, regresión y pruebas de hipótesis sobre los datos del experimento."
+            },
+            {
+              "nombre": "Chart.js",
+              "categoria": "libreria",
+              "descripcion": "Librería de JavaScript para crear gráficos sencillos y personalizables.",
+              "version_sugerida": "4.3.0",
+              "url_docs": "https://www.chartjs.org/",
+              "por_que": "Facilita la visualización de los resultados de los experimentos, como gráficos de barras, líneas y dispersión, directamente en la interfaz de usuario."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "MongoDB",
+              "categoria": "bases_datos",
+              "descripcion": "Base de datos NoSQL orientada a documentos, flexible y escalable.",
+              "version_sugerida": "6.0",
+              "url_docs": "https://www.mongodb.com/docs/",
+              "por_que": "Adecuada para almacenar datos de experimentos que pueden tener esquemas variables (diferentes tipos de datos, mediciones) y para facilitar la colaboración."
+            }
+          ],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript, fácil de usar y con características integradas.",
+              "version_sugerida": "29.6.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Se utiliza para testear la lógica del frontend (React) y el backend (NestJS), incluyendo la integración con la API de análisis estadístico."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Diseño de experimentos aleatorizados (bloques completos, parcelas divididas)",
+          "Registro colaborativo de datos de campo (manual, CSV, IoT)",
+          "Generación de informes estadísticos automáticos (ANOVA, regresión)",
+          "Visualización interactiva de resultados (gráficos, tablas)",
+          "Asistencia IA para selección de diseño experimental óptimo"
+        ],
+        "casos_uso": [
+          "Un investigador diseña un experimento para probar 3 variedades de trigo en 5 fincas diferentes.",
+          "El agricultor introduce las mediciones de rendimiento diarias vía móvil.",
+          "El sistema sugiere el diseño de bloques aleatorizados para minimizar el efecto de variabilidad del suelo.",
+          "Se genera un informe ANOVA para determinar la significancia estadística de las diferencias entre variedades.",
+          "Múltiples investigadores colaboran en el mismo experimento, añadiendo sus observaciones."
+        ],
+        "reglas_negocio": [
+          "Cada experimento debe tener al menos un factor (variable independiente) y una respuesta (variable dependiente).",
+          "Los datos de entrada deben validarse contra las unidades de medida definidas en el diseño.",
+          "Los análisis estadísticos solo se ejecutan si se cumplen los supuestos del modelo (ej. normalidad, homocedasticidad).",
+          "Los usuarios con rol 'administrador' pueden aprobar o rechazar diseños experimentales.",
+          "Los datos de experimentos sensibles solo son visibles para los miembros del equipo del experimento."
+        ],
+        "por_que_ia": "La IA se usa para recomendar diseños experimentales basados en el tipo de cultivo, las variables a probar y las condiciones del suelo/clima, y para validar la robustez estadística de los resultados, algo que requiere experiencia específica.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "APIs de datos climáticos históricos por ubicación.",
+          "Librerías de análisis estadístico de terceros (ej. R, SciPy)."
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 16,
+        "prerequisitos": [
+          "Conocimientos de TypeScript y frameworks de frontend/backend.",
+          "Comprensión de principios de diseño experimental y estadística básica.",
+          "Experiencia con bases de datos NoSQL.",
+          "Familiaridad con la integración de APIs externas."
+        ],
+        "riesgos": [
+          "La complejidad estadística puede ser un obstáculo para usuarios no expertos.",
+          "La integración de datos IoT (sensores) requiere compatibilidad y estandarización.",
+          "La calidad de los resultados de la IA depende fuertemente de los datos de entrenamiento.",
+          "Dificultad para generalizar el diseño experimental a todos los tipos de agricultura.",
+          "Curva de aprendizaje para la interfaz de diseño de experimentos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2023-10-27T10:01:00Z",
+        "hash_unicidad": "e114bbd0e27371a0"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "4c47a3acb22fb978"
+      }
     }
   ],
   "ultimos_hashes": [
-    "4f5e6d7c8b9a0123",
-    "5a6b7c8d9e0f1234",
     "a8b1c2d3e4f5a6b7",
     "c2d3e4f5a6b7c8d9",
     "d3e4f5a6b7c8d9e0",
@@ -28222,8 +28486,10 @@
     "fa64dfbba1383e24",
     "708d08b89dba263e",
     "b4c6375b827063c2",
-    "3ad0ec2daf55360d"
+    "3ad0ec2daf55360d",
+    "034fd3d9e85d3b48",
+    "e114bbd0e27371a0"
   ],
-  "total_generados": 202,
-  "fecha_ultima_generacion": "2026-11-24T04:34:55.930996"
+  "total_generados": 204,
+  "fecha_ultima_generacion": "2026-11-25T03:19:56.172616"
 }
