@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 196,
+    "total_concepts": 197,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-25T02:57:28.914632"
+    "last_scraped": "2026-11-25T12:02:39.700434"
   },
   "concepts": [
     {
@@ -3628,6 +3628,24 @@
       ],
       "cat": "poo",
       "scraped_at": "2026-11-24T18:38:20.791147"
+    },
+    {
+      "title": "TIRx Rust: Apache TVM propone un compilador de ML que se escribe a la vez en Rust, C++ y Python",
+      "summary": "El proyecto Apache TVM publicó el 16 de noviembre de 2026 una entrada en su blog con una propuesta poco habitual en el mundo de los compiladores de aprendizaje automático: en lugar de elegir un único ",
+      "explanation": "El proyecto Apache TVM publicó el 16 de noviembre de 2026 una entrada en su blog con una propuesta poco habitual en el mundo de los compiladores de aprendizaje automático: en lugar de elegir un único lenguaje para el compilador y ofrecer el resto a través de bindings, dejar que Rust, C++ y Python lean y modifiquen directamente los mismos nodos de la representación intermedia (IR) en memoria. Se llamaTIRx Rusty está pensado, según sus autores, para un escenario en el que buena parte del código de compilador lo escriben agentes de IA. Es un trabajo en curso, no una versión estable, y conviene leerlo así. Pero las ideas de diseño son interesantes más allá de TVM, sobre todo si trabajas con Rust y tienes que convivir con una base de C++ o con Python.De dónde viene: TIRx y el giro hacia los agentes TIRx es el compilador de kernels de Apache TVM: un DSL y una infraestructura de compilación para kernels de aprendizaje automático, presentado en unaentrada de junio de 2026. El 3 de noviembre, la comunidad de TVM publicó otra,«Rethinking Abstractions in the Agentic Era», en la que se pregunta si hacen falta compiladores cuando los agentes ya pueden escribir CUDA o PTX directamente. Su respuesta es que sí, pero no con la forma actual: hace falta una base mínima y estable que permita inspeccionar, verificar y transformar los programas que generan los agentes, en vez de obligarlos a reinventar una IR en cada iteración. Esa base descansa en cinco ideas: un conjunto reducido y estable de no",
+      "code_example": "fn describe(expr: &PrimExpr) -> Result<String> {\n    let text = match_any! {\n        expr {\n            Add(ref add) => format!(\"({} + {})\", describe(&add.a)?, describe(&add.b)?),\n            Mul(ref mul) => format!(\"({} * {})\", describe(&mul.a)?, describe(&mul.b)?),\n            Var(ref var) => var.name.as_str().to_owned(),\n            IntImm(ref imm) => imm.value.to_string(),\n            _ => \"<other>\".to_owned(),\n        }\n    };\n    Ok(text)\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-25T12:01:54.358275"
     }
   ]
 }
