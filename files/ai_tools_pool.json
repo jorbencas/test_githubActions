@@ -2996,5 +2996,149 @@
     "dific": 3,
     "source": "promoted",
     "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "controlnet",
+    "tool": "ADetailer",
+    "body": "Una extensión o modelo de IA diseñado para mejorar y corregir los detalles finos en imágenes generadas, especialmente rostros y manos.",
+    "workflow": "Genera una imagen con Stable Diffusion -> Aplica ADetailer como post-procesado -> Obtiene una imagen con detalles mejorados.",
+    "combinaciones": [
+      "stable_diff",
+      "img_edit",
+      "img_inpainting"
+    ],
+    "url": "https://huggingface.co/Bingsu/adetailer",
+    "restricciones": "Requiere integración con entornos de generación de imágenes como ComfyUI o Automatic1111.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "ia_local",
+    "tool": "Qwen3-4B",
+    "body": "Un modelo de lenguaje grande (LLM) de código abierto, optimizado para la generación de texto en diversas tareas y diseñado para ser desplegado localmente.",
+    "workflow": "Descarga el modelo Qwen3-4B -> Carga en un entorno de inferencia (ej. Ollama) -> Genera texto o responde consultas localmente.",
+    "combinaciones": [
+      "texto_gen",
+      "ollama",
+      "fine_tuning"
+    ],
+    "url": "https://huggingface.co/Qwen/Qwen3-4B",
+    "restricciones": "Requiere hardware con GPU compatible y conocimientos para su despliegue local.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "agentes",
+    "tool": "rea",
+    "body": "Un sistema de agentes de IA diseñado para realizar ingeniería inversa de software, analizando desde el comportamiento de aplicaciones hasta binarios nativos.",
+    "workflow": "Proporciona un binario a rea -> Los agentes analizan su funcionamiento -> Obtiene insights de seguridad o documentación técnica.",
+    "combinaciones": [
+      "seguridad",
+      "code_review",
+      "automatizaciones"
+    ],
+    "url": "https://github.com/morluto/rea",
+    "restricciones": "Requiere conocimientos de ingeniería inversa y un entorno técnico para su ejecución.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "multimodal_agents",
+    "tool": "Gemma-4-31B-it",
+    "body": "Un modelo de lenguaje grande multimodal de Google capaz de procesar entradas de imagen y texto para generar respuestas textuales coherentes.",
+    "workflow": "Introduce una imagen y un prompt de texto -> El modelo Gemma analiza ambos -> Genera una descripción o respuesta textual detallada.",
+    "combinaciones": [
+      "texto_gen",
+      "llm_workflow",
+      "ia_local"
+    ],
+    "url": "https://huggingface.co/google/gemma-4-31B-it",
+    "restricciones": "Requiere hardware con GPU potente y conocimientos avanzados para su despliegue y uso.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "agentes",
+    "tool": "OpenClaw",
+    "body": "Un agente de IA versátil diseñado para interactuar y realizar acciones en cualquier sistema operativo y plataforma, ejecutando tareas complejas.",
+    "workflow": "Define una meta o tarea para OpenClaw -> El agente interactúa con el SO o aplicaciones -> Completa la tarea de forma autónoma.",
+    "combinaciones": [
+      "automatizaciones",
+      "rpa_ai",
+      "devops"
+    ],
+    "url": "https://github.com/openclaw/openclaw",
+    "restricciones": "Requiere configuración y permisos de interacción con el sistema operativo donde se despliegue.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "agentes",
+    "tool": "ECC",
+    "body": "Un sistema de optimización del rendimiento para agentes de IA, enfocado en mejorar habilidades, memoria y seguridad para modelos de generación de código como Claude Code y Codex.",
+    "workflow": "Integra ECC con tu agente de codificación -> El agente mejora su eficiencia y seguridad al generar o analizar código.",
+    "combinaciones": [
+      "code_gen",
+      "code_review",
+      "monitorizacion"
+    ],
+    "url": "https://github.com/affaan-m/ECC",
+    "restricciones": "Requiere integración con agentes de IA específicos para código y un cierto nivel de conocimiento técnico.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "llm_workflow",
+    "tool": "Dify",
+    "body": "Una plataforma unificada para construir y desplegar flujos de trabajo de agentes de IA y pipelines RAG, con soporte para diversos modelos y herramientas.",
+    "workflow": "Diseña un flujo de trabajo con Dify usando modelos y herramientas -> Despliega en la nube o localmente -> Crea aplicaciones de IA avanzadas.",
+    "combinaciones": [
+      "agentes",
+      "retrieval_rag",
+      "auto_pipeline"
+    ],
+    "url": "https://github.com/langgenius/dify",
+    "restricciones": "Ofrece opciones de despliegue en la nube o auto-hospedado, con posibles costes según el uso y la infraestructura.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "langchain",
+    "tool": "Langflow",
+    "body": "Una herramienta visual que simplifica la construcción y despliegue de agentes y flujos de trabajo impulsados por IA, a menudo basada en LangChain.",
+    "workflow": "Arrastra y suelta componentes en Langflow -> Conecta nodos para crear un agente de IA -> Despliega la aplicación resultante.",
+    "combinaciones": [
+      "llm_workflow",
+      "agentes",
+      "automatizaciones"
+    ],
+    "url": "https://github.com/langflow-ai/langflow",
+    "restricciones": "Requiere conocimientos básicos de IA y puede necesitar recursos computacionales para su despliegue y ejecución.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "agentes",
+    "tool": "Ponytail",
+    "body": "Un sistema que guía a los agentes de IA para optimizar la generación de código, fomentando soluciones más concisas y eficientes inspiradas en un enfoque 'desarrollador senior perezoso'.",
+    "workflow": "Integra Ponytail con tu agente de codificación de IA -> El agente adopta una estrategia de pensamiento que prioriza la eficiencia -> Genera código más limpio y mínimo.",
+    "combinaciones": [
+      "prompt_playground",
+      "code_gen",
+      "automatizaciones"
+    ],
+    "url": "https://github.com/DietrichGebert/ponytail",
+    "restricciones": "Requiere integración con un agente de IA capaz de generar código y un entendimiento de los principios de desarrollo de software.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
   }
 ]
