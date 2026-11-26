@@ -29688,12 +29688,454 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "7dc7f43aac01b236"
       }
+    },
+    {
+      "proyecto": {
+        "id": "9a1b2c3d4e5f6789",
+        "titulo": "Sistema de Gestión de Inventario y Fidelización para Librerías Independientes",
+        "descripcion_corta": "App móvil offline para libreros que registra ventas y clientes, sincroniza al tener red y sugiere libros basados en historial de compra.",
+        "descripcion_detallada": "Permite a librerías independientes gestionar su inventario y la relación con sus clientes. Funciona offline registrando ventas y datos de clientes, sincronizando automáticamente al recuperar conexión. Incluye un motor de recomendación para sugerir libros a clientes basándose en sus compras pasadas, fomentando la fidelización y el descubrimiento.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "mobile",
+          "api",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "React Native",
+              "categoria": "framework",
+              "descripcion": "Desarrollo de la aplicación móvil multiplataforma (iOS/Android) con una base de código compartida.",
+              "version_sugerida": "^0.73.0",
+              "url_docs": "https://reactnative.dev/",
+              "por_que": "Permite un desarrollo rápido y eficiente para la app móvil principal, con soporte para funcionalidades offline y sincronización."
+            },
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework robusto para construir la API backend que maneja la lógica de negocio y la sincronización de datos.",
+              "version_sugerida": "^10.0.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Proporciona una arquitectura modular y escalable, con soporte para TypeScript y patrones de diseño sólidos, ideal para la API de sincronización y gestión."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "SQLite",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos local embebida en la aplicación móvil para almacenamiento offline.",
+              "version_sugerida": "null",
+              "url_docs": "https://www.sqlite.org/index.html",
+              "por_que": "Esencial para el funcionamiento offline de la app móvil, almacenando inventario, ventas y datos de clientes de forma persistente."
+            },
+            {
+              "nombre": "TypeORM",
+              "categoria": "libreria",
+              "descripcion": "ORM para la API backend que facilita la interacción con la base de datos PostgreSQL.",
+              "version_sugerida": "^0.2.0",
+              "url_docs": "https://typeorm.io/",
+              "por_que": "Simplifica las operaciones de base de datos en el backend, mapeando objetos de TypeScript a tablas de la base de datos relacional."
+            },
+            {
+              "nombre": "Redis",
+              "categoria": "libreria",
+              "descripcion": "Almacén de datos en memoria para caché y gestión de colas de sincronización.",
+              "version_sugerida": "null",
+              "url_docs": "https://redis.io/",
+              "por_que": "Agiliza la sincronización de datos masivos y actúa como caché para lecturas frecuentes, mejorando el rendimiento general del sistema."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos principal para almacenar el catálogo de libros, clientes y datos de ventas.",
+              "version_sugerida": "^15.0",
+              "url_docs": "https://www.postgresql.org/",
+              "por_que": "Ofrece robustez, escalabilidad y soporte para consultas complejas necesarias para el sistema de recomendación y el historial de ventas."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Contenedorización de la aplicación backend y la base de datos para entornos de desarrollo y producción.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno y facilita el despliegue y la gestión de los servicios backend."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para la aplicación móvil y la API backend.",
+              "version_sugerida": "^29.0.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Permite escribir pruebas unitarias y de integración de forma eficiente para garantizar la calidad del código."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro de ventas y clientes en modo offline",
+          "Sincronización automática de datos al recuperar conexión",
+          "Catálogo de libros con búsqueda y filtrado",
+          "Motor de recomendación de libros personalizado",
+          "Gestión de inventario en tiempo real",
+          "Perfiles de clientes con historial de compras"
+        ],
+        "casos_uso": [
+          "Un librero registra una venta en un área sin cobertura móvil.",
+          "La aplicación sugiere al cliente un libro basado en sus compras anteriores.",
+          "El dueño de la librería consulta el inventario actualizado desde un panel web.",
+          "El sistema identifica libros de baja rotación para promociones.",
+          "Se gestionan los datos de nuevos clientes durante eventos en la librería."
+        ],
+        "reglas_negocio": [
+          "Las ventas offline deben registrarse con marca de tiempo local.",
+          "La sincronización solo ocurre cuando hay conexión a internet activa.",
+          "Las recomendaciones se basan en un mínimo de 3 compras previas del cliente.",
+          "El inventario se actualiza automáticamente al registrar una venta.",
+          "Los datos de clientes son privados y solo accesibles por el personal de la librería."
+        ],
+        "por_que_ia": "El motor de recomendación utiliza un modelo de filtrado colaborativo simple basado en el historial de compras de los clientes para sugerir libros, aumentando la probabilidad de venta cruzada y la satisfacción del cliente.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "API de ISBN para obtener metadatos de libros (opcional)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de React Native y TypeScript.",
+          "Comprensión de arquitecturas cliente-servidor y bases de datos relacionales.",
+          "Familiaridad con la gestión de bases de datos locales (SQLite)."
+        ],
+        "riesgos": [
+          "Complejidad en la resolución de conflictos de sincronización de datos.",
+          "Rendimiento de la base de datos local con un gran volumen de ventas.",
+          "Usabilidad de la interfaz móvil en diferentes tamaños de pantalla.",
+          "Seguridad de los datos de clientes durante la sincronización."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-02T10:00:00Z",
+        "hash_unicidad": "75cb76e2c1f7d180"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "c8da9de3aa3426b4"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f8e7d6c5b4a32109",
+        "titulo": "Sistema de Seguimiento de Calidad de Aire y Bienestar en Oficinas",
+        "descripcion_corta": "Sensores IoT y dashboard web para monitorear CO2, VOCs y temperatura en oficinas, alertando sobre condiciones subóptimas de salud.",
+        "descripcion_detallada": "Monitoriza en tiempo real los niveles de CO2, VOCs (Compuestos Orgánicos Volátiles) y temperatura en espacios de trabajo, enviando alertas al personal de mantenimiento y RRHH. El dashboard web permite visualizar datos históricos, identificar patrones y optimizar la ventilación para mejorar el bienestar y la productividad de los empleados.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "API RESTful para recibir datos de los sensores y servir el dashboard web.",
+              "version_sugerida": "^0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Alto rendimiento, validación automática de esquemas con Pydantic y generación de documentación interactiva (Swagger UI), ideal para la ingesta de datos IoT."
+            },
+            {
+              "nombre": "React",
+              "categoria": "framework",
+              "descripcion": "Frontend del dashboard web para visualización de datos y alertas.",
+              "version_sugerida": "^18.0.0",
+              "url_docs": "https://react.dev/",
+              "por_que": "Permite crear interfaces de usuario interactivas y eficientes para la visualización de datos en tiempo real y la gestión de alertas."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Paho MQTT",
+              "categoria": "libreria",
+              "descripcion": "Cliente MQTT para la comunicación entre los sensores IoT y el backend.",
+              "version_sugerida": "2.0.0",
+              "url_docs": "https://pypi.org/project/paho-mqtt/",
+              "por_que": "Protocolo ligero y eficiente para la transmisión de datos desde dispositivos IoT con recursos limitados."
+            },
+            {
+              "nombre": "Chart.js",
+              "categoria": "libreria",
+              "descripcion": "Librería de gráficos para el dashboard web.",
+              "version_sugerida": "4.0.0",
+              "url_docs": "https://www.chartjs.org/",
+              "por_que": "Facilita la creación de visualizaciones claras y atractivas de los datos de calidad del aire y temperatura."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "InfluxDB",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos Time Series optimizada para almacenar datos de sensores.",
+              "version_sugerida": "2.x",
+              "url_docs": "https://www.influxdata.com/",
+              "por_que": "Diseñada para manejar grandes volúmenes de datos con marca de tiempo, ideal para el análisis de series temporales de sensores IoT."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Mosquitto",
+              "categoria": "infraestructura",
+              "descripcion": "Broker MQTT para gestionar la comunicación entre los dispositivos y el backend.",
+              "version_sugerida": "2.0",
+              "url_docs": "https://mosquitto.org/",
+              "por_que": "Servidor MQTT open-source robusto y escalable, centraliza la recepción de mensajes de los sensores."
+            },
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Contenedorización de la API, el broker MQTT y la base de datos para despliegue.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Simplifica la configuración y el despliegue de los diferentes componentes del sistema."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para la API backend.",
+              "version_sugerida": "^7.0.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Potente y flexible para la creación de pruebas unitarias y de integración de la API."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Recepción de datos de sensores vía MQTT",
+          "Almacenamiento eficiente de series temporales",
+          "Dashboard web con visualización en tiempo real",
+          "Generación de alertas personalizables (email/Slack)",
+          "Análisis histórico de la calidad del aire",
+          "Informes de bienestar para departamentos de RRHH"
+        ],
+        "casos_uso": [
+          "Un empleado recibe una alerta de CO2 elevado en su zona de trabajo.",
+          "El responsable de mantenimiento consulta el dashboard para identificar patrones de mala ventilación.",
+          "El departamento de RRHH recibe un informe semanal sobre el bienestar ambiental de las oficinas.",
+          "Se detecta un pico inusual de VOCs indicando una posible fuente de contaminación.",
+          "El sistema ayuda a optimizar el uso del sistema de climatización basándose en datos reales."
+        ],
+        "reglas_negocio": [
+          "Los niveles de CO2 por encima de 800 ppm activan una alerta de nivel bajo.",
+          "Los niveles de VOCs por encima de 1 ppm activan una alerta de nivel medio.",
+          "Las alertas se envían a una lista de correos predefinida.",
+          "Los datos se guardan en InfluxDB con una retención de 1 año.",
+          "El dashboard solo muestra datos de las oficinas para las que el usuario tiene permisos."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Especificaciones de sensores IoT (ej. ESP32 con BME680)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos de Python y desarrollo de APIs REST.",
+          "Experiencia con bases de datos Time Series (InfluxDB).",
+          "Comprensión de protocolos IoT como MQTT.",
+          "Familiaridad con desarrollo frontend (React)."
+        ],
+        "riesgos": [
+          "Fiabilidad y calibración de los sensores IoT.",
+          "Escalabilidad del broker MQTT con un gran número de dispositivos.",
+          "Latencia en la recepción y procesamiento de datos.",
+          "Seguridad de la comunicación entre dispositivos y backend."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-02T10:00:00Z",
+        "hash_unicidad": "f67b4ebbbc674a63"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "c8da9de3aa3426b4"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "1a2b3c4d5e6f7890",
+        "titulo": "Sistema de Gestión de Donaciones y Voluntariado para ONGs",
+        "descripcion_corta": "Plataforma web fullstack para gestionar donaciones, voluntarios y proyectos de ONGs, con seguimiento de impacto y comunicación.",
+        "descripcion_detallada": "Permite a ONGs administrar campañas de donación, registrar y coordinar voluntarios, y hacer seguimiento de proyectos. Ofrece un portal para donantes y voluntarios, facilita la comunicación interna y externa, y genera informes de impacto para justificar la labor realizada.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "fullstack",
+          "api",
+          "web"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web de alto rendimiento para la API backend.",
+              "version_sugerida": "1.21.0",
+              "url_docs": "https://gin-gonic.com/",
+              "por_que": "Ofrece una excelente performance y una API simple para construir los microservicios de gestión de donaciones, voluntarios y proyectos."
+            },
+            {
+              "nombre": "Next.js",
+              "categoria": "framework",
+              "descripcion": "Framework React para construir la interfaz de usuario web y el portal del donante/voluntario.",
+              "version_sugerida": "^14.0.0",
+              "url_docs": "https://nextjs.org/",
+              "por_que": "Permite Server-Side Rendering (SSR) y Static Site Generation (SSG) para optimizar el SEO y la carga inicial de las páginas públicas, además de una experiencia de desarrollo moderna."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "GORM",
+              "categoria": "libreria",
+              "descripcion": "ORM para interactuar con la base de datos PostgreSQL.",
+              "version_sugerida": "2.0",
+              "url_docs": "https://gorm.io/",
+              "por_que": "Simplifica las operaciones de base de datos en Go, facilitando la gestión de las complejas relaciones entre donantes, voluntarios, proyectos y donaciones."
+            },
+            {
+              "nombre": "Stripe SDK",
+              "categoria": "libreria",
+              "descripcion": "Integración con Stripe para procesar donaciones online de forma segura.",
+              "version_sugerida": "null",
+              "url_docs": "https://stripe.com/docs/libraries/go",
+              "por_que": "Proporciona una pasarela de pago robusta y segura, esencial para la gestión de donaciones recurrentes y puntuales."
+            },
+            {
+              "nombre": "Echo",
+              "categoria": "libreria",
+              "descripcion": "Framework para WebSockets, usado para notificaciones en tiempo real.",
+              "version_sugerida": "4.11.0",
+              "url_docs": "https://echo.labstack.com/",
+              "por_que": "Permite la comunicación bidireccional en tiempo real entre el servidor y los clientes para notificaciones instantáneas sobre nuevas donaciones o asignaciones de voluntarios."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos relacional principal para almacenar toda la información de la ONG.",
+              "version_sugerida": "^15.0",
+              "url_docs": "https://www.postgresql.org/",
+              "por_que": "Ofrece transacciones ACID, escalabilidad y soporte para JSONB, útil para almacenar metadatos flexibles de donaciones o proyectos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker & Docker Compose",
+              "categoria": "infraestructura",
+              "descripcion": "Contenerización de microservicios backend, frontend y base de datos.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Facilita el despliegue, la gestión y la escalabilidad de los diferentes componentes de la aplicación, incluyendo microservicios."
+            },
+            {
+              "nombre": "Kubernetes",
+              "categoria": "infraestructura",
+              "descripcion": "Orquestación de contenedores para alta disponibilidad y escalabilidad en producción.",
+              "version_sugerida": "1.28",
+              "url_docs": "https://kubernetes.io/",
+              "por_que": "Permite gestionar el despliegue de microservicios a escala, asegurando la resiliencia y la disponibilidad del sistema."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Paquete nativo de Go para pruebas unitarias y de integración.",
+              "version_sugerida": "null",
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Proporciona las herramientas básicas para escribir pruebas de manera eficiente en Go, integrándose bien con el ecosistema."
+            },
+            {
+              "nombre": "React Testing Library",
+              "categoria": "testing",
+              "descripcion": "Librería para testear componentes React de forma interactiva.",
+              "version_sugerida": "^13.0.0",
+              "url_docs": "https://testing-library.com/docs/react-testing-library/intro/",
+              "por_que": "Fomenta la escritura de pruebas que se asemejan a cómo los usuarios interactúan con la interfaz, asegurando la usabilidad."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Gestión centralizada de campañas de donación",
+          "Registro y asignación de voluntarios a proyectos",
+          "Portal de donantes con historial y recibos fiscales",
+          "Portal de voluntarios con disponibilidad y tareas asignadas",
+          "Seguimiento del progreso y métricas de impacto de proyectos",
+          "Sistema de notificaciones (email, push vía WebSockets)"
+        ],
+        "casos_uso": [
+          "Una ONG lanza una campaña de recaudación para un nuevo proyecto y recibe donaciones online.",
+          "Un voluntario se registra, indica su disponibilidad y es asignado a una tarea específica.",
+          "Un donante consulta su historial de contribuciones y descarga recibos para impuestos.",
+          "La dirección de la ONG revisa el impacto logrado en un proyecto a través de métricas clave.",
+          "Se notifica a los voluntarios sobre un cambio urgente en la asignación de tareas."
+        ],
+        "reglas_negocio": [
+          "Las donaciones recurrentes se procesan mensualmente.",
+          "Los voluntarios deben aceptar los términos y condiciones antes de ser asignados.",
+          "Los recibos fiscales se generan automáticamente tras la confirmación de la donación.",
+          "Los proyectos tienen fases y objetivos medibles.",
+          "Los datos de donantes y voluntarios son confidenciales."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "API de Stripe para procesamiento de pagos.",
+          "Servicio de envío de correos (ej. SendGrid, AWS SES)."
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 12,
+        "prerequisitos": [
+          "Experiencia sólida en Go y desarrollo de microservicios.",
+          "Dominio de frameworks frontend como React/Next.js.",
+          "Conocimientos avanzados de bases de datos relacionales (PostgreSQL).",
+          "Experiencia con orquestación de contenedores (Kubernetes) es un plus."
+        ],
+        "riesgos": [
+          "Complejidad en la arquitectura de microservicios y su comunicación.",
+          "Gestión de la seguridad en el procesamiento de pagos.",
+          "Escalabilidad del sistema ante un gran volumen de usuarios y datos.",
+          "Integración fluida entre los diferentes microservicios y el frontend.",
+          "Mantenimiento y actualización de múltiples componentes."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-02T10:00:00Z",
+        "hash_unicidad": "6a9e80c6a89286bc"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "c8da9de3aa3426b4"
+      }
     }
   ],
   "ultimos_hashes": [
-    "3c4d5e6f7a8b9c0d",
-    "a2b1c3d4e5f67890",
-    "b3d4e5f678901234",
     "c4d5e6f789012345",
     "f1a2b3c4d5e67890",
     "a7b8c9d0e1f23456",
@@ -29790,8 +30232,11 @@
     "7ea7a5a19a4e2ec5",
     "c2389567da1e73fc",
     "185050aab58f1bc3",
-    "6f7476640c52bf89"
+    "6f7476640c52bf89",
+    "75cb76e2c1f7d180",
+    "f67b4ebbbc674a63",
+    "6a9e80c6a89286bc"
   ],
-  "total_generados": 213,
-  "fecha_ultima_generacion": "2026-11-26T07:23:48.808629"
+  "total_generados": 216,
+  "fecha_ultima_generacion": "2026-11-26T18:04:19.510998"
 }
