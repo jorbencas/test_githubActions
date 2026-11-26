@@ -8,7 +8,12 @@
     "Sider",
     "Real-ESRGAN",
     "faster-whisper",
-    "DeepL"
+    "DeepL",
+    "Google Lens",
+    "Bubble AI",
+    "LMSYS Chatbot Arena",
+    "Buffer",
+    "Riverside.fm"
   ],
   "sent_urls": [
     "https://quizlet.com/es",
@@ -19,13 +24,20 @@
     "https://sider.ai",
     "https://github.com/xinntao/Real-ESRGAN",
     "https://github.com/SYSTRAN/faster-whisper",
-    "https://www.deepl.com"
+    "https://www.deepl.com",
+    "https://lens.google.com",
+    "https://bubble.io",
+    "https://lmarena.ai",
+    "https://buffer.com",
+    "https://riverside.fm"
   ],
   "sent_skills": [
     "mattpocock resolving merge conflicts",
     "tizzy916 humanities writing companion",
     "elementalsouls claude osint",
-    "addyosmani agent skills"
+    "addyosmani agent skills",
+    "mattpocock improve codebase architecture",
+    "wenyuchiou ai research skills"
   ],
   "sent_resources": [
     "pdf24",
@@ -37,9 +49,14 @@
     "interactive cv",
     "etherscan",
     "screenshotapi net",
-    "sublime text"
+    "sublime text",
+    "mailboxvalidator",
+    "coinapi",
+    "cloud 66",
+    "twilio",
+    "codingame"
   ],
-  "last_run": "2026-11-25T03:52:18.789370",
-  "total_runs": 2,
+  "last_run": "2026-11-26T01:17:39.619402",
+  "total_runs": 3,
   "db_exhausted": false
 }

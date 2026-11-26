@@ -3140,5 +3140,101 @@
     "dific": 2,
     "source": "promoted",
     "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "agentes",
+    "tool": "Pi",
+    "body": "Un toolkit para construir agentes de IA, con una API unificada para LLMs, bucle de agente y herramientas de interfaz de línea de comandos para agentes de codificación.",
+    "workflow": "Desarrollador usa Pi para integrar un LLM y diseñar un agente de IA -> El agente de codificación se ejecuta desde la CLI para generar código.",
+    "combinaciones": [
+      "api_ai",
+      "code_gen",
+      "llm_workflow"
+    ],
+    "url": "https://github.com/earendil-works/pi",
+    "restricciones": "Requiere conocimientos de desarrollo.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "agentes",
+    "tool": "TradingAgents",
+    "body": "Un framework de trading financiero basado en la interacción de múltiples agentes de IA y Large Language Models (LLMs) para estrategias de inversión.",
+    "workflow": "Configurar agentes LLM con datos financieros -> Ejecutar simulaciones de trading autónomas -> Optimizar estrategias de inversión.",
+    "combinaciones": [
+      "predictivo_ai",
+      "simulacion_ai",
+      "automatizaciones"
+    ],
+    "url": "https://github.com/TauricResearch/TradingAgents",
+    "restricciones": "Requiere conocimientos de programación y finanzas.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "llm_workflow",
+    "tool": "Caveman",
+    "body": "Un proxy para agentes de codificación que reduce el uso de tokens en un 65% al simplificar el lenguaje de las interacciones antes de enviarlas a los LLMs.",
+    "workflow": "Agente de codificación envía consulta a Caveman -> Caveman la simplifica para el LLM -> Envía a LLM -> Recibe respuesta optimizada.",
+    "combinaciones": [
+      "code_gen",
+      "gpt_api",
+      "automatizaciones"
+    ],
+    "url": "https://github.com/JuliusBrussee/caveman",
+    "restricciones": "Integración con agentes de codificación existentes.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "chatbot",
+    "tool": "NextChat",
+    "body": "Un asistente de chat de IA sin configuración que permite conversar instantáneamente con múltiples modelos de lenguaje avanzados como GPT-5, Claude 4 y Gemini 2.5 sin necesidad de claves API.",
+    "workflow": "Usuario se registra en la plataforma -> Selecciona el modelo de IA deseado -> Inicia una conversación directamente.",
+    "combinaciones": [
+      "apps_movil",
+      "gpt_api",
+      "ia_server"
+    ],
+    "url": "https://github.com/ChatGPTNextWeb/NextChat",
+    "restricciones": "Modelo de pago por uso (pay-as-you-go).",
+    "dific": 1,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "agentes",
+    "tool": "Deer-Flow",
+    "body": "Un sistema de 'SuperAgente' de código abierto diseñado para tareas de largo plazo, capaz de investigar, codificar y crear utilizando sandboxes, memoria y subagentes.",
+    "workflow": "Definir una tarea compleja para Deer-Flow -> El sistema la descompone en subtareas y usa subagentes para investigar y codificar.",
+    "combinaciones": [
+      "llm_workflow",
+      "code_gen",
+      "auto_pipeline"
+    ],
+    "url": "https://github.com/bytedance/deer-flow",
+    "restricciones": "Requiere conocimientos técnicos para su configuración y despliegue.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "llm_workflow",
+    "tool": "Headroom",
+    "body": "Una herramienta que comprime salidas de herramientas, logs, archivos y chunks de RAG antes de enviarlos a un LLM, reduciendo significativamente el consumo de tokens.",
+    "workflow": "Datos de RAG son procesados por Headroom -> La información comprimida se envía al LLM -> El LLM genera una respuesta eficiente.",
+    "combinaciones": [
+      "retrieval_rag",
+      "gpt_api",
+      "automatizaciones"
+    ],
+    "url": "https://github.com/headroomlabs-ai/headroom",
+    "restricciones": "Integración con sistemas LLM existentes.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
   }
 ]
