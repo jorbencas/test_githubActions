@@ -29273,12 +29273,424 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "4c18efd6db476c26"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a3b1c4d5",
+        "titulo": "Sistema de Gestión de Inventario para Tiendas de Segunda Mano con Detección de Duplicados por IA",
+        "descripcion_corta": "App para tiendas de segunda mano que identifica artículos duplicados y sugiere precios óptimos usando IA, agilizando la entrada de mercancía.",
+        "descripcion_detallada": "Una aplicación web/móvil para dueños de tiendas de segunda mano que automatiza la catalogación de productos. Utiliza IA para detectar duplicados y sugerir precios basados en tendencias, reduciendo el tiempo de ingreso y maximizando beneficios. Permite la gestión de stock y la visualización de ventas.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "mobile",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs.",
+              "version_sugerida": "0.110.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece validación automática de datos con Pydantic, generación de documentación OpenAPI y alto rendimiento asíncrono para manejar subidas de imágenes y peticiones."
+            },
+            {
+              "nombre": "React Native",
+              "categoria": "framework",
+              "descripcion": "Framework para desarrollar aplicaciones móviles nativas multiplataforma.",
+              "version_sugerida": "0.74.0",
+              "url_docs": "https://reactnative.dev/",
+              "por_que": "Permite desarrollar una única base de código para iOS y Android, reduciendo el esfuerzo de desarrollo y mantenimiento para la app móvil."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pillow",
+              "categoria": "libreria",
+              "descripcion": "Librería para manipulación de imágenes.",
+              "version_sugerida": "10.3.0",
+              "url_docs": "https://pillow.readthedocs.io/",
+              "por_que": "Necesaria para preprocesar las imágenes de los artículos antes de enviarlas al modelo de IA y para generar miniaturas."
+            },
+            {
+              "nombre": "CLIP (Sentence Transformers)",
+              "categoria": "libreria",
+              "descripcion": "Modelos para incrustar texto e imágenes en un espacio vectorial común.",
+              "version_sugerida": "2.6.0",
+              "url_docs": "https://www.sbert.net/",
+              "por_que": "Para generar embeddings de las descripciones e imágenes de los productos y así poder compararlos y detectar duplicados de forma semántica."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional objeto.",
+              "version_sugerida": "16",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Soporta tipos de datos avanzados como JSONB para metadatos flexibles y tiene extensiones como pgvector para búsqueda de similitud de embeddings."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.0.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura entornos de desarrollo y producción consistentes y facilita el despliegue de la API y la base de datos."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Sentence-BERT",
+              "categoria": "ia_ml",
+              "descripcion": "Modelos pre-entrenados para generar embeddings de texto y compararlos.",
+              "version_sugerida": null,
+              "url_docs": "https://www.sbert.net/",
+              "por_que": "Permite comparar descripciones de productos e imágenes para identificar similitudes semánticas y detectar duplicados de manera eficiente."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests unitarios y de integración con fixtures parametrizadas y un ecosistema rico de plugins."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro de artículos con fotos y descripciones",
+          "Detección automática de artículos duplicados mediante IA",
+          "Sugerencia de precios óptimos basada en IA y datos históricos",
+          "Gestión de inventario y stock",
+          "Visualización de ventas y estadísticas"
+        ],
+        "casos_uso": [
+          "Un dueño de tienda de segunda mano registra un nuevo lote de ropa y la app identifica un abrigo similar ya catalogado.",
+          "La app sugiere un precio de venta para un mueble vintage basándose en artículos similares vendidos recientemente.",
+          "Un empleado marca un artículo como vendido, actualizando el stock en tiempo real.",
+          "El dueño revisa un informe de los artículos más vendidos y su margen de beneficio.",
+          "Se carga una foto de un objeto y la IA determina su categoría y posibles duplicados."
+        ],
+        "reglas_negocio": [
+          "Un artículo solo se marca como duplicado si la similitud de embeddings (imagen+descripción) supera un umbral configurable.",
+          "El precio sugerido se calcula con un 10% de margen sobre el precio medio de artículos similares vendidos en el último mes.",
+          "El stock se decrementa automáticamente al marcar un artículo como vendido.",
+          "El sistema solo permite registrar artículos con al menos una imagen y una descripción.",
+          "Los precios sugeridos son solo una recomendación; el usuario puede ajustarlos manualmente."
+        ],
+        "por_que_ia": "La IA se usa para la detección semántica de duplicados (imágenes y texto) y para la predicción de precios óptimos, problemas que son difíciles de resolver con lógica pura y que requieren la comprensión del contenido visual y textual.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de Python y frameworks web.",
+          "Fundamentos de desarrollo móvil con React Native.",
+          "Conceptos básicos de machine learning y embeddings de imágenes/texto.",
+          "Familiaridad con bases de datos relacionales y NoSQL."
+        ],
+        "riesgos": [
+          "La precisión de la detección de duplicados por IA puede ser insuficiente para artículos muy similares pero distintos.",
+          "La calidad de las imágenes subidas por los usuarios puede afectar negativamente al rendimiento de la IA.",
+          "La infraestructura para el entrenamiento/inferencia de modelos de IA puede requerir recursos considerables.",
+          "La integración con sistemas de inventario existentes puede ser compleja."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-07-24T10:00:00Z",
+        "hash_unicidad": "c2389567da1e73fc"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "7dc7f43aac01b236"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "e7f8a9b0",
+        "titulo": "Sistema de Monitoreo y Alerta Temprana de Fugas de Agua en Redes de Distribución",
+        "descripcion_corta": "Plataforma IoT para detectar fugas en redes de agua potable mediante sensores de presión y flujo, alertando a los operarios en tiempo real.",
+        "descripcion_detallada": "Sistema que utiliza sensores IoT desplegados en la red de distribución de agua para monitorizar continuamente presión y flujo. Un backend analiza los datos para identificar anomalías indicativas de fugas, enviando alertas inmediatas a los equipos de mantenimiento a través de SMS o una app móvil.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "api",
+          "mobile",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Go kit",
+              "categoria": "framework",
+              "descripcion": "Framework para construir microservicios distribuidos y robustos.",
+              "version_sugerida": "2.x",
+              "url_docs": "https://gokit.io/",
+              "por_que": "Proporciona abstracciones para transporte, endpoint, servicio y transporte de descubrimiento, ideal para construir un sistema de monitoreo escalable y resiliente."
+            },
+            {
+              "nombre": "Gin",
+              "categoria": "framework",
+              "descripcion": "Framework web HTTP de alto rendimiento para Go.",
+              "version_sugerida": "1.10.0",
+              "url_docs": "https://gin-gonic.com/",
+              "por_que": "Se utiliza para la API RESTful que recibe datos de los sensores y para la interfaz de alertas, ofreciendo un enrutamiento rápido y middleware eficiente."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "MQTT (client/broker)",
+              "categoria": "libreria",
+              "descripcion": "Protocolo de mensajería ligero para IoT.",
+              "version_sugerida": "client: 5.x, broker: Mosquitto 2.x",
+              "url_docs": "https://mqtt.org/",
+              "por_que": "Protocolo estándar para la comunicación entre los sensores IoT y el backend, optimizado para redes con ancho de banda limitado y alta latencia."
+            },
+            {
+              "nombre": "Prometheus client libraries",
+              "categoria": "libreria",
+              "descripcion": "Librerías para instrumentar aplicaciones Go con métricas.",
+              "version_sugerida": "0.13.0",
+              "url_docs": "https://github.com/prometheus/client_golang",
+              "por_que": "Permite exportar métricas de los servicios backend (ej. número de alertas generadas, latencia de recepción de datos) para monitoreo y alerta."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "TimescaleDB",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos de series temporales construida sobre PostgreSQL.",
+              "version_sugerida": "2.14.0",
+              "url_docs": "https://docs.timescale.com/",
+              "por_que": "Optimizado para almacenar y consultar grandes volúmenes de datos de series temporales generados por los sensores, esencial para el análisis de patrones de flujo y presión."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Kubernetes",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de orquestación de contenedores.",
+              "version_sugerida": "1.28",
+              "url_docs": "https://kubernetes.io/docs/",
+              "por_que": "Para desplegar y escalar los microservicios de la API, el broker MQTT y los workers de análisis de datos de forma robusta y automatizada."
+            },
+            {
+              "nombre": "Grafana",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de análisis y visualización de métricas.",
+              "version_sugerida": "10.4.0",
+              "url_docs": "https://grafana.com/docs/",
+              "por_que": "Para visualizar los datos de series temporales de TimescaleDB y las métricas de Prometheus, creando dashboards para el monitoreo en tiempo real de la red."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "GoConvey",
+              "categoria": "testing",
+              "descripcion": "Framework BDD para Go.",
+              "version_sugerida": "v1.0.0",
+              "url_docs": "https://github.com/smartystreets/goconvey",
+              "por_que": "Facilita la escritura de tests de comportamiento para la lógica de detección de fugas y el procesamiento de datos de sensores."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "Sensors (Hardware)",
+              "categoria": "otros",
+              "descripcion": "Dispositivos IoT para medir presión y flujo de agua.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Son la fuente de datos principal del sistema; su fiabilidad y precisión son críticas para la detección de fugas."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Recepción y procesamiento de datos de sensores IoT (presión, flujo)",
+          "Detección de anomalías y patrones de fugas en tiempo real",
+          "Generación de alertas automáticas (SMS, push notification)",
+          "Visualización de la red y estado de las fugas en un dashboard",
+          "Historial de eventos y análisis de rendimiento de la red"
+        ],
+        "casos_uso": [
+          "Un sensor detecta una caída súbita de presión en una sección de la red, activando una alerta.",
+          "El operario recibe una notificación push en su móvil y accede al dashboard para ver la ubicación aproximada de la fuga.",
+          "El equipo de mantenimiento se dirige a la zona indicada y confirma la fuga.",
+          "Se genera un informe de incidencias de fugas por mes para análisis y planificación.",
+          "El sistema permite simular el impacto de una fuga en diferentes puntos de la red."
+        ],
+        "reglas_negocio": [
+          "Una fuga se declara si la diferencia de presión entre dos puntos adyacentes supera el 15% del valor normal durante más de 5 minutos.",
+          "Las alertas se envían a los técnicos de guardia según un esquema de turnos predefinido.",
+          "Los datos de sensores se almacenan con una granularidad de 1 minuto.",
+          "El sistema debe ser capaz de manejar al menos 1000 sensores simultáneamente.",
+          "Las alertas se marcan como resueltas manualmente por un operario autorizado."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 24,
+        "prerequisitos": [
+          "Experiencia sólida en Go y desarrollo de microservicios.",
+          "Conocimiento de protocolos IoT como MQTT.",
+          "Experiencia con bases de datos de series temporales (TimescaleDB, InfluxDB).",
+          "Familiaridad con orquestación de contenedores (Kubernetes).",
+          "Comprensión de redes de distribución de agua y principios de hidráulica."
+        ],
+        "riesgos": [
+          "La fiabilidad y calibración de los sensores IoT son críticas y pueden ser un punto débil.",
+          "La complejidad de la red de distribución puede dificultar la localización precisa de fugas solo con datos de sensores.",
+          "La latencia en la comunicación IoT o el procesamiento de datos puede retrasar las alertas.",
+          "Escalar la infraestructura para soportar miles de sensores puede ser costoso.",
+          "Integrar con sistemas de gestión de agua existentes (SCADA, GIS) puede ser un desafío."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-07-24T10:00:00Z",
+        "hash_unicidad": "185050aab58f1bc3"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "7dc7f43aac01b236"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c9d8e7f6",
+        "titulo": "Plataforma de Gestión de Devoluciones y Repuestos para Tiendas de Electrónica",
+        "descripcion_corta": "Web app para tiendas de electrónica que optimiza el proceso de devoluciones y gestiona eficientemente el stock de repuestos.",
+        "descripcion_detallada": "Una aplicación web para tiendas de electrónica que simplifica la gestión de devoluciones de productos, incluyendo diagnóstico inicial y categorización (reparable, desguace, reventa). Permite rastrear repuestos, gestionar inventario y predecir la demanda de piezas comunes.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "web",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "javascript",
+          "frameworks": [
+            {
+              "nombre": "Express.js",
+              "categoria": "framework",
+              "descripcion": "Framework web minimalista y flexible para Node.js.",
+              "version_sugerida": "4.19.0",
+              "url_docs": "https://expressjs.com/",
+              "por_que": "Ideal para construir la API RESTful que manejará la lógica de negocio y las interacciones con la base de datos para un proyecto de alcance limitado."
+            },
+            {
+              "nombre": "Vue.js",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo para construir interfaces de usuario.",
+              "version_sugerida": "3.4.0",
+              "url_docs": "https://vuejs.org/",
+              "por_que": "Permite crear una interfaz de usuario interactiva y reactiva para la gestión de devoluciones y repuestos de manera eficiente."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Axios",
+              "categoria": "libreria",
+              "descripcion": "Cliente HTTP basado en promesas para el navegador y Node.js.",
+              "version_sugerida": "1.7.2",
+              "url_docs": "https://axios-http.com/",
+              "por_que": "Facilita la comunicación entre el frontend Vue.js y el backend Express.js, manejando las peticiones HTTP de forma sencilla."
+            },
+            {
+              "nombre": "Lodash",
+              "categoria": "libreria",
+              "descripcion": "Utilidades modernas de JavaScript.",
+              "version_sugerida": "4.17.21",
+              "url_docs": "https://lodash.com/",
+              "por_que": "Proporciona funciones útiles para la manipulación de arrays y objetos, simplificando la lógica de la interfaz de usuario y la API."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "MongoDB",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos NoSQL orientada a documentos.",
+              "version_sugerida": "7.0",
+              "url_docs": "https://docs.mongodb.com/",
+              "por_que": "Flexibilidad para almacenar datos de productos, devoluciones y repuestos con esquemas que pueden evolucionar fácilmente, adecuada para un MVP."
+            }
+          ],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para JavaScript.",
+              "version_sugerida": "29.7.0",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Framework popular y fácil de usar para escribir tests unitarios y de integración para el frontend y backend de JavaScript."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro de devoluciones de productos electrónicos",
+          "Clasificación de devoluciones (reparable, desguace, reventa)",
+          "Gestión de inventario de repuestos",
+          "Seguimiento del estado de las reparaciones",
+          "Generación de informes básicos de devoluciones y repuestos"
+        ],
+        "casos_uso": [
+          "Un cliente devuelve un smartphone defectuoso; el empleado lo registra y lo clasifica como 'reparable'.",
+          "Se necesita una pantalla para un modelo de TV específico; el empleado consulta el inventario de repuestos y lo localiza.",
+          "Un técnico actualiza el estado de una reparación a 'completada'.",
+          "El gerente revisa cuántos productos fueron devueltos por 'defecto de fábrica' el mes pasado.",
+          "Se añade un nuevo repuesto (ej. batería de portátil) al inventario."
+        ],
+        "reglas_negocio": [
+          "Las devoluciones solo se aceptan dentro de los 30 días posteriores a la compra.",
+          "Un producto clasificado como 'desguace' no puede ser reintroducido en inventario para reventa.",
+          "El inventario de repuestos se actualiza automáticamente al usarse en una reparación o al ser añadido manualmente.",
+          "Se requiere un número de serie para registrar la devolución de cualquier producto.",
+          "El sistema solo permite registrar productos que existen en una lista maestra de modelos electrónicos."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 4,
+        "prerequisitos": [
+          "Conocimientos básicos de JavaScript y Node.js.",
+          "Familiaridad con frameworks web (Express.js) y de frontend (Vue.js).",
+          "Comprensión de bases de datos NoSQL (MongoDB).",
+          "Conceptos básicos de diseño de APIs RESTful.",
+          "Nociones de gestión de inventarios."
+        ],
+        "riesgos": [
+          "La gestión manual de la clasificación de devoluciones puede ser subjetiva.",
+          "La falta de integración con sistemas de punto de venta (POS) puede requerir doble entrada de datos.",
+          "La predicción de demanda de repuestos requeriría más datos históricos y/o IA para ser efectiva.",
+          "El alcance limitado puede no cubrir todas las necesidades complejas de una tienda grande."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-07-24T10:00:00Z",
+        "hash_unicidad": "6f7476640c52bf89"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "7dc7f43aac01b236"
+      }
     }
   ],
   "ultimos_hashes": [
-    "f7c9a0b2e1d3f5a7",
-    "12a3b4c5d6e7f8a9",
-    "2b3c4d5e6f7a8b9c",
     "3c4d5e6f7a8b9c0d",
     "a2b1c3d4e5f67890",
     "b3d4e5f678901234",
@@ -29375,8 +29787,11 @@
     "be005cf8236f27b3",
     "0b8740eb5b6e62e3",
     "94985ac223a57fac",
-    "7ea7a5a19a4e2ec5"
+    "7ea7a5a19a4e2ec5",
+    "c2389567da1e73fc",
+    "185050aab58f1bc3",
+    "6f7476640c52bf89"
   ],
-  "total_generados": 210,
-  "fecha_ultima_generacion": "2026-11-25T23:58:05.998934"
+  "total_generados": 213,
+  "fecha_ultima_generacion": "2026-11-26T07:23:48.808629"
 }
