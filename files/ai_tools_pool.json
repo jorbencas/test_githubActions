@@ -3236,5 +3236,85 @@
     "dific": 2,
     "source": "promoted",
     "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "devops",
+    "tool": "OpenSpec",
+    "body": "Facilita el desarrollo dirigido por especificaciones para la creación de asistentes de codificación de IA.",
+    "workflow": "Definir especificaciones -> OpenSpec -> Generación de asistente de IA para código.",
+    "combinaciones": [
+      "devops",
+      "code_gen",
+      "api_ai"
+    ],
+    "url": "https://github.com/Fission-AI/OpenSpec",
+    "restricciones": "Requiere integración en el flujo de desarrollo de software.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "seguridad",
+    "tool": "Strix",
+    "body": "Herramienta de código abierto para pruebas de penetración asistidas por IA, que identifica y corrige vulnerabilidades en aplicaciones.",
+    "workflow": "Ejecutar Strix -> Analizar aplicación web -> Obtener reporte de vulnerabilidades de seguridad.",
+    "combinaciones": [
+      "seguridad",
+      "monitorizacion",
+      "devops"
+    ],
+    "url": "https://github.com/usestrix/strix",
+    "restricciones": "Requiere configuración para el entorno de la aplicación a testear.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "ia_local",
+    "tool": "Private GPT",
+    "body": "Una capa de API completa para construir aplicaciones de IA privadas con modelos locales, ofreciendo RAG, habilidades y herramientas.",
+    "workflow": "Desplegar modelos locales -> Private GPT API -> Construir aplicaciones de IA privadas con RAG.",
+    "combinaciones": [
+      "ia_local",
+      "api_ai",
+      "retrieval_rag"
+    ],
+    "url": "https://github.com/zylon-ai/private-gpt",
+    "restricciones": "Requiere un servidor de inferencia compatible con OpenAI.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "agentes",
+    "tool": "Cherry Studio",
+    "body": "Estudio de productividad con IA que integra chat inteligente, agentes autónomos y acceso unificado a LLMs avanzados para diversas tareas.",
+    "workflow": "Seleccionar asistente o agente -> Interactuar vía chat -> Generar contenido o automatizar tareas.",
+    "combinaciones": [
+      "agentes",
+      "chatbot",
+      "llm_workflow"
+    ],
+    "url": "https://github.com/CherryHQ/cherry-studio",
+    "restricciones": "El acceso a LLMs avanzados podría implicar costes de API.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "agentes",
+    "tool": "CowAgent",
+    "body": "Asistente de IA y framework de agentes de código abierto que planifica tareas, ejecuta herramientas y aprende con memoria y conocimiento.",
+    "workflow": "Definir objetivo complejo -> CowAgent planifica y ejecuta tareas con herramientas -> Obtener resultado final.",
+    "combinaciones": [
+      "agentes",
+      "automatizaciones",
+      "llm_workflow"
+    ],
+    "url": "https://github.com/zhayujie/CowAgent",
+    "restricciones": "Requiere instalación y configuración de un entorno de desarrollo.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
   }
 ]
