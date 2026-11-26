@@ -11116,5 +11116,41 @@
         "descripcion": "Unipile offers a unified REST API layer to connect users' LinkedIn, WhatsApp, Instagram, Telegram, email (Gmail, Outlook, IMAP), and calendar (Google, Outlook) accounts. It enables sending and syncing",
         "categoria": "Social",
         "pricing": ""
+    },
+    {
+        "titulo": "Odds-API.io",
+        "enlace": "https://publicapis.io/odds-api-io-api",
+        "fuente": "Public APIs",
+        "tipo": "herramienta",
+        "f": "26/11",
+        "fecha_publicacion": "",
+        "subtipo": "api",
+        "descripcion": "Standardized sports betting odds API covering 500+ bookmakers. Provides live scores, player props, historical closing lines, value bets, and arbitrage detection via REST and WebSocket.",
+        "categoria": "Sports & Fitness",
+        "pricing": ""
+    },
+    {
+        "titulo": "CardTrack",
+        "enlace": "https://publicapis.io/cardtrack-api",
+        "fuente": "Public APIs",
+        "tipo": "herramienta",
+        "f": "26/11",
+        "fecha_publicacion": "",
+        "subtipo": "api",
+        "descripcion": "CardTrack tracks Pokémon card values, offering daily market pricing for raw and graded cards (PSA, BGS, CGC) using aggregated sold listing data.",
+        "categoria": "Games & Comics",
+        "pricing": ""
+    },
+    {
+        "titulo": "Glasser",
+        "enlace": "https://publicapis.io/glasser-api",
+        "fuente": "Public APIs",
+        "tipo": "herramienta",
+        "f": "26/11",
+        "fecha_publicacion": "",
+        "subtipo": "api",
+        "descripcion": "Glasser is a unified API access and billing layer providing pay-as-you-go access to over 2,000 data endpoints for AI agents and developers without individual vendor subscriptions.",
+        "categoria": "Data Access",
+        "pricing": ""
     }
 ]
