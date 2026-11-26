@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 197,
+    "total_concepts": 198,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-26T03:56:08.010283"
+    "last_scraped": "2026-11-26T13:31:54.859044"
   },
   "concepts": [
     {
@@ -3646,6 +3646,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-11-25T12:01:54.358275"
+    },
+    {
+      "title": "Accesibilidad avanzada en JavaFX: lectores de pantalla, acciones y avisos en un mapa de asientos",
+      "summary": "Un lector de pantalla no ve píxeles. Cuando una aplicación JavaFX dibuja sus propios controles sobre unCanvas, para la tecnología de apoyo ese rectángulo es un hueco sin nombre, sin estado y sin nada ",
+      "explanation": "Un lector de pantalla no ve píxeles. Cuando una aplicación JavaFX dibuja sus propios controles sobre unCanvas, para la tecnología de apoyo ese rectángulo es un hueco sin nombre, sin estado y sin nada que pulsar. La API de accesibilidad de JavaFX existe para llenar ese hueco: cada nodo declara qué es, cómo se llama, en qué estado está y qué acciones admite. Este artículo adapta y amplía la lección«Advanced Accessibility in JavaFX»de dev.java (actualizada el 23 de noviembre de 2026). El hilo conductor es el mismo, un mapa de asientos interactivo, pero hemos traducido el código, corregido losimportsque faltaban en el original, añadido el contexto de versiones y de normativa, y reunido al final una lista de errores frecuentes y de cosas que conviene probar antes de dar una pantalla por accesible.Qué necesitas y qué versión usar El tutorial original se validó con JDK 27 y JavaFX 27. Lo importante de verdad es el requisito mínimo del SDK, y ahí las notas oficiales de OpenJFX son claras:JavaFX 27 está compilado con--release 25y exige JDK 25 o posterior, mientras queJavaFX 26 exigía JDK 24 o posterior. Si intentas arrancar con un JDK más antiguo, el lanzador termina con un error porque no encuentra el módulojavafx.base. Las notas de JavaFX 27 también mencionan, entre otras cosas, que las animaciones respetan ya la preferencia de «reducir movimiento» y que mejora la accesibilidad en macOS, con texto estático y enlaces navegables. Son cambios que no afectan al código de este artículo, ",
+      "code_example": "a11-demo/\n??? Launcher.java\n??? SeatAllocationApp.java\n??? SeatMap.java\n??? Seat.java",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-26T13:31:16.222877"
     }
   ]
 }
