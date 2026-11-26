@@ -3316,5 +3316,53 @@
     "dific": 2,
     "source": "promoted",
     "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "agentes",
+    "tool": "AstrBot",
+    "body": "Un asistente de agente de IA y framework de desarrollo que integra múltiples plataformas de mensajería, LLMs y plugins.",
+    "workflow": "Configura AstrBot para interactuar con una plataforma de mensajería, utiliza un LLM específico y ejecuta un plugin para realizar una tarea.",
+    "combinaciones": [
+      "chatbot",
+      "llm_workflow",
+      "api_ai"
+    ],
+    "url": "https://github.com/AstrBotDevs/AstrBot",
+    "restricciones": "Requiere auto-alojamiento y configuración técnica.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "agentes",
+    "tool": "CopilotKit",
+    "body": "Un stack frontend para construir agentes de IA e interfaces de usuario generativas en plataformas como React, Angular y móvil.",
+    "workflow": "Usa CopilotKit con tu framework frontend para desarrollar una interfaz conversacional que interactúe con un agente de IA personalizado.",
+    "combinaciones": [
+      "funciones_ai",
+      "api_ai",
+      "editores_codigo"
+    ],
+    "url": "https://github.com/CopilotKit/CopilotKit",
+    "restricciones": "Requiere conocimientos de desarrollo frontend (React, Angular).",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "second_brain",
+    "tool": "Khoj",
+    "body": "Un segundo cerebro de IA autoalojable que permite obtener respuestas de la web o de documentos locales, construir agentes personalizados y automatizaciones.",
+    "workflow": "Instala Khoj localmente, indexa tus documentos personales y haz preguntas para obtener respuestas contextualizadas y precisas.",
+    "combinaciones": [
+      "agentes",
+      "retrieval_rag",
+      "ia_local"
+    ],
+    "url": "https://github.com/khoj-ai/khoj",
+    "restricciones": "Requiere auto-alojamiento y configuración.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "GitHub Search"
   }
 ]
