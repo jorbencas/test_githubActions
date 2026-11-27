@@ -30537,12 +30537,417 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "4ca0eda5adc4749e"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4e5f6",
+        "titulo": "Sistema de Gestión de Cosechas y Pronóstico de Rendimiento para Granjas de Frutas Pequeñas",
+        "descripcion_corta": "Plataforma web para pequeños agricultores de frutas que registra datos de cultivo y predice rendimiento con IA, mejorando la planificación y venta.",
+        "descripcion_detallada": "Este sistema está diseñado para agricultores de frutas de pequeña escala que carecen de herramientas sofisticadas. Permite registrar datos diarios de riego, fertilización, plagas y floración. Una IA analiza estos datos históricos y actuales para predecir el rendimiento de la cosecha, ayudando a optimizar la logística y las negociaciones de venta. El enfoque es la simplicidad y la utilidad directa para el pequeño productor.",
+        "nivel": "junior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Django",
+              "categoria": "framework",
+              "descripcion": "Framework web robusto para el backend, gestión de ORM y admin.",
+              "version_sugerida": "4.2",
+              "url_docs": "https://docs.djangoproject.com/en/4.2/",
+              "por_que": "Facilita el desarrollo rápido de aplicaciones web con gestión de base de datos y autenticación."
+            },
+            {
+              "nombre": "Django REST framework",
+              "categoria": "framework",
+              "descripcion": "Kit de herramientas para construir APIs web potentes.",
+              "version_sugerida": "3.14",
+              "url_docs": "https://www.django-rest-framework.org/",
+              "por_que": "Permite crear endpoints de API eficientes para la ingesta de datos y la consulta de predicciones."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Librería para manipulación y análisis de datos.",
+              "version_sugerida": "2.0",
+              "url_docs": "https://pandas.pydata.org/docs/",
+              "por_que": "Esencial para preprocesar los datos agrícolas antes de alimentar el modelo de IA."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Librería de machine learning para tareas de clasificación y regresión.",
+              "version_sugerida": "1.3",
+              "url_docs": "https://scikit-learn.org/stable/",
+              "por_que": "Proporciona algoritmos para entrenar el modelo de predicción de rendimiento."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema gestor de bases de datos relacional.",
+              "version_sugerida": "15",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Ofrece robustez, escalabilidad y soporte para tipos de datos avanzados necesarios para datos agrícolas."
+            }
+          ],
+          "infraestructura": [],
+          "ia_ml": [
+            {
+              "nombre": "Regresión Lineal",
+              "categoria": "ia_ml",
+              "descripcion": "Modelo de aprendizaje supervisado para predecir valores numéricos.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Un modelo simple y interpretable para predecir el rendimiento de la fruta basado en datos históricos y actuales."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.4",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests unitarios y de integración para la lógica de negocio y la API."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro diario de datos agrícolas (riego, fertilizante, plagas)",
+          "Visualización de datos históricos en gráficos interactivos",
+          "Predicción de rendimiento de cosecha basada en IA",
+          "Alertas personalizables sobre condiciones de cultivo",
+          "Reportes de resumen de cosecha para ventas"
+        ],
+        "casos_uso": [
+          "Un agricultor registra datos de riego y observa cómo afecta la predicción de rendimiento.",
+          "El agricultor consulta la predicción para planificar la logística de recolección.",
+          "El sistema alerta al agricultor sobre una posible plaga basada en patrones de datos.",
+          "El agricultor utiliza los reportes para negociar precios con compradores.",
+          "El agricultor compara el rendimiento predicho con el real para refinar sus registros."
+        ],
+        "reglas_negocio": [
+          "Los datos de cultivo solo pueden ser ingresados por usuarios autenticados del tipo 'agricultor'.",
+          "Las predicciones de rendimiento se actualizan semanalmente o tras una entrada de datos significativa.",
+          "Las alertas se activan cuando los parámetros de cultivo superan umbrales predefinidos.",
+          "Los datos históricos deben tener al menos una temporada completa para una predicción fiable inicial.",
+          "Los permisos de acceso a los datos son por granja y por usuario."
+        ],
+        "por_que_ia": "La IA se usa para analizar patrones complejos en datos históricos y ambientales que un humano no podría detectar fácilmente, permitiendo predecir el rendimiento de la cosecha y optimizar la toma de decisiones del agricultor.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos básicos de Python y frameworks web.",
+          "Comprensión de conceptos de bases de datos relacionales.",
+          "Nociones de machine learning y análisis de datos."
+        ],
+        "riesgos": [
+          "La precisión de la predicción de IA depende en gran medida de la calidad y cantidad de los datos históricos.",
+          "La adopción por parte de agricultores con baja alfabetización digital puede ser lenta.",
+          "La variabilidad climática extrema puede invalidar las predicciones.",
+          "La integración con sistemas de terceros (ej. sensores IoT) puede requerir adaptaciones.",
+          "Mantenimiento del modelo de IA a medida que se recopilan más datos."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-10T10:00:00Z",
+        "hash_unicidad": "68a42bcfcb72be06"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "6f79e62cfbe93ebd"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f6e5d4c3b2a1",
+        "titulo": "Sistema de Gestión de Citas y Tareas para Terapeutas Ocupacionales Independientes",
+        "descripcion_corta": "Aplicación web y móvil para terapeutas ocupacionales autónomos, simplifica la gestión de citas, notas de progreso y tareas de pacientes, mejorando la eficiencia clínica.",
+        "descripcion_detallada": "Este sistema está dirigido a terapeutas ocupacionales que trabajan de forma independiente y a menudo gestionan su propia carga administrativa. Ofrece un calendario intuitivo para programar citas, un módulo para redactar notas de progreso post-sesión y un gestor de tareas para asignar y seguir ejercicios a los pacientes. Permite la sincronización entre la versión web y móvil para accesibilidad en cualquier lugar.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "mobile",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework progresivo de Node.js para aplicaciones del lado del servidor eficientes y escalables.",
+              "version_sugerida": "10.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Arquitectura modular y escalable, ideal para construir APIs robustas con buena organización del código."
+            },
+            {
+              "nombre": "React Native",
+              "categoria": "framework",
+              "descripcion": "Framework para construir aplicaciones móviles nativas con React.",
+              "version_sugerida": "0.71",
+              "url_docs": "https://reactnative.dev/docs/getting-started",
+              "por_que": "Permite desarrollar una aplicación móvil multiplataforma (iOS/Android) compartiendo gran parte de la lógica con la web."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "TypeORM",
+              "categoria": "libreria",
+              "descripcion": "ORM para TypeScript que soporta múltiples bases de datos.",
+              "version_sugerida": "0.2",
+              "url_docs": "https://typeorm.io/",
+              "por_que": "Facilita la interacción con la base de datos desde el backend de NestJS, con soporte para tipos de TypeScript."
+            },
+            {
+              "nombre": "Zod",
+              "categoria": "libreria",
+              "descripcion": "Validación de esquemas declarativa para TypeScript.",
+              "version_sugerida": "3.21",
+              "url_docs": "https://zod.dev/",
+              "por_que": "Esencial para validar datos de entrada en la API y en el frontend móvil/web, asegurando la integridad de los datos."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "MongoDB",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos NoSQL orientada a documentos.",
+              "version_sugerida": "6.0",
+              "url_docs": "https://www.mongodb.com/docs/",
+              "por_que": "Flexible para almacenar notas de progreso y tareas de pacientes que pueden tener estructuras variables."
+            }
+          ],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para JavaScript y TypeScript.",
+              "version_sugerida": "29.5",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Proporciona un entorno completo para testing unitario, de integración y end-to-end en el backend y frontend."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "React Query",
+              "categoria": "libreria",
+              "descripcion": "Manejo de estado asíncrono y caché para React/React Native.",
+              "version_sugerida": "4.29",
+              "url_docs": "https://tanstack.com/query/v4/",
+              "por_que": "Simplifica la gestión de datos del servidor en la aplicación móvil y web, mejorando la experiencia de usuario."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Calendario interactivo con gestión de citas y recordatorios.",
+          "Creación y edición de notas de progreso clínicas (SOAP/DAP).",
+          "Gestión de tareas y ejercicios personalizados para pacientes.",
+          "Sincronización de datos entre web y móvil.",
+          "Búsqueda avanzada de pacientes y citas."
+        ],
+        "casos_uso": [
+          "Un terapeuta agenda una nueva cita con un paciente y el sistema envía un recordatorio automático.",
+          "Tras una sesión, el terapeuta redacta rápidamente notas de progreso usando plantillas predefinidas.",
+          "El paciente recibe una lista de ejercicios para hacer en casa a través de la app móvil.",
+          "El terapeuta consulta su agenda y notas de progreso desde su tablet durante una visita a domicilio.",
+          "El terapeuta busca rápidamente todas las citas y notas de un paciente específico."
+        ],
+        "reglas_negocio": [
+          "Las citas solo pueden programarse en horarios laborales definidos por el terapeuta.",
+          "Las notas de progreso deben incluir fecha, duración de la sesión y observaciones clínicas.",
+          "Los ejercicios asignados a pacientes deben tener una descripción clara y frecuencia recomendada.",
+          "El acceso a los datos de pacientes está restringido al terapeuta propietario de la cuenta.",
+          "Los recordatorios de citas se envían 24h antes por defecto."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia con TypeScript y Node.js.",
+          "Conocimientos de frameworks frontend como React/React Native.",
+          "Comprensión de bases de datos NoSQL y ORMs.",
+          "Principios de diseño de APIs RESTful."
+        ],
+        "riesgos": [
+          "Cumplimiento de normativas de privacidad de datos de salud (HIPAA, GDPR) si aplica.",
+          "La complejidad de las plantillas de notas clínicas puede variar mucho.",
+          "La sincronización offline y concurrente puede presentar desafíos técnicos.",
+          "La curva de aprendizaje de React Native para desarrolladores web puede ser un factor.",
+          "Necesidad de una interfaz de usuario muy intuitiva para terapeutas con poca experiencia tecnológica."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-10T10:00:00Z",
+        "hash_unicidad": "ab86f61586677d4a"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "6f79e62cfbe93ebd"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "1a2b3c4d5e6f",
+        "titulo": "Sistema de Gestión de Voluntarios para Eventos Culturales y Comunitarios",
+        "descripcion_corta": "Plataforma web para organizadores de eventos que simplifica la captación, asignación y comunicación con voluntarios, optimizando la logística del personal no remunerado.",
+        "descripcion_detallada": "Este sistema ayuda a organizaciones culturales y comunitarias a gestionar eficientemente sus eventos. Permite crear perfiles de eventos, definir roles de voluntariado, publicar convocatorias y recibir/gestionar solicitudes. Asigna voluntarios a tareas específicas, facilita la comunicación (ej. vía email masivo) y permite registrar horas. El objetivo es reducir la carga administrativa y mejorar la experiencia del voluntario.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "bot",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin Web Framework",
+              "categoria": "framework",
+              "descripcion": "Framework web HTTP de alto rendimiento para Go.",
+              "version_sugerida": "1.9",
+              "url_docs": "https://gin-gonic.com/",
+              "por_que": "Proporciona un routing robusto y middleware para construir la API RESTful de manera eficiente."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "GORM",
+              "categoria": "libreria",
+              "descripcion": "ORM completo para Go con soporte para múltiples dialectos SQL.",
+              "version_sugerida": "2.0",
+              "url_docs": "https://gorm.io/",
+              "por_que": "Simplifica la interacción con la base de datos relacional, permitiendo definir modelos de datos de forma clara."
+            },
+            {
+              "nombre": "Go Telegram Bot API",
+              "categoria": "libreria",
+              "descripcion": "Librería para interactuar con la API de Telegram Bot.",
+              "version_sugerida": "2.0",
+              "url_docs": "https://pkg.go.dev/github.com/go-telegram-bot-api/telegram-bot-api/v5",
+              "por_que": "Permite crear un bot de Telegram para notificaciones y gestión básica de voluntarios."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "CockroachDB",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos SQL distribuida, escalable y resiliente.",
+              "version_sugerida": "22.2",
+              "url_docs": "https://www.cockroachlabs.com/docs/",
+              "por_que": "Ofrece alta disponibilidad y escalabilidad horizontal, ideal para manejar múltiples eventos y un gran número de usuarios."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de contenedores para desarrollo, envío y ejecución de aplicaciones.",
+              "version_sugerida": "24.0",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura entornos consistentes de desarrollo, testing y producción, facilitando el despliegue."
+            },
+            {
+              "nombre": "Kubernetes",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de orquestación de contenedores.",
+              "version_sugerida": "1.27",
+              "url_docs": "https://kubernetes.io/docs/home/",
+              "por_que": "Para la gestión y escalado de los microservicios en producción, asegurando alta disponibilidad."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Framework de testing nativo de Go.",
+              "version_sugerida": null,
+              "url_docs": "https://pkg.go.dev/testing",
+              "por_que": "Proporciona las herramientas básicas para tests unitarios y de integración en Go."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "OpenTelemetry",
+              "categoria": "otros",
+              "descripcion": "Kit de herramientas para instrumentación, generación, exportación y visualización de telemetría.",
+              "version_sugerida": "1.18",
+              "url_docs": "https://opentelemetry.io/",
+              "por_que": "Fundamental para la observabilidad de los microservicios en producción, permitiendo monitorizar rendimiento y detectar fallos."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de perfiles de eventos.",
+          "Publicación de roles de voluntariado y recepción de solicitudes.",
+          "Asignación de voluntarios a roles y turnos específicos.",
+          "Comunicación centralizada (email/bot Telegram) con voluntarios.",
+          "Registro y verificación de horas de voluntariado."
+        ],
+        "casos_uso": [
+          "Un organizador de festival crea un evento, define roles (ej. 'taquilla', 'ayuda escenario') y publica la convocatoria.",
+          "Un voluntario se registra, completa su perfil y solicita participar en roles específicos.",
+          "El sistema asigna automáticamente voluntarios a roles según disponibilidad y preferencias.",
+          "El organizador envía un mensaje masivo vía Telegram a todos los voluntarios del turno de mañana.",
+          "Se genera un reporte de horas de voluntariado para el evento al finalizar."
+        ],
+        "reglas_negocio": [
+          "Cada rol de voluntariado tiene un número máximo de plazas disponibles.",
+          "Los voluntarios deben aceptar los términos y condiciones del evento antes de ser asignados.",
+          "Solo los administradores del evento pueden asignar o reasignar voluntarios.",
+          "Las horas de voluntariado deben ser validadas por un responsable del evento.",
+          "Los datos de los voluntarios se asocian a eventos específicos, no son permanentes entre eventos sin reconfirmación."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 10,
+        "prerequisitos": [
+          "Sólida experiencia con Go y concurrencia.",
+          "Conocimiento de patrones de arquitectura de microservicios.",
+          "Experiencia con bases de datos SQL distribuidas y orquestación de contenedores.",
+          "Entendimiento de principios de observabilidad (logging, metrics, tracing)."
+        ],
+        "riesgos": [
+          "La gestión de la concurrencia y el acceso a la base de datos distribuida requiere cuidado.",
+          "La integración con la API de Telegram puede tener limitaciones o cambios.",
+          "La escalabilidad de CockroachDB y Kubernetes requiere configuración experta.",
+          "Garantizar la seguridad y privacidad de los datos de los voluntarios.",
+          "La complejidad de la gestión de múltiples eventos simultáneamente."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-10T10:00:00Z",
+        "hash_unicidad": "d56e9b9a21f8dc9d"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "6f79e62cfbe93ebd"
+      }
     }
   ],
   "ultimos_hashes": [
-    "b0c1d2e3f4a56789",
-    "a4e8e8c23c1d4f5e",
-    "b8c9d0e1f2a34b5c",
     "c9d0e1f2a3b45c6d",
     "f7b2a1c8d9e0f3a4",
     "9f1a2b3c4d5e6f78",
@@ -30639,8 +31044,11 @@
     "6a9e80c6a89286bc",
     "cd2961cf4e25adaf",
     "e96cd5e7fe35b4a4",
-    "dcc626fb42e1ad04"
+    "dcc626fb42e1ad04",
+    "68a42bcfcb72be06",
+    "ab86f61586677d4a",
+    "d56e9b9a21f8dc9d"
   ],
-  "total_generados": 219,
-  "fecha_ultima_generacion": "2026-11-27T02:37:51.993764"
+  "total_generados": 222,
+  "fecha_ultima_generacion": "2026-11-27T13:26:56.596859"
 }
