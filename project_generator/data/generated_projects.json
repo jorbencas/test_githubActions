@@ -30945,12 +30945,426 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "6f79e62cfbe93ebd"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4e5f6",
+        "titulo": "Sistema de Gestión de Citas para Veterinarios de Pequeños Animales con Recordatorios Adaptativos",
+        "descripcion_corta": "App para veterinarios que simplifica citas, historial y envía recordatorios personalizados (SMS/email) a dueños de mascotas, reduciendo ausencias.",
+        "descripcion_detallada": "Plataforma web y móvil para clínicas veterinarias que centraliza citas, historiales médicos y datos de contacto. El gancho es un motor de recordatorios inteligentes que se adaptan al comportamiento del dueño (ej. enviar SMS si usualmente no abre emails), reduciendo no-shows y mejorando la retención de clientes.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "mobile",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework backend Node.js robusto para construir APIs escalables y mantenibles con una arquitectura modular.",
+              "version_sugerida": "^10.0.0",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Ofrece una estructura clara (modules, controllers, services) ideal para la gestión de citas complejas y la integración de servicios externos como SMS/email."
+            },
+            {
+              "nombre": "React Native",
+              "categoria": "framework",
+              "descripcion": "Framework para construir aplicaciones móviles nativas para iOS y Android desde una única base de código.",
+              "version_sugerida": "^0.72.0",
+              "url_docs": "https://reactnative.dev/docs/getting-started",
+              "por_que": "Permite a los veterinarios y asistentes usar la aplicación en tablets o móviles, ofreciendo una experiencia nativa para la gestión rápida de citas y acceso a historiales."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "TypeORM",
+              "categoria": "libreria",
+              "descripcion": "ORM para TypeScript y JavaScript que soporta múltiples bases de datos y patrones de diseño.",
+              "version_sugerida": "^0.2.0",
+              "url_docs": "https://typeorm.io/",
+              "por_que": "Facilita la interacción con la base de datos PostgreSQL, permitiendo definir modelos de datos para pacientes, dueños y citas con validaciones."
+            },
+            {
+              "nombre": "Twilio SDK",
+              "categoria": "libreria",
+              "descripcion": "SDK oficial para interactuar con la API de Twilio para enviar SMS y realizar llamadas.",
+              "version_sugerida": "^4.0.0",
+              "url_docs": "https://www.twilio.com/docs/libraries/reference/twilio-node",
+              "por_que": "Esencial para implementar el sistema de recordatorios automáticos vía SMS, un componente clave del diferenciador del proyecto."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "bases_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional de código abierto, potente y escalable.",
+              "version_sugerida": "^15.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusto para almacenar historiales médicos detallados y relaciones entre pacientes, dueños y citas, con soporte para JSONB si se requiere flexibilidad."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de contenedores para desarrollar, enviar y ejecutar aplicaciones.",
+              "version_sugerida": "latest",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura entornos de desarrollo y producción consistentes y simplifica el despliegue de la API y la base de datos."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de JavaScript con enfoque en simplicidad.",
+              "version_sugerida": "^29.0.0",
+              "url_docs": "https://jestjs.io/docs/getting-started",
+              "por_que": "Permite escribir pruebas unitarias y de integración para la API (NestJS) y componentes de la interfaz de usuario móvil (React Native)."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro y gestión de citas con calendario interactivo",
+          "Historial médico digital por mascota",
+          "Envío automático de recordatorios por SMS y email personalizables",
+          "Notificaciones push para urgencias o cambios de cita",
+          "Gestión de perfiles de mascotas y dueños",
+          "Dashboard resumen de citas del día/semana"
+        ],
+        "casos_uso": [
+          "Un veterinario agenda una cita de vacunación para un perro y el sistema genera un recordatorio para una semana antes.",
+          "Un dueño de mascota recibe un SMS 24 horas antes de su cita, confirmando la hora y dirección.",
+          "La clínica actualiza el historial de vacunas de un gato, y la información queda disponible para futuras consultas.",
+          "El sistema envía una alerta push a todos los veterinarios sobre una cita de emergencia reprogramada.",
+          "Un asistente revisa el calendario del día y ve todas las citas pendientes y confirmadas."
+        ],
+        "reglas_negocio": [
+          "Las citas deben tener una duración mínima definida.",
+          "Los recordatorios solo se envían si la cita está confirmada.",
+          "El historial médico es accesible solo por personal autorizado de la clínica.",
+          "Los recordatorios se envían con un máximo de 7 días de antelación y un mínimo de 12 horas.",
+          "Los usuarios (dueños de mascotas) no pueden modificar citas directamente, solo solicitarlo."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "API de Twilio para SMS",
+          "Servicio de envío de email (ej. SendGrid, Nodemailer)"
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Conocimientos de TypeScript, Node.js y React Native.",
+          "Familiaridad con APIs RESTful.",
+          "Comprensión de bases de datos relacionales.",
+          "Acceso a una cuenta de Twilio para pruebas."
+        ],
+        "riesgos": [
+          "Problemas de integración con la API de Twilio o el servicio de email.",
+          "Dificultad en la sincronización de datos entre la web y la app móvil.",
+          "La complejidad de la lógica de recordatorios adaptativos podría ser subestimada.",
+          "Cumplimiento de normativas de privacidad de datos de mascotas (si aplica en la región)."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-08T10:00:00Z",
+        "hash_unicidad": "6619df267eb9b057"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "55ad806774058264"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f7e8d9c0b1a2",
+        "titulo": "Sistema de Auditoría Energética y Optimización para Pequeñas Industrias",
+        "descripcion_corta": "App web que permite a pequeñas industrias registrar consumos de energía, identificar ineficiencias y recibir recomendaciones de ahorro personalizadas.",
+        "descripcion_detallada": "Plataforma web donde gerentes de planta o técnicos de mantenimiento registran datos de consumo eléctrico de maquinaria y procesos. El sistema analiza estos datos para detectar anomalías o patrones de alto consumo, ofreciendo recomendaciones concretas y priorizadas para reducir costes y huella de carbono.",
+        "nivel": "senior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para construir APIs con Python 3.7+, basado en tipado estándar de Python.",
+              "version_sugerida": "^0.100.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Excelente rendimiento asíncrono para el procesamiento de datos de sensores y la generación de reportes, con validación de datos automática vía Pydantic."
+            },
+            {
+              "nombre": "Streamlit",
+              "categoria": "framework",
+              "descripcion": "Framework de Python para crear y compartir aplicaciones web para machine learning y ciencia de datos de forma rápida.",
+              "version_sugerida": "^1.20.0",
+              "url_docs": "https://docs.streamlit.io/",
+              "por_que": "Permite crear rápidamente interfaces interactivas para visualización de datos de consumo y presentación de recomendaciones, sin necesidad de conocimientos profundos de frontend."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca para manipulación y análisis de datos.",
+              "version_sugerida": "^2.0.0",
+              "url_docs": "https://pandas.pydata.org/docs/",
+              "por_que": "Fundamental para la limpieza, transformación y análisis de series temporales de datos de consumo energético."
+            },
+            {
+              "nombre": "Scikit-learn",
+              "categoria": "libreria",
+              "descripcion": "Biblioteca de aprendizaje automático para Python.",
+              "version_sugerida": "^1.3.0",
+              "url_docs": "https://scikit-learn.org/stable/",
+              "por_que": "Se usará para desarrollar modelos de detección de anomalías en el consumo y para predecir patrones de demanda."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "InfluxDB",
+              "categoria": "bases_datos",
+              "descripcion": "Base de datos de series temporales optimizada para almacenar y consultar grandes volúmenes de datos con marca de tiempo.",
+              "version_sugerida": "2.x",
+              "url_docs": "https://docs.influxdata.com/",
+              "por_que": "Ideal para almacenar datos de consumo energético provenientes de medidores inteligentes o registros manuales, permitiendo consultas eficientes por rangos de tiempo."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Grafana",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma de análisis y visualización de métricas de código abierto.",
+              "version_sugerida": "latest",
+              "url_docs": "https://grafana.com/docs/",
+              "por_que": "Se integra con InfluxDB para crear dashboards visuales del consumo energético en tiempo real y la evolución histórica."
+            }
+          ],
+          "ia_ml": [
+            {
+              "nombre": "Detección de Anomalías",
+              "categoria": "ia_ml",
+              "descripcion": "Identificación de puntos de datos que se desvían significativamente del comportamiento esperado.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Permite señalar consumos inusualmente altos que podrían indicar equipos defectuosos o mal uso, optimizando el mantenimiento."
+            }
+          ],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing de Python que facilita la escritura de pruebas robustas y escalables.",
+              "version_sugerida": "^7.0.0",
+              "url_docs": "https://docs.pytest.org/en/latest/",
+              "por_que": "Permite crear tests para la API de FastAPI, la lógica de análisis de datos con Pandas y los modelos de Scikit-learn."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro manual o importación de datos de consumo energético.",
+          "Visualización de patrones de consumo por máquina/proceso.",
+          "Detección automática de consumos anómalos.",
+          "Generación de informes de auditoría energética personalizados.",
+          "Recomendaciones de ahorro energético basadas en datos y buenas prácticas.",
+          "Seguimiento del impacto de las medidas de ahorro implementadas."
+        ],
+        "casos_uso": [
+          "El gerente de una pequeña fábrica registra el consumo diario de su máquina de inyección de plástico.",
+          "El sistema alerta sobre un pico de consumo inesperado en la línea de ensamblaje durante la noche.",
+          "Se genera un informe que muestra que la iluminación representa el 30% del consumo total y se sugiere cambiar a LED.",
+          "El técnico de mantenimiento usa la app para priorizar la revisión de equipos con alto consumo anómalo.",
+          "La dirección revisa el dashboard para ver el ahorro energético logrado tras implementar nuevas medidas."
+        ],
+        "reglas_negocio": [
+          "Los datos de consumo deben registrarse al menos semanalmente.",
+          "Las recomendaciones de ahorro deben ser viables para pequeñas industrias (coste-efectividad).",
+          "Los datos históricos se conservan por un mínimo de 5 años para análisis comparativos.",
+          "Los informes de auditoría deben incluir un resumen ejecutivo y detalles técnicos.",
+          "El sistema debe permitir la exportación de datos en formato CSV."
+        ],
+        "por_que_ia": "La IA se utiliza para detectar patrones anómalos en el consumo energético que serían difíciles de identificar manualmente en grandes volúmenes de datos, permitiendo un mantenimiento proactivo y la identificación temprana de ineficiencias.",
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Bibliotecas de Python para análisis de datos y ML.",
+          "API de Grafana para visualización."
+        ],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 8,
+        "prerequisitos": [
+          "Experiencia sólida en Python y librerías de análisis de datos (Pandas, Scikit-learn).",
+          "Conocimientos de bases de datos de series temporales (InfluxDB).",
+          "Experiencia con frameworks web (FastAPI) y de visualización (Streamlit, Grafana).",
+          "Comprensión de conceptos de eficiencia energética industrial."
+        ],
+        "riesgos": [
+          "La calidad y granularidad de los datos de entrada pueden ser insuficientes.",
+          "La precisión de los modelos de detección de anomalías puede variar según la industria.",
+          "La adopción por parte de las pequeñas industrias puede ser lenta debido a la falta de personal técnico.",
+          "Integración compleja con sistemas de monitorización de energía existentes."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-08T10:00:01Z",
+        "hash_unicidad": "1212edb9a901eef3"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "55ad806774058264"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c1d2e3f4a5b6",
+        "titulo": "Plataforma de Gestión de Voluntarios para Eventos Culturales con Geolocalización",
+        "descripcion_corta": "App web/móvil para organizadores de eventos culturales que asigna tareas a voluntarios por proximidad, optimizando la logística y comunicación en tiempo real.",
+        "descripcion_detallada": "Sistema para gestionar la asignación y comunicación de voluntarios en eventos culturales (festivales, exposiciones). El diferenciador es el uso de geolocalización para asignar tareas a voluntarios cercanos al punto de acción, facilitando la respuesta rápida y la gestión de equipos in situ. Incluye check-in/out y feedback post-evento.",
+        "nivel": "semisenior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "web",
+          "mobile",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin Gonic",
+              "categoria": "framework",
+              "descripcion": "Framework web de alto rendimiento para Go con un buen balance entre potencia y simplicidad.",
+              "version_sugerida": "^1.9.0",
+              "url_docs": "https://gin-gonic.com/docs/",
+              "por_que": "Proporciona la base para la API RESTful que gestionará voluntarios, tareas y eventos, permitiendo un manejo eficiente de las solicitudes."
+            },
+            {
+              "nombre": "Flutter",
+              "categoria": "framework",
+              "descripcion": "UI toolkit de Google para crear aplicaciones compiladas nativamente para móvil, web y escritorio desde una única base de código.",
+              "version_sugerida": "^3.10.0",
+              "url_docs": "https://docs.flutter.dev/get-started/install",
+              "por_que": "Ofrece una experiencia de usuario fluida y nativa tanto en Android como en iOS, esencial para voluntarios en movimiento que necesitan interactuar con la app."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "GORM",
+              "categoria": "libreria",
+              "descripcion": "ORM completo para Go con soporte para múltiples bases de datos.",
+              "version_sugerida": "^2.0.0",
+              "url_docs": "https://gorm.io/docs/",
+              "por_que": "Facilita la interacción con la base de datos PostgreSQL, simplificando la definición y manipulación de modelos de datos como voluntarios, eventos y tareas."
+            },
+            {
+              "nombre": "Go-Sckt.io",
+              "categoria": "libreria",
+              "descripcion": "Cliente y servidor de WebSockets para Go.",
+              "version_sugerida": "^0.5.0",
+              "url_docs": "https://github.com/go-sckt/go-sckt.io",
+              "por_que": "Permite la comunicación en tiempo real entre la app móvil de los voluntarios y el panel de control del organizador, crucial para notificaciones y actualizaciones de estado de tareas."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "bases_datos",
+              "descripcion": "Base de datos relacional robusta y escalable, ideal para datos estructurados.",
+              "version_sugerida": "^15.0",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Adecuada para almacenar la información detallada de eventos, voluntarios, tareas asignadas y sus estados, asegurando la integridad de los datos."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker Compose",
+              "categoria": "infraestructura",
+              "descripcion": "Herramienta para definir y ejecutar aplicaciones Docker multi-contenedor.",
+              "version_sugerida": "latest",
+              "url_docs": "https://docs.docker.com/compose/",
+              "por_que": "Simplifica la configuración del entorno de desarrollo, levantando la API de Go, la base de datos y potencialmente un servicio de mensajería."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Testify",
+              "categoria": "testing",
+              "descripcion": "Conjunto de herramientas de testing para Go, incluyendo aserciones y mocks.",
+              "version_sugerida": "^1.8.0",
+              "url_docs": "https://pkg.go.dev/github.com/stretchr/testify",
+              "por_que": "Proporciona un framework robusto para escribir pruebas unitarias y de integración para la API de Go y la lógica de negocio."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Creación y gestión de eventos culturales.",
+          "Registro y perfilado de voluntarios con habilidades e intereses.",
+          "Asignación de tareas basada en proximidad geográfica (geofencing).",
+          "Comunicación en tiempo real (chat/notificaciones) entre organizadores y voluntarios.",
+          "Check-in/Check-out de voluntarios en puntos de control.",
+          "Sistema de feedback y evaluación post-evento para voluntarios."
+        ],
+        "casos_uso": [
+          "Un organizador crea un evento y define las tareas necesarias (ej. 'Informador Zona A', 'Control de Acceso').",
+          "Un voluntario recibe una notificación de tarea disponible cerca de su ubicación actual.",
+          "El organizador ve en un mapa la ubicación de los voluntarios activos y les asigna tareas de última hora.",
+          "Un voluntario marca su entrada y salida usando la app móvil en un punto de control.",
+          "Tras el evento, los organizadores evalúan el desempeño de los voluntarios."
+        ],
+        "reglas_negocio": [
+          "Los voluntarios deben aceptar las tareas asignadas dentro de un tiempo límite.",
+          "La asignación por proximidad prioriza voluntarios dentro de un radio definido.",
+          "Solo los organizadores autorizados pueden asignar tareas y ver ubicaciones.",
+          "Los datos de ubicación de los voluntarios se registran solo durante el horario del evento.",
+          "Los voluntarios deben completar un perfil básico para ser visibles en el pool."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Servicios de geolocalización (ej. Google Maps API, Mapbox API) para cálculo de distancias y geofencing.",
+          "Servicio de notificaciones push (Firebase Cloud Messaging / APNS)."
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 10,
+        "prerequisitos": [
+          "Experiencia con Go y desarrollo de APIs RESTful.",
+          "Conocimientos de Flutter para desarrollo móvil cross-platform.",
+          "Comprensión de bases de datos relacionales y ORMs.",
+          "Familiaridad con WebSockets y servicios de geolocalización."
+        ],
+        "riesgos": [
+          "La precisión y el consumo de batería de la geolocalización en la app móvil.",
+          "La complejidad de la lógica de asignación de tareas en tiempo real bajo alta demanda.",
+          "La integración con múltiples servicios externos (mapas, notificaciones).",
+          "La necesidad de una infraestructura escalable para manejar picos de usuarios concurrentes."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-08T10:00:02Z",
+        "hash_unicidad": "099925dfe54aa923"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "55ad806774058264"
+      }
     }
   ],
   "ultimos_hashes": [
-    "c9d0e1f2a3b45c6d",
-    "f7b2a1c8d9e0f3a4",
-    "9f1a2b3c4d5e6f78",
     "f0d8c1a7b2e3f4a5",
     "b7c8d9e0f1a2b3c4",
     "f9a7b1c3d5e8f0a2",
@@ -31047,8 +31461,11 @@
     "dcc626fb42e1ad04",
     "68a42bcfcb72be06",
     "ab86f61586677d4a",
-    "d56e9b9a21f8dc9d"
+    "d56e9b9a21f8dc9d",
+    "6619df267eb9b057",
+    "1212edb9a901eef3",
+    "099925dfe54aa923"
   ],
-  "total_generados": 222,
-  "fecha_ultima_generacion": "2026-11-27T13:26:56.596859"
+  "total_generados": 225,
+  "fecha_ultima_generacion": "2026-11-27T23:53:22.498181"
 }
