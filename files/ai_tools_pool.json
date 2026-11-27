@@ -3364,5 +3364,53 @@
     "dific": 2,
     "source": "promoted",
     "fuente_raw": "GitHub Search"
+  },
+  {
+    "cat": "texto_gen",
+    "tool": "Gemma 4 26B A4B-it",
+    "body": "Un modelo multimodal de Google que genera texto a partir de entradas de imagen y texto.",
+    "workflow": "Proporciona imagen y texto -> Modelo genera respuesta textual.",
+    "combinaciones": [
+      "multimodal_agents",
+      "api_ai",
+      "fine_tuning"
+    ],
+    "url": "https://huggingface.co/google/gemma-4-26B-A4B-it",
+    "restricciones": "Requiere conocimientos técnicos para su implementación o una infraestructura de IA.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "texto_gen",
+    "tool": "Qwen3-VL-8B-Instruct",
+    "body": "Un modelo multimodal de Qwen que genera texto en respuesta a entradas de imagen y texto, diseñado para instrucciones.",
+    "workflow": "Presenta imagen y pregunta -> Modelo genera texto explicativo.",
+    "combinaciones": [
+      "multimodal_agents",
+      "api_ai",
+      "fine_tuning"
+    ],
+    "url": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct",
+    "restricciones": "Requiere conocimientos técnicos para su implementación o una infraestructura de IA.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "audio_tts",
+    "tool": "Kokoro-82M",
+    "body": "Un modelo de Hugging Face especializado en la conversión de texto a voz (Text-to-Speech) para generar audio.",
+    "workflow": "Proporciona texto -> Modelo genera archivo de audio con voz.",
+    "combinaciones": [
+      "audio_gen",
+      "api_ai",
+      "ia_local"
+    ],
+    "url": "https://huggingface.co/hexgrad/Kokoro-82M",
+    "restricciones": "Requiere conocimientos técnicos para su implementación o una infraestructura de IA.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
   }
 ]
