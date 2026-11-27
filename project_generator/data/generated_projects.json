@@ -30133,12 +30133,413 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "c8da9de3aa3426b4"
       }
+    },
+    {
+      "proyecto": {
+        "id": "b4c2a1e0",
+        "titulo": "Sistema de Gestión de Calidad y Trazabilidad de Miel Artesanal",
+        "descripcion_corta": "App móvil para apicultores que registra lotes de miel, análisis de calidad y origen floral; genera certificados con QR para venta directa.",
+        "descripcion_detallada": "Este sistema permite a apicultores artesanales gestionar la calidad de su miel desde la colmena hasta el consumidor. Captura datos de lotes, resultados de análisis (humedad, azúcares, HMF), y origen floral (con opción de foto/notas). Genera certificados digitales con QR para autenticidad y trazabilidad, facilitando la venta directa y el cumplimiento normativo.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "mobile",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "React Native",
+              "categoria": "framework",
+              "descripcion": "Desarrollo de la aplicación móvil multiplataforma para iOS y Android.",
+              "version_sugerida": "^0.74.0",
+              "url_docs": "https://reactnative.dev/docs/getting-started",
+              "por_que": "Permite crear una única base de código para Android e iOS, acelerando el desarrollo móvil y llegando a más apicultores."
+            },
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Construcción de la API RESTful para la gestión de datos y lógica de negocio.",
+              "version_sugerida": "0.110.0",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ofrece alto rendimiento con async, validación automática de datos con Pydantic y generación de documentación OpenAPI, ideal para la API backend."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Zod",
+              "categoria": "libreria",
+              "descripcion": "Validación de esquemas de datos para la API y el frontend.",
+              "version_sugerida": "^3.23.0",
+              "url_docs": "https://zod.dev/",
+              "por_que": "Proporciona una robusta validación de esquemas para asegurar la integridad de los datos que entran y salen de la API."
+            },
+            {
+              "nombre": "Expo",
+              "categoria": "libreria",
+              "descripcion": "Kit de herramientas para simplificar el desarrollo con React Native.",
+              "version_sugerida": "^51.0.0",
+              "url_docs": "https://docs.expo.dev/",
+              "por_que": "Facilita la configuración, el build y el despliegue de la aplicación móvil, abstrae complejidades nativas."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Almacenamiento principal de los datos de lotes, análisis y apicultores.",
+              "version_sugerida": "16",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Soporte robusto para datos relacionales, transacciones ACID, y capacidad de almacenar datos complejos como geo-referencias si fuera necesario."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Contenerización de la API y la base de datos para entornos de desarrollo y producción.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Asegura la reproducibilidad del entorno de desarrollo y simplifica el despliegue de la aplicación backend."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para la API backend.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir tests claros y concisos para la lógica de negocio de la API, con buen soporte para fixtures."
+            },
+            {
+              "nombre": "React Testing Library",
+              "categoria": "testing",
+              "descripcion": "Librería para testear componentes de React Native de forma accesible.",
+              "version_sugerida": "^13.5.0",
+              "url_docs": "https://testing-library.com/docs/react-native-testing-library/intro/",
+              "por_que": "Fomenta buenas prácticas de testing enfocadas en la experiencia del usuario y la accesibilidad de la app móvil."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro de lotes de miel con metadatos (fecha, colmena, peso).",
+          "Captura y adjunto de resultados de análisis de calidad.",
+          "Registro del origen floral (con notas y/o foto).",
+          "Generación automática de certificados de calidad con QR.",
+          "Gestión de apicultores y sus colmenares.",
+          "Vista de historial de lotes y análisis por apicultor."
+        ],
+        "casos_uso": [
+          "Un apicultor registra un nuevo lote de miel y sus análisis en el móvil.",
+          "Un consumidor escanea el QR de un tarro de miel para ver su origen y calidad.",
+          "Un apicultor genera un certificado digital para cumplir con normativas de venta.",
+          "La cooperativa de apicultores puede verificar la procedencia de la miel.",
+          "Apicultor consulta su historial de producción y calidad."
+        ],
+        "reglas_negocio": [
+          "Los lotes de miel deben tener una fecha de cosecha válida.",
+          "Los resultados de análisis deben estar dentro de rangos permitidos para la certificación.",
+          "Cada certificado QR debe ser único y enlazado a un lote específico.",
+          "Solo los apicultores registrados pueden ingresar datos de sus lotes.",
+          "La información del origen floral es opcional pero recomendada."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de desarrollo móvil con React Native (Expo).",
+          "Comprensión de APIs RESTful y bases de datos relacionales.",
+          "Familiaridad con la gestión de certificados digitales y QR."
+        ],
+        "riesgos": [
+          "La variabilidad en los dispositivos móviles puede causar problemas de compatibilidad.",
+          "La adopción por parte de apicultores con poca experiencia tecnológica.",
+          "Integración con sistemas de análisis de laboratorio externos (si aplica).",
+          "Seguridad de los datos sensibles de producción y clientes.",
+          "Mantenimiento de la aplicación móvil a medida que las plataformas evolucionan."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-07-29T10:00:00Z",
+        "hash_unicidad": "cd2961cf4e25adaf"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "4ca0eda5adc4749e"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f9e8d7c6",
+        "titulo": "Sistema de Gestión de Reservas y Turnos para Talleres Mecánicos Pequeños",
+        "descripcion_corta": "Web app para talleres mecánicos que simplifica la gestión de citas, clientes y vehículos; reduce tiempos de espera y errores de comunicación.",
+        "descripcion_detallada": "Este sistema está diseñado para talleres mecánicos pequeños que a menudo gestionan citas de forma manual o con herramientas inadecuadas. Permite a los recepcionistas agendar mantenimientos y reparaciones, asignar mecánicos, registrar detalles del vehículo y del cliente. Los clientes pueden ver próximos turnos y el estado del servicio. Reduce la fricción y mejora la eficiencia operativa del taller.",
+        "nivel": "junior",
+        "scope": "miniproyecto",
+        "tipo": [
+          "web",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Flask",
+              "categoria": "framework",
+              "descripcion": "Microframework web para construir la API y la interfaz web.",
+              "version_sugerida": "3.0.0",
+              "url_docs": "https://flask.palletsprojects.com/",
+              "por_que": "Ligero y fácil de aprender para un proyecto junior, permite un desarrollo rápido de la API y la renderización de plantillas HTML."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "ORM para interactuar con la base de datos PostgreSQL.",
+              "version_sugerida": "2.0.0",
+              "url_docs": "https://www.sqlalchemy.org/",
+              "por_que": "Abstrae las consultas SQL, facilitando la gestión de modelos de datos (clientes, vehículos, citas) y las relaciones entre ellos."
+            },
+            {
+              "nombre": "Bootstrap",
+              "categoria": "libreria",
+              "descripcion": "Framework CSS para el diseño y la interfaz de usuario responsiva.",
+              "version_sugerida": "5.3.0",
+              "url_docs": "https://getbootstrap.com/",
+              "por_que": "Proporciona componentes UI predefinidos y un sistema de grid para crear rápidamente una interfaz web atractiva y adaptable a diferentes tamaños de pantalla."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos relacional para almacenar información de clientes, vehículos y citas.",
+              "version_sugerida": "16",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Robusta, confiable y soporta las relaciones necesarias entre las entidades del taller (cliente-vehículo-cita)."
+            }
+          ],
+          "infraestructura": [],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para la API y lógica de negocio.",
+              "version_sugerida": "7.4.0",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Facilita la escritura de tests unitarios y de integración para asegurar la corrección de la gestión de citas y clientes."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro de clientes y sus vehículos (marca, modelo, matrícula).",
+          "Creación y gestión de citas con asignación de mecánicos y horas.",
+          "Visualización de calendario de citas (diario, semanal).",
+          "Actualización del estado del servicio (en espera, en proceso, completado).",
+          "Notificaciones básicas por email sobre próximas citas (opcional)."
+        ],
+        "casos_uso": [
+          "El recepcionista agenda una cita para un cambio de aceite.",
+          "Un cliente consulta cuándo tiene su próxima cita programada.",
+          "El jefe de taller ve la carga de trabajo de cada mecánico para la semana.",
+          "Se registra que un vehículo ha sido reparado y está listo para ser recogido.",
+          "Se envía un recordatorio por email al cliente sobre su cita."
+        ],
+        "reglas_negocio": [
+          "No se pueden agendar dos citas para el mismo vehículo/hora.",
+          "Las citas deben ser asignadas a un mecánico disponible.",
+          "El estado del servicio debe seguir una secuencia lógica (pendiente -> en proceso -> completado).",
+          "La matrícula del vehículo es un identificador único.",
+          "Los clientes solo pueden ver sus propias citas."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [],
+        "complejidad_estimada": "baja",
+        "tiempo_estimado_semanas": 3,
+        "prerequisitos": [
+          "Conocimientos básicos de Python y Flask.",
+          "Entendimiento de bases de datos relacionales y SQL.",
+          "Nociones de HTML, CSS y JavaScript para la interfaz web."
+        ],
+        "riesgos": [
+          "La interfaz puede volverse compleja si se añaden demasiadas funcionalidades.",
+          "Escalabilidad limitada para talleres muy grandes.",
+          "Dependencia de la correcta entrada de datos por parte del personal del taller.",
+          "Seguridad de los datos de clientes y vehículos.",
+          "Poca resistencia a errores tipográficos en matrículas o nombres."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-07-29T10:00:00Z",
+        "hash_unicidad": "e96cd5e7fe35b4a4"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "4ca0eda5adc4749e"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4",
+        "titulo": "Monitor de Calidad del Aire y Bienestar para Hogares con Mascotas",
+        "descripcion_corta": "Sistema IoT que mide CO2, VOCs y partículas PM2.5; alerta si los niveles son peligrosos para mascotas y sugiere acciones.",
+        "descripcion_detallada": "Este proyecto aborda la preocupación por la calidad del aire interior, especialmente relevante para hogares con mascotas sensibles. Utiliza sensores (CO2, VOC, PM2.5) para monitorizar continuamente el ambiente. Cuando los niveles superan umbrales predefinidos (ajustables), envía alertas al usuario y sugiere acciones correctivas (ventilar, usar purificador). Se enfoca en la salud y confort de las mascotas.",
+        "nivel": "senior",
+        "scope": "proyecto",
+        "tipo": [
+          "api",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Go standard library (net/http, encoding/json)",
+              "categoria": "framework",
+              "descripcion": "Creación de la API RESTful para recibir datos de los sensores y servir información.",
+              "version_sugerida": "1.22",
+              "url_docs": "https://pkg.go.dev/net/http",
+              "por_que": "El ecosistema nativo de Go es suficiente y eficiente para construir una API robusta y de alto rendimiento para el manejo de telemetría."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "TinyGo",
+              "categoria": "libreria",
+              "descripcion": "Compilador para Go optimizado para microcontroladores.",
+              "version_sugerida": "0.28.0",
+              "url_docs": "https://tinygo.org/",
+              "por_que": "Permite ejecutar código Go en microcontroladores de bajo consumo como ESP32, ideal para la parte de hardware IoT."
+            },
+            {
+              "nombre": "InfluxDB Client (Go)",
+              "categoria": "libreria",
+              "descripcion": "Cliente para interactuar con la base de datos de series temporales InfluxDB.",
+              "version_sugerida": "2.x",
+              "url_docs": "https://github.com/influxdata/influxdb-client-go",
+              "por_que": "Facilita la escritura y lectura de datos de series temporales, optimizada para el tipo de datos generados por sensores."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "InfluxDB",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos de series temporales para almacenar las lecturas de los sensores.",
+              "version_sugerida": "2.7",
+              "url_docs": "https://docs.influxdata.com/",
+              "por_que": "Altamente optimizada para almacenar y consultar grandes volúmenes de datos de sensores con marcas de tiempo."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "MQTT Broker (e.g., Mosquitto)",
+              "categoria": "infraestructura",
+              "descripcion": "Servidor de mensajería ligera para la comunicación entre los dispositivos IoT y la API.",
+              "version_sugerida": "2.0",
+              "url_docs": "https://mosquitto.org/",
+              "por_que": "Protocolo estándar y eficiente para la publicación/suscripción de mensajes de telemetría desde dispositivos IoT."
+            },
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Contenerización de la API, el broker MQTT y la base de datos.",
+              "version_sugerida": "24.0.5",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Simplifica la gestión de los diferentes servicios (API, DB, MQTT) y asegura la consistencia entre entornos."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Go testing package",
+              "categoria": "testing",
+              "descripcion": "Framework de testing nativo de Go.",
+              "version_sugerida": "1.22",
+              "url_docs": "https://go.dev/blog/testing",
+              "por_que": "Integrado en el lenguaje, permite escribir tests unitarios y de integración para la lógica de la API y el manejo de datos."
+            }
+          ],
+          "otros": [
+            {
+              "nombre": "ESP32 (Microcontrolador)",
+              "categoria": "otros",
+              "descripcion": "Placa de desarrollo para el hardware del sensor IoT.",
+              "version_sugerida": "DevKitC",
+              "url_docs": "https://www.espressif.com/en/products/socs/esp32",
+              "por_que": "Ofrece conectividad WiFi/Bluetooth, potencia de procesamiento y suficientes pines GPIO para conectar varios sensores."
+            },
+            {
+              "nombre": "BME680 / SGP30 / PMSA003 (Sensores)",
+              "categoria": "otros",
+              "descripcion": "Sensores para medir CO2, VOCs y partículas PM2.5.",
+              "version_sugerida": null,
+              "url_docs": null,
+              "por_que": "Sensores comunes y relativamente precisos para las mediciones requeridas de calidad del aire interior."
+            }
+          ]
+        },
+        "funcionalidades_clave": [
+          "Lectura continua de CO2, VOCs y PM2.5 desde el dispositivo IoT.",
+          "Envío de datos en tiempo real a la API vía MQTT.",
+          "Almacenamiento de datos históricos en InfluxDB.",
+          "API para consultar niveles actuales y históricos de calidad del aire.",
+          "Generación de alertas personalizables basadas en umbrales de peligro para mascotas.",
+          "Sugerencias de acciones correctivas (ventilar, purificar)."
+        ],
+        "casos_uso": [
+          "El sistema alerta al usuario cuando los niveles de CO2 son altos y es hora de ventilar.",
+          "Se notifica al dueño si las partículas PM2.5 alcanzan un nivel peligroso para un perro con asma.",
+          "El usuario consulta el historial de calidad del aire para identificar patrones.",
+          "Se configura un umbral de alerta específico para el tipo de mascota (ej. aves son más sensibles a VOCs).",
+          "Monitorización remota de la calidad del aire en una habitación donde la mascota pasa mucho tiempo."
+        ],
+        "reglas_negocio": [
+          "Los niveles de alerta deben ser configurables por el usuario.",
+          "Los umbrales de alerta deben considerar la sensibilidad de diferentes tipos de mascotas.",
+          "La conexión entre el dispositivo IoT y el broker MQTT debe ser segura.",
+          "Los datos de sensores se guardan con marca de tiempo precisa.",
+          "Se debe definir un período de gracia antes de enviar alertas repetidas."
+        ],
+        "por_que_ia": "La IA podría usarse para predecir episodios de mala calidad del aire basándose en patrones históricos y externos (ej. hora del día, actividad en casa), o para personalizar dinámicamente los umbrales de alerta según el comportamiento y especie de la mascota, requiriendo modelos de clasificación o predicción.",
+        "cliente_ia_sugerido": "local",
+        "recursos_externos": [],
+        "complejidad_estimada": "alta",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia con Go y desarrollo de APIs.",
+          "Conocimiento de sistemas IoT, microcontroladores (ESP32) y protocolos como MQTT.",
+          "Familiaridad con bases de datos de series temporales (InfluxDB).",
+          "Comprensión de electrónica básica para la conexión de sensores."
+        ],
+        "riesgos": [
+          "Fiabilidad y calibración de los sensores de bajo costo.",
+          "Conectividad inestable de los dispositivos IoT en hogares.",
+          "Seguridad de la comunicación MQTT y la API.",
+          "Gestión de la energía en los dispositivos IoT (si son a batería).",
+          "Mantenimiento y actualización del firmware en los dispositivos desplegados."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-07-29T10:00:00Z",
+        "hash_unicidad": "dcc626fb42e1ad04"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "4ca0eda5adc4749e"
+      }
     }
   ],
   "ultimos_hashes": [
-    "c4d5e6f789012345",
-    "f1a2b3c4d5e67890",
-    "a7b8c9d0e1f23456",
     "b0c1d2e3f4a56789",
     "a4e8e8c23c1d4f5e",
     "b8c9d0e1f2a34b5c",
@@ -30235,8 +30636,11 @@
     "6f7476640c52bf89",
     "75cb76e2c1f7d180",
     "f67b4ebbbc674a63",
-    "6a9e80c6a89286bc"
+    "6a9e80c6a89286bc",
+    "cd2961cf4e25adaf",
+    "e96cd5e7fe35b4a4",
+    "dcc626fb42e1ad04"
   ],
-  "total_generados": 216,
-  "fecha_ultima_generacion": "2026-11-26T18:04:19.510998"
+  "total_generados": 219,
+  "fecha_ultima_generacion": "2026-11-27T02:37:51.993764"
 }
