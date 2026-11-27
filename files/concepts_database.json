@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 198,
+    "total_concepts": 199,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-27T04:46:03.017938"
+    "last_scraped": "2026-11-27T14:39:10.892654"
   },
   "concepts": [
     {
@@ -3664,6 +3664,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-11-26T13:31:16.222877"
+    },
+    {
+      "title": "Jiff 1.0: la librería de fechas y zonas horarias de Rust da el salto a la estabilidad",
+      "summary": "Jiff, la librería de fechas y horas de Rust que escribió Andrew Gallant (BurntSushi, el autor de ripgrep y de la crateregex), llegó a la versión 1.0.0 el 15 de noviembre de 2026. No es una novedad men",
+      "explanation": "Jiff, la librería de fechas y horas de Rust que escribió Andrew Gallant (BurntSushi, el autor de ripgrep y de la crateregex), llegó a la versión 1.0.0 el 15 de noviembre de 2026. No es una novedad menor: significa que su API pública queda congelada «de forma indefinida» y que otras bibliotecas pueden exponer tipos de Jiff en su propia interfaz sin miedo a una ruptura de semver. A continuación repasamos qué ha cambiado, cómo piensa Jiff el tiempo y en qué se diferencia dechrono,timey la biblioteca estándar.Jiff 1.0: qué se ha estabilizado Según elCHANGELOG del repositorio, la 1.0.0 es una versión de estabilización: «salvo un problema grave e imprevisto en la API», el compromiso con la rama 1.x.y es indefinido, y las nuevas versiones mayores «no se harán a la ligera». La propiaentrada del blog de Gallantque anuncia el lanzamiento insiste en la idea: Jiff aspira a ser un bloque básico del ecosistema que aparezca en las APIs públicas de otras crates. Desde el 15 de noviembre han salido tres revisiones de mantenimiento: la 1.0.1 (17 de noviembre) corrige el formato de%ZenTimestamp::strftime; la 1.0.2 (21 de noviembre) arregla un posible pánico enZonedDateTime::strptimecon entradas cercanas a los límites; y la 1.0.3 (24 de noviembre) corrigeTimestamp::from_millisecondyfrom_microsecond, que rechazaban valores válidos. Todo ello según el changelog y crates.io, donde la última versión estable a fecha de hoy es la 1.0.3. Los cambios de ruptura respecto a la 0.2 son pocos, pero uno afec",
+      "code_example": "use std::time::{Duration, Instant};\n\nfn main() -> anyhow::Result<()> {\n    let start = Instant::now();\n    // trabajo pesado\n    std::thread::sleep(Duration::from_secs(1));\n    let elapsed = Instant::now().duration_since(start);\n    println!(\"{elapsed:?}\");\n    Ok(())\n}",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "patrones_diseno"
+      ],
+      "cat": "patrones_diseno",
+      "scraped_at": "2026-11-27T14:38:31.500361"
     }
   ]
 }
