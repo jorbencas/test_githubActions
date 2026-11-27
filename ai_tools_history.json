@@ -13,7 +13,12 @@
     "Bubble AI",
     "LMSYS Chatbot Arena",
     "Buffer",
-    "Riverside.fm"
+    "Riverside.fm",
+    "NovelAI",
+    "dlt",
+    "Docker",
+    "Subtitle Edit + Whisper",
+    "Character.AI"
   ],
   "sent_urls": [
     "https://quizlet.com/es",
@@ -29,7 +34,12 @@
     "https://bubble.io",
     "https://lmarena.ai",
     "https://buffer.com",
-    "https://riverside.fm"
+    "https://riverside.fm",
+    "https://novelai.net",
+    "https://dlthub.com",
+    "https://www.docker.com",
+    "https://www.nikse.dk/subtitleedit",
+    "https://character.ai"
   ],
   "sent_skills": [
     "mattpocock resolving merge conflicts",
@@ -37,7 +47,9 @@
     "elementalsouls claude osint",
     "addyosmani agent skills",
     "mattpocock improve codebase architecture",
-    "wenyuchiou ai research skills"
+    "wenyuchiou ai research skills",
+    "mattpocock to tickets",
+    "othmanadi planning with files"
   ],
   "sent_resources": [
     "pdf24",
@@ -54,9 +66,14 @@
     "coinapi",
     "cloud 66",
     "twilio",
-    "codingame"
+    "codingame",
+    "apiflash",
+    "google fonts",
+    "prismml eng bonsai demo",
+    "cockpit",
+    "hkuds deeptutor"
   ],
-  "last_run": "2026-11-26T01:17:39.619402",
-  "total_runs": 3,
+  "last_run": "2026-11-27T03:21:38.604646",
+  "total_runs": 4,
   "db_exhausted": false
 }
