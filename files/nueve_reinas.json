@@ -4935,5 +4935,29 @@
     "relevancia": 3,
     "pelicula": "Nueve reinas",
     "enviada": true
+  },
+  {
+    "titulo": "La película bélica de Netflix que ningún padre se perderá este fin de semana: historia real detrás de 'Mosquito Bowl'",
+    "url": "https://www.cinemania.es/cinemania/noticias/mosquito-bowl-pelicula-belica-netflix-historia-real_7064709_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-27T23:27:59.579923+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 2,
+    "pelicula": "Nueve reinas",
+    "enviada": true
+  },
+  {
+    "titulo": "Netflix cancela repentinamente una de sus series más caras tras una única temporada: ¿la llegaste a ver?",
+    "url": "https://www.cinemania.es/cinemania/series/netflix-cancela-series-caras-unica-temporada_7066237_0.html",
+    "fecha_pub": "",
+    "fecha_ts": "2026-11-27T23:27:59.580113+00:00",
+    "medio": "Cinemania",
+    "imagen": "",
+    "tipo": "noticia",
+    "relevancia": 5,
+    "pelicula": "Nueve reinas",
+    "enviada": true
   }
 ]
