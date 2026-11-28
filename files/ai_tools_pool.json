@@ -3492,5 +3492,53 @@
     "dific": 1,
     "source": "promoted",
     "fuente_raw": "HuggingFace Spaces"
+  },
+  {
+    "cat": "avatar_ai",
+    "tool": "LivePortrait",
+    "body": "Genera retratos animados con control de movimiento a partir de imágenes, accesible a través de una interfaz Gradio.",
+    "workflow": "Sube una imagen de retrato -> Define el movimiento deseado -> Obtiene un video del retrato animado.",
+    "combinaciones": [
+      "img_gen",
+      "video_gen",
+      "motion_tracking"
+    ],
+    "url": "https://huggingface.co/spaces/KlingTeam/LivePortrait",
+    "restricciones": "Se ejecuta en un espacio de Hugging Face.",
+    "dific": 1,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Spaces"
+  },
+  {
+    "cat": "texto_gen",
+    "tool": "GPT-2",
+    "body": "Un modelo de lenguaje generativo de OpenAI, fundamental para tareas de generación de texto y comprensión del lenguaje natural.",
+    "workflow": "Proporcionas un prompt o inicio de texto -> GPT-2 genera el contenido restante.",
+    "combinaciones": [
+      "nlp",
+      "fine_tuning",
+      "embeddings"
+    ],
+    "url": "https://huggingface.co/openai-community/gpt2",
+    "restricciones": "Es un modelo pre-entrenado, requiere implementación para su uso en aplicaciones.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "embeddings",
+    "tool": "BGE-M3",
+    "body": "Modelo multimodal de embeddings que permite calcular la similitud semántica entre frases y documentos, útil para sistemas RAG y búsqueda.",
+    "workflow": "Introduces texto o frases -> BGE-M3 genera embeddings para comparación y recuperación.",
+    "combinaciones": [
+      "nlp",
+      "retrieval_rag",
+      "ai_search"
+    ],
+    "url": "https://huggingface.co/BAAI/bge-m3",
+    "restricciones": "Es un modelo, necesita integración en un sistema o pipeline.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
   }
 ]
