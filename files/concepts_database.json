@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "description": "Base de datos de conceptos de programación con niveles y preguntas de entrevista",
-    "total_concepts": 199,
+    "total_concepts": 200,
     "categories": [
       "bases_datos",
       "concurrency",
@@ -17,7 +17,7 @@
       "rendering",
       "seguridad_web"
     ],
-    "last_scraped": "2026-11-28T05:52:47.866234"
+    "last_scraped": "2026-11-28T14:56:55.895628"
   },
   "concepts": [
     {
@@ -3682,6 +3682,24 @@
       ],
       "cat": "patrones_diseno",
       "scraped_at": "2026-11-27T14:38:31.500361"
+    },
+    {
+      "title": "PostgreSQL 19 ya es estable: REPACK sin bloqueos, pg_plan_advice y los cambios que rompen compatibilidad",
+      "summary": "El 19 de noviembre de 2026 el PostgreSQL Global Development Group publicóPostgreSQL 19. Es una versión con pocas novedades de cara al usuario final y muchas para quien administra bases de datos grande",
+      "explanation": "El 19 de noviembre de 2026 el PostgreSQL Global Development Group publicóPostgreSQL 19. Es una versión con pocas novedades de cara al usuario final y muchas para quien administra bases de datos grandes: se puede compactar una tabla sin dejarla fuera de servicio, se pueden fijar planes de ejecución sin tocar la aplicación y las réplicas ofrecen por fin una forma limpia de leer lo que acabas de escribir en el primario. A cambio, trae una lista de incompatibilidades más larga de lo habitual, con el JIT desactivado por defecto como la más visible. Este repaso se basa en el anuncio oficial y en las notas de la versión; si buscas una vista previa de la época de beta, ya publicamosPostgreSQL 19: ON CONFLICT DO SELECT, SQL/PGQ y COPY TO en JSON.REPACK: adiós a VACUUM FULL y CLUSTER sin bloquear la tabla El «bloat» (espacio muerto que dejan los UPDATE y DELETE) se resolvía hasta ahora conVACUUM FULLoCLUSTER, ambos con un coste conocido: tomaban un bloqueoACCESS EXCLUSIVEy la tabla quedaba inaccesible hasta terminar. PostgreSQL 19 los unifica en un único comando,REPACK, que reescribe la tabla en un fichero nuevo sin espacio sobrante y devuelve lo liberado al sistema operativo. ConUSING INDEXademás reordena las filas físicamente según un índice. Los dos comandos antiguos siguen disponibles por compatibilidad. La novedad real esREPACK (CONCURRENTLY). La mayor parte del trabajo se hace con un bloqueoSHARE UPDATE EXCLUSIVE, de modo que lecturas y escrituras siguen fluyendo; los cambios que",
+      "code_example": "-- compactar y reordenar por la clave primaria sin parar la aplicación\nREPACK (CONCURRENTLY, VERBOSE) pedidos USING INDEX pedidos_pkey;",
+      "use_cases": [],
+      "difficulty": 2,
+      "language": "general",
+      "interview_relevant": false,
+      "interview_question": "",
+      "interview_answer": "",
+      "source": "programacion.net",
+      "tags": [
+        "bases_datos"
+      ],
+      "cat": "bases_datos",
+      "scraped_at": "2026-11-28T14:56:16.205415"
     }
   ]
 }
