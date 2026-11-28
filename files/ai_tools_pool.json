@@ -3540,5 +3540,69 @@
     "dific": 2,
     "source": "promoted",
     "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "gradio",
+    "tool": "wan2-2-fp8da-aoti-faster",
+    "body": "Una demostración en Hugging Face Spaces que presenta un modelo o proceso optimizado para inferencia rápida, accesible a través de una interfaz Gradio.",
+    "workflow": "Accede a la interfaz web de Gradio -> Introduce los datos requeridos -> Observa el rendimiento del modelo optimizado.",
+    "combinaciones": [
+      "funciones_ai",
+      "prompt_playground",
+      "devops"
+    ],
+    "url": "https://huggingface.co/spaces/zerogpu-aoti/wan2-2-fp8da-aoti-faster",
+    "restricciones": "Requiere conexión a Hugging Face Spaces.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Spaces"
+  },
+  {
+    "cat": "bert",
+    "tool": "BERT Base Uncased",
+    "body": "Un modelo de lenguaje preentrenado de Google diseñado para diversas tareas de procesamiento de lenguaje natural, como el relleno de huecos en texto.",
+    "workflow": "Carga el modelo en un entorno de programación -> Introduce texto con una máscara -> Obtiene la predicción para la palabra enmascarada.",
+    "combinaciones": [
+      "nlp",
+      "embeddings",
+      "fine_tuning"
+    ],
+    "url": "https://huggingface.co/google-bert/bert-base-uncased",
+    "restricciones": "Requiere conocimientos de programación (Python, PyTorch/TensorFlow) y recursos computacionales.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "multimodal_agents",
+    "tool": "Qwen3.5-9B",
+    "body": "Un modelo de lenguaje grande (LLM) multimodal que procesa tanto imágenes como texto para generar respuestas coherentes y relevantes.",
+    "workflow": "Carga el modelo -> Proporciona una imagen y un prompt de texto -> Recibe una respuesta textual detallada.",
+    "combinaciones": [
+      "llm_workflow",
+      "nlp",
+      "texto_gen"
+    ],
+    "url": "https://huggingface.co/Qwen/Qwen3.5-9B",
+    "restricciones": "Requiere recursos computacionales significativos y conocimientos avanzados de programación para su implementación.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "comfyui",
+    "tool": "MiniMax-H3",
+    "body": "Un modelo de difusión de imagen diseñado para ser utilizado con ComfyUI, especializado en la generación de imágenes de alta calidad.",
+    "workflow": "Instala el modelo en ComfyUI -> Configura el flujo de nodos -> Genera imágenes a partir de descripciones textuales.",
+    "combinaciones": [
+      "img_gen",
+      "stable_diff",
+      "lora"
+    ],
+    "url": "https://huggingface.co/Comfy-Org/MiniMax-H3",
+    "restricciones": "Requiere tener ComfyUI instalado y una GPU compatible.",
+    "dific": 2,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
   }
 ]
