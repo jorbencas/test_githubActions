@@ -3412,5 +3412,85 @@
     "dific": 3,
     "source": "promoted",
     "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "compare_models",
+    "tool": "Open LLM Leaderboard",
+    "body": "Una plataforma que clasifica y compara modelos de lenguaje grandes (LLM) de código abierto según su rendimiento en diversas métricas.",
+    "workflow": "Accede a la plataforma web -> Revisa las tablas de clasificación para evaluar el rendimiento de los LLMs.",
+    "combinaciones": [
+      "llm_workflow",
+      "monitorizacion",
+      "estudiar"
+    ],
+    "url": "https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard",
+    "restricciones": "Acceso web, solo visualización de datos.",
+    "dific": 1,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Spaces"
+  },
+  {
+    "cat": "compare_models",
+    "tool": "MTEB Leaderboard",
+    "body": "Una tabla de clasificación dedicada a evaluar y comparar el rendimiento de modelos de embeddings de texto masivos (MTEB).",
+    "workflow": "Visita la página web -> Consulta los benchmarks para entender la calidad de diferentes embeddings.",
+    "combinaciones": [
+      "embeddings",
+      "monitorizacion",
+      "nlp"
+    ],
+    "url": "https://huggingface.co/spaces/mteb/leaderboard",
+    "restricciones": "Acceso web, solo visualización de datos.",
+    "dific": 1,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Spaces"
+  },
+  {
+    "cat": "embeddings",
+    "tool": "all-MiniLM-L6-v2",
+    "body": "Un modelo de embeddings de texto preentrenado y optimizado para generar vectores densos que capturan la similitud semántica de oraciones.",
+    "workflow": "Carga el modelo en tu entorno de desarrollo -> Convierte texto a vectores -> Utiliza los embeddings para tareas como búsqueda de similitud.",
+    "combinaciones": [
+      "nlp",
+      "bert",
+      "fine_tuning"
+    ],
+    "url": "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2",
+    "restricciones": "Requiere conocimientos de programación (Python, PyTorch/TensorFlow) para su integración y uso.",
+    "dific": 3,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Models"
+  },
+  {
+    "cat": "music_gen",
+    "tool": "MusicGen",
+    "body": "Un modelo de inteligencia artificial desarrollado por Facebook que permite generar música a partir de descripciones de texto.",
+    "workflow": "Introduce un prompt de texto describiendo la música deseada -> Recibe una pieza musical generada por la IA.",
+    "combinaciones": [
+      "gradio",
+      "texto_gen",
+      "multimedia"
+    ],
+    "url": "https://huggingface.co/spaces/facebook/MusicGen",
+    "restricciones": "Requiere acceso a la interfaz de Hugging Face Spaces.",
+    "dific": 1,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Spaces"
+  },
+  {
+    "cat": "compare_models",
+    "tool": "LMArena AI Leaderboard",
+    "body": "Una tabla de clasificación que compara y evalúa el rendimiento de modelos de lenguaje en un entorno competitivo tipo 'arena'.",
+    "workflow": "Accede a la interfaz web -> Observa las clasificaciones y métricas de los modelos de lenguaje en tiempo real.",
+    "combinaciones": [
+      "llm_workflow",
+      "monitorizacion",
+      "estudiar"
+    ],
+    "url": "https://huggingface.co/spaces/lmarena-ai/arena-leaderboard",
+    "restricciones": "Acceso web, solo visualización de datos.",
+    "dific": 1,
+    "source": "promoted",
+    "fuente_raw": "HuggingFace Spaces"
   }
 ]
