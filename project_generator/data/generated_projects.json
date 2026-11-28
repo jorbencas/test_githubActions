@@ -31362,12 +31362,410 @@
         "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
         "prompt_hash": "55ad806774058264"
       }
+    },
+    {
+      "proyecto": {
+        "id": "a1b2c3d4",
+        "titulo": "Sistema de Gestión de Mantenimiento Preventivo para Ascensores de Comunidades",
+        "descripcion_corta": "App para administradores de fincas que planifica y registra mantenimientos de ascensores, garantizando seguridad y cumplimiento normativo con alertas inteligentes.",
+        "descripcion_detallada": "Plataforma web y móvil que permite a administradores de fincas programar mantenimientos preventivos de ascensores según fabricante y modelo. Genera alertas automáticas por vencimiento de revisiones o fallos reportados, adjunta históricos y certificaciones, facilitando auditorías y la comunicación con técnicos.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "mobile",
+          "api"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "typescript",
+          "frameworks": [
+            {
+              "nombre": "NestJS",
+              "categoria": "framework",
+              "descripcion": "Framework backend Node.js escalable para construir APIs eficientes y mantenibles.",
+              "version_sugerida": "10.x",
+              "url_docs": "https://docs.nestjs.com/",
+              "por_que": "Arquitectura modular y soporte para patrones como microservicios, ideal para la gestión de datos y notificaciones del sistema."
+            },
+            {
+              "nombre": "React Native",
+              "categoria": "framework",
+              "descripcion": "Framework para construir apps móviles nativas con JavaScript/TypeScript.",
+              "version_sugerida": "0.73.x",
+              "url_docs": "https://reactnative.dev/docs/getting-started",
+              "por_que": "Permite un desarrollo multiplataforma (iOS/Android) compartiendo gran parte del código con la interfaz web."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "TypeORM",
+              "categoria": "libreria",
+              "descripcion": "ORM para TypeScript y JavaScript compatible con múltiples bases de datos.",
+              "version_sugerida": "0.2.x",
+              "url_docs": "https://typeorm.io/",
+              "por_que": "Facilita la interacción con la base de datos relacional, mapeando objetos de TypeScript a tablas SQL de forma segura."
+            },
+            {
+              "nombre": "Zod",
+              "categoria": "libreria",
+              "descripcion": "Librería de validación de esquemas para TypeScript.",
+              "version_sugerida": "3.x",
+              "url_docs": "https://zod.dev/",
+              "por_que": "Asegura la integridad de los datos entrantes y salientes en la API y en la aplicación móvil."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "PostgreSQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional de código abierto.",
+              "version_sugerida": "15.x",
+              "url_docs": "https://www.postgresql.org/docs/",
+              "por_que": "Soporta tipos de datos complejos y transacciones ACID, robusto para almacenar historiales de mantenimiento y datos de ascensores."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Docker",
+              "categoria": "infraestructura",
+              "descripcion": "Plataforma para desarrollar, enviar y ejecutar aplicaciones en contenedores.",
+              "version_sugerida": "24.x",
+              "url_docs": "https://docs.docker.com/",
+              "por_que": "Permite empaquetar la aplicación y sus dependencias, asegurando entornos de desarrollo, staging y producción consistentes."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Jest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para JavaScript y TypeScript.",
+              "version_sugerida": "29.x",
+              "url_docs": "https://jestjs.io/",
+              "por_que": "Proporciona un entorno completo para testing unitario, de integración y end-to-end de la API y la lógica de negocio."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro y gestión de contratos de mantenimiento por ascensor y modelo.",
+          "Programación automática de mantenimientos preventivos y correctivos.",
+          "Generación de alertas inteligentes para vencimientos y revisiones pendientes.",
+          "Registro digital de intervenciones con fotos y comentarios del técnico.",
+          "Historial de mantenimiento por ascensor con acceso a certificaciones.",
+          "Gestión de usuarios con roles (administrador, técnico, propietario)."
+        ],
+        "casos_uso": [
+          "Administrador programa el mantenimiento trimestral de 50 ascensores en distintas fincas.",
+          "Técnico recibe alerta de un fallo en un ascensor y registra la intervención desde su móvil.",
+          "Propietario de finca consulta el historial de mantenimiento de su ascensor.",
+          "Sistema alerta al administrador 30 días antes de la fecha límite de la ITV del ascensor.",
+          "Auditor revisa la documentación digital de mantenimiento de un ascensor."
+        ],
+        "reglas_negocio": [
+          "Los mantenimientos preventivos se programan según la frecuencia definida por fabricante o normativa.",
+          "Los técnicos solo pueden registrar intervenciones en ascensores asignados.",
+          "Las alertas de vencimiento se envían con 30, 15 y 7 días de antelación.",
+          "El acceso a certificaciones requiere permisos de administrador o propietario.",
+          "Se deben registrar al menos 3 fotos de la intervención (motor, cabina, cuadro)."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "API de fabricantes de ascensores para especificaciones (si disponible)",
+          "Bases de datos de normativas de mantenimiento de ascensores por región."
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 5,
+        "prerequisitos": [
+          "Conocimientos de TypeScript, Node.js, React Native.",
+          "Comprensión de bases de datos relacionales y ORMs.",
+          "Familiaridad con desarrollo de APIs RESTful."
+        ],
+        "riesgos": [
+          "Integración con sistemas de terceros (fabricantes, organismos de certificación) puede ser compleja.",
+          "La variedad de normativas regionales de mantenimiento puede requerir adaptaciones.",
+          "Adopción por parte de administradores de fincas poco tecnificados.",
+          "Gestión de notificaciones push fiables en ambas plataformas.",
+          "Seguridad de los datos sensibles de las comunidades."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-08T10:00:00Z",
+        "hash_unicidad": "ef8ede3c0cf3cca0"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "1be0524890717bc3"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "f8e7d6c5",
+        "titulo": "Plataforma de Gestión de Voluntariado para ONG de Refugios de Animales",
+        "descripcion_corta": "Sistema para ONGs de animales que coordina voluntarios, asigna tareas (paseos, limpieza, adopción), y gestiona donaciones/eventos, optimizando recursos y comunicación.",
+        "descripcion_detallada": "Web app para organizaciones de rescate animal. Permite registrar voluntarios, sus habilidades y disponibilidad. Facilita la creación de turnos y asignación de tareas específicas (pasear perros, socializar gatos, limpieza, eventos de adopción). Incluye gestión de donaciones y un feed de noticias para mantener informada a la comunidad.",
+        "nivel": "semisenior",
+        "scope": "proyecto",
+        "tipo": [
+          "web",
+          "api",
+          "bot"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "go",
+          "frameworks": [
+            {
+              "nombre": "Gin Gonic",
+              "categoria": "framework",
+              "descripcion": "Framework web RESTful de alto rendimiento para Go.",
+              "version_sugerida": "1.x",
+              "url_docs": "https://gin-gonic.com/docs/",
+              "por_que": "Permite construir una API robusta y rápida para la gestión de voluntarios, tareas y donaciones de manera eficiente."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "GORM",
+              "categoria": "libreria",
+              "descripcion": "ORM completo para Go (SQL).",
+              "version_sugerida": "2.x",
+              "url_docs": "https://gorm.io/docs/",
+              "por_que": "Simplifica la interacción con la base de datos relacional para almacenar y recuperar datos de voluntarios, animales y donaciones."
+            },
+            {
+              "nombre": "Telegram Bot API",
+              "categoria": "libreria",
+              "descripcion": "Interfaz oficial para interactuar con bots de Telegram.",
+              "version_sugerida": "null",
+              "url_docs": "https://core.telegram.org/bots/api",
+              "por_que": "Permite enviar notificaciones automáticas a voluntarios sobre nuevas tareas, recordatorios de turnos o mensajes importantes de la ONG."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "MySQL",
+              "categoria": "base_datos",
+              "descripcion": "Sistema de gestión de bases de datos relacional popular.",
+              "version_sugerida": "8.x",
+              "url_docs": "https://dev.mysql.com/doc/",
+              "por_que": "Adecuado para almacenar datos estructurados de voluntarios, animales, tareas y transacciones de donaciones, con buen soporte y rendimiento."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "Kubernetes",
+              "categoria": "infraestructura",
+              "descripcion": "Sistema de orquestación de contenedores.",
+              "version_sugerida": "1.27+",
+              "url_docs": "https://kubernetes.io/docs/home/",
+              "por_que": "Para desplegar y escalar la API y el bot de Telegram de forma resiliente y automatizada."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Testify",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Go con aserciones y mocks.",
+              "version_sugerida": "v1.x",
+              "url_docs": "https://pkg.go.dev/github.com/stretchr/testify",
+              "por_que": "Proporciona utilidades para escribir tests unitarios y de integración para la lógica de negocio y la API."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro y perfiles de voluntarios con habilidades y disponibilidad.",
+          "Creación y asignación de tareas (paseos, limpieza, eventos) con geolocalización opcional.",
+          "Sistema de turnos rotativos y alertas para voluntarios.",
+          "Gestión de donaciones (seguimiento, agradecimientos).",
+          "Feed de noticias y comunicación centralizada para la comunidad.",
+          "Bot de Telegram para notificaciones y registro rápido de asistencia."
+        ],
+        "casos_uso": [
+          "Voluntario se registra indicando que puede pasear perros los fines de semana.",
+          "Coordinador asigna a un voluntario la tarea de limpiar las jaulas de gatos el martes por la mañana.",
+          "Voluntario recibe una notificación en Telegram sobre un evento de adopción y confirma asistencia.",
+          "ONG publica una campaña de donación para material veterinario.",
+          "Bot de Telegram recuerda a los voluntarios sus turnos asignados para el día."
+        ],
+        "reglas_negocio": [
+          "Los voluntarios deben aceptar los términos y condiciones de la ONG para ser activos.",
+          "Solo los coordinadores pueden asignar tareas y modificar horarios.",
+          "Las donaciones se registran con fecha, monto y donante.",
+          "Las notificaciones del bot son bidireccionales: para informar y para confirmaciones.",
+          "Se priorizan voluntarios con experiencia previa en tareas específicas si están disponibles."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "API de Google Maps para geolocalización de eventos/tareas (opcional).",
+          "Pasarela de pago para donaciones online (Stripe, PayPal)."
+        ],
+        "complejidad_estimada": "media",
+        "tiempo_estimado_semanas": 6,
+        "prerequisitos": [
+          "Experiencia con Go, desarrollo de APIs RESTful.",
+          "Conocimientos de bases de datos relacionales y ORMs.",
+          "Familiaridad con el desarrollo de bots de Telegram."
+        ],
+        "riesgos": [
+          "La gestión de la disponibilidad de voluntarios puede ser compleja y volátil.",
+          "Integración con pasarelas de pago puede presentar desafíos de seguridad.",
+          "Asegurar la fiabilidad del bot de Telegram para notificaciones críticas.",
+          "Escalabilidad si la ONG crece rápidamente en voluntarios y animales.",
+          "Privacidad de los datos de voluntarios y donantes."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-08T10:00:00Z",
+        "hash_unicidad": "8e0f93862112b87c"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "1be0524890717bc3"
+      }
+    },
+    {
+      "proyecto": {
+        "id": "c1d2e3f4",
+        "titulo": "Sistema de Calibración y Verificación de Sensores IoT para Agricultura de Precisión",
+        "descripcion_corta": "Herramienta para agricultores que calibra y verifica la precisión de sensores IoT (humedad, pH, luz) en campo, asegurando datos fiables para la toma de decisiones.",
+        "descripcion_detallada": "Aplicación web que permite a los agricultores gestionar sus dispositivos de sensores IoT. Ofrece procedimientos guiados para calibrar sensores (humedad, pH, temperatura, luz) usando patrones de referencia, y verifica su precisión contra datos históricos o de referencia. Genera informes de validación y alertas de descalibración.",
+        "nivel": "senior",
+        "scope": "multiproyecto",
+        "tipo": [
+          "web",
+          "api",
+          "datos"
+        ],
+        "tech_stack": {
+          "lenguaje_principal": "python",
+          "frameworks": [
+            {
+              "nombre": "Django",
+              "categoria": "framework",
+              "descripcion": "Framework web de alto nivel para Python.",
+              "version_sugerida": "4.x",
+              "url_docs": "https://docs.djangoproject.com/en/stable/",
+              "por_que": "Proporciona una estructura robusta y segura para la aplicación web, incluyendo autenticación, administración y ORM."
+            },
+            {
+              "nombre": "FastAPI",
+              "categoria": "framework",
+              "descripcion": "Framework web moderno y rápido para APIs en Python.",
+              "version_sugerida": "0.100.x",
+              "url_docs": "https://fastapi.tiangolo.com/",
+              "por_que": "Ideal para la API que interactúa con los dispositivos IoT, permitiendo la ingesta de datos y el control de calibración con validación automática."
+            }
+          ],
+          "librerias": [
+            {
+              "nombre": "Pandas",
+              "categoria": "libreria",
+              "descripcion": "Librería para análisis y manipulación de datos en Python.",
+              "version_sugerida": "2.x",
+              "url_docs": "https://pandas.pydata.org/docs/",
+              "por_que": "Esencial para procesar series temporales de datos de sensores, aplicar algoritmos de calibración y generar estadísticas para los informes."
+            },
+            {
+              "nombre": "SQLAlchemy",
+              "categoria": "libreria",
+              "descripcion": "SQL toolkit y Object Relational Mapper (ORM) para Python.",
+              "version_sugerida": "2.x",
+              "url_docs": "https://www.sqlalchemy.org/docs/",
+              "por_que": "Ofrece flexibilidad para interactuar con la base de datos, gestionando la complejidad de las relaciones entre sensores, calibraciones y datos."
+            }
+          ],
+          "bases_datos": [
+            {
+              "nombre": "TimescaleDB",
+              "categoria": "base_datos",
+              "descripcion": "Base de datos de series temporales construida sobre PostgreSQL.",
+              "version_sugerida": "2.x",
+              "url_docs": "https://docs.timescale.com/",
+              "por_que": "Optimizada para almacenar y consultar grandes volúmenes de datos de sensores IoT, facilitando análisis de tendencias y calibración."
+            }
+          ],
+          "infraestructura": [
+            {
+              "nombre": "MQTT Broker (e.g., Mosquitto)",
+              "categoria": "infraestructura",
+              "descripcion": "Servidor de mensajería ligero para IoT.",
+              "version_sugerida": "2.x",
+              "url_docs": "https://mosquitto.org/documentation/",
+              "por_que": "Permite la comunicación eficiente y en tiempo real entre los dispositivos IoT en campo y la API de FastAPI para recepción de datos y comandos de calibración."
+            }
+          ],
+          "ia_ml": [],
+          "testing": [
+            {
+              "nombre": "Pytest",
+              "categoria": "testing",
+              "descripcion": "Framework de testing para Python.",
+              "version_sugerida": "7.x",
+              "url_docs": "https://docs.pytest.org/",
+              "por_que": "Permite escribir tests unitarios, de integración y de datos para asegurar la correcta funcionalidad de la calibración y el procesamiento de datos."
+            }
+          ],
+          "otros": []
+        },
+        "funcionalidades_clave": [
+          "Registro y gestión de inventario de sensores IoT por tipo y ubicación.",
+          "Procedimientos guiados para calibración de sensores con patrones de referencia.",
+          "Verificación de precisión de sensores contra datos históricos o validados.",
+          "Generación automática de informes de calibración y validación.",
+          "Alertas inteligentes sobre descalibración o fallos de sensores.",
+          "Integración con protocolos IoT estándar (MQTT)."
+        ],
+        "casos_uso": [
+          "Un agricultor calibra un sensor de humedad del suelo antes de la siembra.",
+          "El sistema alerta al agricultor que el sensor de pH en el sector 3 muestra lecturas inconsistentes.",
+          "Se genera un informe de validación para un conjunto de sensores de luz antes de una auditoría.",
+          "Un técnico de campo recibe una notificación para recalibrar sensores tras un evento meteorológico extremo.",
+          "El sistema verifica la precisión de los datos de temperatura de los invernaderos."
+        ],
+        "reglas_negocio": [
+          "La calibración requiere la presencia de un patrón de referencia certificado.",
+          "Los informes de validación deben incluir fecha, hora, ID del sensor y margen de error.",
+          "Las alertas de descalibración se activan si el error supera el 5% del valor de referencia.",
+          "Solo usuarios con rol 'Técnico de Campo' o 'Administrador' pueden iniciar calibraciones.",
+          "Los datos históricos utilizados para la verificación deben tener menos de 1 año."
+        ],
+        "por_que_ia": null,
+        "cliente_ia_sugerido": "none",
+        "recursos_externos": [
+          "Proveedores de patrones de referencia certificados (agua destilada, soluciones pH, etc.).",
+          "APIs meteorológicas para correlación de datos (opcional)."
+        ],
+        "complejidad_estimada": "muy_alta",
+        "tiempo_estimado_semanas": 12,
+        "prerequisitos": [
+          "Experiencia avanzada en Python, Django, FastAPI.",
+          "Conocimientos profundos de bases de datos de series temporales (TimescaleDB).",
+          "Comprensión de protocolos IoT (MQTT) y arquitecturas distribuidas.",
+          "Experiencia con análisis de datos y librerías como Pandas."
+        ],
+        "riesgos": [
+          "La precisión y fiabilidad de los patrones de referencia es crítica.",
+          "La diversidad de protocolos y formatos de datos de sensores IoT puede ser un desafío.",
+          "Asegurar la conectividad y fiabilidad de la comunicación con dispositivos en campo.",
+          "Gestión de grandes volúmenes de datos de series temporales.",
+          "Seguridad de la red IoT frente a accesos no autorizados."
+        ],
+        "ideas_extensión": [],
+        "fuente_inspiracion": "tuweb.dev",
+        "fecha_generacion": "2024-03-08T10:00:00Z",
+        "hash_unicidad": "ffc69b04ddda8e67"
+      },
+      "metadata": {
+        "provider": "gemini:gemini-2.5-flash-lite > gemini-2.5-flash > gemini-2.0-flash-lite",
+        "prompt_hash": "1be0524890717bc3"
+      }
     }
   ],
   "ultimos_hashes": [
-    "f0d8c1a7b2e3f4a5",
-    "b7c8d9e0f1a2b3c4",
-    "f9a7b1c3d5e8f0a2",
     "c8d1e3f5a7b0c9d1",
     "f8a1b2c3d4e5f678",
     "8d1e3f5a7b9c0d1e",
@@ -31464,8 +31862,11 @@
     "d56e9b9a21f8dc9d",
     "6619df267eb9b057",
     "1212edb9a901eef3",
-    "099925dfe54aa923"
+    "099925dfe54aa923",
+    "ef8ede3c0cf3cca0",
+    "8e0f93862112b87c",
+    "ffc69b04ddda8e67"
   ],
-  "total_generados": 225,
-  "fecha_ultima_generacion": "2026-11-27T23:53:22.498181"
+  "total_generados": 228,
+  "fecha_ultima_generacion": "2026-11-28T06:02:23.465127"
 }
